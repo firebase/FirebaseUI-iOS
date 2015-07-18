@@ -42,7 +42,9 @@
         
         self.populateCell = ^(id cell, id snap) {};
         
-        [self.tableView registerClass:self.layoutClass forCellReuseIdentifier:self.reuseIdentifier];
+        if ([self.tableView dequeueReusableCellWithIdentifier:identifier] == nil) {
+            [self.tableView registerClass:self.layoutClass forCellReuseIdentifier:self.reuseIdentifier];
+        }
     }
     return self;
 }
