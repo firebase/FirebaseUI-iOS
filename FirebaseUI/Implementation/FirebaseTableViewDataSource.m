@@ -89,7 +89,7 @@
 
 - (id)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id cell = [self createCellWithReuseIdentifier:self.reuseIdentifier atIndexPath:indexPath];
+    id cell = [self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier forIndexPath:indexPath];
     
     FDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
     if (![self.modelClass isSubclassOfClass:[FDataSnapshot class]]) {
@@ -107,11 +107,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.array count];
-}
-
-- (id)createCellWithReuseIdentifier:(NSString *)identifier atIndexPath:(NSIndexPath *)indexPath;
-{
-    return [self.tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
 }
 
 - (void)populateCellWithBlock:(void(^)(id cell, id snap))callback;
