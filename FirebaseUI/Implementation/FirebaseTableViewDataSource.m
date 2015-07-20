@@ -15,50 +15,20 @@
 #pragma mark -
 #pragma mark FirebaseDataSource initializer methods
 
-- (instancetype)initWithRef:(Firebase *)ref context:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
-    return [self initWithRef:ref model:[FDataSnapshot class] context:tableView];
+    return [self initWithRef:ref modelClass:[FDataSnapshot class] reuseIdentifier:identifier view:tableView];
 }
 
-- (instancetype)initWithRef:(Firebase *)ref model:(Class)modelClass context:(UITableView *)tableView;
-{
-    return [self initWithRef:ref model:modelClass layout:[UITableViewCell class] context:tableView];
-}
-
-- (instancetype)initWithRef:(Firebase *)ref model:(Class)modelClass layout:(Class)layoutClass context:(UITableView *)tableView;
-{
-    return [self initWithRef:ref model:modelClass layout:layoutClass reuseIdentifier:@"CellIdentifier" context:tableView];
-}
-
-- (instancetype)initWithRef:(Firebase *)ref model:(Class)modelClass layout:(Class)layoutClass reuseIdentifier:(NSString *)identifier context:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
     FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
     self = [super initWithArray:array];
     if (self) {
         self.tableView = tableView;
-        self.modelClass = modelClass;
-        self.layoutClass = layoutClass;
+        self.modelClass = model;
         self.reuseIdentifier = identifier;
-        
         self.populateCell = ^(id cell, id snap) {};
-        
-        [self.tableView registerClass:self.layoutClass forCellReuseIdentifier:self.reuseIdentifier];
-    }
-    return self;
-}
-
-- (instancetype)initWithRef:(Firebase *)ref model:(Class)modelClass nibName:(NSString *)name reuseIdentifier:(NSString *)identifier context:(UITableView *)tableView;
-{
-    FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
-    self = [super initWithArray:array];
-    if (self) {
-        self.tableView = tableView;
-        self.modelClass = modelClass;
-        self.nibName = name;
-        self.reuseIdentifier = identifier;
-        
-        UINib *nib = [UINib nibWithNibName:self.nibName bundle:[NSBundle mainBundle]];
-        [self.tableView registerNib:nib forCellReuseIdentifier:self.reuseIdentifier];
     }
     return self;
 }
@@ -104,6 +74,7 @@
     FDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
     if (![self.modelClass isSubclassOfClass:[FDataSnapshot class]]) {
         id model = [[self.modelClass alloc] init];
+        // TODO: replace setValuesForKeysWithDictionary to client API valueAsObject method
         [model setValuesForKeysWithDictionary:snap.value];
         self.populateCell(cell, model);
     } else {

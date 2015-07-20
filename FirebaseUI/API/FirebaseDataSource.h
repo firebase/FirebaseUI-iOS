@@ -18,8 +18,6 @@
 
 @property (strong, nonatomic) FirebaseArray *array;
 @property (strong, nonatomic) Class modelClass;
-@property (strong, nonatomic) Class layoutClass;
-@property (strong, nonatomic) NSString *nibName;
 @property (strong, nonatomic) NSString *reuseIdentifier;
 
 - (instancetype)initWithArray:(FirebaseArray *)array;

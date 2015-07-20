@@ -13,15 +13,11 @@
 
 @interface FirebaseTableViewDataSource : FirebaseDataSource <UITableViewDataSource>
 
-@property (weak, nonatomic) UITableView *tableView;
-@property (nonatomic, strong) void(^populateCell)(id cell, id snap);
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) void(^populateCell)(id cell, id snap);
 
-- (instancetype)initWithRef:(Firebase *)ref context:(UITableView *)tableView;
-- (instancetype)initWithRef:(Firebase *)ref model:(Class)modelClass context:(UITableView *)tableView;
-- (instancetype)initWithRef:(Firebase *)ref model:(Class)modelClass layout:(Class)layoutClass context:(UITableView *)tableView;
-- (instancetype)initWithRef:(Firebase *)ref model:(Class)modelClass layout:(Class)layoutClass reuseIdentifier:(NSString *)identifier context:(UITableView *)tableView;
-- (instancetype)initWithRef:(Firebase *)ref model:(Class)modelClass nibName:(NSString *)name reuseIdentifier:(NSString *)identifier context:(UITableView *)tableView;
-
+- (instancetype)initWithRef:(Firebase *)ref reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 
 - (void)populateCellWithBlock:(void(^)(id cell, id snap))callback;
 
