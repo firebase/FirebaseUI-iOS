@@ -1,8 +1,7 @@
 //
 //  FirebaseArray.m
-//  FirebaseToolkit
+//  FirebaseUI
 //
-//  Created by Mike Mcdonald on 7/8/15.
 //  Copyright (c) 2015 Firebase, Inc. All rights reserved.
 //
 
@@ -38,7 +37,7 @@
 
 - (void)dealloc;
 {
-    // Possibly consider keeping track of these and only removing them if they are explicitly added here
+    //TODO: Consider keeping track of these and only removing them if they are explicitly added here
     [self.ref removeAllObservers];
 }
 

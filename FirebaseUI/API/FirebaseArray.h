@@ -1,8 +1,7 @@
 //
 //  FirebaseArray.h
-//  FirebaseToolkit
+//  FirebaseUI
 //
-//  Created by Mike Mcdonald on 7/8/15.
 //  Copyright (c) 2015 Firebase, Inc. All rights reserved.
 //
 

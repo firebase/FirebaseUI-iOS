@@ -1,8 +1,7 @@
 //
 //  FirebaseDataSource.h
-//  Firebase Toolkit
+//  FirebaseUI
 //
-//  Created by Mike Mcdonald on 6/24/15.
 //  Copyright (c) 2015 Firebase, Inc. All rights reserved.
 //
 
