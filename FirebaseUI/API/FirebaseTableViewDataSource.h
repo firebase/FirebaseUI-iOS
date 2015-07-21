@@ -36,7 +36,11 @@
 @property (strong, nonatomic) void(^populateCell)(id cell, id snap);
 
 - (instancetype)initWithRef:(Firebase *)ref reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref cellClass:(Class)cell reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref nibNamed:(NSString *)name reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 - (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model cellClass:(Class)cell reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model nibNamed:(NSString *)name reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 
 - (void)populateCellWithBlock:(void(^)(id cell, id snap))callback;
 

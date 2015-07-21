@@ -40,12 +40,12 @@
     return [self initWithQuery:ref];
 }
 
-- (instancetype)initWithQuery:(Firebase *)ref;
+- (instancetype)initWithQuery:(FQuery *)query;
 {
     self = [super init];
     if (self) {
         self.snapshots = [NSMutableArray array];
-        self.ref = ref;
+        self.query = query;
         
         [self initListeners];
     }
@@ -59,7 +59,7 @@
 - (void)dealloc;
 {
     //TODO: Consider keeping track of these and only removing them if they are explicitly added here
-    [self.ref removeAllObservers];
+    [self.query removeAllObservers];
 }
 
 #pragma mark -
@@ -67,25 +67,15 @@
 
 - (void)initListeners;
 {
-    [self.ref observeEventType:FEventTypeChildAdded andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *previousChildKey) {
+    [self.query observeEventType:FEventTypeChildAdded andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *previousChildKey) {
         NSUInteger index = [self indexForKey:previousChildKey] + 1;
 
         [self.snapshots insertObject:snapshot atIndex:index];
         
         [self.delegate childAdded:snapshot atIndex:index];
     }];
-    
-    [self.ref observeEventType:FEventTypeChildMoved andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *previousChildKey) {
-        NSUInteger fromIndex = [self indexForKey:snapshot.key];
-        [self.snapshots removeObjectAtIndex:fromIndex];
-        
-        NSUInteger toIndex = [self indexForKey:previousChildKey] + 1;
-        [self.snapshots insertObject:snapshot atIndex:toIndex];
-        
-        [self.delegate childMoved:snapshot fromIndex:fromIndex toIndex:toIndex];
-    }];
 
-    [self.ref observeEventType:FEventTypeChildChanged andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *previousChildKey) {
+    [self.query observeEventType:FEventTypeChildChanged andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *previousChildKey) {
         NSUInteger index = [self indexForKey:snapshot.key];
         
         [self.snapshots replaceObjectAtIndex:index withObject:snapshot];
@@ -93,12 +83,22 @@
         [self.delegate childChanged:snapshot atIndex:index];
     }];
     
-    [self.ref observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
+    [self.query observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
         NSUInteger index = [self indexForKey:snapshot.key];
 
         [self.snapshots removeObjectAtIndex:index];
 
         [self.delegate childRemoved:snapshot atIndex:index];
+    }];
+    
+    [self.query observeEventType:FEventTypeChildMoved andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *previousChildKey) {
+        NSUInteger fromIndex = [self indexForKey:snapshot.key];
+        [self.snapshots removeObjectAtIndex:fromIndex];
+        
+        NSUInteger toIndex = [self indexForKey:previousChildKey] + 1;
+        [self.snapshots insertObject:snapshot atIndex:toIndex];
+        
+        [self.delegate childMoved:snapshot fromIndex:fromIndex toIndex:toIndex];
     }];
 }
 
@@ -112,7 +112,13 @@
         }
     }
     
-    @throw [NSException exceptionWithName:@"KeyNotFound" reason:@"" userInfo:@{}];
+    NSString *errorReason = [NSString stringWithFormat:@"Key \"%@\" not found in FirebaseArray %@", key, self.snapshots];
+    @throw [NSException exceptionWithName:@"FirebaseArrayKeyNotFoundException"
+                                   reason:errorReason
+                                 userInfo:@{
+                                            @"Key":key,
+                                            @"Array":self.snapshots
+                                            }];
 }
 
 

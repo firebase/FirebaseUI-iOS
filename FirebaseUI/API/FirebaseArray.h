@@ -28,6 +28,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class FQuery;
 @class Firebase;
 
 @protocol FirebaseArrayDelegate;
@@ -36,14 +37,14 @@
 
 @property (weak, nonatomic) id<FirebaseArrayDelegate> delegate;
 
-@property (strong, nonatomic) Firebase *ref;
+@property (strong, nonatomic) FQuery *query;
 @property (strong, nonatomic) NSMutableArray *snapshots;
 
 #pragma mark -
 #pragma mark Initializer methods
 
 - (instancetype)initWithRef:(Firebase *)ref;
-- (instancetype)initWithQuery:(Firebase *)ref;
+- (instancetype)initWithQuery:(FQuery *)query;
 
 #pragma mark -
 #pragma mark Public API methods
@@ -64,7 +65,7 @@
 @optional
 - (void) childAdded:(id)obj atIndex:(NSUInteger)index;
 - (void) childChanged:(id)obj atIndex:(NSUInteger)index;
-- (void) childMoved:(id)obj fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 - (void) childRemoved:(id)obj atIndex:(NSUInteger)index;
+- (void) childMoved:(id)obj fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
 @end
