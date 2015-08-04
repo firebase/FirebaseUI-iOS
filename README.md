@@ -1,6 +1,6 @@
 # FirebaseUI for iOS — UI Bindings for Firebase
 
-FirebaseUI is an open-source library for iOS that allows you to quickly connect common UI elements to the Firebase [Firebase](https://www.firebase.com/?utm_source=firebaseui-ios) database to apps for data storage, allowing views to be updated in realtime as they change, and providing simple interfaces for common tasks.
+FirebaseUI is an open-source library for iOS that allows you to quickly connect common UI elements to the Firebase [Firebase](https://www.firebase.com/?utm_source=firebaseui-ios) database for data storage, allowing views to be updated in realtime as they change, and providing simple interfaces for common tasks like displaying lists or collections of items.
 
 A compatible FirebaseUI client is also available for [Android](https://github.com/firebase/FirebaseUI-Android).
 
@@ -10,16 +10,13 @@ We recommend using [CocoaPods](http://cocoapods.org/?q=firebaseui-ios), add
 the following to your `Podfile`:
 
 ```
-pod 'FirebaseUI', '>= 0.1'
+pod 'FirebaseUI', '>= 0.1.0'
 ```
 
-Otherwise, you need to download the framework and
-add it to your project. You also need to [add the Firebase
-framework](https://www.firebase.com/docs/ios-quickstart.html?utm_source=firebaseui-ios) to your project.
-
-You can download the latest version of the [FirebaseUI.framework from the releases
+Otherwise, you can download the latest version of the [FirebaseUI.framework from the releases
 page](https://github.com/firebase/FirebaseUI-iOS/releases) or include the FirebaseUI
-Xcode project from this repo in your project.
+Xcode project from this repo in your project. You also need to [add the Firebase
+framework](https://www.firebase.com/docs/ios-quickstart.html?utm_source=firebaseui-ios) to your project.
 
 ### Using FirebaseUI with Swift
 
@@ -35,7 +32,6 @@ to your project. To do that, [follow these instructions](https://www.firebase.co
 
 FirebaseUI requires Firebase in order to store location data. You can [sign up here for a free
 account](https://www.firebase.com/signup/?utm_source=firebaseui-ios).
-
 
 ## FirebaseUI for iOS Quickstart
 
@@ -56,7 +52,7 @@ MyViewController.h
 ```objective-c
 MyViewController.m
 ...
-self.firebaseRef = [[Firebase alloc] initWithUrl:@"https://<your-firebase>.firebaseio.com/"];
+self.firebaseRef = [[Firebase alloc] initWithUrl:@"https://<your-firebase-app>.firebaseio.com/"];
 self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:firebaseRef reuseIdentifier:@"<your-reuse-identifier>" view:self.tableView];
 
 [self.dataSource populateCellWithBlock:^(UITableViewCell *cell, FDataSnapshot *snap) {
@@ -145,21 +141,13 @@ FirebaseArray is synchronized array connecting a Firebase Ref with an array. It 
 
 ##### Objective-C
 ```objective-c
-FirebaseArray *array = [[FirebaseArray alloc] initWithRef:@"https://<your-firebase>.firebaseio.com/"];
+FirebaseArray *array = [[FirebaseArray alloc] initWithRef:@"https://<your-firebase-app>.firebaseio.com/"];
 
 ```
 
 ### FirebaseDataSource
 
 FirebaseDataSource acts as a generic data source by providing common information, such as the count of objects in the data source, and by requiring subclasses to implement FirebaseArrayDelegate methods as appropriate to the view. This class should never be instantiated, but should be subclassed when creating a specific adapter for a View. [FirebaseTableViewDataSource](https://github.com/firebase/FirebaseUI-iOS/blob/master/FirebaseUI/Implementation/FirebaseTableViewDataSource.m) is an example of this.
-
-## Deployment
-
-- `git pull` to update the master branch
-- tag and push the tag for this release
-- `./build.sh` to build a binary
-- From your macbook that already has been granted permissions to Firebase Cocoapods, do `pod trunk push`
-- Update [firebase-versions](https://github.com/firebase/firebase-clients/blob/master/versions/firebase-versions.json) with the changelog for this release.
 
 ## Local Setup
 
@@ -172,7 +160,17 @@ $ cd FirebaseUI-iOS
 $ ./setup.sh
 ```
 
-## Contributor License Agreements
+## Deployment
+
+- `git pull` to update the master branch
+- tag and push the tag for this release
+- `./build.sh` to build a binary
+- From your macbook that already has been granted permissions to FirebaseUI Cocoapods, do `pod trunk push`
+- Update [firebase-versions](https://github.com/firebase/firebase-clients/blob/master/versions/firebase-versions.json) with the changelog for this release.
+
+## Contributing to FirebaseUI
+
+### Contributor License Agreements
 
 We'd love to accept your sample apps and patches! Before we can take them, we
 have to jump a couple of legal hurdles.
@@ -191,7 +189,7 @@ Follow either of the two links above to access the appropriate CLA and
 instructions for how to sign and return it. Once we receive it, we'll be able to
 accept your pull requests.
 
-## Contributing A Patch
+### Contribution Process
 
 1. Submit an issue describing your proposed change to the repo in question.
 1. The repo owner will respond to your issue promptly.
