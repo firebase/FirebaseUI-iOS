@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.author       = { "Firebase" => "support@firebase.com" }
   s.source       = { :git => "https://github.com/firebase/FirebaseUI-iOS.git", :tag => 'v0.1.0' }
   s.source_files = "FirebaseUI/**/*.{h,m}"
-  s.dependency  'Firebase', '~> 2.2'
+  s.dependency  'Firebase', '~> 2.3'
   s.platform = :ios
   s.ios.deployment_target = '7.0'
   s.ios.framework = 'UIKit'

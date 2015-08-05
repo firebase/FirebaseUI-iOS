@@ -28,7 +28,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import <FirebaseUI/FirebaseDataSource.h>
+#import "FirebaseDataSource.h"
 
 @interface FirebaseTableViewDataSource : FirebaseDataSource <UITableViewDataSource>
 

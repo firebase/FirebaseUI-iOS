@@ -28,7 +28,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <FirebaseUI/FirebaseArrayDelegate.h>
+#import "FirebaseArrayDelegate.h"
 
 @class FQuery;
 @class Firebase;

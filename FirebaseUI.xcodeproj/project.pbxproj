@@ -22,17 +22,17 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		D8124F411B72A90C003441AD /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8124F401B72A90C003441AD /* Firebase.framework */; };
+		D8124F421B72B344003441AD /* FirebaseTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B6ACF11B583C41005CDDB2 /* FirebaseTableViewDataSource.m */; };
+		D8124F431B72B347003441AD /* FirebaseTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACEE1B583C33005CDDB2 /* FirebaseTableViewDataSource.h */; };
 		D8784C401B719F280025587E /* FirebaseArrayDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D8784C3F1B719F280025587E /* FirebaseArrayDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8B6ACE51B58383C005CDDB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C579BB1B5837DF00899F86 /* UIKit.framework */; };
 		D8B6ACE71B583877005CDDB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B6ACE61B583877005CDDB2 /* Foundation.framework */; };
 		D8B6ACF31B583C41005CDDB2 /* FirebaseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B6ACEF1B583C41005CDDB2 /* FirebaseArray.m */; };
-		D8B6ACF51B583C41005CDDB2 /* FirebaseTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B6ACF11B583C41005CDDB2 /* FirebaseTableViewDataSource.m */; };
 		D8B6ACF61B583C41005CDDB2 /* FirebaseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B6ACF21B583C41005CDDB2 /* FirebaseDataSource.m */; };
 		D8B6ACF81B583D3E005CDDB2 /* FirebaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACEB1B583C33005CDDB2 /* FirebaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8B6ACF91B583D3E005CDDB2 /* FirebaseDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACED1B583C33005CDDB2 /* FirebaseDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D8B6ACFA1B583D3E005CDDB2 /* FirebaseTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACEE1B583C33005CDDB2 /* FirebaseTableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8B6ACFB1B583D48005CDDB2 /* FirebaseArray.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACEC1B583C33005CDDB2 /* FirebaseArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D8B6ACFF1B583DBA005CDDB2 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B6ACFE1B583DBA005CDDB2 /* Firebase.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D8124F401B72A90C003441AD /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = sdk/Firebase.framework; sourceTree = "<group>"; };
 		D8784C3F1B719F280025587E /* FirebaseArrayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseArrayDelegate.h; path = API/FirebaseArrayDelegate.h; sourceTree = "<group>"; };
 		D8B6ACE61B583877005CDDB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D8B6ACEB1B583C33005CDDB2 /* FirebaseUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseUI.h; path = API/FirebaseUI.h; sourceTree = "<group>"; };
@@ -67,7 +68,6 @@
 		D8B6ACEF1B583C41005CDDB2 /* FirebaseArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseArray.m; path = Implementation/FirebaseArray.m; sourceTree = "<group>"; };
 		D8B6ACF11B583C41005CDDB2 /* FirebaseTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseTableViewDataSource.m; path = Implementation/FirebaseTableViewDataSource.m; sourceTree = "<group>"; };
 		D8B6ACF21B583C41005CDDB2 /* FirebaseDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseDataSource.m; path = Implementation/FirebaseDataSource.m; sourceTree = "<group>"; };
-		D8B6ACFE1B583DBA005CDDB2 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = sdk/Firebase.framework; sourceTree = "<group>"; };
 		D8B6AD971B58D45F005CDDB2 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		D8B6AD991B58D486005CDDB2 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		D8B6AD9B1B58D48C005CDDB2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -82,9 +82,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8B6ACE71B583877005CDDB2 /* Foundation.framework in Frameworks */,
 				D8B6ACE51B58383C005CDDB2 /* UIKit.framework in Frameworks */,
-				D8B6ACFF1B583DBA005CDDB2 /* Firebase.framework in Frameworks */,
+				D8124F411B72A90C003441AD /* Firebase.framework in Frameworks */,
+				D8B6ACE71B583877005CDDB2 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,12 +94,12 @@
 		D8B6ACE81B5839A5005CDDB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D8124F401B72A90C003441AD /* Firebase.framework */,
 				D8B6AD9F1B58D49E005CDDB2 /* SystemConfiguration.framework */,
 				D8B6AD9D1B58D494005CDDB2 /* Security.framework */,
 				D8B6AD9B1B58D48C005CDDB2 /* CFNetwork.framework */,
 				D8B6AD991B58D486005CDDB2 /* libicucore.dylib */,
 				D8B6AD971B58D45F005CDDB2 /* libc++.dylib */,
-				D8B6ACFE1B583DBA005CDDB2 /* Firebase.framework */,
 				D8B6ACE61B583877005CDDB2 /* Foundation.framework */,
 				D8C579BB1B5837DF00899F86 /* UIKit.framework */,
 			);
@@ -162,10 +162,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8B6ACF81B583D3E005CDDB2 /* FirebaseUI.h in Headers */,
-				D8B6ACFA1B583D3E005CDDB2 /* FirebaseTableViewDataSource.h in Headers */,
 				D8B6ACF91B583D3E005CDDB2 /* FirebaseDataSource.h in Headers */,
 				D8784C401B719F280025587E /* FirebaseArrayDelegate.h in Headers */,
 				D8B6ACFB1B583D48005CDDB2 /* FirebaseArray.h in Headers */,
+				D8124F431B72B347003441AD /* FirebaseTableViewDataSource.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +197,7 @@
 		D8C5799E1B57349000899F86 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = FUI;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Firebase, Inc.";
 				TargetAttributes = {
@@ -264,7 +265,7 @@
 			files = (
 				D8B6ACF61B583C41005CDDB2 /* FirebaseDataSource.m in Sources */,
 				D8B6ACF31B583C41005CDDB2 /* FirebaseArray.m in Sources */,
-				D8B6ACF51B583C41005CDDB2 /* FirebaseTableViewDataSource.m in Sources */,
+				D8124F421B72B344003441AD /* FirebaseTableViewDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +283,7 @@
 		D8B6ADA51B58DCDD005CDDB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -289,6 +291,7 @@
 		D8B6ADA61B58DCDD005CDDB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -378,8 +381,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/sdk",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(SDKROOT)/Developer/Library/Frameworks",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_PEDANTIC = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
@@ -395,8 +402,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/sdk",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(SDKROOT)/Developer/Library/Frameworks",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_PEDANTIC = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
