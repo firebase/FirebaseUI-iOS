@@ -30,7 +30,7 @@
 
 #import <FirebaseUI/FirebaseArray.h>
 #import <FirebaseUI/FirebaseDataSource.h>
-//#import <FirebaseUI/FirebaseTableViewDataSource.h>
+#import <FirebaseUI/FirebaseTableViewDataSource.h>
 
 @interface FirebaseUI : NSObject
 
