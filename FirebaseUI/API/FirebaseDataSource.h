@@ -28,22 +28,36 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FirebaseArray.h"
+#import <FirebaseUI/FirebaseArray.h>
 
 @class Firebase;
 
-@protocol FirebaseDataSource;
-
+/**
+ * A FirebaseDataSource is a generic superclass for all Firebase datasources, like FirebaseTableViewDataSource and FirebaseCollectionViewDataSource. It provides properties that all subclasses need as well as several methods that pass through to the instance of FirebaseArray.
+ */
 @interface FirebaseDataSource : NSObject <FirebaseArrayDelegate>
 
+/**
+ * The FirebaseArray which backs the instance of the datasource.
+ */
 @property (strong, nonatomic) FirebaseArray *array;
-@property (strong, nonatomic) Class modelClass;
-@property (strong, nonatomic) NSString *reuseIdentifier;
+
 
 - (instancetype)initWithArray:(FirebaseArray *)array;
 
+/**
+ * Pass through of [FirebaseArray count].
+ */
 - (NSUInteger)count;
+
+/**
+ * Pass through of [FirebaseArray objectAtIndex:].
+ */
 - (id)objectAtIndex:(NSUInteger)index;
+
+/**
+ * Pass through of [FirebaseArray refForIndex:].
+ */
 - (Firebase *)refForIndex:(NSUInteger)index;
 
 @end

@@ -45,9 +45,9 @@
     return [self initWithRef:ref modelClass:[FDataSnapshot class] cellClass:cell reuseIdentifier:identifier view:tableView];
 }
 
-- (instancetype)initWithRef:(Firebase *)ref nibNamed:(NSString *)name reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref nibNamed:(NSString *)nibName reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
-    return [self initWithRef:ref modelClass:[FDataSnapshot class] nibNamed:name reuseIdentifier:identifier view:tableView];
+    return [self initWithRef:ref modelClass:[FDataSnapshot class] nibNamed:nibName reuseIdentifier:identifier view:tableView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
@@ -63,7 +63,7 @@
         self.tableView = tableView;
         self.modelClass = model;
         self.reuseIdentifier = identifier;
-        self.populateCell = ^(id cell, id snap) {};
+        self.populateCell = ^(id cell, id object) {};
         
         if (![self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier]) {
             [self.tableView registerClass:cell forCellReuseIdentifier:self.reuseIdentifier];
@@ -72,7 +72,7 @@
     return self;
 }
 
-- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model nibNamed:(NSString *)name reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model nibNamed:(NSString *)nibName reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
     FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
     self = [super initWithArray:array];
@@ -80,10 +80,10 @@
         self.tableView = tableView;
         self.modelClass = model;
         self.reuseIdentifier = identifier;
-        self.populateCell = ^(id cell, id snap) {};
+        self.populateCell = ^(id cell, id object) {};
         
         if (![self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier]) {
-            UINib *nib = [UINib nibWithNibName:name bundle:nil];
+            UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
             [self.tableView registerNib:nib forCellReuseIdentifier:self.reuseIdentifier];
         }
     }
@@ -146,7 +146,7 @@
     return [self.array count];
 }
 
-- (void)populateCellWithBlock:(void(^)(id cell, id snap))callback;
+- (void)populateCellWithBlock:(void(^)(id cell, id object))callback;
 {
     self.populateCell = callback;
 }
