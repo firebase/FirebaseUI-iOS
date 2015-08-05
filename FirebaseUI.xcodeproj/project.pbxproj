@@ -22,9 +22,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		D8124F411B72A90C003441AD /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8124F401B72A90C003441AD /* Firebase.framework */; };
 		D8124F421B72B344003441AD /* FirebaseTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B6ACF11B583C41005CDDB2 /* FirebaseTableViewDataSource.m */; };
-		D8124F431B72B347003441AD /* FirebaseTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACEE1B583C33005CDDB2 /* FirebaseTableViewDataSource.h */; };
+		D8124F431B72B347003441AD /* FirebaseTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACEE1B583C33005CDDB2 /* FirebaseTableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8124F441B72C94E003441AD /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8124F401B72A90C003441AD /* Firebase.framework */; };
 		D8784C401B719F280025587E /* FirebaseArrayDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D8784C3F1B719F280025587E /* FirebaseArrayDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8B6ACE51B58383C005CDDB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C579BB1B5837DF00899F86 /* UIKit.framework */; };
 		D8B6ACE71B583877005CDDB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B6ACE61B583877005CDDB2 /* Foundation.framework */; };
@@ -82,8 +82,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8124F441B72C94E003441AD /* Firebase.framework in Frameworks */,
 				D8B6ACE51B58383C005CDDB2 /* UIKit.framework in Frameworks */,
-				D8124F411B72A90C003441AD /* Firebase.framework in Frameworks */,
 				D8B6ACE71B583877005CDDB2 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,8 +164,8 @@
 				D8B6ACF81B583D3E005CDDB2 /* FirebaseUI.h in Headers */,
 				D8B6ACF91B583D3E005CDDB2 /* FirebaseDataSource.h in Headers */,
 				D8784C401B719F280025587E /* FirebaseArrayDelegate.h in Headers */,
-				D8B6ACFB1B583D48005CDDB2 /* FirebaseArray.h in Headers */,
 				D8124F431B72B347003441AD /* FirebaseTableViewDataSource.h in Headers */,
+				D8B6ACFB1B583D48005CDDB2 /* FirebaseArray.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,7 +283,7 @@
 		D8B6ADA51B58DCDD005CDDB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -291,7 +291,7 @@
 		D8B6ADA61B58DCDD005CDDB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

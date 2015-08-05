@@ -30,6 +30,8 @@
 
 #import "FirebaseDataSource.h"
 
+@class Firebase;
+
 @interface FirebaseTableViewDataSource : FirebaseDataSource <UITableViewDataSource>
 
 /**
