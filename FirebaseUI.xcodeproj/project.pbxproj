@@ -22,7 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		D8784C3D1B7186F40025587E /* FirebaseArrayDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D8784C3C1B7186F40025587E /* FirebaseArrayDelegate.h */; };
+		D8784C401B719F280025587E /* FirebaseArrayDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D8784C3F1B719F280025587E /* FirebaseArrayDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8B6ACE51B58383C005CDDB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C579BB1B5837DF00899F86 /* UIKit.framework */; };
 		D8B6ACE71B583877005CDDB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B6ACE61B583877005CDDB2 /* Foundation.framework */; };
 		D8B6ACF31B583C41005CDDB2 /* FirebaseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B6ACEF1B583C41005CDDB2 /* FirebaseArray.m */; };
@@ -58,7 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D8784C3C1B7186F40025587E /* FirebaseArrayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseArrayDelegate.h; sourceTree = "<group>"; };
+		D8784C3F1B719F280025587E /* FirebaseArrayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseArrayDelegate.h; path = API/FirebaseArrayDelegate.h; sourceTree = "<group>"; };
 		D8B6ACE61B583877005CDDB2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D8B6ACEB1B583C33005CDDB2 /* FirebaseUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseUI.h; path = API/FirebaseUI.h; sourceTree = "<group>"; };
 		D8B6ACEC1B583C33005CDDB2 /* FirebaseArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseArray.h; path = API/FirebaseArray.h; sourceTree = "<group>"; };
@@ -109,11 +109,11 @@
 		D8B6ACE91B5839C6005CDDB2 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				D8784C3F1B719F280025587E /* FirebaseArrayDelegate.h */,
 				D8B6ACEB1B583C33005CDDB2 /* FirebaseUI.h */,
 				D8B6ACEC1B583C33005CDDB2 /* FirebaseArray.h */,
 				D8B6ACED1B583C33005CDDB2 /* FirebaseDataSource.h */,
 				D8B6ACEE1B583C33005CDDB2 /* FirebaseTableViewDataSource.h */,
-				D8784C3C1B7186F40025587E /* FirebaseArrayDelegate.h */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -161,10 +161,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8784C3D1B7186F40025587E /* FirebaseArrayDelegate.h in Headers */,
 				D8B6ACF81B583D3E005CDDB2 /* FirebaseUI.h in Headers */,
 				D8B6ACFA1B583D3E005CDDB2 /* FirebaseTableViewDataSource.h in Headers */,
 				D8B6ACF91B583D3E005CDDB2 /* FirebaseDataSource.h in Headers */,
+				D8784C401B719F280025587E /* FirebaseArrayDelegate.h in Headers */,
 				D8B6ACFB1B583D48005CDDB2 /* FirebaseArray.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
