@@ -10,7 +10,7 @@ We recommend using [CocoaPods](http://cocoapods.org/?q=firebaseui-ios), add
 the following to your `Podfile`:
 
 ```
-pod 'FirebaseUI', '>= 0.1.0'
+pod 'FirebaseUI', '~> 0.1'
 ```
 
 Otherwise, you can download the latest version of the [FirebaseUI.framework from the releases
