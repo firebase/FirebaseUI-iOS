@@ -28,9 +28,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import <FirebaseUI/FirebaseArray.h>
-#import <FirebaseUI/FirebaseDataSource.h>
-#import <FirebaseUI/FirebaseTableViewDataSource.h>
+#import "FirebaseArray.h"
+#import "FirebaseDataSource.h"
+#import "FirebaseTableViewDataSource.h"
+#import "FirebaseCollectionViewDataSource.h"
 
 @interface FirebaseUI : NSObject
 

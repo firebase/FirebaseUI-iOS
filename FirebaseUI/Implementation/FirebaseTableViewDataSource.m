@@ -37,22 +37,22 @@
 
 - (instancetype)initWithRef:(Firebase *)ref reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
-    return [self initWithRef:ref modelClass:[FDataSnapshot class] cellClass:[UITableViewCell class] reuseIdentifier:identifier view:tableView];
+    return [self initWithRef:ref modelClass:nil cellClass:nil reuseIdentifier:identifier view:tableView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref cellClass:(Class)cell reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
-    return [self initWithRef:ref modelClass:[FDataSnapshot class] cellClass:cell reuseIdentifier:identifier view:tableView];
+    return [self initWithRef:ref modelClass:nil cellClass:cell reuseIdentifier:identifier view:tableView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref nibNamed:(NSString *)nibName reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
-    return [self initWithRef:ref modelClass:[FDataSnapshot class] nibNamed:nibName reuseIdentifier:identifier view:tableView];
+    return [self initWithRef:ref modelClass:nil nibNamed:nibName reuseIdentifier:identifier view:tableView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
-    return [self initWithRef:ref modelClass:model cellClass:[UITableViewCell class] reuseIdentifier:identifier view:tableView];
+    return [self initWithRef:ref modelClass:model cellClass:nil reuseIdentifier:identifier view:tableView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model cellClass:(Class)cell reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
@@ -60,6 +60,15 @@
     FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
     self = [super initWithArray:array];
     if (self) {
+
+        if (!model) {
+            model = [FDataSnapshot class];
+        }
+
+        if (!cell) {
+            cell = [UITableViewCell class];
+        }
+
         self.tableView = tableView;
         self.modelClass = model;
         self.reuseIdentifier = identifier;
@@ -77,6 +86,11 @@
     FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
     self = [super initWithArray:array];
     if (self) {
+
+        if (!model) {
+            model = [FDataSnapshot class];
+        }
+
         self.tableView = tableView;
         self.modelClass = model;
         self.reuseIdentifier = identifier;
@@ -124,7 +138,7 @@
 #pragma mark -
 #pragma mark UITableViewDataSource methods
 
-- (id)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (id)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     id cell = [self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier forIndexPath:indexPath];
     
@@ -141,12 +155,12 @@
     return cell;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
     return [self.array count];
 }
 
-- (void)populateCellWithBlock:(void(^)(id cell, id object))callback;
+- (void)populateCellWithBlock:(nonnull void(^)(__nonnull __kindof UITableViewCell *cell, __nonnull __kindof NSObject *object))callback;
 {
     self.populateCell = callback;
 }

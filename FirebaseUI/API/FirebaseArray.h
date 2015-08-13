@@ -33,6 +33,9 @@
 @class FQuery;
 @class Firebase;
 
+/**
+ * FirebaseArray provides an array structure that is synchronized with a Firebase reference or query. It is useful for building custom data structures or sources, and provides the base for FirebaseDataSource.
+ */
 @interface FirebaseArray : NSObject
 
 /**
@@ -48,7 +51,7 @@
 /**
  * The delegate object that array changes are surfaced to.
  */
-@property (strong, nonatomic) NSMutableArray *snapshots;
+@property (strong, nonatomic) NSMutableArray<FDataSnapshot *> *snapshots;
 
 #pragma mark -
 #pragma mark Initializer methods
