@@ -19,3 +19,7 @@ DerivedData
 
 # Third Party
 /sdk
+
+# Generated
+/target
+/site

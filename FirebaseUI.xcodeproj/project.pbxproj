@@ -33,6 +33,8 @@
 		D8B6ACF81B583D3E005CDDB2 /* FirebaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACEB1B583C33005CDDB2 /* FirebaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8B6ACF91B583D3E005CDDB2 /* FirebaseDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACED1B583C33005CDDB2 /* FirebaseDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8B6ACFB1B583D48005CDDB2 /* FirebaseArray.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACEC1B583C33005CDDB2 /* FirebaseArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DA10F11B7AC50400D00954 /* FirebaseCollectionViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D8DA10F01B7AC50400D00954 /* FirebaseCollectionViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DF55621B742DB40030E996 /* FirebaseCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DF55611B742DB40030E996 /* FirebaseCollectionViewDataSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,13 +70,10 @@
 		D8B6ACEF1B583C41005CDDB2 /* FirebaseArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseArray.m; path = Implementation/FirebaseArray.m; sourceTree = "<group>"; };
 		D8B6ACF11B583C41005CDDB2 /* FirebaseTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseTableViewDataSource.m; path = Implementation/FirebaseTableViewDataSource.m; sourceTree = "<group>"; };
 		D8B6ACF21B583C41005CDDB2 /* FirebaseDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseDataSource.m; path = Implementation/FirebaseDataSource.m; sourceTree = "<group>"; };
-		D8B6AD971B58D45F005CDDB2 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		D8B6AD991B58D486005CDDB2 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		D8B6AD9B1B58D48C005CDDB2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		D8B6AD9D1B58D494005CDDB2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		D8B6AD9F1B58D49E005CDDB2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D8C579A61B57349000899F86 /* libFirebaseUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFirebaseUI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C579BB1B5837DF00899F86 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D8DA10F01B7AC50400D00954 /* FirebaseCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseCollectionViewDataSource.h; path = API/FirebaseCollectionViewDataSource.h; sourceTree = "<group>"; };
+		D8DF55611B742DB40030E996 /* FirebaseCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseCollectionViewDataSource.m; path = Implementation/FirebaseCollectionViewDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,11 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				D8124F401B72A90C003441AD /* Firebase.framework */,
-				D8B6AD9F1B58D49E005CDDB2 /* SystemConfiguration.framework */,
-				D8B6AD9D1B58D494005CDDB2 /* Security.framework */,
-				D8B6AD9B1B58D48C005CDDB2 /* CFNetwork.framework */,
-				D8B6AD991B58D486005CDDB2 /* libicucore.dylib */,
-				D8B6AD971B58D45F005CDDB2 /* libc++.dylib */,
 				D8B6ACE61B583877005CDDB2 /* Foundation.framework */,
 				D8C579BB1B5837DF00899F86 /* UIKit.framework */,
 			);
@@ -114,6 +108,7 @@
 				D8B6ACEC1B583C33005CDDB2 /* FirebaseArray.h */,
 				D8B6ACED1B583C33005CDDB2 /* FirebaseDataSource.h */,
 				D8B6ACEE1B583C33005CDDB2 /* FirebaseTableViewDataSource.h */,
+				D8DA10F01B7AC50400D00954 /* FirebaseCollectionViewDataSource.h */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -121,6 +116,7 @@
 		D8B6ACEA1B5839F7005CDDB2 /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
+				D8DF55611B742DB40030E996 /* FirebaseCollectionViewDataSource.m */,
 				D8B6ACEF1B583C41005CDDB2 /* FirebaseArray.m */,
 				D8B6ACF21B583C41005CDDB2 /* FirebaseDataSource.m */,
 				D8B6ACF11B583C41005CDDB2 /* FirebaseTableViewDataSource.m */,
@@ -165,6 +161,7 @@
 				D8B6ACF91B583D3E005CDDB2 /* FirebaseDataSource.h in Headers */,
 				D8784C401B719F280025587E /* FirebaseArrayDelegate.h in Headers */,
 				D8124F431B72B347003441AD /* FirebaseTableViewDataSource.h in Headers */,
+				D8DA10F11B7AC50400D00954 /* FirebaseCollectionViewDataSource.h in Headers */,
 				D8B6ACFB1B583D48005CDDB2 /* FirebaseArray.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,7 +237,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Using the default Ray Wenderlich build script http://www.raywenderlich.com/65964/create-a-framework-for-ios\nset -e\n\nexport FRAMEWORK_LOCN=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework\"\n\n# Create the path to the real Headers die\nmkdir -p \"${FRAMEWORK_LOCN}/Versions/A/Headers\"\n\n# Create the required symlinks\n/bin/ln -sfh A \"${FRAMEWORK_LOCN}/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${FRAMEWORK_LOCN}/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \\\n\"${FRAMEWORK_LOCN}/${PRODUCT_NAME}\"\n\n# Copy the public headers into the framework\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \\\n\"${FRAMEWORK_LOCN}/Versions/A/Headers\"";
+			shellScript = "set -e\n\nexport FRAMEWORK_LOCN=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework\"\n\n# Create the path to the real Headers die\nmkdir -p \"${FRAMEWORK_LOCN}/Versions/A/Headers\"\n\n# Create the required symlinks\n/bin/ln -sfh A \"${FRAMEWORK_LOCN}/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${FRAMEWORK_LOCN}/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \\\n\"${FRAMEWORK_LOCN}/${PRODUCT_NAME}\"\n\n# Copy the public headers into the framework\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \\\n\"${FRAMEWORK_LOCN}/Versions/A/Headers\"";
 		};
 		D8B6ADA91B58DCF9005CDDB2 /* MultiPlatform Build */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -263,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8DF55621B742DB40030E996 /* FirebaseCollectionViewDataSource.m in Sources */,
 				D8B6ACF61B583C41005CDDB2 /* FirebaseDataSource.m in Sources */,
 				D8B6ACF31B583C41005CDDB2 /* FirebaseArray.m in Sources */,
 				D8124F421B72B344003441AD /* FirebaseTableViewDataSource.m in Sources */,
@@ -283,6 +281,7 @@
 		D8B6ADA51B58DCDD005CDDB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_MODULES_AUTOLINK = YES;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -291,6 +290,7 @@
 		D8B6ADA61B58DCDD005CDDB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_MODULES_AUTOLINK = YES;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -377,17 +377,19 @@
 		D8C579B01B57349000899F86 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_MODULES_AUTOLINK = YES;
 				DEAD_CODE_STRIPPING = NO;
+				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/sdk",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)/sdk",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_PEDANTIC = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
@@ -398,17 +400,19 @@
 		D8C579B11B57349000899F86 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_MODULES_AUTOLINK = YES;
 				DEAD_CODE_STRIPPING = NO;
+				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/sdk",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)/sdk",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_PEDANTIC = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
