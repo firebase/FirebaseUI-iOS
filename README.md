@@ -32,11 +32,20 @@ account](https://www.firebase.com/signup/?utm_source=firebaseui-ios).
 
 ## FirebaseUI for iOS Quickstart
 
-This is a quickstart on how to use FirebaseUI's core features to speed up iOS development with Firebase.
+This is a quickstart on how to use FirebaseUI's core features to speed up iOS development with Firebase. FirebaseUI includes the following features:
+
+Class  | Description
+------------- | -------------
+FirebaseTableViewDataSource | Data source to bind a Firebase query to a UITableView
+FirebaseCollectionViewDataSource | Data source to bind a Firebase query to a UICollectionView
+FirebaseArray | Keeps an array synchronized to a Firebase query
+FirebaseDataSource | Generic superclass to create a custom data source
+
+For a more in-depth explanation of each of the above, check the usage instructions below:
 
 ### FirebaseTableViewDataSource
 
-FirebaseTableViewDataSource implements the UITableViewDataSource protocol to automatically use Firebase as a DataSource for your UITableView.
+`FirebaseTableViewDataSource` implements the `UITableViewDataSource` protocol to automatically use Firebase as a data source for your `UITableView`.
 
 #### Objective-C
 ```objective-c
@@ -82,7 +91,7 @@ self.tableView.dataSource = self.dataSource
 
 ### FirebaseCollectionViewDataSource
 
-FirebaseCollectionViewDataSource implements the UICollectionViewDataSource protocol to automatically use Firebase as a DataSource for your UICollectionView.
+`FirebaseCollectionViewDataSource` implements the `UICollectionViewDataSource` protocol to automatically use Firebase as a data source for your `UICollectionView`.
 
 #### Objective-C
 ```objective-c
@@ -322,6 +331,8 @@ $ git clone https://github.com/firebase/FirebaseUI-iOS.git
 $ cd FirebaseUI-iOS
 $ ./setup.sh
 ```
+
+FirebaseUI makes use of XCode 7 features such as lightweight generics and `__kindof` annotations, so please ensure you're using the latest version of XCode beta for development.
 
 ## Deployment
 
