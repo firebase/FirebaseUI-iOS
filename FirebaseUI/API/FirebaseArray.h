@@ -32,6 +32,7 @@
 
 @class FQuery;
 @class Firebase;
+@class FDataSnapshot;
 
 /**
  * FirebaseArray provides an array structure that is synchronized with a Firebase reference or query. It is useful for building custom data structures or sources, and provides the base for FirebaseDataSource.
