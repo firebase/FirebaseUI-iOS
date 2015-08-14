@@ -26,11 +26,11 @@
 		D8124F431B72B347003441AD /* FirebaseTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACEE1B583C33005CDDB2 /* FirebaseTableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8124F441B72C94E003441AD /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8124F401B72A90C003441AD /* Firebase.framework */; };
 		D8784C401B719F280025587E /* FirebaseArrayDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D8784C3F1B719F280025587E /* FirebaseArrayDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D87E4ABA1B7D832D00A53633 /* FirebaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACEB1B583C33005CDDB2 /* FirebaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8B6ACE51B58383C005CDDB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C579BB1B5837DF00899F86 /* UIKit.framework */; };
 		D8B6ACE71B583877005CDDB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B6ACE61B583877005CDDB2 /* Foundation.framework */; };
 		D8B6ACF31B583C41005CDDB2 /* FirebaseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B6ACEF1B583C41005CDDB2 /* FirebaseArray.m */; };
 		D8B6ACF61B583C41005CDDB2 /* FirebaseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B6ACF21B583C41005CDDB2 /* FirebaseDataSource.m */; };
-		D8B6ACF81B583D3E005CDDB2 /* FirebaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACEB1B583C33005CDDB2 /* FirebaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8B6ACF91B583D3E005CDDB2 /* FirebaseDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACED1B583C33005CDDB2 /* FirebaseDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8B6ACFB1B583D48005CDDB2 /* FirebaseArray.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACEC1B583C33005CDDB2 /* FirebaseArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8DA10F11B7AC50400D00954 /* FirebaseCollectionViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D8DA10F01B7AC50400D00954 /* FirebaseCollectionViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -50,7 +50,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		D8C579A41B57349000899F86 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
@@ -157,7 +157,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8B6ACF81B583D3E005CDDB2 /* FirebaseUI.h in Headers */,
+				D87E4ABA1B7D832D00A53633 /* FirebaseUI.h in Headers */,
 				D8B6ACF91B583D3E005CDDB2 /* FirebaseDataSource.h in Headers */,
 				D8784C401B719F280025587E /* FirebaseArrayDelegate.h in Headers */,
 				D8124F431B72B347003441AD /* FirebaseTableViewDataSource.h in Headers */,
