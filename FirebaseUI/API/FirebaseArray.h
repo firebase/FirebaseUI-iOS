@@ -27,6 +27,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <FirebaseUI/XCodeMacros.h>
 
 #import "FirebaseArrayDelegate.h"
 
@@ -52,7 +53,7 @@
 /**
  * The delegate object that array changes are surfaced to.
  */
-@property (strong, nonatomic) NSMutableArray<FDataSnapshot *> *snapshots;
+@property (strong, nonatomic) __GENERIC(NSMutableArray, FDataSnapshot *) *snapshots;
 
 #pragma mark -
 #pragma mark Initializer methods

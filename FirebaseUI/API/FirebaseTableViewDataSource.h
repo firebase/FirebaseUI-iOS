@@ -27,6 +27,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <FirebaseUI/XCodeMacros.h>
 
 #import "FirebaseDataSource.h"
 
@@ -40,22 +41,22 @@
 /**
  * The model class to coerce FDataSnapshots to (if desired). For instance, if the modelClass is set to [Message class] in Obj-C or Message.self in Swift, then objects of type Message will be returned instead of type FDataSnapshot.
  */
-@property (strong, nonatomic, nonnull) Class modelClass;
+@property (strong, nonatomic, __NON_NULL) Class modelClass;
 
 /**
  * The reuse identifier for cells in the UITableView.
  */
-@property (strong, nonatomic, nonnull) NSString *reuseIdentifier;
+@property (strong, nonatomic, __NON_NULL) NSString *reuseIdentifier;
 
 /**
  * The UITableView instance that operations (inserts, removals, moves, etc.) are performed against.
  */
-@property (strong, nonatomic, nonnull) UITableView *tableView;
+@property (strong, nonatomic, __NON_NULL) UITableView *tableView;
 
 /**
  * The callback to populate a subclass of UITableViewCell with an object provided by the datasource.
  */
-@property (strong, nonatomic, nonnull) void(^populateCell)(__kindof UITableViewCell * _Nonnull cell,  __kindof NSObject * _Nonnull object);
+@property (strong, nonatomic, __NON_NULL) void(^populateCell)(UITableViewCell * __NON_NULL_PTR cell, NSObject * __NON_NULL_PTR object);
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates UITableViewCells with FDataSnapshots.
@@ -64,7 +65,7 @@
  * @param tableView An instance of a UITableView to bind to
  * @return An instance of FirebaseTableViewDataSource that populates UITableViewCells with FDataSnapshots
  */
-- (nonnull instancetype)initWithRef:(nonnull Firebase *)ref reuseIdentifier:(nonnull NSString *)identifier view:(nonnull UITableView *)tableView;
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref reuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom subclass of UITableViewCell with FDataSnapshots.
@@ -74,7 +75,7 @@
  * @param tableView An instance of a UITableView to bind to
  * @return An instance of FirebaseTableViewDataSource that populates a custom subclass of UITableViewCell with FDataSnapshots
  */
-- (nonnull instancetype)initWithRef:(nonnull Firebase *)ref cellClass:(nullable Class)cell reuseIdentifier:(nonnull NSString *)identifier view:(nonnull UITableView *)tableView;
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref cellClass:(__NULLABLE Class)cell reuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom xib with FDataSnapshots.
@@ -84,7 +85,7 @@
  * @param tableView An instance of a UITableView to bind to
  * @return An instance of FirebaseTableViewDataSource that populates a custom xib with FDataSnapshots
  */
-- (nonnull instancetype)initWithRef:(nonnull Firebase *)ref nibNamed:(nonnull NSString *)nibName reuseIdentifier:(nonnull NSString *)identifier view:(nonnull UITableView *)tableView;
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref nibNamed:(__NON_NULL NSString *)nibName reuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates UITableViewCells with a custom model class.
@@ -94,7 +95,7 @@
  * @param tableView An instance of a UITableView to bind to
  * @return An instance of FirebaseTableViewDataSource that populates UITableViewCells with a custom model class
  */
-- (nonnull instancetype)initWithRef:(nonnull Firebase *)ref modelClass:(nullable Class)model reuseIdentifier:(nonnull NSString *)identifier view:(nonnull UITableView *)tableView;
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref modelClass:(__NULLABLE Class)model reuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom subclass of UITableViewCell with a custom model class.
@@ -105,7 +106,7 @@
  * @param tableView An instance of a UITableView to bind to
  * @return An instance of FirebaseTableViewDataSource that populates a custom subclass of UITableViewCell with a custom model class
  */
-- (nonnull instancetype)initWithRef:(nonnull Firebase *)ref modelClass:(nullable Class)model cellClass:(nullable Class)cell reuseIdentifier:(nonnull NSString *)identifier view:(nonnull UITableView *)tableView;
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref modelClass:(__NULLABLE Class)model cellClass:(__NULLABLE Class)cell reuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom xib with a custom model class.
@@ -116,13 +117,13 @@
  * @param tableView An instance of a UITableView to bind to
  * @return An instance of FirebaseTableViewDataSource that populates a custom xib with a custom model class
  */
-- (nonnull instancetype)initWithRef:(nonnull Firebase *)ref modelClass:(nullable Class)model nibNamed:(nonnull NSString *)nibName reuseIdentifier:(nonnull NSString *)identifier view:(nonnull UITableView *)tableView;
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref modelClass:(__NULLABLE Class)model nibNamed:(__NON_NULL NSString *)nibName reuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
 
 /**
  * This method populates the fields of a UITableViewCell or subclass given a model object (or FDataSnapshot).
  * @param callback A block which returns an initialized UITableViewCell (or subclass) and the corresponding object to populate the cell with.
  */
-- (void)populateCellWithBlock:(nonnull void(^)(__kindof UITableViewCell * _Nonnull cell, __kindof NSObject * _Nonnull object))callback;
+- (void)populateCellWithBlock:(__NON_NULL void(^)(UITableViewCell * __NON_NULL_PTR cell, NSObject * __NON_NULL_PTR object))callback;
 
 @end
 

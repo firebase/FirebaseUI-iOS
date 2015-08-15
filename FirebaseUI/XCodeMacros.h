@@ -26,13 +26,31 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Foundation/Foundation.h>
+#ifndef XCodeMacros_h
+#define XCodeMacros_h
 
-#import <FirebaseUI/FirebaseArray.h>
-#import <FirebaseUI/FirebaseDataSource.h>
-#import <FirebaseUI/FirebaseTableViewDataSource.h>
-#import <FirebaseUI/FirebaseCollectionViewDataSource.h>
+#if __has_feature(nullability)
+#   define __ASSUME_NONNULL_BEGIN      NS_ASSUME_NONNULL_BEGIN
+#   define __ASSUME_NONNULL_END        NS_ASSUME_NONNULL_END
+#   define __NULLABLE                  nullable
+#   define __NULLABLE_PTR              __nullable
+#   define __NON_NULL                  nonnull
+#   define __NON_NULL_PTR              __nonnull
+#else
+#   define __ASSUME_NONNULL_BEGIN
+#   define __ASSUME_NONNULL_END
+#   define __NULLABLE
+#   define __NULLABLE_PTR
+#   define __NON_NULL
+#   define __NON_NULL_PTR
+#endif
 
-@interface FirebaseUI : NSObject
+#if __has_feature(objc_generics)
+#   define __GENERIC(class, ...)      class<__VA_ARGS__>
+#   define __GENERIC_TYPE(type)       type
+#else
+#   define __GENERIC(class, ...)      class
+#   define __GENERIC_TYPE(type)       id
+#endif
 
-@end
+#endif /* XCodeMacros_h */

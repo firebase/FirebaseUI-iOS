@@ -154,7 +154,7 @@
     return [self.array count];
 }
 
-- (void)populateCellWithBlock:(nonnull void(^)( __kindof UICollectionViewCell * _Nonnull cell,  __kindof NSObject * _Nonnull object))callback;
+- (void)populateCellWithBlock:(__NON_NULL void(^)(UICollectionViewCell * __NON_NULL_PTR cell, NSObject * __NON_NULL_PTR object))callback;
 {
     self.populateCell = callback;
 }

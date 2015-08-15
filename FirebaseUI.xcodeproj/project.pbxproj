@@ -34,6 +34,7 @@
 		D8B6ACF91B583D3E005CDDB2 /* FirebaseDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACED1B583C33005CDDB2 /* FirebaseDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8B6ACFB1B583D48005CDDB2 /* FirebaseArray.h in Headers */ = {isa = PBXBuildFile; fileRef = D8B6ACEC1B583C33005CDDB2 /* FirebaseArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8DA10F11B7AC50400D00954 /* FirebaseCollectionViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D8DA10F01B7AC50400D00954 /* FirebaseCollectionViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DB81A81B7EA357001429C6 /* XCodeMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = D8DB81A71B7EA357001429C6 /* XCodeMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8DF55621B742DB40030E996 /* FirebaseCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DF55611B742DB40030E996 /* FirebaseCollectionViewDataSource.m */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		D8C579A61B57349000899F86 /* libFirebaseUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFirebaseUI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C579BB1B5837DF00899F86 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D8DA10F01B7AC50400D00954 /* FirebaseCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseCollectionViewDataSource.h; path = API/FirebaseCollectionViewDataSource.h; sourceTree = "<group>"; };
+		D8DB81A71B7EA357001429C6 /* XCodeMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCodeMacros.h; sourceTree = "<group>"; };
 		D8DF55611B742DB40030E996 /* FirebaseCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseCollectionViewDataSource.m; path = Implementation/FirebaseCollectionViewDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +111,7 @@
 				D8B6ACED1B583C33005CDDB2 /* FirebaseDataSource.h */,
 				D8B6ACEE1B583C33005CDDB2 /* FirebaseTableViewDataSource.h */,
 				D8DA10F01B7AC50400D00954 /* FirebaseCollectionViewDataSource.h */,
+				D8DB81A71B7EA357001429C6 /* XCodeMacros.h */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				D87E4ABA1B7D832D00A53633 /* FirebaseUI.h in Headers */,
 				D8B6ACF91B583D3E005CDDB2 /* FirebaseDataSource.h in Headers */,
 				D8784C401B719F280025587E /* FirebaseArrayDelegate.h in Headers */,
+				D8DB81A81B7EA357001429C6 /* XCodeMacros.h in Headers */,
 				D8124F431B72B347003441AD /* FirebaseTableViewDataSource.h in Headers */,
 				D8DA10F11B7AC50400D00954 /* FirebaseCollectionViewDataSource.h in Headers */,
 				D8B6ACFB1B583D48005CDDB2 /* FirebaseArray.h in Headers */,
