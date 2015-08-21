@@ -119,10 +119,10 @@
 		D8B6ACEA1B5839F7005CDDB2 /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
-				D8DF55611B742DB40030E996 /* FirebaseCollectionViewDataSource.m */,
 				D8B6ACEF1B583C41005CDDB2 /* FirebaseArray.m */,
 				D8B6ACF21B583C41005CDDB2 /* FirebaseDataSource.m */,
 				D8B6ACF11B583C41005CDDB2 /* FirebaseTableViewDataSource.m */,
+				D8DF55611B742DB40030E996 /* FirebaseCollectionViewDataSource.m */,
 			);
 			name = Implementation;
 			sourceTree = "<group>";

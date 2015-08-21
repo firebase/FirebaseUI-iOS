@@ -35,27 +35,39 @@
 #pragma mark -
 #pragma mark FirebaseDataSource initializer methods
 
-- (instancetype)initWithRef:(Firebase *)ref reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref cellReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
-    return [self initWithRef:ref modelClass:nil cellClass:nil reuseIdentifier:identifier view:tableView];
+    return [self initWithRef:ref modelClass:nil cellClass:nil cellReuseIdentifier:identifier view:tableView];
 }
 
-- (instancetype)initWithRef:(Firebase *)ref cellClass:(Class)cell reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref prototypeReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
-    return [self initWithRef:ref modelClass:nil cellClass:cell reuseIdentifier:identifier view:tableView];
+    self.hasPrototypeCell = YES;
+    return [self initWithRef:ref modelClass:nil cellClass:nil cellReuseIdentifier:identifier view:tableView];
 }
 
-- (instancetype)initWithRef:(Firebase *)ref nibNamed:(NSString *)nibName reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref cellClass:(Class)cell cellReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
-    return [self initWithRef:ref modelClass:nil nibNamed:nibName reuseIdentifier:identifier view:tableView];
+    return [self initWithRef:ref modelClass:nil cellClass:cell cellReuseIdentifier:identifier view:tableView];
 }
 
-- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref nibNamed:(NSString *)nibName cellReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
-    return [self initWithRef:ref modelClass:model cellClass:nil reuseIdentifier:identifier view:tableView];
+    return [self initWithRef:ref modelClass:nil nibNamed:nibName cellReuseIdentifier:identifier view:tableView];
 }
 
-- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model cellClass:(Class)cell reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model cellReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+{
+    return [self initWithRef:ref modelClass:model cellClass:nil cellReuseIdentifier:identifier view:tableView];
+}
+
+- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model prototypeReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+{
+    self.hasPrototypeCell = YES;
+    return [self initWithRef:ref modelClass:model cellClass:nil cellReuseIdentifier:identifier view:tableView];
+}
+
+- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model cellClass:(Class)cell cellReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
     FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
     self = [super initWithArray:array];
@@ -74,14 +86,14 @@
         self.reuseIdentifier = identifier;
         self.populateCell = ^(id cell, id object) {};
         
-        if (![self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier]) {
+        if (!self.hasPrototypeCell) {
             [self.tableView registerClass:cell forCellReuseIdentifier:self.reuseIdentifier];
         }
     }
     return self;
 }
 
-- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model nibNamed:(NSString *)nibName reuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
+- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model nibNamed:(NSString *)nibName cellReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
 {
     FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
     self = [super initWithArray:array];
@@ -96,7 +108,7 @@
         self.reuseIdentifier = identifier;
         self.populateCell = ^(id cell, id object) {};
         
-        if (![self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier]) {
+        if (!self.hasPrototypeCell) {
             UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
             [self.tableView registerNib:nib forCellReuseIdentifier:self.reuseIdentifier];
         }
@@ -160,7 +172,7 @@
     return [self.array count];
 }
 
-- (void)populateCellWithBlock:(__NON_NULL void(^)(UITableViewCell * __NON_NULL_PTR cell, NSObject * __NON_NULL_PTR object))callback;
+- (void)populateCellWithBlock:(nonnull void (^)(__kindof UITableViewCell * __NON_NULL_PTR cell, __kindof NSObject * __NON_NULL_PTR object))callback;
 {
     self.populateCell = callback;
 }
