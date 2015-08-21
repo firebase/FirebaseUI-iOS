@@ -54,9 +54,14 @@
 @property (strong, nonatomic, __NON_NULL) UITableView *tableView;
 
 /**
+ * Property to keep track of prototype cell use, to not register a class for the UICollectionView or do similar book keeping.
+ */
+@property BOOL hasPrototypeCell;
+
+/**
  * The callback to populate a subclass of UITableViewCell with an object provided by the datasource.
  */
-@property (strong, nonatomic, __NON_NULL) void(^populateCell)(UITableViewCell * __NON_NULL_PTR cell, NSObject * __NON_NULL_PTR object);
+@property (strong, nonatomic, __NON_NULL) void(^populateCell)(__kindof UITableViewCell * __NON_NULL_PTR cell, __kindof NSObject * __NON_NULL_PTR object);
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates UITableViewCells with FDataSnapshots.
@@ -65,7 +70,16 @@
  * @param tableView An instance of a UITableView to bind to
  * @return An instance of FirebaseTableViewDataSource that populates UITableViewCells with FDataSnapshots
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref reuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref cellReuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates UITableViewCells with FDataSnapshots. Note that this method is used when using prototype cells, where the cells don't need to be registered in the class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @return An instance of FirebaseTableViewDataSource that populates UITableViewCells with FDataSnapshots
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref prototypeReuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom subclass of UITableViewCell with FDataSnapshots.
@@ -75,7 +89,7 @@
  * @param tableView An instance of a UITableView to bind to
  * @return An instance of FirebaseTableViewDataSource that populates a custom subclass of UITableViewCell with FDataSnapshots
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref cellClass:(__NULLABLE Class)cell reuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref cellClass:(__NULLABLE Class)cell cellReuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom xib with FDataSnapshots.
@@ -85,7 +99,7 @@
  * @param tableView An instance of a UITableView to bind to
  * @return An instance of FirebaseTableViewDataSource that populates a custom xib with FDataSnapshots
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref nibNamed:(__NON_NULL NSString *)nibName reuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref nibNamed:(__NON_NULL NSString *)nibName cellReuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates UITableViewCells with a custom model class.
@@ -95,7 +109,17 @@
  * @param tableView An instance of a UITableView to bind to
  * @return An instance of FirebaseTableViewDataSource that populates UITableViewCells with a custom model class
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref modelClass:(__NULLABLE Class)model reuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref modelClass:(__NULLABLE Class)model cellReuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates UITableViewCells with a custom model class. Note that this method is used when using prototype cells, where the cells don't need to be registered in the class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to FDataSnapshot if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @return An instance of FirebaseTableViewDataSource that populates UITableViewCells with a custom model class
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref modelClass:(__NULLABLE Class)model prototypeReuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom subclass of UITableViewCell with a custom model class.
@@ -106,7 +130,7 @@
  * @param tableView An instance of a UITableView to bind to
  * @return An instance of FirebaseTableViewDataSource that populates a custom subclass of UITableViewCell with a custom model class
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref modelClass:(__NULLABLE Class)model cellClass:(__NULLABLE Class)cell reuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref modelClass:(__NULLABLE Class)model cellClass:(__NULLABLE Class)cell cellReuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom xib with a custom model class.
@@ -117,13 +141,13 @@
  * @param tableView An instance of a UITableView to bind to
  * @return An instance of FirebaseTableViewDataSource that populates a custom xib with a custom model class
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref modelClass:(__NULLABLE Class)model nibNamed:(__NON_NULL NSString *)nibName reuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref modelClass:(__NULLABLE Class)model nibNamed:(__NON_NULL NSString *)nibName cellReuseIdentifier:(__NON_NULL NSString *)identifier view:(__NON_NULL UITableView *)tableView;
 
 /**
  * This method populates the fields of a UITableViewCell or subclass given a model object (or FDataSnapshot).
  * @param callback A block which returns an initialized UITableViewCell (or subclass) and the corresponding object to populate the cell with.
  */
-- (void)populateCellWithBlock:(__NON_NULL void(^)(UITableViewCell * __NON_NULL_PTR cell, NSObject * __NON_NULL_PTR object))callback;
+- (void)populateCellWithBlock:(nonnull void (^)(__kindof UITableViewCell * __NON_NULL_PTR cell, __kindof NSObject * __NON_NULL_PTR object))callback;
 
 @end
 
