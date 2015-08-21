@@ -102,8 +102,8 @@
  * datasource.
  */
 @property(strong, nonatomic, __NON_NULL) void (^populateCell)
-    (__KINDOF(UICollectionViewCell *) __NON_NULL_PTR cell,
-     __KINDOF(NSObject *) __NON_NULL_PTR object);
+    (__KINDOF(UICollectionViewCell) __NON_NULL_PTR cell,
+     __KINDOF(NSObject) __NON_NULL_PTR object);
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -271,10 +271,8 @@
  * subclass) and the
  * corresponding object to populate the cell with.
  */
-// clang-format off
 - (void)populateCellWithBlock:
-    (__NON_NULL void (^)(__KINDOF(UICollectionViewCell *) __NON_NULL_PTR cell,
-                         __KINDOF(NSObject *) __NON_NULL_PTR object))callback;
-// clang-format on
+    (__NON_NULL void (^)(__KINDOF(UICollectionViewCell)__NON_NULL_PTR cell,
+                         __KINDOF(NSObject)__NON_NULL_PTR object))callback;
 
 @end

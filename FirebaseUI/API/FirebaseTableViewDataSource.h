@@ -89,8 +89,8 @@
  * provided by the datasource.
  */
 @property(strong, nonatomic, __NON_NULL) void (^populateCell)
-    (__KINDOF(UITableViewCell *) __NON_NULL_PTR cell,
-     __KINDOF(NSObject *) __NON_NULL_PTR object);
+    (__KINDOF(UITableViewCell) __NON_NULL_PTR cell,
+     __KINDOF(NSObject) __NON_NULL_PTR object);
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates
@@ -250,10 +250,8 @@
  * subclass) and the
  * corresponding object to populate the cell with.
  */
-// clang-format off
 - (void)populateCellWithBlock:
-    (nonnull void (^)(__KINDOF(UITableViewCell *)__NON_NULL_PTR cell,
-                      __KINDOF(NSObject *)__NON_NULL_PTR object))callback;
-// clang-format on
+    (__NON_NULL void (^)(__KINDOF(UITableViewCell)__NON_NULL_PTR cell,
+                         __KINDOF(NSObject)__NON_NULL_PTR object))callback;
 
 @end

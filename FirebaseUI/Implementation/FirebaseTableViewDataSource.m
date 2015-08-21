@@ -227,12 +227,10 @@
   return [self.array count];
 }
 
-// clang-format off
 - (void)populateCellWithBlock:
-    (nonnull void (^)(__KINDOF(UITableViewCell *) __NON_NULL_PTR cell,
-                      __KINDOF(NSObject *) __NON_NULL_PTR object))callback {
+    (__NON_NULL void (^)(__KINDOF(UITableViewCell)__NON_NULL_PTR cell,
+                         __KINDOF(NSObject)__NON_NULL_PTR object))callback {
   self.populateCell = callback;
 }
-// clang-format on
 
 @end

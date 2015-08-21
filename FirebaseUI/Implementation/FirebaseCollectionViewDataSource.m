@@ -224,12 +224,10 @@ cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
   return [self.array count];
 }
 
-// clang-format off
 - (void)populateCellWithBlock:
-    (__NON_NULL void (^)(__KINDOF(UICollectionViewCell *) __NON_NULL_PTR cell,
-                         __KINDOF(NSObject *) __NON_NULL_PTR object))callback {
+    (__NON_NULL void (^)(__KINDOF(UICollectionViewCell)__NON_NULL_PTR cell,
+                         __KINDOF(NSObject)__NON_NULL_PTR object))callback {
   self.populateCell = callback;
 }
-// clang-format on
 
 @end
