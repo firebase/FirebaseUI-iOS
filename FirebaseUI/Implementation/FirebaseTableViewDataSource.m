@@ -172,7 +172,7 @@
     return [self.array count];
 }
 
-- (void)populateCellWithBlock:(nonnull void (^)(__kindof UITableViewCell * __NON_NULL_PTR cell, __kindof NSObject * __NON_NULL_PTR object))callback;
+- (void)populateCellWithBlock:(nonnull void (^)(__KINDOF UITableViewCell * __NON_NULL_PTR cell, __KINDOF NSObject * __NON_NULL_PTR object))callback;
 {
     self.populateCell = callback;
 }

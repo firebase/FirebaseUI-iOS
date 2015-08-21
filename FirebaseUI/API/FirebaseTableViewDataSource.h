@@ -61,7 +61,7 @@
 /**
  * The callback to populate a subclass of UITableViewCell with an object provided by the datasource.
  */
-@property (strong, nonatomic, __NON_NULL) void(^populateCell)(__kindof UITableViewCell * __NON_NULL_PTR cell, __kindof NSObject * __NON_NULL_PTR object);
+@property (strong, nonatomic, __NON_NULL) void(^populateCell)(__KINDOF UITableViewCell * __NON_NULL_PTR cell, __KINDOF NSObject * __NON_NULL_PTR object);
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates UITableViewCells with FDataSnapshots.
@@ -147,7 +147,7 @@
  * This method populates the fields of a UITableViewCell or subclass given a model object (or FDataSnapshot).
  * @param callback A block which returns an initialized UITableViewCell (or subclass) and the corresponding object to populate the cell with.
  */
-- (void)populateCellWithBlock:(nonnull void (^)(__kindof UITableViewCell * __NON_NULL_PTR cell, __kindof NSObject * __NON_NULL_PTR object))callback;
+- (void)populateCellWithBlock:(nonnull void (^)(__KINDOF UITableViewCell * __NON_NULL_PTR cell, __KINDOF NSObject * __NON_NULL_PTR object))callback;
 
 @end
 

@@ -29,7 +29,7 @@
 #ifndef XCodeMacros_h
 #define XCodeMacros_h
 
-#if __has_feature(nullability)
+#if defined(__has_feature) && __has_feature(nullability)
 #   define __ASSUME_NONNULL_BEGIN      NS_ASSUME_NONNULL_BEGIN
 #   define __ASSUME_NONNULL_END        NS_ASSUME_NONNULL_END
 #   define __NULLABLE                  nullable
@@ -45,12 +45,16 @@
 #   define __NON_NULL_PTR
 #endif
 
-#if __has_feature(objc_generics)
-#   define __GENERIC(class, ...)      class<__VA_ARGS__>
-#   define __GENERIC_TYPE(type)       type
+#if defined(__has_feature) && __has_feature(objc_generics)
+#   define __GENERIC(...)       <__VA_ARGS__>
 #else
-#   define __GENERIC(class, ...)      class
-#   define __GENERIC_TYPE(type)       id
+#   define __GENERIC(...)
 #endif
 
-#endif /* XCodeMacros_h */
+#if defined(__has_feature) && __has_feature(objc_kindof)
+#   define __KINDOF             __kindof
+#else
+#   define __KINDOF
+#endif
+
+#endif

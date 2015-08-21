@@ -53,7 +53,7 @@
 /**
  * The delegate object that array changes are surfaced to.
  */
-@property (strong, nonatomic) __GENERIC(NSMutableArray, FDataSnapshot *) *snapshots;
+@property (strong, nonatomic) NSMutableArray __GENERIC(FDataSnapshot *) *snapshots;
 
 #pragma mark -
 #pragma mark Initializer methods

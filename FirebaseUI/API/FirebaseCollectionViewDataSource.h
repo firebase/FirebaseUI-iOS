@@ -66,7 +66,7 @@
 /**
  * The callback to populate a subclass of UICollectionViewCell with an object provided by the datasource.
  */
-@property (strong, nonatomic, __NON_NULL) void(^populateCell)(__kindof UICollectionViewCell * __NON_NULL_PTR cell, __kindof NSObject * __NON_NULL_PTR object);
+@property (strong, nonatomic, __NON_NULL) void(^populateCell)(__KINDOF UICollectionViewCell * __NON_NULL_PTR cell, __KINDOF NSObject * __NON_NULL_PTR object);
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates UICollectionViewCells with FDataSnapshots.
@@ -152,6 +152,6 @@
  * This method populates the fields of a UICollectionViewCell or subclass given an FDataSnapshot (or custom model object).
  * @param callback A block which returns an initialized UICollectionViewCell (or subclass) and the corresponding object to populate the cell with.
  */
-- (void)populateCellWithBlock:(__NON_NULL void(^)(__kindof UICollectionViewCell * __NON_NULL_PTR cell, __kindof NSObject * __NON_NULL_PTR object))callback;
+- (void)populateCellWithBlock:(__NON_NULL void(^)(__KINDOF UICollectionViewCell * __NON_NULL_PTR cell, __KINDOF NSObject * __NON_NULL_PTR object))callback;
 
 @end
