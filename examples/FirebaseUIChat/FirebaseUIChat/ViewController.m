@@ -61,6 +61,7 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField;
 {
     [[self.ref childByAutoId] setValue:@{@"name": @"iOS User", @"message": textField.text}];
+    [textField resignFirstResponder];
     textField.text = @"";
     return YES;
 }
