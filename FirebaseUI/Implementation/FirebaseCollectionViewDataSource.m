@@ -1,3 +1,5 @@
+// clang-format off
+
 /*
  * Firebase UI Bindings iOS Library
  *
@@ -25,6 +27,8 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+// clang-format on
 
 #import <Firebase/Firebase.h>
 
@@ -151,7 +155,8 @@
     };
 
     UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
-    [self.collectionView registerNib:nib forCellWithReuseIdentifier:self.reuseIdentifier];
+    [self.collectionView registerNib:nib
+          forCellWithReuseIdentifier:self.reuseIdentifier];
   }
   return self;
 }
@@ -160,37 +165,46 @@
 #pragma mark FirebaseCollectionDelegate methods
 
 - (void)childAdded:(id)obj atIndex:(NSUInteger)index {
-  [self.collectionView
-      insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+  [self.collectionView insertItemsAtIndexPaths:@[
+    [NSIndexPath indexPathForItem:index inSection:0]
+  ]];
 }
 
 - (void)childChanged:(id)obj atIndex:(NSUInteger)index {
-  [self.collectionView
-      reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]];
+  [self.collectionView reloadItemsAtIndexPaths:@[
+    [NSIndexPath indexPathForRow:index inSection:0]
+  ]];
 }
 
 - (void)childRemoved:(id)obj atIndex:(NSUInteger)index {
-  [self.collectionView
-      deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]];
+  [self.collectionView deleteItemsAtIndexPaths:@[
+    [NSIndexPath indexPathForRow:index inSection:0]
+  ]];
 }
 
-- (void)childMoved:(id)obj fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-  [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
-                               toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
+- (void)childMoved:(id)obj
+         fromIndex:(NSUInteger)fromIndex
+           toIndex:(NSUInteger)toIndex {
+  [self.collectionView
+      moveItemAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
+              toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
 }
 
 #pragma mark -
 #pragma mark UICollectionViewDataSource methods
 
-- (nonnull UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView
-                          cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-  id cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier
-                                                           forIndexPath:indexPath];
+- (nonnull UICollectionViewCell *)
+        collectionView:(nonnull UICollectionView *)collectionView
+cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+  id cell = [self.collectionView
+      dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier
+                                forIndexPath:indexPath];
 
   FDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
   if (![self.modelClass isSubclassOfClass:[FDataSnapshot class]]) {
     id model = [[self.modelClass alloc] init];
-    // TODO: replace setValuesForKeysWithDictionary with client API valueAsObject method
+    // TODO: replace setValuesForKeysWithDictionary with client API
+    // valueAsObject method
     [model setValuesForKeysWithDictionary:snap.value];
     self.populateCell(cell, model);
   } else {
@@ -200,17 +214,22 @@
   return cell;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(nonnull UICollectionView *)collectionView {
+- (NSInteger)numberOfSectionsInCollectionView:
+    (nonnull UICollectionView *)collectionView {
   return 1;
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView
-     numberOfItemsInSection:(NSInteger)section;
-{ return [self.array count]; }
+     numberOfItemsInSection:(NSInteger)section {
+  return [self.array count];
+}
 
+// clang-format off
 - (void)populateCellWithBlock:
-    (__NON_NULL void (^)(__KINDOF UICollectionViewCell *__NON_NULL_PTR cell,
-                         __KINDOF NSObject *__NON_NULL_PTR object))callback;
-{ self.populateCell = callback; }
+    (__NON_NULL void (^)(__KINDOF(UICollectionViewCell *) __NON_NULL_PTR cell,
+                         __KINDOF(NSObject *) __NON_NULL_PTR object))callback {
+  self.populateCell = callback;
+}
+// clang-format on
 
 @end

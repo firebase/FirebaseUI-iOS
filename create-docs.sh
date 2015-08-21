@@ -16,3 +16,6 @@ appledoc --project-name "FirebaseUI for iOS" \
 --search-undocumented-doc \
 --exit-threshold 2 \
 "$DIR"/FirebaseUI/API/*.h
+
+echo "Copying docs to FirebaseUI site..."
+cp -r site/html/* ../FirebaseUI/docs/ios

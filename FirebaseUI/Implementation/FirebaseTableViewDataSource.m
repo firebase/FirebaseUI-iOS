@@ -1,3 +1,5 @@
+// clang-format off
+
 /*
  * Firebase UI Bindings iOS Library
  *
@@ -25,6 +27,8 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+// clang-format on
 
 #import <Firebase/Firebase.h>
 
@@ -124,7 +128,8 @@
     };
 
     if (!self.hasPrototypeCell) {
-      [self.tableView registerClass:cell forCellReuseIdentifier:self.reuseIdentifier];
+      [self.tableView registerClass:cell
+             forCellReuseIdentifier:self.reuseIdentifier];
     }
   }
   return self;
@@ -150,7 +155,8 @@
 
     if (!self.hasPrototypeCell) {
       UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
-      [self.tableView registerNib:nib forCellReuseIdentifier:self.reuseIdentifier];
+      [self.tableView registerNib:nib
+           forCellReuseIdentifier:self.reuseIdentifier];
     }
   }
   return self;
@@ -161,43 +167,52 @@
 
 - (void)childAdded:(id)obj atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
-  [self.tableView insertRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
-                        withRowAnimation:UITableViewRowAnimationAutomatic];
+  [self.tableView insertRowsAtIndexPaths:@[
+    [NSIndexPath indexPathForRow:index inSection:0]
+  ] withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
 }
 
 - (void)childChanged:(id)obj atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
-  [self.tableView reloadRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
-                        withRowAnimation:UITableViewRowAnimationAutomatic];
+  [self.tableView reloadRowsAtIndexPaths:@[
+    [NSIndexPath indexPathForRow:index inSection:0]
+  ] withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
 }
 
 - (void)childRemoved:(id)obj atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
-  [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
-                        withRowAnimation:UITableViewRowAnimationAutomatic];
+  [self.tableView deleteRowsAtIndexPaths:@[
+    [NSIndexPath indexPathForRow:index inSection:0]
+  ] withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
 }
 
-- (void)childMoved:(id)obj fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+- (void)childMoved:(id)obj
+         fromIndex:(NSUInteger)fromIndex
+           toIndex:(NSUInteger)toIndex {
   [self.tableView beginUpdates];
-  [self.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
-                         toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
+  [self.tableView
+      moveRowAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
+             toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
   [self.tableView endUpdates];
 }
 
 #pragma mark -
 #pragma mark UITableViewDataSource methods
 
-- (id)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  id cell = [self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier
-                                                 forIndexPath:indexPath];
+- (id)tableView:(UITableView *)tableView
+    cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  id cell =
+      [self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier
+                                           forIndexPath:indexPath];
 
   FDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
   if (![self.modelClass isSubclassOfClass:[FDataSnapshot class]]) {
     id model = [[self.modelClass alloc] init];
-    // TODO: replace setValuesForKeysWithDictionary with client API valueAsObject method
+    // TODO: replace setValuesForKeysWithDictionary with client API
+    // valueAsObject method
     [model setValuesForKeysWithDictionary:snap.value];
     self.populateCell(cell, model);
   } else {
@@ -207,13 +222,17 @@
   return cell;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section {
   return [self.array count];
 }
 
-- (void)populateCellWithBlock:(nonnull void (^)(__KINDOF UITableViewCell *__NON_NULL_PTR cell,
-                                                __KINDOF NSObject *__NON_NULL_PTR object))callback {
+// clang-format off
+- (void)populateCellWithBlock:
+    (nonnull void (^)(__KINDOF(UITableViewCell *) __NON_NULL_PTR cell,
+                      __KINDOF(NSObject *) __NON_NULL_PTR object))callback {
   self.populateCell = callback;
 }
+// clang-format on
 
 @end

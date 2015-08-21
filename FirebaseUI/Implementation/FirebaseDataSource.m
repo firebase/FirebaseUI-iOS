@@ -1,3 +1,5 @@
+// clang-format off
+
 /*
  * Firebase UI Bindings iOS Library
  *
@@ -25,6 +27,8 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+// clang-format on
 
 #import <Firebase/Firebase.h>
 

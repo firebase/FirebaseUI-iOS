@@ -1,3 +1,5 @@
+// clang-format off
+
 /*
  * Firebase UI Bindings iOS Library
  *
@@ -26,11 +28,12 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+// clang-format on
+
 /**
  * A protocol to allow instances of FirebaseArray to raise events through a delegate. Raises all
  * Firebase events except FEventTypeValue.
  */
-
 @protocol FirebaseArrayDelegate<NSObject>
 
 @optional

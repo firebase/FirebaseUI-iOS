@@ -1,3 +1,5 @@
+// clang-format off
+
 /*
  * Firebase UI Bindings iOS Library
  *
@@ -26,6 +28,8 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+// clang-format on
+
 #import <Foundation/Foundation.h>
 
 #import "FirebaseArray.h"
@@ -33,9 +37,12 @@
 @class Firebase;
 
 /**
- * A FirebaseDataSource is a generic superclass for all Firebase datasources, like
- * FirebaseTableViewDataSource and FirebaseCollectionViewDataSource. It provides properties that all
- * subclasses need as well as several methods that pass through to the instance of FirebaseArray.
+ * A FirebaseDataSource is a generic superclass for all Firebase datasources,
+ * like
+ * FirebaseTableViewDataSource and FirebaseCollectionViewDataSource. It provides
+ * properties that all
+ * subclasses need as well as several methods that pass through to the instance
+ * of FirebaseArray.
  */
 @interface FirebaseDataSource : NSObject<FirebaseArrayDelegate>
 

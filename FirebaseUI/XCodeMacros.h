@@ -1,3 +1,5 @@
+// clang-format off
+
 /*
  * Firebase UI Bindings iOS Library
  *
@@ -26,6 +28,8 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+// clang-format ongit 
+
 #ifndef XCodeMacros_h
 #define XCodeMacros_h
 
@@ -52,9 +56,9 @@
 #endif
 
 #if defined(__has_feature) && __has_feature(objc_kindof)
-#define __KINDOF __kindof
+#define __KINDOF(class) __kindof class
 #else
-#define __KINDOF
+#define __KINDOF id
 #endif
 
 #endif
