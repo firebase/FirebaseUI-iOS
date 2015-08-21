@@ -18,7 +18,7 @@
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [[self.array refForIndex:indexPath.row] removeValue];
+        [[self refForIndex:indexPath.row] removeValue];
     }
 }
 

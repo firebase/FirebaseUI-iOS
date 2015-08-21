@@ -35,32 +35,28 @@
 #pragma mark -
 #pragma mark Initializer methods
 
-- (instancetype)initWithArray:(FirebaseArray *)array;
-{
-    self = [super init];
-    if (self) {
-        self.array = array;
-        self.array.delegate = self;
-    }
-    return self;
+- (instancetype)initWithArray:(FirebaseArray *)array {
+  self = [super init];
+  if (self) {
+    self.array = array;
+    self.array.delegate = self;
+  }
+  return self;
 }
 
 #pragma mark -
 #pragma mark API methods
 
-- (NSUInteger)count;
-{
-    return [self.array count];
+- (NSUInteger)count {
+  return [self.array count];
 }
 
-- (id)objectAtIndex:(NSUInteger)index;
-{
-    return [self.array objectAtIndex:index];
+- (id)objectAtIndex:(NSUInteger)index {
+  return [self.array objectAtIndex:index];
 }
 
-- (Firebase *)refForIndex:(NSUInteger)index;
-{
-    return [self.array refForIndex:index];
+- (Firebase *)refForIndex:(NSUInteger)index {
+  return [self.array refForIndex:index];
 }
 
 @end

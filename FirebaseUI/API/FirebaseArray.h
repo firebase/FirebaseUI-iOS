@@ -36,24 +36,27 @@
 @class FDataSnapshot;
 
 /**
- * FirebaseArray provides an array structure that is synchronized with a Firebase reference or query. It is useful for building custom data structures or sources, and provides the base for FirebaseDataSource.
+ * FirebaseArray provides an array structure that is synchronized with a Firebase reference or
+ * query. It is useful for building custom data structures or sources, and provides the base for
+ * FirebaseDataSource.
  */
 @interface FirebaseArray : NSObject
 
 /**
- * The delegate object that array changes are surfaced to, which conforms to the [FirebaseArrayDelegate Protocol](FirebaseArrayDelegate).
+ * The delegate object that array changes are surfaced to, which conforms to the
+ * [FirebaseArrayDelegate Protocol](FirebaseArrayDelegate).
  */
-@property (weak, nonatomic) id<FirebaseArrayDelegate> delegate;
+@property(weak, nonatomic) id<FirebaseArrayDelegate> delegate;
 
 /**
  * The query on a Firebase reference that provides data to populate the instance of FirebaseArray.
  */
-@property (strong, nonatomic) FQuery *query;
+@property(strong, nonatomic) FQuery *query;
 
 /**
  * The delegate object that array changes are surfaced to.
  */
-@property (strong, nonatomic) NSMutableArray __GENERIC(FDataSnapshot *) *snapshots;
+@property(strong, nonatomic) NSMutableArray __GENERIC(FDataSnapshot *) * snapshots;
 
 #pragma mark -
 #pragma mark Initializer methods
@@ -99,10 +102,13 @@
 #pragma mark Private API methods
 
 /**
- * Returns an index for a given object's key (that matches the object's key in the corresponding Firebase reference).
+ * Returns an index for a given object's key (that matches the object's key in the corresponding
+ * Firebase reference).
  * @param key The key of the desired object
  * @return The index of the object for which the key matches or -1 if the key is null
- * @exception FirebaseArrayKeyNotFoundException Thrown when the desired key is not in the FirebaseArray, likely indicating that the FirebaseArray is no longer being properly synchronized with the Firebase database.
+ * @exception FirebaseArrayKeyNotFoundException Thrown when the desired key is not in the
+ * FirebaseArray, likely indicating that the FirebaseArray is no longer being properly synchronized
+ * with the Firebase database.
  */
 - (NSUInteger)indexForKey:(NSString *)key;
 

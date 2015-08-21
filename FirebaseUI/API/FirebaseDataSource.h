@@ -33,15 +33,16 @@
 @class Firebase;
 
 /**
- * A FirebaseDataSource is a generic superclass for all Firebase datasources, like FirebaseTableViewDataSource and FirebaseCollectionViewDataSource. It provides properties that all subclasses need as well as several methods that pass through to the instance of FirebaseArray.
+ * A FirebaseDataSource is a generic superclass for all Firebase datasources, like
+ * FirebaseTableViewDataSource and FirebaseCollectionViewDataSource. It provides properties that all
+ * subclasses need as well as several methods that pass through to the instance of FirebaseArray.
  */
-@interface FirebaseDataSource : NSObject <FirebaseArrayDelegate>
+@interface FirebaseDataSource : NSObject<FirebaseArrayDelegate>
 
 /**
  * The FirebaseArray which backs the instance of the datasource.
  */
-@property (strong, nonatomic) FirebaseArray *array;
-
+@property(strong, nonatomic) FirebaseArray *array;
 
 - (instancetype)initWithArray:(FirebaseArray *)array;
 
@@ -61,4 +62,3 @@
 - (Firebase *)refForIndex:(NSUInteger)index;
 
 @end
-

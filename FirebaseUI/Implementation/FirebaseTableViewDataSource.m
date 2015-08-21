@@ -35,146 +35,185 @@
 #pragma mark -
 #pragma mark FirebaseDataSource initializer methods
 
-- (instancetype)initWithRef:(Firebase *)ref cellReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
-{
-    return [self initWithRef:ref modelClass:nil cellClass:nil cellReuseIdentifier:identifier view:tableView];
+- (instancetype)initWithRef:(Firebase *)ref
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UITableView *)tableView {
+  return [self initWithRef:ref
+                modelClass:nil
+                 cellClass:nil
+       cellReuseIdentifier:identifier
+                      view:tableView];
 }
 
-- (instancetype)initWithRef:(Firebase *)ref prototypeReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
-{
-    self.hasPrototypeCell = YES;
-    return [self initWithRef:ref modelClass:nil cellClass:nil cellReuseIdentifier:identifier view:tableView];
+- (instancetype)initWithRef:(Firebase *)ref
+   prototypeReuseIdentifier:(NSString *)identifier
+                       view:(UITableView *)tableView {
+  self.hasPrototypeCell = YES;
+  return [self initWithRef:ref
+                modelClass:nil
+                 cellClass:nil
+       cellReuseIdentifier:identifier
+                      view:tableView];
 }
 
-- (instancetype)initWithRef:(Firebase *)ref cellClass:(Class)cell cellReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
-{
-    return [self initWithRef:ref modelClass:nil cellClass:cell cellReuseIdentifier:identifier view:tableView];
+- (instancetype)initWithRef:(Firebase *)ref
+                  cellClass:(Class)cell
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UITableView *)tableView {
+  return [self initWithRef:ref
+                modelClass:nil
+                 cellClass:cell
+       cellReuseIdentifier:identifier
+                      view:tableView];
 }
 
-- (instancetype)initWithRef:(Firebase *)ref nibNamed:(NSString *)nibName cellReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
-{
-    return [self initWithRef:ref modelClass:nil nibNamed:nibName cellReuseIdentifier:identifier view:tableView];
+- (instancetype)initWithRef:(Firebase *)ref
+                   nibNamed:(NSString *)nibName
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UITableView *)tableView {
+  return [self initWithRef:ref
+                modelClass:nil
+                  nibNamed:nibName
+       cellReuseIdentifier:identifier
+                      view:tableView];
 }
 
-- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model cellReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
-{
-    return [self initWithRef:ref modelClass:model cellClass:nil cellReuseIdentifier:identifier view:tableView];
+- (instancetype)initWithRef:(Firebase *)ref
+                 modelClass:(Class)model
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UITableView *)tableView {
+  return [self initWithRef:ref
+                modelClass:model
+                 cellClass:nil
+       cellReuseIdentifier:identifier
+                      view:tableView];
 }
 
-- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model prototypeReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
-{
-    self.hasPrototypeCell = YES;
-    return [self initWithRef:ref modelClass:model cellClass:nil cellReuseIdentifier:identifier view:tableView];
+- (instancetype)initWithRef:(Firebase *)ref
+                 modelClass:(Class)model
+   prototypeReuseIdentifier:(NSString *)identifier
+                       view:(UITableView *)tableView {
+  self.hasPrototypeCell = YES;
+  return [self initWithRef:ref
+                modelClass:model
+                 cellClass:nil
+       cellReuseIdentifier:identifier
+                      view:tableView];
 }
 
-- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model cellClass:(Class)cell cellReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
-{
-    FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
-    self = [super initWithArray:array];
-    if (self) {
-
-        if (!model) {
-            model = [FDataSnapshot class];
-        }
-
-        if (!cell) {
-            cell = [UITableViewCell class];
-        }
-
-        self.tableView = tableView;
-        self.modelClass = model;
-        self.reuseIdentifier = identifier;
-        self.populateCell = ^(id cell, id object) {};
-        
-        if (!self.hasPrototypeCell) {
-            [self.tableView registerClass:cell forCellReuseIdentifier:self.reuseIdentifier];
-        }
+- (instancetype)initWithRef:(Firebase *)ref
+                 modelClass:(Class)model
+                  cellClass:(Class)cell
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UITableView *)tableView {
+  FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
+  self = [super initWithArray:array];
+  if (self) {
+    if (!model) {
+      model = [FDataSnapshot class];
     }
-    return self;
+
+    if (!cell) {
+      cell = [UITableViewCell class];
+    }
+
+    self.tableView = tableView;
+    self.modelClass = model;
+    self.reuseIdentifier = identifier;
+    self.populateCell = ^(id cell, id object) {
+    };
+
+    if (!self.hasPrototypeCell) {
+      [self.tableView registerClass:cell forCellReuseIdentifier:self.reuseIdentifier];
+    }
+  }
+  return self;
 }
 
-- (instancetype)initWithRef:(Firebase *)ref modelClass:(Class)model nibNamed:(NSString *)nibName cellReuseIdentifier:(NSString *)identifier view:(UITableView *)tableView;
-{
-    FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
-    self = [super initWithArray:array];
-    if (self) {
-
-        if (!model) {
-            model = [FDataSnapshot class];
-        }
-
-        self.tableView = tableView;
-        self.modelClass = model;
-        self.reuseIdentifier = identifier;
-        self.populateCell = ^(id cell, id object) {};
-        
-        if (!self.hasPrototypeCell) {
-            UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
-            [self.tableView registerNib:nib forCellReuseIdentifier:self.reuseIdentifier];
-        }
+- (instancetype)initWithRef:(Firebase *)ref
+                 modelClass:(Class)model
+                   nibNamed:(NSString *)nibName
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UITableView *)tableView {
+  FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
+  self = [super initWithArray:array];
+  if (self) {
+    if (!model) {
+      model = [FDataSnapshot class];
     }
-    return self;
+
+    self.tableView = tableView;
+    self.modelClass = model;
+    self.reuseIdentifier = identifier;
+    self.populateCell = ^(id cell, id object) {
+    };
+
+    if (!self.hasPrototypeCell) {
+      UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
+      [self.tableView registerNib:nib forCellReuseIdentifier:self.reuseIdentifier];
+    }
+  }
+  return self;
 }
 
 #pragma mark -
 #pragma mark FirebaseCollectionDelegate methods
 
-- (void)childAdded:(id)obj atIndex:(NSUInteger)index;
-{
-    [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView endUpdates];
+- (void)childAdded:(id)obj atIndex:(NSUInteger)index {
+  [self.tableView beginUpdates];
+  [self.tableView insertRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
+                        withRowAnimation:UITableViewRowAnimationAutomatic];
+  [self.tableView endUpdates];
 }
 
-- (void)childChanged:(id)obj atIndex:(NSUInteger)index;
-{
-    [self.tableView beginUpdates];
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView endUpdates];
+- (void)childChanged:(id)obj atIndex:(NSUInteger)index {
+  [self.tableView beginUpdates];
+  [self.tableView reloadRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
+                        withRowAnimation:UITableViewRowAnimationAutomatic];
+  [self.tableView endUpdates];
 }
 
-- (void)childRemoved:(id)obj atIndex:(NSUInteger)index;
-{
-    [self.tableView beginUpdates];
-    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView endUpdates];
+- (void)childRemoved:(id)obj atIndex:(NSUInteger)index {
+  [self.tableView beginUpdates];
+  [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
+                        withRowAnimation:UITableViewRowAnimationAutomatic];
+  [self.tableView endUpdates];
 }
 
-- (void)childMoved:(id)obj fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
-{
-    [self.tableView beginUpdates];
-    [self.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0] toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
-    [self.tableView endUpdates];
+- (void)childMoved:(id)obj fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+  [self.tableView beginUpdates];
+  [self.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
+                         toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
+  [self.tableView endUpdates];
 }
 
 #pragma mark -
 #pragma mark UITableViewDataSource methods
 
-- (id)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
-{
-    id cell = [self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier forIndexPath:indexPath];
-    
-    FDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
-    if (![self.modelClass isSubclassOfClass:[FDataSnapshot class]]) {
-        id model = [[self.modelClass alloc] init];
-        // TODO: replace setValuesForKeysWithDictionary with client API valueAsObject method
-        [model setValuesForKeysWithDictionary:snap.value];
-        self.populateCell(cell, model);
-    } else {
-        self.populateCell(cell, snap);
-    }
-    
-    return cell;
+- (id)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  id cell = [self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier
+                                                 forIndexPath:indexPath];
+
+  FDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
+  if (![self.modelClass isSubclassOfClass:[FDataSnapshot class]]) {
+    id model = [[self.modelClass alloc] init];
+    // TODO: replace setValuesForKeysWithDictionary with client API valueAsObject method
+    [model setValuesForKeysWithDictionary:snap.value];
+    self.populateCell(cell, model);
+  } else {
+    self.populateCell(cell, snap);
+  }
+
+  return cell;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
-{
-    return [self.array count];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  return [self.array count];
 }
 
-- (void)populateCellWithBlock:(nonnull void (^)(__KINDOF UITableViewCell * __NON_NULL_PTR cell, __KINDOF NSObject * __NON_NULL_PTR object))callback;
-{
-    self.populateCell = callback;
+- (void)populateCellWithBlock:(nonnull void (^)(__KINDOF UITableViewCell *__NON_NULL_PTR cell,
+                                                __KINDOF NSObject *__NON_NULL_PTR object))callback {
+  self.populateCell = callback;
 }
 
 @end
