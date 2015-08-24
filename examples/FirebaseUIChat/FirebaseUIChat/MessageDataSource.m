@@ -10,16 +10,17 @@
 
 @implementation MessageDataSource
 
--(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath;
-{
-    return YES;
-}
+- (BOOL)tableView:(UITableView *)tableView
+    canEditRowAtIndexPath:(NSIndexPath *)indexPath;
+{ return YES; }
 
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)tableView:(UITableView *)tableView
+    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+     forRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [[self refForIndex:indexPath.row] removeValue];
-    }
+  if (editingStyle == UITableViewCellEditingStyleDelete) {
+    [[self refForIndex:indexPath.row] removeValue];
+  }
 }
 
 @end

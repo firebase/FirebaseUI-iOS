@@ -10,9 +10,9 @@
 
 @interface Message : NSObject
 
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *message;
+@property(strong, nonatomic) NSString *name;
+@property(strong, nonatomic) NSString *text;
 
--(instancetype)initWithName:(NSString *)name andMessage:(NSString *)message;
+- (instancetype)initWithName:(NSString *)name andText:(NSString *)text;
 
 @end

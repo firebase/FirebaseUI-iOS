@@ -11,18 +11,16 @@
 @implementation Message
 
 - (instancetype)init;
-{
-    return [self initWithName:@"" andMessage:@""];
-}
+{ return [self initWithName:@"" andText:@""]; }
 
--(instancetype)initWithName:(NSString *)name andMessage:(NSString *)message;
+- (instancetype)initWithName:(NSString *)name andText:(NSString *)text;
 {
-    self = [super init];
-    if (self) {
-        self.name = name;
-        self.message = message;
-    }
-    return self;
+  self = [super init];
+  if (self) {
+    self.name = name;
+    self.text = text;
+  }
+  return self;
 }
 
 @end

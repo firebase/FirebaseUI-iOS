@@ -10,14 +10,7 @@
 
 @implementation MessageTableViewCell
 
--(void)awakeFromNib;
-{
-    
-}
-
--(instancetype)initWithFrame:(CGRect)frame;
-{
-    return [super initWithFrame:frame];
-}
+- (instancetype)initWithFrame:(CGRect)frame;
+{ return [super initWithFrame:frame]; }
 
 @end

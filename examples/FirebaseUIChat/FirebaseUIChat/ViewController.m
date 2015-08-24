@@ -33,7 +33,7 @@
       populateCellWithBlock:^void(MessageTableViewCell *__nonnull cell,
                                   Message *__nonnull message) {
         if ([message.name isEqualToString:@"iOS User"]) {
-          cell.myMessageLabel.text = message.message;
+          cell.myMessageLabel.text = message.text;
           cell.myNameLabel.text = message.name;
           cell.myNameLabel.textColor = [UIColor colorWithRed:52.0 / 255.0
                                                        green:170.0 / 255.0
@@ -44,7 +44,7 @@
           [cell.myMessageLabel setHidden:NO];
           [cell.myNameLabel setHidden:NO];
         } else {
-          cell.otherMessageLabel.text = message.message;
+          cell.otherMessageLabel.text = message.text;
           cell.otherNameLabel.text = message.name;
           cell.otherNameLabel.textColor = [UIColor colorWithRed:164.0 / 255.0
                                                           green:199.0 / 255.0
