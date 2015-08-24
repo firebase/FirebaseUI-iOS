@@ -4,7 +4,7 @@ FirebaseUI is an open-source library for iOS that allows you to quickly connect 
 
 A compatible FirebaseUI client is also available for [Android](https://github.com/firebase/FirebaseUI-Android).
 
-## Downloading FirebaseUI for iOS
+## Installing FirebaseUI for iOS
 
 We recommend using [CocoaPods](http://cocoapods.org/?q=firebaseui-ios), add
 the following to your `Podfile`:
@@ -41,7 +41,7 @@ FirebaseCollectionViewDataSource | Data source to bind a Firebase query to a UIC
 FirebaseArray | Keeps an array synchronized to a Firebase query
 FirebaseDataSource | Generic superclass to create a custom data source
 
-For a more in-depth explanation of each of the above, check the usage instructions below:
+For a more in-depth explanation of each of the above, check the usage instructions below or read the [docs](https://firebaseui.firebaseapp.com/docs/ios/index.html).
 
 ### FirebaseTableViewDataSource
 
