@@ -1,6 +1,6 @@
 # FirebaseUI for iOS — UI Bindings for Firebase
 
-FirebaseUI is an open-source library for iOS that allows you to quickly connect common UI elements to the Firebase [Firebase](https://www.firebase.com/?utm_source=firebaseui-ios) database for data storage, allowing views to be updated in realtime as they change, and providing simple interfaces for common tasks like displaying lists or collections of items.
+FirebaseUI is an open-source library for iOS that allows you to quickly connect common UI elements to the [Firebase](https://www.firebase.com/?utm_source=firebaseui-ios) database for data storage, allowing views to be updated in realtime as they change, and providing simple interfaces for common tasks like displaying lists or collections of items.
 
 A compatible FirebaseUI client is also available for [Android](https://github.com/firebase/FirebaseUI-Android).
 
