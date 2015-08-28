@@ -30,15 +30,31 @@
 
 // clang-format on
 
-#import <Foundation/Foundation.h>
+#import <Firebase/Firebase.h>
+#import "FirebaseAuthDelegate.h"
 
-#import <FirebaseUI/FirebaseArray.h>
-#import <FirebaseUI/FirebaseDataSource.h>
-#import <FirebaseUI/FirebaseTableViewDataSource.h>
-#import <FirebaseUI/FirebaseCollectionViewDataSource.h>
-#import <FirebaseUI/FirebaseTwitterAuthHelper.h>
-#import <FirebaseUI/FirebaseLoginViewController.h>
+@interface FirebaseTwitterAuthHelper : NSObject
 
-@interface FirebaseUI : NSObject
+@property(strong, nonatomic) ACAccountStore *store;
+@property(strong, nonatomic) Firebase *ref;
+@property(strong, nonatomic) NSString *apiKey;
+@property(strong, nonatomic) NSArray *accounts;
+@property(weak, nonatomic) id<FirebaseAuthDelegate> delegate;
+
+- (id)initWithFirebaseRef:(Firebase *)ref
+                   apiKey:(NSString *)apiKey
+                 delegate:(id<FirebaseAuthDelegate>)delegate;
+
+- (void)selectTwitterAccountWithCallback:(void (^)(NSError *error,
+                                                   NSArray *accounts))callback;
+
+- (void)authenticateAccount:(ACAccount *)account
+               withCallback:
+                   (void (^)(NSError *error, FAuthData *authData))callback;
 
 @end
+
+typedef NS_ENUM(NSInteger, AuthHelperError) {
+  AuthHelperErrorAccountAccessDenied = -1,
+  AuthHelperErrorOAuthTokenRequestDenied = -2
+};
