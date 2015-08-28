@@ -15,4 +15,7 @@
 @optional
 - (void)onError:(NSError *)error;
 
+@optional
+- (void)onAuthStageChange:(FAuthData *)authData;
+
 @end

@@ -57,6 +57,10 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
     self.ref = aRef;
     self.apiKey = anApiKey;
     self.delegate = delegate;
+
+    [self.ref observeAuthEventWithBlock:^(FAuthData *authData) {
+      [self.delegate onAuthStageChange:authData];
+    }];
   }
   return self;
 }
@@ -229,6 +233,10 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
   } else {
     return params;
   }
+}
+
+- (void)dealloc {
+  [self.ref removeAllObservers];
 }
 
 @end

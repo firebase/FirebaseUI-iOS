@@ -57,17 +57,6 @@ NSString *const kpListName = @"Info";
   return _apiKeys;
 }
 
-- (FirebaseTwitterAuthHelper *)twitterAuthHelper {
-  if (!_twitterAuthHelper) {
-    return [[FirebaseTwitterAuthHelper alloc]
-        initWithFirebaseRef:self.ref
-                     apiKey:self.apiKeys.twitterApiKey
-                   delegate:self];
-  }
-
-  return _twitterAuthHelper;
-}
-
 #pragma mark -
 #pragma mark pList methods
 - (FirebaseAuthApiKeys *)retrieveAuthKeysFromPList:(NSDictionary *)pList {
@@ -84,7 +73,32 @@ NSString *const kpListName = @"Info";
 }
 
 #pragma mark -
+#pragma mark Login methods
+
+- (void)loginWithTwitter {
+  [self.twitterAuthHelper
+      selectTwitterAccountWithCallback:^(NSError *error, NSArray *accounts) {
+        if (error != nil) {
+          [self onError:error];
+          return;
+        }
+
+        [self showActionSheetForMultipleTwitterAccounts:accounts];
+      }];
+}
+
+- (void)loginwithPassword {
+}
+
+#pragma mark -
 #pragma mark UIViewController Lifecycle methods
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  self.twitterAuthHelper = [[FirebaseTwitterAuthHelper alloc]
+      initWithFirebaseRef:self.ref
+                   apiKey:self.apiKeys.twitterApiKey
+                 delegate:self];
+}
 
 #pragma mark -
 #pragma mark FirebaseAuthDelegate Protocol methods
@@ -92,6 +106,9 @@ NSString *const kpListName = @"Info";
 }
 
 - (void)onError:(NSError *)error {
+}
+
+- (void)onAuthStateChange:(FAuthData *)authData {
 }
 
 #pragma mark -
@@ -110,18 +127,6 @@ NSString *const kpListName = @"Info";
       [self selectTwitterAccount:accounts];
       break;
   }
-}
-
-- (void)loginWithTwitter {
-  [self.twitterAuthHelper
-      selectTwitterAccountWithCallback:^(NSError *error, NSArray *accounts) {
-        if (error != nil) {
-          [self onError:error];
-          return;
-        }
-
-        [self showActionSheetForMultipleTwitterAccounts:accounts];
-      }];
 }
 
 - (void)authenticateWithTwitterAccount:(ACAccount *)account {
