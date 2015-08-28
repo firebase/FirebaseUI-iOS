@@ -33,6 +33,11 @@
 #import <Firebase/Firebase.h>
 #import "FirebaseAuthDelegate.h"
 
+/**
+ * A helper class that pairs retrieving a Twitter user from the ACAccountStore
+ * and authenticates the account against a Firebase database reference and
+ * Twitter.
+ */
 @interface FirebaseTwitterAuthHelper : NSObject
 
 /**
@@ -74,9 +79,24 @@
                              apiKey:(NSString *)apiKey
                            delegate:(id<FirebaseAuthDelegate>)delegate;
 
+/**
+ * Retrieve a list of Twitter accounts from the ACAccountStore.
+ * @param callback A block/closure returned containing a possible error or the
+ * list of Twitter ACAccounts on the device.
+ * @return void
+ */
 - (void)selectTwitterAccountWithCallback:(void (^)(NSError *error,
                                                    NSArray *accounts))callback;
 
+/**
+ * Given an ACAccount authenticate the user against the Firebase database
+ * reference.
+ * @param account The Twitter ACAccount to authenticate the user as
+ * @param callback A block/closure that is ivoked after the authentication
+ * process occurs. This block/closure will either contain an error or the
+ * authenticated Firebase user.
+ * @return void
+ */
 - (void)authenticateAccount:(ACAccount *)account
                withCallback:
                    (void (^)(NSError *error, FAuthData *authData))callback;
