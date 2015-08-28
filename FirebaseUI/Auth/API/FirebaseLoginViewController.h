@@ -42,12 +42,44 @@
 @interface FirebaseLoginViewController
     : UIViewController<FirebaseAuthDelegate, UIActionSheetDelegate>
 
+/**
+ * The delegate object that authentication changes are surfaced to, which
+ * conforms to the [FirebaseAuthDelegate Protocol](FirebaseAuthDelegate).
+ */
 @property(weak, nonatomic) id<FirebaseAuthDelegate> delegate;
+
+/**
+ * The Firebase database reference which to authenticate against.
+ */
 @property(strong, nonatomic) Firebase *ref;
+
+/**
+ * The set of API Keys associated with each authentication provider.
+ */
 @property(strong, nonatomic) FirebaseAuthApiKeys *apiKeys;
+
+/**
+ * The name of the .plist to read. This is defaulted to "Info".
+ */
 @property(strong, nonatomic) NSString *pListName;
+
+/**
+ * The helper object for Twitter Authentication. This object handles the
+ * requests against the Twitter API and uses the response to authenticate
+ * against the Firebase database.
+ */
 @property(strong, nonatomic) FirebaseTwitterAuthHelper *twitterAuthHelper;
 
+/**
+ * Authenticates the user against Twitter. This method calls into the
+ * twitterAuthHelper property to retrieve a list of Twitter users for the
+ * ACAccountStore. If more than one Twitter user is present a UIActionSheet (in
+ * < iOS8) or UIAlertViewController (in iOS8+) surfaces with options to select a
+ * Twitter user. When the user is selected the authentication process occurs.
+ * When authenticated one of the delegate methods in FirebaseAuthDelegate will
+ * trigger.
+ * @return void
+ */
 - (void)loginWithTwitter;
 
 @end
