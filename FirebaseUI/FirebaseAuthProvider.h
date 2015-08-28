@@ -27,10 +27,9 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#import <Foundation/Foundation.h>
 
 /**
- * FirebaseAuthProvider is an enum that describes all of the available providers for Firebase authentication.
+ * FirebaseAuthProvider is an enum that describes all the available providers for Firebase authentication.
  */
 typedef NS_ENUM(NSInteger, FirebaseAuthProvider) {
   FirebaseAuthProviderGoogle,

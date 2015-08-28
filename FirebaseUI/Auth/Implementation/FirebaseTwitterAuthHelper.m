@@ -48,9 +48,9 @@
 
 NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
 
-- (id)initWithFirebaseRef:(Firebase *)aRef
-                   apiKey:(NSString *)anApiKey
-                 delegate:(id)delegate {
+- (instancetype)initWithFirebaseRef:(Firebase *)aRef
+                             apiKey:(NSString *)anApiKey
+                           delegate:(id)delegate {
   self = [super init];
   if (self) {
     self.store = [[ACAccountStore alloc] init];
@@ -86,7 +86,7 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
                                  NSError *error = [[NSError alloc]
                                      initWithDomain:CLASS_NAME
                                                code:
-                                                   AuthHelperErrorAccountAccessDenied
+                                                   FirebaseAuthHelperErrorAccountAccessDenied
                                            userInfo:@{
                                              NSLocalizedDescriptionKey :
                                                  @"No Twitter accounts "
@@ -102,7 +102,7 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
                                NSError *error = [[NSError alloc]
                                    initWithDomain:CLASS_NAME
                                              code:
-                                                 AuthHelperErrorAccountAccessDenied
+                                                 FirebaseAuthHelperErrorAccountAccessDenied
                                          userInfo:@{
                                            NSLocalizedDescriptionKey :
                                                @"Access to twitter accounts "
@@ -120,13 +120,13 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
                withCallback:
                    (void (^)(NSError *error, FAuthData *authData))callback {
   if (!anAccount) {
-    NSError *error =
-        [[NSError alloc] initWithDomain:CLASS_NAME
-                                   code:AuthHelperErrorAccountAccessDenied
-                               userInfo:@{
-                                 NSLocalizedDescriptionKey :
-                                     @"No Twitter account to authenticate."
-                               }];
+    NSError *error = [[NSError alloc]
+        initWithDomain:CLASS_NAME
+                  code:FirebaseAuthHelperErrorAccountAccessDenied
+              userInfo:@{
+                NSLocalizedDescriptionKey :
+                    @"No Twitter account to authenticate."
+              }];
     callback(error, nil);
   } else {
     self.account = anAccount;
@@ -198,7 +198,7 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
     // There was an error handling the parameters, error out.
     NSError *error = [[NSError alloc]
         initWithDomain:CLASS_NAME
-                  code:AuthHelperErrorOAuthTokenRequestDenied
+                  code:FirebaseAuthHelperErrorOAuthTokenRequestDenied
               userInfo:@{
                 NSLocalizedDescriptionKey : @"OAuth token request was denied.",
                 @"details" : params[@"error"]

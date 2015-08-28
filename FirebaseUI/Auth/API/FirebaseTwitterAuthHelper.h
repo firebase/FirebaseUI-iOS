@@ -35,15 +35,44 @@
 
 @interface FirebaseTwitterAuthHelper : NSObject
 
+/**
+ * The Account Store to retrieve the Twitter users from.
+ */
 @property(strong, nonatomic) ACAccountStore *store;
+
+/**
+ * The Firebase database reference which to authenticate against.
+ */
 @property(strong, nonatomic) Firebase *ref;
+
+/**
+ * The client API Key for the Twitter app.
+ */
 @property(strong, nonatomic) NSString *apiKey;
+
+/**
+ * The accounts returned from the ACAccountStore
+ */
 @property(strong, nonatomic) NSArray *accounts;
+
+/**
+ * The delegate object that authentication changes are surfaced to, which
+ * conforms to the [FirebaseAuthDelegate Protocol](FirebaseAuthDelegate).
+ */
 @property(weak, nonatomic) id<FirebaseAuthDelegate> delegate;
 
-- (id)initWithFirebaseRef:(Firebase *)ref
-                   apiKey:(NSString *)apiKey
-                 delegate:(id<FirebaseAuthDelegate>)delegate;
+/**
+ * Initialize an instance of FirebaseTwitterAuthHelper to authenticate Twitter
+ * users.
+ * @param ref A Firebase database reference to authenticate against
+ * @param apiKey The Twitter App API key to authenticate against
+ * @param delegate The FirebaseAuthDelegate object to surface authentication
+ * changes against
+ * @return An instance of FirebaseTwitterAuthHelper
+ */
+- (instancetype)initWithFirebaseRef:(Firebase *)ref
+                             apiKey:(NSString *)apiKey
+                           delegate:(id<FirebaseAuthDelegate>)delegate;
 
 - (void)selectTwitterAccountWithCallback:(void (^)(NSError *error,
                                                    NSArray *accounts))callback;
@@ -53,8 +82,3 @@
                    (void (^)(NSError *error, FAuthData *authData))callback;
 
 @end
-
-typedef NS_ENUM(NSInteger, AuthHelperError) {
-  AuthHelperErrorAccountAccessDenied = -1,
-  AuthHelperErrorOAuthTokenRequestDenied = -2
-};
