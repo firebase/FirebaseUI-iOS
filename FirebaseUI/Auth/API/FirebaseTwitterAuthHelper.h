@@ -61,23 +61,17 @@
 @property(strong, nonatomic) NSArray *accounts;
 
 /**
- * The delegate object that authentication changes are surfaced to, which
- * conforms to the [FirebaseAuthDelegate Protocol](FirebaseAuthDelegate).
- */
-@property(weak, nonatomic) id<FirebaseAuthDelegate> delegate;
-
-/**
  * Initialize an instance of FirebaseTwitterAuthHelper to authenticate Twitter
  * users.
  * @param ref A Firebase database reference to authenticate against
  * @param apiKey The Twitter App API key to authenticate against
- * @param delegate The FirebaseAuthDelegate object to surface authentication
+ * @param callback The authStateChangedCallback block to surface authentication
  * changes against
  * @return An instance of FirebaseTwitterAuthHelper
  */
 - (instancetype)initWithFirebaseRef:(Firebase *)ref
                              apiKey:(NSString *)apiKey
-                           delegate:(id<FirebaseAuthDelegate>)delegate;
+                           callback:(void (^)(FAuthData *authData))callback;
 
 /**
  * Retrieve a list of Twitter accounts from the ACAccountStore.

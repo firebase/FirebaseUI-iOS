@@ -57,6 +57,20 @@ NSString *const kpListName = @"Info";
   return _apiKeys;
 }
 
+/*
+ TODO: self.twitterAuthHelper.accounts ends up being nil when used inside
+FirebaseLoginViewController
+- (FirebaseTwitterAuthHelper *)twitterAuthHelper {
+  if (!_twitterAuthHelper) {
+    return [[FirebaseTwitterAuthHelper alloc]
+        initWithFirebaseRef:self.ref
+                     apiKey:self.apiKeys.twitterApiKey
+                   delegate:self];
+  }
+
+  return _twitterAuthHelper;
+}*/
+
 #pragma mark -
 #pragma mark pList methods
 - (FirebaseAuthApiKeys *)retrieveAuthKeysFromPList:(NSDictionary *)pList {
@@ -70,6 +84,12 @@ NSString *const kpListName = @"Info";
       dictionaryWithContentsOfFile:[[NSBundle mainBundle]
                                        pathForResource:self.pListName
                                                 ofType:kFileType]];
+}
+
+#pragma mark -
+#pragma mark Logout method
+- (void)logout {
+  [self.ref unauth];
 }
 
 #pragma mark -
@@ -94,10 +114,13 @@ NSString *const kpListName = @"Info";
 #pragma mark UIViewController Lifecycle methods
 - (void)viewDidLoad {
   [super viewDidLoad];
+
   self.twitterAuthHelper = [[FirebaseTwitterAuthHelper alloc]
       initWithFirebaseRef:self.ref
                    apiKey:self.apiKeys.twitterApiKey
-                 delegate:self];
+                 callback:^(FAuthData *authData) {
+                   [self.delegate onAuthStageChange:authData];
+                 }];
 }
 
 #pragma mark -

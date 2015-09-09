@@ -31,6 +31,7 @@
 // clang-format on
 #import <Social/Social.h>
 #import "FirebaseTwitterAuthHelper.h"
+#import "FirebaseAuthHelperError.h"
 
 @interface FirebaseTwitterAuthHelper ()
 @property(strong, nonatomic) ACAccount *account;
@@ -48,18 +49,19 @@
 
 NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
 
+// (void (^)(id newObj))block
+
 - (instancetype)initWithFirebaseRef:(Firebase *)aRef
                              apiKey:(NSString *)anApiKey
-                           delegate:(id)delegate {
+                           callback:(void (^)(FAuthData *authData))callback {
   self = [super init];
   if (self) {
     self.store = [[ACAccountStore alloc] init];
     self.ref = aRef;
     self.apiKey = anApiKey;
-    self.delegate = delegate;
 
     [self.ref observeAuthEventWithBlock:^(FAuthData *authData) {
-      [self.delegate onAuthStageChange:authData];
+      callback(authData);
     }];
   }
   return self;

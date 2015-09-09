@@ -82,4 +82,6 @@
  */
 - (void)loginWithTwitter;
 
+- (void)logout;
+
 @end
