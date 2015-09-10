@@ -34,6 +34,7 @@
 #import "FirebaseAuthDelegate.h"
 #import "FirebaseAuthApiKeys.h"
 #import "FirebaseTwitterAuthHelper.h"
+#import "FirebaseFacebookAuthHelper.h"
 
 /**
  * FirebaseLoginViewController is a subclass of UIViewController that provides a
@@ -71,6 +72,13 @@
 @property(strong, nonatomic) FirebaseTwitterAuthHelper *twitterAuthHelper;
 
 /**
+ * The helper object for Facebook Authentication. This object handles the
+ * requests against the Facebook SDK and uses the response to authenticate
+ * against the Firebase database.
+ */
+@property(strong, nonatomic) FirebaseFacebookAuthHelper *facebookAuthHelper;
+
+/**
  * Authenticates the user against Twitter. This method calls into the
  * twitterAuthHelper property to retrieve a list of Twitter users for the
  * ACAccountStore. If more than one Twitter user is present a UIActionSheet (in
@@ -81,6 +89,14 @@
  * @return void
  */
 - (void)loginWithTwitter;
+
+/**
+ * Authenticates the user against Facebook. This method calls into the
+ * facebookAuthHelper property to authenticate. When authenticated one of the
+ * delegate methods in FirebaseAuthDelegate will trigger.
+ * @return void
+ */
+- (void)loginWithFacebook;
 
 - (void)logout;
 

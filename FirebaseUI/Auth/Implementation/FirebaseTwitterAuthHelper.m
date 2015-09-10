@@ -53,7 +53,7 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
 
 - (instancetype)initWithFirebaseRef:(Firebase *)aRef
                              apiKey:(NSString *)anApiKey
-                           callback:(void (^)(FAuthData *authData))callback {
+            authStateChangeCallback:(void (^)(FAuthData *authData))callback {
   self = [super init];
   if (self) {
     self.store = [[ACAccountStore alloc] init];

@@ -71,7 +71,7 @@
  */
 - (instancetype)initWithFirebaseRef:(Firebase *)ref
                              apiKey:(NSString *)apiKey
-                           callback:(void (^)(FAuthData *authData))callback;
+            authStateChangeCallback:(void (^)(FAuthData *authData))callback;
 
 /**
  * Retrieve a list of Twitter accounts from the ACAccountStore.

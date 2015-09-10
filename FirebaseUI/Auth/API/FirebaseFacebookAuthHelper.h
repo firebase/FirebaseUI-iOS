@@ -30,8 +30,25 @@
 
 // clang-format on
 
-#import "FirebaseAuthApiKeys.h"
+#import <Firebase/Firebase.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-@implementation FirebaseAuthApiKeys
+@interface FirebaseFacebookAuthHelper : NSObject
+
+/**
+ * The Firebase database reference which to authenticate against.
+ */
+@property(strong, nonatomic) Firebase *ref;
+
+/**
+ * The Facebook Login Manager object. This object can login the user.
+ */
+@property(strong, nonatomic) FBSDKLoginManager *loginManager;
+
+- (instancetype)initWithFirebaseRef:(Firebase *)ref
+            authStateChangeCallback:(void (^)(FAuthData *authData))callback;
+
+- (void)loginWithCallback:(void (^)(NSError *error, FAuthData *authData))callback;
 
 @end
