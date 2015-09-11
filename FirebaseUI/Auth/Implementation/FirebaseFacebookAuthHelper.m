@@ -30,7 +30,6 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Foundation/Foundation.h>
 #import "FirebaseFacebookAuthHelper.h"
 
 @implementation FirebaseFacebookAuthHelper
@@ -39,12 +38,12 @@ NSString *const kAuthProvider = @"facebook";
 NSString *const kEmailScope = @"email";
 
 - (instancetype)initWithRef:(Firebase *)aRef
-                   delegate:(id<FirebaseAuthDelegate>)aDelegate {
+                   delegate:(id<FirebaseAuthDelegate>)authDelegate {
   self = [super init];
   if (self) {
     self.ref = aRef;
     self.loginManager = [[FBSDKLoginManager alloc] init];
-    self.delegate = aDelegate;
+    self.delegate = authDelegate;
   }
   return self;
 }

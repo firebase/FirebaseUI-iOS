@@ -6,20 +6,27 @@
 //  Copyright (c) 2015 Firebase, Inc. All rights reserved.
 //
 
-#import <Google/SignIn.h>
 #import <Firebase/Firebase.h>
+#import "FirebaseAuthHelper.h"
 
-@interface FirebaseGoogleAuthHelper : NSObject
+@interface FirebaseGoogleAuthHelper : NSObject<FirebaseAuthHelper>
 
 /**
  * The Firebase database reference which to authenticate against.
  */
 @property(strong, nonatomic) Firebase *ref;
 
-- (instancetype)initWithFirebaseRef:(Firebase *)ref
-            authStateChangeCallback:(void (^)(FAuthData *authData))callback;
+/**
+ * The delegate object that authentication changes are surfaced to, which
+ * conforms to the [FirebaseAuthDelegate Protocol](FirebaseAuthDelegate).
+ */
+@property(weak, nonatomic) id<FirebaseAuthDelegate> delegate;
 
-- (void)loginWithCallback:(void (^)(NSError *error,
-                                    FAuthData *authData))callback;
+- (instancetype)initWithRef:(Firebase *)ref
+                   delegate:(id<FirebaseAuthHelper>)delegate;
+
+- (void)login;
+
+- (void)logout;
 
 @end

@@ -89,7 +89,6 @@
 		BBDFCDDE1B90975700459AE4 /* FirebaseAuthHelperError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseAuthHelperError.h; path = Auth/API/FirebaseAuthHelperError.h; sourceTree = "<group>"; };
 		BBF6D4191BA1FF9200C644A7 /* FirebaseGoogleAuthHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseGoogleAuthHelper.h; path = Auth/API/FirebaseGoogleAuthHelper.h; sourceTree = "<group>"; };
 		BBF6D41A1BA1FFAD00C644A7 /* FirebaseGoogleAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseGoogleAuthHelper.m; path = Auth/Implementation/FirebaseGoogleAuthHelper.m; sourceTree = "<group>"; };
-		BBF6D5731BA201F000C644A7 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleSignIn.bundle; path = sdk/GoogleSignIn.bundle; sourceTree = "<group>"; };
 		BBF6D5761BA33AC300C644A7 /* FirebaseAuthHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseAuthHelper.h; path = Auth/API/FirebaseAuthHelper.h; sourceTree = "<group>"; };
 		D8124F401B72A90C003441AD /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = sdk/Firebase.framework; sourceTree = "<group>"; };
 		D8784C3F1B719F280025587E /* FirebaseArrayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseArrayDelegate.h; path = API/FirebaseArrayDelegate.h; sourceTree = "<group>"; };
@@ -173,7 +172,6 @@
 		D8B6ACE81B5839A5005CDDB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BBF6D5731BA201F000C644A7 /* GoogleSignIn.bundle */,
 				BB6AC20F1BA06A5100A10461 /* FBSDKCoreKit.framework */,
 				BB6AC2101BA06A5100A10461 /* FBSDKLoginKit.framework */,
 				D8124F401B72A90C003441AD /* Firebase.framework */,
