@@ -39,11 +39,6 @@
 @protocol FirebaseAuthDelegate<NSObject>
 
 /**
- * Invoked when a user has successfully authenticated/
- */
-- (void)onLogin:(FAuthData *)authData;
-
-/**
  * Invoked when an authentication error has occured.
  */
 @optional
@@ -56,5 +51,11 @@
  */
 @optional
 - (void)onAuthStageChange:(FAuthData *)authData;
+
+/**
+ * Invoked when a user cancels the authentication process.
+ */
+@optional
+- (void)onCancelled;
 
 @end

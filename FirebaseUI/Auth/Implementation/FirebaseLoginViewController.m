@@ -138,13 +138,12 @@ FirebaseLoginViewController
 
 #pragma mark -
 #pragma mark FirebaseAuthDelegate Protocol methods
-- (void)onLogin:(FAuthData *)authData {
-}
-
 - (void)onError:(NSError *)error {
 }
 
 - (void)onAuthStateChange:(FAuthData *)authData {
+}
+- (void)onCancelled {
 }
 
 #pragma mark -
@@ -194,9 +193,18 @@ FirebaseLoginViewController
 
 - (void)actionSheet:(UIActionSheet *)actionSheet
     clickedButtonAtIndex:(NSInteger)buttonIndex {
+  // Get the button title that was tapepd
+  NSString *buttonTappedTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+
+  // Check for cancellations
+  if ([buttonTappedTitle isEqualToString:@"Cancel"]) {
+    [self.delegate onCancelled];
+    return;
+  }
+
+  // Check button title against available accounts to authenticate against
   for (ACAccount *account in self.twitterAuthHelper.accounts) {
-    if ([[actionSheet buttonTitleAtIndex:buttonIndex]
-            isEqualToString:account.username]) {
+    if ([buttonTappedTitle isEqualToString:account.username]) {
       [self authenticateWithTwitterAccount:account];
       return;
     }
