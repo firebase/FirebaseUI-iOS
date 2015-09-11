@@ -54,13 +54,19 @@ NSString *const kEmailScope = @"email";
     kEmailScope
   ] handler:^(FBSDKLoginManagerLoginResult *facebookResult,
               NSError *facebookError) {
+
     if (facebookError) {
+      // Surface any errors
       [self.delegate onError:facebookError];
     } else if (facebookResult.isCancelled) {
-      NSLog(@"Facebook login got cancelled.");
+      // Surface cancellations
+      [self.delegate onCancelled];
     } else {
+      // Get the token from the FBSDKAccessToken
       NSString *accessToken =
           [[FBSDKAccessToken currentAccessToken] tokenString];
+
+      // Authenticate with Firebase
       [self.ref authWithOAuthProvider:kAuthProvider
                                 token:accessToken
                   withCompletionBlock:^(NSError *error, FAuthData *authData) {

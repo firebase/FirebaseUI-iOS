@@ -138,11 +138,16 @@ FirebaseLoginViewController
 
 #pragma mark -
 #pragma mark FirebaseAuthDelegate Protocol methods
+
+// Abstract
 - (void)onError:(NSError *)error {
 }
 
+// Abstract
 - (void)onAuthStateChange:(FAuthData *)authData {
 }
+
+// Abstract
 - (void)onCancelled {
 }
 
@@ -183,11 +188,18 @@ FirebaseLoginViewController
                          cancelButtonTitle:nil
                     destructiveButtonTitle:nil
                          otherButtonTitles:nil];
+
+  // For every twitter account in the Account Store, create a button with the
+  // handle as the title
   for (ACAccount *account in accounts) {
     [selectUserActionSheet addButtonWithTitle:[account username]];
   }
+
+  // Cancellation button
   selectUserActionSheet.cancelButtonIndex =
       [selectUserActionSheet addButtonWithTitle:@"Cancel"];
+
+  // Show action sheet
   [selectUserActionSheet showInView:self.view];
 }
 
