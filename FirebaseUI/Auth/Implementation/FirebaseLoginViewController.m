@@ -89,11 +89,8 @@ FirebaseLoginViewController
 */
 - (FirebaseFacebookAuthHelper *)facebookAuthHelper {
   if (!_facebookAuthHelper) {
-    return [[FirebaseFacebookAuthHelper alloc]
-            initWithFirebaseRef:self.ref
-        authStateChangeCallback:^(FAuthData *authData) {
-          [self.delegate onAuthStageChange:authData];
-        }];
+    return
+        [[FirebaseFacebookAuthHelper alloc] initWithRef:self.ref delegate:self];
   }
 
   return _facebookAuthHelper;
@@ -154,20 +151,7 @@ FirebaseLoginViewController
 #pragma mark Facebook Auth methods
 
 - (void)loginWithFacebook {
-  [self.facebookAuthHelper
-      loginWithCallback:^(NSError *error, FAuthData *authData) {
-
-        if (error) {
-          [self.delegate onError:error];
-          return;
-        }
-
-        if (authData) {
-          [self.delegate onLogin:authData];
-          return;
-        }
-
-      }];
+  [self.facebookAuthHelper login];
 }
 
 #pragma mark -

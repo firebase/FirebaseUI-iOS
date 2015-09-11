@@ -33,8 +33,9 @@
 #import <Firebase/Firebase.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "FirebaseAuthHelper.h"
 
-@interface FirebaseFacebookAuthHelper : NSObject
+@interface FirebaseFacebookAuthHelper : NSObject<FirebaseAuthHelper>
 
 /**
  * The Firebase database reference which to authenticate against.
@@ -42,14 +43,21 @@
 @property(strong, nonatomic) Firebase *ref;
 
 /**
+ * The delegate object that authentication changes are surfaced to, which
+ * conforms to the [FirebaseAuthDelegate Protocol](FirebaseAuthDelegate).
+ */
+@property(weak, nonatomic) id<FirebaseAuthDelegate> delegate;
+
+/**
  * The Facebook Login Manager object. This object can login the user.
  */
 @property(strong, nonatomic) FBSDKLoginManager *loginManager;
 
-- (instancetype)initWithFirebaseRef:(Firebase *)ref
-            authStateChangeCallback:(void (^)(FAuthData *authData))callback;
+- (instancetype)initWithRef:(Firebase *)ref
+                   delegate:(id<FirebaseAuthDelegate>)delegate;
 
-- (void)loginWithCallback:(void (^)(NSError *error,
-                                    FAuthData *authData))callback;
+- (void)login;
+
+- (void)logout;
 
 @end

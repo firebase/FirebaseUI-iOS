@@ -38,26 +38,24 @@
 NSString *const kAuthProvider = @"facebook";
 NSString *const kEmailScope = @"email";
 
-- (instancetype)initWithFirebaseRef:(Firebase *)aRef
-            authStateChangeCallback:(void (^)(FAuthData *authData))callback {
+- (instancetype)initWithRef:(Firebase *)aRef
+                   delegate:(id<FirebaseAuthDelegate>)aDelegate {
   self = [super init];
   if (self) {
     self.ref = aRef;
     self.loginManager = [[FBSDKLoginManager alloc] init];
-    [self.ref observeAuthEventWithBlock:^(FAuthData *authData) {
-      callback(authData);
-    }];
+    self.delegate = aDelegate;
   }
   return self;
 }
 
-- (void)loginWithCallback:(void (^)(NSError *, FAuthData *))callback {
+- (void)login {
   [self.loginManager logInWithReadPermissions:@[
     kEmailScope
   ] handler:^(FBSDKLoginManagerLoginResult *facebookResult,
               NSError *facebookError) {
     if (facebookError) {
-      callback(facebookError, nil);
+      [self.delegate onError:facebookError];
     } else if (facebookResult.isCancelled) {
       NSLog(@"Facebook login got cancelled.");
     } else {
@@ -67,13 +65,19 @@ NSString *const kEmailScope = @"email";
                                 token:accessToken
                   withCompletionBlock:^(NSError *error, FAuthData *authData) {
                     if (error) {
-                      callback(facebookError, nil);
+                      [self.delegate onError:error];
                     } else {
-                      callback(nil, authData);
+                      // TODO: Possibly register a onAuth listener and ignore
+                      // login events
+                      [self.delegate onAuthStageChange:authData];
                     }
                   }];
     }
   }];
+}
+
+- (void)logout {
+  [self.ref unauth];
 }
 
 @end
