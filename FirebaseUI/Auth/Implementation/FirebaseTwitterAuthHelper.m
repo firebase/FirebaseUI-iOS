@@ -35,7 +35,6 @@
 
 @interface FirebaseTwitterAuthHelper ()
 @property(strong, nonatomic) ACAccount *account;
-@property(nonatomic, copy) void (^userCallback)(NSError *, FAuthData *);
 @end
 
 @implementation FirebaseTwitterAuthHelper
@@ -45,26 +44,29 @@
 @synthesize apiKey;
 @synthesize account;
 @synthesize accounts;
-@synthesize userCallback;
 
+NSString *const kTwitterApiKey = @"TwitterApiKey";
 NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
 
 // (void (^)(id newObj))block
 
-- (instancetype)initWithFirebaseRef:(Firebase *)aRef
-                             apiKey:(NSString *)anApiKey
-            authStateChangeCallback:(void (^)(FAuthData *authData))callback {
+- (instancetype)initWithRef:(Firebase *)aRef
+                   delegate:(id<FirebaseAuthDelegate>)delegate {
   self = [super init];
   if (self) {
     self.store = [[ACAccountStore alloc] init];
     self.ref = aRef;
-    self.apiKey = anApiKey;
-
-    [self.ref observeAuthEventWithBlock:^(FAuthData *authData) {
-      callback(authData);
-    }];
+    self.delegate = delegate;
+    self.apiKey = [[self getPList] objectForKey:kTwitterApiKey];
   }
   return self;
+}
+
+- (NSDictionary *)getPList {
+  return
+      [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle]
+                                                     pathForResource:@"Info"
+                                                              ofType:@"plist"]];
 }
 
 // Step 1a -- get account
@@ -118,9 +120,7 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
 }
 
 // Last public facing method
-- (void)authenticateAccount:(ACAccount *)anAccount
-               withCallback:
-                   (void (^)(NSError *error, FAuthData *authData))callback {
+- (void)login:(ACAccount *)anAccount {
   if (!anAccount) {
     NSError *error = [[NSError alloc]
         initWithDomain:CLASS_NAME
@@ -129,18 +129,20 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
                 NSLocalizedDescriptionKey :
                     @"No Twitter account to authenticate."
               }];
-    callback(error, nil);
+    [self.delegate onError:error];
   } else {
     self.account = anAccount;
-    self.userCallback = callback;
     [self makeReverseRequest];  // kick off step 1b
   }
 }
 
 - (void)callbackIfExistsWithError:(NSError *)error
                          authData:(FAuthData *)authData {
-  if (self.userCallback) {
-    self.userCallback(error, authData);
+  // TODO: Possibly ignore and just register an auth handler in the initializer
+  if (error) {
+    [self.delegate onError:error];
+  } else {
+    [self.delegate onAuthStageChange:authData];
   }
 }
 
@@ -211,7 +213,9 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
   } else {
     [self.ref authWithOAuthProvider:@"twitter"
                          parameters:params
-                withCompletionBlock:self.userCallback];
+                withCompletionBlock:^(NSError *error, FAuthData *authData) {
+                  [self callbackIfExistsWithError:error authData:authData];
+                }];
   }
 }
 
@@ -235,6 +239,10 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
   } else {
     return params;
   }
+}
+
+- (void)logout {
+  [self.ref unauth];
 }
 
 - (void)dealloc {

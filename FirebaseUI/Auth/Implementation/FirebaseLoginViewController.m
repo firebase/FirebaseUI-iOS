@@ -42,7 +42,6 @@
 #pragma mark -
 #pragma mark Constants
 NSString *const kFirebaseName = @"FirebaseName";
-NSString *const kTwitterApiKey = @"TwitterApiKey";
 NSString *const kFileType = @"plist";
 NSString *const kFirebaseUrl = @"https://%@.firebaseio.com/";
 NSString *const kpListName = @"Info";
@@ -74,13 +73,6 @@ NSString *const kpListName = @"Info";
   return _ref;
 }
 
-- (FirebaseAuthApiKeys *)apiKeys {
-  if (!_apiKeys) {
-    return [self retrieveAuthKeysFromPList:[self getPList]];
-  }
-  return _apiKeys;
-}
-
 /*
  TODO: self.twitterAuthHelper.accounts ends up being nil when used inside
 FirebaseLoginViewController
@@ -109,11 +101,6 @@ FirebaseLoginViewController
 
 #pragma mark -
 #pragma mark pList methods
-- (FirebaseAuthApiKeys *)retrieveAuthKeysFromPList:(NSDictionary *)pList {
-  FirebaseAuthApiKeys *apiKeys = [[FirebaseAuthApiKeys alloc] init];
-  apiKeys.twitterApiKey = [pList objectForKey:kTwitterApiKey];
-  return apiKeys;
-}
 
 - (NSDictionary *)getPList {
   return [NSDictionary
@@ -148,12 +135,8 @@ FirebaseLoginViewController
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  self.twitterAuthHelper = [[FirebaseTwitterAuthHelper alloc]
-          initWithFirebaseRef:self.ref
-                       apiKey:self.apiKeys.twitterApiKey
-      authStateChangeCallback:^(FAuthData *authData) {
-        [self.delegate onAuthStageChange:authData];
-      }];
+  self.twitterAuthHelper =
+      [[FirebaseTwitterAuthHelper alloc] initWithRef:self.ref delegate:self];
 }
 
 #pragma mark -
@@ -206,16 +189,7 @@ FirebaseLoginViewController
 }
 
 - (void)authenticateWithTwitterAccount:(ACAccount *)account {
-  [self.twitterAuthHelper
-      authenticateAccount:account
-             withCallback:^(NSError *error, FAuthData *authData) {
-               if (error) {
-                 [self.delegate onError:error];
-                 return;
-               }
-
-               [self.delegate onLogin:authData];
-             }];
+  [self.twitterAuthHelper login:account];
 }
 
 - (void)selectTwitterAccount:(NSArray *)accounts {

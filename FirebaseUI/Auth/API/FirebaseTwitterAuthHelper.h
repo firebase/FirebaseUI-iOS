@@ -31,14 +31,14 @@
 // clang-format on
 
 #import <Firebase/Firebase.h>
-#import "FirebaseAuthDelegate.h"
+#import "FirebaseAuthHelper.h"
 
 /**
  * A helper class that pairs retrieving a Twitter user from the ACAccountStore
  * and authenticates the account against a Firebase database reference and
  * Twitter.
  */
-@interface FirebaseTwitterAuthHelper : NSObject
+@interface FirebaseTwitterAuthHelper : NSObject<FirebaseAuthHelper>
 
 /**
  * The Account Store to retrieve the Twitter users from.
@@ -61,17 +61,20 @@
 @property(strong, nonatomic) NSArray *accounts;
 
 /**
+ * The delegate object that authentication changes are surfaced to, which
+ * conforms to the [FirebaseAuthDelegate Protocol](FirebaseAuthDelegate).
+ */
+@property(weak, nonatomic) id<FirebaseAuthDelegate> delegate;
+
+/**
  * Initialize an instance of FirebaseTwitterAuthHelper to authenticate Twitter
  * users.
  * @param ref A Firebase database reference to authenticate against
- * @param apiKey The Twitter App API key to authenticate against
- * @param callback The authStateChangedCallback block to surface authentication
- * changes against
+ * @param callback The delegate to surface authentication changes against
  * @return An instance of FirebaseTwitterAuthHelper
  */
-- (instancetype)initWithFirebaseRef:(Firebase *)ref
-                             apiKey:(NSString *)apiKey
-            authStateChangeCallback:(void (^)(FAuthData *authData))callback;
+- (instancetype)initWithRef:(Firebase *)ref
+                   delegate:(id<FirebaseAuthDelegate>)delegate;
 
 /**
  * Retrieve a list of Twitter accounts from the ACAccountStore.
@@ -86,13 +89,10 @@
  * Given an ACAccount authenticate the user against the Firebase database
  * reference.
  * @param account The Twitter ACAccount to authenticate the user as
- * @param callback A block/closure that is ivoked after the authentication
- * process occurs. This block/closure will either contain an error or the
- * authenticated Firebase user.
  * @return void
  */
-- (void)authenticateAccount:(ACAccount *)account
-               withCallback:
-                   (void (^)(NSError *error, FAuthData *authData))callback;
+- (void)login:(ACAccount *)account;
+
+- (void)logout;
 
 @end

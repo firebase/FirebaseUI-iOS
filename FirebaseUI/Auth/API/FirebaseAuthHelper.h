@@ -28,28 +28,19 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// clang-format on
+#import "FirebaseAuthDelegate.h"
 
-#import <Firebase/Firebase.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+@protocol FirebaseAuthHelper <NSObject>
 
-@interface FirebaseFacebookAuthHelper : NSObject
+@property (weak, nonatomic) id<FirebaseAuthDelegate> delegate;
+@property (strong, nonatomic) Firebase *ref;
 
-/**
- * The Firebase database reference which to authenticate against.
- */
-@property(strong, nonatomic) Firebase *ref;
+- (instancetype) initWithRef:(Firebase *)ref delegate: (id<FirebaseAuthDelegate>) delegate;
 
-/**
- * The Facebook Login Manager object. This object can login the user.
- */
-@property(strong, nonatomic) FBSDKLoginManager *loginManager;
+@optional
+- (void)login;
+- (void)logout;
 
-- (instancetype)initWithFirebaseRef:(Firebase *)ref
-            authStateChangeCallback:(void (^)(FAuthData *authData))callback;
-
-- (void)loginWithCallback:(void (^)(NSError *error,
-                                    FAuthData *authData))callback;
+- (BOOL)pListIsConfigured;
 
 @end

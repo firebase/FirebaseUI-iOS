@@ -55,11 +55,6 @@
 @property(strong, nonatomic) Firebase *ref;
 
 /**
- * The set of API Keys associated with each authentication provider.
- */
-@property(strong, nonatomic) FirebaseAuthApiKeys *apiKeys;
-
-/**
  * The name of the .plist to read. This is defaulted to "Info".
  */
 @property(strong, nonatomic) NSString *pListName;
