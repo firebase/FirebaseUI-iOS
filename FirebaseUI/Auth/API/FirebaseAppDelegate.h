@@ -28,10 +28,14 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// clang-format on
+#import <UIKit/UIKit.h>
+#import <GoogleSignIn/GoogleSignIn.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <Firebase/Firebase.h>
 
-#import "FirebaseAuthApiKeys.h"
+@interface FirebaseAppDelegate : UIResponder<UIApplicationDelegate>
 
-@implementation FirebaseAuthApiKeys
+@property (strong, nonatomic) UIWindow *window;
 
 @end

@@ -29,25 +29,27 @@
  */
 
 // clang-format on
+#import <GoogleSignIn/GoogleSignIn.h>
 #import <UIKit/UIKit.h>
 #import <Firebase/Firebase.h>
 #import "FirebaseAuthDelegate.h"
-#import "FirebaseAuthApiKeys.h"
 #import "FirebaseTwitterAuthHelper.h"
 #import "FirebaseFacebookAuthHelper.h"
+#import "FirebaseGoogleAuthHelper.h"
 
 /**
  * FirebaseLoginViewController is a subclass of UIViewController that provides a
  * set of helper login methods for Firebase authentication providers.
  */
 @interface FirebaseLoginViewController
-    : UIViewController<FirebaseAuthDelegate, UIActionSheetDelegate>
+    : UIViewController<FirebaseAuthDelegate, UIActionSheetDelegate,
+                       GIDSignInDelegate, GIDSignInUIDelegate>
 
 /**
  * The delegate object that authentication changes are surfaced to, which
  * conforms to the [FirebaseAuthDelegate Protocol](FirebaseAuthDelegate).
  */
-@property(weak, nonatomic) id<FirebaseAuthDelegate> delegate;
+@property(weak, nonatomic) UIViewController<FirebaseAuthDelegate> *delegate;
 
 /**
  * The Firebase database reference which to authenticate against.
@@ -74,6 +76,13 @@
 @property(strong, nonatomic) FirebaseFacebookAuthHelper *facebookAuthHelper;
 
 /**
+ * The helper object for Google Authentication. This object handles the
+ * requests against the Google SDK and uses the response to authenticate
+ * against the Firebase database.
+ */
+@property(strong, nonatomic) FirebaseGoogleAuthHelper *googleAuthHelper;
+
+/**
  * Authenticates the user against Twitter. This method calls into the
  * twitterAuthHelper property to retrieve a list of Twitter users for the
  * ACAccountStore. If more than one Twitter user is present a UIActionSheet (in
@@ -92,6 +101,8 @@
  * @return void
  */
 - (void)loginWithFacebook;
+
+- (void)loginWithGoogle;
 
 - (void)logout;
 

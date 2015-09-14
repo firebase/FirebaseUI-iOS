@@ -39,6 +39,8 @@
 #import <FirebaseUI/FirebaseTwitterAuthHelper.h>
 #import <FirebaseUI/FirebaseFacebookAuthHelper.h>
 #import <FirebaseUI/FirebaseLoginViewController.h>
+#import <FirebaseUI/FirebaseGoogleAuthHelper.h>
+#import <FirebaseUI/FirebaseAppDelegate.h>
 
 @interface FirebaseUI : NSObject
 

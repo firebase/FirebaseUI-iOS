@@ -56,7 +56,7 @@ NSString *const kpListName = @"Info";
   return _pListName;
 }
 
-- (id<FirebaseAuthDelegate>)delegate {
+- (UIViewController<FirebaseAuthDelegate> *)delegate {
   if (!_delegate) {
     return self;
   }
@@ -94,6 +94,17 @@ FirebaseLoginViewController
   }
 
   return _facebookAuthHelper;
+}
+
+- (FirebaseGoogleAuthHelper *)googleAuthHelper {
+  if (!_googleAuthHelper) {
+    return [[FirebaseGoogleAuthHelper alloc] initWithRef:self.ref
+                                                delegate:self
+                                          signInDelegate:self
+                                              uiDelegate:self];
+  }
+
+  return _googleAuthHelper;
 }
 
 #pragma mark -
@@ -156,6 +167,19 @@ FirebaseLoginViewController
 
 - (void)loginWithFacebook {
   [self.facebookAuthHelper login];
+}
+
+#pragma mark -
+#pragma mark Google Auth methods
+
+- (void)loginWithGoogle {
+  [self.googleAuthHelper login];
+}
+
+- (void)signIn:(GIDSignIn *)signIn
+    didSignInForUser:(GIDGoogleUser *)user
+           withError:(NSError *)error {
+  [self.googleAuthHelper signIn:signIn didSignInForUser:user withError:error];
 }
 
 #pragma mark -

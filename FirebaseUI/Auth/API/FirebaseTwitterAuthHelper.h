@@ -64,7 +64,7 @@
  * The delegate object that authentication changes are surfaced to, which
  * conforms to the [FirebaseAuthDelegate Protocol](FirebaseAuthDelegate).
  */
-@property(weak, nonatomic) id<FirebaseAuthDelegate> delegate;
+@property(weak, nonatomic) UIViewController<FirebaseAuthDelegate>* delegate;
 
 /**
  * Initialize an instance of FirebaseTwitterAuthHelper to authenticate Twitter
@@ -74,7 +74,7 @@
  * @return An instance of FirebaseTwitterAuthHelper
  */
 - (instancetype)initWithRef:(Firebase *)ref
-                   delegate:(id<FirebaseAuthDelegate>)delegate;
+                   delegate:(UIViewController<FirebaseAuthDelegate>*)delegate;
 
 /**
  * Retrieve a list of Twitter accounts from the ACAccountStore.

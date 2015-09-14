@@ -29,13 +29,14 @@
  */
 
 #import "FirebaseAuthDelegate.h"
+#import <UIKit/UIKit.h>
 
 @protocol FirebaseAuthHelper <NSObject>
 
 @property (weak, nonatomic) id<FirebaseAuthDelegate> delegate;
 @property (strong, nonatomic) Firebase *ref;
 
-- (instancetype) initWithRef:(Firebase *)ref delegate: (id<FirebaseAuthDelegate>) delegate;
+- (instancetype) initWithRef:(Firebase *)ref delegate: (UIViewController<FirebaseAuthDelegate>*) delegate;
 
 @optional
 - (void)login;

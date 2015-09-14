@@ -46,7 +46,7 @@
  * The delegate object that authentication changes are surfaced to, which
  * conforms to the [FirebaseAuthDelegate Protocol](FirebaseAuthDelegate).
  */
-@property(weak, nonatomic) id<FirebaseAuthDelegate> delegate;
+@property(weak, nonatomic) UIViewController<FirebaseAuthDelegate> *delegate;
 
 /**
  * The Facebook Login Manager object. This object can login the user.
@@ -54,7 +54,7 @@
 @property(strong, nonatomic) FBSDKLoginManager *loginManager;
 
 - (instancetype)initWithRef:(Firebase *)ref
-                   delegate:(id<FirebaseAuthDelegate>)delegate;
+                   delegate:(UIViewController<FirebaseAuthDelegate> *)delegate;
 
 - (void)login;
 

@@ -38,7 +38,8 @@ NSString *const kAuthProvider = @"facebook";
 NSString *const kEmailScope = @"email";
 
 - (instancetype)initWithRef:(Firebase *)aRef
-                   delegate:(id<FirebaseAuthDelegate>)authDelegate {
+                   delegate:
+                       (UIViewController<FirebaseAuthDelegate> *)authDelegate {
   self = [super init];
   if (self) {
     self.ref = aRef;
@@ -51,8 +52,9 @@ NSString *const kEmailScope = @"email";
 - (void)login {
   [self.loginManager logInWithReadPermissions:@[
     kEmailScope
-  ] handler:^(FBSDKLoginManagerLoginResult *facebookResult,
-              NSError *facebookError) {
+  ] fromViewController:self.delegate handler:^(FBSDKLoginManagerLoginResult
+                                                   *facebookResult,
+                                               NSError *facebookError) {
 
     if (facebookError) {
       // Surface any errors

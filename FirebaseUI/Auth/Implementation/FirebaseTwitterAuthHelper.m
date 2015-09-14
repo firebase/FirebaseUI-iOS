@@ -51,7 +51,7 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
 // (void (^)(id newObj))block
 
 - (instancetype)initWithRef:(Firebase *)aRef
-                   delegate:(id<FirebaseAuthDelegate>)delegate {
+                   delegate:(UIViewController<FirebaseAuthDelegate> *)delegate {
   self = [super init];
   if (self) {
     self.store = [[ACAccountStore alloc] init];
