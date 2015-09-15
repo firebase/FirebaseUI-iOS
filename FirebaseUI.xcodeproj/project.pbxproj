@@ -27,17 +27,17 @@
 		BB372B5B1B8CF7DC0046905E /* FirebaseAuthDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = BB372B5A1B8CF7DC0046905E /* FirebaseAuthDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB372B5F1B8D1B580046905E /* FirebaseLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BB372B521B8BE42C0046905E /* FirebaseLoginViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB372B601B8D1B580046905E /* FirebaseTwitterAuthHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = BB372B531B8BE4510046905E /* FirebaseTwitterAuthHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BB62DD031BA38A61001BD539 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB62DD021BA38A61001BD539 /* GoogleSignIn.framework */; };
+		BB4877901BA8A0C000FD3D4D /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB48778F1BA8A0C000FD3D4D /* GoogleSignIn.framework */; };
+		BB48779B1BA8A0D600FD3D4D /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = BB4877931BA8A0D600FD3D4D /* Core.h */; };
+		BB48779C1BA8A0D600FD3D4D /* GGLConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = BB4877941BA8A0D600FD3D4D /* GGLConfiguration.h */; };
+		BB48779D1BA8A0D600FD3D4D /* GGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = BB4877951BA8A0D600FD3D4D /* GGLContext.h */; };
+		BB48779E1BA8A0D600FD3D4D /* GGLErrorCode.h in Headers */ = {isa = PBXBuildFile; fileRef = BB4877961BA8A0D600FD3D4D /* GGLErrorCode.h */; };
+		BB48779F1BA8A0D600FD3D4D /* GGLContext+SignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = BB4877991BA8A0D600FD3D4D /* GGLContext+SignIn.h */; };
+		BB4877A01BA8A0D600FD3D4D /* SignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = BB48779A1BA8A0D600FD3D4D /* SignIn.h */; };
 		BB62DD041BA6EBB6001BD539 /* FirebaseGoogleAuthHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = BBF6D4191BA1FF9200C644A7 /* FirebaseGoogleAuthHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB62DD071BA6F01E001BD539 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB62DD051BA6F01E001BD539 /* FBSDKCoreKit.framework */; };
 		BB62DD081BA6F01E001BD539 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB62DD061BA6F01E001BD539 /* FBSDKLoginKit.framework */; };
 		BB62DD0B1BA6F400001BD539 /* FirebaseAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62DD0A1BA6F400001BD539 /* FirebaseAppDelegate.m */; };
-		BB62DD6E1BA6F78F001BD539 /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = BB62DD571BA6F78F001BD539 /* Core.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		BB62DD6F1BA6F78F001BD539 /* GGLConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = BB62DD581BA6F78F001BD539 /* GGLConfiguration.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		BB62DD701BA6F78F001BD539 /* GGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = BB62DD591BA6F78F001BD539 /* GGLContext.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		BB62DD711BA6F78F001BD539 /* GGLErrorCode.h in Headers */ = {isa = PBXBuildFile; fileRef = BB62DD5A1BA6F78F001BD539 /* GGLErrorCode.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		BB62DD721BA6F78F001BD539 /* GGLContext+SignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = BB62DD5D1BA6F78F001BD539 /* GGLContext+SignIn.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		BB62DD731BA6F78F001BD539 /* SignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = BB62DD5E1BA6F78F001BD539 /* SignIn.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BB62DD7A1BA6F84C001BD539 /* FirebaseAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = BB62DD091BA6F3A1001BD539 /* FirebaseAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB6AC2151BA06B6B00A10461 /* FirebaseFacebookAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6AC2141BA06B6B00A10461 /* FirebaseFacebookAuthHelper.m */; };
 		BBF6D4161BA19CDF00C644A7 /* FirebaseFacebookAuthHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = BB6AC2131BA06AC300A10461 /* FirebaseFacebookAuthHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -87,20 +87,18 @@
 		BB372B541B8BE4890046905E /* FirebaseTwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseTwitterAuthHelper.m; path = Auth/Implementation/FirebaseTwitterAuthHelper.m; sourceTree = "<group>"; };
 		BB372B561B8BE5E20046905E /* FirebaseLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseLoginViewController.m; path = Auth/Implementation/FirebaseLoginViewController.m; sourceTree = "<group>"; };
 		BB372B5A1B8CF7DC0046905E /* FirebaseAuthDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseAuthDelegate.h; path = Auth/Implementation/FirebaseAuthDelegate.h; sourceTree = "<group>"; };
-		BB62DD021BA38A61001BD539 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = sdk/google_signin_sdk_2_2_0/GoogleSignIn.framework; sourceTree = "<group>"; };
+		BB48778E1BA8A0C000FD3D4D /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleSignIn.bundle; path = sdk/google_signin_sdk_2_2_0/GoogleSignIn.bundle; sourceTree = "<group>"; };
+		BB48778F1BA8A0C000FD3D4D /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = sdk/google_signin_sdk_2_2_0/GoogleSignIn.framework; sourceTree = "<group>"; };
+		BB4877931BA8A0D600FD3D4D /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
+		BB4877941BA8A0D600FD3D4D /* GGLConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLConfiguration.h; sourceTree = "<group>"; };
+		BB4877951BA8A0D600FD3D4D /* GGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLContext.h; sourceTree = "<group>"; };
+		BB4877961BA8A0D600FD3D4D /* GGLErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLErrorCode.h; sourceTree = "<group>"; };
+		BB4877991BA8A0D600FD3D4D /* GGLContext+SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GGLContext+SignIn.h"; sourceTree = "<group>"; };
+		BB48779A1BA8A0D600FD3D4D /* SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignIn.h; sourceTree = "<group>"; };
 		BB62DD051BA6F01E001BD539 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = sdk/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		BB62DD061BA6F01E001BD539 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = sdk/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		BB62DD091BA6F3A1001BD539 /* FirebaseAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseAppDelegate.h; path = Auth/API/FirebaseAppDelegate.h; sourceTree = "<group>"; };
 		BB62DD0A1BA6F400001BD539 /* FirebaseAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseAppDelegate.m; path = Auth/Implementation/FirebaseAppDelegate.m; sourceTree = "<group>"; };
-		BB62DD421BA6F721001BD539 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleSignIn.bundle; path = sdk/google_signin_sdk_2_2_0/GoogleSignIn.bundle; sourceTree = "<group>"; };
-		BB62DD571BA6F78F001BD539 /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
-		BB62DD581BA6F78F001BD539 /* GGLConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLConfiguration.h; sourceTree = "<group>"; };
-		BB62DD591BA6F78F001BD539 /* GGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLContext.h; sourceTree = "<group>"; };
-		BB62DD5A1BA6F78F001BD539 /* GGLErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGLErrorCode.h; sourceTree = "<group>"; };
-		BB62DD5D1BA6F78F001BD539 /* GGLContext+SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GGLContext+SignIn.h"; sourceTree = "<group>"; };
-		BB62DD5E1BA6F78F001BD539 /* SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignIn.h; sourceTree = "<group>"; };
-		BB62DD641BA6F78F001BD539 /* libGGLCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGGLCore.a; sourceTree = "<group>"; };
-		BB62DD651BA6F78F001BD539 /* libGGLSignIn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGGLSignIn.a; sourceTree = "<group>"; };
 		BB6AC2131BA06AC300A10461 /* FirebaseFacebookAuthHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseFacebookAuthHelper.h; path = Auth/API/FirebaseFacebookAuthHelper.h; sourceTree = "<group>"; };
 		BB6AC2141BA06B6B00A10461 /* FirebaseFacebookAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseFacebookAuthHelper.m; path = Auth/Implementation/FirebaseFacebookAuthHelper.m; sourceTree = "<group>"; };
 		BBDFCDDC1B90971C00459AE4 /* FirebaseAuthProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseAuthProvider.h; path = Auth/API/FirebaseAuthProvider.h; sourceTree = "<group>"; };
@@ -131,7 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB62DD071BA6F01E001BD539 /* FBSDKCoreKit.framework in Frameworks */,
-				BB62DD031BA38A61001BD539 /* GoogleSignIn.framework in Frameworks */,
+				BB4877901BA8A0C000FD3D4D /* GoogleSignIn.framework in Frameworks */,
 				BB62DD081BA6F01E001BD539 /* FBSDKLoginKit.framework in Frameworks */,
 				D8124F441B72C94E003441AD /* Firebase.framework in Frameworks */,
 				D8B6ACE51B58383C005CDDB2 /* UIKit.framework in Frameworks */,
@@ -188,71 +186,53 @@
 			name = Implementation;
 			sourceTree = "<group>";
 		};
-		BB62DD441BA6F78E001BD539 /* Headers */ = {
+		BB4877911BA8A0D600FD3D4D /* GGLCore */ = {
 			isa = PBXGroup;
 			children = (
-				BB62DD551BA6F78E001BD539 /* GGLCore */,
-				BB62DD5B1BA6F78F001BD539 /* GGLSignIn */,
+				BB4877921BA8A0D600FD3D4D /* Public */,
 			);
-			name = Headers;
-			path = "sdk/02468137448ba914-Google-1.0.7/Headers";
+			name = GGLCore;
+			path = sdk/Headers/GGLCore;
 			sourceTree = "<group>";
 		};
-		BB62DD551BA6F78E001BD539 /* GGLCore */ = {
+		BB4877921BA8A0D600FD3D4D /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				BB62DD561BA6F78F001BD539 /* Public */,
-			);
-			path = GGLCore;
-			sourceTree = "<group>";
-		};
-		BB62DD561BA6F78F001BD539 /* Public */ = {
-			isa = PBXGroup;
-			children = (
-				BB62DD571BA6F78F001BD539 /* Core.h */,
-				BB62DD581BA6F78F001BD539 /* GGLConfiguration.h */,
-				BB62DD591BA6F78F001BD539 /* GGLContext.h */,
-				BB62DD5A1BA6F78F001BD539 /* GGLErrorCode.h */,
+				BB4877931BA8A0D600FD3D4D /* Core.h */,
+				BB4877941BA8A0D600FD3D4D /* GGLConfiguration.h */,
+				BB4877951BA8A0D600FD3D4D /* GGLContext.h */,
+				BB4877961BA8A0D600FD3D4D /* GGLErrorCode.h */,
 			);
 			path = Public;
 			sourceTree = "<group>";
 		};
-		BB62DD5B1BA6F78F001BD539 /* GGLSignIn */ = {
+		BB4877971BA8A0D600FD3D4D /* GGLSignIn */ = {
 			isa = PBXGroup;
 			children = (
-				BB62DD5C1BA6F78F001BD539 /* Public */,
+				BB4877981BA8A0D600FD3D4D /* Public */,
 			);
-			path = GGLSignIn;
+			name = GGLSignIn;
+			path = sdk/Headers/GGLSignIn;
 			sourceTree = "<group>";
 		};
-		BB62DD5C1BA6F78F001BD539 /* Public */ = {
+		BB4877981BA8A0D600FD3D4D /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				BB62DD5D1BA6F78F001BD539 /* GGLContext+SignIn.h */,
-				BB62DD5E1BA6F78F001BD539 /* SignIn.h */,
+				BB4877991BA8A0D600FD3D4D /* GGLContext+SignIn.h */,
+				BB48779A1BA8A0D600FD3D4D /* SignIn.h */,
 			);
 			path = Public;
-			sourceTree = "<group>";
-		};
-		BB62DD5F1BA6F78F001BD539 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				BB62DD641BA6F78F001BD539 /* libGGLCore.a */,
-				BB62DD651BA6F78F001BD539 /* libGGLSignIn.a */,
-			);
-			name = Libraries;
-			path = "sdk/02468137448ba914-Google-1.0.7/Libraries";
 			sourceTree = "<group>";
 		};
 		D8B6ACE81B5839A5005CDDB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BB62DD441BA6F78E001BD539 /* Headers */,
-				BB62DD5F1BA6F78F001BD539 /* Libraries */,
-				BB62DD421BA6F721001BD539 /* GoogleSignIn.bundle */,
+				BB4877911BA8A0D600FD3D4D /* GGLCore */,
+				BB4877971BA8A0D600FD3D4D /* GGLSignIn */,
+				BB48778E1BA8A0C000FD3D4D /* GoogleSignIn.bundle */,
+				BB48778F1BA8A0C000FD3D4D /* GoogleSignIn.framework */,
 				BB62DD051BA6F01E001BD539 /* FBSDKCoreKit.framework */,
 				BB62DD061BA6F01E001BD539 /* FBSDKLoginKit.framework */,
-				BB62DD021BA38A61001BD539 /* GoogleSignIn.framework */,
 				D8124F401B72A90C003441AD /* Firebase.framework */,
 				D8B6ACE61B583877005CDDB2 /* Foundation.framework */,
 				D8C579BB1B5837DF00899F86 /* UIKit.framework */,
@@ -322,19 +302,19 @@
 				D8B6ACF91B583D3E005CDDB2 /* FirebaseDataSource.h in Headers */,
 				D8784C401B719F280025587E /* FirebaseArrayDelegate.h in Headers */,
 				D8DB81A81B7EA357001429C6 /* XCodeMacros.h in Headers */,
+				BB48779D1BA8A0D600FD3D4D /* GGLContext.h in Headers */,
 				D8124F431B72B347003441AD /* FirebaseTableViewDataSource.h in Headers */,
 				BB372B5B1B8CF7DC0046905E /* FirebaseAuthDelegate.h in Headers */,
 				D8DA10F11B7AC50400D00954 /* FirebaseCollectionViewDataSource.h in Headers */,
 				D8B6ACFB1B583D48005CDDB2 /* FirebaseArray.h in Headers */,
 				BB62DD7A1BA6F84C001BD539 /* FirebaseAppDelegate.h in Headers */,
-				BB62DD721BA6F78F001BD539 /* GGLContext+SignIn.h in Headers */,
-				BB62DD6F1BA6F78F001BD539 /* GGLConfiguration.h in Headers */,
-				BB62DD711BA6F78F001BD539 /* GGLErrorCode.h in Headers */,
-				BB62DD701BA6F78F001BD539 /* GGLContext.h in Headers */,
-				BB62DD6E1BA6F78F001BD539 /* Core.h in Headers */,
-				BB62DD731BA6F78F001BD539 /* SignIn.h in Headers */,
 				BB372B5F1B8D1B580046905E /* FirebaseLoginViewController.h in Headers */,
+				BB48779E1BA8A0D600FD3D4D /* GGLErrorCode.h in Headers */,
+				BB48779C1BA8A0D600FD3D4D /* GGLConfiguration.h in Headers */,
+				BB48779B1BA8A0D600FD3D4D /* Core.h in Headers */,
+				BB4877A01BA8A0D600FD3D4D /* SignIn.h in Headers */,
 				BB372B601B8D1B580046905E /* FirebaseTwitterAuthHelper.h in Headers */,
+				BB48779F1BA8A0D600FD3D4D /* GGLContext+SignIn.h in Headers */,
 				BBF6D4161BA19CDF00C644A7 /* FirebaseFacebookAuthHelper.h in Headers */,
 				BBF6D5771BA345E600C644A7 /* FirebaseAuthHelper.h in Headers */,
 				BB62DD041BA6EBB6001BD539 /* FirebaseGoogleAuthHelper.h in Headers */,
