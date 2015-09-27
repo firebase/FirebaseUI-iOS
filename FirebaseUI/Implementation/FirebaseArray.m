@@ -34,7 +34,12 @@
 
 #import "FirebaseArray.h"
 
-@implementation FirebaseArray
+@implementation FirebaseArray {
+    FirebaseHandle _addHandle;
+    FirebaseHandle _changeHandle;
+    FirebaseHandle _removeHandle;
+    FirebaseHandle _moveHandle;
+}
 
 #pragma mark -
 #pragma mark Initializer methods
@@ -54,59 +59,94 @@
   return self;
 }
 
+-(instancetype)initWithRef:(Firebase *)ref sortDescriptors:(NSArray *)sortDescriptors {
+    return [self initWithQuery:ref sortDescriptors:sortDescriptors];
+}
+
+-(instancetype)initWithQuery:(FQuery *)query sortDescriptors:(NSArray *)sortDescriptors {
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    self.snapshots = [NSMutableArray array];
+    self.query = query;
+    self.sortDescriptors = sortDescriptors;
+    
+    [self initListeners];
+    
+    return self;
+}
+
 #pragma mark -
 #pragma mark Memory management methods
 
 - (void)dealloc {
   // TODO: Consider keeping track of these and only removing them if they are
   // explicitly added here
-  [self.query removeAllObservers];
+    [self.query removeObserverWithHandle:_addHandle];
+    [self.query removeObserverWithHandle:_changeHandle];
+    [self.query removeObserverWithHandle:_removeHandle];
+    [self.query removeObserverWithHandle:_moveHandle];
 }
 
 #pragma mark -
 #pragma mark Private API methods
 
 - (void)initListeners {
-  [self.query observeEventType:FEventTypeChildAdded
-      andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot,
-                                       NSString *previousChildKey) {
-        NSUInteger index = [self indexForKey:previousChildKey] + 1;
+    [self initAddListener];
+    [self initChangeListener];
+    [self initRemoveListener];
+    [self initMoveListener];
+}
 
+- (void)initAddListener {
+    _addHandle = [self.query observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        NSUInteger index = [self insertionIndexForSnapshot:snapshot];
+        
         [self.snapshots insertObject:snapshot atIndex:index];
-
+        
         [self.delegate childAdded:snapshot atIndex:index];
-      }];
+    }];
+}
 
-  [self.query observeEventType:FEventTypeChildChanged
-      andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot,
-                                       NSString *previousChildKey) {
-        NSUInteger index = [self indexForKey:snapshot.key];
+- (void)initChangeListener {
+    _changeHandle = [self.query observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
+        NSUInteger startingIndex = [self indexOfObject:snapshot];
+        
+        [self.snapshots removeObjectAtIndex:startingIndex];
+        
+        NSUInteger newSortedIndex = [self insertionIndexForSnapshot:snapshot];
+        
+        [self.snapshots insertObject:snapshot atIndex:newSortedIndex];
+        
+        if (newSortedIndex == startingIndex) {
+            [self.delegate childChanged:snapshot atIndex:startingIndex];
+        } else {
+            [self.delegate childMoved:snapshot fromIndex:startingIndex toIndex:newSortedIndex];
+        }
+    }];
+}
 
-        [self.snapshots replaceObjectAtIndex:index withObject:snapshot];
+- (void)initRemoveListener {
+    _removeHandle = [self.query observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
+        NSUInteger index = [self indexOfObject:snapshot];
+        
+        [self.snapshots removeObjectAtIndex:index];
+        
+        [self.delegate childRemoved:snapshot atIndex:index];
+    }];
+}
 
-        [self.delegate childChanged:snapshot atIndex:index];
-      }];
-
-  [self.query observeEventType:FEventTypeChildRemoved
-                     withBlock:^(FDataSnapshot *snapshot) {
-                       NSUInteger index = [self indexForKey:snapshot.key];
-
-                       [self.snapshots removeObjectAtIndex:index];
-
-                       [self.delegate childRemoved:snapshot atIndex:index];
-                     }];
-
-  [self.query observeEventType:FEventTypeChildMoved
-      andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot,
-                                       NSString *previousChildKey) {
-        NSUInteger fromIndex = [self indexForKey:snapshot.key];
+- (void)initMoveListener {
+    _moveHandle = [self.query observeEventType:FEventTypeChildMoved withBlock:^(FDataSnapshot *snapshot) {
+        NSUInteger fromIndex = [self indexOfObject:snapshot];
         [self.snapshots removeObjectAtIndex:fromIndex];
-
-        NSUInteger toIndex = [self indexForKey:previousChildKey] + 1;
+        
+        NSUInteger toIndex = [self insertionIndexForSnapshot:snapshot];
         [self.snapshots insertObject:snapshot atIndex:toIndex];
-
+        
         [self.delegate childMoved:snapshot fromIndex:fromIndex toIndex:toIndex];
-      }];
+    }];
 }
 
 - (NSUInteger)indexForKey:(NSString *)key {
@@ -130,8 +170,51 @@
                                }];
 }
 
+- (NSUInteger)insertionIndexForSnapshot:(FDataSnapshot *)snapshot {
+    if (!self.snapshots.count) {
+        return 0;
+    }
+    return [self.snapshots indexOfObject:snapshot
+                           inSortedRange:NSMakeRange(0, self.snapshots.count)
+                                 options:
+            NSBinarySearchingInsertionIndex | NSBinarySearchingFirstEqual
+                         usingComparator:[self comparator]];
+}
+
+- (NSComparator)comparator {
+    if (self.sortDescriptors.count) {
+        return ^(FDataSnapshot * obj1, FDataSnapshot * obj2) {
+            if ([obj1.key isEqualToString:obj2.key]) {
+                return NSOrderedSame;
+            }
+            
+            NSComparisonResult result = NSOrderedSame;
+            for (NSSortDescriptor * sortDescriptor in self.sortDescriptors) {
+                result = [sortDescriptor compareObject:obj1 toObject:obj2];
+                if (result != NSOrderedSame) {
+                    break;
+                }
+            }
+            return result;
+        };
+    }
+    return ^(FDataSnapshot * obj1, FDataSnapshot * obj2) {
+        return [obj1.key compare:obj2.key];
+    };
+}
+
 #pragma mark -
 #pragma mark Public API methods
+
+-(NSUInteger)indexOfObject:(FDataSnapshot *)snapshot {
+    return [self.snapshots indexOfObjectWithOptions:NSEnumerationConcurrent passingTest:^BOOL(FDataSnapshot * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        BOOL result = [snapshot.key isEqualToString:obj.key];
+        if (result) {
+            *stop = YES;
+        }
+        return result;
+    }];
+}
 
 - (NSUInteger)count {
   return [self.snapshots count];

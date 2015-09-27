@@ -40,6 +40,150 @@
 #pragma mark FirebaseDataSource initializer methods
 
 - (instancetype)initWithRef:(Firebase *)ref
+            sortDescriptors:(NSArray *)sortDescriptors
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UITableView *)tableView {
+    return [self initWithRef:ref
+             sortDescriptors:sortDescriptors
+                  modelClass:nil
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:tableView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+  prototypeReuseIdentifier:(NSString *)identifier
+                      view:(UITableView *)tableView {
+    self.hasPrototypeCell = YES;
+    return [self initWithRef:ref
+             sortDescriptors:sortDescriptors
+                  modelClass:nil
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:tableView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UITableView *)tableView {
+    return [self initWithRef:ref
+             sortDescriptors:sortDescriptors
+                  modelClass:model
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:tableView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                  nibNamed:(NSString *)nibName
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UITableView *)tableView {
+    return [self initWithRef:ref
+             sortDescriptors:sortDescriptors
+                  modelClass:nil
+                    nibNamed:nibName
+         cellReuseIdentifier:identifier
+                        view:tableView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                 cellClass:(Class)cell
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UITableView *)tableView {
+    return [self initWithRef:ref
+             sortDescriptors:sortDescriptors
+                  modelClass:nil
+                   cellClass:cell
+         cellReuseIdentifier:identifier
+                        view:tableView];
+    
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+  prototypeReuseIdentifier:(NSString *)identifier
+                      view:(UITableView *)tableView {
+    self.hasPrototypeCell = YES;
+    return [self initWithRef:ref
+             sortDescriptors:sortDescriptors
+                  modelClass:model
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:tableView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+                 cellClass:(Class)cell
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UITableView *)tableView {
+    FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref
+                                                       sortDescriptors:sortDescriptors];
+    self = [super initWithArray:array];
+    if (!self) {
+        return nil;
+    }
+    
+    if (!model) {
+        model = [FDataSnapshot class];
+    }
+    
+    if (!cell) {
+        cell = [UITableViewCell class];
+    }
+    
+    self.tableView = tableView;
+    self.modelClass = model;
+    self.reuseIdentifier = identifier;
+    self.populateCell = ^(id cell, id object) {
+    };
+    
+    if (!self.hasPrototypeCell) {
+        [self.tableView registerClass:cell
+               forCellReuseIdentifier:self.reuseIdentifier];
+    }
+    return self;
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+                  nibNamed:(NSString *)nibName
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UITableView *)tableView {
+    FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref
+                                              sortDescriptors:sortDescriptors];
+    self = [super initWithArray:array];
+    if (!self) {
+        return nil;
+    }
+    
+    if (!model) {
+        model = [FDataSnapshot class];
+    }
+    
+    self.tableView = tableView;
+    self.modelClass = model;
+    self.reuseIdentifier = identifier;
+    self.populateCell = ^(id cell, id object) {
+    };
+    
+    if (!self.hasPrototypeCell) {
+        UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
+        [self.tableView registerNib:nib
+             forCellReuseIdentifier:self.reuseIdentifier];
+    }
+    return self;
+}
+
+- (instancetype)initWithRef:(Firebase *)ref
         cellReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
   return [self initWithRef:ref
@@ -110,29 +254,12 @@
                   cellClass:(Class)cell
         cellReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
-  FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
-  self = [super initWithArray:array];
-  if (self) {
-    if (!model) {
-      model = [FDataSnapshot class];
-    }
-
-    if (!cell) {
-      cell = [UITableViewCell class];
-    }
-
-    self.tableView = tableView;
-    self.modelClass = model;
-    self.reuseIdentifier = identifier;
-    self.populateCell = ^(id cell, id object) {
-    };
-
-    if (!self.hasPrototypeCell) {
-      [self.tableView registerClass:cell
-             forCellReuseIdentifier:self.reuseIdentifier];
-    }
-  }
-  return self;
+    return [self initWithRef:ref
+             sortDescriptors:nil
+                  modelClass:model
+                   cellClass:cell
+         cellReuseIdentifier:identifier
+                        view:tableView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -140,26 +267,13 @@
                    nibNamed:(NSString *)nibName
         cellReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
-  FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
-  self = [super initWithArray:array];
-  if (self) {
-    if (!model) {
-      model = [FDataSnapshot class];
-    }
-
-    self.tableView = tableView;
-    self.modelClass = model;
-    self.reuseIdentifier = identifier;
-    self.populateCell = ^(id cell, id object) {
-    };
-
-    if (!self.hasPrototypeCell) {
-      UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
-      [self.tableView registerNib:nib
-           forCellReuseIdentifier:self.reuseIdentifier];
-    }
-  }
-  return self;
+    
+    return [self initWithRef:ref
+             sortDescriptors:nil
+                  modelClass:model
+                    nibNamed:nibName
+         cellReuseIdentifier:identifier
+                        view:tableView];
 }
 
 #pragma mark -

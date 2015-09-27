@@ -77,7 +77,31 @@
  * @param query A query on a Firebase reference which provides filtered data to FirebaseArray
  * @return The instance of FirebaseArray
  */
+
 - (instancetype)initWithQuery:(FQuery *)query;
+/**
+ * Initializes FirebaseArray with a standard Firebase reference and an array of NSSortDescriptors.
+ * Use this if you would like the array to be sorted after being received from the server, or if
+ * you would like more complex sorting behavior.
+ * @param ref The Firebase reference which provides data to FirebaseArray
+ * @param sortDescriptors The sort descriptors by which the array should be ordered. If the array is
+ * empty or nil, the array is ordered by [snapshot1.key compare:snapshot2.key]
+ * @return The instance of FirebaseArray
+ */
+-(instancetype)initWithRef:(Firebase *)ref sortDescriptors:(NSArray *)sortDescriptors;
+
+/**
+ * Initializes FirebaseArray with a Firebase query (FQuery) and an array of NSSortDescriptors.
+ * Use this if you would like the array to be sorted after being received from the server, or if
+ * you would like more complex sorting behavior than an FQuery can provide.
+ * It is recommended that you use FQuery to filter, rather than sort, for use with this initializer.
+ * E.G. query only objects that have false for their hidden flag, then sort using Sort Descriptors.
+ * @param query A query on a Firebase reference which provides filtered data to FirebaseArray
+ * @param sortDescriptors The sort descriptors by which the array should be ordered. If the array is
+ * empty or nil, the array is ordered by [snapshot1.key compare:snapshot2.key]
+ * @return The instance of FirebaseArray
+ */
+-(instancetype)initWithQuery:(FQuery *)query sortDescriptors:(NSArray *)sortDescriptors;
 
 #pragma mark -
 #pragma mark Public API methods
@@ -101,6 +125,19 @@
  * @return A Firebase reference for the object at the given index
  */
 - (Firebase *)refForIndex:(NSUInteger)index;
+
+/**
+ * The sort descriptors by which the array should be ordered. If the array is empty or nil, the
+ * array is ordered by [snapshot1.key compare:snapshot2.key]
+ */
+@property (strong, nonatomic) NSArray * sortDescriptors;
+
+/**
+ * Finds the index of the snapshot using the sortDescriptors. It uses NSBinarySearchingFirstEqual.
+ * @param snapshot The FDataSnapshot to be found.
+ * @return The index of the snapshot in the array or NSNotFound if the snapshot is not in the array.
+ */
+-(NSUInteger)indexOfObject:(FDataSnapshot *)snapshot;
 
 #pragma mark -
 #pragma mark Private API methods
