@@ -112,7 +112,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
  * @param ref A Firebase reference to bind the datasource to
  * @param sortDescriptors The sort descriptors by which the array should be ordered.
  * @param identifier A string to use as a CellReuseIdentifier
- * @param tableView An instance of a UICollectionView to bind to
+ * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells with
  * FDataSnapshots
@@ -120,7 +120,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
 - (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
                        sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)tableView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -130,7 +130,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
  * need to be registered in the class.
  * @param ref A Firebase reference to bind the datasource to
  * @param identifier A string to use as a CellReuseIdentifier
- * @param tableView An instance of a UICollectionView to bind to
+ * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells with
  * FDataSnapshots
@@ -138,7 +138,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
 - (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
                        sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
               prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)tableView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a custom
@@ -150,7 +150,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
  * defaults to
  * UICollectionViewCell if nil
  * @param identifier A string to use as a CellReuseIdentifier
- * @param tableView An instance of a UICollectionView to bind to
+ * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates a custom
  * subclass of
  * UICollectionViewCell with FDataSnapshots
@@ -159,7 +159,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
                        sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
                              cellClass:(__NULLABLE Class)cell
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)tableView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a custom
@@ -170,7 +170,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
  * @param nibName The name of a xib file to create the layout for a
  * UICollectionViewCell
  * @param identifier A string to use as a CellReuseIdentifier
- * @param tableView An instance of a UICollectionView to bind to
+ * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates a custom
  * xib with
  * FDataSnapshots
@@ -179,7 +179,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
                        sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
                               nibNamed:(__NON_NULL NSString *)nibName
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)tableView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -190,7 +190,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
  * @param model A custom class that FDataSnapshots are coerced to, defaults to
  * FDataSnapshot if nil
  * @param identifier A string to use as a CellReuseIdentifier
- * @param tableView An instance of a UICollectionView to bind to
+ * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells with a custom
  * model class
@@ -199,7 +199,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
                        sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
                             modelClass:(__NULLABLE Class)model
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)tableView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -212,7 +212,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
  * @param model A custom class that FDataSnapshots are coerced to, defaults to
  * FDataSnapshot if nil
  * @param identifier A string to use as a CellReuseIdentifier
- * @param tableView An instance of a UICollectionView to bind to
+ * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells with a custom
  * model class
@@ -221,7 +221,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
                        sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
                             modelClass:(__NULLABLE Class)model
               prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)tableView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a custom
@@ -235,7 +235,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
  * defaults to
  * UICollectionViewCell if nil
  * @param identifier A string to use as a CellReuseIdentifier
- * @param tableView An instance of a UICollectionView to bind to
+ * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates a custom
  * subclass of
  * UICollectionViewCell with a custom model class
@@ -245,7 +245,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
                             modelClass:(__NULLABLE Class)model
                              cellClass:(__NULLABLE Class)cell
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)tableView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a custom
@@ -258,7 +258,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
  * @param nibName The name of a xib file to create the layout for a
  * UICollectionViewCell
  * @param identifier A string to use as a CellReuseIdentifier
- * @param tableView An instance of a UICollectionView to bind to
+ * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates a custom
  * xib with a custom
  * model class
@@ -268,7 +268,7 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
                             modelClass:(__NULLABLE Class)model
                               nibNamed:(__NON_NULL NSString *)nibName
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)tableView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 
 
@@ -429,6 +429,84 @@ __KINDOF(NSObject) __NON_NULL_PTR object);
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
                                   view:(__NON_NULL UICollectionView *)
                                            collectionView;
+
+/**
+ * Initialize an instance of FirebaseCollectionViewDataSource that populates a custom
+ * xib with a custom
+ * model class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param predicate The predicate by which the array should be sorted.
+ * @param sortDescriptors The sort descriptors by which the array should be ordered.
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param nibName The name of a xib file to create the layout for a
+ * UICollectionViewCell
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param collectionView An instance of a UICollectionView to bind to
+ * @return An instance of FirebaseCollectionViewDataSource that populates a custom
+ * xib with a custom
+ * model class
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                             predicate:(__NULLABLE NSPredicate *)predicate
+                       sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+                            modelClass:(__NULLABLE Class)model
+                              nibNamed:(__NON_NULL NSString *)nibName
+                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                  view:(__NON_NULL UICollectionView *)collectionView;
+
+
+/**
+ * Initialize an instance of FirebaseCollectionViewDataSource that populates
+ * UICollectionViewCells with a
+ * custom model class. Note that this method is used when using prototype cells,
+ * where the cells
+ * don't need to be registered in the class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param predicate The predicate by which the array should be sorted.
+ * @param sortDescriptors The sort descriptors by which the array should be ordered.
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param collectionView An instance of a UICollectionView to bind to
+ * @return An instance of FirebaseCollectionViewDataSource that populates
+ * UICollectionViewCells with a custom
+ * model class
+ */
+-(__NULLABLE instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                            predicate:(__NULLABLE NSPredicate *)predicate
+                      sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+                           modelClass:(__NULLABLE Class)model
+             prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
+                                 view:(__NON_NULL UICollectionView *)collectionView;
+
+
+/**
+ * Initialize an instance of FirebaseCollectionViewDataSource that populates a custom
+ * subclass of
+ * UICollectionViewCell with a custom model class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param predicate The predicate by which the array should be sorted.
+ * @param sortDescriptors The sort descriptors by which the array should be ordered.
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param cell A subclass of UICollectionViewCell used to populate the UICollectionView,
+ * defaults to
+ * UICollectionViewCell if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param collectionView An instance of a UICollectionView to bind to
+ * @return An instance of FirebaseCollectionViewDataSource that populates a custom
+ * subclass of
+ * UICollectionViewCell with a custom model class
+ */
+-(__NULLABLE instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                            predicate:(__NULLABLE NSPredicate *)predicate
+                      sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+                           modelClass:(__NULLABLE Class)model
+                            cellClass:(__NULLABLE Class)cell
+                  cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                 view:(__NON_NULL UICollectionView *)collectionView;
+
 
 /**
  * This method populates the fields of a UICollectionViewCell or subclass given

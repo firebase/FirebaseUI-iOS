@@ -77,8 +77,38 @@
  * @param query A query on a Firebase reference which provides filtered data to FirebaseArray
  * @return The instance of FirebaseArray
  */
-
 - (instancetype)initWithQuery:(FQuery *)query;
+
+/**
+ * Initializes FirebaseArray with a Firebase query (FQuery), an array of NSSortDescriptors, and an
+ * NSPredicate.
+ * Use this if you would like the array to be sorted after being received from the server, or if
+ * you would like more complex sorting or filtering behavior than an FQuery can provide.
+ * @param query A query on a Firebase reference which provides filtered data to FirebaseArray
+ * @param predicate The predicate by which the snapshots are filtered. If predicate is nil, the array
+ * reflects all results from the Firebase Query or Reference.
+ * @return The instance of FirebaseArray
+ */
+-(instancetype)initWithQuery:(FQuery *)query
+                   predicate:(NSPredicate *)predicate;
+
+
+/**
+ * Initializes FirebaseArray with a Firebase query (FQuery), an array of NSSortDescriptors, and an
+ * NSPredicate.
+ * Use this if you would like the array to be sorted after being received from the server, or if
+ * you would like more complex sorting or filtering behavior than an FQuery can provide.
+ * @param query A query on a Firebase reference which provides filtered data to FirebaseArray
+ * @param sortDescriptors The sort descriptors by which the array should be ordered. If the array is
+ * empty or nil, the array is ordered by [snapshot1.key compare:snapshot2.key]
+ * @param predicate The predicate by which the snapshots are filtered. If predicate is nil, the array
+ * reflects all results from the Firebase Query or Reference.
+ * @return The instance of FirebaseArray
+ */
+-(instancetype)initWithQuery:(FQuery *)query
+             sortDescriptors:(NSArray *)sortDescriptors
+                   predicate:(NSPredicate *)predicate;
+
 /**
  * Initializes FirebaseArray with a standard Firebase reference and an array of NSSortDescriptors.
  * Use this if you would like the array to be sorted after being received from the server, or if
@@ -152,5 +182,11 @@
  * with the Firebase database.
  */
 - (NSUInteger)indexForKey:(NSString *)key;
+
+/**
+ * The predicate by which the snapshots are filtered. If predicate is nil, the array reflects all
+ * results from the Firebase Query or Reference.
+ */
+@property (strong, nonatomic) NSPredicate * predicate;
 
 @end

@@ -60,10 +60,20 @@
 }
 
 -(instancetype)initWithRef:(Firebase *)ref sortDescriptors:(NSArray *)sortDescriptors {
-    return [self initWithQuery:ref sortDescriptors:sortDescriptors];
+    return [self initWithQuery:ref sortDescriptors:sortDescriptors predicate:nil];
 }
 
 -(instancetype)initWithQuery:(FQuery *)query sortDescriptors:(NSArray *)sortDescriptors {
+    return [self initWithQuery:query sortDescriptors:sortDescriptors predicate:nil];
+}
+
+-(instancetype)initWithQuery:(FQuery *)query predicate:(NSPredicate *)predicate {
+    return [self initWithQuery:query sortDescriptors:nil predicate:predicate];
+}
+
+-(instancetype)initWithQuery:(FQuery *)query
+             sortDescriptors:(NSArray *)sortDescriptors
+                   predicate:(NSPredicate *)predicate {
     self = [super init];
     if (!self) {
         return nil;
@@ -71,6 +81,7 @@
     self.snapshots = [NSMutableArray array];
     self.query = query;
     self.sortDescriptors = sortDescriptors;
+    self.predicate = predicate;
     
     [self initListeners];
     
@@ -81,8 +92,6 @@
 #pragma mark Memory management methods
 
 - (void)dealloc {
-  // TODO: Consider keeping track of these and only removing them if they are
-  // explicitly added here
     [self.query removeObserverWithHandle:_addHandle];
     [self.query removeObserverWithHandle:_changeHandle];
     [self.query removeObserverWithHandle:_removeHandle];
@@ -101,6 +110,10 @@
 
 - (void)initAddListener {
     _addHandle = [self.query observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        if (self.predicate && ![self.predicate evaluateWithObject:snapshot]) {
+            return;
+        }
+        
         NSUInteger index = [self insertionIndexForSnapshot:snapshot];
         
         [self.snapshots insertObject:snapshot atIndex:index];
@@ -113,13 +126,21 @@
     _changeHandle = [self.query observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
         NSUInteger startingIndex = [self indexOfObject:snapshot];
         
-        [self.snapshots removeObjectAtIndex:startingIndex];
+        if (startingIndex != NSNotFound) {
+            [self.snapshots removeObjectAtIndex:startingIndex];
+            
+            if (self.predicate && ![self.predicate evaluateWithObject:snapshot]) {
+                [self.delegate childRemoved:snapshot atIndex:startingIndex];
+                return;
+            }
+        }
         
         NSUInteger newSortedIndex = [self insertionIndexForSnapshot:snapshot];
         
         [self.snapshots insertObject:snapshot atIndex:newSortedIndex];
-        
-        if (newSortedIndex == startingIndex) {
+        if (startingIndex == NSNotFound) {
+            [self.delegate childAdded:snapshot atIndex:newSortedIndex];
+        } else if (newSortedIndex == startingIndex) {
             [self.delegate childChanged:snapshot atIndex:startingIndex];
         } else {
             [self.delegate childMoved:snapshot fromIndex:startingIndex toIndex:newSortedIndex];
@@ -131,6 +152,10 @@
     _removeHandle = [self.query observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
         NSUInteger index = [self indexOfObject:snapshot];
         
+        if (index == NSNotFound) {
+            return;
+        }
+        
         [self.snapshots removeObjectAtIndex:index];
         
         [self.delegate childRemoved:snapshot atIndex:index];
@@ -139,15 +164,32 @@
 
 - (void)initMoveListener {
     _moveHandle = [self.query observeEventType:FEventTypeChildMoved withBlock:^(FDataSnapshot *snapshot) {
-        NSUInteger fromIndex = [self indexOfObject:snapshot];
-        [self.snapshots removeObjectAtIndex:fromIndex];
+        NSUInteger startingIndex = [self indexOfObject:snapshot];
         
-        NSUInteger toIndex = [self insertionIndexForSnapshot:snapshot];
-        [self.snapshots insertObject:snapshot atIndex:toIndex];
+        if (startingIndex != NSNotFound) {
+            [self.snapshots removeObjectAtIndex:startingIndex];
+            
+            if (self.predicate && ![self.predicate evaluateWithObject:snapshot]) {
+                [self.delegate childRemoved:snapshot atIndex:startingIndex];
+                return;
+            }
+        }
         
-        [self.delegate childMoved:snapshot fromIndex:fromIndex toIndex:toIndex];
+        NSUInteger newSortedIndex = [self insertionIndexForSnapshot:snapshot];
+        
+        [self.snapshots insertObject:snapshot atIndex:newSortedIndex];
+        if (startingIndex == NSNotFound) {
+            [self.delegate childAdded:snapshot atIndex:newSortedIndex];
+        } else if (newSortedIndex == startingIndex) {
+            [self.delegate childChanged:snapshot atIndex:startingIndex];
+        } else {
+            [self.delegate childMoved:snapshot fromIndex:startingIndex toIndex:newSortedIndex];
+        }
     }];
 }
+
+#pragma mark -
+#pragma mark Searching Methods
 
 - (NSUInteger)indexForKey:(NSString *)key {
   if (!key) return -1;
@@ -168,6 +210,16 @@
                                  @"Key" : key,
                                  @"Array" : self.snapshots
                                }];
+}
+
+-(NSUInteger)indexOfObject:(FDataSnapshot *)snapshot {
+    return [self.snapshots indexOfObjectWithOptions:NSEnumerationConcurrent passingTest:^BOOL(FDataSnapshot * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        BOOL result = [snapshot.key isEqualToString:obj.key];
+        if (result) {
+            *stop = YES;
+        }
+        return result;
+    }];
 }
 
 - (NSUInteger)insertionIndexForSnapshot:(FDataSnapshot *)snapshot {
@@ -205,16 +257,6 @@
 
 #pragma mark -
 #pragma mark Public API methods
-
--(NSUInteger)indexOfObject:(FDataSnapshot *)snapshot {
-    return [self.snapshots indexOfObjectWithOptions:NSEnumerationConcurrent passingTest:^BOOL(FDataSnapshot * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        BOOL result = [snapshot.key isEqualToString:obj.key];
-        if (result) {
-            *stop = YES;
-        }
-        return result;
-    }];
-}
 
 - (NSUInteger)count {
   return [self.snapshots count];

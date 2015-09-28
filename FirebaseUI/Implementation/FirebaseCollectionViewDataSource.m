@@ -119,13 +119,15 @@
 }
 
 -(instancetype)initWithRef:(Firebase *)ref
+                 predicate:(NSPredicate *)predicate
            sortDescriptors:(NSArray *)sortDescriptors
                 modelClass:(Class)model
                  cellClass:(Class)cell
        cellReuseIdentifier:(NSString *)identifier
                       view:(UICollectionView *)collectionView {
-    FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref
-                                              sortDescriptors:sortDescriptors];
+    FirebaseArray *array = [[FirebaseArray alloc] initWithQuery:ref
+                                                sortDescriptors:sortDescriptors
+                                                      predicate:predicate];
     self = [super initWithArray:array];
     if (!self) {
         return nil;
@@ -153,13 +155,15 @@
 }
 
 -(instancetype)initWithRef:(Firebase *)ref
+                 predicate:(NSPredicate *)predicate
            sortDescriptors:(NSArray *)sortDescriptors
                 modelClass:(Class)model
                   nibNamed:(NSString *)nibName
        cellReuseIdentifier:(NSString *)identifier
                       view:(UICollectionView *)collectionView {
-    FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref
-                                              sortDescriptors:sortDescriptors];
+    FirebaseArray *array = [[FirebaseArray alloc] initWithQuery:ref
+                                                sortDescriptors:sortDescriptors
+                                                      predicate:predicate];
     self = [super initWithArray:array];
     if (!self) {
         return nil;
@@ -247,8 +251,6 @@
                       view:collectionView];
 }
 
-
-
 - (instancetype)initWithRef:(Firebase *)ref
                  modelClass:(Class)model
                   cellClass:(Class)cell
@@ -270,6 +272,52 @@
     
     return [self initWithRef:ref
              sortDescriptors:nil
+                  modelClass:model
+                    nibNamed:nibName
+         cellReuseIdentifier:identifier
+                        view:collectionView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+                 predicate:(NSPredicate *)predicate
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+  prototypeReuseIdentifier:(NSString *)identifier
+                      view:(UICollectionView *)collectionView {
+    self.hasPrototypeCell = YES;
+    return [self initWithRef:ref
+                   predicate:predicate
+             sortDescriptors:sortDescriptors
+                  modelClass:model
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:collectionView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+                 cellClass:(Class)cell
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UICollectionView *)collectionView {
+    return [self initWithRef:ref
+                   predicate:nil
+             sortDescriptors:sortDescriptors
+                  modelClass:model
+                   cellClass:cell
+         cellReuseIdentifier:identifier
+                        view:collectionView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+                  nibNamed:(NSString *)nibName
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UICollectionView *)collectionView {
+    return [self initWithRef:ref
+                   predicate:nil
+             sortDescriptors:sortDescriptors
                   modelClass:model
                     nibNamed:nibName
          cellReuseIdentifier:identifier
