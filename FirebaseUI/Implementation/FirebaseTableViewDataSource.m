@@ -330,38 +330,53 @@
 #pragma mark -
 #pragma mark FirebaseCollectionDelegate methods
 
-- (void)childAdded:(id)obj atIndex:(NSUInteger)index {
+- (void)childAdded:(id)obj atIndexPath:(NSIndexPath *)indexPath {
   [self.tableView beginUpdates];
-  [self.tableView insertRowsAtIndexPaths:@[
-    [NSIndexPath indexPathForRow:index inSection:0]
-  ] withRowAnimation:UITableViewRowAnimationAutomatic];
+  [self.tableView insertRowsAtIndexPaths:@[indexPath]
+                        withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
 }
 
-- (void)childChanged:(id)obj atIndex:(NSUInteger)index {
+- (void)childChanged:(id)obj atIndexPath:(NSIndexPath *)indexPath {
   [self.tableView beginUpdates];
-  [self.tableView reloadRowsAtIndexPaths:@[
-    [NSIndexPath indexPathForRow:index inSection:0]
-  ] withRowAnimation:UITableViewRowAnimationAutomatic];
+  [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                        withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
 }
 
-- (void)childRemoved:(id)obj atIndex:(NSUInteger)index {
+- (void)childRemoved:(id)obj atIndexPath:(NSIndexPath *)indexPath {
   [self.tableView beginUpdates];
-  [self.tableView deleteRowsAtIndexPaths:@[
-    [NSIndexPath indexPathForRow:index inSection:0]
-  ] withRowAnimation:UITableViewRowAnimationAutomatic];
+  [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                        withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
 }
 
 - (void)childMoved:(id)obj
-         fromIndex:(NSUInteger)fromIndex
-           toIndex:(NSUInteger)toIndex {
+         fromIndexPath:(NSIndexPath *)fromIndexPath
+           toIndexPath:(NSIndexPath *)toIndexPath {
   [self.tableView beginUpdates];
   [self.tableView
-      moveRowAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
-             toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
+      moveRowAtIndexPath:fromIndexPath
+             toIndexPath:toIndexPath];
   [self.tableView endUpdates];
+}
+
+- (void)sectionAddedAtSectionIndex:(NSUInteger)section {
+    [self.tableView insertSections:[NSIndexSet indexSetWithIndex:section]
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)sectionRemovedAtSectionIndex:(NSUInteger)section {
+    [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:section]
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+-(void)beginUpdates {
+    [self.tableView beginUpdates];
+}
+
+-(void)endUpdates {
+    [self.tableView endUpdates];
 }
 
 #pragma mark -
@@ -373,7 +388,7 @@
       [self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier
                                            forIndexPath:indexPath];
 
-  FDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
+  FDataSnapshot *snap = [self.array objectAtIndexPath:indexPath];
   if (![self.modelClass isSubclassOfClass:[FDataSnapshot class]]) {
     id model = [[self.modelClass alloc] init];
     // TODO: replace setValuesForKeysWithDictionary with client API
@@ -387,9 +402,20 @@
   return cell;
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [self sectionTitleForSection:section];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
-  return [self.array count];
+  return [self.array sectionAtIndex:section].count;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (self.array.sectionKeyPath) {
+        return [self.array.sectionValues count];
+    }
+    return 1;
 }
 
 - (void)populateCellWithBlock:

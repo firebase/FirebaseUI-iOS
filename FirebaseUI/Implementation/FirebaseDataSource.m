@@ -55,12 +55,20 @@
   return [self.array count];
 }
 
-- (id)objectAtIndex:(NSUInteger)index {
-  return [self.array objectAtIndex:index];
+- (id)objectAtIndexPath:(NSIndexPath *)indexPath {
+  return [self.array objectAtIndexPath:indexPath];
 }
 
-- (Firebase *)refForIndex:(NSUInteger)index {
-  return [self.array refForIndex:index];
+- (Firebase *)refForIndexPath:(NSIndexPath *)indexPath {
+  return [self.array refForIndexPath:indexPath];
+}
+
+-(NSString *)sectionTitleForSection:(NSUInteger)section {
+    if (!self.array.sectionKeyPath || !self.array.sectionValues.count) {
+        return nil;
+    }
+    id sectionValue = [self.array.sectionValues objectAtIndex:section];
+    return [NSString stringWithFormat:@"%@", sectionValue];
 }
 
 @end

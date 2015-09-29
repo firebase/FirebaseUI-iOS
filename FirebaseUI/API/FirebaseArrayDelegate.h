@@ -44,9 +44,9 @@
  * [FEventTypeChildAdded](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
  * event being raised.
  * @param object The object added to the FirebaseArray
- * @param index The index the child was added at
+ * @param indexPath The indexPath the child was added at
  */
-- (void)childAdded:(id)object atIndex:(NSUInteger)index;
+- (void)childAdded:(id)obj atIndexPath:(NSIndexPath *)indexPath;
 
 /**
  * Delegate method which is called whenever an object is chinged in a FirebaseArray. On a
@@ -54,9 +54,9 @@
  * [FEventTypeChildChanged](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
  * event being raised.
  * @param object The object that changed in the FirebaseArray
- * @param index The index the child was changed at
+ * @param indexPath The indexPath the child was changed at
  */
-- (void)childChanged:(id)object atIndex:(NSUInteger)index;
+- (void)childChanged:(id)obj atIndexPath:(NSIndexPath *)indexPath;
 
 /**
  * Delegate method which is called whenever an object is removed from a FirebaseArray. On a
@@ -64,9 +64,9 @@
  * [FEventTypeChildRemoved](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
  * event being raised.
  * @param object The object removed from the FirebaseArray
- * @param index The index the child was removed at
+ * @param indexPath The indexPath the child was removed at
  */
-- (void)childRemoved:(id)object atIndex:(NSUInteger)index;
+- (void)childRemoved:(id)obj atIndexPath:(NSIndexPath *)indexPath;
 
 /**
  * Delegate method which is called whenever an object is moved within a FirebaseArray. On a
@@ -74,9 +74,18 @@
  * [FEventTypeChildMoved](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
  * event being raised.
  * @param object The object that has moved locations in the FirebaseArray
- * @param fromIndex The index the child is being moved from
- * @param toIndex The index the child is being moved to
+ * @param fromIndexPath The indexPath the child is being moved from
+ * @param toIndexPath The indexPath the child is being moved to
  */
-- (void)childMoved:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+- (void)childMoved:(id)obj
+     fromIndexPath:(NSIndexPath *)fromIndexPath
+       toIndexPath:(NSIndexPath *)toIndexPath;
+
+- (void)sectionAddedAtSectionIndex:(NSUInteger)section;
+
+- (void)sectionRemovedAtSectionIndex:(NSUInteger)section;
+
+- (void)beginUpdates;
+- (void)endUpdates;
 
 @end

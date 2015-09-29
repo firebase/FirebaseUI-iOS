@@ -363,7 +363,7 @@ cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
       dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier
                                 forIndexPath:indexPath];
 
-  FDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
+  FDataSnapshot *snap = [self.array objectAtIndexPath:indexPath];
   if (![self.modelClass isSubclassOfClass:[FDataSnapshot class]]) {
     id model = [[self.modelClass alloc] init];
     // TODO: replace setValuesForKeysWithDictionary with client API

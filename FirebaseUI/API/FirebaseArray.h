@@ -61,6 +61,7 @@
  * The delegate object that array changes are surfaced to.
  */
 @property(strong, nonatomic) NSMutableArray __GENERIC(FDataSnapshot *) * snapshots;
+@property(strong, nonatomic) NSMutableOrderedSet __GENERIC(id) * sectionValues;
 
 #pragma mark -
 #pragma mark Initializer methods
@@ -89,8 +90,8 @@
  * reflects all results from the Firebase Query or Reference.
  * @return The instance of FirebaseArray
  */
--(instancetype)initWithQuery:(FQuery *)query
-                   predicate:(NSPredicate *)predicate;
+- (instancetype)initWithQuery:(FQuery *)query
+                    predicate:(NSPredicate *)predicate;
 
 
 /**
@@ -105,9 +106,9 @@
  * reflects all results from the Firebase Query or Reference.
  * @return The instance of FirebaseArray
  */
--(instancetype)initWithQuery:(FQuery *)query
-             sortDescriptors:(NSArray *)sortDescriptors
-                   predicate:(NSPredicate *)predicate;
+- (instancetype)initWithQuery:(FQuery *)query
+              sortDescriptors:(NSArray *)sortDescriptors
+                    predicate:(NSPredicate *)predicate;
 
 /**
  * Initializes FirebaseArray with a standard Firebase reference and an array of NSSortDescriptors.
@@ -147,14 +148,14 @@
  * @param index The index of the item to retrieve
  * @return The object at the given index
  */
-- (id)objectAtIndex:(NSUInteger)index;
+- (FDataSnapshot *)objectAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  * Returns a Firebase reference for an object at a specific index in the FirebaseArray.
  * @param index The index of the item to retrieve a reference for
  * @return A Firebase reference for the object at the given index
  */
-- (Firebase *)refForIndex:(NSUInteger)index;
+- (Firebase *)refForIndexPath:(NSIndexPath *)indexPath;
 
 /**
  * The sort descriptors by which the array should be ordered. If the array is empty or nil, the
@@ -162,31 +163,22 @@
  */
 @property (strong, nonatomic) NSArray * sortDescriptors;
 
-/**
- * Finds the index of the snapshot using the sortDescriptors. It uses NSBinarySearchingFirstEqual.
- * @param snapshot The FDataSnapshot to be found.
- * @return The index of the snapshot in the array or NSNotFound if the snapshot is not in the array.
- */
--(NSUInteger)indexOfObject:(FDataSnapshot *)snapshot;
+- (NSIndexPath *)indexPathOfObject:(FDataSnapshot *)snapshot;
 
 #pragma mark -
 #pragma mark Private API methods
 
-/**
- * Returns an index for a given object's key (that matches the object's key in the corresponding
- * Firebase reference).
- * @param key The key of the desired object
- * @return The index of the object for which the key matches or -1 if the key is null
- * @exception FirebaseArrayKeyNotFoundException Thrown when the desired key is not in the
- * FirebaseArray, likely indicating that the FirebaseArray is no longer being properly synchronized
- * with the Firebase database.
- */
-- (NSUInteger)indexForKey:(NSString *)key;
+- (NSIndexPath *)indexPathForKey:(NSString *)key;
 
 /**
  * The predicate by which the snapshots are filtered. If predicate is nil, the array reflects all
  * results from the Firebase Query or Reference.
  */
 @property (strong, nonatomic) NSPredicate * predicate;
+
+@property (strong, nonatomic) NSString * sectionKeyPath;
+@property (nonatomic) BOOL sectionsOrderedAscending;
+
+- (NSArray *)sectionAtIndex:(NSUInteger)sectionIndex;
 
 @end
