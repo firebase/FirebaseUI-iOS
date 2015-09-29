@@ -153,13 +153,11 @@
         
         [self.snapshots insertObject:snapshot atIndex:index];
         
-        NSUInteger sectionIndex;
-        
         if (self.sectionKeyPath) {
             id sectionKeyValue = [snapshot valueForKeyPath:self.sectionKeyPath];
             
             if (![self.sectionValues containsObject:sectionKeyValue]) {
-                sectionIndex =
+                NSUInteger sectionIndex =
                 [self.sectionValues indexOfObject:sectionKeyValue
                                     inSortedRange:NSMakeRange(0, self.sectionValues.count)
                                           options:
@@ -216,10 +214,12 @@
     
     NSUInteger startingIndexInSnapshots = [self indexInSnapshotsForKey:snapshot.key];
     
-    NSIndexPath * startingIndexPath = [self indexPathOfObject:snapshot];
+    NSIndexPath * startingIndexPath = [self indexPathForKey:snapshot.key];
     
     id startingSectionKeyValue;
     id newSectionKeyValue;
+    
+    BOOL sectionRemoved = NO;
     
     if (startingIndexInSnapshots != NSNotFound) {
         FDataSnapshot * startingSnapshot = self.snapshots[startingIndexInSnapshots];
@@ -228,7 +228,6 @@
         
         
         NSUInteger startingSectionIndex = 0;
-        BOOL sectionRemoved = NO;
         
         if (self.sectionKeyPath) {
             startingSectionKeyValue = [startingSnapshot valueForKeyPath:self.sectionKeyPath];
@@ -247,14 +246,16 @@
         }
         
         
-        if (self.predicate && ![self.predicate evaluateWithObject:snapshot]) {
-            if (sectionRemoved) {
-                if (_initialized) [self.delegate sectionRemovedAtSectionIndex:startingSectionIndex];
-            } else {
-                if (_initialized) [self.delegate childRemoved:startingSnapshot atIndexPath:startingIndexPath];
-            }
-            return;
+        if (sectionRemoved) {
+            if (_initialized) [self.delegate sectionRemovedAtSectionIndex:startingSectionIndex];
+        } else {
+            if (_initialized) [self.delegate childRemoved:startingSnapshot atIndexPath:startingIndexPath];
         }
+    }
+    
+    
+    if (self.predicate && ![self.predicate evaluateWithObject:snapshot]) {
+        return;
     }
     
     
@@ -284,13 +285,16 @@
     
     if (sectionInserted) {
         if (_initialized) [self.delegate sectionAddedAtSectionIndex:newIndexPath.section];
-    } else if (startingIndexInSnapshots == NSNotFound) {
+    } else
+//        if (startingIndexInSnapshots == NSNotFound || sectionRemoved)
+        {
         if (_initialized) [self.delegate childAdded:snapshot atIndexPath:newIndexPath];
-    } else if ([newIndexPath isEqual:startingIndexPath]) {
-        if (_initialized) [self.delegate childChanged:snapshot atIndexPath:startingIndexPath];
-    } else {
-        if (_initialized) [self.delegate childMoved:snapshot fromIndexPath:startingIndexPath toIndexPath:newIndexPath];
     }
+//        else if (startingIndexInSnapshots == newSortedIndex) {
+//        if (_initialized) [self.delegate childChanged:snapshot atIndexPath:startingIndexPath];
+//    } else {
+//        if (_initialized) [self.delegate childMoved:snapshot fromIndexPath:startingIndexPath toIndexPath:newIndexPath];
+//    }
 }
 
 - (void)initChangeListener {
@@ -315,24 +319,12 @@
     [self.snapshots
      indexOfObjectWithOptions:NSEnumerationConcurrent
      passingTest:^BOOL(FDataSnapshot * obj, NSUInteger idx, BOOL * stop) {
-         BOOL result = [obj.key isEqualToString:obj.key];
+         BOOL result = [key isEqualToString:obj.key];
          if (result) {
              *stop = YES;
          }
          return result;
      }];
-    
-    if (index == NSNotFound) {
-        NSString *errorReason =
-        [NSString stringWithFormat:@"Key \"%@\" not found in FirebaseArray %@",
-         key, self.snapshots];
-        @throw [NSException exceptionWithName:@"FirebaseArrayKeyNotFoundException"
-                                       reason:errorReason
-                                     userInfo:@{
-                                                @"Key" : key,
-                                                @"Array" : self.snapshots
-                                                }];
-    }
     
     return index;
 }
@@ -341,6 +333,10 @@
     if (!key) return [NSIndexPath indexPathForRow:NSNotFound inSection:NSNotFound];
     
     NSUInteger indexInSnapshots = [self indexInSnapshotsForKey:key];
+    
+    if (indexInSnapshots == NSNotFound) {
+        return nil;
+    }
     
     return [self indexPathOfObject:self.snapshots[indexInSnapshots]];
 }
@@ -379,6 +375,10 @@
          return result;
      }];
     
+    if (rowIndex == NSNotFound) {
+        
+    }
+    
     return [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
 }
 
@@ -395,14 +395,40 @@
     
     id sectionKeyValue = self.sectionValues[sectionIndex];
     
-    NSIndexSet * sectionSet =
-    [self.snapshots
-     indexesOfObjectsWithOptions:NSEnumerationConcurrent
-     passingTest:^BOOL(FDataSnapshot * obj, NSUInteger idx, BOOL * stop) {
-         return [sectionKeyValue isEqual:[obj valueForKeyPath:sectionKeyPath]];
-     }];
+    NSUInteger firstIndex = [self.snapshots indexOfObject:sectionKeyValue
+                                            inSortedRange:NSMakeRange(0, self.snapshots.count)
+                                                  options:NSBinarySearchingFirstEqual
+                                          usingComparator:^NSComparisonResult(id obj1,
+                                                                              id obj2) {
+                                              NSComparisonResult result;
+                                              if ([obj1 isKindOfClass:[sectionKeyValue class]]) {
+                                                  result = [obj1 compare:[obj2 valueForKeyPath:sectionKeyPath]];
+                                              } else {
+                                                  result = [[obj1 valueForKeyPath:sectionKeyPath] compare:obj2];
+                                              }
+                                              return result;
+                                          }];
+    if (firstIndex == NSNotFound) {
+        return [NSArray array];
+    }
     
-    return [self.snapshots objectsAtIndexes:sectionSet];
+    NSUInteger lastIndex = [self.snapshots indexOfObject:sectionKeyValue
+                                           inSortedRange:NSMakeRange(0, self.snapshots.count)
+                                                 options:NSBinarySearchingLastEqual
+                                         usingComparator:^NSComparisonResult(id obj1,
+                                                                             id obj2) {
+                                             NSComparisonResult result;
+                                             if ([obj1 isKindOfClass:[sectionKeyValue class]]) {
+                                                 result = [obj1 compare:[obj2 valueForKeyPath:sectionKeyPath]];
+                                             } else {
+                                                 result = [[obj1 valueForKeyPath:sectionKeyPath] compare:obj2];
+                                             }
+                                             return result;
+                                         }];
+    
+    NSRange sectionRange = NSMakeRange(firstIndex, lastIndex - firstIndex + 1);
+    
+    return [self.snapshots subarrayWithRange:sectionRange];
 }
 
 - (NSUInteger)insertionIndexForSnapshot:(FDataSnapshot *)snapshot {
