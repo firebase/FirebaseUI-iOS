@@ -81,6 +81,8 @@
      fromIndexPath:(NSIndexPath *)fromIndexPath
        toIndexPath:(NSIndexPath *)toIndexPath;
 
+- (void)sectionsAddedAtIndexes:(NSIndexSet *)indexes;
+
 - (void)sectionAddedAtSectionIndex:(NSUInteger)section;
 
 - (void)sectionRemovedAtSectionIndex:(NSUInteger)section;

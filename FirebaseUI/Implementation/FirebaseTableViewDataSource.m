@@ -361,6 +361,11 @@
   [self.tableView endUpdates];
 }
 
+-(void)sectionsAddedAtIndexes:(NSIndexSet *)indexes {
+    [self.tableView insertSections:indexes
+                  withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 - (void)sectionAddedAtSectionIndex:(NSUInteger)section {
     [self.tableView insertSections:[NSIndexSet indexSetWithIndex:section]
                   withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -412,10 +417,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.array.sectionKeyPath) {
-        return [self.array.sectionValues count];
-    }
-    return 1;
+    return self.array.numberOfSections;
 }
 
 - (void)populateCellWithBlock:

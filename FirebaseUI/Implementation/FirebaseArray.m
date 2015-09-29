@@ -37,7 +37,8 @@
 #import "FirebaseArray.h"
 
 @implementation FirebaseArray {
-    BOOL _updatesStarted;
+    BOOL _initStarted;
+    BOOL _initialized;
     FirebaseHandle _addHandle;
     FirebaseHandle _changeHandle;
     FirebaseHandle _removeHandle;
@@ -118,19 +119,32 @@
 
 - (void)initValueListener {
     _valueHandle = [self.query observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-//        if (_updatesStarted) {
-//            _updatesStarted = NO;
-//            [self.delegate endUpdates];
-//        }
+        if (_initialized) {
+            return;
+        }
+        
+        if (self.sectionKeyPath) {
+            NSUInteger count = self.sectionValues.count;
+            
+            NSIndexSet * sections = [NSIndexSet
+                                     indexSetWithIndexesInRange:NSMakeRange(0, count)];
+            
+            [self.delegate sectionsAddedAtIndexes:sections];
+        } else {
+            [self.delegate sectionsAddedAtIndexes:[NSIndexSet indexSetWithIndex:0]];
+        }
+        
+        _initialized = YES;
+        [self.delegate endUpdates];
     }];
 }
 
 - (void)initAddListener {
     _addHandle = [self.query observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-//        if (!_updatesStarted) {
-//            _updatesStarted = YES;
-//            [self.delegate beginUpdates];
-//        }
+        if (!_initialized && !_initStarted) {
+            _initStarted = YES;
+            [self.delegate beginUpdates];
+        }
         if (self.predicate && ![self.predicate evaluateWithObject:snapshot]) {
             return;
         }
@@ -139,12 +153,13 @@
         
         [self.snapshots insertObject:snapshot atIndex:index];
         
+        NSUInteger sectionIndex;
         
         if (self.sectionKeyPath) {
             id sectionKeyValue = [snapshot valueForKeyPath:self.sectionKeyPath];
             
             if (![self.sectionValues containsObject:sectionKeyValue]) {
-                NSUInteger sectionIndex =
+                sectionIndex =
                 [self.sectionValues indexOfObject:sectionKeyValue
                                     inSortedRange:NSMakeRange(0, self.sectionValues.count)
                                           options:
@@ -155,25 +170,24 @@
                 
                 [self.sectionValues insertObject:sectionKeyValue atIndex:sectionIndex];
                 
-                [self.delegate sectionAddedAtSectionIndex:sectionIndex];
+                if (_initialized) [self.delegate sectionAddedAtSectionIndex:sectionIndex];
                 
                 return;
             }
         }
         
-        
         NSIndexPath * indexPath = [self indexPathOfObject:snapshot];
         
-        [self.delegate childAdded:snapshot atIndexPath:indexPath];
+        if (_initialized) [self.delegate childAdded:snapshot atIndexPath:indexPath];
     }];
 }
 
 - (void)initRemoveListener {
     _removeHandle = [self.query observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
-//        if (!_updatesStarted) {
-//            _updatesStarted = YES;
-//            [self.delegate beginUpdates];
-//        }
+        if (!_initialized && !_initStarted) {
+            _initStarted = YES;
+            [self.delegate beginUpdates];
+        }
         NSUInteger index = [self indexInSnapshotsForKey:snapshot.key];
 
         if (index == NSNotFound) {
@@ -187,18 +201,18 @@
         if (self.sectionKeyPath && ![self sectionAtIndex:indexPath.section].count) {
             [self.sectionValues removeObjectAtIndex:indexPath.section];
             
-            [self.delegate sectionRemovedAtSectionIndex:indexPath.section];
+            if (_initialized) [self.delegate sectionRemovedAtSectionIndex:indexPath.section];
         } else {
-            [self.delegate childRemoved:snapshot atIndexPath:indexPath];
+            if (_initialized) [self.delegate childRemoved:snapshot atIndexPath:indexPath];
         }
     }];
 }
 
 - (void)handleChange:(FDataSnapshot *)snapshot {
-//    if (!_updatesStarted) {
-//        _updatesStarted = YES;
-//        [self.delegate beginUpdates];
-//    }
+    if (!_initialized && !_initStarted) {
+        _initStarted = YES;
+        [self.delegate beginUpdates];
+    }
     
     NSUInteger startingIndexInSnapshots = [self indexInSnapshotsForKey:snapshot.key];
     
@@ -235,9 +249,9 @@
         
         if (self.predicate && ![self.predicate evaluateWithObject:snapshot]) {
             if (sectionRemoved) {
-                [self.delegate sectionRemovedAtSectionIndex:startingSectionIndex];
+                if (_initialized) [self.delegate sectionRemovedAtSectionIndex:startingSectionIndex];
             } else {
-                [self.delegate childRemoved:startingSnapshot atIndexPath:startingIndexPath];
+                if (_initialized) [self.delegate childRemoved:startingSnapshot atIndexPath:startingIndexPath];
             }
             return;
         }
@@ -269,13 +283,13 @@
     NSIndexPath * newIndexPath = [self indexPathOfObject:snapshot];
     
     if (sectionInserted) {
-        [self.delegate sectionAddedAtSectionIndex:newIndexPath.section];
+        if (_initialized) [self.delegate sectionAddedAtSectionIndex:newIndexPath.section];
     } else if (startingIndexInSnapshots == NSNotFound) {
-        [self.delegate childAdded:snapshot atIndexPath:newIndexPath];
+        if (_initialized) [self.delegate childAdded:snapshot atIndexPath:newIndexPath];
     } else if ([newIndexPath isEqual:startingIndexPath]) {
-        [self.delegate childChanged:snapshot atIndexPath:startingIndexPath];
+        if (_initialized) [self.delegate childChanged:snapshot atIndexPath:startingIndexPath];
     } else {
-        [self.delegate childMoved:snapshot fromIndexPath:startingIndexPath toIndexPath:newIndexPath];
+        if (_initialized) [self.delegate childMoved:snapshot fromIndexPath:startingIndexPath toIndexPath:newIndexPath];
     }
 }
 
@@ -440,6 +454,16 @@
 
 - (NSUInteger)count {
     return [self.snapshots count];
+}
+
+-(NSUInteger)numberOfSections {
+    if (!_initialized) {
+        return 0;
+    }
+    if (self.sectionKeyPath) {
+        return self.sectionValues.count;
+    }
+    return 1;
 }
 
 - (FDataSnapshot *)objectAtIndexPath:(NSIndexPath *)indexPath {

@@ -181,4 +181,6 @@
 
 - (NSArray *)sectionAtIndex:(NSUInteger)sectionIndex;
 
+- (NSUInteger)numberOfSections;
+
 @end
