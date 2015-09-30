@@ -285,16 +285,9 @@
     
     if (sectionInserted) {
         if (_initialized) [self.delegate sectionAddedAtSectionIndex:newIndexPath.section];
-    } else
-//        if (startingIndexInSnapshots == NSNotFound || sectionRemoved)
-        {
+    } else {
         if (_initialized) [self.delegate childAdded:snapshot atIndexPath:newIndexPath];
     }
-//        else if (startingIndexInSnapshots == newSortedIndex) {
-//        if (_initialized) [self.delegate childChanged:snapshot atIndexPath:startingIndexPath];
-//    } else {
-//        if (_initialized) [self.delegate childMoved:snapshot fromIndexPath:startingIndexPath toIndexPath:newIndexPath];
-//    }
 }
 
 - (void)initChangeListener {
@@ -374,10 +367,6 @@
          }
          return result;
      }];
-    
-    if (rowIndex == NSNotFound) {
-        
-    }
     
     return [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
 }
