@@ -11,7 +11,7 @@ This is a super simple FirebaseUI Chat demo. It shows:
 In order to install and run, simply:
 ``` bash
 git clone https://github.com/firebase/FirebaseUI-iOS.git
-cd FirebaseUI-iOS/examples/FirebaseUI
+cd FirebaseUI-iOS/examples/FirebaseUIChat
 pod install
 open FirebaseUIChat.xcworkspace
 ```
