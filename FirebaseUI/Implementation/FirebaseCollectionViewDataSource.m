@@ -40,6 +40,152 @@
 #pragma mark FirebaseDataSource initializer methods
 
 - (instancetype)initWithRef:(Firebase *)ref
+            sortDescriptors:(NSArray *)sortDescriptors
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UICollectionView *)collectionView {
+    return [self initWithRef:ref
+             sortDescriptors:sortDescriptors
+                  modelClass:nil
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:collectionView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+  prototypeReuseIdentifier:(NSString *)identifier
+                      view:(UICollectionView *)collectionView {
+    self.hasPrototypeCell = YES;
+    return [self initWithRef:ref
+             sortDescriptors:sortDescriptors
+                  modelClass:nil
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:collectionView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UICollectionView *)collectionView {
+    return [self initWithRef:ref
+             sortDescriptors:sortDescriptors
+                  modelClass:model
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:collectionView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                  nibNamed:(NSString *)nibName
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UICollectionView *)collectionView {
+    return [self initWithRef:ref
+             sortDescriptors:sortDescriptors
+                  modelClass:nil
+                    nibNamed:nibName
+         cellReuseIdentifier:identifier
+                        view:collectionView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                 cellClass:(Class)cell
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UICollectionView *)collectionView {
+    return [self initWithRef:ref
+             sortDescriptors:sortDescriptors
+                  modelClass:nil
+                   cellClass:cell
+         cellReuseIdentifier:identifier
+                        view:collectionView];
+    
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+  prototypeReuseIdentifier:(NSString *)identifier
+                      view:(UICollectionView *)collectionView {
+    self.hasPrototypeCell = YES;
+    return [self initWithRef:ref
+             sortDescriptors:sortDescriptors
+                  modelClass:model
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:collectionView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+                 predicate:(NSPredicate *)predicate
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+                 cellClass:(Class)cell
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UICollectionView *)collectionView {
+    FirebaseArray *array = [[FirebaseArray alloc] initWithQuery:ref
+                                                sortDescriptors:sortDescriptors
+                                                      predicate:predicate];
+    self = [super initWithArray:array];
+    if (!self) {
+        return nil;
+    }
+    
+    if (!model) {
+        model = [FDataSnapshot class];
+    }
+    
+    if (!cell) {
+        cell = [UICollectionViewCell class];
+    }
+    
+    self.collectionView = collectionView;
+    self.modelClass = model;
+    self.reuseIdentifier = identifier;
+    self.populateCell = ^(id cell, id object) {
+    };
+    
+    if (!self.hasPrototypeCell) {
+        [self.collectionView registerClass:self.cellClass
+                forCellWithReuseIdentifier:self.reuseIdentifier];
+    }
+    return self;
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+                 predicate:(NSPredicate *)predicate
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+                  nibNamed:(NSString *)nibName
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UICollectionView *)collectionView {
+    FirebaseArray *array = [[FirebaseArray alloc] initWithQuery:ref
+                                                sortDescriptors:sortDescriptors
+                                                      predicate:predicate];
+    self = [super initWithArray:array];
+    if (!self) {
+        return nil;
+    }
+    
+    if (!model) {
+        model = [FDataSnapshot class];
+    }
+    
+    self.collectionView = collectionView;
+    self.modelClass = model;
+    self.reuseIdentifier = identifier;
+    self.populateCell = ^(id cell, id object) {
+    };
+    
+    UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
+    [self.collectionView registerNib:nib
+          forCellWithReuseIdentifier:self.reuseIdentifier];
+    return self;
+}
+
+- (instancetype)initWithRef:(Firebase *)ref
         cellReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithRef:ref
@@ -110,30 +256,12 @@
                   cellClass:(Class)cell
         cellReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
-  FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
-  self = [super initWithArray:array];
-  if (self) {
-    if (!model) {
-      model = [FDataSnapshot class];
-    }
-
-    if (!cell) {
-      cell = [UICollectionViewCell class];
-    }
-
-    self.collectionView = collectionView;
-    self.modelClass = model;
-    self.cellClass = cell;
-    self.reuseIdentifier = identifier;
-    self.populateCell = ^(id cell, id object) {
-    };
-
-    if (!self.hasPrototypeCell) {
-      [self.collectionView registerClass:self.cellClass
-              forCellWithReuseIdentifier:self.reuseIdentifier];
-    }
-  }
-  return self;
+    return [self initWithRef:ref
+             sortDescriptors:nil
+                  modelClass:model
+                   cellClass:cell
+         cellReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -141,24 +269,59 @@
                    nibNamed:(NSString *)nibName
         cellReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
-  FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
-  self = [super initWithArray:array];
-  if (self) {
-    if (!model) {
-      model = [FDataSnapshot class];
-    }
+    
+    return [self initWithRef:ref
+             sortDescriptors:nil
+                  modelClass:model
+                    nibNamed:nibName
+         cellReuseIdentifier:identifier
+                        view:collectionView];
+}
 
-    self.collectionView = collectionView;
-    self.modelClass = model;
-    self.reuseIdentifier = identifier;
-    self.populateCell = ^(id cell, id object) {
-    };
+-(instancetype)initWithRef:(Firebase *)ref
+                 predicate:(NSPredicate *)predicate
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+  prototypeReuseIdentifier:(NSString *)identifier
+                      view:(UICollectionView *)collectionView {
+    self.hasPrototypeCell = YES;
+    return [self initWithRef:ref
+                   predicate:predicate
+             sortDescriptors:sortDescriptors
+                  modelClass:model
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:collectionView];
+}
 
-    UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
-    [self.collectionView registerNib:nib
-          forCellWithReuseIdentifier:self.reuseIdentifier];
-  }
-  return self;
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+                 cellClass:(Class)cell
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UICollectionView *)collectionView {
+    return [self initWithRef:ref
+                   predicate:nil
+             sortDescriptors:sortDescriptors
+                  modelClass:model
+                   cellClass:cell
+         cellReuseIdentifier:identifier
+                        view:collectionView];
+}
+
+-(instancetype)initWithRef:(Firebase *)ref
+           sortDescriptors:(NSArray *)sortDescriptors
+                modelClass:(Class)model
+                  nibNamed:(NSString *)nibName
+       cellReuseIdentifier:(NSString *)identifier
+                      view:(UICollectionView *)collectionView {
+    return [self initWithRef:ref
+                   predicate:nil
+             sortDescriptors:sortDescriptors
+                  modelClass:model
+                    nibNamed:nibName
+         cellReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 #pragma mark -
@@ -200,7 +363,7 @@ cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
       dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier
                                 forIndexPath:indexPath];
 
-  FDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
+  FDataSnapshot *snap = [self.array objectAtIndexPath:indexPath];
   if (![self.modelClass isSubclassOfClass:[FDataSnapshot class]]) {
     id model = [[self.modelClass alloc] init];
     // TODO: replace setValuesForKeysWithDictionary with client API
