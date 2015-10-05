@@ -163,7 +163,7 @@
                                           options:
                  NSBinarySearchingInsertionIndex | NSBinarySearchingFirstEqual
                                   usingComparator:^NSComparisonResult(id obj1, id obj2) {
-                                      return self.sectionsOrderedAscending? [obj2 compare:obj1] :[obj1 compare:obj2];
+                                      return self.sectionsOrderedAscending? [obj1 compare:obj2] :[obj2 compare:obj1];
                                   }];
                 
                 [self.sectionValues insertObject:sectionKeyValue atIndex:sectionIndex];
@@ -268,7 +268,7 @@
                                   options:
          NSBinarySearchingInsertionIndex | NSBinarySearchingFirstEqual
                           usingComparator:^NSComparisonResult(id obj1, id obj2) {
-                              return self.sectionsOrderedAscending? [obj2 compare:obj1] :[obj1 compare:obj2];
+                              return self.sectionsOrderedAscending? [obj1 compare:obj2] :[obj2 compare:obj1];
                           }];
         
         [self.sectionValues insertObject:newSectionKeyValue atIndex:newSectionIndex];
@@ -285,16 +285,9 @@
     
     if (sectionInserted) {
         if (_initialized) [self.delegate sectionAddedAtSectionIndex:newIndexPath.section];
-    } else
-//        if (startingIndexInSnapshots == NSNotFound || sectionRemoved)
-        {
+    } else {
         if (_initialized) [self.delegate childAdded:snapshot atIndexPath:newIndexPath];
     }
-//        else if (startingIndexInSnapshots == newSortedIndex) {
-//        if (_initialized) [self.delegate childChanged:snapshot atIndexPath:startingIndexPath];
-//    } else {
-//        if (_initialized) [self.delegate childMoved:snapshot fromIndexPath:startingIndexPath toIndexPath:newIndexPath];
-//    }
 }
 
 - (void)initChangeListener {
@@ -375,10 +368,6 @@
          return result;
      }];
     
-    if (rowIndex == NSNotFound) {
-        
-    }
-    
     return [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
 }
 
@@ -401,12 +390,11 @@
                                           usingComparator:^NSComparisonResult(id obj1,
                                                                               id obj2) {
                                               NSComparisonResult result;
-                                              if ([obj1 isKindOfClass:[sectionKeyValue class]]) {
-                                                  result = [obj1 compare:[obj2 valueForKeyPath:sectionKeyPath]];
-                                              } else {
-                                                  result = [[obj1 valueForKeyPath:sectionKeyPath] compare:obj2];
-                                              }
-                                              return result;
+                                              NSNumber * num1 = [obj1 isKindOfClass:[sectionKeyValue class]]? obj1 : [obj1 valueForKeyPath:sectionKeyPath];
+                                              NSNumber * num2 = [obj2 isKindOfClass:[sectionKeyValue class]]? obj2 : [obj2 valueForKeyPath:sectionKeyPath];
+                                              
+                                              result = [num1 compare:num2];
+                                              return self.sectionsOrderedAscending? result : result * -1L;
                                           }];
     if (firstIndex == NSNotFound) {
         return [NSArray array];
@@ -418,12 +406,11 @@
                                          usingComparator:^NSComparisonResult(id obj1,
                                                                              id obj2) {
                                              NSComparisonResult result;
-                                             if ([obj1 isKindOfClass:[sectionKeyValue class]]) {
-                                                 result = [obj1 compare:[obj2 valueForKeyPath:sectionKeyPath]];
-                                             } else {
-                                                 result = [[obj1 valueForKeyPath:sectionKeyPath] compare:obj2];
-                                             }
-                                             return result;
+                                             NSNumber * num1 = [obj1 isKindOfClass:[sectionKeyValue class]]? obj1 : [obj1 valueForKeyPath:sectionKeyPath];
+                                             NSNumber * num2 = [obj2 isKindOfClass:[sectionKeyValue class]]? obj2 : [obj2 valueForKeyPath:sectionKeyPath];
+                                             
+                                             result = [num1 compare:num2];
+                                             return self.sectionsOrderedAscending? result: result * -1L;
                                          }];
     
     NSRange sectionRange = NSMakeRange(firstIndex, lastIndex - firstIndex + 1);
