@@ -123,6 +123,7 @@
             return;
         }
         
+        _initialized = YES;
         if (self.sectionKeyPath) {
             NSUInteger count = self.sectionValues.count;
             
@@ -133,8 +134,6 @@
         } else {
             [self.delegate sectionsAddedAtIndexes:[NSIndexSet indexSetWithIndex:0]];
         }
-        
-        _initialized = YES;
         [self.delegate endUpdates];
     }];
 }

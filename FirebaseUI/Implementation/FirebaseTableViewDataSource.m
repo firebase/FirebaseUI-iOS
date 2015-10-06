@@ -363,7 +363,7 @@
 
 -(void)sectionsAddedAtIndexes:(NSIndexSet *)indexes {
     [self.tableView insertSections:indexes
-                  withRowAnimation:UITableViewRowAnimationAutomatic];
+                  withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)sectionAddedAtSectionIndex:(NSUInteger)section {
