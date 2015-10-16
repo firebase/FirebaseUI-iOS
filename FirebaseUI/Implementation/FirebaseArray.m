@@ -219,14 +219,13 @@
     id newSectionKeyValue;
     
     BOOL sectionRemoved = NO;
+    NSUInteger startingSectionIndex = 0;
+    FDataSnapshot * startingSnapshot;
     
     if (startingIndexInSnapshots != NSNotFound) {
-        FDataSnapshot * startingSnapshot = self.snapshots[startingIndexInSnapshots];
+        startingSnapshot = self.snapshots[startingIndexInSnapshots];
         
         [self.snapshots removeObjectAtIndex:startingIndexInSnapshots];
-        
-        
-        NSUInteger startingSectionIndex = 0;
         
         if (self.sectionKeyPath) {
             startingSectionKeyValue = [startingSnapshot valueForKeyPath:self.sectionKeyPath];
@@ -243,13 +242,6 @@
                 sectionRemoved = YES;
             }
         }
-        
-        
-        if (sectionRemoved) {
-            if (_initialized) [self.delegate sectionRemovedAtSectionIndex:startingSectionIndex];
-        } else {
-            if (_initialized) [self.delegate childRemoved:startingSnapshot atIndexPath:startingIndexPath];
-        }
     }
     
     
@@ -258,7 +250,7 @@
     }
     
     
-    BOOL sectionInserted;
+    BOOL sectionInserted = NO;
     
     if (self.sectionKeyPath && ![self.sectionValues containsObject:newSectionKeyValue]) {
         NSUInteger newSectionIndex =
@@ -282,11 +274,40 @@
     
     NSIndexPath * newIndexPath = [self indexPathOfObject:snapshot];
     
-    if (sectionInserted) {
-        if (_initialized) [self.delegate sectionAddedAtSectionIndex:newIndexPath.section];
-    } else {
-        if (_initialized) [self.delegate childAdded:snapshot atIndexPath:newIndexPath];
+    if (!_initialized) {
+        return;
     }
+    
+    
+    [self.delegate beginUpdates];
+    if ([startingIndexPath compare:newIndexPath] == NSOrderedSame) {
+        if (sectionInserted && sectionRemoved) {
+            [self.delegate sectionRemovedAtSectionIndex:startingSectionIndex];
+            [self.delegate sectionAddedAtSectionIndex:newIndexPath.section];
+        } else if (sectionInserted) {
+            [self.delegate childRemoved:startingSnapshot atIndexPath:startingIndexPath];
+            [self.delegate sectionAddedAtSectionIndex:newIndexPath.section];
+        } else if (sectionRemoved) {
+            [self.delegate sectionRemovedAtSectionIndex:startingSectionIndex];
+            [self.delegate childAdded:snapshot atIndexPath:newIndexPath];
+        } else {
+            [self.delegate childChanged:snapshot atIndexPath:newIndexPath];
+        }
+    } else {
+        if (sectionInserted && sectionRemoved) {
+            [self.delegate sectionRemovedAtSectionIndex:startingSectionIndex];
+            [self.delegate sectionAddedAtSectionIndex:newIndexPath.section];
+        } else if (sectionInserted) {
+            [self.delegate childRemoved:startingSnapshot atIndexPath:startingIndexPath];
+            [self.delegate sectionAddedAtSectionIndex:newIndexPath.section];
+        } else if (sectionRemoved) {
+            [self.delegate sectionRemovedAtSectionIndex:startingSectionIndex];
+            [self.delegate childAdded:snapshot atIndexPath:newIndexPath];
+        } else {
+            [self.delegate childMoved:snapshot fromIndexPath:startingIndexPath toIndexPath:newIndexPath];
+        }
+    }
+    [self.delegate endUpdates];
 }
 
 - (void)initChangeListener {

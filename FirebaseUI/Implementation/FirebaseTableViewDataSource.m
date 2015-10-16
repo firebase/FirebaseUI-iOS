@@ -331,34 +331,26 @@
 #pragma mark FirebaseCollectionDelegate methods
 
 - (void)childAdded:(id)obj atIndexPath:(NSIndexPath *)indexPath {
-  [self.tableView beginUpdates];
   [self.tableView insertRowsAtIndexPaths:@[indexPath]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
-  [self.tableView endUpdates];
 }
 
 - (void)childChanged:(id)obj atIndexPath:(NSIndexPath *)indexPath {
-  [self.tableView beginUpdates];
   [self.tableView reloadRowsAtIndexPaths:@[indexPath]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
-  [self.tableView endUpdates];
 }
 
 - (void)childRemoved:(id)obj atIndexPath:(NSIndexPath *)indexPath {
-  [self.tableView beginUpdates];
   [self.tableView deleteRowsAtIndexPaths:@[indexPath]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
-  [self.tableView endUpdates];
 }
 
 - (void)childMoved:(id)obj
          fromIndexPath:(NSIndexPath *)fromIndexPath
            toIndexPath:(NSIndexPath *)toIndexPath {
-  [self.tableView beginUpdates];
   [self.tableView
       moveRowAtIndexPath:fromIndexPath
              toIndexPath:toIndexPath];
-  [self.tableView endUpdates];
 }
 
 -(void)sectionsAddedAtIndexes:(NSIndexSet *)indexes {
