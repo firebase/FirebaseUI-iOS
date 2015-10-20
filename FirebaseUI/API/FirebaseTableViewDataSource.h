@@ -97,6 +97,171 @@
  * UITableViewCells with
  * FDataSnapshots.
  * @param ref A Firebase reference to bind the datasource to
+ * @param sortDescriptors The sort descriptors by which the array should be ordered.
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @return An instance of FirebaseTableViewDataSource that populates
+ * UITableViewCells with
+ * FDataSnapshots
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                       sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                  view:(__NON_NULL UITableView *)tableView;
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates
+ * UITableViewCells with
+ * FDataSnapshots. Note that this method is used when using prototype cells,
+ * where the cells don't
+ * need to be registered in the class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @return An instance of FirebaseTableViewDataSource that populates
+ * UITableViewCells with
+ * FDataSnapshots
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                       sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+              prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
+                                  view:(__NON_NULL UITableView *)tableView;
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates a custom
+ * subclass of
+ * UITableViewCell with FDataSnapshots.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param sortDescriptors The sort descriptors by which the array should be ordered.
+ * @param cell A subclass of UITableViewCell used to populate the UITableView,
+ * defaults to
+ * UITableViewCell if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @return An instance of FirebaseTableViewDataSource that populates a custom
+ * subclass of
+ * UITableViewCell with FDataSnapshots
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                       sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+                             cellClass:(__NULLABLE Class)cell
+                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                  view:(__NON_NULL UITableView *)tableView;
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates a custom
+ * xib with
+ * FDataSnapshots.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param sortDescriptors The sort descriptors by which the array should be ordered.
+ * @param nibName The name of a xib file to create the layout for a
+ * UITableViewCell
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @return An instance of FirebaseTableViewDataSource that populates a custom
+ * xib with
+ * FDataSnapshots
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                       sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+                              nibNamed:(__NON_NULL NSString *)nibName
+                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                  view:(__NON_NULL UITableView *)tableView;
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates
+ * UITableViewCells with a
+ * custom model class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param sortDescriptors The sort descriptors by which the array should be ordered.
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @return An instance of FirebaseTableViewDataSource that populates
+ * UITableViewCells with a custom
+ * model class
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                       sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+                            modelClass:(__NULLABLE Class)model
+                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                  view:(__NON_NULL UITableView *)tableView;
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates
+ * UITableViewCells with a
+ * custom model class. Note that this method is used when using prototype cells,
+ * where the cells
+ * don't need to be registered in the class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param sortDescriptors The sort descriptors by which the array should be ordered.
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @return An instance of FirebaseTableViewDataSource that populates
+ * UITableViewCells with a custom
+ * model class
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                       sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+                            modelClass:(__NULLABLE Class)model
+              prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
+                                  view:(__NON_NULL UITableView *)tableView;
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates a custom
+ * subclass of
+ * UITableViewCell with a custom model class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param sortDescriptors The sort descriptors by which the array should be ordered.
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param cell A subclass of UITableViewCell used to populate the UITableView,
+ * defaults to
+ * UITableViewCell if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @return An instance of FirebaseTableViewDataSource that populates a custom
+ * subclass of
+ * UITableViewCell with a custom model class
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                       sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+                            modelClass:(__NULLABLE Class)model
+                             cellClass:(__NULLABLE Class)cell
+                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                  view:(__NON_NULL UITableView *)tableView;
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates a custom
+ * xib with a custom
+ * model class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param sortDescriptors The sort descriptors by which the array should be ordered.
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param nibName The name of a xib file to create the layout for a
+ * UITableViewCell
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @return An instance of FirebaseTableViewDataSource that populates a custom
+ * xib with a custom
+ * model class
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                       sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+                            modelClass:(__NULLABLE Class)model
+                              nibNamed:(__NON_NULL NSString *)nibName
+                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                  view:(__NON_NULL UITableView *)tableView;
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates
+ * UITableViewCells with
+ * FDataSnapshots.
+ * @param ref A Firebase reference to bind the datasource to
  * @param identifier A string to use as a CellReuseIdentifier
  * @param tableView An instance of a UITableView to bind to
  * @return An instance of FirebaseTableViewDataSource that populates
@@ -241,6 +406,83 @@
                               nibNamed:(__NON_NULL NSString *)nibName
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
                                   view:(__NON_NULL UITableView *)tableView;
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates a custom
+ * xib with a custom
+ * model class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param predicate The predicate by which the array should be sorted.
+ * @param sortDescriptors The sort descriptors by which the array should be ordered.
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param nibName The name of a xib file to create the layout for a
+ * UITableViewCell
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @return An instance of FirebaseTableViewDataSource that populates a custom
+ * xib with a custom
+ * model class
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                             predicate:(__NULLABLE NSPredicate *)predicate
+                       sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+                            modelClass:(__NULLABLE Class)model
+                              nibNamed:(__NON_NULL NSString *)nibName
+                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                  view:(__NON_NULL UITableView *)tableView;
+
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates
+ * UITableViewCells with a
+ * custom model class. Note that this method is used when using prototype cells,
+ * where the cells
+ * don't need to be registered in the class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param predicate The predicate by which the array should be sorted.
+ * @param sortDescriptors The sort descriptors by which the array should be ordered.
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @return An instance of FirebaseTableViewDataSource that populates
+ * UITableViewCells with a custom
+ * model class
+ */
+-(__NULLABLE instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                            predicate:(__NULLABLE NSPredicate *)predicate
+                      sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+                           modelClass:(__NULLABLE Class)model
+             prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
+                                 view:(__NON_NULL UITableView *)tableView;
+
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates a custom
+ * subclass of
+ * UITableViewCell with a custom model class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param predicate The predicate by which the array should be sorted.
+ * @param sortDescriptors The sort descriptors by which the array should be ordered.
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param cell A subclass of UITableViewCell used to populate the UITableView,
+ * defaults to
+ * UITableViewCell if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @return An instance of FirebaseTableViewDataSource that populates a custom
+ * subclass of
+ * UITableViewCell with a custom model class
+ */
+-(__NULLABLE instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                            predicate:(__NULLABLE NSPredicate *)predicate
+                      sortDescriptors:(__NULLABLE NSArray *)sortDescriptors
+                           modelClass:(__NULLABLE Class)model
+                            cellClass:(__NULLABLE Class)cell
+                  cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                 view:(__NON_NULL UITableView *)tableView;
 
 /**
  * This method populates the fields of a UITableViewCell or subclass given a

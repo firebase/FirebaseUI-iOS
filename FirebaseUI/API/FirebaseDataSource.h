@@ -61,11 +61,13 @@
 /**
  * Pass through of [FirebaseArray objectAtIndex:].
  */
-- (id)objectAtIndex:(NSUInteger)index;
+- (id)objectAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  * Pass through of [FirebaseArray refForIndex:].
  */
-- (Firebase *)refForIndex:(NSUInteger)index;
+- (Firebase *)refForIndexPath:(NSIndexPath *)indexPath;
+
+- (NSString *)sectionTitleForSection:(NSUInteger)section;
 
 @end
