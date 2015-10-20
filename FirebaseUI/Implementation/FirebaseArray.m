@@ -36,15 +36,19 @@
 
 #import "FirebaseArray.h"
 
-@implementation FirebaseArray {
-    BOOL _initStarted;
-    BOOL _initialized;
-    FirebaseHandle _addHandle;
-    FirebaseHandle _changeHandle;
-    FirebaseHandle _removeHandle;
-    FirebaseHandle _moveHandle;
-    FirebaseHandle _valueHandle;
-}
+@interface FirebaseArray ()
+
+@property (nonatomic) BOOL initStarted;
+@property (nonatomic) BOOL initialized;
+@property (nonatomic) FirebaseHandle addHandle;
+@property (nonatomic) FirebaseHandle changeHandle;
+@property (nonatomic) FirebaseHandle removeHandle;
+@property (nonatomic) FirebaseHandle moveHandle;
+@property (nonatomic) FirebaseHandle valueHandle;
+
+@end
+
+@implementation FirebaseArray
 
 #pragma mark -
 #pragma mark Initializer methods
@@ -99,11 +103,11 @@
 #pragma mark Memory management methods
 
 - (void)dealloc {
-    [self.query removeObserverWithHandle:_addHandle];
-    [self.query removeObserverWithHandle:_changeHandle];
-    [self.query removeObserverWithHandle:_removeHandle];
-    [self.query removeObserverWithHandle:_moveHandle];
-    [self.query removeObserverWithHandle:_valueHandle];
+    [self.query removeObserverWithHandle:self.addHandle];
+    [self.query removeObserverWithHandle:self.changeHandle];
+    [self.query removeObserverWithHandle:self.removeHandle];
+    [self.query removeObserverWithHandle:self.moveHandle];
+    [self.query removeObserverWithHandle:self.valueHandle];
 }
 
 #pragma mark -
@@ -118,96 +122,99 @@
 }
 
 - (void)initValueListener {
-    _valueHandle = [self.query observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        if (_initialized) {
+    FirebaseArray * __weak welf = self;
+    welf.valueHandle = [welf.query observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (welf.initialized) {
             return;
         }
         
-        _initialized = YES;
-        if (self.sectionKeyPath) {
-            NSUInteger count = self.sectionValues.count;
+        welf.initialized = YES;
+        if (welf.sectionKeyPath) {
+            NSUInteger count = welf.sectionValues.count;
             
             NSIndexSet * sections = [NSIndexSet
                                      indexSetWithIndexesInRange:NSMakeRange(0, count)];
             
-            [self.delegate sectionsAddedAtIndexes:sections];
+            [welf.delegate sectionsAddedAtIndexes:sections];
         } else {
-            [self.delegate sectionsAddedAtIndexes:[NSIndexSet indexSetWithIndex:0]];
+            [welf.delegate sectionsAddedAtIndexes:[NSIndexSet indexSetWithIndex:0]];
         }
-        [self.delegate endUpdates];
+        [welf.delegate endUpdates];
     }];
 }
 
 - (void)initAddListener {
-    _addHandle = [self.query observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-        if (!_initialized && !_initStarted) {
-            _initStarted = YES;
-            [self.delegate beginUpdates];
+    FirebaseArray * __weak welf = self;
+    welf.addHandle = [welf.query observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        if (!welf.initialized && !welf.initStarted) {
+            welf.initStarted = YES;
+            [welf.delegate beginUpdates];
         }
-        if (self.predicate && ![self.predicate evaluateWithObject:snapshot]) {
+        if (welf.predicate && ![welf.predicate evaluateWithObject:snapshot]) {
             return;
         }
         
-        NSUInteger index = [self insertionIndexForSnapshot:snapshot];
+        NSUInteger index = [welf insertionIndexForSnapshot:snapshot];
         
-        [self.snapshots insertObject:snapshot atIndex:index];
+        [welf.snapshots insertObject:snapshot atIndex:index];
         
-        if (self.sectionKeyPath) {
-            id sectionKeyValue = [snapshot valueForKeyPath:self.sectionKeyPath];
+        if (welf.sectionKeyPath) {
+            id sectionKeyValue = [snapshot valueForKeyPath:welf.sectionKeyPath];
             
-            if (![self.sectionValues containsObject:sectionKeyValue]) {
+            if (![welf.sectionValues containsObject:sectionKeyValue]) {
                 NSUInteger sectionIndex =
-                [self.sectionValues indexOfObject:sectionKeyValue
-                                    inSortedRange:NSMakeRange(0, self.sectionValues.count)
+                [welf.sectionValues indexOfObject:sectionKeyValue
+                                    inSortedRange:NSMakeRange(0, welf.sectionValues.count)
                                           options:
                  NSBinarySearchingInsertionIndex | NSBinarySearchingFirstEqual
                                   usingComparator:^NSComparisonResult(id obj1, id obj2) {
-                                      return self.sectionsOrderedAscending? [obj1 compare:obj2] :[obj2 compare:obj1];
+                                      return welf.sectionsOrderedAscending? [obj1 compare:obj2] :[obj2 compare:obj1];
                                   }];
                 
-                [self.sectionValues insertObject:sectionKeyValue atIndex:sectionIndex];
+                [welf.sectionValues insertObject:sectionKeyValue atIndex:sectionIndex];
                 
-                if (_initialized) [self.delegate sectionAddedAtSectionIndex:sectionIndex];
+                if (welf.initialized) [welf.delegate sectionAddedAtSectionIndex:sectionIndex];
                 
                 return;
             }
         }
         
-        NSIndexPath * indexPath = [self indexPathOfObject:snapshot];
+        NSIndexPath * indexPath = [welf indexPathOfObject:snapshot];
         
-        if (_initialized) [self.delegate childAdded:snapshot atIndexPath:indexPath];
+        if (welf.initialized) [welf.delegate childAdded:snapshot atIndexPath:indexPath];
     }];
 }
 
 - (void)initRemoveListener {
-    _removeHandle = [self.query observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
-        if (!_initialized && !_initStarted) {
-            _initStarted = YES;
-            [self.delegate beginUpdates];
+    FirebaseArray * __weak welf = self;
+    welf.removeHandle = [welf.query observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
+        if (!welf.initialized && !welf.initStarted) {
+            welf.initStarted = YES;
+            [welf.delegate beginUpdates];
         }
-        NSUInteger index = [self indexInSnapshotsForKey:snapshot.key];
+        NSUInteger index = [welf indexInSnapshotsForKey:snapshot.key];
 
         if (index == NSNotFound) {
             return;
         }
         
-        NSIndexPath * indexPath = [self indexPathOfObject:snapshot];
+        NSIndexPath * indexPath = [welf indexPathOfObject:snapshot];
 
-        [self.snapshots removeObjectAtIndex:index];
+        [welf.snapshots removeObjectAtIndex:index];
         
-        if (self.sectionKeyPath && ![self sectionAtIndex:indexPath.section].count) {
-            [self.sectionValues removeObjectAtIndex:indexPath.section];
+        if (welf.sectionKeyPath && ![welf sectionAtIndex:indexPath.section].count) {
+            [welf.sectionValues removeObjectAtIndex:indexPath.section];
             
-            if (_initialized) [self.delegate sectionRemovedAtSectionIndex:indexPath.section];
+            if (welf.initialized) [welf.delegate sectionRemovedAtSectionIndex:indexPath.section];
         } else {
-            if (_initialized) [self.delegate childRemoved:snapshot atIndexPath:indexPath];
+            if (welf.initialized) [welf.delegate childRemoved:snapshot atIndexPath:indexPath];
         }
     }];
 }
 
 - (void)handleChange:(FDataSnapshot *)snapshot {
-    if (!_initialized && !_initStarted) {
-        _initStarted = YES;
+    if (!self.initialized && !self.initStarted) {
+        self.initStarted = YES;
         [self.delegate beginUpdates];
     }
     
@@ -274,7 +281,7 @@
     
     NSIndexPath * newIndexPath = [self indexPathOfObject:snapshot];
     
-    if (!_initialized) {
+    if (!self.initialized) {
         return;
     }
     
@@ -315,14 +322,16 @@
 }
 
 - (void)initChangeListener {
-    _changeHandle = [self.query observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
-        [self handleChange:snapshot];
+    FirebaseArray * __weak welf = self;
+    welf.changeHandle = [welf.query observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
+        [welf handleChange:snapshot];
     }];
 }
 
 - (void)initMoveListener {
-    _moveHandle = [self.query observeEventType:FEventTypeChildMoved withBlock:^(FDataSnapshot *snapshot) {
-        [self handleChange:snapshot];
+    FirebaseArray * __weak welf = self;
+    welf.moveHandle = [welf.query observeEventType:FEventTypeChildMoved withBlock:^(FDataSnapshot *snapshot) {
+        [welf handleChange:snapshot];
     }];
 }
 
@@ -494,7 +503,7 @@
 }
 
 -(NSUInteger)numberOfSections {
-    if (!_initialized) {
+    if (!self.initialized) {
         return 0;
     }
     if (self.sectionKeyPath) {
