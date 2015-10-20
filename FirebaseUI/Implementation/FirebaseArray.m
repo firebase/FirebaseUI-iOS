@@ -252,7 +252,7 @@
     
     BOOL sectionInserted = NO;
     
-    if (self.sectionKeyPath && ![self.sectionValues containsObject:newSectionKeyValue]) {
+    if (newSectionKeyValue && self.sectionKeyPath && ![self.sectionValues containsObject:newSectionKeyValue]) {
         NSUInteger newSectionIndex =
         [self.sectionValues indexOfObject:newSectionKeyValue
                             inSortedRange:NSMakeRange(0, self.sectionValues.count)
@@ -280,7 +280,7 @@
     
     
     [self.delegate beginUpdates];
-    if ([startingIndexPath compare:newIndexPath] == NSOrderedSame) {
+    if (startingIndexPath && newIndexPath && [startingIndexPath compare:newIndexPath] == NSOrderedSame) {
         if (sectionInserted && sectionRemoved) {
             [self.delegate sectionRemovedAtSectionIndex:startingSectionIndex];
             [self.delegate sectionAddedAtSectionIndex:newIndexPath.section];
@@ -293,7 +293,7 @@
         } else {
             [self.delegate childChanged:snapshot atIndexPath:newIndexPath];
         }
-    } else {
+    } else if (startingIndexPath && newIndexPath) {
         if (sectionInserted && sectionRemoved) {
             [self.delegate sectionRemovedAtSectionIndex:startingSectionIndex];
             [self.delegate sectionAddedAtSectionIndex:newIndexPath.section];
@@ -306,6 +306,10 @@
         } else {
             [self.delegate childMoved:snapshot fromIndexPath:startingIndexPath toIndexPath:newIndexPath];
         }
+    } else if (newIndexPath) {
+        [self.delegate childAdded:snapshot atIndexPath:newIndexPath];
+    } else if (startingIndexPath) {
+        [self.delegate childRemoved:snapshot atIndexPath:startingIndexPath];
     }
     [self.delegate endUpdates];
 }
