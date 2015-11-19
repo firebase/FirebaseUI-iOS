@@ -7,11 +7,14 @@ This is a super simple FirebaseUI Chat demo. It shows:
   1. Using custom XIBs in FirebaseUI to achieve a custom look and feel
   1. Using a model object to get strongly typed objects from Firebase
   1. Using a custom `FirebaseTableViewDataSource` to add deletion
+  1. Using `FirebaseLoginViewController` to add authentication
 
-In order to install and run, simply:
+In order to install and run:
 ``` bash
 git clone https://github.com/firebase/FirebaseUI-iOS.git
 cd FirebaseUI-iOS/examples/FirebaseUI
 pod install
 open FirebaseUIChat.xcworkspace
 ```
+Once you've opened the workspace, go into `Supporting Files/Info.plist` and either fill in the social provider information currently commented out, or delete extra providers you're not interested in. For providers you choose to keep, enable them in your Firebase Dashboard according to the [user authentication docs](https://www.firebase.com/docs/ios/guide/user-auth.html). In `ViewController.m` make sure to only enable providers that you've configured properly.
+

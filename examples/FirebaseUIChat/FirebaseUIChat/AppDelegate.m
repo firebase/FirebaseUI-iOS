@@ -16,8 +16,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    return YES;
+  [super application:application didFinishLaunchingWithOptions:launchOptions];
+  // Override point for customization after application launch.
+  
+  return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -40,6 +42,13 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nonnull id)annotation {
+  [super application:app openURL:url sourceApplication:sourceApplication annotation:annotation];
+  // Override point for customization.
+  
+  return YES;
 }
 
 @end

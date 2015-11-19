@@ -27,10 +27,8 @@
   NSString *reversedClientId =[plist objectForKey:@"REVERSED_CLIENT_ID"];
   BOOL clientIdExists = [plist objectForKey:@"CLIENT_ID"] != nil;
   BOOL reversedClientIdExists = reversedClientId != nil;
-  NSString *urlString = [NSString stringWithFormat:@"%@://", reversedClientId];
-  BOOL canOpenGoogle = YES; //[[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlString]];
   
-  if (!(clientIdExists && reversedClientIdExists && canOpenGoogle)) {
+  if (!(clientIdExists && reversedClientIdExists)) {
     [NSException raise:NSInternalInconsistencyException format:@"Please add `GoogleService-Info.plist` to `Supporting Files` and\nURL types > Url Schemes in `Supporting Files/Info.plist` according to https://developers.google.com/identity/sign-in/ios/start-integrating"];
   }
 }

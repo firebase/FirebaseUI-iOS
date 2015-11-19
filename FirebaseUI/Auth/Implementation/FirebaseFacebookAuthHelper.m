@@ -48,9 +48,8 @@
 - (void)configureProvider {
   NSString *facebookAppId = [[NSBundle mainBundle] objectForInfoDictionaryKey:kFacebookAppId];
   NSString *facebookDisplayName = [[NSBundle mainBundle] objectForInfoDictionaryKey:kFacebookDisplayName];
-  BOOL canOpenFacebook = YES; //[[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"fb%@://", facebookAppId]]];
   
-  if (facebookAppId == nil || facebookDisplayName == nil || !canOpenFacebook) {
+  if (!(facebookAppId && facebookDisplayName)) {
     [NSException raise:NSInternalInconsistencyException format:@"Please set FacebookAppID, FacebookDisplayName, and\nURL types > Url Schemes in `Supporting Files/Info.plist` according to https://developers.facebook.com/docs/ios/getting-started"];
   }
   

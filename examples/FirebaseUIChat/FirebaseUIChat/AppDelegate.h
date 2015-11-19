@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FirebaseUI/FirebaseUI.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-
+@interface AppDelegate : FirebaseAppDelegate
 
 @end
 

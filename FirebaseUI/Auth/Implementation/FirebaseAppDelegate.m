@@ -36,7 +36,6 @@
   // Configure Google
   NSError* configureError;
   [[GGLContext sharedInstance] configureWithError: &configureError];
-  NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
 
   // Configure Facebook
   [[FBSDKApplicationDelegate sharedInstance] application:application

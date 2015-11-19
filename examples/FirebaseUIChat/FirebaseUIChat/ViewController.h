@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) Firebase *ref;
 @property (strong, nonatomic) FirebaseTableViewDataSource *dataSource;
+@property (strong, nonatomic) FirebaseLoginViewController *loginViewController;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *inputTextField;
