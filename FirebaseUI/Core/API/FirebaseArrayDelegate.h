@@ -82,8 +82,6 @@
  * @param fromIndex The index the child is being moved from
  * @param toIndex The index the child is being moved to
  */
-- (void)childMoved:(id)object
-         fromIndex:(NSUInteger)fromIndex
-           toIndex:(NSUInteger)toIndex;
+- (void)childMoved:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
 @end

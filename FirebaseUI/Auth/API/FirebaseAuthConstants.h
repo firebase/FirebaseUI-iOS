@@ -66,4 +66,3 @@ FOUNDATION_EXPORT CGFloat const kSeparatorHeight;
 FOUNDATION_EXPORT CGFloat const kSeparatorSpace;
 
 #endif /* FirebaseAuthConstants_h */
-

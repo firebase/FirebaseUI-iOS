@@ -56,8 +56,9 @@
 
 @optional
 /**
- * Method that fires when authentication fails due to an error on the provider side. 
- * This could include Firebase authentication (provider incorrectly set up in the Firebase Dashboard)
+ * Method that fires when authentication fails due to an error on the provider side.
+ * This could include Firebase authentication (provider incorrectly set up in the Firebase
+ * Dashboard)
  * or issues with the provider itself (provider is down, incorrectly provisioned, etc.).
  * @param helper The helper
  * @param error

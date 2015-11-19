@@ -41,12 +41,12 @@
 @interface FirebasePasswordAuthHelper : FirebaseAuthHelper
 
 /**
- * Create an instance of FirebasePasswordAuthHelper, which allows for simple authentication to Firebase via Twitter
+ * Create an instance of FirebasePasswordAuthHelper, which allows for simple authentication to
+ * Firebase via Twitter
  * @param email A string containing a valid email address
  * @param password A string containing the password for the email user
  * @return void
  */
 - (void)loginWithEmail:(NSString *)email andPassword:(NSString *)password;
-
 
 @end

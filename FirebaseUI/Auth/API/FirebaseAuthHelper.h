@@ -46,24 +46,24 @@
 /**
  * The Firebase reference to authenticate against
  */
-@property (strong, nonatomic) Firebase *ref;
+@property(strong, nonatomic) Firebase *ref;
 
 /**
  * The Firebase authentication data for the currently authenticated user
  */
-@property (strong, nonatomic) FAuthData *authData;
+@property(strong, nonatomic) FAuthData *authData;
 
 /**
  * A string which represents the chosen authentication provider.
  * See FAuthenticationConstants.h for a full list.
  */
-@property (strong, nonatomic) NSString *provider;
+@property(strong, nonatomic) NSString *provider;
 
 /**
  * FirebaseAuthDelegate delegate to handle all login, logout, and error events
  * from both authentication providers and Firebase
  */
-@property (weak, nonatomic) id<FirebaseAuthDelegate> delegate;
+@property(weak, nonatomic) id<FirebaseAuthDelegate> delegate;
 
 /**
  * Create an instance of FirebaseAuthHelper, which allows for simple authentication to Firebase
@@ -90,7 +90,8 @@
 - (void)logout;
 
 /**
- * Configure the current authentication provider (for instance, by retrieving keys, testing URL schemes, etc.)
+ * Configure the current authentication provider (for instance, by retrieving keys, testing URL
+ * schemes, etc.)
  * Note: you must override this method, as the default implementation raises an exception.
  * @return void
  */

@@ -35,7 +35,8 @@
 #import "FirebaseAuthConstants.h"
 
 /**
- * A UIButton factory that produces appropriately skinned identity provider buttons with a provider field
+ * A UIButton factory that produces appropriately skinned identity provider buttons with a provider
+ * field
  * that is used by FirebaseLoginViewController as well as potentially by other custom login UI.
  */
 @interface FirebaseLoginButton : UIButton
@@ -43,13 +44,13 @@
 /**
  * A string representing a valid identity provider (see FirebaseAuthConstants.h for a full list).
  */
-@property (strong, nonatomic) NSString *provider;
+@property(strong, nonatomic) NSString *provider;
 
 /**
  * Creates a button styled for the appropriate provider.
  * @param provider A string representing the desired identity provider to log in with
  * @return FirebaseLoginButton
  */
--(instancetype)initWithProvider:(NSString *)provider;
+- (instancetype)initWithProvider:(NSString *)provider;
 
 @end

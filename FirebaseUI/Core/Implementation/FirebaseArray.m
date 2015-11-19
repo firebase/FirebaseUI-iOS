@@ -68,8 +68,7 @@
 
 - (void)initListeners {
   [self.query observeEventType:FEventTypeChildAdded
-      andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot,
-                                       NSString *previousChildKey) {
+      andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *previousChildKey) {
         NSUInteger index = [self indexForKey:previousChildKey] + 1;
 
         [self.snapshots insertObject:snapshot atIndex:index];
@@ -78,8 +77,7 @@
       }];
 
   [self.query observeEventType:FEventTypeChildChanged
-      andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot,
-                                       NSString *previousChildKey) {
+      andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *previousChildKey) {
         NSUInteger index = [self indexForKey:snapshot.key];
 
         [self.snapshots replaceObjectAtIndex:index withObject:snapshot];
@@ -97,8 +95,7 @@
                      }];
 
   [self.query observeEventType:FEventTypeChildMoved
-      andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot,
-                                       NSString *previousChildKey) {
+      andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *previousChildKey) {
         NSUInteger fromIndex = [self indexForKey:snapshot.key];
         [self.snapshots removeObjectAtIndex:fromIndex];
 
@@ -113,15 +110,13 @@
   if (!key) return -1;
 
   for (NSUInteger index = 0; index < [self.snapshots count]; index++) {
-    if ([key isEqualToString:[(FDataSnapshot *)[self.snapshots
-                                 objectAtIndex:index] key]]) {
+    if ([key isEqualToString:[(FDataSnapshot *)[self.snapshots objectAtIndex:index] key]]) {
       return index;
     }
   }
 
   NSString *errorReason =
-      [NSString stringWithFormat:@"Key \"%@\" not found in FirebaseArray %@",
-                                 key, self.snapshots];
+      [NSString stringWithFormat:@"Key \"%@\" not found in FirebaseArray %@", key, self.snapshots];
   @throw [NSException exceptionWithName:@"FirebaseArrayKeyNotFoundException"
                                  reason:errorReason
                                userInfo:@{

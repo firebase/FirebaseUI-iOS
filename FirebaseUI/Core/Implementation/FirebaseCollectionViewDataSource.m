@@ -155,8 +155,7 @@
     };
 
     UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
-    [self.collectionView registerNib:nib
-          forCellWithReuseIdentifier:self.reuseIdentifier];
+    [self.collectionView registerNib:nib forCellWithReuseIdentifier:self.reuseIdentifier];
   }
   return self;
 }
@@ -165,40 +164,32 @@
 #pragma mark FirebaseCollectionDelegate methods
 
 - (void)childAdded:(id)obj atIndex:(NSUInteger)index {
-  [self.collectionView insertItemsAtIndexPaths:@[
-    [NSIndexPath indexPathForItem:index inSection:0]
-  ]];
+  [self.collectionView
+      insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
 - (void)childChanged:(id)obj atIndex:(NSUInteger)index {
-  [self.collectionView reloadItemsAtIndexPaths:@[
-    [NSIndexPath indexPathForRow:index inSection:0]
-  ]];
+  [self.collectionView
+      reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]];
 }
 
 - (void)childRemoved:(id)obj atIndex:(NSUInteger)index {
-  [self.collectionView deleteItemsAtIndexPaths:@[
-    [NSIndexPath indexPathForRow:index inSection:0]
-  ]];
+  [self.collectionView
+      deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]];
 }
 
-- (void)childMoved:(id)obj
-         fromIndex:(NSUInteger)fromIndex
-           toIndex:(NSUInteger)toIndex {
-  [self.collectionView
-      moveItemAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
-              toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
+- (void)childMoved:(id)obj fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+  [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
+                               toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
 }
 
 #pragma mark -
 #pragma mark UICollectionViewDataSource methods
 
-- (nonnull UICollectionViewCell *)
-        collectionView:(nonnull UICollectionView *)collectionView
-cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-  id cell = [self.collectionView
-      dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier
-                                forIndexPath:indexPath];
+- (nonnull UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView
+                          cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+  id cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier
+                                                           forIndexPath:indexPath];
 
   FDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
   if (![self.modelClass isSubclassOfClass:[FDataSnapshot class]]) {
@@ -214,8 +205,7 @@ cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
   return cell;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:
-    (nonnull UICollectionView *)collectionView {
+- (NSInteger)numberOfSectionsInCollectionView:(nonnull UICollectionView *)collectionView {
   return 1;
 }
 

@@ -34,8 +34,7 @@
 
 @implementation FirebaseLoginButton
 
-
--(instancetype)initWithProvider:(NSString *)provider {
+- (instancetype)initWithProvider:(NSString *)provider {
   self = [super initWithFrame:CGRectZero];
   if (self) {
     self.provider = provider;
@@ -48,13 +47,25 @@
 
 - (UIColor *)backgroundColorForProvider:(NSString *)provider {
   if ([provider isEqualToString:kGoogleAuthProvider]) {
-    return [UIColor colorWithRed:221.0f/255.0f green:75.0f/255.0f blue:57.0f/255.0f alpha:255.0f/255.0f];
+    return [UIColor colorWithRed:221.0f / 255.0f
+                           green:75.0f / 255.0f
+                            blue:57.0f / 255.0f
+                           alpha:255.0f / 255.0f];
   } else if ([provider isEqualToString:kFacebookAuthProvider]) {
-    return [UIColor colorWithRed:59.0f/255.0f green:89.0f/255.0f blue:152.0f/255.0f alpha:255.0f/255.0f];
+    return [UIColor colorWithRed:59.0f / 255.0f
+                           green:89.0f / 255.0f
+                            blue:152.0f / 255.0f
+                           alpha:255.0f / 255.0f];
   } else if ([provider isEqualToString:kTwitterAuthProvider]) {
-    return [UIColor colorWithRed:0.0f/255.0f green:172.0f/255.0f blue:237.0f/255.0f alpha:255.0f/255.0f];
+    return [UIColor colorWithRed:0.0f / 255.0f
+                           green:172.0f / 255.0f
+                            blue:237.0f / 255.0f
+                           alpha:255.0f / 255.0f];
   } else if ([provider isEqualToString:kPasswordAuthProvider]) {
-    return [UIColor colorWithRed:22.0f/255.0f green:150.0f/255.0f blue:243.0f/255.0f alpha:255.0f/255.0f];
+    return [UIColor colorWithRed:22.0f / 255.0f
+                           green:150.0f / 255.0f
+                            blue:243.0f / 255.0f
+                           alpha:255.0f / 255.0f];
   } else {
     return [UIColor blackColor];
   }

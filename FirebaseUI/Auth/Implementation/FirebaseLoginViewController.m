@@ -51,10 +51,14 @@
   [super viewDidLoad];
 
   // Add cancel button
-  UIImage *image = [[UIImage imageNamed:@"ic_clear_18pt"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  UIImage *image = [[UIImage imageNamed:@"ic_clear_18pt"]
+      imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [self.cancelButton setImage:image forState:UIControlStateNormal];
-  self.cancelButton.imageView.tintColor = [UIColor colorWithRed:158.0f/255.0f green:158.0f/255.0f blue:158.0f/255.0f alpha:1.0f];
-  [self.cancelButton addTarget:self action:@selector(dismissViewController) forControlEvents:UIControlEventTouchUpInside];
+  self.cancelButton.imageView.tintColor =
+      [UIColor colorWithRed:158.0f / 255.0f green:158.0f / 255.0f blue:158.0f / 255.0f alpha:1.0f];
+  [self.cancelButton addTarget:self
+                        action:@selector(dismissViewController)
+              forControlEvents:UIControlEventTouchUpInside];
 
   // If we're already logged in, cancel this
   if (_selectedAuthHelper) {
@@ -62,20 +66,28 @@
   }
 
   if (self.passwordAuthHelper == nil && [_socialProviders count] == 0) {
-    [self dismissViewController]; // Or throw an exception--you need to have at least one provider
+    [self dismissViewController];  // Or throw an exception--you need to have at least one provider
   }
 
   // Populate email/password view
   if (self.passwordAuthHelper != nil) {
-    FirebaseLoginButton *emailLoginButton = [[FirebaseLoginButton alloc] initWithProvider:kPasswordAuthProvider];
-    CGRect buttonFrame = CGRectMake(0, 2 * kTextFieldHeight + 2 * kTextFieldSpace, kButtonWidth, kButtonHeight);
+    FirebaseLoginButton *emailLoginButton =
+        [[FirebaseLoginButton alloc] initWithProvider:kPasswordAuthProvider];
+    CGRect buttonFrame =
+        CGRectMake(0, 2 * kTextFieldHeight + 2 * kTextFieldSpace, kButtonWidth, kButtonHeight);
     emailLoginButton.frame = buttonFrame;
-    [emailLoginButton addTarget:self action:@selector(loginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [emailLoginButton addTarget:self
+                         action:@selector(loginButtonPressed:)
+               forControlEvents:UIControlEventTouchUpInside];
     [self.emailPasswordView addSubview:emailLoginButton];
   } else {
-    [self.socialView setFrame:CGRectMake(self.emailPasswordView.frame.origin.x, self.emailPasswordView.frame.origin.y, self.socialView.frame.size.width, self.socialView.frame.size.height)];
+    [self.socialView
+        setFrame:CGRectMake(self.emailPasswordView.frame.origin.x,
+                            self.emailPasswordView.frame.origin.y, self.socialView.frame.size.width,
+                            self.socialView.frame.size.height)];
     [self.emailPasswordView removeFromSuperview];
-    self.totalHeightConstraint.constant -= (2 * kTextFieldHeight + 2 * kTextFieldSpace + 1 * kButtonHeight);
+    self.totalHeightConstraint.constant -=
+        (2 * kTextFieldHeight + 2 * kTextFieldSpace + 1 * kButtonHeight);
   }
 
   // Populate social view
@@ -87,9 +99,12 @@
     // Add buttons to social view
     CGRect buttonFrame = CGRectMake(0, 0, kButtonWidth, kButtonHeight);
     for (FirebaseAuthHelper *helper in _socialProviders) {
-      FirebaseLoginButton *loginButton = [[FirebaseLoginButton alloc] initWithProvider:helper.provider];
+      FirebaseLoginButton *loginButton =
+          [[FirebaseLoginButton alloc] initWithProvider:helper.provider];
       loginButton.frame = buttonFrame;
-      [loginButton addTarget:self action:@selector(loginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+      [loginButton addTarget:self
+                      action:@selector(loginButtonPressed:)
+            forControlEvents:UIControlEventTouchUpInside];
       [self.socialView addSubview:loginButton];
       buttonFrame.origin.y += kButtonHeight + kButtonSpace;
     }
@@ -97,7 +112,8 @@
     // Size social view and login view appropriately
     CGFloat socialViewHeight = numProviders * kButtonHeight + (numProviders - 1) * kButtonSpace;
     self.socialHeightConstraint.constant = socialViewHeight;
-    self.totalHeightConstraint.constant -= (3 * kButtonHeight + 2 * kButtonSpace - socialViewHeight);
+    self.totalHeightConstraint.constant -=
+        (3 * kButtonHeight + 2 * kButtonSpace - socialViewHeight);
   }
 
   // Handle separator
@@ -112,22 +128,27 @@
 - (instancetype)enableProvider:(NSString *)provider {
   if ([provider isEqualToString:kGoogleAuthProvider]) {
     if (!self.googleAuthHelper) {
-      self.googleAuthHelper = [[FirebaseGoogleAuthHelper alloc] initWithRef:self.ref authDelegate:self uiDelegate:self];
+      self.googleAuthHelper =
+          [[FirebaseGoogleAuthHelper alloc] initWithRef:self.ref authDelegate:self uiDelegate:self];
       [_socialProviders addObject:self.googleAuthHelper];
     }
   } else if ([provider isEqualToString:kFacebookAuthProvider]) {
     if (!self.facebookAuthHelper) {
-      self.facebookAuthHelper = [[FirebaseFacebookAuthHelper alloc] initWithRef:self.ref authDelegate:self];
+      self.facebookAuthHelper =
+          [[FirebaseFacebookAuthHelper alloc] initWithRef:self.ref authDelegate:self];
       [_socialProviders addObject:self.facebookAuthHelper];
     }
   } else if ([provider isEqualToString:kTwitterAuthProvider]) {
     if (!self.twitterAuthHelper) {
-      self.twitterAuthHelper = [[FirebaseTwitterAuthHelper alloc] initWithRef:self.ref authDelegate:self twitterDelegate:self];
+      self.twitterAuthHelper = [[FirebaseTwitterAuthHelper alloc] initWithRef:self.ref
+                                                                 authDelegate:self
+                                                              twitterDelegate:self];
       [_socialProviders addObject:self.twitterAuthHelper];
     }
   } else if ([provider isEqualToString:kPasswordAuthProvider]) {
     if (!self.passwordAuthHelper) {
-      self.passwordAuthHelper = [[FirebasePasswordAuthHelper alloc] initWithRef:self.ref authDelegate:self];
+      self.passwordAuthHelper =
+          [[FirebasePasswordAuthHelper alloc] initWithRef:self.ref authDelegate:self];
     }
   }
   return self;
@@ -176,19 +197,30 @@
 }
 
 - (void)authHelper:(id)helper onProviderError:(NSError *)error {
-  UIAlertController *providerErrorController = [UIAlertController alertControllerWithTitle:@"Provider error!" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-  [providerErrorController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    self.passwordTextField.text = @"";
-  }]];
+  UIAlertController *providerErrorController =
+      [UIAlertController alertControllerWithTitle:@"Provider error!"
+                                          message:error.localizedDescription
+                                   preferredStyle:UIAlertControllerStyleAlert];
+  [providerErrorController
+      addAction:[UIAlertAction actionWithTitle:@"Ok"
+                                         style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction *_Nonnull action) {
+                                         self.passwordTextField.text = @"";
+                                       }]];
 
   [self presentViewController:providerErrorController animated:YES completion:nil];
 }
 
 - (void)authHelper:(id)helper onUserError:(NSError *)error {
-  UIAlertController *userErrorController = [UIAlertController alertControllerWithTitle:@"User error!" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-  [userErrorController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    self.passwordTextField.text = @"";
-  }]];
+  UIAlertController *userErrorController =
+      [UIAlertController alertControllerWithTitle:@"User error!"
+                                          message:error.localizedDescription
+                                   preferredStyle:UIAlertControllerStyleAlert];
+  [userErrorController addAction:[UIAlertAction actionWithTitle:@"Ok"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *_Nonnull action) {
+                                                          self.passwordTextField.text = @"";
+                                                        }]];
 
   [self presentViewController:userErrorController animated:YES completion:nil];
 }
@@ -201,20 +233,32 @@
 #pragma mark Twitter Auth Delegate methods
 
 - (void)createTwitterAccount {
-  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.twitter.com/signup"]];
+  [[UIApplication sharedApplication]
+      openURL:[NSURL URLWithString:@"https://www.twitter.com/signup"]];
 }
 
 - (void)selectTwitterAccount:(NSArray *)accounts {
-  UIAlertController *accountSelectController = [UIAlertController alertControllerWithTitle:@"Select Twitter Account" message:@"Please select which Twitter account you would like to sign in with." preferredStyle:UIAlertControllerStyleActionSheet];
+  UIAlertController *accountSelectController = [UIAlertController
+      alertControllerWithTitle:@"Select Twitter Account"
+                       message:
+                           @"Please select which Twitter account you would like to sign in with."
+                preferredStyle:UIAlertControllerStyleActionSheet];
 
-  [accounts enumerateObjectsUsingBlock:^(ACAccount *account, NSUInteger index, BOOL * _Nonnull stop) {
-    UIAlertAction *addAccountAction = [UIAlertAction actionWithTitle:account.username style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-      [self.twitterAuthHelper loginWithAccount:account];
-    }];
-    [accountSelectController addAction:addAccountAction];
-  }];
+  [accounts
+      enumerateObjectsUsingBlock:^(ACAccount *account, NSUInteger index, BOOL *_Nonnull stop) {
+        UIAlertAction *addAccountAction =
+            [UIAlertAction actionWithTitle:account.username
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *_Nonnull action) {
+                                     [self.twitterAuthHelper loginWithAccount:account];
+                                   }];
+        [accountSelectController addAction:addAccountAction];
+      }];
 
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                         style:UIAlertActionStyleCancel
+                                                       handler:^(UIAlertAction *_Nonnull action){
+                                                       }];
   [accountSelectController addAction:cancelAction];
 
   [self presentViewController:accountSelectController animated:YES completion:nil];

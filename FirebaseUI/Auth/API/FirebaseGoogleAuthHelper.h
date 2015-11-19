@@ -40,15 +40,18 @@
  * A helper class that authenticates a user with Google
  * and uses the credentials to authenticate a Firebase reference
  */
-@interface FirebaseGoogleAuthHelper : FirebaseAuthHelper <GIDSignInDelegate, GIDSignInUIDelegate>
+@interface FirebaseGoogleAuthHelper : FirebaseAuthHelper<GIDSignInDelegate, GIDSignInUIDelegate>
 
 /**
- * Create an instance of FirebaseGoogleAuthHelper, which allows for simple authentication to Firebase via Gooogle
+ * Create an instance of FirebaseGoogleAuthHelper, which allows for simple authentication to
+ * Firebase via Gooogle
  * @param ref The Firebase reference to use for authentication
  * @param authDelegate A class that implements the FirebaseAuthDelegate protocol
  * @param uiDelegate A UIViewController subclass that implements the GIDSignInUIDelegate protocol
  * @return FirebaseGoogleAuthHelper
  */
-- (instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate uiDelegate:(UIViewController<GIDSignInUIDelegate> *)uiDelegate;
+- (instancetype)initWithRef:(Firebase *)ref
+               authDelegate:(id<FirebaseAuthDelegate>)authDelegate
+                 uiDelegate:(UIViewController<GIDSignInUIDelegate> *)uiDelegate;
 
 @end

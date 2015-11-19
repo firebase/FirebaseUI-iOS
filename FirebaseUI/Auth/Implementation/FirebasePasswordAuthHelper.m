@@ -34,8 +34,7 @@
 
 @implementation FirebasePasswordAuthHelper
 
-
--(instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate {
+- (instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate {
   self = [super initWithRef:ref authDelegate:authDelegate];
   if (self) {
     self.provider = kPasswordAuthProvider;
@@ -44,11 +43,13 @@
 }
 
 - (void)loginWithEmail:(NSString *)email andPassword:(NSString *)password {
-  [self.ref authUser:email password:password withCompletionBlock:^(NSError *error, FAuthData *authData) {
-    if (error) {
-      [self handleError:error];
-    }
-  }];
+  [self.ref authUser:email
+                 password:password
+      withCompletionBlock:^(NSError *error, FAuthData *authData) {
+        if (error) {
+          [self handleError:error];
+        }
+      }];
 }
 
 - (void)logout {

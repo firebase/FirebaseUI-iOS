@@ -45,18 +45,22 @@
 @interface FirebaseTwitterAuthHelper : FirebaseAuthHelper
 
 /**
- * Twitter delegate object to handle [TwitterAuthDelegate createTwitterAccount:] and [TwitterAuthDelegate selectTwitterAccount:] calls
+ * Twitter delegate object to handle [TwitterAuthDelegate createTwitterAccount:] and
+ * [TwitterAuthDelegate selectTwitterAccount:] calls
  */
-@property (weak, nonatomic) id<TwitterAuthDelegate> twitterDelegate;
+@property(weak, nonatomic) id<TwitterAuthDelegate> twitterDelegate;
 
 /**
- * Create an instance of FirebaseTwitterAuthHelper, which allows for simple authentication to Firebase via Twitter
+ * Create an instance of FirebaseTwitterAuthHelper, which allows for simple authentication to
+ * Firebase via Twitter
  * @param ref The Firebase reference to use for authentication
  * @param authDelegate A class that implements the FirebaseAuthDelegate protocol
  * @param twitterDelegate A class that implements the TwitterAuthDelegate protocol
  * @return FirebaseTwitterAuthHelper
  */
-- (instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate twitterDelegate:(id<TwitterAuthDelegate>)twitterDelegate;
+- (instancetype)initWithRef:(Firebase *)ref
+               authDelegate:(id<FirebaseAuthDelegate>)authDelegate
+            twitterDelegate:(id<TwitterAuthDelegate>)twitterDelegate;
 
 /**
  * Given an ACAccount authenticate the user against the Firebase database
@@ -65,6 +69,5 @@
  * @return void
  */
 - (void)loginWithAccount:(ACAccount *)account;
-
 
 @end

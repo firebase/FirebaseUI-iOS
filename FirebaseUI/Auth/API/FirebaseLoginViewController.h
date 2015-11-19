@@ -47,65 +47,67 @@
 /**
  * FirebaseLoginViewController is a subclass of UIViewController that provides a
  * set of helper methods for Firebase authentication providers. FirebaseLoginViewController
- * also provides a premade UI which handles login and logout with arbitrary providers, as well as error handling.
+ * also provides a premade UI which handles login and logout with arbitrary providers, as well as
+ * error handling.
  * This also serves as a template for developers interested in developing custom login UI.
  */
-@interface FirebaseLoginViewController : UIViewController<FirebaseAuthDelegate, TwitterAuthDelegate, GIDSignInUIDelegate>
+@interface FirebaseLoginViewController
+    : UIViewController<FirebaseAuthDelegate, TwitterAuthDelegate, GIDSignInUIDelegate>
 
 /**
  * Container view for login activity which wraps the header text and cancel button.
  */
-@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property(weak, nonatomic) IBOutlet UIView *headerView;
 
 /**
  * Header text, defaults to "Please Sign In"
  */
-@property (weak, nonatomic) IBOutlet UILabel *headerText;
+@property(weak, nonatomic) IBOutlet UILabel *headerText;
 
 /**
  * Cancel button, defaults to Grey 500 material cancel image.
  */
-@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property(weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 /**
  * Container view for email and password textfields as well as the email/password login button.
  */
-@property (weak, nonatomic) IBOutlet UIView *emailPasswordView;
+@property(weak, nonatomic) IBOutlet UIView *emailPasswordView;
 
 /**
  * Email text field.
  */
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property(weak, nonatomic) IBOutlet UITextField *emailTextField;
 
 /**
  * Password text field.
  */
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property(weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
 /**
  *Container for ------or------ line.
  */
-@property (weak, nonatomic) IBOutlet UIView *separatorView;
+@property(weak, nonatomic) IBOutlet UIView *separatorView;
 
 /**
  * Container view for social provider login button.
  */
-@property (weak, nonatomic) IBOutlet UIView *socialView;
+@property(weak, nonatomic) IBOutlet UIView *socialView;
 
 /**
  * Container view for full login UI.
  */
-@property (weak, nonatomic) IBOutlet UIView *loginView;
+@property(weak, nonatomic) IBOutlet UIView *loginView;
 
 /**
  * Height constraint for social view.
  */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *socialHeightConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *socialHeightConstraint;
 
 /**
  * Height constraint for login view view.
  */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *totalHeightConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *totalHeightConstraint;
 
 /**
  * The Firebase database reference which to authenticate against.
@@ -141,7 +143,8 @@
 @property(strong, nonatomic) FirebasePasswordAuthHelper *passwordAuthHelper;
 
 /**
- * Create an instance of FirebaseLoginViewController, which allows for easy authentication to Firebase
+ * Create an instance of FirebaseLoginViewController, which allows for easy authentication to
+ * Firebase
  * via a number of identity providers such as Email/Password, Google, Facebook, and Twitter.
  * @param ref The Firebase reference to use for authentication
  * @return FirebaseLoginViewController
@@ -156,7 +159,8 @@
 - (instancetype)enableProvider:(NSString *)provider;
 
 /**
- * Logs the currently authenticated user out of both Firebase and the currently logged in identity provider (if any).
+ * Logs the currently authenticated user out of both Firebase and the currently logged in identity
+ * provider (if any).
  * @return void
  */
 - (void)logout;

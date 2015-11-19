@@ -31,7 +31,7 @@
 // clang-format on
 
 /**
- * A protocol to help Twitter authentication deal with cases of zero 
+ * A protocol to help Twitter authentication deal with cases of zero
  * or more than one Twitter accounts on a given device.
  */
 @protocol TwitterAuthDelegate<NSObject>
