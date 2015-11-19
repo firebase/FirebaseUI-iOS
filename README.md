@@ -1,6 +1,8 @@
 # FirebaseUI for iOS — UI Bindings for Firebase
 
-FirebaseUI is an open-source library for iOS that allows you to quickly connect common UI elements to the Firebase [Firebase](https://www.firebase.com/?utm_source=firebaseui-ios) database for data storage, allowing views to be updated in realtime as they change, and providing simple interfaces for common tasks like displaying lists or collections of items. Additionally, FirebaseUI simplifies Firebase authentication by providing easy to use auth methods that integrate with common identity providers like Facebook, Twitter, and Google as well as allowing developers to use a built in headful UI for ease of development.
+FirebaseUI is an open-source library for iOS that allows you to quickly connect common UI elements to the [Firebase](https://www.firebase.com/?utm_source=firebaseui-ios) database for data storage, allowing views to be updated in realtime as they change, and providing simple interfaces for common tasks like displaying lists or collections of items.
+
+Additionally, FirebaseUI simplifies Firebase authentication by providing easy to use auth methods that integrate with common identity providers like Facebook, Twitter, and Google as well as allowing developers to use a built in headful UI for ease of development.
 
 A compatible FirebaseUI client is also available for [Android](https://github.com/firebase/FirebaseUI-Android).
 
@@ -35,7 +37,7 @@ account](https://www.firebase.com/signup/?utm_source=firebaseui-ios).
 This is a quickstart on how to use FirebaseUI's core features to speed up iOS development with Firebase. FirebaseUI includes the following features:
 
 ### FirebaseUI Core
-Provides core data binding capabilities as well as specific datasources for lists of data. Skip to the [Core API overview]() for more information.
+Provides core data binding capabilities as well as specific datasources for lists of data. Skip to the [Core API overview](https://github.com/firebase/firebaseui-ios#firebaseui-auth-api) for more information.
 
 Class  | Description
 ------------- | -------------
@@ -45,7 +47,7 @@ FirebaseArray | Keeps an array synchronized to a Firebase query
 FirebaseDataSource | Generic superclass to create a custom data source
 
 ### FirebaseUI Auth
-Provides authentication helpers as well as concrete implementations for Facebook, Google, Twitter, and Firbase email/password, plus a headful UI that handles auth state and error conditions. Skip to the [Auth API overview]() for more information.
+Provides authentication helpers as well as concrete implementations for Facebook, Google, Twitter, and Firbase email/password, plus a headful UI that handles auth state and error conditions. Skip to the [Auth API overview](https://github.com/firebase/firebaseui-ios#firebaseui-core-api) for more information.
 
 Class  | Description
 ------------- | -------------
@@ -438,10 +440,10 @@ passwordHelper.login()
 ### FirebaseAuthDelegate and TwitterAuthDelegate protocols
 
 Every authentication event is plumbed through `FirebaseAuthDelegate`, which has four methods:
-  1. [FirebaseAuthDelegate authHelper:onLogin:]
-  1. [FirebaseAuthDelegate onLogout:]
-  1. [FirebaseAuthDelegate authHelper:onUserError:]
-  1. [FirebaseAuthDelegate authHelper:onProviderError:]
+  1. `[FirebaseAuthDelegate authHelper:onLogin:]`
+  1. `[FirebaseAuthDelegate onLogout:]`
+  1. `[FirebaseAuthDelegate authHelper:onUserError:]`
+  1. `[FirebaseAuthDelegate authHelper:onProviderError:]`
 
 The first two methods, for login and logout, are required for classes implementing the `FirebaseAuthDelegate` protcol, while the latter two are optional though strongly recommended. All authentication events, regardless of provider, will go through these methods.
 
