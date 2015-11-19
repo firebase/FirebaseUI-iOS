@@ -28,20 +28,74 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "FirebaseAuthDelegate.h"
+// clang-format on
+
 #import <UIKit/UIKit.h>
 
-@protocol FirebaseAuthHelper <NSObject>
+#import <Firebase/Firebase.h>
 
-@property (weak, nonatomic) id<FirebaseAuthDelegate> delegate;
+#import "FirebaseAuthDelegate.h"
+#import "FirebaseAuthConstants.h"
+
+/**
+ * The base auth helper class that authenticates a user with an identity provider
+ * to a Firebase reference. Subclass this to add support for new identity providers.
+ */
+@interface FirebaseAuthHelper : NSObject
+
+/**
+ * The Firebase reference to authenticate against
+ */
 @property (strong, nonatomic) Firebase *ref;
 
-- (instancetype) initWithRef:(Firebase *)ref delegate: (UIViewController<FirebaseAuthDelegate>*) delegate;
+/**
+ * The Firebase authentication data for the currently authenticated user
+ */
+@property (strong, nonatomic) FAuthData *authData;
 
-@optional
+/**
+ * A string which represents the chosen authentication provider.
+ * See FAuthenticationConstants.h for a full list.
+ */
+@property (strong, nonatomic) NSString *provider;
+
+/**
+ * FirebaseAuthDelegate delegate to handle all login, logout, and error events
+ * from both authentication providers and Firebase
+ */
+@property (weak, nonatomic) id<FirebaseAuthDelegate> delegate;
+
+/**
+ * Create an instance of FirebaseAuthHelper, which allows for simple authentication to Firebase
+ * via various identity providers (social, email/password, etc.). This method should be called
+ * by subclasses
+ * @param ref The Firebase reference to use for authentication
+ * @param authDelegate A class that implements the FirebaseAuthDelegate protocol
+ * @return FirebaseAuthHelper
+ */
+- (instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate;
+
+/**
+ * Log in to the selected authentication provider.
+ * Note: you must override this method, as the default implementation raises an exception.
+ * @return void
+ */
 - (void)login;
+
+/**
+ * Logout of the currently authenticated provider
+ * Note: Always call [super logout] in subclass overrides
+ * @return void
+ */
 - (void)logout;
 
-- (BOOL)pListIsConfigured;
+/**
+ * Configure the current authentication provider (for instance, by retrieving keys, testing URL schemes, etc.)
+ * Note: you must override this method, as the default implementation raises an exception.
+ * @return void
+ */
+- (void)configureProvider;
+
+- (void)handleError:(NSError *)error;
 
 @end

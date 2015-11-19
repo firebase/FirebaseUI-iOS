@@ -28,22 +28,25 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <UIKit/UIKit.h>
+// clang-format on
 
 #import <Firebase/Firebase.h>
 
-#import <Google/SignIn.h>
-
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "FirebaseAuthHelper.h"
 
 /**
- * A replacement for the AppDelegate which includes setup for the Google and Facebook SDK's
- * Implements -application:didFinishLaunchingWithOptions: and -application:openURL:sourceApplication:annotation:
- * so make sure to call the appropriate superclass methods if you override those in a concrete implementation.
+ * A helper class that authenticates a user with an email and password
+ * stored in Firebase and uses the credentials to authenticate a Firebase reference
  */
-@interface FirebaseAppDelegate : UIResponder<UIApplicationDelegate>
+@interface FirebasePasswordAuthHelper : FirebaseAuthHelper
 
-@property (strong, nonatomic) UIWindow *window;
+/**
+ * Create an instance of FirebasePasswordAuthHelper, which allows for simple authentication to Firebase via Twitter
+ * @param email A string containing a valid email address
+ * @param password A string containing the password for the email user
+ * @return void
+ */
+- (void)loginWithEmail:(NSString *)email andPassword:(NSString *)password;
+
 
 @end

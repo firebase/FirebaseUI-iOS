@@ -38,24 +38,41 @@
  */
 @protocol FirebaseAuthDelegate<NSObject>
 
+@required
 /**
- * Invoked when an authentication error has occured.
+ * Method that fires when a user is logged in via any provider. Information about the provider comes
+ * through the authHelper.
+ * @param helper The helper
+ * @param authData A class that implements the FirebaseAuthDelegate protocol
+ * @return void
  */
-@optional
-- (void)onError:(NSError *)error;
+- (void)authHelper:(id)helper onLogin:(FAuthData *)authData;
 
 /**
- * Invoked on each authentication state change, which is either no user present,
- * a user logging in, or a user logging out. If no user is present the FAuthData
- * object will contain nil.
+ * Method that fires when a user is logged out of the current authentication provider.
+ * @return void
  */
+- (void)onLogout;
+
 @optional
-- (void)onAuthStageChange:(FAuthData *)authData;
+/**
+ * Method that fires when authentication fails due to an error on the provider side. 
+ * This could include Firebase authentication (provider incorrectly set up in the Firebase Dashboard)
+ * or issues with the provider itself (provider is down, incorrectly provisioned, etc.).
+ * @param helper The helper
+ * @param error
+ * @return void
+ */
+- (void)authHelper:(id)helper onProviderError:(NSError *)error;
 
 /**
- * Invoked when a user cancels the authentication process.
+ * Method that fires when authentication fails due to an error on the user side.
+ * This could include incorrect email/password, or a user canceling an authentication request
+ * with an identity provider.
+ * @param helper The helper
+ * @param error
+ * @return void
  */
-@optional
-- (void)onCancelled;
+- (void)authHelper:(id)helper onUserError:(NSError *)error;
 
 @end

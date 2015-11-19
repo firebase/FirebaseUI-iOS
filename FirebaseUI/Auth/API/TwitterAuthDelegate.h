@@ -28,10 +28,27 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+// clang-format on
+
 /**
- * FirebaseAuthHelperError is an enum that describes the error states of the Firebase authentication process.
+ * A protocol to help Twitter authentication deal with cases of zero 
+ * or more than one Twitter accounts on a given device.
  */
-typedef NS_ENUM(NSInteger, FirebaseAuthHelperError) {
-  FirebaseAuthHelperErrorAccountAccessDenied = -1,
-  FirebaseAuthHelperErrorOAuthTokenRequestDenied = -2
-};
+@protocol TwitterAuthDelegate<NSObject>
+
+@optional
+/**
+ * Delegate method that fires to prompt a user that no Twitter account exists on
+ * the device and they should create one or link it on the device.
+ * @return void
+ */
+- (void)createTwitterAccount;
+
+/**
+ * Delegate method that fires to prompt a user to select one of the multiple Twitter
+ * accounts authenticated on the device.
+ * @return void
+ */
+- (void)selectTwitterAccount:(NSArray *)accounts;
+
+@end

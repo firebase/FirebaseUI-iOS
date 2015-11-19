@@ -30,60 +30,33 @@
 
 // clang-format on
 
+#import <Social/Social.h>
+
 #import <Firebase/Firebase.h>
+#import <Accounts/Accounts.h>
+
 #import "FirebaseAuthHelper.h"
+#import "TwitterAuthDelegate.h"
 
 /**
- * A helper class that pairs retrieving a Twitter user from the ACAccountStore
- * and authenticates the account against a Firebase database reference and
- * Twitter.
+ * A helper class that authenticates a user with Twitter via ACAccountStore
+ * and uses the credentials to authenticate a Firebase reference
  */
-@interface FirebaseTwitterAuthHelper : NSObject<FirebaseAuthHelper>
+@interface FirebaseTwitterAuthHelper : FirebaseAuthHelper
 
 /**
- * The Account Store to retrieve the Twitter users from.
+ * Twitter delegate object to handle [TwitterAuthDelegate createTwitterAccount:] and [TwitterAuthDelegate selectTwitterAccount:] calls
  */
-@property(strong, nonatomic) ACAccountStore *store;
+@property (weak, nonatomic) id<TwitterAuthDelegate> twitterDelegate;
 
 /**
- * The Firebase database reference which to authenticate against.
+ * Create an instance of FirebaseTwitterAuthHelper, which allows for simple authentication to Firebase via Twitter
+ * @param ref The Firebase reference to use for authentication
+ * @param authDelegate A class that implements the FirebaseAuthDelegate protocol
+ * @param twitterDelegate A class that implements the TwitterAuthDelegate protocol
+ * @return FirebaseTwitterAuthHelper
  */
-@property(strong, nonatomic) Firebase *ref;
-
-/**
- * The client API Key for the Twitter app.
- */
-@property(strong, nonatomic) NSString *apiKey;
-
-/**
- * The accounts returned from the ACAccountStore
- */
-@property(strong, nonatomic) NSArray *accounts;
-
-/**
- * The delegate object that authentication changes are surfaced to, which
- * conforms to the [FirebaseAuthDelegate Protocol](FirebaseAuthDelegate).
- */
-@property(weak, nonatomic) UIViewController<FirebaseAuthDelegate>* delegate;
-
-/**
- * Initialize an instance of FirebaseTwitterAuthHelper to authenticate Twitter
- * users.
- * @param ref A Firebase database reference to authenticate against
- * @param callback The delegate to surface authentication changes against
- * @return An instance of FirebaseTwitterAuthHelper
- */
-- (instancetype)initWithRef:(Firebase *)ref
-                   delegate:(UIViewController<FirebaseAuthDelegate>*)delegate;
-
-/**
- * Retrieve a list of Twitter accounts from the ACAccountStore.
- * @param callback A block/closure returned containing a possible error or the
- * list of Twitter ACAccounts on the device.
- * @return void
- */
-- (void)selectTwitterAccountWithCallback:(void (^)(NSError *error,
-                                                   NSArray *accounts))callback;
+- (instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate twitterDelegate:(id<TwitterAuthDelegate>)twitterDelegate;
 
 /**
  * Given an ACAccount authenticate the user against the Firebase database
@@ -91,8 +64,7 @@
  * @param account The Twitter ACAccount to authenticate the user as
  * @return void
  */
-- (void)login:(ACAccount *)account;
+- (void)loginWithAccount:(ACAccount *)account;
 
-- (void)logout;
 
 @end

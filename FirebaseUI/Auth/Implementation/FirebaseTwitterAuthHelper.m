@@ -29,155 +29,129 @@
  */
 
 // clang-format on
-#import <Social/Social.h>
+
 #import "FirebaseTwitterAuthHelper.h"
-#import "FirebaseAuthHelperError.h"
 
-@interface FirebaseTwitterAuthHelper ()
-@property(strong, nonatomic) ACAccount *account;
-@end
+@implementation FirebaseTwitterAuthHelper {
+  ACAccountStore *_store;
+  NSString *_apiKey;
+}
 
-@implementation FirebaseTwitterAuthHelper
-
-@synthesize store;
-@synthesize ref;
-@synthesize apiKey;
-@synthesize account;
-@synthesize accounts;
-
-NSString *const kTwitterApiKey = @"TwitterApiKey";
-NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
-
-// (void (^)(id newObj))block
-
-- (instancetype)initWithRef:(Firebase *)aRef
-                   delegate:(UIViewController<FirebaseAuthDelegate> *)delegate {
-  self = [super init];
+- (instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate twitterDelegate:(id<TwitterAuthDelegate>)twitterDelegate {
+  self = [super initWithRef:ref authDelegate:authDelegate];
   if (self) {
-    self.store = [[ACAccountStore alloc] init];
-    self.ref = aRef;
-    self.delegate = delegate;
-    self.apiKey = [[self getPList] objectForKey:kTwitterApiKey];
+    self.provider = kTwitterAuthProvider;
+    self.twitterDelegate = twitterDelegate;
+    [self configureProvider];
   }
   return self;
 }
 
-- (NSDictionary *)getPList {
-  return
-      [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle]
-                                                     pathForResource:@"Info"
-                                                              ofType:@"plist"]];
+- (void)configureProvider {
+  _apiKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:kTwitterApiKey];
+  if (_apiKey == nil) {
+    [NSException raise:NSInternalInconsistencyException format:@"Please add your Twitter API key to `TwitterApiKey` in `Supporting Files/Info.plist`"];
+  }
+
+  _store = [[ACAccountStore alloc] init];
 }
 
-// Step 1a -- get account
-- (void)selectTwitterAccountWithCallback:(void (^)(NSError *error,
-                                                   NSArray *accounts))callback {
-  ACAccountType *accountType = [self.store
-      accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+- (void)login {
+  [self twitterAccountsFromStore:_store withCallback:^(NSArray *accounts, NSError *error) {
+    if (error) {
+      // Raise error
+      [self.delegate authHelper:self onUserError:error];
+      return;
+    }
 
-  [self.store
-      requestAccessToAccountsWithType:accountType
+    switch ([accounts count]) {
+      case 0:
+        // No account
+        [self.twitterDelegate createTwitterAccount];
+        break;
+
+      case 1:
+        // Single account
+        [self loginWithAccount:[accounts firstObject]];
+        break;
+
+      default:
+        // Multiple accounts
+        [self.twitterDelegate selectTwitterAccount:accounts];
+        break;
+    }
+  }];
+}
+
+- (void)loginWithAccount:(ACAccount *)account {
+  if (account) {
+    [self makeReverseRequestForAccount:account];
+  } else {
+    NSError *error = [NSError errorWithDomain:NSStringFromClass(self.class) code:FAuthenticationErrorUserDoesNotExist userInfo:@{NSLocalizedDescriptionKey: @"Trying to log in without a valid Twitter account in not allowed."}];
+    [self.delegate authHelper:self onUserError:error];
+  }
+}
+
+- (void)logout {
+  [super logout];
+}
+
+#pragma mark - Twitter token requests
+// Step 1a -- get account
+- (void)twitterAccountsFromStore:(ACAccountStore *)store withCallback:(void (^)(NSArray *accounts, NSError *error))callback {
+  ACAccountType *accountType = [store accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+  [store requestAccessToAccountsWithType:accountType
                               options:nil
                            completion:^(BOOL granted, NSError *error) {
                              if (granted) {
-                               self.accounts = [self.store
-                                   accountsWithAccountType:accountType];
-                               if ([self.accounts count] > 0) {
-                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                   callback(nil, self.accounts);
-                                 });
-                               } else {
-                                 NSError *error = [[NSError alloc]
-                                     initWithDomain:CLASS_NAME
-                                               code:
-                                                   FirebaseAuthHelperErrorAccountAccessDenied
-                                           userInfo:@{
-                                             NSLocalizedDescriptionKey :
-                                                 @"No Twitter accounts "
-                                             @"detected on phone. Please "
-                                             @"add one in the settings "
-                                             @"first."
-                                           }];
-                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                   callback(error, nil);
-                                 });
-                               }
+                               NSArray *accounts = [store accountsWithAccountType:accountType];
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                 callback(accounts, nil);
+                               });
                              } else {
                                NSError *error = [[NSError alloc]
-                                   initWithDomain:CLASS_NAME
-                                             code:
-                                                 FirebaseAuthHelperErrorAccountAccessDenied
+                                   initWithDomain:NSStringFromClass(self.class)
+                                             code:FAuthenticationErrorDeniedByUser
                                          userInfo:@{
                                            NSLocalizedDescriptionKey :
-                                               @"Access to twitter accounts "
-                                           @"denied."
+                                               @"Access to twitter accounts denied."
                                          }];
                                dispatch_async(dispatch_get_main_queue(), ^{
-                                 callback(error, nil);
+                                 callback(nil, error);
                                });
                              }
                            }];
 }
 
-// Last public facing method
-- (void)login:(ACAccount *)anAccount {
-  if (!anAccount) {
-    NSError *error = [[NSError alloc]
-        initWithDomain:CLASS_NAME
-                  code:FirebaseAuthHelperErrorAccountAccessDenied
-              userInfo:@{
-                NSLocalizedDescriptionKey :
-                    @"No Twitter account to authenticate."
-              }];
-    [self.delegate onError:error];
-  } else {
-    self.account = anAccount;
-    [self makeReverseRequest];  // kick off step 1b
-  }
-}
-
-- (void)callbackIfExistsWithError:(NSError *)error
-                         authData:(FAuthData *)authData {
-  // TODO: Possibly ignore and just register an auth handler in the initializer
-  if (error) {
-    [self.delegate onError:error];
-  } else {
-    [self.delegate onAuthStageChange:authData];
-  }
-}
-
 // Step 1b -- get request token from Twitter
-- (void)makeReverseRequest {
-  [self.ref makeReverseOAuthRequestTo:@"twitter"
+- (void)makeReverseRequestForAccount:(ACAccount *)account {
+  [self.ref makeReverseOAuthRequestTo:kTwitterAuthProvider
                   withCompletionBlock:^(NSError *error, NSDictionary *json) {
                     if (error != nil) {
-                      [self callbackIfExistsWithError:error authData:nil];
+                      [self.delegate authHelper:self onProviderError:error];
                     } else {
-                      SLRequest *request = [self
-                          createCredentialRequestWithReverseAuthPayload:json];
+                      SLRequest *request = [self createCredentialRequestWithReverseAuthPayload:json forAccount:account];
                       [self requestTwitterCredentials:request];
                     }
                   }];
 }
 
 // Step 1b Helper -- creates request to Twitter
-- (SLRequest *)createCredentialRequestWithReverseAuthPayload:
-    (NSDictionary *)json {
+- (SLRequest *)createCredentialRequestWithReverseAuthPayload:(NSDictionary *)json forAccount:(ACAccount *)account {
   NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
 
   NSString *requestToken = [json objectForKey:@"oauth"];
   [params setValue:requestToken forKey:@"x_reverse_auth_parameters"];
-  [params setValue:self.apiKey forKey:@"x_reverse_auth_target"];
+  [params setValue:_apiKey forKey:@"x_reverse_auth_target"];
 
-  NSURL *url =
-      [NSURL URLWithString:@"https://api.twitter.com/oauth/access_token"];
-  SLRequest *req = [SLRequest requestForServiceType:SLServiceTypeTwitter
+  NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/oauth/access_token"];
+  SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter
                                       requestMethod:SLRequestMethodPOST
                                                 URL:url
                                          parameters:params];
-  [req setAccount:self.account];
+  [request setAccount:account];
 
-  return req;
+  return request;
 }
 
 // Step 2 -- request credentials from Twitter
@@ -187,7 +161,7 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
                                        NSError *error) {
     if (error) {
       dispatch_async(dispatch_get_main_queue(), ^{
-        [self callbackIfExistsWithError:error authData:nil];
+        [self.delegate authHelper:self onProviderError:error];
       });
     } else {
       [self authenticateWithTwitterCredentials:responseData];
@@ -199,22 +173,23 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
 - (void)authenticateWithTwitterCredentials:(NSData *)responseData {
   NSDictionary *params = [self parseTwitterCredentials:responseData];
   if (params[@"error"]) {
-    // There was an error handling the parameters, error out.
     NSError *error = [[NSError alloc]
-        initWithDomain:CLASS_NAME
-                  code:FirebaseAuthHelperErrorOAuthTokenRequestDenied
+        initWithDomain:NSStringFromClass(self.class)
+                  code:FAuthenticationErrorInvalidCredentials
               userInfo:@{
                 NSLocalizedDescriptionKey : @"OAuth token request was denied.",
                 @"details" : params[@"error"]
               }];
     dispatch_async(dispatch_get_main_queue(), ^{
-      [self callbackIfExistsWithError:error authData:nil];
+      [self.delegate authHelper:self onProviderError:error];
     });
   } else {
     [self.ref authWithOAuthProvider:@"twitter"
                          parameters:params
                 withCompletionBlock:^(NSError *error, FAuthData *authData) {
-                  [self callbackIfExistsWithError:error authData:authData];
+                  if (error != nil) {
+                    [self handleError:error];
+                  }
                 }];
   }
 }
@@ -239,14 +214,6 @@ NSString *const CLASS_NAME = @"FirebaseTwitterAuthHelper";
   } else {
     return params;
   }
-}
-
-- (void)logout {
-  [self.ref unauth];
-}
-
-- (void)dealloc {
-  [self.ref removeAllObservers];
 }
 
 @end

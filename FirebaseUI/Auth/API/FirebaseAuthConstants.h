@@ -28,22 +28,42 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <UIKit/UIKit.h>
+// clang-format on
 
-#import <Firebase/Firebase.h>
+#import <Foundation/Foundation.h>
 
-#import <Google/SignIn.h>
+#ifndef FirebaseAuthConstants_h
+#define FirebaseAuthConstants_h
 
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+FOUNDATION_EXPORT NSString *const kFWPRequestType;
 
-/**
- * A replacement for the AppDelegate which includes setup for the Google and Facebook SDK's
- * Implements -application:didFinishLaunchingWithOptions: and -application:openURL:sourceApplication:annotation:
- * so make sure to call the appropriate superclass methods if you override those in a concrete implementation.
- */
-@interface FirebaseAppDelegate : UIResponder<UIApplicationDelegate>
+FOUNDATION_EXPORT NSString *const kTwitterAuthProvider;
+FOUNDATION_EXPORT NSString *const kTwitterApiKey;
 
-@property (strong, nonatomic) UIWindow *window;
+FOUNDATION_EXPORT NSString *const kFacebookAuthProvider;
+FOUNDATION_EXPORT NSString *const kFacebookAppId;
+FOUNDATION_EXPORT NSString *const kFacebookDisplayName;
+FOUNDATION_EXPORT NSString *const kFacebookEmailScope;
 
-@end
+FOUNDATION_EXPORT NSString *const kGoogleAuthProvider;
+
+FOUNDATION_EXPORT NSString *const kPasswordAuthProvider;
+
+FOUNDATION_EXPORT CGFloat const kHeaderWidth;
+FOUNDATION_EXPORT CGFloat const kHeaderHeight;
+FOUNDATION_EXPORT CGFloat const kHeaderSpace;
+
+FOUNDATION_EXPORT CGFloat const kTextFieldWidth;
+FOUNDATION_EXPORT CGFloat const kTextFieldHeight;
+FOUNDATION_EXPORT CGFloat const kTextFieldSpace;
+
+FOUNDATION_EXPORT CGFloat const kButtonWidth;
+FOUNDATION_EXPORT CGFloat const kButtonHeight;
+FOUNDATION_EXPORT CGFloat const kButtonSpace;
+
+FOUNDATION_EXPORT CGFloat const kSeparatorWidth;
+FOUNDATION_EXPORT CGFloat const kSeparatorHeight;
+FOUNDATION_EXPORT CGFloat const kSeparatorSpace;
+
+#endif /* FirebaseAuthConstants_h */
+

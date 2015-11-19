@@ -28,22 +28,31 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <UIKit/UIKit.h>
+// clang-format on
 
-#import <Firebase/Firebase.h>
+#import "FirebasePasswordAuthHelper.h"
 
-#import <Google/SignIn.h>
+@implementation FirebasePasswordAuthHelper
 
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-/**
- * A replacement for the AppDelegate which includes setup for the Google and Facebook SDK's
- * Implements -application:didFinishLaunchingWithOptions: and -application:openURL:sourceApplication:annotation:
- * so make sure to call the appropriate superclass methods if you override those in a concrete implementation.
- */
-@interface FirebaseAppDelegate : UIResponder<UIApplicationDelegate>
+-(instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate {
+  self = [super initWithRef:ref authDelegate:authDelegate];
+  if (self) {
+    self.provider = kPasswordAuthProvider;
+  }
+  return self;
+}
 
-@property (strong, nonatomic) UIWindow *window;
+- (void)loginWithEmail:(NSString *)email andPassword:(NSString *)password {
+  [self.ref authUser:email password:password withCompletionBlock:^(NSError *error, FAuthData *authData) {
+    if (error) {
+      [self handleError:error];
+    }
+  }];
+}
+
+- (void)logout {
+  [self.ref unauth];
+}
 
 @end

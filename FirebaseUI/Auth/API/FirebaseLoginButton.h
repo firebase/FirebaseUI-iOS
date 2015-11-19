@@ -30,18 +30,26 @@
 
 // clang-format on
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-#import <FirebaseUI/FirebaseArray.h>
-#import <FirebaseUI/FirebaseDataSource.h>
-#import <FirebaseUI/FirebaseTableViewDataSource.h>
-#import <FirebaseUI/FirebaseCollectionViewDataSource.h>
-#import <FirebaseUI/FirebaseTwitterAuthHelper.h>
-#import <FirebaseUI/FirebaseFacebookAuthHelper.h>
-#import <FirebaseUI/FirebaseLoginViewController.h>
-#import <FirebaseUI/FirebaseGoogleAuthHelper.h>
-#import <FirebaseUI/FirebaseAppDelegate.h>
+#import "FirebaseAuthConstants.h"
 
-@interface FirebaseUI : NSObject
+/**
+ * A UIButton factory that produces appropriately skinned identity provider buttons with a provider field
+ * that is used by FirebaseLoginViewController as well as potentially by other custom login UI.
+ */
+@interface FirebaseLoginButton : UIButton
+
+/**
+ * A string representing a valid identity provider (see FirebaseAuthConstants.h for a full list).
+ */
+@property (strong, nonatomic) NSString *provider;
+
+/**
+ * Creates a button styled for the appropriate provider.
+ * @param provider A string representing the desired identity provider to log in with
+ * @return FirebaseLoginButton
+ */
+-(instancetype)initWithProvider:(NSString *)provider;
 
 @end

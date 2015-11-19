@@ -28,22 +28,20 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <UIKit/UIKit.h>
+// clang-format on
 
-#import <Firebase/Firebase.h>
+#import <Foundation/Foundation.h>
 
-#import <Google/SignIn.h>
+#import <FirebaseUI/FirebaseArray.h>
+#import <FirebaseUI/FirebaseDataSource.h>
+#import <FirebaseUI/FirebaseTableViewDataSource.h>
+#import <FirebaseUI/FirebaseCollectionViewDataSource.h>
+#import <FirebaseUI/FirebaseTwitterAuthHelper.h>
+#import <FirebaseUI/FirebaseFacebookAuthHelper.h>
+#import <FirebaseUI/FirebaseGoogleAuthHelper.h>
+#import <FirebaseUI/FirebaseLoginViewController.h>
+#import <FirebaseUI/FirebaseAppDelegate.h>
 
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-
-/**
- * A replacement for the AppDelegate which includes setup for the Google and Facebook SDK's
- * Implements -application:didFinishLaunchingWithOptions: and -application:openURL:sourceApplication:annotation:
- * so make sure to call the appropriate superclass methods if you override those in a concrete implementation.
- */
-@interface FirebaseAppDelegate : UIResponder<UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface FirebaseUI : NSObject
 
 @end

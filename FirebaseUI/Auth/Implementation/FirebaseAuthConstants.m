@@ -28,14 +28,34 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
- * FirebaseAuthProvider is an enum that describes all the available providers for Firebase authentication.
- */
-typedef NS_ENUM(NSInteger, FirebaseAuthProvider) {
-  FirebaseAuthProviderGoogle,
-  FirebaseAuthProviderTwitter,
-  FirebaseAuthProviderFacebook,
-  FirebaseAuthProviderPassword,
-  FirebaseAuthProviderGithub,
-  FirebaseAuthProviderAnonymous
-};
+// clang-format on
+
+#import "FirebaseAuthConstants.h"
+
+NSString *const kTwitterAuthProvider = @"twitter";
+NSString *const kTwitterApiKey = @"TwitterApiKey";
+
+NSString *const kFacebookAuthProvider = @"facebook";
+NSString *const kFacebookAppId = @"FacebookAppID";
+NSString *const kFacebookDisplayName = @"FacebookDisplayName";
+NSString *const kFacebookEmailScope = @"email";
+
+NSString *const kGoogleAuthProvider = @"google";
+
+NSString *const kPasswordAuthProvider = @"password";
+
+CGFloat const kHeaderWidth = 258.0f;
+CGFloat const kHeaderHeight = 60.0f;
+CGFloat const kHeaderSpace = 10.0f;
+
+CGFloat const kTextFieldWidth = 206.0f;
+CGFloat const kTextFieldHeight = 30.0f;
+CGFloat const kTextFieldSpace = 10.0f;
+
+CGFloat const kButtonWidth = 206.0f;
+CGFloat const kButtonHeight = 40.0f;
+CGFloat const kButtonSpace = 10.0f;
+
+CGFloat const kSeparatorWidth = 224.0f;
+CGFloat const kSeparatorHeight = 24.0f;
+CGFloat const kSeparatorSpace = 10.0f;

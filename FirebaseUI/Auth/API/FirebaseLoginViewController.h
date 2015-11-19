@@ -29,37 +29,88 @@
  */
 
 // clang-format on
-#import <GoogleSignIn/GoogleSignIn.h>
+
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+
 #import <Firebase/Firebase.h>
+
+#import <Google/SignIn.h>
+
 #import "FirebaseAuthDelegate.h"
 #import "FirebaseTwitterAuthHelper.h"
 #import "FirebaseFacebookAuthHelper.h"
 #import "FirebaseGoogleAuthHelper.h"
+#import "FirebasePasswordAuthHelper.h"
+#import "FirebaseLoginButton.h"
 
 /**
  * FirebaseLoginViewController is a subclass of UIViewController that provides a
- * set of helper login methods for Firebase authentication providers.
+ * set of helper methods for Firebase authentication providers. FirebaseLoginViewController
+ * also provides a premade UI which handles login and logout with arbitrary providers, as well as error handling.
+ * This also serves as a template for developers interested in developing custom login UI.
  */
-@interface FirebaseLoginViewController
-    : UIViewController<FirebaseAuthDelegate, UIActionSheetDelegate,
-                       GIDSignInDelegate, GIDSignInUIDelegate>
+@interface FirebaseLoginViewController : UIViewController<FirebaseAuthDelegate, TwitterAuthDelegate, GIDSignInUIDelegate>
 
 /**
- * The delegate object that authentication changes are surfaced to, which
- * conforms to the [FirebaseAuthDelegate Protocol](FirebaseAuthDelegate).
+ * Container view for login activity which wraps the header text and cancel button.
  */
-@property(weak, nonatomic) UIViewController<FirebaseAuthDelegate> *delegate;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+
+/**
+ * Header text, defaults to "Please Sign In"
+ */
+@property (weak, nonatomic) IBOutlet UILabel *headerText;
+
+/**
+ * Cancel button, defaults to Grey 500 material cancel image.
+ */
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+
+/**
+ * Container view for email and password textfields as well as the email/password login button.
+ */
+@property (weak, nonatomic) IBOutlet UIView *emailPasswordView;
+
+/**
+ * Email text field.
+ */
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+
+/**
+ * Password text field.
+ */
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+
+/**
+ *Container for ------or------ line.
+ */
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
+
+/**
+ * Container view for social provider login button.
+ */
+@property (weak, nonatomic) IBOutlet UIView *socialView;
+
+/**
+ * Container view for full login UI.
+ */
+@property (weak, nonatomic) IBOutlet UIView *loginView;
+
+/**
+ * Height constraint for social view.
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *socialHeightConstraint;
+
+/**
+ * Height constraint for login view view.
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *totalHeightConstraint;
 
 /**
  * The Firebase database reference which to authenticate against.
  */
 @property(strong, nonatomic) Firebase *ref;
-
-/**
- * The name of the .plist to read. This is defaulted to "Info".
- */
-@property(strong, nonatomic) NSString *pListName;
 
 /**
  * The helper object for Twitter Authentication. This object handles the
@@ -83,27 +134,37 @@
 @property(strong, nonatomic) FirebaseGoogleAuthHelper *googleAuthHelper;
 
 /**
- * Authenticates the user against Twitter. This method calls into the
- * twitterAuthHelper property to retrieve a list of Twitter users for the
- * ACAccountStore. If more than one Twitter user is present a UIActionSheet (in
- * < iOS8) or UIAlertViewController (in iOS8+) surfaces with options to select a
- * Twitter user. When the user is selected the authentication process occurs.
- * When authenticated one of the delegate methods in FirebaseAuthDelegate will
- * trigger.
- * @return void
+ * The helper object for Email/Password Authentication. This object handles the
+ * requests to the Firebase user authentication system to authenticate users to
+ * the Firebase database.
  */
-- (void)loginWithTwitter;
+@property(strong, nonatomic) FirebasePasswordAuthHelper *passwordAuthHelper;
 
 /**
- * Authenticates the user against Facebook. This method calls into the
- * facebookAuthHelper property to authenticate. When authenticated one of the
- * delegate methods in FirebaseAuthDelegate will trigger.
+ * Create an instance of FirebaseLoginViewController, which allows for easy authentication to Firebase
+ * via a number of identity providers such as Email/Password, Google, Facebook, and Twitter.
+ * @param ref The Firebase reference to use for authentication
+ * @return FirebaseLoginViewController
+ */
+- (instancetype)initWithRef:(Firebase *)ref;
+
+/**
+ * Enables a given identity provider and allows for login and logout actions against it.
+ * @param provider A string representing the desired identity provider to log in with
+ * @return FirebaseLoginViewController
+ */
+- (instancetype)enableProvider:(NSString *)provider;
+
+/**
+ * Logs the currently authenticated user out of both Firebase and the currently logged in identity provider (if any).
  * @return void
  */
-- (void)loginWithFacebook;
-
-- (void)loginWithGoogle;
-
 - (void)logout;
+
+/**
+ * Returns the currently authenticated user or nil if no user is authenticated.
+ * @return FAuthData
+ */
+- (FAuthData *)currentUser;
 
 @end

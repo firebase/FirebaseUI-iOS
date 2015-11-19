@@ -32,51 +32,48 @@
 
 #import "FirebaseFacebookAuthHelper.h"
 
-@implementation FirebaseFacebookAuthHelper
+@implementation FirebaseFacebookAuthHelper {
+  FBSDKLoginManager *_loginManager;
+}
 
-NSString *const kAuthProvider = @"facebook";
-NSString *const kEmailScope = @"email";
-
-- (instancetype)initWithRef:(Firebase *)aRef
-                   delegate:
-                       (UIViewController<FirebaseAuthDelegate> *)authDelegate {
-  self = [super init];
+- (instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate {
+  self = [super initWithRef:ref authDelegate:authDelegate];
   if (self) {
-    self.ref = aRef;
-    self.loginManager = [[FBSDKLoginManager alloc] init];
-    self.delegate = authDelegate;
+    self.provider = kFacebookAuthProvider;
+    [self configureProvider];
   }
   return self;
 }
 
+- (void)configureProvider {
+  NSString *facebookAppId = [[NSBundle mainBundle] objectForInfoDictionaryKey:kFacebookAppId];
+  NSString *facebookDisplayName = [[NSBundle mainBundle] objectForInfoDictionaryKey:kFacebookDisplayName];
+  BOOL canOpenFacebook = YES; //[[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"fb%@://", facebookAppId]]];
+  
+  if (facebookAppId == nil || facebookDisplayName == nil || !canOpenFacebook) {
+    [NSException raise:NSInternalInconsistencyException format:@"Please set FacebookAppID, FacebookDisplayName, and\nURL types > Url Schemes in `Supporting Files/Info.plist` according to https://developers.facebook.com/docs/ios/getting-started"];
+  }
+  
+  _loginManager = [[FBSDKLoginManager alloc] init];
+}
+
 - (void)login {
-  [self.loginManager logInWithReadPermissions:@[
-    kEmailScope
-  ] fromViewController:self.delegate handler:^(FBSDKLoginManagerLoginResult
-                                                   *facebookResult,
-                                               NSError *facebookError) {
+  [_loginManager logInWithReadPermissions:@[kFacebookEmailScope] fromViewController: (UIViewController *)self.delegate handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
 
-    if (facebookError) {
-      // Surface any errors
-      [self.delegate onError:facebookError];
-    } else if (facebookResult.isCancelled) {
-      // Surface cancellations
-      [self.delegate onCancelled];
+    if (error) {
+      [self.delegate authHelper:self onProviderError:error];
+    } else if (result.isCancelled) {
+      // TODO: clean up this error
+      NSError *cancelError = [NSError errorWithDomain:@"" code:-1 userInfo:@{}];
+      [self.delegate authHelper:self onProviderError:cancelError];
     } else {
-      // Get the token from the FBSDKAccessToken
-      NSString *accessToken =
-          [[FBSDKAccessToken currentAccessToken] tokenString];
+      NSString *accessToken = [[FBSDKAccessToken currentAccessToken] tokenString];
 
-      // Authenticate with Firebase
-      [self.ref authWithOAuthProvider:kAuthProvider
+      [self.ref authWithOAuthProvider:kFacebookAuthProvider
                                 token:accessToken
                   withCompletionBlock:^(NSError *error, FAuthData *authData) {
                     if (error) {
-                      [self.delegate onError:error];
-                    } else {
-                      // TODO: Possibly register a onAuth listener and ignore
-                      // login events
-                      [self.delegate onAuthStageChange:authData];
+                      [self handleError:error];
                     }
                   }];
     }
@@ -84,7 +81,8 @@ NSString *const kEmailScope = @"email";
 }
 
 - (void)logout {
-  [self.ref unauth];
+  [_loginManager logOut];
+  [super logout];
 }
 
 @end

@@ -31,33 +31,21 @@
 // clang-format on
 
 #import <Firebase/Firebase.h>
+
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 #import "FirebaseAuthHelper.h"
 
-@interface FirebaseFacebookAuthHelper : NSObject<FirebaseAuthHelper>
-
 /**
- * The Firebase database reference which to authenticate against.
+ * A helper class that authenticates a user with Facebook
+ * and uses the credentials to authenticate a Firebase reference
  */
-@property(strong, nonatomic) Firebase *ref;
+@interface FirebaseFacebookAuthHelper : FirebaseAuthHelper
 
 /**
- * The delegate object that authentication changes are surfaced to, which
- * conforms to the [FirebaseAuthDelegate Protocol](FirebaseAuthDelegate).
- */
-@property(weak, nonatomic) UIViewController<FirebaseAuthDelegate> *delegate;
-
-/**
- * The Facebook Login Manager object. This object can login the user.
+ * A Facebook Login Manager object for handling Facebook authentication
  */
 @property(strong, nonatomic) FBSDKLoginManager *loginManager;
-
-- (instancetype)initWithRef:(Firebase *)ref
-                   delegate:(UIViewController<FirebaseAuthDelegate> *)delegate;
-
-- (void)login;
-
-- (void)logout;
 
 @end

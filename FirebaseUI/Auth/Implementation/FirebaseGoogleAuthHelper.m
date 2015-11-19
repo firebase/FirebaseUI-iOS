@@ -10,58 +10,59 @@
 
 @implementation FirebaseGoogleAuthHelper
 
-- (instancetype)initWithRef:(Firebase *)ref
-                   delegate:
-                       (UIViewController<FirebaseAuthDelegate> *)authDelegate {
-  self = [super init];
-
+- (instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate uiDelegate:(UIViewController<GIDSignInUIDelegate> *)uiDelegate {
+  self = [super initWithRef:ref authDelegate:authDelegate];
   if (self) {
-    self.ref = ref;
-    self.delegate = authDelegate;
-  }
-
-  return self;
-}
-
-- (instancetype)initWithRef:(Firebase *)ref
-                   delegate:
-                       (UIViewController<FirebaseAuthDelegate> *)authDelegate
-             signInDelegate:(id<GIDSignInDelegate>)signInDelegate
-                 uiDelegate:(id<GIDSignInUIDelegate>)uiDelegate {
-  self = [super init];
-  if (self) {
-    self.ref = ref;
-    self.delegate = authDelegate;
-    [GIDSignIn sharedInstance].delegate = signInDelegate;
+    self.provider = kGoogleAuthProvider;
+    [self configureProvider];
+    [GIDSignIn sharedInstance].delegate = self;
     [GIDSignIn sharedInstance].uiDelegate = uiDelegate;
   }
   return self;
 }
 
+- (void)configureProvider {
+  NSString *path = [[NSBundle mainBundle] pathForResource:@"GoogleService-Info" ofType:@"plist"];
+  NSDictionary *plist = [NSDictionary dictionaryWithContentsOfFile:path];
+  NSString *reversedClientId =[plist objectForKey:@"REVERSED_CLIENT_ID"];
+  BOOL clientIdExists = [plist objectForKey:@"CLIENT_ID"] != nil;
+  BOOL reversedClientIdExists = reversedClientId != nil;
+  NSString *urlString = [NSString stringWithFormat:@"%@://", reversedClientId];
+  BOOL canOpenGoogle = YES; //[[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlString]];
+  
+  if (!(clientIdExists && reversedClientIdExists && canOpenGoogle)) {
+    [NSException raise:NSInternalInconsistencyException format:@"Please add `GoogleService-Info.plist` to `Supporting Files` and\nURL types > Url Schemes in `Supporting Files/Info.plist` according to https://developers.google.com/identity/sign-in/ios/start-integrating"];
+  }
+}
+
 - (void)login {
-  [[GIDSignIn sharedInstance] signIn];
+  if ([[GIDSignIn sharedInstance] hasAuthInKeychain]) {
+    [[GIDSignIn sharedInstance] signInSilently];
+  } else {
+    [[GIDSignIn sharedInstance] signIn];
+  }
 }
 
 - (void)logout {
   [[GIDSignIn sharedInstance] signOut];
+  [[GIDSignIn sharedInstance] disconnect];
+  [super logout];
 }
 
-- (void)signIn:(GIDSignIn *)signIn
-    didSignInForUser:(GIDGoogleUser *)user
-           withError:(NSError *)error {
-  [self.ref authWithOAuthProvider:@"google"
+- (void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
+  [self.ref authWithOAuthProvider:kGoogleAuthProvider
                             token:user.authentication.accessToken
               withCompletionBlock:^(NSError *error, FAuthData *authData) {
-
                 if (error) {
-                  [self.delegate onError:error];
-                  return;
-                } else {
-                  [self.delegate onAuthStageChange:authData];
-                  return;
+                  [self handleError:error];
                 }
-
               }];
+}
+
+- (void)signIn:(GIDSignIn *)signIn didDisconnectWithUser:(GIDGoogleUser *)user withError:(NSError *)error {
+  if (error) {
+    [self.delegate authHelper:self onProviderError:error];
+  }
 }
 
 @end

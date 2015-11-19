@@ -31,220 +31,193 @@
 // clang-format on
 
 #import "FirebaseLoginViewController.h"
-#import "FirebaseTwitterAuthHelper.h"
 
-@interface FirebaseLoginViewController ()
-// @property(weak, nonatomic) UIActionSheet *actionSheet;
-@end
+@implementation FirebaseLoginViewController {
+  FirebaseAuthHelper *_selectedAuthHelper;
+  NSMutableArray *_socialProviders;
+}
 
-@implementation FirebaseLoginViewController
-
-#pragma mark -
-#pragma mark Constants
-NSString *const kFirebaseName = @"FirebaseName";
-NSString *const kFileType = @"plist";
-NSString *const kFirebaseUrl = @"https://%@.firebaseio.com/";
-NSString *const kpListName = @"Info";
-
-#pragma mark -
-#pragma mark Property getters
-- (NSString *)pListName {
-  if (!_pListName) {
-    return kpListName;
+- (instancetype)initWithRef:(Firebase *)ref;
+{
+  self = [super init];
+  if (self) {
+    self.ref = ref;
+    _socialProviders = [[NSMutableArray alloc] initWithCapacity:3];
   }
-
-  return _pListName;
+  return self;
 }
 
-- (UIViewController<FirebaseAuthDelegate> *)delegate {
-  if (!_delegate) {
-    return self;
-  }
-  return _delegate;
-}
-
-- (Firebase *)ref {
-  if (!_ref) {
-    NSDictionary *pList = [self getPList];
-    NSString *namespace = [pList objectForKey:kFirebaseName];
-    NSString *firebaseUrl = [NSString stringWithFormat:kFirebaseUrl, namespace];
-    self.ref = [[Firebase alloc] initWithUrl:firebaseUrl];
-  }
-  return _ref;
-}
-
-/*
- TODO: self.twitterAuthHelper.accounts ends up being nil when used inside
-FirebaseLoginViewController
-- (FirebaseTwitterAuthHelper *)twitterAuthHelper {
-  if (!_twitterAuthHelper) {
-    return [[FirebaseTwitterAuthHelper alloc]
-        initWithFirebaseRef:self.ref
-                     apiKey:self.apiKeys.twitterApiKey
-                   delegate:self];
-  }
-
-  return _twitterAuthHelper;
-}
-*/
-- (FirebaseFacebookAuthHelper *)facebookAuthHelper {
-  if (!_facebookAuthHelper) {
-    return
-        [[FirebaseFacebookAuthHelper alloc] initWithRef:self.ref delegate:self];
-  }
-
-  return _facebookAuthHelper;
-}
-
-- (FirebaseGoogleAuthHelper *)googleAuthHelper {
-  if (!_googleAuthHelper) {
-    return [[FirebaseGoogleAuthHelper alloc] initWithRef:self.ref
-                                                delegate:self
-                                          signInDelegate:self
-                                              uiDelegate:self];
-  }
-
-  return _googleAuthHelper;
-}
-
-#pragma mark -
-#pragma mark pList methods
-
-- (NSDictionary *)getPList {
-  return [NSDictionary
-      dictionaryWithContentsOfFile:[[NSBundle mainBundle]
-                                       pathForResource:self.pListName
-                                                ofType:kFileType]];
-}
-
-#pragma mark -
-#pragma mark Logout method
-- (void)logout {
-  [self.ref unauth];
-}
-
-#pragma mark -
-#pragma mark Login methods
-
-- (void)loginWithTwitter {
-  [self.twitterAuthHelper
-      selectTwitterAccountWithCallback:^(NSError *error, NSArray *accounts) {
-        if (error != nil) {
-          [self onError:error];
-          return;
-        }
-
-        [self showActionSheetForMultipleTwitterAccounts:accounts];
-      }];
-}
-
-#pragma mark -
-#pragma mark UIViewController Lifecycle methods
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  self.twitterAuthHelper =
-      [[FirebaseTwitterAuthHelper alloc] initWithRef:self.ref delegate:self];
+  // Add cancel button
+  UIImage *image = [[UIImage imageNamed:@"ic_clear_18pt"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  [self.cancelButton setImage:image forState:UIControlStateNormal];
+  self.cancelButton.imageView.tintColor = [UIColor colorWithRed:158.0f/255.0f green:158.0f/255.0f blue:158.0f/255.0f alpha:1.0f];
+  [self.cancelButton addTarget:self action:@selector(dismissViewController) forControlEvents:UIControlEventTouchUpInside];
+
+  // If we're already logged in, cancel this
+  if (_selectedAuthHelper) {
+    [self dismissViewController];
+  }
+
+  if (self.passwordAuthHelper == nil && [_socialProviders count] == 0) {
+    [self dismissViewController]; // Or throw an exception--you need to have at least one provider
+  }
+
+  // Populate email/password view
+  if (self.passwordAuthHelper != nil) {
+    FirebaseLoginButton *emailLoginButton = [[FirebaseLoginButton alloc] initWithProvider:kPasswordAuthProvider];
+    CGRect buttonFrame = CGRectMake(0, 2 * kTextFieldHeight + 2 * kTextFieldSpace, kButtonWidth, kButtonHeight);
+    emailLoginButton.frame = buttonFrame;
+    [emailLoginButton addTarget:self action:@selector(loginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.emailPasswordView addSubview:emailLoginButton];
+  } else {
+    [self.socialView setFrame:CGRectMake(self.emailPasswordView.frame.origin.x, self.emailPasswordView.frame.origin.y, self.socialView.frame.size.width, self.socialView.frame.size.height)];
+    [self.emailPasswordView removeFromSuperview];
+    self.totalHeightConstraint.constant -= (2 * kTextFieldHeight + 2 * kTextFieldSpace + 1 * kButtonHeight);
+  }
+
+  // Populate social view
+  NSUInteger numProviders = [_socialProviders count];
+  if (numProviders == 0) {
+    [self.socialView removeFromSuperview];
+    self.totalHeightConstraint.constant -= (3 * kButtonHeight + 2 * kButtonSpace);
+  } else {
+    // Add buttons to social view
+    CGRect buttonFrame = CGRectMake(0, 0, kButtonWidth, kButtonHeight);
+    for (FirebaseAuthHelper *helper in _socialProviders) {
+      FirebaseLoginButton *loginButton = [[FirebaseLoginButton alloc] initWithProvider:helper.provider];
+      loginButton.frame = buttonFrame;
+      [loginButton addTarget:self action:@selector(loginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+      [self.socialView addSubview:loginButton];
+      buttonFrame.origin.y += kButtonHeight + kButtonSpace;
+    }
+
+    // Size social view and login view appropriately
+    CGFloat socialViewHeight = numProviders * kButtonHeight + (numProviders - 1) * kButtonSpace;
+    self.socialHeightConstraint.constant = socialViewHeight;
+    self.totalHeightConstraint.constant -= (3 * kButtonHeight + 2 * kButtonSpace - socialViewHeight);
+  }
+
+  // Handle separator
+  if (self.passwordAuthHelper == nil || numProviders == 0) {
+    [self.separatorView removeFromSuperview];
+    self.totalHeightConstraint.constant -= (kSeparatorHeight + kSeparatorSpace);
+  }
+
+  [self.view layoutIfNeeded];
 }
 
-#pragma mark -
-#pragma mark FirebaseAuthDelegate Protocol methods
-
-// Abstract
-- (void)onError:(NSError *)error {
+- (instancetype)enableProvider:(NSString *)provider {
+  if ([provider isEqualToString:kGoogleAuthProvider]) {
+    if (!self.googleAuthHelper) {
+      self.googleAuthHelper = [[FirebaseGoogleAuthHelper alloc] initWithRef:self.ref authDelegate:self uiDelegate:self];
+      [_socialProviders addObject:self.googleAuthHelper];
+    }
+  } else if ([provider isEqualToString:kFacebookAuthProvider]) {
+    if (!self.facebookAuthHelper) {
+      self.facebookAuthHelper = [[FirebaseFacebookAuthHelper alloc] initWithRef:self.ref authDelegate:self];
+      [_socialProviders addObject:self.facebookAuthHelper];
+    }
+  } else if ([provider isEqualToString:kTwitterAuthProvider]) {
+    if (!self.twitterAuthHelper) {
+      self.twitterAuthHelper = [[FirebaseTwitterAuthHelper alloc] initWithRef:self.ref authDelegate:self twitterDelegate:self];
+      [_socialProviders addObject:self.twitterAuthHelper];
+    }
+  } else if ([provider isEqualToString:kPasswordAuthProvider]) {
+    if (!self.passwordAuthHelper) {
+      self.passwordAuthHelper = [[FirebasePasswordAuthHelper alloc] initWithRef:self.ref authDelegate:self];
+    }
+  }
+  return self;
 }
 
-// Abstract
-- (void)onAuthStateChange:(FAuthData *)authData {
-}
-
-// Abstract
-- (void)onCancelled {
-}
-
-#pragma mark -
-#pragma mark Facebook Auth methods
-
-- (void)loginWithFacebook {
-  [self.facebookAuthHelper login];
-}
-
-#pragma mark -
-#pragma mark Google Auth methods
-
-- (void)loginWithGoogle {
-  [self.googleAuthHelper login];
-}
-
-- (void)signIn:(GIDSignIn *)signIn
-    didSignInForUser:(GIDGoogleUser *)user
-           withError:(NSError *)error {
-  [self.googleAuthHelper signIn:signIn didSignInForUser:user withError:error];
-}
-
-#pragma mark -
-#pragma mark Twitter Auth methods
-- (void)showActionSheetForMultipleTwitterAccounts:(NSArray *)accounts {
-  switch ([accounts count]) {
-    case 0:
-      // No account on device.
-      break;
-    case 1:
-      // Single user system, go straight to login
-      [self authenticateWithTwitterAccount:[accounts firstObject]];
-      break;
-    default:
-      // Handle multiple users
-      [self selectTwitterAccount:accounts];
-      break;
+- (void)loginButtonPressed:(id)button {
+  if ([button isKindOfClass:[FirebaseLoginButton class]]) {
+    FirebaseLoginButton *loginButton = (FirebaseLoginButton *)button;
+    if ([loginButton.provider isEqualToString:kGoogleAuthProvider]) {
+      [self.googleAuthHelper login];
+    } else if ([loginButton.provider isEqualToString:kFacebookAuthProvider]) {
+      [self.facebookAuthHelper login];
+    } else if ([loginButton.provider isEqualToString:kTwitterAuthProvider]) {
+      [self.twitterAuthHelper login];
+    } else if ([loginButton.provider isEqualToString:kPasswordAuthProvider]) {
+      // We assume that if it wasn't a social provider, it was for email/password
+      NSString *email = self.emailTextField.text;
+      NSString *password = self.passwordTextField.text;
+      [self.passwordAuthHelper loginWithEmail:email andPassword:password];
+    }
   }
 }
 
-- (void)authenticateWithTwitterAccount:(ACAccount *)account {
-  [self.twitterAuthHelper login:account];
+- (void)logout {
+  if (_selectedAuthHelper) {
+    [_selectedAuthHelper logout];
+  }
+}
+
+- (FAuthData *)currentUser {
+  return _selectedAuthHelper.authData;
+}
+
+- (void)dismissViewController {
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark -
+#pragma mark Firebase Auth Delegate methods
+
+- (void)authHelper:(id)helper onLogin:(FAuthData *)authData {
+  _selectedAuthHelper = helper;
+  self.emailTextField.text = @"";
+  self.passwordTextField.text = @"";
+  [self dismissViewController];
+}
+
+- (void)authHelper:(id)helper onProviderError:(NSError *)error {
+  UIAlertController *providerErrorController = [UIAlertController alertControllerWithTitle:@"Provider error!" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+  [providerErrorController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    self.passwordTextField.text = @"";
+  }]];
+
+  [self presentViewController:providerErrorController animated:YES completion:nil];
+}
+
+- (void)authHelper:(id)helper onUserError:(NSError *)error {
+  UIAlertController *userErrorController = [UIAlertController alertControllerWithTitle:@"User error!" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+  [userErrorController addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    self.passwordTextField.text = @"";
+  }]];
+
+  [self presentViewController:userErrorController animated:YES completion:nil];
+}
+
+- (void)onLogout {
+  _selectedAuthHelper = nil;
+}
+
+#pragma mark -
+#pragma mark Twitter Auth Delegate methods
+
+- (void)createTwitterAccount {
+  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.twitter.com/signup"]];
 }
 
 - (void)selectTwitterAccount:(NSArray *)accounts {
-  // Pop up action sheet which has different user accounts as options
-  UIActionSheet *selectUserActionSheet =
-      [[UIActionSheet alloc] initWithTitle:@"Select Twitter Account"
-                                  delegate:self
-                         cancelButtonTitle:nil
-                    destructiveButtonTitle:nil
-                         otherButtonTitles:nil];
+  UIAlertController *accountSelectController = [UIAlertController alertControllerWithTitle:@"Select Twitter Account" message:@"Please select which Twitter account you would like to sign in with." preferredStyle:UIAlertControllerStyleActionSheet];
 
-  // For every twitter account in the Account Store, create a button with the
-  // handle as the title
-  for (ACAccount *account in accounts) {
-    [selectUserActionSheet addButtonWithTitle:[account username]];
-  }
+  [accounts enumerateObjectsUsingBlock:^(ACAccount *account, NSUInteger index, BOOL * _Nonnull stop) {
+    UIAlertAction *addAccountAction = [UIAlertAction actionWithTitle:account.username style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+      [self.twitterAuthHelper loginWithAccount:account];
+    }];
+    [accountSelectController addAction:addAccountAction];
+  }];
 
-  // Cancellation button
-  selectUserActionSheet.cancelButtonIndex =
-      [selectUserActionSheet addButtonWithTitle:@"Cancel"];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+  [accountSelectController addAction:cancelAction];
 
-  // Show action sheet
-  [selectUserActionSheet showInView:self.view];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet
-    clickedButtonAtIndex:(NSInteger)buttonIndex {
-  // Get the button title that was tapepd
-  NSString *buttonTappedTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-
-  // Check for cancellations
-  if ([buttonTappedTitle isEqualToString:@"Cancel"]) {
-    [self.delegate onCancelled];
-    return;
-  }
-
-  // Check button title against available accounts to authenticate against
-  for (ACAccount *account in self.twitterAuthHelper.accounts) {
-    if ([buttonTappedTitle isEqualToString:account.username]) {
-      [self authenticateWithTwitterAccount:account];
-      return;
-    }
-  }
+  [self presentViewController:accountSelectController animated:YES completion:nil];
 }
 
 @end

@@ -29,24 +29,21 @@
  */
 
 #import "FirebaseAppDelegate.h"
-#import "GGLContext.h"
 
 @implementation FirebaseAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  // Override point for customization after application launch.
-  
-  // Configure Google SignIn
+  // Configure Google
   NSError* configureError;
-  
   [[GGLContext sharedInstance] configureWithError: &configureError];
   NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
-  
-  
-  
-  // Return successful Facebook SDK Install
-  return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                  didFinishLaunchingWithOptions:launchOptions];
+
+  // Configure Facebook
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                           didFinishLaunchingWithOptions:launchOptions];
+
+  // Return successful app launch
+  return YES;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
@@ -56,7 +53,7 @@
                                                           openURL:url
                                                 sourceApplication:sourceApplication
                                                        annotation:annotation];
-  } else {
+  } else if ([url.scheme hasPrefix:@"com.google"]) {
     return [[GIDSignIn sharedInstance] handleURL:url
                                sourceApplication:sourceApplication
                                       annotation:annotation];
