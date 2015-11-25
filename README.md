@@ -37,7 +37,7 @@ account](https://www.firebase.com/signup/?utm_source=firebaseui-ios).
 This is a quickstart on how to use FirebaseUI's core features to speed up iOS development with Firebase. FirebaseUI includes the following features:
 
 ### FirebaseUI Core
-Provides core data binding capabilities as well as specific datasources for lists of data. Skip to the [Core API overview](https://github.com/firebase/firebaseui-ios#firebaseui-auth-api) for more information.
+Provides core data binding capabilities as well as specific datasources for lists of data. Skip to the [Core API overview](https://github.com/firebase/firebaseui-ios#firebaseui-core-api) for more information.
 
 Class  | Description
 ------------- | -------------
@@ -47,7 +47,7 @@ FirebaseArray | Keeps an array synchronized to a Firebase query
 FirebaseDataSource | Generic superclass to create a custom data source
 
 ### FirebaseUI Auth
-Provides authentication providers as well as concrete implementations for Facebook, Google, Twitter, and Firbase email/password, plus a headful UI that handles auth state and error conditions. Skip to the [Auth API overview](https://github.com/firebase/firebaseui-ios#firebaseui-core-api) for more information.
+Provides authentication providers as well as concrete implementations for Facebook, Google, Twitter, and Firbase email/password, plus a headful UI that handles auth state and error conditions. Skip to the [Auth API overview](https://github.com/firebase/firebaseui-ios#firebaseui-auth-api) for more information.
 
 Class  | Description
 ------------- | -------------
@@ -638,7 +638,7 @@ $ cd FirebaseUI-iOS
 $ ./setup.sh
 ```
 
-Note that `setup.sh` pulls in a number of provider frameworks (Facebook, Google), which need to be pulled in for local development. The build will also fail due to Google using `#import <Google/SignIn.h>` in their pod but `#import <GoogleSignIn/GoogleSignIn.h>` in the framework, so you can either change the imports, or include `FirebaseUI` in a Cocoapods project and edit there.
+Note that `setup.sh` pulls in a number of provider frameworks (Facebook, Google), which need to be pulled in for local development. The debug build and framework release have the flag `LOCAL_BUILD=1` which uses the local frameworks installed via `setup.sh`, while the Cocoapods release doesn't have this flag set, so the appropriate Pod `#import` statements are used.
 
 FirebaseUI makes use of XCode 7 features such as lightweight generics and `__kindof` annotations, but it should be backwards compatible to XCode 6 thanks to [XCodeMacros.h](https://github.com/firebase/FirebaseUI-iOS/blob/master/FirebaseUI/XCodeMacros.h).
 
