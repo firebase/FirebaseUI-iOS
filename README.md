@@ -343,11 +343,105 @@ FirebaseDataSource acts as a generic data source by providing common information
 
 ## FirebaseUI Auth API
 
-### FirebaseAuthProvider
+### FirebaseAppDelegate
+`FirebaseAppDelegate` is replacement for the standard `AppDelegate` and provides setup features necessary for authentication to work. If you plan on using FirebaseUI authentication features, your `AppDelegate` should subclass `FirebaseAppDelegate` like so:
 
-`FirebaseAuthProvider` is a superclass for all identity providers, providing a default constructor `[FirebaseAuthProvider initWithRef:authDelegate:]` as well as `login`, `logout`, and `configureProvider` methods to facilitate standard authentication across providers. `login` and `configureProvider` are unimplemented in the base implementation and will thrown an exception if called, so each provider should override these methods. `logout` is implemented to unauthenticate the given Firebase reference, and should always be called using `[super logout]` at the end of any subclass implementation.
+#### Objective-C
+```objective-c
+// AppDelegate.h
+#import <UIKit/UIKit.h>
+#import <FirebaseUI/FirebaseUI.h>
 
-`FirebaseAuthProvider` also registers a singleton authentication listener that monitors the global authentication state across all providers and will route `authProvider:onLogin:` and `onLogout` events appropriately.
+@interface AppDelegate : FirebaseAppDelegate
+
+@end
+
+// AppDelegate.m
+#import "AppDelegate.h"
+
+@implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  [super application:application didFinishLaunchingWithOptions:launchOptions];
+  // Override point for customization after application launch.
+
+  return YES;
+}
+...
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nonnull id)annotation {
+  [super application:app openURL:url sourceApplication:sourceApplication annotation:annotation];
+  // Override point for customization.
+
+  return YES;
+}
+
+@end
+```
+
+#### Swift
+```swift
+import UIKit
+import FirebaseUI
+
+@UIApplicationMain
+class AppDelegate: FirebaseAppDelegate {
+
+  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    super.application(application, launchOptions);
+    // Override point for customization after application launch.
+
+    return true
+  }
+  ...
+
+  func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    super.application(application, url, sourceApplication, annotation);
+    // Override point for customization.
+
+    return true
+  }
+}
+```
+
+### FirebaseLoginViewController
+`FirebaseLoginViewContoller` quickly adds a headful UI flow to your application. This flow supports email/password login, as well as social providers (Facebook, Google, Twitter). Using this, you can easily guide users through the login journey, get the current user's state, and log the user out. This view looks like:
+
+![FirebaseLoginViewController with all providers enabled](https://raw.github.com/firebase/firebaseui-ios/tree/master/docs/FirebaseLoginViewController.png)
+
+Code to create this view is below:
+
+#### Objective-C
+```objective-c
+Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<YOUR-FIREBASE-APP>.firebaseio.com/"];
+FirebaseLoginViewController *loginViewController = [[FirebaseLoginViewController alloc] initWithRef:ref];
+  [loginViewController enableProvider:kGoogleAuthProvider];
+  [loginViewController enableProvider:kFacebookAuthProvider];
+  [loginViewController enableProvider:kTwitterAuthProvider];
+  [loginViewController enableProvider:kPasswordAuthProvider];
+  [self presentViewController:self.loginViewController animated:YES completion:nil];
+  ...
+  FAuthData *user = [loginViewController currentUser]; // Check the currently logged in user
+  ...
+  [loginViewController logout]; // Log the current user out
+```
+
+#### Swift
+```swift
+let firebaseRef = Firebase(url: "https://<YOUR-FIREBASE-APP>.firebaseio.com/")
+var loginViewController = FirebaseLoginViewController(ref: firebaseRef)
+loginViewController.enableProvider(kGoogleAuthProvider)
+loginViewController.enableProvider(kFacebookAuthProvider)
+loginViewController.enableProvider(kTwitterAuthProvider)
+loginViewController.enableProvider(kPasswordAuthProvider)
+self.presentViewController(loginViewController, animated: true, completion: nil)
+...
+var user: FAuthData = loginViewController.currentUser(); // Check the currently logged in user
+...
+loginViewController.logout(); // Log the current user out
+```
+
+
 
 ### FirebaseFacebookAuthProvider
 
@@ -370,7 +464,6 @@ facebookProvider.login()
 ...
 facebookProvider.logout()
 ```
-
 ### FirebaseGoogleAuthProvider
 
 `FirebaseGoogleAuthProvider` is a wrapper around Google login. To enable this, visit the Auth tab of your Firebase Dashboard and enable this provider by checking the checkbox, then [create a new Google Project](https://developers.google.com/identity/sign-in/ios/start), download `GoogleServices-Info.plist`, and include it in your projct. You will also have to add several URL schemes to your "Info.plist". For more information about setup, see the Firebase [Google authentication docs](https://www.firebase.com/docs/ios/guide/login/google.html).
@@ -438,6 +531,12 @@ passwordProvider.login()
 ```
 
 ## Understanding FirebaseUI Auth's Internals
+
+### FirebaseAuthProvider
+
+`FirebaseAuthProvider` is a superclass for all identity providers, providing a default constructor `[FirebaseAuthProvider initWithRef:authDelegate:]` as well as `login`, `logout`, and `configureProvider` methods to facilitate standard authentication across providers. `login` and `configureProvider` are unimplemented in the base implementation and will thrown an exception if called, so each provider should override these methods. `logout` is implemented to unauthenticate the given Firebase reference, and should always be called using `[super logout]` at the end of any subclass implementation.
+
+`FirebaseAuthProvider` also registers a singleton authentication listener that monitors the global authentication state across all providers and will route `authProvider:onLogin:` and `onLogout` events appropriately.
 
 ### FirebaseAuthDelegate and TwitterAuthDelegate protocols
 
