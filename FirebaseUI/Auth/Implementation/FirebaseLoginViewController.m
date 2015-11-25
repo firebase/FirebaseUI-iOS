@@ -42,6 +42,7 @@
   self = [super init];
   if (self) {
     self.ref = ref;
+    self.dismissCallback = ^(FAuthData *user, NSError *error){};
     _socialProviders = [[NSMutableArray alloc] initWithCapacity:3];
   }
   return self;
@@ -57,16 +58,19 @@
   self.cancelButton.imageView.tintColor =
       [UIColor colorWithRed:158.0f / 255.0f green:158.0f / 255.0f blue:158.0f / 255.0f alpha:1.0f];
   [self.cancelButton addTarget:self
-                        action:@selector(dismissViewController)
+                        action:@selector(cancelButtonPressed)
               forControlEvents:UIControlEventTouchUpInside];
 
   // If we're already logged in, cancel this
   if (_selectedAuthProvider) {
-    [self dismissViewController];
+    [self dismissViewControllerWithUser:self.currentUser andError:nil];
   }
 
   if (self.passwordAuthProvider == nil && [_socialProviders count] == 0) {
-    [self dismissViewController];  // Or throw an exception--you need to have at least one provider
+    NSError *error = [[NSError alloc] initWithDomain:NSStringFromClass(self.class)
+                                                code:FAuthenticationErrorInvalidConfiguration
+                                            userInfo:nil];
+    [self dismissViewControllerWithUser:nil andError:error];
   }
 
   // Populate email/password view
@@ -154,6 +158,10 @@
   return self;
 }
 
+- (void)didDismissWithBlock:(void (^)(FAuthData *user, NSError *error))callback {
+  self.dismissCallback = callback;
+}
+
 - (void)loginButtonPressed:(id)button {
   if ([button isKindOfClass:[FirebaseLoginButton class]]) {
     FirebaseLoginButton *loginButton = (FirebaseLoginButton *)button;
@@ -182,8 +190,14 @@
   return [self.ref authData];
 }
 
-- (void)dismissViewController {
-  [self dismissViewControllerAnimated:YES completion:nil];
+- (void)cancelButtonPressed {
+  [self dismissViewControllerWithUser:nil andError:nil];
+}
+
+- (void)dismissViewControllerWithUser:(FAuthData *)user andError:(NSError *)error {
+  [self dismissViewControllerAnimated:YES completion:^{
+    self.dismissCallback(user, error);
+  }];
 }
 
 #pragma mark -
@@ -193,7 +207,7 @@
   _selectedAuthProvider = provider;
   self.emailTextField.text = @"";
   self.passwordTextField.text = @"";
-  [self dismissViewController];
+  [self dismissViewControllerWithUser:authData andError:nil];
 }
 
 - (void)authProvider:(id)provider onProviderError:(NSError *)error {

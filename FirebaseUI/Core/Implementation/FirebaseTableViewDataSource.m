@@ -42,7 +42,7 @@
 - (instancetype)initWithRef:(Firebase *)ref
         cellReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
-  return [self initWithRef:ref
+  return [self initWithQuery:ref
                 modelClass:nil
                  cellClass:nil
        cellReuseIdentifier:identifier
