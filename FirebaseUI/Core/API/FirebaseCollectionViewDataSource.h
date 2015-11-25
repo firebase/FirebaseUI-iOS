@@ -55,8 +55,7 @@
  * desired data from
  * Firebase.
  */
-@interface FirebaseCollectionViewDataSource
-    : FirebaseDataSource<UICollectionViewDataSource>
+@interface FirebaseCollectionViewDataSource : FirebaseDataSource<UICollectionViewDataSource>
 
 /**
  * The model class to coerce FDataSnapshots to (if desired). For instance, if
@@ -102,8 +101,7 @@
  * datasource.
  */
 @property(strong, nonatomic, __NON_NULL) void (^populateCell)
-    (__KINDOF(UICollectionViewCell) __NON_NULL_PTR cell,
-     __KINDOF(NSObject) __NON_NULL_PTR object);
+    (__KINDOF(UICollectionViewCell) __NON_NULL_PTR cell, __KINDOF(NSObject) __NON_NULL_PTR object);
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -118,8 +116,7 @@
  */
 - (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)
-                                           collectionView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -136,8 +133,7 @@
  */
 - (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
               prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)
-                                           collectionView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
@@ -156,8 +152,7 @@
 - (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
                              cellClass:(__NULLABLE Class)cell
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)
-                                           collectionView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
@@ -175,8 +170,7 @@
 - (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
                               nibNamed:(__NON_NULL NSString *)nibName
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)
-                                           collectionView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -194,8 +188,7 @@
 - (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
                             modelClass:(__NULLABLE Class)model
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)
-                                           collectionView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -215,8 +208,7 @@
 - (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
                             modelClass:(__NULLABLE Class)model
               prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)
-                                           collectionView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
@@ -238,8 +230,7 @@
                             modelClass:(__NULLABLE Class)model
                              cellClass:(__NULLABLE Class)cell
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)
-                                           collectionView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
@@ -260,8 +251,7 @@
                             modelClass:(__NULLABLE Class)model
                               nibNamed:(__NON_NULL NSString *)nibName
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UICollectionView *)
-                                           collectionView;
+                                  view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * This method populates the fields of a UICollectionViewCell or subclass given

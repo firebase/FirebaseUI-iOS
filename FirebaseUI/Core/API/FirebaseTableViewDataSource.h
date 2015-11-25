@@ -54,8 +54,7 @@
  * created for them
  * with desired data from Firebase.
  */
-@interface FirebaseTableViewDataSource
-    : FirebaseDataSource<UITableViewDataSource>
+@interface FirebaseTableViewDataSource : FirebaseDataSource<UITableViewDataSource>
 
 /**
  * The model class to coerce FDataSnapshots to (if desired). For instance, if
@@ -89,8 +88,7 @@
  * provided by the datasource.
  */
 @property(strong, nonatomic, __NON_NULL) void (^populateCell)
-    (__KINDOF(UITableViewCell) __NON_NULL_PTR cell,
-     __KINDOF(NSObject) __NON_NULL_PTR object);
+    (__KINDOF(UITableViewCell) __NON_NULL_PTR cell, __KINDOF(NSObject) __NON_NULL_PTR object);
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates
@@ -250,8 +248,8 @@
  * subclass) and the
  * corresponding object to populate the cell with.
  */
-- (void)populateCellWithBlock:
-    (__NON_NULL void (^)(__KINDOF(UITableViewCell)__NON_NULL_PTR cell,
-                         __KINDOF(NSObject)__NON_NULL_PTR object))callback;
+- (void)populateCellWithBlock:(__NON_NULL void (^)(__KINDOF(UITableViewCell)__NON_NULL_PTR cell,
+                                                   __KINDOF(NSObject)
+                                                       __NON_NULL_PTR object))callback;
 
 @end

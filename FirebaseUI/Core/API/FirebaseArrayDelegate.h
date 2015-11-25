@@ -31,7 +31,8 @@
 // clang-format on
 
 /**
- * A protocol to allow instances of FirebaseArray to raise events through a delegate. Raises all
+ * A protocol to allow instances of FirebaseArray to raise events through a
+ * delegate. Raises all
  * Firebase events except FEventTypeValue.
  */
 @protocol FirebaseArrayDelegate<NSObject>
@@ -39,7 +40,8 @@
 @optional
 
 /**
- * Delegate method which is called whenever an object is added to a FirebaseArray. On a
+ * Delegate method which is called whenever an object is added to a
+ * FirebaseArray. On a
  * FirebaseArray synchronized to a Firebase reference, this corresponds to an
  * [FEventTypeChildAdded](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
  * event being raised.
@@ -49,7 +51,8 @@
 - (void)childAdded:(id)object atIndex:(NSUInteger)index;
 
 /**
- * Delegate method which is called whenever an object is chinged in a FirebaseArray. On a
+ * Delegate method which is called whenever an object is chinged in a
+ * FirebaseArray. On a
  * FirebaseArray synchronized to a Firebase reference, this corresponds to an
  * [FEventTypeChildChanged](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
  * event being raised.
@@ -59,7 +62,8 @@
 - (void)childChanged:(id)object atIndex:(NSUInteger)index;
 
 /**
- * Delegate method which is called whenever an object is removed from a FirebaseArray. On a
+ * Delegate method which is called whenever an object is removed from a
+ * FirebaseArray. On a
  * FirebaseArray synchronized to a Firebase reference, this corresponds to an
  * [FEventTypeChildRemoved](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
  * event being raised.
@@ -69,7 +73,8 @@
 - (void)childRemoved:(id)object atIndex:(NSUInteger)index;
 
 /**
- * Delegate method which is called whenever an object is moved within a FirebaseArray. On a
+ * Delegate method which is called whenever an object is moved within a
+ * FirebaseArray. On a
  * FirebaseArray synchronized to a Firebase reference, this corresponds to an
  * [FEventTypeChildMoved](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
  * event being raised.

@@ -30,13 +30,30 @@
 
 // clang-format on
 
-#import <Foundation/Foundation.h>
+#import "FirebasePasswordAuthProvider.h"
 
-#import <FirebaseUI/FirebaseArray.h>
-#import <FirebaseUI/FirebaseDataSource.h>
-#import <FirebaseUI/FirebaseTableViewDataSource.h>
-#import <FirebaseUI/FirebaseCollectionViewDataSource.h>
+@implementation FirebasePasswordAuthProvider
 
-@interface FirebaseUI : NSObject
+- (instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate {
+  self = [super initWithRef:ref authDelegate:authDelegate];
+  if (self) {
+    self.provider = kPasswordAuthProvider;
+  }
+  return self;
+}
+
+- (void)loginWithEmail:(NSString *)email andPassword:(NSString *)password {
+  [self.ref authUser:email
+                 password:password
+      withCompletionBlock:^(NSError *error, FAuthData *authData) {
+        if (error) {
+          [self handleError:error];
+        }
+      }];
+}
+
+- (void)logout {
+  [self.ref unauth];
+}
 
 @end

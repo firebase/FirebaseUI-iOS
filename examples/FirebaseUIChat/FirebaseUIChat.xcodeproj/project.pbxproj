@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F11FE7AAF30802A7F12D8F0 /* libPods-FirebaseUIChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56F846D2BC3C877AD3D5CCBF /* libPods-FirebaseUIChat.a */; };
 		812864A440E7F9929EE6CE11 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3A6C38C3FB99BDE832EC5EB /* libPods.a */; };
 		D81A05F61B86A78700498183 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D81A05F51B86A78700498183 /* main.m */; };
 		D81A05F91B86A78700498183 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D81A05F81B86A78700498183 /* AppDelegate.m */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		56F846D2BC3C877AD3D5CCBF /* libPods-FirebaseUIChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseUIChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D57EB4D8BFBE7A4BDD335F0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9BACE546357A3207276416D6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D81A05F01B86A78700498183 /* FirebaseUIChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseUIChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +65,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				812864A440E7F9929EE6CE11 /* libPods.a in Frameworks */,
+				0F11FE7AAF30802A7F12D8F0 /* libPods-FirebaseUIChat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				F3A6C38C3FB99BDE832EC5EB /* libPods.a */,
+				56F846D2BC3C877AD3D5CCBF /* libPods-FirebaseUIChat.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,6 +177,7 @@
 				D81A05ED1B86A78700498183 /* Frameworks */,
 				D81A05EE1B86A78700498183 /* Resources */,
 				7540E200A4937FA3FD4DA402 /* Copy Pods Resources */,
+				DC2743A2818720849B79581E /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -288,6 +293,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC2743A2818720849B79581E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
