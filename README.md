@@ -351,7 +351,7 @@ FirebaseDataSource acts as a generic data source by providing common information
 
 ### FirebaseFacebookAuthProvider
 
-`FirebaseFacebookAuthProvider` is a wrapper around Facebook login. To enable this, visit the Auth tab of your Firebase Dashboard and enable this provider by checking the checkbox, then [create a new Facebook project](https://developers.facebook.com/docs/ios/getting-started) and follow the installation instructions. You will also have to add "FacebookAppID" and "FacebookDisplayName" keys as well as several URL schemes to your "Info.plist". For more information about setup, see the Firebase [Google authentication docs](https://www.firebase.com/docs/ios/guide/login/facebook.html).
+`FirebaseFacebookAuthProvider` is a wrapper around Facebook login. To enable this, visit the Auth tab of your Firebase Dashboard and enable this provider by checking the checkbox, then [create a new Facebook project](https://developers.facebook.com/docs/ios/getting-started) and follow the installation instructions. You will also have to add "FacebookAppID" and "FacebookDisplayName" keys as well as several URL schemes to your "Info.plist". For more information about setup, see the Firebase [Facebook authentication docs](https://www.firebase.com/docs/ios/guide/login/facebook.html).
 
 #### Objective-C
 ```objective-c
