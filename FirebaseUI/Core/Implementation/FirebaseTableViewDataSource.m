@@ -52,8 +52,7 @@
 - (instancetype)initWithRef:(Firebase *)ref
    prototypeReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
-  self.hasPrototypeCell = YES;
-  return [self initWithRef:ref
+  return [self initWithQuery:ref
                 modelClass:nil
                  cellClass:nil
        cellReuseIdentifier:identifier
@@ -64,7 +63,7 @@
                   cellClass:(Class)cell
         cellReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
-  return [self initWithRef:ref
+  return [self initWithQuery:ref
                 modelClass:nil
                  cellClass:cell
        cellReuseIdentifier:identifier
@@ -75,7 +74,7 @@
                    nibNamed:(NSString *)nibName
         cellReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
-  return [self initWithRef:ref
+  return [self initWithQuery:ref
                 modelClass:nil
                   nibNamed:nibName
        cellReuseIdentifier:identifier
@@ -86,7 +85,7 @@
                  modelClass:(Class)model
         cellReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
-  return [self initWithRef:ref
+  return [self initWithQuery:ref
                 modelClass:model
                  cellClass:nil
        cellReuseIdentifier:identifier
@@ -97,8 +96,7 @@
                  modelClass:(Class)model
    prototypeReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
-  self.hasPrototypeCell = YES;
-  return [self initWithRef:ref
+  return [self initWithQuery:ref
                 modelClass:model
                  cellClass:nil
        cellReuseIdentifier:identifier
@@ -110,7 +108,97 @@
                   cellClass:(Class)cell
         cellReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
-  FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
+  return [self initWithQuery:ref
+                  modelClass:model
+                   cellClass:cell
+          cellReuseIdentifier:identifier
+                        view:tableView];
+}
+
+- (instancetype)initWithRef:(Firebase *)ref
+                 modelClass:(Class)model
+                   nibNamed:(NSString *)nibName
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UITableView *)tableView {
+  return [self initWithQuery:ref
+           modelClass:model
+            nibNamed:nibName
+  cellReuseIdentifier:identifier
+                 view:tableView];
+}
+
+- (instancetype)initWithQuery:(FQuery *)query
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UITableView *)tableView {
+  return [self initWithQuery:query
+                  modelClass:nil
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:tableView];
+}
+
+- (instancetype)initWithQuery:(FQuery *)query
+     prototypeReuseIdentifier:(NSString *)identifier
+                         view:(UITableView *)tableView {
+  self.hasPrototypeCell = YES;
+  return [self initWithQuery:query
+                  modelClass:nil
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:tableView];
+}
+
+- (instancetype)initWithQuery:(FQuery *)query
+                    cellClass:(Class)cell
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UITableView *)tableView {
+  return [self initWithQuery:query
+                  modelClass:nil
+                   cellClass:cell
+         cellReuseIdentifier:identifier
+                        view:tableView];
+}
+
+- (instancetype)initWithQuery:(FQuery *)query
+                     nibNamed:(NSString *)nibName
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UITableView *)tableView {
+  return [self initWithQuery:query
+                  modelClass:nil
+                    nibNamed:nibName
+         cellReuseIdentifier:identifier
+                        view:tableView];
+}
+
+- (instancetype)initWithQuery:(FQuery *)query
+                   modelClass:(Class)model
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UITableView *)tableView {
+  return [self initWithQuery:query
+                  modelClass:model
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:tableView];
+}
+
+- (instancetype)initWithQuery:(FQuery *)query
+                   modelClass:(Class)model
+     prototypeReuseIdentifier:(NSString *)identifier
+                         view:(UITableView *)tableView {
+  self.hasPrototypeCell = YES;
+  return [self initWithQuery:query
+                  modelClass:model
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:tableView];
+}
+
+- (instancetype)initWithQuery:(FQuery *)query
+                   modelClass:(Class)model
+                    cellClass:(Class)cell
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UITableView *)tableView {
+  FirebaseArray *array = [[FirebaseArray alloc] initWithQuery:query];
   self = [super initWithArray:array];
   if (self) {
     if (!model) {
@@ -134,12 +222,12 @@
   return self;
 }
 
-- (instancetype)initWithRef:(Firebase *)ref
-                 modelClass:(Class)model
-                   nibNamed:(NSString *)nibName
-        cellReuseIdentifier:(NSString *)identifier
-                       view:(UITableView *)tableView {
-  FirebaseArray *array = [[FirebaseArray alloc] initWithRef:ref];
+- (instancetype)initWithQuery:(FQuery *)query
+                   modelClass:(Class)model
+                     nibNamed:(NSString *)nibName
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UITableView *)tableView {
+  FirebaseArray *array = [[FirebaseArray alloc] initWithQuery:query];
   self = [super initWithArray:array];
   if (self) {
     if (!model) {

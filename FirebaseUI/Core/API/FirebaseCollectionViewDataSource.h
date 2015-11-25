@@ -254,6 +254,156 @@
                                   view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
+ * Initialize an instance of FirebaseCollectionViewDataSource that populates
+ * UICollectionViewCells
+ * with FDataSnapshots.
+ * @param query A Firebase query to bind the datasource to
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param collectionView An instance of a UICollectionView to bind to
+ * @return An instance of FirebaseCollectionViewDataSource that populates
+ * UICollectionViewCells with
+ * FDataSnapshots
+ */
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                    view:(__NON_NULL UICollectionView *)collectionView;
+
+/**
+ * Initialize an instance of FirebaseCollectionViewDataSource that populates
+ * UICollectionViewCells
+ * with FDataSnapshots. Note that this method is used when using prototype
+ * cells, where the cells
+ * don't need to be registered in the class.
+ * @param query A Firebase query to bind the datasource to
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param collectionView An instance of a UICollectionView to bind to
+ * @return An instance of FirebaseCollectionViewDataSource that populates
+ * UICollectionViewCells with
+ * FDataSnapshots
+ */
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+                prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
+                                    view:(__NON_NULL UICollectionView *)collectionView;
+
+/**
+ * Initialize an instance of FirebaseCollectionViewDataSource that populates a
+ * custom subclass of
+ * UICollectionViewCell with FDataSnapshots.
+ * @param query A Firebase query to bind the datasource to
+ * @param cell A subclass of UICollectionViewCell used to populate the
+ * UICollectionView, defaults to
+ * UICollectionViewCell if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param collectionView An instance of a UICollectionView to bind to
+ * @return An instance of FirebaseCollectionViewDataSource that populates a
+ * custom subclass of
+ * UICollectionViewCell with FDataSnapshots
+ */
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+                               cellClass:(__NULLABLE Class)cell
+                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                    view:(__NON_NULL UICollectionView *)collectionView;
+
+/**
+ * Initialize an instance of FirebaseCollectionViewDataSource that populates a
+ * custom xib with
+ * FDataSnapshots.
+ * @param query A Firebase query to bind the datasource to
+ * @param nibName The name of a xib file to create the layout for a
+ * UICollectionViewCell
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param collectionView An instance of a UICollectionView to bind to
+ * @return An instance of FirebaseCollectionViewDataSource that populates a
+ * custom xib with
+ * FDataSnapshots
+ */
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+                                nibNamed:(__NON_NULL NSString *)nibName
+                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                    view:(__NON_NULL UICollectionView *)collectionView;
+
+/**
+ * Initialize an instance of FirebaseCollectionViewDataSource that populates
+ * UICollectionViewCells
+ * with a custom model class.
+ * @param query A Firebase query to bind the datasource to
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param collectionView An instance of a UICollectionView to bind to
+ * @return An instance of FirebaseCollectionViewDataSource that populates
+ * UICollectionViewCells with
+ * a custom model class
+ */
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+                              modelClass:(__NULLABLE Class)model
+                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                    view:(__NON_NULL UICollectionView *)collectionView;
+
+/**
+ * Initialize an instance of FirebaseCollectionViewDataSource that populates
+ * UICollectionViewCells
+ * with a custom model class. Note that this method is used when using prototype
+ * cells, where the
+ * cells don't need to be registered in the class.
+ * @param query A Firebase query to bind the datasource to
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param collectionView An instance of a UICollectionView to bind to
+ * @return An instance of FirebaseCollectionViewDataSource that populates
+ * UICollectionViewCells with
+ * a custom model class
+ */
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+                              modelClass:(__NULLABLE Class)model
+                prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
+                                    view:(__NON_NULL UICollectionView *)collectionView;
+
+/**
+ * Initialize an instance of FirebaseCollectionViewDataSource that populates a
+ * custom subclass of
+ * UICollectionViewCell with a custom model class.
+ * @param query A Firebase query to bind the datasource to
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param cell A subclass of UICollectionViewCell used to populate the
+ * UICollectionView, defaults to
+ * UICollectionViewCell if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param collectionView An instance of a UICollectionView to bind to
+ * @return An instance of FirebaseCollectionViewDataSource that populates a
+ * custom subclass of
+ * UICollectionViewCell with a custom model class
+ */
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+                              modelClass:(__NULLABLE Class)model
+                               cellClass:(__NULLABLE Class)cell
+                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                    view:(__NON_NULL UICollectionView *)collectionView;
+
+/**
+ * Initialize an instance of FirebaseCollectionViewDataSource that populates a
+ * custom xib with a
+ * custom model class.
+ * @param query A Firebase query to bind the datasource to
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param nibName The name of a xib file to create the layout for a
+ * UICollectionViewCell
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param collectionView An instance of a UICollectionView to bind to
+ * @return An instance of FirebaseCollectionViewDataSource that populates a
+ * custom xib with a custom
+ * model class
+ */
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+                              modelClass:(__NULLABLE Class)model
+                                nibNamed:(__NON_NULL NSString *)nibName
+                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                    view:(__NON_NULL UICollectionView *)collectionView;
+
+/**
  * This method populates the fields of a UICollectionViewCell or subclass given
  * an FDataSnapshot (or
  * custom model object).

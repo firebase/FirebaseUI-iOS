@@ -179,7 +179,7 @@
 }
 
 - (FAuthData *)currentUser {
-  return _selectedAuthProvider.authData;
+  return [self.ref authData];
 }
 
 - (void)dismissViewController {
