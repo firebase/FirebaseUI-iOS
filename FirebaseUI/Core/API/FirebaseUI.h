@@ -36,9 +36,9 @@
 #import <FirebaseUI/FirebaseDataSource.h>
 #import <FirebaseUI/FirebaseTableViewDataSource.h>
 #import <FirebaseUI/FirebaseCollectionViewDataSource.h>
-#import <FirebaseUI/FirebaseTwitterAuthHelper.h>
-#import <FirebaseUI/FirebaseFacebookAuthHelper.h>
-#import <FirebaseUI/FirebaseGoogleAuthHelper.h>
+#import <FirebaseUI/FirebaseTwitterAuthProvider.h>
+#import <FirebaseUI/FirebaseFacebookAuthProvider.h>
+#import <FirebaseUI/FirebaseGoogleAuthProvider.h>
 #import <FirebaseUI/FirebaseLoginViewController.h>
 #import <FirebaseUI/FirebaseAppDelegate.h>
 

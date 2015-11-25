@@ -31,6 +31,7 @@
 // clang-format on
 
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CGBase.h>
 
 #ifndef FirebaseAuthConstants_h
 #define FirebaseAuthConstants_h

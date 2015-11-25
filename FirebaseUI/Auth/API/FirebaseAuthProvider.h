@@ -38,10 +38,10 @@
 #import "FirebaseAuthConstants.h"
 
 /**
- * The base auth helper class that authenticates a user with an identity provider
+ * The base auth provider class that authenticates a user with an identity provider
  * to a Firebase reference. Subclass this to add support for new identity providers.
  */
-@interface FirebaseAuthHelper : NSObject
+@interface FirebaseAuthProvider : NSObject
 
 /**
  * The Firebase reference to authenticate against
@@ -66,12 +66,12 @@
 @property(weak, nonatomic) id<FirebaseAuthDelegate> delegate;
 
 /**
- * Create an instance of FirebaseAuthHelper, which allows for simple authentication to Firebase
+ * Create an instance of FirebaseAuthProvider, which allows for simple authentication to Firebase
  * via various identity providers (social, email/password, etc.). This method should be called
  * by subclasses
  * @param ref The Firebase reference to use for authentication
  * @param authDelegate A class that implements the FirebaseAuthDelegate protocol
- * @return FirebaseAuthHelper
+ * @return FirebaseAuthProvider
  */
 - (instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate;
 

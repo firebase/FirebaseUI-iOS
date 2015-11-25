@@ -35,13 +35,13 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-#import "FirebaseAuthHelper.h"
+#import "FirebaseAuthProvider.h"
 
 /**
- * A helper class that authenticates a user with Facebook
+ * An authentication provider class that authenticates a user with Facebook
  * and uses the credentials to authenticate a Firebase reference
  */
-@interface FirebaseFacebookAuthHelper : FirebaseAuthHelper
+@interface FirebaseFacebookAuthProvider : FirebaseAuthProvider
 
 /**
  * A Facebook Login Manager object for handling Facebook authentication

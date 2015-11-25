@@ -22,6 +22,7 @@ ${XCODEBUILD} \
   IPHONEOS_DEPLOYMENT_TARGET=7.0 \
   ONLY_ACTIVE_ARCH=NO \
   ARCHS="armv7 armv7s arm64" \
+  GCC_PREPROCESSOR_DEFINITIONS='${inherited} LOCAL_BUILD=1'\
   build
 
 echo "===> Building simulator binary"
@@ -37,6 +38,7 @@ ${XCODEBUILD} \
   IPHONEOS_DEPLOYMENT_TARGET=7.0 \
   ONLY_ACTIVE_ARCH=NO \
   ARCHS="i386 x86_64" \
+  GCC_PREPROCESSOR_DEFINITIONS='${inherited} LOCAL_BUILD=1'\
   build
 
 echo "===> Using simulator binary as base project for headers and directory structure"

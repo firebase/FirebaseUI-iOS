@@ -41,12 +41,12 @@
 @required
 /**
  * Method that fires when a user is logged in via any provider. Information about the provider comes
- * through the authHelper.
- * @param helper The helper
+ * through the authProvider.
+ * @param provider An instance of FirebaseAuthProvider which contains information about the provider
  * @param authData A class that implements the FirebaseAuthDelegate protocol
  * @return void
  */
-- (void)authHelper:(id)helper onLogin:(FAuthData *)authData;
+- (void)authProvider:(id)provider onLogin:(FAuthData *)authData;
 
 /**
  * Method that fires when a user is logged out of the current authentication provider.
@@ -60,20 +60,20 @@
  * This could include Firebase authentication (provider incorrectly set up in the Firebase
  * Dashboard)
  * or issues with the provider itself (provider is down, incorrectly provisioned, etc.).
- * @param helper The helper
+ * @param provider An instance of FirebaseAuthProvider which contains information about the provider
  * @param error
  * @return void
  */
-- (void)authHelper:(id)helper onProviderError:(NSError *)error;
+- (void)authProvider:(id)provider onProviderError:(NSError *)error;
 
 /**
  * Method that fires when authentication fails due to an error on the user side.
  * This could include incorrect email/password, or a user canceling an authentication request
  * with an identity provider.
- * @param helper The helper
+ * @param provider An instance of FirebaseAuthProvider which contains information about the provider
  * @param error
  * @return void
  */
-- (void)authHelper:(id)helper onUserError:(NSError *)error;
+- (void)authProvider:(id)provider onUserError:(NSError *)error;
 
 @end

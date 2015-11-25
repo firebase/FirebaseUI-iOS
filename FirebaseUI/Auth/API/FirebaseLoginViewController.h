@@ -35,13 +35,17 @@
 
 #import <Firebase/Firebase.h>
 
+#if LOCAL_BUILD
+#import <GoogleSignIn/GoogleSignIn.h>
+#else
 #import <Google/SignIn.h>
+#endif
 
 #import "FirebaseAuthDelegate.h"
-#import "FirebaseTwitterAuthHelper.h"
-#import "FirebaseFacebookAuthHelper.h"
-#import "FirebaseGoogleAuthHelper.h"
-#import "FirebasePasswordAuthHelper.h"
+#import "FirebaseTwitterAuthProvider.h"
+#import "FirebaseFacebookAuthProvider.h"
+#import "FirebaseGoogleAuthProvider.h"
+#import "FirebasePasswordAuthProvider.h"
 #import "FirebaseLoginButton.h"
 
 /**
@@ -115,32 +119,32 @@
 @property(strong, nonatomic) Firebase *ref;
 
 /**
- * The helper object for Twitter Authentication. This object handles the
+ * The provider object for Twitter Authentication. This object handles the
  * requests against the Twitter API and uses the response to authenticate
  * against the Firebase database.
  */
-@property(strong, nonatomic) FirebaseTwitterAuthHelper *twitterAuthHelper;
+@property(strong, nonatomic) FirebaseTwitterAuthProvider *twitterAuthProvider;
 
 /**
- * The helper object for Facebook Authentication. This object handles the
+ * The provider object for Facebook Authentication. This object handles the
  * requests against the Facebook SDK and uses the response to authenticate
  * against the Firebase database.
  */
-@property(strong, nonatomic) FirebaseFacebookAuthHelper *facebookAuthHelper;
+@property(strong, nonatomic) FirebaseFacebookAuthProvider *facebookAuthProvider;
 
 /**
- * The helper object for Google Authentication. This object handles the
+ * The provider object for Google Authentication. This object handles the
  * requests against the Google SDK and uses the response to authenticate
  * against the Firebase database.
  */
-@property(strong, nonatomic) FirebaseGoogleAuthHelper *googleAuthHelper;
+@property(strong, nonatomic) FirebaseGoogleAuthProvider *googleAuthProvider;
 
 /**
- * The helper object for Email/Password Authentication. This object handles the
+ * The provider object for Email/Password Authentication. This object handles the
  * requests to the Firebase user authentication system to authenticate users to
  * the Firebase database.
  */
-@property(strong, nonatomic) FirebasePasswordAuthHelper *passwordAuthHelper;
+@property(strong, nonatomic) FirebasePasswordAuthProvider *passwordAuthProvider;
 
 /**
  * Create an instance of FirebaseLoginViewController, which allows for easy authentication to

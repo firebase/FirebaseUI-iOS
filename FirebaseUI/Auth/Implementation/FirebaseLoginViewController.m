@@ -33,7 +33,7 @@
 #import "FirebaseLoginViewController.h"
 
 @implementation FirebaseLoginViewController {
-  FirebaseAuthHelper *_selectedAuthHelper;
+  FirebaseAuthProvider *_selectedAuthProvider;
   NSMutableArray *_socialProviders;
 }
 
@@ -61,16 +61,16 @@
               forControlEvents:UIControlEventTouchUpInside];
 
   // If we're already logged in, cancel this
-  if (_selectedAuthHelper) {
+  if (_selectedAuthProvider) {
     [self dismissViewController];
   }
 
-  if (self.passwordAuthHelper == nil && [_socialProviders count] == 0) {
+  if (self.passwordAuthProvider == nil && [_socialProviders count] == 0) {
     [self dismissViewController];  // Or throw an exception--you need to have at least one provider
   }
 
   // Populate email/password view
-  if (self.passwordAuthHelper != nil) {
+  if (self.passwordAuthProvider != nil) {
     FirebaseLoginButton *emailLoginButton =
         [[FirebaseLoginButton alloc] initWithProvider:kPasswordAuthProvider];
     CGRect buttonFrame =
@@ -98,9 +98,9 @@
   } else {
     // Add buttons to social view
     CGRect buttonFrame = CGRectMake(0, 0, kButtonWidth, kButtonHeight);
-    for (FirebaseAuthHelper *helper in _socialProviders) {
+    for (FirebaseAuthProvider *provider in _socialProviders) {
       FirebaseLoginButton *loginButton =
-          [[FirebaseLoginButton alloc] initWithProvider:helper.provider];
+          [[FirebaseLoginButton alloc] initWithProvider:provider.provider];
       loginButton.frame = buttonFrame;
       [loginButton addTarget:self
                       action:@selector(loginButtonPressed:)
@@ -117,7 +117,7 @@
   }
 
   // Handle separator
-  if (self.passwordAuthHelper == nil || numProviders == 0) {
+  if (self.passwordAuthProvider == nil || numProviders == 0) {
     [self.separatorView removeFromSuperview];
     self.totalHeightConstraint.constant -= (kSeparatorHeight + kSeparatorSpace);
   }
@@ -127,28 +127,28 @@
 
 - (instancetype)enableProvider:(NSString *)provider {
   if ([provider isEqualToString:kGoogleAuthProvider]) {
-    if (!self.googleAuthHelper) {
-      self.googleAuthHelper =
-          [[FirebaseGoogleAuthHelper alloc] initWithRef:self.ref authDelegate:self uiDelegate:self];
-      [_socialProviders addObject:self.googleAuthHelper];
+    if (!self.googleAuthProvider) {
+      self.googleAuthProvider =
+          [[FirebaseGoogleAuthProvider alloc] initWithRef:self.ref authDelegate:self uiDelegate:self];
+      [_socialProviders addObject:self.googleAuthProvider];
     }
   } else if ([provider isEqualToString:kFacebookAuthProvider]) {
-    if (!self.facebookAuthHelper) {
-      self.facebookAuthHelper =
-          [[FirebaseFacebookAuthHelper alloc] initWithRef:self.ref authDelegate:self];
-      [_socialProviders addObject:self.facebookAuthHelper];
+    if (!self.facebookAuthProvider) {
+      self.facebookAuthProvider =
+          [[FirebaseFacebookAuthProvider alloc] initWithRef:self.ref authDelegate:self];
+      [_socialProviders addObject:self.facebookAuthProvider];
     }
   } else if ([provider isEqualToString:kTwitterAuthProvider]) {
-    if (!self.twitterAuthHelper) {
-      self.twitterAuthHelper = [[FirebaseTwitterAuthHelper alloc] initWithRef:self.ref
+    if (!self.twitterAuthProvider) {
+      self.twitterAuthProvider = [[FirebaseTwitterAuthProvider alloc] initWithRef:self.ref
                                                                  authDelegate:self
                                                               twitterDelegate:self];
-      [_socialProviders addObject:self.twitterAuthHelper];
+      [_socialProviders addObject:self.twitterAuthProvider];
     }
   } else if ([provider isEqualToString:kPasswordAuthProvider]) {
-    if (!self.passwordAuthHelper) {
-      self.passwordAuthHelper =
-          [[FirebasePasswordAuthHelper alloc] initWithRef:self.ref authDelegate:self];
+    if (!self.passwordAuthProvider) {
+      self.passwordAuthProvider =
+          [[FirebasePasswordAuthProvider alloc] initWithRef:self.ref authDelegate:self];
     }
   }
   return self;
@@ -158,28 +158,28 @@
   if ([button isKindOfClass:[FirebaseLoginButton class]]) {
     FirebaseLoginButton *loginButton = (FirebaseLoginButton *)button;
     if ([loginButton.provider isEqualToString:kGoogleAuthProvider]) {
-      [self.googleAuthHelper login];
+      [self.googleAuthProvider login];
     } else if ([loginButton.provider isEqualToString:kFacebookAuthProvider]) {
-      [self.facebookAuthHelper login];
+      [self.facebookAuthProvider login];
     } else if ([loginButton.provider isEqualToString:kTwitterAuthProvider]) {
-      [self.twitterAuthHelper login];
+      [self.twitterAuthProvider login];
     } else if ([loginButton.provider isEqualToString:kPasswordAuthProvider]) {
       // We assume that if it wasn't a social provider, it was for email/password
       NSString *email = self.emailTextField.text;
       NSString *password = self.passwordTextField.text;
-      [self.passwordAuthHelper loginWithEmail:email andPassword:password];
+      [self.passwordAuthProvider loginWithEmail:email andPassword:password];
     }
   }
 }
 
 - (void)logout {
-  if (_selectedAuthHelper) {
-    [_selectedAuthHelper logout];
+  if (_selectedAuthProvider) {
+    [_selectedAuthProvider logout];
   }
 }
 
 - (FAuthData *)currentUser {
-  return _selectedAuthHelper.authData;
+  return _selectedAuthProvider.authData;
 }
 
 - (void)dismissViewController {
@@ -189,14 +189,14 @@
 #pragma mark -
 #pragma mark Firebase Auth Delegate methods
 
-- (void)authHelper:(id)helper onLogin:(FAuthData *)authData {
-  _selectedAuthHelper = helper;
+- (void)authProvider:(id)provider onLogin:(FAuthData *)authData {
+  _selectedAuthProvider = provider;
   self.emailTextField.text = @"";
   self.passwordTextField.text = @"";
   [self dismissViewController];
 }
 
-- (void)authHelper:(id)helper onProviderError:(NSError *)error {
+- (void)authProvider:(id)provider onProviderError:(NSError *)error {
   UIAlertController *providerErrorController =
       [UIAlertController alertControllerWithTitle:@"Provider error!"
                                           message:error.localizedDescription
@@ -211,7 +211,7 @@
   [self presentViewController:providerErrorController animated:YES completion:nil];
 }
 
-- (void)authHelper:(id)helper onUserError:(NSError *)error {
+- (void)authProvider:(id)provider onUserError:(NSError *)error {
   UIAlertController *userErrorController =
       [UIAlertController alertControllerWithTitle:@"User error!"
                                           message:error.localizedDescription
@@ -226,7 +226,7 @@
 }
 
 - (void)onLogout {
-  _selectedAuthHelper = nil;
+  _selectedAuthProvider = nil;
 }
 
 #pragma mark -
@@ -250,7 +250,7 @@
             [UIAlertAction actionWithTitle:account.username
                                      style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction *_Nonnull action) {
-                                     [self.twitterAuthHelper loginWithAccount:account];
+                                     [self.twitterAuthProvider loginWithAccount:account];
                                    }];
         [accountSelectController addAction:addAccountAction];
       }];

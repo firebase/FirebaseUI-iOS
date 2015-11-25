@@ -47,15 +47,15 @@ FirebaseArray | Keeps an array synchronized to a Firebase query
 FirebaseDataSource | Generic superclass to create a custom data source
 
 ### FirebaseUI Auth
-Provides authentication helpers as well as concrete implementations for Facebook, Google, Twitter, and Firbase email/password, plus a headful UI that handles auth state and error conditions. Skip to the [Auth API overview](https://github.com/firebase/firebaseui-ios#firebaseui-core-api) for more information.
+Provides authentication providers as well as concrete implementations for Facebook, Google, Twitter, and Firbase email/password, plus a headful UI that handles auth state and error conditions. Skip to the [Auth API overview](https://github.com/firebase/firebaseui-ios#firebaseui-core-api) for more information.
 
 Class  | Description
 ------------- | -------------
-FirebaseAuthHelper | Generic superclass for authentication helpers
-FirebaseFacebookAuthHelper | Allows for one method login to Facebook
-FirebaseGoogleAuthHelper | Allows for one method login to Google
-FirebaseTwitterAuthHelper | Allows for one method login to Twitter
-FirebasePasswordAuthHelper | Allows for one method login to Firebases email/password authentication
+FirebaseAuthProvider | Generic superclass for authentication providers
+FirebaseFacebookAuthProvider | Allows for one method login to Facebook
+FirebaseGoogleAuthProvider | Allows for one method login to Google
+FirebaseTwitterAuthProvider | Allows for one method login to Twitter
+FirebasePasswordAuthProvider | Allows for one method login to Firebases email/password authentication
 FirebaseLoginViewController | Flexible headful UI which handles login, logout, and error conditions from all identity providers
 
 For a more in-depth explanation of each of the above, check the usage instructions below or read the [docs](https://firebaseui.firebaseapp.com/docs/ios/index.html).
@@ -343,98 +343,98 @@ FirebaseDataSource acts as a generic data source by providing common information
 
 ## FirebaseUI Auth API
 
-### FirebaseAuthHelper
+### FirebaseAuthProvider
 
-`FirebaseAuthHelper` is a superclass for all identity providers, providing a default constructor `[FirebaseAuthHelper initWithRef:authDelegate:]` as well as `login`, `logout`, and `configureProvider` methods to facilitate standard authentication across providers. `login` and `configureProvider` are unimplemented in the base implementation and will thrown an exception if called, so each provider should override these methods. `logout` is implemented to unauthenticate the given Firebase reference, and should always be called using `[super logout]` at the end of any subclass implementation.
+`FirebaseAuthProvider` is a superclass for all identity providers, providing a default constructor `[FirebaseAuthProvider initWithRef:authDelegate:]` as well as `login`, `logout`, and `configureProvider` methods to facilitate standard authentication across providers. `login` and `configureProvider` are unimplemented in the base implementation and will thrown an exception if called, so each provider should override these methods. `logout` is implemented to unauthenticate the given Firebase reference, and should always be called using `[super logout]` at the end of any subclass implementation.
 
-`FirebaseAuthHelper` also registers a singlton authentication listener that monitors the global authentication state across all helpers and will route `authHelper:onLogin:` and `onLogout` events appropriately.
+`FirebaseAuthProvider` also registers a singleton authentication listener that monitors the global authentication state across all providers and will route `authProvider:onLogin:` and `onLogout` events appropriately.
 
-### FirebaseFacebookAuthHelper
+### FirebaseFacebookAuthProvider
 
-`FirebaseFacebookAuthHelper` is a wrapper around Facebook login. To enable this, visit the Auth tab of your Firebase Dashboard and enable this provider by checking the checkbox, then [create a new Facebook project](https://developers.facebook.com/docs/ios/getting-started) and follow the installation instructions. You will also have to add "FacebookAppID" and "FacebookDisplayName" keys as well as several URL schemes to your "Info.plist". For more information about setup, see the Firebase [Google authentication docs](https://www.firebase.com/docs/ios/guide/login/facebook.html).
+`FirebaseFacebookAuthProvider` is a wrapper around Facebook login. To enable this, visit the Auth tab of your Firebase Dashboard and enable this provider by checking the checkbox, then [create a new Facebook project](https://developers.facebook.com/docs/ios/getting-started) and follow the installation instructions. You will also have to add "FacebookAppID" and "FacebookDisplayName" keys as well as several URL schemes to your "Info.plist". For more information about setup, see the Firebase [Google authentication docs](https://www.firebase.com/docs/ios/guide/login/facebook.html).
 
 #### Objective-C
 ```objective-c
 Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<your-firebase-app>.firebaseio.com/"];
-FirebaseFacebookAuthHelper *facebookHelper = [[FirebaseFacebookAuthHelper alloc] initWithRef:firebaseRef authDelegate:self];
-[facebookHelper login];
+FirebaseFacebookAuthProvider *facebookProvider = [[FirebaseFacebookAuthProvider alloc] initWithRef:firebaseRef authDelegate:self];
+[facebookProvider login];
 ...
-[facebookHelper logout];
+[facebookProvider logout];
 ```
 
 #### Swift
 ```swift
 let firebaseRef = Firebase(url: "https://<your-firebase-app>.firebaseio.com/")
-let facebookHelper = FirebaseFacebookAuthHelper(ref: firebaseRef, authDelegate: self)
-facebookHelper.login()
+let facebookProvider = FirebaseFacebookAuthProvider(ref: firebaseRef, authDelegate: self)
+facebookProvider.login()
 ...
-facebookHelper.logout()
+facebookProvider.logout()
 ```
 
-### FirebaseGoogleAuthHelper
+### FirebaseGoogleAuthProvider
 
-`FirebaseGoogleAuthHelper` is a wrapper around Google login. To enable this, visit the Auth tab of your Firebase Dashboard and enable this provider by checking the checkbox, then [create a new Google Project](https://developers.google.com/identity/sign-in/ios/start), download `GoogleServices-Info.plist`, and include it in your projct. You will also have to add several URL schemes to your "Info.plist". For more information about setup, see the Firebase [Google authentication docs](https://www.firebase.com/docs/ios/guide/login/google.html).
+`FirebaseGoogleAuthProvider` is a wrapper around Google login. To enable this, visit the Auth tab of your Firebase Dashboard and enable this provider by checking the checkbox, then [create a new Google Project](https://developers.google.com/identity/sign-in/ios/start), download `GoogleServices-Info.plist`, and include it in your projct. You will also have to add several URL schemes to your "Info.plist". For more information about setup, see the Firebase [Google authentication docs](https://www.firebase.com/docs/ios/guide/login/google.html).
 
 #### Objective-C
 ```objective-c
 Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<your-firebase-app>.firebaseio.com/"];
-FirebaseGoogleAuthHelper *googleHelper = [[FirebaseGoogleAuthHelper alloc] initWithRef:firebaseRef authDelegate:self uiDelegate:self];
-[googleHelper login];
+FirebaseGoogleAuthProvider *googleProvider = [[FirebaseGoogleAuthProvider alloc] initWithRef:firebaseRef authDelegate:self uiDelegate:self];
+[googleProvider login];
 ...
-[googleHelper logout];
+[googleProvider logout];
 ```
 
 #### Swift
 ```swift
 let firebaseRef = Firebase(url: "https://<your-firebase-app>.firebaseio.com/")
-let googleHelper = FirebaseGoogleAuthHelper(ref: firebaseRef, authDelegate: self, uiDelegate: self)
-googleHelper.login()
+let googleProvider = FirebaseGoogleAuthProvider(ref: firebaseRef, authDelegate: self, uiDelegate: self)
+googleProvider.login()
 ...
-googleHelper.logout()
+googleProvider.logout()
 ```
 
-### FirebaseTwitterAuthHelper
+### FirebaseTwitterAuthProvider
 
-`FirebaseTwitterAuthHelper` is a wrapper around Twitter login. To enable this, visit the Auth tab of your Firebase Dashboard and enable this provider by checking the checkbox, then enter your Twitter API Key and Secret (obtained by creating a Twitter project). You will also have to add the key "TwitterApiKey" to your apps "Info.plist". For more information about setup, see the Firebase [Twitter authentication docs](https://www.firebase.com/docs/ios/guide/login/twitter.html).
+`FirebaseTwitterAuthProvider` is a wrapper around Twitter login. To enable this, visit the Auth tab of your Firebase Dashboard and enable this provider by checking the checkbox, then [create a new Twitter project](https://apps.twitter.com/) and enter your Twitter API Key and Secret on this page. You will also have to add the key "TwitterApiKey" to your apps "Info.plist". For more information about setup, see the Firebase [Twitter authentication docs](https://www.firebase.com/docs/ios/guide/login/twitter.html).
 
 #### Objective-C
 ```objective-c
 Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<your-firebase-app>.firebaseio.com/"];
-FirebaseTwitterAuthHelper *twitterHelper = [[FirebaseTwitterAuthHelper alloc] initWithRef:firebaseRef authDelegate:self twitterDelegate:self];
-[twitterHelper login];
+FirebaseTwitterAuthProvider *twitterProvider = [[FirebaseTwitterAuthProvider alloc] initWithRef:firebaseRef authDelegate:self twitterDelegate:self];
+[twitterProvider login];
 ...
-[twitterHelper logout];
+[twitterProvider logout];
 ```
 
 #### Swift
 ```swift
 let firebaseRef = Firebase(url: "https://<your-firebase-app>.firebaseio.com/")
-let twitterHelper = FirebaseTwitterAuthHelper(ref: firebaseRef, authDelegate: self, twitterDelegate: self)
-twitterHelper.login()
+let twitterProvider = FirebaseTwitterAuthProvider(ref: firebaseRef, authDelegate: self, twitterDelegate: self)
+twitterProvider.login()
 ...
-twitterHelper.logout()
+twitterProvider.logout()
 ```
 
-### FirebasePasswordAuthHelper
+### FirebasePasswordAuthProvider
 
-`FirebasePasswordAuthHelper` is a wrapper around Firebase email/password login. To enable this, visit the Auth tab of your Firebase Dashboard and enable this provider by checking the checkbox. For more information about setup, see the Firebase [Email/Password authentication docs](https://www.firebase.com/docs/ios/guide/login/password.html).
+`FirebasePasswordAuthProvider` is a wrapper around Firebase email/password login. To enable this, visit the Auth tab of your Firebase Dashboard and enable this provider by checking the checkbox. For more information about setup, see the Firebase [Email/Password authentication docs](https://www.firebase.com/docs/ios/guide/login/password.html).
 
 #### Objective-C
 ```objective-c
 Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<your-firebase-app>.firebaseio.com/"];
-FirebasePasswordAuthHelper *passwordHelper = [[FirebasePasswordAuthHelper alloc] initWithRef:firebaseRef authDelegate:self];
-[passwordHelper loginWithEmail:@"email" andPassword:@"password"];
+FirebasePasswordAuthProvider *passwordProvider = [[FirebasePasswordAuthProvider alloc] initWithRef:firebaseRef authDelegate:self];
+[passwordProvider loginWithEmail:@"email" andPassword:@"password"];
 ...
-[passwordHelper logout];
+[passwordProvider logout];
 ```
 
 #### Swift
 ```swift
 let firebaseRef = Firebase(url: "https://<your-firebase-app>.firebaseio.com/")
-let passwordHelper = FirebasePasswordAuthHelper(ref: firebaseRef, authDelegate: self)
-passwordHelper.login(email: "email", password: "password")
+let passwordProvider = FirebasePasswordAuthProvider(ref: firebaseRef, authDelegate: self)
+passwordProvider.login(email: "email", password: "password")
 ...
-passwordHelper.login()
+passwordProvider.login()
 ```
 
 ## Understanding FirebaseUI Auth's Internals
@@ -442,10 +442,10 @@ passwordHelper.login()
 ### FirebaseAuthDelegate and TwitterAuthDelegate protocols
 
 Every authentication event is plumbed through `FirebaseAuthDelegate`, which has four methods:
-  1. `[FirebaseAuthDelegate authHelper:onLogin:]`
+  1. `[FirebaseAuthDelegate authProvider:onLogin:]`
   1. `[FirebaseAuthDelegate onLogout:]`
-  1. `[FirebaseAuthDelegate authHelper:onUserError:]`
-  1. `[FirebaseAuthDelegate authHelper:onProviderError:]`
+  1. `[FirebaseAuthDelegate authProvider:onUserError:]`
+  1. `[FirebaseAuthDelegate authProvider:onProviderError:]`
 
 The first two methods, for login and logout, are required for classes implementing the `FirebaseAuthDelegate` protcol, while the latter two are optional though strongly recommended. All authentication events, regardless of provider, will go through these methods.
 
@@ -454,7 +454,7 @@ In general, user errors (such as invalid password or cancellation of an auth req
 `TwitterAuthDelegate` is included as a special case for dealing with zero or multiple Twitter accounts on the same device, as developers need to either prompt the user to create a Twitter account (or sign in on the phone), or select from multiple accounts. The `[TwitterAuthDelegate createTwitterAccount]` and `[TwitterAuthDelegate selectTwitterAccount:]` methods can be used for these purposes.
 
 ### Creating custom headful UI via FirebaseLoginViewController
-`FirebaseLoginViewController` is one implementation of a simple headful UI built on top of FirebaseUI's auth components. This class contains helper methods for the different providers, as well as state about the current provider (and therefore the user), which allows for synchronous calls to `currentUser` and `logout` from outside of the view controller while treating `FirebaseLoginViewController` as a single source of truth for auth state.
+`FirebaseLoginViewController` is one implementation of a simple headful UI built on top of FirebaseUI's auth components. This class contains Provider methods for the different providers, as well as state about the current provider (and therefore the user), which allows for synchronous calls to `currentUser` and `logout` from outside of the view controller while treating `FirebaseLoginViewController` as a single source of truth for auth state.
 
 All UI elements in FirebaseLoginViewController are reconfigurable (with the exception of the button colors), so theming the UI to your application shouldn't be difficult. If the theme doesn't fit, feel free to use the concepts of `FirebaseLoginViewController` to create your own authentication controller.
 

@@ -30,9 +30,9 @@
 
 // clang-format on
 
-#import "FirebaseTwitterAuthHelper.h"
+#import "FirebaseTwitterAuthProvider.h"
 
-@implementation FirebaseTwitterAuthHelper {
+@implementation FirebaseTwitterAuthProvider {
   ACAccountStore *_store;
   NSString *_apiKey;
 }
@@ -66,7 +66,7 @@
                     withCallback:^(NSArray *accounts, NSError *error) {
                       if (error) {
                         // Raise error
-                        [self.delegate authHelper:self onUserError:error];
+                        [self.delegate authProvider:self onUserError:error];
                         return;
                       }
 
@@ -100,7 +100,7 @@
                           NSLocalizedDescriptionKey :
                               @"Trying to log in without a valid Twitter account in not allowed."
                         }];
-    [self.delegate authHelper:self onUserError:error];
+    [self.delegate authProvider:self onUserError:error];
   }
 }
 
@@ -143,7 +143,7 @@
       makeReverseOAuthRequestTo:kTwitterAuthProvider
             withCompletionBlock:^(NSError *error, NSDictionary *json) {
               if (error != nil) {
-                [self.delegate authHelper:self onProviderError:error];
+                [self.delegate authProvider:self onProviderError:error];
               } else {
                 SLRequest *request =
                     [self createCredentialRequestWithReverseAuthPayload:json forAccount:account];
@@ -177,7 +177,7 @@
                                        NSError *error) {
     if (error) {
       dispatch_async(dispatch_get_main_queue(), ^{
-        [self.delegate authHelper:self onProviderError:error];
+        [self.delegate authProvider:self onProviderError:error];
       });
     } else {
       [self authenticateWithTwitterCredentials:responseData];
@@ -197,7 +197,7 @@
                                  @"details" : params[@"error"]
                                }];
     dispatch_async(dispatch_get_main_queue(), ^{
-      [self.delegate authHelper:self onProviderError:error];
+      [self.delegate authProvider:self onProviderError:error];
     });
   } else {
     [self.ref authWithOAuthProvider:@"twitter"

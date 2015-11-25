@@ -57,6 +57,7 @@
                                sourceApplication:sourceApplication
                                       annotation:annotation];
   }
+  return YES;
 }
 
 @end

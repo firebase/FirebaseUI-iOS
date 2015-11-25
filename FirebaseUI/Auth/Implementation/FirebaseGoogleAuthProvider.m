@@ -30,9 +30,9 @@
 
 // clang-format on
 
-#import "FirebaseGoogleAuthHelper.h"
+#import "FirebaseGoogleAuthProvider.h"
 
-@implementation FirebaseGoogleAuthHelper
+@implementation FirebaseGoogleAuthProvider
 
 - (instancetype)initWithRef:(Firebase *)ref
                authDelegate:(id<FirebaseAuthDelegate>)authDelegate
@@ -92,7 +92,7 @@
     didDisconnectWithUser:(GIDGoogleUser *)user
                 withError:(NSError *)error {
   if (error) {
-    [self.delegate authHelper:self onProviderError:error];
+    [self.delegate authProvider:self onProviderError:error];
   }
 }
 

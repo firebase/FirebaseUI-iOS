@@ -30,9 +30,9 @@
 
 // clang-format on
 
-#import "FirebaseFacebookAuthHelper.h"
+#import "FirebaseFacebookAuthProvider.h"
 
-@implementation FirebaseFacebookAuthHelper {
+@implementation FirebaseFacebookAuthProvider {
   FBSDKLoginManager *_loginManager;
 }
 
@@ -67,12 +67,12 @@
                        handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
 
                          if (error) {
-                           [self.delegate authHelper:self onProviderError:error];
+                           [self.delegate authProvider:self onProviderError:error];
                          } else if (result.isCancelled) {
                            // TODO: clean up this error
                            NSError *cancelError =
                                [NSError errorWithDomain:@"" code:-1 userInfo:@{}];
-                           [self.delegate authHelper:self onProviderError:cancelError];
+                           [self.delegate authProvider:self onProviderError:cancelError];
                          } else {
                            NSString *accessToken =
                                [[FBSDKAccessToken currentAccessToken] tokenString];

@@ -22,9 +22,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		BB372B551B8BE4890046905E /* FirebaseTwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BB372B541B8BE4890046905E /* FirebaseTwitterAuthHelper.m */; };
+		BB372B551B8BE4890046905E /* FirebaseTwitterAuthProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = BB372B541B8BE4890046905E /* FirebaseTwitterAuthProvider.m */; };
 		BB372B5B1B8CF7DC0046905E /* FirebaseAuthDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = BB372B5A1B8CF7DC0046905E /* FirebaseAuthDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BB372B601B8D1B580046905E /* FirebaseTwitterAuthHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = BB372B531B8BE4510046905E /* FirebaseTwitterAuthHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BB372B601B8D1B580046905E /* FirebaseTwitterAuthProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = BB372B531B8BE4510046905E /* FirebaseTwitterAuthProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB4877901BA8A0C000FD3D4D /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB48778F1BA8A0C000FD3D4D /* GoogleSignIn.framework */; };
 		BB48779B1BA8A0D600FD3D4D /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = BB4877931BA8A0D600FD3D4D /* Core.h */; };
 		BB48779C1BA8A0D600FD3D4D /* GGLConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = BB4877941BA8A0D600FD3D4D /* GGLConfiguration.h */; };
@@ -32,15 +32,15 @@
 		BB48779E1BA8A0D600FD3D4D /* GGLErrorCode.h in Headers */ = {isa = PBXBuildFile; fileRef = BB4877961BA8A0D600FD3D4D /* GGLErrorCode.h */; };
 		BB48779F1BA8A0D600FD3D4D /* GGLContext+SignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = BB4877991BA8A0D600FD3D4D /* GGLContext+SignIn.h */; };
 		BB4877A01BA8A0D600FD3D4D /* SignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = BB48779A1BA8A0D600FD3D4D /* SignIn.h */; };
-		BB62DD041BA6EBB6001BD539 /* FirebaseGoogleAuthHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = BBF6D4191BA1FF9200C644A7 /* FirebaseGoogleAuthHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BB62DD041BA6EBB6001BD539 /* FirebaseGoogleAuthProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = BBF6D4191BA1FF9200C644A7 /* FirebaseGoogleAuthProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB62DD071BA6F01E001BD539 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB62DD051BA6F01E001BD539 /* FBSDKCoreKit.framework */; };
 		BB62DD081BA6F01E001BD539 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB62DD061BA6F01E001BD539 /* FBSDKLoginKit.framework */; };
 		BB62DD0B1BA6F400001BD539 /* FirebaseAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB62DD0A1BA6F400001BD539 /* FirebaseAppDelegate.m */; };
 		BB62DD7A1BA6F84C001BD539 /* FirebaseAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = BB62DD091BA6F3A1001BD539 /* FirebaseAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BB6AC2151BA06B6B00A10461 /* FirebaseFacebookAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6AC2141BA06B6B00A10461 /* FirebaseFacebookAuthHelper.m */; };
-		BBF6D4161BA19CDF00C644A7 /* FirebaseFacebookAuthHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = BB6AC2131BA06AC300A10461 /* FirebaseFacebookAuthHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BBF6D41B1BA1FFAD00C644A7 /* FirebaseGoogleAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6D41A1BA1FFAD00C644A7 /* FirebaseGoogleAuthHelper.m */; };
-		BBF6D5771BA345E600C644A7 /* FirebaseAuthHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = BBF6D5761BA33AC300C644A7 /* FirebaseAuthHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BB6AC2151BA06B6B00A10461 /* FirebaseFacebookAuthProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6AC2141BA06B6B00A10461 /* FirebaseFacebookAuthProvider.m */; };
+		BBF6D4161BA19CDF00C644A7 /* FirebaseFacebookAuthProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = BB6AC2131BA06AC300A10461 /* FirebaseFacebookAuthProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BBF6D41B1BA1FFAD00C644A7 /* FirebaseGoogleAuthProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6D41A1BA1FFAD00C644A7 /* FirebaseGoogleAuthProvider.m */; };
+		BBF6D5771BA345E600C644A7 /* FirebaseAuthProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = BBF6D5761BA33AC300C644A7 /* FirebaseAuthProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D809A11E1BF67095000257AA /* FirebaseAuthConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D809A11D1BF67095000257AA /* FirebaseAuthConstants.m */; settings = {ASSET_TAGS = (); }; };
 		D809A1271BF6FF6C000257AA /* FirebaseLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D809A1241BF6FF6C000257AA /* FirebaseLoginViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D809A1311BF7ECB0000257AA /* FirebaseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D809A1301BF7ECB0000257AA /* FirebaseLoginViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -61,9 +61,9 @@
 		D81495FE1BF5AF460099AE10 /* FirebaseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D81495F91BF5AF460099AE10 /* FirebaseDataSource.m */; settings = {ASSET_TAGS = (); }; };
 		D81495FF1BF5AF460099AE10 /* FirebaseTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D81495FA1BF5AF460099AE10 /* FirebaseTableViewDataSource.m */; settings = {ASSET_TAGS = (); }; };
 		D81496001BF5AF460099AE10 /* FirebaseUI.m in Sources */ = {isa = PBXBuildFile; fileRef = D81495FB1BF5AF460099AE10 /* FirebaseUI.m */; settings = {ASSET_TAGS = (); }; };
-		D81496061BF5B92C0099AE10 /* FirebasePasswordAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D81496051BF5B92C0099AE10 /* FirebasePasswordAuthHelper.m */; settings = {ASSET_TAGS = (); }; };
-		D81496071BF5B9BE0099AE10 /* FirebasePasswordAuthHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = D81496041BF5B9110099AE10 /* FirebasePasswordAuthHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D87943371BF51FF000525DFD /* FirebaseAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D87943361BF51FF000525DFD /* FirebaseAuthHelper.m */; };
+		D81496061BF5B92C0099AE10 /* FirebasePasswordAuthProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D81496051BF5B92C0099AE10 /* FirebasePasswordAuthProvider.m */; settings = {ASSET_TAGS = (); }; };
+		D81496071BF5B9BE0099AE10 /* FirebasePasswordAuthProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = D81496041BF5B9110099AE10 /* FirebasePasswordAuthProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D87943371BF51FF000525DFD /* FirebaseAuthProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D87943361BF51FF000525DFD /* FirebaseAuthProvider.m */; };
 		D87943461BF59E1F00525DFD /* FirebaseAuthConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = D879433E1BF5654000525DFD /* FirebaseAuthConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D87943471BF59E4F00525DFD /* TwitterAuthDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D879433D1BF5593800525DFD /* TwitterAuthDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D879434A1BF5A41800525DFD /* XCodeMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = D87943491BF5A41800525DFD /* XCodeMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -95,8 +95,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BB372B531B8BE4510046905E /* FirebaseTwitterAuthHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseTwitterAuthHelper.h; path = Auth/API/FirebaseTwitterAuthHelper.h; sourceTree = "<group>"; };
-		BB372B541B8BE4890046905E /* FirebaseTwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseTwitterAuthHelper.m; path = Auth/Implementation/FirebaseTwitterAuthHelper.m; sourceTree = "<group>"; };
+		BB372B531B8BE4510046905E /* FirebaseTwitterAuthProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseTwitterAuthProvider.h; path = Auth/API/FirebaseTwitterAuthProvider.h; sourceTree = "<group>"; };
+		BB372B541B8BE4890046905E /* FirebaseTwitterAuthProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseTwitterAuthProvider.m; path = Auth/Implementation/FirebaseTwitterAuthProvider.m; sourceTree = "<group>"; };
 		BB372B5A1B8CF7DC0046905E /* FirebaseAuthDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseAuthDelegate.h; path = Auth/Implementation/FirebaseAuthDelegate.h; sourceTree = "<group>"; };
 		BB48778F1BA8A0C000FD3D4D /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = sdk/google_signin_sdk_2_2_0/GoogleSignIn.framework; sourceTree = "<group>"; };
 		BB4877931BA8A0D600FD3D4D /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
@@ -109,11 +109,11 @@
 		BB62DD061BA6F01E001BD539 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = sdk/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		BB62DD091BA6F3A1001BD539 /* FirebaseAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseAppDelegate.h; path = Auth/API/FirebaseAppDelegate.h; sourceTree = "<group>"; };
 		BB62DD0A1BA6F400001BD539 /* FirebaseAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseAppDelegate.m; path = Auth/Implementation/FirebaseAppDelegate.m; sourceTree = "<group>"; };
-		BB6AC2131BA06AC300A10461 /* FirebaseFacebookAuthHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseFacebookAuthHelper.h; path = Auth/API/FirebaseFacebookAuthHelper.h; sourceTree = "<group>"; };
-		BB6AC2141BA06B6B00A10461 /* FirebaseFacebookAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseFacebookAuthHelper.m; path = Auth/Implementation/FirebaseFacebookAuthHelper.m; sourceTree = "<group>"; };
-		BBF6D4191BA1FF9200C644A7 /* FirebaseGoogleAuthHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseGoogleAuthHelper.h; path = Auth/API/FirebaseGoogleAuthHelper.h; sourceTree = "<group>"; };
-		BBF6D41A1BA1FFAD00C644A7 /* FirebaseGoogleAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseGoogleAuthHelper.m; path = Auth/Implementation/FirebaseGoogleAuthHelper.m; sourceTree = "<group>"; };
-		BBF6D5761BA33AC300C644A7 /* FirebaseAuthHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseAuthHelper.h; path = Auth/API/FirebaseAuthHelper.h; sourceTree = "<group>"; };
+		BB6AC2131BA06AC300A10461 /* FirebaseFacebookAuthProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseFacebookAuthProvider.h; path = Auth/API/FirebaseFacebookAuthProvider.h; sourceTree = "<group>"; };
+		BB6AC2141BA06B6B00A10461 /* FirebaseFacebookAuthProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseFacebookAuthProvider.m; path = Auth/Implementation/FirebaseFacebookAuthProvider.m; sourceTree = "<group>"; };
+		BBF6D4191BA1FF9200C644A7 /* FirebaseGoogleAuthProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseGoogleAuthProvider.h; path = Auth/API/FirebaseGoogleAuthProvider.h; sourceTree = "<group>"; };
+		BBF6D41A1BA1FFAD00C644A7 /* FirebaseGoogleAuthProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseGoogleAuthProvider.m; path = Auth/Implementation/FirebaseGoogleAuthProvider.m; sourceTree = "<group>"; };
+		BBF6D5761BA33AC300C644A7 /* FirebaseAuthProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseAuthProvider.h; path = Auth/API/FirebaseAuthProvider.h; sourceTree = "<group>"; };
 		D809A11D1BF67095000257AA /* FirebaseAuthConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseAuthConstants.m; path = Auth/Implementation/FirebaseAuthConstants.m; sourceTree = "<group>"; };
 		D809A1241BF6FF6C000257AA /* FirebaseLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseLoginViewController.h; path = Auth/API/FirebaseLoginViewController.h; sourceTree = "<group>"; };
 		D809A1301BF7ECB0000257AA /* FirebaseLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseLoginViewController.m; path = Auth/Implementation/FirebaseLoginViewController.m; sourceTree = "<group>"; };
@@ -134,9 +134,9 @@
 		D81495F91BF5AF460099AE10 /* FirebaseDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseDataSource.m; path = Core/Implementation/FirebaseDataSource.m; sourceTree = "<group>"; };
 		D81495FA1BF5AF460099AE10 /* FirebaseTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseTableViewDataSource.m; path = Core/Implementation/FirebaseTableViewDataSource.m; sourceTree = "<group>"; };
 		D81495FB1BF5AF460099AE10 /* FirebaseUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseUI.m; path = Core/Implementation/FirebaseUI.m; sourceTree = "<group>"; };
-		D81496041BF5B9110099AE10 /* FirebasePasswordAuthHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebasePasswordAuthHelper.h; path = Auth/API/FirebasePasswordAuthHelper.h; sourceTree = "<group>"; };
-		D81496051BF5B92C0099AE10 /* FirebasePasswordAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebasePasswordAuthHelper.m; path = Auth/Implementation/FirebasePasswordAuthHelper.m; sourceTree = "<group>"; };
-		D87943361BF51FF000525DFD /* FirebaseAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseAuthHelper.m; path = Auth/Implementation/FirebaseAuthHelper.m; sourceTree = "<group>"; };
+		D81496041BF5B9110099AE10 /* FirebasePasswordAuthProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebasePasswordAuthProvider.h; path = Auth/API/FirebasePasswordAuthProvider.h; sourceTree = "<group>"; };
+		D81496051BF5B92C0099AE10 /* FirebasePasswordAuthProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebasePasswordAuthProvider.m; path = Auth/Implementation/FirebasePasswordAuthProvider.m; sourceTree = "<group>"; };
+		D87943361BF51FF000525DFD /* FirebaseAuthProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseAuthProvider.m; path = Auth/Implementation/FirebaseAuthProvider.m; sourceTree = "<group>"; };
 		D879433D1BF5593800525DFD /* TwitterAuthDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TwitterAuthDelegate.h; path = Auth/API/TwitterAuthDelegate.h; sourceTree = "<group>"; };
 		D879433E1BF5654000525DFD /* FirebaseAuthConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseAuthConstants.h; path = Auth/API/FirebaseAuthConstants.h; sourceTree = "<group>"; };
 		D87943491BF5A41800525DFD /* XCodeMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCodeMacros.h; path = Util/XCodeMacros.h; sourceTree = "<group>"; };
@@ -185,11 +185,11 @@
 		BB372B4D1B8BE33A0046905E /* API */ = {
 			isa = PBXGroup;
 			children = (
-				BB372B531B8BE4510046905E /* FirebaseTwitterAuthHelper.h */,
-				BB6AC2131BA06AC300A10461 /* FirebaseFacebookAuthHelper.h */,
-				BBF6D4191BA1FF9200C644A7 /* FirebaseGoogleAuthHelper.h */,
-				D81496041BF5B9110099AE10 /* FirebasePasswordAuthHelper.h */,
-				BBF6D5761BA33AC300C644A7 /* FirebaseAuthHelper.h */,
+				BB372B531B8BE4510046905E /* FirebaseTwitterAuthProvider.h */,
+				BB6AC2131BA06AC300A10461 /* FirebaseFacebookAuthProvider.h */,
+				BBF6D4191BA1FF9200C644A7 /* FirebaseGoogleAuthProvider.h */,
+				D81496041BF5B9110099AE10 /* FirebasePasswordAuthProvider.h */,
+				BBF6D5761BA33AC300C644A7 /* FirebaseAuthProvider.h */,
 				D879433E1BF5654000525DFD /* FirebaseAuthConstants.h */,
 				BB372B5A1B8CF7DC0046905E /* FirebaseAuthDelegate.h */,
 				D879433D1BF5593800525DFD /* TwitterAuthDelegate.h */,
@@ -205,11 +205,11 @@
 			children = (
 				D809A16F1BFBE5F9000257AA /* FirebaseLoginButton.m */,
 				D809A1301BF7ECB0000257AA /* FirebaseLoginViewController.m */,
-				BB372B541B8BE4890046905E /* FirebaseTwitterAuthHelper.m */,
-				BB6AC2141BA06B6B00A10461 /* FirebaseFacebookAuthHelper.m */,
-				BBF6D41A1BA1FFAD00C644A7 /* FirebaseGoogleAuthHelper.m */,
-				D81496051BF5B92C0099AE10 /* FirebasePasswordAuthHelper.m */,
-				D87943361BF51FF000525DFD /* FirebaseAuthHelper.m */,
+				BB372B541B8BE4890046905E /* FirebaseTwitterAuthProvider.m */,
+				BB6AC2141BA06B6B00A10461 /* FirebaseFacebookAuthProvider.m */,
+				BBF6D41A1BA1FFAD00C644A7 /* FirebaseGoogleAuthProvider.m */,
+				D81496051BF5B92C0099AE10 /* FirebasePasswordAuthProvider.m */,
+				D87943361BF51FF000525DFD /* FirebaseAuthProvider.m */,
 				BB62DD0A1BA6F400001BD539 /* FirebaseAppDelegate.m */,
 				D809A11D1BF67095000257AA /* FirebaseAuthConstants.m */,
 			);
@@ -363,13 +363,13 @@
 				BB48779B1BA8A0D600FD3D4D /* Core.h in Headers */,
 				D879434A1BF5A41800525DFD /* XCodeMacros.h in Headers */,
 				BB4877A01BA8A0D600FD3D4D /* SignIn.h in Headers */,
-				BB372B601B8D1B580046905E /* FirebaseTwitterAuthHelper.h in Headers */,
+				BB372B601B8D1B580046905E /* FirebaseTwitterAuthProvider.h in Headers */,
 				BB48779F1BA8A0D600FD3D4D /* GGLContext+SignIn.h in Headers */,
-				BBF6D4161BA19CDF00C644A7 /* FirebaseFacebookAuthHelper.h in Headers */,
+				BBF6D4161BA19CDF00C644A7 /* FirebaseFacebookAuthProvider.h in Headers */,
 				D809A1271BF6FF6C000257AA /* FirebaseLoginViewController.h in Headers */,
-				D81496071BF5B9BE0099AE10 /* FirebasePasswordAuthHelper.h in Headers */,
-				BBF6D5771BA345E600C644A7 /* FirebaseAuthHelper.h in Headers */,
-				BB62DD041BA6EBB6001BD539 /* FirebaseGoogleAuthHelper.h in Headers */,
+				D81496071BF5B9BE0099AE10 /* FirebasePasswordAuthProvider.h in Headers */,
+				BBF6D5771BA345E600C644A7 /* FirebaseAuthProvider.h in Headers */,
+				BB62DD041BA6EBB6001BD539 /* FirebaseGoogleAuthProvider.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,17 +482,17 @@
 			files = (
 				D81495FD1BF5AF460099AE10 /* FirebaseCollectionViewDataSource.m in Sources */,
 				D81495FC1BF5AF460099AE10 /* FirebaseArray.m in Sources */,
-				BB6AC2151BA06B6B00A10461 /* FirebaseFacebookAuthHelper.m in Sources */,
+				BB6AC2151BA06B6B00A10461 /* FirebaseFacebookAuthProvider.m in Sources */,
 				D809A1701BFBE5F9000257AA /* FirebaseLoginButton.m in Sources */,
 				D81495FE1BF5AF460099AE10 /* FirebaseDataSource.m in Sources */,
-				D87943371BF51FF000525DFD /* FirebaseAuthHelper.m in Sources */,
-				BB372B551B8BE4890046905E /* FirebaseTwitterAuthHelper.m in Sources */,
+				D87943371BF51FF000525DFD /* FirebaseAuthProvider.m in Sources */,
+				BB372B551B8BE4890046905E /* FirebaseTwitterAuthProvider.m in Sources */,
 				BB62DD0B1BA6F400001BD539 /* FirebaseAppDelegate.m in Sources */,
 				D809A1311BF7ECB0000257AA /* FirebaseLoginViewController.m in Sources */,
-				D81496061BF5B92C0099AE10 /* FirebasePasswordAuthHelper.m in Sources */,
+				D81496061BF5B92C0099AE10 /* FirebasePasswordAuthProvider.m in Sources */,
 				D81495FF1BF5AF460099AE10 /* FirebaseTableViewDataSource.m in Sources */,
 				D809A11E1BF67095000257AA /* FirebaseAuthConstants.m in Sources */,
-				BBF6D41B1BA1FFAD00C644A7 /* FirebaseGoogleAuthHelper.m in Sources */,
+				BBF6D41B1BA1FFAD00C644A7 /* FirebaseGoogleAuthProvider.m in Sources */,
 				D81496001BF5AF460099AE10 /* FirebaseUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -621,6 +621,10 @@
 					"$(PROJECT_DIR)/target/Products/Release-iphoneos",
 					"$(PROJECT_DIR)/target/Products/Release-iphonesimulator",
 					"$(PROJECT_DIR)/sdk/google_signin_sdk_2_2_0",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"LOCAL_BUILD=1",
+					"$(inherited)",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_PEDANTIC = YES;

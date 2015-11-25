@@ -32,23 +32,27 @@
 
 #import <Firebase/Firebase.h>
 
+#if LOCAL_BUILD
+#import <GoogleSignIn/GoogleSignIn.h>
+#else
 #import <Google/SignIn.h>
+#endif
 
-#import "FirebaseAuthHelper.h"
+#import "FirebaseAuthProvider.h"
 
 /**
- * A helper class that authenticates a user with Google
+ * An authentication provider class that authenticates a user with Google
  * and uses the credentials to authenticate a Firebase reference
  */
-@interface FirebaseGoogleAuthHelper : FirebaseAuthHelper<GIDSignInDelegate, GIDSignInUIDelegate>
+@interface FirebaseGoogleAuthProvider : FirebaseAuthProvider<GIDSignInDelegate, GIDSignInUIDelegate>
 
 /**
- * Create an instance of FirebaseGoogleAuthHelper, which allows for simple authentication to
+ * Create an instance of FirebaseGoogleAuthProvider, which allows for simple authentication to
  * Firebase via Gooogle
  * @param ref The Firebase reference to use for authentication
  * @param authDelegate A class that implements the FirebaseAuthDelegate protocol
  * @param uiDelegate A UIViewController subclass that implements the GIDSignInUIDelegate protocol
- * @return FirebaseGoogleAuthHelper
+ * @return FirebaseGoogleAuthProvider
  */
 - (instancetype)initWithRef:(Firebase *)ref
                authDelegate:(id<FirebaseAuthDelegate>)authDelegate

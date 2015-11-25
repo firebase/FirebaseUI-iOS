@@ -30,23 +30,44 @@
 
 // clang-format on
 
+#import <Social/Social.h>
+
 #import <Firebase/Firebase.h>
+#import <Accounts/Accounts.h>
 
-#import "FirebaseAuthHelper.h"
+#import "FirebaseAuthProvider.h"
+#import "TwitterAuthDelegate.h"
 
 /**
- * A helper class that authenticates a user with an email and password
- * stored in Firebase and uses the credentials to authenticate a Firebase reference
+ * An authentication provider class that authenticates a user with Twitter via ACAccountStore
+ * and uses the credentials to authenticate a Firebase reference
  */
-@interface FirebasePasswordAuthHelper : FirebaseAuthHelper
+@interface FirebaseTwitterAuthProvider : FirebaseAuthProvider
 
 /**
- * Create an instance of FirebasePasswordAuthHelper, which allows for simple authentication to
+ * Twitter delegate object to handle [TwitterAuthDelegate createTwitterAccount:] and
+ * [TwitterAuthDelegate selectTwitterAccount:] calls
+ */
+@property(weak, nonatomic) id<TwitterAuthDelegate> twitterDelegate;
+
+/**
+ * Create an instance of FirebaseTwitterAuthProvider, which allows for simple authentication to
  * Firebase via Twitter
- * @param email A string containing a valid email address
- * @param password A string containing the password for the email user
+ * @param ref The Firebase reference to use for authentication
+ * @param authDelegate A class that implements the FirebaseAuthDelegate protocol
+ * @param twitterDelegate A class that implements the TwitterAuthDelegate protocol
+ * @return FirebaseTwitterAuthProvider
+ */
+- (instancetype)initWithRef:(Firebase *)ref
+               authDelegate:(id<FirebaseAuthDelegate>)authDelegate
+            twitterDelegate:(id<TwitterAuthDelegate>)twitterDelegate;
+
+/**
+ * Given an ACAccount authenticate the user against the Firebase database
+ * reference.
+ * @param account The Twitter ACAccount to authenticate the user as
  * @return void
  */
-- (void)loginWithEmail:(NSString *)email andPassword:(NSString *)password;
+- (void)loginWithAccount:(ACAccount *)account;
 
 @end
