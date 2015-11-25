@@ -407,7 +407,7 @@ class AppDelegate: FirebaseAppDelegate {
 ### FirebaseLoginViewController
 `FirebaseLoginViewContoller` quickly adds a headful UI flow to your application. This flow supports email/password login, as well as social providers (Facebook, Google, Twitter). Using this, you can easily guide users through the login journey, get the current user's state, and log the user out. This view looks like:
 
-![FirebaseLoginViewController with all providers enabled](https://raw.github.com/firebase/firebaseui-ios/tree/master/docs/FirebaseLoginViewController.png)
+![FirebaseLoginViewController with all providers enabled](https://github.com/firebase/FirebaseUI-iOS/blob/master/docs/FirebaseLoginViewController.png)
 
 Code to create this view is below:
 
