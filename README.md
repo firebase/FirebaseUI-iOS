@@ -423,10 +423,10 @@ For creating a captive portal, we recommend creating the `FirebaseLoginViewContr
   Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<YOUR-FIREBASE-APP>.firebaseio.com/"];
 
   self.loginViewController = [[FirebaseLoginViewController alloc] initWithRef:firebaseRef];
-  [self.loginViewController enableProvider:kGoogleAuthProvider];
-  [self.loginViewController enableProvider:kFacebookAuthProvider];
-  [self.loginViewController enableProvider:kTwitterAuthProvider];
-  [self.loginViewController enableProvider:kPasswordAuthProvider];
+  [self.loginViewController enableProvider:FAuthProviderFacebook];
+  [self.loginViewController enableProvider:FAuthProviderGoogle];
+  [self.loginViewController enableProvider:FAuthProviderTwitter];
+  [self.loginViewController enableProvider:FAuthProviderPassword];
   // Scenario 1: Set up captive portal login flow
   [self.loginViewController didDismissWithBlock:^(FAuthData *user, NSError *error) {
     if (user) {
@@ -472,10 +472,10 @@ override func viewDidLoad() {
   let firebaseRef = Firebase(url: "https://<YOUR-FIREBASE-APP>.firebaseio.com/")
 
   self.loginViewController = FirebaseLoginViewController(ref: firebaseRef)
-  self.loginViewController.enableProvider(kGoogleAuthProvider)
-  self.loginViewController.enableProvider(kFacebookAuthProvider)
-  self.loginViewController.enableProvider(kTwitterAuthProvider)
-  self.loginViewController.enableProvider(kPasswordAuthProvider)
+  self.loginViewController.enableProvider(FAuthProvider.Facebook)
+  self.loginViewController.enableProvider(FAuthProvider.Google)
+  self.loginViewController.enableProvider(FAuthProvider.Twitter)
+  self.loginViewController.enableProvider(FAuthProvider.Password)
   // Scenario 1: Set up captive portal login flow
   self.loginViewController.didDismissWithBlock { (user: FAuthData, error: NSError) -> Void in
     if (user) {

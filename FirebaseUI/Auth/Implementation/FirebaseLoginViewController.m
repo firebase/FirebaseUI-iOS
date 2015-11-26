@@ -51,6 +51,12 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  // Throw an exception if no IDPs are enabled
+  if (self.passwordAuthProvider == nil && [_socialProviders count] == 0) {
+    [NSException raise:NSInternalInconsistencyException
+                format:@"Please enable at least one authentication provider in your FirebaseLoginViewController"];
+  }
+
   // Add cancel button
   UIImage *image = [[UIImage imageNamed:@"ic_clear_18pt"]
       imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -61,22 +67,15 @@
                         action:@selector(cancelButtonPressed)
               forControlEvents:UIControlEventTouchUpInside];
 
-  // If we're already logged in, cancel this
+  // If we're already logged in, dismiss the view controller and return the currently logged in user
   if (_selectedAuthProvider) {
     [self dismissViewControllerWithUser:self.currentUser andError:nil];
-  }
-
-  if (self.passwordAuthProvider == nil && [_socialProviders count] == 0) {
-    NSError *error = [[NSError alloc] initWithDomain:NSStringFromClass(self.class)
-                                                code:FAuthenticationErrorInvalidConfiguration
-                                            userInfo:nil];
-    [self dismissViewControllerWithUser:nil andError:error];
   }
 
   // Populate email/password view
   if (self.passwordAuthProvider != nil) {
     FirebaseLoginButton *emailLoginButton =
-        [[FirebaseLoginButton alloc] initWithProvider:kPasswordAuthProvider];
+        [[FirebaseLoginButton alloc] initWithProvider:FAuthProviderPassword];
     CGRect buttonFrame =
         CGRectMake(0, 2 * kTextFieldHeight + 2 * kTextFieldSpace, kButtonWidth, kButtonHeight);
     emailLoginButton.frame = buttonFrame;
@@ -98,7 +97,7 @@
   NSUInteger numProviders = [_socialProviders count];
   if (numProviders == 0) {
     [self.socialView removeFromSuperview];
-    self.totalHeightConstraint.constant -= (3 * kButtonHeight + 2 * kButtonSpace);
+    self.totalHeightConstraint.constant -= (3 * kButtonHeight + 3 * kButtonSpace);
   } else {
     // Add buttons to social view
     CGRect buttonFrame = CGRectMake(0, 0, kButtonWidth, kButtonHeight);
@@ -129,31 +128,44 @@
   [self.view layoutIfNeeded];
 }
 
-- (instancetype)enableProvider:(NSString *)provider {
-  if ([provider isEqualToString:kGoogleAuthProvider]) {
-    if (!self.googleAuthProvider) {
-      self.googleAuthProvider =
-          [[FirebaseGoogleAuthProvider alloc] initWithRef:self.ref authDelegate:self uiDelegate:self];
-      [_socialProviders addObject:self.googleAuthProvider];
-    }
-  } else if ([provider isEqualToString:kFacebookAuthProvider]) {
-    if (!self.facebookAuthProvider) {
-      self.facebookAuthProvider =
-          [[FirebaseFacebookAuthProvider alloc] initWithRef:self.ref authDelegate:self];
-      [_socialProviders addObject:self.facebookAuthProvider];
-    }
-  } else if ([provider isEqualToString:kTwitterAuthProvider]) {
-    if (!self.twitterAuthProvider) {
-      self.twitterAuthProvider = [[FirebaseTwitterAuthProvider alloc] initWithRef:self.ref
-                                                                 authDelegate:self
-                                                              twitterDelegate:self];
-      [_socialProviders addObject:self.twitterAuthProvider];
-    }
-  } else if ([provider isEqualToString:kPasswordAuthProvider]) {
-    if (!self.passwordAuthProvider) {
-      self.passwordAuthProvider =
-          [[FirebasePasswordAuthProvider alloc] initWithRef:self.ref authDelegate:self];
-    }
+- (instancetype)enableProvider:(FAuthProvider)provider {
+  switch (provider) {
+    case FAuthProviderFacebook:
+      if (!self.facebookAuthProvider) {
+        self.facebookAuthProvider =
+        [[FirebaseFacebookAuthProvider alloc] initWithRef:self.ref authDelegate:self];
+        [_socialProviders addObject:self.facebookAuthProvider];
+      }
+      break;
+
+    case FAuthProviderGoogle:
+      if (!self.googleAuthProvider) {
+        self.googleAuthProvider =
+        [[FirebaseGoogleAuthProvider alloc] initWithRef:self.ref authDelegate:self uiDelegate:self];
+        [_socialProviders addObject:self.googleAuthProvider];
+      }
+      break;
+
+    case FAuthProviderTwitter:
+      if (!self.twitterAuthProvider) {
+        self.twitterAuthProvider = [[FirebaseTwitterAuthProvider alloc] initWithRef:self.ref
+                                                                       authDelegate:self
+                                                                    twitterDelegate:self];
+        [_socialProviders addObject:self.twitterAuthProvider];
+      }
+      break;
+
+    case FAuthProviderPassword:
+      if (!self.passwordAuthProvider) {
+        self.passwordAuthProvider =
+        [[FirebasePasswordAuthProvider alloc] initWithRef:self.ref authDelegate:self];
+      }
+      break;
+
+    default:
+      [NSException raise:NSInternalInconsistencyException
+                  format:@"Cannot enable non-existent provider!"];
+      break;
   }
   return self;
 }
@@ -165,17 +177,27 @@
 - (void)loginButtonPressed:(id)button {
   if ([button isKindOfClass:[FirebaseLoginButton class]]) {
     FirebaseLoginButton *loginButton = (FirebaseLoginButton *)button;
-    if ([loginButton.provider isEqualToString:kGoogleAuthProvider]) {
-      [self.googleAuthProvider login];
-    } else if ([loginButton.provider isEqualToString:kFacebookAuthProvider]) {
-      [self.facebookAuthProvider login];
-    } else if ([loginButton.provider isEqualToString:kTwitterAuthProvider]) {
-      [self.twitterAuthProvider login];
-    } else if ([loginButton.provider isEqualToString:kPasswordAuthProvider]) {
-      // We assume that if it wasn't a social provider, it was for email/password
-      NSString *email = self.emailTextField.text;
-      NSString *password = self.passwordTextField.text;
-      [self.passwordAuthProvider loginWithEmail:email andPassword:password];
+    switch (loginButton.provider) {
+      case FAuthProviderFacebook:
+        [self.facebookAuthProvider login];
+        break;
+
+      case FAuthProviderGoogle:
+        [self.googleAuthProvider login];
+        break;
+
+      case FAuthProviderTwitter:
+        [self.twitterAuthProvider login];
+        break;
+
+      case FAuthProviderPassword:
+        [self.passwordAuthProvider loginWithEmail:self.emailTextField.text andPassword:self.passwordTextField.text];
+        break;
+
+      default:
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"Cannot log in using non-existent provider!"];
+        break;
     }
   }
 }

@@ -42,15 +42,15 @@
 @interface FirebaseLoginButton : UIButton
 
 /**
- * A string representing a valid identity provider (see FirebaseAuthConstants.h for a full list).
+ * An enum representing a valid identity provider (see FirebaseAuthConstants.h for a full list).
  */
-@property(strong, nonatomic) NSString *provider;
+@property(nonatomic) FAuthProvider provider;
 
 /**
  * Creates a button styled for the appropriate provider.
  * @param provider A string representing the desired identity provider to log in with
  * @return FirebaseLoginButton
  */
-- (instancetype)initWithProvider:(NSString *)provider;
+- (instancetype)initWithProvider:(FAuthProvider)provider;
 
 @end

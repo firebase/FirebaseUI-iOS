@@ -54,10 +54,10 @@
 @property(strong, nonatomic) FAuthData *authData;
 
 /**
- * A string which represents the chosen authentication provider.
+ * An enum which represents the chosen authentication provider.
  * See FAuthenticationConstants.h for a full list.
  */
-@property(strong, nonatomic) NSString *provider;
+@property(nonatomic) FAuthProvider provider;
 
 /**
  * FirebaseAuthDelegate delegate to handle all login, logout, and error events

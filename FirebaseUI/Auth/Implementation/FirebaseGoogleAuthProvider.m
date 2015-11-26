@@ -39,7 +39,7 @@
                  uiDelegate:(UIViewController<GIDSignInUIDelegate> *)uiDelegate {
   self = [super initWithRef:ref authDelegate:authDelegate];
   if (self) {
-    self.provider = kGoogleAuthProvider;
+    self.provider = FAuthProviderGoogle;
     [self configureProvider];
     [GIDSignIn sharedInstance].delegate = self;
     [GIDSignIn sharedInstance].uiDelegate = uiDelegate;
@@ -79,7 +79,7 @@
 - (void)signIn:(GIDSignIn *)signIn
     didSignInForUser:(GIDGoogleUser *)user
            withError:(NSError *)error {
-  [self.ref authWithOAuthProvider:kGoogleAuthProvider
+  [self.ref authWithOAuthProvider:@"google"
                             token:user.authentication.accessToken
               withCompletionBlock:^(NSError *error, FAuthData *authData) {
                 if (error) {

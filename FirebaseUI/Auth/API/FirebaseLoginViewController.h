@@ -162,10 +162,10 @@
 
 /**
  * Enables a given identity provider and allows for login and logout actions against it.
- * @param provider A string representing the desired identity provider to log in with
+ * @param provider An enum representing the desired identity provider to log in with
  * @return FirebaseLoginViewController
  */
-- (instancetype)enableProvider:(NSString *)provider;
+- (instancetype)enableProvider:(FAuthProvider)provider;
 
 /**
  * Callback that fires when after the controller is dismissed (either on success or on failure).

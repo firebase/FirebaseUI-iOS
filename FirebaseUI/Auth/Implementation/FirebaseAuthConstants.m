@@ -32,17 +32,11 @@
 
 #import "FirebaseAuthConstants.h"
 
-NSString *const kTwitterAuthProvider = @"twitter";
 NSString *const kTwitterApiKey = @"TwitterApiKey";
 
-NSString *const kFacebookAuthProvider = @"facebook";
 NSString *const kFacebookAppId = @"FacebookAppID";
 NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 NSString *const kFacebookEmailScope = @"email";
-
-NSString *const kGoogleAuthProvider = @"google";
-
-NSString *const kPasswordAuthProvider = @"password";
 
 CGFloat const kHeaderWidth = 258.0f;
 CGFloat const kHeaderHeight = 60.0f;
