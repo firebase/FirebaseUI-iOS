@@ -48,7 +48,7 @@
 
 /**
  * Creates a button styled for the appropriate provider.
- * @param provider A string representing the desired identity provider to log in with
+ * @param provider An enum representing the desired identity provider to log in with
  * @return FirebaseLoginButton
  */
 - (instancetype)initWithProvider:(FAuthProvider)provider;
