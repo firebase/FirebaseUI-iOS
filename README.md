@@ -12,7 +12,14 @@ FirebaseUI supports iOS 8.0+. We recommend using [CocoaPods](http://cocoapods.or
 the following to your `Podfile`:
 
 ```
-pod 'FirebaseUI', '~> 0.3'
+pod 'FirebaseUI', '~> 0.3'       # Pull in all Firebase UI features
+```
+
+If you don't want to use all of FirebaseUI, there are two subspecs, `Core` and `Auth` which can selectively install subsets of the full feature set.
+
+```
+pod 'FirebaseUI/Core', '~> 0.3'  # Only pull in the "Core" FirebaseUI features
+pod 'FirebaseUI/Auth', '~> 0.3'  # Only pull in the "Auth" FirebaseUI features
 ```
 
 If you're including FirebaseUI in a Swift project, make sure you also have:
@@ -350,7 +357,7 @@ FirebaseDataSource acts as a generic data source by providing common information
 ```objective-c
 // AppDelegate.h
 #import <UIKit/UIKit.h>
-#import <FirebaseUI/FirebaseUI.h>
+#import <FirebaseUI/FirebaseAppDelegate.h>
 
 @interface AppDelegate : FirebaseAppDelegate
 
