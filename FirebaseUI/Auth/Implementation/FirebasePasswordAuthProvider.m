@@ -37,7 +37,7 @@
 - (instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate {
   self = [super initWithRef:ref authDelegate:authDelegate];
   if (self) {
-    self.provider = kPasswordAuthProvider;
+    self.provider = FAuthProviderPassword;
   }
   return self;
 }

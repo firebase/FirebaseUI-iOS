@@ -42,7 +42,7 @@
             twitterDelegate:(id<TwitterAuthDelegate>)twitterDelegate {
   self = [super initWithRef:ref authDelegate:authDelegate];
   if (self) {
-    self.provider = kTwitterAuthProvider;
+    self.provider = FAuthProviderTwitter;
     self.twitterDelegate = twitterDelegate;
     [self configureProvider];
   }
@@ -140,7 +140,7 @@
 // Step 1b -- get request token from Twitter
 - (void)makeReverseRequestForAccount:(ACAccount *)account {
   [self.ref
-      makeReverseOAuthRequestTo:kTwitterAuthProvider
+      makeReverseOAuthRequestTo:@"twitter"
             withCompletionBlock:^(NSError *error, NSDictionary *json) {
               if (error != nil) {
                 [self.delegate authProvider:self onProviderError:error];

@@ -64,10 +64,10 @@
   
   self.loginViewController = [[FirebaseLoginViewController alloc] initWithRef:self.ref];
   // Only enable social providers that you've configured
-//  [self.loginViewController enableProvider:kFacebookAuthProvider];
-//  [self.loginViewController enableProvider:kGoogleAuthProvider];
-//  [self.loginViewController enableProvider:kTwitterAuthProvider];
-  [self.loginViewController enableProvider:kPasswordAuthProvider];
+//  [self.loginViewController enableProvider:FAuthProviderFacebook];
+//  [self.loginViewController enableProvider:FAuthProviderGoogle];
+//  [self.loginViewController enableProvider:FAuthProviderTwitter];
+  [self.loginViewController enableProvider:FAuthProviderPassword];
   
   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:nil style:UIBarButtonItemStylePlain target:self action:@selector(toggleAuth)];
 }

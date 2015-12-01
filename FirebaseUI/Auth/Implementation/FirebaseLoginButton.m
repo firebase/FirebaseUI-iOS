@@ -34,7 +34,7 @@
 
 @implementation FirebaseLoginButton
 
-- (instancetype)initWithProvider:(NSString *)provider {
+- (instancetype)initWithProvider:(FAuthProvider)provider {
   self = [super initWithFrame:CGRectZero];
   if (self) {
     self.provider = provider;
@@ -45,43 +45,63 @@
   return self;
 }
 
-- (UIColor *)backgroundColorForProvider:(NSString *)provider {
-  if ([provider isEqualToString:kGoogleAuthProvider]) {
-    return [UIColor colorWithRed:221.0f / 255.0f
-                           green:75.0f / 255.0f
-                            blue:57.0f / 255.0f
-                           alpha:255.0f / 255.0f];
-  } else if ([provider isEqualToString:kFacebookAuthProvider]) {
-    return [UIColor colorWithRed:59.0f / 255.0f
-                           green:89.0f / 255.0f
-                            blue:152.0f / 255.0f
-                           alpha:255.0f / 255.0f];
-  } else if ([provider isEqualToString:kTwitterAuthProvider]) {
-    return [UIColor colorWithRed:0.0f / 255.0f
-                           green:172.0f / 255.0f
-                            blue:237.0f / 255.0f
-                           alpha:255.0f / 255.0f];
-  } else if ([provider isEqualToString:kPasswordAuthProvider]) {
-    return [UIColor colorWithRed:22.0f / 255.0f
-                           green:150.0f / 255.0f
-                            blue:243.0f / 255.0f
-                           alpha:255.0f / 255.0f];
-  } else {
-    return [UIColor blackColor];
+- (UIColor *)backgroundColorForProvider:(FAuthProvider)provider {
+  switch (provider) {
+    case FAuthProviderFacebook:
+      return [UIColor colorWithRed:59.0f / 255.0f
+                             green:89.0f / 255.0f
+                              blue:152.0f / 255.0f
+                             alpha:255.0f / 255.0f];
+      break;
+
+    case FAuthProviderGoogle:
+      return [UIColor colorWithRed:221.0f / 255.0f
+                             green:75.0f / 255.0f
+                              blue:57.0f / 255.0f
+                             alpha:255.0f / 255.0f];
+      break;
+
+    case FAuthProviderTwitter:
+      return [UIColor colorWithRed:0.0f / 255.0f
+                             green:172.0f / 255.0f
+                              blue:237.0f / 255.0f
+                             alpha:255.0f / 255.0f];
+      break;
+
+    case FAuthProviderPassword:
+      return [UIColor colorWithRed:22.0f / 255.0f
+                             green:150.0f / 255.0f
+                              blue:243.0f / 255.0f
+                             alpha:255.0f / 255.0f];
+      break;
+
+    default:
+      return [UIColor blackColor];
+      break;
   }
 }
 
-- (NSString *)titleForProvider:(NSString *)provider {
-  if ([provider isEqualToString:kGoogleAuthProvider]) {
-    return @"Google";
-  } else if ([provider isEqualToString:kFacebookAuthProvider]) {
-    return @"Facebook";
-  } else if ([provider isEqualToString:kTwitterAuthProvider]) {
-    return @"Twitter";
-  } else if ([provider isEqualToString:kPasswordAuthProvider]) {
-    return @"Login";
-  } else {
-    return @"Unknown Provider";
+- (NSString *)titleForProvider:(FAuthProvider)provider {
+  switch (provider) {
+    case FAuthProviderFacebook:
+      return @"Facebook";
+      break;
+
+    case FAuthProviderGoogle:
+      return @"Google";
+      break;
+
+    case FAuthProviderTwitter:
+      return @"Twitter";
+      break;
+
+    case FAuthProviderPassword:
+      return @"Log In";
+      break;
+
+    default:
+      return @"Unknown Provider";
+      break;
   }
 }
 

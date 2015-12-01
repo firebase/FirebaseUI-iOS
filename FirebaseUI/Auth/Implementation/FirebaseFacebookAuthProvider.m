@@ -39,7 +39,7 @@
 - (instancetype)initWithRef:(Firebase *)ref authDelegate:(id<FirebaseAuthDelegate>)authDelegate {
   self = [super initWithRef:ref authDelegate:authDelegate];
   if (self) {
-    self.provider = kFacebookAuthProvider;
+    self.provider = FAuthProviderFacebook;
     [self configureProvider];
   }
   return self;
@@ -77,7 +77,7 @@
                            NSString *accessToken =
                                [[FBSDKAccessToken currentAccessToken] tokenString];
 
-                           [self.ref authWithOAuthProvider:kFacebookAuthProvider
+                           [self.ref authWithOAuthProvider:@"facebook"
                                                      token:accessToken
                                        withCompletionBlock:^(NSError *error, FAuthData *authData) {
                                          if (error) {

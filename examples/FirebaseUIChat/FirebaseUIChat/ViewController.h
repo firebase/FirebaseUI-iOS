@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <Firebase/Firebase.h>
-#import <FirebaseUI/FirebaseUI.h>
+#import <FirebaseUI/FirebaseTableViewDataSource.h>
+#import <FirebaseUI/FirebaseLoginViewController.h>
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>
 

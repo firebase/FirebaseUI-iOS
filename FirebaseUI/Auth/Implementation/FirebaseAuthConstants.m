@@ -20,7 +20,7 @@
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
  * EVENT SHALL FIREBASE BE LIABLE FOR ANY DIRECT,
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,f
  * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
@@ -32,17 +32,11 @@
 
 #import "FirebaseAuthConstants.h"
 
-NSString *const kTwitterAuthProvider = @"twitter";
 NSString *const kTwitterApiKey = @"TwitterApiKey";
 
-NSString *const kFacebookAuthProvider = @"facebook";
 NSString *const kFacebookAppId = @"FacebookAppID";
 NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 NSString *const kFacebookEmailScope = @"email";
-
-NSString *const kGoogleAuthProvider = @"google";
-
-NSString *const kPasswordAuthProvider = @"password";
 
 CGFloat const kHeaderWidth = 258.0f;
 CGFloat const kHeaderHeight = 60.0f;

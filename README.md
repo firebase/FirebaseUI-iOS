@@ -12,7 +12,14 @@ FirebaseUI supports iOS 8.0+. We recommend using [CocoaPods](http://cocoapods.or
 the following to your `Podfile`:
 
 ```
-pod 'FirebaseUI', '~> 0.3'
+pod 'FirebaseUI', '~> 0.3'       # Pull in all Firebase UI features
+```
+
+If you don't want to use all of FirebaseUI, there are two subspecs, `Core` and `Auth` which can selectively install subsets of the full feature set.
+
+```
+pod 'FirebaseUI/Core', '~> 0.3'  # Only pull in the "Core" FirebaseUI features
+pod 'FirebaseUI/Auth', '~> 0.3'  # Only pull in the "Auth" FirebaseUI features
 ```
 
 If you're including FirebaseUI in a Swift project, make sure you also have:
@@ -37,7 +44,7 @@ account](https://www.firebase.com/signup/?utm_source=firebaseui-ios).
 This is a quickstart on how to use FirebaseUI's core features to speed up iOS development with Firebase. FirebaseUI includes the following features:
 
 ### FirebaseUI Core
-Provides core data binding capabilities as well as specific datasources for lists of data. Skip to the [Core API overview](https://github.com/firebase/firebaseui-ios#firebaseui-auth-api) for more information.
+Provides core data binding capabilities as well as specific datasources for lists of data. Skip to the [Core API overview](https://github.com/firebase/firebaseui-ios#firebaseui-core-api) for more information.
 
 Class  | Description
 ------------- | -------------
@@ -47,7 +54,7 @@ FirebaseArray | Keeps an array synchronized to a Firebase query
 FirebaseDataSource | Generic superclass to create a custom data source
 
 ### FirebaseUI Auth
-Provides authentication providers as well as concrete implementations for Facebook, Google, Twitter, and Firbase email/password, plus a headful UI that handles auth state and error conditions. Skip to the [Auth API overview](https://github.com/firebase/firebaseui-ios#firebaseui-core-api) for more information.
+Provides authentication providers as well as concrete implementations for Facebook, Google, Twitter, and Firbase email/password, plus a headful UI that handles auth state and error conditions. Skip to the [Auth API overview](https://github.com/firebase/firebaseui-ios#firebaseui-auth-api) for more information.
 
 Class  | Description
 ------------- | -------------
@@ -350,7 +357,7 @@ FirebaseDataSource acts as a generic data source by providing common information
 ```objective-c
 // AppDelegate.h
 #import <UIKit/UIKit.h>
-#import <FirebaseUI/FirebaseUI.h>
+#import <FirebaseUI/FirebaseAppDelegate.h>
 
 @interface AppDelegate : FirebaseAppDelegate
 
@@ -405,43 +412,113 @@ class AppDelegate: FirebaseAppDelegate {
 ```
 
 ### FirebaseLoginViewController
-`FirebaseLoginViewContoller` quickly adds a headful UI flow to your application. This flow supports email/password login, as well as social providers (Facebook, Google, Twitter). Using this, you can easily guide users through the login journey, get the current user's state, and log the user out. This view looks like:
+`FirebaseLoginViewContoller` quickly adds a headful UI flow to your application. This flow supports email/password login, as well as social providers (Facebook, Google, Twitter). Using this, you can easily guide users through the login journey, get the current user's state, and log the user out. There are two main scenerios this controller can be used in:
+  1. A captive login portal: launches on app start, developer must specify dismissal behavior
+  2. A login modal view: launches on user action, developer may specify dismissal behavior or use built in FirebaseUI behavior
+
+This view looks like:
 
 ![FirebaseLoginViewController with all providers enabled](https://github.com/firebase/FirebaseUI-iOS/blob/master/docs/FirebaseLoginViewController.png)
 
-Code to create this view is below:
+For creating a captive portal, we recommend creating the `FirebaseLoginViewController` and enabling providers in `viewDidLoad`, but don't display it until the view has been created (`viewWillAppear` or later!). It is best to make the `FirebaseLoginViewController` a property on your view controller so it will be retained and acessible by other methods in your class.
 
 #### Objective-C
 ```objective-c
-Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<YOUR-FIREBASE-APP>.firebaseio.com/"];
-FirebaseLoginViewController *loginViewController = [[FirebaseLoginViewController alloc] initWithRef:ref];
-  [loginViewController enableProvider:kGoogleAuthProvider];
-  [loginViewController enableProvider:kFacebookAuthProvider];
-  [loginViewController enableProvider:kTwitterAuthProvider];
-  [loginViewController enableProvider:kPasswordAuthProvider];
-  [self presentViewController:self.loginViewController animated:YES completion:nil];
-  ...
-  FAuthData *user = [loginViewController currentUser]; // Check the currently logged in user
-  ...
-  [loginViewController logout]; // Log the current user out
+- (void)viewDidLoad {
+  [super viewDidLoad];
+
+  Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<YOUR-FIREBASE-APP>.firebaseio.com/"];
+
+  self.loginViewController = [[FirebaseLoginViewController alloc] initWithRef:firebaseRef];
+  [self.loginViewController enableProvider:FAuthProviderFacebook];
+  [self.loginViewController enableProvider:FAuthProviderGoogle];
+  [self.loginViewController enableProvider:FAuthProviderTwitter];
+  [self.loginViewController enableProvider:FAuthProviderPassword];
+  // Scenario 1: Set up captive portal login flow
+  [self.loginViewController didDismissWithBlock:^(FAuthData *user, NSError *error) {
+    if (user) {
+      // Handle user case
+    } else if (error) {
+      // Handle error case
+    } else {
+      // Handle cancel case
+    }
+  }];
+
+  // Scenario 2: Set up user action based login flow
+  [loginButton addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+  [logoutButton addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+}
+
+// Scenario 1: Application launches login flow, handles dismissal and routing in `didDismissWithBlock:`
+- (void)viewDidAppear:(BOOL)animated {
+  if (![self.loginViewController currentUser]) {
+    [self presentViewController:self.loginViewController animated:YES completion:nil];
+  }
+}
+
+// Scenario 2: User action launches login flow, dismissal and routing handled by `FirebaseLoginViewController`
+- (void)login {
+  if (![self.loginViewController currentUser]) {
+    [self presentViewController:self.loginViewController animated:YES completion:nil];
+  }
+}
+
+- (void)logout {
+  if ([self.loginViewController currentUser]) {
+    [self.loginViewController logout];
+  }
+}
 ```
 
 #### Swift
 ```swift
-let firebaseRef = Firebase(url: "https://<YOUR-FIREBASE-APP>.firebaseio.com/")
-var loginViewController = FirebaseLoginViewController(ref: firebaseRef)
-loginViewController.enableProvider(kGoogleAuthProvider)
-loginViewController.enableProvider(kFacebookAuthProvider)
-loginViewController.enableProvider(kTwitterAuthProvider)
-loginViewController.enableProvider(kPasswordAuthProvider)
-self.presentViewController(loginViewController, animated: true, completion: nil)
-...
-var user: FAuthData = loginViewController.currentUser(); // Check the currently logged in user
-...
-loginViewController.logout(); // Log the current user out
+override func viewDidLoad() {
+  super.viewDidLoad()
+
+  let firebaseRef = Firebase(url: "https://<YOUR-FIREBASE-APP>.firebaseio.com/")
+
+  self.loginViewController = FirebaseLoginViewController(ref: firebaseRef)
+  self.loginViewController.enableProvider(FAuthProvider.Facebook)
+  self.loginViewController.enableProvider(FAuthProvider.Google)
+  self.loginViewController.enableProvider(FAuthProvider.Twitter)
+  self.loginViewController.enableProvider(FAuthProvider.Password)
+  // Scenario 1: Set up captive portal login flow
+  self.loginViewController.didDismissWithBlock { (user: FAuthData, error: NSError) -> Void in
+    if (user) {
+      // Handle user case
+    } else if (error) {
+      // Handle error case
+    } else {
+      // Handle cancel case
+    }
+  }
+
+  // Scenario 2: Set up user action based login flow
+  loginButton.addTarget(self, action: "login", forControlEvents: UIControlEvents.TouchUpInside)
+  logoutButton.addTarget(self, action: "logout", forControlEvents: UIControlEvents.TouchUpInside)
+}
+
+// Scenario 1: Application launches login flow, handles dismissal and routing in `didDismissWithBlock:`
+override func viewDidAppear(animated: Bool) {
+  if (!self.loginViewController.currentUser()) {
+    self.presentViewController(self.loginViewcontroller, animated: true, completion: nil)
+  }
+}
+
+// Scenario 2: User action launches login flow, dismissal and routing handled by `FirebaseLoginViewController`
+func login() {
+  if (!self.loginViewController.currentUser()) {
+    self.presentViewController(self.loginViewcontroller, animated: true, completion: nil)
+  }
+}
+
+func logout() {
+  if (self.loginViewController.currentUser()) {
+    self.loginViewController.logout()
+  }
+}
 ```
-
-
 
 ### FirebaseFacebookAuthProvider
 
@@ -449,7 +526,7 @@ loginViewController.logout(); // Log the current user out
 
 #### Objective-C
 ```objective-c
-Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<your-firebase-app>.firebaseio.com/"];
+Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<YOUR-FIREBASE-APP>.firebaseio.com/"];
 FirebaseFacebookAuthProvider *facebookProvider = [[FirebaseFacebookAuthProvider alloc] initWithRef:firebaseRef authDelegate:self];
 [facebookProvider login];
 ...
@@ -458,7 +535,7 @@ FirebaseFacebookAuthProvider *facebookProvider = [[FirebaseFacebookAuthProvider 
 
 #### Swift
 ```swift
-let firebaseRef = Firebase(url: "https://<your-firebase-app>.firebaseio.com/")
+let firebaseRef = Firebase(url: "https://<YOUR-FIREBASE-APP>.firebaseio.com/")
 let facebookProvider = FirebaseFacebookAuthProvider(ref: firebaseRef, authDelegate: self)
 facebookProvider.login()
 ...
@@ -470,7 +547,7 @@ facebookProvider.logout()
 
 #### Objective-C
 ```objective-c
-Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<your-firebase-app>.firebaseio.com/"];
+Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<YOUR-FIREBASE-APP>.firebaseio.com/"];
 FirebaseGoogleAuthProvider *googleProvider = [[FirebaseGoogleAuthProvider alloc] initWithRef:firebaseRef authDelegate:self uiDelegate:self];
 [googleProvider login];
 ...
@@ -479,7 +556,7 @@ FirebaseGoogleAuthProvider *googleProvider = [[FirebaseGoogleAuthProvider alloc]
 
 #### Swift
 ```swift
-let firebaseRef = Firebase(url: "https://<your-firebase-app>.firebaseio.com/")
+let firebaseRef = Firebase(url: "https://<YOUR-FIREBASE-APP>.firebaseio.com/")
 let googleProvider = FirebaseGoogleAuthProvider(ref: firebaseRef, authDelegate: self, uiDelegate: self)
 googleProvider.login()
 ...
@@ -492,7 +569,7 @@ googleProvider.logout()
 
 #### Objective-C
 ```objective-c
-Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<your-firebase-app>.firebaseio.com/"];
+Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<YOUR-FIREBASE-APP>.firebaseio.com/"];
 FirebaseTwitterAuthProvider *twitterProvider = [[FirebaseTwitterAuthProvider alloc] initWithRef:firebaseRef authDelegate:self twitterDelegate:self];
 [twitterProvider login];
 ...
@@ -501,7 +578,7 @@ FirebaseTwitterAuthProvider *twitterProvider = [[FirebaseTwitterAuthProvider all
 
 #### Swift
 ```swift
-let firebaseRef = Firebase(url: "https://<your-firebase-app>.firebaseio.com/")
+let firebaseRef = Firebase(url: "https://<YOUR-FIREBASE-APP>.firebaseio.com/")
 let twitterProvider = FirebaseTwitterAuthProvider(ref: firebaseRef, authDelegate: self, twitterDelegate: self)
 twitterProvider.login()
 ...
@@ -514,7 +591,7 @@ twitterProvider.logout()
 
 #### Objective-C
 ```objective-c
-Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<your-firebase-app>.firebaseio.com/"];
+Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<YOUR-FIREBASE-APP>.firebaseio.com/"];
 FirebasePasswordAuthProvider *passwordProvider = [[FirebasePasswordAuthProvider alloc] initWithRef:firebaseRef authDelegate:self];
 [passwordProvider loginWithEmail:@"email" andPassword:@"password"];
 ...
@@ -523,7 +600,7 @@ FirebasePasswordAuthProvider *passwordProvider = [[FirebasePasswordAuthProvider 
 
 #### Swift
 ```swift
-let firebaseRef = Firebase(url: "https://<your-firebase-app>.firebaseio.com/")
+let firebaseRef = Firebase(url: "https://<YOUR-FIREBASE-APP>.firebaseio.com/")
 let passwordProvider = FirebasePasswordAuthProvider(ref: firebaseRef, authDelegate: self)
 passwordProvider.login(email: "email", password: "password")
 ...
@@ -568,7 +645,7 @@ $ cd FirebaseUI-iOS
 $ ./setup.sh
 ```
 
-Note that `setup.sh` pulls in a number of provider frameworks (Facebook, Google), which need to be pulled in for local development. The build will also fail due to Google using `#import <Google/SignIn.h>` in their pod but `#import <GoogleSignIn/GoogleSignIn.h>` in the framework, so you can either change the imports, or include `FirebaseUI` in a Cocoapods project and edit there.
+Note that `setup.sh` pulls in a number of provider frameworks (Facebook, Google), which need to be pulled in for local development. The debug build and framework release have the flag `LOCAL_BUILD=1` which uses the local frameworks installed via `setup.sh`, while the Cocoapods release doesn't have this flag set, so the appropriate Pod `#import` statements are used.
 
 FirebaseUI makes use of XCode 7 features such as lightweight generics and `__kindof` annotations, but it should be backwards compatible to XCode 6 thanks to [XCodeMacros.h](https://github.com/firebase/FirebaseUI-iOS/blob/master/FirebaseUI/XCodeMacros.h).
 
