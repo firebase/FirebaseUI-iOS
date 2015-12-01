@@ -40,13 +40,13 @@
 		BBF6D4161BA19CDF00C644A7 /* FirebaseFacebookAuthProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = BB6AC2131BA06AC300A10461 /* FirebaseFacebookAuthProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BBF6D41B1BA1FFAD00C644A7 /* FirebaseGoogleAuthProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6D41A1BA1FFAD00C644A7 /* FirebaseGoogleAuthProvider.m */; };
 		BBF6D5771BA345E600C644A7 /* FirebaseAuthProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = BBF6D5761BA33AC300C644A7 /* FirebaseAuthProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D809A11E1BF67095000257AA /* FirebaseAuthConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D809A11D1BF67095000257AA /* FirebaseAuthConstants.m */; settings = {ASSET_TAGS = (); }; };
+		D809A11E1BF67095000257AA /* FirebaseAuthConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D809A11D1BF67095000257AA /* FirebaseAuthConstants.m */; };
 		D809A1271BF6FF6C000257AA /* FirebaseLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D809A1241BF6FF6C000257AA /* FirebaseLoginViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D809A1311BF7ECB0000257AA /* FirebaseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D809A1301BF7ECB0000257AA /* FirebaseLoginViewController.m */; settings = {ASSET_TAGS = (); }; };
-		D809A1661BFBAC7F000257AA /* FirebaseLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D809A1651BFBAC7F000257AA /* FirebaseLoginViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		D809A16A1BFBAECA000257AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D809A1691BFBAECA000257AA /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
+		D809A1311BF7ECB0000257AA /* FirebaseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D809A1301BF7ECB0000257AA /* FirebaseLoginViewController.m */; };
+		D809A1661BFBAC7F000257AA /* FirebaseLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D809A1651BFBAC7F000257AA /* FirebaseLoginViewController.xib */; };
+		D809A16A1BFBAECA000257AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D809A1691BFBAECA000257AA /* Assets.xcassets */; };
 		D809A16D1BFBE242000257AA /* FirebaseLoginButton.h in Headers */ = {isa = PBXBuildFile; fileRef = D809A16B1BFBE242000257AA /* FirebaseLoginButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D809A1701BFBE5F9000257AA /* FirebaseLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D809A16F1BFBE5F9000257AA /* FirebaseLoginButton.m */; settings = {ASSET_TAGS = (); }; };
+		D809A1701BFBE5F9000257AA /* FirebaseLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D809A16F1BFBE5F9000257AA /* FirebaseLoginButton.m */; };
 		D809A1721BFCF23B000257AA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D809A1711BFCF23B000257AA /* Accounts.framework */; };
 		D8124F441B72C94E003441AD /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8124F401B72A90C003441AD /* Firebase.framework */; };
 		D81495F11BF5AF280099AE10 /* FirebaseArray.h in Headers */ = {isa = PBXBuildFile; fileRef = D81495EB1BF5AF280099AE10 /* FirebaseArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,15 +54,13 @@
 		D81495F31BF5AF280099AE10 /* FirebaseCollectionViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D81495ED1BF5AF280099AE10 /* FirebaseCollectionViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D81495F41BF5AF280099AE10 /* FirebaseDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D81495EE1BF5AF280099AE10 /* FirebaseDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D81495F51BF5AF280099AE10 /* FirebaseTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D81495EF1BF5AF280099AE10 /* FirebaseTableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D81495F61BF5AF280099AE10 /* FirebaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = D81495F01BF5AF280099AE10 /* FirebaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D81495FC1BF5AF460099AE10 /* FirebaseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D81495F71BF5AF460099AE10 /* FirebaseArray.m */; settings = {ASSET_TAGS = (); }; };
-		D81495FD1BF5AF460099AE10 /* FirebaseCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D81495F81BF5AF460099AE10 /* FirebaseCollectionViewDataSource.m */; settings = {ASSET_TAGS = (); }; };
-		D81495FE1BF5AF460099AE10 /* FirebaseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D81495F91BF5AF460099AE10 /* FirebaseDataSource.m */; settings = {ASSET_TAGS = (); }; };
-		D81495FF1BF5AF460099AE10 /* FirebaseTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D81495FA1BF5AF460099AE10 /* FirebaseTableViewDataSource.m */; settings = {ASSET_TAGS = (); }; };
-		D81496001BF5AF460099AE10 /* FirebaseUI.m in Sources */ = {isa = PBXBuildFile; fileRef = D81495FB1BF5AF460099AE10 /* FirebaseUI.m */; settings = {ASSET_TAGS = (); }; };
-		D81496061BF5B92C0099AE10 /* FirebasePasswordAuthProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D81496051BF5B92C0099AE10 /* FirebasePasswordAuthProvider.m */; settings = {ASSET_TAGS = (); }; };
+		D81495FC1BF5AF460099AE10 /* FirebaseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D81495F71BF5AF460099AE10 /* FirebaseArray.m */; };
+		D81495FD1BF5AF460099AE10 /* FirebaseCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D81495F81BF5AF460099AE10 /* FirebaseCollectionViewDataSource.m */; };
+		D81495FE1BF5AF460099AE10 /* FirebaseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D81495F91BF5AF460099AE10 /* FirebaseDataSource.m */; };
+		D81495FF1BF5AF460099AE10 /* FirebaseTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D81495FA1BF5AF460099AE10 /* FirebaseTableViewDataSource.m */; };
+		D81496061BF5B92C0099AE10 /* FirebasePasswordAuthProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D81496051BF5B92C0099AE10 /* FirebasePasswordAuthProvider.m */; };
 		D81496071BF5B9BE0099AE10 /* FirebasePasswordAuthProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = D81496041BF5B9110099AE10 /* FirebasePasswordAuthProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D8680D901C0631FD001987EB /* FirebaseAuthDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D8680D8F1C0631FD001987EB /* FirebaseAuthDelegate.h */; settings = {ASSET_TAGS = (); }; };
+		D8680D901C0631FD001987EB /* FirebaseAuthDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D8680D8F1C0631FD001987EB /* FirebaseAuthDelegate.h */; };
 		D87943371BF51FF000525DFD /* FirebaseAuthProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D87943361BF51FF000525DFD /* FirebaseAuthProvider.m */; };
 		D87943461BF59E1F00525DFD /* FirebaseAuthConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = D879433E1BF5654000525DFD /* FirebaseAuthConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D87943471BF59E4F00525DFD /* TwitterAuthDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D879433D1BF5593800525DFD /* TwitterAuthDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -127,12 +125,10 @@
 		D81495ED1BF5AF280099AE10 /* FirebaseCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseCollectionViewDataSource.h; path = Core/API/FirebaseCollectionViewDataSource.h; sourceTree = "<group>"; };
 		D81495EE1BF5AF280099AE10 /* FirebaseDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseDataSource.h; path = Core/API/FirebaseDataSource.h; sourceTree = "<group>"; };
 		D81495EF1BF5AF280099AE10 /* FirebaseTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseTableViewDataSource.h; path = Core/API/FirebaseTableViewDataSource.h; sourceTree = "<group>"; };
-		D81495F01BF5AF280099AE10 /* FirebaseUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseUI.h; path = Core/API/FirebaseUI.h; sourceTree = "<group>"; };
 		D81495F71BF5AF460099AE10 /* FirebaseArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseArray.m; path = Core/Implementation/FirebaseArray.m; sourceTree = "<group>"; };
 		D81495F81BF5AF460099AE10 /* FirebaseCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseCollectionViewDataSource.m; path = Core/Implementation/FirebaseCollectionViewDataSource.m; sourceTree = "<group>"; };
 		D81495F91BF5AF460099AE10 /* FirebaseDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseDataSource.m; path = Core/Implementation/FirebaseDataSource.m; sourceTree = "<group>"; };
 		D81495FA1BF5AF460099AE10 /* FirebaseTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseTableViewDataSource.m; path = Core/Implementation/FirebaseTableViewDataSource.m; sourceTree = "<group>"; };
-		D81495FB1BF5AF460099AE10 /* FirebaseUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseUI.m; path = Core/Implementation/FirebaseUI.m; sourceTree = "<group>"; };
 		D81496041BF5B9110099AE10 /* FirebasePasswordAuthProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebasePasswordAuthProvider.h; path = Auth/API/FirebasePasswordAuthProvider.h; sourceTree = "<group>"; };
 		D81496051BF5B92C0099AE10 /* FirebasePasswordAuthProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebasePasswordAuthProvider.m; path = Auth/Implementation/FirebasePasswordAuthProvider.m; sourceTree = "<group>"; };
 		D8680D8F1C0631FD001987EB /* FirebaseAuthDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirebaseAuthDelegate.h; path = Auth/API/FirebaseAuthDelegate.h; sourceTree = "<group>"; };
@@ -287,7 +283,6 @@
 				D81495ED1BF5AF280099AE10 /* FirebaseCollectionViewDataSource.h */,
 				D81495EE1BF5AF280099AE10 /* FirebaseDataSource.h */,
 				D81495EF1BF5AF280099AE10 /* FirebaseTableViewDataSource.h */,
-				D81495F01BF5AF280099AE10 /* FirebaseUI.h */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -299,7 +294,6 @@
 				D81495F81BF5AF460099AE10 /* FirebaseCollectionViewDataSource.m */,
 				D81495F91BF5AF460099AE10 /* FirebaseDataSource.m */,
 				D81495FA1BF5AF460099AE10 /* FirebaseTableViewDataSource.m */,
-				D81495FB1BF5AF460099AE10 /* FirebaseUI.m */,
 			);
 			name = Implementation;
 			sourceTree = "<group>";
@@ -350,7 +344,6 @@
 				D87943471BF59E4F00525DFD /* TwitterAuthDelegate.h in Headers */,
 				BB48779D1BA8A0D600FD3D4D /* GGLContext.h in Headers */,
 				D87943461BF59E1F00525DFD /* FirebaseAuthConstants.h in Headers */,
-				D81495F61BF5AF280099AE10 /* FirebaseUI.h in Headers */,
 				BB62DD7A1BA6F84C001BD539 /* FirebaseAppDelegate.h in Headers */,
 				D81495F41BF5AF280099AE10 /* FirebaseDataSource.h in Headers */,
 				D81495F51BF5AF280099AE10 /* FirebaseTableViewDataSource.h in Headers */,
@@ -493,7 +486,6 @@
 				D81495FF1BF5AF460099AE10 /* FirebaseTableViewDataSource.m in Sources */,
 				D809A11E1BF67095000257AA /* FirebaseAuthConstants.m in Sources */,
 				BBF6D41B1BA1FFAD00C644A7 /* FirebaseGoogleAuthProvider.m in Sources */,
-				D81496001BF5AF460099AE10 /* FirebaseUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

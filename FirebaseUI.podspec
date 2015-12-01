@@ -7,15 +7,23 @@ Pod::Spec.new do |s|
   s.author       = { "Firebase" => "support@firebase.com" }
   s.social_media_url = "https://twitter.com/firebase"
   s.source       = { :git => "https://github.com/firebase/FirebaseUI-iOS.git", :tag => 'v0.3.1' }
-  s.source_files = "FirebaseUI/**/*.{h,m}"
-  s.resources = "FirebaseUI/**/Resources/*"
-  s.dependency "Firebase", "~>2.2"
-  s.dependency "FBSDKCoreKit"
-  s.dependency "FBSDKLoginKit"
-  s.dependency "Google/SignIn"
   s.platform = :ios
   s.ios.deployment_target = "8.0"
-  s.ios.framework = "UIKit", "Accounts"
+  s.dependency "Firebase", "~>2.2"
+  s.ios.framework = "UIKit"
   s.xcconfig     = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/Firebase"' }
   s.requires_arc = true
-end
+
+  s.subspec 'Core' do |core|
+    core.source_files = "FirebaseUI/{Core,Util}/**/*.{h,m}"
+  end
+
+  s.subspec 'Auth' do |auth|
+    auth.source_files = "FirebaseUI/Auth/**/*.{h,m}"
+    auth.resources = "FirebaseUI/Auth/Resources/*"
+    auth.dependency "FBSDKCoreKit"
+    auth.dependency "FBSDKLoginKit"
+    auth.dependency "Google/SignIn"
+    auth.ios.framework = "Accounts"
+  end
+ end

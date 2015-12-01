@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <FirebaseUI/FirebaseUI.h>
+#import <FirebaseUI/FirebaseAppDelegate.h>
 
 @interface AppDelegate : FirebaseAppDelegate
 

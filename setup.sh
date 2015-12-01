@@ -4,9 +4,9 @@ set -e
 
 # SDK URLs
 FIREBASE_SDK_URL="https://cdn.firebase.com/ObjC/Firebase.framework-LATEST.zip"
-GOOGLE_SDK_URL="https://developers.google.com/identity/sign-in/ios/sdk/google_signin_sdk_2_2_0.zip"
+GOOGLE_SDK_URL="https://developers.google.com/identity/sign-in/ios/sdk/google_signin_sdk_2_4_0.zip"
 GOOGLE_CORE_SDK_URL="https://www.gstatic.com/cpdc/02468137448ba914-Google-1.0.7.zip"
-FACEBOOK_SDK_URL="http://fb.me/FacebookSDKs-iOS-20151111.zip"
+FACEBOOK_SDK_URL="https://origincache.facebook.com/developers/resources/?id=facebook-ios-sdk-current.zip"
 
 # Script directories
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
