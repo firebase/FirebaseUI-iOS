@@ -612,7 +612,7 @@
 					"$(PROJECT_DIR)/target/Products/Release-combined",
 					"$(PROJECT_DIR)/target/Products/Release-iphoneos",
 					"$(PROJECT_DIR)/target/Products/Release-iphonesimulator",
-					"$(PROJECT_DIR)/sdk/google_signin_sdk_2_2_0",
+					"$(PROJECT_DIR)/sdk/google_signin_sdk_2_4_0",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"LOCAL_BUILD=1",
@@ -657,7 +657,7 @@
 					"$(PROJECT_DIR)/target/Products/Release-combined",
 					"$(PROJECT_DIR)/target/Products/Release-iphoneos",
 					"$(PROJECT_DIR)/target/Products/Release-iphonesimulator",
-					"$(PROJECT_DIR)/sdk/google_signin_sdk_2_2_0",
+					"$(PROJECT_DIR)/sdk/google_signin_sdk_2_4_0",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_PEDANTIC = YES;
