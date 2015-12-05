@@ -33,6 +33,7 @@
 #import <Firebase/Firebase.h>
 
 #import "FirebaseArray.h"
+#import "FRestDataSnapshot.h"
 
 @implementation FirebaseArray
 
@@ -44,10 +45,15 @@
 }
 
 - (instancetype)initWithQuery:(FQuery *)query {
+  return [self initWithQuery:query options:FirebaseUIOptionsNone];
+}
+
+- (instancetype)initWithQuery:(FQuery *)query options:(FirebaseUIOptions)options {
   self = [super init];
   if (self) {
     self.snapshots = [NSMutableArray array];
     self.query = query;
+    self.options = options;
 
     [self initListeners];
   }
@@ -76,7 +82,12 @@
         [self.delegate childAdded:snapshot atIndex:index];
       }
       withCancelBlock:^(NSError *error) {
-        [self.delegate canceledWithError:error];
+        if (((self.options & FirebaseUIOptionsResftulFallback) != 0) &&
+            [error.localizedDescription isEqual:@"too_big"]) {
+          [self fetchViaRest];
+        } else {
+          [self.delegate canceledWithError:error];
+        }
       }];
 
   [self.query observeEventType:FEventTypeChildChanged
@@ -135,6 +146,54 @@
                                  @"Key" : key,
                                  @"Array" : self.snapshots
                                }];
+}
+
+- (void)fetchViaRest {
+  NSURLSession *session = [NSURLSession sharedSession];
+  NSURLComponents *components = [[NSURLComponents alloc] initWithString:self.query.description];
+  components.path = [NSString stringWithFormat:@"%@/.json", components.path];
+
+  NSMutableArray *queryItems = [[NSMutableArray alloc] init];
+  [queryItems addObject:[[NSURLQueryItem alloc] initWithName:@"shallow" value:@"true"]];
+
+  if (self.query.ref.authData.token != nil) {
+    [queryItems addObject:[[NSURLQueryItem alloc] initWithName:@"auth"
+                                                         value:self.query.ref.authData.token]];
+  }
+
+  components.queryItems = queryItems;
+
+  NSURLSessionDataTask *task =
+      [session dataTaskWithURL:components.URL
+             completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response,
+                                 NSError *_Nullable error) {
+               if (error != nil) {
+                 [self.delegate canceledWithError:error];
+               } else if (data != nil) {
+                 NSError *error = nil;
+                 NSDictionary *result =
+                     [NSJSONSerialization JSONObjectWithData:data
+                                                     options:NSJSONReadingMutableContainers
+                                                       error:&error];
+                 if (error != nil) {
+                   [self.delegate canceledWithError:error];
+                 } else if (result != nil) {
+                   for (id key in [result allKeys]) {
+                     Firebase *ref = [self.query.ref childByAppendingPath:key];
+                     FDataSnapshot *snapshot =
+                         [[FRestDataSnapshot alloc] initWithRef:ref value:result[key]];
+
+                     [self.snapshots addObject:snapshot];
+                   }
+
+                   dispatch_async([Firebase defaultConfig].callbackQueue, ^{
+                     [self.delegate dataReloaded];
+                   });
+                 }
+               }
+             }];
+
+  [task resume];
 }
 
 #pragma mark -

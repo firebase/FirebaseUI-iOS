@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		83D0E7EF1C13A62A00652C4A /* FRestDataSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D0E7ED1C13A62A00652C4A /* FRestDataSnapshot.m */; };
 		BB372B551B8BE4890046905E /* FirebaseTwitterAuthProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = BB372B541B8BE4890046905E /* FirebaseTwitterAuthProvider.m */; };
 		BB372B601B8D1B580046905E /* FirebaseTwitterAuthProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = BB372B531B8BE4510046905E /* FirebaseTwitterAuthProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB4877901BA8A0C000FD3D4D /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB48778F1BA8A0C000FD3D4D /* GoogleSignIn.framework */; };
@@ -93,6 +94,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		83D0E7EB1C13A60C00652C4A /* FRestDataSnapshot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FRestDataSnapshot.h; path = Core/API/FRestDataSnapshot.h; sourceTree = "<group>"; };
+		83D0E7ED1C13A62A00652C4A /* FRestDataSnapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRestDataSnapshot.m; path = Core/Implementation/FRestDataSnapshot.m; sourceTree = "<group>"; };
+		83D0E7F01C13B21700652C4A /* FirebaseUIOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseUIOptions.h; path = Core/API/FirebaseUIOptions.h; sourceTree = "<group>"; };
 		BB372B531B8BE4510046905E /* FirebaseTwitterAuthProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FirebaseTwitterAuthProvider.h; path = Auth/API/FirebaseTwitterAuthProvider.h; sourceTree = "<group>"; };
 		BB372B541B8BE4890046905E /* FirebaseTwitterAuthProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirebaseTwitterAuthProvider.m; path = Auth/Implementation/FirebaseTwitterAuthProvider.m; sourceTree = "<group>"; };
 		BB48778F1BA8A0C000FD3D4D /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = sdk/google_signin_sdk_2_2_0/GoogleSignIn.framework; sourceTree = "<group>"; };
@@ -283,6 +287,8 @@
 				D81495ED1BF5AF280099AE10 /* FirebaseCollectionViewDataSource.h */,
 				D81495EE1BF5AF280099AE10 /* FirebaseDataSource.h */,
 				D81495EF1BF5AF280099AE10 /* FirebaseTableViewDataSource.h */,
+				83D0E7EB1C13A60C00652C4A /* FRestDataSnapshot.h */,
+				83D0E7F01C13B21700652C4A /* FirebaseUIOptions.h */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -294,6 +300,7 @@
 				D81495F81BF5AF460099AE10 /* FirebaseCollectionViewDataSource.m */,
 				D81495F91BF5AF460099AE10 /* FirebaseDataSource.m */,
 				D81495FA1BF5AF460099AE10 /* FirebaseTableViewDataSource.m */,
+				83D0E7ED1C13A62A00652C4A /* FRestDataSnapshot.m */,
 			);
 			name = Implementation;
 			sourceTree = "<group>";
@@ -485,6 +492,7 @@
 				D81496061BF5B92C0099AE10 /* FirebasePasswordAuthProvider.m in Sources */,
 				D81495FF1BF5AF460099AE10 /* FirebaseTableViewDataSource.m in Sources */,
 				D809A11E1BF67095000257AA /* FirebaseAuthConstants.m in Sources */,
+				83D0E7EF1C13A62A00652C4A /* FRestDataSnapshot.m in Sources */,
 				BBF6D41B1BA1FFAD00C644A7 /* FirebaseGoogleAuthProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

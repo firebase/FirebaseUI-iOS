@@ -241,6 +241,53 @@
                                   view:(__NON_NULL UITableView *)tableView;
 
 /**
+ * Initialize an instance of FirebaseTableViewDataSource that populates a custom
+ * subclass of
+ * UITableViewCell with a custom model class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param cell A subclass of UITableViewCell used to populate the UITableView,
+ * defaults to
+ * UITableViewCell if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @param options Options for the FirebaseTableViewDataSource
+ * @return An instance of FirebaseTableViewDataSource that populates a custom
+ * subclass of
+ * UITableViewCell with a custom model class
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                            modelClass:(__NULLABLE Class)model
+                             cellClass:(__NULLABLE Class)cell
+                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                  view:(__NON_NULL UITableView *)tableView
+                               options:(FirebaseUIOptions)options;
+
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates a custom
+ * xib with a custom
+ * model class.
+ * @param ref A Firebase reference to bind the datasource to
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param nibName The name of a xib file to create the layout for a
+ * UITableViewCell
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @param options Options for the FirebaseTableViewDataSource
+ * @return An instance of FirebaseTableViewDataSource that populates a custom
+ * xib with a custom
+ * model class
+ */
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+                            modelClass:(__NULLABLE Class)model
+                              nibNamed:(__NON_NULL NSString *)nibName
+                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                  view:(__NON_NULL UITableView *)tableView
+                               options:(FirebaseUIOptions)options;
+
+/**
  * Initialize an instance of FirebaseTableViewDataSource that populates
  * UITableViewCells with
  * FDataSnapshots.
@@ -390,7 +437,52 @@
                      cellReuseIdentifier:(__NON_NULL NSString *)identifier
                                     view:(__NON_NULL UITableView *)tableView;
 
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates a custom
+ * subclass of
+ * UITableViewCell with a custom model class.
+ * @param query A Firebase query to bind the datasource to
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param cell A subclass of UITableViewCell used to populate the UITableView,
+ * defaults to
+ * UITableViewCell if nil
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @param options Options for the FirebaseTableViewDataSource
+ * @return An instance of FirebaseTableViewDataSource that populates a custom
+ * subclass of
+ * UITableViewCell with a custom model class
+ */
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+                              modelClass:(__NULLABLE Class)model
+                               cellClass:(__NULLABLE Class)cell
+                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                    view:(__NON_NULL UITableView *)tableView
+                                 options:(FirebaseUIOptions)options;
 
+/**
+ * Initialize an instance of FirebaseTableViewDataSource that populates a custom
+ * xib with a custom
+ * model class.
+ * @param query A Firebase query to bind the datasource to
+ * @param model A custom class that FDataSnapshots are coerced to, defaults to
+ * FDataSnapshot if nil
+ * @param nibName The name of a xib file to create the layout for a
+ * UITableViewCell
+ * @param identifier A string to use as a CellReuseIdentifier
+ * @param tableView An instance of a UITableView to bind to
+ * @param options Options for the FirebaseTableViewDataSource
+ * @return An instance of FirebaseTableViewDataSource that populates a custom
+ * xib with a custom
+ * model class
+ */
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+                              modelClass:(__NULLABLE Class)model
+                                nibNamed:(__NON_NULL NSString *)nibName
+                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
+                                    view:(__NON_NULL UITableView *)tableView
+                                 options:(FirebaseUIOptions)options;
 
 /**
  * This method populates the fields of a UITableViewCell or subclass given a
