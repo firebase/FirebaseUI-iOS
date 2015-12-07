@@ -74,6 +74,9 @@
         [self.snapshots insertObject:snapshot atIndex:index];
 
         [self.delegate childAdded:snapshot atIndex:index];
+      }
+      withCancelBlock:^(NSError *error) {
+        [self.delegate canceledWithError:error];
       }];
 
   [self.query observeEventType:FEventTypeChildChanged
@@ -83,16 +86,22 @@
         [self.snapshots replaceObjectAtIndex:index withObject:snapshot];
 
         [self.delegate childChanged:snapshot atIndex:index];
+      }
+      withCancelBlock:^(NSError *error) {
+        [self.delegate canceledWithError:error];
       }];
 
   [self.query observeEventType:FEventTypeChildRemoved
-                     withBlock:^(FDataSnapshot *snapshot) {
-                       NSUInteger index = [self indexForKey:snapshot.key];
+      withBlock:^(FDataSnapshot *snapshot) {
+        NSUInteger index = [self indexForKey:snapshot.key];
 
-                       [self.snapshots removeObjectAtIndex:index];
+        [self.snapshots removeObjectAtIndex:index];
 
-                       [self.delegate childRemoved:snapshot atIndex:index];
-                     }];
+        [self.delegate childRemoved:snapshot atIndex:index];
+      }
+      withCancelBlock:^(NSError *error) {
+        [self.delegate canceledWithError:error];
+      }];
 
   [self.query observeEventType:FEventTypeChildMoved
       andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *previousChildKey) {
@@ -103,6 +112,9 @@
         [self.snapshots insertObject:snapshot atIndex:toIndex];
 
         [self.delegate childMoved:snapshot fromIndex:fromIndex toIndex:toIndex];
+      }
+      withCancelBlock:^(NSError *error) {
+        [self.delegate canceledWithError:error];
       }];
 }
 

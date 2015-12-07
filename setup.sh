@@ -18,7 +18,7 @@ FACEBOOK_SDK_DIR="$SCRIPT_DIR/sdk/facebook-sdk"
 FACEBOOK_SDK_ZIP_FILE="$SCRIPT_DIR/sdk/facebook-sdk.zip"
 GOOGLE_SDK_ZIP_FILE="$SDK_DIR/google-sdk.zip"
 GOOGLE_CORE_SDK_ZIP_FILE="$SDK_DIR/google-core-sdk.zip"
-GOOGLE_SDK_DIR="$SCRIPT_DIR/sdk/google_signin_sdk_2_2_0"
+GOOGLE_SDK_DIR="$SCRIPT_DIR/sdk/google_signin_sdk_2_4_0"
 GOOGLE_CORE_SDK_DIR="$SCRIPT_DIR/sdk/google-core-sdk.zip"
 
 echo "$SDK_DIR"

@@ -34,6 +34,10 @@
 
 #import "FirebaseDataSource.h"
 
+@interface FirebaseDataSource ()
+@property(copy, nonatomic) void (^cancelBlock)(NSError *);
+@end
+
 @implementation FirebaseDataSource
 
 #pragma mark -
@@ -61,6 +65,19 @@
 
 - (Firebase *)refForIndex:(NSUInteger)index {
   return [self.array refForIndex:index];
+}
+
+- (void)cancelWithBlock:(void (^)(NSError *))block {
+  self.cancelBlock = block;
+}
+
+#pragma mark -
+#pragma mark FirebaseArrayDelegate methods
+
+- (void)canceledWithError:(NSError *)error {
+  if (self.cancelBlock != nil) {
+    self.cancelBlock(error);
+  }
 }
 
 @end

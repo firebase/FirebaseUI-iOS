@@ -68,4 +68,10 @@
  */
 - (Firebase *)refForIndex:(NSUInteger)index;
 
+/**
+ * Provides a block which is called when the backing array cancels its query.
+ * @param block the block
+ */
+- (void)cancelWithBlock:(void (^)(NSError *error))block;
+
 @end
