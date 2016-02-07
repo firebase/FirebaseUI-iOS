@@ -40,6 +40,11 @@
 @optional
 
 /**
+ * Delegate method which is called whenever array initialized with query.
+ */
+- (void)childrenInitialized;
+
+/**
  * Delegate method which is called whenever an object is added to a
  * FirebaseArray. On a
  * FirebaseArray synchronized to a Firebase reference, this corresponds to an
