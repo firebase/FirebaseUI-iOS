@@ -43,19 +43,19 @@
         cellReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                modelClass:nil
-                 cellClass:nil
-       cellReuseIdentifier:identifier
-                      view:collectionView];
+                  modelClass:nil
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
    prototypeReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                modelClass:nil
-    prototypeReuseIdentifier:identifier
-                      view:collectionView];
+                    modelClass:nil
+      prototypeReuseIdentifier:identifier
+                          view:collectionView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -63,10 +63,10 @@
         cellReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                modelClass:nil
-                 cellClass:cell
-       cellReuseIdentifier:identifier
-                      view:collectionView];
+                  modelClass:nil
+                   cellClass:cell
+         cellReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -74,10 +74,10 @@
         cellReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                modelClass:nil
-                  nibNamed:nibName
-       cellReuseIdentifier:identifier
-                      view:collectionView];
+                  modelClass:nil
+                    nibNamed:nibName
+         cellReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -85,10 +85,10 @@
         cellReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                modelClass:model
-                 cellClass:nil
-       cellReuseIdentifier:identifier
-                      view:collectionView];
+                  modelClass:model
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -96,9 +96,9 @@
    prototypeReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                modelClass:model
-                 prototypeReuseIdentifier:identifier
-                      view:collectionView];
+                    modelClass:model
+      prototypeReuseIdentifier:identifier
+                          view:collectionView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -110,7 +110,8 @@
                   modelClass:model
                    cellClass:cell
          cellReuseIdentifier:identifier
-                        view:collectionView];
+                        view:collectionView
+                     options:FirebaseUIOptionsNone];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -122,17 +123,46 @@
                   modelClass:model
                     nibNamed:nibName
          cellReuseIdentifier:identifier
-                        view:collectionView];
+                        view:collectionView
+                     options:FirebaseUIOptionsNone];
+}
+
+- (instancetype)initWithRef:(Firebase *)ref
+                 modelClass:(Class)model
+                  cellClass:(Class)cell
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UICollectionView *)collectionView
+                    options:(FirebaseUIOptions)options {
+  return [self initWithQuery:ref
+                  modelClass:model
+                   cellClass:cell
+         cellReuseIdentifier:identifier
+                        view:collectionView
+                     options:options];
+}
+
+- (instancetype)initWithRef:(Firebase *)ref
+                 modelClass:(Class)model
+                   nibNamed:(NSString *)nibName
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UICollectionView *)collectionView
+                    options:(FirebaseUIOptions)options {
+  return [self initWithQuery:ref
+                  modelClass:model
+                    nibNamed:nibName
+         cellReuseIdentifier:identifier
+                        view:collectionView
+                     options:options];
 }
 
 - (instancetype)initWithQuery:(FQuery *)query
-        cellReuseIdentifier:(NSString *)identifier
-                       view:(UICollectionView *)collectionView {
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView {
   return [self initWithQuery:query
-                modelClass:nil
-                 cellClass:nil
-       cellReuseIdentifier:identifier
-                      view:collectionView];
+                  modelClass:nil
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 - (instancetype)initWithQuery:(FQuery *)query
@@ -192,10 +222,37 @@
 }
 
 - (instancetype)initWithQuery:(FQuery *)query
-                 modelClass:(Class)model
-                  cellClass:(Class)cell
-        cellReuseIdentifier:(NSString *)identifier
-                       view:(UICollectionView *)collectionView {
+                   modelClass:(Class)model
+                    cellClass:(Class)cell
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView {
+  return [self initWithQuery:query
+                  modelClass:model
+                   cellClass:cell
+         cellReuseIdentifier:identifier
+                        view:collectionView
+                     options:FirebaseUIOptionsNone];
+}
+
+- (instancetype)initWithQuery:(FQuery *)query
+                   modelClass:(Class)model
+                     nibNamed:(NSString *)nibName
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView {
+  return [self initWithQuery:query
+                  modelClass:model
+                    nibNamed:nibName
+         cellReuseIdentifier:identifier
+                        view:collectionView
+                     options:FirebaseUIOptionsNone];
+}
+
+- (instancetype)initWithQuery:(FQuery *)query
+                   modelClass:(Class)model
+                    cellClass:(Class)cell
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView
+                      options:(FirebaseUIOptions)options {
   FirebaseArray *array = [[FirebaseArray alloc] initWithQuery:query];
   self = [super initWithArray:array];
   if (self) {
@@ -223,10 +280,11 @@
 }
 
 - (instancetype)initWithQuery:(FQuery *)query
-                 modelClass:(Class)model
-                   nibNamed:(NSString *)nibName
-        cellReuseIdentifier:(NSString *)identifier
-                       view:(UICollectionView *)collectionView {
+                   modelClass:(Class)model
+                     nibNamed:(NSString *)nibName
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView
+                      options:(FirebaseUIOptions)options {
   FirebaseArray *array = [[FirebaseArray alloc] initWithQuery:query];
   self = [super initWithArray:array];
   if (self) {
@@ -267,6 +325,10 @@
 - (void)childMoved:(id)obj fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
                                toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
+}
+
+- (void)dataReloaded {
+  [self.collectionView reloadData];
 }
 
 #pragma mark -

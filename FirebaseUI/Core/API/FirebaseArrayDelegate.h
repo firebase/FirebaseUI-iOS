@@ -85,6 +85,11 @@
 - (void)childMoved:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
 /**
+ * Delegate method which is called when the backing array is reloaded.
+ */
+- (void)dataReloaded;
+
+/**
  * Delegate method which is called whenever the backing query is canceled.
  * @param error the error that was raised
  */

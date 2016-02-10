@@ -34,6 +34,7 @@
 #import <FirebaseUI/XCodeMacros.h>
 
 #import "FirebaseArrayDelegate.h"
+#import "FirebaseUIOptions.h"
 
 @class FQuery;
 @class Firebase;
@@ -62,6 +63,11 @@
  */
 @property(strong, nonatomic) NSMutableArray __GENERIC(FDataSnapshot *) * snapshots;
 
+/**
+ * Options for the FirebaseArray.
+ */
+@property(nonatomic) FirebaseUIOptions options;
+
 #pragma mark -
 #pragma mark Initializer methods
 
@@ -78,6 +84,14 @@
  * @return The instance of FirebaseArray
  */
 - (instancetype)initWithQuery:(FQuery *)query;
+
+/**
+ * Intitalizes FirebaseArray with a Firebase query (FQuery).
+ * @param query A query on a Firebase reference which provides filtered data to FirebaseArray
+ * @param options Options for the FirebaseArray.
+ * @return The instance of FirebaseArray
+ */
+- (instancetype)initWithQuery:(FQuery *)query options:(FirebaseUIOptions)options;
 
 #pragma mark -
 #pragma mark Public API methods
