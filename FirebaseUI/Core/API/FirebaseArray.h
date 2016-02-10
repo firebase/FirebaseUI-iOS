@@ -102,6 +102,19 @@
  */
 - (Firebase *)refForIndex:(NSUInteger)index;
 
+/**
+ * Support for subscripting. Resolves to objectAtIndex:
+ * @param index The index of the item to retrieve
+ * @return The object at the given index
+ */
+- (id)objectAtIndexedSubscript:(NSUInteger)idx;
+
+/**
+ * Support for subscripting. This method is unused and trying to write directly to the
+ * array using subscripting will cause an assertion.
+ */
+- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx;
+
 #pragma mark -
 #pragma mark Private API methods
 

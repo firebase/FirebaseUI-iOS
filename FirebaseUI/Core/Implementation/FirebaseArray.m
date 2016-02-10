@@ -152,4 +152,12 @@
   return [(FDataSnapshot *)[self.snapshots objectAtIndex:index] ref];
 }
 
+- (id)objectAtIndexedSubscript:(NSUInteger)index{
+	return [self objectAtIndex:index];
+}
+
+- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)index{
+	NSAssert(NO, @"Subscripting is read-only on FirebaseArray");
+}
+
 @end
