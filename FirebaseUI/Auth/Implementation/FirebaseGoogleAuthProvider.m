@@ -57,8 +57,8 @@
   if (!(clientIdExists && reversedClientIdExists)) {
     [NSException raise:NSInternalInconsistencyException
                 format:@"Please add `GoogleService-Info.plist` to `Supporting Files` and\nURL "
-                       @"types > Url Schemes in `Supporting Files/Info.plist` according to "
-                       @"https://developers.google.com/identity/sign-in/ios/start-integrating"];
+                @"types > Url Schemes in `Supporting Files/Info.plist` according to "
+                @"https://developers.google.com/identity/sign-in/ios/start-integrating"];
   }
 }
 

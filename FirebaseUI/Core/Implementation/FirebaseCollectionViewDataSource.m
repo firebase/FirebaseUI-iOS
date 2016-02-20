@@ -43,19 +43,19 @@
         cellReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                modelClass:nil
-                 cellClass:nil
-       cellReuseIdentifier:identifier
-                      view:collectionView];
+                  modelClass:nil
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
    prototypeReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                modelClass:nil
-    prototypeReuseIdentifier:identifier
-                      view:collectionView];
+                    modelClass:nil
+      prototypeReuseIdentifier:identifier
+                          view:collectionView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -63,10 +63,10 @@
         cellReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                modelClass:nil
-                 cellClass:cell
-       cellReuseIdentifier:identifier
-                      view:collectionView];
+                  modelClass:nil
+                   cellClass:cell
+         cellReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -74,10 +74,10 @@
         cellReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                modelClass:nil
-                  nibNamed:nibName
-       cellReuseIdentifier:identifier
-                      view:collectionView];
+                  modelClass:nil
+                    nibNamed:nibName
+         cellReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -85,10 +85,10 @@
         cellReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                modelClass:model
-                 cellClass:nil
-       cellReuseIdentifier:identifier
-                      view:collectionView];
+                  modelClass:model
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -96,9 +96,9 @@
    prototypeReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                modelClass:model
-                 prototypeReuseIdentifier:identifier
-                      view:collectionView];
+                    modelClass:model
+      prototypeReuseIdentifier:identifier
+                          view:collectionView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -126,13 +126,13 @@
 }
 
 - (instancetype)initWithQuery:(FQuery *)query
-        cellReuseIdentifier:(NSString *)identifier
-                       view:(UICollectionView *)collectionView {
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView {
   return [self initWithQuery:query
-                modelClass:nil
-                 cellClass:nil
-       cellReuseIdentifier:identifier
-                      view:collectionView];
+                  modelClass:nil
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 - (instancetype)initWithQuery:(FQuery *)query
@@ -192,10 +192,10 @@
 }
 
 - (instancetype)initWithQuery:(FQuery *)query
-                 modelClass:(Class)model
-                  cellClass:(Class)cell
-        cellReuseIdentifier:(NSString *)identifier
-                       view:(UICollectionView *)collectionView {
+                   modelClass:(Class)model
+                    cellClass:(Class)cell
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView {
   FirebaseArray *array = [[FirebaseArray alloc] initWithQuery:query];
   self = [super initWithArray:array];
   if (self) {
@@ -223,10 +223,10 @@
 }
 
 - (instancetype)initWithQuery:(FQuery *)query
-                 modelClass:(Class)model
-                   nibNamed:(NSString *)nibName
-        cellReuseIdentifier:(NSString *)identifier
-                       view:(UICollectionView *)collectionView {
+                   modelClass:(Class)model
+                     nibNamed:(NSString *)nibName
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView {
   FirebaseArray *array = [[FirebaseArray alloc] initWithQuery:query];
   self = [super initWithArray:array];
   if (self) {

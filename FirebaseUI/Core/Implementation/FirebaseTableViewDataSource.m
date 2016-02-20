@@ -43,20 +43,20 @@
         cellReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
   return [self initWithQuery:ref
-                modelClass:nil
-                 cellClass:nil
-       cellReuseIdentifier:identifier
-                      view:tableView];
+                  modelClass:nil
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:tableView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
    prototypeReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
   return [self initWithQuery:ref
-                modelClass:nil
-                 cellClass:nil
-       cellReuseIdentifier:identifier
-                      view:tableView];
+                  modelClass:nil
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:tableView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -64,10 +64,10 @@
         cellReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
   return [self initWithQuery:ref
-                modelClass:nil
-                 cellClass:cell
-       cellReuseIdentifier:identifier
-                      view:tableView];
+                  modelClass:nil
+                   cellClass:cell
+         cellReuseIdentifier:identifier
+                        view:tableView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -75,10 +75,10 @@
         cellReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
   return [self initWithQuery:ref
-                modelClass:nil
-                  nibNamed:nibName
-       cellReuseIdentifier:identifier
-                      view:tableView];
+                  modelClass:nil
+                    nibNamed:nibName
+         cellReuseIdentifier:identifier
+                        view:tableView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -86,10 +86,10 @@
         cellReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
   return [self initWithQuery:ref
-                modelClass:model
-                 cellClass:nil
-       cellReuseIdentifier:identifier
-                      view:tableView];
+                  modelClass:model
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:tableView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -97,10 +97,10 @@
    prototypeReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
   return [self initWithQuery:ref
-                modelClass:model
-                 cellClass:nil
-       cellReuseIdentifier:identifier
-                      view:tableView];
+                  modelClass:model
+                   cellClass:nil
+         cellReuseIdentifier:identifier
+                        view:tableView];
 }
 
 - (instancetype)initWithRef:(Firebase *)ref
@@ -111,7 +111,7 @@
   return [self initWithQuery:ref
                   modelClass:model
                    cellClass:cell
-          cellReuseIdentifier:identifier
+         cellReuseIdentifier:identifier
                         view:tableView];
 }
 
@@ -121,10 +121,10 @@
         cellReuseIdentifier:(NSString *)identifier
                        view:(UITableView *)tableView {
   return [self initWithQuery:ref
-           modelClass:model
-            nibNamed:nibName
-  cellReuseIdentifier:identifier
-                 view:tableView];
+                  modelClass:model
+                    nibNamed:nibName
+         cellReuseIdentifier:identifier
+                        view:tableView];
 }
 
 - (instancetype)initWithQuery:(FQuery *)query

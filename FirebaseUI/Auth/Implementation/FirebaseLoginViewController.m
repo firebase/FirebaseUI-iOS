@@ -42,7 +42,8 @@
   self = [super init];
   if (self) {
     self.ref = ref;
-    self.dismissCallback = ^(FAuthData *user, NSError *error){};
+    self.dismissCallback = ^(FAuthData *user, NSError *error) {
+    };
     _socialProviders = [[NSMutableArray alloc] initWithCapacity:3];
   }
   return self;
@@ -54,7 +55,8 @@
   // Throw an exception if no IDPs are enabled
   if (self.passwordAuthProvider == nil && [_socialProviders count] == 0) {
     [NSException raise:NSInternalInconsistencyException
-                format:@"Please enable at least one authentication provider in your FirebaseLoginViewController"];
+                format:@"Please enable at least one authentication provider in your "
+                       @"FirebaseLoginViewController"];
   }
 
   // Add cancel button
@@ -133,15 +135,16 @@
     case FAuthProviderFacebook:
       if (!self.facebookAuthProvider) {
         self.facebookAuthProvider =
-        [[FirebaseFacebookAuthProvider alloc] initWithRef:self.ref authDelegate:self];
+            [[FirebaseFacebookAuthProvider alloc] initWithRef:self.ref authDelegate:self];
         [_socialProviders addObject:self.facebookAuthProvider];
       }
       break;
 
     case FAuthProviderGoogle:
       if (!self.googleAuthProvider) {
-        self.googleAuthProvider =
-        [[FirebaseGoogleAuthProvider alloc] initWithRef:self.ref authDelegate:self uiDelegate:self];
+        self.googleAuthProvider = [[FirebaseGoogleAuthProvider alloc] initWithRef:self.ref
+                                                                     authDelegate:self
+                                                                       uiDelegate:self];
         [_socialProviders addObject:self.googleAuthProvider];
       }
       break;
@@ -158,7 +161,7 @@
     case FAuthProviderPassword:
       if (!self.passwordAuthProvider) {
         self.passwordAuthProvider =
-        [[FirebasePasswordAuthProvider alloc] initWithRef:self.ref authDelegate:self];
+            [[FirebasePasswordAuthProvider alloc] initWithRef:self.ref authDelegate:self];
       }
       break;
 
@@ -191,7 +194,8 @@
         break;
 
       case FAuthProviderPassword:
-        [self.passwordAuthProvider loginWithEmail:self.emailTextField.text andPassword:self.passwordTextField.text];
+        [self.passwordAuthProvider loginWithEmail:self.emailTextField.text
+                                      andPassword:self.passwordTextField.text];
         break;
 
       default:
@@ -217,9 +221,10 @@
 }
 
 - (void)dismissViewControllerWithUser:(FAuthData *)user andError:(NSError *)error {
-  [self dismissViewControllerAnimated:YES completion:^{
-    self.dismissCallback(user, error);
-  }];
+  [self dismissViewControllerAnimated:YES
+                           completion:^{
+                             self.dismissCallback(user, error);
+                           }];
 }
 
 #pragma mark -

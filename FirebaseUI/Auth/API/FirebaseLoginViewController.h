@@ -116,7 +116,7 @@
 /**
  * Dismissal callback on success or failure.
  */
-@property (nonatomic, copy) void (^dismissCallback)(FAuthData *user, NSError *error);
+@property(nonatomic, copy) void (^dismissCallback)(FAuthData *user, NSError *error);
 
 /**
  * The Firebase database reference which to authenticate against.
@@ -169,7 +169,8 @@
 
 /**
  * Callback that fires when after the controller is dismissed (either on success or on failure).
- * If successful, the user field will be populated; if an error occurred the error field will be populated.
+ * If successful, the user field will be populated; if an error occurred the error field will be
+ * populated.
  * @param callback A block that returns a user on success or an error on failure.
  * @return void
  */
