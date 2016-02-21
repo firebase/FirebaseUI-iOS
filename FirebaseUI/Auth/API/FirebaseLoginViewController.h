@@ -35,18 +35,39 @@
 
 #import <Firebase/Firebase.h>
 
+// Shared auth
+#import "FirebaseAuthDelegate.h"
+#import "FirebaseLoginButton.h"
+#import "FirebaseAuthProvider.h"
+
+// Pull in Twitter
+#if FIREBASEUI_ENABLE_TWITTER_AUTH
+#import "FirebaseTwitterAuthProvider.h"
+#endif
+
+// Pull in Facebook
+#if FIREBASEUI_ENABLE_FACEBOOK_AUTH
+#import "FirebaseFacebookAuthProvider.h"
+#endif
+
+// Pull in Google
+#if FIREBASEUI_ENABLE_GOOGLE_AUTH
+#import "FirebaseGoogleAuthProvider.h"
+#endif
+
+// Google local build issues
+#if FIREBASEUI_ENABLE_GOOGLE_AUTH
 #if LOCAL_BUILD
 #import <GoogleSignIn/GoogleSignIn.h>
 #else
 #import <Google/SignIn.h>
 #endif
+#endif
 
-#import "FirebaseAuthDelegate.h"
-#import "FirebaseTwitterAuthProvider.h"
-#import "FirebaseFacebookAuthProvider.h"
-#import "FirebaseGoogleAuthProvider.h"
+// Pull in Password
+#if FIREBASEUI_ENABLE_PASSWORD_AUTH
 #import "FirebasePasswordAuthProvider.h"
-#import "FirebaseLoginButton.h"
+#endif
 
 /**
  * FirebaseLoginViewController is a subclass of UIViewController that provides a
@@ -55,8 +76,19 @@
  * error handling.
  * This also serves as a template for developers interested in developing custom login UI.
  */
+#if FIREBASEUI_ENABLE_TWITTER_AUTH && FIREBASEUI_ENABLE_GOOGLE_AUTH
 @interface FirebaseLoginViewController
     : UIViewController<FirebaseAuthDelegate, TwitterAuthDelegate, GIDSignInUIDelegate>
+#elif FIREBASEUI_ENABLE_TWITTER_AUTH
+@interface FirebaseLoginViewController
+: UIViewController<FirebaseAuthDelegate, TwitterAuthDelegate>
+#elif FIREBASEUI_ENABLE_GOOGLE_AUTH
+@interface FirebaseLoginViewController
+: UIViewController<FirebaseAuthDelegate, GIDSignInUIDelegate>
+#else
+@interface FirebaseLoginViewController: UIViewController<FirebaseAuthDelegate>
+#endif
+
 
 /**
  * Container view for login activity which wraps the header text and cancel button.
@@ -116,7 +148,7 @@
 /**
  * Dismissal callback on success or failure.
  */
-@property (nonatomic, copy) void (^dismissCallback)(FAuthData *user, NSError *error);
+@property(nonatomic, copy) void (^dismissCallback)(FAuthData *user, NSError *error);
 
 /**
  * The Firebase database reference which to authenticate against.
@@ -128,28 +160,45 @@
  * requests against the Twitter API and uses the response to authenticate
  * against the Firebase database.
  */
+#if FIREBASEUI_ENABLE_TWITTER_AUTH
 @property(strong, nonatomic) FirebaseTwitterAuthProvider *twitterAuthProvider;
+#else
+@property(strong, nonatomic) FirebaseAuthProvider *twitterAuthProvider;
+#endif
 
 /**
  * The provider object for Facebook Authentication. This object handles the
  * requests against the Facebook SDK and uses the response to authenticate
  * against the Firebase database.
  */
+#if FIREBASEUI_ENABLE_FACEBOOK_AUTH
 @property(strong, nonatomic) FirebaseFacebookAuthProvider *facebookAuthProvider;
+#else
+@property(strong, nonatomic) FirebaseAuthProvider *facebookAuthProvider;
+#endif
+
 
 /**
  * The provider object for Google Authentication. This object handles the
  * requests against the Google SDK and uses the response to authenticate
  * against the Firebase database.
  */
+#if FIREBASEUI_ENABLE_GOOGLE_AUTH
 @property(strong, nonatomic) FirebaseGoogleAuthProvider *googleAuthProvider;
+#else
+@property(strong, nonatomic) FirebaseAuthProvider *googleAuthProvider;
+#endif
 
 /**
  * The provider object for Email/Password Authentication. This object handles the
  * requests to the Firebase user authentication system to authenticate users to
  * the Firebase database.
  */
+#if FIREBASEUI_ENABLE_PASSWORD_AUTH
 @property(strong, nonatomic) FirebasePasswordAuthProvider *passwordAuthProvider;
+#else
+@property(strong, nonatomic) FirebaseAuthProvider *passwordAuthProvider;
+#endif
 
 /**
  * Create an instance of FirebaseLoginViewController, which allows for easy authentication to
@@ -169,7 +218,8 @@
 
 /**
  * Callback that fires when after the controller is dismissed (either on success or on failure).
- * If successful, the user field will be populated; if an error occurred the error field will be populated.
+ * If successful, the user field will be populated; if an error occurred the error field will be
+ * populated.
  * @param callback A block that returns a user on success or an error on failure.
  * @return void
  */

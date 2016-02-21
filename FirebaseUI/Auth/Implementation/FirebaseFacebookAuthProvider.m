@@ -53,8 +53,8 @@
   if (!(facebookAppId && facebookDisplayName)) {
     [NSException raise:NSInternalInconsistencyException
                 format:@"Please set FacebookAppID, FacebookDisplayName, and\nURL types > Url "
-                       @"Schemes in `Supporting Files/Info.plist` according to "
-                       @"https://developers.facebook.com/docs/ios/getting-started"];
+                @"Schemes in `Supporting Files/Info.plist` according to "
+                @"https://developers.facebook.com/docs/ios/getting-started"];
   }
 
   _loginManager = [[FBSDKLoginManager alloc] init];

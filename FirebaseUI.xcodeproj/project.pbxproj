@@ -546,6 +546,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					"LOCAL_BUILD=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -614,10 +615,7 @@
 					"$(PROJECT_DIR)/target/Products/Release-iphonesimulator",
 					"$(PROJECT_DIR)/sdk/google_signin_sdk_2_4_0",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"LOCAL_BUILD=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_PEDANTIC = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;

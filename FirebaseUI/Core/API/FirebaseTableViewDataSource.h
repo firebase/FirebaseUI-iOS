@@ -390,8 +390,6 @@
                      cellReuseIdentifier:(__NON_NULL NSString *)identifier
                                     view:(__NON_NULL UITableView *)tableView;
 
-
-
 /**
  * This method populates the fields of a UITableViewCell or subclass given a
  * model object (or
