@@ -132,6 +132,7 @@
 
 - (instancetype)enableProvider:(FAuthProvider)provider {
   switch (provider) {
+#if FIREBASEUI_ENABLE_FACEBOOK_AUTH
     case FAuthProviderFacebook:
       if (!self.facebookAuthProvider) {
         self.facebookAuthProvider =
@@ -139,7 +140,9 @@
         [_socialProviders addObject:self.facebookAuthProvider];
       }
       break;
+#endif
 
+#if FIREBASEUI_ENABLE_GOOGLE_AUTH
     case FAuthProviderGoogle:
       if (!self.googleAuthProvider) {
         self.googleAuthProvider = [[FirebaseGoogleAuthProvider alloc] initWithRef:self.ref
@@ -148,7 +151,9 @@
         [_socialProviders addObject:self.googleAuthProvider];
       }
       break;
+#endif
 
+#if FIREBASEUI_ENABLE_TWITTER_AUTH
     case FAuthProviderTwitter:
       if (!self.twitterAuthProvider) {
         self.twitterAuthProvider = [[FirebaseTwitterAuthProvider alloc] initWithRef:self.ref
@@ -157,13 +162,16 @@
         [_socialProviders addObject:self.twitterAuthProvider];
       }
       break;
+#endif
 
+#if FIREBASEUI_ENABLE_PASSWORD_AUTH
     case FAuthProviderPassword:
       if (!self.passwordAuthProvider) {
         self.passwordAuthProvider =
             [[FirebasePasswordAuthProvider alloc] initWithRef:self.ref authDelegate:self];
       }
       break;
+#endif
 
     default:
       [NSException raise:NSInternalInconsistencyException
@@ -181,22 +189,30 @@
   if ([button isKindOfClass:[FirebaseLoginButton class]]) {
     FirebaseLoginButton *loginButton = (FirebaseLoginButton *)button;
     switch (loginButton.provider) {
+#if FIREBASEUI_ENABLE_FACEBOOK_AUTH
       case FAuthProviderFacebook:
         [self.facebookAuthProvider login];
         break;
+#endif
 
+#if FIREBASEUI_ENABLE_GOOGLE_AUTH
       case FAuthProviderGoogle:
         [self.googleAuthProvider login];
         break;
+#endif
 
+#if FIREBASEUI_ENABLE_TWITTER_AUTH
       case FAuthProviderTwitter:
         [self.twitterAuthProvider login];
         break;
+#endif
 
+#if FIREBASEUI_ENABLE_PASSWORD_AUTH
       case FAuthProviderPassword:
         [self.passwordAuthProvider loginWithEmail:self.emailTextField.text
                                       andPassword:self.passwordTextField.text];
         break;
+#endif
 
       default:
         [NSException raise:NSInternalInconsistencyException
@@ -229,7 +245,6 @@
 
 #pragma mark -
 #pragma mark Firebase Auth Delegate methods
-
 - (void)authProvider:(id)provider onLogin:(FAuthData *)authData {
   _selectedAuthProvider = provider;
   self.emailTextField.text = @"";
@@ -272,7 +287,7 @@
 
 #pragma mark -
 #pragma mark Twitter Auth Delegate methods
-
+#if FIREBASEUI_ENABLE_TWITTER_AUTH
 - (void)createTwitterAccount {
   [[UIApplication sharedApplication]
       openURL:[NSURL URLWithString:@"https://www.twitter.com/signup"]];
@@ -304,5 +319,6 @@
 
   [self presentViewController:accountSelectController animated:YES completion:nil];
 }
+#endif
 
 @end

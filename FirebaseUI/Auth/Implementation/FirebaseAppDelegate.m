@@ -33,13 +33,18 @@
 @implementation FirebaseAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+#if FIREBASEUI_ENABLE_GOOGLE_AUTH
   // Configure Google
   NSError* configureError;
   [[GGLContext sharedInstance] configureWithError: &configureError];
+#endif
 
+#if FIREBASEUI_ENABLE_FACEBOOK_AUTH
   // Configure Facebook
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
+#endif
 
   // Return successful app launch
   return YES;
@@ -47,16 +52,24 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
   // This is the Facebook or Google SDK returning to the app after authentication.
+
+#if FIREBASEUI_ENABLE_FACEBOOK_AUTH
   if ([url.scheme hasPrefix:@"fb"]) {
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                           openURL:url
                                                 sourceApplication:sourceApplication
                                                        annotation:annotation];
-  } else if ([url.scheme hasPrefix:@"com.google"]) {
+  }
+#endif
+
+#if FIREBASEUI_ENABLE_GOOGLE_AUTH
+  if ([url.scheme hasPrefix:@"com.google"]) {
     return [[GIDSignIn sharedInstance] handleURL:url
                                sourceApplication:sourceApplication
                                       annotation:annotation];
   }
+#endif
+
   return YES;
 }
 

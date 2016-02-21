@@ -33,9 +33,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CGBase.h>
 
-#ifndef FirebaseAuthConstants_h
-#define FirebaseAuthConstants_h
-
 FOUNDATION_EXPORT NSString *const kTwitterApiKey;
 
 FOUNDATION_EXPORT NSString *const kFacebookAppId;
@@ -64,5 +61,3 @@ typedef NS_ENUM(NSInteger, FAuthProvider) {
   FAuthProviderTwitter,
   FAuthProviderPassword
 };
-
-#endif /* FirebaseAuthConstants_h */

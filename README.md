@@ -15,11 +15,20 @@ the following to your `Podfile`:
 pod 'FirebaseUI', '~> 0.3'       # Pull in all Firebase UI features
 ```
 
-If you don't want to use all of FirebaseUI, there are two subspecs, `Core` and `Auth` which can selectively install subsets of the full feature set.
+If you don't want to use all of FirebaseUI, there are multiple subspecs which can selectively install subsets of the full feature set:
 
 ```
-pod 'FirebaseUI/Core', '~> 0.3'  # Only pull in the "Core" FirebaseUI features
-pod 'FirebaseUI/Auth', '~> 0.3'  # Only pull in the "Auth" FirebaseUI features
+# Only pull in the "Core" FirebaseUI features
+pod 'FirebaseUI/Core', '~> 0.3'
+
+# Pull in the "Auth" FirebaseUI features: Facebook, Google, Twitter, and Email/Password auth
+pod 'FirebaseUI/Auth', '~> 0.3'
+
+# Selectively pull in Auth providers
+pod 'FirebaseUI/Facebook', '~> 0.3.2'
+pod 'FirebaseUI/Google', '~> 0.3.2'
+pod 'FirebaseUI/Twitter', '~> 0.3.2'
+pod 'FirebaseUI/Password', '~> 0.3.2'
 ```
 
 If you're including FirebaseUI in a Swift project, make sure you also have:

@@ -28,19 +28,25 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+// clang-format on
+
 #import <UIKit/UIKit.h>
 
 #import <Firebase/Firebase.h>
 
+#if FIREBASEUI_ENABLE_GOOGLE_AUTH
 #if LOCAL_BUILD
 #import <GoogleSignIn/GoogleSignIn.h>
 #import "GGLContext.h"
 #else
 #import <Google/SignIn.h>
 #endif
+#endif
 
+#if FIREBASEUI_ENABLE_FACEBOOK_AUTH
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#endif
 
 /**
  * A replacement for the AppDelegate which includes setup for the Google and Facebook SDK's
