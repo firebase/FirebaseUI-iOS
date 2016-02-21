@@ -157,7 +157,9 @@
 }
 
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)index{
-	NSAssert(NO, @"Subscripting is read-only on FirebaseArray");
+  @throw [NSException exceptionWithName:@"FirebaseArraySetIndexWithSubscript"
+                                 reason:@"Setting an object as FirebaseArray[i] is not supported."
+                               userInfo:nil];
 }
 
 @end
