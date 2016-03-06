@@ -511,14 +511,14 @@ override func viewDidLoad() {
 // Scenario 1: Application launches login flow, handles dismissal and routing in `didDismissWithBlock:`
 override func viewDidAppear(animated: Bool) {
   if (!self.loginViewController.currentUser()) {
-    self.presentViewController(self.loginViewcontroller, animated: true, completion: nil)
+    self.presentViewController(self.loginViewController, animated: true, completion: nil)
   }
 }
 
 // Scenario 2: User action launches login flow, dismissal and routing handled by `FirebaseLoginViewController`
 func login() {
   if (!self.loginViewController.currentUser()) {
-    self.presentViewController(self.loginViewcontroller, animated: true, completion: nil)
+    self.presentViewController(self.loginViewController, animated: true, completion: nil)
   }
 }
 
