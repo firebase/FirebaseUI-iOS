@@ -251,6 +251,10 @@
 #pragma mark -
 #pragma mark FirebaseCollectionDelegate methods
 
+-(void)childrenInitialized{
+    [self.tableView reloadData];
+}
+
 - (void)childAdded:(id)obj atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
   [self.tableView insertRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]

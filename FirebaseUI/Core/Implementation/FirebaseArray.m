@@ -34,7 +34,9 @@
 
 #import "FirebaseArray.h"
 
-@implementation FirebaseArray
+@implementation FirebaseArray{
+    NSUInteger _initialChildrenCount;
+}
 
 #pragma mark -
 #pragma mark Initializer methods
@@ -48,8 +50,12 @@
   if (self) {
     self.snapshots = [NSMutableArray array];
     self.query = query;
-
-    [self initListeners];
+    [query observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+      _initialChildrenCount = snapshot.childrenCount;
+      [self.snapshots addObjectsFromArray:snapshot.children.allObjects];
+      [self.delegate childrenInitialized];
+      [self initListeners];
+    }];
   }
   return self;
 }
@@ -67,8 +73,13 @@
 #pragma mark Private API methods
 
 - (void)initListeners {
+   __block NSUInteger counter = 0;
   [self.query observeEventType:FEventTypeChildAdded
       andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *previousChildKey) {
+        if( counter < _initialChildrenCount ){
+          counter++;
+          return;
+        }
         NSUInteger index = [self indexForKey:previousChildKey] + 1;
 
         [self.snapshots insertObject:snapshot atIndex:index];
