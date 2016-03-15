@@ -39,7 +39,7 @@
 
 - (instancetype)initWithRef:(Firebase *)ref;
 {
-  self = [super init];
+  self = [super initWithNibName:@"FirebaseLoginViewController" bundle:[NSBundle bundleForClass:[self class]]];
   if (self) {
     self.ref = ref;
     self.dismissCallback = ^(FAuthData *user, NSError *error) {
@@ -60,7 +60,7 @@
   }
 
   // Add cancel button
-  UIImage *image = [[UIImage imageNamed:@"ic_clear_18pt"]
+  UIImage *image = [[UIImage imageNamed:@"ic_clear_18pt" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil]
       imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [self.cancelButton setImage:image forState:UIControlStateNormal];
   self.cancelButton.imageView.tintColor =
