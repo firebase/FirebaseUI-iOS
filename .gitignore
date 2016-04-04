@@ -23,3 +23,9 @@ DerivedData
 # Generated
 /target
 /site
+
+.DS_Store
+Pods/
+Podfile.lock
+*.xcworkspace/
+GoogleService-Info.plist

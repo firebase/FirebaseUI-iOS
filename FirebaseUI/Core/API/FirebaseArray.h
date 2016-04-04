@@ -1,32 +1,20 @@
 // clang-format off
 
-/*
- * Firebase UI Bindings iOS Library
- *
- * Copyright © 2015 Firebase - All Rights Reserved
- * https://www.firebase.com
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this
- * list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binaryform must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation
- * and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY FIREBASE AS IS AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- * EVENT SHALL FIREBASE BE LIABLE FOR ANY DIRECT,
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+//
+//  Copyright (c) 2016 Google Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
 
 // clang-format on
 
@@ -35,9 +23,9 @@
 
 #import "FirebaseArrayDelegate.h"
 
-@class FQuery;
-@class Firebase;
-@class FDataSnapshot;
+@class FIRDatabaseQuery;
+@class FIRDatabaseReference;
+@class FIRDataSnapshot;
 
 /**
  * FirebaseArray provides an array structure that is synchronized with a Firebase reference or
@@ -55,12 +43,12 @@
 /**
  * The query on a Firebase reference that provides data to populate the instance of FirebaseArray.
  */
-@property(strong, nonatomic) FQuery *query;
+@property(strong, nonatomic) FIRDatabaseQuery *query;
 
 /**
  * The delegate object that array changes are surfaced to.
  */
-@property(strong, nonatomic) NSMutableArray __GENERIC(FDataSnapshot *) * snapshots;
+@property(strong, nonatomic) NSMutableArray __GENERIC(FIRDataSnapshot *) * snapshots;
 
 #pragma mark -
 #pragma mark Initializer methods
@@ -70,14 +58,14 @@
  * @param ref The Firebase reference which provides data to FirebaseArray
  * @return The instance of FirebaseArray
  */
-- (instancetype)initWithRef:(Firebase *)ref;
+- (instancetype)initWithRef:(FIRDatabaseReference *)ref;
 
 /**
- * Intitalizes FirebaseArray with a Firebase query (FQuery).
+ * Intitalizes FirebaseArray with a Firebase query (FIRDatabaseQuery).
  * @param query A query on a Firebase reference which provides filtered data to FirebaseArray
  * @return The instance of FirebaseArray
  */
-- (instancetype)initWithQuery:(FQuery *)query;
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query;
 
 #pragma mark -
 #pragma mark Public API methods
@@ -100,7 +88,7 @@
  * @param index The index of the item to retrieve a reference for
  * @return A Firebase reference for the object at the given index
  */
-- (Firebase *)refForIndex:(NSUInteger)index;
+- (FIRDatabaseReference *)refForIndex:(NSUInteger)index;
 
 /**
  * Support for subscripting. Resolves to objectAtIndex:

@@ -1,32 +1,20 @@
 // clang-format off
 
-/*
- * Firebase UI Bindings iOS Library
- *
- * Copyright © 2015 Firebase - All Rights Reserved
- * https://www.firebase.com
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this
- * list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binaryform must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation
- * and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY FIREBASE AS IS AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- * EVENT SHALL FIREBASE BE LIABLE FOR ANY DIRECT,
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+//
+//  Copyright (c) 2016 Google Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
 
 // clang-format on
 
@@ -35,7 +23,7 @@
 
 #import "FirebaseDataSource.h"
 
-@class Firebase;
+@class FIRDatabaseReference;
 
 /**
  * FirebaseCollectionViewDataSource provides an class that conforms to the
@@ -58,11 +46,11 @@
 @interface FirebaseCollectionViewDataSource : FirebaseDataSource<UICollectionViewDataSource>
 
 /**
- * The model class to coerce FDataSnapshots to (if desired). For instance, if
+ * The model class to coerce FIRDataSnapshots to (if desired). For instance, if
  * the modelClass is set
  * to [Message class] in Obj-C or Message.self in Swift, then objects of type
  * Message will be
- * returned instead of type FDataSnapshot.
+ * returned instead of type FIRDataSnapshot.
  */
 @property(strong, nonatomic, __NON_NULL) Class modelClass;
 
@@ -106,22 +94,22 @@
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells
- * with FDataSnapshots.
+ * with FIRDataSnapshots.
  * @param ref A Firebase reference to bind the datasource to
  * @param identifier A string to use as a CellReuseIdentifier
  * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells with
- * FDataSnapshots
+ * FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
                                   view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells
- * with FDataSnapshots. Note that this method is used when using prototype
+ * with FIRDataSnapshots. Note that this method is used when using prototype
  * cells, where the cells
  * don't need to be registered in the class.
  * @param ref A Firebase reference to bind the datasource to
@@ -129,16 +117,16 @@
  * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells with
- * FDataSnapshots
+ * FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
               prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
                                   view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
  * custom subclass of
- * UICollectionViewCell with FDataSnapshots.
+ * UICollectionViewCell with FIRDataSnapshots.
  * @param ref A Firebase reference to bind the datasource to
  * @param cell A subclass of UICollectionViewCell used to populate the
  * UICollectionView, defaults to
@@ -147,9 +135,9 @@
  * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates a
  * custom subclass of
- * UICollectionViewCell with FDataSnapshots
+ * UICollectionViewCell with FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
                              cellClass:(__NULLABLE Class)cell
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
                                   view:(__NON_NULL UICollectionView *)collectionView;
@@ -157,7 +145,7 @@
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
  * custom xib with
- * FDataSnapshots.
+ * FIRDataSnapshots.
  * @param ref A Firebase reference to bind the datasource to
  * @param nibName The name of a xib file to create the layout for a
  * UICollectionViewCell
@@ -165,9 +153,9 @@
  * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates a
  * custom xib with
- * FDataSnapshots
+ * FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
                               nibNamed:(__NON_NULL NSString *)nibName
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
                                   view:(__NON_NULL UICollectionView *)collectionView;
@@ -177,15 +165,15 @@
  * UICollectionViewCells
  * with a custom model class.
  * @param ref A Firebase reference to bind the datasource to
- * @param model A custom class that FDataSnapshots are coerced to, defaults to
- * FDataSnapshot if nil
+ * @param model A custom class that FIRDataSnapshots are coerced to, defaults to
+ * FIRDataSnapshot if nil
  * @param identifier A string to use as a CellReuseIdentifier
  * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells with
  * a custom model class
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
                             modelClass:(__NULLABLE Class)model
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
                                   view:(__NON_NULL UICollectionView *)collectionView;
@@ -197,15 +185,15 @@
  * cells, where the
  * cells don't need to be registered in the class.
  * @param ref A Firebase reference to bind the datasource to
- * @param model A custom class that FDataSnapshots are coerced to, defaults to
- * FDataSnapshot if nil
+ * @param model A custom class that FIRDataSnapshots are coerced to, defaults to
+ * FIRDataSnapshot if nil
  * @param identifier A string to use as a CellReuseIdentifier
  * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells with
  * a custom model class
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
                             modelClass:(__NULLABLE Class)model
               prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
                                   view:(__NON_NULL UICollectionView *)collectionView;
@@ -215,8 +203,8 @@
  * custom subclass of
  * UICollectionViewCell with a custom model class.
  * @param ref A Firebase reference to bind the datasource to
- * @param model A custom class that FDataSnapshots are coerced to, defaults to
- * FDataSnapshot if nil
+ * @param model A custom class that FIRDataSnapshots are coerced to, defaults to
+ * FIRDataSnapshot if nil
  * @param cell A subclass of UICollectionViewCell used to populate the
  * UICollectionView, defaults to
  * UICollectionViewCell if nil
@@ -226,7 +214,7 @@
  * custom subclass of
  * UICollectionViewCell with a custom model class
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
                             modelClass:(__NULLABLE Class)model
                              cellClass:(__NULLABLE Class)cell
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
@@ -237,8 +225,8 @@
  * custom xib with a
  * custom model class.
  * @param ref A Firebase reference to bind the datasource to
- * @param model A custom class that FDataSnapshots are coerced to, defaults to
- * FDataSnapshot if nil
+ * @param model A custom class that FIRDataSnapshots are coerced to, defaults to
+ * FIRDataSnapshot if nil
  * @param nibName The name of a xib file to create the layout for a
  * UICollectionViewCell
  * @param identifier A string to use as a CellReuseIdentifier
@@ -247,7 +235,7 @@
  * custom xib with a custom
  * model class
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL Firebase *)ref
+- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
                             modelClass:(__NULLABLE Class)model
                               nibNamed:(__NON_NULL NSString *)nibName
                    cellReuseIdentifier:(__NON_NULL NSString *)identifier
@@ -256,22 +244,22 @@
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells
- * with FDataSnapshots.
+ * with FIRDataSnapshots.
  * @param query A Firebase query to bind the datasource to
  * @param identifier A string to use as a CellReuseIdentifier
  * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells with
- * FDataSnapshots
+ * FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
                      cellReuseIdentifier:(__NON_NULL NSString *)identifier
                                     view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells
- * with FDataSnapshots. Note that this method is used when using prototype
+ * with FIRDataSnapshots. Note that this method is used when using prototype
  * cells, where the cells
  * don't need to be registered in the class.
  * @param query A Firebase query to bind the datasource to
@@ -279,16 +267,16 @@
  * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells with
- * FDataSnapshots
+ * FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
                 prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
                                     view:(__NON_NULL UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
  * custom subclass of
- * UICollectionViewCell with FDataSnapshots.
+ * UICollectionViewCell with FIRDataSnapshots.
  * @param query A Firebase query to bind the datasource to
  * @param cell A subclass of UICollectionViewCell used to populate the
  * UICollectionView, defaults to
@@ -297,9 +285,9 @@
  * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates a
  * custom subclass of
- * UICollectionViewCell with FDataSnapshots
+ * UICollectionViewCell with FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
                                cellClass:(__NULLABLE Class)cell
                      cellReuseIdentifier:(__NON_NULL NSString *)identifier
                                     view:(__NON_NULL UICollectionView *)collectionView;
@@ -307,7 +295,7 @@
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
  * custom xib with
- * FDataSnapshots.
+ * FIRDataSnapshots.
  * @param query A Firebase query to bind the datasource to
  * @param nibName The name of a xib file to create the layout for a
  * UICollectionViewCell
@@ -315,9 +303,9 @@
  * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates a
  * custom xib with
- * FDataSnapshots
+ * FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
                                 nibNamed:(__NON_NULL NSString *)nibName
                      cellReuseIdentifier:(__NON_NULL NSString *)identifier
                                     view:(__NON_NULL UICollectionView *)collectionView;
@@ -327,15 +315,15 @@
  * UICollectionViewCells
  * with a custom model class.
  * @param query A Firebase query to bind the datasource to
- * @param model A custom class that FDataSnapshots are coerced to, defaults to
- * FDataSnapshot if nil
+ * @param model A custom class that FIRDataSnapshots are coerced to, defaults to
+ * FIRDataSnapshot if nil
  * @param identifier A string to use as a CellReuseIdentifier
  * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells with
  * a custom model class
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
                               modelClass:(__NULLABLE Class)model
                      cellReuseIdentifier:(__NON_NULL NSString *)identifier
                                     view:(__NON_NULL UICollectionView *)collectionView;
@@ -347,15 +335,15 @@
  * cells, where the
  * cells don't need to be registered in the class.
  * @param query A Firebase query to bind the datasource to
- * @param model A custom class that FDataSnapshots are coerced to, defaults to
- * FDataSnapshot if nil
+ * @param model A custom class that FIRDataSnapshots are coerced to, defaults to
+ * FIRDataSnapshot if nil
  * @param identifier A string to use as a CellReuseIdentifier
  * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells with
  * a custom model class
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
                               modelClass:(__NULLABLE Class)model
                 prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
                                     view:(__NON_NULL UICollectionView *)collectionView;
@@ -365,8 +353,8 @@
  * custom subclass of
  * UICollectionViewCell with a custom model class.
  * @param query A Firebase query to bind the datasource to
- * @param model A custom class that FDataSnapshots are coerced to, defaults to
- * FDataSnapshot if nil
+ * @param model A custom class that FIRDataSnapshots are coerced to, defaults to
+ * FIRDataSnapshot if nil
  * @param cell A subclass of UICollectionViewCell used to populate the
  * UICollectionView, defaults to
  * UICollectionViewCell if nil
@@ -376,7 +364,7 @@
  * custom subclass of
  * UICollectionViewCell with a custom model class
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
                               modelClass:(__NULLABLE Class)model
                                cellClass:(__NULLABLE Class)cell
                      cellReuseIdentifier:(__NON_NULL NSString *)identifier
@@ -387,8 +375,8 @@
  * custom xib with a
  * custom model class.
  * @param query A Firebase query to bind the datasource to
- * @param model A custom class that FDataSnapshots are coerced to, defaults to
- * FDataSnapshot if nil
+ * @param model A custom class that FIRDataSnapshots are coerced to, defaults to
+ * FIRDataSnapshot if nil
  * @param nibName The name of a xib file to create the layout for a
  * UICollectionViewCell
  * @param identifier A string to use as a CellReuseIdentifier
@@ -397,7 +385,7 @@
  * custom xib with a custom
  * model class
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FQuery *)query
+- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
                               modelClass:(__NULLABLE Class)model
                                 nibNamed:(__NON_NULL NSString *)nibName
                      cellReuseIdentifier:(__NON_NULL NSString *)identifier
@@ -405,7 +393,7 @@
 
 /**
  * This method populates the fields of a UICollectionViewCell or subclass given
- * an FDataSnapshot (or
+ * an FIRDataSnapshot (or
  * custom model object).
  * @param callback A block which returns an initialized UICollectionViewCell (or
  * subclass) and the
