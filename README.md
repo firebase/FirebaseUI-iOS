@@ -12,14 +12,14 @@ FirebaseUI supports iOS 8.0+. We recommend using [CocoaPods](http://cocoapods.or
 the following to your `Podfile`:
 
 ```
-pod 'FirebaseUI', '~> 0.1'       # Pull in all Firebase UI features
+pod 'FirebaseUI', '~> 1.0'       # Pull in all Firebase UI features
 ```
 
 If you don't want to use all of FirebaseUI, there are multiple subspecs which can selectively install subsets of the full feature set:
 
 ```
 # Only pull in the "Core" FirebaseUI features
-pod 'FirebaseUI/Core', '~> 0.1'
+pod 'FirebaseUI/Core', '~> 1.0'
 
 ```
 
