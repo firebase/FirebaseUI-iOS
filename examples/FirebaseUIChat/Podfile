@@ -1,7 +1,9 @@
-# Uncomment this line to define a global platform for your project
+source 'https://cpdc-eap.googlesource.com/spec.git'
+source 'https://github.com/CocoaPods/Specs.git'
+
 platform :ios, '8.0'
 
-pod 'FirebaseUI', '~> 0.3.0'
+pod 'FirebaseUI', :path => "../../FirebaseUI.podspec"
 
 target 'FirebaseUIChat' do
 
