@@ -15,7 +15,7 @@
 //
 
 #import "MessageDataSource.h"
-#import "Firebase/Database.h"
+#import <FirebaseDatabase/FIRDatabase.h>
 
 @implementation MessageDataSource
 

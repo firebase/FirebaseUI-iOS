@@ -9,7 +9,3 @@ target 'FirebaseUIChat' do
 
 end
 
-target 'FirebaseUIChatTests' do
-
-end
-

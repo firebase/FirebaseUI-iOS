@@ -17,15 +17,13 @@
 		D852D9411B86DEA500C732E2 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D852D9401B86DEA500C732E2 /* MessageTableViewCell.m */; };
 		D852D9431B86DEB500C732E2 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D852D9421B86DEB500C732E2 /* MessageTableViewCell.xib */; };
 		D852D9461B86E7A100C732E2 /* MessageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D852D9451B86E7A100C732E2 /* MessageDataSource.m */; };
-		D8DD820EEE6DBF391A1F6E9C /* libPods-FirebaseUIChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AF645CDE82B78BCA20DA820 /* libPods-FirebaseUIChat.a */; };
+		F41BE02E81C4AB41D358E3A1 /* libPods-FirebaseUIChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3231A1F0B092C061D61D5E24 /* libPods-FirebaseUIChat.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1ADEDAE41208EE22E8D39BBF /* Pods-FirebaseUIChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUIChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat.release.xcconfig"; sourceTree = "<group>"; };
-		2AF645CDE82B78BCA20DA820 /* libPods-FirebaseUIChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseUIChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D1F30E3041D705B5B00F400 /* Pods-FirebaseUIChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUIChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUIChatTests/Pods-FirebaseUIChatTests.debug.xcconfig"; sourceTree = "<group>"; };
-		9176D7EEB8E24CFEF19725BA /* Pods-FirebaseUIChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUIChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUIChatTests/Pods-FirebaseUIChatTests.release.xcconfig"; sourceTree = "<group>"; };
-		AF7C6D29348E77F72CB99AE3 /* Pods-FirebaseUIChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUIChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat.debug.xcconfig"; sourceTree = "<group>"; };
+		3231A1F0B092C061D61D5E24 /* libPods-FirebaseUIChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseUIChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8857B2BAB703A62B12EF3029 /* Pods-FirebaseUIChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUIChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat.release.xcconfig"; sourceTree = "<group>"; };
+		AD9105D1AC343D83E56146A1 /* Pods-FirebaseUIChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUIChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat.debug.xcconfig"; sourceTree = "<group>"; };
 		D81A05F01B86A78700498183 /* FirebaseUIChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseUIChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D81A05F41B86A78700498183 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D81A05F51B86A78700498183 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -43,7 +41,6 @@
 		D852D9421B86DEB500C732E2 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		D852D9441B86E7A100C732E2 /* MessageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDataSource.h; sourceTree = "<group>"; };
 		D852D9451B86E7A100C732E2 /* MessageDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDataSource.m; sourceTree = "<group>"; };
-		DDC0C7C29D78439A912A0482 /* libPods-FirebaseUIChatTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseUIChatTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,40 +48,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8DD820EEE6DBF391A1F6E9C /* libPods-FirebaseUIChat.a in Frameworks */,
+				F41BE02E81C4AB41D358E3A1 /* libPods-FirebaseUIChat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4F8B65D0E4C43796CA6604A7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				AF7C6D29348E77F72CB99AE3 /* Pods-FirebaseUIChat.debug.xcconfig */,
-				1ADEDAE41208EE22E8D39BBF /* Pods-FirebaseUIChat.release.xcconfig */,
-				8D1F30E3041D705B5B00F400 /* Pods-FirebaseUIChatTests.debug.xcconfig */,
-				9176D7EEB8E24CFEF19725BA /* Pods-FirebaseUIChatTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		8BFF2490E19CFEA2F4A7A63A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				2AF645CDE82B78BCA20DA820 /* libPods-FirebaseUIChat.a */,
-				DDC0C7C29D78439A912A0482 /* libPods-FirebaseUIChatTests.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		D81A05E71B86A78700498183 = {
 			isa = PBXGroup;
 			children = (
 				D81A05F21B86A78700498183 /* FirebaseUIChat */,
 				D81A05F11B86A78700498183 /* Products */,
-				4F8B65D0E4C43796CA6604A7 /* Pods */,
-				8BFF2490E19CFEA2F4A7A63A /* Frameworks */,
+				FF1F51BB2BDB26A3884844D8 /* Pods */,
+				E5A4E62F7B9F398B49B3BF8E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +102,23 @@
 				D81A05F51B86A78700498183 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E5A4E62F7B9F398B49B3BF8E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3231A1F0B092C061D61D5E24 /* libPods-FirebaseUIChat.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF1F51BB2BDB26A3884844D8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AD9105D1AC343D83E56146A1 /* Pods-FirebaseUIChat.debug.xcconfig */,
+				8857B2BAB703A62B12EF3029 /* Pods-FirebaseUIChat.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,7 +357,7 @@
 		};
 		D81A06141B86A78700498183 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF7C6D29348E77F72CB99AE3 /* Pods-FirebaseUIChat.debug.xcconfig */;
+			baseConfigurationReference = AD9105D1AC343D83E56146A1 /* Pods-FirebaseUIChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FirebaseUIChat/Info.plist;
@@ -375,7 +369,7 @@
 		};
 		D81A06151B86A78700498183 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1ADEDAE41208EE22E8D39BBF /* Pods-FirebaseUIChat.release.xcconfig */;
+			baseConfigurationReference = 8857B2BAB703A62B12EF3029 /* Pods-FirebaseUIChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FirebaseUIChat/Info.plist;

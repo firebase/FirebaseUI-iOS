@@ -18,7 +18,7 @@
 
 // clang-format on
 
-#import <Firebase/Database.h>
+#import <FirebaseDatabase/FIRDatabase.h>
 
 #import "FirebaseCollectionViewDataSource.h"
 

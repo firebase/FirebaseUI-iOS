@@ -15,7 +15,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Firebase/Database.h>
+#import <FirebaseDatabase/FIRDatabase.h>
 #import <FirebaseUI/FirebaseTableViewDataSource.h>
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>
