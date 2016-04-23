@@ -1,0 +1,133 @@
+//
+//  Copyright (c) 2016 Google Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+
+#import "FIRAuthUI.h"
+
+#import <objc/runtime.h>
+
+#import <FirebaseAnalytics/FIRApp.h>
+#import <FirebaseAnalytics/FIRAppAssociationRegistration.h>
+#import <FirebaseAuth/FIRAuth.h>
+#import "FIRAuthPickerViewController.h"
+#import "FIRAuthUI_Internal.h"
+
+/** @var kAppNameCodingKey
+    @brief The key used to encode the app Name for NSCoding.
+ */
+static NSString *const kAppNameCodingKey = @"appName";
+
+@interface FIRAuthUI ()
+
+/** @fn initWithAuth:
+    @brief auth The @c FIRAuth to associate the @c FIRAuthUI instance with.
+ */
+- (nullable instancetype)initWithAuth:(FIRAuth *)auth NS_DESIGNATED_INITIALIZER;
+
+@end
+
+@implementation FIRAuthUI {
+  #warning TODO(chaowei) discuss how we will deal with this block in re: NSCoding.
+  /** @var _pendingCallback
+      @brief A pending callback to be called when sign-in is finished.
+   */
+  FIRAuthUIResultCallback _resultCallback;
+}
+
++ (nullable FIRAuthUI *)authUI {
+  FIRAuth *defaultAuth = [FIRAuth auth];
+  if (!defaultAuth) {
+    return nil;
+  }
+  return [self authUIWithAuth:defaultAuth];
+}
+
++ (nullable FIRAuthUI *)authUIWithAuth:(FIRAuth *)auth {
+  return [FIRAppAssociationRegistration registeredObjectWithHost:auth
+                                                             key:NSStringFromClass(self)
+                                                   creationBlock:^FIRAuthUI *_Nullable() {
+    return [[FIRAuthUI alloc] initWithAuth:auth];
+  }];
+}
+
+- (nullable instancetype)initWithAuth:(FIRAuth *)auth {
+  self = [super init];
+  if (self) {
+    _auth = auth;
+  }
+  return self;
+}
+
+- (void)presentSignInWithViewController:(UIViewController *)viewController
+                               callback:(nullable FIRAuthUIResultCallback)callback {
+  _resultCallback = callback;
+  UIViewController *controller = [[FIRAuthPickerViewController alloc] initWithAuthUI:self];
+  UINavigationController *navigationController =
+      [[UINavigationController alloc] initWithRootViewController:controller];
+  [viewController presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (BOOL)handleOpenURL:(NSURL *)URL
+    sourceApplication:(NSString *)sourceApplication {
+  // Complete IDP-based sign-in flow.
+  for (id<FIRAuthProviderUI> provider in _signInProviders) {
+    if ([provider handleOpenURL:URL sourceApplication:sourceApplication]) {
+      return YES;
+    }
+  }
+
+  // The URL was not meant for us.
+  return NO;
+}
+
+#pragma mark - Internal Methods
+
+- (void)invokeResultCallbackWithUser:(FIRUser *_Nullable)user error:(NSError *_Nullable)error {
+  if (_resultCallback) {
+    FIRAuthUIResultCallback callback = _resultCallback;
+    _resultCallback = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+      callback(user, error);
+    });
+  }
+}
+
+#pragma mark - NSSecureCoding
+
++ (BOOL)supportsSecureCoding {
+  return YES;
+}
+
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
+  NSString *appName = [aDecoder decodeObjectOfClass:[NSString class] forKey:kAppNameCodingKey];
+  if (!appName) {
+    return nil;
+  }
+  FIRApp *app = [FIRApp appNamed:appName];
+  if (!app) {
+    return nil;
+  }
+  FIRAuth *auth = [FIRAuth authWithApp:app];
+  if (!auth) {
+    return nil;
+  }
+  return [self initWithAuth:auth];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+  [aCoder encodeObject:_auth.app.name forKey:kAppNameCodingKey];
+}
+
+@end

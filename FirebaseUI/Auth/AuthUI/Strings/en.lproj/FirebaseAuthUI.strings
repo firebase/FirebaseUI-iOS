@@ -1,0 +1,86 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Welcome";
+
+/* Sign in with email button label. */
+"SignInWithEmail" = "Sign in with Email";
+
+/* Title for email entry screen, email text field placeholder. */
+"EnterYourEmail" = "Enter your email";
+
+/* Error message displayed when user enters an invalid email address. */
+"InvalidEmailError" = "The email address is badly formatted.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Sorry, we cannot authenticate this account.";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"WelcomeBack" = "Welcome back!";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "You've previously used this email address: %@, but signed in via %@.";
+
+/* Title for sign in screen. */
+"SignInTitle" = "Sign in";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Enter your password";
+
+/* Error message displayed when the email and password don't match. */
+"WrongPasswordError" = "The email and password you entered don't match.";
+
+/* Error message displayed when the account does not exist. */
+"AccountDoesNotExistError" = "There is no user record corresponding to this identifier. The user may have been deleted.";
+
+/* Error message displayed when the account is disabled. */
+"AccountDisabledError" = "The user account has been disabled by an administrator.";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Forgot password";
+
+/* Error message displayed when failed to recover password for an account. */
+"PasswordRecoveryError" = "Failed to reset password, please check your email address and try again.";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "An email with instructions has been sent to this address.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Create an account";
+
+/* Name text field placeholder. */
+"EnterYourName" = "Enter your name";
+
+/* Error message displayed when the name of the user is not entered. */
+"NameMissingError" = "You must provide a user name to continue.";
+
+/* Error message displayed when the email address is already in use. */
+"EmailAlreadyInUseError" = "The email address is already in use by another account.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "The password must be 6 characters long or more.";
+
+/* Message to explain to the user why password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "You've previously used this email address: %@, but signed in with a password. Enter your password to sign in.";
+
+/* Error alert title. */
+"Error" = "Error";
+
+/* Informational alert title. */
+"Info" = "Info";
+
+/* OK button title. */
+"OK" = "OK";
+
+/* Cancel button title. */
+"Cancel" = "Cancel";
+
+/* Next button title. */
+"Next" = "Next";
+
+/* Label next to a email text field. */
+"Email" = "Email";
+
+/* Label next to a password text field. */
+"Password" = "Password";
+
+/* Label next to a name text field. */
+"Name" = "Name";
