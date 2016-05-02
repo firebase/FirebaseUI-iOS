@@ -14,8 +14,8 @@
 //  limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
-#import <FirebaseDatabase/FIRDatabase.h>
+@import UIKit;
+@import FirebaseDatabase;
 #import <FirebaseUI/FirebaseTableViewDataSource.h>
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>

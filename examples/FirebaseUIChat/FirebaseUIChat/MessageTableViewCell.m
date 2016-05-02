@@ -18,7 +18,8 @@
 
 @implementation MessageTableViewCell
 
-- (instancetype)initWithFrame:(CGRect)frame;
-{ return [super initWithFrame:frame]; }
+- (instancetype)initWithFrame:(CGRect)frame {
+  return [super initWithFrame:frame];
+}
 
 @end

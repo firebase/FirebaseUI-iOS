@@ -103,12 +103,11 @@
 //  self.navigationItem.rightBarButtonItem.title = _currentUser ? @"Logout" : @"Login";
 //}
 
-- (void)tableView:(UITableView *)tableView
-    didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
-{ [self.tableView deselectRowAtIndexPath:indexPath animated:YES]; }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField;
-{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
   [[self.ref childByAutoId]
 //   setValue:@{@"name" : [self usernameForProvider:[self.loginViewController currentUser].provider], @"text" : textField.text}];
    setValue:@{@"name" : @"iOS User", @"text" : textField.text}];

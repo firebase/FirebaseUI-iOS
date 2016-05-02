@@ -8,10 +8,10 @@ Pod::Spec.new do |s|
   s.social_media_url = "https://twitter.com/firebase"
   s.source       = { :git => "https://dev-partners.googlesource.com/firebaseui-ios.git", :tag => "v#{s.version}" }
   s.platform = :ios
-  s.ios.deployment_target = "8.0"
+  s.ios.deployment_target = "7.0"
   s.dependency "Firebase/Database"
   s.ios.framework = "UIKit"
-  s.xcconfig     = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/Firebase"' }
+  s.xcconfig     = { 'FRAMEWORK_SEARCH_PATHS' => '"${PODS_ROOT}/FirebaseAnalytics/Frameworks", "${PODS_ROOT}/FirebaseDatabase/Frameworks"' }
   s.requires_arc = true
   s.default_subspecs = 'Core'
 
