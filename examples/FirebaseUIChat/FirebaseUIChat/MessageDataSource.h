@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseTableViewDataSource.h"
+#import "FirebaseUI/FirebaseTableViewDataSource.h"
 
 @interface MessageDataSource : FirebaseTableViewDataSource
 
