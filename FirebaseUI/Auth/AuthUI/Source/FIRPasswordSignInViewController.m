@@ -50,7 +50,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
 - (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
                          email:(NSString *_Nullable)email {
-  self = [super initWithAuthUI:authUI];
+  self = [super initWithNibName:NSStringFromClass([self class])
+                         bundle:[FIRAuthUIUtils frameworkBundle]
+                         authUI:authUI];
   if (self) {
     _email = [email copy];
 
@@ -62,25 +64,29 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  UIBarButtonItem *nextButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:[FIRAuthUIStrings next]
+  UIBarButtonItem *signInButtonItem =
+      [[UIBarButtonItem alloc] initWithTitle:[FIRAuthUIStrings signInTitle]
                                        style:UIBarButtonItemStylePlain
                                       target:self
-                                      action:@selector(next)];
-  self.navigationItem.rightBarButtonItem = nextButtonItem;
+                                      action:@selector(signIn)];
+  self.navigationItem.rightBarButtonItem = signInButtonItem;
 }
 
 #pragma mark - Actions
 
-- (void)next {
+- (void)signIn {
   if (![[self class] isValidEmail:_emailField.text]) {
     [self showAlertWithTitle:[FIRAuthUIStrings error] message:[FIRAuthUIStrings invalidEmailError]];
     return;
   }
 
+  [self incrementActivity];
+
   [self.auth signInWithEmail:_emailField.text
                     password:_passwordField.text
                   completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+    [self decrementActivity];
+
     if (error) {
       switch (error.code) {
         case FIRAuthErrorCodeWrongPassword:
@@ -105,10 +111,19 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 }
 
 - (IBAction)forgotPassword {
-  UIViewController *viewControlelr =
+  UIViewController *viewController =
       [[FIRPasswordRecoveryViewController alloc] initWithAuthUI:self.authUI
                                                           email:_emailField.text];
-  [self.navigationController pushViewController:viewControlelr animated:YES];
+  [self pushViewController:viewController];
+}
+
+- (void)textFieldDidChange {
+  [self updateActionButton];
+}
+
+- (void)updateActionButton {
+  BOOL enableActionButton = _emailField.text.length > 0 && _passwordField.text.length > 0;
+  self.navigationItem.rightBarButtonItem.enabled = enableActionButton;
 }
 
 #pragma mark - UITableViewDataSource
@@ -143,6 +158,10 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
     _passwordField.returnKeyType = UIReturnKeyNext;
     _passwordField.keyboardType = UIKeyboardTypeDefault;
   }
+  [cell.textField addTarget:self
+                     action:@selector(textFieldDidChange)
+           forControlEvents:UIControlEventEditingChanged];
+  [self updateActionButton];
   return cell;
 }
 
@@ -152,7 +171,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   if (textField == _emailField) {
     [_passwordField becomeFirstResponder];
   } else if (textField == _passwordField) {
-    [self next];
+    [self signIn];
   }
   return NO;
 }

@@ -16,6 +16,7 @@
 
 #import "FIRAuthUIStrings.h"
 
+#import "FIRAuthUI.h"
 #import "FIRAuthUIUtils.h"
 
 // AuthUI string keys.
@@ -24,7 +25,7 @@ static NSString *const kSignInWithEmail = @"SignInWithEmail";
 static NSString *const kEnterYourEmail = @"EnterYourEmail";
 static NSString *const kInvalidEmailError = @"InvalidEmailError";
 static NSString *const kCannotAuthenticateError = @"CannotAuthenticateError";
-static NSString *const kWelcomeBack = @"WelcomeBack";
+static NSString *const kExistingAccountTitle = @"ExistingAccountTitle";
 static NSString *const kProviderUsedPreviouslyMessage = @"ProviderUsedPreviouslyMessage";
 static NSString *const kSignInTitle = @"SignInTitle";
 static NSString *const kEnterYourPassword = @"EnterYourPassword";
@@ -32,11 +33,15 @@ static NSString *const kWrongPasswordError = @"WrongPasswordError";
 static NSString *const kAccountDoesNotExistError = @"AccountDoesNotExistError";
 static NSString *const kAccountDisabledError = @"AccountDisabledError";
 static NSString *const kPasswordRecoveryTitle = @"PasswordRecoveryTitle";
+static NSString *const kPasswordRecoveryMessage = @"PasswordRecoveryMessage";
 static NSString *const kPasswordRecoveryError = @"PasswordRecoveryError";
+static NSString *const kPasswordRecoveryEmailSentTitle = @"PasswordRecoveryEmailSentTitle";
 static NSString *const kPasswordRecoveryEmailSentMessage = @"PasswordRecoveryEmailSentMessage";
 static NSString *const kSignUpTitle = @"SignUpTitle";
-static NSString *const kEnterYourName = @"EnterYourName";
-static NSString *const kNameMissingError = @"NameMissingError";
+static NSString *const kFirstAndLastName = @"FirstAndLastName";
+static NSString *const kChoosePassword = @"ChoosePassword";
+static NSString *const kTermsOfServiceNotice = @"TermsOfServiceNotice";
+static NSString *const kTermsOfService = @"TermsOfService";
 static NSString *const kEmailAlreadyInUseError = @"EmailAlreadyInUseError";
 static NSString *const kWeakPasswordError = @"WeakPasswordError";
 static NSString *const kPasswordVerificationMessage = @"PasswordVerificationMessage";
@@ -44,10 +49,22 @@ static NSString *const kError = @"Error";
 static NSString *const kInfo = @"Info";
 static NSString *const kOK = @"OK";
 static NSString *const kCancel = @"Cancel";
+static NSString *const kBack = @"Back";
 static NSString *const kNext = @"Next";
+static NSString *const kSave = @"Save";
 static NSString *const kEmail = @"Email";
 static NSString *const kPassword = @"Password";
 static NSString *const kName = @"Name";
+
+/** @var kKeyNotFound
+    @brief The value returned if the key is not found in the table.
+*/
+static NSString *const kKeyNotFound = @"KeyNotFound";
+
+/** @var kTableName
+    @brief The name of the strings table to search for localized strings.
+*/
+static NSString *const kTableName = @"FirebaseAuthUI";
 
 @implementation FIRAuthUIStrings
 
@@ -57,9 +74,18 @@ static NSString *const kName = @"Name";
     @param key A string key which identifies localized text in the .strings files.
     @return Localized value of the string identified by the key.
  */
-+ (NSString *)localizedStringForKey:(NSString *)key {
++ (NSString *)localizedStringForKey:(nonnull NSString *)key {
+  NSBundle *customStringsBundle = [FIRAuthUI authUI].customStringsBundle;
+  if (customStringsBundle) {
+    NSString *localizedString = [customStringsBundle localizedStringForKey:key
+                                                                     value:kKeyNotFound
+                                                                     table:kTableName];
+    if (![kKeyNotFound isEqual:localizedString]) {
+      return localizedString;
+    }
+  }
   NSBundle *frameworkBundle = [FIRAuthUIUtils frameworkBundle];
-  return [frameworkBundle localizedStringForKey:key value:nil table:@"FirebaseAuthUI"];
+  return [frameworkBundle localizedStringForKey:key value:nil table:kTableName];
 }
 
 + (NSString *)authPickerTitle {
@@ -82,8 +108,8 @@ static NSString *const kName = @"Name";
   return [self localizedStringForKey:kCannotAuthenticateError];
 }
 
-+ (NSString *)welcomeBack {
-  return [self localizedStringForKey:kWelcomeBack];
++ (NSString *)existingAccountTitle {
+  return [self localizedStringForKey:kExistingAccountTitle];
 }
 
 + (NSString *)providerUsedPreviouslyMessage {
@@ -114,8 +140,16 @@ static NSString *const kName = @"Name";
   return [self localizedStringForKey:kPasswordRecoveryTitle];
 }
 
++ (NSString *)passwordRecoveryMessage {
+  return [self localizedStringForKey:kPasswordRecoveryMessage];
+}
+
 + (NSString *)passwordRecoveryError {
   return [self localizedStringForKey:kPasswordRecoveryError];
+}
+
++ (NSString *)passwordRecoveryEmailSentTitle {
+  return [self localizedStringForKey:kPasswordRecoveryEmailSentTitle];
 }
 
 + (NSString *)passwordRecoveryEmailSentMessage {
@@ -126,12 +160,20 @@ static NSString *const kName = @"Name";
   return [self localizedStringForKey:kSignUpTitle];
 }
 
-+ (NSString *)enterYourName {
-  return [self localizedStringForKey:kEnterYourName];
++ (NSString *)firstAndLastName {
+  return [self localizedStringForKey:kFirstAndLastName];
 }
 
-+ (NSString *)nameMissingError {
-  return [self localizedStringForKey:kNameMissingError];
++ (NSString *)choosePassword {
+  return [self localizedStringForKey:kChoosePassword];
+}
+
++ (NSString *)termsOfServiceNotice {
+  return [self localizedStringForKey:kTermsOfServiceNotice];
+}
+
++ (NSString *)termsOfService {
+  return [self localizedStringForKey:kTermsOfService];
 }
 
 + (NSString *)emailAlreadyInUseError {
@@ -162,8 +204,16 @@ static NSString *const kName = @"Name";
   return [self localizedStringForKey:kCancel];
 }
 
++ (NSString *)back {
+  return [self localizedStringForKey:kBack];
+}
+
 + (NSString *)next {
   return [self localizedStringForKey:kNext];
+}
+
++ (NSString *)save {
+  return [self localizedStringForKey:kSave];
 }
 
 + (NSString *)email {

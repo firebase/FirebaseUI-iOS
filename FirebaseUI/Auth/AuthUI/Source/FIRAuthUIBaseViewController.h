@@ -43,26 +43,36 @@ typedef void (^FIRAuthUIAlertActionHandler)(void);
 @property(nonatomic, strong, readonly) FIRAuthUI *authUI;
 
 /** @fn init
-    @brief Please use @c initWithAuthUI:.
+    @brief Please use @c initWithNibName:bundle:authUI:.
  */
 - (nullable instancetype)init NS_UNAVAILABLE;
 
 /** @fn initWithStyle:
-    @brief Please use @c initWithAuthUI:.
+    @brief Please use @c initWithNibName:bundle:authUI:.
  */
 - (instancetype)initWithStyle:(UITableViewStyle)style NS_UNAVAILABLE;
 
 /** @fn initWithNibName:bundle:
-    @brief Please use @c initWithAuthUI:.
+    @brief Please use @c initWithNibName:bundle:authUI:.
  */
-- (instancetype)initWithNibName:(NSString *_Nullable)nibNameOrNil
-                         bundle:(NSBundle *_Nullable)nibBundleOrNil NS_UNAVAILABLE;
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
 
-/** @fn initWithAuthUI:
+/** @fn initWithNibName:bundle:authUI:
     @brief Designated initializer.
+    @param nibNameOrNil The name of the nib file to associate with the view controller.
+    @param nibBundleOrNil The bundle in which to search for the nib file.
     @param authUI The @c FIRAuthUI instance that manages this view controller.
  */
-- (instancetype)initWithAuthUI:(FIRAuthUI *)authUI NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FIRAuthUI *)authUI NS_DESIGNATED_INITIALIZER;
+
+/** @fn initWithAuthUI:
+    @brief Convenience initializer.
+    @param authUI The @c FIRAuthUI instance that manages this view controller.
+ */
+- (instancetype)initWithAuthUI:(FIRAuthUI *)authUI;
 
 /** @fn isValidEmail:
     @brief Statically validates email address.
@@ -87,6 +97,27 @@ typedef void (^FIRAuthUIAlertActionHandler)(void);
 - (void)showSignInAlertWithEmail:(NSString *)email
                         provider:(id<FIRAuthProviderUI>)provider
                          handler:(FIRAuthUIAlertActionHandler)handler;
+
+/** @fn pushViewController:
+    @brief Push the view controller to the navigation controller of the current view controller
+        with animation. The pushed view controller will have a fixed "Back" title for back button.
+    @param viewController The view controller to be pushed.
+ */
+- (void)pushViewController:(UIViewController *)viewController;
+
+/** @fn incrementActivity
+    @brief Increment the current acitivity count. If there's positive number of activities, display
+        and animate the activity indicator with a short period of delay.
+    @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
+ */
+- (void)incrementActivity;
+
+/** @fn decrementActivity
+    @brief Decrement the current acitivity count. If the count reaches 0, stop and hide the
+        activity indicator.
+    @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
+ */
+- (void)decrementActivity;
 
 @end
 

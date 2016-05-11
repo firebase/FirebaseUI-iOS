@@ -25,6 +25,18 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface FIRPasswordRecoveryViewController : FIRAuthUIBaseViewController
 
+/** @property footerTextView
+    @brief The text view in the footer of the table.
+ */
+@property(nonatomic, strong) IBOutlet UITextView *footerTextView;
+
+/** @fn initWithNibName:bundle:authUI:
+    @brief Please use @c initWithAuthUI:email:.
+ */
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FIRAuthUI *)authUI NS_UNAVAILABLE;
+
 /** @fn initWithAuthUI:
     @brief Please use @c initWithAuthUI:email:.
  */

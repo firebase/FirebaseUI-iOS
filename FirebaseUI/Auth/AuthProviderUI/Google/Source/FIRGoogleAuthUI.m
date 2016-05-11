@@ -36,6 +36,11 @@ static NSString *const kGooglePlusMeScope = @"https://www.googleapis.com/auth/pl
  */
 static NSString *const kGooglePlusScopesPrefix = @"https://www.googleapis.com/auth/plus.";
 
+/** @var kTableName
+    @brief The name of the strings table to search for localized strings.
+*/
+static NSString *const kTableName = @"FirebaseGoogleAuthUI";
+
 /** @var kSignInWithGoogle
     @brief The string key for localized button text.
  */
@@ -107,7 +112,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
  */
 + (NSString *)localizedStringForKey:(NSString *)key {
   NSBundle *frameworkBundle = [[self class] frameworkBundle];
-  return [frameworkBundle localizedStringForKey:key value:nil table:@"FirebaseGoogleAuthUI"];
+  return [frameworkBundle localizedStringForKey:key value:nil table:kTableName];
 }
 
 #pragma mark - FIRAuthProviderUI
@@ -124,16 +129,37 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   return [[self class] localizedStringForKey:kSignInWithGoogle];
 }
 
-- (void)FIRAuth:(FIRAuth *)auth
-    signInWithPresentingViewController:(nullable UIViewController *)presentingViewController
-                            completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+- (UIImage *)icon {
+  return [[self class] imageNamed:@"ic_google"];
+}
+
+- (UIColor *)buttonBackgroundColor {
+  return [UIColor whiteColor];
+}
+
+- (UIColor *)buttonTextColor {
+  return [UIColor colorWithWhite:0 alpha:0.54f];
+}
+
+- (void)signInWithAuth:(FIRAuth *)auth
+                       email:(nullable NSString *)email
+    presentingViewController:(nullable UIViewController *)presentingViewController
+                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   _presentingViewController = presentingViewController;
-  _pendingSignInCallback = completion;
+
   GIDSignIn *signIn = [self configuredGoogleSignIn];
+  _pendingSignInCallback = ^(FIRAuthCredential *_Nullable credential, NSError *_Nullable error) {
+    signIn.loginHint = nil;
+    if (completion) {
+      completion(credential, error);
+    }
+  };
+
+  signIn.loginHint = email;
   [signIn signIn];
 }
 
-- (void)FIRAuthSignOut:(FIRAuth *)auth {
+- (void)signOutWithAuth:(FIRAuth *)auth {
   GIDSignIn *signIn = [self configuredGoogleSignIn];
   [signIn signOut];
 }
@@ -189,23 +215,6 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   signIn.clientID = _clientID;
   signIn.scopes = _scopes;
   return signIn;
-}
-
-/** @fn clientIsRequestingGoogleSocialScopes
-    @brief Indicates the games scope or a plus.* scope (with the exception of plus.me) is included
-        in the additional scopes being requested for the google provider in the stared FIRAuth
-        instance.
-    @return YES if the client is requesting a social scope.
- */
-- (BOOL)clientIsRequestingGoogleSocialScopes {
-  for (NSString *scope in _scopes) {
-    if ([scope isEqualToString:kGoogleGamesScope] ||
-        ([scope rangeOfString:kGooglePlusScopesPrefix].location != NSNotFound
-        && ![scope isEqualToString:kGooglePlusMeScope])) {
-      return YES;
-    }
-  }
-  return NO;
 }
 
 /** @fn callbackWithCredential:error:

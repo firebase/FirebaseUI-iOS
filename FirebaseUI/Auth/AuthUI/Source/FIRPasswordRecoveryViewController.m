@@ -26,6 +26,11 @@
  */
 static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
+/** @var kFooterTextViewHorizontalInset
+    @brief The horizontal inset for @c footerTextView, which should match the iOS standard margin.
+ */
+static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
+
 @interface FIRPasswordRecoveryViewController () <UITableViewDataSource, UITextFieldDelegate>
 @end
 
@@ -43,7 +48,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
 - (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
                          email:(NSString *_Nullable)email {
-  self = [super initWithAuthUI:authUI];
+  self = [super initWithNibName:NSStringFromClass([self class])
+                         bundle:[FIRAuthUIUtils frameworkBundle]
+                         authUI:authUI];
   if (self) {
     _email = [email copy];
 
@@ -63,25 +70,56 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   self.navigationItem.rightBarButtonItem = nextButtonItem;
 }
 
+- (void)viewDidLayoutSubviews {
+  [super viewDidLayoutSubviews];
+
+  self.footerTextView.text = [FIRAuthUIStrings passwordRecoveryMessage];
+
+  // Adjust the footerTextView to have standard margins.
+  self.footerTextView.textContainer.lineFragmentPadding = 0;
+  _footerTextView.textContainerInset =
+      UIEdgeInsetsMake(0, kFooterTextViewHorizontalInset, 0, kFooterTextViewHorizontalInset);
+  [self.footerTextView sizeToFit];
+}
+
 #pragma mark - Actions
 
 - (void)next {
-  if (![[self class] isValidEmail:_emailField.text]) {
+  NSString *email = _emailField.text;
+  if (![[self class] isValidEmail:email]) {
     [self showAlertWithTitle:[FIRAuthUIStrings error] message:[FIRAuthUIStrings invalidEmailError]];
     return;
   }
 
-  [self.auth sendPasswordResetWithEmail:_emailField.text
-                             completion:^(NSError *_Nullable error) {
-    if (error) {
-      [self showAlertWithTitle:[FIRAuthUIStrings error]
-                       message:[FIRAuthUIStrings passwordRecoveryError]];
-      return;
-    }
+  [self incrementActivity];
 
-    [self showAlertWithTitle:[FIRAuthUIStrings info]
-                     message:[FIRAuthUIStrings passwordRecoveryEmailSentMessage]];
+  [self.auth sendPasswordResetWithEmail:email
+                             completion:^(NSError *_Nullable error) {
+    // The dispatch is a workaround for a bug in FirebaseAuth 3.0.2, which doesn't call the
+    // completion block on the main queue.
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self decrementActivity];
+
+      if (error) {
+        [self showAlertWithTitle:[FIRAuthUIStrings error]
+                         message:[FIRAuthUIStrings passwordRecoveryError]];
+        return;
+      }
+
+      NSString *message =
+          [NSString stringWithFormat:[FIRAuthUIStrings passwordRecoveryEmailSentMessage], email];
+      [self showAlertWithTitle:[FIRAuthUIStrings passwordRecoveryEmailSentTitle]
+                       message:message];
+    });
   }];
+}
+
+- (void)textFieldDidChange {
+  [self updateActionButton];
+}
+
+- (void)updateActionButton {
+  self.navigationItem.rightBarButtonItem.enabled = (_emailField.text.length > 0);
 }
 
 #pragma mark - UITableViewDataSource
@@ -106,6 +144,10 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   _emailField.placeholder = [FIRAuthUIStrings enterYourEmail];
   _emailField.returnKeyType = UIReturnKeyNext;
   _emailField.keyboardType = UIKeyboardTypeEmailAddress;
+  [cell.textField addTarget:self
+                     action:@selector(textFieldDidChange)
+           forControlEvents:UIControlEventEditingChanged];
+  [self updateActionButton];
   return cell;
 }
 

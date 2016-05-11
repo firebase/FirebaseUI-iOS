@@ -52,7 +52,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 - (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
                          email:(NSString *_Nullable)email
                  newCredential:(FIRAuthCredential *)newCredential {
-  self = [super initWithAuthUI:authUI];
+  self = [super initWithNibName:NSStringFromClass([self class])
+                         bundle:[FIRAuthUIUtils frameworkBundle]
+                         authUI:authUI];
   if (self) {
     _email = [email copy];
     _newCredential = newCredential;
@@ -75,16 +77,18 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   // header is added by UITableView.
   FIRAuthUITableHeaderView *tableHeaderView =
       [[FIRAuthUITableHeaderView alloc] initWithFrame:self.tableView.bounds];
-  tableHeaderView.titleLabel.text = [FIRAuthUIStrings welcomeBack];
-  tableHeaderView.detailLabel.text =
-      [NSString stringWithFormat:[FIRAuthUIStrings passwordVerificationMessage], _email];
   self.tableView.tableHeaderView = tableHeaderView;
 }
 
 - (void)viewDidLayoutSubviews {
   [super viewDidLayoutSubviews];
 
-  UIView *tableHeaderView = self.tableView.tableHeaderView;
+  FIRAuthUITableHeaderView *tableHeaderView =
+      (FIRAuthUITableHeaderView *)self.tableView.tableHeaderView;
+  tableHeaderView.titleLabel.text = [FIRAuthUIStrings existingAccountTitle];
+  tableHeaderView.detailLabel.text =
+      [NSString stringWithFormat:[FIRAuthUIStrings passwordVerificationMessage], _email];
+
   CGSize previousSize = tableHeaderView.frame.size;
   [tableHeaderView sizeToFit];
   if (!CGSizeEqualToSize(tableHeaderView.frame.size, previousSize)) {
@@ -96,10 +100,14 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 #pragma mark - Actions
 
 - (void)next {
+  [self incrementActivity];
+
   [self.auth signInWithEmail:_email
                     password:_passwordField.text
                   completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
     if (error) {
+      [self decrementActivity];
+
       [self showAlertWithTitle:[FIRAuthUIStrings error]
                        message:[FIRAuthUIStrings wrongPasswordError]];
       return;
@@ -107,6 +115,8 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
     [user linkWithCredential:_newCredential completion:^(FIRUser * _Nullable user,
                                                          NSError * _Nullable error) {
+      [self decrementActivity];
+
       // Ignore any error (shouldn't happen) and treat the user as successfully signed in.
       [self.navigationController dismissViewControllerAnimated:YES completion:^{
         [self.authUI invokeResultCallbackWithUser:user error:nil];
@@ -116,9 +126,18 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 }
 
 - (IBAction)forgotPassword {
-  UIViewController *viewControlelr =
+  UIViewController *viewController =
       [[FIRPasswordRecoveryViewController alloc] initWithAuthUI:self.authUI email:_email];
-  [self.navigationController pushViewController:viewControlelr animated:YES];
+  [self pushViewController:viewController];
+}
+
+- (void)textFieldDidChange {
+  [self updateActionButton];
+}
+
+- (void)updateActionButton {
+  BOOL enableActionButton = (_passwordField.text.length > 0);
+  self.navigationItem.rightBarButtonItem.enabled = enableActionButton;
 }
 
 #pragma mark - UITableViewDataSource
@@ -143,6 +162,10 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   _passwordField.secureTextEntry = YES;
   _passwordField.returnKeyType = UIReturnKeyNext;
   _passwordField.keyboardType = UIKeyboardTypeDefault;
+  [cell.textField addTarget:self
+                     action:@selector(textFieldDidChange)
+           forControlEvents:UIControlEventEditingChanged];
+  [self updateActionButton];
   return cell;
 }
 

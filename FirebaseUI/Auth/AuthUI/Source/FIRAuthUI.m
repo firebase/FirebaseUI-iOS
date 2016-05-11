@@ -38,13 +38,7 @@ static NSString *const kAppNameCodingKey = @"appName";
 
 @end
 
-@implementation FIRAuthUI {
-  #warning TODO(chaowei) discuss how we will deal with this block in re: NSCoding.
-  /** @var _pendingCallback
-      @brief A pending callback to be called when sign-in is finished.
-   */
-  FIRAuthUIResultCallback _resultCallback;
-}
+@implementation FIRAuthUI
 
 + (nullable FIRAuthUI *)authUI {
   FIRAuth *defaultAuth = [FIRAuth auth];
@@ -70,15 +64,6 @@ static NSString *const kAppNameCodingKey = @"appName";
   return self;
 }
 
-- (void)presentSignInWithViewController:(UIViewController *)viewController
-                               callback:(nullable FIRAuthUIResultCallback)callback {
-  _resultCallback = callback;
-  UIViewController *controller = [[FIRAuthPickerViewController alloc] initWithAuthUI:self];
-  UINavigationController *navigationController =
-      [[UINavigationController alloc] initWithRootViewController:controller];
-  [viewController presentViewController:navigationController animated:YES completion:nil];
-}
-
 - (BOOL)handleOpenURL:(NSURL *)URL
     sourceApplication:(NSString *)sourceApplication {
   // Complete IDP-based sign-in flow.
@@ -87,21 +72,26 @@ static NSString *const kAppNameCodingKey = @"appName";
       return YES;
     }
   }
-
   // The URL was not meant for us.
   return NO;
+}
+
+- (UIViewController *)authViewController {
+  UIViewController *controller;
+  if ([self.delegate respondsToSelector:@selector(authPickerViewControllerForAuthUI:)]) {
+    controller = [self.delegate authPickerViewControllerForAuthUI:self];
+  } else {
+    controller = [[FIRAuthPickerViewController alloc] initWithAuthUI:self];
+  }
+  return [[UINavigationController alloc] initWithRootViewController:controller];
 }
 
 #pragma mark - Internal Methods
 
 - (void)invokeResultCallbackWithUser:(FIRUser *_Nullable)user error:(NSError *_Nullable)error {
-  if (_resultCallback) {
-    FIRAuthUIResultCallback callback = _resultCallback;
-    _resultCallback = nil;
-    dispatch_async(dispatch_get_main_queue(), ^{
-      callback(user, error);
-    });
-  }
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.delegate authUI:self didSignInWithUser:user error:error];
+  });
 }
 
 #pragma mark - NSSecureCoding

@@ -40,6 +40,16 @@ static NSString *const kAppIDCodingKey = @"appID";
  */
 static NSString *const kAuthUICodingKey = @"authUI";
 
+/** @var kEmailCellAccessibilityID
+    @brief The Accessibility Identifier for the @c email sign in cell.
+ */
+static NSString *const kEmailCellAccessibilityID = @"EmailCellAccessibilityID";
+
+/** @var kNextButtonAccessibilityID
+    @brief The Accessibility Identifier for the @c next button.
+ */
+static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID";
+
 @interface FIREmailEntryViewController () <UITableViewDataSource, UITextFieldDelegate>
 @end
 
@@ -53,7 +63,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
 - (instancetype)initWithAuthUI:(FIRAuthUI *)authUI {
   self = [super initWithAuthUI:authUI];
   if (self) {
-    self.title = [FIRAuthUIStrings enterYourEmail];
+    self.title = [FIRAuthUIStrings signInWithEmail];
   }
   return self;
 }
@@ -66,6 +76,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
                                        style:UIBarButtonItemStylePlain
                                       target:self
                                       action:@selector(next)];
+  nextButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = nextButtonItem;
 }
 
@@ -77,9 +88,13 @@ static NSString *const kAuthUICodingKey = @"authUI";
     return;
   }
 
+  [self incrementActivity];
+
   [self.auth fetchProvidersForEmail:_emailField.text
                          completion:^(NSArray<NSString *> *_Nullable providers,
                                       NSError *_Nullable error) {
+    [self decrementActivity];
+
     if (error) {
       if (error.code == FIRAuthErrorCodeInvalidEmail) {
         [self showAlertWithTitle:[FIRAuthUIStrings error]
@@ -94,16 +109,17 @@ static NSString *const kAuthUICodingKey = @"authUI";
 
     id<FIRAuthProviderUI> provider = [self bestProviderFromProviderIDs:providers];
     if (provider) {
-      [self showSignInAlertWithEmail:_emailField.text
+      NSString *email = _emailField.text;
+      [self showSignInAlertWithEmail:email
                             provider:provider
                              handler:^{
-        [self signInWithProvider:provider];
+        [self signInWithProvider:provider email:email];
       }];
     } else if ([providers containsObject:FIREmailPasswordAuthProviderID]) {
       UIViewController *controller =
           [[FIRPasswordSignInViewController alloc] initWithAuthUI:self.authUI
                                                             email:_emailField.text];
-      [self.navigationController pushViewController:controller animated:YES];
+      [self pushViewController:controller];
     } else {
       if (providers.count) {
         // There's some unsupported providers, surface the error to the user.
@@ -114,10 +130,18 @@ static NSString *const kAuthUICodingKey = @"authUI";
         UIViewController *controller =
             [[FIRPasswordSignUpViewController alloc] initWithAuthUI:self.authUI
                                                               email:_emailField.text];
-        [self.navigationController pushViewController:controller animated:YES];
+        [self pushViewController:controller];
       }
     }
   }];
+}
+
+- (void)textFieldDidChange {
+  [self updateActionButton];
+}
+
+- (void)updateActionButton {
+  self.navigationItem.rightBarButtonItem.enabled = (_emailField.text.length > 0);
 }
 
 #pragma mark - UITableViewDataSource
@@ -138,11 +162,16 @@ static NSString *const kAuthUICodingKey = @"authUI";
   cell.label.text = [FIRAuthUIStrings email];
   cell.textField.placeholder = [FIRAuthUIStrings enterYourEmail];
   cell.textField.delegate = self;
+  cell.accessibilityIdentifier = kEmailCellAccessibilityID;
   _emailField = cell.textField;
   _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
   _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
   _emailField.returnKeyType = UIReturnKeyNext;
   _emailField.keyboardType = UIKeyboardTypeEmailAddress;
+  [cell.textField addTarget:self
+                     action:@selector(textFieldDidChange)
+           forControlEvents:UIControlEventEditingChanged];
+  [self updateActionButton];
   return cell;
 }
 
@@ -169,23 +198,34 @@ static NSString *const kAuthUICodingKey = @"authUI";
 
 #pragma mark - Utilities
 
-/** @fn signInWithProvider:
+/** @fn signInWithProvider:email:
     @brief Actually kicks off sign in with the provider.
     @param provider The identity provider to sign in with.
+    @param email The email address of the user.
  */
-- (void)signInWithProvider:(id<FIRAuthProviderUI>)provider {
-  [provider FIRAuth:self.auth
-      signInWithPresentingViewController:self
-                              completion:^(FIRAuthCredential *_Nullable credential,
-                                           NSError *_Nullable error) {
+- (void)signInWithProvider:(id<FIRAuthProviderUI>)provider email:(NSString *)email {
+  [self incrementActivity];
+
+  // Sign out first to make sure sign in starts with a clean state.
+  [provider signOutWithAuth:self.auth];
+  [provider signInWithAuth:self.auth
+                         email:email
+      presentingViewController:self
+                    completion:^(FIRAuthCredential *_Nullable credential,
+                                 NSError *_Nullable error) {
     if (error) {
+      [self decrementActivity];
+
       [self.navigationController dismissViewControllerAnimated:YES completion:^{
         [self.authUI invokeResultCallbackWithUser:nil error:error];
       }];
       return;
     }
+
     [self.auth signInWithCredential:credential
                          completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+      [self decrementActivity];
+
       [self.navigationController dismissViewControllerAnimated:YES completion:^{
         [self.authUI invokeResultCallbackWithUser:user error:error];
       }];

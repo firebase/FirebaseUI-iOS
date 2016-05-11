@@ -2,24 +2,24 @@
 "AuthPickerTitle" = "Welcome";
 
 /* Sign in with email button label. */
-"SignInWithEmail" = "Sign in with Email";
+"SignInWithEmail" = "Sign in with email";
 
 /* Title for email entry screen, email text field placeholder. */
 "EnterYourEmail" = "Enter your email";
 
 /* Error message displayed when user enters an invalid email address. */
-"InvalidEmailError" = "The email address is badly formatted.";
+"InvalidEmailError" = "Please enter a valid email address.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
 "CannotAuthenticateError" = "Sorry, we cannot authenticate this account.";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"WelcomeBack" = "Welcome back!";
+"ExistingAccountTitle" = "You already have an account";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "You've previously used this email address: %@, but signed in via %@.";
+"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
 
-/* Title for sign in screen. */
+/* Title for sign in screen and sign in button. */
 "SignInTitle" = "Sign in";
 
 /* Password text field placeholder. */
@@ -35,31 +35,43 @@
 "AccountDisabledError" = "The user account has been disabled by an administrator.";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Forgot password";
+"PasswordRecoveryTitle" = "Recover password";
+
+/* Explanation on how the password of an account can be recovered. */
+"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
 
 /* Error message displayed when failed to recover password for an account. */
 "PasswordRecoveryError" = "Failed to reset password, please check your email address and try again.";
 
+/* Title of a message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentTitle" = "Check your email";
+
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "An email with instructions has been sent to this address.";
+"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Create an account";
+"SignUpTitle" = "Create account";
 
 /* Name text field placeholder. */
-"EnterYourName" = "Enter your name";
+"FirstAndLastName" = "First & last name";
 
-/* Error message displayed when the name of the user is not entered. */
-"NameMissingError" = "You must provide a user name to continue.";
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Choose password";
+
+/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
+"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Terms of Service";
 
 /* Error message displayed when the email address is already in use. */
 "EmailAlreadyInUseError" = "The email address is already in use by another account.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "The password must be 6 characters long or more.";
+"WeakPasswordError" = "Short passwords are easy to guess. Try one with at least 6 characters.";
 
-/* Message to explain to the user why password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You've previously used this email address: %@, but signed in with a password. Enter your password to sign in.";
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password.";
 
 /* Error alert title. */
 "Error" = "Error";
@@ -73,8 +85,14 @@
 /* Cancel button title. */
 "Cancel" = "Cancel";
 
+/* Back button title. */
+"Back" = "Back";
+
 /* Next button title. */
 "Next" = "Next";
+
+/* Save button title. */
+"Save" = "Save";
 
 /* Label next to a email text field. */
 "Email" = "Email";

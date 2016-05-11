@@ -28,6 +28,11 @@
  */
 static NSString *const kBundleFileName = @"FirebaseFacebookAuthUIBundle.bundle";
 
+/** @var kTableName
+    @brief The name of the strings table to search for localized strings.
+*/
+static NSString *const kTableName = @"FirebaseFacebookAuthUI";
+
 /** @var kSignInWithFacebook
     @brief The string key for localized button text.
  */
@@ -98,7 +103,7 @@ static NSString *const kSignInWithFacebook = @"SignInWithFacebook";
  */
 + (NSString *)localizedStringForKey:(NSString *)key {
   NSBundle *frameworkBundle = [[self class] frameworkBundle];
-  return [frameworkBundle localizedStringForKey:key value:nil table:@"FirebaseFacebookAuthUI"];
+  return [frameworkBundle localizedStringForKey:key value:nil table:kTableName];
 }
 
 #pragma mark - FIRAuthProviderUI
@@ -115,9 +120,22 @@ static NSString *const kSignInWithFacebook = @"SignInWithFacebook";
   return [[self class] localizedStringForKey:kSignInWithFacebook];
 }
 
-- (void)FIRAuth:(FIRAuth *)auth
-    signInWithPresentingViewController:(nullable UIViewController *)presentingViewController
-                            completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+- (UIImage *)icon {
+  return [[self class] imageNamed:@"ic_facebook"];
+}
+
+- (UIColor *)buttonBackgroundColor {
+  return [UIColor colorWithRed:59.0f/255.0f green:89.0f/255.0f blue:152.0f/255.0f alpha:1.0f];
+}
+
+- (UIColor *)buttonTextColor {
+  return [UIColor whiteColor];
+}
+
+- (void)signInWithAuth:(FIRAuth *)auth
+                       email:(nullable NSString *)email
+    presentingViewController:(nullable UIViewController *)presentingViewController
+                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   _pendingSignInCallback = completion;
   [_loginManager logInWithReadPermissions:_scopes
                        fromViewController:presentingViewController
@@ -138,7 +156,7 @@ static NSString *const kSignInWithFacebook = @"SignInWithFacebook";
   }];
 }
 
-- (void)FIRAuthSignOut:(FIRAuth *)auth {
+- (void)signOutWithAuth:(FIRAuth *)auth {
   [_loginManager logOut];
 }
 

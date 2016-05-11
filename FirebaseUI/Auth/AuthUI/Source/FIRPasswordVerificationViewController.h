@@ -27,6 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface FIRPasswordVerificationViewController : FIRAuthUIBaseViewController
 
+/** @fn initWithNibName:bundle:authUI:
+    @brief Please use @c initWithAuthUI:email:.
+ */
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FIRAuthUI *)authUI NS_UNAVAILABLE;
+
 /** @fn initWithAuthUI:
     @brief Please use @c initWithAuthUI:email:.
  */

@@ -14,8 +14,10 @@
 //  limitations under the License.
 //
 
+#import "FIRAuthPickerViewController.h"
 #import "FIRAuthProviderUI.h"
 #import "FIRAuthUI.h"
+#import "FIRAuthUIBaseViewController.h"
 
 /** @var FirebaseAuthUIVersionNumber
     @brief Version number for FirebaseAuthUI.

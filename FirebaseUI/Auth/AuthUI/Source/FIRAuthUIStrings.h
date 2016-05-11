@@ -51,11 +51,11 @@
  */
 + (NSString *)cannotAuthenticateError;
 
-/** @fn welcomeBack
+/** @fn existingAccountTitle
     @brief Title of an alert shown to an existing user coming back to the app.
     @return Localized string.
  */
-+ (NSString *)welcomeBack;
++ (NSString *)existingAccountTitle;
 
 /** @fn providerUsedPreviouslyMessage
     @brief Alert message to let user know what identity provider was used previously for the email
@@ -100,11 +100,23 @@
  */
 + (NSString *)passwordRecoveryTitle;
 
+/** @fn passwordRecoveryMessage
+    @brief Explanation on how the password of an account can be recovered.
+    @return Localized string.
+ */
++ (NSString *)passwordRecoveryMessage;
+
 /** @fn passwordRecoveryError
     @brief Error message displayed when failed to recover password for an account.
     @return Localized string.
  */
 + (NSString *)passwordRecoveryError;
+
+/** @fn passwordRecoveryEmailSentTitle
+    @brief Title of a message displayed when the email for password recovery has been sent.
+    @return Localized string.
+ */
++ (NSString *)passwordRecoveryEmailSentTitle;
 
 /** @fn passwordRecoveryEmailSentMessage
     @brief Message displayed when the email for password recovery has been sent.
@@ -118,17 +130,29 @@
  */
 + (NSString *)signUpTitle;
 
-/** @fn enterYourName
+/** @fn firstAndLastName
     @brief Name text field placeholder.
     @return Localized string.
  */
-+ (NSString *)enterYourName;
++ (NSString *)firstAndLastName;
 
-/** @fn nameMissingError
-    @brief Error message displayed when the name of the user is not entered.
+/** @fn choosePassword
+    @brief Placeholder for the password text field in a sign up form.
     @return Localized string.
  */
-+ (NSString *)nameMissingError;
++ (NSString *)choosePassword;
+
+/** @fn termsOfServiceNotice
+    @brief A notice displayed when the user is creating a new account.
+    @return Localized string.
+ */
++ (NSString *)termsOfServiceNotice;
+
+/** @fn termsOfService
+    @brief Text linked to a web page with the Terms of Service content.
+    @return Localized string.
+ */
++ (NSString *)termsOfService;
 
 /** @fn emailAlreadyInUseError
     @brief Error message displayed when the email address is already in use.
@@ -173,11 +197,23 @@
  */
 + (NSString *)cancel;
 
+/** @fn back
+    @brief Back button title.
+    @return Localized string.
+ */
++ (NSString *)back;
+
 /** @fn next
     @brief Next button title.
     @return Localized string.
  */
 + (NSString *)next;
+
+/** @fn save
+    @brief Save button title.
+    @return Localized string.
+ */
++ (NSString *)save;
 
 /** @fn email
     @brief Label next to a email text field.

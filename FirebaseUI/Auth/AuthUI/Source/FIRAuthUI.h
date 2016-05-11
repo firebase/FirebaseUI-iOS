@@ -19,6 +19,8 @@
 #import "FIRAuthProviderUI.h"
 
 @class FIRAuth;
+@class FIRAuthPickerViewController;
+@class FIRAuthUI;
 @class FIRUser;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -29,6 +31,34 @@ NS_ASSUME_NONNULL_BEGIN
     @param error The error which occurred, if any.
  */
 typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nullable error);
+
+/** @protocol FIRAuthUIDelegate
+    @brief A delegate that receives callbacks or provides custom UI for @c FIRAuthUI.
+ */
+@protocol FIRAuthUIDelegate <NSObject>
+
+/** @fn authUI:didSignInWithUser:error:
+    @brief Message sent after the sign in process has completed to report the signed in user or
+        error encountered.
+    @param authUI The @c FIRAuthUI instance sending the messsage.
+    @param user The signed in user if the sign in attempt was successful.
+    @param error The error that occured during sign in, if any.
+ */
+- (void)authUI:(FIRAuthUI *)authUI
+      didSignInWithUser:(nullable FIRUser *)user
+                  error:(nullable NSError *)error;
+
+@optional
+
+/** @fn authPickerViewControllerForAuthUI:
+    @brief Sent to the receiver to ask for an instance of @c FIRAuthPickerViewController subclass
+        to allow UI customizations.
+    @param authUI The @c FIRAuthUI instance sending the message.
+    @return an instance of @c FIRAuthPickerViewController subclass.
+ */
+- (FIRAuthPickerViewController *)authPickerViewControllerForAuthUI:(FIRAuthUI *)authUI;
+
+@end
 
 /** @class FIRAuthUI
     @brief Provides various iOS UIs for Firebase Auth.
@@ -59,19 +89,34 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
  */
 @property(nonatomic, copy) NSArray<id<FIRAuthProviderUI>> *signInProviders;
 
+/** @property signInWithEmailHidden
+    @brief Whether to hide the "Sign in with email" option, defaults to NO.
+ */
+@property(nonatomic, assign, getter=isSignInWithEmailHidden) BOOL signInWithEmailHidden;
+
+/** @property customStringsBundle
+    @brief Custom strings bundle supplied by the developer. Nil when there is no custom strings
+        bundle set. In which case the default bundle will be used.
+    @remarks Set this property to nil in order to remove the custom strings bundle and revert to
+        using the default bundle.
+ */
+@property(nonatomic, strong, nullable) NSBundle *customStringsBundle;
+
+/** @property termsOfServiceURL
+    @brief The URL of your app's Terms of Service. If not nil, a Terms of Service notice is
+        displayed on the email/password account creation screen.
+ */
+@property(nonatomic, copy, nullable) NSURL *termsOfServiceURL;
+
+/** @property delegate
+    @brief A delegate that receives callbacks or provides custom UI for @c FIRAuthUI.
+ */
+@property(nonatomic, weak) id<FIRAuthUIDelegate> delegate;
+
 /** @fn init
     @brief Please use @c FIRAuthUI.authUIWithAuth to get a @c FIRAuthUI instance.
  */
 - (nullable instancetype)init NS_UNAVAILABLE;
-
-/** @fn presentSignInWithViewController:callback:
-    @brief Presents the sign-in screen.
-    @param viewController The view controller from which to present the sign-in view controller.
-    @param callback A block to invoke when the sign-in process finishes, or is canceled. Invoked
-        asynchronously on the main thread at some time in the future.
- */
-- (void)presentSignInWithViewController:(UIViewController *)viewController
-                               callback:(nullable FIRAuthUIResultCallback)callback;
 
 /** @fn handleOpenURL:
     @brief Should be called from your @c UIApplicationDelegate in
@@ -82,6 +127,12 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
  */
 - (BOOL)handleOpenURL:(NSURL *)URL
     sourceApplication:(NSString *)sourceApplication;
+
+/** @fn authViewController
+    @brief Returns an instance of the initial view controller of AuthUI.
+    @return An instance of the the initial view controller of AuthUI.
+ */
+- (UIViewController *)authViewController;
 
 @end
 

@@ -27,10 +27,35 @@
  */
 static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
+/** @var kEmailSignUpCellAccessibilityID
+    @brief The Accessibility Identifier for the @c email cell.
+ */
+static NSString *const kEmailSignUpCellAccessibilityID = @"EmailSignUpCellAccessibilityID";
+
+/** @var kPasswordSignUpCellAccessibilityID
+    @brief The Accessibility Identifier for the @c password cell.
+ */
+static NSString *const kPasswordSignUpCellAccessibilityID = @"PasswordSignUpCellAccessibilityID";
+
+/** @var kNameSignUpCellAccessibilityID
+    @brief The Accessibility Identifier for the @c name cell.
+ */
+static NSString *const kNameSignUpCellAccessibilityID = @"NameSignUpCellAccessibilityID";
+
+/** @var kNextButtonAccessibilityID
+    @brief The Accessibility Identifier for the @c next button.
+ */
+static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID";
+
 /** @var kTextFieldRightViewSize
     @brief The height and width of the @c rightView of the password text field.
  */
 static const CGFloat kTextFieldRightViewSize = 36.0f;
+
+/** @var kFooterTextViewHorizontalInset
+    @brief The horizontal inset for @c footerTextView, which should match the iOS standard margin.
+ */
+static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 
 @interface FIRPasswordSignUpViewController () <UITableViewDataSource, UITextFieldDelegate>
 @end
@@ -59,7 +84,9 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
 
 - (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
                          email:(NSString *_Nullable)email {
-  self = [super initWithAuthUI:authUI];
+  self = [super initWithNibName:NSStringFromClass([self class])
+                         bundle:[FIRAuthUIUtils frameworkBundle]
+                         authUI:authUI];
   if (self) {
     _email = [email copy];
 
@@ -71,27 +98,54 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  UIBarButtonItem *nextButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:[FIRAuthUIStrings next]
+  UIBarButtonItem *saveButtonItem =
+      [[UIBarButtonItem alloc] initWithTitle:[FIRAuthUIStrings save]
                                        style:UIBarButtonItemStylePlain
                                       target:self
-                                      action:@selector(next)];
-  self.navigationItem.rightBarButtonItem = nextButtonItem;
+                                      action:@selector(save)];
+  saveButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
+  self.navigationItem.rightBarButtonItem = saveButtonItem;
+}
+
+- (void)viewDidLayoutSubviews {
+  [super viewDidLayoutSubviews];
+
+  NSURL *termsOfServiceURL = self.authUI.termsOfServiceURL;
+  if (!termsOfServiceURL) {
+    self.footerTextView.text = nil;
+    return;
+  }
+
+  NSString *termsOfService = [FIRAuthUIStrings termsOfService];
+  NSString *termsOfServiceNotice =
+      [NSString stringWithFormat:[FIRAuthUIStrings termsOfServiceNotice],
+          [FIRAuthUIStrings next], termsOfService];
+  NSMutableAttributedString *attributedString =
+      [[NSMutableAttributedString alloc] initWithString:termsOfServiceNotice];
+  NSRange termsOfServiceRange = [termsOfServiceNotice rangeOfString:termsOfService];
+  [attributedString addAttribute:NSLinkAttributeName
+                           value:self.authUI.termsOfServiceURL.absoluteString
+                           range:termsOfServiceRange];
+  self.footerTextView.attributedText = attributedString;
+
+  // Adjust the footerTextView to have standard margins.
+  self.footerTextView.textContainer.lineFragmentPadding = 0;
+  _footerTextView.textContainerInset =
+      UIEdgeInsetsMake(0, kFooterTextViewHorizontalInset, 0, kFooterTextViewHorizontalInset);
+  [self.footerTextView sizeToFit];
 }
 
 #pragma mark - Actions
 
-- (void)next {
-  if (!_nameField.text.length) {
-    [self showAlertWithTitle:[FIRAuthUIStrings error]
-                     message:[FIRAuthUIStrings nameMissingError]];
-    return;
-  }
+- (void)save {
+  [self incrementActivity];
 
   [self.auth createUserWithEmail:_emailField.text
                         password:_passwordField.text
                       completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
     if (error) {
+      [self decrementActivity];
+
       [self finishSignUpWithUser:nil error:error];
       return;
     }
@@ -99,6 +153,8 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
     FIRUserProfileChangeRequest *request = [user profileChangeRequest];
     request.displayName = _nameField.text;
     [request commitChangesWithCompletion:^(NSError *_Nullable error) {
+      [self decrementActivity];
+
       if (error) {
         [self finishSignUpWithUser:nil error:error];
         return;
@@ -131,6 +187,17 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
   }];
 }
 
+- (void)textFieldDidChange {
+  [self updateActionButton];
+}
+
+- (void)updateActionButton {
+  BOOL enableActionButton = _emailField.text.length > 0
+                            && _nameField.text.length > 0
+                            && _passwordField.text.length > 0;
+  self.navigationItem.rightBarButtonItem.enabled = enableActionButton;
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -149,6 +216,7 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
   cell.textField.delegate = self;
   if (indexPath.row == 0) {
     cell.label.text = [FIRAuthUIStrings email];
+    cell.accessibilityIdentifier = kEmailSignUpCellAccessibilityID;
     _emailField = cell.textField;
     _emailField.text = _email;
     _emailField.placeholder = [FIRAuthUIStrings enterYourEmail];
@@ -157,21 +225,27 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
     _emailField.keyboardType = UIKeyboardTypeEmailAddress;
   } else if (indexPath.row == 1) {
     cell.label.text = [FIRAuthUIStrings name];
+    cell.accessibilityIdentifier = kNameSignUpCellAccessibilityID;
     _nameField = cell.textField;
-    _nameField.placeholder = [FIRAuthUIStrings enterYourName];
+    _nameField.placeholder = [FIRAuthUIStrings firstAndLastName];
     _nameField.secureTextEntry = NO;
     _nameField.returnKeyType = UIReturnKeyNext;
     _nameField.keyboardType = UIKeyboardTypeDefault;
   } else if (indexPath.row == 2) {
     cell.label.text = [FIRAuthUIStrings password];
+    cell.accessibilityIdentifier = kPasswordSignUpCellAccessibilityID;
     _passwordField = cell.textField;
-    _passwordField.placeholder = [FIRAuthUIStrings enterYourPassword];
+    _passwordField.placeholder = [FIRAuthUIStrings choosePassword];
     _passwordField.secureTextEntry = YES;
     _passwordField.rightView = [self visibilityToggleButtonForPasswordField];
     _passwordField.rightViewMode = UITextFieldViewModeAlways;
     _passwordField.returnKeyType = UIReturnKeyNext;
     _passwordField.keyboardType = UIKeyboardTypeDefault;
   }
+  [cell.textField addTarget:self
+                     action:@selector(textFieldDidChange)
+           forControlEvents:UIControlEventEditingChanged];
+  [self updateActionButton];
   return cell;
 }
 
@@ -183,7 +257,7 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
   } else if (textField == _nameField) {
     [_passwordField becomeFirstResponder];
   } else if (textField == _passwordField) {
-    [self next];
+    [self save];
   }
   return NO;
 }
