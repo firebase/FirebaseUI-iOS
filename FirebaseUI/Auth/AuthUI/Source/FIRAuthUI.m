@@ -19,7 +19,6 @@
 #import <objc/runtime.h>
 
 #import <FirebaseAnalytics/FIRApp.h>
-#import <FirebaseAnalytics/FIRAppAssociationRegistration.h>
 #import <FirebaseAuth/FIRAuth.h>
 #import "FIRAuthPickerViewController.h"
 #import "FIRAuthUI_Internal.h"
@@ -28,6 +27,12 @@
     @brief The key used to encode the app Name for NSCoding.
  */
 static NSString *const kAppNameCodingKey = @"appName";
+
+/** @var kAuthAssociationKey
+    @brief The address of this variable is used as the key for associating FIRAuthUI instances with
+        root FIRAuth objects.
+ */
+static const char kAuthAssociationKey;
 
 @interface FIRAuthUI ()
 
@@ -49,11 +54,16 @@ static NSString *const kAppNameCodingKey = @"appName";
 }
 
 + (nullable FIRAuthUI *)authUIWithAuth:(FIRAuth *)auth {
-  return [FIRAppAssociationRegistration registeredObjectWithHost:auth
-                                                             key:NSStringFromClass(self)
-                                                   creationBlock:^FIRAuthUI *_Nullable() {
-    return [[FIRAuthUI alloc] initWithAuth:auth];
-  }];
+  @synchronized (self) {
+    // Let the FIRAuth instance retain the FIRAuthUI instance.
+    FIRAuthUI *authUI = objc_getAssociatedObject(auth, &kAuthAssociationKey);
+    if (!authUI) {
+      authUI = [[FIRAuthUI alloc] initWithAuth:auth];
+      objc_setAssociatedObject(auth, &kAuthAssociationKey, authUI,
+          OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return authUI;
+  }
 }
 
 - (nullable instancetype)initWithAuth:(FIRAuth *)auth {

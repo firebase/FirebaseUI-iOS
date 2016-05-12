@@ -18,6 +18,7 @@
 #import "FIRAuthProviderUI.h"
 #import "FIRAuthUI.h"
 #import "FIRAuthUIBaseViewController.h"
+#import "FIRAuthUIErrors.h"
 
 /** @var FirebaseAuthUIVersionNumber
     @brief Version number for FirebaseAuthUI.

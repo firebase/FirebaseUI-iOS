@@ -18,7 +18,6 @@
 
 #import <FirebaseAuth/FIRFacebookAuthProvider.h>
 #import <FirebaseAuth/FIRUserInfo.h>
-#import <FirebaseAuth/FIRUser_Internal.h>
 #import "FIRAuthUIErrorUtils.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>

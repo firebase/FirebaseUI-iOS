@@ -18,8 +18,6 @@
 
 #import <CoreText/CoreText.h>
 
-#import <FirebaseAuth/FIRAuth_Internal.h>
-
 @implementation FIRAuthUIUtils
 
 + (NSBundle *)frameworkBundle {

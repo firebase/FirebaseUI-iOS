@@ -33,11 +33,11 @@ typedef NS_ENUM(NSUInteger, FIRAuthUIErrorCode) {
   /** @var FIRAuthUIErrorCodeUserCancelledSignIn
       @brief Indicates the user cancelled a sign-in flow.
    */
-  FIRAuthUIErrorCodeUserCancelledSignIn,
+  FIRAuthUIErrorCodeUserCancelledSignIn = 1,
   /** @var FIRAuthUIErrorCodeProviderError
       @brief Indicates there's an error from the identity provider. The
           @c FIRAuthUIErrorUserInfoProviderIDKey field in the @c NError.userInfo dictionary will
           contain the ID of the identity provider.
    */
-  FIRAuthUIErrorCodeProviderError,
+  FIRAuthUIErrorCodeProviderError = 2,
 };
