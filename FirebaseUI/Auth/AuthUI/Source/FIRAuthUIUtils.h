@@ -33,12 +33,4 @@
  */
 + (UIImage *)imageNamed:(NSString *)name;
 
-/** @fn URLWithString:query:
-    @brief Constructs an URL from a string and additional query parameters.
-    @param baseString The URL string to start with.
-    @param queryParameters The dictionary of additional query parameters.
-    @return The constructed URL.
- */
-+ (NSURL *)URLWithString:(NSString *)urlString queryParameters:(NSDictionary *)queryParameters;
-
 @end

@@ -176,9 +176,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 }
 
 - (nullable id<FIRAuthProviderUI>)bestProviderFromProviderIDs:(NSArray<NSString *> *)providerIDs {
-  NSArray<id<FIRAuthProviderUI>> *signInProviders = self.authUI.signInProviders;
+  NSArray<id<FIRAuthProviderUI>> *providers = self.authUI.providers;
   for (NSString *providerID in providerIDs) {
-    for (id<FIRAuthProviderUI> provider in signInProviders) {
+    for (id<FIRAuthProviderUI> provider in providers) {
       if ([providerID isEqual:provider.providerID]) {
         return provider;
       }

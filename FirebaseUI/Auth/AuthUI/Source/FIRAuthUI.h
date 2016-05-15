@@ -84,10 +84,10 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
  */
 @property(nonatomic, weak, readonly, nullable) FIRAuth *auth;
 
-/** @property signInProviders
+/** @property providers
     @brief The @c FIRAuthProviderUI implementations to use for sign-in.
  */
-@property(nonatomic, copy) NSArray<id<FIRAuthProviderUI>> *signInProviders;
+@property(nonatomic, copy) NSArray<id<FIRAuthProviderUI>> *providers;
 
 /** @property signInWithEmailHidden
     @brief Whether to hide the "Sign in with email" option, defaults to NO.
@@ -102,11 +102,11 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
  */
 @property(nonatomic, strong, nullable) NSBundle *customStringsBundle;
 
-/** @property termsOfServiceURL
+/** @property TOSURL
     @brief The URL of your app's Terms of Service. If not nil, a Terms of Service notice is
         displayed on the email/password account creation screen.
  */
-@property(nonatomic, copy, nullable) NSURL *termsOfServiceURL;
+@property(nonatomic, copy, nullable) NSURL *TOSURL;
 
 /** @property delegate
     @brief A delegate that receives callbacks or provides custom UI for @c FIRAuthUI.

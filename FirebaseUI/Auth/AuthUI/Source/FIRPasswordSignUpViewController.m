@@ -110,7 +110,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 - (void)viewDidLayoutSubviews {
   [super viewDidLayoutSubviews];
 
-  NSURL *termsOfServiceURL = self.authUI.termsOfServiceURL;
+  NSURL *termsOfServiceURL = self.authUI.TOSURL;
   if (!termsOfServiceURL) {
     self.footerTextView.text = nil;
     return;
@@ -124,7 +124,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
       [[NSMutableAttributedString alloc] initWithString:termsOfServiceNotice];
   NSRange termsOfServiceRange = [termsOfServiceNotice rangeOfString:termsOfService];
   [attributedString addAttribute:NSLinkAttributeName
-                           value:self.authUI.termsOfServiceURL.absoluteString
+                           value:self.authUI.TOSURL.absoluteString
                            range:termsOfServiceRange];
   self.footerTextView.attributedText = attributedString;
 

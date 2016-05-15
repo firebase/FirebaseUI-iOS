@@ -81,7 +81,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
                                                     action:@selector(cancel)];
   self.navigationItem.leftBarButtonItem = cancelBarButton;
 
-  NSInteger numberOfButtons = self.authUI.signInProviders.count;
+  NSInteger numberOfButtons = self.authUI.providers.count;
   BOOL showEmailButton = !self.authUI.signInWithEmailHidden;
   if (showEmailButton) {
     ++numberOfButtons;
@@ -93,7 +93,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
   [self.view addSubview:_buttonContainerView];
 
   CGRect buttonFrame = CGRectMake(0, 0, kSignInButtonWidth, kSignInButtonHeight);
-  for (id<FIRAuthProviderUI> providerUI in self.authUI.signInProviders) {
+  for (id<FIRAuthProviderUI> providerUI in self.authUI.providers) {
     UIButton *providerButton =
         [[FIRAuthUISignInButton alloc] initWithFrame:buttonFrame providerUI:providerUI];
     [providerButton addTarget:self
@@ -283,8 +283,8 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 #pragma mark - Utilities
 
 - (nullable id<FIRAuthProviderUI>)providerWithID:(NSString *)providerID {
-  NSArray<id<FIRAuthProviderUI>> *signInProviders = self.authUI.signInProviders;
-  for (id<FIRAuthProviderUI> provider in signInProviders) {
+  NSArray<id<FIRAuthProviderUI>> *providers = self.authUI.providers;
+  for (id<FIRAuthProviderUI> provider in providers) {
     if ([provider.providerID isEqual:providerID]) {
       return provider;
     }

@@ -16,8 +16,6 @@
 
 #import "FIRAuthUIUtils.h"
 
-#import <CoreText/CoreText.h>
-
 @implementation FIRAuthUIUtils
 
 + (NSBundle *)frameworkBundle {
@@ -38,62 +36,6 @@
 + (UIImage *)imageNamed:(NSString *)name {
   NSString *path = [[[self class] frameworkBundle] pathForResource:name ofType:@"png"];
   return [UIImage imageWithContentsOfFile:path];
-}
-
-+ (NSURL *)URLWithString:(NSString *)urlString queryParameters:(NSDictionary *)queryParameters {
-  if ([urlString length] == 0) return nil;
-
-  NSString *fullURLString;
-  if ([queryParameters count] > 0) {
-    NSMutableArray *queryItems = [NSMutableArray arrayWithCapacity:[queryParameters count]];
-
-    // sort the custom parameter keys so that we have deterministic parameter
-    // order for unit tests
-    NSArray *queryKeys = [queryParameters allKeys];
-    NSArray *sortedQueryKeys =
-        [queryKeys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-
-    for (NSString *paramKey in sortedQueryKeys) {
-      NSString *paramValue = [queryParameters valueForKey:paramKey];
-
-      NSString *paramItem = [NSString stringWithFormat:@"%@=%@",
-                             [self stringByURLEncodingStringParameter:paramKey],
-                             [self stringByURLEncodingStringParameter:paramValue]];
-
-      [queryItems addObject:paramItem];
-    }
-
-    NSString *paramStr = [queryItems componentsJoinedByString:@"&"];
-
-    BOOL hasQMark = ([urlString rangeOfString:@"?"].location == NSNotFound);
-    char joiner = hasQMark ? '?' : '&';
-    fullURLString = [NSString stringWithFormat:@"%@%c%@",
-                     urlString, joiner, paramStr];
-  } else {
-    fullURLString = urlString;
-  }
-  NSURL *result = [NSURL URLWithString:fullURLString];
-  return result;
-}
-
-+ (NSString *)stringByURLEncodingStringParameter:(NSString *)originalString {
-  // For parameters, we'll explicitly leave spaces unescaped now, and replace
-  // them with +'s
-  NSString *const kForceEscape = @"!*'();:@&=+$,/?%#[]";
-  NSString *const kLeaveUnescaped = @" ";
-
-  NSMutableCharacterSet *cs = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
-  [cs removeCharactersInString:kForceEscape];
-  [cs addCharactersInString:kLeaveUnescaped];
-
-  NSString *escapedStr = [originalString stringByAddingPercentEncodingWithAllowedCharacters:cs];
-  NSString *resultStr = originalString;
-  if (escapedStr) {
-    // replace spaces with plusses
-    resultStr = [escapedStr stringByReplacingOccurrencesOfString:@" "
-                                                      withString:@"+"];
-  }
-  return resultStr;
 }
 
 @end

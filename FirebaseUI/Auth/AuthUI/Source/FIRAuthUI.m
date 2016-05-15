@@ -77,7 +77,7 @@ static const char kAuthAssociationKey;
 - (BOOL)handleOpenURL:(NSURL *)URL
     sourceApplication:(NSString *)sourceApplication {
   // Complete IDP-based sign-in flow.
-  for (id<FIRAuthProviderUI> provider in _signInProviders) {
+  for (id<FIRAuthProviderUI> provider in _providers) {
     if ([provider handleOpenURL:URL sourceApplication:sourceApplication]) {
       return YES;
     }
