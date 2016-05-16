@@ -9,7 +9,7 @@ If not, please feel free to fill in the following info so we can help faster!
 ### Details:
   1. Objective-C or Swift:
   2. iOS Version (7-9):
-  3. CocoaPods Version:
+  3. CocoaPods Version (FirebaseUI only officially supports CocoaPods <= 0.39, please make sure this repro's using 0.39 or below):
 
 ### Explanation of your issue
 ...
