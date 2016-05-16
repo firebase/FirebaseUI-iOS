@@ -19,13 +19,3 @@
 #import "FIRAuthUI.h"
 #import "FIRAuthUIBaseViewController.h"
 #import "FIRAuthUIErrors.h"
-
-/** @var FirebaseAuthUIVersionNumber
-    @brief Version number for FirebaseAuthUI.
- */
-extern const double FirebaseAuthUIVersionNumber;
-
-/** @var FirebaseAuthUIVersionString
-    @brief Version string for FirebaseAuthUI.
- */
-extern const unsigned char *const FirebaseAuthUIVersionString;
