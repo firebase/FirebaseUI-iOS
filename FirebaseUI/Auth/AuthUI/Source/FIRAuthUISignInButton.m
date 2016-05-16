@@ -71,6 +71,8 @@ static const CGFloat kFontSize = 12.0f;
   self.layer.shadowRadius = kDropShadowRadius;
   self.layer.shadowOffset = CGSizeMake(0, kDropShadowYOffset);
 
+  self.adjustsImageWhenHighlighted = NO;
+
   return self;
 }
 

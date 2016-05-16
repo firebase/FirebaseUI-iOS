@@ -30,11 +30,11 @@ static NSString *const kProviderUsedPreviouslyMessage = @"ProviderUsedPreviously
 static NSString *const kSignInTitle = @"SignInTitle";
 static NSString *const kEnterYourPassword = @"EnterYourPassword";
 static NSString *const kWrongPasswordError = @"WrongPasswordError";
-static NSString *const kAccountDoesNotExistError = @"AccountDoesNotExistError";
+static NSString *const kSignInTooManyTimesError = @"SignInTooManyTimesError";
+static NSString *const kUserNotFoundError = @"UserNotFoundError";
 static NSString *const kAccountDisabledError = @"AccountDisabledError";
 static NSString *const kPasswordRecoveryTitle = @"PasswordRecoveryTitle";
 static NSString *const kPasswordRecoveryMessage = @"PasswordRecoveryMessage";
-static NSString *const kPasswordRecoveryError = @"PasswordRecoveryError";
 static NSString *const kPasswordRecoveryEmailSentTitle = @"PasswordRecoveryEmailSentTitle";
 static NSString *const kPasswordRecoveryEmailSentMessage = @"PasswordRecoveryEmailSentMessage";
 static NSString *const kSignUpTitle = @"SignUpTitle";
@@ -44,14 +44,14 @@ static NSString *const kTermsOfServiceNotice = @"TermsOfServiceNotice";
 static NSString *const kTermsOfService = @"TermsOfService";
 static NSString *const kEmailAlreadyInUseError = @"EmailAlreadyInUseError";
 static NSString *const kWeakPasswordError = @"WeakPasswordError";
+static NSString *const kSignUpTooManyTimesError = @"SignUpTooManyTimesError";
 static NSString *const kPasswordVerificationMessage = @"PasswordVerificationMessage";
-static NSString *const kError = @"Error";
-static NSString *const kInfo = @"Info";
 static NSString *const kOK = @"OK";
 static NSString *const kCancel = @"Cancel";
 static NSString *const kBack = @"Back";
 static NSString *const kNext = @"Next";
 static NSString *const kSave = @"Save";
+static NSString *const kSend = @"Send";
 static NSString *const kEmail = @"Email";
 static NSString *const kPassword = @"Password";
 static NSString *const kName = @"Name";
@@ -128,8 +128,12 @@ static NSString *const kTableName = @"FirebaseAuthUI";
   return [self localizedStringForKey:kWrongPasswordError];
 }
 
-+ (NSString *)accountDoesNotExistError {
-  return [self localizedStringForKey:kAccountDoesNotExistError];
++ (NSString *)signInTooManyTimesError {
+  return [self localizedStringForKey:kSignInTooManyTimesError];
+}
+
++ (NSString *)userNotFoundError {
+  return [self localizedStringForKey:kUserNotFoundError];
 }
 
 + (NSString *)accountDisabledError {
@@ -142,10 +146,6 @@ static NSString *const kTableName = @"FirebaseAuthUI";
 
 + (NSString *)passwordRecoveryMessage {
   return [self localizedStringForKey:kPasswordRecoveryMessage];
-}
-
-+ (NSString *)passwordRecoveryError {
-  return [self localizedStringForKey:kPasswordRecoveryError];
 }
 
 + (NSString *)passwordRecoveryEmailSentTitle {
@@ -184,16 +184,12 @@ static NSString *const kTableName = @"FirebaseAuthUI";
   return [self localizedStringForKey:kWeakPasswordError];
 }
 
++ (NSString *)signUpTooManyTimesError {
+  return [self localizedStringForKey:kSignUpTooManyTimesError];
+}
+
 + (NSString *)passwordVerificationMessage {
   return [self localizedStringForKey:kPasswordVerificationMessage];
-}
-
-+ (NSString *)error {
-  return [self localizedStringForKey:kError];
-}
-
-+ (NSString *)info {
-  return [self localizedStringForKey:kInfo];
 }
 
 + (NSString *)OK {
@@ -214,6 +210,10 @@ static NSString *const kTableName = @"FirebaseAuthUI";
 
 + (NSString *)save {
   return [self localizedStringForKey:kSave];
+}
+
++ (NSString *)send {
+  return [self localizedStringForKey:kSend];
 }
 
 + (NSString *)email {

@@ -20,6 +20,7 @@
 #import "FIRAuthUIStrings.h"
 #import "FIRAuthUITableViewCell.h"
 #import "FIRAuthUIUtils.h"
+#import "FIRAuthUI_Internal.h"
 
 /** @var kCellReuseIdentifier
     @brief The reuse identifier for table view cell.
@@ -62,12 +63,12 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  UIBarButtonItem *nextButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:[FIRAuthUIStrings next]
+  UIBarButtonItem *sendButtonItem =
+      [[UIBarButtonItem alloc] initWithTitle:[FIRAuthUIStrings send]
                                        style:UIBarButtonItemStylePlain
                                       target:self
-                                      action:@selector(next)];
-  self.navigationItem.rightBarButtonItem = nextButtonItem;
+                                      action:@selector(send)];
+  self.navigationItem.rightBarButtonItem = sendButtonItem;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -84,10 +85,10 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 
 #pragma mark - Actions
 
-- (void)next {
+- (void)send {
   NSString *email = _emailField.text;
   if (![[self class] isValidEmail:email]) {
-    [self showAlertWithTitle:[FIRAuthUIStrings error] message:[FIRAuthUIStrings invalidEmailError]];
+    [self showAlertWithMessage:[FIRAuthUIStrings invalidEmailError]];
     return;
   }
 
@@ -101,15 +102,20 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
       [self decrementActivity];
 
       if (error) {
-        [self showAlertWithTitle:[FIRAuthUIStrings error]
-                         message:[FIRAuthUIStrings passwordRecoveryError]];
+        if (error.code == FIRAuthErrorCodeUserNotFound) {
+          [self showAlertWithMessage:[FIRAuthUIStrings userNotFoundError]];
+          return;
+        }
+
+        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+          [self.authUI invokeResultCallbackWithUser:nil error:error];
+        }];
         return;
       }
 
       NSString *message =
           [NSString stringWithFormat:[FIRAuthUIStrings passwordRecoveryEmailSentMessage], email];
-      [self showAlertWithTitle:[FIRAuthUIStrings passwordRecoveryEmailSentTitle]
-                       message:message];
+      [self showAlertWithMessage:message];
     });
   }];
 }
@@ -155,7 +161,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
   if (textField == _emailField) {
-    [self next];
+    [self send];
   }
   return NO;
 }

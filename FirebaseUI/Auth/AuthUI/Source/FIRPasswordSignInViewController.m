@@ -76,7 +76,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
 - (void)signIn {
   if (![[self class] isValidEmail:_emailField.text]) {
-    [self showAlertWithTitle:[FIRAuthUIStrings error] message:[FIRAuthUIStrings invalidEmailError]];
+    [self showAlertWithMessage:[FIRAuthUIStrings invalidEmailError]];
     return;
   }
 
@@ -90,16 +90,16 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
     if (error) {
       switch (error.code) {
         case FIRAuthErrorCodeWrongPassword:
-          [self showAlertWithTitle:[FIRAuthUIStrings error]
-                           message:[FIRAuthUIStrings wrongPasswordError]];
+          [self showAlertWithMessage:[FIRAuthUIStrings wrongPasswordError]];
           return;
         case FIRAuthErrorCodeUserNotFound:
-          [self showAlertWithTitle:[FIRAuthUIStrings error]
-                           message:[FIRAuthUIStrings accountDoesNotExistError]];
+          [self showAlertWithMessage:[FIRAuthUIStrings userNotFoundError]];
           return;
         case FIRAuthErrorCodeUserDisabled:
-          [self showAlertWithTitle:[FIRAuthUIStrings error]
-                           message:[FIRAuthUIStrings accountDisabledError]];
+          [self showAlertWithMessage:[FIRAuthUIStrings accountDisabledError]];
+          return;
+        case FIRAuthErrorCodeTooManyRequests:
+          [self showAlertWithMessage:[FIRAuthUIStrings signInTooManyTimesError]];
           return;
       }
     }

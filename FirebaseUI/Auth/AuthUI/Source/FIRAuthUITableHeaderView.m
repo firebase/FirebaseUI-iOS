@@ -16,10 +16,15 @@
 
 #import "FIRAuthUITableHeaderView.h"
 
-/** @var kLabelMargin
-    @brief The margin around any @c UILabel.
+/** @var kLabelHorizontalMargin
+    @brief The horizontal margin around any @c UILabel.
  */
-static const CGFloat kLabelMargin = 8.0f;
+static const CGFloat kLabelHorizontalMargin = 8.0f;
+
+/** @var kLabelVerticalMargin
+    @brief The veritcal margin around any @c UILabel.
+ */
+static const CGFloat kLabelVerticalMargin = 16.0f;
 
 @implementation FIRAuthUITableHeaderView
 
@@ -27,7 +32,7 @@ static const CGFloat kLabelMargin = 8.0f;
   self = [super initWithFrame:frame];
   if (self) {
     _titleLabel = [[UILabel alloc] init];
-    _titleLabel.font = [UIFont boldSystemFontOfSize:14.0f];
+    _titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
     [self addSubview:_titleLabel];
 
     _detailLabel = [[UILabel alloc] init];
@@ -43,21 +48,21 @@ static const CGFloat kLabelMargin = 8.0f;
 
   [_titleLabel sizeToFit];
 
-  CGRect contentRect = CGRectInset(self.bounds, kLabelMargin, kLabelMargin);
+  CGRect contentRect = CGRectInset(self.bounds, kLabelHorizontalMargin, kLabelVerticalMargin);
   CGRect titleLabelFrame, detailLabelFrame, space;
   CGRectDivide(contentRect, &titleLabelFrame, &contentRect,
                CGRectGetHeight(_titleLabel.frame), CGRectMinYEdge);
-  CGRectDivide(contentRect, &space, &detailLabelFrame, kLabelMargin, CGRectMinYEdge);
+  CGRectDivide(contentRect, &space, &detailLabelFrame, kLabelVerticalMargin, CGRectMinYEdge);
 
   _titleLabel.frame = titleLabelFrame;
   _detailLabel.frame = detailLabelFrame;
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
-  CGFloat labelWidth = size.width - kLabelMargin * 2;
+  CGFloat labelWidth = size.width - kLabelHorizontalMargin * 2;
   CGFloat titleLabelHeight = [[self class] sizeForLabel:_titleLabel maxWidth:labelWidth].height;
   CGFloat detailLabelHeight = [[self class] sizeForLabel:_detailLabel maxWidth:labelWidth].height;
-  CGFloat height = titleLabelHeight + detailLabelHeight + kLabelMargin * 3;
+  CGFloat height = titleLabelHeight + detailLabelHeight + kLabelVerticalMargin * 3;
   return CGSizeMake(size.width, height);
 }
 

@@ -108,8 +108,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
     if (error) {
       [self decrementActivity];
 
-      [self showAlertWithTitle:[FIRAuthUIStrings error]
-                       message:[FIRAuthUIStrings wrongPasswordError]];
+      [self showAlertWithMessage:[FIRAuthUIStrings wrongPasswordError]];
       return;
     }
 

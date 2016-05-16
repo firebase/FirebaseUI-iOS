@@ -168,16 +168,16 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   if (error) {
     switch (error.code) {
       case FIRAuthErrorCodeEmailAlreadyInUse:
-        [self showAlertWithTitle:[FIRAuthUIStrings error]
-                         message:[FIRAuthUIStrings emailAlreadyInUseError]];
+        [self showAlertWithMessage:[FIRAuthUIStrings emailAlreadyInUseError]];
         return;
       case FIRAuthErrorCodeInvalidEmail:
-        [self showAlertWithTitle:[FIRAuthUIStrings error]
-                         message:[FIRAuthUIStrings invalidEmailError]];
+        [self showAlertWithMessage:[FIRAuthUIStrings invalidEmailError]];
         return;
       case FIRAuthErrorCodeWeakPassword:
-        [self showAlertWithTitle:[FIRAuthUIStrings error]
-                         message:[FIRAuthUIStrings weakPasswordError]];
+        [self showAlertWithMessage:[FIRAuthUIStrings weakPasswordError]];
+        return;
+      case FIRAuthErrorCodeTooManyRequests:
+        [self showAlertWithMessage:[FIRAuthUIStrings signUpTooManyTimesError]];
         return;
     }
   }

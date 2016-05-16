@@ -82,11 +82,17 @@
  */
 + (NSString *)wrongPasswordError;
 
-/** @fn accountDoesNotExistError
-    @brief Error message displayed when the account does not exist.
+/** @fn signInTooManyTimesError
+    @brief Error message displayed when the account is disabled.
     @return Localized string.
  */
-+ (NSString *)accountDoesNotExistError;
++ (NSString *)signInTooManyTimesError;
+
+/** @fn userNotFoundError
+    @brief Error message displayed when there's no account matching the email address.
+    @return Localized string.
+ */
++ (NSString *)userNotFoundError;
 
 /** @fn accountDisabledError
     @brief The user account has been disabled by an administrator.
@@ -105,12 +111,6 @@
     @return Localized string.
  */
 + (NSString *)passwordRecoveryMessage;
-
-/** @fn passwordRecoveryError
-    @brief Error message displayed when failed to recover password for an account.
-    @return Localized string.
- */
-+ (NSString *)passwordRecoveryError;
 
 /** @fn passwordRecoveryEmailSentTitle
     @brief Title of a message displayed when the email for password recovery has been sent.
@@ -166,24 +166,18 @@
  */
 + (NSString *)weakPasswordError;
 
+/** @fn signUpTooManyTimesError
+    @brief Error message displayed when many accounts have been created from same IP address.
+    @return Localized string.
+ */
++ (NSString *)signUpTooManyTimesError;
+
 /** @fn passwordVerificationMessage
     @brief Message to explain to the user why password is needed for an account with this email
         address.
     @return Localized string.
  */
 + (NSString *)passwordVerificationMessage;
-
-/** @fn error
-    @brief Error alert title.
-    @return Localized string.
- */
-+ (NSString *)error;
-
-/** @fn info
-    @brief Informational alert title.
-    @return Localized string.
- */
-+ (NSString *)info;
 
 /** @fn OK
     @brief OK button title.
@@ -214,6 +208,12 @@
     @return Localized string.
  */
 + (NSString *)save;
+
+/** @fn send
+    @brief Send button title.
+    @return Localized string.
+ */
++ (NSString *)send;
 
 /** @fn email
     @brief Label next to a email text field.

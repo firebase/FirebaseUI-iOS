@@ -185,10 +185,10 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
   return [emailPredicate evaluateWithObject:email];
 }
 
-- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+- (void)showAlertWithMessage:(NSString *)message {
   if ([UIAlertController class]) {
     UIAlertController *alertController =
-        [UIAlertController alertControllerWithTitle:title
+        [UIAlertController alertControllerWithTitle:nil
                                             message:message
                                      preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction =
@@ -199,7 +199,7 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
     [self presentViewController:alertController animated:YES completion:nil];
   } else {
     UIAlertView *alert =
-        [[UIAlertView alloc] initWithTitle:title
+        [[UIAlertView alloc] initWithTitle:nil
                                    message:message
                                   delegate:nil
                          cancelButtonTitle:nil

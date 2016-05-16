@@ -196,8 +196,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
     if (error) {
       if (error.code == FIRAuthErrorCodeInvalidEmail) {
         // This should never happen because the email address comes from the backend.
-        [self showAlertWithTitle:[FIRAuthUIStrings error]
-                         message:[FIRAuthUIStrings invalidEmailError]];
+        [self showAlertWithMessage:[FIRAuthUIStrings invalidEmailError]];
       } else {
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
           [self.authUI invokeResultCallbackWithUser:nil error:error];
@@ -207,8 +206,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
     }
     if (!providers.count) {
       // This should never happen because the user must be registered.
-      [self showAlertWithTitle:[FIRAuthUIStrings error]
-                       message:[FIRAuthUIStrings cannotAuthenticateError]];
+      [self showAlertWithMessage:[FIRAuthUIStrings cannotAuthenticateError]];
       return;
     }
     NSString *bestProviderID = providers[0];
@@ -224,8 +222,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
     id<FIRAuthProviderUI> bestProvider = [self providerWithID:bestProviderID];
     if (!bestProvider) {
       // Unsupported provider.
-      [self showAlertWithTitle:[FIRAuthUIStrings error]
-                       message:[FIRAuthUIStrings cannotAuthenticateError]];
+      [self showAlertWithMessage:[FIRAuthUIStrings cannotAuthenticateError]];
       return;
     }
 

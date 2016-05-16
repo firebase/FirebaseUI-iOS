@@ -84,7 +84,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 - (void)next {
   if (![[self class] isValidEmail:_emailField.text]) {
-    [self showAlertWithTitle:[FIRAuthUIStrings error] message:[FIRAuthUIStrings invalidEmailError]];
+    [self showAlertWithMessage:[FIRAuthUIStrings invalidEmailError]];
     return;
   }
 
@@ -97,8 +97,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
     if (error) {
       if (error.code == FIRAuthErrorCodeInvalidEmail) {
-        [self showAlertWithTitle:[FIRAuthUIStrings error]
-                         message:[FIRAuthUIStrings invalidEmailError]];
+        [self showAlertWithMessage:[FIRAuthUIStrings invalidEmailError]];
       } else {
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
           [self.authUI invokeResultCallbackWithUser:nil error:error];
@@ -123,8 +122,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     } else {
       if (providers.count) {
         // There's some unsupported providers, surface the error to the user.
-        [self showAlertWithTitle:[FIRAuthUIStrings error]
-                         message:[FIRAuthUIStrings cannotAuthenticateError]];
+        [self showAlertWithMessage:[FIRAuthUIStrings cannotAuthenticateError]];
       } else {
         // New user.
         UIViewController *controller =

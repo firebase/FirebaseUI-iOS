@@ -8,10 +8,10 @@
 "EnterYourEmail" = "Enter your email";
 
 /* Error message displayed when user enters an invalid email address. */
-"InvalidEmailError" = "Please enter a valid email address.";
+"InvalidEmailError" = "That email address isn't correct.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "Sorry, we cannot authenticate this account.";
+"CannotAuthenticateError" = "This type of account isn't supported by this app";
 
 /* Title of an alert shown to an existing user coming back to the app. */
 "ExistingAccountTitle" = "You already have an account";
@@ -28,20 +28,20 @@
 /* Error message displayed when the email and password don't match. */
 "WrongPasswordError" = "The email and password you entered don't match.";
 
-/* Error message displayed when the account does not exist. */
-"AccountDoesNotExistError" = "There is no user record corresponding to this identifier. The user may have been deleted.";
+/* Error message displayed when there's no account matching the email address. */
+"UserNotFoundError" = "That email address doesn’t match an existing account.";
 
 /* Error message displayed when the account is disabled. */
-"AccountDisabledError" = "The user account has been disabled by an administrator.";
+"AccountDisabledError" = "That email address is for an account that has been disabled.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
 
 /* Title for password recovery screen. */
 "PasswordRecoveryTitle" = "Recover password";
 
 /* Explanation on how the password of an account can be recovered. */
 "PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
-
-/* Error message displayed when failed to recover password for an account. */
-"PasswordRecoveryError" = "Failed to reset password, please check your email address and try again.";
 
 /* Title of a message displayed when the email for password recovery has been sent. */
 "PasswordRecoveryEmailSentTitle" = "Check your email";
@@ -68,16 +68,13 @@
 "EmailAlreadyInUseError" = "The email address is already in use by another account.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Short passwords are easy to guess. Try one with at least 6 characters.";
+"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password.";
-
-/* Error alert title. */
-"Error" = "Error";
-
-/* Informational alert title. */
-"Info" = "Info";
+"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
 
 /* OK button title. */
 "OK" = "OK";
@@ -93,6 +90,9 @@
 
 /* Save button title. */
 "Save" = "Save";
+
+/* Save button title. */
+"Send" = "Send";
 
 /* Label next to a email text field. */
 "Email" = "Email";

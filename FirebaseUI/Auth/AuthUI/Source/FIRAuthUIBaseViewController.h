@@ -80,13 +80,12 @@ typedef void (^FIRAuthUIAlertActionHandler)(void);
  */
 + (BOOL)isValidEmail:(NSString *)email;
 
-/** @fn showAlertWithTitle:message:
+/** @fn showAlertWithMessage:
     @brief Displays an alert view with given title and message on top of the current view
         controller.
-    @param title The title of the alert.
     @param message The message of the alert.
  */
-- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message;
+- (void)showAlertWithMessage:(NSString *)message;
 
 /** @fn showSignInAlertWithEmail:provider:handler:
     @brief Displays an alert to conform with user whether she wants to proceed with the provider.
