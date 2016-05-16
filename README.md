@@ -8,8 +8,7 @@ A compatible FirebaseUI client is also available for [Android](https://github.co
 
 ## Installing FirebaseUI for iOS
 
-FirebaseUI supports iOS 8.0+. We recommend using [CocoaPods](http://cocoapods.org/pods/FirebaseUI), add
-the following to your `Podfile`:
+FirebaseUI supports iOS 8.0+. We recommend using [CocoaPods](http://cocoapods.org/pods/FirebaseUI) 0.39 (as we don't fully support 1.0 yet). Add the following to your `Podfile`:
 
 ```
 pod 'FirebaseUI', '~> 0.3'       # Pull in all Firebase UI features
