@@ -15,13 +15,3 @@
 //
 
 #import "FIRGoogleAuthUI.h"
-
-/** @var FirebaseGoogleAuthUIVersionNumber
-    @brief Version number for FirebaseGoogleAuthUI.
- */
-extern const double FirebaseGoogleAuthUIVersionNumber;
-
-/** @var FirebaseGoogleAuthUIVersionString
-    @brief Version string for FirebaseGoogleAuthUI.
- */
-extern const unsigned char *const FirebaseGoogleAuthUIVersionString;

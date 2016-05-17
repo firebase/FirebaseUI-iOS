@@ -15,13 +15,3 @@
 //
 
 #import "FIRFacebookAuthUI.h"
-
-/** @var FirebaseFacebookAuthUINumber
-    @brief Version number for FirebaseFacebookAuthUI.
- */
-extern const double FirebaseFacebookAuthUIVersionNumber;
-
-/** @var FirebaseFacebookAuthUIVersionString
-    @brief Version string for FirebaseFacebookAuthProvider.
- */
-extern const unsigned char *const FirebaseFacebookAuthUIVersionString;
