@@ -1,0 +1,10 @@
+framework module FirebaseDatabaseUI {
+  umbrella header "FirebaseDatabaseUI.h"
+
+  export *
+  module * {export * }
+
+  use FirebaseAnalytics
+
+  use FirebaseDatabase
+}
