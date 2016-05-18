@@ -19,9 +19,10 @@
 // clang-format on
 
 #import <Foundation/Foundation.h>
-#import <FirebaseUI/XCodeMacros.h>
 
 #import "FirebaseArrayDelegate.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class FIRDatabaseQuery;
 @class FIRDatabaseReference;
@@ -48,7 +49,7 @@
 /**
  * The delegate object that array changes are surfaced to.
  */
-@property(strong, nonatomic) NSMutableArray __GENERIC(FIRDataSnapshot *) * snapshots;
+@property(strong, nonatomic) NSMutableArray<FIRDataSnapshot *> * snapshots;
 
 #pragma mark -
 #pragma mark Initializer methods
@@ -118,3 +119,5 @@
 - (NSUInteger)indexForKey:(NSString *)key;
 
 @end
+
+NS_ASSUME_NONNULL_END

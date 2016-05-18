@@ -289,8 +289,8 @@
 }
 
 - (void)populateCellWithBlock:
-    (__NON_NULL void (^)(__KINDOF(UICollectionViewCell)__NON_NULL_PTR cell,
-                         __KINDOF(NSObject)__NON_NULL_PTR object))callback {
+    (void (^)(__kindof UICollectionViewCell *cell,
+                         __kindof NSObject *object))callback {
   self.populateCell = callback;
 }
 

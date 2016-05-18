@@ -19,9 +19,10 @@
 // clang-format on
 
 #import <UIKit/UIKit.h>
-#import <FirebaseUI/XCodeMacros.h>
 
 #import "FirebaseDataSource.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class FIRDatabaseReference;
 
@@ -51,18 +52,18 @@
  * Message will be
  * returned instead of type FIRDataSnapshot.
  */
-@property(strong, nonatomic, __NON_NULL) Class modelClass;
+@property(strong, nonatomic) Class modelClass;
 
 /**
  * The reuse identifier for cells in the UITableView.
  */
-@property(strong, nonatomic, __NON_NULL) NSString *reuseIdentifier;
+@property(strong, nonatomic) NSString *reuseIdentifier;
 
 /**
  * The UITableView instance that operations (inserts, removals, moves, etc.) are
  * performed against.
  */
-@property(strong, nonatomic, __NON_NULL) UITableView *tableView;
+@property(strong, nonatomic) UITableView *tableView;
 
 /**
  * Property to keep track of prototype cell use, to not register a class for the
@@ -75,8 +76,8 @@
  * The callback to populate a subclass of UITableViewCell with an object
  * provided by the datasource.
  */
-@property(strong, nonatomic, __NON_NULL) void (^populateCell)
-    (__KINDOF(UITableViewCell) __NON_NULL_PTR cell, __KINDOF(NSObject) __NON_NULL_PTR object);
+@property(strong, nonatomic) void (^populateCell)
+    (__kindof UITableViewCell *cell, __kindof NSObject  *object);
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates
@@ -89,9 +90,9 @@
  * UITableViewCells with
  * FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
-                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithRef:(FIRDatabaseReference *)ref
+                   cellReuseIdentifier:(NSString *)identifier
+                                  view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates
@@ -106,9 +107,9 @@
  * UITableViewCells with
  * FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
-              prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithRef:(FIRDatabaseReference *)ref
+              prototypeReuseIdentifier:(NSString *)identifier
+                                  view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom
@@ -124,10 +125,10 @@
  * subclass of
  * UITableViewCell with FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
-                             cellClass:(__NULLABLE Class)cell
-                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithRef:(FIRDatabaseReference *)ref
+                             cellClass:(nullable Class)cell
+                   cellReuseIdentifier:(NSString *)identifier
+                                  view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom
@@ -142,10 +143,10 @@
  * xib with
  * FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
-                              nibNamed:(__NON_NULL NSString *)nibName
-                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithRef:(FIRDatabaseReference *)ref
+                              nibNamed:(NSString *)nibName
+                   cellReuseIdentifier:(NSString *)identifier
+                                  view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates
@@ -160,10 +161,10 @@
  * UITableViewCells with a custom
  * model class
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
-                            modelClass:(__NULLABLE Class)model
-                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithRef:(FIRDatabaseReference *)ref
+                            modelClass:(nullable Class)model
+                   cellReuseIdentifier:(NSString *)identifier
+                                  view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates
@@ -180,10 +181,10 @@
  * UITableViewCells with a custom
  * model class
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
-                            modelClass:(__NULLABLE Class)model
-              prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithRef:(FIRDatabaseReference *)ref
+                            modelClass:(nullable Class)model
+              prototypeReuseIdentifier:(NSString *)identifier
+                                  view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom
@@ -201,11 +202,11 @@
  * subclass of
  * UITableViewCell with a custom model class
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
-                            modelClass:(__NULLABLE Class)model
-                             cellClass:(__NULLABLE Class)cell
-                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithRef:(FIRDatabaseReference *)ref
+                            modelClass:(nullable Class)model
+                             cellClass:(nullable Class)cell
+                   cellReuseIdentifier:(NSString *)identifier
+                                  view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom
@@ -222,11 +223,11 @@
  * xib with a custom
  * model class
  */
-- (__NON_NULL instancetype)initWithRef:(__NON_NULL FIRDatabaseReference *)ref
-                            modelClass:(__NULLABLE Class)model
-                              nibNamed:(__NON_NULL NSString *)nibName
-                   cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                  view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithRef:(FIRDatabaseReference *)ref
+                            modelClass:(nullable Class)model
+                              nibNamed:(NSString *)nibName
+                   cellReuseIdentifier:(NSString *)identifier
+                                  view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates
@@ -239,9 +240,9 @@
  * UITableViewCells with
  * FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
-                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                    view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
+                     cellReuseIdentifier:(NSString *)identifier
+                                    view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates
@@ -256,9 +257,9 @@
  * UITableViewCells with
  * FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
-                prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
-                                    view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
+                prototypeReuseIdentifier:(NSString *)identifier
+                                    view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom
@@ -274,10 +275,10 @@
  * subclass of
  * UITableViewCell with FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
-                               cellClass:(__NULLABLE Class)cell
-                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                    view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
+                               cellClass:(nullable Class)cell
+                     cellReuseIdentifier:(NSString *)identifier
+                                    view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom
@@ -292,10 +293,10 @@
  * xib with
  * FIRDataSnapshots
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
-                                nibNamed:(__NON_NULL NSString *)nibName
-                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                    view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
+                                nibNamed:(NSString *)nibName
+                     cellReuseIdentifier:(NSString *)identifier
+                                    view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates
@@ -310,10 +311,10 @@
  * UITableViewCells with a custom
  * model class
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
-                              modelClass:(__NULLABLE Class)model
-                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                    view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
+                              modelClass:(nullable Class)model
+                     cellReuseIdentifier:(NSString *)identifier
+                                    view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates
@@ -330,10 +331,10 @@
  * UITableViewCells with a custom
  * model class
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
-                              modelClass:(__NULLABLE Class)model
-                prototypeReuseIdentifier:(__NON_NULL NSString *)identifier
-                                    view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
+                              modelClass:(nullable Class)model
+                prototypeReuseIdentifier:(NSString *)identifier
+                                    view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom
@@ -351,11 +352,11 @@
  * subclass of
  * UITableViewCell with a custom model class
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
-                              modelClass:(__NULLABLE Class)model
-                               cellClass:(__NULLABLE Class)cell
-                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                    view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
+                              modelClass:(nullable Class)model
+                               cellClass:(nullable Class)cell
+                     cellReuseIdentifier:(NSString *)identifier
+                                    view:(UITableView *)tableView;
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates a custom
@@ -372,11 +373,11 @@
  * xib with a custom
  * model class
  */
-- (__NON_NULL instancetype)initWithQuery:(__NON_NULL FIRDatabaseQuery *)query
-                              modelClass:(__NULLABLE Class)model
-                                nibNamed:(__NON_NULL NSString *)nibName
-                     cellReuseIdentifier:(__NON_NULL NSString *)identifier
-                                    view:(__NON_NULL UITableView *)tableView;
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
+                              modelClass:(nullable Class)model
+                                nibNamed:(NSString *)nibName
+                     cellReuseIdentifier:(NSString *)identifier
+                                    view:(UITableView *)tableView;
 
 /**
  * This method populates the fields of a UITableViewCell or subclass given a
@@ -386,8 +387,8 @@
  * subclass) and the
  * corresponding object to populate the cell with.
  */
-- (void)populateCellWithBlock:(__NON_NULL void (^)(__KINDOF(UITableViewCell)__NON_NULL_PTR cell,
-                                                   __KINDOF(NSObject)
-                                                       __NON_NULL_PTR object))callback;
+- (void)populateCellWithBlock:(void (^)(__kindof UITableViewCell *cell, __kindof NSObject *object))callback;
 
 @end
+
+NS_ASSUME_NONNULL_END

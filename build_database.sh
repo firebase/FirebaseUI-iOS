@@ -14,19 +14,19 @@
 
 #!/bin/bash
 
-set -e # Exit sub shell if anything erro
+set -e # Exit sub shell if anything errors
 DIR="$(cd "$(dirname "$0")"; pwd)"
-OUTPUT_DIR="${DIR}/target/"
+OUTPUT_DIR="${DIR}/target"
 XCODE_PROJECT="${DIR}/FirebaseUI.xcodeproj"
 XCODEBUILD=xcodebuild
 
 echo "===> Cleaning target directory"
 rm -rf $OUTPUT_DIR
 
-echo "===> Building iOS binary"
+echo "===> Building Database lib"
 ${XCODEBUILD} \
   -project ${XCODE_PROJECT} \
-  -target FirebaseUI \
+  -target Database \
   -configuration Release \
   -sdk iphoneos \
   BUILD_DIR=${OUTPUT_DIR}/Products \
@@ -36,13 +36,13 @@ ${XCODEBUILD} \
   IPHONEOS_DEPLOYMENT_TARGET=7.0 \
   ONLY_ACTIVE_ARCH=NO \
   ARCHS="armv7 armv7s arm64" \
-  GCC_PREPROCESSOR_DEFINITIONS='${inherited} LOCAL_BUILD=1'\
+  GCC_PREPROCESSOR_DEFINITIONS='${inherited}' \
   build
 
-echo "===> Building simulator binary"
+echo "===> Building database simulator lib"
 ${XCODEBUILD} \
   -project ${XCODE_PROJECT} \
-  -target FirebaseUI \
+  -target Database \
   -configuration Release \
   -sdk iphonesimulator \
   BUILD_DIR=${OUTPUT_DIR}/Products \
@@ -52,35 +52,34 @@ ${XCODEBUILD} \
   IPHONEOS_DEPLOYMENT_TARGET=7.0 \
   ONLY_ACTIVE_ARCH=NO \
   ARCHS="i386 x86_64" \
-  GCC_PREPROCESSOR_DEFINITIONS='${inherited} LOCAL_BUILD=1\
+  GCC_PREPROCESSOR_DEFINITIONS='${inherited}'\
   build
 
 echo "===> Using simulator binary as base project for headers and directory structure"
-cp -a ${OUTPUT_DIR}/Products/Release-iphonesimulator ${OUTPUT_DIR}/Products/Release-combined
+mkdir -p ${OUTPUT_DIR}/Products/Release-combined/FirebaseDatabaseUI.framework/{Headers,Modules}
 
 echo -n "===> Combining all binaries into one ..."
 lipo \
   -create \
-    ${OUTPUT_DIR}/Products/Release-iphoneos/libFirebaseUI.a \
-    ${OUTPUT_DIR}/Products/Release-iphonesimulator/libFirebaseUI.a \
-  -output ${OUTPUT_DIR}/Products/Release-combined/FirebaseUI.framework/Versions/A/FirebaseUI
+    ${OUTPUT_DIR}/Products/Release-iphoneos/libDatabase.a \
+    ${OUTPUT_DIR}/Products/Release-iphonesimulator/libDatabase.a \
+  -output ${OUTPUT_DIR}/Products/Release-combined/FirebaseDatabaseUI.framework/FirebaseDatabaseUI
 echo " done."
+
+echo "===> Copying header files over"
+cp ${DIR}/FirebaseUI/Database/API/*.h ${OUTPUT_DIR}/Products/Release-combined/FirebaseDatabaseUI.framework/Headers
+
+echo "===> Copying modulemap"
+cp ${DIR}/FirebaseUI/Database/API/module.modulemap ${OUTPUT_DIR}/Products/Release-combined/FirebaseDatabaseUI.framework/Modules
 
 echo -n "===> Checking how the final binary looks ..."
 EXPECTEDCOUNT=6
-ARCHCOUNT=$(file ${OUTPUT_DIR}/Products/Release-combined/FirebaseUI.framework/Versions/A/FirebaseUI | wc -l)
+ARCHCOUNT=$(file ${OUTPUT_DIR}/Products/Release-combined/FirebaseDatabaseUI.framework/FirebaseDatabaseUI | wc -l)
 if [[ $ARCHCOUNT -ne $EXPECTEDCOUNT ]]; then
   echo " bad."
-  file ${OUTPUT_DIR}/Products/Release-combined/FirebaseUI.framework/Versions/A/FirebaseUI
+  file ${OUTPUT_DIR}/Products/Release-combined/FirebaseDatabaseUI.framework/FirebaseDatabaseUI
   echo "===> The architecture count ($ARCHCOUNT) looks wrong. It should be $EXPECTEDCOUNT.";
   exit 1
 else
   echo " good."
 fi
-
-echo "===> Creating zip of final framework"
-pushd ${OUTPUT_DIR}/Products/Release-combined
-zip -ry ../../FirebaseUI.framework.zip FirebaseUI.framework
-popd
-
-ls -l target/FirebaseUI.framework.zip
