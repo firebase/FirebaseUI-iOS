@@ -12,14 +12,23 @@ FirebaseUI supports iOS 7.0+. We recommend using [CocoaPods](http://cocoapods.or
 the following to your `Podfile`:
 
 ```
-pod 'FirebaseUI', '~> 1.0'       # Pull in all Firebase UI features
+pod 'FirebaseUI', '~> 0.4'       # Pull in all Firebase UI features
 ```
 
 If you don't want to use all of FirebaseUI, there are multiple subspecs which can selectively install subsets of the full feature set:
 
 ```
 # Only pull in the "Database" FirebaseUI features
-pod 'FirebaseUI/Database', '~> 1.0'
+pod 'FirebaseUI/Database', '~> 0.4'
+
+# Only pull in the "Auth" FirebaseUI features (including Facebook and Google)
+pod 'FirebaseUI/Auth', '~> 0.4'
+
+# Only pull in the "Facebook" login features
+pod 'FirebaseUI/Facebook', '~> 0.4'
+
+# Only pull in the "Google" login features
+pod 'FirebaseUI/Google', '~> 0.4'
 
 ```
 
@@ -43,18 +52,17 @@ following commands to get your environment set up:
 ```bash
 $ git clone https://github.com/firebase/FirebaseUI-iOS.git
 $ cd FirebaseUI-iOS
-$ ./setup.sh
+$ pod install
 ```
 
-Note that `setup.sh` pulls in a number of provider frameworks (Facebook, Google), which need to be pulled in for local development. The debug build and framework release have the flag `LOCAL_BUILD=1` which uses the local frameworks installed via `setup.sh`, while the CocoaPods release doesn't have this flag set, so the appropriate Pod `#import` statements are used.
-
-FirebaseUI makes use of Xcode 7 features such as lightweight generics and `__kindof` annotations, but it should be backwards compatible to Xcode 6 thanks to [XcodeMacros.h](https://github.com/firebase/FirebaseUI-iOS/blob/master/FirebaseUI/XcodeMacros.h).
+FirebaseUI makes use of Xcode 7 features such as lightweight generics and
+`__kindof` annotations, and is no longer compatible with XCode 6 development.
 
 ## Deployment
 
 - `git pull` to update the master branch
 - tag and push the tag for this release
-- `./build.sh` to build a binary
+- `./build_database.sh` to build a database binary (Auth binary steps will be added soon)
 - `./create-docs.sh` to generate docs
 - From your macbook that already has been granted permissions to FirebaseUI CocoaPods, do `pod trunk push`
 - `firebase deploy` the FirebaseUI website with newly generated docs
