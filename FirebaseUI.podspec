@@ -37,14 +37,14 @@ Pod::Spec.new do |s|
 
   s.subspec 'Facebook' do |facebook|
     facebook.vendored_frameworks = ["FirebaseUIFrameworks/Facebook/Frameworks/FirebaseFacebookAuthUI.framework"]
-    facebook.resources = ["FirebaseUIFrameworks/Facebook/Resources/FirebaseFacebookAuthUI.bundle"]
+    facebook.resources = ["FirebaseUIFrameworks/Facebook/Resources/FirebaseFacebookAuthUIBundle.bundle"]
     facebook.dependency 'FirebaseUI/AuthBase'
     facebook.dependency 'FBSDKLoginKit', '~> 4.0'
   end
 
   s.subspec 'Google' do |google|
     google.vendored_frameworks = ["FirebaseUIFrameworks/Google/Frameworks/FirebaseGoogleAuthUI.framework"]
-    google.resources = ["FirebaseUIFrameworks/Google/Resources/FirebaseGoogleAuthUI.bundle"]
+    google.resources = ["FirebaseUIFrameworks/Google/Resources/FirebaseGoogleAuthUIBundle.bundle"]
     google.dependency 'FirebaseUI/AuthBase'
     google.dependency 'GoogleSignIn', '~> 4.0'
   end
