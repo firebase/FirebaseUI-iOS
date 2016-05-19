@@ -51,6 +51,9 @@ instance. The `FIRAuthUI` instance associated with the default `FIRAuth`
 instance can be accessed as follows:
 
 ```objective-c
+@import Firebase
+@import FirebaseAuthUI
+...
 [FIRApp configure];
 FIRAuthUI *authUI = [FIRAuthUI authUI];
 authUI.delegate = self; // Set the delegate to receive callback.
@@ -59,6 +62,9 @@ authUI.delegate = self; // Set the delegate to receive callback.
 This instance can then be configured with the providers you wish to support:
 
 ```objective-c
+@import FirebaseGoogleAuthUI
+@import FirebaseFacebookAuthUI
+...
 FIRGoogleAuthUI *googleAuthUI =
     [[FIRGoogleAuthUI alloc] initWithClientID:kGoogleClientID];
 FIRFacebookAuthUI *facebookAuthUI =
