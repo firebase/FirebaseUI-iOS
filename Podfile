@@ -1,4 +1,3 @@
-source 'https://cpdc-eap.googlesource.com/spec.git'
 source 'http://github.com/CocoaPods/Specs.git'
 
 target 'FirebaseUI' do
