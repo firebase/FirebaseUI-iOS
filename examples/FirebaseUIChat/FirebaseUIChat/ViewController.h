@@ -16,7 +16,7 @@
 
 @import UIKit;
 @import FirebaseDatabase;
-#import <FirebaseUI/FirebaseTableViewDataSource.h>
+@import FirebaseDatabaseUI;
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>
 
