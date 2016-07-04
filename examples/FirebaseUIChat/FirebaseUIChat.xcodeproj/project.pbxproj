@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C887CB2F78EAA58DC354FAFB /* libPods-FirebaseUIChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 585EBE168DE871301F5FA598 /* libPods-FirebaseUIChat.a */; };
 		D81A05F61B86A78700498183 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D81A05F51B86A78700498183 /* main.m */; };
 		D81A05F91B86A78700498183 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D81A05F81B86A78700498183 /* AppDelegate.m */; };
 		D81A05FC1B86A78700498183 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81A05FB1B86A78700498183 /* ViewController.m */; };
@@ -17,9 +16,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		585EBE168DE871301F5FA598 /* libPods-FirebaseUIChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseUIChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A75EDEB82011E034E0FE0DB /* Pods-FirebaseUIChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUIChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat.debug.xcconfig"; sourceTree = "<group>"; };
-		ADBAAD3F5B82BFF071DEB18B /* Pods-FirebaseUIChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUIChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat.release.xcconfig"; sourceTree = "<group>"; };
 		D81A05F01B86A78700498183 /* FirebaseUIChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseUIChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D81A05F41B86A78700498183 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D81A05F51B86A78700498183 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -37,28 +33,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C887CB2F78EAA58DC354FAFB /* libPods-FirebaseUIChat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1B9B1754AE5895259E750F65 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				585EBE168DE871301F5FA598 /* libPods-FirebaseUIChat.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		D81A05E71B86A78700498183 = {
 			isa = PBXGroup;
 			children = (
 				D81A05F21B86A78700498183 /* FirebaseUIChat */,
 				D81A05F11B86A78700498183 /* Products */,
-				E62CDC5AB5CBE329CCD74574 /* Pods */,
-				1B9B1754AE5895259E750F65 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,15 +79,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E62CDC5AB5CBE329CCD74574 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8A75EDEB82011E034E0FE0DB /* Pods-FirebaseUIChat.debug.xcconfig */,
-				ADBAAD3F5B82BFF071DEB18B /* Pods-FirebaseUIChat.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -110,12 +86,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D81A06131B86A78700498183 /* Build configuration list for PBXNativeTarget "FirebaseUIChat" */;
 			buildPhases = (
-				634CADC92C8BFACD70CC31DA /* 📦 Check Pods Manifest.lock */,
 				D81A05EC1B86A78700498183 /* Sources */,
 				D81A05ED1B86A78700498183 /* Frameworks */,
 				D81A05EE1B86A78700498183 /* Resources */,
-				026DCC4EA2371EF2DE13C32C /* 📦 Embed Pods Frameworks */,
-				1DCF3E50D310B6D1FA4DD95D /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,54 +143,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		026DCC4EA2371EF2DE13C32C /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1DCF3E50D310B6D1FA4DD95D /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		634CADC92C8BFACD70CC31DA /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D81A05EC1B86A78700498183 /* Sources */ = {
@@ -335,7 +260,6 @@
 		};
 		D81A06141B86A78700498183 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8A75EDEB82011E034E0FE0DB /* Pods-FirebaseUIChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FirebaseUIChat/Info.plist;
@@ -347,7 +271,6 @@
 		};
 		D81A06151B86A78700498183 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADBAAD3F5B82BFF071DEB18B /* Pods-FirebaseUIChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FirebaseUIChat/Info.plist;
