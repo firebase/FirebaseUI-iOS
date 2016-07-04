@@ -19,8 +19,7 @@
 // clang-format on
 
 #import "FirebaseCollectionViewDataSource.h"
-
-@import FirebaseDatabase;
+#import <FirebaseDatabase/FirebaseDatabase.h>
 
 @implementation FirebaseCollectionViewDataSource
 
