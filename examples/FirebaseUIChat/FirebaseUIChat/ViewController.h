@@ -16,9 +16,12 @@
 
 @import UIKit;
 @import FirebaseDatabase;
+@import Firebase;
 #import <FirebaseUI/FirebaseTableViewDataSource.h>
+#import <FirebaseUI/FirebaseAuthUI.h>
+#import <FirebaseUI/FirebaseGoogleAuthUI.h>
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>
+@interface ViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate, FIRAuthUIDelegate>
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) FirebaseTableViewDataSource *dataSource;

@@ -15,119 +15,94 @@
 //
 
 #import "ViewController.h"
-#import "Message.h"
-#import "MessageTableViewCell.h"
-#import "MessageDataSource.h"
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *signInBtn;
+@property (weak, nonatomic) IBOutlet UIButton *signOutBtn;
+@property (nonatomic) FIRAuthStateDidChangeListenerHandle authStateListener;
+
 @end
 
-@implementation ViewController {
-//  FAuthData *_currentUser;
-}
+@implementation ViewController
 
 - (void)viewDidLoad {
-  [super viewDidLoad];
+    [super viewDidLoad];
 
-  self.ref = [FIRDatabase database].reference;
-
-  self.dataSource =
-      [[MessageDataSource alloc] initWithRef:self.ref
-                                  modelClass:[Message class]
-                                    nibNamed:@"MessageTableViewCell"
-                         cellReuseIdentifier:@"cellReuseIdentifier"
-                                        view:self.tableView];
-
-  [self.dataSource
-      populateCellWithBlock:^void(MessageTableViewCell *__nonnull cell,
-                                  Message *__nonnull message) {
-//        if ([message.name isEqualToString:[self usernameForProvider:[self.loginViewController currentUser].provider]]) {
-//          cell.myMessageLabel.text = message.text;
-//          cell.myNameLabel.text = message.name;
-//          cell.myNameLabel.textColor = [UIColor colorWithRed:52.0 / 255.0
-//                                                       green:170.0 / 255.0
-//                                                        blue:220.0 / 255.0
-//                                                       alpha:1.0];
-//          [cell.otherMessageLabel setHidden:YES];
-//          [cell.otherNameLabel setHidden:YES];
-//          [cell.myMessageLabel setHidden:NO];
-//          [cell.myNameLabel setHidden:NO];
-//        } else {
-          cell.otherMessageLabel.text = message.text;
-          cell.otherNameLabel.text = message.name;
-          cell.otherNameLabel.textColor = [UIColor colorWithRed:164.0 / 255.0
-                                                          green:199.0 / 255.0
-                                                           blue:57.0 / 255.0
-                                                          alpha:1.0];
-          [cell.otherMessageLabel setHidden:NO];
-          [cell.otherNameLabel setHidden:NO];
-          [cell.myMessageLabel setHidden:YES];
-          [cell.myNameLabel setHidden:YES];
-//        }
-      }];
-
-  self.tableView.dataSource = self.dataSource;
-  self.tableView.delegate = self;
-  
-//  self.loginViewController = [[FirebaseLoginViewController alloc] initWithRef:self.ref];
-  // Only enable social providers that you've configured
-//  [self.loginViewController enableProvider:FAuthProviderFacebook];
-//  [self.loginViewController enableProvider:FAuthProviderGoogle];
-//  [self.loginViewController enableProvider:FAuthProviderTwitter];
-//  [self.loginViewController enableProvider:FAuthProviderPassword];
-
-//  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:nil style:UIBarButtonItemStylePlain target:self action:@selector(toggleAuth)];
-}
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-//  _currentUser = [self.loginViewController currentUser];
-//  self.title = [self usernameForProvider:[self.loginViewController currentUser].provider];
-//  self.navigationItem.rightBarButtonItem.title = _currentUser ? @"Logout" : @"Login";
-  [self.tableView reloadData];
+  [super viewWillAppear:animated];
+
+  __weak id weakSelf = self;
+  self.authStateListener = [[FIRAuth auth]
+                            addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth,
+                                                            FIRUser *_Nullable user) {
+                              __strong id strongSelf = weakSelf;
+                              if(strongSelf){
+                                if (user != nil) {
+                                  NSLog(@"User is signed in Listener, %@", user.providerID);
+                                  self.signInBtn.hidden = YES;
+                                  self.signOutBtn.hidden = NO;
+                                } else {
+                                  NSLog(@"No user is signed in Listener");
+                                  self.signInBtn.hidden = NO;
+                                  self.signOutBtn.hidden = YES;
+                                }
+                              }
+                            }];
 }
 
-//- (void)toggleAuth {
-//  if (_currentUser) {
-//    [self.loginViewController logout];
-//    _currentUser = nil;
-//    self.title = @"iOS User";
-//    [self.tableView reloadData];
-//  } else {
-//    [self presentViewController:self.loginViewController animated:YES completion:nil];
-//  }
-//  self.navigationItem.rightBarButtonItem.title = _currentUser ? @"Logout" : @"Login";
-//}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (void)viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+  [[FIRAuth auth] removeAuthStateDidChangeListener:self.authStateListener];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-  [[self.ref childByAutoId]
-//   setValue:@{@"name" : [self usernameForProvider:[self.loginViewController currentUser].provider], @"text" : textField.text}];
-   setValue:@{@"name" : @"iOS User", @"text" : textField.text}];
-  [textField resignFirstResponder];
-  textField.text = @"";
-  return YES;
+- (IBAction)signInBtnClicked:(id)sender {
+
+  FIRAuthUI *authUI = [FIRAuthUI authUI];
+  authUI.delegate = self;
+
+  // Get client ID from [FIRApp defaultApp].options.clientID property
+  // clientID is the OAuth2 client ID for iOS application used to authenticate Google users
+  // API reference: https://firebase.google.com/docs/reference/ios/firebaseanalytics/interface_f_i_r_options
+  FIRGoogleAuthUI *googleAuthUI = [[FIRGoogleAuthUI alloc] initWithClientID:
+                                   [FIRApp defaultApp].options.clientID];
+
+  authUI.providers = @[ googleAuthUI ];
+
+  UIViewController *authViewController = [authUI authViewController];
+
+  [self presentViewController:authViewController animated:YES completion:nil];
+
 }
 
-//- (NSString *)usernameForProvider:(NSString *)provider {
-//  if ([provider isEqualToString:kGoogleAuthProvider]) {
-//    return _currentUser.providerData[@"displayName"];
-//  } else if ([provider isEqualToString:kFacebookAuthProvider]) {
-//    return _currentUser.providerData[@"displayName"];
-//  } else if ([provider isEqualToString:kTwitterAuthProvider]) {
-//    return [NSString stringWithFormat:@"@%@", _currentUser.providerData[@"username"]];
-//  } else if ([provider isEqualToString:kPasswordAuthProvider]) {
-//    return _currentUser.providerData[@"email"];
-//  } else {
-//    return @"iOS User";
-//  }
-//}
+- (IBAction)signOutBtnClicked:(id)sender {
 
+  NSError *signOutError;
+  [[FIRAuthUI authUI].auth signOut:&signOutError];
+  if (!signOutError) {
+    NSLog(@"Sign-out succeeded");
+    self.signInBtn.hidden = NO;
+    self.signOutBtn.hidden = YES;
+  }
+}
+
+
+- (void)authUI:(FIRAuthUI *)authUI
+didSignInWithUser:(nullable FIRUser *)user
+         error:(nullable NSError *)error {
+  if (!error) {
+    NSLog(@"didSignIn");
+
+    self.signInBtn.hidden = YES;
+    self.signOutBtn.hidden = NO;
+      
+  } else {
+
+    NSLog(@"authUI didSign error = %@", error.localizedDescription);
+
+  }
+    
+}
 @end

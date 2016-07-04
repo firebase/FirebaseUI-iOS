@@ -1,7 +1,10 @@
 platform :ios, '7.0'
 
-pod 'FirebaseUI', :path => "../../FirebaseUI.podspec"
+# use local pod
+pod 'FirebaseUI', :path => "../../FirebaseUI"
+
+# use the latest pod in the git repository
+#pod 'FirebaseUI'
 
 target 'FirebaseUIChat' do
 end
-
