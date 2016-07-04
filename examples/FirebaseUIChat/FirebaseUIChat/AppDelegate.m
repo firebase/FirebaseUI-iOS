@@ -28,7 +28,7 @@
 - (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
             options:(NSDictionary<NSString *, id> *)options {
-    return [[FIRAuthUI authUI] handleOpenURL:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
+  return [[FIRAuthUI authUI] handleOpenURL:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
     
 }
 

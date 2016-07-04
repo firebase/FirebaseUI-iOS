@@ -20,9 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *signInBtn;
 @property (weak, nonatomic) IBOutlet UIButton *signOutBtn;
-
 @property (nonatomic) FIRAuthStateDidChangeListenerHandle authStateListener;
-
 
 @end
 
@@ -34,80 +32,77 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+  [super viewWillAppear:animated];
 
-    __weak id weakSelf = self;
-    self.authStateListener = [[FIRAuth auth]
-                              addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth,
-                                                              FIRUser *_Nullable user) {
-                                  __strong id strongSelf = weakSelf;
-                                  if(strongSelf){
-                                      if (user != nil) {
-                                          NSLog(@"User is signed in Listener, %@", user.providerID);
-                                          self.signInBtn.hidden = YES;
-                                          self.signOutBtn.hidden = NO;
-                                      } else {
-                                          NSLog(@"No user is signed in Listener");
-                                          self.signInBtn.hidden = NO;
-                                          self.signOutBtn.hidden = YES;
-                                      }
-                                  }
-                              }];
+  __weak id weakSelf = self;
+  self.authStateListener = [[FIRAuth auth]
+                            addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth,
+                                                            FIRUser *_Nullable user) {
+                              __strong id strongSelf = weakSelf;
+                              if(strongSelf){
+                                if (user != nil) {
+                                  NSLog(@"User is signed in Listener, %@", user.providerID);
+                                  self.signInBtn.hidden = YES;
+                                  self.signOutBtn.hidden = NO;
+                                } else {
+                                  NSLog(@"No user is signed in Listener");
+                                  self.signInBtn.hidden = NO;
+                                  self.signOutBtn.hidden = YES;
+                                }
+                              }
+                            }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [[FIRAuth auth] removeAuthStateDidChangeListener:self.authStateListener];
+  [super viewWillDisappear:animated];
+  [[FIRAuth auth] removeAuthStateDidChangeListener:self.authStateListener];
 }
 
 - (IBAction)signInBtnClicked:(id)sender {
 
-    FIRAuthUI *authUI = [FIRAuthUI authUI];
-    authUI.delegate = self;
+  FIRAuthUI *authUI = [FIRAuthUI authUI];
+  authUI.delegate = self;
 
-    // Get client ID from [FIRApp defaultApp].options.clientID property
-    // clientID is the OAuth2 client ID for iOS application used to authenticate Google users
-    // API reference: https://firebase.google.com/docs/reference/ios/firebaseanalytics/interface_f_i_r_options
-    FIRGoogleAuthUI *googleAuthUI = [[FIRGoogleAuthUI alloc] initWithClientID:
-                                     [FIRApp defaultApp].options.clientID];
+  // Get client ID from [FIRApp defaultApp].options.clientID property
+  // clientID is the OAuth2 client ID for iOS application used to authenticate Google users
+  // API reference: https://firebase.google.com/docs/reference/ios/firebaseanalytics/interface_f_i_r_options
+  FIRGoogleAuthUI *googleAuthUI = [[FIRGoogleAuthUI alloc] initWithClientID:
+                                   [FIRApp defaultApp].options.clientID];
 
-    authUI.providers = @[ googleAuthUI ];
+  authUI.providers = @[ googleAuthUI ];
 
-    UIViewController *authViewController = [authUI authViewController];
+  UIViewController *authViewController = [authUI authViewController];
 
-    [self presentViewController:authViewController animated:YES completion:nil];
+  [self presentViewController:authViewController animated:YES completion:nil];
 
 }
 
 - (IBAction)signOutBtnClicked:(id)sender {
 
-    NSError *signOutError;
-    [[FIRAuthUI authUI].auth signOut:&signOutError];
-    if (!signOutError) {
-        NSLog(@"Sign-out succeeded");
-        self.signInBtn.hidden = NO;
-        self.signOutBtn.hidden = YES;
-    }
+  NSError *signOutError;
+  [[FIRAuthUI authUI].auth signOut:&signOutError];
+  if (!signOutError) {
+    NSLog(@"Sign-out succeeded");
+    self.signInBtn.hidden = NO;
+    self.signOutBtn.hidden = YES;
+  }
 }
 
 
 - (void)authUI:(FIRAuthUI *)authUI
 didSignInWithUser:(nullable FIRUser *)user
          error:(nullable NSError *)error {
-    if (!error) {
+  if (!error) {
+    NSLog(@"didSignIn");
 
-#if DEBUG
-        NSLog(@"didSignIn");
-#endif
+    self.signInBtn.hidden = YES;
+    self.signOutBtn.hidden = NO;
+      
+  } else {
 
-        self.signInBtn.hidden = YES;
-        self.signOutBtn.hidden = NO;
-        
-    } else {
-#if DEBUG
-        NSLog(@"authUI didSign error = %@", error.localizedDescription);
-#endif
-    }
+    NSLog(@"authUI didSign error = %@", error.localizedDescription);
+
+  }
     
 }
 @end
