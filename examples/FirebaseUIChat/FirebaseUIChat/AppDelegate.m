@@ -16,12 +16,20 @@
 
 #import "AppDelegate.h"
 @import Firebase;
+#import <FirebaseUI/FirebaseAuthUI.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [FIRApp configure];
   return YES;
+}
+
+// You should implement this method to complete the authentication process
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<NSString *, id> *)options {
+  return [[FIRAuthUI authUI] handleOpenURL:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
 }
 
 @end
