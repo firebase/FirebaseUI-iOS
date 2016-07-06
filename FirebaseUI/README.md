@@ -69,7 +69,7 @@ FIRGoogleAuthUI *googleAuthUI =
     [[FIRGoogleAuthUI alloc] initWithClientID:kGoogleClientID];
 FIRFacebookAuthUI *facebookAuthUI =
     [[FIRFacebookAuthUI alloc] initWithAppID:kFacebookAppID];
-authUI.providers = @[ googleAuthUI, facebookAuthUI];
+authUI.signInProviders = @[ googleAuthUI, facebookAuthUI];
 ```
 
 For Google sign in support, add custom URL schemes to your Xcode project
