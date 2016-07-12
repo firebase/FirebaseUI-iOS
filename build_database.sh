@@ -66,11 +66,14 @@ lipo \
   -output ${OUTPUT_DIR}/Products/Release-combined/FirebaseDatabaseUI.framework/FirebaseDatabaseUI
 echo " done."
 
-echo "===> Copying header files over"
+echo "===> Copying header files"
 cp ${DIR}/FirebaseUI/Database/API/*.h ${OUTPUT_DIR}/Products/Release-combined/FirebaseDatabaseUI.framework/Headers
 
 echo "===> Copying modulemap"
 cp ${DIR}/FirebaseUI/Database/API/module.modulemap ${OUTPUT_DIR}/Products/Release-combined/FirebaseDatabaseUI.framework/Modules
+
+echo "===> Copyying LICENSE"
+cp ${DIR}/LICENSE ${OUTPUT_DIR}/Products/Release-combined/FirebaseDatabaseUI.framework
 
 echo -n "===> Checking how the final binary looks ..."
 EXPECTEDCOUNT=6
