@@ -1,4 +1,4 @@
-# FirebaseUI for iOS — UI Bindings for Firebase
+# FirebaseUI/Database for iOS — UI Bindings for the Firebase Realtime Database
 
 FirebaseUI/Database allows you to quickly connect common UI elements to the [Firebase Realtime Database](https://firebase.google.com/docs/database?utm_source=firebaseui-ios) for data storage, allowing views to be updated in realtime as they change, and providing simple interfaces for common tasks like displaying lists or collections of items.
 
