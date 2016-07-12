@@ -72,7 +72,7 @@ cp ${DIR}/FirebaseUI/Database/API/*.h ${OUTPUT_DIR}/Products/Release-combined/Fi
 echo "===> Copying modulemap"
 cp ${DIR}/FirebaseUI/Database/API/module.modulemap ${OUTPUT_DIR}/Products/Release-combined/FirebaseDatabaseUI.framework/Modules
 
-echo "===> Copyying LICENSE"
+echo "===> Copying LICENSE"
 cp ${DIR}/LICENSE ${OUTPUT_DIR}/Products/Release-combined/FirebaseDatabaseUI.framework
 
 echo -n "===> Checking how the final binary looks ..."
