@@ -1,0 +1,10 @@
+target 'uidemo' do
+  use_frameworks!
+
+  pod 'FirebaseUI'
+
+  target 'uidemoTests' do
+    inherit! :search_paths
+  end
+
+end
