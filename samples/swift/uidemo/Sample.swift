@@ -16,11 +16,13 @@
 
 import UIKit
 
-// As we add more sample use cases to FirebaseUI, 
-// this enum will eventually grow into a catalogue
-// of features.
+// This enum represents the samples that this app knows about, and
+// is used by the MenuViewController to layout all of the samples
+// and display basic information about them.
 enum Sample: Int, RawRepresentable {
   
+  // When adding new samples, add a new value here and fill
+  // out the switch statements below as necessary.
   case Chat = 0
   case Auth = 1
   
