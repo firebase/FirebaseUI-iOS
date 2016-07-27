@@ -41,7 +41,7 @@ class ChatCollectionViewCell: UICollectionViewCell {
     }
   }
   
-  // These constraints are used to left- and right-align chat bubbles.
+  /// These constraints are used to left- and right-align chat bubbles.
   @IBOutlet private(set) var leadingConstraint: NSLayoutConstraint!
   @IBOutlet private(set) var trailingConstraint: NSLayoutConstraint!
   

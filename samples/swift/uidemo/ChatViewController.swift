@@ -19,42 +19,12 @@ import Firebase
 import FirebaseDatabaseUI
 import FirebaseAuthUI
 
-struct Chat {
-  var uid: String
-  var name: String
-  var text: String
-  
-  var dictionary: [String: String] {
-    return [
-      "uid" : self.uid,
-      "name": self.name,
-      "text": self.text,
-    ]
-  }
-  
-  init(uid: String, name: String, text: String) {
-    self.name = name; self.uid = uid; self.text = text
-  }
-  
-  init?(snapshot: FIRDataSnapshot) {
-    guard let dict = snapshot.value as? [String: String] else { return nil }
-    guard let name = dict["name"] else { return nil }
-    guard let uid  = dict["uid"]  else { return nil }
-    guard let text = dict["text"] else { return nil }
-    
-    self.name = name
-    self.uid = uid
-    self.text = text
-  }
-}
-
 /// View controller demonstrating using a FirebaseCollectionViewDataSource
 /// to populate a collection view with chat messages. The relevant code
 /// is in the call to `collectionViewDataSource.populateCellWithBlock`.
-///
-// All of the error handling in this controller is done with `fatalError`;
-// please don't copy paste it into your production code.
 class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
+  // All of the error handling in this controller is done with `fatalError`;
+  // please don't copy paste it into your production code.
   
   private static let reuseIdentifier = "ChatCollectionViewCell"
   
@@ -69,8 +39,8 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   }
   @IBOutlet private var sendButton: UIButton!
   
-  // Used to shift view contents up when the keyboard appears.
-  @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+  /// Used to shift view contents up when the keyboard appears.
+  @IBOutlet private var bottomConstraint: NSLayoutConstraint!
   
   private let auth = FIRAuth.auth()
   private let chatReference = FIRDatabase.database().reference().child("chats")
@@ -80,43 +50,28 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   private var user: FIRUser?
   private var query: FIRDatabaseQuery?
   
-  static func fromStoryboard(storyboard: UIStoryboard = AppDelegate.mainStoryboard) -> ChatViewController {
-    return storyboard.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    self.collectionView.backgroundColor = UIColor.whiteColor()
-    self.collectionView.delegate = self
-    let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-    layout.minimumInteritemSpacing = CGFloat.max
-    layout.minimumLineSpacing = 4
-    
-    self.auth?.addAuthStateDidChangeListener { (auth, user) in
-      self.user = user
-    }
-    
-    self.sendButton.addTarget(self, action: #selector(didTapSend), forControlEvents: .TouchUpInside)
-  }
+  // MARK: - Interesting stuff
   
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     
     self.auth?.signInAnonymouslyWithCompletion { (user, error) in
       if let error = error {
+        // An error here means the user couldn't sign in. Correctly
+        // handling it depends on the context as well as your app's
+        // capabilities, but this is usually a good place to
+        // present "retry" and "forgot your password?" screens.
         fatalError("Sign in failed: \(error.localizedDescription)")
       }
       
       self.query = self.chatReference.queryLimitedToLast(50)
       
+      // The initializer called below--though it takes a collection view--
+      // doesn't actually set the collection view's data source, so if
+      // we don't set it before trying to populate our view our app will crash.
       self.collectionViewDataSource = FirebaseCollectionViewDataSource(query: self.query!,
         prototypeReuseIdentifier: ChatViewController.reuseIdentifier,
         view: self.collectionView)
-      
-      // The initializer called above--though it takes a collection view--
-      // doesn't actually set the collection view's data source, so if
-      // we don't set it before trying to populate our view our app will crash.
       self.collectionView.dataSource = self.collectionViewDataSource
       
       self.collectionViewDataSource.populateCellWithBlock { (anyCell, data) in
@@ -147,7 +102,48 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
                                                      object: nil)
   }
   
+  @objc private func didTapSend(sender: AnyObject) {
+    guard let user = self.auth?.currentUser else { return }
+    let uid = user.uid
+    let name = "User " + (uid as NSString).substringToIndex(6)
+    let _text = self.textView.text as String?
+    guard let text = _text else { return }
+    if (text.isEmpty) { return }
+    
+    let chat = Chat(uid: uid, name: name, text: text)
+    
+    self.chatReference.childByAutoId().setValue(chat.dictionary) { (error, dbref) in
+      if let error = error {
+        // An error here most likely means the user doesn't have permission
+        // to chat (not signed in?) or the user has no internet connection.
+        fatalError("Failed to write message: \(error.localizedDescription)")
+      }
+    }
+    
+    self.textView.text = ""
+  }
+  
   // MARK: - Boilerplate
+  
+  static func fromStoryboard(storyboard: UIStoryboard = AppDelegate.mainStoryboard) -> ChatViewController {
+    return storyboard.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.collectionView.backgroundColor = UIColor.whiteColor()
+    self.collectionView.delegate = self
+    let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+    layout.minimumInteritemSpacing = CGFloat.max
+    layout.minimumLineSpacing = 4
+    
+    self.auth?.addAuthStateDidChangeListener { (auth, user) in
+      self.user = user
+    }
+    
+    self.sendButton.addTarget(self, action: #selector(didTapSend), forControlEvents: .TouchUpInside)
+  }
   
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
@@ -183,32 +179,13 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     }
   }
   
-  @objc private func didTapSend(sender: AnyObject) {
-    guard let user = self.auth?.currentUser else { return }
-    let uid = user.uid
-    let name = "User " + (uid as NSString).substringToIndex(6)
-    let _text = self.textView.text as String?
-    guard let text = _text else { return }
-    if (text.isEmpty) { return }
-    
-    let chat = Chat(uid: uid, name: name, text: text)
-    
-    self.chatReference.childByAutoId().setValue(chat.dictionary) { (error, dbref) in
-      if let error = error {
-        fatalError("Failed to write message: \(error.localizedDescription)")
-      }
-    }
-    
-    self.textView.text = ""
-  }
-  
   private func scrollToBottom(animated animated: Bool) {
     let fbarray = self.collectionViewDataSource.array
     let indexPath = NSIndexPath(forRow: Int(fbarray.count()) - 1, inSection: 0)
     self.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
   }
   
-  // MARK UICollectionViewDelegateFlowLayout
+  // MARK: UICollectionViewDelegateFlowLayout
   
   func collectionView(collectionView: UICollectionView, layout
     collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -222,5 +199,34 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
     let height = CGFloat(ceil(Double(rect.size.height))) + heightPadding
     return CGSize(width: width, height: height)
+  }
+}
+
+struct Chat {
+  var uid: String
+  var name: String
+  var text: String
+  
+  var dictionary: [String: String] {
+    return [
+      "uid" : self.uid,
+      "name": self.name,
+      "text": self.text,
+    ]
+  }
+  
+  init(uid: String, name: String, text: String) {
+    self.name = name; self.uid = uid; self.text = text
+  }
+  
+  init?(snapshot: FIRDataSnapshot) {
+    guard let dict = snapshot.value as? [String: String] else { return nil }
+    guard let name = dict["name"] else { return nil }
+    guard let uid  = dict["uid"]  else { return nil }
+    guard let text = dict["text"] else { return nil }
+    
+    self.name = name
+    self.uid = uid
+    self.text = text
   }
 }
