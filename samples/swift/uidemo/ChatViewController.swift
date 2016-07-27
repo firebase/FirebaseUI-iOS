@@ -83,9 +83,10 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         cell.populateCellWithChat(chat, user: self.user, maxWidth: self.view.frame.size.width)
       }
       
-      // Unfortunately neither FirebaseArray nor FirebaseCollectionViewDataSource
-      // provide an event listener, so in order to scroll on new insertions we
-      // still need to use the query directly.
+      // FirebaseArray has a delegate method `childAdded` that could be used here,
+      // but unfortunately FirebaseCollectionViewDataSource uses the FirebaseArray
+      // delegate methods to update its own internal state, so in order to scroll 
+      // on new insertions we still need to use the query directly.
       self.query!.observeEventType(.ChildAdded, withBlock: { [unowned self] _ in
         self.scrollToBottom(animated: true)
       })
@@ -180,8 +181,8 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   }
   
   private func scrollToBottom(animated animated: Bool) {
-    let fbarray = self.collectionViewDataSource.array
-    let indexPath = NSIndexPath(forRow: Int(fbarray.count()) - 1, inSection: 0)
+    let count = self.collectionViewDataSource.collectionView(self.collectionView, numberOfItemsInSection: 0)
+    let indexPath = NSIndexPath(forRow: count - 1, inSection: 0)
     self.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
   }
   
