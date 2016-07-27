@@ -48,10 +48,10 @@ struct Chat {
   }
 }
 
-// View controller demonstrating using a FirebaseCollectionViewDataSource
-// to populate a collection view with chat messages. The relevant code
-// is in the call to `collectionViewDataSource.populateCellWithBlock`.
-//
+/// View controller demonstrating using a FirebaseCollectionViewDataSource
+/// to populate a collection view with chat messages. The relevant code
+/// is in the call to `collectionViewDataSource.populateCellWithBlock`.
+///
 // All of the error handling in this controller is done with `fatalError`;
 // please don't copy paste it into your production code.
 class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
@@ -125,29 +125,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         }
         
         let chat = Chat(snapshot: data as! FIRDataSnapshot)!
-        
-        cell.textLabel.text = chat.text
-        
-        let leftRightPadding: CGFloat = 24
-        let rect = ChatCollectionViewCell.boundingRectForText(cell.textLabel.text ?? "",
-          maxWidth: self.view.frame.size.width)
-        let width = self.view.frame.size.width
-        let constant = max(width - rect.size.width - leftRightPadding, CGFloat.min)
-        if chat.uid == self.user?.uid ?? "" {
-          let colors = ChatCollectionViewCell.selfColors
-          cell.containerView.backgroundColor = colors.background
-          cell.textLabel.textColor = colors.text
-          cell.trailingConstraint.active = false
-          cell.leadingConstraint.constant = constant
-          cell.leadingConstraint.active = true
-        } else {
-          let colors = ChatCollectionViewCell.othersColors
-          cell.containerView.backgroundColor = colors.background
-          cell.textLabel.textColor = colors.text
-          cell.leadingConstraint.active = false
-          cell.trailingConstraint.constant = constant
-          cell.trailingConstraint.active = true
-        }
+        cell.populateCellWithChat(chat, user: self.user, maxWidth: self.view.frame.size.width)
       }
       
       // Unfortunately neither FirebaseArray nor FirebaseCollectionViewDataSource
@@ -169,12 +147,10 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
                                                      object: nil)
   }
   
+  // MARK: - Boilerplate
+  
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
-    NSNotificationCenter.defaultCenter().removeObserver(self)
-  }
-  
-  deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }
   
@@ -227,13 +203,12 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   }
   
   private func scrollToBottom(animated animated: Bool) {
-    // FirebaseArray's documentation online is pretty lacking.
     let fbarray = self.collectionViewDataSource.array
     let indexPath = NSIndexPath(forRow: Int(fbarray.count()) - 1, inSection: 0)
     self.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
   }
   
-  // MARK - UICollectionViewDelegateFlowLayout
+  // MARK UICollectionViewDelegateFlowLayout
   
   func collectionView(collectionView: UICollectionView, layout
     collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {

@@ -15,7 +15,9 @@
 //
 
 import UIKit
+import Firebase
 
+/// Displays an individual chat message inside of a ChatViewController.
 class ChatCollectionViewCell: UICollectionViewCell {
   @IBOutlet private(set) var textLabel: UILabel! {
     didSet {
@@ -40,24 +42,18 @@ class ChatCollectionViewCell: UICollectionViewCell {
   }
   
   // These constraints are used to left- and right-align chat bubbles.
-  @IBOutlet private(set) var leadingConstraint: NSLayoutConstraint! {
-    didSet {
-      leadingConstraint.identifier = "leading constraint"
-    }
-  }
-  @IBOutlet private(set) var trailingConstraint: NSLayoutConstraint! {
-    didSet {
-      trailingConstraint.identifier = "trailing constraint"
-    }
-  }
+  @IBOutlet private(set) var leadingConstraint: NSLayoutConstraint!
+  @IBOutlet private(set) var trailingConstraint: NSLayoutConstraint!
   
-  // This is the source of truth for the message font,
-  // overriding whatever is set in interface builder.
+  /// The font used to display chat messages.
+  /// This is the source of truth for the message font,
+  /// overriding whatever is set in interface builder.
   static var messageFont: UIFont {
     return UIFont.systemFontOfSize(UIFont.systemFontSize())
   }
   
-  // Colors for messages sent by the client.
+  /// Colors for messages (text and background) sent from the client.
+  /// White text on a blue background, similar to the Messages app.
   static var selfColors: (background: UIColor, text: UIColor) {
     return (
       background: UIColor(red: 21 / 255, green: 60 / 255, blue: 235 / 255, alpha: 1),
@@ -65,11 +61,39 @@ class ChatCollectionViewCell: UICollectionViewCell {
     )
   }
   
-  // Colors for messages received by the client.
+  /// Colors for messages received by the client.
+  /// Black text on a light gray background, similar to the Messages app.
   static var othersColors: (background: UIColor, text: UIColor) {
     return (
       background: UIColor(red: 230 / 255, green: 230 / 255, blue: 230 / 255, alpha: 1),
       text: UIColor.blackColor()
     )
+  }
+  
+  /// Sets the cell's contents and lays out the cell according
+  /// to the contents set.
+  func populateCellWithChat(chat: Chat, user: FIRUser?, maxWidth: CGFloat) {
+    self.textLabel.text = chat.text
+    
+    let leftRightPadding: CGFloat = 24
+    let rect = ChatCollectionViewCell.boundingRectForText(self.textLabel.text!,
+                                                          maxWidth: maxWidth)
+    
+    let constant = max(maxWidth - rect.size.width - leftRightPadding, CGFloat.min)
+    if chat.uid == user?.uid ?? "" {
+      let colors = ChatCollectionViewCell.selfColors
+      self.containerView.backgroundColor = colors.background
+      self.textLabel.textColor = colors.text
+      self.trailingConstraint.active = false
+      self.leadingConstraint.constant = constant
+      self.leadingConstraint.active = true
+    } else {
+      let colors = ChatCollectionViewCell.othersColors
+      self.containerView.backgroundColor = colors.background
+      self.textLabel.textColor = colors.text
+      self.leadingConstraint.active = false
+      self.trailingConstraint.constant = constant
+      self.trailingConstraint.active = true
+    }
   }
 }
