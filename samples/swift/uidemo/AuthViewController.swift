@@ -15,9 +15,27 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuthUI
 
 class AuthViewController: UIViewController {
+  
+  private(set) var auth: FIRAuth? = nil
+  
+  @IBOutlet var signInButton: UIButton!
+  @IBOutlet var signOutButton: UIButton!
+  
+  
+  
   static func fromStoryboard(storyboard: UIStoryboard = AppDelegate.mainStoryboard) -> AuthViewController {
     return storyboard.instantiateViewControllerWithIdentifier("AuthViewController") as! AuthViewController
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    self.auth = FIRAuth.auth()
+    if let user = self.auth?.currentUser {
+      print("logged in! \(user.displayName ?? "<empty>")")
+    }
   }
 }
