@@ -39,9 +39,10 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     let navController = self.navigationController! // assert nonnull
-    let targetController = ChatViewController.fromStoryboard()
+    let targetController = Sample(rawValue: indexPath.row)!.controller()
     
     navController.pushViewController(targetController, animated: true)
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
   }
   
   // MARK: - UITableView Data Source

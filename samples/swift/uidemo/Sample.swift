@@ -18,15 +18,18 @@ import UIKit
 
 // As we add more sample use cases to FirebaseUI, 
 // this enum will eventually grow into a catalogue
-// of features. When adding a new sample, remember to
-// increment the `total` property and add appropriate
-// titles and subtitles.
+// of features.
 enum Sample: Int, RawRepresentable {
   
   case Chat = 0
+  case Auth = 1
   
   static var total: Int {
-    return 1
+    var count = 0
+    while let _ = Sample(rawValue: count) {
+      count += 1
+    }
+    return count
   }
   
   var labels: (title: String, subtitle: String) {
@@ -36,6 +39,20 @@ enum Sample: Int, RawRepresentable {
         title: "Chat",
         subtitle: "Demonstrates using a FirebaseCollectionViewDataSource to load data from Firebase Database into a UICollectionView for a basic chat app."
       )
+    case .Auth:
+      return (
+        title: "Auth",
+        subtitle: "Demonstrates the FirebaseAuthUI flow with customization options"
+      )
+    }
+  }
+  
+  func controller() -> UIViewController {
+    switch self {
+    case .Chat:
+      return ChatViewController.fromStoryboard()
+    case .Auth:
+      return AuthViewController.fromStoryboard()
     }
   }
 }

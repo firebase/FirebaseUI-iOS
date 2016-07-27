@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6BEBFBD2CFCDA8A7918028C1 /* Pods_uidemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A128E4DD412913B07E20C37 /* Pods_uidemoTests.framework */; };
+		8D16073E1D492B200069E4F5 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16073D1D492B200069E4F5 /* AuthViewController.swift */; };
 		8DABC9891D3D82D600453807 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9881D3D82D600453807 /* AppDelegate.swift */; };
 		8DABC98B1D3D82D600453807 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC98A1D3D82D600453807 /* MenuViewController.swift */; };
 		8DABC98E1D3D82D600453807 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DABC98C1D3D82D600453807 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 		5F8797FA94AF0055875F8117 /* Pods-uidemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uidemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-uidemo/Pods-uidemo.debug.xcconfig"; sourceTree = "<group>"; };
 		6EC625C321DD275A92C4085C /* Pods-uidemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uidemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-uidemoTests/Pods-uidemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		8ADB97851843928A14BC9024 /* Pods-uidemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uidemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-uidemo/Pods-uidemo.release.xcconfig"; sourceTree = "<group>"; };
+		8D16073D1D492B200069E4F5 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8DABC9851D3D82D600453807 /* uidemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = uidemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DABC9881D3D82D600453807 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8DABC98A1D3D82D600453807 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				8DABC98A1D3D82D600453807 /* MenuViewController.swift */,
 				8DABC9AA1D3D947300453807 /* SampleCell.swift */,
 				8DABC9A81D3D872C00453807 /* Sample.swift */,
+				8D16073D1D492B200069E4F5 /* AuthViewController.swift */,
 				8D643F0F1D4827F10081F979 /* ChatSample */,
 				8DABC98C1D3D82D600453807 /* Main.storyboard */,
 				8DABC98F1D3D82D600453807 /* Assets.xcassets */,
@@ -355,6 +358,7 @@
 				8DABC98B1D3D82D600453807 /* MenuViewController.swift in Sources */,
 				8DABC9AB1D3D947300453807 /* SampleCell.swift in Sources */,
 				8DABC9A91D3D872C00453807 /* Sample.swift in Sources */,
+				8D16073E1D492B200069E4F5 /* AuthViewController.swift in Sources */,
 				8DABC9AD1D3D9EAF00453807 /* ChatViewController.swift in Sources */,
 				8DDF1AE51D3FF67D001F1160 /* ChatCollectionViewCell.swift in Sources */,
 				8DABC9891D3D82D600453807 /* AppDelegate.swift in Sources */,
@@ -492,7 +496,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = uidemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.uidemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.firebase.firebaseui.uidemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -507,7 +511,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = uidemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.uidemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.firebase.firebaseui.uidemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
