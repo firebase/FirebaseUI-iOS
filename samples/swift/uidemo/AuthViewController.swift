@@ -21,11 +21,7 @@ import FirebaseAuthUI
 class AuthViewController: UIViewController {
   
   private(set) var auth: FIRAuth? = nil
-  
-  @IBOutlet var signInButton: UIButton!
-  @IBOutlet var signOutButton: UIButton!
-  
-  
+  private(set) var authUI: FIRAuthUI? = nil
   
   static func fromStoryboard(storyboard: UIStoryboard = AppDelegate.mainStoryboard) -> AuthViewController {
     return storyboard.instantiateViewControllerWithIdentifier("AuthViewController") as! AuthViewController
@@ -35,7 +31,20 @@ class AuthViewController: UIViewController {
     super.viewDidAppear(animated)
     self.auth = FIRAuth.auth()
     if let user = self.auth?.currentUser {
-      print("logged in! \(user.displayName ?? "<empty>")")
+      print("logged in! \(user.uid)")
+    } else {
+      self.authUI = FIRAuthUI.authUI()
+      
+      let controller = FIRAuthUI.authViewController(self.authUI!)() // wat?
+      self.presentViewController(controller, animated: true, completion: nil)
+    }
+  }
+  
+  @IBAction func signOutPressed(sender: AnyObject) {
+    do {
+     try self.auth?.signOut()
+    } catch let error {
+      fatalError("Could not sign out: \(error)")
     }
   }
 }

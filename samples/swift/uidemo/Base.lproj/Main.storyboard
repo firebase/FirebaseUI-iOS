@@ -202,21 +202,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V9l-NL-ZBW">
-                                <rect key="frame" x="277" y="168" width="47" height="30"/>
-                                <state key="normal" title="Sign in"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xzr-8w-4TK">
-                                <rect key="frame" x="272" y="206" width="57" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szM-ks-o6D">
+                                <rect key="frame" x="272" y="285" width="57" height="30"/>
                                 <state key="normal" title="Sign out"/>
+                                <connections>
+                                    <action selector="signOutPressed:" destination="Vgg-qQ-Fya" eventType="touchUpInside" id="1Ht-pM-WqF"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="szM-ks-o6D" firstAttribute="centerX" secondItem="u8r-Hb-5vC" secondAttribute="centerX" id="G01-3l-Cr8"/>
+                            <constraint firstItem="szM-ks-o6D" firstAttribute="centerY" secondItem="u8r-Hb-5vC" secondAttribute="centerY" id="Lbb-pX-yBD"/>
+                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="signInButton" destination="V9l-NL-ZBW" id="Bxe-vy-CBl"/>
-                        <outlet property="signOutButton" destination="Xzr-8w-4TK" id="q5G-Lh-Bdm"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LWq-2d-DPi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
