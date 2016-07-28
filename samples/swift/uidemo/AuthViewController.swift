@@ -47,6 +47,13 @@ class AuthViewController: UIViewController {
   @IBOutlet private var signOutButton: UIButton!
   @IBOutlet private var startButton: UIButton!
   
+  @IBOutlet private var signedInLabel: UILabel!
+  @IBOutlet private var nameLabel: UILabel!
+  @IBOutlet private var emailLabel: UILabel!
+  @IBOutlet private var uidLabel: UILabel!
+  
+  @IBOutlet var topConstraint: NSLayoutConstraint!
+  
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
@@ -62,15 +69,8 @@ class AuthViewController: UIViewController {
     // given a swift name that would otherwise make it import as termsOfServiceURL.
     self.authUI?.termsOfServiceURL = kFirebaseTermsOfService
     
-    self.authStateDidChangeHandle = self.auth?.addAuthStateDidChangeListener { (auth, user) in
-      if let _ = user {
-        self.signOutButton.enabled = true
-        self.startButton.enabled = false
-      } else {
-        self.signOutButton.enabled = false
-        self.startButton.enabled = true
-      }
-    }
+    self.authStateDidChangeHandle =
+      self.auth?.addAuthStateDidChangeListener(self.updateUI(auth:user:))
   }
   
   override func viewWillDisappear(animated: Bool) {
@@ -97,6 +97,31 @@ class AuthViewController: UIViewController {
       // makes sense.
       fatalError("Could not sign out: \(error)")
     }
+  }
+  
+  // Boilerplate
+  func updateUI(auth auth: FIRAuth, user: FIRUser?) {
+    if let user = user {
+      self.signOutButton.enabled = true
+      self.startButton.enabled = false
+      
+      self.signedInLabel.text = "Signed in"
+      self.nameLabel.text = "Name: " + (user.displayName ?? "(null)")
+      self.emailLabel.text = "Email: " + (user.email ?? "(null)")
+      self.uidLabel.text = "UID: " + user.uid
+    } else {
+      self.signOutButton.enabled = false
+      self.startButton.enabled = true
+      
+      self.signedInLabel.text = "Not signed in"
+      self.nameLabel.text = "Name"
+      self.emailLabel.text = "Email"
+      self.uidLabel.text = "UID"
+    }
+  }
+  
+  override func viewWillLayoutSubviews() {
+    self.topConstraint.constant = self.topLayoutGuide.length
   }
   
   static func fromStoryboard(storyboard: UIStoryboard = AppDelegate.mainStoryboard) -> AuthViewController {
