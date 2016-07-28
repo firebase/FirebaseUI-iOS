@@ -106,7 +106,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   @objc private func didTapSend(sender: AnyObject) {
     guard let user = self.auth?.currentUser else { return }
     let uid = user.uid
-    let name = "User " + (uid as NSString).substringToIndex(6)
+    let name = "User " + uid[uid.characters.startIndex..<uid.characters.startIndex.advancedBy(6)]
     let _text = self.textView.text as String?
     guard let text = _text else { return }
     if (text.isEmpty) { return }
