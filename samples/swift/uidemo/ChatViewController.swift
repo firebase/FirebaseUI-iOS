@@ -45,25 +45,20 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   private let auth = FIRAuth.auth()
   private let chatReference = FIRDatabase.database().reference().child("chats")
   
-  private var collectionViewDataSource: FirebaseCollectionViewDataSource! = nil
+  private var collectionViewDataSource: FirebaseCollectionViewDataSource!
   
   private var user: FIRUser?
   private var query: FIRDatabaseQuery?
+  
+  private var authStateListenerHandle: FIRAuthStateDidChangeListenerHandle?
   
   // MARK: - Interesting stuff
   
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     
-    self.auth?.signInAnonymouslyWithCompletion { (user, error) in
-      if let error = error {
-        // An error here means the user couldn't sign in. Correctly
-        // handling it depends on the context as well as your app's
-        // capabilities, but this is usually a good place to
-        // present "retry" and "forgot your password?" screens.
-        fatalError("Sign in failed: \(error.localizedDescription)")
-      }
-      
+    self.authStateListenerHandle = self.auth?.addAuthStateDidChangeListener { (auth, user) in
+      self.user = user
       self.query = self.chatReference.queryLimitedToLast(50)
       
       // The initializer called below--though it takes a collection view--
@@ -85,11 +80,21 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
       
       // FirebaseArray has a delegate method `childAdded` that could be used here,
       // but unfortunately FirebaseCollectionViewDataSource uses the FirebaseArray
-      // delegate methods to update its own internal state, so in order to scroll 
+      // delegate methods to update its own internal state, so in order to scroll
       // on new insertions we still need to use the query directly.
       self.query!.observeEventType(.ChildAdded, withBlock: { [unowned self] _ in
         self.scrollToBottom(animated: true)
-      })
+        })
+    }
+    
+    self.auth?.signInAnonymouslyWithCompletion { (user, error) in
+      if let error = error {
+        // An error here means the user couldn't sign in. Correctly
+        // handling it depends on the context as well as your app's
+        // capabilities, but this is usually a good place to
+        // present "retry" and "forgot your password?" screens.
+        fatalError("Sign in failed: \(error.localizedDescription)")
+      }
     }
     
     // Notification boilerplate to handle keyboard appearance/disappearance
@@ -139,15 +144,14 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     layout.minimumInteritemSpacing = CGFloat.max
     layout.minimumLineSpacing = 4
     
-    self.auth?.addAuthStateDidChangeListener { (auth, user) in
-      self.user = user
-    }
-    
     self.sendButton.addTarget(self, action: #selector(didTapSend), forControlEvents: .TouchUpInside)
   }
   
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
+    if let handle = self.authStateListenerHandle {
+      self.auth?.removeAuthStateDidChangeListener(handle)
+    }
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }
   
