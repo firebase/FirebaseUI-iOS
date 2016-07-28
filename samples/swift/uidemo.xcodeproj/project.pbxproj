@@ -17,7 +17,6 @@
 		8DABC9A91D3D872C00453807 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9A81D3D872C00453807 /* Sample.swift */; };
 		8DABC9AB1D3D947300453807 /* SampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9AA1D3D947300453807 /* SampleCell.swift */; };
 		8DABC9AD1D3D9EAF00453807 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9AC1D3D9EAF00453807 /* ChatViewController.swift */; };
-		8DABC9AF1D3DA30D00453807 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DABC9AE1D3DA30D00453807 /* GoogleService-Info.plist */; };
 		8DDF1AE51D3FF67D001F1160 /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF1AE41D3FF67D001F1160 /* ChatCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +45,6 @@
 		8DABC9A81D3D872C00453807 /* Sample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
 		8DABC9AA1D3D947300453807 /* SampleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleCell.swift; sourceTree = "<group>"; };
 		8DABC9AC1D3D9EAF00453807 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		8DABC9AE1D3DA30D00453807 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8DDF1AE41D3FF67D001F1160 /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,7 +106,6 @@
 				8DABC98F1D3D82D600453807 /* Assets.xcassets */,
 				8DABC9911D3D82D600453807 /* LaunchScreen.storyboard */,
 				8DABC9941D3D82D600453807 /* Info.plist */,
-				8DABC9AE1D3DA30D00453807 /* GoogleService-Info.plist */,
 			);
 			path = uidemo;
 			sourceTree = "<group>";
@@ -210,7 +207,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DABC9931D3D82D600453807 /* LaunchScreen.storyboard in Resources */,
-				8DABC9AF1D3DA30D00453807 /* GoogleService-Info.plist in Resources */,
 				8DABC9901D3D82D600453807 /* Assets.xcassets in Resources */,
 				8DABC98E1D3D82D600453807 /* Main.storyboard in Resources */,
 			);
