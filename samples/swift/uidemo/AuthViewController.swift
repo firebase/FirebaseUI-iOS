@@ -17,34 +17,86 @@
 import UIKit
 import Firebase
 import FirebaseAuthUI
+import FirebaseGoogleAuthUI
+import FirebaseFacebookAuthUI
 
+let kFirebaseTermsOfService = NSURL(string: "https://www.firebase.com/terms/terms-of-service.html")!
+
+// Your Google app's client ID, which can be found in the GoogleService-Info.plist file.
+// Firebase Google auth is built on top of Google sign-in, so you'll have to add a URL
+// scheme to your project as outlined at the bottom of this reference:
+// https://developers.google.com/identity/sign-in/ios/start-integrating
+//
+// Make sure you don't accidentally check in your client ID in a public repo!
+let kGoogleAppClientID = "your client ID here"
+
+// Your Facebook App ID, which can be found on developers.facebook.com.
+let kFacebookAppID     = "your fb app ID here"
+
+/// A view controller displaying a basic sign-in flow using FIRAuthUI.
 class AuthViewController: UIViewController {
+  // Before running this sample, make sure you've correctly configured
+  // the appropriate authentication methods in Firebase console. For more
+  // info, see https://firebase.google.com/docs/auth/
   
-  private(set) var auth: FIRAuth? = nil
-  private(set) var authUI: FIRAuthUI? = nil
+  private var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
   
-  static func fromStoryboard(storyboard: UIStoryboard = AppDelegate.mainStoryboard) -> AuthViewController {
-    return storyboard.instantiateViewControllerWithIdentifier("AuthViewController") as! AuthViewController
+  private(set) var auth: FIRAuth? = FIRAuth.auth()
+  private(set) var authUI: FIRAuthUI? = FIRAuthUI.authUI()
+  
+  @IBOutlet private var signOutButton: UIButton!
+  @IBOutlet private var startButton: UIButton!
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    // If you haven't set up your authentications correctly these buttons
+    // will still appear in the UI, but they'll crash the app when tapped.
+    let providers: [FIRAuthProviderUI] = [
+      FIRGoogleAuthUI(clientID: kGoogleAppClientID)!,
+      FIRFacebookAuthUI(appID: kFacebookAppID)!,
+    ]
+    self.authUI?.signInProviders = providers
+    
+    // Strangely this is listed as TOSURL in the objc source and isn't
+    // given a swift name that would otherwise make it import as termsOfServiceURL.
+    self.authUI?.termsOfServiceURL = kFirebaseTermsOfService
+    
+    self.authStateDidChangeHandle = self.auth?.addAuthStateDidChangeListener { (auth, user) in
+      if let _ = user {
+        self.signOutButton.enabled = true
+        self.startButton.enabled = false
+      } else {
+        self.signOutButton.enabled = false
+        self.startButton.enabled = true
+      }
+    }
   }
   
-  override func viewDidAppear(animated: Bool) {
-    super.viewDidAppear(animated)
-    self.auth = FIRAuth.auth()
-    if let user = self.auth?.currentUser {
-      print("logged in! \(user.uid)")
-    } else {
-      self.authUI = FIRAuthUI.authUI()
-      
-      let controller = FIRAuthUI.authViewController(self.authUI!)() // wat?
-      self.presentViewController(controller, animated: true, completion: nil)
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    if let handle = self.authStateDidChangeHandle {
+      self.auth?.removeAuthStateDidChangeListener(handle)
     }
+  }
+  
+  @IBAction func startPressed(sender: AnyObject) {
+    let controller = FIRAuthUI.authViewController(self.authUI!)() // wat?
+    self.presentViewController(controller, animated: true, completion: nil)
   }
   
   @IBAction func signOutPressed(sender: AnyObject) {
     do {
      try self.auth?.signOut()
     } catch let error {
+      // Again, fatalError is not a graceful way to handle errors.
+      // This error is most likely a network error, so retrying here
+      // makes sense.
       fatalError("Could not sign out: \(error)")
     }
+  }
+  
+  static func fromStoryboard(storyboard: UIStoryboard = AppDelegate.mainStoryboard) -> AuthViewController {
+    return storyboard.instantiateViewControllerWithIdentifier("AuthViewController") as! AuthViewController
   }
 }

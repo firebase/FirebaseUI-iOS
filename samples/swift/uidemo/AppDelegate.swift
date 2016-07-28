@@ -16,6 +16,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuthUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,6 +32,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // accompanying valid GoogleService-Info.plist file.
     FIRApp.configure()
     return true
+  }
+  
+  func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    // Seems like an oversight that `sourceApplication` should be force-unwrapped.
+    if FIRAuthUI.authUI()?.handleOpenURL(url, sourceApplication: sourceApplication!) ?? false {
+      return true
+    }
+    // other URL handling goes here.
+    return false
   }
 }
 
