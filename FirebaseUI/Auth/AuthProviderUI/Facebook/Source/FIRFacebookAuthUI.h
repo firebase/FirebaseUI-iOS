@@ -42,10 +42,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable instancetype)init NS_UNAVAILABLE;
 
 /** @fn initWithAppID:
-    @brief Designated initializer.
-    @param appId The Facebook App ID.
+    @brief Conevenience initializer. Uses a default permission of `@[ "email" ]`.
+    @param appID The Facebook App ID.
  */
-- (nullable instancetype)initWithAppID:(NSString *)appID NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithAppID:(NSString *)appID;
+
+/** @fn initWithAppID:permissions:
+    @brief Designated initializer.
+    @param appID The Facebook App ID.
+    @param permissions The permissions of the app. This array must be an array of specific string values
+      as defined in https://developers.facebook.com/docs/facebook-login/permissions/
+ */
+- (nullable instancetype)initWithAppID:(NSString *)appID permissions:(NSArray *)permissions NS_DESIGNATED_INITIALIZER;
 
 @end
 
