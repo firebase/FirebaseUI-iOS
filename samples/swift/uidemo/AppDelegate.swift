@@ -34,8 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
   
-  func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-    // Seems like an oversight that `sourceApplication` should be force-unwrapped.
+  func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+    let sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String?
+    // Seems like an oversight that this API doesn't take a nullable sourceApplication.
     if FIRAuthUI.authUI()?.handleOpenURL(url, sourceApplication: sourceApplication!) ?? false {
       return true
     }
