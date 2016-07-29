@@ -55,14 +55,18 @@ static NSString *const kSignInWithFacebook = @"SignInWithFacebook";
                                userInfo:nil];
 }
 
-- (nullable instancetype)initWithAppID:(NSString *)appID {
+- (nullable instancetype)initWithAppID:(NSString *)appID permissions:(NSArray *)permissions {
   self = [super init];
-  if (self) {
-    _scopes = @[ @"email" ];
+  if (self != nil) {
+    _scopes = permissions;
     [FBSDKSettings setAppID:appID];
     _loginManager = [[FBSDKLoginManager alloc] init];
   }
   return self;
+}
+
+- (nullable instancetype)initWithAppID:(NSString *)appID {
+  return [self initWithAppID:appID permissions:@[ @"email" ]];
 }
 
 /** @fn frameworkBundle
