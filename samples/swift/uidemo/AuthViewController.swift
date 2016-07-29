@@ -29,7 +29,7 @@ let kFirebaseTermsOfService = NSURL(string: "https://www.firebase.com/terms/term
 // https://developers.google.com/identity/sign-in/ios/start-integrating
 //
 // Make sure you don't accidentally check in your client ID in a public repo!
-let kGoogleAppClientID = "your client ID here"
+let kGoogleAppClientID = (FIRApp.defaultApp()?.options.clientID)!
 
 // Your Facebook App ID, which can be found on developers.facebook.com.
 let kFacebookAppID     = "your fb app ID here"
