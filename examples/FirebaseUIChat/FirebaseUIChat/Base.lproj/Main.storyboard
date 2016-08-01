@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7RW-VL-qNI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RbL-pq-tUU">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--FirebaseUI Chat-->
-        <scene sceneID="5Vi-Ss-a4T">
+        <!--View Controller-->
+        <scene sceneID="feI-50-QVV">
             <objects>
-                <navigationController title="FirebaseUI Chat" id="7RW-VL-qNI" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="77g-XZ-4ot">
+                <viewController id="aPY-EA-IbU" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lzq-Li-esD"/>
+                        <viewControllerLayoutGuide type="bottom" id="IrB-Nd-Ovt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wX1-NR-lLH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LiO-ia-Uzk">
+                                <rect key="frame" x="277" y="285" width="47" height="30"/>
+                                <state key="normal" title="Sign In"/>
+                                <connections>
+                                    <action selector="signInBtnClicked:" destination="aPY-EA-IbU" eventType="touchUpInside" id="XFr-pV-uhs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXN-J9-pVF">
+                                <rect key="frame" x="270" y="348" width="60" height="30"/>
+                                <state key="normal" title="Sign Out"/>
+                                <connections>
+                                    <action selector="signOutBtnClicked:" destination="aPY-EA-IbU" eventType="touchUpInside" id="ctJ-Yb-Bd5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZXN-J9-pVF" firstAttribute="top" secondItem="LiO-ia-Uzk" secondAttribute="bottom" constant="33" id="6aL-bj-Ebc"/>
+                            <constraint firstItem="LiO-ia-Uzk" firstAttribute="centerX" secondItem="wX1-NR-lLH" secondAttribute="centerX" id="atR-mV-E6o"/>
+                            <constraint firstItem="ZXN-J9-pVF" firstAttribute="centerX" secondItem="wX1-NR-lLH" secondAttribute="centerX" id="b0k-6i-og4"/>
+                            <constraint firstItem="LiO-ia-Uzk" firstAttribute="centerY" secondItem="wX1-NR-lLH" secondAttribute="centerY" id="gzE-Zm-qnu"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="urO-oR-w9H"/>
+                    <connections>
+                        <outlet property="signInBtn" destination="LiO-ia-Uzk" id="4jl-Rh-qhe"/>
+                        <outlet property="signOutBtn" destination="ZXN-J9-pVF" id="98b-69-uep"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nLR-u1-Z0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="243" y="268"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wQC-MT-kHi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RbL-pq-tUU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dUr-Jn-ISJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="nDk-iY-Ue3"/>
+                        <segue destination="aPY-EA-IbU" kind="relationship" relationship="rootViewController" id="I7K-c8-rlH"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1gA-3Y-kdg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xyn-8p-Erg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-366" y="315"/>
-        </scene>
-        <!--FirebaseUI Chat-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController title="FirebaseUI Chat" id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="nzr-3V-O9i">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="562"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                            </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter message here..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S95-Tw-7PJ">
-                                <rect key="frame" x="0.0" y="570" width="600" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="Yz2-bW-2fl"/>
-                                </connections>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="S95-Tw-7PJ" firstAttribute="trailing" secondItem="nzr-3V-O9i" secondAttribute="trailing" id="5BW-rA-MGs"/>
-                            <constraint firstItem="nzr-3V-O9i" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="UWw-59-jnc"/>
-                            <constraint firstItem="nzr-3V-O9i" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ZMW-Kt-zbw"/>
-                            <constraint firstItem="S95-Tw-7PJ" firstAttribute="top" secondItem="nzr-3V-O9i" secondAttribute="bottom" constant="8" symbolic="YES" id="msf-e2-rVQ"/>
-                            <constraint firstItem="S95-Tw-7PJ" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" id="qJV-uX-EyC"/>
-                            <constraint firstItem="S95-Tw-7PJ" firstAttribute="leading" secondItem="nzr-3V-O9i" secondAttribute="leading" id="qhx-qI-Vza"/>
-                            <constraint firstAttribute="trailing" secondItem="S95-Tw-7PJ" secondAttribute="trailing" id="wSL-Bx-1jc"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="FirebaseUI Chat" id="Bf9-85-il7"/>
-                    <connections>
-                        <outlet property="inputTextField" destination="S95-Tw-7PJ" id="wCq-Lf-Q7w"/>
-                        <outlet property="tableView" destination="nzr-3V-O9i" id="Zgr-Qg-xxw"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="396" y="315"/>
+            <point key="canvasLocation" x="-569" y="268"/>
         </scene>
     </scenes>
 </document>
