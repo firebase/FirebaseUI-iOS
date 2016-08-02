@@ -44,9 +44,7 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
     @param user The signed in user if the sign in attempt was successful.
     @param error The error that occured during sign in, if any.
  */
-- (void)authUI:(FIRAuthUI *)authUI
-      didSignInWithUser:(nullable FIRUser *)user
-                  error:(nullable NSError *)error;
+- (void)authUI:(FIRAuthUI *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error;
 
 @optional
 
@@ -126,7 +124,7 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
     @return YES if Firebase Auth UI handled the URL. NO otherwise.
  */
 - (BOOL)handleOpenURL:(NSURL *)URL
-    sourceApplication:(NSString *)sourceApplication;
+    sourceApplication:(NSString *_Nullable)sourceApplication;
 
 /** @fn authViewController
     @brief Returns an instance of the initial view controller of AuthUI.
