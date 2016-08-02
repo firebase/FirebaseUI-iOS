@@ -29,7 +29,7 @@ and [Web](https://github.com/firebase/firebaseui-web/tree/master/auth).
 ## Installation
 ### Importing FirebaseUI components for auth
 Add the following line to your `Podfile`:
-```objective-c
+```ruby
 pod 'FirebaseUI/Auth'
 ```
 
@@ -50,7 +50,20 @@ All operations, callbacks, UI customizations are done through an `FIRAuthUI`
 instance. The `FIRAuthUI` instance associated with the default `FIRAuth`
 instance can be accessed as follows:
 
+```swift
+// swift
+import Firebase
+import FirebaseAuthUI
+
+/* ... */
+
+FIRApp.configure()
+let authUI = FIRAuthUI.authUI()
+authUI?.delegate = self
+```
+
 ```objective-c
+// objc
 @import Firebase
 @import FirebaseAuthUI
 ...
@@ -61,7 +74,19 @@ authUI.delegate = self; // Set the delegate to receive callback.
 
 This instance can then be configured with the providers you wish to support:
 
+```swift
+// swift
+import FirebaseGoogleAuthUI
+import FirebaseFacebookAuthUI
+
+let googleAuthUI = FIRGoogleAuthUI(clientID: kGoogleClientID)
+let facebookAuthUI = FIRFacebookAuthUI(appID: kFacebookAppID)
+
+authUI?.signInProviders = [googleAuthUI, facebookAuthUI]
+```
+
 ```objective-c
+// objc
 @import FirebaseGoogleAuthUI
 @import FirebaseFacebookAuthUI
 ...
@@ -82,7 +107,16 @@ For Facebook sign in support, follow step 3 and 4 of
 Finally add a call to handle the URL that your application receives at the end of the
 Google/Facebook authentication process.
 
-```objective
+```swift
+// swift
+func application(app: UIApplication, openURL url: NSURL, options: [String: AnyObject]) -> Bool {
+  let sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String
+  return FIRAuthUI.authUI()?.handleOpenURL(url, sourceApplication: sourceApplication ?? "") ?? false
+}
+```
+
+```objective-c
+// objc
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -99,14 +133,24 @@ To start the authentication flow, obtain an `authViewController` instance from
 app or present it from another view controller within your app.  In order to
 present the `authViewController` obtain as instance as follows:
 
+```swift
+// swift
+
+// Present the auth view controller and then implement the sign in callback.
+let authViewController = authUI!.authViewController()
+
+func authUI(authUI: FIRAuthUI, didSignInWithUser user: FIRUser?, error: ErrorType?) {
+  // handle user and error as necessary
+}
+```
+
 ```objective-c
+// objc
 UIViewController *authViewController = [authUI authViewController];
 // Use authViewController as your root view controller,
 // or present it on top of an existing view controller.
 
-- (void)authUI:(FIRAuthUI *)authUI
-      didSignInWithUser:(nullable FIRUser *)user
-                  error:(nullable NSError *)error {
+- (void)authUI:(FIRAuthUI *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error {
   // Implement this method to handle signed in user or error if any.
 }
 ```
@@ -116,8 +160,15 @@ UIViewController *authViewController = [authUI authViewController];
 
 The Terms of Service URL for your application, which is displayed on the
 email/password account creation screen, can be specified as follows:
+
+```swift
+// swift
+authUI?.TOSURL = NSURL(string: "https://example.com/tos")!
+```
+
 ```objective-c
-authUI.TOSURL = [NSURL URLWithString:@"http://example.com/tos"];
+// objc
+authUI.TOSURL = [NSURL URLWithString:@"https://example.com/tos"];
 ```
 
 ### Custom strings
@@ -127,7 +178,13 @@ be useful for things such as adding support for other languages besides English.
 
 In order to do so:
 
+```swift
+// swift
+authUI?.customStringsBundle = NSBundle.mainBundle() // Or any custom bundle.
+```
+
 ```objective-c
+// objc
 authUI.customStringsBundle = [NSBundle mainBundle]; // Or any custom bundle.
 ```
 
@@ -146,8 +203,16 @@ customize it to your needs. Provide `FIRAuthUI` with an instance of your
 subclass by implementing the delegate method
 `authPickerViewControllerForAuthUI:` as follows:
 
+```swift
+// swift
+func authPickerViewControllerForAuthUI(authUI: FIRAuthUI) -> FIRAuthPickerViewController {
+  return CustomAuthPickerViewController(authUI: authUI)
+}
+```
+
 ```objective-c
+// objc
 - (FIRAuthPickerViewController *)authPickerViewControllerForAuthUI:(FIRAuthUI *)authUI {
-  return [[YourCustomAuthPickerViewController alloc] initWithAuthUI:authUI];
+  return [[CustomAuthPickerViewController alloc] initWithAuthUI:authUI];
 }
 ```
