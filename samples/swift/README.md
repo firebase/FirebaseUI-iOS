@@ -7,7 +7,7 @@ In order to run the project you'll need a valid app in Firebase and
 the `GoogleService-Info.plist` file for that project. Drag the plist into the 
 project root and the project should build correctly. 
 
-![](https://raw.githubusercontent.com/dakeshi/FirebaseUI-iOS/add_git_in_sample_readme/samples/swift/drag_plist_into_the_project.gif)
+![](https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/samples/swift/drag_plist_into_the_project.gif)
 
 Find more instructions
 and download a plist file from the [Firebase console](https://console.firebase.google.com). 
