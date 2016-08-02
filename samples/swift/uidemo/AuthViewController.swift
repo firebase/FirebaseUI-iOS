@@ -27,8 +27,6 @@ let kFirebaseTermsOfService = NSURL(string: "https://firebase.google.com/terms/"
 // Firebase Google auth is built on top of Google sign-in, so you'll have to add a URL
 // scheme to your project as outlined at the bottom of this reference:
 // https://developers.google.com/identity/sign-in/ios/start-integrating
-//
-// Make sure you don't accidentally check in your client ID in a public repo!
 let kGoogleAppClientID = (FIRApp.defaultApp()?.options.clientID)!
 
 // Your Facebook App ID, which can be found on developers.facebook.com.
