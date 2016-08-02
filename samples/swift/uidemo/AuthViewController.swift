@@ -36,7 +36,8 @@ let kFacebookAppID     = "your fb app ID here"
 class AuthViewController: UIViewController {
   // Before running this sample, make sure you've correctly configured
   // the appropriate authentication methods in Firebase console. For more
-  // info, see https://firebase.google.com/docs/auth/
+  // info, see the Auth README at ../../FirebaseUI/Auth/README.md
+  // and https://firebase.google.com/docs/auth/
   
   private var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
   
