@@ -20,45 +20,42 @@ For a more in-depth explanation of each of the above, check the usage instructio
 `FirebaseTableViewDataSource` implements the `UITableViewDataSource` protocol to automatically use Firebase as a data source for your `UITableView`.
 
 #### Objective-C
-```objective-c
-YourViewController.h
-...
-@property (strong, nonatomic) Firebase *firebaseRef;
+```objc
+// YourViewController.h
+
+@property (strong, nonatomic) FIRDatabaseReference *firebaseRef;
 @property (strong, nonatomic) FirebaseTableViewDataSource *dataSource;
 ```
 
 ```objective-c
-YourViewController.m
-...
-self.firebaseRef = [[Firebase alloc] initWithUrl:@"https://<YOUR-FIREBASE-APP>.firebaseio.com/"];
-self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:firebaseRef cellReuseIdentifier:@"<YOUR-REUSE-IDENTIFIER>" view:self.tableView];
+// YourViewController.m
 
-[self.dataSource populateCellWithBlock:^(UITableViewCell *cell, FDataSnapshot *snap) {
+self.firebaseRef = [[FIRDatabase database] reference];
+self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:self.firebaseRef cellReuseIdentifier:@"<YOUR-REUSE-IDENTIFIER>" view:self.tableView];
+self.tableView.dataSource = self.dataSource;
+
+[self.dataSource populateCellWithBlock:^(UITableViewCell *cell, FIRDataSnapshot *snap) {
   // Populate cell as you see fit, like as below
   cell.textLabel.text = snap.key;
 }];
-
-[self.tableView setDataSource:self.dataSource];
 ```
 
 #### Swift
 ```swift
-YourViewController.swift
-...
-let firebaseRef = Firebase(url:"https://<YOUR-FIREBASE-APP>.firebaseio.com/")
-let dataSource: FirebaseTableViewDataSource!
-...
+// YourViewController.swift
+
+let firebaseRef = FIRDatabase.database().reference()
+var dataSource: FirebaseTableViewDataSource!
+
 self.dataSource = FirebaseTableViewDataSource(ref: self.firebaseRef, cellReuseIdentifier: "<YOUR-REUSE-IDENTIFIER>", view: self.tableView)
+self.tableView.dataSource = self.dataSource
 
 self.dataSource.populateCellWithBlock { (cell: UITableViewCell, obj: NSObject) -> Void in
-  let snap = obj as! FDataSnapshot
+  let snap = obj as! FIRDataSnapshot
 
   // Populate cell as you see fit, like as below
   cell.textLabel?.text = snap.key as String
 }
-
-self.tableView.dataSource = self.dataSource
-
 ```
 
 ### FirebaseCollectionViewDataSource
@@ -67,44 +64,42 @@ self.tableView.dataSource = self.dataSource
 
 #### Objective-C
 ```objective-c
-YourViewController.h
-...
-@property (strong, nonatomic) Firebase *firebaseRef;
+// YourViewController.h
+
+@property (strong, nonatomic) FIRDatabaseReference *firebaseRef;
 @property (strong, nonatomic) FirebaseCollectionViewDataSource *dataSource;
 ```
 
 ```objective-c
-YourViewController.m
-...
-self.firebaseRef = [[Firebase alloc] initWithUrl:@"https://<YOUR-FIREBASE-APP>.firebaseio.com/"];
-self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:firebaseRef cellReuseIdentifier:@"<YOUR-REUSE-IDENTIFIER>" view:self.CollectionView];
+// YourViewController.m
 
-[self.dataSource populateCellWithBlock:^(UICollectionViewCell *cell, FDataSnapshot *snap) {
+self.firebaseRef = [[FIRDatabase database] reference];
+self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:self.firebaseRef cellReuseIdentifier:@"<YOUR-REUSE-IDENTIFIER>" view:self.CollectionView];
+self.collectionView.dataSource = self.dataSource;
+
+[self.dataSource populateCellWithBlock:^(UICollectionViewCell *cell, FIRDataSnapshot *snap) {
   // Populate cell as you see fit, like as below
   cell.backgroundColor = [UIColor blueColor];
 }];
-
-[self.collectionView setDataSource:self.dataSource];
 ```
 
 #### Swift
 ```swift
-YourViewController.swift
-...
-let firebaseRef = Firebase(url: "https://<YOUR-FIREBASE-APP>.firebaseio.com/")
-let dataSource: FirebaseCollectionViewDataSource!
-...
+// YourViewController.swift
+
+let firebaseRef = FIRDatabase.database().reference()
+var dataSource: FirebaseCollectionViewDataSource!
+
 self.dataSource = FirebaseCollectionViewDataSource(ref: self.firebaseRef, cellReuseIdentifier: "<YOUR-REUSE-IDENTIFIER>", view: self.collectionView)
 
 self.dataSource.populateCellWithBlock { (cell: UICollectionViewCell, obj: NSObject) -> Void in
-  let snap = obj as! FDataSnapshot
+  let snap = obj as! FIRDataSnapshot
 
   // Populate cell as you see fit, like as below
   cell.backgroundColor = UIColor.blueColor()
 }
 
 self.collectionView.dataSource = self.dataSource
-
 ```
 
 ## Customizing your UITableView or UICollectionView
@@ -118,162 +113,155 @@ You can use the default `UITableViewCell` or `UICollectionViewCell` implementati
 #### Objective-C UITableView and UICollectionView with Default UI*ViewCell
 ```objective-c
 self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:firebaseRef cellReuseIdentifier:@"<YOUR-REUSE-IDENTIFIER>" view:self.tableView];
+self.tableView.dataSource = self.dataSource
 
-[self.dataSource populateCellWithBlock:^(UITableViewCell *cell, FDataSnapshot *snap) {
+[self.dataSource populateCellWithBlock:^(UITableViewCell *cell, FIRDataSnapshot *snap) {
   // Populate cell as you see fit, like as below
   cell.textLabel.text = snap.key;
 }];
-
-[self.tableView setDataSource:self.dataSource];
 ```
 
 ```objective-c
 self.dataSource = [[FirebaseCollectioneViewDataSource alloc] initWithRef:firebaseRef cellReuseIdentifier:@"<YOUR-REUSE-IDENTIFIER>" view:self.CollectionView];
+self.collectionView.dataSource = self.dataSource;
 
-[self.dataSource populateCellWithBlock:^(UICollectionViewCell *cell, FDataSnapshot *snap) {
+[self.dataSource populateCellWithBlock:^(UICollectionViewCell *cell, FIRDataSnapshot *snap) {
   // Populate cell as you see fit by adding subviews as appropriate
   [cell.contentView addSubview:customView];
 }];
-
-[self.collectionView setDataSource:self.dataSource];
 ```
 
 #### Swift UITableView and UICollectionView with Default UI*ViewCell
 ```swift
 self.dataSource = FirebaseTableViewDataSource(ref: firebaseRef cellReuseIdentifier: @"<YOUR-REUSE-IDENTIFIER>" view: self.tableView)
+self.tableView.dataSource = self.dataSource
 
 self.dataSource.populateCellWithBlock { (cell: UITableViewCell, obj: NSObject) -> Void in
+  let snap = obj as! FIRDataSnapshot
   // Populate cell as you see fit, like as below
-  cell.textLabel.text = snap.key;
+  cell.textLabel.text = snap.key
 }
-
-self.tableView.dataSource = self.dataSource;
 ```
 
 ```swift
 self.dataSource = FirebaseCollectionViewDataSource(ref: firebaseRef cellReuseIdentifier: @"<YOUR-REUSE-IDENTIFIER>" view: self.collectionView)
+self.collectionView.dataSource = self.dataSource
 
 self.dataSource.populateCellWithBlock { (cell: UICollectionViewCell, obj: NSObject) -> Void in
   // Populate cell as you see fit by adding subviews as appropriate
   cell.contentView.addSubview(customView)
 }
-
-self.collectionView.dataSource = self.dataSource;
 ```
 
 ### Using Storyboards and Prototype Cells
 
-Create a storyboard that has either a `UITableViewController`, `UICollectionViewController` or a `UIViewController` with a `UITableView` or `UICollectionView`. Drag a prototype cell onto the `UITableView` or `UICollectionView` and give it a custom reuse identifier which matches the reuse identifier being used when instantiating the `Firebase*ViewDataSource`. When using prototype cells, make sure to use `prototypeReuseIdentifier` instead of `cellReuseIdentifier`.
+Create a storyboard that has either a `UITableViewController`, `UICollectionViewController` or a `UIViewController` with a `UITableView` or `UICollectionView`. Drag a prototype cell onto the `UITableView` or `UICollectionView` and give it a custom reuse identifier which matches the reuse identifier being used when instantiating the `Firebase*ViewDataSource`. *When using prototype cells, make sure to use `prototypeReuseIdentifier` instead of `cellReuseIdentifier`*.
 
 Drag and other properties onto the cell and associate them with properties of a `UITableViewCell` or `UICollectionViewCell` subclass. Code samples are otherwise similar to the above.
 
 ### Using a Custom Subclass of UI*ViewCell
 
-Create a custom subclass of `UITableViewCell` or `UICollectionViewCell`, with or without the XIB file. Make sure to instantiate `-initWithStyle: reuseIdentifier:` to instantiate a `UITableViewCell` or `-initWithFrame:` to instantiate a `UICollectionViewCell`. You can then hook the custom class up to the implementation of `FirebaseTableViewDataSource`.
+Create a custom subclass of `UITableViewCell` or `UICollectionViewCell`, with or without the XIB file. Make sure to implement `-initWithStyle: reuseIdentifier:` to instantiate a `UITableViewCell` or `-initWithFrame:` to instantiate a `UICollectionViewCell`. You can then hook the custom class up to the implementation of `FirebaseTableViewDataSource`.
 
 #### Objective-C UITableView and UICollectionView with Custom Subclasses of UI*ViewCell
 ```objective-c
 self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:firebaseRef cellClass:[YourCustomClass class] cellReuseIdentifier:@"<YOUR-REUSE-IDENTIFIER>" view:self.tableView];
+self.tableView.dataSource = self.dataSource;
 
-[self.dataSource populateCellWithBlock:^(YourCustomClass *cell, FDataSnapshot *snap) {
+[self.dataSource populateCellWithBlock:^(YourCustomClass *cell, FIRDataSnapshot *snap) {
   // Populate custom cell as you see fit, like as below
   cell.yourCustomLabel.text = snap.key;
 }];
-
-[self.tableView setDataSource:self.dataSource];
 ```
 
 ```objective-c
 self.dataSource = [[FirebaseCollectioneViewDataSource alloc] initWithRef:firebaseRef cellClass:[YourCustomClass class] cellReuseIdentifier:@"<YOUR-REUSE-IDENTIFIER>" view:self.CollectionView];
+self.collectionView.dataSource = self.dataSource;
 
 [self.dataSource populateCellWithBlock:^(YourCustomClass *cell, FDataSnapshot *snap) {
   // Populate cell as you see fit
   cell.customView = customView;
 }];
-
-[self.collectionView setDataSource:self.dataSource];
 ```
 
 #### Swift UITableView and UICollectionView with Custom Subclasses of UI*ViewCell
 ```swift
-self.dataSource = FirebaseTableViewDataSource(ref: firebaseRef cellClass: YourCustomClass.self cellReuseIdentifier: @"<YOUR-REUSE-IDENTIFIER>" view: self.tableView)
+self.dataSource = FirebaseTableViewDataSource(ref: firebaseRef cellClass: CustomCollectionViewCell.self cellReuseIdentifier: @"<YOUR-REUSE-IDENTIFIER>" view: self.tableView)
+self.collectionView.dataSource = self.dataSource
 
-self.dataSource.populateCellWithBlock { (cell: YourCustomClass, obj: NSObject) -> Void in
+self.dataSource.populateCellWithBlock { (anyCell: UITableViewCell, obj: NSObject) -> Void in
+  let cell = anyCell as! CustomTableViewCell
+  let snap = obj as! FIRDatabaseSnapshot
+
   // Populate cell as you see fit, like as below
-  cell.yourCustomLabel.text = snap.key;
+  cell.yourCustomLabel.text = snap.key
 }
-
-self.tableView.dataSource = self.dataSource;
 ```
 
 ```swift
-self.dataSource = FirebaseCollectionViewDataSource(ref: firebaseRef cellClass: YourCustomClass.self cellReuseIdentifier: @"<YOUR-REUSE-IDENTIFIER>" view: self.collectionView)
+self.dataSource = FirebaseCollectionViewDataSource(ref: firebaseRef cellClass: CustomCollectionViewCell.self cellReuseIdentifier: @"<YOUR-REUSE-IDENTIFIER>" view: self.collectionView)
+self.collectionView.dataSource = self.dataSource
 
-self.dataSource.populateCellWithBlock { (cell: YourCustomClass, obj: NSObject) -> Void in
+self.dataSource.populateCellWithBlock { (anyCell: UICollectionViewCell, obj: NSObject) -> Void in
+  let snap = obj as! FIRDatabaseSnapshot
+  let cell = anyCell as! CustomCollectionViewCell
+
   // Populate cell as you see fit
-  cell.customView = customView;
+  cell.customView = customView
 }
-
-self.collectionView.dataSource = self.dataSource;
 ```
 
 ### Using a Custom XIB
 
-Create a custom XIB file and hook it up to the prototype cell. You can then use this like any other UITableViewCell, either using custom tags or by using the custom class associated with the XIB.
+Create a custom XIB file and hook it up to the prototype cell. You can then use this like any other UITableViewCell, for example by using the custom class associated with the XIB.
 
 #### Objective-C UITableView and UICollectionView with Custom XIB
 ```objective-c
 self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:firebaseRef nibNamed:@"<YOUR-XIB>" cellReuseIdentifier:@"<YOUR-REUSE-IDENTIFIER>" view:self.tableView];
+self.tableView.dataSource = self.dataSource;
 
-[self.dataSource populateCellWithBlock:^(UITableViewCell *cell, FDataSnapshot *snap) {
-  // Use tags to populate custom properties, or use properties of a custom cell, if applicable
-  UILabel *yourCustomLabel = (UILabel *)[cell.contentView viewWithTag:<YOUR-TAG>];
-  yourCustomLabel.text = snap.key
+[self.dataSource populateCellWithBlock:^(CustomTableViewCell *cell, FIRDataSnapshot *snap) {
+  NSAssert([cell isMemberOfClass:[CustomTableViewCell class]], @"Unexpected cell type %@ in table view", NSStringFromClass([cell class]));
+  cell.customTextLabel.text = snap.key;
 }];
-
-[self.tableView setDataSource:self.dataSource];
 ```
 
 ```objective-c
 self.dataSource = [[FirebaseCollectionViewDataSource alloc] initWithRef:firebaseRef nibNamed:@"<YOUR-XIB>" cellReuseIdentifier:@"<YOUR-REUSE-IDENTIFIER>" view:self.collectionView];
+self.collectionView.dataSource = self.dataSource;
 
-[self.dataSource populateCellWithBlock:^(UICollectionViewCell *cell, FDataSnapshot *snap) {
-  // Use tags to populate custom properties, or use properties of a custom cell, if applicable
-  UILabel *yourCustomLabel = (UILabel *)[cell.contentView viewWithTag:<YOUR-TAG>];
-  yourCustomLabel.text = snap.key
+[self.dataSource populateCellWithBlock:^(CustomCollectionViewCell *cell, FIRDataSnapshot *snap) {
+  NSAssert([cell isMemberOfClass:[CustomCollectionViewCell class]], @"Unexpected cell type %@ in collection view", NSStringFromClass([cell class]));
+  cell.customTextLabel.text = snap.key;
 }];
-
-[self.tableView setDataSource:self.dataSource];
 ```
 
 #### Swift UITableView and UICollectionView with Custom XIB
 ```swift
 self.dataSource = FirebaseTableViewDataSource(ref: firebaseRef nibNamed: "<YOUR-XIB>" cellReuseIdentifier: @"<YOUR-REUSE-IDENTIFIER>" view: self.tableView)
+self.tableView.dataSource = self.dataSource
 
-self.dataSource.populateCellWithBlock { (cell: UITableViewCell, obj: NSObject) -> Void in
-  // Use tags to populate custom properties, or use properties of a custom cell, if applicable
-  let yourCustomLabel: UILabel = cell.contentView.viewWithTag(<YOUR-TAG>) as! UILabel
-  yourCustomLabel.text = snap.key
+self.dataSource.populateCellWithBlock { (anyCell: UITableViewCell, obj: NSObject) -> Void in
+  let cell = anyCell as! CustomTableViewCell
+  let snap = obj as! FIRDataSnapshot
+  cell.customTextLabel.text = snap.key
 }
-
-self.tableView.dataSource = self.dataSource;
 ```
 
 ```swift
 self.dataSource = FirebaseCollectionViewDataSource(ref: firebaseRef cellClass: YourCustomClass.self cellReuseIdentifier: @"<YOUR-REUSE-IDENTIFIER>" view: self.collectionView)
+self.collectionView.dataSource = self.dataSource
 
-self.dataSource.populateCellWithBlock { (cell: YourCustomClass, obj: NSObject) -> Void in
-  // Use tags to populate custom properties, or use properties of a custom cell, if applicable
-  let yourCustomLabel: UILabel = cell.contentView.viewWithTag(<YOUR-TAG>) as! UILabel
-  yourCustomLabel.text = snap.key
+self.dataSource.populateCellWithBlock { (anyCell: UICollectionViewCell, obj: NSObject) -> Void in
+  let cell = anyCell as! CustomCollectionViewCell
+  let snap = obj as! FIRDataSnapshot
+  cell.customTextLabel.text = snap.key
 }
-
-self.collectionView.dataSource = self.dataSource;
 ```
 
 ## Understanding FirebaseUI Core's Internals
 
-FirebaseUI has several building blocks that developers should understand before building additional functionality on top of FirebaseUI, including a synchronized array `FirebaseArray` and a generic data source superclass `FirebaseDataSource` from which `FirebaseTableViewDataSource` and `FirebaseCollectionViewDataSource` or other custom view classes subclass.
+FirebaseUI has several building blocks that developers should understand before building additional functionality on top of FirebaseUI, including a synchronized array `FirebaseArray` and a generic data source superclass `FirebaseDataSource` from which `FirebaseTableViewDataSource` and `FirebaseCollectionViewDataSource` or other custom data source classes subclass.
 
 ### FirebaseArray and the FirebaseArrayDelegate Protocol
 
@@ -281,13 +269,13 @@ FirebaseUI has several building blocks that developers should understand before 
 
 #### Objective-C
 ```objective-c
-Firebase *firebaseRef = [[Firebase alloc] initWithUrl:@"https://<YOUR-FIREBASE-APP>.firebaseio.com/"];
+FIRDatabaseReference *firebaseRef = [[FIRDatabase database] reference];
 FirebaseArray *array = [[FirebaseArray alloc] initWithRef:firebaseRef];
 ```
 
 #### Swift
 ```swift
-let firebaseRef = Firebase(url: "https://<YOUR-FIREBASE-APP>.firebaseio.com/")
+let firebaseRef = FIRDatabase.database().reference()
 let array = FirebaseArray(ref: firebaseRef)
 ```
 
