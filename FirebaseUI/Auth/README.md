@@ -117,11 +117,9 @@ func application(app: UIApplication, openURL url: NSURL, options: [String: AnyOb
 
 ```objective-c
 // objc
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
-  return [[FIRAuthUI authUI] handleOpenURL:url sourceApplication:sourceApplication]
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
+  NSString *sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+  return [[FIRAuthUI authUI] handleOpenURL:url sourceApplication:sourceApplication];
 }
 ```
 
