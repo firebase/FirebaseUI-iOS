@@ -26,5 +26,6 @@ auth, so make sure those are enabled in Firebase console.
 
 The auth example requires a little more setup (adding url schemes, etc)
 since it depends on the various keys and tokens for the different auth 
-services your app will support. Take a look at the source files for more
-information. 
+services your app will support. Take a look at the [Auth README](../../FirebaseUI/Auth/README.md) 
+for more information.
+ 
