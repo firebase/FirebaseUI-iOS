@@ -20,7 +20,7 @@ import FirebaseAuthUI
 import FirebaseGoogleAuthUI
 import FirebaseFacebookAuthUI
 
-let kFirebaseTermsOfService = NSURL(string: "https://www.firebase.com/terms/terms-of-service.html")!
+let kFirebaseTermsOfService = NSURL(string: "https://firebase.google.com/terms/")!
 
 // Your Google app's client ID, which can be found in the GoogleService-Info.plist file
 // and is stored in the `clientID` property of your FIRApp options.
