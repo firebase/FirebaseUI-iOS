@@ -81,10 +81,7 @@ class AuthViewController: UIViewController {
   }
   
   @IBAction func startPressed(sender: AnyObject) {
-    // The function signature says it returns a view controller,
-    // but when called it actually returns a closure returning a view controller.
-    // Maybe this is a swift-objc interoperability bug.
-    let controller = FIRAuthUI.authViewController(self.authUI!)() // wat?
+    let controller = self.authUI!.authViewController()
     self.presentViewController(controller, animated: true, completion: nil)
   }
   
