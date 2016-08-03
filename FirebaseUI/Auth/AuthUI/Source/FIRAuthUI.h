@@ -124,7 +124,7 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
     @return YES if Firebase Auth UI handled the URL. NO otherwise.
  */
 - (BOOL)handleOpenURL:(NSURL *)URL
-    sourceApplication:(NSString *_Nullable)sourceApplication;
+    sourceApplication:(nullable NSString *)sourceApplication;
 
 /** @fn authViewController
     @brief Returns an instance of the initial view controller of AuthUI.
