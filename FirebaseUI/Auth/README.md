@@ -38,8 +38,8 @@ To use FirebaseUI to authenticate users you first need to configure each provide
 their own developer app settings. Please read the *Before you begin* section of the Firebase
 Auth guides at the following links:
 
-- [Email and password](https://firebase.google.com/docs/auth/ios/password-auth#before_you_begin),
-- [Google](https://firebase.google.com/docs/auth/ios/google-signin#before_you_begin), and
+- [Email and password](https://firebase.google.com/docs/auth/ios/password-auth#before_you_begin)
+- [Google](https://firebase.google.com/docs/auth/ios/google-signin#before_you_begin)
 - [Facebook](https://firebase.google.com/docs/auth/ios/facebook-login#before_you_begin)
 
 
