@@ -100,7 +100,7 @@
 				8DABC98A1D3D82D600453807 /* MenuViewController.swift */,
 				8DABC9AA1D3D947300453807 /* SampleCell.swift */,
 				8DABC9A81D3D872C00453807 /* Sample.swift */,
-				8D16073D1D492B200069E4F5 /* AuthViewController.swift */,
+				8DD17C951D4BCC6500E850E4 /* AuthSample */,
 				8D643F0F1D4827F10081F979 /* ChatSample */,
 				8DABC98C1D3D82D600453807 /* Main.storyboard */,
 				8DABC98F1D3D82D600453807 /* Assets.xcassets */,
@@ -117,6 +117,14 @@
 				8DABC99F1D3D82D600453807 /* Info.plist */,
 			);
 			path = uidemoTests;
+			sourceTree = "<group>";
+		};
+		8DD17C951D4BCC6500E850E4 /* AuthSample */ = {
+			isa = PBXGroup;
+			children = (
+				8D16073D1D492B200069E4F5 /* AuthViewController.swift */,
+			);
+			name = AuthSample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
