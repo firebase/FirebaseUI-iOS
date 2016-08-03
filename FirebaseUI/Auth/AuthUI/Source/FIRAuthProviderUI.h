@@ -99,7 +99,7 @@ typedef void (^FIRAuthProviderSignInCompletionBlock)(FIRAuthCredential *_Nullabl
     @param sourceApplication The application which tried opening the URL.
     @return YES if your auth provider handled the URL. NO otherwise.
  */
-- (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication;
+- (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(nullable NSString *)sourceApplication;
 
 @end
 
