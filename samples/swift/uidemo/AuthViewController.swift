@@ -65,8 +65,8 @@ class AuthViewController: UIViewController {
     ]
     self.authUI?.signInProviders = providers
     
-    // Strangely this is listed as TOSURL in the objc source and isn't
-    // given a swift name that would otherwise make it import as termsOfServiceURL.
+    // This is listed as `TOSURL` in the objc source,
+    // but it's `termsOfServiceURL` in the current pod version.
     self.authUI?.termsOfServiceURL = kFirebaseTermsOfService
     
     self.authStateDidChangeHandle =
