@@ -61,10 +61,14 @@
 
         [self.snapshots insertObject:snapshot atIndex:index];
 
-        [self.delegate childAdded:snapshot atIndex:index];
+        if ([self.delegate respondsToSelector:@selector(array:didAddObject:atIndex:)]) {
+          [self.delegate array:self didAddObject:snapshot atIndex:index];
+        }
       }
       withCancelBlock:^(NSError *error) {
-        [self.delegate canceledWithError:error];
+        if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
+          [self.delegate array:self queryCancelledWithError:error];
+        }
       }];
 
   [self.query observeEventType:FIRDataEventTypeChildChanged
@@ -73,10 +77,14 @@
 
         [self.snapshots replaceObjectAtIndex:index withObject:snapshot];
 
-        [self.delegate childChanged:snapshot atIndex:index];
+        if ([self.delegate respondsToSelector:@selector(array:didChangeObject:atIndex:)]) {
+          [self.delegate array:self didChangeObject:snapshot atIndex:index];
+        }
       }
       withCancelBlock:^(NSError *error) {
-        [self.delegate canceledWithError:error];
+        if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
+          [self.delegate array:self queryCancelledWithError:error];
+        }
       }];
 
   [self.query observeEventType:FIRDataEventTypeChildRemoved
@@ -85,10 +93,14 @@
 
         [self.snapshots removeObjectAtIndex:index];
 
-        [self.delegate childRemoved:snapshot atIndex:index];
+        if ([self.delegate respondsToSelector:@selector(array:didRemoveObject:atIndex:)]) {
+          [self.delegate array:self didRemoveObject:snapshot atIndex:index];
+        }
       }
       withCancelBlock:^(NSError *error) {
-        [self.delegate canceledWithError:error];
+        if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
+          [self.delegate array:self queryCancelledWithError:error];
+        }
       }];
 
   [self.query observeEventType:FIRDataEventTypeChildMoved
@@ -99,10 +111,14 @@
         NSUInteger toIndex = [self indexForKey:previousChildKey] + 1;
         [self.snapshots insertObject:snapshot atIndex:toIndex];
 
-        [self.delegate childMoved:snapshot fromIndex:fromIndex toIndex:toIndex];
+        if ([self.delegate respondsToSelector:@selector(array:didMoveObject:fromIndex:toIndex:)]) {
+          [self.delegate array:self didMoveObject:snapshot fromIndex:fromIndex toIndex:toIndex];
+        }
       }
       withCancelBlock:^(NSError *error) {
-        [self.delegate canceledWithError:error];
+        if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
+          [self.delegate array:self queryCancelledWithError:error];
+        }
       }];
 }
 
@@ -127,6 +143,10 @@
 
 #pragma mark -
 #pragma mark Public API methods
+
+- (NSArray *)items {
+  return [self.snapshots copy];
+}
 
 - (NSUInteger)count {
   return [self.snapshots count];

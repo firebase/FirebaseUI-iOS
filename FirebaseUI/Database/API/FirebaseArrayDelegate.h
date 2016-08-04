@@ -18,6 +18,8 @@
 
 // clang-format on
 
+@class FirebaseArray;
+
 /**
  * A protocol to allow instances of FirebaseArray to raise events through a
  * delegate. Raises all
@@ -36,7 +38,7 @@
  * @param object The object added to the FirebaseArray
  * @param index The index the child was added at
  */
-- (void)childAdded:(id)object atIndex:(NSUInteger)index;
+- (void)array:(FirebaseArray *)array didAddObject:(id)object atIndex:(NSUInteger)index;
 
 /**
  * Delegate method which is called whenever an object is chinged in a
@@ -47,7 +49,7 @@
  * @param object The object that changed in the FirebaseArray
  * @param index The index the child was changed at
  */
-- (void)childChanged:(id)object atIndex:(NSUInteger)index;
+- (void)array:(FirebaseArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index;
 
 /**
  * Delegate method which is called whenever an object is removed from a
@@ -58,7 +60,7 @@
  * @param object The object removed from the FirebaseArray
  * @param index The index the child was removed at
  */
-- (void)childRemoved:(id)object atIndex:(NSUInteger)index;
+- (void)array:(FirebaseArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index;
 
 /**
  * Delegate method which is called whenever an object is moved within a
@@ -70,12 +72,12 @@
  * @param fromIndex The index the child is being moved from
  * @param toIndex The index the child is being moved to
  */
-- (void)childMoved:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+- (void)array:(FirebaseArray *)array didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
 /**
  * Delegate method which is called whenever the backing query is canceled.
  * @param error the error that was raised
  */
-- (void)canceledWithError:(NSError *)error;
+- (void)array:(FirebaseArray *)array queryCancelledWithError:(NSError *)error;
 
 @end

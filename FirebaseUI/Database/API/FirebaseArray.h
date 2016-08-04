@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The delegate object that array changes are surfaced to, which conforms to the
  * [FirebaseArrayDelegate Protocol](FirebaseArrayDelegate).
  */
-@property(weak, nonatomic) id<FirebaseArrayDelegate> delegate;
+@property(weak, nonatomic, nullable) id<FirebaseArrayDelegate> delegate;
 
 /**
  * The query on a Firebase reference that provides data to populate the instance of FirebaseArray.
@@ -50,6 +50,16 @@ NS_ASSUME_NONNULL_BEGIN
  * The delegate object that array changes are surfaced to.
  */
 @property(strong, nonatomic) NSMutableArray<FIRDataSnapshot *> * snapshots;
+
+/**
+ * The number of objects in the FirebaseArray.
+ */
+@property(nonatomic, readonly) NSUInteger count;
+
+/**
+ * The items currently in the FirebaseArray.
+ */
+@property(nonatomic, readonly, copy) NSArray *items;
 
 #pragma mark -
 #pragma mark Initializer methods
@@ -70,12 +80,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 #pragma mark Public API methods
-
-/**
- * Returns the count of objects in the FirebaseArray.
- * @return The count of objects in the FirebaseArray
- */
-- (NSUInteger)count;
 
 /**
  * Returns an object at a specific index in the FirebaseArray.
