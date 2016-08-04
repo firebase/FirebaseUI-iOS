@@ -18,15 +18,27 @@
 
 // clang-format on
 
-#import <Foundation/Foundation.h>
+@import Firebase;
 
 #import "FirebaseArrayDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class FIRDatabaseQuery;
-@class FIRDatabaseReference;
-@class FIRDataSnapshot;
+@protocol FIRDataObservable
+@required
+
+- (FIRDatabaseHandle)observeEventType:(FIRDataEventType)eventType
+       andPreviousSiblingKeyWithBlock:(void (^)(FIRDataSnapshot *snapshot, NSString *__nullable prevKey))block
+                      withCancelBlock:(nullable void (^)(NSError* error))cancelBlock;
+
+- (FIRDatabaseHandle)observeEventType:(FIRDataEventType)eventType
+                            withBlock:(void (^)(FIRDataSnapshot *snapshot))block
+                      withCancelBlock:(nullable void (^)(NSError* error))cancelBlock;
+
+@end
+
+@interface FIRDatabaseQuery (FIRDataObservable) <FIRDataObservable>
+@end
 
 /**
  * FirebaseArray provides an array structure that is synchronized with a Firebase reference or

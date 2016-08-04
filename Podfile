@@ -7,6 +7,15 @@ target 'FirebaseUI' do
   pod 'Firebase/Auth'
   pod 'FBSDKLoginKit', '~> 4.0'
   pod 'GoogleSignIn', '~> 4.0'
+
+  target 'FirebaseUITests' do
+    inherit! :search_paths
+    pod 'Firebase'
+    pod 'Firebase/Database'
+    pod 'Firebase/Auth'
+    pod 'FBSDKLoginKit', '~> 4.0'
+    pod 'GoogleSignIn', '~> 4.0'
+  end
 end
 
 target 'Database' do
@@ -34,3 +43,4 @@ target 'Google' do
   pod 'Firebase/Auth'
   pod 'GoogleSignIn', '~> 4.0'
 end
+
