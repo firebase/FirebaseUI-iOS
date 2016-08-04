@@ -83,6 +83,8 @@
 		8621C9557B0F42B90A867731 /* libPods-FirebaseUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E25E2F8253FA11A3E072D265 /* libPods-FirebaseUI.a */; };
 		8D2CB5E21D53F5AE0097FEEB /* libFirebaseUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C579A61B57349000899F86 /* libFirebaseUI.a */; };
 		8D2CB5E91D53F5C50097FEEB /* FirebaseArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2CB5E81D53F5C50097FEEB /* FirebaseArrayTest.m */; };
+		8DFCD1371D53FE8D00208D7B /* FIRAuthUISignInButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DFCD1351D53FE8D00208D7B /* FIRAuthUISignInButton.h */; };
+		8DFCD1381D53FE8D00208D7B /* FIRAuthUISignInButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCD1361D53FE8D00208D7B /* FIRAuthUISignInButton.m */; };
 		962E1417A825A57ED7034636 /* libPods-Facebook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56CCA3CB9295B6E71208403F /* libPods-Facebook.a */; };
 		D0A910B983E334AD9CFE58E6 /* libPods-FirebaseUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 015DB5FB0D29CB8E1812F81E /* libPods-FirebaseUITests.a */; };
 		D8666CB71CEAFCD5002B7C26 /* FirebaseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 1073FEAC1CE50A8F00E2F73F /* FirebaseArray.m */; };
@@ -340,6 +342,8 @@
 		8D2CB5E11D53F5AE0097FEEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D2CB5E81D53F5C50097FEEB /* FirebaseArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseArrayTest.m; sourceTree = "<group>"; };
 		8D3AA95C1D53F9C7006FC9AF /* libPods-FirebaseUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-FirebaseUI.a"; path = "../../Library/Developer/Xcode/DerivedData/FirebaseUI-fwcyvciocjlrhqbyjmmybozelsll/Build/Products/Debug-iphonesimulator/libPods-FirebaseUI.a"; sourceTree = "<group>"; };
+		8DFCD1351D53FE8D00208D7B /* FIRAuthUISignInButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRAuthUISignInButton.h; sourceTree = "<group>"; };
+		8DFCD1361D53FE8D00208D7B /* FIRAuthUISignInButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRAuthUISignInButton.m; sourceTree = "<group>"; };
 		B992B1D4DFBAE9C4E3453B15 /* Pods-Google.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Google.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Google/Pods-Google.debug.xcconfig"; sourceTree = "<group>"; };
 		D3D8DBF14682CFE73B51B6A5 /* Pods-Google.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Google.release.xcconfig"; path = "Pods/Target Support Files/Pods-Google/Pods-Google.release.xcconfig"; sourceTree = "<group>"; };
 		D8666CAE1CEAFC93002B7C26 /* libDatabase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDatabase.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -580,6 +584,8 @@
 				1073FE471CE509EC00E2F73F /* FIRAuthUIErrors.m */,
 				1073FE481CE509EC00E2F73F /* FIRAuthUIErrorUtils.h */,
 				1073FE491CE509EC00E2F73F /* FIRAuthUIErrorUtils.m */,
+				8DFCD1351D53FE8D00208D7B /* FIRAuthUISignInButton.h */,
+				8DFCD1361D53FE8D00208D7B /* FIRAuthUISignInButton.m */,
 				1073FE4A1CE509EC00E2F73F /* FIRAuthUIStrings.h */,
 				1073FE4B1CE509EC00E2F73F /* FIRAuthUIStrings.m */,
 				1073FE4C1CE509EC00E2F73F /* FIRAuthUITableHeaderView.h */,
@@ -822,6 +828,7 @@
 				1073FE971CE509EC00E2F73F /* FIRPasswordRecoveryViewController.h in Headers */,
 				1073FE741CE509EC00E2F73F /* FIRGoogleAuthUI.h in Headers */,
 				1073FE8E1CE509EC00E2F73F /* FIRAuthUITableViewCell.h in Headers */,
+				8DFCD1371D53FE8D00208D7B /* FIRAuthUISignInButton.h in Headers */,
 				1073FE7D1CE509EC00E2F73F /* FIRAuthPickerViewController.h in Headers */,
 				1073FEB21CE50A8F00E2F73F /* FirebaseCollectionViewDataSource.h in Headers */,
 				1073FE881CE509EC00E2F73F /* FIRAuthUIErrorUtils.h in Headers */,
@@ -1371,6 +1378,7 @@
 				1073FE8F1CE509EC00E2F73F /* FIRAuthUITableViewCell.m in Sources */,
 				1073FE981CE509EC00E2F73F /* FIRPasswordRecoveryViewController.m in Sources */,
 				1073FEA11CE509EC00E2F73F /* FIRPasswordVerificationViewController.m in Sources */,
+				8DFCD1381D53FE8D00208D7B /* FIRAuthUISignInButton.m in Sources */,
 				1073FE951CE509EC00E2F73F /* FIREmailEntryViewController.m in Sources */,
 				1073FEB71CE50A8F00E2F73F /* FirebaseDataSource.m in Sources */,
 				1073FE6B1CE509EC00E2F73F /* FIRFacebookAuthUI.m in Sources */,
