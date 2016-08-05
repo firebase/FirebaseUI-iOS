@@ -33,8 +33,7 @@
 
 @implementation FirebaseArray
 
-#pragma mark -
-#pragma mark Initializer methods
+#pragma mark - Initializer methods
 
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query {
   NSParameterAssert(query != nil);
@@ -48,8 +47,7 @@
   return self;
 }
 
-#pragma mark -
-#pragma mark Memory management methods
+#pragma mark - Memory management methods
 
 - (void)dealloc {
   // TODO: Consider keeping track of these and only removing them if they are
@@ -57,8 +55,7 @@
   [self.query removeAllObservers];
 }
 
-#pragma mark -
-#pragma mark Private API methods
+#pragma mark - Private API methods
 
 - (void)initListeners {
   [self.query observeEventType:FIRDataEventTypeChildAdded
@@ -142,8 +139,7 @@
   return NSNotFound;
 }
 
-#pragma mark -
-#pragma mark Public API methods
+#pragma mark - Public API methods
 
 - (NSArray *)items {
   return [self.snapshots copy];
