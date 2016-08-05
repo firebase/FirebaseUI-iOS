@@ -274,7 +274,7 @@
   id cell = [self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier
                                                  forIndexPath:indexPath];
 
-  FIRDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
+  FIRDataSnapshot *snap = [self.items objectAtIndex:indexPath.row];
   if (![self.modelClass isSubclassOfClass:[FIRDataSnapshot class]]) {
     id model = [[self.modelClass alloc] init];
     // TODO: replace setValuesForKeysWithDictionary with client API
@@ -289,7 +289,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [self.array count];
+  return self.items.count;
 }
 
 - (void)populateCellWithBlock:(void (^)(__kindof UITableViewCell *cell,

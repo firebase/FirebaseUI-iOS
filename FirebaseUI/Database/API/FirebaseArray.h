@@ -18,15 +18,25 @@
 
 // clang-format on
 
-#import <Foundation/Foundation.h>
+@import Firebase;
 
 #import "FirebaseArrayDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class FIRDatabaseQuery;
-@class FIRDatabaseReference;
-@class FIRDataSnapshot;
+@protocol FIRDataObservable
+@required
+
+- (FIRDatabaseHandle)observeEventType:(FIRDataEventType)eventType
+       andPreviousSiblingKeyWithBlock:(void (^)(FIRDataSnapshot *snapshot, NSString *__nullable prevKey))block
+                      withCancelBlock:(nullable void (^)(NSError* error))cancelBlock;
+
+- (void)removeAllObservers; // TODO: allow removing observers by handle
+
+@end
+
+@interface FIRDatabaseQuery (FIRDataObservable) <FIRDataObservable>
+@end
 
 /**
  * FirebaseArray provides an array structure that is synchronized with a Firebase reference or
@@ -39,43 +49,38 @@ NS_ASSUME_NONNULL_BEGIN
  * The delegate object that array changes are surfaced to, which conforms to the
  * [FirebaseArrayDelegate Protocol](FirebaseArrayDelegate).
  */
-@property(weak, nonatomic) id<FirebaseArrayDelegate> delegate;
+@property(weak, nonatomic, nullable) id<FirebaseArrayDelegate> delegate;
 
 /**
  * The query on a Firebase reference that provides data to populate the instance of FirebaseArray.
  */
-@property(strong, nonatomic) FIRDatabaseQuery *query;
+@property(strong, nonatomic) id<FIRDataObservable> query;
 
 /**
- * The delegate object that array changes are surfaced to.
+ * The number of objects in the FirebaseArray.
  */
-@property(strong, nonatomic) NSMutableArray<FIRDataSnapshot *> * snapshots;
+@property(nonatomic, readonly) NSUInteger count;
+
+/**
+ * The items currently in the FirebaseArray.
+ */
+@property(nonatomic, readonly, copy) NSArray *items;
 
 #pragma mark -
 #pragma mark Initializer methods
 
 /**
- * Intitalizes FirebaseArray with a standard Firebase reference.
- * @param ref The Firebase reference which provides data to FirebaseArray
- * @return The instance of FirebaseArray
+ * Initalizes FirebaseArray with a Firebase query (FIRDatabaseQuery) or database reference
+ * (FIRDatabaseReference).
+ * @param query A query or Firebase database reference
+ * @return A FirebaseArray instance
  */
-- (instancetype)initWithRef:(FIRDatabaseReference *)ref;
+- (instancetype)initWithQuery:(id<FIRDataObservable>)query NS_DESIGNATED_INITIALIZER;
 
-/**
- * Intitalizes FirebaseArray with a Firebase query (FIRDatabaseQuery).
- * @param query A query on a Firebase reference which provides filtered data to FirebaseArray
- * @return The instance of FirebaseArray
- */
-- (instancetype)initWithQuery:(FIRDatabaseQuery *)query;
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark -
 #pragma mark Public API methods
-
-/**
- * Returns the count of objects in the FirebaseArray.
- * @return The count of objects in the FirebaseArray
- */
-- (NSUInteger)count;
 
 /**
  * Returns an object at a specific index in the FirebaseArray.

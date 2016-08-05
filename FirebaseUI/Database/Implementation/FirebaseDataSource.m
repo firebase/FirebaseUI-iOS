@@ -21,7 +21,14 @@
 #import "FirebaseDataSource.h"
 
 @interface FirebaseDataSource ()
-@property(copy, nonatomic) void (^cancelBlock)(NSError *);
+
+@property(copy, nonatomic, nonnull) void (^cancelBlock)(NSError *);
+
+/**
+ * The FirebaseArray which backs the instance of the datasource.
+ */
+@property(strong, nonatomic, nonnull) FirebaseArray *array;
+
 @end
 
 @implementation FirebaseDataSource
@@ -32,8 +39,8 @@
 - (instancetype)initWithArray:(FirebaseArray *)array {
   self = [super init];
   if (self) {
-    self.array = array;
-    self.array.delegate = self;
+    _array = array;
+    _array.delegate = self;
   }
   return self;
 }
@@ -42,7 +49,7 @@
 #pragma mark API methods
 
 - (NSUInteger)count {
-  return [self.array count];
+  return self.array.count;
 }
 
 - (id)objectAtIndex:(NSUInteger)index {
