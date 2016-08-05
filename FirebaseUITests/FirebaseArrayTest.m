@@ -25,7 +25,7 @@
 // Dumb object holding a pair of blocks and a data event type.
 @interface FUIDataEventHandler: NSObject
 @property (nonatomic, assign) FIRDataEventType event;
-@property (nonatomic, copy, nonnull) void (^success)(FIRDataSnapshot * _Nonnull, NSString *_Nullable);
+@property (nonatomic, copy, nonnull) void (^success)(FIRDataSnapshot *_Nonnull, NSString *_Nullable);
 @property (nonatomic, copy, nonnull) void (^cancelled)(NSError *_Nonnull);
 @end
 @implementation FUIDataEventHandler
@@ -93,16 +93,24 @@
   }
 }
 
-// Sends a bunch of insertion events with snapshot keys as integer strings (i.e. @"0") of increasing
-// order, starting from 0.
-- (void)populateWithCount:(NSUInteger)count {
+// Inserts sequentially with data provided by the `generator` block.
+- (void)populateWithCount:(NSUInteger)count generator:(FUIFakeSnapshot *(^)(NSUInteger))generator {
   NSString *previous = nil;
   for (NSUInteger i = 0; i < count; i++) {
-    FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] init];
-    snap.key = @(i).stringValue;
+    FUIFakeSnapshot *snap = generator(i);
     [self sendEvent:FIRDataEventTypeChildAdded withObject:snap previousKey:previous error:nil];
     previous = snap.key;
   }
+}
+
+// Sends a bunch of insertion events with snapshot keys as integer strings (i.e. @"0") of increasing
+// order, starting from 0.
+- (void)populateWithCount:(NSUInteger)count {
+  [self populateWithCount:count generator:^FUIFakeSnapshot *(NSUInteger index) {
+    FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] init];
+    snap.key = @(index).stringValue;
+    return snap;
+  }];
 }
 
 @end
@@ -111,6 +119,7 @@
 
 @property (nonatomic, nullable) FUITestObservable *observable;
 @property (nonatomic, nullable) FirebaseArray *firebaseArray;
+@property (nonatomic, nullable) FUIFakeSnapshot *snap;
 
 @end
 
@@ -118,6 +127,7 @@
 
 - (void)setUp {
   [super setUp];
+  self.snap = [[FUIFakeSnapshot alloc] init];
   self.observable = [[FUITestObservable alloc] init];
   self.firebaseArray = [[FirebaseArray alloc] initWithQuery:self.observable];
 }
@@ -127,47 +137,28 @@
   [self.observable removeAllObservers];
 }
 
+#pragma mark - Insertion
+
 - (void)testFirebaseArrayCanBeInitialized {
-  XCTAssertNotNil(self.observable, @"expected FirebaseArray to not be nil when initialized");
+  XCTAssertNotNil(self.firebaseArray, @"expected FirebaseArray to not be nil when initialized");
 }
 
 - (void)testEmptyFirebaseArrayUpdatesCountOnInsert {
-  FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] init];
-  snap.key = @"snapshot";
+  self.snap.key = @"snapshot";
   [self.observable sendEvent:FIRDataEventTypeChildAdded
-                  withObject:snap
+                  withObject:self.snap
                  previousKey:nil
                        error:nil];
   NSAssert(self.firebaseArray.count == 1, @"expected empty array to contain one item after insert");
 }
 
-- (void)testFirebaseArrayCanDeleteOneElementArray {
-  // Insert a key
-  FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] init];
-  snap.key = @"snapshot";
-  [self.observable sendEvent:FIRDataEventTypeChildAdded
-                  withObject:snap
-                 previousKey:nil
-                       error:nil];
-  
-  // Delete
-  [self.observable sendEvent:FIRDataEventTypeChildRemoved
-                  withObject:snap
-                 previousKey:nil
-                       error:nil];
-  
-  XCTAssert(self.firebaseArray.count == 0,
-            @"expected empty array to still be empty after one insertion and one deletion");
-}
-
 - (void)testFirebaseArrayCanInsertInMiddle {
   // Setup boilerplate
   [self.observable populateWithCount:10];
-  FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] init];
-  snap.key = @"5";
+  self.snap.key = @"5";
   
-  // This is the actual change being tested
-  [self.observable sendEvent:FIRDataEventTypeChildAdded withObject:snap previousKey:@"4" error:nil];
+  // Insert in middle
+  [self.observable sendEvent:FIRDataEventTypeChildAdded withObject:self.snap previousKey:@"4" error:nil];
   
   // Expectation boilerplate
   NSArray *items = self.firebaseArray.items;
@@ -179,5 +170,206 @@
   
   XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
 }
+
+- (void)testFirebaseArrayCanInsertAtBeginning {
+  // Setup boilerplate
+  [self.observable populateWithCount:10];
+  self.snap.key = @"0";
+  
+  // Insert at beginning
+  [self.observable sendEvent:FIRDataEventTypeChildAdded withObject:self.snap previousKey:nil error:nil];
+  
+  // Expectation boilerplate
+  NSArray *items = self.firebaseArray.items;
+  NSArray *expected = @[@"0", @"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9"];
+  NSMutableArray *result = [NSMutableArray array];
+  for (FUIFakeSnapshot *snapshot in items) {
+    [result addObject:snapshot.key];
+  }
+  
+  XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
+}
+
+- (void)testFirebaseArrayCanInsertAtEnd {
+  // Setup boilerplate
+  [self.observable populateWithCount:10];
+  self.snap.key = @"10";
+  
+  // Insert at end
+  [self.observable sendEvent:FIRDataEventTypeChildAdded withObject:self.snap previousKey:@"9" error:nil];
+  
+  // Expectation boilerplate
+  NSArray *items = self.firebaseArray.items;
+  NSArray *expected = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10"];
+  NSMutableArray *result = [NSMutableArray array];
+  for (FUIFakeSnapshot *snapshot in items) {
+    [result addObject:snapshot.key];
+  }
+  
+  XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
+}
+
+- (void)testFirebaseArrayCanInsertIntoUniformArray {
+  // Setup boilerplate
+  [self.observable populateWithCount:10 generator:^FUIFakeSnapshot *(NSUInteger i) {
+    FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] init];
+    snap.key = @"1";
+    return snap;
+  }];
+  self.snap.key = @"1";
+  
+  // Insert after @"1", which is ambiguous
+  [self.observable sendEvent:FIRDataEventTypeChildAdded withObject:self.snap previousKey:@"1" error:nil];
+  
+  // Expectation boilerplate
+  NSArray *items = self.firebaseArray.items;
+  NSArray *expected = @[@"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1"];
+  NSMutableArray *result = [NSMutableArray array];
+  for (FUIFakeSnapshot *snapshot in items) {
+    [result addObject:snapshot.key];
+  }
+  
+  XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
+}
+
+- (void)testFirebaseCanInsertIntoArrayWithDuplicates {
+  // Setup boilerplate
+  [self.observable populateWithCount:10 generator:^FUIFakeSnapshot *(NSUInteger i) {
+    FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] init];
+    // Since insertion with duplicates is ambiguous and is resolved by
+    // always inserting at the first element identical to the
+    // previous sibling, this series of insertions will produce
+    // unexpected results.
+    snap.key = ((i % 3 == 0) ? @"1" : @"0");
+    NSLog(@"index: %lu, key: %@", i, snap.key);
+    return snap;
+  }];
+  self.snap.key = @"1";
+  
+  // Insert after @"1", which is ambiguous again
+  [self.observable sendEvent:FIRDataEventTypeChildAdded withObject:self.snap previousKey:@"1" error:nil];
+  
+  // Expectation boilerplate
+  NSArray *items = self.firebaseArray.items;
+  // The insertion point (after the first 1) of this ambiguous insert
+  // is a leaky implementation detail and could be considered a bug.
+  NSArray *expected = @[@"1", @"1", @"0", @"1", @"0", @"0", @"1", @"0", @"0", @"1", @"0"];
+  NSMutableArray *result = [NSMutableArray array];
+  for (FUIFakeSnapshot *snapshot in items) {
+    [result addObject:snapshot.key];
+  }
+  
+  XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
+}
+
+#pragma mark - Deletion
+
+- (void)testFirebaseArrayCanDeleteOneElementArray {
+  // Insert a key
+  self.snap.key = @"snapshot";
+  [self.observable sendEvent:FIRDataEventTypeChildAdded
+                  withObject:self.snap
+                 previousKey:nil
+                       error:nil];
+  
+  // Delete
+  [self.observable sendEvent:FIRDataEventTypeChildRemoved
+                  withObject:self.snap
+                 previousKey:nil
+                       error:nil];
+  
+  XCTAssert(self.firebaseArray.count == 0,
+            @"expected empty array to still be empty after one insertion and one deletion");
+}
+
+- (void)testFirebaseArrayCanDeleteFirstElement {
+  [self.observable populateWithCount:10];
+  self.snap.key = @"0";
+  
+  [self.observable sendEvent:FIRDataEventTypeChildRemoved withObject:self.snap previousKey:nil error:nil];
+  
+  // Expectation boilerplate
+  NSArray *items = self.firebaseArray.items;
+  NSArray *expected = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9"];
+  NSMutableArray *result = [NSMutableArray array];
+  for (FUIFakeSnapshot *snapshot in items) {
+    [result addObject:snapshot.key];
+  }
+  
+  XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
+}
+
+- (void)testFirebaseArrayCanDeleteLastElement {
+  [self.observable populateWithCount:10];
+  self.snap.key = @"9";
+  
+  [self.observable sendEvent:FIRDataEventTypeChildRemoved withObject:self.snap previousKey:@"8" error:nil];
+  
+  // Expectation boilerplate
+  NSArray *items = self.firebaseArray.items;
+  NSArray *expected = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8"];
+  NSMutableArray *result = [NSMutableArray array];
+  for (FUIFakeSnapshot *snapshot in items) {
+    [result addObject:snapshot.key];
+  }
+  
+  XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
+}
+
+- (void)testFirebaseArrayCanDeleteMiddleElement {
+  [self.observable populateWithCount:10];
+  self.snap.key = @"5";
+  
+  [self.observable sendEvent:FIRDataEventTypeChildRemoved withObject:self.snap previousKey:@"4" error:nil];
+  
+  // Expectation boilerplate
+  NSArray *items = self.firebaseArray.items;
+  NSArray *expected = @[@"0", @"1", @"2", @"3", @"4", @"6", @"7", @"8", @"9"];
+  NSMutableArray *result = [NSMutableArray array];
+  for (FUIFakeSnapshot *snapshot in items) {
+    [result addObject:snapshot.key];
+  }
+  
+  XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
+}
+
+- (void)testFirebaseArrayCanModifyElement {
+  // TODO: Make this test less bad
+  [self.observable populateWithCount:10];
+  self.snap.key = @"5";
+  
+  [self.observable sendEvent:FIRDataEventTypeChildChanged withObject:self.snap previousKey:@"4" error:nil];
+  
+  // Expectation boilerplate
+  NSArray *items = self.firebaseArray.items;
+  // Current implementation doesn't change the key of the snap on child change.
+  NSArray *expected = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9"];
+  NSMutableArray *result = [NSMutableArray array];
+  for (FUIFakeSnapshot *snapshot in items) {
+    [result addObject:snapshot.key];
+  }
+  
+  XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
+}
+
+- (void)testirebaseArrayCanMoveElement {
+  [self.observable populateWithCount:10];
+  self.snap.key = @"8";
+  
+  // Move 8 to after 2
+  [self.observable sendEvent:FIRDataEventTypeChildMoved withObject:self.snap previousKey:@"2" error:nil];
+  
+  // Expectation boilerplate
+  NSArray *items = self.firebaseArray.items;
+  NSArray *expected = @[@"0", @"1", @"2", @"8", @"3", @"4", @"5", @"6", @"7", @"9"];
+  NSMutableArray *result = [NSMutableArray array];
+  for (FUIFakeSnapshot *snapshot in items) {
+    [result addObject:snapshot.key];
+  }
+  
+  XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
+}
+
+// TODO: add tests for arrays with uniques after we figure out what we want the desired behavior to be
 
 @end
