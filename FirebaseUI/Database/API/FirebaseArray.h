@@ -31,9 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
        andPreviousSiblingKeyWithBlock:(void (^)(FIRDataSnapshot *snapshot, NSString *__nullable prevKey))block
                       withCancelBlock:(nullable void (^)(NSError* error))cancelBlock;
 
-- (FIRDatabaseHandle)observeEventType:(FIRDataEventType)eventType
-                            withBlock:(void (^)(FIRDataSnapshot *snapshot))block
-                      withCancelBlock:(nullable void (^)(NSError* error))cancelBlock;
+- (void)removeAllObservers; // TODO: allow removing observers by handle
 
 @end
 
@@ -56,12 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The query on a Firebase reference that provides data to populate the instance of FirebaseArray.
  */
-@property(strong, nonatomic) FIRDatabaseQuery *query;
-
-/**
- * The delegate object that array changes are surfaced to.
- */
-@property(strong, nonatomic) NSMutableArray<FIRDataSnapshot *> * snapshots;
+@property(strong, nonatomic) id<FIRDataObservable> query;
 
 /**
  * The number of objects in the FirebaseArray.
@@ -77,18 +70,14 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Initializer methods
 
 /**
- * Intitalizes FirebaseArray with a standard Firebase reference.
- * @param ref The Firebase reference which provides data to FirebaseArray
- * @return The instance of FirebaseArray
+ * Initalizes FirebaseArray with a Firebase query (FIRDatabaseQuery) or database reference
+ * (FIRDatabaseReference).
+ * @param query A query or Firebase database reference
+ * @return A FirebaseArray instance
  */
-- (instancetype)initWithRef:(FIRDatabaseReference *)ref;
+- (instancetype)initWithQuery:(id<FIRDataObservable>)query NS_DESIGNATED_INITIALIZER;
 
-/**
- * Intitalizes FirebaseArray with a Firebase query (FIRDatabaseQuery).
- * @param query A query on a Firebase reference which provides filtered data to FirebaseArray
- * @return The instance of FirebaseArray
- */
-- (instancetype)initWithQuery:(FIRDatabaseQuery *)query;
+- (instancetype)init NS_UNAVAILABLE;
 
 #pragma mark -
 #pragma mark Public API methods

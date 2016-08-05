@@ -20,6 +20,15 @@
 
 #import "FirebaseArray.h"
 
+@interface FirebaseArray ()
+
+/**
+ * The delegate object that array changes are surfaced to.
+ */
+@property(strong, nonatomic) NSMutableArray<FIRDataSnapshot *> * snapshots;
+
+@end
+
 @import FirebaseDatabase;
 
 @implementation FirebaseArray
@@ -27,15 +36,12 @@
 #pragma mark -
 #pragma mark Initializer methods
 
-- (instancetype)initWithRef:(FIRDatabaseReference *)ref {
-  return [self initWithQuery:ref];
-}
-
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query {
+  NSParameterAssert(query != nil);
   self = [super init];
   if (self) {
-    self.snapshots = [NSMutableArray array];
-    self.query = query;
+    _snapshots = [NSMutableArray array];
+    _query = query;
 
     [self initListeners];
   }
@@ -57,7 +63,10 @@
 - (void)initListeners {
   [self.query observeEventType:FIRDataEventTypeChildAdded
       andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
-        NSUInteger index = [self indexForKey:previousChildKey] + 1;
+        NSUInteger index = 0;
+        if (previousChildKey != nil) {
+          index = [self indexForKey:previousChildKey] + 1;
+        }
 
         [self.snapshots insertObject:snapshot atIndex:index];
 
@@ -88,7 +97,7 @@
       }];
 
   [self.query observeEventType:FIRDataEventTypeChildRemoved
-      withBlock:^(FIRDataSnapshot *snapshot) {
+      andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousSiblingKey) {
         NSUInteger index = [self indexForKey:snapshot.key];
 
         [self.snapshots removeObjectAtIndex:index];
@@ -123,22 +132,14 @@
 }
 
 - (NSUInteger)indexForKey:(NSString *)key {
-  if (!key) return -1;
+  NSParameterAssert(key != nil);
 
   for (NSUInteger index = 0; index < [self.snapshots count]; index++) {
     if ([key isEqualToString:[(FIRDataSnapshot *)[self.snapshots objectAtIndex:index] key]]) {
       return index;
     }
   }
-
-  NSString *errorReason =
-      [NSString stringWithFormat:@"Key \"%@\" not found in FirebaseArray %@", key, self.snapshots];
-  @throw [NSException exceptionWithName:@"FirebaseArrayKeyNotFoundException"
-                                 reason:errorReason
-                               userInfo:@{
-                                 @"Key" : key,
-                                 @"Array" : self.snapshots
-                               }];
+  return NSNotFound;
 }
 
 #pragma mark -
