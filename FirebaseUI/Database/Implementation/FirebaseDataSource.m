@@ -33,8 +33,7 @@
 
 @implementation FirebaseDataSource
 
-#pragma mark -
-#pragma mark Initializer methods
+#pragma mark - Initializer methods
 
 - (instancetype)initWithArray:(FirebaseArray *)array {
   self = [super init];
@@ -45,8 +44,7 @@
   return self;
 }
 
-#pragma mark -
-#pragma mark API methods
+#pragma mark - API methods
 
 - (NSUInteger)count {
   return self.array.count;
@@ -64,8 +62,7 @@
   self.cancelBlock = block;
 }
 
-#pragma mark -
-#pragma mark FirebaseArrayDelegate methods
+#pragma mark - FirebaseArrayDelegate methods
 
 - (void)canceledWithError:(NSError *)error {
   if (self.cancelBlock != nil) {

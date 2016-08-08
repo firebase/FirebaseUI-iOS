@@ -24,8 +24,7 @@
 
 @implementation FirebaseTableViewDataSource
 
-#pragma mark -
-#pragma mark FirebaseDataSource initializer methods
+#pragma mark - FirebaseDataSource initializer methods
 
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
         cellReuseIdentifier:(NSString *)identifier
@@ -236,8 +235,7 @@
   return self;
 }
 
-#pragma mark -
-#pragma mark FirebaseArrayDelegate methods
+#pragma mark - FirebaseArrayDelegate methods
 
 - (void)array:(FirebaseArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
@@ -267,8 +265,7 @@
   [self.tableView endUpdates];
 }
 
-#pragma mark -
-#pragma mark UITableViewDataSource methods
+#pragma mark - UITableViewDataSource methods
 
 - (id)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   id cell = [self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier

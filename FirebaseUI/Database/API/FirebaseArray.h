@@ -66,8 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, readonly, copy) NSArray *items;
 
-#pragma mark -
-#pragma mark Initializer methods
+#pragma mark - Initializer methods
 
 /**
  * Initalizes FirebaseArray with a Firebase query (FIRDatabaseQuery) or database reference
@@ -79,8 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init NS_UNAVAILABLE;
 
-#pragma mark -
-#pragma mark Public API methods
+#pragma mark - Public API methods
 
 /**
  * Returns an object at a specific index in the FirebaseArray.
@@ -105,21 +103,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Support for subscripting. This method is unused and trying to write directly to the
- * array using subscripting will cause an assertion.
+ * array using subscripting will cause an assertion failure.
  */
-- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx;
-
-#pragma mark -
-#pragma mark Private API methods
+- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx NS_UNAVAILABLE;
 
 /**
  * Returns an index for a given object's key (that matches the object's key in the corresponding
  * Firebase reference).
  * @param key The key of the desired object
- * @return The index of the object for which the key matches or -1 if the key is null
- * @exception FirebaseArrayKeyNotFoundException Thrown when the desired key is not in the
- * FirebaseArray, likely indicating that the FirebaseArray is no longer being properly synchronized
- * with the Firebase database.
+ * @return The index of the object for which the key matches or NSNotFound if the key is not found
+ * @exception NSInvalidArgumentException Thrown when the `key` parameter is `nil`.
  */
 - (NSUInteger)indexForKey:(NSString *)key;
 

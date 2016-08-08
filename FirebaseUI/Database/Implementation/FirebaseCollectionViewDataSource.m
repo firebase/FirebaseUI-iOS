@@ -24,8 +24,7 @@
 
 @implementation FirebaseCollectionViewDataSource
 
-#pragma mark -
-#pragma mark FirebaseDataSource initializer methods
+#pragma mark - FirebaseDataSource initializer methods
 
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
         cellReuseIdentifier:(NSString *)identifier

@@ -383,9 +383,8 @@ NS_ASSUME_NONNULL_BEGIN
  * This method populates the fields of a UITableViewCell or subclass given a
  * model object (or
  * FIRDataSnapshot).
- * @param callback A block which returns an initialized UITableViewCell (or
- * subclass) and the
- * corresponding object to populate the cell with.
+ * @param callback A block which returns an initialized UITableViewCell 
+ * (or subclass) and the corresponding object to populate the cell with.
  */
 - (void)populateCellWithBlock:(void (^)(__kindof UITableViewCell *cell, __kindof NSObject *object))callback;
 
