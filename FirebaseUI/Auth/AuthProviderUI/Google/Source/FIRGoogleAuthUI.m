@@ -31,10 +31,15 @@ static NSString *const kGoogleGamesScope = @"https://www.googleapis.com/auth/gam
  */
 static NSString *const kGooglePlusMeScope = @"https://www.googleapis.com/auth/plus.me";
 
-/** @var kGooglePlusScopesPrefix
-    @brief The OAuth scope string prefix for all scopes starting with "plus.".
+/** @var kGooglePlusMeScope
+ @brief The OAuth scope string for the user's email scope.
  */
-static NSString *const kGooglePlusScopesPrefix = @"https://www.googleapis.com/auth/plus.";
+static NSString *const kGoogleUserInfoEmailScope = @"https://www.googleapis.com/auth/userinfo.email";
+
+/** @var kGooglePlusMeScope
+ @brief The OAuth scope string for the basic G+ profile information scope.
+ */
+static NSString *const kGoogleUserInfoProfileScope = @"https://www.googleapis.com/auth/userinfo.profile";
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
@@ -67,7 +72,8 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 }
 
 - (instancetype)initWithClientID:(NSString *)clientID {
-  return [self initWithClientID:clientID scopes:@[@"email", @"profile"]];
+  return [self initWithClientID:clientID
+                         scopes:@[kGoogleUserInfoEmailScope, kGoogleUserInfoProfileScope]];
 }
 
 - (instancetype)initWithClientID:(NSString *)clientID scopes:(NSArray *)scopes {
