@@ -34,18 +34,26 @@ NS_ASSUME_NONNULL_BEGIN
     @brief The scopes to use with Google Sign In.
     @remarks Defaults to using "email" and "profile" scopes.
  */
-@property(nonatomic, copy) NSArray<NSString *> *scopes;
+@property(nonatomic, copy, readonly) NSArray<NSString *> *scopes;
 
 /** @fn init
     @brief Please use initWithClientId:
  */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /** @fn initWithClientID:
-    @brief Designated initializer.
+    @brief Convenience initializer. Calls designated init with default 
+      scopes of "email" and "profile".
     @param clientId The Google Sign In client ID.
  */
-- (nullable instancetype)initWithClientID:(NSString *)clientID NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithClientID:(NSString *)clientID;
+
+/** @fn initWithClientID:scopes:
+ @brief Designated initializer.
+ @param clientId The Google Sign In client ID.
+ @param scopes   The user account scopes required by the app.
+ */
+- (instancetype)initWithClientID:(NSString *)clientID scopes:(NSArray <NSString *> *)scopes NS_DESIGNATED_INITIALIZER;
 
 @end
 

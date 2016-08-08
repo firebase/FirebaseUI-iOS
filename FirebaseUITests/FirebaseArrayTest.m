@@ -31,6 +31,14 @@
 @implementation FUIDataEventHandler
 @end
 
+// Horrible abuse of ObjC type system, since FirebaseArray is unfortunately coupled to
+// FIRDataSnapshot
+@interface FUIFakeSnapshot: NSObject
+@property (nonatomic, assign) NSString *key;
+@end
+@implementation FUIFakeSnapshot
+@end
+
 // A dummy observable so we can test this without relying on an internet connection.
 @interface FUITestObservable: NSObject <FIRDataObservable>
 
@@ -40,14 +48,6 @@
 // Incremented to generate unique handles.
 @property (nonatomic, readonly, assign) FIRDatabaseHandle current;
 
-@end
-
-// Horrible abuse of ObjC type system, since FirebaseArray is unfortunately coupled to
-// FIRDataSnapshot
-@interface FUIFakeSnapshot: NSObject
-@property (nonatomic, assign) NSString *key;
-@end
-@implementation FUIFakeSnapshot
 @end
 
 @implementation FUITestObservable

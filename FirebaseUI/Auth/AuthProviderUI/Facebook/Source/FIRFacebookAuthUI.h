@@ -34,18 +34,18 @@ NS_ASSUME_NONNULL_BEGIN
     @brief The scopes to use with Facebook Login.
     @remarks Defaults to using "email" scopes.
  */
-@property(nonatomic, copy) NSArray<NSString *> *scopes;
+@property(nonatomic, copy, readonly) NSArray<NSString *> *scopes;
 
 /** @fn init
     @brief Please use initWithAppId:
  */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /** @fn initWithAppID:
     @brief Conevenience initializer. Uses a default permission of `@[ "email" ]`.
     @param appID The Facebook App ID.
  */
-- (nullable instancetype)initWithAppID:(NSString *)appID;
+- (instancetype)initWithAppID:(NSString *)appID;
 
 /** @fn initWithAppID:permissions:
     @brief Designated initializer.
@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
     @param permissions The permissions of the app. This array must be an array of specific string values
       as defined in https://developers.facebook.com/docs/facebook-login/permissions/
  */
-- (nullable instancetype)initWithAppID:(NSString *)appID permissions:(NSArray *)permissions NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithAppID:(NSString *)appID permissions:(NSArray *)permissions NS_DESIGNATED_INITIALIZER;
 
 @end
 

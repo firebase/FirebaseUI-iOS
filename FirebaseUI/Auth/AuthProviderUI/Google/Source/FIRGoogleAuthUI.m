@@ -60,17 +60,21 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   FIRAuthProviderSignInCompletionBlock _pendingSignInCallback;
 }
 
-- (nullable instancetype)init {
+- (instancetype)init {
   @throw [NSException exceptionWithName:@"Attempt to call unavailable initializer."
                                  reason:@"Please call the designated initializer."
                                userInfo:nil];
 }
 
-- (nullable instancetype)initWithClientID:(NSString *)clientID {
+- (instancetype)initWithClientID:(NSString *)clientID {
+  return [self initWithClientID:clientID scopes:@[@"email", @"profile"]];
+}
+
+- (instancetype)initWithClientID:(NSString *)clientID scopes:(NSArray *)scopes {
   self = [super init];
   if (self) {
     _clientID = [clientID copy];
-    _scopes = @[ @"email", @"profile" ];
+    _scopes = scopes;
   }
   return self;
 }
