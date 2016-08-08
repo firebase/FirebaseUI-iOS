@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
        andPreviousSiblingKeyWithBlock:(void (^)(FIRDataSnapshot *snapshot, NSString *__nullable prevKey))block
                       withCancelBlock:(nullable void (^)(NSError* error))cancelBlock;
 
-- (void)removeAllObservers; // TODO: allow removing observers by handle
+- (void)removeObserverWithHandle:(FIRDatabaseHandle)handle;
 
 @end
 

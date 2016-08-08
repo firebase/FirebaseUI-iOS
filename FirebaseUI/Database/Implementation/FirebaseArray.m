@@ -27,6 +27,12 @@
  */
 @property(strong, nonatomic) NSMutableArray<FIRDataSnapshot *> * snapshots;
 
+/**
+ * A set containing the query observer handles that should be released when
+ * this array is freed.
+ */
+@property(strong, nonatomic) NSMutableSet<NSNumber *> *handles;
+
 @end
 
 @import FirebaseDatabase;
@@ -41,6 +47,7 @@
   if (self) {
     _snapshots = [NSMutableArray array];
     _query = query;
+    _handles = [NSMutableSet setWithCapacity:4];
 
     [self initListeners];
   }
@@ -50,15 +57,16 @@
 #pragma mark - Memory management methods
 
 - (void)dealloc {
-  // TODO: Consider keeping track of these and only removing them if they are
-  // explicitly added here
-  [self.query removeAllObservers];
+  for (NSNumber *handle in _handles) {
+    [_query removeObserverWithHandle:handle.unsignedIntegerValue];
+  }
 }
 
 #pragma mark - Private API methods
 
 - (void)initListeners {
-  [self.query observeEventType:FIRDataEventTypeChildAdded
+  FIRDatabaseHandle handle;
+  handle = [self.query observeEventType:FIRDataEventTypeChildAdded
       andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
         NSUInteger index = 0;
         if (previousChildKey != nil) {
@@ -76,8 +84,9 @@
           [self.delegate array:self queryCancelledWithError:error];
         }
       }];
+  [_handles addObject:@(handle)];
 
-  [self.query observeEventType:FIRDataEventTypeChildChanged
+  handle = [self.query observeEventType:FIRDataEventTypeChildChanged
       andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
         NSUInteger index = [self indexForKey:snapshot.key];
 
@@ -92,8 +101,9 @@
           [self.delegate array:self queryCancelledWithError:error];
         }
       }];
+  [_handles addObject:@(handle)];
 
-  [self.query observeEventType:FIRDataEventTypeChildRemoved
+  handle = [self.query observeEventType:FIRDataEventTypeChildRemoved
       andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousSiblingKey) {
         NSUInteger index = [self indexForKey:snapshot.key];
 
@@ -108,8 +118,9 @@
           [self.delegate array:self queryCancelledWithError:error];
         }
       }];
+  [_handles addObject:@(handle)];
 
-  [self.query observeEventType:FIRDataEventTypeChildMoved
+  handle = [self.query observeEventType:FIRDataEventTypeChildMoved
       andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
         NSUInteger fromIndex = [self indexForKey:snapshot.key];
         [self.snapshots removeObjectAtIndex:fromIndex];
@@ -126,6 +137,7 @@
           [self.delegate array:self queryCancelledWithError:error];
         }
       }];
+  [_handles addObject:@(handle)];
 }
 
 - (NSUInteger)indexForKey:(NSString *)key {
@@ -158,7 +170,7 @@
 }
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index{
-	return [self objectAtIndex:index];
+  return [self objectAtIndex:index];
 }
 
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)index{

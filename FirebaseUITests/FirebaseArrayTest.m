@@ -60,6 +60,10 @@
   return self;
 }
 
+- (void)removeObserverWithHandle:(FIRDatabaseHandle)handle {
+  [self.observers removeObjectForKey:@(handle)];
+}
+
 - (void)removeAllObservers {
   _observers = [NSMutableDictionary dictionary];
 }
