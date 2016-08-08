@@ -169,7 +169,7 @@
   return [(FIRDataSnapshot *)[self.snapshots objectAtIndex:index] ref];
 }
 
-- (id)objectAtIndexedSubscript:(NSUInteger)index{
+- (id)objectAtIndexedSubscript:(NSUInteger)index {
   return [self objectAtIndex:index];
 }
 

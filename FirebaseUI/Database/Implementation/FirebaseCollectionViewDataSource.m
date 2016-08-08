@@ -234,31 +234,29 @@
   return self;
 }
 
-#pragma mark -
-#pragma mark FirebaseCollectionDelegate methods
+#pragma mark - FirebaseArrayDelegate methods
 
-- (void)childAdded:(id)obj atIndex:(NSUInteger)index {
+- (void)array:(FirebaseArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
   [self.collectionView
       insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
-- (void)childChanged:(id)obj atIndex:(NSUInteger)index {
+- (void)array:(FirebaseArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
   [self.collectionView
       reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]];
 }
 
-- (void)childRemoved:(id)obj atIndex:(NSUInteger)index {
+- (void)array:(FirebaseArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
   [self.collectionView
       deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]];
 }
 
-- (void)childMoved:(id)obj fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+- (void)array:(FirebaseArray *)array didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
                                toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
 }
 
-#pragma mark -
-#pragma mark UICollectionViewDataSource methods
+#pragma mark - UICollectionViewDataSource methods
 
 - (nonnull UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView
                           cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -285,7 +283,7 @@
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-  return self.items.count;
+  return self.count;
 }
 
 - (void)populateCellWithBlock:
