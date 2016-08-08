@@ -67,7 +67,7 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
     @brief Gets the @c FIRAuthUI object for the default FirebaseApp.
     @remarks Thread safe.
  */
-+ (nullable FIRAuthUI *)authUI NS_SWIFT_NAME(authUI());
++ (nullable FIRAuthUI *)defaultAuthUI NS_SWIFT_NAME(authUI());
 
 /** @fn authUIWithAuth:
     @brief Gets the @c FIRAuthUI instance for a @c FIRAuth.
