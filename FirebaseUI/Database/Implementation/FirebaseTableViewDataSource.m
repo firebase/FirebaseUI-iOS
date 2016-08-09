@@ -258,7 +258,8 @@
   [self.tableView endUpdates];
 }
 
-- (void)array:(FirebaseArray *)array didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+- (void)array:(FirebaseArray *)array didMoveObject:(id)object
+    fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   [self.tableView beginUpdates];
   [self.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
                          toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];

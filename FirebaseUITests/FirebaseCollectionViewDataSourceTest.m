@@ -40,9 +40,13 @@ static NSString *const kTestReuseIdentifier = @"FirebaseCollectionViewDataSource
   [self.collectionView registerClass:[UICollectionViewCell class]
           forCellWithReuseIdentifier:kTestReuseIdentifier];
   self.observable = [[FUITestObservable alloc] init];
+  // Horrible abuse of type system, knowing that the initializer passes the observable straight to
+  // FirebaseArray anyway.
   self.dataSource = [[FirebaseCollectionViewDataSource alloc] initWithRef:(FIRDatabaseReference *)self.observable
                                                       cellReuseIdentifier:kTestReuseIdentifier
-                                                                          // no really nil is ok
+                                                                          // no really nil is ok.
+                                                                          // using nil here because UICollectionView
+                                                                          // gets unhappy sometimes
                                                                      view:(UICollectionView *_Nonnull)nil];
   [self.observable populateWithCount:10];
 }

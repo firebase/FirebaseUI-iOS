@@ -23,9 +23,9 @@
 @interface FirebaseArray ()
 
 /**
- * The delegate object that array changes are surfaced to.
+ * The backing collection that holds all of the FirebaseArray's data.
  */
-@property(strong, nonatomic) NSMutableArray<FIRDataSnapshot *> * snapshots;
+@property(strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *snapshots;
 
 /**
  * A set containing the query observer handles that should be released when

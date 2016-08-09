@@ -254,7 +254,8 @@
       deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]];
 }
 
-- (void)array:(FirebaseArray *)array didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+- (void)array:(FirebaseArray *)array didMoveObject:(id)object
+    fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
                                toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
 }
@@ -289,9 +290,8 @@
   return self.count;
 }
 
-- (void)populateCellWithBlock:
-    (void (^)(__kindof UICollectionViewCell *cell,
-                         __kindof NSObject *object))callback {
+- (void)populateCellWithBlock:(void (^)(__kindof UICollectionViewCell *cell,
+                                        __kindof NSObject *object))callback {
   self.populateCell = callback;
 }
 
