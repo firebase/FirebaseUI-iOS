@@ -22,6 +22,11 @@
 
 @import FirebaseDatabase;
 
+@interface FirebaseCollectionViewDataSource ()
+@property(strong, nonatomic, readwrite) void (^populateCell)
+(__kindof UICollectionViewCell *cell, __kindof NSObject *object);
+@end
+
 @implementation FirebaseCollectionViewDataSource
 
 #pragma mark - FirebaseDataSource initializer methods
@@ -83,9 +88,9 @@
    prototypeReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                    modelClass:model
-      prototypeReuseIdentifier:identifier
-                          view:collectionView];
+                  modelClass:model
+    prototypeReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
@@ -198,8 +203,7 @@
     self.modelClass = model;
     self.cellClass = cell;
     self.reuseIdentifier = identifier;
-    self.populateCell = ^(id cell, id object) {
-    };
+    self.populateCell = ^(id cell, id object) {};
 
     if (!self.hasPrototypeCell) {
       [self.collectionView registerClass:self.cellClass

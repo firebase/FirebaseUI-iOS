@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
  * provided by the
  * datasource.
  */
-@property(strong, nonatomic) void (^populateCell)
+@property(strong, nonatomic, readonly) void (^populateCell)
     (__kindof UICollectionViewCell *cell, __kindof NSObject *object);
 
 /**

@@ -83,6 +83,8 @@
 		8621C9557B0F42B90A867731 /* libPods-FirebaseUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E25E2F8253FA11A3E072D265 /* libPods-FirebaseUI.a */; };
 		8D2CB5E21D53F5AE0097FEEB /* libFirebaseUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C579A61B57349000899F86 /* libFirebaseUI.a */; };
 		8D2CB5E91D53F5C50097FEEB /* FirebaseArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D2CB5E81D53F5C50097FEEB /* FirebaseArrayTest.m */; };
+		8DD3AACA1D5940E000E6B1F9 /* FirebaseCollectionViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD3AAC91D5940E000E6B1F9 /* FirebaseCollectionViewDataSourceTest.m */; };
+		8DD3AACD1D5942C900E6B1F9 /* FirebaseArrayTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD3AACC1D5942C900E6B1F9 /* FirebaseArrayTestUtils.m */; };
 		8DFCD1371D53FE8D00208D7B /* FIRAuthUISignInButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DFCD1351D53FE8D00208D7B /* FIRAuthUISignInButton.h */; };
 		8DFCD1381D53FE8D00208D7B /* FIRAuthUISignInButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCD1361D53FE8D00208D7B /* FIRAuthUISignInButton.m */; };
 		962E1417A825A57ED7034636 /* libPods-Facebook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56CCA3CB9295B6E71208403F /* libPods-Facebook.a */; };
@@ -342,6 +344,9 @@
 		8D2CB5E11D53F5AE0097FEEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D2CB5E81D53F5C50097FEEB /* FirebaseArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseArrayTest.m; sourceTree = "<group>"; };
 		8D3AA95C1D53F9C7006FC9AF /* libPods-FirebaseUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-FirebaseUI.a"; path = "../../Library/Developer/Xcode/DerivedData/FirebaseUI-fwcyvciocjlrhqbyjmmybozelsll/Build/Products/Debug-iphonesimulator/libPods-FirebaseUI.a"; sourceTree = "<group>"; };
+		8DD3AAC91D5940E000E6B1F9 /* FirebaseCollectionViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseCollectionViewDataSourceTest.m; sourceTree = "<group>"; };
+		8DD3AACB1D5942C900E6B1F9 /* FirebaseArrayTestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseArrayTestUtils.h; sourceTree = "<group>"; };
+		8DD3AACC1D5942C900E6B1F9 /* FirebaseArrayTestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseArrayTestUtils.m; sourceTree = "<group>"; };
 		8DFCD1351D53FE8D00208D7B /* FIRAuthUISignInButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRAuthUISignInButton.h; sourceTree = "<group>"; };
 		8DFCD1361D53FE8D00208D7B /* FIRAuthUISignInButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRAuthUISignInButton.m; sourceTree = "<group>"; };
 		B992B1D4DFBAE9C4E3453B15 /* Pods-Google.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Google.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Google/Pods-Google.debug.xcconfig"; sourceTree = "<group>"; };
@@ -678,10 +683,21 @@
 		8D2CB5DE1D53F5AE0097FEEB /* FirebaseUITests */ = {
 			isa = PBXGroup;
 			children = (
+				8DD3AACE1D5942D000E6B1F9 /* Helpers */,
 				8D2CB5E81D53F5C50097FEEB /* FirebaseArrayTest.m */,
+				8DD3AAC91D5940E000E6B1F9 /* FirebaseCollectionViewDataSourceTest.m */,
 				8D2CB5E11D53F5AE0097FEEB /* Info.plist */,
 			);
 			path = FirebaseUITests;
+			sourceTree = "<group>";
+		};
+		8DD3AACE1D5942D000E6B1F9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8DD3AACB1D5942C900E6B1F9 /* FirebaseArrayTestUtils.h */,
+				8DD3AACC1D5942C900E6B1F9 /* FirebaseArrayTestUtils.m */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		D8B6ACE81B5839A5005CDDB2 /* Frameworks */ = {
@@ -1318,6 +1334,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DD3AACD1D5942C900E6B1F9 /* FirebaseArrayTestUtils.m in Sources */,
+				8DD3AACA1D5940E000E6B1F9 /* FirebaseCollectionViewDataSourceTest.m in Sources */,
 				8D2CB5E91D53F5C50097FEEB /* FirebaseArrayTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
