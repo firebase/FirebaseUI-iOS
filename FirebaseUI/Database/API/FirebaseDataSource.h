@@ -39,13 +39,13 @@
  */
 @property (nonatomic, readonly, copy) NSArray *items;
 
-- (instancetype)initWithArray:(FirebaseArray *)array NS_DESIGNATED_INITIALIZER;
-- (instancetype)init NS_UNAVAILABLE;
-
 /**
  * Pass through of [FirebaseArray count].
  */
-- (NSUInteger)count;
+@property (nonatomic, readonly) NSUInteger count;
+
+- (instancetype)initWithArray:(FirebaseArray *)array NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
 
 /**
  * Pass through of [FirebaseArray objectAtIndex:].

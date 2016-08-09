@@ -228,8 +228,7 @@
     self.collectionView = collectionView;
     self.modelClass = model;
     self.reuseIdentifier = identifier;
-    self.populateCell = ^(id cell, id object) {
-    };
+    self.populateCell = ^(id cell, id object) {};
 
     UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:self.reuseIdentifier];
@@ -240,24 +239,24 @@
 #pragma mark - FirebaseArrayDelegate methods
 
 - (void)array:(FirebaseArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
-  [self.collectionView
-      insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+//  [self.collectionView
+//      insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
 - (void)array:(FirebaseArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
   [self.collectionView
-      reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]];
+      reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
 - (void)array:(FirebaseArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
-  [self.collectionView
-      deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]];
+//  [self.collectionView
+//      deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
 - (void)array:(FirebaseArray *)array didMoveObject:(id)object
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-  [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
-                               toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
+  [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForItem:fromIndex inSection:0]
+                               toIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]];
 }
 
 #pragma mark - UICollectionViewDataSource methods

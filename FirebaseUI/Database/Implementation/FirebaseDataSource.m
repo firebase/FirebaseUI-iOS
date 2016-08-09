@@ -46,6 +46,10 @@
 
 #pragma mark - API methods
 
+- (NSArray *)items {
+  return [self.array.items copy];
+}
+
 - (NSUInteger)count {
   return self.array.count;
 }

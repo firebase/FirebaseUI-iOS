@@ -225,7 +225,6 @@
     // previous sibling, this series of insertions will produce
     // unexpected results.
     snap.key = ((i % 3 == 0) ? @"1" : @"0");
-    NSLog(@"index: %lu, key: %@", i, snap.key);
     return snap;
   }];
   self.snap.key = @"1";
