@@ -239,8 +239,8 @@
 #pragma mark - FirebaseArrayDelegate methods
 
 - (void)array:(FirebaseArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
-//  [self.collectionView
-//      insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+  [self.collectionView
+      insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
 - (void)array:(FirebaseArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
@@ -249,8 +249,8 @@
 }
 
 - (void)array:(FirebaseArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
-//  [self.collectionView
-//      deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+  [self.collectionView
+      deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
 - (void)array:(FirebaseArray *)array didMoveObject:(id)object
