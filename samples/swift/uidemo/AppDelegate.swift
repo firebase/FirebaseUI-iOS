@@ -35,10 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-    if let sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String? {
-      if FIRAuthUI.authUI()?.handleOpenURL(url, sourceApplication: sourceApplication) ?? false {
-        return true
-      }
+    let sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String?
+    if FIRAuthUI.authUI()?.handleOpenURL(url, sourceApplication: sourceApplication ?? "") ?? false {
+      return true
     }
     // other URL handling goes here.
     return false
