@@ -45,9 +45,9 @@
   NSParameterAssert(query != nil);
   self = [super init];
   if (self) {
-    _snapshots = [NSMutableArray array];
-    _query = query;
-    _handles = [NSMutableSet setWithCapacity:4];
+    self.snapshots = [NSMutableArray array];
+    self.query = query;
+    self.handles = [NSMutableSet setWithCapacity:4];
 
     [self initListeners];
   }
