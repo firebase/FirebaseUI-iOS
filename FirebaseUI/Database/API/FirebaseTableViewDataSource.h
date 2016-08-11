@@ -77,8 +77,8 @@ NS_ASSUME_NONNULL_BEGIN
  * The callback to populate a subclass of UITableViewCell with an object
  * provided by the datasource.
  */
-@property(strong, nonatomic) void (^populateCell)
-    (__kindof UITableViewCell *cell, __kindof NSObject  *object);
+@property(strong, nonatomic, readonly) void (^populateCell)
+  (__kindof UITableViewCell *cell,__kindof NSObject  *object);
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates
