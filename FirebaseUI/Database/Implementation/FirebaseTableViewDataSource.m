@@ -295,4 +295,14 @@
   self.populateCell = callback;
 }
 
+#pragma mark - Accessors
+
+- (void)setModelClass:(Class)modelClass {
+  if (modelClass == nil) {
+    _modelClass = [FIRDataSnapshot class];
+  } else {
+    _modelClass = modelClass;
+  }
+}
+
 @end

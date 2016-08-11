@@ -294,4 +294,22 @@
   self.populateCell = callback;
 }
 
+#pragma mark - Accessors
+
+- (void)setModelClass:(Class)modelClass {
+  if (modelClass == nil) {
+    _modelClass = [FIRDataSnapshot class];
+  } else {
+    _modelClass = modelClass;
+  }
+}
+
+- (void)setCellClass:(Class)cellClass {
+  if (cellClass == nil) {
+    _cellClass = [UICollectionViewCell class];
+  } else {
+    _cellClass = cellClass;
+  }
+}
+
 @end

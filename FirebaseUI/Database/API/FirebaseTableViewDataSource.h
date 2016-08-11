@@ -51,8 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
  * to [Message class] in Obj-C or Message.self in Swift, then objects of type
  * Message will be
  * returned instead of type FIRDataSnapshot.
+ * Defaults to FIRDataSnapshot.
  */
-@property(strong, nonatomic) Class modelClass;
+@property(strong, nonatomic, null_resettable) Class modelClass;
 
 /**
  * The reuse identifier for cells in the UITableView.

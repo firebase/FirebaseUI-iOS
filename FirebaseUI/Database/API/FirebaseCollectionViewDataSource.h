@@ -52,8 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
  * to [Message class] in Obj-C or Message.self in Swift, then objects of type
  * Message will be
  * returned instead of type FIRDataSnapshot.
+ * Defaults to FIRDataSnapshot.
  */
-@property(strong, nonatomic, nullable) Class modelClass;
+@property(strong, nonatomic, null_resettable) Class modelClass;
 
 /**
  * The cell class to coerce UICollectionViewCells to (if desired). For instance,
@@ -62,8 +63,9 @@ NS_ASSUME_NONNULL_BEGIN
  * in Swift, then
  * objects of type CustomCollectionViewCell will be returned instead of type
  * UICollectionViewCell.
+ * Defaults to UICollectionViewCell.
  */
-@property(strong, nonatomic, nullable) Class cellClass;
+@property(strong, nonatomic, null_resettable) Class cellClass;
 
 /**
  * The reuse identifier for cells in the UICollectionView.
