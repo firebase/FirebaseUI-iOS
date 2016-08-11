@@ -46,6 +46,7 @@
 - (void)tearDown {
   [super tearDown];
   [self.observable removeAllObservers];
+  self.arrayDelegate = nil;
 }
 
 #pragma mark - Insertion
@@ -177,72 +178,6 @@
   // Delegate expectations
   XCTAssert(delegateWasCalled, @"expected delegate to receive callback for insertion");
   XCTAssert(expectedParametersWereCorrect, @"unexpected parameter in delegate callback");
-}
-
-- (void)testFirebaseArrayCanInsertIntoUniformArray {
-  // Setup boilerplate
-  [self.observable populateWithCount:10 generator:^FUIFakeSnapshot *(NSUInteger i) {
-    FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] init];
-    snap.key = @"1";
-    return snap;
-  }];
-  self.snap.key = @"1";
-  
-  // Test delegate
-  __block BOOL delegateWasCalled = NO;
-  __block BOOL expectedParametersWereCorrect = NO;
-  self.arrayDelegate.didAddObject = ^(FirebaseArray *array, id object, NSUInteger index) {
-    // Xcode complains about retain cycles if an XCTAssert is placed in here.
-    delegateWasCalled = YES;
-    expectedParametersWereCorrect = (array == self.firebaseArray &&
-                                     object == self.snap &&
-                                     index == 1);
-  };
-  
-  // Insert after @"1", which is ambiguous
-  [self.observable sendEvent:FIRDataEventTypeChildAdded withObject:self.snap previousKey:@"1" error:nil];
-  
-  // Array expectations
-  NSArray *items = self.firebaseArray.items;
-  NSArray *expected = @[@"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1", @"1"];
-  NSMutableArray *result = [NSMutableArray array];
-  for (FUIFakeSnapshot *snapshot in items) {
-    [result addObject:snapshot.key];
-  }
-  XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
-  
-  // Delegate expectations
-  XCTAssert(delegateWasCalled, @"expected delegate to receive callback for insertion");
-  XCTAssert(expectedParametersWereCorrect, @"unexpected parameter in delegate callback");
-}
-
-- (void)testFirebaseCanInsertIntoArrayWithDuplicates {
-  // Setup boilerplate
-  [self.observable populateWithCount:10 generator:^FUIFakeSnapshot *(NSUInteger i) {
-    FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] init];
-    // Since insertion with duplicates is ambiguous and is resolved by
-    // always inserting at the first element identical to the
-    // previous sibling, this series of insertions will produce
-    // unexpected results.
-    snap.key = ((i % 3 == 0) ? @"1" : @"0");
-    return snap;
-  }];
-  self.snap.key = @"1";
-  
-  // Insert after @"1", which is ambiguous again
-  [self.observable sendEvent:FIRDataEventTypeChildAdded withObject:self.snap previousKey:@"1" error:nil];
-  
-  // Array expectations
-  NSArray *items = self.firebaseArray.items;
-  // The insertion point (after the first 1) of this ambiguous insert
-  // is a leaky implementation detail and could be considered a bug.
-  NSArray *expected = @[@"1", @"1", @"0", @"1", @"0", @"0", @"1", @"0", @"0", @"1", @"0"];
-  NSMutableArray *result = [NSMutableArray array];
-  for (FUIFakeSnapshot *snapshot in items) {
-    [result addObject:snapshot.key];
-  }
-  
-  XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
 }
 
 #pragma mark - Deletion
@@ -378,9 +313,9 @@
 #pragma mark - Modifying elements
 
 - (void)testFirebaseArrayCanModifyElement {
-  // TODO: Make this test less bad
   [self.observable populateWithCount:10];
   self.snap.key = @"5";
+  self.snap.value = @"a value";
   
   // Test delegate
   __block BOOL delegateWasCalled = NO;
@@ -393,16 +328,14 @@
                                      index == 5);
   };
   
-  // Replace element with identical copy of itself lol
   [self.observable sendEvent:FIRDataEventTypeChildChanged withObject:self.snap previousKey:@"4" error:nil];
   
   // Array expectation
   NSArray *items = self.firebaseArray.items;
-  // Current implementation doesn't change the key of the snap on child change.
-  NSArray *expected = @[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9"];
+  NSArray *expected = @[@"0", @"1", @"2", @"3", @"4", @"a value", @"6", @"7", @"8", @"9"];
   NSMutableArray *result = [NSMutableArray array];
   for (FUIFakeSnapshot *snapshot in items) {
-    [result addObject:snapshot.key];
+    [result addObject:snapshot.value];
   }
   XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
   
@@ -444,7 +377,5 @@
   XCTAssert(delegateWasCalled, @"expected delegate to receive callback for deletion");
   XCTAssert(expectedParametersWereCorrect, @"unexpected parameter in delegate callback");
 }
-
-// TODO: add tests for arrays with uniques after we figure out what we want the desired behavior to be
 
 @end

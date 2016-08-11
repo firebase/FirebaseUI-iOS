@@ -24,6 +24,14 @@
 @end
 
 @implementation FUIFakeSnapshot
+- (instancetype)initWithKey:(NSString *)key value:(NSString *)value {
+  self = [super init];
+  if (self != nil) {
+    _key = [key copy];
+    _value = [value copy];
+  }
+  return self;
+}
 @end
 
 @implementation FUITestObservable
@@ -72,20 +80,20 @@
   }
 }
 
-- (void)populateWithCount:(NSUInteger)count generator:(FUIFakeSnapshot *(^)(NSUInteger))generator {
+- (void)populateWithCount:(NSUInteger)count generator:(NSString *(^)(NSUInteger))generator {
   NSString *previous = nil;
   for (NSUInteger i = 0; i < count; i++) {
-    FUIFakeSnapshot *snap = generator(i);
+    FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] init];
+    snap.value = generator(i);
+    snap.key = @(i).stringValue;
     [self sendEvent:FIRDataEventTypeChildAdded withObject:snap previousKey:previous error:nil];
     previous = snap.key;
   }
 }
 
 - (void)populateWithCount:(NSUInteger)count {
-  [self populateWithCount:count generator:^FUIFakeSnapshot *(NSUInteger index) {
-    FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] init];
-    snap.key = @(index).stringValue;
-    return snap;
+  [self populateWithCount:count generator:^NSString *(NSUInteger index) {
+    return @(index).stringValue;
   }];
 }
 

@@ -32,7 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 // Horrible abuse of ObjC type system, since FirebaseArray is unfortunately coupled to
 // FIRDataSnapshot
 @interface FUIFakeSnapshot: NSObject
+- (instancetype)initWithKey:(NSString *)key value:(NSString *)value;
 @property (nonatomic, copy) NSString *key;
+@property (nonatomic, copy) NSString *value;
 @end
 
 // A dummy observable so we can test this without relying on an internet connection.
@@ -52,8 +54,10 @@ NS_ASSUME_NONNULL_BEGIN
       previousKey:(nullable NSString *)string
             error:(nullable NSError *)error;
 
-// Inserts sequentially with data provided by the `generator` block.
-- (void)populateWithCount:(NSUInteger)count generator:(FUIFakeSnapshot *(^)(NSUInteger))generator;
+// Inserts sequentially with data provided by the `generator` block. Snapshot keys
+// are increasing integers as strings, snapshot values are strings returned by the
+// `generator` block.
+- (void)populateWithCount:(NSUInteger)count generator:(NSString *(^)(NSUInteger))generator;
 
 // Sends a bunch of insertion events with snapshot keys as integer strings (i.e. @"0") of increasing
 // order, starting from 0.
