@@ -22,10 +22,14 @@
 
 @import FirebaseDatabase;
 
+@interface FirebaseCollectionViewDataSource ()
+@property(strong, nonatomic, readwrite) void (^populateCell)
+(__kindof UICollectionViewCell *cell, __kindof NSObject *object);
+@end
+
 @implementation FirebaseCollectionViewDataSource
 
-#pragma mark -
-#pragma mark FirebaseDataSource initializer methods
+#pragma mark - FirebaseDataSource initializer methods
 
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
         cellReuseIdentifier:(NSString *)identifier
@@ -84,9 +88,9 @@
    prototypeReuseIdentifier:(NSString *)identifier
                        view:(UICollectionView *)collectionView {
   return [self initWithQuery:ref
-                    modelClass:model
-      prototypeReuseIdentifier:identifier
-                          view:collectionView];
+                  modelClass:model
+    prototypeReuseIdentifier:identifier
+                        view:collectionView];
 }
 
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
@@ -199,8 +203,7 @@
     self.modelClass = model;
     self.cellClass = cell;
     self.reuseIdentifier = identifier;
-    self.populateCell = ^(id cell, id object) {
-    };
+    self.populateCell = ^(id cell, id object) {};
 
     if (!self.hasPrototypeCell) {
       [self.collectionView registerClass:self.cellClass
@@ -225,8 +228,7 @@
     self.collectionView = collectionView;
     self.modelClass = model;
     self.reuseIdentifier = identifier;
-    self.populateCell = ^(id cell, id object) {
-    };
+    self.populateCell = ^(id cell, id object) {};
 
     UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:self.reuseIdentifier];
@@ -234,38 +236,37 @@
   return self;
 }
 
-#pragma mark -
-#pragma mark FirebaseCollectionDelegate methods
+#pragma mark - FirebaseArrayDelegate methods
 
-- (void)childAdded:(id)obj atIndex:(NSUInteger)index {
+- (void)array:(FirebaseArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
   [self.collectionView
       insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
-- (void)childChanged:(id)obj atIndex:(NSUInteger)index {
+- (void)array:(FirebaseArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
   [self.collectionView
-      reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]];
+      reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
-- (void)childRemoved:(id)obj atIndex:(NSUInteger)index {
+- (void)array:(FirebaseArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
   [self.collectionView
-      deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]];
+      deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
-- (void)childMoved:(id)obj fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-  [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
-                               toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
+- (void)array:(FirebaseArray *)array didMoveObject:(id)object
+    fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+  [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForItem:fromIndex inSection:0]
+                               toIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]];
 }
 
-#pragma mark -
-#pragma mark UICollectionViewDataSource methods
+#pragma mark - UICollectionViewDataSource methods
 
 - (nonnull UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView
                           cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
   id cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier
                                                            forIndexPath:indexPath];
 
-  FIRDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
+  FIRDataSnapshot *snap = [self.items objectAtIndex:indexPath.row];
   if (![self.modelClass isSubclassOfClass:[FIRDataSnapshot class]]) {
     id model = [[self.modelClass alloc] init];
     // TODO: replace setValuesForKeysWithDictionary with client API
@@ -285,13 +286,30 @@
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-  return [self.array count];
+  return self.count;
 }
 
-- (void)populateCellWithBlock:
-    (void (^)(__kindof UICollectionViewCell *cell,
-                         __kindof NSObject *object))callback {
+- (void)populateCellWithBlock:(void (^)(__kindof UICollectionViewCell *cell,
+                                        __kindof NSObject *object))callback {
   self.populateCell = callback;
+}
+
+#pragma mark - Accessors
+
+- (void)setModelClass:(Class)modelClass {
+  if (modelClass == nil) {
+    _modelClass = [FIRDataSnapshot class];
+  } else {
+    _modelClass = modelClass;
+  }
+}
+
+- (void)setCellClass:(Class)cellClass {
+  if (cellClass == nil) {
+    _cellClass = [UICollectionViewCell class];
+  } else {
+    _cellClass = cellClass;
+  }
 }
 
 @end

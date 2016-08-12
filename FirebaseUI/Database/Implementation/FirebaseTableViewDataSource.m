@@ -24,8 +24,7 @@
 
 @implementation FirebaseTableViewDataSource
 
-#pragma mark -
-#pragma mark FirebaseDataSource initializer methods
+#pragma mark - FirebaseDataSource initializer methods
 
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
         cellReuseIdentifier:(NSString *)identifier
@@ -236,45 +235,44 @@
   return self;
 }
 
-#pragma mark -
-#pragma mark FirebaseCollectionDelegate methods
+#pragma mark - FirebaseArrayDelegate methods
 
-- (void)childAdded:(id)obj atIndex:(NSUInteger)index {
+- (void)array:(FirebaseArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
   [self.tableView insertRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
 }
 
-- (void)childChanged:(id)obj atIndex:(NSUInteger)index {
+- (void)array:(FirebaseArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
   [self.tableView reloadRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
 }
 
-- (void)childRemoved:(id)obj atIndex:(NSUInteger)index {
+- (void)array:(FirebaseArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
   [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
 }
 
-- (void)childMoved:(id)obj fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+- (void)array:(FirebaseArray *)array didMoveObject:(id)object
+    fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   [self.tableView beginUpdates];
   [self.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
                          toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
   [self.tableView endUpdates];
 }
 
-#pragma mark -
-#pragma mark UITableViewDataSource methods
+#pragma mark - UITableViewDataSource methods
 
 - (id)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   id cell = [self.tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier
                                                  forIndexPath:indexPath];
 
-  FIRDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
+  FIRDataSnapshot *snap = [self.items objectAtIndex:indexPath.row];
   if (![self.modelClass isSubclassOfClass:[FIRDataSnapshot class]]) {
     id model = [[self.modelClass alloc] init];
     // TODO: replace setValuesForKeysWithDictionary with client API
@@ -289,12 +287,22 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [self.array count];
+  return self.count;
 }
 
 - (void)populateCellWithBlock:(void (^)(__kindof UITableViewCell *cell,
-                                                   __kindof NSObject *object))callback {
+                                        __kindof NSObject *object))callback {
   self.populateCell = callback;
+}
+
+#pragma mark - Accessors
+
+- (void)setModelClass:(Class)modelClass {
+  if (modelClass == nil) {
+    _modelClass = [FIRDataSnapshot class];
+  } else {
+    _modelClass = modelClass;
+  }
 }
 
 @end

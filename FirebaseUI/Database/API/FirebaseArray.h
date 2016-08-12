@@ -18,15 +18,25 @@
 
 // clang-format on
 
-#import <Foundation/Foundation.h>
+@import Firebase;
 
 #import "FirebaseArrayDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class FIRDatabaseQuery;
-@class FIRDatabaseReference;
-@class FIRDataSnapshot;
+@protocol FIRDataObservable
+@required
+
+- (FIRDatabaseHandle)observeEventType:(FIRDataEventType)eventType
+       andPreviousSiblingKeyWithBlock:(void (^)(FIRDataSnapshot *snapshot, NSString *__nullable prevKey))block
+                      withCancelBlock:(nullable void (^)(NSError* error))cancelBlock;
+
+- (void)removeObserverWithHandle:(FIRDatabaseHandle)handle;
+
+@end
+
+@interface FIRDatabaseQuery (FIRDataObservable) <FIRDataObservable>
+@end
 
 /**
  * FirebaseArray provides an array structure that is synchronized with a Firebase reference or
@@ -39,43 +49,36 @@ NS_ASSUME_NONNULL_BEGIN
  * The delegate object that array changes are surfaced to, which conforms to the
  * [FirebaseArrayDelegate Protocol](FirebaseArrayDelegate).
  */
-@property(weak, nonatomic) id<FirebaseArrayDelegate> delegate;
+@property(weak, nonatomic, nullable) id<FirebaseArrayDelegate> delegate;
 
 /**
  * The query on a Firebase reference that provides data to populate the instance of FirebaseArray.
  */
-@property(strong, nonatomic) FIRDatabaseQuery *query;
+@property(strong, nonatomic) id<FIRDataObservable> query;
 
 /**
- * The delegate object that array changes are surfaced to.
+ * The number of objects in the FirebaseArray.
  */
-@property(strong, nonatomic) NSMutableArray<FIRDataSnapshot *> * snapshots;
-
-#pragma mark -
-#pragma mark Initializer methods
+@property(nonatomic, readonly) NSUInteger count;
 
 /**
- * Intitalizes FirebaseArray with a standard Firebase reference.
- * @param ref The Firebase reference which provides data to FirebaseArray
- * @return The instance of FirebaseArray
+ * The items currently in the FirebaseArray.
  */
-- (instancetype)initWithRef:(FIRDatabaseReference *)ref;
+@property(nonatomic, readonly, copy) NSArray *items;
+
+#pragma mark - Initializer methods
 
 /**
- * Intitalizes FirebaseArray with a Firebase query (FIRDatabaseQuery).
- * @param query A query on a Firebase reference which provides filtered data to FirebaseArray
- * @return The instance of FirebaseArray
+ * Initalizes FirebaseArray with a Firebase query (FIRDatabaseQuery) or database reference
+ * (FIRDatabaseReference).
+ * @param query A query or Firebase database reference
+ * @return A FirebaseArray instance
  */
-- (instancetype)initWithQuery:(FIRDatabaseQuery *)query;
+- (instancetype)initWithQuery:(id<FIRDataObservable>)query NS_DESIGNATED_INITIALIZER;
 
-#pragma mark -
-#pragma mark Public API methods
+- (instancetype)init NS_UNAVAILABLE;
 
-/**
- * Returns the count of objects in the FirebaseArray.
- * @return The count of objects in the FirebaseArray
- */
-- (NSUInteger)count;
+#pragma mark - Public API methods
 
 /**
  * Returns an object at a specific index in the FirebaseArray.
@@ -100,21 +103,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Support for subscripting. This method is unused and trying to write directly to the
- * array using subscripting will cause an assertion.
+ * array using subscripting will cause an assertion failure.
  */
-- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx;
-
-#pragma mark -
-#pragma mark Private API methods
+- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)idx NS_UNAVAILABLE;
 
 /**
  * Returns an index for a given object's key (that matches the object's key in the corresponding
  * Firebase reference).
  * @param key The key of the desired object
- * @return The index of the object for which the key matches or -1 if the key is null
- * @exception FirebaseArrayKeyNotFoundException Thrown when the desired key is not in the
- * FirebaseArray, likely indicating that the FirebaseArray is no longer being properly synchronized
- * with the Firebase database.
+ * @return The index of the object for which the key matches or NSNotFound if the key is not found
+ * @exception NSInvalidArgumentException Thrown when the `key` parameter is `nil`.
  */
 - (NSUInteger)indexForKey:(NSString *)key;
 

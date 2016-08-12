@@ -52,8 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
  * to [Message class] in Obj-C or Message.self in Swift, then objects of type
  * Message will be
  * returned instead of type FIRDataSnapshot.
+ * Defaults to FIRDataSnapshot.
  */
-@property(strong, nonatomic) Class modelClass;
+@property(strong, nonatomic, null_resettable) Class modelClass;
 
 /**
  * The cell class to coerce UICollectionViewCells to (if desired). For instance,
@@ -62,8 +63,9 @@ NS_ASSUME_NONNULL_BEGIN
  * in Swift, then
  * objects of type CustomCollectionViewCell will be returned instead of type
  * UICollectionViewCell.
+ * Defaults to UICollectionViewCell.
  */
-@property(strong, nonatomic) Class cellClass;
+@property(strong, nonatomic, null_resettable) Class cellClass;
 
 /**
  * The reuse identifier for cells in the UICollectionView.
@@ -89,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
  * provided by the
  * datasource.
  */
-@property(strong, nonatomic) void (^populateCell)
+@property(strong, nonatomic, readonly) void (^populateCell)
     (__kindof UICollectionViewCell *cell, __kindof NSObject *object);
 
 /**
@@ -104,8 +106,8 @@ NS_ASSUME_NONNULL_BEGIN
  * FIRDataSnapshots
  */
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
-                   cellReuseIdentifier:(NSString *)identifier
-                                  view:(UICollectionView *)collectionView;
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -121,8 +123,8 @@ NS_ASSUME_NONNULL_BEGIN
  * FIRDataSnapshots
  */
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
-              prototypeReuseIdentifier:(NSString *)identifier
-                                  view:(UICollectionView *)collectionView;
+   prototypeReuseIdentifier:(NSString *)identifier
+                       view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
@@ -139,9 +141,9 @@ NS_ASSUME_NONNULL_BEGIN
  * UICollectionViewCell with FIRDataSnapshots
  */
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
-                             cellClass:(nullable Class)cell
-                   cellReuseIdentifier:(NSString *)identifier
-                                  view:(UICollectionView *)collectionView;
+                  cellClass:(nullable Class)cell
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
@@ -157,9 +159,9 @@ NS_ASSUME_NONNULL_BEGIN
  * FIRDataSnapshots
  */
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
-                              nibNamed:(NSString *)nibName
-                   cellReuseIdentifier:(NSString *)identifier
-                                  view:(UICollectionView *)collectionView;
+                   nibNamed:(NSString *)nibName
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -175,9 +177,9 @@ NS_ASSUME_NONNULL_BEGIN
  * a custom model class
  */
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
-                            modelClass:(nullable Class)model
-                   cellReuseIdentifier:(NSString *)identifier
-                                  view:(UICollectionView *)collectionView;
+                 modelClass:(nullable Class)model
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -195,9 +197,9 @@ NS_ASSUME_NONNULL_BEGIN
  * a custom model class
  */
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
-                            modelClass:(nullable Class)model
-              prototypeReuseIdentifier:(NSString *)identifier
-                                  view:(UICollectionView *)collectionView;
+                 modelClass:(nullable Class)model
+   prototypeReuseIdentifier:(NSString *)identifier
+                       view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
@@ -216,10 +218,10 @@ NS_ASSUME_NONNULL_BEGIN
  * UICollectionViewCell with a custom model class
  */
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
-                            modelClass:(nullable Class)model
-                             cellClass:(nullable Class)cell
-                   cellReuseIdentifier:(NSString *)identifier
-                                  view:(UICollectionView *)collectionView;
+                 modelClass:(nullable Class)model
+                  cellClass:(nullable Class)cell
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
@@ -237,10 +239,10 @@ NS_ASSUME_NONNULL_BEGIN
  * model class
  */
 - (instancetype)initWithRef:(FIRDatabaseReference *)ref
-                            modelClass:(nullable Class)model
-                              nibNamed:(NSString *)nibName
-                   cellReuseIdentifier:(NSString *)identifier
-                                  view:(UICollectionView *)collectionView;
+                 modelClass:(nullable Class)model
+                   nibNamed:(NSString *)nibName
+        cellReuseIdentifier:(NSString *)identifier
+                       view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -254,8 +256,8 @@ NS_ASSUME_NONNULL_BEGIN
  * FIRDataSnapshots
  */
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                     cellReuseIdentifier:(NSString *)identifier
-                                    view:(UICollectionView *)collectionView;
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -271,8 +273,8 @@ NS_ASSUME_NONNULL_BEGIN
  * FIRDataSnapshots
  */
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                prototypeReuseIdentifier:(NSString *)identifier
-                                    view:(UICollectionView *)collectionView;
+     prototypeReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
@@ -289,9 +291,9 @@ NS_ASSUME_NONNULL_BEGIN
  * UICollectionViewCell with FIRDataSnapshots
  */
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                               cellClass:(nullable Class)cell
-                     cellReuseIdentifier:(NSString *)identifier
-                                    view:(UICollectionView *)collectionView;
+                    cellClass:(nullable Class)cell
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
@@ -307,9 +309,9 @@ NS_ASSUME_NONNULL_BEGIN
  * FIRDataSnapshots
  */
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                                nibNamed:(NSString *)nibName
-                     cellReuseIdentifier:(NSString *)identifier
-                                    view:(UICollectionView *)collectionView;
+                     nibNamed:(NSString *)nibName
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -325,9 +327,9 @@ NS_ASSUME_NONNULL_BEGIN
  * a custom model class
  */
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                              modelClass:(nullable Class)model
-                     cellReuseIdentifier:(NSString *)identifier
-                                    view:(UICollectionView *)collectionView;
+                   modelClass:(nullable Class)model
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
@@ -345,9 +347,9 @@ NS_ASSUME_NONNULL_BEGIN
  * a custom model class
  */
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                              modelClass:(nullable Class)model
-                prototypeReuseIdentifier:(NSString *)identifier
-                                    view:(UICollectionView *)collectionView;
+                   modelClass:(nullable Class)model
+     prototypeReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
@@ -366,10 +368,10 @@ NS_ASSUME_NONNULL_BEGIN
  * UICollectionViewCell with a custom model class
  */
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                              modelClass:(nullable Class)model
-                               cellClass:(nullable Class)cell
-                     cellReuseIdentifier:(NSString *)identifier
-                                    view:(UICollectionView *)collectionView;
+                   modelClass:(nullable Class)model
+                    cellClass:(nullable Class)cell
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView;
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates a
@@ -387,10 +389,10 @@ NS_ASSUME_NONNULL_BEGIN
  * model class
  */
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                              modelClass:(nullable Class)model
-                                nibNamed:(NSString *)nibName
-                     cellReuseIdentifier:(NSString *)identifier
-                                    view:(UICollectionView *)collectionView;
+                   modelClass:(nullable Class)model
+                     nibNamed:(NSString *)nibName
+          cellReuseIdentifier:(NSString *)identifier
+                         view:(UICollectionView *)collectionView;
 
 /**
  * This method populates the fields of a UICollectionViewCell or subclass given
@@ -400,9 +402,8 @@ NS_ASSUME_NONNULL_BEGIN
  * subclass) and the
  * corresponding object to populate the cell with.
  */
-- (void)populateCellWithBlock:
-    (void (^)(__kindof UICollectionViewCell *cell,
-                         __kindof NSObject *object))callback;
+- (void)populateCellWithBlock:(void (^)(__kindof UICollectionViewCell *cell,
+                                        __kindof NSObject *object))callback;
 
 @end
 

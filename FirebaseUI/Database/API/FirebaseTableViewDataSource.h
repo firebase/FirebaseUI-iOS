@@ -51,8 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
  * to [Message class] in Obj-C or Message.self in Swift, then objects of type
  * Message will be
  * returned instead of type FIRDataSnapshot.
+ * Defaults to FIRDataSnapshot.
  */
-@property(strong, nonatomic) Class modelClass;
+@property(strong, nonatomic, null_resettable) Class modelClass;
 
 /**
  * The reuse identifier for cells in the UITableView.
@@ -76,8 +77,8 @@ NS_ASSUME_NONNULL_BEGIN
  * The callback to populate a subclass of UITableViewCell with an object
  * provided by the datasource.
  */
-@property(strong, nonatomic) void (^populateCell)
-    (__kindof UITableViewCell *cell, __kindof NSObject  *object);
+@property(strong, nonatomic, readonly) void (^populateCell)
+  (__kindof UITableViewCell *cell,__kindof NSObject  *object);
 
 /**
  * Initialize an instance of FirebaseTableViewDataSource that populates
@@ -383,9 +384,8 @@ NS_ASSUME_NONNULL_BEGIN
  * This method populates the fields of a UITableViewCell or subclass given a
  * model object (or
  * FIRDataSnapshot).
- * @param callback A block which returns an initialized UITableViewCell (or
- * subclass) and the
- * corresponding object to populate the cell with.
+ * @param callback A block which returns an initialized UITableViewCell 
+ * (or subclass) and the corresponding object to populate the cell with.
  */
 - (void)populateCellWithBlock:(void (^)(__kindof UITableViewCell *cell, __kindof NSObject *object))callback;
 
