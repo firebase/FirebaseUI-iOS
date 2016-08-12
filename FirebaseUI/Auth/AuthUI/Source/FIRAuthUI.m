@@ -45,7 +45,7 @@ static const char kAuthAssociationKey;
 
 @implementation FIRAuthUI
 
-+ (nullable FIRAuthUI *)authUI {
++ (nullable FIRAuthUI *)defaultAuthUI {
   FIRAuth *defaultAuth = [FIRAuth auth];
   if (!defaultAuth) {
     return nil;
@@ -54,6 +54,7 @@ static const char kAuthAssociationKey;
 }
 
 + (nullable FIRAuthUI *)authUIWithAuth:(FIRAuth *)auth {
+  NSParameterAssert(auth != nil);
   @synchronized (self) {
     // Let the FIRAuth instance retain the FIRAuthUI instance.
     FIRAuthUI *authUI = objc_getAssociatedObject(auth, &kAuthAssociationKey);
@@ -66,7 +67,7 @@ static const char kAuthAssociationKey;
   }
 }
 
-- (nullable instancetype)initWithAuth:(FIRAuth *)auth {
+- (instancetype)initWithAuth:(FIRAuth *)auth {
   self = [super init];
   if (self) {
     _auth = auth;

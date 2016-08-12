@@ -35,16 +35,17 @@
 @interface FirebaseDataSource : NSObject<FirebaseArrayDelegate>
 
 /**
- * The FirebaseArray which backs the instance of the datasource.
+ * The items in the data source.
  */
-@property(strong, nonatomic) FirebaseArray *array;
-
-- (instancetype)initWithArray:(FirebaseArray *)array;
+@property (nonatomic, readonly, copy) NSArray *items;
 
 /**
  * Pass through of [FirebaseArray count].
  */
-- (NSUInteger)count;
+@property (nonatomic, readonly) NSUInteger count;
+
+- (instancetype)initWithArray:(FirebaseArray *)array NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
 
 /**
  * Pass through of [FirebaseArray objectAtIndex:].

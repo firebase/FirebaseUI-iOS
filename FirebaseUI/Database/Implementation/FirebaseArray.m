@@ -20,78 +20,107 @@
 
 #import "FirebaseArray.h"
 
+@interface FirebaseArray ()
+
+/**
+ * The backing collection that holds all of the FirebaseArray's data.
+ */
+@property(strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *snapshots;
+
+/**
+ * A set containing the query observer handles that should be released when
+ * this array is freed.
+ */
+@property(strong, nonatomic) NSMutableSet<NSNumber *> *handles;
+
+@end
+
 @import FirebaseDatabase;
 
 @implementation FirebaseArray
 
-#pragma mark -
-#pragma mark Initializer methods
-
-- (instancetype)initWithRef:(FIRDatabaseReference *)ref {
-  return [self initWithQuery:ref];
-}
+#pragma mark - Initializer methods
 
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query {
+  NSParameterAssert(query != nil);
   self = [super init];
   if (self) {
     self.snapshots = [NSMutableArray array];
     self.query = query;
+    self.handles = [NSMutableSet setWithCapacity:4];
 
     [self initListeners];
   }
   return self;
 }
 
-#pragma mark -
-#pragma mark Memory management methods
+#pragma mark - Memory management methods
 
 - (void)dealloc {
-  // TODO: Consider keeping track of these and only removing them if they are
-  // explicitly added here
-  [self.query removeAllObservers];
+  for (NSNumber *handle in _handles) {
+    [_query removeObserverWithHandle:handle.unsignedIntegerValue];
+  }
 }
 
-#pragma mark -
-#pragma mark Private API methods
+#pragma mark - Private API methods
 
 - (void)initListeners {
-  [self.query observeEventType:FIRDataEventTypeChildAdded
+  FIRDatabaseHandle handle;
+  handle = [self.query observeEventType:FIRDataEventTypeChildAdded
       andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
-        NSUInteger index = [self indexForKey:previousChildKey] + 1;
+        NSUInteger index = 0;
+        if (previousChildKey != nil) {
+          index = [self indexForKey:previousChildKey] + 1;
+        }
 
         [self.snapshots insertObject:snapshot atIndex:index];
 
-        [self.delegate childAdded:snapshot atIndex:index];
+        if ([self.delegate respondsToSelector:@selector(array:didAddObject:atIndex:)]) {
+          [self.delegate array:self didAddObject:snapshot atIndex:index];
+        }
       }
       withCancelBlock:^(NSError *error) {
-        [self.delegate canceledWithError:error];
+        if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
+          [self.delegate array:self queryCancelledWithError:error];
+        }
       }];
+  [_handles addObject:@(handle)];
 
-  [self.query observeEventType:FIRDataEventTypeChildChanged
+  handle = [self.query observeEventType:FIRDataEventTypeChildChanged
       andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
         NSUInteger index = [self indexForKey:snapshot.key];
 
         [self.snapshots replaceObjectAtIndex:index withObject:snapshot];
 
-        [self.delegate childChanged:snapshot atIndex:index];
+        if ([self.delegate respondsToSelector:@selector(array:didChangeObject:atIndex:)]) {
+          [self.delegate array:self didChangeObject:snapshot atIndex:index];
+        }
       }
       withCancelBlock:^(NSError *error) {
-        [self.delegate canceledWithError:error];
+        if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
+          [self.delegate array:self queryCancelledWithError:error];
+        }
       }];
+  [_handles addObject:@(handle)];
 
-  [self.query observeEventType:FIRDataEventTypeChildRemoved
-      withBlock:^(FIRDataSnapshot *snapshot) {
+  handle = [self.query observeEventType:FIRDataEventTypeChildRemoved
+      andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousSiblingKey) {
         NSUInteger index = [self indexForKey:snapshot.key];
 
         [self.snapshots removeObjectAtIndex:index];
 
-        [self.delegate childRemoved:snapshot atIndex:index];
+        if ([self.delegate respondsToSelector:@selector(array:didRemoveObject:atIndex:)]) {
+          [self.delegate array:self didRemoveObject:snapshot atIndex:index];
+        }
       }
       withCancelBlock:^(NSError *error) {
-        [self.delegate canceledWithError:error];
+        if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
+          [self.delegate array:self queryCancelledWithError:error];
+        }
       }];
+  [_handles addObject:@(handle)];
 
-  [self.query observeEventType:FIRDataEventTypeChildMoved
+  handle = [self.query observeEventType:FIRDataEventTypeChildMoved
       andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
         NSUInteger fromIndex = [self indexForKey:snapshot.key];
         [self.snapshots removeObjectAtIndex:fromIndex];
@@ -99,34 +128,34 @@
         NSUInteger toIndex = [self indexForKey:previousChildKey] + 1;
         [self.snapshots insertObject:snapshot atIndex:toIndex];
 
-        [self.delegate childMoved:snapshot fromIndex:fromIndex toIndex:toIndex];
+        if ([self.delegate respondsToSelector:@selector(array:didMoveObject:fromIndex:toIndex:)]) {
+          [self.delegate array:self didMoveObject:snapshot fromIndex:fromIndex toIndex:toIndex];
+        }
       }
       withCancelBlock:^(NSError *error) {
-        [self.delegate canceledWithError:error];
+        if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
+          [self.delegate array:self queryCancelledWithError:error];
+        }
       }];
+  [_handles addObject:@(handle)];
 }
 
 - (NSUInteger)indexForKey:(NSString *)key {
-  if (!key) return -1;
+  NSParameterAssert(key != nil);
 
   for (NSUInteger index = 0; index < [self.snapshots count]; index++) {
     if ([key isEqualToString:[(FIRDataSnapshot *)[self.snapshots objectAtIndex:index] key]]) {
       return index;
     }
   }
-
-  NSString *errorReason =
-      [NSString stringWithFormat:@"Key \"%@\" not found in FirebaseArray %@", key, self.snapshots];
-  @throw [NSException exceptionWithName:@"FirebaseArrayKeyNotFoundException"
-                                 reason:errorReason
-                               userInfo:@{
-                                 @"Key" : key,
-                                 @"Array" : self.snapshots
-                               }];
+  return NSNotFound;
 }
 
-#pragma mark -
-#pragma mark Public API methods
+#pragma mark - Public API methods
+
+- (NSArray *)items {
+  return [self.snapshots copy];
+}
 
 - (NSUInteger)count {
   return [self.snapshots count];
@@ -140,8 +169,8 @@
   return [(FIRDataSnapshot *)[self.snapshots objectAtIndex:index] ref];
 }
 
-- (id)objectAtIndexedSubscript:(NSUInteger)index{
-	return [self objectAtIndex:index];
+- (id)objectAtIndexedSubscript:(NSUInteger)index {
+  return [self objectAtIndex:index];
 }
 
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)index{

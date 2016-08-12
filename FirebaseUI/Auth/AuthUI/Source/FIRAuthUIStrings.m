@@ -75,7 +75,7 @@ static NSString *const kTableName = @"FirebaseAuthUI";
     @return Localized value of the string identified by the key.
  */
 + (NSString *)localizedStringForKey:(nonnull NSString *)key {
-  NSBundle *customStringsBundle = [FIRAuthUI authUI].customStringsBundle;
+  NSBundle *customStringsBundle = [FIRAuthUI defaultAuthUI].customStringsBundle;
   if (customStringsBundle) {
     NSString *localizedString = [customStringsBundle localizedStringForKey:key
                                                                      value:kKeyNotFound
