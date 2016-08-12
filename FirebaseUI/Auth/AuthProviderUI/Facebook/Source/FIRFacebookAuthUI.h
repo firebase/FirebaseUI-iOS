@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 /** @property appId
     @brief The Facebook App ID.
  */
-@property(nonatomic, copy, readonly) NSString *appID;
+@property(nonatomic, readonly, copy) NSString *appID;
 
 /** @property scopes
     @brief The scopes to use with Facebook Login.
     @remarks Defaults to using "email" scopes.
  */
-@property(nonatomic, copy, readonly) NSArray<NSString *> *scopes;
+@property(nonatomic, readonly, copy) NSArray<NSString *> *scopes;
 
 /** @fn init
     @brief Please use initWithAppId:
