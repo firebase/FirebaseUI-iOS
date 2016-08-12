@@ -80,7 +80,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   self = [super init];
   if (self) {
     _clientID = [clientID copy];
-    _scopes = scopes;
+    _scopes = [scopes copy];
   }
   return self;
 }
