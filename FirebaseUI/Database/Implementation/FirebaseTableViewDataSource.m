@@ -22,6 +22,11 @@
 
 @import FirebaseDatabase;
 
+@interface FirebaseTableViewDataSource ()
+@property(strong, nonatomic) void (^populateCell)
+  (__kindof UITableViewCell *cell,__kindof NSObject  *object);
+@end
+
 @implementation FirebaseTableViewDataSource
 
 #pragma mark - FirebaseDataSource initializer methods
