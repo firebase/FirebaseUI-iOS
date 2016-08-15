@@ -151,10 +151,10 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
   // Sign out first to make sure sign in starts with a clean state.
   [providerUI signOutWithAuth:self.auth];
   [providerUI signInWithAuth:self.auth
-                         email:nil
-      presentingViewController:self
-                    completion:^(FIRAuthCredential *_Nullable credential,
-                                 NSError *_Nullable error) {
+                       email:nil
+    presentingViewController:self
+                  completion:^(FIRAuthCredential *_Nullable credential,
+                               NSError *_Nullable error) {
     if (error) {
       [self decrementActivity];
 
