@@ -41,10 +41,7 @@
 
 + (void)initialize {
   // An app needs to be configured before any instances of
-  // FIRAuth or FIRAuthUI can be created. [FIRApp configure]
-  // will crash unless there's a GoogleServices-Info.plist
-  // in the test target. Unfortunately, our .gitignore ignores
-  // those, so the plist has to be added manually on each clone :(
+  // FIRAuth or FIRAuthUI can be created.
   [FIRApp configure];
 }
 
