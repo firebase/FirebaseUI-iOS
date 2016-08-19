@@ -19,7 +19,6 @@
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <FirebaseAuth/FIRGoogleAuthProvider.h>
 #import <FirebaseAuth/FIRUserInfo.h>
-#import "FIRAuthUIErrorUtils.h"
 
 /** @var kGoogleGamesScope
     @brief The OAuth scope string for the "Games" scope.
