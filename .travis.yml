@@ -4,7 +4,7 @@ xcode_workspace: FirebaseUI.xcworkspace
 xcode_scheme: FirebaseUITests
 
 script: xcodebuild -workspace FirebaseUI.xcworkspace
-  -scheme FirebaseUITests
+  -scheme FirebaseUI
   -sdk iphonesimulator
   -destination 'platform=iOS Simulator,name=iPhone 6s'
   build 

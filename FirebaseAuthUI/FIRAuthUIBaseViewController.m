@@ -261,7 +261,7 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
 
   // Delay the display of acitivty indiactor for a short period of time.
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
-                               (int64_t)(kActivityIndiactorAnimationDelay * NSEC_PER_SEC)),
+                              (int64_t)(kActivityIndiactorAnimationDelay * NSEC_PER_SEC)),
                  dispatch_get_main_queue(), ^{
     if (_activityCount > 0) {
       [_activityIndicator startAnimating];

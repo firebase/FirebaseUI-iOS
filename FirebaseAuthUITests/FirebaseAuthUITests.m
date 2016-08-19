@@ -14,4 +14,12 @@
 //  limitations under the License.
 //
 
-#import "FIRFacebookAuthUI.h"
+@import XCTest;
+
+@interface FirebaseAuthUITests : XCTestCase
+
+@end
+
+@implementation FirebaseAuthUITests
+
+@end

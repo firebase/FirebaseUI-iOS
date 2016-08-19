@@ -14,4 +14,18 @@
 //  limitations under the License.
 //
 
-#import "FIRGoogleAuthUI.h"
+@import UIKit;
+
+//! Project version number for FirebaseDatabaseUI.
+FOUNDATION_EXPORT double FirebaseDatabaseUIVersionNumber;
+
+//! Project version string for FirebaseDatabaseUI.
+FOUNDATION_EXPORT const unsigned char FirebaseDatabaseUIVersionString[];
+
+#import <FirebaseDatabaseUI/FirebaseArray.h>
+#import <FirebaseDatabaseUI/FirebaseArrayDelegate.h>
+#import <FirebaseDatabaseUI/FirebaseCollectionViewDataSource.h>
+#import <FirebaseDatabaseUI/FirebaseDataSource.h>
+#import <FirebaseDatabaseUI/FirebaseTableViewDataSource.h>
+
+

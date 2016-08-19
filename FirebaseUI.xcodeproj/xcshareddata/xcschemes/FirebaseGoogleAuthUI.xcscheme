@@ -14,24 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D8C579A51B57349000899F86"
-               BuildableName = "libFirebaseUI.a"
-               BlueprintName = "FirebaseUI"
+               BlueprintIdentifier = "8DCC4FF81D678CF500B0D3C4"
+               BuildableName = "FirebaseGoogleAuthUI.framework"
+               BlueprintName = "FirebaseGoogleAuthUI"
                ReferencedContainer = "container:FirebaseUI.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D1D4C942B8C7C723B2CA4911F7678B4B"
-               BuildableName = "libPods-FirebaseUI.a"
-               BlueprintName = "Pods-FirebaseUI"
-               ReferencedContainer = "container:Pods/Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8D2CB5DC1D53F5AE0097FEEB"
-               BuildableName = "FirebaseUITests.xctest"
-               BlueprintName = "FirebaseUITests"
+               BlueprintIdentifier = "8DCC50011D678CF500B0D3C4"
+               BuildableName = "FirebaseGoogleAuthUITests.xctest"
+               BlueprintName = "FirebaseGoogleAuthUITests"
                ReferencedContainer = "container:FirebaseUI.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D8C579A51B57349000899F86"
-            BuildableName = "libFirebaseUI.a"
-            BlueprintName = "FirebaseUI"
+            BlueprintIdentifier = "8DCC4FF81D678CF500B0D3C4"
+            BuildableName = "FirebaseGoogleAuthUI.framework"
+            BlueprintName = "FirebaseGoogleAuthUI"
             ReferencedContainer = "container:FirebaseUI.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D8C579A51B57349000899F86"
-            BuildableName = "libFirebaseUI.a"
-            BlueprintName = "FirebaseUI"
+            BlueprintIdentifier = "8DCC4FF81D678CF500B0D3C4"
+            BuildableName = "FirebaseGoogleAuthUI.framework"
+            BlueprintName = "FirebaseGoogleAuthUI"
             ReferencedContainer = "container:FirebaseUI.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -96,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D8C579A51B57349000899F86"
-            BuildableName = "libFirebaseUI.a"
-            BlueprintName = "FirebaseUI"
+            BlueprintIdentifier = "8DCC4FF81D678CF500B0D3C4"
+            BuildableName = "FirebaseGoogleAuthUI.framework"
+            BlueprintName = "FirebaseGoogleAuthUI"
             ReferencedContainer = "container:FirebaseUI.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

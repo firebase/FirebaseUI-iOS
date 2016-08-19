@@ -1,5 +1,3 @@
-// clang-format off
-
 //
 //  Copyright (c) 2016 Google Inc.
 //
@@ -16,10 +14,12 @@
 //  limitations under the License.
 //
 
-// clang-format on
+@import XCTest;
 
-#import "FirebaseArray.h"
-#import "FirebaseArrayDelegate.h"
-#import "FirebaseCollectionViewDataSource.h"
-#import "FirebaseDataSource.h"
-#import "FirebaseTableViewDataSource.h"
+@interface FirebaseFacebookAuthUITests : XCTestCase
+
+@end
+
+@implementation FirebaseFacebookAuthUITests
+
+@end
