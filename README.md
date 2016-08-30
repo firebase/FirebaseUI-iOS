@@ -37,7 +37,7 @@ pod 'FirebaseUI/Google', '~> 0.4'
 If you're including FirebaseUI in a Swift project, make sure you also have:
 
 ```
-platform :ios, '7.0'
+platform :ios, '8.0'
 use_frameworks!
 ```
 
