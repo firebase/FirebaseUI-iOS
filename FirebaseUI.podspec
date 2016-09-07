@@ -5,7 +5,8 @@ Pod::Spec.new do |s|
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'FirebaseUIFrameworks/LICENSE' }
   s.author       = 'Firebase'
-  s.source       = { :http => 'https://github.com/firebase/FirebaseUI-iOS/releases/download/v0.5.1/FirebaseUIFrameworks.zip' }
+  # s.source       = { :http => 'https://dl.google.com/dl/firebase/firebaseui/ios/0_5_0/FirebaseUIFrameworks.zip' }
+  s.source       = { :http => 'http://localhost:7777/FirebaseUIFrameworks.zip' }
   s.platform = :ios
   s.ios.deployment_target = '8.0'
   s.ios.framework = 'UIKit'

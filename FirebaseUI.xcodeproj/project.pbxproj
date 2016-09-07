@@ -7,19 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E7E142B46F700B70A0FFAAC /* libPods-FirebaseAuthUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 852C9B29F2C0A1C6648BD0EF /* libPods-FirebaseAuthUITests.a */; };
-		2B0A0F1B267B0C38C92B6521 /* libPods-FirebaseGoogleAuthUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE8871866FE73DA236937C07 /* libPods-FirebaseGoogleAuthUITests.a */; };
-		751DC59EE26D188720369AF1 /* Pods_FirebaseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD43C4E015A7663184C549E /* Pods_FirebaseUI.framework */; };
-		826AFAE769FCFE98B4B74B0C /* libPods-FirebaseAuthUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DBBDC4A2995245AE0265E1A /* libPods-FirebaseAuthUI.a */; };
 		8D2A84AA1D678B2B0058DF04 /* FirebaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D2A84A91D678B2B0058DF04 /* FirebaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D82147C1D67981C0069A614 /* FirebaseAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DCC4FC31D678CDC00B0D3C4 /* FirebaseAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D82147D1D67982E0069A614 /* FirebaseFacebookAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DCC4FDF1D678CE800B0D3C4 /* FirebaseFacebookAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D82147E1D67983C0069A614 /* FirebaseGoogleAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DCC4FFB1D678CF500B0D3C4 /* FirebaseGoogleAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DA9413E1D678DEB00CD3685 /* FirebaseArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA941391D678DEB00CD3685 /* FirebaseArray.h */; };
-		8DA9413F1D678DEB00CD3685 /* FirebaseArrayDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413A1D678DEB00CD3685 /* FirebaseArrayDelegate.h */; };
-		8DA941401D678DEB00CD3685 /* FirebaseCollectionViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413B1D678DEB00CD3685 /* FirebaseCollectionViewDataSource.h */; };
-		8DA941411D678DEB00CD3685 /* FirebaseDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413C1D678DEB00CD3685 /* FirebaseDataSource.h */; };
-		8DA941421D678DEB00CD3685 /* FirebaseTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413D1D678DEB00CD3685 /* FirebaseTableViewDataSource.h */; };
+		8DA9413E1D678DEB00CD3685 /* FirebaseArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA941391D678DEB00CD3685 /* FirebaseArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8DA9413F1D678DEB00CD3685 /* FirebaseArrayDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413A1D678DEB00CD3685 /* FirebaseArrayDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8DA941401D678DEB00CD3685 /* FirebaseCollectionViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413B1D678DEB00CD3685 /* FirebaseCollectionViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8DA941411D678DEB00CD3685 /* FirebaseDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413C1D678DEB00CD3685 /* FirebaseDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8DA941421D678DEB00CD3685 /* FirebaseTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413D1D678DEB00CD3685 /* FirebaseTableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DA941471D678E3200CD3685 /* FirebaseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941431D678E3200CD3685 /* FirebaseArray.m */; };
 		8DA941481D678E3200CD3685 /* FirebaseCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941441D678E3200CD3685 /* FirebaseCollectionViewDataSource.m */; };
 		8DA941491D678E3200CD3685 /* FirebaseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941451D678E3200CD3685 /* FirebaseDataSource.m */; };
@@ -99,11 +95,6 @@
 		8DCC4FEC1D678CE800B0D3C4 /* FirebaseFacebookAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCC4FEB1D678CE800B0D3C4 /* FirebaseFacebookAuthUITests.m */; };
 		8DCC50031D678CF500B0D3C4 /* FirebaseGoogleAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCC4FF91D678CF500B0D3C4 /* FirebaseGoogleAuthUI.framework */; };
 		8DCC50081D678CF500B0D3C4 /* FirebaseGoogleAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCC50071D678CF500B0D3C4 /* FirebaseGoogleAuthUITests.m */; };
-		99101012BFC14F84380BC804 /* libPods-FirebaseFacebookAuthUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D950F6FCC3AEE2A9C7CAA2BF /* libPods-FirebaseFacebookAuthUITests.a */; };
-		B7C23036D39AF3DAD01AC93B /* libPods-FirebaseDatabaseUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1A3F96DD3267BC004514467 /* libPods-FirebaseDatabaseUITests.a */; };
-		C7F40BDD11710E62EC1D8830 /* libPods-FirebaseGoogleAuthUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 583C56DC9BA0F076FF5E9D00 /* libPods-FirebaseGoogleAuthUI.a */; };
-		C9063D6268799592731A20A6 /* libPods-FirebaseFacebookAuthUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DA30EC4DE42212CDA51D360 /* libPods-FirebaseFacebookAuthUI.a */; };
-		D61E8D9CB1462BA4A0AB8ED9 /* libPods-FirebaseDatabaseUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEB0BC78EA1390FC89C631B3 /* libPods-FirebaseDatabaseUI.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,25 +171,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B4E1E07E3C3A7F5297EE0B8 /* Pods-FirebaseAuthUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseAuthUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseAuthUITests/Pods-FirebaseAuthUITests.release.xcconfig"; sourceTree = "<group>"; };
-		21AA4569C0268927DF711DDE /* Pods-FirebaseDatabaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseDatabaseUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseDatabaseUITests/Pods-FirebaseDatabaseUITests.release.xcconfig"; sourceTree = "<group>"; };
-		2B960B098DF328FE5F277375 /* Pods-FirebaseAuthUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseAuthUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseAuthUI/Pods-FirebaseAuthUI.debug.xcconfig"; sourceTree = "<group>"; };
-		2C57E2001F09D0190E3CD254 /* Pods-FirebaseGoogleAuthUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseGoogleAuthUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseGoogleAuthUI/Pods-FirebaseGoogleAuthUI.release.xcconfig"; sourceTree = "<group>"; };
-		3BB716ACAFB52D068419F779 /* Pods-FirebaseDatabaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseDatabaseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseDatabaseUITests/Pods-FirebaseDatabaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		583C56DC9BA0F076FF5E9D00 /* libPods-FirebaseGoogleAuthUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseGoogleAuthUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		59F590F79D6EC7B33989B109 /* Pods-FirebaseFacebookAuthUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseFacebookAuthUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseFacebookAuthUITests/Pods-FirebaseFacebookAuthUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DBBDC4A2995245AE0265E1A /* libPods-FirebaseAuthUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseAuthUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EE5D107DEF38B036547E31D /* Pods-FirebaseUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUI/Pods-FirebaseUI.debug.xcconfig"; sourceTree = "<group>"; };
-		66F6A789AD0BCA0869EBA4F4 /* Pods-FirebaseAuthUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseAuthUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseAuthUITests/Pods-FirebaseAuthUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		6A6CB337F26BBC5C33196639 /* Pods-FirebaseAuthUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseAuthUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseAuthUI/Pods-FirebaseAuthUI.release.xcconfig"; sourceTree = "<group>"; };
-		6AE365FE4DA56E4E9ED14A75 /* Pods-FirebaseFacebookAuthUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseFacebookAuthUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseFacebookAuthUITests/Pods-FirebaseFacebookAuthUITests.release.xcconfig"; sourceTree = "<group>"; };
-		71DC2398ECADBD3A023A7554 /* Pods-FirebaseDatabaseUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseDatabaseUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseDatabaseUI/Pods-FirebaseDatabaseUI.debug.xcconfig"; sourceTree = "<group>"; };
-		751286F07CDFDB77CE53C8DA /* Pods-FirebaseFacebookAuthUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseFacebookAuthUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseFacebookAuthUI/Pods-FirebaseFacebookAuthUI.release.xcconfig"; sourceTree = "<group>"; };
-		852C9B29F2C0A1C6648BD0EF /* libPods-FirebaseAuthUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseAuthUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D2A84A61D678B2B0058DF04 /* FirebaseUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D2A84A91D678B2B0058DF04 /* FirebaseUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseUI.h; sourceTree = "<group>"; };
 		8D2A84AB1D678B2B0058DF04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8DA30EC4DE42212CDA51D360 /* libPods-FirebaseFacebookAuthUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseFacebookAuthUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DA941391D678DEB00CD3685 /* FirebaseArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseArray.h; sourceTree = "<group>"; };
 		8DA9413A1D678DEB00CD3685 /* FirebaseArrayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseArrayDelegate.h; sourceTree = "<group>"; };
 		8DA9413B1D678DEB00CD3685 /* FirebaseCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseCollectionViewDataSource.h; sourceTree = "<group>"; };
@@ -297,17 +272,6 @@
 		8DCC50021D678CF500B0D3C4 /* FirebaseGoogleAuthUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirebaseGoogleAuthUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DCC50071D678CF500B0D3C4 /* FirebaseGoogleAuthUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebaseGoogleAuthUITests.m; sourceTree = "<group>"; };
 		8DCC50091D678CF500B0D3C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8FD3DD6F1F764BD21C933B77 /* Pods-FirebaseUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUI/Pods-FirebaseUI.release.xcconfig"; sourceTree = "<group>"; };
-		A6593091A680C33E3D230974 /* Pods-FirebaseGoogleAuthUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseGoogleAuthUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseGoogleAuthUITests/Pods-FirebaseGoogleAuthUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		B1463BCD1D42D1EA30B36408 /* Pods-FirebaseFacebookAuthUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseFacebookAuthUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseFacebookAuthUI/Pods-FirebaseFacebookAuthUI.debug.xcconfig"; sourceTree = "<group>"; };
-		D061B1E160065AF6A3AE7CE5 /* Pods-FirebaseGoogleAuthUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseGoogleAuthUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseGoogleAuthUI/Pods-FirebaseGoogleAuthUI.debug.xcconfig"; sourceTree = "<group>"; };
-		D950F6FCC3AEE2A9C7CAA2BF /* libPods-FirebaseFacebookAuthUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseFacebookAuthUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DE8871866FE73DA236937C07 /* libPods-FirebaseGoogleAuthUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseGoogleAuthUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EAD43C4E015A7663184C549E /* Pods_FirebaseUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EEB0BC78EA1390FC89C631B3 /* libPods-FirebaseDatabaseUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseDatabaseUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F1A3F96DD3267BC004514467 /* libPods-FirebaseDatabaseUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseDatabaseUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2E0428095D22D9054532510 /* Pods-FirebaseGoogleAuthUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseGoogleAuthUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseGoogleAuthUITests/Pods-FirebaseGoogleAuthUITests.release.xcconfig"; sourceTree = "<group>"; };
-		F73BF4072C60F98F107A676F /* Pods-FirebaseDatabaseUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseDatabaseUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseDatabaseUI/Pods-FirebaseDatabaseUI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,7 +279,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				751DC59EE26D188720369AF1 /* Pods_FirebaseUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +286,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D61E8D9CB1462BA4A0AB8ED9 /* libPods-FirebaseDatabaseUI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +294,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DCC4FAF1D678CC400B0D3C4 /* FirebaseDatabaseUI.framework in Frameworks */,
-				B7C23036D39AF3DAD01AC93B /* libPods-FirebaseDatabaseUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +301,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				826AFAE769FCFE98B4B74B0C /* libPods-FirebaseAuthUI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,7 +309,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DCC4FCB1D678CDC00B0D3C4 /* FirebaseAuthUI.framework in Frameworks */,
-				1E7E142B46F700B70A0FFAAC /* libPods-FirebaseAuthUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +317,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DA941BB1D67915100CD3685 /* FirebaseAuthUI.framework in Frameworks */,
-				C9063D6268799592731A20A6 /* libPods-FirebaseFacebookAuthUI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,7 +325,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DCC4FE71D678CE800B0D3C4 /* FirebaseFacebookAuthUI.framework in Frameworks */,
-				99101012BFC14F84380BC804 /* libPods-FirebaseFacebookAuthUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,7 +333,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DA941BA1D67914800CD3685 /* FirebaseAuthUI.framework in Frameworks */,
-				C7F40BDD11710E62EC1D8830 /* libPods-FirebaseGoogleAuthUI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,54 +341,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DCC50031D678CF500B0D3C4 /* FirebaseGoogleAuthUI.framework in Frameworks */,
-				2B0A0F1B267B0C38C92B6521 /* libPods-FirebaseGoogleAuthUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		14DDED11DC758459373FC5F8 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				2B960B098DF328FE5F277375 /* Pods-FirebaseAuthUI.debug.xcconfig */,
-				6A6CB337F26BBC5C33196639 /* Pods-FirebaseAuthUI.release.xcconfig */,
-				66F6A789AD0BCA0869EBA4F4 /* Pods-FirebaseAuthUITests.debug.xcconfig */,
-				0B4E1E07E3C3A7F5297EE0B8 /* Pods-FirebaseAuthUITests.release.xcconfig */,
-				71DC2398ECADBD3A023A7554 /* Pods-FirebaseDatabaseUI.debug.xcconfig */,
-				F73BF4072C60F98F107A676F /* Pods-FirebaseDatabaseUI.release.xcconfig */,
-				3BB716ACAFB52D068419F779 /* Pods-FirebaseDatabaseUITests.debug.xcconfig */,
-				21AA4569C0268927DF711DDE /* Pods-FirebaseDatabaseUITests.release.xcconfig */,
-				B1463BCD1D42D1EA30B36408 /* Pods-FirebaseFacebookAuthUI.debug.xcconfig */,
-				751286F07CDFDB77CE53C8DA /* Pods-FirebaseFacebookAuthUI.release.xcconfig */,
-				59F590F79D6EC7B33989B109 /* Pods-FirebaseFacebookAuthUITests.debug.xcconfig */,
-				6AE365FE4DA56E4E9ED14A75 /* Pods-FirebaseFacebookAuthUITests.release.xcconfig */,
-				D061B1E160065AF6A3AE7CE5 /* Pods-FirebaseGoogleAuthUI.debug.xcconfig */,
-				2C57E2001F09D0190E3CD254 /* Pods-FirebaseGoogleAuthUI.release.xcconfig */,
-				A6593091A680C33E3D230974 /* Pods-FirebaseGoogleAuthUITests.debug.xcconfig */,
-				F2E0428095D22D9054532510 /* Pods-FirebaseGoogleAuthUITests.release.xcconfig */,
-				5EE5D107DEF38B036547E31D /* Pods-FirebaseUI.debug.xcconfig */,
-				8FD3DD6F1F764BD21C933B77 /* Pods-FirebaseUI.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		89CAE31FB0EC84E5A4D804F7 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5DBBDC4A2995245AE0265E1A /* libPods-FirebaseAuthUI.a */,
-				852C9B29F2C0A1C6648BD0EF /* libPods-FirebaseAuthUITests.a */,
-				EEB0BC78EA1390FC89C631B3 /* libPods-FirebaseDatabaseUI.a */,
-				F1A3F96DD3267BC004514467 /* libPods-FirebaseDatabaseUITests.a */,
-				8DA30EC4DE42212CDA51D360 /* libPods-FirebaseFacebookAuthUI.a */,
-				D950F6FCC3AEE2A9C7CAA2BF /* libPods-FirebaseFacebookAuthUITests.a */,
-				583C56DC9BA0F076FF5E9D00 /* libPods-FirebaseGoogleAuthUI.a */,
-				DE8871866FE73DA236937C07 /* libPods-FirebaseGoogleAuthUITests.a */,
-				EAD43C4E015A7663184C549E /* Pods_FirebaseUI.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		8D2A849C1D678B2B0058DF04 = {
 			isa = PBXGroup;
 			children = (
@@ -446,8 +360,6 @@
 				8DCC4FFA1D678CF500B0D3C4 /* FirebaseGoogleAuthUI */,
 				8DCC50061D678CF500B0D3C4 /* FirebaseGoogleAuthUITests */,
 				8D2A84A71D678B2B0058DF04 /* Products */,
-				14DDED11DC758459373FC5F8 /* Pods */,
-				89CAE31FB0EC84E5A4D804F7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1716,7 +1628,6 @@
 		};
 		8D2A84BB1D678B2B0058DF04 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EE5D107DEF38B036547E31D /* Pods-FirebaseUI.debug.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1733,7 +1644,6 @@
 		};
 		8D2A84BC1D678B2B0058DF04 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8FD3DD6F1F764BD21C933B77 /* Pods-FirebaseUI.release.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1750,7 +1660,6 @@
 		};
 		8DCC4FB61D678CC400B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 71DC2398ECADBD3A023A7554 /* Pods-FirebaseDatabaseUI.debug.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1767,7 +1676,6 @@
 		};
 		8DCC4FB71D678CC400B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F73BF4072C60F98F107A676F /* Pods-FirebaseDatabaseUI.release.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1784,7 +1692,6 @@
 		};
 		8DCC4FB81D678CC400B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3BB716ACAFB52D068419F779 /* Pods-FirebaseDatabaseUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1795,7 +1702,6 @@
 		};
 		8DCC4FB91D678CC400B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21AA4569C0268927DF711DDE /* Pods-FirebaseDatabaseUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1806,7 +1712,6 @@
 		};
 		8DCC4FD31D678CDC00B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B960B098DF328FE5F277375 /* Pods-FirebaseAuthUI.debug.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1823,7 +1728,6 @@
 		};
 		8DCC4FD41D678CDC00B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A6CB337F26BBC5C33196639 /* Pods-FirebaseAuthUI.release.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1840,7 +1744,6 @@
 		};
 		8DCC4FD61D678CDC00B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66F6A789AD0BCA0869EBA4F4 /* Pods-FirebaseAuthUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = FirebaseAuthUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1851,7 +1754,6 @@
 		};
 		8DCC4FD71D678CDC00B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B4E1E07E3C3A7F5297EE0B8 /* Pods-FirebaseAuthUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = FirebaseAuthUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1862,7 +1764,6 @@
 		};
 		8DCC4FEF1D678CE900B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B1463BCD1D42D1EA30B36408 /* Pods-FirebaseFacebookAuthUI.debug.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1880,7 +1781,6 @@
 		};
 		8DCC4FF01D678CE900B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 751286F07CDFDB77CE53C8DA /* Pods-FirebaseFacebookAuthUI.release.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1898,7 +1798,6 @@
 		};
 		8DCC4FF21D678CE900B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 59F590F79D6EC7B33989B109 /* Pods-FirebaseFacebookAuthUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1909,7 +1808,6 @@
 		};
 		8DCC4FF31D678CE900B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6AE365FE4DA56E4E9ED14A75 /* Pods-FirebaseFacebookAuthUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1920,7 +1818,6 @@
 		};
 		8DCC500B1D678CF500B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D061B1E160065AF6A3AE7CE5 /* Pods-FirebaseGoogleAuthUI.debug.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1937,7 +1834,6 @@
 		};
 		8DCC500C1D678CF500B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C57E2001F09D0190E3CD254 /* Pods-FirebaseGoogleAuthUI.release.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1954,7 +1850,6 @@
 		};
 		8DCC500E1D678CF500B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A6593091A680C33E3D230974 /* Pods-FirebaseGoogleAuthUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = FirebaseGoogleAuthUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1965,7 +1860,6 @@
 		};
 		8DCC500F1D678CF500B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2E0428095D22D9054532510 /* Pods-FirebaseGoogleAuthUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = FirebaseGoogleAuthUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

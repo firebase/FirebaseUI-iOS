@@ -19,8 +19,6 @@
 		8DABC9AB1D3D947300453807 /* SampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9AA1D3D947300453807 /* SampleCell.swift */; };
 		8DABC9AD1D3D9EAF00453807 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9AC1D3D9EAF00453807 /* ChatViewController.swift */; };
 		8DDF1AE51D3FF67D001F1160 /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF1AE41D3FF67D001F1160 /* ChatCollectionViewCell.swift */; };
-		9B876E10AD36757E72520042 /* Pods_uidemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D4095176DE050264EC1BDB /* Pods_uidemo.framework */; };
-		CDCCC6ABDF7399481444E4DC /* Pods_uidemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 307AA4B2A6A2B54E7A0E3405 /* Pods_uidemoTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +52,6 @@
 		8DABC9AA1D3D947300453807 /* SampleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleCell.swift; sourceTree = "<group>"; };
 		8DABC9AC1D3D9EAF00453807 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		8DDF1AE41D3FF67D001F1160 /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
-		B835D7CE35743C8759D512F4 /* Pods-uidemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uidemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-uidemoTests/Pods-uidemoTests.release.xcconfig"; sourceTree = "<group>"; };
-		C642C46FDC7F7AA33EECBC4B /* Pods-uidemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uidemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-uidemo/Pods-uidemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +59,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B876E10AD36757E72520042 /* Pods_uidemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,7 +66,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDCCC6ABDF7399481444E4DC /* Pods_uidemoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,8 +87,6 @@
 				8DABC9871D3D82D600453807 /* uidemo */,
 				8DABC99C1D3D82D600453807 /* uidemoTests */,
 				8DABC9861D3D82D600453807 /* Products */,
-				EC679FD26DE58DD80D9A862F /* Pods */,
-				E38536A8BC26A58B6EA918C8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,26 +132,6 @@
 				8D16073D1D492B200069E4F5 /* AuthViewController.swift */,
 			);
 			name = AuthSample;
-			sourceTree = "<group>";
-		};
-		E38536A8BC26A58B6EA918C8 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				49D4095176DE050264EC1BDB /* Pods_uidemo.framework */,
-				307AA4B2A6A2B54E7A0E3405 /* Pods_uidemoTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EC679FD26DE58DD80D9A862F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C642C46FDC7F7AA33EECBC4B /* Pods-uidemo.debug.xcconfig */,
-				646EBF2B9F0A806D044E63F4 /* Pods-uidemo.release.xcconfig */,
-				1004D218CE11AF7D8D57EC06 /* Pods-uidemoTests.debug.xcconfig */,
-				B835D7CE35743C8759D512F4 /* Pods-uidemoTests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,6 +387,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -461,6 +434,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -498,7 +472,6 @@
 		};
 		8DABC9A31D3D82D600453807 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C642C46FDC7F7AA33EECBC4B /* Pods-uidemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -513,7 +486,6 @@
 		};
 		8DABC9A41D3D82D600453807 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 646EBF2B9F0A806D044E63F4 /* Pods-uidemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -527,7 +499,6 @@
 		};
 		8DABC9A61D3D82D600453807 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1004D218CE11AF7D8D57EC06 /* Pods-uidemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = uidemoTests/Info.plist;
@@ -540,7 +511,6 @@
 		};
 		8DABC9A71D3D82D600453807 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B835D7CE35743C8759D512F4 /* Pods-uidemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = uidemoTests/Info.plist;
