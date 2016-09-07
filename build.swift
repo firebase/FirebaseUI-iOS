@@ -1,7 +1,7 @@
 #!/usr/bin/env xcrun swift
 
-// This script builds and lipos static libraries, but doesn't
-// bundle assets for any of them.
+// This script builds and lipos dynamic frameworks
+// built by Xcode.
 
 import Foundation
 
