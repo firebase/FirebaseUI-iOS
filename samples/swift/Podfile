@@ -1,7 +1,7 @@
 target 'uidemo' do
   use_frameworks!
 
-  pod 'FirebaseUI'
+  pod 'FirebaseUI', :podspec => '../../FirebaseUI.podspec'
 
   target 'uidemoTests' do
     inherit! :search_paths

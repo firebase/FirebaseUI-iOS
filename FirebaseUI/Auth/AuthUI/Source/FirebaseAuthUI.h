@@ -18,4 +18,4 @@
 #import "FIRAuthProviderUI.h"
 #import "FIRAuthUI.h"
 #import "FIRAuthUIBaseViewController.h"
-#import "FIRAuthUIErrors.h"
+#import "FIRAuthUIErrorUtils.h"
