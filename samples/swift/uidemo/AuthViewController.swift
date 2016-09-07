@@ -42,7 +42,7 @@ class AuthViewController: UIViewController {
   private var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
   
   private(set) var auth: FIRAuth? = FIRAuth.auth()
-  private(set) var authUI: FIRAuthUI? = FIRAuthUI.authUI()
+  private(set) var authUI: FIRAuthUI? = FIRAuthUI.defaultAuthUI()
   
   @IBOutlet private var signOutButton: UIButton!
   @IBOutlet private var startButton: UIButton!
@@ -60,14 +60,12 @@ class AuthViewController: UIViewController {
     // If you haven't set up your authentications correctly these buttons
     // will still appear in the UI, but they'll crash the app when tapped.
     let providers: [FIRAuthProviderUI] = [
-      FIRGoogleAuthUI(clientID: kGoogleAppClientID)!,
-      FIRFacebookAuthUI(appID: kFacebookAppID)!,
+      FIRGoogleAuthUI(clientID: kGoogleAppClientID),
+      FIRFacebookAuthUI(appID: kFacebookAppID),
     ]
-    self.authUI?.signInProviders = providers
+    self.authUI?.providers = providers
     
-    // This is listed as `TOSURL` in the objc source,
-    // but it's `termsOfServiceURL` in the current pod version.
-    self.authUI?.termsOfServiceURL = kFirebaseTermsOfService
+    self.authUI?.TOSURL = kFirebaseTermsOfService
     
     self.authStateDidChangeHandle =
       self.auth?.addAuthStateDidChangeListener(self.updateUI(auth:user:))
