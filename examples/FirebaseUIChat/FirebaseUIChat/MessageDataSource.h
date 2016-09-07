@@ -14,7 +14,9 @@
 //  limitations under the License.
 //
 
-#import "FirebaseUI/FirebaseTableViewDataSource.h"
+// Uncomment when using frawemorks
+//@import FirebaseDatabaseUI;
+#import <FirebaseUI/FirebaseTableViewDataSource.h>
 
 @interface MessageDataSource : FirebaseTableViewDataSource
 

@@ -16,6 +16,9 @@
 
 @import UIKit;
 @import FirebaseDatabase;
+
+// Uncomment when using frawemorks
+//@import FirebaseDatabaseUI;
 #import <FirebaseUI/FirebaseTableViewDataSource.h>
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>

@@ -1,7 +1,13 @@
-platform :ios, '7.0'
-
-pod 'FirebaseUI', :path => "../../FirebaseUI.podspec"
+platform :ios, '8.0'
 
 target 'FirebaseUIChat' do
+
+#  used for development from sources
+  pod 'FirebaseUI', :path => "../../FirebaseUI_dev.podspec"
+
+#  used for development from released frameworks
+#  use_frameworks!
+#  pod 'FirebaseUI', :podspec => "../../FirebaseUI.podspec"
+
 end
 
