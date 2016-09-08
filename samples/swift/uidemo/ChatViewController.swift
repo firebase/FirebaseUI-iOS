@@ -128,13 +128,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
     self.textView.text = ""
   }
-  
-  // MARK: - Boilerplate
-  
-  static func fromStoryboard(storyboard: UIStoryboard = AppDelegate.mainStoryboard) -> ChatViewController {
-    return storyboard.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
-  }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     

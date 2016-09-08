@@ -118,8 +118,5 @@ class AuthViewController: UIViewController {
   override func viewWillLayoutSubviews() {
     self.topConstraint.constant = self.topLayoutGuide.length
   }
-  
-  static func fromStoryboard(storyboard: UIStoryboard = AppDelegate.mainStoryboard) -> AuthViewController {
-    return storyboard.instantiateViewControllerWithIdentifier("AuthViewController") as! AuthViewController
-  }
+
 }

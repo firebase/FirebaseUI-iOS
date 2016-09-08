@@ -20,10 +20,6 @@ import FirebaseAuthUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  
-  static var mainStoryboard: UIStoryboard {
-    return UIStoryboard(name: "Main", bundle: nil)
-  }
 
   var window: UIWindow?
 
