@@ -114,7 +114,7 @@ let builds = sdks.flatMap { sdk in
       "-scheme"         : scheme,
       "-configuration"  : "Release",
       "-sdk"            : sdk,
-      "-derivedDataPath": DerivedDataDir
+      "-derivedDataPath": DerivedDataDir,
     ])
   }
 }
