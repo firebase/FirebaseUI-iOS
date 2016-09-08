@@ -52,9 +52,9 @@ enum Sample: Int, RawRepresentable {
   func controller() -> UIViewController {
     switch self {
     case .Chat:
-      return ChatViewController.fromStoryboard()
+      return UIStoryboard.instantiateViewController("Main", identifier: "ChatViewController") as! ChatViewController
     case .Auth:
-      return AuthViewController.fromStoryboard()
+      return UIStoryboard.instantiateViewController("Main", identifier: "AuthViewController") as! AuthViewController
     }
   }
 }
