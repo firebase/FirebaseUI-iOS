@@ -36,27 +36,27 @@ let kFacebookAppID     = "your fb app ID here"
 class AuthViewController: UIViewController {
   // Before running this sample, make sure you've correctly configured
   // the appropriate authentication methods in Firebase console. For more
-  // info, see the Auth README at ../../FirebaseUI/Auth/README.md
+  // info, see the Auth README at ../../FirebaseAuthUI/README.md
   // and https://firebase.google.com/docs/auth/
-  
+
   private var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
-  
+
   private(set) var auth: FIRAuth? = FIRAuth.auth()
   private(set) var authUI: FIRAuthUI? = FIRAuthUI.defaultAuthUI()
-  
+
   @IBOutlet private var signOutButton: UIButton!
   @IBOutlet private var startButton: UIButton!
-  
+
   @IBOutlet private var signedInLabel: UILabel!
   @IBOutlet private var nameLabel: UILabel!
   @IBOutlet private var emailLabel: UILabel!
   @IBOutlet private var uidLabel: UILabel!
-  
+
   @IBOutlet var topConstraint: NSLayoutConstraint!
-  
+
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-    
+
     // If you haven't set up your authentications correctly these buttons
     // will still appear in the UI, but they'll crash the app when tapped.
     let providers: [FIRAuthProviderUI] = [
@@ -64,25 +64,25 @@ class AuthViewController: UIViewController {
       FIRFacebookAuthUI(appID: kFacebookAppID),
     ]
     self.authUI?.providers = providers
-    
+
     self.authUI?.TOSURL = kFirebaseTermsOfService
-    
+
     self.authStateDidChangeHandle =
       self.auth?.addAuthStateDidChangeListener(self.updateUI(auth:user:))
   }
-  
+
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
     if let handle = self.authStateDidChangeHandle {
       self.auth?.removeAuthStateDidChangeListener(handle)
     }
   }
-  
+
   @IBAction func startPressed(sender: AnyObject) {
     let controller = self.authUI!.authViewController()
     self.presentViewController(controller, animated: true, completion: nil)
   }
-  
+
   @IBAction func signOutPressed(sender: AnyObject) {
     do {
      try self.auth?.signOut()
@@ -93,13 +93,13 @@ class AuthViewController: UIViewController {
       fatalError("Could not sign out: \(error)")
     }
   }
-  
+
   // Boilerplate
   func updateUI(auth auth: FIRAuth, user: FIRUser?) {
     if let user = user {
       self.signOutButton.enabled = true
       self.startButton.enabled = false
-      
+
       self.signedInLabel.text = "Signed in"
       self.nameLabel.text = "Name: " + (user.displayName ?? "(null)")
       self.emailLabel.text = "Email: " + (user.email ?? "(null)")
@@ -107,14 +107,14 @@ class AuthViewController: UIViewController {
     } else {
       self.signOutButton.enabled = false
       self.startButton.enabled = true
-      
+
       self.signedInLabel.text = "Not signed in"
       self.nameLabel.text = "Name"
       self.emailLabel.text = "Email"
       self.uidLabel.text = "UID"
     }
   }
-  
+
   override func viewWillLayoutSubviews() {
     self.topConstraint.constant = self.topLayoutGuide.length
   }
