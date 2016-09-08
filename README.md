@@ -58,7 +58,7 @@ $ pod install
 ```
 
 FirebaseUI makes use of Xcode 7 features such as lightweight generics and
-`__kindof` annotations, and is no longer compatible with XCode 6 development.
+`__kindof` annotations, and is no longer compatible with Xcode 6 development.
 
 ## Deployment
 
