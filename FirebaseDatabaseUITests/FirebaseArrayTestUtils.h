@@ -18,7 +18,7 @@
 
 // clang-format on
 
-#import "FirebaseArray.h"
+@import FirebaseDatabaseUI;
 
 NS_ASSUME_NONNULL_BEGIN
 

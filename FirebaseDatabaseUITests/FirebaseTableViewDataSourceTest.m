@@ -19,8 +19,8 @@
 // clang-format on
 
 @import XCTest;
+@import FirebaseDatabaseUI;
 
-#import "FirebaseTableViewDataSource.h"
 #import "FirebaseArrayTestUtils.h"
 
 static NSString *const kTestReuseIdentifier = @"FirebaseTableViewDataSourceTest";

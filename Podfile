@@ -14,53 +14,40 @@ end
 
 target 'FirebaseDatabaseUI' do
   # Pods for Database
-  pod 'Firebase'
   pod 'Firebase/Database'
 
   target 'FirebaseDatabaseUITests' do
     inherit! :search_paths
-    pod 'Firebase'
     pod 'Firebase/Database'
   end
 end
 
 target 'FirebaseAuthUI' do
   # Pods for Auth
-  pod 'Firebase'
   pod 'Firebase/Auth'
 
   target 'FirebaseAuthUITests' do
     inherit! :search_paths
-    pod 'Firebase'
-    pod 'Firebase/Auth'
   end
 end
 
 target 'FirebaseFacebookAuthUI' do
   # Pods for Facebook Auth
-  pod 'Firebase'
   pod 'Firebase/Auth'
   pod 'FBSDKLoginKit', '~> 4.0'
 
   target 'FirebaseFacebookAuthUITests' do
     inherit! :search_paths
-    pod 'Firebase'
-    pod 'Firebase/Auth'
-    pod 'FBSDKLoginKit', '~> 4.0'
   end
 end
 
 target 'FirebaseGoogleAuthUI' do
   # Pods for Google Auth
-  pod 'Firebase'
   pod 'Firebase/Auth'
   pod 'GoogleSignIn', '~> 4.0'
 
   target 'FirebaseGoogleAuthUITests' do
     inherit! :search_paths
-    pod 'Firebase'
-    pod 'Firebase/Auth'
-    pod 'GoogleSignIn', '~> 4.0'
   end
 end
 

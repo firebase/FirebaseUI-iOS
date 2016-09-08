@@ -72,8 +72,6 @@
 		8DA941B11D67908E00CD3685 /* FIRFacebookAuthUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941AF1D67908E00CD3685 /* FIRFacebookAuthUI.m */; };
 		8DA941B41D6790E900CD3685 /* FIRGoogleAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA941B21D6790E900CD3685 /* FIRGoogleAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DA941B51D6790E900CD3685 /* FIRGoogleAuthUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941B31D6790E900CD3685 /* FIRGoogleAuthUI.m */; };
-		8DA941BA1D67914800CD3685 /* FirebaseAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCC4FC11D678CDC00B0D3C4 /* FirebaseAuthUI.framework */; };
-		8DA941BB1D67915100CD3685 /* FirebaseAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCC4FC11D678CDC00B0D3C4 /* FirebaseAuthUI.framework */; };
 		8DA941BF1D67923F00CD3685 /* ic_google.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941BC1D67923F00CD3685 /* ic_google.png */; };
 		8DA941C01D67923F00CD3685 /* ic_google@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941BD1D67923F00CD3685 /* ic_google@2x.png */; };
 		8DA941C11D67923F00CD3685 /* ic_google@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941BE1D67923F00CD3685 /* ic_google@3x.png */; };
@@ -88,22 +86,25 @@
 		8DA941F01D67951B00CD3685 /* FirebaseCollectionViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941EC1D67951B00CD3685 /* FirebaseCollectionViewDataSourceTest.m */; };
 		8DA941F11D67951B00CD3685 /* FirebaseTableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941ED1D67951B00CD3685 /* FirebaseTableViewDataSourceTest.m */; };
 		8DCC4FA81D678CC400B0D3C4 /* FirebaseDatabaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DCC4FA71D678CC400B0D3C4 /* FirebaseDatabaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DCC4FAF1D678CC400B0D3C4 /* FirebaseDatabaseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCC4FA51D678CC400B0D3C4 /* FirebaseDatabaseUI.framework */; };
-		8DCC4FCB1D678CDC00B0D3C4 /* FirebaseAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCC4FC11D678CDC00B0D3C4 /* FirebaseAuthUI.framework */; };
 		8DCC4FD01D678CDC00B0D3C4 /* FirebaseAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCC4FCF1D678CDC00B0D3C4 /* FirebaseAuthUITests.m */; };
-		8DCC4FE71D678CE800B0D3C4 /* FirebaseFacebookAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCC4FDD1D678CE800B0D3C4 /* FirebaseFacebookAuthUI.framework */; };
 		8DCC4FEC1D678CE800B0D3C4 /* FirebaseFacebookAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCC4FEB1D678CE800B0D3C4 /* FirebaseFacebookAuthUITests.m */; };
-		8DCC50031D678CF500B0D3C4 /* FirebaseGoogleAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCC4FF91D678CF500B0D3C4 /* FirebaseGoogleAuthUI.framework */; };
 		8DCC50081D678CF500B0D3C4 /* FirebaseGoogleAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCC50071D678CF500B0D3C4 /* FirebaseGoogleAuthUITests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8DA941B61D67911900CD3685 /* PBXContainerItemProxy */ = {
+		8D0BD3D21D81E9BC00F7BF3D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8DCC4FC01D678CDC00B0D3C4;
 			remoteInfo = FirebaseAuthUI;
+		};
+		8D0F5E951D81EB06001C47AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DCC4FA41D678CC400B0D3C4;
+			remoteInfo = FirebaseDatabaseUI;
 		};
 		8DA941B81D67912000CD3685 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -111,13 +112,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8DCC4FC01D678CDC00B0D3C4;
 			remoteInfo = FirebaseAuthUI;
-		};
-		8DCC4FB01D678CC400B0D3C4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DCC4FA41D678CC400B0D3C4;
-			remoteInfo = FirebaseDatabaseUI;
 		};
 		8DCC4FCC1D678CDC00B0D3C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -174,6 +168,7 @@
 		8D2A84A61D678B2B0058DF04 /* FirebaseUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D2A84A91D678B2B0058DF04 /* FirebaseUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseUI.h; sourceTree = "<group>"; };
 		8D2A84AB1D678B2B0058DF04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D9861121D81EEE2007D3FD3 /* libPods-FirebaseDatabaseUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-FirebaseDatabaseUI.a"; path = "../../Library/Developer/Xcode/DerivedData/FirebaseUI-fwcyvciocjlrhqbyjmmybozelsll/Build/Products/Debug-iphonesimulator/libPods-FirebaseDatabaseUI.a"; sourceTree = "<group>"; };
 		8DA941391D678DEB00CD3685 /* FirebaseArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseArray.h; sourceTree = "<group>"; };
 		8DA9413A1D678DEB00CD3685 /* FirebaseArrayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseArrayDelegate.h; sourceTree = "<group>"; };
 		8DA9413B1D678DEB00CD3685 /* FirebaseCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseCollectionViewDataSource.h; sourceTree = "<group>"; };
@@ -293,7 +288,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DCC4FAF1D678CC400B0D3C4 /* FirebaseDatabaseUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +302,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DCC4FCB1D678CDC00B0D3C4 /* FirebaseAuthUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,7 +309,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DA941BB1D67915100CD3685 /* FirebaseAuthUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +316,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DCC4FE71D678CE800B0D3C4 /* FirebaseFacebookAuthUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +323,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DA941BA1D67914800CD3685 /* FirebaseAuthUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +330,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DCC50031D678CF500B0D3C4 /* FirebaseGoogleAuthUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +349,7 @@
 				8DCC4FFA1D678CF500B0D3C4 /* FirebaseGoogleAuthUI */,
 				8DCC50061D678CF500B0D3C4 /* FirebaseGoogleAuthUITests */,
 				8D2A84A71D678B2B0058DF04 /* Products */,
+				C6755E8A1320A2BECE081E94 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -614,6 +604,14 @@
 			path = FirebaseGoogleAuthUITests;
 			sourceTree = "<group>";
 		};
+		C6755E8A1320A2BECE081E94 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8D9861121D81EEE2007D3FD3 /* libPods-FirebaseDatabaseUI.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -732,7 +730,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DCC4FBB1D678CC400B0D3C4 /* Build configuration list for PBXNativeTarget "FirebaseDatabaseUITests" */;
 			buildPhases = (
-				F2A4D7C9DAECFCEB6E34164A /* [CP] Check Pods Manifest.lock */,
+				0CFC3EDD5C8B3997272245C3 /* [CP] Check Pods Manifest.lock */,
 				8DCC4FAA1D678CC400B0D3C4 /* Sources */,
 				8DCC4FAB1D678CC400B0D3C4 /* Frameworks */,
 				8DCC4FAC1D678CC400B0D3C4 /* Resources */,
@@ -742,7 +740,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				8DCC4FB11D678CC400B0D3C4 /* PBXTargetDependency */,
+				8D0F5E961D81EB06001C47AA /* PBXTargetDependency */,
 			);
 			name = FirebaseDatabaseUITests;
 			productName = FirebaseDatabaseUITests;
@@ -804,7 +802,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				8DA941B71D67911900CD3685 /* PBXTargetDependency */,
+				8D0BD3D31D81E9BC00F7BF3D /* PBXTargetDependency */,
 			);
 			name = FirebaseFacebookAuthUI;
 			productName = FirebaseFacebookAuthUI;
@@ -1030,6 +1028,21 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		0A5F7912352E8D5E56852548 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		0CFC3EDD5C8B3997272245C3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1344,21 +1357,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseDatabaseUITests/Pods-FirebaseDatabaseUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F2A4D7C9DAECFCEB6E34164A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1456,20 +1454,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8DA941B71D67911900CD3685 /* PBXTargetDependency */ = {
+		8D0BD3D31D81E9BC00F7BF3D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8DCC4FC01D678CDC00B0D3C4 /* FirebaseAuthUI */;
-			targetProxy = 8DA941B61D67911900CD3685 /* PBXContainerItemProxy */;
+			targetProxy = 8D0BD3D21D81E9BC00F7BF3D /* PBXContainerItemProxy */;
+		};
+		8D0F5E961D81EB06001C47AA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DCC4FA41D678CC400B0D3C4 /* FirebaseDatabaseUI */;
+			targetProxy = 8D0F5E951D81EB06001C47AA /* PBXContainerItemProxy */;
 		};
 		8DA941B91D67912000CD3685 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8DCC4FC01D678CDC00B0D3C4 /* FirebaseAuthUI */;
 			targetProxy = 8DA941B81D67912000CD3685 /* PBXContainerItemProxy */;
-		};
-		8DCC4FB11D678CC400B0D3C4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8DCC4FA41D678CC400B0D3C4 /* FirebaseDatabaseUI */;
-			targetProxy = 8DCC4FB01D678CC400B0D3C4 /* PBXContainerItemProxy */;
 		};
 		8DCC4FCD1D678CDC00B0D3C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1693,6 +1691,7 @@
 		8DCC4FB81D678CC400B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;
@@ -1703,6 +1702,7 @@
 		8DCC4FB91D678CC400B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;

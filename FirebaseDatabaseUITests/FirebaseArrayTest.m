@@ -19,8 +19,8 @@
 // clang-format on
 
 @import XCTest;
+@import FirebaseDatabaseUI;
 
-#import "FirebaseArray.h"
 #import "FirebaseArrayTestUtils.h"
 
 @interface FirebaseArrayTest : XCTestCase
