@@ -16,7 +16,7 @@
 
 import UIKit
 import Firebase
-import FirebaseAuthUI.FIRAuthUI
+import FirebaseAuthUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
