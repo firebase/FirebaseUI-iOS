@@ -1,0 +1,60 @@
+//
+//  Copyright (c) 2016 Google Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+
+@import FirebaseAuthUI;
+
+NS_ASSUME_NONNULL_BEGIN
+
+/** @class FIRGoogleAuthUI
+    @brief AuthUI components for Google Sign In.
+ */
+@interface FIRGoogleAuthUI : NSObject <FIRAuthProviderUI>
+
+/** @property clientID
+    @brief The Google Sign In client ID.
+ */
+@property(nonatomic, copy, readonly) NSString *clientID;
+
+/** @property scopes
+    @brief The scopes to use with Google Sign In.
+    @remarks Defaults to using email and profile scopes. For a list of all scopes
+      see https://developers.google.com/identity/protocols/googlescopes
+ */
+@property(nonatomic, copy, readonly) NSArray<NSString *> *scopes;
+
+/** @fn init
+    @brief Please use initWithClientId:
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
+/** @fn initWithClientID:
+    @brief Convenience initializer. Calls designated init with default 
+      scopes of "email" and "profile".
+    @param clientId The Google Sign In client ID.
+ */
+- (instancetype)initWithClientID:(NSString *)clientID;
+
+/** @fn initWithClientID:scopes:
+ @brief Designated initializer.
+ @param clientId The Google Sign In client ID.
+ @param scopes   The user account scopes required by the app. A list of possible scopes can be
+   found at https://developers.google.com/identity/protocols/googlescopes
+ */
+- (instancetype)initWithClientID:(NSString *)clientID scopes:(NSArray <NSString *> *)scopes NS_DESIGNATED_INITIALIZER;
+
+@end
+
+NS_ASSUME_NONNULL_END

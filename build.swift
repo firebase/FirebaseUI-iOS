@@ -1,7 +1,7 @@
 #!/usr/bin/env xcrun swift
 
-// This script builds and lipos static libraries, but doesn't
-// bundle assets for any of them.
+// This script builds and lipos dynamic frameworks
+// built by Xcode.
 
 import Foundation
 
@@ -25,6 +25,15 @@ func mv(from source: String, to destination: String) -> Void {
   let task = NSTask()
   task.launchPath = "/bin/mv"
   task.arguments = ["-n", "-v", source, destination]
+  task.launch()
+  task.waitUntilExit()
+  guard task.terminationStatus == 0 else { exit(task.terminationStatus) }
+}
+
+func cp(from source: String, to destination: String) -> Void {
+  let task = NSTask()
+  task.launchPath = "/bin/cp"
+  task.arguments = ["-R", "-n", source, destination]
   task.launch()
   task.waitUntilExit()
   guard task.terminationStatus == 0 else { exit(task.terminationStatus) }
@@ -60,12 +69,15 @@ struct Build {
     let keys = self.params.keys
     for key in keys {
       params.append(key)
-      // can't remember what this line is supposed to do
-      let value = self.params[key].flatMap { return $0 }
+      let value = self.params[key]
       if let value = value {
         params.append(value)
       }
     }
+    // hard code bitcode so cocoapods dummy
+    // files are built with bitcode, hope for
+    // no consequences later
+    params.append("BITCODE_GENERATION_MODE=bitcode")
     return params
   }
 
@@ -80,28 +92,25 @@ struct Build {
 }
 
 let sdks = ["iphoneos", "iphonesimulator"]
-let frameworkMapping = [
-  "Database": "FirebaseDatabaseUI",
-  "Auth":     "FirebaseAuthUI",
-  "Facebook": "FirebaseFacebookAuthUI",
-  "Google":   "FirebaseGoogleAuthUI",
-]
-let schemes = Array(frameworkMapping.keys)
-print("Schemes: \(schemes)")
 
-// Create folder structure for built products
+/// Map from scheme names to framework names.
+/// Hopefully can avoid hard-coding this in the future
+let schemes = [
+  "FirebaseDatabaseUI",
+  "FirebaseAuthUI",
+  "FirebaseFacebookAuthUI",
+  "FirebaseGoogleAuthUI",
+]
+
+// make folder structure for built products
 schemes.forEach { scheme in
   let schemeDir = BuiltProductsDir + scheme
   mkdir(schemeDir)
   mkdir(schemeDir + "/Frameworks")
-  mkdir(schemeDir + "/Resources")
-
-  let frameworkDir = schemeDir + "/Frameworks/" 
-    + frameworkMapping[scheme]! + ".framework"
-  mkdir(frameworkDir + "/Modules")
 }
 
-// Create xcodebuild tasks from schemes and target sdks
+// Invoke xcodebuild, building each scheme in
+// release for each target sdk
 let builds = sdks.flatMap { sdk in
   return schemes.map { scheme in
     return Build([
@@ -109,27 +118,21 @@ let builds = sdks.flatMap { sdk in
       "-scheme"         : scheme,
       "-configuration"  : "Release",
       "-sdk"            : sdk,
-      "-derivedDataPath": DerivedDataDir
+      "-derivedDataPath": DerivedDataDir,
     ])
   }
 }
 
-// build everything in release
-builds.forEach { build in
-  build.launch()
+builds.forEach { $0.launch() }
 
-  let scheme = build.params["-scheme"]!
-  let sdk = build.params["-sdk"]!
-  let headerPath = DerivedDataDir + "Build/Products/Release-"
-    + sdk + "/usr/local/include"
-  let framework = frameworkMapping[scheme]! + ".framework"
-  let destination = BuiltProductsDir + scheme + "/Frameworks/"
-    + framework + "/Headers"
-
-  // Headers only need to be moved once.
-  if (sdk == "iphoneos") {
-    mv(from: headerPath, to: destination)
-  }
+// Copy frameworks into built products dir. Don't really
+// care about sdk here since we're gonna lipo everything later
+schemes.forEach { scheme in
+  let sdk = sdks[0] // arbitrary sdk, just need folder structure
+  let frameworkDir = BuiltProductsDir + scheme + "/Frameworks"
+  let framework = scheme
+  let frameworkPath = "\(DerivedDataDir)Build/Products/Release-\(sdk)/\(framework).framework"
+  cp(from: frameworkPath, to: frameworkDir)
 }
 
 // Lipo
@@ -159,13 +162,13 @@ let productsPaths = sdks.map {
 
 // create lipo tasks from built products
 let lipos: [Lipo] = schemes.map { scheme in
-  let lib = "lib" + scheme + ".a"
+  let framework = "\(scheme).framework"
+  let binary = scheme
+
+  let lib = "\(scheme).framework/\(scheme)"
   let chunks = productsPaths.map { path in
     return path + lib
   }
-
-  let framework = frameworkMapping[scheme]! + ".framework"
-  let binary = frameworkMapping[scheme]!
 
   let output = "\(BuiltProductsDir)\(scheme)/Frameworks/\(framework)/\(binary)"
   return Lipo(inputs: chunks, output: output)
@@ -175,4 +178,3 @@ let lipos: [Lipo] = schemes.map { scheme in
 lipos.forEach { $0.launch() }
 
 exit(0)
-

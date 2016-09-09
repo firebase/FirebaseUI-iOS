@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseUI'
-  s.version      = '0.5.1'
+  s.version      = '0.5.2'
   s.summary      = 'UI binding libraries for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'FirebaseUIFrameworks/LICENSE' }
   s.author       = 'Firebase'
-  s.source       = { :http => 'https://github.com/firebase/FirebaseUI-iOS/releases/download/v0.5.1/FirebaseUIFrameworks.zip' }
+  s.source       = { :http => 'https://dl.google.com/dl/firebase/firebaseui/ios/0_5_0/FirebaseUIFrameworks.zip' }
   s.platform = :ios
   s.ios.deployment_target = '8.0'
   s.ios.framework = 'UIKit'
@@ -16,35 +16,32 @@ Pod::Spec.new do |s|
   s.subspec 'All' do |all|
     all.dependency 'FirebaseUI/Database'
     all.dependency 'FirebaseUI/Auth'
+    all.dependency 'FirebaseUI/Facebook'
+    all.dependency 'FirebaseUI/Google'
   end
 
   s.subspec 'Database' do |database|
-    database.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks/FirebaseDatabaseUI.framework"]
-    database.dependency 'Firebase/Database', '~> 3.0'
+    database.source_files = 'FirebaseDatabaseUI/*.{h,m}'
+    database.dependency 'Firebase/Database'
   end
 
   s.subspec 'Auth' do |auth|
-    auth.dependency 'FirebaseUI/AuthBase'
-    auth.dependency 'FirebaseUI/Facebook'
-    auth.dependency 'FirebaseUI/Google'
-  end
-
-  s.subspec 'AuthBase' do |authbase|
-    authbase.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseAuthUI/Frameworks/FirebaseAuthUI.framework"]
-    authbase.dependency 'Firebase/Analytics', '~> 3.0'
-    authbase.dependency 'Firebase/Auth', '~> 3.0'
+    auth.source_files = 'FirebaseAuthUI/*.{h,m}'
+    auth.resource_bundles = { 'FirebaseAuthUIBundle' => [ 'FirebaseAuthUI/Resources/*', 'FirebaseAuthUI/*.xib', 'FirebaseAuthUI/Strings/**/*.strings' ] }
+    auth.dependency 'Firebase/Auth'
   end
 
   s.subspec 'Facebook' do |facebook|
-    facebook.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks/FirebaseFacebookAuthUI.framework"]
-    facebook.dependency 'FirebaseUI/AuthBase'
+    facebook.source_files = 'FirebaseFacebookAuthUI/*.{h,m}'
+    facebook.resource_bundles = { 'FirebaseFacebookAuthUIBundle' => [ 'FirebaseFacebookAuthUI/Resources/*', 'FirebaseFacebookAuthUI/Strings/**/*.strings' ] }
+    facebook.dependency 'FirebaseUI/Auth'
     facebook.dependency 'FBSDKLoginKit', '~> 4.0'
   end
 
   s.subspec 'Google' do |google|
-    google.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks/FirebaseGoogleAuthUI.framework"]
-    google.dependency 'FirebaseUI/AuthBase'
+    google.source_files = 'FirebaseGoogleAuthUI/*.{h,m}'
+    google.resource_bundles = { 'FirebaseGoogleAuthUIBundle' => [ 'FirebaseGoogleAuthUI/Resources/*', 'FirebaseFacebookAuthUI/Strings/**/*.strings' ] }
+    google.dependency 'FirebaseUI/Auth'
     google.dependency 'GoogleSignIn', '~> 4.0'
   end
-
 end
