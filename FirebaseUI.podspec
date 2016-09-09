@@ -35,13 +35,13 @@ Pod::Spec.new do |s|
     facebook.source_files = 'FirebaseFacebookAuthUI/*.{h,m}'
     facebook.resource_bundles = { 'FirebaseFacebookAuthUIBundle' => [ 'FirebaseFacebookAuthUI/Resources/*', 'FirebaseFacebookAuthUI/Strings/**/*.strings' ] }
     facebook.dependency 'FirebaseUI/Auth'
-    facebook.dependency 'FBSDKLoginKit'
+    facebook.dependency 'FBSDKLoginKit', '~> 4.0'
   end
 
   s.subspec 'Google' do |google|
     google.source_files = 'FirebaseGoogleAuthUI/*.{h,m}'
     google.resource_bundles = { 'FirebaseGoogleAuthUIBundle' => [ 'FirebaseGoogleAuthUI/Resources/*', 'FirebaseFacebookAuthUI/Strings/**/*.strings' ] }
     google.dependency 'FirebaseUI/Auth'
-    google.dependency 'GoogleSignIn'
+    google.dependency 'GoogleSignIn', '~> 4.0'
   end
 end
