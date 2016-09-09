@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'FirebaseUIFrameworks/LICENSE' }
   s.author       = 'Firebase'
-  s.source       = { :http => 'https://dl.google.com/dl/firebase/firebaseui/ios/0_5_0/FirebaseUIFrameworks.zip' }
+  s.source       = { :http => 'https://github.com/firebase/FirebaseUI-iOS/releases/download/v0.5.2/FirebaseUIFrameworks.zip' }
   s.platform = :ios
   s.ios.deployment_target = '8.0'
   s.ios.framework = 'UIKit'
@@ -21,26 +21,23 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Database' do |database|
-    database.source_files = 'FirebaseDatabaseUI/*.{h,m}'
+    database.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks/FirebaseDatabaseUI.framework"]
     database.dependency 'Firebase/Database'
   end
 
   s.subspec 'Auth' do |auth|
-    auth.source_files = 'FirebaseAuthUI/*.{h,m}'
-    auth.resource_bundles = { 'FirebaseAuthUIBundle' => [ 'FirebaseAuthUI/Resources/*', 'FirebaseAuthUI/*.xib', 'FirebaseAuthUI/Strings/**/*.strings' ] }
+    auth.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseAuthUI/Frameworks/FirebaseAuthUI.framework"]
     auth.dependency 'Firebase/Auth'
   end
 
   s.subspec 'Facebook' do |facebook|
-    facebook.source_files = 'FirebaseFacebookAuthUI/*.{h,m}'
-    facebook.resource_bundles = { 'FirebaseFacebookAuthUIBundle' => [ 'FirebaseFacebookAuthUI/Resources/*', 'FirebaseFacebookAuthUI/Strings/**/*.strings' ] }
+    facebook.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks/FirebaseFacebookAuthUI.framework"]
     facebook.dependency 'FirebaseUI/Auth'
     facebook.dependency 'FBSDKLoginKit', '~> 4.0'
   end
 
   s.subspec 'Google' do |google|
-    google.source_files = 'FirebaseGoogleAuthUI/*.{h,m}'
-    google.resource_bundles = { 'FirebaseGoogleAuthUIBundle' => [ 'FirebaseGoogleAuthUI/Resources/*', 'FirebaseFacebookAuthUI/Strings/**/*.strings' ] }
+    google.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks/FirebaseGoogleAuthUI.framework"]
     google.dependency 'FirebaseUI/Auth'
     google.dependency 'GoogleSignIn', '~> 4.0'
   end
