@@ -23,23 +23,23 @@
 - (id)initWithTitle:(NSString *)title
   sampleDescription:(NSString *)description
          controller:(FIRControllerBlock)block {
-    if (self = [self init]) {
-        _title = [title copy];
-        _sampleDescription = [description copy];
-        _controllerBlock = [block copy];
-    }
+  if (self = [self init]) {
+    _title = [title copy];
+    _sampleDescription = [description copy];
+    _controllerBlock = [block copy];
+  }
 
-    return self;
+  return self;
 }
 
 + (instancetype)sampleWithTitle:(NSString *)title
               sampleDescription:(NSString *)description
                      controller:(FIRControllerBlock)block {
-    FIRSample *sample = [(FIRSample *)[self alloc] initWithTitle:title
-                                               sampleDescription:description
-                                                      controller:block];
+  FIRSample *sample = [(FIRSample *)[self alloc] initWithTitle:title
+                                             sampleDescription:description
+                                                    controller:block];
 
-    return sample;
+  return sample;
 }
 
 
