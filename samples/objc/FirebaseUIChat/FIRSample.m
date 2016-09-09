@@ -24,9 +24,9 @@
   sampleDescription:(NSString *)description
          controller:(FIRControllerBlock)block {
     if (self = [self init]) {
-        _title = title;
-        _sampleDescription = description;
-        _controllerBlock = block;
+        _title = [title copy];
+        _sampleDescription = [description copy];
+        _controllerBlock = [block copy];
     }
 
     return self;
