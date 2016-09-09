@@ -33,10 +33,6 @@
 
 /* Begin PBXFileReference section */
 		574F1B121D8106D2001924BB /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
-		1004D218CE11AF7D8D57EC06 /* Pods-uidemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uidemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-uidemoTests/Pods-uidemoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		307AA4B2A6A2B54E7A0E3405 /* Pods_uidemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_uidemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		49D4095176DE050264EC1BDB /* Pods_uidemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_uidemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		646EBF2B9F0A806D044E63F4 /* Pods-uidemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uidemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-uidemo/Pods-uidemo.release.xcconfig"; sourceTree = "<group>"; };
 		8D16073D1D492B200069E4F5 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8DABC9851D3D82D600453807 /* uidemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = uidemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DABC9881D3D82D600453807 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };

@@ -74,6 +74,10 @@ struct Build {
         params.append(value)
       }
     }
+    // hard code bitcode so cocoapods dummy
+    // files are built with bitcode, hope for
+    // no consequences later
+    params.append("BITCODE_GENERATION_MODE=bitcode")
     return params
   }
 

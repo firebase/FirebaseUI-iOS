@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseUI'
-  s.version      = '0.5.1'
+  s.version      = '0.5.2'
   s.summary      = 'UI binding libraries for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'FirebaseUIFrameworks/LICENSE' }
@@ -16,6 +16,8 @@ Pod::Spec.new do |s|
   s.subspec 'All' do |all|
     all.dependency 'FirebaseUI/Database'
     all.dependency 'FirebaseUI/Auth'
+    all.dependency 'FirebaseUI/Facebook'
+    all.dependency 'FirebaseUI/Google'
   end
 
   s.subspec 'Database' do |database|
@@ -27,7 +29,6 @@ Pod::Spec.new do |s|
     auth.source_files = 'FirebaseAuthUI/*.{h,m}'
     auth.resource_bundles = { 'FirebaseAuthUIBundle' => [ 'FirebaseAuthUI/Resources/*', 'FirebaseAuthUI/*.xib', 'FirebaseAuthUI/Strings/**/*.strings' ] }
     auth.dependency 'Firebase/Auth'
-    auth.dependency 'Firebase/Analytics'
   end
 
   s.subspec 'Facebook' do |facebook|
