@@ -25,6 +25,9 @@
 // Uncomment when using frawemorks
 //@import FirebaseGoogleAuthUI;
 #import <FIRGoogleAuthUI.h>
+// Uncomment when using frawemorks
+//@import FirebaseFacebookAuthUI;
+#import <FIRFacebookAuthUI.h>
 
 @interface FIRAuthViewController ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellSignIn;
@@ -54,14 +57,25 @@
   [super viewWillAppear:animated];
 
   NSString *googleId = [[FIRApp defaultApp] options].clientID;
-  NSArray<id<FIRAuthProviderUI>> *providers = [NSArray arrayWithObjects:[[FIRGoogleAuthUI alloc] initWithClientID:googleId] , nil];
+  NSString *facebookAppId = [self readFacebookAppId];
+
+  NSArray<id<FIRAuthProviderUI>> *providers = [NSArray arrayWithObjects:
+                                               [[FIRGoogleAuthUI alloc] initWithClientID:googleId],
+                                               [[FIRFacebookAuthUI alloc] initWithAppID:facebookAppId],
+                                               nil];
   _authUI.providers = providers;
 
+  __weak FIRAuthViewController *weakSelf = self;
   self.authStateDidChangeHandle = [self.auth addAuthStateDidChangeListener:^(FIRAuth * _Nonnull auth, FIRUser * _Nullable user) {
-    [self updateUI:auth withUser:user];
+    [weakSelf updateUI:auth withUser:user];
   }];
 
 
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+  [super viewDidDisappear:animated];
+  [self.auth removeAuthStateDidChangeListener:self.authStateDidChangeHandle];
 }
 
 - (void)updateUI:(FIRAuth * _Nonnull) auth withUser:(FIRUser * _Nullable) user {
@@ -95,6 +109,28 @@
       NSLog(@"Sign out error: %@", error);
     }
   }
+}
+
+#pragma mark - Helper Methods
+
+// Helper method to retrieve FB app ID from info.plist
+- (NSString *)readFacebookAppId {
+  NSString *facebookAppId = nil;
+  NSArray *urlTypes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
+  for (NSDictionary *type in urlTypes) {
+    if ([(NSString *)type[@"CFBundleURLName"] isEqualToString:@"FACEBOOK_APP_ID"]) {
+      NSArray *urlSchemes = type[@"CFBundleURLSchemes"];
+      if (urlSchemes.count == 1) {
+        facebookAppId = urlSchemes.firstObject;
+        if (facebookAppId.length > 2) {
+          facebookAppId = [facebookAppId substringFromIndex:2];
+        }
+      }
+      break;
+    }
+  }
+
+  return facebookAppId;
 }
 
 
