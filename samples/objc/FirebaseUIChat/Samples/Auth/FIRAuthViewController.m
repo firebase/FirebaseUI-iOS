@@ -17,18 +17,85 @@
 //
 
 #import "FIRAuthViewController.h"
+@import Firebase;
+
+// Uncomment when using frawemorks
+//@import FirebaseAuthUI;
+#import <FirebaseAuthUI.h>
+// Uncomment when using frawemorks
+//@import FirebaseGoogleAuthUI;
+#import <FIRGoogleAuthUI.h>
 
 @interface FIRAuthViewController ()
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellSignIn;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellName;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellEmail;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellUID;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAuthorization;
+
+@property (nonatomic) FIRAuth *auth;
+@property (nonatomic) FIRAuthUI *authUI;
+@property (nonatomic) FIRUser *authUser;
+
+@property (nonatomic) FIRAuthStateDidChangeListenerHandle authStateDidChangeHandle;
 
 @end
 
 @implementation FIRAuthViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+
+  self.auth = [FIRAuth auth];
+  self.authUI = [FIRAuthUI defaultAuthUI];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+
+  NSString *googleId = [[FIRApp defaultApp] options].clientID;
+  NSArray<id<FIRAuthProviderUI>> *providers = [NSArray arrayWithObjects:[[FIRGoogleAuthUI alloc] initWithClientID:googleId] , nil];
+  _authUI.providers = providers;
+
+  self.authStateDidChangeHandle = [self.auth addAuthStateDidChangeListener:^(FIRAuth * _Nonnull auth, FIRUser * _Nullable user) {
+    [self updateUI:auth withUser:user];
+  }];
+
+
+}
+
+- (void)updateUI:(FIRAuth * _Nonnull) auth withUser:(FIRUser * _Nullable) user {
+  self.authUser = user;
+  if (user) {
+    self.cellSignIn.textLabel.text = @"YES";
+    self.cellName.textLabel.text = user.displayName;
+    self.cellEmail.textLabel.text = user.email;
+    self.cellUID.textLabel.text = user.uid;
+
+    self.btnAuthorization.title = @"Sign Out";
+  } else {
+    self.cellSignIn.textLabel.text = @"NO";
+    self.cellName.textLabel.text = @"";
+    self.cellEmail.textLabel.text = @"";
+    self.cellUID.textLabel.text = @"";
+
+    self.btnAuthorization.title = @"Sign In";
+  }
+
+}
+
+- (IBAction)onAuthorization:(id)sender {
+  if (!self.authUser) {
+    UIViewController *controller = [self.authUI authViewController];
+    [self presentViewController:controller animated:YES completion:nil];
+  } else {
+    NSError *error;
+    [self.auth signOut:&error];
+    if (error) {
+      NSLog(@"Sign out error: %@", error);
+    }
+  }
+}
 
 
 @end

@@ -117,22 +117,101 @@
             <point key="canvasLocation" x="380" y="315"/>
         </scene>
         <!--Auth View Controller-->
-        <scene sceneID="8ct-Gf-RI6">
+        <scene sceneID="AaL-89-8RF">
             <objects>
-                <viewController storyboardIdentifier="FIRAuthViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LmU-7s-TNo" customClass="FIRAuthViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="QAT-HV-OZV"/>
-                        <viewControllerLayoutGuide type="bottom" id="jNo-4u-MUs"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="TYT-qz-Ma5">
+                <tableViewController storyboardIdentifier="FIRAuthViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CNE-cz-Qwp" customClass="FIRAuthViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="pZ2-Vi-FKX">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I5a-Mj-GLr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="83E-4Z-ptP">
+                            <rect key="frame" x="0.0" y="397" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <items>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="o3y-o4-Gpu"/>
+                                <barButtonItem title="Sign In" id="bgV-bu-PcA">
+                                    <connections>
+                                        <action selector="onAuthorization:" destination="CNE-cz-Qwp" id="8RX-tN-gBO"/>
+                                    </connections>
+                                </barButtonItem>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="PyK-ro-bxx"/>
+                            </items>
+                        </toolbar>
+                        <sections>
+                            <tableViewSection headerTitle="Signed In" id="PRj-zg-0nr">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="l96-xc-PHH" style="IBUITableViewCellStyleDefault" id="ORf-bf-Sq2">
+                                        <rect key="frame" x="0.0" y="50" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ORf-bf-Sq2" id="roJ-pJ-jY5">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Not Signed In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l96-xc-PHH">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Name" id="0YA-IY-hOV">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="kCl-ip-jc2">
+                                        <rect key="frame" x="0.0" y="145" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kCl-ip-jc2" id="dm4-D7-IWN">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Email" id="Y94-bQ-cWH">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MCw-zF-UTn">
+                                        <rect key="frame" x="0.0" y="240" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MCw-zF-UTn" id="ea1-oT-1Py">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="UID" id="Yxe-jV-t3o">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="EWm-GE-IZV">
+                                        <rect key="frame" x="0.0" y="335" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EWm-GE-IZV" id="ISG-G9-H8V">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="CNE-cz-Qwp" id="MrI-Jx-5UJ"/>
+                            <outlet property="delegate" destination="CNE-cz-Qwp" id="KFk-25-IpR"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="btnAuthorization" destination="bgV-bu-PcA" id="bBY-yq-fyj"/>
+                        <outlet property="cellEmail" destination="MCw-zF-UTn" id="sw3-8D-gut"/>
+                        <outlet property="cellName" destination="kCl-ip-jc2" id="C8k-DT-KVQ"/>
+                        <outlet property="cellSignIn" destination="ORf-bf-Sq2" id="5Lp-Ik-8fw"/>
+                        <outlet property="cellUID" destination="EWm-GE-IZV" id="eTu-Vt-UCP"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1w1-3x-wCC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1761" y="315"/>
+            <point key="canvasLocation" x="1713" y="315"/>
         </scene>
     </scenes>
 </document>

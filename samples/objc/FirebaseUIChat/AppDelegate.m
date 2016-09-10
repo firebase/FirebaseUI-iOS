@@ -17,11 +17,24 @@
 #import "AppDelegate.h"
 @import Firebase;
 
+// Uncomment when using frawemorks
+//@import FirebaseAuthUI;
+#import <FirebaseAuthUI.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [FIRApp configure];
   return YES;
+}
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
+
+  NSString *sourceApp = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+
+  if ([FIRAuthUI.defaultAuthUI handleOpenURL:url sourceApplication:sourceApp]) {
+    return YES;
+  }
+  return NO;
 }
 
 @end

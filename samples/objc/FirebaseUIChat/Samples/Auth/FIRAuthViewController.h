@@ -18,6 +18,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FIRAuthViewController : UIViewController
+@interface FIRAuthViewController : UITableViewController
 
 @end
