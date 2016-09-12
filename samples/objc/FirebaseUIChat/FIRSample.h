@@ -1,4 +1,6 @@
 //
+//  FIRSampleContainer.h
+//
 //  Copyright (c) 2016 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,17 +16,20 @@
 //  limitations under the License.
 //
 
-@import UIKit;
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-//! Project version number for FirebaseAuthUI.
-FOUNDATION_EXPORT double FirebaseAuthUIVersionNumber;
+typedef UIViewController *(^FIRControllerBlock)();
 
-//! Project version string for FirebaseAuthUI.
-FOUNDATION_EXPORT const unsigned char FirebaseAuthUIVersionString[];
+@interface FIRSample : NSObject
 
-#import <FIRAuthPickerViewController.h>
-#import <FIRAuthProviderUI.h>
-#import <FIRAuthUI.h>
-#import <FIRAuthUIBaseViewController.h>
-#import <FIRAuthUIErrorUtils.h>
++ (instancetype)sampleWithTitle:(NSString *)title
+              sampleDescription:(NSString *)description
+                     controller:(FIRControllerBlock)block;
 
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *sampleDescription;
+@property (nonatomic, copy) FIRControllerBlock controllerBlock;
+
+
+@end

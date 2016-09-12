@@ -20,6 +20,7 @@
 #import <FirebaseAuth/FIRUserInfo.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FIRAuthUIErrorUtils.h>
 
 /** @var kBundleFileName
     @brief The name of the bundle containing Facebook auth provider assets/resources.

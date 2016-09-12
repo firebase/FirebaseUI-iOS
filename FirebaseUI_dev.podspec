@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Database' do |database|
-    database.source_files = "FirebaseUI/{Database,Util}/**/*.{h,m}"
+    database.source_files = "FirebaseDatabaseUI/*.{h,m}"
     database.dependency 'Firebase/Database', '~> 3.0'
     database.ios.framework = 'FirebaseDatabase'
     database.xcconfig  = { 'FRAMEWORK_SEARCH_PATHS' => '"${PODS_ROOT}/FirebaseDatabase/Frameworks"','HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/Firebase/**"' }
@@ -31,22 +31,22 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'AuthBase' do |authbase|
-    authbase.source_files = "FirebaseUI/Auth/AuthUI/Source/*.{h,m}"
-    authbase.resources = "FirebaseUI/Auth/AuthUI/{Resources,Strings}/*", "FirebaseUI/Auth/AuthUI/Source/*.xib"
+    authbase.source_files = "FirebaseAuthUI/*.{h,m}"
+    authbase.resources = "FirebaseAuthUI/{Resources,Strings}/*", "FirebaseAuthUI/*.xib"
     authbase.dependency 'Firebase/Analytics', '~> 3.0'
     authbase.dependency 'Firebase/Auth', '~> 3.0'
   end
 
   s.subspec 'Facebook' do |facebook|
-    facebook.source_files = "FirebaseUI/Auth/AuthProviderUI/Facebook/Source/*.{h,m}"
-    facebook.resources = "FirebaseUI/Auth/AuthProviderUI/Facebook/{Resources,Strings}/*", "FirebaseUI/Auth/AuthProviderUI/Facebook/Source/*.xib"
+    facebook.source_files = "FirebaseFacebookAuthUI/*.{h,m}"
+    facebook.resources = "FirebaseFacebookAuthUI/{Resources,Strings}/*", "FirebaseFacebookAuthUI/*.xib"
     facebook.dependency 'FirebaseUI/AuthBase'
     facebook.dependency 'FBSDKLoginKit', '~> 4.0'
   end
 
   s.subspec 'Google' do |google|
-    google.source_files = "FirebaseUI/Auth/AuthProviderUI/Google/Source/*.{h,m}"
-    google.resources = "FirebaseUI/Auth/AuthProviderUI/Google/{Resources,Strings}/*", "FirebaseUI/Auth/AuthProviderUI/Google/Source/*.xib"
+    google.source_files = "FirebaseGoogleAuthUI/*.{h,m}"
+    google.resources = "FirebaseGoogleAuthUI/{Resources,Strings}/*", "FirebaseGoogleAuthUI/*.xib"
     google.dependency 'FirebaseUI/AuthBase'
     google.dependency 'GoogleSignIn', '~> 4.0'
   end

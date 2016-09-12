@@ -1,4 +1,6 @@
 //
+//  SamplesViewController.h
+//
 //  Copyright (c) 2016 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,17 +16,8 @@
 //  limitations under the License.
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
-//! Project version number for FirebaseAuthUI.
-FOUNDATION_EXPORT double FirebaseAuthUIVersionNumber;
+@interface FIRSamplesViewController : UITableViewController
 
-//! Project version string for FirebaseAuthUI.
-FOUNDATION_EXPORT const unsigned char FirebaseAuthUIVersionString[];
-
-#import <FIRAuthPickerViewController.h>
-#import <FIRAuthProviderUI.h>
-#import <FIRAuthUI.h>
-#import <FIRAuthUIBaseViewController.h>
-#import <FIRAuthUIErrorUtils.h>
-
+@end
