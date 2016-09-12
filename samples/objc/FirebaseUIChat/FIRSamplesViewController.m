@@ -58,12 +58,7 @@
                                        return controller;
                                      }]];
 
-
   _samplesContainer = samples;
-}
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
 }
 
 #pragma mark - Table view data source
@@ -83,7 +78,6 @@
   FIRSample *sample = _samplesContainer[indexPath.row];
   cell.textLabel.text = sample.title;
   cell.detailTextLabel.text = sample.sampleDescription;
-
 
   return cell;
 }

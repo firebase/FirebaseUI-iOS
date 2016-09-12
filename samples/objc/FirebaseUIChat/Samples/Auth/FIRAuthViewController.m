@@ -38,7 +38,6 @@
 
 @property (nonatomic) FIRAuth *auth;
 @property (nonatomic) FIRAuthUI *authUI;
-@property (nonatomic) FIRUser *authUser;
 
 @property (nonatomic) FIRAuthStateDidChangeListenerHandle authStateDidChangeHandle;
 
@@ -70,7 +69,6 @@
     [weakSelf updateUI:auth withUser:user];
   }];
 
-
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
@@ -79,7 +77,6 @@
 }
 
 - (void)updateUI:(FIRAuth * _Nonnull) auth withUser:(FIRUser * _Nullable) user {
-  self.authUser = user;
   if (user) {
     self.cellSignIn.textLabel.text = @"YES";
     self.cellName.textLabel.text = user.displayName;
@@ -99,7 +96,7 @@
 }
 
 - (IBAction)onAuthorization:(id)sender {
-  if (!self.authUser) {
+  if (!self.auth.currentUser) {
     UIViewController *controller = [self.authUI authViewController];
     [self presentViewController:controller animated:YES completion:nil];
   } else {
