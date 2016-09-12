@@ -31,7 +31,7 @@ Feature parity (where it makes sense) is a strict requirement for feature develo
 
 All submissions, including submissions by project members, require review. We
 use Github pull requests for this purpose. We adhere to the
-[Google Objective-C Style guide](https://google.github.io/styleguide/objcguide.xml).
+[Google Objective-C style guide](https://google.github.io/styleguide/objcguide.xml).
 
 ### The small print
 
