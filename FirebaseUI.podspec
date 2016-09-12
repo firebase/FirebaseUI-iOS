@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.author       = 'Firebase'
   s.source       = { :http => 'https://github.com/firebase/FirebaseUI-iOS/releases/download/0.5.4/FirebaseUIFrameworks.zip' }
   s.platform = :ios
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '7.0'
   s.ios.framework = 'UIKit'
   s.requires_arc = true
   s.default_subspecs = 'All'
