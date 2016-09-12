@@ -22,9 +22,9 @@ FOUNDATION_EXPORT double FirebaseAuthUIVersionNumber;
 //! Project version string for FirebaseAuthUI.
 FOUNDATION_EXPORT const unsigned char FirebaseAuthUIVersionString[];
 
-#import <FIRAuthPickerViewController.h>
-#import <FIRAuthProviderUI.h>
-#import <FIRAuthUI.h>
-#import <FIRAuthUIBaseViewController.h>
-#import <FIRAuthUIErrorUtils.h>
+#import <FirebaseAuthUI/FIRAuthPickerViewController.h>
+#import <FirebaseAuthUI/FIRAuthProviderUI.h>
+#import <FirebaseAuthUI/FIRAuthUI.h>
+#import <FirebaseAuthUI/FIRAuthUIBaseViewController.h>
+#import <FirebaseAuthUI/FIRAuthUIErrorUtils.h>
 

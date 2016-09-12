@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		433E703692A371C84E532086 /* Pods_uidemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B7A43C757A128633BBDAFF /* Pods_uidemoTests.framework */; };
-		6001626D469756A781BC0C1D /* Pods_uidemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B23F4C2DB9A671802E1E31 /* Pods_uidemo.framework */; };
 		8D16073E1D492B200069E4F5 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16073D1D492B200069E4F5 /* AuthViewController.swift */; };
 		8DABC9891D3D82D600453807 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9881D3D82D600453807 /* AppDelegate.swift */; };
 		8DABC98B1D3D82D600453807 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC98A1D3D82D600453807 /* MenuViewController.swift */; };
@@ -19,6 +17,7 @@
 		8DABC9A91D3D872C00453807 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9A81D3D872C00453807 /* Sample.swift */; };
 		8DABC9AB1D3D947300453807 /* SampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9AA1D3D947300453807 /* SampleCell.swift */; };
 		8DABC9AD1D3D9EAF00453807 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9AC1D3D9EAF00453807 /* ChatViewController.swift */; };
+		8DD51E371D873B0D00E2CA51 /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD51E361D873B0D00E2CA51 /* UIStoryboardExtension.swift */; };
 		8DDF1AE51D3FF67D001F1160 /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF1AE41D3FF67D001F1160 /* ChatCollectionViewCell.swift */; };
 		C3F23ECD1D80F3300020509F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3F23ECC1D80F3300020509F /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -34,10 +33,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		45B7A43C757A128633BBDAFF /* Pods_uidemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_uidemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4C4F100F73AB7282D3071228 /* Pods-uidemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uidemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-uidemo/Pods-uidemo.release.xcconfig"; sourceTree = "<group>"; };
-		74B1CFAE0F3BD0D456DFCC76 /* Pods-uidemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uidemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-uidemoTests/Pods-uidemoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8C5E1A3D7FD94BB28A092EBC /* Pods-uidemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uidemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-uidemoTests/Pods-uidemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		8D16073D1D492B200069E4F5 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		8DABC9851D3D82D600453807 /* uidemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = uidemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DABC9881D3D82D600453807 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -52,10 +47,9 @@
 		8DABC9A81D3D872C00453807 /* Sample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
 		8DABC9AA1D3D947300453807 /* SampleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleCell.swift; sourceTree = "<group>"; };
 		8DABC9AC1D3D9EAF00453807 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		8DD51E361D873B0D00E2CA51 /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		8DDF1AE41D3FF67D001F1160 /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
-		C0B23F4C2DB9A671802E1E31 /* Pods_uidemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_uidemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3F23ECC1D80F3300020509F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		CB9DA206245B6BEB7500A66A /* Pods-uidemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uidemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-uidemo/Pods-uidemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +57,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6001626D469756A781BC0C1D /* Pods_uidemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,7 +64,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				433E703692A371C84E532086 /* Pods_uidemoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,8 +86,6 @@
 				8DABC9871D3D82D600453807 /* uidemo */,
 				8DABC99C1D3D82D600453807 /* uidemoTests */,
 				8DABC9861D3D82D600453807 /* Products */,
-				94250E737FC3C4C5C6F2681A /* Pods */,
-				F6DBA04B6C438DF62F38F922 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,6 +105,7 @@
 				8DABC98A1D3D82D600453807 /* MenuViewController.swift */,
 				8DABC9AA1D3D947300453807 /* SampleCell.swift */,
 				8DABC9A81D3D872C00453807 /* Sample.swift */,
+				8DD51E361D873B0D00E2CA51 /* UIStoryboardExtension.swift */,
 				8DD17C951D4BCC6500E850E4 /* AuthSample */,
 				8D643F0F1D4827F10081F979 /* ChatSample */,
 				8DABC98C1D3D82D600453807 /* Main.storyboard */,
@@ -140,26 +131,6 @@
 				8D16073D1D492B200069E4F5 /* AuthViewController.swift */,
 			);
 			name = AuthSample;
-			sourceTree = "<group>";
-		};
-		94250E737FC3C4C5C6F2681A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CB9DA206245B6BEB7500A66A /* Pods-uidemo.debug.xcconfig */,
-				4C4F100F73AB7282D3071228 /* Pods-uidemo.release.xcconfig */,
-				74B1CFAE0F3BD0D456DFCC76 /* Pods-uidemoTests.debug.xcconfig */,
-				8C5E1A3D7FD94BB28A092EBC /* Pods-uidemoTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		F6DBA04B6C438DF62F38F922 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C0B23F4C2DB9A671802E1E31 /* Pods_uidemo.framework */,
-				45B7A43C757A128633BBDAFF /* Pods_uidemoTests.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,6 +336,7 @@
 			files = (
 				8DABC98B1D3D82D600453807 /* MenuViewController.swift in Sources */,
 				8DABC9AB1D3D947300453807 /* SampleCell.swift in Sources */,
+				8DD51E371D873B0D00E2CA51 /* UIStoryboardExtension.swift in Sources */,
 				8DABC9A91D3D872C00453807 /* Sample.swift in Sources */,
 				8D16073E1D492B200069E4F5 /* AuthViewController.swift in Sources */,
 				8DABC9AD1D3D9EAF00453807 /* ChatViewController.swift in Sources */,
@@ -415,6 +387,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BITCODE_GENERATION_MODE = bitcode;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -461,6 +434,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BITCODE_GENERATION_MODE = bitcode;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -498,9 +472,9 @@
 		};
 		8DABC9A31D3D82D600453807 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CB9DA206245B6BEB7500A66A /* Pods-uidemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BITCODE_GENERATION_MODE = "";
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = uidemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -513,9 +487,9 @@
 		};
 		8DABC9A41D3D82D600453807 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4C4F100F73AB7282D3071228 /* Pods-uidemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BITCODE_GENERATION_MODE = "";
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = uidemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -527,7 +501,6 @@
 		};
 		8DABC9A61D3D82D600453807 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 74B1CFAE0F3BD0D456DFCC76 /* Pods-uidemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = uidemoTests/Info.plist;
@@ -540,7 +513,6 @@
 		};
 		8DABC9A71D3D82D600453807 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C5E1A3D7FD94BB28A092EBC /* Pods-uidemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = uidemoTests/Info.plist;

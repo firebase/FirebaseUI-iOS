@@ -51,3 +51,24 @@ target 'FirebaseGoogleAuthUI' do
   end
 end
 
+target 'Database' do
+  # Pods for Database
+  pod 'Firebase/Database'
+end
+
+target 'Auth' do
+  # Pods for Auth
+  pod 'Firebase/Auth'
+end
+
+target 'Facebook' do
+  # Pods for Facebook Auth
+  pod 'Firebase/Auth'
+  pod 'FBSDKLoginKit', '~> 4.0'
+end
+
+target 'Google' do
+  # Pods for Google Auth
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn', '~> 4.0'
+end

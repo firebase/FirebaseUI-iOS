@@ -102,6 +102,13 @@ let schemes = [
   "FirebaseGoogleAuthUI",
 ]
 
+let staticLibs = [
+  "Database": "FirebaseDatabaseUI",
+  "Auth"    : "FirebaseAuthUI",
+  "Facebook": "FirebaseFacebookAuthUI",
+  "Google"  : "FirebaseGoogleAuthUI",
+]
+
 // make folder structure for built products
 schemes.forEach { scheme in
   let schemeDir = BuiltProductsDir + scheme
@@ -110,9 +117,23 @@ schemes.forEach { scheme in
 }
 
 // Invoke xcodebuild, building each scheme in
-// release for each target sdk
-let builds = sdks.flatMap { sdk in
-  return schemes.map { scheme in
+// release for each target sdk. Building
+// dynamic frameworks so we don't have to do
+// the asset bundling and folder structures manually,
+// at the costs of lots of duplication. Not sure if ideal.
+let builds =  schemes.map { scheme in
+  return Build([
+    "-workspace"      : "FirebaseUI.xcworkspace",
+    "-scheme"         : scheme,
+    "-configuration"  : "Release",
+    "-sdk"            : sdks[0],
+    "-derivedDataPath": DerivedDataDir,
+  ])
+}
+
+let staticBuilds: [Build] = sdks.flatMap { sdk -> [Build] in
+  let schemeNames = Array(staticLibs.keys)
+  return schemeNames.map { scheme -> Build in
     return Build([
       "-workspace"      : "FirebaseUI.xcworkspace",
       "-scheme"         : scheme,
@@ -124,6 +145,7 @@ let builds = sdks.flatMap { sdk in
 }
 
 builds.forEach { $0.launch() }
+staticBuilds.forEach { $0.launch() }
 
 // Copy frameworks into built products dir. Don't really
 // care about sdk here since we're gonna lipo everything later
@@ -161,16 +183,16 @@ let productsPaths = sdks.map {
 }
 
 // create lipo tasks from built products
-let lipos: [Lipo] = schemes.map { scheme in
-  let framework = "\(scheme).framework"
-  let binary = scheme
+let lipos: [Lipo] = Array(staticLibs.keys).map { scheme in
+  let product = staticLibs[scheme]!
+  let framework = "\(product).framework"
+  let binary = "lib\(scheme).a"
 
-  let lib = "\(scheme).framework/\(scheme)"
   let chunks = productsPaths.map { path in
-    return path + lib
+    return path + binary
   }
 
-  let output = "\(BuiltProductsDir)\(scheme)/Frameworks/\(framework)/\(binary)"
+  let output = "\(BuiltProductsDir)\(product)/Frameworks/\(framework)/\(product)"
   return Lipo(inputs: chunks, output: output)
 }
 
