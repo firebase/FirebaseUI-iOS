@@ -21,23 +21,23 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Database' do |database|
-    database.vendored_frameworks = ["FirebaseUIFrameworks/Database/Frameworks/FirebaseDatabaseUI.framework"]
+    database.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks/FirebaseDatabaseUI.framework"]
     database.dependency 'Firebase/Database'
   end
 
   s.subspec 'Auth' do |auth|
-    auth.vendored_frameworks = ["FirebaseUIFrameworks/Auth/Frameworks/FirebaseAuthUI.framework"]
+    auth.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseAuthUI/Frameworks/FirebaseAuthUI.framework"]
     auth.dependency 'Firebase/Auth'
   end
 
   s.subspec 'Facebook' do |facebook|
-    facebook.vendored_frameworks = ["FirebaseUIFrameworks/Facebook/Frameworks/FirebaseFacebookAuthUI.framework"]
+    facebook.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks/FirebaseFacebookAuthUI.framework"]
     facebook.dependency 'FirebaseUI/Auth'
     facebook.dependency 'FBSDKLoginKit', '~> 4.0'
   end
 
   s.subspec 'Google' do |google|
-    google.vendored_frameworks = ["FirebaseUIFrameworks/Google/Frameworks/FirebaseGoogleAuthUI.framework"]
+    google.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks/FirebaseGoogleAuthUI.framework"]
     google.dependency 'FirebaseUI/Auth'
     google.dependency 'GoogleSignIn', '~> 4.0'
   end
