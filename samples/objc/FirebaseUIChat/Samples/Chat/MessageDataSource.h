@@ -16,7 +16,7 @@
 
 // Uncomment when using frawemorks
 //@import FirebaseDatabaseUI;
-#import <FirebaseUI/FirebaseTableViewDataSource.h>
+#import <FirebaseTableViewDataSource.h>
 
 @interface MessageDataSource : FirebaseTableViewDataSource
 

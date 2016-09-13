@@ -16,10 +16,7 @@
 
 #import "AppDelegate.h"
 @import Firebase;
-
-// Uncomment when using frawemorks
-//@import FirebaseAuthUI;
-#import <FirebaseAuthUI.h>
+@import FirebaseAuthUI;
 
 @implementation AppDelegate
 

@@ -18,10 +18,8 @@
 
 #import "FIRAuthViewController.h"
 @import Firebase;
+@import FirebaseAuthUI;
 
-// Uncomment when using frawemorks
-//@import FirebaseAuthUI;
-#import <FirebaseAuthUI.h>
 // Uncomment when using frawemorks
 //@import FirebaseGoogleAuthUI;
 #import <FIRGoogleAuthUI.h>

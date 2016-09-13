@@ -14,13 +14,11 @@
 //  limitations under the License.
 //
 
+@import FirebaseAuthUI;
 #import "ViewController.h"
 #import "Message.h"
 #import "MessageTableViewCell.h"
 #import "MessageDataSource.h"
-// Uncomment when using frawemorks
-//@import FirebaseAuthUI;
-#import <FirebaseAuthUI.h>
 
 @implementation ViewController
 

@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = 'FirebaseUI'
+  s.name         = 'FirebaseUI-fb'
   s.version      = '0.5.4'
   s.summary      = 'UI binding libraries for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
   s.ios.framework = 'UIKit'
   s.requires_arc = true
-  s.default_subspecs = 'All'
+  s.default_subspecs = 'Facebook'
 
   s.subspec 'All' do |all|
     all.dependency 'FirebaseUI/Database'
