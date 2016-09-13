@@ -199,4 +199,7 @@ let lipos: [Lipo] = Array(staticLibs.keys).map { scheme in
 // lipo everything
 lipos.forEach { $0.launch() }
 
+// copy license file
+cp(from: "LICENSE", to: BuiltProductsDir)
+
 exit(0)
