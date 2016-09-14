@@ -59,7 +59,7 @@ import FirebaseAuthUI
 /* ... */
 
 FIRApp.configure()
-let authUI = FIRAuthUI.authUI()
+let authUI = FIRAuthUI.defaultAuthUI()
 authUI?.delegate = self
 ```
 
@@ -69,7 +69,7 @@ authUI?.delegate = self
 @import FirebaseAuthUI
 ...
 [FIRApp configure];
-FIRAuthUI *authUI = [FIRAuthUI authUI];
+FIRAuthUI *authUI = [FIRAuthUI defaultAuthUI];
 authUI.delegate = self; // Set the delegate to receive callback.
 ```
 
@@ -112,7 +112,7 @@ Google/Facebook authentication process.
 // swift
 func application(app: UIApplication, openURL url: NSURL, options: [String: AnyObject]) -> Bool {
   let sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String
-  return FIRAuthUI.authUI()?.handleOpenURL(url, sourceApplication: sourceApplication ?? "") ?? false
+  return FIRAuthUI.defaultAuthUI()?.handleOpenURL(url, sourceApplication: sourceApplication ?? "") ?? false
 }
 ```
 
@@ -120,7 +120,7 @@ func application(app: UIApplication, openURL url: NSURL, options: [String: AnyOb
 // objc
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
   NSString *sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey];
-  return [[FIRAuthUI authUI] handleOpenURL:url sourceApplication:sourceApplication];
+  return [[FIRAuthUI defaultAuthUI] handleOpenURL:url sourceApplication:sourceApplication];
 }
 ```
 
