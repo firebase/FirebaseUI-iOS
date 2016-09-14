@@ -229,6 +229,7 @@
 		8D2A84A61D678B2B0058DF04 /* FirebaseUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D2A84A91D678B2B0058DF04 /* FirebaseUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseUI.h; sourceTree = "<group>"; };
 		8D2A84AB1D678B2B0058DF04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D7E2BE61D89CF0C000A1F72 /* libPods-FirebaseAuthUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-FirebaseAuthUI.a"; path = "../../Library/Developer/Xcode/DerivedData/FirebaseUI-fwcyvciocjlrhqbyjmmybozelsll/Build/Products/Debug-iphonesimulator/libPods-FirebaseAuthUI.a"; sourceTree = "<group>"; };
 		8D9861121D81EEE2007D3FD3 /* libPods-FirebaseDatabaseUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-FirebaseDatabaseUI.a"; path = "../../Library/Developer/Xcode/DerivedData/FirebaseUI-fwcyvciocjlrhqbyjmmybozelsll/Build/Products/Debug-iphonesimulator/libPods-FirebaseDatabaseUI.a"; sourceTree = "<group>"; };
 		8DA941391D678DEB00CD3685 /* FirebaseArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseArray.h; sourceTree = "<group>"; };
 		8DA9413A1D678DEB00CD3685 /* FirebaseArrayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseArrayDelegate.h; sourceTree = "<group>"; };
@@ -307,6 +308,7 @@
 		8DA941ED1D67951B00CD3685 /* FirebaseTableViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseTableViewDataSourceTest.m; sourceTree = "<group>"; };
 		8DAF8BF41D89CC5300B251C7 /* FIRAuthUITest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRAuthUITest.m; sourceTree = "<group>"; };
 		8DAF8BF51D89CC5300B251C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8DB06C5D1D89D18B00F0AAD3 /* libPods-FirebaseAuthUITests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-FirebaseAuthUITests.a"; path = "../../Library/Developer/Xcode/DerivedData/FirebaseUI-fwcyvciocjlrhqbyjmmybozelsll/Build/Products/Debug-iphonesimulator/libPods-FirebaseAuthUITests.a"; sourceTree = "<group>"; };
 		8DBA0F4F1D872E1C00D113D3 /* libDatabase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDatabase.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DBA0F5C1D872E2400D113D3 /* libAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DBA0F691D872E2E00D113D3 /* libFacebook.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFacebook.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -706,6 +708,8 @@
 		C6755E8A1320A2BECE081E94 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8DB06C5D1D89D18B00F0AAD3 /* libPods-FirebaseAuthUITests.a */,
+				8D7E2BE61D89CF0C000A1F72 /* libPods-FirebaseAuthUI.a */,
 				8D9861121D81EEE2007D3FD3 /* libPods-FirebaseDatabaseUI.a */,
 			);
 			name = Frameworks;
@@ -2222,6 +2226,17 @@
 		8DCC4FD61D678CDC00B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleNetworkingUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleParsingUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleUtilities/Frameworks\"",
+				);
 				INFOPLIST_FILE = FirebaseAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2233,6 +2248,17 @@
 		8DCC4FD71D678CDC00B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleNetworkingUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleParsingUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleUtilities/Frameworks\"",
+				);
 				INFOPLIST_FILE = FirebaseAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

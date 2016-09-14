@@ -15,12 +15,9 @@
 //
 
 @import XCTest;
-@import Firebase;
+@import FirebaseAnalytics;
 @import FirebaseAuth;
-
-#import "FIRAuthUI.h"
-#import "FIRAuthUIUtils.h"
-#import "FIRAuthPickerViewController.h"
+@import FirebaseAuthUI;
 
 @interface FUILoginProvider : NSObject <FIRAuthProviderUI>
 @property (nonatomic, assign) BOOL canHandleURLs;
@@ -85,7 +82,14 @@
 + (void)initialize {
   // An app needs to be configured before any instances of
   // FIRAuth or FIRAuthUI can be created.
-  [FIRApp configure];
+  
+  // Load plist from test file
+  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+  NSString *file = [bundle pathForResource:@"GoogleService-Info"
+                                    ofType:@"plist"];
+  
+  FIROptions *options = [[FIROptions alloc] initWithContentsOfFile:file];
+  [FIRApp configureWithOptions:options];
 }
 
 - (void)setUp {
