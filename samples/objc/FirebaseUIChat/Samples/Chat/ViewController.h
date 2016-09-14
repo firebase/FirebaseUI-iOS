@@ -17,7 +17,7 @@
 @import UIKit;
 @import FirebaseDatabase;
 
-// Uncomment when using frawemorks
+// Uncomment when using frameworks
 //@import FirebaseDatabaseUI;
 #import <FirebaseTableViewDataSource.h>
 

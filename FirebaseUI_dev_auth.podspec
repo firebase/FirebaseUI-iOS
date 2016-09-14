@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-  s.name         = 'FirebaseUI-auth'
-  s.version      = '0.5.4'
-  s.summary      = 'UI binding libraries for Firebase.'
+  s.name         = 'FirebaseAuthUI'
+  s.version      = '0.5.5'
+  s.summary      = 'UI Auth Base library for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0' }
   s.author       = 'Firebase'

@@ -18,12 +18,14 @@
 
 #import "FIRAuthViewController.h"
 @import Firebase;
-@import FirebaseAuthUI;
+// Uncomment when using frameworks
+//@import FirebaseAuthUI;
+#import <FirebaseAuthUI.h>
 
-// Uncomment when using frawemorks
+// Uncomment when using frameworks
 //@import FirebaseGoogleAuthUI;
 #import <FIRGoogleAuthUI.h>
-// Uncomment when using frawemorks
+// Uncomment when using frameworks
 //@import FirebaseFacebookAuthUI;
 #import <FIRFacebookAuthUI.h>
 

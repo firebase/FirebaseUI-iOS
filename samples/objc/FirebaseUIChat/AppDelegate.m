@@ -16,7 +16,9 @@
 
 #import "AppDelegate.h"
 @import Firebase;
-@import FirebaseAuthUI;
+// Uncomment when using frameworks
+//@import FirebaseAuthUI;
+#import <FirebaseAuthUI.h>
 
 @implementation AppDelegate
 

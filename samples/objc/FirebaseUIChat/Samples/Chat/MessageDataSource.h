@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-// Uncomment when using frawemorks
+// Uncomment when using frameworks
 //@import FirebaseDatabaseUI;
 #import <FirebaseTableViewDataSource.h>
 
