@@ -9,7 +9,7 @@
 	<key>CLIENT_ID</key>
 	<string>client-id.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.client=id</string>
+	<string>com.googleusercontent.apps.client-id</string>
 	<key>API_KEY</key>
 	<string>api-key</string>
 	<key>GCM_SENDER_ID</key>
