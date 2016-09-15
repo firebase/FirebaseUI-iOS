@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
     twitter.resources = "FirebaseTwitterAuthUI/{Resources,Strings}/*", "FirebaseTwitterAuthUI/*.xib"
     twitter.dependency 'FirebaseAuthUI/AuthBase'
     twitter.dependency 'TwitterKit', '~> 2.4'
-    twitter.pod_target_xcconfig = { 'CLANG_ENABLE_MODULES' => 'NO' }
+    twitter.pod_target_xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PROJECT_DIR)/TwitterCore/iOS"' }
   end
 
 end
