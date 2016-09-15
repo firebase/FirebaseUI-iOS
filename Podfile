@@ -10,6 +10,7 @@ target 'FirebaseUI' do
 
   pod 'FBSDKLoginKit', '~> 4.0'
   pod 'GoogleSignIn', '~> 4.0'
+  pod 'TwitterKit', '~> 2.4'
 end
 
 target 'FirebaseDatabaseUI' do
@@ -51,6 +52,16 @@ target 'FirebaseGoogleAuthUI' do
   end
 end
 
+target 'FirebaseTwitterAuthUI' do
+  # Pods for Google Auth
+  pod 'Firebase/Auth'
+  pod 'TwitterKit', '~> 2.4'
+
+  target 'FirebaseTwitterAuthUITests' do
+    inherit! :search_paths
+  end
+end
+
 target 'Database' do
   # Pods for Database
   pod 'Firebase/Database'
@@ -71,4 +82,10 @@ target 'Google' do
   # Pods for Google Auth
   pod 'Firebase/Auth'
   pod 'GoogleSignIn', '~> 4.0'
+end
+
+target 'Twitter' do
+  # Pods for Twitter Auth
+  pod 'Firebase/Auth'
+  pod 'TwitterKit', '~> 2.4'
 end

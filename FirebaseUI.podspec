@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
     all.dependency 'FirebaseUI/Auth'
     all.dependency 'FirebaseUI/Facebook'
     all.dependency 'FirebaseUI/Google'
+    all.dependency 'FirebaseUI/Twitter'
   end
 
   s.subspec 'Database' do |database|
@@ -43,5 +44,12 @@ Pod::Spec.new do |s|
     google.dependency 'FirebaseUI/Auth'
     google.dependency 'GoogleSignIn', '~> 4.0'
     google.resources = 'FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks/FirebaseGoogleAuthUI.framework/*.{nib,lproj,png}'
+  end
+
+  s.subspec 'Twitter' do |twitter|
+    twitter.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks/FirebaseTwitterAuthUI.framework"]
+    twitter.dependency 'FirebaseUI/Auth'
+    twitter.dependency 'TwitterKit', '~> 2.4'
+    twitter.resources = 'FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks/FirebaseTwitterAuthUI.framework/*.{nib,lproj,png}'
   end
 end

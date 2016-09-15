@@ -40,9 +40,38 @@
 				<string>REPLACE_ME_WITH_FACEBOOK_APP_ID</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>TWITTER_CONSUMER_KEY</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>twitterkit-&lt;consumer_key&gt;</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>FABRIC_API_KEY</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict>
+					<key>consumerKey</key>
+					<string>Consumer Key</string>
+					<key>consumerSecret</key>
+					<string>Consumer Secret</string>
+				</dict>
+				<key>KitName</key>
+				<string>Twitter</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

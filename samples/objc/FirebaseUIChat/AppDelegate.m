@@ -16,13 +16,17 @@
 
 #import "AppDelegate.h"
 @import Firebase;
+#import <Fabric/Fabric.h>
+#import <TwitterKit/Twitter.h>
 // Uncomment when using frameworks
 //@import FirebaseAuthUI;
 #import <FirebaseAuthUI.h>
 
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  [Fabric with:@[[Twitter class]]];
   [FIRApp configure];
   return YES;
 }
