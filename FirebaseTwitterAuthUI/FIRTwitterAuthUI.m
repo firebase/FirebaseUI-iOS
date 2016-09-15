@@ -20,7 +20,7 @@
 #import "FIRTwitterAuthUI.h"
 
 /** @var kBundleFileName
- @brief The name of the bundle containing Facebook auth provider assets/resources.
+ @brief The name of the bundle containing Twitter auth provider assets/resources.
  */
 static NSString *const kBundleFileName = @"FirebaseTwitterAuthUIBundle.bundle";
 
@@ -29,7 +29,7 @@ static NSString *const kBundleFileName = @"FirebaseTwitterAuthUIBundle.bundle";
  */
 static NSString *const kTableName = @"FirebaseTwitterAuthUI";
 
-/** @var kSignInWithFacebook
+/** @var kSignInWithTwitter
  @brief The string key for localized button text.
  */
 static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
