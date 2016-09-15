@@ -5,11 +5,29 @@
 
 import Foundation
 
+/// Map from scheme names to framework names.
+/// Hopefully can avoid hard-coding this in the future
+let schemes = [
+  "FirebaseDatabaseUI",
+  "FirebaseAuthUI",
+  "FirebaseFacebookAuthUI",
+  "FirebaseGoogleAuthUI",
+  "FirebaseTwitterAuthUI",
+]
+
+let staticLibs = [
+  "Database": "FirebaseDatabaseUI",
+  "Auth"    : "FirebaseAuthUI",
+  "Facebook": "FirebaseFacebookAuthUI",
+  "Google"  : "FirebaseGoogleAuthUI",
+  "Twitter" : "FirebaseTwitterAuthUI",
+]
+
 // TODO: Use NSFileManager instead of all these awful
 // manual path appendings and mkdir/mv/cp
 
 let DerivedDataDir = "artifacts/"
-let BuiltProductsDir = DerivedDataDir + "FirebaseUIFrameworks/"
+let BuiltProductsDir = "FirebaseUIFrameworks/"
 
 // TODO: DRY out these NSTask functions
 
@@ -92,22 +110,6 @@ struct Build {
 }
 
 let sdks = ["iphoneos", "iphonesimulator"]
-
-/// Map from scheme names to framework names.
-/// Hopefully can avoid hard-coding this in the future
-let schemes = [
-  "FirebaseDatabaseUI",
-  "FirebaseAuthUI",
-  "FirebaseFacebookAuthUI",
-  "FirebaseGoogleAuthUI",
-]
-
-let staticLibs = [
-  "Database": "FirebaseDatabaseUI",
-  "Auth"    : "FirebaseAuthUI",
-  "Facebook": "FirebaseFacebookAuthUI",
-  "Google"  : "FirebaseGoogleAuthUI",
-]
 
 // make folder structure for built products
 schemes.forEach { scheme in
@@ -201,5 +203,34 @@ lipos.forEach { $0.launch() }
 
 // copy license file
 cp(from: "LICENSE", to: BuiltProductsDir)
+
+// clean up build artifacts afterward
+
+/// Moves files to trash
+func rm(path: String, isDirectory: Bool) -> Void {
+  let url = NSURL(fileURLWithPath: path, isDirectory: isDirectory)
+  let fileManager = NSFileManager()
+  do {
+    try fileManager.trashItemAtURL(url, resultingItemURL: nil)
+  } catch (let error) {
+    print(fileManager.currentDirectoryPath)
+    print(error)
+    exit(1)
+  }
+}
+
+func zip(input: String, output: String) -> Void {
+  let task = NSTask()
+  task.launchPath = "/usr/bin/zip"
+  task.arguments = ["-r", "-9", output, input]
+  task.launch()
+  task.waitUntilExit()
+  guard task.terminationStatus == 0 else { exit(task.terminationStatus) }
+}
+
+zip("FirebaseUIFrameworks", output: "FirebaseUIFrameworks.zip")
+
+rm(DerivedDataDir, isDirectory: true)
+rm(BuiltProductsDir, isDirectory: true)
 
 exit(0)
