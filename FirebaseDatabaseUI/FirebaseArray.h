@@ -18,7 +18,7 @@
 
 // clang-format on
 
-@import Firebase;
+@import FirebaseDatabase;
 
 #import "FirebaseArrayDelegate.h"
 

@@ -19,7 +19,6 @@ target 'FirebaseDatabaseUI' do
 
   target 'FirebaseDatabaseUITests' do
     inherit! :search_paths
-    pod 'Firebase/Database'
   end
 end
 
