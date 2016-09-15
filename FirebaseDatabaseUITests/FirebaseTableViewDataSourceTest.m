@@ -57,9 +57,9 @@ static NSString *const kTestReuseIdentifier = @"FirebaseTableViewDataSourceTest"
 }
 
 - (void)tearDown {
-  [super tearDown];
   [self.observable removeAllObservers];
   [UIView setAnimationsEnabled:YES];
+  [super tearDown];
 }
 
 - (void)testItHasACount {

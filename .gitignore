@@ -28,4 +28,4 @@ DerivedData
 Pods/
 Podfile.lock
 *.xcworkspace/
-GoogleService-Info.plist
+samples/**/GoogleService-Info.plist
