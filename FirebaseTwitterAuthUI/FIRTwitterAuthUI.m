@@ -114,14 +114,14 @@ presentingViewController:(nullable UIViewController *)presentingViewController
        [FIRTwitterAuthProvider credentialWithToken:session.authToken
                                             secret:session.authTokenSecret];
        if (completion) {
-         completion(credential, error);
+         completion(credential, nil);
        }
      } else {
        NSError *newError =
        [FIRAuthUIErrorUtils providerErrorWithUnderlyingError:error
                                                   providerID:FIRTwitterAuthProviderID];
        if (completion) {
-         completion(nil, error);
+         completion(nil, newError);
        }
      }
    }];

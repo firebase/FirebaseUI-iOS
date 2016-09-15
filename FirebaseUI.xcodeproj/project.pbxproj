@@ -125,7 +125,7 @@
 		C32516951D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = C32516941D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C325169C1D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C32516921D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.framework */; };
 		C32516A11D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32516A01D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests.m */; };
-		C32516B81D88A61C00B0B3F9 /* FIRTwitterAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = C32516B61D88A61C00B0B3F9 /* FIRTwitterAuthUI.h */; };
+		C32516B81D88A61C00B0B3F9 /* FIRTwitterAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = C32516B61D88A61C00B0B3F9 /* FIRTwitterAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C32516B91D88A61C00B0B3F9 /* FIRTwitterAuthUI.m in Sources */ = {isa = PBXBuildFile; fileRef = C32516B71D88A61C00B0B3F9 /* FIRTwitterAuthUI.m */; };
 		C32516BA1D88A61C00B0B3F9 /* FIRTwitterAuthUI.m in Sources */ = {isa = PBXBuildFile; fileRef = C32516B71D88A61C00B0B3F9 /* FIRTwitterAuthUI.m */; };
 		C380A7D61D89ECF1005C031D /* ic_twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D01D89ECF1005C031D /* ic_twitter.png */; };
@@ -216,6 +216,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = C32516911D88A54C00B0B3F9;
 			remoteInfo = FirebaseTwitterAuthUI;
+		};
+		C3CCFF4F1D8B316100788425 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DCC4FC01D678CDC00B0D3C4;
+			remoteInfo = FirebaseAuthUI;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1322,6 +1329,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C3CCFF501D8B316100788425 /* PBXTargetDependency */,
 			);
 			name = FirebaseTwitterAuthUI;
 			productName = FirebaseTwitterAuthUI;
@@ -2349,6 +2357,11 @@
 			isa = PBXTargetDependency;
 			target = C32516911D88A54C00B0B3F9 /* FirebaseTwitterAuthUI */;
 			targetProxy = C325169D1D88A54C00B0B3F9 /* PBXContainerItemProxy */;
+		};
+		C3CCFF501D8B316100788425 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DCC4FC01D678CDC00B0D3C4 /* FirebaseAuthUI */;
+			targetProxy = C3CCFF4F1D8B316100788425 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
