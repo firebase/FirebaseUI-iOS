@@ -21,13 +21,15 @@
 // Uncomment when using frameworks
 //@import FirebaseAuthUI;
 #import <FirebaseAuthUI.h>
-
 // Uncomment when using frameworks
 //@import FirebaseGoogleAuthUI;
 #import <FIRGoogleAuthUI.h>
 // Uncomment when using frameworks
 //@import FirebaseFacebookAuthUI;
 #import <FIRFacebookAuthUI.h>
+// Uncomment when using frameworks
+//@import FIRTwitterAuthUI;
+#import <FIRTwitterAuthUI.h>
 
 @interface FIRAuthViewController ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellSignIn;
@@ -61,6 +63,7 @@
   NSArray<id<FIRAuthProviderUI>> *providers = [NSArray arrayWithObjects:
                                                [[FIRGoogleAuthUI alloc] initWithClientID:googleId],
                                                [[FIRFacebookAuthUI alloc] initWithAppID:facebookAppId],
+                                               [[FIRTwitterAuthUI alloc] init],
                                                nil];
   _authUI.providers = providers;
 

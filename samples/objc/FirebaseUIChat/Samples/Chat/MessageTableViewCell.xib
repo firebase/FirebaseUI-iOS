@@ -23,18 +23,18 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other User" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1WX-IN-auO">
-                        <rect key="frame" x="16" y="24" width="80" height="21"/>
+                        <rect key="frame" x="16" y="24" width="120" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="iDB-9r-SWz"/>
+                            <constraint firstAttribute="width" constant="120" id="iDB-9r-SWz"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My User" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrk-ON-tvy">
-                        <rect key="frame" x="224" y="24" width="80" height="21"/>
+                        <rect key="frame" x="184" y="24" width="120" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="BTh-pi-pbH"/>
+                            <constraint firstAttribute="width" constant="120" id="BTh-pi-pbH"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

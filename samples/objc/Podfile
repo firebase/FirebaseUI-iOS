@@ -7,6 +7,7 @@ target 'FirebaseUIChat' do
   pod 'FirebaseDatabaseUI', :path => "../../FirebaseUI_dev_db.podspec"
   pod 'FirebaseFacebookAuthUI', :path => "../../FirebaseUI_dev_fb.podspec"
   pod 'FirebaseGoogleAuthUI', :path => "../../FirebaseUI_dev_ggl.podspec"
+  pod 'FirebaseTwitterAuthUI', :path => "../../FirebaseUI_dev_tw.podspec"
 
 #  used for development from released frameworks
 #  use_frameworks!

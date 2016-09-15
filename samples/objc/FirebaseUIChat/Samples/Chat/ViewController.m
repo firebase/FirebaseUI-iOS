@@ -40,16 +40,32 @@
   [self.dataSource
    populateCellWithBlock:^void(MessageTableViewCell *__nonnull cell,
                                Message *__nonnull message) {
-     cell.otherMessageLabel.text = message.text;
-     cell.otherNameLabel.text = message.name;
-     cell.otherNameLabel.textColor = [UIColor colorWithRed:164.0 / 255.0
-                                                     green:199.0 / 255.0
-                                                      blue:57.0 / 255.0
-                                                     alpha:1.0];
-     [cell.otherMessageLabel setHidden:NO];
-     [cell.otherNameLabel setHidden:NO];
-     [cell.myMessageLabel setHidden:YES];
-     [cell.myNameLabel setHidden:YES];
+
+     if ([message.name isEqualToString:[FIRAuth auth].currentUser.displayName]) {
+       cell.myMessageLabel.text = message.text;
+       cell.myNameLabel.text = message.name;
+       cell.myNameLabel.textColor = [UIColor colorWithRed:164.0 / 255.0
+                                                       green:199.0 / 255.0
+                                                        blue:57.0 / 255.0
+                                                       alpha:1.0];
+       [cell.myMessageLabel setHidden:NO];
+       [cell.myNameLabel setHidden:NO];
+       [cell.otherMessageLabel setHidden:YES];
+       [cell.otherNameLabel setHidden:YES];
+     } else {
+       cell.otherMessageLabel.text = message.text;
+       cell.otherNameLabel.text = message.name;
+       cell.otherNameLabel.textColor = [UIColor colorWithRed:164.0 / 255.0
+                                                       green:199.0 / 255.0
+                                                        blue:57.0 / 255.0
+                                                       alpha:1.0];
+       [cell.otherMessageLabel setHidden:NO];
+       [cell.otherNameLabel setHidden:NO];
+       [cell.myMessageLabel setHidden:YES];
+       [cell.myNameLabel setHidden:YES];
+
+     }
+
    }];
 
   self.tableView.dataSource = self.dataSource;
