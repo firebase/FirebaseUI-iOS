@@ -19,6 +19,11 @@
 @import FirebaseAuth;
 @import FirebaseAuthUI;
 
+// A hack to fix travis failing to pick up FIROptions interface
+@interface FIROptions (TravisCIHack)
+- (instancetype)initWithContentsOfFile:(NSString *)file;
+@end
+
 @interface FUILoginProvider : NSObject <FIRAuthProviderUI>
 @property (nonatomic, assign) BOOL canHandleURLs;
 @end
