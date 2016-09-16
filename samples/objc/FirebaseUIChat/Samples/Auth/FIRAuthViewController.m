@@ -31,7 +31,7 @@
 //@import FIRTwitterAuthUI;
 #import <FIRTwitterAuthUI.h>
 
-@interface FIRAuthViewController ()
+@interface FIRAuthViewController () <FIRAuthUIDelegate>
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellSignIn;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellName;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellEmail;
@@ -52,6 +52,7 @@
 
   self.auth = [FIRAuth auth];
   self.authUI = [FIRAuthUI defaultAuthUI];
+  self.authUI.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -108,6 +109,23 @@
     if (error) {
       NSLog(@"Sign out error: %@", error);
     }
+  }
+}
+
+#pragma mark - FIRAuthUIDelegate methods
+
+- (void)authUI:(FIRAuthUI *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error {
+  if (error) {
+    NSError *originalError = error.userInfo[NSUnderlyingErrorKey];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                   message:originalError.localizedDescription
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* closeButton = [UIAlertAction
+                                  actionWithTitle:@"Close"
+                                  style:UIAlertActionStyleDefault
+                                  handler:nil];
+    [alert addAction:closeButton];
+    [self presentViewController:alert animated:YES completion:nil];
   }
 }
 
