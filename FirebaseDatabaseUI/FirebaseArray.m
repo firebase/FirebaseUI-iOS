@@ -35,8 +35,6 @@
 
 @end
 
-@import FirebaseDatabase;
-
 @implementation FirebaseArray
 
 #pragma mark - Initializer methods
