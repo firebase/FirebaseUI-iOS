@@ -17,19 +17,13 @@
 //
 
 #import "FIRAuthViewController.h"
+
 @import Firebase;
-// Uncomment when using frameworks
-//@import FirebaseAuthUI;
-#import <FirebaseAuthUI.h>
-// Uncomment when using frameworks
-//@import FirebaseGoogleAuthUI;
-#import <FIRGoogleAuthUI.h>
-// Uncomment when using frameworks
-//@import FirebaseFacebookAuthUI;
-#import <FIRFacebookAuthUI.h>
-// Uncomment when using frameworks
-//@import FIRTwitterAuthUI;
-#import <FIRTwitterAuthUI.h>
+
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
+#import <FirebaseFacebookAuthUI/FIRFacebookAuthUI.h>
+#import <FirebaseGoogleAuthUI/FIRGoogleAuthUI.h>
+#import <FirebaseTwitterAuthUI/FIRTwitterAuthUI.h>
 
 @interface FIRAuthViewController () <FIRAuthUIDelegate>
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellSignIn;

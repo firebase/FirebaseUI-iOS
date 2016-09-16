@@ -15,12 +15,11 @@
 //
 
 #import "AppDelegate.h"
+
 @import Firebase;
 #import <Fabric/Fabric.h>
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <TwitterKit/Twitter.h>
-// Uncomment when using frameworks
-//@import FirebaseAuthUI;
-#import <FirebaseAuthUI.h>
 
 
 @implementation AppDelegate

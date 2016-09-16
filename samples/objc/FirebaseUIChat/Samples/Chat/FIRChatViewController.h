@@ -17,9 +17,7 @@
 @import UIKit;
 @import FirebaseDatabase;
 
-// Uncomment when using frameworks
-//@import FirebaseDatabaseUI;
-#import <FirebaseTableViewDataSource.h>
+#import <FirebaseDatabaseUI/FirebaseTableViewDataSource.h>
 
 @interface FIRChatViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>
 

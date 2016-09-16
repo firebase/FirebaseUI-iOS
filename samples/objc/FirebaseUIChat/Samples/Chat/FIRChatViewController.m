@@ -14,9 +14,7 @@
 //  limitations under the License.
 //
 
-// Uncomment when using frameworks
-//@import FirebaseAuthUI;
-#import <FirebaseAuthUI.h>
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 #import "FIRChatViewController.h"
 #import "FIRChatMessage.h"
