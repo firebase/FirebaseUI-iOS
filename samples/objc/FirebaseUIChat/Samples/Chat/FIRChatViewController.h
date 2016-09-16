@@ -14,21 +14,20 @@
 //  limitations under the License.
 //
 
-#import "Message.h"
+@import UIKit;
+@import FirebaseDatabase;
 
-@implementation Message
+// Uncomment when using frameworks
+//@import FirebaseDatabaseUI;
+#import <FirebaseTableViewDataSource.h>
 
-- (instancetype)init {
-  return [self initWithName:@"" andText:@""];
-}
+@interface FIRChatViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>
 
-- (instancetype)initWithName:(NSString *)name andText:(NSString *)text {
-  self = [super init];
-  if (self) {
-    self.name = name;
-    self.text = text;
-  }
-  return self;
-}
+@property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (strong, nonatomic) FirebaseTableViewDataSource *dataSource;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextField *inputTextField;
 
 @end
+

@@ -18,7 +18,7 @@
 
 #import "FIRSample.h"
 #import "FIRSamplesViewController.h"
-#import "ViewController.h"
+#import "FIRChatViewController.h"
 
 @interface FIRSamplesViewController ()
 

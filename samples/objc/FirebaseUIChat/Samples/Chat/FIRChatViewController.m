@@ -18,12 +18,12 @@
 //@import FirebaseAuthUI;
 #import <FirebaseAuthUI.h>
 
-#import "ViewController.h"
-#import "Message.h"
-#import "MessageTableViewCell.h"
-#import "MessageDataSource.h"
+#import "FIRChatViewController.h"
+#import "FIRChatMessage.h"
+#import "FIRChatMessageTableViewCell.h"
+#import "FIRChatMessageDataSource.h"
 
-@implementation ViewController
+@implementation FIRChatViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -31,15 +31,15 @@
   self.ref = [FIRDatabase database].reference;
 
   self.dataSource =
-  [[MessageDataSource alloc] initWithRef:self.ref
-                              modelClass:[Message class]
-                                nibNamed:@"MessageTableViewCell"
+  [[FIRChatMessageDataSource alloc] initWithRef:self.ref
+                              modelClass:[FIRChatMessage class]
+                                nibNamed:@"FIRChatMessageTableViewCell"
                      cellReuseIdentifier:@"cellReuseIdentifier"
                                     view:self.tableView];
 
   [self.dataSource
-   populateCellWithBlock:^void(MessageTableViewCell *__nonnull cell,
-                               Message *__nonnull message) {
+   populateCellWithBlock:^void(FIRChatMessageTableViewCell *__nonnull cell,
+                               FIRChatMessage *__nonnull message) {
 
      if ([message.name isEqualToString:[FIRAuth auth].currentUser.displayName]) {
        cell.myMessageLabel.text = message.text;

@@ -16,7 +16,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Message : NSObject
+@interface FIRChatMessage : NSObject
 
 @property(strong, nonatomic) NSString *name;
 @property(strong, nonatomic) NSString *text;

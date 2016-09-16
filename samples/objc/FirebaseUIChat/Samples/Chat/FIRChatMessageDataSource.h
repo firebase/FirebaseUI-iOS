@@ -14,13 +14,11 @@
 //  limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
+// Uncomment when using frameworks
+//@import FirebaseDatabaseUI;
+#import <FirebaseTableViewDataSource.h>
 
-@interface MessageTableViewCell : UITableViewCell
-@property(weak, nonatomic) IBOutlet UILabel *myMessageLabel;
-@property(weak, nonatomic) IBOutlet UILabel *myNameLabel;
-
-@property(weak, nonatomic) IBOutlet UILabel *otherMessageLabel;
-@property(weak, nonatomic) IBOutlet UILabel *otherNameLabel;
+@interface FIRChatMessageDataSource : FirebaseTableViewDataSource
 
 @end
+

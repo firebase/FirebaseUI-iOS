@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		34755DFFAC2DCB6B1176CE87 /* libPods-FirebaseUIChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFFAE2215B9D3116BF1AEEF /* libPods-FirebaseUIChat.a */; };
 		C3AC675E1D81FE6B00FC956D /* FIRAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67531D81FE6B00FC956D /* FIRAuthViewController.m */; };
-		C3AC675F1D81FE6B00FC956D /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67561D81FE6B00FC956D /* Message.m */; };
-		C3AC67601D81FE6B00FC956D /* MessageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67581D81FE6B00FC956D /* MessageDataSource.m */; };
-		C3AC67611D81FE6B00FC956D /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC675A1D81FE6B00FC956D /* MessageTableViewCell.m */; };
-		C3AC67621D81FE6B00FC956D /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3AC675B1D81FE6B00FC956D /* MessageTableViewCell.xib */; };
-		C3AC67631D81FE6B00FC956D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC675D1D81FE6B00FC956D /* ViewController.m */; };
+		C3AC675F1D81FE6B00FC956D /* FIRChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67561D81FE6B00FC956D /* FIRChatMessage.m */; };
+		C3AC67601D81FE6B00FC956D /* FIRChatMessageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67581D81FE6B00FC956D /* FIRChatMessageDataSource.m */; };
+		C3AC67611D81FE6B00FC956D /* FIRChatMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC675A1D81FE6B00FC956D /* FIRChatMessageTableViewCell.m */; };
+		C3AC67621D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3AC675B1D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib */; };
+		C3AC67631D81FE6B00FC956D /* FIRChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC675D1D81FE6B00FC956D /* FIRChatViewController.m */; };
 		C3AC67661D82002F00FC956D /* FIRSample.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67651D82002F00FC956D /* FIRSample.m */; };
 		C3F23ECB1D80F26E0020509F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3F23ECA1D80F26E0020509F /* GoogleService-Info.plist */; };
 		C3F23ED01D80F58A0020509F /* FIRSamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F23ECF1D80F58A0020509F /* FIRSamplesViewController.m */; };
@@ -30,15 +30,15 @@
 		92E1431893A040764FCC115E /* Pods-FirebaseUIChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUIChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat.release.xcconfig"; sourceTree = "<group>"; };
 		C3AC67521D81FE6B00FC956D /* FIRAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRAuthViewController.h; sourceTree = "<group>"; };
 		C3AC67531D81FE6B00FC956D /* FIRAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRAuthViewController.m; sourceTree = "<group>"; };
-		C3AC67551D81FE6B00FC956D /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		C3AC67561D81FE6B00FC956D /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
-		C3AC67571D81FE6B00FC956D /* MessageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDataSource.h; sourceTree = "<group>"; };
-		C3AC67581D81FE6B00FC956D /* MessageDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDataSource.m; sourceTree = "<group>"; };
-		C3AC67591D81FE6B00FC956D /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
-		C3AC675A1D81FE6B00FC956D /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
-		C3AC675B1D81FE6B00FC956D /* MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
-		C3AC675C1D81FE6B00FC956D /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C3AC675D1D81FE6B00FC956D /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C3AC67551D81FE6B00FC956D /* FIRChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRChatMessage.h; sourceTree = "<group>"; };
+		C3AC67561D81FE6B00FC956D /* FIRChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRChatMessage.m; sourceTree = "<group>"; };
+		C3AC67571D81FE6B00FC956D /* FIRChatMessageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRChatMessageDataSource.h; sourceTree = "<group>"; };
+		C3AC67581D81FE6B00FC956D /* FIRChatMessageDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRChatMessageDataSource.m; sourceTree = "<group>"; };
+		C3AC67591D81FE6B00FC956D /* FIRChatMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRChatMessageTableViewCell.h; sourceTree = "<group>"; };
+		C3AC675A1D81FE6B00FC956D /* FIRChatMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRChatMessageTableViewCell.m; sourceTree = "<group>"; };
+		C3AC675B1D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRChatMessageTableViewCell.xib; sourceTree = "<group>"; };
+		C3AC675C1D81FE6B00FC956D /* FIRChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRChatViewController.h; sourceTree = "<group>"; };
+		C3AC675D1D81FE6B00FC956D /* FIRChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRChatViewController.m; sourceTree = "<group>"; };
 		C3AC67641D82002F00FC956D /* FIRSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRSample.h; sourceTree = "<group>"; };
 		C3AC67651D82002F00FC956D /* FIRSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRSample.m; sourceTree = "<group>"; };
 		C3F23ECA1D80F26E0020509F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "FirebaseUIChat/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -104,15 +104,15 @@
 		C3AC67541D81FE6B00FC956D /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				C3AC67551D81FE6B00FC956D /* Message.h */,
-				C3AC67561D81FE6B00FC956D /* Message.m */,
-				C3AC67571D81FE6B00FC956D /* MessageDataSource.h */,
-				C3AC67581D81FE6B00FC956D /* MessageDataSource.m */,
-				C3AC67591D81FE6B00FC956D /* MessageTableViewCell.h */,
-				C3AC675A1D81FE6B00FC956D /* MessageTableViewCell.m */,
-				C3AC675B1D81FE6B00FC956D /* MessageTableViewCell.xib */,
-				C3AC675C1D81FE6B00FC956D /* ViewController.h */,
-				C3AC675D1D81FE6B00FC956D /* ViewController.m */,
+				C3AC67551D81FE6B00FC956D /* FIRChatMessage.h */,
+				C3AC67561D81FE6B00FC956D /* FIRChatMessage.m */,
+				C3AC67571D81FE6B00FC956D /* FIRChatMessageDataSource.h */,
+				C3AC67581D81FE6B00FC956D /* FIRChatMessageDataSource.m */,
+				C3AC67591D81FE6B00FC956D /* FIRChatMessageTableViewCell.h */,
+				C3AC675A1D81FE6B00FC956D /* FIRChatMessageTableViewCell.m */,
+				C3AC675B1D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib */,
+				C3AC675C1D81FE6B00FC956D /* FIRChatViewController.h */,
+				C3AC675D1D81FE6B00FC956D /* FIRChatViewController.m */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -225,7 +225,7 @@
 			files = (
 				D81A05FF1B86A78700498183 /* Main.storyboard in Resources */,
 				C3F23ECB1D80F26E0020509F /* GoogleService-Info.plist in Resources */,
-				C3AC67621D81FE6B00FC956D /* MessageTableViewCell.xib in Resources */,
+				C3AC67621D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib in Resources */,
 				D81A06041B86A78700498183 /* LaunchScreen.xib in Resources */,
 				D81A06011B86A78700498183 /* Images.xcassets in Resources */,
 			);
@@ -288,10 +288,10 @@
 			files = (
 				D81A05F91B86A78700498183 /* AppDelegate.m in Sources */,
 				C3F23ED01D80F58A0020509F /* FIRSamplesViewController.m in Sources */,
-				C3AC67631D81FE6B00FC956D /* ViewController.m in Sources */,
-				C3AC67611D81FE6B00FC956D /* MessageTableViewCell.m in Sources */,
-				C3AC67601D81FE6B00FC956D /* MessageDataSource.m in Sources */,
-				C3AC675F1D81FE6B00FC956D /* Message.m in Sources */,
+				C3AC67631D81FE6B00FC956D /* FIRChatViewController.m in Sources */,
+				C3AC67611D81FE6B00FC956D /* FIRChatMessageTableViewCell.m in Sources */,
+				C3AC67601D81FE6B00FC956D /* FIRChatMessageDataSource.m in Sources */,
+				C3AC675F1D81FE6B00FC956D /* FIRChatMessage.m in Sources */,
 				D81A05F61B86A78700498183 /* main.m in Sources */,
 				C3AC67661D82002F00FC956D /* FIRSample.m in Sources */,
 				C3AC675E1D81FE6B00FC956D /* FIRAuthViewController.m in Sources */,

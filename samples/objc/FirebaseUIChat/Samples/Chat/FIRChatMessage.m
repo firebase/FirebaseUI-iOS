@@ -14,20 +14,21 @@
 //  limitations under the License.
 //
 
-#import "MessageDataSource.h"
-@import FirebaseDatabase;
+#import "FIRChatMessage.h"
 
-@implementation MessageDataSource
+@implementation FIRChatMessage
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-  return YES; }
+- (instancetype)init {
+  return [self initWithName:@"" andText:@""];
+}
 
-- (void)tableView:(UITableView *)tableView
-commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
- forRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (editingStyle == UITableViewCellEditingStyleDelete) {
-    [[self refForIndex:indexPath.row] removeValue];
+- (instancetype)initWithName:(NSString *)name andText:(NSString *)text {
+  self = [super init];
+  if (self) {
+    self.name = name;
+    self.text = text;
   }
+  return self;
 }
 
 @end

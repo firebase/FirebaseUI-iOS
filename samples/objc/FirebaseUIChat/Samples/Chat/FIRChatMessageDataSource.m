@@ -14,20 +14,20 @@
 //  limitations under the License.
 //
 
-@import UIKit;
+#import "FIRChatMessageDataSource.h"
 @import FirebaseDatabase;
 
-// Uncomment when using frameworks
-//@import FirebaseDatabaseUI;
-#import <FirebaseTableViewDataSource.h>
+@implementation FIRChatMessageDataSource
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+  return YES; }
 
-@property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (strong, nonatomic) FirebaseTableViewDataSource *dataSource;
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UITextField *inputTextField;
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+ forRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (editingStyle == UITableViewCellEditingStyleDelete) {
+    [[self refForIndex:indexPath.row] removeValue];
+  }
+}
 
 @end
-

@@ -14,9 +14,9 @@
 //  limitations under the License.
 //
 
-#import "MessageTableViewCell.h"
+#import "FIRChatMessageTableViewCell.h"
 
-@implementation MessageTableViewCell
+@implementation FIRChatMessageTableViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
   return [super initWithFrame:frame];
