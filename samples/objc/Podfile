@@ -3,14 +3,15 @@ platform :ios, '8.0'
 target 'FirebaseUIChat' do
 
 #  used for development from sources
-  pod 'FirebaseAuthUI', :path => "FirebaseUI_dev_auth.podspec"
-  pod 'FirebaseDatabaseUI', :path => "FirebaseUI_dev_db.podspec"
-  pod 'FirebaseFacebookAuthUI', :path => "FirebaseUI_dev_fb.podspec"
-  pod 'FirebaseGoogleAuthUI', :path => "FirebaseUI_dev_ggl.podspec"
-  pod 'FirebaseTwitterAuthUI', :path => "FirebaseUI_dev_tw.podspec"
+  pod 'FirebaseAuthUI', :path => "../../FirebaseUI_dev_auth.podspec"
+  pod 'FirebaseDatabaseUI', :path => "../../FirebaseUI_dev_db.podspec"
+  pod 'FirebaseFacebookAuthUI', :path => "../../FirebaseUI_dev_fb.podspec"
+  pod 'FirebaseGoogleAuthUI', :path => "../../FirebaseUI_dev_ggl.podspec"
+  pod 'FirebaseTwitterAuthUI', :path => "../../FirebaseUI_dev_tw.podspec"
 
 #  used for development from released frameworks
 #  use_frameworks!
 #  pod 'FirebaseUI', :podspec => "../../FirebaseUI.podspec"
 
 end
+
