@@ -18,9 +18,10 @@
 
 @interface FIRChatMessage : NSObject
 
-@property(strong, nonatomic) NSString *name;
-@property(strong, nonatomic) NSString *text;
+@property(copy, nonatomic) NSString *name;
+@property(copy, nonatomic) NSString *text;
+@property(copy, nonatomic) NSString *uid;
 
-- (instancetype)initWithName:(NSString *)name andText:(NSString *)text;
+- (instancetype)initWithName:(NSString *)name andText:(NSString *)text userId:(NSString *)uid;
 
 @end

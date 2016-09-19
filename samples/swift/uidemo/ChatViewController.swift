@@ -43,7 +43,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   @IBOutlet private var bottomConstraint: NSLayoutConstraint!
   
   private let auth = FIRAuth.auth()
-  private let chatReference = FIRDatabase.database().reference().child("chats")
+  private let chatReference = FIRDatabase.database().reference().child("swift_demo-chat")
   
   private var collectionViewDataSource: FirebaseCollectionViewDataSource!
   

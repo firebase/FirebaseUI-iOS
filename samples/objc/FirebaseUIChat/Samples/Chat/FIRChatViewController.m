@@ -15,6 +15,7 @@
 //
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
+#import <FirebaseAuth/FirebaseAuth.h>
 
 #import "FIRChatViewController.h"
 #import "FIRChatMessage.h"
@@ -26,7 +27,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  self.ref = [FIRDatabase database].reference;
+  self.ref = [[FIRDatabase database].reference child:@"objc_demo-chat"];
 
   self.dataSource =
   [[FIRChatMessageDataSource alloc] initWithRef:self.ref
@@ -39,7 +40,7 @@
    populateCellWithBlock:^void(FIRChatMessageTableViewCell *__nonnull cell,
                                FIRChatMessage *__nonnull message) {
 
-     if ([message.name isEqualToString:[FIRAuth auth].currentUser.displayName]) {
+     if ([message.uid isEqualToString:[FIRAuth auth].currentUser.uid]) {
        cell.myMessageLabel.text = message.text;
        cell.myNameLabel.text = message.name;
        cell.myNameLabel.textColor = [UIColor colorWithRed:164.0 / 255.0
@@ -82,10 +83,11 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 
-  NSString *currentUser = [FIRAuth auth].currentUser.displayName ?: @"iOS User";
+  FIRUser *cuurentUser = [FIRAuth auth].currentUser;
+  NSString *currentUser = cuurentUser.displayName ?: @"iOS User";
 
   [[self.ref childByAutoId]
-      setValue:@{@"name" : currentUser, @"text" : textField.text}];
+      setValue:@{@"name" : currentUser, @"text" : textField.text, @"uid" : cuurentUser.uid}];
   [textField resignFirstResponder];
   textField.text = @"";
   return YES;

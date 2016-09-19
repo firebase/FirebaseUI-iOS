@@ -19,14 +19,15 @@
 @implementation FIRChatMessage
 
 - (instancetype)init {
-  return [self initWithName:@"" andText:@""];
+  return [self initWithName:@"" andText:@"" userId:@""];
 }
 
-- (instancetype)initWithName:(NSString *)name andText:(NSString *)text {
+- (instancetype)initWithName:(NSString *)name andText:(NSString *)text userId:(NSString *)uid {
   self = [super init];
   if (self) {
     self.name = name;
     self.text = text;
+    self.uid = uid;
   }
   return self;
 }
