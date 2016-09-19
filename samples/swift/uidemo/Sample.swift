@@ -23,9 +23,9 @@ enum Sample: Int, RawRepresentable {
   
   // When adding new samples, add a new value here and fill
   // out the switch statements below as necessary.
-  case Chat = 0
-  case Auth = 1
-  
+  case Auth = 0
+  case Chat = 1
+
   static var total: Int {
     var count = 0
     while let _ = Sample(rawValue: count) {

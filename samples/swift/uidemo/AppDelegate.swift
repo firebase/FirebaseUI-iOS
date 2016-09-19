@@ -17,6 +17,8 @@
 import UIKit
 import Firebase
 import FirebaseAuthUI
+import Fabric
+import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Successfully running this sample requires an app in Firebase and an
     // accompanying valid GoogleService-Info.plist file.
     FIRApp.configure()
+    Fabric.with([Twitter.self])
     return true
   }
   

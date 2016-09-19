@@ -19,6 +19,7 @@ import Firebase
 import FirebaseAuthUI
 import FirebaseGoogleAuthUI
 import FirebaseFacebookAuthUI
+import FirebaseTwitterAuthUI
 
 let kFirebaseTermsOfService = NSURL(string: "https://firebase.google.com/terms/")!
 
@@ -62,6 +63,7 @@ class AuthViewController: UIViewController {
     let providers: [FIRAuthProviderUI] = [
       FIRGoogleAuthUI(clientID: kGoogleAppClientID),
       FIRFacebookAuthUI(appID: kFacebookAppID),
+      FIRTwitterAuthUI(),
     ]
     self.authUI?.providers = providers
 
