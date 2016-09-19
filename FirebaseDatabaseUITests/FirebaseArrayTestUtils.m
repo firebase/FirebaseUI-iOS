@@ -20,6 +20,8 @@
 
 #import "FirebaseArrayTestUtils.h"
 
+@import Foundation;
+
 @implementation FUIDataEventHandler
 @end
 
@@ -34,11 +36,20 @@
 }
 @end
 
+@interface FUITestObservable ()
+@property (nonatomic, readonly) NSMutableDictionary *contents;
+@end
+
 @implementation FUITestObservable
 
 - (instancetype)init {
+  return [self initWithDictionary:@{}];
+}
+
+- (instancetype)initWithDictionary:(NSDictionary *)contents {
   self = [super init];
   if (self != nil) {
+    _contents = [contents mutableCopy];
     _observers = [NSMutableDictionary dictionary];
   }
   return self;
@@ -46,6 +57,12 @@
 
 - (void)removeObserverWithHandle:(FIRDatabaseHandle)handle {
   [self.observers removeObjectForKey:@(handle)];
+}
+
+- (id<FIRDataObservable>)child:(NSString *)path {
+  NSParameterAssert([self.contents[path] isKindOfClass:[NSDictionary class]]);
+  NSDictionary *subdict = self.contents[path];
+  return [[FUITestObservable alloc] initWithDictionary:subdict];
 }
 
 - (void)removeAllObservers {
@@ -63,6 +80,19 @@
   NSNumber *key = @(self.current);
   _current++;
   self.observers[key] = handler;
+
+  // Send values on first observation
+  if (self.observers.count == 1) {
+    NSArray *allKeys = self.contents.allKeys;
+    id previousKey = nil;
+    for (id contentKey in allKeys) {
+      id value = self.contents[contentKey];
+      FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] initWithKey:contentKey value:value];
+      [self sendEvent:FIRDataEventTypeChildAdded withObject:snap previousKey:previousKey error:nil];
+      previousKey = contentKey;
+    }
+  }
+
   return key.unsignedIntegerValue;
 }
 

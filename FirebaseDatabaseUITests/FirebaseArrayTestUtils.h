@@ -18,7 +18,10 @@
 
 // clang-format on
 
+#import "FirebaseArray.h"
+
 @import FirebaseDatabaseUI;
+@import Foundation;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,6 +42,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 // A dummy observable so we can test this without relying on an internet connection.
 @interface FUITestObservable: NSObject <FIRDataObservable>
+
+// The initialized observable behaves like a FIRDatabaseQuery and pretends the
+// provided dict is serialized JSON.
+- (instancetype)initWithDictionary:(NSDictionary *)contents NS_DESIGNATED_INITIALIZER;
 
 // Map of handles to observers.
 @property (nonatomic, readonly) NSMutableDictionary<NSNumber *, FUIDataEventHandler *> *observers;

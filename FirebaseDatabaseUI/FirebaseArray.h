@@ -24,7 +24,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol FIRDataObservable
+@protocol FIRDataObservable <NSObject>
 @required
 
 - (FIRDatabaseHandle)observeEventType:(FIRDataEventType)eventType
@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
                       withCancelBlock:(nullable void (^)(NSError* error))cancelBlock;
 
 - (void)removeObserverWithHandle:(FIRDatabaseHandle)handle;
+
+- (id<FIRDataObservable>)child:(NSString *)path;
 
 @end
 
@@ -71,10 +73,25 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Initalizes FirebaseArray with a Firebase query (FIRDatabaseQuery) or database reference
  * (FIRDatabaseReference).
- * @param query A query or Firebase database reference
+ * @param query    A query or Firebase database reference
+ * @param delegate An object conforming to FirebaseArrayDelegate that should receive delegate messages.
  * @return A FirebaseArray instance
  */
-- (instancetype)initWithQuery:(id<FIRDataObservable>)query NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithQuery:(id<FIRDataObservable>)query
+                     delegate:(nullable id<FirebaseArrayDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initalizes FirebaseArray with a Firebase query (FIRDatabaseQuery) or database reference
+ * (FIRDatabaseReference).
+ * @param query    A query or Firebase database reference
+ * @return A FirebaseArray instance
+ */
+- (instancetype)initWithQuery:(id<FIRDataObservable>)query;
+
+/**
+ * See `initWithQuery:`
+ */
++ (instancetype)arrayWithQuery:(id<FIRDataObservable>)query;
 
 - (instancetype)init NS_UNAVAILABLE;
 
