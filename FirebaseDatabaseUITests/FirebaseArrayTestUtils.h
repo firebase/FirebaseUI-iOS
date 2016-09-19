@@ -18,7 +18,10 @@
 
 // clang-format on
 
+#import "FirebaseArray.h"
+
 @import FirebaseDatabaseUI;
+@import Foundation;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,13 +35,34 @@ NS_ASSUME_NONNULL_BEGIN
 // Horrible abuse of ObjC type system, since FirebaseArray is unfortunately coupled to
 // FIRDataSnapshot
 @interface FUIFakeSnapshot: NSObject
-- (instancetype)initWithKey:(NSString *)key value:(NSString *)value;
+- (instancetype)initWithKey:(NSString *)key value:(id)value;
++ (instancetype)snapWithKey:(NSString *)key value:(id)value;
 @property (nonatomic, copy) NSString *key;
-@property (nonatomic, copy) NSString *value;
+@property (nonatomic, copy) id value;
 @end
 
 // A dummy observable so we can test this without relying on an internet connection.
 @interface FUITestObservable: NSObject <FIRDataObservable>
+
+// The initialized observable behaves like a FIRDatabaseQuery and pretends the
+// provided dict is serialized JSON.
+- (instancetype)initWithDictionary:(NSDictionary *)contents NS_DESIGNATED_INITIALIZER;
+
+// Appends an object to the observable's contents and sends a child added event to the
+// observable's observers.
+- (void)addObject:(id)object forKey:(NSString *)key;
+
+// Removes an object from the observable's contents and sends a child removed event
+// to the observable's observers.
+- (void)removeObjectForKey:(NSString *)key;
+
+// Updates the value for the provided key and sends a child changed event to the
+// observable's observers.
+- (void)changeObject:(id)object forKey:(NSString *)key;
+
+// Moves a value for the provided index and sends a child moved event to the observable's
+// observers.
+- (void)moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to;
 
 // Map of handles to observers.
 @property (nonatomic, readonly) NSMutableDictionary<NSNumber *, FUIDataEventHandler *> *observers;
