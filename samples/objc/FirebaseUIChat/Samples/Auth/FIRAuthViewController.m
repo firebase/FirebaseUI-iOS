@@ -31,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellEmail;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellUID;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAuthorization;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellAccessToken;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellIdToken;
 
 @property (nonatomic) FIRAuth *auth;
 @property (nonatomic) FIRAuthUI *authUI;
@@ -41,8 +43,13 @@
 
 @implementation FIRAuthViewController
 
+#pragma mark - UIViewController methods
+
 - (void)viewDidLoad {
   [super viewDidLoad];
+
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.tableView.estimatedRowHeight = 240;
 
   self.auth = [FIRAuth auth];
   self.authUI = [FIRAuthUI defaultAuthUI];
@@ -74,6 +81,14 @@
   [self.auth removeAuthStateDidChangeListener:self.authStateDidChangeHandle];
 }
 
+#pragma mark - UITableViewController methods
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return UITableViewAutomaticDimension;
+}
+
+#pragma mark - UI methods
+
 - (void)updateUI:(FIRAuth * _Nonnull) auth withUser:(FIRUser * _Nullable) user {
   if (user) {
     self.cellSignIn.textLabel.text = @"YES";
@@ -91,6 +106,10 @@
     self.btnAuthorization.title = @"Sign In";
   }
 
+  self.cellAccessToken.textLabel.text = [self getAllAccessTokens];
+  self.cellIdToken.textLabel.text = [self getAllIdTokens];
+
+  [self.tableView reloadData];
 }
 
 - (IBAction)onAuthorization:(id)sender {
@@ -98,11 +117,7 @@
     UIViewController *controller = [self.authUI authViewController];
     [self presentViewController:controller animated:YES completion:nil];
   } else {
-    NSError *error;
-    [self.auth signOut:&error];
-    if (error) {
-      NSLog(@"Sign out error: %@", error);
-    }
+    [self signOut];
   }
 }
 
@@ -110,16 +125,11 @@
 
 - (void)authUI:(FIRAuthUI *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error {
   if (error) {
-    NSError *originalError = error.userInfo[NSUnderlyingErrorKey];
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                   message:originalError.localizedDescription
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* closeButton = [UIAlertAction
-                                  actionWithTitle:@"Close"
-                                  style:UIAlertActionStyleDefault
-                                  handler:nil];
-    [alert addAction:closeButton];
-    [self presentViewController:alert animated:YES completion:nil];
+    NSError *detailedError = error.userInfo[NSUnderlyingErrorKey];
+    if (!detailedError) {
+      detailedError = error;
+    }
+    [self showAlert:detailedError.localizedDescription];
   }
 }
 
@@ -145,5 +155,50 @@
   return facebookAppId;
 }
 
+- (NSString *)getAllAccessTokens {
+  NSMutableString *result = [NSMutableString new];
+  for (id<FIRAuthProviderUI> provider in _authUI.providers) {
+    [result appendFormat:@"%@:  %@\n", provider.shortName, provider.accessToken];
+  }
+
+  return result;
+}
+
+- (NSString *)getAllIdTokens {
+  NSMutableString *result = [NSMutableString new];
+  for (id<FIRAuthProviderUI> provider in _authUI.providers) {
+    [result appendFormat:@"%@:  %@\n", provider.shortName, provider.idToken];
+  }
+
+  return result;
+}
+
+- (void)signOut {
+  // sign out from Firebase
+  NSError *error;
+  [self.auth signOut:&error];
+  if (error) {
+    [self showAlert:error.localizedDescription];
+  }
+
+  // sign out from all providers (wipes provider tokens too)
+  for (id<FIRAuthProviderUI> provider in _authUI.providers) {
+    [provider signOutWithAuth:self.auth];
+  }
+
+}
+
+- (void)showAlert:(NSString *)message {
+  UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                 message:message
+                                                          preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction* closeButton = [UIAlertAction
+                                actionWithTitle:@"Close"
+                                style:UIAlertActionStyleDefault
+                                handler:nil];
+  [alert addAction:closeButton];
+  [self presentViewController:alert animated:YES completion:nil];
+
+}
 
 @end

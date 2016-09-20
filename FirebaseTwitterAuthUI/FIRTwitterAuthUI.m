@@ -82,6 +82,20 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
   return FIRTwitterAuthProviderID;
 }
 
+/** @fn accessToken:
+ @brief Twitter Auth token is matched by FirebaseUI User Access Token
+ */
+- (NSString *)accessToken {
+  return [Twitter sharedInstance].sessionStore.session.authToken;
+}
+
+/** @fn idToken:
+ @brief Twitter Auth Token Secret is matched by FirebaseUI User Id Token
+ */
+- (NSString *)idToken {
+  return [Twitter sharedInstance].sessionStore.session.authTokenSecret;
+}
+
 - (NSString *)shortName {
   return @"Twitter";
 }

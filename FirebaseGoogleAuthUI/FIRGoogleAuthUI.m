@@ -131,6 +131,14 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   return FIRGoogleAuthProviderID;
 }
 
+- (NSString *)accessToken {
+  return [GIDSignIn sharedInstance].currentUser.authentication.accessToken;
+}
+
+- (NSString *)idToken {
+  return [GIDSignIn sharedInstance].currentUser.authentication.idToken;
+}
+
 - (NSString *)shortName {
   return @"Google";
 }

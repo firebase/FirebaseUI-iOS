@@ -115,6 +115,17 @@ static NSString *const kSignInWithFacebook = @"SignInWithFacebook";
   return FIRFacebookAuthProviderID;
 }
 
+- (NSString *)accessToken {
+  return [FBSDKAccessToken currentAccessToken].tokenString;
+}
+
+/** @fn idToken:
+ @brief Facebook doesn't provide User Id Token during sign in flow
+ */
+- (NSString *)idToken {
+  return nil;
+}
+
 - (NSString *)shortName {
   return @"Facebook";
 }
