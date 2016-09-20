@@ -22,11 +22,11 @@ import FirebaseAuthUI
 /// View controller demonstrating using a FirebaseCollectionViewDataSource
 /// to populate a collection view with chat messages. The relevant code
 /// is in the call to `collectionViewDataSource.populateCellWithBlock`.
-class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
+class FIRChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   // All of the error handling in this controller is done with `fatalError`;
   // please don't copy paste it into your production code.
   
-  private static let reuseIdentifier = "ChatCollectionViewCell"
+  private static let reuseIdentifier = "FIRChatCollectionViewCell"
   
   @IBOutlet private var collectionView: UICollectionView!
   @IBOutlet private var textView: UITextView! {
@@ -65,12 +65,12 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
       // doesn't actually set the collection view's data source, so if
       // we don't set it before trying to populate our view our app will crash.
       self.collectionViewDataSource = FirebaseCollectionViewDataSource(query: self.query!,
-        prototypeReuseIdentifier: ChatViewController.reuseIdentifier,
+        prototypeReuseIdentifier: FIRChatViewController.reuseIdentifier,
         view: self.collectionView)
       self.collectionView.dataSource = self.collectionViewDataSource
       
       self.collectionViewDataSource.populateCellWithBlock { (anyCell, data) in
-        guard let cell = anyCell as? ChatCollectionViewCell else {
+        guard let cell = anyCell as? FIRChatCollectionViewCell else {
           fatalError("Unexpected collection view cell class \(anyCell.self)")
         }
         
@@ -194,7 +194,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     let blob = self.collectionViewDataSource.objectAtIndex(UInt(indexPath.row)) as! FIRDataSnapshot
     let text = Chat(snapshot: blob)!.text
     
-    let rect = ChatCollectionViewCell.boundingRectForText(text, maxWidth: width)
+    let rect = FIRChatCollectionViewCell.boundingRectForText(text, maxWidth: width)
     
     let height = CGFloat(ceil(Double(rect.size.height))) + heightPadding
     return CGSize(width: width, height: height)

@@ -17,9 +17,9 @@
 import UIKit
 
 // This enum represents the samples that this app knows about, and
-// is used by the MenuViewController to layout all of the samples
+// is used by the FIRSamplesViewController to layout all of the samples
 // and display basic information about them.
-enum Sample: Int, RawRepresentable {
+enum FIRSample: Int, RawRepresentable {
   
   // When adding new samples, add a new value here and fill
   // out the switch statements below as necessary.
@@ -28,7 +28,7 @@ enum Sample: Int, RawRepresentable {
 
   static var total: Int {
     var count = 0
-    while let _ = Sample(rawValue: count) {
+    while let _ = FIRSample(rawValue: count) {
       count += 1
     }
     return count
@@ -52,9 +52,9 @@ enum Sample: Int, RawRepresentable {
   func controller() -> UIViewController {
     switch self {
     case .Chat:
-      return UIStoryboard.instantiateViewController("Main", identifier: "ChatViewController") as! ChatViewController
+      return UIStoryboard.instantiateViewController("Main", identifier: "FIRChatViewController") as! FIRChatViewController
     case .Auth:
-      return UIStoryboard.instantiateViewController("Main", identifier: "AuthViewController") as! AuthViewController
+      return UIStoryboard.instantiateViewController("Main", identifier: "FIRAuthViewController") as! FIRAuthViewController
     }
   }
 }

@@ -19,9 +19,9 @@ import UIKit
 // This controller exists solely to list the samples we've defined thus far.
 // Because all of that stuff is static and unchanging, if the app ever crashes
 // in here it's probably a typo or some other small accident.
-class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FIRSamplesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
-  private let reuseIdentifier = "MenuViewControllerCell"
+  private let reuseIdentifier = "FIRSamplesViewControllerCell"
   
   @IBOutlet private var tableView: UITableView!
 
@@ -39,7 +39,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     let navController = self.navigationController! // assert nonnull
-    let targetController = Sample(rawValue: indexPath.row)!.controller()
+    let targetController = FIRSample(rawValue: indexPath.row)!.controller()
     
     navController.pushViewController(targetController, animated: true)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -48,9 +48,9 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
   // MARK: - UITableView Data Source
 
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let sampleType = Sample(rawValue: indexPath.row)!
+    let sampleType = FIRSample(rawValue: indexPath.row)!
     
-    let cell = self.tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as! SampleCell
+    let cell = self.tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as! FIRSampleCell
     
     cell.configureWithType(sampleType)
     
@@ -58,6 +58,6 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return Sample.total
+    return FIRSample.total
   }
 }

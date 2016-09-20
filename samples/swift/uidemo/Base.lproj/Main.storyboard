@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Menu View Controller-->
+        <!--Samples View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="MenuViewController" customModule="uidemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="FIRSamplesViewController" customModule="uidemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MenuViewControllerCell" id="mwf-Pe-7Xw" customClass="SampleCell" customModule="uidemo">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FIRSamplesViewControllerCell" id="mwf-Pe-7Xw" customClass="FIRSampleCell" customModule="uidemo">
                                         <rect key="frame" x="0.0" y="1" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mwf-Pe-7Xw" id="su3-0f-Qc4">
@@ -80,7 +80,7 @@
         <!--Chat View Controller-->
         <scene sceneID="JRY-Ou-cBR">
             <objects>
-                <viewController storyboardIdentifier="ChatViewController" id="DlP-uj-LdB" customClass="ChatViewController" customModule="uidemo" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FIRChatViewController" id="DlP-uj-LdB" customClass="FIRChatViewController" customModule="uidemo" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hrd-jq-l3U"/>
                         <viewControllerLayoutGuide type="bottom" id="CT4-Lk-WT2"/>
@@ -98,7 +98,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChatCollectionViewCell" id="Wc2-OF-raU" customClass="ChatCollectionViewCell" customModule="uidemo">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FIRChatCollectionViewCell" id="Wc2-OF-raU" customClass="FIRChatCollectionViewCell" customModule="uidemo">
                                         <rect key="frame" x="0.0" y="0.0" width="202" height="130"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -193,7 +193,7 @@
         <!--Auth View Controller-->
         <scene sceneID="xeK-e9-b89">
             <objects>
-                <tableViewController storyboardIdentifier="AuthViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wby-P6-pid" customClass="AuthViewController" customModule="uidemo" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FIRAuthViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wby-P6-pid" customClass="FIRAuthViewController" customModule="uidemo" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="inr-RJ-pbo">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

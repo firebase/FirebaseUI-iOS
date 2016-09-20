@@ -34,7 +34,7 @@ let kGoogleAppClientID = (FIRApp.defaultApp()?.options.clientID)!
 let kFacebookAppID     = "your fb app ID here"
 
 /// A view controller displaying a basic sign-in flow using FIRAuthUI.
-class AuthViewController: UITableViewController {
+class FIRAuthViewController: UITableViewController {
   // Before running this sample, make sure you've correctly configured
   // the appropriate authentication methods in Firebase console. For more
   // info, see the Auth README at ../../FirebaseAuthUI/README.md

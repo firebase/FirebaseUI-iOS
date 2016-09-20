@@ -16,7 +16,7 @@
 
 import UIKit
 
-class SampleCell: UITableViewCell {
+class FIRSampleCell: UITableViewCell {
   
   @IBOutlet private var titleLabel: UILabel!
   @IBOutlet private var subtitleLabel: UILabel!
@@ -29,13 +29,13 @@ class SampleCell: UITableViewCell {
     super.init(style: .Default, reuseIdentifier: reuseIdentifier)
   }
   
-  convenience init(type: Sample, reuseIdentifier: String) {
+  convenience init(type: FIRSample, reuseIdentifier: String) {
     self.init(reuseIdentifier: reuseIdentifier)
     
     self.configureWithType(type)
   }
   
-  func configureWithType(type: Sample) {
+  func configureWithType(type: FIRSample) {
     let labels = type.labels
     self.titleLabel.text = labels.title
     self.subtitleLabel.text = labels.subtitle

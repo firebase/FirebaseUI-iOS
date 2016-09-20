@@ -17,16 +17,16 @@
 import UIKit
 import Firebase
 
-/// Displays an individual chat message inside of a ChatViewController.
-class ChatCollectionViewCell: UICollectionViewCell {
+/// Displays an individual chat message inside of a FIRChatViewController.
+class FIRChatCollectionViewCell: UICollectionViewCell {
   @IBOutlet private(set) var textLabel: UILabel! {
     didSet {
-      textLabel.font = ChatCollectionViewCell.messageFont
+      textLabel.font = FIRChatCollectionViewCell.messageFont
     }
   }
   
   static func boundingRectForText(text: String, maxWidth: CGFloat) -> CGRect {
-    let attributes = [NSFontAttributeName: ChatCollectionViewCell.messageFont]
+    let attributes = [NSFontAttributeName: FIRChatCollectionViewCell.messageFont]
     let rect = text.boundingRectWithSize(CGSize(width: maxWidth, height: CGFloat.max),
                                          options: [.UsesLineFragmentOrigin],
                                          attributes: attributes,
@@ -76,19 +76,19 @@ class ChatCollectionViewCell: UICollectionViewCell {
     self.textLabel.text = chat.text
     
     let leftRightPadding: CGFloat = 24
-    let rect = ChatCollectionViewCell.boundingRectForText(self.textLabel.text!,
+    let rect = FIRChatCollectionViewCell.boundingRectForText(self.textLabel.text!,
                                                           maxWidth: maxWidth)
     
     let constant = max(maxWidth - rect.size.width - leftRightPadding, CGFloat.min)
     if chat.uid == user?.uid ?? "" {
-      let colors = ChatCollectionViewCell.selfColors
+      let colors = FIRChatCollectionViewCell.selfColors
       self.containerView.backgroundColor = colors.background
       self.textLabel.textColor = colors.text
       self.trailingConstraint.active = false
       self.leadingConstraint.constant = constant
       self.leadingConstraint.active = true
     } else {
-      let colors = ChatCollectionViewCell.othersColors
+      let colors = FIRChatCollectionViewCell.othersColors
       self.containerView.backgroundColor = colors.background
       self.textLabel.textColor = colors.text
       self.leadingConstraint.active = false
