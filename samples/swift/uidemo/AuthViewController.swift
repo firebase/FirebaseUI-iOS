@@ -34,7 +34,7 @@ let kGoogleAppClientID = (FIRApp.defaultApp()?.options.clientID)!
 let kFacebookAppID     = "your fb app ID here"
 
 /// A view controller displaying a basic sign-in flow using FIRAuthUI.
-class AuthViewController: UIViewController {
+class AuthViewController: UITableViewController {
   // Before running this sample, make sure you've correctly configured
   // the appropriate authentication methods in Firebase console. For more
   // info, see the Auth README at ../../FirebaseAuthUI/README.md
@@ -45,18 +45,21 @@ class AuthViewController: UIViewController {
   private(set) var auth: FIRAuth? = FIRAuth.auth()
   private(set) var authUI: FIRAuthUI? = FIRAuthUI.defaultAuthUI()
 
-  @IBOutlet private var signOutButton: UIButton!
-  @IBOutlet private var startButton: UIButton!
+  @IBOutlet weak var cellSignedIn: UITableViewCell!
+  @IBOutlet weak var cellName: UITableViewCell!
+  @IBOutlet weak var cellEmail: UITableViewCell!
+  @IBOutlet weak var cellUid: UITableViewCell!
+  @IBOutlet weak var cellAccessToken: UITableViewCell!
+  @IBOutlet weak var cellIdToken: UITableViewCell!
 
-  @IBOutlet private var signedInLabel: UILabel!
-  @IBOutlet private var nameLabel: UILabel!
-  @IBOutlet private var emailLabel: UILabel!
-  @IBOutlet private var uidLabel: UILabel!
+  @IBOutlet weak var btnAuthorization: UIBarButtonItem!
 
-  @IBOutlet var topConstraint: NSLayoutConstraint!
 
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
+
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 240;
 
     // If you haven't set up your authentications correctly these buttons
     // will still appear in the UI, but they'll crash the app when tapped.
@@ -80,45 +83,70 @@ class AuthViewController: UIViewController {
     }
   }
 
-  @IBAction func startPressed(sender: AnyObject) {
-    let controller = self.authUI!.authViewController()
-    self.presentViewController(controller, animated: true, completion: nil)
+  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    return UITableViewAutomaticDimension
   }
 
-  @IBAction func signOutPressed(sender: AnyObject) {
-    do {
-     try self.auth?.signOut()
-    } catch let error {
-      // Again, fatalError is not a graceful way to handle errors.
-      // This error is most likely a network error, so retrying here
-      // makes sense.
-      fatalError("Could not sign out: \(error)")
+  @IBAction func onAuthorize(sender: AnyObject) {
+    if (self.auth?.currentUser) != nil {
+      do {
+        try self.auth?.signOut()
+      } catch let error {
+        // Again, fatalError is not a graceful way to handle errors.
+        // This error is most likely a network error, so retrying here
+        // makes sense.
+        fatalError("Could not sign out: \(error)")
+      }
+
+      for provider in self.authUI!.providers {
+        provider.signOutWithAuth(self.auth!)
+      }
+
+    } else {
+      let controller = self.authUI!.authViewController()
+      self.presentViewController(controller, animated: true, completion: nil)
     }
   }
 
   // Boilerplate
   func updateUI(auth auth: FIRAuth, user: FIRUser?) {
-    if let user = user {
-      self.signOutButton.enabled = true
-      self.startButton.enabled = false
+    if let user = self.auth?.currentUser {
+      self.cellSignedIn.textLabel?.text = "Signed in"
+      self.cellName.textLabel?.text = user.displayName ?? "(null)"
+      self.cellEmail.textLabel?.text = user.email ?? "(null)"
+      self.cellUid.textLabel?.text = user.uid
 
-      self.signedInLabel.text = "Signed in"
-      self.nameLabel.text = "Name: " + (user.displayName ?? "(null)")
-      self.emailLabel.text = "Email: " + (user.email ?? "(null)")
-      self.uidLabel.text = "UID: " + user.uid
+      self.btnAuthorization.title = "Sign Out";
     } else {
-      self.signOutButton.enabled = false
-      self.startButton.enabled = true
+      self.cellSignedIn.textLabel?.text = "Not signed in"
+      self.cellName.textLabel?.text = "null"
+      self.cellEmail.textLabel?.text = "null"
+      self.cellUid.textLabel?.text = "null"
 
-      self.signedInLabel.text = "Not signed in"
-      self.nameLabel.text = "Name"
-      self.emailLabel.text = "Email"
-      self.uidLabel.text = "UID"
+      self.btnAuthorization.title = "Sign In";
     }
+
+    self.cellAccessToken.textLabel?.text = getAllAccessTokens()
+    self.cellIdToken.textLabel?.text = getAllIdTokens()
+
+    self.tableView.reloadData()
   }
 
-  override func viewWillLayoutSubviews() {
-    self.topConstraint.constant = self.topLayoutGuide.length
+  func getAllAccessTokens() -> String {
+    var result = ""
+    for provider in self.authUI!.providers {
+      result += (provider.shortName + ": " + provider.accessToken + "\n")
+    }
+
+    return result
   }
 
+  func getAllIdTokens() -> String {
+    var result = ""
+    for provider in self.authUI!.providers {
+      result += (provider.shortName + ": " + (provider.idToken ?? "null")  + "\n")
+    }
+
+    return result
+  }
 }
