@@ -29,10 +29,10 @@ let staticLibs = [
 let DerivedDataDir = "artifacts/"
 let BuiltProductsDir = "FirebaseUIFrameworks/"
 
-// TODO: DRY out these NSTask functions
+// TODO: DRY out these Task functions
 
-func mkdir(dirname: String) -> Void {
-  let task = NSTask()
+func mkdir(_ dirname: String) -> Void {
+  let task = Process()
   task.launchPath = "/bin/mkdir"
   task.arguments = ["-p", dirname]
   task.launch()
@@ -40,7 +40,7 @@ func mkdir(dirname: String) -> Void {
 }
 
 func mv(from source: String, to destination: String) -> Void {
-  let task = NSTask()
+  let task = Process()
   task.launchPath = "/bin/mv"
   task.arguments = ["-n", "-v", source, destination]
   task.launch()
@@ -49,7 +49,7 @@ func mv(from source: String, to destination: String) -> Void {
 }
 
 func cp(from source: String, to destination: String) -> Void {
-  let task = NSTask()
+  let task = Process()
   task.launchPath = "/bin/cp"
   task.arguments = ["-R", "-n", source, destination]
   task.launch()
@@ -64,8 +64,8 @@ mkdir(BuiltProductsDir)
 
 // TODO: use xcrun to invoke dev tool commands
 
-func buildTask(args args: [String] = []) -> NSTask {
-  let task = NSTask()
+func buildTask(args: [String] = []) -> Process {
+  let task = Process()
   task.launchPath = "/usr/bin/xcodebuild"
   task.arguments = args
   return task
@@ -168,7 +168,7 @@ struct Lipo {
 
   func launch() {
     print("lipo \(output)")
-    let task = NSTask()
+    let task = Process()
     task.launchPath = "/usr/bin/lipo"
     task.arguments = ["-create"] + self.inputs
       + ["-output"] + [output]
@@ -207,11 +207,11 @@ cp(from: "LICENSE", to: BuiltProductsDir)
 // clean up build artifacts afterward
 
 /// Moves files to trash
-func rm(path: String, isDirectory: Bool) -> Void {
-  let url = NSURL(fileURLWithPath: path, isDirectory: isDirectory)
-  let fileManager = NSFileManager()
+func rm(_ path: String, isDirectory: Bool) -> Void {
+  let url = URL(fileURLWithPath: path, isDirectory: isDirectory)
+  let fileManager = FileManager()
   do {
-    try fileManager.trashItemAtURL(url, resultingItemURL: nil)
+    try fileManager.trashItem(at: url, resultingItemURL: nil)
   } catch (let error) {
     print(fileManager.currentDirectoryPath)
     print(error)
@@ -219,8 +219,8 @@ func rm(path: String, isDirectory: Bool) -> Void {
   }
 }
 
-func zip(input: String, output: String) -> Void {
-  let task = NSTask()
+func zip(_ input: String, output: String) -> Void {
+  let task = Process()
   task.launchPath = "/usr/bin/zip"
   task.arguments = ["-r", "-9", output, input]
   task.launch()
