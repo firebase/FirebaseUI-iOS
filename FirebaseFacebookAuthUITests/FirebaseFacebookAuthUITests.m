@@ -15,7 +15,7 @@
 //
 
 @import XCTest;
-@import FirebaseFacebookAuthUI;
+#import <FirebaseFacebookAuthUI/FIRFacebookAuthUI.h>
 
 @interface FirebaseFacebookAuthUITests : XCTestCase
 @property (nonatomic, strong) FIRFacebookAuthUI *provider;
