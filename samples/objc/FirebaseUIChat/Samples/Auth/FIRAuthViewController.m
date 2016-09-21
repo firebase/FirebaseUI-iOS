@@ -59,12 +59,9 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
-  NSString *googleId = [[FIRApp defaultApp] options].clientID;
-  NSString *facebookAppId = [self readFacebookAppId];
-
   NSArray<id<FIRAuthProviderUI>> *providers = [NSArray arrayWithObjects:
-                                               [[FIRGoogleAuthUI alloc] initWithClientID:googleId],
-                                               [[FIRFacebookAuthUI alloc] initWithAppID:facebookAppId],
+                                               [[FIRGoogleAuthUI alloc] init],
+                                               [[FIRFacebookAuthUI alloc] init],
                                                [[FIRTwitterAuthUI alloc] init],
                                                nil];
   _authUI.providers = providers;
@@ -134,26 +131,6 @@
 }
 
 #pragma mark - Helper Methods
-
-// Helper method to retrieve FB app ID from info.plist
-- (NSString *)readFacebookAppId {
-  NSString *facebookAppId = nil;
-  NSArray *urlTypes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
-  for (NSDictionary *type in urlTypes) {
-    if ([(NSString *)type[@"CFBundleURLName"] isEqualToString:@"FACEBOOK_APP_ID"]) {
-      NSArray *urlSchemes = type[@"CFBundleURLSchemes"];
-      if (urlSchemes.count == 1) {
-        facebookAppId = urlSchemes.firstObject;
-        if (facebookAppId.length > 2) {
-          facebookAppId = [facebookAppId substringFromIndex:2];
-        }
-      }
-      break;
-    }
-  }
-
-  return facebookAppId;
-}
 
 - (NSString *)getAllAccessTokens {
   NSMutableString *result = [NSMutableString new];

@@ -23,11 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface FIRGoogleAuthUI : NSObject <FIRAuthProviderUI>
 
-/** @property clientID
-    @brief The Google Sign In client ID.
- */
-@property(nonatomic, copy, readonly) NSString *clientID;
-
 /** @property scopes
     @brief The scopes to use with Google Sign In.
     @remarks Defaults to using email and profile scopes. For a list of all scopes
@@ -36,24 +31,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy, readonly) NSArray<NSString *> *scopes;
 
 /** @fn init
-    @brief Please use initWithClientId:
+    @brief Convenience initializer. Calls designated init with default
+     scopes of "email" and "profile".
  */
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)init;
 
-/** @fn initWithClientID:
-    @brief Convenience initializer. Calls designated init with default 
-      scopes of "email" and "profile".
-    @param clientId The Google Sign In client ID.
- */
-- (instancetype)initWithClientID:(NSString *)clientID;
-
-/** @fn initWithClientID:scopes:
+/** @fn initWithScopes:
  @brief Designated initializer.
- @param clientId The Google Sign In client ID.
  @param scopes   The user account scopes required by the app. A list of possible scopes can be
    found at https://developers.google.com/identity/protocols/googlescopes
  */
-- (instancetype)initWithClientID:(NSString *)clientID scopes:(NSArray <NSString *> *)scopes NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithScopes:(NSArray <NSString *> *)scopes NS_DESIGNATED_INITIALIZER;
 
 @end
 

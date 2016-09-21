@@ -37,6 +37,16 @@ static NSString *const kTableName = @"FirebaseFacebookAuthUI";
  */
 static NSString *const kSignInWithFacebook = @"SignInWithFacebook";
 
+/** @var kFacebookAppId
+ @brief The string key used to read Facebook App Id from Info.plist.
+ */
+static NSString *const kFacebookAppId = @"FacebookAppID";
+
+/** @var kFacebookDisplayName
+ @brief The string key used to read Facebook App Name from Info.plist.
+ */
+static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
+
 @implementation FIRFacebookAuthUI {
   /** @var _loginManager
       @brief The Facebook login manager.
@@ -49,24 +59,17 @@ static NSString *const kSignInWithFacebook = @"SignInWithFacebook";
   FIRAuthProviderSignInCompletionBlock _pendingSignInCallback;
 }
 
-- (instancetype)init {
-  @throw [NSException exceptionWithName:@"Attempt to call unavailable initializer."
-                                 reason:@"Please call the designated initializer."
-                               userInfo:nil];
-}
-
-- (instancetype)initWithAppID:(NSString *)appID permissions:(NSArray *)permissions {
+- (instancetype)initWithPermissions:(NSArray *)permissions {
   self = [super init];
   if (self != nil) {
     _scopes = permissions;
-    [FBSDKSettings setAppID:appID];
-    _loginManager = [[FBSDKLoginManager alloc] init];
+    [self configureProvider];
   }
   return self;
 }
 
-- (instancetype)initWithAppID:(NSString *)appID {
-  return [self initWithAppID:appID permissions:@[ @"email" ]];
+- (instancetype)init {
+  return [self initWithPermissions:@[ @"email" ]];
 }
 
 /** @fn frameworkBundle
@@ -212,6 +215,24 @@ static NSString *const kSignInWithFacebook = @"SignInWithFacebook";
   if (callback) {
     callback(credential, error);
   }
+}
+
+/** @fn callbackWithCredential:error:
+ @brief Validates that Facebook SDK data was filled in Info.plist and creates Facebook login manager 
+ */
+- (void)configureProvider {
+  NSString *facebookAppId = [[NSBundle mainBundle] objectForInfoDictionaryKey:kFacebookAppId];
+  NSString *facebookDisplayName =
+  [[NSBundle mainBundle] objectForInfoDictionaryKey:kFacebookDisplayName];
+
+  if (!(facebookAppId && facebookDisplayName)) {
+    [NSException raise:NSInternalInconsistencyException
+                format:@"Please set FacebookAppID, FacebookDisplayName, and\nURL types > Url "
+     @"Schemes in `Supporting Files/Info.plist` according to "
+     @"https://developers.facebook.com/docs/ios/getting-started"];
+  }
+
+  _loginManager = [[FBSDKLoginManager alloc] init];
 }
 
 @end
