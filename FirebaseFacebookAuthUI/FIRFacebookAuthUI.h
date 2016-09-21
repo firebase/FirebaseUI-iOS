@@ -23,11 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface FIRFacebookAuthUI : NSObject <FIRAuthProviderUI>
 
-/** @property appId
-    @brief The Facebook App ID.
- */
-@property(nonatomic, readonly, copy) NSString *appID;
-
 /** @property scopes
     @brief The scopes to use with Facebook Login.
     @remarks Defaults to using "email" scopes.
