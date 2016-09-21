@@ -23,16 +23,6 @@ import FirebaseTwitterAuthUI
 
 let kFirebaseTermsOfService = NSURL(string: "https://firebase.google.com/terms/")!
 
-// Your Google app's client ID, which can be found in the GoogleService-Info.plist file
-// and is stored in the `clientID` property of your FIRApp options.
-// Firebase Google auth is built on top of Google sign-in, so you'll have to add a URL
-// scheme to your project as outlined at the bottom of this reference:
-// https://developers.google.com/identity/sign-in/ios/start-integrating
-let kGoogleAppClientID = (FIRApp.defaultApp()?.options.clientID)!
-
-// Your Facebook App ID, which can be found on developers.facebook.com.
-let kFacebookAppID     = "your fb app ID here"
-
 /// A view controller displaying a basic sign-in flow using FIRAuthUI.
 class FIRAuthViewController: UITableViewController {
   // Before running this sample, make sure you've correctly configured
@@ -64,8 +54,8 @@ class FIRAuthViewController: UITableViewController {
     // If you haven't set up your authentications correctly these buttons
     // will still appear in the UI, but they'll crash the app when tapped.
     let providers: [FIRAuthProviderUI] = [
-      FIRGoogleAuthUI(clientID: kGoogleAppClientID),
-      FIRFacebookAuthUI(appID: kFacebookAppID),
+      FIRGoogleAuthUI(),
+      FIRFacebookAuthUI(),
       FIRTwitterAuthUI(),
     ]
     self.authUI?.providers = providers
