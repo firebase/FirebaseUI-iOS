@@ -33,7 +33,7 @@
   return [self fui_setImageWithStorageReference:storageRef placeholderImage:placeholder completion:nil];
 }
 
-- (id<FUIDownloadTask>)fui_setImageWithStorageReference:(FIRStorageReference *)storageRef
+- (id<FUIDownloadTask>)fui_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
                                        placeholderImage:(UIImage *)placeholder
                                              completion:(void (^)(UIImage *_Nullable,
                                                                   NSError *_Nullable,
@@ -45,7 +45,7 @@
                                      completion:completion];
 }
 
-- (id<FUIDownloadTask>)fui_setImageWithStorageReference:(FIRStorageReference *)storageRef
+- (id<FUIDownloadTask>)fui_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
                                            maxImageSize:(UInt64)size
                                        placeholderImage:(nullable UIImage *)placeholder
                                              completion:(void (^)(UIImage *,
@@ -59,7 +59,7 @@
                                      completion:completion];
 }
 
-- (id<FUIDownloadTask>)fui_setImageWithStorageReference:(FIRStorageReference *)storageRef
+- (id<FUIDownloadTask>)fui_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
                                            maxImageSize:(UInt64)size
                                        placeholderImage:(nullable UIImage *)placeholder
                                                   cache:(nullable id<FUIImageCache>)cache
