@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -125,7 +126,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="83E-4Z-ptP">
-                            <rect key="frame" x="0.0" y="587" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="631" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <items>
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="o3y-o4-Gpu"/>
@@ -138,7 +139,7 @@
                             </items>
                         </toolbar>
                         <sections>
-                            <tableViewSection headerTitle="Signed In" id="PRj-zg-0nr">
+                            <tableViewSection headerTitle="Settings" id="PRj-zg-0nr">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="l96-xc-PHH" style="IBUITableViewCellStyleDefault" id="ORf-bf-Sq2">
                                         <rect key="frame" x="0.0" y="50" width="600" height="44"/>
@@ -157,12 +158,41 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="1sh-pl-VVu">
+                                        <rect key="frame" x="0.0" y="94" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1sh-pl-VVu" id="cPB-dF-hTp">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Custom AuthPickerViewController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="YxK-c8-9q7">
+                                                    <rect key="frame" x="19" y="12" width="563" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JZd-6c-Soe">
+                                                    <rect key="frame" x="533" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onAuthUIDelegateChanged:" destination="CNE-cz-Qwp" eventType="valueChanged" id="KtF-5y-VCY"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="JZd-6c-Soe" firstAttribute="centerY" secondItem="cPB-dF-hTp" secondAttribute="centerY" id="1Bs-jz-kxY"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="JZd-6c-Soe" secondAttribute="trailing" constant="10" id="StU-03-OWl"/>
+                                                <constraint firstItem="YxK-c8-9q7" firstAttribute="leading" secondItem="cPB-dF-hTp" secondAttribute="leadingMargin" constant="11" id="USn-bv-nmj"/>
+                                                <constraint firstItem="YxK-c8-9q7" firstAttribute="trailing" secondItem="JZd-6c-Soe" secondAttribute="trailing" id="cPK-Rb-Vg8"/>
+                                                <constraint firstItem="YxK-c8-9q7" firstAttribute="centerY" secondItem="cPB-dF-hTp" secondAttribute="centerY" id="mlx-Tf-Sum"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Name" id="0YA-IY-hOV">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="kCl-ip-jc2">
-                                        <rect key="frame" x="0.0" y="145" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="189" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kCl-ip-jc2" id="dm4-D7-IWN">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -174,7 +204,7 @@
                             <tableViewSection headerTitle="Email" id="Y94-bQ-cWH">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="MCw-zF-UTn">
-                                        <rect key="frame" x="0.0" y="240" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="284" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MCw-zF-UTn" id="ea1-oT-1Py">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -186,7 +216,7 @@
                             <tableViewSection headerTitle="UID" id="Yxe-jV-t3o">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="EWm-GE-IZV">
-                                        <rect key="frame" x="0.0" y="335" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="379" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EWm-GE-IZV" id="ISG-G9-H8V">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -198,7 +228,7 @@
                             <tableViewSection headerTitle="Provider Access Token" id="E31-4c-QDa">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="k9f-GH-UBQ" style="IBUITableViewCellStyleDefault" id="mdj-SS-dqJ">
-                                        <rect key="frame" x="0.0" y="430" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="474" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mdj-SS-dqJ" id="oCT-Ra-9l7">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -219,7 +249,7 @@
                             <tableViewSection headerTitle="Provider ID Token" id="GaU-wa-aFK">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="M61-v5-jhZ" style="IBUITableViewCellStyleDefault" id="b45-X5-eC9">
-                                        <rect key="frame" x="0.0" y="525" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="569" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b45-X5-eC9" id="ofC-qT-5cz">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -243,6 +273,7 @@
                             <outlet property="delegate" destination="CNE-cz-Qwp" id="KFk-25-IpR"/>
                         </connections>
                     </tableView>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnAuthorization" destination="bgV-bu-PcA" id="bBY-yq-fyj"/>
                         <outlet property="cellAccessToken" destination="mdj-SS-dqJ" id="8WY-EZ-Gy6"/>

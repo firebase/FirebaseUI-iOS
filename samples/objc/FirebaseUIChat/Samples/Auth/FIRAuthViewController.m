@@ -16,14 +16,17 @@
 //  limitations under the License.
 //
 
-#import "FIRAuthViewController.h"
-
 @import Firebase;
+
+#import "FIRAuthViewController.h"
+#import "FIRCustomAuthUIDelegate.h"
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <FirebaseFacebookAuthUI/FIRFacebookAuthUI.h>
 #import <FirebaseGoogleAuthUI/FIRGoogleAuthUI.h>
 #import <FirebaseTwitterAuthUI/FIRTwitterAuthUI.h>
+
+#import "FIRCustomAuthPickerViewController.h"
 
 @interface FIRAuthViewController () <FIRAuthUIDelegate>
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellSignIn;
@@ -36,6 +39,8 @@
 
 @property (nonatomic) FIRAuth *auth;
 @property (nonatomic) FIRAuthUI *authUI;
+// retain customAuthUIDelegate so it can be used when needed
+@property (nonatomic) id<FIRAuthUIDelegate> customAuthUIDelegate;
 
 @property (nonatomic) FIRAuthStateDidChangeListenerHandle authStateDidChangeHandle;
 
@@ -51,9 +56,13 @@
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.tableView.estimatedRowHeight = 240;
 
+  self.customAuthUIDelegate = [[FIRCustomAuthUIDelegate alloc] init];
+
   self.auth = [FIRAuth auth];
   self.authUI = [FIRAuthUI defaultAuthUI];
-  self.authUI.delegate = self;
+  //set AuthUI Delegate
+  [self onAuthUIDelegateChanged:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -88,14 +97,14 @@
 
 - (void)updateUI:(FIRAuth * _Nonnull) auth withUser:(FIRUser * _Nullable) user {
   if (user) {
-    self.cellSignIn.textLabel.text = @"YES";
+    self.cellSignIn.textLabel.text = @"Signed-in";
     self.cellName.textLabel.text = user.displayName;
     self.cellEmail.textLabel.text = user.email;
     self.cellUID.textLabel.text = user.uid;
 
     self.btnAuthorization.title = @"Sign Out";
   } else {
-    self.cellSignIn.textLabel.text = @"NO";
+    self.cellSignIn.textLabel.text = @"Not signed-in";
     self.cellName.textLabel.text = @"";
     self.cellEmail.textLabel.text = @"";
     self.cellUID.textLabel.text = @"";
@@ -107,6 +116,14 @@
   self.cellIdToken.textLabel.text = [self getAllIdTokens];
 
   [self.tableView reloadData];
+}
+- (IBAction)onAuthUIDelegateChanged:(UISwitch *)sender {
+  BOOL isCustomAuthDelegateSelected = sender ? sender.isOn : NO;
+  if (isCustomAuthDelegateSelected) {
+    self.authUI.delegate = self.customAuthUIDelegate;
+  } else {
+    self.authUI.delegate = self;
+  }
 }
 
 - (IBAction)onAuthorization:(id)sender {
@@ -120,15 +137,21 @@
 
 #pragma mark - FIRAuthUIDelegate methods
 
+// this method is called only when FIRAuthViewController is delgate of AuthUI
 - (void)authUI:(FIRAuthUI *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error {
   if (error) {
-    NSError *detailedError = error.userInfo[NSUnderlyingErrorKey];
-    if (!detailedError) {
-      detailedError = error;
+    if (error.code == FIRAuthUIErrorCodeUserCancelledSignIn) {
+      [self showAlert:@"User cancelled sign-in"];
+    } else {
+      NSError *detailedError = error.userInfo[NSUnderlyingErrorKey];
+      if (!detailedError) {
+        detailedError = error;
+      }
+      [self showAlert:detailedError.localizedDescription];
     }
-    [self showAlert:detailedError.localizedDescription];
   }
 }
+
 
 #pragma mark - Helper Methods
 
