@@ -991,14 +991,14 @@ fi
 				<string>8DCC50011D678CF500B0D3C4</string>
 				<string>C32516911D88A54C00B0B3F9</string>
 				<string>C325169A1D88A54C00B0B3F9</string>
+				<string>8D90842D1D9316AB00333CC8</string>
+				<string>8D9084351D9316AB00333CC8</string>
 				<string>8DBA0F4E1D872E1C00D113D3</string>
 				<string>8DBA0F5B1D872E2400D113D3</string>
 				<string>8DBA0F681D872E2E00D113D3</string>
 				<string>8DBA0F751D872E3500D113D3</string>
 				<string>C32516AC1D88A5A700B0B3F9</string>
 				<string>8D90841F1D93168800333CC8</string>
-				<string>8D90842D1D9316AB00333CC8</string>
-				<string>8D9084351D9316AB00333CC8</string>
 			</array>
 		</dict>
 		<key>8D2A84A01D678B2B0058DF04</key>
@@ -1821,7 +1821,7 @@ fi
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>8D9084371D9316AB00333CC8</string>
+				<string>8DDA1D3F1D944ED100B98969</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
@@ -1882,13 +1882,6 @@ fi
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>8D9084371D9316AB00333CC8</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8D90842E1D9316AB00333CC8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>8D9084381D9316AB00333CC8</key>
 		<dict>
 			<key>containerPortal</key>
@@ -1932,7 +1925,7 @@ fi
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>FirebaseStorageUITests.m</string>
+			<string>FUIImageViewCategoryTests.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2086,12 +2079,28 @@ fi
 				<string>YES</string>
 				<key>CLANG_WARN_SUSPICIOUS_MOVES</key>
 				<string>YES</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>"$PODS_CONFIGURATION_BUILD_DIR/SDWebImage"</string>
+					<string>"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks"</string>
+					<string>"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks"</string>
+					<string>"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks"</string>
+					<string>"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks"</string>
+					<string>"${PODS_ROOT}/GoogleUtilities/Frameworks"</string>
+					<string>"${PODS_ROOT}/FirebaseStorage/Frameworks/frameworks"</string>
+					<string>"${PODS_ROOT}/GoogleNetworkingUtilities/Frameworks"</string>
+				</array>
 				<key>INFOPLIST_FILE</key>
 				<string>FirebaseStorageUITests/Info.plist</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
 				<string>10.0</string>
 				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
+				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(BUILT_PRODUCTS_DIR)/SDWebImage</string>
+				<key>LIBRARY_SEARCH_PATHS</key>
+				<string></string>
+				<key>OTHER_LDFLAGS</key>
+				<string>-ObjC</string>
 				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
 				<string>com.firebaseui.FirebaseStorageUITests</string>
 				<key>PRODUCT_NAME</key>
@@ -2117,7 +2126,11 @@ fi
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
 				<string>10.0</string>
 				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
+				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(BUILT_PRODUCTS_DIR)</string>
+				<key>LIBRARY_SEARCH_PATHS</key>
+				<string></string>
+				<key>OTHER_LDFLAGS</key>
+				<string>-ObjC</string>
 				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
 				<string>com.firebaseui.FirebaseStorageUITests</string>
 				<key>PRODUCT_NAME</key>
@@ -6521,6 +6534,13 @@ fi
 			<string>8DCC4FF81D678CF500B0D3C4</string>
 			<key>targetProxy</key>
 			<string>8DCC50161D678D1200B0D3C4</string>
+		</dict>
+		<key>8DDA1D3F1D944ED100B98969</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8D90842E1D9316AB00333CC8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>935EEE7BAB2019F4C23E4780</key>
 		<dict>
