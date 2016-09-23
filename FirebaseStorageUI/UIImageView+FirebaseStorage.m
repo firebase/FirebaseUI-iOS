@@ -19,7 +19,7 @@
 #import "UIImageView+FirebaseStorage.h"
 
 @interface UIImageView (FirebaseStorage_Private)
-@property (nonatomic, readwrite, nullable) id<FUIDownloadTask> currentDownload;
+@property (nonatomic, readwrite, nullable) id<FUIDownloadTask> fui_currentDownload;
 @end
 
 @implementation UIImageView (FirebaseStorage)
@@ -71,9 +71,9 @@
   self.image = placeholder;
 
   // If there's already a download on this UIImageView, cancel it
-  if (self.currentDownload != nil) {
-    [self.currentDownload cancel];
-    self.currentDownload = nil;
+  if (self.fui_currentDownload != nil) {
+    [self.fui_currentDownload cancel];
+    self.fui_currentDownload = nil;
   }
 
   // Query cache for image before trying to download
@@ -99,13 +99,13 @@
   }
 
   // If nothing was found in cache, download the image from Firebase Storage
-  FIRStorageDownloadTask *download = [storageRef dataWithMaxSize:size
-                                                      completion:^(NSData * _Nullable data,
-                                                                   NSError * _Nullable error) {
-    self.currentDownload = nil;
+  id<FUIDownloadTask> download = [storageRef dataWithMaxSize:size
+                                                  completion:^(NSData * _Nullable data,
+                                                               NSError * _Nullable error) {
+    self.fui_currentDownload = nil;
     if (data != nil) {
       dispatch_async(dispatch_get_main_queue(), ^{
-        UIImage *image = [UIImage imageWithData:data];
+        UIImage *image = [UIImage sd_imageWithData:data];
         self.image = image;
 
         // Cache downloaded image
@@ -121,21 +121,21 @@
       }
     }
   }];
-  self.currentDownload = download;
+  self.fui_currentDownload = download;
   return download;
 }
 
 #pragma mark - Accessors
 
-- (void)setCurrentDownload:(id<FUIDownloadTask>)currentDownload {
+- (void)setFui_currentDownload:(id<FUIDownloadTask>)currentDownload {
   objc_setAssociatedObject(self,
-                           @selector(currentDownload),
+                           @selector(fui_currentDownload),
                            currentDownload,
                            OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (id<FUIDownloadTask>)currentDownload {
-  return objc_getAssociatedObject(self, @selector(currentDownload));
+- (id<FUIDownloadTask>)fui_currentDownload {
+  return objc_getAssociatedObject(self, @selector(fui_currentDownload));
 }
 
 @end

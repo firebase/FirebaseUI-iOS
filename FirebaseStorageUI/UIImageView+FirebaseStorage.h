@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The current download task, if the image view is downloading an image.
  */
-@property (nonatomic, readonly, nullable) id<FUIDownloadTask> currentDownload;
+@property (nonatomic, readonly, nullable) id<FUIDownloadTask> fui_currentDownload;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
