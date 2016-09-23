@@ -18,13 +18,14 @@
 #import "FIRFacebookAuthUITest.h"
 
 @interface FirebaseFacebookAuthUITests : XCTestCase
+@property (nonatomic, readwrite) FIRFacebookAuthUI *provider;
 @end
 
 @implementation FirebaseFacebookAuthUITests
 
 - (void)setUp {
   [super setUp];
-  self.provider = [[FIRFacebookAuthUITest alloc] init];
+  self.provider = [[FIRFacebookAuthUI alloc] init];
 }
 
 - (void)testItExists {
