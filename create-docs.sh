@@ -22,14 +22,16 @@ appledoc --project-name "FirebaseUI for iOS" \
 --project-company "Firebase" \
 --company-id com.firebase \
 --no-create-docset \
---create-html \
+--create-html  \
+--verbose 3\
 --keep-intermediate \
 --output ./docs/output/ \
 --templates=./docs/template/ \
---output ${DIR}/site/ \
 --search-undocumented-doc \
 --exit-threshold 2 \
+${DIR}/FirebaseAuthUI \
+${DIR}/FirebaseDatabaseUI \
+${DIR}/FirebaseFacebookAuthUI \
+${DIR}/FirebaseGoogleAuthUI \
+${DIR}/FirebaseTwitterAuthUI \
 ${DIR}/FirebaseUI
-
-echo "Copying docs to FirebaseUI site..."
-cp -r site/html/* ../FirebaseUI/docs/ios
