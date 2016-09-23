@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The current download task, if the image view is downloading an image.
  */
-@property (nonatomic, readonly, nullable) id<FUIDownloadTask> fui_currentDownload;
+@property (nonatomic, readonly, nullable) id<FUIDownloadTask> sd_currentDownload;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
  *   could not be found in cache).
  */
-- (nullable id<FUIDownloadTask>)fui_setImageWithStorageReference:(id<FUIStorageReference>)storageRef;
+- (nullable id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
  *   could not be found in cache).
  */
-- (nullable id<FUIDownloadTask>)fui_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
+- (nullable id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
                                                 placeholderImage:(UIImage *)placeholder;
 
 /**
@@ -93,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
  *   could not be found in cache).
  */
-- (nullable id<FUIDownloadTask>)fui_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
+- (nullable id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
                                                 placeholderImage:(nullable UIImage *)placeholder
                                                       completion:(void (^_Nullable)(UIImage *_Nullable,
                                                                                     NSError *_Nullable,
@@ -112,7 +112,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
  *   could not be found in cache).
  */
-- (nullable id<FUIDownloadTask>)fui_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
+- (nullable id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
                                                     maxImageSize:(UInt64)size
                                                 placeholderImage:(nullable UIImage *)placeholder
                                                       completion:(void (^_Nullable)(UIImage *_Nullable,
@@ -133,7 +133,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
  *   could not be found in cache).
  */
-- (nullable id<FUIDownloadTask>)fui_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
+- (nullable id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
                                                     maxImageSize:(UInt64)size
                                                 placeholderImage:(nullable UIImage *)placeholder
                                                            cache:(nullable id<FUIImageCache>)cache

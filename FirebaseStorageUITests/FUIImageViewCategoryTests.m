@@ -22,11 +22,14 @@
 @class MockDownloadTask, MockStorageReference, MockCache;
 
 @interface MockDownloadTask : NSObject <FUIDownloadTask>
+@property (nonatomic, readwrite, getter=isCancelled) BOOL cancelled;
 @end
 
 @implementation MockDownloadTask
 
-- (void)cancel {}
+- (void)cancel {
+  self.cancelled = YES;
+}
 
 @end
 
@@ -107,7 +110,7 @@
 - (void)testItCreatesADownloadTaskIfCacheIsEmpty {
   MockStorageReference *ref = [[MockStorageReference alloc] init];
   ref.fullPath = @"path/to/image.png";
-  id<FUIDownloadTask> download = [self.imageView fui_setImageWithStorageReference:ref
+  id<FUIDownloadTask> download = [self.imageView sd_setImageWithStorageReference:ref
                                                                      maxImageSize:512
                                                                  placeholderImage:nil
                                                                             cache:self.cache
@@ -126,7 +129,7 @@
   ref.fullPath = @"path/to/image.png";
   UIImage *image = [[UIImage alloc] init];
   [self.cache storeImage:image forKey:ref.fullPath];
-  id<FUIDownloadTask> download = [self.imageView fui_setImageWithStorageReference:ref
+  id<FUIDownloadTask> download = [self.imageView sd_setImageWithStorageReference:ref
                                                                      maxImageSize:4096
                                                                  placeholderImage:nil
                                                                             cache:self.cache
@@ -138,7 +141,7 @@
 - (void)testItRaisesAnErrorIfDownloadingFails {
   MockStorageReference *ref = [[MockStorageReference alloc] init];
   ref.fullPath = @"path/to/image.png";
-  [self.imageView fui_setImageWithStorageReference:ref
+  [self.imageView sd_setImageWithStorageReference:ref
                                       maxImageSize:512
                                   placeholderImage:nil
                                              cache:self.cache
@@ -156,12 +159,16 @@
   MockStorageReference *ref = [[MockStorageReference alloc] init];
   ref.fullPath = @"path/to/image.png";
   UIImage *placeholder = [[UIImage alloc] init];
-  [self.imageView fui_setImageWithStorageReference:ref
+  [self.imageView sd_setImageWithStorageReference:ref
                                       maxImageSize:4096
                                   placeholderImage:placeholder
                                              cache:self.cache
                                         completion:nil];
   XCTAssert(self.imageView.image == placeholder, @"expected image view to use placeholder on failed download");
+}
+
+- (void)testItCancelsTheCurrentDownloadWhenSettingAnImage {
+  
 }
 
 @end

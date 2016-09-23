@@ -19,47 +19,47 @@
 #import "UIImageView+FirebaseStorage.h"
 
 @interface UIImageView (FirebaseStorage_Private)
-@property (nonatomic, readwrite, nullable) id<FUIDownloadTask> fui_currentDownload;
+@property (nonatomic, readwrite, nullable) id<FUIDownloadTask> sd_currentDownload;
 @end
 
 @implementation UIImageView (FirebaseStorage)
 
-- (id<FUIDownloadTask>)fui_setImageWithStorageReference:(id<FUIStorageReference>)storageRef {
-  return [self fui_setImageWithStorageReference:storageRef placeholderImage:nil completion:nil];
+- (id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef {
+  return [self sd_setImageWithStorageReference:storageRef placeholderImage:nil completion:nil];
 }
 
-- (id<FUIDownloadTask>)fui_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
+- (id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
                                        placeholderImage:(UIImage *)placeholder {
-  return [self fui_setImageWithStorageReference:storageRef placeholderImage:placeholder completion:nil];
+  return [self sd_setImageWithStorageReference:storageRef placeholderImage:placeholder completion:nil];
 }
 
-- (id<FUIDownloadTask>)fui_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
+- (id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
                                        placeholderImage:(UIImage *)placeholder
                                              completion:(void (^)(UIImage *_Nullable,
                                                                   NSError *_Nullable,
                                                                   SDImageCacheType,
                                                                   id<FUIStorageReference>_Nonnull))completion {
-  return [self fui_setImageWithStorageReference:storageRef
+  return [self sd_setImageWithStorageReference:storageRef
                                    maxImageSize:5e6 // 5 megabytes
                                placeholderImage:placeholder
                                      completion:completion];
 }
 
-- (id<FUIDownloadTask>)fui_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
+- (id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
                                            maxImageSize:(UInt64)size
                                        placeholderImage:(nullable UIImage *)placeholder
                                              completion:(void (^)(UIImage *,
                                                                   NSError *,
                                                                   SDImageCacheType,
                                                                   id<FUIStorageReference>))completion{
-  return [self fui_setImageWithStorageReference:storageRef
+  return [self sd_setImageWithStorageReference:storageRef
                                    maxImageSize:size
                                placeholderImage:placeholder
                                           cache:[SDImageCache sharedImageCache]
                                      completion:completion];
 }
 
-- (id<FUIDownloadTask>)fui_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
+- (id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
                                            maxImageSize:(UInt64)size
                                        placeholderImage:(nullable UIImage *)placeholder
                                                   cache:(nullable id<FUIImageCache>)cache
@@ -68,13 +68,15 @@
                                                                   SDImageCacheType,
                                                                   id<FUIStorageReference>))completion {
   NSParameterAssert(storageRef != nil);
-  self.image = placeholder;
 
   // If there's already a download on this UIImageView, cancel it
-  if (self.fui_currentDownload != nil) {
-    [self.fui_currentDownload cancel];
-    self.fui_currentDownload = nil;
+  if (self.sd_currentDownload != nil) {
+    [self.sd_currentDownload cancel];
+    self.sd_currentDownload = nil;
   }
+
+  // Set placeholder image
+  self.image = placeholder;
 
   // Query cache for image before trying to download
   NSString *key = storageRef.fullPath;
@@ -102,9 +104,9 @@
   id<FUIDownloadTask> download = [storageRef dataWithMaxSize:size
                                                   completion:^(NSData * _Nullable data,
                                                                NSError * _Nullable error) {
-    self.fui_currentDownload = nil;
     if (data != nil) {
       dispatch_async(dispatch_get_main_queue(), ^{
+        self.sd_currentDownload = nil;
         UIImage *image = [UIImage sd_imageWithData:data];
         self.image = image;
 
@@ -116,26 +118,29 @@
         }
       });
     } else {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        self.sd_currentDownload = nil;
+      });
       if (completion != nil) {
         completion(nil, error, SDImageCacheTypeNone, storageRef);
       }
     }
   }];
-  self.fui_currentDownload = download;
+  self.sd_currentDownload = download;
   return download;
 }
 
 #pragma mark - Accessors
 
-- (void)setFui_currentDownload:(id<FUIDownloadTask>)currentDownload {
+- (void)setSd_currentDownload:(id<FUIDownloadTask>)currentDownload {
   objc_setAssociatedObject(self,
-                           @selector(fui_currentDownload),
+                           @selector(sd_currentDownload),
                            currentDownload,
                            OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (id<FUIDownloadTask>)fui_currentDownload {
-  return objc_getAssociatedObject(self, @selector(fui_currentDownload));
+- (id<FUIDownloadTask>)sd_currentDownload {
+  return objc_getAssociatedObject(self, @selector(sd_currentDownload));
 }
 
 @end
