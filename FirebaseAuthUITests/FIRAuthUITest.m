@@ -33,6 +33,8 @@
 - (NSString *)providerID  { return @"provider id"; }
 - (NSString *)shortName   { return @"login provider"; }
 - (NSString *)signInLabel { return @"sign in label"; }
+- (NSString *)accessToken { return @"accessToken"; }
+- (NSString *)idToken     { return @"idToken"; }
 
 - (UIImage *)icon {
   return [[UIImage alloc] init];

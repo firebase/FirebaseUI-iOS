@@ -22,11 +22,6 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FirebaseAuthUI/FIRAuthUIErrorUtils.h>
 
-/** @var kBundleFileName
-    @brief The name of the bundle containing Facebook auth provider assets/resources.
- */
-static NSString *const kBundleFileName = @"FirebaseFacebookAuthUIBundle.bundle";
-
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
 */
@@ -80,13 +75,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   static NSBundle *frameworkBundle = nil;
   static dispatch_once_t predicate;
   dispatch_once(&predicate, ^{
-    NSString *mainBundlePath = [[NSBundle mainBundle] resourcePath];
-    NSString *frameworkBundlePath =
-        [mainBundlePath stringByAppendingPathComponent:kBundleFileName];
-    frameworkBundle = [NSBundle bundleWithPath:frameworkBundlePath];
-    if (!frameworkBundle) {
-      frameworkBundle = [NSBundle mainBundle];
-    }
+    frameworkBundle = [NSBundle bundleForClass:[self class]];
   });
   return frameworkBundle;
 }
@@ -221,9 +210,9 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
  @brief Validates that Facebook SDK data was filled in Info.plist and creates Facebook login manager 
  */
 - (void)configureProvider {
-  NSString *facebookAppId = [[NSBundle mainBundle] objectForInfoDictionaryKey:kFacebookAppId];
-  NSString *facebookDisplayName =
-  [[NSBundle mainBundle] objectForInfoDictionaryKey:kFacebookDisplayName];
+  NSBundle *bundle = [[self class] frameworkBundle];
+  NSString *facebookAppId = [bundle objectForInfoDictionaryKey:kFacebookAppId];
+  NSString *facebookDisplayName = [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
 
   if (!(facebookAppId && facebookDisplayName)) {
     [NSException raise:NSInternalInconsistencyException

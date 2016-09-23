@@ -14,22 +14,8 @@
 //  limitations under the License.
 //
 
-#import "FIRAuthUIUtils.h"
+#import <FirebaseFacebookAuthUI/FirebaseFacebookAuthUI.h>
 
-@implementation FIRAuthUIUtils
-
-+ (NSBundle *)frameworkBundle {
-  static NSBundle *frameworkBundle = nil;
-  static dispatch_once_t predicate;
-  dispatch_once(&predicate, ^{
-    frameworkBundle = [NSBundle bundleForClass:[self class]];
-  });
-  return frameworkBundle;
-}
-
-+ (UIImage *)imageNamed:(NSString *)name {
-  NSString *path = [[[self class] frameworkBundle] pathForResource:name ofType:@"png"];
-  return [UIImage imageWithContentsOfFile:path];
-}
+@interface FIRFacebookAuthUITest : FIRFacebookAuthUI
 
 @end

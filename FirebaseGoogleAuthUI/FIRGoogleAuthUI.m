@@ -87,13 +87,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   static NSBundle *frameworkBundle = nil;
   static dispatch_once_t predicate;
   dispatch_once(&predicate, ^{
-    NSString *mainBundlePath = [[NSBundle mainBundle] resourcePath];
-    NSString *frameworkBundlePath =
-        [mainBundlePath stringByAppendingPathComponent:@"FirebaseGoogleAuthUIBundle.bundle"];
-    frameworkBundle = [NSBundle bundleWithPath:frameworkBundlePath];
-    if (!frameworkBundle) {
-      frameworkBundle = [NSBundle mainBundle];
-    }
+    frameworkBundle = [NSBundle bundleForClass:[self class]];
   });
   return frameworkBundle;
 }
