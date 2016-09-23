@@ -29,44 +29,44 @@
 }
 
 - (id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
-                                       placeholderImage:(UIImage *)placeholder {
+                                      placeholderImage:(UIImage *)placeholder {
   return [self sd_setImageWithStorageReference:storageRef placeholderImage:placeholder completion:nil];
 }
 
 - (id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
-                                       placeholderImage:(UIImage *)placeholder
-                                             completion:(void (^)(UIImage *_Nullable,
-                                                                  NSError *_Nullable,
-                                                                  SDImageCacheType,
-                                                                  FIRStorageReference *))completion {
+                                      placeholderImage:(UIImage *)placeholder
+                                            completion:(void (^)(UIImage *_Nullable,
+                                                                 NSError *_Nullable,
+                                                                 SDImageCacheType,
+                                                                 FIRStorageReference *))completion {
   return [self sd_setImageWithStorageReference:storageRef
-                                   maxImageSize:5e6 // 5 megabytes
-                               placeholderImage:placeholder
-                                     completion:completion];
+                                  maxImageSize:5e6 // 5 megabytes
+                              placeholderImage:placeholder
+                                    completion:completion];
 }
 
 - (id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
-                                           maxImageSize:(UInt64)size
-                                       placeholderImage:(nullable UIImage *)placeholder
-                                             completion:(void (^)(UIImage *,
-                                                                  NSError *,
-                                                                  SDImageCacheType,
-                                                                  FIRStorageReference *))completion{
+                                          maxImageSize:(UInt64)size
+                                      placeholderImage:(nullable UIImage *)placeholder
+                                            completion:(void (^)(UIImage *,
+                                                                 NSError *,
+                                                                 SDImageCacheType,
+                                                                 FIRStorageReference *))completion{
   return [self sd_setImageWithStorageReference:storageRef
-                                   maxImageSize:size
-                               placeholderImage:placeholder
-                                          cache:[SDImageCache sharedImageCache]
-                                     completion:completion];
+                                  maxImageSize:size
+                              placeholderImage:placeholder
+                                         cache:[SDImageCache sharedImageCache]
+                                    completion:completion];
 }
 
 - (id<FUIDownloadTask>)sd_setImageWithStorageReference:(id<FUIStorageReference>)storageRef
-                                           maxImageSize:(UInt64)size
-                                       placeholderImage:(nullable UIImage *)placeholder
-                                                  cache:(nullable id<FUIImageCache>)cache
-                                             completion:(void (^)(UIImage *,
-                                                                  NSError *,
-                                                                  SDImageCacheType,
-                                                                  FIRStorageReference *))completion {
+                                          maxImageSize:(UInt64)size
+                                      placeholderImage:(nullable UIImage *)placeholder
+                                                 cache:(nullable id<FUIImageCache>)cache
+                                            completion:(void (^)(UIImage *,
+                                                                 NSError *,
+                                                                 SDImageCacheType,
+                                                                 FIRStorageReference *))completion {
   NSParameterAssert(storageRef != nil);
 
   // If there's already a download on this UIImageView, cancel it
