@@ -25,11 +25,6 @@
 
 - (void)setUp {
   [super setUp];
-  self.provider = [[FIRFacebookAuthUI alloc] init];
-}
-
-- (void)testItExists {
-  XCTAssert(self.provider != nil);
 }
 
 @end

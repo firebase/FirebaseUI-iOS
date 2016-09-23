@@ -104,9 +104,9 @@
   id<FUIDownloadTask> download = [storageRef dataWithMaxSize:size
                                                   completion:^(NSData * _Nullable data,
                                                                NSError * _Nullable error) {
-    if (data != nil) {
-      dispatch_async(dispatch_get_main_queue(), ^{
-        self.sd_currentDownloadTask = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+      self.sd_currentDownloadTask = nil;
+      if (data != nil) {
         UIImage *image = [UIImage sd_imageWithData:data];
         self.image = image;
 
@@ -116,15 +116,12 @@
         if (completion != nil) {
           completion(image, nil, SDImageCacheTypeNone, storageRef);
         }
-      });
-    } else {
-      dispatch_async(dispatch_get_main_queue(), ^{
-        self.sd_currentDownloadTask = nil;
-      });
-      if (completion != nil) {
-        completion(nil, error, SDImageCacheTypeNone, storageRef);
+      } else {
+        if (completion != nil) {
+          completion(nil, error, SDImageCacheTypeNone, storageRef);
+        }
       }
-    }
+    });
   }];
   self.sd_currentDownloadTask = download;
   return download;

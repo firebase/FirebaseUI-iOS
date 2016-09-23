@@ -5620,7 +5620,6 @@ fi
 					<string>"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks"</string>
 					<string>"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks"</string>
 					<string>"${PODS_ROOT}/GoogleNetworkingUtilities/Frameworks"</string>
-					<string>"${PODS_ROOT}/GoogleParsingUtilities/Frameworks"</string>
 					<string>"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks"</string>
 					<string>"${PODS_ROOT}/GoogleUtilities/Frameworks"</string>
 				</array>
@@ -5652,7 +5651,6 @@ fi
 					<string>"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks"</string>
 					<string>"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks"</string>
 					<string>"${PODS_ROOT}/GoogleNetworkingUtilities/Frameworks"</string>
-					<string>"${PODS_ROOT}/GoogleParsingUtilities/Frameworks"</string>
 					<string>"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks"</string>
 					<string>"${PODS_ROOT}/GoogleUtilities/Frameworks"</string>
 				</array>
@@ -6052,12 +6050,26 @@ fi
 		<dict>
 			<key>buildSettings</key>
 			<dict>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>"$PODS_CONFIGURATION_BUILD_DIR/Bolts"</string>
+					<string>"$PODS_CONFIGURATION_BUILD_DIR/FBSDKCoreKit"</string>
+					<string>"$PODS_CONFIGURATION_BUILD_DIR/FBSDKLoginKit"</string>
+					<string>"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks"</string>
+					<string>"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks"</string>
+					<string>"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks"</string>
+					<string>"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks"</string>
+					<string>"${PODS_ROOT}/GoogleUtilities/Frameworks"</string>
+					<string>"${PODS_ROOT}/GoogleNetworkingUtilities/Frameworks"</string>
+					<string>"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks"</string>
+				</array>
 				<key>INFOPLIST_FILE</key>
 				<string>FirebaseFacebookAuthUITests/Info.plist</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
 				<string>8.0</string>
 				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
+				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit</string>
 				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
 				<string>com.firebase.FirebaseFacebookAuthUITests</string>
 				<key>PRODUCT_NAME</key>
@@ -6072,12 +6084,26 @@ fi
 		<dict>
 			<key>buildSettings</key>
 			<dict>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>"$PODS_CONFIGURATION_BUILD_DIR/Bolts"</string>
+					<string>"$PODS_CONFIGURATION_BUILD_DIR/FBSDKCoreKit"</string>
+					<string>"$PODS_CONFIGURATION_BUILD_DIR/FBSDKLoginKit"</string>
+					<string>"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks"</string>
+					<string>"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks"</string>
+					<string>"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks"</string>
+					<string>"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks"</string>
+					<string>"${PODS_ROOT}/GoogleUtilities/Frameworks"</string>
+					<string>"${PODS_ROOT}/GoogleNetworkingUtilities/Frameworks"</string>
+					<string>"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks"</string>
+				</array>
 				<key>INFOPLIST_FILE</key>
 				<string>FirebaseFacebookAuthUITests/Info.plist</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
 				<string>8.0</string>
 				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
+				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit</string>
 				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
 				<string>com.firebase.FirebaseFacebookAuthUITests</string>
 				<key>PRODUCT_NAME</key>

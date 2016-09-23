@@ -168,7 +168,25 @@
 }
 
 - (void)testItCancelsTheCurrentDownloadWhenSettingAnImage {
-  
+  MockStorageReference *ref = [[MockStorageReference alloc] init];
+  ref.fullPath = @"path/to/image.png";
+  MockDownloadTask *download = [self.imageView sd_setImageWithStorageReference:(FIRStorageReference *)ref
+                                                                  maxImageSize:512
+                                                              placeholderImage:nil
+                                                                         cache:self.cache
+                                                                    completion:nil];
+  ref = [[MockStorageReference alloc] init];
+  [self.imageView sd_setImageWithStorageReference:(FIRStorageReference *)ref
+                                     maxImageSize:512
+                                 placeholderImage:nil
+                                            cache:self.cache
+                                       completion:nil];
+
+  XCTAssert(download.isCancelled == YES, @"expected setting a new image on an imageview to cancel the old download");
+}
+
+- (void)testItDoesntHaveARaceCondition /* hahahaha! you have no power here... */ {
+
 }
 
 @end
