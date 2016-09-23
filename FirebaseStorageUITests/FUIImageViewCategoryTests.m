@@ -110,14 +110,14 @@
 - (void)testItCreatesADownloadTaskIfCacheIsEmpty {
   MockStorageReference *ref = [[MockStorageReference alloc] init];
   ref.fullPath = @"path/to/image.png";
-  id<FUIDownloadTask> download = [self.imageView sd_setImageWithStorageReference:ref
-                                                                     maxImageSize:512
-                                                                 placeholderImage:nil
-                                                                            cache:self.cache
-                                                                       completion:^(UIImage *image,
-                                                                                    NSError *error,
-                                                                                    SDImageCacheType cacheType,
-                                                                                    id<FUIStorageReference> storageRef) {
+  id<FUIDownloadTask> download = [self.imageView sd_setImageWithStorageReference:(FIRStorageReference *)ref
+                                                                    maxImageSize:512
+                                                                placeholderImage:nil
+                                                                           cache:self.cache
+                                                                      completion:^(UIImage *image,
+                                                                                   NSError *error,
+                                                                                   SDImageCacheType cacheType,
+                                                                                   FIRStorageReference * storageRef) {
     XCTAssert(self.imageView.image == image, @"expected download to populate image");
     XCTAssert(error == nil, @"expected successful download to not produce an error");
   }];
@@ -129,11 +129,11 @@
   ref.fullPath = @"path/to/image.png";
   UIImage *image = [[UIImage alloc] init];
   [self.cache storeImage:image forKey:ref.fullPath];
-  id<FUIDownloadTask> download = [self.imageView sd_setImageWithStorageReference:ref
-                                                                     maxImageSize:4096
-                                                                 placeholderImage:nil
-                                                                            cache:self.cache
-                                                                       completion:nil];
+  id<FUIDownloadTask> download = [self.imageView sd_setImageWithStorageReference:(FIRStorageReference *)ref
+                                                                    maxImageSize:4096
+                                                                placeholderImage:nil
+                                                                           cache:self.cache
+                                                                      completion:nil];
   XCTAssert(download == nil, @"expected image view to not create new download when fetching cached image");
   XCTAssert(self.imageView.image == image, @"expected image view to use cached image");
 }
@@ -141,14 +141,14 @@
 - (void)testItRaisesAnErrorIfDownloadingFails {
   MockStorageReference *ref = [[MockStorageReference alloc] init];
   ref.fullPath = @"path/to/image.png";
-  [self.imageView sd_setImageWithStorageReference:ref
-                                      maxImageSize:512
-                                  placeholderImage:nil
-                                             cache:self.cache
-                                        completion:^(UIImage *image,
-                                                     NSError *error,
-                                                     SDImageCacheType cacheType,
-                                                     id<FUIStorageReference> storageRef) {
+  [self.imageView sd_setImageWithStorageReference:(FIRStorageReference *)ref
+                                     maxImageSize:512
+                                 placeholderImage:nil
+                                            cache:self.cache
+                                       completion:^(UIImage *image,
+                                                    NSError *error,
+                                                    SDImageCacheType cacheType,
+                                                    id<FUIStorageReference> storageRef) {
     XCTAssert(image == nil, @"expected failed download to not return an image");
     XCTAssert(self.imageView.image == nil, @"expected failed download to not populate image");
     XCTAssert(error != nil, @"expected failed download to produce an error");
@@ -159,11 +159,11 @@
   MockStorageReference *ref = [[MockStorageReference alloc] init];
   ref.fullPath = @"path/to/image.png";
   UIImage *placeholder = [[UIImage alloc] init];
-  [self.imageView sd_setImageWithStorageReference:ref
-                                      maxImageSize:4096
-                                  placeholderImage:placeholder
-                                             cache:self.cache
-                                        completion:nil];
+  [self.imageView sd_setImageWithStorageReference:(FIRStorageReference *)ref
+                                     maxImageSize:4096
+                                 placeholderImage:placeholder
+                                            cache:self.cache
+                                       completion:nil];
   XCTAssert(self.imageView.image == placeholder, @"expected image view to use placeholder on failed download");
 }
 

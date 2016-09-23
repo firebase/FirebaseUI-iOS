@@ -38,7 +38,7 @@
                                              completion:(void (^)(UIImage *_Nullable,
                                                                   NSError *_Nullable,
                                                                   SDImageCacheType,
-                                                                  id<FUIStorageReference>_Nonnull))completion {
+                                                                  FIRStorageReference *))completion {
   return [self sd_setImageWithStorageReference:storageRef
                                    maxImageSize:5e6 // 5 megabytes
                                placeholderImage:placeholder
@@ -51,7 +51,7 @@
                                              completion:(void (^)(UIImage *,
                                                                   NSError *,
                                                                   SDImageCacheType,
-                                                                  id<FUIStorageReference>))completion{
+                                                                  FIRStorageReference *))completion{
   return [self sd_setImageWithStorageReference:storageRef
                                    maxImageSize:size
                                placeholderImage:placeholder
@@ -66,7 +66,7 @@
                                              completion:(void (^)(UIImage *,
                                                                   NSError *,
                                                                   SDImageCacheType,
-                                                                  id<FUIStorageReference>))completion {
+                                                                  FIRStorageReference *))completion {
   NSParameterAssert(storageRef != nil);
 
   // If there's already a download on this UIImageView, cancel it
