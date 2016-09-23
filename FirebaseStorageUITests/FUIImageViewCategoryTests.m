@@ -185,8 +185,4 @@
   XCTAssert(download.isCancelled == YES, @"expected setting a new image on an imageview to cancel the old download");
 }
 
-- (void)testItDoesntHaveARaceCondition /* hahahaha! you have no power here... */ {
-
-}
-
 @end

@@ -105,7 +105,6 @@
                                                   completion:^(NSData * _Nullable data,
                                                                NSError * _Nullable error) {
     dispatch_async(dispatch_get_main_queue(), ^{
-      self.sd_currentDownloadTask = nil;
       if (data != nil) {
         UIImage *image = [UIImage sd_imageWithData:data];
         self.image = image;
