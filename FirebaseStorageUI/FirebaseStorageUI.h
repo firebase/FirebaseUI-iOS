@@ -23,6 +23,4 @@ FOUNDATION_EXPORT double FirebaseStorageUIVersionNumber;
 //! Project version string for FirebaseStorageUI.
 FOUNDATION_EXPORT const unsigned char FirebaseStorageUIVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <FirebaseStorageUI/PublicHeader.h>
-
-
+#import <FirebaseStorageUI/UIImageView+FirebaseStorage.h>

@@ -19,7 +19,7 @@
 #import "UIImageView+FirebaseStorage.h"
 
 @interface UIImageView (FirebaseStorage_Private)
-@property (nonatomic, readwrite, nullable) id<FUIDownloadTask> sd_currentDownload;
+@property (nonatomic, readwrite, nullable, setter=sd_setCurrentDownloadTask:) id<FUIDownloadTask> sd_currentDownloadTask;
 @end
 
 @implementation UIImageView (FirebaseStorage)
@@ -70,9 +70,9 @@
   NSParameterAssert(storageRef != nil);
 
   // If there's already a download on this UIImageView, cancel it
-  if (self.sd_currentDownload != nil) {
-    [self.sd_currentDownload cancel];
-    self.sd_currentDownload = nil;
+  if (self.sd_currentDownloadTask != nil) {
+    [self.sd_currentDownloadTask cancel];
+    self.sd_currentDownloadTask = nil;
   }
 
   // Set placeholder image
@@ -106,7 +106,7 @@
                                                                NSError * _Nullable error) {
     if (data != nil) {
       dispatch_async(dispatch_get_main_queue(), ^{
-        self.sd_currentDownload = nil;
+        self.sd_currentDownloadTask = nil;
         UIImage *image = [UIImage sd_imageWithData:data];
         self.image = image;
 
@@ -119,28 +119,28 @@
       });
     } else {
       dispatch_async(dispatch_get_main_queue(), ^{
-        self.sd_currentDownload = nil;
+        self.sd_currentDownloadTask = nil;
       });
       if (completion != nil) {
         completion(nil, error, SDImageCacheTypeNone, storageRef);
       }
     }
   }];
-  self.sd_currentDownload = download;
+  self.sd_currentDownloadTask = download;
   return download;
 }
 
 #pragma mark - Accessors
 
-- (void)setSd_currentDownload:(id<FUIDownloadTask>)currentDownload {
+- (void)sd_setCurrentDownloadTask:(id<FUIDownloadTask>)currentDownload {
   objc_setAssociatedObject(self,
-                           @selector(sd_currentDownload),
+                           @selector(sd_currentDownloadTask),
                            currentDownload,
                            OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (id<FUIDownloadTask>)sd_currentDownload {
-  return objc_getAssociatedObject(self, @selector(sd_currentDownload));
+- (id<FUIDownloadTask>)sd_currentDownloadTask {
+  return objc_getAssociatedObject(self, @selector(sd_currentDownloadTask));
 }
 
 @end

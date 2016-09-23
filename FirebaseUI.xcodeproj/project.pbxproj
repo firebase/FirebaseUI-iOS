@@ -1479,6 +1479,13 @@ fi
 			<string>8D7AD9B51D9317FB006866B9</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
 		<key>8D7AD9B81D9317FB006866B9</key>
 		<dict>

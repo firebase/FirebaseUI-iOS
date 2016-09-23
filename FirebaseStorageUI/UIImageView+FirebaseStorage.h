@@ -15,8 +15,9 @@
 //
 
 @import UIKit;
-@import SDWebImage;
+
 @import FirebaseStorage;
+@import SDWebImage;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -61,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The current download task, if the image view is downloading an image.
  */
-@property (nonatomic, readonly, nullable) FIRStorageDownloadTask *sd_currentDownload;
+@property (nonatomic, readonly, nullable) FIRStorageDownloadTask *sd_currentDownloadTask;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
