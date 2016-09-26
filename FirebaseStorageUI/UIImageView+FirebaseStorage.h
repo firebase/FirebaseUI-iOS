@@ -26,13 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Returns the maximum image download size, in bytes. Defaults to 10e6.
  */
-+ (UInt64)sd_maxImageDownloadSize;
++ (UInt64)sd_defaultMaxImageSize;
 
 /**
  * Sets the maximum image download size, in bytes.
  * @param size The new maximum image download size.
  */
-+ (void)sd_setMaxImageDownloadSize:(UInt64)size;
++ (void)sd_setDefaultMaxImageSize:(UInt64)size;
 
 /**
  * The current download task, if the image view is downloading an image.

@@ -26,11 +26,11 @@ static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
 
 @implementation UIImageView (FirebaseStorage)
 
-+ (UInt64)sd_maxImageDownloadSize {
++ (UInt64)sd_defaultMaxImageSize {
   return FUIMaxImageDownloadSize;
 }
 
-+ (void)sd_setMaxImageDownloadSize:(UInt64)size {
++ (void)sd_setDefaultMaxImageSize:(UInt64)size {
   FUIMaxImageDownloadSize = size;
 }
 
@@ -50,7 +50,7 @@ static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
                                                                       SDImageCacheType,
                                                                       FIRStorageReference *))completion {
   return [self sd_setImageWithStorageReference:storageRef
-                                  maxImageSize:[UIImageView sd_maxImageDownloadSize]
+                                  maxImageSize:[UIImageView sd_defaultMaxImageSize]
                               placeholderImage:placeholder
                                     completion:completion];
 }
