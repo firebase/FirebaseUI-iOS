@@ -22,6 +22,7 @@
 #import "UIImageView+FirebaseStorage.h"
 
 @interface FUIImageViewCategoryTests : XCTestCase
+@property (nonatomic, readwrite) FIRStorageReference *ref;
 @property (nonatomic, readwrite) UIImageView *imageView;
 @property (nonatomic, readwrite) SDImageCache *cache;
 @end
@@ -30,6 +31,8 @@
 
 - (void)setUp {
   [super setUp];
+  self.ref = OCMClassMock([FIRStorageReference class]);
+  OCMStub([self.ref fullPath]).andReturn(@"path/to/image.png");
   self.cache = OCMClassMock([SDImageCache class]);
   self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
 }
@@ -39,11 +42,9 @@
 }
 
 - (void)testItCreatesADownloadTaskIfCacheIsEmpty {
-  FIRStorageReference *ref = OCMClassMock([FIRStorageReference class]);
-  OCMStub([ref fullPath]).andReturn(@"path/to/image.png");
-  OCMStub([ref dataWithMaxSize:512 completion:[OCMArg any]])
+  OCMStub([self.ref dataWithMaxSize:512 completion:[OCMArg any]])
     .andReturn(OCMClassMock([FIRStorageDownloadTask class]));
-  FIRStorageDownloadTask *download = [self.imageView sd_setImageWithStorageReference:(FIRStorageReference *)ref
+  FIRStorageDownloadTask *download = [self.imageView sd_setImageWithStorageReference:self.ref
                                                                         maxImageSize:512
                                                                     placeholderImage:nil
                                                                                cache:self.cache
@@ -52,34 +53,30 @@
                                                                                        SDImageCacheType cacheType,
                                                                                        FIRStorageReference * storageRef) {
     XCTAssert(self.imageView.image == image, @"expected download to populate image");
-    XCTAssert(error == nil, @"expected successful download to not produce an error");
+    XCTAssertNil(error, @"expected successful download to not produce an error");
   }];
-  XCTAssert(download != nil, @"expected image view with empty cache to attempt a download");
+  XCTAssertNotNil(download, @"expected image view with empty cache to attempt a download");
 }
 
 - (void)testItDoesNotCreateADownloadIfImageIsCached {
-  FIRStorageReference *ref = OCMClassMock([FIRStorageReference class]);
-  OCMStub([ref fullPath]).andReturn(@"path/to/image.png");
-  OCMStub([ref dataWithMaxSize:4096 completion:[OCMArg any]])
+  OCMStub([self.ref dataWithMaxSize:4096 completion:[OCMArg any]])
     .andReturn(OCMClassMock([FIRStorageDownloadTask class]));
   UIImage *image = [[UIImage alloc] init];
   self.cache = [[SDImageCache alloc] initWithNamespace:@"FirebaseStorageUITests"];
-  [self.cache storeImage:image forKey:ref.fullPath];
-  FIRStorageDownloadTask *download = [self.imageView sd_setImageWithStorageReference:(FIRStorageReference *)ref
+  [self.cache storeImage:image forKey:self.ref.fullPath];
+  FIRStorageDownloadTask *download = [self.imageView sd_setImageWithStorageReference:self.ref
                                                                         maxImageSize:4096
                                                                     placeholderImage:nil
                                                                                cache:self.cache
                                                                           completion:nil];
-  XCTAssert(download == nil, @"expected image view to not create new download when fetching cached image");
+  XCTAssertNil(download, @"expected image view to not create new download when fetching cached image");
   XCTAssert(self.imageView.image == image, @"expected image view to use cached image");
   [self.cache cleanDisk];
   [self.cache clearMemory];
 }
 
 - (void)testItRaisesAnErrorIfDownloadingFails {
-  FIRStorageReference *ref = OCMClassMock([FIRStorageReference class]);
-  OCMStub([ref fullPath]).andReturn(@"path/to/image.png");
-  [self.imageView sd_setImageWithStorageReference:(FIRStorageReference *)ref
+  [self.imageView sd_setImageWithStorageReference:self.ref
                                      maxImageSize:512
                                  placeholderImage:nil
                                             cache:self.cache
@@ -87,17 +84,15 @@
                                                     NSError *error,
                                                     SDImageCacheType cacheType,
                                                     FIRStorageReference *storageRef) {
-    XCTAssert(image == nil, @"expected failed download to not return an image");
-    XCTAssert(self.imageView.image == nil, @"expected failed download to not populate image");
-    XCTAssert(error != nil, @"expected failed download to produce an error");
+    XCTAssertNil(image, @"expected failed download to not return an image");
+    XCTAssertNil(self.imageView.image, @"expected failed download to not populate image");
+    XCTAssertNotNil(error, @"expected failed download to produce an error");
   }];
 }
 
 - (void)testItSetsAPlaceholder {
-  FIRStorageReference *ref = OCMClassMock([FIRStorageReference class]);
-  OCMStub([ref fullPath]).andReturn(@"path/to/image.png");
   UIImage *placeholder = [[UIImage alloc] init];
-  [self.imageView sd_setImageWithStorageReference:(FIRStorageReference *)ref
+  [self.imageView sd_setImageWithStorageReference:self.ref
                                      maxImageSize:4096
                                  placeholderImage:placeholder
                                             cache:self.cache
@@ -106,15 +101,13 @@
 }
 
 - (void)testItCancelsTheCurrentDownloadWhenSettingAnImage {
-  FIRStorageReference *ref = OCMClassMock([FIRStorageReference class]);
-  OCMStub([ref fullPath]).andReturn(@"path/to/image.png");
-  FIRStorageDownloadTask *download = [self.imageView sd_setImageWithStorageReference:(FIRStorageReference *)ref
-                                                                  maxImageSize:512
-                                                              placeholderImage:nil
-                                                                         cache:self.cache
-                                                                    completion:nil];
-  ref = OCMClassMock([FIRStorageReference class]);
-  [self.imageView sd_setImageWithStorageReference:(FIRStorageReference *)ref
+  FIRStorageDownloadTask *download = [self.imageView sd_setImageWithStorageReference:self.ref
+                                                                        maxImageSize:512
+                                                                    placeholderImage:nil
+                                                                               cache:self.cache
+                                                                          completion:nil];
+  self.ref = OCMClassMock([FIRStorageReference class]);
+  [self.imageView sd_setImageWithStorageReference:self.ref
                                      maxImageSize:512
                                  placeholderImage:nil
                                             cache:self.cache
