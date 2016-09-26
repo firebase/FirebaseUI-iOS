@@ -201,8 +201,9 @@ let lipos: [Lipo] = Array(staticLibs.keys).map { scheme in
 // lipo everything
 lipos.forEach { $0.launch() }
 
-// copy license file
+// copy license, readme file
 cp(from: "LICENSE", to: BuiltProductsDir)
+cp(from: "README.md", to: BuiltProductsDir)
 
 // clean up build artifacts afterward
 
