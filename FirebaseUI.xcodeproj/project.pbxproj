@@ -7000,9 +7000,7 @@ fi
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
-			<array>
-				<string>C325169C1D88A54C00B0B3F9</string>
-			</array>
+			<array/>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
@@ -7061,13 +7059,6 @@ fi
 			<string>FirebaseTwitterAuthUITests.xctest</string>
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>C325169C1D88A54C00B0B3F9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C32516921D88A54C00B0B3F9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>C325169D1D88A54C00B0B3F9</key>
 		<dict>
