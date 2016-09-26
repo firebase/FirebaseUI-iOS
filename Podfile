@@ -18,6 +18,7 @@ target 'FirebaseStorageUI' do
 
   target 'FirebaseStorageUITests' do
     inherit! :search_paths
+    pod 'OCMock'
   end
 end
 

@@ -21,42 +21,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol FUIImageCache <NSObject>
-@required
-
-- (nullable UIImage *)imageFromMemoryCacheForKey:(NSString *)key;
-- (nullable UIImage *)imageFromDiskCacheForKey:(NSString *)key;
-- (void)storeImage:(UIImage *)image forKey:(NSString *)key;
-
-@end
-
-@protocol FUIDownloadTask <NSObject>
-@required
-
-- (void)cancel;
-
-@end
-
-@protocol FUIStorageReference <NSObject>
-@required
-
-@property (nonatomic, readonly) NSString *fullPath;
-
-- (id<FUIDownloadTask>)dataWithMaxSize:(int64_t)size
-                            completion:(void (^)(NSData *_Nullable data,
-                                                 NSError *_Nullable error))completion;
-
-@end
-
-@interface FIRStorageReference (FirebaseUI) <FUIStorageReference>
-@end
-
-@interface FIRStorageDownloadTask (FirebaseUI) <FUIDownloadTask>
-@end
-
-@interface SDImageCache (FirebaseUI) <FUIImageCache>
-@end
-
 @interface UIImageView (FirebaseStorage)
 
 /**
@@ -97,9 +61,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
                                                     placeholderImage:(nullable UIImage *)placeholder
                                                           completion:(void (^_Nullable)(UIImage *_Nullable,
-                                                                                    NSError *_Nullable,
-                                                                                    SDImageCacheType,
-                                                                                    FIRStorageReference *))completion;
+                                                                                        NSError *_Nullable,
+                                                                                        SDImageCacheType,
+                                                                                        FIRStorageReference *))completion;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
@@ -113,13 +77,13 @@ NS_ASSUME_NONNULL_BEGIN
  * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
  *   could not be found in cache).
  */
-- (nullable id<FUIDownloadTask>)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
-                                                   maxImageSize:(UInt64)size
-                                               placeholderImage:(nullable UIImage *)placeholder
-                                                     completion:(void (^_Nullable)(UIImage *_Nullable,
-                                                                                    NSError *_Nullable,
-                                                                                    SDImageCacheType,
-                                                                                    FIRStorageReference *))completion;
+- (nullable FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                                                        maxImageSize:(UInt64)size
+                                                    placeholderImage:(nullable UIImage *)placeholder
+                                                          completion:(void (^_Nullable)(UIImage *_Nullable,
+                                                                                        NSError *_Nullable,
+                                                                                        SDImageCacheType,
+                                                                                        FIRStorageReference *))completion;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
@@ -134,14 +98,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
  *   could not be found in cache).
  */
-- (nullable id<FUIDownloadTask>)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
-                                                   maxImageSize:(UInt64)size
-                                               placeholderImage:(nullable UIImage *)placeholder
-                                                          cache:(nullable id<FUIImageCache>)cache
-                                                     completion:(void (^_Nullable)(UIImage * _Nullable,
-                                                                                   NSError * _Nullable,
-                                                                                   SDImageCacheType,
-                                                                                   FIRStorageReference *))completion;
+- (nullable FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                                                        maxImageSize:(UInt64)size
+                                                    placeholderImage:(nullable UIImage *)placeholder
+                                                               cache:(nullable SDImageCache *)cache
+                                                          completion:(void (^_Nullable)(UIImage * _Nullable,
+                                                                                        NSError * _Nullable,
+                                                                                        SDImageCacheType,
+                                                                                        FIRStorageReference *))completion;
 
 @end
 

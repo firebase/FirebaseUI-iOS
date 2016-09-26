@@ -2153,7 +2153,10 @@ fi
 				<key>LIBRARY_SEARCH_PATHS</key>
 				<string></string>
 				<key>OTHER_LDFLAGS</key>
-				<string>-ObjC</string>
+				<array>
+					<string>$(inherited)</string>
+					<string>-ObjC</string>
+				</array>
 				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
 				<string>com.firebaseui.FirebaseStorageUITests</string>
 				<key>PRODUCT_NAME</key>
@@ -2183,7 +2186,10 @@ fi
 				<key>LIBRARY_SEARCH_PATHS</key>
 				<string></string>
 				<key>OTHER_LDFLAGS</key>
-				<string>-ObjC</string>
+				<array>
+					<string>$(inherited)</string>
+					<string>-ObjC</string>
+				</array>
 				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
 				<string>com.firebaseui.FirebaseStorageUITests</string>
 				<key>PRODUCT_NAME</key>
