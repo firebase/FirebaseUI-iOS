@@ -3,16 +3,6 @@ platform :ios, '8.0'
 
 use_frameworks!
 
-target 'FirebaseUI' do
-  # pod 'Firebase'
-  # pod 'Firebase/Database'
-  # pod 'Firebase/Auth'
-
-  # pod 'FBSDKLoginKit', '~> 4.0'
-  # pod 'GoogleSignIn', '~> 4.0'
-  # pod 'TwitterKit', '~> 2.4'
-end
-
 target 'FirebaseDatabaseUI' do
   # Pods for Database
   pod 'Firebase/Database'

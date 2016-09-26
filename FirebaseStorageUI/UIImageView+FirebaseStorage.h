@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
  *   could not be found in cache).
  */
 - (nullable FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
-                                                placeholderImage:(UIImage *)placeholder;
+                                                    placeholderImage:(UIImage *)placeholder;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
