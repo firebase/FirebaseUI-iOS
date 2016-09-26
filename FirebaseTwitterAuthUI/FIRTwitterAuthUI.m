@@ -19,11 +19,6 @@
 #import <TwitterKit/TwitterKit.h>
 #import "FIRTwitterAuthUI.h"
 
-/** @var kBundleFileName
- @brief The name of the bundle containing Twitter auth provider assets/resources.
- */
-static NSString *const kBundleFileName = @"FirebaseTwitterAuthUIBundle.bundle";
-
 /** @var kTableName
  @brief The name of the strings table to search for localized strings.
  */
@@ -44,13 +39,7 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
   static NSBundle *frameworkBundle = nil;
   static dispatch_once_t predicate;
   dispatch_once(&predicate, ^{
-    NSString *mainBundlePath = [[NSBundle mainBundle] resourcePath];
-    NSString *frameworkBundlePath =
-    [mainBundlePath stringByAppendingPathComponent:kBundleFileName];
-    frameworkBundle = [NSBundle bundleWithPath:frameworkBundlePath];
-    if (!frameworkBundle) {
-      frameworkBundle = [NSBundle mainBundle];
-    }
+    frameworkBundle = [NSBundle bundleForClass:[self class]];
   });
   return frameworkBundle;
 }

@@ -13,10 +13,9 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+#import "FIRFacebookAuthUITest.h"
 
-#import "FIRAuthUIUtils.h"
-
-@implementation FIRAuthUIUtils
+@implementation FIRFacebookAuthUITest
 
 + (NSBundle *)frameworkBundle {
   static NSBundle *frameworkBundle = nil;
@@ -26,10 +25,4 @@
   });
   return frameworkBundle;
 }
-
-+ (UIImage *)imageNamed:(NSString *)name {
-  NSString *path = [[[self class] frameworkBundle] pathForResource:name ofType:@"png"];
-  return [UIImage imageWithContentsOfFile:path];
-}
-
 @end

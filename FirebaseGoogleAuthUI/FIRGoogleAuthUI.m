@@ -16,10 +16,12 @@
 
 #import "FIRGoogleAuthUI.h"
 
-#import <GoogleSignIn/GoogleSignIn.h>
+#import <FirebaseAnalytics/FirebaseAnalytics.h>
 #import <FirebaseAuth/FIRGoogleAuthProvider.h>
 #import <FirebaseAuth/FIRUserInfo.h>
 #import <FirebaseAuthUI/FIRAuthUIErrorUtils.h>
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
+#import <GoogleSignIn/GoogleSignIn.h>
 
 /** @var kGoogleGamesScope
     @brief The OAuth scope string for the "Games" scope.
@@ -66,20 +68,12 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 }
 
 - (instancetype)init {
-  @throw [NSException exceptionWithName:@"Attempt to call unavailable initializer."
-                                 reason:@"Please call the designated initializer."
-                               userInfo:nil];
+  return [self initWithScopes:@[kGoogleUserInfoEmailScope, kGoogleUserInfoProfileScope]];
 }
 
-- (instancetype)initWithClientID:(NSString *)clientID {
-  return [self initWithClientID:clientID
-                         scopes:@[kGoogleUserInfoEmailScope, kGoogleUserInfoProfileScope]];
-}
-
-- (instancetype)initWithClientID:(NSString *)clientID scopes:(NSArray *)scopes {
+- (instancetype)initWithScopes:(NSArray *)scopes {
   self = [super init];
   if (self) {
-    _clientID = [clientID copy];
     _scopes = [scopes copy];
   }
   return self;
@@ -93,13 +87,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   static NSBundle *frameworkBundle = nil;
   static dispatch_once_t predicate;
   dispatch_once(&predicate, ^{
-    NSString *mainBundlePath = [[NSBundle mainBundle] resourcePath];
-    NSString *frameworkBundlePath =
-        [mainBundlePath stringByAppendingPathComponent:@"FirebaseGoogleAuthUIBundle.bundle"];
-    frameworkBundle = [NSBundle bundleWithPath:frameworkBundlePath];
-    if (!frameworkBundle) {
-      frameworkBundle = [NSBundle mainBundle];
-    }
+    frameworkBundle = [NSBundle bundleForClass:[self class]];
   });
   return frameworkBundle;
 }
@@ -230,7 +218,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   signIn.delegate = self;
   signIn.uiDelegate = self;
   signIn.shouldFetchBasicProfile = YES;
-  signIn.clientID = _clientID;
+  signIn.clientID = [[FIRApp defaultApp] options].clientID;
   signIn.scopes = _scopes;
   return signIn;
 }

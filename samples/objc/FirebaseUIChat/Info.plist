@@ -24,30 +24,30 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>REVERSED_CLIENT_ID</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>REPLACE_ME__WITH_REVERSED_CLIENT_ID</string>
+				<string>REVERSED_CLIENT_ID</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>FACEBOOK_APP_ID</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>REPLACE_ME_WITH_FACEBOOK_APP_ID</string>
+				<string>fb{your-app-id}</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>TWITTER_CONSUMER_KEY</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>twitterkit-&lt;consumer_key&gt;</string>
+				<string>twitterkit-{consumer-key}</string>
 			</array>
 		</dict>
 	</array>
@@ -63,15 +63,19 @@
 				<key>KitInfo</key>
 				<dict>
 					<key>consumerKey</key>
-					<string>Consumer Key</string>
+					<string>{consumer-key}</string>
 					<key>consumerSecret</key>
-					<string>Consumer Secret</string>
+					<string>{consumer-secret}</string>
 				</dict>
 				<key>KitName</key>
 				<string>Twitter</string>
 			</dict>
 		</array>
 	</dict>
+	<key>FacebookAppID</key>
+	<string>{your-app-id}</string>
+	<key>FacebookDisplayName</key>
+	<string>{your-app-name}</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

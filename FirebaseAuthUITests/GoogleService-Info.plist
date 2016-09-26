@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>google-app-id</string>
+	<string>0:000000000000:ios:0000000000000000</string>
 	<key>DATABASE_URL</key>
 	<string>database-url</string>
 </dict>
