@@ -68,6 +68,26 @@
                ReferencedContainer = "container:FirebaseUI.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8D9084351D9316AB00333CC8"
+               BuildableName = "FirebaseStorageUITests.xctest"
+               BlueprintName = "FirebaseStorageUITests"
+               ReferencedContainer = "container:FirebaseUI.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C325169A1D88A54C00B0B3F9"
+               BuildableName = "FirebaseTwitterAuthUITests.xctest"
+               BlueprintName = "FirebaseTwitterAuthUITests"
+               ReferencedContainer = "container:FirebaseUI.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

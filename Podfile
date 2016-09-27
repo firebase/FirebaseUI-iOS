@@ -1,17 +1,7 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '8.0'
 
-target 'FirebaseUI' do
-  use_frameworks!
-
-  pod 'Firebase'
-  pod 'Firebase/Database'
-  pod 'Firebase/Auth'
-
-  pod 'FBSDKLoginKit', '~> 4.0'
-  pod 'GoogleSignIn', '~> 4.0'
-  pod 'TwitterKit', '~> 2.4'
-end
+use_frameworks!
 
 target 'FirebaseDatabaseUI' do
   # Pods for Database
@@ -19,6 +9,16 @@ target 'FirebaseDatabaseUI' do
 
   target 'FirebaseDatabaseUITests' do
     inherit! :search_paths
+  end
+end
+
+target 'FirebaseStorageUI' do
+  pod 'Firebase/Storage'
+  pod 'SDWebImage'
+
+  target 'FirebaseStorageUITests' do
+    inherit! :search_paths
+    pod 'OCMock'
   end
 end
 
@@ -61,6 +61,11 @@ end
 target 'Database' do
   # Pods for Database
   pod 'Firebase/Database'
+end
+
+target 'Storage' do
+  pod 'Firebase/Storage'
+  pod 'SDWebImage'
 end
 
 target 'Auth' do
