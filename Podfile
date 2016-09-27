@@ -33,7 +33,6 @@ end
 
 target 'FirebaseFacebookAuthUI' do
   # Pods for Facebook Auth
-  pod 'Firebase/Auth'
   pod 'FBSDKLoginKit', '~> 4.0'
 
   target 'FirebaseFacebookAuthUITests' do
@@ -43,7 +42,6 @@ end
 
 target 'FirebaseGoogleAuthUI' do
   # Pods for Google Auth
-  pod 'Firebase/Auth'
   pod 'GoogleSignIn', '~> 4.0'
 
   target 'FirebaseGoogleAuthUITests' do
@@ -52,8 +50,7 @@ target 'FirebaseGoogleAuthUI' do
 end
 
 target 'FirebaseTwitterAuthUI' do
-  # Pods for Google Auth
-  pod 'Firebase/Auth'
+  # Pods for Twitter Auth
   pod 'TwitterKit', '~> 2.4'
 
   target 'FirebaseTwitterAuthUITests' do
