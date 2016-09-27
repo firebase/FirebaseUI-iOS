@@ -27,6 +27,7 @@ class FIRStorageViewController: UIViewController {
 
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
+    self.textField.autocorrectionType = .No
     self.imageView.contentMode = .ScaleAspectFit
 
     // Notification boilerplate to handle keyboard appearance/disappearance
