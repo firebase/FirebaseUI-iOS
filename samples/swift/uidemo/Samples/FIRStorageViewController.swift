@@ -28,7 +28,6 @@ class FIRStorageViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     self.imageView.contentMode = .ScaleAspectFit
-    self.imageView.sd_setImageWithStorageReference(self.storageRef)
 
     // Notification boilerplate to handle keyboard appearance/disappearance
     NSNotificationCenter.defaultCenter().addObserver(self,
