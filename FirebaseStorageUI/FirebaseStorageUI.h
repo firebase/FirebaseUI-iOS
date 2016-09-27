@@ -14,17 +14,13 @@
 //  limitations under the License.
 //
 
-@import XCTest;
-#import "FIRFacebookAuthUITest.h"
 
-@interface FirebaseFacebookAuthUITests : XCTestCase
-@property (nonatomic, readwrite) FIRFacebookAuthUI *provider;
-@end
+#import <UIKit/UIKit.h>
 
-@implementation FirebaseFacebookAuthUITests
+//! Project version number for FirebaseStorageUI.
+FOUNDATION_EXPORT double FirebaseStorageUIVersionNumber;
 
-- (void)setUp {
-  [super setUp];
-}
+//! Project version string for FirebaseStorageUI.
+FOUNDATION_EXPORT const unsigned char FirebaseStorageUIVersionString[];
 
-@end
+#import <FirebaseStorageUI/UIImageView+FirebaseStorage.h>

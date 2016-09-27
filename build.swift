@@ -13,6 +13,7 @@ let schemes = [
   "FirebaseFacebookAuthUI",
   "FirebaseGoogleAuthUI",
   "FirebaseTwitterAuthUI",
+  "FirebaseStorageUI",
 ]
 
 let staticLibs = [
@@ -21,6 +22,7 @@ let staticLibs = [
   "Facebook": "FirebaseFacebookAuthUI",
   "Google"  : "FirebaseGoogleAuthUI",
   "Twitter" : "FirebaseTwitterAuthUI",
+  "Storage" : "FirebaseStorageUI",
 ]
 
 // TODO: Use NSFileManager instead of all these awful
