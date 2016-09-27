@@ -70,7 +70,7 @@
                                                                                cache:self.cache
                                                                           completion:nil];
   XCTAssertNil(download, @"expected image view to not create new download when fetching cached image");
-  XCTAssert(self.imageView.image == image, @"expected image view to use cached image");
+  XCTAssertEqual(self.imageView.image, image, @"expected image view to use cached image");
   [self.cache cleanDisk];
   [self.cache clearMemory];
 }
@@ -97,7 +97,7 @@
                                  placeholderImage:placeholder
                                             cache:self.cache
                                        completion:nil];
-  XCTAssert(self.imageView.image == placeholder, @"expected image view to use placeholder on failed download");
+  XCTAssertEqual(self.imageView.image, placeholder, @"expected image view to use placeholder on failed download");
 }
 
 - (void)testItCancelsTheCurrentDownloadWhenSettingAnImage {
