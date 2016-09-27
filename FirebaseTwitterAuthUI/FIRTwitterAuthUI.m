@@ -14,7 +14,8 @@
 //  limitations under the License.
 //
 
-#import <FirebaseAuth/FIRTwitterAuthProvider.h>
+@import FirebaseAuth;
+
 #import <FirebaseAuthUI/FIRAuthUIErrorUtils.h>
 #import <TwitterKit/TwitterKit.h>
 #import "FIRTwitterAuthUI.h"
