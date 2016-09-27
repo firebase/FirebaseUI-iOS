@@ -25,6 +25,7 @@ enum FIRSample: Int, RawRepresentable {
   // out the switch statements below as necessary.
   case Auth = 0
   case Chat = 1
+  case Storage = 2
 
   static var total: Int {
     var count = 0
@@ -44,7 +45,12 @@ enum FIRSample: Int, RawRepresentable {
     case .Auth:
       return (
         title: "Auth",
-        subtitle: "Demonstrates the FirebaseAuthUI flow with customization options"
+        subtitle: "Demonstrates the FirebaseAuthUI flow with customization options."
+      )
+    case .Storage:
+      return (
+        title: "Storage",
+        subtitle: "Demonstrates using FirebaseStorageUI to populate an image view."
       )
     }
   }
@@ -52,9 +58,11 @@ enum FIRSample: Int, RawRepresentable {
   func controller() -> UIViewController {
     switch self {
     case .Chat:
-      return UIStoryboard.instantiateViewController("Main", identifier: "FIRChatViewController") as! FIRChatViewController
+      return UIStoryboard.instantiateViewController("Main", identifier: "FIRChatViewController")
     case .Auth:
-      return UIStoryboard.instantiateViewController("Main", identifier: "FIRAuthViewController") as! FIRAuthViewController
+      return UIStoryboard.instantiateViewController("Main", identifier: "FIRAuthViewController")
+    case .Storage:
+      return UIStoryboard.instantiateViewController("Main", identifier: "FIRStorageViewController")
     }
   }
 }
