@@ -34,6 +34,7 @@ end
 target 'FirebaseFacebookAuthUI' do
   # Pods for Facebook Auth
   pod 'FBSDKLoginKit', '~> 4.0'
+  pod 'Firebase/Auth'
 
   target 'FirebaseFacebookAuthUITests' do
     inherit! :search_paths
@@ -43,6 +44,7 @@ end
 target 'FirebaseGoogleAuthUI' do
   # Pods for Google Auth
   pod 'GoogleSignIn', '~> 4.0'
+  pod 'Firebase/Auth'
 
   target 'FirebaseGoogleAuthUITests' do
     inherit! :search_paths
@@ -52,6 +54,7 @@ end
 target 'FirebaseTwitterAuthUI' do
   # Pods for Twitter Auth
   pod 'TwitterKit', '~> 2.4'
+  pod 'Firebase/Auth'
 
   target 'FirebaseTwitterAuthUITests' do
     inherit! :search_paths
