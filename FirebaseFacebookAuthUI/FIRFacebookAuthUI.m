@@ -43,10 +43,6 @@ static NSString *const kFacebookAppId = @"FacebookAppID";
 static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 
 @implementation FIRFacebookAuthUI {
-  /** @var _loginManager
-      @brief The Facebook login manager.
-   */
-  FBSDKLoginManager *_loginManager;
 
   /** @var _pendingSignInCallback
       @brief The callback which should be invoked when the sign in flow completes (or is cancelled.)
@@ -156,7 +152,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
       NSError *newError = [FIRAuthUIErrorUtils userCancelledSignInError];
       [self completeSignInFlowWithAccessToken:nil error:newError];
     } else {
-      [self completeSignInFlowWithAccessToken:[FBSDKAccessToken currentAccessToken].tokenString
+      [self completeSignInFlowWithAccessToken:result.token.tokenString
                                         error:nil];
     }
   }];

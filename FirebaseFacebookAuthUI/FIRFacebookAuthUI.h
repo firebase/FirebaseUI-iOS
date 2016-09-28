@@ -15,13 +15,21 @@
 //
 
 #import <FirebaseAuthUI/FIRAuthUI.h>
-
+@class FBSDKLoginManager;
 NS_ASSUME_NONNULL_BEGIN
 
 /** @class FIRFacebookAuthUI
     @brief AuthUI components for Facebook Login.
  */
 @interface FIRFacebookAuthUI : NSObject <FIRAuthProviderUI>
+{
+  @protected
+  /** @var _loginManager
+   @brief The Facebook login manager.
+   */
+  FBSDKLoginManager *_loginManager;
+
+}
 
 /** @property scopes
     @brief The scopes to use with Facebook Login.

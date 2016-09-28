@@ -15,7 +15,9 @@
 //
 
 #import <FirebaseFacebookAuthUI/FirebaseFacebookAuthUI.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface FIRFacebookAuthUITest : FIRFacebookAuthUI
+- (void)configureLoginManager:(FBSDKLoginManagerLoginResult *)result withError:(NSError *)error;
 
 @end
