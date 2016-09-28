@@ -47,7 +47,7 @@ class FIRStorageViewController: UIViewController {
     guard let text = self.textField.text else { return }
     guard let url = NSURL(string: text) else { return }
 
-    self.storageRef = FIRStorage.storage().referenceWithPath(url.absoluteString)
+    self.storageRef = FIRStorage.storage().referenceWithPath(url.path ?? "")
 
     self.imageView.sd_setImageWithStorageReference(self.storageRef,
       placeholderImage: nil) { (image, error, cacheType, storageRef) in
