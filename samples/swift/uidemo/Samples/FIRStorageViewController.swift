@@ -23,11 +23,12 @@ class FIRStorageViewController: UIViewController {
   @IBOutlet private var imageView: UIImageView!
   @IBOutlet private var textField: UITextField!
 
-  private var storageRef = FIRStorageReference().child("sample.jpg")
+  private var storageRef = FIRStorage.storage().reference()
 
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     self.textField.autocorrectionType = .No
+    self.textField.autocapitalizationType = .None
     self.imageView.contentMode = .ScaleAspectFit
 
     // Notification boilerplate to handle keyboard appearance/disappearance
@@ -45,15 +46,15 @@ class FIRStorageViewController: UIViewController {
     self.imageView.image = nil
     guard let text = self.textField.text else { return }
     guard let url = NSURL(string: text) else { return }
-    guard let components = url.pathComponents else { return }
 
-    self.storageRef = FIRStorageReference()
+    self.storageRef = FIRStorage.storage().referenceWithPath(url.absoluteString)
 
-    for component in components {
-      self.storageRef = self.storageRef.child(component)
+    self.imageView.sd_setImageWithStorageReference(self.storageRef,
+      placeholderImage: nil) { (image, error, cacheType, storageRef) in
+      if let error = error {
+        print("Error loading image: \(error)")
+      }
     }
-
-    self.imageView.sd_setImageWithStorageReference(self.storageRef)
   }
 
   // MARK: Keyboard boilerplate
