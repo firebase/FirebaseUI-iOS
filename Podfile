@@ -55,6 +55,9 @@ target 'FirebaseTwitterAuthUI' do
 
   target 'FirebaseTwitterAuthUITests' do
     inherit! :search_paths
+    pod 'OCMock'
+#    pod 'TwitterKit', '~> 2.4'
+#    pod 'Firebase/Auth'
   end
 end
 
