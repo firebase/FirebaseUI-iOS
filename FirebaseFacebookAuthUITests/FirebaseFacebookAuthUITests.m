@@ -16,15 +16,115 @@
 
 @import XCTest;
 #import "FIRFacebookAuthUITest.h"
+#import <FirebaseAnalytics/FirebaseAnalytics.h>
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
+#import <FirebaseAuth/FirebaseAuth.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface FirebaseFacebookAuthUITests : XCTestCase
-@property (nonatomic, readwrite) FIRFacebookAuthUI *provider;
+@property (nonatomic, strong) FIRFacebookAuthUITest *provider;
 @end
 
 @implementation FirebaseFacebookAuthUITests
 
 - (void)setUp {
   [super setUp];
+  self.provider = [[FIRFacebookAuthUITest alloc] init];
+}
+
+- (void)testItExists {
+  XCTAssertNotNil(self.provider);
+  XCTAssertNotNil(self.provider.icon);
+  XCTAssertNotNil(self.provider.signInLabel);
+  XCTAssertNotNil(self.provider.buttonBackgroundColor);
+  XCTAssertNotNil(self.provider.buttonTextColor);
+  XCTAssertNotNil(self.provider.providerID);
+  XCTAssertNotNil(self.provider.shortName);
+  XCTAssertTrue(self.provider.signInLabel.length != 0);
+}
+
+- (void)testSuccessfullLogin {
+  NSString *testToken = @"fakeToken";
+  XCTAssertNotNil(self.provider);
+  XCTAssertNil(self.provider.accessToken);
+
+  FBSDKAccessToken *token = [[FBSDKAccessToken alloc] initWithTokenString:testToken
+                                                              permissions:@[]
+                                                      declinedPermissions:@[]
+                                                                    appID:@""
+                                                                   userID:@""
+                                                           expirationDate:nil
+                                                              refreshDate:nil];
+
+  FBSDKLoginManagerLoginResult *result = [[FBSDKLoginManagerLoginResult alloc] initWithToken:token
+                                                                                 isCancelled:NO
+                                                                          grantedPermissions:nil
+                                                                         declinedPermissions:nil];
+  XCTAssertNil(_provider.accessToken);
+  [self.provider configureLoginManager:result withError:nil];
+
+  XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
+  [self.provider signInWithAuth:nil
+                          email:nil
+       presentingViewController:nil
+                     completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
+                       XCTAssertNil(error);
+                       XCTAssertNotNil(credential);
+                       FIRAuthCredential *expectedCredential = [FIRFacebookAuthProvider credentialWithAccessToken:testToken];
+                       XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
+                       XCTAssertNil(self.provider.idToken);
+                       //TODO: test access token validity
+                       [expectation fulfill];
+   }];
+  [self waitForExpectationsWithTimeout:0.2 handler:^(NSError * _Nullable error) {
+    XCTAssertNil(error);
+  }];
+}
+
+- (void)testCancelLogin {
+  FBSDKLoginManagerLoginResult *result = [[FBSDKLoginManagerLoginResult alloc] initWithToken:nil
+                                                                                 isCancelled:YES
+                                                                          grantedPermissions:nil
+                                                                         declinedPermissions:nil];
+  [self.provider configureLoginManager:result withError:nil];
+
+  XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
+  [self.provider signInWithAuth:nil
+                          email:nil
+       presentingViewController:nil
+                     completion:^(FIRAuthCredential * _Nullable credential,
+                                    NSError * _Nullable error) {
+                       XCTAssertNotNil(error);
+                       XCTAssertEqual(error.code, FIRAuthUIErrorCodeUserCancelledSignIn);
+                       XCTAssertNil(credential);
+                       XCTAssertNil(self.provider.idToken);
+                       [expectation fulfill];
+                     }];
+  [self waitForExpectationsWithTimeout:0.2 handler:^(NSError * _Nullable error) {
+    XCTAssertNil(error);
+  }];
+}
+
+- (void)testErrorLogin {
+  NSError *testError = [NSError errorWithDomain:@"testErrorDomain" code:777 userInfo:nil];
+
+  [self.provider configureLoginManager:nil withError:testError];
+
+  XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
+  [self.provider signInWithAuth:nil
+                          email:nil
+       presentingViewController:nil
+                     completion:^(FIRAuthCredential * _Nullable credential,
+                                    NSError * _Nullable error) {
+                       XCTAssertNotNil(error);
+                       XCTAssertEqual(error.userInfo[NSUnderlyingErrorKey], testError);
+                       XCTAssertNil(credential);
+                       XCTAssertNil(self.provider.idToken);
+                       [expectation fulfill];
+                     }];
+  [self waitForExpectationsWithTimeout:0.2 handler:^(NSError * _Nullable error) {
+    XCTAssertNil(error);
+  }];
 }
 
 @end

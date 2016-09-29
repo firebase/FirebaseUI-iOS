@@ -14,8 +14,33 @@
 //  limitations under the License.
 //
 #import "FIRFacebookAuthUITest.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
+@interface FBSDKLoginManagerTest : FBSDKLoginManager
+@property(nonatomic) FBSDKLoginManagerLoginResult *result;
+@property(nonatomic) NSError *error;
+@end
+
+@implementation FBSDKLoginManagerTest
+
+- (void)logInWithReadPermissions:(NSArray *)permissions
+              fromViewController:(UIViewController *)fromViewController
+                         handler:(FBSDKLoginManagerRequestTokenHandler)handler {
+  handler(self.result, self.error);
+}
+@end
+
+
 
 @implementation FIRFacebookAuthUITest
+
+- (instancetype)initWithPermissions:(NSArray *)permissions {
+  if (self = [super initWithPermissions:permissions]) {
+    _loginManager = [[FBSDKLoginManagerTest alloc] init];
+  }
+
+  return self;
+}
 
 + (NSBundle *)frameworkBundle {
   static NSBundle *frameworkBundle = nil;
@@ -25,4 +50,10 @@
   });
   return frameworkBundle;
 }
+
+- (void)configureLoginManager:(FBSDKLoginManagerLoginResult *)result withError:(NSError *)error {
+  ((FBSDKLoginManagerTest *)_loginManager).result = result;
+  ((FBSDKLoginManagerTest *)_loginManager).error = error;
+}
+
 @end
