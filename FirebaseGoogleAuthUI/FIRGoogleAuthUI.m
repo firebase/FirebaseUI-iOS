@@ -147,8 +147,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   return [UIColor colorWithWhite:0 alpha:0.54f];
 }
 
-- (void)signInWithAuth:(FIRAuth *)auth
-                       email:(nullable NSString *)email
+- (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   _presentingViewController = presentingViewController;
@@ -165,7 +164,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   [signIn signIn];
 }
 
-- (void)signOutWithAuth:(FIRAuth *)auth {
+- (void)signOut {
   GIDSignIn *signIn = [self configuredGoogleSignIn];
   [signIn signOut];
 }

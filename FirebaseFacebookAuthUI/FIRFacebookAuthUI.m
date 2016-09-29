@@ -134,8 +134,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   return [UIColor whiteColor];
 }
 
-- (void)signInWithAuth:(FIRAuth *)auth
-                       email:(nullable NSString *)email
+- (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   _pendingSignInCallback = completion;
@@ -158,7 +157,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   }];
 }
 
-- (void)signOutWithAuth:(FIRAuth *)auth {
+- (void)signOut {
   [_loginManager logOut];
 }
 

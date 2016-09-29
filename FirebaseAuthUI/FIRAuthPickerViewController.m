@@ -149,9 +149,8 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
   [self incrementActivity];
 
   // Sign out first to make sure sign in starts with a clean state.
-  [providerUI signOutWithAuth:self.auth];
-  [providerUI signInWithAuth:self.auth
-                       email:nil
+  [providerUI signOut];
+  [providerUI signInWithEmail:nil
     presentingViewController:self
                   completion:^(FIRAuthCredential *_Nullable credential,
                                NSError *_Nullable error) {
@@ -230,9 +229,8 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
       [self incrementActivity];
 
       // Sign out first to make sure sign in starts with a clean state.
-      [bestProvider signOutWithAuth:self.auth];
-      [bestProvider signInWithAuth:self.auth
-                             email:email
+      [bestProvider signOut];
+      [bestProvider signInWithEmail:email
           presentingViewController:self
                         completion:^(FIRAuthCredential *_Nullable credential,
                                      NSError *_Nullable error) {

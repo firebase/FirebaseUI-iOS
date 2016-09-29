@@ -183,7 +183,7 @@
 
   // sign out from all providers (wipes provider tokens too)
   for (id<FIRAuthProviderUI> provider in _authUI.providers) {
-    [provider signOutWithAuth:self.auth];
+    [provider signOut];
   }
 
 }

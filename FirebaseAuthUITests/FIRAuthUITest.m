@@ -48,12 +48,11 @@
   return [UIColor whiteColor];
 }
 
-- (void)signInWithAuth:(FIRAuth *)auth
-                 email:(NSString *)email
+- (void)signInWithEmail:(NSString *)email
   presentingViewController:(UIViewController *)presentingViewController
             completion:(FIRAuthProviderSignInCompletionBlock)completion {}
 
-- (void)signOutWithAuth:(FIRAuth *)auth {}
+- (void)signOut {}
 
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication {
   return self.canHandleURLs;
