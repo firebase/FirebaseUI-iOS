@@ -64,8 +64,7 @@
   [self.provider configureLoginManager:result withError:nil];
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
-  [self.provider signInWithAuth:nil
-                          email:nil
+  [self.provider signInWithEmail:nil
        presentingViewController:nil
                      completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
                        XCTAssertNil(error);
@@ -89,8 +88,7 @@
   [self.provider configureLoginManager:result withError:nil];
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
-  [self.provider signInWithAuth:nil
-                          email:nil
+  [self.provider signInWithEmail:nil
        presentingViewController:nil
                      completion:^(FIRAuthCredential * _Nullable credential,
                                     NSError * _Nullable error) {
@@ -111,8 +109,7 @@
   [self.provider configureLoginManager:nil withError:testError];
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
-  [self.provider signInWithAuth:nil
-                          email:nil
+  [self.provider signInWithEmail:nil
        presentingViewController:nil
                      completion:^(FIRAuthCredential * _Nullable credential,
                                     NSError * _Nullable error) {

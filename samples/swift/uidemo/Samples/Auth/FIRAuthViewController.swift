@@ -89,7 +89,7 @@ class FIRAuthViewController: UITableViewController {
       }
 
       for provider in self.authUI!.providers {
-        provider.signOutWithAuth(self.auth!)
+        provider.signOut()
       }
 
     } else {

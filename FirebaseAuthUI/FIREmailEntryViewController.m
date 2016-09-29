@@ -205,9 +205,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [self incrementActivity];
 
   // Sign out first to make sure sign in starts with a clean state.
-  [provider signOutWithAuth:self.auth];
-  [provider signInWithAuth:self.auth
-                         email:email
+  [provider signOut];
+  [provider signInWithEmail:email
       presentingViewController:self
                     completion:^(FIRAuthCredential *_Nullable credential,
                                  NSError *_Nullable error) {

@@ -105,8 +105,7 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
   return [UIColor whiteColor];
 }
 
-- (void)signInWithAuth:(FIRAuth *)auth
-                 email:(nullable NSString *)email
+- (void)signInWithEmail:(nullable NSString *)email
 presentingViewController:(nullable UIViewController *)presentingViewController
             completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
 
@@ -130,7 +129,7 @@ presentingViewController:(nullable UIViewController *)presentingViewController
    }];
 }
 
-- (void)signOutWithAuth:(FIRAuth *)auth {
+- (void)signOut {
   NSString *twitterUserID = [TWTRAPIClient clientWithCurrentUser].userID;
   if (twitterUserID) {
     [[Twitter sharedInstance].sessionStore logOutUserID:twitterUserID];
@@ -139,7 +138,7 @@ presentingViewController:(nullable UIViewController *)presentingViewController
 
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication {
   return [[Twitter sharedInstance] application:[UIApplication sharedApplication]
-                                       openURL:URL options:nil];
+                                       openURL:URL options:@{}];
 
 }
 

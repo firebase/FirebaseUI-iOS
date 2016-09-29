@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** @typedef FIRAuthProviderSignInCompletionBlock
     @brief The type of block used to notify the auth system of the result of a sign-in flow.
-    @see FIRAuthProvider.signInWithAuth:email:presentingViewController:completion:
+    @see FIRAuthProvider.signInWithEmail:presentingViewController:completion:
  */
 typedef void (^FIRAuthProviderSignInCompletionBlock)(FIRAuthCredential *_Nullable credential,
                                                      NSError *_Nullable error);
@@ -67,7 +67,7 @@ typedef void (^FIRAuthProviderSignInCompletionBlock)(FIRAuthCredential *_Nullabl
  */
 @property(nonatomic, strong, readonly) UIColor *buttonTextColor;
 
-/** @fn signInWithAuth:email:presentingViewController:completion:
+/** @fn signInWithEmail:presentingViewController:completion:
     @brief Called when the user wants to sign in using this auth provider.
     @remarks Implementors should invoke the completion block when the sign-in process has terminated
         or is canceled. There are two valid combinations of parameters; either @c credentials and
@@ -80,16 +80,15 @@ typedef void (^FIRAuthProviderSignInCompletionBlock)(FIRAuthCredential *_Nullabl
     @param presentingViewController The view controller used to present the UI.
     @param completion See remarks. A block to invoke when the sign-in process completes.
  */
-- (void)signInWithAuth:(FIRAuth *)auth
-                       email:(nullable NSString *)email
+- (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion;
 
-/** @fn signOutWithAuth:
+/** @fn signOut
     @brief Called when the user wants to sign out.
     @param auth The @c FIRAuth instance which is starting the sign out flow.
  */
-- (void)signOutWithAuth:(FIRAuth *)auth;
+- (void)signOut;
 
 /** @property accessToken
  @brief User Access Token obtained during sign in.
