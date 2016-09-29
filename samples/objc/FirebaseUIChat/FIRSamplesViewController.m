@@ -57,6 +57,14 @@
                                                                   bundle:NULL] instantiateViewControllerWithIdentifier:@"ViewController"];
                                        return controller;
                                      }]];
+  [samples addObject:[FIRSample sampleWithTitle:@"Storage"
+                              sampleDescription:@"Demonstrates using FirebaseStorageUI to populate an image view."
+                                     controller:^UIViewController *{
+                                       UIViewController *controller =
+                                       [[UIStoryboard storyboardWithName:@"Main"
+                                                                  bundle:NULL] instantiateViewControllerWithIdentifier:@"FIRStorageViewController"];
+                                       return controller;
+                                     }]];
 
   _samplesContainer = samples;
 }

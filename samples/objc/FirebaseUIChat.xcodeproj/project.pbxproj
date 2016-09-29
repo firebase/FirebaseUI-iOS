@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		34755DFFAC2DCB6B1176CE87 /* libPods-FirebaseUIChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFFAE2215B9D3116BF1AEEF /* libPods-FirebaseUIChat.a */; };
+		8D7D5DC11D9D9536006C1857 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */; };
+		8D7F86B51D9DAA0100C2A122 /* FIRStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F86B41D9DAA0100C2A122 /* FIRStorageViewController.m */; };
 		C375CB181D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C375CB161D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m */; };
 		C375CB191D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375CB171D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib */; };
 		C375CB1C1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C375CB1B1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.m */; };
@@ -18,7 +19,6 @@
 		C3AC67621D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3AC675B1D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib */; };
 		C3AC67631D81FE6B00FC956D /* FIRChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC675D1D81FE6B00FC956D /* FIRChatViewController.m */; };
 		C3AC67661D82002F00FC956D /* FIRSample.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67651D82002F00FC956D /* FIRSample.m */; };
-		C3F23ECB1D80F26E0020509F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3F23ECA1D80F26E0020509F /* GoogleService-Info.plist */; };
 		C3F23ED01D80F58A0020509F /* FIRSamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F23ECF1D80F58A0020509F /* FIRSamplesViewController.m */; };
 		D81A05F61B86A78700498183 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D81A05F51B86A78700498183 /* main.m */; };
 		D81A05F91B86A78700498183 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D81A05F81B86A78700498183 /* AppDelegate.m */; };
@@ -28,9 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		104B66B372B77CFFE53BC90D /* Pods-FirebaseUIChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUIChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat.debug.xcconfig"; sourceTree = "<group>"; };
-		2CFFAE2215B9D3116BF1AEEF /* libPods-FirebaseUIChat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseUIChat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		92E1431893A040764FCC115E /* Pods-FirebaseUIChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUIChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat.release.xcconfig"; sourceTree = "<group>"; };
+		8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8D7F86B31D9DAA0100C2A122 /* FIRStorageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FIRStorageViewController.h; path = Storage/FIRStorageViewController.h; sourceTree = "<group>"; };
+		8D7F86B41D9DAA0100C2A122 /* FIRStorageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FIRStorageViewController.m; path = Storage/FIRStorageViewController.m; sourceTree = "<group>"; };
 		C375CB151D935D1F002EECD3 /* FIRCustomAuthPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomAuthPickerViewController.h; sourceTree = "<group>"; };
 		C375CB161D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomAuthPickerViewController.m; sourceTree = "<group>"; };
 		C375CB171D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomAuthPickerViewController.xib; sourceTree = "<group>"; };
@@ -49,7 +49,6 @@
 		C3AC675D1D81FE6B00FC956D /* FIRChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRChatViewController.m; sourceTree = "<group>"; };
 		C3AC67641D82002F00FC956D /* FIRSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRSample.h; sourceTree = "<group>"; };
 		C3AC67651D82002F00FC956D /* FIRSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRSample.m; sourceTree = "<group>"; };
-		C3F23ECA1D80F26E0020509F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "FirebaseUIChat/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3F23ECE1D80F5890020509F /* FIRSamplesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRSamplesViewController.h; sourceTree = "<group>"; };
 		C3F23ECF1D80F58A0020509F /* FIRSamplesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRSamplesViewController.m; sourceTree = "<group>"; };
 		D81A05F01B86A78700498183 /* FirebaseUIChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseUIChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,33 +66,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34755DFFAC2DCB6B1176CE87 /* libPods-FirebaseUIChat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04481B557470072D773A3262 /* Frameworks */ = {
+		8D7D5DC51D9DA075006C1857 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				2CFFAE2215B9D3116BF1AEEF /* libPods-FirebaseUIChat.a */,
+				8D7F86B31D9DAA0100C2A122 /* FIRStorageViewController.h */,
+				8D7F86B41D9DAA0100C2A122 /* FIRStorageViewController.m */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5FA27A05804A9B1A0ADDA56C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				104B66B372B77CFFE53BC90D /* Pods-FirebaseUIChat.debug.xcconfig */,
-				92E1431893A040764FCC115E /* Pods-FirebaseUIChat.release.xcconfig */,
-			);
-			name = Pods;
+			name = Storage;
 			sourceTree = "<group>";
 		};
 		C3AC67501D81FE6B00FC956D /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				8D7D5DC51D9DA075006C1857 /* Storage */,
 				C3AC67511D81FE6B00FC956D /* Auth */,
 				C3AC67541D81FE6B00FC956D /* Chat */,
 			);
@@ -133,11 +124,9 @@
 		D81A05E71B86A78700498183 = {
 			isa = PBXGroup;
 			children = (
-				C3F23ECA1D80F26E0020509F /* GoogleService-Info.plist */,
+				8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */,
 				D81A05F21B86A78700498183 /* FirebaseUIChat */,
 				D81A05F11B86A78700498183 /* Products */,
-				5FA27A05804A9B1A0ADDA56C /* Pods */,
-				04481B557470072D773A3262 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -237,11 +226,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D81A05FF1B86A78700498183 /* Main.storyboard in Resources */,
-				C3F23ECB1D80F26E0020509F /* GoogleService-Info.plist in Resources */,
 				C3AC67621D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib in Resources */,
 				D81A06041B86A78700498183 /* LaunchScreen.xib in Resources */,
 				D81A06011B86A78700498183 /* Images.xcassets in Resources */,
 				C375CB191D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib in Resources */,
+				8D7D5DC11D9D9536006C1857 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +299,7 @@
 				C3AC675F1D81FE6B00FC956D /* FIRChatMessage.m in Sources */,
 				D81A05F61B86A78700498183 /* main.m in Sources */,
 				C3AC67661D82002F00FC956D /* FIRSample.m in Sources */,
+				8D7F86B51D9DAA0100C2A122 /* FIRStorageViewController.m in Sources */,
 				C3AC675E1D81FE6B00FC956D /* FIRAuthViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,7 +409,6 @@
 		};
 		D81A06141B86A78700498183 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 104B66B372B77CFFE53BC90D /* Pods-FirebaseUIChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FirebaseUIChat/Info.plist;
@@ -431,7 +420,6 @@
 		};
 		D81A06151B86A78700498183 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92E1431893A040764FCC115E /* Pods-FirebaseUIChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FirebaseUIChat/Info.plist;
