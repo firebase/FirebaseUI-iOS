@@ -65,7 +65,7 @@
                                                       userName:@"tsetUser"
                                                         userID:@"userID"];
 
-  [[[mockerProvider stub] andReturn:mockedTwitterManager] getTwitterManager];
+  OCMStub([mockerProvider getTwitterManager]).andReturn(mockedTwitterManager);
   OCMStub([mockedTwitterManager logInWithCompletion:([OCMArg invokeBlockWithArgs:session, [NSNull null], nil])]);
 
 
@@ -96,7 +96,7 @@
 
   NSError *loginError = [NSError errorWithDomain:@"errorDomain" code:777 userInfo:nil];
 
-  [[[mockerProvider stub] andReturn:mockedTwitterManager] getTwitterManager];
+  OCMStub([mockerProvider getTwitterManager]).andReturn(mockedTwitterManager);
   OCMStub([mockedTwitterManager logInWithCompletion:([OCMArg invokeBlockWithArgs:[NSNull null], loginError, nil])]);
 
 
@@ -117,6 +117,24 @@
   OCMVerify([mockerProvider getTwitterManager]);
 }
 
+- (void)testSignOut {
+  id mockerProvider = OCMPartialMock(self.provider);
+  id mockedTwitterManager = OCMPartialMock([Twitter sharedInstance]);
+
+  id mockedSessionStore = OCMClassMock([TWTRSessionStore class]);
+  id mockedTwitterClient = OCMClassMock([TWTRAPIClient class]);
+
+  NSString *testClientId = @"testClientId";
+  OCMStub([mockedTwitterClient userID]).andReturn(testClientId);
+  OCMStub(ClassMethod([mockedTwitterClient clientWithCurrentUser])).andReturn(mockedTwitterClient);
+
+  OCMStub([mockerProvider getTwitterManager]).andReturn(mockedTwitterManager);
+  OCMStub([mockedTwitterManager sessionStore]).andReturn(mockedSessionStore);
+
+  [mockerProvider signOut];
+  //verify we are calling sign out method
+  OCMVerify([mockedSessionStore logOutUserID:testClientId]);
+}
 
 
 @end

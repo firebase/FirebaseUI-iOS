@@ -29,6 +29,11 @@ static NSString *const kTableName = @"FirebaseTwitterAuthUI";
  */
 static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 
+@interface FIRTwitterAuthUI()
+- (Twitter *)getTwitterManager;
+@end
+
+
 @implementation FIRTwitterAuthUI
 
 /** @fn frameworkBundle
@@ -75,14 +80,14 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
  @brief Twitter Auth token is matched by FirebaseUI User Access Token
  */
 - (NSString *)accessToken {
-  return [Twitter sharedInstance].sessionStore.session.authToken;
+  return [self getTwitterManager].sessionStore.session.authToken;
 }
 
 /** @fn idToken:
  @brief Twitter Auth Token Secret is matched by FirebaseUI User Id Token
  */
 - (NSString *)idToken {
-  return [Twitter sharedInstance].sessionStore.session.authTokenSecret;
+  return [self getTwitterManager].sessionStore.session.authTokenSecret;
 }
 
 - (NSString *)shortName {
@@ -109,7 +114,7 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 presentingViewController:(nullable UIViewController *)presentingViewController
             completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
 
-  [[Twitter sharedInstance]
+  [[self getTwitterManager]
    logInWithCompletion:^(TWTRSession * _Nullable session, NSError * _Nullable error) {
      if (session) {
        FIRAuthCredential *credential =
@@ -132,14 +137,19 @@ presentingViewController:(nullable UIViewController *)presentingViewController
 - (void)signOut {
   NSString *twitterUserID = [TWTRAPIClient clientWithCurrentUser].userID;
   if (twitterUserID) {
-    [[Twitter sharedInstance].sessionStore logOutUserID:twitterUserID];
+    [[self getTwitterManager].sessionStore logOutUserID:twitterUserID];
   }
 }
 
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication {
-  return [[Twitter sharedInstance] application:[UIApplication sharedApplication]
+  return [[self getTwitterManager] application:[UIApplication sharedApplication]
                                        openURL:URL options:@{}];
 
+}
+
+#pragma mark - Private methods
+- (Twitter *)getTwitterManager {
+  return [Twitter sharedInstance];
 }
 
 @end
