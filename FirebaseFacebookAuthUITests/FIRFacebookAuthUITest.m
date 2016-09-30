@@ -31,15 +31,10 @@
 @end
 
 
-
 @implementation FIRFacebookAuthUITest
 
-- (instancetype)initWithPermissions:(NSArray *)permissions {
-  if (self = [super initWithPermissions:permissions]) {
-    _loginManager = [[FBSDKLoginManagerTest alloc] init];
-  }
-
-  return self;
+- (FBSDKLoginManager *)createLoginManger {
+  return [[FBSDKLoginManagerTest alloc] init];
 }
 
 + (NSBundle *)frameworkBundle {

@@ -37,6 +37,7 @@ target 'FirebaseFacebookAuthUI' do
 
   target 'FirebaseFacebookAuthUITests' do
     inherit! :search_paths
+    pod 'OCMock'
   end
 end
 
@@ -46,6 +47,7 @@ target 'FirebaseGoogleAuthUI' do
 
   target 'FirebaseGoogleAuthUITests' do
     inherit! :search_paths
+    pod 'OCMock'
   end
 end
 
@@ -56,8 +58,6 @@ target 'FirebaseTwitterAuthUI' do
   target 'FirebaseTwitterAuthUITests' do
     inherit! :search_paths
     pod 'OCMock'
-#    pod 'TwitterKit', '~> 2.4'
-#    pod 'Firebase/Auth'
   end
 end
 

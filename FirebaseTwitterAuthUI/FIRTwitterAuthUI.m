@@ -114,8 +114,8 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 presentingViewController:(nullable UIViewController *)presentingViewController
             completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
 
-  [[self getTwitterManager]
-   logInWithCompletion:^(TWTRSession * _Nullable session, NSError * _Nullable error) {
+  [[self getTwitterManager] logInWithViewController:presentingViewController
+                                         completion:^(TWTRSession * _Nullable session, NSError * _Nullable error) {
      if (session) {
        FIRAuthCredential *credential =
        [FIRTwitterAuthProvider credentialWithToken:session.authToken
