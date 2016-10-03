@@ -36,7 +36,10 @@
   self.imageView.contentMode = UIViewContentModeScaleAspectFit;
   self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
   self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+}
 
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(keyboardWillShow:)
                                                name:UIKeyboardWillShowNotification
@@ -45,6 +48,11 @@
                                            selector:@selector(keyboardWillHide:)
                                                name:UIKeyboardWillHideNotification
                                              object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+  [super viewDidDisappear:animated];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (IBAction)loadButtonPressed:(id)sender {
