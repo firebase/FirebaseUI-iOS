@@ -84,9 +84,9 @@
 		C3AC67501D81FE6B00FC956D /* Samples */ = {
 			isa = PBXGroup;
 			children = (
-				8D7D5DC51D9DA075006C1857 /* Storage */,
 				C3AC67511D81FE6B00FC956D /* Auth */,
 				C3AC67541D81FE6B00FC956D /* Chat */,
+				8D7D5DC51D9DA075006C1857 /* Storage */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
