@@ -25,6 +25,7 @@ end
 target 'FirebaseAuthUI' do
   # Pods for Auth
   pod 'Firebase/Auth'
+  pod 'Firebase/Core'
 
   target 'FirebaseAuthUITests' do
     inherit! :search_paths
@@ -44,6 +45,7 @@ end
 target 'FirebaseGoogleAuthUI' do
   # Pods for Google Auth
   pod 'GoogleSignIn', '~> 4.0'
+  pod 'Firebase/Core'
 
   target 'FirebaseGoogleAuthUITests' do
     inherit! :search_paths

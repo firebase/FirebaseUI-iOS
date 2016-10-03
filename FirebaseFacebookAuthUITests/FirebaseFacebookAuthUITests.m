@@ -16,7 +16,6 @@
 
 @import XCTest;
 #import "FIRFacebookAuthUITest.h"
-#import <FirebaseAnalytics/FirebaseAnalytics.h>
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
