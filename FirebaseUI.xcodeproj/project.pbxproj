@@ -6442,6 +6442,7 @@ fi
 					<string>"${PODS_ROOT}/GoogleSignIn/Frameworks"</string>
 					<string>"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks"</string>
 					<string>"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks"</string>
+					<string>"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks"</string>
 				</array>
 				<key>INFOPLIST_FILE</key>
 				<string>FirebaseGoogleAuthUI/Info.plist</string>
@@ -6486,6 +6487,7 @@ fi
 					<string>"${PODS_ROOT}/GoogleSignIn/Frameworks"</string>
 					<string>"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks"</string>
 					<string>"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks"</string>
+					<string>"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks"</string>
 				</array>
 				<key>INFOPLIST_FILE</key>
 				<string>FirebaseGoogleAuthUI/Info.plist</string>
