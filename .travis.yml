@@ -11,7 +11,7 @@ before_install:
 script: xcodebuild -workspace FirebaseUI.xcworkspace
   -scheme FirebaseUI
   -sdk iphonesimulator
-  -destination 'platform=iOS Simulator,name=iPhone 6s'
+  -destination 'platform=iOS Simulator,name=iPhone 7'
   clean
   test
   ONLY_ACTIVE_ARCH=YES
