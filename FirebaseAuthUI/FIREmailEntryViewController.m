@@ -207,27 +207,27 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   // Sign out first to make sure sign in starts with a clean state.
   [provider signOut];
   [provider signInWithEmail:email
-      presentingViewController:self
-                    completion:^(FIRAuthCredential *_Nullable credential,
-                                 NSError *_Nullable error) {
-    if (error) {
-      [self decrementActivity];
+   presentingViewController:self
+                 completion:^(FIRAuthCredential *_Nullable credential,
+                              NSError *_Nullable error) {
+                   if (error) {
+                     [self decrementActivity];
 
-      [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        [self.authUI invokeResultCallbackWithUser:nil error:error];
-      }];
-      return;
-    }
+                     [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                       [self.authUI invokeResultCallbackWithUser:nil error:error];
+                     }];
+                     return;
+                   }
 
-    [self.auth signInWithCredential:credential
-                         completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-      [self decrementActivity];
-
-      [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        [self.authUI invokeResultCallbackWithUser:user error:error];
-      }];
-    }];
-  }];
+                   [self.auth signInWithCredential:credential
+                                        completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+                                          [self decrementActivity];
+                                          
+                                          [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                                            [self.authUI invokeResultCallbackWithUser:user error:error];
+                                          }];
+                                        }];
+                 }];
 }
 
 @end

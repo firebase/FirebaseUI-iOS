@@ -14,10 +14,10 @@
 //  limitations under the License.
 //
 
+#import "FIRTwitterAuthUI.h"
 #import <FirebaseAuth/FIRTwitterAuthProvider.h>
 #import <FirebaseAuthUI/FIRAuthUIErrorUtils.h>
 #import <TwitterKit/TwitterKit.h>
-#import "FIRTwitterAuthUI.h"
 
 /** @var kTableName
  @brief The name of the strings table to search for localized strings.

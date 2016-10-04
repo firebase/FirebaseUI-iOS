@@ -14,15 +14,15 @@
 //  limitations under the License.
 //
 
-#import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
-#import <FirebaseTwitterAuthUI/FirebaseTwitterAuthUI.h>
 
-#import <FirebaseAuthUI/FIRAuthUIErrorUtils.h>
-#import <TwitterKit/TwitterKit.h>
-#import <TwitterCore/TwitterCore.h>
-#import <FirebaseAuth/FirebaseAuth.h>
 #import "FIRTwitterAuthUI.h"
+#import <FirebaseAuth/FirebaseAuth.h>
+#import <FirebaseAuthUI/FIRAuthUIErrorUtils.h>
+#import <FirebaseTwitterAuthUI/FirebaseTwitterAuthUI.h>
+#import <OCMock/OCMock.h>
+#import <TwitterCore/TwitterCore.h>
+#import <TwitterKit/TwitterKit.h>
+#import <XCTest/XCTest.h>
 
 @interface FIRTwitterAuthUI (Testing)
 - (Twitter *)getTwitterManager;
@@ -73,30 +73,31 @@
                                                          userID:@"userID"];
   id mockSession = OCMPartialMock(session);
 
-  OCMStub([mockedProvider getTwitterManager]).andReturn(mockedTwitterManager);
-  OCMStub([mockedTwitterManager logInWithViewController:nil completion:([OCMArg invokeBlockWithArgs:mockSession, [NSNull null], nil])]);
+  OCMExpect([mockedProvider getTwitterManager]).andReturn(mockedTwitterManager);
+  OCMExpect([mockedTwitterManager logInWithViewController:nil completion:([OCMArg invokeBlockWithArgs:mockSession, [NSNull null], nil])]);
 
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
   [mockedProvider signInWithEmail:nil
-        presentingViewController:nil
-                      completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
-                        XCTAssertNil(error);
-                        XCTAssertNotNil(credential);
-                        FIRAuthCredential *expectedCredential = [FIRTwitterAuthProvider credentialWithToken:testToken secret:testSecret];
-                        XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
+         presentingViewController:nil
+                       completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
+                         XCTAssertNil(error);
+                         XCTAssertNotNil(credential);
+                         FIRAuthCredential *expectedCredential = [FIRTwitterAuthProvider credentialWithToken:testToken secret:testSecret];
+                         XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
 
-                        //verify that we are using token from server
-                        OCMVerify([mockSession authToken]);
-                        OCMVerify([mockSession authTokenSecret]);
+                         //verify that we are using token from server
+                         OCMVerify([mockSession authToken]);
+                         OCMVerify([mockSession authTokenSecret]);
 
-                        [expectation fulfill];
-                      }];
+                         [expectation fulfill];
+                       }];
   [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
     XCTAssertNil(error);
   }];
 
-  OCMVerify([mockedProvider getTwitterManager]);
+  OCMVerifyAll(mockedProvider);
+  OCMVerifyAll(mockedTwitterManager);
 }
 
 - (void)testErrorLogin {
@@ -108,9 +109,8 @@
 
   NSError *loginError = [NSError errorWithDomain:@"errorDomain" code:777 userInfo:nil];
 
-  OCMStub([mockedProvider getTwitterManager]).andReturn(mockedTwitterManager);
-  OCMStub([mockedTwitterManager logInWithViewController:nil completion:([OCMArg invokeBlockWithArgs:[NSNull null], loginError, nil])]);
-
+  OCMExpect([mockedProvider getTwitterManager]).andReturn(mockedTwitterManager);
+  OCMExpect([mockedTwitterManager logInWithViewController:nil completion:([OCMArg invokeBlockWithArgs:[NSNull null], loginError, nil])]);
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
   [mockedProvider signInWithEmail:nil
@@ -125,7 +125,8 @@
     XCTAssertNil(error);
   }];
 
-  OCMVerify([mockedProvider getTwitterManager]);
+  OCMVerifyAll(mockedProvider);
+  OCMVerifyAll(mockedTwitterManager);
 }
 
 - (void)testSignOut {
@@ -136,15 +137,18 @@
   id mockedTwitterClient = OCMClassMock([TWTRAPIClient class]);
 
   NSString *testClientId = @"testClientId";
-  OCMStub([mockedTwitterClient userID]).andReturn(testClientId);
-  OCMStub(ClassMethod([mockedTwitterClient clientWithCurrentUser])).andReturn(mockedTwitterClient);
+  OCMExpect([mockedTwitterClient userID]).andReturn(testClientId);
+  OCMExpect(ClassMethod([mockedTwitterClient clientWithCurrentUser])).andReturn(mockedTwitterClient);
 
-  OCMStub([mockedProvider getTwitterManager]).andReturn(mockedTwitterManager);
-  OCMStub([mockedTwitterManager sessionStore]).andReturn(mockedSessionStore);
+  OCMExpect([mockedProvider getTwitterManager]).andReturn(mockedTwitterManager);
+  OCMExpect([mockedTwitterManager sessionStore]).andReturn(mockedSessionStore);
 
+  OCMExpect([mockedSessionStore logOutUserID:testClientId]);
   [mockedProvider signOut];
   //verify we are calling sign out method
-  OCMVerify([mockedSessionStore logOutUserID:testClientId]);
+  OCMVerifyAll(mockedSessionStore);
+  OCMVerifyAll(mockedProvider);
+  OCMVerifyAll(mockedTwitterManager);
 }
 
 
