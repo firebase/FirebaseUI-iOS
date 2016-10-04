@@ -14,5 +14,4 @@ script: xcodebuild -workspace FirebaseUI.xcworkspace
   -destination 'platform=iOS Simulator,name=iPhone 6s'
   test
   ONLY_ACTIVE_ARCH=YES
-  CODE_SIGN_IDENTITY=""
   CODE_SIGNING_REQUIRED=NO
