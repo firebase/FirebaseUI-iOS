@@ -82,9 +82,7 @@
 
   OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
 
-
-//  OCMExpect([mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil]);
-//  OCMExpect([mockSignIn signIn]).andCall(mockSignInDelegate, @selector(signIn:didSignInForUser:withError:));
+  //forward call to signIn delegate
   OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
     [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil];
   });
@@ -136,8 +134,6 @@
   OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
   NSError *signInError = [NSError errorWithDomain:@"sign in domain" code:kGIDSignInErrorCodeUnknown userInfo:@{}];
 
-  //  OCMExpect([mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil]);
-  //  OCMExpect([mockSignIn signIn]).andCall(mockSignInDelegate, @selector(signIn:didSignInForUser:withError:));
   OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
     [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:signInError];
   });
@@ -188,8 +184,6 @@
   OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
   NSError *signInError = [NSError errorWithDomain:@"sign in domain" code:kGIDSignInErrorCodeCanceled userInfo:@{}];
 
-  //  OCMExpect([mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil]);
-  //  OCMExpect([mockSignIn signIn]).andCall(mockSignInDelegate, @selector(signIn:didSignInForUser:withError:));
   OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
     [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:signInError];
   });
