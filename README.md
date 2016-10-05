@@ -18,18 +18,23 @@ pod 'FirebaseUI', '~> 0.5'       # Pull in all Firebase UI features
 If you don't want to use all of FirebaseUI, there are multiple subspecs which can selectively install subsets of the full feature set:
 
 ```ruby
-# Only pull in the "Database" FirebaseUI features
-pod 'FirebaseUI/Database', '~> 0.5'
+# Only pull in FirebaseUI Database features
+pod 'FirebaseUI/Database', '~> 0.6'
 
-# Only pull in the "Auth" FirebaseUI features (including Facebook and Google)
-pod 'FirebaseUI/Auth', '~> 0.5'
+# Only pull in FirebaseUI Storage features
+pod 'FirebaseUI/Storage', '~> 0.6'
 
-# Only pull in the "Facebook" login features
-pod 'FirebaseUI/Facebook', '~> 0.5'
+# Only pull in FirebaseUI Auth features
+pod 'FirebaseUI/Auth', '~> 0.6'
 
-# Only pull in the "Google" login features
-pod 'FirebaseUI/Google', '~> 0.5'
+# Only pull in Facebook login features
+pod 'FirebaseUI/Facebook', '~> 0.6'
 
+# Only pull in Google login features
+pod 'FirebaseUI/Google', '~> 0.6'
+
+# Only pull in Twitter login features
+pod 'FirebaseUI/Google', '~> 0.6'
 ```
 
 If you're including FirebaseUI in a Swift project, make sure you also have:
@@ -42,7 +47,7 @@ use_frameworks!
 Otherwise, you can download the latest version of the [FirebaseUI.framework from the releases
 page](https://github.com/firebase/FirebaseUI-iOS/releases) or include the FirebaseUI
 Xcode project from this repo in your project. You also need to [add the Firebase
-framework](https://firebase.google.com/docs/ios/setup?utm_campaign=Firebase_update_awareness_general_en_05-18-16_&utm_source=?utm_campaign=Firebase_featureoverview_awareness_analytics_en_05-18-16_&utm_source=?utm_campaign=Firebase_announcement_awareness_general_en_05-18-16_&utm_source=Firebase&utm_medium=ads&utm_medium=?utm_campaign=Firebase_announcement_awareness_general_en_05-18-16_&utm_source=Firebase&utm_medium=ads&utm_medium=?utm_campaign=Firebase_update_awareness_auth_en_05-18-16_&utm_source=?utm_campaign=Firebase_announcement_awareness_general_en_05-18-16_&utm_source=Firebase&utm_medium=ads&utm_medium=?utm_campaign=Firebase_featureoverview_awareness_analytics_en_05-18-16_&utm_source=?utm_campaign=Firebase_announcement_awareness_general_en_05-18-16_&utm_source=Firebase&utm_medium=ads&utm_medium=?utm_campaign=Firebase_announcement_awareness_general_en_05-18-16_&utm_source=Firebase&utm_medium=ads) to your project.
+framework](https://firebase.google.com/docs/ios/setup) to your project.
 
 ## Local Setup
 
