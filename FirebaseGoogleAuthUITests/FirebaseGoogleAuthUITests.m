@@ -14,20 +14,16 @@
 //  limitations under the License.
 //
 
-//#import <FirebaseAuth/FirebaseAuth.h>
-//#import <FirebaseAuthUI/FIRAuthUIErrorUtils.h>
+#import <FirebaseAuth/FirebaseAuth.h>
+#import <FirebaseAuthUI/FIRAuthUIErrorUtils.h>
 #import <FirebaseGoogleAuthUI/FirebaseGoogleAuthUI.h>
-//#import <GoogleSignIn/GoogleSignIn.h>
+#import <GoogleSignIn/GoogleSignIn.h>
 #import <OCMock/OCMock.h>
 @import XCTest;
-//@import GoogleSignIn;
-//@import FirebaseAuthUI;
-//@import FirebaseGoogleAuthUI;
-//@import FirebaseAuth;
 
 @interface FIRGoogleAuthUI (Testing)
 + (NSBundle *)frameworkBundle;
-//- (GIDSignIn *)configuredGoogleSignIn;
+- (GIDSignIn *)configuredGoogleSignIn;
 @end
 
 @interface FirebaseGoogleAuthUITests : XCTestCase
@@ -67,161 +63,161 @@
   XCTAssertNil(provider.idToken);
 }
 
-//- (void)testSuccessfullLogin {
-//  NSString *testIdToken = @"idToken";
-//  NSString *testAccessToken = @"accessToken";
-//
-//  id mockSignInDelegate = _mockProvider;
-//  id mockSignIn = OCMClassMock([GIDSignIn class]);
-//  id mockAuthentication = OCMClassMock([GIDAuthentication class]);
-//  id mockGoogleUser = OCMClassMock([GIDGoogleUser class]);
-//
-//  // mock accessToken
-//  OCMExpect([mockGoogleUser authentication]).andReturn(mockAuthentication);
-//  OCMExpect([mockAuthentication accessToken]).andReturn(testAccessToken);
-//
-//  // mock idToken
-//  OCMExpect([mockGoogleUser authentication]).andReturn(mockAuthentication);
-//  OCMExpect([mockAuthentication idToken]).andReturn(testIdToken);
-//
-//  OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
-//
-//
-////  OCMExpect([mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil]);
-////  OCMExpect([mockSignIn signIn]).andCall(mockSignInDelegate, @selector(signIn:didSignInForUser:withError:));
-//  OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
-//    [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil];
-//  });
-//
-//
-//  XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
-//
-//  [_mockProvider signInWithEmail:nil
-//        presentingViewController:nil
-//                      completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
-//                        XCTAssertNil(error);
-//                        XCTAssertNotNil(credential);
-//                        FIRAuthCredential *expectedCredential = [FIRGoogleAuthProvider credentialWithIDToken:testIdToken accessToken:testAccessToken];
-//                        XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
-//
-//                        [expectation fulfill];
-//                      }];
-//  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
-//    XCTAssertNil(error);
-//  }];
-//  
-//  OCMVerifyAll(_mockProvider);
-//  OCMVerifyAll(mockSignInDelegate);
-//  OCMVerifyAll(mockGoogleUser);
-//
-//  //verify that we are doing actual sign in
-//  OCMVerifyAll(mockSignIn);
-//  //verify that we are using token from server
-//  OCMVerifyAll(mockAuthentication);
-//}
-//
-//- (void)testErrorLogin {
-//  NSString *testIdToken = @"idToken";
-//  NSString *testAccessToken = @"accessToken";
-//
-//  id mockSignInDelegate = _mockProvider;
-//  id mockSignIn = OCMClassMock([GIDSignIn class]);
-//  id mockAuthentication = OCMClassMock([GIDAuthentication class]);
-//  id mockGoogleUser = OCMClassMock([GIDGoogleUser class]);
-//
-//  // mock accessToken
-//  OCMReject([mockGoogleUser authentication]).andReturn(mockAuthentication);
-//  OCMReject([mockAuthentication accessToken]).andReturn(testAccessToken);
-//
-//  // mock idToken
-//  OCMReject([mockGoogleUser authentication]).andReturn(mockAuthentication);
-//  OCMReject([mockAuthentication idToken]).andReturn(testIdToken);
-//
-//  OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
-//  NSError *signInError = [NSError errorWithDomain:@"sign in domain" code:kGIDSignInErrorCodeUnknown userInfo:@{}];
-//
-//  //  OCMExpect([mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil]);
-//  //  OCMExpect([mockSignIn signIn]).andCall(mockSignInDelegate, @selector(signIn:didSignInForUser:withError:));
-//  OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
-//    [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:signInError];
-//  });
-//
-//
-//  XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
-//
-//  [_mockProvider signInWithEmail:nil
-//        presentingViewController:nil
-//                      completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
-//                        XCTAssertNotNil(error);
-//                        XCTAssertEqualObjects(error.userInfo[NSUnderlyingErrorKey], signInError);
-//                        XCTAssertNil(credential);
-//
-//                        [expectation fulfill];
-//                      }];
-//  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
-//    XCTAssertNil(error);
-//  }];
-//
-//  OCMVerifyAll(_mockProvider);
-//  OCMVerifyAll(mockSignInDelegate);
-//  OCMVerifyAll(mockGoogleUser);
-//
-//  //verify that we are doing actual sign in
-//  OCMVerifyAll(mockSignIn);
-//  //verify that we are using token from server
-//  OCMVerifyAll(mockAuthentication);
-//}
-//
-//- (void)testCancelLogin {
-//  NSString *testIdToken = @"idToken";
-//  NSString *testAccessToken = @"accessToken";
-//
-//  id mockSignInDelegate = _mockProvider;
-//  id mockSignIn = OCMClassMock([GIDSignIn class]);
-//  id mockAuthentication = OCMClassMock([GIDAuthentication class]);
-//  id mockGoogleUser = OCMClassMock([GIDGoogleUser class]);
-//
-//  // mock accessToken
-//  OCMReject([mockGoogleUser authentication]).andReturn(mockAuthentication);
-//  OCMReject([mockAuthentication accessToken]).andReturn(testAccessToken);
-//
-//  // mock idToken
-//  OCMReject([mockGoogleUser authentication]).andReturn(mockAuthentication);
-//  OCMReject([mockAuthentication idToken]).andReturn(testIdToken);
-//
-//  OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
-//  NSError *signInError = [NSError errorWithDomain:@"sign in domain" code:kGIDSignInErrorCodeCanceled userInfo:@{}];
-//
-//  //  OCMExpect([mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil]);
-//  //  OCMExpect([mockSignIn signIn]).andCall(mockSignInDelegate, @selector(signIn:didSignInForUser:withError:));
-//  OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
-//    [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:signInError];
-//  });
-//
-//  XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
-//
-//  [_mockProvider signInWithEmail:nil
-//        presentingViewController:nil
-//                      completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
-//                        XCTAssertNotNil(error);
-//                        XCTAssertEqualObjects(error, [FIRAuthUIErrorUtils userCancelledSignInError]);
-//                        XCTAssertNil(credential);
-//
-//                        [expectation fulfill];
-//                      }];
-//  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
-//    XCTAssertNil(error);
-//  }];
-//
-//  OCMVerifyAll(_mockProvider);
-//  OCMVerifyAll(mockSignInDelegate);
-//  OCMVerifyAll(mockGoogleUser);
-//
-//  //verify that we are doing actual sign in
-//  OCMVerifyAll(mockSignIn);
-//  //verify that we are using token from server
-//  OCMVerifyAll(mockAuthentication);
-//}
-//
+- (void)testSuccessfullLogin {
+  NSString *testIdToken = @"idToken";
+  NSString *testAccessToken = @"accessToken";
+
+  id mockSignInDelegate = _mockProvider;
+  id mockSignIn = OCMClassMock([GIDSignIn class]);
+  id mockAuthentication = OCMClassMock([GIDAuthentication class]);
+  id mockGoogleUser = OCMClassMock([GIDGoogleUser class]);
+
+  // mock accessToken
+  OCMExpect([mockGoogleUser authentication]).andReturn(mockAuthentication);
+  OCMExpect([mockAuthentication accessToken]).andReturn(testAccessToken);
+
+  // mock idToken
+  OCMExpect([mockGoogleUser authentication]).andReturn(mockAuthentication);
+  OCMExpect([mockAuthentication idToken]).andReturn(testIdToken);
+
+  OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
+
+
+//  OCMExpect([mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil]);
+//  OCMExpect([mockSignIn signIn]).andCall(mockSignInDelegate, @selector(signIn:didSignInForUser:withError:));
+  OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
+    [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil];
+  });
+
+
+  XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
+
+  [_mockProvider signInWithEmail:nil
+        presentingViewController:nil
+                      completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
+                        XCTAssertNil(error);
+                        XCTAssertNotNil(credential);
+                        FIRAuthCredential *expectedCredential = [FIRGoogleAuthProvider credentialWithIDToken:testIdToken accessToken:testAccessToken];
+                        XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
+
+                        [expectation fulfill];
+                      }];
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
+    XCTAssertNil(error);
+  }];
+  
+  OCMVerifyAll(_mockProvider);
+  OCMVerifyAll(mockSignInDelegate);
+  OCMVerifyAll(mockGoogleUser);
+
+  //verify that we are doing actual sign in
+  OCMVerifyAll(mockSignIn);
+  //verify that we are using token from server
+  OCMVerifyAll(mockAuthentication);
+}
+
+- (void)testErrorLogin {
+  NSString *testIdToken = @"idToken";
+  NSString *testAccessToken = @"accessToken";
+
+  id mockSignInDelegate = _mockProvider;
+  id mockSignIn = OCMClassMock([GIDSignIn class]);
+  id mockAuthentication = OCMClassMock([GIDAuthentication class]);
+  id mockGoogleUser = OCMClassMock([GIDGoogleUser class]);
+
+  // mock accessToken
+  OCMReject([mockGoogleUser authentication]).andReturn(mockAuthentication);
+  OCMReject([mockAuthentication accessToken]).andReturn(testAccessToken);
+
+  // mock idToken
+  OCMReject([mockGoogleUser authentication]).andReturn(mockAuthentication);
+  OCMReject([mockAuthentication idToken]).andReturn(testIdToken);
+
+  OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
+  NSError *signInError = [NSError errorWithDomain:@"sign in domain" code:kGIDSignInErrorCodeUnknown userInfo:@{}];
+
+  //  OCMExpect([mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil]);
+  //  OCMExpect([mockSignIn signIn]).andCall(mockSignInDelegate, @selector(signIn:didSignInForUser:withError:));
+  OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
+    [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:signInError];
+  });
+
+
+  XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
+
+  [_mockProvider signInWithEmail:nil
+        presentingViewController:nil
+                      completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
+                        XCTAssertNotNil(error);
+                        XCTAssertEqualObjects(error.userInfo[NSUnderlyingErrorKey], signInError);
+                        XCTAssertNil(credential);
+
+                        [expectation fulfill];
+                      }];
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
+    XCTAssertNil(error);
+  }];
+
+  OCMVerifyAll(_mockProvider);
+  OCMVerifyAll(mockSignInDelegate);
+  OCMVerifyAll(mockGoogleUser);
+
+  //verify that we are doing actual sign in
+  OCMVerifyAll(mockSignIn);
+  //verify that we are using token from server
+  OCMVerifyAll(mockAuthentication);
+}
+
+- (void)testCancelLogin {
+  NSString *testIdToken = @"idToken";
+  NSString *testAccessToken = @"accessToken";
+
+  id mockSignInDelegate = _mockProvider;
+  id mockSignIn = OCMClassMock([GIDSignIn class]);
+  id mockAuthentication = OCMClassMock([GIDAuthentication class]);
+  id mockGoogleUser = OCMClassMock([GIDGoogleUser class]);
+
+  // mock accessToken
+  OCMReject([mockGoogleUser authentication]).andReturn(mockAuthentication);
+  OCMReject([mockAuthentication accessToken]).andReturn(testAccessToken);
+
+  // mock idToken
+  OCMReject([mockGoogleUser authentication]).andReturn(mockAuthentication);
+  OCMReject([mockAuthentication idToken]).andReturn(testIdToken);
+
+  OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
+  NSError *signInError = [NSError errorWithDomain:@"sign in domain" code:kGIDSignInErrorCodeCanceled userInfo:@{}];
+
+  //  OCMExpect([mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil]);
+  //  OCMExpect([mockSignIn signIn]).andCall(mockSignInDelegate, @selector(signIn:didSignInForUser:withError:));
+  OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
+    [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:signInError];
+  });
+
+  XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
+
+  [_mockProvider signInWithEmail:nil
+        presentingViewController:nil
+                      completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
+                        XCTAssertNotNil(error);
+                        XCTAssertEqualObjects(error, [FIRAuthUIErrorUtils userCancelledSignInError]);
+                        XCTAssertNil(credential);
+
+                        [expectation fulfill];
+                      }];
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
+    XCTAssertNil(error);
+  }];
+
+  OCMVerifyAll(_mockProvider);
+  OCMVerifyAll(mockSignInDelegate);
+  OCMVerifyAll(mockGoogleUser);
+
+  //verify that we are doing actual sign in
+  OCMVerifyAll(mockSignIn);
+  //verify that we are using token from server
+  OCMVerifyAll(mockAuthentication);
+}
+
 
 @end

@@ -24,42 +24,47 @@ end
 
 target 'FirebaseAuthUI' do
   # Pods for Auth
-  pod 'Firebase/Auth'
-  pod 'Firebase/Core'
+  pod 'FirebaseAuth'
+
+  # Pod for FirebaseGoogleAuthUI (inlcuded to base so it's not duplicated)
+  pod 'GoogleSignIn', '~> 4.0'
 
   target 'FirebaseAuthUITests' do
     inherit! :search_paths
   end
-end
 
-target 'FirebaseFacebookAuthUI' do
-  # Pods for Facebook Auth
-  pod 'FBSDKLoginKit', '~> 4.0'
-
-  target 'FirebaseFacebookAuthUITests' do
+  target 'FirebaseGoogleAuthUI' do
     inherit! :search_paths
-    pod 'OCMock'
+    # Pods for Google Auth
+    # pod 'GoogleSignIn', '~> 4.0'
+
+    target 'FirebaseGoogleAuthUITests' do
+      inherit! :search_paths
+      pod 'OCMock'
+    end
   end
-end
 
-target 'FirebaseGoogleAuthUI' do
-  # Pods for Google Auth
-  pod 'GoogleSignIn', '~> 4.0'
-  pod 'Firebase/Core'
-
-  target 'FirebaseGoogleAuthUITests' do
+  target 'FirebaseFacebookAuthUI' do
     inherit! :search_paths
-    pod 'OCMock'
+    # Pods for Facebook Auth
+    pod 'FBSDKLoginKit', '~> 4.0'
+    pod 'FBSDKCoreKit', '~> 4.0'
+
+    target 'FirebaseFacebookAuthUITests' do
+      inherit! :search_paths
+      pod 'OCMock'
+    end
   end
-end
 
-target 'FirebaseTwitterAuthUI' do
-  # Pods for Twitter Auth
-  pod 'TwitterKit', '~> 2.4'
-
-  target 'FirebaseTwitterAuthUITests' do
+  target 'FirebaseTwitterAuthUI' do
     inherit! :search_paths
-    pod 'OCMock'
+    # Pods for Twitter Auth
+    pod 'TwitterKit', '~> 2.4'
+
+    target 'FirebaseTwitterAuthUITests' do
+      inherit! :search_paths
+      pod 'OCMock'
+    end
   end
 end
 
