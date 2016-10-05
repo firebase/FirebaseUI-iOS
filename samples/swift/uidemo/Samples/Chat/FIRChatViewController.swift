@@ -26,40 +26,40 @@ class FIRChatViewController: UIViewController, UICollectionViewDelegateFlowLayou
   // All of the error handling in this controller is done with `fatalError`;
   // please don't copy paste it into your production code.
   
-  private static let reuseIdentifier = "FIRChatCollectionViewCell"
+  fileprivate static let reuseIdentifier = "FIRChatCollectionViewCell"
   
-  @IBOutlet private var collectionView: UICollectionView!
-  @IBOutlet private var textView: UITextView! {
+  @IBOutlet fileprivate var collectionView: UICollectionView!
+  @IBOutlet fileprivate var textView: UITextView! {
     didSet {
-      textView.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.5).CGColor
+      textView.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
       textView.layer.borderWidth = 1
       textView.layer.cornerRadius = 8
       textView.layer.masksToBounds = true
     }
   }
-  @IBOutlet private var sendButton: UIButton!
+  @IBOutlet fileprivate var sendButton: UIButton!
   
   /// Used to shift view contents up when the keyboard appears.
-  @IBOutlet private var bottomConstraint: NSLayoutConstraint!
+  @IBOutlet fileprivate var bottomConstraint: NSLayoutConstraint!
   
-  private let auth = FIRAuth.auth()
-  private let chatReference = FIRDatabase.database().reference().child("swift_demo-chat")
+  fileprivate let auth = FIRAuth.auth()
+  fileprivate let chatReference = FIRDatabase.database().reference().child("swift_demo-chat")
   
-  private var collectionViewDataSource: FirebaseCollectionViewDataSource!
+  fileprivate var collectionViewDataSource: FirebaseCollectionViewDataSource!
   
-  private var user: FIRUser?
-  private var query: FIRDatabaseQuery?
+  fileprivate var user: FIRUser?
+  fileprivate var query: FIRDatabaseQuery?
   
-  private var authStateListenerHandle: FIRAuthStateDidChangeListenerHandle?
+  fileprivate var authStateListenerHandle: FIRAuthStateDidChangeListenerHandle?
   
   // MARK: - Interesting stuff
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    self.authStateListenerHandle = self.auth?.addAuthStateDidChangeListener { (auth, user) in
+    self.authStateListenerHandle = self.auth?.addStateDidChangeListener { (auth, user) in
       self.user = user
-      self.query = self.chatReference.queryLimitedToLast(50)
+      self.query = self.chatReference.queryLimited(toLast: 50)
       
       // The initializer called below--though it takes a collection view--
       // doesn't actually set the collection view's data source, so if
@@ -69,7 +69,7 @@ class FIRChatViewController: UIViewController, UICollectionViewDelegateFlowLayou
         view: self.collectionView)
       self.collectionView.dataSource = self.collectionViewDataSource
       
-      self.collectionViewDataSource.populateCellWithBlock { (anyCell, data) in
+      self.collectionViewDataSource.populateCell { (anyCell, data) in
         guard let cell = anyCell as? FIRChatCollectionViewCell else {
           fatalError("Unexpected collection view cell class \(anyCell.self)")
         }
@@ -82,12 +82,12 @@ class FIRChatViewController: UIViewController, UICollectionViewDelegateFlowLayou
       // but unfortunately FirebaseCollectionViewDataSource uses the FirebaseArray
       // delegate methods to update its own internal state, so in order to scroll
       // on new insertions we still need to use the query directly.
-      self.query!.observeEventType(.ChildAdded, withBlock: { [unowned self] _ in
+      self.query!.observe(.childAdded, with: { [unowned self] _ in
         self.scrollToBottom(animated: true)
         })
     }
     
-    self.auth?.signInAnonymouslyWithCompletion { (user, error) in
+    self.auth?.signInAnonymously { (user, error) in
       if let error = error {
         // An error here means the user couldn't sign in. Correctly
         // handling it depends on the context as well as your app's
@@ -98,20 +98,20 @@ class FIRChatViewController: UIViewController, UICollectionViewDelegateFlowLayou
     }
     
     // Notification boilerplate to handle keyboard appearance/disappearance
-    NSNotificationCenter.defaultCenter().addObserver(self,
+    NotificationCenter.default.addObserver(self,
                                                      selector: #selector(keyboardWillShow),
-                                                     name: UIKeyboardWillShowNotification,
+                                                     name: NSNotification.Name.UIKeyboardWillShow,
                                                      object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self,
+    NotificationCenter.default.addObserver(self,
                                                      selector: #selector(keyboardWillHide),
-                                                     name: UIKeyboardWillHideNotification,
+                                                     name: NSNotification.Name.UIKeyboardWillHide,
                                                      object: nil)
   }
   
-  @objc private func didTapSend(sender: AnyObject) {
+  @objc fileprivate func didTapSend(_ sender: AnyObject) {
     guard let user = self.auth?.currentUser else { return }
     let uid = user.uid
-    let name = "User " + uid[uid.characters.startIndex..<uid.characters.startIndex.advancedBy(6)]
+    let name = "User " + uid[uid.characters.startIndex..<uid.characters.index(uid.characters.startIndex, offsetBy: 6)]
     let _text = self.textView.text as String?
     guard let text = _text else { return }
     if (text.isEmpty) { return }
@@ -132,27 +132,27 @@ class FIRChatViewController: UIViewController, UICollectionViewDelegateFlowLayou
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.collectionView.backgroundColor = UIColor.whiteColor()
+    self.collectionView.backgroundColor = UIColor.white
     self.collectionView.delegate = self
     let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-    layout.minimumInteritemSpacing = CGFloat.max
+    layout.minimumInteritemSpacing = CGFloat.greatestFiniteMagnitude
     layout.minimumLineSpacing = 4
     
-    self.sendButton.addTarget(self, action: #selector(didTapSend), forControlEvents: .TouchUpInside)
+    self.sendButton.addTarget(self, action: #selector(didTapSend), for: .touchUpInside)
   }
   
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     if let handle = self.authStateListenerHandle {
-      self.auth?.removeAuthStateDidChangeListener(handle)
+      self.auth?.removeStateDidChangeListener(handle)
     }
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
   
-  @objc private func keyboardWillShow(notification: NSNotification) {
-    let userInfo = notification.userInfo!
+  @objc fileprivate func keyboardWillShow(_ notification: Notification) {
+    let userInfo = (notification as NSNotification).userInfo!
     let endFrameValue = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
-    let endHeight = endFrameValue.CGRectValue().size.height
+    let endHeight = endFrameValue.cgRectValue.size.height
     
     self.bottomConstraint.constant = endHeight
     
@@ -160,38 +160,38 @@ class FIRChatViewController: UIViewController, UICollectionViewDelegateFlowLayou
     let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
     
     UIView.setAnimationCurve(curve)
-    UIView.animateWithDuration(duration) { 
+    UIView.animate(withDuration: duration, animations: { 
       self.view.layoutIfNeeded()
-    }
+    }) 
   }
   
-  @objc private func keyboardWillHide(notification: NSNotification) {
+  @objc fileprivate func keyboardWillHide(_ notification: Notification) {
     self.bottomConstraint.constant = 6
     
-    let userInfo = notification.userInfo!
+    let userInfo = (notification as NSNotification).userInfo!
     let curve = UIViewAnimationCurve(rawValue: userInfo[UIKeyboardAnimationCurveUserInfoKey] as! Int)!
     let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
     
     UIView.setAnimationCurve(curve)
-    UIView.animateWithDuration(duration) {
+    UIView.animate(withDuration: duration, animations: {
       self.view.layoutIfNeeded()
-    }
+    }) 
   }
   
-  private func scrollToBottom(animated animated: Bool) {
+  fileprivate func scrollToBottom(animated: Bool) {
     let count = self.collectionViewDataSource.collectionView(self.collectionView, numberOfItemsInSection: 0)
-    let indexPath = NSIndexPath(forRow: count - 1, inSection: 0)
-    self.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
+    let indexPath = IndexPath(row: count - 1, section: 0)
+    self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: animated)
   }
   
   // MARK: UICollectionViewDelegateFlowLayout
   
-  func collectionView(collectionView: UICollectionView, layout
-    collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+  func collectionView(_ collectionView: UICollectionView, layout
+    collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let heightPadding: CGFloat = 16
     
     let width = self.view.frame.size.width
-    let blob = self.collectionViewDataSource.objectAtIndex(UInt(indexPath.row)) as! FIRDataSnapshot
+    let blob = self.collectionViewDataSource.object(at: UInt((indexPath as NSIndexPath).row)) as! FIRDataSnapshot
     let text = Chat(snapshot: blob)!.text
     
     let rect = FIRChatCollectionViewCell.boundingRectForText(text, maxWidth: width)

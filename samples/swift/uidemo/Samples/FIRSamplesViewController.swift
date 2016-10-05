@@ -21,9 +21,9 @@ import UIKit
 // in here it's probably a typo or some other small accident.
 class FIRSamplesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
-  private let reuseIdentifier = "FIRSamplesViewControllerCell"
+  fileprivate let reuseIdentifier = "FIRSamplesViewControllerCell"
   
-  @IBOutlet private var tableView: UITableView!
+  @IBOutlet fileprivate var tableView: UITableView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,27 +37,27 @@ class FIRSamplesViewController: UIViewController, UITableViewDelegate, UITableVi
   
   // MARK: - UITableView Delegate
   
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let navController = self.navigationController! // assert nonnull
-    let targetController = FIRSample(rawValue: indexPath.row)!.controller()
+    let targetController = FIRSample(rawValue: (indexPath as NSIndexPath).row)!.controller()
     
     navController.pushViewController(targetController, animated: true)
-    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    tableView.deselectRow(at: indexPath, animated: true)
   }
   
   // MARK: - UITableView Data Source
 
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let sampleType = FIRSample(rawValue: indexPath.row)!
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let sampleType = FIRSample(rawValue: (indexPath as NSIndexPath).row)!
     
-    let cell = self.tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as! FIRSampleCell
+    let cell = self.tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! FIRSampleCell
     
     cell.configureWithType(sampleType)
     
     return cell
   }
   
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return FIRSample.total
   }
 }

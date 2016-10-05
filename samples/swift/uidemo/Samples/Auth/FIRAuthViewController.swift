@@ -21,7 +21,7 @@ import FirebaseGoogleAuthUI
 import FirebaseFacebookAuthUI
 import FirebaseTwitterAuthUI
 
-let kFirebaseTermsOfService = NSURL(string: "https://firebase.google.com/terms/")!
+let kFirebaseTermsOfService = URL(string: "https://firebase.google.com/terms/")!
 
 /// A view controller displaying a basic sign-in flow using FIRAuthUI.
 class FIRAuthViewController: UITableViewController {
@@ -30,10 +30,10 @@ class FIRAuthViewController: UITableViewController {
   // info, see the Auth README at ../../FirebaseAuthUI/README.md
   // and https://firebase.google.com/docs/auth/
 
-  private var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
+  fileprivate var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
 
-  private(set) var auth: FIRAuth? = FIRAuth.auth()
-  private(set) var authUI: FIRAuthUI? = FIRAuthUI.defaultAuthUI()
+  fileprivate(set) var auth: FIRAuth? = FIRAuth.auth()
+  fileprivate(set) var authUI: FIRAuthUI? = FIRAuthUI.default()
 
   @IBOutlet weak var cellSignedIn: UITableViewCell!
   @IBOutlet weak var cellName: UITableViewCell!
@@ -45,7 +45,7 @@ class FIRAuthViewController: UITableViewController {
   @IBOutlet weak var btnAuthorization: UIBarButtonItem!
 
 
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -60,24 +60,24 @@ class FIRAuthViewController: UITableViewController {
     ]
     self.authUI?.providers = providers
 
-    self.authUI?.TOSURL = kFirebaseTermsOfService
+    self.authUI?.tosurl = kFirebaseTermsOfService
 
     self.authStateDidChangeHandle =
-      self.auth?.addAuthStateDidChangeListener(self.updateUI(auth:user:))
+      self.auth?.addStateDidChangeListener(self.updateUI(auth:user:))
   }
 
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     if let handle = self.authStateDidChangeHandle {
-      self.auth?.removeAuthStateDidChangeListener(handle)
+      self.auth?.removeStateDidChangeListener(handle)
     }
   }
 
-  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableViewAutomaticDimension
   }
 
-  @IBAction func onAuthorize(sender: AnyObject) {
+  @IBAction func onAuthorize(_ sender: AnyObject) {
     if (self.auth?.currentUser) != nil {
       do {
         try self.auth?.signOut()
@@ -94,12 +94,12 @@ class FIRAuthViewController: UITableViewController {
 
     } else {
       let controller = self.authUI!.authViewController()
-      self.presentViewController(controller, animated: true, completion: nil)
+      self.present(controller, animated: true, completion: nil)
     }
   }
 
   // Boilerplate
-  func updateUI(auth auth: FIRAuth, user: FIRUser?) {
+  func updateUI(auth: FIRAuth, user: FIRUser?) {
     if let user = self.auth?.currentUser {
       self.cellSignedIn.textLabel?.text = "Signed in"
       self.cellName.textLabel?.text = user.displayName ?? "(null)"
