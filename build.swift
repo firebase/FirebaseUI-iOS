@@ -73,6 +73,20 @@ func buildTask(args: [String] = []) -> Process {
   return task
 }
 
+let test = buildTask(args: [
+  "-workspace", "FirebaseUI.xcworkspace",
+  "-scheme",  "FirebaseUI",
+  "-sdk", "iphonesimulator",
+  "-destination", "platform=iOS Simulator,name=iPhone 7",
+  "test",
+  "ONLY_ACTIVE_ARCH=YES", "CODE_SIGNING_REQUIRED=NO"
+])
+test.launch()
+test.waitUntilExit()
+guard test.terminationStatus == 0 else {
+  exit(test.terminationStatus)
+}
+
 /// A value type representing an xcodebuild call.
 /// param keys are parameters and expect leading dashes,
 /// i.e. `-workspace`
