@@ -5,6 +5,7 @@ target 'FirebaseUIChat' do
 #  used for development from sources
   pod 'FirebaseAuthUI', :path => "../../FirebaseUI_dev_auth.podspec"
   pod 'FirebaseDatabaseUI', :path => "../../FirebaseUI_dev_db.podspec"
+  pod 'FirebaseStorageUI', :path => "../../FirebaseUI_dev_storage.podspec"
   pod 'FirebaseFacebookAuthUI', :path => "../../FirebaseUI_dev_fb.podspec"
   pod 'FirebaseGoogleAuthUI', :path => "../../FirebaseUI_dev_ggl.podspec"
   pod 'FirebaseTwitterAuthUI', :path => "../../FirebaseUI_dev_tw.podspec"
@@ -14,4 +15,3 @@ target 'FirebaseUIChat' do
 #  pod 'FirebaseUI', :podspec => "../../FirebaseUI.podspec"
 
 end
-
