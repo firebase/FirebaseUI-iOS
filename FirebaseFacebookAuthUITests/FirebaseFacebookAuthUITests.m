@@ -71,19 +71,19 @@
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
   [self.provider signInWithEmail:nil
-       presentingViewController:nil
-                     completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
-                       XCTAssertNil(error);
-                       XCTAssertNotNil(credential);
-                       FIRAuthCredential *expectedCredential = [FIRFacebookAuthProvider credentialWithAccessToken:testToken];
-                       XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
-                       XCTAssertNil(self.provider.idToken);
+        presentingViewController:nil
+                      completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
+                        XCTAssertNil(error);
+                        XCTAssertNotNil(credential);
+                        FIRAuthCredential *expectedCredential = [FIRFacebookAuthProvider credentialWithAccessToken:testToken];
+                        XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
+                        XCTAssertNil(self.provider.idToken);
 
-                       //verify that we are using token from server
-                       OCMVerify([mockToken tokenString]);
+                        //verify that we are using token from server
+                        OCMVerify([mockToken tokenString]);
 
-                       [expectation fulfill];
-   }];
+                        [expectation fulfill];
+                      }];
   [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
     XCTAssertNil(error);
   }];
@@ -107,19 +107,19 @@
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
   [self.provider signInWithEmail:nil
-       presentingViewController:nil
-                     completion:^(FIRAuthCredential * _Nullable credential,
-                                    NSError * _Nullable error) {
-                       XCTAssertNotNil(error);
-                       XCTAssertEqual(error.code, FIRAuthUIErrorCodeUserCancelledSignIn);
-                       XCTAssertNil(credential);
-                       XCTAssertNil(self.provider.idToken);
+        presentingViewController:nil
+                      completion:^(FIRAuthCredential * _Nullable credential,
+                                   NSError * _Nullable error) {
+                        XCTAssertNotNil(error);
+                        XCTAssertEqual(error.code, FIRAuthUIErrorCodeUserCancelledSignIn);
+                        XCTAssertNil(credential);
+                        XCTAssertNil(self.provider.idToken);
 
-                       //verify that we are not using token from server if user canceled request
-                       OCMReject([mockToken tokenString]);
+                        //verify that we are not using token from server if user canceled request
+                        OCMReject([mockToken tokenString]);
 
-                       [expectation fulfill];
-                     }];
+                        [expectation fulfill];
+                      }];
   [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
     XCTAssertNil(error);
   }];
@@ -132,15 +132,15 @@
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
   [self.provider signInWithEmail:nil
-       presentingViewController:nil
-                     completion:^(FIRAuthCredential * _Nullable credential,
-                                    NSError * _Nullable error) {
-                       XCTAssertNotNil(error);
-                       XCTAssertEqual(error.userInfo[NSUnderlyingErrorKey], testError);
-                       XCTAssertNil(credential);
-                       XCTAssertNil(self.provider.idToken);
-                       [expectation fulfill];
-                     }];
+        presentingViewController:nil
+                      completion:^(FIRAuthCredential * _Nullable credential,
+                                   NSError * _Nullable error) {
+                        XCTAssertNotNil(error);
+                        XCTAssertEqual(error.userInfo[NSUnderlyingErrorKey], testError);
+                        XCTAssertNil(credential);
+                        XCTAssertNil(self.provider.idToken);
+                        [expectation fulfill];
+                      }];
   [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
     XCTAssertNil(error);
   }];
@@ -150,19 +150,21 @@
 
   // used to make possible initialization of FIRFacebookAuthUI
   id mockProviderClass = OCMClassMock([FIRFacebookAuthUI class]);
-  OCMStub(ClassMethod([mockProviderClass frameworkBundle])).andReturn([NSBundle bundleForClass:[self class]]);
+  OCMExpect(ClassMethod([mockProviderClass frameworkBundle])).andReturn([NSBundle bundleForClass:[self class]]);
 
   id mockProvider = OCMPartialMock([[FIRFacebookAuthUI alloc] init]);
   id mockFacebookManager = OCMClassMock([FBSDKLoginManager class]);
 
   // stub login manager
-  OCMStub(ClassMethod([mockProvider frameworkBundle])).andReturn([NSBundle bundleForClass:[self class]]);
-  OCMStub([mockProvider createLoginManger]).andReturn(mockFacebookManager);
+  OCMExpect(ClassMethod([mockProvider frameworkBundle])).andReturn([NSBundle bundleForClass:[self class]]);
+  OCMExpect([mockProvider createLoginManger]).andReturn(mockFacebookManager);
   [mockProvider configureProvider];
 
+  OCMExpect([mockFacebookManager logOut]);
   [mockProvider signOut];
 
-  OCMVerify([mockFacebookManager logOut]);
+  OCMVerifyAll(mockFacebookManager);
+  OCMVerifyAll(mockProvider);
 
 }
 
