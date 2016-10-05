@@ -59,6 +59,39 @@ func cp(from source: String, to destination: String) -> Void {
   guard task.terminationStatus == 0 else { exit(task.terminationStatus) }
 }
 
+func ln(from source: String, to destination: String) -> Void {
+  let task = Process()
+  task.launchPath = "/bin/ln"
+  task.arguments = ["-s", source, destination]
+  task.launch()
+  task.waitUntilExit()
+  guard task.terminationStatus == 0 else { exit(task.terminationStatus) }
+}
+
+/// Moves files to trash
+func rm(_ path: String, isDirectory: Bool, isStrict: Bool) -> Void {
+  let url = URL(fileURLWithPath: path, isDirectory: isDirectory)
+  let fileManager = FileManager()
+  do {
+    try fileManager.trashItem(at: url, resultingItemURL: nil)
+  } catch (let error) {
+    if (isStrict) {
+      print(fileManager.currentDirectoryPath)
+      print(error)
+      exit(1)
+    }
+  }
+}
+
+func zip(_ input: String, output: String) -> Void {
+  let task = Process()
+  task.launchPath = "/usr/bin/zip"
+  task.arguments = ["-r", "-9", "-y", output, input]
+  task.launch()
+  task.waitUntilExit()
+  guard task.terminationStatus == 0 else { exit(task.terminationStatus) }
+}
+
 mkdir(DerivedDataDir)
 mkdir(BuiltProductsDir)
 
@@ -223,34 +256,23 @@ cp(from: "README.md", to: BuiltProductsDir)
 
 // copy sample projects
 cp(from: "samples", to: BuiltProductsDir)
+rm(BuiltProductsDir + "samples/objc/Pods", isDirectory: true, isStrict: false)
+rm(BuiltProductsDir + "samples/objc/Podfile.lock", isDirectory: false, isStrict: false)
+rm(BuiltProductsDir + "samples/objc/GoogleService-Info.plist", isDirectory: false, isStrict: false)
+rm(BuiltProductsDir + "samples/swift/Pods", isDirectory: true, isStrict: false)
+rm(BuiltProductsDir + "samples/swift/Podfile.lock", isDirectory: false, isStrict: false)
+rm(BuiltProductsDir + "samples/swift/GoogleService-Info.plist", isDirectory: false, isStrict: false)
+rm(BuiltProductsDir + "samples/objc/FirebaseUIChat.xcodeproj/xcuserdata", isDirectory: true, isStrict: false)
+rm(BuiltProductsDir + "samples/objc/FirebaseUIChat.xcworkspace/xcuserdata", isDirectory: true, isStrict: false)
+rm(BuiltProductsDir + "samples/swift/uidemo.xcodeproj/xcuserdata", isDirectory: true, isStrict: false)
+rm(BuiltProductsDir + "samples/swift/uidemo.xcworkspace/xcuserdata", isDirectory: true, isStrict: false)
+ln(from: "./objc/FirebaseUIChat.xcworkspace", to: BuiltProductsDir + "samples/FirebaseUI-demo-objc.xcworkspace")
+ln(from: "./swift/uidemo.xcworkspace", to: BuiltProductsDir + "samples/FirebaseUI-demo-swift.xcworkspace")
 
 // clean up build artifacts afterward
-
-/// Moves files to trash
-func rm(_ path: String, isDirectory: Bool) -> Void {
-  let url = URL(fileURLWithPath: path, isDirectory: isDirectory)
-  let fileManager = FileManager()
-  do {
-    try fileManager.trashItem(at: url, resultingItemURL: nil)
-  } catch (let error) {
-    print(fileManager.currentDirectoryPath)
-    print(error)
-    exit(1)
-  }
-}
-
-func zip(_ input: String, output: String) -> Void {
-  let task = Process()
-  task.launchPath = "/usr/bin/zip"
-  task.arguments = ["-r", "-9", output, input]
-  task.launch()
-  task.waitUntilExit()
-  guard task.terminationStatus == 0 else { exit(task.terminationStatus) }
-}
-
 zip("FirebaseUIFrameworks", output: "FirebaseUIFrameworks.zip")
 
-rm(DerivedDataDir, isDirectory: true)
-rm(BuiltProductsDir, isDirectory: true)
+rm(DerivedDataDir, isDirectory: true, isStrict: true)
+rm(BuiltProductsDir, isDirectory: true, isStrict: true)
 
 exit(0)

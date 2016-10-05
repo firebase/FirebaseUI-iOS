@@ -19,16 +19,16 @@ import Firebase
 
 /// Displays an individual chat message inside of a FIRChatViewController.
 class FIRChatCollectionViewCell: UICollectionViewCell {
-  @IBOutlet private(set) var textLabel: UILabel! {
+  @IBOutlet fileprivate(set) var textLabel: UILabel! {
     didSet {
       textLabel.font = FIRChatCollectionViewCell.messageFont
     }
   }
   
-  static func boundingRectForText(text: String, maxWidth: CGFloat) -> CGRect {
+  static func boundingRectForText(_ text: String, maxWidth: CGFloat) -> CGRect {
     let attributes = [NSFontAttributeName: FIRChatCollectionViewCell.messageFont]
-    let rect = text.boundingRectWithSize(CGSize(width: maxWidth, height: CGFloat.max),
-                                         options: [.UsesLineFragmentOrigin],
+    let rect = text.boundingRect(with: CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude),
+                                         options: [.usesLineFragmentOrigin],
                                          attributes: attributes,
                                          context: nil)
     return rect
@@ -42,14 +42,14 @@ class FIRChatCollectionViewCell: UICollectionViewCell {
   }
   
   /// These constraints are used to left- and right-align chat bubbles.
-  @IBOutlet private(set) var leadingConstraint: NSLayoutConstraint!
-  @IBOutlet private(set) var trailingConstraint: NSLayoutConstraint!
+  @IBOutlet fileprivate(set) var leadingConstraint: NSLayoutConstraint!
+  @IBOutlet fileprivate(set) var trailingConstraint: NSLayoutConstraint!
   
   /// The font used to display chat messages.
   /// This is the source of truth for the message font,
   /// overriding whatever is set in interface builder.
   static var messageFont: UIFont {
-    return UIFont.systemFontOfSize(UIFont.systemFontSize())
+    return UIFont.systemFont(ofSize: UIFont.systemFontSize)
   }
   
   /// Colors for messages (text and background) sent from the client.
@@ -57,7 +57,7 @@ class FIRChatCollectionViewCell: UICollectionViewCell {
   static var selfColors: (background: UIColor, text: UIColor) {
     return (
       background: UIColor(red: 21 / 255, green: 60 / 255, blue: 235 / 255, alpha: 1),
-      text: UIColor.whiteColor()
+      text: UIColor.white
     )
   }
   
@@ -66,34 +66,34 @@ class FIRChatCollectionViewCell: UICollectionViewCell {
   static var othersColors: (background: UIColor, text: UIColor) {
     return (
       background: UIColor(red: 230 / 255, green: 230 / 255, blue: 230 / 255, alpha: 1),
-      text: UIColor.blackColor()
+      text: UIColor.black
     )
   }
   
   /// Sets the cell's contents and lays out the cell according
   /// to the contents set.
-  func populateCellWithChat(chat: Chat, user: FIRUser?, maxWidth: CGFloat) {
+  func populateCellWithChat(_ chat: Chat, user: FIRUser?, maxWidth: CGFloat) {
     self.textLabel.text = chat.text
     
     let leftRightPadding: CGFloat = 24
     let rect = FIRChatCollectionViewCell.boundingRectForText(self.textLabel.text!,
                                                           maxWidth: maxWidth)
     
-    let constant = max(maxWidth - rect.size.width - leftRightPadding, CGFloat.min)
+    let constant = max(maxWidth - rect.size.width - leftRightPadding, CGFloat.leastNormalMagnitude)
     if chat.uid == user?.uid ?? "" {
       let colors = FIRChatCollectionViewCell.selfColors
       self.containerView.backgroundColor = colors.background
       self.textLabel.textColor = colors.text
-      self.trailingConstraint.active = false
+      self.trailingConstraint.isActive = false
       self.leadingConstraint.constant = constant
-      self.leadingConstraint.active = true
+      self.leadingConstraint.isActive = true
     } else {
       let colors = FIRChatCollectionViewCell.othersColors
       self.containerView.backgroundColor = colors.background
       self.textLabel.textColor = colors.text
-      self.leadingConstraint.active = false
+      self.leadingConstraint.isActive = false
       self.trailingConstraint.constant = constant
-      self.trailingConstraint.active = true
+      self.trailingConstraint.isActive = true
     }
   }
 }

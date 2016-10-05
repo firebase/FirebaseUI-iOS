@@ -17,7 +17,7 @@
 import UIKit
 
 extension UIStoryboard {
-  static func instantiateViewController(storyboard: String, identifier: String) -> UIViewController {
-    return UIStoryboard(name: storyboard, bundle: nil).instantiateViewControllerWithIdentifier(identifier)
+  static func instantiateViewController(_ storyboard: String, identifier: String) -> UIViewController {
+    return UIStoryboard(name: storyboard, bundle: nil).instantiateViewController(withIdentifier: identifier)
   }
 }

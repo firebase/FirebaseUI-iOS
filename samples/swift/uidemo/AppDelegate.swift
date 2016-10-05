@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Successfully running this sample requires an app in Firebase and an
     // accompanying valid GoogleService-Info.plist file.
     FIRApp.configure()
@@ -33,9 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
   
-  func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-    let sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String?
-    if FIRAuthUI.defaultAuthUI()?.handleOpenURL(url, sourceApplication: sourceApplication) ?? false {
+  func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+    let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?
+    if FIRAuthUI.default()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
       return true
     }
     // other URL handling goes here.

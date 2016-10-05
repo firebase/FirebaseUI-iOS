@@ -20,36 +20,36 @@ import FirebaseStorageUI
 
 class FIRStorageViewController: UIViewController {
 
-  @IBOutlet private var imageView: UIImageView!
-  @IBOutlet private var textField: UITextField!
+  @IBOutlet fileprivate var imageView: UIImageView!
+  @IBOutlet fileprivate var textField: UITextField!
 
-  private var storageRef = FIRStorage.storage().reference()
+  fileprivate var storageRef = FIRStorage.storage().reference()
 
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    self.textField.autocorrectionType = .No
-    self.textField.autocapitalizationType = .None
-    self.imageView.contentMode = .ScaleAspectFit
+    self.textField.autocorrectionType = .no
+    self.textField.autocapitalizationType = .none
+    self.imageView.contentMode = .scaleAspectFit
 
     // Notification boilerplate to handle keyboard appearance/disappearance
-    NSNotificationCenter.defaultCenter().addObserver(self,
+    NotificationCenter.default.addObserver(self,
                                                      selector: #selector(keyboardWillShow),
-                                                     name: UIKeyboardWillShowNotification,
+                                                     name: NSNotification.Name.UIKeyboardWillShow,
                                                      object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self,
+    NotificationCenter.default.addObserver(self,
                                                      selector: #selector(keyboardWillHide),
-                                                     name: UIKeyboardWillHideNotification,
+                                                     name: NSNotification.Name.UIKeyboardWillHide,
                                                      object: nil)
   }
 
-  @IBAction private func loadButtonPressed(sender: AnyObject) {
+  @IBAction fileprivate func loadButtonPressed(_ sender: AnyObject) {
     self.imageView.image = nil
     guard let text = self.textField.text else { return }
-    guard let url = NSURL(string: text) else { return }
+    guard let url = URL(string: text) else { return }
 
-    self.storageRef = FIRStorage.storage().referenceWithPath(url.path ?? "")
+    self.storageRef = FIRStorage.storage().reference(withPath: url.path)
 
-    self.imageView.sd_setImageWithStorageReference(self.storageRef,
+    self.imageView.sd_setImage(with: self.storageRef,
       placeholderImage: nil) { (image, error, cacheType, storageRef) in
       if let error = error {
         print("Error loading image: \(error)")
@@ -60,12 +60,12 @@ class FIRStorageViewController: UIViewController {
   // MARK: Keyboard boilerplate
 
   /// Used to shift textfield up when the keyboard appears.
-  @IBOutlet private var bottomConstraint: NSLayoutConstraint!
+  @IBOutlet fileprivate var bottomConstraint: NSLayoutConstraint!
 
-  @objc private func keyboardWillShow(notification: NSNotification) {
-    let userInfo = notification.userInfo!
+  @objc fileprivate func keyboardWillShow(_ notification: Notification) {
+    let userInfo = (notification as NSNotification).userInfo!
     let endFrameValue = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
-    let endHeight = endFrameValue.CGRectValue().size.height
+    let endHeight = endFrameValue.cgRectValue.size.height
 
     self.bottomConstraint.constant = endHeight
 
@@ -73,21 +73,21 @@ class FIRStorageViewController: UIViewController {
     let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
 
     UIView.setAnimationCurve(curve)
-    UIView.animateWithDuration(duration) {
+    UIView.animate(withDuration: duration, animations: {
       self.view.layoutIfNeeded()
-    }
+    }) 
   }
 
-  @objc private func keyboardWillHide(notification: NSNotification) {
+  @objc fileprivate func keyboardWillHide(_ notification: Notification) {
     self.bottomConstraint.constant = 0
 
-    let userInfo = notification.userInfo!
+    let userInfo = (notification as NSNotification).userInfo!
     let curve = UIViewAnimationCurve(rawValue: userInfo[UIKeyboardAnimationCurveUserInfoKey] as! Int)!
     let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
 
     UIView.setAnimationCurve(curve)
-    UIView.animateWithDuration(duration) {
+    UIView.animate(withDuration: duration, animations: {
       self.view.layoutIfNeeded()
-    }
+    }) 
   }
 }
