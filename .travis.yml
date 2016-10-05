@@ -5,22 +5,14 @@ xcode_scheme: FirebaseUI
 
 rvm: 2.3.1
 before_install:
+  - gem uninstall --all --executables cocoapods
   - gem install cocoapods -v '1.0.1'
   - pod install --repo-update
 
-script: 
-- xcodebuild -workspace FirebaseUI.xcworkspace
+script: xcodebuild -workspace FirebaseUI.xcworkspace
   -scheme FirebaseUI
   -sdk iphonesimulator
   -destination 'platform=iOS Simulator,name=iPhone 6s'
-  build
-  ONLY_ACTIVE_ARCH=YES
-  CODE_SIGNING_REQUIRED=NO
-
-- xcodebuild -workspace FirebaseUI.xcworkspace
-  -scheme FirebaseUI
-  -sdk iphonesimulator
-  -destination 'platform=iOS Simulator,name=iPhone 6s'
-  test
+  build test
   ONLY_ACTIVE_ARCH=YES
   CODE_SIGNING_REQUIRED=NO
