@@ -3,15 +3,15 @@ platform :ios, '8.0'
 target 'FirebaseUIChat' do
 
 #  used for development from sources
-  pod 'FirebaseAuthUI', :path => "../../FirebaseUI_dev_auth.podspec"
-  pod 'FirebaseDatabaseUI', :path => "../../FirebaseUI_dev_db.podspec"
-  pod 'FirebaseStorageUI', :path => "../../FirebaseUI_dev_storage.podspec"
-  pod 'FirebaseFacebookAuthUI', :path => "../../FirebaseUI_dev_fb.podspec"
-  pod 'FirebaseGoogleAuthUI', :path => "../../FirebaseUI_dev_ggl.podspec"
-  pod 'FirebaseTwitterAuthUI', :path => "../../FirebaseUI_dev_tw.podspec"
+  pod 'FirebaseAuthUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_auth.podspec"
+  pod 'FirebaseDatabaseUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_db.podspec"
+  pod 'FirebaseStorageUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_storage.podspec"
+  pod 'FirebaseFacebookAuthUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_fb.podspec"
+  pod 'FirebaseGoogleAuthUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_ggl.podspec"
+  pod 'FirebaseTwitterAuthUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_tw.podspec"
 
 #  used for development from released frameworks
 #  use_frameworks!
-#  pod 'FirebaseUI', :podspec => "../../FirebaseUI.podspec"
+#  pod 'FirebaseUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI.podspec"
 
 end
