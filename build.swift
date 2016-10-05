@@ -207,6 +207,9 @@ lipos.forEach { $0.launch() }
 cp(from: "LICENSE", to: BuiltProductsDir)
 cp(from: "README.md", to: BuiltProductsDir)
 
+// copy sample projects
+cp(from: "samples", to: BuiltProductsDir)
+
 // clean up build artifacts afterward
 
 /// Moves files to trash
