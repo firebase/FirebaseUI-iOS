@@ -219,5 +219,16 @@
   OCMVerifyAll(mockAuthentication);
 }
 
+- (void)testSignOut {
+  id mockSignIn = OCMClassMock([GIDSignIn class]);
+  OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
+  OCMExpect([mockSignIn signOut]);
+
+  [_mockProvider signOut];
+
+  OCMVerifyAll(_mockProvider);
+  OCMVerifyAll(mockSignIn);
+}
+
 
 @end
