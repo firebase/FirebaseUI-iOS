@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8D2A84A51D678B2B0058DF04"
-               BuildableName = "FirebaseUI.framework"
-               BlueprintName = "FirebaseUI"
+               BlueprintIdentifier = "C32516911D88A54C00B0B3F9"
+               BuildableName = "FirebaseTwitterAuthUI.framework"
+               BlueprintName = "FirebaseTwitterAuthUI"
                ReferencedContainer = "container:FirebaseUI.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,56 +32,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8DCC4FC91D678CDC00B0D3C4"
-               BuildableName = "FirebaseAuthUITests.xctest"
-               BlueprintName = "FirebaseAuthUITests"
-               ReferencedContainer = "container:FirebaseUI.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8DCC4FAD1D678CC400B0D3C4"
-               BuildableName = "FirebaseDatabaseUITests.xctest"
-               BlueprintName = "FirebaseDatabaseUITests"
-               ReferencedContainer = "container:FirebaseUI.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8DCC4FE51D678CE800B0D3C4"
-               BuildableName = "FirebaseFacebookAuthUITests.xctest"
-               BlueprintName = "FirebaseFacebookAuthUITests"
-               ReferencedContainer = "container:FirebaseUI.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8DCC50011D678CF500B0D3C4"
-               BuildableName = "FirebaseGoogleAuthUITests.xctest"
-               BlueprintName = "FirebaseGoogleAuthUITests"
-               ReferencedContainer = "container:FirebaseUI.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8D9084351D9316AB00333CC8"
-               BuildableName = "FirebaseStorageUITests.xctest"
-               BlueprintName = "FirebaseStorageUITests"
-               ReferencedContainer = "container:FirebaseUI.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "C325169A1D88A54C00B0B3F9"
                BuildableName = "FirebaseTwitterAuthUITests.xctest"
                BlueprintName = "FirebaseTwitterAuthUITests"
@@ -92,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8D2A84A51D678B2B0058DF04"
-            BuildableName = "FirebaseUI.framework"
-            BlueprintName = "FirebaseUI"
+            BlueprintIdentifier = "C32516911D88A54C00B0B3F9"
+            BuildableName = "FirebaseTwitterAuthUI.framework"
+            BlueprintName = "FirebaseTwitterAuthUI"
             ReferencedContainer = "container:FirebaseUI.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -102,7 +52,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -114,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8D2A84A51D678B2B0058DF04"
-            BuildableName = "FirebaseUI.framework"
-            BlueprintName = "FirebaseUI"
+            BlueprintIdentifier = "C32516911D88A54C00B0B3F9"
+            BuildableName = "FirebaseTwitterAuthUI.framework"
+            BlueprintName = "FirebaseTwitterAuthUI"
             ReferencedContainer = "container:FirebaseUI.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -132,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8D2A84A51D678B2B0058DF04"
-            BuildableName = "FirebaseUI.framework"
-            BlueprintName = "FirebaseUI"
+            BlueprintIdentifier = "C32516911D88A54C00B0B3F9"
+            BuildableName = "FirebaseTwitterAuthUI.framework"
+            BlueprintName = "FirebaseTwitterAuthUI"
             ReferencedContainer = "container:FirebaseUI.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
