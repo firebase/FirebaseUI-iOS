@@ -1,6 +1,6 @@
 platform :ios, '8.0'
 
-target 'FirebaseUIChat' do
+target 'FirebaseUI-demo-objc' do
 
 #  used for development from sources
   pod 'FirebaseAuthUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_auth.podspec"

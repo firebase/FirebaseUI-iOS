@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2EBAE127DEBD66C58E245B21 /* libPods-FirebaseUI-demo-objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 938FB9FC77F663938FE622D6 /* libPods-FirebaseUI-demo-objc.a */; };
 		8D7D5DC11D9D9536006C1857 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */; };
 		8D7F86B51D9DAA0100C2A122 /* FIRStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F86B41D9DAA0100C2A122 /* FIRStorageViewController.m */; };
 		C375CB181D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C375CB161D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m */; };
@@ -28,9 +29,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		598B087699EFBC1BE0B36A92 /* Pods-FirebaseUI-demo-objc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUI-demo-objc.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUI-demo-objc/Pods-FirebaseUI-demo-objc.release.xcconfig"; sourceTree = "<group>"; };
+		647B80EEA828EC06543AD749 /* Pods-FirebaseUI-demo-objc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUI-demo-objc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUI-demo-objc/Pods-FirebaseUI-demo-objc.debug.xcconfig"; sourceTree = "<group>"; };
 		8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D7F86B31D9DAA0100C2A122 /* FIRStorageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FIRStorageViewController.h; path = Storage/FIRStorageViewController.h; sourceTree = "<group>"; };
 		8D7F86B41D9DAA0100C2A122 /* FIRStorageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FIRStorageViewController.m; path = Storage/FIRStorageViewController.m; sourceTree = "<group>"; };
+		938FB9FC77F663938FE622D6 /* libPods-FirebaseUI-demo-objc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseUI-demo-objc.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C375CB151D935D1F002EECD3 /* FIRCustomAuthPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomAuthPickerViewController.h; sourceTree = "<group>"; };
 		C375CB161D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomAuthPickerViewController.m; sourceTree = "<group>"; };
 		C375CB171D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomAuthPickerViewController.xib; sourceTree = "<group>"; };
@@ -51,7 +55,7 @@
 		C3AC67651D82002F00FC956D /* FIRSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRSample.m; sourceTree = "<group>"; };
 		C3F23ECE1D80F5890020509F /* FIRSamplesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRSamplesViewController.h; sourceTree = "<group>"; };
 		C3F23ECF1D80F58A0020509F /* FIRSamplesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRSamplesViewController.m; sourceTree = "<group>"; };
-		D81A05F01B86A78700498183 /* FirebaseUIChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseUIChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D81A05F01B86A78700498183 /* FirebaseUI-demo-objc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FirebaseUI-demo-objc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D81A05F41B86A78700498183 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D81A05F51B86A78700498183 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D81A05F71B86A78700498183 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -66,12 +70,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EBAE127DEBD66C58E245B21 /* libPods-FirebaseUI-demo-objc.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3CEA8AFFCA922D2EE7184ACF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				938FB9FC77F663938FE622D6 /* libPods-FirebaseUI-demo-objc.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		73A50C19F323688E38D93693 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				647B80EEA828EC06543AD749 /* Pods-FirebaseUI-demo-objc.debug.xcconfig */,
+				598B087699EFBC1BE0B36A92 /* Pods-FirebaseUI-demo-objc.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8D7D5DC51D9DA075006C1857 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,20 +147,22 @@
 			isa = PBXGroup;
 			children = (
 				8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */,
-				D81A05F21B86A78700498183 /* FirebaseUIChat */,
+				D81A05F21B86A78700498183 /* FirebaseUI-demo-objc */,
 				D81A05F11B86A78700498183 /* Products */,
+				73A50C19F323688E38D93693 /* Pods */,
+				3CEA8AFFCA922D2EE7184ACF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		D81A05F11B86A78700498183 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D81A05F01B86A78700498183 /* FirebaseUIChat.app */,
+				D81A05F01B86A78700498183 /* FirebaseUI-demo-objc.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D81A05F21B86A78700498183 /* FirebaseUIChat */ = {
+		D81A05F21B86A78700498183 /* FirebaseUI-demo-objc */ = {
 			isa = PBXGroup;
 			children = (
 				D81A05F71B86A78700498183 /* AppDelegate.h */,
@@ -153,7 +177,7 @@
 				D81A06021B86A78700498183 /* LaunchScreen.xib */,
 				D81A05F31B86A78700498183 /* Supporting Files */,
 			);
-			path = FirebaseUIChat;
+			path = "FirebaseUI-demo-objc";
 			sourceTree = "<group>";
 		};
 		D81A05F31B86A78700498183 /* Supporting Files */ = {
@@ -168,9 +192,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D81A05EF1B86A78700498183 /* FirebaseUIChat */ = {
+		D81A05EF1B86A78700498183 /* FirebaseUI-demo-objc */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D81A06131B86A78700498183 /* Build configuration list for PBXNativeTarget "FirebaseUIChat" */;
+			buildConfigurationList = D81A06131B86A78700498183 /* Build configuration list for PBXNativeTarget "FirebaseUI-demo-objc" */;
 			buildPhases = (
 				6108EB0AB9E416E4AE3984D7 /* [CP] Check Pods Manifest.lock */,
 				D81A05EC1B86A78700498183 /* Sources */,
@@ -183,9 +207,9 @@
 			);
 			dependencies = (
 			);
-			name = FirebaseUIChat;
-			productName = FirebaseUIChat;
-			productReference = D81A05F01B86A78700498183 /* FirebaseUIChat.app */;
+			name = "FirebaseUI-demo-objc";
+			productName = "FirebaseUI-demo-objc";
+			productReference = D81A05F01B86A78700498183 /* FirebaseUI-demo-objc.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -202,7 +226,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D81A05EB1B86A78700498183 /* Build configuration list for PBXProject "FirebaseUIChat" */;
+			buildConfigurationList = D81A05EB1B86A78700498183 /* Build configuration list for PBXProject "FirebaseUI-demo-objc" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -215,7 +239,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D81A05EF1B86A78700498183 /* FirebaseUIChat */,
+				D81A05EF1B86A78700498183 /* FirebaseUI-demo-objc */,
 			);
 		};
 /* End PBXProject section */
@@ -264,7 +288,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseUI-demo-objc/Pods-FirebaseUI-demo-objc-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9D09D152A3C8575E8465B6B5 /* [CP] Copy Pods Resources */ = {
@@ -279,7 +303,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseUIChat/Pods-FirebaseUIChat-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseUI-demo-objc/Pods-FirebaseUI-demo-objc-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -409,22 +433,24 @@
 		};
 		D81A06141B86A78700498183 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 647B80EEA828EC06543AD749 /* Pods-FirebaseUI-demo-objc.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = FirebaseUIChat/Info.plist;
+				INFOPLIST_FILE = "FirebaseUI-demo-objc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.google.firebase.FirebaseUIChat;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.google.firebase.FirebaseUI-demo-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		D81A06151B86A78700498183 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 598B087699EFBC1BE0B36A92 /* Pods-FirebaseUI-demo-objc.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = FirebaseUIChat/Info.plist;
+				INFOPLIST_FILE = "FirebaseUI-demo-objc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.google.firebase.FirebaseUIChat;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.google.firebase.FirebaseUI-demo-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -432,7 +458,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D81A05EB1B86A78700498183 /* Build configuration list for PBXProject "FirebaseUIChat" */ = {
+		D81A05EB1B86A78700498183 /* Build configuration list for PBXProject "FirebaseUI-demo-objc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D81A06111B86A78700498183 /* Debug */,
@@ -441,7 +467,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D81A06131B86A78700498183 /* Build configuration list for PBXNativeTarget "FirebaseUIChat" */ = {
+		D81A06131B86A78700498183 /* Build configuration list for PBXNativeTarget "FirebaseUI-demo-objc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D81A06141B86A78700498183 /* Debug */,

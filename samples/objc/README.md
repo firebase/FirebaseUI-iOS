@@ -12,9 +12,9 @@ This is a super simple FirebaseUI Chat demo. It shows:
 In order to install and run:
 ``` bash
 git clone https://github.com/firebase/FirebaseUI-iOS.git
-cd FirebaseUI-iOS/examples/FirebaseUIChat
+cd FirebaseUI-iOS/samples/objc
 pod install
-open FirebaseUIChat.xcworkspace
+open FirebaseUI-demo-objc.xcworkspace
 ```
 Once you've opened the workspace, go into `Supporting Files/Info.plist` and either fill in the social provider information currently commented out, or delete extra providers you're not interested in. For providers you choose to keep, enable them in your Firebase Dashboard according to the [user authentication docs](https://www.firebase.com/docs/ios/guide/user-auth.html). In `ViewController.m` make sure to only enable providers that you've configured properly.
 

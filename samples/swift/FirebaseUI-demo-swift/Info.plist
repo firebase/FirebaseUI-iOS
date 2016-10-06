@@ -54,9 +54,9 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
   <key>FacebookAppID</key>
-	<string>{your-app-id}</string>
- 	<key>FacebookDisplayName</key>
- 	<string>{your-app-name}</string>
+  <string>fb{your-app-id}</string>
+  <key>FacebookDisplayName</key>
+  <string>{your-app-name}</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
