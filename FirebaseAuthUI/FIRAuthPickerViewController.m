@@ -73,8 +73,6 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  self.tableView.scrollEnabled = NO;
-
   UIBarButtonItem *cancelBarButton =
       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                     target:self

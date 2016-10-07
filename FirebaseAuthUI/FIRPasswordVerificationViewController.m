@@ -47,6 +47,8 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
       @brief The @c UITextField that user enters password into.
    */
   UITextField *_passwordField;
+
+  __unsafe_unretained IBOutlet UITableView *_tableView;
 }
 
 - (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
@@ -76,15 +78,15 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   // The initial frame doesn't matter as long as it's not CGRectZero, otherwise a default empty
   // header is added by UITableView.
   FIRAuthUITableHeaderView *tableHeaderView =
-      [[FIRAuthUITableHeaderView alloc] initWithFrame:self.tableView.bounds];
-  self.tableView.tableHeaderView = tableHeaderView;
+      [[FIRAuthUITableHeaderView alloc] initWithFrame:_tableView.bounds];
+  _tableView.tableHeaderView = tableHeaderView;
 }
 
 - (void)viewDidLayoutSubviews {
   [super viewDidLayoutSubviews];
 
   FIRAuthUITableHeaderView *tableHeaderView =
-      (FIRAuthUITableHeaderView *)self.tableView.tableHeaderView;
+      (FIRAuthUITableHeaderView *)_tableView.tableHeaderView;
   tableHeaderView.titleLabel.text = [FIRAuthUIStrings existingAccountTitle];
   tableHeaderView.detailLabel.text =
       [NSString stringWithFormat:[FIRAuthUIStrings passwordVerificationMessage], _email];
@@ -93,7 +95,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   [tableHeaderView sizeToFit];
   if (!CGSizeEqualToSize(tableHeaderView.frame.size, previousSize)) {
     // Update the height of table header view by setting the view again.
-    self.tableView.tableHeaderView = tableHeaderView;
+    _tableView.tableHeaderView = tableHeaderView;
   }
 }
 
