@@ -28,12 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * FirebaseTableViewDataSource provides an class that conforms to the
- * UITableViewDataSource protocol which allows UITableViews to implement 
- * FirebaseTableViewDataSource in order to provide a UITableView synchronized 
- * to a Firebase reference or query. In addition to handling all Firebase 
- * child events (added, changed, removed, moved), FirebaseTableViewDataSource 
- * handles UITableViewCell creation, either with the default UITableViewCell, 
- * prototype cells, custom UITableViewCell subclasses, or custom XIBs, and 
+ * UITableViewDataSource protocol which allows UITableViews to implement
+ * FirebaseTableViewDataSource in order to provide a UITableView synchronized
+ * to a Firebase reference or query. In addition to handling all Firebase
+ * child events (added, changed, removed, moved), FirebaseTableViewDataSource
+ * handles UITableViewCell creation, either with the default UITableViewCell,
+ * prototype cells, custom UITableViewCell subclasses, or custom XIBs, and
  * provides a simple [FirebaseTableViewDataSource populateCellWithBlock:]
  * method which allows developers to populate the cells created for them
  * with desired data from Firebase.
@@ -52,7 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(strong, nonatomic, readonly) UITableViewCell *(^populateCell)
   (UITableView *tableView, NSIndexPath *indexPath, FIRDataSnapshot *snap);
 
-
 /**
  * Initialize an instance of FirebaseTableViewDataSource.
  * @param query A Firebase query to bind the data source to.
@@ -60,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
  *   not retained by the data source.
  * @param populateCell A closure used by the data source to create/reuse
  *   table view cells and populate their content. This closure is retained
- *   by the data source, so if you capture self in the closure and also claim ownership 
+ *   by the data source, so if you capture self in the closure and also claim ownership
  *   of the data source, be sure to avoid retain cycles by capturing a weak reference to self.
  * @return An instance of FirebaseTableViewDataSource.
  */
