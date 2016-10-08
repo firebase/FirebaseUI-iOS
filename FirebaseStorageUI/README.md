@@ -21,7 +21,7 @@ To load an image from a `FIRStorageReference`, simply use the `UIImageView+Fireb
 FIRStorageReference *reference = ...;
 
 // UIImageView in your ViewController
-UIImageView imageView = ...;
+UIImageView *imageView = ...;
 
 // Load the image using SDWebImage
 [imageView sd_setImageWithStorageReference:reference placeholderImage:placeholderImage];
