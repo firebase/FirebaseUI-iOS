@@ -124,9 +124,11 @@
         [self.snapshots removeObjectAtIndex:fromIndex];
 
         NSUInteger toIndex = 0;
-        NSUInteger prevIndex = [self indexForKey:previousChildKey];
-        if (prevIndex != NSNotFound) {
-          toIndex = prevIndex + 1;
+        if (previousChildKey != nil) {
+            NSUInteger prevIndex = [self indexForKey:previousChildKey];
+            if (prevIndex != NSNotFound) {
+                toIndex = prevIndex + 1;
+            }
         }
         [self.snapshots insertObject:snapshot atIndex:toIndex];
 

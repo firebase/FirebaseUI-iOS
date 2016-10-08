@@ -410,4 +410,36 @@
     XCTAssert(expectedParametersWereCorrect, @"unexpected parameter in delegate callback");
 }
 
+- (void)testFirebaseArrayMovesElementToStartWithNilPreviousKey {
+    [self.observable populateWithCount:10];
+    self.snap.key = @"6";
+    
+    // Test delegate
+    __block BOOL delegateWasCalled = NO;
+    __block BOOL expectedParametersWereCorrect = NO;
+    self.arrayDelegate.didMoveObject = ^(FirebaseArray *array, id object, NSUInteger from, NSUInteger to) {
+        // Xcode complains about retain cycles if an XCTAssert is placed in here.
+        delegateWasCalled = YES;
+        expectedParametersWereCorrect = (array == self.firebaseArray &&
+                                         object == self.snap &&
+                                         from == 6 && to == 0);
+    };
+    
+    // Move 8 to the start
+    [self.observable sendEvent:FIRDataEventTypeChildMoved withObject:self.snap previousKey:nil error:nil];
+    
+    // Array expectation
+    NSArray *items = self.firebaseArray.items;
+    NSArray *expected = @[@"6", @"0", @"1", @"2", @"3", @"4", @"5", @"7", @"8", @"9"];
+    NSMutableArray *result = [NSMutableArray array];
+    for (FUIFakeSnapshot *snapshot in items) {
+        [result addObject:snapshot.key];
+    }
+    XCTAssert([result isEqual:expected], @"expected firebaseArray contents to equal %@, got %@", expected, [result copy]);
+    
+    // Delegate expectations
+    XCTAssert(delegateWasCalled, @"expected delegate to receive callback for deletion");
+    XCTAssert(expectedParametersWereCorrect, @"unexpected parameter in delegate callback");
+}
+
 @end
