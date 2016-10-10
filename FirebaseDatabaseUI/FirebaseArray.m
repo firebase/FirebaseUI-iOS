@@ -123,7 +123,13 @@
         NSUInteger fromIndex = [self indexForKey:snapshot.key];
         [self.snapshots removeObjectAtIndex:fromIndex];
 
-        NSUInteger toIndex = [self indexForKey:previousChildKey] + 1;
+        NSUInteger toIndex = 0;
+        if (previousChildKey != nil) {
+            NSUInteger prevIndex = [self indexForKey:previousChildKey];
+            if (prevIndex != NSNotFound) {
+                toIndex = prevIndex + 1;
+            }
+        }
         [self.snapshots insertObject:snapshot atIndex:toIndex];
 
         if ([self.delegate respondsToSelector:@selector(array:didMoveObject:fromIndex:toIndex:)]) {
