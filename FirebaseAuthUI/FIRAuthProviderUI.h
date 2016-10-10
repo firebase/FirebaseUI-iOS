@@ -75,7 +75,6 @@ typedef void (^FIRAuthProviderSignInCompletionBlock)(FIRAuthCredential *_Nullabl
         which is one of the @c FIRAuthErrorCode codes. It is very important that all possible code
         paths eventually call this method to inform the auth system of the result of the sign-in
         flow.
-    @param auth The @c FIRAuth instance which is starting the sign-in flow.
     @param email The email address of the user if it's known.
     @param presentingViewController The view controller used to present the UI.
     @param completion See remarks. A block to invoke when the sign-in process completes.
@@ -86,7 +85,6 @@ typedef void (^FIRAuthProviderSignInCompletionBlock)(FIRAuthCredential *_Nullabl
 
 /** @fn signOut
     @brief Called when the user wants to sign out.
-    @param auth The @c FIRAuth instance which is starting the sign out flow.
  */
 - (void)signOut;
 
