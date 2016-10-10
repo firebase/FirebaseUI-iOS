@@ -1,0 +1,96 @@
+//
+//  Copyright (c) 2016 Google Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+
+#import "FirebaseIndexCollectionViewDataSource.h"
+
+#import "FirebaseIndexArray.h"
+
+@interface FirebaseIndexCollectionViewDataSource () <FirebaseIndexArrayDelegate>
+
+@property (nonatomic, readonly, nonnull) FirebaseIndexArray *array;
+@property (nonatomic, readonly, weak) UICollectionView *collectionView;
+@property (nonatomic, readonly, copy) NSString *identifier;
+
+@property (nonatomic, readonly, copy) void (^populateCell)(UICollectionViewCell *, FIRDataSnapshot *);
+
+@end
+
+@implementation FirebaseIndexCollectionViewDataSource
+
+- (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
+                         data:(FIRDatabaseReference *)dataQuery
+               collectionView:(UICollectionView *)collectionView
+                   identifier:(NSString *)cellIdentifier
+                 populateCell:(void (^)(UICollectionViewCell *,
+                                        FIRDataSnapshot *))populateCell {
+  self = [super init];
+  if (self != nil) {
+    _array = [[FirebaseIndexArray alloc] initWithIndex:indexQuery
+                                                  data:dataQuery
+                                              delegate:self];
+    _collectionView = collectionView;
+    _collectionView.dataSource = self;
+    _identifier = [cellIdentifier copy];
+    _populateCell = populateCell;
+  }
+  return self;
+}
+
+#pragma mark - FirebaseIndexArrayDelegate
+
+- (void)array:(FirebaseIndexArray *)array queryCancelledWithError:(NSError *)error {
+  // TODO: implement actual error handling
+  NSLog(@"%@ Error: Firebase query cancelled with error %@", self, error);
+}
+
+- (void)array:(FirebaseIndexArray *)array
+didAddReference:(FIRDatabaseReference *)ref
+      atIndex:(NSUInteger)index {
+  [self.collectionView
+   insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+}
+
+- (void)array:(FirebaseIndexArray *)array
+didChangeReference:(FIRDatabaseReference *)ref
+      atIndex:(NSUInteger)index {
+  [self.collectionView
+   reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+}
+
+- (void)array:(FirebaseIndexArray *)array
+didRemoveReference:(FIRDatabaseReference *)ref
+      atIndex:(NSUInteger)index {
+  [self.collectionView
+   deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+}
+
+- (void)array:(FirebaseIndexArray *)array
+didMoveReference:(FIRDatabaseReference *)ref
+    fromIndex:(NSUInteger)fromIndex
+      toIndex:(NSUInteger)toIndex {
+  [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForItem:fromIndex inSection:0]
+                               toIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]];
+}
+
+- (void)array:(FirebaseIndexArray *)array
+    reference:(FIRDatabaseReference *)ref
+didLoadObject:(FIRDataSnapshot *)object
+      atIndex:(NSUInteger)index {
+  NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:0];
+  [self.collectionView reloadItemsAtIndexPaths:@[path]];
+}
+
+@end

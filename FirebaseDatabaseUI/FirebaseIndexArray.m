@@ -85,6 +85,10 @@
   _observers = nil;
 }
 
+- (FIRDataSnapshot *)objectAtIndex:(NSUInteger)index {
+  return self.observers[index].contents;
+}
+
 - (void)dealloc {
   [self invalidate];
 }

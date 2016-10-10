@@ -53,7 +53,7 @@ didLoadObject:(FIRDataSnapshot *)object
  * [FIRDataEventTypeChildAdded](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
  * event being raised.
  * @param ref The database reference added to the array
- * @param index The index the child was added at
+ * @param index The index the reference was added at
  */
 - (void)array:(FirebaseIndexArray *)array didAddReference:(FIRDatabaseReference *)ref atIndex:(NSUInteger)index;
 
@@ -64,7 +64,7 @@ didLoadObject:(FIRDataSnapshot *)object
  * [FIRDataEventTypeChildChanged](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
  * event being raised.
  * @param object The database reference that changed in the array
- * @param index The index the child was changed at
+ * @param index The index the reference was changed at
  */
 - (void)array:(FirebaseIndexArray *)array didChangeReference:(FIRDatabaseReference *)ref atIndex:(NSUInteger)index;
 
@@ -75,7 +75,7 @@ didLoadObject:(FIRDataSnapshot *)object
  * [FIRDataEventTypeChildRemoved](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
  * event being raised.
  * @param object The database reference removed from the array
- * @param index The index the child was removed at
+ * @param index The index the reference was removed at
  */
 - (void)array:(FirebaseIndexArray *)array didRemoveReference:(FIRDatabaseReference *)ref atIndex:(NSUInteger)index;
 
@@ -86,8 +86,8 @@ didLoadObject:(FIRDataSnapshot *)object
  * [FIRDataEventTypeChildMoved](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
  * event being raised.
  * @param object The database reference that has moved locations
- * @param fromIndex The index the child is being moved from
- * @param toIndex The index the child is being moved to
+ * @param fromIndex The index the reference is being moved from
+ * @param toIndex The index the reference is being moved to
  */
 - (void)array:(FirebaseIndexArray *)array didMoveReference:(FIRDatabaseReference *)ref fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
@@ -133,6 +133,13 @@ didLoadObject:(FIRDataSnapshot *)object
  */
 - (instancetype)initWithIndex:(id<FIRDataObservable>)index
                          data:(id<FIRDataObservable>)data;
+
+/**
+ * Returns the snapshot at the given index, if it has loaded.
+ * @param index The index of the requested snapshot.
+ * @return A snapshot, or nil if one has not yet been loaded.
+ */
+- (nullable FIRDataSnapshot *)objectAtIndex:(NSUInteger)index;
 
 /**
  * Removes all observers from all queries managed by this array and renders this array

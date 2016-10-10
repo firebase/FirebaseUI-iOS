@@ -124,6 +124,12 @@
 		8DCC4FEC1D678CE800B0D3C4 /* FirebaseFacebookAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCC4FEB1D678CE800B0D3C4 /* FirebaseFacebookAuthUITests.m */; };
 		8DCC50081D678CF500B0D3C4 /* FirebaseGoogleAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCC50071D678CF500B0D3C4 /* FirebaseGoogleAuthUITests.m */; };
 		8DDA1D3F1D944ED100B98969 /* FirebaseStorageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D90842E1D9316AB00333CC8 /* FirebaseStorageUI.framework */; };
+		8DFA90421DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DFA90401DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8DFA90431DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA90411DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.m */; };
+		8DFA90441DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA90411DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.m */; };
+		8DFA90471DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DFA90451DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.h */; };
+		8DFA90481DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA90461DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.m */; };
+		8DFA90491DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA90461DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.m */; };
 		C32516951D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = C32516941D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C32516A11D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32516A01D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests.m */; };
 		C32516B81D88A61C00B0B3F9 /* FIRTwitterAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = C32516B61D88A61C00B0B3F9 /* FIRTwitterAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -463,6 +469,10 @@
 		8DCC50021D678CF500B0D3C4 /* FirebaseGoogleAuthUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirebaseGoogleAuthUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DCC50071D678CF500B0D3C4 /* FirebaseGoogleAuthUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebaseGoogleAuthUITests.m; sourceTree = "<group>"; };
 		8DCC50091D678CF500B0D3C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DFA90401DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseIndexTableViewDataSource.h; sourceTree = "<group>"; };
+		8DFA90411DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseIndexTableViewDataSource.m; sourceTree = "<group>"; };
+		8DFA90451DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseIndexCollectionViewDataSource.h; sourceTree = "<group>"; };
+		8DFA90461DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseIndexCollectionViewDataSource.m; sourceTree = "<group>"; };
 		C32516921D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseTwitterAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32516941D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseTwitterAuthUI.h; sourceTree = "<group>"; };
 		C32516961D88A54C00B0B3F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -832,6 +842,10 @@
 				8D924C5C1DA6F67E00C4DA48 /* FirebaseIndexArray.m */,
 				8D924C621DA6F77700C4DA48 /* FirebaseQueryObserver.h */,
 				8D924C631DA6F77700C4DA48 /* FirebaseQueryObserver.m */,
+				8DFA90401DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.h */,
+				8DFA90411DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.m */,
+				8DFA90451DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.h */,
+				8DFA90461DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.m */,
 				8DA9413B1D678DEB00CD3685 /* FirebaseCollectionViewDataSource.h */,
 				8DA941441D678E3200CD3685 /* FirebaseCollectionViewDataSource.m */,
 				8DA9413C1D678DEB00CD3685 /* FirebaseDataSource.h */,
@@ -1082,8 +1096,10 @@
 				8D924C5D1DA6F67E00C4DA48 /* FirebaseIndexArray.h in Headers */,
 				8DCC4FA81D678CC400B0D3C4 /* FirebaseDatabaseUI.h in Headers */,
 				8DA9413E1D678DEB00CD3685 /* FirebaseArray.h in Headers */,
+				8DFA90421DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.h in Headers */,
 				8DA941401D678DEB00CD3685 /* FirebaseCollectionViewDataSource.h in Headers */,
 				8D924C641DA6F77700C4DA48 /* FirebaseQueryObserver.h in Headers */,
+				8DFA90471DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.h in Headers */,
 				8DA941421D678DEB00CD3685 /* FirebaseTableViewDataSource.h in Headers */,
 				8DA9413F1D678DEB00CD3685 /* FirebaseArrayDelegate.h in Headers */,
 				8DA941411D678DEB00CD3685 /* FirebaseDataSource.h in Headers */,
@@ -1830,7 +1846,9 @@
 				8D924C5F1DA6F67E00C4DA48 /* FirebaseIndexArray.m in Sources */,
 				8DBA0F801D872E4700D113D3 /* FirebaseCollectionViewDataSource.m in Sources */,
 				8DBA0F7F1D872E4300D113D3 /* FirebaseArray.m in Sources */,
+				8DFA90441DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.m in Sources */,
 				8DBA0F811D872E4B00D113D3 /* FirebaseDataSource.m in Sources */,
+				8DFA90491DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.m in Sources */,
 				8DBA0F821D872E4E00D113D3 /* FirebaseTableViewDataSource.m in Sources */,
 				8D924C661DA6F77700C4DA48 /* FirebaseQueryObserver.m in Sources */,
 			);
@@ -1881,7 +1899,9 @@
 				8D924C5E1DA6F67E00C4DA48 /* FirebaseIndexArray.m in Sources */,
 				8DA941481D678E3200CD3685 /* FirebaseCollectionViewDataSource.m in Sources */,
 				8DA941471D678E3200CD3685 /* FirebaseArray.m in Sources */,
+				8DFA90431DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.m in Sources */,
 				8DA941491D678E3200CD3685 /* FirebaseDataSource.m in Sources */,
+				8DFA90481DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.m in Sources */,
 				8DA9414A1D678E3200CD3685 /* FirebaseTableViewDataSource.m in Sources */,
 				8D924C651DA6F77700C4DA48 /* FirebaseQueryObserver.m in Sources */,
 			);
