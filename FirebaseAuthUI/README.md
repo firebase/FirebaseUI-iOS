@@ -83,7 +83,7 @@ import FirebaseFacebookAuthUI
 let googleAuthUI = FIRGoogleAuthUI(clientID: kGoogleClientID)
 let facebookAuthUI = FIRFacebookAuthUI(appID: kFacebookAppID)
 
-authUI?.signInProviders = [googleAuthUI, facebookAuthUI]
+authUI?.providers = [googleAuthUI, facebookAuthUI]
 ```
 
 ```objective-c
@@ -187,7 +187,7 @@ authUI?.customStringsBundle = NSBundle.mainBundle() // Or any custom bundle.
 authUI.customStringsBundle = [NSBundle mainBundle]; // Or any custom bundle.
 ```
 
-The bundle should include [.strings](Auth/AuthUI/Strings/FirebaseAuthUI.strings)
+The bundle should include [.strings](Auth/AuthUI/Strings/en.lproj/FirebaseAuthUI.strings)
 files that have the same names as the default files, namely `FirebaseAuthUI`,
 `FirebaseGoogleAuthUI`, and `FirebaseFacebookAuthUI`. Each string in these files
 should have the same key as its counterpart in the default `.strings` files.
