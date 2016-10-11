@@ -42,6 +42,7 @@
                          data:(FIRDatabaseReference *)dataQuery
                     tableView:(UITableView *)tableView
           cellReuseIdentifier:(NSString *)cellIdentifier
+                     delegate:(nullable id<FirebaseIndexTableViewDataSourceDelegate>)delegate
                  populateCell:(nonnull void (^)(UITableViewCell *cell,
                                                 FIRDataSnapshot *data))populateCell {
   self = [super init];
@@ -59,8 +60,19 @@
 
 #pragma mark - FirebaseIndexArrayDelegate 
 
+- (void)array:(FirebaseIndexArray *)array
+    reference:(FIRDatabaseReference *)ref
+      atIndex:(NSUInteger)index
+didFailLoadWithError:(NSError *)error {
+  if ([self.delegate respondsToSelector:@selector(dataSource:reference:didFailLoadAtIndex:withError:)]) {
+    [self.delegate dataSource:self reference:ref didFailLoadAtIndex:index withError:error];
+  }
+}
+
 - (void)array:(FirebaseIndexArray *)array queryCancelledWithError:(NSError *)error {
-  // TODO: implement actual error handling
+  if ([self.delegate respondsToSelector:@selector(dataSource:indexQueryDidFailWithError:)]) {
+    [self.delegate dataSource:self indexQueryDidFailWithError:error];
+  }
   NSLog(@"%@ Error: Firebase query cancelled with error %@", self, error);
 }
 

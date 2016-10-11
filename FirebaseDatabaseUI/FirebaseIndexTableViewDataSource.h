@@ -20,7 +20,42 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class FirebaseIndexTableViewDataSource;
+
+@protocol FirebaseIndexTableViewDataSourceDelegate <NSObject>
+@optional
+
+/**
+ * Called when an individual reference responsible for populating one cell
+ * of the table view has raised an error. This error is unrecoverable, but
+ * does not have any effect on the contents of other cells.
+ * @param dataSource The FirebaseIndexTableViewDataSource raising the error.
+ * @param ref The reference that failed to load.
+ * @param index The index (i.e. row) of the query that failed to load.
+ * @param error The error that occurred.
+ */
+- (void)dataSource:(FirebaseIndexTableViewDataSource *)dataSource
+         reference:(FIRDatabaseReference *)ref
+didFailLoadAtIndex:(NSUInteger)index
+         withError:(NSError *)error;
+
+/**
+ * Called when the index query used to initialize this data source raised an error.
+ * This error is unrecoverable, and likely indicates a bad index query.
+ * @param dataSource The FirebaseIndexTableViewDataSource raising the error.
+ * @param error The error that occurred.
+ */
+- (void)dataSource:(FirebaseIndexTableViewDataSource *)dataSource
+  indexQueryDidFailWithError:(NSError *)error;
+
+@end
+
 @interface FirebaseIndexTableViewDataSource : NSObject <UITableViewDataSource>
+
+/**
+ * The delegate that will receive events from this data source.
+ */
+@property (nonatomic, readwrite, weak, nullable) id<FirebaseIndexTableViewDataSourceDelegate> delegate;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -42,6 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
                          data:(FIRDatabaseReference *)dataQuery
                     tableView:(UITableView *)tableView
           cellReuseIdentifier:(NSString *)cellIdentifier
+                     delegate:(nullable id<FirebaseIndexTableViewDataSourceDelegate>)delegate
                  populateCell:(void (^)(UITableViewCell *cell,
                                         FIRDataSnapshot *_Nullable))populateCell NS_DESIGNATED_INITIALIZER;
 
