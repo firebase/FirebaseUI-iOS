@@ -30,7 +30,7 @@ typedef void (^FIRAuthUIAlertActionHandler)(void);
 /** @class FIRAuthUIBaseViewController
     @brief The base view controller that provides common methods for all subclasses.
  */
-@interface FIRAuthUIBaseViewController : UITableViewController
+@interface FIRAuthUIBaseViewController : UIViewController
 
 /** @property auth
     @brief The @c FIRAuth instance of the application.

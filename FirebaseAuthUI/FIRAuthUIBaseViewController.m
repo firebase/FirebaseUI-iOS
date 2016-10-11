@@ -17,6 +17,7 @@
 #import "FIRAuthUIBaseViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "FIRAuthUIErrorUtils.h"
 #import "FIRAuthUIStrings.h"
 #import "FIRAuthUIUtils.h"
 #import "FIRAuthUI_Internal.h"
@@ -282,4 +283,10 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
   }
 }
 
+- (void)cancelAuthorization {
+  [self.navigationController dismissViewControllerAnimated:YES completion:^{
+    NSError *error = [FIRAuthUIErrorUtils userCancelledSignInError];
+    [self.authUI invokeResultCallbackWithUser:nil error:error];
+  }];
+}
 @end

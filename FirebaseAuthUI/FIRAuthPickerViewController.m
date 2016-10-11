@@ -73,12 +73,10 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  self.tableView.scrollEnabled = NO;
-
   UIBarButtonItem *cancelBarButton =
       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                     target:self
-                                                    action:@selector(cancel)];
+                                                    action:@selector(cancelAuthorization)];
   self.navigationItem.leftBarButtonItem = cancelBarButton;
 
   NSInteger numberOfButtons = self.authUI.providers.count;
@@ -285,13 +283,6 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
     }
   }
   return nil;
-}
-
-- (void)cancel {
-  [self.navigationController dismissViewControllerAnimated:YES completion:^{
-    NSError *error = [FIRAuthUIErrorUtils userCancelledSignInError];
-    [self.authUI invokeResultCallbackWithUser:nil error:error];
-  }];
 }
 
 @end

@@ -22,6 +22,7 @@
 #import <FirebaseAuth/FIRAuth.h>
 #import "FIRAuthPickerViewController.h"
 #import "FIRAuthUI_Internal.h"
+#import "FIREmailEntryViewController.h"
 
 /** @var kAppNameCodingKey
     @brief The key used to encode the app Name for NSCoding.
@@ -89,7 +90,10 @@ static const char kAuthAssociationKey;
 
 - (UIViewController *)authViewController {
   UIViewController *controller;
-  if ([self.delegate respondsToSelector:@selector(authPickerViewControllerForAuthUI:)]) {
+
+  if (self.providers.count == 0 && !self.isSignInWithEmailHidden) {
+    controller = [[FIREmailEntryViewController alloc] initWithAuthUI:self];
+  } else if ([self.delegate respondsToSelector:@selector(authPickerViewControllerForAuthUI:)]) {
     controller = [self.delegate authPickerViewControllerForAuthUI:self];
   } else {
     controller = [[FIRAuthPickerViewController alloc] initWithAuthUI:self];
