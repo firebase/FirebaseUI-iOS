@@ -36,8 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Delegate method called when the database reference at an index has 
  * finished loading its contents.
- * @param array The array calling this method.
- * @param reference The reference that was loaded.
+ * @param array The array containing the reference.
+ * @param ref The reference that was loaded.
  * @param object The database reference's contents.
  * @param index The index of the reference that was loaded.
  */
@@ -45,6 +45,19 @@ NS_ASSUME_NONNULL_BEGIN
     reference:(FIRDatabaseReference *)ref
 didLoadObject:(FIRDataSnapshot *)object
       atIndex:(NSUInteger)index;
+
+/**
+ * Delegate method called when the database reference at an index has 
+ * failed to load contents.
+ * @param array The array containing the reference.
+ * @param ref The reference that failed to load.
+ * @param index The index in the array of the reference that failed to load.
+ * @param error The error that occurred.
+ */
+- (void)array:(FirebaseIndexArray *)array
+    reference:(FIRDatabaseReference *)ref
+      atIndex:(NSUInteger)index
+didFailLoadWithError:(NSError *)error;
 
 /**
  * Delegate method which is called whenever an object is added to a

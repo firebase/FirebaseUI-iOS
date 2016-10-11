@@ -101,17 +101,20 @@
 // they must be kept up to date as the FirebaseArray
 // changes over time.
 
-- (void)observer:(FirebaseQueryObserver *)obs finishedLoadWithSnap:(FIRDataSnapshot *)snap error:(NSError *)error {
+- (void)observer:(FirebaseQueryObserver *)obs
+didFinishLoadWithSnap:(FIRDataSnapshot *)snap
+           error:(NSError *)error {
+  // Need to look up location in array to account for possible moves
+  NSUInteger index = [self.observers indexOfObject:obs];
+
   if (error != nil) {
-    [self invalidate];
-    if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
-      [self.delegate array:self queryCancelledWithError:error];
+    if ([self.delegate respondsToSelector:@selector(array:reference:atIndex:didFailLoadWithError:)]) {
+      [self.delegate array:self reference:obs.query atIndex:index didFailLoadWithError:error];
     }
     return;
   }
 
   if ([self.delegate respondsToSelector:@selector(array:reference:didLoadObject:atIndex:)]) {
-    NSUInteger index = [self.observers indexOfObject:obs];
     [self.delegate array:self reference:obs.query didLoadObject:snap atIndex:index];
   }
 }
@@ -124,7 +127,7 @@
   FirebaseQueryObserver *obs = [FirebaseQueryObserver observerForQuery:query
                                                             completion:^(FIRDataSnapshot *snap,
                                                                          NSError *error) {
-    [self observer:obs finishedLoadWithSnap:snap error:error];
+    [self observer:obs didFinishLoadWithSnap:snap error:error];
   }];
   [self.observers insertObject:obs atIndex:index];
 
@@ -138,17 +141,13 @@ didMoveObject:(FIRDataSnapshot *)object
     fromIndex:(NSUInteger)fromIndex
       toIndex:(NSUInteger)toIndex {
   NSParameterAssert([object.key isKindOfClass:[NSString class]]);
-  id<FIRDataObservable> query = [self.data child:object.key];
-  FirebaseQueryObserver *obs = [FirebaseQueryObserver observerForQuery:query
-                                                            completion:^(FIRDataSnapshot *snap,
-                                                                         NSError *error) {
-    [self observer:obs finishedLoadWithSnap:snap error:error];
-  }];
+  FirebaseQueryObserver *obs = self.observers[fromIndex];
+
   [self.observers removeObjectAtIndex:fromIndex];
   [self.observers insertObject:obs atIndex:toIndex];
 
   if ([self.delegate respondsToSelector:@selector(array:didMoveReference:fromIndex:toIndex:)]) {
-    [self.delegate array:self didMoveReference:query fromIndex:fromIndex toIndex:toIndex];
+    [self.delegate array:self didMoveReference:obs.query fromIndex:fromIndex toIndex:toIndex];
   }
 }
 
@@ -165,7 +164,7 @@ didChangeObject:(FIRDataSnapshot *)object
   FirebaseQueryObserver *obs = [FirebaseQueryObserver observerForQuery:query
                                                             completion:^(FIRDataSnapshot *snap,
                                                                          NSError *error) {
-    [self observer:obs finishedLoadWithSnap:snap error:error];
+    [self observer:obs didFinishLoadWithSnap:snap error:error];
   }];
   [self.observers replaceObjectAtIndex:index withObject:obs];
 
