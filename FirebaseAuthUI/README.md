@@ -95,6 +95,7 @@ self.authUI?.providers = providers
 // objc
 @import FirebaseGoogleAuthUI
 @import FirebaseFacebookAuthUI
+@import FIRTwitterAuthUI
 ...
 NSArray<id<FIRAuthProviderUI>> *providers = [NSArray arrayWithObjects:
                                              [[FIRGoogleAuthUI alloc] init],
