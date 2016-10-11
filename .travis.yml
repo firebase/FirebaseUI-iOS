@@ -7,9 +7,10 @@ rvm: 2.3.1
 before_install:
   - gem uninstall cocoapods -a
   - gem install cocoapods -v '1.0.1'
+  - gem install xcpretty
   - pod install --repo-update
 
-script: xcodebuild -workspace FirebaseUI.xcworkspace
+script: set -o pipefail && xcodebuild -workspace FirebaseUI.xcworkspace
   -scheme FirebaseUI
   -sdk iphonesimulator
   -destination 'platform=iOS Simulator,name=iPhone 7'
@@ -17,3 +18,4 @@ script: xcodebuild -workspace FirebaseUI.xcworkspace
   test
   ONLY_ACTIVE_ARCH=YES
   CODE_SIGNING_REQUIRED=NO
+  | xcpretty
