@@ -38,7 +38,12 @@
 
   OCMStub(ClassMethod([self.authMock auth])).andReturn(self.authMock);
 
+  NSArray<id<FIRAuthProviderUI>> *providers = [NSArray arrayWithObjects:
+                                               [[FIRGoogleAuthUI alloc] init],
+                                               nil];
+
   FIRAuthUI *authUI = [FIRAuthUI defaultAuthUI];
+  authUI.providers = providers;
   authUI.delegate = self;
   self.authUIMock = OCMPartialMock(authUI);
 

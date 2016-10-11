@@ -78,6 +78,19 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                       action:@selector(next)];
   nextButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = nextButtonItem;
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+
+  if (self.navigationController.viewControllers.firstObject == self) {
+    UIBarButtonItem *cancelBarButton =
+    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                  target:self
+                                                  action:@selector(cancelAuthorization)];
+    self.navigationItem.leftBarButtonItem = cancelBarButton;
+  }
 }
 
 #pragma mark - Actions
@@ -229,5 +242,4 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                         }];
                  }];
 }
-
 @end
