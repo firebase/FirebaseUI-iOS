@@ -174,18 +174,11 @@
 }
 
 - (void)signOut {
-  // sign out from Firebase
   NSError *error;
-  [self.auth signOut:&error];
+  [self.authUI signOut:&error];
   if (error) {
     [self showAlert:error.localizedDescription];
   }
-
-  // sign out from all providers (wipes provider tokens too)
-  for (id<FIRAuthProviderUI> provider in _authUI.providers) {
-    [provider signOut];
-  }
-
 }
 
 - (void)showAlert:(NSString *)message {

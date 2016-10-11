@@ -101,6 +101,19 @@ static const char kAuthAssociationKey;
   return [[UINavigationController alloc] initWithRootViewController:controller];
 }
 
+- (BOOL)signOut:(NSError *_Nullable *_Nullable)error {
+  // sign out from Firebase
+  BOOL success = [self.auth signOut:error];
+  if (!error && success) {
+    // sign out from all providers (wipes provider tokens too)
+    for (id<FIRAuthProviderUI> provider in _providers) {
+      [provider signOut];
+    }
+  }
+
+  return success;
+}
+
 #pragma mark - Internal Methods
 
 - (void)invokeResultCallbackWithUser:(FIRUser *_Nullable)user error:(NSError *_Nullable)error {

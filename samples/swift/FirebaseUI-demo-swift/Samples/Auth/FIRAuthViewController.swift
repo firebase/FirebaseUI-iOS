@@ -80,16 +80,12 @@ class FIRAuthViewController: UITableViewController {
   @IBAction func onAuthorize(_ sender: AnyObject) {
     if (self.auth?.currentUser) != nil {
       do {
-        try self.auth?.signOut()
+        try self.authUI?.signOut()
       } catch let error {
         // Again, fatalError is not a graceful way to handle errors.
         // This error is most likely a network error, so retrying here
         // makes sense.
         fatalError("Could not sign out: \(error)")
-      }
-
-      for provider in self.authUI!.providers {
-        provider.signOut()
       }
 
     } else {
