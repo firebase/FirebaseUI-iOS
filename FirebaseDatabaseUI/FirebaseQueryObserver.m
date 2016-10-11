@@ -44,16 +44,18 @@
 }
 
 + (FirebaseQueryObserver *)observerForQuery:(id<FIRDataObservable>)query
-                                 completion:(void (^)(FIRDataSnapshot *snap, NSError *error))completion {
+                                 completion:(void (^)(FirebaseQueryObserver *obs,
+                                                      FIRDataSnapshot *snap,
+                                                      NSError *error))completion {
   FirebaseQueryObserver *obs = [[FirebaseQueryObserver alloc] initWithQuery:query];
 
   void (^observerBlock)(FIRDataSnapshot *, NSString *) = ^(FIRDataSnapshot *snap,
                                                            NSString *previous) {
     obs.contents = snap;
-    completion(snap, nil);
+    completion(obs, snap, nil);
   };
   void (^cancelBlock)(NSError *) = ^(NSError *error) {
-    completion(nil, error);
+    completion(obs, nil, error);
   };
 
   [obs observeEventType:FIRDataEventTypeChildAdded

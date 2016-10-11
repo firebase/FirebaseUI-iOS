@@ -71,7 +71,7 @@ didFailLoadWithError:(NSError *)error;
 - (void)array:(FirebaseIndexArray *)array didAddReference:(FIRDatabaseReference *)ref atIndex:(NSUInteger)index;
 
 /**
- * Delegate method which is called whenever an object is chinged in a
+ * Delegate method which is called whenever an object is changed in a
  * FirebaseArray. On a
  * FirebaseArray synchronized to a Firebase reference, this corresponds to an
  * [FIRDataEventTypeChildChanged](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)

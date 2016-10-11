@@ -131,9 +131,10 @@ didFinishLoadWithSnap:(FIRDataSnapshot *)snap
   NSParameterAssert([object.key isKindOfClass:[NSString class]]);
   id<FIRDataObservable> query = [self.data child:object.key];
   FirebaseQueryObserver *obs = [FirebaseQueryObserver observerForQuery:query
-                                                            completion:^(FIRDataSnapshot *snap,
+                                                            completion:^(FirebaseQueryObserver *observer,
+                                                                         FIRDataSnapshot *snap,
                                                                          NSError *error) {
-    [self observer:obs didFinishLoadWithSnap:snap error:error];
+    [self observer:observer didFinishLoadWithSnap:snap error:error];
   }];
   [self.observers insertObject:obs atIndex:index];
 
@@ -168,9 +169,10 @@ didChangeObject:(FIRDataSnapshot *)object
   // Add new observer
   id<FIRDataObservable> query = [self.data child:object.key];
   FirebaseQueryObserver *obs = [FirebaseQueryObserver observerForQuery:query
-                                                            completion:^(FIRDataSnapshot *snap,
+                                                            completion:^(FirebaseQueryObserver *observer,
+                                                                         FIRDataSnapshot *snap,
                                                                          NSError *error) {
-    [self observer:obs didFinishLoadWithSnap:snap error:error];
+    [self observer:observer didFinishLoadWithSnap:snap error:error];
   }];
   [self.observers replaceObjectAtIndex:index withObject:obs];
 

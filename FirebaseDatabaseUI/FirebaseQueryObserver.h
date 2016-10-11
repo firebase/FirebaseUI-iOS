@@ -38,7 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
  * Creates a query observer and immediately starts observing the query.
  */
 + (FirebaseQueryObserver *)observerForQuery:(id<FIRDataObservable>)query
-                                 completion:(void (^_Nullable)(FIRDataSnapshot *_Nullable,
+                                 completion:(void (^_Nullable)(FirebaseQueryObserver *obs,
+                                                               FIRDataSnapshot *_Nullable,
                                                                NSError *_Nullable))completion;
 
 /**
