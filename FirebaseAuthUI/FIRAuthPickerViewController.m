@@ -138,7 +138,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
   if ([self.authUI.delegate respondsToSelector:@selector(emailEntryViewControllerForAuthUI:)]) {
     controller = [self.authUI.delegate emailEntryViewControllerForAuthUI:self.authUI];
   } else {
-    controller = [[FIREmailEntryViewController alloc] initWithAuthUI:self];
+    controller = [[FIREmailEntryViewController alloc] initWithAuthUI:self.authUI];
   }
   [self pushViewController:controller];
 }
