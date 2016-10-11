@@ -93,4 +93,19 @@ didLoadObject:(FIRDataSnapshot *)object
   [self.collectionView reloadItemsAtIndexPaths:@[path]];
 }
 
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+  return self.array.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+  UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:self.identifier
+                                                                         forIndexPath:indexPath];
+  FIRDataSnapshot *snap = [self.array objectAtIndex:indexPath.item];
+  self.populateCell(cell, snap);
+  return cell;
+}
+
 @end

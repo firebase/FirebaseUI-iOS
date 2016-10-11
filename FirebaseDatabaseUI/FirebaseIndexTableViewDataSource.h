@@ -20,10 +20,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FirebaseIndexTableViewDataSource : NSObject
+@interface FirebaseIndexTableViewDataSource : NSObject <UITableViewDataSource>
 
 - (instancetype)init NS_UNAVAILABLE;
 
+/**
+ * Initializes a table view data source.
+ * @param indexQuery The Firebase query containing children of the data query.
+ * @param dataQuery The reference whose children correspond to the contents of the
+ *   index query. This reference's children's contents are served as teh contents 
+ *   of the table view that adopts this data source.
+ * @param tableView The table view that is populated by this data source. The
+ *   data source pulls updates from Firebase database, so it must maintain a reference
+ *   to the table view in order to update its contents as the database pushes updates.
+ *   The table view is not retained by its data source.
+ * @param cellIdentifier The cell reuse identifier used to dequeue reusable cells from
+ *   the table view.
+ * @param populateCell The closure invoked when populating a UITableViewCell (or subclass).
+ */
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
                     tableView:(UITableView *)tableView
@@ -31,9 +45,6 @@ NS_ASSUME_NONNULL_BEGIN
                  populateCell:(void (^)(UITableViewCell *cell,
                                         FIRDataSnapshot *_Nullable))populateCell NS_DESIGNATED_INITIALIZER;
 
-@end
-
-@interface FirebaseIndexTableViewDataSource (TableViewDataSource) <UITableViewDataSource>
 @end
 
 NS_ASSUME_NONNULL_END

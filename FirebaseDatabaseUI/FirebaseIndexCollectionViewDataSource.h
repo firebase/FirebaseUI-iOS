@@ -20,10 +20,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FirebaseIndexCollectionViewDataSource : NSObject
+@interface FirebaseIndexCollectionViewDataSource : NSObject <UICollectionViewDataSource>
 
 - (instancetype)init NS_UNAVAILABLE;
 
+/**
+ * Initializes a collection view data source.
+ * @param indexQuery The Firebase query containing children of the data query.
+ * @param dataQuery The reference whose children correspond to the contents of the
+ *   index query. This reference's children's contents are served as teh contents
+ *   of the collection view that adopts this data source.
+ * @param collectionView The collection view that is populated by this data source. The
+ *   data source pulls updates from Firebase database, so it must maintain a reference
+ *   to the collection view in order to update its contents as the database pushes updates.
+ *   The table view is not retained by its data source.
+ * @param cellIdentifier The cell reuse identifier used to dequeue reusable cells from
+ *   the collection view.
+ * @param populateCell The closure invoked when populating a UICollectionViewCell (or subclass).
+ */
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
                collectionView:(UICollectionView *)collectionView
@@ -31,9 +45,6 @@ NS_ASSUME_NONNULL_BEGIN
                  populateCell:(void (^)(UICollectionViewCell *cell,
                                         FIRDataSnapshot *_Nullable))populateCell NS_DESIGNATED_INITIALIZER;
 
-@end
-
-@interface FirebaseIndexCollectionViewDataSource (CollectionViewDataSource) <UICollectionViewDataSource>
 @end
 
 NS_ASSUME_NONNULL_END

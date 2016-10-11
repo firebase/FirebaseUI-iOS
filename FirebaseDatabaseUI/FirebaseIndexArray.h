@@ -115,9 +115,21 @@ didFailLoadWithError:(NSError *)error;
 
 @interface FirebaseIndexArray : NSObject
 
+/**
+ * An immutable copy of the loaded contents in the array. Returns an
+ * empty array if no contents have loaded yet.
+ */
 @property(nonatomic, copy, readonly) NSArray<FIRDataSnapshot *> *items;
 
+/**
+ * The delegate that this array should forward events to.
+ */
 @property(nonatomic, weak) id<FirebaseIndexArrayDelegate> delegate;
+
+/**
+ * Returns the number of items in the array.
+ */
+@property(nonatomic, readonly) NSUInteger count;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -149,6 +161,7 @@ didFailLoadWithError:(NSError *)error;
 
 /**
  * Returns the snapshot at the given index, if it has loaded.
+ * Raises a fatal error if the index is out of bounds.
  * @param index The index of the requested snapshot.
  * @return A snapshot, or nil if one has not yet been loaded.
  */

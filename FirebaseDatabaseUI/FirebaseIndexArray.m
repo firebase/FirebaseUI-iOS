@@ -71,9 +71,15 @@
   NSArray *observers = [self.observers copy];
   NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:observers.count];
   for (FirebaseQueryObserver *observer in observers) {
-    [array addObject:observer.contents];
+    if (observer.contents != nil) {
+      [array addObject:observer.contents];
+    }
   }
   return [array copy];
+}
+
+- (NSUInteger)count {
+  return self.observers.count;
 }
 
 // FirebaseIndexArray instance becomes unusable after invalidation.
