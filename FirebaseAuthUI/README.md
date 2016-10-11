@@ -18,7 +18,7 @@ FirebaseUI can be easily customized to fit in with the rest of your app's visual
  experience you want.
 
 Compatible FirebaseUI clients are also available for [Android](https://github.com/firebase/firebaseui-android/tree/master/auth)
-and [Web](https://github.com/firebase/firebaseui-web/tree/master/auth).
+and [Web](https://github.com/firebase/firebaseui-web/).
 
 ## Table of Contents
 
@@ -59,7 +59,8 @@ import FirebaseAuthUI
 /* ... */
 
 FIRApp.configure()
-let authUI = FIRAuthUI.defaultAuthUI()
+let authUI = FIRAuthUI.default()
+// You need to adopt a FIRAuthUIDelegate protocol to receive callback
 authUI?.delegate = self
 ```
 
@@ -69,8 +70,9 @@ authUI?.delegate = self
 @import FirebaseAuthUI
 ...
 [FIRApp configure];
-FIRAuthUI *authUI = [FIRAuthUI defaultAuthUI];
-authUI.delegate = self; // Set the delegate to receive callback.
+FIRAuthUI *authUI = [FIRAuthUI default];
+// You need to adopt a FIRAuthUIDelegate protocol to receive callback
+authUI.delegate = self;
 ```
 
 This instance can then be configured with the providers you wish to support:
@@ -79,11 +81,14 @@ This instance can then be configured with the providers you wish to support:
 // swift
 import FirebaseGoogleAuthUI
 import FirebaseFacebookAuthUI
+import FirebaseTwitterAuthUI
 
-let googleAuthUI = FIRGoogleAuthUI(clientID: kGoogleClientID)
-let facebookAuthUI = FIRFacebookAuthUI(appID: kFacebookAppID)
-
-authUI?.providers = [googleAuthUI, facebookAuthUI]
+let providers: [FIRAuthProviderUI] = [
+  FIRGoogleAuthUI(),
+  FIRFacebookAuthUI(),
+  FIRTwitterAuthUI(),
+]
+self.authUI?.providers = providers
 ```
 
 ```objective-c
@@ -91,11 +96,12 @@ authUI?.providers = [googleAuthUI, facebookAuthUI]
 @import FirebaseGoogleAuthUI
 @import FirebaseFacebookAuthUI
 ...
-FIRGoogleAuthUI *googleAuthUI =
-    [[FIRGoogleAuthUI alloc] initWithClientID:kGoogleClientID];
-FIRFacebookAuthUI *facebookAuthUI =
-    [[FIRFacebookAuthUI alloc] initWithAppID:kFacebookAppID];
-authUI.signInProviders = @[ googleAuthUI, facebookAuthUI];
+NSArray<id<FIRAuthProviderUI>> *providers = [NSArray arrayWithObjects:
+                                             [[FIRGoogleAuthUI alloc] init],
+                                             [[FIRFacebookAuthUI alloc] init],
+                                             [[FIRTwitterAuthUI alloc] init],
+                                             nil];
+_authUI.providers = providers;
 ```
 
 For Google sign in support, add custom URL schemes to your Xcode project
@@ -110,9 +116,13 @@ Google/Facebook authentication process.
 
 ```swift
 // swift
-func application(app: UIApplication, openURL url: NSURL, options: [String: AnyObject]) -> Bool {
-  let sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String
-  return FIRAuthUI.defaultAuthUI()?.handleOpenURL(url, sourceApplication: sourceApplication ?? "") ?? false
+func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+  let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?
+  if FIRAuthUI.default()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+    return true
+  }
+  // other URL handling goes here.
+  return false
 }
 ```
 
@@ -120,7 +130,7 @@ func application(app: UIApplication, openURL url: NSURL, options: [String: AnyOb
 // objc
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
   NSString *sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey];
-  return [[FIRAuthUI defaultAuthUI] handleOpenURL:url sourceApplication:sourceApplication];
+  return [[FIRAuthUI default] handleOpenURL:url sourceApplication:sourceApplication];
 }
 ```
 
@@ -138,7 +148,7 @@ present the `authViewController` obtain as instance as follows:
 // Present the auth view controller and then implement the sign in callback.
 let authViewController = authUI!.authViewController()
 
-func authUI(authUI: FIRAuthUI, didSignInWithUser user: FIRUser?, error: ErrorType?) {
+func authUI(_ authUI: FIRAuthUI, didSignInWithUser user: FIRUser?, error: Error?) {
   // handle user and error as necessary
 }
 ```
@@ -162,12 +172,13 @@ email/password account creation screen, can be specified as follows:
 
 ```swift
 // swift
-authUI?.TOSURL = NSURL(string: "https://example.com/tos")!
+let kFirebaseTermsOfService = URL(string: "https://firebase.google.com/terms/")!
+authUI?.tosurl = kFirebaseTermsOfService
 ```
 
 ```objective-c
 // objc
-authUI.TOSURL = [NSURL URLWithString:@"https://example.com/tos"];
+authUI.tosurl = [NSURL URLWithString:@"https://example.com/tos"];
 ```
 
 ### Custom strings
@@ -187,7 +198,7 @@ authUI?.customStringsBundle = NSBundle.mainBundle() // Or any custom bundle.
 authUI.customStringsBundle = [NSBundle mainBundle]; // Or any custom bundle.
 ```
 
-The bundle should include [.strings](Auth/AuthUI/Strings/en.lproj/FirebaseAuthUI.strings)
+The bundle should include [.strings](https://github.com/firebase/FirebaseUI-iOS/blob/master/FirebaseAuthUI/Strings/en.lproj/FirebaseAuthUI.strings)
 files that have the same names as the default files, namely `FirebaseAuthUI`,
 `FirebaseGoogleAuthUI`, and `FirebaseFacebookAuthUI`. Each string in these files
 should have the same key as its counterpart in the default `.strings` files.
@@ -204,7 +215,7 @@ subclass by implementing the delegate method
 
 ```swift
 // swift
-func authPickerViewControllerForAuthUI(authUI: FIRAuthUI) -> FIRAuthPickerViewController {
+func authPickerViewController(for authUI: FIRAuthUI) -> FIRAuthPickerViewController {
   return CustomAuthPickerViewController(authUI: authUI)
 }
 ```
