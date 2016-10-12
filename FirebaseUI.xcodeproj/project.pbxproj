@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D1E107C1DAEB97300AEFCA0 /* FirebaseIndexTableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1E107B1DAEB97300AEFCA0 /* FirebaseIndexTableViewDataSourceTest.m */; };
 		8D2A84AA1D678B2B0058DF04 /* FirebaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D2A84A91D678B2B0058DF04 /* FirebaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D78AF061D9D8CB000CFA9C5 /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */; };
 		8D7AD9B71D9317FB006866B9 /* UIImageView+FirebaseStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7AD9B51D9317FB006866B9 /* UIImageView+FirebaseStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -347,6 +348,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8D1E107B1DAEB97300AEFCA0 /* FirebaseIndexTableViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseIndexTableViewDataSourceTest.m; sourceTree = "<group>"; };
 		8D2A84A61D678B2B0058DF04 /* FirebaseUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D2A84A91D678B2B0058DF04 /* FirebaseUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseUI.h; sourceTree = "<group>"; };
 		8D2A84AB1D678B2B0058DF04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -863,6 +865,7 @@
 				8D924C601DA6F69100C4DA48 /* FirebaseIndexArrayTest.m */,
 				8DA941EC1D67951B00CD3685 /* FirebaseCollectionViewDataSourceTest.m */,
 				8DA941ED1D67951B00CD3685 /* FirebaseTableViewDataSourceTest.m */,
+				8D1E107B1DAEB97300AEFCA0 /* FirebaseIndexTableViewDataSourceTest.m */,
 			);
 			path = FirebaseDatabaseUITests;
 			sourceTree = "<group>";
@@ -1910,6 +1913,7 @@
 			files = (
 				8DA941F01D67951B00CD3685 /* FirebaseCollectionViewDataSourceTest.m in Sources */,
 				8DA941F11D67951B00CD3685 /* FirebaseTableViewDataSourceTest.m in Sources */,
+				8D1E107C1DAEB97300AEFCA0 /* FirebaseIndexTableViewDataSourceTest.m in Sources */,
 				8DA941EF1D67951B00CD3685 /* FirebaseArrayTestUtils.m in Sources */,
 				8D924C611DA6F69100C4DA48 /* FirebaseIndexArrayTest.m in Sources */,
 				8DA941EE1D67951B00CD3685 /* FirebaseArrayTest.m in Sources */,
