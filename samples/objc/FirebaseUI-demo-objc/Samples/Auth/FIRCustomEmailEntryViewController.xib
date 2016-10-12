@@ -8,8 +8,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FIRCustomEmailEntryViewController">
             <connections>
-                <outlet property="btnNext" destination="Zlg-eU-qAu" id="5FC-D1-rD3"/>
                 <outlet property="emailField" destination="XVe-8c-oMl" id="ySJ-F2-TEY"/>
+                <outlet property="nextButton" destination="Zlg-eU-qAu" id="ej0-gq-PF4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -35,7 +35,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="bT4-ZI-Nyq"/>
                         <barButtonItem title="Next" id="Zlg-eU-qAu">
                             <connections>
-                                <action selector="onBtnNext:" destination="-1" id="mxk-cK-gAg"/>
+                                <action selector="onNextButton:" destination="-1" id="gl6-il-Slp"/>
                             </connections>
                         </barButtonItem>
                     </items>

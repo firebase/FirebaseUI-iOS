@@ -33,7 +33,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellName;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellEmail;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellUID;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAuthorization;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonAuthorization;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellAccessToken;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellIdToken;
 
@@ -103,14 +103,14 @@
     self.cellEmail.textLabel.text = user.email;
     self.cellUID.textLabel.text = user.uid;
 
-    self.btnAuthorization.title = @"Sign Out";
+    self.buttonAuthorization.title = @"Sign Out";
   } else {
     self.cellSignIn.textLabel.text = @"Not signed-in";
     self.cellName.textLabel.text = @"";
     self.cellEmail.textLabel.text = @"";
     self.cellUID.textLabel.text = @"";
 
-    self.btnAuthorization.title = @"Sign In";
+    self.buttonAuthorization.title = @"Sign In";
   }
 
   self.cellAccessToken.textLabel.text = [self getAllAccessTokens];
@@ -179,7 +179,7 @@
 
 - (void)signOut {
   NSError *error;
-  [self.authUI signOut:&error];
+  [self.authUI signOutWithError:&error];
   if (error) {
     [self showAlert:error.localizedDescription];
   }

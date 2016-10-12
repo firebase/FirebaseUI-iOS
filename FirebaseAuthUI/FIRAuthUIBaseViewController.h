@@ -104,11 +104,11 @@ typedef void (^FIRAuthUIAlertActionHandler)(void);
  */
 - (void)pushViewController:(UIViewController *)viewController;
 
-/** @fn onBackButtonPressed:
+/** @fn onBack
     @brief Pops the view controller from navigation stack. If current controller is root 
     works as @c cancelAuthorization
  */
-- (void)onBackButtonPressed;
+- (void)onBack;
 
 /** @fn incrementActivity
     @brief Increment the current acitivity count. If there's positive number of activities, display

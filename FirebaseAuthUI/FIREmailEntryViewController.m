@@ -93,6 +93,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 }
 
 #pragma mark - Actions
+
 - (void)next {
   [self onNext:_emailField.text];
 }

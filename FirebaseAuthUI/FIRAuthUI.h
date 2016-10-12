@@ -141,7 +141,7 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
  */
 - (UINavigationController *)authViewController;
 
-/** @fn signOut:
+/** @fn signOutWithError:
     @brief Signs out the current user from Firbase and all providers.
     @param error Optionally; if an error occurs during Firebase signout, upon return contains an
     NSError object that describes the problem; is nil otherwise. If Firebase error occurs all providers
@@ -152,7 +152,7 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
     The @c NSLocalizedFailureReasonErrorKey field in the @c NSError.userInfo dictionary
     will contain more information about the error encountered.
  */
-- (BOOL)signOut:(NSError *_Nullable *_Nullable)error;
+- (BOOL)signOutWithError:(NSError *_Nullable *_Nullable)error;
 
 @end
 

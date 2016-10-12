@@ -19,7 +19,7 @@
 
 @interface FIRCustomEmailEntryViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnNext;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton;
 
 @end
 
@@ -33,13 +33,13 @@
 
   //override action of default 'Next' button to use custom layout elements
   self.navigationItem.rightBarButtonItem.target = self;
-  self.navigationItem.rightBarButtonItem.action = @selector(onBtnNext:);
+  self.navigationItem.rightBarButtonItem.action = @selector(onNextButton:);
 }
 
 - (IBAction)onBack:(id)sender {
-  [self onBackButtonPressed];
+  [self onBack];
 }
-- (IBAction)onBtnNext:(id)sender {
+- (IBAction)onNextButton:(id)sender {
   [self onNext:_emailField.text];
 }
 - (IBAction)onCancel:(id)sender {
@@ -47,7 +47,7 @@
 }
 - (IBAction)updateEmailValue:(UITextField *)sender {
   BOOL enableActionButton = sender.text.length > 0;
-  self.btnNext.enabled = enableActionButton;
+  self.nextButton.enabled = enableActionButton;
 
   [self onEmailValueChanged:sender.text];
 }

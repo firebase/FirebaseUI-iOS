@@ -105,7 +105,7 @@ static const char kAuthAssociationKey;
   return [[UINavigationController alloc] initWithRootViewController:controller];
 }
 
-- (BOOL)signOut:(NSError *_Nullable *_Nullable)error {
+- (BOOL)signOutWithError:(NSError *_Nullable *_Nullable)error {
   // sign out from Firebase
   BOOL success = [self.auth signOut:error];
   if (!error && success) {

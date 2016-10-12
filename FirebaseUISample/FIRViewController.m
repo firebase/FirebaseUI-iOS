@@ -66,14 +66,9 @@
 - (void)signOut {
   // sign out from Firebase
   NSError *error;
-  [self.authMock signOut:&error];
+  [self.authUIMock signOutWithError:&error];
   if (error) {
     [self showAlert:error.localizedDescription];
-  }
-
-  // sign out from all providers (wipes provider tokens too)
-  for (id<FIRAuthProviderUI> provider in [self.authUIMock providers]) {
-    [provider signOut];
   }
   
 }
