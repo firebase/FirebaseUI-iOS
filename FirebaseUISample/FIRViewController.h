@@ -16,7 +16,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FIRViewController : UIViewController
+@interface FIRViewController : UITableViewController
 
 
 @end
