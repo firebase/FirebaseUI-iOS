@@ -134,8 +134,12 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 #pragma mark - Actions
 
 - (void)signInWithEmail {
-  UIViewController *controller =
-      [[FIREmailEntryViewController alloc] initWithAuthUI:self.authUI];
+  UIViewController *controller;
+  if ([self.authUI.delegate respondsToSelector:@selector(emailEntryViewControllerForAuthUI:)]) {
+    controller = [self.authUI.delegate emailEntryViewControllerForAuthUI:self.authUI];
+  } else {
+    controller = [[FIREmailEntryViewController alloc] initWithAuthUI:self];
+  }
   [self pushViewController:controller];
 }
 

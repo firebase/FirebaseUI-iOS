@@ -16,20 +16,8 @@
 //  limitations under the License.
 //
 
-#import "FIRCustomAuthPickerViewController.h"
+#import <FirebaseAuthUI/FIREmailEntryViewController.h>
 
-@implementation FIRCustomAuthPickerViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil authUI:(FIRAuthUI *)authUI {
-
-  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil authUI:authUI];
-  if (self) {
-    // Custom initialization
-  }
-  return self;
-}
-- (IBAction)onClose:(id)sender {
-  [self cancelAuthorization];
-}
+@interface FIRCustomEmailEntryViewController : FIREmailEntryViewController
 
 @end

@@ -22,6 +22,7 @@
 @class FIRAuthPickerViewController;
 @class FIRAuthUI;
 @class FIRUser;
+@class FIREmailEntryViewController;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -55,6 +56,14 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
     @return an instance of @c FIRAuthPickerViewController subclass.
  */
 - (FIRAuthPickerViewController *)authPickerViewControllerForAuthUI:(FIRAuthUI *)authUI;
+
+/** @fn emailEntryViewControllerForAuthUI:
+    @brief Sent to the receiver to ask for an instance of @c FIREmailEntryViewController subclass
+    to allow UI customizations.
+    @param authUI The @c FIRAuthUI instance sending the message.
+    @return an instance of @c FIREmailEntryViewController subclass.
+ */
+- (FIREmailEntryViewController *)emailEntryViewControllerForAuthUI:(FIRAuthUI *)authUI;
 
 @end
 
@@ -127,10 +136,23 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
     sourceApplication:(nullable NSString *)sourceApplication;
 
 /** @fn authViewController
-    @brief Returns an instance of the initial view controller of AuthUI.
-    @return An instance of the the initial view controller of AuthUI.
+    @brief Returns an instance of the initial navigation view controller of AuthUI.
+    @return An instance of the the initial navigation view controller of AuthUI.
  */
-- (UIViewController *)authViewController;
+- (UINavigationController *)authViewController;
+
+/** @fn signOut:
+    @brief Signs out the current user from Firbase and all providers.
+    @param error Optionally; if an error occurs during Firebase signout, upon return contains an
+    NSError object that describes the problem; is nil otherwise. If Firebase error occurs all providers
+    are not logged-out and sign-out should be retried.
+    @return @YES when the sign out request was successful. @NO otherwise.
+    @remarks Possible error codes:
+    - @c FIRAuthErrorCodeKeychainError Indicates an error occurred when accessing the keychain.
+    The @c NSLocalizedFailureReasonErrorKey field in the @c NSError.userInfo dictionary
+    will contain more information about the error encountered.
+ */
+- (BOOL)signOut:(NSError *_Nullable *_Nullable)error;
 
 @end
 

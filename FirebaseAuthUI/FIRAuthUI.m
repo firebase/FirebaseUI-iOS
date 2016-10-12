@@ -88,17 +88,34 @@ static const char kAuthAssociationKey;
   return NO;
 }
 
-- (UIViewController *)authViewController {
+- (UINavigationController *)authViewController {
   UIViewController *controller;
 
   if (self.providers.count == 0 && !self.isSignInWithEmailHidden) {
-    controller = [[FIREmailEntryViewController alloc] initWithAuthUI:self];
+    if ([self.delegate respondsToSelector:@selector(emailEntryViewControllerForAuthUI:)]) {
+      controller = [self.delegate emailEntryViewControllerForAuthUI:self];
+    } else {
+      controller = [[FIREmailEntryViewController alloc] initWithAuthUI:self];
+    }
   } else if ([self.delegate respondsToSelector:@selector(authPickerViewControllerForAuthUI:)]) {
     controller = [self.delegate authPickerViewControllerForAuthUI:self];
   } else {
     controller = [[FIRAuthPickerViewController alloc] initWithAuthUI:self];
   }
   return [[UINavigationController alloc] initWithRootViewController:controller];
+}
+
+- (BOOL)signOut:(NSError *_Nullable *_Nullable)error {
+  // sign out from Firebase
+  BOOL success = [self.auth signOut:error];
+  if (!error && success) {
+    // sign out from all providers (wipes provider tokens too)
+    for (id<FIRAuthProviderUI> provider in _providers) {
+      [provider signOut];
+    }
+  }
+
+  return success;
 }
 
 #pragma mark - Internal Methods

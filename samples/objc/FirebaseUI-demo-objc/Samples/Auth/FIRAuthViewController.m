@@ -41,6 +41,7 @@
 @property (nonatomic) FIRAuthUI *authUI;
 // retain customAuthUIDelegate so it can be used when needed
 @property (nonatomic) id<FIRAuthUIDelegate> customAuthUIDelegate;
+@property (nonatomic, assign) BOOL isCustomAuthDelegateSelected;
 
 @property (nonatomic) FIRAuthStateDidChangeListenerHandle authStateDidChangeHandle;
 
@@ -118,8 +119,8 @@
   [self.tableView reloadData];
 }
 - (IBAction)onAuthUIDelegateChanged:(UISwitch *)sender {
-  BOOL isCustomAuthDelegateSelected = sender ? sender.isOn : NO;
-  if (isCustomAuthDelegateSelected) {
+  _isCustomAuthDelegateSelected = sender ? sender.isOn : NO;
+  if (_isCustomAuthDelegateSelected) {
     self.authUI.delegate = self.customAuthUIDelegate;
   } else {
     self.authUI.delegate = self;
@@ -128,7 +129,10 @@
 
 - (IBAction)onAuthorization:(id)sender {
   if (!self.auth.currentUser) {
-    UIViewController *controller = [self.authUI authViewController];
+    UINavigationController *controller = [self.authUI authViewController];
+    if (_isCustomAuthDelegateSelected) {
+      controller.navigationBar.hidden = NO;
+    }
     [self presentViewController:controller animated:YES completion:nil];
   } else {
     [self signOut];
@@ -174,18 +178,11 @@
 }
 
 - (void)signOut {
-  // sign out from Firebase
   NSError *error;
-  [self.auth signOut:&error];
+  [self.authUI signOut:&error];
   if (error) {
     [self showAlert:error.localizedDescription];
   }
-
-  // sign out from all providers (wipes provider tokens too)
-  for (id<FIRAuthProviderUI> provider in _authUI.providers) {
-    [provider signOut];
-  }
-
 }
 
 - (void)showAlert:(NSString *)message {
