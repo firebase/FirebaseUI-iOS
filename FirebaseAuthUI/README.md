@@ -70,7 +70,7 @@ authUI?.delegate = self
 @import FirebaseAuthUI
 ...
 [FIRApp configure];
-FIRAuthUI *authUI = [FIRAuthUI default];
+FIRAuthUI *authUI = [FIRAuthUI defaultAuthUI];
 // You need to adopt a FIRAuthUIDelegate protocol to receive callback
 authUI.delegate = self;
 ```
@@ -97,11 +97,11 @@ self.authUI?.providers = providers
 @import FirebaseFacebookAuthUI
 @import FIRTwitterAuthUI
 ...
-NSArray<id<FIRAuthProviderUI>> *providers = [NSArray arrayWithObjects:
+NSArray<id<FIRAuthProviderUI>> *providers = @[
                                              [[FIRGoogleAuthUI alloc] init],
                                              [[FIRFacebookAuthUI alloc] init],
                                              [[FIRTwitterAuthUI alloc] init],
-                                             nil];
+                                             ];
 _authUI.providers = providers;
 ```
 
@@ -131,7 +131,7 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpe
 // objc
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
   NSString *sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey];
-  return [[FIRAuthUI default] handleOpenURL:url sourceApplication:sourceApplication];
+  return [[FIRAuthUI defaultAuthUI] handleOpenURL:url sourceApplication:sourceApplication];
 }
 ```
 
@@ -179,7 +179,7 @@ authUI?.tosurl = kFirebaseTermsOfService
 
 ```objective-c
 // objc
-authUI.tosurl = [NSURL URLWithString:@"https://example.com/tos"];
+authUI.TOSURL = [NSURL URLWithString:@"https://example.com/tos"];
 ```
 
 ### Custom strings
