@@ -257,14 +257,6 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
   [self.navigationController pushViewController:viewController animated:YES];
 }
 
-- (void)onBackButtonPressed {
-  if (self.navigationController.viewControllers.count > 1) {
-    [self.navigationController popViewControllerAnimated:YES];
-  } else {
-    [self cancelAuthorization];
-  }
-}
-
 - (void)incrementActivity {
   _activityCount++;
 

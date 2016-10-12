@@ -18,9 +18,6 @@
 
 #import "FIRCustomAuthUIDelegate.h"
 #import "FIRCustomAuthPickerViewController.h"
-#import "FIRCustomEmailEntryViewController.h"
-
-
 @implementation FIRCustomAuthUIDelegate
 
 - (void)authUI:(FIRAuthUI *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error {
@@ -39,13 +36,6 @@
 
 - (FIRAuthPickerViewController *)authPickerViewControllerForAuthUI:(FIRAuthUI *)authUI {
   return [[FIRCustomAuthPickerViewController alloc] initWithNibName:NSStringFromClass([FIRCustomAuthPickerViewController class])
-                                                             bundle:nil
-                                                             authUI:authUI];
-}
-
-
-- (FIREmailEntryViewController *)emailEntryViewControllerForAuthUI:(FIRAuthUI *)authUI {
-  return [[FIRCustomEmailEntryViewController alloc] initWithNibName:NSStringFromClass([FIRCustomEmailEntryViewController class])
                                                              bundle:nil
                                                              authUI:authUI];
 }

@@ -25,20 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface FIREmailEntryViewController : FIRAuthUIBaseViewController
 
-/** @fn onNext:
-    @brief Should be called when user entered email. Triggers email verification before
-    pushing new controller
-    @param emailText Email value entered by user.
- */
-- (void)onNext:(NSString *)emailText;
-
-/** @fn onEmailValueChanged:
-    @brief Should be called after any change of email value. Updates UI controls state
-    (e g state of next button)
-    @param emailText Email value entered by user.
- */
-- (void)onEmailValueChanged:(NSString *)emailText;
-
 @end
 
 NS_ASSUME_NONNULL_END

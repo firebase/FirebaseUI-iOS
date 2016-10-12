@@ -28,8 +28,5 @@
   }
   return self;
 }
-- (IBAction)onClose:(id)sender {
-  [self cancelAuthorization];
-}
 
 @end

@@ -10,8 +10,6 @@
 		2EBAE127DEBD66C58E245B21 /* libPods-FirebaseUI-demo-objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 938FB9FC77F663938FE622D6 /* libPods-FirebaseUI-demo-objc.a */; };
 		8D7D5DC11D9D9536006C1857 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */; };
 		8D7F86B51D9DAA0100C2A122 /* FIRStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F86B41D9DAA0100C2A122 /* FIRStorageViewController.m */; };
-		C329B1B21DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B1B01DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m */; };
-		C329B1B31DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C329B1B11DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib */; };
 		C375CB181D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C375CB161D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m */; };
 		C375CB191D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375CB171D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib */; };
 		C375CB1C1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C375CB1B1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.m */; };
@@ -37,9 +35,6 @@
 		8D7F86B31D9DAA0100C2A122 /* FIRStorageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FIRStorageViewController.h; path = Storage/FIRStorageViewController.h; sourceTree = "<group>"; };
 		8D7F86B41D9DAA0100C2A122 /* FIRStorageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FIRStorageViewController.m; path = Storage/FIRStorageViewController.m; sourceTree = "<group>"; };
 		938FB9FC77F663938FE622D6 /* libPods-FirebaseUI-demo-objc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseUI-demo-objc.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C329B1AF1DAD6E5100059A13 /* FIRCustomEmailEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomEmailEntryViewController.h; sourceTree = "<group>"; };
-		C329B1B01DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomEmailEntryViewController.m; sourceTree = "<group>"; };
-		C329B1B11DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomEmailEntryViewController.xib; sourceTree = "<group>"; };
 		C375CB151D935D1F002EECD3 /* FIRCustomAuthPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomAuthPickerViewController.h; sourceTree = "<group>"; };
 		C375CB161D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomAuthPickerViewController.m; sourceTree = "<group>"; };
 		C375CB171D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomAuthPickerViewController.xib; sourceTree = "<group>"; };
@@ -128,9 +123,6 @@
 				C375CB151D935D1F002EECD3 /* FIRCustomAuthPickerViewController.h */,
 				C375CB161D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m */,
 				C375CB171D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib */,
-				C329B1AF1DAD6E5100059A13 /* FIRCustomEmailEntryViewController.h */,
-				C329B1B01DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m */,
-				C329B1B11DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -261,7 +253,6 @@
 				C3AC67621D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib in Resources */,
 				D81A06041B86A78700498183 /* LaunchScreen.xib in Resources */,
 				D81A06011B86A78700498183 /* Images.xcassets in Resources */,
-				C329B1B31DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib in Resources */,
 				C375CB191D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib in Resources */,
 				8D7D5DC11D9D9536006C1857 /* GoogleService-Info.plist in Resources */,
 			);
@@ -333,7 +324,6 @@
 				D81A05F61B86A78700498183 /* main.m in Sources */,
 				C3AC67661D82002F00FC956D /* FIRSample.m in Sources */,
 				8D7F86B51D9DAA0100C2A122 /* FIRStorageViewController.m in Sources */,
-				C329B1B21DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m in Sources */,
 				C3AC675E1D81FE6B00FC956D /* FIRAuthViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

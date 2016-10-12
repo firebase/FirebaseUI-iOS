@@ -78,6 +78,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                       action:@selector(next)];
   nextButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = nextButtonItem;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -93,19 +94,16 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 }
 
 #pragma mark - Actions
-- (void)next {
-  [self onNext:_emailField.text];
-}
 
-- (void)onNext:(NSString *)emailText {
-  if (![[self class] isValidEmail:emailText]) {
+- (void)next {
+  if (![[self class] isValidEmail:_emailField.text]) {
     [self showAlertWithMessage:[FIRAuthUIStrings invalidEmailError]];
     return;
   }
 
   [self incrementActivity];
 
-  [self.auth fetchProvidersForEmail:emailText
+  [self.auth fetchProvidersForEmail:_emailField.text
                          completion:^(NSArray<NSString *> *_Nullable providers,
                                       NSError *_Nullable error) {
     [self decrementActivity];
@@ -123,7 +121,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
     id<FIRAuthProviderUI> provider = [self bestProviderFromProviderIDs:providers];
     if (provider) {
-      NSString *email = emailText;
+      NSString *email = _emailField.text;
       [self showSignInAlertWithEmail:email
                             provider:provider
                              handler:^{
@@ -132,7 +130,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     } else if ([providers containsObject:FIREmailPasswordAuthProviderID]) {
       UIViewController *controller =
           [[FIRPasswordSignInViewController alloc] initWithAuthUI:self.authUI
-                                                            email:emailText];
+                                                            email:_emailField.text];
       [self pushViewController:controller];
     } else {
       if (providers.count) {
@@ -142,7 +140,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
         // New user.
         UIViewController *controller =
             [[FIRPasswordSignUpViewController alloc] initWithAuthUI:self.authUI
-                                                              email:emailText];
+                                                              email:_emailField.text];
         [self pushViewController:controller];
       }
     }
@@ -150,11 +148,11 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 }
 
 - (void)textFieldDidChange {
-  [self onEmailValueChanged:_emailField.text];
+  [self updateActionButton];
 }
 
-- (void)onEmailValueChanged:(NSString *)emailText {
-  self.navigationItem.rightBarButtonItem.enabled = (emailText.length > 0);
+- (void)updateActionButton {
+  self.navigationItem.rightBarButtonItem.enabled = (_emailField.text.length > 0);
 }
 
 #pragma mark - UITableViewDataSource
@@ -184,7 +182,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
            forControlEvents:UIControlEventEditingChanged];
-  [self onEmailValueChanged:_emailField.text];
+  [self updateActionButton];
   return cell;
 }
 
@@ -204,7 +202,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
   if (textField == _emailField) {
-    [self onNext:_emailField.text];
+    [self next];
   }
   return NO;
 }
