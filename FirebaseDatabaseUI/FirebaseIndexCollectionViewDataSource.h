@@ -74,7 +74,8 @@ didFailLoadAtIndex:(NSUInteger)index
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
                collectionView:(UICollectionView *)collectionView
-                   identifier:(NSString *)cellIdentifier
+          cellReuseIdentifier:(NSString *)cellIdentifier
+                     delegate:(nullable id<FirebaseIndexCollectionViewDataSourceDelegate>)delegate
                  populateCell:(void (^)(UICollectionViewCell *cell,
                                         FIRDataSnapshot *_Nullable))populateCell NS_DESIGNATED_INITIALIZER;
 

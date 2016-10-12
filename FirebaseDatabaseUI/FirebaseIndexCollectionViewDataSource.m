@@ -33,7 +33,8 @@
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
                collectionView:(UICollectionView *)collectionView
-                   identifier:(NSString *)cellIdentifier
+          cellReuseIdentifier:(NSString *)cellIdentifier
+                     delegate:(id<FirebaseIndexCollectionViewDataSourceDelegate>)delegate
                  populateCell:(void (^)(UICollectionViewCell *,
                                         FIRDataSnapshot *))populateCell {
   self = [super init];
@@ -45,6 +46,7 @@
     _collectionView.dataSource = self;
     _identifier = [cellIdentifier copy];
     _populateCell = populateCell;
+    _delegate = delegate;
   }
   return self;
 }

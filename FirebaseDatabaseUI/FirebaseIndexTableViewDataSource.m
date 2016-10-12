@@ -54,6 +54,7 @@
     tableView.dataSource = self;
     _identifier = [cellIdentifier copy];
     _populateCell = populateCell;
+    _delegate = delegate;
   }
   return self;
 }
