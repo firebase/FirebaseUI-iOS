@@ -8,11 +8,11 @@ FirebaseUI clients are also available for [Android](https://github.com/firebase/
 
 ## Installing FirebaseUI for iOS
 
-FirebaseUI supports iOS 7.0+. We recommend using [CocoaPods](http://cocoapods.org/?q=firebaseui-ios), add
+FirebaseUI supports iOS 8.0+. We recommend using [CocoaPods](http://cocoapods.org/?q=firebaseui), add
 the following to your `Podfile`:
 
 ```ruby
-pod 'FirebaseUI', '~> 0.5'       # Pull in all Firebase UI features
+pod 'FirebaseUI', '~> 0.6'       # Pull in all Firebase UI features
 ```
 
 If you don't want to use all of FirebaseUI, there are multiple subspecs which can selectively install subsets of the full feature set:
@@ -34,7 +34,7 @@ pod 'FirebaseUI/Facebook', '~> 0.6'
 pod 'FirebaseUI/Google', '~> 0.6'
 
 # Only pull in Twitter login features
-pod 'FirebaseUI/Google', '~> 0.6'
+pod 'FirebaseUI/Twitter', '~> 0.6'
 ```
 
 If you're including FirebaseUI in a Swift project, make sure you also have:
