@@ -50,6 +50,11 @@ didFailLoadAtIndex:(NSUInteger)index
 
 @end
 
+/**
+ * An object that manages a @c FirebaseIndexArray and uses it to populate and update
+ * a table view with a single section. The data source maintains a reference to but
+ * does not claim ownership of the table view that it updates.
+ */
 @interface FirebaseIndexTableViewDataSource : NSObject <UITableViewDataSource>
 
 /**

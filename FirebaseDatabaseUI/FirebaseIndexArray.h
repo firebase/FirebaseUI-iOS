@@ -98,13 +98,19 @@ didFailLoadWithError:(NSError *)error;
 
 /**
  * Delegate method which is called whenever the backing query is canceled. This error is fatal
- * and the index array will become unusable afterward, so please handle it appropriately.
+ * and the index array will become unusable afterward, so please handle it appropriately
+ * (i.e. by displaying a modal error explaining why there's no content).
  * @param error the error that was raised
  */
 - (void)array:(FirebaseIndexArray *)array queryCancelledWithError:(NSError *)error;
 
 @end
 
+/**
+ * A FirebaseIndexArray instance uses a query's contents to query children of
+ * a separate database reference, which is useful for displaying an indexed list
+ * of data as described in https://firebase.google.com/docs/database/ios/structure-data
+ */
 @interface FirebaseIndexArray : NSObject
 
 /**
