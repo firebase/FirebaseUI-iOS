@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
                          authUI:(FIRAuthUI *)authUI NS_UNAVAILABLE;
 
 /** @fn initWithAuthUI:
-    @brief Please use @c initWithNibName:bundle:authUI:email::.
+    @brief Please use @c initWithNibName:bundle:authUI:email:.
  */
 - (instancetype)initWithAuthUI:(FIRAuthUI *)authUI NS_UNAVAILABLE;
 
