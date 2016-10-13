@@ -23,6 +23,7 @@
 @class FIRAuthUI;
 @class FIRUser;
 @class FIREmailEntryViewController;
+@class FIRPasswordSignInViewController;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -64,6 +65,9 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
     @return an instance of @c FIREmailEntryViewController subclass.
  */
 - (FIREmailEntryViewController *)emailEntryViewControllerForAuthUI:(FIRAuthUI *)authUI;
+
+- (FIRPasswordSignInViewController *)passwordSignInViewControllerForAuthUI:(FIRAuthUI *)authUI
+                                                                     email:(NSString *)email;
 
 @end
 

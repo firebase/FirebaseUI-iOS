@@ -11,13 +11,17 @@
         <scene sceneID="5Vi-Ss-a4T">
             <objects>
                 <navigationController id="7RW-VL-qNI" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="77g-XZ-4ot">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="77g-XZ-4ot">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="m8h-JF-4XK">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="S3Q-gf-8AQ" kind="relationship" relationship="rootViewController" id="6WL-yB-OaR"/>
                     </connections>
@@ -127,19 +131,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="83E-4Z-ptP">
-                            <rect key="frame" x="0.0" y="667" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <items>
-                                <barButtonItem style="plain" systemItem="flexibleSpace" id="o3y-o4-Gpu"/>
-                                <barButtonItem title="Sign In" id="bgV-bu-PcA">
-                                    <connections>
-                                        <action selector="onAuthorization:" destination="CNE-cz-Qwp" id="8RX-tN-gBO"/>
-                                    </connections>
-                                </barButtonItem>
-                                <barButtonItem style="plain" systemItem="flexibleSpace" id="PyK-ro-bxx"/>
-                            </items>
-                        </toolbar>
                         <sections>
                             <tableViewSection headerTitle="Settings" id="PRj-zg-0nr">
                                 <cells>
@@ -273,6 +264,15 @@
                             <outlet property="delegate" destination="CNE-cz-Qwp" id="KFk-25-IpR"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="o3y-o4-Gpu"/>
+                        <barButtonItem title="Sign In" id="bgV-bu-PcA">
+                            <connections>
+                                <action selector="onAuthorization:" destination="CNE-cz-Qwp" id="8RX-tN-gBO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="PyK-ro-bxx"/>
+                    </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="buttonAuthorization" destination="bgV-bu-PcA" id="jaV-7q-tSk"/>

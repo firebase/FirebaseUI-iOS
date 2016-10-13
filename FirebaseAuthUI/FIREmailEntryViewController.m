@@ -131,9 +131,16 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
         [self signInWithProvider:provider email:email];
       }];
     } else if ([providers containsObject:FIREmailPasswordAuthProviderID]) {
-      UIViewController *controller =
-          [[FIRPasswordSignInViewController alloc] initWithAuthUI:self.authUI
-                                                            email:emailText];
+      UIViewController *controller;
+      if ([self.authUI.delegate respondsToSelector:@selector(passwordSignInViewControllerForAuthUI:email:)]) {
+        controller = [self.authUI.delegate passwordSignInViewControllerForAuthUI:self.authUI
+                                                                           email:emailText];
+      } else {
+        controller = [[FIRPasswordSignInViewController alloc] initWithNibName:NSStringFromClass([FIRPasswordSignInViewController class])
+                                                                       bundle:[FIRAuthUIUtils frameworkBundle]
+                                                                       authUI:self.authUI
+                                                                        email:emailText];
+      }
       [self pushViewController:controller];
     } else {
       if (providers.count) {

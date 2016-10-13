@@ -18,6 +18,6 @@
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
-@interface FIRCustomEmailEntryViewController : FIREmailEntryViewController
+@interface FIRCustomPasswordSignInViewController : FIRPasswordSignInViewController
 
 @end

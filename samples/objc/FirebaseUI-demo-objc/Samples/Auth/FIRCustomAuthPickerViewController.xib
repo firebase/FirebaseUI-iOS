@@ -18,17 +18,17 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Picker View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJ4-3A-3tu">
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XdB-tD-X9o">
-                    <frame key="frameInset" minX="325" minY="24" width="22" height="22"/>
+                    <frame key="frameInset" minX="312" minY="45" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.42328789893617019" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" name="selectedKnobColor" catalog="System" colorSpace="catalog"/>
                     <state key="normal" title="X"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="5"/>
+                            <integer key="value" value="10"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -36,7 +36,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" name="knobColor" catalog="System" colorSpace="catalog"/>
             <constraints>
                 <constraint firstItem="xJ4-3A-3tu" firstAttribute="centerX" secondItem="feM-QA-xVH" secondAttribute="centerX" id="obp-jt-NjF"/>
                 <constraint firstItem="xJ4-3A-3tu" firstAttribute="top" secondItem="feM-QA-xVH" secondAttribute="top" constant="127" id="ypO-V8-Owu"/>
@@ -46,6 +46,7 @@
                     <integer key="value" value="10"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="24.5" y="52.5"/>
         </view>
     </objects>
 </document>
