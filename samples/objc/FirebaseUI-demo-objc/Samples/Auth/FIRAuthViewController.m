@@ -81,11 +81,13 @@
     [weakSelf updateUI:auth withUser:user];
   }];
 
+  [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
--(void)viewDidDisappear:(BOOL)animated {
-  [super viewDidDisappear:animated];
+-(void)viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
   [self.auth removeAuthStateDidChangeListener:self.authStateDidChangeHandle];
+  [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 #pragma mark - UITableViewController methods

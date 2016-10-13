@@ -46,7 +46,7 @@
                     <gestureRecognizers/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="next"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                     <connections>
                         <action selector="updateEmailValue:" destination="-1" eventType="editingChanged" id="w77-D7-izf"/>
                         <outlet property="delegate" destination="-1" id="pGb-hT-tKr"/>
@@ -56,11 +56,11 @@
                     <frame key="frameInset" minX="16" minY="227" width="100" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" name="knobColor" catalog="System" colorSpace="catalog"/>
             <gestureRecognizers/>
             <connections>
                 <outletCollection property="gestureRecognizers" destination="hHc-Ia-wTT" appends="YES" id="UxY-1Y-C5d"/>

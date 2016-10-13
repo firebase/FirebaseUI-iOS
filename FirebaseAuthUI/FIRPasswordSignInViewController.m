@@ -32,11 +32,6 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 @end
 
 @implementation FIRPasswordSignInViewController {
-  /** @var _email
-      @brief The @c The email address of the user from the previous screen.
-   */
-  NSString *_email;
-
   /** @var _emailField
       @brief The @c UITextField that user enters email address into.
    */
@@ -48,10 +43,12 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   UITextField *_passwordField;
 }
 
-- (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
-                         email:(NSString *_Nullable)email {
-  self = [super initWithNibName:NSStringFromClass([self class])
-                         bundle:[FIRAuthUIUtils frameworkBundle]
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FIRAuthUI *)authUI
+                          email:(NSString *_Nullable)email {
+  self = [super initWithNibName:nibNameOrNil
+                         bundle:nibBundleOrNil
                          authUI:authUI];
   if (self) {
     _email = [email copy];
@@ -74,55 +71,65 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
 #pragma mark - Actions
 
-- (void)signIn {
-  if (![[self class] isValidEmail:_emailField.text]) {
+
+- (void)signInWithEmail:(NSString *)email andPassword:(NSString *)password {
+  if (![[self class] isValidEmail:email]) {
     [self showAlertWithMessage:[FIRAuthUIStrings invalidEmailError]];
     return;
   }
 
   [self incrementActivity];
 
-  [self.auth signInWithEmail:_emailField.text
-                    password:_passwordField.text
+  [self.auth signInWithEmail:email
+                    password:password
                   completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-    [self decrementActivity];
+                    [self decrementActivity];
 
-    if (error) {
-      switch (error.code) {
-        case FIRAuthErrorCodeWrongPassword:
-          [self showAlertWithMessage:[FIRAuthUIStrings wrongPasswordError]];
-          return;
-        case FIRAuthErrorCodeUserNotFound:
-          [self showAlertWithMessage:[FIRAuthUIStrings userNotFoundError]];
-          return;
-        case FIRAuthErrorCodeUserDisabled:
-          [self showAlertWithMessage:[FIRAuthUIStrings accountDisabledError]];
-          return;
-        case FIRAuthErrorCodeTooManyRequests:
-          [self showAlertWithMessage:[FIRAuthUIStrings signInTooManyTimesError]];
-          return;
-      }
-    }
+                    if (error) {
+                      switch (error.code) {
+                        case FIRAuthErrorCodeWrongPassword:
+                          [self showAlertWithMessage:[FIRAuthUIStrings wrongPasswordError]];
+                          return;
+                        case FIRAuthErrorCodeUserNotFound:
+                          [self showAlertWithMessage:[FIRAuthUIStrings userNotFoundError]];
+                          return;
+                        case FIRAuthErrorCodeUserDisabled:
+                          [self showAlertWithMessage:[FIRAuthUIStrings accountDisabledError]];
+                          return;
+                        case FIRAuthErrorCodeTooManyRequests:
+                          [self showAlertWithMessage:[FIRAuthUIStrings signInTooManyTimesError]];
+                          return;
+                      }
+                    }
+                    
+                    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                      [self.authUI invokeResultCallbackWithUser:user error:error];
+                    }];
+                  }];
+}
 
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-      [self.authUI invokeResultCallbackWithUser:user error:error];
-    }];
-  }];
+- (void)signIn {
+  [self signInWithEmail:_emailField.text andPassword:_passwordField.text];
+}
+
+- (void)forgotPasswordForEmail:(NSString *)email {
+  UIViewController *viewController =
+  [[FIRPasswordRecoveryViewController alloc] initWithAuthUI:self.authUI
+                                                      email:email];
+  [self pushViewController:viewController];
+
 }
 
 - (IBAction)forgotPassword {
-  UIViewController *viewController =
-      [[FIRPasswordRecoveryViewController alloc] initWithAuthUI:self.authUI
-                                                          email:_emailField.text];
-  [self pushViewController:viewController];
+  [self forgotPasswordForEmail:_emailField.text];
 }
 
 - (void)textFieldDidChange {
-  [self updateActionButton];
+  [self didChangeEmail:_emailField.text andPassword:_passwordField.text];
 }
 
-- (void)updateActionButton {
-  BOOL enableActionButton = _emailField.text.length > 0 && _passwordField.text.length > 0;
+- (void)didChangeEmail:(NSString *)email andPassword:(NSString *)password {
+  BOOL enableActionButton = email.length > 0 && password.length > 0;
   self.navigationItem.rightBarButtonItem.enabled = enableActionButton;
 }
 
@@ -161,7 +168,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
            forControlEvents:UIControlEventEditingChanged];
-  [self updateActionButton];
+  [self didChangeEmail:_emailField.text andPassword:_passwordField.text];
   return cell;
 }
 

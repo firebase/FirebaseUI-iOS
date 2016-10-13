@@ -24,31 +24,59 @@ NS_ASSUME_NONNULL_BEGIN
     @brief The view controller that asks for user's password.
  */
 @interface FIRPasswordSignInViewController : FIRAuthUIBaseViewController
+{
+  @protected
+  /** @var _email
+   @brief The @c email address of the user from the previous screen.
+   */
+  NSString *_email;
+
+}
 
 /** @fn initWithNibName:bundle:authUI:
-    @brief Please use @c initWithAuthUI:email:.
+    @brief Please use @c initWithNibName:bundle:authUI:email:.
  */
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil
                          authUI:(FIRAuthUI *)authUI NS_UNAVAILABLE;
 
 /** @fn initWithAuthUI:
-    @brief Please use @c initWithAuthUI:email:.
+    @brief Please use @c initWithNibName:bundle:authUI:email::.
  */
 - (instancetype)initWithAuthUI:(FIRAuthUI *)authUI NS_UNAVAILABLE;
 
-/** @fn initWithAuthUI:email:
+/** @fn initWithNibName:bundle:authUI:email:
     @brief Designated initializer.
+    @param nibNameOrNil The name of the nib file to associate with the view controller.
+    @param nibBundleOrNil The bundle in which to search for the nib file.
     @param authUI The @c FIRAuthUI instance that manages this view controller.
     @param email The email address of the user.
  */
-- (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FIRAuthUI *)authUI
                          email:(NSString *_Nullable)email NS_DESIGNATED_INITIALIZER;
 
-/** @fn forgotPassword
+/** @fn forgotPasswordForEmail:
     @brief IBAction when user forgot password.
+    @param email The email address of the user.
  */
-- (IBAction)forgotPassword;
+- (void)forgotPasswordForEmail:(NSString *)email;
+
+/** @fn didChangeEmail:andPassword:
+    @brief Should be called after any change of email/password value. Updates UI controls state
+    (e g state of next button)
+    @param email The email address of the user.
+    @param password The password which user uses.
+ */
+- (void)didChangeEmail:(NSString *)email andPassword:(NSString *)password;
+
+/** @fn signInWithEmail:andPassword:
+    @brief Should be called when user entered credentials. Sends authorization request
+    @param email The email address of the user.
+    @param password The password which user uses.
+ */
+- (void)signInWithEmail:(NSString *)email andPassword:(NSString *)password;
 
 @end
 
