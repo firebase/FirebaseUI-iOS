@@ -18,9 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="92Y-Pf-Y6Z">
-                    <frame key="frameInset" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="92Y-Pf-Y6Z">
                     <items>
                         <barButtonItem title="Back" id="9jd-kk-gdQ">
                             <connections>
@@ -40,9 +38,7 @@
                         </barButtonItem>
                     </items>
                 </toolbar>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XVe-8c-oMl">
-                    <frame key="frameInset" minX="16" minY="250" width="343" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XVe-8c-oMl">
                     <gestureRecognizers/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -52,9 +48,11 @@
                         <outlet property="delegate" destination="-1" id="pGb-hT-tKr"/>
                     </connections>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Z3-LG-zzA">
-                    <frame key="frameInset" minX="16" minY="227" width="100" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Z3-LG-zzA">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="1sN-vU-Osq"/>
+                        <constraint firstAttribute="height" constant="21" id="6jG-io-Hwg"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -62,6 +60,16 @@
             </subviews>
             <color key="backgroundColor" name="knobColor" catalog="System" colorSpace="catalog"/>
             <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="XVe-8c-oMl" firstAttribute="top" secondItem="2Z3-LG-zzA" secondAttribute="bottom" constant="2" id="1i6-rH-FPR"/>
+                <constraint firstItem="2Z3-LG-zzA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="120" id="8oX-hp-8At"/>
+                <constraint firstAttribute="trailing" secondItem="92Y-Pf-Y6Z" secondAttribute="trailing" id="d3i-z5-MfW"/>
+                <constraint firstItem="2Z3-LG-zzA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="djI-eM-i8U"/>
+                <constraint firstItem="2Z3-LG-zzA" firstAttribute="leading" secondItem="XVe-8c-oMl" secondAttribute="leading" id="k8z-nW-7K7"/>
+                <constraint firstItem="XVe-8c-oMl" firstAttribute="centerX" secondItem="92Y-Pf-Y6Z" secondAttribute="centerX" id="nZN-TW-Ldr"/>
+                <constraint firstItem="92Y-Pf-Y6Z" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vsJ-aX-WwQ"/>
+                <constraint firstAttribute="bottom" secondItem="92Y-Pf-Y6Z" secondAttribute="bottom" id="zPW-FD-zhF"/>
+            </constraints>
             <connections>
                 <outletCollection property="gestureRecognizers" destination="hHc-Ia-wTT" appends="YES" id="UxY-1Y-C5d"/>
             </connections>

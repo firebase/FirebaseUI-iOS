@@ -148,9 +148,16 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
         [self showAlertWithMessage:[FIRAuthUIStrings cannotAuthenticateError]];
       } else {
         // New user.
-        UIViewController *controller =
-            [[FIRPasswordSignUpViewController alloc] initWithAuthUI:self.authUI
-                                                              email:emailText];
+        UIViewController *controller;
+        if ([self.authUI.delegate respondsToSelector:@selector(passwordSignUpViewControllerForAuthUI:email:)]) {
+          controller = [self.authUI.delegate passwordSignUpViewControllerForAuthUI:self.authUI
+                                                                             email:emailText];
+        } else {
+          controller = [[FIRPasswordSignUpViewController alloc] initWithNibName:NSStringFromClass([FIRPasswordSignUpViewController class])
+                                                                         bundle:[FIRAuthUIUtils frameworkBundle]
+                                                                         authUI:self.authUI
+                                                                          email:emailText];
+        }
         [self pushViewController:controller];
       }
     }

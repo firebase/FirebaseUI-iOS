@@ -20,7 +20,7 @@
 #import "FIRCustomAuthPickerViewController.h"
 #import "FIRCustomEmailEntryViewController.h"
 #import "FIRCustomPasswordSignInViewController.h"
-
+#import "FIRCustomPasswordSignUpViewController.h"
 
 @implementation FIRCustomAuthUIDelegate
 
@@ -59,4 +59,12 @@
 
 }
 
+
+- (FIRPasswordSignUpViewController *)passwordSignUpViewControllerForAuthUI:(FIRAuthUI *)authUI email:(NSString *)email {
+  return [[FIRCustomPasswordSignUpViewController alloc] initWithNibName:NSStringFromClass([FIRCustomPasswordSignUpViewController class])
+                                                                 bundle:nil
+                                                                 authUI:authUI
+                                                                  email:email];
+
+}
 @end

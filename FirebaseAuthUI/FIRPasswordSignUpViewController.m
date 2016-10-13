@@ -61,11 +61,6 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 @end
 
 @implementation FIRPasswordSignUpViewController {
-  /** @var _email
-      @brief The @c The email address of the user from the previous screen.
-   */
-  NSString *_email;
-
   /** @var _emailField
       @brief The @c UITextField that user enters email address into.
    */
@@ -82,10 +77,12 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   UITextField *_passwordField;
 }
 
-- (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
-                         email:(NSString *_Nullable)email {
-  self = [super initWithNibName:NSStringFromClass([self class])
-                         bundle:[FIRAuthUIUtils frameworkBundle]
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FIRAuthUI *)authUI
+                          email:(NSString *_Nullable)email {
+  self = [super initWithNibName:nibNameOrNil
+                         bundle:nibBundleOrNil
                          authUI:authUI];
   if (self) {
     _email = [email copy];
@@ -138,10 +135,18 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 #pragma mark - Actions
 
 - (void)save {
+  [self signUpWithEmail:_emailField.text
+            andPassword:_passwordField.text
+            andUsername:_nameField.text];
+}
+
+- (void)signUpWithEmail:(NSString *)email
+            andPassword:(NSString *)password
+            andUsername:(NSString *)username {
   [self incrementActivity];
 
-  [self.auth createUserWithEmail:_emailField.text
-                        password:_passwordField.text
+  [self.auth createUserWithEmail:email
+                        password:password
                       completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
     if (error) {
       [self decrementActivity];
@@ -151,7 +156,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
     }
 
     FIRUserProfileChangeRequest *request = [user profileChangeRequest];
-    request.displayName = _nameField.text;
+    request.displayName = username;
     [request commitChangesWithCompletion:^(NSError *_Nullable error) {
       [self decrementActivity];
 
@@ -188,13 +193,16 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 }
 
 - (void)textFieldDidChange {
-  [self updateActionButton];
+  [self didChangeEmail:_emailField.text orPassword:_nameField.text orUserName:_passwordField.text];
 }
 
-- (void)updateActionButton {
-  BOOL enableActionButton = _emailField.text.length > 0
-                            && _nameField.text.length > 0
-                            && _passwordField.text.length > 0;
+- (void)didChangeEmail:(NSString *)email
+            orPassword:(NSString *)password
+            orUserName:(NSString *)username {
+
+  BOOL enableActionButton = email.length > 0
+                            && password.length > 0
+                            && username.length > 0;
   self.navigationItem.rightBarButtonItem.enabled = enableActionButton;
 }
 
@@ -245,7 +253,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
            forControlEvents:UIControlEventEditingChanged];
-  [self updateActionButton];
+  [self didChangeEmail:_emailField.text orPassword:_nameField.text orUserName:_passwordField.text];
   return cell;
 }
 
@@ -257,7 +265,9 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   } else if (textField == _nameField) {
     [_passwordField becomeFirstResponder];
   } else if (textField == _passwordField) {
-    [self save];
+    [self signUpWithEmail:_emailField.text
+              andPassword:_passwordField.text
+              andUsername:_nameField.text];
   }
   return NO;
 }
