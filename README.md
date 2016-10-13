@@ -34,7 +34,7 @@ pod 'FirebaseUI/Facebook', '~> 0.6'
 pod 'FirebaseUI/Google', '~> 0.6'
 
 # Only pull in Twitter login features
-pod 'FirebaseUI/Google', '~> 0.6'
+pod 'FirebaseUI/Twitter', '~> 0.6'
 ```
 
 If you're including FirebaseUI in a Swift project, make sure you also have:
