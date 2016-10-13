@@ -61,10 +61,8 @@ didFailLoadWithError:(NSError *)error;
 
 /**
  * Delegate method which is called whenever an object is added to a
- * FirebaseArray. On a
- * FirebaseArray synchronized to a Firebase reference, this corresponds to an
- * [FIRDataEventTypeChildAdded](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
- * event being raised.
+ * FirebaseArray. On a FirebaseArray synchronized to a Firebase reference, 
+ * this corresponds to a @c FIRDataEventTypeChildAdded event being raised.
  * @param ref The database reference added to the array
  * @param index The index the reference was added at
  */
@@ -72,10 +70,8 @@ didFailLoadWithError:(NSError *)error;
 
 /**
  * Delegate method which is called whenever an object is changed in a
- * FirebaseArray. On a
- * FirebaseArray synchronized to a Firebase reference, this corresponds to an
- * [FIRDataEventTypeChildChanged](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
- * event being raised.
+ * FirebaseArray. On a FirebaseArray synchronized to a Firebase reference, 
+ * this corresponds to a @c FIRDataEventTypeChildChanged event being raised.
  * @param object The database reference that changed in the array
  * @param index The index the reference was changed at
  */
@@ -83,10 +79,8 @@ didFailLoadWithError:(NSError *)error;
 
 /**
  * Delegate method which is called whenever an object is removed from a
- * FirebaseArray. On a
- * FirebaseArray synchronized to a Firebase reference, this corresponds to an
- * [FIRDataEventTypeChildRemoved](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
- * event being raised.
+ * FirebaseArray. On a FirebaseArray synchronized to a Firebase reference, 
+ * this corresponds to a @c FIRDataEventTypeChildRemoved event being raised.
  * @param object The database reference removed from the array
  * @param index The index the reference was removed at
  */
@@ -94,10 +88,8 @@ didFailLoadWithError:(NSError *)error;
 
 /**
  * Delegate method which is called whenever an object is moved within a
- * FirebaseArray. On a
- * FirebaseArray synchronized to a Firebase reference, this corresponds to an
- * [FIRDataEventTypeChildMoved](https://www.firebase.com/docs/ios/guide/retrieving-data.html#section-event-types)
- * event being raised.
+ * FirebaseArray. On a FirebaseArray synchronized to a Firebase reference, 
+ * this corresponds to a @c FIRDataEventTypeChildMoved event being raised.
  * @param object The database reference that has moved locations
  * @param fromIndex The index the reference is being moved from
  * @param toIndex The index the reference is being moved to
