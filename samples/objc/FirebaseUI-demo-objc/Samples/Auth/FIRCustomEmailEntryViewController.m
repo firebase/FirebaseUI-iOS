@@ -19,9 +19,8 @@
 #import "FIRCustomEmailEntryViewController.h"
 
 @interface FIRCustomEmailEntryViewController () <UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton;
-
 @end
 
 @implementation FIRCustomEmailEntryViewController
@@ -29,19 +28,23 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  //update state of all UI elements (e g disable 'Next' buttons)
-  [self updateEmailValue:_emailField];
-
   //override action of default 'Next' button to use custom layout elements
   self.navigationItem.rightBarButtonItem.target = self;
   self.navigationItem.rightBarButtonItem.action = @selector(onNextButton:);
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+
+  //update state of all UI elements (e g disable 'Next' buttons)
+  [self updateEmailValue:_emailTextField];
 }
 
 - (IBAction)onBack:(id)sender {
   [self onBack];
 }
 - (IBAction)onNextButton:(id)sender {
-  [self onNext:_emailField.text];
+  [self onNext:_emailTextField.text];
 }
 - (IBAction)onCancel:(id)sender {
   [self cancelAuthorization];
@@ -50,11 +53,11 @@
   BOOL enableActionButton = sender.text.length > 0;
   self.nextButton.enabled = enableActionButton;
 
-  [self onEmailValueChanged:sender.text];
+  [self didChangeEmail:sender.text];
 }
 
 - (IBAction)onViewSelected:(id)sender {
-  [_emailField resignFirstResponder];
+  [_emailTextField resignFirstResponder];
 }
 
 #pragma mark - UITextFieldDelegate methods

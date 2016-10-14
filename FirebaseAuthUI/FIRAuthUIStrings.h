@@ -45,6 +45,12 @@
  */
 + (NSString *)invalidEmailError;
 
+/** @fn invalidPasswordError
+    @brief Error message displayed when user enters an empty password.
+    @return Localized string.
+ */
++ (NSString *)invalidPasswordError;
+
 /** @fn cannotAuthenticateError
     @brief Error message displayed when the app cannot authenticate user's account.
     @return Localized string.

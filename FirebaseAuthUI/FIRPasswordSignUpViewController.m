@@ -61,6 +61,11 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 @end
 
 @implementation FIRPasswordSignUpViewController {
+  /** @var _email
+      @brief The @c email address of the user from the previous screen.
+   */
+  NSString *_email;
+
   /** @var _emailField
       @brief The @c UITextField that user enters email address into.
    */
@@ -143,6 +148,15 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 - (void)signUpWithEmail:(NSString *)email
             andPassword:(NSString *)password
             andUsername:(NSString *)username {
+  if (![[self class] isValidEmail:email]) {
+    [self showAlertWithMessage:[FIRAuthUIStrings invalidEmailError]];
+    return;
+  }
+  if (password.length <= 0) {
+    [self showAlertWithMessage:[FIRAuthUIStrings invalidPasswordError]];
+    return;
+  }
+
   [self incrementActivity];
 
   [self.auth createUserWithEmail:email

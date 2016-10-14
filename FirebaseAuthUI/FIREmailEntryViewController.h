@@ -32,12 +32,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)onNext:(NSString *)emailText;
 
-/** @fn onEmailValueChanged:
+/** @fn didChangeEmail:
     @brief Should be called after any change of email value. Updates UI controls state
     (e g state of next button)
     @param emailText Email value entered by user.
  */
-- (void)onEmailValueChanged:(NSString *)emailText;
+- (void)didChangeEmail:(NSString *)emailText;
 
 @end
 

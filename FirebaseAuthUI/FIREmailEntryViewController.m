@@ -165,10 +165,10 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 }
 
 - (void)textFieldDidChange {
-  [self onEmailValueChanged:_emailField.text];
+  [self didChangeEmail:_emailField.text];
 }
 
-- (void)onEmailValueChanged:(NSString *)emailText {
+- (void)didChangeEmail:(NSString *)emailText {
   self.navigationItem.rightBarButtonItem.enabled = (emailText.length > 0);
 }
 
@@ -199,7 +199,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
            forControlEvents:UIControlEventEditingChanged];
-  [self onEmailValueChanged:_emailField.text];
+  [self didChangeEmail:_emailField.text];
   return cell;
 }
 

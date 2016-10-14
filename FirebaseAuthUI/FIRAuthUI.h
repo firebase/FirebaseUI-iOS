@@ -25,6 +25,7 @@
 @class FIREmailEntryViewController;
 @class FIRPasswordSignInViewController;
 @class FIRPasswordSignUpViewController;
+@class FIRPasswordRecoveryViewController;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -68,25 +69,34 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
 - (FIREmailEntryViewController *)emailEntryViewControllerForAuthUI:(FIRAuthUI *)authUI;
 
 /** @fn passwordSignInViewControllerForAuthUI:email:
-  @brief Sent to the receiver to ask for an instance of @c FIRPasswordSignInViewController subclass
-  to allow sign-in UI customizations.
-  @param authUI The @c FIRAuthUI instance sending the message.
-  @param email The email user is using for sin-in.
-  @return an instance of @c FIRPasswordSignInViewController subclass.
+    @brief Sent to the receiver to ask for an instance of @c FIRPasswordSignInViewController subclass
+    to allow sign-in UI customizations.
+    @param authUI The @c FIRAuthUI instance sending the message.
+    @param email The email user is using for sin-in.
+    @return an instance of @c FIRPasswordSignInViewController subclass.
  */
 - (FIRPasswordSignInViewController *)passwordSignInViewControllerForAuthUI:(FIRAuthUI *)authUI
                                                                      email:(NSString *)email;
 
 /** @fn passwordSignInViewControllerForAuthUI:email:
-  @brief Sent to the receiver to ask for an instance of @c FIRPasswordSignUpViewController subclass
-  to allow sign-up UI customizations.
-  @param authUI The @c FIRAuthUI instance sending the message.
-  @param email The email user is using for sin-in.
-  @return an instance of @c FIRPasswordSignUpViewController subclass.
+    @brief Sent to the receiver to ask for an instance of @c FIRPasswordSignUpViewController subclass
+    to allow sign-up UI customizations.
+    @param authUI The @c FIRAuthUI instance sending the message.
+    @param email The email user is using for sin-in.
+    @return an instance of @c FIRPasswordSignUpViewController subclass.
  */
 - (FIRPasswordSignUpViewController *)passwordSignUpViewControllerForAuthUI:(FIRAuthUI *)authUI
                                                                      email:(NSString *)email;
 
+/** @fn passwordRecoveryViewControllerForAuthUI:email:
+    @brief Sent to the receiver to ask for an instance of @c FIRPasswordRecoveryViewController subclass
+    to allow sign-up UI customizations.
+    @param authUI The @c FIRAuthUI instance sending the message.
+    @param email The email user is using for password recovery.
+    @return an instance of @c FIRPasswordRecoveryViewController subclass.
+ */
+- (FIRPasswordRecoveryViewController *)passwordRecoveryViewControllerForAuthUI:(FIRAuthUI *)authUI
+                                                                         email:(NSString *)email;
 @end
 
 /** @class FIRAuthUI

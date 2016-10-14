@@ -32,6 +32,11 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 @end
 
 @implementation FIRPasswordSignInViewController {
+  /** @var _email
+      @brief The @c email address of the user from the previous screen.
+   */
+  NSString *_email;
+
   /** @var _emailField
       @brief The @c UITextField that user enters email address into.
    */
@@ -77,6 +82,10 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
     [self showAlertWithMessage:[FIRAuthUIStrings invalidEmailError]];
     return;
   }
+  if (password.length <= 0) {
+    [self showAlertWithMessage:[FIRAuthUIStrings invalidPasswordError]];
+    return;
+  }
 
   [self incrementActivity];
 
@@ -113,9 +122,16 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 }
 
 - (void)forgotPasswordForEmail:(NSString *)email {
-  UIViewController *viewController =
-  [[FIRPasswordRecoveryViewController alloc] initWithAuthUI:self.authUI
-                                                      email:email];
+  UIViewController *viewController;
+  if ([self.authUI.delegate respondsToSelector:@selector(passwordRecoveryViewControllerForAuthUI:email:)]) {
+    viewController = [self.authUI.delegate passwordRecoveryViewControllerForAuthUI:self.authUI
+                                                                             email:email];
+  } else {
+    viewController = [[FIRPasswordRecoveryViewController alloc] initWithNibName:NSStringFromClass([FIRPasswordRecoveryViewController class])
+                                                        bundle:[FIRAuthUIUtils frameworkBundle]
+                                                        authUI:self.authUI
+                                                         email:email];
+  }
   [self pushViewController:viewController];
 
 }

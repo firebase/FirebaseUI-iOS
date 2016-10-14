@@ -24,13 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
     @brief The view controller where user signs up as a password account.
  */
 @interface FIRPasswordSignUpViewController : FIRAuthUIBaseViewController
-{
-  @protected
-  /** @var _email
-    @brief The @c email address of the user from the previous screen.
-   */
-  NSString *_email;
-}
 
 /** @property footerTextView
     @brief The text view in the footer of the table.

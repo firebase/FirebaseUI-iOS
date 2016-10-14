@@ -25,11 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface FIRPasswordRecoveryViewController : FIRAuthUIBaseViewController
 
-/** @property footerTextView
-    @brief The text view in the footer of the table.
- */
-@property(nonatomic, strong) IBOutlet UITextView *footerTextView;
-
 /** @fn initWithNibName:bundle:authUI:
     @brief Please use @c initWithAuthUI:email:.
  */
@@ -42,14 +37,33 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithAuthUI:(FIRAuthUI *)authUI NS_UNAVAILABLE;
 
-/** @fn initWithAuthUI:email:
+/** @fn initWithNibName:bundle:authUI:email:
     @brief Designated initializer.
+    @param nibNameOrNil The name of the nib file to associate with the view controller.
+    @param nibBundleOrNil The bundle in which to search for the nib file.
     @param authUI The @c FIRAuthUI instance that manages this view controller.
     @param email The email address of the user.
  */
-- (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
-                         email:(NSString *_Nullable)email NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FIRAuthUI *)authUI
+                          email:(NSString *_Nullable)email NS_DESIGNATED_INITIALIZER;
 
+
+/** @fn didChangeEmail:
+    @brief Should be called after any change of email value. Updates UI controls state
+    (e g state of send button)
+    @param email The email address of the user.
+ */
+- (void)didChangeEmail:(NSString *)email;
+
+
+/** @fn recoverEmail:
+    @brief Should be called when user want to recover password for specified email.
+    Sends email recover request.
+    @param email The email address of the user.
+ */
+- (void)recoverEmail:(NSString *)email;
 @end
 
 NS_ASSUME_NONNULL_END

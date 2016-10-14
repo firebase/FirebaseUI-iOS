@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FIRCustomEmailEntryViewController">
             <connections>
-                <outlet property="emailField" destination="XVe-8c-oMl" id="ySJ-F2-TEY"/>
+                <outlet property="emailTextField" destination="XVe-8c-oMl" id="OQP-lb-kmL"/>
                 <outlet property="nextButton" destination="Zlg-eU-qAu" id="ej0-gq-PF4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
