@@ -24,6 +24,7 @@ static NSString *const kAuthPickerTitle = @"AuthPickerTitle";
 static NSString *const kSignInWithEmail = @"SignInWithEmail";
 static NSString *const kEnterYourEmail = @"EnterYourEmail";
 static NSString *const kInvalidEmailError = @"InvalidEmailError";
+static NSString *const kInvalidPasswordError = @"InvalidPasswordError";
 static NSString *const kCannotAuthenticateError = @"CannotAuthenticateError";
 static NSString *const kExistingAccountTitle = @"ExistingAccountTitle";
 static NSString *const kProviderUsedPreviouslyMessage = @"ProviderUsedPreviouslyMessage";
@@ -102,6 +103,10 @@ static NSString *const kTableName = @"FirebaseAuthUI";
 
 + (NSString *)invalidEmailError {
   return [self localizedStringForKey:kInvalidEmailError];
+}
+
++ (NSString *)invalidPasswordError {
+  return [self localizedStringForKey:kInvalidPasswordError];
 }
 
 + (NSString *)cannotAuthenticateError {

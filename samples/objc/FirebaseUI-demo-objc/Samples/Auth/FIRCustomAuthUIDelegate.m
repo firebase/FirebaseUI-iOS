@@ -21,6 +21,7 @@
 #import "FIRCustomEmailEntryViewController.h"
 #import "FIRCustomPasswordSignInViewController.h"
 #import "FIRCustomPasswordSignUpViewController.h"
+#import "FIRCustomPasswordRecoveryViewController.h"
 
 @implementation FIRCustomAuthUIDelegate
 
@@ -59,7 +60,6 @@
 
 }
 
-
 - (FIRPasswordSignUpViewController *)passwordSignUpViewControllerForAuthUI:(FIRAuthUI *)authUI email:(NSString *)email {
   return [[FIRCustomPasswordSignUpViewController alloc] initWithNibName:NSStringFromClass([FIRCustomPasswordSignUpViewController class])
                                                                  bundle:nil
@@ -67,4 +67,13 @@
                                                                   email:email];
 
 }
+
+- (FIRPasswordRecoveryViewController *)passwordRecoveryViewControllerForAuthUI:(FIRAuthUI *)authUI email:(NSString *)email {
+  return [[FIRCustomPasswordRecoveryViewController alloc] initWithNibName:NSStringFromClass([FIRCustomPasswordRecoveryViewController class])
+                                                                   bundle:nil
+                                                                   authUI:authUI
+                                                                    email:email];
+  
+}
+
 @end

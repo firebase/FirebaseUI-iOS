@@ -24,14 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
     @brief The view controller that asks for user's password.
  */
 @interface FIRPasswordSignInViewController : FIRAuthUIBaseViewController
-{
-  @protected
-  /** @var _email
-   @brief The @c email address of the user from the previous screen.
-   */
-  NSString *_email;
-
-}
 
 /** @fn initWithNibName:bundle:authUI:
     @brief Please use @c initWithNibName:bundle:authUI:email:.

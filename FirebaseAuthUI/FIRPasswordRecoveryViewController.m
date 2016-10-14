@@ -33,11 +33,16 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 
 @interface FIRPasswordRecoveryViewController () <UITableViewDataSource, UITextFieldDelegate>
+/** @property footerTextView
+    @brief The text view in the footer of the table.
+ */
+@property(nonatomic, strong) IBOutlet UITextView *footerTextView;
+
 @end
 
 @implementation FIRPasswordRecoveryViewController {
   /** @var _email
-      @brief The @c The email address of the user from the previous screen.
+      @brief The @c email address of the user from the previous screen.
    */
   NSString *_email;
 
@@ -47,10 +52,12 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   UITextField *_emailField;
 }
 
-- (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
-                         email:(NSString *_Nullable)email {
-  self = [super initWithNibName:NSStringFromClass([self class])
-                         bundle:[FIRAuthUIUtils frameworkBundle]
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FIRAuthUI *)authUI
+                          email:(NSString *_Nullable)email {
+  self = [super initWithNibName:nibNameOrNil
+                         bundle:nibBundleOrNil
                          authUI:authUI];
   if (self) {
     _email = [email copy];
@@ -86,7 +93,10 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 #pragma mark - Actions
 
 - (void)send {
-  NSString *email = _emailField.text;
+  [self recoverEmail:_emailField.text];
+}
+
+- (void)recoverEmail:(NSString *)email {
   if (![[self class] isValidEmail:email]) {
     [self showAlertWithMessage:[FIRAuthUIStrings invalidEmailError]];
     return;
@@ -96,36 +106,37 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 
   [self.auth sendPasswordResetWithEmail:email
                              completion:^(NSError *_Nullable error) {
-    // The dispatch is a workaround for a bug in FirebaseAuth 3.0.2, which doesn't call the
-    // completion block on the main queue.
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [self decrementActivity];
+                               // The dispatch is a workaround for a bug in FirebaseAuth 3.0.2, which doesn't call the
+                               // completion block on the main queue.
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                 [self decrementActivity];
 
-      if (error) {
-        if (error.code == FIRAuthErrorCodeUserNotFound) {
-          [self showAlertWithMessage:[FIRAuthUIStrings userNotFoundError]];
-          return;
-        }
+                                 if (error) {
+                                   if (error.code == FIRAuthErrorCodeUserNotFound) {
+                                     [self showAlertWithMessage:[FIRAuthUIStrings userNotFoundError]];
+                                     return;
+                                   }
 
-        [self.navigationController dismissViewControllerAnimated:YES completion:^{
-          [self.authUI invokeResultCallbackWithUser:nil error:error];
-        }];
-        return;
-      }
+                                   [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                                     [self.authUI invokeResultCallbackWithUser:nil error:error];
+                                   }];
+                                   return;
+                                 }
 
-      NSString *message =
-          [NSString stringWithFormat:[FIRAuthUIStrings passwordRecoveryEmailSentMessage], email];
-      [self showAlertWithMessage:message];
-    });
-  }];
+                                 NSString *message =
+                                 [NSString stringWithFormat:[FIRAuthUIStrings passwordRecoveryEmailSentMessage], email];
+                                 [self showAlertWithMessage:message];
+                               });
+                             }];
 }
 
 - (void)textFieldDidChange {
-  [self updateActionButton];
+  [self didChangeEmail:_emailField.text];
 }
 
-- (void)updateActionButton {
-  self.navigationItem.rightBarButtonItem.enabled = (_emailField.text.length > 0);
+- (void)didChangeEmail:(NSString *)email {
+  self.navigationItem.rightBarButtonItem.enabled = (email.length > 0);
+
 }
 
 #pragma mark - UITableViewDataSource
@@ -153,7 +164,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
            forControlEvents:UIControlEventEditingChanged];
-  [self updateActionButton];
+  [self didChangeEmail:_emailField.text];
   return cell;
 }
 

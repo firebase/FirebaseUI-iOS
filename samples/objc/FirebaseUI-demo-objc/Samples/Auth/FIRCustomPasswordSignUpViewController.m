@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *nextButton;
+
 @end
 
 @implementation FIRCustomPasswordSignUpViewController
@@ -34,10 +36,26 @@
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil authUI:authUI email:email];
 
   if (self) {
-    _emailTextField.text = _email;
+    _emailTextField.text = email;
   }
   return self;
 }
+
+- (void)viewDidLoad {
+  [super viewDidLoad];
+
+  //override action of default 'Next' button to use custom layout elements
+  self.navigationItem.rightBarButtonItem.target = self;
+  self.navigationItem.rightBarButtonItem.action = @selector(onNextPressed:);
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+
+  //update state of all UI elements (e g disable 'Next' buttons)
+  [self updateTextFieldValue:nil];
+}
+
 
 - (IBAction)onNextPressed:(id)sender {
   [self signUpWithEmail:_emailTextField.text
@@ -60,6 +78,15 @@
 }
 
 #pragma mark - UITextFieldDelegate methods
+
+- (IBAction)updateTextFieldValue:(id)sender {
+  BOOL enableActionButton = _emailTextField.text.length > 0 && _passwordTextField.text.length && _usernameTextField.text.length;
+  self.nextButton.enabled = enableActionButton;
+
+  [self didChangeEmail:_emailTextField.text
+            orPassword:_passwordTextField.text
+            orUserName:_usernameTextField.text];
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
   if (textField == _emailTextField) {

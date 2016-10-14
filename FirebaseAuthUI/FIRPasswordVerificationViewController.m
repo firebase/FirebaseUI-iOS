@@ -102,6 +102,15 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 #pragma mark - Actions
 
 - (void)next {
+  if (![[self class] isValidEmail:_email]) {
+    [self showAlertWithMessage:[FIRAuthUIStrings invalidEmailError]];
+    return;
+  }
+  if (_passwordField.text.length <= 0) {
+    [self showAlertWithMessage:[FIRAuthUIStrings invalidPasswordError]];
+    return;
+  }
+
   [self incrementActivity];
 
   [self.auth signInWithEmail:_email
@@ -127,8 +136,16 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 }
 
 - (IBAction)forgotPassword {
-  UIViewController *viewController =
-      [[FIRPasswordRecoveryViewController alloc] initWithAuthUI:self.authUI email:_email];
+  UIViewController *viewController;
+  if ([self.authUI.delegate respondsToSelector:@selector(passwordRecoveryViewControllerForAuthUI:email:)]) {
+    viewController = [self.authUI.delegate passwordRecoveryViewControllerForAuthUI:self.authUI
+                                                                             email:_email];
+  } else {
+    viewController = [[FIRPasswordRecoveryViewController alloc] initWithNibName:NSStringFromClass([FIRPasswordRecoveryViewController class])
+                                                                         bundle:[FIRAuthUIUtils frameworkBundle]
+                                                                         authUI:self.authUI
+                                                                          email:_email];
+  }
   [self pushViewController:viewController];
 }
 

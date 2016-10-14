@@ -134,7 +134,7 @@
   if (!self.auth.currentUser) {
     UINavigationController *controller = [self.authUI authViewController];
     if (_isCustomAuthDelegateSelected) {
-      controller.navigationBar.hidden = NO;
+      controller.navigationBar.hidden = YES;
     }
     [self presentViewController:controller animated:YES completion:nil];
   } else {
