@@ -60,7 +60,7 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
 /** @fn init
     @brief Please use initWithCancelHandler:otherHandlers.
  */
-- (instancetype)init NS_UNAVAILABLE;
+- (nullable instancetype)init NS_UNAVAILABLE;
 
 /** @fn initWithCancelHandler:otherHandlers:
     @brief Designated initializer.

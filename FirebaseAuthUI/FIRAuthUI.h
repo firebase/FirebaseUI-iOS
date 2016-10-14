@@ -145,7 +145,7 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
 /** @fn init
     @brief Please use @c FIRAuthUI.authUIWithAuth to get a @c FIRAuthUI instance.
  */
-- (instancetype)init NS_UNAVAILABLE;
+- (nullable instancetype)init NS_UNAVAILABLE;
 
 /** @fn handleOpenURL:
     @brief Should be called from your @c UIApplicationDelegate in
