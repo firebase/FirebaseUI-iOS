@@ -32,6 +32,12 @@
 
 @end
 
+/**
+ * FirebaseIndexArray manages an instance of FirebaseArray internally to
+ * keep track of which queries it should be updating. The FirebaseArrayDelegate
+ * methods are responsible for keeping observers up-to-date as the contents of
+ * the FirebaseArray change.
+ */
 @implementation FirebaseIndexArray
 
 - (instancetype)init {
@@ -101,12 +107,6 @@
 
 #pragma mark - FirebaseArrayDelegate
 
-// These delegate methods are entirely responsible
-// for keeping a local array of queries up to date.
-// Like mapping a FirebaseArray's contents, except
-// they must be kept up to date as the FirebaseArray
-// changes over time.
-
 - (void)observer:(FirebaseQueryObserver *)obs
 didFinishLoadWithSnap:(FIRDataSnapshot *)snap
            error:(NSError *)error {
@@ -130,11 +130,12 @@ didFinishLoadWithSnap:(FIRDataSnapshot *)snap
       atIndex:(NSUInteger)index {
   NSParameterAssert([object.key isKindOfClass:[NSString class]]);
   id<FIRDataObservable> query = [self.data child:object.key];
+  __weak typeof(self) wSelf = self;
   FirebaseQueryObserver *obs = [FirebaseQueryObserver observerForQuery:query
                                                             completion:^(FirebaseQueryObserver *observer,
                                                                          FIRDataSnapshot *snap,
                                                                          NSError *error) {
-    [self observer:observer didFinishLoadWithSnap:snap error:error];
+    [wSelf observer:observer didFinishLoadWithSnap:snap error:error];
   }];
   [self.observers insertObject:obs atIndex:index];
 
@@ -167,12 +168,13 @@ didChangeObject:(FIRDataSnapshot *)object
   [self.observers[index] removeAllObservers];
 
   // Add new observer
+  __weak typeof(self) wSelf = self;
   id<FIRDataObservable> query = [self.data child:object.key];
   FirebaseQueryObserver *obs = [FirebaseQueryObserver observerForQuery:query
                                                             completion:^(FirebaseQueryObserver *observer,
                                                                          FIRDataSnapshot *snap,
                                                                          NSError *error) {
-    [self observer:observer didFinishLoadWithSnap:snap error:error];
+    [wSelf observer:observer didFinishLoadWithSnap:snap error:error];
   }];
   [self.observers replaceObjectAtIndex:index withObject:obs];
 

@@ -25,11 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 @class FirebaseIndexArray;
 
 /**
- * A protocol to allow instances of FirebaseArray to raise events through a
- * delegate. Raises all
- * Firebase events except FIRDataEventTypeValue.
+ * A protocol to allow instances of FirebaseIndexArray to raise events through a
+ * delegate. Raises all Firebase events except @c FIRDataEventTypeValue.
  */
-@protocol FirebaseIndexArrayDelegate<NSObject>
+@protocol FirebaseIndexArrayDelegate <NSObject>
 
 @optional
 
