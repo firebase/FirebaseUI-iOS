@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
                          email:(NSString *_Nullable)email NS_DESIGNATED_INITIALIZER;
 
 /** @fn forgotPasswordForEmail:
-    @brief IBAction when user forgot password.
+    @brief Method is called when user forgot password.
     @param email The email address of the user.
  */
 - (void)forgotPasswordForEmail:(NSString *)email;

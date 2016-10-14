@@ -51,11 +51,13 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   __unsafe_unretained IBOutlet UITableView *_tableView;
 }
 
-- (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
-                         email:(NSString *_Nullable)email
-                 newCredential:(FIRAuthCredential *)newCredential {
-  self = [super initWithNibName:NSStringFromClass([self class])
-                         bundle:[FIRAuthUIUtils frameworkBundle]
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FIRAuthUI *)authUI
+                          email:(NSString *_Nullable)email
+                  newCredential:(FIRAuthCredential *)newCredential {
+  self = [super initWithNibName:nibNameOrNil
+                         bundle:nibBundleOrNil
                          authUI:authUI];
   if (self) {
     _email = [email copy];
@@ -102,11 +104,15 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 #pragma mark - Actions
 
 - (void)next {
+  [self verifyPassword:_passwordField.text];
+}
+
+- (void)verifyPassword:(NSString *)password {
   if (![[self class] isValidEmail:_email]) {
     [self showAlertWithMessage:[FIRAuthUIStrings invalidEmailError]];
     return;
   }
-  if (_passwordField.text.length <= 0) {
+  if (password.length <= 0) {
     [self showAlertWithMessage:[FIRAuthUIStrings invalidPasswordError]];
     return;
   }
@@ -114,25 +120,25 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   [self incrementActivity];
 
   [self.auth signInWithEmail:_email
-                    password:_passwordField.text
+                    password:password
                   completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-    if (error) {
-      [self decrementActivity];
+                    if (error) {
+                      [self decrementActivity];
 
-      [self showAlertWithMessage:[FIRAuthUIStrings wrongPasswordError]];
-      return;
-    }
+                      [self showAlertWithMessage:[FIRAuthUIStrings wrongPasswordError]];
+                      return;
+                    }
 
-    [user linkWithCredential:_newCredential completion:^(FIRUser * _Nullable user,
-                                                         NSError * _Nullable error) {
-      [self decrementActivity];
+                    [user linkWithCredential:_newCredential completion:^(FIRUser * _Nullable user,
+                                                                         NSError * _Nullable error) {
+                      [self decrementActivity];
 
-      // Ignore any error (shouldn't happen) and treat the user as successfully signed in.
-      [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        [self.authUI invokeResultCallbackWithUser:user error:nil];
-      }];
-    }];
-  }];
+                      // Ignore any error (shouldn't happen) and treat the user as successfully signed in.
+                      [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                        [self.authUI invokeResultCallbackWithUser:user error:nil];
+                      }];
+                    }];
+                  }];
 }
 
 - (IBAction)forgotPassword {
@@ -150,11 +156,11 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 }
 
 - (void)textFieldDidChange {
-  [self updateActionButton];
+  [self didChangePassword:_passwordField.text];
 }
 
-- (void)updateActionButton {
-  BOOL enableActionButton = (_passwordField.text.length > 0);
+- (void)didChangePassword:(NSString *)password {
+  BOOL enableActionButton = (password.length > 0);
   self.navigationItem.rightBarButtonItem.enabled = enableActionButton;
 }
 
@@ -183,7 +189,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
            forControlEvents:UIControlEventEditingChanged];
-  [self updateActionButton];
+  [self didChangePassword:_passwordField.text];
   return cell;
 }
 

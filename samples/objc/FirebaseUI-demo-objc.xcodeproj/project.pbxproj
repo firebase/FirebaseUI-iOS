@@ -12,6 +12,8 @@
 		8D7F86B51D9DAA0100C2A122 /* FIRStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F86B41D9DAA0100C2A122 /* FIRStorageViewController.m */; };
 		C329B1B21DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B1B01DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m */; };
 		C329B1B31DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C329B1B11DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib */; };
+		C34FC1FE1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34FC1FC1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.m */; };
+		C34FC1FF1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C34FC1FD1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.xib */; };
 		C375CB181D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C375CB161D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m */; };
 		C375CB191D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375CB171D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib */; };
 		C375CB1C1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C375CB1B1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.m */; };
@@ -46,6 +48,9 @@
 		C329B1AF1DAD6E5100059A13 /* FIRCustomEmailEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomEmailEntryViewController.h; sourceTree = "<group>"; };
 		C329B1B01DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomEmailEntryViewController.m; sourceTree = "<group>"; };
 		C329B1B11DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomEmailEntryViewController.xib; sourceTree = "<group>"; };
+		C34FC1FB1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomPasswordVerificationViewController.h; sourceTree = "<group>"; };
+		C34FC1FC1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomPasswordVerificationViewController.m; sourceTree = "<group>"; };
+		C34FC1FD1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomPasswordVerificationViewController.xib; sourceTree = "<group>"; };
 		C375CB151D935D1F002EECD3 /* FIRCustomAuthPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomAuthPickerViewController.h; sourceTree = "<group>"; };
 		C375CB161D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomAuthPickerViewController.m; sourceTree = "<group>"; };
 		C375CB171D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomAuthPickerViewController.xib; sourceTree = "<group>"; };
@@ -155,6 +160,9 @@
 				C3A8B7C31DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.h */,
 				C3A8B7C41DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.m */,
 				C3A8B7C51DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.xib */,
+				C34FC1FB1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.h */,
+				C34FC1FC1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.m */,
+				C34FC1FD1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.xib */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -283,6 +291,7 @@
 			files = (
 				C3A8B7C21DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.xib in Resources */,
 				D81A05FF1B86A78700498183 /* Main.storyboard in Resources */,
+				C34FC1FF1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.xib in Resources */,
 				C3AC67621D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib in Resources */,
 				C3A8B7CC1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.xib in Resources */,
 				D81A06041B86A78700498183 /* LaunchScreen.xib in Resources */,
@@ -354,6 +363,7 @@
 				C375CB181D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m in Sources */,
 				C3A8B7C11DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.m in Sources */,
 				C375CB1C1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.m in Sources */,
+				C34FC1FE1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.m in Sources */,
 				C3F23ED01D80F58A0020509F /* FIRSamplesViewController.m in Sources */,
 				C3AC67631D81FE6B00FC956D /* FIRChatViewController.m in Sources */,
 				C3AC67611D81FE6B00FC956D /* FIRChatMessageTableViewCell.m in Sources */,

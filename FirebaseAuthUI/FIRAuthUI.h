@@ -26,6 +26,7 @@
 @class FIRPasswordSignInViewController;
 @class FIRPasswordSignUpViewController;
 @class FIRPasswordRecoveryViewController;
+@class FIRPasswordVerificationViewController;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -97,6 +98,18 @@ typedef void (^FIRAuthUIResultCallback)(FIRUser *_Nullable user, NSError *_Nulla
  */
 - (FIRPasswordRecoveryViewController *)passwordRecoveryViewControllerForAuthUI:(FIRAuthUI *)authUI
                                                                          email:(NSString *)email;
+
+/** @fn passwordVerificationViewControllerForAuthUI:email:newCredential:
+    @brief Sent to the receiver to ask for an instance of @c FIRPasswordVerificationViewController subclass
+    to allow password verification UI customizations.
+    @param authUI The @c FIRAuthUI instance sending the message.
+    @param email The email user is using for sin-in.
+    @param newCredential This @c FIRAuthCredential obtained from linked account.
+    @return an instance of @c FIRPasswordVerificationViewController subclass.
+ */
+- (FIRPasswordVerificationViewController *)passwordVerificationViewControllerForAuthUI:(FIRAuthUI *)authUI
+                                                                                 email:(NSString *)email
+                                                                         newCredential:(FIRAuthCredential *)newCredential;
 @end
 
 /** @class FIRAuthUI

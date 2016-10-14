@@ -39,20 +39,38 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithAuthUI:(FIRAuthUI *)authUI NS_UNAVAILABLE;
 
-/** @fn initWithAuthUI:email:
+/** @fn initWithNibName:bundle:authUI:email:newCredential:
     @brief Designated initializer.
+    @param nibNameOrNil The name of the nib file to associate with the view controller.
+    @param nibBundleOrNil The bundle in which to search for the nib file.
     @param authUI The @c FIRAuthUI instance that manages this view controller.
     @param email The email address of the user.
     @param newCredential The new @c FIRAuthCredential that the user had never used before.
  */
-- (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
-                         email:(NSString *_Nullable)email
-                 newCredential:(FIRAuthCredential *)newCredential NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FIRAuthUI *)authUI
+                          email:(NSString *_Nullable)email
+                  newCredential:(FIRAuthCredential *)newCredential NS_DESIGNATED_INITIALIZER;
 
 /** @fn forgotPassword
-    @brief IBAction when user forgot password.
+    @brief Method is called when user forgot password.
+    @param email The email address of the user.
  */
-- (IBAction)forgotPassword;
+- (void)forgotPassword;
+
+/** @fn didChangePassword:
+    @brief Should be called after any change of password value. Updates UI controls state
+    (e g state of next button)
+    @param password The password which user uses.
+ */
+- (void)didChangePassword:(NSString *)password;
+
+/** @fn verifyPassword:
+    @brief Should be called when user entered password. Sends authorization request
+    @param password The password which user uses.
+ */
+- (void)verifyPassword:(NSString *)password;
 
 @end
 

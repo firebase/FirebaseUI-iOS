@@ -213,10 +213,19 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
     NSString *bestProviderID = providers[0];
     if ([bestProviderID isEqual:FIREmailPasswordAuthProviderID]) {
       // Password verification.
-      UIViewController *controller =
-          [[FIRPasswordVerificationViewController alloc] initWithAuthUI:self.authUI
-                                                                  email:email
-                                                          newCredential:newCredential];
+      UIViewController *controller;
+      if ([self.authUI.delegate respondsToSelector:@selector(passwordVerificationViewControllerForAuthUI:email:newCredential:)]) {
+
+        controller = [self.authUI.delegate passwordVerificationViewControllerForAuthUI:self.authUI
+                                                                                 email:email
+                                                                         newCredential:newCredential];
+      } else {
+        controller = [[FIRPasswordVerificationViewController alloc] initWithNibName:NSStringFromClass([FIRPasswordVerificationViewController class])
+                                                                bundle:[FIRAuthUIUtils frameworkBundle] authUI:self.authUI
+                                                                 email:email
+                                                         newCredential:newCredential];
+
+      }
       [self pushViewController:controller];
       return;
     }

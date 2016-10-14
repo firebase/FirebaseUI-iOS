@@ -22,6 +22,7 @@
 #import "FIRCustomPasswordSignInViewController.h"
 #import "FIRCustomPasswordSignUpViewController.h"
 #import "FIRCustomPasswordRecoveryViewController.h"
+#import "FIRCustomPasswordVerificationViewController.h"
 
 @implementation FIRCustomAuthUIDelegate
 
@@ -74,6 +75,16 @@
                                                                    authUI:authUI
                                                                     email:email];
   
+}
+
+- (FIRPasswordVerificationViewController *)passwordVerificationViewControllerForAuthUI:(FIRAuthUI *)authUI
+                                                                                 email:(NSString *)email
+                                                                         newCredential:(FIRAuthCredential *)newCredential {
+  return [[FIRCustomPasswordVerificationViewController alloc] initWithNibName:NSStringFromClass([FIRCustomPasswordVerificationViewController class])
+                                                                       bundle:nil
+                                                                       authUI:authUI
+                                                                        email:email
+                                                                newCredential:newCredential];
 }
 
 @end
