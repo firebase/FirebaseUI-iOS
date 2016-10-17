@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Support for subscripting. Resolves to objectAtIndex:
- * @param index The index of the item to retrieve
+ * @param idx The index of the item to retrieve
  * @return The object at the given index
  */
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
