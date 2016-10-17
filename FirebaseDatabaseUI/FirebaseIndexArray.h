@@ -71,7 +71,7 @@ didFailLoadWithError:(NSError *)error;
  * Delegate method which is called whenever an object is changed in a
  * FirebaseArray. On a FirebaseArray synchronized to a Firebase reference, 
  * this corresponds to a @c FIRDataEventTypeChildChanged event being raised.
- * @param object The database reference that changed in the array
+ * @param ref The database reference that changed in the array
  * @param index The index the reference was changed at
  */
 - (void)array:(FirebaseIndexArray *)array didChangeReference:(FIRDatabaseReference *)ref atIndex:(NSUInteger)index;
@@ -80,7 +80,7 @@ didFailLoadWithError:(NSError *)error;
  * Delegate method which is called whenever an object is removed from a
  * FirebaseArray. On a FirebaseArray synchronized to a Firebase reference, 
  * this corresponds to a @c FIRDataEventTypeChildRemoved event being raised.
- * @param object The database reference removed from the array
+ * @param ref The database reference removed from the array
  * @param index The index the reference was removed at
  */
 - (void)array:(FirebaseIndexArray *)array didRemoveReference:(FIRDatabaseReference *)ref atIndex:(NSUInteger)index;
@@ -89,7 +89,7 @@ didFailLoadWithError:(NSError *)error;
  * Delegate method which is called whenever an object is moved within a
  * FirebaseArray. On a FirebaseArray synchronized to a Firebase reference, 
  * this corresponds to a @c FIRDataEventTypeChildMoved event being raised.
- * @param object The database reference that has moved locations
+ * @param ref The database reference that has moved locations
  * @param fromIndex The index the reference is being moved from
  * @param toIndex The index the reference is being moved to
  */
