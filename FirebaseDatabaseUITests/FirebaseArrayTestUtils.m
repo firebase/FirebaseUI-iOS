@@ -251,3 +251,51 @@
 }
 
 @end
+
+@implementation FUIFirebaseIndexArrayTestDelegate
+
+- (void)array:(FirebaseIndexArray *)array
+    reference:(nonnull FIRDatabaseReference *)ref
+didLoadObject:(nonnull FIRDataSnapshot *)object
+      atIndex:(NSUInteger)index {
+  if (self.didLoad != NULL) {
+    self.didLoad(array, ref, object, index);
+  }
+}
+
+- (void)array:(FirebaseIndexArray *)array reference:(nonnull FIRDatabaseReference *)ref
+      atIndex:(NSUInteger)index didFailLoadWithError:(nonnull NSError *)error {
+  if (self.didFail != NULL) {
+    self.didFail(array, ref, index, error);
+  }
+}
+
+- (void)array:(FirebaseIndexArray *)array didAddReference:(nonnull FIRDatabaseReference *)ref
+      atIndex:(NSUInteger)index {
+  if (self.didAddQuery != NULL) {
+    self.didAddQuery(array, ref, index);
+  }
+}
+
+- (void)array:(FirebaseIndexArray *)array didChangeReference:(nonnull FIRDatabaseReference *)ref
+      atIndex:(NSUInteger)index {
+  if (self.didChangeQuery != NULL) {
+    self.didChangeQuery(array, ref, index);
+  }
+}
+
+- (void)array:(FirebaseIndexArray *)array didRemoveReference:(nonnull FIRDatabaseReference *)ref
+      atIndex:(NSUInteger)index {
+  if (self.didRemoveQuery != nil) {
+    self.didRemoveQuery(array, ref, index);
+  }
+}
+
+- (void)array:(FirebaseIndexArray *)array didMoveReference:(nonnull FIRDatabaseReference *)ref
+    fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+  if (self.didMoveQuery != NULL) {
+    self.didMoveQuery(array, ref, fromIndex, toIndex);
+  }
+}
+
+@end

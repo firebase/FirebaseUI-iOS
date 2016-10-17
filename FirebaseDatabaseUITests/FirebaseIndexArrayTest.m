@@ -28,6 +28,7 @@
 @property (nonatomic) FUITestObservable *index;
 @property (nonatomic) FUITestObservable *data;
 @property (nonatomic) FirebaseIndexArray *array;
+@property (nonatomic) FUIFirebaseIndexArrayTestDelegate *arrayDelegate;
 
 @property (nonatomic) NSMutableDictionary *dict;
 @end
@@ -60,6 +61,8 @@ static inline NSDictionary *database() {
   self.data = [[FUITestObservable alloc] initWithDictionary:database()[@"data"]];
   self.array = [[FirebaseIndexArray alloc] initWithIndex:self.index
                                                     data:self.data];
+  self.arrayDelegate = [[FUIFirebaseIndexArrayTestDelegate alloc] init];
+  self.array.delegate = self.arrayDelegate;
   self.dict = [database() mutableCopy];
 }
 
@@ -67,6 +70,7 @@ static inline NSDictionary *database() {
   [super tearDown];
   [self.array invalidate];
   self.array = nil;
+  self.arrayDelegate = nil;
 }
 
 - (void)testItHasContents {
@@ -86,9 +90,24 @@ static inline NSDictionary *database() {
   NSArray *items = self.array.items;
   XCTAssert(items.count == 3, @"expected %i keys, got %li", 3, items.count);
 
+  // test delegate
+  __block BOOL delegateWasCalled = NO;
+  __block BOOL expectedParametersWereCorrect = NO;
+
+  self.arrayDelegate.didAddQuery = ^(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger index) {
+    delegateWasCalled = YES;
+    expectedParametersWereCorrect = (
+      array == self.array &&
+      index == 3
+    );
+  };
+
   // insert item
   [self.data addObject:@{ @"data": @"4" } forKey:@"4"];
   [self.index addObject:@(YES) forKey:@"4"];
+
+  XCTAssert(delegateWasCalled, @"expected insertion to call method on delegate");
+  XCTAssert(expectedParametersWereCorrect, @"expected insertion to call delegate method with correct params");
 
   items = self.array.items;
 
@@ -107,9 +126,24 @@ static inline NSDictionary *database() {
   NSArray *items = self.array.items;
   XCTAssert(items.count == 3, @"expected %i keys, got %li", 3, items.count);
 
+  // test delegate
+  __block BOOL delegateWasCalled = NO;
+  __block BOOL expectedParametersWereCorrect = NO;
+
+  self.arrayDelegate.didRemoveQuery = ^(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger index) {
+    delegateWasCalled = YES;
+    expectedParametersWereCorrect = (
+      array == self.array &&
+      index == 1
+    );
+  };
+
   // delete item
   [self.data removeObjectForKey:@"2"];
   [self.index removeObjectForKey:@"2"];
+
+  XCTAssert(delegateWasCalled, @"expected deletion to call method on delegate");
+  XCTAssert(expectedParametersWereCorrect, @"expected deletion to call delegate method with correct params");
 
   items = self.array.items;
 
@@ -121,14 +155,69 @@ static inline NSDictionary *database() {
   XCTAssertEqualObjects(items, expected, @"expected contents to equal %@", expected);
 }
 
+- (void)testItCanDeleteEdgeCases {
+  // check expected number of items
+  NSArray *items = self.array.items;
+  XCTAssert(items.count == 3, @"expected %i keys, got %li", 3, items.count);
+
+  // delete first item
+  [self.data removeObjectForKey:@"1"];
+  [self.index removeObjectForKey:@"1"];
+
+  items = self.array.items;
+
+  NSArray *expected = @[
+    [FUIFakeSnapshot snapWithKey:@"data" value:@"2"],
+    [FUIFakeSnapshot snapWithKey:@"data" value:@"3"],
+  ];
+
+  XCTAssertEqualObjects(items, expected, @"expected contents to equal %@", expected);
+
+  // delete last item
+  [self.data removeObjectForKey:@"3"];
+  [self.index removeObjectForKey:@"3"];
+
+  items = self.array.items;
+
+  expected = @[
+    [FUIFakeSnapshot snapWithKey:@"data" value:@"2"],
+  ];
+
+  XCTAssertEqualObjects(items, expected, @"expected contents to equal %@", expected);
+
+  // delete single item
+  [self.index removeObjectForKey:@"2"];
+
+  items = self.array.items;
+
+  expected = @[];
+
+  XCTAssertEqualObjects(items, expected, @"expected contents to equal %@", expected);
+}
+
 - (void)testItUpdatesOnChange {
   // check expected number of items
   NSArray *items = self.array.items;
   XCTAssert(items.count == 3, @"expected %i keys, got %li", 3, items.count);
 
+  // test delegate
+  __block BOOL delegateWasCalled = NO;
+  __block BOOL expectedParametersWereCorrect = NO;
+
+  self.arrayDelegate.didChangeQuery = ^(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger index) {
+    delegateWasCalled = YES;
+    expectedParametersWereCorrect = (
+      array == self.array &&
+      index == 1
+    );
+  };
+
   // change item
   [self.data changeObject:@{ @"data": @"changed" } forKey:@"2"];
   [self.index changeObject:@(YES) forKey:@"2"];
+
+  XCTAssert(delegateWasCalled, @"expected change to call method on delegate");
+  XCTAssert(expectedParametersWereCorrect, @"expected change to call delegate method with correct params");
 
   items = self.array.items;
 
@@ -146,9 +235,28 @@ static inline NSDictionary *database() {
   NSArray *items = self.array.items;
   XCTAssert(items.count == 3, @"expected %i keys, got %li", 3, items.count);
 
+  // test delegate
+  __block BOOL delegateWasCalled = NO;
+  __block BOOL expectedParametersWereCorrect = NO;
+
+  self.arrayDelegate.didMoveQuery = ^(FirebaseIndexArray *array,
+                                      FIRDatabaseReference *query,
+                                      NSUInteger from,
+                                      NSUInteger to) {
+    delegateWasCalled = YES;
+    expectedParametersWereCorrect = (
+      array == self.array &&
+      from == 0 &&
+      to == 2
+    );
+  };
+
   // move item to back
   [self.data moveObjectFromIndex:0 toIndex:2];
   [self.index moveObjectFromIndex:0 toIndex:2];
+
+  XCTAssert(delegateWasCalled, @"expected move to call method on delegate");
+  XCTAssert(expectedParametersWereCorrect, @"expected move to call delegate method with correct params");
 
   items = self.array.items;
 

@@ -97,4 +97,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^didMoveObject)(FirebaseArray *array, id object, NSUInteger fromIndex, NSUInteger toIndex);
 @end
 
+@interface FUIFirebaseIndexArrayTestDelegate : NSObject <FirebaseIndexArrayDelegate>
+@property (nonatomic, copy) void (^didLoad)(FirebaseIndexArray *array, FIRDatabaseReference *ref, FIRDataSnapshot *snap, NSUInteger index);
+@property (nonatomic, copy) void (^didFail)(FirebaseIndexArray *array, FIRDatabaseReference *ref, NSUInteger index, NSError *error);
+@property (nonatomic, copy) void (^queryCancelled)(FirebaseIndexArray *array, NSError *error);
+@property (nonatomic, copy) void (^didAddQuery)(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger index);
+@property (nonatomic, copy) void (^didChangeQuery)(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger index);
+@property (nonatomic, copy) void (^didRemoveQuery)(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger index);
+@property (nonatomic, copy) void (^didMoveQuery)(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger fromIndex, NSUInteger toIndex);
+@end
+
 NS_ASSUME_NONNULL_END
