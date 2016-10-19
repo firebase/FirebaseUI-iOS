@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * The delegate object that array changes are surfaced to, which conforms to the
- * [FirebaseArrayDelegate Protocol](FirebaseArrayDelegate).
+ * @c FirebaseArrayDelegate protocol.
  */
 @property(weak, nonatomic, nullable) id<FirebaseArrayDelegate> delegate;
 
