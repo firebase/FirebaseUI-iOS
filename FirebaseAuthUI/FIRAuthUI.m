@@ -108,7 +108,7 @@ static const char kAuthAssociationKey;
 - (BOOL)signOutWithError:(NSError *_Nullable *_Nullable)error {
   // sign out from Firebase
   BOOL success = [self.auth signOut:error];
-  if (!error && success) {
+  if (success) {
     // sign out from all providers (wipes provider tokens too)
     for (id<FIRAuthProviderUI> provider in _providers) {
       [provider signOut];
