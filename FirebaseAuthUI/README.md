@@ -41,7 +41,7 @@ Auth guides at the following links:
 - [Email and password](https://firebase.google.com/docs/auth/ios/password-auth#before_you_begin)
 - [Google](https://firebase.google.com/docs/auth/ios/google-signin#before_you_begin)
 - [Facebook](https://firebase.google.com/docs/auth/ios/facebook-login#before_you_begin)
-
+- [Twitter](https://firebase.google.com/docs/auth/ios/twitter-login#before_you_begin)
 
 ## Using FirebaseUI for Authentication
 
@@ -149,14 +149,14 @@ present the `authViewController` obtain as instance as follows:
 // Present the auth view controller and then implement the sign in callback.
 let authViewController = authUI!.authViewController()
 
-func authUI(_ authUI: FIRAuthUI, didSignInWithUser user: FIRUser?, error: Error?) {
+func authUI(_ authUI: FIRAuthUI, didSignInWith user: FIRUser?, error: Error?) {
   // handle user and error as necessary
 }
 ```
 
 ```objective-c
 // objc
-UIViewController *authViewController = [authUI authViewController];
+UINavigationController *authViewController = [authUI authViewController];
 // Use authViewController as your root view controller,
 // or present it on top of an existing view controller.
 
@@ -207,7 +207,7 @@ should have the same key as its counterpart in the default `.strings` files.
 ### Custom sign-in screen
 
 You can customize everything about the authentication method picker screen,
-except for the actual sign-in buttons.
+except for the actual sign-in buttons and their position.
 
 In order to do so, create a subclass of `FIRAuthPickerViewController`  and
 customize it to your needs. Provide `FIRAuthUI` with an instance of your
@@ -227,3 +227,85 @@ func authPickerViewController(for authUI: FIRAuthUI) -> FIRAuthPickerViewControl
   return [[CustomAuthPickerViewController alloc] initWithAuthUI:authUI];
 }
 ```
+
+### Custom Email Identity provider screens
+
+You can entirely customize all email provider screens. Which includes but not limited to:
+- hide top `UINavigationBar`
+- add `Cancel` button
+- change type of controls (don't use `UITableView`)
+Things that are not customizable:
+- `UIAlertController` popups (you can't show error label instead of alert controller)
+- modification of screen flow (you can't combine screens, skip particular screens)
+- disabling validation (e g email validation)
+
+In order to achieve email provider screen customization, create subclass of appropriate controller and implement it to your needs. Provide `FIRAuthUI` with an instance of your
+subclass by implementing the delegate methods:
+```swift
+// swift
+func emailEntryViewController(for authUI: FIRAuthUI) -> FIREmailEntryViewController {
+  return CustomEmailEntryViewController(authUI: authUI)
+}
+
+func passwordSignInViewController(for authUI: FIRAuthUI, email: String) -> FIRPasswordSignInViewController {
+  return CustomPasswordSignInViewController(authUI: authUI, email: email)
+}
+
+func passwordSignUpViewController(for authUI: FIRAuthUI, email: String) -> FIRPasswordSignUpViewController {
+  return CustomPasswordSignUpViewController(authUI: authUI, email: email)
+}
+
+func passwordRecoveryViewController(for authUI: FIRAuthUI, email: String) -> FIRPasswordRecoveryViewController {
+  return CustomPasswordRecoveryViewController(authUI: authUI, email: email)
+}
+
+func passwordVerificationViewController(for authUI: FIRAuthUI, email: String, newCredential: FIRAuthCredential) -> FIRPasswordVerificationViewController {
+  return CustomPasswordVerificationViewController(authUI: authUI, email: email, newCredential: newCredential)
+}
+
+```
+
+```objective-c
+// objc
+- (FIREmailEntryViewController *)emailEntryViewControllerForAuthUI:(FIRAuthUI *)authUI {
+  return [[CustomEmailEntryViewController alloc] initWithAuthUI:authUI];
+
+}
+
+- (FIRPasswordSignInViewController *)passwordSignInViewControllerForAuthUI:(FIRAuthUI *)authUI
+                                                                     email:(NSString *)email {
+  return [[CustomPasswordSignInViewController alloc] initWithAuthUI:authUI
+                                                              email:email];
+
+}
+
+- (FIRPasswordSignUpViewController *)passwordSignUpViewControllerForAuthUI:(FIRAuthUI *)authUI
+                                                                     email:(NSString *)email {
+  return [[CustomPasswordSignUpViewController alloc] initWithAuthUI:authUI
+                                                              email:email];
+
+}
+
+- (FIRPasswordRecoveryViewController *)passwordRecoveryViewControllerForAuthUI:(FIRAuthUI *)authUI
+                                                                         email:(NSString *)email {
+  return [[CustomPasswordRecoveryViewController alloc] initWithAuthUI:authUI
+                                                                email:email];
+  
+}
+
+- (FIRPasswordVerificationViewController *)passwordVerificationViewControllerForAuthUI:(FIRAuthUI *)authUI
+                                                                             email:(NSString *)email
+                                                                     newCredential:(FIRAuthCredential *)newCredential {
+  return [[CustomPasswordVerificationViewController alloc] initWithAuthUI:authUI
+                                                                    email:email
+                                                            newCredential:newCredential];
+}
+```
+
+While customizing call original methods (see subclassed header). Most frequent but not limited are:
+- `- (void)onNext:(NSString *)textFieldValue;` // or any action which lead to the next screen
+- `- (void)didChangeTextField:(NSString *)textFieldValue;` // usually called in viewWillAppear and after modification of entry text field;
+- `- (void)onBack;`
+- `- (void)cancelAuthorization;`
+
+You can refer to objective-c and swift samples to see how customization can be achieved.
