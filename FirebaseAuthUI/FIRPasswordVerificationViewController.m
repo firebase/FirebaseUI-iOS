@@ -51,6 +51,16 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   __unsafe_unretained IBOutlet UITableView *_tableView;
 }
 
+- (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
+                         email:(NSString *_Nullable)email
+                 newCredential:(FIRAuthCredential *)newCredential {
+  return [self initWithNibName:NSStringFromClass([self class])
+                        bundle:[FIRAuthUIUtils frameworkBundle]
+                        authUI:authUI
+                         email:email
+                 newCredential:newCredential];
+}
+
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil
                          authUI:(FIRAuthUI *)authUI
@@ -147,10 +157,8 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
     viewController = [self.authUI.delegate passwordRecoveryViewControllerForAuthUI:self.authUI
                                                                              email:_email];
   } else {
-    viewController = [[FIRPasswordRecoveryViewController alloc] initWithNibName:NSStringFromClass([FIRPasswordRecoveryViewController class])
-                                                                         bundle:[FIRAuthUIUtils frameworkBundle]
-                                                                         authUI:self.authUI
-                                                                          email:_email];
+    viewController = [[FIRPasswordRecoveryViewController alloc] initWithAuthUI:self.authUI
+                                                                         email:_email];
   }
   [self pushViewController:viewController];
 }

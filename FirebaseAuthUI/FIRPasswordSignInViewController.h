@@ -49,6 +49,14 @@ NS_ASSUME_NONNULL_BEGIN
                          authUI:(FIRAuthUI *)authUI
                          email:(NSString *_Nullable)email NS_DESIGNATED_INITIALIZER;
 
+/** @fn initWithAuthUI:email:
+ @brief Convenience initializer.
+ @param authUI The @c FIRAuthUI instance that manages this view controller.
+ @param email The email address of the user.
+ */
+- (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
+                          email:(NSString *_Nullable)email;
+
 /** @fn forgotPasswordForEmail:
     @brief Method is called when user forgot password.
     @param email The email address of the user.

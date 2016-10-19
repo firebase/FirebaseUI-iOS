@@ -61,8 +61,17 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 }
 
 - (instancetype)initWithAuthUI:(FIRAuthUI *)authUI {
-  self = [super initWithNibName:NSStringFromClass([FIRAuthPickerViewController class])
+  return [self initWithNibName:NSStringFromClass([self class])
                          bundle:[FIRAuthUIUtils frameworkBundle]
+                         authUI:authUI];
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil
+                         bundle:(NSBundle *)nibBundleOrNil
+                         authUI:(FIRAuthUI *)authUI {
+
+  self = [super initWithNibName:nibNameOrNil
+                         bundle:nibBundleOrNil
                          authUI:authUI];
   if (self) {
     self.title = [FIRAuthUIStrings authPickerTitle];
@@ -220,10 +229,9 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
                                                                                  email:email
                                                                          newCredential:newCredential];
       } else {
-        controller = [[FIRPasswordVerificationViewController alloc] initWithNibName:NSStringFromClass([FIRPasswordVerificationViewController class])
-                                                                bundle:[FIRAuthUIUtils frameworkBundle] authUI:self.authUI
-                                                                 email:email
-                                                         newCredential:newCredential];
+        controller = [[FIRPasswordVerificationViewController alloc] initWithAuthUI:self.authUI
+                                                                             email:email
+                                                                     newCredential:newCredential];
 
       }
       [self pushViewController:controller];

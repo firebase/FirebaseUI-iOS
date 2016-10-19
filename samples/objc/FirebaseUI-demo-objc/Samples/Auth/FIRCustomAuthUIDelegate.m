@@ -41,38 +41,31 @@
 }
 
 - (FIRAuthPickerViewController *)authPickerViewControllerForAuthUI:(FIRAuthUI *)authUI {
-  return [[FIRCustomAuthPickerViewController alloc] initWithNibName:NSStringFromClass([FIRCustomAuthPickerViewController class])
-                                                             bundle:nil
-                                                             authUI:authUI];
+  return [[FIRCustomAuthPickerViewController alloc] initWithAuthUI:authUI];
 }
 
 - (FIREmailEntryViewController *)emailEntryViewControllerForAuthUI:(FIRAuthUI *)authUI {
-  return [[FIRCustomEmailEntryViewController alloc] initWithNibName:NSStringFromClass([FIRCustomEmailEntryViewController class])
-                                                             bundle:nil
-                                                             authUI:authUI];
+  return [[FIRCustomEmailEntryViewController alloc] initWithAuthUI:authUI];
 
 }
 
-- (FIRPasswordSignInViewController *)passwordSignInViewControllerForAuthUI:(FIRAuthUI *)authUI email:(NSString *)email {
-  return [[FIRCustomPasswordSignInViewController alloc] initWithNibName:NSStringFromClass([FIRCustomPasswordSignInViewController class])
-                                                                 bundle:nil
-                                                                 authUI:authUI
+- (FIRPasswordSignInViewController *)passwordSignInViewControllerForAuthUI:(FIRAuthUI *)authUI
+                                                                     email:(NSString *)email {
+  return [[FIRCustomPasswordSignInViewController alloc] initWithAuthUI:authUI
                                                                   email:email];
 
 }
 
-- (FIRPasswordSignUpViewController *)passwordSignUpViewControllerForAuthUI:(FIRAuthUI *)authUI email:(NSString *)email {
-  return [[FIRCustomPasswordSignUpViewController alloc] initWithNibName:NSStringFromClass([FIRCustomPasswordSignUpViewController class])
-                                                                 bundle:nil
-                                                                 authUI:authUI
+- (FIRPasswordSignUpViewController *)passwordSignUpViewControllerForAuthUI:(FIRAuthUI *)authUI
+                                                                     email:(NSString *)email {
+  return [[FIRCustomPasswordSignUpViewController alloc] initWithAuthUI:authUI
                                                                   email:email];
 
 }
 
-- (FIRPasswordRecoveryViewController *)passwordRecoveryViewControllerForAuthUI:(FIRAuthUI *)authUI email:(NSString *)email {
-  return [[FIRCustomPasswordRecoveryViewController alloc] initWithNibName:NSStringFromClass([FIRCustomPasswordRecoveryViewController class])
-                                                                   bundle:nil
-                                                                   authUI:authUI
+- (FIRPasswordRecoveryViewController *)passwordRecoveryViewControllerForAuthUI:(FIRAuthUI *)authUI
+                                                                         email:(NSString *)email {
+  return [[FIRCustomPasswordRecoveryViewController alloc] initWithAuthUI:authUI
                                                                     email:email];
   
 }
@@ -80,9 +73,7 @@
 - (FIRPasswordVerificationViewController *)passwordVerificationViewControllerForAuthUI:(FIRAuthUI *)authUI
                                                                                  email:(NSString *)email
                                                                          newCredential:(FIRAuthCredential *)newCredential {
-  return [[FIRCustomPasswordVerificationViewController alloc] initWithNibName:NSStringFromClass([FIRCustomPasswordVerificationViewController class])
-                                                                       bundle:nil
-                                                                       authUI:authUI
+  return [[FIRCustomPasswordVerificationViewController alloc] initWithAuthUI:authUI
                                                                         email:email
                                                                 newCredential:newCredential];
 }

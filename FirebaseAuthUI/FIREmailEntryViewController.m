@@ -61,7 +61,18 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 }
 
 - (instancetype)initWithAuthUI:(FIRAuthUI *)authUI {
-  self = [super initWithAuthUI:authUI];
+  return [self initWithNibName:NSStringFromClass([self class])
+                        bundle:[FIRAuthUIUtils frameworkBundle]
+                        authUI:authUI];
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil
+                         bundle:(NSBundle *)nibBundleOrNil
+                         authUI:(FIRAuthUI *)authUI {
+
+  self = [super initWithNibName:nibNameOrNil
+                         bundle:nibBundleOrNil
+                         authUI:authUI];
   if (self) {
     self.title = [FIRAuthUIStrings signInWithEmail];
   }
@@ -136,10 +147,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
         controller = [self.authUI.delegate passwordSignInViewControllerForAuthUI:self.authUI
                                                                            email:emailText];
       } else {
-        controller = [[FIRPasswordSignInViewController alloc] initWithNibName:NSStringFromClass([FIRPasswordSignInViewController class])
-                                                                       bundle:[FIRAuthUIUtils frameworkBundle]
-                                                                       authUI:self.authUI
-                                                                        email:emailText];
+        controller = [[FIRPasswordSignInViewController alloc] initWithAuthUI:self.authUI
+                                                                       email:emailText];
       }
       [self pushViewController:controller];
     } else {
@@ -153,10 +162,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
           controller = [self.authUI.delegate passwordSignUpViewControllerForAuthUI:self.authUI
                                                                              email:emailText];
         } else {
-          controller = [[FIRPasswordSignUpViewController alloc] initWithNibName:NSStringFromClass([FIRPasswordSignUpViewController class])
-                                                                         bundle:[FIRAuthUIUtils frameworkBundle]
-                                                                         authUI:self.authUI
-                                                                          email:emailText];
+          controller = [[FIRPasswordSignUpViewController alloc] initWithAuthUI:self.authUI
+                                                                         email:emailText];
         }
         [self pushViewController:controller];
       }

@@ -52,6 +52,14 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   UITextField *_emailField;
 }
 
+- (instancetype)initWithAuthUI:(FIRAuthUI *)authUI
+                         email:(NSString *_Nullable)email {
+  return [self initWithNibName:NSStringFromClass([self class])
+                        bundle:[FIRAuthUIUtils frameworkBundle]
+                        authUI:authUI
+                         email:email];
+}
+
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil
                          authUI:(FIRAuthUI *)authUI

@@ -65,7 +65,7 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
 /** @fn initWithCancelHandler:otherHandlers:
     @brief Designated initializer.
     @param cancelHandler The block to call when the alert view is cancelled.
-    @param otherHandler Handlers for other buttons of the alert view. The number of handlers must
+    @param otherHandlers Handlers for other buttons of the alert view. The number of handlers must
         match the number of other buttons of the alert view.
  */
 - (nullable instancetype)initWithCancelHandler:(nullable FIRAuthUIAlertActionHandler)cancelHandler
