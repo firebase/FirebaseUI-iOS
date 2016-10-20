@@ -46,7 +46,7 @@ static NSString *const kTestReuseIdentifier = @"FirebaseCollectionViewDataSource
   // FirebaseArray anyway.
   self.dataSource = [[FirebaseCollectionViewDataSource alloc] initWithQuery:(FIRDatabaseReference *)self.observable
                                                                        view:self.collectionView
-                                                               populateCell:^UICollectionViewCell *(NSIndexPath *indexPath, UICollectionView *collectionView, FIRDataSnapshot *object) {
+                                                               populateCell:^UICollectionViewCell *(UICollectionView *collectionView, NSIndexPath *indexPath, FIRDataSnapshot *object) {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTestReuseIdentifier forIndexPath:indexPath];
     cell.accessibilityValue = object.key;
     return cell;

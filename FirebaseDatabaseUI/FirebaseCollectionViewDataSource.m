@@ -28,8 +28,8 @@
 
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
                          view:(UICollectionView *)collectionView
-                 populateCell:(UICollectionViewCell *(^)(NSIndexPath *,
-                                                         UICollectionView *,
+                 populateCell:(UICollectionViewCell *(^)(UICollectionView *,
+                                                         NSIndexPath *,
                                                          FIRDataSnapshot *))populateCell {
   FirebaseArray *array = [[FirebaseArray alloc] initWithQuery:query];
   self = [super initWithArray:array];
@@ -69,7 +69,7 @@
                           cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
   FIRDataSnapshot *snap = [self.items objectAtIndex:indexPath.row];
 
-  UICollectionViewCell *cell = self.populateCellAtIndexPath(indexPath, collectionView, snap);
+  UICollectionViewCell *cell = self.populateCellAtIndexPath(collectionView, indexPath, snap);
 
   return cell;
 }

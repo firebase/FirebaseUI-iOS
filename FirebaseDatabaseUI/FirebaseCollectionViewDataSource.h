@@ -58,23 +58,28 @@ NS_ASSUME_NONNULL_BEGIN
  * provided by the datasource.
  */
 @property(strong, nonatomic, readonly) UICollectionViewCell *(^populateCellAtIndexPath)
-  (NSIndexPath *indexPath, UICollectionView *collectionView, FIRDataSnapshot *object);
+  (UICollectionView *collectionView, NSIndexPath *indexPath, FIRDataSnapshot *object);
 
 /**
  * Initialize an instance of FirebaseCollectionViewDataSource that populates
- * UICollectionViewCells
- * with FIRDataSnapshots.
- * @param query A Firebase query to bind the datasource to
- * @param collectionView An instance of a UICollectionView to bind to
+ * UICollectionViewCells with FIRDataSnapshots.
+ * @param query A Firebase query to bind the data source to.
+ * @param collectionView An instance of a UICollectionView to bind to. This view
+ *   is not retained by its data source.
+ * @param populateCell A closure used by the data source to create the cells that 
+ *   are displayed in the collection view. This closure is retained by the data
+ *   source, so if you capture self in the closure and also claim ownership of the
+ *   data source, be sure to avoid retain cycles by capturing a weak reference to self.
  * @return An instance of FirebaseCollectionViewDataSource that populates
- * UICollectionViewCells with
- * FIRDataSnapshots
+ *   UICollectionViewCells with FIRDataSnapshots.
  */
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
                          view:(UICollectionView *)collectionView
-                 populateCell:(UICollectionViewCell * (^)(NSIndexPath *indexPath,
-                                                          UICollectionView *collectionView,
-                                                          FIRDataSnapshot *object))populateCell;
+                 populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
+                                                         NSIndexPath *indexPath,
+                                                         FIRDataSnapshot *object))populateCell NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithArray:(FirebaseArray *)array NS_UNAVAILABLE;
 
 @end
 
