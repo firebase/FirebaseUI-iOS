@@ -34,6 +34,7 @@ class FIRAuthViewController: UITableViewController {
 
   fileprivate(set) var auth: FIRAuth? = FIRAuth.auth()
   fileprivate(set) var authUI: FIRAuthUI? = FIRAuthUI.default()
+  fileprivate(set) var customAuthUIDelegate: FIRAuthUIDelegate = FIRCustomAuthUIDelegate()
 
   @IBOutlet weak var cellSignedIn: UITableViewCell!
   @IBOutlet weak var cellName: UITableViewCell!
@@ -42,7 +43,8 @@ class FIRAuthViewController: UITableViewController {
   @IBOutlet weak var cellAccessToken: UITableViewCell!
   @IBOutlet weak var cellIdToken: UITableViewCell!
 
-  @IBOutlet weak var btnAuthorization: UIBarButtonItem!
+  @IBOutlet weak var authorizationButton: UIBarButtonItem!
+  @IBOutlet weak var customAuthorizationSwitch: UISwitch!
 
 
   override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +66,8 @@ class FIRAuthViewController: UITableViewController {
 
     self.authStateDidChangeHandle =
       self.auth?.addStateDidChangeListener(self.updateUI(auth:user:))
+
+    self.navigationController?.isToolbarHidden = false;
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -71,6 +75,8 @@ class FIRAuthViewController: UITableViewController {
     if let handle = self.authStateDidChangeHandle {
       self.auth?.removeStateDidChangeListener(handle)
     }
+
+    self.navigationController?.isToolbarHidden = true;
   }
 
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -89,7 +95,10 @@ class FIRAuthViewController: UITableViewController {
       }
 
     } else {
+      self.authUI?.delegate = self.customAuthorizationSwitch.isOn ? self.customAuthUIDelegate : nil;
+
       let controller = self.authUI!.authViewController()
+      controller.navigationBar.isHidden = self.customAuthorizationSwitch.isOn
       self.present(controller, animated: true, completion: nil)
     }
   }
@@ -102,14 +111,14 @@ class FIRAuthViewController: UITableViewController {
       self.cellEmail.textLabel?.text = user.email ?? "(null)"
       self.cellUid.textLabel?.text = user.uid
 
-      self.btnAuthorization.title = "Sign Out";
+      self.authorizationButton.title = "Sign Out";
     } else {
       self.cellSignedIn.textLabel?.text = "Not signed in"
       self.cellName.textLabel?.text = "null"
       self.cellEmail.textLabel?.text = "null"
       self.cellUid.textLabel?.text = "null"
 
-      self.btnAuthorization.title = "Sign In";
+      self.authorizationButton.title = "Sign In";
     }
 
     self.cellAccessToken.textLabel?.text = getAllAccessTokens()
