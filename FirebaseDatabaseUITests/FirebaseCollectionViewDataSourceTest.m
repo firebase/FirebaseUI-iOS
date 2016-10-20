@@ -44,12 +44,12 @@ static NSString *const kTestReuseIdentifier = @"FirebaseCollectionViewDataSource
   self.observable = [[FUITestObservable alloc] init];
   // Horrible abuse of type system, knowing that the initializer passes the observable straight to
   // FirebaseArray anyway.
-  self.dataSource = [[FirebaseCollectionViewDataSource alloc] initWithRef:(FIRDatabaseReference *)self.observable
-                                                      cellReuseIdentifier:kTestReuseIdentifier
-                                                                     view:self.collectionView];
-  [self.dataSource populateCellWithBlock:^(__kindof UICollectionViewCell *_Nonnull cell,
-                                           FUIFakeSnapshot * _Nonnull object) {
+  self.dataSource = [[FirebaseCollectionViewDataSource alloc] initWithQuery:(FIRDatabaseReference *)self.observable
+                                                                       view:self.collectionView
+                                                               populateCell:^UICollectionViewCell *(NSIndexPath *indexPath, UICollectionView *collectionView, FIRDataSnapshot *object) {
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTestReuseIdentifier forIndexPath:indexPath];
     cell.accessibilityValue = object.key;
+    return cell;
   }];
   self.collectionView.dataSource = self.dataSource;
   

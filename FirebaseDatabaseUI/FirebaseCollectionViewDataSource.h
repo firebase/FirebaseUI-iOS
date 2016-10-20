@@ -65,7 +65,6 @@ NS_ASSUME_NONNULL_BEGIN
  * UICollectionViewCells
  * with FIRDataSnapshots.
  * @param query A Firebase query to bind the datasource to
- * @param identifier A string to use as a CellReuseIdentifier
  * @param collectionView An instance of a UICollectionView to bind to
  * @return An instance of FirebaseCollectionViewDataSource that populates
  * UICollectionViewCells with
