@@ -230,7 +230,9 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
     UIAlertAction *cancelAction =
         [UIAlertAction actionWithTitle:[FIRAuthUIStrings cancel]
                                  style:UIAlertActionStyleCancel
-                               handler:nil];
+                               handler:^(UIAlertAction * _Nonnull action) {
+                                 [self.authUI signOutWithError:nil];
+                               }];
     [alertController addAction:cancelAction];
     [self presentViewController:alertController animated:YES completion:nil];
   } else {
@@ -241,7 +243,9 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
                          cancelButtonTitle:[FIRAuthUIStrings cancel]
                          otherButtonTitles:provider.signInLabel, nil];
     FIRAuthUIAlertViewDelegate *delegate =
-        [[FIRAuthUIAlertViewDelegate alloc] initWithCancelHandler:nil otherHandlers:@[ handler ]];
+        [[FIRAuthUIAlertViewDelegate alloc] initWithCancelHandler:^{
+          [self.authUI signOutWithError:nil];
+        }  otherHandlers:@[ handler ]];
     alertView.delegate = delegate;
     [alertView show];
   }
