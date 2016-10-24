@@ -2361,10 +2361,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(BUILT_PRODUCTS_DIR)/SDWebImage";
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseui.FirebaseStorageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2380,10 +2377,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(BUILT_PRODUCTS_DIR)";
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseui.FirebaseStorageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2545,6 +2539,7 @@
 				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2566,6 +2561,7 @@
 				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2624,6 +2620,7 @@
 				INFOPLIST_FILE = FirebaseAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2646,6 +2643,7 @@
 				INFOPLIST_FILE = FirebaseAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2722,6 +2720,7 @@
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2746,6 +2745,7 @@
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2825,6 +2825,7 @@
 					"-iquote",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/OCMock/OCMock.framework/Headers\"",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseGoogleAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2848,6 +2849,7 @@
 					"-iquote",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/OCMock/OCMock.framework/Headers\"",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseGoogleAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2916,6 +2918,7 @@
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2934,6 +2937,7 @@
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
