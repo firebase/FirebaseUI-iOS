@@ -84,3 +84,17 @@
 }
 
 @end
+
+@implementation UICollectionView (FirebaseCollectionViewDataSource)
+
+- (FirebaseCollectionViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
+                                     populateCell:(UICollectionViewCell *(^)(UICollectionView *,
+                                                                             NSIndexPath *,
+                                                                             FIRDataSnapshot *))populateCell {
+  FirebaseCollectionViewDataSource *dataSource =
+    [[FirebaseCollectionViewDataSource alloc] initWithQuery:query view:self populateCell:populateCell];
+  self.dataSource = dataSource;
+  return dataSource;
+}
+
+@end

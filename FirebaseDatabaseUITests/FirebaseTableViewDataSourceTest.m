@@ -44,17 +44,15 @@ static NSString *const kTestReuseIdentifier = @"FirebaseTableViewDataSourceTest"
   self.observable = [[FUITestObservable alloc] init];
   // Horrible abuse of type system, knowing that the initializer passes the observable straight to
   // FirebaseArray anyway.
-  self.dataSource = [[FirebaseTableViewDataSource alloc] initWithQuery:(FIRDatabaseQuery *)self.observable
-                                                                  view:self.tableView
-                                                          populateCell:^UITableViewCell *(UITableView *tableView,
-                                                                                          NSIndexPath *indexPath,
-                                                                                          FIRDataSnapshot *object) {
+  self.dataSource = [self.tableView bindToQuery:(FIRDatabaseReference *)self.observable
+                                   populateCell:^UITableViewCell *(UITableView *tableView,
+                                                                   NSIndexPath *indexPath,
+                                                                   FIRDataSnapshot *object) {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kTestReuseIdentifier];
     cell.accessibilityValue = object.key;
     return cell;
   }];
-  self.tableView.dataSource = self.dataSource;
-  
+
   [self.observable populateWithCount:10];
 }
 

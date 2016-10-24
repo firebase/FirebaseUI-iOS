@@ -94,3 +94,17 @@
 }
 
 @end
+
+@implementation UITableView (FirebaseTableViewDataSource)
+
+- (FirebaseTableViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
+                                populateCell:(UITableViewCell *(^)(UITableView *tableView,
+                                                                   NSIndexPath *indexPath,
+                                                                   FIRDataSnapshot *snap))populateCell {
+  FirebaseTableViewDataSource *dataSource =
+    [[FirebaseTableViewDataSource alloc] initWithQuery:query view:self populateCell:populateCell];
+  self.dataSource = dataSource;
+  return dataSource;
+}
+
+@end

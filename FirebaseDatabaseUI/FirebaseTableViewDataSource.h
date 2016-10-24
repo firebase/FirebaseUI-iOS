@@ -74,4 +74,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface UITableView (FirebaseTableViewDataSource)
+
+/**
+ * Creates a data source, attaches it to the table view, and returns it.
+ * The returned data source is not retained by the table view and must be
+ * retained or it will be deallocated while still in use by the table view.
+ * @param query A Firebase database query to bind the table view to.
+ * @param populateCell A closure used by the data source to create the cells
+ *   displayed in the table view. The closure is retained by the returned
+ *   data source.
+ * @return The created data source. This value must be retained while the table
+ *   view is in use.
+ */
+- (FirebaseTableViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
+                                populateCell:(UITableViewCell *(^)(UITableView *tableView,
+                                                                   NSIndexPath *indexPath,
+                                                                   FIRDataSnapshot *object))populateCell __attribute__((warn_unused_result));
+
+@end
+
 NS_ASSUME_NONNULL_END

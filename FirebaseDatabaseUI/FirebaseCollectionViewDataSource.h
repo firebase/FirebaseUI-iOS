@@ -83,4 +83,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface UICollectionView (FirebaseCollectionViewDataSource)
+
+/**
+ * Creates a data source, attaches it to the collection view, and returns it.
+ * The returned data source is not retained by the collection view and must be
+ * retained or it will be deallocated while still in use by the collection view.
+ * @param query A Firebase database query to bind the collection view to.
+ * @param populateCell A closure used by the data source to create the cells
+ *   displayed in the collection view. The closure is retained by the returned
+ *   data source.
+ * @return The created data source. This value must be retained while the collection
+ *   view is in use.
+ */
+- (FirebaseCollectionViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
+                                     populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
+                                                                             NSIndexPath *indexPath,
+                                                                             FIRDataSnapshot *object))populateCell __attribute__((warn_unused_result));
+
+@end
+
 NS_ASSUME_NONNULL_END
