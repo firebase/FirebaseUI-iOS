@@ -132,7 +132,7 @@ didFailLoadWithError:(NSError *)error;
 
 /**
  * Initializes a FirebaseIndexArray with an index query and a data query.
- * The array expects the keys of the children of the index query to be children
+ * The array expects the keys of the children of the index query to match exactly children
  * of the data query.
  * @param index A Firebase database query whose childrens' keys are all children 
  *   of the data query.

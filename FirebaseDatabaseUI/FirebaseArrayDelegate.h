@@ -38,7 +38,7 @@
 - (void)array:(FirebaseArray *)array didAddObject:(id)object atIndex:(NSUInteger)index;
 
 /**
- * Delegate method which is called whenever an object is chinged in a
+ * Delegate method which is called whenever an object is changed in a
  * FirebaseArray. On a FirebaseArray synchronized to a Firebase reference, 
  * this corresponds to a @c FIRDataEventTypeChildChanged event being raised.
  * @param object The object that changed in the FirebaseArray
