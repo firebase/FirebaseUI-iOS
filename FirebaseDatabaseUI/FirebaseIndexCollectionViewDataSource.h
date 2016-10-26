@@ -65,24 +65,49 @@ didFailLoadAtIndex:(NSUInteger)index
  * Initializes a collection view data source.
  * @param indexQuery The Firebase query containing children of the data query.
  * @param dataQuery The reference whose children correspond to the contents of the
- *   index query. This reference's children's contents are served as teh contents
+ *   index query. This reference's children's contents are served as the contents
  *   of the collection view that adopts this data source.
  * @param collectionView The collection view that is populated by this data source. The
  *   data source pulls updates from Firebase database, so it must maintain a reference
  *   to the collection view in order to update its contents as the database pushes updates.
  *   The collection view is not retained by its data source.
- * @param cellIdentifier The cell reuse identifier used to dequeue reusable cells from
- *   the collection view.
  * @param populateCell The closure invoked when populating a UICollectionViewCell (or subclass).
  */
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
                collectionView:(UICollectionView *)collectionView
-          cellReuseIdentifier:(NSString *)cellIdentifier
                      delegate:(nullable id<FirebaseIndexCollectionViewDataSourceDelegate>)delegate
-                 populateCell:(void (^)(UICollectionViewCell *cell,
-                                        FIRDataSnapshot *_Nullable))populateCell NS_DESIGNATED_INITIALIZER;
+                 populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
+                                                         NSIndexPath *indexPath,
+                                                         FIRDataSnapshot *_Nullable snap))populateCell NS_DESIGNATED_INITIALIZER;
 
 @end
+
+@interface UICollectionView (FirebaseIndexCollectionViewDataSource)
+
+/**
+ * Creates a data source, attaches it to the collection view, and returns it.
+ * The returned data source is not retained by the collection view and must be
+ * retained or it will be deallocated while still in use by the collection view.
+ * @param index The Firebase query containing children of the data query.
+ * @param data  The reference whose children correspond to the contents of the
+ *   index query. This reference's children's contents are served as the contents
+ *   of the collection view.
+ * @param delegate The object that should respond to events from the data source.
+ * @param populateCell A closure used by the data source to create the cells
+ *   displayed in the collection view. The closure is retained by the returned
+ *   data source.
+ * @return The created data source. This value must be retained while the collection
+ *   view is in use.
+ */
+- (FirebaseIndexCollectionViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
+                                                         data:(FIRDatabaseReference *)data
+                                                     delegate:(id<FirebaseIndexCollectionViewDataSourceDelegate>)delegate
+                                                 populateCell:(UICollectionViewCell *(^)(UICollectionView *view,
+                                                                                         NSIndexPath *indexPath,
+                                                                                         FIRDataSnapshot *_Nullable snap))populateCell;
+
+@end
+
 
 NS_ASSUME_NONNULL_END

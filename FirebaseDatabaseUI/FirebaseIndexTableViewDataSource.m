@@ -22,9 +22,9 @@
 
 @property (nonatomic, readonly, nonnull) FirebaseIndexArray *array;
 @property (nonatomic, readonly, weak) UITableView *tableView;
-@property (nonatomic, readonly, copy) NSString *identifier;
 
-@property (nonatomic, readonly, copy) void (^populateCell)(UITableViewCell *, FIRDataSnapshot *);
+@property (nonatomic, readonly, copy) UITableViewCell *(^populateCell)
+  (UITableView *tableView, NSIndexPath *indexPath, FIRDataSnapshot *snap);
 
 @end
 
@@ -41,10 +41,10 @@
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
                     tableView:(UITableView *)tableView
-          cellReuseIdentifier:(NSString *)cellIdentifier
                      delegate:(nullable id<FirebaseIndexTableViewDataSourceDelegate>)delegate
-                 populateCell:(nonnull void (^)(UITableViewCell *cell,
-                                                FIRDataSnapshot *data))populateCell {
+                 populateCell:(UITableViewCell *(^)(UITableView *tableView,
+                                                    NSIndexPath *indexPath,
+                                                    FIRDataSnapshot *snap))populateCell {
   self = [super init];
   if (self != nil) {
     _array = [[FirebaseIndexArray alloc] initWithIndex:indexQuery
@@ -52,7 +52,6 @@
                                               delegate:self];
     _tableView = tableView;
     tableView.dataSource = self;
-    _identifier = [cellIdentifier copy];
     _populateCell = populateCell;
     _delegate = delegate;
   }
@@ -126,14 +125,33 @@ didLoadObject:(FIRDataSnapshot *)object
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.identifier];
   FIRDataSnapshot *snap = [self.array objectAtIndex:indexPath.row];
-  self.populateCell(cell, snap);
+  UITableViewCell *cell = self.populateCell(tableView, indexPath, snap);
   return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return self.array.count;
+}
+
+@end
+
+@implementation UITableView (FirebaseIndexTableViewDataSource)
+
+- (FirebaseIndexTableViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
+                                                    data:(FIRDatabaseReference *)data
+                                                delegate:(id<FirebaseIndexTableViewDataSourceDelegate>)delegate
+                                            populateCell:(UITableViewCell *(^)(UITableView *,
+                                                                               NSIndexPath *,
+                                                                               FIRDataSnapshot *))populateCell {
+  FirebaseIndexTableViewDataSource *dataSource =
+    [[FirebaseIndexTableViewDataSource alloc] initWithIndex:index
+                                                       data:data
+                                                  tableView:self
+                                                   delegate:delegate
+                                               populateCell:populateCell];
+  self.dataSource = dataSource;
+  return dataSource;
 }
 
 @end

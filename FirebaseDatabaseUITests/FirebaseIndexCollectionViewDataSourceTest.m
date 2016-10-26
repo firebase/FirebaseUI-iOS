@@ -69,15 +69,17 @@ static inline NSDictionary *database() {
 
   self.index = [[FUITestObservable alloc] initWithDictionary:database()[@"index"]];
   self.data = [[FUITestObservable alloc] initWithDictionary:database()[@"data"]];
-  self.dataSource = [[FirebaseIndexCollectionViewDataSource alloc] initWithIndex:(FIRDatabaseQuery *)self.index
-                                                                            data:(FIRDatabaseReference *)self.data
-                                                                  collectionView:self.collectionView
-                                                             cellReuseIdentifier:kTestReuseIdentifier
-                                                                        delegate:self
-                                                                    populateCell:^(UICollectionViewCell *cell,
-                                                                                   FIRDataSnapshot *snap) {
+  self.dataSource = [self.collectionView bindToIndexedQuery:(FIRDatabaseQuery *)self.index
+                                                       data:(FIRDatabaseReference *)self.data
+                                                   delegate:self
+                                               populateCell:^UICollectionViewCell *(UICollectionView *view,
+                                                                                    NSIndexPath * indexPath,
+                                                                                    FIRDataSnapshot *snap) {
+    UICollectionViewCell *cell = [view dequeueReusableCellWithReuseIdentifier:kTestReuseIdentifier
+                                                                 forIndexPath:indexPath];
     cell.accessibilityLabel = snap.key;
     cell.accessibilityValue = snap.value;
+    return cell;
   }];
   self.dict = [database() mutableCopy];
 

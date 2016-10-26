@@ -22,9 +22,9 @@
 
 @property (nonatomic, readonly, nonnull) FirebaseIndexArray *array;
 @property (nonatomic, readonly, weak) UICollectionView *collectionView;
-@property (nonatomic, readonly, copy) NSString *identifier;
 
-@property (nonatomic, readonly, copy) void (^populateCell)(UICollectionViewCell *, FIRDataSnapshot *);
+@property (nonatomic, readonly, copy) UICollectionViewCell *(^populateCell)
+  (UICollectionView *collectionView, NSIndexPath *indexPath, FIRDataSnapshot *object);
 
 @end
 
@@ -33,10 +33,10 @@
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
                collectionView:(UICollectionView *)collectionView
-          cellReuseIdentifier:(NSString *)cellIdentifier
                      delegate:(id<FirebaseIndexCollectionViewDataSourceDelegate>)delegate
-                 populateCell:(void (^)(UICollectionViewCell *,
-                                        FIRDataSnapshot *))populateCell {
+                 populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
+                                                         NSIndexPath *indexPath,
+                                                         FIRDataSnapshot *snap))populateCell {
   self = [super init];
   if (self != nil) {
     _array = [[FirebaseIndexArray alloc] initWithIndex:indexQuery
@@ -44,7 +44,6 @@
                                               delegate:self];
     _collectionView = collectionView;
     _collectionView.dataSource = self;
-    _identifier = [cellIdentifier copy];
     _populateCell = populateCell;
     _delegate = delegate;
   }
@@ -114,11 +113,29 @@ didLoadObject:(FIRDataSnapshot *)object
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-  UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:self.identifier
-                                                                         forIndexPath:indexPath];
   FIRDataSnapshot *snap = [self.array objectAtIndex:indexPath.item];
-  self.populateCell(cell, snap);
+  UICollectionViewCell *cell = self.populateCell(collectionView, indexPath, snap);
   return cell;
+}
+
+@end
+
+@implementation UICollectionView (FirebaseIndexCollectionViewDataSource)
+
+- (FirebaseIndexCollectionViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
+                                                         data:(FIRDatabaseReference *)data
+                                                     delegate:(id<FirebaseIndexCollectionViewDataSourceDelegate>)delegate
+                                                 populateCell:(UICollectionViewCell *(^)(UICollectionView *,
+                                                                                         NSIndexPath *,
+                                                                                         FIRDataSnapshot *))populateCell {
+  FirebaseIndexCollectionViewDataSource *dataSource =
+    [[FirebaseIndexCollectionViewDataSource alloc] initWithIndex:index
+                                                            data:data
+                                                  collectionView:self
+                                                        delegate:delegate
+                                                    populateCell:populateCell];
+  self.dataSource = dataSource;
+  return dataSource;
 }
 
 @end

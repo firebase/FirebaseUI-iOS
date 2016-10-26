@@ -74,17 +74,41 @@ didFailLoadAtIndex:(NSUInteger)index
  *   data source pulls updates from Firebase database, so it must maintain a reference
  *   to the table view in order to update its contents as the database pushes updates.
  *   The table view is not retained by its data source.
- * @param cellIdentifier The cell reuse identifier used to dequeue reusable cells from
- *   the table view.
  * @param populateCell The closure invoked when populating a UITableViewCell (or subclass).
  */
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
                     tableView:(UITableView *)tableView
-          cellReuseIdentifier:(NSString *)cellIdentifier
                      delegate:(nullable id<FirebaseIndexTableViewDataSourceDelegate>)delegate
-                 populateCell:(void (^)(UITableViewCell *cell,
-                                        FIRDataSnapshot *_Nullable))populateCell NS_DESIGNATED_INITIALIZER;
+                 populateCell:(UITableViewCell *(^)(UITableView *tableView,
+                                                    NSIndexPath *indexPath,
+                                                    FIRDataSnapshot *_Nullable snap))populateCell NS_DESIGNATED_INITIALIZER;
+
+@end
+
+@interface UITableView (FirebaseIndexTableViewDataSource)
+
+/**
+ * Creates a data source, attaches it to the table view, and returns it.
+ * The returned data source is not retained by the table view and must be
+ * retained or it will be deallocated while still in use by the table view.
+ * @param query A Firebase database query to bind the table view to.
+ * @param data  The reference whose children correspond to the contents of the
+ *   index query. This reference's children's contents are served as the contents
+ *   of the table view.
+ * @param delegate The object that should respond to events from the data source.
+ * @param populateCell A closure used by the data source to create the cells
+ *   displayed in the table view. The closure is retained by the returned
+ *   data source.
+ * @return The created data source. This value must be retained while the table
+ *   view is in use.
+ */
+- (FirebaseIndexTableViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
+                                                    data:(FIRDatabaseReference *)data
+                                                delegate:(id<FirebaseIndexTableViewDataSourceDelegate>)delegate
+                                            populateCell:(UITableViewCell *(^)(UITableView *view,
+                                                                               NSIndexPath *indexPath,
+                                                                               FIRDataSnapshot *_Nullable snap))populateCell;
 
 @end
 
