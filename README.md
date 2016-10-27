@@ -60,6 +60,30 @@ $ cd FirebaseUI-iOS
 $ pod install
 ```
 
+## Mandatory Sample Project Configuration
+
+You have to configure Xcode project in order run samples.
+
+1. You project should contain `GoogleService-Info.plist` downloaded from [Firebase console](https://console.firebase.google.com).<br>
+Find more instructions and download a plist file from the [Firebase console](https://console.firebase.google.com).
+
+2. Update URL Types.<br>
+Go to `Project Settings -> Info tab -> Url Types` and update values for:
+	+ `REVERSED_CLIENT_ID` (get value from `GoogleService-Info.plist`)
+	+ `fb{your-app-id}` (put Facebook App Id)
+	+ `twitterkit-{consumer-key}` (put Twitter App Consumer key)
+
+3. Update `Info.plist` twitter and facebook configuration values
+	+ `FacebookAppID -> {your-app-id}` (put Facebook App Id)
+	+ `Fabric -> Kits -> KitInfo -> consumerKey / consumerSecret` (put Twitter App consumer key/secret). Please notice that's it's not secure to store `consumerSecrent` in the app itself.
+
+4. Enable Keychain Sharing.<br>
+Facebook SDK requires keychain sharing.<br>
+This can be done here: `Project Settings -> Capabilities -> KeyChain Sharing -> ON`
+
+5. Don't forget to configure your Firebase App Database using Firebase Console.<br>
+Database should contain appropriate read/write permissions and folders (`objc_demo-chat` and `swift_demo-chat` respectfully)
+
 ## Contributing to FirebaseUI
 
 ### Contributor License Agreements

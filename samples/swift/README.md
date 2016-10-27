@@ -12,6 +12,10 @@ project root and the project should build correctly.
 Find more instructions
 and download a plist file from the [Firebase console](https://console.firebase.google.com).
 
+###Project configuration
+
+Please follow steps described [here](https://github.com/firebase/FirebaseUI-iOS#mandatory-sample-project-configuration) in order to run sample project.
+
 ###Chat Sample
 
 This sample uses [anonymous authentication](https://firebase.google.com/docs/auth/ios/anonymous-auth),
