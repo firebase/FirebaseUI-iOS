@@ -18,9 +18,9 @@
 
 // clang-format on
 
-#import "FirebaseArray.h"
+#import "FUIArray.h"
 
-@interface FirebaseArray ()
+@interface FUIArray ()
 
 /**
  * The backing collection that holds all of the FirebaseArray's data.
@@ -35,7 +35,7 @@
 
 @end
 
-@implementation FirebaseArray
+@implementation FUIArray
 
 #pragma mark - Initializer methods
 
@@ -187,8 +187,8 @@
 }
 
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)index{
-  @throw [NSException exceptionWithName:@"FirebaseArraySetIndexWithSubscript"
-                                 reason:@"Setting an object as FirebaseArray[i] is not supported."
+  @throw [NSException exceptionWithName:@"FUIArraySetIndexWithSubscript"
+                                 reason:@"Setting an object as FUIArray[i] is not supported."
                                userInfo:nil];
 }
 

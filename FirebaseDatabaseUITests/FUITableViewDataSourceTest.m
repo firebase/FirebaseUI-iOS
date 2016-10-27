@@ -21,17 +21,17 @@
 @import XCTest;
 @import FirebaseDatabaseUI;
 
-#import "FirebaseArrayTestUtils.h"
+#import "FirebaseDatabaseTestUtils.h"
 
 static NSString *const kTestReuseIdentifier = @"FirebaseTableViewDataSourceTest";
 
-@interface FirebaseTableViewDataSourceTest : XCTestCase
+@interface FUITableViewDataSourceTest : XCTestCase
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) FUITestObservable *observable;
-@property (nonatomic) FirebaseTableViewDataSource *dataSource;
+@property (nonatomic) FUITableViewDataSource *dataSource;
 @end
 
-@implementation FirebaseTableViewDataSourceTest
+@implementation FUITableViewDataSourceTest
 
 - (void)setUp {
   [super setUp];

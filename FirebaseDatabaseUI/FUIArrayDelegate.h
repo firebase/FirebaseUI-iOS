@@ -18,13 +18,13 @@
 
 // clang-format on
 
-@class FirebaseArray;
+@class FUIArray;
 
 /**
  * A protocol to allow instances of FirebaseArray to raise events through a
  * delegate. Raises all Firebase events except @c FIRDataEventTypeValue.
  */
-@protocol FirebaseArrayDelegate<NSObject>
+@protocol FUIArrayDelegate<NSObject>
 
 @optional
 
@@ -35,7 +35,7 @@
  * @param object The object added to the FirebaseArray
  * @param index The index the child was added at
  */
-- (void)array:(FirebaseArray *)array didAddObject:(id)object atIndex:(NSUInteger)index;
+- (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index;
 
 /**
  * Delegate method which is called whenever an object is changed in a
@@ -44,7 +44,7 @@
  * @param object The object that changed in the FirebaseArray
  * @param index The index the child was changed at
  */
-- (void)array:(FirebaseArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index;
+- (void)array:(FUIArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index;
 
 /**
  * Delegate method which is called whenever an object is removed from a
@@ -53,7 +53,7 @@
  * @param object The object removed from the FirebaseArray
  * @param index The index the child was removed at
  */
-- (void)array:(FirebaseArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index;
+- (void)array:(FUIArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index;
 
 /**
  * Delegate method which is called whenever an object is moved within a
@@ -63,12 +63,12 @@
  * @param fromIndex The index the child is being moved from
  * @param toIndex The index the child is being moved to
  */
-- (void)array:(FirebaseArray *)array didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+- (void)array:(FUIArray *)array didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
 /**
  * Delegate method which is called whenever the backing query is canceled.
  * @param error the error that was raised
  */
-- (void)array:(FirebaseArray *)array queryCancelledWithError:(NSError *)error;
+- (void)array:(FUIArray *)array queryCancelledWithError:(NSError *)error;
 
 @end

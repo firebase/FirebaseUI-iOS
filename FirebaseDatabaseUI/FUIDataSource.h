@@ -20,19 +20,19 @@
 
 @import Foundation;
 
-#import "FirebaseArray.h"
+#import "FUIArray.h"
 
 @class FIRDatabaseReference;
 
 /**
- * A FirebaseDataSource is a generic superclass for all Firebase datasources,
+ * FUIDataSource is a generic superclass for all Firebase datasources,
  * like
- * FirebaseTableViewDataSource and FirebaseCollectionViewDataSource. It provides
+ * FUITableViewDataSource and FUICollectionViewDataSource. It provides
  * properties that all
  * subclasses need as well as several methods that pass through to the instance
  * of FirebaseArray.
  */
-@interface FirebaseDataSource : NSObject<FirebaseArrayDelegate>
+@interface FUIDataSource : NSObject<FUIArrayDelegate>
 
 /**
  * The items in the data source.
@@ -44,7 +44,7 @@
  */
 @property (nonatomic, readonly) NSUInteger count;
 
-- (instancetype)initWithArray:(FirebaseArray *)array NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithArray:(FUIArray *)array NS_DESIGNATED_INITIALIZER;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**

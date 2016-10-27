@@ -18,11 +18,11 @@
 
 // clang-format on
 
-#import "FirebaseTableViewDataSource.h"
+#import "FUITableViewDataSource.h"
 
 @import FirebaseDatabase;
 
-@interface FirebaseTableViewDataSource ()
+@interface FUITableViewDataSource ()
 
 @property (nonatomic, readwrite, weak) UITableView *tableView;
 
@@ -31,16 +31,16 @@
 
 @end
 
-@implementation FirebaseTableViewDataSource
+@implementation FUITableViewDataSource
 
-#pragma mark - FirebaseDataSource initializer methods
+#pragma mark - FUIDataSource initializer methods
 
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
                          view:(UITableView *)tableView
                  populateCell:(UITableViewCell *(^)(UITableView *,
                                                     NSIndexPath *,
                                                     FIRDataSnapshot *))populateCell {
-  FirebaseArray *array = [[FirebaseArray alloc] initWithQuery:query];
+  FUIArray *array = [[FUIArray alloc] initWithQuery:query];
   self = [super initWithArray:array];
   if (self) {
     self.tableView = tableView;
@@ -49,30 +49,30 @@
   return self;
 }
 
-#pragma mark - FirebaseArrayDelegate methods
+#pragma mark - FUIArrayDelegate methods
 
-- (void)array:(FirebaseArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
+- (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
   [self.tableView insertRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
 }
 
-- (void)array:(FirebaseArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
+- (void)array:(FUIArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
   [self.tableView reloadRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
 }
 
-- (void)array:(FirebaseArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
+- (void)array:(FUIArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
   [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tableView endUpdates];
 }
 
-- (void)array:(FirebaseArray *)array didMoveObject:(id)object
+- (void)array:(FUIArray *)array didMoveObject:(id)object
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   [self.tableView beginUpdates];
   [self.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
@@ -95,14 +95,14 @@
 
 @end
 
-@implementation UITableView (FirebaseTableViewDataSource)
+@implementation UITableView (FUITableViewDataSource)
 
-- (FirebaseTableViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
+- (FUITableViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
                                 populateCell:(UITableViewCell *(^)(UITableView *tableView,
                                                                    NSIndexPath *indexPath,
                                                                    FIRDataSnapshot *snap))populateCell {
-  FirebaseTableViewDataSource *dataSource =
-    [[FirebaseTableViewDataSource alloc] initWithQuery:query view:self populateCell:populateCell];
+  FUITableViewDataSource *dataSource =
+    [[FUITableViewDataSource alloc] initWithQuery:query view:self populateCell:populateCell];
   self.dataSource = dataSource;
   return dataSource;
 }

@@ -20,31 +20,19 @@
 
 @import UIKit;
 
-#import "FirebaseDataSource.h"
+#import "FUIDataSource.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class FIRDatabaseReference;
 
 /**
- * FirebaseCollectionViewDataSource provides an class that conforms to the
- * UICollcetionViewDataSource protocol which allows UICollectionViews to
- * implement
- * FirebaseCollectionViewDataSource in order to provide a UICollectionView
- * synchronized to a
- * Firebase reference or query. In addition to handling all Firebase child
- * events (added, changed,
- * removed, moved), FirebaseCollectionViewDataSource handles UITableViewCell
- * creation, either with
- * the default UICollectionViewCell, prototype cells, custom
- * UICollectionViewCell subclasses, or
- * custom XIBs, and provides a simple [FirebaseCollectionViewDataSource
- * populateCellWithBlock:]
- * method which allows developers to populate the cells created for them with
- * desired data from
- * Firebase.
+ * FUICollectionViewDataSource provides a class that conforms to the
+ * UICollectionViewDataSource protocol which allows UICollectionViews to
+ * adopt FUICollectionViewDataSource in order to provide a UICollectionView
+ * synchronized to a Firebase reference or query.
  */
-@interface FirebaseCollectionViewDataSource : FirebaseDataSource<UICollectionViewDataSource>
+@interface FUICollectionViewDataSource : FUIDataSource<UICollectionViewDataSource>
 
 /**
  * The UICollectionView instance that operations (inserts, removals, moves,
@@ -61,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
   (UICollectionView *collectionView, NSIndexPath *indexPath, FIRDataSnapshot *object);
 
 /**
- * Initialize an instance of FirebaseCollectionViewDataSource that populates
+ * Initialize an instance of FUICollectionViewDataSource that populates
  * UICollectionViewCells with FIRDataSnapshots.
  * @param query A Firebase query to bind the data source to.
  * @param collectionView An instance of a UICollectionView to bind to. This view
@@ -70,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
  *   are displayed in the collection view. This closure is retained by the data
  *   source, so if you capture self in the closure and also claim ownership of the
  *   data source, be sure to avoid retain cycles by capturing a weak reference to self.
- * @return An instance of FirebaseCollectionViewDataSource that populates
+ * @return An instance of FUICollectionViewDataSource that populates
  *   UICollectionViewCells with FIRDataSnapshots.
  */
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
@@ -79,11 +67,11 @@ NS_ASSUME_NONNULL_BEGIN
                                                          NSIndexPath *indexPath,
                                                          FIRDataSnapshot *object))populateCell NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithArray:(FirebaseArray *)array NS_UNAVAILABLE;
+- (instancetype)initWithArray:(FUIArray *)array NS_UNAVAILABLE;
 
 @end
 
-@interface UICollectionView (FirebaseCollectionViewDataSource)
+@interface UICollectionView (FUICollectionViewDataSource)
 
 /**
  * Creates a data source, attaches it to the collection view, and returns it.
@@ -96,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The created data source. This value must be retained while the collection
  *   view is in use.
  */
-- (FirebaseCollectionViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
+- (FUICollectionViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
                                      populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
                                                                              NSIndexPath *indexPath,
                                                                              FIRDataSnapshot *object))populateCell __attribute__((warn_unused_result));

@@ -89,12 +89,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface FUIFirebaseArrayTestDelegate : NSObject <FirebaseArrayDelegate>
-@property (nonatomic, copy) void (^queryCancelled)(FirebaseArray *array, NSError *error);
-@property (nonatomic, copy) void (^didAddObject)(FirebaseArray *array, id object, NSUInteger index);
-@property (nonatomic, copy) void (^didChangeObject)(FirebaseArray *array, id object, NSUInteger index);
-@property (nonatomic, copy) void (^didRemoveObject)(FirebaseArray *array, id object, NSUInteger index);
-@property (nonatomic, copy) void (^didMoveObject)(FirebaseArray *array, id object, NSUInteger fromIndex, NSUInteger toIndex);
+@interface FUIFirebaseArrayTestDelegate : NSObject <FUIArrayDelegate>
+@property (nonatomic, copy) void (^queryCancelled)(FUIArray *array, NSError *error);
+@property (nonatomic, copy) void (^didAddObject)(FUIArray *array, id object, NSUInteger index);
+@property (nonatomic, copy) void (^didChangeObject)(FUIArray *array, id object, NSUInteger index);
+@property (nonatomic, copy) void (^didRemoveObject)(FUIArray *array, id object, NSUInteger index);
+@property (nonatomic, copy) void (^didMoveObject)(FUIArray *array, id object, NSUInteger fromIndex, NSUInteger toIndex);
 @end
 
 @interface FUIFirebaseIndexArrayTestDelegate : NSObject <FirebaseIndexArrayDelegate>

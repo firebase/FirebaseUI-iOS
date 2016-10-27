@@ -21,25 +21,25 @@
 @import XCTest;
 @import FirebaseDatabaseUI;
 
-#import "FirebaseArrayTestUtils.h"
+#import "FirebaseDatabaseTestUtils.h"
 
-@interface FirebaseArrayTest : XCTestCase
+@interface FUIArrayTest : XCTestCase
 
 @property (nonatomic, nullable) FUIFirebaseArrayTestDelegate *arrayDelegate;
 @property (nonatomic, nullable) FUITestObservable *observable;
-@property (nonatomic, nullable) FirebaseArray *firebaseArray;
+@property (nonatomic, nullable) FUIArray *firebaseArray;
 @property (nonatomic, nullable) FUIFakeSnapshot *snap;
 
 @end
 
-@implementation FirebaseArrayTest
+@implementation FUIArrayTest
 
 - (void)setUp {
   [super setUp];
   self.arrayDelegate = [[FUIFirebaseArrayTestDelegate alloc] init];
   self.snap = [[FUIFakeSnapshot alloc] init];
   self.observable = [[FUITestObservable alloc] init];
-  self.firebaseArray = [[FirebaseArray alloc] initWithQuery:self.observable];
+  self.firebaseArray = [[FUIArray alloc] initWithQuery:self.observable];
   self.firebaseArray.delegate = self.arrayDelegate;
 }
 
@@ -59,7 +59,7 @@
   // Test delegate
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
-  self.arrayDelegate.didAddObject = ^(FirebaseArray *array, id object, NSUInteger index) {
+  self.arrayDelegate.didAddObject = ^(FUIArray *array, id object, NSUInteger index) {
     // Xcode complains about retain cycles if an XCTAssert is placed in here.
     delegateWasCalled = YES;
     expectedParametersWereCorrect = (array == self.firebaseArray &&
@@ -89,7 +89,7 @@
   // Test delegate
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
-  self.arrayDelegate.didAddObject = ^(FirebaseArray *array, id object, NSUInteger index) {
+  self.arrayDelegate.didAddObject = ^(FUIArray *array, id object, NSUInteger index) {
     // Xcode complains about retain cycles if an XCTAssert is placed in here.
     delegateWasCalled = YES;
     expectedParametersWereCorrect = (array == self.firebaseArray &&
@@ -122,7 +122,7 @@
   // Test delegate
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
-  self.arrayDelegate.didAddObject = ^(FirebaseArray *array, id object, NSUInteger index) {
+  self.arrayDelegate.didAddObject = ^(FUIArray *array, id object, NSUInteger index) {
     // Xcode complains about retain cycles if an XCTAssert is placed in here.
     delegateWasCalled = YES;
     expectedParametersWereCorrect = (array == self.firebaseArray &&
@@ -155,7 +155,7 @@
   // Test delegate
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
-  self.arrayDelegate.didAddObject = ^(FirebaseArray *array, id object, NSUInteger index) {
+  self.arrayDelegate.didAddObject = ^(FUIArray *array, id object, NSUInteger index) {
     // Xcode complains about retain cycles if an XCTAssert is placed in here.
     delegateWasCalled = YES;
     expectedParametersWereCorrect = (array == self.firebaseArray &&
@@ -193,7 +193,7 @@
   // Test delegate
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
-  self.arrayDelegate.didRemoveObject = ^(FirebaseArray *array, id object, NSUInteger index) {
+  self.arrayDelegate.didRemoveObject = ^(FUIArray *array, id object, NSUInteger index) {
     // Xcode complains about retain cycles if an XCTAssert is placed in here.
     delegateWasCalled = YES;
     expectedParametersWereCorrect = (array == self.firebaseArray &&
@@ -222,7 +222,7 @@
   // Test delegate
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
-  self.arrayDelegate.didRemoveObject = ^(FirebaseArray *array, id object, NSUInteger index) {
+  self.arrayDelegate.didRemoveObject = ^(FUIArray *array, id object, NSUInteger index) {
     // Xcode complains about retain cycles if an XCTAssert is placed in here.
     delegateWasCalled = YES;
     expectedParametersWereCorrect = (array == self.firebaseArray &&
@@ -253,7 +253,7 @@
   // Test delegate
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
-  self.arrayDelegate.didRemoveObject = ^(FirebaseArray *array, id object, NSUInteger index) {
+  self.arrayDelegate.didRemoveObject = ^(FUIArray *array, id object, NSUInteger index) {
     // Xcode complains about retain cycles if an XCTAssert is placed in here.
     delegateWasCalled = YES;
     expectedParametersWereCorrect = (array == self.firebaseArray &&
@@ -285,7 +285,7 @@
   // Test delegate
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
-  self.arrayDelegate.didRemoveObject = ^(FirebaseArray *array, id object, NSUInteger index) {
+  self.arrayDelegate.didRemoveObject = ^(FUIArray *array, id object, NSUInteger index) {
     // Xcode complains about retain cycles if an XCTAssert is placed in here.
     delegateWasCalled = YES;
     expectedParametersWereCorrect = (array == self.firebaseArray &&
@@ -320,7 +320,7 @@
   // Test delegate
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
-  self.arrayDelegate.didChangeObject = ^(FirebaseArray *array, id object, NSUInteger index) {
+  self.arrayDelegate.didChangeObject = ^(FUIArray *array, id object, NSUInteger index) {
     // Xcode complains about retain cycles if an XCTAssert is placed in here.
     delegateWasCalled = YES;
     expectedParametersWereCorrect = (array == self.firebaseArray &&
@@ -353,7 +353,7 @@
   // Test delegate
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
-  self.arrayDelegate.didMoveObject = ^(FirebaseArray *array, id object, NSUInteger from, NSUInteger to) {
+  self.arrayDelegate.didMoveObject = ^(FUIArray *array, id object, NSUInteger from, NSUInteger to) {
     // Xcode complains about retain cycles if an XCTAssert is placed in here.
     delegateWasCalled = YES;
     expectedParametersWereCorrect = (array == self.firebaseArray &&
@@ -385,7 +385,7 @@
     // Test delegate
     __block BOOL delegateWasCalled = NO;
     __block BOOL expectedParametersWereCorrect = NO;
-    self.arrayDelegate.didMoveObject = ^(FirebaseArray *array, id object, NSUInteger from, NSUInteger to) {
+    self.arrayDelegate.didMoveObject = ^(FUIArray *array, id object, NSUInteger from, NSUInteger to) {
         // Xcode complains about retain cycles if an XCTAssert is placed in here.
         delegateWasCalled = YES;
         expectedParametersWereCorrect = (array == self.firebaseArray &&
@@ -417,7 +417,7 @@
     // Test delegate
     __block BOOL delegateWasCalled = NO;
     __block BOOL expectedParametersWereCorrect = NO;
-    self.arrayDelegate.didMoveObject = ^(FirebaseArray *array, id object, NSUInteger from, NSUInteger to) {
+    self.arrayDelegate.didMoveObject = ^(FUIArray *array, id object, NSUInteger from, NSUInteger to) {
         // Xcode complains about retain cycles if an XCTAssert is placed in here.
         delegateWasCalled = YES;
         expectedParametersWereCorrect = (array == self.firebaseArray &&

@@ -18,24 +18,24 @@
 
 // clang-format on
 
-#import "FirebaseDataSource.h"
+#import "FUIDataSource.h"
 
-@interface FirebaseDataSource ()
+@interface FUIDataSource ()
 
 @property(copy, nonatomic, nonnull) void (^cancelBlock)(NSError *);
 
 /**
  * The FirebaseArray which backs the instance of the datasource.
  */
-@property(strong, nonatomic, nonnull) FirebaseArray *array;
+@property(strong, nonatomic, nonnull) FUIArray *array;
 
 @end
 
-@implementation FirebaseDataSource
+@implementation FUIDataSource
 
 #pragma mark - Initializer methods
 
-- (instancetype)initWithArray:(FirebaseArray *)array {
+- (instancetype)initWithArray:(FUIArray *)array {
   self = [super init];
   if (self) {
     _array = array;
@@ -66,7 +66,7 @@
   self.cancelBlock = block;
 }
 
-#pragma mark - FirebaseArrayDelegate methods
+#pragma mark - FUIArrayDelegate methods
 
 - (void)canceledWithError:(NSError *)error {
   if (self.cancelBlock != nil) {

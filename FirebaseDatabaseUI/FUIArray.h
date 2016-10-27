@@ -20,7 +20,7 @@
 
 @import FirebaseDatabase;
 
-#import "FirebaseArrayDelegate.h"
+#import "FUIArrayDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -45,13 +45,13 @@ NS_ASSUME_NONNULL_BEGIN
  * query. It is useful for building custom data structures or sources, and provides the base for
  * FirebaseDataSource.
  */
-@interface FirebaseArray : NSObject
+@interface FUIArray : NSObject
 
 /**
  * The delegate object that array changes are surfaced to, which conforms to the
- * @c FirebaseArrayDelegate protocol.
+ * @c FUIArrayDelegate protocol.
  */
-@property(weak, nonatomic, nullable) id<FirebaseArrayDelegate> delegate;
+@property(weak, nonatomic, nullable) id<FUIArrayDelegate> delegate;
 
 /**
  * The query on a Firebase reference that provides data to populate the instance of FirebaseArray.
