@@ -71,6 +71,11 @@
   self.tableView.dataSource = self.dataSource;
   self.tableView.delegate = self;
 
+  if (![FIRAuth auth].currentUser) {
+    self.inputTextField.enabled = NO;
+    self.inputTextField.placeholder = @"Please sign in...";
+  }
+
 }
 
 
