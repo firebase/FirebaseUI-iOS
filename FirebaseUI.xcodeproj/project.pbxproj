@@ -95,10 +95,6 @@
 		8DA941DF1D6793EE00CD3685 /* ic_facebook@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DC1D6793EE00CD3685 /* ic_facebook@3x.png */; };
 		8DA941E31D67940100CD3685 /* FirebaseFacebookAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941E11D67940100CD3685 /* FirebaseFacebookAuthUI.strings */; };
 		8DA941E81D67945100CD3685 /* FirebaseAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941E61D67945100CD3685 /* FirebaseAuthUI.strings */; };
-		8DA941EE1D67951B00CD3685 /* FUIArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941E91D67951B00CD3685 /* FUIArrayTest.m */; };
-		8DA941EF1D67951B00CD3685 /* FUIDatabaseTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941EB1D67951B00CD3685 /* FUIDatabaseTestUtils.m */; };
-		8DA941F01D67951B00CD3685 /* FUICollectionViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941EC1D67951B00CD3685 /* FUICollectionViewDataSourceTest.m */; };
-		8DA941F11D67951B00CD3685 /* FUITableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941ED1D67951B00CD3685 /* FUITableViewDataSourceTest.m */; };
 		8DAF8BF61D89CC5300B251C7 /* FUIAuthTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAF8BF41D89CC5300B251C7 /* FUIAuthTest.m */; };
 		8DAF8BF71D89CC5300B251C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DAF8BF51D89CC5300B251C7 /* GoogleService-Info.plist */; };
 		8DBA0F7F1D872E4300D113D3 /* FUIArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941431D678E3200CD3685 /* FUIArray.m */; };
@@ -1914,10 +1910,6 @@
 				8D01FC7B1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m in Sources */,
 				8D1E107C1DAEB97300AEFCA0 /* FUIIndexTableViewDataSourceTest.m in Sources */,
 				8D924C611DA6F69100C4DA48 /* FUIIndexArrayTest.m in Sources */,
-				8DA941F01D67951B00CD3685 /* FUICollectionViewDataSourceTest.m in Sources */,
-				8DA941F11D67951B00CD3685 /* FUITableViewDataSourceTest.m in Sources */,
-				8DA941EF1D67951B00CD3685 /* FUIDatabaseTestUtils.m in Sources */,
-				8DA941EE1D67951B00CD3685 /* FUIArrayTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
