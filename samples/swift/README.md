@@ -3,14 +3,9 @@ Swift Samples
 
 This directory contains a collection of swift code samples.
 
-In order to run the project you'll need a valid app in Firebase and
-the `GoogleService-Info.plist` file for that project. Drag the plist into the
-project root and the project should build correctly.
+###Project configuration
 
-![](https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/samples/swift/drag_plist_into_the_project.gif)
-
-Find more instructions
-and download a plist file from the [Firebase console](https://console.firebase.google.com).
+Please follow steps described [here](https://github.com/firebase/FirebaseUI-iOS#mandatory-sample-project-configuration) in order to run sample project.
 
 ###Project configuration
 

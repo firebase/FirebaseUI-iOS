@@ -60,11 +60,14 @@ $ cd FirebaseUI-iOS
 $ pod install
 ```
 
+Alternatively you can use `pod try FirebaseUI` in order to install objective-c or swift sample project
+
 ## Mandatory Sample Project Configuration
 
-You have to configure Xcode project in order run samples.
+You have to configure Xcode project in order to run samples.
 
 1. You project should contain `GoogleService-Info.plist` downloaded from [Firebase console](https://console.firebase.google.com).<br>
+Copy `GoogleService-Info.plist` into sample project folder (`samples/obj-c/GoogleService-Info.plist` or `samples/swift/GoogleService-Info.plist`).<br>
 Find more instructions and download a plist file from the [Firebase console](https://console.firebase.google.com).
 
 2. Update URL Types.<br>
@@ -75,13 +78,13 @@ Go to `Project Settings -> Info tab -> Url Types` and update values for:
 
 3. Update `Info.plist` twitter and facebook configuration values
 	+ `FacebookAppID -> {your-app-id}` (put Facebook App Id)
-	+ `Fabric -> Kits -> KitInfo -> consumerKey / consumerSecret` (put Twitter App consumer key/secret). Please notice that's it's not secure to store `consumerSecrent` in the app itself.
+	+ `Fabric -> Kits -> KitInfo -> consumerKey / consumerSecret` (put Twitter App consumer key/secret). Please notice that's it's not secure to store `consumerSecret` in the app itself.
 
 4. Enable Keychain Sharing.<br>
 Facebook SDK requires keychain sharing.<br>
 This can be done here: `Project Settings -> Capabilities -> KeyChain Sharing -> ON`
 
-5. Don't forget to configure your Firebase App Database using Firebase Console.<br>
+5. Don't forget to configure your Firebase App Database using [Firebase console](https://console.firebase.google.com).<br>
 Database should contain appropriate read/write permissions and folders (`objc_demo-chat` and `swift_demo-chat` respectfully)
 
 ## Contributing to FirebaseUI
