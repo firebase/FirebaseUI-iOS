@@ -54,8 +54,8 @@
   return self.array.count;
 }
 
-- (id)objectAtIndex:(NSUInteger)index {
-  return [self.array objectAtIndex:index];
+- (FIRDataSnapshot *)objectAtIndex:(NSUInteger)index {
+  return [self.array snapshotAtIndex:index];
 }
 
 - (FIRDatabaseReference *)refForIndex:(NSUInteger)index {
@@ -66,7 +66,7 @@
   self.cancelBlock = block;
 }
 
-#pragma mark - FUIArrayDelegate methods
+#pragma mark - FUICollectionDelegate methods
 
 - (void)canceledWithError:(NSError *)error {
   if (self.cancelBlock != nil) {

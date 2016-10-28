@@ -20,7 +20,7 @@
 
 @import FirebaseDatabase;
 
-#import "FUIArrayDelegate.h"
+#import "FUICollection.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -45,23 +45,23 @@ NS_ASSUME_NONNULL_BEGIN
  * query. It is useful for building custom data structures or sources, and provides the base for
  * FirebaseDataSource.
  */
-@interface FUIArray : NSObject
+@interface FUIArray : NSObject <FUICollection>
 
 /**
  * The delegate object that array changes are surfaced to, which conforms to the
- * @c FUIArrayDelegate protocol.
+ * @c FUICollectionDelegate protocol.
  */
-@property(weak, nonatomic, nullable) id<FUIArrayDelegate> delegate;
+@property (weak, nonatomic, nullable) id<FUICollectionDelegate> delegate;
 
 /**
  * The query on a Firebase reference that provides data to populate the array.
  */
-@property(strong, nonatomic) id<FUIDataObservable> query;
+@property (strong, nonatomic) id<FUIDataObservable> query;
 
 /**
  * The number of objects in the array.
  */
-@property(nonatomic, readonly) NSUInteger count;
+@property (nonatomic, readonly) NSUInteger count;
 
 /**
  * The items currently in the array.
@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A FirebaseArray instance
  */
 - (instancetype)initWithQuery:(id<FUIDataObservable>)query
-                     delegate:(nullable id<FUIArrayDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+                     delegate:(nullable id<FUICollectionDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 /**
  * Initalizes FirebaseArray with a Firebase query (FIRDatabaseQuery) or database reference
@@ -102,9 +102,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Returns an object at a specific index in the array.
  * @param index The index of the item to retrieve
- * @return The object at the given index
+ * @return The snapshot at the given index
  */
-- (id)objectAtIndex:(NSUInteger)index;
+- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index;
 
 /**
  * Returns a Firebase reference for an object at a specific index in the array.

@@ -39,7 +39,7 @@
 
 #pragma mark - Initializer methods
 
-- (instancetype)initWithQuery:(FIRDatabaseQuery *)query delegate:(id<FUIArrayDelegate>)delegate {
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query delegate:(id<FUICollectionDelegate>)delegate {
   NSParameterAssert(query != nil);
   self = [super init];
   if (self) {
@@ -174,7 +174,7 @@
   return [self.snapshots count];
 }
 
-- (FIRDataSnapshot *)objectAtIndex:(NSUInteger)index {
+- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index {
   return (FIRDataSnapshot *)[self.snapshots objectAtIndex:index];
 }
 
@@ -183,7 +183,7 @@
 }
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index {
-  return [self objectAtIndex:index];
+  return [self snapshotAtIndex:index];
 }
 
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)index{

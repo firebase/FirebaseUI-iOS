@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface FUIArrayTestDelegate : NSObject <FUIArrayDelegate>
+@interface FUIArrayTestDelegate : NSObject <FUICollectionDelegate>
 @property (nonatomic, copy) void (^queryCancelled)(FUIArray *array, NSError *error);
 @property (nonatomic, copy) void (^didAddObject)(FUIArray *array, id object, NSUInteger index);
 @property (nonatomic, copy) void (^didChangeObject)(FUIArray *array, id object, NSUInteger index);

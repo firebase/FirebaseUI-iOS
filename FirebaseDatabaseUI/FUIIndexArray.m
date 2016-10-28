@@ -21,7 +21,7 @@
 #import "FUIIndexArray.h"
 #import "FUIQueryObserver.h"
 
-@interface FUIIndexArray () <FUIArrayDelegate>
+@interface FUIIndexArray () <FUICollectionDelegate>
 
 @property (nonatomic, readonly) id<FUIDataObservable> index;
 @property (nonatomic, readonly) id<FUIDataObservable> data;

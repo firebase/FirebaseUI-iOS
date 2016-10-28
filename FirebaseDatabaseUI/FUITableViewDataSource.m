@@ -49,7 +49,7 @@
   return self;
 }
 
-#pragma mark - FUIArrayDelegate methods
+#pragma mark - FUICollectionDelegate methods
 
 - (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];

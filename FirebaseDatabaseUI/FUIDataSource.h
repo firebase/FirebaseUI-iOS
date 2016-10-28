@@ -32,7 +32,7 @@
  * subclasses need as well as several methods that pass through to the instance
  * of FirebaseArray.
  */
-@interface FUIDataSource : NSObject<FUIArrayDelegate>
+@interface FUIDataSource : NSObject<FUICollectionDelegate>
 
 /**
  * The items in the data source.
@@ -49,9 +49,9 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- * Pass through of [FirebaseArray objectAtIndex:].
+ * Pass through of [FirebaseArray snapshotAtIndex:].
  */
-- (id)objectAtIndex:(NSUInteger)index;
+- (FIRDataSnapshot *)objectAtIndex:(NSUInteger)index;
 
 /**
  * Pass through of [FirebaseArray refForIndex:].

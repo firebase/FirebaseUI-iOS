@@ -18,13 +18,33 @@
 
 // clang-format on
 
+@import Foundation;
+
 @class FUIArray;
+@protocol FUICollectionDelegate;
+
+NS_ASSUME_NONNULL_BEGIN
+
+@protocol FUICollection <NSObject>
+
+@property (nonatomic, readonly, copy) NSArray<FIRDataSnapshot *> *items;
+
+@property (weak, nonatomic, nullable) id<FUICollectionDelegate> delegate;
+
+/**
+ * The number of objects in the FirebaseArray.
+ */
+@property (nonatomic, readonly) NSUInteger count;
+
+- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index;
+
+@end
 
 /**
  * A protocol to allow instances of FUIArray to raise events through a
  * delegate. Raises all Firebase events except FIRDataEventTypeValue.
  */
-@protocol FUIArrayDelegate<NSObject>
+@protocol FUICollectionDelegate<NSObject>
 
 @optional
 
@@ -35,7 +55,7 @@
  * @param object The object added to the FUIArray
  * @param index The index the child was added at
  */
-- (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index;
+- (void)array:(id<FUICollection>)array didAddObject:(id)object atIndex:(NSUInteger)index;
 
 /**
  * Delegate method which is called whenever an object is changed in an
@@ -44,7 +64,7 @@
  * @param object The object that changed in the FUIArray
  * @param index The index the child was changed at
  */
-- (void)array:(FUIArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index;
+- (void)array:(id<FUICollection>)array didChangeObject:(id)object atIndex:(NSUInteger)index;
 
 /**
  * Delegate method which is called whenever an object is removed from an
@@ -53,7 +73,7 @@
  * @param object The object removed from the FUIArray
  * @param index The index the child was removed at
  */
-- (void)array:(FUIArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index;
+- (void)array:(id<FUICollection>)array didRemoveObject:(id)object atIndex:(NSUInteger)index;
 
 /**
  * Delegate method which is called whenever an object is moved within a
@@ -63,12 +83,14 @@
  * @param fromIndex The index the child is being moved from
  * @param toIndex The index the child is being moved to
  */
-- (void)array:(FUIArray *)array didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+- (void)array:(id<FUICollection>)array didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
 /**
  * Delegate method which is called whenever the backing query is canceled.
  * @param error the error that was raised
  */
-- (void)array:(FUIArray *)array queryCancelledWithError:(NSError *)error;
+- (void)array:(id<FUICollection>)array queryCancelledWithError:(NSError *)error;
 
 @end
+
+NS_ASSUME_NONNULL_END
