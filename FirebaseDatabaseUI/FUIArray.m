@@ -47,7 +47,6 @@
     self.query = query;
     self.handles = [NSMutableSet setWithCapacity:4];
     self.delegate = delegate;
-    [self initListeners];
   }
   return self;
 }
@@ -63,14 +62,13 @@
 #pragma mark - Memory management methods
 
 - (void)dealloc {
-  for (NSNumber *handle in _handles) {
-    [_query removeObserverWithHandle:handle.unsignedIntegerValue];
-  }
+  [self invalidate];
 }
 
 #pragma mark - Private API methods
 
-- (void)initListeners {
+- (void)observeQuery {
+  if (self.handles.count == 4) { /* don't duplicate observers */ return; }
   FIRDatabaseHandle handle;
   handle = [self.query observeEventType:FIRDataEventTypeChildAdded
       andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
@@ -151,6 +149,12 @@
         }
       }];
   [_handles addObject:@(handle)];
+}
+
+- (void)invalidate {
+  for (NSNumber *handle in _handles) {
+    [_query removeObserverWithHandle:handle.unsignedIntegerValue];
+  }
 }
 
 - (NSUInteger)indexForKey:(NSString *)key {

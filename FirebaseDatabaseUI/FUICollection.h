@@ -38,6 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index;
 
+- (void)observeQuery;
+- (void)invalidate;
+
 @end
 
 /**

@@ -40,6 +40,7 @@
   if (self) {
     _array = array;
     _array.delegate = self;
+    [array observeQuery];
   }
   return self;
 }

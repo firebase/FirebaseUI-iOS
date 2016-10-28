@@ -63,6 +63,7 @@
 }
 
 - (void)observeQuery {
+  if (self.handles.count == 4) { /* don't duplicate observers */ return; }
   FIRDatabaseHandle handle;
   handle = [self.query observeEventType:FIRDataEventTypeChildAdded
          andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
