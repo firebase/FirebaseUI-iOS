@@ -6,6 +6,8 @@ Additionally, FirebaseUI simplifies Firebase authentication by providing easy to
 
 FirebaseUI clients are also available for [Android](https://github.com/firebase/FirebaseUI-Android) and [web](https://github.com/firebase/firebaseui-web).
 
+![](https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/samples/demo.gif)
+
 ## Installing FirebaseUI for iOS
 
 FirebaseUI supports iOS 8.0+. We recommend using [CocoaPods](https://cocoapods.org/pods/FirebaseUI), add
