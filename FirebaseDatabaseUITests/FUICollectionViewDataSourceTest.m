@@ -21,9 +21,9 @@
 @import XCTest;
 @import FirebaseDatabaseUI;
 
-#import "FirebaseDatabaseTestUtils.h"
+#import "FUIDatabaseTestUtils.h"
 
-static NSString *const kTestReuseIdentifier = @"FirebaseCollectionViewDataSourceTest";
+static NSString *const kTestReuseIdentifier = @"FUICollectionViewDataSourceTest";
 
 @interface FUICollectionViewDataSourceTest : XCTestCase
 @property (nonatomic) UICollectionView *collectionView;

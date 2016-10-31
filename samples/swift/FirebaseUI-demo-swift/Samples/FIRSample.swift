@@ -40,7 +40,7 @@ enum FIRSample: Int, RawRepresentable {
     case .chat:
       return (
         title: "Chat",
-        subtitle: "Demonstrates using a FirebaseCollectionViewDataSource to load data from Firebase Database into a UICollectionView for a basic chat app."
+        subtitle: "Demonstrates using a FUICollectionViewDataSource to load data from Firebase Database into a UICollectionView for a basic chat app."
       )
     case .auth:
       return (

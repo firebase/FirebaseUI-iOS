@@ -98,9 +98,9 @@
 @implementation UITableView (FUITableViewDataSource)
 
 - (FUITableViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
-                                populateCell:(UITableViewCell *(^)(UITableView *tableView,
-                                                                   NSIndexPath *indexPath,
-                                                                   FIRDataSnapshot *snap))populateCell {
+                           populateCell:(UITableViewCell *(^)(UITableView *tableView,
+                                                              NSIndexPath *indexPath,
+                                                              FIRDataSnapshot *snap))populateCell {
   FUITableViewDataSource *dataSource =
     [[FUITableViewDataSource alloc] initWithQuery:query view:self populateCell:populateCell];
   self.dataSource = dataSource;

@@ -88,9 +88,9 @@
 @implementation UICollectionView (FUICollectionViewDataSource)
 
 - (FUICollectionViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
-                                     populateCell:(UICollectionViewCell *(^)(UICollectionView *,
-                                                                             NSIndexPath *,
-                                                                             FIRDataSnapshot *))populateCell {
+                                populateCell:(UICollectionViewCell *(^)(UICollectionView *,
+                                                                        NSIndexPath *,
+                                                                        FIRDataSnapshot *))populateCell {
   FUICollectionViewDataSource *dataSource =
     [[FUICollectionViewDataSource alloc] initWithQuery:query view:self populateCell:populateCell];
   self.dataSource = dataSource;

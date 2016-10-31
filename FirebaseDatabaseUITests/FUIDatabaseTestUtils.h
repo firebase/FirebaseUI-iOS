@@ -18,7 +18,7 @@
 
 // clang-format on
 
-#import "FirebaseArray.h"
+#import "FUIArray.h"
 
 @import FirebaseDatabaseUI;
 @import Foundation;
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface FUIFirebaseArrayTestDelegate : NSObject <FUIArrayDelegate>
+@interface FUIArrayTestDelegate : NSObject <FUIArrayDelegate>
 @property (nonatomic, copy) void (^queryCancelled)(FUIArray *array, NSError *error);
 @property (nonatomic, copy) void (^didAddObject)(FUIArray *array, id object, NSUInteger index);
 @property (nonatomic, copy) void (^didChangeObject)(FUIArray *array, id object, NSUInteger index);

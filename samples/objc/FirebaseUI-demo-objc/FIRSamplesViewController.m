@@ -50,7 +50,7 @@
                                      }]];
 
   [samples addObject:[FIRSample sampleWithTitle:@"Chat"
-                              sampleDescription:@"Demonstrates using a FirebaseCollectionViewDataSource to load data from Firebase Database into a UICollectionView for a basic chat app."
+                              sampleDescription:@"Demonstrates using a FUICollectionViewDataSource to load data from Firebase Database into a UICollectionView for a basic chat app."
                                      controller:^UIViewController *{
                                        UIViewController *controller =
                                        [[UIStoryboard storyboardWithName:@"Main"

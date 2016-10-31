@@ -85,9 +85,9 @@ NS_ASSUME_NONNULL_BEGIN
  *   view is in use.
  */
 - (FUICollectionViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
-                                     populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
-                                                                             NSIndexPath *indexPath,
-                                                                             FIRDataSnapshot *object))populateCell __attribute__((warn_unused_result));
+                                populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
+                                                                        NSIndexPath *indexPath,
+                                                                        FIRDataSnapshot *object))populateCell __attribute__((warn_unused_result));
 
 @end
 

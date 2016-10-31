@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /**
- * FirebaseArray provides an array structure that is synchronized with a Firebase reference or
+ * FUIArray provides an array structure that is synchronized with a Firebase reference or
  * query. It is useful for building custom data structures or sources, and provides the base for
  * FirebaseDataSource.
  */
@@ -54,37 +54,39 @@ NS_ASSUME_NONNULL_BEGIN
 @property(weak, nonatomic, nullable) id<FUIArrayDelegate> delegate;
 
 /**
- * The query on a Firebase reference that provides data to populate the instance of FirebaseArray.
+ * The query on a Firebase reference that provides data to populate the array.
  */
 @property(strong, nonatomic) id<FIRDataObservable> query;
 
 /**
- * The number of objects in the FirebaseArray.
+ * The number of objects in the array.
  */
 @property(nonatomic, readonly) NSUInteger count;
 
 /**
- * The items currently in the FirebaseArray.
+ * The items currently in the array.
  */
 @property(nonatomic, readonly, copy) NSArray *items;
 
 #pragma mark - Initializer methods
 
 /**
- * Initalizes FirebaseArray with a Firebase query (FIRDatabaseQuery) or database reference
+ * Initalizes an FUIArray with a Firebase query (FIRDatabaseQuery) or database reference
  * (FIRDatabaseReference).
  * @param query    A query or Firebase database reference
  * @param delegate An object conforming to FirebaseArrayDelegate that should receive delegate messages.
  * @return A FirebaseArray instance
  */
 - (instancetype)initWithQuery:(id<FIRDataObservable>)query
-                     delegate:(nullable id<FirebaseArrayDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+                     delegate:(nullable id<FUIArrayDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 /**
  * Initalizes FirebaseArray with a Firebase query (FIRDatabaseQuery) or database reference
  * (FIRDatabaseReference).
- * @param query    A query or Firebase database reference
+ * @param query A query or Firebase database reference
  * @return A FirebaseArray instance
+ * @param query A query or Firebase database reference
+ * @return An FUIArray instance
  */
 - (instancetype)initWithQuery:(id<FIRDataObservable>)query;
 
@@ -98,14 +100,14 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Public API methods
 
 /**
- * Returns an object at a specific index in the FirebaseArray.
+ * Returns an object at a specific index in the array.
  * @param index The index of the item to retrieve
  * @return The object at the given index
  */
 - (id)objectAtIndex:(NSUInteger)index;
 
 /**
- * Returns a Firebase reference for an object at a specific index in the FirebaseArray.
+ * Returns a Firebase reference for an object at a specific index in the array.
  * @param index The index of the item to retrieve a reference for
  * @return A Firebase reference for the object at the given index
  */

@@ -45,6 +45,7 @@
 @property (nonatomic, readonly) NSUInteger count;
 
 - (instancetype)initWithArray:(FUIArray *)array NS_DESIGNATED_INITIALIZER;
+
 - (instancetype)init NS_UNAVAILABLE;
 
 /**

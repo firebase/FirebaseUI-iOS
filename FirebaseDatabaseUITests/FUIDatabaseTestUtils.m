@@ -18,7 +18,7 @@
 
 // clang-format on
 
-#import "FirebaseDatabaseTestUtils.h"
+#import "FUIDatabaseTestUtils.h"
 
 @import Foundation;
 
@@ -217,7 +217,7 @@
 
 @end
 
-@implementation FUIFirebaseArrayTestDelegate
+@implementation FUIArrayTestDelegate
 
 - (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
   if (self.didAddObject != NULL) {

@@ -17,15 +17,14 @@
 @import UIKit;
 @import FirebaseDatabase;
 
-#import <FirebaseDatabaseUI/FirebaseTableViewDataSource.h>
+#import <FirebaseDatabaseUI/FUITableViewDataSource.h>
 
 @interface FIRChatViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (strong, nonatomic) FirebaseTableViewDataSource *dataSource;
+@property (strong, nonatomic) FUITableViewDataSource *dataSource;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *inputTextField;
 
 @end
-

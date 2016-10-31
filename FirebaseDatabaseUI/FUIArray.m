@@ -23,7 +23,7 @@
 @interface FUIArray ()
 
 /**
- * The backing collection that holds all of the FirebaseArray's data.
+ * The backing collection that holds all of the array's data.
  */
 @property(strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *snapshots;
 
@@ -39,7 +39,7 @@
 
 #pragma mark - Initializer methods
 
-- (instancetype)initWithQuery:(FIRDatabaseQuery *)query delegate:(id<FirebaseArrayDelegate>)delegate {
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query delegate:(id<FUIArrayDelegate>)delegate {
   NSParameterAssert(query != nil);
   self = [super init];
   if (self) {

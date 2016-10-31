@@ -81,9 +81,9 @@ NS_ASSUME_NONNULL_BEGIN
  *   view is in use.
  */
 - (FUITableViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
-                                populateCell:(UITableViewCell *(^)(UITableView *tableView,
-                                                                   NSIndexPath *indexPath,
-                                                                   FIRDataSnapshot *object))populateCell __attribute__((warn_unused_result));
+                           populateCell:(UITableViewCell *(^)(UITableView *tableView,
+                                                              NSIndexPath *indexPath,
+                                                              FIRDataSnapshot *object))populateCell __attribute__((warn_unused_result));
 
 @end
 
