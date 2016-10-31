@@ -49,7 +49,11 @@
                                        return controller;
                                      }]];
 
+<<<<<<< HEAD:samples/objc/FirebaseUI-demo-objc/FUISamplesViewController.m
   [samples addObject:[FUISample sampleWithTitle:@"Chat"
+=======
+  [samples addObject:[FIRSample sampleWithTitle:@"Chat"
+>>>>>>> change renamed classes in other files, break swift sample:samples/objc/FirebaseUI-demo-objc/FIRSamplesViewController.m
                               sampleDescription:@"Demonstrates using a FUICollectionViewDataSource to load data from Firebase Database into a UICollectionView for a basic chat app."
                                      controller:^UIViewController *{
                                        UIViewController *controller =

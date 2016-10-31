@@ -18,6 +18,4 @@
 
 @interface FUIViewController : UITableViewController
 
-
 @end
-

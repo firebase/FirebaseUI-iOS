@@ -17,7 +17,11 @@
 @import UIKit;
 @import FirebaseDatabase;
 
+<<<<<<< HEAD:samples/objc/FirebaseUI-demo-objc/Samples/Chat/FUIChatViewController.h
 #import <FirebaseDatabaseUI/FirebaseDatabaseUI.h>
+=======
+#import <FirebaseDatabaseUI/FUITableViewDataSource.h>
+>>>>>>> change renamed classes in other files, break swift sample:samples/objc/FirebaseUI-demo-objc/Samples/Chat/FIRChatViewController.h
 
 @interface FUIChatViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>
 
