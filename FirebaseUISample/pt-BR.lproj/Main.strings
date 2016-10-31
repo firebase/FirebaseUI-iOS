@@ -1,0 +1,39 @@
+
+/* Class = "UITableViewSection"; headerTitle = "Simulation behaviour"; ObjectID = "3OT-yO-TqN"; */
+"3OT-yO-TqN.headerTitle" = "Simular comportamentos";
+
+/* Class = "UILabel"; text = "Twitter"; ObjectID = "9eZ-XP-hHW"; */
+"9eZ-XP-hHW.text" = "Twitter";
+
+/* Class = "UILabel"; text = "Google"; ObjectID = "BZu-2b-sNe"; */
+"BZu-2b-sNe.text" = "Google";
+
+/* Class = "UILabel"; text = "Email"; ObjectID = "Na0-bD-6fV"; */
+"Na0-bD-6fV.text" = "Email";
+
+/* Class = "UIBarButtonItem"; title = "Sign In"; ObjectID = "POZ-cj-0TN"; */
+"POZ-cj-0TN.title" = "Logar";
+
+/* Class = "UILabel"; text = "Simulate New User"; ObjectID = "QPc-KZ-Doq"; */
+"QPc-KZ-Doq.text" = "Simular novo usuário";
+
+/* Class = "UILabel"; text = "Facebook (Disabled)"; ObjectID = "R7m-JT-boG"; */
+"R7m-JT-boG.text" = "Facebook (Desativado)";
+
+/* Class = "UILabel"; text = "Simulate Existing User"; ObjectID = "a9D-Y8-1I3"; */
+"a9D-Y8-1I3.text" = "Simular usuário existente";
+
+/* Class = "UILabel"; text = "No mocks used"; ObjectID = "dAh-Ew-gGT"; */
+"dAh-Ew-gGT.text" = "Não usar mocks";
+
+/* Class = "UILabel"; text = "Simulate Email Recovery"; ObjectID = "geH-vh-07B"; */
+"geH-vh-07B.text" = "Simular recuperação de email";
+
+/* Class = "UINavigationItem"; title = "FirebaseUI Tests"; ObjectID = "nM8-Ol-7Is"; */
+"nM8-Ol-7Is.title" = "FirebaseUI Testes";
+
+/* Class = "UITableViewSection"; headerTitle = "Signed in as"; ObjectID = "nMb-I7-lHz"; */
+"nMb-I7-lHz.headerTitle" = "Logado como";
+
+/* Class = "UITableViewSection"; headerTitle = "IDPs"; ObjectID = "xDm-z8-dYa"; */
+"xDm-z8-dYa.headerTitle" = "Provedores";
