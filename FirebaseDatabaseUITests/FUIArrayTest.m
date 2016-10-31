@@ -41,6 +41,7 @@
   self.observable = [[FUITestObservable alloc] init];
   self.firebaseArray = [[FUIArray alloc] initWithQuery:self.observable];
   self.firebaseArray.delegate = self.arrayDelegate;
+  [self.firebaseArray observeQuery];
 }
 
 - (void)tearDown {

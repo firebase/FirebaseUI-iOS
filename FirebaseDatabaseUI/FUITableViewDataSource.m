@@ -41,7 +41,7 @@
                                                     NSIndexPath *,
                                                     FIRDataSnapshot *))populateCell {
   FUIArray *array = [[FUIArray alloc] initWithQuery:query];
-  self = [super initWithArray:array];
+  self = [super initWithCollection:array];
   if (self) {
     self.tableView = tableView;
     self.populateCell = populateCell;

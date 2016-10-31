@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                          NSIndexPath *indexPath,
                                                          FIRDataSnapshot *object))populateCell NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithArray:(FUIArray *)array NS_UNAVAILABLE;
+- (instancetype)initWithCollection:(id<FUICollection>)collection NS_UNAVAILABLE;
 
 @end
 

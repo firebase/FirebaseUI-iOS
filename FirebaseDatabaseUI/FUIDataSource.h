@@ -44,7 +44,7 @@
  */
 @property (nonatomic, readonly) NSUInteger count;
 
-- (instancetype)initWithArray:(FUIArray *)array NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCollection:(id<FUICollection>)collection NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -52,11 +52,6 @@
  * Pass through of [FirebaseArray snapshotAtIndex:].
  */
 - (FIRDataSnapshot *)objectAtIndex:(NSUInteger)index;
-
-/**
- * Pass through of [FirebaseArray refForIndex:].
- */
-- (FIRDatabaseReference *)refForIndex:(NSUInteger)index;
 
 /**
  * Provides a block which is called when the backing array cancels its query.
