@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A0459B21DC7C8EB00791CCE /* FirebaseAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A0459B01DC7C8EB00791CCE /* FirebaseAuthUI.strings */; };
+		8A0459B61DC7EB2400791CCE /* FirebaseFacebookAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A0459B41DC7EB2400791CCE /* FirebaseFacebookAuthUI.strings */; };
+		8A0459BA1DC7EBC900791CCE /* FirebaseGoogleAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A0459B81DC7EBC900791CCE /* FirebaseGoogleAuthUI.strings */; };
+		8A0459BE1DC7EC3E00791CCE /* FirebaseTwitterAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A0459BC1DC7EC3E00791CCE /* FirebaseTwitterAuthUI.strings */; };
 		8D2A84AA1D678B2B0058DF04 /* FirebaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D2A84A91D678B2B0058DF04 /* FirebaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D78AF061D9D8CB000CFA9C5 /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */; };
 		8D7AD9B71D9317FB006866B9 /* UIImageView+FirebaseStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7AD9B51D9317FB006866B9 /* UIImageView+FirebaseStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -334,6 +338,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8A0459A11DC7C59200791CCE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		8A0459A21DC7C59200791CCE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		8A0459A31DC7C59200791CCE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "Strings/pt-BR.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		8A0459A41DC7C59200791CCE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "Strings/pt-BR.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8A0459A51DC7C59200791CCE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "Strings/pt-BR.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		8A0459B11DC7C8EB00791CCE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "Strings/pt-BR.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		8A0459B51DC7EB2400791CCE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "Strings/pt-BR.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8A0459B91DC7EBC900791CCE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "Strings/pt-BR.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		8A0459BD1DC7EC3E00791CCE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
 		8D2A84A61D678B2B0058DF04 /* FirebaseUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D2A84A91D678B2B0058DF04 /* FirebaseUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseUI.h; sourceTree = "<group>"; };
 		8D2A84AB1D678B2B0058DF04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -636,6 +649,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A0459AA1DC7C79500791CCE /* pt-BR.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				8A0459B01DC7C8EB00791CCE /* FirebaseAuthUI.strings */,
+			);
+			name = "pt-BR.lproj";
+			sourceTree = "<group>";
+		};
+		8A0459B31DC7EAE200791CCE /* pt-BR.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				8A0459B41DC7EB2400791CCE /* FirebaseFacebookAuthUI.strings */,
+			);
+			name = "pt-BR.lproj";
+			sourceTree = "<group>";
+		};
+		8A0459B71DC7EBAF00791CCE /* pt-BR.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				8A0459B81DC7EBC900791CCE /* FirebaseGoogleAuthUI.strings */,
+			);
+			name = "pt-BR.lproj";
+			sourceTree = "<group>";
+		};
+		8A0459BB1DC7EC2300791CCE /* pt-BR.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				8A0459BC1DC7EC3E00791CCE /* FirebaseTwitterAuthUI.strings */,
+			);
+			name = "pt-BR.lproj";
+			sourceTree = "<group>";
+		};
 		8D2A849C1D678B2B0058DF04 = {
 			isa = PBXGroup;
 			children = (
@@ -746,6 +791,7 @@
 			isa = PBXGroup;
 			children = (
 				8DA941CE1D67937400CD3685 /* en.lproj */,
+				8A0459B71DC7EBAF00791CCE /* pt-BR.lproj */,
 			);
 			name = Strings;
 			sourceTree = "<group>";
@@ -772,6 +818,7 @@
 			isa = PBXGroup;
 			children = (
 				8DA941E01D6793F400CD3685 /* en.lproj */,
+				8A0459B31DC7EAE200791CCE /* pt-BR.lproj */,
 			);
 			name = Strings;
 			sourceTree = "<group>";
@@ -788,6 +835,7 @@
 			isa = PBXGroup;
 			children = (
 				8DA941E51D67944300CD3685 /* en.lproj */,
+				8A0459AA1DC7C79500791CCE /* pt-BR.lproj */,
 			);
 			name = Strings;
 			sourceTree = "<group>";
@@ -1015,6 +1063,7 @@
 			isa = PBXGroup;
 			children = (
 				C380A7E21D89ED82005C031D /* en.lproj */,
+				8A0459BB1DC7EC2300791CCE /* pt-BR.lproj */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -1595,6 +1644,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = 8D2A849C1D678B2B0058DF04;
 			productRefGroup = 8D2A84A71D678B2B0058DF04 /* Products */;
@@ -1671,6 +1721,7 @@
 				8DA941A81D67904200CD3685 /* ic_visibility_off@2x.png in Resources */,
 				8DA941921D678F5400CD3685 /* FIRPasswordSignInViewController.xib in Resources */,
 				8DA941A41D67904200CD3685 /* ic_email.png in Resources */,
+				8A0459B21DC7C8EB00791CCE /* FirebaseAuthUI.strings in Resources */,
 				8DA941AC1D67904200CD3685 /* ic_visibility@3x.png in Resources */,
 				8DA941E81D67945100CD3685 /* FirebaseAuthUI.strings in Resources */,
 				8DA941A51D67904200CD3685 /* ic_email@2x.png in Resources */,
@@ -1702,6 +1753,7 @@
 				8DA941E31D67940100CD3685 /* FirebaseFacebookAuthUI.strings in Resources */,
 				8DA941DE1D6793EE00CD3685 /* ic_facebook@2x.png in Resources */,
 				8DA941DD1D6793EE00CD3685 /* ic_facebook.png in Resources */,
+				8A0459B61DC7EB2400791CCE /* FirebaseFacebookAuthUI.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1724,6 +1776,7 @@
 				8DA941C11D67923F00CD3685 /* ic_google@3x.png in Resources */,
 				8DA941BF1D67923F00CD3685 /* ic_google.png in Resources */,
 				8DA941D11D67938000CD3685 /* FirebaseGoogleAuthUI.strings in Resources */,
+				8A0459BA1DC7EBC900791CCE /* FirebaseGoogleAuthUI.strings in Resources */,
 				8DA941C01D67923F00CD3685 /* ic_google@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1742,6 +1795,7 @@
 				C380A7D71D89ECF1005C031D /* ic_twitter@2x.png in Resources */,
 				C380A7E51D89ED82005C031D /* FirebaseTwitterAuthUI.strings in Resources */,
 				C380A7D81D89ECF1005C031D /* ic_twitter@3x.png in Resources */,
+				8A0459BE1DC7EC3E00791CCE /* FirebaseTwitterAuthUI.strings in Resources */,
 				C380A7D61D89ECF1005C031D /* ic_twitter.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2071,10 +2125,43 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8A0459B01DC7C8EB00791CCE /* FirebaseAuthUI.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8A0459B11DC7C8EB00791CCE /* pt-BR */,
+			);
+			name = FirebaseAuthUI.strings;
+			sourceTree = "<group>";
+		};
+		8A0459B41DC7EB2400791CCE /* FirebaseFacebookAuthUI.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8A0459B51DC7EB2400791CCE /* pt-BR */,
+			);
+			name = FirebaseFacebookAuthUI.strings;
+			sourceTree = "<group>";
+		};
+		8A0459B81DC7EBC900791CCE /* FirebaseGoogleAuthUI.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8A0459B91DC7EBC900791CCE /* pt-BR */,
+			);
+			name = FirebaseGoogleAuthUI.strings;
+			sourceTree = "<group>";
+		};
+		8A0459BC1DC7EC3E00791CCE /* FirebaseTwitterAuthUI.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8A0459BD1DC7EC3E00791CCE /* pt-BR */,
+			);
+			name = FirebaseTwitterAuthUI.strings;
+			sourceTree = "<group>";
+		};
 		8DA941CF1D67938000CD3685 /* FirebaseGoogleAuthUI.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				8DA941D01D67938000CD3685 /* en */,
+				8A0459A51DC7C59200791CCE /* pt-BR */,
 			);
 			name = FirebaseGoogleAuthUI.strings;
 			sourceTree = "<group>";
@@ -2083,6 +2170,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8DA941E21D67940100CD3685 /* en */,
+				8A0459A41DC7C59200791CCE /* pt-BR */,
 			);
 			name = FirebaseFacebookAuthUI.strings;
 			sourceTree = "<group>";
@@ -2091,6 +2179,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8DA941E71D67945100CD3685 /* en */,
+				8A0459A31DC7C59200791CCE /* pt-BR */,
 			);
 			name = FirebaseAuthUI.strings;
 			sourceTree = "<group>";
@@ -2099,6 +2188,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C329B1441DA8694A00059A13 /* Base */,
+				8A0459A11DC7C59200791CCE /* pt-BR */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -2107,6 +2197,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C329B1491DA8694A00059A13 /* Base */,
+				8A0459A21DC7C59200791CCE /* pt-BR */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -2127,6 +2218,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BITCODE_GENERATION_MODE = marker;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -2183,6 +2275,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BITCODE_GENERATION_MODE = bitcode;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
