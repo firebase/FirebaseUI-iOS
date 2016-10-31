@@ -199,6 +199,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   cell.textField.delegate = self;
   cell.accessibilityIdentifier = kEmailCellAccessibilityID;
   _emailField = cell.textField;
+  _emailField.secureTextEntry = NO;
   _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
   _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
   _emailField.returnKeyType = UIReturnKeyNext;

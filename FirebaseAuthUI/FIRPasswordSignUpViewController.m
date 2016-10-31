@@ -253,6 +253,8 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
     _emailField.secureTextEntry = NO;
     _emailField.returnKeyType = UIReturnKeyNext;
     _emailField.keyboardType = UIKeyboardTypeEmailAddress;
+    _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
+    _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
   } else if (indexPath.row == 1) {
     cell.label.text = [FIRAuthUIStrings name];
     cell.accessibilityIdentifier = kNameSignUpCellAccessibilityID;

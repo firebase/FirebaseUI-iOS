@@ -167,8 +167,11 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   _emailField.delegate = self;
   _emailField.text = _email;
   _emailField.placeholder = [FIRAuthUIStrings enterYourEmail];
+  _emailField.secureTextEntry = NO;
   _emailField.returnKeyType = UIReturnKeyNext;
   _emailField.keyboardType = UIKeyboardTypeEmailAddress;
+  _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
+  _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
            forControlEvents:UIControlEventEditingChanged];
