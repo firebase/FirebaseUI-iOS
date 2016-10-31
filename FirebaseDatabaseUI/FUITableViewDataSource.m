@@ -35,18 +35,26 @@
 
 #pragma mark - FUIDataSource initializer methods
 
+- (instancetype)initWithCollection:(id<FUICollection>)collection
+                              view:(UITableView *)tableView
+                      populateCell:(UITableViewCell *(^)(UITableView *,
+                                                         NSIndexPath *,
+                                                         FIRDataSnapshot *))populateCell {
+  self = [super initWithCollection:collection];
+  if (self != nil) {
+    self.tableView = tableView;
+    self.populateCell = populateCell;
+  }
+  return self;
+}
+
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
                          view:(UITableView *)tableView
                  populateCell:(UITableViewCell *(^)(UITableView *,
                                                     NSIndexPath *,
                                                     FIRDataSnapshot *))populateCell {
   FUIArray *array = [[FUIArray alloc] initWithQuery:query];
-  self = [super initWithCollection:array];
-  if (self) {
-    self.tableView = tableView;
-    self.populateCell = populateCell;
-  }
-  return self;
+  return [self initWithCollection:array view:tableView populateCell:populateCell];
 }
 
 #pragma mark - FUICollectionDelegate methods
