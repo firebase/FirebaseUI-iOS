@@ -44,14 +44,14 @@ static NSString *const kTestReuseIdentifier = @"FirebaseCollectionViewDataSource
   self.observable = [[FUITestObservable alloc] init];
   // Horrible abuse of type system, knowing that the initializer passes the observable straight to
   // FirebaseArray anyway.
-  self.dataSource = [[FirebaseCollectionViewDataSource alloc] initWithRef:(FIRDatabaseReference *)self.observable
-                                                      cellReuseIdentifier:kTestReuseIdentifier
-                                                                     view:self.collectionView];
-  [self.dataSource populateCellWithBlock:^(__kindof UICollectionViewCell *_Nonnull cell,
-                                           FUIFakeSnapshot * _Nonnull object) {
+  self.dataSource = [self.collectionView bindToQuery:(FIRDatabaseReference *)self.observable
+                                        populateCell:^UICollectionViewCell *(UICollectionView *collectionView,
+                                                                             NSIndexPath *indexPath,
+                                                                             FIRDataSnapshot *object) {
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTestReuseIdentifier forIndexPath:indexPath];
     cell.accessibilityValue = object.key;
+    return cell;
   }];
-  self.collectionView.dataSource = self.dataSource;
   
   // Removing this NSLog causes the tests to crash since `numberOfItemsInSection`
   // actually pulls updates from the data source or something
