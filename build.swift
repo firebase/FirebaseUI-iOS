@@ -268,6 +268,7 @@ rm(BuiltProductsDir + "samples/objc/FirebaseUI-demo-objc.xcworkspace", isDirecto
 rm(BuiltProductsDir + "samples/swift/FirebaseUI-demo-swift.xcodeproj/xcuserdata", isDirectory: true, isStrict: false)
 rm(BuiltProductsDir + "samples/swift/FirebaseUI-demo-swift.xcodeproj/project.xcworkspace", isDirectory: true, isStrict: false)
 rm(BuiltProductsDir + "samples/swift/FirebaseUI-demo-swift.xcworkspace", isDirectory: true, isStrict: false)
+rm(BuiltProductsDir + "samples/demo.gif", isDirectory: false, isStrict: false)
 
 // clean up build artifacts afterward
 zip("FirebaseUIFrameworks", output: "FirebaseUIFrameworks.zip")
