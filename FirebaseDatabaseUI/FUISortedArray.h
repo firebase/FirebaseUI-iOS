@@ -28,15 +28,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (instancetype)initWithQuery:(id<FUIDataObservable>)query
+/**
+ * Initializes a sorted collection.
+ * @param query The query the receiver uses to pull updates from Firebase Database.
+ * @param delegate The delegate object that should receive events from the array.
+ * @param sortDescriptor The closure used by the array to sort its contents. This
+ *   block must always return consistent results or the array may raise a fatal error.
+ */
+- (instancetype)initWithQuery:(id<FIRDataObservable>)query
                      delegate:(nullable id<FUICollectionDelegate>)delegate
                sortDescriptor:(NSComparisonResult (^)(FIRDataSnapshot *left,
                                                       FIRDataSnapshot *right))sortDescriptor NS_DESIGNATED_INITIALIZER;
-
-- (void)observeQuery;
-- (void)invalidate;
-
-- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index;
 
 @end
 

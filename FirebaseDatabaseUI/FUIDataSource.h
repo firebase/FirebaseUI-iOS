@@ -40,16 +40,19 @@
 @property (nonatomic, readonly, copy) NSArray *items;
 
 /**
- * Pass through of [FirebaseArray count].
+ * The number of items in the receiver's collection.
  */
 @property (nonatomic, readonly) NSUInteger count;
 
+/**
+ * Takes an FUICollection and immediately starts observing it.
+ */
 - (instancetype)initWithCollection:(id<FUICollection>)collection NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- * Pass through of [FirebaseArray snapshotAtIndex:].
+ * Returns the snapshot at the given index in the receiver's collection.
  */
 - (FIRDataSnapshot *)objectAtIndex:(NSUInteger)index;
 

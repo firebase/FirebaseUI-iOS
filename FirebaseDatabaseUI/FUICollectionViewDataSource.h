@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
  * UICollectionViewCells with FIRDataSnapshots.
  * @param collection A FUICollection that the data source uses to pull snapshots
  *   from Firebase Database.
- * @param collectionView An instance of a UICollectionView to bind to. This view
+ * @param view An instance of a UICollectionView to bind to. This view
  *   is not retained by its data source.
  * @param populateCell A closure used by the data source to create the cells that
  *   are displayed in the collection view. This closure is retained by the data

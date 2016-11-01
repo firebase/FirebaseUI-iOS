@@ -25,6 +25,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * A protocol representing a collection of objects from Firebase Database.
+ */
 @protocol FUICollection <NSObject>
 
 @property (nonatomic, readonly, copy) NSArray<FIRDataSnapshot *> *items;
@@ -32,13 +35,27 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic, nullable) id<FUICollectionDelegate> delegate;
 
 /**
- * The number of objects in the FirebaseArray.
+ * The number of objects in the collection.
  */
 @property (nonatomic, readonly) NSUInteger count;
 
+/**
+ * The @c FIRDataSnapshot at the given index. May raise fatal errors
+ * if the index is out of bounds.
+ * @param index The index of a snapshot.
+ */
 - (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index;
 
+/**
+ * Calling this makes the array begin observing updates from its query.
+ * Before this call is made the array is inert and doesn't do anything.
+ */
 - (void)observeQuery;
+
+/**
+ * Cancels all active observations. The array may be reused after this
+ * is called by calling @c observeQuery again.
+ */
 - (void)invalidate;
 
 @end
