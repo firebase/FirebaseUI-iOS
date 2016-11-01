@@ -64,6 +64,7 @@ class FIRAuthViewController: UITableViewController {
 
   @IBOutlet weak var authorizationButton: UIBarButtonItem!
   @IBOutlet weak var customAuthorizationSwitch: UISwitch!
+  @IBOutlet weak var customScopesSwitch: UISwitch!
 
 
   override func viewDidLoad() {
@@ -189,16 +190,30 @@ class FIRAuthViewController: UITableViewController {
     if let selectedRows = self.tableView.indexPathsForSelectedRows {
       for indexPath in selectedRows {
         if indexPath.section == UISections.Providers.rawValue {
+          let provider:FIRAuthProviderUI?
+
           switch indexPath.row {
           case Providers.Google.rawValue:
-            providers.append(FIRGoogleAuthUI())
+            provider = self.customScopesSwitch.isOn ? FIRGoogleAuthUI(scopes: [kGoogleGamesScope,
+                                                                               kGooglePlusMeScope,
+                                                                               kGoogleUserInfoEmailScope,
+                                                                               kGoogleUserInfoProfileScope])
+              : FIRGoogleAuthUI()
           case Providers.Twitter.rawValue:
-            providers.append(FIRTwitterAuthUI())
+            provider = FIRTwitterAuthUI()
           case Providers.Facebook.rawValue:
-            providers.append(FIRFacebookAuthUI())
-          default: break
-
+            provider = self.customScopesSwitch.isOn ? FIRFacebookAuthUI(permissions: ["email",
+                                                                                      "user_friends",
+                                                                                      "ads_read"])
+              : FIRFacebookAuthUI()
+          default: provider = nil
           }
+
+          guard provider != nil else {
+            continue
+          }
+
+          providers.append(provider!)
         }
       }
     }
