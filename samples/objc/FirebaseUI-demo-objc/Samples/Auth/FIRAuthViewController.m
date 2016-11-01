@@ -28,6 +28,25 @@
 
 #import "FIRCustomAuthPickerViewController.h"
 
+typedef enum : NSUInteger {
+  kSectionsSettings = 0,
+  kSectionsProviders,
+  kSectionsName,
+  kSectionsEmail,
+  kSectionsUID,
+  kSectionsAccessToken,
+  kSectionsIDToken
+} UISections;
+
+typedef enum : NSUInteger {
+  kIDPEmail = 0,
+  kIDPGoogle,
+  kIDPFacebook,
+  kIDPTwitter
+} FIRProviders;
+
+NSString * const kFirebaseTermsOfService = @"https://firebase.google.com/terms/";
+
 @interface FIRAuthViewController () <FIRAuthUIDelegate>
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellSignIn;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellName;
@@ -61,20 +80,34 @@
 
   self.auth = [FIRAuth auth];
   self.authUI = [FIRAuthUI defaultAuthUI];
+
+  self.authUI.TOSURL = [NSURL URLWithString:kFirebaseTermsOfService];
+
   //set AuthUI Delegate
   [self onAuthUIDelegateChanged:nil];
+
+  //select all Identety providers
+  [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPEmail
+                                                          inSection:kSectionsProviders]
+                              animated:NO
+                        scrollPosition:UITableViewScrollPositionNone];
+  [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPGoogle
+                                                          inSection:kSectionsProviders]
+                              animated:NO
+                        scrollPosition:UITableViewScrollPositionNone];
+  [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPFacebook
+                                                          inSection:kSectionsProviders]
+                              animated:NO
+                        scrollPosition:UITableViewScrollPositionNone];
+  [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPTwitter
+                                                          inSection:kSectionsProviders]
+                              animated:NO
+                        scrollPosition:UITableViewScrollPositionNone];
 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-
-  NSArray<id<FIRAuthProviderUI>> *providers = [NSArray arrayWithObjects:
-                                               [[FIRGoogleAuthUI alloc] init],
-                                               [[FIRFacebookAuthUI alloc] init],
-                                               [[FIRTwitterAuthUI alloc] init],
-                                               nil];
-  _authUI.providers = providers;
 
   __weak FIRAuthViewController *weakSelf = self;
   self.authStateDidChangeHandle = [self.auth addAuthStateDidChangeListener:^(FIRAuth * _Nonnull auth, FIRUser * _Nullable user) {
@@ -119,7 +152,13 @@
   self.cellAccessToken.textLabel.text = [self getAllAccessTokens];
   self.cellIdToken.textLabel.text = [self getAllIdTokens];
 
+  NSArray *selectedRows = [self.tableView indexPathsForSelectedRows];
   [self.tableView reloadData];
+  for (NSIndexPath *path in selectedRows) {
+    [self.tableView selectRowAtIndexPath:path
+                                animated:NO
+                          scrollPosition:UITableViewScrollPositionNone];
+  }
 }
 - (IBAction)onAuthUIDelegateChanged:(UISwitch *)sender {
   _isCustomAuthDelegateSelected = sender ? sender.isOn : NO;
@@ -132,6 +171,10 @@
 
 - (IBAction)onAuthorization:(id)sender {
   if (!self.auth.currentUser) {
+
+    _authUI.providers = [self getListOfIDPs];
+    _authUI.signInWithEmailHidden = ![self isEmailEnabled];
+
     UINavigationController *controller = [self.authUI authViewController];
     if (_isCustomAuthDelegateSelected) {
       controller.navigationBar.hidden = YES;
@@ -158,7 +201,6 @@
     }
   }
 }
-
 
 #pragma mark - Helper Methods
 
@@ -200,5 +242,39 @@
   [self presentViewController:alert animated:YES completion:nil];
 
 }
+
+- (NSArray *)getListOfIDPs {
+  NSArray<NSIndexPath *> *selectedRows = [self.tableView indexPathsForSelectedRows];
+  NSMutableArray *providers = [NSMutableArray new];
+
+  for (NSIndexPath *indexPath in selectedRows) {
+    if (indexPath.section == kSectionsProviders) {
+      switch (indexPath.row) {
+        case kIDPGoogle:
+          [providers addObject:[[FIRGoogleAuthUI alloc] init]];
+          break;
+        case kIDPFacebook:
+          [providers addObject:[[FIRFacebookAuthUI alloc] init]];
+          break;
+        case kIDPTwitter:
+          [providers addObject:[[FIRTwitterAuthUI alloc] init]];
+          break;
+
+        default:
+          break;
+      }
+    }
+  }
+
+  return providers;
+}
+
+- (BOOL)isEmailEnabled {
+  NSArray<NSIndexPath *> *selectedRows = [self.tableView indexPathsForSelectedRows];
+  return [selectedRows containsObject:[NSIndexPath
+                                       indexPathForRow:kIDPEmail
+                                       inSection:kSectionsProviders]];
+}
+
 
 @end

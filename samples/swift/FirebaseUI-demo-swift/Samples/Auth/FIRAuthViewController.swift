@@ -23,6 +23,25 @@ import FirebaseTwitterAuthUI
 
 let kFirebaseTermsOfService = URL(string: "https://firebase.google.com/terms/")!
 
+enum UISections: Int, RawRepresentable {
+  case Settings = 0
+  case Providers
+  case Name
+  case Email
+  case UID
+  case AccessToken
+  case IDToken
+}
+
+enum Providers: Int, RawRepresentable {
+  case Email = 0
+  case Google
+  case Facebook
+  case Twitter
+}
+
+
+
 /// A view controller displaying a basic sign-in flow using FIRAuthUI.
 class FIRAuthViewController: UITableViewController {
   // Before running this sample, make sure you've correctly configured
@@ -47,22 +66,31 @@ class FIRAuthViewController: UITableViewController {
   @IBOutlet weak var customAuthorizationSwitch: UISwitch!
 
 
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    self.authUI?.tosurl = kFirebaseTermsOfService
+
+    self.tableView.selectRow(at: IndexPath(row: Providers.Email.rawValue, section: UISections.Providers.rawValue),
+                             animated: false,
+                             scrollPosition: .none)
+    self.tableView.selectRow(at: IndexPath(row: Providers.Google.rawValue, section: UISections.Providers.rawValue),
+                             animated: false,
+                             scrollPosition: .none)
+    self.tableView.selectRow(at: IndexPath(row: Providers.Facebook.rawValue, section: UISections.Providers.rawValue),
+                             animated: false,
+                             scrollPosition: .none)
+    self.tableView.selectRow(at: IndexPath(row: Providers.Twitter.rawValue, section: UISections.Providers.rawValue),
+                             animated: false,
+                             scrollPosition: .none)
+
+  }
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 240;
-
-    // If you haven't set up your authentications correctly these buttons
-    // will still appear in the UI, but they'll crash the app when tapped.
-    let providers: [FIRAuthProviderUI] = [
-      FIRGoogleAuthUI(),
-      FIRFacebookAuthUI(),
-      FIRTwitterAuthUI(),
-    ]
-    self.authUI?.providers = providers
-
-    self.authUI?.tosurl = kFirebaseTermsOfService
 
     self.authStateDidChangeHandle =
       self.auth?.addStateDidChangeListener(self.updateUI(auth:user:))
@@ -96,6 +124,11 @@ class FIRAuthViewController: UITableViewController {
 
     } else {
       self.authUI?.delegate = self.customAuthorizationSwitch.isOn ? self.customAuthUIDelegate : nil;
+      self.authUI?.isSignInWithEmailHidden = !self.isEmailEnabled()
+
+      // If you haven't set up your authentications correctly these buttons
+      // will still appear in the UI, but they'll crash the app when tapped.
+      self.authUI?.providers = self.getListOfIDPs()
 
       let controller = self.authUI!.authViewController()
       controller.navigationBar.isHidden = self.customAuthorizationSwitch.isOn
@@ -124,7 +157,13 @@ class FIRAuthViewController: UITableViewController {
     self.cellAccessToken.textLabel?.text = getAllAccessTokens()
     self.cellIdToken.textLabel?.text = getAllIdTokens()
 
+    let selectedRows = self.tableView.indexPathsForSelectedRows
     self.tableView.reloadData()
+    if let rows = selectedRows {
+      for path in rows {
+        self.tableView.selectRow(at: path, animated: false, scrollPosition: .none)
+      }
+    }
   }
 
   func getAllAccessTokens() -> String {
@@ -144,4 +183,33 @@ class FIRAuthViewController: UITableViewController {
 
     return result
   }
+
+  func getListOfIDPs() -> [FIRAuthProviderUI] {
+    var providers = [FIRAuthProviderUI]()
+    if let selectedRows = self.tableView.indexPathsForSelectedRows {
+      for indexPath in selectedRows {
+        if indexPath.section == UISections.Providers.rawValue {
+          switch indexPath.row {
+          case Providers.Google.rawValue:
+            providers.append(FIRGoogleAuthUI())
+          case Providers.Twitter.rawValue:
+            providers.append(FIRTwitterAuthUI())
+          case Providers.Facebook.rawValue:
+            providers.append(FIRFacebookAuthUI())
+          default: break
+
+          }
+        }
+      }
+    }
+    
+    return providers
+  }
+
+  func isEmailEnabled() -> Bool {
+    let selectedRows = self.tableView.indexPathsForSelectedRows
+    return selectedRows?.contains(IndexPath(row: Providers.Email.rawValue,
+                                            section: UISections.Providers.rawValue)) ?? false
+  }
+
 }
