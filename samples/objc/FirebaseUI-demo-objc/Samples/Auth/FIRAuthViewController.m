@@ -55,6 +55,7 @@ NSString * const kFirebaseTermsOfService = @"https://firebase.google.com/terms/"
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonAuthorization;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellAccessToken;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellIdToken;
+@property (weak, nonatomic) IBOutlet UISwitch *customScopeSwitch;
 
 @property (nonatomic) FIRAuth *auth;
 @property (nonatomic) FIRAuthUI *authUI;
@@ -249,20 +250,32 @@ NSString * const kFirebaseTermsOfService = @"https://firebase.google.com/terms/"
 
   for (NSIndexPath *indexPath in selectedRows) {
     if (indexPath.section == kSectionsProviders) {
+      id<FIRAuthProviderUI> provider;
       switch (indexPath.row) {
         case kIDPGoogle:
-          [providers addObject:[[FIRGoogleAuthUI alloc] init]];
+          provider = _customScopeSwitch.isOn ? [[FIRGoogleAuthUI alloc] initWithScopes:@[kGoogleUserInfoEmailScope,
+                                                                                         kGoogleUserInfoProfileScope,
+                                                                                         kGoogleGamesScope,
+                                                                                         kGooglePlusMeScope]]
+          : [[FIRGoogleAuthUI alloc] init];
           break;
         case kIDPFacebook:
-          [providers addObject:[[FIRFacebookAuthUI alloc] init]];
+          provider = _customScopeSwitch.isOn ? [[FIRFacebookAuthUI alloc] initWithPermissions:@[@"email",
+                                                                                                @"user_friends",
+                                                                                                @"ads_read"]]
+          :[[FIRFacebookAuthUI alloc] init];
           break;
         case kIDPTwitter:
-          [providers addObject:[[FIRTwitterAuthUI alloc] init]];
+          provider = [[FIRTwitterAuthUI alloc] init];
           break;
 
         default:
           break;
       }
+      if (provider) {
+        [providers addObject:provider];
+      }
+
     }
   }
 

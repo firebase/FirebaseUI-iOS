@@ -18,6 +18,26 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/** @var kGoogleGamesScope
+ @brief The OAuth scope string for the "Games" scope.
+ */
+static NSString *const kGoogleGamesScope = @"https://www.googleapis.com/auth/games";
+
+/** @var kGooglePlusMeScope
+ @brief The OAuth scope string for the "plus.me" scope.
+ */
+static NSString *const kGooglePlusMeScope = @"https://www.googleapis.com/auth/plus.me";
+
+/** @var kGooglePlusMeScope
+ @brief The OAuth scope string for the user's email scope.
+ */
+static NSString *const kGoogleUserInfoEmailScope = @"https://www.googleapis.com/auth/userinfo.email";
+
+/** @var kGooglePlusMeScope
+ @brief The OAuth scope string for the basic G+ profile information scope.
+ */
+static NSString *const kGoogleUserInfoProfileScope = @"https://www.googleapis.com/auth/userinfo.profile";
+
 /** @class FIRGoogleAuthUI
     @brief AuthUI components for Google Sign In.
  */
