@@ -60,24 +60,19 @@ class FIRChatViewController: UIViewController, UICollectionViewDelegateFlowLayou
     self.authStateListenerHandle = self.auth?.addStateDidChangeListener { (auth, user) in
       self.user = user
       self.query = self.chatReference.queryLimited(toLast: 50)
-      
-      // The initializer called below--though it takes a collection view--
-      // doesn't actually set the collection view's data source, so if
-      // we don't set it before trying to populate our view our app will crash.
-      self.collectionViewDataSource = FirebaseCollectionViewDataSource(query: self.query!,
-        prototypeReuseIdentifier: FIRChatViewController.reuseIdentifier,
-        view: self.collectionView)
-      self.collectionView.dataSource = self.collectionViewDataSource
-      
-      self.collectionViewDataSource.populateCell { (anyCell, data) in
-        guard let cell = anyCell as? FIRChatCollectionViewCell else {
-          fatalError("Unexpected collection view cell class \(anyCell.self)")
-        }
-        
-        let chat = Chat(snapshot: data as! FIRDataSnapshot)!
+
+      self.collectionViewDataSource =
+        FirebaseCollectionViewDataSource(query: self.query!,
+                                         view: self.collectionView,
+                                         populateCell: { (view, indexPath, snap) -> UICollectionViewCell in
+        let cell = view.dequeueReusableCell(withReuseIdentifier: FIRChatViewController.reuseIdentifier,
+                                            for: indexPath) as! FIRChatCollectionViewCell
+        let chat = Chat(snapshot: snap)!
         cell.populateCellWithChat(chat, user: self.user, maxWidth: self.view.frame.size.width)
-      }
-      
+        return cell
+      })
+      self.collectionView.dataSource = self.collectionViewDataSource
+
       // FirebaseArray has a delegate method `childAdded` that could be used here,
       // but unfortunately FirebaseCollectionViewDataSource uses the FirebaseArray
       // delegate methods to update its own internal state, so in order to scroll
