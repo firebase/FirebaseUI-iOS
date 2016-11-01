@@ -39,17 +39,25 @@
 
 #pragma mark - Initializer methods
 
-- (instancetype)initWithQuery:(FIRDatabaseQuery *)query {
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query delegate:(id<FirebaseArrayDelegate>)delegate {
   NSParameterAssert(query != nil);
   self = [super init];
   if (self) {
     self.snapshots = [NSMutableArray array];
     self.query = query;
     self.handles = [NSMutableSet setWithCapacity:4];
-
+    self.delegate = delegate;
     [self initListeners];
   }
   return self;
+}
+
+- (instancetype)initWithQuery:(id<FIRDataObservable>)query {
+  return [self initWithQuery:query delegate:nil];
+}
+
++ (instancetype)arrayWithQuery:(id<FIRDataObservable>)query {
+  return [[self alloc] initWithQuery:query];
 }
 
 #pragma mark - Memory management methods
@@ -130,6 +138,7 @@
                 toIndex = prevIndex + 1;
             }
         }
+
         [self.snapshots insertObject:snapshot atIndex:toIndex];
 
         if ([self.delegate respondsToSelector:@selector(array:didMoveObject:fromIndex:toIndex:)]) {
