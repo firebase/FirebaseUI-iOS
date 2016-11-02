@@ -50,6 +50,7 @@
                                                       FIRDataSnapshot *))sortDescriptor {
   self = [super init];
   if (self != nil) {
+    _contents = [NSMutableArray array];
     _delegate = delegate;
     _query = query;
     _sortDescriptor = sortDescriptor;
@@ -67,7 +68,14 @@
   FIRDatabaseHandle handle;
   handle = [self.query observeEventType:FIRDataEventTypeChildAdded
          andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
-    [self insertSnapshot:snapshot];
+    NSInteger index = [self insertSnapshot:snapshot];
+    if ([self.delegate respondsToSelector:@selector(array:didAddObject:atIndex:)]) {
+      [self.delegate array:self didAddObject:snapshot atIndex:index];
+    }
+  } withCancelBlock:^(NSError *error) {
+    if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
+      [self.delegate array:self queryCancelledWithError:error];
+    }
   }];
   [_handles addObject:@(handle)];
 
@@ -87,6 +95,10 @@
     NSInteger newIndex = [self insertSnapshot:snapshot];
     if ([self.delegate respondsToSelector:@selector(array:didAddObject:atIndex:)]) {
       [self.delegate array:self didAddObject:snapshot atIndex:newIndex];
+    }
+  } withCancelBlock:^(NSError *error) {
+    if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
+      [self.delegate array:self queryCancelledWithError:error];
     }
   }];
   [_handles addObject:@(handle)];
@@ -141,7 +153,7 @@
 }
 
 - (NSUInteger)count {
-  return self.items.count;
+  return self.contents.count;
 }
 
 - (void)invalidate {
@@ -189,7 +201,8 @@
       continue;
     } else if (left == NSOrderedAscending && right == NSOrderedDescending) {
       // look right
-      index = ((self.contents.count - index) / 2) + index;
+      index = ((self.contents.count - index) / 2) + index + 1;
+      continue;
     } else if (left == NSOrderedDescending && right == NSOrderedDescending) {
       // bad state (array is not sorted to begin with)
       NSAssert(NO, @"FUISortedArray %@'s sort descriptor returned inconsistent results!", self);

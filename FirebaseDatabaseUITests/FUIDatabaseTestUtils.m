@@ -49,8 +49,7 @@
 }
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"%@, key: %@, value: %@",
-          [super description], self.key, self.value];
+  return [NSString stringWithFormat:@"<FUIFakeSnapshot: %p key = %@, value = %@>", self, self.key, self.value];
 }
 @end
 
@@ -219,25 +218,25 @@
 
 @implementation FUIArrayTestDelegate
 
-- (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
+- (void)array:(id<FUICollection>)array didAddObject:(id)object atIndex:(NSUInteger)index {
   if (self.didAddObject != NULL) {
     self.didAddObject(array, object, index);
   }
 }
 
-- (void)array:(FUIArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
+- (void)array:(id<FUICollection>)array didChangeObject:(id)object atIndex:(NSUInteger)index {
   if (self.didChangeObject != NULL) {
     self.didChangeObject(array, object, index);
   }
 }
 
-- (void)array:(FUIArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
+- (void)array:(id<FUICollection>)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
   if (self.didRemoveObject != NULL) {
     self.didRemoveObject(array, object, index);
   }
 }
 
-- (void)array:(FUIArray *)array didMoveObject:(id)object
+- (void)array:(id<FUICollection>)array didMoveObject:(id)object
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   if (self.didMoveObject != NULL) {
     self.didMoveObject(array, object, fromIndex, toIndex);

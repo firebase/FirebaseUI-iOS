@@ -22,8 +22,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FUISortedArray : NSObject <FUICollection>
 
+/**
+ * A copy of the snapshots currently in the array.
+ */
 @property (nonatomic, readonly, copy) NSArray<FIRDataSnapshot *> *items;
 
+/**
+ * The delegate that should receive events from the sorted array.
+ */
 @property (nonatomic, weak, readwrite, nullable) id<FUICollectionDelegate> delegate;
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -35,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param sortDescriptor The closure used by the array to sort its contents. This
  *   block must always return consistent results or the array may raise a fatal error.
  */
-- (instancetype)initWithQuery:(id<FIRDataObservable>)query
+- (instancetype)initWithQuery:(id<FUIDataObservable>)query
                      delegate:(nullable id<FUICollectionDelegate>)delegate
                sortDescriptor:(NSComparisonResult (^)(FIRDataSnapshot *left,
                                                       FIRDataSnapshot *right))sortDescriptor NS_DESIGNATED_INITIALIZER;
