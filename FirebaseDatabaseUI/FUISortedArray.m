@@ -87,9 +87,10 @@
     if (index == NSNotFound) { /* error */ return; }
 
     // Since changes can change ordering, model changes as a deletion and an insertion.
+    FIRDataSnapshot *removed = self.contents[index];
     [self.contents removeObjectAtIndex:index];
     if ([self.delegate respondsToSelector:@selector(array:didRemoveObject:atIndex:)]) {
-      [self.delegate array:self didRemoveObject:snapshot atIndex:index];
+      [self.delegate array:self didRemoveObject:removed atIndex:index];
     }
     
     NSInteger newIndex = [self insertSnapshot:snapshot];
@@ -135,7 +136,7 @@
   // Don't binary search here because we use snapshot keys
   // for equality; sort descriptor block provides the entire
   // snapshot so binary search isn't reliable. i.e. if the
-  // whole array is NSOrderedSame binary search won't work
+  // whole array is NSOrderedSame binary search won't work.
   for (NSInteger index = 0; index < self.contents.count; index++) {
     if ([self.contents[index].key isEqualToString:snapshot.key]) {
       return index;

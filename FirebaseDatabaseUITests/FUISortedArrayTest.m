@@ -54,6 +54,32 @@
   XCTAssertNotNil(self.array, @"expected array to not be nil when initialized");
 }
 
+- (void)testEmptyArrayUpdatesCountOnInsert {
+  // Test delegate
+  __block BOOL delegateWasCalled = NO;
+  __block BOOL expectedParametersWereCorrect = NO;
+  self.arrayDelegate.didAddObject = ^(FUISortedArray *array, id object, NSUInteger index) {
+    // Xcode complains about retain cycles if an XCTAssert is placed in here.
+    delegateWasCalled = YES;
+    expectedParametersWereCorrect = (array == self.array &&
+                                     object == self.snap &&
+                                     index == 0);
+  };
+
+  // Test insert
+  self.snap.key = @"snapshot";
+  [self.observable sendEvent:FIRDataEventTypeChildAdded
+                  withObject:self.snap
+                 previousKey:nil
+                       error:nil];
+  // Array expectations
+  XCTAssert(self.array.count == 1, @"expected empty array to contain one item after insert");
+
+  // Delegate expectations
+  XCTAssert(delegateWasCalled, @"expected delegate to receive callback for insertion");
+  XCTAssert(expectedParametersWereCorrect, @"unexpected parameter in delegate callback");
+}
+
 - (void)testItSortsItselfOnMiddleInsert {
   [self.observable populateWithCount:10];
 
@@ -141,30 +167,52 @@
   XCTAssert(expectedParametersWereCorrect, @"unexpected parameter in delegate callback");
 }
 
-- (void)testEmptyArrayUpdatesCountOnInsert {
-  // Test delegate
-  __block BOOL delegateWasCalled = NO;
-  __block BOOL expectedParametersWereCorrect = NO;
+- (void)testItSortsItselfWhenChangingObjects {
+  [self.observable removeAllObservers];
+  self.array = [[FUISortedArray alloc] initWithQuery:self.observable
+                                            delegate:self.arrayDelegate
+                                      sortDescriptor:^NSComparisonResult(FIRDataSnapshot *left,
+                                                                         FIRDataSnapshot *right) {
+    // sort by value, so that changes can cause moves as well
+    return [left.value compare:right.value];
+  }];
+  [self.array observeQuery];
+  [self.observable populateWithCount:10];
+
+  // Test delegate. Changes in the sorted array are modelled as
+  // a remove and an insert, since changes may cause reordering.
+  __block BOOL removeWasCalled = NO;
+  __block BOOL insertWasCalled = NO;
+  __block BOOL removeParametersWereCorrect = NO;
+  __block BOOL insertParametersWereCorrect = NO;
   self.arrayDelegate.didAddObject = ^(FUISortedArray *array, id object, NSUInteger index) {
     // Xcode complains about retain cycles if an XCTAssert is placed in here.
-    delegateWasCalled = YES;
-    expectedParametersWereCorrect = (array == self.array &&
-                                     object == self.snap &&
-                                     index == 0);
+    insertWasCalled = YES;
+    insertParametersWereCorrect = (array == self.array &&
+                                   object == self.snap &&
+                                   index == 9);
+    NSLog(@"insert: %@", insertParametersWereCorrect ? @"YES" : @"NO");
+  };
+  self.arrayDelegate.didRemoveObject = ^(FUISortedArray *array, id object, NSUInteger index) {
+    removeWasCalled = YES;
+    removeParametersWereCorrect = (array == self.array &&
+                                   index == 2);
+    NSLog(@"remove: %@", removeParametersWereCorrect ? @"YES" : @"NO");
   };
 
-  // Test insert
-  self.snap.key = @"snapshot";
-  [self.observable sendEvent:FIRDataEventTypeChildAdded
+  // Test change
+  self.snap.key = @"2";
+  self.snap.value = @"a";
+  [self.observable sendEvent:FIRDataEventTypeChildChanged
                   withObject:self.snap
-                 previousKey:nil
+                 previousKey:@"1"
                        error:nil];
-  // Array expectations
-  XCTAssert(self.array.count == 1, @"expected empty array to contain one item after insert");
 
   // Delegate expectations
-  XCTAssert(delegateWasCalled, @"expected delegate to receive callback for insertion");
-  XCTAssert(expectedParametersWereCorrect, @"unexpected parameter in delegate callback");
+  XCTAssert(removeWasCalled, @"expected delegate to receive callback for removal");
+  XCTAssert(insertWasCalled, @"expected delegate to receive callback for insertion");
+  XCTAssert(insertParametersWereCorrect, @"unexpected parameter in delegate callback");
+  XCTAssert(removeParametersWereCorrect, @"unexpected parameter in delegate callback");
 }
 
 @end
