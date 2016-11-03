@@ -22,9 +22,9 @@
 #import "FIRCustomAuthUIDelegate.h"
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
-#import <FirebaseFacebookAuthUI/FIRFacebookAuthUI.h>
-#import <FirebaseGoogleAuthUI/FIRGoogleAuthUI.h>
-#import <FirebaseTwitterAuthUI/FIRTwitterAuthUI.h>
+#import <FirebaseFacebookAuthUI/FUIFacebookAuth.h>
+#import <FirebaseGoogleAuthUI/FUIGoogleAuth.h>
+#import <FirebaseTwitterAuthUI/FUITwitterAuth.h>
 
 #import "FIRCustomAuthPickerViewController.h"
 
@@ -47,7 +47,7 @@ typedef enum : NSUInteger {
 
 NSString * const kFirebaseTermsOfService = @"https://firebase.google.com/terms/";
 
-@interface FIRAuthViewController () <FIRAuthUIDelegate>
+@interface FIRAuthViewController () <FUIAuthDelegate>
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellSignIn;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellName;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellEmail;
@@ -58,9 +58,9 @@ NSString * const kFirebaseTermsOfService = @"https://firebase.google.com/terms/"
 @property (weak, nonatomic) IBOutlet UISwitch *customScopeSwitch;
 
 @property (nonatomic) FIRAuth *auth;
-@property (nonatomic) FIRAuthUI *authUI;
+@property (nonatomic) FUIAuth *authUI;
 // retain customAuthUIDelegate so it can be used when needed
-@property (nonatomic) id<FIRAuthUIDelegate> customAuthUIDelegate;
+@property (nonatomic) id<FUIAuthDelegate> customAuthUIDelegate;
 @property (nonatomic, assign) BOOL isCustomAuthDelegateSelected;
 
 @property (nonatomic) FIRAuthStateDidChangeListenerHandle authStateDidChangeHandle;
@@ -80,7 +80,7 @@ NSString * const kFirebaseTermsOfService = @"https://firebase.google.com/terms/"
   self.customAuthUIDelegate = [[FIRCustomAuthUIDelegate alloc] init];
 
   self.auth = [FIRAuth auth];
-  self.authUI = [FIRAuthUI defaultAuthUI];
+  self.authUI = [FUIAuth defaultAuthUI];
 
   self.authUI.TOSURL = [NSURL URLWithString:kFirebaseTermsOfService];
 
@@ -186,12 +186,12 @@ NSString * const kFirebaseTermsOfService = @"https://firebase.google.com/terms/"
   }
 }
 
-#pragma mark - FIRAuthUIDelegate methods
+#pragma mark - FUIAuthDelegate methods
 
 // this method is called only when FIRAuthViewController is delgate of AuthUI
-- (void)authUI:(FIRAuthUI *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error {
+- (void)authUI:(FUIAuth *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error {
   if (error) {
-    if (error.code == FIRAuthUIErrorCodeUserCancelledSignIn) {
+    if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
       [self showAlert:@"User cancelled sign-in"];
     } else {
       NSError *detailedError = error.userInfo[NSUnderlyingErrorKey];
@@ -207,7 +207,7 @@ NSString * const kFirebaseTermsOfService = @"https://firebase.google.com/terms/"
 
 - (NSString *)getAllAccessTokens {
   NSMutableString *result = [NSMutableString new];
-  for (id<FIRAuthProviderUI> provider in _authUI.providers) {
+  for (id<FUIAuthProvider> provider in _authUI.providers) {
     [result appendFormat:@"%@:  %@\n", provider.shortName, provider.accessToken];
   }
 
@@ -216,7 +216,7 @@ NSString * const kFirebaseTermsOfService = @"https://firebase.google.com/terms/"
 
 - (NSString *)getAllIdTokens {
   NSMutableString *result = [NSMutableString new];
-  for (id<FIRAuthProviderUI> provider in _authUI.providers) {
+  for (id<FUIAuthProvider> provider in _authUI.providers) {
     [result appendFormat:@"%@:  %@\n", provider.shortName, provider.idToken];
   }
 
@@ -250,23 +250,23 @@ NSString * const kFirebaseTermsOfService = @"https://firebase.google.com/terms/"
 
   for (NSIndexPath *indexPath in selectedRows) {
     if (indexPath.section == kSectionsProviders) {
-      id<FIRAuthProviderUI> provider;
+      id<FUIAuthProvider> provider;
       switch (indexPath.row) {
         case kIDPGoogle:
-          provider = _customScopeSwitch.isOn ? [[FIRGoogleAuthUI alloc] initWithScopes:@[kGoogleUserInfoEmailScope,
+          provider = _customScopeSwitch.isOn ? [[FUIGoogleAuth alloc] initWithScopes:@[kGoogleUserInfoEmailScope,
                                                                                          kGoogleUserInfoProfileScope,
                                                                                          kGoogleGamesScope,
                                                                                          kGooglePlusMeScope]]
-          : [[FIRGoogleAuthUI alloc] init];
+          : [[FUIGoogleAuth alloc] init];
           break;
         case kIDPFacebook:
-          provider = _customScopeSwitch.isOn ? [[FIRFacebookAuthUI alloc] initWithPermissions:@[@"email",
+          provider = _customScopeSwitch.isOn ? [[FUIFacebookAuth alloc] initWithPermissions:@[@"email",
                                                                                                 @"user_friends",
                                                                                                 @"ads_read"]]
-          :[[FIRFacebookAuthUI alloc] init];
+          :[[FUIFacebookAuth alloc] init];
           break;
         case kIDPTwitter:
-          provider = [[FIRTwitterAuthUI alloc] init];
+          provider = [[FUITwitterAuth alloc] init];
           break;
 
         default:

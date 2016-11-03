@@ -32,7 +32,7 @@
 
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil
-                         authUI:(FIRAuthUI *)authUI
+                         authUI:(FUIAuth *)authUI
                           email:(NSString *_Nullable)email
                   newCredential:(nonnull FIRAuthCredential *)newCredential{
   self = [super initWithNibName:nibNameOrNil

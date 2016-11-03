@@ -19,12 +19,12 @@ import FirebaseAuthUI
 
 @objc(FIRCustomPasswordSignInViewController)
 
-class FIRCustomPasswordSignInViewController: FIRPasswordSignInViewController {
+class FIRCustomPasswordSignInViewController: FUIPasswordSignInViewController {
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var nextButton: UIBarButtonItem!
 
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, authUI: FIRAuthUI, email: String?) {
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, authUI: FUIAuth, email: String?) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil, authUI: authUI, email: email)
 
     emailTextField.text = email

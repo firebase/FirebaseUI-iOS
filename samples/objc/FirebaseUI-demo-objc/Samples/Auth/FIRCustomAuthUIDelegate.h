@@ -19,6 +19,6 @@
 #import <Foundation/Foundation.h>
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
-@interface FIRCustomAuthUIDelegate : NSObject <FIRAuthUIDelegate>
+@interface FIRCustomAuthUIDelegate : NSObject <FUIAuthDelegate>
 
 @end

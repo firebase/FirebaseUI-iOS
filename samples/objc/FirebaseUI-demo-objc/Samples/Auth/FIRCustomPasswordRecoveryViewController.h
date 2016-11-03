@@ -8,6 +8,6 @@
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
-@interface FIRCustomPasswordRecoveryViewController : FIRPasswordRecoveryViewController
+@interface FIRCustomPasswordRecoveryViewController : FUIPasswordRecoveryViewController
 
 @end

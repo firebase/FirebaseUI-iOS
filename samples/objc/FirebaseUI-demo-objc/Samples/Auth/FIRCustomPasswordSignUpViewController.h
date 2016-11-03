@@ -19,6 +19,6 @@
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
-@interface FIRCustomPasswordSignUpViewController : FIRPasswordSignUpViewController
+@interface FIRCustomPasswordSignUpViewController : FUIPasswordSignUpViewController
 
 @end

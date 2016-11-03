@@ -20,14 +20,14 @@ import FirebaseAuth
 
 @objc(FIRCustomPasswordVerificationViewController)
 
-class FIRCustomPasswordVerificationViewController: FIRPasswordVerificationViewController, UITextFieldDelegate {
+class FIRCustomPasswordVerificationViewController: FUIPasswordVerificationViewController, UITextFieldDelegate {
   fileprivate(set) var userEmail: String
 
   @IBOutlet weak var infoLabel: UILabel!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var nextButton: UIBarButtonItem!
 
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, authUI: FIRAuthUI, email: String?, newCredential: FIRAuthCredential) {
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, authUI: FUIAuth, email: String?, newCredential: FIRAuthCredential) {
     userEmail = email ??  ""
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil, authUI: authUI, email: email, newCredential: newCredential)
 

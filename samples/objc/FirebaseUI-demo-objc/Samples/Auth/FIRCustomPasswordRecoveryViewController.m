@@ -18,7 +18,7 @@
 
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil
-                         authUI:(FIRAuthUI *)authUI
+                         authUI:(FUIAuth *)authUI
                           email:(NSString *_Nullable)email {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil authUI:authUI email:email];
 

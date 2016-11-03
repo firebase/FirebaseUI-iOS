@@ -40,7 +40,7 @@
 }
 
 - (BOOL)handleOpenUrl:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication {
-  if ([FIRAuthUI.defaultAuthUI handleOpenURL:url sourceApplication:sourceApplication]) {
+  if ([FUIAuth.defaultAuthUI handleOpenURL:url sourceApplication:sourceApplication]) {
     return YES;
   }
   return NO;

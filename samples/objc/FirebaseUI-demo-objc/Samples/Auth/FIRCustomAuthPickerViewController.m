@@ -20,7 +20,7 @@
 
 @implementation FIRCustomAuthPickerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil authUI:(FIRAuthUI *)authUI {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil authUI:(FUIAuth *)authUI {
 
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil authUI:authUI];
   if (self) {

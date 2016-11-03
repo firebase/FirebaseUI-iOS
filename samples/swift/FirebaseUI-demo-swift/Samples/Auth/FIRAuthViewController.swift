@@ -42,7 +42,7 @@ enum Providers: Int, RawRepresentable {
 
 
 
-/// A view controller displaying a basic sign-in flow using FIRAuthUI.
+/// A view controller displaying a basic sign-in flow using FUIAuth.
 class FIRAuthViewController: UITableViewController {
   // Before running this sample, make sure you've correctly configured
   // the appropriate authentication methods in Firebase console. For more
@@ -52,8 +52,8 @@ class FIRAuthViewController: UITableViewController {
   fileprivate var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
 
   fileprivate(set) var auth: FIRAuth? = FIRAuth.auth()
-  fileprivate(set) var authUI: FIRAuthUI? = FIRAuthUI.default()
-  fileprivate(set) var customAuthUIDelegate: FIRAuthUIDelegate = FIRCustomAuthUIDelegate()
+  fileprivate(set) var authUI: FUIAuth? = FUIAuth.default()
+  fileprivate(set) var customAuthUIDelegate: FUIAuthDelegate = FIRCustomAuthUIDelegate()
 
   @IBOutlet weak var cellSignedIn: UITableViewCell!
   @IBOutlet weak var cellName: UITableViewCell!
@@ -185,27 +185,27 @@ class FIRAuthViewController: UITableViewController {
     return result
   }
 
-  func getListOfIDPs() -> [FIRAuthProviderUI] {
-    var providers = [FIRAuthProviderUI]()
+  func getListOfIDPs() -> [FUIAuthProvider] {
+    var providers = [FUIAuthProvider]()
     if let selectedRows = self.tableView.indexPathsForSelectedRows {
       for indexPath in selectedRows {
         if indexPath.section == UISections.Providers.rawValue {
-          let provider:FIRAuthProviderUI?
+          let provider:FUIAuthProvider?
 
           switch indexPath.row {
           case Providers.Google.rawValue:
-            provider = self.customScopesSwitch.isOn ? FIRGoogleAuthUI(scopes: [kGoogleGamesScope,
+            provider = self.customScopesSwitch.isOn ? FUIGoogleAuth(scopes: [kGoogleGamesScope,
                                                                                kGooglePlusMeScope,
                                                                                kGoogleUserInfoEmailScope,
                                                                                kGoogleUserInfoProfileScope])
-              : FIRGoogleAuthUI()
+              : FUIGoogleAuth()
           case Providers.Twitter.rawValue:
-            provider = FIRTwitterAuthUI()
+            provider = FUITwitterAuth()
           case Providers.Facebook.rawValue:
-            provider = self.customScopesSwitch.isOn ? FIRFacebookAuthUI(permissions: ["email",
+            provider = self.customScopesSwitch.isOn ? FUIFacebookAuth(permissions: ["email",
                                                                                       "user_friends",
                                                                                       "ads_read"])
-              : FIRFacebookAuthUI()
+              : FUIFacebookAuth()
           default: provider = nil
           }
 

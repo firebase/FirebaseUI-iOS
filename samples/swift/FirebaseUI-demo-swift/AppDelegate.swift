@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func handleOpenUrl(_ url: URL, sourceApplication: String?) -> Bool {
-    if FIRAuthUI.default()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+    if FUIAuth.default()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
       return true
     }
     // other URL handling goes here.

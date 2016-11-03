@@ -15,21 +15,21 @@
 //
 
 @import XCTest;
-#import "FIRFacebookAuthUITest.h"
+#import "FUIFacebookAuthTest.h"
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <OCMock/OCMock.h>
 
 @interface FirebaseFacebookAuthUITests : XCTestCase
-@property (nonatomic, strong) FIRFacebookAuthUITest *provider;
+@property (nonatomic, strong) FUIFacebookAuthTest *provider;
 @end
 
 @implementation FirebaseFacebookAuthUITests
 
 - (void)setUp {
   [super setUp];
-  self.provider = [[FIRFacebookAuthUITest alloc] init];
+  self.provider = [[FUIFacebookAuthTest alloc] init];
 }
 
 - (void)tearDown {
@@ -111,7 +111,7 @@
                       completion:^(FIRAuthCredential * _Nullable credential,
                                    NSError * _Nullable error) {
                         XCTAssertNotNil(error);
-                        XCTAssertEqual(error.code, FIRAuthUIErrorCodeUserCancelledSignIn);
+                        XCTAssertEqual(error.code, FUIAuthErrorCodeUserCancelledSignIn);
                         XCTAssertNil(credential);
                         XCTAssertNil(self.provider.idToken);
 
@@ -148,11 +148,11 @@
 
 - (void)testSignOut {
 
-  // used to make possible initialization of FIRFacebookAuthUI
-  id mockProviderClass = OCMClassMock([FIRFacebookAuthUI class]);
+  // used to make possible initialization of FUIFacebookAuth
+  id mockProviderClass = OCMClassMock([FUIFacebookAuth class]);
   OCMExpect(ClassMethod([mockProviderClass frameworkBundle])).andReturn([NSBundle bundleForClass:[self class]]);
 
-  id mockProvider = OCMPartialMock([[FIRFacebookAuthUI alloc] init]);
+  id mockProvider = OCMPartialMock([[FUIFacebookAuth alloc] init]);
   id mockFacebookManager = OCMClassMock([FBSDKLoginManager class]);
 
   // stub login manager

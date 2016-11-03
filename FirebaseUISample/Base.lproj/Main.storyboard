@@ -9,7 +9,7 @@
         <!--FirebaseUI Tests-->
         <scene sceneID="ko7-Ih-knt">
             <objects>
-                <tableViewController id="XS2-ik-A7G" customClass="FIRViewController" sceneMemberID="viewController">
+                <tableViewController id="XS2-ik-A7G" customClass="FUIViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Y77-OR-078">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

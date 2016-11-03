@@ -15,28 +15,28 @@
 //
 
 
-#import "FIRTwitterAuthUI.h"
+#import "FUITwitterAuth.h"
 #import <FirebaseAuth/FirebaseAuth.h>
-#import <FirebaseAuthUI/FIRAuthUIErrorUtils.h>
+#import <FirebaseAuthUI/FUIAuthErrorUtils.h>
 #import <FirebaseTwitterAuthUI/FirebaseTwitterAuthUI.h>
 #import <OCMock/OCMock.h>
 #import <TwitterCore/TwitterCore.h>
 #import <TwitterKit/TwitterKit.h>
 #import <XCTest/XCTest.h>
 
-@interface FIRTwitterAuthUI (Testing)
+@interface FUITwitterAuth (Testing)
 - (Twitter *)getTwitterManager;
 @end
 
 @interface FirebaseTwitterAuthUITests : XCTestCase
-@property (nonatomic, strong) FIRTwitterAuthUI *provider;
+@property (nonatomic, strong) FUITwitterAuth *provider;
 @end
 
 @implementation FirebaseTwitterAuthUITests
 
 - (void)setUp {
   [super setUp];
-  self.provider = [[FIRTwitterAuthUI alloc] init];
+  self.provider = [[FUITwitterAuth alloc] init];
 }
 
 - (void)tearDown {

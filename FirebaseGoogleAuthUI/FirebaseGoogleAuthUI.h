@@ -22,4 +22,4 @@ FOUNDATION_EXPORT double FirebaseGoogleAuthUIVersionNumber;
 //! Project version string for FirebaseGoogleAuthUI.
 FOUNDATION_EXPORT const unsigned char FirebaseGoogleAuthUIVersionString[];
 
-#import <FirebaseGoogleAuthUI/FIRGoogleAuthUI.h>
+#import <FirebaseGoogleAuthUI/FUIGoogleAuth.h>

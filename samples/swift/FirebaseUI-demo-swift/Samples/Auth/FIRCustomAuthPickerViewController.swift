@@ -19,7 +19,7 @@ import FirebaseAuthUI
 
 @objc(FIRCustomAuthPickerViewController)
 
-class FIRCustomAuthPickerViewController: FIRAuthPickerViewController {
+class FIRCustomAuthPickerViewController: FUIAuthPickerViewController {
 
   @IBAction func onClose(_ sender: AnyObject) {
     self.cancelAuthorization()

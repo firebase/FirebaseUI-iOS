@@ -18,6 +18,6 @@
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
-@interface FIRCustomPasswordVerificationViewController : FIRPasswordVerificationViewController
+@interface FIRCustomPasswordVerificationViewController : FUIPasswordVerificationViewController
 
 @end

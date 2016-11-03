@@ -18,6 +18,6 @@
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
-@interface FIRCustomAuthPickerViewController : FIRAuthPickerViewController
+@interface FIRCustomAuthPickerViewController : FUIAuthPickerViewController
 
 @end

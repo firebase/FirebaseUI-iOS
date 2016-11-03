@@ -19,7 +19,7 @@ import FirebaseAuthUI
 
 @objc(FIRCustomEmailEntryViewController)
 
-class FIRCustomEmailEntryViewController: FIREmailEntryViewController, UITextFieldDelegate {
+class FIRCustomEmailEntryViewController: FUIEmailEntryViewController, UITextFieldDelegate {
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var nextButton: UIBarButtonItem!
 
