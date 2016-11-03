@@ -18,7 +18,7 @@
 
 // clang-format on
 
-#import "FirebaseArray.h"
+#import "FUIArray.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

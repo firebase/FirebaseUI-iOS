@@ -21,12 +21,12 @@
 #import "FirebaseIndexArray.h"
 #import "FirebaseQueryObserver.h"
 
-@interface FirebaseIndexArray () <FirebaseArrayDelegate>
+@interface FirebaseIndexArray () <FUIArrayDelegate>
 
 @property (nonatomic, readonly) id<FIRDataObservable> index;
 @property (nonatomic, readonly) id<FIRDataObservable> data;
 
-@property (nonatomic, readonly) FirebaseArray *indexArray;
+@property (nonatomic, readonly) FUIArray *indexArray;
 
 @property (nonatomic, readonly) NSMutableArray<FirebaseQueryObserver *> *observers;
 
@@ -70,7 +70,7 @@
 }
 
 - (void)observeQueries {
-  _indexArray = [[FirebaseArray alloc] initWithQuery:self.index delegate:self];
+  _indexArray = [[FUIArray alloc] initWithQuery:self.index delegate:self];
 }
 
 - (NSArray <FIRDataSnapshot *> *)items {
@@ -125,7 +125,7 @@ didFinishLoadWithSnap:(FIRDataSnapshot *)snap
   }
 }
 
-- (void)array:(FirebaseArray *)array
+- (void)array:(FUIArray *)array
  didAddObject:(FIRDataSnapshot *)object
       atIndex:(NSUInteger)index {
   NSParameterAssert([object.key isKindOfClass:[NSString class]]);
@@ -144,7 +144,7 @@ didFinishLoadWithSnap:(FIRDataSnapshot *)snap
   }
 }
 
-- (void)array:(FirebaseArray *)array
+- (void)array:(FUIArray *)array
 didMoveObject:(FIRDataSnapshot *)object
     fromIndex:(NSUInteger)fromIndex
       toIndex:(NSUInteger)toIndex {
@@ -159,7 +159,7 @@ didMoveObject:(FIRDataSnapshot *)object
   }
 }
 
-- (void)array:(FirebaseArray *)array
+- (void)array:(FUIArray *)array
 didChangeObject:(FIRDataSnapshot *)object
       atIndex:(NSUInteger)index {
   NSParameterAssert([object.key isKindOfClass:[NSString class]]);
@@ -183,7 +183,7 @@ didChangeObject:(FIRDataSnapshot *)object
   }
 }
 
-- (void)array:(FirebaseArray *)array
+- (void)array:(FUIArray *)array
 didRemoveObject:(FIRDataSnapshot *)object
       atIndex:(NSUInteger)index {
   // Cancel loads on old observer
@@ -197,7 +197,7 @@ didRemoveObject:(FIRDataSnapshot *)object
   }
 }
 
-- (void)array:(FirebaseArray *)array queryCancelledWithError:(NSError *)error {
+- (void)array:(FUIArray *)array queryCancelledWithError:(NSError *)error {
   [self invalidate];
   if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
     [self.delegate array:self queryCancelledWithError:error];

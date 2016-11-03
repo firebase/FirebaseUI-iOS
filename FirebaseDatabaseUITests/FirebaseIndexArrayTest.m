@@ -21,7 +21,7 @@
 @import XCTest;
 @import FirebaseDatabaseUI;
 
-#import "FirebaseArrayTestUtils.h"
+#import "FUIDatabaseTestUtils.h"
 #import "FirebaseIndexArray.h"
 
 @interface FirebaseIndexArrayTest : XCTestCase

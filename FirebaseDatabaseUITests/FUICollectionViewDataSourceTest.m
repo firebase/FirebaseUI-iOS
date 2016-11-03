@@ -21,17 +21,17 @@
 @import XCTest;
 @import FirebaseDatabaseUI;
 
-#import "FirebaseArrayTestUtils.h"
+#import "FUIDatabaseTestUtils.h"
 
-static NSString *const kTestReuseIdentifier = @"FirebaseCollectionViewDataSourceTest";
+static NSString *const kTestReuseIdentifier = @"FUICollectionViewDataSourceTest";
 
-@interface FirebaseCollectionViewDataSourceTest : XCTestCase
+@interface FUICollectionViewDataSourceTest : XCTestCase
 @property (nonatomic) UICollectionView *collectionView;
 @property (nonatomic) FUITestObservable *observable;
-@property (nonatomic) FirebaseCollectionViewDataSource *dataSource;
+@property (nonatomic) FUICollectionViewDataSource *dataSource;
 @end
 
-@implementation FirebaseCollectionViewDataSourceTest
+@implementation FUICollectionViewDataSourceTest
 
 - (void)setUp {
   [super setUp];

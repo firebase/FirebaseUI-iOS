@@ -18,20 +18,20 @@
 
 // clang-format on
 
-#import "FirebaseCollectionViewDataSource.h"
+#import "FUICollectionViewDataSource.h"
 
 @import FirebaseDatabase;
 
-@implementation FirebaseCollectionViewDataSource
+@implementation FUICollectionViewDataSource
 
-#pragma mark - FirebaseDataSource initializer methods
+#pragma mark - FUIDataSource initializer methods
 
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
                          view:(UICollectionView *)collectionView
                  populateCell:(UICollectionViewCell *(^)(UICollectionView *,
                                                          NSIndexPath *,
                                                          FIRDataSnapshot *))populateCell {
-  FirebaseArray *array = [[FirebaseArray alloc] initWithQuery:query];
+  FUIArray *array = [[FUIArray alloc] initWithQuery:query];
   self = [super initWithArray:array];
   if (self) {
     _collectionView = collectionView;
@@ -40,24 +40,24 @@
   return self;
 }
 
-#pragma mark - FirebaseArrayDelegate methods
+#pragma mark - FUIArrayDelegate methods
 
-- (void)array:(FirebaseArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
+- (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
   [self.collectionView
       insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
-- (void)array:(FirebaseArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
+- (void)array:(FUIArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
   [self.collectionView
       reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
-- (void)array:(FirebaseArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
+- (void)array:(FUIArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
   [self.collectionView
       deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
-- (void)array:(FirebaseArray *)array didMoveObject:(id)object
+- (void)array:(FUIArray *)array didMoveObject:(id)object
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForItem:fromIndex inSection:0]
                                toIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]];
@@ -85,14 +85,14 @@
 
 @end
 
-@implementation UICollectionView (FirebaseCollectionViewDataSource)
+@implementation UICollectionView (FUICollectionViewDataSource)
 
-- (FirebaseCollectionViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
-                                     populateCell:(UICollectionViewCell *(^)(UICollectionView *,
-                                                                             NSIndexPath *,
-                                                                             FIRDataSnapshot *))populateCell {
-  FirebaseCollectionViewDataSource *dataSource =
-    [[FirebaseCollectionViewDataSource alloc] initWithQuery:query view:self populateCell:populateCell];
+- (FUICollectionViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
+                                populateCell:(UICollectionViewCell *(^)(UICollectionView *,
+                                                                        NSIndexPath *,
+                                                                        FIRDataSnapshot *))populateCell {
+  FUICollectionViewDataSource *dataSource =
+    [[FUICollectionViewDataSource alloc] initWithQuery:query view:self populateCell:populateCell];
   self.dataSource = dataSource;
   return dataSource;
 }

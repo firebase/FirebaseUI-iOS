@@ -20,7 +20,7 @@
 @import FirebaseDatabaseUI;
 
 #import "FirebaseIndexCollectionViewDataSource.h"
-#import "FirebaseArrayTestUtils.h"
+#import "FUIDatabaseTestUtils.h"
 
 static NSString *const kTestReuseIdentifier = @"FirebaseIndexCollectionViewDataSourceTest";
 

@@ -14,9 +14,8 @@
 //  limitations under the License.
 //
 
-#import <FirebaseDatabaseUI/FirebaseTableViewDataSource.h>
+#import <FirebaseDatabaseUI/FUITableViewDataSource.h>
 
-@interface FIRChatMessageDataSource : FirebaseTableViewDataSource
+@interface FIRChatMessageDataSource : FUITableViewDataSource
 
 @end
-

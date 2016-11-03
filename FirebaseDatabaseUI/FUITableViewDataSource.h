@@ -20,25 +20,19 @@
 
 @import UIKit;
 
-#import "FirebaseDataSource.h"
+#import "FUIDataSource.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class FIRDatabaseReference;
 
 /**
- * FirebaseTableViewDataSource provides an class that conforms to the
+ * FUITableViewDataSource provides a class that conforms to the
  * UITableViewDataSource protocol which allows UITableViews to implement
- * FirebaseTableViewDataSource in order to provide a UITableView synchronized
- * to a Firebase reference or query. In addition to handling all Firebase
- * child events (added, changed, removed, moved), FirebaseTableViewDataSource
- * handles UITableViewCell creation, either with the default UITableViewCell,
- * prototype cells, custom UITableViewCell subclasses, or custom XIBs, and
- * provides a simple [FirebaseTableViewDataSource populateCellWithBlock:]
- * method which allows developers to populate the cells created for them
- * with desired data from Firebase.
+ * FUITableViewDataSource in order to provide a UITableView synchronized
+ * to a Firebase reference or query.
  */
-@interface FirebaseTableViewDataSource : FirebaseDataSource<UITableViewDataSource>
+@interface FUITableViewDataSource : FUIDataSource<UITableViewDataSource>
 
 /**
  * The UITableView instance that operations (inserts, removals, moves, etc.) are
@@ -53,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
   (UITableView *tableView, NSIndexPath *indexPath, FIRDataSnapshot *snap);
 
 /**
- * Initialize an instance of FirebaseTableViewDataSource.
+ * Initialize an instance of FUITableViewDataSource.
  * @param query A Firebase query to bind the data source to.
  * @param tableView An instance of a UITableView to bind to. This view is
  *   not retained by the data source.
@@ -61,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
  *   table view cells and populate their content. This closure is retained
  *   by the data source, so if you capture self in the closure and also claim ownership
  *   of the data source, be sure to avoid retain cycles by capturing a weak reference to self.
- * @return An instance of FirebaseTableViewDataSource.
+ * @return An instance of FUITableViewDataSource.
  */
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
                          view:(UITableView *)tableView
@@ -69,11 +63,11 @@ NS_ASSUME_NONNULL_BEGIN
                                                     NSIndexPath *indexPath,
                                                     FIRDataSnapshot *object))populateCell NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithArray:(FirebaseArray *)array NS_UNAVAILABLE;
+- (instancetype)initWithArray:(FUIArray *)array NS_UNAVAILABLE;
 
 @end
 
-@interface UITableView (FirebaseTableViewDataSource)
+@interface UITableView (FUITableViewDataSource)
 
 /**
  * Creates a data source, attaches it to the table view, and returns it.
@@ -86,10 +80,10 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The created data source. This value must be retained while the table
  *   view is in use.
  */
-- (FirebaseTableViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
-                                populateCell:(UITableViewCell *(^)(UITableView *tableView,
-                                                                   NSIndexPath *indexPath,
-                                                                   FIRDataSnapshot *object))populateCell __attribute__((warn_unused_result));
+- (FUITableViewDataSource *)bindToQuery:(FIRDatabaseQuery *)query
+                           populateCell:(UITableViewCell *(^)(UITableView *tableView,
+                                                              NSIndexPath *indexPath,
+                                                              FIRDataSnapshot *object))populateCell __attribute__((warn_unused_result));
 
 @end
 

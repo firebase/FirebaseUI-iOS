@@ -21,17 +21,17 @@
 @import XCTest;
 @import FirebaseDatabaseUI;
 
-#import "FirebaseArrayTestUtils.h"
+#import "FUIDatabaseTestUtils.h"
 
-static NSString *const kTestReuseIdentifier = @"FirebaseTableViewDataSourceTest";
+static NSString *const kTestReuseIdentifier = @"FUITableViewDataSourceTest";
 
-@interface FirebaseTableViewDataSourceTest : XCTestCase
+@interface FUITableViewDataSourceTest : XCTestCase
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) FUITestObservable *observable;
-@property (nonatomic) FirebaseTableViewDataSource *dataSource;
+@property (nonatomic) FUITableViewDataSource *dataSource;
 @end
 
-@implementation FirebaseTableViewDataSourceTest
+@implementation FUITableViewDataSourceTest
 
 - (void)setUp {
   [super setUp];
@@ -40,7 +40,7 @@ static NSString *const kTestReuseIdentifier = @"FirebaseTableViewDataSourceTest"
                                                 style:UITableViewStylePlain];
   [self.tableView registerClass:[UITableViewCell class]
          forCellReuseIdentifier:kTestReuseIdentifier];
-  
+
   self.observable = [[FUITestObservable alloc] init];
   // Horrible abuse of type system, knowing that the initializer passes the observable straight to
   // FirebaseArray anyway.
@@ -70,7 +70,7 @@ static NSString *const kTestReuseIdentifier = @"FirebaseTableViewDataSourceTest"
 - (void)testItPopulatesCells {
   UITableViewCell *cell = [self.dataSource tableView:self.tableView
                                cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
-  
+
   XCTAssert([cell.accessibilityValue isEqualToString:@"5"], @"expected cell to have accessibility label \
             equal to its indexpath row (5), but instead got %@", cell.accessibilityValue);
 }
@@ -79,7 +79,7 @@ static NSString *const kTestReuseIdentifier = @"FirebaseTableViewDataSourceTest"
   FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] init];
   snap.key = @"inserted";
   [self.observable sendEvent:FIRDataEventTypeChildAdded withObject:snap previousKey:@"9" error:nil];
-  
+
   UITableViewCell *cell = [self.dataSource tableView:self.tableView
                                cellForRowAtIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]];
   XCTAssert([cell.accessibilityValue isEqualToString:snap.key], @"expected inserted element to be last \
@@ -90,7 +90,7 @@ static NSString *const kTestReuseIdentifier = @"FirebaseTableViewDataSourceTest"
   FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] init];
   snap.key = @"9";
   [self.observable sendEvent:FIRDataEventTypeChildRemoved withObject:snap previousKey:@"8" error:nil];
-  
+
   UITableViewCell *cell = [self.dataSource tableView:self.tableView
                                cellForRowAtIndexPath:[NSIndexPath indexPathForRow:8 inSection:0]];
   XCTAssert([cell.accessibilityValue isEqualToString:@"8"], @"expected second-to-last element to be last \

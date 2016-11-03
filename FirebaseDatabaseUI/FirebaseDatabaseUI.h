@@ -22,11 +22,11 @@ FOUNDATION_EXPORT double FirebaseDatabaseUIVersionNumber;
 //! Project version string for FirebaseDatabaseUI.
 FOUNDATION_EXPORT const unsigned char FirebaseDatabaseUIVersionString[];
 
-#import <FirebaseDatabaseUI/FirebaseArray.h>
-#import <FirebaseDatabaseUI/FirebaseArrayDelegate.h>
-#import <FirebaseDatabaseUI/FirebaseCollectionViewDataSource.h>
-#import <FirebaseDatabaseUI/FirebaseDataSource.h>
-#import <FirebaseDatabaseUI/FirebaseTableViewDataSource.h>
 #import <FirebaseDatabaseUI/FirebaseIndexArray.h>
 #import <FirebaseDatabaseUI/FirebaseIndexTableViewDataSource.h>
 #import <FirebaseDatabaseUI/FirebaseIndexCollectionViewDataSource.h>
+#import <FirebaseDatabaseUI/FUIArray.h>
+#import <FirebaseDatabaseUI/FUIArrayDelegate.h>
+#import <FirebaseDatabaseUI/FUICollectionViewDataSource.h>
+#import <FirebaseDatabaseUI/FUIDataSource.h>
+#import <FirebaseDatabaseUI/FUITableViewDataSource.h>

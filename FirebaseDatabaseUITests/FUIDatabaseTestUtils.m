@@ -18,7 +18,7 @@
 
 // clang-format on
 
-#import "FirebaseArrayTestUtils.h"
+#import "FUIDatabaseTestUtils.h"
 
 @import Foundation;
 
@@ -217,34 +217,34 @@
 
 @end
 
-@implementation FUIFirebaseArrayTestDelegate
+@implementation FUIArrayTestDelegate
 
-- (void)array:(FirebaseArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
+- (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
   if (self.didAddObject != NULL) {
     self.didAddObject(array, object, index);
   }
 }
 
-- (void)array:(FirebaseArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
+- (void)array:(FUIArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
   if (self.didChangeObject != NULL) {
     self.didChangeObject(array, object, index);
   }
 }
 
-- (void)array:(FirebaseArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
+- (void)array:(FUIArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
   if (self.didRemoveObject != NULL) {
     self.didRemoveObject(array, object, index);
   }
 }
 
-- (void)array:(FirebaseArray *)array didMoveObject:(id)object
+- (void)array:(FUIArray *)array didMoveObject:(id)object
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   if (self.didMoveObject != NULL) {
     self.didMoveObject(array, object, fromIndex, toIndex);
   }
 }
 
-- (void)array:(FirebaseArray *)array queryCancelledWithError:(NSError *)error {
+- (void)array:(FUIArray *)array queryCancelledWithError:(NSError *)error {
   if (self.queryCancelled != NULL) {
     self.queryCancelled(array, error);
   }

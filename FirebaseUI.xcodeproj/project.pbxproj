@@ -25,15 +25,15 @@
 		8D924C641DA6F77700C4DA48 /* FirebaseQueryObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D924C621DA6F77700C4DA48 /* FirebaseQueryObserver.h */; };
 		8D924C651DA6F77700C4DA48 /* FirebaseQueryObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D924C631DA6F77700C4DA48 /* FirebaseQueryObserver.m */; };
 		8D924C661DA6F77700C4DA48 /* FirebaseQueryObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D924C631DA6F77700C4DA48 /* FirebaseQueryObserver.m */; };
-		8DA9413E1D678DEB00CD3685 /* FirebaseArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA941391D678DEB00CD3685 /* FirebaseArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DA9413F1D678DEB00CD3685 /* FirebaseArrayDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413A1D678DEB00CD3685 /* FirebaseArrayDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DA941401D678DEB00CD3685 /* FirebaseCollectionViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413B1D678DEB00CD3685 /* FirebaseCollectionViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DA941411D678DEB00CD3685 /* FirebaseDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413C1D678DEB00CD3685 /* FirebaseDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DA941421D678DEB00CD3685 /* FirebaseTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413D1D678DEB00CD3685 /* FirebaseTableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DA941471D678E3200CD3685 /* FirebaseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941431D678E3200CD3685 /* FirebaseArray.m */; };
-		8DA941481D678E3200CD3685 /* FirebaseCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941441D678E3200CD3685 /* FirebaseCollectionViewDataSource.m */; };
-		8DA941491D678E3200CD3685 /* FirebaseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941451D678E3200CD3685 /* FirebaseDataSource.m */; };
-		8DA9414A1D678E3200CD3685 /* FirebaseTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941461D678E3200CD3685 /* FirebaseTableViewDataSource.m */; };
+		8DA9413E1D678DEB00CD3685 /* FUIArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA941391D678DEB00CD3685 /* FUIArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8DA9413F1D678DEB00CD3685 /* FUIArrayDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413A1D678DEB00CD3685 /* FUIArrayDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8DA941401D678DEB00CD3685 /* FUICollectionViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413B1D678DEB00CD3685 /* FUICollectionViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8DA941411D678DEB00CD3685 /* FUIDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413C1D678DEB00CD3685 /* FUIDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8DA941421D678DEB00CD3685 /* FUITableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413D1D678DEB00CD3685 /* FUITableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8DA941471D678E3200CD3685 /* FUIArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941431D678E3200CD3685 /* FUIArray.m */; };
+		8DA941481D678E3200CD3685 /* FUICollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941441D678E3200CD3685 /* FUICollectionViewDataSource.m */; };
+		8DA941491D678E3200CD3685 /* FUIDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941451D678E3200CD3685 /* FUIDataSource.m */; };
+		8DA9414A1D678E3200CD3685 /* FUITableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941461D678E3200CD3685 /* FUITableViewDataSource.m */; };
 		8DA941721D678F5400CD3685 /* FIRAuthPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9414B1D678F5400CD3685 /* FIRAuthPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DA941731D678F5400CD3685 /* FIRAuthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA9414C1D678F5400CD3685 /* FIRAuthPickerViewController.m */; };
 		8DA941741D678F5400CD3685 /* FIRAuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9414D1D678F5400CD3685 /* FIRAuthPickerViewController.xib */; };
@@ -95,16 +95,16 @@
 		8DA941DF1D6793EE00CD3685 /* ic_facebook@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DC1D6793EE00CD3685 /* ic_facebook@3x.png */; };
 		8DA941E31D67940100CD3685 /* FirebaseFacebookAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941E11D67940100CD3685 /* FirebaseFacebookAuthUI.strings */; };
 		8DA941E81D67945100CD3685 /* FirebaseAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941E61D67945100CD3685 /* FirebaseAuthUI.strings */; };
-		8DA941EE1D67951B00CD3685 /* FirebaseArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941E91D67951B00CD3685 /* FirebaseArrayTest.m */; };
-		8DA941EF1D67951B00CD3685 /* FirebaseArrayTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941EB1D67951B00CD3685 /* FirebaseArrayTestUtils.m */; };
-		8DA941F01D67951B00CD3685 /* FirebaseCollectionViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941EC1D67951B00CD3685 /* FirebaseCollectionViewDataSourceTest.m */; };
-		8DA941F11D67951B00CD3685 /* FirebaseTableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941ED1D67951B00CD3685 /* FirebaseTableViewDataSourceTest.m */; };
+		8DA941EE1D67951B00CD3685 /* FUIArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941E91D67951B00CD3685 /* FUIArrayTest.m */; };
+		8DA941EF1D67951B00CD3685 /* FUIDatabaseTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941EB1D67951B00CD3685 /* FUIDatabaseTestUtils.m */; };
+		8DA941F01D67951B00CD3685 /* FUICollectionViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941EC1D67951B00CD3685 /* FUICollectionViewDataSourceTest.m */; };
+		8DA941F11D67951B00CD3685 /* FUITableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941ED1D67951B00CD3685 /* FUITableViewDataSourceTest.m */; };
 		8DAF8BF61D89CC5300B251C7 /* FIRAuthUITest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAF8BF41D89CC5300B251C7 /* FIRAuthUITest.m */; };
 		8DAF8BF71D89CC5300B251C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DAF8BF51D89CC5300B251C7 /* GoogleService-Info.plist */; };
-		8DBA0F7F1D872E4300D113D3 /* FirebaseArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941431D678E3200CD3685 /* FirebaseArray.m */; };
-		8DBA0F801D872E4700D113D3 /* FirebaseCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941441D678E3200CD3685 /* FirebaseCollectionViewDataSource.m */; };
-		8DBA0F811D872E4B00D113D3 /* FirebaseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941451D678E3200CD3685 /* FirebaseDataSource.m */; };
-		8DBA0F821D872E4E00D113D3 /* FirebaseTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941461D678E3200CD3685 /* FirebaseTableViewDataSource.m */; };
+		8DBA0F7F1D872E4300D113D3 /* FUIArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941431D678E3200CD3685 /* FUIArray.m */; };
+		8DBA0F801D872E4700D113D3 /* FUICollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941441D678E3200CD3685 /* FUICollectionViewDataSource.m */; };
+		8DBA0F811D872E4B00D113D3 /* FUIDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941451D678E3200CD3685 /* FUIDataSource.m */; };
+		8DBA0F821D872E4E00D113D3 /* FUITableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941461D678E3200CD3685 /* FUITableViewDataSource.m */; };
 		8DBA0F831D872E7A00D113D3 /* FIRAuthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA9414C1D678F5400CD3685 /* FIRAuthPickerViewController.m */; };
 		8DBA0F841D872E8C00D113D3 /* FIRAuthUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941511D678F5400CD3685 /* FIRAuthUI.m */; };
 		8DBA0F851D872E9000D113D3 /* FIRAuthUIBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941531D678F5400CD3685 /* FIRAuthUIBaseViewController.m */; };
@@ -368,15 +368,15 @@
 		8D924C601DA6F69100C4DA48 /* FirebaseIndexArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseIndexArrayTest.m; sourceTree = "<group>"; };
 		8D924C621DA6F77700C4DA48 /* FirebaseQueryObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseQueryObserver.h; sourceTree = "<group>"; };
 		8D924C631DA6F77700C4DA48 /* FirebaseQueryObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseQueryObserver.m; sourceTree = "<group>"; };
-		8DA941391D678DEB00CD3685 /* FirebaseArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseArray.h; sourceTree = "<group>"; };
-		8DA9413A1D678DEB00CD3685 /* FirebaseArrayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseArrayDelegate.h; sourceTree = "<group>"; };
-		8DA9413B1D678DEB00CD3685 /* FirebaseCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseCollectionViewDataSource.h; sourceTree = "<group>"; };
-		8DA9413C1D678DEB00CD3685 /* FirebaseDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseDataSource.h; sourceTree = "<group>"; };
-		8DA9413D1D678DEB00CD3685 /* FirebaseTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseTableViewDataSource.h; sourceTree = "<group>"; };
-		8DA941431D678E3200CD3685 /* FirebaseArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseArray.m; sourceTree = "<group>"; };
-		8DA941441D678E3200CD3685 /* FirebaseCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseCollectionViewDataSource.m; sourceTree = "<group>"; };
-		8DA941451D678E3200CD3685 /* FirebaseDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseDataSource.m; sourceTree = "<group>"; };
-		8DA941461D678E3200CD3685 /* FirebaseTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseTableViewDataSource.m; sourceTree = "<group>"; };
+		8DA941391D678DEB00CD3685 /* FUIArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIArray.h; sourceTree = "<group>"; };
+		8DA9413A1D678DEB00CD3685 /* FUIArrayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIArrayDelegate.h; sourceTree = "<group>"; };
+		8DA9413B1D678DEB00CD3685 /* FUICollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICollectionViewDataSource.h; sourceTree = "<group>"; };
+		8DA9413C1D678DEB00CD3685 /* FUIDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIDataSource.h; sourceTree = "<group>"; };
+		8DA9413D1D678DEB00CD3685 /* FUITableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUITableViewDataSource.h; sourceTree = "<group>"; };
+		8DA941431D678E3200CD3685 /* FUIArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIArray.m; sourceTree = "<group>"; };
+		8DA941441D678E3200CD3685 /* FUICollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICollectionViewDataSource.m; sourceTree = "<group>"; };
+		8DA941451D678E3200CD3685 /* FUIDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIDataSource.m; sourceTree = "<group>"; };
+		8DA941461D678E3200CD3685 /* FUITableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUITableViewDataSource.m; sourceTree = "<group>"; };
 		8DA9414B1D678F5400CD3685 /* FIRAuthPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRAuthPickerViewController.h; sourceTree = "<group>"; };
 		8DA9414C1D678F5400CD3685 /* FIRAuthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRAuthPickerViewController.m; sourceTree = "<group>"; };
 		8DA9414D1D678F5400CD3685 /* FIRAuthPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRAuthPickerViewController.xib; sourceTree = "<group>"; };
@@ -438,11 +438,11 @@
 		8DA941DC1D6793EE00CD3685 /* ic_facebook@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_facebook@3x.png"; path = "Resources/ic_facebook@3x.png"; sourceTree = "<group>"; };
 		8DA941E21D67940100CD3685 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Strings/en.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
 		8DA941E71D67945100CD3685 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Strings/en.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
-		8DA941E91D67951B00CD3685 /* FirebaseArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseArrayTest.m; sourceTree = "<group>"; };
-		8DA941EA1D67951B00CD3685 /* FirebaseArrayTestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseArrayTestUtils.h; sourceTree = "<group>"; };
-		8DA941EB1D67951B00CD3685 /* FirebaseArrayTestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseArrayTestUtils.m; sourceTree = "<group>"; };
-		8DA941EC1D67951B00CD3685 /* FirebaseCollectionViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseCollectionViewDataSourceTest.m; sourceTree = "<group>"; };
-		8DA941ED1D67951B00CD3685 /* FirebaseTableViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseTableViewDataSourceTest.m; sourceTree = "<group>"; };
+		8DA941E91D67951B00CD3685 /* FUIArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIArrayTest.m; sourceTree = "<group>"; };
+		8DA941EA1D67951B00CD3685 /* FUIDatabaseTestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIDatabaseTestUtils.h; sourceTree = "<group>"; };
+		8DA941EB1D67951B00CD3685 /* FUIDatabaseTestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIDatabaseTestUtils.m; sourceTree = "<group>"; };
+		8DA941EC1D67951B00CD3685 /* FUICollectionViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICollectionViewDataSourceTest.m; sourceTree = "<group>"; };
+		8DA941ED1D67951B00CD3685 /* FUITableViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUITableViewDataSourceTest.m; sourceTree = "<group>"; };
 		8DAF8BF41D89CC5300B251C7 /* FIRAuthUITest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRAuthUITest.m; sourceTree = "<group>"; };
 		8DAF8BF51D89CC5300B251C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8DBA0F4F1D872E1C00D113D3 /* libDatabase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDatabase.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -826,8 +826,8 @@
 		8DA941F21D67952100CD3685 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				8DA941EA1D67951B00CD3685 /* FirebaseArrayTestUtils.h */,
-				8DA941EB1D67951B00CD3685 /* FirebaseArrayTestUtils.m */,
+				8DA941EA1D67951B00CD3685 /* FUIDatabaseTestUtils.h */,
+				8DA941EB1D67951B00CD3685 /* FUIDatabaseTestUtils.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -836,9 +836,6 @@
 			isa = PBXGroup;
 			children = (
 				8DCC4FA71D678CC400B0D3C4 /* FirebaseDatabaseUI.h */,
-				8DA941391D678DEB00CD3685 /* FirebaseArray.h */,
-				8DA9413A1D678DEB00CD3685 /* FirebaseArrayDelegate.h */,
-				8DA941431D678E3200CD3685 /* FirebaseArray.m */,
 				8D924C5B1DA6F67E00C4DA48 /* FirebaseIndexArray.h */,
 				8D924C5C1DA6F67E00C4DA48 /* FirebaseIndexArray.m */,
 				8D924C621DA6F77700C4DA48 /* FirebaseQueryObserver.h */,
@@ -847,12 +844,15 @@
 				8DFA90411DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.m */,
 				8DFA90451DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.h */,
 				8DFA90461DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.m */,
-				8DA9413B1D678DEB00CD3685 /* FirebaseCollectionViewDataSource.h */,
-				8DA941441D678E3200CD3685 /* FirebaseCollectionViewDataSource.m */,
-				8DA9413C1D678DEB00CD3685 /* FirebaseDataSource.h */,
-				8DA941451D678E3200CD3685 /* FirebaseDataSource.m */,
-				8DA9413D1D678DEB00CD3685 /* FirebaseTableViewDataSource.h */,
-				8DA941461D678E3200CD3685 /* FirebaseTableViewDataSource.m */,
+				8DA941391D678DEB00CD3685 /* FUIArray.h */,
+				8DA9413A1D678DEB00CD3685 /* FUIArrayDelegate.h */,
+				8DA941431D678E3200CD3685 /* FUIArray.m */,
+				8DA9413B1D678DEB00CD3685 /* FUICollectionViewDataSource.h */,
+				8DA941441D678E3200CD3685 /* FUICollectionViewDataSource.m */,
+				8DA9413C1D678DEB00CD3685 /* FUIDataSource.h */,
+				8DA941451D678E3200CD3685 /* FUIDataSource.m */,
+				8DA9413D1D678DEB00CD3685 /* FUITableViewDataSource.h */,
+				8DA941461D678E3200CD3685 /* FUITableViewDataSource.m */,
 				8DCC4FA91D678CC400B0D3C4 /* Info.plist */,
 			);
 			path = FirebaseDatabaseUI;
@@ -863,12 +863,12 @@
 			children = (
 				8DCC4FB51D678CC400B0D3C4 /* Info.plist */,
 				8DA941F21D67952100CD3685 /* Helpers */,
-				8DA941E91D67951B00CD3685 /* FirebaseArrayTest.m */,
 				8D924C601DA6F69100C4DA48 /* FirebaseIndexArrayTest.m */,
-				8DA941EC1D67951B00CD3685 /* FirebaseCollectionViewDataSourceTest.m */,
-				8DA941ED1D67951B00CD3685 /* FirebaseTableViewDataSourceTest.m */,
 				8D1E107B1DAEB97300AEFCA0 /* FirebaseIndexTableViewDataSourceTest.m */,
 				8D01FC7A1DAEC2FF00BD7848 /* FirebaseIndexCollectionViewDataSourceTest.m */,
+				8DA941E91D67951B00CD3685 /* FUIArrayTest.m */,
+				8DA941EC1D67951B00CD3685 /* FUICollectionViewDataSourceTest.m */,
+				8DA941ED1D67951B00CD3685 /* FUITableViewDataSourceTest.m */,
 			);
 			path = FirebaseDatabaseUITests;
 			sourceTree = "<group>";
@@ -1095,14 +1095,14 @@
 			files = (
 				8D924C5D1DA6F67E00C4DA48 /* FirebaseIndexArray.h in Headers */,
 				8DCC4FA81D678CC400B0D3C4 /* FirebaseDatabaseUI.h in Headers */,
-				8DA9413E1D678DEB00CD3685 /* FirebaseArray.h in Headers */,
 				8DFA90421DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.h in Headers */,
-				8DA941401D678DEB00CD3685 /* FirebaseCollectionViewDataSource.h in Headers */,
 				8D924C641DA6F77700C4DA48 /* FirebaseQueryObserver.h in Headers */,
 				8DFA90471DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.h in Headers */,
-				8DA941421D678DEB00CD3685 /* FirebaseTableViewDataSource.h in Headers */,
-				8DA9413F1D678DEB00CD3685 /* FirebaseArrayDelegate.h in Headers */,
-				8DA941411D678DEB00CD3685 /* FirebaseDataSource.h in Headers */,
+				8DA9413E1D678DEB00CD3685 /* FUIArray.h in Headers */,
+				8DA941401D678DEB00CD3685 /* FUICollectionViewDataSource.h in Headers */,
+				8DA941421D678DEB00CD3685 /* FUITableViewDataSource.h in Headers */,
+				8DA9413F1D678DEB00CD3685 /* FUIArrayDelegate.h in Headers */,
+				8DA941411D678DEB00CD3685 /* FUIDataSource.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1844,13 +1844,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D924C5F1DA6F67E00C4DA48 /* FirebaseIndexArray.m in Sources */,
-				8DBA0F801D872E4700D113D3 /* FirebaseCollectionViewDataSource.m in Sources */,
-				8DBA0F7F1D872E4300D113D3 /* FirebaseArray.m in Sources */,
 				8DFA90441DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.m in Sources */,
-				8DBA0F811D872E4B00D113D3 /* FirebaseDataSource.m in Sources */,
 				8DFA90491DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.m in Sources */,
-				8DBA0F821D872E4E00D113D3 /* FirebaseTableViewDataSource.m in Sources */,
 				8D924C661DA6F77700C4DA48 /* FirebaseQueryObserver.m in Sources */,
+				8DBA0F801D872E4700D113D3 /* FUICollectionViewDataSource.m in Sources */,
+				8DBA0F7F1D872E4300D113D3 /* FUIArray.m in Sources */,
+				8DBA0F811D872E4B00D113D3 /* FUIDataSource.m in Sources */,
+				8DBA0F821D872E4E00D113D3 /* FUITableViewDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1897,13 +1897,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D924C5E1DA6F67E00C4DA48 /* FirebaseIndexArray.m in Sources */,
-				8DA941481D678E3200CD3685 /* FirebaseCollectionViewDataSource.m in Sources */,
-				8DA941471D678E3200CD3685 /* FirebaseArray.m in Sources */,
 				8DFA90431DAC1DAC003B5E10 /* FirebaseIndexTableViewDataSource.m in Sources */,
-				8DA941491D678E3200CD3685 /* FirebaseDataSource.m in Sources */,
 				8DFA90481DAC54DD003B5E10 /* FirebaseIndexCollectionViewDataSource.m in Sources */,
-				8DA9414A1D678E3200CD3685 /* FirebaseTableViewDataSource.m in Sources */,
 				8D924C651DA6F77700C4DA48 /* FirebaseQueryObserver.m in Sources */,
+				8DA941481D678E3200CD3685 /* FUICollectionViewDataSource.m in Sources */,
+				8DA941471D678E3200CD3685 /* FUIArray.m in Sources */,
+				8DA941491D678E3200CD3685 /* FUIDataSource.m in Sources */,
+				8DA9414A1D678E3200CD3685 /* FUITableViewDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1911,13 +1911,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DA941F01D67951B00CD3685 /* FirebaseCollectionViewDataSourceTest.m in Sources */,
-				8DA941F11D67951B00CD3685 /* FirebaseTableViewDataSourceTest.m in Sources */,
 				8D01FC7B1DAEC2FF00BD7848 /* FirebaseIndexCollectionViewDataSourceTest.m in Sources */,
 				8D1E107C1DAEB97300AEFCA0 /* FirebaseIndexTableViewDataSourceTest.m in Sources */,
-				8DA941EF1D67951B00CD3685 /* FirebaseArrayTestUtils.m in Sources */,
 				8D924C611DA6F69100C4DA48 /* FirebaseIndexArrayTest.m in Sources */,
-				8DA941EE1D67951B00CD3685 /* FirebaseArrayTest.m in Sources */,
+				8DA941F01D67951B00CD3685 /* FUICollectionViewDataSourceTest.m in Sources */,
+				8DA941F11D67951B00CD3685 /* FUITableViewDataSourceTest.m in Sources */,
+				8DA941EF1D67951B00CD3685 /* FUIDatabaseTestUtils.m in Sources */,
+				8DA941EE1D67951B00CD3685 /* FUIArrayTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,12 +18,12 @@
 
 // clang-format on
 
-#import "FirebaseArray.h"
+#import "FUIArray.h"
 
-@interface FirebaseArray ()
+@interface FUIArray ()
 
 /**
- * The backing collection that holds all of the FirebaseArray's data.
+ * The backing collection that holds all of the array's data.
  */
 @property(strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *snapshots;
 
@@ -35,11 +35,11 @@
 
 @end
 
-@implementation FirebaseArray
+@implementation FUIArray
 
 #pragma mark - Initializer methods
 
-- (instancetype)initWithQuery:(FIRDatabaseQuery *)query delegate:(id<FirebaseArrayDelegate>)delegate {
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query delegate:(id<FUIArrayDelegate>)delegate {
   NSParameterAssert(query != nil);
   self = [super init];
   if (self) {
@@ -187,8 +187,8 @@
 }
 
 - (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)index{
-  @throw [NSException exceptionWithName:@"FirebaseArraySetIndexWithSubscript"
-                                 reason:@"Setting an object as FirebaseArray[i] is not supported."
+  @throw [NSException exceptionWithName:@"FUIArraySetIndexWithSubscript"
+                                 reason:@"Setting an object as FUIArray[i] is not supported."
                                userInfo:nil];
 }
 
