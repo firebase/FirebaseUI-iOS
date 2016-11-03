@@ -17,16 +17,16 @@
 import UIKit
 import Firebase
 
-/// Displays an individual chat message inside of a FIRChatViewController.
-class FIRChatCollectionViewCell: UICollectionViewCell {
+/// Displays an individual chat message inside of a ChatViewController.
+class ChatCollectionViewCell: UICollectionViewCell {
   @IBOutlet fileprivate(set) var textLabel: UILabel! {
     didSet {
-      textLabel.font = FIRChatCollectionViewCell.messageFont
+      textLabel.font = ChatCollectionViewCell.messageFont
     }
   }
   
   static func boundingRectForText(_ text: String, maxWidth: CGFloat) -> CGRect {
-    let attributes = [NSFontAttributeName: FIRChatCollectionViewCell.messageFont]
+    let attributes = [NSFontAttributeName: ChatCollectionViewCell.messageFont]
     let rect = text.boundingRect(with: CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude),
                                          options: [.usesLineFragmentOrigin],
                                          attributes: attributes,
@@ -76,19 +76,19 @@ class FIRChatCollectionViewCell: UICollectionViewCell {
     self.textLabel.text = chat.text
     
     let leftRightPadding: CGFloat = 24
-    let rect = FIRChatCollectionViewCell.boundingRectForText(self.textLabel.text!,
+    let rect = ChatCollectionViewCell.boundingRectForText(self.textLabel.text!,
                                                           maxWidth: maxWidth)
     
     let constant = max(maxWidth - rect.size.width - leftRightPadding, CGFloat.leastNormalMagnitude)
     if chat.uid == user?.uid ?? "" {
-      let colors = FIRChatCollectionViewCell.selfColors
+      let colors = ChatCollectionViewCell.selfColors
       self.containerView.backgroundColor = colors.background
       self.textLabel.textColor = colors.text
       self.trailingConstraint.isActive = false
       self.leadingConstraint.constant = constant
       self.leadingConstraint.isActive = true
     } else {
-      let colors = FIRChatCollectionViewCell.othersColors
+      let colors = ChatCollectionViewCell.othersColors
       self.containerView.backgroundColor = colors.background
       self.textLabel.textColor = colors.text
       self.leadingConstraint.isActive = false

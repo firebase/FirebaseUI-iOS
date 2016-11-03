@@ -19,9 +19,9 @@ import UIKit
 // This controller exists solely to list the samples we've defined thus far.
 // Because all of that stuff is static and unchanging, if the app ever crashes
 // in here it's probably a typo or some other small accident.
-class FIRSamplesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SamplesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
-  fileprivate let reuseIdentifier = "FIRSamplesViewControllerCell"
+  fileprivate let reuseIdentifier = "SamplesViewControllerCell"
   
   @IBOutlet fileprivate var tableView: UITableView!
 
@@ -39,7 +39,7 @@ class FIRSamplesViewController: UIViewController, UITableViewDelegate, UITableVi
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let navController = self.navigationController! // assert nonnull
-    let targetController = FIRSample(rawValue: (indexPath as NSIndexPath).row)!.controller()
+    let targetController = Sample(rawValue: (indexPath as NSIndexPath).row)!.controller()
     
     navController.pushViewController(targetController, animated: true)
     tableView.deselectRow(at: indexPath, animated: true)
@@ -48,9 +48,9 @@ class FIRSamplesViewController: UIViewController, UITableViewDelegate, UITableVi
   // MARK: - UITableView Data Source
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let sampleType = FIRSample(rawValue: (indexPath as NSIndexPath).row)!
+    let sampleType = Sample(rawValue: (indexPath as NSIndexPath).row)!
     
-    let cell = self.tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! FIRSampleCell
+    let cell = self.tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! SampleCell
     
     cell.configureWithType(sampleType)
     
@@ -58,6 +58,6 @@ class FIRSamplesViewController: UIViewController, UITableViewDelegate, UITableVi
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return FIRSample.total
+    return Sample.total
   }
 }

@@ -10,7 +10,7 @@
         <!--Samples View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="FIRSamplesViewController" customModule="FirebaseUI_demo_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="SamplesViewController" customModule="FirebaseUI_demo_swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -22,7 +22,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="EMf-5k-tRY">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FIRSamplesViewControllerCell" id="mwf-Pe-7Xw" customClass="FIRSampleCell" customModule="FirebaseUI_demo_swift">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SamplesViewControllerCell" id="mwf-Pe-7Xw" customClass="SampleCell" customModule="FirebaseUI_demo_swift">
                                         <rect key="frame" x="0.0" y="1" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mwf-Pe-7Xw" id="su3-0f-Qc4">
@@ -78,7 +78,7 @@
         <!--Chat View Controller-->
         <scene sceneID="JRY-Ou-cBR">
             <objects>
-                <viewController storyboardIdentifier="FIRChatViewController" id="DlP-uj-LdB" customClass="FIRChatViewController" customModule="FirebaseUI_demo_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" id="DlP-uj-LdB" customClass="ChatViewController" customModule="FirebaseUI_demo_swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hrd-jq-l3U"/>
                         <viewControllerLayoutGuide type="bottom" id="CT4-Lk-WT2"/>
@@ -95,7 +95,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FIRChatCollectionViewCell" id="Wc2-OF-raU" customClass="FIRChatCollectionViewCell" customModule="FirebaseUI_demo_swift" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChatCollectionViewCell" id="Wc2-OF-raU" customClass="ChatCollectionViewCell" customModule="FirebaseUI_demo_swift" customModuleProvider="target">
                                         <rect key="frame" x="87" y="0.0" width="202" height="130"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -433,7 +433,7 @@
         <!--Storage View Controller-->
         <scene sceneID="AUm-G9-f66">
             <objects>
-                <viewController storyboardIdentifier="FIRStorageViewController" title="Storage View Controller" id="WET-Ai-gqs" customClass="FIRStorageViewController" customModule="FirebaseUI_demo_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StorageViewController" title="Storage View Controller" id="WET-Ai-gqs" customClass="StorageViewController" customModule="FirebaseUI_demo_swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fLb-ZX-Bfw"/>
                         <viewControllerLayoutGuide type="bottom" id="l9a-lf-5Sv"/>
