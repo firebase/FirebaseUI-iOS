@@ -137,7 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Called when the Firebase query sends a FIRDataEventTypeChildAdded event. Override this
- * to provide custom insertion logic.
+ * to provide custom insertion logic. Don't call this method directly.
  * @param snap The snapshot that was inserted.
  * @param previous The key of the sibling preceding the inserted snapshot.
  */
@@ -145,7 +145,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Called when the Firebase query sends a FIRDataEventTypeChildRemoved event. Override this
- * to provide custom removal logic.
+ * to provide custom removal logic. Don't call this method directly.
  * @param snap The snapshot that was removed.
  * @param previous The key of the sibling preceding the removed snapshot.
  */
@@ -153,7 +153,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Called when the Firebase query sends a FIRDataEventTypeChildChanged event. Override this
- * to provide custom on change logic.
+ * to provide custom on change logic. Don't call this method directly.
  * @param snap The snapshot whose value was changed.
  * @param previous The key of the sibling preceding the changed snapshot.
  */
@@ -161,15 +161,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Called when the Firebase query sends a FIRDataEventTypeChildMoved event. Override this
- * to provide custom move logic.
+ * to provide custom move logic. Don't call this method directly.
  * @param snap The snapshot that was moved.
  * @param previous The key of the sibling preceding the moved snapshot at its new location.
  */
 - (void)moveSnapshot:(FIRDataSnapshot *)snap withPreviousChildKey:(nullable NSString *)previous;
-
-- (void)removeSnapshotAtIndex:(NSUInteger)index;
-- (void)insertSnapshot:(FIRDataSnapshot *)snap atIndex:(NSUInteger)index;
-- (void)addSnapshot:(FIRDataSnapshot *)snap;
 
 @end
 

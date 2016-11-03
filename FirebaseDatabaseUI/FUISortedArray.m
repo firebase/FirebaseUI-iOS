@@ -24,6 +24,11 @@
 @property (nonatomic, copy, nonnull) NSComparisonResult (^sortDescriptor)(FIRDataSnapshot *, FIRDataSnapshot *);
 
 /**
+ * The backing collection that holds all of the array's data.
+ */
+@property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *snapshots;
+
+/**
  * A set containing the query observer handles that should be released when
  * this array is freed.
  */
@@ -32,6 +37,9 @@
 @end
 
 @implementation FUISortedArray
+// Cheating at subclassing, but this @dynamic avoids
+// duplicating storage without exposing mutability publicly
+@dynamic snapshots;
 
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
                      delegate:(id<FUICollectionDelegate>)delegate
@@ -57,7 +65,7 @@
   NSInteger index = [self indexForKey:snap.key];
   if (index == NSNotFound) { /* error */ return; }
 
-  [self removeSnapshotAtIndex:index];
+  [self.snapshots removeObjectAtIndex:index];
   if ([self.delegate respondsToSelector:@selector(array:didRemoveObject:atIndex:)]) {
     [self.delegate array:self didRemoveObject:snap atIndex:index];
   }
@@ -71,7 +79,7 @@
 
   // Since changes can change ordering, model changes as a deletion and an insertion.
   FIRDataSnapshot *removed = [self snapshotAtIndex:index];
-  [self removeSnapshotAtIndex:index];
+  [self.snapshots removeObjectAtIndex:index];
   if ([self.delegate respondsToSelector:@selector(array:didRemoveObject:atIndex:)]) {
     [self.delegate array:self didRemoveObject:removed atIndex:index];
   }
@@ -92,17 +100,17 @@
 
 - (NSInteger)insertSnapshot:(FIRDataSnapshot *)snapshot {
   if (self.count == 0) {
-    [self addSnapshot:snapshot];
+    [self.snapshots addObject:snapshot];
     return 0;
   }
   if (self.count == 1) {
     NSComparisonResult result = self.sortDescriptor(snapshot, [self snapshotAtIndex:0]);
     switch (result) {
       case NSOrderedDescending:
-        [self addSnapshot:snapshot];
+        [self.snapshots addObject:snapshot];
         return 1;
       default:
-        [self insertSnapshot:snapshot atIndex:0];
+        [self.snapshots insertObject:snapshot atIndex:0];
         return 0;
     }
   }
@@ -110,11 +118,11 @@
   NSInteger index = self.count / 2;
   while (index >= 0 && index <= self.count) {
     if (index == 0) {
-      [self insertSnapshot:snapshot atIndex:index];
+      [self.snapshots insertObject:snapshot atIndex:index];
       return 0;
     }
     if (index == self.count) {
-      [self addSnapshot:snapshot];
+      [self.snapshots addObject:snapshot];
       return index;
     }
 
@@ -136,7 +144,7 @@
       NSAssert(NO, @"FUISortedArray %@'s sort descriptor returned inconsistent results!", self);
     } else {
       // good
-      [self insertSnapshot:snapshot atIndex:index];
+      [self.snapshots insertObject:snapshot atIndex:index];
       return index;
     }
   }

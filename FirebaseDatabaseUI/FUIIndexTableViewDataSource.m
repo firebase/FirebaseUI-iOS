@@ -48,8 +48,8 @@
   self = [super init];
   if (self != nil) {
     _array = [[FUIIndexArray alloc] initWithIndex:indexQuery
-                                                  data:dataQuery
-                                              delegate:self];
+                                             data:dataQuery
+                                         delegate:self];
     _tableView = tableView;
     tableView.dataSource = self;
     _populateCell = populateCell;
@@ -139,17 +139,17 @@ didLoadObject:(FIRDataSnapshot *)object
 @implementation UITableView (FUIIndexTableViewDataSource)
 
 - (FUIIndexTableViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
-                                                    data:(FIRDatabaseReference *)data
-                                                delegate:(id<FUIIndexTableViewDataSourceDelegate>)delegate
-                                            populateCell:(UITableViewCell *(^)(UITableView *,
-                                                                               NSIndexPath *,
-                                                                               FIRDataSnapshot *))populateCell {
+                                               data:(FIRDatabaseReference *)data
+                                           delegate:(id<FUIIndexTableViewDataSourceDelegate>)delegate
+                                       populateCell:(UITableViewCell *(^)(UITableView *,
+                                                                          NSIndexPath *,
+                                                                          FIRDataSnapshot *))populateCell {
   FUIIndexTableViewDataSource *dataSource =
     [[FUIIndexTableViewDataSource alloc] initWithIndex:index
-                                                       data:data
-                                                  tableView:self
-                                                   delegate:delegate
-                                               populateCell:populateCell];
+                                                  data:data
+                                             tableView:self
+                                              delegate:delegate
+                                          populateCell:populateCell];
   self.dataSource = dataSource;
   return dataSource;
 }

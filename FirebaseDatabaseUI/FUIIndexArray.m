@@ -71,6 +71,7 @@
 
 - (void)observeQueries {
   _indexArray = [[FUIArray alloc] initWithQuery:self.index delegate:self];
+  [_indexArray observeQuery];
 }
 
 - (NSArray <FIRDataSnapshot *> *)items {

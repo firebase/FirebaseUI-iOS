@@ -26,11 +26,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   // All of the error handling in this controller is done with `fatalError`;
   // please don't copy paste it into your production code.
 
-<<<<<<< HEAD:samples/swift/FirebaseUI-demo-swift/Samples/Chat/ChatViewController.swift
   fileprivate static let reuseIdentifier = "ChatCollectionViewCell"
-=======
-  fileprivate static let reuseIdentifier = "FIRChatCollectionViewCell"
->>>>>>> change renamed classes in other files, break swift sample:samples/swift/FirebaseUI-demo-swift/Samples/Chat/FIRChatViewController.swift
 
   @IBOutlet fileprivate var collectionView: UICollectionView!
   @IBOutlet fileprivate var textView: UITextView! {
@@ -69,13 +65,8 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         FUICollectionViewDataSource(query: self.query!,
                                     view: self.collectionView,
                                     populateCell: { (view, indexPath, snap) -> UICollectionViewCell in
-<<<<<<< HEAD:samples/swift/FirebaseUI-demo-swift/Samples/Chat/ChatViewController.swift
         let cell = view.dequeueReusableCell(withReuseIdentifier: ChatViewController.reuseIdentifier,
                                             for: indexPath) as! ChatCollectionViewCell
-=======
-        let cell = view.dequeueReusableCell(withReuseIdentifier: FIRChatViewController.reuseIdentifier,
-                                            for: indexPath) as! FIRChatCollectionViewCell
->>>>>>> change renamed classes in other files, break swift sample:samples/swift/FirebaseUI-demo-swift/Samples/Chat/FIRChatViewController.swift
         let chat = Chat(snapshot: snap)!
         cell.populateCellWithChat(chat, user: self.user, maxWidth: self.view.frame.size.width)
         return cell
@@ -198,11 +189,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     let blob = self.collectionViewDataSource.object(at: UInt((indexPath as NSIndexPath).row)) as! FIRDataSnapshot
     let text = Chat(snapshot: blob)!.text
 
-<<<<<<< HEAD:samples/swift/FirebaseUI-demo-swift/Samples/Chat/ChatViewController.swift
     let rect = ChatCollectionViewCell.boundingRectForText(text, maxWidth: width)
-=======
-    let rect = FIRChatCollectionViewCell.boundingRectForText(text, maxWidth: width)
->>>>>>> change renamed classes in other files, break swift sample:samples/swift/FirebaseUI-demo-swift/Samples/Chat/FIRChatViewController.swift
 
     let height = CGFloat(ceil(Double(rect.size.height))) + heightPadding
     return CGSize(width: width, height: height)
