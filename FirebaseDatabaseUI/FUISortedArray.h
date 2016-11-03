@@ -20,19 +20,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FUISortedArray : NSObject <FUICollection>
+@interface FUISortedArray : FUIArray <FUICollection>
 
 /**
  * A copy of the snapshots currently in the array.
  */
 @property (nonatomic, readonly, copy) NSArray<FIRDataSnapshot *> *items;
 
-/**
- * The delegate that should receive events from the sorted array.
- */
-@property (nonatomic, weak, readwrite, nullable) id<FUICollectionDelegate> delegate;
-
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithQuery:(id<FIRDataObservable>)query NS_UNAVAILABLE;
 
 /**
  * Initializes a sorted collection.

@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The items currently in the array.
  */
-@property(nonatomic, readonly, copy) NSArray *items;
+@property (nonatomic, readonly, copy) NSArray *items;
 
 #pragma mark - Initializer methods
 
@@ -134,6 +134,42 @@ NS_ASSUME_NONNULL_BEGIN
  * @exception NSInvalidArgumentException Thrown when the `key` parameter is `nil`.
  */
 - (NSUInteger)indexForKey:(NSString *)key;
+
+/**
+ * Called when the Firebase query sends a FIRDataEventTypeChildAdded event. Override this
+ * to provide custom insertion logic.
+ * @param snap The snapshot that was inserted.
+ * @param previous The key of the sibling preceding the inserted snapshot.
+ */
+- (void)insertSnapshot:(FIRDataSnapshot *)snap withPreviousChildKey:(nullable NSString *)previous;
+
+/**
+ * Called when the Firebase query sends a FIRDataEventTypeChildRemoved event. Override this
+ * to provide custom removal logic.
+ * @param snap The snapshot that was removed.
+ * @param previous The key of the sibling preceding the removed snapshot.
+ */
+- (void)removeSnapshot:(FIRDataSnapshot *)snap withPreviousChildKey:(nullable NSString *)previous;
+
+/**
+ * Called when the Firebase query sends a FIRDataEventTypeChildChanged event. Override this
+ * to provide custom on change logic.
+ * @param snap The snapshot whose value was changed.
+ * @param previous The key of the sibling preceding the changed snapshot.
+ */
+- (void)changeSnapshot:(FIRDataSnapshot *)snap withPreviousChildKey:(nullable NSString *)previous;
+
+/**
+ * Called when the Firebase query sends a FIRDataEventTypeChildMoved event. Override this
+ * to provide custom move logic.
+ * @param snap The snapshot that was moved.
+ * @param previous The key of the sibling preceding the moved snapshot at its new location.
+ */
+- (void)moveSnapshot:(FIRDataSnapshot *)snap withPreviousChildKey:(nullable NSString *)previous;
+
+- (void)removeSnapshotAtIndex:(NSUInteger)index;
+- (void)insertSnapshot:(FIRDataSnapshot *)snap atIndex:(NSUInteger)index;
+- (void)addSnapshot:(FIRDataSnapshot *)snap;
 
 @end
 
