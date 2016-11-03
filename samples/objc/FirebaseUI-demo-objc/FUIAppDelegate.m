@@ -29,11 +29,18 @@
   [FIRApp configure];
   return YES;
 }
+
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
+  NSString *sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+  return [self handleOpenUrl:url sourceApplication:sourceApplication];
+}
 
-  NSString *sourceApp = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation {
+  return [self handleOpenUrl:url sourceApplication:sourceApplication];
+}
 
-  if ([FIRAuthUI.defaultAuthUI handleOpenURL:url sourceApplication:sourceApp]) {
+- (BOOL)handleOpenUrl:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication {
+  if ([FIRAuthUI.defaultAuthUI handleOpenURL:url sourceApplication:sourceApplication]) {
     return YES;
   }
   return NO;
