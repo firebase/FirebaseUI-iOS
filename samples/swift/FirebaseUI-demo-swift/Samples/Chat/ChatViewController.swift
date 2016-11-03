@@ -22,11 +22,11 @@ import FirebaseAuthUI
 /// View controller demonstrating using a FUICollectionViewDataSource
 /// to populate a collection view with chat messages. The relevant code
 /// is in the call to `collectionViewDataSource.populateCellWithBlock`.
-class FIRChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
+class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   // All of the error handling in this controller is done with `fatalError`;
   // please don't copy paste it into your production code.
 
-  fileprivate static let reuseIdentifier = "FIRChatCollectionViewCell"
+  fileprivate static let reuseIdentifier = "ChatCollectionViewCell"
 
   @IBOutlet fileprivate var collectionView: UICollectionView!
   @IBOutlet fileprivate var textView: UITextView! {
@@ -65,8 +65,8 @@ class FIRChatViewController: UIViewController, UICollectionViewDelegateFlowLayou
         FUICollectionViewDataSource(query: self.query!,
                                     view: self.collectionView,
                                     populateCell: { (view, indexPath, snap) -> UICollectionViewCell in
-        let cell = view.dequeueReusableCell(withReuseIdentifier: FIRChatViewController.reuseIdentifier,
-                                            for: indexPath) as! FIRChatCollectionViewCell
+        let cell = view.dequeueReusableCell(withReuseIdentifier: ChatViewController.reuseIdentifier,
+                                            for: indexPath) as! ChatCollectionViewCell
         let chat = Chat(snapshot: snap)!
         cell.populateCellWithChat(chat, user: self.user, maxWidth: self.view.frame.size.width)
         return cell
@@ -79,7 +79,7 @@ class FIRChatViewController: UIViewController, UICollectionViewDelegateFlowLayou
       // on new insertions we still need to use the query directly.
       self.query!.observe(.childAdded, with: { [unowned self] _ in
         self.scrollToBottom(animated: true)
-        })
+      })
     }
 
     self.auth?.signInAnonymously { (user, error) in
@@ -189,7 +189,7 @@ class FIRChatViewController: UIViewController, UICollectionViewDelegateFlowLayou
     let blob = self.collectionViewDataSource.object(at: UInt((indexPath as NSIndexPath).row)) as! FIRDataSnapshot
     let text = Chat(snapshot: blob)!.text
 
-    let rect = FIRChatCollectionViewCell.boundingRectForText(text, maxWidth: width)
+    let rect = ChatCollectionViewCell.boundingRectForText(text, maxWidth: width)
 
     let height = CGFloat(ceil(Double(rect.size.height))) + heightPadding
     return CGSize(width: width, height: height)

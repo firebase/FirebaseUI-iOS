@@ -18,7 +18,7 @@ import UIKit
 
 import FirebaseStorageUI
 
-class FIRStorageViewController: UIViewController {
+class StorageViewController: UIViewController {
 
   @IBOutlet fileprivate var imageView: UIImageView!
   @IBOutlet fileprivate var textField: UITextField!
