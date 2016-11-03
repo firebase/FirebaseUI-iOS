@@ -1,6 +1,4 @@
 //
-//  AuthViewController.h
-//
 //  Copyright (c) 2016 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +14,20 @@
 //  limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
+#import "FUIChatMessageDataSource.h"
+@import FirebaseDatabase;
 
-@interface FIRStorageViewController : UIViewController
+@implementation FUIChatMessageDataSource
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+  return YES; }
+
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+ forRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (editingStyle == UITableViewCellEditingStyleDelete) {
+    [[self refForIndex:indexPath.row] removeValue];
+  }
+}
 
 @end

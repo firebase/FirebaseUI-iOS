@@ -1,6 +1,4 @@
 //
-//  FIRSampleContainer.h
-//
 //  Copyright (c) 2016 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,20 +14,8 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+#import <FirebaseDatabaseUI/FirebaseDatabaseUI.h>
 
-typedef UIViewController *(^FIRControllerBlock)();
-
-@interface FIRSample : NSObject
-
-+ (instancetype)sampleWithTitle:(NSString *)title
-              sampleDescription:(NSString *)description
-                     controller:(FIRControllerBlock)block;
-
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *sampleDescription;
-@property (nonatomic, copy) FIRControllerBlock controllerBlock;
-
+@interface FUIChatMessageDataSource : FUITableViewDataSource
 
 @end

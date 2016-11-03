@@ -1,4 +1,6 @@
 //
+//  AuthViewController.h
+//
 //  Copyright (c) 2016 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +16,8 @@
 //  limitations under the License.
 //
 
-#import <FirebaseDatabaseUI/FUITableViewDataSource.h>
+#import <UIKit/UIKit.h>
 
-@interface FIRChatMessageDataSource : FUITableViewDataSource
+@interface FUIStorageViewController : UIViewController
 
 @end

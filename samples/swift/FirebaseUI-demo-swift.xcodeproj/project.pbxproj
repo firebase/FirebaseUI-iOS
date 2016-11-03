@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		19877FB24F4E45159B4C8B51 /* Pods_FirebaseUI_demo_swiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2DBA0AFBF780C260346490A /* Pods_FirebaseUI_demo_swiftTests.framework */; };
-		8D5F93B01D9B192D00D5A2E4 /* FIRStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F93AF1D9B192D00D5A2E4 /* FIRStorageViewController.swift */; };
+		8D5F93B01D9B192D00D5A2E4 /* StorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F93AF1D9B192D00D5A2E4 /* StorageViewController.swift */; };
 		8DABC9891D3D82D600453807 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9881D3D82D600453807 /* AppDelegate.swift */; };
 		8DABC98E1D3D82D600453807 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DABC98C1D3D82D600453807 /* Main.storyboard */; };
 		8DABC9901D3D82D600453807 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DABC98F1D3D82D600453807 /* Assets.xcassets */; };
@@ -16,11 +16,11 @@
 		8DABC99E1D3D82D600453807 /* FirebaseUI-demo-swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC99D1D3D82D600453807 /* FirebaseUI-demo-swiftTests.swift */; };
 		8DD51E371D873B0D00E2CA51 /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD51E361D873B0D00E2CA51 /* UIStoryboardExtension.swift */; };
 		C302C1DC1D91CC7B00ADBD41 /* FIRAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D51D91CC7B00ADBD41 /* FIRAuthViewController.swift */; };
-		C302C1DD1D91CC7B00ADBD41 /* FIRChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D71D91CC7B00ADBD41 /* FIRChatCollectionViewCell.swift */; };
-		C302C1DE1D91CC7B00ADBD41 /* FIRChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D81D91CC7B00ADBD41 /* FIRChatViewController.swift */; };
-		C302C1DF1D91CC7B00ADBD41 /* FIRSamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D91D91CC7B00ADBD41 /* FIRSamplesViewController.swift */; };
-		C302C1E01D91CC7B00ADBD41 /* FIRSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1DA1D91CC7B00ADBD41 /* FIRSample.swift */; };
-		C302C1E11D91CC7B00ADBD41 /* FIRSampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1DB1D91CC7B00ADBD41 /* FIRSampleCell.swift */; };
+		C302C1DD1D91CC7B00ADBD41 /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D71D91CC7B00ADBD41 /* ChatCollectionViewCell.swift */; };
+		C302C1DE1D91CC7B00ADBD41 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D81D91CC7B00ADBD41 /* ChatViewController.swift */; };
+		C302C1DF1D91CC7B00ADBD41 /* SamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D91D91CC7B00ADBD41 /* SamplesViewController.swift */; };
+		C302C1E01D91CC7B00ADBD41 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1DA1D91CC7B00ADBD41 /* Sample.swift */; };
+		C302C1E11D91CC7B00ADBD41 /* SampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1DB1D91CC7B00ADBD41 /* SampleCell.swift */; };
 		C39833AD1DB7ECB300D257EF /* FIRCustomAuthUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39833AC1DB7ECB300D257EF /* FIRCustomAuthUIDelegate.swift */; };
 		C39BC03D1DB7F74B0060F6AF /* FIRCustomAuthPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC03B1DB7F74B0060F6AF /* FIRCustomAuthPickerViewController.swift */; };
 		C39BC03E1DB7F74B0060F6AF /* FIRCustomAuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC03C1DB7F74B0060F6AF /* FIRCustomAuthPickerViewController.xib */; };
@@ -50,7 +50,7 @@
 
 /* Begin PBXFileReference section */
 		7610266FD082466CE20ADACB /* Pods-FirebaseUI-demo-swiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUI-demo-swiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUI-demo-swiftTests/Pods-FirebaseUI-demo-swiftTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8D5F93AF1D9B192D00D5A2E4 /* FIRStorageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIRStorageViewController.swift; sourceTree = "<group>"; };
+		8D5F93AF1D9B192D00D5A2E4 /* StorageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageViewController.swift; sourceTree = "<group>"; };
 		8DABC9851D3D82D600453807 /* FirebaseUI-demo-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FirebaseUI-demo-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DABC9881D3D82D600453807 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8DABC98D1D3D82D600453807 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -66,12 +66,11 @@
 		C01904E28D7A26F3281335EE /* Pods_FirebaseUI_demo_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseUI_demo_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2DBA0AFBF780C260346490A /* Pods_FirebaseUI_demo_swiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseUI_demo_swiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C302C1D51D91CC7B00ADBD41 /* FIRAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIRAuthViewController.swift; sourceTree = "<group>"; };
-		C302C1D71D91CC7B00ADBD41 /* FIRChatCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIRChatCollectionViewCell.swift; sourceTree = "<group>"; };
-		C302C1D81D91CC7B00ADBD41 /* FIRChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIRChatViewController.swift; sourceTree = "<group>"; };
-		C302C1D91D91CC7B00ADBD41 /* FIRSamplesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIRSamplesViewController.swift; sourceTree = "<group>"; };
-		C302C1DA1D91CC7B00ADBD41 /* FIRSample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIRSample.swift; sourceTree = "<group>"; };
-		C302C1DB1D91CC7B00ADBD41 /* FIRSampleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIRSampleCell.swift; sourceTree = "<group>"; };
-		C326B7EB1DA6D364004B818F /* FirebaseUI-demo-swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "FirebaseUI-demo-swift.entitlements"; sourceTree = "<group>"; };
+		C302C1D71D91CC7B00ADBD41 /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
+		C302C1D81D91CC7B00ADBD41 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		C302C1D91D91CC7B00ADBD41 /* SamplesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesViewController.swift; sourceTree = "<group>"; };
+		C302C1DA1D91CC7B00ADBD41 /* Sample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
+		C302C1DB1D91CC7B00ADBD41 /* SampleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleCell.swift; sourceTree = "<group>"; };
 		C39833AC1DB7ECB300D257EF /* FIRCustomAuthUIDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIRCustomAuthUIDelegate.swift; sourceTree = "<group>"; };
 		C39BC03B1DB7F74B0060F6AF /* FIRCustomAuthPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIRCustomAuthPickerViewController.swift; sourceTree = "<group>"; };
 		C39BC03C1DB7F74B0060F6AF /* FIRCustomAuthPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomAuthPickerViewController.xib; sourceTree = "<group>"; };
@@ -121,7 +120,7 @@
 		8D5F93B11D9B193C00D5A2E4 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				8D5F93AF1D9B192D00D5A2E4 /* FIRStorageViewController.swift */,
+				8D5F93AF1D9B192D00D5A2E4 /* StorageViewController.swift */,
 			);
 			name = Storage;
 			sourceTree = "<group>";
@@ -187,9 +186,9 @@
 				C302C1D41D91CC7B00ADBD41 /* Auth */,
 				C302C1D61D91CC7B00ADBD41 /* Chat */,
 				8D5F93B11D9B193C00D5A2E4 /* Storage */,
-				C302C1D91D91CC7B00ADBD41 /* FIRSamplesViewController.swift */,
-				C302C1DA1D91CC7B00ADBD41 /* FIRSample.swift */,
-				C302C1DB1D91CC7B00ADBD41 /* FIRSampleCell.swift */,
+				C302C1D91D91CC7B00ADBD41 /* SamplesViewController.swift */,
+				C302C1DA1D91CC7B00ADBD41 /* Sample.swift */,
+				C302C1DB1D91CC7B00ADBD41 /* SampleCell.swift */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -218,8 +217,8 @@
 		C302C1D61D91CC7B00ADBD41 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				C302C1D71D91CC7B00ADBD41 /* FIRChatCollectionViewCell.swift */,
-				C302C1D81D91CC7B00ADBD41 /* FIRChatViewController.swift */,
+				C302C1D71D91CC7B00ADBD41 /* ChatCollectionViewCell.swift */,
+				C302C1D81D91CC7B00ADBD41 /* ChatViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -335,18 +334,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD51E371D873B0D00E2CA51 /* UIStoryboardExtension.swift in Sources */,
-				C302C1DF1D91CC7B00ADBD41 /* FIRSamplesViewController.swift in Sources */,
+				C302C1DF1D91CC7B00ADBD41 /* SamplesViewController.swift in Sources */,
 				C302C1DC1D91CC7B00ADBD41 /* FIRAuthViewController.swift in Sources */,
 				C39BC0451DB811E70060F6AF /* FIRCustomPasswordRecoveryViewController.swift in Sources */,
 				C39BC03D1DB7F74B0060F6AF /* FIRCustomAuthPickerViewController.swift in Sources */,
-				8D5F93B01D9B192D00D5A2E4 /* FIRStorageViewController.swift in Sources */,
+				8D5F93B01D9B192D00D5A2E4 /* StorageViewController.swift in Sources */,
 				C39BC0491DB812030060F6AF /* FIRCustomPasswordSignInViewController.swift in Sources */,
 				C39BC04D1DB812190060F6AF /* FIRCustomPasswordSignUpViewController.swift in Sources */,
-				C302C1DD1D91CC7B00ADBD41 /* FIRChatCollectionViewCell.swift in Sources */,
-				C302C1DE1D91CC7B00ADBD41 /* FIRChatViewController.swift in Sources */,
+				C302C1DD1D91CC7B00ADBD41 /* ChatCollectionViewCell.swift in Sources */,
+				C302C1DE1D91CC7B00ADBD41 /* ChatViewController.swift in Sources */,
 				C39BC0411DB811630060F6AF /* FIRCustomEmailEntryViewController.swift in Sources */,
-				C302C1E11D91CC7B00ADBD41 /* FIRSampleCell.swift in Sources */,
-				C302C1E01D91CC7B00ADBD41 /* FIRSample.swift in Sources */,
+				C302C1E11D91CC7B00ADBD41 /* SampleCell.swift in Sources */,
+				C302C1E01D91CC7B00ADBD41 /* Sample.swift in Sources */,
 				C39BC0511DB812330060F6AF /* FIRCustomPasswordVerificationViewController.swift in Sources */,
 				8DABC9891D3D82D600453807 /* AppDelegate.swift in Sources */,
 				C39833AD1DB7ECB300D257EF /* FIRCustomAuthUIDelegate.swift in Sources */,

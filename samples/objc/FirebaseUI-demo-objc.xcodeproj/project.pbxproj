@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D7D5DC11D9D9536006C1857 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */; };
-		8D7F86B51D9DAA0100C2A122 /* FIRStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F86B41D9DAA0100C2A122 /* FIRStorageViewController.m */; };
+		8D7F86B51D9DAA0100C2A122 /* FUIStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F86B41D9DAA0100C2A122 /* FUIStorageViewController.m */; };
 		C329B1B21DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B1B01DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m */; };
 		C329B1B31DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C329B1B11DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib */; };
 		C34FC1FE1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34FC1FC1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.m */; };
@@ -23,15 +23,15 @@
 		C3A8B7CB1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8B7C91DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.m */; };
 		C3A8B7CC1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A8B7CA1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.xib */; };
 		C3AC675E1D81FE6B00FC956D /* FIRAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67531D81FE6B00FC956D /* FIRAuthViewController.m */; };
-		C3AC675F1D81FE6B00FC956D /* FIRChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67561D81FE6B00FC956D /* FIRChatMessage.m */; };
-		C3AC67601D81FE6B00FC956D /* FIRChatMessageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67581D81FE6B00FC956D /* FIRChatMessageDataSource.m */; };
-		C3AC67611D81FE6B00FC956D /* FIRChatMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC675A1D81FE6B00FC956D /* FIRChatMessageTableViewCell.m */; };
-		C3AC67621D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3AC675B1D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib */; };
-		C3AC67631D81FE6B00FC956D /* FIRChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC675D1D81FE6B00FC956D /* FIRChatViewController.m */; };
-		C3AC67661D82002F00FC956D /* FIRSample.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67651D82002F00FC956D /* FIRSample.m */; };
-		C3F23ED01D80F58A0020509F /* FIRSamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F23ECF1D80F58A0020509F /* FIRSamplesViewController.m */; };
+		C3AC675F1D81FE6B00FC956D /* FUIChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67561D81FE6B00FC956D /* FUIChatMessage.m */; };
+		C3AC67601D81FE6B00FC956D /* FUIChatMessageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67581D81FE6B00FC956D /* FUIChatMessageDataSource.m */; };
+		C3AC67611D81FE6B00FC956D /* FUIChatMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC675A1D81FE6B00FC956D /* FUIChatMessageTableViewCell.m */; };
+		C3AC67621D81FE6B00FC956D /* FUIChatMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3AC675B1D81FE6B00FC956D /* FUIChatMessageTableViewCell.xib */; };
+		C3AC67631D81FE6B00FC956D /* FUIChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC675D1D81FE6B00FC956D /* FUIChatViewController.m */; };
+		C3AC67661D82002F00FC956D /* FUISample.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67651D82002F00FC956D /* FUISample.m */; };
+		C3F23ED01D80F58A0020509F /* FUISamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F23ECF1D80F58A0020509F /* FUISamplesViewController.m */; };
 		D81A05F61B86A78700498183 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D81A05F51B86A78700498183 /* main.m */; };
-		D81A05F91B86A78700498183 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D81A05F81B86A78700498183 /* AppDelegate.m */; };
+		D81A05F91B86A78700498183 /* FUIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D81A05F81B86A78700498183 /* FUIAppDelegate.m */; };
 		D81A05FF1B86A78700498183 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81A05FD1B86A78700498183 /* Main.storyboard */; };
 		D81A06011B86A78700498183 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D81A06001B86A78700498183 /* Images.xcassets */; };
 		D81A06041B86A78700498183 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D81A06021B86A78700498183 /* LaunchScreen.xib */; };
@@ -39,8 +39,8 @@
 
 /* Begin PBXFileReference section */
 		8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8D7F86B31D9DAA0100C2A122 /* FIRStorageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FIRStorageViewController.h; path = Storage/FIRStorageViewController.h; sourceTree = "<group>"; };
-		8D7F86B41D9DAA0100C2A122 /* FIRStorageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FIRStorageViewController.m; path = Storage/FIRStorageViewController.m; sourceTree = "<group>"; };
+		8D7F86B31D9DAA0100C2A122 /* FUIStorageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FUIStorageViewController.h; path = Storage/FUIStorageViewController.h; sourceTree = "<group>"; };
+		8D7F86B41D9DAA0100C2A122 /* FUIStorageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FUIStorageViewController.m; path = Storage/FUIStorageViewController.m; sourceTree = "<group>"; };
 		C329B1AF1DAD6E5100059A13 /* FIRCustomEmailEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomEmailEntryViewController.h; sourceTree = "<group>"; };
 		C329B1B01DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomEmailEntryViewController.m; sourceTree = "<group>"; };
 		C329B1B11DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomEmailEntryViewController.xib; sourceTree = "<group>"; };
@@ -63,24 +63,24 @@
 		C3A8B7CA1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomPasswordRecoveryViewController.xib; sourceTree = "<group>"; };
 		C3AC67521D81FE6B00FC956D /* FIRAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRAuthViewController.h; sourceTree = "<group>"; };
 		C3AC67531D81FE6B00FC956D /* FIRAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRAuthViewController.m; sourceTree = "<group>"; };
-		C3AC67551D81FE6B00FC956D /* FIRChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRChatMessage.h; sourceTree = "<group>"; };
-		C3AC67561D81FE6B00FC956D /* FIRChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRChatMessage.m; sourceTree = "<group>"; };
-		C3AC67571D81FE6B00FC956D /* FIRChatMessageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRChatMessageDataSource.h; sourceTree = "<group>"; };
-		C3AC67581D81FE6B00FC956D /* FIRChatMessageDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRChatMessageDataSource.m; sourceTree = "<group>"; };
-		C3AC67591D81FE6B00FC956D /* FIRChatMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRChatMessageTableViewCell.h; sourceTree = "<group>"; };
-		C3AC675A1D81FE6B00FC956D /* FIRChatMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRChatMessageTableViewCell.m; sourceTree = "<group>"; };
-		C3AC675B1D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRChatMessageTableViewCell.xib; sourceTree = "<group>"; };
-		C3AC675C1D81FE6B00FC956D /* FIRChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRChatViewController.h; sourceTree = "<group>"; };
-		C3AC675D1D81FE6B00FC956D /* FIRChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRChatViewController.m; sourceTree = "<group>"; };
-		C3AC67641D82002F00FC956D /* FIRSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRSample.h; sourceTree = "<group>"; };
-		C3AC67651D82002F00FC956D /* FIRSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRSample.m; sourceTree = "<group>"; };
-		C3F23ECE1D80F5890020509F /* FIRSamplesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRSamplesViewController.h; sourceTree = "<group>"; };
-		C3F23ECF1D80F58A0020509F /* FIRSamplesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRSamplesViewController.m; sourceTree = "<group>"; };
+		C3AC67551D81FE6B00FC956D /* FUIChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIChatMessage.h; sourceTree = "<group>"; };
+		C3AC67561D81FE6B00FC956D /* FUIChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIChatMessage.m; sourceTree = "<group>"; };
+		C3AC67571D81FE6B00FC956D /* FUIChatMessageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIChatMessageDataSource.h; sourceTree = "<group>"; };
+		C3AC67581D81FE6B00FC956D /* FUIChatMessageDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIChatMessageDataSource.m; sourceTree = "<group>"; };
+		C3AC67591D81FE6B00FC956D /* FUIChatMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIChatMessageTableViewCell.h; sourceTree = "<group>"; };
+		C3AC675A1D81FE6B00FC956D /* FUIChatMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIChatMessageTableViewCell.m; sourceTree = "<group>"; };
+		C3AC675B1D81FE6B00FC956D /* FUIChatMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIChatMessageTableViewCell.xib; sourceTree = "<group>"; };
+		C3AC675C1D81FE6B00FC956D /* FUIChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIChatViewController.h; sourceTree = "<group>"; };
+		C3AC675D1D81FE6B00FC956D /* FUIChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIChatViewController.m; sourceTree = "<group>"; };
+		C3AC67641D82002F00FC956D /* FUISample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISample.h; sourceTree = "<group>"; };
+		C3AC67651D82002F00FC956D /* FUISample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISample.m; sourceTree = "<group>"; };
+		C3F23ECE1D80F5890020509F /* FUISamplesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISamplesViewController.h; sourceTree = "<group>"; };
+		C3F23ECF1D80F58A0020509F /* FUISamplesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISamplesViewController.m; sourceTree = "<group>"; };
 		D81A05F01B86A78700498183 /* FirebaseUI-demo-objc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FirebaseUI-demo-objc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D81A05F41B86A78700498183 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D81A05F51B86A78700498183 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D81A05F71B86A78700498183 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		D81A05F81B86A78700498183 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D81A05F71B86A78700498183 /* FUIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FUIAppDelegate.h; sourceTree = "<group>"; };
+		D81A05F81B86A78700498183 /* FUIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FUIAppDelegate.m; sourceTree = "<group>"; };
 		D81A05FE1B86A78700498183 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D81A06001B86A78700498183 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D81A06031B86A78700498183 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -100,8 +100,8 @@
 		8D7D5DC51D9DA075006C1857 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				8D7F86B31D9DAA0100C2A122 /* FIRStorageViewController.h */,
-				8D7F86B41D9DAA0100C2A122 /* FIRStorageViewController.m */,
+				8D7F86B31D9DAA0100C2A122 /* FUIStorageViewController.h */,
+				8D7F86B41D9DAA0100C2A122 /* FUIStorageViewController.m */,
 			);
 			name = Storage;
 			sourceTree = "<group>";
@@ -148,15 +148,15 @@
 		C3AC67541D81FE6B00FC956D /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				C3AC67551D81FE6B00FC956D /* FIRChatMessage.h */,
-				C3AC67561D81FE6B00FC956D /* FIRChatMessage.m */,
-				C3AC67571D81FE6B00FC956D /* FIRChatMessageDataSource.h */,
-				C3AC67581D81FE6B00FC956D /* FIRChatMessageDataSource.m */,
-				C3AC67591D81FE6B00FC956D /* FIRChatMessageTableViewCell.h */,
-				C3AC675A1D81FE6B00FC956D /* FIRChatMessageTableViewCell.m */,
-				C3AC675B1D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib */,
-				C3AC675C1D81FE6B00FC956D /* FIRChatViewController.h */,
-				C3AC675D1D81FE6B00FC956D /* FIRChatViewController.m */,
+				C3AC67551D81FE6B00FC956D /* FUIChatMessage.h */,
+				C3AC67561D81FE6B00FC956D /* FUIChatMessage.m */,
+				C3AC67571D81FE6B00FC956D /* FUIChatMessageDataSource.h */,
+				C3AC67581D81FE6B00FC956D /* FUIChatMessageDataSource.m */,
+				C3AC67591D81FE6B00FC956D /* FUIChatMessageTableViewCell.h */,
+				C3AC675A1D81FE6B00FC956D /* FUIChatMessageTableViewCell.m */,
+				C3AC675B1D81FE6B00FC956D /* FUIChatMessageTableViewCell.xib */,
+				C3AC675C1D81FE6B00FC956D /* FUIChatViewController.h */,
+				C3AC675D1D81FE6B00FC956D /* FUIChatViewController.m */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -181,12 +181,12 @@
 		D81A05F21B86A78700498183 /* FirebaseUI-demo-objc */ = {
 			isa = PBXGroup;
 			children = (
-				D81A05F71B86A78700498183 /* AppDelegate.h */,
-				D81A05F81B86A78700498183 /* AppDelegate.m */,
-				C3F23ECE1D80F5890020509F /* FIRSamplesViewController.h */,
-				C3F23ECF1D80F58A0020509F /* FIRSamplesViewController.m */,
-				C3AC67641D82002F00FC956D /* FIRSample.h */,
-				C3AC67651D82002F00FC956D /* FIRSample.m */,
+				D81A05F71B86A78700498183 /* FUIAppDelegate.h */,
+				D81A05F81B86A78700498183 /* FUIAppDelegate.m */,
+				C3F23ECE1D80F5890020509F /* FUISamplesViewController.h */,
+				C3F23ECF1D80F58A0020509F /* FUISamplesViewController.m */,
+				C3AC67641D82002F00FC956D /* FUISample.h */,
+				C3AC67651D82002F00FC956D /* FUISample.m */,
 				C3AC67501D81FE6B00FC956D /* Samples */,
 				D81A05FD1B86A78700498183 /* Main.storyboard */,
 				D81A06001B86A78700498183 /* Images.xcassets */,
@@ -265,7 +265,7 @@
 				C3A8B7C21DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.xib in Resources */,
 				D81A05FF1B86A78700498183 /* Main.storyboard in Resources */,
 				C34FC1FF1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.xib in Resources */,
-				C3AC67621D81FE6B00FC956D /* FIRChatMessageTableViewCell.xib in Resources */,
+				C3AC67621D81FE6B00FC956D /* FUIChatMessageTableViewCell.xib in Resources */,
 				C3A8B7CC1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.xib in Resources */,
 				D81A06041B86A78700498183 /* LaunchScreen.xib in Resources */,
 				D81A06011B86A78700498183 /* Images.xcassets in Resources */,
@@ -283,21 +283,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D81A05F91B86A78700498183 /* AppDelegate.m in Sources */,
+				D81A05F91B86A78700498183 /* FUIAppDelegate.m in Sources */,
 				C3A8B7CB1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.m in Sources */,
 				C375CB181D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m in Sources */,
 				C3A8B7C11DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.m in Sources */,
 				C375CB1C1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.m in Sources */,
 				C34FC1FE1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.m in Sources */,
-				C3F23ED01D80F58A0020509F /* FIRSamplesViewController.m in Sources */,
-				C3AC67631D81FE6B00FC956D /* FIRChatViewController.m in Sources */,
-				C3AC67611D81FE6B00FC956D /* FIRChatMessageTableViewCell.m in Sources */,
-				C3AC67601D81FE6B00FC956D /* FIRChatMessageDataSource.m in Sources */,
+				C3F23ED01D80F58A0020509F /* FUISamplesViewController.m in Sources */,
+				C3AC67631D81FE6B00FC956D /* FUIChatViewController.m in Sources */,
+				C3AC67611D81FE6B00FC956D /* FUIChatMessageTableViewCell.m in Sources */,
+				C3AC67601D81FE6B00FC956D /* FUIChatMessageDataSource.m in Sources */,
 				C3A8B7C61DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.m in Sources */,
-				C3AC675F1D81FE6B00FC956D /* FIRChatMessage.m in Sources */,
+				C3AC675F1D81FE6B00FC956D /* FUIChatMessage.m in Sources */,
 				D81A05F61B86A78700498183 /* main.m in Sources */,
-				C3AC67661D82002F00FC956D /* FIRSample.m in Sources */,
-				8D7F86B51D9DAA0100C2A122 /* FIRStorageViewController.m in Sources */,
+				C3AC67661D82002F00FC956D /* FUISample.m in Sources */,
+				8D7F86B51D9DAA0100C2A122 /* FUIStorageViewController.m in Sources */,
 				C329B1B21DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m in Sources */,
 				C3AC675E1D81FE6B00FC956D /* FIRAuthViewController.m in Sources */,
 			);

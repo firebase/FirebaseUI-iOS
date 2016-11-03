@@ -14,12 +14,13 @@
 //  limitations under the License.
 //
 
-#import "FIRChatMessageTableViewCell.h"
+#import <UIKit/UIKit.h>
 
-@implementation FIRChatMessageTableViewCell
+@interface FUIChatMessageTableViewCell : UITableViewCell
+@property(weak, nonatomic) IBOutlet UILabel *myMessageLabel;
+@property(weak, nonatomic) IBOutlet UILabel *myNameLabel;
 
-- (instancetype)initWithFrame:(CGRect)frame {
-  return [super initWithFrame:frame];
-}
+@property(weak, nonatomic) IBOutlet UILabel *otherMessageLabel;
+@property(weak, nonatomic) IBOutlet UILabel *otherNameLabel;
 
 @end

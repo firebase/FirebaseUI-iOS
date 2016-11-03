@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "AppDelegate.h"
+#import "FUIAppDelegate.h"
 
 @import Firebase;
 #import <Fabric/Fabric.h>
@@ -22,7 +22,7 @@
 #import <TwitterKit/Twitter.h>
 
 
-@implementation AppDelegate
+@implementation FUIAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [Fabric with:@[[Twitter class]]];
