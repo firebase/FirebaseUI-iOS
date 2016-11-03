@@ -491,6 +491,7 @@
 				BITCODE_GENERATION_MODE = "";
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "FirebaseUI-demo-swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.google.firebase.firebaseui.FirebaseUI-demo-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -509,6 +510,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "FirebaseUI-demo-swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.google.firebase.firebaseui.FirebaseUI-demo-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
