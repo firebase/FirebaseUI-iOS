@@ -20,21 +20,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class FirebaseIndexTableViewDataSource;
+@class FUIIndexTableViewDataSource;
 
-@protocol FirebaseIndexTableViewDataSourceDelegate <NSObject>
+@protocol FUIIndexTableViewDataSourceDelegate <NSObject>
 @optional
 
 /**
  * Called when an individual reference responsible for populating one cell
  * of the table view has raised an error. This error is unrecoverable, but
  * does not have any effect on the contents of other cells.
- * @param dataSource The FirebaseIndexTableViewDataSource raising the error.
+ * @param dataSource The FUIIndexTableViewDataSource raising the error.
  * @param ref The reference that failed to load.
  * @param index The index (i.e. row) of the query that failed to load.
  * @param error The error that occurred.
  */
-- (void)dataSource:(FirebaseIndexTableViewDataSource *)dataSource
+- (void)dataSource:(FUIIndexTableViewDataSource *)dataSource
          reference:(FIRDatabaseReference *)ref
 didFailLoadAtIndex:(NSUInteger)index
          withError:(NSError *)error;
@@ -42,25 +42,25 @@ didFailLoadAtIndex:(NSUInteger)index
 /**
  * Called when the index query used to initialize this data source raised an error.
  * This error is unrecoverable, and likely indicates a bad index query.
- * @param dataSource The FirebaseIndexTableViewDataSource raising the error.
+ * @param dataSource The FUIIndexTableViewDataSource raising the error.
  * @param error The error that occurred.
  */
-- (void)dataSource:(FirebaseIndexTableViewDataSource *)dataSource
+- (void)dataSource:(FUIIndexTableViewDataSource *)dataSource
   indexQueryDidFailWithError:(NSError *)error;
 
 @end
 
 /**
- * An object that manages a @c FirebaseIndexArray and uses it to populate and update
+ * An object that manages a @c FUIIndexArray and uses it to populate and update
  * a table view with a single section. The data source maintains a reference to but
  * does not claim ownership of the table view that it updates.
  */
-@interface FirebaseIndexTableViewDataSource : NSObject <UITableViewDataSource>
+@interface FUIIndexTableViewDataSource : NSObject <UITableViewDataSource>
 
 /**
  * The delegate that will receive events from this data source.
  */
-@property (nonatomic, readwrite, weak, nullable) id<FirebaseIndexTableViewDataSourceDelegate> delegate;
+@property (nonatomic, readwrite, weak, nullable) id<FUIIndexTableViewDataSourceDelegate> delegate;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -79,14 +79,14 @@ didFailLoadAtIndex:(NSUInteger)index
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
                     tableView:(UITableView *)tableView
-                     delegate:(nullable id<FirebaseIndexTableViewDataSourceDelegate>)delegate
+                     delegate:(nullable id<FUIIndexTableViewDataSourceDelegate>)delegate
                  populateCell:(UITableViewCell *(^)(UITableView *tableView,
                                                     NSIndexPath *indexPath,
                                                     FIRDataSnapshot *_Nullable snap))populateCell NS_DESIGNATED_INITIALIZER;
 
 @end
 
-@interface UITableView (FirebaseIndexTableViewDataSource)
+@interface UITableView (FUIIndexTableViewDataSource)
 
 /**
  * Creates a data source, attaches it to the table view, and returns it.
@@ -103,9 +103,9 @@ didFailLoadAtIndex:(NSUInteger)index
  * @return The created data source. This value must be retained while the table
  *   view is in use.
  */
-- (FirebaseIndexTableViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
+- (FUIIndexTableViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
                                                     data:(FIRDatabaseReference *)data
-                                                delegate:(id<FirebaseIndexTableViewDataSourceDelegate>)delegate
+                                                delegate:(id<FUIIndexTableViewDataSourceDelegate>)delegate
                                             populateCell:(UITableViewCell *(^)(UITableView *view,
                                                                                NSIndexPath *indexPath,
                                                                                FIRDataSnapshot *_Nullable snap))populateCell;

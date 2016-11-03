@@ -19,14 +19,14 @@
 
 @import FirebaseDatabaseUI;
 
-#import "FirebaseIndexTableViewDataSource.h"
+#import "FUIIndexTableViewDataSource.h"
 #import "FUIDatabaseTestUtils.h"
 
-static NSString *const kTestReuseIdentifier = @"FirebaseIndexTableViewDataSourceTest";
+static NSString *const kTestReuseIdentifier = @"FUIIndexTableViewDataSourceTest";
 
-@interface FirebaseIndexTableViewDataSourceTest : XCTestCase <FirebaseIndexTableViewDataSourceDelegate>
+@interface FUIIndexTableViewDataSourceTest : XCTestCase <FUIIndexTableViewDataSourceDelegate>
 
-@property (nonatomic, readwrite) FirebaseIndexTableViewDataSource *dataSource;
+@property (nonatomic, readwrite) FUIIndexTableViewDataSource *dataSource;
 
 @property (nonatomic, readwrite) UITableView *tableView;
 
@@ -37,7 +37,7 @@ static NSString *const kTestReuseIdentifier = @"FirebaseIndexTableViewDataSource
 
 @end
 
-@implementation FirebaseIndexTableViewDataSourceTest
+@implementation FUIIndexTableViewDataSourceTest
 
 static inline NSDictionary *database() {
   static NSDictionary *dict;

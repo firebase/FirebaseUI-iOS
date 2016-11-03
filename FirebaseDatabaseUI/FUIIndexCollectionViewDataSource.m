@@ -14,13 +14,13 @@
 //  limitations under the License.
 //
 
-#import "FirebaseIndexCollectionViewDataSource.h"
+#import "FUIIndexCollectionViewDataSource.h"
 
-#import "FirebaseIndexArray.h"
+#import "FUIIndexArray.h"
 
-@interface FirebaseIndexCollectionViewDataSource () <FirebaseIndexArrayDelegate>
+@interface FUIIndexCollectionViewDataSource () <FUIIndexArrayDelegate>
 
-@property (nonatomic, readonly, nonnull) FirebaseIndexArray *array;
+@property (nonatomic, readonly, nonnull) FUIIndexArray *array;
 @property (nonatomic, readonly, weak) UICollectionView *collectionView;
 
 @property (nonatomic, readonly, copy) UICollectionViewCell *(^populateCell)
@@ -28,18 +28,18 @@
 
 @end
 
-@implementation FirebaseIndexCollectionViewDataSource
+@implementation FUIIndexCollectionViewDataSource
 
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
                collectionView:(UICollectionView *)collectionView
-                     delegate:(id<FirebaseIndexCollectionViewDataSourceDelegate>)delegate
+                     delegate:(id<FUIIndexCollectionViewDataSourceDelegate>)delegate
                  populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
                                                          NSIndexPath *indexPath,
                                                          FIRDataSnapshot *snap))populateCell {
   self = [super init];
   if (self != nil) {
-    _array = [[FirebaseIndexArray alloc] initWithIndex:indexQuery
+    _array = [[FUIIndexArray alloc] initWithIndex:indexQuery
                                                   data:dataQuery
                                               delegate:self];
     _collectionView = collectionView;
@@ -50,9 +50,9 @@
   return self;
 }
 
-#pragma mark - FirebaseIndexArrayDelegate
+#pragma mark - FUIIndexArrayDelegate
 
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
     reference:(FIRDatabaseReference *)ref
       atIndex:(NSUInteger)index
 didFailLoadWithError:(NSError *)error {
@@ -61,35 +61,35 @@ didFailLoadWithError:(NSError *)error {
   }
 }
 
-- (void)array:(FirebaseIndexArray *)array queryCancelledWithError:(NSError *)error {
+- (void)array:(FUIIndexArray *)array queryCancelledWithError:(NSError *)error {
   if ([self.delegate respondsToSelector:@selector(dataSource:indexQueryDidFailWithError:)]) {
     [self.delegate dataSource:self indexQueryDidFailWithError:error];
   }
   NSLog(@"%@ Error: Firebase query cancelled with error %@", self, error);
 }
 
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
 didAddReference:(FIRDatabaseReference *)ref
       atIndex:(NSUInteger)index {
   [self.collectionView
    insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
 didChangeReference:(FIRDatabaseReference *)ref
       atIndex:(NSUInteger)index {
   [self.collectionView
    reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
 didRemoveReference:(FIRDatabaseReference *)ref
       atIndex:(NSUInteger)index {
   [self.collectionView
    deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
 didMoveReference:(FIRDatabaseReference *)ref
     fromIndex:(NSUInteger)fromIndex
       toIndex:(NSUInteger)toIndex {
@@ -97,7 +97,7 @@ didMoveReference:(FIRDatabaseReference *)ref
                                toIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]];
 }
 
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
     reference:(FIRDatabaseReference *)ref
 didLoadObject:(FIRDataSnapshot *)object
       atIndex:(NSUInteger)index {
@@ -120,16 +120,16 @@ didLoadObject:(FIRDataSnapshot *)object
 
 @end
 
-@implementation UICollectionView (FirebaseIndexCollectionViewDataSource)
+@implementation UICollectionView (FUIIndexCollectionViewDataSource)
 
-- (FirebaseIndexCollectionViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
+- (FUIIndexCollectionViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
                                                          data:(FIRDatabaseReference *)data
-                                                     delegate:(id<FirebaseIndexCollectionViewDataSourceDelegate>)delegate
+                                                     delegate:(id<FUIIndexCollectionViewDataSourceDelegate>)delegate
                                                  populateCell:(UICollectionViewCell *(^)(UICollectionView *,
                                                                                          NSIndexPath *,
                                                                                          FIRDataSnapshot *))populateCell {
-  FirebaseIndexCollectionViewDataSource *dataSource =
-    [[FirebaseIndexCollectionViewDataSource alloc] initWithIndex:index
+  FUIIndexCollectionViewDataSource *dataSource =
+    [[FUIIndexCollectionViewDataSource alloc] initWithIndex:index
                                                             data:data
                                                   collectionView:self
                                                         delegate:delegate

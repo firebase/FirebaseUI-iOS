@@ -146,7 +146,7 @@
   [self.observers removeObjectForKey:@(handle)];
 }
 
-- (id<FIRDataObservable>)child:(NSString *)path {
+- (id<FUIDataObservable>)child:(NSString *)path {
   if (self.contents[path] == nil) { return nil; }
   NSParameterAssert([self.contents[path] isKindOfClass:[NSDictionary class]]);
   NSDictionary *subdict = self.contents[path];
@@ -252,9 +252,9 @@
 
 @end
 
-@implementation FUIFirebaseIndexArrayTestDelegate
+@implementation FUIIndexArrayTestDelegate
 
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
     reference:(nonnull FIRDatabaseReference *)ref
 didLoadObject:(nonnull FIRDataSnapshot *)object
       atIndex:(NSUInteger)index {
@@ -263,35 +263,35 @@ didLoadObject:(nonnull FIRDataSnapshot *)object
   }
 }
 
-- (void)array:(FirebaseIndexArray *)array reference:(nonnull FIRDatabaseReference *)ref
+- (void)array:(FUIIndexArray *)array reference:(nonnull FIRDatabaseReference *)ref
       atIndex:(NSUInteger)index didFailLoadWithError:(nonnull NSError *)error {
   if (self.didFail != NULL) {
     self.didFail(array, ref, index, error);
   }
 }
 
-- (void)array:(FirebaseIndexArray *)array didAddReference:(nonnull FIRDatabaseReference *)ref
+- (void)array:(FUIIndexArray *)array didAddReference:(nonnull FIRDatabaseReference *)ref
       atIndex:(NSUInteger)index {
   if (self.didAddQuery != NULL) {
     self.didAddQuery(array, ref, index);
   }
 }
 
-- (void)array:(FirebaseIndexArray *)array didChangeReference:(nonnull FIRDatabaseReference *)ref
+- (void)array:(FUIIndexArray *)array didChangeReference:(nonnull FIRDatabaseReference *)ref
       atIndex:(NSUInteger)index {
   if (self.didChangeQuery != NULL) {
     self.didChangeQuery(array, ref, index);
   }
 }
 
-- (void)array:(FirebaseIndexArray *)array didRemoveReference:(nonnull FIRDatabaseReference *)ref
+- (void)array:(FUIIndexArray *)array didRemoveReference:(nonnull FIRDatabaseReference *)ref
       atIndex:(NSUInteger)index {
   if (self.didRemoveQuery != nil) {
     self.didRemoveQuery(array, ref, index);
   }
 }
 
-- (void)array:(FirebaseIndexArray *)array didMoveReference:(nonnull FIRDatabaseReference *)ref
+- (void)array:(FUIIndexArray *)array didMoveReference:(nonnull FIRDatabaseReference *)ref
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   if (self.didMoveQuery != NULL) {
     self.didMoveQuery(array, ref, fromIndex, toIndex);

@@ -20,21 +20,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class FirebaseIndexCollectionViewDataSource;
+@class FUIIndexCollectionViewDataSource;
 
-@protocol FirebaseIndexCollectionViewDataSourceDelegate <NSObject>
+@protocol FUIIndexCollectionViewDataSourceDelegate <NSObject>
 @optional
 
 /**
  * Called when an individual reference responsible for populating one cell
  * of the collection view has raised an error. This error is unrecoverable, but
  * does not have any effect on the contents of other cells.
- * @param dataSource The FirebaseIndexCollectionViewDataSource raising the error.
+ * @param dataSource The FUIIndexCollectionViewDataSource raising the error.
  * @param ref The reference that failed to load.
  * @param index The index (i.e. row) of the query that failed to load.
  * @param error The error that occurred.
  */
-- (void)dataSource:(FirebaseIndexCollectionViewDataSource *)dataSource
+- (void)dataSource:(FUIIndexCollectionViewDataSource *)dataSource
          reference:(FIRDatabaseReference *)ref
 didFailLoadAtIndex:(NSUInteger)index
          withError:(NSError *)error;
@@ -42,22 +42,22 @@ didFailLoadAtIndex:(NSUInteger)index
 /**
  * Called when the index query used to initialize this data source raised an error.
  * This error is unrecoverable, and likely indicates a bad index query.
- * @param dataSource The FirebaseIndexCollectionViewDataSource raising the error.
+ * @param dataSource The FUIIndexCollectionViewDataSource raising the error.
  * @param error The error that occurred.
  */
-- (void)dataSource:(FirebaseIndexCollectionViewDataSource *)dataSource
+- (void)dataSource:(FUIIndexCollectionViewDataSource *)dataSource
   indexQueryDidFailWithError:(NSError *)error;
 
 @end
 
 /**
- * An object that manages a @c FirebaseIndexArray and uses it to populate and update
+ * An object that manages a @c FUIIndexArray and uses it to populate and update
  * a collection view with a single section. The data source maintains a reference to but
  * does not claim ownership of the collection view that it updates.
  */
-@interface FirebaseIndexCollectionViewDataSource : NSObject <UICollectionViewDataSource>
+@interface FUIIndexCollectionViewDataSource : NSObject <UICollectionViewDataSource>
 
-@property (nonatomic, readwrite, weak, nullable) id<FirebaseIndexCollectionViewDataSourceDelegate> delegate;
+@property (nonatomic, readwrite, weak, nullable) id<FUIIndexCollectionViewDataSourceDelegate> delegate;
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -76,14 +76,14 @@ didFailLoadAtIndex:(NSUInteger)index
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
                collectionView:(UICollectionView *)collectionView
-                     delegate:(nullable id<FirebaseIndexCollectionViewDataSourceDelegate>)delegate
+                     delegate:(nullable id<FUIIndexCollectionViewDataSourceDelegate>)delegate
                  populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
                                                          NSIndexPath *indexPath,
                                                          FIRDataSnapshot *_Nullable snap))populateCell NS_DESIGNATED_INITIALIZER;
 
 @end
 
-@interface UICollectionView (FirebaseIndexCollectionViewDataSource)
+@interface UICollectionView (FUIIndexCollectionViewDataSource)
 
 /**
  * Creates a data source, attaches it to the collection view, and returns it.
@@ -100,9 +100,9 @@ didFailLoadAtIndex:(NSUInteger)index
  * @return The created data source. This value must be retained while the collection
  *   view is in use.
  */
-- (FirebaseIndexCollectionViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
+- (FUIIndexCollectionViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
                                                          data:(FIRDatabaseReference *)data
-                                                     delegate:(id<FirebaseIndexCollectionViewDataSourceDelegate>)delegate
+                                                     delegate:(id<FUIIndexCollectionViewDataSourceDelegate>)delegate
                                                  populateCell:(UICollectionViewCell *(^)(UICollectionView *view,
                                                                                          NSIndexPath *indexPath,
                                                                                          FIRDataSnapshot *_Nullable snap))populateCell;

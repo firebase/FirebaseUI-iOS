@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 // A dummy observable so we can test this without relying on an internet connection.
-@interface FUITestObservable: NSObject <FIRDataObservable>
+@interface FUITestObservable: NSObject <FUIDataObservable>
 
 // The initialized observable behaves like a FIRDatabaseQuery and pretends the
 // provided dict is serialized JSON.
@@ -97,14 +97,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^didMoveObject)(FUIArray *array, id object, NSUInteger fromIndex, NSUInteger toIndex);
 @end
 
-@interface FUIFirebaseIndexArrayTestDelegate : NSObject <FirebaseIndexArrayDelegate>
-@property (nonatomic, copy) void (^didLoad)(FirebaseIndexArray *array, FIRDatabaseReference *ref, FIRDataSnapshot *snap, NSUInteger index);
-@property (nonatomic, copy) void (^didFail)(FirebaseIndexArray *array, FIRDatabaseReference *ref, NSUInteger index, NSError *error);
-@property (nonatomic, copy) void (^queryCancelled)(FirebaseIndexArray *array, NSError *error);
-@property (nonatomic, copy) void (^didAddQuery)(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger index);
-@property (nonatomic, copy) void (^didChangeQuery)(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger index);
-@property (nonatomic, copy) void (^didRemoveQuery)(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger index);
-@property (nonatomic, copy) void (^didMoveQuery)(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger fromIndex, NSUInteger toIndex);
+@interface FUIIndexArrayTestDelegate : NSObject <FUIIndexArrayDelegate>
+@property (nonatomic, copy) void (^didLoad)(FUIIndexArray *array, FIRDatabaseReference *ref, FIRDataSnapshot *snap, NSUInteger index);
+@property (nonatomic, copy) void (^didFail)(FUIIndexArray *array, FIRDatabaseReference *ref, NSUInteger index, NSError *error);
+@property (nonatomic, copy) void (^queryCancelled)(FUIIndexArray *array, NSError *error);
+@property (nonatomic, copy) void (^didAddQuery)(FUIIndexArray *array, FIRDatabaseReference *query, NSUInteger index);
+@property (nonatomic, copy) void (^didChangeQuery)(FUIIndexArray *array, FIRDatabaseReference *query, NSUInteger index);
+@property (nonatomic, copy) void (^didRemoveQuery)(FUIIndexArray *array, FIRDatabaseReference *query, NSUInteger index);
+@property (nonatomic, copy) void (^didMoveQuery)(FUIIndexArray *array, FIRDatabaseReference *query, NSUInteger fromIndex, NSUInteger toIndex);
 @end
 
 NS_ASSUME_NONNULL_END

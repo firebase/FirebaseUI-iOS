@@ -52,11 +52,11 @@
   return self;
 }
 
-- (instancetype)initWithQuery:(id<FIRDataObservable>)query {
+- (instancetype)initWithQuery:(id<FUIDataObservable>)query {
   return [self initWithQuery:query delegate:nil];
 }
 
-+ (instancetype)arrayWithQuery:(id<FIRDataObservable>)query {
++ (instancetype)arrayWithQuery:(id<FUIDataObservable>)query {
   return [[self alloc] initWithQuery:query];
 }
 

@@ -22,13 +22,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class FirebaseIndexArray;
+@class FUIIndexArray;
 
 /**
- * A protocol to allow instances of FirebaseIndexArray to raise events through a
+ * A protocol to allow instances of FUIIndexArray to raise events through a
  * delegate. Raises all Firebase events except @c FIRDataEventTypeValue.
  */
-@protocol FirebaseIndexArrayDelegate <NSObject>
+@protocol FUIIndexArrayDelegate <NSObject>
 
 @optional
 
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param object The database reference's contents.
  * @param index The index of the reference that was loaded.
  */
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
     reference:(FIRDatabaseReference *)ref
 didLoadObject:(FIRDataSnapshot *)object
       atIndex:(NSUInteger)index;
@@ -53,7 +53,7 @@ didLoadObject:(FIRDataSnapshot *)object
  * @param index The index in the array of the reference that failed to load.
  * @param error The error that occurred.
  */
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
     reference:(FIRDatabaseReference *)ref
       atIndex:(NSUInteger)index
 didFailLoadWithError:(NSError *)error;
@@ -65,7 +65,7 @@ didFailLoadWithError:(NSError *)error;
  * @param ref The database reference added to the array
  * @param index The index the reference was added at
  */
-- (void)array:(FirebaseIndexArray *)array didAddReference:(FIRDatabaseReference *)ref atIndex:(NSUInteger)index;
+- (void)array:(FUIIndexArray *)array didAddReference:(FIRDatabaseReference *)ref atIndex:(NSUInteger)index;
 
 /**
  * Delegate method which is called whenever an object is changed in a
@@ -74,7 +74,7 @@ didFailLoadWithError:(NSError *)error;
  * @param ref The database reference that changed in the array
  * @param index The index the reference was changed at
  */
-- (void)array:(FirebaseIndexArray *)array didChangeReference:(FIRDatabaseReference *)ref atIndex:(NSUInteger)index;
+- (void)array:(FUIIndexArray *)array didChangeReference:(FIRDatabaseReference *)ref atIndex:(NSUInteger)index;
 
 /**
  * Delegate method which is called whenever an object is removed from a
@@ -83,7 +83,7 @@ didFailLoadWithError:(NSError *)error;
  * @param ref The database reference removed from the array
  * @param index The index the reference was removed at
  */
-- (void)array:(FirebaseIndexArray *)array didRemoveReference:(FIRDatabaseReference *)ref atIndex:(NSUInteger)index;
+- (void)array:(FUIIndexArray *)array didRemoveReference:(FIRDatabaseReference *)ref atIndex:(NSUInteger)index;
 
 /**
  * Delegate method which is called whenever an object is moved within a
@@ -93,7 +93,7 @@ didFailLoadWithError:(NSError *)error;
  * @param fromIndex The index the reference is being moved from
  * @param toIndex The index the reference is being moved to
  */
-- (void)array:(FirebaseIndexArray *)array didMoveReference:(FIRDatabaseReference *)ref fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+- (void)array:(FUIIndexArray *)array didMoveReference:(FIRDatabaseReference *)ref fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
 /**
  * Delegate method which is called whenever the backing query is canceled. This error is fatal
@@ -101,16 +101,16 @@ didFailLoadWithError:(NSError *)error;
  * (i.e. by displaying a modal error explaining why there's no content).
  * @param error the error that was raised
  */
-- (void)array:(FirebaseIndexArray *)array queryCancelledWithError:(NSError *)error;
+- (void)array:(FUIIndexArray *)array queryCancelledWithError:(NSError *)error;
 
 @end
 
 /**
- * A FirebaseIndexArray instance uses a query's contents to query children of
+ * A FUIIndexArray instance uses a query's contents to query children of
  * a separate database reference, which is useful for displaying an indexed list
  * of data as described in https://firebase.google.com/docs/database/ios/structure-data
  */
-@interface FirebaseIndexArray : NSObject
+@interface FUIIndexArray : NSObject
 
 /**
  * An immutable copy of the loaded contents in the array. Returns an
@@ -121,7 +121,7 @@ didFailLoadWithError:(NSError *)error;
 /**
  * The delegate that this array should forward events to.
  */
-@property(nonatomic, weak) id<FirebaseIndexArrayDelegate> delegate;
+@property(nonatomic, weak) id<FUIIndexArrayDelegate> delegate;
 
 /**
  * Returns the number of items in the array.
@@ -131,7 +131,7 @@ didFailLoadWithError:(NSError *)error;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- * Initializes a FirebaseIndexArray with an index query and a data query.
+ * Initializes a FUIIndexArray with an index query and a data query.
  * The array expects the keys of the children of the index query to match exactly children
  * of the data query.
  * @param index A Firebase database query whose childrens' keys are all children 
@@ -140,12 +140,12 @@ didFailLoadWithError:(NSError *)error;
  *   to populate the array's contents according to the index query.
  * @param delegate The delegate that events should be forwarded to.
  */
-- (instancetype)initWithIndex:(id<FIRDataObservable>)index
-                         data:(id<FIRDataObservable>)data
-                     delegate:(nullable id<FirebaseIndexArrayDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIndex:(id<FUIDataObservable>)index
+                         data:(id<FUIDataObservable>)data
+                     delegate:(nullable id<FUIIndexArrayDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 /**
- * Initializes a FirebaseIndexArray with an index query and a data query.
+ * Initializes a FUIIndexArray with an index query and a data query.
  * The array expects the keys of the children of the index query to be children
  * of the data query.
  * @param index A Firebase database query whose childrens' keys are all children
@@ -153,8 +153,8 @@ didFailLoadWithError:(NSError *)error;
  * @param data  A Firebase database reference whose children will be fetched and used
  *   to populate the array's contents according to the index query.
  */
-- (instancetype)initWithIndex:(id<FIRDataObservable>)index
-                         data:(id<FIRDataObservable>)data;
+- (instancetype)initWithIndex:(id<FUIDataObservable>)index
+                         data:(id<FUIDataObservable>)data;
 
 /**
  * Returns the snapshot at the given index, if it has loaded.
