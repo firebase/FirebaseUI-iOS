@@ -14,16 +14,16 @@
 //  limitations under the License.
 //
 
-#import "FirebaseQueryObserver.h"
+#import "FUIQueryObserver.h"
 
-@interface FirebaseQueryObserver ()
+@interface FUIQueryObserver ()
 
 @property (nonatomic, readonly) NSMutableSet<NSNumber *> *handles;
 @property (nonatomic, readwrite) FIRDataSnapshot *contents;
 
 @end
 
-@implementation FirebaseQueryObserver
+@implementation FUIQueryObserver
 
 - (instancetype)init {
   self = [self initWithQuery:(id _Nonnull)nil]; // silence a clang warning
@@ -34,7 +34,7 @@
   @throw e;
 }
 
-- (instancetype)initWithQuery:(id<FIRDataObservable>)query {
+- (instancetype)initWithQuery:(id<FUIDataObservable>)query {
   self = [super init];
   if (self != nil) {
     _query = query;
@@ -43,11 +43,11 @@
   return self;
 }
 
-+ (FirebaseQueryObserver *)observerForQuery:(id<FIRDataObservable>)query
-                                 completion:(void (^)(FirebaseQueryObserver *obs,
++ (FUIQueryObserver *)observerForQuery:(id<FUIDataObservable>)query
+                                 completion:(void (^)(FUIQueryObserver *obs,
                                                       FIRDataSnapshot *snap,
                                                       NSError *error))completion {
-  FirebaseQueryObserver *obs = [[FirebaseQueryObserver alloc] initWithQuery:query];
+  FUIQueryObserver *obs = [[FUIQueryObserver alloc] initWithQuery:query];
 
   void (^observerBlock)(FIRDataSnapshot *, NSString *) = ^(FIRDataSnapshot *snap,
                                                            NSString *previous) {
@@ -91,7 +91,7 @@ andPreviousSiblingKeyWithBlock:(void (^)(FIRDataSnapshot *snapshot, NSString *__
 
 - (BOOL)isEqual:(id)object {
   if (![object isKindOfClass:[self class]]) { return NO; }
-  FirebaseQueryObserver *obs = object;
+  FUIQueryObserver *obs = object;
   return [self.query isEqual:obs.query];
 }
 

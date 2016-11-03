@@ -22,13 +22,13 @@
 @import FirebaseDatabaseUI;
 
 #import "FUIDatabaseTestUtils.h"
-#import "FirebaseIndexArray.h"
+#import "FUIIndexArray.h"
 
 @interface FirebaseIndexArrayTest : XCTestCase
 @property (nonatomic) FUITestObservable *index;
 @property (nonatomic) FUITestObservable *data;
-@property (nonatomic) FirebaseIndexArray *array;
-@property (nonatomic) FUIFirebaseIndexArrayTestDelegate *arrayDelegate;
+@property (nonatomic) FUIIndexArray *array;
+@property (nonatomic) FUIIndexArrayTestDelegate *arrayDelegate;
 
 @property (nonatomic) NSMutableDictionary *dict;
 @end
@@ -59,9 +59,9 @@ static inline NSDictionary *database() {
   [super setUp];
   self.index = [[FUITestObservable alloc] initWithDictionary:database()[@"index"]];
   self.data = [[FUITestObservable alloc] initWithDictionary:database()[@"data"]];
-  self.array = [[FirebaseIndexArray alloc] initWithIndex:self.index
+  self.array = [[FUIIndexArray alloc] initWithIndex:self.index
                                                     data:self.data];
-  self.arrayDelegate = [[FUIFirebaseIndexArrayTestDelegate alloc] init];
+  self.arrayDelegate = [[FUIIndexArrayTestDelegate alloc] init];
   self.array.delegate = self.arrayDelegate;
   self.dict = [database() mutableCopy];
 }
@@ -94,7 +94,7 @@ static inline NSDictionary *database() {
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
 
-  self.arrayDelegate.didAddQuery = ^(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger index) {
+  self.arrayDelegate.didAddQuery = ^(FUIIndexArray *array, FIRDatabaseReference *query, NSUInteger index) {
     delegateWasCalled = YES;
     expectedParametersWereCorrect = (
       array == self.array &&
@@ -130,7 +130,7 @@ static inline NSDictionary *database() {
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
 
-  self.arrayDelegate.didRemoveQuery = ^(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger index) {
+  self.arrayDelegate.didRemoveQuery = ^(FUIIndexArray *array, FIRDatabaseReference *query, NSUInteger index) {
     delegateWasCalled = YES;
     expectedParametersWereCorrect = (
       array == self.array &&
@@ -204,7 +204,7 @@ static inline NSDictionary *database() {
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
 
-  self.arrayDelegate.didChangeQuery = ^(FirebaseIndexArray *array, FIRDatabaseReference *query, NSUInteger index) {
+  self.arrayDelegate.didChangeQuery = ^(FUIIndexArray *array, FIRDatabaseReference *query, NSUInteger index) {
     delegateWasCalled = YES;
     expectedParametersWereCorrect = (
       array == self.array &&
@@ -239,7 +239,7 @@ static inline NSDictionary *database() {
   __block BOOL delegateWasCalled = NO;
   __block BOOL expectedParametersWereCorrect = NO;
 
-  self.arrayDelegate.didMoveQuery = ^(FirebaseIndexArray *array,
+  self.arrayDelegate.didMoveQuery = ^(FUIIndexArray *array,
                                       FIRDatabaseReference *query,
                                       NSUInteger from,
                                       NSUInteger to) {

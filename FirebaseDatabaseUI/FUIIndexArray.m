@@ -18,27 +18,27 @@
 
 // clang-format on
 
-#import "FirebaseIndexArray.h"
-#import "FirebaseQueryObserver.h"
+#import "FUIIndexArray.h"
+#import "FUIQueryObserver.h"
 
-@interface FirebaseIndexArray () <FUIArrayDelegate>
+@interface FUIIndexArray () <FUIArrayDelegate>
 
-@property (nonatomic, readonly) id<FIRDataObservable> index;
-@property (nonatomic, readonly) id<FIRDataObservable> data;
+@property (nonatomic, readonly) id<FUIDataObservable> index;
+@property (nonatomic, readonly) id<FUIDataObservable> data;
 
 @property (nonatomic, readonly) FUIArray *indexArray;
 
-@property (nonatomic, readonly) NSMutableArray<FirebaseQueryObserver *> *observers;
+@property (nonatomic, readonly) NSMutableArray<FUIQueryObserver *> *observers;
 
 @end
 
 /**
- * FirebaseIndexArray manages an instance of FirebaseArray internally to
+ * FUIIndexArray manages an instance of FirebaseArray internally to
  * keep track of which queries it should be updating. The FirebaseArrayDelegate
  * methods are responsible for keeping observers up-to-date as the contents of
  * the FirebaseArray change.
  */
-@implementation FirebaseIndexArray
+@implementation FUIIndexArray
 
 - (instancetype)init {
   NSException *e =
@@ -48,9 +48,9 @@
   @throw e;
 }
 
-- (instancetype)initWithIndex:(id<FIRDataObservable>)index
-                         data:(id<FIRDataObservable>)data
-                     delegate:(nullable id<FirebaseIndexArrayDelegate>)delegate; {
+- (instancetype)initWithIndex:(id<FUIDataObservable>)index
+                         data:(id<FUIDataObservable>)data
+                     delegate:(nullable id<FUIIndexArrayDelegate>)delegate; {
   NSParameterAssert(index != nil);
   NSParameterAssert(data != nil);
   self = [super init];
@@ -64,8 +64,8 @@
   return self;
 }
 
-- (instancetype)initWithIndex:(id<FIRDataObservable>)index
-                         data:(id<FIRDataObservable>)data {
+- (instancetype)initWithIndex:(id<FUIDataObservable>)index
+                         data:(id<FUIDataObservable>)data {
   return [self initWithIndex:index data:data delegate:nil];
 }
 
@@ -76,7 +76,7 @@
 - (NSArray <FIRDataSnapshot *> *)items {
   NSArray *observers = [self.observers copy];
   NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:observers.count];
-  for (FirebaseQueryObserver *observer in observers) {
+  for (FUIQueryObserver *observer in observers) {
     if (observer.contents != nil) {
       [array addObject:observer.contents];
     }
@@ -88,10 +88,10 @@
   return self.observers.count;
 }
 
-// FirebaseIndexArray instance becomes unusable after invalidation.
+// FUIIndexArray instance becomes unusable after invalidation.
 - (void)invalidate {
   for (NSInteger i = 0; i < self.observers.count; i++) {
-    FirebaseQueryObserver *observer = self.observers[i];
+    FUIQueryObserver *observer = self.observers[i];
     [observer removeAllObservers];
   }
   _observers = nil;
@@ -107,7 +107,7 @@
 
 #pragma mark - FirebaseArrayDelegate
 
-- (void)observer:(FirebaseQueryObserver *)obs
+- (void)observer:(FUIQueryObserver *)obs
 didFinishLoadWithSnap:(FIRDataSnapshot *)snap
            error:(NSError *)error {
   // Need to look up location in array to account for possible moves
@@ -129,10 +129,10 @@ didFinishLoadWithSnap:(FIRDataSnapshot *)snap
  didAddObject:(FIRDataSnapshot *)object
       atIndex:(NSUInteger)index {
   NSParameterAssert([object.key isKindOfClass:[NSString class]]);
-  id<FIRDataObservable> query = [self.data child:object.key];
+  id<FUIDataObservable> query = [self.data child:object.key];
   __weak typeof(self) wSelf = self;
-  FirebaseQueryObserver *obs = [FirebaseQueryObserver observerForQuery:query
-                                                            completion:^(FirebaseQueryObserver *observer,
+  FUIQueryObserver *obs = [FUIQueryObserver observerForQuery:query
+                                                            completion:^(FUIQueryObserver *observer,
                                                                          FIRDataSnapshot *snap,
                                                                          NSError *error) {
     [wSelf observer:observer didFinishLoadWithSnap:snap error:error];
@@ -149,7 +149,7 @@ didMoveObject:(FIRDataSnapshot *)object
     fromIndex:(NSUInteger)fromIndex
       toIndex:(NSUInteger)toIndex {
   NSParameterAssert([object.key isKindOfClass:[NSString class]]);
-  FirebaseQueryObserver *obs = self.observers[fromIndex];
+  FUIQueryObserver *obs = self.observers[fromIndex];
 
   [self.observers removeObjectAtIndex:fromIndex];
   [self.observers insertObject:obs atIndex:toIndex];
@@ -169,9 +169,9 @@ didChangeObject:(FIRDataSnapshot *)object
 
   // Add new observer
   __weak typeof(self) wSelf = self;
-  id<FIRDataObservable> query = [self.data child:object.key];
-  FirebaseQueryObserver *obs = [FirebaseQueryObserver observerForQuery:query
-                                                            completion:^(FirebaseQueryObserver *observer,
+  id<FUIDataObservable> query = [self.data child:object.key];
+  FUIQueryObserver *obs = [FUIQueryObserver observerForQuery:query
+                                                            completion:^(FUIQueryObserver *observer,
                                                                          FIRDataSnapshot *snap,
                                                                          NSError *error) {
     [wSelf observer:observer didFinishLoadWithSnap:snap error:error];
@@ -191,7 +191,7 @@ didRemoveObject:(FIRDataSnapshot *)object
 
   [self.observers removeObjectAtIndex:index];
 
-  id<FIRDataObservable> query = [self.data child:object.key];
+  id<FUIDataObservable> query = [self.data child:object.key];
   if ([self.delegate respondsToSelector:@selector(array:didRemoveReference:atIndex:)]) {
     [self.delegate array:self didRemoveReference:query atIndex:index];
   }

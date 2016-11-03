@@ -14,13 +14,13 @@
 //  limitations under the License.
 //
 
-#import "FirebaseIndexTableViewDataSource.h"
+#import "FUIIndexTableViewDataSource.h"
 
-#import "FirebaseIndexArray.h"
+#import "FUIIndexArray.h"
 
-@interface FirebaseIndexTableViewDataSource () <FirebaseIndexArrayDelegate>
+@interface FUIIndexTableViewDataSource () <FUIIndexArrayDelegate>
 
-@property (nonatomic, readonly, nonnull) FirebaseIndexArray *array;
+@property (nonatomic, readonly, nonnull) FUIIndexArray *array;
 @property (nonatomic, readonly, weak) UITableView *tableView;
 
 @property (nonatomic, readonly, copy) UITableViewCell *(^populateCell)
@@ -28,7 +28,7 @@
 
 @end
 
-@implementation FirebaseIndexTableViewDataSource
+@implementation FUIIndexTableViewDataSource
 
 - (instancetype)init {
   NSException *e =
@@ -41,13 +41,13 @@
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
                     tableView:(UITableView *)tableView
-                     delegate:(nullable id<FirebaseIndexTableViewDataSourceDelegate>)delegate
+                     delegate:(nullable id<FUIIndexTableViewDataSourceDelegate>)delegate
                  populateCell:(UITableViewCell *(^)(UITableView *tableView,
                                                     NSIndexPath *indexPath,
                                                     FIRDataSnapshot *snap))populateCell {
   self = [super init];
   if (self != nil) {
-    _array = [[FirebaseIndexArray alloc] initWithIndex:indexQuery
+    _array = [[FUIIndexArray alloc] initWithIndex:indexQuery
                                                   data:dataQuery
                                               delegate:self];
     _tableView = tableView;
@@ -58,9 +58,9 @@
   return self;
 }
 
-#pragma mark - FirebaseIndexArrayDelegate 
+#pragma mark - FUIIndexArrayDelegate 
 
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
     reference:(FIRDatabaseReference *)ref
       atIndex:(NSUInteger)index
 didFailLoadWithError:(NSError *)error {
@@ -69,14 +69,14 @@ didFailLoadWithError:(NSError *)error {
   }
 }
 
-- (void)array:(FirebaseIndexArray *)array queryCancelledWithError:(NSError *)error {
+- (void)array:(FUIIndexArray *)array queryCancelledWithError:(NSError *)error {
   if ([self.delegate respondsToSelector:@selector(dataSource:indexQueryDidFailWithError:)]) {
     [self.delegate dataSource:self indexQueryDidFailWithError:error];
   }
   NSLog(@"%@ Error: Firebase query cancelled with error %@", self, error);
 }
 
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
 didAddReference:(FIRDatabaseReference *)ref
       atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
@@ -85,7 +85,7 @@ didAddReference:(FIRDatabaseReference *)ref
   [self.tableView endUpdates];
 }
 
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
 didChangeReference:(FIRDatabaseReference *)ref
       atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
@@ -94,7 +94,7 @@ didChangeReference:(FIRDatabaseReference *)ref
   [self.tableView endUpdates];
 }
 
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
 didRemoveReference:(FIRDatabaseReference *)ref
       atIndex:(NSUInteger)index {
   [self.tableView beginUpdates];
@@ -103,7 +103,7 @@ didRemoveReference:(FIRDatabaseReference *)ref
   [self.tableView endUpdates];
 }
 
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
 didMoveReference:(FIRDatabaseReference *)ref
     fromIndex:(NSUInteger)fromIndex
       toIndex:(NSUInteger)toIndex {
@@ -113,7 +113,7 @@ didMoveReference:(FIRDatabaseReference *)ref
   [self.tableView endUpdates];
 }
 
-- (void)array:(FirebaseIndexArray *)array
+- (void)array:(FUIIndexArray *)array
     reference:(FIRDatabaseReference *)ref
 didLoadObject:(FIRDataSnapshot *)object
       atIndex:(NSUInteger)index {
@@ -136,16 +136,16 @@ didLoadObject:(FIRDataSnapshot *)object
 
 @end
 
-@implementation UITableView (FirebaseIndexTableViewDataSource)
+@implementation UITableView (FUIIndexTableViewDataSource)
 
-- (FirebaseIndexTableViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
+- (FUIIndexTableViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
                                                     data:(FIRDatabaseReference *)data
-                                                delegate:(id<FirebaseIndexTableViewDataSourceDelegate>)delegate
+                                                delegate:(id<FUIIndexTableViewDataSourceDelegate>)delegate
                                             populateCell:(UITableViewCell *(^)(UITableView *,
                                                                                NSIndexPath *,
                                                                                FIRDataSnapshot *))populateCell {
-  FirebaseIndexTableViewDataSource *dataSource =
-    [[FirebaseIndexTableViewDataSource alloc] initWithIndex:index
+  FUIIndexTableViewDataSource *dataSource =
+    [[FUIIndexTableViewDataSource alloc] initWithIndex:index
                                                        data:data
                                                   tableView:self
                                                    delegate:delegate

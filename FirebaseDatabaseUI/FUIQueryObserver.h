@@ -14,31 +14,31 @@
 //  limitations under the License.
 //
 
-#import "FirebaseIndexArray.h"
+#import "FUIIndexArray.h"
 
 /**
- * An internal helper class used by FirebaseIndexArray to manage all its queries.
+ * An internal helper class used by FUIIndexArray to manage all its queries.
  */
-@interface FirebaseQueryObserver : NSObject
+@interface FUIQueryObserver : NSObject
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// The query observed by this observer.
-@property (nonatomic, readonly) id<FIRDataObservable> query;
+@property (nonatomic, readonly) id<FUIDataObservable> query;
 
 /// Populated when the query returns a result.
 @property (nonatomic, readonly, nullable) FIRDataSnapshot *contents;
 
 /**
- * Initializes a FirebaseQueryObserver
+ * Initializes a FUIQueryObserver
  */
-- (instancetype)initWithQuery:(id<FIRDataObservable>)query NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithQuery:(id<FUIDataObservable>)query NS_DESIGNATED_INITIALIZER;
 
 /**
  * Creates a query observer and immediately starts observing the query.
  */
-+ (FirebaseQueryObserver *)observerForQuery:(id<FIRDataObservable>)query
-                                 completion:(void (^_Nullable)(FirebaseQueryObserver *obs,
++ (FUIQueryObserver *)observerForQuery:(id<FUIDataObservable>)query
+                                 completion:(void (^_Nullable)(FUIQueryObserver *obs,
                                                                FIRDataSnapshot *_Nullable,
                                                                NSError *_Nullable))completion;
 

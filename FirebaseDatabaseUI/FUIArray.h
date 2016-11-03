@@ -24,7 +24,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol FIRDataObservable <NSObject>
+@protocol FUIDataObservable <NSObject>
 @required
 
 - (FIRDatabaseHandle)observeEventType:(FIRDataEventType)eventType
@@ -33,11 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)removeObserverWithHandle:(FIRDatabaseHandle)handle;
 
-- (id<FIRDataObservable>)child:(NSString *)path;
+- (id<FUIDataObservable>)child:(NSString *)path;
 
 @end
 
-@interface FIRDatabaseQuery (FIRDataObservable) <FIRDataObservable>
+@interface FIRDatabaseQuery (FUIDataObservable) <FUIDataObservable>
 @end
 
 /**
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The query on a Firebase reference that provides data to populate the array.
  */
-@property(strong, nonatomic) id<FIRDataObservable> query;
+@property(strong, nonatomic) id<FUIDataObservable> query;
 
 /**
  * The number of objects in the array.
@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param delegate An object conforming to FirebaseArrayDelegate that should receive delegate messages.
  * @return A FirebaseArray instance
  */
-- (instancetype)initWithQuery:(id<FIRDataObservable>)query
+- (instancetype)initWithQuery:(id<FUIDataObservable>)query
                      delegate:(nullable id<FUIArrayDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 /**
@@ -88,12 +88,12 @@ NS_ASSUME_NONNULL_BEGIN
  * @param query A query or Firebase database reference
  * @return An FUIArray instance
  */
-- (instancetype)initWithQuery:(id<FIRDataObservable>)query;
+- (instancetype)initWithQuery:(id<FUIDataObservable>)query;
 
 /**
  * See `initWithQuery:`
  */
-+ (instancetype)arrayWithQuery:(id<FIRDataObservable>)query;
++ (instancetype)arrayWithQuery:(id<FUIDataObservable>)query;
 
 - (instancetype)init NS_UNAVAILABLE;
 
