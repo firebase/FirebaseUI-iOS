@@ -14,17 +14,14 @@
 //  limitations under the License.
 //
 
-@import UIKit;
-@import FirebaseDatabase;
+#import <Foundation/Foundation.h>
 
-#import <FirebaseDatabaseUI/FUITableViewDataSource.h>
+@interface FUIChatMessage : NSObject
 
-@interface FIRChatViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>
+@property(copy, nonatomic) NSString *name;
+@property(copy, nonatomic) NSString *text;
+@property(copy, nonatomic) NSString *uid;
 
-@property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (strong, nonatomic) FUITableViewDataSource *dataSource;
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UITextField *inputTextField;
+- (instancetype)initWithName:(NSString *)name andText:(NSString *)text userId:(NSString *)uid;
 
 @end

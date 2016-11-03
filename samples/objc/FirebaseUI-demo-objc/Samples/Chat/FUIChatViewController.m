@@ -17,12 +17,12 @@
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <FirebaseAuth/FirebaseAuth.h>
 
-#import "FIRChatViewController.h"
-#import "FIRChatMessage.h"
-#import "FIRChatMessageTableViewCell.h"
-#import "FIRChatMessageDataSource.h"
+#import "FUIChatViewController.h"
+#import "FUIChatMessage.h"
+#import "FUIChatMessageTableViewCell.h"
+#import "FUIChatMessageDataSource.h"
 
-@implementation FIRChatViewController
+@implementation FUIChatViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -30,18 +30,18 @@
   self.ref = [[FIRDatabase database].reference child:@"objc_demo-chat"];
 
   NSString *identifier = @"cellReuseIdentifier";
-  UINib *nib = [UINib nibWithNibName:@"FIRChatMessageTableViewCell" bundle:nil];
+  UINib *nib = [UINib nibWithNibName:@"FUIChatMessageTableViewCell" bundle:nil];
   [self.tableView registerNib:nib forCellReuseIdentifier:identifier];
   self.dataSource =
-  [[FIRChatMessageDataSource alloc] initWithQuery:self.ref
+  [[FUIChatMessageDataSource alloc] initWithQuery:self.ref
                                              view:self.tableView
                                      populateCell:^UITableViewCell *(UITableView *tableView,
                                                                      NSIndexPath *indexPath,
                                                                      FIRDataSnapshot *snap) {
-    FIRChatMessage *message = [[FIRChatMessage alloc] initWithName:snap.value[@"name"]
+    FUIChatMessage *message = [[FUIChatMessage alloc] initWithName:snap.value[@"name"]
                                                            andText:snap.value[@"text"]
                                                             userId:snap.value[@"uid"]];
-    FIRChatMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    FUIChatMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if ([message.uid isEqualToString:[FIRAuth auth].currentUser.uid]) {
       cell.myMessageLabel.text = message.text;
       cell.myNameLabel.text = message.name;

@@ -1,5 +1,5 @@
 //
-//  FIRSampleContainer.m
+//  FUISample.m
 //
 //  Copyright (c) 2016 Google Inc.
 //
@@ -16,9 +16,9 @@
 //  limitations under the License.
 //
 
-#import "FIRSample.h"
+#import "FUISample.h"
 
-@implementation FIRSample
+@implementation FUISample
 
 - (id)initWithTitle:(NSString *)title
   sampleDescription:(NSString *)description
@@ -35,7 +35,7 @@
 + (instancetype)sampleWithTitle:(NSString *)title
               sampleDescription:(NSString *)description
                      controller:(FIRControllerBlock)block {
-  FIRSample *sample = [(FIRSample *)[self alloc] initWithTitle:title
+  FUISample *sample = [(FUISample *)[self alloc] initWithTitle:title
                                              sampleDescription:description
                                                     controller:block];
 

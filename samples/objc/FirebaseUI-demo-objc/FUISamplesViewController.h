@@ -1,4 +1,6 @@
 //
+//  SamplesViewController.h
+//
 //  Copyright (c) 2016 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,20 +16,8 @@
 //  limitations under the License.
 //
 
-#import "FIRChatMessageDataSource.h"
-@import FirebaseDatabase;
+#import <UIKit/UIKit.h>
 
-@implementation FIRChatMessageDataSource
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-  return YES; }
-
-- (void)tableView:(UITableView *)tableView
-commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
- forRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (editingStyle == UITableViewCellEditingStyleDelete) {
-    [[self refForIndex:indexPath.row] removeValue];
-  }
-}
+@interface FUISamplesViewController : UITableViewController
 
 @end

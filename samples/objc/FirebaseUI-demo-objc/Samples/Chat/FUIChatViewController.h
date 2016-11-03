@@ -1,6 +1,4 @@
 //
-//  SamplesViewController.h
-//
 //  Copyright (c) 2016 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +14,17 @@
 //  limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+@import FirebaseDatabase;
 
-@interface FIRSamplesViewController : UITableViewController
+#import <FirebaseDatabaseUI/FirebaseDatabaseUI.h>
+
+@interface FUIChatViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>
+
+@property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (strong, nonatomic) FUITableViewDataSource *dataSource;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextField *inputTextField;
 
 @end

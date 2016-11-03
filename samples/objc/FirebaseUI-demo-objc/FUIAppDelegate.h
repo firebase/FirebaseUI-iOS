@@ -14,14 +14,10 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface FIRChatMessage : NSObject
+@interface FUIAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property(copy, nonatomic) NSString *name;
-@property(copy, nonatomic) NSString *text;
-@property(copy, nonatomic) NSString *uid;
-
-- (instancetype)initWithName:(NSString *)name andText:(NSString *)text userId:(NSString *)uid;
+@property (strong, nonatomic) UIWindow *window;
 
 @end

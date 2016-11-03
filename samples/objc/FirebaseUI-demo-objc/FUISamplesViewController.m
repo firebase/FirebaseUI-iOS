@@ -16,17 +16,17 @@
 //  limitations under the License.
 //
 
-#import "FIRSample.h"
-#import "FIRSamplesViewController.h"
-#import "FIRChatViewController.h"
+#import "FUISample.h"
+#import "FUISamplesViewController.h"
+#import "FUIChatViewController.h"
 
-@interface FIRSamplesViewController ()
+@interface FUISamplesViewController ()
 
 @property (nonatomic) NSArray *samplesContainer;
 
 @end
 
-@implementation FIRSamplesViewController
+@implementation FUISamplesViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -40,7 +40,7 @@
 - (void)populateSamples {
   NSMutableArray *samples = [[NSMutableArray alloc] init];
 
-  [samples addObject:[FIRSample sampleWithTitle:@"Auth"
+  [samples addObject:[FUISample sampleWithTitle:@"Auth"
                               sampleDescription:@"Demonstrates the FirebaseAuthUI flow with customization options"
                                      controller:^UIViewController *{
                                        UIViewController *controller =
@@ -49,7 +49,7 @@
                                        return controller;
                                      }]];
 
-  [samples addObject:[FIRSample sampleWithTitle:@"Chat"
+  [samples addObject:[FUISample sampleWithTitle:@"Chat"
                               sampleDescription:@"Demonstrates using a FUICollectionViewDataSource to load data from Firebase Database into a UICollectionView for a basic chat app."
                                      controller:^UIViewController *{
                                        UIViewController *controller =
@@ -57,12 +57,12 @@
                                                                   bundle:NULL] instantiateViewControllerWithIdentifier:@"ViewController"];
                                        return controller;
                                      }]];
-  [samples addObject:[FIRSample sampleWithTitle:@"Storage"
+  [samples addObject:[FUISample sampleWithTitle:@"Storage"
                               sampleDescription:@"Demonstrates using FirebaseStorageUI to populate an image view."
                                      controller:^UIViewController *{
                                        UIViewController *controller =
                                        [[UIStoryboard storyboardWithName:@"Main"
-                                                                  bundle:NULL] instantiateViewControllerWithIdentifier:@"FIRStorageViewController"];
+                                                                  bundle:NULL] instantiateViewControllerWithIdentifier:@"FUIStorageViewController"];
                                        return controller;
                                      }]];
 
@@ -80,10 +80,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *cellId = @"FIRSampleCell";
+  static NSString *cellId = @"FUISampleCell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
 
-  FIRSample *sample = _samplesContainer[indexPath.row];
+  FUISample *sample = _samplesContainer[indexPath.row];
   cell.textLabel.text = sample.title;
   cell.detailTextLabel.text = sample.sampleDescription;
 
@@ -91,7 +91,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  FIRSample *sample = _samplesContainer[indexPath.row];
+  FUISample *sample = _samplesContainer[indexPath.row];
   UIViewController *viewController = sample.controllerBlock();
   
   [self.navigationController pushViewController:viewController animated:YES];

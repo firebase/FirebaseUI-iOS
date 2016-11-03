@@ -14,10 +14,22 @@
 //  limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
+#import "FUIChatMessage.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@implementation FUIChatMessage
 
-@property (strong, nonatomic) UIWindow *window;
+- (instancetype)init {
+  return [self initWithName:@"" andText:@"" userId:@""];
+}
+
+- (instancetype)initWithName:(NSString *)name andText:(NSString *)text userId:(NSString *)uid {
+  self = [super init];
+  if (self) {
+    self.name = name;
+    self.text = text;
+    self.uid = uid;
+  }
+  return self;
+}
 
 @end

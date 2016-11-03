@@ -16,12 +16,12 @@
 //  limitations under the License.
 //
 
-#import "FIRStorageViewController.h"
+#import "FUIStorageViewController.h"
 
 #import <FirebaseStorage/FirebaseStorage.h>
 #import <FirebaseStorageUI/FirebaseStorageUI.h>
 
-@interface FIRStorageViewController ()
+@interface FUIStorageViewController ()
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 
@@ -29,7 +29,7 @@
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *bottomConstraint;
 @end
 
-@implementation FIRStorageViewController
+@implementation FUIStorageViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];

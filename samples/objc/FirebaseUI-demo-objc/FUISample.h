@@ -1,4 +1,6 @@
 //
+//  FUISample.h
+//
 //  Copyright (c) 2016 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +16,20 @@
 //  limitations under the License.
 //
 
-#import "FIRChatMessage.h"
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@implementation FIRChatMessage
+typedef UIViewController *(^FIRControllerBlock)();
 
-- (instancetype)init {
-  return [self initWithName:@"" andText:@"" userId:@""];
-}
+@interface FUISample : NSObject
 
-- (instancetype)initWithName:(NSString *)name andText:(NSString *)text userId:(NSString *)uid {
-  self = [super init];
-  if (self) {
-    self.name = name;
-    self.text = text;
-    self.uid = uid;
-  }
-  return self;
-}
++ (instancetype)sampleWithTitle:(NSString *)title
+              sampleDescription:(NSString *)description
+                     controller:(FIRControllerBlock)block;
+
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *sampleDescription;
+@property (nonatomic, copy) FIRControllerBlock controllerBlock;
+
 
 @end
