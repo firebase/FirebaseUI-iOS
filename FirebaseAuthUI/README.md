@@ -59,15 +59,15 @@ import FirebaseAuthUI
 /* ... */
 
 FIRApp.configure()
-let authUI = FUIAuth.default()
+let authUI = FUIAuth.defaultAuthUI()
 // You need to adopt a FUIAuthDelegate protocol to receive callback
 authUI?.delegate = self
 ```
 
 ```objective-c
 // objc
-@import Firebase
-@import FirebaseAuthUI
+@import Firebase;
+@import FirebaseAuthUI;
 ...
 [FIRApp configure];
 FUIAuth *authUI = [FUIAuth defaultAuthUI];
