@@ -7,22 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F2F1C189D864A38727F2C92 /* libPods-FirebaseUI-demo-objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CE5CA21ADC4FA8E4181926 /* libPods-FirebaseUI-demo-objc.a */; };
 		8D7D5DC11D9D9536006C1857 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */; };
 		8D7F86B51D9DAA0100C2A122 /* FUIStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F86B41D9DAA0100C2A122 /* FUIStorageViewController.m */; };
-		C329B1B21DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B1B01DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m */; };
-		C329B1B31DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C329B1B11DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib */; };
-		C34FC1FE1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34FC1FC1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.m */; };
-		C34FC1FF1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C34FC1FD1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.xib */; };
-		C375CB181D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C375CB161D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m */; };
-		C375CB191D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375CB171D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib */; };
-		C375CB1C1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C375CB1B1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.m */; };
-		C3A8B7C11DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8B7BF1DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.m */; };
-		C3A8B7C21DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A8B7C01DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.xib */; };
-		C3A8B7C61DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8B7C41DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.m */; };
-		C3A8B7C71DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A8B7C51DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.xib */; };
-		C3A8B7CB1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8B7C91DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.m */; };
-		C3A8B7CC1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A8B7CA1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.xib */; };
-		C3AC675E1D81FE6B00FC956D /* FIRAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67531D81FE6B00FC956D /* FIRAuthViewController.m */; };
+		C329B1B21DAD6E5100059A13 /* FUICustomEmailEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B1B01DAD6E5100059A13 /* FUICustomEmailEntryViewController.m */; };
+		C329B1B31DAD6E5100059A13 /* FUICustomEmailEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C329B1B11DAD6E5100059A13 /* FUICustomEmailEntryViewController.xib */; };
+		C34FC1FE1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34FC1FC1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.m */; };
+		C34FC1FF1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C34FC1FD1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.xib */; };
+		C375CB181D935D1F002EECD3 /* FUICustomAuthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C375CB161D935D1F002EECD3 /* FUICustomAuthPickerViewController.m */; };
+		C375CB191D935D1F002EECD3 /* FUICustomAuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375CB171D935D1F002EECD3 /* FUICustomAuthPickerViewController.xib */; };
+		C375CB1C1D943D5F002EECD3 /* FUICustomAuthDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C375CB1B1D943D5F002EECD3 /* FUICustomAuthDelegate.m */; };
+		C3A8B7C11DAF073400CDF0ED /* FUICustomPasswordSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8B7BF1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.m */; };
+		C3A8B7C21DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A8B7C01DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib */; };
+		C3A8B7C61DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8B7C41DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.m */; };
+		C3A8B7C71DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A8B7C51DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.xib */; };
+		C3A8B7CB1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8B7C91DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.m */; };
+		C3A8B7CC1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A8B7CA1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.xib */; };
+		C3AC675E1D81FE6B00FC956D /* FUIAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67531D81FE6B00FC956D /* FUIAuthViewController.m */; };
 		C3AC675F1D81FE6B00FC956D /* FUIChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67561D81FE6B00FC956D /* FUIChatMessage.m */; };
 		C3AC67601D81FE6B00FC956D /* FUIChatMessageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67581D81FE6B00FC956D /* FUIChatMessageDataSource.m */; };
 		C3AC67611D81FE6B00FC956D /* FUIChatMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC675A1D81FE6B00FC956D /* FUIChatMessageTableViewCell.m */; };
@@ -38,31 +39,33 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		221D2CD42AC40F65DEDBF3E3 /* Pods-FirebaseUI-demo-objc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUI-demo-objc.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUI-demo-objc/Pods-FirebaseUI-demo-objc.release.xcconfig"; sourceTree = "<group>"; };
 		8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D7F86B31D9DAA0100C2A122 /* FUIStorageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FUIStorageViewController.h; path = Storage/FUIStorageViewController.h; sourceTree = "<group>"; };
 		8D7F86B41D9DAA0100C2A122 /* FUIStorageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FUIStorageViewController.m; path = Storage/FUIStorageViewController.m; sourceTree = "<group>"; };
-		C329B1AF1DAD6E5100059A13 /* FIRCustomEmailEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomEmailEntryViewController.h; sourceTree = "<group>"; };
-		C329B1B01DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomEmailEntryViewController.m; sourceTree = "<group>"; };
-		C329B1B11DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomEmailEntryViewController.xib; sourceTree = "<group>"; };
-		C34FC1FB1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomPasswordVerificationViewController.h; sourceTree = "<group>"; };
-		C34FC1FC1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomPasswordVerificationViewController.m; sourceTree = "<group>"; };
-		C34FC1FD1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomPasswordVerificationViewController.xib; sourceTree = "<group>"; };
-		C375CB151D935D1F002EECD3 /* FIRCustomAuthPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomAuthPickerViewController.h; sourceTree = "<group>"; };
-		C375CB161D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomAuthPickerViewController.m; sourceTree = "<group>"; };
-		C375CB171D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomAuthPickerViewController.xib; sourceTree = "<group>"; };
-		C375CB1A1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomAuthUIDelegate.h; sourceTree = "<group>"; };
-		C375CB1B1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomAuthUIDelegate.m; sourceTree = "<group>"; };
-		C3A8B7BE1DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomPasswordSignInViewController.h; sourceTree = "<group>"; };
-		C3A8B7BF1DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomPasswordSignInViewController.m; sourceTree = "<group>"; };
-		C3A8B7C01DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomPasswordSignInViewController.xib; sourceTree = "<group>"; };
-		C3A8B7C31DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomPasswordSignUpViewController.h; sourceTree = "<group>"; };
-		C3A8B7C41DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomPasswordSignUpViewController.m; sourceTree = "<group>"; };
-		C3A8B7C51DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomPasswordSignUpViewController.xib; sourceTree = "<group>"; };
-		C3A8B7C81DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRCustomPasswordRecoveryViewController.h; sourceTree = "<group>"; };
-		C3A8B7C91DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRCustomPasswordRecoveryViewController.m; sourceTree = "<group>"; };
-		C3A8B7CA1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FIRCustomPasswordRecoveryViewController.xib; sourceTree = "<group>"; };
-		C3AC67521D81FE6B00FC956D /* FIRAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRAuthViewController.h; sourceTree = "<group>"; };
-		C3AC67531D81FE6B00FC956D /* FIRAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRAuthViewController.m; sourceTree = "<group>"; };
+		B0CE5CA21ADC4FA8E4181926 /* libPods-FirebaseUI-demo-objc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseUI-demo-objc.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C329B1AF1DAD6E5100059A13 /* FUICustomEmailEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomEmailEntryViewController.h; sourceTree = "<group>"; };
+		C329B1B01DAD6E5100059A13 /* FUICustomEmailEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomEmailEntryViewController.m; sourceTree = "<group>"; };
+		C329B1B11DAD6E5100059A13 /* FUICustomEmailEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomEmailEntryViewController.xib; sourceTree = "<group>"; };
+		C34FC1FB1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomPasswordVerificationViewController.h; sourceTree = "<group>"; };
+		C34FC1FC1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomPasswordVerificationViewController.m; sourceTree = "<group>"; };
+		C34FC1FD1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordVerificationViewController.xib; sourceTree = "<group>"; };
+		C375CB151D935D1F002EECD3 /* FUICustomAuthPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomAuthPickerViewController.h; sourceTree = "<group>"; };
+		C375CB161D935D1F002EECD3 /* FUICustomAuthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomAuthPickerViewController.m; sourceTree = "<group>"; };
+		C375CB171D935D1F002EECD3 /* FUICustomAuthPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomAuthPickerViewController.xib; sourceTree = "<group>"; };
+		C375CB1A1D943D5F002EECD3 /* FUICustomAuthDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomAuthDelegate.h; sourceTree = "<group>"; };
+		C375CB1B1D943D5F002EECD3 /* FUICustomAuthDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomAuthDelegate.m; sourceTree = "<group>"; };
+		C3A8B7BE1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomPasswordSignInViewController.h; sourceTree = "<group>"; };
+		C3A8B7BF1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomPasswordSignInViewController.m; sourceTree = "<group>"; };
+		C3A8B7C01DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordSignInViewController.xib; sourceTree = "<group>"; };
+		C3A8B7C31DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomPasswordSignUpViewController.h; sourceTree = "<group>"; };
+		C3A8B7C41DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomPasswordSignUpViewController.m; sourceTree = "<group>"; };
+		C3A8B7C51DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordSignUpViewController.xib; sourceTree = "<group>"; };
+		C3A8B7C81DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomPasswordRecoveryViewController.h; sourceTree = "<group>"; };
+		C3A8B7C91DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomPasswordRecoveryViewController.m; sourceTree = "<group>"; };
+		C3A8B7CA1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordRecoveryViewController.xib; sourceTree = "<group>"; };
+		C3AC67521D81FE6B00FC956D /* FUIAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAuthViewController.h; sourceTree = "<group>"; };
+		C3AC67531D81FE6B00FC956D /* FUIAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAuthViewController.m; sourceTree = "<group>"; };
 		C3AC67551D81FE6B00FC956D /* FUIChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIChatMessage.h; sourceTree = "<group>"; };
 		C3AC67561D81FE6B00FC956D /* FUIChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIChatMessage.m; sourceTree = "<group>"; };
 		C3AC67571D81FE6B00FC956D /* FUIChatMessageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIChatMessageDataSource.h; sourceTree = "<group>"; };
@@ -76,6 +79,7 @@
 		C3AC67651D82002F00FC956D /* FUISample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISample.m; sourceTree = "<group>"; };
 		C3F23ECE1D80F5890020509F /* FUISamplesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISamplesViewController.h; sourceTree = "<group>"; };
 		C3F23ECF1D80F58A0020509F /* FUISamplesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISamplesViewController.m; sourceTree = "<group>"; };
+		D51EFD3F6922FA855D23087D /* Pods-FirebaseUI-demo-objc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUI-demo-objc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUI-demo-objc/Pods-FirebaseUI-demo-objc.debug.xcconfig"; sourceTree = "<group>"; };
 		D81A05F01B86A78700498183 /* FirebaseUI-demo-objc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FirebaseUI-demo-objc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D81A05F41B86A78700498183 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D81A05F51B86A78700498183 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -91,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F2F1C189D864A38727F2C92 /* libPods-FirebaseUI-demo-objc.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +111,14 @@
 			name = Storage;
 			sourceTree = "<group>";
 		};
+		B052761E5FE212FFCF193F2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B0CE5CA21ADC4FA8E4181926 /* libPods-FirebaseUI-demo-objc.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C3AC67501D81FE6B00FC956D /* Samples */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,28 +132,28 @@
 		C3AC67511D81FE6B00FC956D /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				C3AC67521D81FE6B00FC956D /* FIRAuthViewController.h */,
-				C3AC67531D81FE6B00FC956D /* FIRAuthViewController.m */,
-				C375CB1A1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.h */,
-				C375CB1B1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.m */,
-				C375CB151D935D1F002EECD3 /* FIRCustomAuthPickerViewController.h */,
-				C375CB161D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m */,
-				C375CB171D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib */,
-				C329B1AF1DAD6E5100059A13 /* FIRCustomEmailEntryViewController.h */,
-				C329B1B01DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m */,
-				C329B1B11DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib */,
-				C3A8B7C81DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.h */,
-				C3A8B7C91DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.m */,
-				C3A8B7CA1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.xib */,
-				C3A8B7BE1DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.h */,
-				C3A8B7BF1DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.m */,
-				C3A8B7C01DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.xib */,
-				C3A8B7C31DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.h */,
-				C3A8B7C41DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.m */,
-				C3A8B7C51DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.xib */,
-				C34FC1FB1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.h */,
-				C34FC1FC1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.m */,
-				C34FC1FD1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.xib */,
+				C3AC67521D81FE6B00FC956D /* FUIAuthViewController.h */,
+				C3AC67531D81FE6B00FC956D /* FUIAuthViewController.m */,
+				C375CB1A1D943D5F002EECD3 /* FUICustomAuthDelegate.h */,
+				C375CB1B1D943D5F002EECD3 /* FUICustomAuthDelegate.m */,
+				C375CB151D935D1F002EECD3 /* FUICustomAuthPickerViewController.h */,
+				C375CB161D935D1F002EECD3 /* FUICustomAuthPickerViewController.m */,
+				C375CB171D935D1F002EECD3 /* FUICustomAuthPickerViewController.xib */,
+				C329B1AF1DAD6E5100059A13 /* FUICustomEmailEntryViewController.h */,
+				C329B1B01DAD6E5100059A13 /* FUICustomEmailEntryViewController.m */,
+				C329B1B11DAD6E5100059A13 /* FUICustomEmailEntryViewController.xib */,
+				C3A8B7C81DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.h */,
+				C3A8B7C91DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.m */,
+				C3A8B7CA1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.xib */,
+				C3A8B7BE1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.h */,
+				C3A8B7BF1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.m */,
+				C3A8B7C01DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib */,
+				C3A8B7C31DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.h */,
+				C3A8B7C41DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.m */,
+				C3A8B7C51DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.xib */,
+				C34FC1FB1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.h */,
+				C34FC1FC1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.m */,
+				C34FC1FD1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.xib */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -167,6 +180,8 @@
 				8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */,
 				D81A05F21B86A78700498183 /* FirebaseUI-demo-objc */,
 				D81A05F11B86A78700498183 /* Products */,
+				E058F91CFF44511E1609B856 /* Pods */,
+				B052761E5FE212FFCF193F2A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -205,6 +220,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E058F91CFF44511E1609B856 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D51EFD3F6922FA855D23087D /* Pods-FirebaseUI-demo-objc.debug.xcconfig */,
+				221D2CD42AC40F65DEDBF3E3 /* Pods-FirebaseUI-demo-objc.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -212,9 +236,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D81A06131B86A78700498183 /* Build configuration list for PBXNativeTarget "FirebaseUI-demo-objc" */;
 			buildPhases = (
+				971DBDCA7DEC7A095BF0A32F /* [CP] Check Pods Manifest.lock */,
 				D81A05EC1B86A78700498183 /* Sources */,
 				D81A05ED1B86A78700498183 /* Frameworks */,
 				D81A05EE1B86A78700498183 /* Resources */,
+				713BE7250A2AC513A077023C /* [CP] Embed Pods Frameworks */,
+				E2C1BB9A153F3FE5302D262B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -262,21 +289,69 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3A8B7C21DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.xib in Resources */,
+				C3A8B7C21DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib in Resources */,
 				D81A05FF1B86A78700498183 /* Main.storyboard in Resources */,
-				C34FC1FF1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.xib in Resources */,
+				C34FC1FF1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.xib in Resources */,
 				C3AC67621D81FE6B00FC956D /* FUIChatMessageTableViewCell.xib in Resources */,
-				C3A8B7CC1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.xib in Resources */,
+				C3A8B7CC1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.xib in Resources */,
 				D81A06041B86A78700498183 /* LaunchScreen.xib in Resources */,
 				D81A06011B86A78700498183 /* Images.xcassets in Resources */,
-				C329B1B31DAD6E5100059A13 /* FIRCustomEmailEntryViewController.xib in Resources */,
-				C3A8B7C71DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.xib in Resources */,
-				C375CB191D935D1F002EECD3 /* FIRCustomAuthPickerViewController.xib in Resources */,
+				C329B1B31DAD6E5100059A13 /* FUICustomEmailEntryViewController.xib in Resources */,
+				C3A8B7C71DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.xib in Resources */,
+				C375CB191D935D1F002EECD3 /* FUICustomAuthPickerViewController.xib in Resources */,
 				8D7D5DC11D9D9536006C1857 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		713BE7250A2AC513A077023C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseUI-demo-objc/Pods-FirebaseUI-demo-objc-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		971DBDCA7DEC7A095BF0A32F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E2C1BB9A153F3FE5302D262B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseUI-demo-objc/Pods-FirebaseUI-demo-objc-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D81A05EC1B86A78700498183 /* Sources */ = {
@@ -284,22 +359,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				D81A05F91B86A78700498183 /* FUIAppDelegate.m in Sources */,
-				C3A8B7CB1DB1454D00CDF0ED /* FIRCustomPasswordRecoveryViewController.m in Sources */,
-				C375CB181D935D1F002EECD3 /* FIRCustomAuthPickerViewController.m in Sources */,
-				C3A8B7C11DAF073400CDF0ED /* FIRCustomPasswordSignInViewController.m in Sources */,
-				C375CB1C1D943D5F002EECD3 /* FIRCustomAuthUIDelegate.m in Sources */,
-				C34FC1FE1DB17C8B009ED69A /* FIRCustomPasswordVerificationViewController.m in Sources */,
+				C3A8B7CB1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.m in Sources */,
+				C375CB181D935D1F002EECD3 /* FUICustomAuthPickerViewController.m in Sources */,
+				C3A8B7C11DAF073400CDF0ED /* FUICustomPasswordSignInViewController.m in Sources */,
+				C375CB1C1D943D5F002EECD3 /* FUICustomAuthDelegate.m in Sources */,
+				C34FC1FE1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.m in Sources */,
 				C3F23ED01D80F58A0020509F /* FUISamplesViewController.m in Sources */,
 				C3AC67631D81FE6B00FC956D /* FUIChatViewController.m in Sources */,
 				C3AC67611D81FE6B00FC956D /* FUIChatMessageTableViewCell.m in Sources */,
 				C3AC67601D81FE6B00FC956D /* FUIChatMessageDataSource.m in Sources */,
-				C3A8B7C61DB027D200CDF0ED /* FIRCustomPasswordSignUpViewController.m in Sources */,
+				C3A8B7C61DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.m in Sources */,
 				C3AC675F1D81FE6B00FC956D /* FUIChatMessage.m in Sources */,
 				D81A05F61B86A78700498183 /* main.m in Sources */,
 				C3AC67661D82002F00FC956D /* FUISample.m in Sources */,
 				8D7F86B51D9DAA0100C2A122 /* FUIStorageViewController.m in Sources */,
-				C329B1B21DAD6E5100059A13 /* FIRCustomEmailEntryViewController.m in Sources */,
-				C3AC675E1D81FE6B00FC956D /* FIRAuthViewController.m in Sources */,
+				C329B1B21DAD6E5100059A13 /* FUICustomEmailEntryViewController.m in Sources */,
+				C3AC675E1D81FE6B00FC956D /* FUIAuthViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +483,7 @@
 		};
 		D81A06141B86A78700498183 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D51EFD3F6922FA855D23087D /* Pods-FirebaseUI-demo-objc.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "FirebaseUI-demo-objc/Info.plist";
@@ -421,6 +497,7 @@
 		};
 		D81A06151B86A78700498183 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221D2CD42AC40F65DEDBF3E3 /* Pods-FirebaseUI-demo-objc.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "FirebaseUI-demo-objc/Info.plist";

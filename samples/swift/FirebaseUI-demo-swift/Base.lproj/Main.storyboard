@@ -184,7 +184,7 @@
         <!--Auth View Controller-->
         <scene sceneID="xeK-e9-b89">
             <objects>
-                <tableViewController storyboardIdentifier="FIRAuthViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wby-P6-pid" customClass="FIRAuthViewController" customModule="FirebaseUI_demo_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FUIAuthViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wby-P6-pid" customClass="FUIAuthViewController" customModule="FirebaseUI_demo_swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="inr-RJ-pbo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

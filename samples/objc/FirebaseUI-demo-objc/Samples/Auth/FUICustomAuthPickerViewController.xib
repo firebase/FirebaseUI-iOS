@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FUICustomAuthPickerViewController">
+            <connections>
+                <outlet property="view" destination="feM-QA-xVH" id="cAL-zF-XAY"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="feM-QA-xVH">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XdB-tD-X9o">
+                    <color key="backgroundColor" name="selectedKnobColor" catalog="System" colorSpace="catalog"/>
+                    <state key="normal" title="X"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onClose:" destination="-1" eventType="touchUpInside" id="835-nK-Off"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Picker View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJ4-3A-3tu">
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" name="knobColor" catalog="System" colorSpace="catalog"/>
+            <constraints>
+                <constraint firstItem="XdB-tD-X9o" firstAttribute="baseline" secondItem="xJ4-3A-3tu" secondAttribute="firstBaseline" id="QGX-WU-m5B"/>
+                <constraint firstItem="XdB-tD-X9o" firstAttribute="top" secondItem="feM-QA-xVH" secondAttribute="top" constant="45" id="a3W-X7-uh5"/>
+                <constraint firstItem="XdB-tD-X9o" firstAttribute="firstBaseline" secondItem="xJ4-3A-3tu" secondAttribute="baseline" id="aeU-fW-NxF"/>
+                <constraint firstAttribute="trailing" secondItem="XdB-tD-X9o" secondAttribute="trailing" constant="33" id="gjx-4V-Cgx"/>
+                <constraint firstItem="XdB-tD-X9o" firstAttribute="baseline" secondItem="xJ4-3A-3tu" secondAttribute="baseline" id="mLu-56-aHx"/>
+                <constraint firstItem="xJ4-3A-3tu" firstAttribute="centerX" secondItem="feM-QA-xVH" secondAttribute="centerX" id="obp-jt-NjF"/>
+                <constraint firstItem="xJ4-3A-3tu" firstAttribute="top" secondItem="feM-QA-xVH" secondAttribute="top" constant="50" id="ypO-V8-Owu"/>
+            </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="10"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="24.5" y="52.5"/>
+        </view>
+    </objects>
+</document>

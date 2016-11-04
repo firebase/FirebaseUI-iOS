@@ -14,16 +14,15 @@
 //  limitations under the License.
 //
 
-#import <FirebaseFacebookAuthUI/FirebaseFacebookAuthUI.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+import UIKit
+import FirebaseAuthUI
 
-@interface FUIFacebookAuth (Testing)
-- (FBSDKLoginManager *)createLoginManger;
-+ (NSBundle *)frameworkBundle;
-- (void)configureProvider;
-@end
+@objc(FUICustomAuthPickerViewController)
 
-@interface FUIFacebookAuthTest : FUIFacebookAuth
-- (void)configureLoginManager:(FBSDKLoginManagerLoginResult *)result withError:(NSError *)error;
+class FUICustomAuthPickerViewController: FUIAuthPickerViewController {
 
-@end
+  @IBAction func onClose(_ sender: AnyObject) {
+    self.cancelAuthorization()
+  }
+
+}

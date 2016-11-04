@@ -1,4 +1,6 @@
 //
+//  AuthViewController.h
+//
 //  Copyright (c) 2016 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,16 +16,8 @@
 //  limitations under the License.
 //
 
-#import <FirebaseFacebookAuthUI/FirebaseFacebookAuthUI.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <UIKit/UIKit.h>
 
-@interface FUIFacebookAuth (Testing)
-- (FBSDKLoginManager *)createLoginManger;
-+ (NSBundle *)frameworkBundle;
-- (void)configureProvider;
-@end
-
-@interface FUIFacebookAuthTest : FUIFacebookAuth
-- (void)configureLoginManager:(FBSDKLoginManagerLoginResult *)result withError:(NSError *)error;
+@interface FUIAuthViewController : UITableViewController
 
 @end

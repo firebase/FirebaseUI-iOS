@@ -44,7 +44,7 @@
 }
 
 - (void)testProviderValidity {
-  FUIGoogleAuth *provider = [[FIRGoogleAuthUI alloc] init];
+  FUIGoogleAuth *provider = [[FUIGoogleAuth alloc] init];
   id mockProvider =  OCMPartialMock(provider);
 
   XCTAssertNotNil(provider);

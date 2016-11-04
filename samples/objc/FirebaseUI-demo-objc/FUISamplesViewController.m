@@ -45,7 +45,7 @@
                                      controller:^UIViewController *{
                                        UIViewController *controller =
                                        [[UIStoryboard storyboardWithName:@"Main"
-                                                                  bundle:NULL] instantiateViewControllerWithIdentifier:@"FIRAuthViewController"];
+                                                                  bundle:NULL] instantiateViewControllerWithIdentifier:@"FUIAuthViewController"];
                                        return controller;
                                      }]];
 

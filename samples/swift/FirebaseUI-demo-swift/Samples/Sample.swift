@@ -60,7 +60,7 @@ enum Sample: Int, RawRepresentable {
     case .chat:
       return UIStoryboard.instantiateViewController("Main", identifier: "ChatViewController")
     case .auth:
-      return UIStoryboard.instantiateViewController("Main", identifier: "FIRAuthViewController")
+      return UIStoryboard.instantiateViewController("Main", identifier: "FUIAuthViewController")
     case .storage:
       return UIStoryboard.instantiateViewController("Main", identifier: "StorageViewController")
     }

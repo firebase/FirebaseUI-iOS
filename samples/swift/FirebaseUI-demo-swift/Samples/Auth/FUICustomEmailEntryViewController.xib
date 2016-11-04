@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FUICustomEmailEntryViewController" customModule="FirebaseUI_demo_swift" customModuleProvider="target">
+            <connections>
+                <outlet property="emailTextField" destination="Nqy-Me-kf2" id="K36-qb-2Oa"/>
+                <outlet property="nextButton" destination="qXa-CG-61v" id="L1R-Pe-lvX"/>
+                <outlet property="view" destination="XWM-tV-9r4" id="vs6-MO-4RA"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="XWM-tV-9r4">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqC-aK-aNY">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="DZN-Fd-asy"/>
+                        <constraint firstAttribute="width" constant="100" id="Pmg-jJ-qFb"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nqy-Me-kf2">
+                    <gestureRecognizers/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                    <connections>
+                        <action selector="updateEmailValue:" destination="-1" eventType="editingChanged" id="h2m-DL-UQg"/>
+                        <outlet property="delegate" destination="-1" id="2fE-uF-orO"/>
+                    </connections>
+                </textField>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pSc-8p-Wnd">
+                    <items>
+                        <barButtonItem title="Back" id="nSK-IZ-qUj">
+                            <connections>
+                                <action selector="onBack:" destination="-1" id="Bhr-CH-PKn"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Cancel" id="MCW-lz-Q5i">
+                            <connections>
+                                <action selector="onCancel:" destination="-1" id="TJN-Iq-elH"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="l9Z-DO-HjU"/>
+                        <barButtonItem title="Next" id="qXa-CG-61v">
+                            <connections>
+                                <action selector="onNextButton:" destination="-1" id="uJl-n6-Cbo"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+            </subviews>
+            <color key="backgroundColor" name="knobColor" catalog="System" colorSpace="catalog"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="PqC-aK-aNY" firstAttribute="leading" secondItem="Nqy-Me-kf2" secondAttribute="leading" id="54F-ax-zMg"/>
+                <constraint firstItem="pSc-8p-Wnd" firstAttribute="leading" secondItem="XWM-tV-9r4" secondAttribute="leading" id="C8e-tA-RLP"/>
+                <constraint firstItem="Nqy-Me-kf2" firstAttribute="centerX" secondItem="pSc-8p-Wnd" secondAttribute="centerX" id="EJy-mw-nRy"/>
+                <constraint firstItem="PqC-aK-aNY" firstAttribute="leading" secondItem="XWM-tV-9r4" secondAttribute="leading" constant="16" id="Rdz-62-iOM"/>
+                <constraint firstAttribute="trailing" secondItem="pSc-8p-Wnd" secondAttribute="trailing" id="Vmh-z2-O4V"/>
+                <constraint firstItem="Nqy-Me-kf2" firstAttribute="top" secondItem="PqC-aK-aNY" secondAttribute="bottom" constant="2" id="bgY-Fa-iO3"/>
+                <constraint firstAttribute="bottom" secondItem="pSc-8p-Wnd" secondAttribute="bottom" id="e41-YL-YKb"/>
+                <constraint firstItem="PqC-aK-aNY" firstAttribute="top" secondItem="XWM-tV-9r4" secondAttribute="top" constant="120" id="egp-uq-1CO"/>
+            </constraints>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="OaL-TD-vKf" appends="YES" id="tOr-kh-5Xu"/>
+            </connections>
+            <point key="canvasLocation" x="24.5" y="51.5"/>
+        </view>
+        <tapGestureRecognizer id="OaL-TD-vKf">
+            <connections>
+                <action selector="onViewSelected:" destination="-1" id="bzQ-DC-N9e"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+</document>

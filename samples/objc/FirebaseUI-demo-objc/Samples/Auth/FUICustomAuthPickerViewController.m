@@ -1,4 +1,6 @@
 //
+//  AuthViewController.m
+//
 //  Copyright (c) 2016 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,16 +16,20 @@
 //  limitations under the License.
 //
 
-#import <FirebaseFacebookAuthUI/FirebaseFacebookAuthUI.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "FUICustomAuthPickerViewController.h"
 
-@interface FUIFacebookAuth (Testing)
-- (FBSDKLoginManager *)createLoginManger;
-+ (NSBundle *)frameworkBundle;
-- (void)configureProvider;
-@end
+@implementation FUICustomAuthPickerViewController
 
-@interface FUIFacebookAuthTest : FUIFacebookAuth
-- (void)configureLoginManager:(FBSDKLoginManagerLoginResult *)result withError:(NSError *)error;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil authUI:(FUIAuth *)authUI {
+
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil authUI:authUI];
+  if (self) {
+    // Custom initialization
+  }
+  return self;
+}
+- (IBAction)onClose:(id)sender {
+  [self cancelAuthorization];
+}
 
 @end

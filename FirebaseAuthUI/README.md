@@ -47,8 +47,8 @@ Auth guides at the following links:
 
 ### Configuration
 
-All operations, callbacks, UI customizations are done through an `FIRAuthUI`
-instance. The `FIRAuthUI` instance associated with the default `FIRAuth`
+All operations, callbacks, UI customizations are done through an `FUIAuth`
+instance. The `FUIAuth` instance associated with the default `FIRAuth`
 instance can be accessed as follows:
 
 ```swift
@@ -59,8 +59,8 @@ import FirebaseAuthUI
 /* ... */
 
 FIRApp.configure()
-let authUI = FIRAuthUI.default()
-// You need to adopt a FIRAuthUIDelegate protocol to receive callback
+let authUI = FUIAuth.default()
+// You need to adopt a FUIAuthDelegate protocol to receive callback
 authUI?.delegate = self
 ```
 
@@ -70,8 +70,8 @@ authUI?.delegate = self
 @import FirebaseAuthUI
 ...
 [FIRApp configure];
-FIRAuthUI *authUI = [FIRAuthUI defaultAuthUI];
-// You need to adopt a FIRAuthUIDelegate protocol to receive callback
+FUIAuth *authUI = [FUIAuth defaultAuthUI];
+// You need to adopt a FUIAuthDelegate protocol to receive callback
 authUI.delegate = self;
 ```
 
@@ -83,10 +83,10 @@ import FirebaseGoogleAuthUI
 import FirebaseFacebookAuthUI
 import FirebaseTwitterAuthUI
 
-let providers: [FIRAuthProviderUI] = [
-  FIRGoogleAuthUI(),
-  FIRFacebookAuthUI(),
-  FIRTwitterAuthUI(),
+let providers: [FUIAuthProvider] = [
+  FUIGoogleAuth(),
+  FUIFacebookAuth(),
+  FUITwitterAuth(),
 ]
 self.authUI?.providers = providers
 ```
@@ -95,12 +95,12 @@ self.authUI?.providers = providers
 // objc
 @import FirebaseGoogleAuthUI
 @import FirebaseFacebookAuthUI
-@import FIRTwitterAuthUI
+@import FUITwitterAuth
 ...
-NSArray<id<FIRAuthProviderUI>> *providers = @[
-                                             [[FIRGoogleAuthUI alloc] init],
-                                             [[FIRFacebookAuthUI alloc] init],
-                                             [[FIRTwitterAuthUI alloc] init],
+NSArray<id<FUIAuthProvider>> *providers = @[
+                                             [[FUIGoogleAuth alloc] init],
+                                             [[FUIFacebookAuth alloc] init],
+                                             [[FUITwitterAuth alloc] init],
                                              ];
 _authUI.providers = providers;
 ```
@@ -119,7 +119,7 @@ Google/Facebook authentication process.
 // swift
 func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
   let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?
-  if FIRAuthUI.default()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+  if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
     return true
   }
   // other URL handling goes here.
@@ -131,14 +131,14 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpe
 // objc
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
   NSString *sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey];
-  return [[FIRAuthUI defaultAuthUI] handleOpenURL:url sourceApplication:sourceApplication];
+  return [[FUIAuth defaultAuthUI] handleOpenURL:url sourceApplication:sourceApplication];
 }
 ```
 
 ### Sign In
 
 To start the authentication flow, obtain an `authViewController` instance from
-`FIRAuthUI`.  In order to leverage FirebaseUI for iOS you must display the
+`FUIAuth`.  In order to leverage FirebaseUI for iOS you must display the
 `authViewController`; you can present it as the first view controller of your
 app or present it from another view controller within your app.  In order to
 present the `authViewController` obtain as instance as follows:
@@ -149,7 +149,7 @@ present the `authViewController` obtain as instance as follows:
 // Present the auth view controller and then implement the sign in callback.
 let authViewController = authUI!.authViewController()
 
-func authUI(_ authUI: FIRAuthUI, didSignInWith user: FIRUser?, error: Error?) {
+func authUI(_ authUI: FUIAuth, didSignInWith user: FIRUser?, error: Error?) {
   // handle user and error as necessary
 }
 ```
@@ -160,7 +160,7 @@ UINavigationController *authViewController = [authUI authViewController];
 // Use authViewController as your root view controller,
 // or present it on top of an existing view controller.
 
-- (void)authUI:(FIRAuthUI *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error {
+- (void)authUI:(FUIAuth *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error {
   // Implement this method to handle signed in user or error if any.
 }
 ```
@@ -209,21 +209,21 @@ should have the same key as its counterpart in the default `.strings` files.
 You can customize everything about the authentication method picker screen,
 except for the actual sign-in buttons and their position.
 
-In order to do so, create a subclass of `FIRAuthPickerViewController`  and
-customize it to your needs. Provide `FIRAuthUI` with an instance of your
+In order to do so, create a subclass of `FUIAuthPickerViewController`  and
+customize it to your needs. Provide `FUIAuth` with an instance of your
 subclass by implementing the delegate method
 `authPickerViewControllerForAuthUI:` as follows:
 
 ```swift
 // swift
-func authPickerViewController(for authUI: FIRAuthUI) -> FIRAuthPickerViewController {
+func authPickerViewController(for authUI: FUIAuth) -> FUIAuthPickerViewController {
   return CustomAuthPickerViewController(authUI: authUI)
 }
 ```
 
 ```objective-c
 // objc
-- (FIRAuthPickerViewController *)authPickerViewControllerForAuthUI:(FIRAuthUI *)authUI {
+- (FUIAuthPickerViewController *)authPickerViewControllerForAuthUI:(FUIAuth *)authUI {
   return [[CustomAuthPickerViewController alloc] initWithAuthUI:authUI];
 }
 ```
@@ -239,27 +239,27 @@ Things that are not customizable:
 - modification of screen flow (you can't combine screens, skip particular screens)
 - disabling validation (e g email validation)
 
-In order to achieve email provider screen customization, create subclass of appropriate controller and implement it to your needs. Provide `FIRAuthUI` with an instance of your
+In order to achieve email provider screen customization, create subclass of appropriate controller and implement it to your needs. Provide `FUIAuth` with an instance of your
 subclass by implementing the delegate methods:
 ```swift
 // swift
-func emailEntryViewController(for authUI: FIRAuthUI) -> FIREmailEntryViewController {
+func emailEntryViewController(for authUI: FUIAuth) -> FUIEmailEntryViewController {
   return CustomEmailEntryViewController(authUI: authUI)
 }
 
-func passwordSignInViewController(for authUI: FIRAuthUI, email: String) -> FIRPasswordSignInViewController {
+func passwordSignInViewController(for authUI: FUIAuth, email: String) -> FUIPasswordSignInViewController {
   return CustomPasswordSignInViewController(authUI: authUI, email: email)
 }
 
-func passwordSignUpViewController(for authUI: FIRAuthUI, email: String) -> FIRPasswordSignUpViewController {
+func passwordSignUpViewController(for authUI: FUIAuth, email: String) -> FUIPasswordSignUpViewController {
   return CustomPasswordSignUpViewController(authUI: authUI, email: email)
 }
 
-func passwordRecoveryViewController(for authUI: FIRAuthUI, email: String) -> FIRPasswordRecoveryViewController {
+func passwordRecoveryViewController(for authUI: FUIAuth, email: String) -> FUIPasswordRecoveryViewController {
   return CustomPasswordRecoveryViewController(authUI: authUI, email: email)
 }
 
-func passwordVerificationViewController(for authUI: FIRAuthUI, email: String, newCredential: FIRAuthCredential) -> FIRPasswordVerificationViewController {
+func passwordVerificationViewController(for authUI: FUIAuth, email: String, newCredential: FIRAuthCredential) -> FUIPasswordVerificationViewController {
   return CustomPasswordVerificationViewController(authUI: authUI, email: email, newCredential: newCredential)
 }
 
@@ -267,33 +267,33 @@ func passwordVerificationViewController(for authUI: FIRAuthUI, email: String, ne
 
 ```objective-c
 // objc
-- (FIREmailEntryViewController *)emailEntryViewControllerForAuthUI:(FIRAuthUI *)authUI {
+- (FUIEmailEntryViewController *)emailEntryViewControllerForAuthUI:(FUIAuth *)authUI {
   return [[CustomEmailEntryViewController alloc] initWithAuthUI:authUI];
 
 }
 
-- (FIRPasswordSignInViewController *)passwordSignInViewControllerForAuthUI:(FIRAuthUI *)authUI
+- (FUIPasswordSignInViewController *)passwordSignInViewControllerForAuthUI:(FUIAuth *)authUI
                                                                      email:(NSString *)email {
   return [[CustomPasswordSignInViewController alloc] initWithAuthUI:authUI
                                                               email:email];
 
 }
 
-- (FIRPasswordSignUpViewController *)passwordSignUpViewControllerForAuthUI:(FIRAuthUI *)authUI
+- (FUIPasswordSignUpViewController *)passwordSignUpViewControllerForAuthUI:(FUIAuth *)authUI
                                                                      email:(NSString *)email {
   return [[CustomPasswordSignUpViewController alloc] initWithAuthUI:authUI
                                                               email:email];
 
 }
 
-- (FIRPasswordRecoveryViewController *)passwordRecoveryViewControllerForAuthUI:(FIRAuthUI *)authUI
+- (FUIPasswordRecoveryViewController *)passwordRecoveryViewControllerForAuthUI:(FUIAuth *)authUI
                                                                          email:(NSString *)email {
   return [[CustomPasswordRecoveryViewController alloc] initWithAuthUI:authUI
                                                                 email:email];
   
 }
 
-- (FIRPasswordVerificationViewController *)passwordVerificationViewControllerForAuthUI:(FIRAuthUI *)authUI
+- (FUIPasswordVerificationViewController *)passwordVerificationViewControllerForAuthUI:(FUIAuth *)authUI
                                                                              email:(NSString *)email
                                                                      newCredential:(FIRAuthCredential *)newCredential {
   return [[CustomPasswordVerificationViewController alloc] initWithAuthUI:authUI
