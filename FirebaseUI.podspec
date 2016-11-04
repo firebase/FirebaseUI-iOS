@@ -44,6 +44,7 @@ Pod::Spec.new do |s|
     facebook.dependency 'FirebaseUI/Auth'
     facebook.dependency 'FBSDKLoginKit', '~> 4.0'
     facebook.resources = 'FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks/FirebaseFacebookAuthUI.framework/*.{nib,lproj,png}'
+    facebook.user_target_xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '$(inherited) ${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit' }
   end
 
   s.subspec 'Google' do |google|
