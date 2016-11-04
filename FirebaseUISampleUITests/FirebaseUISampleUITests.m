@@ -57,7 +57,7 @@
   [[tablesQuery.secureTextFields containingType:XCUIElementTypeButton identifier:@"ic visibility"].element typeText:@"test"];
   [tablesQuery.buttons[@"ic visibility"] tap];
   [tablesQuery.buttons[@"ic visibility off"] tap];
-  [app.navigationBars[@"Create account"].buttons[@"NextButtonAccessibilityID"] tap];
+  [app.navigationBars[@"Create account"].buttons[@"SaveButtonAccessibilityID"] tap];
 }
 
 - (void)testSeveralIDPs {
