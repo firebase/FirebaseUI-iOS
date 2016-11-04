@@ -42,10 +42,10 @@ static NSString *const kPasswordSignUpCellAccessibilityID = @"PasswordSignUpCell
  */
 static NSString *const kNameSignUpCellAccessibilityID = @"NameSignUpCellAccessibilityID";
 
-/** @var kNextButtonAccessibilityID
+/** @var kSaveButtonAccessibilityID
     @brief The Accessibility Identifier for the @c next button.
  */
-static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID";
+static NSString *const kSaveButtonAccessibilityID = @"SaveButtonAccessibilityID";
 
 /** @var kTextFieldRightViewSize
     @brief The height and width of the @c rightView of the password text field.
@@ -113,7 +113,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
                                        style:UIBarButtonItemStylePlain
                                       target:self
                                       action:@selector(save)];
-  saveButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
+  saveButtonItem.accessibilityIdentifier = kSaveButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = saveButtonItem;
 }
 
@@ -129,7 +129,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   NSString *termsOfService = [FUIAuthStrings termsOfService];
   NSString *termsOfServiceNotice =
       [NSString stringWithFormat:[FUIAuthStrings termsOfServiceNotice],
-          [FUIAuthStrings next], termsOfService];
+          [FUIAuthStrings save], termsOfService];
   NSMutableAttributedString *attributedString =
       [[NSMutableAttributedString alloc] initWithString:termsOfServiceNotice];
   NSRange termsOfServiceRange = [termsOfServiceNotice rangeOfString:termsOfService];

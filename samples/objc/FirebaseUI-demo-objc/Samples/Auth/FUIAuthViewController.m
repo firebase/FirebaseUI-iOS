@@ -45,7 +45,7 @@ typedef enum : NSUInteger {
   kIDPTwitter
 } FIRProviders;
 
-NSString * const kFirebaseTermsOfService = @"https://firebase.google.com/terms/";
+static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/terms/";
 
 @interface FUIAuthViewController () <FUIAuthDelegate>
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellSignIn;
