@@ -24,7 +24,7 @@
 #import "FUIDatabaseTestUtils.h"
 #import "FUIIndexArray.h"
 
-@interface FirebaseIndexArrayTest : XCTestCase
+@interface FUIIndexArrayTest : XCTestCase
 @property (nonatomic) FUITestObservable *index;
 @property (nonatomic) FUITestObservable *data;
 @property (nonatomic) FUIIndexArray *array;
@@ -33,7 +33,7 @@
 @property (nonatomic) NSMutableDictionary *dict;
 @end
 
-@implementation FirebaseIndexArrayTest
+@implementation FUIIndexArrayTest
 
 static inline NSDictionary *database() {
   static NSDictionary *dict;
