@@ -35,7 +35,7 @@ For a more in-depth explanation of each of the above, check the usage instructio
 self.dataSource = [self.tableView bindToQuery:self.firebaseRef
                                  populateCell:^UITableViewCell *(UITableView *tableView,
                                                                  NSIndexPath *indexPath,
-                                                                 FIRDataSnapshot *object) {
+                                                                 FIRDataSnapshot *snap) {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier"
                                                           forIndexPath:indexPath];
   /* populate cell */
@@ -52,7 +52,7 @@ var dataSource: FUITableViewDataSource!
 
 self.dataSource = self.tableView.bind(to: self.firebaseRef) { tableView, indexPath, snapshot in
   // Dequeue cell
-  let cell = tableView.dequeueReusableCell(withReuseIdentifier: "reuseIdentifier", for: indexPath)
+  let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
   /* populate cell */
   return cell
 }
@@ -78,7 +78,7 @@ self.dataSource = [self.collectionView bindToQuery:self.firebaseRef
                                       populateCell:^UICollectionViewCell *(UICollectionView *collectionView,
                                                                            NSIndexPath *indexPath,
                                                                            FIRDataSnapshot *object) {
-  UICollectionViewCell *cell = [collectionView dequeueReusableCellWithIdentifier:@"reuseIdentfier"
+  UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuseIdentfier"
                                                                     forIndexPath:indexPath];
   /* populate cell */
   return cell;
@@ -89,7 +89,7 @@ self.dataSource = [self.collectionView bindToQuery:self.firebaseRef
 ```swift
 // YourViewController.swift
 
-self.dataSource = self.collectionView.bind(to: self.firebaseRef) { collectionView, indexPath, snap in
+self.dataSource = self.collectionView?.bind(to: self.firebaseRef) { collectionView, indexPath, snap in
   let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reuseIdentifier", for: indexPath)
   /* populate cell */
   return cell
@@ -106,10 +106,10 @@ You can use the default `UITableViewCell` or `UICollectionViewCell` implementati
 
 #### Objective-C UITableView and UICollectionView with Default UI*ViewCell
 ```objective-c
-self.dataSource = [self.tableView bindToQuery:firebaseRef
+self.dataSource = [self.tableView bindToQuery:self.firebaseRef
                                  populateCell:^UITableViewCell *(UITableView *tableView,
                                                                  NSIndexPath *indexPath,
-                                                                 FIRDataSnapshot *object) {
+                                                                 FIRDataSnapshot *snap) {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier"
                                                           forIndexPath:indexPath];
   // Populate cell as you see fit, like as below
@@ -119,14 +119,14 @@ self.dataSource = [self.tableView bindToQuery:firebaseRef
 ```
 
 ```objective-c
-self.dataSource = [self.collectionView bindToQuery:firebaseRef
-                                      populateCell:^UITableViewCell *(UICollectionView *collectionView,
+self.dataSource = [self.collectionView bindToQuery:self.firebaseRef
+                                      populateCell:^UICollectionViewCell *(UICollectionView *collectionView,
                                                                       NSIndexPath *indexPath,
-                                                                      FIRDataSnapshot *object) {
-  UICollectionViewCell *cell = [collectionView dequeueReusableCellWithIdentifier:@"reuseIdentifier"
+                                                                      FIRDataSnapshot *snap) {
+  UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuseIdentifier"
                                                                     forIndexPath:indexPath];
   // Populate cell as you see fit by adding subviews as appropriate
-  cell.contentView.addSubview(customView)
+  [cell.contentView addSubview:customView];
   return cell;
 }];
 ```
@@ -134,15 +134,15 @@ self.dataSource = [self.collectionView bindToQuery:firebaseRef
 #### Swift UITableView and UICollectionView with Default UI*ViewCell
 ```swift
 self.dataSource = self.tableView.bind(to: firebaseRef) { tableView, indexPath, snap in
-  let cell = tableView.dequeueReusableCell(withReuseIdentifier: "reuseIdentifier", for: indexPath)
+  let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
   // Populate cell as you see fit, like as below
-  cell.textLabel.text = snap.key
+  cell.textLabel?.text = snap.key
   return cell
 }
 ```
 
 ```swift
-self.dataSource = self.collectionView.bind(to: firebaseRef) { collectionView, indexPath, snap in
+self.dataSource = self.collectionView?.bind(to: firebaseRef) { collectionView, indexPath, snap in
   let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reuseIdentifier", for: indexPath)
   // Populate cell as you see fit by adding subviews as appropriate
   cell.contentView.addSubview(customView)
@@ -161,13 +161,13 @@ FirebaseUI has several building blocks that developers should understand before 
 #### Objective-C
 ```objective-c
 FIRDatabaseReference *firebaseRef = [[FIRDatabase database] reference];
-FUIArray *array = [[FUIArray alloc] initWithRef:firebaseRef];
+FUIArray *array = [[FUIArray alloc] initWithQuery:firebaseRef];
 ```
 
 #### Swift
 ```swift
 let firebaseRef = FIRDatabase.database().reference()
-let array = FUIArray(ref: firebaseRef)
+let array = FUIArray(query: firebaseRef)
 ```
 
 ### FUIDataSource
