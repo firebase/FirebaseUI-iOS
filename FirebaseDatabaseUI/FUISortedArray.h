@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, copy) NSArray<FIRDataSnapshot *> *items;
 
 - (instancetype)initWithQuery:(id<FUIDataObservable>)query NS_UNAVAILABLE;
+- (instancetype)initWithQuery:(id<FUIDataObservable>)query
+                     delegate:(nullable id<FUICollectionDelegate>)delegate NS_UNAVAILABLE;
 
 /**
  * Initializes a sorted collection.

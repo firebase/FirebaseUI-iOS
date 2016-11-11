@@ -45,9 +45,8 @@
                      delegate:(id<FUICollectionDelegate>)delegate
                sortDescriptor:(NSComparisonResult (^)(FIRDataSnapshot *,
                                                       FIRDataSnapshot *))sortDescriptor {
-  self = [super initWithQuery:query];
+  self = [super initWithQuery:query delegate:delegate];
   if (self != nil) {
-    super.delegate = delegate;
     _sortDescriptor = sortDescriptor;
     _handles = [NSMutableSet setWithCapacity:4];
   }
