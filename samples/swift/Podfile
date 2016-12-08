@@ -1,11 +1,22 @@
 target 'FirebaseUI-demo-swift' do
   use_frameworks!
 
-  pod 'FirebaseUI', :podspec => 'https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI.podspec'
+  # Used for developing with the latest podspec in GitHub.
+  # pod 'FirebaseUI', :podspec => 'https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI.podspec'
+
+  pod 'FirebaseUI/Database'
+
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Facebook'
+  pod 'FirebaseUI/Google'
+  pod 'FirebaseUI/Twitter'
+
+  # [START include_firebaseui_storage]
+  pod 'FirebaseUI/Storage'
+  # [END include_firebaseui_storage]
 
   target 'FirebaseUI-demo-swiftTests' do
     inherit! :search_paths
   end
 
 end
-
