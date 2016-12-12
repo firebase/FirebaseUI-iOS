@@ -32,6 +32,10 @@ and [Web](https://github.com/firebase/firebaseui-web/).
 Add the following line to your `Podfile`:
 ```ruby
 pod 'FirebaseUI/Auth'
+
+pod 'FirebaseUI/Google'
+pod 'FirebaseUI/Facebook'
+pod 'FirebaseUI/Twitter'
 ```
 
 ### Configuring sign-in providers
