@@ -29,7 +29,7 @@ and [Web](https://github.com/firebase/firebaseui-web/).
 
 ## Installation
 ### Importing FirebaseUI components for auth
-Add the following line to your `Podfile`:
+Add the following to your `Podfile`:
 ```ruby
 pod 'FirebaseUI/Auth'
 
