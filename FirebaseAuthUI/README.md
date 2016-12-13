@@ -115,7 +115,7 @@ For Google Sign-in support, add custom URL schemes to your Xcode project
 
 For Facebook Login support, follow step 3 and 4 of
 [Facebook login documentation](https://developers.google.com/firebase/docs/auth/ios/facebook-login#before_you_begin),
-and add custom URL schemes following step 5 of [Facebook SDK for iOS-Getting started documentation](https://developers.facebook.com/docs/ios/getting-started).
+and add custom URL schemes in step 4 of [Facebook SDK for iOS-Getting started documentation](https://developers.facebook.com/docs/ios/getting-started).
 
 Finally, add a call to handle the URL that your application receives at the end
 of the Google/Facebook authentication process.
