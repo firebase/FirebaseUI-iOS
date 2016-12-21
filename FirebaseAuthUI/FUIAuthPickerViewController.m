@@ -61,9 +61,9 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
-  return [self initWithNibName:NSStringFromClass([self class])
-                         bundle:[FUIAuthUtils frameworkBundle]
-                         authUI:authUI];
+  return [self initWithNibName:@"FUIAuthPickerViewController"
+                        bundle:[FUIAuthUtils frameworkBundle]
+                        authUI:authUI];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil

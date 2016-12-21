@@ -69,7 +69,8 @@ typedef void (^FUIAuthAlertActionHandler)(void);
                          authUI:(FUIAuth *)authUI NS_DESIGNATED_INITIALIZER;
 
 /** @fn initWithAuthUI:
-    @brief Convenience initializer.
+    @brief Convenience initializer. If your custom auth picker controller is using its
+      own nib file, this initializer should be overwritten.
     @param authUI The @c FUIAuth instance that manages this view controller.
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI;
