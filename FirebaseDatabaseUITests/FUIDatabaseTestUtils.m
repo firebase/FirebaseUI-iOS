@@ -218,6 +218,18 @@
 
 @implementation FUIArrayTestDelegate
 
+- (void)arrayDidBeginUpdates:(id<FUICollection>)collection {
+  if (self.didStartUpdates != NULL) {
+    self.didStartUpdates();
+  }
+}
+
+- (void)arrayDidEndUpdates:(id<FUICollection>)collection {
+  if (self.didEndUpdates != NULL) {
+    self.didEndUpdates();
+  }
+}
+
 - (void)array:(id<FUICollection>)array didAddObject:(id)object atIndex:(NSUInteger)index {
   if (self.didAddObject != NULL) {
     self.didAddObject(array, object, index);

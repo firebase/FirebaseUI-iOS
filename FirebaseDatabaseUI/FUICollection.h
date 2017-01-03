@@ -69,6 +69,16 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 /**
+ * Called before any other events are sent.
+ */
+- (void)arrayDidBeginUpdates:(id<FUICollection>)collection;
+
+/**
+ * Called after all updates have finished.
+ */
+- (void)arrayDidEndUpdates:(id<FUICollection>)collection;
+
+/**
  * Delegate method which is called whenever an object is added to an FUIArray.
  * On a FUIArray synchronized to a Firebase reference, this corresponds to an
  * @c FIRDataEventTypeChildAdded event being raised.

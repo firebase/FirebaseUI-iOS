@@ -10,6 +10,9 @@
 		8D01FC7B1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D01FC7A1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m */; };
 		8D1E107C1DAEB97300AEFCA0 /* FUIIndexTableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1E107B1DAEB97300AEFCA0 /* FUIIndexTableViewDataSourceTest.m */; };
 		8D2A84AA1D678B2B0058DF04 /* FirebaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D2A84A91D678B2B0058DF04 /* FirebaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D306BBF1E1C64E200A13B0E /* FUIArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941E91D67951B00CD3685 /* FUIArrayTest.m */; };
+		8D306BC01E1C64F000A13B0E /* FUICollectionViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941EC1D67951B00CD3685 /* FUICollectionViewDataSourceTest.m */; };
+		8D306BC11E1C64F200A13B0E /* FUITableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941ED1D67951B00CD3685 /* FUITableViewDataSourceTest.m */; };
 		8D3A120E1DC2B122007558BA /* FUISortedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D3A120C1DC2B122007558BA /* FUISortedArray.h */; };
 		8D3A120F1DC2B122007558BA /* FUISortedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A120D1DC2B122007558BA /* FUISortedArray.m */; };
 		8D78AF061D9D8CB000CFA9C5 /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */; };
@@ -1919,6 +1922,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D306BC01E1C64F000A13B0E /* FUICollectionViewDataSourceTest.m in Sources */,
+				8D306BC11E1C64F200A13B0E /* FUITableViewDataSourceTest.m in Sources */,
+				8D306BBF1E1C64E200A13B0E /* FUIArrayTest.m in Sources */,
 				8D01FC7B1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m in Sources */,
 				8D1E107C1DAEB97300AEFCA0 /* FUIIndexTableViewDataSourceTest.m in Sources */,
 				8D924C611DA6F69100C4DA48 /* FUIIndexArrayTest.m in Sources */,

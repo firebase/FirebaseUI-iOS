@@ -443,4 +443,37 @@
     XCTAssert(expectedParametersWereCorrect, @"unexpected parameter in delegate callback");
 }
 
+- (void)testArraySendsMessageBeforeAnyUpdates {
+  __block NSInteger started = 0;
+  self.arrayDelegate.didStartUpdates = ^{
+    started++; // expect this to only ever be incremented once.
+  };
+  [self.observable populateWithCount:10];
+
+  XCTAssert(started == 1, @"expected array to start updates exactly once");
+
+  // Send a value event to mark the end of batch updates.
+  [self.observable sendEvent:FIRDataEventTypeValue withObject:nil previousKey:nil error:nil];
+}
+
+- (void)testArraySendsMessagesAfterReceivingValueEvent {
+  __block NSInteger started = 0;
+  self.arrayDelegate.didStartUpdates = ^{
+    started++; // expect this to only ever be incremented once.
+  };
+  [self.observable populateWithCount:10];
+
+  XCTAssert(started == 1, @"expected array to start updates exactly once");
+
+  __block NSInteger ended = 0;
+  self.arrayDelegate.didEndUpdates = ^{
+    ended++;
+  };
+
+  // Send a value event to mark the end of batch updates.
+  [self.observable sendEvent:FIRDataEventTypeValue withObject:nil previousKey:nil error:nil];
+
+  XCTAssert(ended == 1, @"expected array to end updates exactly once");
+}
+
 @end

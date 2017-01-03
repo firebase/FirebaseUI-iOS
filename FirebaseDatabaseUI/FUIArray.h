@@ -43,7 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * FUIArray provides an array structure that is synchronized with a Firebase reference or
  * query. It is useful for building custom data structures or sources, and provides the base for
- * FirebaseDataSource.
+ * FirebaseDataSource. FUIArray maintains a large amount of internal state, and most of its methods
+ * are not thread-safe.
  */
 @interface FUIArray : NSObject <FUICollection>
 

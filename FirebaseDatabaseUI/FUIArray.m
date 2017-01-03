@@ -33,6 +33,14 @@
  */
 @property (strong, nonatomic) NSMutableSet<NSNumber *> *handles;
 
+/**
+ * Set to YES when any event that isn't a value event is received; set
+ * back to NO when receiving a value event.
+ * Used to keep track of whether or not the array is updating so consumers
+ * can more easily batch updates.
+ */
+@property (nonatomic, assign) BOOL isSendingUpdates;
+
 @end
 
 @implementation FUIArray
@@ -68,51 +76,82 @@
 #pragma mark - Private API methods
 
 - (void)observeQuery {
-  if (self.handles.count == 4) { /* don't duplicate observers */ return; }
+  if (self.handles.count == 5) { /* don't duplicate observers */ return; }
   FIRDatabaseHandle handle;
   handle = [self.query observeEventType:FIRDataEventTypeChildAdded
       andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
+        [self didUpdate];
         [self insertSnapshot:snapshot withPreviousChildKey:previousChildKey];
       }
       withCancelBlock:^(NSError *error) {
-        if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
-          [self.delegate array:self queryCancelledWithError:error];
-        }
+        [self raiseError:error];
       }];
   [_handles addObject:@(handle)];
 
   handle = [self.query observeEventType:FIRDataEventTypeChildChanged
       andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
+        [self didUpdate];
         [self changeSnapshot:snapshot withPreviousChildKey:previousChildKey];
       }
       withCancelBlock:^(NSError *error) {
-        if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
-          [self.delegate array:self queryCancelledWithError:error];
-        }
+        [self raiseError:error];
       }];
   [_handles addObject:@(handle)];
 
   handle = [self.query observeEventType:FIRDataEventTypeChildRemoved
       andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousSiblingKey) {
+        [self didUpdate];
         [self removeSnapshot:snapshot withPreviousChildKey:previousSiblingKey];
       }
       withCancelBlock:^(NSError *error) {
-        if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
-          [self.delegate array:self queryCancelledWithError:error];
-        }
+        [self raiseError:error];
       }];
   [_handles addObject:@(handle)];
 
   handle = [self.query observeEventType:FIRDataEventTypeChildMoved
       andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
+        [self didUpdate];
         [self moveSnapshot:snapshot withPreviousChildKey:previousChildKey];
       }
       withCancelBlock:^(NSError *error) {
-        if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
-          [self.delegate array:self queryCancelledWithError:error];
-        }
+        [self raiseError:error];
       }];
   [_handles addObject:@(handle)];
+
+  handle = [self.query observeEventType:FIRDataEventTypeValue
+      andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot *snapshot, NSString *previousChildKey) {
+        [self didFinishUpdates];
+      }
+      withCancelBlock:^(NSError *error) {
+        [self raiseError:error];
+      }];
+  [_handles addObject:@(handle)];
+}
+
+// Must be called from every non-value event listener in order to work correctly.
+- (void)didUpdate {
+  if (self.isSendingUpdates) {
+    return;
+  }
+  self.isSendingUpdates = YES;
+  if ([self.delegate respondsToSelector:@selector(arrayDidBeginUpdates:)]) {
+    [self.delegate arrayDidBeginUpdates:self];
+  }
+}
+
+// Must be called from a value event listener.
+- (void)didFinishUpdates {
+  if (!self.isSendingUpdates) { /* This is probably an error */ return; }
+  self.isSendingUpdates = NO;
+  if ([self.delegate respondsToSelector:@selector(arrayDidEndUpdates:)]) {
+    [self.delegate arrayDidEndUpdates:self];
+  }
+}
+
+- (void)raiseError:(NSError *)error {
+  if ([self.delegate respondsToSelector:@selector(array:queryCancelledWithError:)]) {
+    [self.delegate array:self queryCancelledWithError:error];
+  }
 }
 
 - (void)invalidate {
