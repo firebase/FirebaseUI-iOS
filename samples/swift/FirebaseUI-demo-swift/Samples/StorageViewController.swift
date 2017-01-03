@@ -47,9 +47,9 @@ class StorageViewController: UIViewController {
     guard let text = self.textField.text else { return }
     guard let url = URL(string: text) else { return }
 
-    // [START firebaseui_load_image]
     self.storageRef = FIRStorage.storage().reference(withPath: url.path)
 
+    // [START firebaseui_load_image]
     self.imageView.sd_setImage(with: self.storageRef,
                                placeholderImage: nil) { (image, error, cacheType, storageRef) in
       if let error = error {
