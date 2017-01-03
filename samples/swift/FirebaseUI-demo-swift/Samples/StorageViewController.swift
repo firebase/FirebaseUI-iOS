@@ -33,13 +33,13 @@ class StorageViewController: UIViewController {
 
     // Notification boilerplate to handle keyboard appearance/disappearance
     NotificationCenter.default.addObserver(self,
-                                           selector: #selector(keyboardWillShow),
-                                           name: NSNotification.Name.UIKeyboardWillShow,
-                                           object: nil)
+                                                     selector: #selector(keyboardWillShow),
+                                                     name: NSNotification.Name.UIKeyboardWillShow,
+                                                     object: nil)
     NotificationCenter.default.addObserver(self,
-                                           selector: #selector(keyboardWillHide),
-                                           name: NSNotification.Name.UIKeyboardWillHide,
-                                           object: nil)
+                                                     selector: #selector(keyboardWillHide),
+                                                     name: NSNotification.Name.UIKeyboardWillHide,
+                                                     object: nil)
   }
 
   @IBAction fileprivate func loadButtonPressed(_ sender: AnyObject) {
@@ -49,14 +49,12 @@ class StorageViewController: UIViewController {
 
     self.storageRef = FIRStorage.storage().reference(withPath: url.path)
 
-    // [START firebaseui_load_image]
     self.imageView.sd_setImage(with: self.storageRef,
-                               placeholderImage: nil) { (image, error, cacheType, storageRef) in
+      placeholderImage: nil) { (image, error, cacheType, storageRef) in
       if let error = error {
         print("Error loading image: \(error)")
       }
     }
-    // [END firebaseui_load_image]
   }
 
   // MARK: Keyboard boilerplate
