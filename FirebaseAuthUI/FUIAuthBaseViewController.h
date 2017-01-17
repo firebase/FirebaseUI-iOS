@@ -45,7 +45,7 @@ typedef void (^FUIAuthAlertActionHandler)(void);
 /** @fn init
     @brief Please use @c initWithNibName:bundle:authUI:.
  */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /** @fn initWithStyle:
     @brief Please use @c initWithNibName:bundle:authUI:.
