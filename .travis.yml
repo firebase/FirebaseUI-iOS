@@ -6,7 +6,7 @@ xcode_scheme: FirebaseUI
 rvm: 2.3.1
 before_install:
   - gem uninstall cocoapods -a
-  - gem install cocoapods -v 1.1.1
+  - gem install cocoapods -v 1.2.0.rc.1
   - gem install xcpretty
   - pod install --repo-update
 
