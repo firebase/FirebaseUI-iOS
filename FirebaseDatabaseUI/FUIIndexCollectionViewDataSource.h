@@ -101,11 +101,11 @@ didFailLoadAtIndex:(NSUInteger)index
  *   view is in use.
  */
 - (FUIIndexCollectionViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
-                                                         data:(FIRDatabaseReference *)data
-                                                     delegate:(id<FUIIndexCollectionViewDataSourceDelegate>)delegate
-                                                 populateCell:(UICollectionViewCell *(^)(UICollectionView *view,
-                                                                                         NSIndexPath *indexPath,
-                                                                                         FIRDataSnapshot *_Nullable snap))populateCell;
+                                                    data:(FIRDatabaseReference *)data
+                                                delegate:(id<FUIIndexCollectionViewDataSourceDelegate>)delegate
+                                            populateCell:(UICollectionViewCell *(^)(UICollectionView *view,
+                                                                                    NSIndexPath *indexPath,
+                                                                                    FIRDataSnapshot *_Nullable snap))populateCell __attribute__((warn_unused_result));
 
 @end
 

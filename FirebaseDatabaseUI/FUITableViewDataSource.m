@@ -35,49 +35,57 @@
 
 #pragma mark - FUIDataSource initializer methods
 
-- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                         view:(UITableView *)tableView
-                 populateCell:(UITableViewCell *(^)(UITableView *,
-                                                    NSIndexPath *,
-                                                    FIRDataSnapshot *))populateCell {
-  FUIArray *array = [[FUIArray alloc] initWithQuery:query];
-  self = [super initWithArray:array];
-  if (self) {
+- (instancetype)initWithCollection:(id<FUICollection>)collection
+                              view:(UITableView *)tableView
+                      populateCell:(UITableViewCell *(^)(UITableView *,
+                                                         NSIndexPath *,
+                                                         FIRDataSnapshot *))populateCell {
+  self = [super initWithCollection:collection];
+  if (self != nil) {
     self.tableView = tableView;
     self.populateCell = populateCell;
   }
   return self;
 }
 
-#pragma mark - FUIArrayDelegate methods
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
+                         view:(UITableView *)tableView
+                 populateCell:(UITableViewCell *(^)(UITableView *,
+                                                    NSIndexPath *,
+                                                    FIRDataSnapshot *))populateCell {
+  FUIArray *array = [[FUIArray alloc] initWithQuery:query];
+  return [self initWithCollection:array view:tableView populateCell:populateCell];
+}
+
+#pragma mark - FUICollectionDelegate methods
+
+- (void)arrayDidBeginUpdates:(id<FUICollection>)collection {
+  [self.tableView beginUpdates];
+}
+
+- (void)arrayDidEndUpdates:(id<FUICollection>)collection {
+  [self.tableView endUpdates];
+}
 
 - (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
-  [self.tableView beginUpdates];
   [self.tableView insertRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
-  [self.tableView endUpdates];
 }
 
 - (void)array:(FUIArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
-  [self.tableView beginUpdates];
   [self.tableView reloadRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
-  [self.tableView endUpdates];
 }
 
 - (void)array:(FUIArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
-  [self.tableView beginUpdates];
   [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
-  [self.tableView endUpdates];
 }
 
 - (void)array:(FUIArray *)array didMoveObject:(id)object
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-  [self.tableView beginUpdates];
   [self.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
                          toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
-  [self.tableView endUpdates];
 }
 
 #pragma mark - UITableViewDataSource methods

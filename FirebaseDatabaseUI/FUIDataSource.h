@@ -32,7 +32,7 @@
  * subclasses need as well as several methods that pass through to the instance
  * of FirebaseArray.
  */
-@interface FUIDataSource : NSObject<FUIArrayDelegate>
+@interface FUIDataSource : NSObject<FUICollectionDelegate>
 
 /**
  * The items in the data source.
@@ -40,23 +40,21 @@
 @property (nonatomic, readonly, copy) NSArray *items;
 
 /**
- * Pass through of [FirebaseArray count].
+ * The number of items in the receiver's collection.
  */
 @property (nonatomic, readonly) NSUInteger count;
 
-- (instancetype)initWithArray:(FUIArray *)array NS_DESIGNATED_INITIALIZER;
+/**
+ * Takes an FUICollection and immediately starts observing it.
+ */
+- (instancetype)initWithCollection:(id<FUICollection>)collection NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- * Pass through of [FirebaseArray objectAtIndex:].
+ * Returns the snapshot at the given index in the receiver's collection.
  */
-- (id)objectAtIndex:(NSUInteger)index;
-
-/**
- * Pass through of [FirebaseArray refForIndex:].
- */
-- (FIRDatabaseReference *)refForIndex:(NSUInteger)index;
+- (FIRDataSnapshot *)objectAtIndex:(NSUInteger)index;
 
 /**
  * Provides a block which is called when the backing array cancels its query.

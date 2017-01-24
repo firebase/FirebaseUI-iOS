@@ -20,7 +20,7 @@
 
 @import FirebaseDatabase;
 
-#import "FUIArrayDelegate.h"
+#import "FUICollection.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -43,30 +43,31 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * FUIArray provides an array structure that is synchronized with a Firebase reference or
  * query. It is useful for building custom data structures or sources, and provides the base for
- * FirebaseDataSource.
+ * FirebaseDataSource. FUIArray maintains a large amount of internal state, and most of its methods
+ * are not thread-safe.
  */
-@interface FUIArray : NSObject
+@interface FUIArray : NSObject <FUICollection>
 
 /**
  * The delegate object that array changes are surfaced to, which conforms to the
- * @c FUIArrayDelegate protocol.
+ * @c FUICollectionDelegate protocol.
  */
-@property(weak, nonatomic, nullable) id<FUIArrayDelegate> delegate;
+@property (weak, nonatomic, nullable) id<FUICollectionDelegate> delegate;
 
 /**
  * The query on a Firebase reference that provides data to populate the array.
  */
-@property(strong, nonatomic) id<FUIDataObservable> query;
+@property (strong, nonatomic) id<FUIDataObservable> query;
 
 /**
  * The number of objects in the array.
  */
-@property(nonatomic, readonly) NSUInteger count;
+@property (nonatomic, readonly) NSUInteger count;
 
 /**
  * The items currently in the array.
  */
-@property(nonatomic, readonly, copy) NSArray *items;
+@property (nonatomic, readonly, copy) NSArray *items;
 
 #pragma mark - Initializer methods
 
@@ -78,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A FirebaseArray instance
  */
 - (instancetype)initWithQuery:(id<FUIDataObservable>)query
-                     delegate:(nullable id<FUIArrayDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+                     delegate:(nullable id<FUICollectionDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 /**
  * Initalizes FirebaseArray with a Firebase query (FIRDatabaseQuery) or database reference
@@ -102,9 +103,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Returns an object at a specific index in the array.
  * @param index The index of the item to retrieve
- * @return The object at the given index
+ * @return The snapshot at the given index
  */
-- (id)objectAtIndex:(NSUInteger)index;
+- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index;
 
 /**
  * Returns a Firebase reference for an object at a specific index in the array.
@@ -134,6 +135,38 @@ NS_ASSUME_NONNULL_BEGIN
  * @exception NSInvalidArgumentException Thrown when the `key` parameter is `nil`.
  */
 - (NSUInteger)indexForKey:(NSString *)key;
+
+/**
+ * Called when the Firebase query sends a FIRDataEventTypeChildAdded event. Override this
+ * to provide custom insertion logic. Don't call this method directly.
+ * @param snap The snapshot that was inserted.
+ * @param previous The key of the sibling preceding the inserted snapshot.
+ */
+- (void)insertSnapshot:(FIRDataSnapshot *)snap withPreviousChildKey:(nullable NSString *)previous;
+
+/**
+ * Called when the Firebase query sends a FIRDataEventTypeChildRemoved event. Override this
+ * to provide custom removal logic. Don't call this method directly.
+ * @param snap The snapshot that was removed.
+ * @param previous The key of the sibling preceding the removed snapshot.
+ */
+- (void)removeSnapshot:(FIRDataSnapshot *)snap withPreviousChildKey:(nullable NSString *)previous;
+
+/**
+ * Called when the Firebase query sends a FIRDataEventTypeChildChanged event. Override this
+ * to provide custom on change logic. Don't call this method directly.
+ * @param snap The snapshot whose value was changed.
+ * @param previous The key of the sibling preceding the changed snapshot.
+ */
+- (void)changeSnapshot:(FIRDataSnapshot *)snap withPreviousChildKey:(nullable NSString *)previous;
+
+/**
+ * Called when the Firebase query sends a FIRDataEventTypeChildMoved event. Override this
+ * to provide custom move logic. Don't call this method directly.
+ * @param snap The snapshot that was moved.
+ * @param previous The key of the sibling preceding the moved snapshot at its new location.
+ */
+- (void)moveSnapshot:(FIRDataSnapshot *)snap withPreviousChildKey:(nullable NSString *)previous;
 
 @end
 

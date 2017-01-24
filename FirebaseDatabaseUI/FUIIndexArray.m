@@ -21,7 +21,7 @@
 #import "FUIIndexArray.h"
 #import "FUIQueryObserver.h"
 
-@interface FUIIndexArray () <FUIArrayDelegate>
+@interface FUIIndexArray () <FUICollectionDelegate>
 
 @property (nonatomic, readonly) id<FUIDataObservable> index;
 @property (nonatomic, readonly) id<FUIDataObservable> data;
@@ -71,6 +71,7 @@
 
 - (void)observeQueries {
   _indexArray = [[FUIArray alloc] initWithQuery:self.index delegate:self];
+  [_indexArray observeQuery];
 }
 
 - (NSArray <FIRDataSnapshot *> *)items {

@@ -48,6 +48,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Initialize an instance of FUITableViewDataSource.
+ * @param collection An FUICollection used by the data source to pull data
+ *   from Firebase Database.
+ * @param tableView An instance of a UITableView to bind to. This view is
+ *   not retained by the data source.
+ * @param populateCell A closure used by the data source to create/reuse
+ *   table view cells and populate their content. This closure is retained
+ *   by the data source, so if you capture self in the closure and also claim ownership
+ *   of the data source, be sure to avoid retain cycles by capturing a weak reference to self.
+ * @return An instance of FUITableViewDataSource.
+ */
+- (instancetype)initWithCollection:(id<FUICollection>)collection
+                              view:(UITableView *)tableView
+                      populateCell:(UITableViewCell *(^)(UITableView *tableView,
+                                                         NSIndexPath *indexPath,
+                                                         FIRDataSnapshot *object))populateCell NS_DESIGNATED_INITIALIZER;
+
+
+/**
+ * Initialize an instance of FUITableViewDataSource with contents ordered
+ * by the query.
  * @param query A Firebase query to bind the data source to.
  * @param tableView An instance of a UITableView to bind to. This view is
  *   not retained by the data source.
@@ -61,9 +81,9 @@ NS_ASSUME_NONNULL_BEGIN
                          view:(UITableView *)tableView
                  populateCell:(UITableViewCell *(^)(UITableView *tableView,
                                                     NSIndexPath *indexPath,
-                                                    FIRDataSnapshot *object))populateCell NS_DESIGNATED_INITIALIZER;
+                                                    FIRDataSnapshot *object))populateCell;
 
-- (instancetype)initWithArray:(FUIArray *)array NS_UNAVAILABLE;
+- (instancetype)initWithCollection:(id<FUICollection>)collection NS_UNAVAILABLE;
 
 @end
 

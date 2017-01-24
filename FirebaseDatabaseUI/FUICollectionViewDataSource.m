@@ -26,21 +26,29 @@
 
 #pragma mark - FUIDataSource initializer methods
 
+- (instancetype)initWithCollection:(id<FUICollection>)collection
+                              view:(UICollectionView *)view
+                      populateCell:(UICollectionViewCell * (^)(UICollectionView *,
+                                                               NSIndexPath *,
+                                                               FIRDataSnapshot *))populateCell {
+  self = [super initWithCollection:collection];
+  if (self) {
+    _collectionView = view;
+    _populateCellAtIndexPath = populateCell;
+  }
+  return self;
+}
+
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
                          view:(UICollectionView *)collectionView
                  populateCell:(UICollectionViewCell *(^)(UICollectionView *,
                                                          NSIndexPath *,
                                                          FIRDataSnapshot *))populateCell {
   FUIArray *array = [[FUIArray alloc] initWithQuery:query];
-  self = [super initWithArray:array];
-  if (self) {
-    _collectionView = collectionView;
-    _populateCellAtIndexPath = populateCell;
-  }
-  return self;
+  return [self initWithCollection:array view:collectionView populateCell:populateCell];
 }
 
-#pragma mark - FUIArrayDelegate methods
+#pragma mark - FUICollectionDelegate methods
 
 - (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
   [self.collectionView

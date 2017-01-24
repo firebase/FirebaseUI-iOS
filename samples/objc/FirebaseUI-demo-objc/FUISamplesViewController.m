@@ -50,7 +50,7 @@
                                      }]];
 
   [samples addObject:[FUISample sampleWithTitle:@"Chat"
-                              sampleDescription:@"Demonstrates using a FUICollectionViewDataSource to load data from Firebase Database into a UICollectionView for a basic chat app."
+                                sampleDescription:@"Demonstrates using a FUICollectionViewDataSource to load data from Firebase Database into a UICollectionView for a basic chat app."
                                      controller:^UIViewController *{
                                        UIViewController *controller =
                                        [[UIStoryboard storyboardWithName:@"Main"
@@ -93,7 +93,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   FUISample *sample = _samplesContainer[indexPath.row];
   UIViewController *viewController = sample.controllerBlock();
-  
+
   [self.navigationController pushViewController:viewController animated:YES];
 }
 

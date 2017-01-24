@@ -27,7 +27,7 @@
 /**
  * The FirebaseArray which backs the instance of the datasource.
  */
-@property(strong, nonatomic, nonnull) FUIArray *array;
+@property(strong, nonatomic, nonnull) id<FUICollection> collection;
 
 @end
 
@@ -35,11 +35,12 @@
 
 #pragma mark - Initializer methods
 
-- (instancetype)initWithArray:(FUIArray *)array {
+- (instancetype)initWithCollection:(id<FUICollection>)collection {
   self = [super init];
   if (self) {
-    _array = array;
-    _array.delegate = self;
+    _collection = collection;
+    _collection.delegate = self;
+    [_collection observeQuery];
   }
   return self;
 }
@@ -47,26 +48,22 @@
 #pragma mark - API methods
 
 - (NSArray *)items {
-  return [self.array.items copy];
+  return [self.collection.items copy];
 }
 
 - (NSUInteger)count {
-  return self.array.count;
+  return self.collection.count;
 }
 
-- (id)objectAtIndex:(NSUInteger)index {
-  return [self.array objectAtIndex:index];
-}
-
-- (FIRDatabaseReference *)refForIndex:(NSUInteger)index {
-  return [self.array refForIndex:index];
+- (FIRDataSnapshot *)objectAtIndex:(NSUInteger)index {
+  return [self.collection snapshotAtIndex:index];
 }
 
 - (void)cancelWithBlock:(void (^)(NSError *))block {
   self.cancelBlock = block;
 }
 
-#pragma mark - FUIArrayDelegate methods
+#pragma mark - FUICollectionDelegate methods
 
 - (void)canceledWithError:(NSError *)error {
   if (self.cancelBlock != nil) {
