@@ -3225,7 +3225,7 @@
 				);
 				INFOPLIST_FILE = FirebaseUISampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\"";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -3339,7 +3339,7 @@
 				);
 				INFOPLIST_FILE = FirebaseUISampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\"";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
