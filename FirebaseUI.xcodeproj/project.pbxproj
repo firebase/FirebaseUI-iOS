@@ -2710,7 +2710,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks/frameworks\"",
@@ -2731,7 +2731,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks/frameworks\"",
@@ -2855,7 +2855,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
 				);
@@ -2887,7 +2887,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
 				);
@@ -3174,10 +3174,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
-					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks/frameworks",
+					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks",
 				);
 				INFOPLIST_FILE = FirebaseUISample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3197,10 +3197,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
-					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks/frameworks",
+					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks",
 				);
 				INFOPLIST_FILE = FirebaseUISample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3217,9 +3217,9 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
-					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks/frameworks",
+					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks",
 					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework",
 					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-framework",
 				);
@@ -3331,9 +3331,9 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
-					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks/frameworks",
+					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks",
 					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework",
 					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-framework",
 				);

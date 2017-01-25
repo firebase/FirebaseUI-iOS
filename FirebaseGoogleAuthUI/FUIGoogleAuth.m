@@ -16,7 +16,7 @@
 
 #import "FUIGoogleAuth.h"
 
-#import <FirebaseAnalytics/FirebaseAnalytics.h>
+#import <FirebaseCore/FirebaseCore.h>
 #import <FirebaseAuth/FIRGoogleAuthProvider.h>
 #import <FirebaseAuth/FIRUserInfo.h>
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>

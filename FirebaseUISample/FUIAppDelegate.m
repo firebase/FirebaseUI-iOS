@@ -15,7 +15,7 @@
 //
 
 #import "FUIAppDelegate.h"
-#import <FirebaseCore/FIRApp.h>
+#import <FirebaseCore/FirebaseCore.h>
 
 @implementation FUIAppDelegate
 
