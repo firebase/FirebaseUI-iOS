@@ -197,7 +197,7 @@
 			remoteGlobalIDString = 8D90842D1D9316AB00333CC8;
 			remoteInfo = FirebaseStorageUI;
 		};
-		8DA941B81D67912000CD3685 /* PBXContainerItemProxy */ = {
+		8D9FF4681E3829BA003FF6ED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
 			proxyType = 1;
@@ -1437,7 +1437,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				8DA941B91D67912000CD3685 /* PBXTargetDependency */,
+				8D9FF4691E3829BA003FF6ED /* PBXTargetDependency */,
 			);
 			name = FirebaseGoogleAuthUI;
 			productName = FirebaseGoogleAuthUI;
@@ -2066,10 +2066,10 @@
 			target = 8D90842D1D9316AB00333CC8 /* FirebaseStorageUI */;
 			targetProxy = 8D9084381D9316AB00333CC8 /* PBXContainerItemProxy */;
 		};
-		8DA941B91D67912000CD3685 /* PBXTargetDependency */ = {
+		8D9FF4691E3829BA003FF6ED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8DCC4FC01D678CDC00B0D3C4 /* FirebaseAuthUI */;
-			targetProxy = 8DA941B81D67912000CD3685 /* PBXContainerItemProxy */;
+			targetProxy = 8D9FF4681E3829BA003FF6ED /* PBXContainerItemProxy */;
 		};
 		8DCC4FCD1D678CDC00B0D3C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2925,7 +2925,13 @@
 					"-iquote",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/OCMock/OCMock.framework/Headers\"",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					"\"GTMOAuth2\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseGoogleAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2948,7 +2954,13 @@
 					"-iquote",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/OCMock/OCMock.framework/Headers\"",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					"\"GTMOAuth2\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseGoogleAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2977,6 +2989,45 @@
 					"$(inherited)",
 					"-fstack-protector-all",
 					"-fobjc-arc",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accounts\"",
+					"-framework",
+					"\"AddressBook\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"Social\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TwitterCore\"",
+					"-framework",
+					"\"TwitterKit\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3007,6 +3058,45 @@
 					"$(inherited)",
 					"-fstack-protector-all",
 					"-fobjc-arc",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accounts\"",
+					"-framework",
+					"\"AddressBook\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"Social\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TwitterCore\"",
+					"-framework",
+					"\"TwitterKit\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3083,16 +3173,10 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/OCMock\"",
 					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleUtilities/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleNetworkingUtilities/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAuthUI/Frameworks/frameworks\"",
 					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks/frameworks",
 				);
 				INFOPLIST_FILE = FirebaseUISample/Info.plist;
@@ -3112,16 +3196,10 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/OCMock\"",
 					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleUtilities/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleNetworkingUtilities/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAuthUI/Frameworks/frameworks\"",
 					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks/frameworks",
 				);
 				INFOPLIST_FILE = FirebaseUISample/Info.plist;
@@ -3139,15 +3217,107 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/OCMock\"",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
 					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks/frameworks",
-					"$(PROJECT_DIR)/FirebaseUIFrameworks/FirebaseAuthUI/Frameworks",
+					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework",
+					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-framework",
 				);
 				INFOPLIST_FILE = FirebaseUISampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accounts\"",
+					"-framework",
+					"\"AddressBook\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseAuth\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseDatabase\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"FirebaseStorage\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppUtilities\"",
+					"-framework",
+					"\"GoogleInterchangeUtilities\"",
+					"-framework",
+					"\"GoogleSignIn\"",
+					"-framework",
+					"\"GoogleSymbolUtilities\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"Social\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TwitterCore\"",
+					"-framework",
+					"\"TwitterKit\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"AudioToolbox\"",
+					"-weak_framework",
+					"\"CoreGraphics\"",
+					"-weak_framework",
+					"\"CoreLocation\"",
+					"-weak_framework",
+					"\"Foundation\"",
+					"-weak_framework",
+					"\"QuartzCore\"",
+					"-weak_framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"Social\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"GTMOAuth2\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseUISampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = FirebaseUISample;
@@ -3161,15 +3331,107 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/OCMock\"",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks/frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
 					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks/frameworks",
-					"$(PROJECT_DIR)/FirebaseUIFrameworks/FirebaseAuthUI/Frameworks",
+					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework",
+					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-framework",
 				);
 				INFOPLIST_FILE = FirebaseUISampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accounts\"",
+					"-framework",
+					"\"AddressBook\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseAuth\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseDatabase\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"FirebaseStorage\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppUtilities\"",
+					"-framework",
+					"\"GoogleInterchangeUtilities\"",
+					"-framework",
+					"\"GoogleSignIn\"",
+					"-framework",
+					"\"GoogleSymbolUtilities\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"Social\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TwitterCore\"",
+					"-framework",
+					"\"TwitterKit\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"AudioToolbox\"",
+					"-weak_framework",
+					"\"CoreGraphics\"",
+					"-weak_framework",
+					"\"CoreLocation\"",
+					"-weak_framework",
+					"\"Foundation\"",
+					"-weak_framework",
+					"\"QuartzCore\"",
+					"-weak_framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"Social\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"GTMOAuth2\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseUISampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = FirebaseUISample;
