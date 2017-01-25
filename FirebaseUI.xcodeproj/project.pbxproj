@@ -197,7 +197,7 @@
 			remoteGlobalIDString = 8D90842D1D9316AB00333CC8;
 			remoteInfo = FirebaseStorageUI;
 		};
-		8DA941B81D67912000CD3685 /* PBXContainerItemProxy */ = {
+		8D9FF4681E3829BA003FF6ED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
 			proxyType = 1;
@@ -1437,7 +1437,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				8DA941B91D67912000CD3685 /* PBXTargetDependency */,
+				8D9FF4691E3829BA003FF6ED /* PBXTargetDependency */,
 			);
 			name = FirebaseGoogleAuthUI;
 			productName = FirebaseGoogleAuthUI;
@@ -2066,10 +2066,10 @@
 			target = 8D90842D1D9316AB00333CC8 /* FirebaseStorageUI */;
 			targetProxy = 8D9084381D9316AB00333CC8 /* PBXContainerItemProxy */;
 		};
-		8DA941B91D67912000CD3685 /* PBXTargetDependency */ = {
+		8D9FF4691E3829BA003FF6ED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8DCC4FC01D678CDC00B0D3C4 /* FirebaseAuthUI */;
-			targetProxy = 8DA941B81D67912000CD3685 /* PBXContainerItemProxy */;
+			targetProxy = 8D9FF4681E3829BA003FF6ED /* PBXContainerItemProxy */;
 		};
 		8DCC4FCD1D678CDC00B0D3C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2978,6 +2978,45 @@
 					"-fstack-protector-all",
 					"-fobjc-arc",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accounts\"",
+					"-framework",
+					"\"AddressBook\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"Social\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TwitterCore\"",
+					"-framework",
+					"\"TwitterKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3007,6 +3046,45 @@
 					"$(inherited)",
 					"-fstack-protector-all",
 					"-fobjc-arc",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accounts\"",
+					"-framework",
+					"\"AddressBook\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"Social\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TwitterCore\"",
+					"-framework",
+					"\"TwitterKit\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
