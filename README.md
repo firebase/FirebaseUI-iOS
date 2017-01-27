@@ -14,29 +14,29 @@ FirebaseUI supports iOS 8.0+. We recommend using [CocoaPods](https://cocoapods.o
 the following to your `Podfile`:
 
 ```ruby
-pod 'FirebaseUI', '~> 1.0'       # Pull in all Firebase UI features
+pod 'FirebaseUI', '~> 2.0'       # Pull in all Firebase UI features
 ```
 
 If you don't want to use all of FirebaseUI, there are multiple subspecs which can selectively install subsets of the full feature set:
 
 ```ruby
 # Only pull in FirebaseUI Database features
-pod 'FirebaseUI/Database', '~> 1.0'
+pod 'FirebaseUI/Database', '~> 2.0'
 
 # Only pull in FirebaseUI Storage features
-pod 'FirebaseUI/Storage', '~> 1.0'
+pod 'FirebaseUI/Storage', '~> 2.0'
 
 # Only pull in FirebaseUI Auth features
-pod 'FirebaseUI/Auth', '~> 1.0'
+pod 'FirebaseUI/Auth', '~> 2.0'
 
 # Only pull in Facebook login features
-pod 'FirebaseUI/Facebook', '~> 1.0'
+pod 'FirebaseUI/Facebook', '~> 2.0'
 
 # Only pull in Google login features
-pod 'FirebaseUI/Google', '~> 1.0'
+pod 'FirebaseUI/Google', '~> 2.0'
 
 # Only pull in Twitter login features
-pod 'FirebaseUI/Twitter', '~> 1.0'
+pod 'FirebaseUI/Twitter', '~> 2.0'
 ```
 
 If you're including FirebaseUI in a Swift project, make sure you also have:
@@ -62,7 +62,7 @@ $ cd FirebaseUI-iOS
 $ pod install
 ```
 
-Alternatively you can use `pod try FirebaseUI` in order to install objective-c or swift sample project
+Alternatively you can use `pod try FirebaseUI` to install the Objective-C or Swift sample projects.
 
 ## Mandatory Sample Project Configuration
 
@@ -80,7 +80,7 @@ Go to `Project Settings -> Info tab -> Url Types` and update values for:
 
 3. Update `Info.plist` twitter and facebook configuration values
 	+ `FacebookAppID -> {your-app-id}` (put Facebook App Id)
-	+ `Fabric -> Kits -> KitInfo -> consumerKey / consumerSecret` (put Twitter App consumer key/secret). Please notice that's it's not secure to store `consumerSecret` in the app itself.
+	+ `Fabric -> Kits -> KitInfo -> consumerKey / consumerSecret` (put Twitter App consumer key/secret). Please note that's it's not secure to store `consumerSecret` in the app itself.
 
 4. Enable Keychain Sharing.<br>
 Facebook SDK requires keychain sharing.<br>
