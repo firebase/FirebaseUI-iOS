@@ -168,7 +168,7 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
 /** @fn init
     @brief Please use @c FUIAuth.authUIWithAuth to get a @c FUIAuth instance.
  */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /** @fn handleOpenURL:
     @brief Should be called from your @c UIApplicationDelegate in

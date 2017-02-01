@@ -35,27 +35,27 @@ class FUICustomAuthDelegate: NSObject, FUIAuthDelegate {
     }
   }
 
-  func authPickerViewController(for authUI: FUIAuth) -> FUIAuthPickerViewController {
+  func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
     return FUICustomAuthPickerViewController(authUI: authUI)
   }
 
-  func emailEntryViewController(for authUI: FUIAuth) -> FUIEmailEntryViewController {
+  func emailEntryViewController(forAuthUI authUI: FUIAuth) -> FUIEmailEntryViewController {
     return FUICustomEmailEntryViewController(authUI: authUI)
   }
 
-  func passwordRecoveryViewController(for authUI: FUIAuth, email: String) -> FUIPasswordRecoveryViewController {
+  func passwordRecoveryViewController(forAuthUI authUI: FUIAuth, email: String) -> FUIPasswordRecoveryViewController {
     return FUICustomPasswordRecoveryViewController(authUI: authUI, email: email)
   }
 
-  func passwordSignInViewController(for authUI: FUIAuth, email: String) -> FUIPasswordSignInViewController {
+  func passwordSignInViewController(forAuthUI authUI: FUIAuth, email: String) -> FUIPasswordSignInViewController {
     return FUICustomPasswordSignInViewController(authUI: authUI, email: email)
   }
 
-  func passwordSignUpViewController(for authUI: FUIAuth, email: String) -> FUIPasswordSignUpViewController {
+  func passwordSignUpViewController(forAuthUI authUI: FUIAuth, email: String) -> FUIPasswordSignUpViewController {
     return FUICustomPasswordSignUpViewController(authUI: authUI, email: email)
   }
 
-  func passwordVerificationViewController(for authUI: FUIAuth, email: String, newCredential: FIRAuthCredential) -> FUIPasswordVerificationViewController {
+  func passwordVerificationViewController(forAuthUI authUI: FUIAuth, email: String, newCredential: FIRAuthCredential) -> FUIPasswordVerificationViewController {
     return FUICustomPasswordVerificationViewController(authUI: authUI, email: email, newCredential: newCredential)
   }
 }

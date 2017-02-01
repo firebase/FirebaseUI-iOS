@@ -186,7 +186,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     let heightPadding: CGFloat = 16
 
     let width = self.view.frame.size.width
-    let blob = self.collectionViewDataSource.object(at: UInt((indexPath as NSIndexPath).row)) as! FIRDataSnapshot
+    let blob = self.collectionViewDataSource.object(at: UInt((indexPath as NSIndexPath).row))!
     let text = Chat(snapshot: blob)!.text
 
     let rect = ChatCollectionViewCell.boundingRectForText(text, maxWidth: width)

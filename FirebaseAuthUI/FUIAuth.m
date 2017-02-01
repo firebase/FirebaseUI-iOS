@@ -40,7 +40,7 @@ static const char kAuthAssociationKey;
 /** @fn initWithAuth:
     @brief auth The @c FIRAuth to associate the @c FUIAuth instance with.
  */
-- (nullable instancetype)initWithAuth:(FIRAuth *)auth NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithAuth:(FIRAuth *)auth NS_DESIGNATED_INITIALIZER;
 
 @end
 
