@@ -16,11 +16,11 @@ target 'FirebaseStorageUI' do
   use_frameworks!
 
   pod 'Firebase/Storage'
-  pod 'SDWebImage'
+  pod 'SDWebImage', '~> 4.0'
 
   target 'FirebaseStorageUITests' do
     inherit! :search_paths
-    pod 'SDWebImage'
+    pod 'SDWebImage', '~> 4.0'
     pod 'OCMock'
   end
 end
@@ -38,7 +38,6 @@ end
 
 target 'FirebaseFacebookAuthUI' do
   use_frameworks!
-  inherit! :search_paths
   # Pods for Facebook Auth
   pod 'FBSDKLoginKit', '~> 4.0'
   pod 'FBSDKCoreKit', '~> 4.0'
@@ -53,7 +52,6 @@ end
 
 target 'FirebaseGoogleAuthUI' do
   use_frameworks!
-  inherit! :search_paths
   # Pods for Google Auth
   pod 'GoogleSignIn', '~> 4.0'
 
@@ -65,7 +63,6 @@ end
 
 target 'FirebaseTwitterAuthUI' do
   use_frameworks!
-  inherit! :search_paths
   # Pods for Twitter Auth
   pod 'TwitterKit', '~> 2.4'
 
@@ -77,7 +74,6 @@ end
 
 target 'Database' do
   use_frameworks!
-
   # Pods for Database
   pod 'Firebase/Database'
 end
@@ -86,7 +82,7 @@ target 'Storage' do
   use_frameworks!
 
   pod 'Firebase/Storage'
-  pod 'SDWebImage'
+  pod 'SDWebImage', '~> 4.0'
 end
 
 target 'Auth' do

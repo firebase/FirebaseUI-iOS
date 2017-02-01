@@ -2436,7 +2436,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(BUILT_PRODUCTS_DIR)/SDWebImage";
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseui.FirebaseStorageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2460,7 +2460,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(BUILT_PRODUCTS_DIR)";
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseui.FirebaseStorageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2631,7 +2631,7 @@
 				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2652,7 +2652,7 @@
 				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2719,7 +2719,7 @@
 				INFOPLIST_FILE = FirebaseAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks  ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524\"";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2740,7 +2740,7 @@
 				INFOPLIST_FILE = FirebaseAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks  ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524\"";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2818,7 +2818,7 @@
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2838,7 +2838,7 @@
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2926,7 +2926,7 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/OCMock/OCMock.framework/Headers\"",
 				);
 				OTHER_LDFLAGS = (
-					"-ObjC",
+					"$(inherited)",
 					"-framework",
 					"\"GTMOAuth2\"",
 					"-framework",
@@ -2955,7 +2955,7 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/OCMock/OCMock.framework/Headers\"",
 				);
 				OTHER_LDFLAGS = (
-					"-ObjC",
+					"$(inherited)",
 					"-framework",
 					"\"GTMOAuth2\"",
 					"-framework",
@@ -3111,11 +3111,12 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/TwitterKit/iOS\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/TwitterCore/iOS\"",
 				);
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -3128,11 +3129,12 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/TwitterKit/iOS\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/TwitterCore/iOS\"",
 				);
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -3219,9 +3221,19 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
-					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks",
-					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework",
-					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-framework",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-framework\"",
+					"\"$(PODS_ROOT)/FirebaseDatabase/Frameworks\"",
+					"\"$(PODS_ROOT)/Fabric/iOS\"",
+					"\"$(PODS_ROOT)/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/FirebaseInstanceID/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/FirebaseStorage/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/GoogleAppUtilities/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/GoogleInterchangeUtilities/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/GoogleSignIn/Frameworks\"",
+					"\"$(PODS_ROOT)/GoogleSymbolUtilities/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/TwitterCore/iOS\"",
+					"\"$(PODS_ROOT)/TwitterKit/iOS\"",
 				);
 				INFOPLIST_FILE = FirebaseUISampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3333,9 +3345,19 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
-					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks",
-					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework",
-					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-framework",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-framework\"",
+					"\"$(PODS_ROOT)/FirebaseDatabase/Frameworks\"",
+					"\"$(PODS_ROOT)/Fabric/iOS\"",
+					"\"$(PODS_ROOT)/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/FirebaseInstanceID/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/FirebaseStorage/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/GoogleAppUtilities/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/GoogleInterchangeUtilities/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/GoogleSignIn/Frameworks\"",
+					"\"$(PODS_ROOT)/GoogleSymbolUtilities/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/TwitterCore/iOS\"",
+					"\"$(PODS_ROOT)/TwitterKit/iOS\"",
 				);
 				INFOPLIST_FILE = FirebaseUISampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
