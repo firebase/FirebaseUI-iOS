@@ -24,8 +24,6 @@
 
 @interface FUITableViewDataSource ()
 
-@property (nonatomic, readwrite, weak) UITableView *tableView;
-
 @property(strong, nonatomic, readwrite) UITableViewCell *(^populateCell)
   (UITableView *tableView, NSIndexPath *indexPath, FIRDataSnapshot *snap);
 

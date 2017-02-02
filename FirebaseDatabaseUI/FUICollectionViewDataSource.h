@@ -37,9 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The UICollectionView instance that operations (inserts, removals, moves,
  * etc.) are performed against. The data source does not claim ownership of
- * the collection view it populates.
+ * the collection view it populates. This collection view must be receiving data
+ * from this data source otherwise data inconsistency crashes will occur.
  */
-@property (nonatomic, readonly, weak) UICollectionView *collectionView;
+@property (nonatomic, readwrite, weak, nullable) UICollectionView *collectionView;
 
 /**
  * The callback to populate a subclass of UICollectionViewCell with an object

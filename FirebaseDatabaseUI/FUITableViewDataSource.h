@@ -30,15 +30,16 @@ NS_ASSUME_NONNULL_BEGIN
  * FUITableViewDataSource provides a class that conforms to the
  * UITableViewDataSource protocol which allows UITableViews to implement
  * FUITableViewDataSource in order to provide a UITableView synchronized
- * to a Firebase reference or query.
+ * to a Firebase reference or query. 
  */
 @interface FUITableViewDataSource : FUIDataSource<UITableViewDataSource>
 
 /**
  * The UITableView instance that operations (inserts, removals, moves, etc.) are
- * performed against.
+ * performed against. This collection view must be receiving data from
+ * this data source otherwise data inconsistency crashes will occur.
  */
-@property (nonatomic, readonly, weak) UITableView *tableView;
+@property (nonatomic, readwrite, weak, nullable) UITableView *tableView;
 
 /**
  * The callback used by the data source to populate the table view.
