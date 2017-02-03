@@ -13,7 +13,7 @@
 		8D306BBF1E1C64E200A13B0E /* FUIArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941E91D67951B00CD3685 /* FUIArrayTest.m */; };
 		8D306BC01E1C64F000A13B0E /* FUICollectionViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941EC1D67951B00CD3685 /* FUICollectionViewDataSourceTest.m */; };
 		8D306BC11E1C64F200A13B0E /* FUITableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941ED1D67951B00CD3685 /* FUITableViewDataSourceTest.m */; };
-		8D3A120E1DC2B122007558BA /* FUISortedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D3A120C1DC2B122007558BA /* FUISortedArray.h */; };
+		8D3A120E1DC2B122007558BA /* FUISortedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D3A120C1DC2B122007558BA /* FUISortedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D3A120F1DC2B122007558BA /* FUISortedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A120D1DC2B122007558BA /* FUISortedArray.m */; };
 		8D78AF061D9D8CB000CFA9C5 /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */; };
 		8D7AD9B71D9317FB006866B9 /* UIImageView+FirebaseStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7AD9B51D9317FB006866B9 /* UIImageView+FirebaseStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -125,6 +125,7 @@
 		8DBA0F911D872EAA00D113D3 /* FUIPasswordVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941701D678F5400CD3685 /* FUIPasswordVerificationViewController.m */; };
 		8DBA0F921D872EBA00D113D3 /* FUIFacebookAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941AF1D67908E00CD3685 /* FUIFacebookAuth.m */; };
 		8DBA0F931D872EC100D113D3 /* FUIGoogleAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941B31D6790E900CD3685 /* FUIGoogleAuth.m */; };
+		8DC2FA5E1E44FA720036C03F /* FUISortedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A120D1DC2B122007558BA /* FUISortedArray.m */; };
 		8DCC4FA81D678CC400B0D3C4 /* FirebaseDatabaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DCC4FA71D678CC400B0D3C4 /* FirebaseDatabaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DCC4FEC1D678CE800B0D3C4 /* FirebaseFacebookAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCC4FEB1D678CE800B0D3C4 /* FirebaseFacebookAuthUITests.m */; };
 		8DCC50081D678CF500B0D3C4 /* FirebaseGoogleAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCC50071D678CF500B0D3C4 /* FirebaseGoogleAuthUITests.m */; };
@@ -1859,6 +1860,7 @@
 				8D924C661DA6F77700C4DA48 /* FUIQueryObserver.m in Sources */,
 				8DBA0F801D872E4700D113D3 /* FUICollectionViewDataSource.m in Sources */,
 				8DBA0F7F1D872E4300D113D3 /* FUIArray.m in Sources */,
+				8DC2FA5E1E44FA720036C03F /* FUISortedArray.m in Sources */,
 				8DBA0F811D872E4B00D113D3 /* FUIDataSource.m in Sources */,
 				8DBA0F821D872E4E00D113D3 /* FUITableViewDataSource.m in Sources */,
 			);

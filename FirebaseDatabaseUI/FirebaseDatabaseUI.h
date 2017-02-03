@@ -26,6 +26,7 @@ FOUNDATION_EXPORT const unsigned char FirebaseDatabaseUIVersionString[];
 #import <FirebaseDatabaseUI/FUIIndexTableViewDataSource.h>
 #import <FirebaseDatabaseUI/FUIIndexCollectionViewDataSource.h>
 #import <FirebaseDatabaseUI/FUIArray.h>
+#import <FirebaseDatabaseUI/FUISortedArray.h>
 #import <FirebaseDatabaseUI/FUICollection.h>
 #import <FirebaseDatabaseUI/FUICollectionViewDataSource.h>
 #import <FirebaseDatabaseUI/FUIDataSource.h>
