@@ -33,11 +33,9 @@
 		8DA9413E1D678DEB00CD3685 /* FUIArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA941391D678DEB00CD3685 /* FUIArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DA9413F1D678DEB00CD3685 /* FUICollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413A1D678DEB00CD3685 /* FUICollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DA941401D678DEB00CD3685 /* FUICollectionViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413B1D678DEB00CD3685 /* FUICollectionViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DA941411D678DEB00CD3685 /* FUIDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413C1D678DEB00CD3685 /* FUIDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DA941421D678DEB00CD3685 /* FUITableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9413D1D678DEB00CD3685 /* FUITableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DA941471D678E3200CD3685 /* FUIArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941431D678E3200CD3685 /* FUIArray.m */; };
 		8DA941481D678E3200CD3685 /* FUICollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941441D678E3200CD3685 /* FUICollectionViewDataSource.m */; };
-		8DA941491D678E3200CD3685 /* FUIDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941451D678E3200CD3685 /* FUIDataSource.m */; };
 		8DA9414A1D678E3200CD3685 /* FUITableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941461D678E3200CD3685 /* FUITableViewDataSource.m */; };
 		8DA941721D678F5400CD3685 /* FUIAuthPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9414B1D678F5400CD3685 /* FUIAuthPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DA941731D678F5400CD3685 /* FUIAuthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA9414C1D678F5400CD3685 /* FUIAuthPickerViewController.m */; };
@@ -106,7 +104,6 @@
 		8DAF8BF71D89CC5300B251C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DAF8BF51D89CC5300B251C7 /* GoogleService-Info.plist */; };
 		8DBA0F7F1D872E4300D113D3 /* FUIArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941431D678E3200CD3685 /* FUIArray.m */; };
 		8DBA0F801D872E4700D113D3 /* FUICollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941441D678E3200CD3685 /* FUICollectionViewDataSource.m */; };
-		8DBA0F811D872E4B00D113D3 /* FUIDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941451D678E3200CD3685 /* FUIDataSource.m */; };
 		8DBA0F821D872E4E00D113D3 /* FUITableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941461D678E3200CD3685 /* FUITableViewDataSource.m */; };
 		8DBA0F831D872E7A00D113D3 /* FUIAuthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA9414C1D678F5400CD3685 /* FUIAuthPickerViewController.m */; };
 		8DBA0F841D872E8C00D113D3 /* FUIAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941511D678F5400CD3685 /* FUIAuth.m */; };
@@ -378,11 +375,9 @@
 		8DA941391D678DEB00CD3685 /* FUIArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIArray.h; sourceTree = "<group>"; };
 		8DA9413A1D678DEB00CD3685 /* FUICollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICollection.h; sourceTree = "<group>"; };
 		8DA9413B1D678DEB00CD3685 /* FUICollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICollectionViewDataSource.h; sourceTree = "<group>"; };
-		8DA9413C1D678DEB00CD3685 /* FUIDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIDataSource.h; sourceTree = "<group>"; };
 		8DA9413D1D678DEB00CD3685 /* FUITableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUITableViewDataSource.h; sourceTree = "<group>"; };
 		8DA941431D678E3200CD3685 /* FUIArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIArray.m; sourceTree = "<group>"; };
 		8DA941441D678E3200CD3685 /* FUICollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICollectionViewDataSource.m; sourceTree = "<group>"; };
-		8DA941451D678E3200CD3685 /* FUIDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIDataSource.m; sourceTree = "<group>"; };
 		8DA941461D678E3200CD3685 /* FUITableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUITableViewDataSource.m; sourceTree = "<group>"; };
 		8DA9414B1D678F5400CD3685 /* FUIAuthPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAuthPickerViewController.h; sourceTree = "<group>"; };
 		8DA9414C1D678F5400CD3685 /* FUIAuthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAuthPickerViewController.m; sourceTree = "<group>"; };
@@ -858,8 +853,6 @@
 				8D3A120D1DC2B122007558BA /* FUISortedArray.m */,
 				8DA9413B1D678DEB00CD3685 /* FUICollectionViewDataSource.h */,
 				8DA941441D678E3200CD3685 /* FUICollectionViewDataSource.m */,
-				8DA9413C1D678DEB00CD3685 /* FUIDataSource.h */,
-				8DA941451D678E3200CD3685 /* FUIDataSource.m */,
 				8DA9413D1D678DEB00CD3685 /* FUITableViewDataSource.h */,
 				8DA941461D678E3200CD3685 /* FUITableViewDataSource.m */,
 				8DCC4FA91D678CC400B0D3C4 /* Info.plist */,
@@ -1113,7 +1106,6 @@
 				8DA941401D678DEB00CD3685 /* FUICollectionViewDataSource.h in Headers */,
 				8DA941421D678DEB00CD3685 /* FUITableViewDataSource.h in Headers */,
 				8DA9413F1D678DEB00CD3685 /* FUICollection.h in Headers */,
-				8DA941411D678DEB00CD3685 /* FUIDataSource.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1861,7 +1853,6 @@
 				8DBA0F801D872E4700D113D3 /* FUICollectionViewDataSource.m in Sources */,
 				8DBA0F7F1D872E4300D113D3 /* FUIArray.m in Sources */,
 				8DC2FA5E1E44FA720036C03F /* FUISortedArray.m in Sources */,
-				8DBA0F811D872E4B00D113D3 /* FUIDataSource.m in Sources */,
 				8DBA0F821D872E4E00D113D3 /* FUITableViewDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1915,7 +1906,6 @@
 				8D3A120F1DC2B122007558BA /* FUISortedArray.m in Sources */,
 				8DA941481D678E3200CD3685 /* FUICollectionViewDataSource.m in Sources */,
 				8DA941471D678E3200CD3685 /* FUIArray.m in Sources */,
-				8DA941491D678E3200CD3685 /* FUIDataSource.m in Sources */,
 				8DA9414A1D678E3200CD3685 /* FUITableViewDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -48,19 +48,18 @@ static NSString *const kTestReuseIdentifier = @"FUICollectionViewDataSourceTest"
                                         populateCell:^UICollectionViewCell *(UICollectionView *collectionView,
                                                                              NSIndexPath *indexPath,
                                                                              FIRDataSnapshot *object) {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTestReuseIdentifier forIndexPath:indexPath];
+    UICollectionViewCell *cell =
+        [collectionView dequeueReusableCellWithReuseIdentifier:kTestReuseIdentifier
+                                                  forIndexPath:indexPath];
     cell.accessibilityValue = object.key;
     return cell;
   }];
-  
-  // Removing this NSLog causes the tests to crash since `numberOfItemsInSection`
-  // actually pulls updates from the data source or something
-  NSLog(@"count: %lu", [self.collectionView numberOfItemsInSection:0]);
-  
+
   [self.observable populateWithCount:10];
 }
 
 - (void)tearDown {
+  [self.dataSource unbind];
   [self.observable removeAllObservers];
   [UIView setAnimationsEnabled:YES];
   [super tearDown];
