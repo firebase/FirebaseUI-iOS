@@ -18,14 +18,17 @@
 
 // clang-format on
 
+#import "FUIArray.h"
 #import "FUITableViewDataSource.h"
 
 @import FirebaseDatabase;
 
 @interface FUITableViewDataSource ()
 
-@property(strong, nonatomic, readwrite) UITableViewCell *(^populateCell)
+@property (strong, nonatomic, readwrite) UITableViewCell *(^populateCell)
   (UITableView *tableView, NSIndexPath *indexPath, FIRDataSnapshot *snap);
+
+@property (strong, nonatomic, readonly) id<FUICollection> collection;
 
 @end
 
@@ -34,25 +37,39 @@
 #pragma mark - FUIDataSource initializer methods
 
 - (instancetype)initWithCollection:(id<FUICollection>)collection
-                              view:(UITableView *)tableView
                       populateCell:(UITableViewCell *(^)(UITableView *,
                                                          NSIndexPath *,
                                                          FIRDataSnapshot *))populateCell {
-  self = [super initWithCollection:collection];
+  self = [super init];
   if (self != nil) {
-    self.tableView = tableView;
-    self.populateCell = populateCell;
+    _collection = collection;
+    _populateCell = populateCell;
   }
   return self;
 }
 
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                         view:(UITableView *)tableView
                  populateCell:(UITableViewCell *(^)(UITableView *,
                                                     NSIndexPath *,
                                                     FIRDataSnapshot *))populateCell {
   FUIArray *array = [[FUIArray alloc] initWithQuery:query];
-  return [self initWithCollection:array view:tableView populateCell:populateCell];
+  return [self initWithCollection:array populateCell:populateCell];
+}
+
+- (NSUInteger)count {
+  return self.collection.count;
+}
+
+- (void)bindToView:(UITableView *)view {
+  self.tableView = view;
+  view.dataSource = self;
+  [self.collection observeQuery];
+}
+
+- (void)unbind {
+  self.tableView.dataSource = nil;
+  self.tableView = nil;
+  [self.collection invalidate];
 }
 
 #pragma mark - FUICollectionDelegate methods
@@ -89,14 +106,14 @@
 #pragma mark - UITableViewDataSource methods
 
 - (id)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  FIRDataSnapshot *snap = [self.items objectAtIndex:indexPath.row];
+  FIRDataSnapshot *snap = [self.collection.items objectAtIndex:indexPath.row];
 
   UITableViewCell *cell = self.populateCell(tableView, indexPath, snap);
   return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return self.count;
+  return self.collection.count;
 }
 
 @end
@@ -108,8 +125,8 @@
                                                               NSIndexPath *indexPath,
                                                               FIRDataSnapshot *snap))populateCell {
   FUITableViewDataSource *dataSource =
-    [[FUITableViewDataSource alloc] initWithQuery:query view:self populateCell:populateCell];
-  self.dataSource = dataSource;
+    [[FUITableViewDataSource alloc] initWithQuery:query populateCell:populateCell];
+  [dataSource bindToView:self];
   return dataSource;
 }
 

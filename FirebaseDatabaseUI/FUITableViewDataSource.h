@@ -20,7 +20,7 @@
 
 @import UIKit;
 
-#import "FUIDataSource.h"
+#import <FirebaseDatabaseUI/FUICollection.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
  * FUITableViewDataSource in order to provide a UITableView synchronized
  * to a Firebase reference or query. 
  */
-@interface FUITableViewDataSource : FUIDataSource<UITableViewDataSource>
+@interface FUITableViewDataSource : NSObject <UITableViewDataSource>
 
 /**
  * The UITableView instance that operations (inserts, removals, moves, etc.) are
@@ -44,15 +44,18 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The callback used by the data source to populate the table view.
  */
-@property(strong, nonatomic, readonly) UITableViewCell *(^populateCell)
+@property (strong, nonatomic, readonly) UITableViewCell *(^populateCell)
   (UITableView *tableView, NSIndexPath *indexPath, FIRDataSnapshot *snap);
+
+/**
+ * The number of items in the data source.
+ */
+@property (nonatomic, readonly) NSUInteger count;
 
 /**
  * Initialize an instance of FUITableViewDataSource.
  * @param collection An FUICollection used by the data source to pull data
  *   from Firebase Database.
- * @param tableView An instance of a UITableView to bind to. This view is
- *   not retained by the data source.
  * @param populateCell A closure used by the data source to create/reuse
  *   table view cells and populate their content. This closure is retained
  *   by the data source, so if you capture self in the closure and also claim ownership
@@ -60,7 +63,6 @@ NS_ASSUME_NONNULL_BEGIN
  * @return An instance of FUITableViewDataSource.
  */
 - (instancetype)initWithCollection:(id<FUICollection>)collection
-                              view:(UITableView *)tableView
                       populateCell:(UITableViewCell *(^)(UITableView *tableView,
                                                          NSIndexPath *indexPath,
                                                          FIRDataSnapshot *object))populateCell NS_DESIGNATED_INITIALIZER;
@@ -70,8 +72,6 @@ NS_ASSUME_NONNULL_BEGIN
  * Initialize an instance of FUITableViewDataSource with contents ordered
  * by the query.
  * @param query A Firebase query to bind the data source to.
- * @param tableView An instance of a UITableView to bind to. This view is
- *   not retained by the data source.
  * @param populateCell A closure used by the data source to create/reuse
  *   table view cells and populate their content. This closure is retained
  *   by the data source, so if you capture self in the closure and also claim ownership
@@ -79,12 +79,23 @@ NS_ASSUME_NONNULL_BEGIN
  * @return An instance of FUITableViewDataSource.
  */
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                         view:(UITableView *)tableView
                  populateCell:(UITableViewCell *(^)(UITableView *tableView,
                                                     NSIndexPath *indexPath,
                                                     FIRDataSnapshot *object))populateCell;
 
-- (instancetype)initWithCollection:(id<FUICollection>)collection NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ * Attaches the data source to a table view and begins sending updates immediately.
+ * @param view An instance of UITableView that the data source should push
+ *   updates to.
+ */
+- (void)bindToView:(UITableView *)view;
+
+/**
+ * Detaches the data source from a view and stops sending any updates.
+ */
+- (void)unbind;
 
 @end
 

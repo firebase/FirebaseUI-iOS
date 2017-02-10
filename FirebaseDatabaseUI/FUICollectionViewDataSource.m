@@ -19,33 +19,54 @@
 // clang-format on
 
 #import "FUICollectionViewDataSource.h"
+#import "FUIArray.h"
 
 @import FirebaseDatabase;
+
+@interface FUICollectionViewDataSource ()
+
+@property (nonatomic, readonly, nonnull) id<FUICollection> collection;
+
+@end
 
 @implementation FUICollectionViewDataSource
 
 #pragma mark - FUIDataSource initializer methods
 
 - (instancetype)initWithCollection:(id<FUICollection>)collection
-                              view:(UICollectionView *)view
                       populateCell:(UICollectionViewCell * (^)(UICollectionView *,
                                                                NSIndexPath *,
                                                                FIRDataSnapshot *))populateCell {
-  self = [super initWithCollection:collection];
+  self = [super init];
   if (self) {
-    _collectionView = view;
+    _collection = collection;
     _populateCellAtIndexPath = populateCell;
   }
   return self;
 }
 
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                         view:(UICollectionView *)collectionView
                  populateCell:(UICollectionViewCell *(^)(UICollectionView *,
                                                          NSIndexPath *,
                                                          FIRDataSnapshot *))populateCell {
   FUIArray *array = [[FUIArray alloc] initWithQuery:query];
-  return [self initWithCollection:array view:collectionView populateCell:populateCell];
+  return [self initWithCollection:array populateCell:populateCell];
+}
+
+- (NSUInteger)count {
+  return self.collection.count;
+}
+
+- (void)bindToView:(UICollectionView *)view {
+  self.collectionView = view;
+  view.dataSource = self;
+  [self.collection observeQuery];
+}
+
+- (void)unbind {
+  self.collectionView.dataSource = nil;
+  self.collectionView = nil;
+  [self.collection invalidate];
 }
 
 #pragma mark - FUICollectionDelegate methods
@@ -75,7 +96,7 @@
 
 - (nonnull UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView
                           cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-  FIRDataSnapshot *snap = [self.items objectAtIndex:indexPath.row];
+  FIRDataSnapshot *snap = [self.collection.items objectAtIndex:indexPath.item];
 
   UICollectionViewCell *cell = self.populateCellAtIndexPath(collectionView, indexPath, snap);
 
@@ -88,7 +109,7 @@
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-  return self.count;
+  return self.collection.count;
 }
 
 @end
@@ -100,8 +121,8 @@
                                                                         NSIndexPath *,
                                                                         FIRDataSnapshot *))populateCell {
   FUICollectionViewDataSource *dataSource =
-    [[FUICollectionViewDataSource alloc] initWithQuery:query view:self populateCell:populateCell];
-  self.dataSource = dataSource;
+    [[FUICollectionViewDataSource alloc] initWithQuery:query populateCell:populateCell];
+  [dataSource bindToView:self];
   return dataSource;
 }
 
