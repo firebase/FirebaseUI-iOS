@@ -23,7 +23,7 @@
 
 @import FirebaseDatabase;
 
-@interface FUITableViewDataSource ()
+@interface FUITableViewDataSource () <FUICollectionDelegate>
 
 @property (strong, nonatomic, readwrite) UITableViewCell *(^populateCell)
   (UITableView *tableView, NSIndexPath *indexPath, FIRDataSnapshot *snap);
@@ -43,6 +43,7 @@
   self = [super init];
   if (self != nil) {
     _collection = collection;
+    _collection.delegate = self;
     _populateCell = populateCell;
   }
   return self;
@@ -58,6 +59,14 @@
 
 - (NSUInteger)count {
   return self.collection.count;
+}
+
+- (NSArray<FIRDataSnapshot *> *)items {
+  return self.collection.items;
+}
+
+- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index {
+  return [self.collection snapshotAtIndex:index];
 }
 
 - (void)bindToView:(UITableView *)view {
@@ -101,6 +110,12 @@
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   [self.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
                          toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
+}
+
+- (void)array:(id<FUICollection>)array queryCancelledWithError:(NSError *)error {
+  if (self.queryErrorHandler != NULL) {
+    self.queryErrorHandler(error);
+  }
 }
 
 #pragma mark - UITableViewDataSource methods

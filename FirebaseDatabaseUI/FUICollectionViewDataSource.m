@@ -23,9 +23,16 @@
 
 @import FirebaseDatabase;
 
-@interface FUICollectionViewDataSource ()
+@interface FUICollectionViewDataSource () <FUICollectionDelegate>
 
 @property (nonatomic, readonly, nonnull) id<FUICollection> collection;
+
+/**
+ * The callback to populate a subclass of UICollectionViewCell with an object
+ * provided by the datasource.
+ */
+@property (strong, nonatomic, readonly) UICollectionViewCell *(^populateCellAtIndexPath)
+  (UICollectionView *collectionView, NSIndexPath *indexPath, FIRDataSnapshot *object);
 
 @end
 
@@ -40,6 +47,7 @@
   self = [super init];
   if (self) {
     _collection = collection;
+    _collection.delegate = self;
     _populateCellAtIndexPath = populateCell;
   }
   return self;
@@ -55,6 +63,14 @@
 
 - (NSUInteger)count {
   return self.collection.count;
+}
+
+- (NSArray<FIRDataSnapshot *> *)items {
+  return self.collection.items;
+}
+
+- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index {
+  return [self.collection snapshotAtIndex:index];
 }
 
 - (void)bindToView:(UICollectionView *)view {
@@ -90,6 +106,12 @@
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForItem:fromIndex inSection:0]
                                toIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]];
+}
+
+- (void)array:(id<FUICollection>)array queryCancelledWithError:(NSError *)error {
+  if (self.queryErrorHandler != NULL) {
+    self.queryErrorHandler(error);
+  }
 }
 
 #pragma mark - UICollectionViewDataSource methods

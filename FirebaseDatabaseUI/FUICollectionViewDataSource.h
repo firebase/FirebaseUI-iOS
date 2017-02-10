@@ -41,16 +41,26 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readwrite, weak, nullable) UICollectionView *collectionView;
 
 /**
- * The callback to populate a subclass of UICollectionViewCell with an object
- * provided by the datasource.
- */
-@property (strong, nonatomic, readonly) UICollectionViewCell *(^populateCellAtIndexPath)
-  (UICollectionView *collectionView, NSIndexPath *indexPath, FIRDataSnapshot *object);
-
-/**
  * The number of items in the data source.
  */
 @property (nonatomic, readonly) NSUInteger count;
+
+/**
+ * The snapshots in the data source.
+ */
+@property (nonatomic, readonly) NSArray<FIRDataSnapshot *> *items;
+
+/**
+ * A closure that should be invoked when the query encounters a fatal error. 
+ * After this is invoked, the query is no longer valid and the data source should
+ * be recreated.
+ */
+@property (nonatomic, copy, readwrite) void (^queryErrorHandler)(NSError *);
+
+/**
+ * Returns the snapshot at the given index. Throws an exception if the index is out of bounds.
+ */
+- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index;
 
 /**
  * Initialize an instance of FUICollectionViewDataSource that populates

@@ -62,18 +62,15 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
       self.query = self.chatReference.queryLimited(toLast: 50)
 
       self.collectionViewDataSource =
-        FUICollectionViewDataSource(query: self.query!,
-                                    view: self.collectionView,
-                                    populateCell: { (view, indexPath, snap) -> UICollectionViewCell in
-        let cell = view.dequeueReusableCell(withReuseIdentifier: ChatViewController.reuseIdentifier,
-                                            for: indexPath) as! ChatCollectionViewCell
-        let chat = Chat(snapshot: snap)!
-        cell.populateCellWithChat(chat, user: self.user, maxWidth: self.view.frame.size.width)
-        return cell
-      })
-      self.collectionView.dataSource = self.collectionViewDataSource
+          self.collectionView.bind(to: self.query!) { (view, indexPath, snap) -> UICollectionViewCell in
+            let cell = view.dequeueReusableCell(withReuseIdentifier: ChatViewController.reuseIdentifier,
+                                                for: indexPath) as! ChatCollectionViewCell
+            let chat = Chat(snapshot: snap)!
+            cell.populateCellWithChat(chat, user: self.user, maxWidth: self.view.frame.size.width)
+            return cell
+      }
 
-      // FirebaseArray has a delegate method `childAdded` that could be used here,
+      // FUIArray has a delegate method `childAdded` that could be used here,
       // but unfortunately FirebaseCollectionViewDataSource uses the FUICollection
       // delegate methods to update its own internal state, so in order to scroll
       // on new insertions we still need to use the query directly.
@@ -94,13 +91,13 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
 
     // Notification boilerplate to handle keyboard appearance/disappearance
     NotificationCenter.default.addObserver(self,
-                                                     selector: #selector(keyboardWillShow),
-                                                     name: NSNotification.Name.UIKeyboardWillShow,
-                                                     object: nil)
+                                           selector: #selector(keyboardWillShow),
+                                           name: NSNotification.Name.UIKeyboardWillShow,
+                                           object: nil)
     NotificationCenter.default.addObserver(self,
-                                                     selector: #selector(keyboardWillHide),
-                                                     name: NSNotification.Name.UIKeyboardWillHide,
-                                                     object: nil)
+                                           selector: #selector(keyboardWillHide),
+                                           name: NSNotification.Name.UIKeyboardWillHide,
+                                           object: nil)
   }
 
   @objc fileprivate func didTapSend(_ sender: AnyObject) {
@@ -174,8 +171,9 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   }
 
   fileprivate func scrollToBottom(animated: Bool) {
-    let count = self.collectionViewDataSource.collectionView(self.collectionView, numberOfItemsInSection: 0)
-    let indexPath = IndexPath(row: count - 1, section: 0)
+    let count = Int(self.collectionViewDataSource.count)
+    guard count > 0 else { return }
+    let indexPath = IndexPath(item: count - 1, section: 0)
     self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: animated)
   }
 
@@ -186,7 +184,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     let heightPadding: CGFloat = 16
 
     let width = self.view.frame.size.width
-    let blob = self.collectionViewDataSource.object(at: UInt((indexPath as NSIndexPath).row))!
+    let blob = self.collectionViewDataSource.snapshot(at: indexPath.item)
     let text = Chat(snapshot: blob)!.text
 
     let rect = ChatCollectionViewCell.boundingRectForText(text, maxWidth: width)

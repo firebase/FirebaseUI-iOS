@@ -42,15 +42,26 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readwrite, weak, nullable) UITableView *tableView;
 
 /**
- * The callback used by the data source to populate the table view.
- */
-@property (strong, nonatomic, readonly) UITableViewCell *(^populateCell)
-  (UITableView *tableView, NSIndexPath *indexPath, FIRDataSnapshot *snap);
-
-/**
  * The number of items in the data source.
  */
 @property (nonatomic, readonly) NSUInteger count;
+
+/**
+ * The snapshots in the data source.
+ */
+@property (nonatomic, readonly) NSArray<FIRDataSnapshot *> *items;
+
+/**
+ * A closure that should be invoked when the query encounters a fatal error.
+ * After this is invoked, the query is no longer valid and the data source should
+ * be recreated.
+ */
+@property (nonatomic, copy, readwrite) void (^queryErrorHandler)(NSError *);
+
+/**
+ * Returns the snapshot at the given index. Throws an exception if the index is out of bounds.
+ */
+- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index;
 
 /**
  * Initialize an instance of FUITableViewDataSource.

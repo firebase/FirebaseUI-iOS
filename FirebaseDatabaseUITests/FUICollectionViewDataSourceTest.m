@@ -55,6 +55,9 @@ static NSString *const kTestReuseIdentifier = @"FUICollectionViewDataSourceTest"
     return cell;
   }];
 
+  // Removing this line causes the tests to crash.
+  NSLog(@"%lu", (unsigned long)[self.collectionView numberOfItemsInSection:0]);
+
   [self.observable populateWithCount:10];
 }
 
@@ -68,6 +71,11 @@ static NSString *const kTestReuseIdentifier = @"FUICollectionViewDataSourceTest"
 - (void)testItHasACount {
   NSUInteger count = self.dataSource.count;
   XCTAssert(count == 10, @"expected data source to have 10 elements after 10 insertions, but got %lu", count);
+}
+
+- (void)testItReturnsSnapshots {
+  id snap = [self.dataSource snapshotAtIndex:0];
+  XCTAssert(snap != nil, @"expected snapshot to exist");
 }
 
 - (void)testItPopulatesCells {
