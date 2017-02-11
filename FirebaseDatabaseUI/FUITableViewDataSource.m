@@ -84,11 +84,9 @@
 #pragma mark - FUICollectionDelegate methods
 
 - (void)arrayDidBeginUpdates:(id<FUICollection>)collection {
-  [self.tableView beginUpdates];
 }
 
 - (void)arrayDidEndUpdates:(id<FUICollection>)collection {
-  [self.tableView endUpdates];
 }
 
 - (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
