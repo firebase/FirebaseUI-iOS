@@ -34,7 +34,6 @@
   [self.tableView registerNib:nib forCellReuseIdentifier:identifier];
   self.dataSource =
   [[FUIChatMessageDataSource alloc] initWithQuery:self.ref
-                                             view:self.tableView
                                      populateCell:^UITableViewCell *(UITableView *tableView,
                                                                      NSIndexPath *indexPath,
                                                                      FIRDataSnapshot *snap) {
@@ -68,7 +67,7 @@
     return cell;
   }];
 
-  self.tableView.dataSource = self.dataSource;
+  [self.dataSource bindToView:self.tableView];
   self.tableView.delegate = self;
 
   if (![FIRAuth auth].currentUser) {
