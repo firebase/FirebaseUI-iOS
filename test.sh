@@ -13,8 +13,8 @@ EXIT_STATUS=0
   CODE_SIGNING_REQUIRED=NO \
   | xcpretty) || EXIT_STATUS=$?
 
-cd samples/objc;
-pod install;
+cd samples/objc || EXIT_STATUS=$?
+pod install || EXIT_STATUS=$?
 
 (xcodebuild \
   -workspace FirebaseUI-demo-objc.xcworkspace \
