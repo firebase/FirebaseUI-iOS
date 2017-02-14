@@ -16,8 +16,7 @@
 
 #import "FUIFacebookAuth.h"
 
-#import <FirebaseAuth/FIRFacebookAuthProvider.h>
-#import <FirebaseAuth/FIRUserInfo.h>
+#import <FirebaseAuth/FirebaseAuth.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>

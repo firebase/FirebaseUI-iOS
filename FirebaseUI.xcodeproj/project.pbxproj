@@ -2418,11 +2418,9 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks\"",
-					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseStorage/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
 				);
 				INFOPLIST_FILE = FirebaseStorageUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2442,11 +2440,9 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks\"",
-					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseStorage/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
 				);
 				INFOPLIST_FILE = FirebaseStorageUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2614,11 +2610,9 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseDatabase/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks\"",
-					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
 				);
 				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2635,11 +2629,9 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseDatabase/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks\"",
-					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
 				);
 				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2701,12 +2693,10 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 				);
 				INFOPLIST_FILE = FirebaseAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2722,12 +2712,10 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 				);
 				INFOPLIST_FILE = FirebaseAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2748,7 +2736,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMOAuth2-framework\"",
 				);
 				INFOPLIST_FILE = FirebaseFacebookAuthUI/Info.plist;
@@ -2777,7 +2765,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMOAuth2-framework\"",
 				);
 				INFOPLIST_FILE = FirebaseFacebookAuthUI/Info.plist;
@@ -2801,11 +2789,9 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks\"",
-					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 				);
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2821,11 +2807,9 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/GoogleInterchangeUtilities/Frameworks\"",
-					"\"${PODS_ROOT}/GoogleSymbolUtilities/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 				);
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2848,8 +2832,8 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseGoogleAuthUI/Info.plist;
@@ -2880,8 +2864,8 @@
 					"$(inherited)",
 					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseGoogleAuthUI/Info.plist;
@@ -2905,7 +2889,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
@@ -2934,7 +2918,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
@@ -2971,7 +2955,7 @@
 					"\"${PODS_ROOT}/Fabric/iOS\"",
 					"\"${PODS_ROOT}/TwitterCore/iOS\"",
 					"\"${PODS_ROOT}/TwitterKit/iOS\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 				);
 				INFOPLIST_FILE = FirebaseTwitterAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3040,7 +3024,7 @@
 					"\"${PODS_ROOT}/Fabric/iOS\"",
 					"\"${PODS_ROOT}/TwitterCore/iOS\"",
 					"\"${PODS_ROOT}/TwitterKit/iOS\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 				);
 				INFOPLIST_FILE = FirebaseTwitterAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3102,7 +3086,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/TwitterKit/iOS\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"$(PODS_ROOT)/TwitterCore/iOS\"",
 				);
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
@@ -3120,7 +3104,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/TwitterKit/iOS\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"$(PODS_ROOT)/TwitterCore/iOS\"",
 				);
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
@@ -3167,10 +3151,10 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
 					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks",
 				);
 				INFOPLIST_FILE = FirebaseUISample/Info.plist;
@@ -3190,10 +3174,10 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
-					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
 					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks",
 				);
 				INFOPLIST_FILE = FirebaseUISample/Info.plist;
@@ -3212,18 +3196,15 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-framework\"",
 					"\"$(PODS_ROOT)/FirebaseDatabase/Frameworks\"",
 					"\"$(PODS_ROOT)/Fabric/iOS\"",
-					"\"$(PODS_ROOT)/FirebaseAnalytics/Frameworks/frameworks\"",
-					"\"$(PODS_ROOT)/FirebaseInstanceID/Frameworks/frameworks\"",
-					"\"$(PODS_ROOT)/FirebaseStorage/Frameworks/frameworks\"",
-					"\"$(PODS_ROOT)/GoogleAppUtilities/Frameworks/frameworks\"",
-					"\"$(PODS_ROOT)/GoogleInterchangeUtilities/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/FirebaseAnalytics/Frameworks\"",
+					"\"$(PODS_ROOT)/FirebaseInstanceID/Frameworks\"",
+					"\"$(PODS_ROOT)/FirebaseStorage/Frameworks\"",
 					"\"$(PODS_ROOT)/GoogleSignIn/Frameworks\"",
-					"\"$(PODS_ROOT)/GoogleSymbolUtilities/Frameworks/frameworks\"",
 					"\"$(PODS_ROOT)/TwitterCore/iOS\"",
 					"\"$(PODS_ROOT)/TwitterKit/iOS\"",
 				);
@@ -3270,13 +3251,7 @@
 					"-framework",
 					"\"Foundation\"",
 					"-framework",
-					"\"GoogleAppUtilities\"",
-					"-framework",
-					"\"GoogleInterchangeUtilities\"",
-					"-framework",
 					"\"GoogleSignIn\"",
-					"-framework",
-					"\"GoogleSymbolUtilities\"",
 					"-framework",
 					"\"ImageIO\"",
 					"-framework",
@@ -3336,18 +3311,15 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks/frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-framework\"",
 					"\"$(PODS_ROOT)/FirebaseDatabase/Frameworks\"",
 					"\"$(PODS_ROOT)/Fabric/iOS\"",
-					"\"$(PODS_ROOT)/FirebaseAnalytics/Frameworks/frameworks\"",
-					"\"$(PODS_ROOT)/FirebaseInstanceID/Frameworks/frameworks\"",
-					"\"$(PODS_ROOT)/FirebaseStorage/Frameworks/frameworks\"",
-					"\"$(PODS_ROOT)/GoogleAppUtilities/Frameworks/frameworks\"",
-					"\"$(PODS_ROOT)/GoogleInterchangeUtilities/Frameworks/frameworks\"",
+					"\"$(PODS_ROOT)/FirebaseAnalytics/Frameworks\"",
+					"\"$(PODS_ROOT)/FirebaseInstanceID/Frameworks\"",
+					"\"$(PODS_ROOT)/FirebaseStorage/Frameworks\"",
 					"\"$(PODS_ROOT)/GoogleSignIn/Frameworks\"",
-					"\"$(PODS_ROOT)/GoogleSymbolUtilities/Frameworks/frameworks\"",
 					"\"$(PODS_ROOT)/TwitterCore/iOS\"",
 					"\"$(PODS_ROOT)/TwitterKit/iOS\"",
 				);
@@ -3394,13 +3366,7 @@
 					"-framework",
 					"\"Foundation\"",
 					"-framework",
-					"\"GoogleAppUtilities\"",
-					"-framework",
-					"\"GoogleInterchangeUtilities\"",
-					"-framework",
 					"\"GoogleSignIn\"",
-					"-framework",
-					"\"GoogleSymbolUtilities\"",
 					"-framework",
 					"\"ImageIO\"",
 					"-framework",

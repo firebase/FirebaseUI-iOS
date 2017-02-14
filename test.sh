@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eo pipefail
+
 EXIT_STATUS=0
 
 (xcodebuild \
