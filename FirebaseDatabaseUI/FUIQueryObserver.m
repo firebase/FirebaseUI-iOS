@@ -58,8 +58,6 @@
     completion(obs, nil, error);
   };
 
-  [obs observeEventType:FIRDataEventTypeChildAdded
-    andPreviousSiblingKeyWithBlock:observerBlock withCancelBlock:cancelBlock];
   [obs observeEventType:FIRDataEventTypeValue
     andPreviousSiblingKeyWithBlock:observerBlock withCancelBlock:cancelBlock];
   return obs;
