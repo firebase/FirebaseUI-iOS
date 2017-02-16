@@ -19,6 +19,7 @@
 #import "FUISample.h"
 #import "FUISamplesViewController.h"
 #import "FUIChatViewController.h"
+#import "FUIAccountSettingsViewController.h"
 
 @interface FUISamplesViewController ()
 
@@ -44,8 +45,16 @@
                               sampleDescription:@"Demonstrates the FirebaseAuthUI flow with customization options"
                                      controller:^UIViewController *{
                                        UIViewController *controller =
-                                       [[UIStoryboard storyboardWithName:@"Main"
-                                                                  bundle:NULL] instantiateViewControllerWithIdentifier:@"FUIAuthViewController"];
+                                           [[UIStoryboard storyboardWithName:@"Main"
+                                                                      bundle:NULL] instantiateViewControllerWithIdentifier:@"FUIAuthViewController"];
+                                       return controller;
+                                     }]];
+
+  [samples addObject:[FUISample sampleWithTitle:@"Account Settings"
+                              sampleDescription:@"Demonstrates the FirebaseAuthUI user account management flow"
+                                     controller:^UIViewController *{
+                                       UIViewController *controller =
+                                           [[FUIAccountSettingsViewController alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
                                        return controller;
                                      }]];
 

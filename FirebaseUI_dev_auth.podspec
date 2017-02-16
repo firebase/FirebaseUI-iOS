@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
   s.default_subspecs = 'AuthBase'
 
   s.subspec 'AuthBase' do |authbase|
-    authbase.source_files = "FirebaseAuthUI/*.{h,m}"
-    authbase.resources = "FirebaseAuthUI/{Resources,Strings}/*", "FirebaseAuthUI/*.xib"
+    authbase.source_files = "FirebaseAuthUI/**/*.{h,m}"
+    authbase.resources = "FirebaseAuthUI/{Resources,Strings}/*", "FirebaseAuthUI/**/*.xib"
     authbase.dependency 'Firebase/Analytics', '~> 3.0'
     authbase.dependency 'Firebase/Auth', '~> 3.0'
   end

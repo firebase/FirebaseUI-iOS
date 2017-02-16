@@ -151,6 +151,14 @@
 		C380A7D71D89ECF1005C031D /* ic_twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D11D89ECF1005C031D /* ic_twitter@2x.png */; };
 		C380A7D81D89ECF1005C031D /* ic_twitter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D21D89ECF1005C031D /* ic_twitter@3x.png */; };
 		C380A7E51D89ED82005C031D /* FirebaseTwitterAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = C380A7E31D89ED82005C031D /* FirebaseTwitterAuthUI.strings */; };
+		C3BCC4E81E527B7E0095D610 /* FUIAccountSettingsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BCC4E21E527B7E0095D610 /* FUIAccountSettingsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3BCC4E91E527B7E0095D610 /* FUIAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BCC4E31E527B7E0095D610 /* FUIAccountSettingsViewController.m */; };
+		C3BCC4EA1E527B7E0095D610 /* FUIAccountSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BCC4E41E527B7E0095D610 /* FUIAccountSettingsViewController.xib */; };
+		C3BCC4EB1E527B7E0095D610 /* FUIASTextViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BCC4E51E527B7E0095D610 /* FUIASTextViewCell.h */; };
+		C3BCC4EC1E527B7E0095D610 /* FUIASTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BCC4E61E527B7E0095D610 /* FUIASTextViewCell.m */; };
+		C3BCC4ED1E527B7E0095D610 /* FUIASTextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BCC4E71E527B7E0095D610 /* FUIASTextViewCell.xib */; };
+		C3BCC4EE1E527B980095D610 /* FUIAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BCC4E31E527B7E0095D610 /* FUIAccountSettingsViewController.m */; };
+		C3BCC4EF1E527BAF0095D610 /* FUIASTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BCC4E61E527B7E0095D610 /* FUIASTextViewCell.m */; };
 		C3C3B0FE1D99F83C003F8B90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3C3B0FD1D99F83C003F8B90 /* GoogleService-Info.plist */; };
 		C3C3B10D1D9B4530003F8B90 /* ic_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DA1D6793EE00CD3685 /* ic_facebook.png */; };
 		C3C3B10E1D9B4530003F8B90 /* ic_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DB1D6793EE00CD3685 /* ic_facebook@2x.png */; };
@@ -504,6 +512,12 @@
 		C380A7D11D89ECF1005C031D /* ic_twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_twitter@2x.png"; sourceTree = "<group>"; };
 		C380A7D21D89ECF1005C031D /* ic_twitter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_twitter@3x.png"; sourceTree = "<group>"; };
 		C380A7E41D89ED82005C031D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C3BCC4E21E527B7E0095D610 /* FUIAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsViewController.h; sourceTree = "<group>"; };
+		C3BCC4E31E527B7E0095D610 /* FUIAccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAccountSettingsViewController.m; sourceTree = "<group>"; };
+		C3BCC4E41E527B7E0095D610 /* FUIAccountSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIAccountSettingsViewController.xib; sourceTree = "<group>"; };
+		C3BCC4E51E527B7E0095D610 /* FUIASTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIASTextViewCell.h; sourceTree = "<group>"; };
+		C3BCC4E61E527B7E0095D610 /* FUIASTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIASTextViewCell.m; sourceTree = "<group>"; };
+		C3BCC4E71E527B7E0095D610 /* FUIASTextViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIASTextViewCell.xib; sourceTree = "<group>"; };
 		C3C3B0FD1D99F83C003F8B90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3C3B1111D9C26AE003F8B90 /* FUIFacebookAuthTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIFacebookAuthTest.h; sourceTree = "<group>"; };
 		C3C3B1121D9C26AE003F8B90 /* FUIFacebookAuthTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIFacebookAuthTest.m; sourceTree = "<group>"; };
@@ -879,6 +893,7 @@
 		8DCC4FC21D678CDC00B0D3C4 /* FirebaseAuthUI */ = {
 			isa = PBXGroup;
 			children = (
+				C3BCC4E11E527B7E0095D610 /* AccountManagement */,
 				8DCC4FC31D678CDC00B0D3C4 /* FirebaseAuthUI.h */,
 				8DA9414B1D678F5400CD3685 /* FUIAuthPickerViewController.h */,
 				8DA9414C1D678F5400CD3685 /* FUIAuthPickerViewController.m */,
@@ -1072,6 +1087,19 @@
 			path = en.lproj;
 			sourceTree = "<group>";
 		};
+		C3BCC4E11E527B7E0095D610 /* AccountManagement */ = {
+			isa = PBXGroup;
+			children = (
+				C3BCC4E21E527B7E0095D610 /* FUIAccountSettingsViewController.h */,
+				C3BCC4E31E527B7E0095D610 /* FUIAccountSettingsViewController.m */,
+				C3BCC4E41E527B7E0095D610 /* FUIAccountSettingsViewController.xib */,
+				C3BCC4E51E527B7E0095D610 /* FUIASTextViewCell.h */,
+				C3BCC4E61E527B7E0095D610 /* FUIASTextViewCell.m */,
+				C3BCC4E71E527B7E0095D610 /* FUIASTextViewCell.xib */,
+			);
+			path = AccountManagement;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1121,6 +1149,8 @@
 				8DA9417D1D678F5400CD3685 /* FUIAuthErrorUtils.h in Headers */,
 				8DA941931D678F5400CD3685 /* FUIPasswordSignUpViewController.h in Headers */,
 				8DA941881D678F5400CD3685 /* FUIAuthUtils.h in Headers */,
+				C3BCC4E81E527B7E0095D610 /* FUIAccountSettingsViewController.h in Headers */,
+				C3BCC4EB1E527B7E0095D610 /* FUIASTextViewCell.h in Headers */,
 				8DA941761D678F5400CD3685 /* FUIAuth_Internal.h in Headers */,
 				8DA941901D678F5400CD3685 /* FUIPasswordSignInViewController.h in Headers */,
 				8DA941831D678F5400CD3685 /* FUIAuthTableHeaderView.h in Headers */,
@@ -1706,10 +1736,12 @@
 			files = (
 				8DA941A61D67904200CD3685 /* ic_email@3x.png in Resources */,
 				8DA9418F1D678F5400CD3685 /* FUIPasswordRecoveryViewController.xib in Resources */,
+				C3BCC4EA1E527B7E0095D610 /* FUIAccountSettingsViewController.xib in Resources */,
 				8DA941A81D67904200CD3685 /* ic_visibility_off@2x.png in Resources */,
 				8DA941921D678F5400CD3685 /* FUIPasswordSignInViewController.xib in Resources */,
 				8DA941A41D67904200CD3685 /* ic_email.png in Resources */,
 				8DA941AC1D67904200CD3685 /* ic_visibility@3x.png in Resources */,
+				C3BCC4ED1E527B7E0095D610 /* FUIASTextViewCell.xib in Resources */,
 				8DA941E81D67945100CD3685 /* FirebaseAuthUI.strings in Resources */,
 				8DA941A51D67904200CD3685 /* ic_email@2x.png in Resources */,
 				8DA941AB1D67904200CD3685 /* ic_visibility@2x.png in Resources */,
@@ -1867,6 +1899,7 @@
 				8DBA0F881D872E9800D113D3 /* FUIAuthSignInButton.m in Sources */,
 				8DBA0F8D1D872EAA00D113D3 /* FUIEmailEntryViewController.m in Sources */,
 				8DBA0F8A1D872E9E00D113D3 /* FUIAuthTableHeaderView.m in Sources */,
+				C3BCC4EE1E527B980095D610 /* FUIAccountSettingsViewController.m in Sources */,
 				8DBA0F831D872E7A00D113D3 /* FUIAuthPickerViewController.m in Sources */,
 				8DBA0F901D872EAA00D113D3 /* FUIPasswordSignUpViewController.m in Sources */,
 				8DBA0F861D872E9300D113D3 /* FUIAuthErrors.m in Sources */,
@@ -1876,6 +1909,7 @@
 				8DBA0F8C1D872EAA00D113D3 /* FUIAuthUtils.m in Sources */,
 				8DBA0F841D872E8C00D113D3 /* FUIAuth.m in Sources */,
 				8DBA0F891D872E9A00D113D3 /* FUIAuthStrings.m in Sources */,
+				C3BCC4EF1E527BAF0095D610 /* FUIASTextViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1935,6 +1969,7 @@
 				8DA941801D678F5400CD3685 /* FUIAuthSignInButton.m in Sources */,
 				8DA9418B1D678F5400CD3685 /* FUIEmailEntryViewController.m in Sources */,
 				8DA941841D678F5400CD3685 /* FUIAuthTableHeaderView.m in Sources */,
+				C3BCC4E91E527B7E0095D610 /* FUIAccountSettingsViewController.m in Sources */,
 				8DA941731D678F5400CD3685 /* FUIAuthPickerViewController.m in Sources */,
 				8DA941941D678F5400CD3685 /* FUIPasswordSignUpViewController.m in Sources */,
 				8DA9417C1D678F5400CD3685 /* FUIAuthErrors.m in Sources */,
@@ -1944,6 +1979,7 @@
 				8DA941891D678F5400CD3685 /* FUIAuthUtils.m in Sources */,
 				8DA941781D678F5400CD3685 /* FUIAuth.m in Sources */,
 				8DA941821D678F5400CD3685 /* FUIAuthStrings.m in Sources */,
+				C3BCC4EC1E527B7E0095D610 /* FUIASTextViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
