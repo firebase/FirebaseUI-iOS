@@ -60,7 +60,7 @@ static inline NSDictionary *database() {
   self.index = [[FUITestObservable alloc] initWithDictionary:database()[@"index"]];
   self.data = [[FUITestObservable alloc] initWithDictionary:database()[@"data"]];
   self.array = [[FUIIndexArray alloc] initWithIndex:self.index
-                                                    data:self.data];
+                                               data:self.data];
   self.arrayDelegate = [[FUIIndexArrayTestDelegate alloc] init];
   self.array.delegate = self.arrayDelegate;
   self.dict = [database() mutableCopy];
