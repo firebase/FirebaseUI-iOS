@@ -114,13 +114,16 @@
     }
   }
 
+  NSInteger lowerBound = 0;
+  NSInteger upperBound = self.snapshots.count;
   NSInteger index = self.count / 2;
-  while (index >= 0 && index <= self.count) {
+  while (index >= 0 && index <= upperBound) {
+
     if (index == 0) {
-      [self.snapshots insertObject:snapshot atIndex:index];
+      [self.snapshots insertObject:snapshot atIndex:0];
       return 0;
     }
-    if (index == self.count) {
+    if (index == self.snapshots.count) {
       [self.snapshots addObject:snapshot];
       return index;
     }
@@ -132,11 +135,13 @@
 
     if (left == NSOrderedDescending && right == NSOrderedAscending) {
       // look left
-      index /= 2;
+      upperBound = index;
+      index = (lowerBound + upperBound) / 2;
       continue;
     } else if (left == NSOrderedAscending && right == NSOrderedDescending) {
       // look right
-      index = ((self.count - index) / 2) + index + 1;
+      lowerBound = index + 1;
+      index = (lowerBound + upperBound) / 2;
       continue;
     } else if (left == NSOrderedDescending && right == NSOrderedDescending) {
       // bad state (array is not sorted to begin with)
