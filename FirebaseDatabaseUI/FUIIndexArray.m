@@ -74,7 +74,7 @@
   [_indexArray observeQuery];
 }
 
-- (NSArray <FIRDataSnapshot *> *)items {
+- (NSArray<FIRDataSnapshot *> *)items {
   NSArray *observers = [self.observers copy];
   NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:observers.count];
   for (FUIQueryObserver *observer in observers) {
@@ -83,6 +83,10 @@
     }
   }
   return [array copy];
+}
+
+- (NSArray<FIRDataSnapshot *> *) indexes {
+  return self.indexArray.items;
 }
 
 - (NSUInteger)count {

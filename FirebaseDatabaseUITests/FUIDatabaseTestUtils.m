@@ -176,6 +176,11 @@
       id value = self.contents[contentKey];
       FUIFakeSnapshot *snap = [[FUIFakeSnapshot alloc] initWithKey:contentKey value:value];
       [self sendEvent:FIRDataEventTypeChildAdded withObject:snap previousKey:previousKey error:nil];
+
+      // Send a value event, since this is a complete snapshot.
+      // TODO: FUIFakeSnapshot currently only represents dictionary types, though snapshots can
+      // have array, string, or number values as well. Tests need to be written for these.
+      [self sendEvent:FIRDataEventTypeValue withObject:snap previousKey:previousKey error:nil];
       previousKey = contentKey;
     }
   }

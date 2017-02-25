@@ -119,6 +119,12 @@ didFailLoadWithError:(NSError *)error;
 @property(nonatomic, copy, readonly) NSArray<FIRDataSnapshot *> *items;
 
 /**
+ * An immutable copy of the loaded indexes in the array. Returns an empty
+ * array if no indexes have loaded.
+ */
+@property(nonatomic, copy, readonly) NSArray<FIRDataSnapshot *> *indexes;
+
+/**
  * The delegate that this array should forward events to.
  */
 @property(nonatomic, weak) id<FUIIndexArrayDelegate> delegate;
