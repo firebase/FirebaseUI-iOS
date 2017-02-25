@@ -239,4 +239,69 @@
  */
 + (NSString *)name;
 
+/** @fn error
+    @brief Alert title error.
+    @return Localized string.
+ */
++ (NSString *)error;
+
+/** @fn close
+    @brief Alert button title close.
+    @return Localized string.
+ */
++ (NSString *)close;
+
+/** @fn
+    @brief Account Settings section title for Profile.
+    @return Localized string.
+ */
++ (NSString *)ASSectionTitleProfile;
+
+/** @fn
+    @brief Account Settings section title for Security.
+    @return Localized string.
+ */
++ (NSString *)ASSectionTitleSecurity;
+
+/** @fn
+    @brief Account Settings section title for Linked Accounts.
+    @return Localized string.
+ */
++ (NSString *)ASSectionTitleLinkedAccounts;
+
+/** @fn
+    @brief Account Settings cell title for Name.
+    @return Localized string.
+ */
++ (NSString *)ASCellName;
+
+/** @fn
+    @brief Account Settings cell title for Email.
+    @return Localized string.
+ */
++ (NSString *)ASCellEmail;
+
+/** @fn
+    @brief Account Settings cell title for Add Password.
+    @return Localized string.
+ */
++ (NSString *)ASCellAddPassword;
+
+/** @fn
+    @brief Account Settings cell title for Change Password.
+    @return Localized string.
+ */
++ (NSString *)ASCellChangePassword;
+
+/** @fn
+    @brief Account Settings cell title for Sign Out.
+    @return Localized string.
+ */
++ (NSString *)ASCellSignOut;
+
+/** @fn
+    @brief Account Settings cell title forDelete Account .
+    @return Localized string.
+ */
++ (NSString *)ASCellDeleteAccount;
 @end

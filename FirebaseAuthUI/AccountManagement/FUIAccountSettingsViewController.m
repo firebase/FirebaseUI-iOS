@@ -16,108 +16,42 @@
 
 #import "FUIAccountSettingsViewController.h"
 
-#import "FUIAccountSettingsCell.h"
+#import "FUIAuthStrings.h"
+#import "FUIStaticContentTableViewManager.h"
 #import <FirebaseAuth/FirebaseAuth.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, FUIASSection) {
-  FUIAMSectionProfile = 0,
-  FUIAMSectionSecurity,
-  FUIAMSectionLinkedAccounts,
-  FUIAMSectionActionButtons
-} ;
+typedef NS_ENUM(NSInteger, FUIASAccountState) {
+  FUIASAccountStateUnknown = 0,
+  FUIASAccountStateEmailPassword,
+  FUIASAccountStateLinkedAccountWithEmail,
+  FUIASAccountStateLinkedAccountWithoutEmail,
+  FUIASAccountStateLinkedAccountWithEmailPassword
+};
+
+static NSString *const kProviderIdEmail = @"password";
+static NSString *const kProviderIdGoogle = @"google.com";
+static NSString *const kProviderIdFacebook = @"facebook.com";
+static NSString *const kProviderIdTwitter = @"twitter.com";
+
 
 @interface FUIAccountSettingsViewController () <UITableViewDelegate, UITableViewDataSource>
 @end
 
 @implementation FUIAccountSettingsViewController {
   __unsafe_unretained IBOutlet UITableView *_tableView;
+  FUIStaticContentTableViewManager *_tableViewManager;
+  FUIASAccountState _accountState;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
-  [self populateTableHeader];
-}
-
-#pragma mark - UITableView methods
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  FUIAccountSettingsCell *cellData = [_tableView cellForRowAtIndexPath:indexPath];
-  BOOL hasAssociatedAction = cellData.action != nil;
-  if (hasAssociatedAction) {
-    cellData.action();
-  }
-  [_tableView deselectRowAtIndexPath:indexPath animated:hasAssociatedAction];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  NSInteger *numberOfRowsInSection;
-  switch (section) {
-    case FUIAMSectionProfile: {
-      numberOfRowsInSection = 2;
-      break;
-    }
-    case FUIAMSectionSecurity: {
-      numberOfRowsInSection = 1;
-      break;
-    }
-    case FUIAMSectionLinkedAccounts: {
-      numberOfRowsInSection = self.auth.currentUser.providerData.count;
-      break;
-    }
-    case FUIAMSectionActionButtons: {
-      numberOfRowsInSection = 2;
-      break;
-    }
-
-    default:
-      numberOfRowsInSection = 0;
-      break;
-  }
-
-  return numberOfRowsInSection;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  if (!self.auth.currentUser) {
-    return 0;
-  }
-  return FUIAMSectionActionButtons + 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *textCellIdentifier = @"FUIASCell";
-  FUIAccountSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:textCellIdentifier];
-  if (!cell) {
-    cell = [[FUIAccountSettingsCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                         reuseIdentifier:textCellIdentifier];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-  }
-  [self resetCell:cell];
-
-  switch (indexPath.section) {
-    case FUIAMSectionProfile:
-      [self populateProfileSection:cell row:indexPath.row];
-      break;
-    case FUIAMSectionSecurity:
-      [self populateSecuritySection:cell row:indexPath.row];
-      break;
-    case FUIAMSectionLinkedAccounts:
-      [self populateLinkedAccountsSection:cell row:indexPath.row];
-      break;
-    case FUIAMSectionActionButtons:
-      [self populateActionButtonsSection:cell row:indexPath.row];
-      break;
-
-    default:
-      break;
-  }
-
-
-  return cell;
+  _tableViewManager = [[FUIStaticContentTableViewManager alloc] init];
+  _tableViewManager.tableView = _tableView;
+  _tableView.dataSource = _tableViewManager;
+  _tableView.delegate = _tableViewManager;
+  [self updateUI];
 }
 
 #pragma mark - Actions
@@ -140,6 +74,10 @@ typedef NS_ENUM(NSInteger, FUIASSection) {
   NSLog(@"%s", __FUNCTION__);
 }
 
+- (void)onChangePasswordSelected {
+  NSLog(@"%s", __FUNCTION__);
+}
+
 - (void)onLinkedAccountSelected:(id<FIRUserInfo>)userInfo {
   NSLog(@"%s %@", __FUNCTION__, userInfo.providerID);
 }
@@ -152,93 +90,49 @@ typedef NS_ENUM(NSInteger, FUIASSection) {
   NSLog(@"%s", __FUNCTION__);
 }
 
+- (void)onAddEmailSelected {
+  NSLog(@"%s", __FUNCTION__);
+}
+
 #pragma mark - Helpers
 
-- (void)populateSecuritySection:(FUIAccountSettingsCell *)cell row:(NSInteger)row {
-  cell.textLabel.text = @"Add password";
-  cell.detailTextLabel.text = nil;
-  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  __weak id weakSelf = self;
-  cell.action = ^() {
-    [weakSelf onAddPasswordSelected];
-  };
-}
 
-- (void)populateLinkedAccountsSection:(FUIAccountSettingsCell *)cell row:(NSInteger)row {
-  id<FIRUserInfo> userInfo = self.auth.currentUser.providerData[row];
-  cell.textLabel.text = userInfo.providerID;
-  cell.detailTextLabel.text = userInfo.displayName;
-  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  __weak id weakSelf = self;
-  cell.action = ^{
-    [weakSelf onLinkedAccountSelected:userInfo];
-  };
-}
-
-- (void)populateActionButtonsSection:(FUIAccountSettingsCell *)cell row:(NSInteger)row {
-  NSString *text;
-  __weak id weakSelf = self;
-  switch (row) {
-    case 0: {
-      text = @"Sign Out";
-      cell.action = ^() {
-        [weakSelf onSignOutSelected];
-      };
-      break;
-    }
-    case 1: {
-      text = @"Delete account";
-      cell.action = ^() {
-        [weakSelf onDeleteAccountSelected];
-      };
-      break;
-    }
-
-    default:
-      break;
+- (FUIASAccountState)accountState {
+  NSArray<id<FIRUserInfo>> *providers = self.auth.currentUser.providerData;
+  if (!providers || providers.count == 0) {
+    return FUIASAccountStateUnknown;
   }
-  cell.detailTextLabel.text = nil;
-  cell.textLabel.text = text;
-  cell.textLabel.textColor = [UIColor blueColor];
-  cell.accessoryType = UITableViewCellAccessoryNone;
 
+  BOOL hasPasswordProvider = NO;
+  BOOL hasEmailInLinkedProvider = NO;
 
-}
-
-- (void)populateProfileSection:(FUIAccountSettingsCell *)cell row:(NSInteger)row {
-  NSString *text;
-  NSString *detail;
-  __weak id weakSelf = self;
-  switch (row) {
-    case 0: {
-      text = @"Name";
-      detail = self.auth.currentUser.displayName;
-      cell.action = ^() {
-        [weakSelf onNameSelected];
-      };
-      break;
-    }
-    case 1: {
-      text = @"Email";
-      detail = self.auth.currentUser.email;
-      cell.action = ^() {
-        [weakSelf onEmailSelected];
-      };
-      break;
+  for (<FIRUserInfo> userInfo in providers) {
+    if (userInfo.email.length > 0 && ![userInfo.providerID isEqualToString:kProviderIdEmail]) {
+      hasEmailInLinkedProvider = YES;
     }
 
-    default:
-      break;
+    if ([userInfo.providerID isEqualToString:kProviderIdEmail]) {
+      hasPasswordProvider = YES;
+    }
   }
-  cell.textLabel.text = text;
-  cell.detailTextLabel.text = detail;
-  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+  if (providers.count == 1 && hasPasswordProvider) {
+    return FUIASAccountStateEmailPassword;
+  } else if (!hasPasswordProvider && !hasEmailInLinkedProvider) {
+    return FUIASAccountStateLinkedAccountWithoutEmail;
+  } else if (!hasPasswordProvider && hasEmailInLinkedProvider) {
+    return FUIASAccountStateLinkedAccountWithEmail;
+  } else if (hasPasswordProvider && hasEmailInLinkedProvider) {
+    return FUIASAccountStateLinkedAccountWithEmailPassword;
+  }
+
+  return FUIASAccountStateUnknown;
 }
 
 - (void)populateTableHeader {
 
   if (!self.auth.currentUser) {
-    _tableView.tableHeaderView = nil;
+    _tableViewManager.tableView.tableHeaderView = nil;
     return;
   }
 
@@ -283,16 +177,15 @@ typedef NS_ENUM(NSInteger, FUIASSection) {
                                multiplier:1
                                  constant:0]];
 
-  _tableView.tableHeaderView = wrapper;
-  CGRect frame = _tableView.tableHeaderView.frame;
+  _tableViewManager.tableView.tableHeaderView = wrapper;
+  CGRect frame = _tableViewManager.tableView.tableHeaderView.frame;
   frame.size.height = 90;
-  _tableView.tableHeaderView.frame = frame;
+  _tableViewManager.tableView.tableHeaderView.frame = frame;
 
-  id<FIRUserInfo> userInfo = self.auth.currentUser.providerData.count > 0 ?
-      self.auth.currentUser.providerData.firstObject : nil;
-  if (userInfo.photoURL) {
+  NSURL *photoURL = self.auth.currentUser.photoURL;
+  if (photoURL) {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      NSData *imageData = [NSData dataWithContentsOfURL:userInfo.photoURL];
+      NSData *imageData = [NSData dataWithContentsOfURL:photoURL];
       UIImage *image = [UIImage imageWithData:imageData];
       dispatch_async(dispatch_get_main_queue(), ^{
         headerImage.image = image;
@@ -300,28 +193,185 @@ typedef NS_ENUM(NSInteger, FUIASSection) {
     });
 
   }
-
-
 }
 
-- (void)resetCell:(FUIAccountSettingsCell *)cell {
-  cell.action = nil;
-  cell.textLabel.text = nil;
-  cell.detailTextLabel.text = nil;
-  cell.title = nil;
-  cell.value = nil;
-  cell.textLabel.textColor = [UIColor blackColor];
-  cell.detailTextLabel.textColor = [UIColor blackColor];
-  cell.accessoryType = UITableViewCellAccessoryNone;
+- (void)updateTable {
+  switch (_accountState) {
+    case FUIASAccountStateEmailPassword:
+      [self updateTableStateEmailPassword];
+      break;
+    case FUIASAccountStateLinkedAccountWithEmail:
+      [self updateTableStateLinkedAccountWithEmail];
+      break;
+    case FUIASAccountStateLinkedAccountWithoutEmail:
+      [self updateTableStateLinkedAccountWithoutEmail];
+      break;
+    case FUIASAccountStateLinkedAccountWithEmailPassword:
+      [self updateTableStateLinkedAccountWithEmailPassword];
+      break;
+
+    default:
+      _tableViewManager.contents = nil;
+      break;
+  }
+}
+
+- (void)updateTableStateEmailPassword {
+    __weak typeof(self) weakSelf = self;
+  _tableViewManager.contents =
+    [FUIStaticContentTableViewContent contentWithSections:@[
+      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleProfile]
+                                                   cells:@[
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
+                                               value:self.auth.currentUser.displayName
+                                              action:^{ [weakSelf onNameSelected]; }],
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
+                                               value:self.auth.currentUser.email
+                                              action:^{ [weakSelf onEmailSelected]; }]
+      ]],
+      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
+                                                   cells:@[
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellChangePassword]
+                                              action:^{ [weakSelf onChangePasswordSelected]; }]
+      ]],
+      [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
+                                              action:^{ [weakSelf onSignOutSelected]; }
+                                                type:FUIStaticContentTableViewCellTypeButton],
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
+                                              action:^{ [weakSelf onDeleteAccountSelected]; }
+                                                type:FUIStaticContentTableViewCellTypeButton]
+      ]],
+    ]];
+}
+
+
+- (void)updateTableStateLinkedAccountWithoutEmail {
+    __weak typeof(self) weakSelf = self;
+  NSMutableArray *linkedAccounts =
+      [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
+  for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
+    UITableViewCell * cell =
+        [FUIStaticContentTableViewCell cellWithTitle:userInfo.providerID
+                                               value:userInfo.displayName];
+    [linkedAccounts addObject:cell];
+  }
+
+  _tableViewManager.contents =
+    [FUIStaticContentTableViewContent contentWithSections:@[
+      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleProfile]
+                                                   cells:@[
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
+                                               value:self.auth.currentUser.displayName
+                                              action:^{ [weakSelf onNameSelected]; }],
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
+                                               value:self.auth.currentUser.email
+                                              action:^{ [weakSelf onEmailSelected]; }]
+      ]],
+      [FUIStaticContentTableViewSection
+          sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
+      [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
+                                              action:^{ [weakSelf onSignOutSelected]; }
+                                                type:FUIStaticContentTableViewCellTypeButton],
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
+                                              action:^{ [weakSelf onDeleteAccountSelected]; }
+                                                type:FUIStaticContentTableViewCellTypeButton]
+      ]],
+    ]];
+}
+
+
+- (void)updateTableStateLinkedAccountWithEmail {
+    __weak typeof(self) weakSelf = self;
+  NSMutableArray *linkedAccounts =
+      [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
+  for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
+    UITableViewCell * cell =
+        [FUIStaticContentTableViewCell cellWithTitle:userInfo.providerID
+                                               value:userInfo.displayName];
+    [linkedAccounts addObject:cell];
+  }
+
+  _tableViewManager.contents =
+    [FUIStaticContentTableViewContent contentWithSections:@[
+      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleProfile]
+                                                   cells:@[
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
+                                               value:self.auth.currentUser.displayName
+                                              action:^{ [weakSelf onNameSelected]; }],
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
+                                               value:self.auth.currentUser.email
+                                              action:^{ [weakSelf onEmailSelected]; }]
+      ]],
+      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
+                                                   cells:@[
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellAddPassword]
+                                              action:^{ [weakSelf onAddPasswordSelected]; }]
+      ]],
+      [FUIStaticContentTableViewSection
+          sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
+      [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
+                                              action:^{ [weakSelf onSignOutSelected]; }
+                                                type:FUIStaticContentTableViewCellTypeButton],
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
+                                              action:^{ [weakSelf onDeleteAccountSelected]; }
+                                                type:FUIStaticContentTableViewCellTypeButton]
+      ]],
+    ]];
+}
+
+- (void)updateTableStateLinkedAccountWithEmailPassword {
+    __weak typeof(self) weakSelf = self;
+  NSMutableArray *linkedAccounts =
+      [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
+  for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
+    FUIStaticContentTableViewCellAction action =
+        ^{ [weakSelf onLinkedAccountSelected:userInfo.providerID]; };
+    UITableViewCell * cell =
+        [FUIStaticContentTableViewCell cellWithTitle:userInfo.providerID
+                                               value:userInfo.displayName
+                                              action:action];
+    [linkedAccounts addObject:cell];
+  }
+
+  _tableViewManager.contents =
+    [FUIStaticContentTableViewContent contentWithSections:@[
+      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleProfile]
+                                                   cells:@[
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
+                                               value:self.auth.currentUser.displayName
+                                              action:^{ [weakSelf onNameSelected]; }],
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
+                                               value:self.auth.currentUser.email
+                                              action:^{ [weakSelf onEmailSelected]; }]
+      ]],
+      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
+                                                   cells:@[
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellChangePassword]
+                                              action:^{ [weakSelf onChangePasswordSelected]; }]
+      ]],
+      [FUIStaticContentTableViewSection
+          sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
+      [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
+                                              action:^{ [weakSelf onSignOutSelected]; }
+                                                 type:FUIStaticContentTableViewCellTypeButton],
+        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
+                                              action:^{ [weakSelf onDeleteAccountSelected]; }
+                                                type:FUIStaticContentTableViewCellTypeButton]
+      ]],
+    ]];
 }
 
 - (void)showAlert:(NSString *)message {
   UIAlertController *alert =
-      [UIAlertController alertControllerWithTitle:@"Error"
+      [UIAlertController alertControllerWithTitle:[FUIAuthStrings error]
                                           message:message
                                    preferredStyle:UIAlertControllerStyleAlert];
   UIAlertAction* closeButton = [UIAlertAction
-                                actionWithTitle:@"Close"
+                                actionWithTitle:[FUIAuthStrings close]
                                 style:UIAlertActionStyleDefault
                                 handler:nil];
   [alert addAction:closeButton];
@@ -330,7 +380,8 @@ typedef NS_ENUM(NSInteger, FUIASSection) {
 }
 
 - (void)updateUI {
-  [_tableView reloadData];
+  _accountState = [self accountState];
+  [self updateTable];
   [self populateTableHeader];
 }
 

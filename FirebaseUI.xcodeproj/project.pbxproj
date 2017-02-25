@@ -154,11 +154,10 @@
 		C3BCC4E81E527B7E0095D610 /* FUIAccountSettingsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BCC4E21E527B7E0095D610 /* FUIAccountSettingsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3BCC4E91E527B7E0095D610 /* FUIAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BCC4E31E527B7E0095D610 /* FUIAccountSettingsViewController.m */; };
 		C3BCC4EA1E527B7E0095D610 /* FUIAccountSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BCC4E41E527B7E0095D610 /* FUIAccountSettingsViewController.xib */; };
-		C3BCC4EB1E527B7E0095D610 /* FUIASTextViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BCC4E51E527B7E0095D610 /* FUIASTextViewCell.h */; };
-		C3BCC4EC1E527B7E0095D610 /* FUIASTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BCC4E61E527B7E0095D610 /* FUIASTextViewCell.m */; };
-		C3BCC4ED1E527B7E0095D610 /* FUIASTextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BCC4E71E527B7E0095D610 /* FUIASTextViewCell.xib */; };
 		C3BCC4EE1E527B980095D610 /* FUIAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BCC4E31E527B7E0095D610 /* FUIAccountSettingsViewController.m */; };
-		C3BCC4EF1E527BAF0095D610 /* FUIASTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BCC4E61E527B7E0095D610 /* FUIASTextViewCell.m */; };
+		C3BE73751E610F6700BCD147 /* FUIStaticContentTableViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BE73731E610F6700BCD147 /* FUIStaticContentTableViewManager.h */; };
+		C3BE73761E610F6700BCD147 /* FUIStaticContentTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE73741E610F6700BCD147 /* FUIStaticContentTableViewManager.m */; };
+		C3BE73771E610F7600BCD147 /* FUIStaticContentTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE73741E610F6700BCD147 /* FUIStaticContentTableViewManager.m */; };
 		C3C3B0FE1D99F83C003F8B90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3C3B0FD1D99F83C003F8B90 /* GoogleService-Info.plist */; };
 		C3C3B10D1D9B4530003F8B90 /* ic_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DA1D6793EE00CD3685 /* ic_facebook.png */; };
 		C3C3B10E1D9B4530003F8B90 /* ic_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DB1D6793EE00CD3685 /* ic_facebook@2x.png */; };
@@ -515,9 +514,8 @@
 		C3BCC4E21E527B7E0095D610 /* FUIAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsViewController.h; sourceTree = "<group>"; };
 		C3BCC4E31E527B7E0095D610 /* FUIAccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAccountSettingsViewController.m; sourceTree = "<group>"; };
 		C3BCC4E41E527B7E0095D610 /* FUIAccountSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIAccountSettingsViewController.xib; sourceTree = "<group>"; };
-		C3BCC4E51E527B7E0095D610 /* FUIASTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIASTextViewCell.h; sourceTree = "<group>"; };
-		C3BCC4E61E527B7E0095D610 /* FUIASTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIASTextViewCell.m; sourceTree = "<group>"; };
-		C3BCC4E71E527B7E0095D610 /* FUIASTextViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIASTextViewCell.xib; sourceTree = "<group>"; };
+		C3BE73731E610F6700BCD147 /* FUIStaticContentTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIStaticContentTableViewManager.h; sourceTree = "<group>"; };
+		C3BE73741E610F6700BCD147 /* FUIStaticContentTableViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIStaticContentTableViewManager.m; sourceTree = "<group>"; };
 		C3C3B0FD1D99F83C003F8B90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3C3B1111D9C26AE003F8B90 /* FUIFacebookAuthTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIFacebookAuthTest.h; sourceTree = "<group>"; };
 		C3C3B1121D9C26AE003F8B90 /* FUIFacebookAuthTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIFacebookAuthTest.m; sourceTree = "<group>"; };
@@ -934,6 +932,8 @@
 				8DA9416F1D678F5400CD3685 /* FUIPasswordVerificationViewController.h */,
 				8DA941701D678F5400CD3685 /* FUIPasswordVerificationViewController.m */,
 				8DA941711D678F5400CD3685 /* FUIPasswordVerificationViewController.xib */,
+				C3BE73731E610F6700BCD147 /* FUIStaticContentTableViewManager.h */,
+				C3BE73741E610F6700BCD147 /* FUIStaticContentTableViewManager.m */,
 				8DCC4FC51D678CDC00B0D3C4 /* Info.plist */,
 				8DA941E41D67943E00CD3685 /* Strings */,
 				8DA941AD1D67904800CD3685 /* Resources */,
@@ -1093,9 +1093,6 @@
 				C3BCC4E21E527B7E0095D610 /* FUIAccountSettingsViewController.h */,
 				C3BCC4E31E527B7E0095D610 /* FUIAccountSettingsViewController.m */,
 				C3BCC4E41E527B7E0095D610 /* FUIAccountSettingsViewController.xib */,
-				C3BCC4E51E527B7E0095D610 /* FUIASTextViewCell.h */,
-				C3BCC4E61E527B7E0095D610 /* FUIASTextViewCell.m */,
-				C3BCC4E71E527B7E0095D610 /* FUIASTextViewCell.xib */,
 			);
 			path = AccountManagement;
 			sourceTree = "<group>";
@@ -1150,11 +1147,11 @@
 				8DA941931D678F5400CD3685 /* FUIPasswordSignUpViewController.h in Headers */,
 				8DA941881D678F5400CD3685 /* FUIAuthUtils.h in Headers */,
 				C3BCC4E81E527B7E0095D610 /* FUIAccountSettingsViewController.h in Headers */,
-				C3BCC4EB1E527B7E0095D610 /* FUIASTextViewCell.h in Headers */,
 				8DA941761D678F5400CD3685 /* FUIAuth_Internal.h in Headers */,
 				8DA941901D678F5400CD3685 /* FUIPasswordSignInViewController.h in Headers */,
 				8DA941831D678F5400CD3685 /* FUIAuthTableHeaderView.h in Headers */,
 				8DA941961D678F5400CD3685 /* FUIPasswordVerificationViewController.h in Headers */,
+				C3BE73751E610F6700BCD147 /* FUIStaticContentTableViewManager.h in Headers */,
 				8D82147C1D67981C0069A614 /* FirebaseAuthUI.h in Headers */,
 				8DA9417F1D678F5400CD3685 /* FUIAuthSignInButton.h in Headers */,
 				8DA941851D678F5400CD3685 /* FUIAuthTableViewCell.h in Headers */,
@@ -1741,7 +1738,6 @@
 				8DA941921D678F5400CD3685 /* FUIPasswordSignInViewController.xib in Resources */,
 				8DA941A41D67904200CD3685 /* ic_email.png in Resources */,
 				8DA941AC1D67904200CD3685 /* ic_visibility@3x.png in Resources */,
-				C3BCC4ED1E527B7E0095D610 /* FUIASTextViewCell.xib in Resources */,
 				8DA941E81D67945100CD3685 /* FirebaseAuthUI.strings in Resources */,
 				8DA941A51D67904200CD3685 /* ic_email@2x.png in Resources */,
 				8DA941AB1D67904200CD3685 /* ic_visibility@2x.png in Resources */,
@@ -1906,10 +1902,10 @@
 				8DBA0F911D872EAA00D113D3 /* FUIPasswordVerificationViewController.m in Sources */,
 				8DBA0F871D872E9500D113D3 /* FUIAuthErrorUtils.m in Sources */,
 				8DBA0F8E1D872EAA00D113D3 /* FUIPasswordRecoveryViewController.m in Sources */,
+				C3BE73771E610F7600BCD147 /* FUIStaticContentTableViewManager.m in Sources */,
 				8DBA0F8C1D872EAA00D113D3 /* FUIAuthUtils.m in Sources */,
 				8DBA0F841D872E8C00D113D3 /* FUIAuth.m in Sources */,
 				8DBA0F891D872E9A00D113D3 /* FUIAuthStrings.m in Sources */,
-				C3BCC4EF1E527BAF0095D610 /* FUIASTextViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1976,10 +1972,10 @@
 				8DA941971D678F5400CD3685 /* FUIPasswordVerificationViewController.m in Sources */,
 				8DA9417E1D678F5400CD3685 /* FUIAuthErrorUtils.m in Sources */,
 				8DA9418E1D678F5400CD3685 /* FUIPasswordRecoveryViewController.m in Sources */,
+				C3BE73761E610F6700BCD147 /* FUIStaticContentTableViewManager.m in Sources */,
 				8DA941891D678F5400CD3685 /* FUIAuthUtils.m in Sources */,
 				8DA941781D678F5400CD3685 /* FUIAuth.m in Sources */,
 				8DA941821D678F5400CD3685 /* FUIAuthStrings.m in Sources */,
-				C3BCC4EC1E527B7E0095D610 /* FUIASTextViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

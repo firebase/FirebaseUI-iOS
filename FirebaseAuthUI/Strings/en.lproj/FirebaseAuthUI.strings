@@ -105,3 +105,37 @@
 
 /* Label next to a name text field. */
 "Name" = "Name";
+
+/* Alert title Error */
+"Error" = "Error";
+
+/* Alert button title Close */
+"Close" = "Close";
+
+/* Account Settings section title Profile */
+"AS_SectionProfile" = "Profile";
+
+/* Account Settings section title Secrity */
+"AS_SectionSecurity" = "Security";
+
+/* Account Settings section title Linked Accounts */
+"AS_SectionLinkedAccounts" = "Linked Accounts";
+
+/* Account Settings cell title Name */
+"AS_Name" = "Name";
+
+/* Account Settings cell title Email */
+"AS_Email" = "Email";
+
+/* Account Settings cell title Add Password */
+"AS_AddPassword" = "Add password";
+
+/* Account Settings cell title Change Password */
+"AS_ChangePassword" = "Change password";
+
+/* Account Settings cell title Sign Out */
+"AS_SignOut" = "Sign Out";
+
+/* Account Settings cell title Delete Account */
+"AS_DeleteAccount" = "Delete Account";
+
