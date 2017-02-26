@@ -138,7 +138,8 @@ typedef void(^FUIStaticContentTableViewCellAction)(void);
 typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
   FUIStaticContentTableViewCellTypeDefault = 0,
   FUIStaticContentTableViewCellTypeButton,
-  FUIStaticContentTableViewCellTypeInput
+  FUIStaticContentTableViewCellTypeInput,
+  FUIStaticContentTableViewCellTypePassword
 };
 
 /** @class FUIStaticContentTableViewCell
@@ -160,7 +161,7 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
     @brief If no custom cell is being used, this is the text of the @c detailTextLabel of the
        @c UITableViewCell.
  */
-@property(nonatomic, copy, readonly, nullable) NSString *value;
+@property(nonatomic, copy, nullable) NSString *value;
 
 /** @property type
     @brief Style of displaying cell. Default value is @c FUIStaticContentTableViewCellTypeDefault
@@ -237,5 +238,15 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
     @brief Please use initWithCustomCell:title:action:
  */
 - (nullable instancetype)init NS_UNAVAILABLE;
+
+@end
+
+@interface FUIPasswordTableViewCell : UITableViewCell<UITextFieldDelegate>
+
+@property (nonatomic) FUIStaticContentTableViewCell *cellData;
+
+@property (weak, nonatomic) IBOutlet UILabel *title;
+
+@property (weak, nonatomic) IBOutlet UITextField *password;
 
 @end

@@ -48,14 +48,14 @@
 }
 
 - (void)showAddPassword {
+  __block FUIStaticContentTableViewCell *passwordCell =
+      [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
+                                            action:nil
+                                              type:FUIStaticContentTableViewCellTypePassword];
   FUIStaticContentTableViewContent *contents =
     [FUIStaticContentTableViewContent contentWithSections:@[
       [FUIStaticContentTableViewSection sectionWithTitle:nil
-                                                   cells:@[
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
-                                              action:nil
-                                              type:FUIStaticContentTableViewCellTypeInput]
-      ]],
+                                                   cells:@[passwordCell]],
     ]];
 
 
@@ -63,7 +63,7 @@
       [[FUIStaticContentTableViewController alloc] initWithAuthUI:self.authUI
                                                          contents:contents nextTitle:@"Save"
                                                        nextAction:^{
-        [self onBack];
+        [self onSavePassword:passwordCell.value];
       }];
   controller.title = @"Add password";
   [self pushViewController:controller];
@@ -142,5 +142,14 @@
   return [FIRAuth authWithApp:app];
 }
 
+
+- (void)onSavePassword:(NSString *)passwrod {
+  if (!passwrod.length) {
+    [self showAlertWithMessage:@"Short passwords are easy to guess"];
+  } else {
+    NSLog(@"%s %@", __FUNCTION__, passwrod);
+    [self onBack];
+  }
+}
 
 @end

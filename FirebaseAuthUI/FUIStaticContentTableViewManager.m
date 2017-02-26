@@ -15,7 +15,7 @@
 //
 
 #import "FUIStaticContentTableViewManager.h"
-
+#import "FUIAuthUtils.h"
 /** @var kCellReuseIdentitfier
     @brief The reuse identifier for default style table view cell.
  */
@@ -25,6 +25,7 @@ static NSString *const kCellReuseIdentitfier = @"reuseIdentifier";
     @brief The reuse identifier for value style table view cell.
  */
 static NSString *const kValueCellReuseIdentitfier = @"reuseValueIdentifier";
+static NSString *const kPasswordCellReuseIdentitfier = @"kPasswordCellReuseIdentitfier";
 
 #pragma mark -
 
@@ -38,7 +39,9 @@ static NSString *const kValueCellReuseIdentitfier = @"reuseValueIdentifier";
 - (void)setTableView:(UITableView *)tableView {
   _tableView = tableView;
   [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellReuseIdentitfier];
-}
+  UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([FUIPasswordTableViewCell class])
+                                  bundle:[FUIAuthUtils frameworkBundle]];
+  [tableView registerNib:cellNib forCellReuseIdentifier:kPasswordCellReuseIdentitfier];}
 
 #pragma mark - UITableViewDataSource
 
@@ -60,7 +63,9 @@ static NSString *const kValueCellReuseIdentitfier = @"reuseValueIdentifier";
   FUIStaticContentTableViewCell *cellData =
       _contents.sections[indexPath.section].cells[indexPath.row];
   UITableViewCell *cell;
-  if (cellData.value.length) {
+  if (cellData.type == FUIStaticContentTableViewCellTypePassword) {
+    return [self dequeuePasswordCell:cellData tableView:tableView];
+  } else if (cellData.value.length) {
     cell = [tableView dequeueReusableCellWithIdentifier:kValueCellReuseIdentitfier];
     if (!cell) {
       cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
@@ -81,6 +86,16 @@ static NSString *const kValueCellReuseIdentitfier = @"reuseValueIdentifier";
   cell.textLabel.textColor = cellData.type == FUIStaticContentTableViewCellTypeButton ?
       [UIColor blueColor] : [UIColor blackColor];
   return cell;
+}
+
+- (UITableViewCell *)dequeuePasswordCell:(FUIStaticContentTableViewCell *)cellData
+                               tableView:(UITableView *)tableView{
+  FUIPasswordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPasswordCellReuseIdentitfier];
+  cell.title.text = cellData.title;
+  cell.password.text = cellData.value;
+  cell.cellData = cellData;
+  return cell;
+
 }
 
 #pragma mark - UITableViewDelegate
@@ -211,6 +226,24 @@ static NSString *const kValueCellReuseIdentitfier = @"reuseValueIdentifier";
     _type = type;
   }
   return self;
+}
+
+@end
+
+@interface FUIPasswordTableViewCell ()
+@property (weak, nonatomic) IBOutlet UIButton *visibilityButton;
+@end
+
+@implementation FUIPasswordTableViewCell
+
+- (IBAction)onPasswordVisibilitySelected:(id)sender {
+  self.password.secureTextEntry = ! self.password.secureTextEntry;
+  UIImage *image = self.password.secureTextEntry ? [UIImage imageNamed:@"ic_visibility.png"]
+                                                 : [UIImage imageNamed:@"ic_visibility_off.png"];
+  [self.visibilityButton setImage:image forState:UIControlStateNormal];
+}
+- (IBAction)onPasswordChanged:(id)sender {
+  self.cellData.value = self.password.text;
 }
 
 @end

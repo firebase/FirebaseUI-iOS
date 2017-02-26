@@ -179,6 +179,7 @@
 		C3BE738D1E625D9F00BCD147 /* FUIStaticContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE738A1E625D9F00BCD147 /* FUIStaticContentTableViewController.m */; };
 		C3BE738E1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE738B1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib */; };
 		C3BE738F1E625DAD00BCD147 /* FUIStaticContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE738A1E625D9F00BCD147 /* FUIStaticContentTableViewController.m */; };
+		C3BE73921E6276AC00BCD147 /* FUIPasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE73911E6276AC00BCD147 /* FUIPasswordTableViewCell.xib */; };
 		C3C3B0FE1D99F83C003F8B90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3C3B0FD1D99F83C003F8B90 /* GoogleService-Info.plist */; };
 		C3C3B10D1D9B4530003F8B90 /* ic_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DA1D6793EE00CD3685 /* ic_facebook.png */; };
 		C3C3B10E1D9B4530003F8B90 /* ic_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DB1D6793EE00CD3685 /* ic_facebook@2x.png */; };
@@ -591,6 +592,7 @@
 		C3BE73891E625D9F00BCD147 /* FUIStaticContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIStaticContentTableViewController.h; sourceTree = "<group>"; };
 		C3BE738A1E625D9F00BCD147 /* FUIStaticContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIStaticContentTableViewController.m; sourceTree = "<group>"; };
 		C3BE738B1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIStaticContentTableViewController.xib; sourceTree = "<group>"; };
+		C3BE73911E6276AC00BCD147 /* FUIPasswordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPasswordTableViewCell.xib; sourceTree = "<group>"; };
 		C3C3B0FD1D99F83C003F8B90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3C3B1111D9C26AE003F8B90 /* FUIFacebookAuthTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIFacebookAuthTest.h; sourceTree = "<group>"; };
 		C3C3B1121D9C26AE003F8B90 /* FUIFacebookAuthTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIFacebookAuthTest.m; sourceTree = "<group>"; };
@@ -1278,6 +1280,7 @@
 				C3BCC4E41E527B7E0095D610 /* FUIAccountSettingsViewController.xib */,
 				C3BE73841E625AD800BCD147 /* FUIAccountSettingsViewController+AddPassword.h */,
 				C3BE73851E625AD800BCD147 /* FUIAccountSettingsViewController+AddPassword.m */,
+				C3BE73911E6276AC00BCD147 /* FUIPasswordTableViewCell.xib */,
 			);
 			path = AccountManagement;
 			sourceTree = "<group>";
@@ -1977,6 +1980,7 @@
 				8DA941E81D67945100CD3685 /* FirebaseAuthUI.strings in Resources */,
 				8DA941A51D67904200CD3685 /* ic_email@2x.png in Resources */,
 				8DA941AB1D67904200CD3685 /* ic_visibility@2x.png in Resources */,
+				C3BE73921E6276AC00BCD147 /* FUIPasswordTableViewCell.xib in Resources */,
 				8DA941A91D67904200CD3685 /* ic_visibility_off@3x.png in Resources */,
 				8DA941741D678F5400CD3685 /* FUIAuthPickerViewController.xib in Resources */,
 				8DA941981D678F5400CD3685 /* FUIPasswordVerificationViewController.xib in Resources */,
