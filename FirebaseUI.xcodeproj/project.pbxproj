@@ -180,6 +180,13 @@
 		C3BE738E1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE738B1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib */; };
 		C3BE738F1E625DAD00BCD147 /* FUIStaticContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE738A1E625D9F00BCD147 /* FUIStaticContentTableViewController.m */; };
 		C3BE73921E6276AC00BCD147 /* FUIPasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE73911E6276AC00BCD147 /* FUIPasswordTableViewCell.xib */; };
+		C3BE73981E62BB2E00BCD147 /* FUIInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE73971E62BB2E00BCD147 /* FUIInputTableViewCell.xib */; };
+		C3BE73A11E62C50E00BCD147 /* FUIAccountSettingsViewController+ChangeName.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BE739D1E62C50E00BCD147 /* FUIAccountSettingsViewController+ChangeName.h */; };
+		C3BE73A21E62C50E00BCD147 /* FUIAccountSettingsViewController+ChangeName.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE739E1E62C50E00BCD147 /* FUIAccountSettingsViewController+ChangeName.m */; };
+		C3BE73A31E62C50E00BCD147 /* FUIAccountSettingsViewController+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BE739F1E62C50E00BCD147 /* FUIAccountSettingsViewController+Internal.h */; };
+		C3BE73A41E62C50E00BCD147 /* FUIAccountSettingsViewController+Internal.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE73A01E62C50E00BCD147 /* FUIAccountSettingsViewController+Internal.m */; };
+		C3BE73A51E62C52600BCD147 /* FUIAccountSettingsViewController+ChangeName.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE739E1E62C50E00BCD147 /* FUIAccountSettingsViewController+ChangeName.m */; };
+		C3BE73A61E62C52A00BCD147 /* FUIAccountSettingsViewController+Internal.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE73A01E62C50E00BCD147 /* FUIAccountSettingsViewController+Internal.m */; };
 		C3C3B0FE1D99F83C003F8B90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3C3B0FD1D99F83C003F8B90 /* GoogleService-Info.plist */; };
 		C3C3B10D1D9B4530003F8B90 /* ic_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DA1D6793EE00CD3685 /* ic_facebook.png */; };
 		C3C3B10E1D9B4530003F8B90 /* ic_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DB1D6793EE00CD3685 /* ic_facebook@2x.png */; };
@@ -593,6 +600,11 @@
 		C3BE738A1E625D9F00BCD147 /* FUIStaticContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIStaticContentTableViewController.m; sourceTree = "<group>"; };
 		C3BE738B1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIStaticContentTableViewController.xib; sourceTree = "<group>"; };
 		C3BE73911E6276AC00BCD147 /* FUIPasswordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPasswordTableViewCell.xib; sourceTree = "<group>"; };
+		C3BE73971E62BB2E00BCD147 /* FUIInputTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIInputTableViewCell.xib; sourceTree = "<group>"; };
+		C3BE739D1E62C50E00BCD147 /* FUIAccountSettingsViewController+ChangeName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FUIAccountSettingsViewController+ChangeName.h"; sourceTree = "<group>"; };
+		C3BE739E1E62C50E00BCD147 /* FUIAccountSettingsViewController+ChangeName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FUIAccountSettingsViewController+ChangeName.m"; sourceTree = "<group>"; };
+		C3BE739F1E62C50E00BCD147 /* FUIAccountSettingsViewController+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FUIAccountSettingsViewController+Internal.h"; sourceTree = "<group>"; };
+		C3BE73A01E62C50E00BCD147 /* FUIAccountSettingsViewController+Internal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FUIAccountSettingsViewController+Internal.m"; sourceTree = "<group>"; };
 		C3C3B0FD1D99F83C003F8B90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3C3B1111D9C26AE003F8B90 /* FUIFacebookAuthTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIFacebookAuthTest.h; sourceTree = "<group>"; };
 		C3C3B1121D9C26AE003F8B90 /* FUIFacebookAuthTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIFacebookAuthTest.m; sourceTree = "<group>"; };
@@ -1280,6 +1292,11 @@
 				C3BCC4E41E527B7E0095D610 /* FUIAccountSettingsViewController.xib */,
 				C3BE73841E625AD800BCD147 /* FUIAccountSettingsViewController+AddPassword.h */,
 				C3BE73851E625AD800BCD147 /* FUIAccountSettingsViewController+AddPassword.m */,
+				C3BE739D1E62C50E00BCD147 /* FUIAccountSettingsViewController+ChangeName.h */,
+				C3BE739E1E62C50E00BCD147 /* FUIAccountSettingsViewController+ChangeName.m */,
+				C3BE739F1E62C50E00BCD147 /* FUIAccountSettingsViewController+Internal.h */,
+				C3BE73A01E62C50E00BCD147 /* FUIAccountSettingsViewController+Internal.m */,
+				C3BE73971E62BB2E00BCD147 /* FUIInputTableViewCell.xib */,
 				C3BE73911E6276AC00BCD147 /* FUIPasswordTableViewCell.xib */,
 			);
 			path = AccountManagement;
@@ -1328,6 +1345,7 @@
 			files = (
 				8DA941721D678F5400CD3685 /* FUIAuthPickerViewController.h in Headers */,
 				8DA941791D678F5400CD3685 /* FUIAuthBaseViewController.h in Headers */,
+				C3BE73A31E62C50E00BCD147 /* FUIAccountSettingsViewController+Internal.h in Headers */,
 				8DA941771D678F5400CD3685 /* FUIAuth.h in Headers */,
 				8DA941751D678F5400CD3685 /* FUIAuthProvider.h in Headers */,
 				8DA9417B1D678F5400CD3685 /* FUIAuthErrors.h in Headers */,
@@ -1344,6 +1362,7 @@
 				C3BE73751E610F6700BCD147 /* FUIStaticContentTableViewManager.h in Headers */,
 				8D82147C1D67981C0069A614 /* FirebaseAuthUI.h in Headers */,
 				8DA9417F1D678F5400CD3685 /* FUIAuthSignInButton.h in Headers */,
+				C3BE73A11E62C50E00BCD147 /* FUIAccountSettingsViewController+ChangeName.h in Headers */,
 				8DA941851D678F5400CD3685 /* FUIAuthTableViewCell.h in Headers */,
 				8DA941811D678F5400CD3685 /* FUIAuthStrings.h in Headers */,
 				8DA9418A1D678F5400CD3685 /* FUIEmailEntryViewController.h in Headers */,
@@ -1972,6 +1991,7 @@
 				8DA941A61D67904200CD3685 /* ic_email@3x.png in Resources */,
 				C3BE738E1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib in Resources */,
 				8DA9418F1D678F5400CD3685 /* FUIPasswordRecoveryViewController.xib in Resources */,
+				C3BE73981E62BB2E00BCD147 /* FUIInputTableViewCell.xib in Resources */,
 				C3BCC4EA1E527B7E0095D610 /* FUIAccountSettingsViewController.xib in Resources */,
 				8DA941A81D67904200CD3685 /* ic_visibility_off@2x.png in Resources */,
 				8DA941921D678F5400CD3685 /* FUIPasswordSignInViewController.xib in Resources */,
@@ -2855,7 +2875,9 @@
 				8DBA0F8B1D872EAA00D113D3 /* FUIAuthTableViewCell.m in Sources */,
 				8DBA0F8F1D872EAA00D113D3 /* FUIPasswordSignInViewController.m in Sources */,
 				8DBA0F851D872E9000D113D3 /* FUIAuthBaseViewController.m in Sources */,
+				C3BE73A51E62C52600BCD147 /* FUIAccountSettingsViewController+ChangeName.m in Sources */,
 				C3BE73881E625AD800BCD147 /* FUIAccountSettingsViewController+AddPassword.m in Sources */,
+				C3BE73A61E62C52A00BCD147 /* FUIAccountSettingsViewController+Internal.m in Sources */,
 				C3BE738F1E625DAD00BCD147 /* FUIStaticContentTableViewController.m in Sources */,
 				8DBA0F881D872E9800D113D3 /* FUIAuthSignInButton.m in Sources */,
 				8DBA0F8D1D872EAA00D113D3 /* FUIEmailEntryViewController.m in Sources */,
@@ -2927,7 +2949,9 @@
 				8DA941861D678F5400CD3685 /* FUIAuthTableViewCell.m in Sources */,
 				8DA941911D678F5400CD3685 /* FUIPasswordSignInViewController.m in Sources */,
 				8DA9417A1D678F5400CD3685 /* FUIAuthBaseViewController.m in Sources */,
+				C3BE73A21E62C50E00BCD147 /* FUIAccountSettingsViewController+ChangeName.m in Sources */,
 				C3BE73871E625AD800BCD147 /* FUIAccountSettingsViewController+AddPassword.m in Sources */,
+				C3BE73A41E62C50E00BCD147 /* FUIAccountSettingsViewController+Internal.m in Sources */,
 				C3BE738D1E625D9F00BCD147 /* FUIStaticContentTableViewController.m in Sources */,
 				8DA941801D678F5400CD3685 /* FUIAuthSignInButton.m in Sources */,
 				8DA9418B1D678F5400CD3685 /* FUIEmailEntryViewController.m in Sources */,

@@ -26,6 +26,7 @@ static NSString *const kCellReuseIdentitfier = @"reuseIdentifier";
  */
 static NSString *const kValueCellReuseIdentitfier = @"reuseValueIdentifier";
 static NSString *const kPasswordCellReuseIdentitfier = @"kPasswordCellReuseIdentitfier";
+static NSString *const kInputCellReuseIdentitfier = @"kInputCellReuseIdentitfier";
 
 #pragma mark -
 
@@ -39,9 +40,15 @@ static NSString *const kPasswordCellReuseIdentitfier = @"kPasswordCellReuseIdent
 - (void)setTableView:(UITableView *)tableView {
   _tableView = tableView;
   [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellReuseIdentitfier];
-  UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([FUIPasswordTableViewCell class])
+
+  UINib *passwordCellNib = [UINib nibWithNibName:NSStringFromClass([FUIPasswordTableViewCell class])
                                   bundle:[FUIAuthUtils frameworkBundle]];
-  [tableView registerNib:cellNib forCellReuseIdentifier:kPasswordCellReuseIdentitfier];}
+  [tableView registerNib:passwordCellNib forCellReuseIdentifier:kPasswordCellReuseIdentitfier];
+
+  UINib *inputCellNib = [UINib nibWithNibName:NSStringFromClass([FUIInputTableViewCell class])
+                                  bundle:[FUIAuthUtils frameworkBundle]];
+  [tableView registerNib:inputCellNib forCellReuseIdentifier:kInputCellReuseIdentitfier];
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -65,6 +72,8 @@ static NSString *const kPasswordCellReuseIdentitfier = @"kPasswordCellReuseIdent
   UITableViewCell *cell;
   if (cellData.type == FUIStaticContentTableViewCellTypePassword) {
     return [self dequeuePasswordCell:cellData tableView:tableView];
+  } else if (cellData.type == FUIStaticContentTableViewCellTypeInput) {
+    return [self dequeueInputCell:cellData tableView:tableView];
   } else if (cellData.value.length) {
     cell = [tableView dequeueReusableCellWithIdentifier:kValueCellReuseIdentitfier];
     if (!cell) {
@@ -95,7 +104,15 @@ static NSString *const kPasswordCellReuseIdentitfier = @"kPasswordCellReuseIdent
   cell.password.text = cellData.value;
   cell.cellData = cellData;
   return cell;
+}
 
+- (UITableViewCell *)dequeueInputCell:(FUIStaticContentTableViewCell *)cellData
+                               tableView:(UITableView *)tableView{
+  FUIInputTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kInputCellReuseIdentitfier];
+  cell.title.text = cellData.title;
+  cell.input.text = cellData.value;
+  cell.cellData = cellData;
+  return cell;
 }
 
 #pragma mark - UITableViewDelegate
@@ -198,20 +215,14 @@ static NSString *const kPasswordCellReuseIdentitfier = @"kPasswordCellReuseIdent
                                 type:FUIStaticContentTableViewCellTypeDefault];
 }
 
-
-+ (nullable instancetype)cellWithCustomCell:(nullable UITableViewCell *)customCell {
-  return [[self alloc] initWithTitle:nil
-                               value:nil
-                              action:nil
-                                type:FUIStaticContentTableViewCellTypeDefault];
-}
-
-+ (nullable instancetype)cellWithCustomCell:(nullable UITableViewCell *)customCell
-                                     action:(nullable FUIStaticContentTableViewCellAction)action {
-  return [[self alloc] initWithTitle:nil
-                               value:nil
++ (nullable instancetype)cellWithTitle:(nullable NSString *)title
+                                 value:(nullable NSString *)value
+                                action:(nullable FUIStaticContentTableViewCellAction)action
+                                  type:(FUIStaticContentTableViewCellType) type {
+  return [[self alloc] initWithTitle:title
+                               value:value
                               action:action
-                                type:FUIStaticContentTableViewCellTypeDefault];
+                                type:type];
 }
 
 - (nullable instancetype)initWithTitle:(nullable NSString *)title
@@ -244,6 +255,14 @@ static NSString *const kPasswordCellReuseIdentitfier = @"kPasswordCellReuseIdent
 }
 - (IBAction)onPasswordChanged:(id)sender {
   self.cellData.value = self.password.text;
+}
+
+@end
+
+@implementation FUIInputTableViewCell
+
+- (IBAction)onInputChanged:(id)sender {
+  self.cellData.value = self.input.text;
 }
 
 @end

@@ -219,6 +219,18 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
                                  value:(nullable NSString *)value
                                 action:(nullable FUIStaticContentTableViewCellAction)action;
 
+/** @fn cellWithTitle:value:action:type:
+    @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
+    @param title The text of the @c titleLabel of the @c UITableViewCell.
+    @param value The text of the @c detailTextLabel of the @c UITableViewCell.
+    @param action A block which is executed when the cell is selected.
+    @param type Style of displaying cell.
+ */
++ (nullable instancetype)cellWithTitle:(nullable NSString *)title
+                                 value:(nullable NSString *)value
+                                action:(nullable FUIStaticContentTableViewCellAction)action
+                                  type:(FUIStaticContentTableViewCellType) type;
+
 /** @fn initWithTitle:action:type:
     @brief Designated initializer.
     @param title If no custom cell is being used, this is the text of the @c titleLabel of the
@@ -248,5 +260,15 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
 @property (weak, nonatomic) IBOutlet UILabel *title;
 
 @property (weak, nonatomic) IBOutlet UITextField *password;
+
+@end
+
+@interface FUIInputTableViewCell : UITableViewCell<UITextFieldDelegate>
+
+@property (nonatomic) FUIStaticContentTableViewCell *cellData;
+
+@property (weak, nonatomic) IBOutlet UILabel *title;
+
+@property (weak, nonatomic) IBOutlet UITextField *input;
 
 @end

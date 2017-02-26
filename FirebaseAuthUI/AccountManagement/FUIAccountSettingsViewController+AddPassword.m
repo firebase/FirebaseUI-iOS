@@ -14,9 +14,10 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController+AddPassword.h"
+#import "FUIAccountSettingsViewController+Internal.h"
 
 #import "FUIAuthStrings.h"
+#import "FUIAuth_Internal.h"
 #import "FUIStaticContentTableViewController.h"
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FirebaseCore/FirebaseCore.h>
@@ -47,7 +48,7 @@
 
 }
 
-- (void)showAddPassword {
+- (void)showAddPasswordWithCredential:(FIRAuthCredential *_Nullable)credential {
   __block FUIStaticContentTableViewCell *passwordCell =
       [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
                                             action:nil
@@ -63,7 +64,7 @@
       [[FUIStaticContentTableViewController alloc] initWithAuthUI:self.authUI
                                                          contents:contents nextTitle:@"Save"
                                                        nextAction:^{
-        [self onSavePassword:passwordCell.value];
+        [self onSavePassword:passwordCell.value withCredential:credential];
       }];
   controller.title = @"Add password";
   [self pushViewController:controller];
@@ -89,7 +90,7 @@
   [self incrementActivity];
   // Sign out first to make sure sign in starts with a clean state.
   [providerUI signOut];
-  [providerUI signInWithEmail:nil
+  [providerUI signInWithEmail:self.auth.currentUser.email
      presentingViewController:self
                    completion:^(FIRAuthCredential *_Nullable credential,
                                 NSError *_Nullable error) {
@@ -120,10 +121,9 @@
                                             }
                                             [self decrementActivity];
                                             if ([user.email isEqualToString:self.auth.currentUser.email]) {
-                                              [self showAddPassword];
+                                              [self showAddPasswordWithCredential:credential];
                                             } else {
-                                              // TODO: show alert
-                                              NSLog(@"Emails don't match");
+                                              [self showAlertWithMessage:@"Emails don't match"];
                                             }
                                             // TODO: delete second FIRAuuth
 //                                            [secondAuth deleteApp:nil];
@@ -143,13 +143,86 @@
 }
 
 
-- (void)onSavePassword:(NSString *)passwrod {
+- (void)onSavePassword:(NSString *)passwrod withCredential:(FIRAuthCredential *_Nullable)credential {
   if (!passwrod.length) {
     [self showAlertWithMessage:@"Short passwords are easy to guess"];
   } else {
     NSLog(@"%s %@", __FUNCTION__, passwrod);
-    [self onBack];
+    [self linkAccount:passwrod withCredential:credential];
+
   }
 }
+
+- (void)linkAccount:(NSString *)password withCredential:(FIRAuthCredential *_Nullable)credential {
+  [self incrementActivity];
+//  [self.auth.currentUser updatePassword:password completion:^(NSError * _Nullable error) {
+//    [self decrementActivity];
+//    NSLog(@"updatePassword error %@", error);
+//  }];
+
+//  [self.auth signInWithEmail:self.auth.currentUser.email
+//                    password:password
+//                  completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+//                    if (error) {
+//                      [self decrementActivity];
+//
+//                      [self showAlertWithMessage:[FUIAuthStrings wrongPasswordError]];
+//                      return;
+//                    }
+//
+//                    [user linkWithCredential:credential completion:^(FIRUser * _Nullable user,
+//                                                                         NSError * _Nullable error) {
+//                      [self decrementActivity];
+//
+//                      // Ignore any error (shouldn't happen) and treat the user as successfully signed in.
+//                      [self.navigationController dismissViewControllerAnimated:YES completion:^{
+//                        [self.authUI invokeResultCallbackWithUser:user error:nil];
+//                      }];
+//                    }];
+//                  }];
+//
+
+  [self.auth createUserWithEmail:self.auth.currentUser.email
+                        password:password
+                      completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+    if (error) {
+      [self decrementActivity];
+
+      [self finishSignUpWithUser:nil error:error];
+      return;
+    }
+
+    [user linkWithCredential:credential completion:^(FIRUser * _Nullable user,
+                                                         NSError * _Nullable error) {
+      [self decrementActivity];
+
+      // Ignore any error (shouldn't happen) and treat the user as successfully signed in.
+//      [self.navigationController dismissViewControllerAnimated:YES completion:^{
+//        [self.authUI invokeResultCallbackWithUser:user error:nil];
+//      }];
+      if (error) {
+        [self finishSignUpWithUser:nil error:error];
+        return;
+      }
+      [self finishSignUpWithUser:user error:nil];
+
+    }];
+
+
+//    FIRUserProfileChangeRequest *request = [user profileChangeRequest];
+//    request.displayName = username;
+//    [request commitChangesWithCompletion:^(NSError *_Nullable error) {
+//      [self decrementActivity];
+//
+//      if (error) {
+//        [self finishSignUpWithUser:nil error:error];
+//        return;
+//      }
+//      [self finishSignUpWithUser:user error:nil];
+//    }];
+  }];
+
+}
+
 
 @end

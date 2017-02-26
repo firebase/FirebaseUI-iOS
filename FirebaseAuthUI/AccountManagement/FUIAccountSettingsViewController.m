@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController+AddPassword.h"
+#import "FUIAccountSettingsViewController+Internal.h"
 
 #import "FUIAuthStrings.h"
 #import "FUIStaticContentTableViewController.h"
@@ -86,6 +86,7 @@ static NSString *const kProviderIdTwitter = @"twitter.com";
 
 - (void)onNameSelected {
   NSLog(@"%s", __FUNCTION__);
+  [self changeName];
 }
 
 - (void)onEmailSelected {
@@ -383,8 +384,8 @@ static NSString *const kProviderIdTwitter = @"twitter.com";
 
 - (void)updateUI {
   _accountState = [self accountState];
-  [self updateTable];
   [self populateTableHeader];
+  [self updateTable];
 }
 
 @end
