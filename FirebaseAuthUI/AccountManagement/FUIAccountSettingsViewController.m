@@ -14,10 +14,10 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController.h"
+#import "FUIAccountSettingsViewController+AddPassword.h"
 
 #import "FUIAuthStrings.h"
-#import "FUIStaticContentTableViewManager.h"
+#import "FUIStaticContentTableViewController.h"
 #import <FirebaseAuth/FirebaseAuth.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -36,7 +36,7 @@ static NSString *const kProviderIdFacebook = @"facebook.com";
 static NSString *const kProviderIdTwitter = @"twitter.com";
 
 
-@interface FUIAccountSettingsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface FUIAccountSettingsViewController ()
 @end
 
 @implementation FUIAccountSettingsViewController {
@@ -72,6 +72,8 @@ static NSString *const kProviderIdTwitter = @"twitter.com";
 
 - (void)onAddPasswordSelected {
   NSLog(@"%s", __FUNCTION__);
+
+  [self showAddPasswordDialog];
 }
 
 - (void)onChangePasswordSelected {
@@ -106,7 +108,7 @@ static NSString *const kProviderIdTwitter = @"twitter.com";
   BOOL hasPasswordProvider = NO;
   BOOL hasEmailInLinkedProvider = NO;
 
-  for (<FIRUserInfo> userInfo in providers) {
+  for (id<FIRUserInfo> userInfo in providers) {
     if (userInfo.email.length > 0 && ![userInfo.providerID isEqualToString:kProviderIdEmail]) {
       hasEmailInLinkedProvider = YES;
     }
@@ -251,7 +253,7 @@ static NSString *const kProviderIdTwitter = @"twitter.com";
   NSMutableArray *linkedAccounts =
       [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
   for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
-    UITableViewCell * cell =
+    FUIStaticContentTableViewCell *cell =
         [FUIStaticContentTableViewCell cellWithTitle:userInfo.providerID
                                                value:userInfo.displayName];
     [linkedAccounts addObject:cell];
@@ -287,7 +289,7 @@ static NSString *const kProviderIdTwitter = @"twitter.com";
   NSMutableArray *linkedAccounts =
       [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
   for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
-    UITableViewCell * cell =
+    FUIStaticContentTableViewCell *cell =
         [FUIStaticContentTableViewCell cellWithTitle:userInfo.providerID
                                                value:userInfo.displayName];
     [linkedAccounts addObject:cell];
@@ -328,8 +330,8 @@ static NSString *const kProviderIdTwitter = @"twitter.com";
       [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
   for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
     FUIStaticContentTableViewCellAction action =
-        ^{ [weakSelf onLinkedAccountSelected:userInfo.providerID]; };
-    UITableViewCell * cell =
+        ^{ [weakSelf onLinkedAccountSelected:userInfo]; };
+    FUIStaticContentTableViewCell *cell =
         [FUIStaticContentTableViewCell cellWithTitle:userInfo.providerID
                                                value:userInfo.displayName
                                               action:action];

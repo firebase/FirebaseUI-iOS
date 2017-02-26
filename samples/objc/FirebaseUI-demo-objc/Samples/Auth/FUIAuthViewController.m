@@ -244,8 +244,20 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
 
 }
 
++ (NSArray *)getAllIDPs {
+  NSArray<NSIndexPath *> *selectedRows = @[
+    [NSIndexPath indexPathForRow:kIDPGoogle inSection:kSectionsProviders],
+    [NSIndexPath indexPathForRow:kIDPFacebook inSection:kSectionsProviders],
+    [NSIndexPath indexPathForRow:kIDPTwitter inSection:kSectionsProviders]
+  ];
+  return [self getListOfIDPs:selectedRows useCustomScopes:NO];
+}
+
 - (NSArray *)getListOfIDPs {
-  NSArray<NSIndexPath *> *selectedRows = [self.tableView indexPathsForSelectedRows];
+  return [[self class] getListOfIDPs:[self.tableView indexPathsForSelectedRows] useCustomScopes:_customScopeSwitch.isOn];
+}
+
++ (NSArray *)getListOfIDPs:(NSArray<NSIndexPath *> *)selectedRows useCustomScopes:(BOOL)useCustomScopes {
   NSMutableArray *providers = [NSMutableArray new];
 
   for (NSIndexPath *indexPath in selectedRows) {
@@ -253,16 +265,16 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
       id<FUIAuthProvider> provider;
       switch (indexPath.row) {
         case kIDPGoogle:
-          provider = _customScopeSwitch.isOn ? [[FUIGoogleAuth alloc] initWithScopes:@[kGoogleUserInfoEmailScope,
-                                                                                         kGoogleUserInfoProfileScope,
-                                                                                         kGoogleGamesScope,
-                                                                                         kGooglePlusMeScope]]
+          provider = useCustomScopes ? [[FUIGoogleAuth alloc] initWithScopes:@[kGoogleUserInfoEmailScope,
+                                                                               kGoogleUserInfoProfileScope,
+                                                                               kGoogleGamesScope,
+                                                                               kGooglePlusMeScope]]
           : [[FUIGoogleAuth alloc] init];
           break;
         case kIDPFacebook:
-          provider = _customScopeSwitch.isOn ? [[FUIFacebookAuth alloc] initWithPermissions:@[@"email",
-                                                                                                @"user_friends",
-                                                                                                @"ads_read"]]
+          provider = useCustomScopes ? [[FUIFacebookAuth alloc] initWithPermissions:@[@"email",
+                                                                                        @"user_friends",
+                                                                                        @"ads_read"]]
           :[[FUIFacebookAuth alloc] init];
           break;
         case kIDPTwitter:

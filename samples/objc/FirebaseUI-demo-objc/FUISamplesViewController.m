@@ -20,6 +20,7 @@
 #import "FUISamplesViewController.h"
 #import "FUIChatViewController.h"
 #import "FUIAccountSettingsViewController.h"
+#import "FUIAuthViewController.h"
 
 @interface FUISamplesViewController ()
 
@@ -53,6 +54,8 @@
   [samples addObject:[FUISample sampleWithTitle:@"Account Settings"
                               sampleDescription:@"Demonstrates the FirebaseAuthUI user account management flow"
                                      controller:^UIViewController *{
+                                       [FUIAuth defaultAuthUI].providers
+                                           = [FUIAuthViewController getAllIDPs];
                                        UIViewController *controller =
                                            [[FUIAccountSettingsViewController alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
                                        return controller;

@@ -137,7 +137,8 @@ typedef void(^FUIStaticContentTableViewCellAction)(void);
 
 typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
   FUIStaticContentTableViewCellTypeDefault = 0,
-  FUIStaticContentTableViewCellTypeButton
+  FUIStaticContentTableViewCellTypeButton,
+  FUIStaticContentTableViewCellTypeInput
 };
 
 /** @class FUIStaticContentTableViewCell

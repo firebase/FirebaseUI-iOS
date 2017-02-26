@@ -1,7 +1,5 @@
 //
-//  AuthViewController.h
-//
-//  Copyright (c) 2016 Google Inc.
+//  Copyright (c) 2017 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -16,10 +14,10 @@
 //  limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
+#import "FUIAccountSettingsViewController.h"
 
-@interface FUIAuthViewController : UITableViewController
+@interface FUIAccountSettingsViewController (AddPassword)
 
-+ (NSArray *)getAllIDPs;
+- (void)showAddPasswordDialog;
 
 @end
