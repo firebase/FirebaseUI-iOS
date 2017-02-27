@@ -48,7 +48,7 @@
 
 }
 
-- (void)showAddPasswordWithCredential:(FIRAuthCredential *_Nullable)credential {
+- (void)showAddPasswordWithCredential {
   __block FUIStaticContentTableViewCell *passwordCell =
       [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
                                             action:nil
@@ -64,7 +64,7 @@
       [[FUIStaticContentTableViewController alloc] initWithAuthUI:self.authUI
                                                          contents:contents nextTitle:@"Save"
                                                        nextAction:^{
-        [self onSavePassword:passwordCell.value withCredential:credential];
+        [self onSetPasswordForCurrentUser:passwordCell.value];
       }];
   controller.title = @"Add password";
   [self pushViewController:controller];
@@ -110,46 +110,42 @@
                      }
 
 
-                     FIRAuth *secondAuth = [self createFIRAuth];
-                     [secondAuth signInWithCredential:credential
-                                          completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-                                            if (error && error.code == FIRAuthErrorCodeEmailAlreadyInUse) {
+//                     FIRAuth *secondAuth = [self createFIRAuth];
+                     [self.auth.currentUser reauthenticateWithCredential:credential
+                                                              completion:^(NSError *_Nullable error) {
+                                            [self decrementActivity];
+                                            if ((error && error.code == FIRAuthErrorCodeUserMismatch)) {
                                             // TODO: Shoul we do anything here? It's not possible
 //                                              NSString *email = error.userInfo[kErrorUserInfoEmailKey];
 //                                              [self handleAccountLinkingForEmail:email newCredential:credential];
-                                              return;
-                                            }
-                                            [self decrementActivity];
-                                            if ([user.email isEqualToString:self.auth.currentUser.email]) {
-                                              [self showAddPasswordWithCredential:credential];
-                                            } else {
                                               [self showAlertWithMessage:@"Emails don't match"];
+                                            } else if (error) {
+                                              [self showAlertWithMessage:@"Reauthenticate error"];
+                                            } else {
+                                              [self showAddPasswordWithCredential];
                                             }
-                                            // TODO: delete second FIRAuuth
-//                                            [secondAuth deleteApp:nil];
+
                                           }];
                    }];
 }
 
-- (FIRAuth *)createFIRAuth {
-  // TODO: Use constant for app name
-  NSString *secondAppName = @"as_second_fir_app";
-  FIRApp *app = [FIRApp appNamed:secondAppName];
-  if (!app) {
-    [FIRApp configureWithName:secondAppName options:[FIRApp defaultApp].options];
-    app = [FIRApp appNamed:secondAppName];
-  }
-  return [FIRAuth authWithApp:app];
-}
 
-
-- (void)onSavePassword:(NSString *)passwrod withCredential:(FIRAuthCredential *_Nullable)credential {
-  if (!passwrod.length) {
-    [self showAlertWithMessage:@"Short passwords are easy to guess"];
+- (void)onSetPasswordForCurrentUser:(NSString *)password {
+  if (!password.length) {
+    [self showAlertWithMessage:[FUIAuthStrings weakPasswordError]];
   } else {
-    NSLog(@"%s %@", __FUNCTION__, passwrod);
-    [self linkAccount:passwrod withCredential:credential];
-
+    NSLog(@"%s %@", __FUNCTION__, password);
+    [self incrementActivity];
+    [self.auth.currentUser updatePassword:password completion:^(NSError * _Nullable error) {
+      [self decrementActivity];
+      NSLog(@"updatePassword error %@", error);
+      if (!error) {
+        [self onBack];
+        [self updateUI];
+      } else {
+        [self finishSignUpWithUser:self.auth.currentUser error:error];
+      }
+    }];
   }
 }
 
