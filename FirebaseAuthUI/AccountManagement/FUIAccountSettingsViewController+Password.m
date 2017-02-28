@@ -14,41 +14,22 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController+Internal.h"
+#import "FUIAccountSettingsViewController+Common.h"
 
-#import "FUIAuthStrings.h"
-#import "FUIAuth_Internal.h"
-#import "FUIStaticContentTableViewController.h"
-#import <FirebaseAuth/FirebaseAuth.h>
-#import <FirebaseCore/FirebaseCore.h>
 
-@implementation FUIAccountSettingsViewController (AddPassword)
+@implementation FUIAccountSettingsViewController (Password)
 
 - (void)showAddPasswordDialog {
-  UIAlertController *alert =
-      [UIAlertController alertControllerWithTitle:@"Verify it's you"
-                                          message:@"To add password to your account, you will need to sign in again."
-                                   preferredStyle:UIAlertControllerStyleAlert];
-
-  for (id<FIRUserInfo> provider in self.auth.currentUser.providerData) {
-    UIAlertAction* action = [UIAlertAction
-                                actionWithTitle:provider.providerID
-                                style:UIAlertActionStyleDefault
-                                handler:^(UIAlertAction * _Nonnull action) {
-                                  [self signInWithProviderUI:provider];
-                                }];
-    [alert addAction:action];
-  }
-  UIAlertAction* closeButton = [UIAlertAction
-                                    actionWithTitle:[FUIAuthStrings cancel]
-                                    style:UIAlertActionStyleDefault
-                                    handler:nil];
-  [alert addAction:closeButton];
-  [self presentViewController:alert animated:YES completion:nil];
-
+  [self showSelectProviderDialog:^(id<FIRUserInfo> provider) {
+    [self reauthenticateWithProviderUI:provider actionHandler:^{
+      [self showAddPassword];
+    }];
+  } alertTitle:@"Verify it's you"
+                    alertMessage:@"To add password to your account, you will need to sign in again."
+                alertCloseButton:[FUIAuthStrings cancel]];
 }
 
-- (void)showAddPasswordWithCredential {
+- (void)showAddPassword {
   __block FUIStaticContentTableViewCell *passwordCell =
       [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
                                             action:nil
@@ -61,8 +42,8 @@
 
 
   UIViewController *controller =
-      [[FUIStaticContentTableViewController alloc] initWithAuthUI:self.authUI
-                                                         contents:contents nextTitle:@"Save"
+      [[FUIStaticContentTableViewController alloc] initWithContents:contents
+                                                          nextTitle:@"Save"
                                                        nextAction:^{
         [self onSetPasswordForCurrentUser:passwordCell.value];
       }];
@@ -71,63 +52,6 @@
 
 }
 
-- (void)signInWithProviderUI:(id<FIRUserInfo>)provider {
-
-  id providerUI;
-  for (id<FUIAuthProvider> authProvider in self.authUI.providers) {
-    if ([provider.providerID isEqualToString:authProvider.providerID]) {
-      providerUI = authProvider;
-      break;
-    }
-  }
-
-  if (!providerUI) {
-    // TODO: Show alert or print error
-    NSLog(@"Can't find provider for %@", provider.providerID);
-    return;
-  }
-
-  [self incrementActivity];
-  // Sign out first to make sure sign in starts with a clean state.
-  [providerUI signOut];
-  [providerUI signInWithEmail:self.auth.currentUser.email
-     presentingViewController:self
-                   completion:^(FIRAuthCredential *_Nullable credential,
-                                NSError *_Nullable error) {
-                     if (error) {
-                       [self decrementActivity];
-
-                       if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
-                         // User cancelled sign in, Do nothing.
-                         return;
-                       }
-
-// TODO: Shoul we do anything here?
-//                       [self.navigationController dismissViewControllerAnimated:YES completion:^{
-//                         [self.authUI invokeResultCallbackWithUser:nil error:error];
-//                       }];
-                       return;
-                     }
-
-
-//                     FIRAuth *secondAuth = [self createFIRAuth];
-                     [self.auth.currentUser reauthenticateWithCredential:credential
-                                                              completion:^(NSError *_Nullable error) {
-                                            [self decrementActivity];
-                                            if ((error && error.code == FIRAuthErrorCodeUserMismatch)) {
-                                            // TODO: Shoul we do anything here? It's not possible
-//                                              NSString *email = error.userInfo[kErrorUserInfoEmailKey];
-//                                              [self handleAccountLinkingForEmail:email newCredential:credential];
-                                              [self showAlertWithMessage:@"Emails don't match"];
-                                            } else if (error) {
-                                              [self showAlertWithMessage:@"Reauthenticate error"];
-                                            } else {
-                                              [self showAddPasswordWithCredential];
-                                            }
-
-                                          }];
-                   }];
-}
 
 
 - (void)onSetPasswordForCurrentUser:(NSString *)password {

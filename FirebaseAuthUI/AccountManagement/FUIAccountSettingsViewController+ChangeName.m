@@ -14,9 +14,8 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController+Internal.h"
+#import "FUIAccountSettingsViewController+Common.h"
 
-#import "FUIAuthStrings.h"
 #import "FUIStaticContentTableViewController.h"
 #import <FirebaseAuth/FirebaseAuth.h>
 
@@ -35,8 +34,7 @@
     ]];
 
   UIViewController *controller =
-      [[FUIStaticContentTableViewController alloc] initWithAuthUI:self.authUI
-                                                         contents:contents nextTitle:[FUIAuthStrings save]
+      [[FUIStaticContentTableViewController alloc] initWithContents:contents nextTitle:[FUIAuthStrings save]
                                                        nextAction:^{
         [self onSaveName:cell.value];
       }];

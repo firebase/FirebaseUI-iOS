@@ -14,19 +14,10 @@
 //  limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
+#import "FUIAccountSettingsViewController.h"
 
-#import "FUIStaticContentTableViewManager.h"
+@interface FUIAccountSettingsViewController (DeleteAccount)
 
-@interface FUIStaticContentTableViewController : UIViewController
-
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                     nextTitle:(NSString *)actionTitle
-                    nextAction:(FUIStaticContentTableViewCellAction)action;
-
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                     nextTitle:(NSString *)actionTitle
-                    nextAction:(FUIStaticContentTableViewCellAction)action
-                    headerText:(NSString *)header;
+- (void)deleteAccountWithLinkedProvider;
 
 @end

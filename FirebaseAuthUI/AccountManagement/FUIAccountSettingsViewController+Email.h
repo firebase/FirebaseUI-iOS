@@ -15,13 +15,7 @@
 //
 
 #import "FUIAccountSettingsViewController.h"
-#import "FUIAccountSettingsViewController+AddPassword.h"
-#import "FUIAccountSettingsViewController+ChangeName.h"
 
-@interface FUIAccountSettingsViewController (Internal)
-
-- (void)finishSignUpWithUser:(FIRUser *)user error:(NSError *)error;
-
-- (void)updateUI;
+@interface FUIAccountSettingsViewController (Email)
 
 @end

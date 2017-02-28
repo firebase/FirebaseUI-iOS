@@ -14,19 +14,8 @@
 //  limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
+#import "FUIAccountSettingsViewController+Common.h"
 
-#import "FUIStaticContentTableViewManager.h"
-
-@interface FUIStaticContentTableViewController : UIViewController
-
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                     nextTitle:(NSString *)actionTitle
-                    nextAction:(FUIStaticContentTableViewCellAction)action;
-
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                     nextTitle:(NSString *)actionTitle
-                    nextAction:(FUIStaticContentTableViewCellAction)action
-                    headerText:(NSString *)header;
+@implementation FUIAccountSettingsViewController (Email)
 
 @end

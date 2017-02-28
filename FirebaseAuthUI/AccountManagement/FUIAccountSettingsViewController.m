@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController+Internal.h"
+#import "FUIAccountSettingsViewController+Common.h"
 
 #import "FUIAuthStrings.h"
 #import "FUIStaticContentTableViewController.h"
@@ -29,12 +29,6 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
   FUIASAccountStateLinkedAccountWithoutEmail,
   FUIASAccountStateLinkedAccountWithEmailPassword
 };
-
-static NSString *const kProviderIdEmail = @"password";
-static NSString *const kProviderIdGoogle = @"google.com";
-static NSString *const kProviderIdFacebook = @"facebook.com";
-static NSString *const kProviderIdTwitter = @"twitter.com";
-
 
 @interface FUIAccountSettingsViewController ()
 @end
@@ -110,11 +104,11 @@ static NSString *const kProviderIdTwitter = @"twitter.com";
   BOOL hasEmailInLinkedProvider = NO;
 
   for (id<FIRUserInfo> userInfo in providers) {
-    if (userInfo.email.length > 0 && ![userInfo.providerID isEqualToString:kProviderIdEmail]) {
+    if (userInfo.email.length > 0 && ![userInfo.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
       hasEmailInLinkedProvider = YES;
     }
 
-    if ([userInfo.providerID isEqualToString:kProviderIdEmail]) {
+    if ([userInfo.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
       hasPasswordProvider = YES;
     }
   }
@@ -254,6 +248,9 @@ static NSString *const kProviderIdTwitter = @"twitter.com";
   NSMutableArray *linkedAccounts =
       [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
   for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
+    if ([userInfo.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
+      continue;
+    }
     FUIStaticContentTableViewCell *cell =
         [FUIStaticContentTableViewCell cellWithTitle:userInfo.providerID
                                                value:userInfo.displayName];
@@ -278,7 +275,7 @@ static NSString *const kProviderIdTwitter = @"twitter.com";
                                               action:^{ [weakSelf onSignOutSelected]; }
                                                 type:FUIStaticContentTableViewCellTypeButton],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{ [weakSelf onDeleteAccountSelected]; }
+                                              action:^{ [weakSelf deleteAccountWithLinkedProvider]; }
                                                 type:FUIStaticContentTableViewCellTypeButton]
       ]],
     ]];
@@ -290,6 +287,9 @@ static NSString *const kProviderIdTwitter = @"twitter.com";
   NSMutableArray *linkedAccounts =
       [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
   for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
+    if ([userInfo.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
+      continue;
+    }
     FUIStaticContentTableViewCell *cell =
         [FUIStaticContentTableViewCell cellWithTitle:userInfo.providerID
                                                value:userInfo.displayName];
@@ -319,7 +319,7 @@ static NSString *const kProviderIdTwitter = @"twitter.com";
                                               action:^{ [weakSelf onSignOutSelected]; }
                                                 type:FUIStaticContentTableViewCellTypeButton],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{ [weakSelf onDeleteAccountSelected]; }
+                                              action:^{ [weakSelf deleteAccountWithLinkedProvider]; }
                                                 type:FUIStaticContentTableViewCellTypeButton]
       ]],
     ]];
@@ -330,6 +330,9 @@ static NSString *const kProviderIdTwitter = @"twitter.com";
   NSMutableArray *linkedAccounts =
       [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
   for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
+    if ([userInfo.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
+      continue;
+    }
     FUIStaticContentTableViewCellAction action =
         ^{ [weakSelf onLinkedAccountSelected:userInfo]; };
     FUIStaticContentTableViewCell *cell =

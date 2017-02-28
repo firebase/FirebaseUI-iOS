@@ -16,7 +16,7 @@
 
 #import "FUIAccountSettingsViewController.h"
 
-@interface FUIAccountSettingsViewController (AddPassword)
+@interface FUIAccountSettingsViewController (Password)
 
 - (void)showAddPasswordDialog;
 
