@@ -5,13 +5,15 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FUIStaticContentTableViewController">
             <connections>
-                <outlet property="_headerText" destination="cTy-1s-QWK" id="ySA-se-26T"/>
-                <outlet property="_tableView" destination="dV7-P0-8Pd" id="2XH-G3-zrq"/>
+                <outlet property="_footerButton" destination="4Cr-Up-Dez" id="nI4-of-rLb"/>
+                <outlet property="_headerLabel" destination="oYZ-x6-A1j" id="ci6-qJ-vFx"/>
+                <outlet property="_tableView" destination="uNi-em-AIf" id="Fx3-aH-BM1"/>
                 <outlet property="view" destination="gaA-9f-Wc0" id="zTW-yG-YaX"/>
             </connections>
         </placeholder>
@@ -20,36 +22,61 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="dV7-P0-8Pd">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="uNi-em-AIf">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <view key="tableHeaderView" contentMode="scaleToFill" id="hN3-Aw-syi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <view key="tableHeaderView" contentMode="scaleToFill" id="6tb-B7-N40">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTy-1s-QWK">
-                                <rect key="frame" x="7.5" y="-0.5" width="359" height="44"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYZ-x6-A1j">
+                                <rect key="frame" x="7.5" y="25" width="359" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cTy-1s-QWK" firstAttribute="centerX" secondItem="hN3-Aw-syi" secondAttribute="centerX" id="1LI-Jq-rqJ"/>
-                            <constraint firstItem="cTy-1s-QWK" firstAttribute="height" secondItem="hN3-Aw-syi" secondAttribute="height" id="G08-By-unW"/>
-                            <constraint firstItem="cTy-1s-QWK" firstAttribute="width" secondItem="hN3-Aw-syi" secondAttribute="width" constant="-16" id="R7g-uY-vzi"/>
-                            <constraint firstItem="cTy-1s-QWK" firstAttribute="centerY" secondItem="hN3-Aw-syi" secondAttribute="centerY" id="d3M-ul-QgM"/>
+                            <constraint firstItem="oYZ-x6-A1j" firstAttribute="centerX" secondItem="6tb-B7-N40" secondAttribute="centerX" id="4Z5-63-vyR"/>
+                            <constraint firstItem="oYZ-x6-A1j" firstAttribute="width" secondItem="6tb-B7-N40" secondAttribute="width" constant="-16" id="6y1-zQ-GYj"/>
+                            <constraint firstItem="oYZ-x6-A1j" firstAttribute="centerY" secondItem="6tb-B7-N40" secondAttribute="centerY" id="D9V-Ls-1JC"/>
+                            <constraint firstItem="oYZ-x6-A1j" firstAttribute="height" secondItem="6tb-B7-N40" secondAttribute="height" constant="-50" id="eDc-eH-Uoa"/>
+                        </constraints>
+                    </view>
+                    <view key="tableFooterView" contentMode="scaleToFill" id="u9P-om-lwv">
+                        <rect key="frame" x="0.0" y="634" width="375" height="60"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Cr-Up-Dez">
+                                <rect key="frame" x="8" y="0.0" width="63" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="63" id="e9p-Se-vHf"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-8" maxY="0.0"/>
+                                <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="-8" maxY="0.0"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="onFooterAction:" destination="-1" eventType="touchUpInside" id="ubK-Vt-75c"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="4Cr-Up-Dez" firstAttribute="top" secondItem="u9P-om-lwv" secondAttribute="top" id="SDs-Ni-7Ki"/>
+                            <constraint firstItem="4Cr-Up-Dez" firstAttribute="leading" secondItem="u9P-om-lwv" secondAttribute="leadingMargin" id="bfw-JL-dak"/>
                         </constraints>
                     </view>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="dV7-P0-8Pd" firstAttribute="centerX" secondItem="gaA-9f-Wc0" secondAttribute="centerX" id="Juu-zt-maP"/>
-                <constraint firstItem="dV7-P0-8Pd" firstAttribute="height" secondItem="gaA-9f-Wc0" secondAttribute="height" id="gAa-lD-heK"/>
-                <constraint firstItem="dV7-P0-8Pd" firstAttribute="centerY" secondItem="gaA-9f-Wc0" secondAttribute="centerY" id="lXf-pr-jOg"/>
-                <constraint firstItem="dV7-P0-8Pd" firstAttribute="width" secondItem="gaA-9f-Wc0" secondAttribute="width" id="sf9-0U-0xG"/>
+                <constraint firstItem="uNi-em-AIf" firstAttribute="height" secondItem="gaA-9f-Wc0" secondAttribute="height" id="Lj7-h6-v1Q"/>
+                <constraint firstItem="uNi-em-AIf" firstAttribute="centerY" secondItem="gaA-9f-Wc0" secondAttribute="centerY" id="VOH-XH-QdQ"/>
+                <constraint firstItem="uNi-em-AIf" firstAttribute="centerX" secondItem="gaA-9f-Wc0" secondAttribute="centerX" id="giJ-Pz-tiA"/>
+                <constraint firstItem="uNi-em-AIf" firstAttribute="width" secondItem="gaA-9f-Wc0" secondAttribute="width" id="ld8-bN-MN6"/>
             </constraints>
+            <point key="canvasLocation" x="26.5" y="52.5"/>
         </view>
+        <customObject id="Acj-Gn-8ir"/>
     </objects>
 </document>

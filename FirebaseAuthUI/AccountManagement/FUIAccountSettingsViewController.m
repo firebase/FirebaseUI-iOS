@@ -60,10 +60,6 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
   [self updateUI];
 }
 
-- (void)onDeleteAccountSelected {
-  NSLog(@"%s", __FUNCTION__);
-}
-
 - (void)onAddPasswordSelected {
   NSLog(@"%s", __FUNCTION__);
 
@@ -236,7 +232,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
                                               action:^{ [weakSelf onSignOutSelected]; }
                                                 type:FUIStaticContentTableViewCellTypeButton],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{ [weakSelf onDeleteAccountSelected]; }
+                                              action:^{ [weakSelf showDeleteAccountViewWithPassword]; }
                                                 type:FUIStaticContentTableViewCellTypeButton]
       ]],
     ]];
@@ -365,7 +361,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
                                               action:^{ [weakSelf onSignOutSelected]; }
                                                  type:FUIStaticContentTableViewCellTypeButton],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{ [weakSelf onDeleteAccountSelected]; }
+                                              action:^{ [weakSelf deleteAccountWithLinkedProvider]; }
                                                 type:FUIStaticContentTableViewCellTypeButton]
       ]],
     ]];

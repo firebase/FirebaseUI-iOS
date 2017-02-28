@@ -19,5 +19,5 @@
 @interface FUIAccountSettingsViewController (DeleteAccount)
 
 - (void)deleteAccountWithLinkedProvider;
-
+- (void)showDeleteAccountViewWithPassword;
 @end

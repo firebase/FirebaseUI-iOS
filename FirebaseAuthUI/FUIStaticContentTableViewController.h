@@ -21,12 +21,19 @@
 @interface FUIStaticContentTableViewController : UIViewController
 
 - (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                     nextTitle:(NSString *)actionTitle
-                    nextAction:(FUIStaticContentTableViewCellAction)action;
+                       nextTitle:(NSString *)nextTitle
+                      nextAction:(FUIStaticContentTableViewCellAction)nextAction;
 
 - (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                     nextTitle:(NSString *)actionTitle
-                    nextAction:(FUIStaticContentTableViewCellAction)action
-                    headerText:(NSString *)header;
+                       nextTitle:(NSString *)nextTitle
+                      nextAction:(FUIStaticContentTableViewCellAction)nextAction
+                      headerText:(NSString *)headerText;
+
+- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                       nextTitle:(NSString *)actionTitle
+                      nextAction:(FUIStaticContentTableViewCellAction)nextAction
+                      headerText:(NSString *)headerText
+                      footerText:(NSString *)footerText
+                    footerAction:(FUIStaticContentTableViewCellAction)footerAction;
 
 @end

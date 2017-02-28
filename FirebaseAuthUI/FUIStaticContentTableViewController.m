@@ -20,45 +20,55 @@
 
 @interface FUIStaticContentTableViewController ()
 {
-  NSString *_header;
-  __unsafe_unretained IBOutlet UILabel *_headerText;
+  NSString *_headerText;
+  NSString *_footerText;
+  NSString *_actionTitle;
+  __unsafe_unretained IBOutlet UILabel *_headerLabel;
   __unsafe_unretained IBOutlet UITableView *_tableView;
+  __unsafe_unretained IBOutlet UIButton *_footerButton;
   FUIStaticContentTableViewManager *_tableViewManager;
   FUIStaticContentTableViewCellAction _nextAction;
+  FUIStaticContentTableViewCellAction _footerAction;
 }
 @end
 
 @implementation FUIStaticContentTableViewController
 
 - (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                     nextTitle:(NSString *)actionTitle
-                    nextAction:(FUIStaticContentTableViewCellAction)action {
-  return [self initWithContents:contents nextTitle:actionTitle nextAction:action headerText:nil];
+                     nextTitle:(NSString *)nextTitle
+                    nextAction:(FUIStaticContentTableViewCellAction)nextAction {
+  return [self initWithContents:contents nextTitle:nextTitle nextAction:nextAction headerText:nil];
 }
 
 - (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                     nextTitle:(NSString *)actionTitle
-                    nextAction:(FUIStaticContentTableViewCellAction)action
-                    headerText:(NSString *)header {
+                     nextTitle:(NSString *)nextTitle
+                    nextAction:(FUIStaticContentTableViewCellAction)nextAction
+                    headerText:(NSString *)headerText {
+  return [self initWithContents:contents
+                      nextTitle:nextTitle
+                     nextAction:nextAction
+                     headerText:headerText
+                     footerText:nil
+                   footerAction:nil];
+}
+
+- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                       nextTitle:(NSString *)actionTitle
+                      nextAction:(FUIStaticContentTableViewCellAction)nextAction
+                      headerText:(NSString *)headerText
+                      footerText:(NSString *)footerText
+                    footerAction:(FUIStaticContentTableViewCellAction)footerAction {
   if (self = [self initWithNibName:NSStringFromClass([self class])
                             bundle:[FUIAuthUtils frameworkBundle]]) {
     _tableViewManager = [[FUIStaticContentTableViewManager alloc] init];
     _tableViewManager.contents = contents;
-    _nextAction = [action copy];
-    _header = [header copy];
-
-    UIBarButtonItem *actionButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:actionTitle
-                                       style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(onNext)];
-    // TODO: add AccessibilityID
-    //    actionButtonItem.accessibilityIdentifier = kSaveButtonAccessibilityID;
-    self.navigationItem.rightBarButtonItem = actionButtonItem;
+    _nextAction = [nextAction copy];
+    _footerAction = [footerAction copy];
+    _headerText = [headerText copy];
+    _footerText = [footerText copy];
+    _actionTitle = [actionTitle copy];
   }
-
   return self;
-
 }
 
 - (void)viewDidLoad {
@@ -66,8 +76,21 @@
   _tableViewManager.tableView = _tableView;
   _tableView.delegate = _tableViewManager;
   _tableView.dataSource = _tableViewManager;
-  _headerText.text = _header ? _header : @"";
+  _headerLabel.text = _headerText ? _headerText : @"";
+  if (!_footerText) {
+    _tableView.tableFooterView.hidden = YES;
+  } else {
+    [_footerButton setTitle:_footerText forState:UIControlStateNormal];
+  }
 
+  UIBarButtonItem *actionButtonItem =
+      [[UIBarButtonItem alloc] initWithTitle:_actionTitle
+                                       style:UIBarButtonItemStylePlain
+                                      target:self
+                                      action:@selector(onNext)];
+  // TODO: add AccessibilityID
+  //    actionButtonItem.accessibilityIdentifier = kSaveButtonAccessibilityID;
+  self.navigationItem.rightBarButtonItem = actionButtonItem;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -76,18 +99,22 @@
 }
 
 - (void)updateHeaderSize {
-  _headerText.preferredMaxLayoutWidth = _headerText.bounds.size.width;
+  _headerLabel.preferredMaxLayoutWidth = _headerLabel.bounds.size.width;
   CGFloat height = [_tableView.tableHeaderView
                         systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
   CGRect frame = _tableView.tableHeaderView.frame;
   frame.size.height = height;
   _tableView.tableHeaderView.frame = frame;
-
 }
 
 - (void)onNext {
   if (_nextAction) {
     _nextAction();
+  }
+}
+- (IBAction)onFooterAction:(id)sender {
+  if (_footerAction) {
+    _footerAction();
   }
 }
 

@@ -43,4 +43,8 @@ typedef void(^FUIAccountSettingsreauthenticateHandler)(void);
 
 - (void)reauthenticateWithProviderUI:(id<FIRUserInfo>)provider
                actionHandler:(FUIAccountSettingsreauthenticateHandler)handler;
+
+- (void)reauthenticateWithPassword:(NSString *)password
+                     actionHandler:(FUIAccountSettingsreauthenticateHandler)handler;
+
 @end

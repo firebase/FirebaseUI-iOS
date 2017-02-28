@@ -37,11 +37,20 @@
       case FIRAuthErrorCodeTooManyRequests:
         [self showAlertWithMessage:[FUIAuthStrings signUpTooManyTimesError]];
         return;
+      case FIRAuthErrorCodeWrongPassword:
+        [self showAlertWithMessage:[FUIAuthStrings wrongPasswordError]];
+        return;
+      case FIRAuthErrorCodeUserNotFound:
+        [self showAlertWithMessage:[FUIAuthStrings userNotFoundError]];
+        return;
+      case FIRAuthErrorCodeUserDisabled:
+        [self showAlertWithMessage:[FUIAuthStrings accountDisabledError]];
+        return;
     }
   }
 
   [self.authUI invokeResultCallbackWithUser:user error:nil];
-  
+
 }
 
 - (void)showSelectProviderDialog:(FUIAccountSettingsChoseProvider)handler
@@ -134,5 +143,25 @@
                    }];
 }
 
+- (void)reauthenticateWithPassword:(NSString *)password
+                     actionHandler:(FUIAccountSettingsreauthenticateHandler)handler {
+  if (password.length <= 0) {
+    [self showAlertWithMessage:[FUIAuthStrings invalidPasswordError]];
+    return;
+  }
+
+  [self incrementActivity];
+
+  [self.auth signInWithEmail:self.auth.currentUser.email
+                    password:password
+                  completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+                    [self decrementActivity];
+
+                    [self finishSignUpWithUser:user error:error];
+                    if (!error && handler) {
+                      handler();
+                    }
+                  }];
+}
 
 @end

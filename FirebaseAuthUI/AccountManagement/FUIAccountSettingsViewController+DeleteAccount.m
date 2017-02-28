@@ -20,9 +20,13 @@
 
 - (void)deleteAccountWithLinkedProvider {
   [self showSelectProviderDialog:^(id<FIRUserInfo> provider) {
-    [self reauthenticateWithProviderUI:provider actionHandler:^{
-      [self showDeleteAccountView];
-    }];
+    if (![provider.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
+      [self reauthenticateWithProviderUI:provider actionHandler:^{
+        [self showDeleteAccountView];
+      }];
+    } else {
+      [self showDeleteAccountViewWithPassword];
+    }
   } alertTitle:@"Delete Account?"
                     alertMessage:@"This will erase all data associated with your account, and can't be undone You will need t osign in again to complete this action"
                 alertCloseButton:[FUIAuthStrings cancel]];
@@ -30,17 +34,41 @@
 
 - (void)showDeleteAccountView {
   NSString *message = @"This will erase all data assosiated with your account, and can't be undone. Are you sure you want to delete your account?";
-  UIViewController *controller =
-      [[FUIStaticContentTableViewController alloc] initWithContents:nil
-                                                          nextTitle:@"Delete"
-                                                       nextAction:^{
-                                                         [self onDeleteAccountViewNextAction];
-                                                       }
-                                                         headerText:message];
+  UIViewController *controller = [[FUIStaticContentTableViewController alloc]
+                                    initWithContents:nil
+                                    nextTitle:@"Delete"
+                                    nextAction:^{ [self onDeleteAccountViewNextAction]; }
+                                    headerText:message];
   // TODO: add localization
   controller.title = @"Delete account";
   [self pushViewController:controller];
-  
+
+}
+
+- (void)showDeleteAccountViewWithPassword {
+  __block FUIStaticContentTableViewCell *passwordCell =
+  [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
+                                        action:nil
+                                          type:FUIStaticContentTableViewCellTypePassword];
+  FUIStaticContentTableViewContent *contents =
+      [FUIStaticContentTableViewContent
+           contentWithSections:@[
+                                 [FUIStaticContentTableViewSection sectionWithTitle:nil
+                                                                              cells:@[passwordCell]],
+                                ]];
+
+  NSString *message = @"This will erase all data assosiated with your account, and can't be undone. Are you sure you want to delete your account?";
+  UIViewController *controller =
+      [[FUIStaticContentTableViewController alloc]
+          initWithContents:contents
+                 nextTitle:@"Delete"
+                nextAction:^{ [self deleteCurrentAccountWithPassword:passwordCell.value]; }
+                headerText:message
+                footerText:@"Forgot Password?"
+              footerAction:^{ [self onForgotPassword]; }];
+  // TODO: add localization
+  controller.title = @"Delete account";
+  [self pushViewController:controller];
 }
 
 - (void)onDeleteAccountViewNextAction {
@@ -64,6 +92,12 @@
 
 }
 
+- (void)deleteCurrentAccountWithPassword:(NSString *)password {
+  [self reauthenticateWithPassword:password actionHandler:^{
+    [self deleteCurrentAccount];
+  }];
+}
+
 - (void)deleteCurrentAccount {
   [self incrementActivity];
   [self.auth.currentUser deleteWithCompletion:^(NSError * _Nullable error) {
@@ -75,6 +109,10 @@
       [self finishSignUpWithUser:self.auth.currentUser error:error];
     }
   }];
+}
+
+- (void)onForgotPassword {
+  NSLog(@"%s", __FUNCTION__);
 }
 
 @end
