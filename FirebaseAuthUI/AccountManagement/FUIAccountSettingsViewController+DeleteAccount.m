@@ -112,7 +112,60 @@
 }
 
 - (void)onForgotPassword {
-  NSLog(@"%s", __FUNCTION__);
+  __block FUIStaticContentTableViewCell *inputCell =
+  [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings email]
+                                        value:self.auth.currentUser.email
+                                        action:nil
+                                          type:FUIStaticContentTableViewCellTypeInput];
+  FUIStaticContentTableViewContent *contents =
+      [FUIStaticContentTableViewContent
+           contentWithSections:@[
+                                 [FUIStaticContentTableViewSection sectionWithTitle:nil
+                                                                              cells:@[inputCell]],
+                                ]];
+
+  UIViewController *controller =
+      [[FUIStaticContentTableViewController alloc]
+           initWithContents:contents
+                  nextTitle:[FUIAuthStrings send]
+                 nextAction:^{ [self onPasswordRecovery:inputCell.value]; }
+                 headerText:[FUIAuthStrings passwordRecoveryMessage]];
+  controller.title = [FUIAuthStrings passwordRecoveryTitle];
+  [self pushViewController:controller];
+}
+
+- (void)onPasswordRecovery:(NSString *)email {
+  if (![[self class] isValidEmail:email]) {
+    [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
+    return;
+  }
+
+  [self incrementActivity];
+
+  [self.auth sendPasswordResetWithEmail:email
+                             completion:^(NSError *_Nullable error) {
+                               // The dispatch is a workaround for a bug in FirebaseAuth 3.0.2, which doesn't call the
+                               // completion block on the main queue.
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                 [self decrementActivity];
+
+                                 if (error) {
+                                   if (error.code == FIRAuthErrorCodeUserNotFound) {
+                                     [self showAlertWithMessage:[FUIAuthStrings userNotFoundError]];
+                                     return;
+                                   }
+
+//                                   [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                                     [self.authUI invokeResultCallbackWithUser:nil error:error];
+//                                   }];
+                                   return;
+                                 }
+
+                                 NSString *message =
+                                 [NSString stringWithFormat:[FUIAuthStrings passwordRecoveryEmailSentMessage], email];
+                                 [self showAlertWithMessage:message];
+                               });
+                             }];
 }
 
 @end
