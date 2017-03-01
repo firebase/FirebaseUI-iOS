@@ -20,4 +20,5 @@
 
 - (void)deleteAccountWithLinkedProvider;
 - (void)showDeleteAccountViewWithPassword;
+- (void)onForgotPassword;
 @end

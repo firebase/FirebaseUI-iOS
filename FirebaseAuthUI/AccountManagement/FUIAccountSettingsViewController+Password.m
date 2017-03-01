@@ -22,14 +22,14 @@
 - (void)showAddPasswordDialog {
   [self showSelectProviderDialog:^(id<FIRUserInfo> provider) {
     [self reauthenticateWithProviderUI:provider actionHandler:^{
-      [self showAddPassword];
+      [self showAddPassword:YES];
     }];
   } alertTitle:@"Verify it's you"
                     alertMessage:@"To add password to your account, you will need to sign in again."
                 alertCloseButton:[FUIAuthStrings cancel]];
 }
 
-- (void)showAddPassword {
+- (void)showAddPassword:(BOOL)newPassword {
   __block FUIStaticContentTableViewCell *passwordCell =
       [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
                                             action:nil
@@ -47,11 +47,42 @@
                                                        nextAction:^{
         [self onSetPasswordForCurrentUser:passwordCell.value];
       }];
-  controller.title = @"Add password";
+  if (newPassword) {
+    controller.title = @"Add password";
+  } else {
+    controller.title = @"Change password";
+  }
   [self pushViewController:controller];
 
 }
 
+- (void)showVerifyPassword {
+  __block FUIStaticContentTableViewCell *passwordCell =
+      [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
+                                            action:nil
+                                              type:FUIStaticContentTableViewCellTypePassword];
+  FUIStaticContentTableViewContent *contents =
+    [FUIStaticContentTableViewContent contentWithSections:@[
+      [FUIStaticContentTableViewSection sectionWithTitle:nil
+                                                   cells:@[passwordCell]],
+    ]];
+
+
+  UIViewController *controller =
+      [[FUIStaticContentTableViewController alloc] initWithContents:contents
+                                                          nextTitle:[FUIAuthStrings next]
+                                                       nextAction:^{
+        [self reauthenticateWithPassword:passwordCell.value actionHandler:^{
+          [self showAddPassword:NO];
+        }];
+      }
+      headerText:@"In oreder to change your password, you first need to enter your current password."
+      footerText:@"Forgot password?" footerAction:^{
+        [self onForgotPassword];
+      }];
+  controller.title = @"Verify it's you";
+  [self pushViewController:controller];
+}
 
 
 - (void)onSetPasswordForCurrentUser:(NSString *)password {
@@ -64,7 +95,7 @@
       [self decrementActivity];
       NSLog(@"updatePassword error %@", error);
       if (!error) {
-        [self onBack];
+        [self popToRoot];
         [self updateUI];
       } else {
         [self finishSignUpWithUser:self.auth.currentUser error:error];

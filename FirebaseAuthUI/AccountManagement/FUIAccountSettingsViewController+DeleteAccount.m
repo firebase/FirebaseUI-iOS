@@ -103,7 +103,7 @@
   [self.auth.currentUser deleteWithCompletion:^(NSError * _Nullable error) {
     [self decrementActivity];
     if (!error) {
-      [self onBack];
+      [self popToRoot];
       [self updateUI];
     } else {
       [self finishSignUpWithUser:self.auth.currentUser error:error];
@@ -162,7 +162,7 @@
                                  }
 
                                  NSString *message =
-                                 [NSString stringWithFormat:[FUIAuthStrings passwordRecoveryEmailSentMessage], email];
+                                     [NSString stringWithFormat:[FUIAuthStrings passwordRecoveryEmailSentMessage], email];
                                  [self showAlertWithMessage:message];
                                });
                              }];

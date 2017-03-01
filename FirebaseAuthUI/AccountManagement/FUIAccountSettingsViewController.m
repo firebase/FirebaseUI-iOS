@@ -225,7 +225,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
       [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellChangePassword]
-                                              action:^{ [weakSelf onChangePasswordSelected]; }]
+                                              action:^{ [weakSelf showVerifyPassword]; }]
       ]],
       [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]

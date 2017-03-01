@@ -54,7 +54,7 @@
       return;
     }
     [self finishSignUpWithUser:self.auth.currentUser error:nil];
-    [self onBack];
+    [self popToRoot];
     [self updateUI];
   }];
 }

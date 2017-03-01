@@ -164,4 +164,8 @@
                   }];
 }
 
+- (void)popToRoot {
+  [self.navigationController popToViewController:self animated:YES];
+}
+
 @end
