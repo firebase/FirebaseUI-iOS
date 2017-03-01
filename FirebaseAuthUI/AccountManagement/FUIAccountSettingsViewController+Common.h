@@ -17,6 +17,7 @@
 #import "FUIAccountSettingsViewController+ChangeName.h"
 #import "FUIAccountSettingsViewController+Password.h"
 #import "FUIAccountSettingsViewController+DeleteAccount.h"
+#import "FUIAccountSettingsViewController+Email.h"
 #import "FUIAccountSettingsViewController.h"
 #import "FUIAuthStrings.h"
 #import "FUIAuth_Internal.h"

@@ -66,15 +66,6 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
   NSLog(@"%s %@", __FUNCTION__, userInfo.providerID);
 }
 
-- (void)onNameSelected {
-  NSLog(@"%s", __FUNCTION__);
-  [self changeName];
-}
-
-- (void)onEmailSelected {
-  NSLog(@"%s", __FUNCTION__);
-}
-
 - (void)onAddEmailSelected {
   NSLog(@"%s", __FUNCTION__);
 }
@@ -209,10 +200,10 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
                                                value:self.auth.currentUser.displayName
-                                              action:^{ [weakSelf onNameSelected]; }],
+                                              action:^{ [weakSelf changeName]; }],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
                                                value:self.auth.currentUser.email
-                                              action:^{ [weakSelf onEmailSelected]; }]
+                                              action:^{ [weakSelf showUpdateEmailView]; }]
       ]],
       [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
                                                    cells:@[
@@ -251,10 +242,10 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
                                                value:self.auth.currentUser.displayName
-                                              action:^{ [weakSelf onNameSelected]; }],
+                                              action:^{ [weakSelf changeName]; }],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
                                                value:self.auth.currentUser.email
-                                              action:^{ [weakSelf onEmailSelected]; }]
+                                              action:^{ [weakSelf showUpdateEmailDialog]; }]
       ]],
       [FUIStaticContentTableViewSection
           sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
@@ -290,10 +281,10 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
                                                value:self.auth.currentUser.displayName
-                                              action:^{ [weakSelf onNameSelected]; }],
+                                              action:^{ [weakSelf changeName]; }],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
                                                value:self.auth.currentUser.email
-                                              action:^{ [weakSelf onEmailSelected]; }]
+                                              action:^{ [weakSelf showUpdateEmailDialog]; }]
       ]],
       [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
                                                    cells:@[
@@ -336,10 +327,10 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
                                                value:self.auth.currentUser.displayName
-                                              action:^{ [weakSelf onNameSelected]; }],
+                                              action:^{ [weakSelf changeName]; }],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
                                                value:self.auth.currentUser.email
-                                              action:^{ [weakSelf onEmailSelected]; }]
+                                              action:^{ [weakSelf showUpdateEmailDialog]; }]
       ]],
       [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
                                                    cells:@[

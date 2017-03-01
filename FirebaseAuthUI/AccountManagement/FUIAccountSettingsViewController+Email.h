@@ -18,4 +18,7 @@
 
 @interface FUIAccountSettingsViewController (Email)
 
+- (void)showUpdateEmailDialog;
+- (void)showUpdateEmailView;
+
 @end

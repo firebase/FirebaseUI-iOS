@@ -18,4 +18,59 @@
 
 @implementation FUIAccountSettingsViewController (Email)
 
+- (void)showUpdateEmailDialog {
+  NSString *message;
+    message = @"To change email address associated with your your account, you will need to sign in again.";
+  [self showVerifyDialog:^{ [self showUpdateEmail]; } message:message];
+
+}
+
+- (void)showUpdateEmailView {
+  [self showVerifyPasswordView:^{
+    [self showUpdateEmail];
+  }
+                       message:@"In oreder to change your password, you first need to enter your current password."];
+}
+
+- (void)showUpdateEmail {
+  __block FUIStaticContentTableViewCell *cell =
+      [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings email]
+                                             value:self.auth.currentUser.email
+                                            action:nil
+                                              type:FUIStaticContentTableViewCellTypeInput];
+  FUIStaticContentTableViewContent *contents =
+    [FUIStaticContentTableViewContent contentWithSections:@[
+      [FUIStaticContentTableViewSection sectionWithTitle:nil
+                                                   cells:@[cell]],
+    ]];
+
+
+  UIViewController *controller =
+      [[FUIStaticContentTableViewController alloc] initWithContents:contents
+                                                          nextTitle:[FUIAuthStrings save]
+                                                       nextAction:^{
+        [self updateEmailForCurrentUser:cell.value];
+      }];
+  controller.title = @"Edit email";
+  [self pushViewController:controller];
+
+}
+
+- (void)updateEmailForCurrentUser:(NSString *)email {
+  if (![[self class] isValidEmail:email]) {
+    [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
+  } else {
+    [self incrementActivity];
+    [self.auth.currentUser updateEmail:email completion:^(NSError * _Nullable error) {
+      [self decrementActivity];
+      if (!error) {
+        [self popToRoot];
+        [self updateUI];
+      } else {
+        [self finishSignUpWithUser:self.auth.currentUser error:error];
+      }
+    }];
+  }
+}
+
 @end
