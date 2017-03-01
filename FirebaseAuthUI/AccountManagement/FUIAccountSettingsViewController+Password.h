@@ -18,6 +18,6 @@
 
 @interface FUIAccountSettingsViewController (Password)
 
-- (void)showAddPasswordDialog;
-- (void)showVerifyPassword;
+- (void)showUpdatePasswordDialog:(BOOL)newPassword;
+- (void)showUpdatePasswordView;
 @end

@@ -164,6 +164,45 @@
                   }];
 }
 
+- (void)showVerifyDialog:(FUIAccountSettingsreauthenticateHandler)handler
+                 message:(NSString *)message {
+  [self showSelectProviderDialog:^(id<FIRUserInfo> provider) {
+    if (![provider.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
+      [self reauthenticateWithProviderUI:provider actionHandler:handler];
+    } else {
+      [self showVerifyPasswordView:handler message:message];
+    }
+  } alertTitle:@"Verify it's you"
+                    alertMessage:message
+                alertCloseButton:[FUIAuthStrings cancel]];
+}
+
+- (void)showVerifyPasswordView:(FUIAccountSettingsreauthenticateHandler)handler
+                       message:(NSString *)message {
+  __block FUIStaticContentTableViewCell *passwordCell =
+      [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
+                                            action:nil
+                                              type:FUIStaticContentTableViewCellTypePassword];
+  FUIStaticContentTableViewContent *contents =
+    [FUIStaticContentTableViewContent contentWithSections:@[
+      [FUIStaticContentTableViewSection sectionWithTitle:nil
+                                                   cells:@[passwordCell]],
+    ]];
+
+
+  UIViewController *controller =
+      [[FUIStaticContentTableViewController alloc] initWithContents:contents
+                                                          nextTitle:[FUIAuthStrings next]
+                                                       nextAction:^{
+        [self reauthenticateWithPassword:passwordCell.value actionHandler:handler];
+      }
+      headerText:message
+      footerText:@"Forgot password?" footerAction:^{
+        [self onForgotPassword];
+      }];
+  controller.title = @"Verify it's you";
+  [self pushViewController:controller];
+}
 - (void)popToRoot {
   [self.navigationController popToViewController:self animated:YES];
 }

@@ -47,6 +47,12 @@ typedef void(^FUIAccountSettingsreauthenticateHandler)(void);
 - (void)reauthenticateWithPassword:(NSString *)password
                      actionHandler:(FUIAccountSettingsreauthenticateHandler)handler;
 
+- (void)showVerifyDialog:(FUIAccountSettingsreauthenticateHandler)handler
+                 message:(NSString *)message;
+
+- (void)showVerifyPasswordView:(FUIAccountSettingsreauthenticateHandler)handler
+                       message:(NSString *)message;
+
 /** @fn popToRoot
     @brief Pops the view controller to root navigation controller.
  */

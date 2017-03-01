@@ -60,15 +60,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
   [self updateUI];
 }
 
-- (void)onAddPasswordSelected {
-  NSLog(@"%s", __FUNCTION__);
 
-  [self showAddPasswordDialog];
-}
-
-- (void)onChangePasswordSelected {
-  NSLog(@"%s", __FUNCTION__);
-}
 
 - (void)onLinkedAccountSelected:(id<FIRUserInfo>)userInfo {
   NSLog(@"%s %@", __FUNCTION__, userInfo.providerID);
@@ -225,7 +217,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
       [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellChangePassword]
-                                              action:^{ [weakSelf showVerifyPassword]; }]
+                                              action:^{ [weakSelf showUpdatePasswordView]; }]
       ]],
       [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
@@ -306,7 +298,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
       [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellAddPassword]
-                                              action:^{ [weakSelf onAddPasswordSelected]; }]
+                                              action:^{ [weakSelf showUpdatePasswordDialog:YES]; }]
       ]],
       [FUIStaticContentTableViewSection
           sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
@@ -352,7 +344,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
       [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellChangePassword]
-                                              action:^{ [weakSelf onChangePasswordSelected]; }]
+                                              action:^{ [weakSelf showUpdatePasswordDialog:NO]; }]
       ]],
       [FUIStaticContentTableViewSection
           sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
