@@ -263,7 +263,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
                                               action:^{ [weakSelf onSignOutSelected]; }
                                                 type:FUIStaticContentTableViewCellTypeButton],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{ [weakSelf deleteAccountWithLinkedProvider]; }
+                                              action:^{ [weakSelf showDeleteAccountDialog]; }
                                                 type:FUIStaticContentTableViewCellTypeButton]
       ]],
     ]];
@@ -307,7 +307,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
                                               action:^{ [weakSelf onSignOutSelected]; }
                                                 type:FUIStaticContentTableViewCellTypeButton],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{ [weakSelf deleteAccountWithLinkedProvider]; }
+                                              action:^{ [weakSelf showDeleteAccountDialog]; }
                                                 type:FUIStaticContentTableViewCellTypeButton]
       ]],
     ]];
@@ -353,7 +353,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
                                               action:^{ [weakSelf onSignOutSelected]; }
                                                  type:FUIStaticContentTableViewCellTypeButton],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{ [weakSelf deleteAccountWithLinkedProvider]; }
+                                              action:^{ [weakSelf showDeleteAccountDialog]; }
                                                 type:FUIStaticContentTableViewCellTypeButton]
       ]],
     ]];

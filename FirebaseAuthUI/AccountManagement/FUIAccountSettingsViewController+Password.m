@@ -27,18 +27,18 @@
     message = @"To change password to your account, you will need to sign in again.";
   }
 
-  [self showVerifyDialog:^{ [self showAddPassword:newPassword]; } message:message];
+  [self showVerifyDialog:^{ [self showUpdatePassword:newPassword]; } message:message];
 
 }
 
 - (void)showUpdatePasswordView {
   [self showVerifyPasswordView:^{
-    [self showAddPassword:NO];
+    [self showUpdatePassword:NO];
   }
                        message:@"In oreder to change your password, you first need to enter your current password."];
 }
 
-- (void)showAddPassword:(BOOL)newPassword {
+- (void)showUpdatePassword:(BOOL)newPassword {
   __block FUIStaticContentTableViewCell *passwordCell =
       [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
                                             action:nil
@@ -54,7 +54,7 @@
       [[FUIStaticContentTableViewController alloc] initWithContents:contents
                                                           nextTitle:@"Save"
                                                        nextAction:^{
-        [self onSetPasswordForCurrentUser:passwordCell.value];
+        [self updatePasswordForCurrentUser:passwordCell.value];
       }];
   if (newPassword) {
     controller.title = @"Add password";
@@ -65,7 +65,7 @@
 
 }
 
-- (void)onSetPasswordForCurrentUser:(NSString *)password {
+- (void)updatePasswordForCurrentUser:(NSString *)password {
   if (!password.length) {
     [self showAlertWithMessage:[FUIAuthStrings weakPasswordError]];
   } else {
@@ -82,77 +82,6 @@
       }
     }];
   }
-}
-
-- (void)linkAccount:(NSString *)password withCredential:(FIRAuthCredential *_Nullable)credential {
-  [self incrementActivity];
-//  [self.auth.currentUser updatePassword:password completion:^(NSError * _Nullable error) {
-//    [self decrementActivity];
-//    NSLog(@"updatePassword error %@", error);
-//  }];
-
-//  [self.auth signInWithEmail:self.auth.currentUser.email
-//                    password:password
-//                  completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-//                    if (error) {
-//                      [self decrementActivity];
-//
-//                      [self showAlertWithMessage:[FUIAuthStrings wrongPasswordError]];
-//                      return;
-//                    }
-//
-//                    [user linkWithCredential:credential completion:^(FIRUser * _Nullable user,
-//                                                                         NSError * _Nullable error) {
-//                      [self decrementActivity];
-//
-//                      // Ignore any error (shouldn't happen) and treat the user as successfully signed in.
-//                      [self.navigationController dismissViewControllerAnimated:YES completion:^{
-//                        [self.authUI invokeResultCallbackWithUser:user error:nil];
-//                      }];
-//                    }];
-//                  }];
-//
-
-  [self.auth createUserWithEmail:self.auth.currentUser.email
-                        password:password
-                      completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-    if (error) {
-      [self decrementActivity];
-
-      [self finishSignUpWithUser:nil error:error];
-      return;
-    }
-
-    [user linkWithCredential:credential completion:^(FIRUser * _Nullable user,
-                                                         NSError * _Nullable error) {
-      [self decrementActivity];
-
-      // Ignore any error (shouldn't happen) and treat the user as successfully signed in.
-//      [self.navigationController dismissViewControllerAnimated:YES completion:^{
-//        [self.authUI invokeResultCallbackWithUser:user error:nil];
-//      }];
-      if (error) {
-        [self finishSignUpWithUser:nil error:error];
-        return;
-      }
-      [self finishSignUpWithUser:user error:nil];
-
-    }];
-
-
-//    FIRUserProfileChangeRequest *request = [user profileChangeRequest];
-//    request.displayName = username;
-//    [request commitChangesWithCompletion:^(NSError *_Nullable error) {
-//      [self decrementActivity];
-//
-//      if (error) {
-//        [self finishSignUpWithUser:nil error:error];
-//        return;
-//      }
-//      [self finishSignUpWithUser:user error:nil];
-//    }];
-  }];
-
 }
 
 
