@@ -14,10 +14,19 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController+Common.h"
+#import "FUIAccountSettingsOperationUpdatePassword.h"
 
+#import "FUIAccountSettingsOperation_Internal.h"
 
-@implementation FUIAccountSettingsViewController (Password)
+@implementation FUIAccountSettingsOperationUpdatePassword
+
+- (void)execute:(BOOL)showDialog {
+  if (showDialog) {
+    [self showUpdatePasswordDialog:self.newPassword];
+  } else {
+    [self showUpdatePasswordView];
+  }
+}
 
 - (void)showUpdatePasswordDialog:(BOOL)newPassword {
   NSString *message;
@@ -61,7 +70,7 @@
   } else {
     controller.title = @"Change password";
   }
-  [self pushViewController:controller];
+  [_delegate pushViewController:controller];
 
 }
 
@@ -70,15 +79,13 @@
     [self showAlertWithMessage:[FUIAuthStrings weakPasswordError]];
   } else {
     NSLog(@"%s %@", __FUNCTION__, password);
-    [self incrementActivity];
-    [self.auth.currentUser updatePassword:password completion:^(NSError * _Nullable error) {
-      [self decrementActivity];
+    [_delegate incrementActivity];
+    [_delegate.auth.currentUser updatePassword:password completion:^(NSError * _Nullable error) {
+      [_delegate decrementActivity];
       NSLog(@"updatePassword error %@", error);
+      [self finishOperationWithUser:_delegate.auth.currentUser error:error];
       if (!error) {
-        [self popToRoot];
-        [self updateUI];
-      } else {
-        [self finishSignUpWithUser:self.auth.currentUser error:error];
+        [_delegate presentBaseController];
       }
     }];
   }

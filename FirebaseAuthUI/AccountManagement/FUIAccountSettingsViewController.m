@@ -14,11 +14,14 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController+Common.h"
+#import "FUIAccountSettingsViewController.h"
 
 #import "FUIAuthStrings.h"
 #import "FUIStaticContentTableViewController.h"
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "FUIAccountSettingsOperation.h"
+#import "FUIAccountSettingsOperationUnlinkAccount.h"
+#import "FUIAccountSettingsOperationUpdatePassword.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,7 +33,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
   FUIASAccountStateLinkedAccountWithEmailPassword
 };
 
-@interface FUIAccountSettingsViewController ()
+@interface FUIAccountSettingsViewController () <FUIAccountSettingsOperationDelegate>
 @end
 
 @implementation FUIAccountSettingsViewController {
@@ -48,27 +51,6 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
   [self updateUI];
 }
 
-#pragma mark - Actions
-
-- (void)onSignOutSelected {
-  NSLog(@"%s", __FUNCTION__);
-  NSError *error;
-  [self.authUI signOutWithError:&error];
-  if (error) {
-    [self showAlert:error.localizedDescription];
-  }
-  [self updateUI];
-}
-
-
-
-- (void)onLinkedAccountSelected:(id<FIRUserInfo>)userInfo {
-  NSLog(@"%s %@", __FUNCTION__, userInfo.providerID);
-}
-
-- (void)onAddEmailSelected {
-  NSLog(@"%s", __FUNCTION__);
-}
 
 #pragma mark - Helpers
 
@@ -193,29 +175,28 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
 }
 
 - (void)updateTableStateEmailPassword {
-    __weak typeof(self) weakSelf = self;
   _tableViewManager.contents =
     [FUIStaticContentTableViewContent contentWithSections:@[
       [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleProfile]
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
                                                value:self.auth.currentUser.displayName
-                                              action:^{ [weakSelf changeName]; }],
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeUpdateName withDelegate:self] execute:NO]; }],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
                                                value:self.auth.currentUser.email
-                                              action:^{ [weakSelf showUpdateEmailView]; }]
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeUpdateEmail withDelegate:self] execute:NO]; }]
       ]],
       [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellChangePassword]
-                                              action:^{ [weakSelf showUpdatePasswordView]; }]
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeUpdatePassword withDelegate:self] execute:NO]; }]
       ]],
       [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
-                                              action:^{ [weakSelf onSignOutSelected]; }
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeSignOut withDelegate:self] execute:NO]; }
                                                 type:FUIStaticContentTableViewCellTypeButton],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{ [weakSelf showDeleteAccountViewWithPassword]; }
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeDeleteAccount withDelegate:self] execute:NO]; }
                                                 type:FUIStaticContentTableViewCellTypeButton]
       ]],
     ]];
@@ -223,7 +204,6 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
 
 
 - (void)updateTableStateLinkedAccountWithoutEmail {
-    __weak typeof(self) weakSelf = self;
   NSMutableArray *linkedAccounts =
       [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
   for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
@@ -242,19 +222,19 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
                                                value:self.auth.currentUser.displayName
-                                              action:^{ [weakSelf changeName]; }],
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeUpdateName withDelegate:self] execute:NO]; }],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
                                                value:self.auth.currentUser.email
-                                              action:^{ [weakSelf showUpdateEmailDialog]; }]
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeUpdateEmail withDelegate:self] execute:YES]; }]
       ]],
       [FUIStaticContentTableViewSection
           sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
       [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
-                                              action:^{ [weakSelf onSignOutSelected]; }
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeSignOut withDelegate:self] execute:NO]; }
                                                 type:FUIStaticContentTableViewCellTypeButton],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{ [weakSelf showDeleteAccountDialog]; }
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeDeleteAccount withDelegate:self] execute:YES]; }
                                                 type:FUIStaticContentTableViewCellTypeButton]
       ]],
     ]];
@@ -262,7 +242,6 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
 
 
 - (void)updateTableStateLinkedAccountWithEmail {
-    __weak typeof(self) weakSelf = self;
   NSMutableArray *linkedAccounts =
       [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
   for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
@@ -281,39 +260,48 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
                                                value:self.auth.currentUser.displayName
-                                              action:^{ [weakSelf changeName]; }],
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeUpdateName withDelegate:self] execute:NO]; }],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
                                                value:self.auth.currentUser.email
-                                              action:^{ [weakSelf showUpdateEmailDialog]; }]
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeUpdateEmail withDelegate:self] execute:YES]; }]
       ]],
       [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellAddPassword]
-                                              action:^{ [weakSelf showUpdatePasswordDialog:YES]; }]
+                                              action:^{
+
+        FUIAccountSettingsOperationUpdatePassword *operation = (FUIAccountSettingsOperationUpdatePassword *)[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeUpdatePassword withDelegate:self];
+        operation.newPassword = YES;
+        [operation execute:YES];
+                                               }]
       ]],
       [FUIStaticContentTableViewSection
           sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
       [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
-                                              action:^{ [weakSelf onSignOutSelected]; }
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeSignOut withDelegate:self] execute:NO]; }
                                                 type:FUIStaticContentTableViewCellTypeButton],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{ [weakSelf showDeleteAccountDialog]; }
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeDeleteAccount withDelegate:self] execute:YES]; }
                                                 type:FUIStaticContentTableViewCellTypeButton]
       ]],
     ]];
 }
 
 - (void)updateTableStateLinkedAccountWithEmailPassword {
-    __weak typeof(self) weakSelf = self;
   NSMutableArray *linkedAccounts =
       [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
   for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
     if ([userInfo.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
       continue;
     }
-    FUIStaticContentTableViewCellAction action =
-        ^{ [weakSelf onLinkedAccountSelected:userInfo]; };
+    FUIStaticContentTableViewCellAction action = ^{
+      FUIAccountSettingsOperationUnlinkAccount *operation =
+          (FUIAccountSettingsOperationUnlinkAccount *)[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeUnlinkAccount
+                                            withDelegate:self];
+      operation.provider = userInfo;
+      [operation execute:NO];
+     };
     FUIStaticContentTableViewCell *cell =
         [FUIStaticContentTableViewCell cellWithTitle:userInfo.providerID
                                                value:userInfo.displayName
@@ -327,24 +315,29 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
                                                value:self.auth.currentUser.displayName
-                                              action:^{ [weakSelf changeName]; }],
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeUpdateName withDelegate:self] execute:NO]; }],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
                                                value:self.auth.currentUser.email
-                                              action:^{ [weakSelf showUpdateEmailDialog]; }]
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeUpdateEmail withDelegate:self] execute:YES]; }]
       ]],
       [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
                                                    cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellChangePassword]
-                                              action:^{ [weakSelf showUpdatePasswordDialog:NO]; }]
+                                              action:^{
+          FUIAccountSettingsOperationUpdatePassword *operation =
+              (FUIAccountSettingsOperationUpdatePassword *)[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeUpdatePassword withDelegate:self];
+          operation.newPassword = NO;
+          [operation execute:YES];
+        }]
       ]],
       [FUIStaticContentTableViewSection
           sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
       [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
-                                              action:^{ [weakSelf onSignOutSelected]; }
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeSignOut withDelegate:self] execute:NO]; }
                                                  type:FUIStaticContentTableViewCellTypeButton],
         [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{ [weakSelf showDeleteAccountDialog]; }
+                                              action:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeDeleteAccount withDelegate:self] execute:YES]; }
                                                 type:FUIStaticContentTableViewCellTypeButton]
       ]],
     ]];
@@ -368,6 +361,37 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
   _accountState = [self accountState];
   [self populateTableHeader];
   [self updateTable];
+}
+
+- (void)popToRoot {
+  [self.navigationController popToViewController:self animated:YES];
+}
+
+
+#pragma mark - FUIAccountSettingsOperationDelegate
+- (void)presentViewController:(UIViewController *)controller {
+  [self presentViewController:controller animated:YES completion:nil];
+}
+
+- (void)pushViewController:(UIViewController *)controller {
+  [super pushViewController:controller];
+}
+
+- (void)presentBaseController {
+  [self popToRoot];
+  [self updateUI];
+}
+
+- (FIRAuth *)auth {
+  return super.auth;
+}
+
+- (void)incrementActivity {
+  [super incrementActivity];
+}
+
+- (void)decrementActivity {
+  [super decrementActivity];
 }
 
 @end

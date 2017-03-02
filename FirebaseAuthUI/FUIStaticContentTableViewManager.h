@@ -22,6 +22,8 @@
 @class FUIStaticContentTableViewContent;
 @class FUIStaticContentTableViewSection;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - Block Type Definitions
 
 /** @typedef FUIStaticContentTableViewCellAction
@@ -272,3 +274,5 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
 @property (weak, nonatomic) IBOutlet UITextField *input;
 
 @end
+
+NS_ASSUME_NONNULL_END

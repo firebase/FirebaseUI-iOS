@@ -14,11 +14,24 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController.h"
+#import "FUIAccountSettingsOperationSignOut.h"
 
-@interface FUIAccountSettingsViewController (Email)
+#import "FUIAccountSettingsOperation_Internal.h"
 
-- (void)showUpdateEmailDialog;
-- (void)showUpdateEmailView;
+@implementation FUIAccountSettingsOperationSignOut
+
+- (void)execute:(BOOL)showDialog {
+  [self signOut];
+}
+
+- (void)signOut{
+  NSError *error;
+  [_delegate.authUI signOutWithError:&error];
+  [self finishOperationWithUser:_delegate.auth.currentUser error:error];
+  if (!error) {
+    [_delegate presentBaseController];
+  }
+
+}
 
 @end

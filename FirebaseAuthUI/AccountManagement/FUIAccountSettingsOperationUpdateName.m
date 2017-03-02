@@ -14,17 +14,17 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController+Common.h"
+#import "FUIAccountSettingsOperationUpdateName.h"
 
-#import "FUIStaticContentTableViewController.h"
-#import <FirebaseAuth/FirebaseAuth.h>
+#import "FUIAccountSettingsOperation_Internal.h"
 
-@implementation FUIAccountSettingsViewController (ChangeName)
 
-- (void)changeName {
+@implementation FUIAccountSettingsOperationUpdateName
+
+- (void)execute:(BOOL)showDialog {
   __block FUIStaticContentTableViewCell *cell =
       [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings name]
-                                             value:self.auth.currentUser.displayName
+                                             value:_delegate.auth.currentUser.displayName
                                             action:nil
                                               type:FUIStaticContentTableViewCellTypeInput];
   FUIStaticContentTableViewContent *contents =
@@ -36,26 +36,20 @@
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc] initWithContents:contents nextTitle:[FUIAuthStrings save]
                                                        nextAction:^{
-        [self onSaveName:cell.value];
+        [self onUpdateName:cell.value];
       }];
   controller.title = @"Edit name";
-  [self pushViewController:controller];
+  [_delegate pushViewController:controller];
 }
 
-- (void)onSaveName:(NSString *)username {
-  [self incrementActivity];
-  FIRUserProfileChangeRequest *request = [self.auth.currentUser profileChangeRequest];
+- (void)onUpdateName:(NSString *)username {
+  [_delegate incrementActivity];
+  FIRUserProfileChangeRequest *request = [_delegate.auth.currentUser profileChangeRequest];
   request.displayName = username;
   [request commitChangesWithCompletion:^(NSError *_Nullable error) {
-    [self decrementActivity];
-
-    if (error) {
-      [self finishSignUpWithUser:nil error:error];
-      return;
-    }
-    [self finishSignUpWithUser:self.auth.currentUser error:nil];
-    [self popToRoot];
-    [self updateUI];
+    [_delegate decrementActivity];
+    [self finishOperationWithUser:_delegate.auth.currentUser error:error];
+    [_delegate presentBaseController];
   }];
 }
 

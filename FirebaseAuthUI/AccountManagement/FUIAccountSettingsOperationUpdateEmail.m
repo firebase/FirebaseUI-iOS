@@ -14,9 +14,20 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController+Common.h"
+#import "FUIAccountSettingsOperationUpdateEmail.h"
 
-@implementation FUIAccountSettingsViewController (Email)
+#import "FUIAccountSettingsOperation_Internal.h"
+#import "FUIAuthBaseViewController.h"
+
+@implementation FUIAccountSettingsOperationUpdateEmail
+
+- (void)execute:(BOOL)showDialog {
+  if (showDialog) {
+    [self showUpdateEmailDialog];
+  } else {
+    [self showUpdateEmailView];
+  }
+}
 
 - (void)showUpdateEmailDialog {
   NSString *message;
@@ -35,7 +46,7 @@
 - (void)showUpdateEmail {
   __block FUIStaticContentTableViewCell *cell =
       [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings email]
-                                             value:self.auth.currentUser.email
+                                             value:_delegate.auth.currentUser.email
                                             action:nil
                                               type:FUIStaticContentTableViewCellTypeInput];
   FUIStaticContentTableViewContent *contents =
@@ -52,22 +63,20 @@
         [self updateEmailForCurrentUser:cell.value];
       }];
   controller.title = @"Edit email";
-  [self pushViewController:controller];
+  [_delegate pushViewController:controller];
 
 }
 
 - (void)updateEmailForCurrentUser:(NSString *)email {
-  if (![[self class] isValidEmail:email]) {
+  if (![[FUIAuthBaseViewController class] isValidEmail:email]) {
     [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
   } else {
-    [self incrementActivity];
-    [self.auth.currentUser updateEmail:email completion:^(NSError * _Nullable error) {
-      [self decrementActivity];
+    [_delegate incrementActivity];
+    [_delegate.auth.currentUser updateEmail:email completion:^(NSError * _Nullable error) {
+      [_delegate decrementActivity];
+      [self finishOperationWithUser:_delegate.auth.currentUser error:error];
       if (!error) {
-        [self popToRoot];
-        [self updateUI];
-      } else {
-        [self finishSignUpWithUser:self.auth.currentUser error:error];
+      [_delegate presentBaseController];
       }
     }];
   }

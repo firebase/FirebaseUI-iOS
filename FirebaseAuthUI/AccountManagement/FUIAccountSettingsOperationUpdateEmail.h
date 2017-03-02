@@ -14,10 +14,8 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController.h"
+#import "FUIAccountSettingsOperation.h"
 
-@interface FUIAccountSettingsViewController (DeleteAccount)
+@interface FUIAccountSettingsOperationUpdateEmail : FUIAccountSettingsOperation
 
-- (void)showDeleteAccountDialog;
-- (void)showDeleteAccountViewWithPassword;
 @end

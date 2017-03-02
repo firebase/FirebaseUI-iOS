@@ -14,9 +14,19 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController+Common.h"
+#import "FUIAccountSettingsOperationDeleteAccount.h"
 
-@implementation FUIAccountSettingsViewController (DeleteAccount)
+#import "FUIAccountSettingsOperation_Internal.h"
+
+@implementation FUIAccountSettingsOperationDeleteAccount
+
+- (void)execute:(BOOL)showDialog {
+  if (showDialog) {
+    [self showDeleteAccountDialog];
+  } else {
+    [self showDeleteAccountView];
+  }
+}
 
 - (void)showDeleteAccountDialog {
   [self showSelectProviderDialog:^(id<FIRUserInfo> provider) {
@@ -41,7 +51,7 @@
                                     headerText:message];
   // TODO: add localization
   controller.title = @"Delete account";
-  [self pushViewController:controller];
+  [_delegate pushViewController:controller];
 
 }
 
@@ -65,10 +75,10 @@
                 nextAction:^{ [self deleteCurrentAccountWithPassword:passwordCell.value]; }
                 headerText:message
                 footerText:@"Forgot Password?"
-              footerAction:^{ [self onForgotPassword]; }];
+              footerAction:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeForgotPassword withDelegate:_delegate ] execute:NO]; }];
   // TODO: add localization
   controller.title = @"Delete account";
-  [self pushViewController:controller];
+  [_delegate pushViewController:controller];
 }
 
 - (void)onDeleteAccountViewNextAction {
@@ -88,7 +98,7 @@
                              handler:nil];
   [alertController addAction:deleteAction];
   [alertController addAction:action];
-  [self presentViewController:alertController animated:YES completion:nil];
+  [_delegate presentViewController:alertController];
 
 }
 
@@ -99,14 +109,12 @@
 }
 
 - (void)deleteCurrentAccount {
-  [self incrementActivity];
-  [self.auth.currentUser deleteWithCompletion:^(NSError * _Nullable error) {
-    [self decrementActivity];
+  [_delegate incrementActivity];
+  [_delegate.auth.currentUser deleteWithCompletion:^(NSError * _Nullable error) {
+    [_delegate decrementActivity];
+    [self finishOperationWithUser:_delegate.auth.currentUser error:error];
     if (!error) {
-      [self popToRoot];
-      [self updateUI];
-    } else {
-      [self finishSignUpWithUser:self.auth.currentUser error:error];
+      [_delegate presentBaseController];
     }
   }];
 }

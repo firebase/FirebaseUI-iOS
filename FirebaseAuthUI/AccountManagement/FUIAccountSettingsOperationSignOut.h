@@ -14,10 +14,8 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsViewController.h"
+#import "FUIAccountSettingsOperation.h"
 
-@interface FUIAccountSettingsViewController (Password)
+@interface FUIAccountSettingsOperationSignOut : FUIAccountSettingsOperation
 
-- (void)showUpdatePasswordDialog:(BOOL)newPassword;
-- (void)showUpdatePasswordView;
 @end

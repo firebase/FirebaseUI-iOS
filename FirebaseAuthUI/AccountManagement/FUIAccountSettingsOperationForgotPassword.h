@@ -13,11 +13,8 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+#import "FUIAccountSettingsOperation.h"
 
-#import "FUIAccountSettingsViewController.h"
-
-@interface FUIAccountSettingsViewController (ChangeName)
-
-- (void)changeName;
+@interface FUIAccountSettingsOperationForgotPassword : FUIAccountSettingsOperation
 
 @end
