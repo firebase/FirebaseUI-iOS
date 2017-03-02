@@ -1,4 +1,4 @@
-osx_image: xcode8.1
+osx_image: xcode8.2.1
 language: objective-c
 xcode_workspace: FirebaseUI.xcworkspace
 xcode_scheme: FirebaseUI
@@ -11,4 +11,3 @@ before_install:
   - pod install --repo-update
 
 script: ./test.sh
-
