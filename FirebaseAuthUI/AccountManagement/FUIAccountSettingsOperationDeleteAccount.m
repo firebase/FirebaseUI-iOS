@@ -24,7 +24,7 @@
   if (showDialog) {
     [self showDeleteAccountDialog];
   } else {
-    [self showDeleteAccountView];
+    [self showDeleteAccountViewWithPassword];
   }
 }
 
@@ -40,19 +40,6 @@
   } alertTitle:@"Delete Account?"
                     alertMessage:@"This will erase all data associated with your account, and can't be undone You will need t osign in again to complete this action"
                 alertCloseButton:[FUIAuthStrings cancel]];
-}
-
-- (void)showDeleteAccountView {
-  NSString *message = @"This will erase all data assosiated with your account, and can't be undone. Are you sure you want to delete your account?";
-  UIViewController *controller = [[FUIStaticContentTableViewController alloc]
-                                    initWithContents:nil
-                                    nextTitle:@"Delete"
-                                    nextAction:^{ [self onDeleteAccountViewNextAction]; }
-                                    headerText:message];
-  // TODO: add localization
-  controller.title = @"Delete account";
-  [_delegate pushViewController:controller];
-
 }
 
 - (void)showDeleteAccountViewWithPassword {
@@ -80,6 +67,20 @@
   controller.title = @"Delete account";
   [_delegate pushViewController:controller];
 }
+
+- (void)showDeleteAccountView {
+  NSString *message = @"This will erase all data assosiated with your account, and can't be undone. Are you sure you want to delete your account?";
+  UIViewController *controller = [[FUIStaticContentTableViewController alloc]
+                                    initWithContents:nil
+                                    nextTitle:@"Delete"
+                                    nextAction:^{ [self onDeleteAccountViewNextAction]; }
+                                    headerText:message];
+  // TODO: add localization
+  controller.title = @"Delete account";
+  [_delegate pushViewController:controller];
+
+}
+
 
 - (void)onDeleteAccountViewNextAction {
   UIAlertController *alertController =
