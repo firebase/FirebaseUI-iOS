@@ -66,11 +66,10 @@ Alternatively you can use `pod try FirebaseUI` to install the Objective-C or Swi
 
 ## Mandatory Sample Project Configuration
 
-You have to configure Xcode project in order to run samples.
+You have to configure your Xcode project in order to run samples.
 
-1. You project should contain `GoogleService-Info.plist` downloaded from [Firebase console](https://console.firebase.google.com).<br>
-Copy `GoogleService-Info.plist` into sample project folder (`samples/obj-c/GoogleService-Info.plist` or `samples/swift/GoogleService-Info.plist`).<br>
-Find more instructions and download a plist file from the [Firebase console](https://console.firebase.google.com).
+1. Your Xcode project should contain `GoogleService-Info.plist`, downloaded from [Firebase console](https://console.firebase.google.com) when you add your app to a Firebase project.<br>
+Copy `GoogleService-Info.plist` into sample the project folder (`samples/obj-c/GoogleService-Info.plist` or `samples/swift/GoogleService-Info.plist`).
 
 2. Update URL Types.<br>
 Go to `Project Settings -> Info tab -> Url Types` and update values for:
@@ -87,7 +86,7 @@ Facebook SDK requires keychain sharing.<br>
 This can be done here: `Project Settings -> Capabilities -> KeyChain Sharing -> ON`
 
 5. Don't forget to configure your Firebase App Database using [Firebase console](https://console.firebase.google.com).<br>
-Database should contain appropriate read/write permissions and folders (`objc_demo-chat` and `swift_demo-chat` respectfully)
+Database should contain appropriate read/write permissions and folders (`objc_demo-chat` and `swift_demo-chat` respectively)
 
 ## Contributing to FirebaseUI
 
