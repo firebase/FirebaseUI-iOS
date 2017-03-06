@@ -93,6 +93,12 @@
       case FIRAuthErrorCodeUserDisabled:
         [self showAlertWithMessage:[FUIAuthStrings accountDisabledError]];
         return;
+      case FUIAuthErrorCodeCantFindProvider:
+        {
+          NSString *message = [NSString stringWithFormat:@"Can't find provider for %@", error.userInfo[FUIAuthErrorUserInfoProviderIDKey]];
+          [self showAlertWithMessage:message];
+          return;
+        }
       case FIRAuthErrorCodeUserMismatch:
         [self showAlertWithMessage:@"Emails don't match"];
         return;
@@ -157,9 +163,11 @@
 
   if (!providerUI) {
     // TODO: Show alert or print error
-    NSError *error = [FUIAuthErrorUtils errorWithCode:FUIAuthErrorCodeCantFindProvider userInfo:@{FUIAuthErrorUserInfoProviderIDKey : provider.providerID }];
+    NSError *error = [FUIAuthErrorUtils errorWithCode:FUIAuthErrorCodeCantFindProvider
+                                             userInfo:@{
+      FUIAuthErrorUserInfoProviderIDKey : provider.providerID
+    }];
     [self finishOperationWithError:error];
-    NSLog(@"Can't find provider for %@", provider.providerID);
     return;
   }
 
