@@ -18,4 +18,7 @@
 
 @interface FUIAccountSettingsOperationDeleteAccount : FUIAccountSettingsOperation
 
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+    NS_UNAVAILABLE;
+
 @end

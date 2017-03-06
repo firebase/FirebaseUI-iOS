@@ -16,20 +16,25 @@
 
 #import "FUIAccountSettingsOperation_Internal.h"
 
-#import "FUIAuthBaseViewController.h"
-#import "FUIAccountSettingsOperationUnlinkAccount.h"
-#import "FUIAccountSettingsOperationUpdateName.h"
 #import "FUIAccountSettingsOperationDeleteAccount.h"
-#import "FUIAccountSettingsOperationUpdateEmail.h"
-#import "FUIAccountSettingsOperationUpdatePassword.h"
 #import "FUIAccountSettingsOperationForgotPassword.h"
 #import "FUIAccountSettingsOperationSignOut.h"
+#import "FUIAccountSettingsOperationUnlinkAccount.h"
+#import "FUIAccountSettingsOperationUpdateEmail.h"
+#import "FUIAccountSettingsOperationUpdateName.h"
+#import "FUIAccountSettingsOperationUpdatePassword.h"
+#import "FUIAuthBaseViewController.h"
+#import "FUIAuthErrorUtils.h"
 
 @implementation FUIAccountSettingsOperation
 
-+ (instancetype)createOperation:(FUIAccountSettingsOperationType)operationType
-                   withDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate {
-  return [[[self classForOperation:operationType] alloc] initWithDelegate:delegate];
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+                                 showDialog:(BOOL)showDialog {
+  [[[self alloc] initWithDelegate:delegate] execute:showDialog];
+}
+
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate {
+  [[[self alloc] initWithDelegate:delegate] execute:NO];
 }
 
 - (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate {
@@ -44,9 +49,27 @@
   
 }
 
+- (FUIAccountSettingsOperationType)operationType {
+    static NSDictionary* classMap = nil;
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+      classMap = @{
+        NSStringFromClass([FUIAccountSettingsOperationUpdateName class])     : @(FUIAccountSettingsOperationTypeUpdateName),
+        NSStringFromClass([FUIAccountSettingsOperationUpdatePassword class]) : @(FUIAccountSettingsOperationTypeUpdatePassword),
+        NSStringFromClass([FUIAccountSettingsOperationForgotPassword class]) : @(FUIAccountSettingsOperationTypeForgotPassword),
+        NSStringFromClass([FUIAccountSettingsOperationUpdateEmail class])    : @(FUIAccountSettingsOperationTypeUpdateEmail),
+        NSStringFromClass([FUIAccountSettingsOperationUnlinkAccount class])  : @(FUIAccountSettingsOperationTypeUnlinkAccount),
+        NSStringFromClass([FUIAccountSettingsOperationSignOut class])        : @(FUIAccountSettingsOperationTypeSignOut),
+        NSStringFromClass([FUIAccountSettingsOperationDeleteAccount class])  : @(FUIAccountSettingsOperationTypeDeleteAccount)
+      };
+    });
+  return [classMap[NSStringFromClass([self class])] integerValue];
+}
+
 #pragma mark - protected methods
 
-- (void)finishOperationWithUser:(nullable FIRUser *)user error:(NSError *)error {
+- (void)finishOperationWithError:(NSError *)error {
   if (error) {
     switch (error.code) {
       case FIRAuthErrorCodeEmailAlreadyInUse:
@@ -76,7 +99,7 @@
     }
   }
 
-  [[FUIAuth defaultAuthUI] invokeResultCallbackWithUser:user error:nil];
+  [[FUIAuth defaultAuthUI] invokeOperationCallback:[self operationType] error:error];
 }
 
 - (void)showSelectProviderDialog:(FUIAccountSettingsChooseProviderHandler)handler
@@ -134,6 +157,8 @@
 
   if (!providerUI) {
     // TODO: Show alert or print error
+    NSError *error = [FUIAuthErrorUtils errorWithCode:FUIAuthErrorCodeCantFindProvider userInfo:@{FUIAuthErrorUserInfoProviderIDKey : provider.providerID }];
+    [self finishOperationWithError:error];
     NSLog(@"Can't find provider for %@", provider.providerID);
     return;
   }
@@ -147,14 +172,14 @@
                                 NSError *_Nullable error) {
                      if (error) {
                        [_delegate decrementActivity];
-                       [self finishOperationWithUser:_delegate.auth.currentUser error:error];
+                       [self finishOperationWithError:error];
                        return;
                      }
                      [_delegate.auth.currentUser reauthenticateWithCredential:credential
                                                               completion:^(NSError *_Nullable error) {
                                                                 [_delegate decrementActivity];
                                                                 if (error) {
-                                                                  [self finishOperationWithUser:_delegate.auth.currentUser error:error];
+                                                                  [self finishOperationWithError:error];
                                                                } else {
                                                                   if (handler) {
                                                                     handler();
@@ -179,7 +204,7 @@
                   completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
                     [_delegate decrementActivity];
 
-                    [self finishOperationWithUser:user error:error];
+                    [self finishOperationWithError:error];
                     if (!error && handler) {
                       handler();
                     }
@@ -220,47 +245,10 @@
       }
       headerText:message
       footerText:@"Forgot password?" footerAction:^{
-        [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeForgotPassword withDelegate:_delegate ] execute:NO];
+        [FUIAccountSettingsOperationForgotPassword executeOperationWithDelegate:_delegate];
       }];
   controller.title = @"Verify it's you";
   [_delegate pushViewController:controller];
-}
-
-
-
-#pragma mark - helper methods
-
-+ (Class)classForOperation:(FUIAccountSettingsOperationType)operationType {
-  Class operationClass;
-  switch (operationType) {
-    case FUIAccountSettingsOperationTypeUnlinkAccount:
-      operationClass = [FUIAccountSettingsOperationUnlinkAccount class];
-      break;
-    case FUIAccountSettingsOperationTypeUpdateName:
-      operationClass = [FUIAccountSettingsOperationUpdateName class];
-      break;
-    case FUIAccountSettingsOperationTypeDeleteAccount:
-      operationClass = [FUIAccountSettingsOperationDeleteAccount class];
-      break;
-    case FUIAccountSettingsOperationTypeUpdateEmail:
-      operationClass = [FUIAccountSettingsOperationUpdateEmail class];
-      break;
-    case FUIAccountSettingsOperationTypeUpdatePassword:
-      operationClass = [FUIAccountSettingsOperationUpdatePassword class];
-      break;
-    case FUIAccountSettingsOperationTypeForgotPassword:
-      operationClass = [FUIAccountSettingsOperationForgotPassword class];
-      break;
-    case FUIAccountSettingsOperationTypeSignOut:
-      operationClass = [FUIAccountSettingsOperationSignOut class];
-      break;
-
-    default:
-      break;
-  }
-
-  return operationClass;
-  
 }
 
 @end

@@ -161,6 +161,7 @@
 		C329B1791DAC121200059A13 /* FirebaseAuthUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8DCC4FC11D678CDC00B0D3C4 /* FirebaseAuthUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C329B17C1DAC149B00059A13 /* FirebaseUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D2A84A61D678B2B0058DF04 /* FirebaseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C329B1AE1DAC5D0B00059A13 /* FirebaseUISampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B15F1DA8694B00059A13 /* FirebaseUISampleUITests.m */; };
+		C33B0F3D1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h in Headers */ = {isa = PBXBuildFile; fileRef = C33B0F3C1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C380A7D61D89ECF1005C031D /* ic_twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D01D89ECF1005C031D /* ic_twitter.png */; };
 		C380A7D71D89ECF1005C031D /* ic_twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D11D89ECF1005C031D /* ic_twitter@2x.png */; };
 		C380A7D81D89ECF1005C031D /* ic_twitter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D21D89ECF1005C031D /* ic_twitter@3x.png */; };
@@ -601,6 +602,7 @@
 		C329B15B1DA8694A00059A13 /* FirebaseUISampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirebaseUISampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C329B15F1DA8694B00059A13 /* FirebaseUISampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebaseUISampleUITests.m; sourceTree = "<group>"; };
 		C329B1611DA8694B00059A13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C33B0F3C1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsOperationType.h; sourceTree = "<group>"; };
 		C380A7D01D89ECF1005C031D /* ic_twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_twitter.png; sourceTree = "<group>"; };
 		C380A7D11D89ECF1005C031D /* ic_twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_twitter@2x.png"; sourceTree = "<group>"; };
 		C380A7D21D89ECF1005C031D /* ic_twitter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_twitter@3x.png"; sourceTree = "<group>"; };
@@ -1323,6 +1325,7 @@
 				C3CA198F1E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.m */,
 				C3CA19901E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.h */,
 				C3CA19911E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.m */,
+				C33B0F3C1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h */,
 				C3CA19921E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.h */,
 				C3CA19931E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.m */,
 				C3CA19941E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.h */,
@@ -1382,6 +1385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DA941721D678F5400CD3685 /* FUIAuthPickerViewController.h in Headers */,
+				C33B0F3D1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h in Headers */,
 				C3CA19A11E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.h in Headers */,
 				8DA941791D678F5400CD3685 /* FUIAuthBaseViewController.h in Headers */,
 				8DA941771D678F5400CD3685 /* FUIAuth.h in Headers */,

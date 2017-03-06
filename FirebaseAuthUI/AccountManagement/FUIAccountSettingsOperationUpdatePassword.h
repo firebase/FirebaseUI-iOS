@@ -18,6 +18,15 @@
 
 @interface FUIAccountSettingsOperationUpdatePassword : FUIAccountSettingsOperation
 
-@property (nonatomic, assign)BOOL newPassword;
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+                          showDialog:(BOOL)showDialog NS_UNAVAILABLE;
+
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+    NS_UNAVAILABLE;
+
+
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+                          showDialog:(BOOL)showDialog
+                         newPassword:(BOOL)newPassword;
 
 @end

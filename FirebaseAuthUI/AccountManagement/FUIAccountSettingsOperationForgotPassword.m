@@ -64,7 +64,7 @@
                                  [_delegate decrementActivity];
 
                                  if (error) {
-                                   [self finishOperationWithUser:nil error:error];
+                                   [self finishOperationWithError:error];
                                    return;
                                  }
 

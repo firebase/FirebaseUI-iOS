@@ -21,18 +21,6 @@
 @class FUIAuth;
 @class UIViewController;
 
-typedef NS_ENUM(NSInteger, FUIAccountSettingsOperationType) {
-  FUIAccountSettingsOperationTypeUnsupported = 0,
-  FUIAccountSettingsOperationTypeUpdateName,
-  FUIAccountSettingsOperationTypeUpdatePassword,
-  FUIAccountSettingsOperationTypeForgotPassword,
-  FUIAccountSettingsOperationTypeUpdateEmail,
-  FUIAccountSettingsOperationTypeUnlinkAccount,
-  FUIAccountSettingsOperationTypeSignOut,
-  FUIAccountSettingsOperationTypeDeleteAccount,
-};
-
-
 @protocol FUIAccountSettingsOperationDelegate <NSObject>
 - (void)presentViewController:(UIViewController *)controller;
 - (void)pushViewController:(UIViewController *)controller;
@@ -49,10 +37,9 @@ typedef NS_ENUM(NSInteger, FUIAccountSettingsOperationType) {
   id<FUIAccountSettingsOperationDelegate> _delegate;
 }
 
-- (void)execute:(BOOL)showDialog;
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+                          showDialog:(BOOL)showDialog;
 
-+ (instancetype)createOperation:(FUIAccountSettingsOperationType)operationType
-                   withDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate;
-
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate;
 
 @end

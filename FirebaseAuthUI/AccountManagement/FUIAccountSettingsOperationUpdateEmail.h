@@ -18,4 +18,7 @@
 
 @interface FUIAccountSettingsOperationUpdateEmail : FUIAccountSettingsOperation
 
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+                          showDialog:(BOOL)showDialog NS_UNAVAILABLE;
+
 @end

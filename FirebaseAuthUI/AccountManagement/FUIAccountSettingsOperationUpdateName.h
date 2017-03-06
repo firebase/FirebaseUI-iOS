@@ -18,4 +18,7 @@
 
 @interface FUIAccountSettingsOperationUpdateName : FUIAccountSettingsOperation
 
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+    NS_UNAVAILABLE;
+
 @end

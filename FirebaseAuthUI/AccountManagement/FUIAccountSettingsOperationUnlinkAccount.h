@@ -20,6 +20,15 @@
 
 @interface FUIAccountSettingsOperationUnlinkAccount : FUIAccountSettingsOperation
 
-@property (nonatomic, weak) id<FIRUserInfo> provider;
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+                          showDialog:(BOOL)showDialog NS_UNAVAILABLE;
+
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+    NS_UNAVAILABLE;
+
+
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+                          showDialog:(BOOL)showDialog
+                            provider:(id<FIRUserInfo>)provider;
 
 @end

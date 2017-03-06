@@ -74,7 +74,7 @@
     [_delegate incrementActivity];
     [_delegate.auth.currentUser updateEmail:email completion:^(NSError * _Nullable error) {
       [_delegate decrementActivity];
-      [self finishOperationWithUser:_delegate.auth.currentUser error:error];
+      [self finishOperationWithError:error];
       if (!error) {
       [_delegate presentBaseController];
       }

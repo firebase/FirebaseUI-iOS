@@ -18,12 +18,34 @@
 
 #import "FUIAccountSettingsOperation_Internal.h"
 
+@interface FUIAccountSettingsOperationUnlinkAccount ()
+{
+  id<FIRUserInfo> _provider;
+}
+
+@end 
+
+
 @implementation FUIAccountSettingsOperationUnlinkAccount
+
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+                          showDialog:(BOOL)showDialog
+                            provider:(id<FIRUserInfo>)provider {
+  [[[self alloc] initWithDelegate:delegate provider:provider] execute:showDialog];
+}
+
+- (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+                        provider:(id<FIRUserInfo>) provider {
+  if (self = [super initWithDelegate:delegate]) {
+    _provider = provider;
+  }
+  return self;
+}
 
 - (void)execute:(BOOL)showDialog {
   __block FUIStaticContentTableViewCell *cell =
-      [FUIStaticContentTableViewCell cellWithTitle:self.provider.providerID
-                                             value:self.provider.displayName
+      [FUIStaticContentTableViewCell cellWithTitle:_provider.providerID
+                                             value:_provider.displayName
                                             action:nil
                                               type:FUIStaticContentTableViewCellTypeDefault];
   FUIStaticContentTableViewContent *contents =
@@ -64,10 +86,10 @@
 }
 
 - (void)unlinkAcount {
-  [[FIRAuth auth].currentUser unlinkFromProvider:self.provider.providerID
+  [[FIRAuth auth].currentUser unlinkFromProvider:_provider.providerID
                                       completion:^(FIRUser * _Nullable user,
                                                    NSError * _Nullable error) {
-      [self finishOperationWithUser:user error:error];
+      [self finishOperationWithError:error];
       [_delegate presentBaseController];
   }];
 }

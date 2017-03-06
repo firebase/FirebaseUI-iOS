@@ -17,6 +17,7 @@
 #import "FUIAccountSettingsOperationDeleteAccount.h"
 
 #import "FUIAccountSettingsOperation_Internal.h"
+#import "FUIAccountSettingsOperationForgotPassword.h"
 
 @implementation FUIAccountSettingsOperationDeleteAccount
 
@@ -62,7 +63,7 @@
                 nextAction:^{ [self deleteCurrentAccountWithPassword:passwordCell.value]; }
                 headerText:message
                 footerText:@"Forgot Password?"
-              footerAction:^{ [[FUIAccountSettingsOperation createOperation:FUIAccountSettingsOperationTypeForgotPassword withDelegate:_delegate ] execute:NO]; }];
+              footerAction:^{ [FUIAccountSettingsOperationForgotPassword executeOperationWithDelegate:_delegate]; }];
   // TODO: add localization
   controller.title = @"Delete account";
   [_delegate pushViewController:controller];
@@ -113,7 +114,7 @@
   [_delegate incrementActivity];
   [_delegate.auth.currentUser deleteWithCompletion:^(NSError * _Nullable error) {
     [_delegate decrementActivity];
-    [self finishOperationWithUser:_delegate.auth.currentUser error:error];
+    [self finishOperationWithError:error];
     if (!error) {
       [_delegate presentBaseController];
     }

@@ -48,7 +48,7 @@
   request.displayName = username;
   [request commitChangesWithCompletion:^(NSError *_Nullable error) {
     [_delegate decrementActivity];
-    [self finishOperationWithUser:_delegate.auth.currentUser error:error];
+    [self finishOperationWithError:error];
     [_delegate presentBaseController];
   }];
 }

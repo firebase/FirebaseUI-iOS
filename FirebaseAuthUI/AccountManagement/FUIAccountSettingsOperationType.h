@@ -14,24 +14,13 @@
 //  limitations under the License.
 //
 
-#import "FUIAccountSettingsOperationSignOut.h"
-
-#import "FUIAccountSettingsOperation_Internal.h"
-
-@implementation FUIAccountSettingsOperationSignOut
-
-- (void)execute:(BOOL)showDialog {
-  [self signOut];
-}
-
-- (void)signOut{
-  NSError *error;
-  [_delegate.authUI signOutWithError:&error];
-  [self finishOperationWithError:error];
-  if (!error) {
-    [_delegate presentBaseController];
-  }
-
-}
-
-@end
+typedef NS_ENUM(NSInteger, FUIAccountSettingsOperationType) {
+  FUIAccountSettingsOperationTypeUnsupported = 0,
+  FUIAccountSettingsOperationTypeUpdateName,
+  FUIAccountSettingsOperationTypeUpdatePassword,
+  FUIAccountSettingsOperationTypeForgotPassword,
+  FUIAccountSettingsOperationTypeUpdateEmail,
+  FUIAccountSettingsOperationTypeUnlinkAccount,
+  FUIAccountSettingsOperationTypeSignOut,
+  FUIAccountSettingsOperationTypeDeleteAccount,
+};

@@ -28,6 +28,8 @@
 @class FUIPasswordRecoveryViewController;
 @class FUIPasswordVerificationViewController;
 
+#import "FUIAccountSettingsOperationType.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /** @typedef FUIAuthResultCallback
@@ -52,6 +54,10 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
 - (void)authUI:(FUIAuth *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error;
 
 @optional
+
+// TODO: add docs
+- (void)authUI:(FUIAuth *)authUI didFinishOperation:(FUIAccountSettingsOperationType)operation
+    error:(nullable NSError *)error;
 
 /** @fn authPickerViewControllerForAuthUI:
     @brief Sent to the receiver to ask for an instance of @c FUIAuthPickerViewController subclass

@@ -126,6 +126,15 @@ static const char kAuthAssociationKey;
   });
 }
 
+- (void)invokeOperationCallback:(FUIAccountSettingsOperationType)operation
+                          error:(NSError *_Nullable)error {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    if ([self.delegate respondsToSelector:@selector(authUI:didFinishOperation:error:)]) {
+      [self.delegate authUI:self didFinishOperation:operation error:error];
+    }
+  });
+}
+
 #pragma mark - NSSecureCoding
 
 + (BOOL)supportsSecureCoding {

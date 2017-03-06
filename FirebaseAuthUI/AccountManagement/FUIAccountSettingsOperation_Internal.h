@@ -17,6 +17,8 @@
 #import "FUIAccountSettingsOperation.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
+
+#import "FUIAccountSettingsOperationType.h"
 #import "FUIAuthStrings.h"
 #import "FUIAuth_Internal.h"
 #import "FUIStaticContentTableViewController.h"
@@ -29,7 +31,9 @@ typedef void(^FUIAccountSettingsReauthenticateHandler)(void);
 
 @interface FUIAccountSettingsOperation (Internal)
 
-- (void)finishOperationWithUser:(nullable FIRUser *)user error:(NSError *)error;
+- (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate;
+
+- (void)finishOperationWithError:(NSError *)error;
 
 - (void)reauthenticateWithProviderUI:(id<FIRUserInfo>)provider
                actionHandler:(FUIAccountSettingsReauthenticateHandler)handler;

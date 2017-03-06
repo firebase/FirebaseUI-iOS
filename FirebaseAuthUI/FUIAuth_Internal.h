@@ -27,6 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)invokeResultCallbackWithUser:(FIRUser *_Nullable)user error:(NSError *_Nullable)error;
 
+// TODO: add docs
+- (void)invokeOperationCallback:(FUIAccountSettingsOperationType)operation
+                          error:(NSError *_Nullable)error;
 @end
 
 NS_ASSUME_NONNULL_END

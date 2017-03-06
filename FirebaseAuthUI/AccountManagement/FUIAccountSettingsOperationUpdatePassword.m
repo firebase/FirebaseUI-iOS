@@ -18,11 +18,31 @@
 
 #import "FUIAccountSettingsOperation_Internal.h"
 
+@interface FUIAccountSettingsOperationUpdatePassword ()
+{
+  BOOL _newPassword;
+}
+@end
+
 @implementation FUIAccountSettingsOperationUpdatePassword
+
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+                          showDialog:(BOOL)showDialog
+                         newPassword:(BOOL)newPassword {
+  return [[[self alloc] initWithDelegate:delegate newPassword:newPassword] execute:showDialog];
+}
+
+- (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+                     newPassword:(BOOL)newPassword {
+  if (self = [super initWithDelegate:delegate]) {
+    _newPassword = newPassword;
+  }
+  return self;
+}
 
 - (void)execute:(BOOL)showDialog {
   if (showDialog) {
-    [self showUpdatePasswordDialog:self.newPassword];
+    [self showUpdatePasswordDialog:_newPassword];
   } else {
     [self showUpdatePasswordView];
   }
@@ -78,12 +98,10 @@
   if (!password.length) {
     [self showAlertWithMessage:[FUIAuthStrings weakPasswordError]];
   } else {
-    NSLog(@"%s %@", __FUNCTION__, password);
     [_delegate incrementActivity];
     [_delegate.auth.currentUser updatePassword:password completion:^(NSError * _Nullable error) {
       [_delegate decrementActivity];
-      NSLog(@"updatePassword error %@", error);
-      [self finishOperationWithUser:_delegate.auth.currentUser error:error];
+      [self finishOperationWithError:error];
       if (!error) {
         [_delegate presentBaseController];
       }
