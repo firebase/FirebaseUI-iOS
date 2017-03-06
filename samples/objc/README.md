@@ -1,7 +1,7 @@
-FirebaseUI Chat Demo
-====================
+FirebaseUI Chat Demo in Objective C
+===================================
 
-This is a super simple FirebaseUI Chat demo. It shows:
+This is a super simple FirebaseUI Chat demo in Objective C. It shows:
   1. The ease of integrating with FirebaseUI
   1. Using a `UITableView` outside of a `UITableViewController`
   1. Using custom XIBs in FirebaseUI to achieve a custom look and feel
@@ -20,7 +20,7 @@ Once you've opened the workspace, go into `Supporting Files/Info.plist` and eith
 
 ###Project configuration
 
-Please follow steps described [here](https://github.com/firebase/FirebaseUI-iOS#mandatory-sample-project-configuration) in order to run sample project.
+Please follow steps described [here](https://github.com/firebase/FirebaseUI-iOS#mandatory-sample-project-configuration) in order to run the sample project.
 
 ###Chat Sample
 
@@ -38,3 +38,8 @@ The auth example requires a little more setup (adding url schemes, etc)
 since it depends on the various keys and tokens for the different auth
 services your app will support. Take a look at the [Auth README](../../FirebaseAuthUI/README.md)
 for more information.
+
+###Storage Sample
+
+This sample does not use a logged-in user, so make to set up the [Storage Security Rules](https://firebase.google.com/docs/storage/security/start#sample-rules)
+for your bucket to allow that.
