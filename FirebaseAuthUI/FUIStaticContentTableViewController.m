@@ -41,16 +41,16 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 @implementation FUIStaticContentTableViewController
 
-- (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                                nextTitle:(nullable NSString *)nextTitle
-                               nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction {
+- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                       nextTitle:(nullable NSString *)nextTitle
+                      nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction {
   return [self initWithContents:contents nextTitle:nextTitle nextAction:nextAction headerText:nil];
 }
 
-- (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                                nextTitle:(nullable NSString *)nextTitle
-                               nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
-                               headerText:(nullable NSString *)headerText {
+- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                       nextTitle:(nullable NSString *)nextTitle
+                      nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
+                      headerText:(nullable NSString *)headerText {
   return [self initWithContents:contents
                       nextTitle:nextTitle
                      nextAction:nextAction
@@ -59,13 +59,12 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                    footerAction:nil];
 }
 
-- (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                                nextTitle:(nullable NSString *)actionTitle
-                               nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
-                               headerText:(nullable NSString *)headerText
-                               footerText:(nullable NSString *)footerText
-                             footerAction:
-                                 (nullable FUIStaticContentTableViewCellAction)footerAction {
+- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                       nextTitle:(nullable NSString *)actionTitle
+                      nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
+                      headerText:(nullable NSString *)headerText
+                      footerText:(nullable NSString *)footerText
+                    footerAction:(nullable FUIStaticContentTableViewCellAction)footerAction {
   if (self = [self initWithNibName:NSStringFromClass([self class])
                             bundle:[FUIAuthUtils frameworkBundle]]) {
     _tableViewManager = [[FUIStaticContentTableViewManager alloc] init];

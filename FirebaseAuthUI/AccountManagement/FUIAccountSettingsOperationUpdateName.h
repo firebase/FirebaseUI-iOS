@@ -16,9 +16,20 @@
 
 #import "FUIAccountSettingsOperation.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
+/** @class FUIAccountSettingsOperationUpdateName
+    @brief Handles logic of updating name operation.
+ */
 @interface FUIAccountSettingsOperationUpdateName : FUIAccountSettingsOperation
 
+/** @fn executeOperationWithDelegate:
+    @brief Instead use @c executeOperationWithDelegate:showDialog:
+    @param delegate UI delegate which handles all UI related logic.
+ */
 + (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
     NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

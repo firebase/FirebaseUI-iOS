@@ -25,7 +25,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/** @typedef FUIAccountSettingsChooseProviderHandler
+    @brief The type of block invoked when a select provider dialog button is tapped.
+ */
 typedef void(^FUIAccountSettingsChooseProviderHandler)(id<FIRUserInfo> provider);
+
+/** @typedef FUIAccountSettingsReauthenticateHandler
+    @brief The type of block invoked when reathentication operation is finished.
+ */
 typedef void(^FUIAccountSettingsReauthenticateHandler)(void);
 
 /** @class FUIAccountSettingsOperation
@@ -36,7 +43,7 @@ typedef void(^FUIAccountSettingsReauthenticateHandler)(void);
 /** @fn initWithDelegate:
     @brief Creates new instance of @c FUIAccountSettingsOperation.
  */
-- (nullable instancetype)initWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate;
 
 /** @fn finishOperationWithError:
     @brief Callback which is used for notification of operation result.

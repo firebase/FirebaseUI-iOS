@@ -14,6 +14,9 @@
 //  limitations under the License.
 //
 
+/** @typedef FUIAccountSettingsOperationType
+    @brief List of all possible Account management operations.
+ */
 typedef NS_ENUM(NSInteger, FUIAccountSettingsOperationType) {
   FUIAccountSettingsOperationTypeUnsupported = 0,
   FUIAccountSettingsOperationTypeUpdateName,

@@ -18,6 +18,8 @@
 
 #import "FUIAccountSettingsOperation_Internal.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface FUIAccountSettingsOperationUpdatePassword ()
 {
   BOOL _newPassword;
@@ -61,10 +63,8 @@
 }
 
 - (void)showUpdatePasswordView {
-  [self showVerifyPasswordView:^{
-    [self showUpdatePassword:NO];
-  }
-                       message:@"In oreder to change your password, you first need to enter your current password."];
+  [self showVerifyPasswordView:^{ [self showUpdatePassword:NO]; }
+                       message:@"In order to change your password, you first need to enter your current password."];
 }
 
 - (void)showUpdatePassword:(BOOL)newPassword {
@@ -109,5 +109,6 @@
   }
 }
 
-
 @end
+
+NS_ASSUME_NONNULL_END

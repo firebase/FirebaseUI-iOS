@@ -18,6 +18,8 @@
 
 #import "FUIAuthUtils.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** @var kCellReuseIdentitfier
     @brief The reuse identifier for default style table view cell.
  */
@@ -42,12 +44,12 @@ static NSString *const kInputCellReuseIdentitfier = @"inputCellReuseIdentitfier"
 
 @implementation FUIStaticContentTableViewManager
 
-- (void)setContents:(FUIStaticContentTableViewContent *)contents {
+- (void)setContents:(nullable FUIStaticContentTableViewContent *)contents {
   _contents = contents;
   [self.tableView reloadData];
 }
 
-- (void)setTableView:(UITableView *)tableView {
+- (void)setTableView:(nullable UITableView *)tableView {
   _tableView = tableView;
   [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellReuseIdentitfier];
 
@@ -70,7 +72,7 @@ static NSString *const kInputCellReuseIdentitfier = @"inputCellReuseIdentitfier"
   return _contents.sections[section].cells.count;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
   return _contents.sections[section].title;
 }
 
@@ -144,13 +146,12 @@ static NSString *const kInputCellReuseIdentitfier = @"inputCellReuseIdentitfier"
 
 @implementation FUIStaticContentTableViewContent
 
-+ (nullable instancetype)contentWithSections:
++ (instancetype)contentWithSections:
     (nullable NSArray<FUIStaticContentTableViewSection *> *)sections {
   return [[self alloc] initWithSections:sections];
 }
 
-- (nullable instancetype)initWithSections:
-    (nullable NSArray<FUIStaticContentTableViewSection *> *)sections {
+- (instancetype)initWithSections:(nullable NSArray<FUIStaticContentTableViewSection *> *)sections {
   self = [super init];
   if (self) {
     _sections = [sections copy];
@@ -164,14 +165,13 @@ static NSString *const kInputCellReuseIdentitfier = @"inputCellReuseIdentitfier"
 
 @implementation FUIStaticContentTableViewSection
 
-+ (nullable instancetype)
-    sectionWithTitle:(nullable NSString *)title
-               cells:(nullable NSArray<FUIStaticContentTableViewCell *> *)cells {
++ (instancetype)sectionWithTitle:(nullable NSString *)title
+                           cells:(nullable NSArray<FUIStaticContentTableViewCell *> *)cells {
   return [[self alloc] initWithTitle:title cells:cells];
 }
 
-- (nullable instancetype)initWithTitle:(nullable NSString *)title
-                                 cells:(nullable NSArray<FUIStaticContentTableViewCell *> *)cells {
+- (instancetype)initWithTitle:(nullable NSString *)title
+                        cells:(nullable NSArray<FUIStaticContentTableViewCell *> *)cells {
   self = [super init];
   if (self) {
     _title = [title copy];
@@ -186,61 +186,61 @@ static NSString *const kInputCellReuseIdentitfier = @"inputCellReuseIdentitfier"
 
 @implementation FUIStaticContentTableViewCell
 
-+ (nullable instancetype)cellWithTitle:(nullable NSString *)title {
++ (instancetype)cellWithTitle:(nullable NSString *)title {
   return [[self alloc] initWithTitle:title
                                value:nil
                               action:nil
                                 type:FUIStaticContentTableViewCellTypeDefault];
 }
 
-+ (nullable instancetype)cellWithTitle:(nullable NSString *)title
-                                 value:(nullable NSString *)value {
++ (instancetype)cellWithTitle:(nullable NSString *)title
+                        value:(nullable NSString *)value {
   return [[self alloc] initWithTitle:title
                                value:value
                               action:nil
                                 type:FUIStaticContentTableViewCellTypeDefault];
 }
 
-+ (nullable instancetype)cellWithTitle:(nullable NSString *)title
-                                action:(nullable FUIStaticContentTableViewCellAction)action {
++ (instancetype)cellWithTitle:(nullable NSString *)title
+                       action:(nullable FUIStaticContentTableViewCellAction)action {
   return [[self alloc] initWithTitle:title
                                value:nil
                               action:action
                                 type:FUIStaticContentTableViewCellTypeDefault];
 }
 
-+ (nullable instancetype)cellWithTitle:(nullable NSString *)title
-                                action:(nullable FUIStaticContentTableViewCellAction)action
-                                  type:(FUIStaticContentTableViewCellType) type {
++ (instancetype)cellWithTitle:(nullable NSString *)title
+                       action:(nullable FUIStaticContentTableViewCellAction)action
+                         type:(FUIStaticContentTableViewCellType) type {
   return [[self alloc] initWithTitle:title
                                value:nil
                               action:action
                                 type:type];
 }
 
-+ (nullable instancetype)cellWithTitle:(nullable NSString *)title
-                                 value:(nullable NSString *)value
-                                action:(nullable FUIStaticContentTableViewCellAction)action {
++ (instancetype)cellWithTitle:(nullable NSString *)title
+                        value:(nullable NSString *)value
+                       action:(nullable FUIStaticContentTableViewCellAction)action {
   return [[self alloc] initWithTitle:title
                                value:value
                               action:action
                                 type:FUIStaticContentTableViewCellTypeDefault];
 }
 
-+ (nullable instancetype)cellWithTitle:(nullable NSString *)title
-                                 value:(nullable NSString *)value
-                                action:(nullable FUIStaticContentTableViewCellAction)action
-                                  type:(FUIStaticContentTableViewCellType) type {
++ (instancetype)cellWithTitle:(nullable NSString *)title
+                        value:(nullable NSString *)value
+                       action:(nullable FUIStaticContentTableViewCellAction)action
+                         type:(FUIStaticContentTableViewCellType) type {
   return [[self alloc] initWithTitle:title
                                value:value
                               action:action
                                 type:type];
 }
 
-- (nullable instancetype)initWithTitle:(nullable NSString *)title
-                                 value:(nullable NSString *)value
-                                action:(nullable FUIStaticContentTableViewCellAction)action
-                                  type:(FUIStaticContentTableViewCellType) type {
+- (instancetype)initWithTitle:(nullable NSString *)title
+                        value:(nullable NSString *)value
+                       action:(nullable FUIStaticContentTableViewCellAction)action
+                         type:(FUIStaticContentTableViewCellType) type {
   self = [super init];
   if (self) {
     _title = [title copy];
@@ -278,3 +278,5 @@ static NSString *const kInputCellReuseIdentitfier = @"inputCellReuseIdentitfier"
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

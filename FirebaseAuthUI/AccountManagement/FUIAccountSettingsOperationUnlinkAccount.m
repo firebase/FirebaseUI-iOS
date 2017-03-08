@@ -18,11 +18,12 @@
 
 #import "FUIAccountSettingsOperation_Internal.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface FUIAccountSettingsOperationUnlinkAccount ()
 {
   id<FIRUserInfo> _provider;
 }
-
 @end 
 
 
@@ -59,7 +60,7 @@
       [[FUIStaticContentTableViewController alloc] initWithContents:contents
                                                           nextTitle:@"Unlink"
                                                        nextAction:^{
-          [self showUnlinkConfirmationDialog];
+        [self showUnlinkConfirmationDialog];
       }];
   controller.title = @"Linked account";
   [_delegate pushViewController:controller];
@@ -71,11 +72,9 @@
                                       message:@"You will no longer be able to sign in using your account"
                                preferredStyle:UIAlertControllerStyleAlert];
   UIAlertAction *action =
-  [UIAlertAction actionWithTitle:@"Unlink account"
-                           style:UIAlertActionStyleDestructive
-                         handler:^(UIAlertAction *_Nonnull action) {
-                           [self unlinkAcount];
-                         }];
+      [UIAlertAction actionWithTitle:@"Unlink account"
+                               style:UIAlertActionStyleDestructive
+                             handler:^(UIAlertAction *_Nonnull action) { [self unlinkAcount]; }];
   [alertController addAction:action];
   UIAlertAction *cancelAction =
   [UIAlertAction actionWithTitle:[FUIAuthStrings cancel]
@@ -89,9 +88,11 @@
   [[FIRAuth auth].currentUser unlinkFromProvider:_provider.providerID
                                       completion:^(FIRUser * _Nullable user,
                                                    NSError * _Nullable error) {
-      [self finishOperationWithError:error];
-      [_delegate presentBaseController];
+    [self finishOperationWithError:error];
+    [_delegate presentBaseController];
   }];
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

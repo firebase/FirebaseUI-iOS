@@ -15,9 +15,22 @@
 //
 #import "FUIAccountSettingsOperation.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
+/** @class FUIAccountSettingsOperationForgotPassword
+    @brief Handles logic of 'forgot password' operation.
+ */
 @interface FUIAccountSettingsOperationForgotPassword : FUIAccountSettingsOperation
 
+/** @fn executeOperationWithDelegate:showDialog:
+    @brief Instead use @c executeOperationWithDelegate:
+    @param delegate UI delegate which handles all UI related logic.
+    @param showDialog Determines if operation specific UI should be started with confirmation
+        dialog.
+ */
 + (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                           showDialog:(BOOL)showDialog NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

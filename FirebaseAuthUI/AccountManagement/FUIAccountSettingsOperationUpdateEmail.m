@@ -19,6 +19,8 @@
 #import "FUIAccountSettingsOperation_Internal.h"
 #import "FUIAuthBaseViewController.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation FUIAccountSettingsOperationUpdateEmail
 
 - (void)execute:(BOOL)showDialog {
@@ -37,10 +39,8 @@
 }
 
 - (void)showUpdateEmailView {
-  [self showVerifyPasswordView:^{
-    [self showUpdateEmail];
-  }
-                       message:@"In oreder to change your password, you first need to enter your current password."];
+  [self showVerifyPasswordView:^{ [self showUpdateEmail]; }
+                       message:@"In order to change your password, you first need to enter your current password."];
 }
 
 - (void)showUpdateEmail {
@@ -76,10 +76,12 @@
       [_delegate decrementActivity];
       [self finishOperationWithError:error];
       if (!error) {
-      [_delegate presentBaseController];
+        [_delegate presentBaseController];
       }
     }];
   }
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

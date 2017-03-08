@@ -18,17 +18,42 @@
 
 @protocol FIRUserInfo;
 
+NS_ASSUME_NONNULL_BEGIN
+
+/** @class FUIAccountSettingsOperationUnlinkAccount
+    @brief Handles logic of unlinking from 3P provider operation.
+ */
 @interface FUIAccountSettingsOperationUnlinkAccount : FUIAccountSettingsOperation
 
+/** @fn executeOperationWithDelegate:showDialog:
+    @brief Instead use @c executeOperationWithDelegate:showDialog:provider:
+    @param delegate UI delegate which handles all UI related logic.
+    @param showDialog Determines if operation specific UI should be started with confirmation
+        dialog.
+ */
 + (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                           showDialog:(BOOL)showDialog NS_UNAVAILABLE;
 
+/** @fn executeOperationWithDelegate:
+    @brief Instead use @c executeOperationWithDelegate:showDialog:provider:
+    @param delegate UI delegate which handles all UI related logic.
+ */
 + (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
     NS_UNAVAILABLE;
 
 
+/** @fn executeOperationWithDelegate:showDialog:provider:
+    @brief Creates new instance of @c FUIAccountSettingsOperationUnlinkAccount and executes logic
+        associated with it.
+    @param delegate UI delegate which handles all UI related logic.
+    @param showDialog Determines if operation specific UI should be started with confirmation
+        dialog.
+    @param provider Instance of 3P provider retrieved from currently logged in @c FIRUser.
+ */
 + (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                           showDialog:(BOOL)showDialog
                             provider:(id<FIRUserInfo>)provider;
 
 @end
+
+NS_ASSUME_NONNULL_END

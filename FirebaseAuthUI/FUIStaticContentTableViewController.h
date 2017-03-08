@@ -32,9 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
     @param actionTitle Text displayed on the navigation bar title.
     @param nextAction Action triggered on the right bar item of @C UINavigationController
  */
-- (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                                nextTitle:(nullable NSString *)nextTitle
-                               nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction;
+- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                       nextTitle:(nullable NSString *)nextTitle
+                      nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction;
 
 
 /** @fn initWithContents:nextTitle:nextAction:headerText:
@@ -44,10 +44,10 @@ NS_ASSUME_NONNULL_BEGIN
     @param nextAction Action triggered on the right bar item of @C UINavigationController
     @param headerText Text displayed at the header view controller.
  */
-- (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                                nextTitle:(nullable NSString *)nextTitle
-                               nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
-                               headerText:(nullable NSString *)headerText;
+- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                       nextTitle:(nullable NSString *)nextTitle
+                      nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
+                      headerText:(nullable NSString *)headerText;
 
 /** @fn initWithContents:nextTitle:nextAction:headerText:footerText:footerAction:
     @brief Designated initializer.
@@ -58,12 +58,12 @@ NS_ASSUME_NONNULL_BEGIN
     @param footerText Text displayed at the footer of view controller.
     @param footerAction Action triggered when user taps on the footer.
  */
-- (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                                nextTitle:(nullable NSString *)actionTitle
-                               nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
-                               headerText:(nullable NSString *)headerText
-                               footerText:(nullable NSString *)footerText
-                             footerAction:(nullable FUIStaticContentTableViewCellAction)footerAction
+- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                       nextTitle:(nullable NSString *)actionTitle
+                      nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
+                      headerText:(nullable NSString *)headerText
+                      footerText:(nullable NSString *)footerText
+                    footerAction:(nullable FUIStaticContentTableViewCellAction)footerAction
     NS_DESIGNATED_INITIALIZER;
 
 @end

@@ -16,17 +16,42 @@
 
 #import "FUIAccountSettingsOperation.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
+/** @class FUIAccountSettingsOperationUpdatePassword
+    @brief Handles logic of updating password operation.
+ */
 @interface FUIAccountSettingsOperationUpdatePassword : FUIAccountSettingsOperation
 
+/** @fn executeOperationWithDelegate:showDialog:
+    @brief Instead use @c executeOperationWithDelegate:showDialog:newPassword:
+    @param delegate UI delegate which handles all UI related logic.
+    @param showDialog Determines if operation specific UI should be started with confirmation
+        dialog.
+ */
 + (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                           showDialog:(BOOL)showDialog NS_UNAVAILABLE;
 
+/** @fn executeOperationWithDelegate:
+    @brief Instead use @c executeOperationWithDelegate:showDialog:newPassword:
+    @param delegate UI delegate which handles all UI related logic.
+ */
 + (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
     NS_UNAVAILABLE;
 
 
+/** @fn executeOperationWithDelegate:showDialog:newPassword:
+    @brief Creates new instance of @c FUIAccountSettingsOperationUnlinkAccount and executes logic
+        associated with it.
+    @param delegate UI delegate which handles all UI related logic.
+    @param showDialog Determines if operation specific UI should be started with confirmation
+        dialog.
+    @param newPassword Defines if this is add password (pass YES) or update password operation.
+ */
 + (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                           showDialog:(BOOL)showDialog
                          newPassword:(BOOL)newPassword;
 
 @end
+
+NS_ASSUME_NONNULL_END

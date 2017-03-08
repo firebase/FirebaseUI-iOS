@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
   [[[self alloc] initWithDelegate:delegate] execute:NO];
 }
 
-- (nullable instancetype)initWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate {
+- (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate {
   if (self = [super init]) {
     _delegate = delegate;
   }

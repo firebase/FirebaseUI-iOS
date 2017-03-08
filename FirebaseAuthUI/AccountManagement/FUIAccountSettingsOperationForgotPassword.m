@@ -19,6 +19,8 @@
 #import "FUIAccountSettingsOperation_Internal.h"
 #import "FUIAuthBaseViewController.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation FUIAccountSettingsOperationForgotPassword
 
 -(void)execute:(BOOL)showDialog {
@@ -58,21 +60,23 @@
 
   [_delegate.auth sendPasswordResetWithEmail:email
                              completion:^(NSError *_Nullable error) {
-                               // The dispatch is a workaround for a bug in FirebaseAuth 3.0.2, which doesn't call the
-                               // completion block on the main queue.
-                               dispatch_async(dispatch_get_main_queue(), ^{
-                                 [_delegate decrementActivity];
+     // The dispatch is a workaround for a bug in FirebaseAuth 3.0.2, which doesn't call the
+     // completion block on the main queue.
+     dispatch_async(dispatch_get_main_queue(), ^{
+       [_delegate decrementActivity];
 
-                                 if (error) {
-                                   [self finishOperationWithError:error];
-                                   return;
-                                 }
+       if (error) {
+         [self finishOperationWithError:error];
+         return;
+       }
 
-                                 NSString *message =
-                                     [NSString stringWithFormat:[FUIAuthStrings passwordRecoveryEmailSentMessage], email];
-                                 [self showAlertWithMessage:message];
-                               });
-                             }];
+       NSString *message =
+           [NSString stringWithFormat:[FUIAuthStrings passwordRecoveryEmailSentMessage], email];
+       [self showAlertWithMessage:message];
+     });
+   }];
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

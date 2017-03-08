@@ -18,6 +18,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/** @class FUIAccountSettingsViewController
+    @brief Represents View Controller for Account Managemt UI. This controller should be embeded in
+        @c UINavigationController in order to present it's internal views.
+ */
 @interface FUIAccountSettingsViewController : FUIAuthBaseViewController
 
 @end

@@ -19,6 +19,8 @@
 #import "FUIAccountSettingsOperation_Internal.h"
 #import "FUIAccountSettingsOperationForgotPassword.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation FUIAccountSettingsOperationDeleteAccount
 
 - (void)execute:(BOOL)showDialog {
@@ -39,7 +41,7 @@
       [self showDeleteAccountViewWithPassword];
     }
   } alertTitle:@"Delete Account?"
-                    alertMessage:@"This will erase all data associated with your account, and can't be undone You will need t osign in again to complete this action"
+                    alertMessage:@"This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action"
                 alertCloseButton:[FUIAuthStrings cancel]];
 }
 
@@ -49,13 +51,11 @@
                                         action:nil
                                           type:FUIStaticContentTableViewCellTypePassword];
   FUIStaticContentTableViewContent *contents =
-      [FUIStaticContentTableViewContent
-           contentWithSections:@[
-                                 [FUIStaticContentTableViewSection sectionWithTitle:nil
-                                                                              cells:@[passwordCell]],
-                                ]];
+      [FUIStaticContentTableViewContent contentWithSections:@[
+   [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[passwordCell]],
+  ]];
 
-  NSString *message = @"This will erase all data assosiated with your account, and can't be undone. Are you sure you want to delete your account?";
+  NSString *message = @"This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc]
           initWithContents:contents
@@ -63,14 +63,16 @@
                 nextAction:^{ [self deleteCurrentAccountWithPassword:passwordCell.value]; }
                 headerText:message
                 footerText:@"Forgot Password?"
-              footerAction:^{ [FUIAccountSettingsOperationForgotPassword executeOperationWithDelegate:_delegate]; }];
+              footerAction:^{
+        [FUIAccountSettingsOperationForgotPassword executeOperationWithDelegate:_delegate];
+      }];
   // TODO: add localization
   controller.title = @"Delete account";
   [_delegate pushViewController:controller];
 }
 
 - (void)showDeleteAccountView {
-  NSString *message = @"This will erase all data assosiated with your account, and can't be undone. Are you sure you want to delete your account?";
+  NSString *message = @"This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
   UIViewController *controller = [[FUIStaticContentTableViewController alloc]
                                     initWithContents:nil
                                     nextTitle:@"Delete"
@@ -92,8 +94,8 @@
       [UIAlertAction actionWithTitle:@"Delete Account"
                                style:UIAlertActionStyleDestructive
                              handler:^(UIAlertAction * _Nonnull action) {
-                               [self deleteCurrentAccount];
-                             }];
+       [self deleteCurrentAccount];
+      }];
   UIAlertAction *action =
       [UIAlertAction actionWithTitle:[FUIAuthStrings cancel]
                                style:UIAlertActionStyleCancel
@@ -122,3 +124,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

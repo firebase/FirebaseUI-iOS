@@ -18,6 +18,7 @@
 
 #import "FUIAccountSettingsOperation_Internal.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 @implementation FUIAccountSettingsOperationUpdateName
 
@@ -34,8 +35,9 @@
     ]];
 
   UIViewController *controller =
-      [[FUIStaticContentTableViewController alloc] initWithContents:contents nextTitle:[FUIAuthStrings save]
-                                                       nextAction:^{
+      [[FUIStaticContentTableViewController alloc] initWithContents:contents
+                                                          nextTitle:[FUIAuthStrings save]
+                                                         nextAction:^{
         [self onUpdateName:cell.value];
       }];
   controller.title = @"Edit name";
@@ -54,3 +56,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -70,20 +70,18 @@ typedef void(^FUIStaticContentTableViewCellAction)(void);
         @c FUIStaticContentTableViewContent.
     @param sections The sections for the @c UITableView.
  */
-+ (nullable instancetype)contentWithSections:
-    (nullable NSArray<FUIStaticContentTableViewSection *> *)sections;
++ (instancetype)contentWithSections:(nullable NSArray<FUIStaticContentTableViewSection *> *)sections;
 
 /** @fn init
     @brief Please use initWithSections:
  */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /** @fn initWithSections:
     @brief Designated initializer.
     @param sections The sections in the @c UITableView.
  */
-- (nullable instancetype)initWithSections:
-    (nullable NSArray<FUIStaticContentTableViewSection *> *)sections;
+- (instancetype)initWithSections:(nullable NSArray<FUIStaticContentTableViewSection *> *)sections;
 
 @end
 
@@ -112,22 +110,21 @@ typedef void(^FUIStaticContentTableViewCellAction)(void);
     @param title The title of the section in the @c UITableView.
     @param cells The cells in this section of the @c UITableView.
  */
-+ (nullable instancetype)
-    sectionWithTitle:(nullable NSString *)title
-               cells:(nullable NSArray<FUIStaticContentTableViewCell *> *)cells;
++ (instancetype) sectionWithTitle:(nullable NSString *)title
+                            cells:(nullable NSArray<FUIStaticContentTableViewCell *> *)cells;
 
 /** @fn init
     @brief Please use initWithTitle:cells:
  */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /** @fn initWithTitle:cells:
     @brief Designated initializer.
     @param title The title of the section in the @c UITableView.
     @param cells The cells in this section of the @c UITableView.
  */
-- (nullable instancetype)initWithTitle:(nullable NSString *)title
-                                 cells:(nullable NSArray<FUIStaticContentTableViewCell *> *)cells;
+- (instancetype)initWithTitle:(nullable NSString *)title
+                        cells:(nullable NSArray<FUIStaticContentTableViewCell *> *)cells;
 
 @end
 
@@ -176,23 +173,23 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
     @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
     @param title The text of the @c titleLabel of the @c UITableViewCell.
  */
-+ (nullable instancetype)cellWithTitle:(nullable NSString *)title;
++ (instancetype)cellWithTitle:(nullable NSString *)title;
 
 /** @fn cellWithTitle:value:
     @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
     @param title The text of the @c titleLabel of the @c UITableViewCell.
     @param value The text of the @c detailTextLabel of the @c UITableViewCell.
  */
-+ (nullable instancetype)cellWithTitle:(nullable NSString *)title
-                                 value:(nullable NSString *)value;
++ (instancetype)cellWithTitle:(nullable NSString *)title
+                        value:(nullable NSString *)value;
 
 /** @fn cellWithTitle:action:
     @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
     @param title The text of the @c titleLabel of the @c UITableViewCell.
     @param action A block which is executed when the cell is selected.
  */
-+ (nullable instancetype)cellWithTitle:(nullable NSString *)title
-                                action:(nullable FUIStaticContentTableViewCellAction)action;
++ (instancetype)cellWithTitle:(nullable NSString *)title
+                       action:(nullable FUIStaticContentTableViewCellAction)action;
 
 /** @fn cellWithTitle:action:type:
     @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
@@ -200,9 +197,9 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
     @param action A block which is executed when the cell is selected.
     @param type Style of displaying cell.
  */
-+ (nullable instancetype)cellWithTitle:(nullable NSString *)title
-                                action:(nullable FUIStaticContentTableViewCellAction)action
-                                  type:(FUIStaticContentTableViewCellType) type;
++ (instancetype)cellWithTitle:(nullable NSString *)title
+                       action:(nullable FUIStaticContentTableViewCellAction)action
+                         type:(FUIStaticContentTableViewCellType) type;
 
 /** @fn cellWithTitle:value:action:
     @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
@@ -210,9 +207,9 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
     @param value The text of the @c detailTextLabel of the @c UITableViewCell.
     @param action A block which is executed when the cell is selected.
  */
-+ (nullable instancetype)cellWithTitle:(nullable NSString *)title
-                                 value:(nullable NSString *)value
-                                action:(nullable FUIStaticContentTableViewCellAction)action;
++ (instancetype)cellWithTitle:(nullable NSString *)title
+                        value:(nullable NSString *)value
+                       action:(nullable FUIStaticContentTableViewCellAction)action;
 
 /** @fn cellWithTitle:value:action:type:
     @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
@@ -221,10 +218,10 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
     @param action A block which is executed when the cell is selected.
     @param type Style of displaying cell.
  */
-+ (nullable instancetype)cellWithTitle:(nullable NSString *)title
-                                 value:(nullable NSString *)value
-                                action:(nullable FUIStaticContentTableViewCellAction)action
-                                  type:(FUIStaticContentTableViewCellType) type;
++ (instancetype)cellWithTitle:(nullable NSString *)title
+                        value:(nullable NSString *)value
+                       action:(nullable FUIStaticContentTableViewCellAction)action
+                         type:(FUIStaticContentTableViewCellType) type;
 
 /** @fn initWithTitle:value:action:type:
     @brief Designated initializer.
@@ -233,16 +230,16 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
     @param action A block which is executed when the cell is selected.
     @param type Style of displaying cell.
  */
-- (nullable instancetype)initWithTitle:(nullable NSString *)title
-                                 value:(nullable NSString *)value
-                                action:(nullable FUIStaticContentTableViewCellAction)action
-                                  type:(FUIStaticContentTableViewCellType) type
+- (instancetype)initWithTitle:(nullable NSString *)title
+                        value:(nullable NSString *)value
+                       action:(nullable FUIStaticContentTableViewCellAction)action
+                         type:(FUIStaticContentTableViewCellType) type
     NS_DESIGNATED_INITIALIZER;
 
 /** @fn init
     @brief Please use initWithTitle:value:action:type:
  */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

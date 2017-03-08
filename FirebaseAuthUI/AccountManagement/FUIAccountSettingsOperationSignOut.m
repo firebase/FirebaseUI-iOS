@@ -18,6 +18,8 @@
 
 #import "FUIAccountSettingsOperation_Internal.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation FUIAccountSettingsOperationSignOut
 
 - (void)execute:(BOOL)showDialog {
@@ -35,3 +37,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
