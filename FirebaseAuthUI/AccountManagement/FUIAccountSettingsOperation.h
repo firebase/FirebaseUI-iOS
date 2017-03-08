@@ -39,14 +39,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, readonly) FUIAuth *authUI;
 
 /** @fn incrementActivity
-    @brief Increment the current acitivity count. If there's positive number of activities, display
+    @brief Increment the current activity count. If there's positive number of activities, display
         and animate the activity indicator with a short period of delay.
     @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
  */
 - (void)incrementActivity;
 
 /** @fn decrementActivity
-    @brief Decrement the current acitivity count. If the count reaches 0, stop and hide the
+    @brief Decrement the current activity count. If the count reaches 0, stop and hide the
         activity indicator.
     @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
  */
@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
     @brief Creates new instance of @c FUIAccountSettingsOperation and executes logic
         associated with it.
     @param delegate UI delegate which handles all UI related logic.
-    @param showDialog Determines if operation specifica UI should be started with confirmation
+    @param showDialog Determines if operation specific UI should be started with confirmation
         dialog.
  */
 + (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate

@@ -27,9 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FUIStaticContentTableViewController : UIViewController
 
 /** @fn initWithContents:nextTitle:nextAction
-    @brief Convinience initializer. View controller doesn't have header and footer sections.
-    @param contents The contents of the table viewpresented in the controller.
-    @param actionTitle Text displayed on the navibation bar title.
+    @brief Convenience initializer. View controller doesn't have header and footer sections.
+    @param contents The contents of the table view presented in the controller.
+    @param actionTitle Text displayed on the navigation bar title.
     @param nextAction Action triggered on the right bar item of @C UINavigationController
  */
 - (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
@@ -38,11 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /** @fn initWithContents:nextTitle:nextAction:headerText:
-    @brief Convinience initializer. View controller doesn't have footer section.
-    @param contents The contents of the table viewpresented in the controller.
-    @param actionTitle Text displayed on the navibation bar title.
+    @brief Convenience initializer. View controller doesn't have footer section.
+    @param contents The contents of the table view presented in the controller.
+    @param actionTitle Text displayed on the navigation bar title.
     @param nextAction Action triggered on the right bar item of @C UINavigationController
-    @param headerText Text desplayed at the header view controller.
+    @param headerText Text displayed at the header view controller.
  */
 - (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
                                 nextTitle:(nullable NSString *)nextTitle
@@ -51,11 +51,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** @fn initWithContents:nextTitle:nextAction:headerText:footerText:footerAction:
     @brief Designated initializer.
-    @param contents The contents of the table viewpresented in the controller.
-    @param actionTitle Text displayed on the navibation bar title.
+    @param contents The contents of the table view presented in the controller.
+    @param actionTitle Text displayed on the navigation bar title.
     @param nextAction Action triggered on the right bar item of @C UINavigationController
-    @param headerText Text desplayed at the header view controller.
-    @param footerText Text desplayed at the footer of view controller.
+    @param headerText Text displayed at the header view controller.
+    @param footerText Text displayed at the footer of view controller.
     @param footerAction Action triggered when user taps on the footer.
  */
 - (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
