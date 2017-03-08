@@ -16,30 +16,85 @@
 
 #import <Foundation/Foundation.h>
 
-@class FIRUser;
 @class FIRAuth;
+@class FIRUser;
 @class FUIAuth;
 @class UIViewController;
 
-@protocol FUIAccountSettingsOperationDelegate <NSObject>
-- (void)presentViewController:(UIViewController *)controller;
-- (void)pushViewController:(UIViewController *)controller;
-- (void)presentBaseController;
-- (FIRAuth *)auth;
-- (FUIAuth *)authUI;
+NS_ASSUME_NONNULL_BEGIN
+
+/** @protocol FUIAccountSettingsOperationUIDelegate
+    @brief A delegate that provides UI methods for @c FUIAccountSettingsOperation.
+ */
+@protocol FUIAccountSettingsOperationUIDelegate <NSObject>
+
+/** @property auth
+    @brief The @c FIRAuth instance of the application.
+ */
+@property(nonatomic, strong, readonly) FIRAuth *auth;
+
+/** @property authUI
+    @brief The @c FUIAuth instance of the application.
+ */
+@property(nonatomic, strong, readonly) FUIAuth *authUI;
+
+/** @fn incrementActivity
+    @brief Increment the current acitivity count. If there's positive number of activities, display
+        and animate the activity indicator with a short period of delay.
+    @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
+ */
 - (void)incrementActivity;
+
+/** @fn decrementActivity
+    @brief Decrement the current acitivity count. If the count reaches 0, stop and hide the
+        activity indicator.
+    @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
+ */
 - (void)decrementActivity;
+
+/** @fn presentBaseController
+    @brief Called when initial Account Settings controller needs to be presented.
+ */
+- (void)presentBaseController;
+
+/** @fn presentBaseController
+    @brief Presents (pops) @c UIViewController from navigation stack.
+ */
+- (void)presentViewController:(UIViewController *)controller;
+
+/** @fn presentBaseController
+    @brief Adds (pushes) @c UIViewController to navigation stack.
+ */
+- (void)pushViewController:(UIViewController *)controller;
+
 @end
 
+/** @class FUIAccountSettingsOperation
+    @brief Handles logic for every specific user operation.
+ */
 @interface FUIAccountSettingsOperation : NSObject
 {
   @protected
-  id<FUIAccountSettingsOperationDelegate> _delegate;
+  id<FUIAccountSettingsOperationUIDelegate> _delegate;
 }
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+/** @fn executeOperationWithDelegate:showDialog:
+    @brief Creates new instance of @c FUIAccountSettingsOperation and executes logic
+        associated with it.
+    @param delegate UI delegate which handles all UI related logic.
+    @param showDialog Determines if operation specifica UI should be started with confirmation
+        dialog.
+ */
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                           showDialog:(BOOL)showDialog;
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate;
+/** @fn executeOperationWithDelegate:
+    @brief Creates new instance of @c FUIAccountSettingsOperation and executes logic
+        associated with it. New flow is started with new view.
+    @param delegate UI delegate which handles all UI related logic.
+ */
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate;
 
 @end
+
+NS_ASSUME_NONNULL_END

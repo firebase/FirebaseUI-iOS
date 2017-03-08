@@ -26,18 +26,20 @@
 #import "FUIAuthBaseViewController.h"
 #import "FUIAuthErrorUtils.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation FUIAccountSettingsOperation
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                                  showDialog:(BOOL)showDialog {
   [[[self alloc] initWithDelegate:delegate] execute:showDialog];
 }
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate {
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate {
   [[[self alloc] initWithDelegate:delegate] execute:NO];
 }
 
-- (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate {
+- (nullable instancetype)initWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate {
   if (self = [super init]) {
     _delegate = delegate;
   }
@@ -46,7 +48,8 @@
 }
 
 - (void)execute:(BOOL)showDialog {
-  
+  // This method should always be overriden.
+  [self doesNotRecognizeSelector:_cmd];
 }
 
 - (FUIAccountSettingsOperationType)operationType {
@@ -55,13 +58,19 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
       classMap = @{
-        NSStringFromClass([FUIAccountSettingsOperationUpdateName class])     : @(FUIAccountSettingsOperationTypeUpdateName),
-        NSStringFromClass([FUIAccountSettingsOperationUpdatePassword class]) : @(FUIAccountSettingsOperationTypeUpdatePassword),
-        NSStringFromClass([FUIAccountSettingsOperationForgotPassword class]) : @(FUIAccountSettingsOperationTypeForgotPassword),
-        NSStringFromClass([FUIAccountSettingsOperationUpdateEmail class])    : @(FUIAccountSettingsOperationTypeUpdateEmail),
-        NSStringFromClass([FUIAccountSettingsOperationUnlinkAccount class])  : @(FUIAccountSettingsOperationTypeUnlinkAccount),
-        NSStringFromClass([FUIAccountSettingsOperationSignOut class])        : @(FUIAccountSettingsOperationTypeSignOut),
-        NSStringFromClass([FUIAccountSettingsOperationDeleteAccount class])  : @(FUIAccountSettingsOperationTypeDeleteAccount)
+        NSStringFromClass([FUIAccountSettingsOperationUpdateName class]) :
+            @(FUIAccountSettingsOperationTypeUpdateName),
+        NSStringFromClass([FUIAccountSettingsOperationUpdatePassword class]) :
+            @(FUIAccountSettingsOperationTypeUpdatePassword),
+          NSStringFromClass([FUIAccountSettingsOperationForgotPassword class]) : @(FUIAccountSettingsOperationTypeForgotPassword),
+        NSStringFromClass([FUIAccountSettingsOperationUpdateEmail class]) :
+            @(FUIAccountSettingsOperationTypeUpdateEmail),
+        NSStringFromClass([FUIAccountSettingsOperationUnlinkAccount class]) :
+            @(FUIAccountSettingsOperationTypeUnlinkAccount),
+        NSStringFromClass([FUIAccountSettingsOperationSignOut class]) :
+            @(FUIAccountSettingsOperationTypeSignOut),
+        NSStringFromClass([FUIAccountSettingsOperationDeleteAccount class]) :
+            @(FUIAccountSettingsOperationTypeDeleteAccount)
       };
     });
   return [classMap[NSStringFromClass([self class])] integerValue];
@@ -69,7 +78,7 @@
 
 #pragma mark - protected methods
 
-- (void)finishOperationWithError:(NSError *)error {
+- (void)finishOperationWithError:(nullable NSError *)error {
   if (error) {
     switch (error.code) {
       case FIRAuthErrorCodeEmailAlreadyInUse:
@@ -95,7 +104,8 @@
         return;
       case FUIAuthErrorCodeCantFindProvider:
         {
-          NSString *message = [NSString stringWithFormat:@"Can't find provider for %@", error.userInfo[FUIAuthErrorUserInfoProviderIDKey]];
+          NSString *message = [NSString stringWithFormat:@"Can't find provider for %@",
+            error.userInfo[FUIAuthErrorUserInfoProviderIDKey]];
           [self showAlertWithMessage:message];
           return;
         }
@@ -108,9 +118,9 @@
   [[FUIAuth defaultAuthUI] invokeOperationCallback:[self operationType] error:error];
 }
 
-- (void)showSelectProviderDialog:(FUIAccountSettingsChooseProviderHandler)handler
-                      alertTitle:(NSString *)title
-                    alertMessage:(NSString *)message
+- (void)showSelectProviderDialog:(nullable FUIAccountSettingsChooseProviderHandler)handler
+                      alertTitle:(nullable NSString *)title
+                    alertMessage:(nullable NSString *)message
                 alertCloseButton:(nullable NSString *)closeActionTitle {
   UIAlertController *alert =
   [UIAlertController alertControllerWithTitle:title
@@ -118,20 +128,18 @@
                                preferredStyle:UIAlertControllerStyleAlert];
 
   for (id<FIRUserInfo> provider in _delegate.auth.currentUser.providerData) {
-    UIAlertAction* action = [UIAlertAction
-                             actionWithTitle:provider.providerID
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * _Nonnull action) {
-                               if (handler) {
-                                 handler(provider);
-                               }
-                             }];
+    UIAlertAction* action = [UIAlertAction actionWithTitle:provider.providerID
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * _Nonnull action) {
+      if (handler) {
+        handler(provider);
+      }
+    }];
     [alert addAction:action];
   }
-  UIAlertAction* closeButton = [UIAlertAction
-                                actionWithTitle:closeActionTitle
-                                style:UIAlertActionStyleCancel
-                                handler:nil];
+  UIAlertAction* closeButton = [UIAlertAction actionWithTitle:closeActionTitle
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:nil];
   [alert addAction:closeButton];
   [_delegate presentViewController:alert];
 
@@ -139,23 +147,22 @@
 
 - (void)showAlertWithMessage:(NSString *)message {
   UIAlertController *alertController =
-  [UIAlertController alertControllerWithTitle:nil
-                                      message:message
-                               preferredStyle:UIAlertControllerStyleAlert];
-  UIAlertAction *okAction =
-  [UIAlertAction actionWithTitle:[FUIAuthStrings OK]
-                           style:UIAlertActionStyleDefault
-                         handler:nil];
+      [UIAlertController alertControllerWithTitle:nil
+                                          message:message
+                                   preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *okAction = [UIAlertAction actionWithTitle:[FUIAuthStrings OK]
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:nil];
   [alertController addAction:okAction];
   [_delegate presentViewController:alertController];
 }
 
-- (void)reauthenticateWithProviderUI:(id<FIRUserInfo>)provider
-               actionHandler:(FUIAccountSettingsReauthenticateHandler)handler {
+- (void)reauthenticateWithProvider:(NSString *)providerID
+                    actionHandlier:(nullable FUIAccountSettingsReauthenticateHandler)handler {
 
   id providerUI;
   for (id<FUIAuthProvider> authProvider in _delegate.authUI.providers) {
-    if ([provider.providerID isEqualToString:authProvider.providerID]) {
+    if ([providerID isEqualToString:authProvider.providerID]) {
       providerUI = authProvider;
       break;
     }
@@ -165,7 +172,7 @@
     // TODO: Show alert or print error
     NSError *error = [FUIAuthErrorUtils errorWithCode:FUIAuthErrorCodeCantFindProvider
                                              userInfo:@{
-      FUIAuthErrorUserInfoProviderIDKey : provider.providerID
+      FUIAuthErrorUserInfoProviderIDKey : providerID
     }];
     [self finishOperationWithError:error];
     return;
@@ -178,28 +185,27 @@
      presentingViewController:_delegate
                    completion:^(FIRAuthCredential *_Nullable credential,
                                 NSError *_Nullable error) {
-                     if (error) {
-                       [_delegate decrementActivity];
-                       [self finishOperationWithError:error];
-                       return;
-                     }
-                     [_delegate.auth.currentUser reauthenticateWithCredential:credential
-                                                              completion:^(NSError *_Nullable error) {
-                                                                [_delegate decrementActivity];
-                                                                if (error) {
-                                                                  [self finishOperationWithError:error];
-                                                               } else {
-                                                                  if (handler) {
-                                                                    handler();
-                                                                  }
-                                                                }
-                                                                
-                                                              }];
-                   }];
+    if (error) {
+     [_delegate decrementActivity];
+     [self finishOperationWithError:error];
+     return;
+    }
+    [_delegate.auth.currentUser reauthenticateWithCredential:credential
+                                                  completion:^(NSError *_Nullable error) {
+      [_delegate decrementActivity];
+      if (error) {
+        [self finishOperationWithError:error];
+      } else {
+        if (handler) {
+          handler();
+        }
+      }
+    }];
+  }];
 }
 
 - (void)reauthenticateWithPassword:(NSString *)password
-                     actionHandler:(FUIAccountSettingsReauthenticateHandler)handler {
+                     actionHandler:(nullable FUIAccountSettingsReauthenticateHandler)handler {
   if (password.length <= 0) {
     [self showAlertWithMessage:[FUIAuthStrings invalidPasswordError]];
     return;
@@ -210,29 +216,30 @@
   [_delegate.auth signInWithEmail:_delegate.auth.currentUser.email
                     password:password
                   completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-                    [_delegate decrementActivity];
+    [_delegate decrementActivity];
 
-                    [self finishOperationWithError:error];
-                    if (!error && handler) {
-                      handler();
-                    }
-                  }];
+    [self finishOperationWithError:error];
+    if (!error && handler) {
+      handler();
+    }
+  }];
 }
 
-- (void)showVerifyDialog:(FUIAccountSettingsReauthenticateHandler)handler
+- (void)showVerifyDialog:(nullable FUIAccountSettingsReauthenticateHandler)handler
                  message:(NSString *)message {
   [self showSelectProviderDialog:^(id<FIRUserInfo> provider) {
     if (![provider.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
-      [self reauthenticateWithProviderUI:provider actionHandler:handler];
+      [self reauthenticateWithProvider:provider.providerID actionHandler:handler];
     } else {
       [self showVerifyPasswordView:handler message:message];
     }
-  } alertTitle:@"Verify it's you"
+  }
+                      alertTitle:@"Verify it's you"
                     alertMessage:message
                 alertCloseButton:[FUIAuthStrings cancel]];
 }
 
-- (void)showVerifyPasswordView:(FUIAccountSettingsReauthenticateHandler)handler
+- (void)showVerifyPasswordView:(nullable FUIAccountSettingsReauthenticateHandler)handler
                        message:(NSString *)message {
   __block FUIStaticContentTableViewCell *passwordCell =
       [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
@@ -248,11 +255,12 @@
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc] initWithContents:contents
                                                           nextTitle:[FUIAuthStrings next]
-                                                       nextAction:^{
+                                                         nextAction:^{
         [self reauthenticateWithPassword:passwordCell.value actionHandler:handler];
       }
-      headerText:message
-      footerText:@"Forgot password?" footerAction:^{
+                                                         headerText:message
+                                                         footerText:@"Forgot password?"
+                                                       footerAction:^{
         [FUIAccountSettingsOperationForgotPassword executeOperationWithDelegate:_delegate];
       }];
   controller.title = @"Verify it's you";
@@ -260,3 +268,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

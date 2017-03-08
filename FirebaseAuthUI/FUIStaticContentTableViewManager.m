@@ -15,7 +15,9 @@
 //
 
 #import "FUIStaticContentTableViewManager.h"
+
 #import "FUIAuthUtils.h"
+
 /** @var kCellReuseIdentitfier
     @brief The reuse identifier for default style table view cell.
  */
@@ -25,8 +27,16 @@ static NSString *const kCellReuseIdentitfier = @"reuseIdentifier";
     @brief The reuse identifier for value style table view cell.
  */
 static NSString *const kValueCellReuseIdentitfier = @"reuseValueIdentifier";
-static NSString *const kPasswordCellReuseIdentitfier = @"kPasswordCellReuseIdentitfier";
-static NSString *const kInputCellReuseIdentitfier = @"kInputCellReuseIdentitfier";
+
+/** @var kPasswordCellReuseIdentitfier
+    @brief The reuse identifier for password style table view cell.
+ */
+static NSString *const kPasswordCellReuseIdentitfier = @"passwordCellReuseIdentitfier";
+
+/** @var kInputCellReuseIdentitfier
+    @brief The reuse identifier for input style table view cell.
+ */
+static NSString *const kInputCellReuseIdentitfier = @"inputCellReuseIdentitfier";
 
 #pragma mark -
 
@@ -62,7 +72,6 @@ static NSString *const kInputCellReuseIdentitfier = @"kInputCellReuseIdentitfier
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
   return _contents.sections[section].title;
-
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -99,7 +108,8 @@ static NSString *const kInputCellReuseIdentitfier = @"kInputCellReuseIdentitfier
 
 - (UITableViewCell *)dequeuePasswordCell:(FUIStaticContentTableViewCell *)cellData
                                tableView:(UITableView *)tableView{
-  FUIPasswordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPasswordCellReuseIdentitfier];
+  FUIPasswordTableViewCell *cell =
+      [tableView dequeueReusableCellWithIdentifier:kPasswordCellReuseIdentitfier];
   cell.title.text = cellData.title;
   cell.password.text = cellData.value;
   cell.cellData = cellData;
@@ -108,7 +118,8 @@ static NSString *const kInputCellReuseIdentitfier = @"kInputCellReuseIdentitfier
 
 - (UITableViewCell *)dequeueInputCell:(FUIStaticContentTableViewCell *)cellData
                                tableView:(UITableView *)tableView{
-  FUIInputTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kInputCellReuseIdentitfier];
+  FUIInputTableViewCell *cell =
+      [tableView dequeueReusableCellWithIdentifier:kInputCellReuseIdentitfier];
   cell.title.text = cellData.title;
   cell.input.text = cellData.value;
   cell.cellData = cellData;
@@ -153,8 +164,9 @@ static NSString *const kInputCellReuseIdentitfier = @"kInputCellReuseIdentitfier
 
 @implementation FUIStaticContentTableViewSection
 
-+ (nullable instancetype)sectionWithTitle:(nullable NSString *)title
-                                    cells:(nullable NSArray<FUIStaticContentTableViewCell *> *)cells {
++ (nullable instancetype)
+    sectionWithTitle:(nullable NSString *)title
+               cells:(nullable NSArray<FUIStaticContentTableViewCell *> *)cells {
   return [[self alloc] initWithTitle:title cells:cells];
 }
 

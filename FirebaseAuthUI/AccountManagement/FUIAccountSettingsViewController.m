@@ -31,6 +31,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/** @var FUIASAccountState
+    @brief Defines all possible states of current loogged-in @c FIRUser.
+ */
 typedef NS_ENUM(NSInteger, FUIASAccountState) {
   FUIASAccountStateUnknown = 0,
   FUIASAccountStateEmailPassword,
@@ -39,7 +42,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
   FUIASAccountStateLinkedAccountWithEmailPassword
 };
 
-@interface FUIAccountSettingsViewController () <FUIAccountSettingsOperationDelegate>
+@interface FUIAccountSettingsViewController () <FUIAccountSettingsOperationUIDelegate>
 @end
 
 @implementation FUIAccountSettingsViewController {
@@ -363,7 +366,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
 }
 
 
-#pragma mark - FUIAccountSettingsOperationDelegate
+#pragma mark - FUIAccountSettingsOperationUIDelegate
 - (void)presentViewController:(UIViewController *)controller {
   [self presentViewController:controller animated:YES completion:nil];
 }

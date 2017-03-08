@@ -18,14 +18,14 @@
 
 @interface FUIAccountSettingsOperationUpdatePassword : FUIAccountSettingsOperation
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                           showDialog:(BOOL)showDialog NS_UNAVAILABLE;
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
     NS_UNAVAILABLE;
 
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                           showDialog:(BOOL)showDialog
                          newPassword:(BOOL)newPassword;
 

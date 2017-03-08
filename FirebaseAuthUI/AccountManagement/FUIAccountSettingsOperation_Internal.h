@@ -28,31 +28,68 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^FUIAccountSettingsChooseProviderHandler)(id<FIRUserInfo> provider);
 typedef void(^FUIAccountSettingsReauthenticateHandler)(void);
 
-
+/** @class FUIAccountSettingsOperation
+    @brief Internal methods which are not exposed for public usage.
+ */
 @interface FUIAccountSettingsOperation (Internal)
 
-- (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate;
+/** @fn initWithDelegate:
+    @brief Creates new instance of @c FUIAccountSettingsOperation.
+ */
+- (nullable instancetype)initWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate;
 
-- (void)finishOperationWithError:(NSError *)error;
+/** @fn finishOperationWithError:
+    @brief Callback which is used for notification of operation result.
+ */
+- (void)finishOperationWithError:(nullable NSError *)error;
 
-- (void)reauthenticateWithProviderUI:(id<FIRUserInfo>)provider
-               actionHandler:(FUIAccountSettingsReauthenticateHandler)handler;
+/** @fn reauthenticateWithProvider:actionHandler:
+    @brief Reauthenticates currently logged-in user with specified 3P porviderID.
+    @param providerID The ID of third party provider.
+    @param handler Block which is called when user was re-authenticated. 
+ */
+- (void)reauthenticateWithProvider:(NSString *)providerID
+                     actionHandler:(nullable FUIAccountSettingsReauthenticateHandler)handler;
 
+/** @fn reauthenticateWithPassword:actionHandler:
+    @brief Reauthenticates currently logged-in user with 'password' auth provider.
+    @param password Value of the password used for re-authentication of currently loggen-in user.
+    @param handler Block which is called when user was re-authenticated. 
+ */
 - (void)reauthenticateWithPassword:(NSString *)password
-                     actionHandler:(FUIAccountSettingsReauthenticateHandler)handler;
+                     actionHandler:(nullable FUIAccountSettingsReauthenticateHandler)handler;
 
-- (void)showAlertWithMessage:(NSString *)message;
-
-- (void)showSelectProviderDialog:(FUIAccountSettingsChooseProviderHandler)handler
-                      alertTitle:(NSString *)title
-                    alertMessage:(NSString *)message
+/** @fn showSelectProviderDialog:alertTitle:alertMessage:alertCloseButton:
+    @brief Displays alert dialog with all available 3P providers.
+    @param handler Block which is called when user selects any of 3P providers.
+    @param title The title of the dialog
+    @param message The message displayed in the alert body.
+    @param closeActionTitle The title of the close button.
+ */
+- (void)showSelectProviderDialog:(nullable FUIAccountSettingsChooseProviderHandler)handler
+                      alertTitle:(nullable NSString *)title
+                    alertMessage:(nullable NSString *)message
                 alertCloseButton:(nullable NSString *)closeActionTitle;
 
-- (void)showVerifyDialog:(FUIAccountSettingsReauthenticateHandler)handler
+/** @fn showVerifyDialog:message:
+    @brief Displays alert dialog when user need to verify it's identity.
+    @param handler Block which is called when user selects any of 3P providers.
+    @param message The message displayed in the alert body.
+ */
+- (void)showVerifyDialog:(nullable FUIAccountSettingsReauthenticateHandler)handler
                  message:(NSString *)message;
 
-- (void)showVerifyPasswordView:(FUIAccountSettingsReauthenticateHandler)handler
+
+/** @fn showVerifyPasswordView:message:
+    @brief Displays view with password input field when user need to verify it's identity.
+    @param handler Block which is called when user selects any of 3P providers.
+    @param message The message displayed in the alert body.
+ */
+- (void)showVerifyPasswordView:(nullable FUIAccountSettingsReauthenticateHandler)handler
                        message:(NSString *)message;
+                       
+- (void)showAlertWithMessage:(NSString *)message;
+
 @end
 
 NS_ASSUME_NONNULL_END

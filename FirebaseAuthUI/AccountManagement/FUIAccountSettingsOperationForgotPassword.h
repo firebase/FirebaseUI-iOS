@@ -17,7 +17,7 @@
 
 @interface FUIAccountSettingsOperationForgotPassword : FUIAccountSettingsOperation
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                           showDialog:(BOOL)showDialog NS_UNAVAILABLE;
 
 @end

@@ -26,13 +26,13 @@
 
 @implementation FUIAccountSettingsOperationUpdatePassword
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                           showDialog:(BOOL)showDialog
                          newPassword:(BOOL)newPassword {
   return [[[self alloc] initWithDelegate:delegate newPassword:newPassword] execute:showDialog];
 }
 
-- (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+- (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                      newPassword:(BOOL)newPassword {
   if (self = [super initWithDelegate:delegate]) {
     _newPassword = newPassword;

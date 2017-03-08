@@ -18,22 +18,54 @@
 
 #import "FUIStaticContentTableViewManager.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
+/** @class FUIStaticContentTableViewController
+    @brief The view controller which presents contents of @c FUIStaticContentTableViewContent.
+        controller has footer and header views.
+ */
 @interface FUIStaticContentTableViewController : UIViewController
 
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                       nextTitle:(NSString *)nextTitle
-                      nextAction:(FUIStaticContentTableViewCellAction)nextAction;
+/** @fn initWithContents:nextTitle:nextAction
+    @brief Convinience initializer. View controller doesn't have header and footer sections.
+    @param contents The contents of the table viewpresented in the controller.
+    @param actionTitle Text displayed on the navibation bar title.
+    @param nextAction Action triggered on the right bar item of @C UINavigationController
+ */
+- (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                                nextTitle:(nullable NSString *)nextTitle
+                               nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction;
 
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                       nextTitle:(NSString *)nextTitle
-                      nextAction:(FUIStaticContentTableViewCellAction)nextAction
-                      headerText:(NSString *)headerText;
 
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                       nextTitle:(NSString *)actionTitle
-                      nextAction:(FUIStaticContentTableViewCellAction)nextAction
-                      headerText:(NSString *)headerText
-                      footerText:(NSString *)footerText
-                    footerAction:(FUIStaticContentTableViewCellAction)footerAction;
+/** @fn initWithContents:nextTitle:nextAction:headerText:
+    @brief Convinience initializer. View controller doesn't have footer section.
+    @param contents The contents of the table viewpresented in the controller.
+    @param actionTitle Text displayed on the navibation bar title.
+    @param nextAction Action triggered on the right bar item of @C UINavigationController
+    @param headerText Text desplayed at the header view controller.
+ */
+- (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                                nextTitle:(nullable NSString *)nextTitle
+                               nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
+                               headerText:(nullable NSString *)headerText;
+
+/** @fn initWithContents:nextTitle:nextAction:headerText:footerText:footerAction:
+    @brief Designated initializer.
+    @param contents The contents of the table viewpresented in the controller.
+    @param actionTitle Text displayed on the navibation bar title.
+    @param nextAction Action triggered on the right bar item of @C UINavigationController
+    @param headerText Text desplayed at the header view controller.
+    @param footerText Text desplayed at the footer of view controller.
+    @param footerAction Action triggered when user taps on the footer.
+ */
+- (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                                nextTitle:(nullable NSString *)actionTitle
+                               nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
+                               headerText:(nullable NSString *)headerText
+                               footerText:(nullable NSString *)footerText
+                             footerAction:(nullable FUIStaticContentTableViewCellAction)footerAction
+    NS_DESIGNATED_INITIALIZER;
 
 @end
+
+NS_ASSUME_NONNULL_END

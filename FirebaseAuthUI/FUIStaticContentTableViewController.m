@@ -18,6 +18,13 @@
 
 #import "FUIAuthUtils.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
+/** @var kSaveButtonAccessibilityID
+    @brief The Accessibility Identifier for the @c next button.
+ */
+static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID";
+
 @interface FUIStaticContentTableViewController ()
 {
   NSString *_headerText;
@@ -34,16 +41,16 @@
 
 @implementation FUIStaticContentTableViewController
 
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                     nextTitle:(NSString *)nextTitle
-                    nextAction:(FUIStaticContentTableViewCellAction)nextAction {
+- (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                                nextTitle:(nullable NSString *)nextTitle
+                               nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction {
   return [self initWithContents:contents nextTitle:nextTitle nextAction:nextAction headerText:nil];
 }
 
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                     nextTitle:(NSString *)nextTitle
-                    nextAction:(FUIStaticContentTableViewCellAction)nextAction
-                    headerText:(NSString *)headerText {
+- (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                                nextTitle:(nullable NSString *)nextTitle
+                               nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
+                               headerText:(nullable NSString *)headerText {
   return [self initWithContents:contents
                       nextTitle:nextTitle
                      nextAction:nextAction
@@ -52,12 +59,13 @@
                    footerAction:nil];
 }
 
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
-                       nextTitle:(NSString *)actionTitle
-                      nextAction:(FUIStaticContentTableViewCellAction)nextAction
-                      headerText:(NSString *)headerText
-                      footerText:(NSString *)footerText
-                    footerAction:(FUIStaticContentTableViewCellAction)footerAction {
+- (nullable instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+                                nextTitle:(nullable NSString *)actionTitle
+                               nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
+                               headerText:(nullable NSString *)headerText
+                               footerText:(nullable NSString *)footerText
+                             footerAction:
+                                 (nullable FUIStaticContentTableViewCellAction)footerAction {
   if (self = [self initWithNibName:NSStringFromClass([self class])
                             bundle:[FUIAuthUtils frameworkBundle]]) {
     _tableViewManager = [[FUIStaticContentTableViewManager alloc] init];
@@ -88,8 +96,7 @@
                                        style:UIBarButtonItemStylePlain
                                       target:self
                                       action:@selector(onNext)];
-  // TODO: add AccessibilityID
-  //    actionButtonItem.accessibilityIdentifier = kSaveButtonAccessibilityID;
+  actionButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = actionButtonItem;
 }
 
@@ -119,3 +126,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -28,13 +28,13 @@
 
 @implementation FUIAccountSettingsOperationUnlinkAccount
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
++ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                           showDialog:(BOOL)showDialog
                             provider:(id<FIRUserInfo>)provider {
   [[[self alloc] initWithDelegate:delegate provider:provider] execute:showDialog];
 }
 
-- (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationDelegate>)delegate
+- (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
                         provider:(id<FIRUserInfo>) provider {
   if (self = [super initWithDelegate:delegate]) {
     _provider = provider;

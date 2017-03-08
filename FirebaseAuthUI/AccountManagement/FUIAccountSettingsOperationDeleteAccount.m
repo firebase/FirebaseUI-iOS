@@ -32,7 +32,7 @@
 - (void)showDeleteAccountDialog {
   [self showSelectProviderDialog:^(id<FIRUserInfo> provider) {
     if (![provider.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
-      [self reauthenticateWithProviderUI:provider actionHandler:^{
+      [self reauthenticateWithProvider:provider.providerID actionHandler:^{
         [self showDeleteAccountView];
       }];
     } else {

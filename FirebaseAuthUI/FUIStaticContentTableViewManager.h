@@ -35,11 +35,6 @@ typedef void(^FUIStaticContentTableViewCellAction)(void);
 
 /** @class FUIStaticContentTableViewManager
     @brief Generic class useful for populating a @c UITableView with static content.
-    @remarks Because I keep writing the same UITableView code for every internal testing app, and
-        it's getting too tedious and ugly to keep writing the same thing over and over. It makes
-        our sample apps harder to maintain with all this code sprinkled around everywhere, and
-        we end up cutting corners and making junky testing apps, and spending more time in the
-        process.
  */
 @interface FUIStaticContentTableViewManager : NSObject<UITableViewDelegate, UITableViewDataSource>
 
@@ -67,7 +62,8 @@ typedef void(^FUIStaticContentTableViewCellAction)(void);
 /** @property sections
     @brief The sections for the @c UITableView.
  */
-@property(nonatomic, copy, readonly, nullable) NSArray<FUIStaticContentTableViewSection *> *sections;
+@property(nonatomic, copy, readonly, nullable)
+    NSArray<FUIStaticContentTableViewSection *> *sections;
 
 /** @fn contentWithSections:
     @brief Convenience factory method for creating a new instance of
@@ -137,6 +133,9 @@ typedef void(^FUIStaticContentTableViewCellAction)(void);
 
 #pragma mark -
 
+/** @typedef FUIStaticContentTableViewCellType
+    @brief Defines all possible styles of @c FUIStaticContentTableViewCell.
+ */
 typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
   FUIStaticContentTableViewCellTypeDefault = 0,
   FUIStaticContentTableViewCellTypeButton,
@@ -146,22 +145,16 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
 
 /** @class FUIStaticContentTableViewCell
     @brief Represents a cell in a @c UITableView.
-    @remarks Cells may be custom cells (in which you specify a @c UITableViewCell to use), or
-        simple single-label cells which you supply the title text for. It does not make sense to
-        specify both @c customCell and also @c title, but if a @c customCell is specified, it will
-        be used instead of the @c title.
  */
 @interface FUIStaticContentTableViewCell : NSObject
 
 /** @property title
-    @brief If no custom cell is being used, this is the text of the @c titleLabel of the
-        @c UITableViewCell.
+    @brief The text of the @c titleLabel of the @c UITableViewCell.
  */
 @property(nonatomic, copy, readonly, nullable) NSString *title;
 
 /** @property value
-    @brief If no custom cell is being used, this is the text of the @c detailTextLabel of the
-       @c UITableViewCell.
+    @brief The text of the @c detailTextLabel of the @c UITableViewCell.
  */
 @property(nonatomic, copy, nullable) NSString *value;
 
@@ -233,12 +226,10 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
                                 action:(nullable FUIStaticContentTableViewCellAction)action
                                   type:(FUIStaticContentTableViewCellType) type;
 
-/** @fn initWithTitle:action:type:
+/** @fn initWithTitle:value:action:type:
     @brief Designated initializer.
-    @param title If no custom cell is being used, this is the text of the @c titleLabel of the
-        @c UITableViewCell.
-    @param title If no custom cell is being used, this is the text of the @c detailTextLabel of the
-        @c UITableViewCell.
+    @param title The text of the @c titleLabel of the @c UITableViewCell.
+    @param value The text of the @c detailTextLabel of the @c UITableViewCell.
     @param action A block which is executed when the cell is selected.
     @param type Style of displaying cell.
  */
@@ -249,28 +240,52 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
     NS_DESIGNATED_INITIALIZER;
 
 /** @fn init
-    @brief Please use initWithCustomCell:title:action:
+    @brief Please use initWithTitle:value:action:type:
  */
 - (nullable instancetype)init NS_UNAVAILABLE;
 
 @end
 
+/** @class FUIPasswordTableViewCell
+    @brief Represents a cell in a @c UITableView. This cell has password input field.
+ */
 @interface FUIPasswordTableViewCell : UITableViewCell<UITextFieldDelegate>
 
+/** @var cellData
+    @brief Used to retrieve modified value of the cell.
+ */
 @property (nonatomic) FUIStaticContentTableViewCell *cellData;
 
+/** @var title
+    @brief The title label of the cell.
+ */
 @property (weak, nonatomic) IBOutlet UILabel *title;
 
+/** @var password
+    @brief The password inout field of the cell.
+ */
 @property (weak, nonatomic) IBOutlet UITextField *password;
 
 @end
 
+/** @class FUIInputTableViewCell
+    @brief Represents a cell in a @c UITableView. This cell has regular input field.
+ */
 @interface FUIInputTableViewCell : UITableViewCell<UITextFieldDelegate>
 
+/** @var cellData
+    @brief Used to retrieve modified value of the cell.
+ */
 @property (nonatomic) FUIStaticContentTableViewCell *cellData;
 
+/** @var title
+    @brief The title label of the cell.
+ */
 @property (weak, nonatomic) IBOutlet UILabel *title;
 
+/** @var password
+    @brief The inout field of the cell.
+ */
 @property (weak, nonatomic) IBOutlet UITextField *input;
 
 @end
