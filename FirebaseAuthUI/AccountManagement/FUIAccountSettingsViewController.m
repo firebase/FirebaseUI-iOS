@@ -209,19 +209,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
                                                                       newPassword:NO];
         }]
       ]],
-      [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
-                                              action:^{
-          [FUIAccountSettingsOperationSignOut executeOperationWithDelegate:self];
-        }
-                                                type:FUIStaticContentTableViewCellTypeButton],
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{
-          [FUIAccountSettingsOperationDeleteAccount executeOperationWithDelegate:self
-                                                                      showDialog:NO];
-        }
-                                                type:FUIStaticContentTableViewCellTypeButton]
-      ]],
+      [self createActionsSection]
     ]];
 }
 
@@ -256,19 +244,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
       ]],
       [FUIStaticContentTableViewSection
           sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
-      [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
-                                              action:^{
-          [FUIAccountSettingsOperationSignOut executeOperationWithDelegate:self];
-        }
-                                                type:FUIStaticContentTableViewCellTypeButton],
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{
-          [FUIAccountSettingsOperationDeleteAccount executeOperationWithDelegate:self
-                                                                      showDialog:YES];
-        }
-                                                type:FUIStaticContentTableViewCellTypeButton]
-      ]],
+      [self createActionsSection]
     ]];
 }
 
@@ -312,19 +288,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
       ]],
       [FUIStaticContentTableViewSection
           sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
-      [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
-                                              action:^{
-          [FUIAccountSettingsOperationSignOut executeOperationWithDelegate:self];
-        }
-                                                type:FUIStaticContentTableViewCellTypeButton],
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{
-          [FUIAccountSettingsOperationDeleteAccount executeOperationWithDelegate:self
-                                                                      showDialog:YES];
-        }
-                                                type:FUIStaticContentTableViewCellTypeButton]
-      ]],
+      [self createActionsSection]
     ]];
 }
 
@@ -372,34 +336,29 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
       ]],
       [FUIStaticContentTableViewSection
           sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
-      [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
-                                              action:^{
-          [FUIAccountSettingsOperationSignOut executeOperationWithDelegate:self];
-        }
-                                                 type:FUIStaticContentTableViewCellTypeButton],
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
-                                              action:^{
-          [FUIAccountSettingsOperationDeleteAccount executeOperationWithDelegate:self
-                                                                      showDialog:YES];
-        }
-                                                type:FUIStaticContentTableViewCellTypeButton]
-      ]],
+      [self createActionsSection]
     ]];
 }
 
-- (void)showAlert:(NSString *)message {
-  UIAlertController *alert =
-      [UIAlertController alertControllerWithTitle:[FUIAuthStrings error]
-                                          message:message
-                                   preferredStyle:UIAlertControllerStyleAlert];
-  UIAlertAction* closeButton = [UIAlertAction
-                                actionWithTitle:[FUIAuthStrings close]
-                                style:UIAlertActionStyleDefault
-                                handler:nil];
-  [alert addAction:closeButton];
-  [self presentViewController:alert animated:YES completion:nil];
-
+- (FUIStaticContentTableViewSection *)createActionsSection {
+  FUIStaticContentTableViewCell *signOutCell =
+      [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
+                                            action:^{
+        [FUIAccountSettingsOperationSignOut executeOperationWithDelegate:self];
+      }
+                                              type:FUIStaticContentTableViewCellTypeButton];
+  NSMutableArray *cells = [NSMutableArray arrayWithObject:signOutCell];
+  if (!_deleteAccountActionDisabled) {
+    FUIStaticContentTableViewCell *deleteCell =
+      [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
+                                            action:^{
+        [FUIAccountSettingsOperationDeleteAccount executeOperationWithDelegate:self
+                                                                    showDialog:YES];
+      }
+                                              type:FUIStaticContentTableViewCellTypeButton];
+    [cells addObject:deleteCell];
+  }
+  return [FUIStaticContentTableViewSection sectionWithTitle:nil cells:cells];
 }
 
 - (void)updateUI {
@@ -426,10 +385,6 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
 - (void)presentBaseController {
   [self popToRoot];
   [self updateUI];
-}
-
-- (FIRAuth *)auth {
-  return super.auth;
 }
 
 - (void)incrementActivity {
