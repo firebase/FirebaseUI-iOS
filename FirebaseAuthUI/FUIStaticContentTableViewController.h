@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
     @param actionTitle Text displayed on the navigation bar title.
     @param nextAction Action triggered on the right bar item of @C UINavigationController
  */
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+- (instancetype)initWithContents:(nullable FUIStaticContentTableViewContent *)contents
                        nextTitle:(nullable NSString *)nextTitle
                       nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction;
 
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
     @param nextAction Action triggered on the right bar item of @C UINavigationController
     @param headerText Text displayed at the header view controller.
  */
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+- (instancetype)initWithContents:(nullable FUIStaticContentTableViewContent *)contents
                        nextTitle:(nullable NSString *)nextTitle
                       nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
                       headerText:(nullable NSString *)headerText;
@@ -58,13 +58,29 @@ NS_ASSUME_NONNULL_BEGIN
     @param footerText Text displayed at the footer of view controller.
     @param footerAction Action triggered when user taps on the footer.
  */
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+- (instancetype)initWithContents:(nullable FUIStaticContentTableViewContent *)contents
                        nextTitle:(nullable NSString *)actionTitle
                       nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
                       headerText:(nullable NSString *)headerText
                       footerText:(nullable NSString *)footerText
                     footerAction:(nullable FUIStaticContentTableViewCellAction)footerAction
     NS_DESIGNATED_INITIALIZER;
+
+/** @fn init
+    @brief Please use @c initWithContents:nextTitle:nextAction:headerText:footerText:footerAction:.
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
+/** @fn initWithNibName:bundle:
+    @brief Please use @c initWithContents:nextTitle:nextAction:headerText:footerText:footerAction:.
+ */
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
+
+/** @fn initWithCoder:
+    @brief Please use @c initWithContents:nextTitle:nextAction:headerText:footerText:footerAction:.
+ */
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 
 @end
 

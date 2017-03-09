@@ -395,6 +395,9 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
   [super decrementActivity];
 }
 
+- (UIViewController *)presentingController {
+  return self;
+}
 @end
 
 NS_ASSUME_NONNULL_END

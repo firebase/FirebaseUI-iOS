@@ -67,6 +67,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)pushViewController:(UIViewController *)controller;
 
+/** @fn presentingController
+    @brief Provides access to presenting controller.
+ */
+- (UIViewController *)presentingController;
+
 @end
 
 /** @class FUIAccountSettingsOperation

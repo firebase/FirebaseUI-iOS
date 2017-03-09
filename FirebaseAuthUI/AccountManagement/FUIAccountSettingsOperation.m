@@ -158,7 +158,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)reauthenticateWithProvider:(NSString *)providerID
-                    actionHandlier:(nullable FUIAccountSettingsReauthenticateHandler)handler {
+                     actionHandler:(nullable FUIAccountSettingsReauthenticateHandler)handler {
 
   id providerUI;
   for (id<FUIAuthProvider> authProvider in _delegate.authUI.providers) {
@@ -182,7 +182,7 @@ NS_ASSUME_NONNULL_BEGIN
   // Sign out first to make sure sign in starts with a clean state.
   [providerUI signOut];
   [providerUI signInWithEmail:_delegate.auth.currentUser.email
-     presentingViewController:_delegate
+     presentingViewController:[_delegate presentingController]
                    completion:^(FIRAuthCredential *_Nullable credential,
                                 NSError *_Nullable error) {
     if (error) {

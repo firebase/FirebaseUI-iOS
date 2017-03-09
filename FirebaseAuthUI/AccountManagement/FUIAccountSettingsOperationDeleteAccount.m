@@ -73,11 +73,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showDeleteAccountView {
   NSString *message = @"This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
-  UIViewController *controller = [[FUIStaticContentTableViewController alloc]
-                                    initWithContents:nil
-                                    nextTitle:@"Delete"
-                                    nextAction:^{ [self onDeleteAccountViewNextAction]; }
-                                    headerText:message];
+  UIViewController *controller =
+      [[FUIStaticContentTableViewController alloc] initWithContents:nil
+                                                          nextTitle:@"Delete"
+                                                         nextAction:^{
+        [self onDeleteAccountViewNextAction];
+      }
+                                                         headerText:message];
   // TODO: add localization
   controller.title = @"Delete account";
   [_delegate pushViewController:controller];

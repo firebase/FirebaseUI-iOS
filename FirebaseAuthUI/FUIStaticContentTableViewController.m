@@ -41,13 +41,13 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 @implementation FUIStaticContentTableViewController
 
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+- (instancetype)initWithContents:(nullable FUIStaticContentTableViewContent *)contents
                        nextTitle:(nullable NSString *)nextTitle
                       nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction {
   return [self initWithContents:contents nextTitle:nextTitle nextAction:nextAction headerText:nil];
 }
 
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+- (instancetype)initWithContents:(nullable FUIStaticContentTableViewContent *)contents
                        nextTitle:(nullable NSString *)nextTitle
                       nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
                       headerText:(nullable NSString *)headerText {
@@ -59,14 +59,14 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                    footerAction:nil];
 }
 
-- (instancetype)initWithContents:(FUIStaticContentTableViewContent *)contents
+- (instancetype)initWithContents:(nullable FUIStaticContentTableViewContent *)contents
                        nextTitle:(nullable NSString *)actionTitle
                       nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction
                       headerText:(nullable NSString *)headerText
                       footerText:(nullable NSString *)footerText
                     footerAction:(nullable FUIStaticContentTableViewCellAction)footerAction {
-  if (self = [self initWithNibName:NSStringFromClass([self class])
-                            bundle:[FUIAuthUtils frameworkBundle]]) {
+  if (self = [super initWithNibName:NSStringFromClass([self class])
+                             bundle:[FUIAuthUtils frameworkBundle]]) {
     _tableViewManager = [[FUIStaticContentTableViewManager alloc] init];
     _tableViewManager.contents = contents;
     _nextAction = [nextAction copy];
