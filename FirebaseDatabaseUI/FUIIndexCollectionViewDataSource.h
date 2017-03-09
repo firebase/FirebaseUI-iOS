@@ -57,7 +57,17 @@ didFailLoadAtIndex:(NSUInteger)index
  */
 @interface FUIIndexCollectionViewDataSource : NSObject <UICollectionViewDataSource>
 
+/**
+ * The delegate that should receive updates from this data source. Implement this delegate
+ * to handle load errors and successes.
+ */
 @property (nonatomic, readwrite, weak, nullable) id<FUIIndexCollectionViewDataSourceDelegate> delegate;
+
+/**
+ * The indexes that have finished loading in the data source. Returns an empty array if no indexes
+ * have loaded.
+ */
+@property (nonatomic, readonly, copy) NSArray<FIRDataSnapshot *> *indexes;
 
 - (instancetype)init NS_UNAVAILABLE;
 
