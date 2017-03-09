@@ -8,7 +8,7 @@ EXIT_STATUS=0
   -workspace FirebaseUI.xcworkspace \
   -scheme FirebaseUI \
   -sdk iphonesimulator \
-  -destination 'platform=iOS Simulator,name=iPhone 7' \
+  -destination 'platform=iOS Simulator,OS=10.2,name=iPhone 7' \
   build \
   test \
   ONLY_ACTIVE_ARCH=YES \
