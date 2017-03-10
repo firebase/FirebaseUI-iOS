@@ -16,6 +16,7 @@
 
 #import "FUIAccountSettingsOperationUnlinkAccount.h"
 
+#import "FUIAuthBaseViewController.h"
 #import "FUIAccountSettingsOperation_Internal.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -45,7 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)execute:(BOOL)showDialog {
   __block FUIStaticContentTableViewCell *cell =
-      [FUIStaticContentTableViewCell cellWithTitle:_provider.providerID
+      [FUIStaticContentTableViewCell cellWithTitle:
+          [FUIAuthBaseViewController providerLocalizedName:_provider.providerID]
                                              value:_provider.displayName
                                             action:nil
                                               type:FUIStaticContentTableViewCellTypeDefault];
@@ -58,21 +60,22 @@ NS_ASSUME_NONNULL_BEGIN
 
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc] initWithContents:contents
-                                                          nextTitle:@"Unlink"
+                                                          nextTitle:
+          FUILocalizedString(kStr_UnlinkAction)
                                                        nextAction:^{
         [self showUnlinkConfirmationDialog];
       }];
-  controller.title = @"Linked account";
+  controller.title = FUILocalizedString(kStr_UnlinkTitle);
   [_delegate pushViewController:controller];
 }
 
 - (void)showUnlinkConfirmationDialog {
   UIAlertController *alertController =
-  [UIAlertController alertControllerWithTitle:@"Unlink account?"
-                                      message:@"You will no longer be able to sign in using your account"
-                               preferredStyle:UIAlertControllerStyleAlert];
+      [UIAlertController alertControllerWithTitle:FUILocalizedString(kStr_UnlinkConfirmationTitle)
+                                          message:FUILocalizedString(kStr_UnlinkConfirmationMessage)
+                                   preferredStyle:UIAlertControllerStyleAlert];
   UIAlertAction *action =
-      [UIAlertAction actionWithTitle:@"Unlink account"
+      [UIAlertAction actionWithTitle:FUILocalizedString(kStr_UnlinkConfirmationActionTitle)
                                style:UIAlertActionStyleDestructive
                              handler:^(UIAlertAction *_Nonnull action) { [self unlinkAcount]; }];
   [alertController addAction:action];
@@ -85,7 +88,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)unlinkAcount {
-  [[FIRAuth auth].currentUser unlinkFromProvider:_provider.providerID
+  [[FIRAuth auth].currentUser unlinkFromProvider:
+      [FUIAuthBaseViewController providerLocalizedName:_provider.providerID]
                                       completion:^(FIRUser * _Nullable user,
                                                    NSError * _Nullable error) {
     [self finishOperationWithError:error];

@@ -42,6 +42,11 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
   FUIASAccountStateLinkedAccountWithEmailPassword
 };
 
+/** @var kUserAccountImage
+    @brief Name of icon to show default user account.
+ */
+static NSString *const kUserAccountImage = @"ic_account_circle.png";
+
 @interface FUIAccountSettingsViewController () <FUIAccountSettingsOperationUIDelegate>
 @end
 
@@ -106,7 +111,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
 
   CGFloat profileHeight = 60;
   UIImageView *headerImage =
-      [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_account_circle.png"]];
+      [[UIImageView alloc] initWithImage:[UIImage imageNamed:kUserAccountImage]];
   headerImage.layer.cornerRadius = profileHeight / 2;
   headerImage.clipsToBounds = YES;
   UIView *wrapper = [[UIView alloc] init];
@@ -224,7 +229,8 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
       continue;
     }
     FUIStaticContentTableViewCell *cell =
-        [FUIStaticContentTableViewCell cellWithTitle:userInfo.providerID
+        [FUIStaticContentTableViewCell cellWithTitle:
+            [FUIAuthBaseViewController providerLocalizedName:userInfo.providerID]
                                                value:userInfo.displayName];
     [linkedAccounts addObject:cell];
   }
@@ -261,7 +267,8 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
       continue;
     }
     FUIStaticContentTableViewCell *cell =
-        [FUIStaticContentTableViewCell cellWithTitle:userInfo.providerID
+        [FUIStaticContentTableViewCell cellWithTitle:
+            [FUIAuthBaseViewController providerLocalizedName:userInfo.providerID]
                                                value:userInfo.displayName];
     [linkedAccounts addObject:cell];
   }
@@ -307,7 +314,8 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
       continue;
     }
     FUIStaticContentTableViewCell *cell =
-        [FUIStaticContentTableViewCell cellWithTitle:userInfo.providerID
+        [FUIStaticContentTableViewCell cellWithTitle:
+            [FUIAuthBaseViewController providerLocalizedName:userInfo.providerID]
                                                value:userInfo.displayName
                                               action:^{
       [FUIAccountSettingsOperationUnlinkAccount executeOperationWithDelegate:self

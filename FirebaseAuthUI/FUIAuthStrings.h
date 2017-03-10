@@ -66,6 +66,35 @@ extern NSString *const kStr_TermsOfServiceNotice;
 extern NSString *const kStr_UserNotFoundError;
 extern NSString *const kStr_WeakPasswordError;
 extern NSString *const kStr_WrongPasswordError;
+extern NSString *const kStr_CantFindProvider;
+extern NSString *const kStr_EmailsDontMatch;
+extern NSString *const kStr_ForgotPassword;
+extern NSString *const kStr_VerifyItsYou;
+extern NSString *const kStr_DeleteAccountConfimationTitle;
+extern NSString *const kStr_DeleteAccountBody;
+extern NSString *const kStr_DeleteAccountConfirmationMessage;
+extern NSString *const kStr_Delete;
+extern NSString *const kStr_DeleteAccountControllerTitle;
+extern NSString *const kStr_ActionCantBeUndone;
+extern NSString *const kStr_UnlinkTitle;
+extern NSString *const kStr_UnlinkAction;
+extern NSString *const kStr_UnlinkConfirmationTitle;
+extern NSString *const kStr_UnlinkConfirmationMessage;
+extern NSString *const kStr_UnlinkConfirmationActionTitle;
+extern NSString *const kStr_UpdateEmailAlertMessage;
+extern NSString *const kStr_UpdateEmailVerificationAlertMessage;
+extern NSString *const kStr_AddPasswordAlertMessage;
+extern NSString *const kStr_EditPasswordAlertMessage;
+extern NSString *const kStr_ReauthenticateEditPasswordAlertMessage;
+extern NSString *const kStr_AddPasswordTitle;
+extern NSString *const kStr_EditPasswordTitle;
+extern NSString *const kStr_EditNameTitle;
+extern NSString *const kStr_EditEmailTitle;
+extern NSString *const kStr_ProviderTitlePassword;
+extern NSString *const kStr_ProviderTitleGoogle;
+extern NSString *const kStr_ProviderTitleFacebook;
+extern NSString *const kStr_ProviderTitleTwitter;
+extern NSString *const kStr_SignInWithProvider;
 
 #ifdef __cplusplus
 extern "C" {

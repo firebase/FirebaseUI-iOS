@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                          nextAction:^{
         [self onUpdateName:cell.value];
       }];
-  controller.title = @"Edit name";
+  controller.title = FUILocalizedString(kStr_EditNameTitle);
   [_delegate pushViewController:controller];
 }
 

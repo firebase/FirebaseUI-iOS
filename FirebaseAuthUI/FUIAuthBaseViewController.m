@@ -301,4 +301,18 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
     [self.authUI invokeResultCallbackWithUser:nil error:error];
   }];
 }
+
++ (NSString *)providerLocalizedName:(NSString *)providerId {
+  if ([providerId isEqualToString:FIREmailPasswordAuthProviderID]) {
+    return FUILocalizedString(kStr_ProviderTitlePassword);
+  } else if ([providerId isEqualToString:FIRGoogleAuthProviderID]) {
+    return FUILocalizedString(kStr_ProviderTitleGoogle);
+  } else if ([providerId isEqualToString:FIRFacebookAuthProviderID]) {
+    return FUILocalizedString(kStr_ProviderTitleFacebook);
+  } else if ([providerId isEqualToString:FIRTwitterAuthProviderID]) {
+    return FUILocalizedString(kStr_ProviderTitleTwitter);
+  }
+  return @"";
+}
+
 @end

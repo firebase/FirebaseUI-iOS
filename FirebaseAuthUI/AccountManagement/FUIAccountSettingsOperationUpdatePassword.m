@@ -53,9 +53,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showUpdatePasswordDialog:(BOOL)newPassword {
   NSString *message;
   if (newPassword) {
-    message = @"To add password to your account, you will need to sign in again.";
+    message = FUILocalizedString(kStr_AddPasswordAlertMessage);
   } else {
-    message = @"To change password to your account, you will need to sign in again.";
+    message = FUILocalizedString(kStr_EditPasswordAlertMessage);
   }
 
   [self showVerifyDialog:^{ [self showUpdatePassword:newPassword]; } message:message];
@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showUpdatePasswordView {
   [self showVerifyPasswordView:^{ [self showUpdatePassword:NO]; }
-                       message:@"In order to change your password, you first need to enter your current password."];
+                       message:FUILocalizedString(kStr_ReauthenticateEditPasswordAlertMessage)];
 }
 
 - (void)showUpdatePassword:(BOOL)newPassword {
@@ -81,14 +81,14 @@ NS_ASSUME_NONNULL_BEGIN
 
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc] initWithContents:contents
-                                                          nextTitle:@"Save"
+                                                          nextTitle:FUILocalizedString(kStr_Save)
                                                        nextAction:^{
         [self updatePasswordForCurrentUser:passwordCell.value];
       }];
   if (newPassword) {
-    controller.title = @"Add password";
+    controller.title = FUILocalizedString(kStr_AddPasswordTitle);
   } else {
-    controller.title = @"Change password";
+    controller.title = FUILocalizedString(kStr_EditPasswordTitle);
   }
   [_delegate pushViewController:controller];
 

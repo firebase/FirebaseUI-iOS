@@ -40,8 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
     } else {
       [self showDeleteAccountViewWithPassword];
     }
-  } alertTitle:@"Delete Account?"
-                    alertMessage:@"This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action"
+  }
+                      alertTitle:FUILocalizedString(kStr_DeleteAccountConfimationTitle)
+                    alertMessage:FUILocalizedString(kStr_DeleteAccountBody)
                 alertCloseButton:FUILocalizedString(kStr_Cancel)];
 }
 
@@ -55,33 +56,33 @@ NS_ASSUME_NONNULL_BEGIN
    [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[passwordCell]],
   ]];
 
-  NSString *message = @"This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+  NSString *message = FUILocalizedString(kStr_DeleteAccountConfirmationMessage);
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc]
           initWithContents:contents
-                 nextTitle:@"Delete"
+                 nextTitle:FUILocalizedString(kStr_Delete)
                 nextAction:^{ [self deleteCurrentAccountWithPassword:passwordCell.value]; }
                 headerText:message
-                footerText:@"Forgot Password?"
+                footerText:FUILocalizedString(kStr_ForgotPassword)
               footerAction:^{
         [FUIAccountSettingsOperationForgotPassword executeOperationWithDelegate:_delegate];
       }];
   // TODO: add localization
-  controller.title = @"Delete account";
+  controller.title = FUILocalizedString(kStr_DeleteAccountControllerTitle);
   [_delegate pushViewController:controller];
 }
 
 - (void)showDeleteAccountView {
-  NSString *message = @"This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+  NSString *message = FUILocalizedString(kStr_DeleteAccountConfirmationMessage);
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc] initWithContents:nil
-                                                          nextTitle:@"Delete"
+                                                          nextTitle:FUILocalizedString(kStr_Delete)
                                                          nextAction:^{
         [self onDeleteAccountViewNextAction];
       }
                                                          headerText:message];
   // TODO: add localization
-  controller.title = @"Delete account";
+  controller.title = FUILocalizedString(kStr_DeleteAccountControllerTitle);
   [_delegate pushViewController:controller];
 
 }
@@ -89,11 +90,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)onDeleteAccountViewNextAction {
   UIAlertController *alertController =
-  [UIAlertController alertControllerWithTitle:@"Delete account?"
-                                      message:@"This action can't be undone"
+  [UIAlertController alertControllerWithTitle:FUILocalizedString(kStr_DeleteAccountConfimationTitle)
+                                      message:FUILocalizedString(kStr_ActionCantBeUndone)
                                preferredStyle:UIAlertControllerStyleAlert];
   UIAlertAction *deleteAction =
-      [UIAlertAction actionWithTitle:@"Delete Account"
+      [UIAlertAction actionWithTitle:FUILocalizedString(kStr_DeleteAccountControllerTitle)
                                style:UIAlertActionStyleDestructive
                              handler:^(UIAlertAction * _Nonnull action) {
        [self deleteCurrentAccount];

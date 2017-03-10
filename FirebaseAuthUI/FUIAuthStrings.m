@@ -70,6 +70,34 @@ NSString *const kStr_TermsOfServiceNotice = @"TermsOfServiceNotice";
 NSString *const kStr_UserNotFoundError = @"UserNotFoundError";
 NSString *const kStr_WeakPasswordError = @"WeakPasswordError";
 NSString *const kStr_WrongPasswordError = @"WrongPasswordError";
+NSString *const kStr_CantFindProvider = @"CantFindProvider";
+NSString *const kStr_EmailsDontMatch = @"EmailsDontMatch";
+NSString *const kStr_VerifyItsYou = @"VerifyItsYou";
+NSString *const kStr_DeleteAccountConfimationTitle = @"DeleteAccountConfimationTitle";
+NSString *const kStr_DeleteAccountBody = @"DeleteAccountBody";
+NSString *const kStr_DeleteAccountConfirmationMessage = @"DeleteAccountConfirmationMessage";
+NSString *const kStr_Delete = @"Delete";
+NSString *const kStr_DeleteAccountControllerTitle = @"DeleteAccountControllerTitle";
+NSString *const kStr_ActionCantBeUndone = @"ActionCantBeUndone";
+NSString *const kStr_UnlinkTitle = @"UnlinkTitle";
+NSString *const kStr_UnlinkAction = @"UnlinkAction";
+NSString *const kStr_UnlinkConfirmationTitle = @"UnlinkConfirmationTitle";
+NSString *const kStr_UnlinkConfirmationMessage = @"UnlinkConfirmationMessage";
+NSString *const kStr_UnlinkConfirmationActionTitle = @"UnlinkConfirmationActionTitle";
+NSString *const kStr_UpdateEmailAlertMessage = @"UpdateEmailAlertMessage";
+NSString *const kStr_UpdateEmailVerificationAlertMessage = @"UpdateEmailVerificationAlertMessage";
+NSString *const kStr_EditEmailTitle = @"EditEmailTitle";
+NSString *const kStr_EditNameTitle = @"EditNameTitle";
+NSString *const kStr_AddPasswordAlertMessage = @"AddPasswordAlertMessage";
+NSString *const kStr_EditPasswordAlertMessage = @"EditPasswordAlertMessage";
+NSString *const kStr_ReauthenticateEditPasswordAlertMessage = @"ReauthenticateEditPasswordAlertMessage";
+NSString *const kStr_AddPasswordTitle = @"AddPasswordTitle";
+NSString *const kStr_EditPasswordTitle = @"EditPasswordTitle";
+NSString *const kStr_ProviderTitlePassword = @"ProviderTitlePassword";
+NSString *const kStr_ProviderTitleGoogle = @"ProviderTitleGoogle";
+NSString *const kStr_ProviderTitleFacebook = @"ProviderTitleFacebook";
+NSString *const kStr_ProviderTitleTwitter = @"ProviderTitleTwitter";
+NSString *const kStr_SignInWithProvider = @"SignInWithProvider";
 
 /** @var kKeyNotFound
     @brief The value returned if the key is not found in the table.

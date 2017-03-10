@@ -128,6 +128,12 @@ typedef void (^FUIAuthAlertActionHandler)(void);
     @brief Cancels Authorization flow, calls UI delegate callbacks and hides UI
  */
 - (void)cancelAuthorization;
+
+/** @fn providerLocalizedName:
+    @brief Maps provider Id to localized provider name.
+ */
++ (NSString *)providerLocalizedName:(NSString *)providerId;
+
 @end
 
 NS_ASSUME_NONNULL_END

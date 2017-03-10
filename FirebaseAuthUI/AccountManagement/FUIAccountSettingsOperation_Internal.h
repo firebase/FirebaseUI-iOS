@@ -86,7 +86,6 @@ typedef void(^FUIAccountSettingsReauthenticateHandler)(void);
 - (void)showVerifyDialog:(nullable FUIAccountSettingsReauthenticateHandler)handler
                  message:(NSString *)message;
 
-
 /** @fn showVerifyPasswordView:message:
     @brief Displays view with password input field when user need to verify it's identity.
     @param handler Block which is called when user selects any of 3P providers.
@@ -95,6 +94,10 @@ typedef void(^FUIAccountSettingsReauthenticateHandler)(void);
 - (void)showVerifyPasswordView:(nullable FUIAccountSettingsReauthenticateHandler)handler
                        message:(NSString *)message;
                        
+/** @fn showAlertWithMessage:message:
+    @brief Displays alert view with with specified message and OK button.
+    @param message The message displayed in the alert body.
+ */
 - (void)showAlertWithMessage:(NSString *)message;
 
 @end

@@ -105,13 +105,13 @@ NS_ASSUME_NONNULL_BEGIN
         return;
       case FUIAuthErrorCodeCantFindProvider:
         {
-          NSString *message = [NSString stringWithFormat:@"Can't find provider for %@",
+          NSString *message = [NSString stringWithFormat:FUILocalizedString(kStr_CantFindProvider),
             error.userInfo[FUIAuthErrorUserInfoProviderIDKey]];
           [self showAlertWithMessage:message];
           return;
         }
       case FIRAuthErrorCodeUserMismatch:
-        [self showAlertWithMessage:@"Emails don't match"];
+        [self showAlertWithMessage:FUILocalizedString(kStr_EmailsDontMatch)];
         return;
     }
   }
@@ -129,7 +129,10 @@ NS_ASSUME_NONNULL_BEGIN
                                preferredStyle:UIAlertControllerStyleAlert];
 
   for (id<FIRUserInfo> provider in _delegate.auth.currentUser.providerData) {
-    UIAlertAction* action = [UIAlertAction actionWithTitle:provider.providerID
+    NSString *providerTitle =
+        [NSString stringWithFormat:FUILocalizedString(kStr_SignInWithProvider),
+            [FUIAuthBaseViewController providerLocalizedName:provider.providerID]];
+    UIAlertAction* action = [UIAlertAction actionWithTitle:providerTitle
                                                      style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * _Nonnull action) {
       if (handler) {
@@ -235,7 +238,7 @@ NS_ASSUME_NONNULL_BEGIN
       [self showVerifyPasswordView:handler message:message];
     }
   }
-                      alertTitle:@"Verify it's you"
+                      alertTitle:FUILocalizedString(kStr_VerifyItsYou)
                     alertMessage:message
                 alertCloseButton:FUILocalizedString(kStr_Cancel)];
 }
@@ -260,11 +263,12 @@ NS_ASSUME_NONNULL_BEGIN
         [self reauthenticateWithPassword:passwordCell.value actionHandler:handler];
       }
                                                          headerText:message
-                                                         footerText:@"Forgot password?"
+                                                         footerText:
+          FUILocalizedString(kStr_ForgotPassword)
                                                        footerAction:^{
         [FUIAccountSettingsOperationForgotPassword executeOperationWithDelegate:_delegate];
       }];
-  controller.title = @"Verify it's you";
+  controller.title = FUILocalizedString(kStr_VerifyItsYou);
   [_delegate pushViewController:controller];
 }
 

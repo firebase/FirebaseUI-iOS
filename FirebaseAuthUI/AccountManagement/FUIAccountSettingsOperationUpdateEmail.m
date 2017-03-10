@@ -33,14 +33,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showUpdateEmailDialog {
   NSString *message;
-    message = @"To change email address associated with your your account, you will need to sign in again.";
+    message = FUILocalizedString(kStr_UpdateEmailAlertMessage);
   [self showVerifyDialog:^{ [self showUpdateEmail]; } message:message];
 
 }
 
 - (void)showUpdateEmailView {
   [self showVerifyPasswordView:^{ [self showUpdateEmail]; }
-                       message:@"In order to change your password, you first need to enter your current password."];
+                       message:FUILocalizedString(kStr_UpdateEmailVerificationAlertMessage)];
 }
 
 - (void)showUpdateEmail {
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                        nextAction:^{
         [self updateEmailForCurrentUser:cell.value];
       }];
-  controller.title = @"Edit email";
+  controller.title = FUILocalizedString(kStr_EditEmailTitle);
   [_delegate pushViewController:controller];
 
 }
