@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)onForgotPassword {
   __block FUIStaticContentTableViewCell *inputCell =
-  [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings email]
+  [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Email)
                                         value:_delegate.auth.currentUser.email
                                         action:nil
                                           type:FUIStaticContentTableViewCellTypeInput];
@@ -43,16 +43,16 @@ NS_ASSUME_NONNULL_BEGIN
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc]
            initWithContents:contents
-                  nextTitle:[FUIAuthStrings send]
+                  nextTitle:FUILocalizedString(kStr_Send)
                  nextAction:^{ [self onPasswordRecovery:inputCell.value]; }
-                 headerText:[FUIAuthStrings passwordRecoveryMessage]];
-  controller.title = [FUIAuthStrings passwordRecoveryTitle];
+                 headerText:FUILocalizedString(kStr_PasswordRecoveryMessage)];
+  controller.title = FUILocalizedString(kStr_PasswordRecoveryTitle);
   [_delegate pushViewController:controller];
 }
 
 - (void)onPasswordRecovery:(NSString *)email {
   if (![[FUIAuthBaseViewController class] isValidEmail:email]) {
-    [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
+    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
     return;
   }
 
@@ -70,8 +70,8 @@ NS_ASSUME_NONNULL_BEGIN
          return;
        }
 
-       NSString *message =
-           [NSString stringWithFormat:[FUIAuthStrings passwordRecoveryEmailSentMessage], email];
+       NSString *message = [NSString stringWithFormat:
+           FUILocalizedString(kStr_PasswordRecoveryEmailSentMessage), email];
        [self showAlertWithMessage:message];
      });
    }];

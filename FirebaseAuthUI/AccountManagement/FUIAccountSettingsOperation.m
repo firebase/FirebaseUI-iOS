@@ -62,7 +62,8 @@ NS_ASSUME_NONNULL_BEGIN
             @(FUIAccountSettingsOperationTypeUpdateName),
         NSStringFromClass([FUIAccountSettingsOperationUpdatePassword class]) :
             @(FUIAccountSettingsOperationTypeUpdatePassword),
-          NSStringFromClass([FUIAccountSettingsOperationForgotPassword class]) : @(FUIAccountSettingsOperationTypeForgotPassword),
+        NSStringFromClass([FUIAccountSettingsOperationForgotPassword class]) :
+            @(FUIAccountSettingsOperationTypeForgotPassword),
         NSStringFromClass([FUIAccountSettingsOperationUpdateEmail class]) :
             @(FUIAccountSettingsOperationTypeUpdateEmail),
         NSStringFromClass([FUIAccountSettingsOperationUnlinkAccount class]) :
@@ -82,25 +83,25 @@ NS_ASSUME_NONNULL_BEGIN
   if (error) {
     switch (error.code) {
       case FIRAuthErrorCodeEmailAlreadyInUse:
-        [self showAlertWithMessage:[FUIAuthStrings emailAlreadyInUseError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_EmailAlreadyInUseError)];
         return;
       case FIRAuthErrorCodeInvalidEmail:
-        [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
         return;
       case FIRAuthErrorCodeWeakPassword:
-        [self showAlertWithMessage:[FUIAuthStrings weakPasswordError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_WeakPasswordError)];
         return;
       case FIRAuthErrorCodeTooManyRequests:
-        [self showAlertWithMessage:[FUIAuthStrings signUpTooManyTimesError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_SignUpTooManyTimesError)];
         return;
       case FIRAuthErrorCodeWrongPassword:
-        [self showAlertWithMessage:[FUIAuthStrings wrongPasswordError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_WrongPasswordError)];
         return;
       case FIRAuthErrorCodeUserNotFound:
-        [self showAlertWithMessage:[FUIAuthStrings userNotFoundError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_UserNotFoundError)];
         return;
       case FIRAuthErrorCodeUserDisabled:
-        [self showAlertWithMessage:[FUIAuthStrings accountDisabledError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_AccountDisabledError)];
         return;
       case FUIAuthErrorCodeCantFindProvider:
         {
@@ -150,7 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
       [UIAlertController alertControllerWithTitle:nil
                                           message:message
                                    preferredStyle:UIAlertControllerStyleAlert];
-  UIAlertAction *okAction = [UIAlertAction actionWithTitle:[FUIAuthStrings OK]
+  UIAlertAction *okAction = [UIAlertAction actionWithTitle:FUILocalizedString(kStr_OK)
                                                      style:UIAlertActionStyleDefault
                                                    handler:nil];
   [alertController addAction:okAction];
@@ -207,7 +208,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)reauthenticateWithPassword:(NSString *)password
                      actionHandler:(nullable FUIAccountSettingsReauthenticateHandler)handler {
   if (password.length <= 0) {
-    [self showAlertWithMessage:[FUIAuthStrings invalidPasswordError]];
+    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidPasswordError)];
     return;
   }
 
@@ -236,13 +237,13 @@ NS_ASSUME_NONNULL_BEGIN
   }
                       alertTitle:@"Verify it's you"
                     alertMessage:message
-                alertCloseButton:[FUIAuthStrings cancel]];
+                alertCloseButton:FUILocalizedString(kStr_Cancel)];
 }
 
 - (void)showVerifyPasswordView:(nullable FUIAccountSettingsReauthenticateHandler)handler
                        message:(NSString *)message {
   __block FUIStaticContentTableViewCell *passwordCell =
-      [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
+      [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Password)
                                             action:nil
                                               type:FUIStaticContentTableViewCellTypePassword];
   FUIStaticContentTableViewContent *contents =
@@ -254,7 +255,7 @@ NS_ASSUME_NONNULL_BEGIN
 
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc] initWithContents:contents
-                                                          nextTitle:[FUIAuthStrings next]
+                                                          nextTitle:FUILocalizedString(kStr_Next)
                                                          nextAction:^{
         [self reauthenticateWithPassword:passwordCell.value actionHandler:handler];
       }

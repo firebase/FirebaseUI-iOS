@@ -187,22 +187,24 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
 - (void)updateTableStateEmailPassword {
   _tableViewManager.contents =
     [FUIStaticContentTableViewContent contentWithSections:@[
-      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleProfile]
+      [FUIStaticContentTableViewSection sectionWithTitle:
+          FUILocalizedString(kStr_ASSectionTitleProfile)
                                                    cells:@[
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
+        [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellName)
                                                value:self.auth.currentUser.displayName
                                               action:^{
           [FUIAccountSettingsOperationUpdateName executeOperationWithDelegate:self showDialog:NO];
         }],
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
+        [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellEmail)
                                                value:self.auth.currentUser.email
                                               action:^{
           [FUIAccountSettingsOperationUpdateEmail executeOperationWithDelegate:self];
         }]
       ]],
-      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
+      [FUIStaticContentTableViewSection sectionWithTitle:
+          FUILocalizedString(kStr_ASSectionTitleSecurity)
                                                    cells:@[
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellChangePassword]
+        [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellChangePassword)
                                               action:^{
           [FUIAccountSettingsOperationUpdatePassword executeOperationWithDelegate:self
                                                                        showDialog:YES
@@ -229,21 +231,23 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
 
   _tableViewManager.contents =
     [FUIStaticContentTableViewContent contentWithSections:@[
-      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleProfile]
+      [FUIStaticContentTableViewSection sectionWithTitle:
+          FUILocalizedString(kStr_ASSectionTitleProfile)
                                                    cells:@[
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
+        [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellName)
                                                value:self.auth.currentUser.displayName
                                               action:^{
           [FUIAccountSettingsOperationUpdateName executeOperationWithDelegate:self showDialog:NO];
         }],
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
+        [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellEmail)
                                                value:self.auth.currentUser.email
                                               action:^{
           [FUIAccountSettingsOperationUpdateEmail executeOperationWithDelegate:self];
         }]
       ]],
-      [FUIStaticContentTableViewSection
-          sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
+      [FUIStaticContentTableViewSection sectionWithTitle:
+          FUILocalizedString(kStr_ASSectionTitleLinkedAccounts)
+                                                   cells:linkedAccounts],
       [self createActionsSection]
     ]];
 }
@@ -264,30 +268,33 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
 
   _tableViewManager.contents =
     [FUIStaticContentTableViewContent contentWithSections:@[
-      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleProfile]
+      [FUIStaticContentTableViewSection sectionWithTitle:
+          FUILocalizedString(kStr_ASSectionTitleProfile)
                                                    cells:@[
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
+        [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellName)
                                                value:self.auth.currentUser.displayName
                                               action:^{
           [FUIAccountSettingsOperationUpdateName executeOperationWithDelegate:self showDialog:NO];
         }],
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
+        [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellEmail)
                                                value:self.auth.currentUser.email
                                               action:^{
           [FUIAccountSettingsOperationUpdateEmail executeOperationWithDelegate:self];
         }]
       ]],
-      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
+      [FUIStaticContentTableViewSection sectionWithTitle:
+          FUILocalizedString(kStr_ASSectionTitleSecurity)
                                                    cells:@[
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellAddPassword]
+        [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellAddPassword)
                                               action:^{
           [FUIAccountSettingsOperationUpdatePassword executeOperationWithDelegate:self
                                                                        showDialog:YES
                                                                       newPassword:YES];
         }]
       ]],
-      [FUIStaticContentTableViewSection
-          sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
+      [FUIStaticContentTableViewSection sectionWithTitle:
+          FUILocalizedString(kStr_ASSectionTitleLinkedAccounts)
+                                                   cells:linkedAccounts],
       [self createActionsSection]
     ]];
 }
@@ -312,37 +319,40 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
 
   _tableViewManager.contents =
     [FUIStaticContentTableViewContent contentWithSections:@[
-      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleProfile]
+      [FUIStaticContentTableViewSection sectionWithTitle:
+          FUILocalizedString(kStr_ASSectionTitleProfile)
                                                    cells:@[
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellName]
+        [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellName)
                                                value:self.auth.currentUser.displayName
                                               action:^{
           [FUIAccountSettingsOperationUpdateName executeOperationWithDelegate:self showDialog:NO];
         }],
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellEmail]
+        [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellEmail)
                                                value:self.auth.currentUser.email
                                               action:^{
           [FUIAccountSettingsOperationUpdateEmail executeOperationWithDelegate:self];
         }]
       ]],
-      [FUIStaticContentTableViewSection sectionWithTitle:[FUIAuthStrings ASSectionTitleSecurity]
+      [FUIStaticContentTableViewSection sectionWithTitle:
+          FUILocalizedString(kStr_ASSectionTitleSecurity)
                                                    cells:@[
-        [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellChangePassword]
+        [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellChangePassword)
                                               action:^{
           [FUIAccountSettingsOperationUpdatePassword executeOperationWithDelegate:self
                                                                        showDialog:YES
                                                                       newPassword:NO];
         }]
       ]],
-      [FUIStaticContentTableViewSection
-          sectionWithTitle:[FUIAuthStrings ASSectionTitleLinkedAccounts] cells:linkedAccounts],
+      [FUIStaticContentTableViewSection sectionWithTitle:
+          FUILocalizedString(kStr_ASSectionTitleLinkedAccounts)
+                                                   cells:linkedAccounts],
       [self createActionsSection]
     ]];
 }
 
 - (FUIStaticContentTableViewSection *)createActionsSection {
   FUIStaticContentTableViewCell *signOutCell =
-      [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellSignOut]
+      [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellSignOut)
                                             action:^{
         [FUIAccountSettingsOperationSignOut executeOperationWithDelegate:self];
       }
@@ -350,7 +360,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
   NSMutableArray *cells = [NSMutableArray arrayWithObject:signOutCell];
   if (!_deleteAccountActionDisabled) {
     FUIStaticContentTableViewCell *deleteCell =
-      [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings ASCellDeleteAccount]
+      [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellDeleteAccount)
                                             action:^{
         [FUIAccountSettingsOperationDeleteAccount executeOperationWithDelegate:self
                                                                     showDialog:YES];

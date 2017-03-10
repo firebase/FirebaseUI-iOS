@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showUpdatePassword:(BOOL)newPassword {
   __block FUIStaticContentTableViewCell *passwordCell =
-      [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
+      [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Password)
                                             action:nil
                                               type:FUIStaticContentTableViewCellTypePassword];
   FUIStaticContentTableViewContent *contents =
@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)updatePasswordForCurrentUser:(NSString *)password {
   if (!password.length) {
-    [self showAlertWithMessage:[FUIAuthStrings weakPasswordError]];
+    [self showAlertWithMessage:FUILocalizedString(kStr_WeakPasswordError)];
   } else {
     [_delegate incrementActivity];
     [_delegate.auth.currentUser updatePassword:password completion:^(NSError * _Nullable error) {

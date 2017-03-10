@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)execute:(BOOL)showDialog {
   __block FUIStaticContentTableViewCell *cell =
-      [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings name]
+      [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Name)
                                              value:_delegate.auth.currentUser.displayName
                                             action:nil
                                               type:FUIStaticContentTableViewCellTypeInput];
@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc] initWithContents:contents
-                                                          nextTitle:[FUIAuthStrings save]
+                                                          nextTitle:FUILocalizedString(kStr_Save)
                                                          nextAction:^{
         [self onUpdateName:cell.value];
       }];

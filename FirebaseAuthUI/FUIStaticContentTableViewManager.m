@@ -40,10 +40,25 @@ static NSString *const kPasswordCellReuseIdentitfier = @"passwordCellReuseIdenti
  */
 static NSString *const kInputCellReuseIdentitfier = @"inputCellReuseIdentitfier";
 
+/** @var kVisibilityOffImage
+    @brief Name of icon to show current password in secure input field.
+ */
+static NSString *const kVisibilityOffImage = @"ic_visibility_off.png";
+
+/** @var kVisibilityOnImage
+    @brief Name of icon to show current password in secure input field.
+ */
+static NSString *const kVisibilityOnImage = @"ic_visibility.png";
+
 #pragma mark -
 
 @implementation FUIStaticContentTableViewManager
 
+/**
+ <#Description#>
+
+ @param contents <#contents description#>
+ */
 - (void)setContents:(nullable FUIStaticContentTableViewContent *)contents {
   _contents = contents;
   [self.tableView reloadData];
@@ -261,8 +276,8 @@ static NSString *const kInputCellReuseIdentitfier = @"inputCellReuseIdentitfier"
 
 - (IBAction)onPasswordVisibilitySelected:(id)sender {
   self.password.secureTextEntry = ! self.password.secureTextEntry;
-  UIImage *image = self.password.secureTextEntry ? [UIImage imageNamed:@"ic_visibility.png"]
-                                                 : [UIImage imageNamed:@"ic_visibility_off.png"];
+  UIImage *image = self.password.secureTextEntry ? [UIImage imageNamed:kVisibilityOnImage]
+                                                 : [UIImage imageNamed:kVisibilityOffImage];
   [self.visibilityButton setImage:image forState:UIControlStateNormal];
 }
 - (IBAction)onPasswordChanged:(id)sender {

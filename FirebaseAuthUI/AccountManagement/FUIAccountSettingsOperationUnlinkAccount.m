@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
                              handler:^(UIAlertAction *_Nonnull action) { [self unlinkAcount]; }];
   [alertController addAction:action];
   UIAlertAction *cancelAction =
-  [UIAlertAction actionWithTitle:[FUIAuthStrings cancel]
+  [UIAlertAction actionWithTitle:FUILocalizedString(kStr_Cancel)
                            style:UIAlertActionStyleCancel
                          handler:nil];
   [alertController addAction:cancelAction];

@@ -100,7 +100,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   if (self) {
     _email = [email copy];
 
-    self.title = [FUIAuthStrings signUpTitle];
+    self.title = FUILocalizedString(kStr_SignUpTitle);
   }
   return self;
 }
@@ -109,7 +109,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   [super viewDidLoad];
 
   UIBarButtonItem *saveButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:[FUIAuthStrings save]
+      [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Save)
                                        style:UIBarButtonItemStylePlain
                                       target:self
                                       action:@selector(save)];
@@ -126,10 +126,10 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
     return;
   }
 
-  NSString *termsOfService = [FUIAuthStrings termsOfService];
+  NSString *termsOfService = FUILocalizedString(kStr_TermsOfService);
   NSString *termsOfServiceNotice =
-      [NSString stringWithFormat:[FUIAuthStrings termsOfServiceNotice],
-          [FUIAuthStrings save], termsOfService];
+      [NSString stringWithFormat:FUILocalizedString(kStr_TermsOfServiceNotice),
+          FUILocalizedString(kStr_Save), termsOfService];
   NSMutableAttributedString *attributedString =
       [[NSMutableAttributedString alloc] initWithString:termsOfServiceNotice];
   NSRange termsOfServiceRange = [termsOfServiceNotice rangeOfString:termsOfService];
@@ -157,11 +157,11 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
             andPassword:(NSString *)password
             andUsername:(NSString *)username {
   if (![[self class] isValidEmail:email]) {
-    [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
+    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
     return;
   }
   if (password.length <= 0) {
-    [self showAlertWithMessage:[FUIAuthStrings invalidPasswordError]];
+    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidPasswordError)];
     return;
   }
 
@@ -195,16 +195,16 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   if (error) {
     switch (error.code) {
       case FIRAuthErrorCodeEmailAlreadyInUse:
-        [self showAlertWithMessage:[FUIAuthStrings emailAlreadyInUseError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_EmailAlreadyInUseError)];
         return;
       case FIRAuthErrorCodeInvalidEmail:
-        [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
         return;
       case FIRAuthErrorCodeWeakPassword:
-        [self showAlertWithMessage:[FUIAuthStrings weakPasswordError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_WeakPasswordError)];
         return;
       case FIRAuthErrorCodeTooManyRequests:
-        [self showAlertWithMessage:[FUIAuthStrings signUpTooManyTimesError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_SignUpTooManyTimesError)];
         return;
     }
   }
@@ -245,29 +245,29 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   }
   cell.textField.delegate = self;
   if (indexPath.row == 0) {
-    cell.label.text = [FUIAuthStrings email];
+    cell.label.text = FUILocalizedString(kStr_Email);
     cell.accessibilityIdentifier = kEmailSignUpCellAccessibilityID;
     _emailField = cell.textField;
     _emailField.text = _email;
-    _emailField.placeholder = [FUIAuthStrings enterYourEmail];
+    _emailField.placeholder = FUILocalizedString(kStr_EnterYourEmail);
     _emailField.secureTextEntry = NO;
     _emailField.returnKeyType = UIReturnKeyNext;
     _emailField.keyboardType = UIKeyboardTypeEmailAddress;
     _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
     _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
   } else if (indexPath.row == 1) {
-    cell.label.text = [FUIAuthStrings name];
+    cell.label.text = FUILocalizedString(kStr_Name);
     cell.accessibilityIdentifier = kNameSignUpCellAccessibilityID;
     _nameField = cell.textField;
-    _nameField.placeholder = [FUIAuthStrings firstAndLastName];
+    _nameField.placeholder = FUILocalizedString(kStr_FirstAndLastName);
     _nameField.secureTextEntry = NO;
     _nameField.returnKeyType = UIReturnKeyNext;
     _nameField.keyboardType = UIKeyboardTypeDefault;
   } else if (indexPath.row == 2) {
-    cell.label.text = [FUIAuthStrings password];
+    cell.label.text = FUILocalizedString(kStr_Password);
     cell.accessibilityIdentifier = kPasswordSignUpCellAccessibilityID;
     _passwordField = cell.textField;
-    _passwordField.placeholder = [FUIAuthStrings choosePassword];
+    _passwordField.placeholder = FUILocalizedString(kStr_ChoosePassword);
     _passwordField.secureTextEntry = YES;
     _passwordField.rightView = [self visibilityToggleButtonForPasswordField];
     _passwordField.rightViewMode = UITextFieldViewModeAlways;

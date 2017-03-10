@@ -74,7 +74,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                          bundle:nibBundleOrNil
                          authUI:authUI];
   if (self) {
-    self.title = [FUIAuthStrings signInWithEmail];
+    self.title = FUILocalizedString(kStr_SignInWithEmail);
   }
   return self;
 }
@@ -83,7 +83,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [super viewDidLoad];
 
   UIBarButtonItem *nextButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:[FUIAuthStrings next]
+      [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Next)
                                        style:UIBarButtonItemStylePlain
                                       target:self
                                       action:@selector(next)];
@@ -111,7 +111,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 - (void)onNext:(NSString *)emailText {
   if (![[self class] isValidEmail:emailText]) {
-    [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
+    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
     return;
   }
 
@@ -124,7 +124,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
     if (error) {
       if (error.code == FIRAuthErrorCodeInvalidEmail) {
-        [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
       } else {
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
           [self.authUI invokeResultCallbackWithUser:nil error:error];
@@ -154,7 +154,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     } else {
       if (providers.count) {
         // There's some unsupported providers, surface the error to the user.
-        [self showAlertWithMessage:[FUIAuthStrings cannotAuthenticateError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_CannotAuthenticateError)];
       } else {
         // New user.
         UIViewController *controller;
@@ -194,8 +194,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     [tableView registerNib:cellNib forCellReuseIdentifier:kCellReuseIdentifier];
     cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   }
-  cell.label.text = [FUIAuthStrings email];
-  cell.textField.placeholder = [FUIAuthStrings enterYourEmail];
+  cell.label.text = FUILocalizedString(kStr_Email);
+  cell.textField.placeholder = FUILocalizedString(kStr_EnterYourEmail);
   cell.textField.delegate = self;
   cell.accessibilityIdentifier = kEmailCellAccessibilityID;
   _emailField = cell.textField;

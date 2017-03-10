@@ -74,7 +74,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
                          bundle:nibBundleOrNil
                          authUI:authUI];
   if (self) {
-    self.title = [FUIAuthStrings authPickerTitle];
+    self.title = FUILocalizedString(kStr_AuthPickerTitle);
   }
   return self;
 }
@@ -118,7 +118,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
     UIButton *emailButton =
         [[FUIAuthSignInButton alloc] initWithFrame:buttonFrame
                                                image:[FUIAuthUtils imageNamed:@"ic_email"]
-                                                text:[FUIAuthStrings signInWithEmail]
+                                                text:FUILocalizedString(kStr_SignInWithEmail)
                                      backgroundColor:emailButtonBackgroundColor
                                            textColor:[UIColor whiteColor]];
     [emailButton addTarget:self
@@ -206,7 +206,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
     if (error) {
       if (error.code == FIRAuthErrorCodeInvalidEmail) {
         // This should never happen because the email address comes from the backend.
-        [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
+        [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
       } else {
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
           [self.authUI invokeResultCallbackWithUser:nil error:error];
@@ -216,7 +216,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
     }
     if (!providers.count) {
       // This should never happen because the user must be registered.
-      [self showAlertWithMessage:[FUIAuthStrings cannotAuthenticateError]];
+      [self showAlertWithMessage:FUILocalizedString(kStr_CannotAuthenticateError)];
       return;
     }
     NSString *bestProviderID = providers[0];
@@ -240,7 +240,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
     id<FUIAuthProvider> bestProvider = [self providerWithID:bestProviderID];
     if (!bestProvider) {
       // Unsupported provider.
-      [self showAlertWithMessage:[FUIAuthStrings cannotAuthenticateError]];
+      [self showAlertWithMessage:FUILocalizedString(kStr_CannotAuthenticateError)];
       return;
     }
 

@@ -42,12 +42,12 @@ NS_ASSUME_NONNULL_BEGIN
     }
   } alertTitle:@"Delete Account?"
                     alertMessage:@"This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action"
-                alertCloseButton:[FUIAuthStrings cancel]];
+                alertCloseButton:FUILocalizedString(kStr_Cancel)];
 }
 
 - (void)showDeleteAccountViewWithPassword {
   __block FUIStaticContentTableViewCell *passwordCell =
-  [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings password]
+  [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Password)
                                         action:nil
                                           type:FUIStaticContentTableViewCellTypePassword];
   FUIStaticContentTableViewContent *contents =
@@ -99,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
        [self deleteCurrentAccount];
       }];
   UIAlertAction *action =
-      [UIAlertAction actionWithTitle:[FUIAuthStrings cancel]
+      [UIAlertAction actionWithTitle:FUILocalizedString(kStr_Cancel)
                                style:UIAlertActionStyleCancel
                              handler:nil];
   [alertController addAction:deleteAction];

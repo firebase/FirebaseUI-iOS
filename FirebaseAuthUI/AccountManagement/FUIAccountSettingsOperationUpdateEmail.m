@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showUpdateEmail {
   __block FUIStaticContentTableViewCell *cell =
-      [FUIStaticContentTableViewCell cellWithTitle:[FUIAuthStrings email]
+      [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Email)
                                              value:_delegate.auth.currentUser.email
                                             action:nil
                                               type:FUIStaticContentTableViewCellTypeInput];
@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc] initWithContents:contents
-                                                          nextTitle:[FUIAuthStrings save]
+                                                          nextTitle:FUILocalizedString(kStr_Save)
                                                        nextAction:^{
         [self updateEmailForCurrentUser:cell.value];
       }];
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)updateEmailForCurrentUser:(NSString *)email {
   if (![[FUIAuthBaseViewController class] isValidEmail:email]) {
-    [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
+    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
   } else {
     [_delegate incrementActivity];
     [_delegate.auth.currentUser updateEmail:email completion:^(NSError * _Nullable error) {

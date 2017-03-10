@@ -193,7 +193,7 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
                                             message:message
                                      preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction =
-        [UIAlertAction actionWithTitle:[FUIAuthStrings OK]
+        [UIAlertAction actionWithTitle:FUILocalizedString(kStr_OK)
                                  style:UIAlertActionStyleDefault
                                handler:nil];
     [alertController addAction:okAction];
@@ -204,7 +204,7 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
                                    message:message
                                   delegate:nil
                          cancelButtonTitle:nil
-                         otherButtonTitles:[FUIAuthStrings OK], nil];
+                         otherButtonTitles:FUILocalizedString(kStr_OK), nil];
     [alert show];
   }
 }
@@ -213,11 +213,11 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
                         provider:(id<FUIAuthProvider>)provider
                          handler:(FUIAuthAlertActionHandler)handler {
   NSString *message =
-      [NSString stringWithFormat:[FUIAuthStrings providerUsedPreviouslyMessage],
+      [NSString stringWithFormat:FUILocalizedString(kStr_ProviderUsedPreviouslyMessage),
           email, provider.shortName];
   if ([UIAlertController class]) {
     UIAlertController *alertController =
-        [UIAlertController alertControllerWithTitle:[FUIAuthStrings existingAccountTitle]
+        [UIAlertController alertControllerWithTitle:FUILocalizedString(kStr_ExistingAccountTitle)
                                             message:message
                                      preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *signInAction =
@@ -228,7 +228,7 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
         }];
     [alertController addAction:signInAction];
     UIAlertAction *cancelAction =
-        [UIAlertAction actionWithTitle:[FUIAuthStrings cancel]
+        [UIAlertAction actionWithTitle:FUILocalizedString(kStr_Cancel)
                                  style:UIAlertActionStyleCancel
                                handler:^(UIAlertAction * _Nonnull action) {
                                  [self.authUI signOutWithError:nil];
@@ -237,10 +237,10 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
     [self presentViewController:alertController animated:YES completion:nil];
   } else {
     UIAlertView *alertView =
-        [[UIAlertView alloc] initWithTitle:[FUIAuthStrings existingAccountTitle]
+        [[UIAlertView alloc] initWithTitle:FUILocalizedString(kStr_ExistingAccountTitle)
                                    message:message
                                   delegate:self
-                         cancelButtonTitle:[FUIAuthStrings cancel]
+                         cancelButtonTitle:FUILocalizedString(kStr_Cancel)
                          otherButtonTitles:provider.signInLabel, nil];
     FUIAuthAlertViewDelegate *delegate =
         [[FUIAuthAlertViewDelegate alloc] initWithCancelHandler:^{
@@ -254,7 +254,7 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
 - (void)pushViewController:(UIViewController *)viewController {
   // Override the back button title with "Back".
   self.navigationItem.backBarButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:[FUIAuthStrings back]
+      [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Back)
                                        style:UIBarButtonItemStylePlain
                                       target:nil
                                       action:nil];
