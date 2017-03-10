@@ -385,7 +385,7 @@ typedef NS_ENUM(NSInteger, FUIASAccountState) {
 #pragma mark - FUIAccountSettingsOperationUIDelegate
 
 - (void)presentViewController:(UIViewController *)controller {
-  [self presentViewController:controller animated:YES completion:nil];
+  [self.navigationController presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)pushViewController:(UIViewController *)controller {
