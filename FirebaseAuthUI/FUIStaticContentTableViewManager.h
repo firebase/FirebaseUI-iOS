@@ -146,14 +146,19 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
 @interface FUIStaticContentTableViewCell : NSObject
 
 /** @property title
-    @brief The text of the @c titleLabel of the @c UITableViewCell.
+    @brief The text of the @c titleLabel of the @c FUIStaticContentTableViewCell.
  */
 @property(nonatomic, copy, readonly, nullable) NSString *title;
 
 /** @property value
-    @brief The text of the @c detailTextLabel of the @c UITableViewCell.
+    @brief The text of the @c detailTextLabel of the @c FUIStaticContentTableViewCell.
  */
 @property(nonatomic, copy, nullable) NSString *value;
+
+/** @property placeholder
+    @brief The text of the placeholder or hint of the @c FUIStaticContentTableViewCell.
+ */
+@property(nonatomic, copy, nullable) NSString *placeholder;
 
 /** @property type
     @brief Style of displaying cell. Default value is @c FUIStaticContentTableViewCellTypeDefault
@@ -171,21 +176,21 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
 
 /** @fn cellWithTitle:
     @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
-    @param title The text of the @c titleLabel of the @c UITableViewCell.
+    @param title The text of the @c titleLabel of the @c FUIStaticContentTableViewCell.
  */
 + (instancetype)cellWithTitle:(nullable NSString *)title;
 
 /** @fn cellWithTitle:value:
     @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
-    @param title The text of the @c titleLabel of the @c UITableViewCell.
-    @param value The text of the @c detailTextLabel of the @c UITableViewCell.
+    @param title The text of the @c titleLabel of the @c FUIStaticContentTableViewCell.
+    @param value The text of the @c detailTextLabel of the @c FUIStaticContentTableViewCell.
  */
 + (instancetype)cellWithTitle:(nullable NSString *)title
                         value:(nullable NSString *)value;
 
 /** @fn cellWithTitle:action:
     @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
-    @param title The text of the @c titleLabel of the @c UITableViewCell.
+    @param title The text of the @c titleLabel of the @c FUIStaticContentTableViewCell.
     @param action A block which is executed when the cell is selected.
  */
 + (instancetype)cellWithTitle:(nullable NSString *)title
@@ -193,47 +198,75 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
 
 /** @fn cellWithTitle:action:type:
     @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
-    @param title The text of the @c titleLabel of the @c UITableViewCell.
-    @param action A block which is executed when the cell is selected.
+    @param title The text of the @c titleLabel of the @c FUIStaticContentTableViewCell.
     @param type Style of displaying cell.
+    @param action A block which is executed when the cell is selected.
  */
 + (instancetype)cellWithTitle:(nullable NSString *)title
-                       action:(nullable FUIStaticContentTableViewCellAction)action
-                         type:(FUIStaticContentTableViewCellType) type;
+                         type:(FUIStaticContentTableViewCellType) type
+                       action:(nullable FUIStaticContentTableViewCellAction)action;
 
 /** @fn cellWithTitle:value:action:
     @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
-    @param title The text of the @c titleLabel of the @c UITableViewCell.
-    @param value The text of the @c detailTextLabel of the @c UITableViewCell.
+    @param title The text of the @c titleLabel of the @c FUIStaticContentTableViewCell.
+    @param value The text of the @c detailTextLabel of the @c FUIStaticContentTableViewCell.
     @param action A block which is executed when the cell is selected.
  */
 + (instancetype)cellWithTitle:(nullable NSString *)title
                         value:(nullable NSString *)value
                        action:(nullable FUIStaticContentTableViewCellAction)action;
 
-/** @fn cellWithTitle:value:action:type:
+/** @fn cellWithTitle:value:type:action:
     @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
-    @param title The text of the @c titleLabel of the @c UITableViewCell.
-    @param value The text of the @c detailTextLabel of the @c UITableViewCell.
+    @param title The text of the @c titleLabel of the @c FUIStaticContentTableViewCell.
+    @param value The text of the @c detailTextLabel of the @c FUIStaticContentTableViewCell.
     @param action A block which is executed when the cell is selected.
     @param type Style of displaying cell.
  */
 + (instancetype)cellWithTitle:(nullable NSString *)title
                         value:(nullable NSString *)value
-                       action:(nullable FUIStaticContentTableViewCellAction)action
-                         type:(FUIStaticContentTableViewCellType) type;
+                         type:(FUIStaticContentTableViewCellType) type
+                       action:(nullable FUIStaticContentTableViewCellAction)action;
 
-/** @fn initWithTitle:value:action:type:
-    @brief Designated initializer.
-    @param title The text of the @c titleLabel of the @c UITableViewCell.
-    @param value The text of the @c detailTextLabel of the @c UITableViewCell.
+/** @fn cellWithTitle:value:type:action:
+    @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
+    @param title The text of the @c titleLabel of the @c FUIStaticContentTableViewCell.
+    @param value The text of the @c detailTextLabel of the @c FUIStaticContentTableViewCell.
     @param action A block which is executed when the cell is selected.
     @param type Style of displaying cell.
  */
++ (instancetype)cellWithTitle:(nullable NSString *)title
+                        value:(nullable NSString *)value
+                         type:(FUIStaticContentTableViewCellType) type
+                       action:(nullable FUIStaticContentTableViewCellAction)action;
+
+/** @fn cellWithTitle:value:type:action:
+    @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
+    @param title The text of the @c titleLabel of the @c FUIStaticContentTableViewCell.
+    @param value The text of the @c detailTextLabel of the @c FUIStaticContentTableViewCell.
+    @param placeholder The placeholder of input filed, if any.
+    @param action A block which is executed when the cell is selected.
+    @param type Style of displaying cell.
+ */
++ (instancetype)cellWithTitle:(nullable NSString *)title
+                        value:(nullable NSString *)value
+                  placeholder:(nullable NSString *)placeholder
+                         type:(FUIStaticContentTableViewCellType) type
+                       action:(nullable FUIStaticContentTableViewCellAction)action;
+
+/** @fn initWithTitle:value:action:type:
+    @brief Designated initializer.
+    @param title The text of the @c titleLabel of the @c FUIStaticContentTableViewCell.
+    @param value The text of the @c detailTextLabel of the @c FUIStaticContentTableViewCell.
+    @param placeholder The placeholder of input filed, if any.
+    @param type Style of displaying cell.
+    @param action A block which is executed when the cell is selected.
+ */
 - (instancetype)initWithTitle:(nullable NSString *)title
                         value:(nullable NSString *)value
-                       action:(nullable FUIStaticContentTableViewCellAction)action
+                  placeholder:(nullable NSString *)placeholder
                          type:(FUIStaticContentTableViewCellType) type
+                       action:(nullable FUIStaticContentTableViewCellAction)action
     NS_DESIGNATED_INITIALIZER;
 
 /** @fn init

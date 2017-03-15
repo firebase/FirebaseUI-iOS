@@ -54,8 +54,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showDeleteAccountViewWithPassword {
   __block FUIStaticContentTableViewCell *passwordCell =
   [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Password)
-                                        action:nil
-                                          type:FUIStaticContentTableViewCellTypePassword];
+                                         value:nil
+                                   placeholder:FUILocalizedString(kStr_PlaceholderEnterPassword)
+                                          type:FUIStaticContentTableViewCellTypePassword
+                                        action:nil];
   FUIStaticContentTableViewContent *contents =
       [FUIStaticContentTableViewContent contentWithSections:@[
    [FUIStaticContentTableViewSection sectionWithTitle:nil cells:@[passwordCell]],

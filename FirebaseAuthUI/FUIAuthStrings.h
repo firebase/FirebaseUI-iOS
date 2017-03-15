@@ -95,6 +95,11 @@ extern NSString *const kStr_ProviderTitleGoogle;
 extern NSString *const kStr_ProviderTitleFacebook;
 extern NSString *const kStr_ProviderTitleTwitter;
 extern NSString *const kStr_SignInWithProvider;
+extern NSString *const kStr_PlaceholderEnterName;
+extern NSString *const kStr_PlaceholderEnterEmail;
+extern NSString *const kStr_PlaceholderEnterPassword;
+extern NSString *const kStr_PlaceholderChosePassword;
+extern NSString *const kStr_PlaceholderNewPassword;
 
 #ifdef __cplusplus
 extern "C" {

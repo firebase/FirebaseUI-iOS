@@ -54,11 +54,6 @@ static NSString *const kVisibilityOnImage = @"ic_visibility.png";
 
 @implementation FUIStaticContentTableViewManager
 
-/**
- <#Description#>
-
- @param contents <#contents description#>
- */
 - (void)setContents:(nullable FUIStaticContentTableViewContent *)contents {
   _contents = contents;
   [self.tableView reloadData];
@@ -113,6 +108,7 @@ static NSString *const kVisibilityOnImage = @"ic_visibility.png";
     cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentitfier
                                            forIndexPath:indexPath];
   }
+  cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
   cell.detailTextLabel.text = cellData.value;
   cell.textLabel.text = cellData.title;
   cell.accessoryType = cellData.action &&
@@ -120,6 +116,8 @@ static NSString *const kVisibilityOnImage = @"ic_visibility.png";
       UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
   cell.textLabel.textColor = cellData.type == FUIStaticContentTableViewCellTypeButton ?
       [UIColor blueColor] : [UIColor blackColor];
+  cell.selectionStyle = cellData.action ? UITableViewCellSelectionStyleDefault :
+                                          UITableViewCellSelectionStyleNone;
   return cell;
 }
 
@@ -129,7 +127,9 @@ static NSString *const kVisibilityOnImage = @"ic_visibility.png";
       [tableView dequeueReusableCellWithIdentifier:kPasswordCellReuseIdentitfier];
   cell.title.text = cellData.title;
   cell.password.text = cellData.value;
+  cell.password.placeholder = cellData.placeholder;
   cell.cellData = cellData;
+  cell.title.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
   return cell;
 }
 
@@ -139,7 +139,9 @@ static NSString *const kVisibilityOnImage = @"ic_visibility.png";
       [tableView dequeueReusableCellWithIdentifier:kInputCellReuseIdentitfier];
   cell.title.text = cellData.title;
   cell.input.text = cellData.value;
+  cell.input.placeholder = cellData.placeholder;
   cell.cellData = cellData;
+  cell.title.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
   return cell;
 }
 
@@ -204,33 +206,37 @@ static NSString *const kVisibilityOnImage = @"ic_visibility.png";
 + (instancetype)cellWithTitle:(nullable NSString *)title {
   return [[self alloc] initWithTitle:title
                                value:nil
-                              action:nil
-                                type:FUIStaticContentTableViewCellTypeDefault];
+                         placeholder:nil
+                                type:FUIStaticContentTableViewCellTypeDefault
+                              action:nil];
 }
 
 + (instancetype)cellWithTitle:(nullable NSString *)title
                         value:(nullable NSString *)value {
   return [[self alloc] initWithTitle:title
                                value:value
-                              action:nil
-                                type:FUIStaticContentTableViewCellTypeDefault];
+                         placeholder:nil
+                                type:FUIStaticContentTableViewCellTypeDefault
+                              action:nil];
 }
 
 + (instancetype)cellWithTitle:(nullable NSString *)title
                        action:(nullable FUIStaticContentTableViewCellAction)action {
   return [[self alloc] initWithTitle:title
                                value:nil
-                              action:action
-                                type:FUIStaticContentTableViewCellTypeDefault];
+                         placeholder:nil
+                                type:FUIStaticContentTableViewCellTypeDefault
+                              action:action];
 }
 
 + (instancetype)cellWithTitle:(nullable NSString *)title
-                       action:(nullable FUIStaticContentTableViewCellAction)action
-                         type:(FUIStaticContentTableViewCellType) type {
+                         type:(FUIStaticContentTableViewCellType) type
+                       action:(nullable FUIStaticContentTableViewCellAction)action {
   return [[self alloc] initWithTitle:title
                                value:nil
-                              action:action
-                                type:type];
+                         placeholder:nil
+                                type:type
+                              action:action];
 }
 
 + (instancetype)cellWithTitle:(nullable NSString *)title
@@ -238,29 +244,45 @@ static NSString *const kVisibilityOnImage = @"ic_visibility.png";
                        action:(nullable FUIStaticContentTableViewCellAction)action {
   return [[self alloc] initWithTitle:title
                                value:value
-                              action:action
-                                type:FUIStaticContentTableViewCellTypeDefault];
+                         placeholder:nil
+                                type:FUIStaticContentTableViewCellTypeDefault
+                              action:action];
 }
 
 + (instancetype)cellWithTitle:(nullable NSString *)title
                         value:(nullable NSString *)value
-                       action:(nullable FUIStaticContentTableViewCellAction)action
-                         type:(FUIStaticContentTableViewCellType) type {
+                         type:(FUIStaticContentTableViewCellType) type
+                       action:(nullable FUIStaticContentTableViewCellAction)action {
   return [[self alloc] initWithTitle:title
                                value:value
-                              action:action
-                                type:type];
+                          placeholder:nil
+                               type:type
+                              action:action];
+}
+
++ (instancetype)cellWithTitle:(nullable NSString *)title
+                        value:(nullable NSString *)value
+                  placeholder:(nullable NSString *)placeholder
+                         type:(FUIStaticContentTableViewCellType) type
+                       action:(nullable FUIStaticContentTableViewCellAction)action {
+  return [[self alloc] initWithTitle:title
+                               value:value
+                         placeholder:placeholder
+                                type:type
+                              action:action];
 }
 
 - (instancetype)initWithTitle:(nullable NSString *)title
                         value:(nullable NSString *)value
-                       action:(nullable FUIStaticContentTableViewCellAction)action
-                         type:(FUIStaticContentTableViewCellType) type {
+                  placeholder:(nullable NSString *)placeholder
+                         type:(FUIStaticContentTableViewCellType) type
+                       action:(nullable FUIStaticContentTableViewCellAction)action {
   self = [super init];
   if (self) {
     _title = [title copy];
     _value = [value copy];
     _action = [action copy];
+    _placeholder = [placeholder copy];
     _type = type;
   }
   return self;

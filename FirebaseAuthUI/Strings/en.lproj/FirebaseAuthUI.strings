@@ -226,3 +226,17 @@
 /* Sign in with provider button label. */
 "SignInWithProvider" = "Sign in with %@";
 
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Enter your name";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterEmail" = "Enter your email";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Enter your password";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "New password";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Choose password";

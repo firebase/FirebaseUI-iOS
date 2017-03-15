@@ -361,19 +361,21 @@ static NSString *const kUserAccountImage = @"ic_account_circle.png";
 - (FUIStaticContentTableViewSection *)createActionsSection {
   FUIStaticContentTableViewCell *signOutCell =
       [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellSignOut)
+                                              type:FUIStaticContentTableViewCellTypeButton
                                             action:^{
         [FUIAccountSettingsOperationSignOut executeOperationWithDelegate:self];
       }
-                                              type:FUIStaticContentTableViewCellTypeButton];
+];
   NSMutableArray *cells = [NSMutableArray arrayWithObject:signOutCell];
   if (!_deleteAccountActionDisabled) {
     FUIStaticContentTableViewCell *deleteCell =
       [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_ASCellDeleteAccount)
+                                              type:FUIStaticContentTableViewCellTypeButton
                                             action:^{
         [FUIAccountSettingsOperationDeleteAccount executeOperationWithDelegate:self
                                                                     showDialog:YES];
       }
-                                              type:FUIStaticContentTableViewCellTypeButton];
+];
     [cells addObject:deleteCell];
   }
   return [FUIStaticContentTableViewSection sectionWithTitle:nil cells:cells];

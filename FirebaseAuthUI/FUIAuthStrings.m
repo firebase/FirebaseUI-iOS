@@ -98,6 +98,11 @@ NSString *const kStr_ProviderTitleGoogle = @"ProviderTitleGoogle";
 NSString *const kStr_ProviderTitleFacebook = @"ProviderTitleFacebook";
 NSString *const kStr_ProviderTitleTwitter = @"ProviderTitleTwitter";
 NSString *const kStr_SignInWithProvider = @"SignInWithProvider";
+NSString *const kStr_PlaceholderEnterName = @"PlaceholderEnterName";
+NSString *const kStr_PlaceholderEnterEmail = @"PlaceholderEnterEmail";
+NSString *const kStr_PlaceholderEnterPassword = @"PlaceholderEnterPassword";
+NSString *const kStr_PlaceholderChosePassword = @"PlaceholderChosePassword";
+NSString *const kStr_PlaceholderNewPassword = @"PlaceholderNewPassword";
 
 /** @var kKeyNotFound
     @brief The value returned if the key is not found in the table.

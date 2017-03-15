@@ -34,9 +34,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onForgotPassword {
   __block FUIStaticContentTableViewCell *inputCell =
   [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Email)
-                                        value:self.delegate.auth.currentUser.email
-                                        action:nil
-                                          type:FUIStaticContentTableViewCellTypeInput];
+                                         value:self.delegate.auth.currentUser.email
+                                         placeholder:FUILocalizedString(kStr_PlaceholderEnterEmail)
+                                          type:FUIStaticContentTableViewCellTypeInput
+                                        action:nil];
   FUIStaticContentTableViewContent *contents =
       [FUIStaticContentTableViewContent
            contentWithSections:@[

@@ -30,8 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
   __block FUIStaticContentTableViewCell *cell =
       [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Name)
                                              value:self.delegate.auth.currentUser.displayName
-                                            action:nil
-                                              type:FUIStaticContentTableViewCellTypeInput];
+                                       placeholder:FUILocalizedString(kStr_PlaceholderEnterName)
+                                              type:FUIStaticContentTableViewCellTypeInput
+                                            action:nil];
   FUIStaticContentTableViewContent *contents =
     [FUIStaticContentTableViewContent contentWithSections:@[
       [FUIStaticContentTableViewSection sectionWithTitle:nil

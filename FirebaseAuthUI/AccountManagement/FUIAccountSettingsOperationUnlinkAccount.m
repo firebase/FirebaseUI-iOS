@@ -56,8 +56,8 @@ NS_ASSUME_NONNULL_BEGIN
       [FUIStaticContentTableViewCell cellWithTitle:
           [FUIAuthBaseViewController providerLocalizedName:_provider.providerID]
                                              value:_provider.displayName
-                                            action:nil
-                                              type:FUIStaticContentTableViewCellTypeDefault];
+                                              type:FUIStaticContentTableViewCellTypeDefault
+                                            action:nil];
   FUIStaticContentTableViewContent *contents =
     [FUIStaticContentTableViewContent contentWithSections:@[
       [FUIStaticContentTableViewSection sectionWithTitle:nil
@@ -95,10 +95,9 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)unlinkAcount {
-  [[FIRAuth auth].currentUser unlinkFromProvider:
-      [FUIAuthBaseViewController providerLocalizedName:_provider.providerID]
-                                      completion:^(FIRUser *_Nullable user,
-                                                   NSError *_Nullable error) {
+  [self.delegate.auth.currentUser unlinkFromProvider:_provider.providerID
+                                          completion:^(FIRUser *_Nullable user,
+                                                       NSError *_Nullable error) {
     [self finishOperationWithError:error];
     [self.delegate presentBaseController];
   }];

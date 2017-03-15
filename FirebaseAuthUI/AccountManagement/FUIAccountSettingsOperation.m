@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
   }
 
-  [[FUIAuth defaultAuthUI] invokeOperationCallback:[self operationType] error:error];
+  [self.delegate.authUI invokeOperationCallback:[self operationType] error:error];
 }
 
 - (void)showSelectProviderDialogWithAlertTitle:(nullable NSString *)title
@@ -229,8 +229,10 @@ NS_ASSUME_NONNULL_BEGIN
                                           handler {
   __block FUIStaticContentTableViewCell *passwordCell =
       [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Password)
-                                            action:nil
-                                              type:FUIStaticContentTableViewCellTypePassword];
+                                             value:nil
+                                       placeholder:FUILocalizedString(kStr_PlaceholderEnterPassword)
+                                              type:FUIStaticContentTableViewCellTypePassword
+                                            action:nil];
   FUIStaticContentTableViewContent *contents =
     [FUIStaticContentTableViewContent contentWithSections:@[
       [FUIStaticContentTableViewSection sectionWithTitle:nil

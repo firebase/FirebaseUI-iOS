@@ -77,10 +77,14 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)showUpdatePassword:(BOOL)newPassword {
+  NSString *placeHolder = newPassword ? FUILocalizedString(kStr_PlaceholderChosePassword) :
+                                        FUILocalizedString(kStr_PlaceholderNewPassword);
   __block FUIStaticContentTableViewCell *passwordCell =
       [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Password)
-                                            action:nil
-                                              type:FUIStaticContentTableViewCellTypePassword];
+                                             value:nil
+                                       placeholder:placeHolder
+                                              type:FUIStaticContentTableViewCellTypePassword
+                                            action:nil];
   FUIStaticContentTableViewContent *contents =
     [FUIStaticContentTableViewContent contentWithSections:@[
       [FUIStaticContentTableViewSection sectionWithTitle:nil
