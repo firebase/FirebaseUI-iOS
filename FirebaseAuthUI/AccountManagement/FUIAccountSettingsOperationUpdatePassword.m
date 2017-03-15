@@ -65,13 +65,15 @@ NS_ASSUME_NONNULL_BEGIN
     message = FUILocalizedString(kStr_EditPasswordAlertMessage);
   }
 
-  [self showVerifyDialog:^{ [self showUpdatePassword:newPassword]; } message:message];
+  [self showVerifyDialogWithMessage:message
+                    providerHandler:^{ [self showUpdatePassword:newPassword]; }];
 
 }
 
 - (void)showUpdatePasswordView {
-  [self showVerifyPasswordView:^{ [self showUpdatePassword:NO]; }
-                       message:FUILocalizedString(kStr_ReauthenticateEditPasswordAlertMessage)];
+  [self showVerifyPasswordViewWithMessage:
+      FUILocalizedString(kStr_ReauthenticateEditPasswordAlertMessage)
+                          providerHandler:^{ [self showUpdatePassword:NO]; }];
 }
 
 - (void)showUpdatePassword:(BOOL)newPassword {

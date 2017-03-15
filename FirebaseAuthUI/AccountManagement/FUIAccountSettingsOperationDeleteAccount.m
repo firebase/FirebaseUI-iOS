@@ -36,7 +36,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)showDeleteAccountDialog {
-  [self showSelectProviderDialog:^(id<FIRUserInfo> provider) {
+  [self showSelectProviderDialogWithAlertTitle:
+      FUILocalizedString(kStr_DeleteAccountConfimationTitle)
+                                  alertMessage:FUILocalizedString(kStr_DeleteAccountBody)
+                              alertCloseButton:FUILocalizedString(kStr_Cancel)
+                               providerHandler:^(id<FIRUserInfo> provider) {
     if (![provider.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
       [self reauthenticateWithProvider:provider.providerID actionHandler:^{
         [self showDeleteAccountView];
@@ -44,10 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
     } else {
       [self showDeleteAccountViewWithPassword];
     }
-  }
-                      alertTitle:FUILocalizedString(kStr_DeleteAccountConfimationTitle)
-                    alertMessage:FUILocalizedString(kStr_DeleteAccountBody)
-                alertCloseButton:FUILocalizedString(kStr_Cancel)];
+  }];
 }
 
 - (void)showDeleteAccountViewWithPassword {

@@ -38,13 +38,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showUpdateEmailDialog {
   NSString *message;
     message = FUILocalizedString(kStr_UpdateEmailAlertMessage);
-  [self showVerifyDialog:^{ [self showUpdateEmail]; } message:message];
+  [self showVerifyDialogWithMessage:message providerHandler:^{ [self showUpdateEmail]; }];
 
 }
 
 - (void)showUpdateEmailView {
-  [self showVerifyPasswordView:^{ [self showUpdateEmail]; }
-                       message:FUILocalizedString(kStr_UpdateEmailVerificationAlertMessage)];
+  [self showVerifyPasswordViewWithMessage:
+      FUILocalizedString(kStr_UpdateEmailVerificationAlertMessage)
+                          providerHandler:^{ [self showUpdateEmail]; }];
 }
 
 - (void)showUpdateEmail {

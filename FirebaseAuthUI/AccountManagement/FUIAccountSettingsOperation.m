@@ -100,10 +100,11 @@ NS_ASSUME_NONNULL_BEGIN
   [[FUIAuth defaultAuthUI] invokeOperationCallback:[self operationType] error:error];
 }
 
-- (void)showSelectProviderDialog:(nullable FUIAccountSettingsChooseProviderHandler)handler
-                      alertTitle:(nullable NSString *)title
-                    alertMessage:(nullable NSString *)message
-                alertCloseButton:(nullable NSString *)closeActionTitle {
+- (void)showSelectProviderDialogWithAlertTitle:(nullable NSString *)title
+                                  alertMessage:(nullable NSString *)message
+                              alertCloseButton:(nullable NSString *)closeActionTitle
+                               providerHandler:(nullable FUIAccountSettingsChooseProviderHandler)
+                                               handler; {
   UIAlertController *alert =
     [UIAlertController alertControllerWithTitle:title
                                         message:message
@@ -209,22 +210,23 @@ NS_ASSUME_NONNULL_BEGIN
   }];
 }
 
-- (void)showVerifyDialog:(nullable FUIAccountSettingsReauthenticateHandler)handler
-                 message:(NSString *)message {
-  [self showSelectProviderDialog:^(id<FIRUserInfo> provider) {
+- (void)showVerifyDialogWithMessage:(NSString *)message
+                    providerHandler:(nullable FUIAccountSettingsReauthenticateHandler)handler {
+  [self showSelectProviderDialogWithAlertTitle:FUILocalizedString(kStr_VerifyItsYou)
+                                  alertMessage:message
+                              alertCloseButton:FUILocalizedString(kStr_Cancel)
+                               providerHandler:^(id<FIRUserInfo> provider) {
     if (![provider.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
       [self reauthenticateWithProvider:provider.providerID actionHandler:handler];
     } else {
-      [self showVerifyPasswordView:handler message:message];
+      [self showVerifyPasswordViewWithMessage:message providerHandler:handler];
     }
-  }
-                      alertTitle:FUILocalizedString(kStr_VerifyItsYou)
-                    alertMessage:message
-                alertCloseButton:FUILocalizedString(kStr_Cancel)];
+  }];
 }
 
-- (void)showVerifyPasswordView:(nullable FUIAccountSettingsReauthenticateHandler)handler
-                       message:(NSString *)message {
+- (void)showVerifyPasswordViewWithMessage:(NSString *)message
+                          providerHandler:(nullable FUIAccountSettingsReauthenticateHandler)
+                                          handler {
   __block FUIStaticContentTableViewCell *passwordCell =
       [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Password)
                                             action:nil

@@ -66,33 +66,34 @@ typedef void(^FUIAccountSettingsReauthenticateHandler)(void);
 - (void)reauthenticateWithPassword:(NSString *)password
                      actionHandler:(nullable FUIAccountSettingsReauthenticateHandler)handler;
 
-/** @fn showSelectProviderDialog:alertTitle:alertMessage:alertCloseButton:
+/** @fn showSelectProviderDialogWithAlertTitle:alertMessage:alertCloseButton:providerHandler:
     @brief Displays alert dialog with all available 3P providers.
-    @param handler Block which is called when user selects any of 3P providers.
     @param title The title of the dialog
     @param message The message displayed in the alert body.
     @param closeActionTitle The title of the close button.
+    @param handler Block which is called when user selects any of 3P providers.
  */
-- (void)showSelectProviderDialog:(nullable FUIAccountSettingsChooseProviderHandler)handler
-                      alertTitle:(nullable NSString *)title
-                    alertMessage:(nullable NSString *)message
-                alertCloseButton:(nullable NSString *)closeActionTitle;
+- (void)showSelectProviderDialogWithAlertTitle:(nullable NSString *)title
+                                  alertMessage:(nullable NSString *)message
+                              alertCloseButton:(nullable NSString *)closeActionTitle
+                               providerHandler:(nullable FUIAccountSettingsChooseProviderHandler)
+                                               handler;
 
-/** @fn showVerifyDialog:message:
+/** @fn showVerifyDialogWithMessage:providerHandler:
     @brief Displays alert dialog when user need to verify it's identity.
-    @param handler Block which is called when user selects any of 3P providers.
     @param message The message displayed in the alert body.
+    @param handler Block which is called when user selects any of 3P providers.
  */
-- (void)showVerifyDialog:(nullable FUIAccountSettingsReauthenticateHandler)handler
-                 message:(NSString *)message;
+- (void)showVerifyDialogWithMessage:(NSString *)message
+                    providerHandler:(nullable FUIAccountSettingsReauthenticateHandler)handler;
 
-/** @fn showVerifyPasswordView:message:
+/** @fn showVerifyPasswordViewWithMessage:providerHandler:
     @brief Displays view with password input field when user need to verify it's identity.
-    @param handler Block which is called when user selects any of 3P providers.
     @param message The message displayed in the alert body.
+    @param handler Block which is called when user selects any of 3P providers.
  */
-- (void)showVerifyPasswordView:(nullable FUIAccountSettingsReauthenticateHandler)handler
-                       message:(NSString *)message;
+- (void)showVerifyPasswordViewWithMessage:(NSString *)message
+                          providerHandler:(nullable FUIAccountSettingsReauthenticateHandler)handler;
                        
 /** @fn showAlertWithMessage:message:
     @brief Displays alert view with with specified message and OK button.
