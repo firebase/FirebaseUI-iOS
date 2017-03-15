@@ -51,13 +51,21 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
     @param user The signed in user if the sign in attempt was successful.
     @param error The error that occured during sign in, if any.
  */
-- (void)authUI:(FUIAuth *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error;
+- (void)authUI:(FUIAuth *)authUI
+    didSignInWithUser:(nullable FIRUser *)user
+                error:(nullable NSError *)error;
 
 @optional
 
-// TODO: add docs
-- (void)authUI:(FUIAuth *)authUI didFinishOperation:(FUIAccountSettingsOperationType)operation
-    error:(nullable NSError *)error;
+/** @fn authUI:didFinishOperation:error:
+    @brief Message sent after finishing Account Management operation.
+    @param authUI The @c FUIAuth instance sending the messsage.
+    @param operation The operation type that was just completed.
+    @param error The error that occured during operation, if any.
+ */
+ - (void)authUI:(FUIAuth *)authUI
+    didFinishOperation:(FUIAccountSettingsOperationType)operation
+                 error:(nullable NSError *)error;
 
 /** @fn authPickerViewControllerForAuthUI:
     @brief Sent to the receiver to ask for an instance of @c FUIAuthPickerViewController subclass

@@ -139,8 +139,8 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
                       return;
                     }
 
-                    [user linkWithCredential:_newCredential completion:^(FIRUser * _Nullable user,
-                                                                         NSError * _Nullable error) {
+                    [user linkWithCredential:_newCredential completion:^(FIRUser *_Nullable user,
+                                                                         NSError *_Nullable error) {
                       [self decrementActivity];
 
                       // Ignore any error (shouldn't happen) and treat the user as successfully signed in.

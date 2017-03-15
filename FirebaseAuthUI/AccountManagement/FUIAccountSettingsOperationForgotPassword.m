@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation FUIAccountSettingsOperationForgotPassword
 
+- (FUIAccountSettingsOperationType)operationType {
+  return FUIAccountSettingsOperationTypeForgotPassword;
+}
+
 -(void)execute:(BOOL)showDialog {
   [self onForgotPassword];
 }
@@ -30,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onForgotPassword {
   __block FUIStaticContentTableViewCell *inputCell =
   [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Email)
-                                        value:_delegate.auth.currentUser.email
+                                        value:self.delegate.auth.currentUser.email
                                         action:nil
                                           type:FUIStaticContentTableViewCellTypeInput];
   FUIStaticContentTableViewContent *contents =
@@ -47,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
                  nextAction:^{ [self onPasswordRecovery:inputCell.value]; }
                  headerText:FUILocalizedString(kStr_PasswordRecoveryMessage)];
   controller.title = FUILocalizedString(kStr_PasswordRecoveryTitle);
-  [_delegate pushViewController:controller];
+  [self.delegate pushViewController:controller];
 }
 
 - (void)onPasswordRecovery:(NSString *)email {
@@ -56,25 +60,35 @@ NS_ASSUME_NONNULL_BEGIN
     return;
   }
 
-  [_delegate incrementActivity];
+  [self.delegate incrementActivity];
 
-  [_delegate.auth sendPasswordResetWithEmail:email
+  [self.delegate.auth sendPasswordResetWithEmail:email
                              completion:^(NSError *_Nullable error) {
-     // The dispatch is a workaround for a bug in FirebaseAuth 3.0.2, which doesn't call the
-     // completion block on the main queue.
-     dispatch_async(dispatch_get_main_queue(), ^{
-       [_delegate decrementActivity];
+    // The dispatch is a workaround for a bug in FirebaseAuth 3.0.2, which doesn't call the
+    // completion block on the main queue.
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self.delegate decrementActivity];
 
-       if (error) {
-         [self finishOperationWithError:error];
-         return;
-       }
+      if (error) {
+        [self finishOperationWithError:error];
+        return;
+      }
 
-       NSString *message = [NSString stringWithFormat:
-           FUILocalizedString(kStr_PasswordRecoveryEmailSentMessage), email];
-       [self showAlertWithMessage:message];
-     });
-   }];
+      NSString *message = [NSString stringWithFormat:
+                              FUILocalizedString(kStr_PasswordRecoveryEmailSentMessage), email];
+      UIAlertController *alertController =
+          [UIAlertController alertControllerWithTitle:nil
+                                              message:message
+                                       preferredStyle:UIAlertControllerStyleAlert];
+      UIAlertAction *okAction = [UIAlertAction actionWithTitle:FUILocalizedString(kStr_OK)
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction *_Nonnull action) {
+                                  [self finishOperationWithError:error];
+                                }];
+      [alertController addAction:okAction];
+      [self.delegate presentViewController:alertController];
+    });
+  }];
 }
 
 @end

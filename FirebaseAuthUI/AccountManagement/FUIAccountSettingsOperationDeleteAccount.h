@@ -26,8 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** @fn executeOperationWithDelegate:
     @brief Instead use @c executeOperationWithDelegate:showDialog:
     @param delegate UI delegate which handles all UI related logic.
+    @return Instance of the executed operation.
  */
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
++ (instancetype)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
     NS_UNAVAILABLE;
 
 @end

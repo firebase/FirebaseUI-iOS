@@ -28,10 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation FUIAccountSettingsOperationUpdatePassword
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
-                          showDialog:(BOOL)showDialog
-                         newPassword:(BOOL)newPassword {
-  return [[[self alloc] initWithDelegate:delegate newPassword:newPassword] execute:showDialog];
++ (instancetype)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
+                                  showDialog:(BOOL)showDialog
+                                 newPassword:(BOOL)newPassword {
+  FUIAccountSettingsOperationUpdatePassword *operation =
+      [[self alloc] initWithDelegate:delegate newPassword:newPassword];
+  [operation execute:showDialog];
+  return operation;
 }
 
 - (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
@@ -40,6 +43,10 @@ NS_ASSUME_NONNULL_BEGIN
     _newPassword = newPassword;
   }
   return self;
+}
+
+- (FUIAccountSettingsOperationType)operationType {
+  return FUIAccountSettingsOperationTypeUpdatePassword;
 }
 
 - (void)execute:(BOOL)showDialog {
@@ -90,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
   } else {
     controller.title = FUILocalizedString(kStr_EditPasswordTitle);
   }
-  [_delegate pushViewController:controller];
+  [self.delegate pushViewController:controller];
 
 }
 
@@ -98,12 +105,12 @@ NS_ASSUME_NONNULL_BEGIN
   if (!password.length) {
     [self showAlertWithMessage:FUILocalizedString(kStr_WeakPasswordError)];
   } else {
-    [_delegate incrementActivity];
-    [_delegate.auth.currentUser updatePassword:password completion:^(NSError * _Nullable error) {
-      [_delegate decrementActivity];
+    [self.delegate incrementActivity];
+    [self.delegate.auth.currentUser updatePassword:password completion:^(NSError *_Nullable error) {
+      [self.delegate decrementActivity];
       [self finishOperationWithError:error];
       if (!error) {
-        [_delegate presentBaseController];
+        [self.delegate presentBaseController];
       }
     }];
   }
