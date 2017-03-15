@@ -23,7 +23,7 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="88" id="NQp-aD-hrg"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -33,7 +33,7 @@
                             <constraint firstAttribute="height" constant="44" id="JL9-Jt-Ytc"/>
                         </constraints>
                         <nil key="textColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                         <connections>
                             <action selector="onInputChanged:" destination="iNb-DP-bP2" eventType="editingChanged" id="W8F-zs-sCz"/>
