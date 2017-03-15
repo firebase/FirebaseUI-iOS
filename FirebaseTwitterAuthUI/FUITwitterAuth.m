@@ -115,7 +115,7 @@ presentingViewController:(nullable UIViewController *)presentingViewController
             completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
 
   [[self getTwitterManager] logInWithViewController:presentingViewController
-                                         completion:^(TWTRSession * _Nullable session, NSError * _Nullable error) {
+                                         completion:^(TWTRSession *_Nullable session, NSError *_Nullable error) {
      if (session) {
        FIRAuthCredential *credential =
        [FIRTwitterAuthProvider credentialWithToken:session.authToken

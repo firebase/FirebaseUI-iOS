@@ -25,7 +25,7 @@
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
-*/
+ */
 static NSString *const kTableName = @"FirebaseGoogleAuthUI";
 
 /** @var kSignInWithGoogle

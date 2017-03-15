@@ -38,7 +38,7 @@ typedef void(^FUIAccountSettingsReauthenticateHandler)(void);
 /** @class FUIAccountSettingsOperation
     @brief Internal methods which are not exposed for public usage.
  */
-@interface FUIAccountSettingsOperation (Internal)
+@interface FUIAccountSettingsOperation ()
 
 /** @fn initWithDelegate:
     @brief Creates new instance of @c FUIAccountSettingsOperation.
@@ -99,6 +99,11 @@ typedef void(^FUIAccountSettingsReauthenticateHandler)(void);
     @param message The message displayed in the alert body.
  */
 - (void)showAlertWithMessage:(NSString *)message;
+
+/** @property delegate
+    @brief The operation UI delegate which handles all UI callbacks.
+ */
+@property(nonatomic, weak, readonly) id<FUIAccountSettingsOperationUIDelegate> delegate;
 
 @end
 

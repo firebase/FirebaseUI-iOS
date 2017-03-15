@@ -30,9 +30,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   NSString *_headerText;
   NSString *_footerText;
   NSString *_actionTitle;
-  __unsafe_unretained IBOutlet UILabel *_headerLabel;
-  __unsafe_unretained IBOutlet UITableView *_tableView;
-  __unsafe_unretained IBOutlet UIButton *_footerButton;
+  __weak IBOutlet UILabel *_headerLabel;
+  __weak IBOutlet UITableView *_tableView;
+  __weak IBOutlet UIButton *_footerButton;
   FUIStaticContentTableViewManager *_tableViewManager;
   FUIStaticContentTableViewCellAction _nextAction;
   FUIStaticContentTableViewCellAction _footerAction;

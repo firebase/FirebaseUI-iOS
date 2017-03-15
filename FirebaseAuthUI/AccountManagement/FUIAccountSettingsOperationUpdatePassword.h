@@ -28,15 +28,17 @@ NS_ASSUME_NONNULL_BEGIN
     @param delegate UI delegate which handles all UI related logic.
     @param showDialog Determines if operation specific UI should be started with confirmation
         dialog.
+    @return Instance of the executed operation.
  */
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
-                          showDialog:(BOOL)showDialog NS_UNAVAILABLE;
++ (instancetype)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
+                                  showDialog:(BOOL)showDialog NS_UNAVAILABLE;
 
 /** @fn executeOperationWithDelegate:
     @brief Instead use @c executeOperationWithDelegate:showDialog:newPassword:
     @param delegate UI delegate which handles all UI related logic.
+    @return Instance of the executed operation.
  */
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
++ (instancetype)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
     NS_UNAVAILABLE;
 
 
@@ -47,10 +49,11 @@ NS_ASSUME_NONNULL_BEGIN
     @param showDialog Determines if operation specific UI should be started with confirmation
         dialog.
     @param newPassword Defines if this is add password (pass YES) or update password operation.
+    @return Instance of the executed operation.
  */
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
-                          showDialog:(BOOL)showDialog
-                         newPassword:(BOOL)newPassword;
++ (instancetype)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
+                                  showDialog:(BOOL)showDialog
+                                 newPassword:(BOOL)newPassword;
 
 @end
 

@@ -230,7 +230,7 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
     UIAlertAction *cancelAction =
         [UIAlertAction actionWithTitle:FUILocalizedString(kStr_Cancel)
                                  style:UIAlertActionStyleCancel
-                               handler:^(UIAlertAction * _Nonnull action) {
+                               handler:^(UIAlertAction *_Nonnull action) {
                                  [self.authUI signOutWithError:nil];
                                }];
     [alertController addAction:cancelAction];

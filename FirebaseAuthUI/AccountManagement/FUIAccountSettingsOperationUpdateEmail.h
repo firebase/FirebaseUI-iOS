@@ -28,9 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
     @param delegate UI delegate which handles all UI related logic.
     @param showDialog Determines if operation specific UI should be started with confirmation
         dialog.
+    @return Instance of the executed operation.
  */
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
-                          showDialog:(BOOL)showDialog NS_UNAVAILABLE;
++ (instancetype)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
+                                  showDialog:(BOOL)showDialog NS_UNAVAILABLE;
 
 @end
 

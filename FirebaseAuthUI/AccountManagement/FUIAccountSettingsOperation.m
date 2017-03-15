@@ -30,51 +30,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation FUIAccountSettingsOperation
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
-                                 showDialog:(BOOL)showDialog {
-  [[[self alloc] initWithDelegate:delegate] execute:showDialog];
++ (instancetype)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
+                          showDialog:(BOOL)showDialog {
+  FUIAccountSettingsOperation *operation = [[self alloc] initWithDelegate:delegate];
+  [operation execute:showDialog];
+  return operation;
 }
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate {
-  [[[self alloc] initWithDelegate:delegate] execute:NO];
++ (instancetype)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate {
+  FUIAccountSettingsOperation *operation = [[self alloc] initWithDelegate:delegate];
+  [operation execute:NO];
+  return operation;
 }
 
-- (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate {
+- (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)operationDelegate {
   if (self = [super init]) {
-    _delegate = delegate;
+    _delegate = operationDelegate;
   }
-
   return self;
 }
 
 - (void)execute:(BOOL)showDialog {
-  // This method should always be overriden.
-  [self doesNotRecognizeSelector:_cmd];
+  NSAssert(NO, @"Expected execute: to be overwritten by subclass");
 }
 
 - (FUIAccountSettingsOperationType)operationType {
-    static NSDictionary* classMap = nil;
-
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-      classMap = @{
-        NSStringFromClass([FUIAccountSettingsOperationUpdateName class]) :
-            @(FUIAccountSettingsOperationTypeUpdateName),
-        NSStringFromClass([FUIAccountSettingsOperationUpdatePassword class]) :
-            @(FUIAccountSettingsOperationTypeUpdatePassword),
-        NSStringFromClass([FUIAccountSettingsOperationForgotPassword class]) :
-            @(FUIAccountSettingsOperationTypeForgotPassword),
-        NSStringFromClass([FUIAccountSettingsOperationUpdateEmail class]) :
-            @(FUIAccountSettingsOperationTypeUpdateEmail),
-        NSStringFromClass([FUIAccountSettingsOperationUnlinkAccount class]) :
-            @(FUIAccountSettingsOperationTypeUnlinkAccount),
-        NSStringFromClass([FUIAccountSettingsOperationSignOut class]) :
-            @(FUIAccountSettingsOperationTypeSignOut),
-        NSStringFromClass([FUIAccountSettingsOperationDeleteAccount class]) :
-            @(FUIAccountSettingsOperationTypeDeleteAccount)
-      };
-    });
-  return [classMap[NSStringFromClass([self class])] integerValue];
+  NSAssert(NO, @"Expected execute: to be overwritten by subclass");
+  return FUIAccountSettingsOperationTypeUnsupported;
 }
 
 #pragma mark - protected methods
@@ -84,35 +66,34 @@ NS_ASSUME_NONNULL_BEGIN
     switch (error.code) {
       case FIRAuthErrorCodeEmailAlreadyInUse:
         [self showAlertWithMessage:FUILocalizedString(kStr_EmailAlreadyInUseError)];
-        return;
+        break;
       case FIRAuthErrorCodeInvalidEmail:
         [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
-        return;
+        break;
       case FIRAuthErrorCodeWeakPassword:
         [self showAlertWithMessage:FUILocalizedString(kStr_WeakPasswordError)];
-        return;
+        break;
       case FIRAuthErrorCodeTooManyRequests:
         [self showAlertWithMessage:FUILocalizedString(kStr_SignUpTooManyTimesError)];
-        return;
+        break;
       case FIRAuthErrorCodeWrongPassword:
         [self showAlertWithMessage:FUILocalizedString(kStr_WrongPasswordError)];
-        return;
+        break;
       case FIRAuthErrorCodeUserNotFound:
         [self showAlertWithMessage:FUILocalizedString(kStr_UserNotFoundError)];
-        return;
+        break;
       case FIRAuthErrorCodeUserDisabled:
         [self showAlertWithMessage:FUILocalizedString(kStr_AccountDisabledError)];
-        return;
-      case FUIAuthErrorCodeCantFindProvider:
-        {
-          NSString *message = [NSString stringWithFormat:FUILocalizedString(kStr_CantFindProvider),
-            error.userInfo[FUIAuthErrorUserInfoProviderIDKey]];
-          [self showAlertWithMessage:message];
-          return;
-        }
+        break;
+      case FUIAuthErrorCodeCantFindProvider: {
+        NSString *message = [NSString stringWithFormat:FUILocalizedString(kStr_CantFindProvider),
+          error.userInfo[FUIAuthErrorUserInfoProviderIDKey]];
+        [self showAlertWithMessage:message];
+        break;
+      }
       case FIRAuthErrorCodeUserMismatch:
         [self showAlertWithMessage:FUILocalizedString(kStr_EmailsDontMatch)];
-        return;
+        break;
     }
   }
 
@@ -124,17 +105,16 @@ NS_ASSUME_NONNULL_BEGIN
                     alertMessage:(nullable NSString *)message
                 alertCloseButton:(nullable NSString *)closeActionTitle {
   UIAlertController *alert =
-  [UIAlertController alertControllerWithTitle:title
-                                      message:message
-                               preferredStyle:UIAlertControllerStyleAlert];
-
-  for (id<FIRUserInfo> provider in _delegate.auth.currentUser.providerData) {
+    [UIAlertController alertControllerWithTitle:title
+                                        message:message
+                                 preferredStyle:UIAlertControllerStyleAlert];
+  for (id<FIRUserInfo> provider in self.delegate.auth.currentUser.providerData) {
     NSString *providerTitle =
         [NSString stringWithFormat:FUILocalizedString(kStr_SignInWithProvider),
             [FUIAuthBaseViewController providerLocalizedName:provider.providerID]];
     UIAlertAction* action = [UIAlertAction actionWithTitle:providerTitle
                                                      style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction * _Nonnull action) {
+                                                   handler:^(UIAlertAction *_Nonnull action) {
       if (handler) {
         handler(provider);
       }
@@ -145,8 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                         style:UIAlertActionStyleCancel
                                                       handler:nil];
   [alert addAction:closeButton];
-  [_delegate presentViewController:alert];
-
+  [self.delegate presentViewController:alert];
 }
 
 - (void)showAlertWithMessage:(NSString *)message {
@@ -158,14 +137,14 @@ NS_ASSUME_NONNULL_BEGIN
                                                      style:UIAlertActionStyleDefault
                                                    handler:nil];
   [alertController addAction:okAction];
-  [_delegate presentViewController:alertController];
+  [self.delegate presentViewController:alertController];
 }
 
 - (void)reauthenticateWithProvider:(NSString *)providerID
                      actionHandler:(nullable FUIAccountSettingsReauthenticateHandler)handler {
 
-  id providerUI;
-  for (id<FUIAuthProvider> authProvider in _delegate.authUI.providers) {
+  id<FUIAuthProvider> providerUI;
+  for (id<FUIAuthProvider> authProvider in self.delegate.authUI.providers) {
     if ([providerID isEqualToString:authProvider.providerID]) {
       providerUI = authProvider;
       break;
@@ -182,26 +161,27 @@ NS_ASSUME_NONNULL_BEGIN
     return;
   }
 
-  [_delegate incrementActivity];
+  [self.delegate incrementActivity];
   // Sign out first to make sure sign in starts with a clean state.
   [providerUI signOut];
-  [providerUI signInWithEmail:_delegate.auth.currentUser.email
-     presentingViewController:[_delegate presentingController]
+  [providerUI signInWithEmail:self.delegate.auth.currentUser.email
+     presentingViewController:[self.delegate presentingController]
                    completion:^(FIRAuthCredential *_Nullable credential,
                                 NSError *_Nullable error) {
     if (error) {
-     [_delegate decrementActivity];
+     [self.delegate decrementActivity];
      [self finishOperationWithError:error];
      return;
     }
-    [_delegate.auth.currentUser reauthenticateWithCredential:credential
+    [self.delegate.auth.currentUser reauthenticateWithCredential:credential
                                                   completion:^(NSError *_Nullable error) {
-      [_delegate decrementActivity];
+      [self.delegate decrementActivity];
       if (error) {
         [self finishOperationWithError:error];
       } else {
         if (handler) {
           handler();
+          [self finishOperationWithError:error];
         }
       }
     }];
@@ -215,12 +195,12 @@ NS_ASSUME_NONNULL_BEGIN
     return;
   }
 
-  [_delegate incrementActivity];
+  [self.delegate incrementActivity];
 
-  [_delegate.auth signInWithEmail:_delegate.auth.currentUser.email
-                    password:password
-                  completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-    [_delegate decrementActivity];
+  [self.delegate.auth signInWithEmail:self.delegate.auth.currentUser.email
+                             password:password
+                           completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+    [self.delegate decrementActivity];
 
     [self finishOperationWithError:error];
     if (!error && handler) {
@@ -266,10 +246,10 @@ NS_ASSUME_NONNULL_BEGIN
                                                          footerText:
           FUILocalizedString(kStr_ForgotPassword)
                                                        footerAction:^{
-        [FUIAccountSettingsOperationForgotPassword executeOperationWithDelegate:_delegate];
+        [FUIAccountSettingsOperationForgotPassword executeOperationWithDelegate:self.delegate];
       }];
   controller.title = FUILocalizedString(kStr_VerifyItsYou);
-  [_delegate pushViewController:controller];
+  [self.delegate pushViewController:controller];
 }
 
 @end

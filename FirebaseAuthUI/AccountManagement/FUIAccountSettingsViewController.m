@@ -51,7 +51,7 @@ static NSString *const kUserAccountImage = @"ic_account_circle.png";
 @end
 
 @implementation FUIAccountSettingsViewController {
-  __unsafe_unretained IBOutlet UITableView *_tableView;
+  __weak UITableView *_tableView;
   FUIStaticContentTableViewManager *_tableViewManager;
   FUIASAccountState _accountState;
 }

@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation FUIAccountSettingsOperationUpdateEmail
 
+- (FUIAccountSettingsOperationType)operationType {
+  return FUIAccountSettingsOperationTypeUpdateEmail;
+}
+
 - (void)execute:(BOOL)showDialog {
   if (showDialog) {
     [self showUpdateEmailDialog];
@@ -46,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showUpdateEmail {
   __block FUIStaticContentTableViewCell *cell =
       [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Email)
-                                             value:_delegate.auth.currentUser.email
+                                             value:self.delegate.auth.currentUser.email
                                             action:nil
                                               type:FUIStaticContentTableViewCellTypeInput];
   FUIStaticContentTableViewContent *contents =
@@ -63,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
         [self updateEmailForCurrentUser:cell.value];
       }];
   controller.title = FUILocalizedString(kStr_EditEmailTitle);
-  [_delegate pushViewController:controller];
+  [self.delegate pushViewController:controller];
 
 }
 
@@ -71,12 +75,12 @@ NS_ASSUME_NONNULL_BEGIN
   if (![[FUIAuthBaseViewController class] isValidEmail:email]) {
     [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
   } else {
-    [_delegate incrementActivity];
-    [_delegate.auth.currentUser updateEmail:email completion:^(NSError * _Nullable error) {
-      [_delegate decrementActivity];
+    [self.delegate incrementActivity];
+    [self.delegate.auth.currentUser updateEmail:email completion:^(NSError *_Nullable error) {
+      [self.delegate decrementActivity];
       [self finishOperationWithError:error];
       if (!error) {
-        [_delegate presentBaseController];
+        [self.delegate presentBaseController];
       }
     }];
   }

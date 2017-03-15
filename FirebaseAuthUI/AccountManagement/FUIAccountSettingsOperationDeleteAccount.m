@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation FUIAccountSettingsOperationDeleteAccount
 
+- (FUIAccountSettingsOperationType)operationType {
+  return FUIAccountSettingsOperationTypeDeleteAccount;
+}
+
 - (void)execute:(BOOL)showDialog {
   if (showDialog) {
     [self showDeleteAccountDialog];
@@ -65,11 +69,11 @@ NS_ASSUME_NONNULL_BEGIN
                 headerText:message
                 footerText:FUILocalizedString(kStr_ForgotPassword)
               footerAction:^{
-        [FUIAccountSettingsOperationForgotPassword executeOperationWithDelegate:_delegate];
+        [FUIAccountSettingsOperationForgotPassword executeOperationWithDelegate:self.delegate];
       }];
   // TODO: add localization
   controller.title = FUILocalizedString(kStr_DeleteAccountControllerTitle);
-  [_delegate pushViewController:controller];
+  [self.delegate pushViewController:controller];
 }
 
 - (void)showDeleteAccountView {
@@ -83,20 +87,20 @@ NS_ASSUME_NONNULL_BEGIN
                                                          headerText:message];
   // TODO: add localization
   controller.title = FUILocalizedString(kStr_DeleteAccountControllerTitle);
-  [_delegate pushViewController:controller];
+  [self.delegate pushViewController:controller];
 
 }
 
 
 - (void)onDeleteAccountViewNextAction {
   UIAlertController *alertController =
-  [UIAlertController alertControllerWithTitle:FUILocalizedString(kStr_DeleteAccountConfimationTitle)
-                                      message:FUILocalizedString(kStr_ActionCantBeUndone)
-                               preferredStyle:UIAlertControllerStyleAlert];
+    [UIAlertController alertControllerWithTitle:FUILocalizedString(kStr_DeleteAccountConfimationTitle)
+                                        message:FUILocalizedString(kStr_ActionCantBeUndone)
+                                 preferredStyle:UIAlertControllerStyleAlert];
   UIAlertAction *deleteAction =
       [UIAlertAction actionWithTitle:FUILocalizedString(kStr_DeleteAccountControllerTitle)
                                style:UIAlertActionStyleDestructive
-                             handler:^(UIAlertAction * _Nonnull action) {
+                             handler:^(UIAlertAction *_Nonnull action) {
        [self deleteCurrentAccount];
       }];
   UIAlertAction *action =
@@ -105,7 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
                              handler:nil];
   [alertController addAction:deleteAction];
   [alertController addAction:action];
-  [_delegate presentViewController:alertController];
+  [self.delegate presentViewController:alertController];
 
 }
 
@@ -116,12 +120,12 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)deleteCurrentAccount {
-  [_delegate incrementActivity];
-  [_delegate.auth.currentUser deleteWithCompletion:^(NSError * _Nullable error) {
-    [_delegate decrementActivity];
+  [self.delegate incrementActivity];
+  [self.delegate.auth.currentUser deleteWithCompletion:^(NSError *_Nullable error) {
+    [self.delegate decrementActivity];
     [self finishOperationWithError:error];
     if (!error) {
-      [_delegate presentBaseController];
+      [self.delegate presentBaseController];
     }
   }];
 }

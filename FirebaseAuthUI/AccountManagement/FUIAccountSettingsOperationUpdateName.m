@@ -22,10 +22,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation FUIAccountSettingsOperationUpdateName
 
+- (FUIAccountSettingsOperationType)operationType {
+  return FUIAccountSettingsOperationTypeUpdateName;
+}
+
 - (void)execute:(BOOL)showDialog {
   __block FUIStaticContentTableViewCell *cell =
       [FUIStaticContentTableViewCell cellWithTitle:FUILocalizedString(kStr_Name)
-                                             value:_delegate.auth.currentUser.displayName
+                                             value:self.delegate.auth.currentUser.displayName
                                             action:nil
                                               type:FUIStaticContentTableViewCellTypeInput];
   FUIStaticContentTableViewContent *contents =
@@ -41,17 +45,17 @@ NS_ASSUME_NONNULL_BEGIN
         [self onUpdateName:cell.value];
       }];
   controller.title = FUILocalizedString(kStr_EditNameTitle);
-  [_delegate pushViewController:controller];
+  [self.delegate pushViewController:controller];
 }
 
 - (void)onUpdateName:(NSString *)username {
-  [_delegate incrementActivity];
-  FIRUserProfileChangeRequest *request = [_delegate.auth.currentUser profileChangeRequest];
+  [self.delegate incrementActivity];
+  FIRUserProfileChangeRequest *request = [self.delegate.auth.currentUser profileChangeRequest];
   request.displayName = username;
   [request commitChangesWithCompletion:^(NSError *_Nullable error) {
-    [_delegate decrementActivity];
+    [self.delegate decrementActivity];
     [self finishOperationWithError:error];
-    [_delegate presentBaseController];
+    [self.delegate presentBaseController];
   }];
 }
 

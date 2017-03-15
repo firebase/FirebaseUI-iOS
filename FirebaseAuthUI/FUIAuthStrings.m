@@ -101,12 +101,12 @@ NSString *const kStr_SignInWithProvider = @"SignInWithProvider";
 
 /** @var kKeyNotFound
     @brief The value returned if the key is not found in the table.
-*/
+ */
 NSString *const kKeyNotFound = @"KeyNotFound";
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
-*/
+ */
 NSString *const kTableName = @"FirebaseAuthUI";
 
 NSString *FUILocalizedString(NSString *key) {

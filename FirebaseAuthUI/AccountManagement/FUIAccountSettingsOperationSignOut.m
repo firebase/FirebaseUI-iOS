@@ -22,16 +22,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation FUIAccountSettingsOperationSignOut
 
+- (FUIAccountSettingsOperationType)operationType {
+  return FUIAccountSettingsOperationTypeSignOut;
+}
+
 - (void)execute:(BOOL)showDialog {
   [self signOut];
 }
 
 - (void)signOut{
   NSError *error;
-  [_delegate.authUI signOutWithError:&error];
+  [self.delegate.authUI signOutWithError:&error];
   [self finishOperationWithError:error];
   if (!error) {
-    [_delegate presentBaseController];
+    [self.delegate presentBaseController];
   }
 
 }

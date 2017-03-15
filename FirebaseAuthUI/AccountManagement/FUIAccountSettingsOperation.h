@@ -57,12 +57,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)presentBaseController;
 
-/** @fn presentBaseController
+/** @fn presentViewController:
     @brief Presents (pops) @c UIViewController from navigation stack.
  */
 - (void)presentViewController:(UIViewController *)controller;
 
-/** @fn presentBaseController
+/** @fn pushViewController:
     @brief Adds (pushes) @c UIViewController to navigation stack.
  */
 - (void)pushViewController:(UIViewController *)controller;
@@ -78,10 +78,6 @@ NS_ASSUME_NONNULL_BEGIN
     @brief Handles logic for every specific user operation.
  */
 @interface FUIAccountSettingsOperation : NSObject
-{
-  @protected
-  id<FUIAccountSettingsOperationUIDelegate> _delegate;
-}
 
 /** @fn executeOperationWithDelegate:showDialog:
     @brief Creates new instance of @c FUIAccountSettingsOperation and executes logic
@@ -89,16 +85,18 @@ NS_ASSUME_NONNULL_BEGIN
     @param delegate UI delegate which handles all UI related logic.
     @param showDialog Determines if operation specific UI should be started with confirmation
         dialog.
+    @return Instance of the executed operation.
  */
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
-                          showDialog:(BOOL)showDialog;
++ (instancetype)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
+                                  showDialog:(BOOL)showDialog;
 
 /** @fn executeOperationWithDelegate:
     @brief Creates new instance of @c FUIAccountSettingsOperation and executes logic
         associated with it. New flow is started with new view.
     @param delegate UI delegate which handles all UI related logic.
+    @return Instance of the executed operation.
  */
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate;
++ (instancetype)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate;
 
 @end
 

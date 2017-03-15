@@ -30,10 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation FUIAccountSettingsOperationUnlinkAccount
 
-+ (void)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
-                          showDialog:(BOOL)showDialog
-                            provider:(id<FIRUserInfo>)provider {
-  [[[self alloc] initWithDelegate:delegate provider:provider] execute:showDialog];
++ (instancetype)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
+                                  showDialog:(BOOL)showDialog
+                                    provider:(id<FIRUserInfo>)provider {
+  FUIAccountSettingsOperationUnlinkAccount *operation =
+      [[self alloc] initWithDelegate:delegate provider:provider];
+  [operation execute:showDialog];
+  return operation;
 }
 
 - (instancetype)initWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
@@ -42,6 +45,10 @@ NS_ASSUME_NONNULL_BEGIN
     _provider = provider;
   }
   return self;
+}
+
+- (FUIAccountSettingsOperationType)operationType {
+  return FUIAccountSettingsOperationTypeUnlinkAccount;
 }
 
 - (void)execute:(BOOL)showDialog {
@@ -66,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
         [self showUnlinkConfirmationDialog];
       }];
   controller.title = FUILocalizedString(kStr_UnlinkTitle);
-  [_delegate pushViewController:controller];
+  [self.delegate pushViewController:controller];
 }
 
 - (void)showUnlinkConfirmationDialog {
@@ -84,16 +91,16 @@ NS_ASSUME_NONNULL_BEGIN
                            style:UIAlertActionStyleCancel
                          handler:nil];
   [alertController addAction:cancelAction];
-  [_delegate presentViewController:alertController];
+  [self.delegate presentViewController:alertController];
 }
 
 - (void)unlinkAcount {
   [[FIRAuth auth].currentUser unlinkFromProvider:
       [FUIAuthBaseViewController providerLocalizedName:_provider.providerID]
-                                      completion:^(FIRUser * _Nullable user,
-                                                   NSError * _Nullable error) {
+                                      completion:^(FIRUser *_Nullable user,
+                                                   NSError *_Nullable error) {
     [self finishOperationWithError:error];
-    [_delegate presentBaseController];
+    [self.delegate presentBaseController];
   }];
 }
 

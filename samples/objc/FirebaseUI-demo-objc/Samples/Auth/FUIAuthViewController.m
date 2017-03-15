@@ -111,7 +111,8 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
   [super viewWillAppear:animated];
 
   __weak FUIAuthViewController *weakSelf = self;
-  self.authStateDidChangeHandle = [self.auth addAuthStateDidChangeListener:^(FIRAuth * _Nonnull auth, FIRUser * _Nullable user) {
+  self.authStateDidChangeHandle =
+      [self.auth addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth, FIRUser *_Nullable user) {
     [weakSelf updateUI:auth withUser:user];
   }];
 
@@ -133,7 +134,7 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
 
 #pragma mark - UI methods
 
-- (void)updateUI:(FIRAuth * _Nonnull) auth withUser:(FIRUser * _Nullable) user {
+- (void)updateUI:(FIRAuth * _Nonnull) auth withUser:(FIRUser *_Nullable) user {
   if (user) {
     self.cellSignIn.textLabel.text = @"Signed-in";
     self.cellName.textLabel.text = user.displayName;
