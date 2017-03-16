@@ -23,26 +23,27 @@
 #import <FirebaseTwitterAuthUI/FirebaseTwitterAuthUI.h>
 #import <OCMock/OCMock.h>
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, UISections) {
   kSectionsSignedInAs = 0,
   kSectionsSimulationBehavior,
-  kSectionsProviders
-} UISections;
+  kSectionsProviders,
+  kSectionsAccountManager
+};
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, FIRSimulationChoise) {
   kSimulationNoMocks = 0,
   kSimulationExistingUser,
   kSimulationNewUser,
   kSimulationEmailRecovery,
   kSimulationUnknown,
-} FIRSimulationChoise;
+};
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, FIRProviders) {
   kIDPEmail = 0,
   kIDPGoogle,
   kIDPFacebook,
   kIDPTwitter
-} FIRProviders;
+};
 
 @interface FUIViewController () <FUIAuthDelegate, NSURLSessionDataDelegate>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAuthorization;
@@ -84,6 +85,18 @@ typedef enum : NSUInteger {
   if (indexPath.section != kSectionsProviders) {
     _selectedSimulationChoise = indexPath.row;
     [self deselectAllCellsExcept:indexPath];
+  }
+  if (indexPath.section == kSectionsAccountManager) {
+    switch (indexPath.row) {
+      case 0:
+        [self prepareForAccountMangerEmailPassword];
+        break;
+
+      default:
+        break;
+    }
+
+    [self showAccountManager];
   }
 }
 
@@ -169,6 +182,7 @@ typedef enum : NSUInteger {
   OCMStub(ClassMethod([self.authMock auth])).andReturn(self.authMock);
 
   self.authUIMock = OCMPartialMock([self configureFirAuthUI]);
+  OCMStub([self.authUIMock auth]).andReturn(self.authMock);
 }
 
 - (void)prepareStubsForSimulationExistingUser {
@@ -179,18 +193,7 @@ typedef enum : NSUInteger {
   });
 
 
-  OCMStub([self.authMock signInWithEmail:OCMOCK_ANY password:OCMOCK_ANY completion:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
-    FIRAuthResultCallback mockedResponse;
-    [invocation getArgument:&mockedResponse atIndex:4];
-
-    NSString *responseEmail;
-    [invocation getArgument:&responseEmail atIndex:2];
-
-    id mockUser = OCMClassMock([FIRUser class]);
-    OCMStub([mockUser email]).andReturn(responseEmail);
-
-    mockedResponse(mockUser, nil);
-  });
+  [self mockSignInWithEmail];
 }
 
 - (void)prepareStubsForSimulationNewUser {
@@ -209,15 +212,8 @@ typedef enum : NSUInteger {
     [invocation getArgument:&responseEmail atIndex:2];
 
     id mockUser = OCMClassMock([FIRUser class]);
-    id mockRequest = OCMClassMock([FIRUserProfileChangeRequest class]);
     OCMStub([mockUser email]).andReturn(responseEmail);
-    OCMStub([mockUser profileChangeRequest]).andReturn(mockRequest);
-    OCMStub([mockRequest commitChangesWithCompletion:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
-      FIRUserProfileChangeCallback mockedCallBack;
-      [invocation getArgument:&mockedCallBack atIndex:2];
-      mockedCallBack(nil);
-    });
-    
+    [self mockUpdateUserRequest:mockUser];
     
     mockedCallback(mockUser, nil);
   });
@@ -279,4 +275,68 @@ typedef enum : NSUInteger {
   authUI.delegate = self;
   return authUI;
 }
+
+- (void)showAccountManager {
+  UIViewController *controller =
+      [[FUIAccountSettingsViewController alloc] initWithAuthUI:self.authUIMock];
+  [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)prepareForAccountMangerEmailPassword {
+  [self prepareStubsForTests];
+  id mockUser = OCMClassMock([FIRUser class]);
+  OCMStub([self.authMock currentUser]).andReturn(mockUser);
+
+  id emailPasswordProviderMock = OCMProtocolMock(@protocol(FIRUserInfo));
+  OCMStub([emailPasswordProviderMock providerID]).andReturn(FIREmailPasswordAuthProviderID);
+
+  // Mock User display values
+  NSArray *providers = [NSArray arrayWithObject:emailPasswordProviderMock];
+  OCMStub([mockUser providerData]).andReturn(providers);
+  OCMStub([mockUser email]).andReturn(@"email@email.com");
+  OCMStub([mockUser displayName]).andReturn(@"displayName");
+
+  // Mock update name request
+  [self mockUpdateUserRequest:mockUser];
+
+  // Mock udpate email operation
+  OCMStub([mockUser updateEmail:OCMOCK_ANY completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
+    FIRUserProfileChangeCallback mockedCallBack;
+    [invocation getArgument:&mockedCallBack atIndex:3];
+    mockedCallBack(nil);
+  });
+
+  // mock re-authentication with email
+  [self mockSignInWithEmail];
+}
+
+#pragma mark - stubbing methods
+
+- (void)mockUpdateUserRequest:(id)mockUser {
+  id mockRequest = OCMClassMock([FIRUserProfileChangeRequest class]);
+  OCMStub([mockUser profileChangeRequest]).andReturn(mockRequest);
+  OCMStub([mockRequest commitChangesWithCompletion:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
+    FIRUserProfileChangeCallback mockedCallBack;
+    [invocation getArgument:&mockedCallBack atIndex:2];
+    mockedCallBack(nil);
+  });
+}
+
+- (void)mockSignInWithEmail {
+  OCMStub([self.authMock signInWithEmail:OCMOCK_ANY password:OCMOCK_ANY completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
+    FIRAuthResultCallback mockedResponse;
+    [invocation getArgument:&mockedResponse atIndex:4];
+
+    NSString *responseEmail;
+    [invocation getArgument:&responseEmail atIndex:2];
+
+    id mockUser = OCMClassMock([FIRUser class]);
+    OCMStub([mockUser email]).andReturn(responseEmail);
+
+    mockedResponse(mockUser, nil);
+  });
+}
+
 @end

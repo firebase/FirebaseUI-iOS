@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc] initWithContents:contents
                                                           nextTitle:FUILocalizedString(kStr_Save)
-                                                       nextAction:^{
+                                                         nextAction:^{
         [self updateEmailForCurrentUser:cell.value];
       }];
   controller.title = FUILocalizedString(kStr_EditEmailTitle);

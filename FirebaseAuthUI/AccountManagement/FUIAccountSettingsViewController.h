@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import <FirebaseAuthUI/FirebaseAuthUI.h>
+#import "FUIAuthBaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface FUIAccountSettingsViewController : FUIAuthBaseViewController
 
-/** @class deleteAccountActionDisabled
+/** @property deleteAccountActionDisabled
     @brief Whether to hide "Delete account" button, defaults to NO.
  */
 @property(nonatomic, assign, getter=isDeleteAccountActionDisabled)

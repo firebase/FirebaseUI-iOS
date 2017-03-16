@@ -16,6 +16,7 @@
 
 #import "FUIStaticContentTableViewController.h"
 
+#import "FUIAuth.h"
 #import "FUIAuthUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -66,37 +67,42 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                       footerText:(nullable NSString *)footerText
                     footerAction:(nullable FUIStaticContentTableViewCellAction)footerAction {
   if (self = [super initWithNibName:NSStringFromClass([self class])
-                             bundle:[FUIAuthUtils frameworkBundle]]) {
-    _tableViewManager = [[FUIStaticContentTableViewManager alloc] init];
+                             bundle:[FUIAuthUtils frameworkBundle]
+                             authUI:[FUIAuth defaultAuthUI]]) {
     _tableViewManager.contents = contents;
     _nextAction = [nextAction copy];
     _footerAction = [footerAction copy];
     _headerText = [headerText copy];
     _footerText = [footerText copy];
     _actionTitle = [actionTitle copy];
+
+    UIBarButtonItem *actionButtonItem =
+        [[UIBarButtonItem alloc] initWithTitle:_actionTitle
+                                         style:UIBarButtonItemStylePlain
+                                        target:self
+                                        action:@selector(onNext)];
+    actionButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
+    self.navigationItem.rightBarButtonItem = actionButtonItem;
   }
   return self;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  _tableViewManager = [[FUIStaticContentTableViewManager alloc] init];
   _tableViewManager.tableView = _tableView;
   _tableView.delegate = _tableViewManager;
   _tableView.dataSource = _tableViewManager;
-  _headerLabel.text = _headerText ? _headerText : @"";
+  if (_headerText) {
+    _headerLabel.text = _headerText;
+  } else {
+    _tableView.tableHeaderView = nil;
+  }
   if (!_footerText) {
     _tableView.tableFooterView.hidden = YES;
   } else {
     [_footerButton setTitle:_footerText forState:UIControlStateNormal];
   }
-
-  UIBarButtonItem *actionButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:_actionTitle
-                                       style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(onNext)];
-  actionButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
-  self.navigationItem.rightBarButtonItem = actionButtonItem;
 }
 
 - (void)viewDidLayoutSubviews {

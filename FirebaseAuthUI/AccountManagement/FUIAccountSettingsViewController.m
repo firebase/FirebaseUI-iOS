@@ -18,8 +18,6 @@
 
 #import <FirebaseAuth/FirebaseAuth.h>
 
-#import "FUIAuthStrings.h"
-#import "FUIStaticContentTableViewController.h"
 #import "FUIAccountSettingsOperation.h"
 #import "FUIAccountSettingsOperationDeleteAccount.h"
 #import "FUIAccountSettingsOperationForgotPassword.h"
@@ -28,6 +26,9 @@
 #import "FUIAccountSettingsOperationUpdateEmail.h"
 #import "FUIAccountSettingsOperationUpdateName.h"
 #import "FUIAccountSettingsOperationUpdatePassword.h"
+#import "FUIAuthBaseViewController.h"
+#import "FUIAuthStrings.h"
+#import "FUIStaticContentTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -408,11 +409,21 @@ static NSString *const kUserAccountImage = @"ic_account_circle.png";
 }
 
 - (void)incrementActivity {
-  [super incrementActivity];
+  UIViewController *controller = self.navigationController.topViewController;
+  if (controller == self) {
+    [super incrementActivity];
+  } else if ([controller isKindOfClass:[FUIAuthBaseViewController class]]) {
+    [(FUIAuthBaseViewController *)controller incrementActivity];
+  }
 }
 
 - (void)decrementActivity {
-  [super decrementActivity];
+  UIViewController *controller = self.navigationController.topViewController;
+  if (controller == self) {
+    [super decrementActivity];
+  } else if ([controller isKindOfClass:[FUIAuthBaseViewController class]]) {
+    [(FUIAuthBaseViewController *)controller decrementActivity];
+  }
 }
 
 - (UIViewController *)presentingController {

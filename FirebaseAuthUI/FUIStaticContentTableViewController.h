@@ -16,6 +16,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "FUIAuthBaseViewController.h"
 #import "FUIStaticContentTableViewManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -24,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
     @brief The view controller which presents contents of @c FUIStaticContentTableViewContent.
         controller has footer and header views.
  */
-@interface FUIStaticContentTableViewController : UIViewController
+@interface FUIStaticContentTableViewController : FUIAuthBaseViewController
 
 /** @fn initWithContents:nextTitle:nextAction
     @brief Convenience initializer. View controller doesn't have header and footer sections.
@@ -81,6 +82,16 @@ NS_ASSUME_NONNULL_BEGIN
     @brief Please use @c initWithContents:nextTitle:nextAction:headerText:footerText:footerAction:.
  */
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+
+/** @fn initWithNibName:bundle:authUI:
+    @brief Please use @c initWithContents:nextTitle:nextAction:headerText:footerText:footerAction:.
+    @param nibNameOrNil The name of the nib file to associate with the view controller.
+    @param nibBundleOrNil The bundle in which to search for the nib file.
+    @param authUI The @c FUIAuth instance that manages this view controller.
+ */
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FUIAuth *)authUI NS_UNAVAILABLE;
 
 @end
 
