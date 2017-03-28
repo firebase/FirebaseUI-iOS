@@ -50,6 +50,10 @@
   return self;
 }
 
+- (NSArray<FIRDataSnapshot *> *)indexes {
+  return self.array.indexes;
+}
+
 #pragma mark - FUIIndexArrayDelegate
 
 - (void)array:(FUIIndexArray *)array

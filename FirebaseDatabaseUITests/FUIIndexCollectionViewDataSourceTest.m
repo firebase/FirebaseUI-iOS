@@ -93,6 +93,18 @@ static inline NSDictionary *database() {
   [super tearDown];
 }
 
+- (void)testItReturnsItsArraysIndexes {
+  NSArray *expectedIndexes = @[
+    [FUIFakeSnapshot snapWithKey:@"1" value:@(YES)],
+    [FUIFakeSnapshot snapWithKey:@"2" value:@(YES)],
+    [FUIFakeSnapshot snapWithKey:@"3" value:@(YES)],
+  ];
+
+  NSArray *indexes = self.dataSource.indexes;
+
+  XCTAssert([indexes isEqual:expectedIndexes], @"expected data source's indexes to equal its array's indexes");
+}
+
 - (void)testItPopulatesCells {
   UICollectionViewCell *cell = [self.dataSource collectionView:self.collectionView
                                         cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];

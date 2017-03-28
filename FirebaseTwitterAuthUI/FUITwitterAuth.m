@@ -111,27 +111,32 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 }
 
 - (void)signInWithEmail:(nullable NSString *)email
-presentingViewController:(nullable UIViewController *)presentingViewController
-            completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+    presentingViewController:(nullable UIViewController *)presentingViewController
+                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
 
   [[self getTwitterManager] logInWithViewController:presentingViewController
-                                         completion:^(TWTRSession *_Nullable session, NSError *_Nullable error) {
-     if (session) {
-       FIRAuthCredential *credential =
-       [FIRTwitterAuthProvider credentialWithToken:session.authToken
-                                            secret:session.authTokenSecret];
-       if (completion) {
-         completion(credential, nil);
-       }
-     } else {
-       NSError *newError =
-       [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
-                                                  providerID:FIRTwitterAuthProviderID];
-       if (completion) {
-         completion(nil, newError);
-       }
-     }
-   }];
+                                         completion:^(TWTRSession * _Nullable session,
+                                                      NSError * _Nullable error) {
+    if (session) {
+      FIRAuthCredential *credential =
+          [FIRTwitterAuthProvider credentialWithToken:session.authToken
+                                              secret:session.authTokenSecret];
+      if (completion) {
+        completion(credential, nil);
+      }
+    } else {
+      if (completion) {
+        NSError *newError;
+        if (error.code == TWTRLogInErrorCodeCanceled) {
+          newError = [FUIAuthErrorUtils userCancelledSignInError];
+        } else {
+          newError = [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
+                                                              providerID:FIRTwitterAuthProviderID];
+        }
+        completion(nil, newError);
+      }
+    }
+  }];
 }
 
 - (void)signOut {
@@ -144,10 +149,10 @@ presentingViewController:(nullable UIViewController *)presentingViewController
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication {
   return [[self getTwitterManager] application:[UIApplication sharedApplication]
                                        openURL:URL options:@{}];
-
 }
 
 #pragma mark - Private methods
+
 - (Twitter *)getTwitterManager {
   return [Twitter sharedInstance];
 }
