@@ -215,12 +215,12 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
      @"https://developers.facebook.com/docs/ios/getting-started"];
   }
 
-  _loginManager = [self createLoginManger];
+  _loginManager = [self createLoginManager];
 }
 
 #pragma mark - Private methods
 
-- (FBSDKLoginManager *)createLoginManger {
+- (FBSDKLoginManager *)createLoginManager {
   return [[FBSDKLoginManager alloc] init];
 }
 

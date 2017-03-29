@@ -157,7 +157,7 @@
 
   // stub login manager
   OCMExpect(ClassMethod([mockProvider frameworkBundle])).andReturn([NSBundle bundleForClass:[self class]]);
-  OCMExpect([mockProvider createLoginManger]).andReturn(mockFacebookManager);
+  OCMExpect([mockProvider createLoginManager]).andReturn(mockFacebookManager);
   [mockProvider configureProvider];
 
   OCMExpect([mockFacebookManager logOut]);

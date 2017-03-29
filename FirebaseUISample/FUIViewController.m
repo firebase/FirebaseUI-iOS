@@ -86,16 +86,32 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
     _selectedSimulationChoise = indexPath.row;
     [self deselectAllCellsExcept:indexPath];
   }
+
+  [self prepareStubsForTests];
+
   if (indexPath.section == kSectionsAccountManager) {
     switch (indexPath.row) {
       case 0:
-        [self prepareForAccountMangerEmailPassword];
+        [self prepareForAccountManagerWithPasswordWithoutLinkedAccount];
+        break;
+      case 1:
+        [self prepareForAccountManagerWithPasswordWithLinkedAccountWithEmail];
+        break;
+      case 2:
+        [self prepareForAccountManagerWithPasswordWithLinkedAccountWithoutEmail];
+        break;
+      case 3:
+        [self prepareForAccountManagerWithoutPasswordWithLinkedAccountWithoutEmail];
+        break;
+      case 4:
+        [self prepareForAccountManagerWithoutPasswordWithLinkedAccountWithEmail];
         break;
 
       default:
         break;
     }
 
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     [self showAccountManager];
   }
 }
@@ -177,10 +193,12 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 }
 
 - (void)prepareStubsForTests {
+  [self.authMock stopMocking];
   self.authMock = OCMPartialMock([FIRAuth auth]);
 
   OCMStub(ClassMethod([self.authMock auth])).andReturn(self.authMock);
 
+  [self.authUIMock stopMocking];
   self.authUIMock = OCMPartialMock([self configureFirAuthUI]);
   OCMStub([self.authUIMock auth]).andReturn(self.authMock);
 }
@@ -282,19 +300,15 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   [self.navigationController pushViewController:controller animated:YES];
 }
 
-- (void)prepareForAccountMangerEmailPassword {
-  [self prepareStubsForTests];
-  id mockUser = OCMClassMock([FIRUser class]);
-  OCMStub([self.authMock currentUser]).andReturn(mockUser);
+- (void)prepareForAccountManagerWithPasswordWithoutLinkedAccount {
+  id mockUser = [self mockUserWhichHasEmail:YES];
 
-  id emailPasswordProviderMock = OCMProtocolMock(@protocol(FIRUserInfo));
-  OCMStub([emailPasswordProviderMock providerID]).andReturn(FIREmailPasswordAuthProviderID);
+  // Add EmailPassword provider
+  id emailPasswordProviderMock = [self createPasswordProvider];
 
-  // Mock User display values
+  // Stub providerData
   NSArray *providers = [NSArray arrayWithObject:emailPasswordProviderMock];
   OCMStub([mockUser providerData]).andReturn(providers);
-  OCMStub([mockUser email]).andReturn(@"email@email.com");
-  OCMStub([mockUser displayName]).andReturn(@"displayName");
 
   // Mock update name request
   [self mockUpdateUserRequest:mockUser];
@@ -311,7 +325,91 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   [self mockSignInWithEmail];
 }
 
+- (void)prepareForAccountManagerWithPasswordWithLinkedAccountWithEmail {
+  id mockUser = [self mockUserWhichHasEmail:YES];
+
+  //Add EmailPassword provider
+  id emailPasswordProviderMock = [self createPasswordProvider];
+
+  //Add third party provider with email
+  id linkedProviderMock = [self createThirdPartyProviderWhichHasEmail:YES];
+
+  // Stub providerData
+  NSArray *providers =
+      [NSArray arrayWithObjects:emailPasswordProviderMock, linkedProviderMock, nil];
+  OCMStub([mockUser providerData]).andReturn(providers);
+}
+
+- (void)prepareForAccountManagerWithPasswordWithLinkedAccountWithoutEmail {
+  id mockUser = [self mockUserWhichHasEmail:YES];
+
+  //Add third party provider without email
+  id linkedProviderMock = [self createThirdPartyProviderWhichHasEmail:NO];
+
+  //Add EmailPassword provider
+  id emailPasswordProviderMock = [self createPasswordProvider];
+
+  // Stub providerData
+  NSArray *providers =
+      [NSArray arrayWithObjects:emailPasswordProviderMock, linkedProviderMock, nil];
+  OCMStub([mockUser providerData]).andReturn(providers);
+}
+
+- (void)prepareForAccountManagerWithoutPasswordWithLinkedAccountWithoutEmail {
+  id mockUser = [self mockUserWhichHasEmail:NO];
+
+  //Add third party provider without email
+  id linkedProviderMock = [self createThirdPartyProviderWhichHasEmail:NO];
+
+  // Stub providerData
+  NSArray *providers = [NSArray arrayWithObject:linkedProviderMock];
+  OCMStub([mockUser providerData]).andReturn(providers);
+}
+
+- (void)prepareForAccountManagerWithoutPasswordWithLinkedAccountWithEmail {
+  id mockUser = [self mockUserWhichHasEmail:YES];
+
+  //Add third party provider with email
+  id linkedProviderMock = [self createThirdPartyProviderWhichHasEmail:YES];
+
+  // Stub providerData
+  NSArray *providers = [NSArray arrayWithObject:linkedProviderMock];
+  OCMStub([mockUser providerData]).andReturn(providers);
+}
+
 #pragma mark - stubbing methods
+
+- (id)createPasswordProvider {
+  id emailPasswordProviderMock = OCMProtocolMock(@protocol(FIRUserInfo));
+  OCMStub([emailPasswordProviderMock providerID]).andReturn(FIREmailPasswordAuthProviderID);
+  OCMStub([emailPasswordProviderMock email]).andReturn(@"password@email.com");
+  OCMStub([emailPasswordProviderMock displayName]).andReturn(@"password displayName");
+
+  return emailPasswordProviderMock;
+}
+
+- (id)createThirdPartyProviderWhichHasEmail:(BOOL)hasEmail {
+  id linkedProviderMock = OCMProtocolMock(@protocol(FIRUserInfo));
+  OCMStub([linkedProviderMock providerID]).andReturn(FIRGoogleAuthProviderID);
+  OCMStub([linkedProviderMock displayName]).andReturn(@"linked displayName");
+  if (hasEmail) {
+    OCMStub([linkedProviderMock email]).andReturn(@"linked@email.com");
+  }
+  return linkedProviderMock;
+}
+
+- (id)mockUserWhichHasEmail:(BOOL)hasEmail {
+  id mockUser = OCMClassMock([FIRUser class]);
+  OCMStub([self.authMock currentUser]).andReturn(mockUser);
+
+  // Mock User display values
+  if (hasEmail) {
+    OCMStub([mockUser email]).andReturn(@"email@email.com");
+  }
+  OCMStub([mockUser displayName]).andReturn(@"user displayName");
+
+  return mockUser;
+}
 
 - (void)mockUpdateUserRequest:(id)mockUser {
   id mockRequest = OCMClassMock([FIRUserProfileChangeRequest class]);

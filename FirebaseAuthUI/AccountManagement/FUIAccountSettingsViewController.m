@@ -98,6 +98,8 @@ static NSString *const kUserAccountImage = @"ic_account_circle.png";
     return FUIASAccountStateLinkedAccountWithEmail;
   } else if (hasPasswordProvider && hasEmailInLinkedProvider) {
     return FUIASAccountStateLinkedAccountWithEmailPassword;
+  } else if (hasPasswordProvider && !hasEmailInLinkedProvider) {
+    return FUIASAccountStateLinkedAccountWithEmailPassword;
   }
 
   return FUIASAccountStateUnknown;
