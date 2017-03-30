@@ -264,12 +264,11 @@ rm(BuiltProductsDir + "samples/swift/Podfile.lock", isDirectory: false, isStrict
 rm(BuiltProductsDir + "samples/swift/GoogleService-Info.plist", isDirectory: false, isStrict: false)
 rm(BuiltProductsDir + "samples/objc/FirebaseUI-demo-objc.xcodeproj/xcuserdata", isDirectory: true, isStrict: false)
 rm(BuiltProductsDir + "samples/objc/FirebaseUI-demo-objc.xcodeproj/project.xcworkspace", isDirectory: true, isStrict: false)
-rm(BuiltProductsDir + "samples/objc/FirebaseUI-demo-objc.xcworkspace/xcuserdata", isDirectory: true, isStrict: false)
+rm(BuiltProductsDir + "samples/objc/FirebaseUI-demo-objc.xcworkspace", isDirectory: true, isStrict: false)
 rm(BuiltProductsDir + "samples/swift/FirebaseUI-demo-swift.xcodeproj/xcuserdata", isDirectory: true, isStrict: false)
-rm(BuiltProductsDir + "samples/swift/FirebaseUI-demo-swift.xcworkspace/xcuserdata", isDirectory: true, isStrict: false)
 rm(BuiltProductsDir + "samples/swift/FirebaseUI-demo-swift.xcodeproj/project.xcworkspace", isDirectory: true, isStrict: false)
-// ln(from: "./objc/FirebaseUI-demo-objc.xcworkspace", to: BuiltProductsDir + "samples/FirebaseUI-demo-objc.xcworkspace")
-// ln(from: "./swift/FirebaseUI-demo-swift.xcworkspace", to: BuiltProductsDir + "samples/FirebaseUI-demo-swift.xcworkspace")
+rm(BuiltProductsDir + "samples/swift/FirebaseUI-demo-swift.xcworkspace", isDirectory: true, isStrict: false)
+rm(BuiltProductsDir + "samples/demo.gif", isDirectory: false, isStrict: false)
 
 // clean up build artifacts afterward
 zip("FirebaseUIFrameworks", output: "FirebaseUIFrameworks.zip")

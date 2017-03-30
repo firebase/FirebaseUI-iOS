@@ -25,6 +25,9 @@
 /* Password text field placeholder. */
 "EnterYourPassword" = "Enter your password";
 
+/* Error message displayed when user enters an empty passwrd. */
+"InvalidPasswordError" = "Password cannot be empty.";
+
 /* Error message displayed when the email and password don't match. */
 "WrongPasswordError" = "The email and password you entered don't match.";
 

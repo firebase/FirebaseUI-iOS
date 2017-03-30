@@ -16,11 +16,11 @@ target 'FirebaseStorageUI' do
   use_frameworks!
 
   pod 'Firebase/Storage'
-  pod 'SDWebImage'
+  pod 'SDWebImage', '~> 4.0'
 
   target 'FirebaseStorageUITests' do
     inherit! :search_paths
-    pod 'SDWebImage'
+    pod 'SDWebImage', '~> 4.0'
     pod 'OCMock'
   end
 end
@@ -31,53 +31,49 @@ target 'FirebaseAuthUI' do
   # Pods for Auth
   pod 'FirebaseAuth'
 
-  # Pod for FirebaseGoogleAuthUI (inlcuded to base so it's not duplicated)
-  pod 'GoogleSignIn', '~> 4.0'
-
   target 'FirebaseAuthUITests' do
     inherit! :search_paths
   end
+end
 
-  target 'FirebaseGoogleAuthUI' do
+target 'FirebaseFacebookAuthUI' do
+  use_frameworks!
+  # Pods for Facebook Auth
+  pod 'FBSDKLoginKit', '~> 4.0'
+  pod 'FBSDKCoreKit', '~> 4.0'
+
+  target 'FirebaseFacebookAuthUITests' do
     inherit! :search_paths
-    # Pods for Google Auth
-    # pod 'GoogleSignIn', '~> 4.0'
-
-    target 'FirebaseGoogleAuthUITests' do
-      inherit! :search_paths
-      pod 'OCMock'
-    end
-  end
-
-  target 'FirebaseFacebookAuthUI' do
-    inherit! :search_paths
-    # Pods for Facebook Auth
+    pod 'OCMock'
     pod 'FBSDKLoginKit', '~> 4.0'
     pod 'FBSDKCoreKit', '~> 4.0'
-
-    target 'FirebaseFacebookAuthUITests' do
-      inherit! :search_paths
-      pod 'OCMock'
-      pod 'FBSDKLoginKit', '~> 4.0'
-      pod 'FBSDKCoreKit', '~> 4.0'
-    end
   end
+end
 
-  target 'FirebaseTwitterAuthUI' do
+target 'FirebaseGoogleAuthUI' do
+  use_frameworks!
+  # Pods for Google Auth
+  pod 'GoogleSignIn', '~> 4.0'
+
+  target 'FirebaseGoogleAuthUITests' do
     inherit! :search_paths
-    # Pods for Twitter Auth
-    pod 'TwitterKit', '~> 2.4'
+    pod 'OCMock'
+  end
+end
 
-    target 'FirebaseTwitterAuthUITests' do
-      inherit! :search_paths
-      pod 'OCMock'
-    end
+target 'FirebaseTwitterAuthUI' do
+  use_frameworks!
+  # Pods for Twitter Auth
+  pod 'TwitterKit', '~> 2.4'
+
+  target 'FirebaseTwitterAuthUITests' do
+    inherit! :search_paths
+    pod 'OCMock'
   end
 end
 
 target 'Database' do
   use_frameworks!
-
   # Pods for Database
   pod 'Firebase/Database'
 end
@@ -86,7 +82,7 @@ target 'Storage' do
   use_frameworks!
 
   pod 'Firebase/Storage'
-  pod 'SDWebImage'
+  pod 'SDWebImage', '~> 4.0'
 end
 
 target 'Auth' do

@@ -15,13 +15,13 @@
 //
 
 #import <FirebaseAuth/FirebaseAuth.h>
-#import <FirebaseAuthUI/FIRAuthUIErrorUtils.h>
+#import <FirebaseAuthUI/FUIAuthErrorUtils.h>
 #import <FirebaseGoogleAuthUI/FirebaseGoogleAuthUI.h>
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <OCMock/OCMock.h>
 @import XCTest;
 
-@interface FIRGoogleAuthUI (Testing)
+@interface FUIGoogleAuth (Testing)
 + (NSBundle *)frameworkBundle;
 - (GIDSignIn *)configuredGoogleSignIn;
 @end
@@ -35,7 +35,7 @@
 
 - (void)setUp {
   [super setUp];
-  self.mockProvider =  OCMPartialMock([[FIRGoogleAuthUI alloc] init]);
+  self.mockProvider =  OCMPartialMock([[FUIGoogleAuth alloc] init]);
 }
 
 - (void)tearDown {
@@ -44,12 +44,12 @@
 }
 
 - (void)testProviderValidity {
-  FIRGoogleAuthUI *provider = [[FIRGoogleAuthUI alloc] init];
+  FUIGoogleAuth *provider = [[FUIGoogleAuth alloc] init];
   id mockProvider =  OCMPartialMock(provider);
 
   XCTAssertNotNil(provider);
   OCMExpect([mockProvider frameworkBundle])
-    .andForwardToRealObject().andReturn([NSBundle bundleForClass:[FIRGoogleAuthUI class]]);
+    .andForwardToRealObject().andReturn([NSBundle bundleForClass:[FUIGoogleAuth class]]);
   XCTAssertNotNil(provider.icon);
   OCMVerifyAll(mockProvider);
 
@@ -194,7 +194,7 @@
         presentingViewController:nil
                       completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
                         XCTAssertNotNil(error);
-                        XCTAssertEqualObjects(error, [FIRAuthUIErrorUtils userCancelledSignInError]);
+                        XCTAssertEqualObjects(error, [FUIAuthErrorUtils userCancelledSignInError]);
                         XCTAssertNil(credential);
 
                         [expectation fulfill];

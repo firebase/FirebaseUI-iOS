@@ -120,7 +120,7 @@ static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
         self.image = image;
 
         // Cache downloaded image
-        [cache storeImage:image forKey:storageRef.fullPath];
+        [cache storeImage:image forKey:storageRef.fullPath completion:nil];
 
         if (completion != nil) {
           completion(image, nil, SDImageCacheTypeNone, storageRef);

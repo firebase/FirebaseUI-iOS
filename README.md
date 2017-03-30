@@ -6,35 +6,37 @@ Additionally, FirebaseUI simplifies Firebase authentication by providing easy to
 
 FirebaseUI clients are also available for [Android](https://github.com/firebase/FirebaseUI-Android) and [web](https://github.com/firebase/firebaseui-web).
 
+![](https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/samples/demo.gif)
+
 ## Installing FirebaseUI for iOS
 
 FirebaseUI supports iOS 8.0+. We recommend using [CocoaPods](https://cocoapods.org/pods/FirebaseUI), add
 the following to your `Podfile`:
 
 ```ruby
-pod 'FirebaseUI', '~> 0.6'       # Pull in all Firebase UI features
+pod 'FirebaseUI', '~> 3.0'       # Pull in all Firebase UI features
 ```
 
 If you don't want to use all of FirebaseUI, there are multiple subspecs which can selectively install subsets of the full feature set:
 
 ```ruby
 # Only pull in FirebaseUI Database features
-pod 'FirebaseUI/Database', '~> 0.6'
+pod 'FirebaseUI/Database', '~> 3.0'
 
 # Only pull in FirebaseUI Storage features
-pod 'FirebaseUI/Storage', '~> 0.6'
+pod 'FirebaseUI/Storage', '~> 3.0'
 
 # Only pull in FirebaseUI Auth features
-pod 'FirebaseUI/Auth', '~> 0.6'
+pod 'FirebaseUI/Auth', '~> 3.0'
 
 # Only pull in Facebook login features
-pod 'FirebaseUI/Facebook', '~> 0.6'
+pod 'FirebaseUI/Facebook', '~> 3.0'
 
 # Only pull in Google login features
-pod 'FirebaseUI/Google', '~> 0.6'
+pod 'FirebaseUI/Google', '~> 3.0'
 
 # Only pull in Twitter login features
-pod 'FirebaseUI/Twitter', '~> 0.6'
+pod 'FirebaseUI/Twitter', '~> 3.0'
 ```
 
 If you're including FirebaseUI in a Swift project, make sure you also have:
@@ -59,6 +61,32 @@ $ git clone https://github.com/firebase/FirebaseUI-iOS.git
 $ cd FirebaseUI-iOS
 $ pod install
 ```
+
+Alternatively you can use `pod try FirebaseUI` to install the Objective-C or Swift sample projects.
+
+## Mandatory Sample Project Configuration
+
+You have to configure your Xcode project in order to run samples.
+
+1. Your Xcode project should contain `GoogleService-Info.plist`, downloaded from [Firebase console](https://console.firebase.google.com) when you add your app to a Firebase project.<br>
+Copy `GoogleService-Info.plist` into sample the project folder (`samples/obj-c/GoogleService-Info.plist` or `samples/swift/GoogleService-Info.plist`).
+
+2. Update URL Types.<br>
+Go to `Project Settings -> Info tab -> Url Types` and update values for:
+	+ `REVERSED_CLIENT_ID` (get value from `GoogleService-Info.plist`)
+	+ `fb{your-app-id}` (put Facebook App Id)
+	+ `twitterkit-{consumer-key}` (put Twitter App Consumer key)
+
+3. Update `Info.plist` twitter and facebook configuration values
+	+ `FacebookAppID -> {your-app-id}` (put Facebook App Id)
+	+ `Fabric -> Kits -> KitInfo -> consumerKey / consumerSecret` (put Twitter App consumer key/secret). Please note that's it's not secure to store `consumerSecret` in the app itself.
+
+4. Enable Keychain Sharing.<br>
+Facebook SDK requires keychain sharing.<br>
+This can be done here: `Project Settings -> Capabilities -> KeyChain Sharing -> ON`
+
+5. Don't forget to configure your Firebase App Database using [Firebase console](https://console.firebase.google.com).<br>
+Database should contain appropriate read/write permissions and folders (`objc_demo-chat` and `swift_demo-chat` respectively)
 
 ## Contributing to FirebaseUI
 
