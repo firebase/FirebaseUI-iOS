@@ -111,6 +111,8 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
         break;
     }
 
+    [self mockServerOperations];
+
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     [self showAccountManager];
   }
@@ -232,10 +234,10 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
     id mockUser = OCMClassMock([FIRUser class]);
     OCMStub([mockUser email]).andReturn(responseEmail);
     [self mockUpdateUserRequest:mockUser];
-    
+
     mockedCallback(mockUser, nil);
   });
-  
+
 }
 
 - (void)prepareStubsForEmailRecovery {
@@ -310,19 +312,6 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   NSArray *providers = [NSArray arrayWithObject:emailPasswordProviderMock];
   OCMStub([mockUser providerData]).andReturn(providers);
 
-  // Mock update name request
-  [self mockUpdateUserRequest:mockUser];
-
-  // Mock udpate email operation
-  OCMStub([mockUser updateEmail:OCMOCK_ANY completion:OCMOCK_ANY]).
-      andDo(^(NSInvocation *invocation) {
-    FIRUserProfileChangeCallback mockedCallBack;
-    [invocation getArgument:&mockedCallBack atIndex:3];
-    mockedCallBack(nil);
-  });
-
-  // mock re-authentication with email
-  [self mockSignInWithEmail];
 }
 
 - (void)prepareForAccountManagerWithPasswordWithLinkedAccountWithEmail {
@@ -332,7 +321,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   id emailPasswordProviderMock = [self createPasswordProvider];
 
   //Add third party provider with email
-  id linkedProviderMock = [self createThirdPartyProviderWhichHasEmail:YES];
+  id linkedProviderMock = [self createThirdPartyProvider:FIRGoogleAuthProviderID hasEmail:YES];
 
   // Stub providerData
   NSArray *providers =
@@ -344,7 +333,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   id mockUser = [self mockUserWhichHasEmail:YES];
 
   //Add third party provider without email
-  id linkedProviderMock = [self createThirdPartyProviderWhichHasEmail:NO];
+  id linkedProviderMock = [self createThirdPartyProvider:FIRGoogleAuthProviderID hasEmail:NO];
 
   //Add EmailPassword provider
   id emailPasswordProviderMock = [self createPasswordProvider];
@@ -359,7 +348,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   id mockUser = [self mockUserWhichHasEmail:NO];
 
   //Add third party provider without email
-  id linkedProviderMock = [self createThirdPartyProviderWhichHasEmail:NO];
+  id linkedProviderMock = [self createThirdPartyProvider:FIRGoogleAuthProviderID hasEmail:NO];
 
   // Stub providerData
   NSArray *providers = [NSArray arrayWithObject:linkedProviderMock];
@@ -370,7 +359,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   id mockUser = [self mockUserWhichHasEmail:YES];
 
   //Add third party provider with email
-  id linkedProviderMock = [self createThirdPartyProviderWhichHasEmail:YES];
+  id linkedProviderMock = [self createThirdPartyProvider:FIRGoogleAuthProviderID hasEmail:YES];
 
   // Stub providerData
   NSArray *providers = [NSArray arrayWithObject:linkedProviderMock];
@@ -388,9 +377,9 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   return emailPasswordProviderMock;
 }
 
-- (id)createThirdPartyProviderWhichHasEmail:(BOOL)hasEmail {
+- (id)createThirdPartyProvider:(NSString *)providerId hasEmail:(BOOL)hasEmail {
   id linkedProviderMock = OCMProtocolMock(@protocol(FIRUserInfo));
-  OCMStub([linkedProviderMock providerID]).andReturn(FIRGoogleAuthProviderID);
+  OCMStub([linkedProviderMock providerID]).andReturn(providerId);
   OCMStub([linkedProviderMock displayName]).andReturn(@"linked displayName");
   if (hasEmail) {
     OCMStub([linkedProviderMock email]).andReturn(@"linked@email.com");
@@ -432,9 +421,106 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 
     id mockUser = OCMClassMock([FIRUser class]);
     OCMStub([mockUser email]).andReturn(responseEmail);
-
+    
     mockedResponse(mockUser, nil);
   });
+}
+
+- (void)mockUpdatePasswordRequest:(id)mockUser {
+  OCMStub([mockUser updatePassword:OCMOCK_ANY completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
+    FIRUserProfileChangeCallback mockedCallBack;
+    [invocation getArgument:&mockedCallBack atIndex:3];
+    mockedCallBack(nil);
+  });
+}
+
+- (void)mockSignOut {
+  OCMStub([self.authUIMock signOutWithError:[OCMArg setTo:nil]]);
+}
+
+- (void)mockDeleteUserRequest:(id)mockUser {
+  OCMStub([mockUser deleteWithCompletion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
+    FIRUserProfileChangeCallback mockedCallBack;
+    [invocation getArgument:&mockedCallBack atIndex:2];
+    mockedCallBack(nil);
+  });
+}
+
+- (void)mockUpdateEmail:(id)mockUser {
+  OCMStub([mockUser updateEmail:OCMOCK_ANY completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
+    FIRUserProfileChangeCallback mockedCallBack;
+    [invocation getArgument:&mockedCallBack atIndex:3];
+    mockedCallBack(nil);
+  });
+}
+
+- (void)mockSignInWithProvider:(NSString *)providerId user:(id)mockUser {
+  id mockProviderUI = OCMProtocolMock(@protocol(FUIAuthProvider));
+  NSArray *providers = [NSArray arrayWithObject:mockProviderUI];
+  OCMStub([self.authUIMock providers]).andReturn(providers);
+
+  OCMStub([mockProviderUI signOut]);
+  OCMStub([mockProviderUI providerID]).andReturn(providerId);
+
+  OCMStub([mockUser reauthenticateWithCredential:OCMOCK_ANY completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
+    FIRUserProfileChangeCallback mockedCallBack;
+    [invocation getArgument:&mockedCallBack atIndex:3];
+
+    mockedCallBack(nil);
+  });
+
+  OCMStub([mockProviderUI signInWithEmail:OCMOCK_ANY
+                 presentingViewController:OCMOCK_ANY
+                               completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
+    FIRAuthProviderSignInCompletionBlock mockedResponse;
+    [invocation getArgument:&mockedResponse atIndex:4];
+
+    id mockCredential = OCMClassMock([FIRAuthCredential class]);
+    mockedResponse(mockCredential, nil);
+  });
+}
+
+- (void)mockUnlinkOperation:(id)mockUser {
+  OCMStub([mockUser unlinkFromProvider:OCMOCK_ANY completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
+    FIRAuthResultCallback mockedCallBack;
+    [invocation getArgument:&mockedCallBack atIndex:3];
+
+    mockedCallBack(mockUser, nil);
+  });
+}
+
+- (void)mockServerOperations {
+  id mockUser = [self.authMock currentUser];
+
+  // Mock update name request
+  [self mockUpdateUserRequest:mockUser];
+
+  // Mock udpate email operation
+  [self mockUpdateEmail:mockUser];
+
+  // mock re-authentication with email
+  [self mockSignInWithEmail];
+
+  // mock update password
+  [self mockUpdatePasswordRequest:mockUser];
+
+  // mock sign out
+  [self mockSignOut];
+
+  // mock delete user
+  [self mockDeleteUserRequest:mockUser];
+
+  // mock re-authentication with 3P provider
+  [self mockSignInWithProvider:FIRGoogleAuthProviderID user:mockUser];
+
+  // mock unlinking 3P provider
+  [self mockUnlinkOperation:mockUser];
 }
 
 @end
