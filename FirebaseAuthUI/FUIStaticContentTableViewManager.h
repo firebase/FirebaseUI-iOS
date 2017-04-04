@@ -220,20 +220,8 @@ typedef NS_ENUM(NSInteger, FUIStaticContentTableViewCellType) {
     @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
     @param title The text of the @c titleLabel of the @c FUIStaticContentTableViewCell.
     @param value The text of the @c detailTextLabel of the @c FUIStaticContentTableViewCell.
-    @param action A block which is executed when the cell is selected.
     @param type Style of displaying cell.
- */
-+ (instancetype)cellWithTitle:(nullable NSString *)title
-                        value:(nullable NSString *)value
-                         type:(FUIStaticContentTableViewCellType) type
-                       action:(nullable FUIStaticContentTableViewCellAction)action;
-
-/** @fn cellWithTitle:value:type:action:
-    @brief Convenience factory method for a new instance of @c FUIStaticContentTableViewCell.
-    @param title The text of the @c titleLabel of the @c FUIStaticContentTableViewCell.
-    @param value The text of the @c detailTextLabel of the @c FUIStaticContentTableViewCell.
     @param action A block which is executed when the cell is selected.
-    @param type Style of displaying cell.
  */
 + (instancetype)cellWithTitle:(nullable NSString *)title
                         value:(nullable NSString *)value

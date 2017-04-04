@@ -15,11 +15,13 @@
 //
 
 #import "FUIViewController.h"
+
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <FirebaseCore/FIRApp.h>
-#import <FirebaseGoogleAuthUI/FirebaseGoogleAuthUI.h>
 #import <FirebaseFacebookAuthUI/FirebaseFacebookAuthUI.h>
+#import <FirebaseGoogleAuthUI/FirebaseGoogleAuthUI.h>
+#import <FirebasePhoneAuthUI/FirebasePhoneAuthUI.h>
 #import <FirebaseTwitterAuthUI/FirebaseTwitterAuthUI.h>
 #import <OCMock/OCMock.h>
 
@@ -42,7 +44,8 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   kIDPEmail = 0,
   kIDPGoogle,
   kIDPFacebook,
-  kIDPTwitter
+  kIDPTwitter,
+  kIDPPhone
 };
 
 @interface FUIViewController () <FUIAuthDelegate, NSURLSessionDataDelegate>
@@ -270,6 +273,9 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
           break;
         case kIDPTwitter:
           [providers addObject:[[FUITwitterAuth alloc] init]];
+          break;
+        case kIDPPhone:
+          [providers addObject:[[FUIPhoneAuth alloc] init]];
           break;
 
         default:

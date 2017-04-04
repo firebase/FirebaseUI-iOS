@@ -61,6 +61,15 @@ target 'FirebaseGoogleAuthUI' do
   end
 end
 
+target 'FirebasePhoneAuthUI' do
+  use_frameworks!
+
+  target 'FirebasePhoneAuthUITests' do
+    inherit! :search_paths
+    pod 'OCMock'
+  end
+end
+
 target 'FirebaseTwitterAuthUI' do
   use_frameworks!
   # Pods for Twitter Auth
@@ -108,6 +117,13 @@ target 'Google' do
   pod 'GoogleSignIn', '~> 4.0'
 end
 
+target 'Phone' do
+  use_frameworks!
+
+  # Pods for Phone Auth
+  pod 'Firebase/Auth'
+end
+
 target 'Twitter' do
   use_frameworks!
 
@@ -125,6 +141,7 @@ target 'FirebaseUISample' do
   pod 'FirebaseStorageUI', :path => "FirebaseUI_dev_storage.podspec"
   pod 'FirebaseFacebookAuthUI', :path => "FirebaseUI_dev_fb.podspec"
   pod 'FirebaseGoogleAuthUI', :path => "FirebaseUI_dev_ggl.podspec"
+  pod 'FirebasePhoneAuthUI', :path => "FirebaseUI_dev_phone.podspec"
   pod 'FirebaseTwitterAuthUI', :path => "FirebaseUI_dev_tw.podspec"
 
   target 'FirebaseUISampleUITests' do

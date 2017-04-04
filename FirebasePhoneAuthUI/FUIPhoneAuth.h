@@ -14,11 +14,15 @@
 //  limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
-#import "FUIAppDelegate.h"
+#import <FirebaseAuthUI/FUIAuth.h>
 
-int main(int argc, char * argv[]) {
-  @autoreleasepool {
-      return UIApplicationMain(argc, argv, nil, NSStringFromClass([FUIAppDelegate class]));
-  }
-}
+NS_ASSUME_NONNULL_BEGIN
+
+/** @class FUIPhoneAuth
+    @brief AuthUI components for Phone Sign In.
+ */
+@interface FUIPhoneAuth : NSObject <FUIAuthProvider>
+
+@end
+
+NS_ASSUME_NONNULL_END

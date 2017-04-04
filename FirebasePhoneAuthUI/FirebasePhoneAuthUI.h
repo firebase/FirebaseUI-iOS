@@ -14,11 +14,12 @@
 //  limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
-#import "FUIAppDelegate.h"
+@import UIKit;
 
-int main(int argc, char * argv[]) {
-  @autoreleasepool {
-      return UIApplicationMain(argc, argv, nil, NSStringFromClass([FUIAppDelegate class]));
-  }
-}
+//! Project version number for FirebasePhoneAuthUI.
+FOUNDATION_EXPORT double FirebasePhoneAuthUIVersionNumber;
+
+//! Project version string for FirebasePhoneAuthUI.
+FOUNDATION_EXPORT const unsigned char FirebasePhoneAuthUIVersionString[];
+
+#import <FirebasePhoneAuthUI/FUIPhoneAuth.h>

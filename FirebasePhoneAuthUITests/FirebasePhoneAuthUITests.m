@@ -14,11 +14,22 @@
 //  limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
-#import "FUIAppDelegate.h"
+#import <XCTest/XCTest.h>
 
-int main(int argc, char * argv[]) {
-  @autoreleasepool {
-      return UIApplicationMain(argc, argv, nil, NSStringFromClass([FUIAppDelegate class]));
-  }
+@interface FirebasePhoneAuthUITests : XCTestCase
+
+@end
+
+@implementation FirebasePhoneAuthUITests
+
+- (void)setUp {
+    [super setUp];
+    // TODO: Put setup code here.
 }
+
+- (void)tearDown {
+    // TODO: Put teardown code here.
+    [super tearDown];
+}
+
+@end
