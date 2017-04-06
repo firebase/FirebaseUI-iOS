@@ -19,22 +19,22 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /** @var kGoogleGamesScope
- @brief The OAuth scope string for the "Games" scope.
+    @brief The OAuth scope string for the "Games" scope.
  */
 static NSString *const kGoogleGamesScope = @"https://www.googleapis.com/auth/games";
 
 /** @var kGooglePlusMeScope
- @brief The OAuth scope string for the "plus.me" scope.
+    @brief The OAuth scope string for the "plus.me" scope.
  */
 static NSString *const kGooglePlusMeScope = @"https://www.googleapis.com/auth/plus.me";
 
 /** @var kGooglePlusMeScope
- @brief The OAuth scope string for the user's email scope.
+    @brief The OAuth scope string for the user's email scope.
  */
 static NSString *const kGoogleUserInfoEmailScope = @"https://www.googleapis.com/auth/userinfo.email";
 
 /** @var kGooglePlusMeScope
- @brief The OAuth scope string for the basic G+ profile information scope.
+    @brief The OAuth scope string for the basic G+ profile information scope.
  */
 static NSString *const kGoogleUserInfoProfileScope = @"https://www.googleapis.com/auth/userinfo.profile";
 
@@ -46,20 +46,20 @@ static NSString *const kGoogleUserInfoProfileScope = @"https://www.googleapis.co
 /** @property scopes
     @brief The scopes to use with Google Sign In.
     @remarks Defaults to using email and profile scopes. For a list of all scopes
-      see https://developers.google.com/identity/protocols/googlescopes
+        see https://developers.google.com/identity/protocols/googlescopes
  */
 @property(nonatomic, copy, readonly) NSArray<NSString *> *scopes;
 
 /** @fn init
     @brief Convenience initializer. Calls designated init with default
-     scopes of "email" and "profile".
+        scopes of "email" and "profile".
  */
 - (instancetype)init;
 
 /** @fn initWithScopes:
- @brief Designated initializer.
- @param scopes   The user account scopes required by the app. A list of possible scopes can be
-   found at https://developers.google.com/identity/protocols/googlescopes
+    @brief Designated initializer.
+    @param scopes   The user account scopes required by the app. A list of possible scopes can be
+        found at https://developers.google.com/identity/protocols/googlescopes
  */
 - (instancetype)initWithScopes:(NSArray <NSString *> *)scopes NS_DESIGNATED_INITIALIZER;
 

@@ -25,6 +25,7 @@
 #import <FirebaseFacebookAuthUI/FUIFacebookAuth.h>
 #import <FirebaseGoogleAuthUI/FUIGoogleAuth.h>
 #import <FirebaseTwitterAuthUI/FUITwitterAuth.h>
+#import <FirebasePhoneAuthUI/FUIPhoneAuth.h>
 
 #import "FUICustomAuthPickerViewController.h"
 
@@ -38,12 +39,13 @@ typedef enum : NSUInteger {
   kSectionsIDToken
 } UISections;
 
-typedef enum : NSUInteger {
+NS_ENUM(NSUInteger, FIRProviders) {
   kIDPEmail = 0,
   kIDPGoogle,
   kIDPFacebook,
-  kIDPTwitter
-} FIRProviders;
+  kIDPTwitter,
+  kIDPPhone
+};
 
 static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/terms/";
 
@@ -101,6 +103,10 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
   [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPTwitter
+                                                          inSection:kSectionsProviders]
+                              animated:NO
+                        scrollPosition:UITableViewScrollPositionNone];
+  [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPPhone
                                                           inSection:kSectionsProviders]
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
@@ -249,7 +255,8 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
   NSArray<NSIndexPath *> *selectedRows = @[
     [NSIndexPath indexPathForRow:kIDPGoogle inSection:kSectionsProviders],
     [NSIndexPath indexPathForRow:kIDPFacebook inSection:kSectionsProviders],
-    [NSIndexPath indexPathForRow:kIDPTwitter inSection:kSectionsProviders]
+    [NSIndexPath indexPathForRow:kIDPTwitter inSection:kSectionsProviders],
+    [NSIndexPath indexPathForRow:kIDPPhone inSection:kSectionsProviders]
   ];
   return [self getListOfIDPs:selectedRows useCustomScopes:NO];
 }
@@ -270,16 +277,19 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
                                                                                kGoogleUserInfoProfileScope,
                                                                                kGoogleGamesScope,
                                                                                kGooglePlusMeScope]]
-          : [[FUIGoogleAuth alloc] init];
+                                     : [[FUIGoogleAuth alloc] init];
           break;
         case kIDPFacebook:
           provider = useCustomScopes ? [[FUIFacebookAuth alloc] initWithPermissions:@[@"email",
                                                                                         @"user_friends",
                                                                                         @"ads_read"]]
-          :[[FUIFacebookAuth alloc] init];
+                                     :[[FUIFacebookAuth alloc] init];
           break;
         case kIDPTwitter:
           provider = [[FUITwitterAuth alloc] init];
+          break;
+        case kIDPPhone:
+          provider = [[FUIPhoneAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
           break;
 
         default:
@@ -301,6 +311,5 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
                                        indexPathForRow:kIDPEmail
                                        inSection:kSectionsProviders]];
 }
-
 
 @end

@@ -14,56 +14,29 @@
 //  limitations under the License.
 //
 
-#import "FUIPhoneAuth.h"
+#import "FUIPhoneAuth_Internal.h"
 
+#import "FUIPhoneAuthStrings.h"
+#import "FUIPhoneEntryViewController.h"
 #import <FirebaseAuth/FIRPhoneAuthProvider.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** @var kTableName
- @brief The name of the strings table to search for localized strings.
- */
-static NSString *const kTableName = @"FirebasePhoneAuthUI";
+@implementation FUIPhoneAuth {
+  /** The @c FUIAuth instance of the application. */
+  FUIAuth *_authUI;
 
-/** @var kSignInWithTwitter
- @brief The string key for localized button text.
- */
-static NSString *const kSignInWithTwitter = @"SignInWithPhone";
+  /** The callback which should be invoked when the sign in flow completes (or is cancelled.) */
+  FIRAuthProviderSignInCompletionBlock _pendingSignInCallback;
 
-@implementation FUIPhoneAuth
-
-/** @fn frameworkBundle
-    @brief Returns the auth provider's resource bundle.
-    @return Resource bundle for the auth provider.
- */
-+ (NSBundle *)frameworkBundle {
-  static NSBundle *frameworkBundle = nil;
-  static dispatch_once_t predicate;
-  dispatch_once(&predicate, ^{
-    frameworkBundle = [NSBundle bundleForClass:[self class]];
-  });
-  return frameworkBundle;
 }
 
-/** @fn imageNamed:
-    @brief Returns an image from the resource bundle given a resource name.
-    @param name The name of the image file.
-    @return The image object for the named file.
- */
-+ (UIImage *)imageNamed:(NSString *)name {
-  NSString *path = [[[self class] frameworkBundle] pathForResource:name ofType:@"png"];
-  return [UIImage imageWithContentsOfFile:path];
-}
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI {
+  if (self = [super init]) {
+    _authUI = authUI;
+  }
 
-/** @fn localizedStringForKey:
-    @brief Returns the localized text associated with a given string key. Will default to english
-        text if the string is not available for the current localization.
-    @param key A string key which identifies localized text in the .strings files.
-    @return Localized value of the string identified by the key.
- */
-+ (NSString *)localizedStringForKey:(NSString *)key {
-  NSBundle *frameworkBundle = [[self class] frameworkBundle];
-  return [frameworkBundle localizedStringForKey:key value:nil table:kTableName];
+  return self;
 }
 
 #pragma mark - FUIAuthProvider
@@ -91,11 +64,11 @@ static NSString *const kSignInWithTwitter = @"SignInWithPhone";
 }
 
 - (NSString *)signInLabel {
-  return [[self class] localizedStringForKey:kSignInWithTwitter];
+  return FUILocalizedString(kStr_SignInWithTwitter);
 }
 
 - (UIImage *)icon {
-  return [[self class] imageNamed:@"ic_phone"];
+  return [FUIAuthUtils imageNamed:@"ic_phone"];
 }
 
 - (UIColor *)buttonBackgroundColor {
@@ -109,7 +82,13 @@ static NSString *const kSignInWithTwitter = @"SignInWithPhone";
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
-  // TODO: implement
+
+  _pendingSignInCallback = completion;
+
+  UIViewController *controller = [[FUIPhoneEntryViewController alloc] initWithAuthUI:_authUI];
+  UINavigationController *navigationController =
+      [[UINavigationController alloc] initWithRootViewController:controller];
+  [presentingViewController presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (void)signOut {
@@ -120,9 +99,15 @@ static NSString *const kSignInWithTwitter = @"SignInWithPhone";
   return NO; // TODO: implement
 }
 
-#pragma mark - Private methods
-
-
-NS_ASSUME_NONNULL_END
+- (void)callbackWithCredential:(nullable FIRAuthCredential *)credential
+                         error:(nullable NSError *)error {
+  FIRAuthProviderSignInCompletionBlock callback = _pendingSignInCallback;
+  _pendingSignInCallback = nil;
+  if (callback) {
+    callback(credential, error);
+  }
+}
 
 @end
+
+NS_ASSUME_NONNULL_END

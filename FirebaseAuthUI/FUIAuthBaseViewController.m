@@ -52,66 +52,6 @@ static const CGFloat kActivityIndiactorOverlayOpacity = 0.8f;
  */
 static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
 
-/** @class FUIAuthAlertViewDelegate
-    @brief A @c UIAlertViewDelegate which allows @c UIAlertView to be used with blocks more easily.
- */
-@interface FUIAuthAlertViewDelegate : NSObject <UIAlertViewDelegate>
-
-/** @fn init
-    @brief Please use initWithCancelHandler:otherHandlers.
- */
-- (instancetype)init NS_UNAVAILABLE;
-
-/** @fn initWithCancelHandler:otherHandlers:
-    @brief Designated initializer.
-    @param cancelHandler The block to call when the alert view is cancelled.
-    @param otherHandlers Handlers for other buttons of the alert view. The number of handlers must
-        match the number of other buttons of the alert view.
- */
-- (nullable instancetype)initWithCancelHandler:(nullable FUIAuthAlertActionHandler)cancelHandler
-    otherHandlers:(nullable NSArray<FUIAuthAlertActionHandler> *)otherHandlers
-    NS_DESIGNATED_INITIALIZER;
-
-@end
-
-@implementation FUIAuthAlertViewDelegate {
-  FUIAuthAlertActionHandler _cancelHandler;
-  NSArray<FUIAuthAlertActionHandler> *_otherHandlers;
-  FUIAuthAlertViewDelegate *_retainedSelf;
-}
-
-- (nullable instancetype)initWithCancelHandler:(nullable FUIAuthAlertActionHandler)cancelHandler
-    otherHandlers:(nullable NSArray<FUIAuthAlertActionHandler> *)otherHandlers {
-  self = [super init];
-  if (self) {
-    _cancelHandler = cancelHandler;
-    _otherHandlers = otherHandlers;
-    _retainedSelf = self;
-  }
-  return self;
-}
-
-#pragma mark - FUIAuthAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-  if (buttonIndex == alertView.cancelButtonIndex) {
-    if (_cancelHandler) {
-      _cancelHandler();
-    }
-  } else if (alertView.firstOtherButtonIndex != -1) {
-    NSInteger otherButtonIndex = buttonIndex - alertView.firstOtherButtonIndex;
-    if (_otherHandlers && _otherHandlers.count > otherButtonIndex) {
-      FUIAuthAlertActionHandler handler = _otherHandlers[otherButtonIndex];
-      handler();
-    }
-  }
-  _cancelHandler = nil;
-  _otherHandlers = nil;
-  _retainedSelf = nil;
-}
-
-@end
-
 @implementation FUIAuthBaseViewController {
   /** @var _activityIndicator
       @brief A spinner that is displayed when there's an ongoing activity.
@@ -215,40 +155,25 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
   NSString *message =
       [NSString stringWithFormat:FUILocalizedString(kStr_ProviderUsedPreviouslyMessage),
           email, provider.shortName];
-  if ([UIAlertController class]) {
-    UIAlertController *alertController =
-        [UIAlertController alertControllerWithTitle:FUILocalizedString(kStr_ExistingAccountTitle)
-                                            message:message
-                                     preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *signInAction =
-        [UIAlertAction actionWithTitle:provider.signInLabel
-                                 style:UIAlertActionStyleDefault
-                               handler:^(UIAlertAction *_Nonnull action) {
-          handler();
-        }];
-    [alertController addAction:signInAction];
-    UIAlertAction *cancelAction =
-        [UIAlertAction actionWithTitle:FUILocalizedString(kStr_Cancel)
-                                 style:UIAlertActionStyleCancel
-                               handler:^(UIAlertAction *_Nonnull action) {
-                                 [self.authUI signOutWithError:nil];
-                               }];
-    [alertController addAction:cancelAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-  } else {
-    UIAlertView *alertView =
-        [[UIAlertView alloc] initWithTitle:FUILocalizedString(kStr_ExistingAccountTitle)
-                                   message:message
-                                  delegate:self
-                         cancelButtonTitle:FUILocalizedString(kStr_Cancel)
-                         otherButtonTitles:provider.signInLabel, nil];
-    FUIAuthAlertViewDelegate *delegate =
-        [[FUIAuthAlertViewDelegate alloc] initWithCancelHandler:^{
-          [self.authUI signOutWithError:nil];
-        }  otherHandlers:@[ handler ]];
-    alertView.delegate = delegate;
-    [alertView show];
-  }
+  UIAlertController *alertController =
+      [UIAlertController alertControllerWithTitle:FUILocalizedString(kStr_ExistingAccountTitle)
+                                          message:message
+                                   preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *signInAction =
+      [UIAlertAction actionWithTitle:provider.signInLabel
+                               style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction *_Nonnull action) {
+        handler();
+      }];
+  [alertController addAction:signInAction];
+  UIAlertAction *cancelAction =
+      [UIAlertAction actionWithTitle:FUILocalizedString(kStr_Cancel)
+                               style:UIAlertActionStyleCancel
+                             handler:^(UIAlertAction *_Nonnull action) {
+                               [self.authUI signOutWithError:nil];
+                             }];
+  [alertController addAction:cancelAction];
+  [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)pushViewController:(UIViewController *)viewController {

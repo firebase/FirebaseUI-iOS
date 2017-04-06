@@ -14,14 +14,8 @@
 //  limitations under the License.
 //
 
-@import UIKit;
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
-//! Project version number for FirebasePhoneAuthUI.
-FOUNDATION_EXPORT double FirebasePhoneAuthUIVersionNumber;
+@interface FUIPhoneVerificationViewController : FUIAuthBaseViewController
 
-//! Project version string for FirebasePhoneAuthUI.
-FOUNDATION_EXPORT const unsigned char FirebasePhoneAuthUIVersionString[];
-
-#import <FirebasePhoneAuthUI/FUIPhoneAuth.h>
-#import <FirebasePhoneAuthUI/FUIPhoneEntryViewController.h>
-#import <FirebasePhoneAuthUI/FUIPhoneVerificationViewController.h>
+@end

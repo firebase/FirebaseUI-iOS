@@ -14,14 +14,18 @@
 //  limitations under the License.
 //
 
-@import UIKit;
+#import "FUIPhoneAuth.h"
 
-//! Project version number for FirebasePhoneAuthUI.
-FOUNDATION_EXPORT double FirebasePhoneAuthUIVersionNumber;
+#import <FirebasePhoneAuthUI/FirebasePhoneAuthUI.h>
 
-//! Project version string for FirebasePhoneAuthUI.
-FOUNDATION_EXPORT const unsigned char FirebasePhoneAuthUIVersionString[];
+@interface FUIPhoneAuth (Internal)
 
-#import <FirebasePhoneAuthUI/FUIPhoneAuth.h>
-#import <FirebasePhoneAuthUI/FUIPhoneEntryViewController.h>
-#import <FirebasePhoneAuthUI/FUIPhoneVerificationViewController.h>
+/** @fn callbackWithCredential:error:
+    @brief Ends the sign-in flow by cleaning up and calling back with given credential or error.
+    @param credential The credential to pass back, if any.
+    @param error The error to pass back, if any.
+ */
+- (void)callbackWithCredential:(nullable FIRAuthCredential *)credential
+                         error:(nullable NSError *)error;
+
+@end

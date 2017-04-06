@@ -27,7 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 }
 @end 
 
-
 @implementation FUIAccountSettingsOperationUnlinkAccount
 
 + (instancetype)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
@@ -63,7 +62,6 @@ NS_ASSUME_NONNULL_BEGIN
       [FUIStaticContentTableViewSection sectionWithTitle:nil
                                                    cells:@[cell]],
     ]];
-
 
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc] initWithContents:contents

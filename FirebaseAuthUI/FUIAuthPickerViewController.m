@@ -165,19 +165,19 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
      presentingViewController:self
                    completion:^(FIRAuthCredential *_Nullable credential,
                                 NSError *_Nullable error) {
-                     if (error) {
-                       [self decrementActivity];
+    if (error) {
+      [self decrementActivity];
 
-                       if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
-                         // User cancelled sign in, Do nothing.
-                         return;
-                       }
+      if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
+        // User cancelled sign in, Do nothing.
+        return;
+      }
 
-                       [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                         [self.authUI invokeResultCallbackWithUser:nil error:error];
-                       }];
-                       return;
-                     }
+      [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        [self.authUI invokeResultCallbackWithUser:nil error:error];
+      }];
+      return;
+    }
 
     [self.auth signInWithCredential:credential
                          completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {

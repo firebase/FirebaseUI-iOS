@@ -115,18 +115,22 @@ NSString *const kKeyNotFound = @"KeyNotFound";
 NSString *const kTableName = @"FirebaseAuthUI";
 
 NSString *FUILocalizedString(NSString *key) {
+  return FUILocalizedStringFromTable(key, kTableName);
+}
+
+NSString *FUILocalizedStringFromTable(NSString *key, NSString *table) {
 
   NSBundle *customStringsBundle = [FUIAuth defaultAuthUI].customStringsBundle;
   if (customStringsBundle) {
     NSString *localizedString = [customStringsBundle localizedStringForKey:key
                                                                      value:kKeyNotFound
-                                                                     table:kTableName];
+                                                                     table:table];
     if (![kKeyNotFound isEqual:localizedString]) {
       return localizedString;
     }
   }
   NSBundle *frameworkBundle = [FUIAuthUtils frameworkBundle];
-  return [frameworkBundle localizedStringForKey:key value:nil table:kTableName];
+  return [frameworkBundle localizedStringForKey:key value:nil table:table];
 }
 
 NS_ASSUME_NONNULL_END

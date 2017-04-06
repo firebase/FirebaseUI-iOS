@@ -108,9 +108,17 @@ extern "C" {
 /** @fn FUILocalizedString
     @brief Gets a localized string from a name.
     @param name The key value of the string.
-    @return The string by the key localized in the current locale.
+    @return The string by the key localized in the current locale located in default table.
  */
 NSString *FUILocalizedString(NSString *key);
+
+/** @fn FUILocalizedStringFromTable
+    @brief Gets a localized string from a name.
+    @param name The key value of the string.
+    @param table The localization table name.
+    @return The string by the key localized in the current locale.
+*/
+NSString *FUILocalizedStringFromTable(NSString *key, NSString *table);
 
 #ifdef __cplusplus
 }

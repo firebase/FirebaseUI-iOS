@@ -54,10 +54,10 @@ NS_ASSUME_NONNULL_BEGIN
                   newCredential:(FIRAuthCredential *)newCredential NS_DESIGNATED_INITIALIZER;
 
 /** @fn initWithAuthUI:email:newCredential:
- @brief Convenience initializer.
- @param authUI The @c FUIAuth instance that manages this view controller.
- @param email The email address of the user.
- @param newCredential The new @c FIRAuthCredential that the user had never used before.
+    @brief Convenience initializer.
+    @param authUI The @c FUIAuth instance that manages this view controller.
+    @param email The email address of the user.
+    @param newCredential The new @c FIRAuthCredential that the user had never used before.
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                           email:(NSString *_Nullable)email

@@ -61,7 +61,6 @@ NS_ASSUME_NONNULL_BEGIN
                                                    cells:@[cell]],
     ]];
 
-
   UIViewController *controller =
       [[FUIStaticContentTableViewController alloc] initWithContents:contents
                                                           nextTitle:FUILocalizedString(kStr_Save)

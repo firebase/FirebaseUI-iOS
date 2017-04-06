@@ -32,12 +32,12 @@ static NSString *const kTableName = @"FirebaseFacebookAuthUI";
 static NSString *const kSignInWithFacebook = @"SignInWithFacebook";
 
 /** @var kFacebookAppId
- @brief The string key used to read Facebook App Id from Info.plist.
+    @brief The string key used to read Facebook App Id from Info.plist.
  */
 static NSString *const kFacebookAppId = @"FacebookAppID";
 
 /** @var kFacebookDisplayName
- @brief The string key used to read Facebook App Name from Info.plist.
+    @brief The string key used to read Facebook App Name from Info.plist.
  */
 static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 
@@ -107,7 +107,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 /** @fn idToken:
- @brief Facebook doesn't provide User Id Token during sign in flow
+    @brief Facebook doesn't provide User Id Token during sign in flow
  */
 - (NSString *)idToken {
   return nil;
@@ -201,7 +201,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 /** @fn callbackWithCredential:error:
- @brief Validates that Facebook SDK data was filled in Info.plist and creates Facebook login manager 
+    @brief Validates that Facebook SDK data was filled in Info.plist and creates Facebook login manager 
  */
 - (void)configureProvider {
   NSBundle *bundle = [[self class] frameworkBundle];

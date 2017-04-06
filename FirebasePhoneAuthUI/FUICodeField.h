@@ -1,6 +1,4 @@
 //
-//  FUISample.h
-//
 //  Copyright (c) 2016 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,19 +14,26 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef UIViewController *(^FIRControllerBlock)();
+@protocol FUICodeFieldDelegate <NSObject>
 
-@interface FUISample : NSObject
+- (void) entryIsCompletedWithCode:(NSString *)code;
+- (void) entryIsIncomplete;
 
-+ (instancetype)sampleWithTitle:(NSString *)title
-              sampleDescription:(NSString *)description
-                     controller:(FIRControllerBlock)block;
+@end
 
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *sampleDescription;
-@property (nonatomic, copy) FIRControllerBlock controllerBlock;
+IB_DESIGNABLE
+@interface FUICodeField : UIView <UIKeyInput, UITextInputTraits>
+
+@property (nonatomic, strong) UIColor *textColor UI_APPEARANCE_SELECTOR;
+@property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance UI_APPEARANCE_SELECTOR;
+
+@property (nonatomic, retain, readonly) NSMutableString *codeEntry;
+@property (nonatomic,getter=isSecureTextEntry) IBInspectable BOOL secureTextEntry;
+
+@property (nonatomic, readwrite) id<FUICodeFieldDelegate> delegate;
+
+-(void)clearCodeInput;
 
 @end

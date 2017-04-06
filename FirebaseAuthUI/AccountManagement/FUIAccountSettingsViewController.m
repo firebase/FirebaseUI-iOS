@@ -66,9 +66,7 @@ static NSString *const kUserAccountImage = @"ic_account_circle.png";
   [self updateUI];
 }
 
-
 #pragma mark - Helpers
-
 
 - (FUIASAccountState)accountState {
   NSArray<id<FIRUserInfo>> *providers = self.auth.currentUser.providerData;
@@ -223,7 +221,6 @@ static NSString *const kUserAccountImage = @"ic_account_circle.png";
     ]];
 }
 
-
 - (void)updateTableStateLinkedAccountWithoutEmail {
   NSMutableArray *linkedAccounts =
       [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
@@ -260,7 +257,6 @@ static NSString *const kUserAccountImage = @"ic_account_circle.png";
       [self createActionsSection]
     ]];
 }
-
 
 - (void)updateTableStateLinkedAccountWithEmail {
   NSMutableArray *linkedAccounts =
@@ -393,7 +389,6 @@ static NSString *const kUserAccountImage = @"ic_account_circle.png";
 - (void)popToRoot {
   [self.navigationController popToViewController:self animated:YES];
 }
-
 
 #pragma mark - FUIAccountSettingsOperationUIDelegate
 

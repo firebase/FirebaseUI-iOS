@@ -84,7 +84,6 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
 #pragma mark - Actions
 
-
 - (void)signInWithEmail:(NSString *)email andPassword:(NSString *)password {
   if (![[self class] isValidEmail:email]) {
     [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];

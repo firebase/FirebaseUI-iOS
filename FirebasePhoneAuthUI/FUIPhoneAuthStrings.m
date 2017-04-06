@@ -14,14 +14,20 @@
 //  limitations under the License.
 //
 
-@import UIKit;
+#import "FUIPhoneAuthStrings.h"
 
-//! Project version number for FirebasePhoneAuthUI.
-FOUNDATION_EXPORT double FirebasePhoneAuthUIVersionNumber;
+NS_ASSUME_NONNULL_BEGIN
 
-//! Project version string for FirebasePhoneAuthUI.
-FOUNDATION_EXPORT const unsigned char FirebasePhoneAuthUIVersionString[];
+NSString *const kStr_EnterPhoneTitle = @"EnterPhoneTitle";
+NSString *const kStr_SignInWithTwitter = @"SignInWithPhone";
 
-#import <FirebasePhoneAuthUI/FUIPhoneAuth.h>
-#import <FirebasePhoneAuthUI/FUIPhoneEntryViewController.h>
-#import <FirebasePhoneAuthUI/FUIPhoneVerificationViewController.h>
+/** @var kTableName
+    @brief The name of the strings table to search for localized strings.
+ */
+NSString *const kTableName = @"FirebasePhoneAuthUI";
+
+NSString *FUILocalizedString(NSString *key) {
+  return FUILocalizedStringFromTable(key, kTableName);
+}
+
+NS_ASSUME_NONNULL_END

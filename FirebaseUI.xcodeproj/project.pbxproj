@@ -161,6 +161,16 @@
 		C329B17C1DAC149B00059A13 /* FirebaseUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D2A84A61D678B2B0058DF04 /* FirebaseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C329B1AE1DAC5D0B00059A13 /* FirebaseUISampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B15F1DA8694B00059A13 /* FirebaseUISampleUITests.m */; };
 		C33B0F3D1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h in Headers */ = {isa = PBXBuildFile; fileRef = C33B0F3C1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C343D29B1E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = C343D2991E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h */; };
+		C343D2A01E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C343D29E1E96CFD400DD9C61 /* FUIPhoneAuthStrings.h */; };
+		C343D2A11E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C343D29E1E96CFD400DD9C61 /* FUIPhoneAuthStrings.h */; };
+		C343D2A21E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = C343D29F1E96CFD400DD9C61 /* FUIPhoneAuthStrings.m */; };
+		C343D2A31E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = C343D29F1E96CFD400DD9C61 /* FUIPhoneAuthStrings.m */; };
+		C343D2A41E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = C343D29F1E96CFD400DD9C61 /* FUIPhoneAuthStrings.m */; };
+		C37296841E95C83900F3FCCC /* FUICodeField.h in Headers */ = {isa = PBXBuildFile; fileRef = C37296811E95C83900F3FCCC /* FUICodeField.h */; };
+		C37296851E95C83900F3FCCC /* FUICodeField.m in Sources */ = {isa = PBXBuildFile; fileRef = C37296821E95C83900F3FCCC /* FUICodeField.m */; };
+		C37296861E95C83900F3FCCC /* FUICodeField.m in Sources */ = {isa = PBXBuildFile; fileRef = C37296821E95C83900F3FCCC /* FUICodeField.m */; };
+		C37296871E95C83900F3FCCC /* FUICodeField.xib in Resources */ = {isa = PBXBuildFile; fileRef = C37296831E95C83900F3FCCC /* FUICodeField.xib */; };
 		C3773B5D1E8EFDEB00ACF58C /* FirebasePhoneAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3773B541E8EFDEA00ACF58C /* FirebasePhoneAuthUI.framework */; };
 		C3773B641E8EFDEB00ACF58C /* FirebasePhoneAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3773B631E8EFDEB00ACF58C /* FirebasePhoneAuthUITests.m */; };
 		C3773B661E8EFDEB00ACF58C /* FirebasePhoneAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = C3773B561E8EFDEA00ACF58C /* FirebasePhoneAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -177,6 +187,14 @@
 		C380A7D71D89ECF1005C031D /* ic_twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D11D89ECF1005C031D /* ic_twitter@2x.png */; };
 		C380A7D81D89ECF1005C031D /* ic_twitter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D21D89ECF1005C031D /* ic_twitter@3x.png */; };
 		C380A7E51D89ED82005C031D /* FirebaseTwitterAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = C380A7E31D89ED82005C031D /* FirebaseTwitterAuthUI.strings */; };
+		C3A201771E9597DA0040563F /* FUIPhoneEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A201711E9597DA0040563F /* FUIPhoneEntryViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3A201781E9597DA0040563F /* FUIPhoneEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A201721E9597DA0040563F /* FUIPhoneEntryViewController.m */; };
+		C3A201791E9597DA0040563F /* FUIPhoneEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A201731E9597DA0040563F /* FUIPhoneEntryViewController.xib */; };
+		C3A2017A1E9597DA0040563F /* FUIPhoneVerificationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A201741E9597DA0040563F /* FUIPhoneVerificationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3A2017B1E9597DA0040563F /* FUIPhoneVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A201751E9597DA0040563F /* FUIPhoneVerificationViewController.m */; };
+		C3A2017C1E9597DA0040563F /* FUIPhoneVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A201761E9597DA0040563F /* FUIPhoneVerificationViewController.xib */; };
+		C3A2017D1E9597FB0040563F /* FUIPhoneEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A201721E9597DA0040563F /* FUIPhoneEntryViewController.m */; };
+		C3A2017E1E9598040040563F /* FUIPhoneVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A201751E9597DA0040563F /* FUIPhoneVerificationViewController.m */; };
 		C3BE73751E610F6700BCD147 /* FUIStaticContentTableViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BE73731E610F6700BCD147 /* FUIStaticContentTableViewManager.h */; };
 		C3BE73761E610F6700BCD147 /* FUIStaticContentTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE73741E610F6700BCD147 /* FUIStaticContentTableViewManager.m */; };
 		C3BE73771E610F7600BCD147 /* FUIStaticContentTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE73741E610F6700BCD147 /* FUIStaticContentTableViewManager.m */; };
@@ -662,6 +680,12 @@
 		C329B15F1DA8694B00059A13 /* FirebaseUISampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebaseUISampleUITests.m; sourceTree = "<group>"; };
 		C329B1611DA8694B00059A13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C33B0F3C1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsOperationType.h; sourceTree = "<group>"; };
+		C343D2991E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneAuth_Internal.h; sourceTree = "<group>"; };
+		C343D29E1E96CFD400DD9C61 /* FUIPhoneAuthStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneAuthStrings.h; sourceTree = "<group>"; };
+		C343D29F1E96CFD400DD9C61 /* FUIPhoneAuthStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPhoneAuthStrings.m; sourceTree = "<group>"; };
+		C37296811E95C83900F3FCCC /* FUICodeField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICodeField.h; sourceTree = "<group>"; };
+		C37296821E95C83900F3FCCC /* FUICodeField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICodeField.m; sourceTree = "<group>"; };
+		C37296831E95C83900F3FCCC /* FUICodeField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICodeField.xib; sourceTree = "<group>"; };
 		C3773B541E8EFDEA00ACF58C /* FirebasePhoneAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebasePhoneAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3773B561E8EFDEA00ACF58C /* FirebasePhoneAuthUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebasePhoneAuthUI.h; sourceTree = "<group>"; };
 		C3773B571E8EFDEA00ACF58C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -681,6 +705,12 @@
 		C380A7D11D89ECF1005C031D /* ic_twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_twitter@2x.png"; sourceTree = "<group>"; };
 		C380A7D21D89ECF1005C031D /* ic_twitter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_twitter@3x.png"; sourceTree = "<group>"; };
 		C380A7E41D89ED82005C031D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C3A201711E9597DA0040563F /* FUIPhoneEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneEntryViewController.h; sourceTree = "<group>"; };
+		C3A201721E9597DA0040563F /* FUIPhoneEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPhoneEntryViewController.m; sourceTree = "<group>"; };
+		C3A201731E9597DA0040563F /* FUIPhoneEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPhoneEntryViewController.xib; sourceTree = "<group>"; };
+		C3A201741E9597DA0040563F /* FUIPhoneVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneVerificationViewController.h; sourceTree = "<group>"; };
+		C3A201751E9597DA0040563F /* FUIPhoneVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPhoneVerificationViewController.m; sourceTree = "<group>"; };
+		C3A201761E9597DA0040563F /* FUIPhoneVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPhoneVerificationViewController.xib; sourceTree = "<group>"; };
 		C3BE73731E610F6700BCD147 /* FUIStaticContentTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIStaticContentTableViewManager.h; sourceTree = "<group>"; };
 		C3BE73741E610F6700BCD147 /* FUIStaticContentTableViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIStaticContentTableViewManager.m; sourceTree = "<group>"; };
 		C3BE73891E625D9F00BCD147 /* FUIStaticContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIStaticContentTableViewController.h; sourceTree = "<group>"; };
@@ -1407,8 +1437,20 @@
 			isa = PBXGroup;
 			children = (
 				C3773B561E8EFDEA00ACF58C /* FirebasePhoneAuthUI.h */,
+				C37296811E95C83900F3FCCC /* FUICodeField.h */,
+				C37296821E95C83900F3FCCC /* FUICodeField.m */,
+				C37296831E95C83900F3FCCC /* FUICodeField.xib */,
 				C3773B831E92C3CF00ACF58C /* FUIPhoneAuth.h */,
 				C3773B841E92C3CF00ACF58C /* FUIPhoneAuth.m */,
+				C343D2991E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h */,
+				C343D29E1E96CFD400DD9C61 /* FUIPhoneAuthStrings.h */,
+				C343D29F1E96CFD400DD9C61 /* FUIPhoneAuthStrings.m */,
+				C3A201711E9597DA0040563F /* FUIPhoneEntryViewController.h */,
+				C3A201721E9597DA0040563F /* FUIPhoneEntryViewController.m */,
+				C3A201731E9597DA0040563F /* FUIPhoneEntryViewController.xib */,
+				C3A201741E9597DA0040563F /* FUIPhoneVerificationViewController.h */,
+				C3A201751E9597DA0040563F /* FUIPhoneVerificationViewController.m */,
+				C3A201761E9597DA0040563F /* FUIPhoneVerificationViewController.xib */,
 				C3773B571E8EFDEA00ACF58C /* Info.plist */,
 				C3773B781E92C36400ACF58C /* Resources */,
 				C3773B7C1E92C36400ACF58C /* Strings */,
@@ -1554,6 +1596,7 @@
 				C3CA19A11E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.h in Headers */,
 				8DA941791D678F5400CD3685 /* FUIAuthBaseViewController.h in Headers */,
 				8DA941771D678F5400CD3685 /* FUIAuth.h in Headers */,
+				C343D2A01E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */,
 				C3CA19B01E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.h in Headers */,
 				C3CA199E1E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.h in Headers */,
 				8DA941751D678F5400CD3685 /* FUIAuthProvider.h in Headers */,
@@ -1614,7 +1657,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C343D2A11E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */,
 				C3773B851E92C3CF00ACF58C /* FUIPhoneAuth.h in Headers */,
+				C37296841E95C83900F3FCCC /* FUICodeField.h in Headers */,
+				C3A201771E9597DA0040563F /* FUIPhoneEntryViewController.h in Headers */,
+				C343D29B1E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h in Headers */,
+				C3A2017A1E9597DA0040563F /* FUIPhoneVerificationViewController.h in Headers */,
 				C3773B661E8EFDEB00ACF58C /* FirebasePhoneAuthUI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2402,6 +2450,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C37296871E95C83900F3FCCC /* FUICodeField.xib in Resources */,
+				C3A201791E9597DA0040563F /* FUIPhoneEntryViewController.xib in Resources */,
+				C3A2017C1E9597DA0040563F /* FUIPhoneVerificationViewController.xib in Resources */,
 				C3773B7F1E92C36400ACF58C /* ic_phone.png in Resources */,
 				C3773B801E92C36400ACF58C /* ic_phone@2x.png in Resources */,
 				C3773B821E92C36400ACF58C /* FirebasePhoneAuthUI.strings in Resources */,
@@ -3388,6 +3439,7 @@
 				C3CA19AB1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.m in Sources */,
 				C3CA19AE1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.m in Sources */,
 				8DA941731D678F5400CD3685 /* FUIAuthPickerViewController.m in Sources */,
+				C343D2A21E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */,
 				C3CA19A81E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.m in Sources */,
 				8DA941941D678F5400CD3685 /* FUIPasswordSignUpViewController.m in Sources */,
 				8DA9417C1D678F5400CD3685 /* FUIAuthErrors.m in Sources */,
@@ -3492,7 +3544,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C37296851E95C83900F3FCCC /* FUICodeField.m in Sources */,
+				C343D2A31E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */,
 				C3773B861E92C3CF00ACF58C /* FUIPhoneAuth.m in Sources */,
+				C3A2017B1E9597DA0040563F /* FUIPhoneVerificationViewController.m in Sources */,
+				C3A201781E9597DA0040563F /* FUIPhoneEntryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3508,7 +3564,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C37296861E95C83900F3FCCC /* FUICodeField.m in Sources */,
+				C343D2A41E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */,
 				C3773B991E92CA2D00ACF58C /* FUIPhoneAuth.m in Sources */,
+				C3A2017E1E9598040040563F /* FUIPhoneVerificationViewController.m in Sources */,
+				C3A2017D1E9597FB0040563F /* FUIPhoneEntryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

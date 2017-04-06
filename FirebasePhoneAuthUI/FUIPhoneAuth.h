@@ -23,6 +23,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface FUIPhoneAuth : NSObject <FUIAuthProvider>
 
+/** @fn init
+    @brief Please use @c initWithAuthUI: .
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
+/** @fn initWithAuthUI:
+    @param authUI The @c FUIAuth instance that manages controllers of this provider.
+ */
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI NS_DESIGNATED_INITIALIZER;
+
 @end
 
 NS_ASSUME_NONNULL_END

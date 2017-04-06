@@ -89,19 +89,16 @@ typedef void (^FIRAuthProviderSignInCompletionBlock)(FIRAuthCredential *_Nullabl
 - (void)signOut;
 
 /** @property accessToken
- @brief User Access Token obtained during sign in.
+    @brief User Access Token obtained during sign in.
  */
 @property(nonatomic, copy, readonly) NSString *accessToken;
 
-
 @optional;
 
-
 /** @property idToken
- @brief User Id Token obtained during sign in. Not all providers can return, thus it's optional
+    @brief User Id Token obtained during sign in. Not all providers can return, thus it's optional
  */
 @property(nonatomic, copy, readonly) NSString *idToken;
-
 
 /** @fn handleOpenURL:
     @brief May be used to help complete a sign-in flow which requires a callback from Safari.

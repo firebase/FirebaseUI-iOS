@@ -275,7 +275,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
           [providers addObject:[[FUITwitterAuth alloc] init]];
           break;
         case kIDPPhone:
-          [providers addObject:[[FUIPhoneAuth alloc] init]];
+          [providers addObject:[[FUIPhoneAuth alloc] initWithAuthUI:self.authUIMock]];
           break;
 
         default:

@@ -43,7 +43,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)executeOperationWithDelegate:(id<FUIAccountSettingsOperationUIDelegate>)delegate
     NS_UNAVAILABLE;
 
-
 /** @fn executeOperationWithDelegate:showDialog:provider:
     @brief Creates new instance of @c FUIAccountSettingsOperationUnlinkAccount and executes logic
         associated with it.

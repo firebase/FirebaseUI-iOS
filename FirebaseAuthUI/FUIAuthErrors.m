@@ -14,7 +14,6 @@
 //  limitations under the License.
 //
 
-
 #import "FUIAuthErrors.h"
 
 NSString *const FUIAuthErrorDomain = @"FUIAuthErrorDomain";
