@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (NSString *)signInLabel {
-  return FUILocalizedString(kStr_SignInWithTwitter);
+  return FUIPhoneAuthLocalizedString(kPAStr_SignInWithTwitter);
 }
 
 - (UIImage *)icon {

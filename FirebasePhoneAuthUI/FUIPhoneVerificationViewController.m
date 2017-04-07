@@ -26,30 +26,30 @@
  */
 static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID";
 
-@interface FUIPhoneVerificationViewController ()
-
-@end
-
 @implementation FUIPhoneVerificationViewController {
-
   __unsafe_unretained IBOutlet FUICodeField *_codeField;
+  NSString *_verificationID;
 }
 
-- (instancetype)initWithAuthUI:(FUIAuth *)authUI {
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI
+                verificationID:(NSString *)verificationID {
   return [self initWithNibName:NSStringFromClass([self class])
                         bundle:[FUIAuthUtils frameworkBundle]
-                        authUI:authUI];
+                        authUI:authUI
+                verificationID:verificationID];
 }
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil
-                         bundle:(NSBundle *)nibBundleOrNil
-                         authUI:(FUIAuth *)authUI {
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FUIAuth *)authUI
+                 verificationID:(NSString *)verificationID {
 
   self = [super initWithNibName:nibNameOrNil
                          bundle:nibBundleOrNil
                          authUI:authUI];
   if (self) {
-    self.title = FUILocalizedString(kStr_EnterPhoneTitle);
+    self.title = FUIPhoneAuthLocalizedString(kPAStr_EnterPhoneTitle);
+    _verificationID = [verificationID copy];
   }
   return self;
 }
@@ -58,7 +58,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [super viewDidLoad];
 
   UIBarButtonItem *nextButtonItem =
-  [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Next)
+  [[UIBarButtonItem alloc] initWithTitle:FUIPhoneAuthLocalizedString(kPAStr_Next)
                                    style:UIBarButtonItemStylePlain
                                   target:self
                                   action:@selector(next)];
@@ -88,18 +88,18 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 - (void)onNext:(NSString *)verificationCode {
   if (!verificationCode.length) {
-    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
+    [self showAlertWithMessage:FUIPhoneAuthLocalizedString(kPAStr_EmptyVerificationCode)];
     return;
   }
 
-  [self incrementActivity];
+  FIRPhoneAuthProvider *provider = [FIRPhoneAuthProvider providerWithAuth:self.auth];
 
-  [self decrementActivity];
+  FIRPhoneAuthCredential *credential =
+    [provider credentialWithVerificationID:_verificationID verificationCode:verificationCode];
 
   [self.navigationController dismissViewControllerAnimated:YES completion:^{
-    NSError *error = [FUIAuthErrorUtils userCancelledSignInError];
     FUIPhoneAuth *delegate = [self phoneAuthProvider];
-    [delegate callbackWithCredential:nil error:error];
+    [delegate callbackWithCredential:credential error:nil];
   }];
 
 }

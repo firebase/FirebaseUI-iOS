@@ -16,18 +16,25 @@
 
 #import "FUIPhoneAuthStrings.h"
 
+#import "FUIAuthStrings.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
-NSString *const kStr_EnterPhoneTitle = @"EnterPhoneTitle";
-NSString *const kStr_SignInWithTwitter = @"SignInWithPhone";
+NSString *const kPAStr_EnterPhoneTitle = @"EnterPhoneTitle";
+NSString *const kPAStr_SignInWithTwitter = @"SignInWithPhone";
+NSString *const kPAStr_Next = @"Next";
+NSString *const kPAStr_EmptyVerificationCode = @"EmptyVerificationCode";
+NSString *const kPAStr_EmptyPhoneNumber = @"EmptyPhoneNumber";
+NSString *const kPAStr_PhoneNumber = @"PhoneNumber";
+NSString *const kPAStr_EnterYourPhoneNumber = @"EnterYourPhoneNumber";
 
-/** @var kTableName
+/** @var kPhoneAuthProviderTableName
     @brief The name of the strings table to search for localized strings.
  */
-NSString *const kTableName = @"FirebasePhoneAuthUI";
+NSString *const kPhoneAuthProviderTableName = @"FirebasePhoneAuthUI";
 
-NSString *FUILocalizedString(NSString *key) {
-  return FUILocalizedStringFromTable(key, kTableName);
+NSString *FUIPhoneAuthLocalizedString(NSString *key) {
+  return FUILocalizedStringFromTable(key, kPhoneAuthProviderTableName);
 }
 
 NS_ASSUME_NONNULL_END

@@ -14,24 +14,28 @@
 //  limitations under the License.
 //
 
-#import "FUIAuthStrings.h"
 #import "FUIAuthUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *const kStr_EnterPhoneTitle;
-extern NSString *const kStr_SignInWithTwitter;
+extern NSString *const kPAStr_EnterPhoneTitle;
+extern NSString *const kPAStr_SignInWithTwitter;
+extern NSString *const kPAStr_Next;
+extern NSString *const kPAStr_EmptyVerificationCode;
+extern NSString *const kPAStr_EmptyPhoneNumber;
+extern NSString *const kPAStr_PhoneNumber;
+extern NSString *const kPAStr_EnterYourPhoneNumber;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/** @fn FUILocalizedString
+/** @fn FUIPhoneAuthLocalizedString
     @brief Gets a localized string from a name.
     @param name The key value of the string.
     @return The string by the key localized in the current locale.
  */
-NSString *FUILocalizedString(NSString *key);
+NSString *FUIPhoneAuthLocalizedString(NSString *key);
 
 #ifdef __cplusplus
 }

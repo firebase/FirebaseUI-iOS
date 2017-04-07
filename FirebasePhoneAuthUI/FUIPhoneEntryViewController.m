@@ -63,7 +63,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                          bundle:nibBundleOrNil
                          authUI:authUI];
   if (self) {
-    self.title = FUILocalizedString(kStr_EnterPhoneTitle);
+    self.title = FUIPhoneAuthLocalizedString(kPAStr_EnterPhoneTitle);
   }
   return self;
 }
@@ -72,7 +72,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [super viewDidLoad];
 
   UIBarButtonItem *nextButtonItem =
-  [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Next)
+  [[UIBarButtonItem alloc] initWithTitle:FUIPhoneAuthLocalizedString(kPAStr_Next)
                                    style:UIBarButtonItemStylePlain
                                   target:self
                                   action:@selector(next)];
@@ -100,20 +100,28 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 - (void)onNext:(NSString *)phoneNumber {
   if (!phoneNumber.length) {
-    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
+    [self showAlertWithMessage:FUIPhoneAuthLocalizedString(kPAStr_EmptyPhoneNumber)];
     return;
   }
 
   [self incrementActivity];
+  FIRPhoneAuthProvider *provider = [FIRPhoneAuthProvider providerWithAuth:self.auth];
+  [provider verifyPhoneNumber:phoneNumber
+                   completion:^(NSString * _Nullable verificationID, NSError * _Nullable error) {
 
-  UIViewController *controller =
-      [[FUIPhoneVerificationViewController alloc] initWithAuthUI:self.authUI];
+    [self decrementActivity];
 
-  [self pushViewController:controller];
-  NSLog(@"%s", __func__);
+    if (error) {
+      [self showAlertWithMessage:error.localizedDescription];
+      return;
+    }
 
-  [self decrementActivity];
+    UIViewController *controller =
+        [[FUIPhoneVerificationViewController alloc] initWithAuthUI:self.authUI
+                                                    verificationID:verificationID];
 
+    [self pushViewController:controller];
+  }];
 }
 
 - (void)onBack {
@@ -143,8 +151,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     [tableView registerNib:cellNib forCellReuseIdentifier:kCellReuseIdentifier];
     cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   }
-  cell.label.text = FUILocalizedString(kStr_Email);
-  cell.textField.placeholder = FUILocalizedString(kStr_EnterYourEmail);
+  cell.label.text = FUIPhoneAuthLocalizedString(kPAStr_PhoneNumber);
+  cell.textField.placeholder = FUIPhoneAuthLocalizedString(kPAStr_EnterYourPhoneNumber);
   cell.textField.delegate = self;
   cell.accessibilityIdentifier = kPhoneNumberCellAccessibilityID;
   _phoneNumberField = cell.textField;

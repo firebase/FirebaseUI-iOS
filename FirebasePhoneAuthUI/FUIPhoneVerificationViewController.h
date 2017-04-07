@@ -18,4 +18,40 @@
 
 @interface FUIPhoneVerificationViewController : FUIAuthBaseViewController
 
+/** @fn initWithNibName:bundle:authUI:
+    @brief Designated initializer.
+    @param nibNameOrNil The name of the nib file to associate with the view controller.
+    @param nibBundleOrNil The bundle in which to search for the nib file.
+    @param authUI The @c FUIAuth instance that manages this view controller.
+ */
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FUIAuth *)authUI NS_UNAVAILABLE;
+
+/** @fn initWithAuthUI:
+    @brief Convenience initializer.
+    @param authUI The @c FUIAuth instance that manages this view controller.
+ */
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI NS_UNAVAILABLE;
+
+/** @fn initWithAuthUI:
+    @brief Convenience initializer.
+    @param authUI The @c FUIAuth instance that manages this view controller.
+    @param verificationID The verification ID obtained while verifying phone number.
+ */
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI
+                verificationID:(NSString *)verificationID;
+
+/** @fn initWithNibName:bundle:authUI:
+    @brief Designated initializer.
+    @param nibNameOrNil The name of the nib file to associate with the view controller.
+    @param nibBundleOrNil The bundle in which to search for the nib file.
+    @param authUI The @c FUIAuth instance that manages this view controller.
+    @param verificationID The verification ID obtained while verifying phone number.
+ */
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FUIAuth *)authUI
+                 verificationID:(NSString *)verificationID NS_DESIGNATED_INITIALIZER;
+
 @end
