@@ -38,9 +38,11 @@
     @brief Convenience initializer.
     @param authUI The @c FUIAuth instance that manages this view controller.
     @param verificationID The verification ID obtained while verifying phone number.
+    @param phoneNumber The phone number which is being verifying.
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
-                verificationID:(NSString *)verificationID;
+                verificationID:(NSString *)verificationID
+                   phoneNumber:(NSString *)phoneNumber;
 
 /** @fn initWithNibName:bundle:authUI:
     @brief Designated initializer.
@@ -48,10 +50,12 @@
     @param nibBundleOrNil The bundle in which to search for the nib file.
     @param authUI The @c FUIAuth instance that manages this view controller.
     @param verificationID The verification ID obtained while verifying phone number.
+    @param phoneNumber The phone number which is being verifying.
  */
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil
                          authUI:(FUIAuth *)authUI
-                 verificationID:(NSString *)verificationID NS_DESIGNATED_INITIALIZER;
+                 verificationID:(NSString *)verificationID
+                    phoneNumber:(NSString *)phoneNumber NS_DESIGNATED_INITIALIZER;
 
 @end

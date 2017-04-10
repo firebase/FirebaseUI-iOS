@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
   return FUIAccountSettingsOperationTypeForgotPassword;
 }
 
--(void)execute:(BOOL)showDialog {
+- (void)execute:(BOOL)showDialog {
   [self onForgotPassword];
 }
 

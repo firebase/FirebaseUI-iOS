@@ -4,12 +4,12 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DGTCodeField">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FUICodeField">
             <connections>
                 <outlet property="digits" destination="KwP-n3-yLd" id="1VA-xV-JDl"/>
             </connections>
@@ -20,40 +20,22 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 2 3 4 5 6" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="KwP-n3-yLd">
-                    <rect key="frame" x="23.666666666666657" y="31.333333333333329" width="264.33333333333337" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="251" id="8aZ-1k-sIp"/>
-                        <constraint firstAttribute="height" constant="84" id="GaV-5j-2uh"/>
-                    </constraints>
+                    <rect key="frame" x="23" y="31" width="265" height="40"/>
                     <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="40"/>
                     <nil key="highlightedColor"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="8aZ-1k-sIp"/>
-                            <exclude reference="GaV-5j-2uh"/>
-                        </mask>
-                    </variation>
                 </label>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KwP-n3-yLd" secondAttribute="trailing" constant="5" id="VPB-EN-xAc"/>
-                <constraint firstItem="KwP-n3-yLd" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="gUo-qV-4M0"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="KwP-n3-yLd" secondAttribute="bottom" constant="5" id="i0w-ka-ksd"/>
                 <constraint firstItem="KwP-n3-yLd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="mfI-yf-23P"/>
                 <constraint firstItem="KwP-n3-yLd" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="uBV-4t-Idj"/>
                 <constraint firstItem="KwP-n3-yLd" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="vLH-Yg-7nn"/>
-                <constraint firstItem="KwP-n3-yLd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="xJt-ek-mbC"/>
                 <constraint firstItem="KwP-n3-yLd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="xRa-BW-RgT"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="gUo-qV-4M0"/>
-                    <exclude reference="xJt-ek-mbC"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="292" y="-32.5"/>
         </view>
     </objects>

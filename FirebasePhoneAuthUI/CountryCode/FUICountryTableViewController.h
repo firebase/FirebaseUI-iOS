@@ -14,26 +14,26 @@
 //  limitations under the License.
 //
 
+#import "FUICountryCodes.h"
+
 #import <UIKit/UIKit.h>
 
-@protocol FUICodeFieldDelegate <NSObject>
+@protocol FUICountryTableViewDelegate
 
-- (void) entryIsCompletedWithCode:(NSString *)code;
-- (void) entryIsIncomplete;
+- (void)didSelectCountry:(FUICountryCodeInfo*)countryCodeInfo;
 
 @end
 
-IB_DESIGNABLE
-@interface FUICodeField : UIView <UIKeyInput, UITextInputTraits>
+@interface FUICountryTableViewController : UIViewController
+    <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate>
 
-@property (nonatomic, strong) UIColor *textColor UI_APPEARANCE_SELECTOR;
-@property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance UI_APPEARANCE_SELECTOR;
+@property (nonatomic, weak) id<FUICountryTableViewDelegate> delegate;
 
-@property (nonatomic, retain, readonly) NSMutableString *codeEntry;
-@property (nonatomic,getter=isSecureTextEntry) IBInspectable BOOL secureTextEntry;
+- (instancetype)initWithCountryCodes:(FUICountryCodes *)countryCodes;
 
-@property (nonatomic, readwrite) id<FUICodeFieldDelegate> delegate;
-
-- (void)clearCodeInput;
++ (instancetype)new __unavailable;
+- (instancetype)init __unavailable;
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil
+                         bundle:(NSBundle *)nibBundleOrNil __unavailable;
 
 @end

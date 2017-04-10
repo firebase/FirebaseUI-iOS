@@ -146,6 +146,7 @@
 		96AD180C98F2EFE357B19B85 /* Pods_FirebaseGoogleAuthUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49CED19C9E246147A4705E55 /* Pods_FirebaseGoogleAuthUITests.framework */; };
 		B1DD488E3A0D3EFB21AC49E5 /* Pods_FirebasePhoneAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B748215979B4C9C5831D38 /* Pods_FirebasePhoneAuthUI.framework */; };
 		B7AF03E7EE4073BE7357E233 /* Pods_FirebaseDatabaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC8669677D8F6B9EA4692F0 /* Pods_FirebaseDatabaseUITests.framework */; };
+		C3204F0C1E98340400841149 /* FUICountryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3204F0B1E98340400841149 /* FUICountryTableViewController.xib */; };
 		C32516951D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = C32516941D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C32516A11D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32516A01D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests.m */; };
 		C32516B81D88A61C00B0B3F9 /* FUITwitterAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = C32516B61D88A61C00B0B3F9 /* FUITwitterAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -187,6 +188,18 @@
 		C380A7D71D89ECF1005C031D /* ic_twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D11D89ECF1005C031D /* ic_twitter@2x.png */; };
 		C380A7D81D89ECF1005C031D /* ic_twitter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D21D89ECF1005C031D /* ic_twitter@3x.png */; };
 		C380A7E51D89ED82005C031D /* FirebaseTwitterAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = C380A7E31D89ED82005C031D /* FirebaseTwitterAuthUI.strings */; };
+		C3A08D991E97227A00FF63EB /* FUICollationForCountries.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A08D911E97227A00FF63EB /* FUICollationForCountries.h */; };
+		C3A08D9A1E97227A00FF63EB /* FUICollationForCountries.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D921E97227A00FF63EB /* FUICollationForCountries.m */; };
+		C3A08D9B1E97227A00FF63EB /* FUICollationForCountries.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D921E97227A00FF63EB /* FUICollationForCountries.m */; };
+		C3A08D9C1E97227A00FF63EB /* FUICountryCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A08D931E97227A00FF63EB /* FUICountryCodes.h */; };
+		C3A08D9D1E97227A00FF63EB /* FUICountryCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D941E97227A00FF63EB /* FUICountryCodes.m */; };
+		C3A08D9E1E97227A00FF63EB /* FUICountryCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D941E97227A00FF63EB /* FUICountryCodes.m */; };
+		C3A08D9F1E97227A00FF63EB /* FUICountryTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A08D951E97227A00FF63EB /* FUICountryTableViewController.h */; };
+		C3A08DA01E97227A00FF63EB /* FUICountryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D961E97227A00FF63EB /* FUICountryTableViewController.m */; };
+		C3A08DA11E97227A00FF63EB /* FUICountryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D961E97227A00FF63EB /* FUICountryTableViewController.m */; };
+		C3A08DA21E97227A00FF63EB /* FUIFeatureSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A08D971E97227A00FF63EB /* FUIFeatureSwitch.h */; };
+		C3A08DA31E97227A00FF63EB /* FUIFeatureSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D981E97227A00FF63EB /* FUIFeatureSwitch.m */; };
+		C3A08DA41E97227A00FF63EB /* FUIFeatureSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D981E97227A00FF63EB /* FUIFeatureSwitch.m */; };
 		C3A201771E9597DA0040563F /* FUIPhoneEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A201711E9597DA0040563F /* FUIPhoneEntryViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3A201781E9597DA0040563F /* FUIPhoneEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A201721E9597DA0040563F /* FUIPhoneEntryViewController.m */; };
 		C3A201791E9597DA0040563F /* FUIPhoneEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A201731E9597DA0040563F /* FUIPhoneEntryViewController.xib */; };
@@ -657,6 +670,7 @@
 		B5F1974856C3C17FE94129DF /* Pods-FirebaseAuthUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseAuthUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseAuthUITests/Pods-FirebaseAuthUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B8752554D67482334FFA1D3C /* Pods-FirebasePhoneAuthUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebasePhoneAuthUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebasePhoneAuthUITests/Pods-FirebasePhoneAuthUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C19A1BCBA9A29D1FB6C2325F /* Pods_FirebaseStorageUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseStorageUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3204F0B1E98340400841149 /* FUICountryTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICountryTableViewController.xib; sourceTree = "<group>"; };
 		C32516921D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseTwitterAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32516941D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseTwitterAuthUI.h; sourceTree = "<group>"; };
 		C32516961D88A54C00B0B3F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -705,6 +719,14 @@
 		C380A7D11D89ECF1005C031D /* ic_twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_twitter@2x.png"; sourceTree = "<group>"; };
 		C380A7D21D89ECF1005C031D /* ic_twitter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_twitter@3x.png"; sourceTree = "<group>"; };
 		C380A7E41D89ED82005C031D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C3A08D911E97227A00FF63EB /* FUICollationForCountries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICollationForCountries.h; sourceTree = "<group>"; };
+		C3A08D921E97227A00FF63EB /* FUICollationForCountries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICollationForCountries.m; sourceTree = "<group>"; };
+		C3A08D931E97227A00FF63EB /* FUICountryCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICountryCodes.h; sourceTree = "<group>"; };
+		C3A08D941E97227A00FF63EB /* FUICountryCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICountryCodes.m; sourceTree = "<group>"; };
+		C3A08D951E97227A00FF63EB /* FUICountryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICountryTableViewController.h; sourceTree = "<group>"; };
+		C3A08D961E97227A00FF63EB /* FUICountryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICountryTableViewController.m; sourceTree = "<group>"; };
+		C3A08D971E97227A00FF63EB /* FUIFeatureSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIFeatureSwitch.h; sourceTree = "<group>"; };
+		C3A08D981E97227A00FF63EB /* FUIFeatureSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIFeatureSwitch.m; sourceTree = "<group>"; };
 		C3A201711E9597DA0040563F /* FUIPhoneEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneEntryViewController.h; sourceTree = "<group>"; };
 		C3A201721E9597DA0040563F /* FUIPhoneEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPhoneEntryViewController.m; sourceTree = "<group>"; };
 		C3A201731E9597DA0040563F /* FUIPhoneEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPhoneEntryViewController.xib; sourceTree = "<group>"; };
@@ -1436,6 +1458,7 @@
 		C3773B551E8EFDEA00ACF58C /* FirebasePhoneAuthUI */ = {
 			isa = PBXGroup;
 			children = (
+				C3A08D901E97227A00FF63EB /* CountryCode */,
 				C3773B561E8EFDEA00ACF58C /* FirebasePhoneAuthUI.h */,
 				C37296811E95C83900F3FCCC /* FUICodeField.h */,
 				C37296821E95C83900F3FCCC /* FUICodeField.m */,
@@ -1518,6 +1541,22 @@
 				C380A7E31D89ED82005C031D /* FirebaseTwitterAuthUI.strings */,
 			);
 			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		C3A08D901E97227A00FF63EB /* CountryCode */ = {
+			isa = PBXGroup;
+			children = (
+				C3A08D911E97227A00FF63EB /* FUICollationForCountries.h */,
+				C3A08D921E97227A00FF63EB /* FUICollationForCountries.m */,
+				C3A08D931E97227A00FF63EB /* FUICountryCodes.h */,
+				C3A08D941E97227A00FF63EB /* FUICountryCodes.m */,
+				C3A08D951E97227A00FF63EB /* FUICountryTableViewController.h */,
+				C3A08D961E97227A00FF63EB /* FUICountryTableViewController.m */,
+				C3204F0B1E98340400841149 /* FUICountryTableViewController.xib */,
+				C3A08D971E97227A00FF63EB /* FUIFeatureSwitch.h */,
+				C3A08D981E97227A00FF63EB /* FUIFeatureSwitch.m */,
+			);
+			path = CountryCode;
 			sourceTree = "<group>";
 		};
 		C3BCC4E11E527B7E0095D610 /* AccountManagement */ = {
@@ -1657,13 +1696,17 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3A08DA21E97227A00FF63EB /* FUIFeatureSwitch.h in Headers */,
 				C343D2A11E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */,
+				C3A08D9C1E97227A00FF63EB /* FUICountryCodes.h in Headers */,
 				C3773B851E92C3CF00ACF58C /* FUIPhoneAuth.h in Headers */,
 				C37296841E95C83900F3FCCC /* FUICodeField.h in Headers */,
 				C3A201771E9597DA0040563F /* FUIPhoneEntryViewController.h in Headers */,
 				C343D29B1E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h in Headers */,
 				C3A2017A1E9597DA0040563F /* FUIPhoneVerificationViewController.h in Headers */,
 				C3773B661E8EFDEB00ACF58C /* FirebasePhoneAuthUI.h in Headers */,
+				C3A08D991E97227A00FF63EB /* FUICollationForCountries.h in Headers */,
+				C3A08D9F1E97227A00FF63EB /* FUICountryTableViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2453,6 +2496,7 @@
 				C37296871E95C83900F3FCCC /* FUICodeField.xib in Resources */,
 				C3A201791E9597DA0040563F /* FUIPhoneEntryViewController.xib in Resources */,
 				C3A2017C1E9597DA0040563F /* FUIPhoneVerificationViewController.xib in Resources */,
+				C3204F0C1E98340400841149 /* FUICountryTableViewController.xib in Resources */,
 				C3773B7F1E92C36400ACF58C /* ic_phone.png in Resources */,
 				C3773B801E92C36400ACF58C /* ic_phone@2x.png in Resources */,
 				C3773B821E92C36400ACF58C /* FirebasePhoneAuthUI.strings in Resources */,
@@ -3546,6 +3590,10 @@
 			files = (
 				C37296851E95C83900F3FCCC /* FUICodeField.m in Sources */,
 				C343D2A31E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */,
+				C3A08D9D1E97227A00FF63EB /* FUICountryCodes.m in Sources */,
+				C3A08D9A1E97227A00FF63EB /* FUICollationForCountries.m in Sources */,
+				C3A08DA31E97227A00FF63EB /* FUIFeatureSwitch.m in Sources */,
+				C3A08DA01E97227A00FF63EB /* FUICountryTableViewController.m in Sources */,
 				C3773B861E92C3CF00ACF58C /* FUIPhoneAuth.m in Sources */,
 				C3A2017B1E9597DA0040563F /* FUIPhoneVerificationViewController.m in Sources */,
 				C3A201781E9597DA0040563F /* FUIPhoneEntryViewController.m in Sources */,
@@ -3566,6 +3614,10 @@
 			files = (
 				C37296861E95C83900F3FCCC /* FUICodeField.m in Sources */,
 				C343D2A41E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */,
+				C3A08D9E1E97227A00FF63EB /* FUICountryCodes.m in Sources */,
+				C3A08D9B1E97227A00FF63EB /* FUICollationForCountries.m in Sources */,
+				C3A08DA41E97227A00FF63EB /* FUIFeatureSwitch.m in Sources */,
+				C3A08DA11E97227A00FF63EB /* FUICountryTableViewController.m in Sources */,
 				C3773B991E92CA2D00ACF58C /* FUIPhoneAuth.m in Sources */,
 				C3A2017E1E9598040040563F /* FUIPhoneVerificationViewController.m in Sources */,
 				C3A2017D1E9597FB0040563F /* FUIPhoneEntryViewController.m in Sources */,

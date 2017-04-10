@@ -29,20 +29,24 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 @implementation FUIPhoneVerificationViewController {
   __unsafe_unretained IBOutlet FUICodeField *_codeField;
   NSString *_verificationID;
+  __unsafe_unretained IBOutlet UITextView *_phoneNumber;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
-                verificationID:(NSString *)verificationID {
+                verificationID:(NSString *)verificationID
+                   phoneNumber:(NSString *)phoneNumber{
   return [self initWithNibName:NSStringFromClass([self class])
                         bundle:[FUIAuthUtils frameworkBundle]
                         authUI:authUI
-                verificationID:verificationID];
+                verificationID:verificationID
+                   phoneNumber:phoneNumber];
 }
 
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil
                          authUI:(FUIAuth *)authUI
-                 verificationID:(NSString *)verificationID {
+                 verificationID:(NSString *)verificationID
+                    phoneNumber:(NSString *)phoneNumber {
 
   self = [super initWithNibName:nibNameOrNil
                          bundle:nibBundleOrNil
@@ -50,6 +54,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   if (self) {
     self.title = FUIPhoneAuthLocalizedString(kPAStr_EnterPhoneTitle);
     _verificationID = [verificationID copy];
+    _phoneNumber.text = phoneNumber;
   }
   return self;
 }

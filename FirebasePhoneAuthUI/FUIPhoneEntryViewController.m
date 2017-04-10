@@ -23,6 +23,13 @@
 #import "FUIPhoneVerificationViewController.h"
 #import <FirebaseAuth/FIRPhoneAuthProvider.h>
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "FUICountryTableViewController.h"
+#import "FUIFeatureSwitch.h"
+
+NS_ENUM(NSInteger, FUIPhoneEntryRow) {
+  FUIPhoneEntryRowCountrySelector = 0,
+  FUIPhoneEntryRowPhoneNuber
+};
 
 /** @var kCellReuseIdentifier
     @brief The reuse identifier for table view cell.
@@ -39,7 +46,8 @@ static NSString *const kPhoneNumberCellAccessibilityID = @"PhoneNumberCellAccess
  */
 static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID";
 
-@interface FUIPhoneEntryViewController () <UITextFieldDelegate>
+@interface FUIPhoneEntryViewController ()
+    <UITextFieldDelegate, UITabBarDelegate, UITableViewDataSource>
 @end
 
 @implementation FUIPhoneEntryViewController  {
@@ -47,6 +55,12 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       @brief The @c UITextField that user enters phone number.
    */
   UITextField *_phoneNumberField;
+  UITextField *_countryCodeField;
+  FUICountryCodeInfo *_selectedCountryCode;
+
+
+  __unsafe_unretained IBOutlet UITableView *_tableView;
+  FUICountryCodes *_countryCodes;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
@@ -64,6 +78,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                          authUI:authUI];
   if (self) {
     self.title = FUIPhoneAuthLocalizedString(kPAStr_EnterPhoneTitle);
+    _countryCodes = [[FUICountryCodes alloc] init];
+    _selectedCountryCode = [_countryCodes countryCodeInfoFromDeviceLocale];
+
   }
   return self;
 }
@@ -106,7 +123,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
   [self incrementActivity];
   FIRPhoneAuthProvider *provider = [FIRPhoneAuthProvider providerWithAuth:self.auth];
-  [provider verifyPhoneNumber:phoneNumber
+  NSString *phoneNumberWithCountryCode =
+      [NSString stringWithFormat:@"+%@%@", _selectedCountryCode.dialCode, phoneNumber];
+  [provider verifyPhoneNumber:phoneNumberWithCountryCode
                    completion:^(NSString * _Nullable verificationID, NSError * _Nullable error) {
 
     [self decrementActivity];
@@ -118,7 +137,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
     UIViewController *controller =
         [[FUIPhoneVerificationViewController alloc] initWithAuthUI:self.authUI
-                                                    verificationID:verificationID];
+                                                    verificationID:verificationID
+                                                       phoneNumber:phoneNumberWithCountryCode];
 
     [self pushViewController:controller];
   }];
@@ -139,7 +159,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return 1;
+  return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -151,23 +171,43 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     [tableView registerNib:cellNib forCellReuseIdentifier:kCellReuseIdentifier];
     cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   }
-  cell.label.text = FUIPhoneAuthLocalizedString(kPAStr_PhoneNumber);
-  cell.textField.placeholder = FUIPhoneAuthLocalizedString(kPAStr_EnterYourPhoneNumber);
-  cell.textField.delegate = self;
-  cell.accessibilityIdentifier = kPhoneNumberCellAccessibilityID;
-  _phoneNumberField = cell.textField;
-  _phoneNumberField.secureTextEntry = NO;
-  _phoneNumberField.autocorrectionType = UITextAutocorrectionTypeNo;
-  _phoneNumberField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-  _phoneNumberField.returnKeyType = UIReturnKeyNext;
-  _phoneNumberField.keyboardType = UIKeyboardTypeEmailAddress;
-  [cell.textField addTarget:self
-                     action:@selector(textFieldDidChange)
-           forControlEvents:UIControlEventEditingChanged];
-  [self didChangePhoneNumber:_phoneNumberField.text];
+  if (indexPath.row == FUIPhoneEntryRowCountrySelector) {
+    cell.label.text = FUIPhoneAuthLocalizedString(kPAStr_Country);
+    cell.textField.enabled = NO;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    _countryCodeField = cell.textField;
+    [self setCountryCodeValue];
+  } else if (indexPath.row == FUIPhoneEntryRowPhoneNuber) {
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.label.text = FUIPhoneAuthLocalizedString(kPAStr_PhoneNumber);
+    cell.textField.enabled = YES;
+    cell.textField.placeholder = FUIPhoneAuthLocalizedString(kPAStr_EnterYourPhoneNumber);
+    cell.textField.delegate = self;
+    cell.accessibilityIdentifier = kPhoneNumberCellAccessibilityID;
+    _phoneNumberField = cell.textField;
+    _phoneNumberField.secureTextEntry = NO;
+    _phoneNumberField.autocorrectionType = UITextAutocorrectionTypeNo;
+    _phoneNumberField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    _phoneNumberField.returnKeyType = UIReturnKeyNext;
+    _phoneNumberField.keyboardType = UIKeyboardTypeEmailAddress;
+    [cell.textField addTarget:self
+                       action:@selector(textFieldDidChange)
+             forControlEvents:UIControlEventEditingChanged];
+    [self didChangePhoneNumber:_phoneNumberField.text];
+  }
+  cell.selectionStyle = UITableViewCellSelectionStyleNone;
   return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.row == FUIPhoneEntryRowCountrySelector) {
+    FUICountryTableViewController* countryTableViewController =
+        [[FUICountryTableViewController alloc] initWithCountryCodes:_countryCodes];
+    countryTableViewController.delegate = self;
+    [self.navigationController pushViewController:countryTableViewController animated:YES];
+
+  }
+}
 - (nullable id<FUIAuthProvider>)bestProviderFromProviderIDs:(NSArray<NSString *> *)providerIDs {
   NSArray<id<FUIAuthProvider>> *providers = self.authUI.providers;
   for (NSString *providerID in providerIDs) {
@@ -187,6 +227,27 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     [self onNext:_phoneNumberField.text];
   }
   return NO;
+}
+
+#pragma mark - CountryCodeDelegate
+
+- (void)didSelectCountry:(FUICountryCodeInfo*)countryCodeInfo {
+  _selectedCountryCode = countryCodeInfo;
+  [self setCountryCodeValue];
+  [_tableView reloadData];
+}
+
+- (void)setCountryCodeValue {
+  NSString *countruCode;
+  if ([FUIFeatureSwitch isCountryFlagEmojiEnabled]) {
+    NSString *countryFlag = [_selectedCountryCode countryFlagEmoji];
+    countruCode = [NSString stringWithFormat:@"%@ +%@ (%@)", countryFlag,
+                      _selectedCountryCode.dialCode, _selectedCountryCode.localizedCountryName];
+  } else {
+    countruCode = [NSString stringWithFormat:@"+%@ (%@)", _selectedCountryCode.dialCode,
+                      _selectedCountryCode.localizedCountryName];
+  }
+  _countryCodeField.text = countruCode;
 }
 
 #pragma mark - Private

@@ -29,8 +29,6 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
 @property (nonatomic, readonly) IBInspectable NSInteger codeLength;
 @property (nonatomic, readonly) IBInspectable NSString *placeholder;
 
-@property (nonatomic) NSArray *viewConstraints;
-
 @end
 
 @implementation FUICodeField
@@ -84,7 +82,7 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
   return YES;
 }
 
--(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
+- (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
   [self becomeFirstResponder];
 }
 
@@ -167,33 +165,6 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
   CGSize textFieldSize = [self inputFieldIntrinsicContentSize];
 
   return textFieldSize;
-}
-
-- (void)updateConstraints {
-  if (self.viewConstraints.count > 0) {
-    [self removeConstraints:self.viewConstraints];
-  }
-
-  NSDictionary *views = NSDictionaryOfVariableBindings(_inputField);
-  NSDictionary *metrics = @{ @"inputFieldHeight": @(FUICodeFieldMinInputFieldHeight)};
-
-  NSMutableArray *newViewConstraints = [@[] mutableCopy];
-  [newViewConstraints addObjectsFromArray:
-      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_inputField]|"
-                                              options:0
-                                              metrics:metrics
-                                                views:views]];
-
-  [newViewConstraints addObjectsFromArray:
-      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_inputField(==inputFieldHeight)]|"
-                                              options:0
-                                              metrics:metrics
-                                                views:views]];
-
-  self.viewConstraints = newViewConstraints;
-  [self addConstraints:self.viewConstraints];
-
-  [super updateConstraints];
 }
 
 @end

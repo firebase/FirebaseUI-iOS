@@ -27,6 +27,7 @@ NSString *const kPAStr_EmptyVerificationCode = @"EmptyVerificationCode";
 NSString *const kPAStr_EmptyPhoneNumber = @"EmptyPhoneNumber";
 NSString *const kPAStr_PhoneNumber = @"PhoneNumber";
 NSString *const kPAStr_EnterYourPhoneNumber = @"EnterYourPhoneNumber";
+NSString *const kPAStr_Country = @"Country";
 
 /** @var kPhoneAuthProviderTableName
     @brief The name of the strings table to search for localized strings.
