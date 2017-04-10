@@ -27,12 +27,16 @@ IB_DESIGNABLE
 @interface FUICodeField : UIView <UIKeyInput, UITextInputTraits>
 
 @property (nonatomic, strong) UIColor *textColor UI_APPEARANCE_SELECTOR;
+
 @property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance UI_APPEARANCE_SELECTOR;
 
 @property (nonatomic, retain, readonly) NSMutableString *codeEntry;
+
 @property (nonatomic,getter=isSecureTextEntry) IBInspectable BOOL secureTextEntry;
 
 @property (nonatomic, readwrite) id<FUICodeFieldDelegate> delegate;
+
+@property (nonatomic, readonly) IBInspectable NSInteger codeLength;
 
 - (void)clearCodeInput;
 

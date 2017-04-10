@@ -26,6 +26,11 @@ extern NSString *const kPAStr_EmptyPhoneNumber;
 extern NSString *const kPAStr_PhoneNumber;
 extern NSString *const kPAStr_EnterYourPhoneNumber;
 extern NSString *const kPAStr_Country;
+extern NSString *const kPAStr_EnterCodeDescription;
+extern NSString *const kPAStr_ResendCode;
+extern NSString *const kPAStr_ResendCodeTimer;
+extern NSString *const kPAStr_VerifyPhoneTitle;
+extern NSString *const kPAStr_ResendCodeResult;
 
 #ifdef __cplusplus
 extern "C" {

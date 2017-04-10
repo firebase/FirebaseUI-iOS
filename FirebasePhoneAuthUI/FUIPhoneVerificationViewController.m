@@ -26,10 +26,17 @@
  */
 static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID";
 
+static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
+
 @implementation FUIPhoneVerificationViewController {
+  __unsafe_unretained IBOutlet UITextView *_enterCodeDescription;
   __unsafe_unretained IBOutlet FUICodeField *_codeField;
   NSString *_verificationID;
   __unsafe_unretained IBOutlet UITextView *_phoneNumber;
+  __unsafe_unretained IBOutlet UITextView *_resendConfirmationCodeTimerLabel;
+  __unsafe_unretained IBOutlet UIButton *_resendCodeButton;
+  NSTimer *_resendConfirmationCodeTimer;
+  NSTimeInterval _resendConfirmationCodeSeconds;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
@@ -52,7 +59,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                          bundle:nibBundleOrNil
                          authUI:authUI];
   if (self) {
-    self.title = FUIPhoneAuthLocalizedString(kPAStr_EnterPhoneTitle);
+    self.title = FUIPhoneAuthLocalizedString(kPAStr_VerifyPhoneTitle);
     _verificationID = [verificationID copy];
     _phoneNumber.text = phoneNumber;
   }
@@ -70,6 +77,14 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   nextButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = nextButtonItem;
 
+  _enterCodeDescription.text =
+      [NSString stringWithFormat: FUIPhoneAuthLocalizedString(kPAStr_EnterCodeDescription),
+          @(_codeField.codeLength)];
+  _enterCodeDescription.contentOffset = CGPointZero;
+  [_resendCodeButton setTitle:FUIPhoneAuthLocalizedString(kPAStr_ResendCode)
+                     forState:UIControlStateNormal];
+  [self startResendTimer];
+
   [_codeField becomeFirstResponder];
 }
 
@@ -86,6 +101,27 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 }
 
 #pragma mark - Actions
+- (IBAction)onResendCode:(id)sender {
+  [self startResendTimer];
+  [self incrementActivity];
+  FIRPhoneAuthProvider *provider = [FIRPhoneAuthProvider providerWithAuth:self.auth];
+  [provider verifyPhoneNumber:_phoneNumber.text
+                   completion:^(NSString * _Nullable verificationID, NSError * _Nullable error) {
+
+    [self decrementActivity];
+    _verificationID = verificationID;
+
+    if (error) {
+      [self showAlertWithMessage:error.localizedDescription];
+      return;
+    }
+
+    NSString *resultMessage =
+        [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeResult),
+            _phoneNumber.text];
+    [self showAlertWithMessage:resultMessage];
+  }];
+}
 
 - (void)next {
   [self onNext:_codeField.codeEntry];
@@ -129,5 +165,48 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
   return nil;
 }
+
+- (void)startResendTimer {
+  _resendConfirmationCodeSeconds = FUIDelayInSecondsBeforeShowingResendConfirmationCode;
+  _resendConfirmationCodeTimerLabel.text =
+      [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeTimer), @0,
+          @(_resendConfirmationCodeSeconds)];
+
+  _resendCodeButton.hidden = YES;
+  _resendConfirmationCodeTimerLabel.hidden = NO;
+
+  _resendConfirmationCodeTimer =
+      [NSTimer scheduledTimerWithTimeInterval:1.0
+                                       target:self
+                                     selector:@selector(resendConfirmationCodeTick:)
+                                     userInfo:nil
+                                      repeats:YES];
+}
+
+- (void)cleanUpTimer {
+  [_resendConfirmationCodeTimer invalidate];
+  _resendConfirmationCodeTimer = nil;
+  _resendConfirmationCodeSeconds = 0;
+  _resendConfirmationCodeTimerLabel.hidden = YES;
+}
+
+- (void)resendConfirmationCodeTick:(id)sender {
+  _resendConfirmationCodeSeconds -= 1.0;
+  if (_resendConfirmationCodeSeconds <= 0){
+    _resendConfirmationCodeSeconds = 0;
+    [self resendConfirmationCodeTimerFinished];
+  }
+
+  _resendConfirmationCodeTimerLabel.text =
+      [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeTimer), @0,
+          @(_resendConfirmationCodeSeconds)];
+}
+
+- (void)resendConfirmationCodeTimerFinished {
+  [self cleanUpTimer];
+
+  _resendCodeButton.hidden = NO;
+}
+
 
 @end

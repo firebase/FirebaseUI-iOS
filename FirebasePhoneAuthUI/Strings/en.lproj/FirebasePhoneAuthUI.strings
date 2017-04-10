@@ -2,3 +2,25 @@
 "SignInWithPhone" = "Sign in with phone";
 
 "EnterPhoneTitle" = "Enter phone number";
+
+"Next" = "Next";
+
+"EmptyVerificationCode" = "Verification code can't be empty";
+
+"EmptyPhoneNumber" = "Phone number can't be empty";
+
+"PhoneNumber" = "Number";
+
+"EnterYourPhoneNumber" = "Enter your phone number";
+
+"Country" = "Country";
+
+"EnterCodeDescription" = "Enter the %@-digit code we sent to";
+
+"ResendCode" = "Resend code";
+
+"ResendCodeTimer" = "Resend code in %@:%@";
+
+"VerifyPhoneTitle" = "Verify phone number";
+
+"ResendCodeResult" = "Code was sent to %@";

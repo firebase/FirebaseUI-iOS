@@ -28,6 +28,11 @@ NSString *const kPAStr_EmptyPhoneNumber = @"EmptyPhoneNumber";
 NSString *const kPAStr_PhoneNumber = @"PhoneNumber";
 NSString *const kPAStr_EnterYourPhoneNumber = @"EnterYourPhoneNumber";
 NSString *const kPAStr_Country = @"Country";
+NSString *const kPAStr_EnterCodeDescription = @"EnterCodeDescription";
+NSString *const kPAStr_ResendCode = @"ResendCode";
+NSString *const kPAStr_ResendCodeTimer = @"ResendCodeTimer";
+NSString *const kPAStr_VerifyPhoneTitle = @"VerifyPhoneTitle";
+NSString *const kPAStr_ResendCodeResult = @"ResendCodeResult";
 
 /** @var kPhoneAuthProviderTableName
     @brief The name of the strings table to search for localized strings.

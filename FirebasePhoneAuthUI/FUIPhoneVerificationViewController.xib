@@ -12,7 +12,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FUIPhoneVerificationViewController">
             <connections>
                 <outlet property="_codeField" destination="WCV-7f-nzd" id="RJn-XF-C6g"/>
+                <outlet property="_enterCodeDescription" destination="ycK-wz-YTN" id="vP9-rx-ikh"/>
                 <outlet property="_phoneNumber" destination="JMk-sL-cJE" id="aMv-hQ-8qB"/>
+                <outlet property="_resendCodeButton" destination="PcA-t5-BTE" id="LzC-9b-60t"/>
+                <outlet property="_resendConfirmationCodeTimerLabel" destination="5vh-iS-C4H" id="J3R-4f-QfP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,18 +24,17 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Enter code " textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q98-a4-lXT">
-                    <rect key="frame" x="16" y="90" width="343" height="25"/>
+                <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Enter 6-digit code we sent to" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ycK-wz-YTN">
+                    <rect key="frame" x="16" y="99" width="343" height="91"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="25" id="O8Y-ol-w3x"/>
+                        <constraint firstAttribute="height" constant="50" id="YDY-iz-nvi"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    <dataDetectorType key="dataDetectorTypes" phoneNumber="YES"/>
                 </textView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="+1 (415) 420-1234" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMk-sL-cJE">
-                    <rect key="frame" x="16" y="123" width="343" height="25"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="+1 (415) 420-1234" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMk-sL-cJE">
+                    <rect key="frame" x="16" y="198" width="343" height="25"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="LT9-5G-PAd"/>
@@ -43,7 +45,7 @@
                     <dataDetectorType key="dataDetectorTypes" phoneNumber="YES"/>
                 </textView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WCV-7f-nzd" customClass="FUICodeField">
-                    <rect key="frame" x="16" y="156" width="343" height="60"/>
+                    <rect key="frame" x="16" y="231" width="343" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="4n9-2e-jBZ"/>
@@ -55,16 +57,45 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="-"/>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Resend code in" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5vh-iS-C4H">
+                    <rect key="frame" x="68" y="299" width="239" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                    </accessibility>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="udA-8K-VDx"/>
+                    </constraints>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PcA-t5-BTE">
+                    <rect key="frame" x="120" y="299" width="135" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="QqC-fb-uMv"/>
+                    </constraints>
+                    <state key="normal" title="Resend code"/>
+                    <connections>
+                        <action selector="onResendCode:" destination="-1" eventType="touchUpInside" id="vx8-RJ-2TG"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstItem="Q98-a4-lXT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="3Kv-9w-k1S"/>
-                <constraint firstItem="JMk-sL-cJE" firstAttribute="top" secondItem="Q98-a4-lXT" secondAttribute="bottom" constant="8" id="3rn-7x-JNn"/>
+                <constraint firstItem="5vh-iS-C4H" firstAttribute="top" secondItem="WCV-7f-nzd" secondAttribute="bottom" constant="8" id="0hs-g9-UO8"/>
+                <constraint firstAttribute="trailing" secondItem="ycK-wz-YTN" secondAttribute="trailing" constant="16" id="Did-c7-Y7o"/>
                 <constraint firstItem="WCV-7f-nzd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="FAF-9K-2KS"/>
-                <constraint firstAttribute="trailing" secondItem="Q98-a4-lXT" secondAttribute="trailing" constant="16" id="KZb-EI-by4"/>
+                <constraint firstItem="ycK-wz-YTN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="90" id="Hn7-kV-hpL"/>
+                <constraint firstAttribute="trailing" secondItem="PcA-t5-BTE" secondAttribute="trailing" constant="120" id="Ne1-l9-WhX"/>
+                <constraint firstItem="PcA-t5-BTE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="120" id="PYj-es-OB5"/>
+                <constraint firstAttribute="trailing" secondItem="5vh-iS-C4H" secondAttribute="trailing" constant="68" id="Wua-cn-dXz"/>
+                <constraint firstItem="PcA-t5-BTE" firstAttribute="top" secondItem="WCV-7f-nzd" secondAttribute="bottom" constant="8" id="aua-CK-QH9"/>
+                <constraint firstItem="JMk-sL-cJE" firstAttribute="top" secondItem="ycK-wz-YTN" secondAttribute="bottom" id="bTw-KH-fEe"/>
+                <constraint firstItem="ycK-wz-YTN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="cgR-fN-30Y"/>
                 <constraint firstAttribute="trailing" secondItem="WCV-7f-nzd" secondAttribute="trailing" constant="16" id="fD3-5J-ASD"/>
                 <constraint firstItem="WCV-7f-nzd" firstAttribute="top" secondItem="JMk-sL-cJE" secondAttribute="bottom" constant="8" id="fNg-Ih-oqf"/>
-                <constraint firstItem="Q98-a4-lXT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="90" id="jj0-n9-BMa"/>
+                <constraint firstItem="5vh-iS-C4H" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="68" id="jQx-ir-bIR"/>
                 <constraint firstAttribute="trailing" secondItem="JMk-sL-cJE" secondAttribute="trailing" constant="16" id="wCz-o0-h4w"/>
                 <constraint firstItem="JMk-sL-cJE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="zKP-h9-9i3"/>
             </constraints>

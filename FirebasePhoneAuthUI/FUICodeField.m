@@ -26,7 +26,6 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
 
 @property (weak, nonatomic) IBOutlet UILabel *digits;
 
-@property (nonatomic, readonly) IBInspectable NSInteger codeLength;
 @property (nonatomic, readonly) IBInspectable NSString *placeholder;
 
 @end

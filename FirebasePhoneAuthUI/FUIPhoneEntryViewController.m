@@ -183,6 +183,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     cell.textField.enabled = YES;
     cell.textField.placeholder = FUIPhoneAuthLocalizedString(kPAStr_EnterYourPhoneNumber);
     cell.textField.delegate = self;
+    cell.textField.keyboardType = UIKeyboardTypeNumberPad;
     cell.accessibilityIdentifier = kPhoneNumberCellAccessibilityID;
     _phoneNumberField = cell.textField;
     _phoneNumberField.secureTextEntry = NO;
