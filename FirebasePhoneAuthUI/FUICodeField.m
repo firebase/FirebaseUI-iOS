@@ -18,6 +18,8 @@
 
 #import "FUIAuthUtils.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
 
 @interface FUICodeField ()
@@ -39,7 +41,7 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
   return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
   if (self = [super initWithCoder:aDecoder]){
     [self setUpFromNib];
   }
@@ -81,7 +83,7 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
   return YES;
 }
 
-- (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
+- (void) touchesBegan: (NSSet *) touches withEvent: (nullable UIEvent *) event {
   [self becomeFirstResponder];
 }
 
@@ -167,3 +169,5 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

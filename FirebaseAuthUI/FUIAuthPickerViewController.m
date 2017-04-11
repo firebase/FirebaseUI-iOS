@@ -164,18 +164,29 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
   [providerUI signInWithEmail:nil
      presentingViewController:self
                    completion:^(FIRAuthCredential *_Nullable credential,
-                                NSError *_Nullable error) {
+                                NSError *_Nullable error,
+                                _Nullable FIRAuthResultCallback result) {
     if (error) {
       [self decrementActivity];
 
       if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
         // User cancelled sign in, Do nothing.
+        if (result) {
+          result(nil, error);
+        }
         return;
       }
 
-      [self.navigationController dismissViewControllerAnimated:YES completion:^{
+      if (error) {
         [self.authUI invokeResultCallbackWithUser:nil error:error];
-      }];
+      } else {
+        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+          [self.authUI invokeResultCallbackWithUser:nil error:error];
+        }];
+      }
+      if (result) {
+        result(nil, error);
+      }
       return;
     }
 
@@ -184,14 +195,25 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
       if (error && error.code == FIRAuthErrorCodeEmailAlreadyInUse) {
         NSString *email = error.userInfo[kErrorUserInfoEmailKey];
         [self handleAccountLinkingForEmail:email newCredential:credential];
+        if (result) {
+          result(nil, error);
+        }
         return;
       }
 
       [self decrementActivity];
 
-      [self.navigationController dismissViewControllerAnimated:YES completion:^{
+      if (result) {
+        result(user, error);
+      }
+
+      if (error) {
         [self.authUI invokeResultCallbackWithUser:user error:error];
-      }];
+      } else {
+        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+          [self.authUI invokeResultCallbackWithUser:user error:error];
+        }];
+      }
     }];
   }];
 }
@@ -252,35 +274,53 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
       [bestProvider signInWithEmail:email
            presentingViewController:self
                          completion:^(FIRAuthCredential *_Nullable credential,
-                                      NSError *_Nullable error) {
-                           if (error) {
-                             [self decrementActivity];
+                                      NSError *_Nullable error,
+                                      _Nullable FIRAuthResultCallback result) {
+        if (error) {
+          [self decrementActivity];
 
-                             if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
-                               // User cancelled sign in, Do nothing.
-                               return;
-                             }
+          if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
+            // User cancelled sign in, Do nothing.
+            if (result) {
+              result(nil, error);
+            }
+            return;
+          }
 
-                             [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                               [self.authUI invokeResultCallbackWithUser:nil error:error];
-                             }];
-                             return;
-                           }
+          if (error) {
+            [self.authUI invokeResultCallbackWithUser:nil error:error];
+          } else {
+            [self.navigationController dismissViewControllerAnimated:YES completion:^{
+              [self.authUI invokeResultCallbackWithUser:nil error:error];
+            }];
+          }
+          return;
+        }
 
         [self.auth signInWithCredential:credential completion:^(FIRUser *_Nullable user,
                                                                 NSError *_Nullable error) {
           if (error) {
             [self decrementActivity];
 
-            [self.navigationController dismissViewControllerAnimated:YES completion:^{
+            if (error) {
               [self.authUI invokeResultCallbackWithUser:nil error:error];
-            }];
+            } else {
+              [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                [self.authUI invokeResultCallbackWithUser:nil error:error];
+              }];
+            }
+            if (result) {
+              result(nil, error);
+            }
             return;
           }
 
           [user linkWithCredential:newCredential completion:^(FIRUser *_Nullable user,
                                                               NSError *_Nullable error) {
             [self decrementActivity];
+            if (result) {
+              result(user, error);
+            }
 
             // Ignore any error (most likely caused by email mismatch) and treat the user as
             // successfully signed in.

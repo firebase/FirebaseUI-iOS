@@ -21,6 +21,8 @@
 #import "FUIPhoneAuth_Internal.h"
 #import <FirebaseAuth/FIRPhoneAuthProvider.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** @var kNextButtonAccessibilityID
     @brief The Accessibility Identifier for the @c next button.
  */
@@ -106,7 +108,7 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   [self incrementActivity];
   FIRPhoneAuthProvider *provider = [FIRPhoneAuthProvider providerWithAuth:self.auth];
   [provider verifyPhoneNumber:_phoneNumber.text
-                   completion:^(NSString * _Nullable verificationID, NSError * _Nullable error) {
+                   completion:^(NSString *_Nullable verificationID, NSError *_Nullable error) {
 
     [self decrementActivity];
     _verificationID = verificationID;
@@ -138,9 +140,15 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   FIRPhoneAuthCredential *credential =
     [provider credentialWithVerificationID:_verificationID verificationCode:verificationCode];
 
-  [self.navigationController dismissViewControllerAnimated:YES completion:^{
-    FUIPhoneAuth *delegate = [self phoneAuthProvider];
-    [delegate callbackWithCredential:credential error:nil];
+  FUIPhoneAuth *delegate = [self phoneAuthProvider];
+  [delegate callbackWithCredential:credential
+                             error:nil
+                            result:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+    if (!error) {
+      [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    } else {
+      [self showAlertWithMessage:error.localizedDescription];
+    }
   }];
 
 }
@@ -148,10 +156,16 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
 #pragma mark - Private
 
 - (void)cancelAuthorization {
-  [self.navigationController dismissViewControllerAnimated:YES completion:^{
-    NSError *error = [FUIAuthErrorUtils userCancelledSignInError];
-    FUIPhoneAuth *delegate = [self phoneAuthProvider];
-    [delegate callbackWithCredential:nil error:error];
+  NSError *error = [FUIAuthErrorUtils userCancelledSignInError];
+  FUIPhoneAuth *delegate = [self phoneAuthProvider];
+  [delegate callbackWithCredential:nil
+                             error:error
+                            result:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+    if (!error) {
+      [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    } else {
+      [self showAlertWithMessage:error.localizedDescription];
+    }
   }];
 }
 
@@ -208,5 +222,6 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   _resendCodeButton.hidden = NO;
 }
 
-
 @end
+
+NS_ASSUME_NONNULL_END

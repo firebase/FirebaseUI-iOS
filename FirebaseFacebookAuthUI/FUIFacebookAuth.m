@@ -179,24 +179,27 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 - (void)completeSignInFlowWithAccessToken:(nullable NSString *)accessToken
                                     error:(nullable NSError *)error {
   if (error) {
-    [self callbackWithCredential:nil error:error];
+    [self callbackWithCredential:nil error:error result:nil];
     return;
   }
   FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:accessToken];
-  [self callbackWithCredential:credential error:nil];
+  [self callbackWithCredential:credential error:nil result:nil];
 }
 
 /** @fn callbackWithCredential:error:
     @brief Ends the sign-in flow by cleaning up and calling back with given credential or error.
     @param credential The credential to pass back, if any.
     @param error The error to pass back, if any.
+    @param result The result of sign-in operation using provided @c FIRAuthCredential object.
+        @see @c FIRAuth.signInWithCredential:completion:
  */
 - (void)callbackWithCredential:(nullable FIRAuthCredential *)credential
-                         error:(nullable NSError *)error {
+                         error:(nullable NSError *)error
+                        result:(nullable FIRAuthResultCallback)result {
   FIRAuthProviderSignInCompletionBlock callback = _pendingSignInCallback;
   _pendingSignInCallback = nil;
   if (callback) {
-    callback(credential, error);
+    callback(credential, error, result);
   }
 }
 

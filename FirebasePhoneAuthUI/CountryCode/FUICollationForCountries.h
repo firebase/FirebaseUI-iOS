@@ -17,6 +17,8 @@
 #import <Foundation/Foundation.h>
 #import "FUICountryCodes.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** @class FUICollationForCountries
     @brief Replacement class for UILocalizedIndexedCollation tailored to FUICountryCodes, used to 
         create UITableView alphabetical indices. Main difference from UILocalizedIndexedCollation 
@@ -49,3 +51,5 @@
 - (NSInteger)numberOfCountriesInSection:(NSInteger)sectionIndex;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -18,6 +18,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol FUICountryTableViewDelegate
 
 - (void)didSelectCountry:(FUICountryCodeInfo*)countryCodeInfo;
@@ -33,7 +35,9 @@
 
 + (instancetype)new __unavailable;
 - (instancetype)init __unavailable;
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil
-                         bundle:(NSBundle *)nibBundleOrNil __unavailable;
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil __unavailable;
 
 @end
+
+NS_ASSUME_NONNULL_END

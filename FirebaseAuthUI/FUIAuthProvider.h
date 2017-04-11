@@ -15,6 +15,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FirebaseAuth/FIRAuth.h>
 
 @class FIRAuth;
 @class FIRAuthCredential;
@@ -24,10 +25,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** @typedef FIRAuthProviderSignInCompletionBlock
     @brief The type of block used to notify the auth system of the result of a sign-in flow.
-    @see FIRAuthProvider.signInWithEmail:presentingViewController:completion:
+        @see FUIAuthProvider.signInWithEmail:presentingViewController:completion:
+    @param credential The @c FIRAuthCredential object created after user interaction with third 
+        party provider.
+    @param error The error which may happen during creation of The @c FIRAuthCredential object.
+    @param result The result of sign-in operation using provided @c FIRAuthCredential object.
+        @see @c FIRAuth.signInWithCredential:completion:
  */
-typedef void (^FIRAuthProviderSignInCompletionBlock)(FIRAuthCredential *_Nullable credential,
-                                                     NSError *_Nullable error);
+typedef void (^FIRAuthProviderSignInCompletionBlock) (
+    FIRAuthCredential *_Nullable credential,
+    NSError *_Nullable error,
+    _Nullable FIRAuthResultCallback result);
 
 /** @protocol FUIAuthProvider
     @brief Represents an authentication provider (such as Google Sign In or Facebook Login) which

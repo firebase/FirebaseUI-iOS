@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Enter 6-digit code we sent to" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ycK-wz-YTN">
-                    <rect key="frame" x="16" y="99" width="343" height="91"/>
+                    <rect key="frame" x="16" y="90" width="343" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="YDY-iz-nvi"/>
@@ -34,7 +34,7 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="+1 (415) 420-1234" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMk-sL-cJE">
-                    <rect key="frame" x="16" y="198" width="343" height="25"/>
+                    <rect key="frame" x="16" y="140" width="343" height="25"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="LT9-5G-PAd"/>
@@ -45,7 +45,7 @@
                     <dataDetectorType key="dataDetectorTypes" phoneNumber="YES"/>
                 </textView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WCV-7f-nzd" customClass="FUICodeField">
-                    <rect key="frame" x="16" y="231" width="343" height="60"/>
+                    <rect key="frame" x="16" y="173" width="343" height="60"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="4n9-2e-jBZ"/>
@@ -58,7 +58,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Resend code in" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5vh-iS-C4H">
-                    <rect key="frame" x="68" y="299" width="239" height="30"/>
+                    <rect key="frame" x="68" y="241" width="239" height="30"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -71,7 +71,7 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PcA-t5-BTE">
-                    <rect key="frame" x="120" y="299" width="135" height="30"/>
+                    <rect key="frame" x="120" y="241" width="135" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="QqC-fb-uMv"/>
                     </constraints>

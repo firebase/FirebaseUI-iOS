@@ -26,6 +26,8 @@
 #import "FUICountryTableViewController.h"
 #import "FUIFeatureSwitch.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 NS_ENUM(NSInteger, FUIPhoneEntryRow) {
   FUIPhoneEntryRowCountrySelector = 0,
   FUIPhoneEntryRowPhoneNuber
@@ -47,7 +49,7 @@ static NSString *const kPhoneNumberCellAccessibilityID = @"PhoneNumberCellAccess
 static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID";
 
 @interface FUIPhoneEntryViewController ()
-    <UITextFieldDelegate, UITabBarDelegate, UITableViewDataSource>
+    <UITextFieldDelegate, UITabBarDelegate, UITableViewDataSource, FUICountryTableViewDelegate>
 @end
 
 @implementation FUIPhoneEntryViewController  {
@@ -69,8 +71,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                         authUI:authUI];
 }
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil
-                         bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
                          authUI:(FUIAuth *)authUI {
 
   self = [super initWithNibName:nibNameOrNil
@@ -126,7 +128,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   NSString *phoneNumberWithCountryCode =
       [NSString stringWithFormat:@"+%@%@", _selectedCountryCode.dialCode, phoneNumber];
   [provider verifyPhoneNumber:phoneNumberWithCountryCode
-                   completion:^(NSString * _Nullable verificationID, NSError * _Nullable error) {
+                   completion:^(NSString *_Nullable verificationID, NSError *_Nullable error) {
 
     [self decrementActivity];
 
@@ -254,10 +256,15 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 #pragma mark - Private
 
 - (void)cancelAuthorization {
-  [self.navigationController dismissViewControllerAnimated:YES completion:^{
-    NSError *error = [FUIAuthErrorUtils userCancelledSignInError];
-    FUIPhoneAuth *delegate = [self phoneAuthProvider];
-    [delegate callbackWithCredential:nil error:error];
+  NSError *error = [FUIAuthErrorUtils userCancelledSignInError];
+  FUIPhoneAuth *delegate = [self phoneAuthProvider];
+  [delegate callbackWithCredential:nil error:error result:^(FIRUser *_Nullable user,
+                                                            NSError *_Nullable error) {
+    if (!error) {
+      [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    } else {
+      [self showAlertWithMessage:error.localizedDescription];
+    }
   }];
 }
 
@@ -273,3 +280,5 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -16,6 +16,10 @@
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface FUIPhoneEntryViewController : FUIAuthBaseViewController
 
 @end
+
+NS_ASSUME_NONNULL_END

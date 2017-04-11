@@ -247,24 +247,35 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [provider signInWithEmail:email
    presentingViewController:self
                  completion:^(FIRAuthCredential *_Nullable credential,
-                              NSError *_Nullable error) {
-                   if (error) {
-                     [self decrementActivity];
+                              NSError *_Nullable error,
+                              _Nullable FIRAuthResultCallback result) {
+    if (error) {
+      [self decrementActivity];
+      if (result) {
+        result(nil, error);
+      }
 
-                     [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                       [self.authUI invokeResultCallbackWithUser:nil error:error];
-                     }];
-                     return;
-                   }
+      [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        [self.authUI invokeResultCallbackWithUser:nil error:error];
+      }];
+      return;
+    }
 
-                   [self.auth signInWithCredential:credential
-                                        completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-                                          [self decrementActivity];
-                                          
-                                          [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                                            [self.authUI invokeResultCallbackWithUser:user error:error];
-                                          }];
-                                        }];
-                 }];
+    [self.auth signInWithCredential:credential
+                        completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+      [self decrementActivity];
+      if (result) {
+        result(user, error);
+      }
+
+      if (error) {
+        [self.authUI invokeResultCallbackWithUser:nil error:error];
+      } else {
+        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+          [self.authUI invokeResultCallbackWithUser:user error:error];
+        }];
+      }
+    }];
+ }];
 }
 @end

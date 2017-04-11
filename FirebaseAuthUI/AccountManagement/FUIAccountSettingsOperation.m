@@ -168,15 +168,22 @@ NS_ASSUME_NONNULL_BEGIN
   [providerUI signInWithEmail:self.delegate.auth.currentUser.email
      presentingViewController:[self.delegate presentingController]
                    completion:^(FIRAuthCredential *_Nullable credential,
-                                NSError *_Nullable error) {
+                                NSError *_Nullable error,
+                                _Nullable FIRAuthResultCallback result) {
     if (error) {
-     [self.delegate decrementActivity];
-     [self finishOperationWithError:error];
-     return;
+      [self.delegate decrementActivity];
+      [self finishOperationWithError:error];
+      if (result) {
+        result(nil, error);
+      }
+      return;
     }
     [self.delegate.auth.currentUser reauthenticateWithCredential:credential
-                                                  completion:^(NSError *_Nullable error) {
+                                                  completion:^(NSError *_Nullable reauthError) {
       [self.delegate decrementActivity];
+      if (result) {
+        result(self.delegate.auth.currentUser, reauthError);
+      }
       if (error) {
         [self finishOperationWithError:error];
       } else {

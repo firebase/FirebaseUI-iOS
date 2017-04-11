@@ -18,14 +18,21 @@
 
 #import <FirebasePhoneAuthUI/FirebasePhoneAuthUI.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface FUIPhoneAuth (Internal)
 
 /** @fn callbackWithCredential:error:
     @brief Ends the sign-in flow by cleaning up and calling back with given credential or error.
     @param credential The credential to pass back, if any.
     @param error The error to pass back, if any.
- */
+    @param result The result of sign-in operation using provided @c FIRAuthCredential object.
+        @see @c FIRAuth.signInWithCredential:completion:
+*/
 - (void)callbackWithCredential:(nullable FIRAuthCredential *)credential
-                         error:(nullable NSError *)error;
+                         error:(nullable NSError *)error
+                        result:(nullable FIRAuthResultCallback)result;
 
 @end
+
+NS_ASSUME_NONNULL_END

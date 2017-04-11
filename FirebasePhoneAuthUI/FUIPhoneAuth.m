@@ -49,14 +49,14 @@ NS_ASSUME_NONNULL_BEGIN
     @brief Phone Auth token is matched by FirebaseUI User Access Token
  */
 - (NSString *)accessToken {
-  return nil; // TODO: implement
+  return nil;
 }
 
 /** @fn idToken:
     @brief Phone Auth Token Secret is matched by FirebaseUI User Id Token
  */
 - (NSString *)idToken {
-  return nil; // TODO: implement
+  return nil;
 }
 
 - (NSString *)shortName {
@@ -92,7 +92,6 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)signOut {
-  // TODO: implement
 }
 
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(nullable NSString *)sourceApplication {
@@ -100,11 +99,20 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)callbackWithCredential:(nullable FIRAuthCredential *)credential
-                         error:(nullable NSError *)error {
+                         error:(nullable NSError *)error
+                        result:(nullable FIRAuthResultCallback)result {
   FIRAuthProviderSignInCompletionBlock callback = _pendingSignInCallback;
-  _pendingSignInCallback = nil;
+
+  FIRAuthResultCallback resultAuthCallback = ^(FIRUser *_Nullable user, NSError *_Nullable error) {
+    if (!error) {
+      _pendingSignInCallback = nil;
+    }
+    if (result) {
+      result(user, error);
+    }
+  };
   if (callback) {
-    callback(credential, error);
+    callback(credential, error, resultAuthCallback);
   }
 }
 

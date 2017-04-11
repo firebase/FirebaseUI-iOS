@@ -16,6 +16,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol FUICodeFieldDelegate <NSObject>
 
 - (void) entryIsCompletedWithCode:(NSString *)code;
@@ -41,3 +43,5 @@ IB_DESIGNABLE
 - (void)clearCodeInput;
 
 @end
+
+NS_ASSUME_NONNULL_END

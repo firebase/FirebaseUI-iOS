@@ -114,14 +114,14 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
 
   [[self getTwitterManager] logInWithViewController:presentingViewController
-                                         completion:^(TWTRSession * _Nullable session,
-                                                      NSError * _Nullable error) {
+                                         completion:^(TWTRSession *_Nullable session,
+                                                      NSError *_Nullable error) {
     if (session) {
       FIRAuthCredential *credential =
           [FIRTwitterAuthProvider credentialWithToken:session.authToken
                                               secret:session.authTokenSecret];
       if (completion) {
-        completion(credential, nil);
+        completion(credential, nil, nil);
       }
     } else {
       if (completion) {
@@ -132,7 +132,7 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
           newError = [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
                                                               providerID:FIRTwitterAuthProviderID];
         }
-        completion(nil, newError);
+        completion(nil, newError, nil);
       }
     }
   }];

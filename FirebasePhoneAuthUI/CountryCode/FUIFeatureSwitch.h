@@ -16,7 +16,11 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // a helper class for setting and detecting os dependent features
 @interface FUIFeatureSwitch : NSObject
 + (BOOL) isCountryFlagEmojiEnabled;
 @end
+
+NS_ASSUME_NONNULL_END

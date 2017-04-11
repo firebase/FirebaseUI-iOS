@@ -18,6 +18,8 @@
 
 #import "FUIAuthUtils.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 NSString* const FUI_JSON_COUNTRY_NAME_KEY = @"name";
 NSString* const FUI_JSON_LOCALIZED_COUNTRY_NAME_KEY = @"localized_name";
 NSString* const FUI_JSON_COUNTRY_CODE_KEY = @"iso2_cc";
@@ -78,7 +80,9 @@ NSString* const FUIDefaultCountryCode = @"1";
 
     NSError* error = nil;
     _countryCodesArray =
-        [NSJSONSerialization JSONObjectWithStream:inputStream options:0 error:&error];
+        [NSJSONSerialization JSONObjectWithStream:inputStream
+                                          options:NSJSONReadingMutableContainers
+                                            error:&error];
 
     [inputStream close];
 
@@ -246,3 +250,5 @@ NSString* const FUIDefaultCountryCode = @"1";
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

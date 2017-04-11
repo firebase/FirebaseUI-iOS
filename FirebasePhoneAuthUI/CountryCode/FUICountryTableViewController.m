@@ -22,6 +22,8 @@
 #import "FUICountryTableViewController.h"
 #import "FUIFeatureSwitch.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface FUICountryTableViewController ()<UISearchResultsUpdating>
 
 @property (nonatomic, readonly) FUICountryCodes *countryCodes;
@@ -114,7 +116,7 @@
 
 #pragma mark Section index
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
   if ([self isSearchActive]) {
     NSString *queryString = self.searchController.searchBar.text;
     return queryString.length ? [[queryString substringToIndex:1] capitalizedString] : @"";
@@ -123,7 +125,7 @@
   return [[self.collationForCountries sectionTitles] objectAtIndex:section];
 }
 
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+- (nullable NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
   return [self.collationForCountries sectionIndexTitles];
 }
 
@@ -166,3 +168,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

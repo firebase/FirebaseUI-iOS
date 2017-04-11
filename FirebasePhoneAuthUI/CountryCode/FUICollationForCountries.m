@@ -18,6 +18,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface FUICollationForCountries ()
 
 @property (nonatomic, readonly) FUICountryCodes *countryCodes;
@@ -94,3 +96,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

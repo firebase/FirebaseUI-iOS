@@ -487,7 +487,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
     [invocation getArgument:&mockedResponse atIndex:4];
 
     id mockCredential = OCMClassMock([FIRAuthCredential class]);
-    mockedResponse(mockCredential, nil);
+    mockedResponse(mockCredential, nil, nil);
   });
 }
 
