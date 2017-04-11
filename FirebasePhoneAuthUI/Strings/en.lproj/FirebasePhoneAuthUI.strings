@@ -5,13 +5,15 @@
 
 "Next" = "Next";
 
+"Verify" = "Verify";
+
 "EmptyVerificationCode" = "Verification code can't be empty";
 
 "EmptyPhoneNumber" = "Phone number can't be empty";
 
 "PhoneNumber" = "Number";
 
-"EnterYourPhoneNumber" = "Enter your phone number";
+"EnterYourPhoneNumber" = "Phone number";
 
 "Country" = "Country";
 
@@ -24,3 +26,11 @@
 "VerifyPhoneTitle" = "Verify phone number";
 
 "ResendCodeResult" = "Code was sent to %@";
+
+"IncorrectCodeTitle" = "Incorrect verification code";
+
+"IncorrectCodeMessage" = "Try entering your verification code again";
+
+"Done" = "Done";
+
+"Back" = "Back";

@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 NSString *const kPAStr_EnterPhoneTitle = @"EnterPhoneTitle";
 NSString *const kPAStr_SignInWithTwitter = @"SignInWithPhone";
 NSString *const kPAStr_Next = @"Next";
+NSString *const kPAStr_Verify = @"Verify";
 NSString *const kPAStr_EmptyVerificationCode = @"EmptyVerificationCode";
 NSString *const kPAStr_EmptyPhoneNumber = @"EmptyPhoneNumber";
 NSString *const kPAStr_PhoneNumber = @"PhoneNumber";
@@ -33,6 +34,10 @@ NSString *const kPAStr_ResendCode = @"ResendCode";
 NSString *const kPAStr_ResendCodeTimer = @"ResendCodeTimer";
 NSString *const kPAStr_VerifyPhoneTitle = @"VerifyPhoneTitle";
 NSString *const kPAStr_ResendCodeResult = @"ResendCodeResult";
+NSString *const kPAStr_IncorrectCodeTitle = @"IncorrectCodeTitle";
+NSString *const kPAStr_IncorrectCodeMessage = @"IncorrectCodeMessage";
+NSString *const kPAStr_Done = @"Done";
+NSString *const kPAStr_Back = @"Back";
 
 /** @var kPhoneAuthProviderTableName
     @brief The name of the strings table to search for localized strings.

@@ -95,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(nullable NSString *)sourceApplication {
-  return NO; // TODO: implement
+  return NO;
 }
 
 - (void)callbackWithCredential:(nullable FIRAuthCredential *)credential

@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString *const kPAStr_EnterPhoneTitle;
 extern NSString *const kPAStr_SignInWithTwitter;
 extern NSString *const kPAStr_Next;
+extern NSString *const kPAStr_Verify;
 extern NSString *const kPAStr_EmptyVerificationCode;
 extern NSString *const kPAStr_EmptyPhoneNumber;
 extern NSString *const kPAStr_PhoneNumber;
@@ -31,6 +32,10 @@ extern NSString *const kPAStr_ResendCode;
 extern NSString *const kPAStr_ResendCodeTimer;
 extern NSString *const kPAStr_VerifyPhoneTitle;
 extern NSString *const kPAStr_ResendCodeResult;
+extern NSString *const kPAStr_IncorrectCodeTitle;
+extern NSString *const kPAStr_IncorrectCodeMessage;
+extern NSString *const kPAStr_Done;
+extern NSString *const kPAStr_Back;
 
 #ifdef __cplusplus
 extern "C" {

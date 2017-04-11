@@ -30,15 +30,19 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
 
+@interface FUIPhoneVerificationViewController () <FUICodeFieldDelegate>
+@end
+
 @implementation FUIPhoneVerificationViewController {
-  __unsafe_unretained IBOutlet UITextView *_enterCodeDescription;
   __unsafe_unretained IBOutlet FUICodeField *_codeField;
-  NSString *_verificationID;
-  __unsafe_unretained IBOutlet UITextView *_phoneNumber;
   __unsafe_unretained IBOutlet UITextView *_resendConfirmationCodeTimerLabel;
   __unsafe_unretained IBOutlet UIButton *_resendCodeButton;
+  __unsafe_unretained IBOutlet UILabel *_actionDescriptionLabel;
+  __unsafe_unretained IBOutlet UIButton *_phoneNumberButton;
+  NSString *_verificationID;
   NSTimer *_resendConfirmationCodeTimer;
   NSTimeInterval _resendConfirmationCodeSeconds;
+  NSString *_phoneNumber;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
@@ -63,7 +67,17 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   if (self) {
     self.title = FUIPhoneAuthLocalizedString(kPAStr_VerifyPhoneTitle);
     _verificationID = [verificationID copy];
-    _phoneNumber.text = phoneNumber;
+    _phoneNumber = [phoneNumber copy];
+
+    [_resendCodeButton setTitle:FUIPhoneAuthLocalizedString(kPAStr_ResendCode)
+                       forState:UIControlStateNormal];
+    _actionDescriptionLabel.text =
+        [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_EnterCodeDescription),
+             @(_codeField.codeLength)];
+    [_phoneNumberButton setTitle:_phoneNumber forState:UIControlStateNormal];
+
+    [_codeField becomeFirstResponder];
+    [self startResendTimer];
   }
   return self;
 }
@@ -78,16 +92,7 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
                                   action:@selector(next)];
   nextButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = nextButtonItem;
-
-  _enterCodeDescription.text =
-      [NSString stringWithFormat: FUIPhoneAuthLocalizedString(kPAStr_EnterCodeDescription),
-          @(_codeField.codeLength)];
-  _enterCodeDescription.contentOffset = CGPointZero;
-  [_resendCodeButton setTitle:FUIPhoneAuthLocalizedString(kPAStr_ResendCode)
-                     forState:UIControlStateNormal];
-  [self startResendTimer];
-
-  [_codeField becomeFirstResponder];
+  self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -95,19 +100,28 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
 
   if (self.navigationController.viewControllers.firstObject == self) {
     UIBarButtonItem *cancelBarButton =
-    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                  target:self
-                                                  action:@selector(cancelAuthorization)];
+        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                      target:self
+                                                      action:@selector(cancelAuthorization)];
     self.navigationItem.leftBarButtonItem = cancelBarButton;
   }
 }
 
+- (void)entryIsIncomplete {
+  self.navigationItem.rightBarButtonItem.enabled = NO;
+}
+
+- (void) entryIsCompletedWithCode:(NSString *)code {
+  self.navigationItem.rightBarButtonItem.enabled = YES;
+}
+
 #pragma mark - Actions
 - (IBAction)onResendCode:(id)sender {
+  [_codeField clearCodeInput];
   [self startResendTimer];
   [self incrementActivity];
   FIRPhoneAuthProvider *provider = [FIRPhoneAuthProvider providerWithAuth:self.auth];
-  [provider verifyPhoneNumber:_phoneNumber.text
+  [provider verifyPhoneNumber:_phoneNumber
                    completion:^(NSString *_Nullable verificationID, NSError *_Nullable error) {
 
     [self decrementActivity];
@@ -120,9 +134,12 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
 
     NSString *resultMessage =
         [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeResult),
-            _phoneNumber.text];
+            _phoneNumber];
     [self showAlertWithMessage:resultMessage];
   }];
+}
+- (IBAction)onPhoneNumberSelected:(id)sender {
+  [self onBack];
 }
 
 - (void)next {
@@ -144,13 +161,37 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   [delegate callbackWithCredential:credential
                              error:nil
                             result:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-    if (!error) {
+    if (!error || error.code == FUIAuthErrorCodeUserCancelledSignIn) {
       [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    } else if (error.code >= FIRAuthErrorCodeMissingPhoneNumber
+                   && error.code <= FIRAuthErrorCodeInvalidVerificationID) {
+      NSString *title = FUIPhoneAuthLocalizedString(kPAStr_IncorrectCodeTitle);
+      NSString *message = FUIPhoneAuthLocalizedString(kPAStr_IncorrectCodeMessage);
+      UIAlertController *alertController =
+          [UIAlertController alertControllerWithTitle:title
+                                              message:message
+                                       preferredStyle:UIAlertControllerStyleAlert];
+      UIAlertAction *okAction =
+          [UIAlertAction actionWithTitle:FUIPhoneAuthLocalizedString(kPAStr_Done)
+                                   style:UIAlertActionStyleDefault
+                                 handler:nil];
+      [alertController addAction:okAction];
+      [self presentViewController:alertController animated:YES completion:nil];
     } else {
       [self showAlertWithMessage:error.localizedDescription];
     }
   }];
 
+}
+
+- (void)observeValueForKeyPath:(nullable NSString *)keyPath
+                      ofObject:(nullable id)object
+                        change:(nullable NSDictionary<NSKeyValueChangeKey, id> *)change
+                       context:(nullable void *)context {
+  if (object == _codeField) {
+    self.navigationItem.rightBarButtonItem.enabled =
+        _codeField.codeEntry.length == _codeField.codeLength;
+  }
 }
 
 #pragma mark - Private
@@ -161,7 +202,7 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   [delegate callbackWithCredential:nil
                              error:error
                             result:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-    if (!error) {
+    if (!error || error.code == FUIAuthErrorCodeUserCancelledSignIn) {
       [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } else {
       [self showAlertWithMessage:error.localizedDescription];

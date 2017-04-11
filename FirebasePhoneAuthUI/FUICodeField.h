@@ -36,7 +36,7 @@ IB_DESIGNABLE
 
 @property (nonatomic,getter=isSecureTextEntry) IBInspectable BOOL secureTextEntry;
 
-@property (nonatomic, readwrite) id<FUICodeFieldDelegate> delegate;
+@property (nonatomic, readwrite) IBOutlet id<FUICodeFieldDelegate> delegate;
 
 @property (nonatomic, readonly) IBInspectable NSInteger codeLength;
 

@@ -127,26 +127,16 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
 }
 
 - (void)showAlertWithMessage:(NSString *)message {
-  if ([UIAlertController class]) {
-    UIAlertController *alertController =
-        [UIAlertController alertControllerWithTitle:nil
-                                            message:message
-                                     preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction =
-        [UIAlertAction actionWithTitle:FUILocalizedString(kStr_OK)
-                                 style:UIAlertActionStyleDefault
-                               handler:nil];
-    [alertController addAction:okAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-  } else {
-    UIAlertView *alert =
-        [[UIAlertView alloc] initWithTitle:nil
-                                   message:message
-                                  delegate:nil
-                         cancelButtonTitle:nil
-                         otherButtonTitles:FUILocalizedString(kStr_OK), nil];
-    [alert show];
-  }
+  UIAlertController *alertController =
+      [UIAlertController alertControllerWithTitle:nil
+                                          message:message
+                                   preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *okAction =
+      [UIAlertAction actionWithTitle:FUILocalizedString(kStr_OK)
+                               style:UIAlertActionStyleDefault
+                             handler:nil];
+  [alertController addAction:okAction];
+  [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)showSignInAlertWithEmail:(NSString *)email

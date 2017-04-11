@@ -91,12 +91,19 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [super viewDidLoad];
 
   UIBarButtonItem *nextButtonItem =
-  [[UIBarButtonItem alloc] initWithTitle:FUIPhoneAuthLocalizedString(kPAStr_Next)
-                                   style:UIBarButtonItemStylePlain
-                                  target:self
-                                  action:@selector(next)];
+      [[UIBarButtonItem alloc] initWithTitle:FUIPhoneAuthLocalizedString(kPAStr_Verify)
+                                       style:UIBarButtonItemStylePlain
+                                      target:self
+                                      action:@selector(next)];
   nextButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = nextButtonItem;
+
+  NSString *backLabel = FUIPhoneAuthLocalizedString(kPAStr_Back);
+  UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:backLabel
+                                                               style:UIBarButtonItemStylePlain
+                                                              target:nil
+                                                              action:nil];
+  [self.navigationItem setBackBarButtonItem:backItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -185,14 +192,14 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     cell.textField.enabled = YES;
     cell.textField.placeholder = FUIPhoneAuthLocalizedString(kPAStr_EnterYourPhoneNumber);
     cell.textField.delegate = self;
-    cell.textField.keyboardType = UIKeyboardTypeNumberPad;
     cell.accessibilityIdentifier = kPhoneNumberCellAccessibilityID;
     _phoneNumberField = cell.textField;
     _phoneNumberField.secureTextEntry = NO;
     _phoneNumberField.autocorrectionType = UITextAutocorrectionTypeNo;
     _phoneNumberField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     _phoneNumberField.returnKeyType = UIReturnKeyNext;
-    _phoneNumberField.keyboardType = UIKeyboardTypeEmailAddress;
+    _phoneNumberField.keyboardType = UIKeyboardTypeNumberPad;
+    [_phoneNumberField becomeFirstResponder];
     [cell.textField addTarget:self
                        action:@selector(textFieldDidChange)
              forControlEvents:UIControlEventEditingChanged];
@@ -208,7 +215,6 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
         [[FUICountryTableViewController alloc] initWithCountryCodes:_countryCodes];
     countryTableViewController.delegate = self;
     [self.navigationController pushViewController:countryTableViewController animated:YES];
-
   }
 }
 - (nullable id<FUIAuthProvider>)bestProviderFromProviderIDs:(NSArray<NSString *> *)providerIDs {
@@ -260,7 +266,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   FUIPhoneAuth *delegate = [self phoneAuthProvider];
   [delegate callbackWithCredential:nil error:error result:^(FIRUser *_Nullable user,
                                                             NSError *_Nullable error) {
-    if (!error) {
+    if (!error || error.code == FUIAuthErrorCodeUserCancelledSignIn) {
       [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } else {
       [self showAlertWithMessage:error.localizedDescription];
