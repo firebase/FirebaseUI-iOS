@@ -72,9 +72,12 @@
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
   [self.provider signInWithEmail:nil
         presentingViewController:nil
-                      completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
+                      completion:^(FIRAuthCredential *_Nullable credential,
+                                   NSError *_Nullable error,
+                                   FIRAuthResultCallback _Nullable result) {
                         XCTAssertNil(error);
                         XCTAssertNotNil(credential);
+                        XCTAssertNil(result);
                         FIRAuthCredential *expectedCredential = [FIRFacebookAuthProvider credentialWithAccessToken:testToken];
                         XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
                         XCTAssertNil(self.provider.idToken);
@@ -84,7 +87,7 @@
 
                         [expectation fulfill];
                       }];
-  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];
 }
@@ -108,11 +111,13 @@
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
   [self.provider signInWithEmail:nil
         presentingViewController:nil
-                      completion:^(FIRAuthCredential * _Nullable credential,
-                                   NSError * _Nullable error) {
+                      completion:^(FIRAuthCredential *_Nullable credential,
+                                   NSError *_Nullable error,
+                                   FIRAuthResultCallback _Nullable result) {
                         XCTAssertNotNil(error);
                         XCTAssertEqual(error.code, FUIAuthErrorCodeUserCancelledSignIn);
                         XCTAssertNil(credential);
+                        XCTAssertNil(result);
                         XCTAssertNil(self.provider.idToken);
 
                         //verify that we are not using token from server if user canceled request
@@ -120,7 +125,7 @@
 
                         [expectation fulfill];
                       }];
-  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];
 }
@@ -133,15 +138,17 @@
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
   [self.provider signInWithEmail:nil
         presentingViewController:nil
-                      completion:^(FIRAuthCredential * _Nullable credential,
-                                   NSError * _Nullable error) {
+                      completion:^(FIRAuthCredential *_Nullable credential,
+                                   NSError *_Nullable error,
+                                   FIRAuthResultCallback _Nullable result) {
                         XCTAssertNotNil(error);
                         XCTAssertEqual(error.userInfo[NSUnderlyingErrorKey], testError);
                         XCTAssertNil(credential);
+                        XCTAssertNil(result);
                         XCTAssertNil(self.provider.idToken);
                         [expectation fulfill];
                       }];
-  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];
 }

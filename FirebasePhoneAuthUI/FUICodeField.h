@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-IB_DESIGNABLE
 @interface FUICodeField : UIView <UIKeyInput, UITextInputTraits>
 
 @property (nonatomic, strong) UIColor *textColor UI_APPEARANCE_SELECTOR;
