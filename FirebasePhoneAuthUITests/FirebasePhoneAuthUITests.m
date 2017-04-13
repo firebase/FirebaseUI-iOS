@@ -16,20 +16,86 @@
 
 #import <XCTest/XCTest.h>
 
-@interface FirebasePhoneAuthUITests : XCTestCase
+#import <FirebasePhoneAuthUI/FirebasePhoneAuthUI.h>
+#import <FirebaseAuth/FirebaseAuth.h>
+#import <OCMock/OCMock.h>
+#import "FUIAuthUtils.h"
+#import "FUIPhoneAuth_Internal.h"
 
+@interface FirebasePhoneAuthUITests : XCTestCase
+@property (nonatomic, strong) FUIPhoneAuth *provider;
 @end
 
 @implementation FirebasePhoneAuthUITests
 
 - (void)setUp {
-    [super setUp];
-    // TODO: Put setup code here.
+  [super setUp];
+  id classMock = OCMClassMock([FUIAuthUtils class]);
+  OCMStub(ClassMethod([classMock frameworkBundle])).
+      andReturn([NSBundle bundleForClass:[FUIPhoneAuth class]]);
+  self.provider = [[FUIPhoneAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
 }
 
 - (void)tearDown {
-    // TODO: Put teardown code here.
-    [super tearDown];
+  self.provider = nil;
+  [super tearDown];
+}
+
+- (void)testProviderValidity {
+  XCTAssertNotNil(self.provider);
+  XCTAssertNotNil(self.provider.icon);
+  XCTAssertNotNil(self.provider.signInLabel);
+  XCTAssertNotNil(self.provider.buttonBackgroundColor);
+  XCTAssertNotNil(self.provider.buttonTextColor);
+  XCTAssertNotNil(self.provider.providerID);
+  XCTAssertNotNil(self.provider.shortName);
+  XCTAssertTrue(self.provider.signInLabel.length != 0);
+  XCTAssertNil(self.provider.accessToken);
+  XCTAssertNil(self.provider.idToken);
+}
+
+- (void)testSignIn {
+  XCTAssertNotNil(self.provider);
+  XCTAssertNil(self.provider.accessToken);
+
+  id mockedProvider = OCMPartialMock(self.provider);
+
+  XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
+  XCTestExpectation *expectationCallback = [self expectationWithDescription:@"result is called"];
+  id mockedCredential = OCMClassMock([FIRAuthCredential class]);
+  id mockedError = OCMClassMock([NSError class]);
+  id mockedUser = OCMClassMock([FIRUser class]);
+  FIRAuthResultCallback resultCallback = ^(FIRUser *_Nullable user, NSError *_Nullable error) {
+    [expectationCallback fulfill];
+    XCTAssertEqual(error, mockedError);
+    XCTAssertEqual(user, mockedUser);
+  };
+
+  id mockedController = OCMClassMock([UIViewController class]);
+  OCMExpect([mockedController presentViewController:OCMOCK_ANY
+                                           animated:OCMOCK_ANY
+                                         completion:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
+    [mockedProvider callbackWithCredential:mockedCredential
+                                     error:mockedError
+                                    result:resultCallback];
+  });
+
+  [mockedProvider signInWithEmail:nil
+         presentingViewController:mockedController
+                       completion:^(FIRAuthCredential *_Nullable credential,
+                                    NSError *_Nullable error,
+                                    FIRAuthResultCallback _Nullable result) {
+    XCTAssertEqual(credential, mockedCredential);
+    XCTAssertEqual(error, mockedError);
+    [expectation fulfill];
+
+    // We can't compare result and resultCallback. Thus verifying with expectation that result
+    // is called.
+    result(mockedUser, error);
+  }];
+  [self waitForExpectationsWithTimeout:0.1 handler:nil];
+
+  OCMVerifyAll(mockedProvider);
 }
 
 @end

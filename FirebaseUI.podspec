@@ -57,7 +57,7 @@ Pod::Spec.new do |s|
   s.subspec 'Phone' do |phone|
     phone.vendored_frameworks = ["FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks/FirebasePhoneAuthUI.framework"]
     phone.dependency 'FirebaseUI/Auth'
-    phone.resources = 'FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks/FirebasePhoneAuthUI.framework/*.{nib,lproj,png}'
+    phone.resources = 'FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks/FirebasePhoneAuthUI.framework/*.{nib,lproj,png,json}'
   end
 
   s.subspec 'Twitter' do |twitter|

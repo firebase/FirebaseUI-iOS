@@ -13,6 +13,7 @@ let schemes = [
   "FirebaseFacebookAuthUI",
   "FirebaseGoogleAuthUI",
   "FirebaseTwitterAuthUI",
+  "FirebasePhoneAuthUI",
   "FirebaseStorageUI",
 ]
 
@@ -22,6 +23,7 @@ let staticLibs = [
   "Facebook": "FirebaseFacebookAuthUI",
   "Google"  : "FirebaseGoogleAuthUI",
   "Twitter" : "FirebaseTwitterAuthUI",
+  "Phone"   : "FirebasePhoneAuthUI",
   "Storage" : "FirebaseStorageUI",
 ]
 
