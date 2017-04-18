@@ -127,6 +127,11 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
 }
 
 - (void)showAlertWithMessage:(NSString *)message {
+  [[self class] showAlertWithMessage:message presentingViewController:self];
+}
+
++ (void)showAlertWithMessage:(NSString *)message
+    presentingViewController:(UIViewController *)presentingViewController {
   UIAlertController *alertController =
       [UIAlertController alertControllerWithTitle:nil
                                           message:message
@@ -136,12 +141,14 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
                                style:UIAlertActionStyleDefault
                              handler:nil];
   [alertController addAction:okAction];
-  [self presentViewController:alertController animated:YES completion:nil];
+  [presentingViewController presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)showSignInAlertWithEmail:(NSString *)email
++ (void)showSignInAlertWithEmail:(NSString *)email
                         provider:(id<FUIAuthProvider>)provider
-                         handler:(FUIAuthAlertActionHandler)handler {
+        presentingViewController:(UIViewController *)presentingViewController
+                   signinHandler:(FUIAuthAlertActionHandler)signinHandler
+                   cancelHandler:(FUIAuthAlertActionHandler)cancelHandler {
   NSString *message =
       [NSString stringWithFormat:FUILocalizedString(kStr_ProviderUsedPreviouslyMessage),
           email, provider.shortName];
@@ -153,27 +160,33 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
       [UIAlertAction actionWithTitle:provider.signInLabel
                                style:UIAlertActionStyleDefault
                              handler:^(UIAlertAction *_Nonnull action) {
-        handler();
+        signinHandler();
       }];
   [alertController addAction:signInAction];
   UIAlertAction *cancelAction =
       [UIAlertAction actionWithTitle:FUILocalizedString(kStr_Cancel)
                                style:UIAlertActionStyleCancel
-                             handler:^(UIAlertAction *_Nonnull action) {
-                               [self.authUI signOutWithError:nil];
-                             }];
+                               handler:^(UIAlertAction * _Nonnull action) {
+        cancelHandler();
+      }];
   [alertController addAction:cancelAction];
-  [self presentViewController:alertController animated:YES completion:nil];
+  [presentingViewController presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)pushViewController:(UIViewController *)viewController {
+  [[self class] pushViewController:viewController
+              navigationController:self.navigationController];
+}
+
++ (void)pushViewController:(UIViewController *)viewController
+      navigationController:(UINavigationController *)navigationController {
   // Override the back button title with "Back".
-  self.navigationItem.backBarButtonItem =
+  navigationController.navigationItem.backBarButtonItem =
       [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Back)
                                        style:UIBarButtonItemStylePlain
                                       target:nil
                                       action:nil];
-  [self.navigationController pushViewController:viewController animated:YES];
+  [navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)onBack {

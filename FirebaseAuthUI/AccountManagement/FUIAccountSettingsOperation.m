@@ -153,7 +153,6 @@ NS_ASSUME_NONNULL_BEGIN
   }
 
   if (!providerUI) {
-    // TODO: Show alert or print error
     NSError *error = [FUIAuthErrorUtils errorWithCode:FUIAuthErrorCodeCantFindProvider
                                              userInfo:@{
       FUIAuthErrorUserInfoProviderIDKey : providerID

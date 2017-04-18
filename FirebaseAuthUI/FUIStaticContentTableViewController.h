@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
                        nextTitle:(nullable NSString *)nextTitle
                       nextAction:(nullable FUIStaticContentTableViewCellAction)nextAction;
 
+// TODO: set nextAction param last arg
 /** @fn initWithContents:nextTitle:nextAction:headerText:
     @brief Convenience initializer. View controller doesn't have footer section.
     @param contents The contents of the table view presented in the controller.

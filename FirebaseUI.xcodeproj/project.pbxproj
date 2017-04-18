@@ -202,10 +202,10 @@
 		C3A08DA21E97227A00FF63EB /* FUIFeatureSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A08D971E97227A00FF63EB /* FUIFeatureSwitch.h */; };
 		C3A08DA31E97227A00FF63EB /* FUIFeatureSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D981E97227A00FF63EB /* FUIFeatureSwitch.m */; };
 		C3A08DA41E97227A00FF63EB /* FUIFeatureSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D981E97227A00FF63EB /* FUIFeatureSwitch.m */; };
-		C3A201771E9597DA0040563F /* FUIPhoneEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A201711E9597DA0040563F /* FUIPhoneEntryViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3A201771E9597DA0040563F /* FUIPhoneEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A201711E9597DA0040563F /* FUIPhoneEntryViewController.h */; };
 		C3A201781E9597DA0040563F /* FUIPhoneEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A201721E9597DA0040563F /* FUIPhoneEntryViewController.m */; };
 		C3A201791E9597DA0040563F /* FUIPhoneEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A201731E9597DA0040563F /* FUIPhoneEntryViewController.xib */; };
-		C3A2017A1E9597DA0040563F /* FUIPhoneVerificationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A201741E9597DA0040563F /* FUIPhoneVerificationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3A2017A1E9597DA0040563F /* FUIPhoneVerificationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A201741E9597DA0040563F /* FUIPhoneVerificationViewController.h */; };
 		C3A2017B1E9597DA0040563F /* FUIPhoneVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A201751E9597DA0040563F /* FUIPhoneVerificationViewController.m */; };
 		C3A2017C1E9597DA0040563F /* FUIPhoneVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A201761E9597DA0040563F /* FUIPhoneVerificationViewController.xib */; };
 		C3A2017D1E9597FB0040563F /* FUIPhoneEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A201721E9597DA0040563F /* FUIPhoneEntryViewController.m */; };
@@ -1691,11 +1691,11 @@
 				C3A08DA21E97227A00FF63EB /* FUIFeatureSwitch.h in Headers */,
 				C343D2A11E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */,
 				C3A08D9C1E97227A00FF63EB /* FUICountryCodes.h in Headers */,
-				C3773B851E92C3CF00ACF58C /* FUIPhoneAuth.h in Headers */,
-				C37296841E95C83900F3FCCC /* FUICodeField.h in Headers */,
-				C3A201771E9597DA0040563F /* FUIPhoneEntryViewController.h in Headers */,
-				C343D29B1E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h in Headers */,
 				C3A2017A1E9597DA0040563F /* FUIPhoneVerificationViewController.h in Headers */,
+				C3773B851E92C3CF00ACF58C /* FUIPhoneAuth.h in Headers */,
+				C3A201771E9597DA0040563F /* FUIPhoneEntryViewController.h in Headers */,
+				C37296841E95C83900F3FCCC /* FUICodeField.h in Headers */,
+				C343D29B1E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h in Headers */,
 				C3773B661E8EFDEB00ACF58C /* FirebasePhoneAuthUI.h in Headers */,
 				C3A08D991E97227A00FF63EB /* FUICollationForCountries.h in Headers */,
 				C3A08D9F1E97227A00FF63EB /* FUICountryTableViewController.h in Headers */,

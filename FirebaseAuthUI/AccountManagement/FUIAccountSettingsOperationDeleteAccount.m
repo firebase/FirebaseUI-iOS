@@ -74,7 +74,6 @@ NS_ASSUME_NONNULL_BEGIN
               footerAction:^{
         [FUIAccountSettingsOperationForgotPassword executeOperationWithDelegate:self.delegate];
       }];
-  // TODO: add localization
   controller.title = FUILocalizedString(kStr_DeleteAccountControllerTitle);
   [self.delegate pushViewController:controller];
 }
@@ -88,7 +87,6 @@ NS_ASSUME_NONNULL_BEGIN
         [self onDeleteAccountViewNextAction];
       }
                                                          headerText:message];
-  // TODO: add localization
   controller.title = FUILocalizedString(kStr_DeleteAccountControllerTitle);
   [self.delegate pushViewController:controller];
 

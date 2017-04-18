@@ -126,6 +126,33 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
                                                                          newCredential:(FIRAuthCredential *)newCredential;
 @end
 
+/** @protocol FUIAuthSignInUIDelegate
+    @brief A delegate that receives sign in callbacks and provides custom UI for sign in process.
+ */
+@protocol FUIAuthSignInUIDelegate
+
+/** @fn incrementActivity
+    @brief Increment the current acitivity count. If there's positive number of activities, display
+        and animate the activity indicator with a short period of delay.
+    @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
+ */
+- (void)incrementActivity;
+
+/** @fn decrementActivity
+    @brief Decrement the current acitivity count. If the count reaches 0, stop and hide the
+        activity indicator.
+    @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
+ */
+- (void)decrementActivity;
+
+/** @fn presentingNavigationViewController
+    @brief Returns @c UINavigationController into which view controllers are pushed 
+        during sign in flow.
+ */
+- (UINavigationController *)presentingNavigationViewController;
+
+@end
+
 /** @class FUIAuth
     @brief Provides various iOS UIs for Firebase Auth.
  */
@@ -203,15 +230,24 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
 /** @fn signOutWithError:
     @brief Signs out the current user from Firbase and all providers.
     @param error Optionally; if an error occurs during Firebase signout, upon return contains an
-    NSError object that describes the problem; is nil otherwise. If Firebase error occurs all providers
-    are not logged-out and sign-out should be retried.
-    @return @YES when the sign out request was successful. @NO otherwise.
-    @remarks Possible error codes:
-    - @c FIRAuthErrorCodeKeychainError Indicates an error occurred when accessing the keychain.
-    The @c NSLocalizedFailureReasonErrorKey field in the @c NSError.userInfo dictionary
-    will contain more information about the error encountered.
+        NSError object that describes the problem; is nil otherwise. If Firebase error occurs all 
+        providers are not logged-out and sign-out should be retried.
+        @return @YES when the sign out request was successful. @NO otherwise.
+        @remarks Possible error codes:
+        - @c FIRAuthErrorCodeKeychainError Indicates an error occurred when accessing the keychain.
+        The @c NSLocalizedFailureReasonErrorKey field in the @c NSError.userInfo dictionary
+        will contain more information about the error encountered.
  */
 - (BOOL)signOutWithError:(NSError *_Nullable *_Nullable)error;
+
+/** @fn signOutWithError:
+    @brief Signs in with sepcified provider. @see FUIAuthDelegate.authUI:didSignInWithUser:error: 
+        for method callback.
+    @param providerUI The authentication provider used for signing in.
+    @param delegate The UI delegate which handles UI operations.
+ */
+- (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI
+            signInUIDelegate:(id<FUIAuthSignInUIDelegate>)delegate;
 
 @end
 

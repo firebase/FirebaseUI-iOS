@@ -48,8 +48,12 @@ NS_ENUM(NSUInteger, FIRProviders) {
 };
 
 static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/terms/";
+static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
+static const CGFloat kActivityIndiactorOverlayOpacity = 0.8f;
+static const CGFloat kActivityIndiactorPadding = 20.0f;
+static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
 
-@interface FUIAuthViewController () <FUIAuthDelegate>
+@interface FUIAuthViewController () <FUIAuthDelegate, FUIAuthSignInUIDelegate>
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellSignIn;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellName;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellEmail;
@@ -69,7 +73,10 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
 
 @end
 
-@implementation FUIAuthViewController
+@implementation FUIAuthViewController {
+  NSInteger _activityCount;
+  UIActivityIndicatorView *_activityIndicator;
+}
 
 #pragma mark - UIViewController methods
 
@@ -85,6 +92,17 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
   self.authUI = [FUIAuth defaultAuthUI];
 
   self.authUI.TOSURL = [NSURL URLWithString:kFirebaseTermsOfService];
+
+  _activityIndicator =
+      [[UIActivityIndicatorView alloc]
+          initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+  _activityIndicator.frame = CGRectInset(_activityIndicator.frame,
+                                         -kActivityIndiactorPadding,
+                                         -kActivityIndiactorPadding);
+  _activityIndicator.backgroundColor =
+      [UIColor colorWithWhite:0 alpha:kActivityIndiactorOverlayOpacity];
+  _activityIndicator.layer.cornerRadius = kActivityIndiactorOverlayCornerRadius;
+  [self.view addSubview:_activityIndicator];
 
   //set AuthUI Delegate
   [self onAuthUIDelegateChanged:nil];
@@ -130,6 +148,15 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
   [self.auth removeAuthStateDidChangeListener:self.authStateDidChangeHandle];
 
   self.navigationController.toolbarHidden = YES;
+}
+
+- (void)viewDidLayoutSubviews {
+  [super viewDidLayoutSubviews];
+
+  CGPoint activityIndicatorCenter = self.view.center;
+  // Compensate for bounds adjustment if any.
+  activityIndicatorCenter.y += self.view.bounds.origin.y;
+  _activityIndicator.center = activityIndicatorCenter;
 }
 
 #pragma mark - UITableViewController methods
@@ -183,11 +210,18 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
     _authUI.providers = [self getListOfIDPs];
     _authUI.signInWithEmailHidden = ![self isEmailEnabled];
 
-    UINavigationController *controller = [self.authUI authViewController];
-    if (_isCustomAuthDelegateSelected) {
-      controller.navigationBar.hidden = YES;
+    BOOL shouldSkipPhoneAuthPicker = self.authUI.providers.count == 1 &&
+        [self.authUI.providers.firstObject.providerID isEqualToString:FIRPhoneAuthProviderID] &&
+            self.authUI.isSignInWithEmailHidden;
+    if (shouldSkipPhoneAuthPicker) {
+      [self.authUI signInWithProviderUI:self.authUI.providers.firstObject signInUIDelegate:self];
+    } else {
+      UINavigationController *controller = [self.authUI authViewController];
+      if (_isCustomAuthDelegateSelected) {
+        controller.navigationBar.hidden = YES;
+      }
+      [self presentViewController:controller animated:YES completion:nil];
     }
-    [self presentViewController:controller animated:YES completion:nil];
   } else {
     [self signOut];
   }
@@ -208,6 +242,37 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
       [self showAlert:detailedError.localizedDescription];
     }
   }
+}
+
+#pragma mark - FUIAuthSignInUIDelegate methods
+
+- (void)incrementActivity {
+  _activityCount++;
+
+  // Delay the display of acitivty indiactor for a short period of time.
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+                              (int64_t)(kActivityIndiactorAnimationDelay * NSEC_PER_SEC)),
+                 dispatch_get_main_queue(), ^{
+    if (_activityCount > 0) {
+      [_activityIndicator startAnimating];
+    }
+  });
+}
+
+- (void)decrementActivity {
+  _activityCount--;
+
+  if (_activityCount < 0) {
+    NSLog(@"Unbalanced calls to incrementActivity and decrementActivity.");
+    _activityCount = 0;
+  }
+
+  if (_activityCount == 0) {
+    [_activityIndicator stopAnimating];
+  }
+}
+- (UINavigationController *)presentingNavigationViewController {
+  return self.navigationController;
 }
 
 #pragma mark - Helper Methods

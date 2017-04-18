@@ -21,7 +21,7 @@
 
 "ResendCode" = "Resend code";
 
-"ResendCodeTimer" = "Resend code in %@:%@";
+"ResendCodeTimer" = "Resend code in %@";
 
 "VerifyPhoneTitle" = "Verify phone number";
 

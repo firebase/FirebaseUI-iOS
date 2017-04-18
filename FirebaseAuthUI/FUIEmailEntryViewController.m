@@ -136,10 +136,14 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     id<FUIAuthProvider> provider = [self bestProviderFromProviderIDs:providers];
     if (provider) {
       NSString *email = emailText;
-      [self showSignInAlertWithEmail:email
-                            provider:provider
-                             handler:^{
+      [[self class] showSignInAlertWithEmail:email
+                                    provider:provider
+                    presentingViewController:self
+                               signinHandler:^{
         [self signInWithProvider:provider email:email];
+      }
+                               cancelHandler:^{
+        [self.authUI signOutWithError:nil];
       }];
     } else if ([providers containsObject:FIREmailPasswordAuthProviderID]) {
       UIViewController *controller;

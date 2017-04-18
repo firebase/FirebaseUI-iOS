@@ -27,9 +27,32 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)invokeResultCallbackWithUser:(FIRUser *_Nullable)user error:(NSError *_Nullable)error;
 
-// TODO: add docs
+/** @fn invokeOperationCallback:error:
+    @brief Invokes the auth UI operation callback.
+    @param operation The executed operation.
+    @param error The error which occurred, if any.
+ */
 - (void)invokeOperationCallback:(FUIAccountSettingsOperationType)operation
                           error:(NSError *_Nullable)error;
+
+/** @fn providerWithID:
+    @brief Returns first provider (if it exists) with specified provider ID.
+    @param providerID The ID of the provider.
+ */
+- (nullable id<FUIAuthProvider>)providerWithID:(NSString *)providerID;
+
+/** @fn signOutWithError:
+    @brief Signs in with sepcified provider. @see FUIAuthDelegate.authUI:didSignInWithUser:error: 
+        for method callback.
+    @param providerUI The authentication provider used for signing in.
+    @param delegate The UI delegate which handles UI operations.
+    @param shownWithoutAuthPicker Defines if sign in flow was shown without 
+        @c FUIAuthPickerViewController.
+ */
+- (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI
+            signInUIDelegate:(id<FUIAuthSignInUIDelegate>)delegate
+      shownWithoutAuthPicker:(BOOL)shownWithoutAuthPicker;
+
 @end
 
 NS_ASSUME_NONNULL_END

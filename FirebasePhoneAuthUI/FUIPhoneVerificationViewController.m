@@ -16,10 +16,12 @@
 
 #import "FUIPhoneVerificationViewController.h"
 
+#import <FirebaseAuth/FIRPhoneAuthProvider.h>
+#import "FirebaseAuth/FIRPhoneAuthCredential.h"
+#import "FUIAuth_Internal.h"
 #import "FUICodeField.h"
 #import "FUIPhoneAuthStrings.h"
 #import "FUIPhoneAuth_Internal.h"
-#import <FirebaseAuth/FIRPhoneAuthProvider.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -154,10 +156,10 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
 
   FIRPhoneAuthProvider *provider = [FIRPhoneAuthProvider providerWithAuth:self.auth];
 
-  FIRPhoneAuthCredential *credential =
+  FIRAuthCredential *credential =
     [provider credentialWithVerificationID:_verificationID verificationCode:verificationCode];
 
-  FUIPhoneAuth *delegate = [self phoneAuthProvider];
+  FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
   [delegate callbackWithCredential:credential
                              error:nil
                             result:^(FIRUser *_Nullable user, NSError *_Nullable error) {
@@ -198,7 +200,7 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
 
 - (void)cancelAuthorization {
   NSError *error = [FUIAuthErrorUtils userCancelledSignInError];
-  FUIPhoneAuth *delegate = [self phoneAuthProvider];
+  FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
   [delegate callbackWithCredential:nil
                              error:error
                             result:^(FIRUser *_Nullable user, NSError *_Nullable error) {
@@ -210,22 +212,9 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   }];
 }
 
-- (FUIPhoneAuth *)phoneAuthProvider {
-  for (id<FUIAuthProvider> provider in self.authUI.providers) {
-    if ([provider.providerID isEqualToString:FIRPhoneAuthProviderID]
-        && [provider isKindOfClass:[FUIPhoneAuth class]]) {
-      return provider;
-    }
-  }
-
-  return nil;
-}
-
 - (void)startResendTimer {
   _resendConfirmationCodeSeconds = FUIDelayInSecondsBeforeShowingResendConfirmationCode;
-  _resendConfirmationCodeTimerLabel.text =
-      [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeTimer), @0,
-          @(_resendConfirmationCodeSeconds)];
+  [self updateResendLabel];
 
   _resendCodeButton.hidden = YES;
   _resendConfirmationCodeTimerLabel.hidden = NO;
@@ -252,15 +241,23 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
     [self resendConfirmationCodeTimerFinished];
   }
 
-  _resendConfirmationCodeTimerLabel.text =
-      [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeTimer), @0,
-          @(_resendConfirmationCodeSeconds)];
+  [self updateResendLabel];
 }
 
 - (void)resendConfirmationCodeTimerFinished {
   [self cleanUpTimer];
 
   _resendCodeButton.hidden = NO;
+}
+
+- (void)updateResendLabel {
+  NSTimeInterval minutes = _resendConfirmationCodeSeconds / 60;
+  NSTimeInterval seconds = (NSUInteger)_resendConfirmationCodeSeconds % 60;
+  NSString *formattedTime = [NSString stringWithFormat:@"%02.0f:%02.0f", minutes, seconds];
+
+  _resendConfirmationCodeTimerLabel.text =
+      [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeTimer),
+           formattedTime];
 }
 
 @end

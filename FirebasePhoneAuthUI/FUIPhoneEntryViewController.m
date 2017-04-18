@@ -16,15 +16,16 @@
 
 #import "FUIPhoneEntryViewController.h"
 
+#import <FirebaseAuth/FIRPhoneAuthProvider.h>
+#import <FirebaseAuth/FirebaseAuth.h>
 #import "FUIAuthTableViewCell.h"
 #import "FUIAuthUtils.h"
+#import "FUIAuth_Internal.h"
+#import "FUICountryTableViewController.h"
+#import "FUIFeatureSwitch.h"
 #import "FUIPhoneAuthStrings.h"
 #import "FUIPhoneAuth_Internal.h"
 #import "FUIPhoneVerificationViewController.h"
-#import <FirebaseAuth/FIRPhoneAuthProvider.h>
-#import <FirebaseAuth/FirebaseAuth.h>
-#import "FUICountryTableViewController.h"
-#import "FUIFeatureSwitch.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -111,9 +112,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
   if (self.navigationController.viewControllers.firstObject == self) {
     UIBarButtonItem *cancelBarButton =
-    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                  target:self
-                                                  action:@selector(cancelAuthorization)];
+        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                      target:self
+                                                      action:@selector(cancelAuthorization)];
     self.navigationItem.leftBarButtonItem = cancelBarButton;
   }
 }
@@ -263,7 +264,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 - (void)cancelAuthorization {
   NSError *error = [FUIAuthErrorUtils userCancelledSignInError];
-  FUIPhoneAuth *delegate = [self phoneAuthProvider];
+  FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
   [delegate callbackWithCredential:nil error:error result:^(FIRUser *_Nullable user,
                                                             NSError *_Nullable error) {
     if (!error || error.code == FUIAuthErrorCodeUserCancelledSignIn) {
@@ -272,17 +273,6 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       [self showAlertWithMessage:error.localizedDescription];
     }
   }];
-}
-
-- (FUIPhoneAuth *)phoneAuthProvider {
-  for (id<FUIAuthProvider> provider in self.authUI.providers) {
-    if ([provider.providerID isEqualToString:FIRPhoneAuthProviderID]
-        && [provider isKindOfClass:[FUIPhoneAuth class]]) {
-      return provider;
-    }
-  }
-
-  return nil;
 }
 
 @end

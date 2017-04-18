@@ -59,10 +59,14 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 
 @end
 
-@implementation FUIViewController
+@implementation FUIViewController {
+  NSMutableArray *_authProviders;
+}
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+
+  _authProviders = [NSMutableArray new];
 
   [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kSimulationNoMocks
                                                           inSection:kSectionsSimulationBehavior]
@@ -73,6 +77,9 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
                                                           inSection:kSectionsProviders]
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
+
+  [self prepareStubsForTests];
+  [self mockPhoneAuthServerRequests];
 }
 
 - (IBAction)onAuthorization:(id)sender {
@@ -81,6 +88,10 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   [self presentViewController:controller animated:YES completion:nil];
 }
 
+- (void)setAuthUIMock:(id)authUIMock {
+  _authUIMock = authUIMock;
+  [self configureFirAuthUIProviders];
+}
 
 #pragma mark - UITableViewControllerDelegate methods
 
@@ -89,8 +100,6 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
     _selectedSimulationChoise = indexPath.row;
     [self deselectAllCellsExcept:indexPath];
   }
-
-  [self prepareStubsForTests];
 
   if (indexPath.section == kSectionsAccountManager) {
     switch (indexPath.row) {
@@ -169,12 +178,11 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 #pragma mark - helper methods
 
 - (void)prepareStubs {
-
-  [self prepareStubsForTests];
+  [self populateListOfIDPs];
 
   switch (_selectedSimulationChoise) {
+    case kSimulationNoMocks:
     case kSimulationUnknown:
-      [self prepareGenuineExample];
       break;
     case kSimulationExistingUser:
       [self prepareStubsForSimulationExistingUser];
@@ -191,21 +199,15 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   }
 }
 
-- (void)prepareGenuineExample {
-  self.authMock = [FIRAuth auth];
-  self.authUIMock = [self configureFirAuthUI];
-
-}
-
 - (void)prepareStubsForTests {
-  [self.authMock stopMocking];
   self.authMock = OCMPartialMock([FIRAuth auth]);
 
-  OCMStub(ClassMethod([self.authMock auth])).andReturn(self.authMock);
+  id mockedAuth = OCMClassMock([FIRAuth class]);
+  OCMStub(ClassMethod([mockedAuth auth])).andReturn(self.authMock);
 
-  [self.authUIMock stopMocking];
   self.authUIMock = OCMPartialMock([self configureFirAuthUI]);
-  OCMStub([self.authUIMock auth]).andReturn(self.authMock);
+  id mockedAuthUI = OCMClassMock([FUIAuth class]);
+  OCMStub(ClassMethod([mockedAuthUI defaultAuthUI])).andReturn(self.authUIMock);
 }
 
 - (void)prepareStubsForSimulationExistingUser {
@@ -258,24 +260,24 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 
 }
 
-- (NSArray *)getListOfIDPs {
+- (void)populateListOfIDPs {
   NSArray<NSIndexPath *> *selectedRows = [self.tableView indexPathsForSelectedRows];
-  NSMutableArray *providers = [NSMutableArray new];
+  [_authProviders removeAllObjects];
 
   for (NSIndexPath *indexPath in selectedRows) {
     if (indexPath.section == kSectionsProviders) {
       switch (indexPath.row) {
         case kIDPGoogle:
-          [providers addObject:[[FUIGoogleAuth alloc] init]];
+          [_authProviders addObject:[[FUIGoogleAuth alloc] init]];
           break;
         case kIDPFacebook:
-          [providers addObject:[[FUIFacebookAuth alloc] init]];
+          [_authProviders addObject:[[FUIFacebookAuth alloc] init]];
           break;
         case kIDPTwitter:
-          [providers addObject:[[FUITwitterAuth alloc] init]];
+          [_authProviders addObject:[[FUITwitterAuth alloc] init]];
           break;
         case kIDPPhone:
-          [providers addObject:[[FUIPhoneAuth alloc] initWithAuthUI:self.authUIMock]];
+          [_authProviders addObject:[[FUIPhoneAuth alloc] initWithAuthUI:self.authUIMock]];
           break;
 
         default:
@@ -283,8 +285,6 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
       }
     }
   }
-
-  return providers;
 }
 
 - (BOOL)isEmailEnabled {
@@ -296,10 +296,14 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 
 - (FUIAuth *)configureFirAuthUI {
   FUIAuth *authUI = [FUIAuth defaultAuthUI];
-  authUI.providers = [self getListOfIDPs];
   authUI.signInWithEmailHidden = ![self isEmailEnabled];
   authUI.delegate = self;
   return authUI;
+}
+
+- (void)configureFirAuthUIProviders {
+  [self populateListOfIDPs];
+  OCMStub([self.authUIMock providers]).andReturn(_authProviders);
 }
 
 - (void)showAccountManager {
@@ -432,6 +436,15 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   });
 }
 
+- (void)mockSignInWithCredential {
+  OCMStub([self.authMock signInWithCredential:OCMOCK_ANY completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
+    FIRAuthResultCallback mockedResponse;
+    [invocation getArgument:&mockedResponse atIndex:3];
+    id mockUser = OCMClassMock([FIRUser class]);
+    mockedResponse(mockUser, nil);
+  });
+}
 - (void)mockUpdatePasswordRequest:(id)mockUser {
   OCMStub([mockUser updatePassword:OCMOCK_ANY completion:OCMOCK_ANY]).
       andDo(^(NSInvocation *invocation) {
@@ -527,6 +540,27 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 
   // mock unlinking 3P provider
   [self mockUnlinkOperation:mockUser];
+}
+
+#pragma mark - Phone Auth mocks
+
+- (void)mockPhoneAuthServerRequests {
+  id mockedProvider = OCMClassMock([FIRPhoneAuthProvider class]);
+  OCMStub(ClassMethod([mockedProvider provider])).andReturn(mockedProvider);
+  OCMStub(ClassMethod([mockedProvider providerWithAuth:OCMOCK_ANY])).andReturn(mockedProvider);
+
+  OCMStub([mockedProvider verifyPhoneNumber:OCMOCK_ANY completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
+    FIRVerificationResultCallback mockedCallback;
+    [invocation getArgument:&mockedCallback atIndex:3];
+    mockedCallback(@"verificationID", nil);
+  });
+
+  id mockedCredential = OCMClassMock([FIRPhoneAuthCredential class]);
+  OCMStub([mockedProvider credentialWithVerificationID:OCMOCK_ANY verificationCode:OCMOCK_ANY]).
+      andReturn(mockedCredential);
+
+  [self mockSignInWithCredential];
 }
 
 @end

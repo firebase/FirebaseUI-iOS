@@ -87,15 +87,27 @@ typedef void (^FUIAuthAlertActionHandler)(void);
  */
 - (void)showAlertWithMessage:(NSString *)message;
 
+/** @fn showAlertWithMessage:presentingViewController:
+    @brief Displays an alert view with given title and message on top of the current view
+        controller.
+    @param message The message of the alert.
+    @param presentingViewController The controller which shows alert.
+ */
++ (void)showAlertWithMessage:(NSString *)message
+    presentingViewController:(UIViewController *)presentingViewController;
+
 /** @fn showSignInAlertWithEmail:provider:handler:
     @brief Displays an alert to conform with user whether she wants to proceed with the provider.
     @param email The email address to sign in with.
     @param provider The identity provider to sign in with.
-    @param handler Handler for the sign in action of the alert.
+    @param signinHandler Handler for the sign in action of the alert.
+    @param cancelHandler Handler for the cancel action of the alert.
  */
-- (void)showSignInAlertWithEmail:(NSString *)email
++ (void)showSignInAlertWithEmail:(NSString *)email
                         provider:(id<FUIAuthProvider>)provider
-                         handler:(FUIAuthAlertActionHandler)handler;
+        presentingViewController:(UIViewController *)presentingViewController
+                   signinHandler:(FUIAuthAlertActionHandler)signinHandler
+                   cancelHandler:(FUIAuthAlertActionHandler)cancelHandler;
 
 /** @fn pushViewController:
     @brief Push the view controller to the navigation controller of the current view controller
@@ -103,6 +115,15 @@ typedef void (^FUIAuthAlertActionHandler)(void);
     @param viewController The view controller to be pushed.
  */
 - (void)pushViewController:(UIViewController *)viewController;
+
+/** @fn pushViewController:
+    @brief Push the view controller to the navigation controller of the current view controller
+        with animation. The pushed view controller will have a fixed "Back" title for back button.
+    @param viewController The view controller to be pushed.
+    @param navigationController The controller where view controller is pushed.
+ */
++ (void)pushViewController:(UIViewController *)viewController
+      navigationController:(UINavigationController *)navigationController;
 
 /** @fn onBack
     @brief Pops the view controller from navigation stack. If current controller is root 
