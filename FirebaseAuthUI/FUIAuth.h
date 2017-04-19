@@ -131,27 +131,24 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
  */
 @protocol FUIAuthSignInUIDelegate <NSObject>
 
-/** @fn presentingNavigationViewController
-    @brief Returns @c UINavigationController into which view controllers are pushed
-      during sign in flow.
+/** @fn presentingSignInController
+    @brief Returns @c UIViewController from which sign in UI is presented.
  */
-- (UINavigationController *)presentingNavigationViewController;
+- (UIViewController *)presentingSignInController;
 
 @optional
 
-/** @fn incrementActivity
-    @brief Increment the current activity count. If there's positive number of activities, display
-        and animate the activity indicator with a short period of delay.
-    @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
+/** @fn showActivityIndicator
+    @brief Called when UI should notify user about background activity.
+    @remarks Calls to @c showActivityIndicator and @c hideActivityIndicator should be balanced.
  */
-- (void)incrementActivity;
+- (void)showActivityIndicator;
 
-/** @fn decrementActivity
-    @brief Decrement the current activity count. If the count reaches 0, stop and hide the
-        activity indicator.
-    @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
+/** @fn hideActivityIndicator
+    @brief Called when background activity is finished.
+    @remarks Calls to @c showActivityIndicator and @c hideActivityIndicator should be balanced.
  */
-- (void)decrementActivity;
+- (void)hideActivityIndicator;
 
 @end
 

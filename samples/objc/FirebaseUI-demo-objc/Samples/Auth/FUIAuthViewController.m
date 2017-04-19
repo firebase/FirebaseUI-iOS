@@ -246,7 +246,7 @@ static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
 
 #pragma mark - FUIAuthSignInUIDelegate methods
 
-- (void)incrementActivity {
+- (void)showActivityIndicator {
   _activityCount++;
 
   // Delay the display of acitivty indiactor for a short period of time.
@@ -259,7 +259,7 @@ static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
   });
 }
 
-- (void)decrementActivity {
+- (void)hideActivityIndicator {
   _activityCount--;
 
   if (_activityCount < 0) {
@@ -271,8 +271,8 @@ static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
     [_activityIndicator stopAnimating];
   }
 }
-- (UINavigationController *)presentingNavigationViewController {
-  return self.navigationController;
+- (UIViewController *)presentingSignInController {
+  return self;
 }
 
 #pragma mark - Helper Methods

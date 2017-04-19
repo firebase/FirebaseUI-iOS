@@ -160,7 +160,16 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 
 #pragma mark - FUIAuthSignInUIDelegate methods
 
-- (UINavigationController *)presentingNavigationViewController {
-  return self.navigationController;
+- (UIViewController *)presentingSignInController {
+  return self;
 }
+
+- (void)showActivityIndicator {
+  [self incrementActivity];
+}
+
+- (void)hideActivityIndicator {
+  [self decrementActivity];
+}
+
 @end

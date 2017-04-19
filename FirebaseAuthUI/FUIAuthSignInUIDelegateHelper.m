@@ -29,20 +29,20 @@ NS_ASSUME_NONNULL_BEGIN
   return self;
 }
 
-- (void)incrementActivity {
-  if ([_delegate respondsToSelector:@selector(incrementActivity)]) {
-    [_delegate incrementActivity];
+- (void)showActivityIndicator {
+  if ([_delegate respondsToSelector:@selector(showActivityIndicator)]) {
+    [_delegate showActivityIndicator];
   }
 }
 
-- (void)decrementActivity {
-  if ([_delegate respondsToSelector:@selector(decrementActivity)]) {
-    [_delegate decrementActivity];
+- (void)hideActivityIndicator {
+  if ([_delegate respondsToSelector:@selector(hideActivityIndicator)]) {
+    [_delegate hideActivityIndicator];
   }
 }
 
-- (UINavigationController *)presentingNavigationViewController {
-  return _delegate.presentingNavigationViewController;
+- (UIViewController *)presentingSignInController {
+  return _delegate.presentingSignInController;
 }
 
 @end
