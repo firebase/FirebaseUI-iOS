@@ -142,6 +142,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
     if (error) {
       [self showAlertWithMessage:error.localizedDescription];
+      FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
+      [delegate callbackWithCredential:nil error:error result:nil];
       return;
     }
 

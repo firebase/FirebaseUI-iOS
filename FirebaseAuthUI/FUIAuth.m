@@ -23,6 +23,7 @@
 #import <FirebaseAuth/FirebaseAuth.h>
 #import "FUIAuthErrors.h"
 #import "FUIAuthPickerViewController.h"
+#import "FUIAuthSignInUIDelegateHelper.h"
 #import "FUIAuthStrings.h"
 #import "FUIEmailEntryViewController.h"
 #import "FUIPasswordVerificationViewController.h"
@@ -39,7 +40,7 @@ static NSString *const kAppNameCodingKey = @"appName";
 static const char kAuthAssociationKey;
 
 /** @var kErrorUserInfoEmailKey
-    @brief The key for the email address in the userinfo dictionary of a sign in error.
+    @brief The key for the email address in the userInfo dictionary of a sign in error.
  */
 static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
 
@@ -134,8 +135,11 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
 - (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI
             signInUIDelegate:(id<FUIAuthSignInUIDelegate>)delegate
       shownWithoutAuthPicker:(BOOL)shownWithoutAuthPicker {
-  UINavigationController *controller = delegate.presentingNavigationViewController;
-  [delegate incrementActivity];
+  id<FUIAuthSignInUIDelegate> signInUIDelegate =
+      [[FUIAuthSignInUIDelegateHelper alloc] initWithUIDelegate:delegate];
+
+  UINavigationController *controller = signInUIDelegate.presentingNavigationViewController;
+  [signInUIDelegate incrementActivity];
 
   // Sign out first to make sure sign in starts with a clean state.
   [providerUI signOut];
@@ -145,7 +149,7 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
                                 NSError *_Nullable error,
                                 _Nullable FIRAuthResultCallback result) {
     if (error) {
-      [delegate decrementActivity];
+      [signInUIDelegate decrementActivity];
 
       if (shownWithoutAuthPicker || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
         [self invokeResultCallbackWithUser:nil error:error];
@@ -164,14 +168,14 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
         NSString *email = error.userInfo[kErrorUserInfoEmailKey];
         [self handleAccountLinkingForEmail:email
                              newCredential:credential
-                          signInUIDelegate:delegate];
+                          signInUIDelegate:signInUIDelegate];
         if (result) {
           result(nil, error);
         }
         return;
       }
 
-      [delegate decrementActivity];
+      [signInUIDelegate decrementActivity];
 
       if (result) {
         result(user, error);

@@ -38,12 +38,12 @@ static NSString *const kAuthUICodingKey = @"authUI";
 static const CGFloat kActivityIndiactorPadding = 20.0f;
 
 /** @var kActivityIndiactorOverlayCornerRadius
-    @brief The corner radius of the overlay of the acitvity indicator.
+    @brief The corner radius of the overlay of the activity indicator.
  */
 static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
 
 /** @var kActivityIndiactorOverlayOpacity
-    @brief The opacity of the overlay of the acitvity indicator.
+    @brief The opacity of the overlay of the activity indicator.
  */
 static const CGFloat kActivityIndiactorOverlayOpacity = 0.8f;
 

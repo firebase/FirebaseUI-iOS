@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable id<FUIAuthProvider>)providerWithID:(NSString *)providerID;
 
 /** @fn signOutWithError:
-    @brief Signs in with sepcified provider. @see FUIAuthDelegate.authUI:didSignInWithUser:error: 
+    @brief Signs in with specified provider. @see FUIAuthDelegate.authUI:didSignInWithUser:error: 
         for method callback.
     @param providerUI The authentication provider used for signing in.
     @param delegate The UI delegate which handles UI operations.

@@ -132,14 +132,14 @@ typedef void (^FUIAuthAlertActionHandler)(void);
 - (void)onBack;
 
 /** @fn incrementActivity
-    @brief Increment the current acitivity count. If there's positive number of activities, display
+    @brief Increment the current activity count. If there's positive number of activities, display
         and animate the activity indicator with a short period of delay.
     @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
  */
 - (void)incrementActivity;
 
 /** @fn decrementActivity
-    @brief Decrement the current acitivity count. If the count reaches 0, stop and hide the
+    @brief Decrement the current activity count. If the count reaches 0, stop and hide the
         activity indicator.
     @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
  */

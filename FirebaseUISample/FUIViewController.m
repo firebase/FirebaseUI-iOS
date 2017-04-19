@@ -78,11 +78,12 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
 
-  [self prepareStubsForTests];
-  [self mockPhoneAuthServerRequests];
 }
 
 - (IBAction)onAuthorization:(id)sender {
+  [self prepareAuthUIMocks];
+  [self mockPhoneAuthServerRequests];
+
   [self prepareStubs];
   UIViewController *controller = [self.authUIMock authViewController];
   [self presentViewController:controller animated:YES completion:nil];
@@ -179,6 +180,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 
 - (void)prepareStubs {
   [self populateListOfIDPs];
+  OCMStub([self.authUIMock isSignInWithEmailHidden]).andReturn(![self isEmailEnabled]);
 
   switch (_selectedSimulationChoise) {
     case kSimulationNoMocks:
@@ -199,12 +201,14 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   }
 }
 
-- (void)prepareStubsForTests {
+- (void)prepareAuthUIMocks {
+  [self.authMock stopMocking];
   self.authMock = OCMPartialMock([FIRAuth auth]);
 
   id mockedAuth = OCMClassMock([FIRAuth class]);
   OCMStub(ClassMethod([mockedAuth auth])).andReturn(self.authMock);
 
+  [self.authUIMock stopMocking];
   self.authUIMock = OCMPartialMock([self configureFirAuthUI]);
   id mockedAuthUI = OCMClassMock([FUIAuth class]);
   OCMStub(ClassMethod([mockedAuthUI defaultAuthUI])).andReturn(self.authUIMock);
@@ -296,7 +300,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 
 - (FUIAuth *)configureFirAuthUI {
   FUIAuth *authUI = [FUIAuth defaultAuthUI];
-  authUI.signInWithEmailHidden = ![self isEmailEnabled];
+//  authUI.signInWithEmailHidden = ![self isEmailEnabled];
   authUI.delegate = self;
   return authUI;
 }

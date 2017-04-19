@@ -16,6 +16,17 @@
 
 #import <XCTest/XCTest.h>
 
+@implementation XCUIElement (ForceTap)
+- (void) forceTap {
+  if (self.hittable) {
+    [self tap];
+  } else {
+    XCUICoordinate *coordinate = [self coordinateWithNormalizedOffset:CGVectorMake(0.0, 0.0)];
+    [coordinate tap];
+  }
+}
+@end
+
 @interface FirebaseUISampleUITests : XCTestCase
 
 @end
@@ -104,6 +115,44 @@
   [[[[app.navigationBars[@"Sign in"] childrenMatchingType:XCUIElementTypeButton] matchingIdentifier:@"Back"] elementBoundByIndex:0] tap];
   [signInWithEmailNavigationBar.buttons[@"Cancel"] tap];
   [app.alerts[@"Error"].buttons[@"Close"] tap];
+
+}
+
+- (void)testPhoneAuthCoutryPicker {
+  XCUIApplication *app = [[XCUIApplication alloc] init];
+  XCUIElementQuery *tablesQuery = app.tables;
+
+  [tablesQuery.cells.staticTexts[@"Phone"] tap];
+  [app.toolbars.buttons[@"Sign In"] tap];
+  [app.buttons[@"Sign in with phone"] tap];
+
+  [tablesQuery.staticTexts[@"Country"] tap];
+
+  [app.tables.cells.staticTexts[@"\U0001F1E6\U0001F1F8 American Samoa"] tap];
+
+  [tablesQuery.staticTexts[@"Country"] tap];
+  [app.tables.searchFields[@"Search"] tap];
+  [app.searchFields[@"Search"] typeText:@"united"];
+
+  [app.tables.cells.staticTexts[@"\U0001F1FA\U0001F1F8 United States"]  forceTap];
+
+  [app.navigationBars[@"Enter phone number"].buttons[@"Cancel"] tap];
+  [app.navigationBars[@"Welcome"].buttons[@"Cancel"] tap];
+  [app.alerts[@"Error"].buttons[@"Close"] tap];
+}
+
+- (void)testPhoneAuthFlow {
+  XCUIApplication *app = [[XCUIApplication alloc] init];
+  XCUIElementQuery *tablesQuery = app.tables;
+
+  [tablesQuery.cells.staticTexts[@"Phone"] tap];
+  [app.toolbars.buttons[@"Sign In"] tap];
+  [app.buttons[@"Sign in with phone"] tap];
+
+  [tablesQuery.cells[@"PhoneNumberCellAccessibilityID"].textFields[@"Phone number"] tap];
+  [[tablesQuery.cells[@"PhoneNumberCellAccessibilityID"]
+       childrenMatchingType:XCUIElementTypeTextField].element typeText:@"123456789"];
+  [app.navigationBars[@"Enter phone number"].buttons[@"NextButtonAccessibilityID"] tap];
 
 }
 
