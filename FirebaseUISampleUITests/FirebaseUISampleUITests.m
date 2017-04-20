@@ -154,6 +154,51 @@
        childrenMatchingType:XCUIElementTypeTextField].element typeText:@"123456789"];
   [app.navigationBars[@"Enter phone number"].buttons[@"NextButtonAccessibilityID"] tap];
 
+  [app.keyboards.keys[@"1"] tap];
+  [app.keyboards.keys[@"2"] tap];
+  [app.keyboards.keys[@"3"] tap];
+  [app.keyboards.keys[@"4"] tap];
+  [app.keyboards.keys[@"5"] tap];
+  
+  XCUIElement *nextbuttonaccessibilityidButton =
+      app.navigationBars[@"Verify phone number"].buttons[@"NextButtonAccessibilityID"];
+  [nextbuttonaccessibilityidButton tap];
+  [app.keyboards.keys[@"6"] tap];
+  [nextbuttonaccessibilityidButton tap];
+
+}
+
+- (void)testDirectPhoneAuthSignIn {
+  XCUIApplication *app = [[XCUIApplication alloc] init];
+  XCUIElementQuery *tablesQuery = app.tables;
+  [tablesQuery.cells.staticTexts[@"Phone"] tap];
+  [tablesQuery.cells.staticTexts[@"Email"] tap];
+  
+  XCUIElement *signInButton = app.toolbars.buttons[@"Sign In"];
+  [signInButton tap];
+
+  XCUIElement *textField = [tablesQuery.cells[@"PhoneNumberCellAccessibilityID"]
+                               childrenMatchingType:XCUIElementTypeTextField].element;
+  [textField typeText:@"1"];
+
+  XCUIElement *enterPhoneNumberNavigationBar = app.navigationBars[@"Enter phone number"];
+  XCUIElement *nextbuttonaccessibilityidButton =
+      enterPhoneNumberNavigationBar.buttons[@"NextButtonAccessibilityID"];
+  [nextbuttonaccessibilityidButton tap];
+  [app.buttons[@"+11"] tap];
+  [enterPhoneNumberNavigationBar.buttons[@"Cancel"] tap];
+  [app.alerts[@"Error"].buttons[@"Close"] tap];
+  [signInButton tap];
+  [textField typeText:@"2"];
+  [nextbuttonaccessibilityidButton tap];
+  [app.keyboards.keys[@"1"] tap];
+  [app.keyboards.keys[@"2"] tap];
+  [app.keyboards.keys[@"3"] tap];
+  [app.keyboards.keys[@"4"] tap];
+  [app.keyboards.keys[@"5"] tap];
+  [app.keyboards.keys[@"6"] tap];
+  [app.navigationBars[@"Verify phone number"].buttons[@"NextButtonAccessibilityID"] tap];
+  [signInButton tap];
 }
 
 @end

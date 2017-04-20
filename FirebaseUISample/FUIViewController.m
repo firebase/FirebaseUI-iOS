@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   kIDPPhone
 };
 
-@interface FUIViewController () <FUIAuthDelegate, NSURLSessionDataDelegate>
+@interface FUIViewController () <FUIAuthDelegate, NSURLSessionDataDelegate, FUIAuthSignInUIDelegate>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAuthorization;
 @property (weak, nonatomic) IBOutlet UILabel *labelUserEmail;
 @property (nonatomic, assign) FIRSimulationChoise selectedSimulationChoise;
@@ -60,7 +60,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 @end
 
 @implementation FUIViewController {
-  NSMutableArray *_authProviders;
+  NSMutableArray<id<FUIAuthProvider>> *_authProviders;
 }
 
 - (void)viewDidLoad {
@@ -85,13 +85,28 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   [self mockPhoneAuthServerRequests];
 
   [self prepareStubs];
-  UIViewController *controller = [self.authUIMock authViewController];
-  [self presentViewController:controller animated:YES completion:nil];
+
+  BOOL shouldSkipPhoneAuthPicker = _authProviders.count == 1 &&
+      [_authProviders.firstObject.providerID isEqualToString:FIRPhoneAuthProviderID] &&
+          [self.authUIMock isSignInWithEmailHidden];
+  if (shouldSkipPhoneAuthPicker) {
+    [self.authUIMock signInWithProviderUI:_authProviders.firstObject signInUIDelegate:self];
+  } else {
+    UIViewController *controller = [self.authUIMock authViewController];
+    [self presentViewController:controller animated:YES completion:nil];
+  }
+
 }
 
 - (void)setAuthUIMock:(id)authUIMock {
   _authUIMock = authUIMock;
   [self configureFirAuthUIProviders];
+}
+
+#pragma mark - FUIAuthSignInUIDelegate
+
+- (UIViewController *)presentingSignInController {
+  return self;
 }
 
 #pragma mark - UITableViewControllerDelegate methods
