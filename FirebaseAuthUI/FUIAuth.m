@@ -184,9 +184,13 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
       if (error) {
         [self invokeResultCallbackWithUser:user error:error];
       } else {
-        [controller dismissViewControllerAnimated:YES completion:^{
+        if (controller.presentingViewController) {
+          [controller dismissViewControllerAnimated:YES completion:^{
+            [self invokeResultCallbackWithUser:user error:error];
+          }];
+        } else {
           [self invokeResultCallbackWithUser:user error:error];
-        }];
+        }
       }
     }];
   }];
