@@ -33,12 +33,6 @@ static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
  */
 static const CGFloat kActivityIndiactorOverlayOpacity = 0.8f;
 
-/** @var kActivityIndiactorAnimationDelay
-    @brief The time delay before the activity indicator is actually animated.
- */
-static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
-
-
 @implementation FUIAuthUtils
 
 + (NSBundle *)frameworkBundle {

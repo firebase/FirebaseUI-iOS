@@ -22,6 +22,11 @@
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
 
+/** @var kActivityIndiactorAnimationDelay
+    @brief The time delay before the activity indicator is actually animated.
+ */
+static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
+
 /** @var kEmailRegex
     @brief Regular expression for matching email addresses.
  */

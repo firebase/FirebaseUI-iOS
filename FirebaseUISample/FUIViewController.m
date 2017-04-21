@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   kIDPPhone
 };
 
-@interface FUIViewController () <FUIAuthDelegate, NSURLSessionDataDelegate, FUIAuthSignInUIDelegate>
+@interface FUIViewController () <FUIAuthDelegate, NSURLSessionDataDelegate>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAuthorization;
 @property (weak, nonatomic) IBOutlet UILabel *labelUserEmail;
 @property (nonatomic, assign) FIRSimulationChoise selectedSimulationChoise;
@@ -90,7 +90,8 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
       [_authProviders.firstObject.providerID isEqualToString:FIRPhoneAuthProviderID] &&
           [self.authUIMock isSignInWithEmailHidden];
   if (shouldSkipPhoneAuthPicker) {
-    [self.authUIMock signInWithProviderUI:_authProviders.firstObject signInUIDelegate:self];
+    FUIPhoneAuth *provider = _authProviders.firstObject;
+    [provider signInWithPresentingViewController:self];
   } else {
     UIViewController *controller = [self.authUIMock authViewController];
     [self presentViewController:controller animated:YES completion:nil];
