@@ -168,7 +168,7 @@
 		C32D1A671EA6F75100A9F8A2 /* FUIAuthSignInUIDelegateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C32D1A651EA6F75100A9F8A2 /* FUIAuthSignInUIDelegateHelper.h */; };
 		C32D1A681EA6F75100A9F8A2 /* FUIAuthSignInUIDelegateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D1A661EA6F75100A9F8A2 /* FUIAuthSignInUIDelegateHelper.m */; };
 		C32D1A691EA6F76300A9F8A2 /* FUIAuthSignInUIDelegateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D1A661EA6F75100A9F8A2 /* FUIAuthSignInUIDelegateHelper.m */; };
-		C33B0F3D1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h in Headers */ = {isa = PBXBuildFile; fileRef = C33B0F3C1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C33B0F3D1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h in Headers */ = {isa = PBXBuildFile; fileRef = C33B0F3C1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h */; };
 		C343D29B1E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = C343D2991E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h */; };
 		C343D2A01E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C343D29E1E96CFD400DD9C61 /* FUIPhoneAuthStrings.h */; };
 		C343D2A11E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C343D29E1E96CFD400DD9C61 /* FUIPhoneAuthStrings.h */; };
@@ -220,7 +220,7 @@
 		C3BE738D1E625D9F00BCD147 /* FUIStaticContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE738A1E625D9F00BCD147 /* FUIStaticContentTableViewController.m */; };
 		C3BE738E1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE738B1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib */; };
 		C3BE738F1E625DAD00BCD147 /* FUIStaticContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE738A1E625D9F00BCD147 /* FUIStaticContentTableViewController.m */; };
-		C3BE73BE1E64D1D000BCD147 /* FUIAccountSettingsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BE73AF1E64D1D000BCD147 /* FUIAccountSettingsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3BE73BE1E64D1D000BCD147 /* FUIAccountSettingsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BE73AF1E64D1D000BCD147 /* FUIAccountSettingsViewController.h */; };
 		C3BE73BF1E64D1D000BCD147 /* FUIAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE73B01E64D1D000BCD147 /* FUIAccountSettingsViewController.m */; };
 		C3BE73C01E64D1D000BCD147 /* FUIAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE73B01E64D1D000BCD147 /* FUIAccountSettingsViewController.m */; };
 		C3BE73C11E64D1D000BCD147 /* FUIAccountSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE73B11E64D1D000BCD147 /* FUIAccountSettingsViewController.xib */; };

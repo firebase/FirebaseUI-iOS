@@ -97,7 +97,8 @@ NS_ASSUME_NONNULL_BEGIN
     }
   }
 
-  [self.delegate.authUI invokeOperationCallback:[self operationType] error:error];
+  // TODO: Assistant Settings will be released later.
+  // [self.delegate.authUI invokeOperationCallback:[self operationType] error:error];
 }
 
 - (void)showSelectProviderDialogWithAlertTitle:(nullable NSString *)title

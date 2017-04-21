@@ -253,7 +253,7 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
 - (void)updateResendLabel {
   NSTimeInterval minutes = _resendConfirmationCodeSeconds / 60;
   NSTimeInterval seconds = (NSUInteger)_resendConfirmationCodeSeconds % 60;
-  NSString *formattedTime = [NSString stringWithFormat:@"%02.0f:%02.0f", minutes, seconds];
+  NSString *formattedTime = [NSString stringWithFormat:@"%01.0f:%02.0f", minutes, seconds];
 
   _resendConfirmationCodeTimerLabel.text =
       [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeTimer),

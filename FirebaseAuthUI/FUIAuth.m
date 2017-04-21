@@ -338,6 +338,8 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
   });
 }
 
+/*
+ // TODO: Assistant Settings will be released later.
 - (void)invokeOperationCallback:(FUIAccountSettingsOperationType)operation
                           error:(NSError *_Nullable)error {
   dispatch_async(dispatch_get_main_queue(), ^{
@@ -346,6 +348,7 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
     }
   });
 }
+ */
 
 - (nullable id<FUIAuthProvider>)providerWithID:(NSString *)providerID {
   NSArray<id<FUIAuthProvider>> *providers = self.providers;

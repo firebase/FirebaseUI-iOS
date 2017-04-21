@@ -19,7 +19,6 @@
 #import "FUISamplesViewController.h"
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
-#import "FUIAccountSettingsViewController.h"
 #import "FUIAuthViewController.h"
 #import "FUIChatViewController.h"
 #import "FUISample.h"
@@ -52,16 +51,6 @@
             [storyboard instantiateViewControllerWithIdentifier:@"FUIAuthViewController"];
         return controller;
       }],
-
-    [FUISample sampleWithTitle:@"Account Settings"
-            sampleDescription:@"Demonstrates the FirebaseAuthUI user account management flow"
-                   controller:^UIViewController *{
-        [FUIAuth defaultAuthUI].providers = [FUIAuthViewController getAllIDPs];
-        UIViewController *controller =
-            [[FUIAccountSettingsViewController alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
-        return controller;
-      }],
-
     [FUISample sampleWithTitle:@"Chat"
             sampleDescription:@"Demonstrates using a FUICollectionViewDataSource to load data from "
                                "Firebase Database into a UICollectionView for a basic chat app."

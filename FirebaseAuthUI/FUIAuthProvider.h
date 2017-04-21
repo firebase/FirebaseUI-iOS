@@ -85,7 +85,8 @@ typedef void (^FIRAuthProviderSignInCompletionBlock) (
         flow.
     @param email The email address of the user if it's known.
     @param presentingViewController The view controller used to present the UI.
-    @param completion See remarks. A block to invoke when the sign-in process completes.
+    @param completion See remarks. A block which should be invoked when the sign-in process 
+        (using @c FIRAuthCredential) completes.
  */
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController

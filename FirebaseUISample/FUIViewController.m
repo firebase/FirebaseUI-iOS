@@ -315,7 +315,6 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 
 - (FUIAuth *)configureFirAuthUI {
   FUIAuth *authUI = [FUIAuth defaultAuthUI];
-//  authUI.signInWithEmailHidden = ![self isEmailEnabled];
   authUI.delegate = self;
   return authUI;
 }
@@ -326,9 +325,12 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 }
 
 - (void)showAccountManager {
+  /*
+   // TODO: Assistant Settings will be released later.
   UIViewController *controller =
       [[FUIAccountSettingsViewController alloc] initWithAuthUI:self.authUIMock];
   [self.navigationController pushViewController:controller animated:YES];
+   */
 }
 
 - (void)prepareForAccountManagerWithPasswordWithoutLinkedAccount {

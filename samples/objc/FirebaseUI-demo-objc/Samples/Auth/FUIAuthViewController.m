@@ -239,7 +239,7 @@ static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
       if (!detailedError) {
         detailedError = error;
       }
-      [self showAlert:detailedError.localizedDescription];
+      NSLog(@"ERROR: %@", detailedError.localizedDescription);
     }
   }
 }
