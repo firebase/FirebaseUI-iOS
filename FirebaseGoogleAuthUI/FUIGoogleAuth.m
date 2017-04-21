@@ -20,6 +20,7 @@
 #import <FirebaseAuth/FIRGoogleAuthProvider.h>
 #import <FirebaseAuth/FIRUserInfo.h>
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>
+#import <FirebaseAuthUI/FUIAuthUtils.h>
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <FirebaseCore/FirebaseCore.h>
 #import <GoogleSignIn/GoogleSignIn.h>
@@ -175,10 +176,17 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
     }
     return;
   }
+  UIActivityIndicatorView *activityView =
+      [FUIAuthUtils addActivityIndicator:_presentingViewController.view];
+  [activityView startAnimating];
   FIRAuthCredential *credential =
       [FIRGoogleAuthProvider credentialWithIDToken:user.authentication.idToken
                                        accessToken:user.authentication.accessToken];
-  [self callbackWithCredential:credential error:nil result:nil];
+  [self callbackWithCredential:credential error:nil result:^(FIRUser * _Nullable user,
+                                                             NSError * _Nullable error) {
+    [activityView stopAnimating];
+    [activityView removeFromSuperview];
+  }];
 }
 
 #pragma mark - GIDSignInUIDelegate methods

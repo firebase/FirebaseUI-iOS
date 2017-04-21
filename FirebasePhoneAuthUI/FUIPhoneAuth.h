@@ -33,6 +33,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI NS_DESIGNATED_INITIALIZER;
 
+/** @fn signInWithPresentingViewController:
+    @brief Signs in with phone auth provider. @see FUIAuthDelegate.authUI:didSignInWithUser:error:
+        for method callback.
+    @param presentingViewController The view controller used to present the UI.
+ */
+- (void)signInWithPresentingViewController:(UIViewController *)presentingViewController;
+
 @end
 
 NS_ASSUME_NONNULL_END

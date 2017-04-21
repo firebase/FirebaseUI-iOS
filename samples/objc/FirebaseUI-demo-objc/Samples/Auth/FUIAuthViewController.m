@@ -53,7 +53,7 @@ static const CGFloat kActivityIndiactorOverlayOpacity = 0.8f;
 static const CGFloat kActivityIndiactorPadding = 20.0f;
 static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
 
-@interface FUIAuthViewController () <FUIAuthDelegate, FUIAuthSignInUIDelegate>
+@interface FUIAuthViewController () <FUIAuthDelegate>
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellSignIn;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellName;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellEmail;
@@ -214,7 +214,8 @@ static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
         [self.authUI.providers.firstObject.providerID isEqualToString:FIRPhoneAuthProviderID] &&
             self.authUI.isSignInWithEmailHidden;
     if (shouldSkipPhoneAuthPicker) {
-      [self.authUI signInWithProviderUI:self.authUI.providers.firstObject signInUIDelegate:self];
+      FUIPhoneAuth *provider = self.authUI.providers.firstObject;
+      [provider signInWithPresentingViewController:self];
     } else {
       UINavigationController *controller = [self.authUI authViewController];
       if (_isCustomAuthDelegateSelected) {
@@ -242,37 +243,6 @@ static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
       NSLog(@"ERROR: %@", detailedError.localizedDescription);
     }
   }
-}
-
-#pragma mark - FUIAuthSignInUIDelegate methods
-
-- (void)showActivityIndicator {
-  _activityCount++;
-
-  // Delay the display of acitivty indiactor for a short period of time.
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
-                              (int64_t)(kActivityIndiactorAnimationDelay * NSEC_PER_SEC)),
-                 dispatch_get_main_queue(), ^{
-    if (_activityCount > 0) {
-      [_activityIndicator startAnimating];
-    }
-  });
-}
-
-- (void)hideActivityIndicator {
-  _activityCount--;
-
-  if (_activityCount < 0) {
-    NSLog(@"Unbalanced calls to incrementActivity and decrementActivity.");
-    _activityCount = 0;
-  }
-
-  if (_activityCount == 0) {
-    [_activityIndicator stopAnimating];
-  }
-}
-- (UIViewController *)presentingSignInController {
-  return self;
 }
 
 #pragma mark - Helper Methods

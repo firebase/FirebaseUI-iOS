@@ -23,7 +23,6 @@
 #import <FirebaseAuth/FirebaseAuth.h>
 #import "FUIAuthErrors.h"
 #import "FUIAuthPickerViewController.h"
-#import "FUIAuthSignInUIDelegateHelper.h"
 #import "FUIAuthStrings.h"
 #import "FUIEmailEntryViewController.h"
 #import "FUIPasswordVerificationViewController.h"
@@ -128,38 +127,24 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
 }
 
 - (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI
-            signInUIDelegate:(id<FUIAuthSignInUIDelegate>)delegate {
-  [self signInWithProviderUI:providerUI signInUIDelegate:delegate shownWithoutAuthPicker:YES];
-}
-
-- (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI
-            signInUIDelegate:(id<FUIAuthSignInUIDelegate>)delegate
-      shownWithoutAuthPicker:(BOOL)shownWithoutAuthPicker {
-  id<FUIAuthSignInUIDelegate> signInUIDelegate =
-      [[FUIAuthSignInUIDelegateHelper alloc] initWithUIDelegate:delegate];
-
-  UIViewController *controller = signInUIDelegate.presentingSignInController;
-  [signInUIDelegate showActivityIndicator];
+    presentingViewController:(UIViewController *)presentingViewController {
 
   // Sign out first to make sure sign in starts with a clean state.
   [providerUI signOut];
   [providerUI signInWithEmail:nil
-     presentingViewController:controller
+     presentingViewController:presentingViewController
                    completion:^(FIRAuthCredential *_Nullable credential,
                                 NSError *_Nullable error,
                                 _Nullable FIRAuthResultCallback result) {
     if (error) {
-      [signInUIDelegate hideActivityIndicator];
-
-      if (shownWithoutAuthPicker || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
+      if ([presentingViewController isKindOfClass:[FUIAuthPickerViewController class]]
+              || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
         [self invokeResultCallbackWithUser:nil error:error];
       }
-
       if (result) {
         result(nil, error);
       }
       return;
-
     }
 
     [self.auth signInWithCredential:credential
@@ -168,14 +153,10 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
         NSString *email = error.userInfo[kErrorUserInfoEmailKey];
         [self handleAccountLinkingForEmail:email
                              newCredential:credential
-                          signInUIDelegate:signInUIDelegate];
-        if (result) {
-          result(nil, error);
-        }
+                  presentingViewController:presentingViewController
+                              singInResult:result];
         return;
       }
-
-      [signInUIDelegate hideActivityIndicator];
 
       if (result) {
         result(user, error);
@@ -184,8 +165,8 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
       if (error) {
         [self invokeResultCallbackWithUser:user error:error];
       } else {
-        if (controller.presentingViewController) {
-          [controller dismissViewControllerAnimated:YES completion:^{
+        if (presentingViewController.presentingViewController) {
+          [presentingViewController dismissViewControllerAnimated:YES completion:^{
             [self invokeResultCallbackWithUser:user error:error];
           }];
         } else {
@@ -198,21 +179,23 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
 
 - (void)handleAccountLinkingForEmail:(NSString *)email
                        newCredential:(FIRAuthCredential *)newCredential
-            signInUIDelegate:(id<FUIAuthSignInUIDelegate>)delegate {
-  UIViewController *controller = delegate.presentingSignInController;
+            presentingViewController:(UIViewController *)presentingViewController
+                        singInResult:(_Nullable FIRAuthResultCallback) result {
 
   [self.auth fetchProvidersForEmail:email
                          completion:^(NSArray<NSString *> *_Nullable providers,
                                       NSError *_Nullable error) {
-    [delegate hideActivityIndicator];
+    if (result) {
+      result(nil, error);
+    }
 
     if (error) {
       if (error.code == FIRAuthErrorCodeInvalidEmail) {
         // This should never happen because the email address comes from the backend.
         [FUIAuthBaseViewController showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)
-                               presentingViewController:controller];
+                               presentingViewController:presentingViewController];
       } else {
-        [controller dismissViewControllerAnimated:YES completion:^{
+        [presentingViewController dismissViewControllerAnimated:YES completion:^{
           [self invokeResultCallbackWithUser:nil error:error];
         }];
       }
@@ -222,7 +205,7 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
       // This should never happen because the user must be registered.
       [FUIAuthBaseViewController showAlertWithMessage:
           FUILocalizedString(kStr_CannotAuthenticateError)
-                             presentingViewController:controller];
+                             presentingViewController:presentingViewController];
       return;
     }
     NSString *bestProviderID = providers[0];
@@ -240,11 +223,11 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
             [[FUIPasswordVerificationViewController alloc] initWithAuthUI:self
                                                                     email:email
                                                             newCredential:newCredential];
-
       }
-      if (controller.navigationController) {
+      if (presentingViewController.navigationController) {
         [FUIAuthBaseViewController pushViewController:passwordController
-                                 navigationController:controller.navigationController];
+                                 navigationController:
+            presentingViewController.navigationController];
       }
       return;
     }
@@ -253,26 +236,22 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
       // Unsupported provider.
       [FUIAuthBaseViewController showAlertWithMessage:
           FUILocalizedString(kStr_CannotAuthenticateError)
-                             presentingViewController:controller];
+                             presentingViewController:presentingViewController];
       return;
     }
 
     [FUIAuthBaseViewController showSignInAlertWithEmail:email
                                                provider:bestProvider
-                               presentingViewController:controller
+                               presentingViewController:presentingViewController
                                           signinHandler:^{
-      [delegate showActivityIndicator];
-
       // Sign out first to make sure sign in starts with a clean state.
       [bestProvider signOut];
       [bestProvider signInWithEmail:email
-           presentingViewController:controller
+           presentingViewController:presentingViewController
                          completion:^(FIRAuthCredential *_Nullable credential,
                                       NSError *_Nullable error,
                                       _Nullable FIRAuthResultCallback result) {
         if (error) {
-          [delegate hideActivityIndicator];
-
           if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
             // User cancelled sign in, Do nothing.
             if (result) {
@@ -280,29 +259,14 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
             }
             return;
           }
-
-          if (error) {
-            [self invokeResultCallbackWithUser:nil error:error];
-          } else {
-            [controller dismissViewControllerAnimated:YES completion:^{
-              [self invokeResultCallbackWithUser:nil error:error];
-            }];
-          }
+          [self invokeResultCallbackWithUser:nil error:error];
           return;
         }
 
         [self.auth signInWithCredential:credential completion:^(FIRUser *_Nullable user,
                                                                 NSError *_Nullable error) {
           if (error) {
-            [delegate hideActivityIndicator];
-
-            if (error) {
-              [self invokeResultCallbackWithUser:nil error:error];
-            } else {
-              [controller dismissViewControllerAnimated:YES completion:^{
-                [self invokeResultCallbackWithUser:nil error:error];
-              }];
-            }
+            [self invokeResultCallbackWithUser:nil error:error];
             if (result) {
               result(nil, error);
             }
@@ -311,14 +275,12 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
 
           [user linkWithCredential:newCredential completion:^(FIRUser *_Nullable user,
                                                               NSError *_Nullable error) {
-            [delegate hideActivityIndicator];
             if (result) {
               result(user, error);
             }
-
             // Ignore any error (most likely caused by email mismatch) and treat the user as
             // successfully signed in.
-            [controller dismissViewControllerAnimated:YES completion:^{
+            [presentingViewController dismissViewControllerAnimated:YES completion:^{
               [self invokeResultCallbackWithUser:user error:nil];
             }];
           }];

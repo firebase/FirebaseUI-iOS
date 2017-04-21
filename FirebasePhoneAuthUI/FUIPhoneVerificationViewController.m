@@ -159,10 +159,12 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   FIRAuthCredential *credential =
     [provider credentialWithVerificationID:_verificationID verificationCode:verificationCode];
 
+  [self incrementActivity];
   FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
   [delegate callbackWithCredential:credential
                              error:nil
                             result:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+    [self decrementActivity];
     if (!error || error.code == FUIAuthErrorCodeUserCancelledSignIn) {
       [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } else if (error.code >= FIRAuthErrorCodeMissingPhoneNumber

@@ -125,32 +125,6 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
                                                                          newCredential:(FIRAuthCredential *)newCredential;
 @end
 
-/** @protocol FUIAuthSignInUIDelegate
-    @brief A delegate that receives sign in callbacks and provides custom UI for sign in process.
- */
-@protocol FUIAuthSignInUIDelegate <NSObject>
-
-/** @fn presentingSignInController
-    @brief Returns @c UIViewController from which sign in UI is presented.
- */
-- (UIViewController *)presentingSignInController;
-
-@optional
-
-/** @fn showActivityIndicator
-    @brief Called when UI should notify user about background activity.
-    @remarks Calls to @c showActivityIndicator and @c hideActivityIndicator should be balanced.
- */
-- (void)showActivityIndicator;
-
-/** @fn hideActivityIndicator
-    @brief Called when background activity is finished.
-    @remarks Calls to @c showActivityIndicator and @c hideActivityIndicator should be balanced.
- */
-- (void)hideActivityIndicator;
-
-@end
-
 /** @class FUIAuth
     @brief Provides various iOS UIs for Firebase Auth.
  */
@@ -237,15 +211,6 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
         will contain more information about the error encountered.
  */
 - (BOOL)signOutWithError:(NSError *_Nullable *_Nullable)error;
-
-/** @fn signOutWithError:
-    @brief Signs in with specified provider. @see FUIAuthDelegate.authUI:didSignInWithUser:error:
-        for method callback.
-    @param providerUI The authentication provider used for signing in.
-    @param delegate The UI delegate which handles UI operations.
- */
-- (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI
-            signInUIDelegate:(id<FUIAuthSignInUIDelegate>)delegate;
 
 @end
 

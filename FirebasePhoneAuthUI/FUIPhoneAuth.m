@@ -16,6 +16,7 @@
 
 #import "FUIPhoneAuth_Internal.h"
 
+#import "FUIAuth_Internal.h"
 #import "FUIPhoneAuthStrings.h"
 #import "FUIPhoneEntryViewController.h"
 #import <FirebaseAuth/FIRPhoneAuthProvider.h>
@@ -77,6 +78,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIColor *)buttonTextColor {
   return [UIColor whiteColor];
+}
+
+- (void)signInWithPresentingViewController:(UIViewController *)presentingViewController {
+  [_authUI signInWithProviderUI:self presentingViewController:presentingViewController];
 }
 
 - (void)signInWithEmail:(nullable NSString *)email

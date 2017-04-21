@@ -53,9 +53,6 @@ static const CGFloat kSignInButtonVerticalMargin = 24.0f;
  */
 static const CGFloat kButtonContainerBottomMargin = 56.0f;
 
-@interface FUIAuthPickerViewController () <FUIAuthSignInUIDelegate>
-@end
-
 @implementation FUIAuthPickerViewController {
   UIView *_buttonContainerView;
 }
@@ -153,23 +150,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 }
 
 - (void)didTapSignInButton:(FUIAuthSignInButton *)button {
-  [self.authUI signInWithProviderUI:button.providerUI
-                   signInUIDelegate:self
-             shownWithoutAuthPicker:NO];
-}
-
-#pragma mark - FUIAuthSignInUIDelegate methods
-
-- (UIViewController *)presentingSignInController {
-  return self;
-}
-
-- (void)showActivityIndicator {
-  [self incrementActivity];
-}
-
-- (void)hideActivityIndicator {
-  [self decrementActivity];
+  [self.authUI signInWithProviderUI:button.providerUI presentingViewController:self];
 }
 
 @end

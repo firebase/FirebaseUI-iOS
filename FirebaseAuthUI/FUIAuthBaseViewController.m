@@ -32,26 +32,6 @@ static NSString *const kEmailRegex = @".+@([a-zA-Z0-9\\-]+\\.)+[a-zA-Z0-9]{2,63}
  */
 static NSString *const kAuthUICodingKey = @"authUI";
 
-/** @var kActivityIndiactorPadding
-    @brief The padding between the activity indiactor and its overlay.
- */
-static const CGFloat kActivityIndiactorPadding = 20.0f;
-
-/** @var kActivityIndiactorOverlayCornerRadius
-    @brief The corner radius of the overlay of the activity indicator.
- */
-static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
-
-/** @var kActivityIndiactorOverlayOpacity
-    @brief The opacity of the overlay of the activity indicator.
- */
-static const CGFloat kActivityIndiactorOverlayOpacity = 0.8f;
-
-/** @var kActivityIndiactorAnimationDelay
-    @brief The time delay before the activity indicator is actually animated.
- */
-static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
-
 @implementation FUIAuthBaseViewController {
   /** @var _activityIndicator
       @brief A spinner that is displayed when there's an ongoing activity.
@@ -72,16 +52,7 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
     _auth = authUI.auth;
     _authUI = authUI;
 
-    _activityIndicator =
-        [[UIActivityIndicatorView alloc]
-            initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    _activityIndicator.frame = CGRectInset(_activityIndicator.frame,
-                                           -kActivityIndiactorPadding,
-                                           -kActivityIndiactorPadding);
-    _activityIndicator.backgroundColor =
-        [UIColor colorWithWhite:0 alpha:kActivityIndiactorOverlayOpacity];
-    _activityIndicator.layer.cornerRadius = kActivityIndiactorOverlayCornerRadius;
-    [self.view addSubview:_activityIndicator];
+    _activityIndicator = [[FUIAuthUtils class] addActivityIndicator:self.view];
   }
   return self;
 }

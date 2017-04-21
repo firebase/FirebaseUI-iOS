@@ -42,17 +42,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable id<FUIAuthProvider>)providerWithID:(NSString *)providerID;
 
-/** @fn signOutWithError:
+/** @fn signInWithProviderUI:presentingViewController:
     @brief Signs in with specified provider. @see FUIAuthDelegate.authUI:didSignInWithUser:error: 
         for method callback.
     @param providerUI The authentication provider used for signing in.
-    @param delegate The UI delegate which handles UI operations.
-    @param shownWithoutAuthPicker Defines if sign in flow was shown without 
-        @c FUIAuthPickerViewController.
+    @param presentingViewController The view controller used to present the UI.
  */
 - (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI
-            signInUIDelegate:(id<FUIAuthSignInUIDelegate>)delegate
-      shownWithoutAuthPicker:(BOOL)shownWithoutAuthPicker;
+    presentingViewController:(UIViewController *)presentingViewController;
 
 @end
 

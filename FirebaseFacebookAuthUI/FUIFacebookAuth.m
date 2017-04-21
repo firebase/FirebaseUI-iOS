@@ -20,6 +20,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>
+#import <FirebaseAuthUI/FUIAuthUtils.h>
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
@@ -47,6 +48,11 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
       @brief The callback which should be invoked when the sign in flow completes (or is cancelled.)
    */
   FIRAuthProviderSignInCompletionBlock _pendingSignInCallback;
+
+  /** @var _presentingViewController
+      @brief The presenting view controller for interactive sign-in.
+   */
+  UIViewController *_presentingViewController;
 }
 
 - (instancetype)initWithPermissions:(NSArray *)permissions {
@@ -137,6 +143,8 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   _pendingSignInCallback = completion;
+  _presentingViewController = presentingViewController;
+
   [_loginManager logInWithReadPermissions:_scopes
                        fromViewController:presentingViewController
                                   handler:^(FBSDKLoginManagerLoginResult *result,
@@ -183,7 +191,14 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
     return;
   }
   FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:accessToken];
-  [self callbackWithCredential:credential error:nil result:nil];
+  UIActivityIndicatorView *activityView =
+      [FUIAuthUtils addActivityIndicator:_presentingViewController.view];
+  [activityView startAnimating];
+  [self callbackWithCredential:credential error:nil result:^(FIRUser * _Nullable user,
+                                                             NSError * _Nullable error) {
+    [activityView stopAnimating];
+    [activityView removeFromSuperview];
+  }];
 }
 
 /** @fn callbackWithCredential:error:
