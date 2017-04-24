@@ -83,18 +83,18 @@
                        completion:^(FIRAuthCredential *_Nullable credential,
                                     NSError *_Nullable error,
                                     FIRAuthResultCallback _Nullable result) {
-                         XCTAssertNil(error);
-                         XCTAssertNotNil(credential);
-                         XCTAssertNil(result);
-                         FIRAuthCredential *expectedCredential = [FIRTwitterAuthProvider credentialWithToken:testToken secret:testSecret];
-                         XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
+    XCTAssertNil(error);
+    XCTAssertNotNil(credential);
+    XCTAssertNotNil(result);
+    FIRAuthCredential *expectedCredential = [FIRTwitterAuthProvider credentialWithToken:testToken secret:testSecret];
+    XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
 
-                         //verify that we are using token from server
-                         OCMVerify([mockSession authToken]);
-                         OCMVerify([mockSession authTokenSecret]);
+    //verify that we are using token from server
+    OCMVerify([mockSession authToken]);
+    OCMVerify([mockSession authTokenSecret]);
 
-                         [expectation fulfill];
-                       }];
+    [expectation fulfill];
+  }];
   [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];
@@ -121,12 +121,12 @@
                        completion:^(FIRAuthCredential *_Nullable credential,
                                     NSError *_Nullable error,
                                     FIRAuthResultCallback _Nullable result) {
-                         XCTAssertNil(credential);
-                         XCTAssertNotNil(error);
-                         XCTAssertNil(result);
-                         XCTAssertEqualObjects(error.userInfo[NSUnderlyingErrorKey], loginError);
-                         [expectation fulfill];
-                       }];
+    XCTAssertNil(credential);
+    XCTAssertNotNil(error);
+    XCTAssertNil(result);
+    XCTAssertEqualObjects(error.userInfo[NSUnderlyingErrorKey], loginError);
+    [expectation fulfill];
+  }];
   [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];

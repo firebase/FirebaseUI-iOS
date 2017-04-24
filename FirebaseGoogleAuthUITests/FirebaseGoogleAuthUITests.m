@@ -87,7 +87,6 @@
     [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil];
   });
 
-
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
 
   [_mockProvider signInWithEmail:nil
@@ -95,14 +94,18 @@
                       completion:^(FIRAuthCredential *_Nullable credential,
                                    NSError *_Nullable error,
                                    FIRAuthResultCallback _Nullable result) {
-                        XCTAssertNil(error);
-                        XCTAssertNil(result);
-                        XCTAssertNotNil(credential);
-                        FIRAuthCredential *expectedCredential = [FIRGoogleAuthProvider credentialWithIDToken:testIdToken accessToken:testAccessToken];
-                        XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
+    XCTAssertNil(error);
+    XCTAssertNotNil(result);
+    XCTAssertNotNil(credential);
+    FIRAuthCredential *expectedCredential =
+        [FIRGoogleAuthProvider credentialWithIDToken:testIdToken accessToken:testAccessToken];
+    XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
 
-                        [expectation fulfill];
-                      }];
+    [expectation fulfill];
+    // We can't compare result and resultCallback. Thus verifying with expectation that result
+    // is called.
+    result(mockGoogleUser, error);
+  }];
   [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];
@@ -149,12 +152,12 @@
                       completion:^(FIRAuthCredential *_Nullable credential,
                                    NSError *_Nullable error,
                                    FIRAuthResultCallback _Nullable result) {
-                        XCTAssertNotNil(error);
-                        XCTAssertEqualObjects(error.userInfo[NSUnderlyingErrorKey], signInError);
-                        XCTAssertNil(credential);
-                        XCTAssertNil(result);
-                        [expectation fulfill];
-                      }];
+    XCTAssertNotNil(error);
+    XCTAssertEqualObjects(error.userInfo[NSUnderlyingErrorKey], signInError);
+    XCTAssertNil(credential);
+    XCTAssertNil(result);
+    [expectation fulfill];
+  }];
   [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];
@@ -200,13 +203,13 @@
                       completion:^(FIRAuthCredential *_Nullable credential,
                                    NSError *_Nullable error,
                                    FIRAuthResultCallback _Nullable result) {
-                        XCTAssertNotNil(error);
-                        XCTAssertEqualObjects(error, [FUIAuthErrorUtils userCancelledSignInError]);
-                        XCTAssertNil(credential);
-                        XCTAssertNil(result);
+    XCTAssertNotNil(error);
+    XCTAssertEqualObjects(error, [FUIAuthErrorUtils userCancelledSignInError]);
+    XCTAssertNil(credential);
+    XCTAssertNil(result);
 
-                        [expectation fulfill];
-                      }];
+    [expectation fulfill];
+  }];
   [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];

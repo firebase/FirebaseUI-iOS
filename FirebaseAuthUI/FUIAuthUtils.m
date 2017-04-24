@@ -18,21 +18,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** @var kActivityIndiactorPadding
-    @brief The padding between the activity indiactor and its overlay.
- */
-static const CGFloat kActivityIndiactorPadding = 20.0f;
-
-/** @var kActivityIndiactorOverlayCornerRadius
-    @brief The corner radius of the overlay of the activity indicator.
- */
-static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
-
-/** @var kActivityIndiactorOverlayOpacity
-    @brief The opacity of the overlay of the activity indicator.
- */
-static const CGFloat kActivityIndiactorOverlayOpacity = 0.8f;
-
 @implementation FUIAuthUtils
 
 + (NSBundle *)frameworkBundle {
@@ -48,27 +33,6 @@ static const CGFloat kActivityIndiactorOverlayOpacity = 0.8f;
   NSString *path = [[[self class] frameworkBundle] pathForResource:name ofType:@"png"];
   return [UIImage imageWithContentsOfFile:path];
 }
-
-+ (UIActivityIndicatorView *)addActivityIndicator:(UIView *)view {
-  UIActivityIndicatorView *activityIndicator =
-      [[UIActivityIndicatorView alloc]
-           initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-  activityIndicator.frame = CGRectInset(activityIndicator.frame,
-                                        -kActivityIndiactorPadding,
-                                        -kActivityIndiactorPadding);
-  activityIndicator.backgroundColor =
-  [UIColor colorWithWhite:0 alpha:kActivityIndiactorOverlayOpacity];
-  activityIndicator.layer.cornerRadius = kActivityIndiactorOverlayCornerRadius;
-  [view addSubview:activityIndicator];
-
-    CGPoint activityIndicatorCenter = view.center;
-  // Compensate for bounds adjustment if any.
-  activityIndicatorCenter.y += view.bounds.origin.y;
-  activityIndicator.center = activityIndicatorCenter;
-
-  return activityIndicator;
-}
-
 NS_ASSUME_NONNULL_END
 
 @end

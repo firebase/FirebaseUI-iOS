@@ -19,8 +19,8 @@
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FirebaseAuthUI/FUIAuthBaseViewController.h>
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>
-#import <FirebaseAuthUI/FUIAuthUtils.h>
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
@@ -192,10 +192,10 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   }
   FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:accessToken];
   UIActivityIndicatorView *activityView =
-      [FUIAuthUtils addActivityIndicator:_presentingViewController.view];
+      [FUIAuthBaseViewController addActivityIndicator:_presentingViewController.view];
   [activityView startAnimating];
-  [self callbackWithCredential:credential error:nil result:^(FIRUser * _Nullable user,
-                                                             NSError * _Nullable error) {
+  [self callbackWithCredential:credential error:nil result:^(FIRUser *_Nullable user,
+                                                             NSError *_Nullable error) {
     [activityView stopAnimating];
     [activityView removeFromSuperview];
   }];

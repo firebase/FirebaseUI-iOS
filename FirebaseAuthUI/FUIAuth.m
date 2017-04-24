@@ -137,7 +137,7 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
                                 NSError *_Nullable error,
                                 _Nullable FIRAuthResultCallback result) {
     if (error) {
-      if ([presentingViewController isKindOfClass:[FUIAuthPickerViewController class]]
+      if (![presentingViewController isKindOfClass:[FUIAuthPickerViewController class]]
               || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
         [self invokeResultCallbackWithUser:nil error:error];
       }

@@ -22,6 +22,21 @@
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
 
+/** @var kActivityIndiactorPadding
+    @brief The padding between the activity indiactor and its overlay.
+ */
+static const CGFloat kActivityIndiactorPadding = 20.0f;
+
+/** @var kActivityIndiactorOverlayCornerRadius
+    @brief The corner radius of the overlay of the activity indicator.
+ */
+static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
+
+/** @var kActivityIndiactorOverlayOpacity
+    @brief The opacity of the overlay of the activity indicator.
+ */
+static const CGFloat kActivityIndiactorOverlayOpacity = 0.8f;
+
 /** @var kActivityIndiactorAnimationDelay
     @brief The time delay before the activity indicator is actually animated.
  */
@@ -57,7 +72,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
     _auth = authUI.auth;
     _authUI = authUI;
 
-    _activityIndicator = [[FUIAuthUtils class] addActivityIndicator:self.view];
+    _activityIndicator = [[self class] addActivityIndicator:self.view];
   }
   return self;
 }
@@ -100,6 +115,26 @@ static NSString *const kAuthUICodingKey = @"authUI";
     emailPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", kEmailRegex];
   });
   return [emailPredicate evaluateWithObject:email];
+}
+
++ (UIActivityIndicatorView *)addActivityIndicator:(UIView *)view {
+  UIActivityIndicatorView *activityIndicator =
+      [[UIActivityIndicatorView alloc]
+           initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+  activityIndicator.frame = CGRectInset(activityIndicator.frame,
+                                        -kActivityIndiactorPadding,
+                                        -kActivityIndiactorPadding);
+  activityIndicator.backgroundColor =
+  [UIColor colorWithWhite:0 alpha:kActivityIndiactorOverlayOpacity];
+  activityIndicator.layer.cornerRadius = kActivityIndiactorOverlayCornerRadius;
+  [view addSubview:activityIndicator];
+
+    CGPoint activityIndicatorCenter = view.center;
+  // Compensate for bounds adjustment if any.
+  activityIndicatorCenter.y += view.bounds.origin.y;
+  activityIndicator.center = activityIndicatorCenter;
+
+  return activityIndicator;
 }
 
 - (void)showAlertWithMessage:(NSString *)message {

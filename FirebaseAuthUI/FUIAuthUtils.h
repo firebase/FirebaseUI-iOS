@@ -33,10 +33,4 @@
  */
 + (UIImage *)imageNamed:(NSString *)name;
 
-/** @fn addActivityIndicator:
-    @brief Creates and add activity indicator to the center of the specified view.
-    @param view The View where indicator is shown.
- */
-+ (UIActivityIndicatorView *)addActivityIndicator:(UIView *)view;
-
 @end

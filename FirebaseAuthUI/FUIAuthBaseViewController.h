@@ -155,6 +155,12 @@ typedef void (^FUIAuthAlertActionHandler)(void);
  */
 + (NSString *)providerLocalizedName:(NSString *)providerId;
 
+/** @fn addActivityIndicator:
+    @brief Creates and add activity indicator to the center of the specified view.
+    @param view The View where indicator is shown.
+ */
++ (UIActivityIndicatorView *)addActivityIndicator:(UIView *)view;
+
 @end
 
 NS_ASSUME_NONNULL_END

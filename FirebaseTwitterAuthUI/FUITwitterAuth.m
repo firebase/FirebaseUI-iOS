@@ -16,8 +16,8 @@
 
 #import "FUITwitterAuth.h"
 #import <FirebaseAuth/FIRTwitterAuthProvider.h>
+#import <FirebaseAuthUI/FUIAuthBaseViewController.h>
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>
-#import <FirebaseAuthUI/FUIAuthUtils.h>
 #import <TwitterKit/TwitterKit.h>
 
 /** @var kTableName
@@ -123,10 +123,10 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
                                               secret:session.authTokenSecret];
       if (completion) {
         UIActivityIndicatorView *activityView =
-            [FUIAuthUtils addActivityIndicator:presentingViewController.view];
+            [FUIAuthBaseViewController addActivityIndicator:presentingViewController.view];
         [activityView startAnimating];
-        FIRAuthResultCallback result = ^(FIRUser * _Nullable user,
-                                        NSError * _Nullable error) {
+        FIRAuthResultCallback result = ^(FIRUser *_Nullable user,
+                                        NSError *_Nullable error) {
           [activityView stopAnimating];
           [activityView removeFromSuperview];
         };
