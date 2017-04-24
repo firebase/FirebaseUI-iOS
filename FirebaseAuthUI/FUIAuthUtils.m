@@ -16,6 +16,8 @@
 
 #import "FUIAuthUtils.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation FUIAuthUtils
 
 + (NSBundle *)frameworkBundle {
@@ -31,5 +33,6 @@
   NSString *path = [[[self class] frameworkBundle] pathForResource:name ofType:@"png"];
   return [UIImage imageWithContentsOfFile:path];
 }
+NS_ASSUME_NONNULL_END
 
 @end

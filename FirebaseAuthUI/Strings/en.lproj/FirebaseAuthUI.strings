@@ -40,6 +40,12 @@
 /* Error message displayed after user trying to sign in too many times. */
 "SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
 
+/* Error message displayed when lib third FUIAuth is not configured with third party provider. */
+"CantFindProvider" = "Can't find provider for %@.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorizaed user's email doen't match. */
+"EmailsDontMatch" = "Emails don't match";
+
 /* Title for password recovery screen. */
 "PasswordRecoveryTitle" = "Recover password";
 
@@ -105,3 +111,132 @@
 
 /* Label next to a name text field. */
 "Name" = "Name";
+
+/* Alert title Error. */
+"Error" = "Error";
+
+/* Alert button title Close. */
+"Close" = "Close";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Profile";
+
+/* Account Settings section title Secrity. */
+"AS_SectionSecurity" = "Security";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Linked Accounts";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Name";
+
+/* Account Settings cell title Email. */
+"AS_Email" = "Email";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Add password";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Change password";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Sign Out";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Delete Account";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Forgot password?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Verify it's you";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfimationTitle" = "Delete Account?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+
+/* Text of Delete action button. */
+"Delete" = "Delete";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Delete account";
+
+/* Alert nessage shown before account deletion. */
+"ActionCantBeUndone" = "This action can't be undone";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Unlink";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Linked account";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Unlink account?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Unlink account";
+
+/* Alert action message shown before updating email action. */
+"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+
+/* Alert action message shown before confimation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
+
+/* Controller title shown when editing account email. */
+"EditEmailTitle" = "Edit email";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Edit name";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
+
+/* Alert message shown when reathenticationg before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Add password";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Change password";
+
+/* Title of Password/Email provider */
+"ProviderTitlePassword" = "Email";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Sign in with %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Enter your name";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterEmail" = "Enter your email";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Enter your password";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "New password";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Choose password";

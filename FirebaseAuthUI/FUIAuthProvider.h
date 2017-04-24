@@ -15,6 +15,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FirebaseAuth/FIRAuth.h>
 
 @class FIRAuth;
 @class FIRAuthCredential;
@@ -24,10 +25,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** @typedef FIRAuthProviderSignInCompletionBlock
     @brief The type of block used to notify the auth system of the result of a sign-in flow.
-    @see FIRAuthProvider.signInWithEmail:presentingViewController:completion:
+        @see FUIAuthProvider.signInWithEmail:presentingViewController:completion:
+    @param credential The @c FIRAuthCredential object created after user interaction with third 
+        party provider.
+    @param error The error which may happen during creation of The @c FIRAuthCredential object.
+    @param result The result of sign-in operation using provided @c FIRAuthCredential object.
+        @see @c FIRAuth.signInWithCredential:completion:
  */
-typedef void (^FIRAuthProviderSignInCompletionBlock)(FIRAuthCredential *_Nullable credential,
-                                                     NSError *_Nullable error);
+typedef void (^FIRAuthProviderSignInCompletionBlock) (
+    FIRAuthCredential *_Nullable credential,
+    NSError *_Nullable error,
+    _Nullable FIRAuthResultCallback result);
 
 /** @protocol FUIAuthProvider
     @brief Represents an authentication provider (such as Google Sign In or Facebook Login) which
@@ -77,7 +85,8 @@ typedef void (^FIRAuthProviderSignInCompletionBlock)(FIRAuthCredential *_Nullabl
         flow.
     @param email The email address of the user if it's known.
     @param presentingViewController The view controller used to present the UI.
-    @param completion See remarks. A block to invoke when the sign-in process completes.
+    @param completion See remarks. A block which should be invoked when the sign-in process 
+        (using @c FIRAuthCredential) completes.
  */
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
@@ -89,19 +98,16 @@ typedef void (^FIRAuthProviderSignInCompletionBlock)(FIRAuthCredential *_Nullabl
 - (void)signOut;
 
 /** @property accessToken
- @brief User Access Token obtained during sign in.
+    @brief User Access Token obtained during sign in.
  */
 @property(nonatomic, copy, readonly) NSString *accessToken;
 
-
 @optional;
 
-
 /** @property idToken
- @brief User Id Token obtained during sign in. Not all providers can return, thus it's optional
+    @brief User Id Token obtained during sign in. Not all providers can return, thus it's optional
  */
 @property(nonatomic, copy, readonly) NSString *idToken;
-
 
 /** @fn handleOpenURL:
     @brief May be used to help complete a sign-in flow which requires a callback from Safari.

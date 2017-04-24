@@ -24,8 +24,8 @@ and [Web](https://github.com/firebase/firebaseui-web/).
 ## Table of Contents
 
 1. [Installation](#installation)
-2. [Usage instructions](#using-firebaseui-for-authentication)
-3. [Customization](#customizing-firebaseui-for-authentication)
+1. [Usage instructions](#using-firebaseui-for-authentication)
+1. [Customization](#customizing-firebaseui-for-authentication)
 
 ## Installation
 ### Importing FirebaseUI components for auth
@@ -36,6 +36,7 @@ pod 'FirebaseUI/Auth'
 pod 'FirebaseUI/Google'
 pod 'FirebaseUI/Facebook'
 pod 'FirebaseUI/Twitter'
+pod 'FirebaseUI/Phone'
 ```
 
 ### Configuring sign-in providers
@@ -47,6 +48,7 @@ Auth guides at the following links:
 - [Google](https://firebase.google.com/docs/auth/ios/google-signin#before_you_begin)
 - [Facebook](https://firebase.google.com/docs/auth/ios/facebook-login#before_you_begin)
 - [Twitter](https://firebase.google.com/docs/auth/ios/twitter-login#before_you_begin)
+- [Phone](https://firebase.google.com/docs/auth/ios/phone-login#before_you_begin)
 
 ## Using FirebaseUI for Authentication
 
@@ -87,11 +89,13 @@ This instance can then be configured with the providers you wish to support:
 import FirebaseGoogleAuthUI
 import FirebaseFacebookAuthUI
 import FirebaseTwitterAuthUI
+import FirebasePhoneAuthUI
 
 let providers: [FUIAuthProvider] = [
   FUIGoogleAuth(),
   FUIFacebookAuth(),
   FUITwitterAuth(),
+  FUIPhoneAuth(authUI:FUIAuth.defaultAuthUI()),
 ]
 self.authUI?.providers = providers
 ```
@@ -101,12 +105,14 @@ self.authUI?.providers = providers
 @import FirebaseGoogleAuthUI;
 @import FirebaseFacebookAuthUI;
 @import FirebaseTwitterAuthUI;
+@import FirebasePhoneAuthUI;
 ...
 NSArray<id<FUIAuthProvider>> *providers = @[
-                                             [[FUIGoogleAuth alloc] init],
-                                             [[FUIFacebookAuth alloc] init],
-                                             [[FUITwitterAuth alloc] init],
-                                             ];
+  [[FUIGoogleAuth alloc] init],
+  [[FUIFacebookAuth alloc] init],
+  [[FUITwitterAuth alloc] init],
+  [[FUIPhoneAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]]
+];
 _authUI.providers = providers;
 ```
 

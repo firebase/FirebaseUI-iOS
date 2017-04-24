@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseUI'
-  s.version      = '3.1.1'
+  s.version      = '4.0.0'
   s.summary      = 'UI binding libraries for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'FirebaseUIFrameworks/LICENSE' }
@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
     all.dependency 'FirebaseUI/Auth'
     all.dependency 'FirebaseUI/Facebook'
     all.dependency 'FirebaseUI/Google'
+    all.dependency 'FirebaseUI/Phone'
     all.dependency 'FirebaseUI/Twitter'
   end
 
@@ -51,6 +52,12 @@ Pod::Spec.new do |s|
     google.dependency 'FirebaseUI/Auth'
     google.dependency 'GoogleSignIn', '~> 4.0'
     google.resources = 'FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks/FirebaseGoogleAuthUI.framework/*.{nib,lproj,png}'
+  end
+
+  s.subspec 'Phone' do |phone|
+    phone.vendored_frameworks = ["FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks/FirebasePhoneAuthUI.framework"]
+    phone.dependency 'FirebaseUI/Auth'
+    phone.resources = 'FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks/FirebasePhoneAuthUI.framework/*.{nib,lproj,png,json}'
   end
 
   s.subspec 'Twitter' do |twitter|

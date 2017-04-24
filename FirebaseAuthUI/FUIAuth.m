@@ -14,15 +14,18 @@
 //  limitations under the License.
 //
 
-#import "FUIAuth.h"
+#import "FUIAuth_Internal.h"
 
 #import <objc/runtime.h>
 
 #import <FirebaseAnalytics/FIRApp.h>
 #import <FirebaseAuth/FIRAuth.h>
+#import <FirebaseAuth/FirebaseAuth.h>
+#import "FUIAuthErrors.h"
 #import "FUIAuthPickerViewController.h"
-#import "FUIAuth_Internal.h"
+#import "FUIAuthStrings.h"
 #import "FUIEmailEntryViewController.h"
+#import "FUIPasswordVerificationViewController.h"
 
 /** @var kAppNameCodingKey
     @brief The key used to encode the app Name for NSCoding.
@@ -34,6 +37,11 @@ static NSString *const kAppNameCodingKey = @"appName";
         root FIRAuth objects.
  */
 static const char kAuthAssociationKey;
+
+/** @var kErrorUserInfoEmailKey
+    @brief The key for the email address in the userInfo dictionary of a sign in error.
+ */
+static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
 
 @interface FUIAuth ()
 
@@ -118,12 +126,200 @@ static const char kAuthAssociationKey;
   return success;
 }
 
+- (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI
+    presentingViewController:(UIViewController *)presentingViewController {
+
+  // Sign out first to make sure sign in starts with a clean state.
+  [providerUI signOut];
+  [providerUI signInWithEmail:nil
+     presentingViewController:presentingViewController
+                   completion:^(FIRAuthCredential *_Nullable credential,
+                                NSError *_Nullable error,
+                                _Nullable FIRAuthResultCallback result) {
+    if (error) {
+      if (![presentingViewController isKindOfClass:[FUIAuthPickerViewController class]]
+              || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
+        [self invokeResultCallbackWithUser:nil error:error];
+      }
+      if (result) {
+        result(nil, error);
+      }
+      return;
+    }
+
+    [self.auth signInWithCredential:credential
+                         completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+      if (error && error.code == FIRAuthErrorCodeAccountExistsWithDifferentCredential) {
+        NSString *email = error.userInfo[kErrorUserInfoEmailKey];
+        [self handleAccountLinkingForEmail:email
+                             newCredential:credential
+                  presentingViewController:presentingViewController
+                              singInResult:result];
+        return;
+      }
+
+      if (result) {
+        result(user, error);
+      }
+
+      if (error) {
+        [self invokeResultCallbackWithUser:user error:error];
+      } else {
+        if (presentingViewController.presentingViewController) {
+          [presentingViewController dismissViewControllerAnimated:YES completion:^{
+            [self invokeResultCallbackWithUser:user error:error];
+          }];
+        } else {
+          [self invokeResultCallbackWithUser:user error:error];
+        }
+      }
+    }];
+  }];
+}
+
+- (void)handleAccountLinkingForEmail:(NSString *)email
+                       newCredential:(FIRAuthCredential *)newCredential
+            presentingViewController:(UIViewController *)presentingViewController
+                        singInResult:(_Nullable FIRAuthResultCallback) result {
+
+  [self.auth fetchProvidersForEmail:email
+                         completion:^(NSArray<NSString *> *_Nullable providers,
+                                      NSError *_Nullable error) {
+    if (result) {
+      result(nil, error);
+    }
+
+    if (error) {
+      if (error.code == FIRAuthErrorCodeInvalidEmail) {
+        // This should never happen because the email address comes from the backend.
+        [FUIAuthBaseViewController showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)
+                               presentingViewController:presentingViewController];
+      } else {
+        [presentingViewController dismissViewControllerAnimated:YES completion:^{
+          [self invokeResultCallbackWithUser:nil error:error];
+        }];
+      }
+      return;
+    }
+    if (!providers.count) {
+      // This should never happen because the user must be registered.
+      [FUIAuthBaseViewController showAlertWithMessage:
+          FUILocalizedString(kStr_CannotAuthenticateError)
+                             presentingViewController:presentingViewController];
+      return;
+    }
+    NSString *bestProviderID = providers[0];
+    if ([bestProviderID isEqual:FIREmailPasswordAuthProviderID]) {
+      // Password verification.
+      UIViewController *passwordController;
+      if ([self.delegate respondsToSelector:
+              @selector(passwordVerificationViewControllerForAuthUI:email:newCredential:)]) {
+
+        passwordController = [self.delegate passwordVerificationViewControllerForAuthUI:self
+                                                                          email:email
+                                                                  newCredential:newCredential];
+      } else {
+        passwordController =
+            [[FUIPasswordVerificationViewController alloc] initWithAuthUI:self
+                                                                    email:email
+                                                            newCredential:newCredential];
+      }
+      if (presentingViewController.navigationController) {
+        [FUIAuthBaseViewController pushViewController:passwordController
+                                 navigationController:
+            presentingViewController.navigationController];
+      }
+      return;
+    }
+    id<FUIAuthProvider> bestProvider = [self providerWithID:bestProviderID];
+    if (!bestProvider) {
+      // Unsupported provider.
+      [FUIAuthBaseViewController showAlertWithMessage:
+          FUILocalizedString(kStr_CannotAuthenticateError)
+                             presentingViewController:presentingViewController];
+      return;
+    }
+
+    [FUIAuthBaseViewController showSignInAlertWithEmail:email
+                                               provider:bestProvider
+                               presentingViewController:presentingViewController
+                                          signinHandler:^{
+      // Sign out first to make sure sign in starts with a clean state.
+      [bestProvider signOut];
+      [bestProvider signInWithEmail:email
+           presentingViewController:presentingViewController
+                         completion:^(FIRAuthCredential *_Nullable credential,
+                                      NSError *_Nullable error,
+                                      _Nullable FIRAuthResultCallback result) {
+        if (error) {
+          if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
+            // User cancelled sign in, Do nothing.
+            if (result) {
+              result(nil, error);
+            }
+            return;
+          }
+          [self invokeResultCallbackWithUser:nil error:error];
+          return;
+        }
+
+        [self.auth signInWithCredential:credential completion:^(FIRUser *_Nullable user,
+                                                                NSError *_Nullable error) {
+          if (error) {
+            [self invokeResultCallbackWithUser:nil error:error];
+            if (result) {
+              result(nil, error);
+            }
+            return;
+          }
+
+          [user linkWithCredential:newCredential completion:^(FIRUser *_Nullable user,
+                                                              NSError *_Nullable error) {
+            if (result) {
+              result(user, error);
+            }
+            // Ignore any error (most likely caused by email mismatch) and treat the user as
+            // successfully signed in.
+            [presentingViewController dismissViewControllerAnimated:YES completion:^{
+              [self invokeResultCallbackWithUser:user error:nil];
+            }];
+          }];
+        }];
+      }];
+    } cancelHandler:^{
+      [self signOutWithError:nil];
+    }];
+  }];
+}
+
 #pragma mark - Internal Methods
 
 - (void)invokeResultCallbackWithUser:(FIRUser *_Nullable)user error:(NSError *_Nullable)error {
   dispatch_async(dispatch_get_main_queue(), ^{
     [self.delegate authUI:self didSignInWithUser:user error:error];
   });
+}
+
+/*
+ // TODO: Assistant Settings will be released later.
+- (void)invokeOperationCallback:(FUIAccountSettingsOperationType)operation
+                          error:(NSError *_Nullable)error {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    if ([self.delegate respondsToSelector:@selector(authUI:didFinishOperation:error:)]) {
+      [self.delegate authUI:self didFinishOperation:operation error:error];
+    }
+  });
+}
+ */
+
+- (nullable id<FUIAuthProvider>)providerWithID:(NSString *)providerID {
+  NSArray<id<FUIAuthProvider>> *providers = self.providers;
+  for (id<FUIAuthProvider> provider in providers) {
+    if ([provider.providerID isEqual:providerID]) {
+      return provider;
+    }
+  }
+  return nil;
 }
 
 #pragma mark - NSSecureCoding

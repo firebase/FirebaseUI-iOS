@@ -66,7 +66,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   if (self) {
     _email = [email copy];
 
-    self.title = [FUIAuthStrings signInTitle];
+    self.title = FUILocalizedString(kStr_SignInTitle);
   }
   return self;
 }
@@ -75,7 +75,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   [super viewDidLoad];
 
   UIBarButtonItem *signInButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:[FUIAuthStrings signInTitle]
+      [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_SignInTitle)
                                        style:UIBarButtonItemStylePlain
                                       target:self
                                       action:@selector(signIn)];
@@ -84,14 +84,13 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
 #pragma mark - Actions
 
-
 - (void)signInWithEmail:(NSString *)email andPassword:(NSString *)password {
   if (![[self class] isValidEmail:email]) {
-    [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
+    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
     return;
   }
   if (password.length <= 0) {
-    [self showAlertWithMessage:[FUIAuthStrings invalidPasswordError]];
+    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidPasswordError)];
     return;
   }
 
@@ -105,16 +104,16 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
                     if (error) {
                       switch (error.code) {
                         case FIRAuthErrorCodeWrongPassword:
-                          [self showAlertWithMessage:[FUIAuthStrings wrongPasswordError]];
+                          [self showAlertWithMessage:FUILocalizedString(kStr_WrongPasswordError)];
                           return;
                         case FIRAuthErrorCodeUserNotFound:
-                          [self showAlertWithMessage:[FUIAuthStrings userNotFoundError]];
+                          [self showAlertWithMessage:FUILocalizedString(kStr_UserNotFoundError)];
                           return;
                         case FIRAuthErrorCodeUserDisabled:
-                          [self showAlertWithMessage:[FUIAuthStrings accountDisabledError]];
+                          [self showAlertWithMessage:FUILocalizedString(kStr_AccountDisabledError)];
                           return;
                         case FIRAuthErrorCodeTooManyRequests:
-                          [self showAlertWithMessage:[FUIAuthStrings signInTooManyTimesError]];
+                          [self showAlertWithMessage:FUILocalizedString(kStr_SignInTooManyTimesError)];
                           return;
                       }
                     }
@@ -172,19 +171,19 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   }
   cell.textField.delegate = self;
   if (indexPath.row == 0) {
-    cell.label.text = [FUIAuthStrings email];
+    cell.label.text = FUILocalizedString(kStr_Email);
     _emailField = cell.textField;
     _emailField.text = _email;
-    _emailField.placeholder = [FUIAuthStrings enterYourEmail];
+    _emailField.placeholder = FUILocalizedString(kStr_EnterYourEmail);
     _emailField.secureTextEntry = NO;
     _emailField.returnKeyType = UIReturnKeyNext;
     _emailField.keyboardType = UIKeyboardTypeEmailAddress;
     _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
     _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
   } else if (indexPath.row == 1) {
-    cell.label.text = [FUIAuthStrings password];
+    cell.label.text = FUILocalizedString(kStr_Password);
     _passwordField = cell.textField;
-    _passwordField.placeholder = [FUIAuthStrings enterYourPassword];
+    _passwordField.placeholder = FUILocalizedString(kStr_EnterYourPassword);
     _passwordField.secureTextEntry = YES;
     _passwordField.returnKeyType = UIReturnKeyNext;
     _passwordField.keyboardType = UIKeyboardTypeDefault;

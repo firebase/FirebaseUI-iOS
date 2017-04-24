@@ -16,16 +16,18 @@
 
 #import "FUIGoogleAuth.h"
 
-#import <FirebaseCore/FirebaseCore.h>
+#import <FirebaseAuth/FIRAuth.h>
 #import <FirebaseAuth/FIRGoogleAuthProvider.h>
 #import <FirebaseAuth/FIRUserInfo.h>
+#import <FirebaseAuthUI/FUIAuthBaseViewController.h>
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
+#import <FirebaseCore/FirebaseCore.h>
 #import <GoogleSignIn/GoogleSignIn.h>
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
-*/
+ */
 static NSString *const kTableName = @"FirebaseGoogleAuthUI";
 
 /** @var kSignInWithGoogle
@@ -133,10 +135,12 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   _presentingViewController = presentingViewController;
 
   GIDSignIn *signIn = [self configuredGoogleSignIn];
-  _pendingSignInCallback = ^(FIRAuthCredential *_Nullable credential, NSError *_Nullable error) {
+  _pendingSignInCallback = ^(FIRAuthCredential *_Nullable credential,
+                             NSError *_Nullable error,
+                             _Nullable FIRAuthResultCallback result) {
     signIn.loginHint = nil;
     if (completion) {
-      completion(credential, error);
+      completion(credential, error, result);
     }
   };
 
@@ -161,19 +165,28 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
            withError:(NSError *)error {
   if (error) {
     if (error.code == kGIDSignInErrorCodeCanceled) {
-      [self callbackWithCredential:nil error:[FUIAuthErrorUtils userCancelledSignInError]];
+      [self callbackWithCredential:nil
+                             error:[FUIAuthErrorUtils
+                                    userCancelledSignInError] result:nil];
     } else {
       NSError *newError =
           [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
                                                      providerID:FIRGoogleAuthProviderID];
-      [self callbackWithCredential:nil error:newError];
+      [self callbackWithCredential:nil error:newError result:nil];
     }
     return;
   }
+  UIActivityIndicatorView *activityView =
+      [FUIAuthBaseViewController addActivityIndicator:_presentingViewController.view];
+  [activityView startAnimating];
   FIRAuthCredential *credential =
       [FIRGoogleAuthProvider credentialWithIDToken:user.authentication.idToken
                                        accessToken:user.authentication.accessToken];
-  [self callbackWithCredential:credential error:nil];
+  [self callbackWithCredential:credential error:nil result:^(FIRUser *_Nullable user,
+                                                             NSError *_Nullable error) {
+    [activityView stopAnimating];
+    [activityView removeFromSuperview];
+  }];
 }
 
 #pragma mark - GIDSignInUIDelegate methods
@@ -206,14 +219,17 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
     @brief Ends the sign-in flow by cleaning up and calling back with given credential or error.
     @param credential The credential to pass back, if any.
     @param error The error to pass back, if any.
+    @param result The result of sign-in operation using provided @c FIRAuthCredential object.
+        @see @c FIRAuth.signInWithCredential:completion:
  */
 - (void)callbackWithCredential:(nullable FIRAuthCredential *)credential
-                         error:(nullable NSError *)error {
+                         error:(nullable NSError *)error
+                        result:(nullable FIRAuthResultCallback)result {
   FIRAuthProviderSignInCompletionBlock callback = _pendingSignInCallback;
   _presentingViewController = nil;
   _pendingSignInCallback = nil;
   if (callback) {
-    callback(credential, error);
+    callback(credential, error, result);
   }
 }
 

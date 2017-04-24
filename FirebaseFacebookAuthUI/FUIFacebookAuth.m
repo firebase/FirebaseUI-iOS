@@ -19,11 +19,12 @@
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FirebaseAuthUI/FUIAuthBaseViewController.h>
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
-*/
+ */
 static NSString *const kTableName = @"FirebaseFacebookAuthUI";
 
 /** @var kSignInWithFacebook
@@ -32,12 +33,12 @@ static NSString *const kTableName = @"FirebaseFacebookAuthUI";
 static NSString *const kSignInWithFacebook = @"SignInWithFacebook";
 
 /** @var kFacebookAppId
- @brief The string key used to read Facebook App Id from Info.plist.
+    @brief The string key used to read Facebook App Id from Info.plist.
  */
 static NSString *const kFacebookAppId = @"FacebookAppID";
 
 /** @var kFacebookDisplayName
- @brief The string key used to read Facebook App Name from Info.plist.
+    @brief The string key used to read Facebook App Name from Info.plist.
  */
 static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 
@@ -47,6 +48,11 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
       @brief The callback which should be invoked when the sign in flow completes (or is cancelled.)
    */
   FIRAuthProviderSignInCompletionBlock _pendingSignInCallback;
+
+  /** @var _presentingViewController
+      @brief The presenting view controller for interactive sign-in.
+   */
+  UIViewController *_presentingViewController;
 }
 
 - (instancetype)initWithPermissions:(NSArray *)permissions {
@@ -107,7 +113,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 /** @fn idToken:
- @brief Facebook doesn't provide User Id Token during sign in flow
+    @brief Facebook doesn't provide User Id Token during sign in flow
  */
 - (NSString *)idToken {
   return nil;
@@ -137,6 +143,8 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   _pendingSignInCallback = completion;
+  _presentingViewController = presentingViewController;
+
   [_loginManager logInWithReadPermissions:_scopes
                        fromViewController:presentingViewController
                                   handler:^(FBSDKLoginManagerLoginResult *result,
@@ -179,29 +187,39 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 - (void)completeSignInFlowWithAccessToken:(nullable NSString *)accessToken
                                     error:(nullable NSError *)error {
   if (error) {
-    [self callbackWithCredential:nil error:error];
+    [self callbackWithCredential:nil error:error result:nil];
     return;
   }
   FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:accessToken];
-  [self callbackWithCredential:credential error:nil];
+  UIActivityIndicatorView *activityView =
+      [FUIAuthBaseViewController addActivityIndicator:_presentingViewController.view];
+  [activityView startAnimating];
+  [self callbackWithCredential:credential error:nil result:^(FIRUser *_Nullable user,
+                                                             NSError *_Nullable error) {
+    [activityView stopAnimating];
+    [activityView removeFromSuperview];
+  }];
 }
 
 /** @fn callbackWithCredential:error:
     @brief Ends the sign-in flow by cleaning up and calling back with given credential or error.
     @param credential The credential to pass back, if any.
     @param error The error to pass back, if any.
+    @param result The result of sign-in operation using provided @c FIRAuthCredential object.
+        @see @c FIRAuth.signInWithCredential:completion:
  */
 - (void)callbackWithCredential:(nullable FIRAuthCredential *)credential
-                         error:(nullable NSError *)error {
+                         error:(nullable NSError *)error
+                        result:(nullable FIRAuthResultCallback)result {
   FIRAuthProviderSignInCompletionBlock callback = _pendingSignInCallback;
   _pendingSignInCallback = nil;
   if (callback) {
-    callback(credential, error);
+    callback(credential, error, result);
   }
 }
 
 /** @fn callbackWithCredential:error:
- @brief Validates that Facebook SDK data was filled in Info.plist and creates Facebook login manager 
+    @brief Validates that Facebook SDK data was filled in Info.plist and creates Facebook login manager 
  */
 - (void)configureProvider {
   NSBundle *bundle = [[self class] frameworkBundle];
@@ -215,12 +233,12 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
      @"https://developers.facebook.com/docs/ios/getting-started"];
   }
 
-  _loginManager = [self createLoginManger];
+  _loginManager = [self createLoginManager];
 }
 
 #pragma mark - Private methods
 
-- (FBSDKLoginManager *)createLoginManger {
+- (FBSDKLoginManager *)createLoginManager {
   return [[FBSDKLoginManager alloc] init];
 }
 

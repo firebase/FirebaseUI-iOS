@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseDatabaseUI'
-  s.version      = '3.1.1'
+  s.version      = '4.0.0'
   s.summary      = 'Firebase Database UI binding library.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0' }
@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
   s.default_subspecs = 'Database'
 
   s.subspec 'Database' do |database|
-    database.source_files = "FirebaseDatabaseUI/*.{h,m}"
-    database.dependency 'Firebase/Database', '~> 3.0'
+    database.source_files = "FirebaseDatabaseUI/**/*.{h,m}"
+    database.dependency 'Firebase/Database'
     database.ios.framework = 'FirebaseDatabase'
     database.xcconfig  = { 'FRAMEWORK_SEARCH_PATHS' => '"${PODS_ROOT}/FirebaseDatabase/Frameworks"','HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/Firebase/**"' }
   end

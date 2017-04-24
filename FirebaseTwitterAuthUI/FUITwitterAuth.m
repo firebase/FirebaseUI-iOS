@@ -16,16 +16,17 @@
 
 #import "FUITwitterAuth.h"
 #import <FirebaseAuth/FIRTwitterAuthProvider.h>
+#import <FirebaseAuthUI/FUIAuthBaseViewController.h>
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>
 #import <TwitterKit/TwitterKit.h>
 
 /** @var kTableName
- @brief The name of the strings table to search for localized strings.
+    @brief The name of the strings table to search for localized strings.
  */
 static NSString *const kTableName = @"FirebaseTwitterAuthUI";
 
 /** @var kSignInWithTwitter
- @brief The string key for localized button text.
+    @brief The string key for localized button text.
  */
 static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 
@@ -33,12 +34,11 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 - (Twitter *)getTwitterManager;
 @end
 
-
 @implementation FUITwitterAuth
 
 /** @fn frameworkBundle
- @brief Returns the auth provider's resource bundle.
- @return Resource bundle for the auth provider.
+    @brief Returns the auth provider's resource bundle.
+    @return Resource bundle for the auth provider.
  */
 + (NSBundle *)frameworkBundle {
   static NSBundle *frameworkBundle = nil;
@@ -50,9 +50,9 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 }
 
 /** @fn imageNamed:
- @brief Returns an image from the resource bundle given a resource name.
- @param name The name of the image file.
- @return The image object for the named file.
+    @brief Returns an image from the resource bundle given a resource name.
+    @param name The name of the image file.
+    @return The image object for the named file.
  */
 + (UIImage *)imageNamed:(NSString *)name {
   NSString *path = [[[self class] frameworkBundle] pathForResource:name ofType:@"png"];
@@ -60,10 +60,10 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 }
 
 /** @fn localizedStringForKey:
- @brief Returns the localized text associated with a given string key. Will default to english
- text if the string is not available for the current localization.
- @param key A string key which identifies localized text in the .strings files.
- @return Localized value of the string identified by the key.
+    @brief Returns the localized text associated with a given string key. Will default to english
+        text if the string is not available for the current localization.
+    @param key A string key which identifies localized text in the .strings files.
+    @return Localized value of the string identified by the key.
  */
 + (NSString *)localizedStringForKey:(NSString *)key {
   NSBundle *frameworkBundle = [[self class] frameworkBundle];
@@ -77,14 +77,14 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 }
 
 /** @fn accessToken:
- @brief Twitter Auth token is matched by FirebaseUI User Access Token
+    @brief Twitter Auth token is matched by FirebaseUI User Access Token
  */
 - (NSString *)accessToken {
   return [self getTwitterManager].sessionStore.session.authToken;
 }
 
 /** @fn idToken:
- @brief Twitter Auth Token Secret is matched by FirebaseUI User Id Token
+    @brief Twitter Auth Token Secret is matched by FirebaseUI User Id Token
  */
 - (NSString *)idToken {
   return [self getTwitterManager].sessionStore.session.authTokenSecret;
@@ -115,14 +115,22 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
 
   [[self getTwitterManager] logInWithViewController:presentingViewController
-                                         completion:^(TWTRSession * _Nullable session,
-                                                      NSError * _Nullable error) {
+                                         completion:^(TWTRSession *_Nullable session,
+                                                      NSError *_Nullable error) {
     if (session) {
       FIRAuthCredential *credential =
           [FIRTwitterAuthProvider credentialWithToken:session.authToken
                                               secret:session.authTokenSecret];
       if (completion) {
-        completion(credential, nil);
+        UIActivityIndicatorView *activityView =
+            [FUIAuthBaseViewController addActivityIndicator:presentingViewController.view];
+        [activityView startAnimating];
+        FIRAuthResultCallback result = ^(FIRUser *_Nullable user,
+                                        NSError *_Nullable error) {
+          [activityView stopAnimating];
+          [activityView removeFromSuperview];
+        };
+        completion(credential, nil, result);
       }
     } else {
       if (completion) {
@@ -133,7 +141,7 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
           newError = [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
                                                               providerID:FIRTwitterAuthProviderID];
         }
-        completion(nil, newError);
+        completion(nil, newError, nil);
       }
     }
   }];

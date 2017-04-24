@@ -42,6 +42,8 @@ typedef NS_ENUM(NSUInteger, FUIAuthErrorCode) {
           contain the ID of the identity provider.
    */
   FUIAuthErrorCodeProviderError = 2,
+
+  FUIAuthErrorCodeCantFindProvider = 3,
 };
 
 NS_ASSUME_NONNULL_END

@@ -13,6 +13,7 @@ let schemes = [
   "FirebaseFacebookAuthUI",
   "FirebaseGoogleAuthUI",
   "FirebaseTwitterAuthUI",
+  "FirebasePhoneAuthUI",
   "FirebaseStorageUI",
 ]
 
@@ -22,6 +23,7 @@ let staticLibs = [
   "Facebook": "FirebaseFacebookAuthUI",
   "Google"  : "FirebaseGoogleAuthUI",
   "Twitter" : "FirebaseTwitterAuthUI",
+  "Phone"   : "FirebasePhoneAuthUI",
   "Storage" : "FirebaseStorageUI",
 ]
 
@@ -92,8 +94,18 @@ func zip(_ input: String, output: String) -> Void {
   guard task.terminationStatus == 0 else { exit(task.terminationStatus) }
 }
 
+func enableSoftwareKeyboard() -> Void {
+  let task = Process()
+  task.launchPath = "/usr/bin/defaults"
+  task.arguments = ["write", "com.apple.iphonesimulator", "ConnectHardwareKeyboard", "-bool", "NO"]
+  task.launch()
+  task.waitUntilExit()
+  guard task.terminationStatus == 0 else { exit(task.terminationStatus) }
+}
+
 mkdir(DerivedDataDir)
 mkdir(BuiltProductsDir)
+enableSoftwareKeyboard()
 
 // Build
 

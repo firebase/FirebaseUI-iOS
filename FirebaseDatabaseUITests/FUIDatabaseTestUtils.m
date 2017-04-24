@@ -157,8 +157,8 @@
 }
 
 - (FIRDatabaseHandle)observeEventType:(FIRDataEventType)eventType
-       andPreviousSiblingKeyWithBlock:(void (^)(FIRDataSnapshot * _Nonnull, NSString * _Nullable))block
-                      withCancelBlock:(void (^)(NSError * _Nonnull))cancelBlock  {
+       andPreviousSiblingKeyWithBlock:(void (^)(FIRDataSnapshot *_Nonnull, NSString *_Nullable))block
+                      withCancelBlock:(void (^)(NSError *_Nonnull))cancelBlock  {
   FUIDataEventHandler *handler = [[FUIDataEventHandler alloc] init];
   handler.event = eventType;
   handler.success = block;

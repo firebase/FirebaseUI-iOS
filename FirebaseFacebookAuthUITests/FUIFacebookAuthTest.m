@@ -33,7 +33,7 @@
 
 @implementation FUIFacebookAuthTest
 
-- (FBSDKLoginManager *)createLoginManger {
+- (FBSDKLoginManager *)createLoginManager {
   return [[FBSDKLoginManagerTest alloc] init];
 }
 

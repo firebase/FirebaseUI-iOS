@@ -16,6 +16,17 @@
 
 #import <XCTest/XCTest.h>
 
+@implementation XCUIElement (ForceTap)
+- (void) forceTap {
+  if (self.hittable) {
+    [self tap];
+  } else {
+    XCUICoordinate *coordinate = [self coordinateWithNormalizedOffset:CGVectorMake(0.0, 0.0)];
+    [coordinate tap];
+  }
+}
+@end
+
 @interface FirebaseUISampleUITests : XCTestCase
 
 @end
@@ -105,6 +116,89 @@
   [signInWithEmailNavigationBar.buttons[@"Cancel"] tap];
   [app.alerts[@"Error"].buttons[@"Close"] tap];
 
+}
+
+- (void)testPhoneAuthCoutryPicker {
+  XCUIApplication *app = [[XCUIApplication alloc] init];
+  XCUIElementQuery *tablesQuery = app.tables;
+
+  [tablesQuery.cells.staticTexts[@"Phone"] tap];
+  [app.toolbars.buttons[@"Sign In"] tap];
+  [app.buttons[@"Sign in with phone"] tap];
+
+  [tablesQuery.staticTexts[@"Country"] tap];
+
+  [app.tables.cells.staticTexts[@"\U0001F1E6\U0001F1F8 American Samoa"] tap];
+
+  [tablesQuery.staticTexts[@"Country"] tap];
+  [app.tables.searchFields[@"Search"] tap];
+  [app.searchFields[@"Search"] typeText:@"united"];
+
+  [app.tables.cells.staticTexts[@"\U0001F1FA\U0001F1F8 United States"]  forceTap];
+
+  [app.navigationBars[@"Enter phone number"].buttons[@"Cancel"] tap];
+  [app.navigationBars[@"Welcome"].buttons[@"Cancel"] tap];
+  [app.alerts[@"Error"].buttons[@"Close"] tap];
+}
+
+- (void)testPhoneAuthFlow {
+  XCUIApplication *app = [[XCUIApplication alloc] init];
+  XCUIElementQuery *tablesQuery = app.tables;
+
+  [tablesQuery.cells.staticTexts[@"Phone"] tap];
+  [app.toolbars.buttons[@"Sign In"] tap];
+  [app.buttons[@"Sign in with phone"] tap];
+
+  [tablesQuery.cells[@"PhoneNumberCellAccessibilityID"].textFields[@"Phone number"] tap];
+  [[tablesQuery.cells[@"PhoneNumberCellAccessibilityID"]
+       childrenMatchingType:XCUIElementTypeTextField].element typeText:@"123456789"];
+  [app.navigationBars[@"Enter phone number"].buttons[@"NextButtonAccessibilityID"] tap];
+
+  [app.keyboards.keys[@"1"] tap];
+  [app.keyboards.keys[@"2"] tap];
+  [app.keyboards.keys[@"3"] tap];
+  [app.keyboards.keys[@"4"] tap];
+  [app.keyboards.keys[@"5"] tap];
+  
+  XCUIElement *nextbuttonaccessibilityidButton =
+      app.navigationBars[@"Verify phone number"].buttons[@"NextButtonAccessibilityID"];
+  [nextbuttonaccessibilityidButton tap];
+  [app.keyboards.keys[@"6"] tap];
+  [nextbuttonaccessibilityidButton tap];
+
+}
+
+- (void)testDirectPhoneAuthSignIn {
+  XCUIApplication *app = [[XCUIApplication alloc] init];
+  XCUIElementQuery *tablesQuery = app.tables;
+  [tablesQuery.cells.staticTexts[@"Phone"] tap];
+  [tablesQuery.cells.staticTexts[@"Email"] tap];
+  
+  XCUIElement *signInButton = app.toolbars.buttons[@"Sign In"];
+  [signInButton tap];
+
+  XCUIElement *textField = [tablesQuery.cells[@"PhoneNumberCellAccessibilityID"]
+                               childrenMatchingType:XCUIElementTypeTextField].element;
+  [textField typeText:@"1"];
+
+  XCUIElement *enterPhoneNumberNavigationBar = app.navigationBars[@"Enter phone number"];
+  XCUIElement *nextbuttonaccessibilityidButton =
+      enterPhoneNumberNavigationBar.buttons[@"NextButtonAccessibilityID"];
+  [nextbuttonaccessibilityidButton tap];
+  [app.buttons[@"+11"] tap];
+  [enterPhoneNumberNavigationBar.buttons[@"Cancel"] tap];
+  [app.alerts[@"Error"].buttons[@"Close"] tap];
+  [signInButton tap];
+  [textField typeText:@"2"];
+  [nextbuttonaccessibilityidButton tap];
+  [app.keyboards.keys[@"1"] tap];
+  [app.keyboards.keys[@"2"] tap];
+  [app.keyboards.keys[@"3"] tap];
+  [app.keyboards.keys[@"4"] tap];
+  [app.keyboards.keys[@"5"] tap];
+  [app.keyboards.keys[@"6"] tap];
+  [app.navigationBars[@"Verify phone number"].buttons[@"NextButtonAccessibilityID"] tap];
+  [signInButton tap];
 }
 
 @end

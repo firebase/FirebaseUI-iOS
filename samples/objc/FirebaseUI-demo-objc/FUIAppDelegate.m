@@ -21,7 +21,6 @@
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <TwitterKit/Twitter.h>
 
-
 @implementation FUIAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

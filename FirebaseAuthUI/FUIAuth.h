@@ -45,13 +45,26 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
 /** @fn authUI:didSignInWithUser:error:
     @brief Message sent after the sign in process has completed to report the signed in user or
         error encountered.
-    @param authUI The @c FUIAuth instance sending the messsage.
+    @param authUI The @c FUIAuth instance sending the message.
     @param user The signed in user if the sign in attempt was successful.
-    @param error The error that occured during sign in, if any.
+    @param error The error that occurred during sign in, if any.
  */
-- (void)authUI:(FUIAuth *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error;
+- (void)authUI:(FUIAuth *)authUI
+    didSignInWithUser:(nullable FIRUser *)user
+                error:(nullable NSError *)error;
 
 @optional
+
+/** @fn authUI:didFinishOperation:error:
+    @brief Message sent after finishing Account Management operation.
+    @param authUI The @c FUIAuth instance sending the message.
+    @param operation The operation type that was just completed.
+    @param error The error that occurred during operation, if any.
+ // TODO: Assitant Settings will be released later.
+ - (void)authUI:(FUIAuth *)authUI
+    didFinishOperation:(FUIAccountSettingsOperationType)operation
+                 error:(nullable NSError *)error;
+ */
 
 /** @fn authPickerViewControllerForAuthUI:
     @brief Sent to the receiver to ask for an instance of @c FUIAuthPickerViewController subclass
@@ -187,15 +200,15 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
 - (UINavigationController *)authViewController;
 
 /** @fn signOutWithError:
-    @brief Signs out the current user from Firbase and all providers.
-    @param error Optionally; if an error occurs during Firebase signout, upon return contains an
-    NSError object that describes the problem; is nil otherwise. If Firebase error occurs all providers
-    are not logged-out and sign-out should be retried.
-    @return @YES when the sign out request was successful. @NO otherwise.
-    @remarks Possible error codes:
-    - @c FIRAuthErrorCodeKeychainError Indicates an error occurred when accessing the keychain.
-    The @c NSLocalizedFailureReasonErrorKey field in the @c NSError.userInfo dictionary
-    will contain more information about the error encountered.
+    @brief Signs out the current user from Firebase and all providers.
+    @param error Optionally; if an error occurs during Firebase sign out, upon return contains an
+        NSError object that describes the problem; is nil otherwise. If Firebase error occurs all 
+        providers are not logged-out and sign-out should be retried.
+        @return @YES when the sign out request was successful. @NO otherwise.
+        @remarks Possible error codes:
+        - @c FIRAuthErrorCodeKeychainError Indicates an error occurred when accessing the keychain.
+        The @c NSLocalizedFailureReasonErrorKey field in the @c NSError.userInfo dictionary
+        will contain more information about the error encountered.
  */
 - (BOOL)signOutWithError:(NSError *_Nullable *_Nullable)error;
 

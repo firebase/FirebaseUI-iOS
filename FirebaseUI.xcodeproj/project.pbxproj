@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29F8E5DF3DC749596A508B15 /* Pods_Auth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4429AF9243B3E3601F52462 /* Pods_Auth.framework */; };
+		2F5BE953C9EE64E86B09C0D5 /* Pods_Google.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CACC40A530AF1B522B4F4B1E /* Pods_Google.framework */; };
+		44DA4422DF573DBD5418E5C7 /* Pods_FirebasePhoneAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3585126C654F68170E7CBE46 /* Pods_FirebasePhoneAuthUI.framework */; };
+		4BF2492275385993BFFF8BEE /* Pods_FirebaseDatabaseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A31E8929A6EBF90D794CE9 /* Pods_FirebaseDatabaseUI.framework */; };
+		4DD3086E95331A683666BA07 /* Pods_FirebaseFacebookAuthUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F416D1AE65041345CA54BB3 /* Pods_FirebaseFacebookAuthUITests.framework */; };
+		5A598E49BF405C8C0A6746F4 /* libPods-FirebaseUISample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFF3B7EC23D67B5F8FF9C5A /* libPods-FirebaseUISample.a */; };
+		7487A3A740BA4B37642580A5 /* Pods_FirebaseFacebookAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FE722A9B3A7D7DEF49F343 /* Pods_FirebaseFacebookAuthUI.framework */; };
+		7AC0E3F0A398B6CD4005BB51 /* Pods_FirebaseStorageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C00C33D979555BA97861EC /* Pods_FirebaseStorageUI.framework */; };
+		860B43F3B657305295BBD677 /* Pods_Phone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16954326E16B80CF96A11586 /* Pods_Phone.framework */; };
+		87FC2AD35E55C5895F85B2E4 /* Pods_Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98FEEEC7AAC561D8FC28BA58 /* Pods_Twitter.framework */; };
 		8D01FC7B1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D01FC7A1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m */; };
 		8D1E107C1DAEB97300AEFCA0 /* FUIIndexTableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1E107B1DAEB97300AEFCA0 /* FUIIndexTableViewDataSourceTest.m */; };
 		8D2A84AA1D678B2B0058DF04 /* FirebaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D2A84A91D678B2B0058DF04 /* FirebaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -87,7 +97,6 @@
 		8DA941AC1D67904200CD3685 /* ic_visibility@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941A31D67904200CD3685 /* ic_visibility@3x.png */; };
 		8DA941B01D67908E00CD3685 /* FUIFacebookAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA941AE1D67908E00CD3685 /* FUIFacebookAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DA941B11D67908E00CD3685 /* FUIFacebookAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941AF1D67908E00CD3685 /* FUIFacebookAuth.m */; };
-		8DA941B41D6790E900CD3685 /* FUIGoogleAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA941B21D6790E900CD3685 /* FUIGoogleAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DA941B51D6790E900CD3685 /* FUIGoogleAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941B31D6790E900CD3685 /* FUIGoogleAuth.m */; };
 		8DA941BF1D67923F00CD3685 /* ic_google.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941BC1D67923F00CD3685 /* ic_google.png */; };
 		8DA941C01D67923F00CD3685 /* ic_google@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941BD1D67923F00CD3685 /* ic_google@2x.png */; };
@@ -133,6 +142,12 @@
 		8DFA90471DAC54DD003B5E10 /* FUIIndexCollectionViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DFA90451DAC54DD003B5E10 /* FUIIndexCollectionViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8DFA90481DAC54DD003B5E10 /* FUIIndexCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA90461DAC54DD003B5E10 /* FUIIndexCollectionViewDataSource.m */; };
 		8DFA90491DAC54DD003B5E10 /* FUIIndexCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA90461DAC54DD003B5E10 /* FUIIndexCollectionViewDataSource.m */; };
+		9C62027B70C621E9266E9886 /* Pods_FirebaseAuthUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44419069E7AA40D471278994 /* Pods_FirebaseAuthUITests.framework */; };
+		9E0CA055D6EA0FF8DA2EA2E8 /* libPods-FirebaseUISampleUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D464960A5B698DD843EC2FF /* libPods-FirebaseUISampleUITests.a */; };
+		A473336B3558AFFBF5C771AC /* Pods_FirebaseAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB7232C0FFCB68825280DFE7 /* Pods_FirebaseAuthUI.framework */; };
+		A47AB319A650FCEC014ADCAC /* Pods_FirebaseGoogleAuthUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F3B946E46DCA9E61C18034 /* Pods_FirebaseGoogleAuthUITests.framework */; };
+		A47E5D65A9F291D65FF14D0E /* Pods_Facebook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DDAC92B675F57953384F6D /* Pods_Facebook.framework */; };
+		C3204F0C1E98340400841149 /* FUICountryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3204F0B1E98340400841149 /* FUICountryTableViewController.xib */; };
 		C32516951D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = C32516941D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C32516A11D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32516A01D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests.m */; };
 		C32516B81D88A61C00B0B3F9 /* FUITwitterAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = C32516B61D88A61C00B0B3F9 /* FUITwitterAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -147,16 +162,107 @@
 		C329B1791DAC121200059A13 /* FirebaseAuthUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8DCC4FC11D678CDC00B0D3C4 /* FirebaseAuthUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C329B17C1DAC149B00059A13 /* FirebaseUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D2A84A61D678B2B0058DF04 /* FirebaseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C329B1AE1DAC5D0B00059A13 /* FirebaseUISampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B15F1DA8694B00059A13 /* FirebaseUISampleUITests.m */; };
+		C33B0F3D1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h in Headers */ = {isa = PBXBuildFile; fileRef = C33B0F3C1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h */; };
+		C33D6B891EB261000013D5C4 /* FUINavigationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C33D6B871EB261000013D5C4 /* FUINavigationViewController.h */; };
+		C33D6B8A1EB261000013D5C4 /* FUINavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33D6B881EB261000013D5C4 /* FUINavigationViewController.m */; };
+		C33D6B8B1EB261000013D5C4 /* FUINavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33D6B881EB261000013D5C4 /* FUINavigationViewController.m */; };
+		C343D29B1E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = C343D2991E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h */; };
+		C343D2A01E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C343D29E1E96CFD400DD9C61 /* FUIPhoneAuthStrings.h */; };
+		C343D2A11E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C343D29E1E96CFD400DD9C61 /* FUIPhoneAuthStrings.h */; };
+		C343D2A21E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = C343D29F1E96CFD400DD9C61 /* FUIPhoneAuthStrings.m */; };
+		C343D2A31E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = C343D29F1E96CFD400DD9C61 /* FUIPhoneAuthStrings.m */; };
+		C343D2A41E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = C343D29F1E96CFD400DD9C61 /* FUIPhoneAuthStrings.m */; };
+		C36179F9AF7E9E8B0EDC95FF /* Pods_FirebaseGoogleAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3164E5D31EF93CFBBEB958 /* Pods_FirebaseGoogleAuthUI.framework */; };
+		C37296841E95C83900F3FCCC /* FUICodeField.h in Headers */ = {isa = PBXBuildFile; fileRef = C37296811E95C83900F3FCCC /* FUICodeField.h */; };
+		C37296851E95C83900F3FCCC /* FUICodeField.m in Sources */ = {isa = PBXBuildFile; fileRef = C37296821E95C83900F3FCCC /* FUICodeField.m */; };
+		C37296861E95C83900F3FCCC /* FUICodeField.m in Sources */ = {isa = PBXBuildFile; fileRef = C37296821E95C83900F3FCCC /* FUICodeField.m */; };
+		C37296871E95C83900F3FCCC /* FUICodeField.xib in Resources */ = {isa = PBXBuildFile; fileRef = C37296831E95C83900F3FCCC /* FUICodeField.xib */; };
+		C3773B641E8EFDEB00ACF58C /* FirebasePhoneAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3773B631E8EFDEB00ACF58C /* FirebasePhoneAuthUITests.m */; };
+		C3773B661E8EFDEB00ACF58C /* FirebasePhoneAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = C3773B561E8EFDEA00ACF58C /* FirebasePhoneAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3773B7F1E92C36400ACF58C /* ic_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = C3773B791E92C36400ACF58C /* ic_phone.png */; };
+		C3773B801E92C36400ACF58C /* ic_phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3773B7A1E92C36400ACF58C /* ic_phone@2x.png */; };
+		C3773B811E92C36400ACF58C /* ic_phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3773B7B1E92C36400ACF58C /* ic_phone@3x.png */; };
+		C3773B821E92C36400ACF58C /* FirebasePhoneAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3773B7D1E92C36400ACF58C /* FirebasePhoneAuthUI.strings */; };
+		C3773B851E92C3CF00ACF58C /* FUIPhoneAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = C3773B831E92C3CF00ACF58C /* FUIPhoneAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3773B861E92C3CF00ACF58C /* FUIPhoneAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = C3773B841E92C3CF00ACF58C /* FUIPhoneAuth.m */; };
+		C3773B991E92CA2D00ACF58C /* FUIPhoneAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = C3773B841E92C3CF00ACF58C /* FUIPhoneAuth.m */; };
+		C3773B9B1E93267100ACF58C /* FUIGoogleAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA941B21D6790E900CD3685 /* FUIGoogleAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C380A7D61D89ECF1005C031D /* ic_twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D01D89ECF1005C031D /* ic_twitter.png */; };
 		C380A7D71D89ECF1005C031D /* ic_twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D11D89ECF1005C031D /* ic_twitter@2x.png */; };
 		C380A7D81D89ECF1005C031D /* ic_twitter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D21D89ECF1005C031D /* ic_twitter@3x.png */; };
 		C380A7E51D89ED82005C031D /* FirebaseTwitterAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = C380A7E31D89ED82005C031D /* FirebaseTwitterAuthUI.strings */; };
+		C3A08D991E97227A00FF63EB /* FUICollationForCountries.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A08D911E97227A00FF63EB /* FUICollationForCountries.h */; };
+		C3A08D9A1E97227A00FF63EB /* FUICollationForCountries.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D921E97227A00FF63EB /* FUICollationForCountries.m */; };
+		C3A08D9B1E97227A00FF63EB /* FUICollationForCountries.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D921E97227A00FF63EB /* FUICollationForCountries.m */; };
+		C3A08D9C1E97227A00FF63EB /* FUICountryCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A08D931E97227A00FF63EB /* FUICountryCodes.h */; };
+		C3A08D9D1E97227A00FF63EB /* FUICountryCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D941E97227A00FF63EB /* FUICountryCodes.m */; };
+		C3A08D9E1E97227A00FF63EB /* FUICountryCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D941E97227A00FF63EB /* FUICountryCodes.m */; };
+		C3A08D9F1E97227A00FF63EB /* FUICountryTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A08D951E97227A00FF63EB /* FUICountryTableViewController.h */; };
+		C3A08DA01E97227A00FF63EB /* FUICountryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D961E97227A00FF63EB /* FUICountryTableViewController.m */; };
+		C3A08DA11E97227A00FF63EB /* FUICountryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D961E97227A00FF63EB /* FUICountryTableViewController.m */; };
+		C3A08DA21E97227A00FF63EB /* FUIFeatureSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A08D971E97227A00FF63EB /* FUIFeatureSwitch.h */; };
+		C3A08DA31E97227A00FF63EB /* FUIFeatureSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D981E97227A00FF63EB /* FUIFeatureSwitch.m */; };
+		C3A08DA41E97227A00FF63EB /* FUIFeatureSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A08D981E97227A00FF63EB /* FUIFeatureSwitch.m */; };
+		C3A201771E9597DA0040563F /* FUIPhoneEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A201711E9597DA0040563F /* FUIPhoneEntryViewController.h */; };
+		C3A201781E9597DA0040563F /* FUIPhoneEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A201721E9597DA0040563F /* FUIPhoneEntryViewController.m */; };
+		C3A201791E9597DA0040563F /* FUIPhoneEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A201731E9597DA0040563F /* FUIPhoneEntryViewController.xib */; };
+		C3A2017A1E9597DA0040563F /* FUIPhoneVerificationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A201741E9597DA0040563F /* FUIPhoneVerificationViewController.h */; };
+		C3A2017B1E9597DA0040563F /* FUIPhoneVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A201751E9597DA0040563F /* FUIPhoneVerificationViewController.m */; };
+		C3A2017C1E9597DA0040563F /* FUIPhoneVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A201761E9597DA0040563F /* FUIPhoneVerificationViewController.xib */; };
+		C3A2017D1E9597FB0040563F /* FUIPhoneEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A201721E9597DA0040563F /* FUIPhoneEntryViewController.m */; };
+		C3A2017E1E9598040040563F /* FUIPhoneVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A201751E9597DA0040563F /* FUIPhoneVerificationViewController.m */; };
+		C3BE73751E610F6700BCD147 /* FUIStaticContentTableViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BE73731E610F6700BCD147 /* FUIStaticContentTableViewManager.h */; };
+		C3BE73761E610F6700BCD147 /* FUIStaticContentTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE73741E610F6700BCD147 /* FUIStaticContentTableViewManager.m */; };
+		C3BE73771E610F7600BCD147 /* FUIStaticContentTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE73741E610F6700BCD147 /* FUIStaticContentTableViewManager.m */; };
+		C3BE738C1E625D9F00BCD147 /* FUIStaticContentTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BE73891E625D9F00BCD147 /* FUIStaticContentTableViewController.h */; };
+		C3BE738D1E625D9F00BCD147 /* FUIStaticContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE738A1E625D9F00BCD147 /* FUIStaticContentTableViewController.m */; };
+		C3BE738E1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE738B1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib */; };
+		C3BE738F1E625DAD00BCD147 /* FUIStaticContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE738A1E625D9F00BCD147 /* FUIStaticContentTableViewController.m */; };
+		C3BE73BE1E64D1D000BCD147 /* FUIAccountSettingsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BE73AF1E64D1D000BCD147 /* FUIAccountSettingsViewController.h */; };
+		C3BE73BF1E64D1D000BCD147 /* FUIAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE73B01E64D1D000BCD147 /* FUIAccountSettingsViewController.m */; };
+		C3BE73C01E64D1D000BCD147 /* FUIAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE73B01E64D1D000BCD147 /* FUIAccountSettingsViewController.m */; };
+		C3BE73C11E64D1D000BCD147 /* FUIAccountSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE73B11E64D1D000BCD147 /* FUIAccountSettingsViewController.xib */; };
+		C3BE73D11E64D1D000BCD147 /* FUIInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE73BC1E64D1D000BCD147 /* FUIInputTableViewCell.xib */; };
+		C3BE73D21E64D1D000BCD147 /* FUIPasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE73BD1E64D1D000BCD147 /* FUIPasswordTableViewCell.xib */; };
 		C3C3B0FE1D99F83C003F8B90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3C3B0FD1D99F83C003F8B90 /* GoogleService-Info.plist */; };
 		C3C3B10D1D9B4530003F8B90 /* ic_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DA1D6793EE00CD3685 /* ic_facebook.png */; };
 		C3C3B10E1D9B4530003F8B90 /* ic_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DB1D6793EE00CD3685 /* ic_facebook@2x.png */; };
 		C3C3B10F1D9B4530003F8B90 /* ic_facebook@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DC1D6793EE00CD3685 /* ic_facebook@3x.png */; };
 		C3C3B1101D9B4534003F8B90 /* FirebaseFacebookAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941E11D67940100CD3685 /* FirebaseFacebookAuthUI.strings */; };
 		C3C3B1131D9C26AE003F8B90 /* FUIFacebookAuthTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C3B1121D9C26AE003F8B90 /* FUIFacebookAuthTest.m */; };
+		C3CA199A1E67E605002AB4CC /* FUIAccountSettingsOperation_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = C3CA19891E67E605002AB4CC /* FUIAccountSettingsOperation_Internal.h */; };
+		C3CA199B1E67E605002AB4CC /* FUIAccountSettingsOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C3CA198A1E67E605002AB4CC /* FUIAccountSettingsOperation.h */; };
+		C3CA199C1E67E605002AB4CC /* FUIAccountSettingsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA198B1E67E605002AB4CC /* FUIAccountSettingsOperation.m */; };
+		C3CA199D1E67E605002AB4CC /* FUIAccountSettingsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA198B1E67E605002AB4CC /* FUIAccountSettingsOperation.m */; };
+		C3CA199E1E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = C3CA198C1E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.h */; };
+		C3CA199F1E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA198D1E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.m */; };
+		C3CA19A01E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA198D1E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.m */; };
+		C3CA19A11E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.h in Headers */ = {isa = PBXBuildFile; fileRef = C3CA198E1E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.h */; };
+		C3CA19A21E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA198F1E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.m */; };
+		C3CA19A31E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA198F1E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.m */; };
+		C3CA19A41E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.h in Headers */ = {isa = PBXBuildFile; fileRef = C3CA19901E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.h */; };
+		C3CA19A51E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA19911E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.m */; };
+		C3CA19A61E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA19911E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.m */; };
+		C3CA19A71E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = C3CA19921E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.h */; };
+		C3CA19A81E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA19931E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.m */; };
+		C3CA19A91E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA19931E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.m */; };
+		C3CA19AA1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.h in Headers */ = {isa = PBXBuildFile; fileRef = C3CA19941E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.h */; };
+		C3CA19AB1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA19951E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.m */; };
+		C3CA19AC1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA19951E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.m */; };
+		C3CA19AD1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.h in Headers */ = {isa = PBXBuildFile; fileRef = C3CA19961E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.h */; };
+		C3CA19AE1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA19971E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.m */; };
+		C3CA19AF1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA19971E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.m */; };
+		C3CA19B01E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.h in Headers */ = {isa = PBXBuildFile; fileRef = C3CA19981E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.h */; };
+		C3CA19B11E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA19991E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m */; };
+		C3CA19B21E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA19991E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m */; };
+		C3D718F61E9F133500F734D8 /* country-codes.json in Resources */ = {isa = PBXBuildFile; fileRef = C3D718F51E9F133500F734D8 /* country-codes.json */; };
+		CF98C184279325D705FA9C8E /* Pods_FirebaseTwitterAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C49ED6AD34E2C2B0150A811 /* Pods_FirebaseTwitterAuthUI.framework */; };
+		D34FE9B6CE0C31063367B7F0 /* Pods_FirebaseTwitterAuthUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5165B56141EBBF9724A45A1 /* Pods_FirebaseTwitterAuthUITests.framework */; };
+		DF73221FA9622DEF2C2934DC /* Pods_Database.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8383FC4E4827CF98B1BFD9 /* Pods_Database.framework */; };
+		EAE1D683B4788C53DFB05C56 /* Pods_Storage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1E16A384AD20299E806F5F6 /* Pods_Storage.framework */; };
+		F07113B82EBDC5752DA82259 /* Pods_FirebaseStorageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D95E0064DF62D31F4038ED9 /* Pods_FirebaseStorageUITests.framework */; };
+		F6BB3FF4A4D8ED066FE62D26 /* Pods_FirebasePhoneAuthUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7784DAFD16A268A75176D4A4 /* Pods_FirebasePhoneAuthUITests.framework */; };
+		F723EAF9F0162025376F85CB /* Pods_FirebaseDatabaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12BAE82D3D00BEEA73025F2A /* Pods_FirebaseDatabaseUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -272,6 +378,27 @@
 			remoteGlobalIDString = 8D2A84A51D678B2B0058DF04;
 			remoteInfo = FirebaseUI;
 		};
+		C3773B5E1E8EFDEB00ACF58C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C3773B531E8EFDEA00ACF58C;
+			remoteInfo = FirebasePhoneAuthUI;
+		};
+		C3773B941E92C9CE00ACF58C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C3773B531E8EFDEA00ACF58C;
+			remoteInfo = FirebasePhoneAuthUI;
+		};
+		C3773B961E92C9FA00ACF58C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DCC4FC01D678CDC00B0D3C4;
+			remoteInfo = FirebaseAuthUI;
+		};
 		C3CCFF4F1D8B316100788425 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
@@ -347,9 +474,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C3773B891E92C91D00ACF58C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05B50A024328C53956F24F81 /* Pods-Database.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Database.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Database/Pods-Database.debug.xcconfig"; sourceTree = "<group>"; };
+		05B7023A91EB57305BAD4550 /* Pods-FirebaseTwitterAuthUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseTwitterAuthUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseTwitterAuthUI/Pods-FirebaseTwitterAuthUI.release.xcconfig"; sourceTree = "<group>"; };
+		0C7F1B4F106A3E94DBF31F1B /* Pods-FirebaseStorageUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseStorageUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseStorageUI/Pods-FirebaseStorageUI.release.xcconfig"; sourceTree = "<group>"; };
+		0E17C6D46F89DEE139D63A8F /* Pods-FirebaseUISampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUISampleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUISampleUITests/Pods-FirebaseUISampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		12364CFDE39E64EEF44A0C2A /* Pods-Auth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Auth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Auth/Pods-Auth.debug.xcconfig"; sourceTree = "<group>"; };
+		126DA02E9DB2835E67154B8C /* Pods-FirebaseUISample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUISample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUISample/Pods-FirebaseUISample.debug.xcconfig"; sourceTree = "<group>"; };
+		12BAE82D3D00BEEA73025F2A /* Pods_FirebaseDatabaseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseDatabaseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		15CF5F4250C3C04D27E01158 /* Pods-Facebook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Facebook.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Facebook/Pods-Facebook.debug.xcconfig"; sourceTree = "<group>"; };
+		160F6D6463A9224404AC096D /* Pods-FirebasePhoneAuthUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebasePhoneAuthUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebasePhoneAuthUITests/Pods-FirebasePhoneAuthUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		16954326E16B80CF96A11586 /* Pods_Phone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Phone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D464960A5B698DD843EC2FF /* libPods-FirebaseUISampleUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseUISampleUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		27A7613A4B101F24BABEA939 /* Pods-FirebaseGoogleAuthUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseGoogleAuthUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseGoogleAuthUI/Pods-FirebaseGoogleAuthUI.debug.xcconfig"; sourceTree = "<group>"; };
+		2D95E0064DF62D31F4038ED9 /* Pods_FirebaseStorageUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseStorageUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3585126C654F68170E7CBE46 /* Pods_FirebasePhoneAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebasePhoneAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E120AC89290E4C7A3B98CCC /* Pods-FirebaseAuthUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseAuthUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseAuthUITests/Pods-FirebaseAuthUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		41034109E15B3F733A3CF16C /* Pods-FirebaseAuthUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseAuthUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseAuthUITests/Pods-FirebaseAuthUITests.release.xcconfig"; sourceTree = "<group>"; };
+		44419069E7AA40D471278994 /* Pods_FirebaseAuthUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseAuthUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48233B0328C9742974FAF0AA /* Pods-Phone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Phone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Phone/Pods-Phone.debug.xcconfig"; sourceTree = "<group>"; };
+		5067984EB8D391ACDCDE3666 /* Pods-FirebaseDatabaseUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseDatabaseUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseDatabaseUI/Pods-FirebaseDatabaseUI.release.xcconfig"; sourceTree = "<group>"; };
+		507B68E0DC47537959EDBF9C /* Pods-FirebaseGoogleAuthUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseGoogleAuthUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseGoogleAuthUITests/Pods-FirebaseGoogleAuthUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		59B70AC75E41D3BD2F50D11F /* Pods-FirebasePhoneAuthUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebasePhoneAuthUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebasePhoneAuthUI/Pods-FirebasePhoneAuthUI.release.xcconfig"; sourceTree = "<group>"; };
+		5CA35A5C492B2CD22FCAEE65 /* Pods-FirebaseGoogleAuthUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseGoogleAuthUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseGoogleAuthUITests/Pods-FirebaseGoogleAuthUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6129ED0968AEB9C89CEAFBFD /* Pods-FirebaseDatabaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseDatabaseUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseDatabaseUITests/Pods-FirebaseDatabaseUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6456170A0D334A2C3ABCB602 /* Pods-Facebook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Facebook.release.xcconfig"; path = "Pods/Target Support Files/Pods-Facebook/Pods-Facebook.release.xcconfig"; sourceTree = "<group>"; };
+		69B7F5967F5CDBB74FA277BD /* Pods-FirebaseAuthUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseAuthUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseAuthUI/Pods-FirebaseAuthUI.release.xcconfig"; sourceTree = "<group>"; };
+		6C49ED6AD34E2C2B0150A811 /* Pods_FirebaseTwitterAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseTwitterAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F416D1AE65041345CA54BB3 /* Pods_FirebaseFacebookAuthUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseFacebookAuthUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73DDAC92B675F57953384F6D /* Pods_Facebook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Facebook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7784DAFD16A268A75176D4A4 /* Pods_FirebasePhoneAuthUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebasePhoneAuthUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77FE722A9B3A7D7DEF49F343 /* Pods_FirebaseFacebookAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseFacebookAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		78A31E8929A6EBF90D794CE9 /* Pods_FirebaseDatabaseUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseDatabaseUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85C00C33D979555BA97861EC /* Pods_FirebaseStorageUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseStorageUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		893D0B359600146DA14821B0 /* Pods-FirebaseTwitterAuthUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseTwitterAuthUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseTwitterAuthUITests/Pods-FirebaseTwitterAuthUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		8C488E6ABBC92C014EEECA87 /* Pods-FirebaseUISampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUISampleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUISampleUITests/Pods-FirebaseUISampleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8D01FC7A1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIIndexCollectionViewDataSourceTest.m; sourceTree = "<group>"; };
 		8D1E107B1DAEB97300AEFCA0 /* FUIIndexTableViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIIndexTableViewDataSourceTest.m; sourceTree = "<group>"; };
 		8D2A84A61D678B2B0058DF04 /* FirebaseUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -478,6 +648,25 @@
 		8DFA90411DAC1DAC003B5E10 /* FUIIndexTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIIndexTableViewDataSource.m; sourceTree = "<group>"; };
 		8DFA90451DAC54DD003B5E10 /* FUIIndexCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIIndexCollectionViewDataSource.h; sourceTree = "<group>"; };
 		8DFA90461DAC54DD003B5E10 /* FUIIndexCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIIndexCollectionViewDataSource.m; sourceTree = "<group>"; };
+		904CCB0FE70C1CEE935BA50E /* Pods-FirebaseDatabaseUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseDatabaseUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseDatabaseUI/Pods-FirebaseDatabaseUI.debug.xcconfig"; sourceTree = "<group>"; };
+		98FEEEC7AAC561D8FC28BA58 /* Pods_Twitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Twitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CBCE37A7E02C36AF3C5AF9C /* Pods-FirebaseUISample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUISample.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseUISample/Pods-FirebaseUISample.release.xcconfig"; sourceTree = "<group>"; };
+		9F3164E5D31EF93CFBBEB958 /* Pods_FirebaseGoogleAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseGoogleAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FC0666172044BC779D15BC0 /* Pods-Database.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Database.release.xcconfig"; path = "Pods/Target Support Files/Pods-Database/Pods-Database.release.xcconfig"; sourceTree = "<group>"; };
+		A5165B56141EBBF9724A45A1 /* Pods_FirebaseTwitterAuthUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseTwitterAuthUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD9CEF033E0AE91780E40C12 /* Pods-FirebaseAuthUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseAuthUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseAuthUI/Pods-FirebaseAuthUI.debug.xcconfig"; sourceTree = "<group>"; };
+		B178A762D59D5A64DBF6ACB7 /* Pods-Phone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Phone.release.xcconfig"; path = "Pods/Target Support Files/Pods-Phone/Pods-Phone.release.xcconfig"; sourceTree = "<group>"; };
+		B1DA61BA35933A2A9FF70241 /* Pods-Storage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Storage.release.xcconfig"; path = "Pods/Target Support Files/Pods-Storage/Pods-Storage.release.xcconfig"; sourceTree = "<group>"; };
+		B1E16A384AD20299E806F5F6 /* Pods_Storage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Storage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5F3B946E46DCA9E61C18034 /* Pods_FirebaseGoogleAuthUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseGoogleAuthUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6E0657A841C5CA36B9F9AFF /* Pods-FirebaseFacebookAuthUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseFacebookAuthUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseFacebookAuthUITests/Pods-FirebaseFacebookAuthUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BB9606BB725B6980BE51A1CF /* Pods-Twitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-Twitter/Pods-Twitter.release.xcconfig"; sourceTree = "<group>"; };
+		BC1E546C7D4FCAF50357A47E /* Pods-FirebasePhoneAuthUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebasePhoneAuthUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebasePhoneAuthUI/Pods-FirebasePhoneAuthUI.debug.xcconfig"; sourceTree = "<group>"; };
+		BCD340617F228C38856AD85B /* Pods-FirebaseFacebookAuthUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseFacebookAuthUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseFacebookAuthUI/Pods-FirebaseFacebookAuthUI.debug.xcconfig"; sourceTree = "<group>"; };
+		BFAEE8F248FA2B9EC923E448 /* Pods-Storage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Storage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Storage/Pods-Storage.debug.xcconfig"; sourceTree = "<group>"; };
+		C0B11EE1FA6B4970C3127EEE /* Pods-FirebaseFacebookAuthUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseFacebookAuthUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseFacebookAuthUITests/Pods-FirebaseFacebookAuthUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C1775C63258D3259618AE277 /* Pods-FirebaseStorageUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseStorageUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseStorageUI/Pods-FirebaseStorageUI.debug.xcconfig"; sourceTree = "<group>"; };
+		C3204F0B1E98340400841149 /* FUICountryTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICountryTableViewController.xib; sourceTree = "<group>"; };
 		C32516921D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseTwitterAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32516941D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseTwitterAuthUI.h; sourceTree = "<group>"; };
 		C32516961D88A54C00B0B3F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -500,13 +689,96 @@
 		C329B15B1DA8694A00059A13 /* FirebaseUISampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirebaseUISampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C329B15F1DA8694B00059A13 /* FirebaseUISampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebaseUISampleUITests.m; sourceTree = "<group>"; };
 		C329B1611DA8694B00059A13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C33B0F3C1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsOperationType.h; sourceTree = "<group>"; };
+		C33D6B871EB261000013D5C4 /* FUINavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUINavigationViewController.h; sourceTree = "<group>"; };
+		C33D6B881EB261000013D5C4 /* FUINavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUINavigationViewController.m; sourceTree = "<group>"; };
+		C343D2991E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneAuth_Internal.h; sourceTree = "<group>"; };
+		C343D29E1E96CFD400DD9C61 /* FUIPhoneAuthStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneAuthStrings.h; sourceTree = "<group>"; };
+		C343D29F1E96CFD400DD9C61 /* FUIPhoneAuthStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPhoneAuthStrings.m; sourceTree = "<group>"; };
+		C37296811E95C83900F3FCCC /* FUICodeField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICodeField.h; sourceTree = "<group>"; };
+		C37296821E95C83900F3FCCC /* FUICodeField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICodeField.m; sourceTree = "<group>"; };
+		C37296831E95C83900F3FCCC /* FUICodeField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICodeField.xib; sourceTree = "<group>"; };
+		C3773B541E8EFDEA00ACF58C /* FirebasePhoneAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebasePhoneAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3773B561E8EFDEA00ACF58C /* FirebasePhoneAuthUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebasePhoneAuthUI.h; sourceTree = "<group>"; };
+		C3773B571E8EFDEA00ACF58C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3773B5C1E8EFDEA00ACF58C /* FirebasePhoneAuthUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirebasePhoneAuthUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3773B631E8EFDEB00ACF58C /* FirebasePhoneAuthUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebasePhoneAuthUITests.m; sourceTree = "<group>"; };
+		C3773B651E8EFDEB00ACF58C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3773B791E92C36400ACF58C /* ic_phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_phone.png; sourceTree = "<group>"; };
+		C3773B7A1E92C36400ACF58C /* ic_phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_phone@2x.png"; sourceTree = "<group>"; };
+		C3773B7B1E92C36400ACF58C /* ic_phone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_phone@3x.png"; sourceTree = "<group>"; };
+		C3773B7E1E92C36400ACF58C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C3773B831E92C3CF00ACF58C /* FUIPhoneAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneAuth.h; sourceTree = "<group>"; };
+		C3773B841E92C3CF00ACF58C /* FUIPhoneAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPhoneAuth.m; sourceTree = "<group>"; };
+		C3773B8B1E92C91D00ACF58C /* libPhone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPhone.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3773B8D1E92C91E00ACF58C /* Phone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Phone.h; sourceTree = "<group>"; };
+		C3773B8E1E92C91E00ACF58C /* Phone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Phone.m; sourceTree = "<group>"; };
 		C380A7D01D89ECF1005C031D /* ic_twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_twitter.png; sourceTree = "<group>"; };
 		C380A7D11D89ECF1005C031D /* ic_twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_twitter@2x.png"; sourceTree = "<group>"; };
 		C380A7D21D89ECF1005C031D /* ic_twitter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_twitter@3x.png"; sourceTree = "<group>"; };
 		C380A7E41D89ED82005C031D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C3A08D911E97227A00FF63EB /* FUICollationForCountries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICollationForCountries.h; sourceTree = "<group>"; };
+		C3A08D921E97227A00FF63EB /* FUICollationForCountries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICollationForCountries.m; sourceTree = "<group>"; };
+		C3A08D931E97227A00FF63EB /* FUICountryCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICountryCodes.h; sourceTree = "<group>"; };
+		C3A08D941E97227A00FF63EB /* FUICountryCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICountryCodes.m; sourceTree = "<group>"; };
+		C3A08D951E97227A00FF63EB /* FUICountryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICountryTableViewController.h; sourceTree = "<group>"; };
+		C3A08D961E97227A00FF63EB /* FUICountryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICountryTableViewController.m; sourceTree = "<group>"; };
+		C3A08D971E97227A00FF63EB /* FUIFeatureSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIFeatureSwitch.h; sourceTree = "<group>"; };
+		C3A08D981E97227A00FF63EB /* FUIFeatureSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIFeatureSwitch.m; sourceTree = "<group>"; };
+		C3A201711E9597DA0040563F /* FUIPhoneEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneEntryViewController.h; sourceTree = "<group>"; };
+		C3A201721E9597DA0040563F /* FUIPhoneEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPhoneEntryViewController.m; sourceTree = "<group>"; };
+		C3A201731E9597DA0040563F /* FUIPhoneEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPhoneEntryViewController.xib; sourceTree = "<group>"; };
+		C3A201741E9597DA0040563F /* FUIPhoneVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneVerificationViewController.h; sourceTree = "<group>"; };
+		C3A201751E9597DA0040563F /* FUIPhoneVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPhoneVerificationViewController.m; sourceTree = "<group>"; };
+		C3A201761E9597DA0040563F /* FUIPhoneVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPhoneVerificationViewController.xib; sourceTree = "<group>"; };
+		C3BE73731E610F6700BCD147 /* FUIStaticContentTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIStaticContentTableViewManager.h; sourceTree = "<group>"; };
+		C3BE73741E610F6700BCD147 /* FUIStaticContentTableViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIStaticContentTableViewManager.m; sourceTree = "<group>"; };
+		C3BE73891E625D9F00BCD147 /* FUIStaticContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIStaticContentTableViewController.h; sourceTree = "<group>"; };
+		C3BE738A1E625D9F00BCD147 /* FUIStaticContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIStaticContentTableViewController.m; sourceTree = "<group>"; };
+		C3BE738B1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIStaticContentTableViewController.xib; sourceTree = "<group>"; };
+		C3BE73AF1E64D1D000BCD147 /* FUIAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsViewController.h; sourceTree = "<group>"; };
+		C3BE73B01E64D1D000BCD147 /* FUIAccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAccountSettingsViewController.m; sourceTree = "<group>"; };
+		C3BE73B11E64D1D000BCD147 /* FUIAccountSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIAccountSettingsViewController.xib; sourceTree = "<group>"; };
+		C3BE73BC1E64D1D000BCD147 /* FUIInputTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIInputTableViewCell.xib; sourceTree = "<group>"; };
+		C3BE73BD1E64D1D000BCD147 /* FUIPasswordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPasswordTableViewCell.xib; sourceTree = "<group>"; };
 		C3C3B0FD1D99F83C003F8B90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3C3B1111D9C26AE003F8B90 /* FUIFacebookAuthTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIFacebookAuthTest.h; sourceTree = "<group>"; };
 		C3C3B1121D9C26AE003F8B90 /* FUIFacebookAuthTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIFacebookAuthTest.m; sourceTree = "<group>"; };
+		C3CA19891E67E605002AB4CC /* FUIAccountSettingsOperation_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsOperation_Internal.h; sourceTree = "<group>"; };
+		C3CA198A1E67E605002AB4CC /* FUIAccountSettingsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsOperation.h; sourceTree = "<group>"; };
+		C3CA198B1E67E605002AB4CC /* FUIAccountSettingsOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAccountSettingsOperation.m; sourceTree = "<group>"; };
+		C3CA198C1E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsOperationDeleteAccount.h; sourceTree = "<group>"; };
+		C3CA198D1E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAccountSettingsOperationDeleteAccount.m; sourceTree = "<group>"; };
+		C3CA198E1E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsOperationForgotPassword.h; sourceTree = "<group>"; };
+		C3CA198F1E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAccountSettingsOperationForgotPassword.m; sourceTree = "<group>"; };
+		C3CA19901E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsOperationSignOut.h; sourceTree = "<group>"; };
+		C3CA19911E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAccountSettingsOperationSignOut.m; sourceTree = "<group>"; };
+		C3CA19921E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsOperationUnlinkAccount.h; sourceTree = "<group>"; };
+		C3CA19931E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAccountSettingsOperationUnlinkAccount.m; sourceTree = "<group>"; };
+		C3CA19941E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsOperationUpdateEmail.h; sourceTree = "<group>"; };
+		C3CA19951E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAccountSettingsOperationUpdateEmail.m; sourceTree = "<group>"; };
+		C3CA19961E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsOperationUpdateName.h; sourceTree = "<group>"; };
+		C3CA19971E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAccountSettingsOperationUpdateName.m; sourceTree = "<group>"; };
+		C3CA19981E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsOperationUpdatePassword.h; sourceTree = "<group>"; };
+		C3CA19991E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAccountSettingsOperationUpdatePassword.m; sourceTree = "<group>"; };
+		C3D718F51E9F133500F734D8 /* country-codes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "country-codes.json"; sourceTree = "<group>"; };
+		C5BE0C35509F4E444EFCB576 /* Pods-FirebaseFacebookAuthUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseFacebookAuthUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseFacebookAuthUI/Pods-FirebaseFacebookAuthUI.release.xcconfig"; sourceTree = "<group>"; };
+		CACC40A530AF1B522B4F4B1E /* Pods_Google.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Google.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD31767337AEB98AA9AFBA9D /* Pods-FirebaseDatabaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseDatabaseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseDatabaseUITests/Pods-FirebaseDatabaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D259FAC6FA2BE56A4F1FFBD9 /* Pods-Auth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Auth.release.xcconfig"; path = "Pods/Target Support Files/Pods-Auth/Pods-Auth.release.xcconfig"; sourceTree = "<group>"; };
+		D328C77DF4E8D18736DF5EC0 /* Pods-Google.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Google.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Google/Pods-Google.debug.xcconfig"; sourceTree = "<group>"; };
+		E0191377D0E0BD0480A1DFEC /* Pods-FirebaseStorageUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseStorageUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseStorageUITests/Pods-FirebaseStorageUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E1824D692E1F968329F1C486 /* Pods-Twitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Twitter/Pods-Twitter.debug.xcconfig"; sourceTree = "<group>"; };
+		E4429AF9243B3E3601F52462 /* Pods_Auth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Auth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E578E7D681695876A3D42AD4 /* Pods-FirebaseTwitterAuthUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseTwitterAuthUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseTwitterAuthUITests/Pods-FirebaseTwitterAuthUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E8C3D267FD7EBAFD7EEBFD63 /* Pods-FirebasePhoneAuthUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebasePhoneAuthUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebasePhoneAuthUITests/Pods-FirebasePhoneAuthUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E9C21203E097910814FF5025 /* Pods-Google.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Google.release.xcconfig"; path = "Pods/Target Support Files/Pods-Google/Pods-Google.release.xcconfig"; sourceTree = "<group>"; };
+		ED8383FC4E4827CF98B1BFD9 /* Pods_Database.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Database.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDC10C24505764521A52E931 /* Pods-FirebaseStorageUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseStorageUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseStorageUITests/Pods-FirebaseStorageUITests.release.xcconfig"; sourceTree = "<group>"; };
+		EDFF3B7EC23D67B5F8FF9C5A /* libPods-FirebaseUISample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FirebaseUISample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F43009537AE5D1AB4BF58EB9 /* Pods-FirebaseTwitterAuthUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseTwitterAuthUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseTwitterAuthUI/Pods-FirebaseTwitterAuthUI.debug.xcconfig"; sourceTree = "<group>"; };
+		FB7232C0FFCB68825280DFE7 /* Pods_FirebaseAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD2055B0B37B3E5765656B07 /* Pods-FirebaseGoogleAuthUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseGoogleAuthUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseGoogleAuthUI/Pods-FirebaseGoogleAuthUI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -521,6 +793,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAE1D683B4788C53DFB05C56 /* Pods_Storage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +801,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AC0E3F0A398B6CD4005BB51 /* Pods_FirebaseStorageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +810,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DDA1D3F1D944ED100B98969 /* FirebaseStorageUI.framework in Frameworks */,
+				F07113B82EBDC5752DA82259 /* Pods_FirebaseStorageUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +818,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF73221FA9622DEF2C2934DC /* Pods_Database.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +826,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29F8E5DF3DC749596A508B15 /* Pods_Auth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +834,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A47E5D65A9F291D65FF14D0E /* Pods_Facebook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +842,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F5BE953C9EE64E86B09C0D5 /* Pods_Google.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +850,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BF2492275385993BFFF8BEE /* Pods_FirebaseDatabaseUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +858,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F723EAF9F0162025376F85CB /* Pods_FirebaseDatabaseUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +866,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A473336B3558AFFBF5C771AC /* Pods_FirebaseAuthUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,6 +874,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C62027B70C621E9266E9886 /* Pods_FirebaseAuthUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,6 +882,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7487A3A740BA4B37642580A5 /* Pods_FirebaseFacebookAuthUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,6 +890,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DD3086E95331A683666BA07 /* Pods_FirebaseFacebookAuthUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,6 +898,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C36179F9AF7E9E8B0EDC95FF /* Pods_FirebaseGoogleAuthUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +906,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A47AB319A650FCEC014ADCAC /* Pods_FirebaseGoogleAuthUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +914,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF98C184279325D705FA9C8E /* Pods_FirebaseTwitterAuthUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,6 +922,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D34FE9B6CE0C31063367B7F0 /* Pods_FirebaseTwitterAuthUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +930,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87FC2AD35E55C5895F85B2E4 /* Pods_Twitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +938,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A598E49BF405C8C0A6746F4 /* libPods-FirebaseUISample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +946,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E0CA055D6EA0FF8DA2EA2E8 /* libPods-FirebaseUISampleUITests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3773B501E8EFDEA00ACF58C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44DA4422DF573DBD5418E5C7 /* Pods_FirebasePhoneAuthUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3773B591E8EFDEA00ACF58C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6BB3FF4A4D8ED066FE62D26 /* Pods_FirebasePhoneAuthUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3773B881E92C91D00ACF58C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				860B43F3B657305295BBD677 /* Pods_Phone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,14 +989,18 @@
 				8DCC4FEA1D678CE800B0D3C4 /* FirebaseFacebookAuthUITests */,
 				8DCC4FFA1D678CF500B0D3C4 /* FirebaseGoogleAuthUI */,
 				8DCC50061D678CF500B0D3C4 /* FirebaseGoogleAuthUITests */,
+				C3773B551E8EFDEA00ACF58C /* FirebasePhoneAuthUI */,
+				C3773B621E8EFDEB00ACF58C /* FirebasePhoneAuthUITests */,
 				C32516931D88A54C00B0B3F9 /* FirebaseTwitterAuthUI */,
 				C325169F1D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests */,
 				8D90842F1D9316AB00333CC8 /* FirebaseStorageUI */,
 				8D90843A1D9316AB00333CC8 /* FirebaseStorageUITests */,
 				C329B1391DA8694A00059A13 /* FirebaseUISample */,
 				C329B15E1DA8694B00059A13 /* FirebaseUISampleUITests */,
+				C3773B8C1E92C91E00ACF58C /* Phone */,
 				8D2A84A71D678B2B0058DF04 /* Products */,
 				903F73EA092681D67581F496 /* Frameworks */,
+				C7A6A4C2CC3F8CFB68B802B6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -708,6 +1028,9 @@
 				8D9084361D9316AB00333CC8 /* FirebaseStorageUITests.xctest */,
 				C329B1381DA8694A00059A13 /* FirebaseUISample.app */,
 				C329B15B1DA8694A00059A13 /* FirebaseUISampleUITests.xctest */,
+				C3773B541E8EFDEA00ACF58C /* FirebasePhoneAuthUI.framework */,
+				C3773B5C1E8EFDEA00ACF58C /* FirebasePhoneAuthUITests.xctest */,
+				C3773B8B1E92C91D00ACF58C /* libPhone.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -879,6 +1202,7 @@
 		8DCC4FC21D678CDC00B0D3C4 /* FirebaseAuthUI */ = {
 			isa = PBXGroup;
 			children = (
+				C3BCC4E11E527B7E0095D610 /* AccountManagement */,
 				8DCC4FC31D678CDC00B0D3C4 /* FirebaseAuthUI.h */,
 				8DA9414B1D678F5400CD3685 /* FUIAuthPickerViewController.h */,
 				8DA9414C1D678F5400CD3685 /* FUIAuthPickerViewController.m */,
@@ -919,6 +1243,11 @@
 				8DA9416F1D678F5400CD3685 /* FUIPasswordVerificationViewController.h */,
 				8DA941701D678F5400CD3685 /* FUIPasswordVerificationViewController.m */,
 				8DA941711D678F5400CD3685 /* FUIPasswordVerificationViewController.xib */,
+				C3BE73891E625D9F00BCD147 /* FUIStaticContentTableViewController.h */,
+				C3BE738A1E625D9F00BCD147 /* FUIStaticContentTableViewController.m */,
+				C3BE738B1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib */,
+				C3BE73731E610F6700BCD147 /* FUIStaticContentTableViewManager.h */,
+				C3BE73741E610F6700BCD147 /* FUIStaticContentTableViewManager.m */,
 				8DCC4FC51D678CDC00B0D3C4 /* Info.plist */,
 				8DA941E41D67943E00CD3685 /* Strings */,
 				8DA941AD1D67904800CD3685 /* Resources */,
@@ -987,6 +1316,29 @@
 			isa = PBXGroup;
 			children = (
 				8DCF7AD31DC009C1004E19CA /* GTMOAuth2.framework */,
+				E4429AF9243B3E3601F52462 /* Pods_Auth.framework */,
+				ED8383FC4E4827CF98B1BFD9 /* Pods_Database.framework */,
+				73DDAC92B675F57953384F6D /* Pods_Facebook.framework */,
+				FB7232C0FFCB68825280DFE7 /* Pods_FirebaseAuthUI.framework */,
+				44419069E7AA40D471278994 /* Pods_FirebaseAuthUITests.framework */,
+				78A31E8929A6EBF90D794CE9 /* Pods_FirebaseDatabaseUI.framework */,
+				12BAE82D3D00BEEA73025F2A /* Pods_FirebaseDatabaseUITests.framework */,
+				77FE722A9B3A7D7DEF49F343 /* Pods_FirebaseFacebookAuthUI.framework */,
+				6F416D1AE65041345CA54BB3 /* Pods_FirebaseFacebookAuthUITests.framework */,
+				9F3164E5D31EF93CFBBEB958 /* Pods_FirebaseGoogleAuthUI.framework */,
+				B5F3B946E46DCA9E61C18034 /* Pods_FirebaseGoogleAuthUITests.framework */,
+				3585126C654F68170E7CBE46 /* Pods_FirebasePhoneAuthUI.framework */,
+				7784DAFD16A268A75176D4A4 /* Pods_FirebasePhoneAuthUITests.framework */,
+				85C00C33D979555BA97861EC /* Pods_FirebaseStorageUI.framework */,
+				2D95E0064DF62D31F4038ED9 /* Pods_FirebaseStorageUITests.framework */,
+				6C49ED6AD34E2C2B0150A811 /* Pods_FirebaseTwitterAuthUI.framework */,
+				A5165B56141EBBF9724A45A1 /* Pods_FirebaseTwitterAuthUITests.framework */,
+				EDFF3B7EC23D67B5F8FF9C5A /* libPods-FirebaseUISample.a */,
+				1D464960A5B698DD843EC2FF /* libPods-FirebaseUISampleUITests.a */,
+				CACC40A530AF1B522B4F4B1E /* Pods_Google.framework */,
+				16954326E16B80CF96A11586 /* Pods_Phone.framework */,
+				B1E16A384AD20299E806F5F6 /* Pods_Storage.framework */,
+				98FEEEC7AAC561D8FC28BA58 /* Pods_Twitter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1046,6 +1398,71 @@
 			path = FirebaseUISampleUITests;
 			sourceTree = "<group>";
 		};
+		C3773B551E8EFDEA00ACF58C /* FirebasePhoneAuthUI */ = {
+			isa = PBXGroup;
+			children = (
+				C3A08D901E97227A00FF63EB /* CountryCode */,
+				C3773B561E8EFDEA00ACF58C /* FirebasePhoneAuthUI.h */,
+				C37296811E95C83900F3FCCC /* FUICodeField.h */,
+				C37296821E95C83900F3FCCC /* FUICodeField.m */,
+				C37296831E95C83900F3FCCC /* FUICodeField.xib */,
+				C33D6B871EB261000013D5C4 /* FUINavigationViewController.h */,
+				C33D6B881EB261000013D5C4 /* FUINavigationViewController.m */,
+				C3773B831E92C3CF00ACF58C /* FUIPhoneAuth.h */,
+				C3773B841E92C3CF00ACF58C /* FUIPhoneAuth.m */,
+				C343D2991E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h */,
+				C343D29E1E96CFD400DD9C61 /* FUIPhoneAuthStrings.h */,
+				C343D29F1E96CFD400DD9C61 /* FUIPhoneAuthStrings.m */,
+				C3A201711E9597DA0040563F /* FUIPhoneEntryViewController.h */,
+				C3A201721E9597DA0040563F /* FUIPhoneEntryViewController.m */,
+				C3A201731E9597DA0040563F /* FUIPhoneEntryViewController.xib */,
+				C3A201741E9597DA0040563F /* FUIPhoneVerificationViewController.h */,
+				C3A201751E9597DA0040563F /* FUIPhoneVerificationViewController.m */,
+				C3A201761E9597DA0040563F /* FUIPhoneVerificationViewController.xib */,
+				C3773B571E8EFDEA00ACF58C /* Info.plist */,
+				C3773B781E92C36400ACF58C /* Resources */,
+				C3773B7C1E92C36400ACF58C /* Strings */,
+			);
+			path = FirebasePhoneAuthUI;
+			sourceTree = "<group>";
+		};
+		C3773B621E8EFDEB00ACF58C /* FirebasePhoneAuthUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C3773B631E8EFDEB00ACF58C /* FirebasePhoneAuthUITests.m */,
+				C3773B651E8EFDEB00ACF58C /* Info.plist */,
+			);
+			path = FirebasePhoneAuthUITests;
+			sourceTree = "<group>";
+		};
+		C3773B781E92C36400ACF58C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C3D718F51E9F133500F734D8 /* country-codes.json */,
+				C3773B791E92C36400ACF58C /* ic_phone.png */,
+				C3773B7A1E92C36400ACF58C /* ic_phone@2x.png */,
+				C3773B7B1E92C36400ACF58C /* ic_phone@3x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C3773B7C1E92C36400ACF58C /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				C3773B7D1E92C36400ACF58C /* FirebasePhoneAuthUI.strings */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
+		C3773B8C1E92C91E00ACF58C /* Phone */ = {
+			isa = PBXGroup;
+			children = (
+				C3773B8D1E92C91E00ACF58C /* Phone.h */,
+				C3773B8E1E92C91E00ACF58C /* Phone.m */,
+			);
+			path = Phone;
+			sourceTree = "<group>";
+		};
 		C380A7CF1D89ECF1005C031D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1070,6 +1487,105 @@
 				C380A7E31D89ED82005C031D /* FirebaseTwitterAuthUI.strings */,
 			);
 			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		C3A08D901E97227A00FF63EB /* CountryCode */ = {
+			isa = PBXGroup;
+			children = (
+				C3A08D911E97227A00FF63EB /* FUICollationForCountries.h */,
+				C3A08D921E97227A00FF63EB /* FUICollationForCountries.m */,
+				C3A08D931E97227A00FF63EB /* FUICountryCodes.h */,
+				C3A08D941E97227A00FF63EB /* FUICountryCodes.m */,
+				C3A08D951E97227A00FF63EB /* FUICountryTableViewController.h */,
+				C3A08D961E97227A00FF63EB /* FUICountryTableViewController.m */,
+				C3204F0B1E98340400841149 /* FUICountryTableViewController.xib */,
+				C3A08D971E97227A00FF63EB /* FUIFeatureSwitch.h */,
+				C3A08D981E97227A00FF63EB /* FUIFeatureSwitch.m */,
+			);
+			path = CountryCode;
+			sourceTree = "<group>";
+		};
+		C3BCC4E11E527B7E0095D610 /* AccountManagement */ = {
+			isa = PBXGroup;
+			children = (
+				C3CA198A1E67E605002AB4CC /* FUIAccountSettingsOperation.h */,
+				C3CA198B1E67E605002AB4CC /* FUIAccountSettingsOperation.m */,
+				C3CA19891E67E605002AB4CC /* FUIAccountSettingsOperation_Internal.h */,
+				C3CA198C1E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.h */,
+				C3CA198D1E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.m */,
+				C3CA198E1E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.h */,
+				C3CA198F1E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.m */,
+				C3CA19901E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.h */,
+				C3CA19911E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.m */,
+				C33B0F3C1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h */,
+				C3CA19921E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.h */,
+				C3CA19931E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.m */,
+				C3CA19941E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.h */,
+				C3CA19951E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.m */,
+				C3CA19961E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.h */,
+				C3CA19971E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.m */,
+				C3CA19981E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.h */,
+				C3CA19991E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m */,
+				C3BE73AF1E64D1D000BCD147 /* FUIAccountSettingsViewController.h */,
+				C3BE73B01E64D1D000BCD147 /* FUIAccountSettingsViewController.m */,
+				C3BE73B11E64D1D000BCD147 /* FUIAccountSettingsViewController.xib */,
+				C3BE73BC1E64D1D000BCD147 /* FUIInputTableViewCell.xib */,
+				C3BE73BD1E64D1D000BCD147 /* FUIPasswordTableViewCell.xib */,
+			);
+			path = AccountManagement;
+			sourceTree = "<group>";
+		};
+		C7A6A4C2CC3F8CFB68B802B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				12364CFDE39E64EEF44A0C2A /* Pods-Auth.debug.xcconfig */,
+				D259FAC6FA2BE56A4F1FFBD9 /* Pods-Auth.release.xcconfig */,
+				05B50A024328C53956F24F81 /* Pods-Database.debug.xcconfig */,
+				9FC0666172044BC779D15BC0 /* Pods-Database.release.xcconfig */,
+				15CF5F4250C3C04D27E01158 /* Pods-Facebook.debug.xcconfig */,
+				6456170A0D334A2C3ABCB602 /* Pods-Facebook.release.xcconfig */,
+				AD9CEF033E0AE91780E40C12 /* Pods-FirebaseAuthUI.debug.xcconfig */,
+				69B7F5967F5CDBB74FA277BD /* Pods-FirebaseAuthUI.release.xcconfig */,
+				3E120AC89290E4C7A3B98CCC /* Pods-FirebaseAuthUITests.debug.xcconfig */,
+				41034109E15B3F733A3CF16C /* Pods-FirebaseAuthUITests.release.xcconfig */,
+				904CCB0FE70C1CEE935BA50E /* Pods-FirebaseDatabaseUI.debug.xcconfig */,
+				5067984EB8D391ACDCDE3666 /* Pods-FirebaseDatabaseUI.release.xcconfig */,
+				CD31767337AEB98AA9AFBA9D /* Pods-FirebaseDatabaseUITests.debug.xcconfig */,
+				6129ED0968AEB9C89CEAFBFD /* Pods-FirebaseDatabaseUITests.release.xcconfig */,
+				BCD340617F228C38856AD85B /* Pods-FirebaseFacebookAuthUI.debug.xcconfig */,
+				C5BE0C35509F4E444EFCB576 /* Pods-FirebaseFacebookAuthUI.release.xcconfig */,
+				C0B11EE1FA6B4970C3127EEE /* Pods-FirebaseFacebookAuthUITests.debug.xcconfig */,
+				B6E0657A841C5CA36B9F9AFF /* Pods-FirebaseFacebookAuthUITests.release.xcconfig */,
+				27A7613A4B101F24BABEA939 /* Pods-FirebaseGoogleAuthUI.debug.xcconfig */,
+				FD2055B0B37B3E5765656B07 /* Pods-FirebaseGoogleAuthUI.release.xcconfig */,
+				507B68E0DC47537959EDBF9C /* Pods-FirebaseGoogleAuthUITests.debug.xcconfig */,
+				5CA35A5C492B2CD22FCAEE65 /* Pods-FirebaseGoogleAuthUITests.release.xcconfig */,
+				BC1E546C7D4FCAF50357A47E /* Pods-FirebasePhoneAuthUI.debug.xcconfig */,
+				59B70AC75E41D3BD2F50D11F /* Pods-FirebasePhoneAuthUI.release.xcconfig */,
+				160F6D6463A9224404AC096D /* Pods-FirebasePhoneAuthUITests.debug.xcconfig */,
+				E8C3D267FD7EBAFD7EEBFD63 /* Pods-FirebasePhoneAuthUITests.release.xcconfig */,
+				C1775C63258D3259618AE277 /* Pods-FirebaseStorageUI.debug.xcconfig */,
+				0C7F1B4F106A3E94DBF31F1B /* Pods-FirebaseStorageUI.release.xcconfig */,
+				E0191377D0E0BD0480A1DFEC /* Pods-FirebaseStorageUITests.debug.xcconfig */,
+				EDC10C24505764521A52E931 /* Pods-FirebaseStorageUITests.release.xcconfig */,
+				F43009537AE5D1AB4BF58EB9 /* Pods-FirebaseTwitterAuthUI.debug.xcconfig */,
+				05B7023A91EB57305BAD4550 /* Pods-FirebaseTwitterAuthUI.release.xcconfig */,
+				893D0B359600146DA14821B0 /* Pods-FirebaseTwitterAuthUITests.debug.xcconfig */,
+				E578E7D681695876A3D42AD4 /* Pods-FirebaseTwitterAuthUITests.release.xcconfig */,
+				126DA02E9DB2835E67154B8C /* Pods-FirebaseUISample.debug.xcconfig */,
+				9CBCE37A7E02C36AF3C5AF9C /* Pods-FirebaseUISample.release.xcconfig */,
+				0E17C6D46F89DEE139D63A8F /* Pods-FirebaseUISampleUITests.debug.xcconfig */,
+				8C488E6ABBC92C014EEECA87 /* Pods-FirebaseUISampleUITests.release.xcconfig */,
+				D328C77DF4E8D18736DF5EC0 /* Pods-Google.debug.xcconfig */,
+				E9C21203E097910814FF5025 /* Pods-Google.release.xcconfig */,
+				48233B0328C9742974FAF0AA /* Pods-Phone.debug.xcconfig */,
+				B178A762D59D5A64DBF6ACB7 /* Pods-Phone.release.xcconfig */,
+				BFAEE8F248FA2B9EC923E448 /* Pods-Storage.debug.xcconfig */,
+				B1DA61BA35933A2A9FF70241 /* Pods-Storage.release.xcconfig */,
+				E1824D692E1F968329F1C486 /* Pods-Twitter.debug.xcconfig */,
+				BB9606BB725B6980BE51A1CF /* Pods-Twitter.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1114,20 +1630,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DA941721D678F5400CD3685 /* FUIAuthPickerViewController.h in Headers */,
+				C33B0F3D1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h in Headers */,
+				C3CA19A11E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.h in Headers */,
 				8DA941791D678F5400CD3685 /* FUIAuthBaseViewController.h in Headers */,
 				8DA941771D678F5400CD3685 /* FUIAuth.h in Headers */,
+				C343D2A01E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */,
+				C3CA19B01E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.h in Headers */,
+				C3CA199E1E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.h in Headers */,
 				8DA941751D678F5400CD3685 /* FUIAuthProvider.h in Headers */,
+				C3CA19A41E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.h in Headers */,
 				8DA9417B1D678F5400CD3685 /* FUIAuthErrors.h in Headers */,
+				C3CA19AA1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.h in Headers */,
+				C3CA19A71E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.h in Headers */,
 				8DA9417D1D678F5400CD3685 /* FUIAuthErrorUtils.h in Headers */,
 				8DA941931D678F5400CD3685 /* FUIPasswordSignUpViewController.h in Headers */,
+				C3BE738C1E625D9F00BCD147 /* FUIStaticContentTableViewController.h in Headers */,
 				8DA941881D678F5400CD3685 /* FUIAuthUtils.h in Headers */,
+				C3BE73BE1E64D1D000BCD147 /* FUIAccountSettingsViewController.h in Headers */,
 				8DA941761D678F5400CD3685 /* FUIAuth_Internal.h in Headers */,
 				8DA941901D678F5400CD3685 /* FUIPasswordSignInViewController.h in Headers */,
 				8DA941831D678F5400CD3685 /* FUIAuthTableHeaderView.h in Headers */,
 				8DA941961D678F5400CD3685 /* FUIPasswordVerificationViewController.h in Headers */,
+				C3CA19AD1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.h in Headers */,
+				C3BE73751E610F6700BCD147 /* FUIStaticContentTableViewManager.h in Headers */,
+				C3CA199A1E67E605002AB4CC /* FUIAccountSettingsOperation_Internal.h in Headers */,
 				8D82147C1D67981C0069A614 /* FirebaseAuthUI.h in Headers */,
 				8DA9417F1D678F5400CD3685 /* FUIAuthSignInButton.h in Headers */,
 				8DA941851D678F5400CD3685 /* FUIAuthTableViewCell.h in Headers */,
+				C3CA199B1E67E605002AB4CC /* FUIAccountSettingsOperation.h in Headers */,
 				8DA941811D678F5400CD3685 /* FUIAuthStrings.h in Headers */,
 				8DA9418A1D678F5400CD3685 /* FUIEmailEntryViewController.h in Headers */,
 				8DA9418D1D678F5400CD3685 /* FUIPasswordRecoveryViewController.h in Headers */,
@@ -1147,8 +1677,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3773B9B1E93267100ACF58C /* FUIGoogleAuth.h in Headers */,
 				8D82147E1D67983C0069A614 /* FirebaseGoogleAuthUI.h in Headers */,
-				8DA941B41D6790E900CD3685 /* FUIGoogleAuth.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1158,6 +1688,25 @@
 			files = (
 				C32516B81D88A61C00B0B3F9 /* FUITwitterAuth.h in Headers */,
 				C32516951D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3773B511E8EFDEA00ACF58C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3A08DA21E97227A00FF63EB /* FUIFeatureSwitch.h in Headers */,
+				C33D6B891EB261000013D5C4 /* FUINavigationViewController.h in Headers */,
+				C343D2A11E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */,
+				C3A08D9C1E97227A00FF63EB /* FUICountryCodes.h in Headers */,
+				C3A2017A1E9597DA0040563F /* FUIPhoneVerificationViewController.h in Headers */,
+				C3773B851E92C3CF00ACF58C /* FUIPhoneAuth.h in Headers */,
+				C3A201771E9597DA0040563F /* FUIPhoneEntryViewController.h in Headers */,
+				C37296841E95C83900F3FCCC /* FUICodeField.h in Headers */,
+				C343D29B1E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h in Headers */,
+				C3773B661E8EFDEB00ACF58C /* FirebasePhoneAuthUI.h in Headers */,
+				C3A08D991E97227A00FF63EB /* FUICollationForCountries.h in Headers */,
+				C3A08D9F1E97227A00FF63EB /* FUICountryTableViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1176,6 +1725,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C3773B951E92C9CE00ACF58C /* PBXTargetDependency */,
 				8D73A3191D95E06B009F229E /* PBXTargetDependency */,
 				8D73A31B1D95E06B009F229E /* PBXTargetDependency */,
 				8DCC50111D678D1200B0D3C4 /* PBXTargetDependency */,
@@ -1192,9 +1742,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8D9084281D93168800333CC8 /* Build configuration list for PBXNativeTarget "Storage" */;
 			buildPhases = (
+				F691A4659C30E291AE5F863E /* [CP] Check Pods Manifest.lock */,
 				8D90841C1D93168800333CC8 /* Sources */,
 				8D90841D1D93168800333CC8 /* Frameworks */,
 				8D90841E1D93168800333CC8 /* CopyFiles */,
+				5306D23A17569D7FD962F719 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1209,10 +1761,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8D90843F1D9316AB00333CC8 /* Build configuration list for PBXNativeTarget "FirebaseStorageUI" */;
 			buildPhases = (
+				40EF8A43A9EECC499282202A /* [CP] Check Pods Manifest.lock */,
 				8D9084291D9316AB00333CC8 /* Sources */,
 				8D90842A1D9316AB00333CC8 /* Frameworks */,
 				8D90842B1D9316AB00333CC8 /* Headers */,
 				8D90842C1D9316AB00333CC8 /* Resources */,
+				A7CBCFD5B8086449C50A7E49 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1227,9 +1781,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8D9084421D9316AB00333CC8 /* Build configuration list for PBXNativeTarget "FirebaseStorageUITests" */;
 			buildPhases = (
+				6596DA4642286F2E8DE346EB /* [CP] Check Pods Manifest.lock */,
 				8D9084321D9316AB00333CC8 /* Sources */,
 				8D9084331D9316AB00333CC8 /* Frameworks */,
 				8D9084341D9316AB00333CC8 /* Resources */,
+				192A4529D64CE0136A489F42 /* [CP] Embed Pods Frameworks */,
+				5CD53FA9805383C17DDEB761 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1245,9 +1802,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DBA0F571D872E1C00D113D3 /* Build configuration list for PBXNativeTarget "Database" */;
 			buildPhases = (
+				044CC6A2A1017844C82D74B9 /* [CP] Check Pods Manifest.lock */,
 				8DBA0F4B1D872E1C00D113D3 /* Sources */,
 				8DBA0F4C1D872E1C00D113D3 /* Frameworks */,
 				8DBA0F4D1D872E1C00D113D3 /* CopyFiles */,
+				A35E40DA782B1DEEFA2BB4ED /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1262,9 +1821,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DBA0F621D872E2400D113D3 /* Build configuration list for PBXNativeTarget "Auth" */;
 			buildPhases = (
+				36C15552172C26AC22845F13 /* [CP] Check Pods Manifest.lock */,
 				8DBA0F581D872E2400D113D3 /* Sources */,
 				8DBA0F591D872E2400D113D3 /* Frameworks */,
 				8DBA0F5A1D872E2400D113D3 /* CopyFiles */,
+				DCF5B152E6852B7621D51503 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1279,9 +1840,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DBA0F6F1D872E2E00D113D3 /* Build configuration list for PBXNativeTarget "Facebook" */;
 			buildPhases = (
+				CE8D7F998A4EFCA175762939 /* [CP] Check Pods Manifest.lock */,
 				8DBA0F651D872E2E00D113D3 /* Sources */,
 				8DBA0F661D872E2E00D113D3 /* Frameworks */,
 				8DBA0F671D872E2E00D113D3 /* CopyFiles */,
+				C4591707EAFCE7338A29EA50 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1296,9 +1859,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DBA0F7C1D872E3500D113D3 /* Build configuration list for PBXNativeTarget "Google" */;
 			buildPhases = (
+				2CAC3979787C7F2E9F5ADD12 /* [CP] Check Pods Manifest.lock */,
 				8DBA0F721D872E3500D113D3 /* Sources */,
 				8DBA0F731D872E3500D113D3 /* Frameworks */,
 				8DBA0F741D872E3500D113D3 /* CopyFiles */,
+				8CD12455D66492F5F518B0AB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1313,10 +1878,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DCC4FBA1D678CC400B0D3C4 /* Build configuration list for PBXNativeTarget "FirebaseDatabaseUI" */;
 			buildPhases = (
+				8DED1E7F77906248FDCB4ACD /* [CP] Check Pods Manifest.lock */,
 				8DCC4FA01D678CC400B0D3C4 /* Sources */,
 				8DCC4FA11D678CC400B0D3C4 /* Frameworks */,
 				8DCC4FA21D678CC400B0D3C4 /* Headers */,
 				8DCC4FA31D678CC400B0D3C4 /* Resources */,
+				B6254A268E617CFDDE08A24E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1331,9 +1898,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DCC4FBB1D678CC400B0D3C4 /* Build configuration list for PBXNativeTarget "FirebaseDatabaseUITests" */;
 			buildPhases = (
+				A816E2F7AA85B7FCB35EBDA5 /* [CP] Check Pods Manifest.lock */,
 				8DCC4FAA1D678CC400B0D3C4 /* Sources */,
 				8DCC4FAB1D678CC400B0D3C4 /* Frameworks */,
 				8DCC4FAC1D678CC400B0D3C4 /* Resources */,
+				3AA7F837A51385921FD7CB08 /* [CP] Embed Pods Frameworks */,
+				BE02E1587051531F3A0A5F89 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1349,10 +1919,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DCC4FD21D678CDC00B0D3C4 /* Build configuration list for PBXNativeTarget "FirebaseAuthUI" */;
 			buildPhases = (
+				C295F970C04F3ABFDB0FDAFC /* [CP] Check Pods Manifest.lock */,
 				8DCC4FBC1D678CDC00B0D3C4 /* Sources */,
 				8DCC4FBD1D678CDC00B0D3C4 /* Frameworks */,
 				8DCC4FBE1D678CDC00B0D3C4 /* Headers */,
 				8DCC4FBF1D678CDC00B0D3C4 /* Resources */,
+				592C44C9CBEF3735AC423053 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1367,9 +1939,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DCC4FD51D678CDC00B0D3C4 /* Build configuration list for PBXNativeTarget "FirebaseAuthUITests" */;
 			buildPhases = (
+				D11A7380FF26DECAD5E37886 /* [CP] Check Pods Manifest.lock */,
 				8DCC4FC61D678CDC00B0D3C4 /* Sources */,
 				8DCC4FC71D678CDC00B0D3C4 /* Frameworks */,
 				8DCC4FC81D678CDC00B0D3C4 /* Resources */,
+				CDB1CFF69984C6ABDF731AC3 /* [CP] Embed Pods Frameworks */,
+				AD796B75C465D27D6EA0FB5E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1385,10 +1960,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DCC4FEE1D678CE900B0D3C4 /* Build configuration list for PBXNativeTarget "FirebaseFacebookAuthUI" */;
 			buildPhases = (
+				9CA06DCDA4DD879C581108BA /* [CP] Check Pods Manifest.lock */,
 				8DCC4FD81D678CE800B0D3C4 /* Sources */,
 				8DCC4FD91D678CE800B0D3C4 /* Frameworks */,
 				8DCC4FDA1D678CE800B0D3C4 /* Headers */,
 				8DCC4FDB1D678CE800B0D3C4 /* Resources */,
+				D6F8BDFBB209EA258C973F67 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1404,9 +1981,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DCC4FF11D678CE900B0D3C4 /* Build configuration list for PBXNativeTarget "FirebaseFacebookAuthUITests" */;
 			buildPhases = (
+				48B6ABB3B6158309205B3A03 /* [CP] Check Pods Manifest.lock */,
 				8DCC4FE21D678CE800B0D3C4 /* Sources */,
 				8DCC4FE31D678CE800B0D3C4 /* Frameworks */,
 				8DCC4FE41D678CE800B0D3C4 /* Resources */,
+				517622739A92E091CD969051 /* [CP] Embed Pods Frameworks */,
+				B5E91304D1B966B67A976FF7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1422,10 +2002,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DCC500A1D678CF500B0D3C4 /* Build configuration list for PBXNativeTarget "FirebaseGoogleAuthUI" */;
 			buildPhases = (
+				8D8E20418DC3F60486E1BA4A /* [CP] Check Pods Manifest.lock */,
 				8DCC4FF41D678CF500B0D3C4 /* Sources */,
 				8DCC4FF51D678CF500B0D3C4 /* Frameworks */,
 				8DCC4FF61D678CF500B0D3C4 /* Headers */,
 				8DCC4FF71D678CF500B0D3C4 /* Resources */,
+				419E50C0051F12FCEB1ED191 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1441,9 +2023,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DCC500D1D678CF500B0D3C4 /* Build configuration list for PBXNativeTarget "FirebaseGoogleAuthUITests" */;
 			buildPhases = (
+				FC5F12FF43C032D6749DB346 /* [CP] Check Pods Manifest.lock */,
 				8DCC4FFE1D678CF500B0D3C4 /* Sources */,
 				8DCC4FFF1D678CF500B0D3C4 /* Frameworks */,
 				8DCC50001D678CF500B0D3C4 /* Resources */,
+				083C3834D8CC34119FBB25A2 /* [CP] Embed Pods Frameworks */,
+				0BFDBB585218A399F03DD6AF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1459,10 +2044,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C32516A71D88A54C00B0B3F9 /* Build configuration list for PBXNativeTarget "FirebaseTwitterAuthUI" */;
 			buildPhases = (
+				31CE00B70BE7A87781110240 /* [CP] Check Pods Manifest.lock */,
 				C325168D1D88A54C00B0B3F9 /* Sources */,
 				C325168E1D88A54C00B0B3F9 /* Frameworks */,
 				C325168F1D88A54C00B0B3F9 /* Headers */,
 				C32516901D88A54C00B0B3F9 /* Resources */,
+				4B2E53D5714C8FCC6341599D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1478,9 +2065,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C32516A81D88A54C00B0B3F9 /* Build configuration list for PBXNativeTarget "FirebaseTwitterAuthUITests" */;
 			buildPhases = (
+				A6D4CF359767DD9211526467 /* [CP] Check Pods Manifest.lock */,
 				C32516971D88A54C00B0B3F9 /* Sources */,
 				C32516981D88A54C00B0B3F9 /* Frameworks */,
 				C32516991D88A54C00B0B3F9 /* Resources */,
+				385AF167C6E6298487BEC0EC /* [CP] Embed Pods Frameworks */,
+				F83E459E8EDEB9878B91EB6B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1496,9 +2086,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C32516B31D88A5A700B0B3F9 /* Build configuration list for PBXNativeTarget "Twitter" */;
 			buildPhases = (
+				22B8C8DC1FB6BF5BA75AAA6C /* [CP] Check Pods Manifest.lock */,
 				C32516A91D88A5A700B0B3F9 /* Sources */,
 				C32516AA1D88A5A700B0B3F9 /* Frameworks */,
 				C32516AB1D88A5A700B0B3F9 /* CopyFiles */,
+				553ED65352F271A53D2DE59C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1513,9 +2105,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C329B1681DA8694B00059A13 /* Build configuration list for PBXNativeTarget "FirebaseUISample" */;
 			buildPhases = (
+				2B19367D709E2F0D61D89570 /* [CP] Check Pods Manifest.lock */,
 				C329B1341DA8694A00059A13 /* Sources */,
 				C329B1351DA8694A00059A13 /* Frameworks */,
 				C329B1361DA8694A00059A13 /* Resources */,
+				58232B7B14426B03DEA9115D /* [CP] Embed Pods Frameworks */,
+				B422806969D4743AC519F914 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1531,10 +2126,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C329B16A1DA8694B00059A13 /* Build configuration list for PBXNativeTarget "FirebaseUISampleUITests" */;
 			buildPhases = (
+				F5A769F1F1923CD454FDDD64 /* [CP] Check Pods Manifest.lock */,
 				C329B1571DA8694A00059A13 /* Sources */,
 				C329B1581DA8694A00059A13 /* Frameworks */,
 				C329B1591DA8694A00059A13 /* Resources */,
 				C329B1781DAC120200059A13 /* CopyFiles */,
+				FAA8BE729B3B41CAE2EF0E04 /* [CP] Embed Pods Frameworks */,
+				F4273A1FF80E45A9B0ADAAC1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1545,6 +2143,67 @@
 			productName = FirebaseUISampleUITests;
 			productReference = C329B15B1DA8694A00059A13 /* FirebaseUISampleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		C3773B531E8EFDEA00ACF58C /* FirebasePhoneAuthUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3773B6F1E8EFDEB00ACF58C /* Build configuration list for PBXNativeTarget "FirebasePhoneAuthUI" */;
+			buildPhases = (
+				A98DE9C3B91149562B40F609 /* [CP] Check Pods Manifest.lock */,
+				C3773B4F1E8EFDEA00ACF58C /* Sources */,
+				C3773B501E8EFDEA00ACF58C /* Frameworks */,
+				C3773B511E8EFDEA00ACF58C /* Headers */,
+				C3773B521E8EFDEA00ACF58C /* Resources */,
+				480ED9D2C2B0D066F94E087D /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C3773B971E92C9FA00ACF58C /* PBXTargetDependency */,
+			);
+			name = FirebasePhoneAuthUI;
+			productName = FirebasePhoneAuthUI;
+			productReference = C3773B541E8EFDEA00ACF58C /* FirebasePhoneAuthUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C3773B5B1E8EFDEA00ACF58C /* FirebasePhoneAuthUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3773B711E8EFDEB00ACF58C /* Build configuration list for PBXNativeTarget "FirebasePhoneAuthUITests" */;
+			buildPhases = (
+				3D2FEE2276ADDFD3E8D303FB /* [CP] Check Pods Manifest.lock */,
+				C3773B581E8EFDEA00ACF58C /* Sources */,
+				C3773B591E8EFDEA00ACF58C /* Frameworks */,
+				C3773B5A1E8EFDEA00ACF58C /* Resources */,
+				F4927F5143C62A04753D068B /* [CP] Embed Pods Frameworks */,
+				8D5B533CB7C4C254ACF986FB /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C3773B5F1E8EFDEB00ACF58C /* PBXTargetDependency */,
+			);
+			name = FirebasePhoneAuthUITests;
+			productName = FirebasePhoneAuthUITests;
+			productReference = C3773B5C1E8EFDEA00ACF58C /* FirebasePhoneAuthUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C3773B8A1E92C91D00ACF58C /* Phone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3773B931E92C91E00ACF58C /* Build configuration list for PBXNativeTarget "Phone" */;
+			buildPhases = (
+				73F9F7BB714F0B7CE5696382 /* [CP] Check Pods Manifest.lock */,
+				C3773B871E92C91D00ACF58C /* Sources */,
+				C3773B881E92C91D00ACF58C /* Frameworks */,
+				C3773B891E92C91D00ACF58C /* CopyFiles */,
+				532D41FB3BEFDACA72F9579D /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Phone;
+			productName = Phone;
+			productReference = C3773B8B1E92C91D00ACF58C /* libPhone.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -1617,12 +2276,25 @@
 					};
 					C329B1371DA8694A00059A13 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = EQHXZ8M8AV;
 						ProvisioningStyle = Automatic;
 					};
 					C329B15A1DA8694A00059A13 = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Automatic;
 						TestTargetID = C329B1371DA8694A00059A13;
+					};
+					C3773B531E8EFDEA00ACF58C = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					C3773B5B1E8EFDEA00ACF58C = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					C3773B8A1E92C91D00ACF58C = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -1648,6 +2320,8 @@
 				8DCC4FE51D678CE800B0D3C4 /* FirebaseFacebookAuthUITests */,
 				8DCC4FF81D678CF500B0D3C4 /* FirebaseGoogleAuthUI */,
 				8DCC50011D678CF500B0D3C4 /* FirebaseGoogleAuthUITests */,
+				C3773B531E8EFDEA00ACF58C /* FirebasePhoneAuthUI */,
+				C3773B5B1E8EFDEA00ACF58C /* FirebasePhoneAuthUITests */,
 				C32516911D88A54C00B0B3F9 /* FirebaseTwitterAuthUI */,
 				C325169A1D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests */,
 				8D90842D1D9316AB00333CC8 /* FirebaseStorageUI */,
@@ -1656,6 +2330,7 @@
 				8DBA0F5B1D872E2400D113D3 /* Auth */,
 				8DBA0F681D872E2E00D113D3 /* Facebook */,
 				8DBA0F751D872E3500D113D3 /* Google */,
+				C3773B8A1E92C91D00ACF58C /* Phone */,
 				C32516AC1D88A5A700B0B3F9 /* Twitter */,
 				8D90841F1D93168800333CC8 /* Storage */,
 				C329B1371DA8694A00059A13 /* FirebaseUISample */,
@@ -1705,6 +2380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DA941A61D67904200CD3685 /* ic_email@3x.png in Resources */,
+				C3BE738E1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib in Resources */,
 				8DA9418F1D678F5400CD3685 /* FUIPasswordRecoveryViewController.xib in Resources */,
 				8DA941A81D67904200CD3685 /* ic_visibility_off@2x.png in Resources */,
 				8DA941921D678F5400CD3685 /* FUIPasswordSignInViewController.xib in Resources */,
@@ -1714,9 +2390,12 @@
 				8DA941A51D67904200CD3685 /* ic_email@2x.png in Resources */,
 				8DA941AB1D67904200CD3685 /* ic_visibility@2x.png in Resources */,
 				8DA941A91D67904200CD3685 /* ic_visibility_off@3x.png in Resources */,
+				C3BE73C11E64D1D000BCD147 /* FUIAccountSettingsViewController.xib in Resources */,
 				8DA941741D678F5400CD3685 /* FUIAuthPickerViewController.xib in Resources */,
+				C3BE73D11E64D1D000BCD147 /* FUIInputTableViewCell.xib in Resources */,
 				8DA941981D678F5400CD3685 /* FUIPasswordVerificationViewController.xib in Resources */,
 				8DA941871D678F5400CD3685 /* FUIAuthTableViewCell.xib in Resources */,
+				C3BE73D21E64D1D000BCD147 /* FUIPasswordTableViewCell.xib in Resources */,
 				8DA9418C1D678F5400CD3685 /* FUIEmailEntryViewController.xib in Resources */,
 				8DA941A71D67904200CD3685 /* ic_visibility_off.png in Resources */,
 				8DA941951D678F5400CD3685 /* FUIPasswordSignUpViewController.xib in Resources */,
@@ -1808,7 +2487,858 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C3773B521E8EFDEA00ACF58C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C37296871E95C83900F3FCCC /* FUICodeField.xib in Resources */,
+				C3A201791E9597DA0040563F /* FUIPhoneEntryViewController.xib in Resources */,
+				C3A2017C1E9597DA0040563F /* FUIPhoneVerificationViewController.xib in Resources */,
+				C3D718F61E9F133500F734D8 /* country-codes.json in Resources */,
+				C3204F0C1E98340400841149 /* FUICountryTableViewController.xib in Resources */,
+				C3773B7F1E92C36400ACF58C /* ic_phone.png in Resources */,
+				C3773B801E92C36400ACF58C /* ic_phone@2x.png in Resources */,
+				C3773B821E92C36400ACF58C /* FirebasePhoneAuthUI.strings in Resources */,
+				C3773B811E92C36400ACF58C /* ic_phone@3x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3773B5A1E8EFDEA00ACF58C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		044CC6A2A1017844C82D74B9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		083C3834D8CC34119FBB25A2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseGoogleAuthUITests/Pods-FirebaseGoogleAuthUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0BFDBB585218A399F03DD6AF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseGoogleAuthUITests/Pods-FirebaseGoogleAuthUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		192A4529D64CE0136A489F42 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseStorageUITests/Pods-FirebaseStorageUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		22B8C8DC1FB6BF5BA75AAA6C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		2B19367D709E2F0D61D89570 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		2CAC3979787C7F2E9F5ADD12 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		31CE00B70BE7A87781110240 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		36C15552172C26AC22845F13 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		385AF167C6E6298487BEC0EC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseTwitterAuthUITests/Pods-FirebaseTwitterAuthUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3AA7F837A51385921FD7CB08 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseDatabaseUITests/Pods-FirebaseDatabaseUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3D2FEE2276ADDFD3E8D303FB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		40EF8A43A9EECC499282202A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		419E50C0051F12FCEB1ED191 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseGoogleAuthUI/Pods-FirebaseGoogleAuthUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		480ED9D2C2B0D066F94E087D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebasePhoneAuthUI/Pods-FirebasePhoneAuthUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		48B6ABB3B6158309205B3A03 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4B2E53D5714C8FCC6341599D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseTwitterAuthUI/Pods-FirebaseTwitterAuthUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		517622739A92E091CD969051 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseFacebookAuthUITests/Pods-FirebaseFacebookAuthUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5306D23A17569D7FD962F719 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Storage/Pods-Storage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		532D41FB3BEFDACA72F9579D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Phone/Pods-Phone-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		553ED65352F271A53D2DE59C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Twitter/Pods-Twitter-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		58232B7B14426B03DEA9115D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseUISample/Pods-FirebaseUISample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		592C44C9CBEF3735AC423053 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseAuthUI/Pods-FirebaseAuthUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5CD53FA9805383C17DDEB761 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseStorageUITests/Pods-FirebaseStorageUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6596DA4642286F2E8DE346EB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		73F9F7BB714F0B7CE5696382 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8CD12455D66492F5F518B0AB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Google/Pods-Google-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D5B533CB7C4C254ACF986FB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebasePhoneAuthUITests/Pods-FirebasePhoneAuthUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D8E20418DC3F60486E1BA4A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8DED1E7F77906248FDCB4ACD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9CA06DCDA4DD879C581108BA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A35E40DA782B1DEEFA2BB4ED /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Database/Pods-Database-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A6D4CF359767DD9211526467 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A7CBCFD5B8086449C50A7E49 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseStorageUI/Pods-FirebaseStorageUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A816E2F7AA85B7FCB35EBDA5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A98DE9C3B91149562B40F609 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AD796B75C465D27D6EA0FB5E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseAuthUITests/Pods-FirebaseAuthUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B422806969D4743AC519F914 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseUISample/Pods-FirebaseUISample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5E91304D1B966B67A976FF7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseFacebookAuthUITests/Pods-FirebaseFacebookAuthUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B6254A268E617CFDDE08A24E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseDatabaseUI/Pods-FirebaseDatabaseUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE02E1587051531F3A0A5F89 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseDatabaseUITests/Pods-FirebaseDatabaseUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C295F970C04F3ABFDB0FDAFC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C4591707EAFCE7338A29EA50 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Facebook/Pods-Facebook-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDB1CFF69984C6ABDF731AC3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseAuthUITests/Pods-FirebaseAuthUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE8D7F998A4EFCA175762939 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D11A7380FF26DECAD5E37886 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D6F8BDFBB209EA258C973F67 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseFacebookAuthUI/Pods-FirebaseFacebookAuthUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DCF5B152E6852B7621D51503 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Auth/Pods-Auth-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4273A1FF80E45A9B0ADAAC1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseUISampleUITests/Pods-FirebaseUISampleUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4927F5143C62A04753D068B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebasePhoneAuthUITests/Pods-FirebasePhoneAuthUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F5A769F1F1923CD454FDDD64 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F691A4659C30E291AE5F863E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F83E459E8EDEB9878B91EB6B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseTwitterAuthUITests/Pods-FirebaseTwitterAuthUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FAA8BE729B3B41CAE2EF0E04 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseUISampleUITests/Pods-FirebaseUISampleUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC5F12FF43C032D6749DB346 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D2A84A11D678B2B0058DF04 /* Sources */ = {
@@ -1862,19 +3392,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DBA0F8B1D872EAA00D113D3 /* FUIAuthTableViewCell.m in Sources */,
+				C3CA199D1E67E605002AB4CC /* FUIAccountSettingsOperation.m in Sources */,
 				8DBA0F8F1D872EAA00D113D3 /* FUIPasswordSignInViewController.m in Sources */,
 				8DBA0F851D872E9000D113D3 /* FUIAuthBaseViewController.m in Sources */,
+				C3BE738F1E625DAD00BCD147 /* FUIStaticContentTableViewController.m in Sources */,
 				8DBA0F881D872E9800D113D3 /* FUIAuthSignInButton.m in Sources */,
 				8DBA0F8D1D872EAA00D113D3 /* FUIEmailEntryViewController.m in Sources */,
 				8DBA0F8A1D872E9E00D113D3 /* FUIAuthTableHeaderView.m in Sources */,
+				C3CA19A01E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.m in Sources */,
+				C3CA19AC1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.m in Sources */,
+				C3CA19AF1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.m in Sources */,
 				8DBA0F831D872E7A00D113D3 /* FUIAuthPickerViewController.m in Sources */,
+				C3CA19A91E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.m in Sources */,
 				8DBA0F901D872EAA00D113D3 /* FUIPasswordSignUpViewController.m in Sources */,
 				8DBA0F861D872E9300D113D3 /* FUIAuthErrors.m in Sources */,
 				8DBA0F911D872EAA00D113D3 /* FUIPasswordVerificationViewController.m in Sources */,
+				C3CA19A61E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.m in Sources */,
 				8DBA0F871D872E9500D113D3 /* FUIAuthErrorUtils.m in Sources */,
+				C3CA19A31E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.m in Sources */,
 				8DBA0F8E1D872EAA00D113D3 /* FUIPasswordRecoveryViewController.m in Sources */,
+				C3BE73771E610F7600BCD147 /* FUIStaticContentTableViewManager.m in Sources */,
+				C3CA19B21E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m in Sources */,
 				8DBA0F8C1D872EAA00D113D3 /* FUIAuthUtils.m in Sources */,
 				8DBA0F841D872E8C00D113D3 /* FUIAuth.m in Sources */,
+				C3BE73C01E64D1D000BCD147 /* FUIAccountSettingsViewController.m in Sources */,
 				8DBA0F891D872E9A00D113D3 /* FUIAuthStrings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1930,19 +3471,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DA941861D678F5400CD3685 /* FUIAuthTableViewCell.m in Sources */,
+				C3CA199C1E67E605002AB4CC /* FUIAccountSettingsOperation.m in Sources */,
 				8DA941911D678F5400CD3685 /* FUIPasswordSignInViewController.m in Sources */,
 				8DA9417A1D678F5400CD3685 /* FUIAuthBaseViewController.m in Sources */,
+				C3BE738D1E625D9F00BCD147 /* FUIStaticContentTableViewController.m in Sources */,
 				8DA941801D678F5400CD3685 /* FUIAuthSignInButton.m in Sources */,
 				8DA9418B1D678F5400CD3685 /* FUIEmailEntryViewController.m in Sources */,
 				8DA941841D678F5400CD3685 /* FUIAuthTableHeaderView.m in Sources */,
+				C3CA199F1E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.m in Sources */,
+				C3CA19AB1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.m in Sources */,
+				C3CA19AE1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.m in Sources */,
 				8DA941731D678F5400CD3685 /* FUIAuthPickerViewController.m in Sources */,
+				C343D2A21E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */,
+				C3CA19A81E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.m in Sources */,
 				8DA941941D678F5400CD3685 /* FUIPasswordSignUpViewController.m in Sources */,
 				8DA9417C1D678F5400CD3685 /* FUIAuthErrors.m in Sources */,
 				8DA941971D678F5400CD3685 /* FUIPasswordVerificationViewController.m in Sources */,
+				C3CA19A51E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.m in Sources */,
 				8DA9417E1D678F5400CD3685 /* FUIAuthErrorUtils.m in Sources */,
+				C3CA19A21E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.m in Sources */,
 				8DA9418E1D678F5400CD3685 /* FUIPasswordRecoveryViewController.m in Sources */,
+				C3BE73761E610F6700BCD147 /* FUIStaticContentTableViewManager.m in Sources */,
+				C3CA19B11E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m in Sources */,
 				8DA941891D678F5400CD3685 /* FUIAuthUtils.m in Sources */,
 				8DA941781D678F5400CD3685 /* FUIAuth.m in Sources */,
+				C3BE73BF1E64D1D000BCD147 /* FUIAccountSettingsViewController.m in Sources */,
 				8DA941821D678F5400CD3685 /* FUIAuthStrings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2030,6 +3583,48 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C3773B4F1E8EFDEA00ACF58C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C37296851E95C83900F3FCCC /* FUICodeField.m in Sources */,
+				C343D2A31E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */,
+				C3A08D9D1E97227A00FF63EB /* FUICountryCodes.m in Sources */,
+				C3A08D9A1E97227A00FF63EB /* FUICollationForCountries.m in Sources */,
+				C3A08DA31E97227A00FF63EB /* FUIFeatureSwitch.m in Sources */,
+				C3A08DA01E97227A00FF63EB /* FUICountryTableViewController.m in Sources */,
+				C33D6B8A1EB261000013D5C4 /* FUINavigationViewController.m in Sources */,
+				C3773B861E92C3CF00ACF58C /* FUIPhoneAuth.m in Sources */,
+				C3A2017B1E9597DA0040563F /* FUIPhoneVerificationViewController.m in Sources */,
+				C3A201781E9597DA0040563F /* FUIPhoneEntryViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3773B581E8EFDEA00ACF58C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3773B641E8EFDEB00ACF58C /* FirebasePhoneAuthUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3773B871E92C91D00ACF58C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C37296861E95C83900F3FCCC /* FUICodeField.m in Sources */,
+				C343D2A41E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */,
+				C3A08D9E1E97227A00FF63EB /* FUICountryCodes.m in Sources */,
+				C3A08D9B1E97227A00FF63EB /* FUICollationForCountries.m in Sources */,
+				C3A08DA41E97227A00FF63EB /* FUIFeatureSwitch.m in Sources */,
+				C3A08DA11E97227A00FF63EB /* FUICountryTableViewController.m in Sources */,
+				C33D6B8B1EB261000013D5C4 /* FUINavigationViewController.m in Sources */,
+				C3773B991E92CA2D00ACF58C /* FUIPhoneAuth.m in Sources */,
+				C3A2017E1E9598040040563F /* FUIPhoneVerificationViewController.m in Sources */,
+				C3A2017D1E9597FB0040563F /* FUIPhoneEntryViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2113,6 +3708,21 @@
 			target = 8D2A84A51D678B2B0058DF04 /* FirebaseUI */;
 			targetProxy = C329B16C1DA879CD00059A13 /* PBXContainerItemProxy */;
 		};
+		C3773B5F1E8EFDEB00ACF58C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C3773B531E8EFDEA00ACF58C /* FirebasePhoneAuthUI */;
+			targetProxy = C3773B5E1E8EFDEB00ACF58C /* PBXContainerItemProxy */;
+		};
+		C3773B951E92C9CE00ACF58C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C3773B531E8EFDEA00ACF58C /* FirebasePhoneAuthUI */;
+			targetProxy = C3773B941E92C9CE00ACF58C /* PBXContainerItemProxy */;
+		};
+		C3773B971E92C9FA00ACF58C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DCC4FC01D678CDC00B0D3C4 /* FirebaseAuthUI */;
+			targetProxy = C3773B961E92C9FA00ACF58C /* PBXContainerItemProxy */;
+		};
 		C3CCFF501D8B316100788425 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8DCC4FC01D678CDC00B0D3C4 /* FirebaseAuthUI */;
@@ -2159,6 +3769,14 @@
 				C329B1491DA8694A00059A13 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		C3773B7D1E92C36400ACF58C /* FirebasePhoneAuthUI.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3773B7E1E92C36400ACF58C /* en */,
+			);
+			name = FirebasePhoneAuthUI.strings;
 			sourceTree = "<group>";
 		};
 		C380A7E31D89ED82005C031D /* FirebaseTwitterAuthUI.strings */ = {
@@ -2326,6 +3944,7 @@
 		};
 		8D9084261D93168800333CC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFAEE8F248FA2B9EC923E448 /* Pods-Storage.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -2342,6 +3961,7 @@
 		};
 		8D9084271D93168800333CC8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1DA61BA35933A2A9FF70241 /* Pods-Storage.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -2358,6 +3978,7 @@
 		};
 		8D9084401D9316AB00333CC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1775C63258D3259618AE277 /* Pods-FirebaseStorageUI.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -2385,6 +4006,7 @@
 		};
 		8D9084411D9316AB00333CC8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C7F1B4F106A3E94DBF31F1B /* Pods-FirebaseStorageUI.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -2412,6 +4034,7 @@
 		};
 		8D9084431D9316AB00333CC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0191377D0E0BD0480A1DFEC /* Pods-FirebaseStorageUITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -2434,6 +4057,7 @@
 		};
 		8D9084441D9316AB00333CC8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDC10C24505764521A52E931 /* Pods-FirebaseStorageUITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -2456,6 +4080,7 @@
 		};
 		8DBA0F551D872E1C00D113D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05B50A024328C53956F24F81 /* Pods-Database.debug.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
@@ -2469,6 +4094,7 @@
 		};
 		8DBA0F561D872E1C00D113D3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FC0666172044BC779D15BC0 /* Pods-Database.release.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
@@ -2482,6 +4108,7 @@
 		};
 		8DBA0F631D872E2400D113D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12364CFDE39E64EEF44A0C2A /* Pods-Auth.debug.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
@@ -2495,6 +4122,7 @@
 		};
 		8DBA0F641D872E2400D113D3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D259FAC6FA2BE56A4F1FFBD9 /* Pods-Auth.release.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
@@ -2508,6 +4136,7 @@
 		};
 		8DBA0F701D872E2E00D113D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15CF5F4250C3C04D27E01158 /* Pods-Facebook.debug.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
@@ -2521,6 +4150,7 @@
 		};
 		8DBA0F711D872E2E00D113D3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6456170A0D334A2C3ABCB602 /* Pods-Facebook.release.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
@@ -2534,6 +4164,7 @@
 		};
 		8DBA0F7D1D872E3500D113D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D328C77DF4E8D18736DF5EC0 /* Pods-Google.debug.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
@@ -2547,6 +4178,7 @@
 		};
 		8DBA0F7E1D872E3500D113D3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9C21203E097910814FF5025 /* Pods-Google.release.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
@@ -2560,6 +4192,7 @@
 		};
 		8DCC4FB61D678CC400B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 904CCB0FE70C1CEE935BA50E /* Pods-FirebaseDatabaseUI.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -2583,6 +4216,7 @@
 		};
 		8DCC4FB71D678CC400B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5067984EB8D391ACDCDE3666 /* Pods-FirebaseDatabaseUI.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -2606,6 +4240,7 @@
 		};
 		8DCC4FB81D678CC400B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD31767337AEB98AA9AFBA9D /* Pods-FirebaseDatabaseUITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2625,6 +4260,7 @@
 		};
 		8DCC4FB91D678CC400B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6129ED0968AEB9C89CEAFBFD /* Pods-FirebaseDatabaseUITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2644,6 +4280,7 @@
 		};
 		8DCC4FD31D678CDC00B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD9CEF033E0AE91780E40C12 /* Pods-FirebaseAuthUI.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -2667,6 +4304,7 @@
 		};
 		8DCC4FD41D678CDC00B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69B7F5967F5CDBB74FA277BD /* Pods-FirebaseAuthUI.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -2690,6 +4328,7 @@
 		};
 		8DCC4FD61D678CDC00B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E120AC89290E4C7A3B98CCC /* Pods-FirebaseAuthUITests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2709,6 +4348,7 @@
 		};
 		8DCC4FD71D678CDC00B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41034109E15B3F733A3CF16C /* Pods-FirebaseAuthUITests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2728,6 +4368,7 @@
 		};
 		8DCC4FEF1D678CE900B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BCD340617F228C38856AD85B /* Pods-FirebaseFacebookAuthUI.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -2757,6 +4398,7 @@
 		};
 		8DCC4FF01D678CE900B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5BE0C35509F4E444EFCB576 /* Pods-FirebaseFacebookAuthUI.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -2786,6 +4428,7 @@
 		};
 		8DCC4FF21D678CE900B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0B11EE1FA6B4970C3127EEE /* Pods-FirebaseFacebookAuthUITests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2804,6 +4447,7 @@
 		};
 		8DCC4FF31D678CE900B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6E0657A841C5CA36B9F9AFF /* Pods-FirebaseFacebookAuthUITests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2822,6 +4466,7 @@
 		};
 		8DCC500B1D678CF500B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27A7613A4B101F24BABEA939 /* Pods-FirebaseGoogleAuthUI.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -2854,6 +4499,7 @@
 		};
 		8DCC500C1D678CF500B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD2055B0B37B3E5765656B07 /* Pods-FirebaseGoogleAuthUI.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -2886,6 +4532,7 @@
 		};
 		8DCC500E1D678CF500B0D3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 507B68E0DC47537959EDBF9C /* Pods-FirebaseGoogleAuthUITests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2915,6 +4562,7 @@
 		};
 		8DCC500F1D678CF500B0D3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CA35A5C492B2CD22FCAEE65 /* Pods-FirebaseGoogleAuthUITests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2944,6 +4592,7 @@
 		};
 		C32516A31D88A54C00B0B3F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F43009537AE5D1AB4BF58EB9 /* Pods-FirebaseTwitterAuthUI.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -3013,6 +4662,7 @@
 		};
 		C32516A41D88A54C00B0B3F9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05B7023A91EB57305BAD4550 /* Pods-FirebaseTwitterAuthUI.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -3082,6 +4732,7 @@
 		};
 		C32516A51D88A54C00B0B3F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 893D0B359600146DA14821B0 /* Pods-FirebaseTwitterAuthUITests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3092,14 +4743,16 @@
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524";
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "${inherited}";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REEXPORTED_FRAMEWORK_NAMES = "";
 			};
 			name = Debug;
 		};
 		C32516A61D88A54C00B0B3F9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E578E7D681695876A3D42AD4 /* Pods-FirebaseTwitterAuthUITests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3110,14 +4763,16 @@
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524";
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "${inherited}";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REEXPORTED_FRAMEWORK_NAMES = "";
 			};
 			name = Release;
 		};
 		C32516B41D88A5A700B0B3F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1824D692E1F968329F1C486 /* Pods-Twitter.debug.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
@@ -3131,6 +4786,7 @@
 		};
 		C32516B51D88A5A700B0B3F9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB9606BB725B6980BE51A1CF /* Pods-Twitter.release.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
@@ -3144,10 +4800,12 @@
 		};
 		C329B1621DA8694B00059A13 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 126DA02E9DB2835E67154B8C /* Pods-FirebaseUISample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = EQHXZ8M8AV;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3167,10 +4825,12 @@
 		};
 		C329B1631DA8694B00059A13 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9CBCE37A7E02C36AF3C5AF9C /* Pods-FirebaseUISample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = EQHXZ8M8AV;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3190,6 +4850,7 @@
 		};
 		C329B1661DA8694B00059A13 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E17C6D46F89DEE139D63A8F /* Pods-FirebaseUISampleUITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -3305,6 +4966,7 @@
 		};
 		C329B1671DA8694B00059A13 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C488E6ABBC92C014EEECA87 /* Pods-FirebaseUISampleUITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -3415,6 +5077,368 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseUISampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = FirebaseUISample;
+			};
+			name = Release;
+		};
+		C3773B6B1E8EFDEB00ACF58C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC1E546C7D4FCAF50357A47E /* Pods-FirebasePhoneAuthUI.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+				);
+				INFOPLIST_FILE = FirebasePhoneAuthUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-fstack-protector-all",
+					"-fobjc-arc",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accounts\"",
+					"-framework",
+					"\"AddressBook\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"Social\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C3773B6C1E8EFDEB00ACF58C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59B70AC75E41D3BD2F50D11F /* Pods-FirebasePhoneAuthUI.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+				);
+				INFOPLIST_FILE = FirebaseTwitterAuthUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-fstack-protector-all",
+					"-fobjc-arc",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accounts\"",
+					"-framework",
+					"\"AddressBook\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"Social\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		C3773B6D1E8EFDEB00ACF58C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 160F6D6463A9224404AC096D /* Pods-FirebasePhoneAuthUITests.debug.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/OCMock-framework\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+				);
+				INFOPLIST_FILE = FirebasePhoneAuthUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.FirebaseUI.dev.FirebasePhoneAuthUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C3773B6E1E8EFDEB00ACF58C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8C3D267FD7EBAFD7EEBFD63 /* Pods-FirebasePhoneAuthUITests.release.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/OCMock-framework\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+				);
+				INFOPLIST_FILE = FirebasePhoneAuthUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.FirebaseUI.dev.FirebasePhoneAuthUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		C3773B911E92C91E00ACF58C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48233B0328C9742974FAF0AA /* Pods-Phone.debug.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/Core/Sources",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuthUI\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabaseUI\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseFacebookAuthUI\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseGoogleAuthUI\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebasePhoneAuthUI\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorage\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorageUI\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseTwitterAuthUI\"",
+					"\"${PODS_ROOT}/Headers/Public/GTMOAuth2\"",
+					"\"${PODS_ROOT}/Headers/Public/GTMSessionFetcher\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSignIn\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleToolboxForMac\"",
+					"\"${PODS_ROOT}/Headers/Public/OCMock\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/TwitterCore\"",
+					"\"${PODS_ROOT}/Headers/Public/TwitterKit\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GTMSessionFetcher-Core/GTMSessionFetcher.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GoogleToolboxForMac-f490f524/GoogleToolboxForMac.framework/Headers\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FBSDKCoreKit\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FBSDKLoginKit\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuthUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabaseUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseFacebookAuthUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseGoogleAuthUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebasePhoneAuthUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorage\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorageUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseTwitterAuthUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/GTMOAuth2\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/GTMSessionFetcher\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSignIn\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/GoogleToolboxForMac\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/OCMock\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/TwitterCore\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/TwitterKit\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C3773B921E92C91E00ACF58C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B178A762D59D5A64DBF6ACB7 /* Pods-Phone.release.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/Core/Sources",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuthUI\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabaseUI\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseFacebookAuthUI\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseGoogleAuthUI\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebasePhoneAuthUI\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorage\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorageUI\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseTwitterAuthUI\"",
+					"\"${PODS_ROOT}/Headers/Public/GTMOAuth2\"",
+					"\"${PODS_ROOT}/Headers/Public/GTMSessionFetcher\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSignIn\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleToolboxForMac\"",
+					"\"${PODS_ROOT}/Headers/Public/OCMock\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/TwitterCore\"",
+					"\"${PODS_ROOT}/Headers/Public/TwitterKit\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GTMSessionFetcher-Core/GTMSessionFetcher.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GoogleToolboxForMac-f490f524/GoogleToolboxForMac.framework/Headers\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FBSDKCoreKit\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FBSDKLoginKit\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuthUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabaseUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseFacebookAuthUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseGoogleAuthUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebasePhoneAuthUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorage\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorageUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseTwitterAuthUI\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/GTMOAuth2\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/GTMSessionFetcher\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSignIn\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/GoogleToolboxForMac\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/OCMock\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/TwitterCore\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/TwitterKit\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -3615,6 +5639,33 @@
 			buildConfigurations = (
 				C329B1661DA8694B00059A13 /* Debug */,
 				C329B1671DA8694B00059A13 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3773B6F1E8EFDEB00ACF58C /* Build configuration list for PBXNativeTarget "FirebasePhoneAuthUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3773B6B1E8EFDEB00ACF58C /* Debug */,
+				C3773B6C1E8EFDEB00ACF58C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3773B711E8EFDEB00ACF58C /* Build configuration list for PBXNativeTarget "FirebasePhoneAuthUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3773B6D1E8EFDEB00ACF58C /* Debug */,
+				C3773B6E1E8EFDEB00ACF58C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3773B931E92C91E00ACF58C /* Build configuration list for PBXNativeTarget "Phone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3773B911E92C91E00ACF58C /* Debug */,
+				C3773B921E92C91E00ACF58C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

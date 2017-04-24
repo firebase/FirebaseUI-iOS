@@ -19,7 +19,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /** @class FUITwitterAuth
- @brief AuthUI components for Twitter Sign In.
+    @brief AuthUI components for Twitter Sign In.
  */
 @interface FUITwitterAuth : NSObject <FUIAuthProvider>
 

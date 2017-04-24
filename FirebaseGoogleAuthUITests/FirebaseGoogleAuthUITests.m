@@ -87,20 +87,26 @@
     [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil];
   });
 
-
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
 
   [_mockProvider signInWithEmail:nil
         presentingViewController:nil
-                      completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
-                        XCTAssertNil(error);
-                        XCTAssertNotNil(credential);
-                        FIRAuthCredential *expectedCredential = [FIRGoogleAuthProvider credentialWithIDToken:testIdToken accessToken:testAccessToken];
-                        XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
+                      completion:^(FIRAuthCredential *_Nullable credential,
+                                   NSError *_Nullable error,
+                                   FIRAuthResultCallback _Nullable result) {
+    XCTAssertNil(error);
+    XCTAssertNotNil(result);
+    XCTAssertNotNil(credential);
+    FIRAuthCredential *expectedCredential =
+        [FIRGoogleAuthProvider credentialWithIDToken:testIdToken accessToken:testAccessToken];
+    XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
 
-                        [expectation fulfill];
-                      }];
-  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
+    [expectation fulfill];
+    // We can't compare result and resultCallback. Thus verifying with expectation that result
+    // is called.
+    result(mockGoogleUser, error);
+  }];
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];
   
@@ -143,14 +149,16 @@
 
   [_mockProvider signInWithEmail:nil
         presentingViewController:nil
-                      completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
-                        XCTAssertNotNil(error);
-                        XCTAssertEqualObjects(error.userInfo[NSUnderlyingErrorKey], signInError);
-                        XCTAssertNil(credential);
-
-                        [expectation fulfill];
-                      }];
-  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
+                      completion:^(FIRAuthCredential *_Nullable credential,
+                                   NSError *_Nullable error,
+                                   FIRAuthResultCallback _Nullable result) {
+    XCTAssertNotNil(error);
+    XCTAssertEqualObjects(error.userInfo[NSUnderlyingErrorKey], signInError);
+    XCTAssertNil(credential);
+    XCTAssertNil(result);
+    [expectation fulfill];
+  }];
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];
 
@@ -192,14 +200,17 @@
 
   [_mockProvider signInWithEmail:nil
         presentingViewController:nil
-                      completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
-                        XCTAssertNotNil(error);
-                        XCTAssertEqualObjects(error, [FUIAuthErrorUtils userCancelledSignInError]);
-                        XCTAssertNil(credential);
+                      completion:^(FIRAuthCredential *_Nullable credential,
+                                   NSError *_Nullable error,
+                                   FIRAuthResultCallback _Nullable result) {
+    XCTAssertNotNil(error);
+    XCTAssertEqualObjects(error, [FUIAuthErrorUtils userCancelledSignInError]);
+    XCTAssertNil(credential);
+    XCTAssertNil(result);
 
-                        [expectation fulfill];
-                      }];
-  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
+    [expectation fulfill];
+  }];
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];
 

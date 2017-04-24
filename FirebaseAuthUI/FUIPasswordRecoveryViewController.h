@@ -50,13 +50,12 @@ NS_ASSUME_NONNULL_BEGIN
                           email:(NSString *_Nullable)email NS_DESIGNATED_INITIALIZER;
 
 /** @fn initWithAuthUI:email:
- @brief Convenience initializer.
- @param authUI The @c FUIAuth instance that manages this view controller.
- @param email The email address of the user.
+    @brief Convenience initializer.
+    @param authUI The @c FUIAuth instance that manages this view controller.
+    @param email The email address of the user.
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                           email:(NSString *_Nullable)email;
-
 
 /** @fn didChangeEmail:
     @brief Should be called after any change of email value. Updates UI controls state
@@ -64,7 +63,6 @@ NS_ASSUME_NONNULL_BEGIN
     @param email The email address of the user.
  */
 - (void)didChangeEmail:(NSString *)email;
-
 
 /** @fn recoverEmail:
     @brief Should be called when user want to recover password for specified email.

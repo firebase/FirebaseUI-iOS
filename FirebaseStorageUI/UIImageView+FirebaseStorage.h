@@ -118,8 +118,8 @@ NS_ASSUME_NONNULL_BEGIN
                                                         maxImageSize:(UInt64)size
                                                     placeholderImage:(nullable UIImage *)placeholder
                                                                cache:(nullable SDImageCache *)cache
-                                                          completion:(void (^_Nullable)(UIImage * _Nullable,
-                                                                                        NSError * _Nullable,
+                                                          completion:(void (^_Nullable)(UIImage *_Nullable,
+                                                                                        NSError *_Nullable,
                                                                                         SDImageCacheType,
                                                                                         FIRStorageReference *))completion;
 

@@ -19,218 +19,118 @@
 #import "FUIAuth.h"
 #import "FUIAuthUtils.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 // AuthUI string keys.
-static NSString *const kAuthPickerTitle = @"AuthPickerTitle";
-static NSString *const kSignInWithEmail = @"SignInWithEmail";
-static NSString *const kEnterYourEmail = @"EnterYourEmail";
-static NSString *const kInvalidEmailError = @"InvalidEmailError";
-static NSString *const kInvalidPasswordError = @"InvalidPasswordError";
-static NSString *const kCannotAuthenticateError = @"CannotAuthenticateError";
-static NSString *const kExistingAccountTitle = @"ExistingAccountTitle";
-static NSString *const kProviderUsedPreviouslyMessage = @"ProviderUsedPreviouslyMessage";
-static NSString *const kSignInTitle = @"SignInTitle";
-static NSString *const kEnterYourPassword = @"EnterYourPassword";
-static NSString *const kWrongPasswordError = @"WrongPasswordError";
-static NSString *const kSignInTooManyTimesError = @"SignInTooManyTimesError";
-static NSString *const kUserNotFoundError = @"UserNotFoundError";
-static NSString *const kAccountDisabledError = @"AccountDisabledError";
-static NSString *const kPasswordRecoveryTitle = @"PasswordRecoveryTitle";
-static NSString *const kPasswordRecoveryMessage = @"PasswordRecoveryMessage";
-static NSString *const kPasswordRecoveryEmailSentTitle = @"PasswordRecoveryEmailSentTitle";
-static NSString *const kPasswordRecoveryEmailSentMessage = @"PasswordRecoveryEmailSentMessage";
-static NSString *const kSignUpTitle = @"SignUpTitle";
-static NSString *const kFirstAndLastName = @"FirstAndLastName";
-static NSString *const kChoosePassword = @"ChoosePassword";
-static NSString *const kTermsOfServiceNotice = @"TermsOfServiceNotice";
-static NSString *const kTermsOfService = @"TermsOfService";
-static NSString *const kEmailAlreadyInUseError = @"EmailAlreadyInUseError";
-static NSString *const kWeakPasswordError = @"WeakPasswordError";
-static NSString *const kSignUpTooManyTimesError = @"SignUpTooManyTimesError";
-static NSString *const kPasswordVerificationMessage = @"PasswordVerificationMessage";
-static NSString *const kOK = @"OK";
-static NSString *const kCancel = @"Cancel";
-static NSString *const kBack = @"Back";
-static NSString *const kNext = @"Next";
-static NSString *const kSave = @"Save";
-static NSString *const kSend = @"Send";
-static NSString *const kEmail = @"Email";
-static NSString *const kPassword = @"Password";
-static NSString *const kName = @"Name";
+NSString *const kStr_ASCellAddPassword = @"AS_AddPassword";
+NSString *const kStr_ASCellChangePassword = @"AS_ChangePassword";
+NSString *const kStr_ASCellDeleteAccount = @"AS_DeleteAccount";
+NSString *const kStr_ASCellEmail = @"AS_Email";
+NSString *const kStr_ASCellName = @"AS_Name";
+NSString *const kStr_ASCellSignOut = @"AS_SignOut";
+NSString *const kStr_ASSectionTitleLinkedAccounts = @"AS_SectionLinkedAccounts";
+NSString *const kStr_ASSectionTitleProfile = @"AS_SectionProfile";
+NSString *const kStr_ASSectionTitleSecurity = @"AS_SectionSecurity";
+NSString *const kStr_AccountDisabledError = @"AccountDisabledError";
+NSString *const kStr_AuthPickerTitle = @"AuthPickerTitle";
+NSString *const kStr_Back = @"Back";
+NSString *const kStr_Cancel = @"Cancel";
+NSString *const kStr_CannotAuthenticateError = @"CannotAuthenticateError";
+NSString *const kStr_ChoosePassword = @"ChoosePassword";
+NSString *const kStr_Close = @"Close";
+NSString *const kStr_Email = @"Email";
+NSString *const kStr_EmailAlreadyInUseError = @"EmailAlreadyInUseError";
+NSString *const kStr_EnterYourEmail = @"EnterYourEmail";
+NSString *const kStr_EnterYourPassword = @"EnterYourPassword";
+NSString *const kStr_Error = @"Error";
+NSString *const kStr_ExistingAccountTitle = @"ExistingAccountTitle";
+NSString *const kStr_FirstAndLastName = @"FirstAndLastName";
+NSString *const kStr_ForgotPassword = @"ForgotPassword";
+NSString *const kStr_InvalidEmailError = @"InvalidEmailError";
+NSString *const kStr_InvalidPasswordError = @"InvalidPasswordError";
+NSString *const kStr_Name = @"Name";
+NSString *const kStr_Next = @"Next";
+NSString *const kStr_OK = @"OK";
+NSString *const kStr_Password = @"Password";
+NSString *const kStr_PasswordRecoveryEmailSentMessage = @"PasswordRecoveryEmailSentMessage";
+NSString *const kStr_PasswordRecoveryEmailSentTitle = @"PasswordRecoveryEmailSentTitle";
+NSString *const kStr_PasswordRecoveryMessage = @"PasswordRecoveryMessage";
+NSString *const kStr_PasswordRecoveryTitle = @"PasswordRecoveryTitle";
+NSString *const kStr_PasswordVerificationMessage = @"PasswordVerificationMessage";
+NSString *const kStr_ProviderUsedPreviouslyMessage = @"ProviderUsedPreviouslyMessage";
+NSString *const kStr_Save = @"Save";
+NSString *const kStr_Send = @"Send";
+NSString *const kStr_SignInTitle = @"SignInTitle";
+NSString *const kStr_SignInTooManyTimesError = @"SignInTooManyTimesError";
+NSString *const kStr_SignInWithEmail = @"SignInWithEmail";
+NSString *const kStr_SignUpTitle = @"SignUpTitle";
+NSString *const kStr_SignUpTooManyTimesError = @"SignUpTooManyTimesError";
+NSString *const kStr_TermsOfService = @"TermsOfService";
+NSString *const kStr_TermsOfServiceNotice = @"TermsOfServiceNotice";
+NSString *const kStr_UserNotFoundError = @"UserNotFoundError";
+NSString *const kStr_WeakPasswordError = @"WeakPasswordError";
+NSString *const kStr_WrongPasswordError = @"WrongPasswordError";
+NSString *const kStr_CantFindProvider = @"CantFindProvider";
+NSString *const kStr_EmailsDontMatch = @"EmailsDontMatch";
+NSString *const kStr_VerifyItsYou = @"VerifyItsYou";
+NSString *const kStr_DeleteAccountConfimationTitle = @"DeleteAccountConfimationTitle";
+NSString *const kStr_DeleteAccountBody = @"DeleteAccountBody";
+NSString *const kStr_DeleteAccountConfirmationMessage = @"DeleteAccountConfirmationMessage";
+NSString *const kStr_Delete = @"Delete";
+NSString *const kStr_DeleteAccountControllerTitle = @"DeleteAccountControllerTitle";
+NSString *const kStr_ActionCantBeUndone = @"ActionCantBeUndone";
+NSString *const kStr_UnlinkTitle = @"UnlinkTitle";
+NSString *const kStr_UnlinkAction = @"UnlinkAction";
+NSString *const kStr_UnlinkConfirmationTitle = @"UnlinkConfirmationTitle";
+NSString *const kStr_UnlinkConfirmationMessage = @"UnlinkConfirmationMessage";
+NSString *const kStr_UnlinkConfirmationActionTitle = @"UnlinkConfirmationActionTitle";
+NSString *const kStr_UpdateEmailAlertMessage = @"UpdateEmailAlertMessage";
+NSString *const kStr_UpdateEmailVerificationAlertMessage = @"UpdateEmailVerificationAlertMessage";
+NSString *const kStr_EditEmailTitle = @"EditEmailTitle";
+NSString *const kStr_EditNameTitle = @"EditNameTitle";
+NSString *const kStr_AddPasswordAlertMessage = @"AddPasswordAlertMessage";
+NSString *const kStr_EditPasswordAlertMessage = @"EditPasswordAlertMessage";
+NSString *const kStr_ReauthenticateEditPasswordAlertMessage = @"ReauthenticateEditPasswordAlertMessage";
+NSString *const kStr_AddPasswordTitle = @"AddPasswordTitle";
+NSString *const kStr_EditPasswordTitle = @"EditPasswordTitle";
+NSString *const kStr_ProviderTitlePassword = @"ProviderTitlePassword";
+NSString *const kStr_ProviderTitleGoogle = @"ProviderTitleGoogle";
+NSString *const kStr_ProviderTitleFacebook = @"ProviderTitleFacebook";
+NSString *const kStr_ProviderTitleTwitter = @"ProviderTitleTwitter";
+NSString *const kStr_SignInWithProvider = @"SignInWithProvider";
+NSString *const kStr_PlaceholderEnterName = @"PlaceholderEnterName";
+NSString *const kStr_PlaceholderEnterEmail = @"PlaceholderEnterEmail";
+NSString *const kStr_PlaceholderEnterPassword = @"PlaceholderEnterPassword";
+NSString *const kStr_PlaceholderChosePassword = @"PlaceholderChosePassword";
+NSString *const kStr_PlaceholderNewPassword = @"PlaceholderNewPassword";
 
 /** @var kKeyNotFound
     @brief The value returned if the key is not found in the table.
-*/
-static NSString *const kKeyNotFound = @"KeyNotFound";
+ */
+NSString *const kKeyNotFound = @"KeyNotFound";
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
-*/
-static NSString *const kTableName = @"FirebaseAuthUI";
-
-@implementation FUIAuthStrings
-
-/** @fn localizedStringForKey:
-    @brief Returns the localized text associated with a given string key. Will default to english
-        text if the string is not available for the current localization.
-    @param key A string key which identifies localized text in the .strings files.
-    @return Localized value of the string identified by the key.
  */
-+ (NSString *)localizedStringForKey:(nonnull NSString *)key {
+NSString *const kTableName = @"FirebaseAuthUI";
+
+NSString *FUILocalizedString(NSString *key) {
+  return FUILocalizedStringFromTable(key, kTableName);
+}
+
+NSString *FUILocalizedStringFromTable(NSString *key, NSString *table) {
+
   NSBundle *customStringsBundle = [FUIAuth defaultAuthUI].customStringsBundle;
   if (customStringsBundle) {
     NSString *localizedString = [customStringsBundle localizedStringForKey:key
                                                                      value:kKeyNotFound
-                                                                     table:kTableName];
+                                                                     table:table];
     if (![kKeyNotFound isEqual:localizedString]) {
       return localizedString;
     }
   }
   NSBundle *frameworkBundle = [FUIAuthUtils frameworkBundle];
-  return [frameworkBundle localizedStringForKey:key value:nil table:kTableName];
+  return [frameworkBundle localizedStringForKey:key value:nil table:table];
 }
 
-+ (NSString *)authPickerTitle {
-  return [self localizedStringForKey:kAuthPickerTitle];
-}
-
-+ (NSString *)signInWithEmail {
-  return [self localizedStringForKey:kSignInWithEmail];
-}
-
-+ (NSString *)enterYourEmail {
-  return [self localizedStringForKey:kEnterYourEmail];
-}
-
-+ (NSString *)invalidEmailError {
-  return [self localizedStringForKey:kInvalidEmailError];
-}
-
-+ (NSString *)invalidPasswordError {
-  return [self localizedStringForKey:kInvalidPasswordError];
-}
-
-+ (NSString *)cannotAuthenticateError {
-  return [self localizedStringForKey:kCannotAuthenticateError];
-}
-
-+ (NSString *)existingAccountTitle {
-  return [self localizedStringForKey:kExistingAccountTitle];
-}
-
-+ (NSString *)providerUsedPreviouslyMessage {
-  return [self localizedStringForKey:kProviderUsedPreviouslyMessage];
-}
-
-+ (NSString *)signInTitle {
-  return [self localizedStringForKey:kSignInTitle];
-}
-
-+ (NSString *)enterYourPassword {
-  return [self localizedStringForKey:kEnterYourPassword];
-}
-
-+ (NSString *)wrongPasswordError {
-  return [self localizedStringForKey:kWrongPasswordError];
-}
-
-+ (NSString *)signInTooManyTimesError {
-  return [self localizedStringForKey:kSignInTooManyTimesError];
-}
-
-+ (NSString *)userNotFoundError {
-  return [self localizedStringForKey:kUserNotFoundError];
-}
-
-+ (NSString *)accountDisabledError {
-  return [self localizedStringForKey:kAccountDisabledError];
-}
-
-+ (NSString *)passwordRecoveryTitle {
-  return [self localizedStringForKey:kPasswordRecoveryTitle];
-}
-
-+ (NSString *)passwordRecoveryMessage {
-  return [self localizedStringForKey:kPasswordRecoveryMessage];
-}
-
-+ (NSString *)passwordRecoveryEmailSentTitle {
-  return [self localizedStringForKey:kPasswordRecoveryEmailSentTitle];
-}
-
-+ (NSString *)passwordRecoveryEmailSentMessage {
-  return [self localizedStringForKey:kPasswordRecoveryEmailSentMessage];
-}
-
-+ (NSString *)signUpTitle {
-  return [self localizedStringForKey:kSignUpTitle];
-}
-
-+ (NSString *)firstAndLastName {
-  return [self localizedStringForKey:kFirstAndLastName];
-}
-
-+ (NSString *)choosePassword {
-  return [self localizedStringForKey:kChoosePassword];
-}
-
-+ (NSString *)termsOfServiceNotice {
-  return [self localizedStringForKey:kTermsOfServiceNotice];
-}
-
-+ (NSString *)termsOfService {
-  return [self localizedStringForKey:kTermsOfService];
-}
-
-+ (NSString *)emailAlreadyInUseError {
-  return [self localizedStringForKey:kEmailAlreadyInUseError];
-}
-
-+ (NSString *)weakPasswordError {
-  return [self localizedStringForKey:kWeakPasswordError];
-}
-
-+ (NSString *)signUpTooManyTimesError {
-  return [self localizedStringForKey:kSignUpTooManyTimesError];
-}
-
-+ (NSString *)passwordVerificationMessage {
-  return [self localizedStringForKey:kPasswordVerificationMessage];
-}
-
-+ (NSString *)OK {
-  return [self localizedStringForKey:kOK];
-}
-
-+ (NSString *)cancel {
-  return [self localizedStringForKey:kCancel];
-}
-
-+ (NSString *)back {
-  return [self localizedStringForKey:kBack];
-}
-
-+ (NSString *)next {
-  return [self localizedStringForKey:kNext];
-}
-
-+ (NSString *)save {
-  return [self localizedStringForKey:kSave];
-}
-
-+ (NSString *)send {
-  return [self localizedStringForKey:kSend];
-}
-
-+ (NSString *)email {
-  return [self localizedStringForKey:kEmail];
-}
-
-+ (NSString *)password {
-  return [self localizedStringForKey:kPassword];
-}
-
-+ (NSString *)name {
-  return [self localizedStringForKey:kName];
-}
-
-@end
+NS_ASSUME_NONNULL_END
