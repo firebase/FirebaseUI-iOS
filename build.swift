@@ -105,7 +105,7 @@ func enableSoftwareKeyboard() -> Void {
 
 mkdir(DerivedDataDir)
 mkdir(BuiltProductsDir)
-enableSoftwareKeyboard ()
+enableSoftwareKeyboard()
 
 // Build
 
