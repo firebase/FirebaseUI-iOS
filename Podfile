@@ -1,6 +1,11 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '8.0'
 
+# TODO: used only for EAP testing
+source 'sso://cpdc-eap/spec'
+source 'https://cpdc-eap.googlesource.com/spec.git'
+source 'https://github.com/CocoaPods/Specs.git'
+
 target 'FirebaseDatabaseUI' do
   use_frameworks!
 
@@ -98,14 +103,14 @@ target 'Auth' do
   use_frameworks!
 
   # Pods for Auth
-  pod 'Firebase/Auth'
+  pod 'FirebaseAuth'
 end
 
 target 'Facebook' do
   use_frameworks!
 
   # Pods for Facebook Auth
-  pod 'Firebase/Auth'
+  pod 'FirebaseAuth'
   pod 'FBSDKLoginKit', '~> 4.0'
 end
 
@@ -113,7 +118,7 @@ target 'Google' do
   use_frameworks!
 
   # Pods for Google Auth
-  pod 'Firebase/Auth'
+  pod 'FirebaseAuth'
   pod 'GoogleSignIn', '~> 4.0'
 end
 
@@ -121,14 +126,14 @@ target 'Phone' do
   use_frameworks!
 
   # Pods for Phone Auth
-  pod 'Firebase/Auth'
+  pod 'FirebaseAuth'
 end
 
 target 'Twitter' do
   use_frameworks!
 
   # Pods for Twitter Auth
-  pod 'Firebase/Auth'
+  pod 'FirebaseAuth'
   pod 'TwitterKit', '~> 2.4'
 end
 

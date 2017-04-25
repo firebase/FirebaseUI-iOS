@@ -2,6 +2,11 @@ platform :ios, '8.0'
 
 target 'FirebaseUI-demo-objc' do
 
+# TODO: used only for EAP testing
+source 'sso://cpdc-eap/spec'
+source 'https://cpdc-eap.googlesource.com/spec.git'
+source 'https://github.com/CocoaPods/Specs.git'
+
 #  used for development from sources
   pod 'FirebaseAuthUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_auth.podspec"
   pod 'FirebaseDatabaseUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_db.podspec"

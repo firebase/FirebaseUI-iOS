@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (UIColor *)buttonBackgroundColor {
-  return [UIColor colorWithRed:71.0f/255.0f green:154.0f/255.0f blue:234.0f/255.0f alpha:1.0f];
+  return [UIColor colorWithRed:31.0f/255.0f green:189.0f/255.0f blue:77.0f/255.0f alpha:1.0f];
 }
 
 - (UIColor *)buttonTextColor {
