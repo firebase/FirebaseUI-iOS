@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ENUM(NSInteger, FUIPhoneEntryRow) {
   FUIPhoneEntryRowCountrySelector = 0,
-  FUIPhoneEntryRowPhoneNuber
+  FUIPhoneEntryRowPhoneNumber
 };
 
 /** @var kCellReuseIdentifier
@@ -62,7 +62,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   FUICountryCodeInfo *_selectedCountryCode;
 
 
-  __unsafe_unretained IBOutlet UITableView *_tableView;
+  __weak IBOutlet UITableView *_tableView;
   FUICountryCodes *_countryCodes;
 }
 
@@ -132,6 +132,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   }
 
   [self incrementActivity];
+  self.navigationItem.rightBarButtonItem.enabled = NO;
   FIRPhoneAuthProvider *provider = [FIRPhoneAuthProvider providerWithAuth:self.auth];
   NSString *phoneNumberWithCountryCode =
       [NSString stringWithFormat:@"+%@%@", _selectedCountryCode.dialCode, phoneNumber];
@@ -139,6 +140,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                    completion:^(NSString *_Nullable verificationID, NSError *_Nullable error) {
 
     [self decrementActivity];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
 
     if (error) {
       [self showAlertWithMessage:error.localizedDescription];
@@ -189,7 +191,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     _countryCodeField = cell.textField;
     [self setCountryCodeValue];
-  } else if (indexPath.row == FUIPhoneEntryRowPhoneNuber) {
+  } else if (indexPath.row == FUIPhoneEntryRowPhoneNumber) {
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.label.text = FUIPhoneAuthLocalizedString(kPAStr_PhoneNumber);
     cell.textField.enabled = YES;

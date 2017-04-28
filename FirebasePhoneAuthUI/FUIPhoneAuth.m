@@ -17,6 +17,7 @@
 #import "FUIPhoneAuth_Internal.h"
 
 #import "FUIAuth_Internal.h"
+#import "FUINavigationViewController.h"
 #import "FUIPhoneAuthStrings.h"
 #import "FUIPhoneEntryViewController.h"
 #import <FirebaseAuth/FIRPhoneAuthProvider.h>
@@ -92,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
 
   UIViewController *controller = [[FUIPhoneEntryViewController alloc] initWithAuthUI:_authUI];
   UINavigationController *navigationController =
-      [[UINavigationController alloc] initWithRootViewController:controller];
+      [[FUINavigationViewController alloc] initWithRootViewController:controller];
   [presentingViewController presentViewController:navigationController animated:YES completion:nil];
 }
 

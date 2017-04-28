@@ -36,11 +36,11 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
 @end
 
 @implementation FUIPhoneVerificationViewController {
-  __unsafe_unretained IBOutlet FUICodeField *_codeField;
-  __unsafe_unretained IBOutlet UITextView *_resendConfirmationCodeTimerLabel;
-  __unsafe_unretained IBOutlet UIButton *_resendCodeButton;
-  __unsafe_unretained IBOutlet UILabel *_actionDescriptionLabel;
-  __unsafe_unretained IBOutlet UIButton *_phoneNumberButton;
+  __weak IBOutlet FUICodeField *_codeField;
+  __weak IBOutlet UITextView *_resendConfirmationCodeTimerLabel;
+  __weak IBOutlet UIButton *_resendCodeButton;
+  __weak IBOutlet UILabel *_actionDescriptionLabel;
+  __weak IBOutlet UIButton *_phoneNumberButton;
   NSString *_verificationID;
   NSTimer *_resendConfirmationCodeTimer;
   NSTimeInterval _resendConfirmationCodeSeconds;
@@ -160,11 +160,13 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
     [provider credentialWithVerificationID:_verificationID verificationCode:verificationCode];
 
   [self incrementActivity];
+  self.navigationItem.rightBarButtonItem.enabled = NO;
   FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
   [delegate callbackWithCredential:credential
                              error:nil
                             result:^(FIRUser *_Nullable user, NSError *_Nullable error) {
     [self decrementActivity];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     if (!error || error.code == FUIAuthErrorCodeUserCancelledSignIn) {
       [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } else if (error.code >= FIRAuthErrorCodeMissingPhoneNumber

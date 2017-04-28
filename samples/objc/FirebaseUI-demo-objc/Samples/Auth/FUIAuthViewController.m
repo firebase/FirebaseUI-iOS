@@ -48,10 +48,6 @@ NS_ENUM(NSUInteger, FIRProviders) {
 };
 
 static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/terms/";
-static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
-static const CGFloat kActivityIndiactorOverlayOpacity = 0.8f;
-static const CGFloat kActivityIndiactorPadding = 20.0f;
-static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
 
 @interface FUIAuthViewController () <FUIAuthDelegate>
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellSignIn;
@@ -75,7 +71,6 @@ static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
 
 @implementation FUIAuthViewController {
   NSInteger _activityCount;
-  UIActivityIndicatorView *_activityIndicator;
 }
 
 #pragma mark - UIViewController methods
@@ -92,17 +87,6 @@ static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
   self.authUI = [FUIAuth defaultAuthUI];
 
   self.authUI.TOSURL = [NSURL URLWithString:kFirebaseTermsOfService];
-
-  _activityIndicator =
-      [[UIActivityIndicatorView alloc]
-          initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-  _activityIndicator.frame = CGRectInset(_activityIndicator.frame,
-                                         -kActivityIndiactorPadding,
-                                         -kActivityIndiactorPadding);
-  _activityIndicator.backgroundColor =
-      [UIColor colorWithWhite:0 alpha:kActivityIndiactorOverlayOpacity];
-  _activityIndicator.layer.cornerRadius = kActivityIndiactorOverlayCornerRadius;
-  [self.view addSubview:_activityIndicator];
 
   //set AuthUI Delegate
   [self onAuthUIDelegateChanged:nil];
@@ -148,15 +132,6 @@ static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
   [self.auth removeAuthStateDidChangeListener:self.authStateDidChangeHandle];
 
   self.navigationController.toolbarHidden = YES;
-}
-
-- (void)viewDidLayoutSubviews {
-  [super viewDidLayoutSubviews];
-
-  CGPoint activityIndicatorCenter = self.view.center;
-  // Compensate for bounds adjustment if any.
-  activityIndicatorCenter.y += self.view.bounds.origin.y;
-  _activityIndicator.center = activityIndicatorCenter;
 }
 
 #pragma mark - UITableViewController methods

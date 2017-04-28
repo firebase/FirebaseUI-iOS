@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseStorageUI'
-  s.version      = '3.1.1'
+  s.version      = '4.0.0'
   s.summary      = 'UI Storage library for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0' }
@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
   s.default_subspecs = 'Storage'
 
   s.subspec 'Storage' do |storage|
-    storage.source_files = "FirebaseStorageUI/*.{h,m}"
-    storage.dependency 'Firebase/Storage', '~> 3.0'
+    storage.source_files = "FirebaseStorageUI/**/*.{h,m}"
+    storage.dependency 'Firebase/Storage'
     storage.dependency 'SDWebImage'
   end
 end

@@ -149,7 +149,7 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
 
     [self.auth signInWithCredential:credential
                          completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-      if (error && error.code == FIRAuthErrorCodeEmailAlreadyInUse) {
+      if (error && error.code == FIRAuthErrorCodeAccountExistsWithDifferentCredential) {
         NSString *email = error.userInfo[kErrorUserInfoEmailKey];
         [self handleAccountLinkingForEmail:email
                              newCredential:credential

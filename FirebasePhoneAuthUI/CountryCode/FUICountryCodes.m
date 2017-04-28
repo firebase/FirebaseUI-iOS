@@ -29,14 +29,6 @@ NSString* const FUI_JSON_COUNTRY_CODE_PREDICATE = @"(iso2_cc == %@)";
 NSString* const FUI_JSON_COUNTRY_NAME_PREDICATE = @"(localized_name beginswith[c] %@)";
 NSString* const FUIDefaultCountryCode = @"1";
 
-/*
- Country codes JSON from https://serenity.cloudhopper.com/api/e164_countries/all
-
- Modifications:
- - Remove all entries after Zimbabwe (i.e. private global network dial codes)
- - Replace " with \"
- */
-
 @implementation FUICountryCodeInfo
 
 - (NSString *)countryFlagEmoji {
@@ -70,6 +62,7 @@ NSString* const FUIDefaultCountryCode = @"1";
 
 - (FUICountryCodes *)init {
   if (self = [super init]) {
+    // Country codes JSON containing country codes and phone number info.
     NSString *countryCodeFilePath = [[FUIAuthUtils frameworkBundle] pathForResource:@"country-codes"
                                                                              ofType:@"json"];
     NSAssert([[NSFileManager defaultManager] fileExistsAtPath:countryCodeFilePath],
