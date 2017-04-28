@@ -169,13 +169,16 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
     self.navigationItem.rightBarButtonItem.enabled = YES;
     if (!error || error.code == FUIAuthErrorCodeUserCancelledSignIn) {
       [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    } else if (error.code >= FIRAuthErrorCodeMissingPhoneNumber
-                   && error.code <= FIRAuthErrorCodeInvalidVerificationID) {
-      if (error.code == FIRAuthErrorCodeInvalidVerificationCode) {
-        [_codeField clearCodeInput];
+    } else {
+      NSString *title;
+      NSString *message;
+      if (error.code >= FIRAuthErrorCodeMissingPhoneNumber
+              && error.code <= FIRAuthErrorCodeInvalidVerificationID) {
+        title = FUIPhoneAuthLocalizedString(kPAStr_IncorrectCodeTitle);
+        message = FUIPhoneAuthLocalizedString(kPAStr_IncorrectCodeMessage);
+      } else {
+        message = error.localizedDescription;
       }
-      NSString *title = FUIPhoneAuthLocalizedString(kPAStr_IncorrectCodeTitle);
-      NSString *message = FUIPhoneAuthLocalizedString(kPAStr_IncorrectCodeMessage);
       UIAlertController *alertController =
           [UIAlertController alertControllerWithTitle:title
                                               message:message
@@ -183,11 +186,11 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
       UIAlertAction *okAction =
           [UIAlertAction actionWithTitle:FUIPhoneAuthLocalizedString(kPAStr_Done)
                                    style:UIAlertActionStyleDefault
-                                 handler:nil];
+                                 handler:^(UIAlertAction *_Nonnull action) {
+            [_codeField clearCodeInput];
+          }];
       [alertController addAction:okAction];
       [self presentViewController:alertController animated:YES completion:nil];
-    } else {
-      [self showAlertWithMessage:error.localizedDescription];
     }
   }];
 
