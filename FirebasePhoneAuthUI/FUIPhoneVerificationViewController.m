@@ -171,6 +171,9 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
       [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } else if (error.code >= FIRAuthErrorCodeMissingPhoneNumber
                    && error.code <= FIRAuthErrorCodeInvalidVerificationID) {
+      if (error.code == FIRAuthErrorCodeInvalidVerificationCode) {
+        [_codeField clearCodeInput];
+      }
       NSString *title = FUIPhoneAuthLocalizedString(kPAStr_IncorrectCodeTitle);
       NSString *message = FUIPhoneAuthLocalizedString(kPAStr_IncorrectCodeMessage);
       UIAlertController *alertController =

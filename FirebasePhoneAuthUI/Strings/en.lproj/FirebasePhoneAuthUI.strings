@@ -7,9 +7,9 @@
 
 "Verify" = "Verify";
 
-"EmptyVerificationCode" = "Verification code can't be empty";
+"EmptyVerificationCode" = "Verification code can't be empty.";
 
-"EmptyPhoneNumber" = "Phone number can't be empty";
+"EmptyPhoneNumber" = "Phone number can't be empty.";
 
 "PhoneNumber" = "Number";
 
@@ -25,11 +25,15 @@
 
 "VerifyPhoneTitle" = "Verify phone number";
 
+"IncorrectPhoneTitle" = "Invalid phone number";
+
+"IncorrectPhoneMessage" = "Try entering your phone number again.";
+
 "ResendCodeResult" = "Code was sent to %@";
 
 "IncorrectCodeTitle" = "Incorrect verification code";
 
-"IncorrectCodeMessage" = "Try entering your verification code again";
+"IncorrectCodeMessage" = "Try entering your verification code again.";
 
 "Done" = "Done";
 

@@ -36,6 +36,8 @@ extern NSString *const kPAStr_IncorrectCodeTitle;
 extern NSString *const kPAStr_IncorrectCodeMessage;
 extern NSString *const kPAStr_Done;
 extern NSString *const kPAStr_Back;
+extern NSString *const kPAStr_IncorrectPhoneTitle;
+extern NSString *const kPAStr_IncorrectPhoneMessage;
 
 #ifdef __cplusplus
 extern "C" {
