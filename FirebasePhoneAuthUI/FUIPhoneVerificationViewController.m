@@ -37,7 +37,7 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
 
 @implementation FUIPhoneVerificationViewController {
   __weak IBOutlet FUICodeField *_codeField;
-  __weak IBOutlet UITextView *_resendConfirmationCodeTimerLabel;
+  __weak IBOutlet UILabel *_resendConfirmationCodeTimerLabel;
   __weak IBOutlet UIButton *_resendCodeButton;
   __weak IBOutlet UILabel *_actionDescriptionLabel;
   __weak IBOutlet UIButton *_phoneNumberButton;
