@@ -79,11 +79,11 @@ static NSString *const kUserAccountImage = @"ic_account_circle.png";
 
   for (id<FIRUserInfo> userInfo in providers) {
     if (userInfo.email.length > 0 &&
-        ![userInfo.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
+        ![userInfo.providerID isEqualToString:FIREmailAuthProviderID]) {
       hasEmailInLinkedProvider = YES;
     }
 
-    if ([userInfo.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
+    if ([userInfo.providerID isEqualToString:FIREmailAuthProviderID]) {
       hasPasswordProvider = YES;
     }
   }
@@ -225,7 +225,7 @@ static NSString *const kUserAccountImage = @"ic_account_circle.png";
   NSMutableArray *linkedAccounts =
       [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
   for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
-    if ([userInfo.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
+    if ([userInfo.providerID isEqualToString:FIREmailAuthProviderID]) {
       continue;
     }
     FUIStaticContentTableViewCell *cell =
@@ -262,7 +262,7 @@ static NSString *const kUserAccountImage = @"ic_account_circle.png";
   NSMutableArray *linkedAccounts =
       [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
   for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
-    if ([userInfo.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
+    if ([userInfo.providerID isEqualToString:FIREmailAuthProviderID]) {
       continue;
     }
     FUIStaticContentTableViewCell *cell =
@@ -309,7 +309,7 @@ static NSString *const kUserAccountImage = @"ic_account_circle.png";
   NSMutableArray *linkedAccounts =
       [[NSMutableArray alloc] initWithCapacity:self.auth.currentUser.providerData.count];
   for (id<FIRUserInfo> userInfo in self.auth.currentUser.providerData) {
-    if ([userInfo.providerID isEqualToString:FIREmailPasswordAuthProviderID]) {
+    if ([userInfo.providerID isEqualToString:FIREmailAuthProviderID]) {
       continue;
     }
     FUIStaticContentTableViewCell *cell =

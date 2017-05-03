@@ -86,8 +86,6 @@ NS_ASSUME_NONNULL_BEGIN
  * (FIRDatabaseReference).
  * @param query A query or Firebase database reference
  * @return A FirebaseArray instance
- * @param query A query or Firebase database reference
- * @return An FUIArray instance
  */
 - (instancetype)initWithQuery:(id<FUIDataObservable>)query;
 

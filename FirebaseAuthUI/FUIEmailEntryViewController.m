@@ -145,7 +145,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                cancelHandler:^{
         [self.authUI signOutWithError:nil];
       }];
-    } else if ([providers containsObject:FIREmailPasswordAuthProviderID]) {
+    } else if ([providers containsObject:FIREmailAuthProviderID]) {
       UIViewController *controller;
       if ([self.authUI.delegate respondsToSelector:@selector(passwordSignInViewControllerForAuthUI:email:)]) {
         controller = [self.authUI.delegate passwordSignInViewControllerForAuthUI:self.authUI

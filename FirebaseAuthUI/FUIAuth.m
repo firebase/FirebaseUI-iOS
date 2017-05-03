@@ -209,7 +209,7 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
       return;
     }
     NSString *bestProviderID = providers[0];
-    if ([bestProviderID isEqual:FIREmailPasswordAuthProviderID]) {
+    if ([bestProviderID isEqual:FIREmailAuthProviderID]) {
       // Password verification.
       UIViewController *passwordController;
       if ([self.delegate respondsToSelector:

@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** @fn initWithContents:nextTitle:nextAction
     @brief Convenience initializer. View controller doesn't have header and footer sections.
     @param contents The contents of the table view presented in the controller.
-    @param actionTitle Text displayed on the navigation bar title.
+    @param nextTitle Text displayed on the navigation bar title.
     @param nextAction Action triggered on the right bar item of @C UINavigationController
  */
 - (instancetype)initWithContents:(nullable FUIStaticContentTableViewContent *)contents
@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** @fn initWithContents:nextTitle:nextAction:headerText:
     @brief Convenience initializer. View controller doesn't have footer section.
     @param contents The contents of the table view presented in the controller.
-    @param actionTitle Text displayed on the navigation bar title.
+    @param nextTitle Text displayed on the navigation bar title.
     @param nextAction Action triggered on the right bar item of @C UINavigationController
     @param headerText Text displayed at the header view controller.
  */

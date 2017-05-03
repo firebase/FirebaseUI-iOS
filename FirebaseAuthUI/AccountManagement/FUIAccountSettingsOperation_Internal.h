@@ -35,9 +35,7 @@ typedef void(^FUIAccountSettingsChooseProviderHandler)(id<FIRUserInfo> provider)
  */
 typedef void(^FUIAccountSettingsReauthenticateHandler)(void);
 
-/** @class FUIAccountSettingsOperation
-    @brief Internal methods which are not exposed for public usage.
- */
+/** Internal methods which are not exposed for public usage. */
 @interface FUIAccountSettingsOperation ()
 
 /** @fn initWithDelegate:

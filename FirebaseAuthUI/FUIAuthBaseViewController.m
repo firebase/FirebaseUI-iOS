@@ -242,7 +242,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
 }
 
 + (NSString *)providerLocalizedName:(NSString *)providerId {
-  if ([providerId isEqualToString:FIREmailPasswordAuthProviderID]) {
+  if ([providerId isEqualToString:FIREmailAuthProviderID]) {
     return FUILocalizedString(kStr_ProviderTitlePassword);
   } else if ([providerId isEqualToString:FIRGoogleAuthProviderID]) {
     return FUILocalizedString(kStr_ProviderTitleGoogle);
