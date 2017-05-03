@@ -99,7 +99,7 @@ didFailLoadAtIndex:(NSUInteger)index
  * Creates a data source, attaches it to the table view, and returns it.
  * The returned data source is not retained by the table view and must be
  * retained or it will be deallocated while still in use by the table view.
- * @param query A Firebase database query to bind the table view to.
+ * @param index A Firebase database query to bind the table view to.
  * @param data  The reference whose children correspond to the contents of the
  *   index query. This reference's children's contents are served as the contents
  *   of the table view.

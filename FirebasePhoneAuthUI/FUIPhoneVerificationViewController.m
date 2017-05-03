@@ -41,6 +41,7 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   __weak IBOutlet UIButton *_resendCodeButton;
   __weak IBOutlet UILabel *_actionDescriptionLabel;
   __weak IBOutlet UIButton *_phoneNumberButton;
+  __weak IBOutlet UIScrollView *_scrollView;
   NSString *_verificationID;
   NSTimer *_resendConfirmationCodeTimer;
   NSTimeInterval _resendConfirmationCodeSeconds;
@@ -107,6 +108,11 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
                                                       action:@selector(cancelAuthorization)];
     self.navigationItem.leftBarButtonItem = cancelBarButton;
   }
+  [self registerForKeyboardNotifications];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [self unregisterFromNotifications];
 }
 
 - (void)entryIsIncomplete {
@@ -268,6 +274,61 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   _resendConfirmationCodeTimerLabel.text =
       [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeTimer),
            formattedTime];
+}
+
+#pragma mark - UIKeyboard observer methods
+
+- (void)registerForKeyboardNotifications {
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(keyboardWasShown:)
+                                               name:UIKeyboardDidShowNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(keyboardWillBeHidden:)
+                                               name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)unregisterFromNotifications {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification {
+  NSDictionary* info = [aNotification userInfo];
+  CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+  CGFloat topOffset = self.navigationController.navigationBar.frame.size.height +
+      [UIApplication sharedApplication].statusBarFrame.size.height;
+  
+  UIEdgeInsets contentInsets = UIEdgeInsetsMake(topOffset, 0.0, kbSize.height, 0.0);
+  
+  [UIView beginAnimations:nil context:NULL];
+  
+  NSDictionary *userInfo = [aNotification userInfo];
+  [UIView setAnimationDuration:[userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+  [UIView setAnimationCurve:[userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
+
+  _scrollView.contentInset = contentInsets;
+  _scrollView.scrollIndicatorInsets = contentInsets;
+  
+  [_scrollView scrollRectToVisible:_codeField.frame animated:NO];
+
+  [UIView commitAnimations];
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+  UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+  CGFloat topOffset = self.navigationController.navigationBar.frame.size.height +
+      [UIApplication sharedApplication].statusBarFrame.size.height;
+  contentInsets.top = topOffset;
+
+  [UIView beginAnimations:nil context:NULL];
+  
+  NSDictionary *userInfo = [aNotification userInfo];
+  [UIView setAnimationDuration:[userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+  [UIView setAnimationCurve:[userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
+
+  _scrollView.contentInset = contentInsets;
+  _scrollView.scrollIndicatorInsets = contentInsets;
+
+  [UIView commitAnimations];
 }
 
 @end

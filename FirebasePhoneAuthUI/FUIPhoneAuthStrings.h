@@ -45,7 +45,7 @@ extern "C" {
 
 /** @fn FUIPhoneAuthLocalizedString
     @brief Gets a localized string from a name.
-    @param name The key value of the string.
+    @param key The key value of the string.
     @return The string by the key localized in the current locale.
  */
 NSString *FUIPhoneAuthLocalizedString(NSString *key);

@@ -402,7 +402,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 
 - (id)createPasswordProvider {
   id emailPasswordProviderMock = OCMProtocolMock(@protocol(FIRUserInfo));
-  OCMStub([emailPasswordProviderMock providerID]).andReturn(FIREmailPasswordAuthProviderID);
+  OCMStub([emailPasswordProviderMock providerID]).andReturn(FIREmailAuthProviderID);
   OCMStub([emailPasswordProviderMock email]).andReturn(@"password@email.com");
   OCMStub([emailPasswordProviderMock displayName]).andReturn(@"password displayName");
 
