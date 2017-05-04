@@ -34,6 +34,7 @@ typedef enum : NSUInteger {
   kSectionsProviders,
   kSectionsName,
   kSectionsEmail,
+  kSectionsPhoneNumber,
   kSectionsUID,
   kSectionsAccessToken,
   kSectionsIDToken
@@ -57,6 +58,7 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonAuthorization;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellAccessToken;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellIdToken;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellPhoneNumber;
 @property (weak, nonatomic) IBOutlet UISwitch *customScopeSwitch;
 
 @property (nonatomic) FIRAuth *auth;
@@ -147,6 +149,7 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
     self.cellSignIn.textLabel.text = @"Signed-in";
     self.cellName.textLabel.text = user.displayName;
     self.cellEmail.textLabel.text = user.email;
+    self.cellPhoneNumber.textLabel.text = user.phoneNumber;
     self.cellUID.textLabel.text = user.uid;
 
     self.buttonAuthorization.title = @"Sign Out";
@@ -154,6 +157,7 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
     self.cellSignIn.textLabel.text = @"Not signed-in";
     self.cellName.textLabel.text = @"";
     self.cellEmail.textLabel.text = @"";
+    self.cellPhoneNumber.textLabel.text = @"";
     self.cellUID.textLabel.text = @"";
 
     self.buttonAuthorization.title = @"Sign In";
