@@ -19,15 +19,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation FUIFeatureSwitch
-+ (BOOL) isCountryFlagEmojiEnabled {
-    static BOOL useEmoji = false;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // cutoff version of using country flag emoji is ios 8.4
-        static NSOperatingSystemVersion ios8_4_0 = (NSOperatingSystemVersion){8, 4, 0};
-        useEmoji = [[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios8_4_0];
-    });
-    return useEmoji;
++ (BOOL)isCountryFlagEmojiEnabled {
+  static BOOL useEmoji = false;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    // Cutoff version of using country flag emoji is ios 8.4
+    static NSOperatingSystemVersion ios8_4_0 = (NSOperatingSystemVersion){8, 4, 0};
+    useEmoji = [[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:ios8_4_0];
+  });
+  return useEmoji;
 }
 @end
 

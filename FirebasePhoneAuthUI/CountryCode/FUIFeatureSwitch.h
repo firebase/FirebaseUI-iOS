@@ -18,9 +18,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// a helper class for setting and detecting os dependent features
+/** @class FUIFeatureSwitch
+    @brief A helper class for setting and detecting os dependent features.
+ */
 @interface FUIFeatureSwitch : NSObject
-+ (BOOL) isCountryFlagEmojiEnabled;
++ (BOOL)isCountryFlagEmojiEnabled;
 @end
 
 NS_ASSUME_NONNULL_END
