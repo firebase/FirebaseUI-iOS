@@ -143,12 +143,22 @@ static NSString *const kAuthUICodingKey = @"authUI";
 
 + (void)showAlertWithMessage:(NSString *)message
     presentingViewController:(UIViewController *)presentingViewController {
+  [[self class] showAlertWithTitle:nil
+                           message:message
+                       actionTitle:FUILocalizedString(kStr_OK)
+          presentingViewController:presentingViewController];
+}
+
++ (void)showAlertWithTitle:(nullable NSString *)title
+                     message:(NSString *)message
+                 actionTitle:(NSString *)actionTitle
+    presentingViewController:(UIViewController *)presentingViewController {
   UIAlertController *alertController =
-      [UIAlertController alertControllerWithTitle:nil
+      [UIAlertController alertControllerWithTitle:title
                                           message:message
                                    preferredStyle:UIAlertControllerStyleAlert];
   UIAlertAction *okAction =
-      [UIAlertAction actionWithTitle:FUILocalizedString(kStr_OK)
+      [UIAlertAction actionWithTitle:actionTitle
                                style:UIAlertActionStyleDefault
                              handler:nil];
   [alertController addAction:okAction];

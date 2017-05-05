@@ -146,16 +146,16 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       if (error.code == FIRAuthErrorCodeInvalidPhoneNumber) {
         NSString *title = FUIPhoneAuthLocalizedString(kPAStr_IncorrectPhoneTitle);
         NSString *message = FUIPhoneAuthLocalizedString(kPAStr_IncorrectPhoneMessage);
-        UIAlertController *alertController =
-            [UIAlertController alertControllerWithTitle:title
-                                                message:message
-                                         preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction =
-            [UIAlertAction actionWithTitle:FUIPhoneAuthLocalizedString(kPAStr_Done)
-                                     style:UIAlertActionStyleDefault
-                                   handler:nil];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [[self class] showAlertWithTitle:title
+                                 message:message
+                             actionTitle:FUIPhoneAuthLocalizedString(kPAStr_Done)
+                presentingViewController:self];
+      } if (error.code >= FIRAuthErrorCodeInternalError) {
+        NSString *message = FUIPhoneAuthLocalizedString(kPAStr_InternalErrorMessage);
+        [[self class] showAlertWithTitle:nil
+                                 message:message
+                             actionTitle:FUIPhoneAuthLocalizedString(kPAStr_Done)
+                presentingViewController:self];
       } else {
         [self showAlertWithMessage:error.localizedDescription];
       }
@@ -210,6 +210,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.label.text = FUIPhoneAuthLocalizedString(kPAStr_PhoneNumber);
     cell.textField.enabled = YES;
+    cell.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     cell.textField.placeholder = FUIPhoneAuthLocalizedString(kPAStr_EnterYourPhoneNumber);
     cell.textField.delegate = self;
     cell.accessibilityIdentifier = kPhoneNumberCellAccessibilityID;

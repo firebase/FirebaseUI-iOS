@@ -40,6 +40,7 @@ NSString *const kPAStr_Done = @"Done";
 NSString *const kPAStr_Back = @"Back";
 NSString *const kPAStr_IncorrectPhoneTitle = @"IncorrectPhoneTitle";
 NSString *const kPAStr_IncorrectPhoneMessage = @"IncorrectPhoneMessage";
+NSString *const kPAStr_InternalErrorMessage = @"InternalErrorMessage";
 
 /** @var kPhoneAuthProviderTableName
     @brief The name of the strings table to search for localized strings.

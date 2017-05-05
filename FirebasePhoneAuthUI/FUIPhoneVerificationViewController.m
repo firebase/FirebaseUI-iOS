@@ -182,6 +182,8 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
               && error.code <= FIRAuthErrorCodeInvalidVerificationID) {
         title = FUIPhoneAuthLocalizedString(kPAStr_IncorrectCodeTitle);
         message = FUIPhoneAuthLocalizedString(kPAStr_IncorrectCodeMessage);
+      } if (error.code >= FIRAuthErrorCodeInternalError) {
+        message = FUIPhoneAuthLocalizedString(kPAStr_InternalErrorMessage);
       } else {
         message = error.localizedDescription;
       }

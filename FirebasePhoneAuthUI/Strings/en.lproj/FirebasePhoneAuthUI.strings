@@ -38,3 +38,5 @@
 "Done" = "Done";
 
 "Back" = "Back";
+
+"InternalErrorMessage" = "Your request couldn't be completed. Try again later.";
