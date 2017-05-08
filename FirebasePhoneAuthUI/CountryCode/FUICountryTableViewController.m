@@ -116,7 +116,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark Section index
 
-- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (nullable NSString *)tableView:(UITableView *)tableView
+         titleForHeaderInSection:(NSInteger)section {
   if ([self isSearchActive]) {
     NSString *queryString = self.searchController.searchBar.text;
     return queryString.length ? [[queryString substringToIndex:1] capitalizedString] : @"";
