@@ -131,6 +131,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     return;
   }
 
+  [_phoneNumberField resignFirstResponder];
   [self incrementActivity];
   self.navigationItem.rightBarButtonItem.enabled = NO;
   FIRPhoneAuthProvider *provider = [FIRPhoneAuthProvider providerWithAuth:self.auth];
@@ -143,6 +144,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     self.navigationItem.rightBarButtonItem.enabled = YES;
 
     if (error) {
+      [_phoneNumberField becomeFirstResponder];
+
       UIAlertController *alertController = [FUIPhoneAuth alertControllerForError:error
                                                                    actionHandler:nil];
       [self presentViewController:alertController animated:YES completion:nil];

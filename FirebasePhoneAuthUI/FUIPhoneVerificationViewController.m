@@ -128,15 +128,22 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   [_codeField clearCodeInput];
   [self startResendTimer];
   [self incrementActivity];
+  [_codeField resignFirstResponder];
   FIRPhoneAuthProvider *provider = [FIRPhoneAuthProvider providerWithAuth:self.auth];
   [provider verifyPhoneNumber:_phoneNumber
                    completion:^(NSString *_Nullable verificationID, NSError *_Nullable error) {
 
     [self decrementActivity];
     _verificationID = verificationID;
+    [_codeField becomeFirstResponder];
 
     if (error) {
-      [self showAlertWithMessage:error.localizedDescription];
+      UIAlertController *alertController = [FUIPhoneAuth alertControllerForError:error
+                                                                   actionHandler:^{
+                                             [_codeField clearCodeInput];
+                                             [_codeField becomeFirstResponder];
+                                           }];
+      [self presentViewController:alertController animated:YES completion:nil];
       return;
     }
 
@@ -166,6 +173,7 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
     [provider credentialWithVerificationID:_verificationID verificationCode:verificationCode];
 
   [self incrementActivity];
+  [_codeField resignFirstResponder];
   self.navigationItem.rightBarButtonItem.enabled = NO;
   FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
   [delegate callbackWithCredential:credential
@@ -179,6 +187,7 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
       UIAlertController *alertController = [FUIPhoneAuth alertControllerForError:error
                                                                    actionHandler:^{
                                              [_codeField clearCodeInput];
+                                             [_codeField becomeFirstResponder];
                                            }];
       [self presentViewController:alertController animated:YES completion:nil];
     }
