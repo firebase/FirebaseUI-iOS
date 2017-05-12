@@ -47,7 +47,7 @@
 "IncorrectPhoneTitle" = "Invalid phone number";
 
 /* The body message of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneMessage" = "Try entering your phone number again.";
+"IncorrectPhoneMessage" = "Enter a valid phone number.";
 
 /* The body message of alert shown when user tapped resend verification code button. */
 "ResendCodeResult" = "Code was sent to %@";
@@ -56,7 +56,16 @@
 "IncorrectCodeTitle" = "Incorrect verification code";
 
 /* The body message of alert shown when user entered invalid verification code. */
-"IncorrectCodeMessage" = "Try entering your verification code again.";
+"IncorrectCodeMessage" = "Wrong code. Try again.";
 
 /* The body message of alert shown when internal server error appeared. */
-"InternalErrorMessage" = "Your request couldn't be completed. Try again later.";
+"InternalErrorMessage" = "Something went wrong. Please try again.";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "This phone number has been used too many times.";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "There was a problem verifying your phone number.";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "This code is no longer valid.";

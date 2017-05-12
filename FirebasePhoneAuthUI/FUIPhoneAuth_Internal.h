@@ -17,6 +17,7 @@
 #import "FUIPhoneAuth.h"
 
 #import <FirebasePhoneAuthUI/FirebasePhoneAuthUI.h>
+#import "FUIAuthBaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,6 +33,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)callbackWithCredential:(nullable FIRAuthCredential *)credential
                          error:(nullable NSError *)error
                         result:(nullable FIRAuthResultCallback)result;
+
+/** @fn alertControllerForError:actionHandler:
+    @brief Creates alert controller for specified phone auth error.
+    @param error The error which should be shown in alert.
+    @param actionHandler The handler of alert action button, if any.
+ */
++ (UIAlertController *)alertControllerForError:(NSError *)error
+                                 actionHandler:(nullable FUIAuthAlertActionHandler)actionHandler;
 
 @end
 

@@ -143,22 +143,10 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     self.navigationItem.rightBarButtonItem.enabled = YES;
 
     if (error) {
-      if (error.code == FIRAuthErrorCodeInvalidPhoneNumber) {
-        NSString *title = FUIPhoneAuthLocalizedString(kPAStr_IncorrectPhoneTitle);
-        NSString *message = FUIPhoneAuthLocalizedString(kPAStr_IncorrectPhoneMessage);
-        [[self class] showAlertWithTitle:title
-                                 message:message
-                             actionTitle:FUIPhoneAuthLocalizedString(kPAStr_Done)
-                presentingViewController:self];
-      } if (error.code >= FIRAuthErrorCodeInternalError) {
-        NSString *message = FUIPhoneAuthLocalizedString(kPAStr_InternalErrorMessage);
-        [[self class] showAlertWithTitle:nil
-                                 message:message
-                             actionTitle:FUIPhoneAuthLocalizedString(kPAStr_Done)
-                presentingViewController:self];
-      } else {
-        [self showAlertWithMessage:error.localizedDescription];
-      }
+      UIAlertController *alertController = [FUIPhoneAuth alertControllerForError:error
+                                                                   actionHandler:nil];
+      [self presentViewController:alertController animated:YES completion:nil];
+      
       FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
       [delegate callbackWithCredential:nil error:error result:nil];
       return;

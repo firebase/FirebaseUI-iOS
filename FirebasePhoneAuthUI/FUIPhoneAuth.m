@@ -121,6 +121,42 @@ NS_ASSUME_NONNULL_BEGIN
   }
 }
 
++ (UIAlertController *)alertControllerForError:(NSError *)error
+                                 actionHandler:(nullable FUIAuthAlertActionHandler)actionHandler {
+  NSString *message;
+  if (error.code == FIRAuthErrorCodeInvalidPhoneNumber) {
+    message = FUIPhoneAuthLocalizedString(kPAStr_IncorrectPhoneMessage);
+  } else if (error.code == FIRAuthErrorCodeInvalidVerificationCode) {
+    message = FUIPhoneAuthLocalizedString(kPAStr_IncorrectCodeMessage);
+  } else if (error.code == FIRAuthErrorCodeTooManyRequests) {
+    message = FUIPhoneAuthLocalizedString(kPAStr_TooManyCodesSent);
+  } else if (error.code == FIRAuthErrorCodeQuotaExceeded) {
+    message = FUIPhoneAuthLocalizedString(kPAStr_MessageQuotaExceeded);
+  } else if (error.code == FIRAuthErrorCodeSessionExpired) {
+    message = FUIPhoneAuthLocalizedString(kPAStr_MessageExpired);
+  } else if ((error.code >= FIRAuthErrorCodeMissingPhoneNumber
+             && error.code <= FIRAuthErrorCodeAppNotVerified)
+             || error.code >= FIRAuthErrorCodeInternalError) {
+    message = FUIPhoneAuthLocalizedString(kPAStr_InternalErrorMessage);
+  } else {
+    message = error.localizedDescription;
+  }
+  UIAlertController *alertController =
+      [UIAlertController alertControllerWithTitle:nil
+                                          message:message
+                                   preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *okAction =
+      [UIAlertAction actionWithTitle:FUIPhoneAuthLocalizedString(kPAStr_Done)
+                              style:UIAlertActionStyleDefault
+                            handler:^(UIAlertAction *_Nonnull action) {
+        if (actionHandler) {
+          actionHandler();
+        }
+      }];
+  [alertController addAction:okAction];
+  return alertController;
+}
+
 @end
 
 NS_ASSUME_NONNULL_END

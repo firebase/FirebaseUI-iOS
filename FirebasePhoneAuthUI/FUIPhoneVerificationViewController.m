@@ -176,28 +176,10 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
     if (!error || error.code == FUIAuthErrorCodeUserCancelledSignIn) {
       [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } else {
-      NSString *title;
-      NSString *message;
-      if (error.code >= FIRAuthErrorCodeMissingPhoneNumber
-              && error.code <= FIRAuthErrorCodeInvalidVerificationID) {
-        title = FUIPhoneAuthLocalizedString(kPAStr_IncorrectCodeTitle);
-        message = FUIPhoneAuthLocalizedString(kPAStr_IncorrectCodeMessage);
-      } if (error.code >= FIRAuthErrorCodeInternalError) {
-        message = FUIPhoneAuthLocalizedString(kPAStr_InternalErrorMessage);
-      } else {
-        message = error.localizedDescription;
-      }
-      UIAlertController *alertController =
-          [UIAlertController alertControllerWithTitle:title
-                                              message:message
-                                       preferredStyle:UIAlertControllerStyleAlert];
-      UIAlertAction *okAction =
-          [UIAlertAction actionWithTitle:FUIPhoneAuthLocalizedString(kPAStr_Done)
-                                   style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction *_Nonnull action) {
-            [_codeField clearCodeInput];
-          }];
-      [alertController addAction:okAction];
+      UIAlertController *alertController = [FUIPhoneAuth alertControllerForError:error
+                                                                   actionHandler:^{
+                                             [_codeField clearCodeInput];
+                                           }];
       [self presentViewController:alertController animated:YES completion:nil];
     }
   }];
