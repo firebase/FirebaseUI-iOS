@@ -1,11 +1,6 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '8.0'
 
-# TODO: used only for EAP testing
-source 'sso://cpdc-eap/spec'
-source 'https://cpdc-eap.googlesource.com/spec.git'
-source 'https://github.com/CocoaPods/Specs.git'
-
 target 'FirebaseDatabaseUI' do
   use_frameworks!
 
