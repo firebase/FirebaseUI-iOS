@@ -16,6 +16,9 @@
 
 #import "FUICountryCodes.h"
 
+#import <CoreTelephony/CTCarrier.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+
 #import "FUIAuthUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -25,9 +28,9 @@ NSString* const FUI_JSON_LOCALIZED_COUNTRY_NAME_KEY = @"localized_name";
 NSString* const FUI_JSON_COUNTRY_CODE_KEY = @"iso2_cc";
 NSString* const FUI_JSON_DIALCODE_KEY = @"e164_cc";
 NSString* const FUI_JSON_LEVEL_KEY = @"level";
-NSString* const FUI_JSON_COUNTRY_CODE_PREDICATE = @"(iso2_cc == %@)";
-NSString* const FUI_JSON_COUNTRY_NAME_PREDICATE = @"(localized_name beginswith[c] %@)";
-NSString* const FUIDefaultCountryCode = @"1";
+NSString* const FUI_JSON_COUNTRY_CODE_PREDICATE = @"(iso2_cc like[c] %@)";
+NSString* const FUI_JSON_COUNTRY_NAME_PREDICATE = @"(localized_name beginswith[cd] %@)";
+NSString* const FUIDefaultCountryCode = @"US";
 
 @implementation FUICountryCodeInfo
 
@@ -127,7 +130,8 @@ NSString* const FUIDefaultCountryCode = @"1";
 }
 
 - (FUICountryCodeInfo *)countryCodeInfoFromDeviceLocale {
-  NSString *countryCode = [[self class] countryCodeFromDeviceLocale];
+  CTCarrier *carrier = [[[CTTelephonyNetworkInfo alloc] init] subscriberCellularProvider];
+  NSString *countryCode = carrier.isoCountryCode ?: [[self class] countryCodeFromDeviceLocale];
   FUICountryCodeInfo* countryCodeInfo = [self countryCodeInfoForCode:countryCode];
   return countryCodeInfo ?: [self countryCodeInfoForCode:FUIDefaultCountryCode];
 }
