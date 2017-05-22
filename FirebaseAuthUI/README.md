@@ -48,7 +48,7 @@ Auth guides at the following links:
 - [Google](https://firebase.google.com/docs/auth/ios/google-signin#before_you_begin)
 - [Facebook](https://firebase.google.com/docs/auth/ios/facebook-login#before_you_begin)
 - [Twitter](https://firebase.google.com/docs/auth/ios/twitter-login#before_you_begin)
-- [Phone](https://firebase.google.com/docs/auth/ios/phone-login#before_you_begin)
+- [Phone](https://firebase.google.com/docs/auth/ios/phone-auth#before_you_begin)
 
 ## Using FirebaseUI for Authentication
 

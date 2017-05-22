@@ -33,7 +33,7 @@ This sample uses [email/password](https://firebase.google.com/docs/auth/ios/pass
 [Google](https://firebase.google.com/docs/auth/ios/google-signin),
 [Facebook](https://firebase.google.com/docs/auth/ios/facebook-login),
 [Twitter](https://firebase.google.com/docs/auth/ios/twitter-login)
-and [Phone](https://firebase.google.com/docs/auth/ios/phone-login)
+and [Phone](https://firebase.google.com/docs/auth/ios/phone-auth)
 auth so make sure those are enabled in Firebase console.
 
 The auth example requires a little more setup (adding url schemes, etc)
