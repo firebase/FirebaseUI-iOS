@@ -1,62 +1,71 @@
 /* The text of the button used to sign-in with Phone. */
-"SignInWithPhone" = "Sign in with phone";
+"SignInWithPhone" = "휴대전화로 로그인";
 
 /* The title of view controller where user enters phone number. */
-"EnterPhoneTitle" = "Enter phone number";
+"EnterPhoneTitle" = "전화번호 입력";
 
 /* The title of button on navigation controller which navigates to previous screen. */
-"Back" = "Back";
+"Back" = "뒤로";
 
 /* The title of button on navigation controller which navigates to the next screen. */
-"Next" = "Next";
+"Next" = "다음";
 
 /* The title of button which user taps on phone verification screen. */
-"Verify" = "Verify";
+"Verify" = "인증";
 
 /* Alert message displayed when user submits empty verification code. */
-"EmptyVerificationCode" = "Verification code can't be empty.";
+"EmptyVerificationCode" = "인증 코드는 비워둘 수 없습니다.";
 
 /* Alert message displayed when user submits empty phone number. */
-"EmptyPhoneNumber" = "Phone number can't be empty.";
+"EmptyPhoneNumber" = "전화번호는 비워둘 수 없습니다.";
 
 /* Label next to the left of phone number entry field. */
-"PhoneNumber" = "Number";
+"PhoneNumber" = "번호";
 
 /* Placeholder shown for phone number input field. */
-"EnterYourPhoneNumber" = "Phone number";
+"EnterYourPhoneNumber" = "전화번호";
 
 /* Label next to the left of country selector control. */
-"Country" = "Country";
+"Country" = "국가";
 
 /* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
-"EnterCodeDescription" = "Enter the %@-digit code we sent to";
+"EnterCodeDescription" = "전송된 %@자리 코드를 입력하세요.";
 
 /* The title of button with resend verification code functionality. */
-"ResendCode" = "Resend code";
+"ResendCode" = "코드 재전송";
 
 /* Text of the resend timer label shown on verification phone number screen. */
-"ResendCodeTimer" = "Resend code in %@";
+"ResendCodeTimer" = "%@ 후에 코드 재전송";
 
 /* The title of view controller where user verifies phone number. . */
-"VerifyPhoneTitle" = "Verify phone number";
+"VerifyPhoneTitle" = "전화번호 확인";
 
 /* The title of button displayed when user closes alert message. */
-"Done" = "Done";
+"Done" = "완료";
 
 /* The title of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneTitle" = "Invalid phone number";
+"IncorrectPhoneTitle" = "전화번호가 잘못되었습니다.";
 
 /* The body message of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneMessage" = "Try entering your phone number again.";
+"IncorrectPhoneMessage" = "올바른 전화번호를 입력하세요.";
 
 /* The body message of alert shown when user tapped resend verification code button. */
-"ResendCodeResult" = "Code was sent to %@";
+"ResendCodeResult" = "%@으(로) 코드가 전송되었습니다.";
 
 /* The title of alert shown when user entered invalid verification code. */
-"IncorrectCodeTitle" = "Incorrect verification code";
+"IncorrectCodeTitle" = "잘못된 인증 코드";
 
 /* The body message of alert shown when user entered invalid verification code. */
-"IncorrectCodeMessage" = "Try entering your verification code again.";
+"IncorrectCodeMessage" = "코드가 잘못되었습니다. 다시 시도하세요.";
 
 /* The body message of alert shown when internal server error appeared. */
-"InternalErrorMessage" = "Your request couldn't be completed. Try again later.";
+"InternalErrorMessage" = "문제가 발생했습니다. 다시 시도해 주세요.";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "이 전화번호로 전송 시도를 너무 많이 했습니다.";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "전화번호를 인증하는 중에 문제가 발생했습니다.";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "더 이상 유효하지 않은 코드입니다.";

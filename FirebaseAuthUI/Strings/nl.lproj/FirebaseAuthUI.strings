@@ -1,218 +1,218 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "Welcome";
+"AuthPickerTitle" = "Welkom";
 
 /* Sign in with email button label. */
-"SignInWithEmail" = "Sign in with email";
+"SignInWithEmail" = "Inloggen met e-mailadres";
 
 /* Title for email entry screen, email text field placeholder. */
-"EnterYourEmail" = "Enter your email";
+"EnterYourEmail" = "Voer uw e-mailadres in";
 
 /* Error message displayed when user enters an invalid email address. */
-"InvalidEmailError" = "That email address isn't correct.";
+"InvalidEmailError" = "Dit e-mailadres is niet juist.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "This type of account isn't supported by this app";
+"CannotAuthenticateError" = "Dit accounttype wordt niet ondersteund door deze app";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "You already have an account";
+"ExistingAccountTitle" = "U heeft al een account";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
+"ProviderUsedPreviouslyMessage" = "U heeft %@ al gebruikt. Log in met %@ om verder te gaan.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "Sign in";
+"SignInTitle" = "Inloggen";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "Enter your password";
+"EnterYourPassword" = "Voer uw wachtwoord in";
 
 /* Error message displayed when user enters an empty passwrd. */
-"InvalidPasswordError" = "Password cannot be empty.";
+"InvalidPasswordError" = "Wachtwoord mag niet leeg zijn.";
 
 /* Error message displayed when the email and password don't match. */
-"WrongPasswordError" = "The email and password you entered don't match.";
+"WrongPasswordError" = "Het ingevoerde e-mailadres en wachtwoord komen niet overeen.";
 
 /* Error message displayed when there's no account matching the email address. */
-"UserNotFoundError" = "That email address doesn’t match an existing account.";
+"UserNotFoundError" = "Dit e-mailadres komt niet overeen met een bestaand account.";
 
 /* Error message displayed when the account is disabled. */
-"AccountDisabledError" = "That email address is for an account that has been disabled.";
+"AccountDisabledError" = "Dit e-mailadres hoort bij een uitgeschakeld account.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
+"SignInTooManyTimesError" = "U heeft te vaak een fout wachtwoord ingevoerd. Probeer het over enkele minuten opnieuw.";
 
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "Can't find provider for %@.";
+"CantFindProvider" = "Kan de provider niet vinden voor %@.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorizaed user's email doen't match. */
-"EmailsDontMatch" = "Emails don't match";
+"EmailsDontMatch" = "E-mailadressen komen niet overeen";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Recover password";
+"PasswordRecoveryTitle" = "Wachtwoord herstellen";
 
 /* Explanation on how the password of an account can be recovered. */
-"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
+"PasswordRecoveryMessage" = "Er wordt een e-mail naar dit adres verzonden met instructies om uw wachtwoord te herstellen.";
 
 /* Title of a message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentTitle" = "Check your email";
+"PasswordRecoveryEmailSentTitle" = "Controleer uw inbox";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
+"PasswordRecoveryEmailSentMessage" = "Volg de instructies die we naar %@ hebben verzonden om uw wachtwoord te herstellen.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Create account";
+"SignUpTitle" = "Account maken";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "First & last name";
+"FirstAndLastName" = "Voor- en achternaam";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "Choose password";
+"ChoosePassword" = "Wachtwoord kiezen";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
+"TermsOfServiceNotice" = "Door op %@ te tikken, gaat u akkoord met de %@.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "Terms of Service";
+"TermsOfService" = "Servicevoorwaarden";
 
 /* Error message displayed when the email address is already in use. */
-"EmailAlreadyInUseError" = "The email address is already in use by another account.";
+"EmailAlreadyInUseError" = "Dit e-mailadres wordt al gebruikt door een ander account.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
+"WeakPasswordError" = "Sterke wachtwoorden bevatten ten minste zes tekens en een combinatie van letters en cijfers.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
+"SignUpTooManyTimesError" = "Er komen te veel accountaanvragen van uw IP-adres. Probeer het over enkele minuten opnieuw.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
+"PasswordVerificationMessage" = "U heeft al ingelogd met %@. Voer uw wachtwoord in voor dit account.";
 
 /* OK button title. */
 "OK" = "OK";
 
 /* Cancel button title. */
-"Cancel" = "Cancel";
+"Cancel" = "Annuleren";
 
 /* Back button title. */
-"Back" = "Back";
+"Back" = "Terug";
 
 /* Next button title. */
-"Next" = "Next";
+"Next" = "Volgende";
 
 /* Save button title. */
-"Save" = "Save";
+"Save" = "Opslaan";
 
 /* Save button title. */
-"Send" = "Send";
+"Send" = "Verzenden";
 
 /* Label next to a email text field. */
-"Email" = "Email";
+"Email" = "E-mail";
 
 /* Label next to a password text field. */
-"Password" = "Password";
+"Password" = "Wachtwoord";
 
 /* Label next to a name text field. */
-"Name" = "Name";
+"Name" = "Naam";
 
 /* Alert title Error. */
-"Error" = "Error";
+"Error" = "Fout";
 
 /* Alert button title Close. */
-"Close" = "Close";
+"Close" = "Sluiten";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "Profile";
+"AS_SectionProfile" = "Profiel";
 
 /* Account Settings section title Secrity. */
-"AS_SectionSecurity" = "Security";
+"AS_SectionSecurity" = "Beveiliging";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "Linked Accounts";
+"AS_SectionLinkedAccounts" = "Gelinkte accounts";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "Name";
+"AS_Name" = "Naam";
 
 /* Account Settings cell title Email. */
-"AS_Email" = "Email";
+"AS_Email" = "E-mail";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "Add password";
+"AS_AddPassword" = "Wachtwoord toevoegen";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "Change password";
+"AS_ChangePassword" = "Wachtwoord wijzigen";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "Sign Out";
+"AS_SignOut" = "Uitloggen";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "Delete Account";
+"AS_DeleteAccount" = "Account verwijderen";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Forgot password?";
+"ForgotPassword" = "Wachtwoord vergeten?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Verify it's you";
+"VerifyItsYou" = "Bevestig dat u het bent";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "Delete Account?";
+"DeleteAccountConfimationTitle" = "Account verwijderen?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
+"DeleteAccountBody" = "Alle gegevens die aan uw account zijn gekoppeld, worden gewist. Dit kan niet ongedaan worden gemaakt. U moet opnieuw inloggen om deze actie te voltooien.";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+"DeleteAccountConfirmationMessage" = "Alle gegevens die aan uw account zijn gekoppeld, worden gewist. Dit kan niet ongedaan worden gemaakt. Weet u zeker dat u uw account wilt verwijderen?";
 
 /* Text of Delete action button. */
-"Delete" = "Delete";
+"Delete" = "Verwijderen";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "Delete account";
+"DeleteAccountControllerTitle" = "Account verwijderen";
 
 /* Alert nessage shown before account deletion. */
-"ActionCantBeUndone" = "This action can't be undone";
+"ActionCantBeUndone" = "Deze actie kan niet ongedaan worden gemaakt.";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Unlink";
+"UnlinkAction" = "Link verwijderen";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "Linked account";
+"UnlinkTitle" = "Gelinkt account";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Unlink account?";
+"UnlinkConfirmationTitle" = "Link met account verwijderen?";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
+"UnlinkConfirmationMessage" = "U kunt niet meer inloggen met uw account";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Unlink account";
+"UnlinkConfirmationActionTitle" = "Link met account verwijderen";
 
 /* Alert action message shown before updating email action. */
-"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+"UpdateEmailAlertMessage" = "Als u een e-mailadres wilt veranderen dat is gekoppeld aan uw account, moet u opnieuw inloggen.";
 
 /* Alert action message shown before confimation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"UpdateEmailVerificationAlertMessage" = "Om uw wachtwoord te veranderen, moet u eerst uw huidige wachtwoord invoeren.";
 
 /* Controller title shown when editing account email. */
-"EditEmailTitle" = "Edit email";
+"EditEmailTitle" = "E-mailadres bewerken";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "Edit name";
+"EditNameTitle" = "Naam bewerken";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
+"AddPasswordAlertMessage" = "Om een wachtwoord toe te voegen aan uw account, moet u opnieuw inloggen.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
+"EditPasswordAlertMessage" = "Om het wachtwoord van uw account te veranderen, moet u opnieuw inloggen.";
 
 /* Alert message shown when reathenticationg before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"ReauthenticateEditPasswordAlertMessage" = "Om uw wachtwoord te veranderen, moet u eerst uw huidige wachtwoord invoeren.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "Add password";
+"AddPasswordTitle" = "Wachtwoord toevoegen";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "Change password";
+"EditPasswordTitle" = "Wachtwoord wijzigen";
 
 /* Title of Password/Email provider */
-"ProviderTitlePassword" = "Email";
+"ProviderTitlePassword" = "E-mail";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google";
@@ -224,19 +224,19 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "Sign in with %@";
+"SignInWithProvider" = "Inloggen met %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "Enter your name";
+"PlaceholderEnterName" = "Voer uw naam in";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterEmail" = "Enter your email";
+"PlaceholderEnterEmail" = "Voer uw e-mailadres in";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "Enter your password";
+"PlaceholderEnterPassword" = "Voer uw wachtwoord in";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "New password";
+"PlaceholderNewPassword" = "Nieuw wachtwoord";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "Choose password";
+"PlaceholderChosePassword" = "Wachtwoord kiezen";

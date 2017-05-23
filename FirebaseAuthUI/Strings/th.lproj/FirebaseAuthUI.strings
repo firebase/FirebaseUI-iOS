@@ -1,218 +1,218 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "Welcome";
+"AuthPickerTitle" = "ยินดีต้อนรับ";
 
 /* Sign in with email button label. */
-"SignInWithEmail" = "Sign in with email";
+"SignInWithEmail" = "ลงชื่อเข้าใช้ด้วยอีเมล";
 
 /* Title for email entry screen, email text field placeholder. */
-"EnterYourEmail" = "Enter your email";
+"EnterYourEmail" = "ป้อนอีเมลของคุณ";
 
 /* Error message displayed when user enters an invalid email address. */
-"InvalidEmailError" = "That email address isn't correct.";
+"InvalidEmailError" = "ที่อยู่อีเมลนี้ไม่ถูกต้อง";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "This type of account isn't supported by this app";
+"CannotAuthenticateError" = "แอปนี้ไม่รองรับบัญชีประเภทนี้";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "You already have an account";
+"ExistingAccountTitle" = "คุณมีบัญชีอยู่แล้ว";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
+"ProviderUsedPreviouslyMessage" = "คุณใช้ %@ อยู่แล้ว ลงชื่อเข้าใช้ด้วย %@ เพื่อดำเนินการต่อ";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "Sign in";
+"SignInTitle" = "ลงชื่อเข้าใช้";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "Enter your password";
+"EnterYourPassword" = "ป้อนรหัสผ่านของคุณ";
 
 /* Error message displayed when user enters an empty passwrd. */
-"InvalidPasswordError" = "Password cannot be empty.";
+"InvalidPasswordError" = "ต้องระบุรหัสผ่าน";
 
 /* Error message displayed when the email and password don't match. */
-"WrongPasswordError" = "The email and password you entered don't match.";
+"WrongPasswordError" = "อีเมลและรหัสผ่านที่ป้อนไม่ตรงกัน";
 
 /* Error message displayed when there's no account matching the email address. */
-"UserNotFoundError" = "That email address doesn’t match an existing account.";
+"UserNotFoundError" = "ที่อยู่อีเมลไม่ตรงกับบัญชีที่มีอยู่";
 
 /* Error message displayed when the account is disabled. */
-"AccountDisabledError" = "That email address is for an account that has been disabled.";
+"AccountDisabledError" = "ที่อยู่อีเมลนี้เป็นของบัญชีที่ปิดใช้ไปแล้ว";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
+"SignInTooManyTimesError" = "คุณป้อนรหัสผ่านไม่ถูกต้องหลายครั้งเกินไป โปรดรอสักครู่แล้วลองอีกครั้ง";
 
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "Can't find provider for %@.";
+"CantFindProvider" = "ไม่พบผู้ให้บริการสำหรับ %@";
 
 /* Error message displayed when after re-authorization current user's email and re-authorizaed user's email doen't match. */
-"EmailsDontMatch" = "Emails don't match";
+"EmailsDontMatch" = "อีเมลไม่ตรงกัน";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Recover password";
+"PasswordRecoveryTitle" = "กู้คืนรหัสผ่าน";
 
 /* Explanation on how the password of an account can be recovered. */
-"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
+"PasswordRecoveryMessage" = "ดูวิธีการที่ส่งไปยังอีเมลนี้ซึ่งอธิบายเกี่ยวกับวิธีรีเซ็ตรหัสผ่านของคุณ";
 
 /* Title of a message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentTitle" = "Check your email";
+"PasswordRecoveryEmailSentTitle" = "ตรวจสอบอีเมลของคุณ";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
+"PasswordRecoveryEmailSentMessage" = "ทำตามวิธีการที่ส่งไปยัง %@ เพื่อกู้คืนรหัสผ่าน";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Create account";
+"SignUpTitle" = "สร้างบัญชี";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "First & last name";
+"FirstAndLastName" = "ชื่อและนามสกุล";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "Choose password";
+"ChoosePassword" = "ตั้งรหัสผ่าน";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
+"TermsOfServiceNotice" = "การแตะ%@แสดงว่าคุณยอมรับ%@";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "Terms of Service";
+"TermsOfService" = "ข้อกำหนดในการให้บริการ";
 
 /* Error message displayed when the email address is already in use. */
-"EmailAlreadyInUseError" = "The email address is already in use by another account.";
+"EmailAlreadyInUseError" = "มีบัญชีอื่นใช้งานที่อยู่อีเมลนี้อยู่แล้ว";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
+"WeakPasswordError" = "รหัสผ่านที่รัดกุมต้องมีความยาวอย่างน้อย 6 อักขระและประกอบด้วยตัวอักษรปนกับตัวเลข";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
+"SignUpTooManyTimesError" = "มีคำขอสร้างบัญชีจากที่อยู่ IP ของคุณมากเกินไป โปรดรอสักครู่แล้วลองอีกครั้ง";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
+"PasswordVerificationMessage" = "คุณใช้ %@ ในการลงชื่อเข้าใช้อยู่แล้ว โปรดป้อนรหัสผ่านสำหรับบัญชีดังกล่าว";
 
 /* OK button title. */
-"OK" = "OK";
+"OK" = "ตกลง";
 
 /* Cancel button title. */
-"Cancel" = "Cancel";
+"Cancel" = "ยกเลิก";
 
 /* Back button title. */
-"Back" = "Back";
+"Back" = "ย้อนกลับ";
 
 /* Next button title. */
-"Next" = "Next";
+"Next" = "ถัดไป";
 
 /* Save button title. */
-"Save" = "Save";
+"Save" = "บันทึก";
 
 /* Save button title. */
-"Send" = "Send";
+"Send" = "ส่ง";
 
 /* Label next to a email text field. */
-"Email" = "Email";
+"Email" = "อีเมล";
 
 /* Label next to a password text field. */
-"Password" = "Password";
+"Password" = "รหัสผ่าน";
 
 /* Label next to a name text field. */
-"Name" = "Name";
+"Name" = "ชื่อ";
 
 /* Alert title Error. */
-"Error" = "Error";
+"Error" = "ข้อผิดพลาด";
 
 /* Alert button title Close. */
-"Close" = "Close";
+"Close" = "ปิด";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "Profile";
+"AS_SectionProfile" = "โปรไฟล์";
 
 /* Account Settings section title Secrity. */
-"AS_SectionSecurity" = "Security";
+"AS_SectionSecurity" = "ความปลอดภัย";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "Linked Accounts";
+"AS_SectionLinkedAccounts" = "บัญชีที่ลิงก์";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "Name";
+"AS_Name" = "ชื่อ";
 
 /* Account Settings cell title Email. */
-"AS_Email" = "Email";
+"AS_Email" = "อีเมล";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "Add password";
+"AS_AddPassword" = "เพิ่มรหัสผ่าน";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "Change password";
+"AS_ChangePassword" = "เปลี่ยนรหัสผ่าน";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "Sign Out";
+"AS_SignOut" = "ออกจากระบบ";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "Delete Account";
+"AS_DeleteAccount" = "ลบบัญชี";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Forgot password?";
+"ForgotPassword" = "หากลืมรหัสผ่าน";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Verify it's you";
+"VerifyItsYou" = "โปรดยืนยันว่าเป็นคุณ";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "Delete Account?";
+"DeleteAccountConfimationTitle" = "ลบบัญชีไหม";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
+"DeleteAccountBody" = "การทำเช่นนี้จะลบข้อมูลทั้งหมดที่เชื่อมโยงกับบัญชีของคุณและไม่สามารถเลิกทำได้ โปรดลงชื่อเข้าใช้อีกครั้งเพื่อดำเนินการให้เสร็จสมบูรณ์";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+"DeleteAccountConfirmationMessage" = "การทำเช่นนี้จะลบข้อมูลทั้งหมดที่เชื่อมโยงกับบัญชีและไม่สามารถเลิกทำได้ คุณแน่ใจไหมว่าต้องการลบบัญชีของคุณ";
 
 /* Text of Delete action button. */
-"Delete" = "Delete";
+"Delete" = "ลบ";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "Delete account";
+"DeleteAccountControllerTitle" = "ลบบัญชี";
 
 /* Alert nessage shown before account deletion. */
-"ActionCantBeUndone" = "This action can't be undone";
+"ActionCantBeUndone" = "การดำเนินการนี้ไม่สามารถเลิกทำได้";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Unlink";
+"UnlinkAction" = "ยกเลิกการลิงก์";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "Linked account";
+"UnlinkTitle" = "บัญชีที่ลิงก์";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Unlink account?";
+"UnlinkConfirmationTitle" = "ยกเลิกการลิงก์บัญชีไหม";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
+"UnlinkConfirmationMessage" = "คุณจะไม่สามารถลงชื่อเข้าใช้ด้วยบัญชีของคุณได้อีก";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Unlink account";
+"UnlinkConfirmationActionTitle" = "ยกเลิกการลิงก์บัญชี";
 
 /* Alert action message shown before updating email action. */
-"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+"UpdateEmailAlertMessage" = "ในการเปลี่ยนที่อยู่อีเมลที่เชื่อมโยงกับบัญชีของคุณ คุณจะต้องลงชื่อเข้าใช้อีกครั้ง";
 
 /* Alert action message shown before confimation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"UpdateEmailVerificationAlertMessage" = "คุณต้องป้อนรหัสผ่านปัจจุบันของคุณก่อนจึงจะเปลี่ยนรหัสผ่านได้";
 
 /* Controller title shown when editing account email. */
-"EditEmailTitle" = "Edit email";
+"EditEmailTitle" = "แก้ไขอีเมล";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "Edit name";
+"EditNameTitle" = "แก้ไขชื่อ";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
+"AddPasswordAlertMessage" = "ในการเพิ่มรหัสผ่านลงในบัญชี คุณจะต้องลงชื่อเข้าใช้อีกครั้ง";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
+"EditPasswordAlertMessage" = "ในการเปลี่ยนรหัสผ่านบัญชี คุณจะต้องลงชื่อเข้าใช้อีกครั้ง";
 
 /* Alert message shown when reathenticationg before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"ReauthenticateEditPasswordAlertMessage" = "คุณต้องป้อนรหัสผ่านปัจจุบันของคุณก่อนจึงจะเปลี่ยนรหัสผ่านได้";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "Add password";
+"AddPasswordTitle" = "เพิ่มรหัสผ่าน";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "Change password";
+"EditPasswordTitle" = "เปลี่ยนรหัสผ่าน";
 
 /* Title of Password/Email provider */
-"ProviderTitlePassword" = "Email";
+"ProviderTitlePassword" = "อีเมล";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google";
@@ -224,19 +224,19 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "Sign in with %@";
+"SignInWithProvider" = "ลงชื่อเข้าใช้ด้วย %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "Enter your name";
+"PlaceholderEnterName" = "ป้อนชื่อของคุณ";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterEmail" = "Enter your email";
+"PlaceholderEnterEmail" = "ป้อนอีเมลของคุณ";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "Enter your password";
+"PlaceholderEnterPassword" = "ป้อนรหัสผ่านของคุณ";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "New password";
+"PlaceholderNewPassword" = "รหัสผ่านใหม่";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "Choose password";
+"PlaceholderChosePassword" = "ตั้งรหัสผ่าน";

@@ -1,62 +1,71 @@
 /* The text of the button used to sign-in with Phone. */
-"SignInWithPhone" = "Sign in with phone";
+"SignInWithPhone" = "‏‮Sign‬‏ ‏‮in‬‏ ‏‮with‬‏ ‏‮phone‬‏";
 
 /* The title of view controller where user enters phone number. */
-"EnterPhoneTitle" = "Enter phone number";
+"EnterPhoneTitle" = "‏‮Enter‬‏ ‏‮phone‬‏ ‏‮number‬‏";
 
 /* The title of button on navigation controller which navigates to previous screen. */
-"Back" = "Back";
+"Back" = "‏‮Back‬‏";
 
 /* The title of button on navigation controller which navigates to the next screen. */
-"Next" = "Next";
+"Next" = "‏‮Next‬‏";
 
 /* The title of button which user taps on phone verification screen. */
-"Verify" = "Verify";
+"Verify" = "‏‮Verify‬‏";
 
 /* Alert message displayed when user submits empty verification code. */
-"EmptyVerificationCode" = "Verification code can't be empty.";
+"EmptyVerificationCode" = "‏‮Verification‬‏ ‏‮code‬‏ ‏‮can‬‏'‏‮t‬‏ ‏‮be‬‏ ‏‮empty‬‏";
 
 /* Alert message displayed when user submits empty phone number. */
-"EmptyPhoneNumber" = "Phone number can't be empty.";
+"EmptyPhoneNumber" = "‏‮Phone‬‏ ‏‮number‬‏ ‏‮can‬‏'‏‮t‬‏ ‏‮be‬‏ ‏‮empty‬‏";
 
 /* Label next to the left of phone number entry field. */
-"PhoneNumber" = "Number";
+"PhoneNumber" = "‏‮Number‬‏";
 
 /* Placeholder shown for phone number input field. */
-"EnterYourPhoneNumber" = "Phone number";
+"EnterYourPhoneNumber" = "‏‮Phone‬‏ ‏‮number‬‏";
 
 /* Label next to the left of country selector control. */
-"Country" = "Country";
+"Country" = "‏‮Country‬‏";
 
 /* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
-"EnterCodeDescription" = "Enter the %@-digit code we sent to";
+"EnterCodeDescription" = "‏‮Enter‬‏ ‏‮the‬‏ %@-‏‮digit‬‏ ‏‮code‬‏ ‏‮we‬‏ ‏‮sent‬‏ ‏‮to‬‏";
 
 /* The title of button with resend verification code functionality. */
-"ResendCode" = "Resend code";
+"ResendCode" = "‏‮Resend‬‏ ‏‮code‬‏";
 
 /* Text of the resend timer label shown on verification phone number screen. */
-"ResendCodeTimer" = "Resend code in %@";
+"ResendCodeTimer" = "‏‮Resend‬‏ ‏‮code‬‏ ‏‮in‬‏ %@";
 
 /* The title of view controller where user verifies phone number. . */
-"VerifyPhoneTitle" = "Verify phone number";
+"VerifyPhoneTitle" = "‏‮Verify‬‏ ‏‮phone‬‏ ‏‮number‬‏";
 
 /* The title of button displayed when user closes alert message. */
-"Done" = "Done";
+"Done" = "‏‮Done‬‏";
 
 /* The title of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneTitle" = "Invalid phone number";
+"IncorrectPhoneTitle" = "‏‮Invalid‬‏ ‏‮phone‬‏ ‏‮number‬‏";
 
 /* The body message of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneMessage" = "Try entering your phone number again.";
+"IncorrectPhoneMessage" = "‏‮Enter‬‏ ‏‮a‬‏ ‏‮valid‬‏ ‏‮phone‬‏ ‏‮number‬‏";
 
 /* The body message of alert shown when user tapped resend verification code button. */
-"ResendCodeResult" = "Code was sent to %@";
+"ResendCodeResult" = "‏‮Code‬‏ ‏‮was‬‏ ‏‮sent‬‏ ‏‮to‬‏ %@";
 
 /* The title of alert shown when user entered invalid verification code. */
-"IncorrectCodeTitle" = "Incorrect verification code";
+"IncorrectCodeTitle" = "‏‮Incorrect‬‏ ‏‮verification‬‏ ‏‮code‬‏";
 
 /* The body message of alert shown when user entered invalid verification code. */
-"IncorrectCodeMessage" = "Try entering your verification code again.";
+"IncorrectCodeMessage" = "‏‮Wrong‬‏ ‏‮code‬‏. ‏‮Try‬‏ ‏‮again‬‏.";
 
 /* The body message of alert shown when internal server error appeared. */
-"InternalErrorMessage" = "Your request couldn't be completed. Try again later.";
+"InternalErrorMessage" = "‏‮Something‬‏ ‏‮went‬‏ ‏‮wrong‬‏. ‏‮Please‬‏ ‏‮try‬‏ ‏‮again‬‏.";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "‏‮This‬‏ ‏‮phone‬‏ ‏‮number‬‏ ‏‮has‬‏ ‏‮been‬‏ ‏‮used‬‏ ‏‮too‬‏ ‏‮many‬‏ ‏‮times‬‏";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "‏‮There‬‏ ‏‮was‬‏ ‏‮a‬‏ ‏‮problem‬‏ ‏‮verifying‬‏ ‏‮your‬‏ ‏‮phone‬‏ ‏‮number‬‏";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "‏‮This‬‏ ‏‮code‬‏ ‏‮is‬‏ ‏‮no‬‏ ‏‮longer‬‏ ‏‮valid‬‏";

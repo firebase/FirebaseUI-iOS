@@ -1,218 +1,218 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "Welcome";
+"AuthPickerTitle" = "Witamy";
 
 /* Sign in with email button label. */
-"SignInWithEmail" = "Sign in with email";
+"SignInWithEmail" = "Zaloguj się za pomocą e-maila";
 
 /* Title for email entry screen, email text field placeholder. */
-"EnterYourEmail" = "Enter your email";
+"EnterYourEmail" = "Wpisz swój adres e-mail";
 
 /* Error message displayed when user enters an invalid email address. */
-"InvalidEmailError" = "That email address isn't correct.";
+"InvalidEmailError" = "Nieprawidłowy adres e-mail.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "This type of account isn't supported by this app";
+"CannotAuthenticateError" = "Konto tego typu nie jest obsługiwane przez tę aplikację";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "You already have an account";
+"ExistingAccountTitle" = "Masz już konto";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
+"ProviderUsedPreviouslyMessage" = "Adres %@ został już przez Ciebie użyty. Aby kontynuować, zaloguj się przez: %@.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "Sign in";
+"SignInTitle" = "Zaloguj się";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "Enter your password";
+"EnterYourPassword" = "Wpisz hasło";
 
 /* Error message displayed when user enters an empty passwrd. */
-"InvalidPasswordError" = "Password cannot be empty.";
+"InvalidPasswordError" = "Pole z hasłem nie może być puste.";
 
 /* Error message displayed when the email and password don't match. */
-"WrongPasswordError" = "The email and password you entered don't match.";
+"WrongPasswordError" = "Podany przez Ciebie adres e-mail i hasło nie zgadzają się.";
 
 /* Error message displayed when there's no account matching the email address. */
-"UserNotFoundError" = "That email address doesn’t match an existing account.";
+"UserNotFoundError" = "Nie istnieje konto, do którego pasuje ten adres e-mail.";
 
 /* Error message displayed when the account is disabled. */
-"AccountDisabledError" = "That email address is for an account that has been disabled.";
+"AccountDisabledError" = "To jest adres e-mail konta, które zostało wyłączone.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
+"SignInTooManyTimesError" = "Zbyt wiele razy podano niepoprawne hasło. Spróbuj jeszcze raz za kilka minut.";
 
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "Can't find provider for %@.";
+"CantFindProvider" = "%@ – nie można znaleźć usługi";
 
 /* Error message displayed when after re-authorization current user's email and re-authorizaed user's email doen't match. */
-"EmailsDontMatch" = "Emails don't match";
+"EmailsDontMatch" = "Adresy e-mail są niezgodne";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Recover password";
+"PasswordRecoveryTitle" = "Odzyskiwanie hasła";
 
 /* Explanation on how the password of an account can be recovered. */
-"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
+"PasswordRecoveryMessage" = "Na ten adres e-mail zostaną wysłane instrukcje wyjaśniające, jak zresetować hasło.";
 
 /* Title of a message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentTitle" = "Check your email";
+"PasswordRecoveryEmailSentTitle" = "Sprawdź pocztę";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
+"PasswordRecoveryEmailSentMessage" = "Aby odzyskać hasło, wykonaj instrukcje wysłane na adres %@.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Create account";
+"SignUpTitle" = "Tworzenie konta";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "First & last name";
+"FirstAndLastName" = "Imię i nazwisko";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "Choose password";
+"ChoosePassword" = "Wybierz hasło";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
+"TermsOfServiceNotice" = "Klikając %@, wyrażasz zgodę na %@.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "Terms of Service";
+"TermsOfService" = "Warunki korzystania z usługi";
 
 /* Error message displayed when the email address is already in use. */
-"EmailAlreadyInUseError" = "The email address is already in use by another account.";
+"EmailAlreadyInUseError" = "Adres e-mail jest już używany przez inne konto.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
+"WeakPasswordError" = "Silne hasło ma co najmniej 6 znaków i jest kombinacją liter oraz cyfr.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
+"SignUpTooManyTimesError" = "Z tego adresu IP wysłano zbyt wiele próśb o utworzenie konta. Spróbuj jeszcze raz za kilka minut.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
+"PasswordVerificationMessage" = "Adres e-mail %@ był już używany przez Ciebie do logowania. Wpisz hasło tego konta.";
 
 /* OK button title. */
 "OK" = "OK";
 
 /* Cancel button title. */
-"Cancel" = "Cancel";
+"Cancel" = "Anuluj";
 
 /* Back button title. */
-"Back" = "Back";
+"Back" = "Wstecz";
 
 /* Next button title. */
-"Next" = "Next";
+"Next" = "Dalej";
 
 /* Save button title. */
-"Save" = "Save";
+"Save" = "Zapisz";
 
 /* Save button title. */
-"Send" = "Send";
+"Send" = "Wyślij";
 
 /* Label next to a email text field. */
-"Email" = "Email";
+"Email" = "Adres e-mail";
 
 /* Label next to a password text field. */
-"Password" = "Password";
+"Password" = "Hasło";
 
 /* Label next to a name text field. */
-"Name" = "Name";
+"Name" = "Nazwa";
 
 /* Alert title Error. */
-"Error" = "Error";
+"Error" = "Błąd";
 
 /* Alert button title Close. */
-"Close" = "Close";
+"Close" = "Zamknij";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "Profile";
+"AS_SectionProfile" = "Profil";
 
 /* Account Settings section title Secrity. */
-"AS_SectionSecurity" = "Security";
+"AS_SectionSecurity" = "Zabezpieczenia";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "Linked Accounts";
+"AS_SectionLinkedAccounts" = "Połączone konta";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "Name";
+"AS_Name" = "Nazwa";
 
 /* Account Settings cell title Email. */
-"AS_Email" = "Email";
+"AS_Email" = "Adres e-mail";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "Add password";
+"AS_AddPassword" = "Dodaj hasło";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "Change password";
+"AS_ChangePassword" = "Zmień hasło";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "Sign Out";
+"AS_SignOut" = "Wyloguj się";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "Delete Account";
+"AS_DeleteAccount" = "Usuń konto";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Forgot password?";
+"ForgotPassword" = "Nie pamiętasz hasła?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Verify it's you";
+"VerifyItsYou" = "Potwierdź, że to Ty";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "Delete Account?";
+"DeleteAccountConfimationTitle" = "Usunąć konto?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
+"DeleteAccountBody" = "Spowoduje to nieodwracalne usunięcie wszystkich danych powiązanych z Twoim kontem. Aby zakończyć tę czynność, musisz jeszcze raz się zalogować";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+"DeleteAccountConfirmationMessage" = "Spowoduje to nieodwracalne usunięcie wszystkich danych powiązanych z Twoim kontem. Czy na pewno chcesz usunąć konto?";
 
 /* Text of Delete action button. */
-"Delete" = "Delete";
+"Delete" = "Usuń";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "Delete account";
+"DeleteAccountControllerTitle" = "Usuwanie konta";
 
 /* Alert nessage shown before account deletion. */
-"ActionCantBeUndone" = "This action can't be undone";
+"ActionCantBeUndone" = "Tej czynności nie będzie można cofnąć";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Unlink";
+"UnlinkAction" = "Odłącz";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "Linked account";
+"UnlinkTitle" = "Połączone konto";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Unlink account?";
+"UnlinkConfirmationTitle" = "Czy odłączyć konto?";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
+"UnlinkConfirmationMessage" = "Logowanie za pomocą tego konta będzie niemożliwe";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Unlink account";
+"UnlinkConfirmationActionTitle" = "Odłączanie konta";
 
 /* Alert action message shown before updating email action. */
-"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+"UpdateEmailAlertMessage" = "Aby zmienić adres e-mail powiązany ze swoim kontem, musisz zalogować się jeszcze raz.";
 
 /* Alert action message shown before confimation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"UpdateEmailVerificationAlertMessage" = "Aby zmienić hasło, musisz najpierw wpisać to, którego używasz obecnie.";
 
 /* Controller title shown when editing account email. */
-"EditEmailTitle" = "Edit email";
+"EditEmailTitle" = "Edycja adresu e-mail";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "Edit name";
+"EditNameTitle" = "Edycja nazwy";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
+"AddPasswordAlertMessage" = "Aby dodać hasło do swojego konta, musisz zalogować się jeszcze raz.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
+"EditPasswordAlertMessage" = "Aby zmienić hasło do swojego konta, musisz zalogować się jeszcze raz.";
 
 /* Alert message shown when reathenticationg before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"ReauthenticateEditPasswordAlertMessage" = "Aby zmienić hasło, musisz najpierw wpisać to, którego używasz obecnie.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "Add password";
+"AddPasswordTitle" = "Dodawanie hasła";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "Change password";
+"EditPasswordTitle" = "Zmiana hasła";
 
 /* Title of Password/Email provider */
-"ProviderTitlePassword" = "Email";
+"ProviderTitlePassword" = "Adres e-mail";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google";
@@ -224,19 +224,19 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "Sign in with %@";
+"SignInWithProvider" = "Zaloguj się przez: %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "Enter your name";
+"PlaceholderEnterName" = "Wpisz nazwę";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterEmail" = "Enter your email";
+"PlaceholderEnterEmail" = "Wpisz adres e-mail";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "Enter your password";
+"PlaceholderEnterPassword" = "Wpisz hasło";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "New password";
+"PlaceholderNewPassword" = "Nowe hasło";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "Choose password";
+"PlaceholderChosePassword" = "Wybierz hasło";

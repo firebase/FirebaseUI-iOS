@@ -1,218 +1,218 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "Welcome";
+"AuthPickerTitle" = "Добро пожаловать!";
 
 /* Sign in with email button label. */
-"SignInWithEmail" = "Sign in with email";
+"SignInWithEmail" = "Войти по адресу электронной почты";
 
 /* Title for email entry screen, email text field placeholder. */
-"EnterYourEmail" = "Enter your email";
+"EnterYourEmail" = "Введите свой адрес электронной почты";
 
 /* Error message displayed when user enters an invalid email address. */
-"InvalidEmailError" = "That email address isn't correct.";
+"InvalidEmailError" = "Неверный адрес электронной почты.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "This type of account isn't supported by this app";
+"CannotAuthenticateError" = "В этом приложении не поддерживается такой тип аккаунта.";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "You already have an account";
+"ExistingAccountTitle" = "У вас уже есть аккаунт";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
+"ProviderUsedPreviouslyMessage" = "Вы уже использовали адрес %@. Войдите через аккаунт %@.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "Sign in";
+"SignInTitle" = "Войти";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "Enter your password";
+"EnterYourPassword" = "Введите пароль";
 
 /* Error message displayed when user enters an empty passwrd. */
-"InvalidPasswordError" = "Password cannot be empty.";
+"InvalidPasswordError" = "Укажите пароль.";
 
 /* Error message displayed when the email and password don't match. */
-"WrongPasswordError" = "The email and password you entered don't match.";
+"WrongPasswordError" = "Неверный адрес эл. почты или пароль.";
 
 /* Error message displayed when there's no account matching the email address. */
-"UserNotFoundError" = "That email address doesn’t match an existing account.";
+"UserNotFoundError" = "Нет аккаунта с таким адресом электронной почты.";
 
 /* Error message displayed when the account is disabled. */
-"AccountDisabledError" = "That email address is for an account that has been disabled.";
+"AccountDisabledError" = "Аккаунт с этим адресом электронной почты отключен.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
+"SignInTooManyTimesError" = "Вы неправильно ввели пароль слишком много раз. Прежде чем повторить попытку, подождите несколько минут.";
 
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "Can't find provider for %@.";
+"CantFindProvider" = "%@: поставщик услуг не найден.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorizaed user's email doen't match. */
-"EmailsDontMatch" = "Emails don't match";
+"EmailsDontMatch" = "Адреса электронной почты не совпадают.";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Recover password";
+"PasswordRecoveryTitle" = "Сбор пароля";
 
 /* Explanation on how the password of an account can be recovered. */
-"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
+"PasswordRecoveryMessage" = "На этот адрес будет отправлено письмо с инструкциями по сбросу пароля.";
 
 /* Title of a message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentTitle" = "Check your email";
+"PasswordRecoveryEmailSentTitle" = "Проверьте электронную почту";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
+"PasswordRecoveryEmailSentMessage" = "На адрес %@ отправлено письмо с инструкциями по сбросу пароля.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Create account";
+"SignUpTitle" = "Создать аккаунт";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "First & last name";
+"FirstAndLastName" = "Имя и фамилия";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "Choose password";
+"ChoosePassword" = "Выберите пароль";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
+"TermsOfServiceNotice" = "Нажимая кнопку \"%@\", вы принимаете %@.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "Terms of Service";
+"TermsOfService" = "Условия использования";
 
 /* Error message displayed when the email address is already in use. */
-"EmailAlreadyInUseError" = "The email address is already in use by another account.";
+"EmailAlreadyInUseError" = "Этот адрес электронной почты уже используется в другом аккаунте.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
+"WeakPasswordError" = "Пароль должен состоять из букв и цифр и содержать не меньше шести символов.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
+"SignUpTooManyTimesError" = "С вашего IP-адреса поступает слишком много запросов на создание аккаунта. Повторите попытку через несколько минут.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
+"PasswordVerificationMessage" = "Вы уже использовали адрес %@. Введите пароль для этого аккаунта.";
 
 /* OK button title. */
-"OK" = "OK";
+"OK" = "ОК";
 
 /* Cancel button title. */
-"Cancel" = "Cancel";
+"Cancel" = "Отмена";
 
 /* Back button title. */
-"Back" = "Back";
+"Back" = "Назад";
 
 /* Next button title. */
-"Next" = "Next";
+"Next" = "Далее";
 
 /* Save button title. */
-"Save" = "Save";
+"Save" = "Сохранить";
 
 /* Save button title. */
-"Send" = "Send";
+"Send" = "Отправить";
 
 /* Label next to a email text field. */
-"Email" = "Email";
+"Email" = "Адрес электронной почты";
 
 /* Label next to a password text field. */
-"Password" = "Password";
+"Password" = "Пароль";
 
 /* Label next to a name text field. */
-"Name" = "Name";
+"Name" = "Имя";
 
 /* Alert title Error. */
-"Error" = "Error";
+"Error" = "Ошибка";
 
 /* Alert button title Close. */
-"Close" = "Close";
+"Close" = "Закрыть";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "Profile";
+"AS_SectionProfile" = "Профиль";
 
 /* Account Settings section title Secrity. */
-"AS_SectionSecurity" = "Security";
+"AS_SectionSecurity" = "Безопасность";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "Linked Accounts";
+"AS_SectionLinkedAccounts" = "Связанные аккаунты";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "Name";
+"AS_Name" = "Имя";
 
 /* Account Settings cell title Email. */
-"AS_Email" = "Email";
+"AS_Email" = "Адрес электронной почты";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "Add password";
+"AS_AddPassword" = "Добавить пароль";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "Change password";
+"AS_ChangePassword" = "Изменить пароль";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "Sign Out";
+"AS_SignOut" = "Выйти";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "Delete Account";
+"AS_DeleteAccount" = "Удалить аккаунт";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Forgot password?";
+"ForgotPassword" = "Забыли пароль?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Verify it's you";
+"VerifyItsYou" = "Подтвердите, что это вы";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "Delete Account?";
+"DeleteAccountConfimationTitle" = "Удалить аккаунт?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
+"DeleteAccountBody" = "Все данные в нем будут безвозвратно удалены. Чтобы завершить это действие, нужно будет войти в аккаунт ещё раз.";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+"DeleteAccountConfirmationMessage" = "Все данные в аккаунте будут безвозвратно удалены. Вы уверены, что хотите продолжить?";
 
 /* Text of Delete action button. */
-"Delete" = "Delete";
+"Delete" = "Удалить";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "Delete account";
+"DeleteAccountControllerTitle" = "Удаление аккаунта";
 
 /* Alert nessage shown before account deletion. */
-"ActionCantBeUndone" = "This action can't be undone";
+"ActionCantBeUndone" = "Отменить это действие невозможно.";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Unlink";
+"UnlinkAction" = "Отменить связь";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "Linked account";
+"UnlinkTitle" = "Связанный аккаунт";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Unlink account?";
+"UnlinkConfirmationTitle" = "Отменить связь с аккаунтом?";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
+"UnlinkConfirmationMessage" = "Вы больше не сможете входить в систему с его помощью.";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Unlink account";
+"UnlinkConfirmationActionTitle" = "Отменить связь с аккаунтом";
 
 /* Alert action message shown before updating email action. */
-"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+"UpdateEmailAlertMessage" = "Чтобы изменить адрес электронной почты, связанный с аккаунтом, нужно будет войти в систему ещё раз.";
 
 /* Alert action message shown before confimation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"UpdateEmailVerificationAlertMessage" = "Сначала нужно ввести текущий пароль.";
 
 /* Controller title shown when editing account email. */
-"EditEmailTitle" = "Edit email";
+"EditEmailTitle" = "Изменить адрес электронной почты";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "Edit name";
+"EditNameTitle" = "Изменить имя";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
+"AddPasswordAlertMessage" = "Чтобы добавить новый пароль, нужно будет войти в аккаунт ещё раз.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
+"EditPasswordAlertMessage" = "Чтобы изменить пароль, нужно будет войти в аккаунт ещё раз.";
 
 /* Alert message shown when reathenticationg before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"ReauthenticateEditPasswordAlertMessage" = "Сначала нужно ввести текущий пароль.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "Add password";
+"AddPasswordTitle" = "Добавить пароль";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "Change password";
+"EditPasswordTitle" = "Изменить пароль";
 
 /* Title of Password/Email provider */
-"ProviderTitlePassword" = "Email";
+"ProviderTitlePassword" = "Адрес электронной почты";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google";
@@ -224,19 +224,19 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "Sign in with %@";
+"SignInWithProvider" = "Войти через аккаунт %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "Enter your name";
+"PlaceholderEnterName" = "Введите свое имя";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterEmail" = "Enter your email";
+"PlaceholderEnterEmail" = "Введите свой адрес электронной почты";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "Enter your password";
+"PlaceholderEnterPassword" = "Введите пароль";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "New password";
+"PlaceholderNewPassword" = "Новый пароль";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "Choose password";
+"PlaceholderChosePassword" = "Выберите пароль";
