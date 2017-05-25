@@ -21,6 +21,7 @@
 #import "FUICountryCodes.h"
 #import "FUICountryTableViewController.h"
 #import "FUIFeatureSwitch.h"
+#import "FUIPhoneAuthStrings.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithCountryCodes:(FUICountryCodes *)countryCodes {
   if ((self = [super initWithNibName:NSStringFromClass([self class])
-                              bundle:[FUIAuthUtils frameworkBundle]])) {
+                              bundle:[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName]])) {
     _countryCodes = countryCodes;
     _collationForCountries =
         [[FUICollationForCountries alloc] initWithCountryCodes:self.countryCodes];

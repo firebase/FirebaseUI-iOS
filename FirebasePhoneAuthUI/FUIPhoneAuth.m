@@ -65,11 +65,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (NSString *)signInLabel {
-  return FUIPhoneAuthLocalizedString(kPAStr_SignInWithTwitter);
+  return FUIPhoneAuthLocalizedString(kPAStr_SignInWithPhone);
 }
 
 - (UIImage *)icon {
-  return [FUIAuthUtils imageNamed:@"ic_phone"];
+  return [FUIAuthUtils imageNamed:@"ic_phone" fromBundle:FUIPhoneAuthBundleName];
 }
 
 - (UIColor *)buttonBackgroundColor {

@@ -55,7 +55,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                          email:(NSString *_Nullable)email {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils frameworkBundle]
+                        bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
                         authUI:authUI
                          email:email];
 }
@@ -158,7 +158,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   FUIAuthTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   if (!cell) {
     UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([FUIAuthTableViewCell class])
-                                    bundle:[FUIAuthUtils frameworkBundle]];
+                                    bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]];
     [tableView registerNib:cellNib forCellReuseIdentifier:kCellReuseIdentifier];
     cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   }

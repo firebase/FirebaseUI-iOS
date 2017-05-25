@@ -147,6 +147,9 @@
 		A473336B3558AFFBF5C771AC /* Pods_FirebaseAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB7232C0FFCB68825280DFE7 /* Pods_FirebaseAuthUI.framework */; };
 		A47AB319A650FCEC014ADCAC /* Pods_FirebaseGoogleAuthUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F3B946E46DCA9E61C18034 /* Pods_FirebaseGoogleAuthUITests.framework */; };
 		A47E5D65A9F291D65FF14D0E /* Pods_Facebook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DDAC92B675F57953384F6D /* Pods_Facebook.framework */; };
+		C30AEB121ED610E70084E328 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30AEB0F1ED610E70084E328 /* LaunchScreen.storyboard */; };
+		C30AEB141ED610E70084E328 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30AEB111ED610E70084E328 /* Main.storyboard */; };
+		C30AEB151ED611060084E328 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C30AEB171ED611060084E328 /* Localizable.strings */; };
 		C3204F0C1E98340400841149 /* FUICountryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3204F0B1E98340400841149 /* FUICountryTableViewController.xib */; };
 		C32516951D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = C32516941D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C32516A11D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32516A01D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests.m */; };
@@ -156,9 +159,7 @@
 		C329B13C1DA8694A00059A13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B13B1DA8694A00059A13 /* main.m */; };
 		C329B13F1DA8694A00059A13 /* FUIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B13E1DA8694A00059A13 /* FUIAppDelegate.m */; };
 		C329B1421DA8694A00059A13 /* FUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B1411DA8694A00059A13 /* FUIViewController.m */; };
-		C329B1451DA8694A00059A13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C329B1431DA8694A00059A13 /* Main.storyboard */; };
 		C329B1471DA8694A00059A13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C329B1461DA8694A00059A13 /* Assets.xcassets */; };
-		C329B14A1DA8694A00059A13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C329B1481DA8694A00059A13 /* LaunchScreen.storyboard */; };
 		C329B1791DAC121200059A13 /* FirebaseAuthUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8DCC4FC11D678CDC00B0D3C4 /* FirebaseAuthUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C329B17C1DAC149B00059A13 /* FirebaseUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D2A84A61D678B2B0058DF04 /* FirebaseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C329B1AE1DAC5D0B00059A13 /* FirebaseUISampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B15F1DA8694B00059A13 /* FirebaseUISampleUITests.m */; };
@@ -663,6 +664,26 @@
 		BFAEE8F248FA2B9EC923E448 /* Pods-Storage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Storage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Storage/Pods-Storage.debug.xcconfig"; sourceTree = "<group>"; };
 		C0B11EE1FA6B4970C3127EEE /* Pods-FirebaseFacebookAuthUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseFacebookAuthUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseFacebookAuthUITests/Pods-FirebaseFacebookAuthUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C1775C63258D3259618AE277 /* Pods-FirebaseStorageUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseStorageUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseStorageUI/Pods-FirebaseStorageUI.debug.xcconfig"; sourceTree = "<group>"; };
+		C30AEB0F1ED610E70084E328 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C30AEB111ED610E70084E328 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C30AEB161ED611060084E328 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB181ED611080084E328 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB191ED611090084E328 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB1A1ED6110A0084E328 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB1B1ED6110A0084E328 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB1C1ED6110C0084E328 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB1D1ED6110D0084E328 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB1E1ED6110E0084E328 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB1F1ED6110F0084E328 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB201ED611100084E328 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB211ED611110084E328 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB221ED611110084E328 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB231ED611120084E328 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB241ED611130084E328 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB251ED611140084E328 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB261ED611140084E328 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB271ED611150084E328 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-ES"; path = "es-ES.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB281ED611160084E328 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C3204F0B1E98340400841149 /* FUICountryTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICountryTableViewController.xib; sourceTree = "<group>"; };
 		C32516921D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseTwitterAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32516941D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseTwitterAuthUI.h; sourceTree = "<group>"; };
@@ -679,9 +700,7 @@
 		C329B13E1DA8694A00059A13 /* FUIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FUIAppDelegate.m; sourceTree = "<group>"; };
 		C329B1401DA8694A00059A13 /* FUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FUIViewController.h; sourceTree = "<group>"; };
 		C329B1411DA8694A00059A13 /* FUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FUIViewController.m; sourceTree = "<group>"; };
-		C329B1441DA8694A00059A13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C329B1461DA8694A00059A13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C329B1491DA8694A00059A13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C329B14B1DA8694A00059A13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C329B15B1DA8694A00059A13 /* FirebaseUISampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirebaseUISampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C329B15F1DA8694B00059A13 /* FirebaseUISampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebaseUISampleUITests.m; sourceTree = "<group>"; };
@@ -1399,6 +1418,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C30AEB0E1ED610E70084E328 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C30AEB0F1ED610E70084E328 /* LaunchScreen.storyboard */,
+				C30AEB171ED611060084E328 /* Localizable.strings */,
+				C30AEB111ED610E70084E328 /* Main.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		C32516931D88A54C00B0B3F9 /* FirebaseTwitterAuthUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1428,9 +1457,8 @@
 				C329B13E1DA8694A00059A13 /* FUIAppDelegate.m */,
 				C329B1401DA8694A00059A13 /* FUIViewController.h */,
 				C329B1411DA8694A00059A13 /* FUIViewController.m */,
-				C329B1431DA8694A00059A13 /* Main.storyboard */,
+				C30AEB0E1ED610E70084E328 /* Resources */,
 				C329B1461DA8694A00059A13 /* Assets.xcassets */,
-				C329B1481DA8694A00059A13 /* LaunchScreen.storyboard */,
 				C329B14B1DA8694A00059A13 /* Info.plist */,
 				C329B13A1DA8694A00059A13 /* Supporting Files */,
 			);
@@ -2349,7 +2377,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				ar,
 				"zh-Hans",
 				"zh-Hant",
@@ -2536,9 +2563,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C329B14A1DA8694A00059A13 /* LaunchScreen.storyboard in Resources */,
 				C329B1471DA8694A00059A13 /* Assets.xcassets in Resources */,
-				C329B1451DA8694A00059A13 /* Main.storyboard in Resources */,
+				C30AEB151ED611060084E328 /* Localizable.strings in Resources */,
+				C30AEB121ED610E70084E328 /* LaunchScreen.storyboard in Resources */,
+				C30AEB141ED610E70084E328 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3866,20 +3894,29 @@
 			name = FirebaseAuthUI.strings;
 			sourceTree = "<group>";
 		};
-		C329B1431DA8694A00059A13 /* Main.storyboard */ = {
+		C30AEB171ED611060084E328 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C329B1441DA8694A00059A13 /* Base */,
+				C30AEB161ED611060084E328 /* en */,
+				C30AEB181ED611080084E328 /* ar */,
+				C30AEB191ED611090084E328 /* zh-Hans */,
+				C30AEB1A1ED6110A0084E328 /* zh-Hant */,
+				C30AEB1B1ED6110A0084E328 /* nl */,
+				C30AEB1C1ED6110C0084E328 /* en-GB */,
+				C30AEB1D1ED6110D0084E328 /* fr */,
+				C30AEB1E1ED6110E0084E328 /* de */,
+				C30AEB1F1ED6110F0084E328 /* it */,
+				C30AEB201ED611100084E328 /* ja */,
+				C30AEB211ED611110084E328 /* ko */,
+				C30AEB221ED611110084E328 /* pl */,
+				C30AEB231ED611120084E328 /* ru */,
+				C30AEB241ED611130084E328 /* th */,
+				C30AEB251ED611140084E328 /* tr */,
+				C30AEB261ED611140084E328 /* pt-BR */,
+				C30AEB271ED611150084E328 /* es-ES */,
+				C30AEB281ED611160084E328 /* es-419 */,
 			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C329B1481DA8694A00059A13 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C329B1491DA8694A00059A13 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		C32F21B81EC24E8F0028CBE4 /* FirebaseTwitterAuthUI.strings */ = {

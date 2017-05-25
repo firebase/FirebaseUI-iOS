@@ -14,7 +14,11 @@ Pod::Spec.new do |s|
 
   s.subspec 'Phone' do |phone|
     phone.source_files = "FirebasePhoneAuthUI/**/*.{h,m}"
-    phone.resources = "FirebasePhoneAuthUI/{Resources,Strings}/**/*", "FirebasePhoneAuthUI/**/*.xib"
+    phone.resource_bundle = { 
+      'FirebasePhoneAuthUI' => ['FirebasePhoneAuthUI/Strings/**/*', 
+                                'FirebasePhoneAuthUI/Resources/**/*', 
+                                'FirebasePhoneAuthUI/**/*.xib']
+    }
     phone.dependency 'FirebaseAuthUI/AuthBase'
   end
 end

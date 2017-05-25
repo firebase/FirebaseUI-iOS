@@ -14,7 +14,11 @@ Pod::Spec.new do |s|
 
   s.subspec 'Google' do |google|
     google.source_files = "FirebaseGoogleAuthUI/**/*.{h,m}"
-    google.resources = "FirebaseGoogleAuthUI/{Resources,Strings}/**/*", "FirebaseGoogleAuthUI/**/*.xib"
+    google.resource_bundle = { 
+      'FirebaseGoogleAuthUI' => ['FirebaseGoogleAuthUI/Strings/**/*', 
+                                 'FirebaseGoogleAuthUI/Resources/**/*', 
+                                 'FirebaseGoogleAuthUI/**/*.xib']
+    }
     google.dependency 'FirebaseAuthUI/AuthBase'
     google.dependency 'GoogleSignIn', '~> 4.0'
   end

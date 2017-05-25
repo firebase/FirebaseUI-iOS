@@ -55,7 +55,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
                          email:(NSString *_Nullable)email
                  newCredential:(FIRAuthCredential *)newCredential {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils frameworkBundle]
+                        bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
                         authUI:authUI
                          email:email
                  newCredential:newCredential];
@@ -183,7 +183,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   FUIAuthTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   if (!cell) {
     UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([FUIAuthTableViewCell class])
-                                    bundle:[FUIAuthUtils frameworkBundle]];
+                                    bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]];
     [tableView registerNib:cellNib forCellReuseIdentifier:kCellReuseIdentifier];
     cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   }

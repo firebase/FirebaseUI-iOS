@@ -14,7 +14,11 @@ Pod::Spec.new do |s|
 
   s.subspec 'AuthBase' do |authbase|
     authbase.source_files = "FirebaseAuthUI/**/*.{h,m}"
-    authbase.resources = "FirebaseAuthUI/{Resources,Strings}/**/*", "FirebaseAuthUI/**/*.xib"
+    authbase.resource_bundle = { 
+      'FirebaseAuthUI' => ['FirebaseAuthUI/Strings/**/*', 
+                           'FirebaseAuthUI/Resources/**/*', 
+                           'FirebaseAuthUI/**/*.xib']
+    }
     authbase.dependency 'Firebase/Analytics'
     authbase.dependency 'FirebaseAuth'
   end

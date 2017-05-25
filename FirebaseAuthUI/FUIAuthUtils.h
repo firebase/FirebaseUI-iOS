@@ -16,6 +16,9 @@
 
 #import <UIKit/UIKit.h>
 
+/* Name of the FirebaseAuthUI resource bundle. */
+extern NSString *const FUIAuthBundleName;
+
 /** @class FUIAuthUtils
     @brief Provides utility methods for Firebase Auth UI.
  */
@@ -23,14 +26,17 @@
 
 - (instancetype)init NS_UNAVAILABLE;
 
-/** @fn frameworkBundle
-    @brief Gets the framework bundle for Firebase Auth UI
+/** @fn bundleNamed:
+    @brief Gets the framework bundle for specified name
+    @param bundleName Name of the bundle to retreive.
  */
-+ (NSBundle *)frameworkBundle;
++ (NSBundle *)bundleNamed:(NSString *)bundleName;
 
-/** @fn imageNamed:
+/** @fn imageNamed:fromBundle:
     @brief Gets a UIImage with the given name, assuming it's a png.
+    @param name Name of the image to retreive.
+    @param bundleName Name of the bundle to retreive.
  */
-+ (UIImage *)imageNamed:(NSString *)name;
++ (UIImage *)imageNamed:(NSString *)name fromBundle:(NSString *)bundleName;
 
 @end

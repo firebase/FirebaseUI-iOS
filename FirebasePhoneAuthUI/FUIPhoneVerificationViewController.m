@@ -52,7 +52,7 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
                 verificationID:(NSString *)verificationID
                    phoneNumber:(NSString *)phoneNumber{
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils frameworkBundle]
+                        bundle:[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName]
                         authUI:authUI
                 verificationID:verificationID
                    phoneNumber:phoneNumber];

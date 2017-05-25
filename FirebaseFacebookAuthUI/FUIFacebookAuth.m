@@ -21,11 +21,18 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FirebaseAuthUI/FUIAuthBaseViewController.h>
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>
+#import "FUIAuthStrings.h"
+#import "FUIAuthUtils.h"
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
  */
 static NSString *const kTableName = @"FirebaseFacebookAuthUI";
+
+/** @var kBundleName
+    @brief The name of the bundle to search for resources.
+ */
+static NSString *const kBundleName = @"FirebaseFacebookAuthUI";
 
 /** @var kSignInWithFacebook
     @brief The string key for localized button text.
@@ -68,39 +75,6 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   return [self initWithPermissions:@[ @"email" ]];
 }
 
-/** @fn frameworkBundle
-    @brief Returns the auth provider's resource bundle.
-    @return Resource bundle for the auth provider.
- */
-+ (NSBundle *)frameworkBundle {
-  static NSBundle *frameworkBundle = nil;
-  static dispatch_once_t predicate;
-  dispatch_once(&predicate, ^{
-    frameworkBundle = [NSBundle bundleForClass:[self class]];
-  });
-  return frameworkBundle;
-}
-
-/** @fn imageNamed:
-    @brief Returns an image from the resource bundle given a resource name.
-    @param name The name of the image file.
-    @return The image object for the named file.
- */
-+ (UIImage *)imageNamed:(NSString *)name {
-  NSString *path = [[[self class] frameworkBundle] pathForResource:name ofType:@"png"];
-  return [UIImage imageWithContentsOfFile:path];
-}
-
-/** @fn localizedStringForKey:
-    @brief Returns the localized text associated with a given string key. Will default to english
-        text if the string is not available for the current localization.
-    @param key A string key which identifies localized text in the .strings files.
-    @return Localized value of the string identified by the key.
- */
-+ (NSString *)localizedStringForKey:(NSString *)key {
-  NSBundle *frameworkBundle = [[self class] frameworkBundle];
-  return [frameworkBundle localizedStringForKey:key value:nil table:kTableName];
-}
 
 #pragma mark - FUIAuthProvider
 
@@ -124,11 +98,11 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 - (NSString *)signInLabel {
-  return [[self class] localizedStringForKey:kSignInWithFacebook];
+  return FUILocalizedStringFromTableInBundle(kSignInWithFacebook, kTableName, kBundleName);
 }
 
 - (UIImage *)icon {
-  return [[self class] imageNamed:@"ic_facebook"];
+  return [FUIAuthUtils imageNamed:@"ic_facebook" fromBundle:kBundleName];
 }
 
 - (UIColor *)buttonBackgroundColor {
@@ -173,7 +147,6 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
                                                         openURL:URL
                                               sourceApplication:sourceApplication
                                                      annotation:nil];
-
 }
 
 #pragma mark -
@@ -222,7 +195,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
     @brief Validates that Facebook SDK data was filled in Info.plist and creates Facebook login manager 
  */
 - (void)configureProvider {
-  NSBundle *bundle = [[self class] frameworkBundle];
+  NSBundle *bundle = [FUIAuthUtils bundleNamed:nil];
   NSString *facebookAppId = [bundle objectForInfoDictionaryKey:kFacebookAppId];
   NSString *facebookDisplayName = [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
 

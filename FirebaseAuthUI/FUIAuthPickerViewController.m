@@ -59,7 +59,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
   return [self initWithNibName:NSStringFromClass([self class])
-                         bundle:[FUIAuthUtils frameworkBundle]
+                         bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
                          authUI:authUI];
 }
 
@@ -114,7 +114,8 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
         [UIColor colorWithRed:208.f/255.f green:2.f/255.f blue:27.f/255.f alpha:1.0];
     UIButton *emailButton =
         [[FUIAuthSignInButton alloc] initWithFrame:buttonFrame
-                                               image:[FUIAuthUtils imageNamed:@"ic_email"]
+                                               image:[FUIAuthUtils imageNamed:@"ic_email"
+                                                                   fromBundle:FUIAuthBundleName]
                                                 text:FUILocalizedString(kStr_SignInWithEmail)
                                      backgroundColor:emailButtonBackgroundColor
                                            textColor:[UIColor whiteColor]];

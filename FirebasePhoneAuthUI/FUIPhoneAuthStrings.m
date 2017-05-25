@@ -17,11 +17,12 @@
 #import "FUIPhoneAuthStrings.h"
 
 #import "FUIAuthStrings.h"
+#import "FUIPhoneAuth_Internal.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 NSString *const kPAStr_EnterPhoneTitle = @"EnterPhoneTitle";
-NSString *const kPAStr_SignInWithTwitter = @"SignInWithPhone";
+NSString *const kPAStr_SignInWithPhone = @"SignInWithPhone";
 NSString *const kPAStr_Next = @"Next";
 NSString *const kPAStr_Verify = @"Verify";
 NSString *const kPAStr_EmptyVerificationCode = @"EmptyVerificationCode";
@@ -45,13 +46,17 @@ NSString *const kPAStr_TooManyCodesSent = @"TooManyCodesSent";
 NSString *const kPAStr_MessageQuotaExceeded = @"MessageQuotaExceeded";
 NSString *const kPAStr_MessageExpired = @"MessageExpired";
 
+NSString *const FUIPhoneAuthBundleName = @"FirebasePhoneAuthUI";
+
 /** @var kPhoneAuthProviderTableName
     @brief The name of the strings table to search for localized strings.
  */
 NSString *const kPhoneAuthProviderTableName = @"FirebasePhoneAuthUI";
 
 NSString *FUIPhoneAuthLocalizedString(NSString *key) {
-  return FUILocalizedStringFromTable(key, kPhoneAuthProviderTableName);
+  return FUILocalizedStringFromTableInBundle(key,
+                                             kPhoneAuthProviderTableName,
+                                             FUIPhoneAuthBundleName);
 }
 
 NS_ASSUME_NONNULL_END

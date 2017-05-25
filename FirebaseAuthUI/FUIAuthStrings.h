@@ -120,6 +120,17 @@ NSString *FUILocalizedString(NSString *key);
 */
 NSString *FUILocalizedStringFromTable(NSString *key, NSString *table);
 
+/** @fn FUILocalizedStringFromTableInBundle
+    @brief Gets a localized string from a name.
+    @param key The key value of the string.
+    @param table The localization table name.
+    @param bundleName The value of bundlu to look for. If nil is passed looking in apps bundle.
+    @return The string by the key localized in the current locale.
+*/
+NSString *FUILocalizedStringFromTableInBundle(NSString *key,
+                                              NSString *table,
+                                              NSString *_Nullable bundleName);
+  
 #ifdef __cplusplus
 }
 #endif

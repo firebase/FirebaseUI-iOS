@@ -85,7 +85,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                          email:(NSString *_Nullable)email {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils frameworkBundle]
+                        bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
                         authUI:authUI
                          email:email];
 }
@@ -239,7 +239,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   FUIAuthTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   if (!cell) {
     UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([FUIAuthTableViewCell class])
-                                    bundle:[FUIAuthUtils frameworkBundle]];
+                                    bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]];
     [tableView registerNib:cellNib forCellReuseIdentifier:kCellReuseIdentifier];
     cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   }
@@ -311,7 +311,8 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 
 - (void)updateIconForRightViewButton:(UIButton *)button {
   NSString *imageName = _passwordField.secureTextEntry ? @"ic_visibility" : @"ic_visibility_off";
-  [button setImage:[FUIAuthUtils imageNamed:imageName] forState:UIControlStateNormal];
+  [button setImage:[FUIAuthUtils imageNamed:imageName fromBundle:FUIAuthBundleName]
+          forState:UIControlStateNormal];
 }
 
 - (void)togglePasswordFieldVisibility:(UIButton *)button {

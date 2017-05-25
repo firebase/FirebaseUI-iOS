@@ -20,6 +20,7 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
 #import "FUIAuthUtils.h"
+#import "FUIPhoneAuthStrings.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -66,8 +67,9 @@ NSString* const FUIDefaultCountryCode = @"US";
 - (FUICountryCodes *)init {
   if (self = [super init]) {
     // Country codes JSON containing country codes and phone number info.
-    NSString *countryCodeFilePath = [[FUIAuthUtils frameworkBundle] pathForResource:@"country-codes"
-                                                                             ofType:@"json"];
+    NSString *countryCodeFilePath =
+        [[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName] pathForResource:@"country-codes"
+                                                                    ofType:@"json"];
     NSAssert([[NSFileManager defaultManager] fileExistsAtPath:countryCodeFilePath],
              @"Could not find country code file");
 

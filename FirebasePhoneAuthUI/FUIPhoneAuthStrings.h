@@ -19,7 +19,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *const kPAStr_EnterPhoneTitle;
-extern NSString *const kPAStr_SignInWithTwitter;
+extern NSString *const kPAStr_SignInWithPhone;
 extern NSString *const kPAStr_Next;
 extern NSString *const kPAStr_Verify;
 extern NSString *const kPAStr_EmptyVerificationCode;
@@ -42,6 +42,9 @@ extern NSString *const kPAStr_InternalErrorMessage;
 extern NSString *const kPAStr_TooManyCodesSent;
 extern NSString *const kPAStr_MessageQuotaExceeded;
 extern NSString *const kPAStr_MessageExpired;
+
+/* Name of the FirebasePhoneAuthUI resource bundle. */
+extern NSString *const FUIPhoneAuthBundleName;
 
 #ifdef __cplusplus
 extern "C" {

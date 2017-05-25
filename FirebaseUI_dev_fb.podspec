@@ -14,7 +14,11 @@ Pod::Spec.new do |s|
 
   s.subspec 'Facebook' do |facebook|
     facebook.source_files = "FirebaseFacebookAuthUI/**/*.{h,m}"
-    facebook.resources = "FirebaseFacebookAuthUI/{Resources,Strings}/**/*", "FirebaseFacebookAuthUI/**/*.xib"
+    facebook.resource_bundle = { 
+      'FirebaseFacebookAuthUI' => ['FirebaseFacebookAuthUI/Strings/**/*', 
+                                   'FirebaseFacebookAuthUI/Resources/**/*', 
+                                   'FirebaseFacebookAuthUI/**/*.xib']
+    }
     facebook.dependency 'FirebaseAuthUI/AuthBase'
     facebook.dependency 'FBSDKLoginKit', '~> 4.0'
   end

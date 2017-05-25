@@ -17,6 +17,7 @@
 #import "FUICodeField.h"
 
 #import "FUIAuthUtils.h"
+#import "FUIPhoneAuthStrings.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -49,7 +50,7 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
 }
 
 - (void)setUpFromNib {
-  NSBundle *bundle = [FUIAuthUtils frameworkBundle];
+  NSBundle *bundle = [FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName];
   UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class]) bundle:bundle];
 
   _inputField = [nib instantiateWithOwner:self options:nil][0];

@@ -119,7 +119,13 @@ NSString *FUILocalizedString(NSString *key) {
 }
 
 NSString *FUILocalizedStringFromTable(NSString *key, NSString *table) {
+  return FUILocalizedStringFromTableInBundle(key, table, kTableName);
+}
 
+NSString *FUILocalizedStringFromTableInBundle(NSString *key,
+                                              NSString *table,
+                                              NSString *_Nullable bundleName) {
+  
   NSBundle *customStringsBundle = [FUIAuth defaultAuthUI].customStringsBundle;
   if (customStringsBundle) {
     NSString *localizedString = [customStringsBundle localizedStringForKey:key
@@ -129,7 +135,7 @@ NSString *FUILocalizedStringFromTable(NSString *key, NSString *table) {
       return localizedString;
     }
   }
-  NSBundle *frameworkBundle = [FUIAuthUtils frameworkBundle];
+  NSBundle *frameworkBundle = [FUIAuthUtils bundleNamed:bundleName];
   return [frameworkBundle localizedStringForKey:key value:nil table:table];
 }
 
