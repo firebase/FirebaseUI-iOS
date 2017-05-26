@@ -100,6 +100,7 @@ extern NSString *const kStr_PlaceholderEnterEmail;
 extern NSString *const kStr_PlaceholderEnterPassword;
 extern NSString *const kStr_PlaceholderChosePassword;
 extern NSString *const kStr_PlaceholderNewPassword;
+extern NSString *const kStr_ForgotPasswordTitle;
 
 #ifdef __cplusplus
 extern "C" {

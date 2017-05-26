@@ -240,3 +240,6 @@
 
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Choose password";
+
+/* The title of forgot password button. */
+"ForgotPasswordTitle" = "Trouble signing in?";
