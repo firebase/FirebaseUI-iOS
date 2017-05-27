@@ -60,9 +60,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   UITextField *_phoneNumberField;
   UITextField *_countryCodeField;
   FUICountryCodeInfo *_selectedCountryCode;
-
-
   __weak IBOutlet UITableView *_tableView;
+  __weak IBOutlet UITextView *_tosTextView;
   FUICountryCodes *_countryCodes;
 }
 
@@ -105,6 +104,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                                               target:nil
                                                               action:nil];
   [self.navigationItem setBackBarButtonItem:backItem];
+  _tosTextView.text = [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_TermsSMS),
+                           FUIPhoneAuthLocalizedString(kPAStr_Verify)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

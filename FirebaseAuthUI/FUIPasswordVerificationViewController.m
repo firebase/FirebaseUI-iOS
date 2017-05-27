@@ -49,6 +49,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   UITextField *_passwordField;
 
   __weak IBOutlet UITableView *_tableView;
+  __weak IBOutlet UIButton *_forgotPasswordButton;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
@@ -92,6 +93,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   FUIAuthTableHeaderView *tableHeaderView =
       [[FUIAuthTableHeaderView alloc] initWithFrame:_tableView.bounds];
   _tableView.tableHeaderView = tableHeaderView;
+  [_forgotPasswordButton setTitle:FUILocalizedString(kStr_ForgotPasswordTitle) forState:UIControlStateNormal];
 }
 
 - (void)viewDidLayoutSubviews {

@@ -32,6 +32,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
 
+/** Regex pattern that matches for a TOS style link. For example: [Terms]. */
+static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
+
 @interface FUIPhoneVerificationViewController () <FUICodeFieldDelegate>
 @end
 
@@ -41,6 +44,7 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   __weak IBOutlet UIButton *_resendCodeButton;
   __weak IBOutlet UILabel *_actionDescriptionLabel;
   __weak IBOutlet UIButton *_phoneNumberButton;
+  __weak IBOutlet UITextView *_tosTextView;
   __weak IBOutlet UIScrollView *_scrollView;
   NSString *_verificationID;
   NSTimer *_resendConfirmationCodeTimer;
@@ -96,6 +100,7 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   nextButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = nextButtonItem;
   self.navigationItem.rightBarButtonItem.enabled = NO;
+  _tosTextView.attributedText = [self accountCreationTOS];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -322,6 +327,30 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
   _scrollView.scrollIndicatorInsets = contentInsets;
 
   [UIView commitAnimations];
+}
+
+- (NSAttributedString *)accountCreationTOS {
+  NSString *accountCreationTOS = [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_TermsAccountCreation), FUIPhoneAuthLocalizedString(kPAStr_Next)];
+  NSMutableAttributedString *attributedLinkText =
+      [[NSMutableAttributedString alloc] initWithString:accountCreationTOS attributes:nil];
+
+  NSRegularExpression *linkRegex =
+      [NSRegularExpression regularExpressionWithPattern:kLinkPlaceholderPattern
+                                                options:0
+                                                  error:nil];
+  NSTextCheckingResult *placeholderMatch =
+      [linkRegex firstMatchInString:accountCreationTOS
+                            options:0
+                              range:NSMakeRange(0, [accountCreationTOS length])];
+  NSRange placeholderRange = placeholderMatch.range;
+  if (placeholderRange.location != NSNotFound) {
+    [attributedLinkText addAttribute:NSLinkAttributeName
+                               value:[FUIAuth defaultAuthUI].TOSURL
+                               range:placeholderRange];
+    [attributedLinkText replaceCharactersInRange:NSMakeRange(placeholderRange.location + placeholderRange.length - 1, 1) withString:@""];
+    [attributedLinkText replaceCharactersInRange:NSMakeRange(placeholderRange.location, 1) withString:@""];
+  }
+  return attributedLinkText;
 }
 
 @end

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FUIPhoneEntryViewController">
             <connections>
                 <outlet property="_tableView" destination="ZXV-PY-1fK" id="jxd-xz-C6f"/>
+                <outlet property="_tosTextView" destination="qze-o8-Q39" id="aHS-7J-y6C"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,6 +24,19 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ZXV-PY-1fK">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <textView key="tableFooterView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" id="qze-o8-Q39">
+                        <rect key="frame" x="0.0" y="614" width="375" height="80"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <attributedString key="attributedText">
+                            <fragment content="By tapping Verify Phone Number, an SMS may be sent. Message &amp; data rates may apply.">
+                                <attributes>
+                                    <font key="NSFont" metaFont="system" size="14"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="cIO-fO-UsX"/>
                         <outlet property="delegate" destination="-1" id="IWT-TE-EyX"/>
@@ -36,6 +50,7 @@
                 <constraint firstItem="ZXV-PY-1fK" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="ibc-Lu-Lpt"/>
                 <constraint firstItem="ZXV-PY-1fK" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="uNZ-29-fq6"/>
             </constraints>
+            <point key="canvasLocation" x="64.5" y="93.5"/>
         </view>
     </objects>
 </document>

@@ -46,6 +46,8 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
       @brief The @c UITextField that user enters password into.
    */
   UITextField *_passwordField;
+  
+  __weak IBOutlet UIButton *_forgotPasswordButton;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
@@ -80,6 +82,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
                                       target:self
                                       action:@selector(signIn)];
   self.navigationItem.rightBarButtonItem = signInButtonItem;
+  [_forgotPasswordButton setTitle:FUILocalizedString(kStr_ForgotPasswordTitle) forState:UIControlStateNormal];
 }
 
 #pragma mark - Actions

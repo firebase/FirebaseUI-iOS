@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,6 +17,7 @@
                 <outlet property="_resendCodeButton" destination="PcA-t5-BTE" id="LzC-9b-60t"/>
                 <outlet property="_resendConfirmationCodeTimerLabel" destination="WHW-Rm-HAw" id="zfA-Cb-SSz"/>
                 <outlet property="_scrollView" destination="dye-T3-FoY" id="KOp-Ke-uIn"/>
+                <outlet property="_tosTextView" destination="IbP-WL-gSm" id="Nbp-OK-TKx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,10 +29,10 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dye-T3-FoY">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the 6-digit code we sent to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ND2-cc-05r">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the 6-digit code we sent to" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ND2-cc-05r">
                             <rect key="frame" x="20" y="10" width="374" height="20"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="20" id="xV4-wG-lLz"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="xV4-wG-lLz"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
@@ -72,18 +74,31 @@
                                 <action selector="onResendCode:" destination="-1" eventType="touchUpInside" id="vx8-RJ-2TG"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resend code in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHW-Rm-HAw">
-                            <rect key="frame" x="157.66666666666663" y="144" width="99.333333333333371" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resend code in" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHW-Rm-HAw">
+                            <rect key="frame" x="20" y="144" width="374.66666666666669" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="dhl-OS-L3V"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="By tapping Continue you are indicating that you agree to the [Terms of Service]." translatesAutoresizingMaskIntoConstraints="NO" id="IbP-WL-gSm">
+                            <rect key="frame" x="20" y="176" width="374" height="52"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                        </textView>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="WHW-Rm-HAw" firstAttribute="leading" secondItem="dye-T3-FoY" secondAttribute="leading" constant="20" id="0De-xW-B7U"/>
+                        <constraint firstItem="IbP-WL-gSm" firstAttribute="leading" secondItem="dye-T3-FoY" secondAttribute="leading" constant="20" id="1YW-PD-qTg"/>
                         <constraint firstAttribute="trailing" secondItem="WCV-7f-nzd" secondAttribute="trailing" constant="20" id="2bg-NV-Bb3"/>
                         <constraint firstAttribute="trailing" secondItem="pLV-Br-GnD" secondAttribute="trailing" constant="72" id="4E8-Nz-0ej"/>
                         <constraint firstItem="PcA-t5-BTE" firstAttribute="top" secondItem="WCV-7f-nzd" secondAttribute="bottom" constant="10" id="5D4-Ae-1RK"/>
-                        <constraint firstAttribute="bottom" secondItem="PcA-t5-BTE" secondAttribute="bottom" constant="5" id="Bld-Ns-dsh"/>
+                        <constraint firstItem="IbP-WL-gSm" firstAttribute="top" secondItem="PcA-t5-BTE" secondAttribute="bottom" constant="8" id="7Sc-Dv-sZG"/>
                         <constraint firstAttribute="trailing" secondItem="ND2-cc-05r" secondAttribute="trailing" constant="20" id="IAN-91-GEI"/>
                         <constraint firstItem="pLV-Br-GnD" firstAttribute="top" secondItem="ND2-cc-05r" secondAttribute="bottom" id="OTf-Jb-T2S"/>
                         <constraint firstAttribute="trailing" secondItem="PcA-t5-BTE" secondAttribute="trailing" constant="20" id="Qoc-Ld-UfD"/>
@@ -91,10 +106,13 @@
                         <constraint firstItem="ND2-cc-05r" firstAttribute="centerX" secondItem="dye-T3-FoY" secondAttribute="centerX" id="XmG-ll-T2V"/>
                         <constraint firstItem="WCV-7f-nzd" firstAttribute="top" secondItem="pLV-Br-GnD" secondAttribute="bottom" constant="8" id="ZRx-YX-9UF"/>
                         <constraint firstItem="WHW-Rm-HAw" firstAttribute="centerX" secondItem="ND2-cc-05r" secondAttribute="centerX" id="am3-Zw-DRc"/>
+                        <constraint firstAttribute="trailing" secondItem="IbP-WL-gSm" secondAttribute="trailing" constant="20" id="bjv-rT-Lvm"/>
                         <constraint firstItem="ND2-cc-05r" firstAttribute="leading" secondItem="dye-T3-FoY" secondAttribute="leading" constant="20" id="d4U-su-icR"/>
+                        <constraint firstAttribute="trailing" secondItem="WHW-Rm-HAw" secondAttribute="trailing" constant="20" id="dJO-pk-zhO"/>
                         <constraint firstItem="WHW-Rm-HAw" firstAttribute="top" secondItem="WCV-7f-nzd" secondAttribute="bottom" constant="16" id="gmO-lX-GmB"/>
                         <constraint firstItem="ND2-cc-05r" firstAttribute="top" secondItem="dye-T3-FoY" secondAttribute="top" constant="10" id="isu-X4-ahE"/>
                         <constraint firstItem="pLV-Br-GnD" firstAttribute="leading" secondItem="dye-T3-FoY" secondAttribute="leading" constant="72" id="sXd-Vz-5Qy"/>
+                        <constraint firstAttribute="bottom" secondItem="IbP-WL-gSm" secondAttribute="bottom" constant="5" id="svL-ih-Jnz"/>
                         <constraint firstItem="PcA-t5-BTE" firstAttribute="leading" secondItem="dye-T3-FoY" secondAttribute="leading" constant="20" id="wJz-al-TQH"/>
                     </constraints>
                 </scrollView>
