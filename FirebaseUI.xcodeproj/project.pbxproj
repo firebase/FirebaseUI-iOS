@@ -682,8 +682,368 @@
 		C30AEB241ED611130084E328 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C30AEB251ED611140084E328 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C30AEB261ED611140084E328 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		C30AEB271ED611150084E328 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-ES"; path = "es-ES.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB271ED611150084E328 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C30AEB281ED611160084E328 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB3A1EDDF4800084E328 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = Strings/bg.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB3B1EDDF4800084E328 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = Strings/bg.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB3C1EDDF4800084E328 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = Strings/bg.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB3D1EDDF4800084E328 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB3E1EDDF4800084E328 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB3F1EDDF4800084E328 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB401EDDF74E0084E328 /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = Strings/bn.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB411EDDF74E0084E328 /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = Strings/bn.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB421EDDF74E0084E328 /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = Strings/bn.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB431EDDF74E0084E328 /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = bn.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB441EDDF74E0084E328 /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = bn.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB451EDDF74E0084E328 /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = bn.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB461EDDF7630084E328 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = Strings/ca.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB471EDDF7630084E328 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = Strings/ca.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB481EDDF7630084E328 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = Strings/ca.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB491EDDF7630084E328 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB4A1EDDF7640084E328 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB4B1EDDF7640084E328 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB4C1EDDF7710084E328 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Strings/cs.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB4D1EDDF7710084E328 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Strings/cs.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB4E1EDDF7710084E328 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Strings/cs.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB4F1EDDF7710084E328 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB501EDDF7710084E328 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB511EDDF7710084E328 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB521EDDF77A0084E328 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = Strings/da.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB531EDDF77A0084E328 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = Strings/da.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB541EDDF77A0084E328 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = Strings/da.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB551EDDF77B0084E328 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB561EDDF77B0084E328 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB571EDDF77B0084E328 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB581EDDF7900084E328 /* de-AT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-AT"; path = "Strings/de-AT.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB591EDDF7900084E328 /* de-AT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-AT"; path = "Strings/de-AT.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB5A1EDDF7900084E328 /* de-AT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-AT"; path = "Strings/de-AT.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB5B1EDDF7900084E328 /* de-AT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-AT"; path = "de-AT.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB5C1EDDF7900084E328 /* de-AT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-AT"; path = "de-AT.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB5D1EDDF7900084E328 /* de-AT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-AT"; path = "de-AT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB5E1EDDF7B60084E328 /* de-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-CH"; path = "Strings/de-CH.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB5F1EDDF7B60084E328 /* de-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-CH"; path = "Strings/de-CH.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB601EDDF7B60084E328 /* de-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-CH"; path = "Strings/de-CH.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB611EDDF7B70084E328 /* de-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-CH"; path = "de-CH.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB621EDDF7B70084E328 /* de-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-CH"; path = "de-CH.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB631EDDF7B70084E328 /* de-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-CH"; path = "de-CH.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB641EDDF7E10084E328 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = Strings/el.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB651EDDF7E10084E328 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = Strings/el.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB661EDDF7E10084E328 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = Strings/el.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB671EDDF7E10084E328 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB681EDDF7E10084E328 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEB691EDDF7E10084E328 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB6A1EDDF7F90084E328 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "Strings/en-AU.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB6B1EDDF7F90084E328 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "Strings/en-AU.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB6C1EDDF7F90084E328 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "Strings/en-AU.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB6D1EDDF7FA0084E328 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB6E1EDDF7FA0084E328 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB6F1EDDF7FA0084E328 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB701EDDF80F0084E328 /* en-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-CA"; path = "Strings/en-CA.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB711EDDF80F0084E328 /* en-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-CA"; path = "Strings/en-CA.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB721EDDF8100084E328 /* en-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-CA"; path = "Strings/en-CA.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB731EDDF8100084E328 /* en-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-CA"; path = "en-CA.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB741EDDF8100084E328 /* en-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-CA"; path = "en-CA.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB751EDDF8100084E328 /* en-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-CA"; path = "en-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB761EDDF8390084E328 /* en-IE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IE"; path = "Strings/en-IE.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB771EDDF8390084E328 /* en-IE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IE"; path = "Strings/en-IE.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB781EDDF8390084E328 /* en-IE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IE"; path = "Strings/en-IE.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB791EDDF8390084E328 /* en-IE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IE"; path = "en-IE.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB7A1EDDF8390084E328 /* en-IE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IE"; path = "en-IE.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB7B1EDDF8390084E328 /* en-IE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IE"; path = "en-IE.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB7C1EDDF8510084E328 /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "Strings/en-IN.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB7D1EDDF8510084E328 /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "Strings/en-IN.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB7E1EDDF8510084E328 /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "Strings/en-IN.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB7F1EDDF8510084E328 /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "en-IN.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB801EDDF8510084E328 /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "en-IN.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB811EDDF8510084E328 /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "en-IN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB821EDDF8640084E328 /* en-SG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-SG"; path = "Strings/en-SG.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB831EDDF8640084E328 /* en-SG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-SG"; path = "Strings/en-SG.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB841EDDF8640084E328 /* en-SG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-SG"; path = "Strings/en-SG.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB851EDDF8640084E328 /* en-SG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-SG"; path = "en-SG.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB861EDDF8650084E328 /* en-SG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-SG"; path = "en-SG.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB871EDDF8650084E328 /* en-SG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-SG"; path = "en-SG.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB881EDDF8FC0084E328 /* en-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-ZA"; path = "Strings/en-ZA.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB891EDDF8FC0084E328 /* en-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-ZA"; path = "Strings/en-ZA.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB8A1EDDF8FC0084E328 /* en-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-ZA"; path = "Strings/en-ZA.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB8B1EDDF8FC0084E328 /* en-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-ZA"; path = "en-ZA.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB8C1EDDF8FD0084E328 /* en-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-ZA"; path = "en-ZA.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB8D1EDDF8FD0084E328 /* en-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-ZA"; path = "en-ZA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB8E1EDDF9940084E328 /* es-AR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-AR"; path = "Strings/es-AR.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB8F1EDDF9940084E328 /* es-AR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-AR"; path = "Strings/es-AR.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB901EDDF9950084E328 /* es-AR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-AR"; path = "Strings/es-AR.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB911EDDF9950084E328 /* es-AR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-AR"; path = "es-AR.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB921EDDF9950084E328 /* es-AR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-AR"; path = "es-AR.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB931EDDF9950084E328 /* es-AR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-AR"; path = "es-AR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB941EDDF9A30084E328 /* es-BO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-BO"; path = "Strings/es-BO.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB951EDDF9A30084E328 /* es-BO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-BO"; path = "Strings/es-BO.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB961EDDF9A40084E328 /* es-BO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-BO"; path = "Strings/es-BO.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB971EDDF9A40084E328 /* es-BO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-BO"; path = "es-BO.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB981EDDF9A40084E328 /* es-BO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-BO"; path = "es-BO.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB991EDDF9A40084E328 /* es-BO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-BO"; path = "es-BO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB9A1EDDF9C20084E328 /* es-CO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CO"; path = "Strings/es-CO.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB9B1EDDF9C20084E328 /* es-CO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CO"; path = "Strings/es-CO.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB9C1EDDF9C20084E328 /* es-CO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CO"; path = "Strings/es-CO.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB9D1EDDF9C20084E328 /* es-CO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CO"; path = "es-CO.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB9E1EDDF9C20084E328 /* es-CO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CO"; path = "es-CO.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEB9F1EDDF9C20084E328 /* es-CO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CO"; path = "es-CO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBA01EDDF9DA0084E328 /* es-CL */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CL"; path = "Strings/es-CL.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBA11EDDF9DA0084E328 /* es-CL */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CL"; path = "Strings/es-CL.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBA21EDDF9DA0084E328 /* es-CL */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CL"; path = "Strings/es-CL.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBA31EDDF9DA0084E328 /* es-CL */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CL"; path = "es-CL.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBA41EDDF9DA0084E328 /* es-CL */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CL"; path = "es-CL.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBA51EDDF9DA0084E328 /* es-CL */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CL"; path = "es-CL.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBA61EDDF9E50084E328 /* es-CR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CR"; path = "Strings/es-CR.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBA71EDDF9E50084E328 /* es-CR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CR"; path = "Strings/es-CR.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBA81EDDF9E50084E328 /* es-CR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CR"; path = "Strings/es-CR.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBA91EDDF9E50084E328 /* es-CR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CR"; path = "es-CR.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBAA1EDDF9E50084E328 /* es-CR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CR"; path = "es-CR.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBAB1EDDF9E50084E328 /* es-CR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CR"; path = "es-CR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBAC1EDDF9F20084E328 /* es-DO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-DO"; path = "Strings/es-DO.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBAD1EDDF9F20084E328 /* es-DO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-DO"; path = "Strings/es-DO.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBAE1EDDF9F20084E328 /* es-DO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-DO"; path = "Strings/es-DO.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBAF1EDDF9F20084E328 /* es-DO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-DO"; path = "es-DO.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBB01EDDF9F20084E328 /* es-DO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-DO"; path = "es-DO.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBB11EDDF9F20084E328 /* es-DO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-DO"; path = "es-DO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBB21EDDF9FD0084E328 /* es-EC */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-EC"; path = "Strings/es-EC.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBB31EDDF9FD0084E328 /* es-EC */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-EC"; path = "Strings/es-EC.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBB41EDDF9FD0084E328 /* es-EC */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-EC"; path = "Strings/es-EC.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBB51EDDF9FD0084E328 /* es-EC */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-EC"; path = "es-EC.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBB61EDDF9FD0084E328 /* es-EC */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-EC"; path = "es-EC.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBB71EDDF9FD0084E328 /* es-EC */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-EC"; path = "es-EC.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBB81EDDFA090084E328 /* es-GT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-GT"; path = "Strings/es-GT.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBB91EDDFA090084E328 /* es-GT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-GT"; path = "Strings/es-GT.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBBA1EDDFA090084E328 /* es-GT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-GT"; path = "Strings/es-GT.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBBB1EDDFA090084E328 /* es-GT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-GT"; path = "es-GT.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBBC1EDDFA090084E328 /* es-GT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-GT"; path = "es-GT.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBBD1EDDFA090084E328 /* es-GT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-GT"; path = "es-GT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBBE1EDDFA1D0084E328 /* es-HN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-HN"; path = "Strings/es-HN.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBBF1EDDFA1D0084E328 /* es-HN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-HN"; path = "Strings/es-HN.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBC01EDDFA1D0084E328 /* es-HN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-HN"; path = "Strings/es-HN.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBC11EDDFA1D0084E328 /* es-HN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-HN"; path = "es-HN.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBC21EDDFA1D0084E328 /* es-HN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-HN"; path = "es-HN.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBC31EDDFA1D0084E328 /* es-HN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-HN"; path = "es-HN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBC41EDDFA270084E328 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "Strings/es-MX.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBC51EDDFA280084E328 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "Strings/es-MX.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBC61EDDFA280084E328 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "Strings/es-MX.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBC71EDDFA280084E328 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBC81EDDFA280084E328 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBC91EDDFA280084E328 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBCA1EDDFA460084E328 /* es-NI */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-NI"; path = "Strings/es-NI.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBCB1EDDFA460084E328 /* es-NI */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-NI"; path = "Strings/es-NI.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBCC1EDDFA460084E328 /* es-NI */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-NI"; path = "Strings/es-NI.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBCD1EDDFA460084E328 /* es-NI */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-NI"; path = "es-NI.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBCE1EDDFA460084E328 /* es-NI */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-NI"; path = "es-NI.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBCF1EDDFA470084E328 /* es-NI */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-NI"; path = "es-NI.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBD01EDDFA520084E328 /* es-PA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PA"; path = "Strings/es-PA.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBD11EDDFA520084E328 /* es-PA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PA"; path = "Strings/es-PA.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBD21EDDFA520084E328 /* es-PA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PA"; path = "Strings/es-PA.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBD31EDDFA520084E328 /* es-PA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PA"; path = "es-PA.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBD41EDDFA520084E328 /* es-PA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PA"; path = "es-PA.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBD51EDDFA520084E328 /* es-PA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PA"; path = "es-PA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBD61EDDFA5F0084E328 /* es-PE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PE"; path = "Strings/es-PE.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBD71EDDFA5F0084E328 /* es-PE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PE"; path = "Strings/es-PE.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBD81EDDFA5F0084E328 /* es-PE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PE"; path = "Strings/es-PE.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBD91EDDFA5F0084E328 /* es-PE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PE"; path = "es-PE.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBDA1EDDFA5F0084E328 /* es-PE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PE"; path = "es-PE.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBDB1EDDFA5F0084E328 /* es-PE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PE"; path = "es-PE.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBDC1EDDFA6A0084E328 /* es-PR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PR"; path = "Strings/es-PR.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBDD1EDDFA6A0084E328 /* es-PR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PR"; path = "Strings/es-PR.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBDE1EDDFA6B0084E328 /* es-PR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PR"; path = "Strings/es-PR.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBDF1EDDFA6B0084E328 /* es-PR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PR"; path = "es-PR.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBE01EDDFA6B0084E328 /* es-PR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PR"; path = "es-PR.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBE11EDDFA6B0084E328 /* es-PR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PR"; path = "es-PR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBE21EDDFA770084E328 /* es-PY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PY"; path = "Strings/es-PY.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBE31EDDFA780084E328 /* es-PY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PY"; path = "Strings/es-PY.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBE41EDDFA780084E328 /* es-PY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PY"; path = "Strings/es-PY.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBE51EDDFA780084E328 /* es-PY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PY"; path = "es-PY.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBE61EDDFA780084E328 /* es-PY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PY"; path = "es-PY.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBE71EDDFA780084E328 /* es-PY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PY"; path = "es-PY.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBE81EDDFA840084E328 /* es-SV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-SV"; path = "Strings/es-SV.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBE91EDDFA850084E328 /* es-SV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-SV"; path = "Strings/es-SV.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBEA1EDDFA850084E328 /* es-SV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-SV"; path = "Strings/es-SV.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBEB1EDDFA850084E328 /* es-SV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-SV"; path = "es-SV.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBEC1EDDFA850084E328 /* es-SV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-SV"; path = "es-SV.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBED1EDDFA850084E328 /* es-SV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-SV"; path = "es-SV.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBEE1EDDFA970084E328 /* es-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-US"; path = "Strings/es-US.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBEF1EDDFA980084E328 /* es-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-US"; path = "Strings/es-US.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBF01EDDFA980084E328 /* es-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-US"; path = "Strings/es-US.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBF11EDDFA980084E328 /* es-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-US"; path = "es-US.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBF21EDDFA980084E328 /* es-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-US"; path = "es-US.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBF31EDDFA980084E328 /* es-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-US"; path = "es-US.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBF41EDDFAA50084E328 /* es-UY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-UY"; path = "Strings/es-UY.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBF51EDDFAA50084E328 /* es-UY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-UY"; path = "Strings/es-UY.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBF61EDDFAA50084E328 /* es-UY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-UY"; path = "Strings/es-UY.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBF71EDDFAA50084E328 /* es-UY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-UY"; path = "es-UY.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBF81EDDFAA60084E328 /* es-UY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-UY"; path = "es-UY.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBF91EDDFAA60084E328 /* es-UY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-UY"; path = "es-UY.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEBFA1EDDFAB20084E328 /* es-VE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-VE"; path = "Strings/es-VE.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBFB1EDDFAB20084E328 /* es-VE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-VE"; path = "Strings/es-VE.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBFC1EDDFAB20084E328 /* es-VE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-VE"; path = "Strings/es-VE.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBFD1EDDFAB20084E328 /* es-VE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-VE"; path = "es-VE.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBFE1EDDFAB20084E328 /* es-VE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-VE"; path = "es-VE.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEBFF1EDDFAB20084E328 /* es-VE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-VE"; path = "es-VE.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEC001EDE16370084E328 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = Strings/fa.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC011EDE16370084E328 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = Strings/fa.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC021EDE16370084E328 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = Strings/fa.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC031EDE16370084E328 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC041EDE16370084E328 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC051EDE16370084E328 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC061EDE164A0084E328 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = Strings/fi.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC071EDE164A0084E328 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = Strings/fi.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC081EDE164A0084E328 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = Strings/fi.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC091EDE164A0084E328 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC0A1EDE164A0084E328 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC0B1EDE164A0084E328 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC0C1EDE16BB0084E328 /* fr-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CH"; path = "Strings/fr-CH.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC0D1EDE16BB0084E328 /* fr-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CH"; path = "Strings/fr-CH.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC0E1EDE16BB0084E328 /* fr-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CH"; path = "Strings/fr-CH.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC0F1EDE16BB0084E328 /* fr-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CH"; path = "fr-CH.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC101EDE16BB0084E328 /* fr-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CH"; path = "fr-CH.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC111EDE16BB0084E328 /* fr-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CH"; path = "fr-CH.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEC121EDE17250084E328 /* gsw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gsw; path = Strings/gsw.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC131EDE17250084E328 /* gsw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gsw; path = Strings/gsw.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC141EDE17250084E328 /* gsw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gsw; path = Strings/gsw.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC151EDE17250084E328 /* gsw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gsw; path = gsw.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC161EDE17250084E328 /* gsw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gsw; path = gsw.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC171EDE17250084E328 /* gsw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gsw; path = gsw.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC181EDE17C60084E328 /* gu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gu; path = Strings/gu.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC191EDE17C70084E328 /* gu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gu; path = Strings/gu.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC1A1EDE17C70084E328 /* gu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gu; path = Strings/gu.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC1B1EDE17C70084E328 /* gu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gu; path = gu.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC1C1EDE17C70084E328 /* gu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gu; path = gu.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC1D1EDE17C70084E328 /* gu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gu; path = gu.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC1E1EDE17D30084E328 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = Strings/hi.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC1F1EDE17D40084E328 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = Strings/hi.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC201EDE17D40084E328 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = Strings/hi.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC211EDE17D40084E328 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC221EDE17D40084E328 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC231EDE17D40084E328 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC241EDE17F60084E328 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = Strings/hr.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC251EDE17F60084E328 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = Strings/hr.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC261EDE17F60084E328 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = Strings/hr.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC271EDE17F60084E328 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC281EDE17F60084E328 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC291EDE17F60084E328 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC2A1EDE180F0084E328 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = Strings/hu.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC2B1EDE180F0084E328 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = Strings/hu.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC2C1EDE180F0084E328 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = Strings/hu.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC2D1EDE18100084E328 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC2E1EDE18100084E328 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC2F1EDE18100084E328 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC301EDE183D0084E328 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = Strings/id.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC311EDE183D0084E328 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = Strings/id.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC321EDE183D0084E328 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = Strings/id.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC331EDE183E0084E328 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC341EDE183E0084E328 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC351EDE183E0084E328 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC361EDE19BB0084E328 /* kn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kn; path = Strings/kn.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC371EDE19BC0084E328 /* kn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kn; path = Strings/kn.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC381EDE19BC0084E328 /* kn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kn; path = Strings/kn.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC391EDE19BC0084E328 /* kn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kn; path = kn.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC3A1EDE19BC0084E328 /* kn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kn; path = kn.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC3B1EDE19BC0084E328 /* kn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kn; path = kn.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC3C1EDE19D90084E328 /* ln */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ln; path = Strings/ln.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC3D1EDE19D90084E328 /* ln */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ln; path = Strings/ln.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC3E1EDE19DA0084E328 /* ln */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ln; path = Strings/ln.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC3F1EDE19DA0084E328 /* ln */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ln; path = ln.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC401EDE19DA0084E328 /* ln */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ln; path = ln.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC411EDE19DA0084E328 /* ln */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ln; path = ln.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC421EDE1A360084E328 /* mr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = mr; path = Strings/mr.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC431EDE1A360084E328 /* mr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = mr; path = Strings/mr.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC441EDE1A360084E328 /* mr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = mr; path = Strings/mr.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC451EDE1A360084E328 /* mr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = mr; path = mr.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC461EDE1A360084E328 /* mr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = mr; path = mr.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC471EDE1A360084E328 /* mr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = mr; path = mr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC481EDE1A3F0084E328 /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = Strings/ms.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC491EDE1A400084E328 /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = Strings/ms.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC4A1EDE1A400084E328 /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = Strings/ms.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC4B1EDE1A400084E328 /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = ms.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC4C1EDE1A400084E328 /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = ms.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC4D1EDE1A400084E328 /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = ms.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC4E1EDE1AA20084E328 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = Strings/nb.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC4F1EDE1AA20084E328 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = Strings/nb.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC501EDE1AA20084E328 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = Strings/nb.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC511EDE1AA20084E328 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC521EDE1AA20084E328 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC531EDE1AA20084E328 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC541EDE1BD70084E328 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Strings/pt.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC551EDE1BD70084E328 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Strings/pt.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC561EDE1BD70084E328 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = Strings/pt.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC571EDE1BD70084E328 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC581EDE1BD70084E328 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC591EDE1BD70084E328 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC5A1EDE1BE90084E328 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = Strings/ro.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC5B1EDE1BE90084E328 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = Strings/ro.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC5C1EDE1BE90084E328 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = Strings/ro.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC5D1EDE1BE90084E328 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC5E1EDE1BE90084E328 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC5F1EDE1BE90084E328 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC601EDE1BF20084E328 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = Strings/sk.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC611EDE1BF20084E328 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = Strings/sk.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC621EDE1BF20084E328 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = Strings/sk.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC631EDE1BF20084E328 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC641EDE1BF20084E328 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC651EDE1BF20084E328 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC661EDE1C0F0084E328 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "Strings/sr-Latn.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC671EDE1C0F0084E328 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "Strings/sr-Latn.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC681EDE1C0F0084E328 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "Strings/sr-Latn.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC691EDE1C0F0084E328 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC6A1EDE1C0F0084E328 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC6B1EDE1C100084E328 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEC6C1EDE1C1C0084E328 /* sr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sr; path = Strings/sr.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC6D1EDE1C1C0084E328 /* sr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sr; path = Strings/sr.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC6E1EDE1C1C0084E328 /* sr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sr; path = Strings/sr.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC6F1EDE1C1C0084E328 /* sr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sr; path = sr.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC701EDE1C1C0084E328 /* sr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sr; path = sr.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC711EDE1C1C0084E328 /* sr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sr; path = sr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC721EDE1C510084E328 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = Strings/sv.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC731EDE1C510084E328 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = Strings/sv.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC741EDE1C510084E328 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = Strings/sv.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC751EDE1C510084E328 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC761EDE1C510084E328 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC771EDE1C510084E328 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC781EDE1C660084E328 /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = Strings/ta.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC791EDE1C660084E328 /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = Strings/ta.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC7A1EDE1C660084E328 /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = Strings/ta.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC7B1EDE1C660084E328 /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC7C1EDE1C660084E328 /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC7D1EDE1C670084E328 /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC7E1EDE1C780084E328 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = Strings/uk.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC7F1EDE1C780084E328 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = Strings/uk.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC801EDE1C780084E328 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = Strings/uk.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC811EDE1C780084E328 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC821EDE1C780084E328 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC831EDE1C780084E328 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC841EDE1C870084E328 /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = Strings/ur.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC851EDE1C870084E328 /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = Strings/ur.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC861EDE1C870084E328 /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = Strings/ur.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC871EDE1C870084E328 /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = ur.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC881EDE1C870084E328 /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = ur.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC891EDE1C870084E328 /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = ur.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC8A1EDE1C900084E328 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = Strings/vi.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC8B1EDE1C900084E328 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = Strings/vi.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC8C1EDE1C910084E328 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = Strings/vi.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC8D1EDE1C910084E328 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC8E1EDE1C910084E328 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC8F1EDE1C910084E328 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC901EDE1D970084E328 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "Strings/zh-Hant-TW.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC911EDE1D970084E328 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "Strings/zh-Hant-TW.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC921EDE1D970084E328 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "Strings/zh-Hant-TW.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC931EDE1D980084E328 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC941EDE1D980084E328 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC951EDE1D980084E328 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEC961EDE1DBB0084E328 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = Strings/zh.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC971EDE1DBB0084E328 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = Strings/zh.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC981EDE1DBC0084E328 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = Strings/zh.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC991EDE1DBC0084E328 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC9A1EDE1DBC0084E328 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C30AEC9B1EDE1DBC0084E328 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEC9C1EDE20400084E328 /* nn-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nn-NO"; path = "Strings/nn-NO.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC9D1EDE20400084E328 /* nn-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nn-NO"; path = "Strings/nn-NO.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC9E1EDE20410084E328 /* nn-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nn-NO"; path = "Strings/nn-NO.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C30AEC9F1EDE20410084E328 /* nn-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nn-NO"; path = "nn-NO.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C30AECA01EDE20410084E328 /* nn-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nn-NO"; path = "nn-NO.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C30AECA11EDE20410084E328 /* nn-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nn-NO"; path = "nn-NO.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C3204F0B1E98340400841149 /* FUICountryTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICountryTableViewController.xib; sourceTree = "<group>"; };
 		C32516921D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseTwitterAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32516941D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseTwitterAuthUI.h; sourceTree = "<group>"; };
@@ -781,11 +1141,11 @@
 		C32F228B1EC546DF0028CBE4 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "Strings/pt-BR.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
 		C32F228C1EC546DF0028CBE4 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
 		C32F228D1EC546DF0028CBE4 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
-		C32F228E1EC546F50028CBE4 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-ES"; path = "Strings/es-ES.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
-		C32F228F1EC546F50028CBE4 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-ES"; path = "Strings/es-ES.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
-		C32F22901EC546F50028CBE4 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-ES"; path = "Strings/es-ES.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
-		C32F22911EC546F50028CBE4 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-ES"; path = "es-ES.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
-		C32F22921EC546F50028CBE4 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-ES"; path = "es-ES.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C32F228E1EC546F50028CBE4 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Strings/es.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C32F228F1EC546F50028CBE4 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Strings/es.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C32F22901EC546F50028CBE4 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Strings/es.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C32F22911EC546F50028CBE4 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C32F22921EC546F50028CBE4 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
 		C32F22931EC547590028CBE4 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "Strings/es-419.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
 		C32F22941EC547590028CBE4 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "Strings/es-419.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
 		C32F22951EC547590028CBE4 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "Strings/es-419.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
@@ -2392,8 +2752,68 @@
 				th,
 				tr,
 				"pt-BR",
-				"es-ES",
+				es,
 				"es-419",
+				bg,
+				bn,
+				ca,
+				cs,
+				da,
+				"de-AT",
+				"de-CH",
+				el,
+				"en-AU",
+				"en-CA",
+				"en-IE",
+				"en-IN",
+				"en-SG",
+				"en-ZA",
+				"es-AR",
+				"es-BO",
+				"es-CO",
+				"es-CL",
+				"es-CR",
+				"es-DO",
+				"es-EC",
+				"es-GT",
+				"es-HN",
+				"es-MX",
+				"es-NI",
+				"es-PA",
+				"es-PE",
+				"es-PR",
+				"es-PY",
+				"es-SV",
+				"es-US",
+				"es-UY",
+				"es-VE",
+				fa,
+				fi,
+				"fr-CH",
+				gsw,
+				gu,
+				hi,
+				hr,
+				hu,
+				id,
+				kn,
+				ln,
+				mr,
+				ms,
+				nb,
+				pt,
+				ro,
+				sk,
+				"sr-Latn",
+				sr,
+				sv,
+				ta,
+				uk,
+				ur,
+				vi,
+				"zh-Hant-TW",
+				zh,
+				"nn-NO",
 			);
 			mainGroup = 8D2A849C1D678B2B0058DF04;
 			productRefGroup = 8D2A84A71D678B2B0058DF04 /* Products */;
@@ -3838,8 +4258,68 @@
 				C32F22641EC252300028CBE4 /* th */,
 				C32F22691EC252390028CBE4 /* tr */,
 				C32F228B1EC546DF0028CBE4 /* pt-BR */,
-				C32F22901EC546F50028CBE4 /* es-ES */,
+				C32F22901EC546F50028CBE4 /* es */,
 				C32F22951EC547590028CBE4 /* es-419 */,
+				C30AEB3C1EDDF4800084E328 /* bg */,
+				C30AEB421EDDF74E0084E328 /* bn */,
+				C30AEB481EDDF7630084E328 /* ca */,
+				C30AEB4E1EDDF7710084E328 /* cs */,
+				C30AEB541EDDF77A0084E328 /* da */,
+				C30AEB5A1EDDF7900084E328 /* de-AT */,
+				C30AEB601EDDF7B60084E328 /* de-CH */,
+				C30AEB661EDDF7E10084E328 /* el */,
+				C30AEB6C1EDDF7F90084E328 /* en-AU */,
+				C30AEB721EDDF8100084E328 /* en-CA */,
+				C30AEB781EDDF8390084E328 /* en-IE */,
+				C30AEB7E1EDDF8510084E328 /* en-IN */,
+				C30AEB841EDDF8640084E328 /* en-SG */,
+				C30AEB8A1EDDF8FC0084E328 /* en-ZA */,
+				C30AEB901EDDF9950084E328 /* es-AR */,
+				C30AEB961EDDF9A40084E328 /* es-BO */,
+				C30AEB9C1EDDF9C20084E328 /* es-CO */,
+				C30AEBA21EDDF9DA0084E328 /* es-CL */,
+				C30AEBA81EDDF9E50084E328 /* es-CR */,
+				C30AEBAE1EDDF9F20084E328 /* es-DO */,
+				C30AEBB41EDDF9FD0084E328 /* es-EC */,
+				C30AEBBA1EDDFA090084E328 /* es-GT */,
+				C30AEBC01EDDFA1D0084E328 /* es-HN */,
+				C30AEBC61EDDFA280084E328 /* es-MX */,
+				C30AEBCC1EDDFA460084E328 /* es-NI */,
+				C30AEBD21EDDFA520084E328 /* es-PA */,
+				C30AEBD81EDDFA5F0084E328 /* es-PE */,
+				C30AEBDE1EDDFA6B0084E328 /* es-PR */,
+				C30AEBE41EDDFA780084E328 /* es-PY */,
+				C30AEBEA1EDDFA850084E328 /* es-SV */,
+				C30AEBF01EDDFA980084E328 /* es-US */,
+				C30AEBF61EDDFAA50084E328 /* es-UY */,
+				C30AEBFC1EDDFAB20084E328 /* es-VE */,
+				C30AEC021EDE16370084E328 /* fa */,
+				C30AEC081EDE164A0084E328 /* fi */,
+				C30AEC0E1EDE16BB0084E328 /* fr-CH */,
+				C30AEC141EDE17250084E328 /* gsw */,
+				C30AEC1A1EDE17C70084E328 /* gu */,
+				C30AEC201EDE17D40084E328 /* hi */,
+				C30AEC261EDE17F60084E328 /* hr */,
+				C30AEC2C1EDE180F0084E328 /* hu */,
+				C30AEC321EDE183D0084E328 /* id */,
+				C30AEC381EDE19BC0084E328 /* kn */,
+				C30AEC3E1EDE19DA0084E328 /* ln */,
+				C30AEC441EDE1A360084E328 /* mr */,
+				C30AEC4A1EDE1A400084E328 /* ms */,
+				C30AEC501EDE1AA20084E328 /* nb */,
+				C30AEC561EDE1BD70084E328 /* pt */,
+				C30AEC5C1EDE1BE90084E328 /* ro */,
+				C30AEC621EDE1BF20084E328 /* sk */,
+				C30AEC681EDE1C0F0084E328 /* sr-Latn */,
+				C30AEC6E1EDE1C1C0084E328 /* sr */,
+				C30AEC741EDE1C510084E328 /* sv */,
+				C30AEC7A1EDE1C660084E328 /* ta */,
+				C30AEC801EDE1C780084E328 /* uk */,
+				C30AEC861EDE1C870084E328 /* ur */,
+				C30AEC8C1EDE1C910084E328 /* vi */,
+				C30AEC921EDE1D970084E328 /* zh-Hant-TW */,
+				C30AEC981EDE1DBC0084E328 /* zh */,
+				C30AEC9E1EDE20410084E328 /* nn-NO */,
 			);
 			name = FirebaseGoogleAuthUI.strings;
 			sourceTree = "<group>";
@@ -3863,8 +4343,68 @@
 				C32F22631EC252300028CBE4 /* th */,
 				C32F22681EC252390028CBE4 /* tr */,
 				C32F228A1EC546DF0028CBE4 /* pt-BR */,
-				C32F228F1EC546F50028CBE4 /* es-ES */,
+				C32F228F1EC546F50028CBE4 /* es */,
 				C32F22941EC547590028CBE4 /* es-419 */,
+				C30AEB3B1EDDF4800084E328 /* bg */,
+				C30AEB411EDDF74E0084E328 /* bn */,
+				C30AEB471EDDF7630084E328 /* ca */,
+				C30AEB4D1EDDF7710084E328 /* cs */,
+				C30AEB531EDDF77A0084E328 /* da */,
+				C30AEB591EDDF7900084E328 /* de-AT */,
+				C30AEB5F1EDDF7B60084E328 /* de-CH */,
+				C30AEB651EDDF7E10084E328 /* el */,
+				C30AEB6B1EDDF7F90084E328 /* en-AU */,
+				C30AEB711EDDF80F0084E328 /* en-CA */,
+				C30AEB771EDDF8390084E328 /* en-IE */,
+				C30AEB7D1EDDF8510084E328 /* en-IN */,
+				C30AEB831EDDF8640084E328 /* en-SG */,
+				C30AEB891EDDF8FC0084E328 /* en-ZA */,
+				C30AEB8F1EDDF9940084E328 /* es-AR */,
+				C30AEB951EDDF9A30084E328 /* es-BO */,
+				C30AEB9B1EDDF9C20084E328 /* es-CO */,
+				C30AEBA11EDDF9DA0084E328 /* es-CL */,
+				C30AEBA71EDDF9E50084E328 /* es-CR */,
+				C30AEBAD1EDDF9F20084E328 /* es-DO */,
+				C30AEBB31EDDF9FD0084E328 /* es-EC */,
+				C30AEBB91EDDFA090084E328 /* es-GT */,
+				C30AEBBF1EDDFA1D0084E328 /* es-HN */,
+				C30AEBC51EDDFA280084E328 /* es-MX */,
+				C30AEBCB1EDDFA460084E328 /* es-NI */,
+				C30AEBD11EDDFA520084E328 /* es-PA */,
+				C30AEBD71EDDFA5F0084E328 /* es-PE */,
+				C30AEBDD1EDDFA6A0084E328 /* es-PR */,
+				C30AEBE31EDDFA780084E328 /* es-PY */,
+				C30AEBE91EDDFA850084E328 /* es-SV */,
+				C30AEBEF1EDDFA980084E328 /* es-US */,
+				C30AEBF51EDDFAA50084E328 /* es-UY */,
+				C30AEBFB1EDDFAB20084E328 /* es-VE */,
+				C30AEC011EDE16370084E328 /* fa */,
+				C30AEC071EDE164A0084E328 /* fi */,
+				C30AEC0D1EDE16BB0084E328 /* fr-CH */,
+				C30AEC131EDE17250084E328 /* gsw */,
+				C30AEC191EDE17C70084E328 /* gu */,
+				C30AEC1F1EDE17D40084E328 /* hi */,
+				C30AEC251EDE17F60084E328 /* hr */,
+				C30AEC2B1EDE180F0084E328 /* hu */,
+				C30AEC311EDE183D0084E328 /* id */,
+				C30AEC371EDE19BC0084E328 /* kn */,
+				C30AEC3D1EDE19D90084E328 /* ln */,
+				C30AEC431EDE1A360084E328 /* mr */,
+				C30AEC491EDE1A400084E328 /* ms */,
+				C30AEC4F1EDE1AA20084E328 /* nb */,
+				C30AEC551EDE1BD70084E328 /* pt */,
+				C30AEC5B1EDE1BE90084E328 /* ro */,
+				C30AEC611EDE1BF20084E328 /* sk */,
+				C30AEC671EDE1C0F0084E328 /* sr-Latn */,
+				C30AEC6D1EDE1C1C0084E328 /* sr */,
+				C30AEC731EDE1C510084E328 /* sv */,
+				C30AEC791EDE1C660084E328 /* ta */,
+				C30AEC7F1EDE1C780084E328 /* uk */,
+				C30AEC851EDE1C870084E328 /* ur */,
+				C30AEC8B1EDE1C900084E328 /* vi */,
+				C30AEC911EDE1D970084E328 /* zh-Hant-TW */,
+				C30AEC971EDE1DBB0084E328 /* zh */,
+				C30AEC9D1EDE20400084E328 /* nn-NO */,
 			);
 			name = FirebaseFacebookAuthUI.strings;
 			sourceTree = "<group>";
@@ -3888,8 +4428,68 @@
 				C32F22621EC252300028CBE4 /* th */,
 				C32F22671EC252390028CBE4 /* tr */,
 				C32F22891EC546DF0028CBE4 /* pt-BR */,
-				C32F228E1EC546F50028CBE4 /* es-ES */,
+				C32F228E1EC546F50028CBE4 /* es */,
 				C32F22931EC547590028CBE4 /* es-419 */,
+				C30AEB3A1EDDF4800084E328 /* bg */,
+				C30AEB401EDDF74E0084E328 /* bn */,
+				C30AEB461EDDF7630084E328 /* ca */,
+				C30AEB4C1EDDF7710084E328 /* cs */,
+				C30AEB521EDDF77A0084E328 /* da */,
+				C30AEB581EDDF7900084E328 /* de-AT */,
+				C30AEB5E1EDDF7B60084E328 /* de-CH */,
+				C30AEB641EDDF7E10084E328 /* el */,
+				C30AEB6A1EDDF7F90084E328 /* en-AU */,
+				C30AEB701EDDF80F0084E328 /* en-CA */,
+				C30AEB761EDDF8390084E328 /* en-IE */,
+				C30AEB7C1EDDF8510084E328 /* en-IN */,
+				C30AEB821EDDF8640084E328 /* en-SG */,
+				C30AEB881EDDF8FC0084E328 /* en-ZA */,
+				C30AEB8E1EDDF9940084E328 /* es-AR */,
+				C30AEB941EDDF9A30084E328 /* es-BO */,
+				C30AEB9A1EDDF9C20084E328 /* es-CO */,
+				C30AEBA01EDDF9DA0084E328 /* es-CL */,
+				C30AEBA61EDDF9E50084E328 /* es-CR */,
+				C30AEBAC1EDDF9F20084E328 /* es-DO */,
+				C30AEBB21EDDF9FD0084E328 /* es-EC */,
+				C30AEBB81EDDFA090084E328 /* es-GT */,
+				C30AEBBE1EDDFA1D0084E328 /* es-HN */,
+				C30AEBC41EDDFA270084E328 /* es-MX */,
+				C30AEBCA1EDDFA460084E328 /* es-NI */,
+				C30AEBD01EDDFA520084E328 /* es-PA */,
+				C30AEBD61EDDFA5F0084E328 /* es-PE */,
+				C30AEBDC1EDDFA6A0084E328 /* es-PR */,
+				C30AEBE21EDDFA770084E328 /* es-PY */,
+				C30AEBE81EDDFA840084E328 /* es-SV */,
+				C30AEBEE1EDDFA970084E328 /* es-US */,
+				C30AEBF41EDDFAA50084E328 /* es-UY */,
+				C30AEBFA1EDDFAB20084E328 /* es-VE */,
+				C30AEC001EDE16370084E328 /* fa */,
+				C30AEC061EDE164A0084E328 /* fi */,
+				C30AEC0C1EDE16BB0084E328 /* fr-CH */,
+				C30AEC121EDE17250084E328 /* gsw */,
+				C30AEC181EDE17C60084E328 /* gu */,
+				C30AEC1E1EDE17D30084E328 /* hi */,
+				C30AEC241EDE17F60084E328 /* hr */,
+				C30AEC2A1EDE180F0084E328 /* hu */,
+				C30AEC301EDE183D0084E328 /* id */,
+				C30AEC361EDE19BB0084E328 /* kn */,
+				C30AEC3C1EDE19D90084E328 /* ln */,
+				C30AEC421EDE1A360084E328 /* mr */,
+				C30AEC481EDE1A3F0084E328 /* ms */,
+				C30AEC4E1EDE1AA20084E328 /* nb */,
+				C30AEC541EDE1BD70084E328 /* pt */,
+				C30AEC5A1EDE1BE90084E328 /* ro */,
+				C30AEC601EDE1BF20084E328 /* sk */,
+				C30AEC661EDE1C0F0084E328 /* sr-Latn */,
+				C30AEC6C1EDE1C1C0084E328 /* sr */,
+				C30AEC721EDE1C510084E328 /* sv */,
+				C30AEC781EDE1C660084E328 /* ta */,
+				C30AEC7E1EDE1C780084E328 /* uk */,
+				C30AEC841EDE1C870084E328 /* ur */,
+				C30AEC8A1EDE1C900084E328 /* vi */,
+				C30AEC901EDE1D970084E328 /* zh-Hant-TW */,
+				C30AEC961EDE1DBB0084E328 /* zh */,
+				C30AEC9C1EDE20400084E328 /* nn-NO */,
 			);
 			name = FirebaseAuthUI.strings;
 			sourceTree = "<group>";
@@ -3913,8 +4513,68 @@
 				C30AEB241ED611130084E328 /* th */,
 				C30AEB251ED611140084E328 /* tr */,
 				C30AEB261ED611140084E328 /* pt-BR */,
-				C30AEB271ED611150084E328 /* es-ES */,
+				C30AEB271ED611150084E328 /* es */,
 				C30AEB281ED611160084E328 /* es-419 */,
+				C30AEB3F1EDDF4800084E328 /* bg */,
+				C30AEB451EDDF74E0084E328 /* bn */,
+				C30AEB4B1EDDF7640084E328 /* ca */,
+				C30AEB511EDDF7710084E328 /* cs */,
+				C30AEB571EDDF77B0084E328 /* da */,
+				C30AEB5D1EDDF7900084E328 /* de-AT */,
+				C30AEB631EDDF7B70084E328 /* de-CH */,
+				C30AEB691EDDF7E10084E328 /* el */,
+				C30AEB6F1EDDF7FA0084E328 /* en-AU */,
+				C30AEB751EDDF8100084E328 /* en-CA */,
+				C30AEB7B1EDDF8390084E328 /* en-IE */,
+				C30AEB811EDDF8510084E328 /* en-IN */,
+				C30AEB871EDDF8650084E328 /* en-SG */,
+				C30AEB8D1EDDF8FD0084E328 /* en-ZA */,
+				C30AEB931EDDF9950084E328 /* es-AR */,
+				C30AEB991EDDF9A40084E328 /* es-BO */,
+				C30AEB9F1EDDF9C20084E328 /* es-CO */,
+				C30AEBA51EDDF9DA0084E328 /* es-CL */,
+				C30AEBAB1EDDF9E50084E328 /* es-CR */,
+				C30AEBB11EDDF9F20084E328 /* es-DO */,
+				C30AEBB71EDDF9FD0084E328 /* es-EC */,
+				C30AEBBD1EDDFA090084E328 /* es-GT */,
+				C30AEBC31EDDFA1D0084E328 /* es-HN */,
+				C30AEBC91EDDFA280084E328 /* es-MX */,
+				C30AEBCF1EDDFA470084E328 /* es-NI */,
+				C30AEBD51EDDFA520084E328 /* es-PA */,
+				C30AEBDB1EDDFA5F0084E328 /* es-PE */,
+				C30AEBE11EDDFA6B0084E328 /* es-PR */,
+				C30AEBE71EDDFA780084E328 /* es-PY */,
+				C30AEBED1EDDFA850084E328 /* es-SV */,
+				C30AEBF31EDDFA980084E328 /* es-US */,
+				C30AEBF91EDDFAA60084E328 /* es-UY */,
+				C30AEBFF1EDDFAB20084E328 /* es-VE */,
+				C30AEC051EDE16370084E328 /* fa */,
+				C30AEC0B1EDE164A0084E328 /* fi */,
+				C30AEC111EDE16BB0084E328 /* fr-CH */,
+				C30AEC171EDE17250084E328 /* gsw */,
+				C30AEC1D1EDE17C70084E328 /* gu */,
+				C30AEC231EDE17D40084E328 /* hi */,
+				C30AEC291EDE17F60084E328 /* hr */,
+				C30AEC2F1EDE18100084E328 /* hu */,
+				C30AEC351EDE183E0084E328 /* id */,
+				C30AEC3B1EDE19BC0084E328 /* kn */,
+				C30AEC411EDE19DA0084E328 /* ln */,
+				C30AEC471EDE1A360084E328 /* mr */,
+				C30AEC4D1EDE1A400084E328 /* ms */,
+				C30AEC531EDE1AA20084E328 /* nb */,
+				C30AEC591EDE1BD70084E328 /* pt */,
+				C30AEC5F1EDE1BE90084E328 /* ro */,
+				C30AEC651EDE1BF20084E328 /* sk */,
+				C30AEC6B1EDE1C100084E328 /* sr-Latn */,
+				C30AEC711EDE1C1C0084E328 /* sr */,
+				C30AEC771EDE1C510084E328 /* sv */,
+				C30AEC7D1EDE1C670084E328 /* ta */,
+				C30AEC831EDE1C780084E328 /* uk */,
+				C30AEC891EDE1C870084E328 /* ur */,
+				C30AEC8F1EDE1C910084E328 /* vi */,
+				C30AEC951EDE1D980084E328 /* zh-Hant-TW */,
+				C30AEC9B1EDE1DBC0084E328 /* zh */,
+				C30AECA11EDE20410084E328 /* nn-NO */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -3938,8 +4598,68 @@
 				C32F22661EC252300028CBE4 /* th */,
 				C32F226B1EC252390028CBE4 /* tr */,
 				C32F228D1EC546DF0028CBE4 /* pt-BR */,
-				C32F22921EC546F50028CBE4 /* es-ES */,
+				C32F22921EC546F50028CBE4 /* es */,
 				C32F22971EC547590028CBE4 /* es-419 */,
+				C30AEB3E1EDDF4800084E328 /* bg */,
+				C30AEB441EDDF74E0084E328 /* bn */,
+				C30AEB4A1EDDF7640084E328 /* ca */,
+				C30AEB501EDDF7710084E328 /* cs */,
+				C30AEB561EDDF77B0084E328 /* da */,
+				C30AEB5C1EDDF7900084E328 /* de-AT */,
+				C30AEB621EDDF7B70084E328 /* de-CH */,
+				C30AEB681EDDF7E10084E328 /* el */,
+				C30AEB6E1EDDF7FA0084E328 /* en-AU */,
+				C30AEB741EDDF8100084E328 /* en-CA */,
+				C30AEB7A1EDDF8390084E328 /* en-IE */,
+				C30AEB801EDDF8510084E328 /* en-IN */,
+				C30AEB861EDDF8650084E328 /* en-SG */,
+				C30AEB8C1EDDF8FD0084E328 /* en-ZA */,
+				C30AEB921EDDF9950084E328 /* es-AR */,
+				C30AEB981EDDF9A40084E328 /* es-BO */,
+				C30AEB9E1EDDF9C20084E328 /* es-CO */,
+				C30AEBA41EDDF9DA0084E328 /* es-CL */,
+				C30AEBAA1EDDF9E50084E328 /* es-CR */,
+				C30AEBB01EDDF9F20084E328 /* es-DO */,
+				C30AEBB61EDDF9FD0084E328 /* es-EC */,
+				C30AEBBC1EDDFA090084E328 /* es-GT */,
+				C30AEBC21EDDFA1D0084E328 /* es-HN */,
+				C30AEBC81EDDFA280084E328 /* es-MX */,
+				C30AEBCE1EDDFA460084E328 /* es-NI */,
+				C30AEBD41EDDFA520084E328 /* es-PA */,
+				C30AEBDA1EDDFA5F0084E328 /* es-PE */,
+				C30AEBE01EDDFA6B0084E328 /* es-PR */,
+				C30AEBE61EDDFA780084E328 /* es-PY */,
+				C30AEBEC1EDDFA850084E328 /* es-SV */,
+				C30AEBF21EDDFA980084E328 /* es-US */,
+				C30AEBF81EDDFAA60084E328 /* es-UY */,
+				C30AEBFE1EDDFAB20084E328 /* es-VE */,
+				C30AEC041EDE16370084E328 /* fa */,
+				C30AEC0A1EDE164A0084E328 /* fi */,
+				C30AEC101EDE16BB0084E328 /* fr-CH */,
+				C30AEC161EDE17250084E328 /* gsw */,
+				C30AEC1C1EDE17C70084E328 /* gu */,
+				C30AEC221EDE17D40084E328 /* hi */,
+				C30AEC281EDE17F60084E328 /* hr */,
+				C30AEC2E1EDE18100084E328 /* hu */,
+				C30AEC341EDE183E0084E328 /* id */,
+				C30AEC3A1EDE19BC0084E328 /* kn */,
+				C30AEC401EDE19DA0084E328 /* ln */,
+				C30AEC461EDE1A360084E328 /* mr */,
+				C30AEC4C1EDE1A400084E328 /* ms */,
+				C30AEC521EDE1AA20084E328 /* nb */,
+				C30AEC581EDE1BD70084E328 /* pt */,
+				C30AEC5E1EDE1BE90084E328 /* ro */,
+				C30AEC641EDE1BF20084E328 /* sk */,
+				C30AEC6A1EDE1C0F0084E328 /* sr-Latn */,
+				C30AEC701EDE1C1C0084E328 /* sr */,
+				C30AEC761EDE1C510084E328 /* sv */,
+				C30AEC7C1EDE1C660084E328 /* ta */,
+				C30AEC821EDE1C780084E328 /* uk */,
+				C30AEC881EDE1C870084E328 /* ur */,
+				C30AEC8E1EDE1C910084E328 /* vi */,
+				C30AEC941EDE1D980084E328 /* zh-Hant-TW */,
+				C30AEC9A1EDE1DBC0084E328 /* zh */,
+				C30AECA01EDE20410084E328 /* nn-NO */,
 			);
 			name = FirebaseTwitterAuthUI.strings;
 			sourceTree = "<group>";
@@ -3963,8 +4683,68 @@
 				C32F22651EC252300028CBE4 /* th */,
 				C32F226A1EC252390028CBE4 /* tr */,
 				C32F228C1EC546DF0028CBE4 /* pt-BR */,
-				C32F22911EC546F50028CBE4 /* es-ES */,
+				C32F22911EC546F50028CBE4 /* es */,
 				C32F22961EC547590028CBE4 /* es-419 */,
+				C30AEB3D1EDDF4800084E328 /* bg */,
+				C30AEB431EDDF74E0084E328 /* bn */,
+				C30AEB491EDDF7630084E328 /* ca */,
+				C30AEB4F1EDDF7710084E328 /* cs */,
+				C30AEB551EDDF77B0084E328 /* da */,
+				C30AEB5B1EDDF7900084E328 /* de-AT */,
+				C30AEB611EDDF7B70084E328 /* de-CH */,
+				C30AEB671EDDF7E10084E328 /* el */,
+				C30AEB6D1EDDF7FA0084E328 /* en-AU */,
+				C30AEB731EDDF8100084E328 /* en-CA */,
+				C30AEB791EDDF8390084E328 /* en-IE */,
+				C30AEB7F1EDDF8510084E328 /* en-IN */,
+				C30AEB851EDDF8640084E328 /* en-SG */,
+				C30AEB8B1EDDF8FC0084E328 /* en-ZA */,
+				C30AEB911EDDF9950084E328 /* es-AR */,
+				C30AEB971EDDF9A40084E328 /* es-BO */,
+				C30AEB9D1EDDF9C20084E328 /* es-CO */,
+				C30AEBA31EDDF9DA0084E328 /* es-CL */,
+				C30AEBA91EDDF9E50084E328 /* es-CR */,
+				C30AEBAF1EDDF9F20084E328 /* es-DO */,
+				C30AEBB51EDDF9FD0084E328 /* es-EC */,
+				C30AEBBB1EDDFA090084E328 /* es-GT */,
+				C30AEBC11EDDFA1D0084E328 /* es-HN */,
+				C30AEBC71EDDFA280084E328 /* es-MX */,
+				C30AEBCD1EDDFA460084E328 /* es-NI */,
+				C30AEBD31EDDFA520084E328 /* es-PA */,
+				C30AEBD91EDDFA5F0084E328 /* es-PE */,
+				C30AEBDF1EDDFA6B0084E328 /* es-PR */,
+				C30AEBE51EDDFA780084E328 /* es-PY */,
+				C30AEBEB1EDDFA850084E328 /* es-SV */,
+				C30AEBF11EDDFA980084E328 /* es-US */,
+				C30AEBF71EDDFAA50084E328 /* es-UY */,
+				C30AEBFD1EDDFAB20084E328 /* es-VE */,
+				C30AEC031EDE16370084E328 /* fa */,
+				C30AEC091EDE164A0084E328 /* fi */,
+				C30AEC0F1EDE16BB0084E328 /* fr-CH */,
+				C30AEC151EDE17250084E328 /* gsw */,
+				C30AEC1B1EDE17C70084E328 /* gu */,
+				C30AEC211EDE17D40084E328 /* hi */,
+				C30AEC271EDE17F60084E328 /* hr */,
+				C30AEC2D1EDE18100084E328 /* hu */,
+				C30AEC331EDE183E0084E328 /* id */,
+				C30AEC391EDE19BC0084E328 /* kn */,
+				C30AEC3F1EDE19DA0084E328 /* ln */,
+				C30AEC451EDE1A360084E328 /* mr */,
+				C30AEC4B1EDE1A400084E328 /* ms */,
+				C30AEC511EDE1AA20084E328 /* nb */,
+				C30AEC571EDE1BD70084E328 /* pt */,
+				C30AEC5D1EDE1BE90084E328 /* ro */,
+				C30AEC631EDE1BF20084E328 /* sk */,
+				C30AEC691EDE1C0F0084E328 /* sr-Latn */,
+				C30AEC6F1EDE1C1C0084E328 /* sr */,
+				C30AEC751EDE1C510084E328 /* sv */,
+				C30AEC7B1EDE1C660084E328 /* ta */,
+				C30AEC811EDE1C780084E328 /* uk */,
+				C30AEC871EDE1C870084E328 /* ur */,
+				C30AEC8D1EDE1C910084E328 /* vi */,
+				C30AEC931EDE1D980084E328 /* zh-Hant-TW */,
+				C30AEC991EDE1DBC0084E328 /* zh */,
+				C30AEC9F1EDE20410084E328 /* nn-NO */,
 			);
 			name = FirebasePhoneAuthUI.strings;
 			sourceTree = "<group>";
