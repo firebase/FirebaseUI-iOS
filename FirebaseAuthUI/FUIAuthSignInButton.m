@@ -19,6 +19,8 @@
 #import "FUIAuthProvider.h"
 #import "FUIAuthUtils.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** @var kCornerRadius
     @brief Corner radius of the button.
  */
@@ -60,8 +62,15 @@ static const CGFloat kFontSize = 12.0f;
   [self setTitle:text forState:UIControlStateNormal];
   [self setTitleColor:textColor forState:UIControlStateNormal];
   self.titleLabel.font = [UIFont boldSystemFontOfSize:kFontSize];
+  self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
   [self setImage:image forState:UIControlStateNormal];
 
+  CGFloat paddingTitle = 8.0f;
+  CGFloat paddingImage = 8.0f;
+  [self setTitleEdgeInsets:UIEdgeInsetsMake(0, paddingTitle, 0, paddingImage + paddingTitle)];
+  [self setContentEdgeInsets:UIEdgeInsetsMake(0, paddingImage, 0, -paddingImage - paddingTitle)];
+  [self setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+  
   self.layer.cornerRadius = kCornerRadius;
 
   // Add a drop shadow.
@@ -85,16 +94,7 @@ static const CGFloat kFontSize = 12.0f;
                    textColor:providerUI.buttonTextColor];
 }
 
-- (void)layoutSubviews {
-  [super layoutSubviews];
-
-  CGRect imageRect = self.imageView.frame;
-  imageRect.origin.x = 8.0f;
-  self.imageView.frame = imageRect;
-
-  CGRect titleRect = self.titleLabel.frame;
-  titleRect.origin.x = 50.0f;
-  self.titleLabel.frame = titleRect;
-}
-
 @end
+
+NS_ASSUME_NONNULL_END
+
