@@ -152,7 +152,7 @@
 "VerifyItsYou" = "Confirmez qu'il s'agit bien de vous";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "Supprimer le compte ?";
+"DeleteAccountConfirmationTitle" = "Supprimer le compte ?";
 
 /* Alert message body shown to confirm account deletion action. */
 "DeleteAccountBody" = "Cette action effacera toutes les données associées à votre compte de façon irréversible. Vous devrez vous reconnecter pour finaliser cette opération.";

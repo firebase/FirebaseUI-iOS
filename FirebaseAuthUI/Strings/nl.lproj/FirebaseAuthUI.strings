@@ -152,7 +152,7 @@
 "VerifyItsYou" = "Bevestig dat u het bent";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "Account verwijderen?";
+"DeleteAccountConfirmationTitle" = "Account verwijderen?";
 
 /* Alert message body shown to confirm account deletion action. */
 "DeleteAccountBody" = "Alle gegevens die aan uw account zijn gekoppeld, worden gewist. Dit kan niet ongedaan worden gemaakt. U moet opnieuw inloggen om deze actie te voltooien.";

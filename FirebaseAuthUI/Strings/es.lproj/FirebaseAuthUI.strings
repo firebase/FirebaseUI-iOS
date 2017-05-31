@@ -152,7 +152,7 @@
 "VerifyItsYou" = "Verifica que eres tú";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "¿Eliminar cuenta?";
+"DeleteAccountConfirmationTitle" = "¿Eliminar cuenta?";
 
 /* Alert message body shown to confirm account deletion action. */
 "DeleteAccountBody" = "Esta acción borrará todos los datos asociados a la cuenta y no se puede deshacer. Tendrás que volver a iniciar sesión para completarla";

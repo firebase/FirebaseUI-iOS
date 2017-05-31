@@ -77,10 +77,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   [super viewDidLoad];
 
   UIBarButtonItem *signInButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_SignInTitle)
-                                       style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(signIn)];
+      [FUIAuthBaseViewController barItemWithTitle:FUILocalizedString(kStr_SignInTitle)
+                                           target:self
+                                           action:@selector(signIn)];
   self.navigationItem.rightBarButtonItem = signInButtonItem;
   [_forgotPasswordButton setTitle:FUILocalizedString(kStr_ForgotPasswordTitle) forState:UIControlStateNormal];
 }

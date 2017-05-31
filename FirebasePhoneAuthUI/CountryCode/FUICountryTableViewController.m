@@ -16,7 +16,6 @@
 
 #import "FUICollationForCountries.h"
 
-#import "FUIAuthTableViewCell.h"
 #import "FUIAuthUtils.h"
 #import "FUICountryCodes.h"
 #import "FUICountryTableViewController.h"
@@ -65,10 +64,48 @@ NS_ASSUME_NONNULL_BEGIN
     return nil;
   }
 
-  FUIAuthTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"digits-country-cell"];
+  static NSString *identifier = @"fui-country-cell";
+  CGFloat textLabelTag = 1;
+  CGFloat detailTextLabelTag = 2;
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+  UILabel *detailTextLabel;
+  UILabel *textLabel;
   if (cell == nil) {
-    cell = [[FUIAuthTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                       reuseIdentifier:@"digits-country-cell"];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:identifier];
+    detailTextLabel = [[UILabel alloc] init];
+    [detailTextLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    detailTextLabel.textColor = [UIColor grayColor];
+    detailTextLabel.tag = detailTextLabelTag;
+    [cell.contentView addSubview:detailTextLabel];
+    
+    textLabel = [[UILabel alloc] init];
+    [textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    textLabel.tag = textLabelTag;
+    [cell.contentView addSubview:textLabel];
+
+    NSDictionary *views = NSDictionaryOfVariableBindings(detailTextLabel, textLabel);
+    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[detailTextLabel]|"
+                                                                   options:0
+                                                                   metrics:nil
+                                                                     views:views];
+    [cell.contentView addConstraints:constraints];
+    
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[textLabel]|"
+                                                          options: 0
+                                                          metrics:nil
+                                                            views:views];
+    [cell.contentView addConstraints:constraints];
+    
+    constraints =
+        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[textLabel]-[detailTextLabel(<=90)]|"
+                                                options: 0
+                                                metrics:nil
+                                                  views:views];
+    [cell.contentView addConstraints:constraints];
+  } else {
+    detailTextLabel = [cell.contentView viewWithTag:detailTextLabelTag];
+    textLabel = [cell.contentView viewWithTag:textLabelTag];
   }
 
   FUICountryCodeInfo* countryCodeInfo;
@@ -82,12 +119,12 @@ NS_ASSUME_NONNULL_BEGIN
   if (countryCodeInfo) {
     if ([FUIFeatureSwitch isCountryFlagEmojiEnabled]) {
       NSString *countryFlag = [countryCodeInfo countryFlagEmoji];
-      cell.textLabel.text =
+      textLabel.text =
           [NSString stringWithFormat:@"%@ %@", countryFlag, countryCodeInfo.localizedCountryName];
     } else {
-      cell.textLabel.text = countryCodeInfo.localizedCountryName;
+      textLabel.text = countryCodeInfo.localizedCountryName;
     }
-    cell.detailTextLabel.text = countryCodeInfo.dialCode;
+    detailTextLabel.text = countryCodeInfo.dialCode;
   }
   return cell;
 }

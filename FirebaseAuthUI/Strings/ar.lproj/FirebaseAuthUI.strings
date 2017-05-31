@@ -152,7 +152,7 @@
 "VerifyItsYou" = "‏‮Verify‬‏ ‏‮it‬‏'‏‮s‬‏ ‏‮you‬‏";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "‏‮Delete‬‏ ‏‮Account‬‏?";
+"DeleteAccountConfirmationTitle" = "‏‮Delete‬‏ ‏‮Account‬‏?";
 
 /* Alert message body shown to confirm account deletion action. */
 "DeleteAccountBody" = "‏‮This‬‏ ‏‮will‬‏ ‏‮erase‬‏ ‏‮all‬‏ ‏‮data‬‏ ‏‮associated‬‏ ‏‮with‬‏ ‏‮your‬‏ ‏‮account‬‏, ‏‮and‬‏ ‏‮can‬‏'‏‮t‬‏ ‏‮be‬‏ ‏‮undone‬‏ ‏‮You‬‏ ‏‮will‬‏ ‏‮need‬‏ ‏‮to‬‏ ‏‮sign‬‏ ‏‮in‬‏ ‏‮again‬‏ ‏‮to‬‏ ‏‮complete‬‏ ‏‮this‬‏ ‏‮action‬‏";

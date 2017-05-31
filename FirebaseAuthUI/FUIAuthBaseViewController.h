@@ -175,6 +175,15 @@ typedef void (^FUIAuthAlertActionHandler)(void);
  */
 + (UIActivityIndicatorView *)addActivityIndicator:(UIView *)view;
 
+/** @fn barItemWithTitle:target:action:
+    @brief Creates multiline @c UIBarButtonItem of fixed width.
+    @param title The title of the button.
+    @param target The target object of the @c UIBarButtonItem .
+    @param action The action called when button is selected.
+ */
++ (UIBarButtonItem *)barItemWithTitle:(NSString *)title
+                               target:(nullable id)target
+                               action:(SEL)action;
 @end
 
 NS_ASSUME_NONNULL_END

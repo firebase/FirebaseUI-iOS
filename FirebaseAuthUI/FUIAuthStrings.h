@@ -70,7 +70,7 @@ extern NSString *const kStr_CantFindProvider;
 extern NSString *const kStr_EmailsDontMatch;
 extern NSString *const kStr_ForgotPassword;
 extern NSString *const kStr_VerifyItsYou;
-extern NSString *const kStr_DeleteAccountConfimationTitle;
+extern NSString *const kStr_DeleteAccountConfirmationTitle;
 extern NSString *const kStr_DeleteAccountBody;
 extern NSString *const kStr_DeleteAccountConfirmationMessage;
 extern NSString *const kStr_Delete;

@@ -109,10 +109,9 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   [super viewDidLoad];
 
   UIBarButtonItem *saveButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Save)
-                                       style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(save)];
+      [FUIAuthBaseViewController barItemWithTitle:FUILocalizedString(kStr_Save)
+                                           target:self
+                                           action:@selector(save)];
   saveButtonItem.accessibilityIdentifier = kSaveButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = saveButtonItem;
 }

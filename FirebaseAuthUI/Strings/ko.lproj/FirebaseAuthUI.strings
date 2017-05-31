@@ -152,7 +152,7 @@
 "VerifyItsYou" = "본인 인증";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "계정을 삭제하시겠습니까?";
+"DeleteAccountConfirmationTitle" = "계정을 삭제하시겠습니까?";
 
 /* Alert message body shown to confirm account deletion action. */
 "DeleteAccountBody" = "계정에 연결된 데이터가 모두 삭제되며 삭제를 취소할 수 없습니다. 이 작업을 완료하려면 다시 로그인해야 합니다.";

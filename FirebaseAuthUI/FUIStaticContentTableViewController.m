@@ -77,10 +77,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     _actionTitle = [actionTitle copy];
 
     UIBarButtonItem *actionButtonItem =
-        [[UIBarButtonItem alloc] initWithTitle:_actionTitle
-                                         style:UIBarButtonItemStylePlain
-                                        target:self
-                                        action:@selector(onNext)];
+        [FUIAuthBaseViewController barItemWithTitle:_actionTitle
+                                             target:self
+                                             action:@selector(onNext)];
     actionButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
     self.navigationItem.rightBarButtonItem = actionButtonItem;
   }

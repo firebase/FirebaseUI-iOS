@@ -82,10 +82,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   [super viewDidLoad];
 
   UIBarButtonItem *nextButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Next)
-                                       style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(next)];
+      [FUIAuthBaseViewController barItemWithTitle:FUILocalizedString(kStr_Next)
+                                           target:self
+                                           action:@selector(next)];
   self.navigationItem.rightBarButtonItem = nextButtonItem;
 
   // The initial frame doesn't matter as long as it's not CGRectZero, otherwise a default empty

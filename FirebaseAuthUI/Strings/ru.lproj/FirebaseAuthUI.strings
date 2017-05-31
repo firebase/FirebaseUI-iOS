@@ -152,7 +152,7 @@
 "VerifyItsYou" = "Подтвердите, что это вы";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "Удалить аккаунт?";
+"DeleteAccountConfirmationTitle" = "Удалить аккаунт?";
 
 /* Alert message body shown to confirm account deletion action. */
 "DeleteAccountBody" = "Все данные в нем будут безвозвратно удалены. Чтобы завершить это действие, нужно будет войти в аккаунт ещё раз.";

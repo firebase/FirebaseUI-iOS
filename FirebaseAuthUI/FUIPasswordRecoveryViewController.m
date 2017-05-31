@@ -79,10 +79,9 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   [super viewDidLoad];
 
   UIBarButtonItem *sendButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Send)
-                                       style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(send)];
+      [FUIAuthBaseViewController barItemWithTitle:FUILocalizedString(kStr_Send)
+                                           target:self
+                                           action:@selector(send)];
   self.navigationItem.rightBarButtonItem = sendButtonItem;
 }
 

@@ -93,10 +93,9 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
   [super viewDidLoad];
 
   UIBarButtonItem *nextButtonItem =
-  [[UIBarButtonItem alloc] initWithTitle:FUIPhoneAuthLocalizedString(kPAStr_Next)
-                                   style:UIBarButtonItemStylePlain
-                                  target:self
-                                  action:@selector(next)];
+      [FUIAuthBaseViewController barItemWithTitle:FUIPhoneAuthLocalizedString(kPAStr_Next)
+                                           target:self
+                                           action:@selector(next)];
   nextButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = nextButtonItem;
   self.navigationItem.rightBarButtonItem.enabled = NO;
@@ -330,7 +329,9 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
 }
 
 - (NSAttributedString *)accountCreationTOS {
-  NSString *accountCreationTOS = [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_TermsAccountCreation), FUIPhoneAuthLocalizedString(kPAStr_Next)];
+  NSString *accountCreationTOS =
+      [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_TermsAccountCreation),
+          FUIPhoneAuthLocalizedString(kPAStr_Next)];
   NSMutableAttributedString *attributedLinkText =
       [[NSMutableAttributedString alloc] initWithString:accountCreationTOS attributes:nil];
 
@@ -343,12 +344,15 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
                             options:0
                               range:NSMakeRange(0, [accountCreationTOS length])];
   NSRange placeholderRange = placeholderMatch.range;
-  if (placeholderRange.location != NSNotFound) {
+  if (placeholderMatch) {
     [attributedLinkText addAttribute:NSLinkAttributeName
                                value:[FUIAuth defaultAuthUI].TOSURL
                                range:placeholderRange];
-    [attributedLinkText replaceCharactersInRange:NSMakeRange(placeholderRange.location + placeholderRange.length - 1, 1) withString:@""];
-    [attributedLinkText replaceCharactersInRange:NSMakeRange(placeholderRange.location, 1) withString:@""];
+    NSRange lastOccurenceRange =
+        NSMakeRange(placeholderRange.location + placeholderRange.length - 1, 1);
+    NSRange firstOccurenceRange = NSMakeRange(placeholderRange.location, 1);
+    [attributedLinkText replaceCharactersInRange:lastOccurenceRange withString:@""];
+    [attributedLinkText replaceCharactersInRange:firstOccurenceRange withString:@""];
   }
   return attributedLinkText;
 }

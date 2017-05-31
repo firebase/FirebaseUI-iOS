@@ -152,7 +152,7 @@
 "VerifyItsYou" = "請驗證您的身分";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "要刪除帳戶嗎？";
+"DeleteAccountConfirmationTitle" = "要刪除帳戶嗎？";
 
 /* Alert message body shown to confirm account deletion action. */
 "DeleteAccountBody" = "這項操作會清除與您的帳戶相關聯的所有資料，而且帳戶刪除後即無法復原。您需要再次登入才能完成這項操作";

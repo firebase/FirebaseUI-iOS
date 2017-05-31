@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showDeleteAccountDialog {
   [self showSelectProviderDialogWithAlertTitle:
-      FUILocalizedString(kStr_DeleteAccountConfimationTitle)
+      FUILocalizedString(kStr_DeleteAccountConfirmationTitle)
                                   alertMessage:FUILocalizedString(kStr_DeleteAccountBody)
                               alertCloseButton:FUILocalizedString(kStr_Cancel)
                                providerHandler:^(id<FIRUserInfo> provider) {
@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)onDeleteAccountViewNextAction {
   UIAlertController *alertController =
-    [UIAlertController alertControllerWithTitle:FUILocalizedString(kStr_DeleteAccountConfimationTitle)
+    [UIAlertController alertControllerWithTitle:FUILocalizedString(kStr_DeleteAccountConfirmationTitle)
                                         message:FUILocalizedString(kStr_ActionCantBeUndone)
                                  preferredStyle:UIAlertControllerStyleAlert];
   UIAlertAction *deleteAction =

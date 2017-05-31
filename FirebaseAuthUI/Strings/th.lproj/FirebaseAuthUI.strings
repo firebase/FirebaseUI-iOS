@@ -152,7 +152,7 @@
 "VerifyItsYou" = "โปรดยืนยันว่าเป็นคุณ";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "ลบบัญชีไหม";
+"DeleteAccountConfirmationTitle" = "ลบบัญชีไหม";
 
 /* Alert message body shown to confirm account deletion action. */
 "DeleteAccountBody" = "การทำเช่นนี้จะลบข้อมูลทั้งหมดที่เชื่อมโยงกับบัญชีของคุณและไม่สามารถเลิกทำได้ โปรดลงชื่อเข้าใช้อีกครั้งเพื่อดำเนินการให้เสร็จสมบูรณ์";

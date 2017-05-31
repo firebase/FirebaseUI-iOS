@@ -152,7 +152,7 @@
 "VerifyItsYou" = "Kimliğinizi doğrulayın";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "Hesap silinsin mi?";
+"DeleteAccountConfirmationTitle" = "Hesap silinsin mi?";
 
 /* Alert message body shown to confirm account deletion action. */
 "DeleteAccountBody" = "Bu işlem, hesabınızla ilişkili tüm verileri siler ve geri alınamaz. Bu işlemi tamamlamak için tekrar oturum açmanız gerekir";

@@ -152,7 +152,7 @@
 "VerifyItsYou" = "ご本人確認";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfimationTitle" = "アカウントを削除しますか？";
+"DeleteAccountConfirmationTitle" = "アカウントを削除しますか？";
 
 /* Alert message body shown to confirm account deletion action. */
 "DeleteAccountBody" = "この操作を行うと、アカウントに関連付けられたすべてのデータが削除され、元に戻すことはできません。この操作を完了させるには、再度ログインする必要があります。";
