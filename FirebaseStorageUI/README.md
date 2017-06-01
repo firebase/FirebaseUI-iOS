@@ -31,7 +31,7 @@ UIImageView *imageView = ...;
 // Swift
 
 // Reference to an image file in Cloud Storage
-let reference: FIRStorageReference = ...;
+let reference: StorageReference = ...;
 
 // UIImageView in your ViewController
 var imageView: UIImageView = ...;
