@@ -17,6 +17,7 @@
 #import "FUIPasswordSignUpViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthStrings.h"
 #import "FUIAuthTableViewCell.h"
 #import "FUIAuthUtils.h"
@@ -80,6 +81,11 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
       @brief The @c UITextField that user enters password into.
    */
   UITextField *_passwordField;
+  
+  /** @var _tableView
+      @brief The @c UITableView used to store all UI elements.
+   */
+  __weak IBOutlet UITableView *_tableView;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
@@ -114,6 +120,8 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
                                            action:@selector(save)];
   saveButtonItem.accessibilityIdentifier = kSaveButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = saveButtonItem;
+
+  [self enableDynamicCellHeightForTableView:_tableView];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -125,12 +133,18 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
     return;
   }
 
+  NSAttributedString *currentAttributedString = self.footerTextView.attributedText;
+  NSDictionary *currentAttributes =
+      [currentAttributedString attributesAtIndex:0
+                           longestEffectiveRange:nil
+                                         inRange:NSMakeRange(0, currentAttributedString.length)];
   NSString *termsOfService = FUILocalizedString(kStr_TermsOfService);
   NSString *termsOfServiceNotice =
       [NSString stringWithFormat:FUILocalizedString(kStr_TermsOfServiceNotice),
           FUILocalizedString(kStr_Save), termsOfService];
   NSMutableAttributedString *attributedString =
-      [[NSMutableAttributedString alloc] initWithString:termsOfServiceNotice];
+      [[NSMutableAttributedString alloc] initWithString:termsOfServiceNotice
+                                             attributes:currentAttributes];
   NSRange termsOfServiceRange = [termsOfServiceNotice rangeOfString:termsOfService];
   [attributedString addAttribute:NSLinkAttributeName
                            value:self.authUI.TOSURL.absoluteString

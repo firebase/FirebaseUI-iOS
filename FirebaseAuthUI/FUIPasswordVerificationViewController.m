@@ -17,6 +17,7 @@
 #import "FUIPasswordVerificationViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthStrings.h"
 #import "FUIAuthTableHeaderView.h"
 #import "FUIAuthTableViewCell.h"
@@ -48,7 +49,14 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
    */
   UITextField *_passwordField;
 
+  /** @var _tableView
+      @brief The @c UITableView used to store all UI elements.
+   */
   __weak IBOutlet UITableView *_tableView;
+  
+  /** @var _forgotPasswordButton
+      @brief The @c UIButton which handles forgot password action.
+   */
   __weak IBOutlet UIButton *_forgotPasswordButton;
 }
 
@@ -93,6 +101,8 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
       [[FUIAuthTableHeaderView alloc] initWithFrame:_tableView.bounds];
   _tableView.tableHeaderView = tableHeaderView;
   [_forgotPasswordButton setTitle:FUILocalizedString(kStr_ForgotPasswordTitle) forState:UIControlStateNormal];
+
+  [self enableDynamicCellHeightForTableView:_tableView];
 }
 
 - (void)viewDidLayoutSubviews {

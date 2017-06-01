@@ -21,6 +21,7 @@
 #import <FirebaseAnalytics/FIRApp.h>
 #import <FirebaseAuth/FIRAuth.h>
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthErrors.h"
 #import "FUIAuthPickerViewController.h"
 #import "FUIAuthStrings.h"

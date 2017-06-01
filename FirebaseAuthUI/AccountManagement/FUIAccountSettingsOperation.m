@@ -23,7 +23,7 @@
 #import "FUIAccountSettingsOperationUpdateEmail.h"
 #import "FUIAccountSettingsOperationUpdateName.h"
 #import "FUIAccountSettingsOperationUpdatePassword.h"
-#import "FUIAuthBaseViewController.h"
+#import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthErrorUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN

@@ -329,11 +329,19 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
 }
 
 - (NSAttributedString *)accountCreationTOS {
+
+  NSAttributedString *currentAttributedString = _tosTextView.attributedText;
+  NSDictionary *currentAttributes =
+      [currentAttributedString attributesAtIndex:0
+                           longestEffectiveRange:nil
+                                         inRange:NSMakeRange(0, currentAttributedString.length)];
+
   NSString *accountCreationTOS =
       [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_TermsAccountCreation),
           FUIPhoneAuthLocalizedString(kPAStr_Next)];
   NSMutableAttributedString *attributedLinkText =
-      [[NSMutableAttributedString alloc] initWithString:accountCreationTOS attributes:nil];
+      [[NSMutableAttributedString alloc] initWithString:accountCreationTOS
+                                             attributes:currentAttributes];
 
   NSRegularExpression *linkRegex =
       [NSRegularExpression regularExpressionWithPattern:kLinkPlaceholderPattern

@@ -24,6 +24,7 @@
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <FirebaseCore/FirebaseCore.h>
 #import <GoogleSignIn/GoogleSignIn.h>
+#import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthStrings.h"
 #import "FUIAuthUtils.h"
 

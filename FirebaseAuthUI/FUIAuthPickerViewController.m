@@ -17,6 +17,7 @@
 #import "FUIAuthPickerViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthSignInButton.h"
 #import "FUIAuthStrings.h"
 #import "FUIAuthUtils.h"

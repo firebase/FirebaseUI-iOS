@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FUIAuthBaseViewController.h"
+#import "FUIAuthBaseViewController_Internal.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
 #import "FUIAuthErrorUtils.h"
@@ -42,20 +42,10 @@ static const CGFloat kActivityIndiactorOverlayOpacity = 0.8f;
  */
 static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
 
-/** @var kMaxUIButtonBarItemWidth
-    @brief Maximum width of the multiline UIBarButton item.
- */
-static const CGFloat kMaxUIButtonBarItemWidth = 75.f;
-
 /** @var kUITableViewCellHeight
     @brief Height of all table view cells used in subclasses of the controller.
  */
-static const CGFloat kUITableViewCellHeight = 60.f;
-
-/** @var kMaxNumberOfLinesInElement
-    @brief Maximum amount of lines in multiline element.
- */
-static const NSInteger kMaxNumberOfLinesInElement = 2;
+static const CGFloat kUITableViewCellHeight = 44.f;
 
 /** @var kEmailRegex
     @brief Regular expression for matching email addresses.
@@ -66,9 +56,6 @@ static NSString *const kEmailRegex = @".+@([a-zA-Z0-9\\-]+\\.)+[a-zA-Z0-9]{2,63}
     @brief The key used to encode @c FUIAuth instance for NSCoding.
  */
 static NSString *const kAuthUICodingKey = @"authUI";
-
-@interface FUIAuthBaseViewController() <UITableViewDelegate>
-@end
 
 @implementation FUIAuthBaseViewController {
   /** @var _activityIndicator
@@ -108,34 +95,6 @@ static NSString *const kAuthUICodingKey = @"authUI";
   // Compensate for bounds adjustment if any.
   activityIndicatorCenter.y += self.view.bounds.origin.y;
   _activityIndicator.center = activityIndicatorCenter;
-}
-
-- (void)setTitle:(NSString *)title {
-  [self setTwoLineTitle:title color:[UIColor blackColor]
-                   font:[UIFont boldSystemFontOfSize:[UIFont labelFontSize]]];
-}
-
-- (void)setTwoLineTitle:(NSString *)titleText color:(UIColor *)color font:(UIFont *)font {
-  UILabel *label = [[UILabel alloc] init];
-  label.backgroundColor = [UIColor clearColor];
-  label.numberOfLines = kMaxNumberOfLinesInElement;
-  label.font = font;
-  label.textAlignment = NSTextAlignmentCenter;
-  label.lineBreakMode = NSLineBreakByWordWrapping;
-  label.textColor = color;
-  label.text = titleText;
-  [label sizeToFit];
-  
-  CGRect rect = label.frame;
-  rect.size.height = font.lineHeight * label.numberOfLines;
-  label.frame = rect;
-  self.navigationItem.titleView = label;
-}
-
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return kUITableViewCellHeight;
 }
 
 #pragma mark - NSCoding
@@ -260,19 +219,10 @@ static NSString *const kAuthUICodingKey = @"authUI";
 + (UIBarButtonItem *)barItemWithTitle:(NSString *)title
                                target:(nullable id)target
                                action:(SEL)action {
-  UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-  [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-  [button setTitle:title forState:UIControlStateNormal];
-  button.titleLabel.numberOfLines = kMaxNumberOfLinesInElement;
-  button.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
-  button.titleLabel.textAlignment = NSTextAlignmentCenter;
-  [button sizeToFit];
-  if (button.frame.size.width > kMaxUIButtonBarItemWidth) {
-    CGRect rect = button.frame;
-    rect.size.width = kMaxUIButtonBarItemWidth;
-    button.frame = rect;
-  }
-  UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+  UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithTitle:title
+                                                               style:UIBarButtonItemStylePlain
+                                                              target:target
+                                                              action:action];
   return buttonItem;
 }
 
@@ -328,6 +278,11 @@ static NSString *const kAuthUICodingKey = @"authUI";
     return FUILocalizedString(kStr_ProviderTitleTwitter);
   }
   return @"";
+}
+
+- (void)enableDynamicCellHeightForTableView:(UITableView *)tableView {
+  tableView.rowHeight = UITableViewAutomaticDimension;
+  tableView.estimatedRowHeight = kUITableViewCellHeight;
 }
 
 @end

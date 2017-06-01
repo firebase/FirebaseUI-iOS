@@ -104,6 +104,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [self.navigationItem setBackBarButtonItem:backItem];
   _tosTextView.text = [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_TermsSMS),
                            FUIPhoneAuthLocalizedString(kPAStr_Verify)];
+
+  [self enableDynamicCellHeightForTableView:_tableView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

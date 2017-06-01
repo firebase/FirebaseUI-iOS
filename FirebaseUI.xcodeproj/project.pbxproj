@@ -254,6 +254,7 @@
 		C3CA19B11E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA19991E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m */; };
 		C3CA19B21E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA19991E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m */; };
 		C3D718F61E9F133500F734D8 /* country-codes.json in Resources */ = {isa = PBXBuildFile; fileRef = C3D718F51E9F133500F734D8 /* country-codes.json */; };
+		C3EB909D1EE0AB9C006E08BB /* FUIAuthBaseViewController_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = C3EB909C1EE0AB98006E08BB /* FUIAuthBaseViewController_Internal.h */; };
 		CF98C184279325D705FA9C8E /* Pods_FirebaseTwitterAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C49ED6AD34E2C2B0150A811 /* Pods_FirebaseTwitterAuthUI.framework */; };
 		D34FE9B6CE0C31063367B7F0 /* Pods_FirebaseTwitterAuthUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5165B56141EBBF9724A45A1 /* Pods_FirebaseTwitterAuthUITests.framework */; };
 		DF73221FA9622DEF2C2934DC /* Pods_Database.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8383FC4E4827CF98B1BFD9 /* Pods_Database.framework */; };
@@ -1221,6 +1222,7 @@
 		C3CA19981E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAccountSettingsOperationUpdatePassword.h; sourceTree = "<group>"; };
 		C3CA19991E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAccountSettingsOperationUpdatePassword.m; sourceTree = "<group>"; };
 		C3D718F51E9F133500F734D8 /* country-codes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "country-codes.json"; sourceTree = "<group>"; };
+		C3EB909C1EE0AB98006E08BB /* FUIAuthBaseViewController_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FUIAuthBaseViewController_Internal.h; sourceTree = "<group>"; };
 		C5BE0C35509F4E444EFCB576 /* Pods-FirebaseFacebookAuthUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseFacebookAuthUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseFacebookAuthUI/Pods-FirebaseFacebookAuthUI.release.xcconfig"; sourceTree = "<group>"; };
 		CACC40A530AF1B522B4F4B1E /* Pods_Google.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Google.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD31767337AEB98AA9AFBA9D /* Pods-FirebaseDatabaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseDatabaseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseDatabaseUITests/Pods-FirebaseDatabaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1648,6 +1650,7 @@
 				8DA941511D678F5400CD3685 /* FUIAuth.m */,
 				8DA941521D678F5400CD3685 /* FUIAuthBaseViewController.h */,
 				8DA941531D678F5400CD3685 /* FUIAuthBaseViewController.m */,
+				C3EB909C1EE0AB98006E08BB /* FUIAuthBaseViewController_Internal.h */,
 				8DA941541D678F5400CD3685 /* FUIAuthErrors.h */,
 				8DA941551D678F5400CD3685 /* FUIAuthErrors.m */,
 				8DA941561D678F5400CD3685 /* FUIAuthErrorUtils.h */,
@@ -2090,6 +2093,7 @@
 				C3CA199A1E67E605002AB4CC /* FUIAccountSettingsOperation_Internal.h in Headers */,
 				8D82147C1D67981C0069A614 /* FirebaseAuthUI.h in Headers */,
 				8DA9417F1D678F5400CD3685 /* FUIAuthSignInButton.h in Headers */,
+				C3EB909D1EE0AB9C006E08BB /* FUIAuthBaseViewController_Internal.h in Headers */,
 				8DA941851D678F5400CD3685 /* FUIAuthTableViewCell.h in Headers */,
 				C3CA199B1E67E605002AB4CC /* FUIAccountSettingsOperation.h in Headers */,
 				8DA941811D678F5400CD3685 /* FUIAuthStrings.h in Headers */,

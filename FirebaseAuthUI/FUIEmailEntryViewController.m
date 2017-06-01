@@ -17,6 +17,7 @@
 #import "FUIEmailEntryViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthProvider.h"
 #import "FUIAuthStrings.h"
 #import "FUIAuthTableViewCell.h"
@@ -58,6 +59,11 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       @brief The @c UITextField that user enters email address into.
    */
   UITextField *_emailField;
+  
+  /** @var _tableView
+      @brief The @c UITableView used to store all UI elements.
+   */
+  __weak IBOutlet UITableView *_tableView;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
@@ -88,6 +94,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                            action:@selector(next)];
   nextButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = nextButtonItem;
+
+  [self enableDynamicCellHeightForTableView:_tableView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -202,11 +210,11 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   cell.textField.delegate = self;
   cell.accessibilityIdentifier = kEmailCellAccessibilityID;
   _emailField = cell.textField;
-  _emailField.secureTextEntry = NO;
-  _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
-  _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-  _emailField.returnKeyType = UIReturnKeyNext;
-  _emailField.keyboardType = UIKeyboardTypeEmailAddress;
+  cell.textField.secureTextEntry = NO;
+  cell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+  cell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+  cell.textField.returnKeyType = UIReturnKeyNext;
+  cell.textField.keyboardType = UIKeyboardTypeEmailAddress;
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
            forControlEvents:UIControlEventEditingChanged];

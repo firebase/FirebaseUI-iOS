@@ -17,6 +17,7 @@
 #import "FUIStaticContentTableViewController.h"
 
 #import "FUIAuth.h"
+#import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -102,6 +103,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   } else {
     [_footerButton setTitle:_footerText forState:UIControlStateNormal];
   }
+
+  [self enableDynamicCellHeightForTableView:_tableView];
 }
 
 - (void)viewDidLayoutSubviews {

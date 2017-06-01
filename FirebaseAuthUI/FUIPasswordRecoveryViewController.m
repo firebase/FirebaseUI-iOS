@@ -17,6 +17,7 @@
 #import "FUIPasswordRecoveryViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthStrings.h"
 #import "FUIAuthTableViewCell.h"
 #import "FUIAuthUtils.h"
@@ -50,6 +51,11 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
       @brief The @c UITextField that user enters email address into.
    */
   UITextField *_emailField;
+  
+  /** @var _tableView
+      @brief The @c UITableView used to store all UI elements.
+   */
+  __weak IBOutlet UITableView *_tableView;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
@@ -83,6 +89,8 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
                                            target:self
                                            action:@selector(send)];
   self.navigationItem.rightBarButtonItem = sendButtonItem;
+
+  [self enableDynamicCellHeightForTableView:_tableView];
 }
 
 - (void)viewDidLayoutSubviews {

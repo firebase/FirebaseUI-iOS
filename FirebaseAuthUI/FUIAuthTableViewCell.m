@@ -18,4 +18,9 @@
 
 @implementation FUIAuthTableViewCell
 
+- (void)setLabel:(UILabel *)label {
+  _label = label;
+  [self layoutIfNeeded];
+}
+
 @end

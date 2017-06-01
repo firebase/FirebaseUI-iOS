@@ -65,8 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
   }
 
   static NSString *identifier = @"fui-country-cell";
-  CGFloat textLabelTag = 1;
-  CGFloat detailTextLabelTag = 2;
+  NSInteger textLabelTag = 1;
+  NSInteger detailTextLabelTag = 2;
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
   UILabel *detailTextLabel;
   UILabel *textLabel;
