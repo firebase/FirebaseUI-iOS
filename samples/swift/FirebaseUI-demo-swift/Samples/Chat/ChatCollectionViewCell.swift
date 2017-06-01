@@ -72,7 +72,7 @@ class ChatCollectionViewCell: UICollectionViewCell {
   
   /// Sets the cell's contents and lays out the cell according
   /// to the contents set.
-  func populateCellWithChat(_ chat: Chat, user: FIRUser?, maxWidth: CGFloat) {
+  func populateCellWithChat(_ chat: Chat, user: User?, maxWidth: CGFloat) {
     self.textLabel.text = chat.text
     
     let leftRightPadding: CGFloat = 24

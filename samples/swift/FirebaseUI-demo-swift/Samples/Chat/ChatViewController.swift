@@ -42,22 +42,22 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   /// Used to shift view contents up when the keyboard appears.
   @IBOutlet fileprivate var bottomConstraint: NSLayoutConstraint!
 
-  fileprivate let auth = FIRAuth.auth()
-  fileprivate let chatReference = FIRDatabase.database().reference().child("swift_demo-chat")
+  fileprivate let auth = Auth.auth()
+  fileprivate let chatReference = Database.database().reference().child("swift_demo-chat")
 
   fileprivate var collectionViewDataSource: FUICollectionViewDataSource!
 
-  fileprivate var user: FIRUser?
-  fileprivate var query: FIRDatabaseQuery?
+  fileprivate var user: User?
+  fileprivate var query: DatabaseQuery?
 
-  fileprivate var authStateListenerHandle: FIRAuthStateDidChangeListenerHandle?
+  fileprivate var authStateListenerHandle: AuthStateDidChangeListenerHandle?
 
   // MARK: - Interesting stuff
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
-    self.authStateListenerHandle = self.auth?.addStateDidChangeListener { (auth, user) in
+    self.authStateListenerHandle = self.auth.addStateDidChangeListener { (auth, user) in
       self.user = user
       self.query = self.chatReference.queryLimited(toLast: 50)
 
@@ -79,7 +79,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
       })
     }
 
-    self.auth?.signInAnonymously { (user, error) in
+    self.auth.signInAnonymously { (user, error) in
       if let error = error {
         // An error here means the user couldn't sign in. Correctly
         // handling it depends on the context as well as your app's
@@ -101,7 +101,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   }
 
   @objc fileprivate func didTapSend(_ sender: AnyObject) {
-    guard let user = self.auth?.currentUser else { return }
+    guard let user = self.auth.currentUser else { return }
     let uid = user.uid
     let name = "User " + uid[uid.characters.startIndex..<uid.characters.index(uid.characters.startIndex, offsetBy: 6)]
     let _text = self.textView.text as String?
@@ -136,7 +136,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     if let handle = self.authStateListenerHandle {
-      self.auth?.removeStateDidChangeListener(handle)
+      self.auth.removeStateDidChangeListener(handle)
     }
     NotificationCenter.default.removeObserver(self)
   }
@@ -211,7 +211,7 @@ struct Chat {
     self.name = name; self.uid = uid; self.text = text
   }
 
-  init?(snapshot: FIRDataSnapshot) {
+  init?(snapshot: DataSnapshot) {
     guard let dict = snapshot.value as? [String: String] else { return nil }
     guard let name = dict["name"] else { return nil }
     guard let uid  = dict["uid"]  else { return nil }

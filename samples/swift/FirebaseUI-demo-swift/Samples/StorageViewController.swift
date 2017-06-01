@@ -23,7 +23,7 @@ class StorageViewController: UIViewController {
   @IBOutlet fileprivate var imageView: UIImageView!
   @IBOutlet fileprivate var textField: UITextField!
 
-  fileprivate var storageRef = FIRStorage.storage().reference()
+  fileprivate var storageRef = Storage.storage().reference()
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
@@ -47,7 +47,7 @@ class StorageViewController: UIViewController {
     guard let text = self.textField.text else { return }
     guard let url = URL(string: text) else { return }
 
-    self.storageRef = FIRStorage.storage().reference(withPath: url.path)
+    self.storageRef = Storage.storage().reference(withPath: url.path)
 
     self.imageView.sd_setImage(with: self.storageRef,
       placeholderImage: nil) { (image, error, cacheType, storageRef) in

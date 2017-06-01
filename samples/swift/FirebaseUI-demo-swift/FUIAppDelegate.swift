@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Successfully running this sample requires an app in Firebase and an
     // accompanying valid GoogleService-Info.plist file.
-    FIRApp.configure()
+    FirebaseApp.configure()
     Fabric.with([Twitter.self])
     return true
   }
