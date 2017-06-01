@@ -65,7 +65,7 @@ import FirebaseAuthUI
 
 /* ... */
 
-FIRApp.configure()
+FirebaseApp.configure()
 let authUI = FUIAuth.defaultAuthUI()
 // You need to adopt a FUIAuthDelegate protocol to receive callback
 authUI?.delegate = self
@@ -271,7 +271,7 @@ func passwordRecoveryViewController(for authUI: FUIAuth, email: String) -> FUIPa
   return CustomPasswordRecoveryViewController(authUI: authUI, email: email)
 }
 
-func passwordVerificationViewController(for authUI: FUIAuth, email: String, newCredential: FIRAuthCredential) -> FUIPasswordVerificationViewController {
+func passwordVerificationViewController(for authUI: FUIAuth, email: String, newCredential: AuthCredential) -> FUIPasswordVerificationViewController {
   return CustomPasswordVerificationViewController(authUI: authUI, email: email, newCredential: newCredential)
 }
 ```

@@ -25,7 +25,7 @@ For a more in-depth explanation of each of the above, check the usage instructio
 ```swift
 // YourViewController.swift
 
-let firebaseRef = FIRDatabase.database().reference()
+let firebaseRef = Database.database().reference()
 var dataSource: FUITableViewDataSource!
 
 self.dataSource = self.tableView.bind(to: self.firebaseRef) { tableView, indexPath, snapshot in
@@ -160,7 +160,7 @@ FirebaseUI has several building blocks that developers should understand before 
 
 #### Swift
 ```swift
-let firebaseRef = FIRDatabase.database().reference()
+let firebaseRef = Database.database().reference()
 let array = FUIArray(query: firebaseRef)
 ```
 
