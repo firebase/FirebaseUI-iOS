@@ -49,9 +49,9 @@ class FUIAuthViewController: UITableViewController {
   // info, see the Auth README at ../../FirebaseAuthUI/README.md
   // and https://firebase.google.com/docs/auth/
 
-  fileprivate var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
+  fileprivate var authStateDidChangeHandle: AuthStateDidChangeListenerHandle?
 
-  fileprivate(set) var auth: FIRAuth? = FIRAuth.auth()
+  fileprivate(set) var auth: Auth? = Auth.auth()
   fileprivate(set) var authUI: FUIAuth? = FUIAuth.defaultAuthUI()
   fileprivate(set) var customAuthUIDelegate: FUIAuthDelegate = FUICustomAuthDelegate()
 
@@ -138,7 +138,7 @@ class FUIAuthViewController: UITableViewController {
   }
 
   // Boilerplate
-  func updateUI(auth: FIRAuth, user: FIRUser?) {
+  func updateUI(auth: Auth, user: User?) {
     if let user = self.auth?.currentUser {
       self.cellSignedIn.textLabel?.text = "Signed in"
       self.cellName.textLabel?.text = user.displayName ?? "(null)"

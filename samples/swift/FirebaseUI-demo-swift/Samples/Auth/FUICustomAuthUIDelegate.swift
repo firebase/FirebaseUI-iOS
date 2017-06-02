@@ -20,7 +20,7 @@ import FirebaseAuth
 
 class FUICustomAuthDelegate: NSObject, FUIAuthDelegate {
 
-  func authUI(_ authUI: FUIAuth, didSignInWith user: FIRUser?, error: Error?) {
+  func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
     guard let authError = error else { return }
 
     let errorCode = UInt((authError as NSError).code)
@@ -55,7 +55,7 @@ class FUICustomAuthDelegate: NSObject, FUIAuthDelegate {
     return FUICustomPasswordSignUpViewController(authUI: authUI, email: email)
   }
 
-  func passwordVerificationViewController(forAuthUI authUI: FUIAuth, email: String, newCredential: FIRAuthCredential) -> FUIPasswordVerificationViewController {
+  func passwordVerificationViewController(forAuthUI authUI: FUIAuth, email: String, newCredential: AuthCredential) -> FUIPasswordVerificationViewController {
     return FUICustomPasswordVerificationViewController(authUI: authUI, email: email, newCredential: newCredential)
   }
 }
