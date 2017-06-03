@@ -1,218 +1,218 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "Welcome";
+"AuthPickerTitle" = "Välkommen";
 
-/* Sign in with email button label. */
-"SignInWithEmail" = "Sign in with email";
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Logga in med e-post";
 
-/* Title for email entry screen, email text field placeholder. */
-"EnterYourEmail" = "Enter your email";
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Ange din e-postadress";
 
-/* Error message displayed when user enters an invalid email address. */
-"InvalidEmailError" = "That email address isn't correct.";
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "E-postadressen är ogiltig.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "This type of account isn't supported by this app";
+"CannotAuthenticateError" = "Appen stöder inte den här typen av konto";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "You already have an account";
+"ExistingAccountTitle" = "Du har redan ett konto";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
+"ProviderUsedPreviouslyMessage" = "Du har redan använt %@. Logga in med %@ om du vill fortsätta.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "Sign in";
+"SignInTitle" = "Logga in";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "Enter your password";
+"EnterYourPassword" = "Ange ditt lösenord";
 
-/* Error message displayed when user enters an empty passwrd. */
-"InvalidPasswordError" = "Password cannot be empty.";
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Du måste ange lösenord.";
 
-/* Error message displayed when the email and password don't match. */
-"WrongPasswordError" = "The email and password you entered don't match.";
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "E-postadressen och lösenordet matchar inte.";
 
-/* Error message displayed when there's no account matching the email address. */
-"UserNotFoundError" = "That email address doesn’t match an existing account.";
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "E-postadressen matchar inget befintligt konto.";
 
-/* Error message displayed when the account is disabled. */
-"AccountDisabledError" = "That email address is for an account that has been disabled.";
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "E-postadressen tillhör ett inaktiverat konto.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
+"SignInTooManyTimesError" = "Du har angett fel lösenord för många gånger. Försök igen om några minuter.";
 
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "Can't find provider for %@.";
+"CantFindProvider" = "Det gick inte att hitta någon leverantör för %@.";
 
-/* Error message displayed when after re-authorization current user's email and re-authorizaed user's email doen't match. */
-"EmailsDontMatch" = "Emails don't match";
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "E-postadresserna stämmer inte överens";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Recover password";
+"PasswordRecoveryTitle" = "Återställa lösenord";
 
-/* Explanation on how the password of an account can be recovered. */
-"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Få ett e-postmeddelande med anvisningar för hur du återställer lösenordet.";
 
-/* Title of a message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentTitle" = "Check your email";
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Kolla dina e-postmeddelanden";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
+"PasswordRecoveryEmailSentMessage" = "Följ anvisningarna som har skickats till %@ för att återställa ditt lösenord.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Create account";
+"SignUpTitle" = "Skapa konto";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "First & last name";
+"FirstAndLastName" = "För- och efternamn";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "Choose password";
+"ChoosePassword" = "Välj lösenord";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
+"TermsOfServiceNotice" = "Genom att klicka på %@ godkänner du %@.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "Terms of Service";
+"TermsOfService" = "användarvillkoren";
 
-/* Error message displayed when the email address is already in use. */
-"EmailAlreadyInUseError" = "The email address is already in use by another account.";
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "E-postadressen används redan av ett annat konto.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
+"WeakPasswordError" = "Starka lösenord består av minst 6 tecken och en blandning av bokstäver och siffror.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
+"SignUpTooManyTimesError" = "Det kommer för många kontobegäranden från din IP-adress. Försök igen om några minuter.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
+"PasswordVerificationMessage" = "Du har redan loggat in med %@. Ange lösenordet för det kontot.";
 
 /* OK button title. */
 "OK" = "OK";
 
 /* Cancel button title. */
-"Cancel" = "Cancel";
+"Cancel" = "Avbryt";
 
 /* Back button title. */
-"Back" = "Back";
+"Back" = "Föregående";
 
 /* Next button title. */
-"Next" = "Next";
+"Next" = "Nästa";
 
 /* Save button title. */
-"Save" = "Save";
+"Save" = "Spara";
 
 /* Save button title. */
-"Send" = "Send";
+"Send" = "Skicka";
 
-/* Label next to a email text field. */
-"Email" = "Email";
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "E-post";
 
 /* Label next to a password text field. */
-"Password" = "Password";
+"Password" = "Lösenord";
 
 /* Label next to a name text field. */
-"Name" = "Name";
+"Name" = "Namn";
 
 /* Alert title Error. */
-"Error" = "Error";
+"Error" = "Fel";
 
 /* Alert button title Close. */
-"Close" = "Close";
+"Close" = "Stäng";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "Profile";
+"AS_SectionProfile" = "Profil";
 
-/* Account Settings section title Secrity. */
-"AS_SectionSecurity" = "Security";
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Säkerhet";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "Linked Accounts";
+"AS_SectionLinkedAccounts" = "Länkade konton";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "Name";
+"AS_Name" = "Namn";
 
-/* Account Settings cell title Email. */
-"AS_Email" = "Email";
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "E-post";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "Add password";
+"AS_AddPassword" = "Lägg till lösenord";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "Change password";
+"AS_ChangePassword" = "Ändra lösenord";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "Sign Out";
+"AS_SignOut" = "Logga ut";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "Delete Account";
+"AS_DeleteAccount" = "Radera konto";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Forgot password?";
+"ForgotPassword" = "Har du glömt lösenordet?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Verify it's you";
+"VerifyItsYou" = "Verifiera dig";
 
 /* Alert message title shown to confirm account deletion action. */
 "DeleteAccountConfirmationTitle" = "Delete Account?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
+"DeleteAccountBody" = "All data som är kopplad till ditt konto raderas permanent. Du måste logga in igen för att slutföra åtgärden.";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+"DeleteAccountConfirmationMessage" = "All data som är kopplad till ditt konto raderas permanent. Är du säker på att du vill radera kontot?";
 
 /* Text of Delete action button. */
-"Delete" = "Delete";
+"Delete" = "Radera";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "Delete account";
+"DeleteAccountControllerTitle" = "Radera konto";
 
-/* Alert nessage shown before account deletion. */
-"ActionCantBeUndone" = "This action can't be undone";
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Det går inte att ångra åtgärden";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Unlink";
+"UnlinkAction" = "Ta bort länk";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "Linked account";
+"UnlinkTitle" = "Länkat konto";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Unlink account?";
+"UnlinkConfirmationTitle" = "Ta bort länk till konto?";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
+"UnlinkConfirmationMessage" = "Du kommer inte längre att kunna logga in med kontot";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Unlink account";
+"UnlinkConfirmationActionTitle" = "Ta bort länk till konto";
 
-/* Alert action message shown before updating email action. */
-"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Du måste logga in igen om du vill ändra vilken e-postadress som är länkad till ditt konto.";
 
-/* Alert action message shown before confimation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Du måste först ange ditt aktuella lösenord för att kunna ändra lösenordet.";
 
-/* Controller title shown when editing account email. */
-"EditEmailTitle" = "Edit email";
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "Redigera e-postadress";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "Edit name";
+"EditNameTitle" = "Redigera namn";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
+"AddPasswordAlertMessage" = "Du måste logga in igen för att kunna lägga till lösenord för kontot.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
+"EditPasswordAlertMessage" = "Du måste logga in igen för att kunna ändra lösenord för kontot.";
 
-/* Alert message shown when reathenticationg before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Du måste först ange ditt aktuella lösenord för att kunna ändra lösenordet.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "Add password";
+"AddPasswordTitle" = "Lägg till lösenord";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "Change password";
+"EditPasswordTitle" = "Ändra lösenord";
 
-/* Title of Password/Email provider */
-"ProviderTitlePassword" = "Email";
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "E-post";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google";
@@ -224,22 +224,22 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "Sign in with %@";
+"SignInWithProvider" = "Logga in med %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "Enter your name";
+"PlaceholderEnterName" = "Ange ditt namn";
 
-/* Placeholder of input cell when user changes name. */
-"PlaceholderEnterEmail" = "Enter your email";
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Ange din e-postadress";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "Enter your password";
+"PlaceholderEnterPassword" = "Ange ditt lösenord";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "New password";
+"PlaceholderNewPassword" = "Nytt lösenord";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "Choose password";
+"PlaceholderChosePassword" = "Välj lösenord";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "Trouble signing in?";
+"ForgotPasswordTitle" = "Har du problem med att logga in?";

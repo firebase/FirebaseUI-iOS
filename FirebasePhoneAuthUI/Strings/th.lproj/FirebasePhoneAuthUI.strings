@@ -19,7 +19,7 @@
 /* Alert message displayed when user submits empty phone number. */
 "EmptyPhoneNumber" = "ต้องระบุหมายเลขโทรศัพท์";
 
-/* Label next to the left of phone number entry field. */
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
 "PhoneNumber" = "หมายเลข";
 
 /* Placeholder shown for phone number input field. */
@@ -69,3 +69,10 @@
 
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
 "MessageExpired" = "ไม่สามารถใช้รหัสนี้ได้อีกต่อไป";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
+"TermsSMS" = "เมื่อคุณแตะ %@ ระบบจะส่ง SMS ให้คุณ อาจมีค่าบริการรับส่งข้อความและค่าบริการอินเทอร์เน็ต";
+
+/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
+"TermsAccountCreation" = "การแตะ %@ แสดงว่าคุณยอมรับ[ข้อกำหนดในการให้บริการ]";
+

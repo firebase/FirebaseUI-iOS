@@ -19,7 +19,7 @@
 /* Alert message displayed when user submits empty phone number. */
 "EmptyPhoneNumber" = "전화번호는 비워둘 수 없습니다.";
 
-/* Label next to the left of phone number entry field. */
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
 "PhoneNumber" = "번호";
 
 /* Placeholder shown for phone number input field. */
@@ -69,3 +69,10 @@
 
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
 "MessageExpired" = "더 이상 유효하지 않은 코드입니다.";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
+"TermsSMS" = "%@을(를) 탭하면 SMS가 발송될 수 있습니다. 메시지 및 데이터 요금이 부과될 수 있습니다.";
+
+/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
+"TermsAccountCreation" = "%@을(를) 탭하면 [서비스 약관]에 동의하는 것으로 간주됩니다.";
+

@@ -19,7 +19,7 @@
 /* Alert message displayed when user submits empty phone number. */
 "EmptyPhoneNumber" = "Phone number can't be empty";
 
-/* Label next to the left of phone number entry field. */
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
 "PhoneNumber" = "Number";
 
 /* Placeholder shown for phone number input field. */

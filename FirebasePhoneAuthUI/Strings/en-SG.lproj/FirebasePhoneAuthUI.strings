@@ -19,7 +19,7 @@
 /* Alert message displayed when user submits empty phone number. */
 "EmptyPhoneNumber" = "Phone number can't be empty";
 
-/* Label next to the left of phone number entry field. */
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
 "PhoneNumber" = "Number";
 
 /* Placeholder shown for phone number input field. */
@@ -29,7 +29,7 @@
 "Country" = "Country";
 
 /* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
-"EnterCodeDescription" = "Enter the %@-digit code we sent to";
+"EnterCodeDescription" = "Enter the %@-digit code that we sent to";
 
 /* The title of button with resend verification code functionality. */
 "ResendCode" = "Resend code";

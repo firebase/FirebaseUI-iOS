@@ -1,218 +1,218 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "Welcome";
+"AuthPickerTitle" = "Vítáme vás";
 
-/* Sign in with email button label. */
-"SignInWithEmail" = "Sign in with email";
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Přihlásit se pomocí e-mailu";
 
-/* Title for email entry screen, email text field placeholder. */
-"EnterYourEmail" = "Enter your email";
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Zadejte e-mail";
 
-/* Error message displayed when user enters an invalid email address. */
-"InvalidEmailError" = "That email address isn't correct.";
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "E-mailová adresa není správná.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "This type of account isn't supported by this app";
+"CannotAuthenticateError" = "Tento typ účtu aplikace nepodporuje.";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "You already have an account";
+"ExistingAccountTitle" = "Již máte účet.";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
+"ProviderUsedPreviouslyMessage" = "Již jste použili službu %@. Chcete-li pokračovat, přihlaste se prostřednictvím služby %@.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "Sign in";
+"SignInTitle" = "Přihlásit se";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "Enter your password";
+"EnterYourPassword" = "Zadejte své heslo";
 
-/* Error message displayed when user enters an empty passwrd. */
-"InvalidPasswordError" = "Password cannot be empty.";
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Pole hesla nesmí být prázdné.";
 
-/* Error message displayed when the email and password don't match. */
-"WrongPasswordError" = "The email and password you entered don't match.";
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Zadaný e-mail a heslo se neshodují.";
 
-/* Error message displayed when there's no account matching the email address. */
-"UserNotFoundError" = "That email address doesn’t match an existing account.";
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "E-mailová adresa neodpovídá žádnému stávajícímu účtu.";
 
-/* Error message displayed when the account is disabled. */
-"AccountDisabledError" = "That email address is for an account that has been disabled.";
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "E-mailová adresa patří k účtu, který byl zablokován.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
+"SignInTooManyTimesError" = "Provedli jste příliš mnoho neplatných pokusů o zadání hesla. Opakujte akci za chvíli.";
 
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "Can't find provider for %@.";
+"CantFindProvider" = "Nepodařilo se nalézt poskytovatele pro službu %@.";
 
-/* Error message displayed when after re-authorization current user's email and re-authorizaed user's email doen't match. */
-"EmailsDontMatch" = "Emails don't match";
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "E-mailové adresy se neshodují";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Recover password";
+"PasswordRecoveryTitle" = "Obnovit heslo";
 
-/* Explanation on how the password of an account can be recovered. */
-"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Na tento e-mail vám zašleme pokyny, jak heslo obnovit.";
 
-/* Title of a message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentTitle" = "Check your email";
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Zkontrolujte svůj e-mail";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
+"PasswordRecoveryEmailSentMessage" = "Postupujte podle pokynů odeslaných na adresu %@ a obnovte heslo.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Create account";
+"SignUpTitle" = "Vytvořit účet";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "First & last name";
+"FirstAndLastName" = "Jméno a příjmení";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "Choose password";
+"ChoosePassword" = "Heslo";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
+"TermsOfServiceNotice" = "Klepnutím na tlačítko %@ vyjadřujete souhlas s dokumentem %@.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "Terms of Service";
+"TermsOfService" = "Smluvní podmínky";
 
-/* Error message displayed when the email address is already in use. */
-"EmailAlreadyInUseError" = "The email address is already in use by another account.";
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Tuto e-mailovou adresu již využívá jiný účet.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
+"WeakPasswordError" = "Silné heslo má alespoň šest znaků a skládá se z kombinace písmen a číslic.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
+"SignUpTooManyTimesError" = "Z vaší adresy IP přichází příliš mnoho požadavků na účet. Zkuste to znovu za několik minut.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
+"PasswordVerificationMessage" = "K přihlášení jste již použili adresu %@. Zadejte příslušné heslo k účtu.";
 
 /* OK button title. */
-"OK" = "OK";
+"OK" = "V pořádku";
 
 /* Cancel button title. */
-"Cancel" = "Cancel";
+"Cancel" = "Zrušit";
 
 /* Back button title. */
-"Back" = "Back";
+"Back" = "Zpět";
 
 /* Next button title. */
-"Next" = "Next";
+"Next" = "Další";
 
 /* Save button title. */
-"Save" = "Save";
+"Save" = "Uložit";
 
 /* Save button title. */
-"Send" = "Send";
+"Send" = "Odeslat";
 
-/* Label next to a email text field. */
-"Email" = "Email";
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "E-mail";
 
 /* Label next to a password text field. */
-"Password" = "Password";
+"Password" = "Heslo";
 
 /* Label next to a name text field. */
-"Name" = "Name";
+"Name" = "Jméno";
 
 /* Alert title Error. */
-"Error" = "Error";
+"Error" = "Chyba";
 
 /* Alert button title Close. */
-"Close" = "Close";
+"Close" = "Zavřít";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "Profile";
+"AS_SectionProfile" = "Profil";
 
-/* Account Settings section title Secrity. */
-"AS_SectionSecurity" = "Security";
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Zabezpečení";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "Linked Accounts";
+"AS_SectionLinkedAccounts" = "Propojené účty";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "Name";
+"AS_Name" = "Jméno";
 
-/* Account Settings cell title Email. */
-"AS_Email" = "Email";
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "E-mail";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "Add password";
+"AS_AddPassword" = "Přidat heslo";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "Change password";
+"AS_ChangePassword" = "Změnit heslo";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "Sign Out";
+"AS_SignOut" = "Odhlásit se";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "Delete Account";
+"AS_DeleteAccount" = "Smazat účet";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Forgot password?";
+"ForgotPassword" = "Zapomněli jste heslo?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Verify it's you";
+"VerifyItsYou" = "Ověřte svou identitu";
 
 /* Alert message title shown to confirm account deletion action. */
 "DeleteAccountConfirmationTitle" = "Delete Account?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
+"DeleteAccountBody" = "Dojde k odstranění všech údajů souvisejících s vaším účtem. Tuto akci nebude možné vrátit zpět. Pokud ji chcete skutečně provést, musíte se znovu přihlásit.";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+"DeleteAccountConfirmationMessage" = "Dojde k odstranění všech údajů souvisejících s vaším účtem. Tuto akci nebude možné vrátit zpět. Opravdu chcete účet smazat?";
 
 /* Text of Delete action button. */
-"Delete" = "Delete";
+"Delete" = "Smazat";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "Delete account";
+"DeleteAccountControllerTitle" = "Smazat účet";
 
-/* Alert nessage shown before account deletion. */
-"ActionCantBeUndone" = "This action can't be undone";
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Tuto akci nelze vrátit zpět.";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Unlink";
+"UnlinkAction" = "Odpojit";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "Linked account";
+"UnlinkTitle" = "Propojený účet";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Unlink account?";
+"UnlinkConfirmationTitle" = "Odpojit účet?";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
+"UnlinkConfirmationMessage" = "Prostřednictvím tohoto účtu už se nebudete moci přihlásit.";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Unlink account";
+"UnlinkConfirmationActionTitle" = "Odpojit účet";
 
-/* Alert action message shown before updating email action. */
-"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Chcete-li změnit e-mailovou adresu přidruženou k vašemu účtu, musíte se znovu přihlásit.";
 
-/* Alert action message shown before confimation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Chcete-li změnit heslo, musíte nejprve zadat aktuální heslo.";
 
-/* Controller title shown when editing account email. */
-"EditEmailTitle" = "Edit email";
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "Změnit e-mail";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "Edit name";
+"EditNameTitle" = "Změnit jméno";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
+"AddPasswordAlertMessage" = "Chcete-li do účtu přidat heslo, musíte se znovu přihlásit.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
+"EditPasswordAlertMessage" = "Chcete-li změnit heslo k účtu, musíte se znovu přihlásit.";
 
-/* Alert message shown when reathenticationg before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Chcete-li změnit heslo, musíte nejprve zadat aktuální heslo.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "Add password";
+"AddPasswordTitle" = "Přidat heslo";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "Change password";
+"EditPasswordTitle" = "Změnit heslo";
 
-/* Title of Password/Email provider */
-"ProviderTitlePassword" = "Email";
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "E-mail";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google";
@@ -224,22 +224,22 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "Sign in with %@";
+"SignInWithProvider" = "Přihlásit se přes %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "Enter your name";
+"PlaceholderEnterName" = "Zadejte své jméno";
 
-/* Placeholder of input cell when user changes name. */
-"PlaceholderEnterEmail" = "Enter your email";
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Zadejte e-mail";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "Enter your password";
+"PlaceholderEnterPassword" = "Zadejte své heslo";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "New password";
+"PlaceholderNewPassword" = "Nové heslo";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "Choose password";
+"PlaceholderChosePassword" = "Zvolte heslo.";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "Trouble signing in?";
+"ForgotPasswordTitle" = "Máte potíže s přihlášením?";

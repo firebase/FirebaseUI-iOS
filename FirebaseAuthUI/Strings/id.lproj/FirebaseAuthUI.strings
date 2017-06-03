@@ -1,217 +1,217 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "Welcome";
+"AuthPickerTitle" = "Selamat datang";
 
-/* Sign in with email button label. */
-"SignInWithEmail" = "Sign in with email";
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Login dengan email";
 
-/* Title for email entry screen, email text field placeholder. */
-"EnterYourEmail" = "Enter your email";
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Masukkan email Anda";
 
-/* Error message displayed when user enters an invalid email address. */
-"InvalidEmailError" = "That email address isn't correct.";
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Alamat email yang dimasukkan salah.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "This type of account isn't supported by this app";
+"CannotAuthenticateError" = "Jenis akun ini tidak didukung oleh aplikasi ini";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "You already have an account";
+"ExistingAccountTitle" = "Anda sudah memiliki akun";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
+"ProviderUsedPreviouslyMessage" = "Anda telah menggunakan %@. Login dengan %@ untuk melanjutkan.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "Sign in";
+"SignInTitle" = "Login";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "Enter your password";
+"EnterYourPassword" = "Masukkan sandi";
 
-/* Error message displayed when user enters an empty passwrd. */
-"InvalidPasswordError" = "Password cannot be empty.";
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Sandi tidak boleh kosong.";
 
-/* Error message displayed when the email and password don't match. */
-"WrongPasswordError" = "The email and password you entered don't match.";
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Email dan sandi yang Anda masukkan tidak cocok.";
 
-/* Error message displayed when there's no account matching the email address. */
-"UserNotFoundError" = "That email address doesn’t match an existing account.";
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Alamat email tidak cocok dengan akun yang ada.";
 
-/* Error message displayed when the account is disabled. */
-"AccountDisabledError" = "That email address is for an account that has been disabled.";
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Akun yang sesuai dengan alamat email tersebut sudah dinonaktifkan.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
+"SignInTooManyTimesError" = "Anda sudah terlalu sering memasukkan sandi yang salah. Coba beberapa menit lagi.";
 
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "Can't find provider for %@.";
+"CantFindProvider" = "Tidak dapat menemukan provider untuk %@.";
 
-/* Error message displayed when after re-authorization current user's email and re-authorizaed user's email doen't match. */
-"EmailsDontMatch" = "Emails don't match";
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "Email tidak cocok";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Recover password";
+"PasswordRecoveryTitle" = "Pulihkan sandi";
 
-/* Explanation on how the password of an account can be recovered. */
-"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Dapatkan petunjuk yang dikirimkan ke email ini yang menjelaskan cara menyetel ulang sandi Anda.";
 
-/* Title of a message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentTitle" = "Check your email";
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Periksa email Anda";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
+"PasswordRecoveryEmailSentMessage" = "Ikuti petunjuk yang dikirim ke %@ untuk memulihkan sandi Anda.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Create account";
+"SignUpTitle" = "Buat akun";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "First & last name";
+"FirstAndLastName" = "Nama depan & nama belakang";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "Choose password";
+"ChoosePassword" = "Pilih sandi";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
+"TermsOfServiceNotice" = "Dengan menge-tap %@, Anda menunjukkan bahwa Anda menyetujui %@.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "Terms of Service";
+"TermsOfService" = "Persyaratan Layanan";
 
-/* Error message displayed when the email address is already in use. */
-"EmailAlreadyInUseError" = "The email address is already in use by another account.";
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Alamat email ini sudah digunakan oleh akun lain.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
+"WeakPasswordError" = "Sandi yang kuat harus memiliki minimal 6 karakter dan merupakan kombinasi huruf dan angka.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
+"SignUpTooManyTimesError" = "Terlalu banyak permintaan akun yang berasal dari alamat IP Anda. Coba beberapa menit lagi.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
+"PasswordVerificationMessage" = "Anda telah menggunakan %@ untuk login. Masukkan sandi untuk akun tersebut.";
 
 /* OK button title. */
-"OK" = "OK";
+"OK" = "Oke";
 
 /* Cancel button title. */
-"Cancel" = "Cancel";
+"Cancel" = "Batal";
 
 /* Back button title. */
-"Back" = "Back";
+"Back" = "Kembali";
 
 /* Next button title. */
-"Next" = "Next";
+"Next" = "Berikutnya";
 
 /* Save button title. */
-"Save" = "Save";
+"Save" = "Simpan";
 
 /* Save button title. */
-"Send" = "Send";
+"Send" = "Kirim";
 
-/* Label next to a email text field. */
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Email";
 
 /* Label next to a password text field. */
-"Password" = "Password";
+"Password" = "Sandi";
 
 /* Label next to a name text field. */
-"Name" = "Name";
+"Name" = "Nama";
 
 /* Alert title Error. */
 "Error" = "Error";
 
 /* Alert button title Close. */
-"Close" = "Close";
+"Close" = "Tutup";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "Profile";
+"AS_SectionProfile" = "Profil";
 
-/* Account Settings section title Secrity. */
-"AS_SectionSecurity" = "Security";
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Keamanan";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "Linked Accounts";
+"AS_SectionLinkedAccounts" = "Akun Tertaut";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "Name";
+"AS_Name" = "Nama";
 
-/* Account Settings cell title Email. */
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "AS_Email" = "Email";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "Add password";
+"AS_AddPassword" = "Tambahkan sandi";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "Change password";
+"AS_ChangePassword" = "Ubah sandi";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "Sign Out";
+"AS_SignOut" = "Logout";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "Delete Account";
+"AS_DeleteAccount" = "Hapus Akun";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Forgot password?";
+"ForgotPassword" = "Lupa sandi?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Verify it's you";
+"VerifyItsYou" = "Verifikasi bahwa itu Anda";
 
 /* Alert message title shown to confirm account deletion action. */
 "DeleteAccountConfirmationTitle" = "Delete Account?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
+"DeleteAccountBody" = "Tindakan ini akan menghapus semua data yang terkait dengan akun Anda, dan tidak dapat diurungkan. Anda harus login kembali untuk menyelesaikan tindakan ini";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+"DeleteAccountConfirmationMessage" = "Tindakan ini akan menghapus semua data yang terkait dengan akun Anda, dan tidak dapat diurungkan. Yakin ingin menghapus akun?";
 
 /* Text of Delete action button. */
-"Delete" = "Delete";
+"Delete" = "Hapus";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "Delete account";
+"DeleteAccountControllerTitle" = "Hapus akun";
 
-/* Alert nessage shown before account deletion. */
-"ActionCantBeUndone" = "This action can't be undone";
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Tindakan ini tidak dapat diurungkan";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Unlink";
+"UnlinkAction" = "Batalkan link";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "Linked account";
+"UnlinkTitle" = "Akun tertaut";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Unlink account?";
+"UnlinkConfirmationTitle" = "Batalkan link akun?";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
+"UnlinkConfirmationMessage" = "Anda tidak dapat lagi login menggunakan akun Anda";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Unlink account";
+"UnlinkConfirmationActionTitle" = "Batalkan link akun";
 
-/* Alert action message shown before updating email action. */
-"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Untuk mengubah alamat email yang terkait dengan akun, Anda harus login kembali.";
 
-/* Alert action message shown before confimation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Untuk mengubah sandi, Anda harus memasukkan sandi saat ini terlebih dahulu.";
 
-/* Controller title shown when editing account email. */
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EditEmailTitle" = "Edit email";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "Edit name";
+"EditNameTitle" = "Edit nama";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
+"AddPasswordAlertMessage" = "Untuk menambahkan sandi ke akun, Anda harus login kembali.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
+"EditPasswordAlertMessage" = "Untuk mengubah sandi akun, Anda harus login kembali.";
 
-/* Alert message shown when reathenticationg before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Untuk mengubah sandi, Anda harus memasukkan sandi saat ini terlebih dahulu.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "Add password";
+"AddPasswordTitle" = "Tambahkan sandi";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "Change password";
+"EditPasswordTitle" = "Ubah sandi";
 
-/* Title of Password/Email provider */
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "ProviderTitlePassword" = "Email";
 
 /* Title of Google provider */
@@ -224,22 +224,22 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "Sign in with %@";
+"SignInWithProvider" = "Login dengan %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "Enter your name";
+"PlaceholderEnterName" = "Masukkan nama Anda";
 
-/* Placeholder of input cell when user changes name. */
-"PlaceholderEnterEmail" = "Enter your email";
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Masukkan email Anda";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "Enter your password";
+"PlaceholderEnterPassword" = "Masukkan sandi";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "New password";
+"PlaceholderNewPassword" = "Sandi baru";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "Choose password";
+"PlaceholderChosePassword" = "Pilih sandi";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "Trouble signing in?";
+"ForgotPasswordTitle" = "Terjadi masalah saat login?";

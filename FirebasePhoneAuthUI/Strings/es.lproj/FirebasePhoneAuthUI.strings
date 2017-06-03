@@ -19,7 +19,7 @@
 /* Alert message displayed when user submits empty phone number. */
 "EmptyPhoneNumber" = "El número de teléfono no puede estar vacío";
 
-/* Label next to the left of phone number entry field. */
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
 "PhoneNumber" = "Número";
 
 /* Placeholder shown for phone number input field. */
@@ -69,3 +69,10 @@
 
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
 "MessageExpired" = "Este código ya no es válido";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
+"TermsSMS" = "Al tocar %@, podría enviarse un SMS. Es posible que se apliquen cargos de mensajería y uso de datos.";
+
+/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
+"TermsAccountCreation" = "Al tocar %@ indicas que aceptas las [Condiciones de Servicio].";
+

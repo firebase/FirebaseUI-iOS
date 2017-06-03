@@ -1,13 +1,13 @@
 /* Title for auth picker screen. */
 "AuthPickerTitle" = "ยินดีต้อนรับ";
 
-/* Sign in with email button label. */
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "SignInWithEmail" = "ลงชื่อเข้าใช้ด้วยอีเมล";
 
-/* Title for email entry screen, email text field placeholder. */
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EnterYourEmail" = "ป้อนอีเมลของคุณ";
 
-/* Error message displayed when user enters an invalid email address. */
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "InvalidEmailError" = "ที่อยู่อีเมลนี้ไม่ถูกต้อง";
 
 /* Error message displayed when the app cannot authenticate user's account. */
@@ -25,16 +25,16 @@
 /* Password text field placeholder. */
 "EnterYourPassword" = "ป้อนรหัสผ่านของคุณ";
 
-/* Error message displayed when user enters an empty passwrd. */
+/* Error message displayed when user enters an empty password. */
 "InvalidPasswordError" = "ต้องระบุรหัสผ่าน";
 
-/* Error message displayed when the email and password don't match. */
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "WrongPasswordError" = "อีเมลและรหัสผ่านที่ป้อนไม่ตรงกัน";
 
-/* Error message displayed when there's no account matching the email address. */
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "UserNotFoundError" = "ที่อยู่อีเมลไม่ตรงกับบัญชีที่มีอยู่";
 
-/* Error message displayed when the account is disabled. */
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "AccountDisabledError" = "ที่อยู่อีเมลนี้เป็นของบัญชีที่ปิดใช้ไปแล้ว";
 
 /* Error message displayed after user trying to sign in too many times. */
@@ -43,16 +43,16 @@
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
 "CantFindProvider" = "ไม่พบผู้ให้บริการสำหรับ %@";
 
-/* Error message displayed when after re-authorization current user's email and re-authorizaed user's email doen't match. */
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailsDontMatch" = "อีเมลไม่ตรงกัน";
 
 /* Title for password recovery screen. */
 "PasswordRecoveryTitle" = "กู้คืนรหัสผ่าน";
 
-/* Explanation on how the password of an account can be recovered. */
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "PasswordRecoveryMessage" = "ดูวิธีการที่ส่งไปยังอีเมลนี้ซึ่งอธิบายเกี่ยวกับวิธีรีเซ็ตรหัสผ่านของคุณ";
 
-/* Title of a message displayed when the email for password recovery has been sent. */
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "PasswordRecoveryEmailSentTitle" = "ตรวจสอบอีเมลของคุณ";
 
 /* Message displayed when the email for password recovery has been sent. */
@@ -73,7 +73,7 @@
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "ข้อกำหนดในการให้บริการ";
 
-/* Error message displayed when the email address is already in use. */
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "มีบัญชีอื่นใช้งานที่อยู่อีเมลนี้อยู่แล้ว";
 
 /* Error message displayed when the password is too weak. */
@@ -103,7 +103,7 @@
 /* Save button title. */
 "Send" = "ส่ง";
 
-/* Label next to a email text field. */
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "อีเมล";
 
 /* Label next to a password text field. */
@@ -121,7 +121,7 @@
 /* Account Settings section title Profile. */
 "AS_SectionProfile" = "โปรไฟล์";
 
-/* Account Settings section title Secrity. */
+/* Account Settings section title Security. */
 "AS_SectionSecurity" = "ความปลอดภัย";
 
 /* Account Settings section title Linked Accounts. */
@@ -130,7 +130,7 @@
 /* Account Settings cell title Name. */
 "AS_Name" = "ชื่อ";
 
-/* Account Settings cell title Email. */
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "AS_Email" = "อีเมล";
 
 /* Account Settings cell title Add Password. */
@@ -152,7 +152,7 @@
 "VerifyItsYou" = "โปรดยืนยันว่าเป็นคุณ";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfirmationTitle" = "ลบบัญชีไหม";
+"DeleteAccountConfirmationTitle" = "Delete Account?";
 
 /* Alert message body shown to confirm account deletion action. */
 "DeleteAccountBody" = "การทำเช่นนี้จะลบข้อมูลทั้งหมดที่เชื่อมโยงกับบัญชีของคุณและไม่สามารถเลิกทำได้ โปรดลงชื่อเข้าใช้อีกครั้งเพื่อดำเนินการให้เสร็จสมบูรณ์";
@@ -166,7 +166,7 @@
 /* Title of Controller shown before deleting account */
 "DeleteAccountControllerTitle" = "ลบบัญชี";
 
-/* Alert nessage shown before account deletion. */
+/* Alert message shown before account deletion. */
 "ActionCantBeUndone" = "การดำเนินการนี้ไม่สามารถเลิกทำได้";
 
 /* Button title for unlinking account action. */
@@ -184,13 +184,13 @@
 /* Alert action title shown before unlinking action. */
 "UnlinkConfirmationActionTitle" = "ยกเลิกการลิงก์บัญชี";
 
-/* Alert action message shown before updating email action. */
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "UpdateEmailAlertMessage" = "ในการเปลี่ยนที่อยู่อีเมลที่เชื่อมโยงกับบัญชีของคุณ คุณจะต้องลงชื่อเข้าใช้อีกครั้ง";
 
-/* Alert action message shown before confimation of updating email action. */
+/* Alert action message shown before confirmation of updating email action. */
 "UpdateEmailVerificationAlertMessage" = "คุณต้องป้อนรหัสผ่านปัจจุบันของคุณก่อนจึงจะเปลี่ยนรหัสผ่านได้";
 
-/* Controller title shown when editing account email. */
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EditEmailTitle" = "แก้ไขอีเมล";
 
 /* Controller title shown when editing account name. */
@@ -202,7 +202,7 @@
 /* Alert message shown when editing account password. */
 "EditPasswordAlertMessage" = "ในการเปลี่ยนรหัสผ่านบัญชี คุณจะต้องลงชื่อเข้าใช้อีกครั้ง";
 
-/* Alert message shown when reathenticationg before editing account password. */
+/* Alert message shown when re-authenticating before editing account password. */
 "ReauthenticateEditPasswordAlertMessage" = "คุณต้องป้อนรหัสผ่านปัจจุบันของคุณก่อนจึงจะเปลี่ยนรหัสผ่านได้";
 
 /* Controller title shown when adding password to account. */
@@ -211,7 +211,7 @@
 /* Controller title shown when editing password to account. */
 "EditPasswordTitle" = "เปลี่ยนรหัสผ่าน";
 
-/* Title of Password/Email provider */
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "ProviderTitlePassword" = "อีเมล";
 
 /* Title of Google provider */
@@ -229,7 +229,7 @@
 /* Placeholder of input cell when user changes name. */
 "PlaceholderEnterName" = "ป้อนชื่อของคุณ";
 
-/* Placeholder of input cell when user changes name. */
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "PlaceholderEnterEmail" = "ป้อนอีเมลของคุณ";
 
 /* Placeholder of secret input cell when user changes password. */
@@ -240,3 +240,6 @@
 
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "ตั้งรหัสผ่าน";
+
+/* The title of forgot password button. */
+"ForgotPasswordTitle" = "หากพบปัญหาในการลงชื่อเช้าใช้";

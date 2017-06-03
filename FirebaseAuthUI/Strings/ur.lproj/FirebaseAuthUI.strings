@@ -1,13 +1,13 @@
 /* Title for auth picker screen. */
 "AuthPickerTitle" = "Welcome";
 
-/* Sign in with email button label. */
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "SignInWithEmail" = "Sign in with email";
 
-/* Title for email entry screen, email text field placeholder. */
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EnterYourEmail" = "Enter your email";
 
-/* Error message displayed when user enters an invalid email address. */
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "InvalidEmailError" = "That email address isn't correct.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
@@ -25,16 +25,16 @@
 /* Password text field placeholder. */
 "EnterYourPassword" = "Enter your password";
 
-/* Error message displayed when user enters an empty passwrd. */
+/* Error message displayed when user enters an empty password. */
 "InvalidPasswordError" = "Password cannot be empty.";
 
-/* Error message displayed when the email and password don't match. */
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "WrongPasswordError" = "The email and password you entered don't match.";
 
-/* Error message displayed when there's no account matching the email address. */
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "UserNotFoundError" = "That email address doesn’t match an existing account.";
 
-/* Error message displayed when the account is disabled. */
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "AccountDisabledError" = "That email address is for an account that has been disabled.";
 
 /* Error message displayed after user trying to sign in too many times. */
@@ -43,16 +43,16 @@
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
 "CantFindProvider" = "Can't find provider for %@.";
 
-/* Error message displayed when after re-authorization current user's email and re-authorizaed user's email doen't match. */
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailsDontMatch" = "Emails don't match";
 
 /* Title for password recovery screen. */
 "PasswordRecoveryTitle" = "Recover password";
 
-/* Explanation on how the password of an account can be recovered. */
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
 
-/* Title of a message displayed when the email for password recovery has been sent. */
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "PasswordRecoveryEmailSentTitle" = "Check your email";
 
 /* Message displayed when the email for password recovery has been sent. */
@@ -73,7 +73,7 @@
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Terms of Service";
 
-/* Error message displayed when the email address is already in use. */
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "The email address is already in use by another account.";
 
 /* Error message displayed when the password is too weak. */
@@ -103,7 +103,7 @@
 /* Save button title. */
 "Send" = "Send";
 
-/* Label next to a email text field. */
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Email";
 
 /* Label next to a password text field. */
@@ -121,7 +121,7 @@
 /* Account Settings section title Profile. */
 "AS_SectionProfile" = "Profile";
 
-/* Account Settings section title Secrity. */
+/* Account Settings section title Security. */
 "AS_SectionSecurity" = "Security";
 
 /* Account Settings section title Linked Accounts. */
@@ -130,7 +130,7 @@
 /* Account Settings cell title Name. */
 "AS_Name" = "Name";
 
-/* Account Settings cell title Email. */
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "AS_Email" = "Email";
 
 /* Account Settings cell title Add Password. */
@@ -166,7 +166,7 @@
 /* Title of Controller shown before deleting account */
 "DeleteAccountControllerTitle" = "Delete account";
 
-/* Alert nessage shown before account deletion. */
+/* Alert message shown before account deletion. */
 "ActionCantBeUndone" = "This action can't be undone";
 
 /* Button title for unlinking account action. */
@@ -184,13 +184,13 @@
 /* Alert action title shown before unlinking action. */
 "UnlinkConfirmationActionTitle" = "Unlink account";
 
-/* Alert action message shown before updating email action. */
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
 
-/* Alert action message shown before confimation of updating email action. */
+/* Alert action message shown before confirmation of updating email action. */
 "UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
 
-/* Controller title shown when editing account email. */
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EditEmailTitle" = "Edit email";
 
 /* Controller title shown when editing account name. */
@@ -202,7 +202,7 @@
 /* Alert message shown when editing account password. */
 "EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
 
-/* Alert message shown when reathenticationg before editing account password. */
+/* Alert message shown when re-authenticating before editing account password. */
 "ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
 
 /* Controller title shown when adding password to account. */
@@ -211,7 +211,7 @@
 /* Controller title shown when editing password to account. */
 "EditPasswordTitle" = "Change password";
 
-/* Title of Password/Email provider */
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "ProviderTitlePassword" = "Email";
 
 /* Title of Google provider */
@@ -229,7 +229,7 @@
 /* Placeholder of input cell when user changes name. */
 "PlaceholderEnterName" = "Enter your name";
 
-/* Placeholder of input cell when user changes name. */
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "PlaceholderEnterEmail" = "Enter your email";
 
 /* Placeholder of secret input cell when user changes password. */
@@ -242,4 +242,4 @@
 "PlaceholderChosePassword" = "Choose password";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "Trouble signing in?";
+"ForgotPasswordTitle" = "سائن ان کرنے میں دشواری؟";

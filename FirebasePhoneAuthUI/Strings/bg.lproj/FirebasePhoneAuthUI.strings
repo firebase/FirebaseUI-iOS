@@ -1,78 +1,78 @@
 /* The text of the button used to sign-in with Phone. */
-"SignInWithPhone" = "Sign in with phone";
+"SignInWithPhone" = "Вход с телефон";
 
 /* The title of view controller where user enters phone number. */
-"EnterPhoneTitle" = "Enter phone number";
+"EnterPhoneTitle" = "Въвеждане на телефонен номер";
 
 /* The title of button on navigation controller which navigates to previous screen. */
-"Back" = "Back";
+"Back" = "Назад";
 
 /* The title of button on navigation controller which navigates to the next screen. */
-"Next" = "Next";
+"Next" = "Напред";
 
 /* The title of button which user taps on phone verification screen. */
-"Verify" = "Verify";
+"Verify" = "Потвърждаване";
 
 /* Alert message displayed when user submits empty verification code. */
-"EmptyVerificationCode" = "Verification code can't be empty";
+"EmptyVerificationCode" = "Трябва да посочите код за потвърждение";
 
 /* Alert message displayed when user submits empty phone number. */
-"EmptyPhoneNumber" = "Phone number can't be empty";
+"EmptyPhoneNumber" = "Трябва да посочите телефонен номер";
 
-/* Label next to the left of phone number entry field. */
-"PhoneNumber" = "Number";
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
+"PhoneNumber" = "Номер";
 
 /* Placeholder shown for phone number input field. */
-"EnterYourPhoneNumber" = "Phone number";
+"EnterYourPhoneNumber" = "Телефонен номер";
 
 /* Label next to the left of country selector control. */
-"Country" = "Country";
+"Country" = "Държава";
 
 /* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
-"EnterCodeDescription" = "Enter the %@-digit code we sent to";
+"EnterCodeDescription" = "Въведете %@-цифрения код, който изпратихме до";
 
 /* The title of button with resend verification code functionality. */
-"ResendCode" = "Resend code";
+"ResendCode" = "Повторно изпращане на кода";
 
 /* Text of the resend timer label shown on verification phone number screen. */
-"ResendCodeTimer" = "Resend code in %@";
+"ResendCodeTimer" = "Повторно изпращане на кода след %@";
 
 /* The title of view controller where user verifies phone number. . */
-"VerifyPhoneTitle" = "Verify phone number";
+"VerifyPhoneTitle" = "Потвърждаване на телефонния номер";
 
 /* The title of button displayed when user closes alert message. */
-"Done" = "Done";
+"Done" = "Готово";
 
 /* The title of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneTitle" = "Invalid phone number";
+"IncorrectPhoneTitle" = "Невалиден телефонен номер";
 
 /* The body message of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneMessage" = "Enter a valid phone number";
+"IncorrectPhoneMessage" = "Въведете валиден телефонен номер";
 
 /* The body message of alert shown when user tapped resend verification code button. */
-"ResendCodeResult" = "Code was sent to %@";
+"ResendCodeResult" = "Кодът бе изпратен до %@";
 
 /* The title of alert shown when user entered invalid verification code. */
-"IncorrectCodeTitle" = "Incorrect verification code";
+"IncorrectCodeTitle" = "Неправилен код за потвърждение";
 
 /* The body message of alert shown when user entered invalid verification code. */
-"IncorrectCodeMessage" = "Wrong code. Try again.";
+"IncorrectCodeMessage" = "Неправилен код. Опитайте отново.";
 
 /* The body message of alert shown when internal server error appeared. */
-"InternalErrorMessage" = "Something went wrong. Please try again.";
+"InternalErrorMessage" = "Нещо се обърка. Моля, опитайте отново.";
 
 /* The body message of alert shown when the user has tried to send too many SMS messages. */
-"TooManyCodesSent" = "This phone number has been used too many times";
+"TooManyCodesSent" = "Този телефонен номер е използван твърде много пъти";
 
 /* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
-"MessageQuotaExceeded" = "There was a problem verifying your phone number";
+"MessageQuotaExceeded" = "При потвърждаването на телефонния ви номер възникна проблем";
 
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
-"MessageExpired" = "This code is no longer valid";
+"MessageExpired" = "Този код вече не е валиден";
 
 /* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "By tapping %@, an SMS may be sent. Message & data rates may apply.";
+"TermsSMS" = "Докосвайки %@, може да получите SMS съобщение. То може да се таксува по тарифите за данни и SMS.";
 
 /* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "By tapping %@ you are indicating that you agree to the [Terms of Service].";
+"TermsAccountCreation" = "Докосвайки %@, приемате [Общите условия].";
 

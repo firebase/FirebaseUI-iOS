@@ -136,6 +136,7 @@
 		C375CB171D935D1F002EECD3 /* FUICustomAuthPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomAuthPickerViewController.xib; sourceTree = "<group>"; };
 		C375CB1A1D943D5F002EECD3 /* FUICustomAuthDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomAuthDelegate.h; sourceTree = "<group>"; };
 		C375CB1B1D943D5F002EECD3 /* FUICustomAuthDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomAuthDelegate.m; sourceTree = "<group>"; };
+		C383C4521EE2754F002A4204 /* es-PY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PY"; path = "es-PY.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C3A8B7BE1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomPasswordSignInViewController.h; sourceTree = "<group>"; };
 		C3A8B7BF1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomPasswordSignInViewController.m; sourceTree = "<group>"; };
 		C3A8B7C01DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordSignInViewController.xib; sourceTree = "<group>"; };
@@ -635,6 +636,7 @@
 				C3490EB21EDE266C00CD416B /* ur */,
 				C3490EB31EDE267500CD416B /* vi */,
 				C3490EB41EDE268500CD416B /* ro */,
+				C383C4521EE2754F002A4204 /* es-PY */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

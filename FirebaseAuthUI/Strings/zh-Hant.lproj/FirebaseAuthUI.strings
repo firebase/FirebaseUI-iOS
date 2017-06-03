@@ -1,13 +1,13 @@
 /* Title for auth picker screen. */
 "AuthPickerTitle" = "歡迎";
 
-/* Sign in with email button label. */
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "SignInWithEmail" = "使用電子郵件登入";
 
-/* Title for email entry screen, email text field placeholder. */
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EnterYourEmail" = "輸入您的電子郵件";
 
-/* Error message displayed when user enters an invalid email address. */
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "InvalidEmailError" = "電子郵件地址不正確。";
 
 /* Error message displayed when the app cannot authenticate user's account. */
@@ -25,16 +25,16 @@
 /* Password text field placeholder. */
 "EnterYourPassword" = "輸入您的密碼";
 
-/* Error message displayed when user enters an empty passwrd. */
+/* Error message displayed when user enters an empty password. */
 "InvalidPasswordError" = "密碼不能空白。";
 
-/* Error message displayed when the email and password don't match. */
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "WrongPasswordError" = "您輸入的電子郵件和密碼不相符。";
 
-/* Error message displayed when there's no account matching the email address. */
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "UserNotFoundError" = "這個電子郵件地址和現有帳戶不相符。";
 
-/* Error message displayed when the account is disabled. */
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "AccountDisabledError" = "這個電子郵件地址屬於已停用的帳戶。";
 
 /* Error message displayed after user trying to sign in too many times. */
@@ -43,16 +43,16 @@
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
 "CantFindProvider" = "找不到 %@ 的供應商。";
 
-/* Error message displayed when after re-authorization current user's email and re-authorizaed user's email doen't match. */
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailsDontMatch" = "電子郵件不相符";
 
 /* Title for password recovery screen. */
 "PasswordRecoveryTitle" = "重新取得密碼";
 
-/* Explanation on how the password of an account can be recovered. */
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "PasswordRecoveryMessage" = "這個電子郵件會收到重設密碼的指示。";
 
-/* Title of a message displayed when the email for password recovery has been sent. */
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "PasswordRecoveryEmailSentTitle" = "請查看您的電子郵件";
 
 /* Message displayed when the email for password recovery has been sent. */
@@ -73,7 +73,7 @@
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "服務條款";
 
-/* Error message displayed when the email address is already in use. */
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "另一個帳戶已使用這個電子郵件地址。";
 
 /* Error message displayed when the password is too weak. */
@@ -103,7 +103,7 @@
 /* Save button title. */
 "Send" = "傳送";
 
-/* Label next to a email text field. */
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "電子郵件";
 
 /* Label next to a password text field. */
@@ -121,7 +121,7 @@
 /* Account Settings section title Profile. */
 "AS_SectionProfile" = "個人資料";
 
-/* Account Settings section title Secrity. */
+/* Account Settings section title Security. */
 "AS_SectionSecurity" = "安全性";
 
 /* Account Settings section title Linked Accounts. */
@@ -130,7 +130,7 @@
 /* Account Settings cell title Name. */
 "AS_Name" = "名稱";
 
-/* Account Settings cell title Email. */
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "AS_Email" = "電子郵件";
 
 /* Account Settings cell title Add Password. */
@@ -152,7 +152,7 @@
 "VerifyItsYou" = "請驗證您的身分";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfirmationTitle" = "要刪除帳戶嗎？";
+"DeleteAccountConfirmationTitle" = "Delete Account?";
 
 /* Alert message body shown to confirm account deletion action. */
 "DeleteAccountBody" = "這項操作會清除與您的帳戶相關聯的所有資料，而且帳戶刪除後即無法復原。您需要再次登入才能完成這項操作";
@@ -166,7 +166,7 @@
 /* Title of Controller shown before deleting account */
 "DeleteAccountControllerTitle" = "刪除帳戶";
 
-/* Alert nessage shown before account deletion. */
+/* Alert message shown before account deletion. */
 "ActionCantBeUndone" = "這項操作無法復原";
 
 /* Button title for unlinking account action. */
@@ -184,13 +184,13 @@
 /* Alert action title shown before unlinking action. */
 "UnlinkConfirmationActionTitle" = "取消連結帳戶";
 
-/* Alert action message shown before updating email action. */
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "UpdateEmailAlertMessage" = "如要變更與您的帳戶相關聯的電子郵件地址，您需要重新登入。";
 
-/* Alert action message shown before confimation of updating email action. */
+/* Alert action message shown before confirmation of updating email action. */
 "UpdateEmailVerificationAlertMessage" = "如要變更密碼，請先輸入目前的密碼。";
 
-/* Controller title shown when editing account email. */
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EditEmailTitle" = "編輯電子郵件";
 
 /* Controller title shown when editing account name. */
@@ -202,7 +202,7 @@
 /* Alert message shown when editing account password. */
 "EditPasswordAlertMessage" = "如要變更帳戶密碼，您需要重新登入。";
 
-/* Alert message shown when reathenticationg before editing account password. */
+/* Alert message shown when re-authenticating before editing account password. */
 "ReauthenticateEditPasswordAlertMessage" = "如要變更密碼，請先輸入目前的密碼。";
 
 /* Controller title shown when adding password to account. */
@@ -211,7 +211,7 @@
 /* Controller title shown when editing password to account. */
 "EditPasswordTitle" = "變更密碼";
 
-/* Title of Password/Email provider */
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "ProviderTitlePassword" = "電子郵件";
 
 /* Title of Google provider */
@@ -229,7 +229,7 @@
 /* Placeholder of input cell when user changes name. */
 "PlaceholderEnterName" = "輸入您的名稱";
 
-/* Placeholder of input cell when user changes name. */
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "PlaceholderEnterEmail" = "輸入您的電子郵件";
 
 /* Placeholder of secret input cell when user changes password. */
@@ -240,3 +240,6 @@
 
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "選擇密碼";
+
+/* The title of forgot password button. */
+"ForgotPasswordTitle" = "無法登入嗎？";

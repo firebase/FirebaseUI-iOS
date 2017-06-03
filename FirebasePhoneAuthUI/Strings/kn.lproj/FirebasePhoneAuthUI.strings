@@ -19,7 +19,7 @@
 /* Alert message displayed when user submits empty phone number. */
 "EmptyPhoneNumber" = "Phone number can't be empty";
 
-/* Label next to the left of phone number entry field. */
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
 "PhoneNumber" = "Number";
 
 /* Placeholder shown for phone number input field. */
@@ -71,8 +71,8 @@
 "MessageExpired" = "This code is no longer valid";
 
 /* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "By tapping %@, an SMS may be sent. Message & data rates may apply.";
+"TermsSMS" = "%@ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡುವ ಮೂಲಕ, ಎಸ್‌ಎಂಎಸ್‌ ಅನ್ನು ಕಳುಹಿಸಬಹುದಾಗಿದೆ. ಸಂದೇಶ ಮತ್ತು ಡೇಟಾ ದರಗಳು ಅನ್ವಯಿಸಬಹುದು.";
 
 /* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "By tapping %@ you are indicating that you agree to the [Terms of Service].";
+"TermsAccountCreation" = "%@ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡುವ ಮೂಲಕ ನೀವು [ಸೇವಾ ನಿಯಮಗಳನ್ನು] ಗೆ ಒಪ್ಪುತ್ತೀರಿ ಎಂದು ನೀವು ಸೂಚಿಸುತ್ತಿದ್ದೀರಿ.";
 
