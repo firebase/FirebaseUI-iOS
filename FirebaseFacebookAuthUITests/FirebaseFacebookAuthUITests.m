@@ -16,8 +16,10 @@
 
 @import XCTest;
 #import "FUIFacebookAuthTest.h"
+#import "FUIAuthUtils.h"
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <FirebaseAuth/FirebaseAuth.h>
+#import <FirebaseCore/FirebaseCore.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <OCMock/OCMock.h>
 
@@ -29,6 +31,19 @@
 
 - (void)setUp {
   [super setUp];
+
+  id mockUtilsClass = OCMClassMock([FUIAuthUtils class]);
+  OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY])).
+      andReturn([NSBundle bundleForClass:[FUIFacebookAuthTest class]]);
+  
+  id authUIClass = OCMClassMock([FUIAuth class]);
+  OCMStub(ClassMethod([authUIClass authUIWithAuth:OCMOCK_ANY])).
+      andReturn(authUIClass);
+
+  id authClass = OCMClassMock([FIRAuth class]);
+  OCMStub(ClassMethod([authClass auth])).
+      andReturn(authClass);
+
   self.provider = [[FUIFacebookAuthTest alloc] init];
 }
 
@@ -154,16 +169,9 @@
 }
 
 - (void)testSignOut {
-
-  // used to make possible initialization of FUIFacebookAuth
-  id mockProviderClass = OCMClassMock([FUIFacebookAuth class]);
-  OCMExpect(ClassMethod([mockProviderClass frameworkBundle])).andReturn([NSBundle bundleForClass:[self class]]);
-
   id mockProvider = OCMPartialMock([[FUIFacebookAuth alloc] init]);
   id mockFacebookManager = OCMClassMock([FBSDKLoginManager class]);
 
-  // stub login manager
-  OCMExpect(ClassMethod([mockProvider frameworkBundle])).andReturn([NSBundle bundleForClass:[self class]]);
   OCMExpect([mockProvider createLoginManager]).andReturn(mockFacebookManager);
   [mockProvider configureProvider];
 

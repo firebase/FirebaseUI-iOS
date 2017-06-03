@@ -330,6 +330,10 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
 
 - (NSAttributedString *)accountCreationTOS {
 
+  if (![FUIAuth defaultAuthUI].TOSURL) {
+    return nil;
+  }
+
   NSAttributedString *currentAttributedString = _tosTextView.attributedText;
   NSDictionary *currentAttributes =
       [currentAttributedString attributesAtIndex:0

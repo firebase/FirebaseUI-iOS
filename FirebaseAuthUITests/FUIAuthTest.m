@@ -18,6 +18,8 @@
 @import FirebaseAnalytics;
 @import FirebaseAuth;
 @import FirebaseAuthUI;
+#import <OCMock/OCMock.h>
+#import "FUIAuthUtils.h"
 
 @interface FUILoginProvider : NSObject <FUIAuthProvider>
 @property (nonatomic, assign) BOOL canHandleURLs;
@@ -80,21 +82,16 @@
 
 @implementation FUIAuthTest
 
-+ (void)initialize {
-  // An app needs to be configured before any instances of
-  // FIRAuth or FUIAuth can be created.
-  
-  // Load plist from test file
-  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-  NSString *file = [bundle pathForResource:@"GoogleService-Info"
-                                    ofType:@"plist"];
-  
-  FIROptions *options = [[FIROptions alloc] initWithContentsOfFile:file];
-  [FIRApp configureWithOptions:options];
-}
-
 - (void)setUp {
   [super setUp];
+  id authClass = OCMClassMock([FIRAuth class]);
+  OCMStub(ClassMethod([authClass auth])).
+      andReturn(authClass);
+
+  id mockUtilsClass = OCMClassMock([FUIAuthUtils class]);
+  OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY])).
+      andReturn([NSBundle bundleForClass:[FUIAuth class]]);
+
   self.auth = [FIRAuth auth];
   self.authUI = [FUIAuth defaultAuthUI];
   self.delegate = [[FUIAuthUIDelegate alloc] init];

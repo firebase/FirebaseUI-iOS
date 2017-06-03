@@ -33,6 +33,7 @@ target 'FirebaseAuthUI' do
 
   target 'FirebaseAuthUITests' do
     inherit! :search_paths
+    pod 'OCMock'
   end
 end
 

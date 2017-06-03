@@ -19,7 +19,6 @@
 
 @interface FUIFacebookAuth (Testing)
 - (FBSDKLoginManager *)createLoginManager;
-+ (NSBundle *)frameworkBundle;
 - (void)configureProvider;
 @end
 

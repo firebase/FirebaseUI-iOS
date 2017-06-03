@@ -16,13 +16,14 @@
 
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>
+#import <FirebaseAuthUI/FUIAuthUtils.h>
+#import <FirebaseCore/FirebaseCore.h>
 #import <FirebaseGoogleAuthUI/FirebaseGoogleAuthUI.h>
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <OCMock/OCMock.h>
 @import XCTest;
 
 @interface FUIGoogleAuth (Testing)
-+ (NSBundle *)frameworkBundle;
 - (GIDSignIn *)configuredGoogleSignIn;
 @end
 
@@ -36,6 +37,18 @@
 - (void)setUp {
   [super setUp];
   self.mockProvider =  OCMPartialMock([[FUIGoogleAuth alloc] init]);
+
+  id mockUtilsClass = OCMClassMock([FUIAuthUtils class]);
+  OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY])).
+      andReturn([NSBundle bundleForClass:[FUIGoogleAuth class]]);
+  
+  id authUIClass = OCMClassMock([FUIAuth class]);
+  OCMStub(ClassMethod([authUIClass authUIWithAuth:OCMOCK_ANY])).
+      andReturn(authUIClass);
+
+  id authClass = OCMClassMock([FIRAuth class]);
+  OCMStub(ClassMethod([authClass auth])).
+      andReturn(authClass);
 }
 
 - (void)tearDown {
@@ -45,14 +58,9 @@
 
 - (void)testProviderValidity {
   FUIGoogleAuth *provider = [[FUIGoogleAuth alloc] init];
-  id mockProvider =  OCMPartialMock(provider);
 
   XCTAssertNotNil(provider);
-  OCMExpect([mockProvider frameworkBundle])
-    .andForwardToRealObject().andReturn([NSBundle bundleForClass:[FUIGoogleAuth class]]);
   XCTAssertNotNil(provider.icon);
-  OCMVerifyAll(mockProvider);
-
   XCTAssertNotNil(provider.signInLabel);
   XCTAssertNotNil(provider.buttonBackgroundColor);
   XCTAssertNotNil(provider.buttonTextColor);

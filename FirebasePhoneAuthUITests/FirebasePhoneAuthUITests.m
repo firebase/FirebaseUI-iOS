@@ -16,8 +16,10 @@
 
 #import <XCTest/XCTest.h>
 
+#import "FUIAuthUtils.h"
 #import <FirebasePhoneAuthUI/FirebasePhoneAuthUI.h>
 #import <FirebaseAuth/FirebaseAuth.h>
+#import <FirebaseCore/FirebaseCore.h>
 #import <OCMock/OCMock.h>
 #import "FUIAuthUtils.h"
 #import "FUIPhoneAuth_Internal.h"
@@ -30,9 +32,19 @@
 
 - (void)setUp {
   [super setUp];
-  id classMock = OCMClassMock([FUIAuthUtils class]);
-  OCMStub(ClassMethod([classMock frameworkBundle])).
+
+  id mockUtilsClass = OCMClassMock([FUIAuthUtils class]);
+  OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY])).
       andReturn([NSBundle bundleForClass:[FUIPhoneAuth class]]);
+  
+  id authUIClass = OCMClassMock([FUIAuth class]);
+  OCMStub(ClassMethod([authUIClass authUIWithAuth:OCMOCK_ANY])).
+      andReturn(authUIClass);
+
+  id authClass = OCMClassMock([FIRAuth class]);
+  OCMStub(ClassMethod([authClass auth])).
+      andReturn(authClass);
+
   self.provider = [[FUIPhoneAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
 }
 

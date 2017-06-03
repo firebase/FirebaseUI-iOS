@@ -1,13 +1,16 @@
-osx_image: xcode8.2
+osx_image: xcode8.3
 language: objective-c
 xcode_workspace: FirebaseUI.xcworkspace
 xcode_scheme: FirebaseUI
+cache:
+  - bundler
+  - cocoapods
 
 rvm: 2.3.1
 before_install:
-  - gem uninstall cocoapods -a
-  - gem install cocoapods -v 1.2.0
+  - open -a "simulator" --args -CurrentDeviceUDID 1FC0DC01-6B14-4A81-9F05-E337EEDC11B2
+  - bundle install
   - gem install xcpretty
-  - pod install --repo-update
+  - bundle exec pod install --repo-update
 
 script: ./test.sh

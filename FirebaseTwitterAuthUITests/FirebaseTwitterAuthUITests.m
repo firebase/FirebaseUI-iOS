@@ -18,6 +18,8 @@
 #import "FUITwitterAuth.h"
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>
+#import <FirebaseAuthUI/FUIAuthUtils.h>
+#import <FirebaseCore/FirebaseCore.h>
 #import <FirebaseTwitterAuthUI/FirebaseTwitterAuthUI.h>
 #import <OCMock/OCMock.h>
 #import <TwitterCore/TwitterCore.h>
@@ -36,6 +38,18 @@
 
 - (void)setUp {
   [super setUp];
+  id mockUtilsClass = OCMClassMock([FUIAuthUtils class]);
+  OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY])).
+      andReturn([NSBundle bundleForClass:[FUITwitterAuth class]]);
+
+  id authUIClass = OCMClassMock([FUIAuth class]);
+  OCMStub(ClassMethod([authUIClass authUIWithAuth:OCMOCK_ANY])).
+      andReturn(authUIClass);
+
+  id authClass = OCMClassMock([FIRAuth class]);
+  OCMStub(ClassMethod([authClass auth])).
+      andReturn(authClass);
+
   self.provider = [[FUITwitterAuth alloc] init];
 }
 
