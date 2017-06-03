@@ -67,9 +67,19 @@ static const CGFloat kFontSize = 12.0f;
 
   CGFloat paddingTitle = 8.0f;
   CGFloat paddingImage = 8.0f;
-  [self setTitleEdgeInsets:UIEdgeInsetsMake(0, paddingTitle, 0, paddingImage + paddingTitle)];
-  [self setContentEdgeInsets:UIEdgeInsetsMake(0, paddingImage, 0, -paddingImage - paddingTitle)];
-  [self setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+  BOOL isLTRLayout = [[UIApplication sharedApplication] userInterfaceLayoutDirection] ==
+      UIUserInterfaceLayoutDirectionLeftToRight;
+  if (isLTRLayout) {
+    [self setTitleEdgeInsets:UIEdgeInsetsMake(0, paddingTitle, 0, paddingImage + paddingTitle)];
+    [self setContentEdgeInsets:UIEdgeInsetsMake(0, paddingImage, 0, -paddingImage - paddingTitle)];
+    [self setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+  } else {
+    [self setTitleEdgeInsets:UIEdgeInsetsMake(0, paddingImage + paddingTitle, 0, paddingTitle)];
+    [self setContentEdgeInsets:UIEdgeInsetsMake(0, -paddingImage - paddingTitle, 0, paddingImage)];
+    [self setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+  }
+  
+  
   
   self.layer.cornerRadius = kCornerRadius;
 
