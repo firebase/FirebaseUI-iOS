@@ -1,74 +1,74 @@
 /* The text of the button used to sign-in with Phone. */
-"SignInWithPhone" = "Sign in with phone";
+"SignInWithPhone" = "ફોન વડે સાઇન ઇન કરો";
 
 /* The title of view controller where user enters phone number. */
-"EnterPhoneTitle" = "Enter phone number";
+"EnterPhoneTitle" = "ફોન નંબર દાખલ કરો";
 
 /* The title of button on navigation controller which navigates to previous screen. */
-"Back" = "Back";
+"Back" = "પાછળ";
 
 /* The title of button on navigation controller which navigates to the next screen. */
-"Next" = "Next";
+"Next" = "આગલું";
 
 /* The title of button which user taps on phone verification screen. */
-"Verify" = "Verify";
+"Verify" = "ચકાસો";
 
 /* Alert message displayed when user submits empty verification code. */
-"EmptyVerificationCode" = "Verification code can't be empty";
+"EmptyVerificationCode" = "ચકાસણી કોડ દાખલ કરવો આવશ્યક છે";
 
 /* Alert message displayed when user submits empty phone number. */
-"EmptyPhoneNumber" = "Phone number can't be empty";
+"EmptyPhoneNumber" = "ફોન નંબર દાખલ કરવો આવશ્યક છે";
 
 /* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
-"PhoneNumber" = "Number";
+"PhoneNumber" = "નંબર";
 
 /* Placeholder shown for phone number input field. */
-"EnterYourPhoneNumber" = "Phone number";
+"EnterYourPhoneNumber" = "ફોન નંબર";
 
 /* Label next to the left of country selector control. */
-"Country" = "Country";
+"Country" = "દેશ";
 
 /* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
-"EnterCodeDescription" = "Enter the %@-digit code we sent to";
+"EnterCodeDescription" = "અમે આ ફોન નંબર પર મોકલેલ %@-અંકનો કોડ દાખલ કરો";
 
 /* The title of button with resend verification code functionality. */
-"ResendCode" = "Resend code";
+"ResendCode" = "કોડ ફરીથી મોકલો";
 
 /* Text of the resend timer label shown on verification phone number screen. */
-"ResendCodeTimer" = "Resend code in %@";
+"ResendCodeTimer" = "%@માં કોડ ફરીથી મોકલો";
 
 /* The title of view controller where user verifies phone number. . */
-"VerifyPhoneTitle" = "Verify phone number";
+"VerifyPhoneTitle" = "ફોન નંબર ચકાસો";
 
 /* The title of button displayed when user closes alert message. */
-"Done" = "Done";
+"Done" = "થઈ ગયું";
 
 /* The title of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneTitle" = "Invalid phone number";
+"IncorrectPhoneTitle" = "અમાન્ય ફોન નંબર";
 
 /* The body message of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneMessage" = "Enter a valid phone number";
+"IncorrectPhoneMessage" = "એક માન્ય ફોન નંબર દાખલ કરો";
 
 /* The body message of alert shown when user tapped resend verification code button. */
-"ResendCodeResult" = "Code was sent to %@";
+"ResendCodeResult" = "કોડ %@ પર મોકલવામાં આવ્યો હતો";
 
 /* The title of alert shown when user entered invalid verification code. */
-"IncorrectCodeTitle" = "Incorrect verification code";
+"IncorrectCodeTitle" = "ખોટો ચકાસણી કોડ";
 
 /* The body message of alert shown when user entered invalid verification code. */
-"IncorrectCodeMessage" = "Wrong code. Try again.";
+"IncorrectCodeMessage" = "કોડ ખોટો છે. ફરી પ્રયાસ કરો.";
 
 /* The body message of alert shown when internal server error appeared. */
-"InternalErrorMessage" = "Something went wrong. Please try again.";
+"InternalErrorMessage" = "કંઈક ખોટું થયું. કૃપા કરીને ફરી પ્રયાસ કરો.";
 
 /* The body message of alert shown when the user has tried to send too many SMS messages. */
-"TooManyCodesSent" = "This phone number has been used too many times";
+"TooManyCodesSent" = "આ ફોન નંબરનો ઉપયોગ ઘણી બધી વખત થઈ ગયો છે";
 
 /* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
-"MessageQuotaExceeded" = "There was a problem verifying your phone number";
+"MessageQuotaExceeded" = "તમારો ફોન નંબર ચકાસવામાં સમસ્યા આવી હતી";
 
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
-"MessageExpired" = "This code is no longer valid";
+"MessageExpired" = "આ કોડ હવે માન્ય નથી";
 
 /* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
 "TermsSMS" = "%@ને ટૅપ કરવાથી, કદાચ એક SMS મોકલવામાં આવી શકે છે. સંદેશ અને ડેટા શુલ્ક લાગુ થઈ શકે છે.";
