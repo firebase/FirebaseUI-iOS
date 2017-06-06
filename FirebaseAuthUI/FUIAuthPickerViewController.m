@@ -60,8 +60,8 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
   return [self initWithNibName:NSStringFromClass([self class])
-                         bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
-                         authUI:authUI];
+                        bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
+                        authUI:authUI];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil

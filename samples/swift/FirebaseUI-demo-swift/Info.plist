@@ -53,10 +53,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-  <key>FacebookAppID</key>
-  <string>fb{your-app-id}</string>
-  <key>FacebookDisplayName</key>
-  <string>{your-app-name}</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -76,6 +72,10 @@
 			</dict>
 		</array>
 	</dict>
+	<key>FacebookAppID</key>
+	<string>fb{your-app-id}</string>
+	<key>FacebookDisplayName</key>
+	<string>{your-app-name}</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -85,6 +85,10 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

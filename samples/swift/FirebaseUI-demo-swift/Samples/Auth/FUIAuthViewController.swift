@@ -19,6 +19,7 @@ import Firebase
 import FirebaseAuthUI
 import FirebaseGoogleAuthUI
 import FirebaseFacebookAuthUI
+import FirebasePhoneAuthUI
 import FirebaseTwitterAuthUI
 
 let kFirebaseTermsOfService = URL(string: "https://firebase.google.com/terms/")!
@@ -29,6 +30,7 @@ enum UISections: Int, RawRepresentable {
   case Name
   case Email
   case UID
+  case Phone
   case AccessToken
   case IDToken
 }
@@ -38,6 +40,7 @@ enum Providers: Int, RawRepresentable {
   case Google
   case Facebook
   case Twitter
+  case Phone
 }
 
 
@@ -59,6 +62,7 @@ class FUIAuthViewController: UITableViewController {
   @IBOutlet weak var cellName: UITableViewCell!
   @IBOutlet weak var cellEmail: UITableViewCell!
   @IBOutlet weak var cellUid: UITableViewCell!
+  @IBOutlet weak var cellPhone: UITableViewCell!
   @IBOutlet weak var cellAccessToken: UITableViewCell!
   @IBOutlet weak var cellIdToken: UITableViewCell!
 
@@ -82,6 +86,9 @@ class FUIAuthViewController: UITableViewController {
                              animated: false,
                              scrollPosition: .none)
     self.tableView.selectRow(at: IndexPath(row: Providers.Twitter.rawValue, section: UISections.Providers.rawValue),
+                             animated: false,
+                             scrollPosition: .none)
+    self.tableView.selectRow(at: IndexPath(row: Providers.Phone.rawValue, section: UISections.Providers.rawValue),
                              animated: false,
                              scrollPosition: .none)
 
@@ -131,9 +138,17 @@ class FUIAuthViewController: UITableViewController {
       // will still appear in the UI, but they'll crash the app when tapped.
       self.authUI?.providers = self.getListOfIDPs()
 
-      let controller = self.authUI!.authViewController()
-      controller.navigationBar.isHidden = self.customAuthorizationSwitch.isOn
-      self.present(controller, animated: true, completion: nil)
+      let shouldSkipPhoneAuthPicker = (self.authUI?.providers.count == 1) &&
+        (self.authUI?.providers.first?.providerID == PhoneAuthProviderID) &&
+        (self.authUI?.isSignInWithEmailHidden)!;
+      if (shouldSkipPhoneAuthPicker) {
+        let provider = self.authUI?.providers.first as! FUIPhoneAuth;
+        provider.signIn(withPresenting: self);
+      } else {
+        let controller = self.authUI!.authViewController()
+        controller.navigationBar.isHidden = self.customAuthorizationSwitch.isOn
+        self.present(controller, animated: true, completion: nil)
+      }
     }
   }
 
@@ -144,6 +159,7 @@ class FUIAuthViewController: UITableViewController {
       self.cellName.textLabel?.text = user.displayName ?? "(null)"
       self.cellEmail.textLabel?.text = user.email ?? "(null)"
       self.cellUid.textLabel?.text = user.uid
+      self.cellPhone.textLabel?.text = user.phoneNumber
 
       self.authorizationButton.title = "Sign Out";
     } else {
@@ -151,6 +167,7 @@ class FUIAuthViewController: UITableViewController {
       self.cellName.textLabel?.text = "null"
       self.cellEmail.textLabel?.text = "null"
       self.cellUid.textLabel?.text = "null"
+      self.cellPhone.textLabel?.text = "null"
 
       self.authorizationButton.title = "Sign In";
     }
@@ -195,17 +212,19 @@ class FUIAuthViewController: UITableViewController {
           switch indexPath.row {
           case Providers.Google.rawValue:
             provider = self.customScopesSwitch.isOn ? FUIGoogleAuth(scopes: [kGoogleGamesScope,
-                                                                               kGooglePlusMeScope,
-                                                                               kGoogleUserInfoEmailScope,
-                                                                               kGoogleUserInfoProfileScope])
+                                                                             kGooglePlusMeScope,
+                                                                             kGoogleUserInfoEmailScope,
+                                                                             kGoogleUserInfoProfileScope])
               : FUIGoogleAuth()
           case Providers.Twitter.rawValue:
             provider = FUITwitterAuth()
           case Providers.Facebook.rawValue:
             provider = self.customScopesSwitch.isOn ? FUIFacebookAuth(permissions: ["email",
-                                                                                      "user_friends",
-                                                                                      "ads_read"])
+                                                                                    "user_friends",
+                                                                                    "ads_read"])
               : FUIFacebookAuth()
+          case Providers.Phone.rawValue:
+            provider = FUIPhoneAuth(authUI: self.authUI!)
           default: provider = nil
           }
 
