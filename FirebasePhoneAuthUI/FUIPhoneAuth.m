@@ -87,8 +87,23 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
-
   _pendingSignInCallback = completion;
+  
+  FUIPhoneAuth *delegate = [_authUI providerWithID:FIRPhoneAuthProviderID];
+  if (!delegate) {
+    NSError *error = [FUIAuthErrorUtils errorWithCode:FUIAuthErrorCodeCantFindProvider
+                                             userInfo:@{
+                       FUIAuthErrorUserInfoProviderIDKey : FIRPhoneAuthProviderID
+                     }];
+    [self callbackWithCredential:nil error:error result:^(FIRUser *_Nullable user,
+                                                          NSError *_Nullable error) {
+      if (error) {
+        [FUIAuthBaseViewController showAlertWithMessage:error.localizedDescription
+                               presentingViewController:presentingViewController];
+      }
+    }];
+    return;
+  }
 
   UIViewController *controller = [[FUIPhoneEntryViewController alloc] initWithAuthUI:_authUI];
   UINavigationController *navigationController =
