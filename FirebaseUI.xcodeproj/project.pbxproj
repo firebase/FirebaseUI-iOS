@@ -714,6 +714,42 @@
 		C380A7D01D89ECF1005C031D /* ic_twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_twitter.png; sourceTree = "<group>"; };
 		C380A7D11D89ECF1005C031D /* ic_twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_twitter@2x.png"; sourceTree = "<group>"; };
 		C380A7D21D89ECF1005C031D /* ic_twitter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_twitter@3x.png"; sourceTree = "<group>"; };
+		C389F5911EE9FCD700D63A34 /* fil */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fil; path = fil.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C389F5921EE9FCD700D63A34 /* fil */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fil; path = fil.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C389F5931EE9FCD700D63A34 /* fil */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fil; path = fil.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C389F5941EE9FCD700D63A34 /* fil */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fil; path = fil.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C389F5951EE9FCD700D63A34 /* fil */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fil; path = fil.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C389F5961EE9FCD700D63A34 /* fil */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fil; path = fil.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C389F5971EE9FDD700D63A34 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C389F5981EE9FDD700D63A34 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C389F5991EE9FDD700D63A34 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C389F59A1EE9FDD700D63A34 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C389F59B1EE9FDD800D63A34 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C389F59C1EE9FDD800D63A34 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C389F59D1EE9FEBC00D63A34 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C389F59E1EE9FEBC00D63A34 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C389F59F1EE9FEBC00D63A34 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C389F5A01EE9FEBC00D63A34 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C389F5A11EE9FEBC00D63A34 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C389F5A21EE9FEBC00D63A34 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C389F5A31EE9FECB00D63A34 /* lv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lv; path = lv.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C389F5A41EE9FECB00D63A34 /* lv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lv; path = lv.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C389F5A51EE9FECB00D63A34 /* lv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lv; path = lv.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C389F5A61EE9FECB00D63A34 /* lv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lv; path = lv.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C389F5A71EE9FECB00D63A34 /* lv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lv; path = lv.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C389F5A81EE9FECC00D63A34 /* lv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lv; path = lv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C389F5A91EE9FF0D00D63A34 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/FirebaseAuthUI.strings"; sourceTree = "<group>"; };
+		C389F5AA1EE9FF0D00D63A34 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		C389F5AB1EE9FF0D00D63A34 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/FirebaseGoogleAuthUI.strings"; sourceTree = "<group>"; };
+		C389F5AC1EE9FF0D00D63A34 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		C389F5AD1EE9FF0D00D63A34 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/FirebaseTwitterAuthUI.strings"; sourceTree = "<group>"; };
+		C389F5AE1EE9FF0E00D63A34 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C389F5AF1EE9FF2400D63A34 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/FirebaseAuthUI.strings; sourceTree = "<group>"; };
+		C389F5B01EE9FF2400D63A34 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		C389F5B11EE9FF2400D63A34 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/FirebaseGoogleAuthUI.strings; sourceTree = "<group>"; };
+		C389F5B21EE9FF2400D63A34 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		C389F5B31EE9FF2400D63A34 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/FirebaseTwitterAuthUI.strings; sourceTree = "<group>"; };
+		C389F5B41EE9FF2400D63A34 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C38F4F291EE24A2E008B2250 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C38F4F2A1EE24A2E008B2250 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C38F4F2B1EE24A2E008B2250 /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = bn.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2817,6 +2853,12 @@
 				vi,
 				"zh-Hant-TW",
 				zh,
+				fil,
+				he,
+				lt,
+				lv,
+				"pt-PT",
+				sl,
 			);
 			mainGroup = 8D2A849C1D678B2B0058DF04;
 			productRefGroup = 8D2A84A71D678B2B0058DF04 /* Products */;
@@ -4244,6 +4286,7 @@
 		C38F4F281EE24A2E008B2250 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
+				C38F4F3A1EE24A2E008B2250 /* en */,
 				C38F4F291EE24A2E008B2250 /* ar */,
 				C38F4F2A1EE24A2E008B2250 /* bg */,
 				C38F4F2B1EE24A2E008B2250 /* bn */,
@@ -4261,7 +4304,6 @@
 				C38F4F371EE24A2E008B2250 /* en-IN */,
 				C38F4F381EE24A2E008B2250 /* en-SG */,
 				C38F4F391EE24A2E008B2250 /* en-ZA */,
-				C38F4F3A1EE24A2E008B2250 /* en */,
 				C38F4F3B1EE24A2E008B2250 /* es-419 */,
 				C38F4F3C1EE24A2E008B2250 /* es-AR */,
 				C38F4F3D1EE24A2E008B2250 /* es-BO */,
@@ -4285,10 +4327,12 @@
 				C38F4F4F1EE24A2E008B2250 /* es */,
 				C38F4F501EE24A2E008B2250 /* fa */,
 				C38F4F511EE24A2E008B2250 /* fi */,
+				C389F5961EE9FCD700D63A34 /* fil */,
 				C38F4F521EE24A2E008B2250 /* fr-CH */,
 				C38F4F531EE24A2E008B2250 /* fr */,
 				C38F4F541EE24A2E008B2250 /* gsw */,
 				C38F4F551EE24A2E008B2250 /* gu */,
+				C389F59C1EE9FDD800D63A34 /* he */,
 				C38F4F561EE24A2E008B2250 /* hi */,
 				C38F4F571EE24A2E008B2250 /* hr */,
 				C38F4F581EE24A2E008B2250 /* hu */,
@@ -4298,6 +4342,8 @@
 				C38F4F5C1EE24A2E008B2250 /* kn */,
 				C38F4F5D1EE24A2E008B2250 /* ko */,
 				C38F4F5F1EE24A2E008B2250 /* ln */,
+				C389F5A21EE9FEBC00D63A34 /* lt */,
+				C389F5A81EE9FECC00D63A34 /* lv */,
 				C38F4F611EE24A2E008B2250 /* mr */,
 				C38F4F621EE24A2E008B2250 /* ms */,
 				C38F4F631EE24A2E008B2250 /* nb */,
@@ -4305,10 +4351,12 @@
 				C38F4F651EE24A2E008B2250 /* nn-NO */,
 				C38F4F661EE24A2E008B2250 /* pl */,
 				C38F4F671EE24A2E008B2250 /* pt-BR */,
+				C389F5AE1EE9FF0E00D63A34 /* pt-PT */,
 				C38F4F681EE24A2E008B2250 /* pt */,
 				C38F4F691EE24A2E008B2250 /* ro */,
 				C38F4F6A1EE24A2E008B2250 /* ru */,
 				C38F4F6B1EE24A2E008B2250 /* sk */,
+				C389F5B41EE9FF2400D63A34 /* sl */,
 				C38F4F6C1EE24A2E008B2250 /* sr-Latn */,
 				C38F4F6D1EE24A2E008B2250 /* sr */,
 				C38F4F6E1EE24A2E008B2250 /* sv */,
@@ -4407,6 +4455,12 @@
 				C38F4FCA1EE24A94008B2250 /* zh-Hant-TW */,
 				C38F4FCB1EE24A94008B2250 /* zh-Hant */,
 				C38F4FCC1EE24A94008B2250 /* zh */,
+				C389F5911EE9FCD700D63A34 /* fil */,
+				C389F5971EE9FDD700D63A34 /* he */,
+				C389F59D1EE9FEBC00D63A34 /* lt */,
+				C389F5A31EE9FECB00D63A34 /* lv */,
+				C389F5A91EE9FF0D00D63A34 /* pt-PT */,
+				C389F5AF1EE9FF2400D63A34 /* sl */,
 			);
 			name = FirebaseAuthUI.strings;
 			sourceTree = "<group>";
@@ -4492,6 +4546,12 @@
 				C38F501B1EE24ABA008B2250 /* zh-Hant-TW */,
 				C38F501C1EE24ABA008B2250 /* zh-Hant */,
 				C38F501D1EE24ABA008B2250 /* zh */,
+				C389F5921EE9FCD700D63A34 /* fil */,
+				C389F5981EE9FDD700D63A34 /* he */,
+				C389F59E1EE9FEBC00D63A34 /* lt */,
+				C389F5A41EE9FECB00D63A34 /* lv */,
+				C389F5AA1EE9FF0D00D63A34 /* pt-PT */,
+				C389F5B01EE9FF2400D63A34 /* sl */,
 			);
 			name = FirebaseFacebookAuthUI.strings;
 			sourceTree = "<group>";
@@ -4577,6 +4637,12 @@
 				C38F506E1EE24B22008B2250 /* zh-Hant-TW */,
 				C38F506F1EE24B22008B2250 /* zh-Hant */,
 				C38F50701EE24B22008B2250 /* zh */,
+				C389F5931EE9FCD700D63A34 /* fil */,
+				C389F5991EE9FDD700D63A34 /* he */,
+				C389F59F1EE9FEBC00D63A34 /* lt */,
+				C389F5A51EE9FECB00D63A34 /* lv */,
+				C389F5AB1EE9FF0D00D63A34 /* pt-PT */,
+				C389F5B11EE9FF2400D63A34 /* sl */,
 			);
 			name = FirebaseGoogleAuthUI.strings;
 			sourceTree = "<group>";
@@ -4662,6 +4728,12 @@
 				C38F50BF1EE24B94008B2250 /* zh-Hant-TW */,
 				C38F50C01EE24B94008B2250 /* zh-Hant */,
 				C38F50C11EE24B94008B2250 /* zh */,
+				C389F5941EE9FCD700D63A34 /* fil */,
+				C389F59A1EE9FDD700D63A34 /* he */,
+				C389F5A01EE9FEBC00D63A34 /* lt */,
+				C389F5A61EE9FECB00D63A34 /* lv */,
+				C389F5AC1EE9FF0D00D63A34 /* pt-PT */,
+				C389F5B21EE9FF2400D63A34 /* sl */,
 			);
 			name = FirebasePhoneAuthUI.strings;
 			sourceTree = "<group>";
@@ -4747,6 +4819,12 @@
 				C38F51101EE24BB0008B2250 /* zh-Hant-TW */,
 				C38F51111EE24BB0008B2250 /* zh-Hant */,
 				C38F51121EE24BB0008B2250 /* zh */,
+				C389F5951EE9FCD700D63A34 /* fil */,
+				C389F59B1EE9FDD800D63A34 /* he */,
+				C389F5A11EE9FEBC00D63A34 /* lt */,
+				C389F5A71EE9FECB00D63A34 /* lv */,
+				C389F5AD1EE9FF0D00D63A34 /* pt-PT */,
+				C389F5B31EE9FF2400D63A34 /* sl */,
 			);
 			name = FirebaseTwitterAuthUI.strings;
 			sourceTree = "<group>";

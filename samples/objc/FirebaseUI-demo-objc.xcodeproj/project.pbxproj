@@ -137,6 +137,12 @@
 		C375CB1A1D943D5F002EECD3 /* FUICustomAuthDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomAuthDelegate.h; sourceTree = "<group>"; };
 		C375CB1B1D943D5F002EECD3 /* FUICustomAuthDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomAuthDelegate.m; sourceTree = "<group>"; };
 		C383C4521EE2754F002A4204 /* es-PY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PY"; path = "es-PY.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C389F5B51EEA099B00D63A34 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C389F5B61EEA09A000D63A34 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C389F5B71EEA09AF00D63A34 /* fil */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fil; path = fil.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C389F5B81EEA09BC00D63A34 /* lv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lv; path = lv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C389F5B91EEA09D000D63A34 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C389F5BA1EEA09DD00D63A34 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C3A8B7BE1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomPasswordSignInViewController.h; sourceTree = "<group>"; };
 		C3A8B7BF1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomPasswordSignInViewController.m; sourceTree = "<group>"; };
 		C3A8B7C01DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordSignInViewController.xib; sourceTree = "<group>"; };
@@ -447,6 +453,12 @@
 				ur,
 				vi,
 				ro,
+				he,
+				"pt-PT",
+				fil,
+				lv,
+				lt,
+				sl,
 			);
 			mainGroup = D81A05E71B86A78700498183;
 			productRefGroup = D81A05F11B86A78700498183 /* Products */;
@@ -637,6 +649,12 @@
 				C3490EB31EDE267500CD416B /* vi */,
 				C3490EB41EDE268500CD416B /* ro */,
 				C383C4521EE2754F002A4204 /* es-PY */,
+				C389F5B51EEA099B00D63A34 /* he */,
+				C389F5B61EEA09A000D63A34 /* pt-PT */,
+				C389F5B71EEA09AF00D63A34 /* fil */,
+				C389F5B81EEA09BC00D63A34 /* lv */,
+				C389F5B91EEA09D000D63A34 /* lt */,
+				C389F5BA1EEA09DD00D63A34 /* sl */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
