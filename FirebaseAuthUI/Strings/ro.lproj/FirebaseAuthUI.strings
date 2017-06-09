@@ -1,218 +1,218 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "Bun venit";
+"AuthPickerTitle" = "Welcome";
 
 /* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"SignInWithEmail" = "Conectați-vă cu adresa de e-mail";
+"SignInWithEmail" = "Sign in with email";
 
 /* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EnterYourEmail" = "Introduceți adresa de e-mail";
+"EnterYourEmail" = "Enter your email";
 
 /* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"InvalidEmailError" = "Adresa de e-mail nu este corectă.";
+"InvalidEmailError" = "That email address isn't correct.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "Acest tip de cont nu este acceptat de aplicație";
+"CannotAuthenticateError" = "This type of account isn't supported by this app";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "Aveți deja un cont";
+"ExistingAccountTitle" = "You already have an account";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "Ați folosit deja %@. Pentru a continua, conectați-vă cu %@.";
+"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "Conectați-vă";
+"SignInTitle" = "Sign in";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "Introduceți parola";
+"EnterYourPassword" = "Enter your password";
 
 /* Error message displayed when user enters an empty password. */
-"InvalidPasswordError" = "Parola trebuie completată.";
+"InvalidPasswordError" = "Password cannot be empty.";
 
 /* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"WrongPasswordError" = "Adresa de e-mail și parola pe care le-ați introdus nu se potrivesc.";
+"WrongPasswordError" = "The email and password you entered don't match.";
 
 /* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UserNotFoundError" = "Adresa de e-mail nu corespunde unui cont existent.";
+"UserNotFoundError" = "That email address doesn’t match an existing account.";
 
 /* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AccountDisabledError" = "Această adresă de e-mail aparține unui cont dezactivat.";
+"AccountDisabledError" = "That email address is for an account that has been disabled.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "Ați introdus de prea multe ori o parolă incorectă. Încercați din nou peste câteva minute.";
+"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
 
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "Furnizorul pentru %@ nu poate fi găsit.";
+"CantFindProvider" = "Can't find provider for %@.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailsDontMatch" = "Adresele de e-mail nu sunt identice";
+"EmailsDontMatch" = "Emails don't match";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Recuperați parola";
+"PasswordRecoveryTitle" = "Recover password";
 
 /* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryMessage" = "Primiți instrucțiuni pentru resetarea parolei la această adresă de e-mail.";
+"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryEmailSentTitle" = "Verificați căsuța de e-mail";
+"PasswordRecoveryEmailSentTitle" = "Check your email";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "Urmați instrucțiunile trimise la %@ pentru a vă recupera parola.";
+"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Creați un cont";
+"SignUpTitle" = "Create account";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "Prenume și nume de familie";
+"FirstAndLastName" = "First & last name";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "Alegeți o parolă";
+"ChoosePassword" = "Choose password";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Dacă atingeți %@, indicați că sunteți de acord cu %@.";
+"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "Termeni și condițiile";
+"TermsOfService" = "Terms of Service";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailAlreadyInUseError" = "Adresa de e-mail este folosită deja de alt cont.";
+"EmailAlreadyInUseError" = "The email address is already in use by another account.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Parolele puternice au cel puțin 6 caractere și conțin o combinație de litere și cifre.";
+"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "Au fost create prea multe solicitări de conturi de la această adresă IP. Încercați din nou peste câteva minute.";
+"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "Ați folosit deja %@ pentru a vă conecta. Introduceți parola acestui cont.";
+"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
 
 /* OK button title. */
 "OK" = "OK";
 
 /* Cancel button title. */
-"Cancel" = "Anulați";
+"Cancel" = "Cancel";
 
 /* Back button title. */
-"Back" = "Înapoi";
+"Back" = "Back";
 
 /* Next button title. */
-"Next" = "Înainte";
+"Next" = "Next";
 
 /* Save button title. */
-"Save" = "Salvați";
+"Save" = "Save";
 
 /* Save button title. */
-"Send" = "Trimiteți";
+"Send" = "Send";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"Email" = "Adresă de e-mail";
+"Email" = "Email";
 
 /* Label next to a password text field. */
-"Password" = "Parolă";
+"Password" = "Password";
 
 /* Label next to a name text field. */
-"Name" = "Nume";
+"Name" = "Name";
 
 /* Alert title Error. */
-"Error" = "Eroare";
+"Error" = "Error";
 
 /* Alert button title Close. */
-"Close" = "Închideți";
+"Close" = "Close";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "Profil";
+"AS_SectionProfile" = "Profile";
 
 /* Account Settings section title Security. */
-"AS_SectionSecurity" = "Securitate";
+"AS_SectionSecurity" = "Security";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "Conturi conectate";
+"AS_SectionLinkedAccounts" = "Linked Accounts";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "Nume";
+"AS_Name" = "Name";
 
 /* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AS_Email" = "Adresă de e-mail";
+"AS_Email" = "Email";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "Adăugați parola";
+"AS_AddPassword" = "Add password";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "Schimbați parola";
+"AS_ChangePassword" = "Change password";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "Deconectați-vă";
+"AS_SignOut" = "Sign Out";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "Ștergeți contul";
+"AS_DeleteAccount" = "Delete Account";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Ați uitat parola?";
+"ForgotPassword" = "Forgot password?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Confirmați-vă identitatea";
+"VerifyItsYou" = "Verify it's you";
 
 /* Alert message title shown to confirm account deletion action. */
 "DeleteAccountConfirmationTitle" = "Delete Account?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "Toate datele asociate acestui cont vor fi șterse, iar acțiunea nu poate fi anulată. Va trebui să vă conectați din nou pentru a finaliza acțiunea.";
+"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "Toate datele asociate acestui cont vor fi șterse, iar acțiunea nu poate fi anulată. Sigur doriți să vă ștergeți contul?";
+"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
 
 /* Text of Delete action button. */
-"Delete" = "Ștergeți";
+"Delete" = "Delete";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "Ștergeți contul";
+"DeleteAccountControllerTitle" = "Delete account";
 
 /* Alert message shown before account deletion. */
-"ActionCantBeUndone" = "Această acțiune nu poate fi anulată";
+"ActionCantBeUndone" = "This action can't be undone";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Deconectați";
+"UnlinkAction" = "Unlink";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "Cont conectat";
+"UnlinkTitle" = "Linked account";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Deconectați contul?";
+"UnlinkConfirmationTitle" = "Unlink account?";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "Nu vă veți mai putea conecta folosind contul";
+"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Deconectați contul";
+"UnlinkConfirmationActionTitle" = "Unlink account";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "Pentru a schimba adresa de e-mail asociată contului, va trebui să vă conectați din nou.";
+"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
 
 /* Alert action message shown before confirmation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "Pentru a vă schimba parola, trebuie să introduceți parola actuală.";
+"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
 
 /* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EditEmailTitle" = "Modificați adresa de e-mail";
+"EditEmailTitle" = "Edit email";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "Modificați numele";
+"EditNameTitle" = "Edit name";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "Pentru a adăuga parola contului, va trebui să vă conectați din nou.";
+"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "Pentru a schimba parola contului, va trebui să vă conectați din nou.";
+"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
 
 /* Alert message shown when re-authenticating before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "Pentru a vă schimba parola, trebuie să introduceți parola actuală.";
+"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "Adăugați parola";
+"AddPasswordTitle" = "Add password";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "Schimbați parola";
+"EditPasswordTitle" = "Change password";
 
 /* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"ProviderTitlePassword" = "Adresă de e-mail";
+"ProviderTitlePassword" = "Email";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google";
@@ -224,22 +224,22 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "Conectați-vă cu %@";
+"SignInWithProvider" = "Sign in with %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "Introduceți numele";
+"PlaceholderEnterName" = "Enter your name";
 
 /* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PlaceholderEnterEmail" = "Introduceți adresa de e-mail";
+"PlaceholderEnterEmail" = "Enter your email";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "Introduceți parola";
+"PlaceholderEnterPassword" = "Enter your password";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "Parolă nouă";
+"PlaceholderNewPassword" = "New password";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "Alegeți o parolă";
+"PlaceholderChosePassword" = "Choose password";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "Nu reușiți să vă conectați?";
+"ForgotPasswordTitle" = "Trouble signing in?";

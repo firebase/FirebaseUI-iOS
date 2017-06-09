@@ -1,78 +1,78 @@
 /* The text of the button used to sign-in with Phone. */
-"SignInWithPhone" = "Kirjaudu puhelimella";
+"SignInWithPhone" = "Sign in with phone";
 
 /* The title of view controller where user enters phone number. */
-"EnterPhoneTitle" = "Anna puhelinnumero";
+"EnterPhoneTitle" = "Enter phone number";
 
 /* The title of button on navigation controller which navigates to previous screen. */
-"Back" = "Takaisin";
+"Back" = "Back";
 
 /* The title of button on navigation controller which navigates to the next screen. */
-"Next" = "Seuraava";
+"Next" = "Next";
 
 /* The title of button which user taps on phone verification screen. */
-"Verify" = "Vahvista";
+"Verify" = "Verify";
 
 /* Alert message displayed when user submits empty verification code. */
-"EmptyVerificationCode" = "Vahvistuskoodi ei voi olla tyhjä.";
+"EmptyVerificationCode" = "Verification code can't be empty";
 
 /* Alert message displayed when user submits empty phone number. */
-"EmptyPhoneNumber" = "Puhelinnumero ei voi olla tyhjä.";
+"EmptyPhoneNumber" = "Phone number can't be empty";
 
 /* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
-"PhoneNumber" = "Numero";
+"PhoneNumber" = "Number";
 
 /* Placeholder shown for phone number input field. */
-"EnterYourPhoneNumber" = "Puhelinnumero";
+"EnterYourPhoneNumber" = "Phone number";
 
 /* Label next to the left of country selector control. */
-"Country" = "Maa";
+"Country" = "Country";
 
 /* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
-"EnterCodeDescription" = "Anna %@ merkin pituinen koodi, jonka lähetimme numeroon";
+"EnterCodeDescription" = "Enter the %@-digit code we sent to";
 
 /* The title of button with resend verification code functionality. */
-"ResendCode" = "Lähetä koodi uudelleen";
+"ResendCode" = "Resend code";
 
 /* Text of the resend timer label shown on verification phone number screen. */
-"ResendCodeTimer" = "Lähetä koodi uudelleen seuraavan ajan kuluttua: %@.";
+"ResendCodeTimer" = "Resend code in %@";
 
 /* The title of view controller where user verifies phone number. . */
-"VerifyPhoneTitle" = "Vahvista puhelinnumero";
+"VerifyPhoneTitle" = "Verify phone number";
 
 /* The title of button displayed when user closes alert message. */
-"Done" = "Valmis";
+"Done" = "Done";
 
 /* The title of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneTitle" = "Virheellinen puhelinnumero";
+"IncorrectPhoneTitle" = "Invalid phone number";
 
 /* The body message of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneMessage" = "Anna voimassa oleva puhelinnumero.";
+"IncorrectPhoneMessage" = "Enter a valid phone number";
 
 /* The body message of alert shown when user tapped resend verification code button. */
-"ResendCodeResult" = "Koodi lähetettiin numeroon %@.";
+"ResendCodeResult" = "Code was sent to %@";
 
 /* The title of alert shown when user entered invalid verification code. */
-"IncorrectCodeTitle" = "Virheellinen vahvistuskoodi";
+"IncorrectCodeTitle" = "Incorrect verification code";
 
 /* The body message of alert shown when user entered invalid verification code. */
-"IncorrectCodeMessage" = "Väärä koodi. Yritä uudelleen.";
+"IncorrectCodeMessage" = "Wrong code. Try again.";
 
 /* The body message of alert shown when internal server error appeared. */
-"InternalErrorMessage" = "Tapahtui virhe. Yritä uudelleen.";
+"InternalErrorMessage" = "Something went wrong. Please try again.";
 
 /* The body message of alert shown when the user has tried to send too many SMS messages. */
-"TooManyCodesSent" = "Tätä puhelinnumeroa on käytetty liian monta kertaa.";
+"TooManyCodesSent" = "This phone number has been used too many times";
 
 /* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
-"MessageQuotaExceeded" = "Puhelinnumerosi vahvistamisessa tapahtui virhe.";
+"MessageQuotaExceeded" = "There was a problem verifying your phone number";
 
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
-"MessageExpired" = "Tämä koodi ei ole enää voimassa.";
+"MessageExpired" = "This code is no longer valid";
 
 /* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "Kun napautat %@, tekstiviesti voidaan lähettää. Datan ja viestien käyttö voi olla maksullista.";
+"TermsSMS" = "By tapping %@, an SMS may be sent. Message & data rates may apply.";
 
 /* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "Napauttamalla %@ hyväksyt [Käyttöehdot].";
+"TermsAccountCreation" = "By tapping %@ you are indicating that you agree to the [Terms of Service].";
 

@@ -1,78 +1,78 @@
 /* The text of the button used to sign-in with Phone. */
-"SignInWithPhone" = "Σύνδεση μέσω τηλεφώνου";
+"SignInWithPhone" = "Sign in with phone";
 
 /* The title of view controller where user enters phone number. */
-"EnterPhoneTitle" = "Εισαγωγή αριθμού τηλεφώνου";
+"EnterPhoneTitle" = "Enter phone number";
 
 /* The title of button on navigation controller which navigates to previous screen. */
-"Back" = "Πίσω";
+"Back" = "Back";
 
 /* The title of button on navigation controller which navigates to the next screen. */
-"Next" = "Επόμενο";
+"Next" = "Next";
 
 /* The title of button which user taps on phone verification screen. */
-"Verify" = "Επαλήθευση";
+"Verify" = "Verify";
 
 /* Alert message displayed when user submits empty verification code. */
-"EmptyVerificationCode" = "Ο κωδικός επαλήθευσης δεν μπορεί να είναι κενός";
+"EmptyVerificationCode" = "Verification code can't be empty";
 
 /* Alert message displayed when user submits empty phone number. */
-"EmptyPhoneNumber" = "Ο αριθμός τηλεφώνου δεν μπορεί να είναι κενός";
+"EmptyPhoneNumber" = "Phone number can't be empty";
 
 /* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
-"PhoneNumber" = "Αριθμός";
+"PhoneNumber" = "Number";
 
 /* Placeholder shown for phone number input field. */
-"EnterYourPhoneNumber" = "Αριθμός τηλεφώνου";
+"EnterYourPhoneNumber" = "Phone number";
 
 /* Label next to the left of country selector control. */
-"Country" = "Χώρα";
+"Country" = "Country";
 
 /* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
-"EnterCodeDescription" = "Εισαγάγετε τον κωδικό %@ ψηφίων που στείλαμε στο";
+"EnterCodeDescription" = "Enter the %@-digit code we sent to";
 
 /* The title of button with resend verification code functionality. */
-"ResendCode" = "Επανάληψη αποστολής κωδικού";
+"ResendCode" = "Resend code";
 
 /* Text of the resend timer label shown on verification phone number screen. */
-"ResendCodeTimer" = "Επανάληψη αποστολής κωδικού στο %@";
+"ResendCodeTimer" = "Resend code in %@";
 
 /* The title of view controller where user verifies phone number. . */
-"VerifyPhoneTitle" = "Επαλήθευση αριθμού τηλεφώνου";
+"VerifyPhoneTitle" = "Verify phone number";
 
 /* The title of button displayed when user closes alert message. */
-"Done" = "Τέλος";
+"Done" = "Done";
 
 /* The title of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneTitle" = "Μη έγκυρος αριθμός τηλεφώνου";
+"IncorrectPhoneTitle" = "Invalid phone number";
 
 /* The body message of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneMessage" = "Εισαγάγετε έναν έγκυρο αριθμό τηλεφώνου";
+"IncorrectPhoneMessage" = "Enter a valid phone number";
 
 /* The body message of alert shown when user tapped resend verification code button. */
-"ResendCodeResult" = "Ο κωδικός στάλθηκε στο %@";
+"ResendCodeResult" = "Code was sent to %@";
 
 /* The title of alert shown when user entered invalid verification code. */
-"IncorrectCodeTitle" = "Εσφαλμένος κωδικός επαλήθευσης";
+"IncorrectCodeTitle" = "Incorrect verification code";
 
 /* The body message of alert shown when user entered invalid verification code. */
-"IncorrectCodeMessage" = "Εσφαλμένος κωδικός. Δοκιμάστε ξανά.";
+"IncorrectCodeMessage" = "Wrong code. Try again.";
 
 /* The body message of alert shown when internal server error appeared. */
-"InternalErrorMessage" = "Κάτι πήγε στραβά. Δοκιμάστε ξανά.";
+"InternalErrorMessage" = "Something went wrong. Please try again.";
 
 /* The body message of alert shown when the user has tried to send too many SMS messages. */
-"TooManyCodesSent" = "Αυτός ο αριθμός τηλεφώνου χρησιμοποιήθηκε πάρα πολλές φορές";
+"TooManyCodesSent" = "This phone number has been used too many times";
 
 /* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
-"MessageQuotaExceeded" = "Παρουσιάστηκε πρόβλημα με την επαλήθευση του αριθμού τηλεφώνου";
+"MessageQuotaExceeded" = "There was a problem verifying your phone number";
 
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
-"MessageExpired" = "Αυτός ο κωδικός δεν είναι πλέον έγκυρος";
+"MessageExpired" = "This code is no longer valid";
 
 /* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "Αν πατήσετε %@, θα σταλεί ένα SMS. Ενδέχεται να ισχύουν χρεώσεις μηνυμάτων και δεδομένων.";
+"TermsSMS" = "By tapping %@, an SMS may be sent. Message & data rates may apply.";
 
 /* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "Αν πατήσετε %@, δηλώνετε ότι συμφωνείτε με τους [Όρους Παροχής Υπηρεσιών].";
+"TermsAccountCreation" = "By tapping %@ you are indicating that you agree to the [Terms of Service].";
 

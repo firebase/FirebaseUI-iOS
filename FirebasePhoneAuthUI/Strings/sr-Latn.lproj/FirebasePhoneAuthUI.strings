@@ -1,78 +1,78 @@
 /* The text of the button used to sign-in with Phone. */
-"SignInWithPhone" = "Prijavi me pomoću telefona";
+"SignInWithPhone" = "Sign in with phone";
 
 /* The title of view controller where user enters phone number. */
-"EnterPhoneTitle" = "Unesite broj telefona";
+"EnterPhoneTitle" = "Enter phone number";
 
 /* The title of button on navigation controller which navigates to previous screen. */
-"Back" = "Nazad";
+"Back" = "Back";
 
 /* The title of button on navigation controller which navigates to the next screen. */
-"Next" = "Sledeće";
+"Next" = "Next";
 
 /* The title of button which user taps on phone verification screen. */
-"Verify" = "Potvrdi";
+"Verify" = "Verify";
 
 /* Alert message displayed when user submits empty verification code. */
-"EmptyVerificationCode" = "Verifikacioni kôd mora da se unese";
+"EmptyVerificationCode" = "Verification code can't be empty";
 
 /* Alert message displayed when user submits empty phone number. */
-"EmptyPhoneNumber" = "Broj telefona mora da se unese";
+"EmptyPhoneNumber" = "Phone number can't be empty";
 
 /* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
-"PhoneNumber" = "Broj";
+"PhoneNumber" = "Number";
 
 /* Placeholder shown for phone number input field. */
-"EnterYourPhoneNumber" = "Broj telefona";
+"EnterYourPhoneNumber" = "Phone number";
 
 /* Label next to the left of country selector control. */
-"Country" = "Zemlja";
+"Country" = "Country";
 
 /* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
-"EnterCodeDescription" = "Unesite %@-cifreni kôd koji smo poslali na";
+"EnterCodeDescription" = "Enter the %@-digit code we sent to";
 
 /* The title of button with resend verification code functionality. */
-"ResendCode" = "Ponovo pošalji kôd";
+"ResendCode" = "Resend code";
 
 /* Text of the resend timer label shown on verification phone number screen. */
-"ResendCodeTimer" = "Ponovo pošalji kôd za %@";
+"ResendCodeTimer" = "Resend code in %@";
 
 /* The title of view controller where user verifies phone number. . */
-"VerifyPhoneTitle" = "Verifikujte broj telefona";
+"VerifyPhoneTitle" = "Verify phone number";
 
 /* The title of button displayed when user closes alert message. */
-"Done" = "Gotovo";
+"Done" = "Done";
 
 /* The title of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneTitle" = "Nevažeći broj telefona";
+"IncorrectPhoneTitle" = "Invalid phone number";
 
 /* The body message of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneMessage" = "Unesite važeći broj telefona";
+"IncorrectPhoneMessage" = "Enter a valid phone number";
 
 /* The body message of alert shown when user tapped resend verification code button. */
-"ResendCodeResult" = "Kôd je poslat na broj %@";
+"ResendCodeResult" = "Code was sent to %@";
 
 /* The title of alert shown when user entered invalid verification code. */
-"IncorrectCodeTitle" = "Verifikacioni kôd je netačan";
+"IncorrectCodeTitle" = "Incorrect verification code";
 
 /* The body message of alert shown when user entered invalid verification code. */
-"IncorrectCodeMessage" = "Pogrešan kôd. Probajte ponovo.";
+"IncorrectCodeMessage" = "Wrong code. Try again.";
 
 /* The body message of alert shown when internal server error appeared. */
-"InternalErrorMessage" = "Nešto nije u redu. Probajte ponovo.";
+"InternalErrorMessage" = "Something went wrong. Please try again.";
 
 /* The body message of alert shown when the user has tried to send too many SMS messages. */
-"TooManyCodesSent" = "Ovaj broj telefona je upotrebljen previše puta";
+"TooManyCodesSent" = "This phone number has been used too many times";
 
 /* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
-"MessageQuotaExceeded" = "Došlo je do problema pri verifikaciji broja telefona";
+"MessageQuotaExceeded" = "There was a problem verifying your phone number";
 
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
-"MessageExpired" = "Taj kôd više ne važi";
+"MessageExpired" = "This code is no longer valid";
 
 /* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "Ako dodirnete %@, možda ćete primiti SMS. Možda će vam biti naplaćena poruka i prenos podataka.";
+"TermsSMS" = "By tapping %@, an SMS may be sent. Message & data rates may apply.";
 
 /* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "Ako dodirnete %@, potvrđujete da ste saglasni sa [uslovima korišćenja usluge].";
+"TermsAccountCreation" = "By tapping %@ you are indicating that you agree to the [Terms of Service].";
 

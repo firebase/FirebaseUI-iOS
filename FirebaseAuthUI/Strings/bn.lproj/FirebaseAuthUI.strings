@@ -1,218 +1,218 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "স্বাগতম";
+"AuthPickerTitle" = "Welcome";
 
 /* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"SignInWithEmail" = "ইমেল দিয়ে সাইন-ইন করুন";
+"SignInWithEmail" = "Sign in with email";
 
 /* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EnterYourEmail" = "আপনার ইমেল লিখুন";
+"EnterYourEmail" = "Enter your email";
 
 /* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"InvalidEmailError" = "ইমেল অ্যাড্রেসটি সঠিক নয়।";
+"InvalidEmailError" = "That email address isn't correct.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "এই ধরনের অ্যাকাউন্ট এই অ্যাপে ব্যবহার করা যায় না";
+"CannotAuthenticateError" = "This type of account isn't supported by this app";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "আপনার আগে থেকেই একটি অ্যাকাউন্ট আছে";
+"ExistingAccountTitle" = "You already have an account";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "আপনি আগেই %@ ব্যবহার করেছেন। চালিয়ে যেতে %@ দিয়ে সাইন-ইন করুন।";
+"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "সাইন-ইন করুন";
+"SignInTitle" = "Sign in";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "আপনার পাসওয়ার্ডটি লিখুন";
+"EnterYourPassword" = "Enter your password";
 
 /* Error message displayed when user enters an empty password. */
-"InvalidPasswordError" = "পাসওয়ার্ডটি খালি রাখা যাবেনা।";
+"InvalidPasswordError" = "Password cannot be empty.";
 
 /* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"WrongPasswordError" = "আপনার দেওয়া ইমেল এবং পাসওয়ার্ডটি মিলছে না।";
+"WrongPasswordError" = "The email and password you entered don't match.";
 
 /* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UserNotFoundError" = "আগে থেকে থাকা অ্যাকাউন্টের সাথে ইমেল অ্যাড্রেসটি মিলছে না।";
+"UserNotFoundError" = "That email address doesn’t match an existing account.";
 
 /* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AccountDisabledError" = "এই ইমেল অ্যাড্রেসটি এমন একটি অ্যাকাউন্টের জন্য যেটি অক্ষম করা হয়েছে।";
+"AccountDisabledError" = "That email address is for an account that has been disabled.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "আপনি অনেকবার ভুল পাসওয়ার্ড লিখেছেন। কিছুক্ষণের মধ্যে আবার চেষ্টা করুন।";
+"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
 
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "%@ এর জন্য প্রদানকারী পাওয়া যাচ্ছে না।";
+"CantFindProvider" = "Can't find provider for %@.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailsDontMatch" = "ইমেলটি মেল হচ্ছে না";
+"EmailsDontMatch" = "Emails don't match";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "পাসওয়ার্ড পুনরুদ্ধার করুন";
+"PasswordRecoveryTitle" = "Recover password";
 
 /* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryMessage" = "কিভাবে পাসওয়ার্ড রিসেট করবেন তা জানতে এই ইমেলে নির্দেশাবলী পাঠান।";
+"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryEmailSentTitle" = "আপনার ইমেল দেখুন";
+"PasswordRecoveryEmailSentTitle" = "Check your email";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "আপনার পাসওয়ার্ড পুনরুদ্ধার করতে %@ তে পাঠানো নির্দেশ অনুসরণ করুন।";
+"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "অ্যাকাউন্ট তৈরি করুন";
+"SignUpTitle" = "Create account";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "নাম ও পদবি";
+"FirstAndLastName" = "First & last name";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "পাসওয়ার্ড বেছে নিন";
+"ChoosePassword" = "Choose password";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "%@ এ ট্যাপ করার মাধ্যমে আপনি %@ তে সম্মতি জানাচ্ছেন।";
+"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "পরিষেবার শর্তাবলি";
+"TermsOfService" = "Terms of Service";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailAlreadyInUseError" = "এই ইমেল অ্যাড্রেসটি আগে থেকেই অন্য অ্যাকাউন্টে ব্যবহার করা হচ্ছে।";
+"EmailAlreadyInUseError" = "The email address is already in use by another account.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "সুরক্ষিত পাসওয়ার্ডে কমপক্ষে ৬টি বিশেষ বর্ণ এবং অক্ষর ও সংখ্যা মিশিয়ে থাকবে।";
+"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "আপনার IP অ্যাড্রেস থেকে অনেকগুলি অ্যাকাউন্টের অনুরোধ আসছে। কিছুক্ষণের মধ্যে আবার চেষ্টা করুন।";
+"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "সাইন-ইন করতে আপনি %@ আগেই ব্যবহার করেছেন। সেই অ্যাকাউন্টের জন্য আপনার পাসওয়ার্ড লিখুন।";
+"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
 
 /* OK button title. */
-"OK" = "ঠিক আছে";
+"OK" = "OK";
 
 /* Cancel button title. */
-"Cancel" = "বাতিল করুন";
+"Cancel" = "Cancel";
 
 /* Back button title. */
-"Back" = "ফিরে যান";
+"Back" = "Back";
 
 /* Next button title. */
-"Next" = "পরবর্তী";
+"Next" = "Next";
 
 /* Save button title. */
-"Save" = "সেভ করুন";
+"Save" = "Save";
 
 /* Save button title. */
-"Send" = "পাঠান";
+"Send" = "Send";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"Email" = "ইমেল";
+"Email" = "Email";
 
 /* Label next to a password text field. */
-"Password" = "পাসওয়ার্ড";
+"Password" = "Password";
 
 /* Label next to a name text field. */
-"Name" = "নাম";
+"Name" = "Name";
 
 /* Alert title Error. */
-"Error" = "ত্রুটি";
+"Error" = "Error";
 
 /* Alert button title Close. */
-"Close" = "বন্ধ করুন";
+"Close" = "Close";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "প্রোফাইল";
+"AS_SectionProfile" = "Profile";
 
 /* Account Settings section title Security. */
-"AS_SectionSecurity" = "নিরাপত্তা";
+"AS_SectionSecurity" = "Security";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "লিঙ্ক করা অ্যাকাউন্ট";
+"AS_SectionLinkedAccounts" = "Linked Accounts";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "নাম";
+"AS_Name" = "Name";
 
 /* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AS_Email" = "ইমেল";
+"AS_Email" = "Email";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "পাসওয়ার্ড যোগ করুন";
+"AS_AddPassword" = "Add password";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "পাসওয়ার্ড পরিবর্তন করুন";
+"AS_ChangePassword" = "Change password";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "সাইন-আউট করুন";
+"AS_SignOut" = "Sign Out";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "অ্যাকাউন্টটি মুছুন";
+"AS_DeleteAccount" = "Delete Account";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "পাসওয়ার্ড ভুলে গেছেন?";
+"ForgotPassword" = "Forgot password?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "আপনার পরিচয় যাচাই করুন";
+"VerifyItsYou" = "Verify it's you";
 
 /* Alert message title shown to confirm account deletion action. */
 "DeleteAccountConfirmationTitle" = "Delete Account?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "আপনার অ্যাকাউন্টের সাথে যুক্ত সমস্ত ডেটা মুছে ফেলা হবে, এবং পূর্বাবস্থায় ফেরানো যাবে না। এই কাজটি সম্পূর্ণ করতে আপনাকে আবার সাইন-ইন করতে হবে";
+"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "আপনার অ্যাকাউন্টের সাথে যুক্ত সমস্ত ডেটা মুছে ফেলা হবে, এবং পূর্বাবস্থায় ফেরানো যাবে না। আপনি কি অ্যাকাউন্টটি মুছে ফেলার বিষয়ে নিশ্চিত?";
+"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
 
 /* Text of Delete action button. */
-"Delete" = "মুছুন";
+"Delete" = "Delete";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "অ্যাকাউন্টটি মুছুন";
+"DeleteAccountControllerTitle" = "Delete account";
 
 /* Alert message shown before account deletion. */
-"ActionCantBeUndone" = "এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না";
+"ActionCantBeUndone" = "This action can't be undone";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "লিঙ্কমুক্ত করুন";
+"UnlinkAction" = "Unlink";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "লিঙ্ক করা অ্যাকাউন্ট";
+"UnlinkTitle" = "Linked account";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "অ্যাকাউন্ট লিঙ্কমুক্ত করবেন?";
+"UnlinkConfirmationTitle" = "Unlink account?";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "আপনি আর এই অ্যাকাউন্টটি ব্যবহার করে সাইন-ইন করতে পারবেন না";
+"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "অ্যাকাউন্ট লিঙ্কমুক্ত করুন";
+"UnlinkConfirmationActionTitle" = "Unlink account";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "আপনার অ্যাকাউন্টের সাথে যুক্ত ইমেল অ্যাড্রেসটি পরিবর্তন করতে আপনাকে আবার সাইন-ইন করতে হবে।";
+"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
 
 /* Alert action message shown before confirmation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "পাসওয়ার্ড পরিবর্তন করার জন্য আগে আপনাকে বর্তমান পাসওয়ার্ডটি লিখতে হবে।";
+"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
 
 /* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EditEmailTitle" = "ইমেলটি সম্পাদনা করুন";
+"EditEmailTitle" = "Edit email";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "নাম সম্পাদনা করুন";
+"EditNameTitle" = "Edit name";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "আপনার অ্যাকাউন্টে পাসওয়ার্ড যোগ করতে আপনাকে আবার সাইন-ইন করতে হবে।";
+"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "আপনার অ্যাকাউন্টের পাসওয়ার্ড পরিবর্তন করতে আপনাকে আবার সাইন-ইন করতে হবে।";
+"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
 
 /* Alert message shown when re-authenticating before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "পাসওয়ার্ড পরিবর্তন করার জন্য আগে আপনাকে বর্তমান পাসওয়ার্ডটি লিখতে হবে।";
+"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "পাসওয়ার্ড যোগ করুন";
+"AddPasswordTitle" = "Add password";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "পাসওয়ার্ড পরিবর্তন করুন";
+"EditPasswordTitle" = "Change password";
 
 /* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"ProviderTitlePassword" = "ইমেল";
+"ProviderTitlePassword" = "Email";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google";
@@ -224,22 +224,22 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "%@ দিয়ে সাইন-ইন করুন";
+"SignInWithProvider" = "Sign in with %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "আপনার নামটি লিখুন";
+"PlaceholderEnterName" = "Enter your name";
 
 /* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PlaceholderEnterEmail" = "আপনার ইমেল লিখুন";
+"PlaceholderEnterEmail" = "Enter your email";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "আপনার পাসওয়ার্ডটি লিখুন";
+"PlaceholderEnterPassword" = "Enter your password";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "নতুন পাসওয়ার্ড";
+"PlaceholderNewPassword" = "New password";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "পাসওয়ার্ড বেছে নিন";
+"PlaceholderChosePassword" = "Choose password";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "সাইন-ইন করতে সমস্যা হচ্ছে?";
+"ForgotPasswordTitle" = "Trouble signing in?";

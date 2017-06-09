@@ -1,219 +1,218 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "Tervetuloa";
+"AuthPickerTitle" = "Welcome";
 
 /* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"SignInWithEmail" = "Kirjaudu sähköpostilla";
+"SignInWithEmail" = "Sign in with email";
 
 /* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EnterYourEmail" = "Anna sähköpostiosoitteesi";
+"EnterYourEmail" = "Enter your email";
 
 /* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"InvalidEmailError" = "Virheellinen sähköpostiosoite";
+"InvalidEmailError" = "That email address isn't correct.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "Sovellus ei tue tätä tilityyppiä.";
+"CannotAuthenticateError" = "This type of account isn't supported by this app";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "Sinulla on jo tili.";
+"ExistingAccountTitle" = "You already have an account";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "Olet jo käyttänyt osoitetta %@. Jatka kirjautumalla palvelun %@ kautta.";
+"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "Kirjaudu sisään";
+"SignInTitle" = "Sign in";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "Anna salasana";
+"EnterYourPassword" = "Enter your password";
 
 /* Error message displayed when user enters an empty password. */
-"InvalidPasswordError" = "Salasana ei voi olla tyhjä.";
+"InvalidPasswordError" = "Password cannot be empty.";
 
 /* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"WrongPasswordError" = "Antamasi sähköpostiosoite ja salasana eivät täsmää.";
+"WrongPasswordError" = "The email and password you entered don't match.";
 
 /* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UserNotFoundError" = "Sähköpostiosoite ei vastaa aiemmin luotua tiliä.";
+"UserNotFoundError" = "That email address doesn’t match an existing account.";
 
 /* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AccountDisabledError" = "Sähköpostiosoite on rekisteröity tiliin, joka on poistettu käytöstä.";
+"AccountDisabledError" = "That email address is for an account that has been disabled.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "Olet antanut virheellisen salasanan liian monta kertaa. Yritä uudelleen muutaman minuutin kuluttua.";
+"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
 
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "Palveluntarjoajaa ei löydy osoitteelle %@.";
+"CantFindProvider" = "Can't find provider for %@.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailsDontMatch" = "Sähköpostit eivät täsmää.";
+"EmailsDontMatch" = "Emails don't match";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Palauta salasana";
+"PasswordRecoveryTitle" = "Recover password";
 
 /* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryMessage" = "Tilaa tähän sähköpostiin ohjeet, joissa neuvotaan, miten voit nollata salasanan.";
+"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryEmailSentTitle" = "Tarkista sähköpostisi";
+"PasswordRecoveryEmailSentTitle" = "Check your email";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "Palauta salasana noudattamalla osoitteeseen %@ lähetettyjä ohjeita.";
+"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Luo tili";
+"SignUpTitle" = "Create account";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "Etu- ja sukunimi";
+"FirstAndLastName" = "First & last name";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "Valitse salasana";
+"ChoosePassword" = "Choose password";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Napauttamalla %@ ilmaiset, että hyväksyt %@.";
+"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "Käyttöehdot";
+"TermsOfService" = "Terms of Service";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailAlreadyInUseError" = "Tämä sähköpostiosoite on jo rekisteröity toiseen tiliin.";
+"EmailAlreadyInUseError" = "The email address is already in use by another account.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Vahvassa salasanassa on vähintään 6 merkkiä, ja se sisältää kirjaimia ja numeroita.";
+"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "IP-osoitteestasi on lähetetty liian monta tilipyyntöä. Yritä uudelleen muutaman minuutin kuluttua.";
+"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "Olet jo käyttänyt osoitetta %@
-        kirjautumiseen. Anna kyseisen tilin salasana.";
+"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
 
 /* OK button title. */
-"OK" = "Ok";
+"OK" = "OK";
 
 /* Cancel button title. */
-"Cancel" = "Peruuta";
+"Cancel" = "Cancel";
 
 /* Back button title. */
-"Back" = "Takaisin";
+"Back" = "Back";
 
 /* Next button title. */
-"Next" = "Seuraava";
+"Next" = "Next";
 
 /* Save button title. */
-"Save" = "Tallenna";
+"Save" = "Save";
 
 /* Save button title. */
-"Send" = "Lähetä";
+"Send" = "Send";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"Email" = "Sähköposti";
+"Email" = "Email";
 
 /* Label next to a password text field. */
-"Password" = "Salasana";
+"Password" = "Password";
 
 /* Label next to a name text field. */
-"Name" = "Nimi";
+"Name" = "Name";
 
 /* Alert title Error. */
-"Error" = "Virhe";
+"Error" = "Error";
 
 /* Alert button title Close. */
-"Close" = "Sulje";
+"Close" = "Close";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "Profiili";
+"AS_SectionProfile" = "Profile";
 
 /* Account Settings section title Security. */
-"AS_SectionSecurity" = "Turvallisuus";
+"AS_SectionSecurity" = "Security";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "Linkitetyt tilit";
+"AS_SectionLinkedAccounts" = "Linked Accounts";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "Nimi";
+"AS_Name" = "Name";
 
 /* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AS_Email" = "Sähköposti";
+"AS_Email" = "Email";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "Lisää salasana";
+"AS_AddPassword" = "Add password";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "Vaihda salasana";
+"AS_ChangePassword" = "Change password";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "Kirjaudu ulos";
+"AS_SignOut" = "Sign Out";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "Poista tili";
+"AS_DeleteAccount" = "Delete Account";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Unohditko salasanasi?";
+"ForgotPassword" = "Forgot password?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Vahvista henkilöllisyytesi";
+"VerifyItsYou" = "Verify it's you";
 
 /* Alert message title shown to confirm account deletion action. */
 "DeleteAccountConfirmationTitle" = "Delete Account?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "Tämä poistaa kaikki tiliisi liittyvät tiedot, eikä toimintoa voi kumota. Sinun pitää kirjautua sisään uudelleen, jotta voit suorittaa toiminnon loppuun.";
+"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "Tämä poistaa kaikki tiliisi liittyvät tiedot, eikä toimintoa voi kumota. Haluatko varmasti poistaa tilisi?";
+"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
 
 /* Text of Delete action button. */
-"Delete" = "Poista";
+"Delete" = "Delete";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "Poista tili";
+"DeleteAccountControllerTitle" = "Delete account";
 
 /* Alert message shown before account deletion. */
-"ActionCantBeUndone" = "Tätä toimintoa ei voi kumota.";
+"ActionCantBeUndone" = "This action can't be undone";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Poista linkitys";
+"UnlinkAction" = "Unlink";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "Linkitetty tili";
+"UnlinkTitle" = "Linked account";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Poistetaanko tilin linkitys?";
+"UnlinkConfirmationTitle" = "Unlink account?";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "Et enää voi kirjautua sisään tililläsi.";
+"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Poista tilin linkitys";
+"UnlinkConfirmationActionTitle" = "Unlink account";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "Jotta voit vaihtaa tiliisi liittyvän sähköpostiosoitteen, sinun pitää kirjautua sisään uudelleen.";
+"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
 
 /* Alert action message shown before confirmation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "Jotta voit vaihtaa salasanasi, sinun on annettava ensin nykyinen salasanasi.";
+"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
 
 /* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EditEmailTitle" = "Muokkaa sähköpostia";
+"EditEmailTitle" = "Edit email";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "Muokkaa nimeä";
+"EditNameTitle" = "Edit name";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "Jotta voit lisätä salasanan tiliisi, sinun pitää kirjautua sisään uudelleen.";
+"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "Jotta voit vaihtaa tilisi salasanan, sinun pitää kirjautua sisään uudelleen.";
+"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
 
 /* Alert message shown when re-authenticating before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "Jotta voit vaihtaa salasanasi, sinun on annettava ensin nykyinen salasanasi.";
+"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "Lisää salasana";
+"AddPasswordTitle" = "Add password";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "Vaihda salasana";
+"EditPasswordTitle" = "Change password";
 
 /* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"ProviderTitlePassword" = "Sähköposti";
+"ProviderTitlePassword" = "Email";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google";
@@ -225,22 +224,22 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "Kirjaudu palvelun %@ kautta";
+"SignInWithProvider" = "Sign in with %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "Anna nimesi";
+"PlaceholderEnterName" = "Enter your name";
 
 /* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PlaceholderEnterEmail" = "Anna sähköpostiosoitteesi";
+"PlaceholderEnterEmail" = "Enter your email";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "Anna salasana";
+"PlaceholderEnterPassword" = "Enter your password";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "Uusi salasana";
+"PlaceholderNewPassword" = "New password";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "Valitse salasana";
+"PlaceholderChosePassword" = "Choose password";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "Eikö kirjautuminen onnistu?";
+"ForgotPasswordTitle" = "Trouble signing in?";

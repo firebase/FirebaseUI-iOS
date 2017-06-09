@@ -1,78 +1,78 @@
 /* The text of the button used to sign-in with Phone. */
-"SignInWithPhone" = "ورود به سیستم با تلفن";
+"SignInWithPhone" = "Sign in with phone";
 
 /* The title of view controller where user enters phone number. */
-"EnterPhoneTitle" = "شماره تلفن را وارد کنید";
+"EnterPhoneTitle" = "Enter phone number";
 
 /* The title of button on navigation controller which navigates to previous screen. */
-"Back" = "برگشت";
+"Back" = "Back";
 
 /* The title of button on navigation controller which navigates to the next screen. */
-"Next" = "بعدی";
+"Next" = "Next";
 
 /* The title of button which user taps on phone verification screen. */
-"Verify" = "تأیید";
+"Verify" = "Verify";
 
 /* Alert message displayed when user submits empty verification code. */
-"EmptyVerificationCode" = "فیلد کد تأیید نباید خالی باشد";
+"EmptyVerificationCode" = "Verification code can't be empty";
 
 /* Alert message displayed when user submits empty phone number. */
-"EmptyPhoneNumber" = "فیلد شماره تلفن نباید خالی باشد";
+"EmptyPhoneNumber" = "Phone number can't be empty";
 
 /* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
-"PhoneNumber" = "عدد";
+"PhoneNumber" = "Number";
 
 /* Placeholder shown for phone number input field. */
-"EnterYourPhoneNumber" = "شماره تلفن";
+"EnterYourPhoneNumber" = "Phone number";
 
 /* Label next to the left of country selector control. */
-"Country" = "کشور";
+"Country" = "Country";
 
 /* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
-"EnterCodeDescription" = "کد %@ رقمی‌ای که به این شماره ارسال کرده‌ایم را وارد کنید";
+"EnterCodeDescription" = "Enter the %@-digit code we sent to";
 
 /* The title of button with resend verification code functionality. */
-"ResendCode" = "ارسال مجدد کد";
+"ResendCode" = "Resend code";
 
 /* Text of the resend timer label shown on verification phone number screen. */
-"ResendCodeTimer" = "کد پس از %@ مجدداً ارسال می‌شود";
+"ResendCodeTimer" = "Resend code in %@";
 
 /* The title of view controller where user verifies phone number. . */
-"VerifyPhoneTitle" = "تأیید شماره تلفن";
+"VerifyPhoneTitle" = "Verify phone number";
 
 /* The title of button displayed when user closes alert message. */
-"Done" = "انجام شد";
+"Done" = "Done";
 
 /* The title of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneTitle" = "شماره تلفن نامعتبر";
+"IncorrectPhoneTitle" = "Invalid phone number";
 
 /* The body message of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneMessage" = "یک شماره تلفن معتبر وارد کنید";
+"IncorrectPhoneMessage" = "Enter a valid phone number";
 
 /* The body message of alert shown when user tapped resend verification code button. */
-"ResendCodeResult" = "کد به %@ ارسال شد";
+"ResendCodeResult" = "Code was sent to %@";
 
 /* The title of alert shown when user entered invalid verification code. */
-"IncorrectCodeTitle" = "کد تأیید نادرست";
+"IncorrectCodeTitle" = "Incorrect verification code";
 
 /* The body message of alert shown when user entered invalid verification code. */
-"IncorrectCodeMessage" = "کد اشتباه است. دوباره امتحان کنید.";
+"IncorrectCodeMessage" = "Wrong code. Try again.";
 
 /* The body message of alert shown when internal server error appeared. */
-"InternalErrorMessage" = "مشکلی پیش آمد. لطفاً دوباره امتحان کنید.";
+"InternalErrorMessage" = "Something went wrong. Please try again.";
 
 /* The body message of alert shown when the user has tried to send too many SMS messages. */
-"TooManyCodesSent" = "از این شماره تلفن به دفعات زیاد استفاده شده است";
+"TooManyCodesSent" = "This phone number has been used too many times";
 
 /* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
-"MessageQuotaExceeded" = "مشکلی در تأیید شماره تلفنتان پیش آمد";
+"MessageQuotaExceeded" = "There was a problem verifying your phone number";
 
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
-"MessageExpired" = "این کد دیگر معتبر نیست";
+"MessageExpired" = "This code is no longer valid";
 
 /* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "با ضربه زدن روی %@ پیامکی ارسال می‌شود. ممکن است هزینه انتقال داده و پیام اعمال شود.";
+"TermsSMS" = "By tapping %@, an SMS may be sent. Message & data rates may apply.";
 
 /* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "با ضربه زدن روی %@ موافقتتان را با [شرایط و ضوابط] اعلام می‌کنید.";
+"TermsAccountCreation" = "By tapping %@ you are indicating that you agree to the [Terms of Service].";
 

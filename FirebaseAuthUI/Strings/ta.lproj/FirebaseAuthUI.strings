@@ -1,218 +1,218 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "வரவேற்கிறோம்";
+"AuthPickerTitle" = "Welcome";
 
 /* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"SignInWithEmail" = "மின்னஞ்சல் மூலம் உள்நுழைக";
+"SignInWithEmail" = "Sign in with email";
 
 /* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EnterYourEmail" = "மின்னஞ்சலை உள்ளிடவும்";
+"EnterYourEmail" = "Enter your email";
 
 /* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"InvalidEmailError" = "மின்னஞ்சல் முகவரி தவறாக உள்ளது.";
+"InvalidEmailError" = "That email address isn't correct.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "இந்தப் பயன்பாடு, இந்தக் கணக்கு வகையை ஆதரிக்காது";
+"CannotAuthenticateError" = "This type of account isn't supported by this app";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "ஏற்கனவே உங்களிடம் கணக்கு உள்ளது";
+"ExistingAccountTitle" = "You already have an account";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "ஏற்கனவே %@ஐப் பயன்படுத்தியுள்ளீர்கள். தொடர, %@ மூலம் உள்நுழையவும்.";
+"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "உள்நுழைக";
+"SignInTitle" = "Sign in";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "கடவுச்சொல்லை உள்ளிடவும்";
+"EnterYourPassword" = "Enter your password";
 
 /* Error message displayed when user enters an empty password. */
-"InvalidPasswordError" = "கடவுச்சொல் காலியாக இருக்கக்கூடாது.";
+"InvalidPasswordError" = "Password cannot be empty.";
 
 /* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"WrongPasswordError" = "உள்ளிட்ட மின்னஞ்சலும் கடவுச்சொல்லும் பொருந்தவில்லை.";
+"WrongPasswordError" = "The email and password you entered don't match.";
 
 /* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UserNotFoundError" = "மின்னஞ்சல் முகவரி தற்போதைய கணக்குடன் பொருந்தவில்லை.";
+"UserNotFoundError" = "That email address doesn’t match an existing account.";
 
 /* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AccountDisabledError" = "இந்த மின்னஞ்சலுக்குரிய கணக்கு முடக்கப்பட்டுள்ளது.";
+"AccountDisabledError" = "That email address is for an account that has been disabled.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "தவறான கடவுச்சொல்லைப் பலமுறை உள்ளிட்டுள்ளீர்கள். சில நிமிடங்களில் மீண்டும் முயலவும்.";
+"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
 
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "%@க்கான வழங்குநர் இல்லை.";
+"CantFindProvider" = "Can't find provider for %@.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailsDontMatch" = "மின்னஞ்சல்கள் பொருந்தவில்லை";
+"EmailsDontMatch" = "Emails don't match";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "கடவுச்சொல்லை மீட்டெடு";
+"PasswordRecoveryTitle" = "Recover password";
 
 /* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryMessage" = "கடவுச்சொல்லை மீட்டமைப்பது தொடர்பான வழிமுறைகளை இந்த மின்னஞ்சலில் பார்க்கவும்.";
+"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryEmailSentTitle" = "உங்கள் மின்னஞ்சலைப் பார்க்கவும்";
+"PasswordRecoveryEmailSentTitle" = "Check your email";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "கடவுச்சொல்லை மீட்டெடுக்க, %@க்கு அனுப்பிய வழிமுறைகளைப் பின்பற்றவும்.";
+"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "கணக்கை உருவாக்கு";
+"SignUpTitle" = "Create account";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "பெயரின் முற்பகுதி மற்றும் பிற்பகுதி";
+"FirstAndLastName" = "First & last name";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "கடவுச்சொல்லைத் தேர்வு செய்யவும்";
+"ChoosePassword" = "Choose password";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "%@ஐத் தட்டுவதன் மூலம், %@ஐ ஏற்பதாகக் குறிப்பிடுகிறீர்கள்.";
+"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "சேவை விதிமுறைகள்";
+"TermsOfService" = "Terms of Service";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailAlreadyInUseError" = "மின்னஞ்சல் முகவரி ஏற்கனவே வேறொரு கணக்கில் பயன்படுத்தப்படுகிறது.";
+"EmailAlreadyInUseError" = "The email address is already in use by another account.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "வலுவான கடவுச்சொற்களில் குறைந்தது 6 எழுத்துக்குறிகளும், எழுத்துகளும் எண்களும் கலந்த கலவையும் இருக்க வேண்டும்.";
+"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "உங்கள் IP முகவரியிலிருந்து கணக்குக் கோரிக்கைகள் பல வருகின்றன. சில நிமிடங்களில் மீண்டும் முயலவும்.";
+"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "ஏற்கனவே %@ஐப் பயன்படுத்தி உள்நுழைந்துள்ளீர்கள். அந்தக் கணக்கிற்கான கடவுச்சொல்லை உள்ளிடவும்.";
+"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
 
 /* OK button title. */
-"OK" = "சரி";
+"OK" = "OK";
 
 /* Cancel button title. */
-"Cancel" = "ரத்துசெய்";
+"Cancel" = "Cancel";
 
 /* Back button title. */
-"Back" = "முந்தையது";
+"Back" = "Back";
 
 /* Next button title. */
-"Next" = "அடுத்து";
+"Next" = "Next";
 
 /* Save button title. */
-"Save" = "சேமி";
+"Save" = "Save";
 
 /* Save button title. */
-"Send" = "அனுப்பு";
+"Send" = "Send";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"Email" = "மின்னஞ்சல்";
+"Email" = "Email";
 
 /* Label next to a password text field. */
-"Password" = "கடவுச்சொல்";
+"Password" = "Password";
 
 /* Label next to a name text field. */
-"Name" = "பெயர்";
+"Name" = "Name";
 
 /* Alert title Error. */
-"Error" = "பிழை";
+"Error" = "Error";
 
 /* Alert button title Close. */
-"Close" = "மூடு";
+"Close" = "Close";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "சுயவிவரம்";
+"AS_SectionProfile" = "Profile";
 
 /* Account Settings section title Security. */
-"AS_SectionSecurity" = "பாதுகாப்பு";
+"AS_SectionSecurity" = "Security";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "இணைத்துள்ள கணக்குகள்";
+"AS_SectionLinkedAccounts" = "Linked Accounts";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "பெயர்";
+"AS_Name" = "Name";
 
 /* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AS_Email" = "மின்னஞ்சல்";
+"AS_Email" = "Email";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "கடவுச்சொல்லைச் சேர்";
+"AS_AddPassword" = "Add password";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "கடவுச்சொல்லை மாற்று";
+"AS_ChangePassword" = "Change password";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "வெளியேறு";
+"AS_SignOut" = "Sign Out";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "கணக்கை நீக்கு";
+"AS_DeleteAccount" = "Delete Account";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "கடவுச்சொல்லை மறந்துவிட்டீர்களா?";
+"ForgotPassword" = "Forgot password?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "நீங்கள் தான் என்பதை உறுதிசெய்யவும்";
+"VerifyItsYou" = "Verify it's you";
 
 /* Alert message title shown to confirm account deletion action. */
 "DeleteAccountConfirmationTitle" = "Delete Account?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "இவ்வாறு செய்தால், உங்கள் கணக்குடன் தொடர்புடைய எல்லாத் தரவும் அழிக்கப்படும், அத்துடன் அவற்றைத் திரும்பப்பெற முடியாது. இந்தச் செயல்பாட்டை முடிக்க, நீங்கள் மீண்டும் உள்நுழைய வேண்டும்";
+"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "இவ்வாறு செய்தால், உங்கள் கணக்குடன் தொடர்புடைய எல்லாத் தரவும் அழிக்கப்படும், அத்துடன் அவற்றைத் திரும்பப்பெற முடியாது. நிச்சயம் நீக்க விரும்புகிறீர்களா?";
+"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
 
 /* Text of Delete action button. */
-"Delete" = "நீக்கு";
+"Delete" = "Delete";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "கணக்கை நீக்கு";
+"DeleteAccountControllerTitle" = "Delete account";
 
 /* Alert message shown before account deletion. */
-"ActionCantBeUndone" = "இதைப் பின்னர் செயல்தவிர்க்க முடியாது";
+"ActionCantBeUndone" = "This action can't be undone";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "இணைப்பை நீக்கு";
+"UnlinkAction" = "Unlink";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "இணைத்துள்ள கணக்கு";
+"UnlinkTitle" = "Linked account";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "கணக்கின் இணைப்பை நீக்கவா?";
+"UnlinkConfirmationTitle" = "Unlink account?";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "உங்கள் கணக்கைப் பயன்படுத்தி இனி உள்நுழைய முடியாது";
+"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "கணக்கின் இணைப்பை நீக்கு";
+"UnlinkConfirmationActionTitle" = "Unlink account";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "உங்கள் கணக்குடன் தொடர்புடைய மின்னஞ்சல் முகவரியை மாற்ற, நீங்கள் மீண்டும் உள்நுழைய வேண்டும்.";
+"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
 
 /* Alert action message shown before confirmation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "கடவுச்சொல்லை மாற்ற, தற்போதைய கடவுச்சொல்லை முதலில் உள்ளிட வேண்டும்.";
+"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
 
 /* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EditEmailTitle" = "மின்னஞ்சலைத் திருத்து";
+"EditEmailTitle" = "Edit email";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "பெயரை மாற்று";
+"EditNameTitle" = "Edit name";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "உங்கள் கணக்கின் கடவுச்சொல்லை சேர்க்க, நீங்கள் மீண்டும் உள்நுழைய வேண்டும்.";
+"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "உங்கள் கணக்கின் கடவுச்சொல்லை மாற்ற, நீங்கள் மீண்டும் உள்நுழைய வேண்டும்.";
+"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
 
 /* Alert message shown when re-authenticating before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "கடவுச்சொல்லை மாற்ற, தற்போதைய கடவுச்சொல்லை முதலில் உள்ளிட வேண்டும்.";
+"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "கடவுச்சொல்லைச் சேர்";
+"AddPasswordTitle" = "Add password";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "கடவுச்சொல்லை மாற்று";
+"EditPasswordTitle" = "Change password";
 
 /* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"ProviderTitlePassword" = "மின்னஞ்சல்";
+"ProviderTitlePassword" = "Email";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google";
@@ -224,22 +224,22 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "%@ மூலம் உள்நுழைக";
+"SignInWithProvider" = "Sign in with %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "பெயரை உள்ளிடவும்";
+"PlaceholderEnterName" = "Enter your name";
 
 /* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PlaceholderEnterEmail" = "மின்னஞ்சலை உள்ளிடவும்";
+"PlaceholderEnterEmail" = "Enter your email";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "கடவுச்சொல்லை உள்ளிடவும்";
+"PlaceholderEnterPassword" = "Enter your password";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "புதிய கடவுச்சொல்";
+"PlaceholderNewPassword" = "New password";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "கடவுச்சொல்லைத் தேர்வு செய்யவும்";
+"PlaceholderChosePassword" = "Choose password";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "உள்நுழைவதில் சிக்கலா?";
+"ForgotPasswordTitle" = "Trouble signing in?";

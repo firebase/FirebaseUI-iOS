@@ -1,218 +1,218 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "ಸ್ವಾಗತ";
+"AuthPickerTitle" = "Welcome";
 
 /* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"SignInWithEmail" = "ಇಮೇಲ್ ಜೊತೆ ಸೈನ್ ಇನ್ ಮಾಡಿ";
+"SignInWithEmail" = "Sign in with email";
 
 /* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EnterYourEmail" = "ನಿಮ್ಮ ಇಮೇಲ್ ಅನ್ನು ನಮೂದಿಸಿ";
+"EnterYourEmail" = "Enter your email";
 
 /* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"InvalidEmailError" = "ಆ ಇಮೇಲ್ ವಿಳಾಸವು ಸರಿಯಾಗಿಲ್ಲ.";
+"InvalidEmailError" = "That email address isn't correct.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "ಈ ಅಪ್ಲಿಕೇಶನ್‌ ಈ ರೀತಿಯ ಖಾತೆಯನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ";
+"CannotAuthenticateError" = "This type of account isn't supported by this app";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "ನೀವು ಈಗಾಗಲೇ ಖಾತೆಯನ್ನು ಹೊಂದಿರುವಿರಿ";
+"ExistingAccountTitle" = "You already have an account";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "ನೀವು ಈಗಾಗಲೇ %@ ನ್ನು ಬಳಸಿದ್ದೀರಿ. ಮುಂದುವರಿಸಲು %@ ಜೊತೆ ಸೈನ್ ಇನ್ ಮಾಡಿ.";
+"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "ಸೈನ್ ಇನ್‌";
+"SignInTitle" = "Sign in";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ";
+"EnterYourPassword" = "Enter your password";
 
 /* Error message displayed when user enters an empty password. */
-"InvalidPasswordError" = "ಪಾಸ್‌ವರ್ಡ್‌ ಖಾಲಿ ಇರುವಂತಿಲ್ಲ.";
+"InvalidPasswordError" = "Password cannot be empty.";
 
 /* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"WrongPasswordError" = "ನೀವು ನಮೂದಿಸಿರುವ ಇಮೇಲ್‌ ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್‌ ಹೊಂದಾಣಿಕೆಯಾಗಿಲ್ಲ.";
+"WrongPasswordError" = "The email and password you entered don't match.";
 
 /* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UserNotFoundError" = "ಆ ಇಮೇಲ್‌ ವಿಳಾಸವು ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ  ಖಾತೆಗೆ ಹೊಂದಾಣಿಕೆಯಾಗುವುದಿಲ್ಲ.";
+"UserNotFoundError" = "That email address doesn’t match an existing account.";
 
 /* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AccountDisabledError" = "ಖಾತೆಗೆ ಆ ಇಮೇಲ್‌ ವಿಳಾಸವನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ.";
+"AccountDisabledError" = "That email address is for an account that has been disabled.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "ಹಲವು ಬಾರಿ ನೀವು ತಪ್ಪಾದ ಪಾಸ್‌ವರ್ಡ್‌ ನಮೂದಿಸಿರುವಿರಿ. ಕೆಲವು ನಿಮಿಷಗಳಲ್ಲಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.";
+"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
 
 /* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "%@ ಗಾಗಿ ಪೂರೈಕೆದಾರರನ್ನು ಹುಡಕಲಾಗಲಿಲ್ಲ";
+"CantFindProvider" = "Can't find provider for %@.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailsDontMatch" = "ಇಮೇಲ್‌ಗಳು ಹೊಂದಾಣಿಕೆಯಾಗುತ್ತಿಲ್ಲ";
+"EmailsDontMatch" = "Emails don't match";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "ಪಾಸ್‌ವರ್ಡ್ ಹಿಂಪಡೆಯಿರಿ";
+"PasswordRecoveryTitle" = "Recover password";
 
 /* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryMessage" = "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಮರುಹೊಂದಿಸುವುದು ಹೇಗೆ ಎಂದು ತಿಳಿಯಲು ಆ ಇಮೇಲ್‌ಗೆ ಕಳುಹಿಸಿರುವ ಸೂಚನೆಗಳನ್ನು ಪಡೆಯಿರಿ.";
+"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryEmailSentTitle" = "ನಿಮ್ಮ ಇಮೇಲ್‌ ಅನ್ನು ಪರಿಶೀಲಿಸಿ";
+"PasswordRecoveryEmailSentTitle" = "Check your email";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಮರುಪಡೆಯಲು %@ ಗೆ ಕಳುಹಿಸಲಾದ ಸೂಚನೆಗಳನ್ನು ಅನುಸರಿಸಿ.";
+"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "ಖಾತೆ ರಚಿಸಿ";
+"SignUpTitle" = "Create account";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "ಮೊದಲ ಮತ್ತು ಕೊನೆಯ ಹೆಸರು";
+"FirstAndLastName" = "First & last name";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಆರಿಸಿ";
+"ChoosePassword" = "Choose password";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "%@ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡುವ ಮೂಲಕ, ನೀವು %@ ನ್ನು ಒಪ್ಪುತ್ತೀರಿ ಎಂದು ಸೂಚಿಸುತ್ತಿದ್ದೀರಿ.";
+"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "ಸೇವಾ ನಿಯಮಗಳು";
+"TermsOfService" = "Terms of Service";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailAlreadyInUseError" = "ಇಮೇಲ್‌ ವಿಳಾಸವು ಈಗಾಗಲೇ ಮತ್ತೊಂದು ಖಾತೆಗೆ ಬಳಸಲಾಗಿದೆ.";
+"EmailAlreadyInUseError" = "The email address is already in use by another account.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "ಪ್ರಬಲವಾದ ಪಾಸ್‌ವರ್ಡ್‌ಗಳು ಕನಿಷ್ಠ ಅಕ್ಷರಗಳನ್ನಾದರೂ ಹಾಗೂ ಮಿಕ್ಸ್‌ ಅಕ್ಷರಗಳು ಮತ್ತು ಸಂಖ್ಯೆಗಳು ಇರಬೇಕು.";
+"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "ನಿಮ್ಮ IP ವಿಳಾಸದಿಂದ ಅತಿ ಹೆಚ್ಚು ಖಾತೆ ಕೋರಿಕೆಗಳು ಬರುತ್ತಿವೆ. ಕೆಲವು ನಿಮಿಷಗಳಲ್ಲಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.";
+"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "ನೀವು ಈಗಾಗಲೇ ಸೈನ್ ಇನ್ ಮಾಡಲು %@ ನ್ನು ಬಳಸಿದ್ದೀರ. ಆ ಖಾತೆಗೆ ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್‌ ಅನ್ನು ನಮೂದಿಸಿ.";
+"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
 
 /* OK button title. */
-"OK" = "ಸರಿ";
+"OK" = "OK";
 
 /* Cancel button title. */
-"Cancel" = "ರದ್ದುಮಾಡಿ";
+"Cancel" = "Cancel";
 
 /* Back button title. */
-"Back" = "ಹಿಂದೆ";
+"Back" = "Back";
 
 /* Next button title. */
-"Next" = "ಮುಂದೆ";
+"Next" = "Next";
 
 /* Save button title. */
-"Save" = "ಉಳಿಸು";
+"Save" = "Save";
 
 /* Save button title. */
-"Send" = "ಕಳುಹಿಸಿ";
+"Send" = "Send";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"Email" = "ಇಮೇಲ್";
+"Email" = "Email";
 
 /* Label next to a password text field. */
-"Password" = "ಪಾಸ್‌ವರ್ಡ್";
+"Password" = "Password";
 
 /* Label next to a name text field. */
-"Name" = "ಹೆಸರು";
+"Name" = "Name";
 
 /* Alert title Error. */
-"Error" = "ದೋಷ";
+"Error" = "Error";
 
 /* Alert button title Close. */
-"Close" = "ಮುಚ್ಚಿ";
+"Close" = "Close";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "ಪ್ರೊಫೈಲ್";
+"AS_SectionProfile" = "Profile";
 
 /* Account Settings section title Security. */
-"AS_SectionSecurity" = "ಭದ್ರತೆ";
+"AS_SectionSecurity" = "Security";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "ಲಿಂಕ್‌ ಮಾಡಲಾದ ಖಾತೆಗಳು";
+"AS_SectionLinkedAccounts" = "Linked Accounts";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "ಹೆಸರು";
+"AS_Name" = "Name";
 
 /* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AS_Email" = "ಇಮೇಲ್";
+"AS_Email" = "Email";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "ಪಾಸ್‌ವರ್ಡ್‌ ಸೇರಿಸಿ";
+"AS_AddPassword" = "Add password";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "ಪಾಸ್‌ವರ್ಡ್ ಬದಲಿಸಿ";
+"AS_ChangePassword" = "Change password";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "ಸೈನ್ ಔಟ್ ಮಾಡಿ";
+"AS_SignOut" = "Sign Out";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "ಖಾತೆಯನ್ನು ಅಳಿಸಿ";
+"AS_DeleteAccount" = "Delete Account";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "ಪಾಸ್‌ವರ್ಡ್ ಮರೆತಿರುವಿರಾ?";
+"ForgotPassword" = "Forgot password?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "ಅದು ನೀವೇ ಎಂದು ಪರಿಶೀಲಿಸಿ";
+"VerifyItsYou" = "Verify it's you";
 
 /* Alert message title shown to confirm account deletion action. */
 "DeleteAccountConfirmationTitle" = "Delete Account?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "ನಿಮ್ಮ ಖಾತೆಗೆ ಸಂಬಂಧಿಸಿದ ಎಲ್ಲಾ ಡೇಟಾವನ್ನು ಇದು ಅಳಿಸಿಹಾಕುತ್ತದೆ ಮತ್ತು ರದ್ದುಗೊಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ನೀವು ಈ ಕ್ರಿಯೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ಪುನಃ ಸೈನ್‌ ಇನ್‌ ಮಾಡಬೇಕಾಗುತ್ತದೆ.";
+"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "ನಿಮ್ಮ ಖಾತೆಗೆ ಸಂಬಂಧಿಸಿದ ಎಲ್ಲಾ ಡೇಟಾವನ್ನು ಇದು ಅಳಿಸಿಹಾಕುತ್ತದೆ ಮತ್ತು ರದ್ದುಗೊಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಈ ಖಾತೆಯನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?";
+"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
 
 /* Text of Delete action button. */
-"Delete" = "ಅಳಿಸಿ";
+"Delete" = "Delete";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "ಖಾತೆಯನ್ನು ಅಳಿಸಿ";
+"DeleteAccountControllerTitle" = "Delete account";
 
 /* Alert message shown before account deletion. */
-"ActionCantBeUndone" = "ಈ ಕ್ರಿಯೆಯನ್ನು ರದ್ದುಪಡಿಸಲಾಗುವುದಿಲ್ಲ.";
+"ActionCantBeUndone" = "This action can't be undone";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "ಅನ್‌ಲಿಂಕ್";
+"UnlinkAction" = "Unlink";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "ಲಿಂಕ್‌ ಮಾಡಿದ ಖಾತೆ";
+"UnlinkTitle" = "Linked account";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "ಖಾತೆಯ ಲಿಂಕ್‌ ರದ್ದುಗೊಳಿಸುವುದೇ?";
+"UnlinkConfirmationTitle" = "Unlink account?";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "ಇನ್ನು ಮುಂದೆ ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಬಳಸಿಕೊಂಡು ಸೈನ್‌ ಇನ್‌ ಮಾಡಲಾಗುವುದಿಲ್ಲ";
+"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "ಖಾತೆಯ ಲಿಂಕ್‌ ರದ್ದುಮಾಡಿ";
+"UnlinkConfirmationActionTitle" = "Unlink account";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "ನಿಮ್ಮ ಖಾತೆಗೆ ಸಂಬಂಧಿಸಿದ ಇಮೇಲ್‌ ವಿಳಾಸವನ್ನು ಬದಲಿಸಲು, ನೀವು ಪುನಃ ಸೈನ್‌ ಇನ್‌ ಮಾಡಬೇಕಾಗುತ್ತದೆ.";
+"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
 
 /* Alert action message shown before confirmation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್‌ ಅನ್ನು ಬದಲಿಸಲು, ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಪಾಸ್‌ವರ್ಡ್‌ ಅನ್ನು ನೀವು ಮೊದಲು ನಮೂದಿಸಬೇಕಾಗಿದೆ.";
+"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
 
 /* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EditEmailTitle" = "ಇಮೇಲ್‌ ಎಡಿಟ್‌ ಮಾಡಿ";
+"EditEmailTitle" = "Edit email";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "ಹೆಸರನ್ನು ಎಡಿಟ್ ಮಾಡಿ";
+"EditNameTitle" = "Edit name";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "ನಿಮ್ಮ ಖಾತೆಗೆ ಪಾಸ್‌ವರ್ಡ್‌ ಅನ್ನು ಸೇರಿಸಲು, ನೀವು ಪುನಃ ಸೈನ್‌ ಇನ್‌ ಮಾಡಬೇಕಾಗುತ್ತದೆ.";
+"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "ನಿಮ್ಮ ಖಾತೆಗೆ ಪಾಸ್‌ವರ್ಡ್‌ ಅನ್ನು ಬದಲಿಸಲು, ನೀವು ಪುನಃ ಸೈನ್‌ ಇನ್‌ ಮಾಡಬೇಕಾಗುತ್ತದೆ.";
+"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
 
 /* Alert message shown when re-authenticating before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್‌ ಅನ್ನು ಬದಲಿಸಲು, ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಪಾಸ್‌ವರ್ಡ್‌ ಅನ್ನು ನೀವು ಮೊದಲು ನಮೂದಿಸಬೇಕಾಗಿದೆ.";
+"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "ಪಾಸ್‌ವರ್ಡ್‌ ಸೇರಿಸಿ";
+"AddPasswordTitle" = "Add password";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "ಪಾಸ್‌ವರ್ಡ್ ಬದಲಿಸಿ";
+"EditPasswordTitle" = "Change password";
 
 /* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"ProviderTitlePassword" = "ಇಮೇಲ್";
+"ProviderTitlePassword" = "Email";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google";
@@ -224,22 +224,22 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "%@ ಅವರೊಂದಿಗೆ ಸೈನ್‌ ಇನ್ ಮಾಡಿ";
+"SignInWithProvider" = "Sign in with %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "ನಿಮ್ಮ ಹೆಸರು ನಮೂದಿಸಿ";
+"PlaceholderEnterName" = "Enter your name";
 
 /* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PlaceholderEnterEmail" = "ನಿಮ್ಮ ಇಮೇಲ್ ಅನ್ನು ನಮೂದಿಸಿ";
+"PlaceholderEnterEmail" = "Enter your email";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ";
+"PlaceholderEnterPassword" = "Enter your password";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "ಹೊಸ ಪಾಸ್‌ವರ್ಡ್";
+"PlaceholderNewPassword" = "New password";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಆರಿಸಿ";
+"PlaceholderChosePassword" = "Choose password";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "ಸೈನ್ ಇನ್ ಮಾಡುವಲ್ಲಿ ಸಮಸ್ಯೆ ಇದೆಯೇ?";
+"ForgotPasswordTitle" = "Trouble signing in?";
