@@ -89,16 +89,6 @@
                ReferencedContainer = "container:FirebaseUI.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C329B15A1DA8694A00059A13"
-               BuildableName = "FirebaseUISampleUITests.xctest"
-               BlueprintName = "FirebaseUISampleUITests"
-               ReferencedContainer = "container:FirebaseUI.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
