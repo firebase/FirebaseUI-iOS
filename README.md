@@ -49,10 +49,15 @@ platform :ios, '8.0'
 use_frameworks!
 ```
 
-Otherwise, you can download the latest version of the [FirebaseUI.framework from the releases
+Otherwise, you can download the latest version of the [FirebaseUI frameworks from the releases
 page](https://github.com/firebase/FirebaseUI-iOS/releases) or include the FirebaseUI
 Xcode project from this repo in your project. You also need to [add the Firebase
 framework](https://firebase.google.com/docs/ios/setup) to your project.
+
+## Documentation
+
+The docs for individual subspecs of FirebaseUI can be found in their respective
+project folders.
 
 ## Local Setup
 
@@ -98,7 +103,7 @@ Database should contain appropriate read/write permissions and folders (`objc_de
 ##### Enable silent push notifications in Xcode
 
   * `Push Notification` - Under `Capabilities` tab in your app target choose `Push Notifications` and put the switch to the `On` position.
-  * `Background Mode` - Under `Capabilities` tab in your app target choose `Background Modes` put the switch to the `On` position.  In the list of available modes select `Background fetch` and `Remote notifications` (If available). 
+  * `Background Mode` - Under `Capabilities` tab in your app target choose `Background Modes` put the switch to the `On` position.  In the list of available modes select `Background fetch` and `Remote notifications` (If available).
 
 ##### Upload APNS Certificate to Firebase
 

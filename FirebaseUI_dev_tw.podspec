@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseTwitterAuthUI'
-  s.version      = '4.0.0'
+  s.version      = '4.1.0'
   s.summary      = 'Twitter UI binding library for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0' }
@@ -14,9 +14,9 @@ Pod::Spec.new do |s|
 
   s.subspec 'Twitter' do |twitter|
     twitter.source_files = "FirebaseTwitterAuthUI/*.{h,m}"
-    twitter.resource_bundle = { 
-      'FirebaseTwitterAuthUI' => ['FirebaseTwitterAuthUI/Strings/**/*', 
-                                  'FirebaseTwitterAuthUI/Resources/**/*', 
+    twitter.resource_bundle = {
+      'FirebaseTwitterAuthUI' => ['FirebaseTwitterAuthUI/Strings/**/*',
+                                  'FirebaseTwitterAuthUI/Resources/**/*',
                                   'FirebaseTwitterAuthUI/**/*.xib']
     }
     twitter.dependency 'FirebaseAuthUI/AuthBase'

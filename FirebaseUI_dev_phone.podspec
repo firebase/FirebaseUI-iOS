@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebasePhoneAuthUI'
-  s.version      = '4.0.0'
+  s.version      = '4.1.0'
   s.summary      = 'Phone Auth UI binding library for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0' }
@@ -14,9 +14,9 @@ Pod::Spec.new do |s|
 
   s.subspec 'Phone' do |phone|
     phone.source_files = "FirebasePhoneAuthUI/**/*.{h,m}"
-    phone.resource_bundle = { 
-      'FirebasePhoneAuthUI' => ['FirebasePhoneAuthUI/Strings/**/*', 
-                                'FirebasePhoneAuthUI/Resources/**/*', 
+    phone.resource_bundle = {
+      'FirebasePhoneAuthUI' => ['FirebasePhoneAuthUI/Strings/**/*',
+                                'FirebasePhoneAuthUI/Resources/**/*',
                                 'FirebasePhoneAuthUI/**/*.xib']
     }
     phone.dependency 'FirebaseAuthUI/AuthBase'

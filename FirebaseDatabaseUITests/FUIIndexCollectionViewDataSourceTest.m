@@ -83,8 +83,7 @@ static inline NSDictionary *database() {
   }];
   self.dict = [database() mutableCopy];
 
-  // Removing this NSLog causes the tests to crash since `numberOfItemsInSection`
-  // actually pulls updates from the data source or something
+  // Removing this line causes the tests to crash.
   NSLog(@"count: %lu", [self.collectionView numberOfItemsInSection:0]);
 }
 
