@@ -59,7 +59,7 @@
     _data = data;
     _observers = [NSMutableArray array];
     _delegate = delegate;
-    [self observeQueries];
+    [self observeQueries]; // TODO: remove this line
   }
   return self;
 }
@@ -137,9 +137,9 @@ didFinishLoadWithSnap:(FIRDataSnapshot *)snap
   id<FUIDataObservable> query = [self.data child:object.key];
   __weak typeof(self) wSelf = self;
   FUIQueryObserver *obs = [FUIQueryObserver observerForQuery:query
-                                                            completion:^(FUIQueryObserver *observer,
-                                                                         FIRDataSnapshot *snap,
-                                                                         NSError *error) {
+                                                  completion:^(FUIQueryObserver *observer,
+                                                               FIRDataSnapshot *snap,
+                                                               NSError *error) {
     [wSelf observer:observer didFinishLoadWithSnap:snap error:error];
   }];
   [self.observers insertObject:obs atIndex:index];

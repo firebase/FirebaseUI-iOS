@@ -171,6 +171,12 @@ didFailLoadWithError:(NSError *)error;
 - (nullable FIRDataSnapshot *)objectAtIndex:(NSUInteger)index;
 
 /**
+ * Attaches observers to the index and data queries and begins populating the array.
+ * Before this is called, the array won't send any updates or contain any elements.
+ */
+- (void)observeQueries;
+
+/**
  * Removes all observers from all queries managed by this array and renders this array
  * unusable.
  */
