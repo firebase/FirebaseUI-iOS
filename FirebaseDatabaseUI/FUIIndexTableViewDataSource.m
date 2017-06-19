@@ -62,6 +62,10 @@
   return self.array.indexes;
 }
 
+- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index {
+  return [self.array objectAtIndex:index];
+}
+
 #pragma mark - FUIIndexArrayDelegate 
 
 - (void)array:(FUIIndexArray *)array

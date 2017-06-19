@@ -91,6 +91,14 @@ didFailLoadAtIndex:(NSUInteger)index
                                                          NSIndexPath *indexPath,
                                                          FIRDataSnapshot *_Nullable snap))populateCell NS_DESIGNATED_INITIALIZER;
 
+/**
+ * Returns the snapshot at the given index, if it has loaded.
+ * Raises a fatal error if the index is out of bounds.
+ * @param index The index of the requested snapshot.
+ * @return A snapshot, or nil if one has not yet been loaded.
+ */
+- (nullable FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index;
+
 @end
 
 @interface UICollectionView (FUIIndexCollectionViewDataSource)

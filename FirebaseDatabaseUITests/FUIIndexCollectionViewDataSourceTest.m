@@ -183,4 +183,10 @@ static inline NSDictionary *database() {
   XCTAssertEqualObjects(cell.accessibilityValue, @"3");
 }
 
+- (void)testItReturnsSnapshotsFromItsIndexArray {
+  FIRDataSnapshot *snap = [self.dataSource snapshotAtIndex:0];
+  XCTAssertEqualObjects(snap.key, @"data", @"expected snap's key to equal 'data', got %@ instead", snap.key);
+  XCTAssertEqualObjects(snap.value, @"1", @"expected snap's key to equal '1', got %@ instead", snap.value);
+}
+
 @end
