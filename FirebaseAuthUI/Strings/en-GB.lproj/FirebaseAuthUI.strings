@@ -8,7 +8,7 @@
 "EnterYourEmail" = "Enter your email";
 
 /* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"InvalidEmailError" = "That email address isn't correct.";
+"InvalidEmailError" = "Incorrect email address.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
 "CannotAuthenticateError" = "This type of account isn't supported by this app";
@@ -17,7 +17,7 @@
 "ExistingAccountTitle" = "You already have an account";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
+"ProviderUsedPreviouslyMessage" = "You've already used %@. Sign in with %@ to continue.";
 
 /* Title for sign in screen and sign in button. */
 "SignInTitle" = "Sign in";
@@ -29,18 +29,18 @@
 "InvalidPasswordError" = "Password cannot be empty.";
 
 /* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"WrongPasswordError" = "The email and password you entered don't match.";
+"WrongPasswordError" = "The email and password that you entered don't match.";
 
 /* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UserNotFoundError" = "That email address doesn’t match an existing account.";
+"UserNotFoundError" = "That email address doesn't match an existing account.";
 
 /* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "AccountDisabledError" = "That email address is for an account that has been disabled.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
+"SignInTooManyTimesError" = "You've entered an incorrect password too many times. Try again in a few minutes.";
 
-/* Error message displayed when lib third FUIAuth is not configured with third party provider. */
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
 "CantFindProvider" = "Can't find provider for %@.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
@@ -50,7 +50,7 @@
 "PasswordRecoveryTitle" = "Recover password";
 
 /* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
+"PasswordRecoveryMessage" = "Receive instructions to this email that explain how to reset your password";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "PasswordRecoveryEmailSentTitle" = "Check your email";
@@ -62,7 +62,7 @@
 "SignUpTitle" = "Create account";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "First & last name";
+"FirstAndLastName" = "First name & surname";
 
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Choose password";
@@ -83,7 +83,7 @@
 "SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
+"PasswordVerificationMessage" = "You've already used %@ to sign in. Enter your password for that account.";
 
 /* OK button title. */
 "OK" = "OK";
@@ -146,19 +146,19 @@
 "AS_DeleteAccount" = "Delete Account";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Forgot password?";
+"ForgotPassword" = "Forgotten password?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Verify it's you";
+"VerifyItsYou" = "Verify that it's you";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfirmationTitle" = "Delete Account?";
+"DeleteAccountConfirmationTitle" = "Delete account?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
+"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone. You will need to sign in again to complete this action";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure that you want to delete your account?";
 
 /* Text of Delete action button. */
 "Delete" = "Delete";
@@ -185,7 +185,7 @@
 "UnlinkConfirmationActionTitle" = "Unlink account";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+"UpdateEmailAlertMessage" = "To change the email address associated with your account, you will need to sign in again.";
 
 /* Alert action message shown before confirmation of updating email action. */
 "UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
@@ -197,10 +197,10 @@
 "EditNameTitle" = "Edit name";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
+"AddPasswordAlertMessage" = "To add a password to your account, you will need to sign in again.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
+"EditPasswordAlertMessage" = "To change your account's password, you will need to sign in again.";
 
 /* Alert message shown when re-authenticating before editing account password. */
 "ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";

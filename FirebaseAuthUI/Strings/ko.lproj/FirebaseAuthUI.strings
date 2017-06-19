@@ -1,218 +1,218 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "Welcome";
+"AuthPickerTitle" = "시작";
 
 /* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"SignInWithEmail" = "Sign in with email";
+"SignInWithEmail" = "이메일로 로그인";
 
 /* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EnterYourEmail" = "Enter your email";
+"EnterYourEmail" = "이메일 입력";
 
 /* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"InvalidEmailError" = "That email address isn't correct.";
+"InvalidEmailError" = "이메일 주소가 잘못되었습니다.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "This type of account isn't supported by this app";
+"CannotAuthenticateError" = "이 앱에서 지원하지 않는 계정 유형입니다.";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "You already have an account";
+"ExistingAccountTitle" = "계정이 이미 있음";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
+"ProviderUsedPreviouslyMessage" = "%@을(를) 이미 사용하고 있습니다. 계속하려면 %@(으)로 로그인하세요.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "Sign in";
+"SignInTitle" = "로그인";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "Enter your password";
+"EnterYourPassword" = "비밀번호를 입력하세요.";
 
 /* Error message displayed when user enters an empty password. */
-"InvalidPasswordError" = "Password cannot be empty.";
+"InvalidPasswordError" = "비밀번호는 비워둘 수 없습니다.";
 
 /* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"WrongPasswordError" = "The email and password you entered don't match.";
+"WrongPasswordError" = "입력한 이메일과 비밀번호가 일치하지 않습니다.";
 
 /* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UserNotFoundError" = "That email address doesn’t match an existing account.";
+"UserNotFoundError" = "이메일 주소가 기존 계정과 일치하지 않습니다.";
 
 /* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AccountDisabledError" = "That email address is for an account that has been disabled.";
+"AccountDisabledError" = "사용 중지된 계정의 이메일 주소입니다.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
+"SignInTooManyTimesError" = "비밀번호 입력 오류 횟수를 초과했습니다. 잠시 후에 다시 시도해 주세요.";
 
-/* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "Can't find provider for %@.";
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "%@에 대한 제공업체를 찾지 못했습니다.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailsDontMatch" = "Emails don't match";
+"EmailsDontMatch" = "이메일이 일치하지 않습니다.";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Recover password";
+"PasswordRecoveryTitle" = "비밀번호 복구";
 
 /* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
+"PasswordRecoveryMessage" = "비밀번호 재설정 방법을 안내하는 이메일을 보내 드립니다.";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryEmailSentTitle" = "Check your email";
+"PasswordRecoveryEmailSentTitle" = "이메일 확인";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
+"PasswordRecoveryEmailSentMessage" = "%@(으)로 발송된 이메일의 안내에 따라 비밀번호를 복구하세요.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Create account";
+"SignUpTitle" = "계정 만들기";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "First & last name";
+"FirstAndLastName" = "이름 및 성";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "Choose password";
+"ChoosePassword" = "비밀번호 선택";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
+"TermsOfServiceNotice" = "%@을(를) 탭하면 %@에 동의하는 것으로 간주됩니다.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "Terms of Service";
+"TermsOfService" = "서비스 약관";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailAlreadyInUseError" = "The email address is already in use by another account.";
+"EmailAlreadyInUseError" = "이미 다른 계정에서 사용 중인 이메일 주소입니다.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
+"WeakPasswordError" = "안전한 비밀번호는 6자 이상이어야 하고 문자와 숫자가 조합되어야 합니다.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
+"SignUpTooManyTimesError" = "IP 주소에서 계정 요청이 너무 많이 발생하고 있습니다. 잠시 후에 다시 시도해 주세요.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
+"PasswordVerificationMessage" = "이미 %@을(를) 사용하여 로그인했습니다. 해당 계정의 비밀번호를 입력하세요.";
 
 /* OK button title. */
-"OK" = "OK";
+"OK" = "확인";
 
 /* Cancel button title. */
-"Cancel" = "Cancel";
+"Cancel" = "취소";
 
 /* Back button title. */
-"Back" = "Back";
+"Back" = "뒤로";
 
 /* Next button title. */
-"Next" = "Next";
+"Next" = "다음";
 
 /* Save button title. */
-"Save" = "Save";
+"Save" = "저장";
 
 /* Save button title. */
-"Send" = "Send";
+"Send" = "보내기";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"Email" = "Email";
+"Email" = "이메일";
 
 /* Label next to a password text field. */
-"Password" = "Password";
+"Password" = "비밀번호";
 
 /* Label next to a name text field. */
-"Name" = "Name";
+"Name" = "이름";
 
 /* Alert title Error. */
-"Error" = "Error";
+"Error" = "오류";
 
 /* Alert button title Close. */
-"Close" = "Close";
+"Close" = "닫기";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "Profile";
+"AS_SectionProfile" = "프로필";
 
 /* Account Settings section title Security. */
-"AS_SectionSecurity" = "Security";
+"AS_SectionSecurity" = "보안";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "Linked Accounts";
+"AS_SectionLinkedAccounts" = "연결된 계정";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "Name";
+"AS_Name" = "이름";
 
 /* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AS_Email" = "Email";
+"AS_Email" = "이메일";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "Add password";
+"AS_AddPassword" = "비밀번호 추가";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "Change password";
+"AS_ChangePassword" = "비밀번호 변경";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "Sign Out";
+"AS_SignOut" = "로그아웃";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "Delete Account";
+"AS_DeleteAccount" = "계정 삭제";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Forgot password?";
+"ForgotPassword" = "비밀번호 찾기";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Verify it's you";
+"VerifyItsYou" = "본인 인증";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfirmationTitle" = "Delete Account?";
+"DeleteAccountConfirmationTitle" = "계정을 삭제하시겠습니까?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
+"DeleteAccountBody" = "계정에 연결된 데이터가 모두 삭제되며 삭제를 취소할 수 없습니다. 이 작업을 완료하려면 다시 로그인해야 합니다.";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+"DeleteAccountConfirmationMessage" = "계정에 연결된 데이터가 모두 삭제되며 삭제를 취소할 수 없습니다. 계정을 삭제하시겠습니까?";
 
 /* Text of Delete action button. */
-"Delete" = "Delete";
+"Delete" = "삭제";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "Delete account";
+"DeleteAccountControllerTitle" = "계정 삭제";
 
 /* Alert message shown before account deletion. */
-"ActionCantBeUndone" = "This action can't be undone";
+"ActionCantBeUndone" = "이 작업은 취소할 수 없습니다.";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Unlink";
+"UnlinkAction" = "연결 해제";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "Linked account";
+"UnlinkTitle" = "연결된 계정";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Unlink account?";
+"UnlinkConfirmationTitle" = "계정 연결 해제 확인";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
+"UnlinkConfirmationMessage" = "이 계정으로 더 이상 로그인할 수 없습니다.";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Unlink account";
+"UnlinkConfirmationActionTitle" = "계정 연결 해제";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+"UpdateEmailAlertMessage" = "계정에 연결된 이메일 주소를 변경하려면 다시 로그인해야 합니다.";
 
 /* Alert action message shown before confirmation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"UpdateEmailVerificationAlertMessage" = "비밀번호를 변경하려면 먼저 현재 비밀번호를 입력해야 합니다.";
 
 /* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EditEmailTitle" = "Edit email";
+"EditEmailTitle" = "이메일 수정";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "Edit name";
+"EditNameTitle" = "이름 수정";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
+"AddPasswordAlertMessage" = "계정에 비밀번호를 추가하려면 다시 로그인해야 합니다.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
+"EditPasswordAlertMessage" = "계정의 비밀번호를 변경하려면 다시 로그인해야 합니다.";
 
 /* Alert message shown when re-authenticating before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"ReauthenticateEditPasswordAlertMessage" = "비밀번호를 변경하려면 먼저 현재 비밀번호를 입력해야 합니다.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "Add password";
+"AddPasswordTitle" = "비밀번호 추가";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "Change password";
+"EditPasswordTitle" = "비밀번호 변경";
 
 /* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"ProviderTitlePassword" = "Email";
+"ProviderTitlePassword" = "이메일";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google";
@@ -224,22 +224,22 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "Sign in with %@";
+"SignInWithProvider" = "%@(으)로 로그인";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "Enter your name";
+"PlaceholderEnterName" = "이름을 입력하세요.";
 
 /* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PlaceholderEnterEmail" = "Enter your email";
+"PlaceholderEnterEmail" = "이메일 입력";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "Enter your password";
+"PlaceholderEnterPassword" = "비밀번호를 입력하세요.";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "New password";
+"PlaceholderNewPassword" = "새 비밀번호";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "Choose password";
+"PlaceholderChosePassword" = "비밀번호 선택";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "Trouble signing in?";
+"ForgotPasswordTitle" = "로그인하는 데 문제가 있나요?";

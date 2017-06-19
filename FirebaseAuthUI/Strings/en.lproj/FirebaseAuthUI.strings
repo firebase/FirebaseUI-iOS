@@ -40,7 +40,7 @@
 /* Error message displayed after user trying to sign in too many times. */
 "SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
 
-/* Error message displayed when lib third FUIAuth is not configured with third party provider. */
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
 "CantFindProvider" = "Can't find provider for %@.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
@@ -185,7 +185,7 @@
 "UnlinkConfirmationActionTitle" = "Unlink account";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+"UpdateEmailAlertMessage" = "To change email address associated with your account, you will need to sign in again.";
 
 /* Alert action message shown before confirmation of updating email action. */
 "UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";

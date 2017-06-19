@@ -1,78 +1,78 @@
 /* The text of the button used to sign-in with Phone. */
-"SignInWithPhone" = "Sign in with phone";
+"SignInWithPhone" = "Acceder con el teléfono";
 
 /* The title of view controller where user enters phone number. */
-"EnterPhoneTitle" = "Enter phone number";
+"EnterPhoneTitle" = "Ingresar número de teléfono";
 
 /* The title of button on navigation controller which navigates to previous screen. */
-"Back" = "Back";
+"Back" = "Atrás";
 
 /* The title of button on navigation controller which navigates to the next screen. */
-"Next" = "Next";
+"Next" = "Siguiente";
 
 /* The title of button which user taps on phone verification screen. */
-"Verify" = "Verify";
+"Verify" = "Verificar";
 
 /* Alert message displayed when user submits empty verification code. */
-"EmptyVerificationCode" = "Verification code can't be empty";
+"EmptyVerificationCode" = "El campo de código de verificación no puede estar vacío";
 
 /* Alert message displayed when user submits empty phone number. */
-"EmptyPhoneNumber" = "Phone number can't be empty";
+"EmptyPhoneNumber" = "El campo de número de teléfono no puede estar vacío";
 
 /* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
-"PhoneNumber" = "Number";
+"PhoneNumber" = "Número";
 
 /* Placeholder shown for phone number input field. */
-"EnterYourPhoneNumber" = "Phone number";
+"EnterYourPhoneNumber" = "Número de teléfono";
 
 /* Label next to the left of country selector control. */
-"Country" = "Country";
+"Country" = "País";
 
 /* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
-"EnterCodeDescription" = "Enter the %@-digit code we sent to";
+"EnterCodeDescription" = "Ingresa el código de %@ dígitos que enviamos a";
 
 /* The title of button with resend verification code functionality. */
-"ResendCode" = "Resend code";
+"ResendCode" = "Volver a enviar el código";
 
 /* Text of the resend timer label shown on verification phone number screen. */
-"ResendCodeTimer" = "Resend code in %@";
+"ResendCodeTimer" = "Volver a enviar el código en %@";
 
 /* The title of view controller where user verifies phone number. . */
-"VerifyPhoneTitle" = "Verify phone number";
+"VerifyPhoneTitle" = "Verificar tu número de teléfono";
 
 /* The title of button displayed when user closes alert message. */
-"Done" = "Done";
+"Done" = "Listo";
 
 /* The title of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneTitle" = "Invalid phone number";
+"IncorrectPhoneTitle" = "Número de teléfono no válido";
 
 /* The body message of alert shown when user entered invalid phone number format. */
-"IncorrectPhoneMessage" = "Enter a valid phone number";
+"IncorrectPhoneMessage" = "Ingresa un número de teléfono válido";
 
 /* The body message of alert shown when user tapped resend verification code button. */
-"ResendCodeResult" = "Code was sent to %@";
+"ResendCodeResult" = "Se envió el código a %@";
 
 /* The title of alert shown when user entered invalid verification code. */
-"IncorrectCodeTitle" = "Incorrect verification code";
+"IncorrectCodeTitle" = "Código de verificación incorrecto";
 
 /* The body message of alert shown when user entered invalid verification code. */
-"IncorrectCodeMessage" = "Wrong code. Try again.";
+"IncorrectCodeMessage" = "Código incorrecto. Vuelve a intentarlo.";
 
 /* The body message of alert shown when internal server error appeared. */
-"InternalErrorMessage" = "Something went wrong. Please try again.";
+"InternalErrorMessage" = "Se produjo un error. Vuelve a intentarlo.";
 
 /* The body message of alert shown when the user has tried to send too many SMS messages. */
-"TooManyCodesSent" = "This phone number has been used too many times";
+"TooManyCodesSent" = "Este número de teléfono se usó demasiadas veces";
 
 /* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
-"MessageQuotaExceeded" = "There was a problem verifying your phone number";
+"MessageQuotaExceeded" = "Ocurrió un problema durante la verificación de tu número de teléfono";
 
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
-"MessageExpired" = "This code is no longer valid";
+"MessageExpired" = "Este código ya no es válido";
 
 /* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "By tapping %@, an SMS may be sent. Message & data rates may apply.";
+"TermsSMS" = "Si presionas “%@”, es posible que se envíe un SMS. Podrían aplicarse tarifas de mensajes y datos.";
 
 /* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "By tapping %@ you are indicating that you agree to the [Terms of Service].";
+"TermsAccountCreation" = "Si presionas “%@”, indicas que aceptas las [Condiciones del servicio].";
 

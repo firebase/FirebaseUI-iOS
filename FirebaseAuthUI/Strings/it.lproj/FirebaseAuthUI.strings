@@ -1,107 +1,107 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "Welcome";
+"AuthPickerTitle" = "Benvenuto";
 
 /* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"SignInWithEmail" = "Sign in with email";
+"SignInWithEmail" = "Accedi con l'indirizzo email";
 
 /* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EnterYourEmail" = "Enter your email";
+"EnterYourEmail" = "Inserisci l'indirizzo email";
 
 /* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"InvalidEmailError" = "That email address isn't correct.";
+"InvalidEmailError" = "L'indirizzo email non è corretto.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "This type of account isn't supported by this app";
+"CannotAuthenticateError" = "Questo tipo di account non è supportato da questa applicazione";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "You already have an account";
+"ExistingAccountTitle" = "Hai già un account";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
+"ProviderUsedPreviouslyMessage" = "Hai già utilizzato %@. Accedi con %@ per continuare.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "Sign in";
+"SignInTitle" = "Accedi";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "Enter your password";
+"EnterYourPassword" = "Inserisci la password";
 
 /* Error message displayed when user enters an empty password. */
-"InvalidPasswordError" = "Password cannot be empty.";
+"InvalidPasswordError" = "La password non può essere vuota.";
 
 /* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"WrongPasswordError" = "The email and password you entered don't match.";
+"WrongPasswordError" = "L’indirizzo email e la password non corrispondono.";
 
 /* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UserNotFoundError" = "That email address doesn’t match an existing account.";
+"UserNotFoundError" = "L'indirizzo email non corrisponde a un account esistente.";
 
 /* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AccountDisabledError" = "That email address is for an account that has been disabled.";
+"AccountDisabledError" = "L'indirizzo email è relativo a un account che è stato disattivato.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
+"SignInTooManyTimesError" = "Hai effettuato troppi tentativi con una password errata. Riprova tra qualche minuto.";
 
-/* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "Can't find provider for %@.";
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Impossibile trovare il provider per %@.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailsDontMatch" = "Emails don't match";
+"EmailsDontMatch" = "Gli indirizzi email non corrispondono";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Recover password";
+"PasswordRecoveryTitle" = "Recupera la password";
 
 /* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
+"PasswordRecoveryMessage" = "Ricevi le istruzioni a questo indirizzo email che spiegano come reimpostare la password.";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryEmailSentTitle" = "Check your email";
+"PasswordRecoveryEmailSentTitle" = "Controlla la tua casella di posta";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
+"PasswordRecoveryEmailSentMessage" = "Segui le istruzioni inviate all'indirizzo %@ per recuperare la password.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Create account";
+"SignUpTitle" = "Crea account";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "First & last name";
+"FirstAndLastName" = "Nome e cognome";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "Choose password";
+"ChoosePassword" = "Scegli password";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
+"TermsOfServiceNotice" = "Se tocchi %@, accetti i %@.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "Terms of Service";
+"TermsOfService" = "Termini di servizio";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailAlreadyInUseError" = "The email address is already in use by another account.";
+"EmailAlreadyInUseError" = "L'indirizzo email è già utilizzato da un altro account.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
+"WeakPasswordError" = "Una password efficace è composta da almeno 6 caratteri e contiene una combinazione di lettere e numeri.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
+"SignUpTooManyTimesError" = "Troppe richieste di account provenienti dal tuo indirizzo IP. Riprova tra qualche minuto.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
+"PasswordVerificationMessage" = "Hai già utilizzato %@ per accedere. Inserisci la tua password per tale account.";
 
 /* OK button title. */
 "OK" = "OK";
 
 /* Cancel button title. */
-"Cancel" = "Cancel";
+"Cancel" = "Annulla";
 
 /* Back button title. */
-"Back" = "Back";
+"Back" = "Indietro";
 
 /* Next button title. */
-"Next" = "Next";
+"Next" = "Avanti";
 
 /* Save button title. */
-"Save" = "Save";
+"Save" = "Salva";
 
 /* Save button title. */
-"Send" = "Send";
+"Send" = "Invia";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Email";
@@ -110,106 +110,106 @@
 "Password" = "Password";
 
 /* Label next to a name text field. */
-"Name" = "Name";
+"Name" = "Nome";
 
 /* Alert title Error. */
-"Error" = "Error";
+"Error" = "Errore";
 
 /* Alert button title Close. */
-"Close" = "Close";
+"Close" = "Chiudi";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "Profile";
+"AS_SectionProfile" = "Profilo";
 
 /* Account Settings section title Security. */
-"AS_SectionSecurity" = "Security";
+"AS_SectionSecurity" = "Sicurezza";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "Linked Accounts";
+"AS_SectionLinkedAccounts" = "Account collegati";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "Name";
+"AS_Name" = "Nome";
 
 /* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "AS_Email" = "Email";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "Add password";
+"AS_AddPassword" = "Aggiungi password";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "Change password";
+"AS_ChangePassword" = "Cambia password";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "Sign Out";
+"AS_SignOut" = "Esci";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "Delete Account";
+"AS_DeleteAccount" = "Elimina account";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Forgot password?";
+"ForgotPassword" = "Password dimenticata?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Verify it's you";
+"VerifyItsYou" = "Verifica che sei tu";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfirmationTitle" = "Delete Account?";
+"DeleteAccountConfirmationTitle" = "Vuoi eliminare l'account?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
+"DeleteAccountBody" = "L'operazione cancellerà tutti i dati associati al tuo account e non può essere annullata. Devi accedere nuovamente per completarla.";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+"DeleteAccountConfirmationMessage" = "L'operazione cancellerà tutti i dati associati al tuo account e non può essere annullata. Vuoi eliminare il tuo account?";
 
 /* Text of Delete action button. */
-"Delete" = "Delete";
+"Delete" = "Elimina";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "Delete account";
+"DeleteAccountControllerTitle" = "Elimina account";
 
 /* Alert message shown before account deletion. */
-"ActionCantBeUndone" = "This action can't be undone";
+"ActionCantBeUndone" = "Questa azione non può essere annullata";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Unlink";
+"UnlinkAction" = "Scollega";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "Linked account";
+"UnlinkTitle" = "Account collegato";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Unlink account?";
+"UnlinkConfirmationTitle" = "Vuoi scollegare l'account?";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
+"UnlinkConfirmationMessage" = "Non potrai accedere utilizzando il tuo account";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Unlink account";
+"UnlinkConfirmationActionTitle" = "Scollega account";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+"UpdateEmailAlertMessage" = "Per modificare l'indirizzo email associato al tuo account, devi accedere di nuovo.";
 
 /* Alert action message shown before confirmation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"UpdateEmailVerificationAlertMessage" = "Per modificare la password, devi prima inserire la password corrente.";
 
 /* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EditEmailTitle" = "Edit email";
+"EditEmailTitle" = "Modifica email";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "Edit name";
+"EditNameTitle" = "Modifica nome";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
+"AddPasswordAlertMessage" = "Per aggiungere la password al tuo account, devi accedere di nuovo.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
+"EditPasswordAlertMessage" = "Per modificare la password del tuo account, devi accedere di nuovo.";
 
 /* Alert message shown when re-authenticating before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"ReauthenticateEditPasswordAlertMessage" = "Per modificare la password, devi prima inserire la password corrente.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "Add password";
+"AddPasswordTitle" = "Aggiungi password";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "Change password";
+"EditPasswordTitle" = "Cambia password";
 
 /* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "ProviderTitlePassword" = "Email";
@@ -224,22 +224,22 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "Sign in with %@";
+"SignInWithProvider" = "Accedi con %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "Enter your name";
+"PlaceholderEnterName" = "Inserisci il tuo nome";
 
 /* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PlaceholderEnterEmail" = "Enter your email";
+"PlaceholderEnterEmail" = "Inserisci l'indirizzo email";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "Enter your password";
+"PlaceholderEnterPassword" = "Inserisci la password";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "New password";
+"PlaceholderNewPassword" = "Nuova password";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "Choose password";
+"PlaceholderChosePassword" = "Scegli password";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "Trouble signing in?";
+"ForgotPasswordTitle" = "Problemi di accesso?";

@@ -1,218 +1,218 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "Welcome";
+"AuthPickerTitle" = "Üdvözöljük!";
 
 /* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"SignInWithEmail" = "Sign in with email";
+"SignInWithEmail" = "Bejelentkezés e-mail-fiókkal";
 
 /* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EnterYourEmail" = "Enter your email";
+"EnterYourEmail" = "Adja meg az e-mail-címét";
 
 /* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"InvalidEmailError" = "That email address isn't correct.";
+"InvalidEmailError" = "Az e-mail-cím helytelen.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "This type of account isn't supported by this app";
+"CannotAuthenticateError" = "Ezt a típusú fiókot az alkalmazás nem támogatja.";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "You already have an account";
+"ExistingAccountTitle" = "Már rendelkezik fiókkal";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
+"ProviderUsedPreviouslyMessage" = "Már használta a következő e-mail-címet: %@. A folytatáshoz jelentkezzen be %@-fiókjával.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "Sign in";
+"SignInTitle" = "Bejelentkezés";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "Enter your password";
+"EnterYourPassword" = "Adja meg a jelszót";
 
 /* Error message displayed when user enters an empty password. */
-"InvalidPasswordError" = "Password cannot be empty.";
+"InvalidPasswordError" = "A jelszó mező nem lehet üres.";
 
 /* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"WrongPasswordError" = "The email and password you entered don't match.";
+"WrongPasswordError" = "A megadott e-mail-cím és jelszó nem egyezik.";
 
 /* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UserNotFoundError" = "That email address doesn’t match an existing account.";
+"UserNotFoundError" = "Ehhez az e-mail-címhez egyetlen meglévő fiók sem tartozik.";
 
 /* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AccountDisabledError" = "That email address is for an account that has been disabled.";
+"AccountDisabledError" = "Ez az e-mail-cím egy letiltott fiókhoz tartozik.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
+"SignInTooManyTimesError" = "Túl sokszor adott meg hibás jelszót. Néhány perc múlva próbálja újra.";
 
-/* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "Can't find provider for %@.";
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Nem találjuk a következőhöz tartozó szolgáltatót: %@.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailsDontMatch" = "Emails don't match";
+"EmailsDontMatch" = "Az e-mail-címek nem egyeznek.";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Recover password";
+"PasswordRecoveryTitle" = "Jelszó visszaállítása";
 
 /* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
+"PasswordRecoveryMessage" = "Olvassa el az e-mailben elküldött utasításokat, amelyekből megtudhatja, hogyan állíthatja vissza a jelszavát.";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryEmailSentTitle" = "Check your email";
+"PasswordRecoveryEmailSentTitle" = "Ellenőrizze az e-mailjeit.";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
+"PasswordRecoveryEmailSentMessage" = "A jelszó visszaállításához kövesse az ide (%@) elküldött utasításokat.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Create account";
+"SignUpTitle" = "Fiók létrehozása";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "First & last name";
+"FirstAndLastName" = "Utónév és vezetéknév";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "Choose password";
+"ChoosePassword" = "Válasszon jelszót";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
+"TermsOfServiceNotice" = "Ha erre a lehetőségre (%@) koppint, az azt jelenti, hogy elfogadja a következőket: %@.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "Terms of Service";
+"TermsOfService" = "Általános Szerződési Feltételek";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailAlreadyInUseError" = "The email address is already in use by another account.";
+"EmailAlreadyInUseError" = "Az e-mail-cím egy másik fióknál már használatban van.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
+"WeakPasswordError" = "Az erős jelszavak legalább 6 karakterből állnak, valamint betűket és számokat egyaránt tartalmaznak.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
+"SignUpTooManyTimesError" = "Az Ön IP-címéről túl sok fiókkérelem érkezik. Néhány perc múlva próbálja újra.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
+"PasswordVerificationMessage" = "Ezt az e-mail-fiókot (%@) már használta bejelentkezésre. Adja meg a fiókhoz tartozó jelszót.";
 
 /* OK button title. */
-"OK" = "OK";
+"OK" = "Rendben";
 
 /* Cancel button title. */
-"Cancel" = "Cancel";
+"Cancel" = "Mégse";
 
 /* Back button title. */
-"Back" = "Back";
+"Back" = "Vissza";
 
 /* Next button title. */
-"Next" = "Next";
+"Next" = "Következő";
 
 /* Save button title. */
-"Save" = "Save";
+"Save" = "Mentés";
 
 /* Save button title. */
-"Send" = "Send";
+"Send" = "Küldés";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"Email" = "Email";
+"Email" = "E-mail";
 
 /* Label next to a password text field. */
-"Password" = "Password";
+"Password" = "Jelszó";
 
 /* Label next to a name text field. */
-"Name" = "Name";
+"Name" = "Név";
 
 /* Alert title Error. */
-"Error" = "Error";
+"Error" = "Hiba";
 
 /* Alert button title Close. */
-"Close" = "Close";
+"Close" = "Bezárás";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "Profile";
+"AS_SectionProfile" = "Profil";
 
 /* Account Settings section title Security. */
-"AS_SectionSecurity" = "Security";
+"AS_SectionSecurity" = "Biztonság";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "Linked Accounts";
+"AS_SectionLinkedAccounts" = "Összekapcsolt fiókok";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "Name";
+"AS_Name" = "Név";
 
 /* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AS_Email" = "Email";
+"AS_Email" = "E-mail";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "Add password";
+"AS_AddPassword" = "Jelszó hozzáadása";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "Change password";
+"AS_ChangePassword" = "Jelszó módosítása";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "Sign Out";
+"AS_SignOut" = "Kijelentkezés";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "Delete Account";
+"AS_DeleteAccount" = "Fiók törlése";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Forgot password?";
+"ForgotPassword" = "Elfelejtette a jelszavát?";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Verify it's you";
+"VerifyItsYou" = "Igazolja, hogy Ön az";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfirmationTitle" = "Delete Account?";
+"DeleteAccountConfirmationTitle" = "Fiók törlése?";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
+"DeleteAccountBody" = "Ezzel az összes fiókadatát törli, és ezt a műveletet nem vonhatja vissza. A művelet végrehajtásához újra be kell jelentkeznie.";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+"DeleteAccountConfirmationMessage" = "Ezzel az összes fiókadatát törli, és ezt a műveletet nem vonhatja vissza. Biztosan törölni szeretné a fiókját?";
 
 /* Text of Delete action button. */
-"Delete" = "Delete";
+"Delete" = "Törlés";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "Delete account";
+"DeleteAccountControllerTitle" = "Fiók törlése";
 
 /* Alert message shown before account deletion. */
-"ActionCantBeUndone" = "This action can't be undone";
+"ActionCantBeUndone" = "A művelet nem vonható vissza.";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Unlink";
+"UnlinkAction" = "Leválasztás";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "Linked account";
+"UnlinkTitle" = "Összekapcsolt fiók";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Unlink account?";
+"UnlinkConfirmationTitle" = "Leválasztja a fiókot?";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
+"UnlinkConfirmationMessage" = "Többé nem fog tudni bejelentkezni a fiókkal.";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Unlink account";
+"UnlinkConfirmationActionTitle" = "Fiók leválasztása";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+"UpdateEmailAlertMessage" = "A fiókjához tartozó e-mail-cím módosításához újra be kell jelentkeznie.";
 
 /* Alert action message shown before confirmation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"UpdateEmailVerificationAlertMessage" = "A jelszó módosításához előbb meg kell adnia a jelenlegi jelszavát.";
 
 /* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EditEmailTitle" = "Edit email";
+"EditEmailTitle" = "E-mail szerkesztése";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "Edit name";
+"EditNameTitle" = "Név szerkesztése";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
+"AddPasswordAlertMessage" = "Ha fiókjához jelszót szeretne hozzáadni, újra be kell jelentkeznie.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
+"EditPasswordAlertMessage" = "Fiókja jelszavának módosításához újra be kell jelentkeznie.";
 
 /* Alert message shown when re-authenticating before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"ReauthenticateEditPasswordAlertMessage" = "A jelszó módosításához előbb meg kell adnia a jelenlegi jelszavát.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "Add password";
+"AddPasswordTitle" = "Jelszó hozzáadása";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "Change password";
+"EditPasswordTitle" = "Jelszó módosítása";
 
 /* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"ProviderTitlePassword" = "Email";
+"ProviderTitlePassword" = "E-mail";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google";
@@ -224,22 +224,22 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "Sign in with %@";
+"SignInWithProvider" = "Bejelentkezés a következővel: %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "Enter your name";
+"PlaceholderEnterName" = "Írja be a nevét";
 
 /* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PlaceholderEnterEmail" = "Enter your email";
+"PlaceholderEnterEmail" = "Adja meg az e-mail-címét";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "Enter your password";
+"PlaceholderEnterPassword" = "Adja meg a jelszót";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "New password";
+"PlaceholderNewPassword" = "Új jelszó";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "Choose password";
+"PlaceholderChosePassword" = "Válasszon jelszót";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "Trouble signing in?";
+"ForgotPasswordTitle" = "Problémái vannak a bejelentkezéssel?";

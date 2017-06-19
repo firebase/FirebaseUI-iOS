@@ -1,221 +1,221 @@
 /* Title for auth picker screen. */
-"AuthPickerTitle" = "Welcome";
+"AuthPickerTitle" = "خوش‌ آمدید";
 
 /* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"SignInWithEmail" = "Sign in with email";
+"SignInWithEmail" = "ورود به سیستم با رایانامه";
 
 /* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EnterYourEmail" = "Enter your email";
+"EnterYourEmail" = "رایانامه‌تان را وارد کنید";
 
 /* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"InvalidEmailError" = "That email address isn't correct.";
+"InvalidEmailError" = "این آدرس رایانامه درست نیست.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
-"CannotAuthenticateError" = "This type of account isn't supported by this app";
+"CannotAuthenticateError" = "این برنامه از این نوع حساب‌ پشتیبانی نمی‌کند";
 
 /* Title of an alert shown to an existing user coming back to the app. */
-"ExistingAccountTitle" = "You already have an account";
+"ExistingAccountTitle" = "از قبل حسابی دارید";
 
 /* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
-"ProviderUsedPreviouslyMessage" = "You’ve already used %@. Sign in with %@ to continue.";
+"ProviderUsedPreviouslyMessage" = "قبلاً از %@ استفاده کرده‌اید. برای ادامه با %@ وارد سیستم شوید.";
 
 /* Title for sign in screen and sign in button. */
-"SignInTitle" = "Sign in";
+"SignInTitle" = "ورود به سیستم";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "Enter your password";
+"EnterYourPassword" = "گذرواژه‌تان را وارد کنید";
 
 /* Error message displayed when user enters an empty password. */
-"InvalidPasswordError" = "Password cannot be empty.";
+"InvalidPasswordError" = "فیلد گذرواژه نمی‌تواند خالی باشد.";
 
 /* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"WrongPasswordError" = "The email and password you entered don't match.";
+"WrongPasswordError" = "رایانامه و گذرواژه وارد‌شده با هم مطابقت ندارند.";
 
 /* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UserNotFoundError" = "That email address doesn’t match an existing account.";
+"UserNotFoundError" = "این آدرس رایانامه با هیچ حسابی مطابقت ندارد.";
 
 /* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AccountDisabledError" = "That email address is for an account that has been disabled.";
+"AccountDisabledError" = "این آدرس رایانامه متعلق به حسابی است که غیرفعال شده است.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "You’ve entered an incorrect password too many times. Try again in a few minutes.";
+"SignInTooManyTimesError" = "دفعات زیادی گذرواژه اشتباه وارد کرده‌اید. پس از چند دقیقه دوباره امتحان کنید.";
 
-/* Error message displayed when lib third FUIAuth is not configured with third party provider. */
-"CantFindProvider" = "Can't find provider for %@.";
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "قادر به پیدا کردن ارائه‌دهنده %@ نیست.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailsDontMatch" = "Emails don't match";
+"EmailsDontMatch" = "رایانامه‌ها با هم مطابقت ندارند";
 
 /* Title for password recovery screen. */
-"PasswordRecoveryTitle" = "Recover password";
+"PasswordRecoveryTitle" = "بازیابی گذرواژه";
 
 /* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryMessage" = "Get instructions sent to this email that explain how to reset your password.";
+"PasswordRecoveryMessage" = "دستورالعمل نحوه بازنشانی گذرواژه‌تان به این رایانامه ارسال شده است، آن را ببینید.";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryEmailSentTitle" = "Check your email";
+"PasswordRecoveryEmailSentTitle" = "رایانامه‌تان را بررسی کنید";
 
 /* Message displayed when the email for password recovery has been sent. */
-"PasswordRecoveryEmailSentMessage" = "Follow the instructions sent to %@ to recover your password.";
+"PasswordRecoveryEmailSentMessage" = "برای بازیابی گذرواژه‌تان، دستورالعمل‌های ارسال‌شده به %@ را دنبال کنید.";
 
 /* Title for sign up screen. */
-"SignUpTitle" = "Create account";
+"SignUpTitle" = "ایجاد حساب";
 
 /* Name text field placeholder. */
-"FirstAndLastName" = "First & last name";
+"FirstAndLastName" = "نام و نام خانوادگی";
 
 /* Placeholder for the password text field in a sign up form. */
-"ChoosePassword" = "Choose password";
+"ChoosePassword" = "یک گذرواژه انتخاب کنید";
 
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
+"TermsOfServiceNotice" = "با ضربه زدن روی %@، موافقتتان را با %@ اعلام می‌کنید.";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "Terms of Service";
+"TermsOfService" = "شرایط خدمات";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailAlreadyInUseError" = "The email address is already in use by another account.";
+"EmailAlreadyInUseError" = "قبلاً از این آدرس رایانامه برای حساب دیگری استفاده شده است.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
+"WeakPasswordError" = "گذرواژه قوی باید حداقل شامل ۶ نویسه‌ و ترکیبی از حروف و اعداد باشد.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
+"SignUpTooManyTimesError" = "تعداد زیادی درخواست حساب از آدرس IP شما در حال ارسال است. پس از چند دقیقه دوباره امتحان کنید.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
-"PasswordVerificationMessage" = "You’ve already used %@ to sign in. Enter your password for that account.";
+"PasswordVerificationMessage" = "قبلاً از %@ برای ورود به سیستم استفاده کرده‌اید. گذرواژه این حساب را وارد کنید.";
 
 /* OK button title. */
-"OK" = "OK";
+"OK" = "تأیید";
 
 /* Cancel button title. */
-"Cancel" = "Cancel";
+"Cancel" = "لغو";
 
 /* Back button title. */
-"Back" = "Back";
+"Back" = "قبلی";
 
 /* Next button title. */
-"Next" = "Next";
+"Next" = "بعدی";
 
 /* Save button title. */
-"Save" = "Save";
+"Save" = "ذخیره";
 
 /* Save button title. */
-"Send" = "Send";
+"Send" = "ارسال";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"Email" = "Email";
+"Email" = "رایانامه";
 
 /* Label next to a password text field. */
-"Password" = "Password";
+"Password" = "گذرواژه";
 
 /* Label next to a name text field. */
-"Name" = "Name";
+"Name" = "نام";
 
 /* Alert title Error. */
-"Error" = "Error";
+"Error" = "خطا";
 
 /* Alert button title Close. */
-"Close" = "Close";
+"Close" = "بستن";
 
 /* Account Settings section title Profile. */
-"AS_SectionProfile" = "Profile";
+"AS_SectionProfile" = "نمایه";
 
 /* Account Settings section title Security. */
-"AS_SectionSecurity" = "Security";
+"AS_SectionSecurity" = "امنیت";
 
 /* Account Settings section title Linked Accounts. */
-"AS_SectionLinkedAccounts" = "Linked Accounts";
+"AS_SectionLinkedAccounts" = "حساب‌های مرتبط";
 
 /* Account Settings cell title Name. */
-"AS_Name" = "Name";
+"AS_Name" = "نام";
 
 /* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AS_Email" = "Email";
+"AS_Email" = "رایانامه";
 
 /* Account Settings cell title Add Password. */
-"AS_AddPassword" = "Add password";
+"AS_AddPassword" = "افزودن گذرواژه";
 
 /* Account Settings cell title Change Password. */
-"AS_ChangePassword" = "Change password";
+"AS_ChangePassword" = "تغییر گذرواژه";
 
 /* Account Settings cell title Sign Out. */
-"AS_SignOut" = "Sign Out";
+"AS_SignOut" = "خروج از سیستم";
 
 /* Account Settings cell title Delete Account. */
-"AS_DeleteAccount" = "Delete Account";
+"AS_DeleteAccount" = "حذف حساب";
 
 /* Button text for 'Forgot Password' action. */
-"ForgotPassword" = "Forgot password?";
+"ForgotPassword" = "گذرواژه‌تان را فراموش کرده‌اید؟";
 
 /* Alert message title show for re-authorization. */
-"VerifyItsYou" = "Verify it's you";
+"VerifyItsYou" = "تأیید کنید این خود شما هستید";
 
 /* Alert message title shown to confirm account deletion action. */
-"DeleteAccountConfirmationTitle" = "Delete Account?";
+"DeleteAccountConfirmationTitle" = "حساب حذف شود؟";
 
 /* Alert message body shown to confirm account deletion action. */
-"DeleteAccountBody" = "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action";
+"DeleteAccountBody" = "با این کار همه داده‌های مرتبط با حسابتان پاک می‌شود که قابل واگرد نیست. برای تکمیل این اقدام باید دوباره وارد سیستم شوید";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?";
+"DeleteAccountConfirmationMessage" = "با این کار همه داده‌های مرتبط با حسابتان پاک می‌شود که قابل واگرد نیست. مطمئنید می‌خواهید حسابتان حذف شود؟";
 
 /* Text of Delete action button. */
-"Delete" = "Delete";
+"Delete" = "حذف";
 
 /* Title of Controller shown before deleting account */
-"DeleteAccountControllerTitle" = "Delete account";
+"DeleteAccountControllerTitle" = "حذف حساب";
 
 /* Alert message shown before account deletion. */
-"ActionCantBeUndone" = "This action can't be undone";
+"ActionCantBeUndone" = "این اقدام واگردپذیر نیست.";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Unlink";
+"UnlinkAction" = "لغو پیوند";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "Linked account";
+"UnlinkTitle" = "حساب پیوندشده";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Unlink account?";
+"UnlinkConfirmationTitle" = "پیوند حساب لغو شود؟";
 
 /* Alert message shown before unlinking action. */
-"UnlinkConfirmationMessage" = "You will no longer be able to sign in using your account";
+"UnlinkConfirmationMessage" = "دیگر نمی‌توانید با استفاده از این حساب وارد سیستم شوید";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Unlink account";
+"UnlinkConfirmationActionTitle" = "لغو پیوند حساب";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "To change email address associated with your your account, you will need to sign in again.";
+"UpdateEmailAlertMessage" = "برای تغییر آدرس رایانامه مرتبط با حسابتان باید دوباره وارد سیستم شوید.";
 
 /* Alert action message shown before confirmation of updating email action. */
-"UpdateEmailVerificationAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"UpdateEmailVerificationAlertMessage" = "برای تغییر گذرواژه‌‌، ابتدا باید گذرواژه کنونی‌تان را وارد کنید.";
 
 /* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EditEmailTitle" = "Edit email";
+"EditEmailTitle" = "ویرایش رایانامه";
 
 /* Controller title shown when editing account name. */
-"EditNameTitle" = "Edit name";
+"EditNameTitle" = "ویرایش نام";
 
 /* Alert message shown when adding account password. */
-"AddPasswordAlertMessage" = "To add password to your account, you will need to sign in again.";
+"AddPasswordAlertMessage" = "برای افزودن گذرواژه به حسابتان باید دوباره وارد سیستم شوید.";
 
 /* Alert message shown when editing account password. */
-"EditPasswordAlertMessage" = "To change password to your account, you will need to sign in again.";
+"EditPasswordAlertMessage" = "برای تغییر گذرواژه حسابتان باید دوباره وارد سیستم شوید.";
 
 /* Alert message shown when re-authenticating before editing account password. */
-"ReauthenticateEditPasswordAlertMessage" = "In order to change your password, you first need to enter your current password.";
+"ReauthenticateEditPasswordAlertMessage" = "برای تغییر گذرواژه‌‌، ابتدا باید گذرواژه کنونی‌تان را وارد کنید.";
 
 /* Controller title shown when adding password to account. */
-"AddPasswordTitle" = "Add password";
+"AddPasswordTitle" = "افزودن گذرواژه";
 
 /* Controller title shown when editing password to account. */
-"EditPasswordTitle" = "Change password";
+"EditPasswordTitle" = "تغییر گذرواژه";
 
 /* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"ProviderTitlePassword" = "Email";
+"ProviderTitlePassword" = "ایمیل";
 
 /* Title of Google provider */
-"ProviderTitleGoogle" = "Google";
+"ProviderTitleGoogle" = "Google‏";
 
 /* Title of Facebook provider */
 "ProviderTitleFacebook" = "Facebook";
@@ -224,22 +224,22 @@
 "ProviderTitleTwitter" = "Twitter";
 
 /* Sign in with provider button label. */
-"SignInWithProvider" = "Sign in with %@";
+"SignInWithProvider" = "ورود به سیستم با %@";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "Enter your name";
+"PlaceholderEnterName" = "نام خود را وارد کنید";
 
 /* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PlaceholderEnterEmail" = "Enter your email";
+"PlaceholderEnterEmail" = "رایانامه‌تان را وارد کنید";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "Enter your password";
+"PlaceholderEnterPassword" = "گذرواژه‌تان را وارد کنید";
 
 /* Placeholder of secret input cell when user confirms password. */
-"PlaceholderNewPassword" = "New password";
+"PlaceholderNewPassword" = "گذرواژه جدید";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderChosePassword" = "Choose password";
+"PlaceholderChosePassword" = "گذرواژه انتخاب کنید";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "Trouble signing in?";
+"ForgotPasswordTitle" = "مشکلی در ورود به سیستم دارید؟";
