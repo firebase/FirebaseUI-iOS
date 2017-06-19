@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 /**
- * Delegate method called when the database reference at an index has 
+ * Delegate method called when the database reference at an index has
  * finished loading its contents.
  * @param array The array containing the reference.
  * @param ref The reference that was loaded.
