@@ -23,10 +23,9 @@
 
 @interface FUIIndexArray () <FUICollectionDelegate>
 
-@property (nonatomic, readonly) id<FUIDataObservable> index;
 @property (nonatomic, readonly) id<FUIDataObservable> data;
 
-@property (nonatomic, readonly) FUIArray *indexArray;
+@property (nonatomic, readonly) id<FUICollection> indexArray;
 
 @property (nonatomic, readonly) NSMutableArray<FUIQueryObserver *> *observers;
 
@@ -48,20 +47,27 @@
   @throw e;
 }
 
-- (instancetype)initWithIndex:(id<FUIDataObservable>)index
-                         data:(id<FUIDataObservable>)data
-                     delegate:(nullable id<FUIIndexArrayDelegate>)delegate; {
-  NSParameterAssert(index != nil);
+- (instancetype)initWithIndexArray:(id<FUICollection>)indexArray
+                              data:(id<FUIDataObservable>)data
+                          delegate:(nullable id<FUIIndexArrayDelegate>)delegate {
+  NSParameterAssert(indexArray != nil);
   NSParameterAssert(data != nil);
   self = [super init];
   if (self != nil) {
-    _index = index;
+    _indexArray = indexArray;
+    _indexArray.delegate = self;
     _data = data;
     _observers = [NSMutableArray array];
     _delegate = delegate;
-    [self observeQueries]; // TODO: remove this line
   }
   return self;
+}
+
+- (instancetype)initWithIndex:(id<FUIDataObservable>)index
+                         data:(id<FUIDataObservable>)data
+                     delegate:(nullable id<FUIIndexArrayDelegate>)delegate {
+  FUIArray *indexCollection = [[FUIArray alloc] initWithQuery:index delegate:self];
+  return [self initWithIndexArray:indexCollection data:data delegate:delegate];
 }
 
 - (instancetype)initWithIndex:(id<FUIDataObservable>)index
@@ -70,7 +76,6 @@
 }
 
 - (void)observeQueries {
-  _indexArray = [[FUIArray alloc] initWithQuery:self.index delegate:self];
   [_indexArray observeQuery];
 }
 
