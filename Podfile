@@ -17,6 +17,7 @@ target 'FirebaseStorageUI' do
 
   pod 'Firebase/Storage'
   pod 'SDWebImage', '~> 4.0'
+  pod 'FLAnimatedImage'
 
   target 'FirebaseStorageUITests' do
     inherit! :search_paths
@@ -93,6 +94,7 @@ target 'Storage' do
 
   pod 'Firebase/Storage'
   pod 'SDWebImage', '~> 4.0'
+  pod 'FLAnimatedImage'
 end
 
 target 'Auth' do

@@ -61,7 +61,7 @@ static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
                                                  completion:(void (^)(UIImage *,
                                                                       NSError *,
                                                                       SDImageCacheType,
-                                                                      FIRStorageReference *))completion{
+                                                                      FIRStorageReference *))completion {
   return [self sd_setImageWithStorageReference:storageRef
                                   maxImageSize:size
                               placeholderImage:placeholder
