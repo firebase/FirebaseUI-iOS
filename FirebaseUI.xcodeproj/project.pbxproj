@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D01FC7B1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D01FC7A1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m */; };
+		8D19D5941EFC81C9004DF646 /* FUISnapshotArrayDiffTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D19D5931EFC81C9004DF646 /* FUISnapshotArrayDiffTest.m */; };
 		8D1E107C1DAEB97300AEFCA0 /* FUIIndexTableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1E107B1DAEB97300AEFCA0 /* FUIIndexTableViewDataSourceTest.m */; };
 		8D1EFCB01EF890D90075F701 /* FirebaseAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = C38F4F7E1EE24A94008B2250 /* FirebaseAuthUI.strings */; };
 		8D2A84AA1D678B2B0058DF04 /* FirebaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D2A84A91D678B2B0058DF04 /* FirebaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -16,12 +17,19 @@
 		8D306BC11E1C64F200A13B0E /* FUITableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941ED1D67951B00CD3685 /* FUITableViewDataSourceTest.m */; };
 		8D3A120E1DC2B122007558BA /* FUISortedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D3A120C1DC2B122007558BA /* FUISortedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D3A120F1DC2B122007558BA /* FUISortedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A120D1DC2B122007558BA /* FUISortedArray.m */; };
+		8D6EE51B1EFDC1B90072E9A3 /* FUIBatchedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D6EE5191EFDC1B90072E9A3 /* FUIBatchedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D6EE51C1EFDC1B90072E9A3 /* FUIBatchedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6EE51A1EFDC1B90072E9A3 /* FUIBatchedArray.m */; };
+		8D6EE51D1EFDC1B90072E9A3 /* FUIBatchedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6EE51A1EFDC1B90072E9A3 /* FUIBatchedArray.m */; };
+		8D6EE51F1EFDD4290072E9A3 /* FUIBatchedArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6EE51E1EFDD4290072E9A3 /* FUIBatchedArrayTest.m */; };
 		8D78AF061D9D8CB000CFA9C5 /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */; };
 		8D7AD9B71D9317FB006866B9 /* UIImageView+FirebaseStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7AD9B51D9317FB006866B9 /* UIImageView+FirebaseStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D7AD9B81D9317FB006866B9 /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */; };
 		8D82147C1D67981C0069A614 /* FirebaseAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DCC4FC31D678CDC00B0D3C4 /* FirebaseAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D82147D1D67982E0069A614 /* FirebaseFacebookAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DCC4FDF1D678CE800B0D3C4 /* FirebaseFacebookAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D82147E1D67983C0069A614 /* FirebaseGoogleAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DCC4FFB1D678CF500B0D3C4 /* FirebaseGoogleAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D8340EE1EFB163C0047897C /* FUISnapshotArrayDiff.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D8340EC1EFB163C0047897C /* FUISnapshotArrayDiff.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D8340EF1EFB163C0047897C /* FUISnapshotArrayDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D8340ED1EFB163C0047897C /* FUISnapshotArrayDiff.m */; };
+		8D8340F01EFB163C0047897C /* FUISnapshotArrayDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D8340ED1EFB163C0047897C /* FUISnapshotArrayDiff.m */; };
 		8D90843C1D9316AB00333CC8 /* FUIImageViewCategoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90843B1D9316AB00333CC8 /* FUIImageViewCategoryTests.m */; };
 		8D90843E1D9316AB00333CC8 /* FirebaseStorageUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D9084301D9316AB00333CC8 /* FirebaseStorageUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D924C5D1DA6F67E00C4DA48 /* FUIIndexArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D924C5B1DA6F67E00C4DA48 /* FUIIndexArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -465,6 +473,7 @@
 
 /* Begin PBXFileReference section */
 		8D01FC7A1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIIndexCollectionViewDataSourceTest.m; sourceTree = "<group>"; };
+		8D19D5931EFC81C9004DF646 /* FUISnapshotArrayDiffTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISnapshotArrayDiffTest.m; sourceTree = "<group>"; };
 		8D1E107B1DAEB97300AEFCA0 /* FUIIndexTableViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIIndexTableViewDataSourceTest.m; sourceTree = "<group>"; };
 		8D2A84A61D678B2B0058DF04 /* FirebaseUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D2A84A91D678B2B0058DF04 /* FirebaseUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseUI.h; sourceTree = "<group>"; };
@@ -472,8 +481,13 @@
 		8D3A120C1DC2B122007558BA /* FUISortedArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISortedArray.h; sourceTree = "<group>"; };
 		8D3A120D1DC2B122007558BA /* FUISortedArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISortedArray.m; sourceTree = "<group>"; };
 		8D60505E1DCA8EB8005D8635 /* FUISortedArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISortedArrayTest.m; sourceTree = "<group>"; };
+		8D6EE5191EFDC1B90072E9A3 /* FUIBatchedArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIBatchedArray.h; sourceTree = "<group>"; };
+		8D6EE51A1EFDC1B90072E9A3 /* FUIBatchedArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIBatchedArray.m; sourceTree = "<group>"; };
+		8D6EE51E1EFDD4290072E9A3 /* FUIBatchedArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIBatchedArrayTest.m; sourceTree = "<group>"; };
 		8D7AD9B51D9317FB006866B9 /* UIImageView+FirebaseStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+FirebaseStorage.h"; sourceTree = "<group>"; };
 		8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+FirebaseStorage.m"; sourceTree = "<group>"; };
+		8D8340EC1EFB163C0047897C /* FUISnapshotArrayDiff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISnapshotArrayDiff.h; sourceTree = "<group>"; };
+		8D8340ED1EFB163C0047897C /* FUISnapshotArrayDiff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISnapshotArrayDiff.m; sourceTree = "<group>"; };
 		8D9084201D93168800333CC8 /* libStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D90842E1D9316AB00333CC8 /* FirebaseStorageUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseStorageUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9084301D9316AB00333CC8 /* FirebaseStorageUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseStorageUI.h; sourceTree = "<group>"; };
@@ -1511,6 +1525,10 @@
 				8DA9413A1D678DEB00CD3685 /* FUICollection.h */,
 				8DA941391D678DEB00CD3685 /* FUIArray.h */,
 				8DA941431D678E3200CD3685 /* FUIArray.m */,
+				8D6EE5191EFDC1B90072E9A3 /* FUIBatchedArray.h */,
+				8D6EE51A1EFDC1B90072E9A3 /* FUIBatchedArray.m */,
+				8D8340EC1EFB163C0047897C /* FUISnapshotArrayDiff.h */,
+				8D8340ED1EFB163C0047897C /* FUISnapshotArrayDiff.m */,
 				8D3A120C1DC2B122007558BA /* FUISortedArray.h */,
 				8D3A120D1DC2B122007558BA /* FUISortedArray.m */,
 				8DA9413B1D678DEB00CD3685 /* FUICollectionViewDataSource.h */,
@@ -1532,6 +1550,8 @@
 				8D01FC7A1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m */,
 				8DA941E91D67951B00CD3685 /* FUIArrayTest.m */,
 				8D60505E1DCA8EB8005D8635 /* FUISortedArrayTest.m */,
+				8D19D5931EFC81C9004DF646 /* FUISnapshotArrayDiffTest.m */,
+				8D6EE51E1EFDD4290072E9A3 /* FUIBatchedArrayTest.m */,
 				8DA941EC1D67951B00CD3685 /* FUICollectionViewDataSourceTest.m */,
 				8DA941ED1D67951B00CD3685 /* FUITableViewDataSourceTest.m */,
 			);
@@ -1906,8 +1926,10 @@
 				8D924C641DA6F77700C4DA48 /* FUIQueryObserver.h in Headers */,
 				8DFA90471DAC54DD003B5E10 /* FUIIndexCollectionViewDataSource.h in Headers */,
 				8D3A120E1DC2B122007558BA /* FUISortedArray.h in Headers */,
+				8D8340EE1EFB163C0047897C /* FUISnapshotArrayDiff.h in Headers */,
 				8DA9413E1D678DEB00CD3685 /* FUIArray.h in Headers */,
 				8DA941401D678DEB00CD3685 /* FUICollectionViewDataSource.h in Headers */,
+				8D6EE51B1EFDC1B90072E9A3 /* FUIBatchedArray.h in Headers */,
 				8DA941421D678DEB00CD3685 /* FUITableViewDataSource.h in Headers */,
 				8DA9413F1D678DEB00CD3685 /* FUICollection.h in Headers */,
 			);
@@ -2867,9 +2889,11 @@
 			files = (
 				8D924C5F1DA6F67E00C4DA48 /* FUIIndexArray.m in Sources */,
 				8DFA90441DAC1DAC003B5E10 /* FUIIndexTableViewDataSource.m in Sources */,
+				8D6EE51D1EFDC1B90072E9A3 /* FUIBatchedArray.m in Sources */,
 				8DFA90491DAC54DD003B5E10 /* FUIIndexCollectionViewDataSource.m in Sources */,
 				8D924C661DA6F77700C4DA48 /* FUIQueryObserver.m in Sources */,
 				8DBA0F801D872E4700D113D3 /* FUICollectionViewDataSource.m in Sources */,
+				8D8340F01EFB163C0047897C /* FUISnapshotArrayDiff.m in Sources */,
 				8DBA0F7F1D872E4300D113D3 /* FUIArray.m in Sources */,
 				8DC2FA5E1E44FA720036C03F /* FUISortedArray.m in Sources */,
 				8DBA0F821D872E4E00D113D3 /* FUITableViewDataSource.m in Sources */,
@@ -2931,9 +2955,11 @@
 			files = (
 				8D924C5E1DA6F67E00C4DA48 /* FUIIndexArray.m in Sources */,
 				8DFA90431DAC1DAC003B5E10 /* FUIIndexTableViewDataSource.m in Sources */,
+				8D6EE51C1EFDC1B90072E9A3 /* FUIBatchedArray.m in Sources */,
 				8DFA90481DAC54DD003B5E10 /* FUIIndexCollectionViewDataSource.m in Sources */,
 				8D924C651DA6F77700C4DA48 /* FUIQueryObserver.m in Sources */,
 				8D3A120F1DC2B122007558BA /* FUISortedArray.m in Sources */,
+				8D8340EF1EFB163C0047897C /* FUISnapshotArrayDiff.m in Sources */,
 				8DA941481D678E3200CD3685 /* FUICollectionViewDataSource.m in Sources */,
 				8DA941471D678E3200CD3685 /* FUIArray.m in Sources */,
 				8DA9414A1D678E3200CD3685 /* FUITableViewDataSource.m in Sources */,
@@ -2950,6 +2976,8 @@
 				8D01FC7B1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m in Sources */,
 				8D1E107C1DAEB97300AEFCA0 /* FUIIndexTableViewDataSourceTest.m in Sources */,
 				8D924C611DA6F69100C4DA48 /* FUIIndexArrayTest.m in Sources */,
+				8D6EE51F1EFDD4290072E9A3 /* FUIBatchedArrayTest.m in Sources */,
+				8D19D5941EFC81C9004DF646 /* FUISnapshotArrayDiffTest.m in Sources */,
 				8DAC55A91DD666D700D52664 /* FUIDatabaseTestUtils.m in Sources */,
 				8DAC55A81DD666CB00D52664 /* FUISortedArrayTest.m in Sources */,
 			);

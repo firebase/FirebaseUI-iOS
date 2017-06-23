@@ -116,7 +116,7 @@
 
           // Cache downloaded image
           [cache storeImage:image imageData:data forKey:key toDisk:YES completion:^{}];
-          
+
           if (completion != nil) {
             completion(image, nil, SDImageCacheTypeNone, storageRef);
           }

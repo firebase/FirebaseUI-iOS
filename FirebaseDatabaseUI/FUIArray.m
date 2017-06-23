@@ -53,7 +53,7 @@
   if (self) {
     self.snapshots = [NSMutableArray array];
     self.query = query;
-    self.handles = [NSMutableSet setWithCapacity:4];
+    self.handles = [NSMutableSet setWithCapacity:5];
     self.delegate = delegate;
   }
   return self;
