@@ -155,12 +155,16 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       [delegate callbackWithCredential:nil error:error result:nil];
       return;
     }
-
-    UIViewController *controller =
-        [[FUIPhoneVerificationViewController alloc] initWithAuthUI:self.authUI
-                                                    verificationID:verificationID
-                                                       phoneNumber:phoneNumberWithCountryCode];
-
+   
+    UIViewController *controller;
+    if (self.authUI.delegate && [self.authUI.delegate respondsToSelector:@selector(phoneVerificationViewControllerForAuthUI:phoneNumber:)]) {
+      controller = [self.authUI.delegate phoneVerificationViewControllerForAuthUI: self.authUI phoneNumber:phoneNumberWithCountryCode];
+    } else {
+      controller =
+      [[FUIPhoneVerificationViewController alloc] initWithAuthUI:self.authUI
+                                                  verificationID:verificationID
+                                                     phoneNumber:phoneNumberWithCountryCode];
+    }
     [self pushViewController:controller];
   }];
 }

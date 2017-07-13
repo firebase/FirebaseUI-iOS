@@ -105,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
     return;
   }
   UIViewController *controller;
-  if ([delegate respondsToSelector:@selector(phoneEntryViewControllerForAuthUI:)]) {
+  if ([_authUI.delegate respondsToSelector:@selector(phoneEntryViewControllerForAuthUI:)]) {
     controller = [_authUI.delegate phoneEntryViewControllerForAuthUI: _authUI];
   } else {
     controller = [[FUIPhoneEntryViewController alloc] initWithAuthUI:_authUI];
