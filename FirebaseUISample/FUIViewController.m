@@ -179,6 +179,10 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   }
 }
 
+- (FUIPhoneEntryViewController *) phoneEntryViewControllerForAuthUI:(FUIAuth *)authUI {
+  return [[FUIPhoneEntryViewController alloc] initWithAuthUI: self.authUIMock];
+}
+
 - (void)showAlert:(NSString *)message {
   UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
                                                                  message:message
