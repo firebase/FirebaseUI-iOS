@@ -27,6 +27,8 @@
 @class FUIPasswordSignUpViewController;
 @class FUIPasswordRecoveryViewController;
 @class FUIPasswordVerificationViewController;
+@class FUIPhoneEntryViewController;
+@class FUIPhoneVerificationViewController;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -86,7 +88,7 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
     @brief Sent to the receiver to ask for an instance of @c FUIPasswordSignInViewController subclass
     to allow sign-in UI customizations.
     @param authUI The @c FUIAuth instance sending the message.
-    @param email The email user is using for sin-in.
+    @param email The email user is using for sign-in.
     @return an instance of @c FUIPasswordSignInViewController subclass.
  */
 - (FUIPasswordSignInViewController *)passwordSignInViewControllerForAuthUI:(FUIAuth *)authUI
@@ -96,7 +98,7 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
     @brief Sent to the receiver to ask for an instance of @c FUIPasswordSignUpViewController subclass
     to allow sign-up UI customizations.
     @param authUI The @c FUIAuth instance sending the message.
-    @param email The email user is using for sin-in.
+    @param email The email user is using for sign-in.
     @return an instance of @c FUIPasswordSignUpViewController subclass.
  */
 - (FUIPasswordSignUpViewController *)passwordSignUpViewControllerForAuthUI:(FUIAuth *)authUI
@@ -116,13 +118,32 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
     @brief Sent to the receiver to ask for an instance of @c FUIPasswordVerificationViewController subclass
     to allow password verification UI customizations.
     @param authUI The @c FUIAuth instance sending the message.
-    @param email The email user is using for sin-in.
+    @param email The email user is using for sign-in.
     @param newCredential This @c FIRAuthCredential obtained from linked account.
     @return an instance of @c FUIPasswordVerificationViewController subclass.
  */
 - (FUIPasswordVerificationViewController *)passwordVerificationViewControllerForAuthUI:(FUIAuth *)authUI
                                                                                  email:(NSString *)email
                                                                          newCredential:(FIRAuthCredential *)newCredential;
+
+/** @fn phoneEntryViewControllerForAuthUI:
+ @brief Sent to the receiver to ask for an instance of @c FUIPhoneEntryViewController subclass
+ to allow phone entry UI customizations.
+ @param authUI The @c FUIAuth instance sending the message.
+ @return an instance of @c FUIPhoneEntryViewController subclass.
+ */
+- (FUIPhoneEntryViewController *)phoneEntryViewControllerForAuthUI:(FUIAuth *)authUI;
+
+/** @fn phoneVerificationViewControllerForAuthUI:phoneNumber:newCredential:
+ @brief Sent to the receiver to ask for an instance of @c FUIPhoneVerificationViewController subclass
+ to allow phone verification UI customizations.
+ @param authUI The @c FUIAuth instance sending the message.
+ @param phoneNumber The phone number user is using for sign-in.
+ @return an instance of @c FUIPhoneVerificationViewController subclass.
+ */
+- (FUIPhoneVerificationViewController *)phoneVerificationViewControllerForAuthUI:(FUIAuth *)authUI
+                                                                     phoneNumber:(NSString *)phoneNumber;
+
 @end
 
 /** @class FUIAuth
