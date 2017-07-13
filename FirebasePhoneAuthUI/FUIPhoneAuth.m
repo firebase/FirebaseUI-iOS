@@ -104,8 +104,12 @@ NS_ASSUME_NONNULL_BEGIN
     }];
     return;
   }
-
-  UIViewController *controller = [[FUIPhoneEntryViewController alloc] initWithAuthUI:_authUI];
+  UIViewController *controller;
+  if ([delegate respondsToSelector:@selector(phoneEntryViewControllerForAuthUI:)]) {
+    controller = [_authUI.delegate phoneEntryViewControllerForAuthUI: _authUI];
+  } else {
+    controller = [[FUIPhoneEntryViewController alloc] initWithAuthUI:_authUI];
+  }
   UINavigationController *navigationController =
       [[UINavigationController alloc] initWithRootViewController:controller];
   [presentingViewController presentViewController:navigationController animated:YES completion:nil];
