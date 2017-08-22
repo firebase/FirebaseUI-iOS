@@ -2436,7 +2436,7 @@
 		8D2A849D1D678B2B0058DF04 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = FirebaseUI;
 				TargetAttributes = {
 					8D2A84A51D678B2B0058DF04 = {
@@ -3762,6 +3762,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BITCODE_GENERATION_MODE = marker;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3818,6 +3819,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BITCODE_GENERATION_MODE = bitcode;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -4390,7 +4392,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524 ${BUILT_PRODUCTS_DIR}/nanopb-framework";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4410,7 +4412,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524 ${BUILT_PRODUCTS_DIR}/nanopb-framework";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4492,7 +4494,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseGoogleAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524 ${BUILT_PRODUCTS_DIR}/nanopb-framework";
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -4521,7 +4523,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseGoogleAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524 ${BUILT_PRODUCTS_DIR}/nanopb-framework";
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -4688,7 +4690,7 @@
 				);
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524 ${BUILT_PRODUCTS_DIR}/nanopb-framework";
 				OTHER_LDFLAGS = "${inherited}";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4707,7 +4709,7 @@
 				);
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-f490f524 ${BUILT_PRODUCTS_DIR}/nanopb-framework";
 				OTHER_LDFLAGS = "${inherited}";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
