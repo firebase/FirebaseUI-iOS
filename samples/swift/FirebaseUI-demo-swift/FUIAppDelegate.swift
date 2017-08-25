@@ -17,7 +17,7 @@
 import UIKit
 import Firebase
 import FirebaseAuthUI
-import Fabric
+import GTMSessionFetcher
 import TwitterKit
 
 @UIApplicationMain
@@ -29,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Successfully running this sample requires an app in Firebase and an
     // accompanying valid GoogleService-Info.plist file.
     FirebaseApp.configure()
-    Fabric.with([Twitter.self])
+    Twitter.sharedInstance().start(withConsumerKey: "", consumerSecret: "");
+    GTMSessionFetcher.setLoggingEnabled(true)
     return true
   }
   
