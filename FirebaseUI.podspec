@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   s.subspec 'Twitter' do |twitter|
     twitter.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks/FirebaseTwitterAuthUI.framework"]
     twitter.dependency 'FirebaseUI/Auth'
-    twitter.dependency 'TwitterKit', '~> 2.4'
+    twitter.dependency 'TwitterKit', '~> 3.0'
     twitter.resource_bundle = {
       'FirebaseTwitterAuthUI' => ['FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks/FirebaseTwitterAuthUI.framework/*.nib',
                                   'FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks/FirebaseTwitterAuthUI.framework/*.lproj',

@@ -17,15 +17,17 @@
 #import "FUIAppDelegate.h"
 
 @import Firebase;
-#import <Fabric/Fabric.h>
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
+#import <GTMSessionFetcher/GTMSessionFetcherLogging.h>
 #import <TwitterKit/Twitter.h>
 
 @implementation FUIAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  [Fabric with:@[[Twitter class]]];
+  [[Twitter sharedInstance] startWithConsumerKey:@""
+                                  consumerSecret:@""];
   [FIRApp configure];
+  [GTMSessionFetcher setLoggingEnabled:YES];
   return YES;
 }
 

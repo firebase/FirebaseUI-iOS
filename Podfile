@@ -72,11 +72,13 @@ target 'FirebasePhoneAuthUI' do
 end
 
 target 'FirebaseTwitterAuthUI' do
+  platform :ios, '9.0'
   use_frameworks!
   # Pods for Twitter Auth
-  pod 'TwitterKit', '~> 2.4'
+  pod 'TwitterKit', '~> 3.0'
 
   target 'FirebaseTwitterAuthUITests' do
+    platform :ios, '9.0'
     inherit! :search_paths
     pod 'OCMock'
   end
@@ -126,14 +128,16 @@ target 'Phone' do
 end
 
 target 'Twitter' do
+  platform :ios, '9.0'
   use_frameworks!
 
   # Pods for Twitter Auth
   pod 'FirebaseAuth'
-  pod 'TwitterKit', '~> 2.4'
+  pod 'TwitterKit', '~> 3.0'
 end
 
 target 'FirebaseUISample' do
+  platform :ios, '9.0'
 
   pod 'OCMock'
 

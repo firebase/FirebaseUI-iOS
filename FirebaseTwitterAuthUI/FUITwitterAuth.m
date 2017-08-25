@@ -109,7 +109,7 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
     } else {
       if (completion) {
         NSError *newError;
-        if (error.code == TWTRLogInErrorCodeCanceled) {
+        if (error.code == TWTRLogInErrorCodeCancelled) {
           newError = [FUIAuthErrorUtils userCancelledSignInError];
         } else {
           newError = [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
