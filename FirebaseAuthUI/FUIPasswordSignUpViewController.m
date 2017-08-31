@@ -228,7 +228,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 }
 
 - (void)textFieldDidChange {
-  [self didChangeEmail:_emailField.text orPassword:_nameField.text orUserName:_passwordField.text];
+  [self didChangeEmail:_emailField.text orPassword:_passwordField.text orUserName:_nameField.text];
 }
 
 - (void)didChangeEmail:(NSString *)email
