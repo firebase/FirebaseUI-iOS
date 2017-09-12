@@ -264,9 +264,9 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
 }
 
 - (void)updateResendLabel {
-  NSTimeInterval minutes = _resendConfirmationCodeSeconds / 60;
-  NSTimeInterval seconds = (NSUInteger)_resendConfirmationCodeSeconds % 60;
-  NSString *formattedTime = [NSString stringWithFormat:@"%01.0f:%02.0f", minutes, seconds];
+  NSInteger minutes = _resendConfirmationCodeSeconds / 60; // Integer type for truncation
+  NSInteger seconds = round(_resendConfirmationCodeSeconds % 60);
+  NSString *formattedTime = [NSString stringWithFormat:@"%ld:%02ld", minutes, seconds];
 
   _resendConfirmationCodeTimerLabel.text =
       [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeTimer),
