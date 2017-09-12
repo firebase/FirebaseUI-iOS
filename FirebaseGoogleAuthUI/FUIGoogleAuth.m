@@ -106,6 +106,14 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+  [self signInWithDefaultValue:email
+      presentingViewController:presentingViewController
+                    completion:completion];
+}
+
+- (void)signInWithDefaultValue:(nullable NSString *)defaultValue
+    presentingViewController:(nullable UIViewController *)presentingViewController
+                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   _presentingViewController = presentingViewController;
 
   GIDSignIn *signIn = [self configuredGoogleSignIn];
@@ -118,7 +126,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
     }
   };
 
-  signIn.loginHint = email;
+  signIn.loginHint = defaultValue;
   [signIn signIn];
 }
 

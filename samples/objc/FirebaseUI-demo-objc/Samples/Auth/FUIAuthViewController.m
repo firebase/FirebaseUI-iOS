@@ -194,7 +194,7 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
             self.authUI.isSignInWithEmailHidden;
     if (shouldSkipPhoneAuthPicker) {
       FUIPhoneAuth *provider = self.authUI.providers.firstObject;
-      [provider signInWithPresentingViewController:self];
+      [provider signInWithPresentingViewController:self phoneNumber:nil];
     } else {
       UINavigationController *controller = [self.authUI authViewController];
       if (_isCustomAuthDelegateSelected) {
