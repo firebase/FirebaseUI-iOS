@@ -14,25 +14,13 @@
 //  limitations under the License.
 //
 
-#import <objc/runtime.h>
+#import "FLAnimatedImageView+FirebaseStorage.h"
 
-#import "UIImageView+FirebaseStorage.h"
-
-static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
-
-@interface UIImageView (FirebaseStorage_Private)
-@property (nonatomic, readwrite, nullable, setter=sd_setCurrentDownloadTask:) FIRStorageDownloadTask *sd_currentDownloadTask;
+@interface FLAnimatedImageView ()
+@property (readwrite) FIRStorageDownloadTask *sd_currentDownloadTask;
 @end
 
-@implementation UIImageView (FirebaseStorage)
-
-+ (UInt64)sd_defaultMaxImageSize {
-  return FUIMaxImageDownloadSize;
-}
-
-+ (void)sd_setDefaultMaxImageSize:(UInt64)size {
-  FUIMaxImageDownloadSize = size;
-}
+@implementation FLAnimatedImageView (FirebaseStorage)
 
 - (FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef {
   return [self sd_setImageWithStorageReference:storageRef placeholderImage:nil completion:nil];
@@ -90,63 +78,58 @@ static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
 
   // Query cache for image before trying to download
   NSString *key = storageRef.fullPath;
-  UIImage *cached = nil;
 
-  cached = [cache imageFromMemoryCacheForKey:key];
-  if (cached != nil) {
-    self.image = cached;
-    if (completion != nil) {
-      completion(cached, nil, SDImageCacheTypeMemory, storageRef);
-    }
-    return nil;
-  }
-
-  cached = [cache imageFromDiskCacheForKey:key];
-  if (cached != nil) {
-    self.image = cached;
-    if (completion != nil) {
-      completion(cached, nil, SDImageCacheTypeDisk, storageRef);
-    }
-    return nil;
-  }
-
-  // If nothing was found in cache, download the image from Firebase Storage
-  FIRStorageDownloadTask * download = [storageRef dataWithMaxSize:size
-                                                       completion:^(NSData *_Nullable data,
-                                                                    NSError *_Nullable error) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-      if (data != nil) {
-        UIImage *image = [UIImage sd_imageWithData:data];
-        self.image = image;
-
-        // Cache downloaded image
-        [cache storeImage:image forKey:storageRef.fullPath completion:nil];
-
-        if (completion != nil) {
-          completion(image, nil, SDImageCacheTypeNone, storageRef);
-        }
+  [cache queryCacheOperationForKey:key done:^(UIImage * _Nullable image,
+                                              NSData * _Nullable data,
+                                              SDImageCacheType cacheType) {
+    if (data != nil) {
+      SDImageFormat format = [NSData sd_imageFormatForImageData:data];
+      if (format == SDImageFormatGIF) {
+        FLAnimatedImage *image = [[FLAnimatedImage alloc] initWithAnimatedGIFData:data];
+        self.animatedImage = image;
+        self.image = nil;
       } else {
-        if (completion != nil) {
-          completion(nil, error, SDImageCacheTypeNone, storageRef);
-        }
+        UIImage *image = [UIImage imageWithData:data];
+        self.image = image;
+        self.animatedImage = nil;
       }
-    });
+    }
+
+    // If nothing was found in cache, download the image from Firebase Storage
+    FIRStorageDownloadTask *download = [storageRef dataWithMaxSize:size
+                                                        completion:^(NSData *_Nullable data,
+                                                                     NSError *_Nullable error) {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        if (data != nil) {
+          UIImage *image;
+
+          SDImageFormat format = [NSData sd_imageFormatForImageData:data];
+          if (format == SDImageFormatGIF) {
+            FLAnimatedImage *animated = [[FLAnimatedImage alloc] initWithAnimatedGIFData:data];
+            self.animatedImage = animated;
+            self.image = nil;
+          } else {
+            image = [UIImage imageWithData:data];
+            self.image = image;
+            self.animatedImage = nil;
+          }
+
+          // Cache downloaded image
+          [cache storeImage:image imageData:data forKey:key toDisk:YES completion:^{}];
+
+          if (completion != nil) {
+            completion(image, nil, SDImageCacheTypeNone, storageRef);
+          }
+        } else {
+          if (completion != nil) {
+            completion(nil, error, SDImageCacheTypeNone, storageRef);
+          }
+        }
+      });
+    }];
+    self.sd_currentDownloadTask = download;
   }];
-  self.sd_currentDownloadTask = download;
-  return download;
-}
-
-#pragma mark - Accessors
-
-- (void)sd_setCurrentDownloadTask:(FIRStorageDownloadTask *)currentDownload {
-  objc_setAssociatedObject(self,
-                           @selector(sd_currentDownloadTask),
-                           currentDownload,
-                           OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (FIRStorageDownloadTask *)sd_currentDownloadTask {
-  return objc_getAssociatedObject(self, @selector(sd_currentDownloadTask));
+  return nil;
 }
 
 @end

@@ -137,6 +137,20 @@ didFailLoadWithError:(NSError *)error;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
+ * Initializes a FUIIndexArray with an index collection and a data query.
+ * The array expects the keys of the children of the index collection's query to match
+ * exactly children of the data query. The index collection may maintain its own ordering.
+ * @param index A Firebase database query whose childrens' keys are all children
+ *   of the data query.
+ * @param data  A Firebase database reference whose children will be fetched and used
+ *   to populate the array's contents according to the index query.
+ * @param delegate The delegate that events should be forwarded to.
+ */
+- (instancetype)initWithIndexArray:(id<FUICollection>)indexArray
+                              data:(id<FUIDataObservable>)data
+                          delegate:(nullable id<FUIIndexArrayDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+
+/**
  * Initializes a FUIIndexArray with an index query and a data query.
  * The array expects the keys of the children of the index query to match exactly children
  * of the data query.
@@ -148,7 +162,7 @@ didFailLoadWithError:(NSError *)error;
  */
 - (instancetype)initWithIndex:(id<FUIDataObservable>)index
                          data:(id<FUIDataObservable>)data
-                     delegate:(nullable id<FUIIndexArrayDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+                     delegate:(nullable id<FUIIndexArrayDelegate>)delegate;
 
 /**
  * Initializes a FUIIndexArray with an index query and a data query.
@@ -169,6 +183,12 @@ didFailLoadWithError:(NSError *)error;
  * @return A snapshot, or nil if one has not yet been loaded.
  */
 - (nullable FIRDataSnapshot *)objectAtIndex:(NSUInteger)index;
+
+/**
+ * Attaches observers to the index and data queries and begins populating the array.
+ * Before this is called, the array won't send any updates or contain any elements.
+ */
+- (void)observeQueries;
 
 /**
  * Removes all observers from all queries managed by this array and renders this array

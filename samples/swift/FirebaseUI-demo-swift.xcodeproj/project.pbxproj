@@ -37,6 +37,7 @@
 		C39BC0511DB812330060F6AF /* FUICustomPasswordVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC04F1DB812330060F6AF /* FUICustomPasswordVerificationViewController.swift */; };
 		C39BC0521DB812330060F6AF /* FUICustomPasswordVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC0501DB812330060F6AF /* FUICustomPasswordVerificationViewController.xib */; };
 		C3F23ECD1D80F3300020509F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3F23ECC1D80F3300020509F /* GoogleService-Info.plist */; };
+		F2844E1183A96A6823606B2F /* Pods_FirebaseUI_demo_swiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B263E1C7BF4D2B5E1A7427E /* Pods_FirebaseUI_demo_swiftTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */

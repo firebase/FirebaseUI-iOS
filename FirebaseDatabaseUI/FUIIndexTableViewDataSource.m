@@ -40,7 +40,6 @@
 
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
-                    tableView:(UITableView *)tableView
                      delegate:(nullable id<FUIIndexTableViewDataSourceDelegate>)delegate
                  populateCell:(UITableViewCell *(^)(UITableView *tableView,
                                                     NSIndexPath *indexPath,
@@ -50,12 +49,16 @@
     _array = [[FUIIndexArray alloc] initWithIndex:indexQuery
                                              data:dataQuery
                                          delegate:self];
-    _tableView = tableView;
-    tableView.dataSource = self;
     _populateCell = populateCell;
     _delegate = delegate;
   }
   return self;
+}
+
+- (void)bindToTableView:(UITableView *)tableView {
+  _tableView = tableView;
+  tableView.dataSource = self;
+  [self.array observeQueries];
 }
 
 - (NSArray<FIRDataSnapshot *> *)indexes {
@@ -64,6 +67,10 @@
 
 - (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index {
   return [self.array objectAtIndex:index];
+}
+
+- (void)dealloc {
+  [self.array invalidate];
 }
 
 #pragma mark - FUIIndexArrayDelegate 
@@ -155,10 +162,9 @@ didLoadObject:(FIRDataSnapshot *)object
   FUIIndexTableViewDataSource *dataSource =
     [[FUIIndexTableViewDataSource alloc] initWithIndex:index
                                                   data:data
-                                             tableView:self
                                               delegate:delegate
                                           populateCell:populateCell];
-  self.dataSource = dataSource;
+  [dataSource bindToTableView:self];
   return dataSource;
 }
 

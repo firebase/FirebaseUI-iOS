@@ -32,7 +32,6 @@
 
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
-               collectionView:(UICollectionView *)collectionView
                      delegate:(id<FUIIndexCollectionViewDataSourceDelegate>)delegate
                  populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
                                                          NSIndexPath *indexPath,
@@ -40,14 +39,18 @@
   self = [super init];
   if (self != nil) {
     _array = [[FUIIndexArray alloc] initWithIndex:indexQuery
-                                                  data:dataQuery
-                                              delegate:self];
-    _collectionView = collectionView;
-    _collectionView.dataSource = self;
+                                             data:dataQuery
+                                         delegate:self];
     _populateCell = populateCell;
     _delegate = delegate;
   }
   return self;
+}
+
+- (void)bindToCollectionView:(UICollectionView *)collectionView {
+  _collectionView = collectionView;
+  _collectionView.dataSource = self;
+  [self.array observeQueries];
 }
 
 - (NSArray<FIRDataSnapshot *> *)indexes {
@@ -56,6 +59,10 @@
 
 - (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index {
   return [self.array objectAtIndex:index];
+}
+
+- (void)dealloc {
+  [self.array invalidate];
 }
 
 #pragma mark - FUIIndexArrayDelegate
@@ -139,10 +146,9 @@ didLoadObject:(FIRDataSnapshot *)object
   FUIIndexCollectionViewDataSource *dataSource =
     [[FUIIndexCollectionViewDataSource alloc] initWithIndex:index
                                                             data:data
-                                                  collectionView:self
                                                         delegate:delegate
                                                     populateCell:populateCell];
-  self.dataSource = dataSource;
+  [dataSource bindToCollectionView:self];
   return dataSource;
 }
 

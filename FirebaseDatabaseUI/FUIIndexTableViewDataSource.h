@@ -77,19 +77,24 @@ didFailLoadAtIndex:(NSUInteger)index
  * @param dataQuery The reference whose children correspond to the contents of the
  *   index query. This reference's children's contents are served as teh contents 
  *   of the table view that adopts this data source.
- * @param tableView The table view that is populated by this data source. The
- *   data source pulls updates from Firebase database, so it must maintain a reference
- *   to the table view in order to update its contents as the database pushes updates.
- *   The table view is not retained by its data source.
  * @param populateCell The closure invoked when populating a UITableViewCell (or subclass).
  */
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
-                    tableView:(UITableView *)tableView
                      delegate:(nullable id<FUIIndexTableViewDataSourceDelegate>)delegate
                  populateCell:(UITableViewCell *(^)(UITableView *tableView,
                                                     NSIndexPath *indexPath,
                                                     FIRDataSnapshot *_Nullable snap))populateCell NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Attaches the data source to a table view and begins pulling updates from the server.
+ * No data will be loaded before this method is called.
+ * @param tableView The table view that is populated by this data source. The
+ *   data source pulls updates from Firebase database, so it must maintain a reference
+ *   to the table view in order to update its contents as the database pushes updates.
+ *   The table view is not retained by its data source.
+ */
+- (void)bindToTableView:(UITableView *)tableView;
 
 /**
  * Returns the snapshot at the given index, if it has loaded.
