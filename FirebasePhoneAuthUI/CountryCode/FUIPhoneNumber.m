@@ -71,14 +71,14 @@ NSString * const FUIPhoneNumberValidationErrorDomain = @"FUIPhoneNumberValidatio
                                  countryCode:countryCode];
 }
 
-- (BOOL)validate:(NSError *__autoreleasing _Nullable *_Nullable)errorRef
+- (BOOL)validate:(NSError *__autoreleasing _Nullable *_Nullable)errorRef {
   // The first character is always the '+'
   BOOL firstCharacterIsPlus = [_normalizedPhoneNumber characterAtIndex:0] == '+';
   if (!firstCharacterIsPlus) {
     if (errorRef) {
       NSString *message = [NSString stringWithFormat:@"Phone number %@ should start with '+'",
                               _normalizedPhoneNumber];
-      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : message }];
+      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : message };
       *errorRef = [NSError errorWithDomain:FUIPhoneNumberValidationErrorDomain
                                       code:FUIPhoneNumberValidationErrorMissingPlus
                                   userInfo:userInfo];
@@ -90,7 +90,7 @@ NSString * const FUIPhoneNumberValidationErrorDomain = @"FUIPhoneNumberValidatio
     if (errorRef) {
       NSString *message = [NSString stringWithFormat:@"Phone number %@ should have only one '+'",
                               _normalizedPhoneNumber];
-      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : message }];
+      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : message };
       *errorRef = [NSError errorWithDomain:FUIPhoneNumberValidationErrorDomain
                                       code:FUIPhoneNumberValidationErrorMissingDialCode
                                   userInfo:userInfo];
@@ -104,7 +104,7 @@ NSString * const FUIPhoneNumberValidationErrorDomain = @"FUIPhoneNumberValidatio
       NSString *message =
           [NSString stringWithFormat:@"Phone number %@ should have only one country code",
               _normalizedPhoneNumber];
-      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : message }];
+      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : message };
       *errorRef = [NSError errorWithDomain:FUIPhoneNumberValidationErrorDomain
                                       code:FUIPhoneNumberValidationErrorMissingNumber
                                   userInfo:userInfo];
