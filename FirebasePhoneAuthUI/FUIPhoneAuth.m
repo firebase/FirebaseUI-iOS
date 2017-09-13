@@ -100,8 +100,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)signInWithDefaultValue:(nullable NSString *)defaultValue
-    presentingViewController:(nullable UIViewController *)presentingViewController
-                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+      presentingViewController:(nullable UIViewController *)presentingViewController
+                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   _pendingSignInCallback = completion;
   
   FUIPhoneAuth *delegate = [_authUI providerWithID:FIRPhoneAuthProviderID];

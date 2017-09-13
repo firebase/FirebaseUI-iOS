@@ -108,8 +108,8 @@ __attribute__((deprecated("This is deprecated API and will be removed in a futur
         (using @c FIRAuthCredential) completes.
  */
 - (void)signInWithDefaultValue:(nullable NSString *)defaultValue
-    presentingViewController:(nullable UIViewController *)presentingViewController
-                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion;
+      presentingViewController:(nullable UIViewController *)presentingViewController
+                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion;
 
 /** @fn signOut
     @brief Called when the user wants to sign out.

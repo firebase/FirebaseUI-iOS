@@ -45,15 +45,15 @@ typedef NS_ENUM(NSInteger, FUIPhoneNumberValidationError) {
         a raw phone number and country code.
     @return object or nil if any of the required parameters is nil.
 */
-- (instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber;
+- (nullable instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber;
 
 /** @fn initWithRawPhoneNumber:countryCode:
     @param rawPhoneNumber           (required) The raw phone number without country code
     @param countryCode              (required) The country code information
     @return object or nil if any of the required parameters is nil.
 */
-- (instancetype)initWithRawPhoneNumber:(NSString *)rawPhoneNumber
-                           countryCode:(FUICountryCodeInfo *)countryCode;
+- (nullable instancetype)initWithRawPhoneNumber:(NSString *)rawPhoneNumber
+                                    countryCode:(FUICountryCodeInfo *)countryCode;
 
 /** @fn initWithNormalizedPhoneNumber:rawPhoneNumber:countryCode:
     @param normalizedPhoneNumber    (optional) The phone number returned from the endpoint;
@@ -62,14 +62,18 @@ typedef NS_ENUM(NSInteger, FUIPhoneNumberValidationError) {
     @param countryCode              (required) The country code information
     @return object or nil if any of the required parameters is nil.
 */
-- (instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber
-                               rawPhoneNumber:(NSString *)rawPhoneNumber
-                                  countryCode:(FUICountryCodeInfo *)countryCode;
+- (nullable instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber
+                                        rawPhoneNumber:(NSString *)rawPhoneNumber
+                                           countryCode:(FUICountryCodeInfo *)countryCode;
 
-- (instancetype)init __unavailable;
+- (instancetype)init NS_UNAVAILABLE;
 
-- (BOOL)validate:(NSError **)error;
-
+/** @fn validate:
+    @brief Checks if current phone number has valid international format.
+    @param errorRef The error which occurred, if any.
+    @return True if phone number format is valid.
+*/
+- (BOOL)validate:(NSError *__autoreleasing _Nullable *_Nullable)errorRef;
 @end
 
 NS_ASSUME_NONNULL_END

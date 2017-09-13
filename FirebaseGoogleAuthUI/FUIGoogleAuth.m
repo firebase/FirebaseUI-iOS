@@ -112,8 +112,8 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 }
 
 - (void)signInWithDefaultValue:(nullable NSString *)defaultValue
-    presentingViewController:(nullable UIViewController *)presentingViewController
-                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+      presentingViewController:(nullable UIViewController *)presentingViewController
+                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   _presentingViewController = presentingViewController;
 
   GIDSignIn *signIn = [self configuredGoogleSignIn];

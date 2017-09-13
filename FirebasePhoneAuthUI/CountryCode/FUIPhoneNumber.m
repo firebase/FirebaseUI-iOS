@@ -22,7 +22,7 @@ NSString * const FUIPhoneNumberValidationErrorDomain = @"FUIPhoneNumberValidatio
 
 @implementation FUIPhoneNumber
 
-- (instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber {
+- (nullable instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber {
   if (!normalizedPhoneNumber) {
     return nil;
   }
@@ -44,12 +44,9 @@ NSString * const FUIPhoneNumberValidationErrorDomain = @"FUIPhoneNumberValidatio
   return [self initWithRawPhoneNumber:rawPhoneNumber countryCode:countryCode];
 }
 
-- (instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber
-                               rawPhoneNumber:(NSString *)rawPhoneNumber
-                                  countryCode:(FUICountryCodeInfo *)countryCode {
-  NSParameterAssert(normalizedPhoneNumber);
-  NSParameterAssert(rawPhoneNumber);
-  NSParameterAssert(countryCode);
+- (nullable instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber
+                                        rawPhoneNumber:(NSString *)rawPhoneNumber
+                                           countryCode:(FUICountryCodeInfo *)countryCode {
   if (!normalizedPhoneNumber || !rawPhoneNumber || !countryCode){
     return nil;
   }
@@ -61,8 +58,8 @@ NSString * const FUIPhoneNumberValidationErrorDomain = @"FUIPhoneNumberValidatio
   return self;
 }
 
-- (instancetype)initWithRawPhoneNumber:(NSString *)rawPhoneNumber
-                           countryCode:(FUICountryCodeInfo *)countryCode {
+- (nullable instancetype)initWithRawPhoneNumber:(NSString *)rawPhoneNumber
+                                    countryCode:(FUICountryCodeInfo *)countryCode {
   NSString *dialCode = countryCode.dialCode;
   if ([dialCode characterAtIndex:0] != '+') {
     dialCode = [@"+" stringByAppendingString:dialCode];
@@ -74,32 +71,43 @@ NSString * const FUIPhoneNumberValidationErrorDomain = @"FUIPhoneNumberValidatio
                                  countryCode:countryCode];
 }
 
-- (BOOL)validate:(NSError *__autoreleasing *)error {
+- (BOOL)validate:(NSError *__autoreleasing _Nullable *_Nullable)errorRef
   // The first character is always the '+'
-  BOOL firstCharacterIsPlus = [self.normalizedPhoneNumber characterAtIndex:0] == '+';
+  BOOL firstCharacterIsPlus = [_normalizedPhoneNumber characterAtIndex:0] == '+';
   if (!firstCharacterIsPlus) {
-    if (error) {
-      *error = [NSError errorWithDomain:FUIPhoneNumberValidationErrorDomain
-                                   code:FUIPhoneNumberValidationErrorMissingPlus
-                               userInfo:nil];
+    if (errorRef) {
+      NSString *message = [NSString stringWithFormat:@"Phone number %@ should start with '+'",
+                              _normalizedPhoneNumber];
+      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : message }];
+      *errorRef = [NSError errorWithDomain:FUIPhoneNumberValidationErrorDomain
+                                      code:FUIPhoneNumberValidationErrorMissingPlus
+                                  userInfo:userInfo];
     }
     return false;
   }
   BOOL containsMoreThanThePlus = self.normalizedPhoneNumber.length > 1;
-  if (!containsMoreThanThePlus && error) {
-    if (error) {
-      *error = [NSError errorWithDomain:FUIPhoneNumberValidationErrorDomain
-                                   code:FUIPhoneNumberValidationErrorMissingDialCode
-                               userInfo:nil];
+  if (!containsMoreThanThePlus) {
+    if (errorRef) {
+      NSString *message = [NSString stringWithFormat:@"Phone number %@ should have only one '+'",
+                              _normalizedPhoneNumber];
+      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : message }];
+      *errorRef = [NSError errorWithDomain:FUIPhoneNumberValidationErrorDomain
+                                      code:FUIPhoneNumberValidationErrorMissingDialCode
+                                  userInfo:userInfo];
     }
     return false;
   }
   BOOL containsMoreThanTheCountryCode =
       self.normalizedPhoneNumber.length > 1 + self.countryCode.dialCode.length;
   if (!containsMoreThanTheCountryCode) {
-    if (error) {
-      *error = [NSError errorWithDomain:FUIPhoneNumberValidationErrorDomain
-                                   code:FUIPhoneNumberValidationErrorMissingNumber userInfo:nil];
+    if (errorRef) {
+      NSString *message =
+          [NSString stringWithFormat:@"Phone number %@ should have only one country code",
+              _normalizedPhoneNumber];
+      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : message }];
+      *errorRef = [NSError errorWithDomain:FUIPhoneNumberValidationErrorDomain
+                                      code:FUIPhoneNumberValidationErrorMissingNumber
+                                  userInfo:userInfo];
     }
     return false;
   }

@@ -123,8 +123,8 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 - (void)signInWithDefaultValue:(nullable NSString *)defaultValue
-    presentingViewController:(nullable UIViewController *)presentingViewController
-                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+      presentingViewController:(nullable UIViewController *)presentingViewController
+                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   _pendingSignInCallback = completion;
   _presentingViewController = presentingViewController;
 

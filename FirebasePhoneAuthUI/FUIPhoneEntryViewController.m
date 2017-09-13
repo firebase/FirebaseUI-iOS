@@ -70,8 +70,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil
                          authUI:(FUIAuth *)authUI {
-  return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName]
+  return [self initWithNibName:nibNameOrNil
+                        bundle:nibBundleOrNil
                         authUI:authUI
                    phoneNumber:nil];
 }
