@@ -19,6 +19,7 @@
 @import Firebase;
 
 #import "FUIAuthViewController.h"
+#import "FUIAppDelegate.h"
 #import "FUICustomAuthDelegate.h"
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
@@ -114,7 +115,13 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
                                                           inSection:kSectionsProviders]
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
-
+  // Disable twitter provider if token is not set.
+  if (!kTwitterConsumerKey.length || !kTwitterConsumerSecret.length) {
+    NSIndexPath *twitterRow = [NSIndexPath indexPathForRow:kIDPTwitter
+                                                 inSection:kSectionsProviders];
+    [self tableView:self.tableView cellForRowAtIndexPath:twitterRow].userInteractionEnabled = NO;
+    [self.tableView deselectRowAtIndexPath:twitterRow animated:NO];
+  }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
