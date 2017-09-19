@@ -81,12 +81,27 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)signInWithPresentingViewController:(UIViewController *)presentingViewController {
-  [_authUI signInWithProviderUI:self presentingViewController:presentingViewController];
+  [self signInWithPresentingViewController:presentingViewController phoneNumber:nil];
+}
+
+
+- (void)signInWithPresentingViewController:(UIViewController *)presentingViewController
+                               phoneNumber:(nullable NSString *)phoneNumber {
+  [_authUI signInWithProviderUI:self presentingViewController:presentingViewController
+                   defaultValue:phoneNumber];
 }
 
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+  [self signInWithDefaultValue:email
+      presentingViewController:presentingViewController
+                    completion:completion];
+}
+
+- (void)signInWithDefaultValue:(nullable NSString *)defaultValue
+      presentingViewController:(nullable UIViewController *)presentingViewController
+                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   _pendingSignInCallback = completion;
   
   FUIPhoneAuth *delegate = [_authUI providerWithID:FIRPhoneAuthProviderID];
@@ -105,7 +120,8 @@ NS_ASSUME_NONNULL_BEGIN
     return;
   }
 
-  UIViewController *controller = [[FUIPhoneEntryViewController alloc] initWithAuthUI:_authUI];
+  UIViewController *controller = [[FUIPhoneEntryViewController alloc] initWithAuthUI:_authUI
+                                                                         phoneNumber:defaultValue];
   UINavigationController *navigationController =
       [[UINavigationController alloc] initWithRootViewController:controller];
   [presentingViewController presentViewController:navigationController animated:YES completion:nil];

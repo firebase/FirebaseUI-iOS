@@ -21,11 +21,18 @@
 #import <GTMSessionFetcher/GTMSessionFetcherLogging.h>
 #import <TwitterKit/Twitter.h>
 
+// TODO: Update with Twitter key and secret
+NSString *const kTwitterConsumerKey = @"";
+NSString *const kTwitterConsumerSecret = @"";
+
 @implementation FUIAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  [[Twitter sharedInstance] startWithConsumerKey:@""
-                                  consumerSecret:@""];
+  if (kTwitterConsumerKey.length && kTwitterConsumerSecret.length) {
+    [[Twitter sharedInstance] startWithConsumerKey:kTwitterConsumerKey
+                                    consumerSecret:kTwitterConsumerSecret];
+  }
+
   [FIRApp configure];
   [GTMSessionFetcher setLoggingEnabled:YES];
   return YES;

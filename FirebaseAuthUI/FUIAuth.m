@@ -128,11 +128,12 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
 }
 
 - (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI
-    presentingViewController:(UIViewController *)presentingViewController {
+    presentingViewController:(UIViewController *)presentingViewController
+                defaultValue:(nullable NSString *)defaultValue {
 
   // Sign out first to make sure sign in starts with a clean state.
   [providerUI signOut];
-  [providerUI signInWithEmail:nil
+  [providerUI signInWithDefaultValue:defaultValue
      presentingViewController:presentingViewController
                    completion:^(FIRAuthCredential *_Nullable credential,
                                 NSError *_Nullable error,
@@ -247,7 +248,7 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
                                           signinHandler:^{
       // Sign out first to make sure sign in starts with a clean state.
       [bestProvider signOut];
-      [bestProvider signInWithEmail:email
+      [bestProvider signInWithDefaultValue:email
            presentingViewController:presentingViewController
                          completion:^(FIRAuthCredential *_Nullable credential,
                                       NSError *_Nullable error,

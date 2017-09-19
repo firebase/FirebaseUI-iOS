@@ -165,7 +165,7 @@ NS_ASSUME_NONNULL_BEGIN
   [self.delegate incrementActivity];
   // Sign out first to make sure sign in starts with a clean state.
   [providerUI signOut];
-  [providerUI signInWithEmail:self.delegate.auth.currentUser.email
+  [providerUI signInWithDefaultValue:self.delegate.auth.currentUser.email
      presentingViewController:[self.delegate presentingController]
                    completion:^(FIRAuthCredential *_Nullable credential,
                                 NSError *_Nullable error,

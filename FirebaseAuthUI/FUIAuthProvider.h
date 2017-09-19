@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** @typedef FIRAuthProviderSignInCompletionBlock
     @brief The type of block used to notify the auth system of the result of a sign-in flow.
-        @see FUIAuthProvider.signInWithEmail:presentingViewController:completion:
+        @see FUIAuthProvider.signInWithDefaultValue:presentingViewController:completion:
     @param credential The @c FIRAuthCredential object created after user interaction with third 
         party provider.
     @param error The error which may happen during creation of The @c FIRAuthCredential object.
@@ -90,7 +90,26 @@ typedef void (^FIRAuthProviderSignInCompletionBlock) (
  */
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
-                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion;
+                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion
+__attribute__((deprecated("This is deprecated API and will be removed in a future release."
+                          "Use signInWithDefaultValue:presentingViewController:completion:")));
+
+/** @fn signInWithDefaultValue:presentingViewController:completion:
+    @brief Called when the user wants to sign in using this auth provider.
+    @remarks Implementors should invoke the completion block when the sign-in process has terminated
+        or is canceled. There are two valid combinations of parameters; either @c credentials and
+        @c userInfo are both non-nil, or @c error is non-nil. Errors must specify an error code
+        which is one of the @c FIRAuthErrorCode codes. It is very important that all possible code
+        paths eventually call this method to inform the auth system of the result of the sign-in
+        flow.
+    @param defaultValue The default initialization value of the provider (email, phone number etc.).
+    @param presentingViewController The view controller used to present the UI.
+    @param completion See remarks. A block which should be invoked when the sign-in process 
+        (using @c FIRAuthCredential) completes.
+ */
+- (void)signInWithDefaultValue:(nullable NSString *)defaultValue
+      presentingViewController:(nullable UIViewController *)presentingViewController
+                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion;
 
 /** @fn signOut
     @brief Called when the user wants to sign out.

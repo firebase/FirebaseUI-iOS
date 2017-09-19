@@ -87,6 +87,14 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+  [self signInWithDefaultValue:email
+      presentingViewController:presentingViewController
+                    completion:completion];
+}
+
+- (void)signInWithDefaultValue:(nullable NSString *)defaultValue
+      presentingViewController:(nullable UIViewController *)presentingViewController
+                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
 
   [[self getTwitterManager] logInWithViewController:presentingViewController
                                          completion:^(TWTRSession *_Nullable session,
