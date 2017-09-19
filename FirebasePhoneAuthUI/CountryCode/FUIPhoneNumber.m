@@ -22,10 +22,8 @@ NSString * const FUIPhoneNumberValidationErrorDomain = @"FUIPhoneNumberValidatio
 
 @implementation FUIPhoneNumber
 
-- (nullable instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber {
-  if (!normalizedPhoneNumber) {
-    return nil;
-  }
+- (instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber {
+  NSAssert(normalizedPhoneNumber, @"normalizedPhoneNumber can't be nil");
   NSString *rawPhoneNumber;
   FUICountryCodes *codes = [[FUICountryCodes alloc] init];
   FUICountryCodeInfo *countryCode = [codes countryCodeInfoForPhoneNumber:normalizedPhoneNumber];
@@ -44,12 +42,12 @@ NSString * const FUIPhoneNumberValidationErrorDomain = @"FUIPhoneNumberValidatio
   return [self initWithRawPhoneNumber:rawPhoneNumber countryCode:countryCode];
 }
 
-- (nullable instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber
+- (instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber
                                         rawPhoneNumber:(NSString *)rawPhoneNumber
                                            countryCode:(FUICountryCodeInfo *)countryCode {
-  if (!normalizedPhoneNumber || !rawPhoneNumber || !countryCode){
-    return nil;
-  }
+  NSAssert(normalizedPhoneNumber, @"normalizedPhoneNumber can't be nil");
+  NSAssert(rawPhoneNumber, @"rawPhoneNumber can't be nil");
+  NSAssert(countryCode, @"countryCode can't be nil");
   if (self = [super init]) {
     _countryCode = countryCode;
     _rawPhoneNumber = rawPhoneNumber;
@@ -58,9 +56,12 @@ NSString * const FUIPhoneNumberValidationErrorDomain = @"FUIPhoneNumberValidatio
   return self;
 }
 
-- (nullable instancetype)initWithRawPhoneNumber:(NSString *)rawPhoneNumber
-                                    countryCode:(FUICountryCodeInfo *)countryCode {
+- (instancetype)initWithRawPhoneNumber:(NSString *)rawPhoneNumber
+                           countryCode:(FUICountryCodeInfo *)countryCode {
+  NSAssert(rawPhoneNumber, @"rawPhoneNumber can't be nil");
+  NSAssert(countryCode, @"countryCode can't be nil");
   NSString *dialCode = countryCode.dialCode;
+  NSAssert(dialCode.length, @"dialCode can't be empty");
   if ([dialCode characterAtIndex:0] != '+') {
     dialCode = [@"+" stringByAppendingString:dialCode];
   }
