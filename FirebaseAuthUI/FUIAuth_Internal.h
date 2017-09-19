@@ -42,14 +42,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable id<FUIAuthProvider>)providerWithID:(NSString *)providerID;
 
-/** @fn signInWithProviderUI:presentingViewController:
+/** @fn signInWithProviderUI:presentingViewController:defaultValue:
     @brief Signs in with specified provider. @see FUIAuthDelegate.authUI:didSignInWithUser:error: 
         for method callback.
     @param providerUI The authentication provider used for signing in.
     @param presentingViewController The view controller used to present the UI.
+    @param defaultValue The provider default initialization value (e g email or phone number)
+        used for signing in.
  */
 - (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI
-    presentingViewController:(UIViewController *)presentingViewController;
+    presentingViewController:(UIViewController *)presentingViewController
+                defaultValue:(nullable NSString *)defaultValue;
 
 @end
 

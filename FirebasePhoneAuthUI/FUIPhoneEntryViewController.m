@@ -25,6 +25,7 @@
 #import "FUIFeatureSwitch.h"
 #import "FUIPhoneAuthStrings.h"
 #import "FUIPhoneAuth_Internal.h"
+#import "FUIPhoneNumber.h"
 #import "FUIPhoneVerificationViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -63,17 +64,37 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   __weak IBOutlet UITableView *_tableView;
   __weak IBOutlet UITextView *_tosTextView;
   FUICountryCodes *_countryCodes;
-}
-
-- (instancetype)initWithAuthUI:(FUIAuth *)authUI {
-  return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName]
-                        authUI:authUI];
+  FUIPhoneNumber *_phoneNumber;
 }
 
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil
                          authUI:(FUIAuth *)authUI {
+  return [self initWithNibName:nibNameOrNil
+                        bundle:nibBundleOrNil
+                        authUI:authUI
+                   phoneNumber:nil];
+}
+
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI {
+  return [self initWithNibName:NSStringFromClass([self class])
+                        bundle:[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName]
+                        authUI:authUI
+                   phoneNumber:nil];
+}
+
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI
+                   phoneNumber:(nullable NSString *)phoneNumber {
+  return [self initWithNibName:NSStringFromClass([self class])
+                        bundle:[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName]
+                        authUI:authUI
+                   phoneNumber:phoneNumber];
+}
+
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil
+                         authUI:(FUIAuth *)authUI
+                    phoneNumber:(nullable NSString *)phoneNumber {
 
   self = [super initWithNibName:nibNameOrNil
                          bundle:nibBundleOrNil
@@ -81,8 +102,10 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   if (self) {
     self.title = FUIPhoneAuthLocalizedString(kPAStr_EnterPhoneTitle);
     _countryCodes = [[FUICountryCodes alloc] init];
-    _selectedCountryCode = [_countryCodes countryCodeInfoFromDeviceLocale];
-
+    _phoneNumber = phoneNumber.length ?
+        [[FUIPhoneNumber alloc] initWithNormalizedPhoneNumber:phoneNumber] : nil;
+    _selectedCountryCode = _phoneNumber.countryCode ?:
+        [_countryCodes countryCodeInfoFromDeviceLocale];
   }
   return self;
 }
@@ -213,6 +236,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     _phoneNumberField.returnKeyType = UIReturnKeyNext;
     _phoneNumberField.keyboardType = UIKeyboardTypeNumberPad;
     [_phoneNumberField becomeFirstResponder];
+    if (_phoneNumber) {
+      _phoneNumberField.text = _phoneNumber.rawPhoneNumber;
+    }
     [cell.textField addTarget:self
                        action:@selector(textFieldDidChange)
              forControlEvents:UIControlEventEditingChanged];
