@@ -84,6 +84,17 @@ target 'FirebaseTwitterAuthUI' do
   end
 end
 
+target 'FirebaseFirestoreUI' do
+  use_frameworks!
+
+  # Pods for Firestore
+  pod 'Firestore', :podspec => 'https://storage.googleapis.com/firebase-preview-drop/ios/firestore/0.7.0/Firestore.podspec.json'
+
+  target 'FirebaseFirestoreUITests' do
+    inherit! :search_paths
+  end
+end
+
 target 'Database' do
   use_frameworks!
   # Pods for Database
@@ -134,6 +145,13 @@ target 'Twitter' do
   # Pods for Twitter Auth
   pod 'FirebaseAuth'
   pod 'TwitterKit', '~> 3.0'
+end
+
+target 'Firestore' do
+  platform :ios, '9.0'
+  use_frameworks!
+
+  pod 'Firestore', :podspec => 'https://storage.googleapis.com/firebase-preview-drop/ios/firestore/0.7.0/Firestore.podspec.json'
 end
 
 target 'FirebaseUISample' do
