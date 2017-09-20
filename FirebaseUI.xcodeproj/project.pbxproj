@@ -16,7 +16,6 @@
 		8D3758551F6C671D007C4D87 /* FUIDocumentChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3758541F6C671D007C4D87 /* FUIDocumentChange.m */; };
 		8D3A120E1DC2B122007558BA /* FUISortedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D3A120C1DC2B122007558BA /* FUISortedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D3A120F1DC2B122007558BA /* FUISortedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A120D1DC2B122007558BA /* FUISortedArray.m */; };
-		8D777BF71F732DD700F3B0D9 /* FUIPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = C310EAFF1F67524400666879 /* FUIPhoneNumber.m */; };
 		8D4B6BC01F69EB2900C4A14B /* FUITableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D4B6BBE1F69EB2900C4A14B /* FUITableViewDataSource.h */; };
 		8D4B6BC11F69EB2900C4A14B /* FUITableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4B6BBF1F69EB2900C4A14B /* FUITableViewDataSource.m */; };
 		8D559D4A1F68A7F100CE9D8A /* FirebaseFirestoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D559D411F68A7F100CE9D8A /* FirebaseFirestoreUI.framework */; };
@@ -31,6 +30,7 @@
 		8D559D721F68A85B00CE9D8A /* FUISnapshotArrayDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D559D6A1F68A85B00CE9D8A /* FUISnapshotArrayDiff.m */; };
 		8D559D731F68A85B00CE9D8A /* FUISnapshotArrayDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D559D6A1F68A85B00CE9D8A /* FUISnapshotArrayDiff.m */; };
 		8D559D771F68A86E00CE9D8A /* FUISnapshotArrayDiffTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D559D751F68A86E00CE9D8A /* FUISnapshotArrayDiffTest.m */; };
+		8D777BF71F732DD700F3B0D9 /* FUIPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = C310EAFF1F67524400666879 /* FUIPhoneNumber.m */; };
 		8D78AF061D9D8CB000CFA9C5 /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */; };
 		8D7AD9B71D9317FB006866B9 /* UIImageView+FirebaseStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7AD9B51D9317FB006866B9 /* UIImageView+FirebaseStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D7AD9B81D9317FB006866B9 /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */; };
@@ -4240,7 +4240,10 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -4252,7 +4255,10 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
