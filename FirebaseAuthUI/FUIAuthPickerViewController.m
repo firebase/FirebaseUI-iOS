@@ -152,7 +152,9 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 }
 
 - (void)didTapSignInButton:(FUIAuthSignInButton *)button {
-  [self.authUI signInWithProviderUI:button.providerUI presentingViewController:self];
+  [self.authUI signInWithProviderUI:button.providerUI
+           presentingViewController:self
+                       defaultValue:nil];
 }
 
 @end

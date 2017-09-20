@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseStorageUI'
-  s.version      = '4.2.0'
+  s.version      = '4.3.0'
   s.summary      = 'UI Storage library for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0' }
