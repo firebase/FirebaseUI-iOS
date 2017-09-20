@@ -16,8 +16,9 @@
 
 #import "FUIPhoneEntryViewController.h"
 
-#import <FirebaseAuth/FIRPhoneAuthProvider.h>
 #import <FirebaseAuth/FirebaseAuth.h>
+#import <FirebaseAuth/FIRAuthUIDelegate.h>
+#import <FirebaseAuth/FIRPhoneAuthProvider.h>
 #import "FUIAuthTableViewCell.h"
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
@@ -50,8 +51,11 @@ static NSString *const kPhoneNumberCellAccessibilityID = @"PhoneNumberCellAccess
  */
 static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID";
 
-@interface FUIPhoneEntryViewController ()
-    <UITextFieldDelegate, UITabBarDelegate, UITableViewDataSource, FUICountryTableViewDelegate>
+@interface FUIPhoneEntryViewController () <UITextFieldDelegate,
+                                           UITabBarDelegate,
+                                           UITableViewDataSource,
+                                           FUICountryTableViewDelegate,
+                                           FIRAuthUIDelegate>
 @end
 
 @implementation FUIPhoneEntryViewController  {
@@ -162,6 +166,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   NSString *phoneNumberWithCountryCode =
       [NSString stringWithFormat:@"+%@%@", _selectedCountryCode.dialCode, phoneNumber];
   [provider verifyPhoneNumber:phoneNumberWithCountryCode
+                   UIDelegate:self
                    completion:^(NSString *_Nullable verificationID, NSError *_Nullable error) {
 
     [self decrementActivity];

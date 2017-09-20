@@ -16,6 +16,7 @@
 
 #import "FUIPhoneVerificationViewController.h"
 
+#import <FirebaseAuth/FIRAuthUIDelegate.h>
 #import <FirebaseAuth/FIRPhoneAuthProvider.h>
 #import "FirebaseAuth/FIRPhoneAuthCredential.h"
 #import "FUIAuth_Internal.h"
@@ -35,7 +36,7 @@ static NSTimeInterval FUIDelayInSecondsBeforeShowingResendConfirmationCode = 15;
 /** Regex pattern that matches for a TOS style link. For example: [Terms]. */
 static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
 
-@interface FUIPhoneVerificationViewController () <FUICodeFieldDelegate>
+@interface FUIPhoneVerificationViewController () <FUICodeFieldDelegate, FIRAuthUIDelegate>
 @end
 
 @implementation FUIPhoneVerificationViewController {
@@ -135,6 +136,7 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
   [_codeField resignFirstResponder];
   FIRPhoneAuthProvider *provider = [FIRPhoneAuthProvider providerWithAuth:self.auth];
   [provider verifyPhoneNumber:_phoneNumber
+                   UIDelegate:self
                    completion:^(NSString *_Nullable verificationID, NSError *_Nullable error) {
 
     [self decrementActivity];
