@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseUI'
-  s.version      = '4.2.0'
+  s.version      = '4.3.0'
   s.summary      = 'UI binding libraries for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'FirebaseUIFrameworks/LICENSE' }
-  s.source       = { :http => 'https://github.com/firebase/FirebaseUI-iOS/releases/download/v4.2.0/FirebaseUIFrameworks.zip' }
+  s.source       = { :http => 'https://github.com/firebase/FirebaseUI-iOS/releases/download/v4.3.0/FirebaseUIFrameworks.zip' }
   s.author       = 'Firebase'
   s.platform = :ios
   s.ios.deployment_target = '9.0'
@@ -40,7 +40,7 @@ Pod::Spec.new do |s|
   s.subspec 'Auth' do |auth|
     auth.platform = :ios, '8.0'
     auth.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseAuthUI/Frameworks/FirebaseAuthUI.framework"]
-    auth.dependency 'Firebase/Auth', '~> 4.0'
+    auth.dependency 'Firebase/Auth', '~> 4.2'
     auth.resource_bundle = {
       'FirebaseAuthUI' => ['FirebaseUIFrameworks/FirebaseAuthUI/Frameworks/FirebaseAuthUI.framework/*.nib',
                            'FirebaseUIFrameworks/FirebaseAuthUI/Frameworks/FirebaseAuthUI.framework/*.lproj',
@@ -73,7 +73,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Phone' do |phone|
-    phone.platform = :ios, '8.0'
+    phone.platform = :ios, '9.0'
     phone.vendored_frameworks = ["FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks/FirebasePhoneAuthUI.framework"]
     phone.dependency 'FirebaseUI/Auth'
     phone.resource_bundle = {

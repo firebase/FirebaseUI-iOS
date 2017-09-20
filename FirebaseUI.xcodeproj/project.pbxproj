@@ -15,6 +15,7 @@
 		8D306BC11E1C64F200A13B0E /* FUITableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941ED1D67951B00CD3685 /* FUITableViewDataSourceTest.m */; };
 		8D3A120E1DC2B122007558BA /* FUISortedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D3A120C1DC2B122007558BA /* FUISortedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D3A120F1DC2B122007558BA /* FUISortedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A120D1DC2B122007558BA /* FUISortedArray.m */; };
+		8D777BF71F732DD700F3B0D9 /* FUIPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = C310EAFF1F67524400666879 /* FUIPhoneNumber.m */; };
 		8D78AF061D9D8CB000CFA9C5 /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */; };
 		8D7AD9B71D9317FB006866B9 /* UIImageView+FirebaseStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7AD9B51D9317FB006866B9 /* UIImageView+FirebaseStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D7AD9B81D9317FB006866B9 /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */; };
@@ -131,7 +132,6 @@
 		8DFA90491DAC54DD003B5E10 /* FUIIndexCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFA90461DAC54DD003B5E10 /* FUIIndexCollectionViewDataSource.m */; };
 		C310EB001F67524400666879 /* FUIPhoneNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = C310EAFE1F67524400666879 /* FUIPhoneNumber.h */; };
 		C310EB011F67524400666879 /* FUIPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = C310EAFF1F67524400666879 /* FUIPhoneNumber.m */; };
-		C310EB021F67524400666879 /* FUIPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = C310EAFF1F67524400666879 /* FUIPhoneNumber.m */; };
 		C3204F0C1E98340400841149 /* FUICountryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3204F0B1E98340400841149 /* FUICountryTableViewController.xib */; };
 		C32516951D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = C32516941D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C32516A11D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C32516A01D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests.m */; };
@@ -3091,7 +3091,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C310EB021F67524400666879 /* FUIPhoneNumber.m in Sources */,
 				C3773B641E8EFDEB00ACF58C /* FirebasePhoneAuthUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3108,6 +3107,7 @@
 				C3A08DA11E97227A00FF63EB /* FUICountryTableViewController.m in Sources */,
 				C3773B991E92CA2D00ACF58C /* FUIPhoneAuth.m in Sources */,
 				C3A2017E1E9598040040563F /* FUIPhoneVerificationViewController.m in Sources */,
+				8D777BF71F732DD700F3B0D9 /* FUIPhoneNumber.m in Sources */,
 				C3A2017D1E9597FB0040563F /* FUIPhoneEntryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
