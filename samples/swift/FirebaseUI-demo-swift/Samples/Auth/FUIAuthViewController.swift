@@ -143,7 +143,7 @@ class FUIAuthViewController: UITableViewController {
         (self.authUI?.isSignInWithEmailHidden)!;
       if (shouldSkipPhoneAuthPicker) {
         let provider = self.authUI?.providers.first as! FUIPhoneAuth;
-        provider.signIn(withPresenting: self);
+        provider.signIn(withPresenting: self, phoneNumber: nil);
       } else {
         let controller = self.authUI!.authViewController()
         controller.navigationBar.isHidden = self.customAuthorizationSwitch.isOn
