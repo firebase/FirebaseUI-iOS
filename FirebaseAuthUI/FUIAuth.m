@@ -44,6 +44,23 @@ static const char kAuthAssociationKey;
  */
 static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
 
+/** @var kFirebaseAuthUIFrameworkMarker
+    @brief The marker in the HTTP header that indicates the presence of Firebase Auth UI.
+ */
+static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
+
+/** @category FIRAuth(InternalInterface)
+    @brief Redeclares the internal interface not publicly exposed in FIRAuth.
+ */
+@interface FIRAuth (InternalInterface)
+
+/** @property additionalFrameworkMarker
+    @brief Additional framework marker that will be added as part of the header of every request.
+ */
+@property(nonatomic, copy, nullable) NSString *additionalFrameworkMarker;
+
+@end
+
 @interface FUIAuth ()
 
 /** @fn initWithAuth:
@@ -72,6 +89,9 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
       authUI = [[FUIAuth alloc] initWithAuth:auth];
       objc_setAssociatedObject(auth, &kAuthAssociationKey, authUI,
           OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+      if ([auth respondsToSelector:@selector(setAdditionalFrameworkMarker:)]) {
+        auth.additionalFrameworkMarker = kFirebaseAuthUIFrameworkMarker;
+      }
     }
     return authUI;
   }
