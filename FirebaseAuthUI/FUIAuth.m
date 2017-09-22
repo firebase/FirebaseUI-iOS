@@ -89,7 +89,9 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       authUI = [[FUIAuth alloc] initWithAuth:auth];
       objc_setAssociatedObject(auth, &kAuthAssociationKey, authUI,
           OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-      auth.additionalFrameworkMarker = kFirebaseAuthUIFrameworkMarker;
+      if ([auth respondsToSelector:@selector(setAdditionalFrameworkMarker:)]) {
+        auth.additionalFrameworkMarker = kFirebaseAuthUIFrameworkMarker;
+      }
     }
     return authUI;
   }
