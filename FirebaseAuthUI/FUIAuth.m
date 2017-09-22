@@ -50,7 +50,7 @@ static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
 static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
 
 /** @category FIRAuth(InternalInterface)
-    @brief Reclares the internal interface not publicly exposed in FIRAuth.
+    @brief Redeclares the internal interface not publicly exposed in FIRAuth.
  */
 @interface FIRAuth (InternalInterface)
 
