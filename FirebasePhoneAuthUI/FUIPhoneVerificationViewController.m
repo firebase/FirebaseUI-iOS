@@ -138,7 +138,7 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
   [provider verifyPhoneNumber:_phoneNumber
                    UIDelegate:self
                    completion:^(NSString *_Nullable verificationID, NSError *_Nullable error) {
-    // Temporary fix to guarantee execution of the completion block in the main thread.
+    // Temporary fix to guarantee execution of the completion block on the main thread.
     // TODO: Remove temporary workaround when the issue is fixed in FirebaseAuth.
     dispatch_block_t completionBlock = ^() {
       [self decrementActivity];
