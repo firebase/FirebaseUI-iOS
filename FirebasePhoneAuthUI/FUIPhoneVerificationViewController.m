@@ -138,25 +138,33 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
   [provider verifyPhoneNumber:_phoneNumber
                    UIDelegate:self
                    completion:^(NSString *_Nullable verificationID, NSError *_Nullable error) {
+    // Temporary fix to guarantee execution of the completion block in the main thread.
+    // TODO: Remove temporary workaround when the issue is fixed in FirebaseAuth.
+    dispatch_block_t completionBlock = ^() {
+      [self decrementActivity];
+      _verificationID = verificationID;
+      [_codeField becomeFirstResponder];
 
-    [self decrementActivity];
-    _verificationID = verificationID;
-    [_codeField becomeFirstResponder];
+      if (error) {
+        UIAlertController *alertController = [FUIPhoneAuth alertControllerForError:error
+                                                                     actionHandler:^{
+                                               [_codeField clearCodeInput];
+                                               [_codeField becomeFirstResponder];
+                                             }];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+      }
 
-    if (error) {
-      UIAlertController *alertController = [FUIPhoneAuth alertControllerForError:error
-                                                                   actionHandler:^{
-                                             [_codeField clearCodeInput];
-                                             [_codeField becomeFirstResponder];
-                                           }];
-      [self presentViewController:alertController animated:YES completion:nil];
-      return;
+      NSString *resultMessage =
+          [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeResult),
+              _phoneNumber];
+      [self showAlertWithMessage:resultMessage];
+    };
+    if ([NSThread isMainThread]) {
+      completionBlock();
+    } else {
+      dispatch_sync(dispatch_get_main_queue(), completionBlock);
     }
-
-    NSString *resultMessage =
-        [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeResult),
-            _phoneNumber];
-    [self showAlertWithMessage:resultMessage];
   }];
 }
 - (IBAction)onPhoneNumberSelected:(id)sender {
