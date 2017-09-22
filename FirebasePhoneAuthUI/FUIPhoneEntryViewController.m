@@ -168,28 +168,36 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [provider verifyPhoneNumber:phoneNumberWithCountryCode
                    UIDelegate:self
                    completion:^(NSString *_Nullable verificationID, NSError *_Nullable error) {
+    // Temporary fix to guarantee execution of the completion block on the main thread.
+    // TODO: Remove temporary workaround when the issue is fixed in FirebaseAuth.
+    dispatch_block_t completionBlock = ^() {
+      [self decrementActivity];
+      self.navigationItem.rightBarButtonItem.enabled = YES;
 
-    [self decrementActivity];
-    self.navigationItem.rightBarButtonItem.enabled = YES;
+      if (error) {
+        [_phoneNumberField becomeFirstResponder];
 
-    if (error) {
-      [_phoneNumberField becomeFirstResponder];
+        UIAlertController *alertController = [FUIPhoneAuth alertControllerForError:error
+                                                                     actionHandler:nil];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+        FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
+        [delegate callbackWithCredential:nil error:error result:nil];
+        return;
+      }
 
-      UIAlertController *alertController = [FUIPhoneAuth alertControllerForError:error
-                                                                   actionHandler:nil];
-      [self presentViewController:alertController animated:YES completion:nil];
-      
-      FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
-      [delegate callbackWithCredential:nil error:error result:nil];
-      return;
+      UIViewController *controller =
+          [[FUIPhoneVerificationViewController alloc] initWithAuthUI:self.authUI
+                                                      verificationID:verificationID
+                                                         phoneNumber:phoneNumberWithCountryCode];
+
+      [self pushViewController:controller];
+    };
+    if ([NSThread isMainThread]) {
+      completionBlock();
+    } else {
+      dispatch_sync(dispatch_get_main_queue(), completionBlock);
     }
-
-    UIViewController *controller =
-        [[FUIPhoneVerificationViewController alloc] initWithAuthUI:self.authUI
-                                                    verificationID:verificationID
-                                                       phoneNumber:phoneNumberWithCountryCode];
-
-    [self pushViewController:controller];
   }];
 }
 
