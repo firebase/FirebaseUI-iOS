@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  * FUICollectionViewDataSource provides a class that conforms to the
  * UICollectionViewDataSource protocol which allows UICollectionViews to
  * adopt FUICollectionViewDataSource in order to provide a UICollectionView
- * synchronized to a Firebase reference or query.
+ * synchronized to a Firestore reference or query.
  */
 @interface FUICollectionViewDataSource : NSObject <UICollectionViewDataSource>
 
@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Initialize an instance of FUICollectionViewDataSource that populates
  * UICollectionViewCells with FIRDataSnapshots.
  * @param collection A FUICollection that the data source uses to pull snapshots
- *   from Firebase Database.
+ *   from Cloud Firestore.
  * @param populateCell A closure used by the data source to create the cells that
  *   are displayed in the collection view. This closure is retained by the data
  *   source, so if you capture self in the closure and also claim ownership of the
@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Initialize an unsorted instance of FUICollectionViewDataSource that populates
  * UICollectionViewCells with FIRDataSnapshots.
- * @param query A Firebase query to bind the data source to.
+ * @param query A Firestore query to bind the data source to.
  * @param populateCell A closure used by the data source to create the cells that 
  *   are displayed in the collection view. This closure is retained by the data
  *   source, so if you capture self in the closure and also claim ownership of the
@@ -125,14 +125,14 @@ NS_ASSUME_NONNULL_BEGIN
  * Creates a data source, attaches it to the collection view, and returns it.
  * The returned data source is not retained by the collection view and must be
  * retained or it will be deallocated while still in use by the collection view.
- * @param query A Firebase database query to bind the collection view to.
+ * @param query A Cloud Firestore query to bind the collection view to.
  * @param populateCell A closure used by the data source to create the cells
  *   displayed in the collection view. The closure is retained by the returned
  *   data source.
  * @return The created data source. This value must be retained while the collection
  *   view is in use.
  */
-- (FUICollectionViewDataSource *)bindToQuery:(FIRDocumentSnapshot *)query
+- (FUICollectionViewDataSource *)bindToQuery:(FIRQuery *)query
                                 populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
                                                                         NSIndexPath *indexPath,
                                                                         FIRDocumentSnapshot *object))populateCell __attribute__((warn_unused_result));

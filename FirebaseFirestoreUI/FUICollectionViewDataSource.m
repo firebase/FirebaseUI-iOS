@@ -110,7 +110,10 @@
       NSIndexPath *changed = [NSIndexPath indexPathForItem:changedIndex.integerValue inSection:0];
       [changedIndexPaths addObject:changed];
     }
-    [self.collectionView reloadItemsAtIndexPaths:changedIndexPaths];
+    // Use a delete and insert instead of a reload. See
+    // https://stackoverflow.com/questions/42147822/uicollectionview-batchupdate-edge-case-fails
+    [self.collectionView deleteItemsAtIndexPaths:changedIndexPaths];
+    [self.collectionView insertItemsAtIndexPaths:changedIndexPaths];
 
     for (NSInteger i = 0; i < diff.movedInitialIndexes.count; i++) {
       NSInteger initialIndex = diff.movedInitialIndexes[i].integerValue;

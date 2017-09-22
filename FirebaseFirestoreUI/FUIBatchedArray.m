@@ -128,7 +128,7 @@
     return NO;
   }
 
-  return [object.documentID isEqual:self.documentID] && [object.data isEqual:self.data];
+  return [object.documentID isEqual:self.documentID];
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {

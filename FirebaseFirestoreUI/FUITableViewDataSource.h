@@ -24,13 +24,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class FIRDatabaseReference;
-
 /**
  * FUITableViewDataSource provides a class that conforms to the
  * UITableViewDataSource protocol which allows UITableViews to implement
  * FUITableViewDataSource in order to provide a UITableView synchronized
- * to a Firebase reference or query. 
+ * to a Firestore reference or query.
  */
 @interface FUITableViewDataSource : NSObject <UITableViewDataSource>
 
@@ -80,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Initialize an instance of FUITableViewDataSource.
  * @param collection An FUICollection used by the data source to pull data
- *   from Firebase Database.
+ *   from Cloud Firestore.
  * @param populateCell A closure used by the data source to create/reuse
  *   table view cells and populate their content. This closure is retained
  *   by the data source, so if you capture self in the closure and also claim ownership
@@ -96,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Initialize an instance of FUITableViewDataSource with contents ordered
  * by the query.
- * @param query A Firebase query to bind the data source to.
+ * @param query A Firestore query to bind the data source to.
  * @param populateCell A closure used by the data source to create/reuse
  *   table view cells and populate their content. This closure is retained
  *   by the data source, so if you capture self in the closure and also claim ownership
@@ -130,7 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Creates a data source, attaches it to the table view, and returns it.
  * The returned data source is not retained by the table view and must be
  * retained or it will be deallocated while still in use by the table view.
- * @param query A Firebase database query to bind the table view to.
+ * @param query A Cloud Firestore query to bind the table view to.
  * @param populateCell A closure used by the data source to create the cells
  *   displayed in the table view. The closure is retained by the returned
  *   data source.

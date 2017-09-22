@@ -416,11 +416,20 @@ FUIUnorderedPair *FUIUnorderedPairMake(id left, id right) {
         }
         continue;
       case FIRDocumentChangeTypeModified:
-        // Don't try to reload changes that were later deleted.
-        if (newIndex == nil) { continue; }
-        if (newIndex != oldIndex) { continue; /* Not a change */ }
-        [changedIndexes addObject:newIndex];
-        [changedObjects addObject:snapshot];
+        // Don't try to reload changes that weren't in the initial and result arrays.
+        if (newIndex == nil || oldIndex == nil) { continue; }
+        // This should be counted as a move.
+        if (![newIndex isEqualToNumber:oldIndex]) {
+          [movedInitialIndexes addObject:oldIndex];
+          [movedResultIndexes addObject:newIndex];
+          [movedObjects addObject:snapshot];
+
+          // Keep track of which insertions we should ignore later.
+          [movedSnapshots addObject:snapshot];
+        } else {
+          [changedIndexes addObject:oldIndex];
+          [changedObjects addObject:snapshot];
+        }
         continue;
       case FIRDocumentChangeTypeAdded:
         // Ignore insertions that were later removed.
@@ -429,10 +438,9 @@ FUIUnorderedPair *FUIUnorderedPairMake(id left, id right) {
         // counted as moves.
         if (oldIndex != nil) { continue; }
         // Ignore insertions that we consider moves.
-        if (![movedSnapshots containsObject:snapshot]) {
-          [insertedIndexes addObject:newIndex];
-          [insertedObjects addObject:snapshot];
-        }
+        if ([movedSnapshots containsObject:snapshot]) { continue; }
+        [insertedIndexes addObject:newIndex];
+        [insertedObjects addObject:snapshot];
         continue;
     }
   }
