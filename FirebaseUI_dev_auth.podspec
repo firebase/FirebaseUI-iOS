@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
                            'FirebaseAuthUI/**/*.xib']
     }
     authbase.dependency 'Firebase/Analytics'
-    authbase.dependency 'FirebaseAuth'
+    authbase.dependency 'FirebaseAuth', '~> 4.2'
   end
 
 end
