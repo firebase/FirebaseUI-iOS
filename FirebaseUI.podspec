@@ -30,6 +30,11 @@ Pod::Spec.new do |s|
     database.dependency 'Firebase/Database', '~> 4.0'
   end
 
+  s.subspec 'Firestore' do |firestore|
+    firestore.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseFirestoreUI/Frameworks/FirebaseFirestoreUI.framework"]
+    firestore.dependency 'Firebase/Firestore'
+  end
+
   s.subspec 'Storage' do |storage|
     storage.platform = :ios, '8.0'
     storage.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseStorageUI/Frameworks/FirebaseStorageUI.framework"]
