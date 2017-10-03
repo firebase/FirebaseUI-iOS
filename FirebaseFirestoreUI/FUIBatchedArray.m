@@ -84,6 +84,7 @@
   if (self.observer == nil) { return; }
   [self.observer remove];
   self.observer = nil;
+  self.isInSync = NO;
 }
 
 - (void)setQuery:(FIRQuery *)query {
