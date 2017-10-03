@@ -56,8 +56,13 @@ framework](https://firebase.google.com/docs/ios/setup) to your project.
 
 ## Documentation
 
-The docs for individual subspecs of FirebaseUI can be found in their respective
+The READMEs for components of FirebaseUI can be found in their respective
 project folders.
+
+- [Database](FirebaseDatabaseUI/README.md)
+- [Firestore](FirebaseFirestoreUI/README.md)
+- [Auth](FirebaseAuthUI/README.md)
+- [Storage](FirebaseStorageUI/README.md)
 
 ## Local Setup
 

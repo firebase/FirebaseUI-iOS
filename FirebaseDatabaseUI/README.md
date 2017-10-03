@@ -3,7 +3,7 @@
 FirebaseUI Database allows you to quickly connect common UI elements to the [Firebase Realtime Database](https://firebase.google.com/docs/database?utm_source=firebaseui-ios) for data storage, allowing views to be updated in realtime as they change, and providing simple interfaces for common tasks like displaying lists or collections of items.
 
 ## FirebaseUI Database
-Provides core data binding capabilities as well as specific datasources for lists of data. Skip to the [Core API overview](https://github.com/firebase/firebaseui-ios#firebaseui-core-api) for more information.
+Provides core data binding capabilities as well as specific data sources for lists of data.
 
 Class                            | Description
 -------------------------------- | --------------------------------
@@ -12,23 +12,19 @@ FUICollectionViewDataSource      | Data source to bind a Firebase query to a UIC
 FUIIndexCollectionViewDataSource | Data source to populate a collection view with indexed data from Firebase DB.
 FUIIndexTableViewDataSource      | Data source to populate a table view with indexed data from Firebase DB.
 FUIArray                         | Keeps an array synchronized to a Firebase query
+FUISortedArray                   | A synchronized array that automatically sorts its contents.
 FUIIndexArray                    | Keeps an array synchronized to indexed data from two Firebase references.
 
-For a more in-depth explanation of each of the above, check the usage instructions below or read the [docs](https://firebaseui.firebaseapp.com/docs/ios/index.html).
+For a more in-depth explanation of each of the above, check the usage instructions below.
 
-## FirebaseUI Database API
+## API Overview
 ### FUITableViewDataSource
 
 `FUITableViewDataSource` implements the `UITableViewDataSource` protocol to automatically use Firebase as a data source for your `UITableView`.
 
 #### Swift
 ```swift
-// YourViewController.swift
-
-let firebaseRef = Database.database().reference()
-var dataSource: FUITableViewDataSource!
-
-self.dataSource = self.tableView.bind(to: self.firebaseRef) { tableView, indexPath, snapshot in
+self.dataSource = self.tableView.bind(to: query) { tableView, indexPath, snapshot in
   // Dequeue cell
   let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
   /* populate cell */
@@ -39,15 +35,7 @@ self.dataSource = self.tableView.bind(to: self.firebaseRef) { tableView, indexPa
 #### Objective-C
 
 ```objc
-// YourViewController.h
-
-@property (strong, nonatomic) FIRDatabaseReference *firebaseRef;
-@property (strong, nonatomic) FUITableViewDataSource *dataSource;
-```
-
-```objc
-// YourViewController.m
-self.dataSource = [self.tableView bindToQuery:self.firebaseRef
+self.dataSource = [self.tableView bindToQuery:query
                                  populateCell:^UITableViewCell *(UITableView *tableView,
                                                                  NSIndexPath *indexPath,
                                                                  FIRDataSnapshot *snap) {
@@ -64,9 +52,7 @@ self.dataSource = [self.tableView bindToQuery:self.firebaseRef
 
 #### Swift
 ```swift
-// YourViewController.swift
-
-self.dataSource = self.collectionView?.bind(to: self.firebaseRef) { collectionView, indexPath, snap in
+self.dataSource = self.collectionView.bind(to: self.firebaseRef) { collectionView, indexPath, snap in
   let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reuseIdentifier", for: indexPath)
   /* populate cell */
   return cell
@@ -74,16 +60,8 @@ self.dataSource = self.collectionView?.bind(to: self.firebaseRef) { collectionVi
 ```
 
 #### Objective-C
-```objective-c
-// YourViewController.h
-
-@property (strong, nonatomic) FIRDatabaseReference *firebaseRef;
-@property (strong, nonatomic) FUICollectionViewDataSource *dataSource;
-```
 
 ```objective-c
-// YourViewController.m
-
 self.firebaseRef = [[FIRDatabase database] reference];
 self.dataSource = [self.collectionView bindToQuery:self.firebaseRef
                                       populateCell:^UICollectionViewCell *(UICollectionView *collectionView,
@@ -96,13 +74,9 @@ self.dataSource = [self.collectionView bindToQuery:self.firebaseRef
 }];
 ```
 
-## Customizing your UITableView or UICollectionView
-
-You can use `FUITableViewDataSource` or `FUICollectionViewDataSource` in several ways to create custom UITableViews or UICollectionViews. For more information on how to create custom UITableViews, check out the following tutorial on [TutsPlus](http://code.tutsplus.com/tutorials/ios-sdk-crafting-custom-uitableview-cells--mobile-15702). For more information on how to create custom UICollectionViews, particularly how to implement a UICollectionViewLayout, check out the following tutorial on Ray Wenderlich in [Objective-C](http://www.raywenderlich.com/22324/beginning-uicollectionview-in-ios-6-part-12) and [Swift](http://www.raywenderlich.com/78550/beginning-ios-collection-views-swift-part-1).
-
 ### Using the Default Table/Collection View Cell
 
-You can use the default `UITableViewCell` or `UICollectionViewCell` implementations to get up and running quickly. For `UITableViewCell`s, this allows for the `cell.textLabel` and the `cell.detailTextLabel` to be used directly out of the box. For `UICollectionViewCell`s, you will have to add subviews to the contentView in order for it to be useful.
+You can use the default `UITableViewCell` or `UICollectionViewCell` implementations to get up and running quickly. For `UITableViewCell`s, this allows for the `cell.textLabel` and the `cell.detailTextLabel` to be used directly out of the box. For `UICollectionViewCell`s, you will have to add subviews to the contentView in order for them to be useful.
 
 #### Swift
 ```swift
@@ -115,10 +89,10 @@ self.dataSource = self.tableView.bind(to: firebaseRef) { tableView, indexPath, s
 ```
 
 ```swift
-self.dataSource = self.collectionView?.bind(to: firebaseRef) { collectionView, indexPath, snap in
+self.dataSource = self.collectionView.bind(to: firebaseRef) { collectionView, indexPath, snap in
   let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reuseIdentifier", for: indexPath)
-  // Populate cell as you see fit by adding subviews as appropriate
-  cell.contentView.addSubview(customView)
+  // Populate cell as you see fit
+  cell.contentView.accessibilityLabel = "A cell"
   return cell
 }
 ```
@@ -144,8 +118,8 @@ self.dataSource = [self.collectionView bindToQuery:self.firebaseRef
                                                                       FIRDataSnapshot *snap) {
   UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuseIdentifier"
                                                                     forIndexPath:indexPath];
-  // Populate cell as you see fit by adding subviews as appropriate
-  [cell.contentView addSubview:customView];
+  // Populate cell as you see fit
+  cell.contentView.accessibilityLabel = @"A cell";
   return cell;
 }];
 ```
@@ -156,7 +130,7 @@ FirebaseUI has several building blocks that developers should understand before 
 
 ### FUIArray and the FUICollectionDelegate Protocol
 
-`FUIArray` is synchronized array connecting a Firebase `FIRDatabaseReference` with an array. It surfaces Firebase events through the `FUICollectionDelegate` Protocol. It is generally recommended that developers not directly access `FUIArray` without routing it through a custom data source, though if this is desired, check out `FUIDataSource` below. See the header files for more in-depth documentation.
+`FUIArray` is synchronized array connecting a Firebase `FIRDatabaseReference` with an array. It surfaces Firebase events through the `FUICollectionDelegate` Protocol. If you're building a multiple-section UI, you'll have to use this class directly instead of using one of the provided data sources.
 
 #### Swift
 ```swift
