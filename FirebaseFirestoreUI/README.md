@@ -62,3 +62,10 @@ If you're creating a more complex UI, chances are you'll have to use
 let array = FUIBatchedArray(query: query, delegate: self)
 array.observeQuery()
 ```
+
+####FUISnapshotArrayDiff
+
+This class and its helper classes are responsible for the diffing logic in
+FirestoreUI. You should never have to use this directly, though all of the
+operations here are pure and most have no dependencies on Firestore, so if
+you need to diff arbitrary data you can use the functions provided here.
