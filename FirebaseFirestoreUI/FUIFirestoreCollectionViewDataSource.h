@@ -25,12 +25,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * FUICollectionViewDataSource provides a class that conforms to the
+ * FUIFirestoreCollectionViewDataSource provides a class that conforms to the
  * UICollectionViewDataSource protocol which allows UICollectionViews to
- * adopt FUICollectionViewDataSource in order to provide a UICollectionView
+ * adopt FUIFirestoreCollectionViewDataSource in order to provide a UICollectionView
  * synchronized to a Firestore reference or query.
  */
-@interface FUICollectionViewDataSource : NSObject <UICollectionViewDataSource>
+@interface FUIFirestoreCollectionViewDataSource : NSObject <UICollectionViewDataSource>
 
 /**
  * The UICollectionView instance that operations (inserts, removals, moves,
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (FIRDocumentSnapshot *)snapshotAtIndex:(NSInteger)index;
 
 /**
- * Initialize an instance of FUICollectionViewDataSource that populates
+ * Initialize an instance of FUIFirestoreCollectionViewDataSource that populates
  * UICollectionViewCells with FIRDataSnapshots.
  * @param collection A FUICollection that the data source uses to pull snapshots
  *   from Cloud Firestore.
@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
  *   are displayed in the collection view. This closure is retained by the data
  *   source, so if you capture self in the closure and also claim ownership of the
  *   data source, be sure to avoid retain cycles by capturing a weak reference to self.
- * @return An instance of FUICollectionViewDataSource that populates
+ * @return An instance of FUIFirestoreCollectionViewDataSource that populates
  *   UICollectionViewCells with FIRDataSnapshots.
  */
 - (instancetype)initWithCollection:(FUIBatchedArray *)collection
@@ -88,14 +88,14 @@ NS_ASSUME_NONNULL_BEGIN
                                                               FIRDocumentSnapshot *object))populateCell NS_DESIGNATED_INITIALIZER;
 
 /**
- * Initialize an unsorted instance of FUICollectionViewDataSource that populates
+ * Initialize an unsorted instance of FUIFirestoreCollectionViewDataSource that populates
  * UICollectionViewCells with FIRDataSnapshots.
  * @param query A Firestore query to bind the data source to.
  * @param populateCell A closure used by the data source to create the cells that 
  *   are displayed in the collection view. This closure is retained by the data
  *   source, so if you capture self in the closure and also claim ownership of the
  *   data source, be sure to avoid retain cycles by capturing a weak reference to self.
- * @return An instance of FUICollectionViewDataSource that populates
+ * @return An instance of FUIFirestoreCollectionViewDataSource that populates
  *   UICollectionViewCells with FIRDataSnapshots.
  */
 - (instancetype)initWithQuery:(FIRQuery *)query
@@ -119,7 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface UICollectionView (FUICollectionViewDataSource)
+@interface UICollectionView (FUIFirestoreCollectionViewDataSource)
 
 /**
  * Creates a data source, attaches it to the collection view, and returns it.
@@ -132,10 +132,11 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The created data source. This value must be retained while the collection
  *   view is in use.
  */
-- (FUICollectionViewDataSource *)bindToQuery:(FIRQuery *)query
-                                populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
-                                                                        NSIndexPath *indexPath,
-                                                                        FIRDocumentSnapshot *object))populateCell __attribute__((warn_unused_result));
+- (FUIFirestoreCollectionViewDataSource *)bindToQuery:(FIRQuery *)query
+    populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
+                                            NSIndexPath *indexPath,
+                                            FIRDocumentSnapshot *object))populateCell
+                                                __attribute__((warn_unused_result));
 
 @end
 

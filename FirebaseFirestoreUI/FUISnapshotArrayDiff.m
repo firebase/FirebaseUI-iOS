@@ -16,7 +16,7 @@
 
 #import <FirebaseFirestoreUI/FUISnapshotArrayDiff.h>
 
-@import Firestore;
+@import FirebaseFirestore;
 
 @interface FUIArraySlice ()
 

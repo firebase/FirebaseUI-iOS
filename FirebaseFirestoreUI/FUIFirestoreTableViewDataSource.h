@@ -25,12 +25,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * FUITableViewDataSource provides a class that conforms to the
+ * FUIFirestoreTableViewDataSource provides a class that conforms to the
  * UITableViewDataSource protocol which allows UITableViews to implement
- * FUITableViewDataSource in order to provide a UITableView synchronized
+ * FUIFirestoreTableViewDataSource in order to provide a UITableView synchronized
  * to a Firestore reference or query.
  */
-@interface FUITableViewDataSource : NSObject <UITableViewDataSource>
+@interface FUIFirestoreTableViewDataSource : NSObject <UITableViewDataSource>
 
 /**
  * The UITableView instance that operations (inserts, removals, moves, etc.) are
@@ -76,14 +76,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (FIRDocumentSnapshot *)snapshotAtIndex:(NSInteger)index;
 
 /**
- * Initialize an instance of FUITableViewDataSource.
+ * Initialize an instance of FUIFirestoreTableViewDataSource.
  * @param collection An FUICollection used by the data source to pull data
  *   from Cloud Firestore.
  * @param populateCell A closure used by the data source to create/reuse
  *   table view cells and populate their content. This closure is retained
  *   by the data source, so if you capture self in the closure and also claim ownership
  *   of the data source, be sure to avoid retain cycles by capturing a weak reference to self.
- * @return An instance of FUITableViewDataSource.
+ * @return An instance of FUIFirestoreTableViewDataSource.
  */
 - (instancetype)initWithCollection:(FUIBatchedArray *)collection
                       populateCell:(UITableViewCell *(^)(UITableView *tableView,
@@ -92,14 +92,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- * Initialize an instance of FUITableViewDataSource with contents ordered
+ * Initialize an instance of FUIFirestoreTableViewDataSource with contents ordered
  * by the query.
  * @param query A Firestore query to bind the data source to.
  * @param populateCell A closure used by the data source to create/reuse
  *   table view cells and populate their content. This closure is retained
  *   by the data source, so if you capture self in the closure and also claim ownership
  *   of the data source, be sure to avoid retain cycles by capturing a weak reference to self.
- * @return An instance of FUITableViewDataSource.
+ * @return An instance of FUIFirestoreTableViewDataSource.
  */
 - (instancetype)initWithQuery:(FIRQuery *)query
                  populateCell:(UITableViewCell *(^)(UITableView *tableView,
@@ -122,7 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface UITableView (FUITableViewDataSource)
+@interface UITableView (FUIFirestoreTableViewDataSource)
 
 /**
  * Creates a data source, attaches it to the table view, and returns it.
@@ -135,10 +135,11 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The created data source. This value must be retained while the table
  *   view is in use.
  */
-- (FUITableViewDataSource *)bindToQuery:(FIRQuery *)query
-                           populateCell:(UITableViewCell *(^)(UITableView *tableView,
-                                                              NSIndexPath *indexPath,
-                                                              FIRDocumentSnapshot *object))populateCell __attribute__((warn_unused_result));
+- (FUIFirestoreTableViewDataSource *)bindToQuery:(FIRQuery *)query
+    populateCell:(UITableViewCell *(^)(UITableView *tableView,
+                                       NSIndexPath *indexPath,
+                                       FIRDocumentSnapshot *object))populateCell
+                                           __attribute__((warn_unused_result));
 
 @end
 

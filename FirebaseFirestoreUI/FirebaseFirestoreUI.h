@@ -24,4 +24,4 @@ FOUNDATION_EXPORT const unsigned char FirebaseFirestoreUIVersionString[];
 
 #import <FirebaseFirestoreUI/FUISnapshotArrayDiff.h>
 #import <FirebaseFirestoreUI/FUIBatchedArray.h>
-#import <FirebaseFirestoreUI/FUICollectionViewDataSource.h>
+#import <FirebaseFirestoreUI/FUIFirestoreCollectionViewDataSource.h>

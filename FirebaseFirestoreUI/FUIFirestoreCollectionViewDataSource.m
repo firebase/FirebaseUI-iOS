@@ -18,9 +18,9 @@
 
 // clang-format on
 
-#import "FUICollectionViewDataSource.h"
+#import "FUIFirestoreCollectionViewDataSource.h"
 
-@interface FUICollectionViewDataSource () <FUIBatchedArrayDelegate>
+@interface FUIFirestoreCollectionViewDataSource () <FUIBatchedArrayDelegate>
 
 @property (nonatomic, readonly, nonnull) FUIBatchedArray *collection;
 
@@ -33,7 +33,7 @@
 
 @end
 
-@implementation FUICollectionViewDataSource
+@implementation FUIFirestoreCollectionViewDataSource
 
 #pragma mark - FUIDataSource initializer methods
 
@@ -168,14 +168,14 @@
 
 @end
 
-@implementation UICollectionView (FUICollectionViewDataSource)
+@implementation UICollectionView (FUIFirestoreCollectionViewDataSource)
 
-- (FUICollectionViewDataSource *)bindToQuery:(FIRQuery *)query
-                                populateCell:(UICollectionViewCell *(^)(UICollectionView *,
-                                                                        NSIndexPath *,
-                                                                        FIRDocumentSnapshot *))populateCell {
-  FUICollectionViewDataSource *dataSource =
-      [[FUICollectionViewDataSource alloc] initWithQuery:query populateCell:populateCell];
+- (FUIFirestoreCollectionViewDataSource *)bindToQuery:(FIRQuery *)query
+    populateCell:(UICollectionViewCell *(^)(UICollectionView *,
+                                            NSIndexPath *,
+                                            FIRDocumentSnapshot *))populateCell {
+  FUIFirestoreCollectionViewDataSource *dataSource =
+      [[FUIFirestoreCollectionViewDataSource alloc] initWithQuery:query populateCell:populateCell];
   [dataSource bindToView:self];
   return dataSource;
 }

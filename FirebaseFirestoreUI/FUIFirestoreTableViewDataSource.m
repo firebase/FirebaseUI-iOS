@@ -18,11 +18,11 @@
 
 // clang-format on
 
-#import "FUITableViewDataSource.h"
+#import "FUIFirestoreTableViewDataSource.h"
 
-@import Firestore;
+@import FirebaseFirestore;
 
-@interface FUITableViewDataSource () <FUIBatchedArrayDelegate>
+@interface FUIFirestoreTableViewDataSource () <FUIBatchedArrayDelegate>
 
 @property (strong, nonatomic, readwrite) UITableViewCell *(^populateCell)
   (UITableView *tableView, NSIndexPath *indexPath, FIRDocumentSnapshot *snap);
@@ -31,7 +31,7 @@
 
 @end
 
-@implementation FUITableViewDataSource
+@implementation FUIFirestoreTableViewDataSource
 
 #pragma mark - FUIDataSource initializer methods
 
@@ -156,14 +156,14 @@
 
 @end
 
-@implementation UITableView (FUITableViewDataSource)
+@implementation UITableView (FUIFirestoreTableViewDataSource)
 
-- (FUITableViewDataSource *)bindToQuery:(FIRQuery *)query
-                           populateCell:(UITableViewCell *(^)(UITableView *tableView,
-                                                              NSIndexPath *indexPath,
-                                                              FIRDocumentSnapshot *snap))populateCell {
-  FUITableViewDataSource *dataSource =
-    [[FUITableViewDataSource alloc] initWithQuery:query populateCell:populateCell];
+- (FUIFirestoreTableViewDataSource *)bindToQuery:(FIRQuery *)query
+    populateCell:(UITableViewCell *(^)(UITableView *tableView,
+                                       NSIndexPath *indexPath,
+                                       FIRDocumentSnapshot *snap))populateCell {
+  FUIFirestoreTableViewDataSource *dataSource =
+      [[FUIFirestoreTableViewDataSource alloc] initWithQuery:query populateCell:populateCell];
   [dataSource bindToView:self];
   return dataSource;
 }

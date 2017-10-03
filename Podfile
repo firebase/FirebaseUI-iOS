@@ -88,7 +88,7 @@ target 'FirebaseFirestoreUI' do
   use_frameworks!
 
   # Pods for Firestore
-  pod 'Firestore', :podspec => 'https://storage.googleapis.com/firebase-preview-drop/ios/firestore/0.7.0/Firestore.podspec.json'
+  pod 'Firebase/Firestore'
 
   target 'FirebaseFirestoreUITests' do
     inherit! :search_paths
@@ -151,7 +151,7 @@ target 'Firestore' do
   platform :ios, '9.0'
   use_frameworks!
 
-  pod 'Firestore', :podspec => 'https://storage.googleapis.com/firebase-preview-drop/ios/firestore/0.7.0/Firestore.podspec.json'
+  pod 'Firebase/Firestore'
 end
 
 target 'FirebaseUISample' do
