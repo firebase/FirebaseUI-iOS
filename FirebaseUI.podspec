@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseUI'
-  s.version      = '4.3.1'
+  s.version      = '4.4.0'
   s.summary      = 'UI binding libraries for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'FirebaseUIFrameworks/LICENSE' }
-  s.source       = { :http => 'https://github.com/firebase/FirebaseUI-iOS/releases/download/v4.3.1/FirebaseUIFrameworks.zip' }
+  s.source       = { :http => 'https://github.com/firebase/FirebaseUI-iOS/releases/download/v4.4.0/FirebaseUIFrameworks.zip' }
   s.author       = 'Firebase'
   s.platform = :ios
   s.ios.deployment_target = '9.0'
@@ -22,12 +22,19 @@ Pod::Spec.new do |s|
     all.dependency 'FirebaseUI/Google'
     all.dependency 'FirebaseUI/Phone'
     all.dependency 'FirebaseUI/Twitter'
+    all.dependency 'FirebaseUI/Firestore'
   end
 
   s.subspec 'Database' do |database|
     database.platform = :ios, '8.0'
     database.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks/FirebaseDatabaseUI.framework"]
     database.dependency 'Firebase/Database', '~> 4.0'
+  end
+
+  s.subspec 'Firestore' do |firestore|
+    firestore.platform = :ios, '8.0'
+    firestore.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseFirestoreUI/Frameworks/FirebaseFirestoreUI.framework"]
+    firestore.dependency 'Firebase/Firestore'
   end
 
   s.subspec 'Storage' do |storage|

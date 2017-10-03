@@ -274,7 +274,7 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
 }
 
 - (void)updateResendLabel {
-  NSInteger minutes = _resendConfirmationCodeSeconds / 60; // Integer type for truncation
+  NSInteger minutes = (NSInteger)_resendConfirmationCodeSeconds / 60; // Integer type for truncation
   NSInteger seconds = (NSInteger)round(_resendConfirmationCodeSeconds) % 60;
   NSString *formattedTime = [NSString stringWithFormat:@"%ld:%02ld", minutes, seconds];
 
