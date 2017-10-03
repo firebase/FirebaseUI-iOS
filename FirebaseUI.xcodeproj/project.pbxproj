@@ -17,9 +17,6 @@
 		8D3758551F6C671D007C4D87 /* FUIDocumentChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3758541F6C671D007C4D87 /* FUIDocumentChange.m */; };
 		8D3A120E1DC2B122007558BA /* FUISortedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D3A120C1DC2B122007558BA /* FUISortedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D3A120F1DC2B122007558BA /* FUISortedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A120D1DC2B122007558BA /* FUISortedArray.m */; };
-<<<<<<< HEAD
-		8D53897A1F7988D800B2920A /* libleveldb-library-library.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D5389791F7988D800B2920A /* libleveldb-library-library.a */; };
-=======
 		8D4B6BC01F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D4B6BBE1F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.h */; };
 		8D4B6BC11F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4B6BBF1F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.m */; };
 		8D559D4A1F68A7F100CE9D8A /* FirebaseFirestoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D559D411F68A7F100CE9D8A /* FirebaseFirestoreUI.framework */; };
@@ -34,7 +31,6 @@
 		8D559D721F68A85B00CE9D8A /* FUISnapshotArrayDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D559D6A1F68A85B00CE9D8A /* FUISnapshotArrayDiff.m */; };
 		8D559D731F68A85B00CE9D8A /* FUISnapshotArrayDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D559D6A1F68A85B00CE9D8A /* FUISnapshotArrayDiff.m */; };
 		8D559D771F68A86E00CE9D8A /* FUISnapshotArrayDiffTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D559D751F68A86E00CE9D8A /* FUISnapshotArrayDiffTest.m */; };
->>>>>>> top-secret
 		8D777BF71F732DD700F3B0D9 /* FUIPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = C310EAFF1F67524400666879 /* FUIPhoneNumber.m */; };
 		8D78AF061D9D8CB000CFA9C5 /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */; };
 		8D7AD9B71D9317FB006866B9 /* UIImageView+FirebaseStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7AD9B51D9317FB006866B9 /* UIImageView+FirebaseStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -516,9 +512,6 @@
 		8D3758541F6C671D007C4D87 /* FUIDocumentChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIDocumentChange.m; sourceTree = "<group>"; };
 		8D3A120C1DC2B122007558BA /* FUISortedArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISortedArray.h; sourceTree = "<group>"; };
 		8D3A120D1DC2B122007558BA /* FUISortedArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISortedArray.m; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		8D5389791F7988D800B2920A /* libleveldb-library-library.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libleveldb-library-library.a"; path = "../../Library/Developer/Xcode/DerivedData/FirebaseUI-fwcyvciocjlrhqbyjmmybozelsll/Build/Products/Debug-iphonesimulator/leveldb-library-library/libleveldb-library-library.a"; sourceTree = "<group>"; };
-=======
 		8D4B6BBE1F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIFirestoreTableViewDataSource.h; sourceTree = "<group>"; };
 		8D4B6BBF1F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIFirestoreTableViewDataSource.m; sourceTree = "<group>"; };
 		8D559D411F68A7F100CE9D8A /* FirebaseFirestoreUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseFirestoreUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -534,7 +527,6 @@
 		8D559D691F68A85B00CE9D8A /* FUISnapshotArrayDiff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISnapshotArrayDiff.h; sourceTree = "<group>"; };
 		8D559D6A1F68A85B00CE9D8A /* FUISnapshotArrayDiff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISnapshotArrayDiff.m; sourceTree = "<group>"; };
 		8D559D751F68A86E00CE9D8A /* FUISnapshotArrayDiffTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISnapshotArrayDiffTest.m; sourceTree = "<group>"; };
->>>>>>> top-secret
 		8D60505E1DCA8EB8005D8635 /* FUISortedArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISortedArrayTest.m; sourceTree = "<group>"; };
 		8D7AD9B51D9317FB006866B9 /* UIImageView+FirebaseStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+FirebaseStorage.h"; sourceTree = "<group>"; };
 		8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+FirebaseStorage.m"; sourceTree = "<group>"; };
@@ -1420,7 +1412,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D53897A1F7988D800B2920A /* libleveldb-library-library.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1770,7 +1761,6 @@
 		903F73EA092681D67581F496 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8D5389791F7988D800B2920A /* libleveldb-library-library.a */,
 				8DCF7AD31DC009C1004E19CA /* GTMOAuth2.framework */,
 			);
 			name = Frameworks;
