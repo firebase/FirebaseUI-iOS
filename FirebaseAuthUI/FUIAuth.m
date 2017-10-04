@@ -158,9 +158,10 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                    completion:^(FIRAuthCredential *_Nullable credential,
                                 NSError *_Nullable error,
                                 _Nullable FIRAuthResultCallback result) {
+    BOOL isAuthPickerShown =
+        [presentingViewController isKindOfClass:[FUIAuthPickerViewController class]];
     if (error) {
-      if (![presentingViewController isKindOfClass:[FUIAuthPickerViewController class]]
-              || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
+      if (!isAuthPickerShown || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
         [self invokeResultCallbackWithUser:nil error:error];
       }
       if (result) {
@@ -187,7 +188,8 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       if (error) {
         [self invokeResultCallbackWithUser:user error:error];
       } else {
-        if (presentingViewController.presentingViewController) {
+        // Hide Auth Picker Controller which was presented modally.
+        if (isAuthPickerShown && presentingViewController.presentingViewController) {
           [presentingViewController dismissViewControllerAnimated:YES completion:^{
             [self invokeResultCallbackWithUser:user error:error];
           }];
