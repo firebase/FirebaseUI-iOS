@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Phone' do |phone|
-    phone.platform = :ios, '9.0'
+    phone.platform = :ios, '8.0'
     phone.vendored_frameworks = ["FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks/FirebasePhoneAuthUI.framework"]
     phone.dependency 'FirebaseUI/Auth'
     phone.resource_bundle = {
