@@ -257,6 +257,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     [_phoneNumberField becomeFirstResponder];
     if (_phoneNumber) {
       _phoneNumberField.text = _phoneNumber.rawPhoneNumber;
+    } else {
+      _phoneNumberField.text = nil;
     }
     [cell.textField addTarget:self
                        action:@selector(textFieldDidChange)
