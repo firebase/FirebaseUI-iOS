@@ -107,6 +107,11 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                                   target:self
                                                   action:@selector(cancelAuthorization)];
     self.navigationItem.leftBarButtonItem = cancelBarButton;
+    self.navigationItem.backBarButtonItem =
+        [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Back)
+                                         style:UIBarButtonItemStylePlain
+                                        target:nil
+                                        action:nil];
   }
 }
 

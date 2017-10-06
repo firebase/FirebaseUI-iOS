@@ -19,6 +19,7 @@
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FirebaseAuth/FIRAuthUIDelegate.h>
 #import <FirebaseAuth/FIRPhoneAuthProvider.h>
+#import "FUIAuthStrings.h"
 #import "FUIAuthTableViewCell.h"
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
@@ -144,6 +145,11 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                                       target:self
                                                       action:@selector(cancelAuthorization)];
     self.navigationItem.leftBarButtonItem = cancelBarButton;
+    self.navigationItem.backBarButtonItem =
+        [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Back)
+                                         style:UIBarButtonItemStylePlain
+                                        target:nil
+                                        action:nil];
   }
 }
 

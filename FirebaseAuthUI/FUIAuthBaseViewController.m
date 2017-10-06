@@ -207,7 +207,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
 + (void)pushViewController:(UIViewController *)viewController
       navigationController:(UINavigationController *)navigationController {
   // Override the back button title with "Back".
-  navigationController.navigationItem.backBarButtonItem =
+  viewController.navigationItem.backBarButtonItem =
       [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Back)
                                        style:UIBarButtonItemStylePlain
                                       target:nil

@@ -571,10 +571,12 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   OCMStub(ClassMethod([mockedProvider provider])).andReturn(mockedProvider);
   OCMStub(ClassMethod([mockedProvider providerWithAuth:OCMOCK_ANY])).andReturn(mockedProvider);
 
-  OCMStub([mockedProvider verifyPhoneNumber:OCMOCK_ANY completion:OCMOCK_ANY]).
+  OCMStub([mockedProvider verifyPhoneNumber:OCMOCK_ANY
+                                 UIDelegate:OCMOCK_ANY
+                                 completion:OCMOCK_ANY]).
       andDo(^(NSInvocation *invocation) {
     FIRVerificationResultCallback mockedCallback;
-    [invocation getArgument:&mockedCallback atIndex:3];
+    [invocation getArgument:&mockedCallback atIndex:4];
     mockedCallback(@"verificationID", nil);
   });
 

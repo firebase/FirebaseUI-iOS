@@ -105,14 +105,6 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-
-  if (self.navigationController.viewControllers.firstObject == self) {
-    UIBarButtonItem *cancelBarButton =
-        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                      target:self
-                                                      action:@selector(cancelAuthorization)];
-    self.navigationItem.leftBarButtonItem = cancelBarButton;
-  }
   [self registerForKeyboardNotifications];
 }
 
