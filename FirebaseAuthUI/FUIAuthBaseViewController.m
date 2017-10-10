@@ -123,22 +123,94 @@ static NSString *const kAuthUICodingKey = @"authUI";
 }
 
 + (UIActivityIndicatorView *)addActivityIndicator:(UIView *)view {
+  if (!view) {
+    return nil;
+  }
   UIActivityIndicatorView *activityIndicator =
       [[UIActivityIndicatorView alloc]
            initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-  activityIndicator.frame = CGRectInset(activityIndicator.frame,
-                                        -kActivityIndiactorPadding,
-                                        -kActivityIndiactorPadding);
-  activityIndicator.backgroundColor =
-  [UIColor colorWithWhite:0 alpha:kActivityIndiactorOverlayOpacity];
-  activityIndicator.layer.cornerRadius = kActivityIndiactorOverlayCornerRadius;
+  UIView *tintView = [[UIView alloc] initWithFrame:CGRectInset(activityIndicator.frame,
+                                                               -kActivityIndiactorPadding,
+                                                               -kActivityIndiactorPadding)];
+  tintView.backgroundColor =
+      [UIColor colorWithWhite:0 alpha:kActivityIndiactorOverlayOpacity];
+  tintView.layer.cornerRadius = kActivityIndiactorOverlayCornerRadius;
+  [activityIndicator addSubview:tintView];
+  
+  // Align tintView (transparent background).
+  tintView.translatesAutoresizingMaskIntoConstraints = NO;
+  [activityIndicator addConstraint:
+      [NSLayoutConstraint constraintWithItem:tintView
+                                   attribute:NSLayoutAttributeWidth
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:nil
+                                   attribute:NSLayoutAttributeNotAnAttribute
+                                  multiplier:1
+                                    constant:CGRectGetWidth(tintView.frame)]];
+  [activityIndicator addConstraint:
+      [NSLayoutConstraint constraintWithItem:tintView
+                                   attribute:NSLayoutAttributeCenterX
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:activityIndicator
+                                   attribute:NSLayoutAttributeCenterX
+                                  multiplier:1
+                                    constant:0]];
+
+  [activityIndicator addConstraint:
+      [NSLayoutConstraint constraintWithItem:tintView
+                                   attribute:NSLayoutAttributeHeight
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:nil
+                                   attribute:NSLayoutAttributeNotAnAttribute
+                                  multiplier:1
+                                    constant:CGRectGetHeight(tintView.frame)]];
+  [activityIndicator addConstraint:
+      [NSLayoutConstraint constraintWithItem:tintView
+                                   attribute:NSLayoutAttributeCenterY
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:activityIndicator
+                                   attribute:NSLayoutAttributeCenterY
+                                  multiplier:1
+                                    constant:0]];
+
+  [activityIndicator sendSubviewToBack:tintView];
+  
   [view addSubview:activityIndicator];
+  // Align activity indicator.
+  activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
+  [view addConstraint:
+      [NSLayoutConstraint constraintWithItem:activityIndicator
+                                   attribute:NSLayoutAttributeWidth
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:view
+                                   attribute:NSLayoutAttributeWidth
+                                  multiplier:1
+                                    constant:0]];
+  [view addConstraint:
+      [NSLayoutConstraint constraintWithItem:activityIndicator
+                                   attribute:NSLayoutAttributeCenterX
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:view
+                                   attribute:NSLayoutAttributeCenterX
+                                  multiplier:1
+                                    constant:0]];
 
-    CGPoint activityIndicatorCenter = view.center;
-  // Compensate for bounds adjustment if any.
-  activityIndicatorCenter.y += view.bounds.origin.y;
-  activityIndicator.center = activityIndicatorCenter;
-
+  [view addConstraint:
+      [NSLayoutConstraint constraintWithItem:activityIndicator
+                                   attribute:NSLayoutAttributeHeight
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:view
+                                   attribute:NSLayoutAttributeHeight
+                                  multiplier:1
+                                    constant:0]];
+  [view addConstraint:
+      [NSLayoutConstraint constraintWithItem:activityIndicator
+                                   attribute:NSLayoutAttributeCenterY
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:view
+                                   attribute:NSLayoutAttributeCenterY
+                                  multiplier:1
+                                    constant:0]];
   return activityIndicator;
 }
 
@@ -241,6 +313,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                               (int64_t)(kActivityIndiactorAnimationDelay * NSEC_PER_SEC)),
                  dispatch_get_main_queue(), ^{
+    [_activityIndicator.superview bringSubviewToFront:_activityIndicator];
     if (_activityCount > 0) {
       [_activityIndicator startAnimating];
     }
@@ -256,6 +329,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
   }
 
   if (_activityCount == 0) {
+    [_activityIndicator.superview sendSubviewToBack:_activityIndicator];
     [_activityIndicator stopAnimating];
   }
 }
