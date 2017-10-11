@@ -60,7 +60,6 @@ To start the authentication flow:
 // Swift
 let phoneProvider = FUIAuth.defaultAuthUI()?.providers.first as! FUIPhoneAuth
 phoneProvider.signIn(withPresenting: currentlyVisibleController, phoneNumber: nil)
-}
 ```
 
 ```objective-c

@@ -92,6 +92,10 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       if ([auth respondsToSelector:@selector(setAdditionalFrameworkMarker:)]) {
         auth.additionalFrameworkMarker = kFirebaseAuthUIFrameworkMarker;
       }
+      // Update auth with the actual language used in the app.
+      // If localization is not provided by developer, the first localization available,
+      // ordered by the user's preferred order, is used.
+      auth.languageCode = [NSBundle mainBundle].preferredLocalizations.firstObject;
     }
     return authUI;
   }
