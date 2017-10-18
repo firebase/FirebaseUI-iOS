@@ -158,7 +158,7 @@
 
 @implementation UITableView (FUIFirestoreTableViewDataSource)
 
-- (FUIFirestoreTableViewDataSource *)bindToQuery:(FIRQuery *)query
+- (FUIFirestoreTableViewDataSource *)bindToFirestoreQuery:(FIRQuery *)query
     populateCell:(UITableViewCell *(^)(UITableView *tableView,
                                        NSIndexPath *indexPath,
                                        FIRDocumentSnapshot *snap))populateCell {

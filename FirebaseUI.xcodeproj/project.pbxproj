@@ -17,7 +17,7 @@
 		8D3758551F6C671D007C4D87 /* FUIDocumentChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3758541F6C671D007C4D87 /* FUIDocumentChange.m */; };
 		8D3A120E1DC2B122007558BA /* FUISortedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D3A120C1DC2B122007558BA /* FUISortedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D3A120F1DC2B122007558BA /* FUISortedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D3A120D1DC2B122007558BA /* FUISortedArray.m */; };
-		8D4B6BC01F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D4B6BBE1F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.h */; };
+		8D4B6BC01F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D4B6BBE1F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D4B6BC11F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4B6BBF1F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.m */; };
 		8D559D4A1F68A7F100CE9D8A /* FirebaseFirestoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D559D411F68A7F100CE9D8A /* FirebaseFirestoreUI.framework */; };
 		8D559D511F68A7F100CE9D8A /* FirebaseFirestoreUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D559D431F68A7F100CE9D8A /* FirebaseFirestoreUI.h */; settings = {ATTRIBUTES = (Public, ); }; };

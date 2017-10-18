@@ -132,7 +132,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The created data source. This value must be retained while the collection
  *   view is in use.
  */
-- (FUIFirestoreCollectionViewDataSource *)bindToQuery:(FIRQuery *)query
+- (FUIFirestoreCollectionViewDataSource *)bindToFirestoreQuery:(FIRQuery *)query
     populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
                                             NSIndexPath *indexPath,
                                             FIRDocumentSnapshot *object))populateCell

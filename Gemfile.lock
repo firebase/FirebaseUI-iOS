@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/CocoaPods/CocoaPods.git
-  revision: eb900a784c16d8ec13b6b97d36431248e73be006
+  revision: f6a7d53286ccbc4c5e419c33f0eb3dbc320af2be
   specs:
     cocoapods (1.4.0.beta.1)
       activesupport (>= 4.0.2, < 5)
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/CocoaPods/Core.git
-  revision: 283ac03a69984faab02c03ad65871966f7581481
+  revision: 3efa5e2f0dec56af6fdcfd98822156b65c888ef5
   specs:
     cocoapods-core (1.4.0.beta.1)
       activesupport (>= 4.0.2, < 6)
@@ -33,7 +33,7 @@ GIT
 
 GIT
   remote: https://github.com/CocoaPods/Xcodeproj.git
-  revision: 07607507950d971f7271c8f288e0b14cc11ea87a
+  revision: 0b7414adf9a21efe139eeed9eda4c16eede431fd
   specs:
     xcodeproj (1.5.2)
       CFPropertyList (~> 2.3.3)
@@ -62,11 +62,13 @@ GEM
       netrc (~> 0.11)
     cocoapods-try (1.1.0)
     colored2 (3.1.2)
+    concurrent-ruby (1.0.5)
     escape (0.0.4)
     fourflusher (2.0.1)
     fuzzy_match (2.0.4)
     gh_inspector (1.0.3)
-    i18n (0.8.6)
+    i18n (0.9.0)
+      concurrent-ruby (~> 1.0)
     minitest (5.10.3)
     molinillo (0.6.3)
     nanaimo (0.2.3)

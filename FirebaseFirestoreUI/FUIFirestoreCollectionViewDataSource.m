@@ -170,7 +170,7 @@
 
 @implementation UICollectionView (FUIFirestoreCollectionViewDataSource)
 
-- (FUIFirestoreCollectionViewDataSource *)bindToQuery:(FIRQuery *)query
+- (FUIFirestoreCollectionViewDataSource *)bindToFirestoreQuery:(FIRQuery *)query
     populateCell:(UICollectionViewCell *(^)(UICollectionView *,
                                             NSIndexPath *,
                                             FIRDocumentSnapshot *))populateCell {

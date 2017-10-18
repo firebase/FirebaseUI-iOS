@@ -135,7 +135,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return The created data source. This value must be retained while the table
  *   view is in use.
  */
-- (FUIFirestoreTableViewDataSource *)bindToQuery:(FIRQuery *)query
+- (FUIFirestoreTableViewDataSource *)bindToFirestoreQuery:(FIRQuery *)query
     populateCell:(UITableViewCell *(^)(UITableView *tableView,
                                        NSIndexPath *indexPath,
                                        FIRDocumentSnapshot *object))populateCell
