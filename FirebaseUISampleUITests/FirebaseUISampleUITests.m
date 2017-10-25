@@ -63,6 +63,7 @@
   [tablesQuery.secureTextFields[@"Enter your password"] tap];
   [[[tablesQuery.cells containingType:XCUIElementTypeStaticText identifier:@"Password"] childrenMatchingType:XCUIElementTypeSecureTextField].element typeText:@"test"];
   [self.app.navigationBars[@"Sign in"].buttons[@"Sign in"] tap];
+  [self.app.toolbars.buttons[@"Sign In"] isHittable];
 }
 
 - (void)testSuccessSignUp {
@@ -81,6 +82,7 @@
   [tablesQuery.buttons[@"ic visibility"] tap];
   [tablesQuery.buttons[@"ic visibility off"] tap];
   [self.app.navigationBars[@"Create account"].buttons[@"SaveButtonAccessibilityID"] tap];
+  [self.app.toolbars.buttons[@"Sign In"] isHittable];
 }
 
 - (void)testSeveralIDPs {
@@ -98,6 +100,8 @@
   [[[[signInWithEmailNavigationBar childrenMatchingType:XCUIElementTypeButton] matchingIdentifier:@"Back"] elementBoundByIndex:0] tap];
   [self.app.navigationBars[@"Welcome"].buttons[@"Cancel"] tap];
   [self.app.alerts[@"Error"].buttons[@"Close"] tap];
+
+  [self.app.toolbars.buttons[@"Sign In"] isHittable];
 }
 
 - (void)testEmailRecovery {
@@ -124,6 +128,7 @@
   [signInWithEmailNavigationBar.buttons[@"Cancel"] tap];
   [self.app.alerts[@"Error"].buttons[@"Close"] tap];
 
+  [self.app.toolbars.buttons[@"Sign In"] isHittable];
 }
 
 - (void)testPhoneAuthCountryPicker {
@@ -146,6 +151,8 @@
   [self.app.navigationBars[@"Enter phone number"].buttons[@"Cancel"] tap];
   [self.app.navigationBars[@"Welcome"].buttons[@"Cancel"] tap];
   [self.app.alerts[@"Error"].buttons[@"Close"] tap];
+
+  [self.app.toolbars.buttons[@"Sign In"] isHittable];
 }
 
 - (void)testPhoneAuthFlow {
@@ -171,6 +178,8 @@
   [nextbuttonaccessibilityidButton tap];
   [self.app.keyboards.keys[@"6"] tap];
   [nextbuttonaccessibilityidButton tap];
+
+  [self.app.toolbars.buttons[@"Sign In"] isHittable];
 }
 
 - (void)testDirectPhoneAuthSignIn {
@@ -202,7 +211,8 @@
   [self.app.keyboards.keys[@"5"] tap];
   [self.app.keyboards.keys[@"6"] tap];
   [self.app.navigationBars[@"Verify phone number"].buttons[@"NextButtonAccessibilityID"] tap];
-  [signInButton tap];
+
+  [self.app.toolbars.buttons[@"Sign In"] isHittable];
 }
 
 @end
