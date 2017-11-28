@@ -30,6 +30,7 @@ class FUICustomAuthDelegate: NSObject, FUIAuthDelegate {
       print("Login error: \(error.localizedDescription)")
     case .none:
       return
+    }
   }
 
   func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {

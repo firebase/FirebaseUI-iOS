@@ -29,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Successfully running this sample requires an app in Firebase and an
     // accompanying valid GoogleService-Info.plist file.
     FirebaseApp.configure()
-    Twitter.sharedInstance().start(withConsumerKey: "", consumerSecret: "");
+    Twitter.sharedInstance().start(withConsumerKey: "consumer-key",
+                                   consumerSecret: "consumer-secret");
     GTMSessionFetcher.setLoggingEnabled(true)
     return true
   }
