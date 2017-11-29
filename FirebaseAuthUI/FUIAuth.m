@@ -18,7 +18,7 @@
 
 #import <objc/runtime.h>
 
-#import <FirebaseAnalytics/FIRApp.h>
+#import <FirebaseCore/FIRApp.h>
 #import <FirebaseAuth/FIRAuth.h>
 #import <FirebaseAuth/FirebaseAuth.h>
 #import "FUIAuthBaseViewController_Internal.h"
