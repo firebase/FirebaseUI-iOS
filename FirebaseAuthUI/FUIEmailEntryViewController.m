@@ -139,7 +139,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
         [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
       } else {
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
-          [self.authUI invokeResultCallbackWithUser:nil error:error];
+          [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
         }];
       }
       return;
@@ -261,10 +261,10 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   // Sign out first to make sure sign in starts with a clean state.
   [provider signOut];
   [provider signInWithDefaultValue:email
-   presentingViewController:self
-                 completion:^(FIRAuthCredential *_Nullable credential,
-                              NSError *_Nullable error,
-                              _Nullable FIRAuthResultCallback result) {
+          presentingViewController:self
+                        completion:^(FIRAuthCredential *_Nullable credential,
+                                     NSError *_Nullable error,
+                                     _Nullable FIRAuthResultCallback result) {
     if (error) {
       [self decrementActivity];
       if (result) {
@@ -272,23 +272,24 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       }
 
       [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        [self.authUI invokeResultCallbackWithUser:nil error:error];
+        [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
       }];
       return;
     }
 
-    [self.auth signInWithCredential:credential
-                        completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+    [self.auth signInAndRetrieveDataWithCredential:credential
+                                        completion:^(FIRAuthDataResult *_Nullable authResult,
+                                                     NSError *_Nullable error) {
       [self decrementActivity];
       if (result) {
-        result(user, error);
+        result(authResult.user, error);
       }
 
       if (error) {
-        [self.authUI invokeResultCallbackWithUser:nil error:error];
+        [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
       } else {
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
-          [self.authUI invokeResultCallbackWithUser:user error:error];
+          [self.authUI invokeResultCallbackWithAuthDataResult:authResult error:error];
         }];
       }
     }];

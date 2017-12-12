@@ -217,7 +217,9 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
 #pragma mark - FUIAuthDelegate methods
 
 // this method is called only when FUIAuthViewController is delgate of AuthUI
-- (void)authUI:(FUIAuth *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error {
+- (void)authUI:(FUIAuth *)authUI
+    didSignInWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult
+                          error:(nullable NSError *)error {
   if (error) {
     if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
       [self showAlert:@"User cancelled sign-in"];

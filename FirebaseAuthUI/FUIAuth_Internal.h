@@ -20,12 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FUIAuth ()
 
-/** @fn invokeResultCallbackWithUser:error:
+/** @fn invokeResultCallbackWithAuthDataResult:error:
     @brief Invokes the auth UI result callback.
-    @param user The user signed in, if any.
+    @param authDataResult The sign in data result, if any.
     @param error The error which occurred, if any.
  */
-- (void)invokeResultCallbackWithUser:(FIRUser *_Nullable)user error:(NSError *_Nullable)error;
+- (void)invokeResultCallbackWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult
+                                         error:(nullable NSError *)error;
 
 /** @fn invokeOperationCallback:error:
     @brief Invokes the auth UI operation callback.
@@ -43,8 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable id<FUIAuthProvider>)providerWithID:(NSString *)providerID;
 
 /** @fn signInWithProviderUI:presentingViewController:defaultValue:
-    @brief Signs in with specified provider. @see FUIAuthDelegate.authUI:didSignInWithUser:error: 
-        for method callback.
+    @brief Signs in with specified provider.
+        @see FUIAuthDelegate.authUI:didSignInWithAuthDataResult:error: for method callback.
     @param providerUI The authentication provider used for signing in.
     @param presentingViewController The view controller used to present the UI.
     @param defaultValue The provider default initialization value (e g email or phone number)

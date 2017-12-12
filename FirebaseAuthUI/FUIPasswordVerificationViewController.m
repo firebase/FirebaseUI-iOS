@@ -140,26 +140,29 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
   [self incrementActivity];
 
-  [self.auth signInWithEmail:_email
-                    password:password
-                  completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-                    if (error) {
-                      [self decrementActivity];
+  FIRAuthCredential *credential =
+      [FIREmailAuthProvider credentialWithEmail:_email password:password];
+  [self.auth signInAndRetrieveDataWithCredential:credential
+                                      completion:^(FIRAuthDataResult *_Nullable authResult,
+                                                   NSError *_Nullable error) {
+    if (error) {
+      [self decrementActivity];
 
-                      [self showAlertWithMessage:FUILocalizedString(kStr_WrongPasswordError)];
-                      return;
-                    }
+      [self showAlertWithMessage:FUILocalizedString(kStr_WrongPasswordError)];
+      return;
+    }
 
-                    [user linkWithCredential:_newCredential completion:^(FIRUser *_Nullable user,
-                                                                         NSError *_Nullable error) {
-                      [self decrementActivity];
+    [authResult.user linkAndRetrieveDataWithCredential:_newCredential
+                                            completion:^(FIRAuthDataResult *_Nullable authResult,
+                                                         NSError *_Nullable error) {
+      [self decrementActivity];
 
-                      // Ignore any error (shouldn't happen) and treat the user as successfully signed in.
-                      [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                        [self.authUI invokeResultCallbackWithUser:user error:nil];
-                      }];
-                    }];
-                  }];
+      // Ignore any error (shouldn't happen) and treat the user as successfully signed in.
+      [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        [self.authUI invokeResultCallbackWithAuthDataResult:authResult error:nil];
+      }];
+    }];
+  }];
 }
 
 - (IBAction)forgotPassword {

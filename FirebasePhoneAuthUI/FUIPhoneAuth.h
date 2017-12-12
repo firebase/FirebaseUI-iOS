@@ -34,8 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI NS_DESIGNATED_INITIALIZER;
 
 /** @fn signInWithPresentingViewController:
-    @brief Signs in with phone auth provider. @see FUIAuthDelegate.authUI:didSignInWithUser:error:
-        for method callback.
+    @brief Signs in with phone auth provider.
+        @see FUIAuthDelegate.authUI:didSignInWithAuthDataResult:error: for method callback.
     @param presentingViewController The view controller used to present the UI.
  */
 - (void)signInWithPresentingViewController:(UIViewController *)presentingViewController
@@ -43,8 +43,8 @@ __attribute__((deprecated("This is deprecated API and will be removed in a futur
                           "Please use signInWithPresentingViewController:phoneNumber:")));
 
 /** @fn signInWithPresentingViewController:phoneNumber:
-    @brief Signs in with phone auth provider. @see FUIAuthDelegate.authUI:didSignInWithUser:error:
-        for method callback.
+    @brief Signs in with phone auth provider.
+        @see FUIAuthDelegate.authUI:didSignInWithAuthDataResult:error: for method callback.
     @param presentingViewController The view controller used to present the UI.
     @param phoneNumber The default phone number specified in the international format
         e.g. +14151112233
