@@ -186,20 +186,22 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
         return;
       }
 
-      if (result) {
-        result(authResult.user, error);
-      }
-
       if (error) {
-        [self invokeResultCallbackWithAuthDataResult:authResult error:error];
+        if (result) {
+          result(nil, error);
+        }
+        [self invokeResultCallbackWithAuthDataResult:nil error:error];
       } else {
+        if (result) {
+          result(authResult.user, nil);
+        }
         // Hide Auth Picker Controller which was presented modally.
         if (isAuthPickerShown && presentingViewController.presentingViewController) {
           [presentingViewController dismissViewControllerAnimated:YES completion:^{
-            [self invokeResultCallbackWithAuthDataResult:authResult error:error];
+            [self invokeResultCallbackWithAuthDataResult:authResult error:nil];
           }];
         } else {
-          [self invokeResultCallbackWithAuthDataResult:authResult error:error];
+          [self invokeResultCallbackWithAuthDataResult:authResult error:nil];
         }
       }
     }];

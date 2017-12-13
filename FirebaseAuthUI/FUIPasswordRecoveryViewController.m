@@ -121,28 +121,24 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 
   [self.auth sendPasswordResetWithEmail:email
                              completion:^(NSError *_Nullable error) {
-     // The dispatch is a workaround for a bug in FirebaseAuth 3.0.2, which doesn't call the
-     // completion block on the main queue.
-     dispatch_async(dispatch_get_main_queue(), ^{
-       [self decrementActivity];
+    [self decrementActivity];
 
-       if (error) {
-         if (error.code == FIRAuthErrorCodeUserNotFound) {
-           [self showAlertWithMessage:FUILocalizedString(kStr_UserNotFoundError)];
-           return;
-         }
+    if (error) {
+      if (error.code == FIRAuthErrorCodeUserNotFound) {
+        [self showAlertWithMessage:FUILocalizedString(kStr_UserNotFoundError)];
+        return;
+      }
 
-         [self.navigationController dismissViewControllerAnimated:YES completion:^{
-           [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
-         }];
-         return;
-       }
+      [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
+      }];
+      return;
+    }
 
-       NSString *message =
-       [NSString stringWithFormat:FUILocalizedString(kStr_PasswordRecoveryEmailSentMessage), email];
-       [self showAlertWithMessage:message];
-     });
-   }];
+    NSString *message = [NSString stringWithFormat:
+                            FUILocalizedString(kStr_PasswordRecoveryEmailSentMessage), email];
+    [self showAlertWithMessage:message];
+  }];
 }
 
 - (void)textFieldDidChange {

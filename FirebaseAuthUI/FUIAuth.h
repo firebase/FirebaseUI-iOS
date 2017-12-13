@@ -70,7 +70,7 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
     didSignInWithUser:(nullable FIRUser *)user
                 error:(nullable NSError *)error
 __attribute__((deprecated("This is deprecated API and will be removed in a future release."
-                          "Use authUI:didSignInWithAuthDataResult:error:")));
+                          "Instead use authUI:didSignInWithAuthDataResult:error:")));
 
 
 /** @fn authUI:didFinishOperation:error:
