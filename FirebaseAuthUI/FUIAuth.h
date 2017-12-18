@@ -42,8 +42,25 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
  */
 @protocol FUIAuthDelegate <NSObject>
 
-/** @fn authUI:didSignInWithUser:error:
+@optional
+
+/** @fn authUI:didSignInWithAuthDataResult:error:
     @brief Message sent after the sign in process has completed to report the signed in user or
+        error encountered.
+    @param authUI The @c FUIAuth instance sending the message.
+    @param authDataResult The data result if the sign in attempt was successful.
+    @param error The error that occurred during sign in, if any.
+ */
+- (void)authUI:(FUIAuth *)authUI
+    didSignInWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult
+                          error:(nullable NSError *)error;
+
+/** @fn authUI:didSignInWithUser:error:
+    @brief This is deprecated API and will be removed in a future release.
+        Use @c authUI:didSignInWithAuthDataResult:error:
+        Both sign in call backs are called (@c authUI:didSignInWithAuthDataResult:error:
+        and @c authUI:didSignInWithUser:error:).
+        This message is sent after the sign in process has completed to report the signed in user or
         error encountered.
     @param authUI The @c FUIAuth instance sending the message.
     @param user The signed in user if the sign in attempt was successful.
@@ -51,9 +68,9 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
  */
 - (void)authUI:(FUIAuth *)authUI
     didSignInWithUser:(nullable FIRUser *)user
-                error:(nullable NSError *)error;
+                error:(nullable NSError *)error
+__attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:")));
 
-@optional
 
 /** @fn authUI:didFinishOperation:error:
     @brief Message sent after finishing Account Management operation.

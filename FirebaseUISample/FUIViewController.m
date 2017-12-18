@@ -91,7 +91,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
           [self.authUIMock isSignInWithEmailHidden];
   if (shouldSkipPhoneAuthPicker) {
     FUIPhoneAuth *provider = _authProviders.firstObject;
-    [provider signInWithPresentingViewController:self];
+    [provider signInWithPresentingViewController:self phoneNumber:nil];
   } else {
     UIViewController *controller = [self.authUIMock authViewController];
     [self presentViewController:controller animated:YES completion:nil];
@@ -161,7 +161,9 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 
 #pragma mark - FUIAuthDelegate methods
 
-- (void)authUI:(FUIAuth *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error {
+- (void)authUI:(FUIAuth *)authUI
+    didSignInWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult
+         error:(nullable NSError *)error {
   if (error) {
     if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
       [self showAlert:@"User cancelled sign-in"];
@@ -173,20 +175,21 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
       [self showAlert:detailedError.localizedDescription];
     }
   } else {
-    _labelUserEmail.text = user.email;
+    _labelUserEmail.text = authDataResult.user.email;
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kSectionsSignedInAs]
                   withRowAnimation:UITableViewRowAnimationNone];
   }
 }
 
 - (void)showAlert:(NSString *)message {
-  UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                 message:message
-                                                          preferredStyle:UIAlertControllerStyleAlert];
-  UIAlertAction* closeButton = [UIAlertAction
-                                actionWithTitle:@"Close"
-                                style:UIAlertActionStyleDefault
-                                handler:nil];
+  UIAlertController *alert =
+      [UIAlertController alertControllerWithTitle:@"Error"
+                                          message:message
+                                   preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction* closeButton =
+      [UIAlertAction actionWithTitle:@"Close"
+                               style:UIAlertActionStyleDefault
+                             handler:nil];
   [alert addAction:closeButton];
   [self presentViewController:alert animated:YES completion:nil];
 
@@ -231,48 +234,57 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 }
 
 - (void)prepareStubsForSimulationExistingUser {
-  OCMStub([self.authMock fetchProvidersForEmail:OCMOCK_ANY completion:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
+  OCMStub([self.authMock fetchProvidersForEmail:OCMOCK_ANY completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
     FIRProviderQueryCallback mockedCallback;
     [invocation getArgument:&mockedCallback atIndex:3];
     mockedCallback(@[@"password"], nil);
   });
 
 
-  [self mockSignInWithEmail];
+  [self mockSignInWithCredential];
 }
 
 - (void)prepareStubsForSimulationNewUser {
-  OCMStub([self.authMock fetchProvidersForEmail:OCMOCK_ANY completion:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
+  OCMStub([self.authMock fetchProvidersForEmail:OCMOCK_ANY completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
     FIRProviderQueryCallback mockedResponse;
     [invocation getArgument:&mockedResponse atIndex:3];
     mockedResponse(nil, nil);
   });
 
 
-  OCMStub([self.authMock createUserWithEmail:OCMOCK_ANY password:OCMOCK_ANY completion:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
-    FIRAuthResultCallback mockedCallback;
+  OCMStub([self.authMock createUserAndRetrieveDataWithEmail:OCMOCK_ANY
+                                                   password:OCMOCK_ANY
+                                                 completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
+    FIRAuthDataResultCallback mockedCallback;
     [invocation getArgument:&mockedCallback atIndex:4];
 
     NSString *responseEmail;
     [invocation getArgument:&responseEmail atIndex:2];
 
+    id mockDataResult = OCMClassMock([FIRAuthDataResult class]);
     id mockUser = OCMClassMock([FIRUser class]);
     OCMStub([mockUser email]).andReturn(responseEmail);
+    OCMStub([mockDataResult user]).andReturn(mockUser);
     [self mockUpdateUserRequest:mockUser];
 
-    mockedCallback(mockUser, nil);
+    mockedCallback(mockDataResult, nil);
   });
 
 }
 
 - (void)prepareStubsForEmailRecovery {
-  OCMStub([self.authMock fetchProvidersForEmail:OCMOCK_ANY completion:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
+  OCMStub([self.authMock fetchProvidersForEmail:OCMOCK_ANY completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
     FIRProviderQueryCallback mockedCallback;
     [invocation getArgument:&mockedCallback atIndex:3];
     mockedCallback(@[@"password"], nil);
   });
 
-  OCMStub([self.authMock sendPasswordResetWithEmail:OCMOCK_ANY completion:OCMOCK_ANY]).andDo(^(NSInvocation *invocation) {
+  OCMStub([self.authMock sendPasswordResetWithEmail:OCMOCK_ANY completion:OCMOCK_ANY]).
+      andDo(^(NSInvocation *invocation) {
     FIRSendPasswordResetCallback mockedCallback;
     [invocation getArgument:&mockedCallback atIndex:3];
     mockedCallback(nil);
@@ -442,29 +454,13 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   });
 }
 
-- (void)mockSignInWithEmail {
-  OCMStub([self.authMock signInWithEmail:OCMOCK_ANY password:OCMOCK_ANY completion:OCMOCK_ANY]).
-      andDo(^(NSInvocation *invocation) {
-    FIRAuthResultCallback mockedResponse;
-    [invocation getArgument:&mockedResponse atIndex:4];
-
-    NSString *responseEmail;
-    [invocation getArgument:&responseEmail atIndex:2];
-
-    id mockUser = OCMClassMock([FIRUser class]);
-    OCMStub([mockUser email]).andReturn(responseEmail);
-    
-    mockedResponse(mockUser, nil);
-  });
-}
-
 - (void)mockSignInWithCredential {
-  OCMStub([self.authMock signInWithCredential:OCMOCK_ANY completion:OCMOCK_ANY]).
+  OCMStub([self.authMock signInAndRetrieveDataWithCredential:OCMOCK_ANY completion:OCMOCK_ANY]).
       andDo(^(NSInvocation *invocation) {
-    FIRAuthResultCallback mockedResponse;
+    FIRAuthDataResultCallback mockedResponse;
     [invocation getArgument:&mockedResponse atIndex:3];
-    id mockUser = OCMClassMock([FIRUser class]);
-    mockedResponse(mockUser, nil);
+    id mockDataResult = OCMClassMock([FIRAuthDataResult class]);
+    mockedResponse(mockDataResult, nil);
   });
 }
 - (void)mockUpdatePasswordRequest:(id)mockUser {
@@ -514,9 +510,9 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
     mockedCallBack(nil);
   });
 
-  OCMStub([mockProviderUI signInWithEmail:OCMOCK_ANY
-                 presentingViewController:OCMOCK_ANY
-                               completion:OCMOCK_ANY]).
+  OCMStub([mockProviderUI signInWithDefaultValue:OCMOCK_ANY
+                        presentingViewController:OCMOCK_ANY
+                                      completion:OCMOCK_ANY]).
       andDo(^(NSInvocation *invocation) {
     FIRAuthProviderSignInCompletionBlock mockedResponse;
     [invocation getArgument:&mockedResponse atIndex:4];
@@ -545,8 +541,8 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   // Mock udpate email operation
   [self mockUpdateEmail:mockUser];
 
-  // mock re-authentication with email
-  [self mockSignInWithEmail];
+  // mock re-authentication with credential
+  [self mockSignInWithCredential];
 
   // mock update password
   [self mockUpdatePasswordRequest:mockUser];

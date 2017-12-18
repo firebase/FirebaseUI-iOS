@@ -180,31 +180,33 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 
   [self incrementActivity];
 
-  [self.auth createUserWithEmail:email
-                        password:password
-                      completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+  [self.auth createUserAndRetrieveDataWithEmail:email
+                                       password:password
+                                     completion:^(FIRAuthDataResult *_Nullable authDataResult,
+                                                  NSError *_Nullable error) {
     if (error) {
       [self decrementActivity];
 
-      [self finishSignUpWithUser:nil error:error];
+      [self finishSignUpWithAuthDataResult:nil error:error];
       return;
     }
 
-    FIRUserProfileChangeRequest *request = [user profileChangeRequest];
+    FIRUserProfileChangeRequest *request = [authDataResult.user profileChangeRequest];
     request.displayName = username;
     [request commitChangesWithCompletion:^(NSError *_Nullable error) {
       [self decrementActivity];
 
       if (error) {
-        [self finishSignUpWithUser:nil error:error];
+        [self finishSignUpWithAuthDataResult:nil error:error];
         return;
       }
-      [self finishSignUpWithUser:user error:nil];
+      [self finishSignUpWithAuthDataResult:authDataResult error:nil];
     }];
   }];
 }
 
-- (void)finishSignUpWithUser:(FIRUser *)user error:(NSError *)error {
+- (void)finishSignUpWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult
+                                 error:(nullable NSError *)error {
   if (error) {
     switch (error.code) {
       case FIRAuthErrorCodeEmailAlreadyInUse:
@@ -223,7 +225,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   }
 
   [self.navigationController dismissViewControllerAnimated:YES completion:^() {
-    [self.authUI invokeResultCallbackWithUser:user error:error];
+    [self.authUI invokeResultCallbackWithAuthDataResult:authDataResult error:error];
   }];
 }
 

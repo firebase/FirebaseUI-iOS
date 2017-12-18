@@ -20,7 +20,7 @@ import FirebaseAuth
 
 class FUICustomAuthDelegate: NSObject, FUIAuthDelegate {
 
-  func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
+  func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
     switch error {
     case .some(let error as NSError) where UInt(error.code) == FUIAuthErrorCode.userCancelledSignIn.rawValue:
       print("User cancelled sign-in")

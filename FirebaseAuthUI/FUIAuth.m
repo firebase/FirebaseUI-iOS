@@ -166,7 +166,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
         [presentingViewController isKindOfClass:[FUIAuthPickerViewController class]];
     if (error) {
       if (!isAuthPickerShown || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
-        [self invokeResultCallbackWithUser:nil error:error];
+        [self invokeResultCallbackWithAuthDataResult:nil error:error];
       }
       if (result) {
         result(nil, error);
@@ -174,8 +174,9 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       return;
     }
 
-    [self.auth signInWithCredential:credential
-                         completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+    [self.auth signInAndRetrieveDataWithCredential:credential
+                                        completion:^(FIRAuthDataResult *_Nullable authResult,
+                                                     NSError *_Nullable error) {
       if (error && error.code == FIRAuthErrorCodeAccountExistsWithDifferentCredential) {
         NSString *email = error.userInfo[kErrorUserInfoEmailKey];
         [self handleAccountLinkingForEmail:email
@@ -185,20 +186,22 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
         return;
       }
 
-      if (result) {
-        result(user, error);
-      }
-
       if (error) {
-        [self invokeResultCallbackWithUser:user error:error];
+        if (result) {
+          result(nil, error);
+        }
+        [self invokeResultCallbackWithAuthDataResult:nil error:error];
       } else {
+        if (result) {
+          result(authResult.user, nil);
+        }
         // Hide Auth Picker Controller which was presented modally.
         if (isAuthPickerShown && presentingViewController.presentingViewController) {
           [presentingViewController dismissViewControllerAnimated:YES completion:^{
-            [self invokeResultCallbackWithUser:user error:error];
+            [self invokeResultCallbackWithAuthDataResult:authResult error:nil];
           }];
         } else {
-          [self invokeResultCallbackWithUser:user error:error];
+          [self invokeResultCallbackWithAuthDataResult:authResult error:nil];
         }
       }
     }];
@@ -224,7 +227,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                                presentingViewController:presentingViewController];
       } else {
         [presentingViewController dismissViewControllerAnimated:YES completion:^{
-          [self invokeResultCallbackWithUser:nil error:error];
+          [self invokeResultCallbackWithAuthDataResult:nil error:error];
         }];
       }
       return;
@@ -287,29 +290,30 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
             }
             return;
           }
-          [self invokeResultCallbackWithUser:nil error:error];
+          [self invokeResultCallbackWithAuthDataResult:nil error:error];
           return;
         }
 
         [self.auth signInWithCredential:credential completion:^(FIRUser *_Nullable user,
                                                                 NSError *_Nullable error) {
           if (error) {
-            [self invokeResultCallbackWithUser:nil error:error];
+            [self invokeResultCallbackWithAuthDataResult:nil error:error];
             if (result) {
               result(nil, error);
             }
             return;
           }
 
-          [user linkWithCredential:newCredential completion:^(FIRUser *_Nullable user,
-                                                              NSError *_Nullable error) {
+          [user linkAndRetrieveDataWithCredential:newCredential
+                                       completion:^(FIRAuthDataResult *_Nullable authResult,
+                                                    NSError *_Nullable error) {
             if (result) {
-              result(user, error);
+              result(authResult.user, error);
             }
             // Ignore any error (most likely caused by email mismatch) and treat the user as
             // successfully signed in.
             [presentingViewController dismissViewControllerAnimated:YES completion:^{
-              [self invokeResultCallbackWithUser:user error:nil];
+              [self invokeResultCallbackWithAuthDataResult:authResult error:nil];
             }];
           }];
         }];
@@ -322,9 +326,15 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
 
 #pragma mark - Internal Methods
 
-- (void)invokeResultCallbackWithUser:(FIRUser *_Nullable)user error:(NSError *_Nullable)error {
+- (void)invokeResultCallbackWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult
+                                         error:(nullable NSError *)error {
   dispatch_async(dispatch_get_main_queue(), ^{
-    [self.delegate authUI:self didSignInWithUser:user error:error];
+    if ([self.delegate respondsToSelector:@selector(authUI:didSignInWithAuthDataResult:error:)]) {
+      [self.delegate authUI:self didSignInWithAuthDataResult:authDataResult error:error];
+    }
+    if ([self.delegate respondsToSelector:@selector(authUI:didSignInWithUser:error:)]) {
+      [self.delegate authUI:self didSignInWithUser:authDataResult.user error:error];
+    }
   });
 }
 
