@@ -144,6 +144,7 @@ target 'Twitter' do
 
   # Pods for Twitter Auth
   pod 'FirebaseAuth'
+  pod 'TwitterCore', '~> 3.0'
   pod 'TwitterKit', '~> 3.0'
 end
 
