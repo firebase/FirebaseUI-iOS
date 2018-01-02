@@ -270,6 +270,9 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
     _emailField.keyboardType = UIKeyboardTypeEmailAddress;
     _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
     _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    if (@available(iOS 11.0, *)) {
+        _emailField.textContentType = UITextContentTypeUsername;
+    }
   } else if (indexPath.row == 1) {
     cell.label.text = FUILocalizedString(kStr_Name);
     cell.accessibilityIdentifier = kNameSignUpCellAccessibilityID;
@@ -278,6 +281,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
     _nameField.secureTextEntry = NO;
     _nameField.returnKeyType = UIReturnKeyNext;
     _nameField.keyboardType = UIKeyboardTypeDefault;
+    _nameField.textContentType = UITextContentTypeName;
   } else if (indexPath.row == 2) {
     cell.label.text = FUILocalizedString(kStr_Password);
     cell.accessibilityIdentifier = kPasswordSignUpCellAccessibilityID;
@@ -288,6 +292,9 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
     _passwordField.rightViewMode = UITextFieldViewModeAlways;
     _passwordField.returnKeyType = UIReturnKeyNext;
     _passwordField.keyboardType = UIKeyboardTypeDefault;
+    if (@available(iOS 11.0, *)) {
+        _passwordField.textContentType = UITextContentTypePassword;
+    }
   }
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
