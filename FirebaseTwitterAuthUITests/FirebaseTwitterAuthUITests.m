@@ -23,7 +23,7 @@
 #import <FirebaseTwitterAuthUI/FirebaseTwitterAuthUI.h>
 #import <OCMock/OCMock.h>
 #import <TwitterCore/TwitterCore.h>
-#import <TwitterKit/TwitterKit.h>
+#import <TwitterKit/TWTRTwitter.h>
 #import <XCTest/XCTest.h>
 
 @interface FUITwitterAuth (Testing)
