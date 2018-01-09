@@ -514,6 +514,8 @@
 		8D3A120D1DC2B122007558BA /* FUISortedArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISortedArray.m; sourceTree = "<group>"; };
 		8D4B6BBE1F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIFirestoreTableViewDataSource.h; sourceTree = "<group>"; };
 		8D4B6BBF1F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIFirestoreTableViewDataSource.m; sourceTree = "<group>"; };
+		8D5247E1200435D300575A46 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterCore.framework; path = Pods/TwitterCore/iOS/TwitterCore.framework; sourceTree = "<group>"; };
+		8D5247E3200435FB00575A46 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = Pods/TwitterKit/iOS/TwitterKit.framework; sourceTree = "<group>"; };
 		8D559D411F68A7F100CE9D8A /* FirebaseFirestoreUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseFirestoreUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D559D431F68A7F100CE9D8A /* FirebaseFirestoreUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseFirestoreUI.h; sourceTree = "<group>"; };
 		8D559D441F68A7F100CE9D8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1761,6 +1763,8 @@
 		903F73EA092681D67581F496 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D5247E3200435FB00575A46 /* TwitterKit.framework */,
+				8D5247E1200435D300575A46 /* TwitterCore.framework */,
 				8DCF7AD31DC009C1004E19CA /* GTMOAuth2.framework */,
 			);
 			name = Frameworks;
@@ -2609,7 +2613,7 @@
 		8D2A849D1D678B2B0058DF04 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = FirebaseUI;
 				TargetAttributes = {
 					8D2A84A51D678B2B0058DF04 = {
@@ -4014,7 +4018,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
@@ -4023,6 +4029,8 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -4071,7 +4079,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
@@ -4080,6 +4090,8 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -5131,12 +5143,12 @@
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
-					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework",
-					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\"",
 				);
 				INFOPLIST_FILE = FirebaseUISampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\"";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\" \"$(PODS_ROOT)/TwitterKit/iOS\" \"$(PODS_ROOT)/TwitterCore/iOS\"";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -5193,10 +5205,6 @@
 					"\"StoreKit\"",
 					"-framework",
 					"\"SystemConfiguration\"",
-					"-framework",
-					"\"TwitterCore\"",
-					"-framework",
-					"\"TwitterKit\"",
 					"-framework",
 					"\"UIKit\"",
 					"-weak_framework",
@@ -5235,12 +5243,12 @@
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
-					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework",
-					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\"",
 				);
 				INFOPLIST_FILE = FirebaseUISampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\"";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\" \"$(PODS_ROOT)/TwitterKit/iOS\" \"$(PODS_ROOT)/TwitterCore/iOS\"";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -5297,10 +5305,6 @@
 					"\"StoreKit\"",
 					"-framework",
 					"\"SystemConfiguration\"",
-					"-framework",
-					"\"TwitterCore\"",
-					"-framework",
-					"\"TwitterKit\"",
 					"-framework",
 					"\"UIKit\"",
 					"-weak_framework",
