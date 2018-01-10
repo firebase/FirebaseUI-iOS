@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseTwitterAuthUI'
-  s.version      = '4.5.0'
+  s.version      = '4.5.1'
   s.summary      = 'Twitter UI binding library for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0' }

@@ -19,7 +19,7 @@
 @import Firebase;
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <GTMSessionFetcher/GTMSessionFetcherLogging.h>
-#import <TwitterKit/Twitter.h>
+#import <TwitterKit/TWTRTwitter.h>
 
 // TODO: Update with Twitter key and secret
 NSString *const kTwitterConsumerKey = @"";
@@ -29,8 +29,8 @@ NSString *const kTwitterConsumerSecret = @"";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   if (kTwitterConsumerKey.length && kTwitterConsumerSecret.length) {
-    [[Twitter sharedInstance] startWithConsumerKey:kTwitterConsumerKey
-                                    consumerSecret:kTwitterConsumerSecret];
+    [[TWTRTwitter sharedInstance] startWithConsumerKey:kTwitterConsumerKey
+                                        consumerSecret:kTwitterConsumerSecret];
   }
 
   [FIRApp configure];
