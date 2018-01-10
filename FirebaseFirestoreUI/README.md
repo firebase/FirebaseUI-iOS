@@ -1,17 +1,17 @@
-#Firestore UI - UI Bindings for Cloud Firestore
+# Firestore UI - UI Bindings for Cloud Firestore
 
 Firestore UI provides a handful of classes that allow developers to easily bind
 UI elements to Cloud Firestore queries, and to update their UI elements when
 those queries change.
 
-##API Overview
+## API Overview
 
 FUIFirestoreTableViewDataSource      | Binds a Firestore query to a table view.
 FUIFirestoreCollectionViewDataSource | Binds a Firestore query to a collection view.
 FUIBatchedArray                      | Maintains a local array containing the contents of a Firestore query.
 FUISnapshotArrayDiff                 | Describes an array update in a manner friendly to table and collection views.
 
-####FUIFirestoreTableViewDataSource
+#### FUIFirestoreTableViewDataSource
 
 `FUIFirestoreTableViewDataSource` is responsible for observing a Firestore query
 and updating a UITableView as the query changes, suitable for single-section
@@ -30,7 +30,7 @@ self.dataSource = tableView.bind(to: query) { tableView, indexPath, snapshot in
 }
 ```
 
-####FUIFirestoreCollectionViewDataSource
+#### FUIFirestoreCollectionViewDataSource
 
 Like its table view counterpart, `FUIFirestoreCollectionViewDataSource` keeps a
 Firestore query in sync with a collection view instance, suitable for
@@ -45,7 +45,7 @@ self.dataSource = collectionView.bind(to: query) { collectionView, indexPath, sn
 }
 ```
 
-####FUIBatchedArray
+#### FUIBatchedArray
 
 `FUIBatchedArray` powers all of the updating logic in the data source classes
 by generating diffs from the document change data in Firestore query snapshot
@@ -63,7 +63,7 @@ let array = FUIBatchedArray(query: query, delegate: self)
 array.observeQuery()
 ```
 
-####FUISnapshotArrayDiff
+#### FUISnapshotArrayDiff
 
 This class and its helper classes are responsible for the diffing logic in
 FirestoreUI. You should never have to use this directly, though all of the
