@@ -153,8 +153,14 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.section == kSectionsAnonymousSignIn && indexPath.row == 0) {
-    [FUIAuth.defaultAuthUI.auth signInAnonymouslyWithCompletion:^(FIRUser * _Nullable user,
-                                                                  NSError * _Nullable error) {
+    if (_authUI.auth.currentUser.isAnonymous) {
+      [self showAlertWithTitlte:@"" message:@"Already signed in anonymously"];
+      [tableView deselectRowAtIndexPath:indexPath animated:NO];
+      return;
+    }
+    [self signOut];
+    [FUIAuth.defaultAuthUI.auth signInAnonymouslyWithCompletion:^(FIRUser *_Nullable user,
+                                                                  NSError *_Nullable error) {
       if (error) {
         NSError *detailedError = error.userInfo[NSUnderlyingErrorKey];
         if (!detailedError) {
