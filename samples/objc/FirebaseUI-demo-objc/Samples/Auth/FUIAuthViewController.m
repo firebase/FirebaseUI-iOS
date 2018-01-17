@@ -167,7 +167,6 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
           detailedError = error;
         }
         NSLog(@"ERROR: %@", detailedError.localizedDescription);
-        return;
       }
     }];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -291,6 +290,7 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
     [currentUser deleteWithCompletion:^(NSError * _Nullable error) {
       if (error) {
         [self showAlertWithTitlte:@"Error" message:error.localizedDescription];
+        return;
       }
       [self showAlertWithTitlte:@"" message:@"Anonymous user deleted"];
     }];
