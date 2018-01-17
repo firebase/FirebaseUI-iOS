@@ -30,16 +30,17 @@
 
 #import "FUICustomAuthPickerViewController.h"
 
-typedef enum : NSUInteger {
+NS_ENUM(NSUInteger, UISections) {
   kSectionsSettings = 0,
   kSectionsProviders,
+  kSectionsAnonymousSignIn,
   kSectionsName,
   kSectionsEmail,
   kSectionsPhoneNumber,
   kSectionsUID,
   kSectionsAccessToken,
   kSectionsIDToken
-} UISections;
+};
 
 NS_ENUM(NSUInteger, FIRProviders) {
   kIDPEmail = 0,
@@ -56,6 +57,7 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellName;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellEmail;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellUID;
+@property (weak, nonatomic) IBOutlet UITableViewCell *anonymousSignIn;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonAuthorization;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellAccessToken;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellIdToken;
@@ -149,6 +151,23 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
   return UITableViewAutomaticDimension;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.section == kSectionsAnonymousSignIn && indexPath.row == 0) {
+    [FUIAuth.defaultAuthUI.auth signInAnonymouslyWithCompletion:^(FIRUser * _Nullable user,
+                                                                  NSError * _Nullable error) {
+      if (error) {
+        NSError *detailedError = error.userInfo[NSUnderlyingErrorKey];
+        if (!detailedError) {
+          detailedError = error;
+        }
+        NSLog(@"ERROR: %@", detailedError.localizedDescription);
+        return;
+      }
+    }];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+  }
+}
+
 #pragma mark - UI methods
 
 - (void)updateUI:(FIRAuth * _Nonnull) auth withUser:(FIRUser *_Nullable) user {
@@ -159,7 +178,12 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
     self.cellPhoneNumber.textLabel.text = user.phoneNumber;
     self.cellUID.textLabel.text = user.uid;
 
-    self.buttonAuthorization.title = @"Sign Out";
+    // If the user is anonymous, delete the user to avoid dangling anonymous users.
+    if (self.authUI.auth.currentUser.isAnonymous) {
+      self.buttonAuthorization.title = @"Delete Anonymous User";
+    } else {
+      self.buttonAuthorization.title = @"Sign Out";
+    }
   } else {
     self.cellSignIn.textLabel.text = @"Not signed-in";
     self.cellName.textLabel.text = @"";
@@ -222,7 +246,7 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
                           error:(nullable NSError *)error {
   if (error) {
     if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
-      [self showAlert:@"User cancelled sign-in"];
+      [self showAlertWithTitlte:@"Error" message:error.localizedDescription];
     } else {
       NSError *detailedError = error.userInfo[NSUnderlyingErrorKey];
       if (!detailedError) {
@@ -255,14 +279,25 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
 
 - (void)signOut {
   NSError *error;
-  [self.authUI signOutWithError:&error];
-  if (error) {
-    [self showAlert:error.localizedDescription];
+  FIRUser *currentUser = self.authUI.auth.currentUser;
+  // If the user is anonymous, delete the user to avoid dangling anonymous users.
+  if (currentUser.isAnonymous) {
+    [currentUser deleteWithCompletion:^(NSError * _Nullable error) {
+      if (error) {
+        [self showAlertWithTitlte:@"Error" message:error.localizedDescription];
+      }
+      [self showAlertWithTitlte:@"" message:@"Anonymous user deleted"];
+    }];
+  } else {
+    [self.authUI signOutWithError:&error];
+    if (error) {
+      [self showAlertWithTitlte:@"Error" message:error.localizedDescription];
+    }
   }
 }
 
-- (void)showAlert:(NSString *)message {
-  UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+- (void)showAlertWithTitlte:(NSString *)title message:(NSString *)message {
+  UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                  message:message
                                                           preferredStyle:UIAlertControllerStyleAlert];
   UIAlertAction* closeButton = [UIAlertAction
