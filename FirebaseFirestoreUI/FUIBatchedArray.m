@@ -120,18 +120,6 @@
 
 @implementation FIRDocumentSnapshot (FirebaseUI)
 
-- (NSUInteger)hash {
-  return self.documentID.hash;
-}
-
-- (BOOL)isEqual:(FIRDocumentSnapshot *)object {
-  if (![object isKindOfClass:[FIRDocumentSnapshot class]]) {
-    return NO;
-  }
-
-  return [object.documentID isEqual:self.documentID];
-}
-
 - (instancetype)copyWithZone:(NSZone *)zone {
   return self;
 }
