@@ -27,6 +27,7 @@ let kFirebaseTermsOfService = URL(string: "https://firebase.google.com/terms/")!
 enum UISections: Int, RawRepresentable {
   case Settings = 0
   case Providers
+  case AnonymousSignIn
   case Name
   case Email
   case UID
@@ -65,6 +66,7 @@ class FUIAuthViewController: UITableViewController {
   @IBOutlet weak var cellPhone: UITableViewCell!
   @IBOutlet weak var cellAccessToken: UITableViewCell!
   @IBOutlet weak var cellIdToken: UITableViewCell!
+  @IBOutlet weak var cellAnonymousSignIn: UITableViewCell!
 
   @IBOutlet weak var authorizationButton: UIBarButtonItem!
   @IBOutlet weak var customAuthorizationSwitch: UISwitch!
@@ -119,17 +121,71 @@ class FUIAuthViewController: UITableViewController {
     return UITableViewAutomaticDimension
   }
 
-  @IBAction func onAuthorize(_ sender: AnyObject) {
-    if (self.auth?.currentUser) != nil {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if (indexPath.section == UISections.AnonymousSignIn.rawValue && indexPath.row == 0) {
+      if (auth?.currentUser?.isAnonymous ?? false) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        return;
+      }
       do {
         try self.authUI?.signOut()
       } catch let error {
-        // Again, fatalError is not a graceful way to handle errors.
-        // This error is most likely a network error, so retrying here
-        // makes sense.
-        fatalError("Could not sign out: \(error)")
+        self.ifNoError(error) {}
       }
 
+      auth?.signInAnonymously() { user, error in
+        self.ifNoError(error) {
+          self.showAlert(title: "Signed In Anonymously")
+        }
+      }
+      tableView.deselectRow(at: indexPath, animated: false)
+    }
+  }
+
+ fileprivate func showAlert(title: String, message: String? = "") {
+    if #available(iOS 8.0, *) {
+      let alertController =
+          UIAlertController(title: title, message: message, preferredStyle: .alert)
+      alertController.addAction(UIAlertAction(title: "OK",
+                                              style: .default,
+                                            handler: { (UIAlertAction) in
+        alertController.dismiss(animated: true, completion: nil)
+      }))
+      self.present(alertController, animated: true, completion: nil)
+    } else {
+      UIAlertView(title: title,
+                  message: message ?? "",
+                  delegate: nil,
+                  cancelButtonTitle: nil,
+                  otherButtonTitles: "OK").show()
+    }
+  }
+
+  private func ifNoError(_ error: Error?, execute: () -> Void) {
+    guard error == nil else {
+      showAlert(title: "Error", message: error!.localizedDescription)
+      return
+    }
+    execute()
+  }
+
+  @IBAction func onAuthorize(_ sender: AnyObject) {
+    if (self.auth?.currentUser) != nil {
+      if (auth?.currentUser?.isAnonymous != false) {
+        auth?.currentUser?.delete() { error in
+          self.ifNoError(error) {
+            self.showAlert(title: "", message:"The user was properly deleted.")
+          }
+        }
+      } else {
+        do {
+          try self.authUI?.signOut()
+        } catch let error {
+          self.ifNoError(error) {
+            self.showAlert(title: "Error", message:"The user was properly signed out.")
+          }
+        }
+      }
     } else {
       self.authUI?.delegate = self.customAuthorizationSwitch.isOn ? self.customAuthUIDelegate : nil;
       self.authUI?.isSignInWithEmailHidden = !self.isEmailEnabled()
@@ -161,7 +217,11 @@ class FUIAuthViewController: UITableViewController {
       self.cellUid.textLabel?.text = user.uid
       self.cellPhone.textLabel?.text = user.phoneNumber
 
-      self.authorizationButton.title = "Sign Out";
+      if (auth.currentUser?.isAnonymous != false) {
+        self.authorizationButton.title = "Delete Anonymous User";
+      } else {
+        self.authorizationButton.title = "Sign Out";
+      }
     } else {
       self.cellSignedIn.textLabel?.text = "Not signed in"
       self.cellName.textLabel?.text = "null"
