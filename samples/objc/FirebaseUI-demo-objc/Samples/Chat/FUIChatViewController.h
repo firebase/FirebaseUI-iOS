@@ -17,7 +17,7 @@
 @import UIKit;
 @import FirebaseDatabase;
 
-#import <FirebaseDatabaseUI/FirebaseDatabaseUI.h>
+@import FirebaseUI;
 
 @interface FUIChatViewController : UIViewController <UITableViewDelegate, UITextFieldDelegate>
 

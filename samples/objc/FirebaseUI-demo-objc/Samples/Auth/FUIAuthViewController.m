@@ -17,16 +17,11 @@
 //
 
 @import Firebase;
+@import FirebaseUI;
 
 #import "FUIAuthViewController.h"
 #import "FUIAppDelegate.h"
 #import "FUICustomAuthDelegate.h"
-
-#import <FirebaseAuthUI/FirebaseAuthUI.h>
-#import <FirebaseFacebookAuthUI/FUIFacebookAuth.h>
-#import <FirebaseGoogleAuthUI/FUIGoogleAuth.h>
-#import <FirebaseTwitterAuthUI/FUITwitterAuth.h>
-#import <FirebasePhoneAuthUI/FUIPhoneAuth.h>
 
 #import "FUICustomAuthPickerViewController.h"
 

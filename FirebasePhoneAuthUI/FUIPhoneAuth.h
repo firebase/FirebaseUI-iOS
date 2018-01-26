@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import <FirebaseAuthUI/FUIAuth.h>
+#import "FUIAuth.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

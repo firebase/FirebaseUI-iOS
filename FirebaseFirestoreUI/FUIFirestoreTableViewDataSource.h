@@ -20,7 +20,7 @@
 
 @import UIKit;
 
-#import <FirebaseFirestoreUI/FUIBatchedArray.h>
+#import "FUIBatchedArray.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

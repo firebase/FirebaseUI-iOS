@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @class FIRAuth;
 @class FIRUser;

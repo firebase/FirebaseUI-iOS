@@ -16,7 +16,7 @@
 
 @import FirebaseDatabase;
 
-#import <FirebaseDatabaseUI/FirebaseDatabaseUI.h>
+#import "FirebaseDatabaseUI.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

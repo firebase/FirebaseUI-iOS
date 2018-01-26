@@ -16,7 +16,7 @@
 
 import UIKit
 import Firebase
-import FirebaseAuthUI
+import FirebaseUI
 import GTMSessionFetcher
 import TwitterKit
 
