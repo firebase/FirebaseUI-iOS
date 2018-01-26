@@ -13,35 +13,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.public_header_files = 'FirebaseUI/FirebaseUI.h'
   s.source_files = 'FirebaseUI/FirebaseUI.h'
-  # s.default_subspecs = 'All'
-  # s.source_files = ['FirebaseDatabaseUI/**/*.{h,m}',
-  #                   'FirebaseFirestoreUI/**/*.{h,m}',
-  #                   'FirebaseStorageUI/**/*.{h,m}',
-  #                   'FirebaseAuthUI/**/*.{h,m}',
-  #                   'FirebaseFacebookAuthUI/**/*.{h,m}',
-  #                   'FirebaseGoogleAuthUI/**/*.{h,m}',
-  #                   'FirebasePhoneAuthUI/**/*.{h,m}',
-  #                   'FirebaseTwitterAuthUI/**/*.{h,m}',]
-
-  # s.subspec 'All' do |all|
-  #   all.platform = :ios, '9.0'
-  #   all.dependency 'FirebaseUI/Database'
-  #   all.dependency 'FirebaseUI/Storage'
-  #   all.dependency 'FirebaseUI/Auth'
-  #   all.dependency 'FirebaseUI/Facebook'
-  #   all.dependency 'FirebaseUI/Google'
-  #   all.dependency 'FirebaseUI/Phone'
-  #   all.dependency 'FirebaseUI/Twitter'
-  #   all.dependency 'FirebaseUI/Firestore'
-  #   all.source_files = ['FirebaseDatabaseUI/**/*.{h,m}',
-  #                       'FirebaseFirestoreUI/**/*.{h,m}',
-  #                       'FirebaseStorageUI/**/*.{h,m}',
-  #                       'FirebaseAuthUI/**/*.{h,m}',
-  #                       'FirebaseFacebookAuthUI/**/*.{h,m}',
-  #                       'FirebaseGoogleAuthUI/**/*.{h,m}',
-  #                       'FirebasePhoneAuthUI/**/*.{h,m}',
-  #                       'FirebaseTwitterAuthUI/**/*.{h,m}',]
-  # end
 
   s.subspec 'Database' do |database|
     database.platform = :ios, '8.0'
