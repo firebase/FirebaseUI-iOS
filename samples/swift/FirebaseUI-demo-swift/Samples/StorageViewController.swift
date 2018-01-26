@@ -16,7 +16,7 @@
 
 import UIKit
 
-import FirebaseStorageUI
+import FirebaseUI
 
 class StorageViewController: UIViewController {
 

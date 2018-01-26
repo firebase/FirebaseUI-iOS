@@ -23,4 +23,4 @@ FOUNDATION_EXPORT double FirebaseStorageUIVersionNumber;
 //! Project version string for FirebaseStorageUI.
 FOUNDATION_EXPORT const unsigned char FirebaseStorageUIVersionString[];
 
-#import <FirebaseStorageUI/UIImageView+FirebaseStorage.h>
+#import "UIImageView+FirebaseStorage.h"
