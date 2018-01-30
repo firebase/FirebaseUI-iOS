@@ -148,8 +148,18 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.section == kSectionsAnonymousSignIn && indexPath.row == 0) {
-    if (_authUI.auth.currentUser.isAnonymous) {
-      [self showAlertWithTitlte:@"" message:@"Already signed in anonymously"];
+    FIRUser *currentUser = self.authUI.auth.currentUser;
+    if (currentUser.isAnonymous) {
+      // If the user is anonymous, delete the user to avoid dangling anonymous users.
+      if (currentUser.isAnonymous) {
+        [currentUser deleteWithCompletion:^(NSError * _Nullable error) {
+          if (error) {
+            [self showAlertWithTitlte:@"Error" message:error.localizedDescription];
+            return;
+          }
+          [self showAlertWithTitlte:@"" message:@"Anonymous user deleted"];
+        }];
+      }
       [tableView deselectRowAtIndexPath:indexPath animated:NO];
       return;
     }
@@ -179,12 +189,15 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
     self.cellUID.textLabel.text = user.uid;
 
     // If the user is anonymous, delete the user to avoid dangling anonymous users.
-    if (self.authUI.auth.currentUser.isAnonymous) {
-      self.buttonAuthorization.title = @"Delete Anonymous User";
-    } else {
+    if (auth.currentUser.isAnonymous) {
+      [_anonymousSignIn.textLabel setText:@"Delete Anonymous User"];
+    }
+    else {
+      [_anonymousSignIn.textLabel setText:@"Sign In Anonymously"];
       self.buttonAuthorization.title = @"Sign Out";
     }
   } else {
+    [_anonymousSignIn.textLabel setText:@"Sign In Anonymously"];
     self.cellSignIn.textLabel.text = @"Not signed-in";
     self.cellName.textLabel.text = @"";
     self.cellEmail.textLabel.text = @"";
@@ -215,8 +228,8 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
 }
 
 - (IBAction)onAuthorization:(id)sender {
-  if (!self.auth.currentUser) {
-
+  if (!_auth.currentUser || _auth.currentUser.isAnonymous) {
+    FUIAuth.defaultAuthUI.autoUpgradeAnonymousUsers = YES;
     _authUI.providers = [self getListOfIDPs];
     _authUI.signInWithEmailHidden = ![self isEmailEnabled];
 
@@ -247,13 +260,31 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
   if (error) {
     if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
       [self showAlertWithTitlte:@"Error" message:error.localizedDescription];
-    } else {
-      NSError *detailedError = error.userInfo[NSUnderlyingErrorKey];
-      if (!detailedError) {
-        detailedError = error;
-      }
-      NSLog(@"ERROR: %@", detailedError.localizedDescription);
+      return;
     }
+    if (error.code == FUIAuthErrorCodeMergeConflict) {
+      FIRAuthCredential *credential = error.userInfo[FUIAuthCredentialKey];
+      NSString *anonymousUserID = authUI.auth.currentUser.uid;
+      NSString *messsage = [NSString stringWithFormat:@"A merge conflict occurred. The old user ID "
+          "was: %@. You are now sig in with the following credential type: %@", anonymousUserID,
+          [credential.provider uppercaseString]];
+      [self showAlertWithTitlte:@"Merge Conflict" message:messsage];
+      NSLog(@"%@", messsage);
+      [[FUIAuth defaultAuthUI].auth
+          signInAndRetrieveDataWithCredential:credential
+                                   completion:^(FIRAuthDataResult *_Nullable authResult,
+                                                NSError *_Nullable error) {
+        if (error) {
+          NSLog(@"%@",error.description);
+        }
+      }];
+      return;
+    }
+    NSError *detailedError = error.userInfo[NSUnderlyingErrorKey];
+    if (!detailedError) {
+      detailedError = error;
+    }
+    NSLog(@"ERROR: %@", detailedError.localizedDescription);
   }
 }
 
@@ -279,21 +310,9 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
 
 - (void)signOut {
   NSError *error;
-  FIRUser *currentUser = self.authUI.auth.currentUser;
-  // If the user is anonymous, delete the user to avoid dangling anonymous users.
-  if (currentUser.isAnonymous) {
-    [currentUser deleteWithCompletion:^(NSError * _Nullable error) {
-      if (error) {
-        [self showAlertWithTitlte:@"Error" message:error.localizedDescription];
-        return;
-      }
-      [self showAlertWithTitlte:@"" message:@"Anonymous user deleted"];
-    }];
-  } else {
-    [self.authUI signOutWithError:&error];
-    if (error) {
-      [self showAlertWithTitlte:@"Error" message:error.localizedDescription];
-    }
+  [self.authUI signOutWithError:&error];
+  if (error) {
+    [self showAlertWithTitlte:@"Error" message:error.localizedDescription];
   }
 }
 
