@@ -175,17 +175,18 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
     }
 
     // Block to complete sign-in
-    void (^completeSignInBlock)(FIRAuthDataResult *) = ^(FIRAuthDataResult *authResult){
+    void (^completeSignInBlock)(FIRAuthDataResult *, NSError *) = ^(FIRAuthDataResult *authResult,
+                                                                    NSError *error) {
       if (result) {
         result(authResult.user, nil);
       }
       // Hide Auth Picker Controller which was presented modally.
       if (isAuthPickerShown && presentingViewController.presentingViewController) {
         [presentingViewController dismissViewControllerAnimated:YES completion:^{
-          [self invokeResultCallbackWithAuthDataResult:authResult error:nil];
+          [self invokeResultCallbackWithAuthDataResult:authResult error:error];
         }];
       } else {
-        [self invokeResultCallbackWithAuthDataResult:authResult error:nil];
+        [self invokeResultCallbackWithAuthDataResult:authResult error:error];
       }
     };
 
@@ -210,10 +211,9 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                                              code:FUIAuthErrorCodeMergeConflict
                                          userInfo:userInfo];
             result(nil, mergeError);
-            [self invokeResultCallbackWithAuthDataResult:nil error:mergeError];
+            completeSignInBlock(authResult, mergeError);
           }
         }
-        completeSignInBlock(authResult);
       }];
     } else {
       [self.auth signInAndRetrieveDataWithCredential:credential
@@ -234,7 +234,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
           }
           [self invokeResultCallbackWithAuthDataResult:nil error:error];
         } else {
-          completeSignInBlock(authResult);
+          completeSignInBlock(authResult, nil);
         }
       }];
     }
