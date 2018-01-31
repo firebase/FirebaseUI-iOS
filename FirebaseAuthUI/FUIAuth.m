@@ -197,11 +197,13 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                                  completion:^(FIRAuthDataResult *_Nullable authResult,
                                               NSError * _Nullable error) {
         if (error) {
-          // Handle error cases
-          NSError *mergeError;
-          FIRAuthCredential *newCredential = credential;
+          // Check for "credential in use" conflict error and handle appropriately.
           if (error.code == FIRAuthErrorCodeCredentialAlreadyInUse) {
+            NSError *mergeError;
+            FIRAuthCredential *newCredential = credential;
+            // Check for and handle special case for Phone Auth Provider.
             if (providerUI.providerID == FIRPhoneAuthProviderID) {
+              // Obtain temporary Phone Auth provider.
               newCredential = error.userInfo[FIRAuthUpdatedCredentialKey];
             }
             NSDictionary *userInfo = @{
@@ -233,9 +235,9 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
             result(nil, error);
           }
           [self invokeResultCallbackWithAuthDataResult:nil error:error];
-        } else {
-          completeSignInBlock(authResult, nil);
+          return;
         }
+        completeSignInBlock(authResult, nil);
       }];
     }
   }];
