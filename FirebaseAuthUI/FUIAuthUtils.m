@@ -26,6 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
   NSBundle *frameworkBundle = nil;
   if (bundleName) {
     NSString *path = [[NSBundle mainBundle] pathForResource:bundleName ofType:@"bundle"];
+    if (path == nil) {
+      // Check framework resources if bundle isn't present in main bundle.
+      path = [[NSBundle mainBundle] pathForResource:bundleName ofType:@"framework"];
+    }
     frameworkBundle = [NSBundle bundleWithPath:path];
   } else {
     frameworkBundle = [NSBundle bundleForClass:[self class]];
