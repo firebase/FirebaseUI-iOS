@@ -212,8 +212,15 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
             mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
                                              code:FUIAuthErrorCodeMergeConflict
                                          userInfo:userInfo];
-            result(nil, mergeError);
-            completeSignInBlock(authResult, mergeError);
+            result(nil, error);
+            completeSignInBlock(authResult, error);
+          } else {
+            if (!isAuthPickerShown || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
+              [self invokeResultCallbackWithAuthDataResult:nil error:error];
+            }
+            if (result) {
+              result(nil, error);
+            }
           }
         }
       }];
@@ -229,7 +236,6 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                                 singInResult:result];
           return;
         }
-
         if (error) {
           if (result) {
             result(nil, error);
