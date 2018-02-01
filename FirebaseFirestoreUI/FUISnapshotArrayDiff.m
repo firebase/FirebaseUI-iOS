@@ -14,9 +14,9 @@
 //  limitations under the License.
 //
 
-#import "FUISnapshotArrayDiff.h"
+#import <FirebaseFirestore/FirebaseFirestore.h>
 
-@import FirebaseFirestore;
+#import "FUISnapshotArrayDiff.h"
 
 @interface FUIArraySlice ()
 

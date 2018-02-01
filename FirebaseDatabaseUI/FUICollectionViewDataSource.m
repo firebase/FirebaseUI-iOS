@@ -21,8 +21,6 @@
 #import "FUICollectionViewDataSource.h"
 #import "FUIArray.h"
 
-@import FirebaseDatabase;
-
 @interface FUICollectionViewDataSource () <FUICollectionDelegate>
 
 @property (nonatomic, readonly, nonnull) id<FUICollection> collection;

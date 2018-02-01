@@ -20,8 +20,6 @@
 
 #import "FUIFirestoreTableViewDataSource.h"
 
-@import FirebaseFirestore;
-
 @interface FUIFirestoreTableViewDataSource () <FUIBatchedArrayDelegate>
 
 @property (strong, nonatomic, readwrite) UITableViewCell *(^populateCell)

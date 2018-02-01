@@ -21,8 +21,6 @@
 #import "FUIArray.h"
 #import "FUITableViewDataSource.h"
 
-@import FirebaseDatabase;
-
 @interface FUITableViewDataSource () <FUICollectionDelegate>
 
 @property (strong, nonatomic, readwrite) UITableViewCell *(^populateCell)
