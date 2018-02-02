@@ -156,17 +156,10 @@ target 'Firestore' do
 end
 
 target 'FirebaseUISample' do
+  use_frameworks!
   platform :ios, '9.0'
 
   pod 'OCMock'
-
-  pod 'FirebaseAuthUI', :path => "FirebaseUI_dev_auth.podspec"
-  pod 'FirebaseDatabaseUI', :path => "FirebaseUI_dev_db.podspec"
-  pod 'FirebaseStorageUI', :path => "FirebaseUI_dev_storage.podspec"
-  pod 'FirebaseFacebookAuthUI', :path => "FirebaseUI_dev_fb.podspec"
-  pod 'FirebaseGoogleAuthUI', :path => "FirebaseUI_dev_ggl.podspec"
-  pod 'FirebasePhoneAuthUI', :path => "FirebaseUI_dev_phone.podspec"
-  pod 'FirebaseTwitterAuthUI', :path => "FirebaseUI_dev_tw.podspec"
 
   target 'FirebaseUISampleUITests' do
     inherit! :search_paths

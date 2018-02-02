@@ -14,9 +14,8 @@
 //  limitations under the License.
 //
 
-@import UIKit;
-
-@import FirebaseDatabase;
+#import <FirebaseDatabase/FirebaseDatabase.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

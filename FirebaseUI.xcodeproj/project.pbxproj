@@ -8,6 +8,48 @@
 
 /* Begin PBXBuildFile section */
 		8D01FC7B1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D01FC7A1DAEC2FF00BD7848 /* FUIIndexCollectionViewDataSourceTest.m */; };
+		8D0439922023962400D0372F /* FUIAccountSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE73B11E64D1D000BCD147 /* FUIAccountSettingsViewController.xib */; };
+		8D0439932023962400D0372F /* FUIInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE73BC1E64D1D000BCD147 /* FUIInputTableViewCell.xib */; };
+		8D0439942023962400D0372F /* FUIPasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE73BD1E64D1D000BCD147 /* FUIPasswordTableViewCell.xib */; };
+		8D0439952023962400D0372F /* FUIAuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9414D1D678F5400CD3685 /* FUIAuthPickerViewController.xib */; };
+		8D0439962023962400D0372F /* FUIAuthTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941601D678F5400CD3685 /* FUIAuthTableViewCell.xib */; };
+		8D0439972023962400D0372F /* FUIEmailEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941651D678F5400CD3685 /* FUIEmailEntryViewController.xib */; };
+		8D0439982023962400D0372F /* FUIPasswordRecoveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941681D678F5400CD3685 /* FUIPasswordRecoveryViewController.xib */; };
+		8D0439992023962400D0372F /* FUIPasswordSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9416B1D678F5400CD3685 /* FUIPasswordSignInViewController.xib */; };
+		8D04399A2023962400D0372F /* FUIPasswordSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9416E1D678F5400CD3685 /* FUIPasswordSignUpViewController.xib */; };
+		8D04399B2023962400D0372F /* FUIPasswordVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941711D678F5400CD3685 /* FUIPasswordVerificationViewController.xib */; };
+		8D04399C2023962400D0372F /* FUIStaticContentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE738B1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib */; };
+		8D04399D2023962400D0372F /* FUICountryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3204F0B1E98340400841149 /* FUICountryTableViewController.xib */; };
+		8D04399E2023962400D0372F /* FUICodeField.xib in Resources */ = {isa = PBXBuildFile; fileRef = C37296831E95C83900F3FCCC /* FUICodeField.xib */; };
+		8D04399F2023962400D0372F /* FUIPhoneEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A201731E9597DA0040563F /* FUIPhoneEntryViewController.xib */; };
+		8D0439A02023962400D0372F /* FUIPhoneVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A201761E9597DA0040563F /* FUIPhoneVerificationViewController.xib */; };
+		8D0439A1202396E000D0372F /* ic_email.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9419B1D67904200CD3685 /* ic_email.png */; };
+		8D0439A2202396E000D0372F /* ic_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9419C1D67904200CD3685 /* ic_email@2x.png */; };
+		8D0439A3202396E000D0372F /* ic_email@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9419D1D67904200CD3685 /* ic_email@3x.png */; };
+		8D0439A4202396E000D0372F /* ic_visibility_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9419E1D67904200CD3685 /* ic_visibility_off.png */; };
+		8D0439A5202396E000D0372F /* ic_visibility_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9419F1D67904200CD3685 /* ic_visibility_off@2x.png */; };
+		8D0439A6202396E000D0372F /* ic_visibility_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941A01D67904200CD3685 /* ic_visibility_off@3x.png */; };
+		8D0439A7202396E000D0372F /* ic_visibility.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941A11D67904200CD3685 /* ic_visibility.png */; };
+		8D0439A8202396E000D0372F /* ic_visibility@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941A21D67904200CD3685 /* ic_visibility@2x.png */; };
+		8D0439A9202396E000D0372F /* ic_visibility@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941A31D67904200CD3685 /* ic_visibility@3x.png */; };
+		8D0439AA202396E000D0372F /* FirebaseAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = C38F4F7E1EE24A94008B2250 /* FirebaseAuthUI.strings */; };
+		8D0439AB202396E000D0372F /* ic_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DA1D6793EE00CD3685 /* ic_facebook.png */; };
+		8D0439AC202396E000D0372F /* ic_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DB1D6793EE00CD3685 /* ic_facebook@2x.png */; };
+		8D0439AD202396E000D0372F /* ic_facebook@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941DC1D6793EE00CD3685 /* ic_facebook@3x.png */; };
+		8D0439AE202396E000D0372F /* FirebaseFacebookAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = C38F4FCF1EE24ABA008B2250 /* FirebaseFacebookAuthUI.strings */; };
+		8D0439AF202396E000D0372F /* ic_google.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941BC1D67923F00CD3685 /* ic_google.png */; };
+		8D0439B0202396E000D0372F /* ic_google@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941BD1D67923F00CD3685 /* ic_google@2x.png */; };
+		8D0439B1202396E000D0372F /* ic_google@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941BE1D67923F00CD3685 /* ic_google@3x.png */; };
+		8D0439B2202396E000D0372F /* FirebaseGoogleAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = C38F50221EE24B22008B2250 /* FirebaseGoogleAuthUI.strings */; };
+		8D0439B3202396E000D0372F /* country-codes.json in Resources */ = {isa = PBXBuildFile; fileRef = C3D718F51E9F133500F734D8 /* country-codes.json */; };
+		8D0439B4202396E000D0372F /* ic_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = C3773B791E92C36400ACF58C /* ic_phone.png */; };
+		8D0439B5202396E000D0372F /* ic_phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3773B7A1E92C36400ACF58C /* ic_phone@2x.png */; };
+		8D0439B6202396E000D0372F /* ic_phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3773B7B1E92C36400ACF58C /* ic_phone@3x.png */; };
+		8D0439B7202396E000D0372F /* FirebasePhoneAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = C38F50731EE24B94008B2250 /* FirebasePhoneAuthUI.strings */; };
+		8D0439B8202396E000D0372F /* ic_twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D01D89ECF1005C031D /* ic_twitter.png */; };
+		8D0439B9202396E000D0372F /* ic_twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D11D89ECF1005C031D /* ic_twitter@2x.png */; };
+		8D0439BA202396E000D0372F /* ic_twitter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C380A7D21D89ECF1005C031D /* ic_twitter@3x.png */; };
+		8D0439BB202396E000D0372F /* FirebaseTwitterAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = C38F50C41EE24BB0008B2250 /* FirebaseTwitterAuthUI.strings */; };
 		8D14BD0C1F840A4D0081997C /* FUIFirestoreTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4B6BBF1F69EB2900C4A14B /* FUIFirestoreTableViewDataSource.m */; };
 		8D1E107C1DAEB97300AEFCA0 /* FUIIndexTableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1E107B1DAEB97300AEFCA0 /* FUIIndexTableViewDataSourceTest.m */; };
 		8D2A84AA1D678B2B0058DF04 /* FirebaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D2A84A91D678B2B0058DF04 /* FirebaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -31,6 +73,11 @@
 		8D559D721F68A85B00CE9D8A /* FUISnapshotArrayDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D559D6A1F68A85B00CE9D8A /* FUISnapshotArrayDiff.m */; };
 		8D559D731F68A85B00CE9D8A /* FUISnapshotArrayDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D559D6A1F68A85B00CE9D8A /* FUISnapshotArrayDiff.m */; };
 		8D559D771F68A86E00CE9D8A /* FUISnapshotArrayDiffTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D559D751F68A86E00CE9D8A /* FUISnapshotArrayDiffTest.m */; };
+		8D5BD09E2023BDBA00300E84 /* FirebaseAuthUI.framework in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC4FC11D678CDC00B0D3C4 /* FirebaseAuthUI.framework */; };
+		8D5BD09F2023BDBA00300E84 /* FirebaseFacebookAuthUI.framework in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC4FDD1D678CE800B0D3C4 /* FirebaseFacebookAuthUI.framework */; };
+		8D5BD0A02023BDBA00300E84 /* FirebaseGoogleAuthUI.framework in Resources */ = {isa = PBXBuildFile; fileRef = 8DCC4FF91D678CF500B0D3C4 /* FirebaseGoogleAuthUI.framework */; };
+		8D5BD0A12023BDBA00300E84 /* FirebaseTwitterAuthUI.framework in Resources */ = {isa = PBXBuildFile; fileRef = C32516921D88A54C00B0B3F9 /* FirebaseTwitterAuthUI.framework */; };
+		8D5BD0A22023BDBA00300E84 /* FirebasePhoneAuthUI.framework in Resources */ = {isa = PBXBuildFile; fileRef = C3773B541E8EFDEA00ACF58C /* FirebasePhoneAuthUI.framework */; };
 		8D777BF71F732DD700F3B0D9 /* FUIPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = C310EAFF1F67524400666879 /* FUIPhoneNumber.m */; };
 		8D78AF061D9D8CB000CFA9C5 /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */; };
 		8D7AD9B71D9317FB006866B9 /* UIImageView+FirebaseStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7AD9B51D9317FB006866B9 /* UIImageView+FirebaseStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -358,6 +405,13 @@
 			remoteGlobalIDString = 8DCC4FF81D678CF500B0D3C4;
 			remoteInfo = FirebaseGoogleAuthUI;
 		};
+		8DEBE1022023B8C600F99BF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D2A84A51D678B2B0058DF04;
+			remoteInfo = FirebaseUI;
+		};
 		8DFB54731F68AAA2005972D4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
@@ -378,13 +432,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = C329B1371DA8694A00059A13;
 			remoteInfo = FirebaseUISample;
-		};
-		C329B16C1DA879CD00059A13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8D2A84A51D678B2B0058DF04;
-			remoteInfo = FirebaseUI;
 		};
 		C3773B5E1E8EFDEB00ACF58C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -529,7 +576,11 @@
 		8D559D691F68A85B00CE9D8A /* FUISnapshotArrayDiff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISnapshotArrayDiff.h; sourceTree = "<group>"; };
 		8D559D6A1F68A85B00CE9D8A /* FUISnapshotArrayDiff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISnapshotArrayDiff.m; sourceTree = "<group>"; };
 		8D559D751F68A86E00CE9D8A /* FUISnapshotArrayDiffTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISnapshotArrayDiffTest.m; sourceTree = "<group>"; };
+		8D5BD09D2023BB2500300E84 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GTMSessionFetcher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D60505E1DCA8EB8005D8635 /* FUISortedArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISortedArrayTest.m; sourceTree = "<group>"; };
+		8D7AA8232023B661000DDB76 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		8D7AA8252023B669000DDB76 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		8D7AA8272023B66E000DDB76 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		8D7AD9B51D9317FB006866B9 /* UIImageView+FirebaseStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+FirebaseStorage.h"; sourceTree = "<group>"; };
 		8D7AD9B61D9317FB006866B9 /* UIImageView+FirebaseStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+FirebaseStorage.m"; sourceTree = "<group>"; };
 		8D9084201D93168800333CC8 /* libStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1763,6 +1814,10 @@
 		903F73EA092681D67581F496 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D5BD09D2023BB2500300E84 /* GTMSessionFetcher.framework */,
+				8D7AA8272023B66E000DDB76 /* AddressBook.framework */,
+				8D7AA8252023B669000DDB76 /* libsqlite3.tbd */,
+				8D7AA8232023B661000DDB76 /* libc++.tbd */,
 				8D5247E3200435FB00575A46 /* TwitterKit.framework */,
 				8D5247E1200435D300575A46 /* TwitterCore.framework */,
 				8DCF7AD31DC009C1004E19CA /* GTMOAuth2.framework */,
@@ -2527,7 +2582,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				C329B16D1DA879CD00059A13 /* PBXTargetDependency */,
+				8DEBE1032023B8C600F99BF6 /* PBXTargetDependency */,
 			);
 			name = FirebaseUISample;
 			productName = FirebaseUISample;
@@ -2986,6 +3041,53 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D5BD09E2023BDBA00300E84 /* FirebaseAuthUI.framework in Resources */,
+				8D5BD09F2023BDBA00300E84 /* FirebaseFacebookAuthUI.framework in Resources */,
+				8D5BD0A02023BDBA00300E84 /* FirebaseGoogleAuthUI.framework in Resources */,
+				8D5BD0A12023BDBA00300E84 /* FirebaseTwitterAuthUI.framework in Resources */,
+				8D5BD0A22023BDBA00300E84 /* FirebasePhoneAuthUI.framework in Resources */,
+				8D0439A1202396E000D0372F /* ic_email.png in Resources */,
+				8D0439A2202396E000D0372F /* ic_email@2x.png in Resources */,
+				8D0439A3202396E000D0372F /* ic_email@3x.png in Resources */,
+				8D0439A4202396E000D0372F /* ic_visibility_off.png in Resources */,
+				8D0439A5202396E000D0372F /* ic_visibility_off@2x.png in Resources */,
+				8D0439A6202396E000D0372F /* ic_visibility_off@3x.png in Resources */,
+				8D0439A7202396E000D0372F /* ic_visibility.png in Resources */,
+				8D0439A8202396E000D0372F /* ic_visibility@2x.png in Resources */,
+				8D0439A9202396E000D0372F /* ic_visibility@3x.png in Resources */,
+				8D0439AA202396E000D0372F /* FirebaseAuthUI.strings in Resources */,
+				8D0439AB202396E000D0372F /* ic_facebook.png in Resources */,
+				8D0439AC202396E000D0372F /* ic_facebook@2x.png in Resources */,
+				8D0439AD202396E000D0372F /* ic_facebook@3x.png in Resources */,
+				8D0439AE202396E000D0372F /* FirebaseFacebookAuthUI.strings in Resources */,
+				8D0439AF202396E000D0372F /* ic_google.png in Resources */,
+				8D0439B0202396E000D0372F /* ic_google@2x.png in Resources */,
+				8D0439B1202396E000D0372F /* ic_google@3x.png in Resources */,
+				8D0439B2202396E000D0372F /* FirebaseGoogleAuthUI.strings in Resources */,
+				8D0439B3202396E000D0372F /* country-codes.json in Resources */,
+				8D0439B4202396E000D0372F /* ic_phone.png in Resources */,
+				8D0439B5202396E000D0372F /* ic_phone@2x.png in Resources */,
+				8D0439B6202396E000D0372F /* ic_phone@3x.png in Resources */,
+				8D0439B7202396E000D0372F /* FirebasePhoneAuthUI.strings in Resources */,
+				8D0439B8202396E000D0372F /* ic_twitter.png in Resources */,
+				8D0439B9202396E000D0372F /* ic_twitter@2x.png in Resources */,
+				8D0439BA202396E000D0372F /* ic_twitter@3x.png in Resources */,
+				8D0439BB202396E000D0372F /* FirebaseTwitterAuthUI.strings in Resources */,
+				8D0439922023962400D0372F /* FUIAccountSettingsViewController.xib in Resources */,
+				8D0439932023962400D0372F /* FUIInputTableViewCell.xib in Resources */,
+				8D0439942023962400D0372F /* FUIPasswordTableViewCell.xib in Resources */,
+				8D0439952023962400D0372F /* FUIAuthPickerViewController.xib in Resources */,
+				8D0439962023962400D0372F /* FUIAuthTableViewCell.xib in Resources */,
+				8D0439972023962400D0372F /* FUIEmailEntryViewController.xib in Resources */,
+				8D0439982023962400D0372F /* FUIPasswordRecoveryViewController.xib in Resources */,
+				8D0439992023962400D0372F /* FUIPasswordSignInViewController.xib in Resources */,
+				8D04399A2023962400D0372F /* FUIPasswordSignUpViewController.xib in Resources */,
+				8D04399B2023962400D0372F /* FUIPasswordVerificationViewController.xib in Resources */,
+				8D04399C2023962400D0372F /* FUIStaticContentTableViewController.xib in Resources */,
+				8D04399D2023962400D0372F /* FUICountryTableViewController.xib in Resources */,
+				8D04399E2023962400D0372F /* FUICodeField.xib in Resources */,
+				8D04399F2023962400D0372F /* FUIPhoneEntryViewController.xib in Resources */,
+				8D0439A02023962400D0372F /* FUIPhoneVerificationViewController.xib in Resources */,
 				C38F4F7A1EE24A2E008B2250 /* LaunchScreen.storyboard in Resources */,
 				C329B1471DA8694A00059A13 /* Assets.xcassets in Resources */,
 				C38F4F791EE24A2E008B2250 /* Localizable.strings in Resources */,
@@ -3414,6 +3516,11 @@
 			target = 8DCC4FF81D678CF500B0D3C4 /* FirebaseGoogleAuthUI */;
 			targetProxy = 8DCC50161D678D1200B0D3C4 /* PBXContainerItemProxy */;
 		};
+		8DEBE1032023B8C600F99BF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D2A84A51D678B2B0058DF04 /* FirebaseUI */;
+			targetProxy = 8DEBE1022023B8C600F99BF6 /* PBXContainerItemProxy */;
+		};
 		8DFB54741F68AAA2005972D4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8D559D401F68A7F100CE9D8A /* FirebaseFirestoreUI */;
@@ -3428,11 +3535,6 @@
 			isa = PBXTargetDependency;
 			target = C329B1371DA8694A00059A13 /* FirebaseUISample */;
 			targetProxy = C329B15C1DA8694B00059A13 /* PBXContainerItemProxy */;
-		};
-		C329B16D1DA879CD00059A13 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8D2A84A51D678B2B0058DF04 /* FirebaseUI */;
-			targetProxy = C329B16C1DA879CD00059A13 /* PBXContainerItemProxy */;
 		};
 		C3773B5F1E8EFDEB00ACF58C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4739,7 +4841,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3 ${BUILT_PRODUCTS_DIR}/nanopb-framework-iOS8.0";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit ${BUILT_PRODUCTS_DIR}/GTMOAuth2 ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib-iOS8.0 ${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4759,7 +4861,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3 ${BUILT_PRODUCTS_DIR}/nanopb-framework-iOS8.0";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit ${BUILT_PRODUCTS_DIR}/GTMOAuth2 ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib-iOS8.0 ${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4841,7 +4943,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseGoogleAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3 ${BUILT_PRODUCTS_DIR}/nanopb-framework-iOS8.0";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) ${BUILT_PRODUCTS_DIR}/GTMOAuth2 ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib-iOS8.0 ${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0";
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -4870,7 +4972,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseGoogleAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3 ${BUILT_PRODUCTS_DIR}/nanopb-framework-iOS8.0";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) ${BUILT_PRODUCTS_DIR}/GTMOAuth2 ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib-iOS8.0 ${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0";
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -4914,39 +5016,6 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
-					"-l\"c++\"",
-					"-l\"sqlite3\"",
-					"-l\"z\"",
-					"-framework",
-					"\"AVFoundation\"",
-					"-framework",
-					"\"Accounts\"",
-					"-framework",
-					"\"AddressBook\"",
-					"-framework",
-					"\"CoreData\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"CoreMedia\"",
-					"-framework",
-					"\"CoreText\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"SafariServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"Social\"",
-					"-framework",
-					"\"StoreKit\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-framework",
-					"\"TwitterCore\"",
-					"-framework",
-					"\"TwitterKit\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4980,39 +5049,6 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
-					"-l\"c++\"",
-					"-l\"sqlite3\"",
-					"-l\"z\"",
-					"-framework",
-					"\"AVFoundation\"",
-					"-framework",
-					"\"Accounts\"",
-					"-framework",
-					"\"AddressBook\"",
-					"-framework",
-					"\"CoreData\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"CoreMedia\"",
-					"-framework",
-					"\"CoreText\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"SafariServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"Social\"",
-					"-framework",
-					"\"StoreKit\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-framework",
-					"\"TwitterCore\"",
-					"-framework",
-					"\"TwitterKit\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5031,8 +5067,8 @@
 				);
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3 ${BUILT_PRODUCTS_DIR}/nanopb-framework-iOS8.0";
-				OTHER_LDFLAGS = "${inherited}";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2 ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib-iOS8.0 ${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REEXPORTED_FRAMEWORK_NAMES = "";
@@ -5050,8 +5086,8 @@
 				);
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-framework ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3 ${BUILT_PRODUCTS_DIR}/nanopb-framework-iOS8.0";
-				OTHER_LDFLAGS = "${inherited}";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2 ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib-iOS8.0 ${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REEXPORTED_FRAMEWORK_NAMES = "";
@@ -5098,11 +5134,16 @@
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
-					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks",
+					"\"$(PODS_ROOT)/FirebaseCore/Frameworks\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core\"",
 				);
 				INFOPLIST_FILE = FirebaseUISample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @rpath \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core\" \"$(PODS_ROOT)/TwitterKit/iOS\" \"$(PODS_ROOT)/TwitterCore/iOS\" \"$(PODS_CONFIGURATION_BUILD_DIR)/Bolts\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKLoginKit\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKCoreKit\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-Defines-NSData+zlib-iOS8.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/OCMock-framework-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-ProtoRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/Protobuf-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-RxLibrary-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/SDWebImage-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-Core-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/leveldb-library-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/BoringSSL-iOS9.0\" @executable_path @loader_path/Frameworks \"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb-iOS8.0\"";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseUISample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -5122,11 +5163,16 @@
 					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
-					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks",
+					"\"$(PODS_ROOT)/FirebaseCore/Frameworks\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core\"",
 				);
 				INFOPLIST_FILE = FirebaseUISample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @rpath \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core\" \"$(PODS_ROOT)/TwitterKit/iOS\" \"$(PODS_ROOT)/TwitterCore/iOS\" \"$(PODS_CONFIGURATION_BUILD_DIR)/Bolts\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKLoginKit\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKCoreKit\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-Defines-NSData+zlib-iOS8.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/OCMock-framework-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-ProtoRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/Protobuf-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-RxLibrary-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/SDWebImage-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-Core-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/leveldb-library-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/BoringSSL-iOS9.0\" @executable_path @loader_path/Frameworks \"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb-iOS8.0\"";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseUISample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -5144,87 +5190,13 @@
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\"",
-					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\"",
 				);
 				INFOPLIST_FILE = FirebaseUISampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\" \"$(PODS_ROOT)/TwitterKit/iOS\" \"$(PODS_ROOT)/TwitterCore/iOS\"";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-framework\" \"$(PODS_ROOT)/TwitterKit/iOS\" \"$(PODS_ROOT)/TwitterCore/iOS\" \"$(PODS_CONFIGURATION_BUILD_DIR)/Bolts-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKLoginKit-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKCoreKit-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-3f10cfc8\" \"$(PODS_CONFIGURATION_BUILD_DIR)/OCMock-framework-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-ProtoRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/Protobuf-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-RxLibrary-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/SDWebImage-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-Core-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/leveldb-library-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/BoringSSL-iOS9.0\" @executable_path @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
-					"-l\"c++\"",
-					"-l\"icucore\"",
-					"-l\"sqlite3\"",
-					"-l\"GTMSessionFetcher.default-Core-library\"",
-					"-l\"leveldb-library-library\"",
-					"-l\"GTMOAuth2-library\"",
-					"-l\"z\"",
-					"-framework",
-					"\"AVFoundation\"",
-					"-framework",
-					"\"Accounts\"",
-					"-framework",
-					"\"AddressBook\"",
-					"-framework",
-					"\"CFNetwork\"",
-					"-framework",
-					"\"CoreData\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"CoreMedia\"",
-					"-framework",
-					"\"CoreText\"",
-					"-framework",
-					"\"FirebaseAuth\"",
-					"-framework",
-					"\"FirebaseCore\"",
-					"-framework",
-					"\"FirebaseDatabase\"",
-					"-framework",
-					"\"FirebaseInstanceID\"",
-					"-framework",
-					"\"FirebaseStorage\"",
-					"-framework",
-					"\"Foundation\"",
-					"-framework",
-					"\"GoogleSignIn\"",
-					"-framework",
-					"\"ImageIO\"",
-					"-framework",
-					"\"MobileCoreServices\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"SafariServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"Social\"",
-					"-framework",
-					"\"StoreKit\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-framework",
-					"\"UIKit\"",
-					"-weak_framework",
-					"\"Accounts\"",
-					"-weak_framework",
-					"\"AudioToolbox\"",
-					"-weak_framework",
-					"\"CoreGraphics\"",
-					"-weak_framework",
-					"\"CoreLocation\"",
-					"-weak_framework",
-					"\"Foundation\"",
-					"-weak_framework",
-					"\"QuartzCore\"",
-					"-weak_framework",
-					"\"Security\"",
-					"-weak_framework",
-					"\"Social\"",
-					"-weak_framework",
-					"\"UIKit\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseUISampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5244,87 +5216,13 @@
 					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\"",
-					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\"",
 				);
 				INFOPLIST_FILE = FirebaseUISampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\" \"$(PODS_ROOT)/TwitterKit/iOS\" \"$(PODS_ROOT)/TwitterCore/iOS\"";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-framework\" \"$(PODS_ROOT)/TwitterKit/iOS\" \"$(PODS_ROOT)/TwitterCore/iOS\" \"$(PODS_CONFIGURATION_BUILD_DIR)/Bolts-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKLoginKit-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKCoreKit-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-3f10cfc8\" \"$(PODS_CONFIGURATION_BUILD_DIR)/OCMock-framework-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-ProtoRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/Protobuf-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-RxLibrary-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/SDWebImage-framework\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-Core-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/leveldb-library-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/BoringSSL-iOS9.0\" @executable_path @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
-					"-l\"c++\"",
-					"-l\"icucore\"",
-					"-l\"sqlite3\"",
-					"-l\"GTMSessionFetcher.default-Core-library\"",
-					"-l\"leveldb-library-library\"",
-					"-l\"GTMOAuth2-library\"",
-					"-l\"z\"",
-					"-framework",
-					"\"AVFoundation\"",
-					"-framework",
-					"\"Accounts\"",
-					"-framework",
-					"\"AddressBook\"",
-					"-framework",
-					"\"CFNetwork\"",
-					"-framework",
-					"\"CoreData\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"CoreMedia\"",
-					"-framework",
-					"\"CoreText\"",
-					"-framework",
-					"\"FirebaseAuth\"",
-					"-framework",
-					"\"FirebaseCore\"",
-					"-framework",
-					"\"FirebaseDatabase\"",
-					"-framework",
-					"\"FirebaseInstanceID\"",
-					"-framework",
-					"\"FirebaseStorage\"",
-					"-framework",
-					"\"Foundation\"",
-					"-framework",
-					"\"GoogleSignIn\"",
-					"-framework",
-					"\"ImageIO\"",
-					"-framework",
-					"\"MobileCoreServices\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"SafariServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"Social\"",
-					"-framework",
-					"\"StoreKit\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-framework",
-					"\"UIKit\"",
-					"-weak_framework",
-					"\"Accounts\"",
-					"-weak_framework",
-					"\"AudioToolbox\"",
-					"-weak_framework",
-					"\"CoreGraphics\"",
-					"-weak_framework",
-					"\"CoreLocation\"",
-					"-weak_framework",
-					"\"Foundation\"",
-					"-weak_framework",
-					"\"QuartzCore\"",
-					"-weak_framework",
-					"\"Security\"",
-					"-weak_framework",
-					"\"Social\"",
-					"-weak_framework",
-					"\"UIKit\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseUISampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

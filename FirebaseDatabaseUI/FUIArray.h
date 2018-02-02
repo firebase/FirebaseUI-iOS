@@ -18,7 +18,7 @@
 
 // clang-format on
 
-@import FirebaseDatabase;
+#import <FirebaseDatabase/FirebaseDatabase.h>
 
 #import "FUICollection.h"
 

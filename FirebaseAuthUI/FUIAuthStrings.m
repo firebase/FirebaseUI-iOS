@@ -137,6 +137,9 @@ NSString *FUILocalizedStringFromTableInBundle(NSString *key,
     }
   }
   NSBundle *frameworkBundle = [FUIAuthUtils bundleNamed:bundleName];
+  if (frameworkBundle == nil) {
+    frameworkBundle = [NSBundle mainBundle];
+  }
   return [frameworkBundle localizedStringForKey:key value:nil table:table];
 }
 
