@@ -229,7 +229,7 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
 
 - (IBAction)onAuthorization:(id)sender {
   if (!_auth.currentUser || _auth.currentUser.isAnonymous) {
-    FUIAuth.defaultAuthUI.autoUpgradeAnonymousUsers = YES;
+    FUIAuth.defaultAuthUI.shouldAutoUpgradeAnonymousUsers = YES;
     _authUI.providers = [self getListOfIDPs];
     _authUI.signInWithEmailHidden = ![self isEmailEnabled];
 
@@ -266,7 +266,7 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
       FIRAuthCredential *credential = error.userInfo[FUIAuthCredentialKey];
       NSString *anonymousUserID = authUI.auth.currentUser.uid;
       NSString *messsage = [NSString stringWithFormat:@"A merge conflict occurred. The old user ID "
-          "was: %@. You are now sig in with the following credential type: %@", anonymousUserID,
+          "was: %@. You are now signed in with the following credential type: %@", anonymousUserID,
           [credential.provider uppercaseString]];
       [self showAlertWithTitlte:@"Merge Conflict" message:messsage];
       NSLog(@"%@", messsage);

@@ -190,10 +190,11 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
  */
 @property(nonatomic, copy, nullable) NSURL *TOSURL;
 
-/** @property autoUpgradeAnonymousUsers
+/** @property shouldAutoUpgradeAnonymousUsers
     @brief Whether to enable auto upgrading of anonymous accounts, defaults to NO.
  */
-@property(nonatomic, assign, getter=isAutoUpgradeAnonymousUsers) BOOL autoUpgradeAnonymousUsers;
+@property(nonatomic, assign, getter=shouldAutoUpgradeAnonymousUsers) BOOL
+    shouldAutoUpgradeAnonymousUsers;
 
 /** @property delegate
     @brief A delegate that receives callbacks or provides custom UI for @c FUIAuth.

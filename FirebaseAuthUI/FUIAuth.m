@@ -191,7 +191,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
     };
 
     // Check for the presence of an anonymous user and whether automatic upgrade is enabled.
-    if (_auth.currentUser.isAnonymous && [FUIAuth defaultAuthUI].autoUpgradeAnonymousUsers) {
+    if (_auth.currentUser.isAnonymous && [FUIAuth defaultAuthUI].shouldAutoUpgradeAnonymousUsers) {
       [_auth.currentUser
           linkAndRetrieveDataWithCredential:credential
                                  completion:^(FIRAuthDataResult *_Nullable authResult,
@@ -212,8 +212,8 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
             mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
                                              code:FUIAuthErrorCodeMergeConflict
                                          userInfo:userInfo];
-            result(nil, error);
-            completeSignInBlock(authResult, error);
+            result(nil, mergeError);
+            completeSignInBlock(authResult, mergeError);
           } else {
             if (!isAuthPickerShown || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
               [self invokeResultCallbackWithAuthDataResult:nil error:error];
