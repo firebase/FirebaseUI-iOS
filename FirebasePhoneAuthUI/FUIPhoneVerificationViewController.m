@@ -187,7 +187,9 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
                             result:^(FIRUser *_Nullable user, NSError *_Nullable error) {
     [self decrementActivity];
     self.navigationItem.rightBarButtonItem.enabled = YES;
-    if (!error || error.code == FUIAuthErrorCodeUserCancelledSignIn) {
+    if (!error ||
+        error.code == FUIAuthErrorCodeUserCancelledSignIn ||
+        error.code == FUIAuthErrorCodeMergeConflict) {
       [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } else {
       UIAlertController *alertController = [FUIPhoneAuth alertControllerForError:error

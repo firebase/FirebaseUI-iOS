@@ -201,6 +201,12 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
  */
 @property(nonatomic, copy, nullable) NSURL *TOSURL;
 
+/** @property shouldAutoUpgradeAnonymousUsers
+    @brief Whether to enable auto upgrading of anonymous accounts, defaults to NO.
+ */
+@property(nonatomic, assign, getter=shouldAutoUpgradeAnonymousUsers) BOOL
+    shouldAutoUpgradeAnonymousUsers;
+
 /** @property privacyPolicyURL
     @brief The URL of your app's Privacy Policy. If not nil, a privacy policy notice is
         displayed on the initial sign-in screen and potentially the phone number auth and
