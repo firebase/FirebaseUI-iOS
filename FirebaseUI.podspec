@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.public_header_files = 'FirebaseUI/FirebaseUI.h'
   s.source_files = 'FirebaseUI/FirebaseUI.h'
+  s.cocoapods_version = '>= 1.4.0.beta.2'
 
   s.subspec 'Database' do |database|
     database.platform = :ios, '8.0'
