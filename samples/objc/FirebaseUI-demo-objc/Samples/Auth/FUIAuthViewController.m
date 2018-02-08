@@ -264,19 +264,21 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
     }
     if (error.code == FUIAuthErrorCodeMergeConflict) {
       FIRAuthCredential *credential = error.userInfo[FUIAuthCredentialKey];
-      NSString *anonymousUserID = authUI.auth.currentUser.uid;
-      NSString *messsage = [NSString stringWithFormat:@"A merge conflict occurred. The old user ID "
-          "was: %@. You are now signed in with the following credential type: %@", anonymousUserID,
-          [credential.provider uppercaseString]];
-      [self showAlertWithTitlte:@"Merge Conflict" message:messsage];
-      NSLog(@"%@", messsage);
       [[FUIAuth defaultAuthUI].auth
           signInAndRetrieveDataWithCredential:credential
                                    completion:^(FIRAuthDataResult *_Nullable authResult,
                                                 NSError *_Nullable error) {
         if (error) {
+          [self showAlertWithTitlte:@"Sign-In error" message:error.description];
           NSLog(@"%@",error.description);
+          return;
         }
+        NSString *anonymousUserID = authUI.auth.currentUser.uid;
+        NSString *messsage = [NSString stringWithFormat:@"A merge conflict occurred. The old user"
+            " ID was: %@. You are now signed in with the following credential type: %@",
+            anonymousUserID, [credential.provider uppercaseString]];
+        [self showAlertWithTitlte:@"Merge Conflict" message:messsage];
+        NSLog(@"%@", messsage);
       }];
       return;
     }
