@@ -18,6 +18,7 @@
 
 #import <FirebaseAuth/FirebaseAuth.h>
 #import "FUIAuthBaseViewController_Internal.h"
+#import "FUIAuthErrorUtils.h"
 #import "FUIAuthStrings.h"
 #import "FUIAuthTableViewCell.h"
 #import "FUIAuthUtils.h"
@@ -110,7 +111,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
   [self incrementActivity];
   FIRAuthCredential *credential =
-    [FIREmailAuthProvider credentialWithEmail:email password:password];
+      [FIREmailAuthProvider credentialWithEmail:email password:password];
 
     void (^completeSignInBlock)(FIRAuthDataResult *, NSError *) = ^(FIRAuthDataResult *authResult,
                                                                     NSError *error) {
@@ -148,9 +149,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
       if (error) {
         if (error.code == FIRAuthErrorCodeEmailAlreadyInUse) {
           NSDictionary *userInfo = @{ FUIAuthCredentialKey : credential };
-          NSError *mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
-                                                    code:FUIAuthErrorCodeMergeConflict
-                                                userInfo:userInfo];
+          NSError *mergeError = [FUIAuthErrorUtils mergeConflictErrorWithUserInfo:userInfo];
           [self.navigationController dismissViewControllerAnimated:YES completion:^{
             [self.authUI invokeResultCallbackWithAuthDataResult:authResult error:mergeError];
           }];
@@ -162,11 +161,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
       completeSignInBlock(authResult, nil);
     }];
   } else {
-    [self.auth signInAndRetrieveDataWithCredential:credential
-                                        completion:^(FIRAuthDataResult *_Nullable authResult,
-                                                     NSError *_Nullable error) {
-      completeSignInBlock(authResult, error);
-    }];
+    [self.auth signInAndRetrieveDataWithCredential:credential completion:completeSignInBlock];
   }
 }
 
