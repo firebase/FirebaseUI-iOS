@@ -202,8 +202,9 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
     };
 
     // Check for the presence of an anonymous user and whether automatic upgrade is enabled.
-    if (_auth.currentUser.isAnonymous && [FUIAuth defaultAuthUI].shouldAutoUpgradeAnonymousUsers) {
-      [_auth.currentUser
+    if (self.auth.currentUser.isAnonymous &&
+        [FUIAuth defaultAuthUI].shouldAutoUpgradeAnonymousUsers) {
+      [self.auth.currentUser
           linkAndRetrieveDataWithCredential:credential
                                  completion:^(FIRAuthDataResult *_Nullable authResult,
                                               NSError * _Nullable error) {
@@ -214,7 +215,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
             FIRAuthCredential *newCredential = credential;
             // Check for and handle special case for Phone Auth Provider.
             if (providerUI.providerID == FIRPhoneAuthProviderID) {
-              // Obtain temporary Phone Auth provider.
+              // Obtain temporary Phone Auth credential.
               newCredential = error.userInfo[FIRAuthUpdatedCredentialKey];
             }
             NSDictionary *userInfo = @{
