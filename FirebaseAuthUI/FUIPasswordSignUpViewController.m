@@ -180,29 +180,57 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 
   [self incrementActivity];
 
-  [self.auth createUserAndRetrieveDataWithEmail:email
-                                       password:password
-                                     completion:^(FIRAuthDataResult *_Nullable authDataResult,
-                                                  NSError *_Nullable error) {
-    if (error) {
-      [self decrementActivity];
-
-      [self finishSignUpWithAuthDataResult:nil error:error];
-      return;
-    }
-
-    FIRUserProfileChangeRequest *request = [authDataResult.user profileChangeRequest];
-    request.displayName = username;
-    [request commitChangesWithCompletion:^(NSError *_Nullable error) {
-      [self decrementActivity];
-
+  // Check for the presence of an anonymous user and whether automatic upgrade is enabled.
+  if (self.auth.currentUser.isAnonymous &&
+        [FUIAuth defaultAuthUI].shouldAutoUpgradeAnonymousUsers) {
+    FIRAuthCredential *credential =
+        [FIREmailAuthProvider credentialWithEmail:email password:password];
+    [self.auth.currentUser
+      linkAndRetrieveDataWithCredential:credential
+                             completion:^(FIRAuthDataResult *_Nullable authResult,
+                                          NSError * _Nullable error) {
       if (error) {
+        [self decrementActivity];
         [self finishSignUpWithAuthDataResult:nil error:error];
         return;
       }
-      [self finishSignUpWithAuthDataResult:authDataResult error:nil];
+      FIRUserProfileChangeRequest *request = [authResult.user profileChangeRequest];
+      request.displayName = username;
+      [request commitChangesWithCompletion:^(NSError *_Nullable error) {
+        [self decrementActivity];
+
+        if (error) {
+          [self finishSignUpWithAuthDataResult:nil error:error];
+          return;
+        }
+        [self finishSignUpWithAuthDataResult:authResult error:nil];
+      }];
     }];
-  }];
+  } else {
+    [self.auth createUserAndRetrieveDataWithEmail:email
+                                       password:password
+                                     completion:^(FIRAuthDataResult *_Nullable authDataResult,
+                                                  NSError *_Nullable error) {
+      if (error) {
+        [self decrementActivity];
+
+        [self finishSignUpWithAuthDataResult:nil error:error];
+        return;
+      }
+
+      FIRUserProfileChangeRequest *request = [authDataResult.user profileChangeRequest];
+      request.displayName = username;
+      [request commitChangesWithCompletion:^(NSError *_Nullable error) {
+        [self decrementActivity];
+
+        if (error) {
+          [self finishSignUpWithAuthDataResult:nil error:error];
+          return;
+        }
+        [self finishSignUpWithAuthDataResult:authDataResult error:nil];
+      }];
+    }];
+  }
 }
 
 - (void)finishSignUpWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult

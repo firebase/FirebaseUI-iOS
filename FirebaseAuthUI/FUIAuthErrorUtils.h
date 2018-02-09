@@ -36,6 +36,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSError *)userCancelledSignInError;
 
+/** @fn userCancelledSignIn
+    @brief Constructs an @c NSError with the @c FUIAuthErrorCodeMergeConflict code.
+    @param userInfo The userInfo dictionary to add to the NSError object.
+    @return The merge conflict error.
+ */
++ (NSError *)mergeConflictErrorWithUserInfo:(NSDictionary *)userInfo;
+
 /** @fn providerErrorWithUnderlyingError:providerID:
     @brief Constructs an @c NSError with the @c FUIAuthErrorCodeProviderError code and a populated
         @c NSUnderlyingErrorKey and @c FUIAuthErrorUserInfoProviderIDKey in the
