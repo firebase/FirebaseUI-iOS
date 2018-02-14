@@ -19,12 +19,14 @@
 #import <objc/runtime.h>
 
 #import <FirebaseCore/FIRApp.h>
+#import <FirebaseCore/FIROptions.h>
 #import <FirebaseAuth/FIRAuth.h>
 #import <FirebaseAuth/FirebaseAuth.h>
 #import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthErrors.h"
 #import "FUIAuthPickerViewController.h"
 #import "FUIAuthStrings.h"
+#import "FUIGoogleAuth.h"
 #import "FUIEmailEntryViewController.h"
 #import "FUIPasswordVerificationViewController.h"
 
@@ -173,7 +175,6 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       }
       return;
     }
-
     // Block to complete sign-in
     void (^completeSignInBlock)(FIRAuthDataResult *, NSError *) = ^(FIRAuthDataResult *authResult,
                                                                     NSError *error) {
@@ -200,7 +201,6 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
         if (error) {
           // Check for "credential in use" conflict error and handle appropriately.
           if (error.code == FIRAuthErrorCodeCredentialAlreadyInUse) {
-            NSError *mergeError;
             FIRAuthCredential *newCredential = credential;
             // Check for and handle special case for Phone Auth Provider.
             if (providerUI.providerID == FIRPhoneAuthProviderID) {
@@ -210,11 +210,44 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
             NSDictionary *userInfo = @{
               FUIAuthCredentialKey : newCredential,
             };
-            mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
-                                             code:FUIAuthErrorCodeMergeConflict
-                                         userInfo:userInfo];
+            NSError *mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
+                                                      code:FUIAuthErrorCodeMergeConflict
+                                                  userInfo:userInfo];
             result(nil, mergeError);
             completeSignInBlock(authResult, mergeError);
+          } else if (error.code == FIRAuthErrorCodeEmailAlreadyInUse) {
+            if ([providerUI respondsToSelector:@selector(email)]) {
+              // Link federated providers
+              [self signInWithEmailHint:[providerUI email]
+               presentingViewController:presentingViewController
+                             completion:^(FIRAuthDataResult *_Nullable authResult,
+                                          NSError *_Nullable error) {
+                if (error) {
+                  result(nil, error);
+                  completeSignInBlock(nil, error);
+                  return;
+                }
+                [authResult.user linkAndRetrieveDataWithCredential:credential
+                                                        completion:^(FIRAuthDataResult
+                                                                         *_Nullable authResult,
+                                                                     NSError *_Nullable error) {
+                  if (error) {
+                    result(nil, error);
+                    completeSignInBlock(nil, error);
+                    return;
+                  }
+                  FIRAuthCredential *newCredential = credential;
+                  NSDictionary *userInfo = @{
+                    FUIAuthCredentialKey : newCredential,
+                  };
+                  NSError *mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
+                                                             code:FUIAuthErrorCodeMergeConflict
+                                                         userInfo:userInfo];
+                  result(nil, mergeError);
+                  completeSignInBlock(authResult, mergeError);
+                }];
+              }];
+            }
           } else {
             if (!isAuthPickerShown || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
               [self invokeResultCallbackWithAuthDataResult:nil error:error];
@@ -248,6 +281,57 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       }];
     }
   }];
+}
+
+- (void)signInWithEmailHint:(NSString *)emailHint
+   presentingViewController:(UIViewController *)presentingViewController
+                 completion:(FIRAuthDataResultCallback)completion {
+  NSString *kTempApp = @"tempApp";
+  FIROptions *options = [FIROptions defaultOptions];
+  if (![FIRApp appNamed:kTempApp]) {
+    [FIRApp configureWithName:kTempApp options:options];
+  }
+  FIRApp *tempApp = [FIRApp appNamed:kTempApp];
+  FIRAuth *auth = [FIRAuth authWithApp:tempApp];
+
+  [self.auth fetchProvidersForEmail:emailHint completion:^(NSArray<NSString *> *_Nullable providers,
+                                                           NSError *_Nullable error) {
+    NSString *federatedProviderID = [self federatedAuthProviderFromProviders:providers];
+    // Google case
+    if ([federatedProviderID isEqualToString:FIRGoogleAuthProviderID]) {
+      id<FUIAuthProvider> googleProviderUI;
+      for (id<FUIAuthProvider> provider in self.providers) {
+        if ([provider.providerID isEqualToString:FIRGoogleAuthProviderID]) {
+          googleProviderUI = provider;
+          break;
+        }
+      }
+      [googleProviderUI signOut];
+      [googleProviderUI signInWithDefaultValue:emailHint
+                      presentingViewController:presentingViewController
+                                    completion:^(FIRAuthCredential *_Nullable credential,
+                                                 NSError *_Nullable error,
+                                                 FIRAuthResultCallback  _Nullable result) {
+        if (error) {
+          completion(nil, error);
+          return;
+        }
+
+        [auth signInAndRetrieveDataWithCredential:credential completion:completion];
+      }];
+    }
+  }];
+}
+
+- (nullable NSString *)federatedAuthProviderFromProviders:(NSArray <NSString *> *) providers {
+  NSSet *providerSet =
+      [[NSSet alloc] initWithArray:@[ FIRFacebookAuthProviderID, FIRGoogleAuthProviderID ]];
+  for (NSString *provider in providers) {
+    if ( [providerSet containsObject:provider]) {
+      return provider;
+    }
+  }
+  return nil;
 }
 
 - (void)handleAccountLinkingForEmail:(NSString *)email
