@@ -213,7 +213,6 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
             NSError *mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
                                                       code:FUIAuthErrorCodeMergeConflict
                                                   userInfo:userInfo];
-            result(nil, mergeError);
             completeSignInBlock(authResult, mergeError);
           } else if (error.code == FIRAuthErrorCodeEmailAlreadyInUse) {
             if ([providerUI respondsToSelector:@selector(email)]) {
@@ -223,7 +222,6 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                              completion:^(FIRAuthDataResult *_Nullable authResult,
                                           NSError *_Nullable error) {
                 if (error) {
-                  result(nil, error);
                   completeSignInBlock(nil, error);
                   return;
                 }
@@ -232,7 +230,6 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                                                                          *_Nullable authResult,
                                                                      NSError *_Nullable error) {
                   if (error) {
-                    result(nil, error);
                     completeSignInBlock(nil, error);
                     return;
                   }
@@ -243,7 +240,6 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                   NSError *mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
                                                              code:FUIAuthErrorCodeMergeConflict
                                                          userInfo:userInfo];
-                  result(nil, mergeError);
                   completeSignInBlock(authResult, mergeError);
                 }];
               }];
@@ -325,7 +321,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
 
 - (nullable NSString *)federatedAuthProviderFromProviders:(NSArray <NSString *> *) providers {
   NSSet *providerSet =
-      [[NSSet alloc] initWithArray:@[ FIRFacebookAuthProviderID, FIRGoogleAuthProviderID ]];
+      [NSSet setWithArray:@[ FIRFacebookAuthProviderID, FIRGoogleAuthProviderID ]];
   for (NSString *provider in providers) {
     if ( [providerSet containsObject:provider]) {
       return provider;
