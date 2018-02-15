@@ -284,10 +284,13 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                  completion:(FIRAuthDataResultCallback)completion {
   NSString *kTempApp = @"tempApp";
   FIROptions *options = [FIROptions defaultOptions];
+  // Create an new app instance in order to create a new auth instance.
   if (![FIRApp appNamed:kTempApp]) {
     [FIRApp configureWithName:kTempApp options:options];
   }
   FIRApp *tempApp = [FIRApp appNamed:kTempApp];
+  // Create a new auth instance in order to perform a successful sign-in without losing the
+  // currently signed in user on the default auth instance.
   FIRAuth *auth = [FIRAuth authWithApp:tempApp];
 
   [self.auth fetchProvidersForEmail:emailHint completion:^(NSArray<NSString *> *_Nullable providers,
