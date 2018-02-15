@@ -124,9 +124,14 @@ __attribute__((deprecated("This is deprecated API and will be removed in a futur
 @optional;
 
 /** @property idToken
-    @brief User Id Token obtained during sign in. Not all providers can return, thus it's optional
+    @brief User Id Token obtained during sign in. Not all providers can return, thus it's optional.
  */
 @property(nonatomic, copy, readonly) NSString *idToken;
+
+/** @fn email
+    @brief The email address associated with this provider, if any.
+ */
+- (NSString *)email;
 
 /** @fn handleOpenURL:
     @brief May be used to help complete a sign-in flow which requires a callback from Safari.
