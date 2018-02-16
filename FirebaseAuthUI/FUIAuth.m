@@ -295,22 +295,29 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
 
   [self.auth fetchProvidersForEmail:emailHint completion:^(NSArray<NSString *> *_Nullable providers,
                                                            NSError *_Nullable error) {
-    NSString *federatedProviderID = [self federatedAuthProviderFromProviders:providers];
-    // Google case
-    if ([federatedProviderID isEqualToString:FIRGoogleAuthProviderID]) {
-      id<FUIAuthProvider> googleProviderUI;
+    if (error) {
+      completion(nil, error);
+      return;
+    }
+    NSString *existingFederatedProviderID = [self federatedAuthProviderFromProviders:providers];
+    // Set of providers which can be auto-linked
+    NSSet *supportedProviders =
+        [NSSet setWithObjects:FIRGoogleAuthProviderID, FIRFacebookAuthProviderID, nil];
+    if ([supportedProviders containsObject:existingFederatedProviderID]) {
+      id<FUIAuthProvider> authProviderUI;
+      // Retrieve the FUIAuthProvider instance from FUIAuth for the existing provider ID.
       for (id<FUIAuthProvider> provider in self.providers) {
-        if ([provider.providerID isEqualToString:FIRGoogleAuthProviderID]) {
-          googleProviderUI = provider;
+        if ([provider.providerID isEqualToString:existingFederatedProviderID]) {
+          authProviderUI = provider;
           break;
         }
       }
-      [googleProviderUI signOut];
-      [googleProviderUI signInWithDefaultValue:emailHint
-                      presentingViewController:presentingViewController
-                                    completion:^(FIRAuthCredential *_Nullable credential,
-                                                 NSError *_Nullable error,
-                                                 FIRAuthResultCallback  _Nullable result) {
+      [authProviderUI signOut];
+      [authProviderUI signInWithDefaultValue:emailHint
+                    presentingViewController:presentingViewController
+                                  completion:^(FIRAuthCredential *_Nullable credential,
+                                               NSError *_Nullable error,
+                                               FIRAuthResultCallback  _Nullable result) {
         if (error) {
           completion(nil, error);
           return;
