@@ -302,7 +302,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
     NSString *existingFederatedProviderID = [self federatedAuthProviderFromProviders:providers];
     // Set of providers which can be auto-linked
     NSSet *supportedProviders =
-        [NSSet setWithObjects:FIRGoogleAuthProviderID,FIRFacebookAuthProviderID, nil];
+        [NSSet setWithObjects:FIRGoogleAuthProviderID, FIRFacebookAuthProviderID, nil];
     if ([supportedProviders containsObject:existingFederatedProviderID]) {
       id<FUIAuthProvider> authProviderUI;
       // Retrieve the FUIAuthProvider instance from FUIAuth for the existing provider ID.
@@ -314,10 +314,10 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       }
       [authProviderUI signOut];
       [authProviderUI signInWithDefaultValue:emailHint
-                      presentingViewController:presentingViewController
-                                    completion:^(FIRAuthCredential *_Nullable credential,
-                                                 NSError *_Nullable error,
-                                                 FIRAuthResultCallback  _Nullable result) {
+                    presentingViewController:presentingViewController
+                                  completion:^(FIRAuthCredential *_Nullable credential,
+                                               NSError *_Nullable error,
+                                               FIRAuthResultCallback  _Nullable result) {
         if (error) {
           completion(nil, error);
           return;
