@@ -331,7 +331,9 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                                                  NSError *_Nullable error,
                                                  FIRAuthResultCallback  _Nullable result) {
           if (error) {
-            completion(nil, error);
+            if (completion) {
+              completion(nil, error);
+            }
             return;
           }
           [tempAuth signInAndRetrieveDataWithCredential:credential completion:completion];
