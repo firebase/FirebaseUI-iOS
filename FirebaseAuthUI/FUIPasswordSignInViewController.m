@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FUIPasswordSignInViewController.h"
+#import "FUIPasswordSignInViewController_Internal.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
 #import "FUIAuthBaseViewController_Internal.h"
@@ -80,6 +80,10 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
     _email = [email copy];
 
     self.title = FUILocalizedString(kStr_SignInTitle);
+    __weak FUIPasswordSignInViewController *weakself = self;
+    _onDismissCallback = ^(FIRAuthDataResult *authResult, NSError *error){
+      [weakself.authUI invokeResultCallbackWithAuthDataResult:authResult error:error];
+    };
   }
   return self;
 }
@@ -153,7 +157,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
         }
       }
       [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        [self.authUI invokeResultCallbackWithAuthDataResult:authResult error:error];
+        if (self->_onDismissCallback) {
+          self->_onDismissCallback(authResult, error);
+        }
       }];
     };
 
