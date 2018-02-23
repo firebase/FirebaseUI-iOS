@@ -28,6 +28,7 @@
 #import "FUIAuthStrings.h"
 #import "FUIGoogleAuth.h"
 #import "FUIEmailEntryViewController.h"
+#import "FUIPasswordSignInViewController_Internal.h"
 #import "FUIPasswordVerificationViewController.h"
 
 /** @var kAppNameCodingKey
@@ -154,7 +155,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
 }
 
 - (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI
-    presentingViewController:(UIViewController *)presentingViewController
+    presentingViewController:(FUIAuthBaseViewController *)presentingViewController
                 defaultValue:(nullable NSString *)defaultValue {
 
   // Sign out first to make sure sign in starts with a clean state.
@@ -280,7 +281,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
 }
 
 - (void)signInWithEmailHint:(NSString *)emailHint
-   presentingViewController:(UIViewController *)presentingViewController
+   presentingViewController:(FUIAuthBaseViewController *)presentingViewController
                  completion:(FIRAuthDataResultCallback)completion {
   NSString *kTempApp = @"tempApp";
   FIROptions *options = [FIROptions defaultOptions];
@@ -291,7 +292,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
   FIRApp *tempApp = [FIRApp appNamed:kTempApp];
   // Create a new auth instance in order to perform a successful sign-in without losing the
   // currently signed in user on the default auth instance.
-  FIRAuth *auth = [FIRAuth authWithApp:tempApp];
+  FIRAuth *tempAuth = [FIRAuth authWithApp:tempApp];
 
   [self.auth fetchProvidersForEmail:emailHint completion:^(NSArray<NSString *> *_Nullable providers,
                                                            NSError *_Nullable error) {
@@ -299,39 +300,54 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       completion(nil, error);
       return;
     }
-    NSString *existingFederatedProviderID = [self federatedAuthProviderFromProviders:providers];
-    // Set of providers which can be auto-linked
+    NSString *existingFederatedProviderID = [self authProviderFromProviders:providers];
+    // Set of providers which can be auto-linked.
     NSSet *supportedProviders =
-        [NSSet setWithObjects:FIRGoogleAuthProviderID, FIRFacebookAuthProviderID, nil];
+        [NSSet setWithObjects:FIRGoogleAuthProviderID,
+                              FIRFacebookAuthProviderID,
+                              FIREmailAuthProviderID,
+                              nil];
     if ([supportedProviders containsObject:existingFederatedProviderID]) {
-      id<FUIAuthProvider> authProviderUI;
-      // Retrieve the FUIAuthProvider instance from FUIAuth for the existing provider ID.
-      for (id<FUIAuthProvider> provider in self.providers) {
-        if ([provider.providerID isEqualToString:existingFederatedProviderID]) {
-          authProviderUI = provider;
-          break;
+      if ([existingFederatedProviderID isEqualToString:FIREmailAuthProviderID]) {
+        FUIAuth *authUI = [[FUIAuth alloc]initWithAuth:tempAuth];
+        // Email password sign-in
+        FUIPasswordSignInViewController *controller =
+            [[FUIPasswordSignInViewController alloc] initWithAuthUI:authUI email:emailHint];
+        controller.onDismissCallback = completion;
+        [presentingViewController pushViewController:controller];
+      } else {
+        id<FUIAuthProvider> authProviderUI;
+        // Retrieve the FUIAuthProvider instance from FUIAuth for the existing provider ID.
+        for (id<FUIAuthProvider> provider in self.providers) {
+          if ([provider.providerID isEqualToString:existingFederatedProviderID]) {
+            authProviderUI = provider;
+            break;
+          }
         }
+        [authProviderUI signOut];
+        [authProviderUI signInWithDefaultValue:emailHint
+                      presentingViewController:presentingViewController
+                                    completion:^(FIRAuthCredential *_Nullable credential,
+                                                 NSError *_Nullable error,
+                                                 FIRAuthResultCallback  _Nullable result) {
+          if (error) {
+            if (completion) {
+              completion(nil, error);
+            }
+            return;
+          }
+          [tempAuth signInAndRetrieveDataWithCredential:credential completion:completion];
+        }];
       }
-      [authProviderUI signOut];
-      [authProviderUI signInWithDefaultValue:emailHint
-                    presentingViewController:presentingViewController
-                                  completion:^(FIRAuthCredential *_Nullable credential,
-                                               NSError *_Nullable error,
-                                               FIRAuthResultCallback  _Nullable result) {
-        if (error) {
-          completion(nil, error);
-          return;
-        }
-
-        [auth signInAndRetrieveDataWithCredential:credential completion:completion];
-      }];
     }
   }];
 }
 
-- (nullable NSString *)federatedAuthProviderFromProviders:(NSArray <NSString *> *) providers {
+- (nullable NSString *)authProviderFromProviders:(NSArray <NSString *> *) providers {
   NSSet *providerSet =
-      [NSSet setWithArray:@[ FIRFacebookAuthProviderID, FIRGoogleAuthProviderID ]];
+      [NSSet setWithArray:@[ FIRFacebookAuthProviderID,
+                             FIRGoogleAuthProviderID,
+                             FIREmailAuthProviderID ]];
   for (NSString *provider in providers) {
     if ( [providerSet containsObject:provider]) {
       return provider;
