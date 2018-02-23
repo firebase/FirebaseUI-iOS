@@ -59,11 +59,6 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
       @brief The @c UIButton which handles forgot password action.
    */
   __weak IBOutlet UIButton *_forgotPasswordButton;
-
-  /** @var _onDismissCallback
-      @brief The callback to be executed during view controller dismissal.
-   */
-  FIRAuthDataResultCallback _onDismissCallback;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
@@ -83,8 +78,12 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
                          authUI:authUI];
   if (self) {
     _email = [email copy];
-    _onDismissCallback = nil;
+
     self.title = FUILocalizedString(kStr_SignInTitle);
+    __weak FUIPasswordSignInViewController *weakself = self;
+    _onDismissCallback = ^(FIRAuthDataResult *authResult, NSError *error){
+      [weakself.authUI invokeResultCallbackWithAuthDataResult:authResult error:error];
+    };
   }
   return self;
 }
@@ -141,8 +140,6 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
       [self.navigationController dismissViewControllerAnimated:YES completion:^{
         if (self->_onDismissCallback) {
           self->_onDismissCallback(authResult, error);
-        } else {
-          [self.authUI invokeResultCallbackWithAuthDataResult:authResult error:error];
         }
       }];
     };
@@ -202,10 +199,6 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 - (void)didChangeEmail:(NSString *)email andPassword:(NSString *)password {
   BOOL enableActionButton = email.length > 0 && password.length > 0;
   self.navigationItem.rightBarButtonItem.enabled = enableActionButton;
-}
-
-- (void)setOnDismissCallback:(FIRAuthDataResultCallback)callback {
-  _onDismissCallback = callback;
 }
 
 #pragma mark - UITableViewDataSource

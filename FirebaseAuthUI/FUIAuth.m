@@ -313,7 +313,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
         // Email password sign-in
         FUIPasswordSignInViewController *controller =
             [[FUIPasswordSignInViewController alloc] initWithAuthUI:authUI email:emailHint];
-        [controller setOnDismissCallback:completion];
+        controller.onDismissCallback = completion;
         [presentingViewController pushViewController:controller];
       } else {
         id<FUIAuthProvider> authProviderUI;

@@ -21,13 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FUIPasswordSignInViewController ()
 
-/** @fn setOnDismissCallback:
+/** @property onDismissCallback:
     @brief Sets an optional custom callback for FUIPasswordSigInViewController during dismissal. If
-        this callback is set the default dismissal routine is not triggered and should be included
-        in this block if necessary.
-    @param callback The custom callback to execute during dismissal of the view controller.
+        this property is set the default dismissal routine is not triggered and should be included
+        in this block if necessary. This block is NOT set to nil after use, set to nil after using
+        if you wish to avoid circular references.
  */
-- (void)setOnDismissCallback:(FIRAuthDataResultCallback)callback;
+@property(nonatomic, strong, nullable) FIRAuthDataResultCallback onDismissCallback;
 
 NS_ASSUME_NONNULL_END
 
