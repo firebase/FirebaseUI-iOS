@@ -220,6 +220,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
               // Link federated providers
               [self signInWithEmailHint:[providerUI email]
                presentingViewController:presentingViewController
+                          originalError:error
                              completion:^(FIRAuthDataResult *_Nullable authResult,
                                           NSError *_Nullable error) {
                 if (error) {
@@ -282,6 +283,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
 
 - (void)signInWithEmailHint:(NSString *)emailHint
    presentingViewController:(FUIAuthBaseViewController *)presentingViewController
+              originalError:(NSError *)originalError
                  completion:(FIRAuthDataResultCallback)completion {
   NSString *kTempApp = @"tempApp";
   FIROptions *options = [FIROptions defaultOptions];
@@ -309,12 +311,24 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                               nil];
     if ([supportedProviders containsObject:existingFederatedProviderID]) {
       if ([existingFederatedProviderID isEqualToString:FIREmailAuthProviderID]) {
-        FUIAuth *authUI = [[FUIAuth alloc]initWithAuth:tempAuth];
-        // Email password sign-in
-        FUIPasswordSignInViewController *controller =
-            [[FUIPasswordSignInViewController alloc] initWithAuthUI:authUI email:emailHint];
-        controller.onDismissCallback = completion;
-        [presentingViewController pushViewController:controller];
+
+        [FUIAuthBaseViewController showSignInAlertWithEmail:emailHint
+                                          providerShortName:@"Email/Password"
+                                        providerSignInLabel:@"Sign in with Email/Password"
+                                   presentingViewController:presentingViewController
+                                              signinHandler:^{
+          FUIAuth *authUI = [[FUIAuth alloc]initWithAuth:tempAuth];
+          // Email password sign-in
+          FUIPasswordSignInViewController *controller =
+              [[FUIPasswordSignInViewController alloc] initWithAuthUI:authUI email:emailHint];
+          controller.onDismissCallback = completion;
+          [presentingViewController pushViewController:controller];
+        }
+                                              cancelHandler:^{
+          if (completion) {
+            completion(nil, originalError);
+          }
+        }];
       } else {
         id<FUIAuthProvider> authProviderUI;
         // Retrieve the FUIAuthProvider instance from FUIAuth for the existing provider ID.
@@ -324,20 +338,32 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
             break;
           }
         }
-        [authProviderUI signOut];
-        [authProviderUI signInWithDefaultValue:emailHint
-                      presentingViewController:presentingViewController
-                                    completion:^(FIRAuthCredential *_Nullable credential,
-                                                 NSError *_Nullable error,
-                                                 FIRAuthResultCallback  _Nullable result) {
-          if (error) {
-            if (completion) {
-              completion(nil, error);
+
+        [FUIAuthBaseViewController showSignInAlertWithEmail:emailHint
+                                                   provider:authProviderUI
+                                   presentingViewController:presentingViewController
+                                              signinHandler:^{
+          [authProviderUI signOut];
+          [authProviderUI signInWithDefaultValue:emailHint
+                        presentingViewController:presentingViewController
+                                      completion:^(FIRAuthCredential *_Nullable credential,
+                                                   NSError *_Nullable error,
+                                                   FIRAuthResultCallback  _Nullable result) {
+            if (error) {
+              if (completion) {
+                completion(nil, error);
+              }
+              return;
             }
-            return;
+            [tempAuth signInAndRetrieveDataWithCredential:credential completion:completion];
+          }];
+        }
+                                              cancelHandler:^{
+          if (completion) {
+            completion(nil, originalError);
           }
-          [tempAuth signInAndRetrieveDataWithCredential:credential completion:completion];
-        }];
+         }
+        ];
       }
     }
   }];
