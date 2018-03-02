@@ -247,15 +247,29 @@ static NSString *const kAuthUICodingKey = @"authUI";
         presentingViewController:(UIViewController *)presentingViewController
                    signinHandler:(FUIAuthAlertActionHandler)signinHandler
                    cancelHandler:(FUIAuthAlertActionHandler)cancelHandler {
+  [self showSignInAlertWithEmail:email
+               providerShortName:provider.shortName
+             providerSignInLabel:provider.signInLabel
+        presentingViewController:presentingViewController
+                   signinHandler:signinHandler
+                   cancelHandler:cancelHandler];
+}
+
++ (void)showSignInAlertWithEmail:(NSString *)email
+               providerShortName:(NSString *)providerShortName
+             providerSignInLabel:(NSString *)providerSignInLabel
+        presentingViewController:(UIViewController *)presentingViewController
+                   signinHandler:(FUIAuthAlertActionHandler)signinHandler
+                   cancelHandler:(FUIAuthAlertActionHandler)cancelHandler {
   NSString *message =
       [NSString stringWithFormat:FUILocalizedString(kStr_ProviderUsedPreviouslyMessage),
-          email, provider.shortName];
+          email, providerShortName];
   UIAlertController *alertController =
       [UIAlertController alertControllerWithTitle:FUILocalizedString(kStr_ExistingAccountTitle)
                                           message:message
                                    preferredStyle:UIAlertControllerStyleAlert];
   UIAlertAction *signInAction =
-      [UIAlertAction actionWithTitle:provider.signInLabel
+      [UIAlertAction actionWithTitle:providerSignInLabel
                                style:UIAlertActionStyleDefault
                              handler:^(UIAlertAction *_Nonnull action) {
         signinHandler();
