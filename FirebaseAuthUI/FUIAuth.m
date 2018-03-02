@@ -399,7 +399,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
               if (![emailHint isEqualToString:authResult.user.email]) {
                 NSString *signedInEmail = authResult.user.email;
                 NSString *title =
-                    [NSString stringWithFormat:@"Continue sign in with %@", signedInEmail];
+                    [NSString stringWithFormat:@"Continue sign in with %@?", signedInEmail];
                 NSString *message =
                     [NSString stringWithFormat:@"You originally wanted to sign in with %@",
                     emailHint];
@@ -408,10 +408,14 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                                                   actionTitle:@"Continue"
                                      presentingViewController:presentingViewController
                                                 actionHandler:^{
-                  completion(authResult, nil, credential);
+                  if (completion) {
+                    completion(authResult, nil, credential);
+                  }
                 }
                                                 cancelHandler:^{
-                  completion(nil, error, credential);
+                  if (completion) {
+                    completion(nil, error, credential);
+                  }
                 }];
               }
             }];
