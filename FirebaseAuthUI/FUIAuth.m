@@ -362,8 +362,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
           if (completion) {
             completion(nil, originalError);
           }
-         }
-        ];
+        }];
       }
     }
   }];
