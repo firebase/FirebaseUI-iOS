@@ -32,7 +32,7 @@
 #import "FUIPasswordVerificationViewController.h"
 
 /** @typedef EmailHintSignInCallback
-    @brief The type of block invoked when an emailHint sing-in event completes.
+    @brief The type of block invoked when an emailHint sign-in event completes.
 
     @param authResult Optionally; Result of sign-in request containing both the user and
        the additional user info associated with the user.
