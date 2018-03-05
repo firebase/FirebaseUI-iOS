@@ -242,6 +242,33 @@ static NSString *const kAuthUICodingKey = @"authUI";
   [presentingViewController presentViewController:alertController animated:YES completion:nil];
 }
 
++ (void)showAlertWithTitle:(nullable NSString *)title
+                   message:(NSString *)message
+               actionTitle:(NSString *)actionTitle
+  presentingViewController:(UIViewController *)presentingViewController
+             actionHandler:(FUIAuthAlertActionHandler)actionHandler
+             cancelHandler:(FUIAuthAlertActionHandler)cancelHandler {
+  UIAlertController *alertController =
+      [UIAlertController alertControllerWithTitle:title
+                                          message:message
+                                   preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *okAction =
+      [UIAlertAction actionWithTitle:actionTitle
+                               style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction *_Nonnull action) {
+        actionHandler();
+      }];
+  [alertController addAction:okAction];
+  UIAlertAction *cancelAction =
+      [UIAlertAction actionWithTitle:FUILocalizedString(kStr_Cancel)
+                               style:UIAlertActionStyleCancel
+                               handler:^(UIAlertAction * _Nonnull action) {
+        cancelHandler();
+      }];
+  [alertController addAction:cancelAction];
+  [presentingViewController presentViewController:alertController animated:YES completion:nil];
+}
+
 + (void)showSignInAlertWithEmail:(NSString *)email
                         provider:(id<FUIAuthProvider>)provider
         presentingViewController:(UIViewController *)presentingViewController

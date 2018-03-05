@@ -61,6 +61,23 @@ typedef void (^FUIAuthAlertActionHandler)(void);
                  actionTitle:(NSString *)actionTitle
     presentingViewController:(UIViewController *)presentingViewController;
 
+/** @fn showAlertWithTitle:message:actionTitle:presentingViewController:
+    @brief Displays an alert view with given title, message and action title  on top of the
+        specified view controller.
+    @param title The title of the alert.
+    @param message The message of the alert.
+    @param actionTitle The title of the action button.
+    @param actionHandler The block to execute if the action button is tapped.
+    @param cancelHandler The block to execute if the cancel button is tapped.
+    @param presentingViewController The controller which shows alert.
+ */
++ (void)showAlertWithTitle:(nullable NSString *)title
+                   message:(NSString *)message
+               actionTitle:(NSString *)actionTitle
+  presentingViewController:(UIViewController *)presentingViewController
+             actionHandler:(FUIAuthAlertActionHandler)actionHandler
+             cancelHandler:(FUIAuthAlertActionHandler)cancelHandler;
+
 /** @fn showSignInAlertWithEmail:provider:handler:
     @brief Displays an alert to conform with user whether she wants to proceed with the provider.
     @param email The email address to sign in with.
