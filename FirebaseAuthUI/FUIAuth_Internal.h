@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
         @see FUIAuthDelegate.authUI:didSignInWithAuthDataResult:error: for method callback.
     @param providerUI The authentication provider used for signing in.
     @param presentingViewController The view controller used to present the UI.
-    @param defaultValue The provider default initialization value (e g email or phone number)
+    @param defaultValue The provider default initialization value (e.g. email or phone number)
         used for signing in.
  */
 - (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI

@@ -158,10 +158,10 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
   // Sign out first to make sure sign in starts with a clean state.
   [providerUI signOut];
   [providerUI signInWithDefaultValue:defaultValue
-     presentingViewController:presentingViewController
-                   completion:^(FIRAuthCredential *_Nullable credential,
-                                NSError *_Nullable error,
-                                _Nullable FIRAuthResultCallback result) {
+            presentingViewController:presentingViewController
+                          completion:^(FIRAuthCredential *_Nullable credential,
+                                       NSError *_Nullable error,
+                                       _Nullable FIRAuthResultCallback result) {
     BOOL isAuthPickerShown =
         [presentingViewController isKindOfClass:[FUIAuthPickerViewController class]];
     if (error) {
@@ -177,12 +177,12 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
     [self.auth signInAndRetrieveDataWithCredential:credential
                                         completion:^(FIRAuthDataResult *_Nullable authResult,
                                                      NSError *_Nullable error) {
-      if (error && error.code == FIRAuthErrorCodeAccountExistsWithDifferentCredential) {
+      if (error.code == FIRAuthErrorCodeAccountExistsWithDifferentCredential) {
         NSString *email = error.userInfo[kErrorUserInfoEmailKey];
         [self handleAccountLinkingForEmail:email
                              newCredential:credential
                   presentingViewController:presentingViewController
-                              singInResult:result];
+                              signInResult:result];
         return;
       }
 
@@ -208,10 +208,20 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
   }];
 }
 
+/** @fn handleAccountLinkingForEmail:newCredential:presentingViewController:signInResult
+    @brief Handles the account linking case after a user tries to sign-in which has a credential
+        with an email which is already used by a different account.
+    @param email The email address used by an existing account and and also the credential used in
+        the sign-in attempt.
+    @param newCredential The credential used in the lastest sign-in attempt.
+    @param presentingViewController The view controller used to present the UI.
+    @param signInResult block which takes the result of this method as a parameter; a nullable
+        AuthResult indicating success or a nullable Error indicating failure.
+ */
 - (void)handleAccountLinkingForEmail:(NSString *)email
                        newCredential:(FIRAuthCredential *)newCredential
             presentingViewController:(UIViewController *)presentingViewController
-                        singInResult:(_Nullable FIRAuthResultCallback) result {
+                        signInResult:(_Nullable FIRAuthResultCallback)result {
 
   [self.auth fetchProvidersForEmail:email
                          completion:^(NSArray<NSString *> *_Nullable providers,
