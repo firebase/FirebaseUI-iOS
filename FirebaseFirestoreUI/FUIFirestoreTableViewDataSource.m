@@ -136,7 +136,8 @@
   if (self.queryErrorHandler != nil) {
     self.queryErrorHandler(error);
   } else {
-    NSLog(@"%@ Unhandled Firestore error: %@", self, error);
+    NSLog(@"%@ Unhandled Firestore error: %@. Set the queryErrorHandler property to debug.",
+          self, error);
   }
 }
 

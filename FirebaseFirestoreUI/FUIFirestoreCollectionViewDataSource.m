@@ -132,17 +132,15 @@
     }
     [self.collectionView insertItemsAtIndexPaths:insertedIndexPaths];
 
-  } completion:^(BOOL finished) {
-    NSLog(@"Updated with diff: %@", diff);
-    NSLog(@"Total: %ld", (long)_collection.count);
-  }];
+  } completion:^(BOOL finished) {}];
 }
 
 - (void)batchedArray:(FUIBatchedArray *)array queryDidFailWithError:(NSError *)error {
   if (self.queryErrorHandler != nil) {
     self.queryErrorHandler(error);
   } else {
-    NSLog(@"%@ Unhandled Firestore error: %@", self, error);
+    NSLog(@"%@ Unhandled Firestore error: %@. Set the queryErrorHandler property to debug.",
+          self, error);
   }
 }
 
