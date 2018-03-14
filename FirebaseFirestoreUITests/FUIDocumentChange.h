@@ -24,3 +24,11 @@
 + (instancetype)changeWithType:(FIRDocumentChangeType)type document:(id)document;
 
 @end
+
+@interface FUIDocumentSnapshot: NSObject
+
+@property (nonatomic, readwrite) NSString *documentID;
+
++ (instancetype)documentWithID:(NSString *)identifier;
+
+@end

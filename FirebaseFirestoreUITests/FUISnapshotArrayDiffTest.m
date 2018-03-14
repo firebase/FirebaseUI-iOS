@@ -262,8 +262,22 @@
 
 - (void)testSimpleInsertionCase {
   NSArray *initial = @[];
-  NSArray *result =
-      @[@"a", @"b", @"c", @"d", @"e", @"f", @"g", @"h", @"i", @"j", @"k", @"l", @"m", @"n"];
+  NSArray *result = @[
+    [FUIDocumentSnapshot documentWithID:@"a"],
+    [FUIDocumentSnapshot documentWithID:@"b"],
+    [FUIDocumentSnapshot documentWithID:@"c"],
+    [FUIDocumentSnapshot documentWithID:@"d"],
+    [FUIDocumentSnapshot documentWithID:@"e"],
+    [FUIDocumentSnapshot documentWithID:@"f"],
+    [FUIDocumentSnapshot documentWithID:@"g"],
+    [FUIDocumentSnapshot documentWithID:@"h"],
+    [FUIDocumentSnapshot documentWithID:@"i"],
+    [FUIDocumentSnapshot documentWithID:@"j"],
+    [FUIDocumentSnapshot documentWithID:@"k"],
+    [FUIDocumentSnapshot documentWithID:@"l"],
+    [FUIDocumentSnapshot documentWithID:@"m"],
+    [FUIDocumentSnapshot documentWithID:@"n"],
+  ];
 
   NSMutableArray *changes = [NSMutableArray arrayWithCapacity:14];
   for (NSInteger i = 0; i < 14; i++) {
@@ -295,8 +309,23 @@
 }
 
 - (void)testSimpleChangeCase {
-  NSArray *initial =
-      @[@"a", @"b", @"c", @"d", @"e", @"f", @"g", @"h", @"i", @"j", @"k", @"l", @"m", @"n"];
+  NSArray *initial = @[
+    [FUIDocumentSnapshot documentWithID:@"a"],
+    [FUIDocumentSnapshot documentWithID:@"b"],
+    [FUIDocumentSnapshot documentWithID:@"c"],
+    [FUIDocumentSnapshot documentWithID:@"d"],
+    [FUIDocumentSnapshot documentWithID:@"e"],
+    [FUIDocumentSnapshot documentWithID:@"f"],
+    [FUIDocumentSnapshot documentWithID:@"g"],
+    [FUIDocumentSnapshot documentWithID:@"h"],
+    [FUIDocumentSnapshot documentWithID:@"i"],
+    [FUIDocumentSnapshot documentWithID:@"j"],
+    [FUIDocumentSnapshot documentWithID:@"k"],
+    [FUIDocumentSnapshot documentWithID:@"l"],
+    [FUIDocumentSnapshot documentWithID:@"m"],
+    [FUIDocumentSnapshot documentWithID:@"n"],
+  ];
+
   NSArray *result = initial;
 
   NSMutableArray *changes = [NSMutableArray arrayWithCapacity:14];
@@ -329,8 +358,22 @@
 }
 
 - (void)testSimpleDeletionCase {
-  NSArray *initial =
-      @[@"a", @"b", @"c", @"d", @"e", @"f", @"g", @"h", @"i", @"j", @"k", @"l", @"m", @"n"];
+  NSArray *initial = @[
+    [FUIDocumentSnapshot documentWithID:@"a"],
+    [FUIDocumentSnapshot documentWithID:@"b"],
+    [FUIDocumentSnapshot documentWithID:@"c"],
+    [FUIDocumentSnapshot documentWithID:@"d"],
+    [FUIDocumentSnapshot documentWithID:@"e"],
+    [FUIDocumentSnapshot documentWithID:@"f"],
+    [FUIDocumentSnapshot documentWithID:@"g"],
+    [FUIDocumentSnapshot documentWithID:@"h"],
+    [FUIDocumentSnapshot documentWithID:@"i"],
+    [FUIDocumentSnapshot documentWithID:@"j"],
+    [FUIDocumentSnapshot documentWithID:@"k"],
+    [FUIDocumentSnapshot documentWithID:@"l"],
+    [FUIDocumentSnapshot documentWithID:@"m"],
+    [FUIDocumentSnapshot documentWithID:@"n"],
+  ];
   NSArray *result = @[];
 
   NSMutableArray *changes = [NSMutableArray arrayWithCapacity:14];

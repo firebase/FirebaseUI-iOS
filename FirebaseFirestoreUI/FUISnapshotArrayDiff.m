@@ -101,9 +101,25 @@
 @property (nonatomic, readwrite) id left;
 @property (nonatomic, readwrite) id right;
 
+- (instancetype)initWithLeft:(id)left right:(id)right NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
+
 @end
 
 @implementation FUIUnorderedPair
+
+- (instancetype)init {
+  abort();
+}
+
+- (instancetype)initWithLeft:(id)left right:(id)right {
+  self = [super init];
+  if (self != nil) {
+    _left = left;
+    _right = right;
+  }
+  return self;
+}
 
 - (NSUInteger)hash {
   return [self.left hash] ^ [self.right hash];
@@ -127,12 +143,9 @@
 @end
 
 FUIUnorderedPair *FUIUnorderedPairMake(id left, id right) {
-  FUIUnorderedPair *pair = [[FUIUnorderedPair alloc] init];
-  pair.left = left;
-  pair.right = right;
+  FUIUnorderedPair *pair = [[FUIUnorderedPair alloc] initWithLeft:left right:right];
   return pair;
 }
-
 
 @interface FUILCS ()
 @property (nonatomic, readonly) NSMutableDictionary<FUIUnorderedPair<FUIArraySlice<id> *> *, NSMutableArray<id> *> *memo;
@@ -365,17 +378,20 @@ FUIUnorderedPair *FUIUnorderedPairMake(id left, id right) {
 }
 
 - (void)buildDiffsFromDocumentChanges:(NSArray<FIRDocumentChange *> *)documentChanges {
-  NSMutableDictionary<FIRDocumentSnapshot *, NSNumber *> *oldIndexes =
+  NSMutableDictionary<NSString *, NSNumber *> *oldIndexes =
       [NSMutableDictionary dictionaryWithCapacity:_initial.count];
-  NSMutableDictionary<FIRDocumentSnapshot *, NSNumber *> *newIndexes =
+  NSMutableDictionary<NSString *, NSNumber *> *newIndexes =
       [NSMutableDictionary dictionaryWithCapacity:_result.count];
+
+  NSArray<FIRDocumentSnapshot *> *initial = _initial;
+  NSArray<FIRDocumentSnapshot *> *result = _result;
 
   // Ignore the FIRDocumentChange indexing, since we do our own
   for (NSInteger i = 0; i < _initial.count; i++) {
-    oldIndexes[_initial[i]] = @(i);
+    oldIndexes[initial[i].documentID] = @(i);
   }
   for (NSInteger i = 0; i < _result.count; i++) {
-    newIndexes[_result[i]] = @(i);
+    newIndexes[result[i].documentID] = @(i);
   }
 
   NSMutableArray<NSNumber *> *deletedIndexes = [NSMutableArray array];
@@ -395,8 +411,8 @@ FUIUnorderedPair *FUIUnorderedPairMake(id left, id right) {
 
   for (FIRDocumentChange *change in documentChanges) {
     FIRDocumentSnapshot *snapshot = change.document;
-    NSNumber *oldIndex = oldIndexes[snapshot];
-    NSNumber *newIndex = newIndexes[snapshot];
+    NSNumber *oldIndex = oldIndexes[snapshot.documentID];
+    NSNumber *newIndex = newIndexes[snapshot.documentID];
     if (oldIndex == nil && newIndex == nil) { continue; }
     switch (change.type) {
       case FIRDocumentChangeTypeRemoved:
@@ -478,7 +494,8 @@ FUIUnorderedPair *FUIUnorderedPairMake(id left, id right) {
     NSNumber *initial = _movedInitialIndexes[i];
     NSNumber *final = _movedResultIndexes[i];
     id object = _movedObjects[i];
-    [moved appendFormat:@"  %li -> %li, %@\n", (long)initial.integerValue, final.integerValue, object];
+    [moved appendFormat:@"  %li -> %li, %@\n",
+        (long)initial.integerValue, (long)final.integerValue, object];
   }
   [moved appendString:@")\n"];
 
