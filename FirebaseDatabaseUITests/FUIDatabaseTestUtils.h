@@ -92,8 +92,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface FUIArrayTestDelegate : NSObject <FUICollectionDelegate>
-@property (nonatomic, copy) void (^didStartUpdates)();
-@property (nonatomic, copy) void (^didEndUpdates)();
+@property (nonatomic, copy) void (^didStartUpdates)(void);
+@property (nonatomic, copy) void (^didEndUpdates)(void);
 @property (nonatomic, copy) void (^queryCancelled)(id<FUICollection> array, NSError *error);
 @property (nonatomic, copy) void (^didAddObject)(id<FUICollection> array, id object, NSUInteger index);
 @property (nonatomic, copy) void (^didChangeObject)(id<FUICollection> array, id object, NSUInteger index);

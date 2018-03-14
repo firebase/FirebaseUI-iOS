@@ -18,11 +18,22 @@
 
 @implementation FUIDocumentChange
 
-+ (instancetype)changeWithType:(FIRDocumentChangeType)type document:(id)document {
++ (instancetype)changeWithType:(FIRDocumentChangeType)type
+                      document:(id)document {
   FUIDocumentChange *change = [[FUIDocumentChange alloc] init];
   change.type = type;
   change.document = document;
   return change;
+}
+
+@end
+
+@implementation FUIDocumentSnapshot
+
++ (instancetype)documentWithID:(NSString *)identifier {
+  FUIDocumentSnapshot *doc = [[FUIDocumentSnapshot alloc] init];
+  doc.documentID = identifier;
+  return doc;
 }
 
 @end
