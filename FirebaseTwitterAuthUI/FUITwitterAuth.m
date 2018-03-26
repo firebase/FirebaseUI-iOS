@@ -138,8 +138,14 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 }
 
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication {
+  NSDictionary<UIApplicationOpenURLOptionsKey, NSString *> *options = @{};
+  if (sourceApplication != nil) {
+    options = @{
+      UIApplicationOpenURLOptionsSourceApplicationKey: sourceApplication
+    };
+  }
   return [[self getTwitterManager] application:[UIApplication sharedApplication]
-                                       openURL:URL options:@{}];
+                                       openURL:URL options:options];
 }
 
 #pragma mark - Private methods
