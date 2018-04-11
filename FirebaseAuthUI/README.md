@@ -160,8 +160,8 @@ present the `authViewController` obtain as instance as follows:
 // Present the auth view controller and then implement the sign in callback.
 let authViewController = authUI!.authViewController()
 
-func authUI(_ authUI: FUIAuth, didSignInWith user: FIRUser?, error: Error?) {
-  // handle user and error as necessary
+func authUI(_ authUI: FUIAuth, didSignInWithAuthDataResult authDataResult: FIRAuthDataResult?, error: Error?){
+  // handle user (`authDataResult.user`) and error as necessary
 }
 ```
 
@@ -171,8 +171,10 @@ UINavigationController *authViewController = [authUI authViewController];
 // Use authViewController as your root view controller,
 // or present it on top of an existing view controller.
 
-- (void)authUI:(FUIAuth *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error {
-  // Implement this method to handle signed in user or error if any.
+- (void)authUI:(FUIAuth *)authUI
+    didSignInWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult
+         error:(nullable NSError *)error {
+  // Implement this method to handle signed in user (`authDataResult.user`) or error if any.
 }
 ```
 
