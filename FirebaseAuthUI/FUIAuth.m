@@ -246,7 +246,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                           originalError:error
                              completion:^(FIRAuthDataResult *_Nullable authResult,
                                           NSError *_Nullable error,
-                                          FIRAuthCredential *_Nullable credential) {
+                                          FIRAuthCredential *_Nullable existingCredential) {
                 if (error) {
                   completeSignInBlock(nil, error);
                   return;
@@ -336,7 +336,9 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
   [self.auth fetchProvidersForEmail:emailHint completion:^(NSArray<NSString *> *_Nullable providers,
                                                            NSError *_Nullable error) {
     if (error) {
-      completion(nil, error, nil);
+      if (completion) {
+        completion(nil, error, nil);
+      }
       return;
     }
     NSString *existingFederatedProviderID = [self authProviderFromProviders:providers];
@@ -370,7 +372,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
             completion(nil, originalError, nil);
           }
         }];
-      } else {
+      } else { // Federated sign-in case.
         id<FUIAuthProvider> authProviderUI;
         // Retrieve the FUIAuthProvider instance from FUIAuth for the existing provider ID.
         for (id<FUIAuthProvider> provider in self.providers) {
@@ -428,6 +430,9 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                     completion(nil, error, credential);
                   }
                 }];
+              }
+              if (completion) {
+                completion(authResult, error, credential);
               }
             }];
           }];
