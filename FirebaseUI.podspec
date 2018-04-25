@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
     database.platform = :ios, '8.0'
     database.public_header_files = 'FirebaseDatabaseUI/*.h'
     database.source_files = 'FirebaseDatabaseUI/*.{h,m}'
-    database.dependency 'Firebase/Database', '~> 4.0'
+    database.dependency 'Firebase/Database', '~> 5.0'
     database.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseDatabaseUI' }
   end
 
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
     storage.platform = :ios, '8.0'
     storage.public_header_files = 'FirebaseStorageUI/*.h'
     storage.source_files = 'FirebaseStorageUI/*.{h,m}'
-    storage.dependency 'Firebase/Storage', '~> 4.0'
+    storage.dependency 'Firebase/Storage', '~> 5.0'
     storage.dependency 'SDWebImage', '~> 4.0'
     storage.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseStorageUI' }
   end
@@ -56,7 +56,7 @@ Pod::Spec.new do |s|
                                 'FirebaseAuthUI/FUIPasswordSignUpViewController.h',
                                 'FirebaseAuthUI/FUIPasswordVerificationViewController.h']
     auth.source_files = ['FirebaseAuthUI/**/*.{h,m}', 'FirebaseAuthUI/*.{h,m}']
-    auth.dependency 'Firebase/Auth', '~> 4.2'
+    auth.dependency 'Firebase/Auth', '~> 5.0'
     auth.resource_bundle = {
       'FirebaseAuthUI' => ['FirebaseAuthUI/**/*.{xib,png,lproj}']
     }
