@@ -91,6 +91,8 @@ NS_ASSUME_NONNULL_BEGIN
                    defaultValue:phoneNumber];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
@@ -98,6 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
       presentingViewController:presentingViewController
                     completion:completion];
 }
+#pragma clang diagnostic pop
 
 - (void)signInWithDefaultValue:(nullable NSString *)defaultValue
       presentingViewController:(nullable UIViewController *)presentingViewController
@@ -141,7 +144,7 @@ NS_ASSUME_NONNULL_BEGIN
 
   FIRAuthResultCallback resultAuthCallback = ^(FIRUser *_Nullable user, NSError *_Nullable error) {
     if (!error) {
-      _pendingSignInCallback = nil;
+      self->_pendingSignInCallback = nil;
     }
     if (result) {
       result(user, error);

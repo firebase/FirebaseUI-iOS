@@ -205,9 +205,13 @@ NS_ASSUME_NONNULL_BEGIN
 
   [self.delegate incrementActivity];
 
+  if (self.delegate.auth.currentUser.email == nil) {
+    NSLog(@"FirebaseUI: Expected nonnull email during email/password reauthentication");
+    return;
+  }
   [self.delegate.auth signInWithEmail:self.delegate.auth.currentUser.email
                              password:password
-                           completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+                           completion:^(FIRAuthDataResult *authResult, NSError *error) {
     [self.delegate decrementActivity];
 
     [self finishOperationWithError:error];
