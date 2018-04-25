@@ -27,6 +27,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface FUIAuthBaseViewController : UIViewController
 
+/** @typedef FUIAuthAlertActionHandler
+ @brief The type of block called when an alert view is dismissed by a user action.
+ */
+typedef void (^FUIAuthAlertActionHandler)(void);
+
 /** @property auth
     @brief The @c FIRAuth instance of the application.
  */
@@ -79,6 +84,39 @@ NS_ASSUME_NONNULL_BEGIN
     @brief Cancels Authorization flow, calls UI delegate callbacks and hides UI
  */
 - (void)cancelAuthorization;
+
+/** @fn showSignInAlertWithEmail:provider:handler:
+ @brief Displays an alert to conform with user whether she wants to proceed with the provider.
+ @param email The email address to sign in with.
+ @param provider The identity provider to sign in with.
+ @param signinHandler Handler for the sign in action of the alert.
+ @param cancelHandler Handler for the cancel action of the alert.
+ */
++ (void)showSignInAlertWithEmail:(NSString *)email
+                        provider:(id<FUIAuthProvider>)provider
+        presentingViewController:(UIViewController *)presentingViewController
+                   signinHandler:(FUIAuthAlertActionHandler)signinHandler
+                   cancelHandler:(FUIAuthAlertActionHandler)cancelHandler;
+
+/** @fn incrementActivity
+ @brief Increment the current activity count. If there's positive number of activities, display
+ and animate the activity indicator with a short period of delay.
+ @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
+ */
+- (void)incrementActivity;
+
+/** @fn decrementActivity
+ @brief Decrement the current activity count. If the count reaches 0, stop and hide the
+ activity indicator.
+ @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
+ */
+- (void)decrementActivity;
+
+/** @fn addActivityIndicator:
+ @brief Creates and add activity indicator to the center of the specified view.
+ @param view The View where indicator is shown.
+ */
++ (UIActivityIndicatorView *)addActivityIndicator:(UIView *)view;
 
 @end
 
