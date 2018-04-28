@@ -277,7 +277,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
 }
 
 - (void)dismissNavigationControllerAnimated:(BOOL)animated completion:(void (^)(void))completion{
-     if (self.navigationController == UIApplication.sharedApplication.delegate.window.rootViewController){
+     if (self.navigationController.presentingViewController == nil){
          if (completion){
              completion();
          }
