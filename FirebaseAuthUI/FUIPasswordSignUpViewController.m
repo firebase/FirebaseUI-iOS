@@ -223,8 +223,8 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
         return;
     }
   }
-
-  [self.navigationController dismissViewControllerAnimated:YES completion:^() {
+    
+  [self dismissNavigationControllerAnimated:YES completion:^() {
     [self.authUI invokeResultCallbackWithAuthDataResult:authDataResult error:error];
   }];
 }

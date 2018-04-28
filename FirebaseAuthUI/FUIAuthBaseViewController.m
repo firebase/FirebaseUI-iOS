@@ -276,6 +276,16 @@ static NSString *const kAuthUICodingKey = @"authUI";
               navigationController:self.navigationController];
 }
 
+- (void)dismissNavigationControllerAnimated:(BOOL)animated completion:(void (^)(void))completion{
+     if (self.navigationController == UIApplication.sharedApplication.delegate.window.rootViewController){
+         if (completion){
+             completion();
+         }
+     }else{
+         [self.navigationController dismissViewControllerAnimated:animated completion:completion];
+     }
+}
+
 + (void)pushViewController:(UIViewController *)viewController
       navigationController:(UINavigationController *)navigationController {
   // Override the back button title with "Back".
@@ -335,7 +345,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
 }
 
 - (void)cancelAuthorization {
-  [self.navigationController dismissViewControllerAnimated:YES completion:^{
+  [self dismissNavigationControllerAnimated:YES completion:^{
     NSError *error = [FUIAuthErrorUtils userCancelledSignInError];
     [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
   }];
