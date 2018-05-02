@@ -1,3 +1,6 @@
+source 'sso://cpdc-internal/spec'
+source 'https://github.com/CocoaPods/Specs.git'
+
 target 'FirebaseUI-demo-swift' do
   use_frameworks!
 
@@ -8,4 +11,3 @@ target 'FirebaseUI-demo-swift' do
   end
 
 end
-
