@@ -86,7 +86,7 @@ typedef void (^FUIAuthAlertActionHandler)(void);
 - (void)cancelAuthorization;
 
 /** @fn showSignInAlertWithEmail:provider:handler:
- @brief Displays an alert to conform with user whether she wants to proceed with the provider.
+ @brief Displays an alert asking the user to confirm whether or not they want to proceed with the selected provider.
  @param email The email address to sign in with.
  @param provider The identity provider to sign in with.
  @param signinHandler Handler for the sign in action of the alert.
@@ -100,7 +100,7 @@ typedef void (^FUIAuthAlertActionHandler)(void);
 
 /** @fn incrementActivity
  @brief Increment the current activity count. If there's positive number of activities, display
- and animate the activity indicator with a short period of delay.
+ and animate the activity indicator with a short delay.
  @remarks Calls to @c incrementActivity and @c decrementActivity should be balanced.
  */
 - (void)incrementActivity;
@@ -113,8 +113,8 @@ typedef void (^FUIAuthAlertActionHandler)(void);
 - (void)decrementActivity;
 
 /** @fn addActivityIndicator:
- @brief Creates and add activity indicator to the center of the specified view.
- @param view The View where indicator is shown.
+ @briefCreates and adds an activity indicator to the center of the specified view.
+ @param view The view where indicator is shown.
  */
 + (UIActivityIndicatorView *)addActivityIndicator:(UIView *)view;
 
