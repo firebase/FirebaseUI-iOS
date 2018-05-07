@@ -19,7 +19,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class FUIIndexCollectionViewDataSource;
+@class FUIIndexCollectionViewDataSource, FUIIndexArray;
 
 @protocol FUIIndexCollectionViewDataSourceDelegate <NSObject>
 @optional
@@ -72,6 +72,22 @@ didFailLoadAtIndex:(NSUInteger)index
 
 /**
  * Initializes a collection view data source.
+ * @param indexArray The FUIIndexArray whose contents will be displayed in the collection view.
+ * @param collectionView The collection view that is populated by this data source. The
+ *   data source pulls updates from Firebase database, so it must maintain a reference
+ *   to the collection view in order to update its contents as the database pushes updates.
+ *   The collection view is not retained by its data source.
+ * @param populateCell The closure invoked when populating a UICollectionViewCell (or subclass).
+ */
+- (instancetype)initWithIndexArray:(FUIIndexArray *)indexArray
+                          delegate:(nullable id<FUIIndexCollectionViewDataSourceDelegate>)delegate
+                      populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
+                                                              NSIndexPath *indexPath,
+                                                              FIRDataSnapshot *_Nullable snap))populateCell
+                                                                  NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes a collection view data source.
  * @param indexQuery The Firebase query containing children of the data query.
  * @param dataQuery The reference whose children correspond to the contents of the
  *   index query. This reference's children's contents are served as the contents
@@ -84,11 +100,10 @@ didFailLoadAtIndex:(NSUInteger)index
  */
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
-               collectionView:(UICollectionView *)collectionView
                      delegate:(nullable id<FUIIndexCollectionViewDataSourceDelegate>)delegate
                  populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
                                                          NSIndexPath *indexPath,
-                                                         FIRDataSnapshot *_Nullable snap))populateCell NS_DESIGNATED_INITIALIZER;
+                                                         FIRDataSnapshot *_Nullable snap))populateCell;
 
 /**
  * Returns the snapshot at the given index, if it has loaded.
@@ -97,6 +112,18 @@ didFailLoadAtIndex:(NSUInteger)index
  * @return A snapshot, or nil if one has not yet been loaded.
  */
 - (nullable FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index;
+
+/**
+ * Attaches the data source to a collection view and begins sending updates immediately.
+ * @param view An instance of UICollectionView that the data source should push
+ *   updates to.
+ */
+- (void)bindToView:(UICollectionView *)view;
+
+/**
+ * Detaches the data source from a view and stops sending any updates.
+ */
+- (void)unbind;
 
 @end
 

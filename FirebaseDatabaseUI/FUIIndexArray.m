@@ -59,7 +59,6 @@
     _data = data;
     _observers = [NSMutableArray array];
     _delegate = delegate;
-    [self observeQueries];
   }
   return self;
 }
@@ -91,6 +90,10 @@
 
 - (NSUInteger)count {
   return self.observers.count;
+}
+
+- (void)observeQuery {
+  [self observeQueries];
 }
 
 // FUIIndexArray instance becomes unusable after invalidation.

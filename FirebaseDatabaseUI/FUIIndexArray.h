@@ -171,8 +171,14 @@ didFailLoadWithError:(NSError *)error;
 - (nullable FIRDataSnapshot *)objectAtIndex:(NSUInteger)index;
 
 /**
+ * Starts observing the index array's listeners. The indexed array will pass updates to its delegate
+ * until the `invalidate` method is called.
+ */
+- (void)observeQuery;
+
+/**
  * Removes all observers from all queries managed by this array and renders this array
- * unusable.
+ * unusable. Initialize a new array instead of reusing this array.
  */
 - (void)invalidate;
 
