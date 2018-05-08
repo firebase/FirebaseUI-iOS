@@ -73,10 +73,6 @@ didFailLoadAtIndex:(NSUInteger)index
 /**
  * Initializes a collection view data source.
  * @param indexArray The FUIIndexArray whose contents will be displayed in the collection view.
- * @param collectionView The collection view that is populated by this data source. The
- *   data source pulls updates from Firebase database, so it must maintain a reference
- *   to the collection view in order to update its contents as the database pushes updates.
- *   The collection view is not retained by its data source.
  * @param populateCell The closure invoked when populating a UICollectionViewCell (or subclass).
  */
 - (instancetype)initWithIndexArray:(FUIIndexArray *)indexArray
@@ -92,10 +88,6 @@ didFailLoadAtIndex:(NSUInteger)index
  * @param dataQuery The reference whose children correspond to the contents of the
  *   index query. This reference's children's contents are served as the contents
  *   of the collection view that adopts this data source.
- * @param collectionView The collection view that is populated by this data source. The
- *   data source pulls updates from Firebase database, so it must maintain a reference
- *   to the collection view in order to update its contents as the database pushes updates.
- *   The collection view is not retained by its data source.
  * @param populateCell The closure invoked when populating a UICollectionViewCell (or subclass).
  */
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
@@ -115,8 +107,10 @@ didFailLoadAtIndex:(NSUInteger)index
 
 /**
  * Attaches the data source to a collection view and begins sending updates immediately.
- * @param view An instance of UICollectionView that the data source should push
- *   updates to.
+ * @param view The collection view that is populated by this data source. The
+ *   data source pulls updates from Firebase database, so it must maintain a reference
+ *   to the collection view in order to update its contents as the database pushes updates.
+ *   The collection view is not retained by its data source.
  */
 - (void)bindToView:(UICollectionView *)view;
 
