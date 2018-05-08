@@ -4,8 +4,7 @@ Pod::Spec.new do |s|
   s.summary      = 'UI binding libraries for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'LICENSE' }
-  # s.source       = { :git => 'https://github.com/firebase/FirebaseUI-iOS.git', :tag => 'v5.0.0' }
-  s.source       = { :git => 'sso://devrel/firebaseui-ios', :branch => 'firebase-5' }
+  s.source       = { :git => 'https://github.com/firebase/FirebaseUI-iOS.git', :tag => 'v5.0.0' }
   s.author       = 'Firebase'
   s.platform = :ios
   s.ios.deployment_target = '9.0'
