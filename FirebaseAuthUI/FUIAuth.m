@@ -304,8 +304,9 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
           return;
         }
 
-        [self.auth signInWithCredential:credential completion:^(FIRUser *_Nullable user,
-                                                                NSError *_Nullable error) {
+        [self.auth signInAndRetrieveDataWithCredential:credential
+                                            completion:^(FIRAuthDataResult*_Nullable authResult,
+                                                         NSError *_Nullable error) {
           if (error) {
             [self invokeResultCallbackWithAuthDataResult:nil error:error];
             if (result) {
@@ -314,6 +315,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
             return;
           }
 
+          FIRUser *user = authResult.user;
           [user linkAndRetrieveDataWithCredential:newCredential
                                        completion:^(FIRAuthDataResult *_Nullable authResult,
                                                     NSError *_Nullable error) {
@@ -339,12 +341,15 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
 - (void)invokeResultCallbackWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult
                                          error:(nullable NSError *)error {
   dispatch_async(dispatch_get_main_queue(), ^{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if ([self.delegate respondsToSelector:@selector(authUI:didSignInWithAuthDataResult:error:)]) {
       [self.delegate authUI:self didSignInWithAuthDataResult:authDataResult error:error];
     }
     if ([self.delegate respondsToSelector:@selector(authUI:didSignInWithUser:error:)]) {
       [self.delegate authUI:self didSignInWithUser:authDataResult.user error:error];
     }
+#pragma clang diagnostic pop
   });
 }
 

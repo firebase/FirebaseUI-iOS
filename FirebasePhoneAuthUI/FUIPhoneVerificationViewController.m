@@ -134,14 +134,14 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
     // TODO: Remove temporary workaround when the issue is fixed in FirebaseAuth.
     dispatch_block_t completionBlock = ^() {
       [self decrementActivity];
-      _verificationID = verificationID;
-      [_codeField becomeFirstResponder];
+      self->_verificationID = verificationID;
+      [self->_codeField becomeFirstResponder];
 
       if (error) {
         UIAlertController *alertController = [FUIPhoneAuth alertControllerForError:error
                                                                      actionHandler:^{
-                                               [_codeField clearCodeInput];
-                                               [_codeField becomeFirstResponder];
+                                               [self->_codeField clearCodeInput];
+                                               [self->_codeField becomeFirstResponder];
                                              }];
         [self presentViewController:alertController animated:YES completion:nil];
         return;
@@ -149,7 +149,7 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
 
       NSString *resultMessage =
           [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeResult),
-              _phoneNumber];
+              self->_phoneNumber];
       [self showAlertWithMessage:resultMessage];
     };
     if ([NSThread isMainThread]) {
@@ -192,8 +192,8 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
     } else {
       UIAlertController *alertController = [FUIPhoneAuth alertControllerForError:error
                                                                    actionHandler:^{
-                                             [_codeField clearCodeInput];
-                                             [_codeField becomeFirstResponder];
+                                             [self->_codeField clearCodeInput];
+                                             [self->_codeField becomeFirstResponder];
                                            }];
       [self presentViewController:alertController animated:YES completion:nil];
     }
@@ -268,7 +268,7 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
 - (void)updateResendLabel {
   NSInteger minutes = (NSInteger)_resendConfirmationCodeSeconds / 60; // Integer type for truncation
   NSInteger seconds = (NSInteger)round(_resendConfirmationCodeSeconds) % 60;
-  NSString *formattedTime = [NSString stringWithFormat:@"%ld:%02ld", minutes, seconds];
+  NSString *formattedTime = [NSString stringWithFormat:@"%ld:%02ld", (long)minutes, (long)seconds];
 
   _resendConfirmationCodeTimerLabel.text =
       [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_ResendCodeTimer),

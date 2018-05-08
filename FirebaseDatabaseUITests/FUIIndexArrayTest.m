@@ -64,6 +64,7 @@ static inline NSDictionary *database() {
   self.arrayDelegate = [[FUIIndexArrayTestDelegate alloc] init];
   self.array.delegate = self.arrayDelegate;
   self.dict = [database() mutableCopy];
+  [self.array observeQuery];
 }
 
 - (void)tearDown {

@@ -35,53 +35,54 @@ target 'FirebaseAuthUI' do
     inherit! :search_paths
     pod 'OCMock'
   end
-end
 
-target 'FirebaseFacebookAuthUI' do
-  use_frameworks!
-  # Pods for Facebook Auth
-  pod 'FBSDKLoginKit', '~> 4.0'
-  pod 'FBSDKCoreKit', '~> 4.0'
-
-  target 'FirebaseFacebookAuthUITests' do
+  target 'FirebaseFacebookAuthUI' do
     inherit! :search_paths
-    pod 'OCMock'
+    # Pods for Facebook Auth
     pod 'FBSDKLoginKit', '~> 4.0'
     pod 'FBSDKCoreKit', '~> 4.0'
+
+    target 'FirebaseFacebookAuthUITests' do
+      inherit! :search_paths
+      pod 'OCMock'
+      pod 'FBSDKLoginKit', '~> 4.0'
+      pod 'FBSDKCoreKit', '~> 4.0'
+    end
   end
-end
 
-target 'FirebaseGoogleAuthUI' do
-  use_frameworks!
-  # Pods for Google Auth
-  pod 'GoogleSignIn', '~> 4.0'
-
-  target 'FirebaseGoogleAuthUITests' do
+  target 'FirebaseGoogleAuthUI' do
     inherit! :search_paths
-    pod 'OCMock'
+    # Pods for Google Auth
+    pod 'GoogleSignIn', '~> 4.0'
+
+    target 'FirebaseGoogleAuthUITests' do
+      inherit! :search_paths
+      pod 'OCMock'
+    end
   end
-end
 
-target 'FirebasePhoneAuthUI' do
-  use_frameworks!
-
-  target 'FirebasePhoneAuthUITests' do
+  target 'FirebasePhoneAuthUI' do
     inherit! :search_paths
-    pod 'OCMock'
+
+    target 'FirebasePhoneAuthUITests' do
+      inherit! :search_paths
+      pod 'OCMock'
+    end
   end
-end
 
-target 'FirebaseTwitterAuthUI' do
-  platform :ios, '9.0'
-  use_frameworks!
-  # Pods for Twitter Auth
-  pod 'TwitterKit', '~> 3.0'
-
-  target 'FirebaseTwitterAuthUITests' do
+  target 'FirebaseTwitterAuthUI' do
     platform :ios, '9.0'
     inherit! :search_paths
-    pod 'OCMock'
+    # Pods for Twitter Auth
+    pod 'TwitterKit', '~> 3.0'
+
+    target 'FirebaseTwitterAuthUITests' do
+      platform :ios, '9.0'
+      inherit! :search_paths
+      pod 'OCMock'
+    end
   end
+
 end
 
 target 'FirebaseFirestoreUI' do

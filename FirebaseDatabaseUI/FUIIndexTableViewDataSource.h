@@ -19,7 +19,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class FUIIndexTableViewDataSource;
+@class FUIIndexTableViewDataSource, FUIIndexArray;
 
 @protocol FUIIndexTableViewDataSourceDelegate <NSObject>
 @optional
@@ -74,7 +74,7 @@ didFailLoadAtIndex:(NSUInteger)index
  * Initializes a table view data source.
  * @param indexQuery The Firebase query containing children of the data query.
  * @param dataQuery The reference whose children correspond to the contents of the
- *   index query. This reference's children's contents are served as teh contents 
+ *   index query. This reference's children's contents are served as the contents
  *   of the table view that adopts this data source.
  * @param tableView The table view that is populated by this data source. The
  *   data source pulls updates from Firebase database, so it must maintain a reference
@@ -84,11 +84,26 @@ didFailLoadAtIndex:(NSUInteger)index
  */
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
-                    tableView:(UITableView *)tableView
                      delegate:(nullable id<FUIIndexTableViewDataSourceDelegate>)delegate
                  populateCell:(UITableViewCell *(^)(UITableView *tableView,
                                                     NSIndexPath *indexPath,
-                                                    FIRDataSnapshot *_Nullable snap))populateCell NS_DESIGNATED_INITIALIZER;
+                                                    FIRDataSnapshot *_Nullable snap))populateCell;
+
+/**
+ * Initializes a table view data source.
+ * @param indexArray The FUIIndexArray whose contents will be displayed in the table view.
+ * @param tableView The table view that is populated by this data source. The
+ *   data source pulls updates from Firebase database, so it must maintain a reference
+ *   to the table view in order to update its contents as the database pushes updates.
+ *   The table view is not retained by its data source.
+ * @param populateCell The closure invoked when populating a UITableViewCell (or subclass).
+ */
+- (instancetype)initWithIndexArray:(FUIIndexArray *)indexArray
+                          delegate:(nullable id<FUIIndexTableViewDataSourceDelegate>)delegate
+                      populateCell:(UITableViewCell *(^)(UITableView *tableView,
+                                                         NSIndexPath *indexPath,
+                                                         FIRDataSnapshot *_Nullable snap))populateCell
+                                                             NS_DESIGNATED_INITIALIZER;
 
 /**
  * Returns the snapshot at the given index, if it has loaded.
@@ -97,6 +112,18 @@ didFailLoadAtIndex:(NSUInteger)index
  * @return A snapshot, or nil if one has not yet been loaded.
  */
 - (nullable FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index;
+
+/**
+ * Attaches the data source to a table view and begins sending updates immediately.
+ * @param view An instance of UITableView that the data source should push
+ *   updates to.
+ */
+- (void)bindToView:(UITableView *)view;
+
+/**
+ * Detaches the data source from a view and stops sending any updates.
+ */
+- (void)unbind;
 
 @end
 

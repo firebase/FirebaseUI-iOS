@@ -21,7 +21,7 @@
 @interface FUIIndexCollectionViewDataSource () <FUIIndexArrayDelegate>
 
 @property (nonatomic, readonly, nonnull) FUIIndexArray *array;
-@property (nonatomic, readonly, weak) UICollectionView *collectionView;
+@property (nonatomic, weak, nullable) UICollectionView *collectionView;
 
 @property (nonatomic, readonly, copy) UICollectionViewCell *(^populateCell)
   (UICollectionView *collectionView, NSIndexPath *indexPath, FIRDataSnapshot *object);
@@ -32,17 +32,24 @@
 
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
                          data:(FIRDatabaseReference *)dataQuery
-               collectionView:(UICollectionView *)collectionView
+                     delegate:(id<FUIIndexCollectionViewDataSourceDelegate>)delegate
+                 populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
+                                                         NSIndexPath *indexPath,
+                                                         FIRDataSnapshot *snap))populateCell {
+  FUIIndexArray *array = [[FUIIndexArray alloc] initWithIndex:indexQuery
+                                                         data:dataQuery
+                                                     delegate:self];
+  return [self initWithIndexArray:array delegate:delegate populateCell:populateCell];
+}
+
+- (instancetype)initWithIndexArray:(FUIIndexArray *)indexArray
                      delegate:(id<FUIIndexCollectionViewDataSourceDelegate>)delegate
                  populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
                                                          NSIndexPath *indexPath,
                                                          FIRDataSnapshot *snap))populateCell {
   self = [super init];
   if (self != nil) {
-    _array = [[FUIIndexArray alloc] initWithIndex:indexQuery
-                                                  data:dataQuery
-                                              delegate:self];
-    _collectionView = collectionView;
+    _array = indexArray;
     _collectionView.dataSource = self;
     _populateCell = populateCell;
     _delegate = delegate;
@@ -56,6 +63,18 @@
 
 - (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index {
   return [self.array objectAtIndex:index];
+}
+
+- (void)bindToView:(UICollectionView *)view {
+  self.collectionView = view;
+  view.dataSource = self;
+  [self.array observeQuery];
+}
+
+- (void)unbind {
+  [self.array invalidate];
+  self.collectionView.dataSource = nil;
+  self.collectionView = nil;
 }
 
 #pragma mark - FUIIndexArrayDelegate
@@ -115,7 +134,8 @@ didLoadObject:(FIRDataSnapshot *)object
 
 #pragma mark - UICollectionViewDataSource
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView
+     numberOfItemsInSection:(NSInteger)section {
   return self.array.count;
 }
 
@@ -131,18 +151,17 @@ didLoadObject:(FIRDataSnapshot *)object
 @implementation UICollectionView (FUIIndexCollectionViewDataSource)
 
 - (FUIIndexCollectionViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
-                                                    data:(FIRDatabaseReference *)data
-                                                delegate:(id<FUIIndexCollectionViewDataSourceDelegate>)delegate
-                                            populateCell:(UICollectionViewCell *(^)(UICollectionView *,
-                                                                                    NSIndexPath *,
-                                                                                    FIRDataSnapshot *))populateCell {
+    data:(FIRDatabaseReference *)data
+    delegate:(id<FUIIndexCollectionViewDataSourceDelegate>)delegate
+    populateCell:(UICollectionViewCell *(^)(UICollectionView *,
+                                            NSIndexPath *,
+                                            FIRDataSnapshot *))populateCell {
   FUIIndexCollectionViewDataSource *dataSource =
     [[FUIIndexCollectionViewDataSource alloc] initWithIndex:index
-                                                            data:data
-                                                  collectionView:self
-                                                        delegate:delegate
-                                                    populateCell:populateCell];
-  self.dataSource = dataSource;
+                                                       data:data
+                                                   delegate:delegate
+                                               populateCell:populateCell];
+  [dataSource bindToView:self];
   return dataSource;
 }
 

@@ -103,6 +103,8 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   return [UIColor colorWithWhite:0 alpha:0.54f];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
@@ -110,6 +112,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
       presentingViewController:presentingViewController
                     completion:completion];
 }
+#pragma clang diagnostic pop
 
 - (void)signInWithDefaultValue:(nullable NSString *)defaultValue
       presentingViewController:(nullable UIViewController *)presentingViewController

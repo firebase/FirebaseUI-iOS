@@ -181,7 +181,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       self.navigationItem.rightBarButtonItem.enabled = YES;
 
       if (error) {
-        [_phoneNumberField becomeFirstResponder];
+        [self->_phoneNumberField becomeFirstResponder];
 
         UIAlertController *alertController = [FUIPhoneAuth alertControllerForError:error
                                                                      actionHandler:nil];

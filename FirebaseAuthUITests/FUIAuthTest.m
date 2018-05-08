@@ -15,7 +15,6 @@
 //
 
 @import XCTest;
-@import FirebaseAnalytics;
 @import FirebaseAuth;
 @import FirebaseAuthUI;
 #import <OCMock/OCMock.h>

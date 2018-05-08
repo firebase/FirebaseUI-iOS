@@ -152,7 +152,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
       return;
     }
 
-    [authResult.user linkAndRetrieveDataWithCredential:_newCredential
+    [authResult.user linkAndRetrieveDataWithCredential:self->_newCredential
                                             completion:^(FIRAuthDataResult *_Nullable authResult,
                                                          NSError *_Nullable error) {
       [self decrementActivity];
