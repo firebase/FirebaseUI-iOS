@@ -208,6 +208,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   _passwordField.secureTextEntry = YES;
   _passwordField.returnKeyType = UIReturnKeyNext;
   _passwordField.keyboardType = UIKeyboardTypeDefault;
+  if (@available(iOS 11.0, *)) {
+    _passwordField.textContentType = UITextContentTypePassword;
+  }
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
            forControlEvents:UIControlEventEditingChanged];

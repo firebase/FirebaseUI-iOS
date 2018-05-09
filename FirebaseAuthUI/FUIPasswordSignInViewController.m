@@ -195,6 +195,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
     _emailField.keyboardType = UIKeyboardTypeEmailAddress;
     _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
     _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    if (@available(iOS 11.0, *)) {
+        _emailField.textContentType = UITextContentTypeUsername;
+    }
   } else if (indexPath.row == 1) {
     cell.label.text = FUILocalizedString(kStr_Password);
     _passwordField = cell.textField;
@@ -202,6 +205,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
     _passwordField.secureTextEntry = YES;
     _passwordField.returnKeyType = UIReturnKeyNext;
     _passwordField.keyboardType = UIKeyboardTypeDefault;
+    if (@available(iOS 11.0, *)) {
+        _passwordField.textContentType = UITextContentTypePassword;
+    }
   }
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
