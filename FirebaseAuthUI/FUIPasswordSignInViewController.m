@@ -133,7 +133,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
       }
     }
     
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+    [self dismissNavigationControllerAnimated:YES completion:^{
       [self.authUI invokeResultCallbackWithAuthDataResult:authResult error:error];
     }];
   }];

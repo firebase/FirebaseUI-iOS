@@ -63,6 +63,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)pushViewController:(UIViewController *)viewController;
 
+/** @fn dismissNavigationControllerAnimated:completion:
+    @brief dismiss navigation controller if it is not the rootViewController. If it is set as
+        the rootViewController only perform the completion block.
+    @param animated Use animation when dismissing the ViewControler.
+    @param completion Code to be executed upon completion
+ */
+- (void)dismissNavigationControllerAnimated:(BOOL)animated
+                                 completion:(void (^)(void))completion;
+
 /** @fn pushViewController:
     @brief Push the view controller to the navigation controller of the current view controller
         with animation. The pushed view controller will have a fixed "Back" title for back button.

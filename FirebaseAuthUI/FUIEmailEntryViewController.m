@@ -138,7 +138,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       if (error.code == FIRAuthErrorCodeInvalidEmail) {
         [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
       } else {
-        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        [self dismissNavigationControllerAnimated:YES completion:^{
           [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
         }];
       }
@@ -271,7 +271,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
         result(nil, error);
       }
 
-      [self.navigationController dismissViewControllerAnimated:YES completion:^{
+      [self dismissNavigationControllerAnimated:YES completion:^{
         [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
       }];
       return;
@@ -288,7 +288,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       if (error) {
         [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
       } else {
-        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        [self dismissNavigationControllerAnimated:YES completion:^{
           [self.authUI invokeResultCallbackWithAuthDataResult:authResult error:error];
         }];
       }

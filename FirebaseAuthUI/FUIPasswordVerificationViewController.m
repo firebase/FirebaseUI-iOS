@@ -158,7 +158,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
       [self decrementActivity];
 
       // Ignore any error (shouldn't happen) and treat the user as successfully signed in.
-      [self.navigationController dismissViewControllerAnimated:YES completion:^{
+      [self dismissNavigationControllerAnimated:YES completion:^{
         [self.authUI invokeResultCallbackWithAuthDataResult:authResult error:nil];
       }];
     }];
