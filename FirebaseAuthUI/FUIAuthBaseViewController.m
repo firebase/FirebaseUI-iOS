@@ -323,7 +323,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                               (int64_t)(kActivityIndiactorAnimationDelay * NSEC_PER_SEC)),
                  dispatch_get_main_queue(), ^{
-    [self->_activityIndicator.superview bringSubviewToFront:_activityIndicator];
+    [self->_activityIndicator.superview bringSubviewToFront:self->_activityIndicator];
     if (self->_activityCount > 0) {
       [self->_activityIndicator startAnimating];
     }

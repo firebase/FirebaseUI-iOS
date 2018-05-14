@@ -215,7 +215,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
         the sign-in attempt.
     @param newCredential The credential used in the lastest sign-in attempt.
     @param presentingViewController The view controller used to present the UI.
-    @param signInResult block which takes the result of this method as a parameter; a nullable
+    @param result block which takes the result of this method as a parameter; a nullable
         AuthResult indicating success or a nullable Error indicating failure.
  */
 - (void)handleAccountLinkingForEmail:(NSString *)email
