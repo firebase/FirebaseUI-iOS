@@ -34,7 +34,7 @@ UIImageView *imageView = ...;
 let reference: StorageReference = ...;
 
 // UIImageView in your ViewController
-var imageView: UIImageView = ...;
+let imageView: UIImageView = ...;
 
 // Load the image using SDWebImage
 imageView.sd_setImageWithStorageReference(reference, placeholderImage: placeholderImage)

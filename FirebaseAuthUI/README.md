@@ -60,8 +60,7 @@ instance can be accessed as follows:
 
 ```swift
 // Swift
-import Firebase
-import FirebaseAuthUI
+import FirebaseUI
 
 /* ... */
 
@@ -73,8 +72,7 @@ authUI?.delegate = self
 
 ```objective-c
 // Objective-C
-@import Firebase;
-@import FirebaseAuthUI;
+@import FirebaseUI;
 ...
 [FIRApp configure];
 FUIAuth *authUI = [FUIAuth defaultAuthUI];
@@ -86,10 +84,7 @@ This instance can then be configured with the providers you wish to support:
 
 ```swift
 // Swift
-import FirebaseGoogleAuthUI
-import FirebaseFacebookAuthUI
-import FirebaseTwitterAuthUI
-import FirebasePhoneAuthUI
+import FirebaseUI
 
 let providers: [FUIAuthProvider] = [
   FUIGoogleAuth(),
@@ -102,11 +97,10 @@ self.authUI?.providers = providers
 
 ```objective-c
 // Objective-C
-@import FirebaseGoogleAuthUI;
-@import FirebaseFacebookAuthUI;
-@import FirebaseTwitterAuthUI;
-@import FirebasePhoneAuthUI;
-...
+@import FirebaseUI;
+
+// ...
+
 NSArray<id<FUIAuthProvider>> *providers = @[
   [[FUIGoogleAuth alloc] init],
   [[FUIFacebookAuth alloc] init],
