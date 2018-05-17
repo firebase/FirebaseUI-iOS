@@ -174,12 +174,16 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       } else {
         // New user.
         UIViewController *controller;
-        if ([self.authUI.delegate respondsToSelector:@selector(passwordSignUpViewControllerForAuthUI:email:)]) {
-          controller = [self.authUI.delegate passwordSignUpViewControllerForAuthUI:self.authUI
+        if (self.authUI.allowNewEmailAccounts) {
+          if ([self.authUI.delegate respondsToSelector:@selector(passwordSignUpViewControllerForAuthUI:email:)]) {
+            controller = [self.authUI.delegate passwordSignUpViewControllerForAuthUI:self.authUI
                                                                              email:emailText];
-        } else {
-          controller = [[FUIPasswordSignUpViewController alloc] initWithAuthUI:self.authUI
+          } else {
+            controller = [[FUIPasswordSignUpViewController alloc] initWithAuthUI:self.authUI
                                                                          email:emailText];
+          }
+        } else {
+            [self showAlertWithMessage:FUILocalizedString(kStr_UserNotFoundError)];
         }
         [self pushViewController:controller];
       }

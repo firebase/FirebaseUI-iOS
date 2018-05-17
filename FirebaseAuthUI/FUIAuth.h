@@ -176,6 +176,11 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
  */
 @property(nonatomic, assign, getter=isSignInWithEmailHidden) BOOL signInWithEmailHidden;
 
+/** @property allowNewEmailAccounts
+ @brief Whether to allow new user sign, defaults to YES.
+ */
+@property(nonatomic, assign) BOOL allowNewEmailAccounts;
+
 /** @property customStringsBundle
     @brief Custom strings bundle supplied by the developer. Nil when there is no custom strings
         bundle set. In which case the default bundle will be used.
