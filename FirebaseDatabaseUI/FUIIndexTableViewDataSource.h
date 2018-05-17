@@ -76,10 +76,6 @@ didFailLoadAtIndex:(NSUInteger)index
  * @param dataQuery The reference whose children correspond to the contents of the
  *   index query. This reference's children's contents are served as the contents
  *   of the table view that adopts this data source.
- * @param tableView The table view that is populated by this data source. The
- *   data source pulls updates from Firebase database, so it must maintain a reference
- *   to the table view in order to update its contents as the database pushes updates.
- *   The table view is not retained by its data source.
  * @param populateCell The closure invoked when populating a UITableViewCell (or subclass).
  */
 - (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
@@ -92,10 +88,6 @@ didFailLoadAtIndex:(NSUInteger)index
 /**
  * Initializes a table view data source.
  * @param indexArray The FUIIndexArray whose contents will be displayed in the table view.
- * @param tableView The table view that is populated by this data source. The
- *   data source pulls updates from Firebase database, so it must maintain a reference
- *   to the table view in order to update its contents as the database pushes updates.
- *   The table view is not retained by its data source.
  * @param populateCell The closure invoked when populating a UITableViewCell (or subclass).
  */
 - (instancetype)initWithIndexArray:(FUIIndexArray *)indexArray
@@ -115,8 +107,10 @@ didFailLoadAtIndex:(NSUInteger)index
 
 /**
  * Attaches the data source to a table view and begins sending updates immediately.
- * @param view An instance of UITableView that the data source should push
- *   updates to.
+ * @param view The table view that is populated by this data source. The
+ *   data source pulls updates from Firebase database, so it must maintain a reference
+ *   to the table view in order to update its contents as the database pushes updates.
+ *   The table view is not retained by its data source.
  */
 - (void)bindToView:(UITableView *)view;
 
