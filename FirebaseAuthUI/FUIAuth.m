@@ -27,6 +27,7 @@
 #import "FUIAuthStrings.h"
 #import "FUIEmailEntryViewController.h"
 #import "FUIPasswordVerificationViewController.h"
+#import "FUIPasswordSignInViewController.h"
 
 /** @var kAppNameCodingKey
     @brief The key used to encode the app Name for NSCoding.
@@ -104,6 +105,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
 - (instancetype)initWithAuth:(FIRAuth *)auth {
   self = [super init];
   if (self) {
+    _allowNewEmailAccounts = YES;
     _auth = auth;
   }
   return self;
@@ -125,11 +127,20 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
   UIViewController *controller;
 
   if (self.providers.count == 0 && !self.isSignInWithEmailHidden) {
-    if ([self.delegate respondsToSelector:@selector(emailEntryViewControllerForAuthUI:)]) {
-      controller = [self.delegate emailEntryViewControllerForAuthUI:self];
-    } else {
-      controller = [[FUIEmailEntryViewController alloc] initWithAuthUI:self];
-    }
+      if (self.allowedNewEmailAccounts){
+        if ([self.delegate respondsToSelector:@selector(emailEntryViewControllerForAuthUI:)]) {
+          controller = [self.delegate emailEntryViewControllerForAuthUI:self];
+        } else {
+          controller = [[FUIEmailEntryViewController alloc] initWithAuthUI:self];
+        }
+      }
+      else{
+        if ([self.delegate respondsToSelector:@selector(emailEntryViewControllerForAuthUI:)]) {
+            controller = [self.delegate passwordSignInViewControllerForAuthUI:self email:@""];
+        } else {
+            controller = [[FUIPasswordSignInViewController alloc] initWithAuthUI:self email:nil];
+        }
+      }
   } else if ([self.delegate respondsToSelector:@selector(authPickerViewControllerForAuthUI:)]) {
     controller = [self.delegate authPickerViewControllerForAuthUI:self];
   } else {
