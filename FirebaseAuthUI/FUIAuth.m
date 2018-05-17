@@ -127,14 +127,14 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
   UIViewController *controller;
 
   if (self.providers.count == 0 && !self.isSignInWithEmailHidden) {
-      if (self.allowedNewEmailAccounts){
+      if (self.allowNewEmailAccounts) {
         if ([self.delegate respondsToSelector:@selector(emailEntryViewControllerForAuthUI:)]) {
           controller = [self.delegate emailEntryViewControllerForAuthUI:self];
         } else {
           controller = [[FUIEmailEntryViewController alloc] initWithAuthUI:self];
         }
       }
-      else{
+      else {
         if ([self.delegate respondsToSelector:@selector(emailEntryViewControllerForAuthUI:)]) {
             controller = [self.delegate passwordSignInViewControllerForAuthUI:self email:@""];
         } else {
