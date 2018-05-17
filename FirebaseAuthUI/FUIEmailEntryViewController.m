@@ -174,7 +174,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       } else {
         // New user.
         UIViewController *controller;
-        if (self.authUI.allowedNewEmailAccounts) {
+        if (self.authUI.allowNewEmailAccounts) {
           if ([self.authUI.delegate respondsToSelector:@selector(passwordSignUpViewControllerForAuthUI:email:)]) {
             controller = [self.authUI.delegate passwordSignUpViewControllerForAuthUI:self.authUI
                                                                              email:emailText];
