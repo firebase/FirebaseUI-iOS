@@ -129,7 +129,7 @@ class FUIAuthViewController: UITableViewController {
         self.ifNoError(error) {}
       }
 
-      auth?.signInAnonymously() { user, error in
+      auth?.signInAnonymously() { authReuslt, error in
         self.ifNoError(error) {
           self.showAlert(title: "Signed In Anonymously")
         }

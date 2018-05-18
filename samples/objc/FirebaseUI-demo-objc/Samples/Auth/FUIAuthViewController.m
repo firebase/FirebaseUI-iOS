@@ -154,7 +154,7 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
       return;
     }
     [self signOut];
-    [FUIAuth.defaultAuthUI.auth signInAnonymouslyWithCompletion:^(FIRUser *_Nullable user,
+    [FUIAuth.defaultAuthUI.auth signInAnonymouslyWithCompletion:^(FIRAuthDataResult *_Nullable authResult,
                                                                   NSError *_Nullable error) {
       if (error) {
         NSError *detailedError = error.userInfo[NSUnderlyingErrorKey];
