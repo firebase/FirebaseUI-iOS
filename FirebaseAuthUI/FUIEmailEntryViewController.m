@@ -102,7 +102,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [super viewWillAppear:animated];
 
   if (self.navigationController.viewControllers.firstObject == self) {
-    if (!self.authUI.hideCancelButton) {
+    if (!self.authUI.shouldHideCancelButton) {
       UIBarButtonItem *cancelBarButton =
           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                         target:self

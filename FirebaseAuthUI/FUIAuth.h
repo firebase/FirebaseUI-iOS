@@ -181,10 +181,10 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
  */
 @property(nonatomic, assign) BOOL allowNewEmailAccounts;
 
-/** @property hideCancelButton
+/** @property shouldHideCancelButton
  @brief Whether to hide the canel button, defaults to NO.
  */
-@property(nonatomic, assign) BOOL hideCancelButton;
+@property(nonatomic, assign) BOOL shouldHideCancelButton;
 
 /** @property customStringsBundle
     @brief Custom strings bundle supplied by the developer. Nil when there is no custom strings

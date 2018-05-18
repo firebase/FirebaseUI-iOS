@@ -147,7 +147,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                       target:self
                                       action:@selector(cancelAuthorization)];
       self.navigationItem.leftBarButtonItem = cancelBarButton;
-    } else if (!self.authUI.hideCancelButton) {
+    } else if (!self.authUI.shouldHideCancelButton) {
       UIBarButtonItem *cancelBarButton =
           [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                         target:self
