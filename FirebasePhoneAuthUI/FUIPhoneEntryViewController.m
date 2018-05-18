@@ -140,11 +140,20 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [super viewWillAppear:animated];
 
   if (self.navigationController.viewControllers.firstObject == self) {
-    UIBarButtonItem *cancelBarButton =
-        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                      target:self
-                                                      action:@selector(cancelAuthorization)];
-    self.navigationItem.leftBarButtonItem = cancelBarButton;
+    if (self.authUI.providers.count != 1){
+      UIBarButtonItem *cancelBarButton =
+         [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Back)
+                                       style:UIBarButtonItemStylePlain
+                                      target:self
+                                      action:@selector(cancelAuthorization)];
+      self.navigationItem.leftBarButtonItem = cancelBarButton;
+    } else if (!self.authUI.shouldHideCancelButton) {
+      UIBarButtonItem *cancelBarButton =
+          [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                        target:self
+                                                        action:@selector(cancelAuthorization)];
+      self.navigationItem.leftBarButtonItem = cancelBarButton;
+    }
     self.navigationItem.backBarButtonItem =
         [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Back)
                                          style:UIBarButtonItemStylePlain

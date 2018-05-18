@@ -80,11 +80,13 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  UIBarButtonItem *cancelBarButton =
-      [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                    target:self
-                                                    action:@selector(cancelAuthorization)];
-  self.navigationItem.leftBarButtonItem = cancelBarButton;
+  if (!self.authUI.shouldHideCancelButton) {
+    UIBarButtonItem *cancelBarButton =
+        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                      target:self
+                                                      action:@selector(cancelAuthorization)];
+    self.navigationItem.leftBarButtonItem = cancelBarButton;
+  }
   self.navigationItem.backBarButtonItem =
       [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Back)
                                        style:UIBarButtonItemStylePlain
