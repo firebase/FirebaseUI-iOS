@@ -15,21 +15,13 @@
 //
 
 #import "FUIAppDelegate.h"
-#import <FirebaseCore/FirebaseCore.h>
+@import Firebase;
 
 @implementation FUIAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   FIROptions *options = [[FIROptions alloc] initWithGoogleAppID:@"0:000000000000:ios:0000000000000000"
-                                                       bundleID:@"testBundleIdValue"
-                                                    GCMSenderID:@"testGCMSenderIDValue"
-                                                         APIKey:@"testAPIKeyValue"
-                                                       clientID:@"testclientID"
-                                                     trackingID:@"testTrackingIDValue"
-                                                androidClientID:@"testAndroidClientIDValue"
-                                                    databaseURL:@"testDatabaseURLValue"
-                                                  storageBucket:@"testStorageBucketValue"
-                                              deepLinkURLScheme:@"testDeepLinkURLSchemeValue"];
+                                                    GCMSenderID:@"testGCMSenderIDValue"];
   [FIRApp configureWithOptions:options];
 
   return YES;

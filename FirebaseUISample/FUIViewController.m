@@ -16,13 +16,12 @@
 
 #import "FUIViewController.h"
 
-#import <FirebaseAuth/FirebaseAuth.h>
-#import <FirebaseAuthUI/FirebaseAuthUI.h>
-#import <FirebaseCore/FIRApp.h>
-#import <FirebaseFacebookAuthUI/FirebaseFacebookAuthUI.h>
-#import <FirebaseGoogleAuthUI/FirebaseGoogleAuthUI.h>
-#import <FirebasePhoneAuthUI/FirebasePhoneAuthUI.h>
-#import <FirebaseTwitterAuthUI/FirebaseTwitterAuthUI.h>
+@import FirebaseAuthUI;
+@import FirebasePhoneAuthUI;
+@import FirebaseTwitterAuthUI;
+@import FirebaseFacebookAuthUI;
+@import FirebaseGoogleAuthUI;
+
 #import <OCMock/OCMock.h>
 
 typedef NS_ENUM(NSUInteger, UISections) {
