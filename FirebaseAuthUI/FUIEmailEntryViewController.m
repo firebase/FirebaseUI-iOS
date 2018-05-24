@@ -80,7 +80,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                          bundle:nibBundleOrNil
                          authUI:authUI];
   if (self) {
-    self.title = FUILocalizedString(kStr_SignInWithEmail);
+    self.title = FUILocalizedString(kStr_EnterYourEmail);
   }
   return self;
 }
