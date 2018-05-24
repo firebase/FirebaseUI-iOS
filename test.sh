@@ -8,11 +8,10 @@ EXIT_STATUS=0
   -workspace FirebaseUI.xcworkspace \
   -scheme FirebaseUI \
   -sdk iphonesimulator \
-  -destination 'platform=iOS Simulator,OS=11.2,name=iPhone X' \
+  -destination 'platform=iOS Simulator,OS=11.3,name=iPhone X' \
   build \
   test \
   ONLY_ACTIVE_ARCH=YES \
-  CODE_SIGNING_REQUIRED=NO \
   | xcpretty) || EXIT_STATUS=$?
 
 # It'd be nice to test building the objc sample as a simple
@@ -28,7 +27,6 @@ EXIT_STATUS=0
 #   -destination 'platform=iOS Simulator,name=iPhone 7' \
 #   build \
 #   ONLY_ACTIVE_ARCH=YES \
-#   CODE_SIGNING_REQUIRED=NO \
 #   | xcpretty) || EXIT_STATUS=$?
 
 exit $EXIT_STATUS

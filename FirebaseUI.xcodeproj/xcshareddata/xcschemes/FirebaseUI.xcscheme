@@ -20,6 +20,20 @@
                ReferencedContainer = "container:FirebaseUI.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C329B15A1DA8694A00059A13"
+               BuildableName = "FirebaseUISampleUITests.xctest"
+               BlueprintName = "FirebaseUISampleUITests"
+               ReferencedContainer = "container:FirebaseUI.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -96,16 +110,6 @@
                BlueprintIdentifier = "8D559D481F68A7F100CE9D8A"
                BuildableName = "FirebaseFirestoreUITests.xctest"
                BlueprintName = "FirebaseFirestoreUITests"
-               ReferencedContainer = "container:FirebaseUI.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C329B15A1DA8694A00059A13"
-               BuildableName = "FirebaseUISampleUITests.xctest"
-               BlueprintName = "FirebaseUISampleUITests"
                ReferencedContainer = "container:FirebaseUI.xcodeproj">
             </BuildableReference>
          </TestableReference>

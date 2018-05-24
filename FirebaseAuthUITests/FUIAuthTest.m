@@ -15,9 +15,8 @@
 //
 
 @import XCTest;
-@import FirebaseAuth;
+@import FirebaseCore;
 @import FirebaseAuthUI;
-#import <OCMock/OCMock.h>
 #import "FUIAuthUtils.h"
 
 @interface FUILoginProvider : NSObject <FUIAuthProvider>
@@ -44,9 +43,12 @@
   return [UIColor whiteColor];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)signInWithEmail:(NSString *)email
   presentingViewController:(UIViewController *)presentingViewController
             completion:(FIRAuthProviderSignInCompletionBlock)completion {}
+#pragma clang diagnostic pop
 
 - (void)signOut {}
 
@@ -54,14 +56,22 @@
   return self.canHandleURLs;
 }
 
+- (void)signInWithDefaultValue:(nullable NSString *)defaultValue
+      presentingViewController:(nullable UIViewController *)presentingViewController
+                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {}
+
+
 @end
 
 @interface FUIAuthUIDelegate : NSObject <FUIAuthDelegate>
 @end
 
 @implementation FUIAuthUIDelegate
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)authUI:(FUIAuth *)authUI didSignInWithUser:(FIRUser *)user error:(NSError *)error {
 }
+#pragma clang diagnostic pop
 
 - (FUIAuthPickerViewController *)authPickerViewControllerForAuthUI:(FUIAuth *)authUI {
   Class controllerClass = [FUIAuthPickerViewController class];
@@ -83,16 +93,13 @@
 
 - (void)setUp {
   [super setUp];
-  id authClass = OCMClassMock([FIRAuth class]);
-  OCMStub(ClassMethod([authClass auth])).
-      andReturn(authClass);
 
-  id mockUtilsClass = OCMClassMock([FUIAuthUtils class]);
-  OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY])).
-      andReturn([NSBundle bundleForClass:[FUIAuth class]]);
+  if ([FIRApp defaultApp] == nil) {
+    [FIRApp configure];
+  }
 
-  self.auth = [FIRAuth auth];
-  self.authUI = [FUIAuth defaultAuthUI];
+  self.auth = [FIRAuth authWithApp:[FIRApp defaultApp]];
+  self.authUI = [FUIAuth authUIWithAuth:self.auth];
   self.delegate = [[FUIAuthUIDelegate alloc] init];
 }
 

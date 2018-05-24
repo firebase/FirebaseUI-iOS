@@ -14,6 +14,8 @@
 //  limitations under the License.
 //
 
+@import FirebaseCore;
+
 #import "FUIAuthStrings.h"
 
 #import "FUIAuth.h"
@@ -126,14 +128,18 @@ NSString *FUILocalizedStringFromTable(NSString *key, NSString *table) {
 NSString *FUILocalizedStringFromTableInBundle(NSString *key,
                                               NSString *table,
                                               NSString *_Nullable bundleName) {
-  
-  NSBundle *customStringsBundle = [FUIAuth defaultAuthUI].customStringsBundle;
-  if (customStringsBundle) {
-    NSString *localizedString = [customStringsBundle localizedStringForKey:key
-                                                                     value:kKeyNotFound
-                                                                     table:table];
-    if (![kKeyNotFound isEqual:localizedString]) {
-      return localizedString;
+  // Don't load defaultAuthUI if the default app isn't configured. We don't recommend
+  // people do this in our docs, but if for whatever reason they want to use a custom
+  // app, this code shouldn't crash.
+  if ([FIRApp defaultApp] != nil) {
+    NSBundle *customStringsBundle = [FUIAuth defaultAuthUI].customStringsBundle;
+    if (customStringsBundle) {
+      NSString *localizedString = [customStringsBundle localizedStringForKey:key
+                                                                       value:kKeyNotFound
+                                                                       table:table];
+      if (![kKeyNotFound isEqual:localizedString]) {
+        return localizedString;
+      }
     }
   }
   NSBundle *frameworkBundle = [FUIAuthUtils bundleNamed:bundleName];
