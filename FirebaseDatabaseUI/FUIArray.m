@@ -158,6 +158,19 @@
   for (NSNumber *handle in _handles) {
     [_query removeObserverWithHandle:handle.unsignedIntegerValue];
   }
+
+  // Remove all values on invalidation.
+  [self didUpdate];
+  for (NSInteger i = 0; i < self.snapshots.count; i++) {
+    FIRDataSnapshot *current = self.snapshots[i];
+
+    [self.snapshots removeObjectAtIndex:i];
+
+    if ([self.delegate respondsToSelector:@selector(array:didRemoveObject:atIndex:)]) {
+      [self.delegate array:self didRemoveObject:current atIndex:i];
+    }
+  }
+  [self didFinishUpdates];
 }
 
 - (NSUInteger)indexForKey:(NSString *)key {
