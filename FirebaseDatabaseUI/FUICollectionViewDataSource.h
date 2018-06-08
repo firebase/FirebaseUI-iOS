@@ -20,11 +20,9 @@
 
 @import UIKit;
 
-#import "FUIDataSource.h"
+#import "FUICollection.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-@class FIRDatabaseReference;
 
 /**
  * FUICollectionViewDataSource provides a class that conforms to the
@@ -32,28 +30,59 @@ NS_ASSUME_NONNULL_BEGIN
  * adopt FUICollectionViewDataSource in order to provide a UICollectionView
  * synchronized to a Firebase reference or query.
  */
-@interface FUICollectionViewDataSource : FUIDataSource<UICollectionViewDataSource>
+@interface FUICollectionViewDataSource : NSObject <UICollectionViewDataSource>
 
 /**
  * The UICollectionView instance that operations (inserts, removals, moves,
  * etc.) are performed against. The data source does not claim ownership of
- * the collection view it populates.
+ * the collection view it populates. This collection view must be receiving data
+ * from this data source otherwise data inconsistency crashes will occur.
  */
-@property (nonatomic, readonly, weak) UICollectionView *collectionView;
+@property (nonatomic, readwrite, weak, nullable) UICollectionView *collectionView;
 
 /**
- * The callback to populate a subclass of UICollectionViewCell with an object
- * provided by the datasource.
+ * The number of items in the data source.
  */
-@property(strong, nonatomic, readonly) UICollectionViewCell *(^populateCellAtIndexPath)
-  (UICollectionView *collectionView, NSIndexPath *indexPath, FIRDataSnapshot *object);
+@property (nonatomic, readonly) NSUInteger count;
+
+/**
+ * The snapshots in the data source.
+ */
+@property (nonatomic, readonly) NSArray<FIRDataSnapshot *> *items;
+
+/**
+ * A closure that should be invoked when the query encounters a fatal error. 
+ * After this is invoked, the query is no longer valid and the data source should
+ * be recreated.
+ */
+@property (nonatomic, copy, readwrite) void (^queryErrorHandler)(NSError *);
+
+/**
+ * Returns the snapshot at the given index. Throws an exception if the index is out of bounds.
+ */
+- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index;
 
 /**
  * Initialize an instance of FUICollectionViewDataSource that populates
  * UICollectionViewCells with FIRDataSnapshots.
+ * @param collection A FUICollection that the data source uses to pull snapshots
+ *   from Firebase Database.
+ * @param populateCell A closure used by the data source to create the cells that
+ *   are displayed in the collection view. This closure is retained by the data
+ *   source, so if you capture self in the closure and also claim ownership of the
+ *   data source, be sure to avoid retain cycles by capturing a weak reference to self.
+ * @return An instance of FUICollectionViewDataSource that populates
+ *   UICollectionViewCells with FIRDataSnapshots.
+ */
+- (instancetype)initWithCollection:(id<FUICollection>)collection
+                      populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
+                                                              NSIndexPath *indexPath,
+                                                              FIRDataSnapshot *object))populateCell NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initialize an unsorted instance of FUICollectionViewDataSource that populates
+ * UICollectionViewCells with FIRDataSnapshots.
  * @param query A Firebase query to bind the data source to.
- * @param collectionView An instance of a UICollectionView to bind to. This view
- *   is not retained by its data source.
  * @param populateCell A closure used by the data source to create the cells that 
  *   are displayed in the collection view. This closure is retained by the data
  *   source, so if you capture self in the closure and also claim ownership of the
@@ -62,12 +91,23 @@ NS_ASSUME_NONNULL_BEGIN
  *   UICollectionViewCells with FIRDataSnapshots.
  */
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                         view:(UICollectionView *)collectionView
                  populateCell:(UICollectionViewCell *(^)(UICollectionView *collectionView,
                                                          NSIndexPath *indexPath,
-                                                         FIRDataSnapshot *object))populateCell NS_DESIGNATED_INITIALIZER;
+                                                         FIRDataSnapshot *object))populateCell;
 
-- (instancetype)initWithArray:(FUIArray *)array NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ * Attaches the data source to a collection view and begins sending updates immediately.
+ * @param view An instance of UICollectionView that the data source should push
+ *   updates to.
+ */
+- (void)bindToView:(UICollectionView *)view;
+
+/**
+ * Detaches the data source from a view and stops sending any updates.
+ */
+- (void)unbind;
 
 @end
 

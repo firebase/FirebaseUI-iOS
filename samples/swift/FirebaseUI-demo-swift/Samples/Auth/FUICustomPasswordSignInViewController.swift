@@ -15,7 +15,7 @@
 //
 
 import UIKit
-import FirebaseAuthUI
+import FirebaseUI
 
 @objc(FUICustomPasswordSignInViewController)
 
@@ -57,7 +57,7 @@ class FUICustomPasswordSignInViewController: FUIPasswordSignInViewController {
 
   @IBAction func onNext(_ sender: AnyObject?) {
     if let email = emailTextField.text, let password = passwordTextField.text {
-      self.signIn(withEmail: email, andPassword: password)
+      self.signIn(withDefaultValue: email, andPassword: password)
     }
   }
 

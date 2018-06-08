@@ -63,7 +63,7 @@
     .andReturn(OCMClassMock([FIRStorageDownloadTask class]));
   UIImage *image = [[UIImage alloc] init];
   self.cache = [[SDImageCache alloc] initWithNamespace:@"FirebaseStorageUITests"];
-  [self.cache storeImage:image forKey:self.ref.fullPath];
+  [self.cache storeImage:image forKey:self.ref.fullPath completion:nil];
   FIRStorageDownloadTask *download = [self.imageView sd_setImageWithStorageReference:self.ref
                                                                         maxImageSize:4096
                                                                     placeholderImage:nil
@@ -71,7 +71,7 @@
                                                                           completion:nil];
   XCTAssertNil(download, @"expected image view to not create new download when fetching cached image");
   XCTAssertEqual(self.imageView.image, image, @"expected image view to use cached image");
-  [self.cache cleanDisk];
+  [self.cache clearDiskOnCompletion:nil];
   [self.cache clearMemory];
 }
 

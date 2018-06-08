@@ -21,7 +21,7 @@
 @interface FUIIndexTableViewDataSource () <FUIIndexArrayDelegate>
 
 @property (nonatomic, readonly, nonnull) FUIIndexArray *array;
-@property (nonatomic, readonly, weak) UITableView *tableView;
+@property (nonatomic, weak, nullable) UITableView *tableView;
 
 @property (nonatomic, readonly, copy) UITableViewCell *(^populateCell)
   (UITableView *tableView, NSIndexPath *indexPath, FIRDataSnapshot *snap);
@@ -38,24 +38,50 @@
   @throw e;
 }
 
-- (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
-                         data:(FIRDatabaseReference *)dataQuery
-                    tableView:(UITableView *)tableView
-                     delegate:(nullable id<FUIIndexTableViewDataSourceDelegate>)delegate
-                 populateCell:(UITableViewCell *(^)(UITableView *tableView,
-                                                    NSIndexPath *indexPath,
-                                                    FIRDataSnapshot *snap))populateCell {
+- (instancetype)initWithIndexArray:(FUIIndexArray *)indexArray
+                          delegate:(nullable id<FUIIndexTableViewDataSourceDelegate>)delegate
+                      populateCell:(UITableViewCell *(^)(UITableView *tableView,
+                                                         NSIndexPath *indexPath,
+                                                         FIRDataSnapshot *snap))populateCell {
   self = [super init];
   if (self != nil) {
-    _array = [[FUIIndexArray alloc] initWithIndex:indexQuery
-                                                  data:dataQuery
-                                              delegate:self];
-    _tableView = tableView;
-    tableView.dataSource = self;
+    _array = indexArray;
     _populateCell = populateCell;
     _delegate = delegate;
   }
   return self;
+}
+
+- (instancetype)initWithIndex:(FIRDatabaseQuery *)indexQuery
+                         data:(FIRDatabaseReference *)dataQuery
+                     delegate:(nullable id<FUIIndexTableViewDataSourceDelegate>)delegate
+                 populateCell:(UITableViewCell *(^)(UITableView *tableView,
+                                                    NSIndexPath *indexPath,
+                                                    FIRDataSnapshot *snap))populateCell {
+  FUIIndexArray *array = [[FUIIndexArray alloc] initWithIndex:indexQuery
+                                                         data:dataQuery
+                                                     delegate:self];
+  return [self initWithIndexArray:array delegate:delegate populateCell:populateCell];
+}
+
+- (NSArray<FIRDataSnapshot *> *)indexes {
+  return self.array.indexes;
+}
+
+- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index {
+  return [self.array objectAtIndex:index];
+}
+
+- (void)bindToView:(UITableView *)view {
+  self.tableView = view;
+  view.dataSource = self;
+  [self.array observeQuery];
+}
+
+- (void)unbind {
+  [self.array invalidate];
+  self.tableView.dataSource = nil;
+  self.tableView = nil;
 }
 
 #pragma mark - FUIIndexArrayDelegate 
@@ -139,18 +165,17 @@ didLoadObject:(FIRDataSnapshot *)object
 @implementation UITableView (FUIIndexTableViewDataSource)
 
 - (FUIIndexTableViewDataSource *)bindToIndexedQuery:(FIRDatabaseQuery *)index
-                                                    data:(FIRDatabaseReference *)data
-                                                delegate:(id<FUIIndexTableViewDataSourceDelegate>)delegate
-                                            populateCell:(UITableViewCell *(^)(UITableView *,
-                                                                               NSIndexPath *,
-                                                                               FIRDataSnapshot *))populateCell {
+                                               data:(FIRDatabaseReference *)data
+                                           delegate:(id<FUIIndexTableViewDataSourceDelegate>)delegate
+                                       populateCell:(UITableViewCell *(^)(UITableView *,
+                                                                          NSIndexPath *,
+                                                                          FIRDataSnapshot *))populateCell {
   FUIIndexTableViewDataSource *dataSource =
     [[FUIIndexTableViewDataSource alloc] initWithIndex:index
-                                                       data:data
-                                                  tableView:self
-                                                   delegate:delegate
-                                               populateCell:populateCell];
-  self.dataSource = dataSource;
+                                                  data:data
+                                              delegate:delegate
+                                          populateCell:populateCell];
+  [dataSource bindToView:self];
   return dataSource;
 }
 

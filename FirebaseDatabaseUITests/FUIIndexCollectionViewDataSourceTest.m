@@ -83,14 +83,25 @@ static inline NSDictionary *database() {
   }];
   self.dict = [database() mutableCopy];
 
-  // Removing this NSLog causes the tests to crash since `numberOfItemsInSection`
-  // actually pulls updates from the data source or something
+  // Removing this line causes the tests to crash.
   NSLog(@"count: %lu", [self.collectionView numberOfItemsInSection:0]);
 }
 
 - (void)tearDown {
   [UIView setAnimationsEnabled:YES];
   [super tearDown];
+}
+
+- (void)testItReturnsItsArraysIndexes {
+  NSArray *expectedIndexes = @[
+    [FUIFakeSnapshot snapWithKey:@"1" value:@(YES)],
+    [FUIFakeSnapshot snapWithKey:@"2" value:@(YES)],
+    [FUIFakeSnapshot snapWithKey:@"3" value:@(YES)],
+  ];
+
+  NSArray *indexes = self.dataSource.indexes;
+
+  XCTAssert([indexes isEqual:expectedIndexes], @"expected data source's indexes to equal its array's indexes");
 }
 
 - (void)testItPopulatesCells {
@@ -169,6 +180,12 @@ static inline NSDictionary *database() {
   
   XCTAssertEqualObjects(cell.accessibilityLabel, @"data");
   XCTAssertEqualObjects(cell.accessibilityValue, @"3");
+}
+
+- (void)testItReturnsSnapshotsFromItsIndexArray {
+  FIRDataSnapshot *snap = [self.dataSource snapshotAtIndex:0];
+  XCTAssertEqualObjects(snap.key, @"data", @"expected snap's key to equal 'data', got %@ instead", snap.key);
+  XCTAssertEqualObjects(snap.value, @"1", @"expected snap's key to equal '1', got %@ instead", snap.value);
 }
 
 @end

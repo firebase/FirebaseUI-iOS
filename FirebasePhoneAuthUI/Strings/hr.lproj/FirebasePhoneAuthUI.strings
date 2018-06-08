@@ -1,0 +1,78 @@
+/* The text of the button used to sign-in with Phone. */
+"SignInWithPhone" = "Prijava putem telefona";
+
+/* The title of view controller where user enters phone number. */
+"EnterPhoneTitle" = "Unesite telefonski broj";
+
+/* The title of button on navigation controller which navigates to previous screen. */
+"Back" = "Natrag";
+
+/* The title of button on navigation controller which navigates to the next screen. */
+"Next" = "Dalje";
+
+/* The title of button which user taps on phone verification screen. */
+"Verify" = "Potvrdi";
+
+/* Alert message displayed when user submits empty verification code. */
+"EmptyVerificationCode" = "Polje za kontrolni kôd ne može biti prazno";
+
+/* Alert message displayed when user submits empty phone number. */
+"EmptyPhoneNumber" = "Polje za telefonski broj ne može biti prazno";
+
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
+"PhoneNumber" = "Broj";
+
+/* Placeholder shown for phone number input field. */
+"EnterYourPhoneNumber" = "Telefonski broj";
+
+/* Label next to the left of country selector control. */
+"Country" = "Zemlja";
+
+/* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
+"EnterCodeDescription" = "Unesite %@-znamenkasti kôd koji smo poslali na broj";
+
+/* The title of button with resend verification code functionality. */
+"ResendCode" = "Ponovo pošalji kôd";
+
+/* Text of the resend timer label shown on verification phone number screen. */
+"ResendCodeTimer" = "Ponovno slanje koda za %@";
+
+/* The title of view controller where user verifies phone number. . */
+"VerifyPhoneTitle" = "Potvrda telefonskog broja";
+
+/* The title of button displayed when user closes alert message. */
+"Done" = "Gotovo";
+
+/* The title of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneTitle" = "Nevažeći telefonski broj";
+
+/* The body message of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneMessage" = "Unesite važeći telefonski broj";
+
+/* The body message of alert shown when user tapped resend verification code button. */
+"ResendCodeResult" = "Kôd smo poslali na broj %@";
+
+/* The title of alert shown when user entered invalid verification code. */
+"IncorrectCodeTitle" = "Nevažeći kontrolni kôd";
+
+/* The body message of alert shown when user entered invalid verification code. */
+"IncorrectCodeMessage" = "Pogrešan kôd. Pokušajte ponovo.";
+
+/* The body message of alert shown when internal server error appeared. */
+"InternalErrorMessage" = "Nešto nije u redu. Pokušajte ponovo.";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "Taj telefonski broj upotrijebljen je previše puta";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "Došlo je do problema s potvrdom vašeg telefonskog broja.";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "Kôd više nije važeći";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
+"TermsSMS" = "Ako dodirnete %@, možda ćemo vam poslati SMS. Moguća je naplata poruke i podatkovnog prometa.";
+
+/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
+"TermsAccountCreation" = "Ako dodirnete %@, navodite da se slažete s [Uvjetima pružanja usluge].";
+

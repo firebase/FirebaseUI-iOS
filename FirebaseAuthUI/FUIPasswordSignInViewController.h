@@ -50,9 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
                          email:(NSString *_Nullable)email NS_DESIGNATED_INITIALIZER;
 
 /** @fn initWithAuthUI:email:
- @brief Convenience initializer.
- @param authUI The @c FUIAuth instance that manages this view controller.
- @param email The email address of the user.
+    @brief Convenience initializer.
+    @param authUI The @c FUIAuth instance that manages this view controller.
+    @param email The email address of the user.
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                           email:(NSString *_Nullable)email;
@@ -71,12 +71,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)didChangeEmail:(NSString *)email andPassword:(NSString *)password;
 
-/** @fn signInWithEmail:andPassword:
+/** @fn signInWithDefaultValue:andPassword:
     @brief Should be called when user entered credentials. Sends authorization request
     @param email The email address of the user.
     @param password The password which user uses.
  */
-- (void)signInWithEmail:(NSString *)email andPassword:(NSString *)password;
+- (void)signInWithDefaultValue:(NSString *)email andPassword:(NSString *)password;
 
 @end
 

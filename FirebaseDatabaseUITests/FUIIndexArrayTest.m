@@ -60,10 +60,11 @@ static inline NSDictionary *database() {
   self.index = [[FUITestObservable alloc] initWithDictionary:database()[@"index"]];
   self.data = [[FUITestObservable alloc] initWithDictionary:database()[@"data"]];
   self.array = [[FUIIndexArray alloc] initWithIndex:self.index
-                                                    data:self.data];
+                                               data:self.data];
   self.arrayDelegate = [[FUIIndexArrayTestDelegate alloc] init];
   self.array.delegate = self.arrayDelegate;
   self.dict = [database() mutableCopy];
+  [self.array observeQuery];
 }
 
 - (void)tearDown {
@@ -74,15 +75,23 @@ static inline NSDictionary *database() {
 }
 
 - (void)testItHasContents {
+  NSArray *indexes = self.array.indexes;
   NSArray *items = self.array.items;
 
-  NSArray *expected = @[
+  NSArray *expectedIndexes = @[
+    [FUIFakeSnapshot snapWithKey:@"1" value:@(YES)],
+    [FUIFakeSnapshot snapWithKey:@"2" value:@(YES)],
+    [FUIFakeSnapshot snapWithKey:@"3" value:@(YES)],
+  ];
+
+  NSArray *expectedContents = @[
     [FUIFakeSnapshot snapWithKey:@"data" value:@"1"],
     [FUIFakeSnapshot snapWithKey:@"data" value:@"2"],
     [FUIFakeSnapshot snapWithKey:@"data" value:@"3"],
   ];
 
-  XCTAssertEqualObjects(items, expected, @"expected contents to equal %@", expected);
+  XCTAssertEqualObjects(indexes, expectedIndexes, @"expected indexes to equal %@", expectedIndexes);
+  XCTAssertEqualObjects(items, expectedContents, @"expected contents to equal %@", expectedContents);
 }
 
 - (void)testItUpdatesOnInsertion {

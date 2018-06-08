@@ -44,9 +44,9 @@
 }
 
 + (FUIQueryObserver *)observerForQuery:(id<FUIDataObservable>)query
-                                 completion:(void (^)(FUIQueryObserver *obs,
-                                                      FIRDataSnapshot *snap,
-                                                      NSError *error))completion {
+                            completion:(void (^)(FUIQueryObserver *obs,
+                                                 FIRDataSnapshot *snap,
+                                                 NSError *error))completion {
   FUIQueryObserver *obs = [[FUIQueryObserver alloc] initWithQuery:query];
 
   void (^observerBlock)(FIRDataSnapshot *, NSString *) = ^(FIRDataSnapshot *snap,
@@ -58,8 +58,6 @@
     completion(obs, nil, error);
   };
 
-  [obs observeEventType:FIRDataEventTypeChildAdded
-    andPreviousSiblingKeyWithBlock:observerBlock withCancelBlock:cancelBlock];
   [obs observeEventType:FIRDataEventTypeValue
     andPreviousSiblingKeyWithBlock:observerBlock withCancelBlock:cancelBlock];
   return obs;

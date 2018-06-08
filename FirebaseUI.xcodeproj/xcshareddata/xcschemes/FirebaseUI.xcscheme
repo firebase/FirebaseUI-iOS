@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -20,14 +20,28 @@
                ReferencedContainer = "container:FirebaseUI.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C329B15A1DA8694A00059A13"
+               BuildableName = "FirebaseUISampleUITests.xctest"
+               BlueprintName = "FirebaseUISampleUITests"
+               ReferencedContainer = "container:FirebaseUI.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      codeCoverageEnabled = "YES"
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -93,9 +107,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C329B15A1DA8694A00059A13"
-               BuildableName = "FirebaseUISampleUITests.xctest"
-               BlueprintName = "FirebaseUISampleUITests"
+               BlueprintIdentifier = "8D559D481F68A7F100CE9D8A"
+               BuildableName = "FirebaseFirestoreUITests.xctest"
+               BlueprintName = "FirebaseFirestoreUITests"
                ReferencedContainer = "container:FirebaseUI.xcodeproj">
             </BuildableReference>
          </TestableReference>

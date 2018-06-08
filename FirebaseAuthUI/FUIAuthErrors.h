@@ -32,16 +32,24 @@ extern NSString *const FUIAuthErrorUserInfoProviderIDKey;
     @brief Error codes used by FUIAuth.
  */
 typedef NS_ENUM(NSUInteger, FUIAuthErrorCode) {
+
   /** @var FUIAuthErrorCodeUserCancelledSignIn
       @brief Indicates the user cancelled a sign-in flow.
    */
   FUIAuthErrorCodeUserCancelledSignIn = 1,
+
   /** @var FUIAuthErrorCodeProviderError
       @brief Indicates there's an error from the identity provider. The
           @c FUIAuthErrorUserInfoProviderIDKey field in the @c NError.userInfo dictionary will
           contain the ID of the identity provider.
    */
   FUIAuthErrorCodeProviderError = 2,
+
+  /** @var FUIAuthErrorCodeCantFindProvider
+      @brief Indicates that @FUIAuth.providers doen't contain current provider (see NSError.userInfo
+          key @c FUIAuthErrorUserInfoProviderIDKey).
+   */
+  FUIAuthErrorCodeCantFindProvider = 3,
 };
 
 NS_ASSUME_NONNULL_END

@@ -67,6 +67,11 @@ static NSString *const kTestReuseIdentifier = @"FUITableViewDataSourceTest";
   XCTAssert(count == 10, @"expected data source to have 10 elements after 10 insertions, but got %lu", count);
 }
 
+- (void)testItReturnsSnapshots {
+  id snap = [self.dataSource snapshotAtIndex:0];
+  XCTAssert(snap != nil, @"expected snapshot to exist");
+}
+
 - (void)testItPopulatesCells {
   UITableViewCell *cell = [self.dataSource tableView:self.tableView
                                cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];

@@ -16,227 +16,124 @@
 
 #import <Foundation/Foundation.h>
 
-/** @class FUIAuthStrings
-    @brief A util class to provide localized strings.
- */
-@interface FUIAuthStrings : NSObject
+NS_ASSUME_NONNULL_BEGIN
 
-/** @fn authPickerTitle
-    @brief Title for auth picker screen.
-    @return Localized string.
- */
-+ (NSString *)authPickerTitle;
+extern NSString *const kStr_ASCellAddPassword;
+extern NSString *const kStr_ASCellChangePassword;
+extern NSString *const kStr_ASCellDeleteAccount;
+extern NSString *const kStr_ASCellEmail;
+extern NSString *const kStr_ASCellName;
+extern NSString *const kStr_ASCellSignOut;
+extern NSString *const kStr_ASSectionTitleLinkedAccounts;
+extern NSString *const kStr_ASSectionTitleProfile;
+extern NSString *const kStr_ASSectionTitleSecurity;
+extern NSString *const kStr_AccountDisabledError;
+extern NSString *const kStr_AuthPickerTitle;
+extern NSString *const kStr_Back;
+extern NSString *const kStr_Cancel;
+extern NSString *const kStr_CannotAuthenticateError;
+extern NSString *const kStr_ChoosePassword;
+extern NSString *const kStr_Close;
+extern NSString *const kStr_Email;
+extern NSString *const kStr_EmailAlreadyInUseError;
+extern NSString *const kStr_EnterYourEmail;
+extern NSString *const kStr_EnterYourPassword;
+extern NSString *const kStr_Error;
+extern NSString *const kStr_ExistingAccountTitle;
+extern NSString *const kStr_FirstAndLastName;
+extern NSString *const kStr_ForgotPassword;
+extern NSString *const kStr_InvalidEmailError;
+extern NSString *const kStr_InvalidPasswordError;
+extern NSString *const kStr_Name;
+extern NSString *const kStr_Next;
+extern NSString *const kStr_OK;
+extern NSString *const kStr_Password;
+extern NSString *const kStr_PasswordRecoveryEmailSentMessage;
+extern NSString *const kStr_PasswordRecoveryEmailSentTitle;
+extern NSString *const kStr_PasswordRecoveryMessage;
+extern NSString *const kStr_PasswordRecoveryTitle;
+extern NSString *const kStr_PasswordVerificationMessage;
+extern NSString *const kStr_ProviderUsedPreviouslyMessage;
+extern NSString *const kStr_Save;
+extern NSString *const kStr_Send;
+extern NSString *const kStr_SignInTitle;
+extern NSString *const kStr_SignInTooManyTimesError;
+extern NSString *const kStr_SignInWithEmail;
+extern NSString *const kStr_SignUpTitle;
+extern NSString *const kStr_SignUpTooManyTimesError;
+extern NSString *const kStr_TermsOfService;
+extern NSString *const kStr_TermsOfServiceNotice;
+extern NSString *const kStr_UserNotFoundError;
+extern NSString *const kStr_WeakPasswordError;
+extern NSString *const kStr_WrongPasswordError;
+extern NSString *const kStr_CantFindProvider;
+extern NSString *const kStr_EmailsDontMatch;
+extern NSString *const kStr_ForgotPassword;
+extern NSString *const kStr_VerifyItsYou;
+extern NSString *const kStr_DeleteAccountConfirmationTitle;
+extern NSString *const kStr_DeleteAccountBody;
+extern NSString *const kStr_DeleteAccountConfirmationMessage;
+extern NSString *const kStr_Delete;
+extern NSString *const kStr_DeleteAccountControllerTitle;
+extern NSString *const kStr_ActionCantBeUndone;
+extern NSString *const kStr_UnlinkTitle;
+extern NSString *const kStr_UnlinkAction;
+extern NSString *const kStr_UnlinkConfirmationTitle;
+extern NSString *const kStr_UnlinkConfirmationMessage;
+extern NSString *const kStr_UnlinkConfirmationActionTitle;
+extern NSString *const kStr_UpdateEmailAlertMessage;
+extern NSString *const kStr_UpdateEmailVerificationAlertMessage;
+extern NSString *const kStr_AddPasswordAlertMessage;
+extern NSString *const kStr_EditPasswordAlertMessage;
+extern NSString *const kStr_ReauthenticateEditPasswordAlertMessage;
+extern NSString *const kStr_AddPasswordTitle;
+extern NSString *const kStr_EditPasswordTitle;
+extern NSString *const kStr_EditNameTitle;
+extern NSString *const kStr_EditEmailTitle;
+extern NSString *const kStr_ProviderTitlePassword;
+extern NSString *const kStr_ProviderTitleGoogle;
+extern NSString *const kStr_ProviderTitleFacebook;
+extern NSString *const kStr_ProviderTitleTwitter;
+extern NSString *const kStr_SignInWithProvider;
+extern NSString *const kStr_PlaceholderEnterName;
+extern NSString *const kStr_PlaceholderEnterEmail;
+extern NSString *const kStr_PlaceholderEnterPassword;
+extern NSString *const kStr_PlaceholderChosePassword;
+extern NSString *const kStr_PlaceholderNewPassword;
+extern NSString *const kStr_ForgotPasswordTitle;
 
-/** @fn signInWithEmail
-    @brief Sign in with email button label.
-    @return Localized string.
- */
-+ (NSString *)signInWithEmail;
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-/** @fn enterYourEmail
-    @brief Title for email entry screen, email text field placeholder.
-    @return Localized string.
+/** @fn FUILocalizedString
+    @brief Gets a localized string from a name.
+    @param key The key value of the string.
+    @return The string by the key localized in the current locale located in default table.
  */
-+ (NSString *)enterYourEmail;
+NSString *FUILocalizedString(NSString *key);
 
-/** @fn invalidEmailError
-    @brief Error message displayed when user enters an invalid email address.
-    @return Localized string.
- */
-+ (NSString *)invalidEmailError;
+/** @fn FUILocalizedStringFromTable
+    @brief Gets a localized string from a name.
+    @param key The key value of the string.
+    @param table The localization table name.
+    @return The string by the key localized in the current locale.
+*/
+NSString *FUILocalizedStringFromTable(NSString *key, NSString *table);
 
-/** @fn invalidPasswordError
-    @brief Error message displayed when user enters an empty password.
-    @return Localized string.
- */
-+ (NSString *)invalidPasswordError;
+/** @fn FUILocalizedStringFromTableInBundle
+    @brief Gets a localized string from a name.
+    @param key The key value of the string.
+    @param table The localization table name.
+    @param bundleName The value of bundlu to look for. If nil is passed looking in apps bundle.
+    @return The string by the key localized in the current locale.
+*/
+NSString *FUILocalizedStringFromTableInBundle(NSString *key,
+                                              NSString *table,
+                                              NSString *_Nullable bundleName);
+  
+#ifdef __cplusplus
+}
+#endif
 
-/** @fn cannotAuthenticateError
-    @brief Error message displayed when the app cannot authenticate user's account.
-    @return Localized string.
- */
-+ (NSString *)cannotAuthenticateError;
-
-/** @fn existingAccountTitle
-    @brief Title of an alert shown to an existing user coming back to the app.
-    @return Localized string.
- */
-+ (NSString *)existingAccountTitle;
-
-/** @fn providerUsedPreviouslyMessage
-    @brief Alert message to let user know what identity provider was used previously for the email
-        address;
-    @return Localized string.
- */
-+ (NSString *)providerUsedPreviouslyMessage;
-
-/** @fn signInTitle
-    @brief Title for sign in screen.
-    @return Localized string.
- */
-+ (NSString *)signInTitle;
-
-/** @fn enterYourPassword
-    @brief Password text field placeholder.
-    @return Localized string.
- */
-+ (NSString *)enterYourPassword;
-
-/** @fn wrongPasswordError
-    @brief Error message displayed when the email and password don't match.
-    @return Localized string.
- */
-+ (NSString *)wrongPasswordError;
-
-/** @fn signInTooManyTimesError
-    @brief Error message displayed when the account is disabled.
-    @return Localized string.
- */
-+ (NSString *)signInTooManyTimesError;
-
-/** @fn userNotFoundError
-    @brief Error message displayed when there's no account matching the email address.
-    @return Localized string.
- */
-+ (NSString *)userNotFoundError;
-
-/** @fn accountDisabledError
-    @brief The user account has been disabled by an administrator.
-    @return Localized string.
- */
-+ (NSString *)accountDisabledError;
-
-/** @fn passwordRecoveryTitle
-    @brief Title for password recovery screen.
-    @return Localized string.
- */
-+ (NSString *)passwordRecoveryTitle;
-
-/** @fn passwordRecoveryMessage
-    @brief Explanation on how the password of an account can be recovered.
-    @return Localized string.
- */
-+ (NSString *)passwordRecoveryMessage;
-
-/** @fn passwordRecoveryEmailSentTitle
-    @brief Title of a message displayed when the email for password recovery has been sent.
-    @return Localized string.
- */
-+ (NSString *)passwordRecoveryEmailSentTitle;
-
-/** @fn passwordRecoveryEmailSentMessage
-    @brief Message displayed when the email for password recovery has been sent.
-    @return Localized string.
- */
-+ (NSString *)passwordRecoveryEmailSentMessage;
-
-/** @fn signUpTitle
-    @brief Title for sign up screen.
-    @return Localized string.
- */
-+ (NSString *)signUpTitle;
-
-/** @fn firstAndLastName
-    @brief Name text field placeholder.
-    @return Localized string.
- */
-+ (NSString *)firstAndLastName;
-
-/** @fn choosePassword
-    @brief Placeholder for the password text field in a sign up form.
-    @return Localized string.
- */
-+ (NSString *)choosePassword;
-
-/** @fn termsOfServiceNotice
-    @brief A notice displayed when the user is creating a new account.
-    @return Localized string.
- */
-+ (NSString *)termsOfServiceNotice;
-
-/** @fn termsOfService
-    @brief Text linked to a web page with the Terms of Service content.
-    @return Localized string.
- */
-+ (NSString *)termsOfService;
-
-/** @fn emailAlreadyInUseError
-    @brief Error message displayed when the email address is already in use.
-    @return Localized string.
- */
-+ (NSString *)emailAlreadyInUseError;
-
-/** @fn weakPasswordError
-    @brief Error message displayed when the password is too weak.
-    @return Localized string.
- */
-+ (NSString *)weakPasswordError;
-
-/** @fn signUpTooManyTimesError
-    @brief Error message displayed when many accounts have been created from same IP address.
-    @return Localized string.
- */
-+ (NSString *)signUpTooManyTimesError;
-
-/** @fn passwordVerificationMessage
-    @brief Message to explain to the user why password is needed for an account with this email
-        address.
-    @return Localized string.
- */
-+ (NSString *)passwordVerificationMessage;
-
-/** @fn OK
-    @brief OK button title.
-    @return Localized string.
- */
-+ (NSString *)OK;
-
-/** @fn cancel
-    @brief Cancel button title.
-    @return Localized string.
- */
-+ (NSString *)cancel;
-
-/** @fn back
-    @brief Back button title.
-    @return Localized string.
- */
-+ (NSString *)back;
-
-/** @fn next
-    @brief Next button title.
-    @return Localized string.
- */
-+ (NSString *)next;
-
-/** @fn save
-    @brief Save button title.
-    @return Localized string.
- */
-+ (NSString *)save;
-
-/** @fn send
-    @brief Send button title.
-    @return Localized string.
- */
-+ (NSString *)send;
-
-/** @fn email
-    @brief Label next to a email text field.
-    @return Localized string.
- */
-+ (NSString *)email;
-
-/** @fn password
-    @brief Label next to a password text field.
-    @return Localized string.
- */
-+ (NSString *)password;
-
-/** @fn name
-    @brief Label next to a name text field.
-    @return Localized string.
- */
-+ (NSString *)name;
-
-@end
+NS_ASSUME_NONNULL_END

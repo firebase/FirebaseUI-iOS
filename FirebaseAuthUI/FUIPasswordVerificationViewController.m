@@ -17,6 +17,7 @@
 #import "FUIPasswordVerificationViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthStrings.h"
 #import "FUIAuthTableHeaderView.h"
 #import "FUIAuthTableViewCell.h"
@@ -48,14 +49,22 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
    */
   UITextField *_passwordField;
 
-  __unsafe_unretained IBOutlet UITableView *_tableView;
+  /** @var _tableView
+      @brief The @c UITableView used to store all UI elements.
+   */
+  __weak IBOutlet UITableView *_tableView;
+  
+  /** @var _forgotPasswordButton
+      @brief The @c UIButton which handles forgot password action.
+   */
+  __weak IBOutlet UIButton *_forgotPasswordButton;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                          email:(NSString *_Nullable)email
                  newCredential:(FIRAuthCredential *)newCredential {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils frameworkBundle]
+                        bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
                         authUI:authUI
                          email:email
                  newCredential:newCredential];
@@ -72,7 +81,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   if (self) {
     _email = [email copy];
     _newCredential = newCredential;
-    self.title = [FUIAuthStrings signInTitle];
+    self.title = FUILocalizedString(kStr_SignInTitle);
   }
   return self;
 }
@@ -81,10 +90,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   [super viewDidLoad];
 
   UIBarButtonItem *nextButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:[FUIAuthStrings next]
-                                       style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(next)];
+      [FUIAuthBaseViewController barItemWithTitle:FUILocalizedString(kStr_Next)
+                                           target:self
+                                           action:@selector(next)];
   self.navigationItem.rightBarButtonItem = nextButtonItem;
 
   // The initial frame doesn't matter as long as it's not CGRectZero, otherwise a default empty
@@ -92,6 +100,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   FUIAuthTableHeaderView *tableHeaderView =
       [[FUIAuthTableHeaderView alloc] initWithFrame:_tableView.bounds];
   _tableView.tableHeaderView = tableHeaderView;
+  [_forgotPasswordButton setTitle:FUILocalizedString(kStr_ForgotPasswordTitle) forState:UIControlStateNormal];
+
+  [self enableDynamicCellHeightForTableView:_tableView];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -99,9 +110,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
   FUIAuthTableHeaderView *tableHeaderView =
       (FUIAuthTableHeaderView *)_tableView.tableHeaderView;
-  tableHeaderView.titleLabel.text = [FUIAuthStrings existingAccountTitle];
+  tableHeaderView.titleLabel.text = FUILocalizedString(kStr_ExistingAccountTitle);
   tableHeaderView.detailLabel.text =
-      [NSString stringWithFormat:[FUIAuthStrings passwordVerificationMessage], _email];
+      [NSString stringWithFormat:FUILocalizedString(kStr_PasswordVerificationMessage), _email];
 
   CGSize previousSize = tableHeaderView.frame.size;
   [tableHeaderView sizeToFit];
@@ -119,36 +130,39 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
 - (void)verifyPassword:(NSString *)password {
   if (![[self class] isValidEmail:_email]) {
-    [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
+    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
     return;
   }
   if (password.length <= 0) {
-    [self showAlertWithMessage:[FUIAuthStrings invalidPasswordError]];
+    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidPasswordError)];
     return;
   }
 
   [self incrementActivity];
 
-  [self.auth signInWithEmail:_email
-                    password:password
-                  completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-                    if (error) {
-                      [self decrementActivity];
+  FIRAuthCredential *credential =
+      [FIREmailAuthProvider credentialWithEmail:_email password:password];
+  [self.auth signInAndRetrieveDataWithCredential:credential
+                                      completion:^(FIRAuthDataResult *_Nullable authResult,
+                                                   NSError *_Nullable error) {
+    if (error) {
+      [self decrementActivity];
 
-                      [self showAlertWithMessage:[FUIAuthStrings wrongPasswordError]];
-                      return;
-                    }
+      [self showAlertWithMessage:FUILocalizedString(kStr_WrongPasswordError)];
+      return;
+    }
 
-                    [user linkWithCredential:_newCredential completion:^(FIRUser * _Nullable user,
-                                                                         NSError * _Nullable error) {
-                      [self decrementActivity];
+    [authResult.user linkAndRetrieveDataWithCredential:self->_newCredential
+                                            completion:^(FIRAuthDataResult *_Nullable authResult,
+                                                         NSError *_Nullable error) {
+      [self decrementActivity];
 
-                      // Ignore any error (shouldn't happen) and treat the user as successfully signed in.
-                      [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                        [self.authUI invokeResultCallbackWithUser:user error:nil];
-                      }];
-                    }];
-                  }];
+      // Ignore any error (shouldn't happen) and treat the user as successfully signed in.
+      [self dismissNavigationControllerAnimated:YES completion:^{
+        [self.authUI invokeResultCallbackWithAuthDataResult:authResult error:nil];
+      }];
+    }];
+  }];
 }
 
 - (IBAction)forgotPassword {
@@ -183,14 +197,14 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   FUIAuthTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   if (!cell) {
     UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([FUIAuthTableViewCell class])
-                                    bundle:[FUIAuthUtils frameworkBundle]];
+                                    bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]];
     [tableView registerNib:cellNib forCellReuseIdentifier:kCellReuseIdentifier];
     cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   }
   cell.textField.delegate = self;
-  cell.label.text = [FUIAuthStrings password];
+  cell.label.text = FUILocalizedString(kStr_Password);
   _passwordField = cell.textField;
-  _passwordField.placeholder = [FUIAuthStrings enterYourPassword];
+  _passwordField.placeholder = FUILocalizedString(kStr_EnterYourPassword);
   _passwordField.secureTextEntry = YES;
   _passwordField.returnKeyType = UIReturnKeyNext;
   _passwordField.keyboardType = UIKeyboardTypeDefault;

@@ -16,14 +16,14 @@
 
 import UIKit
 
-import FirebaseStorageUI
+import FirebaseUI
 
 class StorageViewController: UIViewController {
 
   @IBOutlet fileprivate var imageView: UIImageView!
   @IBOutlet fileprivate var textField: UITextField!
 
-  fileprivate var storageRef = FIRStorage.storage().reference()
+  fileprivate var storageRef = Storage.storage().reference()
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
@@ -33,13 +33,13 @@ class StorageViewController: UIViewController {
 
     // Notification boilerplate to handle keyboard appearance/disappearance
     NotificationCenter.default.addObserver(self,
-                                           selector: #selector(keyboardWillShow),
-                                           name: NSNotification.Name.UIKeyboardWillShow,
-                                           object: nil)
+                                                     selector: #selector(keyboardWillShow),
+                                                     name: NSNotification.Name.UIKeyboardWillShow,
+                                                     object: nil)
     NotificationCenter.default.addObserver(self,
-                                           selector: #selector(keyboardWillHide),
-                                           name: NSNotification.Name.UIKeyboardWillHide,
-                                           object: nil)
+                                                     selector: #selector(keyboardWillHide),
+                                                     name: NSNotification.Name.UIKeyboardWillHide,
+                                                     object: nil)
   }
 
   @IBAction fileprivate func loadButtonPressed(_ sender: AnyObject) {
@@ -47,16 +47,14 @@ class StorageViewController: UIViewController {
     guard let text = self.textField.text else { return }
     guard let url = URL(string: text) else { return }
 
-    // [START firebaseui_load_image]
-    self.storageRef = FIRStorage.storage().reference(withPath: url.path)
+    self.storageRef = Storage.storage().reference(withPath: url.path)
 
     self.imageView.sd_setImage(with: self.storageRef,
-                               placeholderImage: nil) { (image, error, cacheType, storageRef) in
+      placeholderImage: nil) { (image, error, cacheType, storageRef) in
       if let error = error {
         print("Error loading image: \(error)")
       }
     }
-    // [END firebaseui_load_image]
   }
 
   // MARK: Keyboard boilerplate

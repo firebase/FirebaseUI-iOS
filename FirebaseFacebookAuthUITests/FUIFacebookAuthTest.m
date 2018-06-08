@@ -33,17 +33,8 @@
 
 @implementation FUIFacebookAuthTest
 
-- (FBSDKLoginManager *)createLoginManger {
+- (FBSDKLoginManager *)createLoginManager {
   return [[FBSDKLoginManagerTest alloc] init];
-}
-
-+ (NSBundle *)frameworkBundle {
-  static NSBundle *frameworkBundle = nil;
-  static dispatch_once_t predicate;
-  dispatch_once(&predicate, ^{
-    frameworkBundle = [NSBundle bundleForClass:[self class]];
-  });
-  return frameworkBundle;
 }
 
 - (void)configureLoginManager:(FBSDKLoginManagerLoginResult *)result withError:(NSError *)error {

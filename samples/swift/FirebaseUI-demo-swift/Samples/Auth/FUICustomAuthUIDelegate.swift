@@ -15,47 +15,62 @@
 //
 
 import UIKit
-import FirebaseAuthUI
+import FirebaseUI
 import FirebaseAuth
 
 class FUICustomAuthDelegate: NSObject, FUIAuthDelegate {
 
-  func authUI(_ authUI: FUIAuth, didSignInWith user: FIRUser?, error: Error?) {
-    guard let authError = error else { return }
-
-    let errorCode = UInt((authError as NSError).code)
-
-    switch errorCode {
-    case FUIAuthErrorCode.userCancelledSignIn.rawValue:
-      print("User cancelled sign-in");
-      break
-    default:
-      let detailedError = (authError as NSError).userInfo[NSUnderlyingErrorKey] ?? authError
-      print("Login error: \((detailedError as! NSError).localizedDescription)");
+  func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+    switch error {
+    case .some(let error as NSError) where UInt(error.code) == FUIAuthErrorCode.userCancelledSignIn.rawValue:
+      print("User cancelled sign-in")
+    case .some(let error as NSError) where error.userInfo[NSUnderlyingErrorKey] != nil:
+      print("Login error: \(error.userInfo[NSUnderlyingErrorKey]!)")
+    case .some(let error):
+      print("Login error: \(error.localizedDescription)")
+    case .none:
+      return
     }
   }
 
-  func authPickerViewController(for authUI: FUIAuth) -> FUIAuthPickerViewController {
-    return FUICustomAuthPickerViewController(authUI: authUI)
+  func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
+    return FUICustomAuthPickerViewController(nibName: "FUICustomAuthPickerViewController",
+                                             bundle: Bundle.main,
+                                             authUI: authUI)
   }
 
-  func emailEntryViewController(for authUI: FUIAuth) -> FUIEmailEntryViewController {
-    return FUICustomEmailEntryViewController(authUI: authUI)
+  func emailEntryViewController(forAuthUI authUI: FUIAuth) -> FUIEmailEntryViewController {
+    return FUICustomEmailEntryViewController(nibName: "FUICustomEmailEntryViewController",
+                                             bundle: Bundle.main,
+                                             authUI: authUI)
   }
 
-  func passwordRecoveryViewController(for authUI: FUIAuth, email: String) -> FUIPasswordRecoveryViewController {
-    return FUICustomPasswordRecoveryViewController(authUI: authUI, email: email)
+  func passwordRecoveryViewController(forAuthUI authUI: FUIAuth, email: String) -> FUIPasswordRecoveryViewController {
+    return FUICustomPasswordRecoveryViewController(nibName: "FUICustomPasswordRecoveryViewController",
+                                                   bundle: Bundle.main,
+                                                   authUI: authUI,
+                                                   email: email)
   }
 
-  func passwordSignInViewController(for authUI: FUIAuth, email: String) -> FUIPasswordSignInViewController {
-    return FUICustomPasswordSignInViewController(authUI: authUI, email: email)
+  func passwordSignInViewController(forAuthUI authUI: FUIAuth, email: String) -> FUIPasswordSignInViewController {
+    return FUICustomPasswordSignInViewController(nibName: "FUICustomPasswordSignInViewController",
+                                                 bundle: Bundle.main,
+                                                 authUI: authUI,
+                                                 email: email)
   }
 
-  func passwordSignUpViewController(for authUI: FUIAuth, email: String) -> FUIPasswordSignUpViewController {
-    return FUICustomPasswordSignUpViewController(authUI: authUI, email: email)
+  func passwordSignUpViewController(forAuthUI authUI: FUIAuth, email: String) -> FUIPasswordSignUpViewController {
+    return FUICustomPasswordSignUpViewController(nibName: "FUICustomPasswordSignUpViewController",
+                                                 bundle: Bundle.main,
+                                                 authUI: authUI,
+                                                 email: email)
   }
 
-  func passwordVerificationViewController(for authUI: FUIAuth, email: String, newCredential: FIRAuthCredential) -> FUIPasswordVerificationViewController {
-    return FUICustomPasswordVerificationViewController(authUI: authUI, email: email, newCredential: newCredential)
+  func passwordVerificationViewController(forAuthUI authUI: FUIAuth, email: String, newCredential: AuthCredential) -> FUIPasswordVerificationViewController {
+    return FUICustomPasswordVerificationViewController(nibName: "FUICustomPasswordVerificationViewController",
+                                                       bundle: Bundle.main,
+                                                       authUI: authUI,
+                                                       email: email,
+                                                       newCredential: newCredential)
   }
 }

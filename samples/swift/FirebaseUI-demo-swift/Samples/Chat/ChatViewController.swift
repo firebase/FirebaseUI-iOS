@@ -16,8 +16,7 @@
 
 import UIKit
 import Firebase
-import FirebaseDatabaseUI
-import FirebaseAuthUI
+import FirebaseUI
 
 /// View controller demonstrating using a FUICollectionViewDataSource
 /// to populate a collection view with chat messages. The relevant code
@@ -42,38 +41,35 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   /// Used to shift view contents up when the keyboard appears.
   @IBOutlet fileprivate var bottomConstraint: NSLayoutConstraint!
 
-  fileprivate let auth = FIRAuth.auth()
-  fileprivate let chatReference = FIRDatabase.database().reference().child("swift_demo-chat")
+  fileprivate let auth = Auth.auth()
+  fileprivate let chatReference = Database.database().reference().child("swift_demo-chat")
 
   fileprivate var collectionViewDataSource: FUICollectionViewDataSource!
 
-  fileprivate var user: FIRUser?
-  fileprivate var query: FIRDatabaseQuery?
+  fileprivate var user: User?
+  fileprivate var query: DatabaseQuery?
 
-  fileprivate var authStateListenerHandle: FIRAuthStateDidChangeListenerHandle?
+  fileprivate var authStateListenerHandle: AuthStateDidChangeListenerHandle?
 
   // MARK: - Interesting stuff
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
-    self.authStateListenerHandle = self.auth?.addStateDidChangeListener { (auth, user) in
+    self.authStateListenerHandle = self.auth.addStateDidChangeListener { (auth, user) in
       self.user = user
       self.query = self.chatReference.queryLimited(toLast: 50)
 
       self.collectionViewDataSource =
-        FUICollectionViewDataSource(query: self.query!,
-                                    view: self.collectionView,
-                                    populateCell: { (view, indexPath, snap) -> UICollectionViewCell in
-        let cell = view.dequeueReusableCell(withReuseIdentifier: ChatViewController.reuseIdentifier,
-                                            for: indexPath) as! ChatCollectionViewCell
-        let chat = Chat(snapshot: snap)!
-        cell.populateCellWithChat(chat, user: self.user, maxWidth: self.view.frame.size.width)
-        return cell
-      })
-      self.collectionView.dataSource = self.collectionViewDataSource
+          self.collectionView.bind(to: self.query!) { (view, indexPath, snap) -> UICollectionViewCell in
+            let cell = view.dequeueReusableCell(withReuseIdentifier: ChatViewController.reuseIdentifier,
+                                                for: indexPath) as! ChatCollectionViewCell
+            let chat = Chat(snapshot: snap)!
+            cell.populateCellWithChat(chat, user: self.user, maxWidth: self.view.frame.size.width)
+            return cell
+      }
 
-      // FirebaseArray has a delegate method `childAdded` that could be used here,
+      // FUIArray has a delegate method `childAdded` that could be used here,
       // but unfortunately FirebaseCollectionViewDataSource uses the FUICollection
       // delegate methods to update its own internal state, so in order to scroll
       // on new insertions we still need to use the query directly.
@@ -82,7 +78,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
       })
     }
 
-    self.auth?.signInAnonymously { (user, error) in
+    self.auth.signInAnonymously { (user, error) in
       if let error = error {
         // An error here means the user couldn't sign in. Correctly
         // handling it depends on the context as well as your app's
@@ -94,17 +90,17 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
 
     // Notification boilerplate to handle keyboard appearance/disappearance
     NotificationCenter.default.addObserver(self,
-                                                     selector: #selector(keyboardWillShow),
-                                                     name: NSNotification.Name.UIKeyboardWillShow,
-                                                     object: nil)
+                                           selector: #selector(keyboardWillShow),
+                                           name: NSNotification.Name.UIKeyboardWillShow,
+                                           object: nil)
     NotificationCenter.default.addObserver(self,
-                                                     selector: #selector(keyboardWillHide),
-                                                     name: NSNotification.Name.UIKeyboardWillHide,
-                                                     object: nil)
+                                           selector: #selector(keyboardWillHide),
+                                           name: NSNotification.Name.UIKeyboardWillHide,
+                                           object: nil)
   }
 
   @objc fileprivate func didTapSend(_ sender: AnyObject) {
-    guard let user = self.auth?.currentUser else { return }
+    guard let user = self.auth.currentUser else { return }
     let uid = user.uid
     let name = "User " + uid[uid.characters.startIndex..<uid.characters.index(uid.characters.startIndex, offsetBy: 6)]
     let _text = self.textView.text as String?
@@ -139,7 +135,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     if let handle = self.authStateListenerHandle {
-      self.auth?.removeStateDidChangeListener(handle)
+      self.auth.removeStateDidChangeListener(handle)
     }
     NotificationCenter.default.removeObserver(self)
   }
@@ -174,8 +170,9 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
   }
 
   fileprivate func scrollToBottom(animated: Bool) {
-    let count = self.collectionViewDataSource.collectionView(self.collectionView, numberOfItemsInSection: 0)
-    let indexPath = IndexPath(row: count - 1, section: 0)
+    let count = Int(self.collectionViewDataSource.count)
+    guard count > 0 else { return }
+    let indexPath = IndexPath(item: count - 1, section: 0)
     self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: animated)
   }
 
@@ -186,7 +183,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     let heightPadding: CGFloat = 16
 
     let width = self.view.frame.size.width
-    let blob = self.collectionViewDataSource.object(at: UInt((indexPath as NSIndexPath).row)) as! FIRDataSnapshot
+    let blob = self.collectionViewDataSource.snapshot(at: indexPath.item)
     let text = Chat(snapshot: blob)!.text
 
     let rect = ChatCollectionViewCell.boundingRectForText(text, maxWidth: width)
@@ -213,7 +210,7 @@ struct Chat {
     self.name = name; self.uid = uid; self.text = text
   }
 
-  init?(snapshot: FIRDataSnapshot) {
+  init?(snapshot: DataSnapshot) {
     guard let dict = snapshot.value as? [String: String] else { return nil }
     guard let name = dict["name"] else { return nil }
     guard let uid  = dict["uid"]  else { return nil }

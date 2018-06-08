@@ -19,28 +19,71 @@
 // clang-format on
 
 #import "FUICollectionViewDataSource.h"
+#import "FUIArray.h"
 
-@import FirebaseDatabase;
+@interface FUICollectionViewDataSource () <FUICollectionDelegate>
+
+@property (nonatomic, readonly, nonnull) id<FUICollection> collection;
+
+/**
+ * The callback to populate a subclass of UICollectionViewCell with an object
+ * provided by the datasource.
+ */
+@property (strong, nonatomic, readonly) UICollectionViewCell *(^populateCellAtIndexPath)
+  (UICollectionView *collectionView, NSIndexPath *indexPath, FIRDataSnapshot *object);
+
+@end
 
 @implementation FUICollectionViewDataSource
 
 #pragma mark - FUIDataSource initializer methods
 
-- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                         view:(UICollectionView *)collectionView
-                 populateCell:(UICollectionViewCell *(^)(UICollectionView *,
-                                                         NSIndexPath *,
-                                                         FIRDataSnapshot *))populateCell {
-  FUIArray *array = [[FUIArray alloc] initWithQuery:query];
-  self = [super initWithArray:array];
+- (instancetype)initWithCollection:(id<FUICollection>)collection
+                      populateCell:(UICollectionViewCell * (^)(UICollectionView *,
+                                                               NSIndexPath *,
+                                                               FIRDataSnapshot *))populateCell {
+  self = [super init];
   if (self) {
-    _collectionView = collectionView;
+    _collection = collection;
+    _collection.delegate = self;
     _populateCellAtIndexPath = populateCell;
   }
   return self;
 }
 
-#pragma mark - FUIArrayDelegate methods
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
+                 populateCell:(UICollectionViewCell *(^)(UICollectionView *,
+                                                         NSIndexPath *,
+                                                         FIRDataSnapshot *))populateCell {
+  FUIArray *array = [[FUIArray alloc] initWithQuery:query];
+  return [self initWithCollection:array populateCell:populateCell];
+}
+
+- (NSUInteger)count {
+  return self.collection.count;
+}
+
+- (NSArray<FIRDataSnapshot *> *)items {
+  return self.collection.items;
+}
+
+- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index {
+  return [self.collection snapshotAtIndex:index];
+}
+
+- (void)bindToView:(UICollectionView *)view {
+  self.collectionView = view;
+  view.dataSource = self;
+  [self.collection observeQuery];
+}
+
+- (void)unbind {
+  self.collectionView.dataSource = nil;
+  self.collectionView = nil;
+  [self.collection invalidate];
+}
+
+#pragma mark - FUICollectionDelegate methods
 
 - (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
   [self.collectionView
@@ -63,11 +106,17 @@
                                toIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]];
 }
 
+- (void)array:(id<FUICollection>)array queryCancelledWithError:(NSError *)error {
+  if (self.queryErrorHandler != NULL) {
+    self.queryErrorHandler(error);
+  }
+}
+
 #pragma mark - UICollectionViewDataSource methods
 
 - (nonnull UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView
                           cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-  FIRDataSnapshot *snap = [self.items objectAtIndex:indexPath.row];
+  FIRDataSnapshot *snap = [self.collection.items objectAtIndex:indexPath.item];
 
   UICollectionViewCell *cell = self.populateCellAtIndexPath(collectionView, indexPath, snap);
 
@@ -80,7 +129,7 @@
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-  return self.count;
+  return self.collection.count;
 }
 
 @end
@@ -92,8 +141,8 @@
                                                                         NSIndexPath *,
                                                                         FIRDataSnapshot *))populateCell {
   FUICollectionViewDataSource *dataSource =
-    [[FUICollectionViewDataSource alloc] initWithQuery:query view:self populateCell:populateCell];
-  self.dataSource = dataSource;
+    [[FUICollectionViewDataSource alloc] initWithQuery:query populateCell:populateCell];
+  [dataSource bindToView:self];
   return dataSource;
 }
 

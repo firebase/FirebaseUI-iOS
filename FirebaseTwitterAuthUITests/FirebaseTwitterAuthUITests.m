@@ -15,13 +15,16 @@
 //
 
 
+
 #import "FUITwitterAuth.h"
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>
+#import "FUIAuthUtils.h"
+#import <FirebaseAuthUI/FUIAuth.h>
 #import <FirebaseTwitterAuthUI/FirebaseTwitterAuthUI.h>
 #import <OCMock/OCMock.h>
 #import <TwitterCore/TwitterCore.h>
-#import <TwitterKit/TwitterKit.h>
+#import <TwitterKit/TWTRTwitter.h>
 #import <XCTest/XCTest.h>
 
 @interface FUITwitterAuth (Testing)
@@ -36,6 +39,18 @@
 
 - (void)setUp {
   [super setUp];
+  id mockUtilsClass = OCMClassMock([FUIAuthUtils class]);
+  OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY])).
+      andReturn([NSBundle bundleForClass:[FUITwitterAuth class]]);
+
+  id authUIClass = OCMClassMock([FUIAuth class]);
+  OCMStub(ClassMethod([authUIClass authUIWithAuth:OCMOCK_ANY])).
+      andReturn(authUIClass);
+
+  id authClass = OCMClassMock([FIRAuth class]);
+  OCMStub(ClassMethod([authClass auth])).
+      andReturn(authClass);
+
   self.provider = [[FUITwitterAuth alloc] init];
 }
 
@@ -80,19 +95,22 @@
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
   [mockedProvider signInWithEmail:nil
          presentingViewController:nil
-                       completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
-                         XCTAssertNil(error);
-                         XCTAssertNotNil(credential);
-                         FIRAuthCredential *expectedCredential = [FIRTwitterAuthProvider credentialWithToken:testToken secret:testSecret];
-                         XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
+                       completion:^(FIRAuthCredential *_Nullable credential,
+                                    NSError *_Nullable error,
+                                    FIRAuthResultCallback _Nullable result) {
+    XCTAssertNil(error);
+    XCTAssertNotNil(credential);
+    XCTAssertNotNil(result);
+    FIRAuthCredential *expectedCredential = [FIRTwitterAuthProvider credentialWithToken:testToken secret:testSecret];
+    XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
 
-                         //verify that we are using token from server
-                         OCMVerify([mockSession authToken]);
-                         OCMVerify([mockSession authTokenSecret]);
+    //verify that we are using token from server
+    OCMVerify([mockSession authToken]);
+    OCMVerify([mockSession authTokenSecret]);
 
-                         [expectation fulfill];
-                       }];
-  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
+    [expectation fulfill];
+  }];
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];
 
@@ -115,13 +133,16 @@
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
   [mockedProvider signInWithEmail:nil
          presentingViewController:nil
-                       completion:^(FIRAuthCredential * _Nullable credential, NSError * _Nullable error) {
-                         XCTAssertNil(credential);
-                         XCTAssertNotNil(error);
-                         XCTAssertEqualObjects(error.userInfo[NSUnderlyingErrorKey], loginError);
-                         [expectation fulfill];
-                       }];
-  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError * _Nullable error) {
+                       completion:^(FIRAuthCredential *_Nullable credential,
+                                    NSError *_Nullable error,
+                                    FIRAuthResultCallback _Nullable result) {
+    XCTAssertNil(credential);
+    XCTAssertNotNil(error);
+    XCTAssertNil(result);
+    XCTAssertEqualObjects(error.userInfo[NSUnderlyingErrorKey], loginError);
+    [expectation fulfill];
+  }];
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];
 

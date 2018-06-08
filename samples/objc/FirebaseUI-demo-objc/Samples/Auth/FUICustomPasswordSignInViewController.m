@@ -59,7 +59,7 @@
 }
 
 - (IBAction)onNextPressed:(id)sender {
-  [self signInWithEmail:_emailTextField.text andPassword:_passwordTextField.text];
+  [self signInWithDefaultValue:_emailTextField.text andPassword:_passwordTextField.text];
 }
 
 - (IBAction)onCancelPressed:(id)sender {

@@ -2,22 +2,22 @@
 
 ## Using FirebaseUI to download and display images
 
-[Firebase Storage][firebase-storage] provides secure file uploads and downloads for your Firebase apps,
+[Cloud Storage for Firebase][firebase-storage] provides secure file uploads and downloads for your Firebase apps,
 regardless of network quality. You can use it to store images, audio, video, or other
-user-generated content. Firebase Storage is backed by Google Cloud Storage, a powerful, simple,
+user-generated content. Cloud Storage is a powerful, simple,
 and cost-effective object storage service.
 
-FirebaseUI provides bindings to download an image file stored in Firebase Storage
+FirebaseUI provides bindings to download an image file stored in Cloud Storage
 from a [`FIRStorageReference`][storage-reference] and display it using the popular
 [SDWebImage][sdwebimage] library. This technique allows you to get all of SDWebImage's performance
-benefits while leveraging Firebase Storage's authenticated storage capabilities.
+benefits while leveraging Cloud Storage's authenticated storage capabilities.
 
 To load an image from a `FIRStorageReference`, simply use the `UIImageView+FirebaseStorage` extensions:
 
 ```objective-c
 // Objective-C
 
-// Reference to an image file in Firebase Storage
+// Reference to an image file in Cloud Storage
 FIRStorageReference *reference = ...;
 
 // UIImageView in your ViewController
@@ -30,17 +30,17 @@ UIImageView *imageView = ...;
 ```swift
 // Swift
 
-// Reference to an image file in Firebase Storage
-let reference: FIRStorageReference = ...;
+// Reference to an image file in Cloud Storage
+let reference: StorageReference = ...;
 
 // UIImageView in your ViewController
-var imageView: UIImageView = ...;
+let imageView: UIImageView = ...;
 
 // Load the image using SDWebImage
 imageView.sd_setImageWithStorageReference(reference, placeholderImage: placeholderImage)
 ```
 
-Images are cached by their path in Firebase Storage, so repeated loads will be
+Images are cached by their path in Cloud Storage, so repeated loads will be
 fast and conserve bandwidth. For more information on caching in SDWebImage,
 see [this guide][sdwebimage-caching].
 

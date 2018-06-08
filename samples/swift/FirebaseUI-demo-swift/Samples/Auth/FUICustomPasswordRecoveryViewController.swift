@@ -15,7 +15,7 @@
 //
 
 import UIKit
-import FirebaseAuthUI
+import FirebaseUI
 
 @objc(FUICustomPasswordRecoveryViewController)
 

@@ -1,0 +1,245 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Welkom";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Inloggen met e-mailadres";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Voer uw e-mailadres in";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Dit e-mailadres is niet juist.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Dit accounttype wordt niet ondersteund door deze app";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "U heeft al een account";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "U heeft %@ al gebruikt. Log in met %@ om verder te gaan.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Inloggen";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Voer uw wachtwoord in";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Wachtwoord mag niet leeg zijn.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Het ingevoerde e-mailadres en wachtwoord komen niet overeen.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Dit e-mailadres komt niet overeen met een bestaand account.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Dit e-mailadres hoort bij een uitgeschakeld account.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "U heeft te vaak een fout wachtwoord ingevoerd. Probeer het over enkele minuten opnieuw.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Kan de provider niet vinden voor %@.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "E-mailadressen komen niet overeen";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Wachtwoord herstellen";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Er wordt een e-mail naar dit adres verzonden met instructies om uw wachtwoord te herstellen.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Controleer uw inbox";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Volg de instructies die we naar %@ hebben verzonden om uw wachtwoord te herstellen.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Account maken";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Voor- en achternaam";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Wachtwoord kiezen";
+
+/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
+"TermsOfServiceNotice" = "Door op %@ te tikken, gaat u akkoord met de %@.";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Servicevoorwaarden";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Dit e-mailadres wordt al gebruikt door een ander account.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Sterke wachtwoorden bevatten ten minste zes tekens en een combinatie van letters en cijfers.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "Er komen te veel accountaanvragen van uw IP-adres. Probeer het over enkele minuten opnieuw.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "U heeft al ingelogd met %@. Voer uw wachtwoord in voor dit account.";
+
+/* OK button title. */
+"OK" = "OK";
+
+/* Cancel button title. */
+"Cancel" = "Annuleren";
+
+/* Back button title. */
+"Back" = "Terug";
+
+/* Next button title. */
+"Next" = "Volgende";
+
+/* Save button title. */
+"Save" = "Opslaan";
+
+/* Save button title. */
+"Send" = "Verzenden";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "E-mail";
+
+/* Label next to a password text field. */
+"Password" = "Wachtwoord";
+
+/* Label next to a name text field. */
+"Name" = "Naam";
+
+/* Alert title Error. */
+"Error" = "Fout";
+
+/* Alert button title Close. */
+"Close" = "Sluiten";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Profiel";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Beveiliging";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Gelinkte accounts";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Naam";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "E-mail";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Wachtwoord toevoegen";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Wachtwoord wijzigen";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Uitloggen";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Account verwijderen";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Wachtwoord vergeten?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Bevestig dat u het bent";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Account verwijderen?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Alle gegevens die aan uw account zijn gekoppeld, worden gewist. Dit kan niet ongedaan worden gemaakt. U moet opnieuw inloggen om deze actie te voltooien.";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Alle gegevens die aan uw account zijn gekoppeld, worden gewist. Dit kan niet ongedaan worden gemaakt. Weet u zeker dat u uw account wilt verwijderen?";
+
+/* Text of Delete action button. */
+"Delete" = "Verwijderen";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Account verwijderen";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Deze actie kan niet ongedaan worden gemaakt.";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Link verwijderen";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Gelinkt account";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Link met account verwijderen?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "U kunt niet meer inloggen met uw account";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Link met account verwijderen";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Als u een e-mailadres wilt veranderen dat is gekoppeld aan uw account, moet u opnieuw inloggen.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Om uw wachtwoord te veranderen, moet u eerst uw huidige wachtwoord invoeren.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "E-mailadres bewerken";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Naam bewerken";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Om een wachtwoord toe te voegen aan uw account, moet u opnieuw inloggen.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Om het wachtwoord van uw account te veranderen, moet u opnieuw inloggen.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Om uw wachtwoord te veranderen, moet u eerst uw huidige wachtwoord invoeren.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Wachtwoord toevoegen";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Wachtwoord wijzigen";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "E-mail";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Inloggen met %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Voer uw naam in";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Voer uw e-mailadres in";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Voer uw wachtwoord in";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Nieuw wachtwoord";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Wachtwoord kiezen";
+
+/* The title of forgot password button. */
+"ForgotPasswordTitle" = "Problemen met inloggen?";

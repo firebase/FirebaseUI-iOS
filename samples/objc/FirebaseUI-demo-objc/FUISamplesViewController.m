@@ -16,9 +16,13 @@
 //  limitations under the License.
 //
 
-#import "FUISample.h"
+@import FirebaseUI;
+
 #import "FUISamplesViewController.h"
+
+#import "FUIAuthViewController.h"
 #import "FUIChatViewController.h"
+#import "FUISample.h"
 
 @interface FUISamplesViewController ()
 
@@ -38,34 +42,31 @@
 }
 
 - (void)populateSamples {
-  NSMutableArray *samples = [[NSMutableArray alloc] init];
-
-  [samples addObject:[FUISample sampleWithTitle:@"Auth"
-                              sampleDescription:@"Demonstrates the FirebaseAuthUI flow with customization options"
-                                     controller:^UIViewController *{
-                                       UIViewController *controller =
-                                       [[UIStoryboard storyboardWithName:@"Main"
-                                                                  bundle:NULL] instantiateViewControllerWithIdentifier:@"FUIAuthViewController"];
-                                       return controller;
-                                     }]];
-
-  [samples addObject:[FUISample sampleWithTitle:@"Chat"
-                              sampleDescription:@"Demonstrates using a FUICollectionViewDataSource to load data from Firebase Database into a UICollectionView for a basic chat app."
-                                     controller:^UIViewController *{
-                                       UIViewController *controller =
-                                       [[UIStoryboard storyboardWithName:@"Main"
-                                                                  bundle:NULL] instantiateViewControllerWithIdentifier:@"ViewController"];
-                                       return controller;
-                                     }]];
-  [samples addObject:[FUISample sampleWithTitle:@"Storage"
-                              sampleDescription:@"Demonstrates using FirebaseStorageUI to populate an image view."
-                                     controller:^UIViewController *{
-                                       UIViewController *controller =
-                                       [[UIStoryboard storyboardWithName:@"Main"
-                                                                  bundle:NULL] instantiateViewControllerWithIdentifier:@"FUIStorageViewController"];
-                                       return controller;
-                                     }]];
-
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main"
+                                                       bundle:NULL];
+  NSArray *samples = @[
+    [FUISample sampleWithTitle:@"Auth"
+            sampleDescription:@"Demonstrates the FirebaseAuthUI flow with customization options"
+                   controller:^UIViewController *{
+        UIViewController *controller =
+            [storyboard instantiateViewControllerWithIdentifier:@"FUIAuthViewController"];
+        return controller;
+      }],
+    [FUISample sampleWithTitle:@"Chat"
+            sampleDescription:@"Demonstrates using a FUICollectionViewDataSource to load data from "
+                               "Firebase Database into a UICollectionView for a basic chat app."
+                   controller:^UIViewController *{
+        UIViewController *controller =
+          [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
+        return controller;
+      }],
+    [FUISample sampleWithTitle:@"Storage"
+            sampleDescription:@"Demonstrates using FirebaseStorageUI to populate an image view."
+                   controller:^UIViewController *{
+        UIViewController *controller =
+          [storyboard instantiateViewControllerWithIdentifier:@"FUIStorageViewController"];
+        return controller;
+      }]];
   _samplesContainer = samples;
 }
 
@@ -79,9 +80,11 @@
   return _samplesContainer.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString *cellId = @"FUISampleCell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId
+                                                          forIndexPath:indexPath];
 
   FUISample *sample = _samplesContainer[indexPath.row];
   cell.textLabel.text = sample.title;
@@ -93,7 +96,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   FUISample *sample = _samplesContainer[indexPath.row];
   UIViewController *viewController = sample.controllerBlock();
-  
+
   [self.navigationController pushViewController:viewController animated:YES];
 }
 

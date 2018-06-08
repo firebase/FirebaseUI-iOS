@@ -22,6 +22,7 @@ FOUNDATION_EXPORT double FirebaseFacebookAuthUIVersionNumber;
 //! Project version string for FirebaseFacebookAuthUI.
 FOUNDATION_EXPORT const unsigned char FirebaseFacebookAuthUIVersionString[];
 
-#import <FirebaseFacebookAuthUI/FUIFacebookAuth.h>
+#import "FUIFacebookAuth.h"
+
 
 

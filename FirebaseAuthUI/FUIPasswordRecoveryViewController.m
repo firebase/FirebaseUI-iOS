@@ -17,6 +17,7 @@
 #import "FUIPasswordRecoveryViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
+#import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthStrings.h"
 #import "FUIAuthTableViewCell.h"
 #import "FUIAuthUtils.h"
@@ -50,12 +51,17 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
       @brief The @c UITextField that user enters email address into.
    */
   UITextField *_emailField;
+  
+  /** @var _tableView
+      @brief The @c UITableView used to store all UI elements.
+   */
+  __weak IBOutlet UITableView *_tableView;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                          email:(NSString *_Nullable)email {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils frameworkBundle]
+                        bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
                         authUI:authUI
                          email:email];
 }
@@ -70,7 +76,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   if (self) {
     _email = [email copy];
 
-    self.title = [FUIAuthStrings passwordRecoveryTitle];
+    self.title = FUILocalizedString(kStr_PasswordRecoveryTitle);
   }
   return self;
 }
@@ -79,17 +85,18 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   [super viewDidLoad];
 
   UIBarButtonItem *sendButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:[FUIAuthStrings send]
-                                       style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(send)];
+      [FUIAuthBaseViewController barItemWithTitle:FUILocalizedString(kStr_Send)
+                                           target:self
+                                           action:@selector(send)];
   self.navigationItem.rightBarButtonItem = sendButtonItem;
+
+  [self enableDynamicCellHeightForTableView:_tableView];
 }
 
 - (void)viewDidLayoutSubviews {
   [super viewDidLayoutSubviews];
 
-  self.footerTextView.text = [FUIAuthStrings passwordRecoveryMessage];
+  self.footerTextView.text = FUILocalizedString(kStr_PasswordRecoveryMessage);
 
   // Adjust the footerTextView to have standard margins.
   self.footerTextView.textContainer.lineFragmentPadding = 0;
@@ -106,7 +113,7 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 
 - (void)recoverEmail:(NSString *)email {
   if (![[self class] isValidEmail:email]) {
-    [self showAlertWithMessage:[FUIAuthStrings invalidEmailError]];
+    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
     return;
   }
 
@@ -114,28 +121,24 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 
   [self.auth sendPasswordResetWithEmail:email
                              completion:^(NSError *_Nullable error) {
-                               // The dispatch is a workaround for a bug in FirebaseAuth 3.0.2, which doesn't call the
-                               // completion block on the main queue.
-                               dispatch_async(dispatch_get_main_queue(), ^{
-                                 [self decrementActivity];
+    [self decrementActivity];
 
-                                 if (error) {
-                                   if (error.code == FIRAuthErrorCodeUserNotFound) {
-                                     [self showAlertWithMessage:[FUIAuthStrings userNotFoundError]];
-                                     return;
-                                   }
+    if (error) {
+      if (error.code == FIRAuthErrorCodeUserNotFound) {
+        [self showAlertWithMessage:FUILocalizedString(kStr_UserNotFoundError)];
+        return;
+      }
 
-                                   [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                                     [self.authUI invokeResultCallbackWithUser:nil error:error];
-                                   }];
-                                   return;
-                                 }
+      [self dismissNavigationControllerAnimated:YES completion:^{
+        [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
+      }];
+      return;
+    }
 
-                                 NSString *message =
-                                 [NSString stringWithFormat:[FUIAuthStrings passwordRecoveryEmailSentMessage], email];
-                                 [self showAlertWithMessage:message];
-                               });
-                             }];
+    NSString *message = [NSString stringWithFormat:
+                            FUILocalizedString(kStr_PasswordRecoveryEmailSentMessage), email];
+    [self showAlertWithMessage:message];
+  }];
 }
 
 - (void)textFieldDidChange {
@@ -158,15 +161,15 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   FUIAuthTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   if (!cell) {
     UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([FUIAuthTableViewCell class])
-                                    bundle:[FUIAuthUtils frameworkBundle]];
+                                    bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]];
     [tableView registerNib:cellNib forCellReuseIdentifier:kCellReuseIdentifier];
     cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   }
-  cell.label.text = [FUIAuthStrings email];
+  cell.label.text = FUILocalizedString(kStr_Email);
   _emailField = cell.textField;
   _emailField.delegate = self;
   _emailField.text = _email;
-  _emailField.placeholder = [FUIAuthStrings enterYourEmail];
+  _emailField.placeholder = FUILocalizedString(kStr_EnterYourEmail);
   _emailField.secureTextEntry = NO;
   _emailField.returnKeyType = UIReturnKeyNext;
   _emailField.keyboardType = UIKeyboardTypeEmailAddress;

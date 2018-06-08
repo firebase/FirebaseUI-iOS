@@ -16,11 +16,11 @@ target 'FirebaseStorageUI' do
   use_frameworks!
 
   pod 'Firebase/Storage'
-  pod 'SDWebImage'
+  pod 'SDWebImage', '~> 4.0'
 
   target 'FirebaseStorageUITests' do
     inherit! :search_paths
-    pod 'SDWebImage'
+    pod 'SDWebImage', '~> 4.0'
     pod 'OCMock'
   end
 end
@@ -31,22 +31,8 @@ target 'FirebaseAuthUI' do
   # Pods for Auth
   pod 'FirebaseAuth'
 
-  # Pod for FirebaseGoogleAuthUI (inlcuded to base so it's not duplicated)
-  pod 'GoogleSignIn', '~> 4.0'
-
   target 'FirebaseAuthUITests' do
     inherit! :search_paths
-  end
-
-  target 'FirebaseGoogleAuthUI' do
-    inherit! :search_paths
-    # Pods for Google Auth
-    # pod 'GoogleSignIn', '~> 4.0'
-
-    target 'FirebaseGoogleAuthUITests' do
-      inherit! :search_paths
-      pod 'OCMock'
-    end
   end
 
   target 'FirebaseFacebookAuthUI' do
@@ -58,81 +44,73 @@ target 'FirebaseAuthUI' do
     target 'FirebaseFacebookAuthUITests' do
       inherit! :search_paths
       pod 'OCMock'
-      pod 'FBSDKLoginKit', '~> 4.0'
-      pod 'FBSDKCoreKit', '~> 4.0'
+    end
+  end
+
+  target 'FirebaseGoogleAuthUI' do
+    inherit! :search_paths
+    # Pods for Google Auth
+    pod 'GoogleSignIn', '~> 4.0'
+
+    target 'FirebaseGoogleAuthUITests' do
+      inherit! :search_paths
+      pod 'OCMock'
+    end
+  end
+
+  target 'FirebasePhoneAuthUI' do
+    inherit! :search_paths
+
+    target 'FirebasePhoneAuthUITests' do
+      inherit! :search_paths
+      pod 'OCMock'
     end
   end
 
   target 'FirebaseTwitterAuthUI' do
+    platform :ios, '9.0'
     inherit! :search_paths
     # Pods for Twitter Auth
-    pod 'TwitterKit', '~> 2.4'
+    pod 'TwitterKit', '~> 3.0'
 
     target 'FirebaseTwitterAuthUITests' do
+      platform :ios, '9.0'
       inherit! :search_paths
       pod 'OCMock'
     end
   end
 end
 
-target 'Database' do
+target 'FirebaseFirestoreUI' do
   use_frameworks!
 
-  # Pods for Database
-  pod 'Firebase/Database'
-end
+  # Pods for Firestore
+  pod 'Firebase/Firestore'
 
-target 'Storage' do
-  use_frameworks!
-
-  pod 'Firebase/Storage'
-  pod 'SDWebImage'
-end
-
-target 'Auth' do
-  use_frameworks!
-
-  # Pods for Auth
-  pod 'Firebase/Auth'
-end
-
-target 'Facebook' do
-  use_frameworks!
-
-  # Pods for Facebook Auth
-  pod 'Firebase/Auth'
-  pod 'FBSDKLoginKit', '~> 4.0'
-end
-
-target 'Google' do
-  use_frameworks!
-
-  # Pods for Google Auth
-  pod 'Firebase/Auth'
-  pod 'GoogleSignIn', '~> 4.0'
-end
-
-target 'Twitter' do
-  use_frameworks!
-
-  # Pods for Twitter Auth
-  pod 'Firebase/Auth'
-  pod 'TwitterKit', '~> 2.4'
+  target 'FirebaseFirestoreUITests' do
+    inherit! :search_paths
+  end
 end
 
 target 'FirebaseUISample' do
+  use_frameworks!
+  platform :ios, '9.0'
 
   pod 'OCMock'
-
-  pod 'FirebaseAuthUI', :path => "FirebaseUI_dev_auth.podspec"
-  pod 'FirebaseDatabaseUI', :path => "FirebaseUI_dev_db.podspec"
-  pod 'FirebaseStorageUI', :path => "FirebaseUI_dev_storage.podspec"
-  pod 'FirebaseFacebookAuthUI', :path => "FirebaseUI_dev_fb.podspec"
-  pod 'FirebaseGoogleAuthUI', :path => "FirebaseUI_dev_ggl.podspec"
-  pod 'FirebaseTwitterAuthUI', :path => "FirebaseUI_dev_tw.podspec"
+  # pod 'FirebaseUI/Auth', :path => '.'
+  # pod 'FirebaseUI/Facebook', :path => '.'
+  # pod 'FirebaseUI/Google', :path => '.'
+  # pod 'FirebaseUI/Twitter', :path => '.'
+  # pod 'FirebaseUI/Phone', :path => '.'
 
   target 'FirebaseUISampleUITests' do
     inherit! :search_paths
   end
+end
 
+post_install do |installer|
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings.delete('CODE_SIGNING_ALLOWED')
+    config.build_settings.delete('CODE_SIGNING_REQUIRED')
+  end
 end

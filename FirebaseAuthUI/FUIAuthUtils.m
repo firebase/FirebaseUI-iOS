@@ -16,20 +16,31 @@
 
 #import "FUIAuthUtils.h"
 
+NSString *const FUIAuthBundleName = @"FirebaseAuthUI";
+
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation FUIAuthUtils
 
-+ (NSBundle *)frameworkBundle {
-  static NSBundle *frameworkBundle = nil;
-  static dispatch_once_t predicate;
-  dispatch_once(&predicate, ^{
++ (NSBundle *)bundleNamed:(NSString *)bundleName {
+  NSBundle *frameworkBundle = nil;
+  if (bundleName) {
+    NSString *path = [[NSBundle mainBundle] pathForResource:bundleName ofType:@"bundle"];
+    if (path == nil) {
+      // Check framework resources if bundle isn't present in main bundle.
+      path = [[NSBundle mainBundle] pathForResource:bundleName ofType:@"framework"];
+    }
+    frameworkBundle = [NSBundle bundleWithPath:path];
+  } else {
     frameworkBundle = [NSBundle bundleForClass:[self class]];
-  });
+  }
   return frameworkBundle;
 }
 
-+ (UIImage *)imageNamed:(NSString *)name {
-  NSString *path = [[[self class] frameworkBundle] pathForResource:name ofType:@"png"];
++ (UIImage *)imageNamed:(NSString *)name fromBundle:(NSString *)bundleName {
+  NSString *path = [[FUIAuthUtils bundleNamed:bundleName] pathForResource:name ofType:@"png"];
   return [UIImage imageWithContentsOfFile:path];
 }
+NS_ASSUME_NONNULL_END
 
 @end

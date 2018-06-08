@@ -26,7 +26,9 @@
 
 @implementation FUICustomAuthDelegate
 
-- (void)authUI:(FUIAuth *)authUI didSignInWithUser:(nullable FIRUser *)user error:(nullable NSError *)error {
+- (void)authUI:(FUIAuth *)authUI
+    didSignInWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult
+                          error:(nullable NSError *)error {
   if (error) {
     if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
       NSLog(@"User cancelled sign-in");
@@ -41,41 +43,57 @@
 }
 
 - (FUIAuthPickerViewController *)authPickerViewControllerForAuthUI:(FUIAuth *)authUI {
-  return [[FUICustomAuthPickerViewController alloc] initWithAuthUI:authUI];
+  return [[FUICustomAuthPickerViewController alloc]
+              initWithNibName:@"FUICustomAuthPickerViewController"
+                       bundle:[NSBundle mainBundle]
+                       authUI:authUI];
 }
 
 - (FUIEmailEntryViewController *)emailEntryViewControllerForAuthUI:(FUIAuth *)authUI {
-  return [[FUICustomEmailEntryViewController alloc] initWithAuthUI:authUI];
-
+  return [[FUICustomEmailEntryViewController alloc]
+              initWithNibName:@"FUICustomEmailEntryViewController"
+                       bundle:[NSBundle mainBundle]
+                       authUI:authUI];
 }
 
 - (FUIPasswordSignInViewController *)passwordSignInViewControllerForAuthUI:(FUIAuth *)authUI
                                                                      email:(NSString *)email {
-  return [[FUICustomPasswordSignInViewController alloc] initWithAuthUI:authUI
-                                                                  email:email];
-
+  return [[FUICustomPasswordSignInViewController alloc]
+              initWithNibName:@"FUICustomPasswordSignInViewController"
+                       bundle:[NSBundle mainBundle]
+                       authUI:authUI
+                        email:email];
 }
 
 - (FUIPasswordSignUpViewController *)passwordSignUpViewControllerForAuthUI:(FUIAuth *)authUI
                                                                      email:(NSString *)email {
-  return [[FUICustomPasswordSignUpViewController alloc] initWithAuthUI:authUI
-                                                                  email:email];
-
+  return [[FUICustomPasswordSignUpViewController alloc]
+              initWithNibName:@"FUICustomPasswordSignUpViewController"
+                       bundle:[NSBundle mainBundle]
+                       authUI:authUI
+                        email:email];
 }
 
-- (FUIPasswordRecoveryViewController *)passwordRecoveryViewControllerForAuthUI:(FUIAuth *)authUI
-                                                                         email:(NSString *)email {
-  return [[FUICustomPasswordRecoveryViewController alloc] initWithAuthUI:authUI
-                                                                    email:email];
-  
+- (FUIPasswordRecoveryViewController *)
+    passwordRecoveryViewControllerForAuthUI:(FUIAuth *)authUI
+                                      email:(NSString *)email {
+  return [[FUICustomPasswordRecoveryViewController alloc]
+              initWithNibName:@"FUICustomPasswordRecoveryViewController"
+                       bundle:[NSBundle mainBundle]
+                       authUI:authUI
+                        email:email];
 }
 
-- (FUIPasswordVerificationViewController *)passwordVerificationViewControllerForAuthUI:(FUIAuth *)authUI
-                                                                                 email:(NSString *)email
-                                                                         newCredential:(FIRAuthCredential *)newCredential {
-  return [[FUICustomPasswordVerificationViewController alloc] initWithAuthUI:authUI
-                                                                        email:email
-                                                                newCredential:newCredential];
+- (FUIPasswordVerificationViewController *)
+    passwordVerificationViewControllerForAuthUI:(FUIAuth *)authUI
+                                          email:(NSString *)email
+                                  newCredential:(FIRAuthCredential *)newCredential {
+  return [[FUICustomPasswordVerificationViewController alloc]
+              initWithNibName:@"FUICustomPasswordVerificationViewController"
+                       bundle:[NSBundle mainBundle]
+                       authUI:authUI
+                        email:email
+                newCredential:newCredential];
 }
 
 @end

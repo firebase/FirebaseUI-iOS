@@ -16,17 +16,27 @@
 
 #import "FUIGoogleAuth.h"
 
-#import <FirebaseAnalytics/FirebaseAnalytics.h>
+#import <FirebaseAuth/FIRAuth.h>
 #import <FirebaseAuth/FIRGoogleAuthProvider.h>
 #import <FirebaseAuth/FIRUserInfo.h>
-#import <FirebaseAuthUI/FUIAuthErrorUtils.h>
-#import <FirebaseAuthUI/FirebaseAuthUI.h>
+#import "FUIAuthBaseViewController.h"
+#import "FUIAuthErrorUtils.h"
+#import "FirebaseAuthUI.h"
+#import <FirebaseCore/FirebaseCore.h>
 #import <GoogleSignIn/GoogleSignIn.h>
+#import "FUIAuthBaseViewController_Internal.h"
+#import "FUIAuthStrings.h"
+#import "FUIAuthUtils.h"
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
-*/
+ */
 static NSString *const kTableName = @"FirebaseGoogleAuthUI";
+
+/** @var kBundleName
+    @brief The name of the bundle to search for resources.
+ */
+static NSString *const kBundleName = @"FirebaseGoogleAuthUI";
 
 /** @var kSignInWithGoogle
     @brief The string key for localized button text.
@@ -59,40 +69,6 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   return self;
 }
 
-/** @fn frameworkBundle
-    @brief Returns the auth provider's resource bundle.
-    @return Resource bundle for the auth provider.
- */
-+ (NSBundle *)frameworkBundle {
-  static NSBundle *frameworkBundle = nil;
-  static dispatch_once_t predicate;
-  dispatch_once(&predicate, ^{
-    frameworkBundle = [NSBundle bundleForClass:[self class]];
-  });
-  return frameworkBundle;
-}
-
-/** @fn imageNamed:
-    @brief Returns an image from the resource bundle given a resource name.
-    @param name The name of the image file.
-    @return The image object for the named file.
- */
-+ (UIImage *)imageNamed:(NSString *)name {
-  NSString *path = [[[self class] frameworkBundle] pathForResource:name ofType:@"png"];
-  return [UIImage imageWithContentsOfFile:path];
-}
-
-/** @fn localizedStringForKey:
-    @brief Returns the localized text associated with a given string key. Will default to english
-        text if the string is not available for the current localization.
-    @param key A string key which identifies localized text in the .strings files.
-    @return Localized value of the string identified by the key.
- */
-+ (NSString *)localizedStringForKey:(NSString *)key {
-  NSBundle *frameworkBundle = [[self class] frameworkBundle];
-  return [frameworkBundle localizedStringForKey:key value:nil table:kTableName];
-}
-
 #pragma mark - FUIAuthProvider
 
 - (NSString *)providerID {
@@ -112,11 +88,11 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 }
 
 - (NSString *)signInLabel {
-  return [[self class] localizedStringForKey:kSignInWithGoogle];
+  return FUILocalizedStringFromTableInBundle(kSignInWithGoogle, kTableName, kBundleName);
 }
 
 - (UIImage *)icon {
-  return [[self class] imageNamed:@"ic_google"];
+  return [FUIAuthUtils imageNamed:@"ic_google" fromBundle:kBundleName];
 }
 
 - (UIColor *)buttonBackgroundColor {
@@ -127,20 +103,33 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   return [UIColor colorWithWhite:0 alpha:0.54f];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+  [self signInWithDefaultValue:email
+      presentingViewController:presentingViewController
+                    completion:completion];
+}
+#pragma clang diagnostic pop
+
+- (void)signInWithDefaultValue:(nullable NSString *)defaultValue
+      presentingViewController:(nullable UIViewController *)presentingViewController
+                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   _presentingViewController = presentingViewController;
 
   GIDSignIn *signIn = [self configuredGoogleSignIn];
-  _pendingSignInCallback = ^(FIRAuthCredential *_Nullable credential, NSError *_Nullable error) {
+  _pendingSignInCallback = ^(FIRAuthCredential *_Nullable credential,
+                             NSError *_Nullable error,
+                             _Nullable FIRAuthResultCallback result) {
     signIn.loginHint = nil;
     if (completion) {
-      completion(credential, error);
+      completion(credential, error, result);
     }
   };
 
-  signIn.loginHint = email;
+  signIn.loginHint = defaultValue;
   [signIn signIn];
 }
 
@@ -161,19 +150,28 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
            withError:(NSError *)error {
   if (error) {
     if (error.code == kGIDSignInErrorCodeCanceled) {
-      [self callbackWithCredential:nil error:[FUIAuthErrorUtils userCancelledSignInError]];
+      [self callbackWithCredential:nil
+                             error:[FUIAuthErrorUtils
+                                    userCancelledSignInError] result:nil];
     } else {
       NSError *newError =
           [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
                                                      providerID:FIRGoogleAuthProviderID];
-      [self callbackWithCredential:nil error:newError];
+      [self callbackWithCredential:nil error:newError result:nil];
     }
     return;
   }
+  UIActivityIndicatorView *activityView =
+      [FUIAuthBaseViewController addActivityIndicator:_presentingViewController.view];
+  [activityView startAnimating];
   FIRAuthCredential *credential =
       [FIRGoogleAuthProvider credentialWithIDToken:user.authentication.idToken
                                        accessToken:user.authentication.accessToken];
-  [self callbackWithCredential:credential error:nil];
+  [self callbackWithCredential:credential error:nil result:^(FIRUser *_Nullable user,
+                                                             NSError *_Nullable error) {
+    [activityView stopAnimating];
+    [activityView removeFromSuperview];
+  }];
 }
 
 #pragma mark - GIDSignInUIDelegate methods
@@ -206,14 +204,17 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
     @brief Ends the sign-in flow by cleaning up and calling back with given credential or error.
     @param credential The credential to pass back, if any.
     @param error The error to pass back, if any.
+    @param result The result of sign-in operation using provided @c FIRAuthCredential object.
+        @see @c FIRAuth.signInWithCredential:completion:
  */
 - (void)callbackWithCredential:(nullable FIRAuthCredential *)credential
-                         error:(nullable NSError *)error {
+                         error:(nullable NSError *)error
+                        result:(nullable FIRAuthResultCallback)result {
   FIRAuthProviderSignInCompletionBlock callback = _pendingSignInCallback;
   _presentingViewController = nil;
   _pendingSignInCallback = nil;
   if (callback) {
-    callback(credential, error);
+    callback(credential, error, result);
   }
 }
 

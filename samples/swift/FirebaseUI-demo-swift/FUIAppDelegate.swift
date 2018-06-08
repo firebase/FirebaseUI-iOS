@@ -16,8 +16,8 @@
 
 import UIKit
 import Firebase
-import FirebaseAuthUI
-import Fabric
+import FirebaseUI
+import GTMSessionFetcher
 import TwitterKit
 
 @UIApplicationMain
@@ -28,8 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Successfully running this sample requires an app in Firebase and an
     // accompanying valid GoogleService-Info.plist file.
-    FIRApp.configure()
-    Fabric.with([Twitter.self])
+    FirebaseApp.configure()
+    TWTRTwitter.sharedInstance().start(withConsumerKey: "consumer-key",
+                                       consumerSecret: "consumer-secret");
+    GTMSessionFetcher.setLoggingEnabled(true)
     return true
   }
   

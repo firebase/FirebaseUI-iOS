@@ -31,5 +31,4 @@ typedef UIViewController *(^FIRControllerBlock)();
 @property (nonatomic, copy) NSString *sampleDescription;
 @property (nonatomic, copy) FIRControllerBlock controllerBlock;
 
-
 @end

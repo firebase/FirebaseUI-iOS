@@ -22,6 +22,6 @@ FOUNDATION_EXPORT double FirebaseTwitterAuthUIVersionNumber;
 //! Project version string for FirebaseTwitterAuthUI.
 FOUNDATION_EXPORT const unsigned char FirebaseTwitterAuthUIVersionString[];
 
-#import <FirebaseTwitterAuthUI/FUITwitterAuth.h>
+#import "FUITwitterAuth.h"
 
 

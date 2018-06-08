@@ -18,8 +18,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface FUIFacebookAuth (Testing)
-- (FBSDKLoginManager *)createLoginManger;
-+ (NSBundle *)frameworkBundle;
+- (FBSDKLoginManager *)createLoginManager;
 - (void)configureProvider;
 @end
 

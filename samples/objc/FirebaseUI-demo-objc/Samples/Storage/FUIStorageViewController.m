@@ -16,10 +16,11 @@
 //  limitations under the License.
 //
 
+@import FirebaseUI;
+
 #import "FUIStorageViewController.h"
 
 #import <FirebaseStorage/FirebaseStorage.h>
-#import <FirebaseStorageUI/FirebaseStorageUI.h>
 
 @interface FUIStorageViewController ()
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;

@@ -1,0 +1,78 @@
+/* The text of the button used to sign-in with Phone. */
+"SignInWithPhone" = "Mag-sign in gamit ang telepono";
+
+/* The title of view controller where user enters phone number. */
+"EnterPhoneTitle" = "Ilagay ang numero ng telepono";
+
+/* The title of button on navigation controller which navigates to previous screen. */
+"Back" = "Bumalik";
+
+/* The title of button on navigation controller which navigates to the next screen. */
+"Next" = "Susunod";
+
+/* The title of button which user taps on phone verification screen. */
+"Verify" = "I-verify";
+
+/* Alert message displayed when user submits empty verification code. */
+"EmptyVerificationCode" = "Hindi maaaring walang laman ang code sa pag-verify";
+
+/* Alert message displayed when user submits empty phone number. */
+"EmptyPhoneNumber" = "Hindi maaaring walang laman ang numero ng telepono";
+
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
+"PhoneNumber" = "Numero";
+
+/* Placeholder shown for phone number input field. */
+"EnterYourPhoneNumber" = "Numero ng telepono";
+
+/* Label next to the left of country selector control. */
+"Country" = "Bansa";
+
+/* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
+"EnterCodeDescription" = "Ilagay ang %@-digit na code na ipinadala namin sa";
+
+/* The title of button with resend verification code functionality. */
+"ResendCode" = "Ipadala muli ang code";
+
+/* Text of the resend timer label shown on verification phone number screen. */
+"ResendCodeTimer" = "Ipadala muli ang code sa %@";
+
+/* The title of view controller where user verifies phone number. . */
+"VerifyPhoneTitle" = "I-verify ang numero ng telepono";
+
+/* The title of button displayed when user closes alert message. */
+"Done" = "Tapos Na";
+
+/* The title of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneTitle" = "Di-wastong numero ng telepono";
+
+/* The body message of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneMessage" = "Maglagay ng wastong numero ng telepono";
+
+/* The body message of alert shown when user tapped resend verification code button. */
+"ResendCodeResult" = "Ipinadala ang code sa %@";
+
+/* The title of alert shown when user entered invalid verification code. */
+"IncorrectCodeTitle" = "Maling verification code";
+
+/* The body message of alert shown when user entered invalid verification code. */
+"IncorrectCodeMessage" = "Maling code. Subukang muli.";
+
+/* The body message of alert shown when internal server error appeared. */
+"InternalErrorMessage" = "Nagkaroon ng problema. Pakisubukang muli.";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "Masyadong maraming beses nang nagamit ang numero ng teleponong ito";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "Nagkaproblema sa pag-verify ng numero ng iyong telepono";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "Wala nang bisa ang code na ito";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
+"TermsSMS" = "Sa pamamagitan ng pag-tap sa %@, maaaring magpadala ng SMS. Maaaring ipatupad ang mga rate ng pagmemensahe at data.";
+
+/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
+"TermsAccountCreation" = "Sa pamamagitan ng pag-tap sa %@ isinasaad mo na sumasang-ayon ka sa [Mga Tuntunin ng Serbisyo].";
+

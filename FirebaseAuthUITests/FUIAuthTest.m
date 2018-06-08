@@ -15,9 +15,9 @@
 //
 
 @import XCTest;
-@import FirebaseAnalytics;
-@import FirebaseAuth;
+@import FirebaseCore;
 @import FirebaseAuthUI;
+#import "FUIAuthUtils.h"
 
 @interface FUILoginProvider : NSObject <FUIAuthProvider>
 @property (nonatomic, assign) BOOL canHandleURLs;
@@ -43,9 +43,12 @@
   return [UIColor whiteColor];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)signInWithEmail:(NSString *)email
   presentingViewController:(UIViewController *)presentingViewController
             completion:(FIRAuthProviderSignInCompletionBlock)completion {}
+#pragma clang diagnostic pop
 
 - (void)signOut {}
 
@@ -53,14 +56,22 @@
   return self.canHandleURLs;
 }
 
+- (void)signInWithDefaultValue:(nullable NSString *)defaultValue
+      presentingViewController:(nullable UIViewController *)presentingViewController
+                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {}
+
+
 @end
 
 @interface FUIAuthUIDelegate : NSObject <FUIAuthDelegate>
 @end
 
 @implementation FUIAuthUIDelegate
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)authUI:(FUIAuth *)authUI didSignInWithUser:(FIRUser *)user error:(NSError *)error {
 }
+#pragma clang diagnostic pop
 
 - (FUIAuthPickerViewController *)authPickerViewControllerForAuthUI:(FUIAuth *)authUI {
   Class controllerClass = [FUIAuthPickerViewController class];
@@ -80,23 +91,15 @@
 
 @implementation FUIAuthTest
 
-+ (void)initialize {
-  // An app needs to be configured before any instances of
-  // FIRAuth or FUIAuth can be created.
-  
-  // Load plist from test file
-  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-  NSString *file = [bundle pathForResource:@"GoogleService-Info"
-                                    ofType:@"plist"];
-  
-  FIROptions *options = [[FIROptions alloc] initWithContentsOfFile:file];
-  [FIRApp configureWithOptions:options];
-}
-
 - (void)setUp {
   [super setUp];
-  self.auth = [FIRAuth auth];
-  self.authUI = [FUIAuth defaultAuthUI];
+
+  if ([FIRApp defaultApp] == nil) {
+    [FIRApp configure];
+  }
+
+  self.auth = [FIRAuth authWithApp:[FIRApp defaultApp]];
+  self.authUI = [FUIAuth authUIWithAuth:self.auth];
   self.delegate = [[FUIAuthUIDelegate alloc] init];
 }
 

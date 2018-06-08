@@ -88,6 +88,18 @@ static inline NSDictionary *database() {
   [super tearDown];
 }
 
+- (void)testItReturnsItsArraysIndexes {
+  NSArray *expectedIndexes = @[
+    [FUIFakeSnapshot snapWithKey:@"1" value:@(YES)],
+    [FUIFakeSnapshot snapWithKey:@"2" value:@(YES)],
+    [FUIFakeSnapshot snapWithKey:@"3" value:@(YES)],
+  ];
+
+  NSArray *indexes = self.dataSource.indexes;
+
+  XCTAssert([indexes isEqual:expectedIndexes], @"expected data source's indexes to equal its array's indexes");
+}
+
 - (void)testItPopulatesCells {
   UITableViewCell *cell = [self.dataSource tableView:self.tableView
                                cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
@@ -164,6 +176,12 @@ static inline NSDictionary *database() {
 
   XCTAssertEqualObjects(cell.accessibilityLabel, @"data");
   XCTAssertEqualObjects(cell.accessibilityValue, @"3");
+}
+
+- (void)testItReturnsSnapshotsFromItsIndexArray {
+  FIRDataSnapshot *snap = [self.dataSource snapshotAtIndex:0];
+  XCTAssertEqualObjects(snap.key, @"data", @"expected snap's key to equal 'data', got %@ instead", snap.key);
+  XCTAssertEqualObjects(snap.value, @"1", @"expected snap's key to equal '1', got %@ instead", snap.value);
 }
 
 @end

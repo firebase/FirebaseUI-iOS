@@ -72,7 +72,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)removeAllObservers;
 
-// Sends an event to the observable's observers.
+// Sends an event to the observable's observers. This could be more
+// robust--currently it depends on the tester knowing what the "correct"
+// previousKey is supposed to be.
 - (void)sendEvent:(FIRDataEventType)event
        withObject:(nullable FUIFakeSnapshot *)object
       previousKey:(nullable NSString *)string
@@ -89,12 +91,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface FUIArrayTestDelegate : NSObject <FUIArrayDelegate>
-@property (nonatomic, copy) void (^queryCancelled)(FUIArray *array, NSError *error);
-@property (nonatomic, copy) void (^didAddObject)(FUIArray *array, id object, NSUInteger index);
-@property (nonatomic, copy) void (^didChangeObject)(FUIArray *array, id object, NSUInteger index);
-@property (nonatomic, copy) void (^didRemoveObject)(FUIArray *array, id object, NSUInteger index);
-@property (nonatomic, copy) void (^didMoveObject)(FUIArray *array, id object, NSUInteger fromIndex, NSUInteger toIndex);
+@interface FUIArrayTestDelegate : NSObject <FUICollectionDelegate>
+@property (nonatomic, copy) void (^didStartUpdates)(void);
+@property (nonatomic, copy) void (^didEndUpdates)(void);
+@property (nonatomic, copy) void (^queryCancelled)(id<FUICollection> array, NSError *error);
+@property (nonatomic, copy) void (^didAddObject)(id<FUICollection> array, id object, NSUInteger index);
+@property (nonatomic, copy) void (^didChangeObject)(id<FUICollection> array, id object, NSUInteger index);
+@property (nonatomic, copy) void (^didRemoveObject)(id<FUICollection> array, id object, NSUInteger index);
+@property (nonatomic, copy) void (^didMoveObject)(id<FUICollection> array, id object, NSUInteger fromIndex, NSUInteger toIndex);
 @end
 
 @interface FUIIndexArrayTestDelegate : NSObject <FUIIndexArrayDelegate>

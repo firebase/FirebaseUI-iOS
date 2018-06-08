@@ -1,0 +1,245 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Vitajte";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Prihlásiť sa e-mailom";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Zadajte svoj e-mail";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Daná e-mailová adresa nie je správna.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Táto aplikácia nepodporuje tento typ účtu";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "Už máte účet";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Už ste použili adresu %@. Ak chcete pokračovať, prihláste sa cez %@.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Prihlásiť sa";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Zadajte svoje heslo";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Heslo nesmie byť prázdne.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Zadaný e-mail a heslo sa nezhodujú.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Daná e-mailová adresa sa nezhoduje s existujúcim účtom.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Daná e-mailová adresa patrí k účtu, ktorý bol deaktivovaný.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Zadali ste nesprávne heslo príliš veľakrát. Skúste to znova o pár minút.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Nemožno nájsť poskytovateľa pre službu %@.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "E-maily sa nezhodujú";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Obnovenie hesla";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Nechajte si na tento e-mail poslať pokyny s vysvetlením, ako obnoviť svoje heslo.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Skontrolujte si e-mail";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Obnovte si heslo podľa pokynov odoslaných na adresu %@.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Vytvoriť účet";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Krstné meno a priezvisko";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Zvoľte si heslo";
+
+/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
+"TermsOfServiceNotice" = "Klepnutím na tlačidlo %@ vyjadrujete súhlas s dokumentom %@.";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Zmluvné podmienky";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "E-mailovú adresu už využíva iný účet.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Silné heslá majú aspoň 6 znakov a kombinujú písmena a čísla.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "Z vašej adresy IP prichádza príliš veľa žiadostí o účet. Skúste to znova o pár minút.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Na prihlásenie ste už použili e-mailovú adresu %@. Zadajte heslo pre daný účet.";
+
+/* OK button title. */
+"OK" = "OK";
+
+/* Cancel button title. */
+"Cancel" = "Zrušiť";
+
+/* Back button title. */
+"Back" = "Späť";
+
+/* Next button title. */
+"Next" = "Ďalej";
+
+/* Save button title. */
+"Save" = "Uložiť";
+
+/* Save button title. */
+"Send" = "Odoslať";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "E-mail";
+
+/* Label next to a password text field. */
+"Password" = "Heslo";
+
+/* Label next to a name text field. */
+"Name" = "Názov";
+
+/* Alert title Error. */
+"Error" = "Chyba";
+
+/* Alert button title Close. */
+"Close" = "Zatvoriť";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Profil";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Zabezpečenie";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Prepojené účty";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Názov";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "E-mail";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Pridanie hesla";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Zmena hesla";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Odhlásenie";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Odstránenie účtu";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Zabudli ste heslo?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Overte, že ste to vy";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Chcete odstrániť účet?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Týmto sa vymažú všetky dáta súvisiace s vaším účtom a túto akciu nie je možné vrátiť späť. Na dokončenie tejto akcie sa budete musieť prihlásiť";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Týmto sa vymažú všetky dáta súvisiace s vaším účtom a túto akciu nie je možné vrátiť späť. Naozaj chcete odstrániť svoj účet?";
+
+/* Text of Delete action button. */
+"Delete" = "Odstrániť";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Odstrániť účet";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Túto akciu nie je možné vrátiť späť";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Odpojiť";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Prepojený účet";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Chcete odpojiť účet?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Už sa nebudete môcť prihlásiť svojím účtom";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Odpojiť účet";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Ak chcete zmeniť e-mailovú adresu prepojenú s vaším účtom, budete sa musieť znova prihlásiť.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Ak chcete zmeniť heslo, musíte najskôr zadať aktuálne heslo.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "Úprava e-mailu";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Úprava názvu";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Ak chcete k účtu pridať heslo, budete sa musieť znova prihlásiť.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Ak chcete zmeniť heslo svojho účtu, budete sa musieť znova prihlásiť.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Ak chcete zmeniť heslo, musíte najskôr zadať aktuálne heslo.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Pridanie hesla";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Zmena hesla";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "E-mail";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Prihlásiť sa cez %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Zadajte svoje meno";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Zadajte svoj e-mail";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Zadajte svoje heslo";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Nové heslo";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Zvoľte si heslo";
+
+/* The title of forgot password button. */
+"ForgotPasswordTitle" = "Máte problémy s prihlásením?";

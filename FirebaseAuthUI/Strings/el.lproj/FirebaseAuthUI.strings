@@ -1,0 +1,245 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Καλώς ήρθατε";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Σύνδεση μέσω ηλεκτρονικού ταχυδρομείου";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Εισαγάγετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Αυτή η διεύθυνση ηλεκτρονικού ταχυδρομείου δεν είναι σωστή.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Αυτός ο τύπος λογαριασμού δεν υποστηρίζεται από αυτήν την εφαρμογή";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "Έχετε ήδη λογαριασμό";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Έχετε ήδη χρησιμοποιήσει το %@. Συνδεθείτε με %@ για να συνεχίσετε.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Σύνδεση";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Εισαγάγετε τον κωδικό πρόσβασής σας";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Ο κωδικός πρόσβασης δεν μπορεί να είναι κενός.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Η διεύθυνση ηλεκτρονικού ταχυδρομείου και ο κωδικός πρόσβασης δεν ταιριάζουν.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Αυτή η διεύθυνση ηλεκτρονικού ταχυδρομείου δεν ταιριάζει με κάποιον υπάρχοντα λογαριασμό.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Αυτή η διεύθυνση ηλεκτρονικού ταχυδρομείου αφορά έναν λογαριασμό που έχει απενεργοποιηθεί.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Πληκτρολογήσατε πολλές φορές λανθασμένο κωδικό πρόσβασης. Δοκιμάστε ξανά σε λίγα λεπτά.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Δεν είναι δυνατή η εύρεση του παρόχου για %@.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "Οι διευθύνσεις ηλεκτρονικού ταχυδρομείου δεν ταιριάζουν";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Ανάκτηση κωδικού πρόσβασης";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Δείτε τις οδηγίες που στάλθηκαν σε αυτήν τη διεύθυνση ηλεκτρονικού ταχυδρομείου, οι οποίες εξηγούν πώς να επαναφέρετε τον κωδικό πρόσβασής σας.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Ελέγξτε τα εισερχόμενα του ηλεκτρονικού ταχυδρομείου σας";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Ακολουθήστε τις οδηγίες που στάλθηκαν στο %@ για να ανακτήσετε τον κωδικό πρόσβασής σας.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Δημιουργία λογαριασμού";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Όνομα και επώνυμο";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Επιλέξτε κωδικό πρόσβασης";
+
+/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
+"TermsOfServiceNotice" = "Αν πατήσετε %@, δηλώνετε ότι συμφωνείτε με τους %@.";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Όρους Παροχής Υπηρεσιών";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Αυτή η διεύθυνση ηλεκτρονικού ταχυδρομείου χρησιμοποιείται ήδη από άλλον λογαριασμό.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Οι ισχυροί κωδικοί πρόσβασης έχουν τουλάχιστον 6 χαρακτήρες και έναν συνδυασμό γραμμάτων και αριθμών.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "Η διεύθυνση IP έχει στείλει πάρα πολλά αιτήματα λογαριασμού. Δοκιμάστε ξανά σε λίγα λεπτά.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Χρησιμοποιήσατε ήδη το %@ για να συνδεθείτε. Εισαγάγετε τον κωδικό πρόσβασης για αυτόν τον λογαριασμό.";
+
+/* OK button title. */
+"OK" = "ΟΚ";
+
+/* Cancel button title. */
+"Cancel" = "Ακύρωση";
+
+/* Back button title. */
+"Back" = "Πίσω";
+
+/* Next button title. */
+"Next" = "Επόμενο";
+
+/* Save button title. */
+"Save" = "Αποθήκευση";
+
+/* Save button title. */
+"Send" = "Αποστολή";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "Ηλεκτρονικό ταχυδρομείο";
+
+/* Label next to a password text field. */
+"Password" = "Κωδικός πρόσβασης";
+
+/* Label next to a name text field. */
+"Name" = "Όνομα";
+
+/* Alert title Error. */
+"Error" = "Σφάλμα";
+
+/* Alert button title Close. */
+"Close" = "Κλείσιμο";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Προφίλ";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Ασφάλεια";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Συνδεδεμένοι λογαριασμοί";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Όνομα";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "Ηλεκτρονικό ταχυδρομείο";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Προσθήκη κωδικού πρόσβασης";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Αλλαγή κωδικού πρόσβασης";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Έξοδος";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Διαγραφή λογαριασμού";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Ξεχάσατε τον κωδικό πρόσβασής σας;";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Επαληθεύστε ότι είστε εσείς";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Διαγραφή λογαριασμού;";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Αυτή η ενέργεια θα διαγράψει όλα τα δεδομένα που συσχετίζονται με τον λογαριασμό σας και δεν είναι δυνατή η αναίρεσή της. Για να ολοκληρώσετε αυτήν την ενέργεια, θα πρέπει να συνδεθείτε ξανά";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Αυτή η ενέργεια θα διαγράψει όλα τα δεδομένα που συσχετίζονται με τον λογαριασμό σας και δεν είναι δυνατή η αναίρεσή της. Είστε σίγουροι ότι θέλετε να διαγράψετε τον λογαριασμό σας;";
+
+/* Text of Delete action button. */
+"Delete" = "Διαγραφή";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Διαγραφή λογαριασμού";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Δεν είναι δυνατή η αναίρεση αυτής της ενέργειας";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Αποσύνδεση";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Συνδεδεμένος λογαριασμός";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Αποσύνδεση λογαριασμού;";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Δεν θα μπορείτε πλέον να συνδεθείτε χρησιμοποιώντας τον λογαριασμό σας";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Αποσύνδεση λογαριασμού";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Για να αλλάξετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου που συσχετίζεται με τον λογαριασμό σας, θα πρέπει να συνδεθείτε ξανά.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Για να αλλάξετε τον κωδικό πρόσβασής σας, θα πρέπει πρώτα να εισαγάγετε τον τρέχοντα κωδικό πρόσβασης.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "Επεξεργασία διεύθυνσης ηλεκτρονικού ταχυδρομείου";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Επεξεργασία ονόματος";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Για να προσθέσετε κωδικό πρόσβασης στον λογαριασμό σας, θα πρέπει να συνδεθείτε ξανά.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Για να αλλάξετε κωδικό πρόσβασης στον λογαριασμό σας, θα πρέπει να συνδεθείτε ξανά.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Για να αλλάξετε τον κωδικό πρόσβασής σας, θα πρέπει πρώτα να εισαγάγετε τον τρέχοντα κωδικό πρόσβασης.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Προσθήκη κωδικού πρόσβασης";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Αλλαγή κωδικού πρόσβασης";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "Ηλεκτρονικό ταχυδρομείο";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Σύνδεση μέσω %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Εισαγάγετε το όνομά σας";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Εισαγάγετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Εισαγάγετε τον κωδικό πρόσβασής σας";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Νέος κωδικός πρόσβασης";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Επιλέξτε κωδικό πρόσβασης";
+
+/* The title of forgot password button. */
+"ForgotPasswordTitle" = "Πρόβλημα σύνδεσης;";

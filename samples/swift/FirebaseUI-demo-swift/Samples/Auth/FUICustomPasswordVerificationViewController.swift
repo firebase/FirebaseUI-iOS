@@ -15,7 +15,7 @@
 //
 
 import UIKit
-import FirebaseAuthUI
+import FirebaseUI
 import FirebaseAuth
 
 @objc(FUICustomPasswordVerificationViewController)
@@ -27,7 +27,7 @@ class FUICustomPasswordVerificationViewController: FUIPasswordVerificationViewCo
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var nextButton: UIBarButtonItem!
 
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, authUI: FUIAuth, email: String?, newCredential: FIRAuthCredential) {
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, authUI: FUIAuth, email: String?, newCredential: AuthCredential) {
     userEmail = email ??  ""
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil, authUI: authUI, email: email, newCredential: newCredential)
 

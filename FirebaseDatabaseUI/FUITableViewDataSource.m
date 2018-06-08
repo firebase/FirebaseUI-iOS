@@ -18,16 +18,15 @@
 
 // clang-format on
 
+#import "FUIArray.h"
 #import "FUITableViewDataSource.h"
 
-@import FirebaseDatabase;
+@interface FUITableViewDataSource () <FUICollectionDelegate>
 
-@interface FUITableViewDataSource ()
-
-@property (nonatomic, readwrite, weak) UITableView *tableView;
-
-@property(strong, nonatomic, readwrite) UITableViewCell *(^populateCell)
+@property (strong, nonatomic, readwrite) UITableViewCell *(^populateCell)
   (UITableView *tableView, NSIndexPath *indexPath, FIRDataSnapshot *snap);
+
+@property (strong, nonatomic, readonly) id<FUICollection> collection;
 
 @end
 
@@ -35,62 +34,97 @@
 
 #pragma mark - FUIDataSource initializer methods
 
-- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
-                         view:(UITableView *)tableView
-                 populateCell:(UITableViewCell *(^)(UITableView *,
-                                                    NSIndexPath *,
-                                                    FIRDataSnapshot *))populateCell {
-  FUIArray *array = [[FUIArray alloc] initWithQuery:query];
-  self = [super initWithArray:array];
-  if (self) {
-    self.tableView = tableView;
-    self.populateCell = populateCell;
+- (instancetype)initWithCollection:(id<FUICollection>)collection
+                      populateCell:(UITableViewCell *(^)(UITableView *,
+                                                         NSIndexPath *,
+                                                         FIRDataSnapshot *))populateCell {
+  self = [super init];
+  if (self != nil) {
+    _collection = collection;
+    _collection.delegate = self;
+    _populateCell = populateCell;
   }
   return self;
 }
 
-#pragma mark - FUIArrayDelegate methods
+- (instancetype)initWithQuery:(FIRDatabaseQuery *)query
+                 populateCell:(UITableViewCell *(^)(UITableView *,
+                                                    NSIndexPath *,
+                                                    FIRDataSnapshot *))populateCell {
+  FUIArray *array = [[FUIArray alloc] initWithQuery:query];
+  return [self initWithCollection:array populateCell:populateCell];
+}
+
+- (NSUInteger)count {
+  return self.collection.count;
+}
+
+- (NSArray<FIRDataSnapshot *> *)items {
+  return self.collection.items;
+}
+
+- (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index {
+  return [self.collection snapshotAtIndex:index];
+}
+
+- (void)bindToView:(UITableView *)view {
+  self.tableView = view;
+  view.dataSource = self;
+  [self.collection observeQuery];
+}
+
+- (void)unbind {
+  self.tableView.dataSource = nil;
+  self.tableView = nil;
+  [self.collection invalidate];
+}
+
+#pragma mark - FUICollectionDelegate methods
+
+- (void)arrayDidBeginUpdates:(id<FUICollection>)collection {
+}
+
+- (void)arrayDidEndUpdates:(id<FUICollection>)collection {
+}
 
 - (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
-  [self.tableView beginUpdates];
   [self.tableView insertRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
-  [self.tableView endUpdates];
 }
 
 - (void)array:(FUIArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
-  [self.tableView beginUpdates];
   [self.tableView reloadRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
-  [self.tableView endUpdates];
 }
 
 - (void)array:(FUIArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
-  [self.tableView beginUpdates];
   [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
                         withRowAnimation:UITableViewRowAnimationAutomatic];
-  [self.tableView endUpdates];
 }
 
 - (void)array:(FUIArray *)array didMoveObject:(id)object
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-  [self.tableView beginUpdates];
   [self.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:0]
                          toIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:0]];
-  [self.tableView endUpdates];
+}
+
+- (void)array:(id<FUICollection>)array queryCancelledWithError:(NSError *)error {
+  if (self.queryErrorHandler != NULL) {
+    self.queryErrorHandler(error);
+  }
 }
 
 #pragma mark - UITableViewDataSource methods
 
 - (id)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  FIRDataSnapshot *snap = [self.items objectAtIndex:indexPath.row];
+  FIRDataSnapshot *snap = [self.collection.items objectAtIndex:indexPath.row];
 
   UITableViewCell *cell = self.populateCell(tableView, indexPath, snap);
   return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return self.count;
+  return self.collection.count;
 }
 
 @end
@@ -102,8 +136,8 @@
                                                               NSIndexPath *indexPath,
                                                               FIRDataSnapshot *snap))populateCell {
   FUITableViewDataSource *dataSource =
-    [[FUITableViewDataSource alloc] initWithQuery:query view:self populateCell:populateCell];
-  self.dataSource = dataSource;
+    [[FUITableViewDataSource alloc] initWithQuery:query populateCell:populateCell];
+  [dataSource bindToView:self];
   return dataSource;
 }
 

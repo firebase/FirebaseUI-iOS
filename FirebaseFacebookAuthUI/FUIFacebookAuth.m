@@ -16,16 +16,24 @@
 
 #import "FUIFacebookAuth.h"
 
-#import <FirebaseAuth/FIRFacebookAuthProvider.h>
-#import <FirebaseAuth/FIRUserInfo.h>
+#import <FirebaseAuth/FirebaseAuth.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <FirebaseAuthUI/FUIAuthErrorUtils.h>
+#import "FUIAuthBaseViewController.h"
+#import "FUIAuthErrorUtils.h"
+#import "FUIAuthBaseViewController_Internal.h"
+#import "FUIAuthStrings.h"
+#import "FUIAuthUtils.h"
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
-*/
+ */
 static NSString *const kTableName = @"FirebaseFacebookAuthUI";
+
+/** @var kBundleName
+    @brief The name of the bundle to search for resources.
+ */
+static NSString *const kBundleName = @"FirebaseFacebookAuthUI";
 
 /** @var kSignInWithFacebook
     @brief The string key for localized button text.
@@ -33,12 +41,12 @@ static NSString *const kTableName = @"FirebaseFacebookAuthUI";
 static NSString *const kSignInWithFacebook = @"SignInWithFacebook";
 
 /** @var kFacebookAppId
- @brief The string key used to read Facebook App Id from Info.plist.
+    @brief The string key used to read Facebook App Id from Info.plist.
  */
 static NSString *const kFacebookAppId = @"FacebookAppID";
 
 /** @var kFacebookDisplayName
- @brief The string key used to read Facebook App Name from Info.plist.
+    @brief The string key used to read Facebook App Name from Info.plist.
  */
 static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 
@@ -48,6 +56,11 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
       @brief The callback which should be invoked when the sign in flow completes (or is cancelled.)
    */
   FIRAuthProviderSignInCompletionBlock _pendingSignInCallback;
+
+  /** @var _presentingViewController
+      @brief The presenting view controller for interactive sign-in.
+   */
+  UIViewController *_presentingViewController;
 }
 
 - (instancetype)initWithPermissions:(NSArray *)permissions {
@@ -63,39 +76,6 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   return [self initWithPermissions:@[ @"email" ]];
 }
 
-/** @fn frameworkBundle
-    @brief Returns the auth provider's resource bundle.
-    @return Resource bundle for the auth provider.
- */
-+ (NSBundle *)frameworkBundle {
-  static NSBundle *frameworkBundle = nil;
-  static dispatch_once_t predicate;
-  dispatch_once(&predicate, ^{
-    frameworkBundle = [NSBundle bundleForClass:[self class]];
-  });
-  return frameworkBundle;
-}
-
-/** @fn imageNamed:
-    @brief Returns an image from the resource bundle given a resource name.
-    @param name The name of the image file.
-    @return The image object for the named file.
- */
-+ (UIImage *)imageNamed:(NSString *)name {
-  NSString *path = [[[self class] frameworkBundle] pathForResource:name ofType:@"png"];
-  return [UIImage imageWithContentsOfFile:path];
-}
-
-/** @fn localizedStringForKey:
-    @brief Returns the localized text associated with a given string key. Will default to english
-        text if the string is not available for the current localization.
-    @param key A string key which identifies localized text in the .strings files.
-    @return Localized value of the string identified by the key.
- */
-+ (NSString *)localizedStringForKey:(NSString *)key {
-  NSBundle *frameworkBundle = [[self class] frameworkBundle];
-  return [frameworkBundle localizedStringForKey:key value:nil table:kTableName];
-}
 
 #pragma mark - FUIAuthProvider
 
@@ -108,7 +88,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 /** @fn idToken:
- @brief Facebook doesn't provide User Id Token during sign in flow
+    @brief Facebook doesn't provide User Id Token during sign in flow
  */
 - (NSString *)idToken {
   return nil;
@@ -119,11 +99,11 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 - (NSString *)signInLabel {
-  return [[self class] localizedStringForKey:kSignInWithFacebook];
+  return FUILocalizedStringFromTableInBundle(kSignInWithFacebook, kTableName, kBundleName);
 }
 
 - (UIImage *)icon {
-  return [[self class] imageNamed:@"ic_facebook"];
+  return [FUIAuthUtils imageNamed:@"ic_facebook" fromBundle:kBundleName];
 }
 
 - (UIColor *)buttonBackgroundColor {
@@ -134,10 +114,23 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   return [UIColor whiteColor];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
                   completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+  [self signInWithDefaultValue:email
+      presentingViewController:presentingViewController
+                    completion:completion];
+}
+#pragma clang diagnostic pop
+
+- (void)signInWithDefaultValue:(nullable NSString *)defaultValue
+      presentingViewController:(nullable UIViewController *)presentingViewController
+                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   _pendingSignInCallback = completion;
+  _presentingViewController = presentingViewController;
+
   [_loginManager logInWithReadPermissions:_scopes
                        fromViewController:presentingViewController
                                   handler:^(FBSDKLoginManagerLoginResult *result,
@@ -166,7 +159,6 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
                                                         openURL:URL
                                               sourceApplication:sourceApplication
                                                      annotation:nil];
-
 }
 
 #pragma mark -
@@ -180,32 +172,42 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 - (void)completeSignInFlowWithAccessToken:(nullable NSString *)accessToken
                                     error:(nullable NSError *)error {
   if (error) {
-    [self callbackWithCredential:nil error:error];
+    [self callbackWithCredential:nil error:error result:nil];
     return;
   }
   FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:accessToken];
-  [self callbackWithCredential:credential error:nil];
+  UIActivityIndicatorView *activityView =
+      [FUIAuthBaseViewController addActivityIndicator:_presentingViewController.view];
+  [activityView startAnimating];
+  [self callbackWithCredential:credential error:nil result:^(FIRUser *_Nullable user,
+                                                             NSError *_Nullable error) {
+    [activityView stopAnimating];
+    [activityView removeFromSuperview];
+  }];
 }
 
 /** @fn callbackWithCredential:error:
     @brief Ends the sign-in flow by cleaning up and calling back with given credential or error.
     @param credential The credential to pass back, if any.
     @param error The error to pass back, if any.
+    @param result The result of sign-in operation using provided @c FIRAuthCredential object.
+        @see @c FIRAuth.signInWithCredential:completion:
  */
 - (void)callbackWithCredential:(nullable FIRAuthCredential *)credential
-                         error:(nullable NSError *)error {
+                         error:(nullable NSError *)error
+                        result:(nullable FIRAuthResultCallback)result {
   FIRAuthProviderSignInCompletionBlock callback = _pendingSignInCallback;
   _pendingSignInCallback = nil;
   if (callback) {
-    callback(credential, error);
+    callback(credential, error, result);
   }
 }
 
 /** @fn callbackWithCredential:error:
- @brief Validates that Facebook SDK data was filled in Info.plist and creates Facebook login manager 
+    @brief Validates that Facebook SDK data was filled in Info.plist and creates Facebook login manager 
  */
 - (void)configureProvider {
-  NSBundle *bundle = [[self class] frameworkBundle];
+  NSBundle *bundle = [FUIAuthUtils bundleNamed:nil];
   NSString *facebookAppId = [bundle objectForInfoDictionaryKey:kFacebookAppId];
   NSString *facebookDisplayName = [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
 
@@ -216,12 +218,12 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
      @"https://developers.facebook.com/docs/ios/getting-started"];
   }
 
-  _loginManager = [self createLoginManger];
+  _loginManager = [self createLoginManager];
 }
 
 #pragma mark - Private methods
 
-- (FBSDKLoginManager *)createLoginManger {
+- (FBSDKLoginManager *)createLoginManager {
   return [[FBSDKLoginManager alloc] init];
 }
 

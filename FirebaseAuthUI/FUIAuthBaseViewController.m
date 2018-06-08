@@ -14,13 +14,38 @@
 //  limitations under the License.
 //
 
-#import "FUIAuthBaseViewController.h"
+#import "FUIAuthBaseViewController_Internal.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
 #import "FUIAuthErrorUtils.h"
 #import "FUIAuthStrings.h"
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
+
+/** @var kActivityIndiactorPadding
+    @brief The padding between the activity indiactor and its overlay.
+ */
+static const CGFloat kActivityIndiactorPadding = 20.0f;
+
+/** @var kActivityIndiactorOverlayCornerRadius
+    @brief The corner radius of the overlay of the activity indicator.
+ */
+static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
+
+/** @var kActivityIndiactorOverlayOpacity
+    @brief The opacity of the overlay of the activity indicator.
+ */
+static const CGFloat kActivityIndiactorOverlayOpacity = 0.8f;
+
+/** @var kActivityIndiactorAnimationDelay
+    @brief The time delay before the activity indicator is actually animated.
+ */
+static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
+
+/** @var kUITableViewCellHeight
+    @brief Height of all table view cells used in subclasses of the controller.
+ */
+static const CGFloat kUITableViewCellHeight = 44.f;
 
 /** @var kEmailRegex
     @brief Regular expression for matching email addresses.
@@ -31,86 +56,6 @@ static NSString *const kEmailRegex = @".+@([a-zA-Z0-9\\-]+\\.)+[a-zA-Z0-9]{2,63}
     @brief The key used to encode @c FUIAuth instance for NSCoding.
  */
 static NSString *const kAuthUICodingKey = @"authUI";
-
-/** @var kActivityIndiactorPadding
-    @brief The padding between the activity indiactor and its overlay.
- */
-static const CGFloat kActivityIndiactorPadding = 20.0f;
-
-/** @var kActivityIndiactorOverlayCornerRadius
-    @brief The corner radius of the overlay of the acitvity indicator.
- */
-static const CGFloat kActivityIndiactorOverlayCornerRadius = 20.0f;
-
-/** @var kActivityIndiactorOverlayOpacity
-    @brief The opacity of the overlay of the acitvity indicator.
- */
-static const CGFloat kActivityIndiactorOverlayOpacity = 0.8f;
-
-/** @var kActivityIndiactorAnimationDelay
-    @brief The time delay before the activity indicator is actually animated.
- */
-static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
-
-/** @class FUIAuthAlertViewDelegate
-    @brief A @c UIAlertViewDelegate which allows @c UIAlertView to be used with blocks more easily.
- */
-@interface FUIAuthAlertViewDelegate : NSObject <UIAlertViewDelegate>
-
-/** @fn init
-    @brief Please use initWithCancelHandler:otherHandlers.
- */
-- (nullable instancetype)init NS_UNAVAILABLE;
-
-/** @fn initWithCancelHandler:otherHandlers:
-    @brief Designated initializer.
-    @param cancelHandler The block to call when the alert view is cancelled.
-    @param otherHandlers Handlers for other buttons of the alert view. The number of handlers must
-        match the number of other buttons of the alert view.
- */
-- (nullable instancetype)initWithCancelHandler:(nullable FUIAuthAlertActionHandler)cancelHandler
-    otherHandlers:(nullable NSArray<FUIAuthAlertActionHandler> *)otherHandlers
-    NS_DESIGNATED_INITIALIZER;
-
-@end
-
-@implementation FUIAuthAlertViewDelegate {
-  FUIAuthAlertActionHandler _cancelHandler;
-  NSArray<FUIAuthAlertActionHandler> *_otherHandlers;
-  FUIAuthAlertViewDelegate *_retainedSelf;
-}
-
-- (nullable instancetype)initWithCancelHandler:(nullable FUIAuthAlertActionHandler)cancelHandler
-    otherHandlers:(nullable NSArray<FUIAuthAlertActionHandler> *)otherHandlers {
-  self = [super init];
-  if (self) {
-    _cancelHandler = cancelHandler;
-    _otherHandlers = otherHandlers;
-    _retainedSelf = self;
-  }
-  return self;
-}
-
-#pragma mark - FUIAuthAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-  if (buttonIndex == alertView.cancelButtonIndex) {
-    if (_cancelHandler) {
-      _cancelHandler();
-    }
-  } else if (alertView.firstOtherButtonIndex != -1) {
-    NSInteger otherButtonIndex = buttonIndex - alertView.firstOtherButtonIndex;
-    if (_otherHandlers && _otherHandlers.count > otherButtonIndex) {
-      FUIAuthAlertActionHandler handler = _otherHandlers[otherButtonIndex];
-      handler();
-    }
-  }
-  _cancelHandler = nil;
-  _otherHandlers = nil;
-  _retainedSelf = nil;
-}
-
-@end
 
 @implementation FUIAuthBaseViewController {
   /** @var _activityIndicator
@@ -132,23 +77,14 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
     _auth = authUI.auth;
     _authUI = authUI;
 
-    _activityIndicator =
-        [[UIActivityIndicatorView alloc]
-            initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    _activityIndicator.frame = CGRectInset(_activityIndicator.frame,
-                                           -kActivityIndiactorPadding,
-                                           -kActivityIndiactorPadding);
-    _activityIndicator.backgroundColor =
-        [UIColor colorWithWhite:0 alpha:kActivityIndiactorOverlayOpacity];
-    _activityIndicator.layer.cornerRadius = kActivityIndiactorOverlayCornerRadius;
-    [self.view addSubview:_activityIndicator];
+    _activityIndicator = [[self class] addActivityIndicator:self.view];
   }
   return self;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils frameworkBundle]
+                        bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
                         authUI:authUI];
 }
 
@@ -186,79 +122,190 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
   return [emailPredicate evaluateWithObject:email];
 }
 
-- (void)showAlertWithMessage:(NSString *)message {
-  if ([UIAlertController class]) {
-    UIAlertController *alertController =
-        [UIAlertController alertControllerWithTitle:nil
-                                            message:message
-                                     preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction =
-        [UIAlertAction actionWithTitle:[FUIAuthStrings OK]
-                                 style:UIAlertActionStyleDefault
-                               handler:nil];
-    [alertController addAction:okAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-  } else {
-    UIAlertView *alert =
-        [[UIAlertView alloc] initWithTitle:nil
-                                   message:message
-                                  delegate:nil
-                         cancelButtonTitle:nil
-                         otherButtonTitles:[FUIAuthStrings OK], nil];
-    [alert show];
++ (UIActivityIndicatorView *)addActivityIndicator:(UIView *)view {
+  if (!view) {
+    return nil;
   }
+  UIActivityIndicatorView *activityIndicator =
+      [[UIActivityIndicatorView alloc]
+           initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+  UIView *tintView = [[UIView alloc] initWithFrame:CGRectInset(activityIndicator.frame,
+                                                               -kActivityIndiactorPadding,
+                                                               -kActivityIndiactorPadding)];
+  tintView.backgroundColor =
+      [UIColor colorWithWhite:0 alpha:kActivityIndiactorOverlayOpacity];
+  tintView.layer.cornerRadius = kActivityIndiactorOverlayCornerRadius;
+  [activityIndicator addSubview:tintView];
+  
+  // Align tintView (transparent background).
+  tintView.translatesAutoresizingMaskIntoConstraints = NO;
+  [activityIndicator addConstraint:
+      [NSLayoutConstraint constraintWithItem:tintView
+                                   attribute:NSLayoutAttributeWidth
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:nil
+                                   attribute:NSLayoutAttributeNotAnAttribute
+                                  multiplier:1
+                                    constant:CGRectGetWidth(tintView.frame)]];
+  [activityIndicator addConstraint:
+      [NSLayoutConstraint constraintWithItem:tintView
+                                   attribute:NSLayoutAttributeCenterX
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:activityIndicator
+                                   attribute:NSLayoutAttributeCenterX
+                                  multiplier:1
+                                    constant:0]];
+
+  [activityIndicator addConstraint:
+      [NSLayoutConstraint constraintWithItem:tintView
+                                   attribute:NSLayoutAttributeHeight
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:nil
+                                   attribute:NSLayoutAttributeNotAnAttribute
+                                  multiplier:1
+                                    constant:CGRectGetHeight(tintView.frame)]];
+  [activityIndicator addConstraint:
+      [NSLayoutConstraint constraintWithItem:tintView
+                                   attribute:NSLayoutAttributeCenterY
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:activityIndicator
+                                   attribute:NSLayoutAttributeCenterY
+                                  multiplier:1
+                                    constant:0]];
+
+  [activityIndicator sendSubviewToBack:tintView];
+  
+  [view addSubview:activityIndicator];
+  // Align activity indicator.
+  activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
+  [view addConstraint:
+      [NSLayoutConstraint constraintWithItem:activityIndicator
+                                   attribute:NSLayoutAttributeWidth
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:view
+                                   attribute:NSLayoutAttributeWidth
+                                  multiplier:1
+                                    constant:0]];
+  [view addConstraint:
+      [NSLayoutConstraint constraintWithItem:activityIndicator
+                                   attribute:NSLayoutAttributeCenterX
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:view
+                                   attribute:NSLayoutAttributeCenterX
+                                  multiplier:1
+                                    constant:0]];
+
+  [view addConstraint:
+      [NSLayoutConstraint constraintWithItem:activityIndicator
+                                   attribute:NSLayoutAttributeHeight
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:view
+                                   attribute:NSLayoutAttributeHeight
+                                  multiplier:1
+                                    constant:0]];
+  [view addConstraint:
+      [NSLayoutConstraint constraintWithItem:activityIndicator
+                                   attribute:NSLayoutAttributeCenterY
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:view
+                                   attribute:NSLayoutAttributeCenterY
+                                  multiplier:1
+                                    constant:0]];
+  return activityIndicator;
 }
 
-- (void)showSignInAlertWithEmail:(NSString *)email
+- (void)showAlertWithMessage:(NSString *)message {
+  [[self class] showAlertWithMessage:message presentingViewController:self];
+}
+
++ (void)showAlertWithMessage:(NSString *)message
+    presentingViewController:(UIViewController *)presentingViewController {
+  [[self class] showAlertWithTitle:nil
+                           message:message
+                       actionTitle:FUILocalizedString(kStr_OK)
+          presentingViewController:presentingViewController];
+}
+
++ (void)showAlertWithTitle:(nullable NSString *)title
+                     message:(NSString *)message
+                 actionTitle:(NSString *)actionTitle
+    presentingViewController:(UIViewController *)presentingViewController {
+  UIAlertController *alertController =
+      [UIAlertController alertControllerWithTitle:title
+                                          message:message
+                                   preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *okAction =
+      [UIAlertAction actionWithTitle:actionTitle
+                               style:UIAlertActionStyleDefault
+                             handler:nil];
+  [alertController addAction:okAction];
+  [presentingViewController presentViewController:alertController animated:YES completion:nil];
+}
+
++ (void)showSignInAlertWithEmail:(NSString *)email
                         provider:(id<FUIAuthProvider>)provider
-                         handler:(FUIAuthAlertActionHandler)handler {
+        presentingViewController:(UIViewController *)presentingViewController
+                   signinHandler:(FUIAuthAlertActionHandler)signinHandler
+                   cancelHandler:(FUIAuthAlertActionHandler)cancelHandler {
   NSString *message =
-      [NSString stringWithFormat:[FUIAuthStrings providerUsedPreviouslyMessage],
+      [NSString stringWithFormat:FUILocalizedString(kStr_ProviderUsedPreviouslyMessage),
           email, provider.shortName];
-  if ([UIAlertController class]) {
-    UIAlertController *alertController =
-        [UIAlertController alertControllerWithTitle:[FUIAuthStrings existingAccountTitle]
-                                            message:message
-                                     preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *signInAction =
-        [UIAlertAction actionWithTitle:provider.signInLabel
-                                 style:UIAlertActionStyleDefault
-                               handler:^(UIAlertAction *_Nonnull action) {
-          handler();
-        }];
-    [alertController addAction:signInAction];
-    UIAlertAction *cancelAction =
-        [UIAlertAction actionWithTitle:[FUIAuthStrings cancel]
-                                 style:UIAlertActionStyleCancel
+  UIAlertController *alertController =
+      [UIAlertController alertControllerWithTitle:FUILocalizedString(kStr_ExistingAccountTitle)
+                                          message:message
+                                   preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *signInAction =
+      [UIAlertAction actionWithTitle:provider.signInLabel
+                               style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction *_Nonnull action) {
+        signinHandler();
+      }];
+  [alertController addAction:signInAction];
+  UIAlertAction *cancelAction =
+      [UIAlertAction actionWithTitle:FUILocalizedString(kStr_Cancel)
+                               style:UIAlertActionStyleCancel
                                handler:^(UIAlertAction * _Nonnull action) {
-                                 [self.authUI signOutWithError:nil];
-                               }];
-    [alertController addAction:cancelAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-  } else {
-    UIAlertView *alertView =
-        [[UIAlertView alloc] initWithTitle:[FUIAuthStrings existingAccountTitle]
-                                   message:message
-                                  delegate:self
-                         cancelButtonTitle:[FUIAuthStrings cancel]
-                         otherButtonTitles:provider.signInLabel, nil];
-    FUIAuthAlertViewDelegate *delegate =
-        [[FUIAuthAlertViewDelegate alloc] initWithCancelHandler:^{
-          [self.authUI signOutWithError:nil];
-        }  otherHandlers:@[ handler ]];
-    alertView.delegate = delegate;
-    [alertView show];
-  }
+        cancelHandler();
+      }];
+  [alertController addAction:cancelAction];
+  [presentingViewController presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)pushViewController:(UIViewController *)viewController {
+  [[self class] pushViewController:viewController
+              navigationController:self.navigationController];
+}
+
+- (void)dismissNavigationControllerAnimated:(BOOL)animated completion:(void (^)(void))completion {
+     if (self.navigationController.presentingViewController == nil){
+         if (completion){
+             completion();
+         }
+     } else {
+         [self.navigationController dismissViewControllerAnimated:animated completion:completion];
+     }
+}
+
++ (void)pushViewController:(UIViewController *)viewController
+      navigationController:(UINavigationController *)navigationController {
   // Override the back button title with "Back".
-  self.navigationItem.backBarButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:[FUIAuthStrings back]
+  viewController.navigationItem.backBarButtonItem =
+      [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Back)
                                        style:UIBarButtonItemStylePlain
                                       target:nil
                                       action:nil];
-  [self.navigationController pushViewController:viewController animated:YES];
+  [navigationController pushViewController:viewController animated:YES];
+}
+
+
++ (UIBarButtonItem *)barItemWithTitle:(NSString *)title
+                               target:(nullable id)target
+                               action:(SEL)action {
+  UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithTitle:title
+                                                               style:UIBarButtonItemStylePlain
+                                                              target:target
+                                                              action:action];
+  return buttonItem;
 }
 
 - (void)onBack {
@@ -276,8 +323,9 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                               (int64_t)(kActivityIndiactorAnimationDelay * NSEC_PER_SEC)),
                  dispatch_get_main_queue(), ^{
-    if (_activityCount > 0) {
-      [_activityIndicator startAnimating];
+    [self->_activityIndicator.superview bringSubviewToFront:self->_activityIndicator];
+    if (self->_activityCount > 0) {
+      [self->_activityIndicator startAnimating];
     }
   });
 }
@@ -291,14 +339,34 @@ static const NSTimeInterval kActivityIndiactorAnimationDelay = 0.5f;
   }
 
   if (_activityCount == 0) {
+    [_activityIndicator.superview sendSubviewToBack:_activityIndicator];
     [_activityIndicator stopAnimating];
   }
 }
 
 - (void)cancelAuthorization {
-  [self.navigationController dismissViewControllerAnimated:YES completion:^{
+  [self dismissNavigationControllerAnimated:YES completion:^{
     NSError *error = [FUIAuthErrorUtils userCancelledSignInError];
-    [self.authUI invokeResultCallbackWithUser:nil error:error];
+    [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
   }];
 }
+
++ (NSString *)providerLocalizedName:(NSString *)providerId {
+  if ([providerId isEqualToString:FIREmailAuthProviderID]) {
+    return FUILocalizedString(kStr_ProviderTitlePassword);
+  } else if ([providerId isEqualToString:FIRGoogleAuthProviderID]) {
+    return FUILocalizedString(kStr_ProviderTitleGoogle);
+  } else if ([providerId isEqualToString:FIRFacebookAuthProviderID]) {
+    return FUILocalizedString(kStr_ProviderTitleFacebook);
+  } else if ([providerId isEqualToString:FIRTwitterAuthProviderID]) {
+    return FUILocalizedString(kStr_ProviderTitleTwitter);
+  }
+  return @"";
+}
+
+- (void)enableDynamicCellHeightForTableView:(UITableView *)tableView {
+  tableView.rowHeight = UITableViewAutomaticDimension;
+  tableView.estimatedRowHeight = kUITableViewCellHeight;
+}
+
 @end

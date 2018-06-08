@@ -1,29 +1,32 @@
 #!/usr/bin/env bash
 
-set -o pipefail && xcodebuild \
+set -eo pipefail
+
+EXIT_STATUS=0
+
+(xcodebuild \
   -workspace FirebaseUI.xcworkspace \
   -scheme FirebaseUI \
   -sdk iphonesimulator \
-  -destination 'platform=iOS Simulator,name=iPhone 7' \
+  -destination 'platform=iOS Simulator,OS=11.3,name=iPhone X' \
   build \
   test \
   ONLY_ACTIVE_ARCH=YES \
-  CODE_SIGNING_REQUIRED=NO\
-  | xcpretty
+  | xcpretty) || EXIT_STATUS=$?
 
-RESULT=$?
-if [ $RESULT == 65 ]; then
-  echo "xcodebuild exited with 65, retrying"
-  set -o pipefail && xcodebuild \
-    -workspace FirebaseUI.xcworkspace \
-    -scheme FirebaseUI \
-    -sdk iphonesimulator \
-    -destination 'platform=iOS Simulator,name=iPhone 7' \
-    build \
-    test \
-    ONLY_ACTIVE_ARCH=YES \
-    CODE_SIGNING_REQUIRED=NO\
-    | xcpretty
-else
-  exit $RESULT
-fi
+# It'd be nice to test building the objc sample as a simple
+# integration test, but we don't have a GoogleService-Info.plist file
+# on Travis.
+# cd samples/objc
+# pod install
+
+# (xcodebuild \
+#   -workspace FirebaseUI-demo-objc.xcworkspace \
+#   -scheme FirebaseUI-demo-objc \
+#   -sdk iphonesimulator \
+#   -destination 'platform=iOS Simulator,name=iPhone 7' \
+#   build \
+#   ONLY_ACTIVE_ARCH=YES \
+#   | xcpretty) || EXIT_STATUS=$?
+
+exit $EXIT_STATUS

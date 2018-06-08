@@ -42,5 +42,4 @@
   return sample;
 }
 
-
 @end

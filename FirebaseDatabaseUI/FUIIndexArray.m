@@ -21,7 +21,7 @@
 #import "FUIIndexArray.h"
 #import "FUIQueryObserver.h"
 
-@interface FUIIndexArray () <FUIArrayDelegate>
+@interface FUIIndexArray () <FUICollectionDelegate>
 
 @property (nonatomic, readonly) id<FUIDataObservable> index;
 @property (nonatomic, readonly) id<FUIDataObservable> data;
@@ -59,7 +59,6 @@
     _data = data;
     _observers = [NSMutableArray array];
     _delegate = delegate;
-    [self observeQueries];
   }
   return self;
 }
@@ -71,9 +70,10 @@
 
 - (void)observeQueries {
   _indexArray = [[FUIArray alloc] initWithQuery:self.index delegate:self];
+  [_indexArray observeQuery];
 }
 
-- (NSArray <FIRDataSnapshot *> *)items {
+- (NSArray<FIRDataSnapshot *> *)items {
   NSArray *observers = [self.observers copy];
   NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:observers.count];
   for (FUIQueryObserver *observer in observers) {
@@ -84,8 +84,16 @@
   return [array copy];
 }
 
+- (NSArray<FIRDataSnapshot *> *) indexes {
+  return self.indexArray.items;
+}
+
 - (NSUInteger)count {
   return self.observers.count;
+}
+
+- (void)observeQuery {
+  [self observeQueries];
 }
 
 // FUIIndexArray instance becomes unusable after invalidation.

@@ -22,13 +22,18 @@ FOUNDATION_EXPORT double FirebaseAuthUIVersionNumber;
 //! Project version string for FirebaseAuthUI.
 FOUNDATION_EXPORT const unsigned char FirebaseAuthUIVersionString[];
 
-#import <FirebaseAuthUI/FUIAuthPickerViewController.h>
-#import <FirebaseAuthUI/FUIAuthProvider.h>
-#import <FirebaseAuthUI/FUIAuth.h>
-#import <FirebaseAuthUI/FUIAuthBaseViewController.h>
-#import <FirebaseAuthUI/FUIAuthErrorUtils.h>
-#import <FirebaseAuthUI/FUIEmailEntryViewController.h>
-#import <FirebaseAuthUI/FUIPasswordRecoveryViewController.h>
-#import <FirebaseAuthUI/FUIPasswordSignInViewController.h>
-#import <FirebaseAuthUI/FUIPasswordSignUpViewController.h>
-#import <FirebaseAuthUI/FUIPasswordVerificationViewController.h>
+/*
+ // Account settings will be released later.
+#import "FUIAccountSettingsOperationType.h"
+#import "FUIAccountSettingsViewController.h"
+ */
+#import "FUIAuth.h"
+#import "FUIAuthBaseViewController.h"
+#import "FUIAuthErrorUtils.h"
+#import "FUIAuthPickerViewController.h"
+#import "FUIAuthProvider.h"
+#import "FUIEmailEntryViewController.h"
+#import "FUIPasswordRecoveryViewController.h"
+#import "FUIPasswordSignInViewController.h"
+#import "FUIPasswordSignUpViewController.h"
+#import "FUIPasswordVerificationViewController.h"
