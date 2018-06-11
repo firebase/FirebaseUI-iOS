@@ -56,6 +56,8 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 
 @implementation FUIAuthPickerViewController {
   UIView *_buttonContainerView;
+
+  IBOutlet UITextView *_privacyPolicyAndTOSView;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
@@ -99,7 +101,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
     ++numberOfButtons;
   }
   CGFloat buttonContainerViewHeight =
-      kSignInButtonHeight * numberOfButtons + kSignInButtonVerticalMargin * (numberOfButtons - 1);
+      kSignInButtonHeight * numberOfButtons + kSignInButtonVerticalMargin * (numberOfButtons);
   CGRect buttonContainerViewFrame = CGRectMake(0, 0, kSignInButtonWidth, buttonContainerViewHeight);
   _buttonContainerView = [[UIView alloc] initWithFrame:buttonContainerViewFrame];
   [self.view addSubview:_buttonContainerView];
@@ -133,7 +135,47 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
     emailButton.accessibilityIdentifier = kEmailButtonAccessibilityID;
     [_buttonContainerView addSubview:emailButton];
   }
+  _privacyPolicyAndTOSView.attributedText = [self privacyPolicyAndTOS];
+  _privacyPolicyAndTOSView.textColor = [UIColor lightGrayColor];
 }
+
+- (NSAttributedString *)privacyPolicyAndTOS {
+  if (![FUIAuth defaultAuthUI].TOSURL.absoluteString.length &&
+      ![FUIAuth defaultAuthUI].privacyPolicyURL.absoluteString.length) {
+    return nil;
+  }
+  if (![FUIAuth defaultAuthUI].TOSURL.absoluteString.length ||
+    ![FUIAuth defaultAuthUI].privacyPolicyURL.absoluteString.length) {
+    NSLog(@"The terms of service and privacy policy URLs for your app must be provided together. Pl"
+        "ease set the terms of service policy using [FUIAuth defaultAuthUI].TOSURL and the privacy"
+        " policy URL using [FUIAuth defaultAuthUI].privacyPolicyURL");
+    return nil;
+  }
+  NSString *privacyPolicyAndTOSString =
+      [NSString stringWithFormat:FUILocalizedString(kStr_TermsOfServiceAuthPicker),
+          FUILocalizedString(kStr_TermsOfService), FUILocalizedString(kStr_PrivacyPolicy)];
+  NSMutableAttributedString *attributedLinkText =
+      [[NSMutableAttributedString alloc] initWithString:privacyPolicyAndTOSString];
+
+  NSRange TOSRange =
+      [privacyPolicyAndTOSString rangeOfString:FUILocalizedString(kStr_TermsOfService)];
+
+  if (TOSRange.length) {
+    [attributedLinkText addAttribute:NSLinkAttributeName
+                               value:[FUIAuth defaultAuthUI].TOSURL
+                               range:TOSRange];
+  }
+  NSRange privacyPolicyRange =
+    [privacyPolicyAndTOSString rangeOfString:FUILocalizedString(kStr_PrivacyPolicy)];
+
+  if (privacyPolicyRange.length) {
+    [attributedLinkText addAttribute:NSLinkAttributeName
+                               value:[FUIAuth defaultAuthUI].privacyPolicyURL
+                               range:privacyPolicyRange];
+  }
+  return attributedLinkText;
+}
+
 
 - (void)viewDidLayoutSubviews {
   [super viewDidLayoutSubviews];

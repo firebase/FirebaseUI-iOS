@@ -196,9 +196,17 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
 
 /** @property TOSURL
     @brief The URL of your app's Terms of Service. If not nil, a Terms of Service notice is
-        displayed on the email/password account creation screen.
+        displayed on the initial sign-in screen and potentially the phone number auth and
+        email/password account creation screen.
  */
 @property(nonatomic, copy, nullable) NSURL *TOSURL;
+
+/** @property privacyPolicyURL
+    @brief The URL of your app's Privacy Policy. If not nil, a privacy policy notice is
+        displayed on the initial sign-in screen and potentially the phone number auth and
+        email/password account creation screen.
+ */
+@property(nonatomic, copy, nullable) NSURL *privacyPolicyURL;
 
 /** @property delegate
     @brief A delegate that receives callbacks or provides custom UI for @c FUIAuth.

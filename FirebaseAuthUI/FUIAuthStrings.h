@@ -63,6 +63,8 @@ extern NSString *const kStr_SignUpTitle;
 extern NSString *const kStr_SignUpTooManyTimesError;
 extern NSString *const kStr_TermsOfService;
 extern NSString *const kStr_TermsOfServiceNotice;
+extern NSString *const kStr_TermsOfServiceAuthPicker;
+extern NSString *const kStr_PrivacyPolicy;
 extern NSString *const kStr_UserNotFoundError;
 extern NSString *const kStr_WeakPasswordError;
 extern NSString *const kStr_WrongPasswordError;

@@ -70,8 +70,14 @@
 /* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
 "TermsOfServiceNotice" = "By tapping %@, you are indicating that you agree to the %@.";
 
+/* A notice displayed on the Auth Picker screen. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceAuthPicker" = "By continuing, you are indicating that you accept our %@ and %@.";
+
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Terms of Service";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Privacy Policy";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "The email address is already in use by another account.";

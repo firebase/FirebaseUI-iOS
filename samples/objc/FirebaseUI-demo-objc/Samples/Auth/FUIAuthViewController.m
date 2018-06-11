@@ -46,6 +46,7 @@ NS_ENUM(NSUInteger, FIRProviders) {
 };
 
 static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/terms/";
+static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/support/privacy/";
 
 @interface FUIAuthViewController () <FUIAuthDelegate>
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellSignIn;
@@ -87,6 +88,7 @@ static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/t
   self.authUI = [FUIAuth defaultAuthUI];
 
   self.authUI.TOSURL = [NSURL URLWithString:kFirebaseTermsOfService];
+  self.authUI.privacyPolicyURL = [NSURL URLWithString:kFirebasePrivacyPolicy];
 
   //set AuthUI Delegate
   [self onAuthUIDelegateChanged:nil];
