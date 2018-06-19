@@ -55,7 +55,7 @@ Auth guides at the following links:
 ### Configuration
 
 All operations, callbacks, UI customizations are done through an `FUIAuth`
-instance. The `FUIAuth` instance associated with the default `FIRAuth`
+instance. The `FUIAuth` instance associated with the default Firebase Auth
 instance can be accessed as follows:
 
 ```swift
@@ -90,7 +90,7 @@ let providers: [FUIAuthProvider] = [
   FUIGoogleAuth(),
   FUIFacebookAuth(),
   FUITwitterAuth(),
-  FUIPhoneAuth(authUI:FUIAuth.defaultAuthUI()),
+  FUIPhoneAuth(authUI: FUIAuth.defaultAuthUI()),
 ]
 self.authUI?.providers = providers
 ```
@@ -154,7 +154,7 @@ present the `authViewController` obtain as instance as follows:
 // Present the auth view controller and then implement the sign in callback.
 let authViewController = authUI!.authViewController()
 
-func authUI(_ authUI: FUIAuth, didSignInWithAuthDataResult authDataResult: FIRAuthDataResult?, error: Error?){
+func authUI(_ authUI: FUIAuth, didSignInWithAuthDataResult authDataResult: AuthDataResult?, error: Error?) {
   // handle user (`authDataResult.user`) and error as necessary
 }
 ```

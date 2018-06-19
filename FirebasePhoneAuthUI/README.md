@@ -31,8 +31,7 @@ In order to use Phone Auth you should initialize Phone provider and add it to th
 ```swift
 // Swift
 import Firebase
-import FirebaseAuthUI
-import FirebasePhoneAuthUI
+import FirebaseUI
 
 /* ... */
 
@@ -43,8 +42,7 @@ FUIAuth.defaultAuthUI()?.providers = [phoneProvider]
 
 ```objective-c
 // Objective-C
-@import FirebaseAuthUI;      // OR #import <FirebaseAuthUI/FirebaseAuthUI.h>
-@import FirebasePhoneAuthUI; // OR #import <FirebasePhoneAuthUI/FUIPhoneAuth.h>
+@import FirebaseUI;
 
 /* ... */
 
@@ -55,7 +53,7 @@ FUIPhoneAuth *phoneProvider = [[FUIPhoneAuth alloc] initWithAuthUI:[FUIAuth defa
 
 ### Sign In
 
-To start the authentication flow: 
+To start the authentication flow:
 
 ```swift
 // Swift
@@ -68,9 +66,6 @@ phoneProvider.signIn(withPresenting: currentlyVisibleController, phoneNumber: ni
 FUIPhoneAuth *phoneProvider = [FUIAuth defaultAuthUI].providers.firstObject;
 [phoneProvider signInWithPresentingViewController:currentlyVisibleController phoneNumber:nil];
 ```
-
-## Customizing
-Customizing of Phone Auth is planned to be implemented in 2017 Q4
 
 ## Integration cheat sheet
 Here you can find steps things that need to be checked in case of any issues with Firebase Phone Auth integration problems.
@@ -85,7 +80,7 @@ In case  need to handle push notifications yourself:
 <br>In this case The type of the token (production or sandbox) will be attempted to be automatically detected. There is other method to set it manually.
 1. In the `AppDelegate` `application:didReceiveRemoteNotification:fetchCompletionHandler:` call `[FUIAuth.defaultAuthUI.auth canHandleNotification:userInfo]`
 1. In the `AppDelegate` `application:didFinishLaunchingWithOptions:` call `[FIRApp configure]`
-1. In the `AppDelegate` `application:openURL:options:` return `[FUIAuth.defaultAuthUI handleOpenURL:url sourceApplication:sourceApplication]` 
+1. In the `AppDelegate` `application:openURL:options:` return `[FUIAuth.defaultAuthUI handleOpenURL:url sourceApplication:sourceApplication]`
 1. Add `REVERSED_CLIENT_ID` as URL scheme to `Project settings`
 1. Add `GoogleService-Info.plist` to your project
 1. In you controller call:
