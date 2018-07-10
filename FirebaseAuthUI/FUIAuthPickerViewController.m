@@ -140,12 +140,12 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 }
 
 - (NSAttributedString *)privacyPolicyAndTOS {
-  if (![FUIAuth defaultAuthUI].TOSURL.absoluteString.length &&
-      ![FUIAuth defaultAuthUI].privacyPolicyURL.absoluteString.length) {
+  if (!self.authUI.TOSURL.absoluteString.length &&
+      !self.authUI.privacyPolicyURL.absoluteString.length) {
     return nil;
   }
-  if (![FUIAuth defaultAuthUI].TOSURL.absoluteString.length ||
-    ![FUIAuth defaultAuthUI].privacyPolicyURL.absoluteString.length) {
+  if (!self.authUI.TOSURL.absoluteString.length ||
+    !self.authUI.privacyPolicyURL.absoluteString.length) {
     NSLog(@"The terms of service and privacy policy URLs for your app must be provided together. Pl"
         "ease set the terms of service policy using [FUIAuth defaultAuthUI].TOSURL and the privacy"
         " policy URL using [FUIAuth defaultAuthUI].privacyPolicyURL");
@@ -162,7 +162,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 
   if (TOSRange.length) {
     [attributedLinkText addAttribute:NSLinkAttributeName
-                               value:[FUIAuth defaultAuthUI].TOSURL
+                               value:self.authUI.TOSURL
                                range:TOSRange];
   }
   NSRange privacyPolicyRange =
@@ -170,7 +170,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 
   if (privacyPolicyRange.length) {
     [attributedLinkText addAttribute:NSLinkAttributeName
-                               value:[FUIAuth defaultAuthUI].privacyPolicyURL
+                               value:self.authUI.privacyPolicyURL
                                range:privacyPolicyRange];
   }
   return attributedLinkText;
