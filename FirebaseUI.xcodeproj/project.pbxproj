@@ -3765,7 +3765,11 @@
 				INFOPLIST_FILE = FirebaseUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -3789,7 +3793,11 @@
 				INFOPLIST_FILE = FirebaseUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -3814,7 +3822,11 @@
 				INFOPLIST_FILE = FirebaseFirestoreUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFirestoreUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3834,7 +3846,11 @@
 				INFOPLIST_FILE = FirebaseFirestoreUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFirestoreUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3848,7 +3864,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				INFOPLIST_FILE = FirebaseFirestoreUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFirestoreUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -3861,7 +3881,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				INFOPLIST_FILE = FirebaseFirestoreUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFirestoreUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -3882,7 +3906,11 @@
 				INFOPLIST_FILE = FirebaseStorageUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -3909,7 +3937,11 @@
 				INFOPLIST_FILE = FirebaseStorageUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -3930,7 +3962,12 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseStorageUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(BUILT_PRODUCTS_DIR)/SDWebImage";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"$(BUILT_PRODUCTS_DIR)/SDWebImage",
+				);
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseui.FirebaseStorageUITests;
@@ -3947,7 +3984,12 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseStorageUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(BUILT_PRODUCTS_DIR)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseui.FirebaseStorageUITests;
@@ -3966,7 +4008,11 @@
 				INFOPLIST_FILE = FirebaseDatabaseUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -3989,7 +4035,11 @@
 				INFOPLIST_FILE = FirebaseDatabaseUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -4008,7 +4058,11 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4022,7 +4076,11 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4041,7 +4099,11 @@
 				INFOPLIST_FILE = FirebaseAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -4065,7 +4127,11 @@
 				INFOPLIST_FILE = FirebaseAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -4084,7 +4150,11 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4098,7 +4168,11 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4119,7 +4193,11 @@
 				INFOPLIST_FILE = FirebaseFacebookAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -4146,7 +4224,11 @@
 				INFOPLIST_FILE = FirebaseFacebookAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -4168,7 +4250,18 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit ${BUILT_PRODUCTS_DIR}/GTMOAuth2 \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-Defines-NSData+zlib\" ${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"${BUILT_PRODUCTS_DIR}/Bolts",
+					"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit",
+					"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit",
+					"${BUILT_PRODUCTS_DIR}/GTMOAuth2",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-Defines-NSData+zlib\"",
+					"${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4184,7 +4277,18 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/Bolts ${BUILT_PRODUCTS_DIR}/FBSDKCoreKit ${BUILT_PRODUCTS_DIR}/FBSDKLoginKit ${BUILT_PRODUCTS_DIR}/GTMOAuth2 \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-Defines-NSData+zlib\" ${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"${BUILT_PRODUCTS_DIR}/Bolts",
+					"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit",
+					"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit",
+					"${BUILT_PRODUCTS_DIR}/GTMOAuth2",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher-Core\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-Defines-NSData+zlib\"",
+					"${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4259,7 +4363,13 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseGoogleAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) ${BUILT_PRODUCTS_DIR}/GTMOAuth2 ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib-iOS8.0 ${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"${BUILT_PRODUCTS_DIR}/GTMOAuth2",
+					"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core",
+					"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib-iOS8.0",
+					"${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -4287,7 +4397,13 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseGoogleAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) ${BUILT_PRODUCTS_DIR}/GTMOAuth2 ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib-iOS8.0 ${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"${BUILT_PRODUCTS_DIR}/GTMOAuth2",
+					"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core",
+					"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib-iOS8.0",
+					"${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -4321,7 +4437,11 @@
 				INFOPLIST_FILE = FirebaseTwitterAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -4353,7 +4473,11 @@
 				INFOPLIST_FILE = FirebaseTwitterAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -4380,7 +4504,15 @@
 				);
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2 ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-iOS8.0 ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3 ${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"${BUILT_PRODUCTS_DIR}/GTMOAuth2",
+					"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher",
+					"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3",
+					"${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4399,7 +4531,15 @@
 				);
 				INFOPLIST_FILE = FirebaseTwitterAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2 ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core-iOS8.0 ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3 ${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"${BUILT_PRODUCTS_DIR}/GTMOAuth2",
+					"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher",
+					"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3",
+					"${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseTwitterAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4432,7 +4572,31 @@
 				);
 				INFOPLIST_FILE = FirebaseUISample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath @executable_path @loader_path/Frameworks \"$(PODS_CONFIGURATION_BUILD_DIR)/Bolts-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKCoreKit-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKLoginKit-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-f0850809\" \"$(PODS_CONFIGURATION_BUILD_DIR)/OCMock-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-ProtoRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/Protobuf-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-RxLibrary-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/SDWebImage-iOS9.0\" \"$(PODS_ROOT)/TwitterKit/iOS\" \"$(PODS_ROOT)/TwitterCore/iOS\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-Core-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/leveldb-library-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/BoringSSL-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseUI\"";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@rpath",
+					"@executable_path",
+					"@loader_path/Frameworks",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/Bolts\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKCoreKit\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKLoginKit\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/OCMock-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-ProtoRPC\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/Protobuf\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-RxLibrary\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/SDWebImage\"",
+					"\"$(PODS_ROOT)/TwitterKit/iOS\"",
+					"\"$(PODS_ROOT)/TwitterCore/iOS\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-Core\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/leveldb-library\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/BoringSSL\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseUI\"",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseUISample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4464,7 +4628,31 @@
 				);
 				INFOPLIST_FILE = FirebaseUISample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath @executable_path @loader_path/Frameworks \"$(PODS_CONFIGURATION_BUILD_DIR)/Bolts-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKCoreKit-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKLoginKit-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-f0850809\" \"$(PODS_CONFIGURATION_BUILD_DIR)/OCMock-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-ProtoRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/Protobuf-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-RxLibrary-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/SDWebImage-iOS9.0\" \"$(PODS_ROOT)/TwitterKit/iOS\" \"$(PODS_ROOT)/TwitterCore/iOS\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-Core-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/leveldb-library-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/BoringSSL-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseUI\"";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@rpath",
+					"@executable_path",
+					"@loader_path/Frameworks",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/Bolts\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKCoreKit\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKLoginKit\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/OCMock-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-ProtoRPC\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/Protobuf\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-RxLibrary\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/SDWebImage\"",
+					"\"$(PODS_ROOT)/TwitterKit/iOS\"",
+					"\"$(PODS_ROOT)/TwitterCore/iOS\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-Core\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/leveldb-library\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/BoringSSL\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseUI\"",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseUISample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4479,7 +4667,31 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseUISampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath @executable_path @loader_path/Frameworks \"$(PODS_CONFIGURATION_BUILD_DIR)/Bolts-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKCoreKit-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKLoginKit-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-f0850809\" \"$(PODS_CONFIGURATION_BUILD_DIR)/OCMock-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-ProtoRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/Protobuf-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-RxLibrary-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/SDWebImage-iOS9.0\" \"$(PODS_ROOT)/TwitterKit/iOS\" \"$(PODS_ROOT)/TwitterCore/iOS\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-Core-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/leveldb-library-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/BoringSSL-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseUI\"";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@rpath",
+					"@executable_path",
+					"@loader_path/Frameworks",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/Bolts-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKCoreKit-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKLoginKit-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-f0850809\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/OCMock-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-ProtoRPC-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/Protobuf-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-RxLibrary-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/SDWebImage-iOS9.0\"",
+					"\"$(PODS_ROOT)/TwitterKit/iOS\"",
+					"\"$(PODS_ROOT)/TwitterCore/iOS\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-Core-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/leveldb-library-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/BoringSSL-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseUI\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -4498,7 +4710,31 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebaseUISampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @rpath @executable_path @loader_path/Frameworks \"$(PODS_CONFIGURATION_BUILD_DIR)/Bolts-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKCoreKit-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKLoginKit-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher.default-Core-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-f0850809\" \"$(PODS_CONFIGURATION_BUILD_DIR)/OCMock-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-ProtoRPC-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/Protobuf-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-RxLibrary-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/SDWebImage-iOS9.0\" \"$(PODS_ROOT)/TwitterKit/iOS\" \"$(PODS_ROOT)/TwitterCore/iOS\" \"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-Core-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/leveldb-library-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/BoringSSL-iOS9.0\" \"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseUI\"";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@rpath",
+					"@executable_path",
+					"@loader_path/Frameworks",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/Bolts-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKCoreKit-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FBSDKLoginKit-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMOAuth2-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/GoogleToolboxForMac-f0850809\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/OCMock-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-ProtoRPC-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/Protobuf-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-RxLibrary-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/SDWebImage-iOS9.0\"",
+					"\"$(PODS_ROOT)/TwitterKit/iOS\"",
+					"\"$(PODS_ROOT)/TwitterCore/iOS\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/gRPC-Core-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/leveldb-library-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/nanopb-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/BoringSSL-iOS9.0\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseUI\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -4522,7 +4758,11 @@
 				INFOPLIST_FILE = FirebasePhoneAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -4580,7 +4820,11 @@
 				INFOPLIST_FILE = FirebaseTwitterAuthUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-fstack-protector-all",
@@ -4633,7 +4877,14 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebasePhoneAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-Core ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework",
+					"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-Core",
+					"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.google.FirebaseUI.dev.FirebasePhoneAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4648,7 +4899,14 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FirebasePhoneAuthUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks ${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework ${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-Core ${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"${BUILT_PRODUCTS_DIR}/GTMOAuth2-framework",
+					"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-Core",
+					"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.google.FirebaseUI.dev.FirebasePhoneAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
