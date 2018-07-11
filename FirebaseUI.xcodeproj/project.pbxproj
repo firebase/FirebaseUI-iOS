@@ -4509,8 +4509,8 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 					"${BUILT_PRODUCTS_DIR}/GTMOAuth2",
-					"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher",
-					"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3",
+					"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-Core",
+					"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib",
 					"${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
@@ -4536,8 +4536,8 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 					"${BUILT_PRODUCTS_DIR}/GTMOAuth2",
-					"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher",
-					"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3",
+					"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-Core",
+					"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib",
 					"${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
