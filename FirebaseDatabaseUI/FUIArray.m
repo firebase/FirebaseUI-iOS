@@ -161,7 +161,7 @@
 
   // Remove all values on invalidation.
   [self didUpdate];
-  for (NSInteger i = 0; i < self.snapshots.count; i++) {
+  for (NSInteger i = 0; i < self.snapshots.count; /* no i++ since we modify the array instead*/ ) {
     FIRDataSnapshot *current = self.snapshots[i];
 
     [self.snapshots removeObjectAtIndex:i];
@@ -269,7 +269,7 @@
   return [self snapshotAtIndex:index];
 }
 
-- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)index{
+- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)index {
   @throw [NSException exceptionWithName:@"FUIArraySetIndexWithSubscript"
                                  reason:@"Setting an object as FUIArray[i] is not supported."
                                userInfo:nil];
