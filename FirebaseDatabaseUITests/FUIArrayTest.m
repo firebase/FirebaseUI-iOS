@@ -476,4 +476,13 @@
   XCTAssert(ended == 1, @"expected array to end updates exactly once");
 }
 
+- (void)testRemovesAllElementsWhenInvalidated {
+  [self.observable populateWithCount:10];
+  [self.firebaseArray invalidate];
+
+  XCTAssert(self.firebaseArray.count == 0,
+            @"Expected array to be empty after invalidation, instead got %ld elements",
+            self.firebaseArray.count);
+}
+
 @end
