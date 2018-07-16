@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FUIPhoneEntryViewController">
             <connections>
                 <outlet property="_tableView" destination="ZXV-PY-1fK" id="jxd-xz-C6f"/>
-                <outlet property="_tosTextView" destination="kGX-Qm-s2k" id="IJF-gg-ym9"/>
+                <outlet property="_tosView" destination="kGX-Qm-s2k" id="E18-dA-xIS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,10 +25,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <view key="tableFooterView" contentMode="scaleToFill" id="1jX-mt-zck">
-                        <rect key="frame" x="0.0" y="592.5" width="375" height="100"/>
+                        <rect key="frame" x="0.0" y="896.5" width="375" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="By tapping Verify Phone Number, an SMS may be sent. Message &amp; data rates may apply." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGX-Qm-s2k">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="By tapping Verify Phone Number, an SMS may be sent. Message &amp; data rates may apply." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGX-Qm-s2k" userLabel="Tos View" customClass="FUIPrivacyAndTermsOfServiceView">
                                 <rect key="frame" x="10" y="0.0" width="355" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

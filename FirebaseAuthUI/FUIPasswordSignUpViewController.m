@@ -22,6 +22,7 @@
 #import "FUIAuthTableViewCell.h"
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
+#import "FUIPrivacyAndTermsOfServiceView.h"
 
 /** @var kCellReuseIdentifier
     @brief The reuse identifier for table view cell.
@@ -52,11 +53,6 @@ static NSString *const kSaveButtonAccessibilityID = @"SaveButtonAccessibilityID"
     @brief The height and width of the @c rightView of the password text field.
  */
 static const CGFloat kTextFieldRightViewSize = 36.0f;
-
-/** @var kFooterTextViewHorizontalInset
-    @brief The horizontal inset for @c footerTextView, which should match the iOS standard margin.
- */
-static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 
 @interface FUIPasswordSignUpViewController () <UITableViewDataSource, UITextFieldDelegate>
 @end
@@ -127,35 +123,8 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
 - (void)viewDidLayoutSubviews {
   [super viewDidLayoutSubviews];
 
-  NSURL *termsOfServiceURL = self.authUI.TOSURL;
-  if (!termsOfServiceURL) {
-    self.footerTextView.text = nil;
-    return;
-  }
-
-  NSAttributedString *currentAttributedString = self.footerTextView.attributedText;
-  NSDictionary *currentAttributes =
-      [currentAttributedString attributesAtIndex:0
-                           longestEffectiveRange:nil
-                                         inRange:NSMakeRange(0, currentAttributedString.length)];
-  NSString *termsOfService = FUILocalizedString(kStr_TermsOfService);
-  NSString *termsOfServiceNotice =
-      [NSString stringWithFormat:FUILocalizedString(kStr_TermsOfServiceNotice),
-          FUILocalizedString(kStr_Save), termsOfService];
-  NSMutableAttributedString *attributedString =
-      [[NSMutableAttributedString alloc] initWithString:termsOfServiceNotice
-                                             attributes:currentAttributes];
-  NSRange termsOfServiceRange = [termsOfServiceNotice rangeOfString:termsOfService];
-  [attributedString addAttribute:NSLinkAttributeName
-                           value:self.authUI.TOSURL.absoluteString
-                           range:termsOfServiceRange];
-  self.footerTextView.attributedText = attributedString;
-
-  // Adjust the footerTextView to have standard margins.
-  self.footerTextView.textContainer.lineFragmentPadding = 0;
-  _footerTextView.textContainerInset =
-      UIEdgeInsetsMake(0, kFooterTextViewHorizontalInset, 0, kFooterTextViewHorizontalInset);
-  [self.footerTextView sizeToFit];
+  self.footerView.authUI = self.authUI;
+  [self.footerView useFooterMessage];
 }
 
 #pragma mark - Actions
