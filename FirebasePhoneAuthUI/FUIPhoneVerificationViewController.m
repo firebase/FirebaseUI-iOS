@@ -23,6 +23,7 @@
 #import "FUICodeField.h"
 #import "FUIPhoneAuthStrings.h"
 #import "FUIPhoneAuth_Internal.h"
+#import "FUIPrivacyAndTermsOfServiceView+PhoneAuth.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -45,7 +46,7 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
   __weak IBOutlet UIButton *_resendCodeButton;
   __weak IBOutlet UILabel *_actionDescriptionLabel;
   __weak IBOutlet UIButton *_phoneNumberButton;
-  __weak IBOutlet UITextView *_tosTextView;
+  __weak IBOutlet FUIPrivacyAndTermsOfServiceView *_tosView;
   __weak IBOutlet UIScrollView *_scrollView;
   NSString *_verificationID;
   NSTimer *_resendConfirmationCodeTimer;
@@ -100,7 +101,8 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
   nextButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = nextButtonItem;
   self.navigationItem.rightBarButtonItem.enabled = NO;
-  _tosTextView.attributedText = [self accountCreationTOS];
+  _tosView.authUI = self.authUI;
+  [_tosView useFooterMessage];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -328,47 +330,6 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
   _scrollView.scrollIndicatorInsets = contentInsets;
 
   [UIView commitAnimations];
-}
-
-- (NSAttributedString *)accountCreationTOS {
-
-  if (![FUIAuth defaultAuthUI].TOSURL) {
-    return nil;
-  }
-
-  NSAttributedString *currentAttributedString = _tosTextView.attributedText;
-  NSDictionary *currentAttributes =
-      [currentAttributedString attributesAtIndex:0
-                           longestEffectiveRange:nil
-                                         inRange:NSMakeRange(0, currentAttributedString.length)];
-
-  NSString *accountCreationTOS =
-      [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_TermsAccountCreation),
-          FUIPhoneAuthLocalizedString(kPAStr_Next)];
-  NSMutableAttributedString *attributedLinkText =
-      [[NSMutableAttributedString alloc] initWithString:accountCreationTOS
-                                             attributes:currentAttributes];
-
-  NSRegularExpression *linkRegex =
-      [NSRegularExpression regularExpressionWithPattern:kLinkPlaceholderPattern
-                                                options:0
-                                                  error:nil];
-  NSTextCheckingResult *placeholderMatch =
-      [linkRegex firstMatchInString:accountCreationTOS
-                            options:0
-                              range:NSMakeRange(0, [accountCreationTOS length])];
-  NSRange placeholderRange = placeholderMatch.range;
-  if (placeholderMatch) {
-    [attributedLinkText addAttribute:NSLinkAttributeName
-                               value:[FUIAuth defaultAuthUI].TOSURL
-                               range:placeholderRange];
-    NSRange lastOccurenceRange =
-        NSMakeRange(placeholderRange.location + placeholderRange.length - 1, 1);
-    NSRange firstOccurenceRange = NSMakeRange(placeholderRange.location, 1);
-    [attributedLinkText replaceCharactersInRange:lastOccurenceRange withString:@""];
-    [attributedLinkText replaceCharactersInRange:firstOccurenceRange withString:@""];
-  }
-  return attributedLinkText;
 }
 
 @end

@@ -43,7 +43,6 @@ extern NSString *const kPAStr_TooManyCodesSent;
 extern NSString *const kPAStr_MessageQuotaExceeded;
 extern NSString *const kPAStr_MessageExpired;
 extern NSString *const kPAStr_TermsSMS;
-extern NSString *const kPAStr_TermsAccountCreation;
 
 /* Name of the FirebasePhoneAuthUI resource bundle. */
 extern NSString *const FUIPhoneAuthBundleName;
