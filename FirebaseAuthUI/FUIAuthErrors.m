@@ -19,3 +19,5 @@
 NSString *const FUIAuthErrorDomain = @"FUIAuthErrorDomain";
 
 NSString *const FUIAuthErrorUserInfoProviderIDKey = @"FUIAuthErrorUserInfoProviderIDKey";
+
+NSString *const FUIAuthCredentialKey = @"FUIAuthCredentialKey";

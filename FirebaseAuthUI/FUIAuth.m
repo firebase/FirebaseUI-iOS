@@ -19,15 +19,30 @@
 #import <objc/runtime.h>
 
 #import <FirebaseCore/FIRApp.h>
+#import <FirebaseCore/FIROptions.h>
 #import <FirebaseAuth/FIRAuth.h>
 #import <FirebaseAuth/FirebaseAuth.h>
 #import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthErrors.h"
 #import "FUIAuthPickerViewController.h"
 #import "FUIAuthStrings.h"
+#import "FUIGoogleAuth.h"
 #import "FUIEmailEntryViewController.h"
+#import "FUIPasswordSignInViewController_Internal.h"
 #import "FUIPasswordVerificationViewController.h"
 #import "FUIPasswordSignInViewController.h"
+
+/** @typedef EmailHintSignInCallback
+    @brief The type of block invoked when an emailHint sign-in event completes.
+
+    @param authResult Optionally; Result of sign-in request containing both the user and
+       the additional user info associated with the user.
+    @param error Optionally; the error which occurred - or nil if the request was successful.
+    @param credential Optionally; The credential used to sign-in.
+ */
+typedef void (^EmailHintSignInCallback)(FIRAuthDataResult *_Nullable authResult,
+                                        NSError *_Nullable error,
+                                        FIRAuthCredential *_Nullable credential);
 
 /** @var kAppNameCodingKey
     @brief The key used to encode the app Name for NSCoding.
@@ -163,16 +178,16 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
 }
 
 - (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI
-    presentingViewController:(UIViewController *)presentingViewController
+    presentingViewController:(FUIAuthBaseViewController *)presentingViewController
                 defaultValue:(nullable NSString *)defaultValue {
 
   // Sign out first to make sure sign in starts with a clean state.
   [providerUI signOut];
   [providerUI signInWithDefaultValue:defaultValue
-            presentingViewController:presentingViewController
-                          completion:^(FIRAuthCredential *_Nullable credential,
-                                       NSError *_Nullable error,
-                                       _Nullable FIRAuthResultCallback result) {
+     presentingViewController:presentingViewController
+                   completion:^(FIRAuthCredential *_Nullable credential,
+                                NSError *_Nullable error,
+                                _Nullable FIRAuthResultCallback result) {
     BOOL isAuthPickerShown =
         [presentingViewController isKindOfClass:[FUIAuthPickerViewController class]];
     if (error) {
@@ -184,51 +199,267 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       }
       return;
     }
-
-    [self.auth signInAndRetrieveDataWithCredential:credential
-                                        completion:^(FIRAuthDataResult *_Nullable authResult,
-                                                     NSError *_Nullable error) {
-      if (error.code == FIRAuthErrorCodeAccountExistsWithDifferentCredential) {
-        NSString *email = error.userInfo[kErrorUserInfoEmailKey];
-        [self handleAccountLinkingForEmail:email
-                             newCredential:credential
-                  presentingViewController:presentingViewController
-                              signInResult:result];
-        return;
+    // Block to complete sign-in
+    void (^completeSignInBlock)(FIRAuthDataResult *, NSError *) = ^(FIRAuthDataResult *authResult,
+                                                                    NSError *error) {
+      if (result) {
+        result(authResult.user, nil);
       }
-
-      if (error) {
-        if (result) {
-          result(nil, error);
-        }
-        [self invokeResultCallbackWithAuthDataResult:nil error:error];
+      // Hide Auth Picker Controller which was presented modally.
+      if (isAuthPickerShown && presentingViewController.presentingViewController) {
+        [presentingViewController dismissViewControllerAnimated:YES completion:^{
+          [self invokeResultCallbackWithAuthDataResult:authResult error:error];
+        }];
       } else {
-        if (result) {
-          result(authResult.user, nil);
-        }
-        // Hide Auth Picker Controller which was presented modally.
-        if (isAuthPickerShown && presentingViewController.presentingViewController) {
-          [presentingViewController dismissViewControllerAnimated:YES completion:^{
-            [self invokeResultCallbackWithAuthDataResult:authResult error:nil];
-          }];
-        } else {
-          [self invokeResultCallbackWithAuthDataResult:authResult error:nil];
-        }
+        [self invokeResultCallbackWithAuthDataResult:authResult error:error];
       }
-    }];
+    };
+
+    // Check for the presence of an anonymous user and whether automatic upgrade is enabled.
+    if (self.auth.currentUser.isAnonymous &&
+        [FUIAuth defaultAuthUI].shouldAutoUpgradeAnonymousUsers) {
+      [self.auth.currentUser
+          linkAndRetrieveDataWithCredential:credential
+                                 completion:^(FIRAuthDataResult *_Nullable authResult,
+                                              NSError * _Nullable error) {
+        if (error) {
+          // Check for "credential in use" conflict error and handle appropriately.
+          if (error.code == FIRAuthErrorCodeCredentialAlreadyInUse) {
+            FIRAuthCredential *newCredential = credential;
+            // Check for and handle special case for Phone Auth Provider.
+            if (providerUI.providerID == FIRPhoneAuthProviderID) {
+              // Obtain temporary Phone Auth credential.
+              newCredential = error.userInfo[FIRAuthUpdatedCredentialKey];
+            }
+            NSDictionary *userInfo = @{
+              FUIAuthCredentialKey : newCredential,
+            };
+            NSError *mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
+                                                      code:FUIAuthErrorCodeMergeConflict
+                                                  userInfo:userInfo];
+            completeSignInBlock(authResult, mergeError);
+          } else if (error.code == FIRAuthErrorCodeEmailAlreadyInUse) {
+            if ([providerUI respondsToSelector:@selector(email)]) {
+              // Link federated providers
+              [self signInWithEmailHint:[providerUI email]
+               presentingViewController:presentingViewController
+                          originalError:error
+                             completion:^(FIRAuthDataResult *_Nullable authResult,
+                                          NSError *_Nullable error,
+                                          FIRAuthCredential *_Nullable existingCredential) {
+                if (error) {
+                  completeSignInBlock(nil, error);
+                  return;
+                }
+
+                if (![authResult.user.email isEqualToString:[providerUI email]]
+                    && credential) {
+                  NSDictionary *userInfo = @{
+                    FUIAuthCredentialKey : credential,
+                  };
+                  NSError *mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
+                                                            code:FUIAuthErrorCodeMergeConflict
+                                                        userInfo:userInfo];
+                  completeSignInBlock(nil, mergeError);
+                  return;
+                }
+
+                [authResult.user linkAndRetrieveDataWithCredential:credential
+                                                        completion:^(FIRAuthDataResult
+                                                                         *_Nullable authResult,
+                                                                     NSError *_Nullable error) {
+                  if (error) {
+                    completeSignInBlock(nil, error);
+                    return;
+                  }
+                  FIRAuthCredential *newCredential = credential;
+                  NSDictionary *userInfo = @{
+                    FUIAuthCredentialKey : newCredential,
+                  };
+                  NSError *mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
+                                                             code:FUIAuthErrorCodeMergeConflict
+                                                         userInfo:userInfo];
+                  completeSignInBlock(authResult, mergeError);
+                }];
+              }];
+            }
+          } else {
+            if (!isAuthPickerShown || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
+              [self invokeResultCallbackWithAuthDataResult:nil error:error];
+            }
+            if (result) {
+              result(nil, error);
+            }
+          }
+        }
+      }];
+    } else {
+      [self.auth signInAndRetrieveDataWithCredential:credential
+                                          completion:^(FIRAuthDataResult *_Nullable authResult,
+                                                       NSError *_Nullable error) {
+        if (error && error.code == FIRAuthErrorCodeAccountExistsWithDifferentCredential) {
+          NSString *email = error.userInfo[kErrorUserInfoEmailKey];
+          [self handleAccountLinkingForEmail:email
+                               newCredential:credential
+                    presentingViewController:presentingViewController
+                                signInResult:result];
+          return;
+        }
+        if (error) {
+          if (result) {
+            result(nil, error);
+          }
+          [self invokeResultCallbackWithAuthDataResult:nil error:error];
+          return;
+        }
+        completeSignInBlock(authResult, nil);
+      }];
+    }
   }];
 }
 
-/** @fn handleAccountLinkingForEmail:newCredential:presentingViewController:signInResult
-    @brief Handles the account linking case after a user tries to sign-in which has a credential
-        with an email which is already used by a different account.
-    @param email The email address used by an existing account and and also the credential used in
-        the sign-in attempt.
-    @param newCredential The credential used in the lastest sign-in attempt.
-    @param presentingViewController The view controller used to present the UI.
-    @param result block which takes the result of this method as a parameter; a nullable
-        AuthResult indicating success or a nullable Error indicating failure.
- */
+- (void)signInWithEmailHint:(NSString *)emailHint
+   presentingViewController:(FUIAuthBaseViewController *)presentingViewController
+              originalError:(NSError *)originalError
+                 completion:(EmailHintSignInCallback)completion {
+  NSString *kTempApp = @"tempApp";
+  FIROptions *options = [FIROptions defaultOptions];
+  // Create an new app instance in order to create a new auth instance.
+  if (![FIRApp appNamed:kTempApp]) {
+    [FIRApp configureWithName:kTempApp options:options];
+  }
+  FIRApp *tempApp = [FIRApp appNamed:kTempApp];
+  // Create a new auth instance in order to perform a successful sign-in without losing the
+  // currently signed in user on the default auth instance.
+  FIRAuth *tempAuth = [FIRAuth authWithApp:tempApp];
+
+  [self.auth fetchProvidersForEmail:emailHint completion:^(NSArray<NSString *> *_Nullable providers,
+                                                           NSError *_Nullable error) {
+    if (error) {
+      if (completion) {
+        completion(nil, error, nil);
+      }
+      return;
+    }
+    NSString *existingFederatedProviderID = [self authProviderFromProviders:providers];
+    // Set of providers which can be auto-linked.
+    NSSet *supportedProviders =
+        [NSSet setWithObjects:FIRGoogleAuthProviderID,
+                              FIRFacebookAuthProviderID,
+                              FIREmailAuthProviderID,
+                              nil];
+    if ([supportedProviders containsObject:existingFederatedProviderID]) {
+      if ([existingFederatedProviderID isEqualToString:FIREmailAuthProviderID]) {
+
+        [FUIAuthBaseViewController showSignInAlertWithEmail:emailHint
+                                          providerShortName:@"Email/Password"
+                                        providerSignInLabel:@"Sign in with Email/Password"
+                                   presentingViewController:presentingViewController
+                                              signinHandler:^{
+          FUIAuth *authUI = [[FUIAuth alloc]initWithAuth:tempAuth];
+          // Email password sign-in
+          FUIPasswordSignInViewController *controller =
+              [[FUIPasswordSignInViewController alloc] initWithAuthUI:authUI email:emailHint];
+          controller.onDismissCallback = ^(FIRAuthDataResult *result, NSError *error) {
+            if (completion) {
+              completion(result, error, nil);
+            }
+          };
+          [presentingViewController pushViewController:controller];
+        }
+                                              cancelHandler:^{
+          if (completion) {
+            completion(nil, originalError, nil);
+          }
+        }];
+      } else { // Federated sign-in case.
+        id<FUIAuthProvider> authProviderUI;
+        // Retrieve the FUIAuthProvider instance from FUIAuth for the existing provider ID.
+        for (id<FUIAuthProvider> provider in self.providers) {
+          if ([provider.providerID isEqualToString:existingFederatedProviderID]) {
+            authProviderUI = provider;
+            break;
+          }
+        }
+
+        [FUIAuthBaseViewController showSignInAlertWithEmail:emailHint
+                                                   provider:authProviderUI
+                                   presentingViewController:presentingViewController
+                                              signinHandler:^{
+          [authProviderUI signOut];
+          [authProviderUI signInWithDefaultValue:emailHint
+                        presentingViewController:presentingViewController
+                                      completion:^(FIRAuthCredential *_Nullable credential,
+                                                   NSError *_Nullable error,
+                                                   FIRAuthResultCallback  _Nullable result) {
+            if (error) {
+              if (completion) {
+                completion(nil, error, nil);
+              }
+              return;
+            }
+
+            [tempAuth signInAndRetrieveDataWithCredential:credential
+                                               completion:^(FIRAuthDataResult *_Nullable authResult,
+                                                            NSError *_Nullable error) {
+              if (error) {
+                if (completion) {
+                  completion(nil, error, nil);
+                }
+              }
+
+              // Handle potential email mismatch.
+              if (![emailHint isEqualToString:authResult.user.email]) {
+                NSString *signedInEmail = authResult.user.email;
+                NSString *title =
+                    [NSString stringWithFormat:@"Continue sign in with %@?", signedInEmail];
+                NSString *message =
+                    [NSString stringWithFormat:@"You originally wanted to sign in with %@",
+                    emailHint];
+                [FUIAuthBaseViewController showAlertWithTitle:title
+                                                      message:message
+                                                  actionTitle:@"Continue"
+                                     presentingViewController:presentingViewController
+                                                actionHandler:^{
+                  if (completion) {
+                    completion(authResult, nil, credential);
+                  }
+                }
+                                                cancelHandler:^{
+                  if (completion) {
+                    completion(nil, error, credential);
+                  }
+                }];
+              }
+              if (completion) {
+                completion(authResult, error, credential);
+              }
+            }];
+          }];
+        }
+                                              cancelHandler:^{
+          if (completion) {
+            completion(nil, originalError, nil);
+          }
+        }];
+      }
+    }
+  }];
+}
+
+- (nullable NSString *)authProviderFromProviders:(NSArray <NSString *> *) providers {
+  NSSet *providerSet =
+      [NSSet setWithArray:@[ FIRFacebookAuthProviderID,
+                             FIRGoogleAuthProviderID,
+                             FIREmailAuthProviderID ]];
+  for (NSString *provider in providers) {
+    if ( [providerSet containsObject:provider]) {
+      return provider;
+    }
+  }
+  return nil;
+}
+
 - (void)handleAccountLinkingForEmail:(NSString *)email
                        newCredential:(FIRAuthCredential *)newCredential
             presentingViewController:(UIViewController *)presentingViewController
