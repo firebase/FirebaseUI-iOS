@@ -302,7 +302,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
           [self handleAccountLinkingForEmail:email
                                newCredential:credential
                     presentingViewController:presentingViewController
-                                singInResult:result];
+                                signInResult:result];
           return;
         }
         if (error) {
