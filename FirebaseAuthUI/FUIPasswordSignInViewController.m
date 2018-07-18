@@ -25,6 +25,7 @@
 #import "FUIAuth_Internal.h"
 #import "FUIAuthErrors.h"
 #import "FUIPasswordRecoveryViewController.h"
+#import "FUIPrivacyAndTermsOfServiceView.h"
 
 /** @var kCellReuseIdentifier
     @brief The reuse identifier for table view cell.
@@ -59,6 +60,12 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
       @brief The @c UIButton which handles forgot password action.
    */
   __weak IBOutlet UIButton *_forgotPasswordButton;
+
+  /** @var _termsOfServiceView
+   @brief The @c Text view which displays Terms of Service.
+   */
+  __weak IBOutlet FUIPrivacyAndTermsOfServiceView *_termsOfServiceView;
+
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
@@ -96,7 +103,10 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
                                            target:self
                                            action:@selector(signIn)];
   self.navigationItem.rightBarButtonItem = signInButtonItem;
-  [_forgotPasswordButton setTitle:FUILocalizedString(kStr_ForgotPasswordTitle) forState:UIControlStateNormal];
+  [_forgotPasswordButton setTitle:FUILocalizedString(kStr_ForgotPasswordTitle)
+                         forState:UIControlStateNormal];
+  _termsOfServiceView.authUI = self.authUI;
+  [_termsOfServiceView useFooterMessage];
 
   [self enableDynamicCellHeightForTableView:_tableView];
 }

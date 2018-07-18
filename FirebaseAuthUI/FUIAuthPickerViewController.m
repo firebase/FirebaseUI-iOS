@@ -23,6 +23,8 @@
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
 #import "FUIEmailEntryViewController.h"
+#import "FUIPrivacyAndTermsOfServiceView.h"
+
 
 /** @var kErrorUserInfoEmailKey
     @brief The key for the email address in the userinfo dictionary of a sign in error.
@@ -57,7 +59,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 @implementation FUIAuthPickerViewController {
   UIView *_buttonContainerView;
 
-  IBOutlet UITextView *_privacyPolicyAndTOSView;
+  IBOutlet FUIPrivacyAndTermsOfServiceView *_privacyPolicyAndTOSView;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
@@ -135,47 +137,9 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
     emailButton.accessibilityIdentifier = kEmailButtonAccessibilityID;
     [_buttonContainerView addSubview:emailButton];
   }
-  _privacyPolicyAndTOSView.attributedText = [self privacyPolicyAndTOS];
-  _privacyPolicyAndTOSView.textColor = [UIColor lightGrayColor];
+  _privacyPolicyAndTOSView.authUI = self.authUI;
+  [_privacyPolicyAndTOSView useFullMessage];
 }
-
-- (NSAttributedString *)privacyPolicyAndTOS {
-  if (!self.authUI.TOSURL.absoluteString.length &&
-      !self.authUI.privacyPolicyURL.absoluteString.length) {
-    return nil;
-  }
-  if (!self.authUI.TOSURL.absoluteString.length ||
-    !self.authUI.privacyPolicyURL.absoluteString.length) {
-    NSLog(@"The terms of service and privacy policy URLs for your app must be provided together. Pl"
-        "ease set the terms of service policy using [FUIAuth defaultAuthUI].TOSURL and the privacy"
-        " policy URL using [FUIAuth defaultAuthUI].privacyPolicyURL");
-    return nil;
-  }
-  NSString *privacyPolicyAndTOSString =
-      [NSString stringWithFormat:FUILocalizedString(kStr_TermsOfServiceAuthPicker),
-          FUILocalizedString(kStr_TermsOfService), FUILocalizedString(kStr_PrivacyPolicy)];
-  NSMutableAttributedString *attributedLinkText =
-      [[NSMutableAttributedString alloc] initWithString:privacyPolicyAndTOSString];
-
-  NSRange TOSRange =
-      [privacyPolicyAndTOSString rangeOfString:FUILocalizedString(kStr_TermsOfService)];
-
-  if (TOSRange.length) {
-    [attributedLinkText addAttribute:NSLinkAttributeName
-                               value:self.authUI.TOSURL
-                               range:TOSRange];
-  }
-  NSRange privacyPolicyRange =
-    [privacyPolicyAndTOSString rangeOfString:FUILocalizedString(kStr_PrivacyPolicy)];
-
-  if (privacyPolicyRange.length) {
-    [attributedLinkText addAttribute:NSLinkAttributeName
-                               value:self.authUI.privacyPolicyURL
-                               range:privacyPolicyRange];
-  }
-  return attributedLinkText;
-}
-
 
 - (void)viewDidLayoutSubviews {
   [super viewDidLayoutSubviews];

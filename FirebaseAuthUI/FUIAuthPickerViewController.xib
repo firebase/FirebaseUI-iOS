@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,16 +21,23 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xez-8g-dy2">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xez-8g-dy2" customClass="FUIPrivacyAndTermsOfServiceView">
                     <rect key="frame" x="16" y="618" width="343" height="49"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="DYU-T6-FUV"/>
+                    </constraints>
                     <attributedString key="attributedText"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="url"/>
                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                 </textView>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="Xez-8g-dy2" firstAttribute="leading" secondItem="kfP-Vq-eU2" secondAttribute="leadingMargin" id="146-w9-1AF"/>
+                <constraint firstItem="Xez-8g-dy2" firstAttribute="trailing" secondItem="kfP-Vq-eU2" secondAttribute="trailingMargin" id="Hoh-mG-IDs"/>
+                <constraint firstAttribute="bottom" secondItem="Xez-8g-dy2" secondAttribute="bottom" id="uZS-Dj-pya"/>
+            </constraints>
             <point key="canvasLocation" x="25.5" y="51.5"/>
         </view>
     </objects>

@@ -46,7 +46,6 @@ NSString *const kPAStr_TooManyCodesSent = @"TooManyCodesSent";
 NSString *const kPAStr_MessageQuotaExceeded = @"MessageQuotaExceeded";
 NSString *const kPAStr_MessageExpired = @"MessageExpired";
 NSString *const kPAStr_TermsSMS = @"TermsSMS";
-NSString *const kPAStr_TermsAccountCreation = @"TermsAccountCreation";
 
 NSString *const FUIPhoneAuthBundleName = @"FirebasePhoneAuthUI";
 
