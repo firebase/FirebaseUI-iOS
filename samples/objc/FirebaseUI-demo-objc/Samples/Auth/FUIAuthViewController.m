@@ -231,7 +231,7 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
 
 - (IBAction)onAuthorization:(id)sender {
   if (!_auth.currentUser || _auth.currentUser.isAnonymous) {
-    FUIAuth.defaultAuthUI.shouldAutoUpgradeAnonymousUsers = YES;
+    FUIAuth.defaultAuthUI.autoUpgradeAnonymousUsers = YES;
     _authUI.providers = [self getListOfIDPs];
     _authUI.signInWithEmailHidden = ![self isEmailEnabled];
 

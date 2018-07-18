@@ -256,14 +256,18 @@ static NSString *const kAuthUICodingKey = @"authUI";
       [UIAlertAction actionWithTitle:actionTitle
                                style:UIAlertActionStyleDefault
                              handler:^(UIAlertAction *_Nonnull action) {
-        actionHandler();
+        if (actionHandler) {
+          actionHandler();
+        }
       }];
   [alertController addAction:okAction];
   UIAlertAction *cancelAction =
       [UIAlertAction actionWithTitle:FUILocalizedString(kStr_Cancel)
                                style:UIAlertActionStyleCancel
                                handler:^(UIAlertAction * _Nonnull action) {
-        cancelHandler();
+        if (cancelHandler) {
+          cancelHandler();
+        }
       }];
   [alertController addAction:cancelAction];
   [presentingViewController presentViewController:alertController animated:YES completion:nil];
@@ -299,14 +303,18 @@ static NSString *const kAuthUICodingKey = @"authUI";
       [UIAlertAction actionWithTitle:providerSignInLabel
                                style:UIAlertActionStyleDefault
                              handler:^(UIAlertAction *_Nonnull action) {
-        signinHandler();
+        if (signinHandler) {
+          signinHandler();
+        }
       }];
   [alertController addAction:signInAction];
   UIAlertAction *cancelAction =
       [UIAlertAction actionWithTitle:FUILocalizedString(kStr_Cancel)
                                style:UIAlertActionStyleCancel
                                handler:^(UIAlertAction * _Nonnull action) {
-        cancelHandler();
+        if (cancelHandler) {
+          cancelHandler();
+        }
       }];
   [alertController addAction:cancelAction];
   [presentingViewController presentViewController:alertController animated:YES completion:nil];
