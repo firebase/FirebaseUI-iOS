@@ -204,8 +204,7 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
 /** @property shouldAutoUpgradeAnonymousUsers
     @brief Whether to enable auto upgrading of anonymous accounts, defaults to NO.
  */
-@property(nonatomic, assign, getter=shouldAutoUpgradeAnonymousUsers) BOOL
-    shouldAutoUpgradeAnonymousUsers;
+@property(nonatomic, assign, getter=shouldAutoUpgradeAnonymousUsers) BOOL autoUpgradeAnonymousUsers;
 
 /** @property privacyPolicyURL
     @brief The URL of your app's Privacy Policy. If not nil, a privacy policy notice is
