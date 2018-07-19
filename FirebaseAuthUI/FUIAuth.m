@@ -26,7 +26,6 @@
 #import "FUIAuthErrors.h"
 #import "FUIAuthPickerViewController.h"
 #import "FUIAuthStrings.h"
-#import "FUIGoogleAuth.h"
 #import "FUIEmailEntryViewController.h"
 #import "FUIPasswordSignInViewController_Internal.h"
 #import "FUIPasswordVerificationViewController.h"

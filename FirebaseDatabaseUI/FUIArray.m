@@ -161,7 +161,7 @@
 
   // Remove all values on invalidation.
   [self didUpdate];
-  for (NSInteger i = 0; i < self.snapshots.count; /* no i++ since we modify the array instead*/ ) {
+  for (NSInteger i = 0; i < self.snapshots.count; /* no i++ since we modify the array instead */ ) {
     FIRDataSnapshot *current = self.snapshots[i];
 
     [self.snapshots removeObjectAtIndex:i];
