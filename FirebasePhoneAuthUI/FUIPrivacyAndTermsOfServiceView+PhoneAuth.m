@@ -34,7 +34,7 @@
 - (NSAttributedString *)fullPrivacyPolicyAndTOSMessageWithSMSRateInfo {
   NSString *messageFormat =
       [NSString stringWithFormat:FUIPhoneAuthLocalizedString(kPAStr_TermsSMS),
-          FUIPhoneAuthLocalizedString(kPAStr_Verify)];
+          FUIPhoneAuthLocalizedString(kPAStr_Verify), @"%@", @"%@"];
   return [self privacyPolicyAndTOSMessageFromFormat:messageFormat];
 
 
