@@ -132,7 +132,16 @@
     }
     [self.collectionView insertItemsAtIndexPaths:insertedIndexPaths];
 
-  } completion:^(BOOL finished) {}];
+  } completion:^(BOOL finished) {
+    // Reload paths that have been moved.
+    NSMutableArray *movedIndexPaths =
+    [NSMutableArray arrayWithCapacity:diff.movedResultIndexes.count];
+    for (NSNumber *movedResultIndex in diff.movedResultIndexes) {
+      NSIndexPath *moved = [NSIndexPath indexPathForItem:movedResultIndex.integerValue inSection:0];
+      [movedIndexPaths addObject:moved];
+    }
+    [self.collectionView reloadItemsAtIndexPaths:movedIndexPaths];
+  }];
 }
 
 - (void)batchedArray:(FUIBatchedArray *)array queryDidFailWithError:(NSError *)error {
