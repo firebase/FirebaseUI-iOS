@@ -26,6 +26,5 @@ DerivedData
 
 .DS_Store
 Pods/
-Podfile.lock
 *.xcworkspace/
 samples/**/GoogleService-Info.plist
