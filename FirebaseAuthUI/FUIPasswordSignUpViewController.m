@@ -176,10 +176,10 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
       }];
     }];
   } else {
-    [self.auth createUserAndRetrieveDataWithEmail:email
-                                       password:password
-                                     completion:^(FIRAuthDataResult *_Nullable authDataResult,
-                                                  NSError *_Nullable error) {
+    [self.auth createUserWithEmail:email
+                          password:password
+                        completion:^(FIRAuthDataResult *_Nullable authDataResult,
+                                     NSError *_Nullable error) {
       if (error) {
         [self decrementActivity];
 
