@@ -265,6 +265,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     _phoneNumberField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     _phoneNumberField.returnKeyType = UIReturnKeyNext;
     _phoneNumberField.keyboardType = UIKeyboardTypeNumberPad;
+    if (@available(iOS 10.0, *)) {
+      _phoneNumberField.textContentType = UITextContentTypeTelephoneNumber;
+    }
     [_phoneNumberField becomeFirstResponder];
     if (_phoneNumber) {
       _phoneNumberField.text = _phoneNumber.rawPhoneNumber;

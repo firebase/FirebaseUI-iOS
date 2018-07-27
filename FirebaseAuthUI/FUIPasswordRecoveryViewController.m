@@ -180,6 +180,9 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   _emailField.keyboardType = UIKeyboardTypeEmailAddress;
   _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
   _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+  if (@available(iOS 11.0, *)) {
+    _emailField.textContentType = UITextContentTypeUsername;
+  }
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
            forControlEvents:UIControlEventEditingChanged];
