@@ -114,7 +114,7 @@ typedef void (^FUIAuthAlertActionHandler)(void);
 - (void)decrementActivity;
 
 /** @fn addActivityIndicator:
- @briefCreates and adds an activity indicator to the center of the specified view.
+ @brief Creates and adds an activity indicator to the center of the specified view.
  @param view The view where indicator is shown.
  */
 + (UIActivityIndicatorView *)addActivityIndicator:(UIView *)view;
