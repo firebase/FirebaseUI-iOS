@@ -59,12 +59,12 @@ NSString* const FUIDefaultCountryCode = @"US";
 @end
 
 @interface FUICountryCodes ()
-@property (nonatomic, readonly) NSArray* countryCodesArray;
+@property (nonatomic, readonly) NSArray<NSDictionary *> *countryCodesArray;
 @end
 
 @implementation FUICountryCodes
 
-- (FUICountryCodes *)init {
+- (instancetype)init {
   if (self = [super init]) {
     // Country codes JSON containing country codes and phone number info.
     NSString *countryCodeFilePath =
@@ -92,50 +92,41 @@ NSString* const FUIDefaultCountryCode = @"US";
   return self;
 }
 
-- (FUICountryCodes *)initWithCountriesArray:(NSArray *)countries {
-  NSParameterAssert(countries);
-
-  if (!countries) {
-    return nil;
-  }
-
-  if (self = [super init]) {
-    _countryCodesArray = countries;
-
-    [self localizeCountryCodesArray];
-    [self sortCountryCodesArray];
-
-  }
-  return self;
-}
-
 - (NSUInteger)count {
   return [self.countryCodesArray count];
 }
 
-- (FUICountryCodeInfo*)countryCodeInfoForCode:(NSString*)countryCode {
-  NSArray* filtered =
+- (nullable FUICountryCodeInfo *)countryCodeInfoForCode:(NSString *)countryCode {
+  NSArray *filtered =
       [self.countryCodesArray filteredArrayUsingPredicate:
           [NSPredicate predicateWithFormat:FUI_JSON_COUNTRY_CODE_PREDICATE, countryCode]];
-  if ([filtered count] != 1) {
+  if (filtered.count != 1) {
     return nil;
   }
-  NSDictionary* match = filtered[0];
+  NSDictionary *match = filtered[0];
 
   return [self countryCodeInfoForDictionary:match];
 }
 
-- (FUICountryCodeInfo*)countryCodeInfoForRow:(NSInteger)row {
-  NSDictionary* match = [self.countryCodesArray objectAtIndex:row];
-
+- (FUICountryCodeInfo *)countryCodeInfoAtIndex:(NSInteger)index {
+  NSDictionary *match = [self.countryCodesArray objectAtIndex:index];
   return [self countryCodeInfoForDictionary:match];
 }
 
-- (FUICountryCodeInfo *)countryCodeInfoFromDeviceLocale {
+- (FUICountryCodeInfo *)defaultCountryCodeInfo {
+  // Get the country code based on the information of user's telecommunication carrier provider.
   CTCarrier *carrier = [[[CTTelephonyNetworkInfo alloc] init] subscriberCellularProvider];
   NSString *countryCode = carrier.isoCountryCode ?: [[self class] countryCodeFromDeviceLocale];
-  FUICountryCodeInfo* countryCodeInfo = [self countryCodeInfoForCode:countryCode];
-  return countryCodeInfo ?: [self countryCodeInfoForCode:FUIDefaultCountryCode];
+  FUICountryCodeInfo *countryCodeInfo = [self countryCodeInfoForCode:countryCode];
+  // If carrier is not availble, get the hard coded default country code.
+  if (!countryCodeInfo) {
+    countryCodeInfo = [self countryCodeInfoForCode:FUIDefaultCountryCode];
+  }
+  // If the hard coded default country code is not available, get the first available country code.
+  if (!countryCodeInfo) {
+    countryCodeInfo = [self countryCodeInfoAtIndex:0];
+  }
+  return countryCodeInfo;
 }
 
 - (FUICountryCodeInfo *)countryCodeInfoForPhoneNumber:(NSString *)phoneNumber {
@@ -163,18 +154,57 @@ NSString* const FUIDefaultCountryCode = @"US";
   return nil;
 }
 
-- (FUICountryCodes *)searchCountriesByName:(NSString *)countryName {
-  if ([countryName length] == 0) {
-    return nil;
-  } else {
-    NSArray *results =
-        [self.countryCodesArray filteredArrayUsingPredicate:
-            [NSPredicate predicateWithFormat:FUI_JSON_COUNTRY_NAME_PREDICATE, countryName]];
-    return [[FUICountryCodes alloc] initWithCountriesArray:results];
+- (void)blackListCountries:(NSSet<NSString *> *)countries {
+  NSMutableArray<NSDictionary *> *array =
+      [[NSMutableArray alloc] initWithCapacity:_countryCodesArray.count];
+  for (NSDictionary *dict in self.countryCodesArray) {
+    NSString *countryCode = dict[FUI_JSON_COUNTRY_CODE_KEY];
+    NSString *dialCode = dict[FUI_JSON_DIALCODE_KEY];
+    if ([countries containsObject:countryCode] || [countries containsObject:dialCode]) {
+      continue;
+    }
+    [array addObject:dict];
   }
+  _countryCodesArray = array.mutableCopy;
+}
+
+- (void)whiteListCountries:(NSSet<NSString *> *)countries {
+  NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:_countryCodesArray.count];
+  for (NSDictionary *dict in self.countryCodesArray) {
+    NSString *countryCode = dict[FUI_JSON_COUNTRY_CODE_KEY];
+    NSString *dialCode = dict[FUI_JSON_DIALCODE_KEY];
+    if ([countries containsObject:countryCode] || [countries containsObject:dialCode]) {
+      [array addObject:dict];
+    }
+  }
+  _countryCodesArray = array.mutableCopy;
+}
+
+- (instancetype)searchCountriesByName:(NSString *)nameQuery {
+  NSArray<NSDictionary *> *results =
+      [self.countryCodesArray filteredArrayUsingPredicate:
+          [NSPredicate predicateWithFormat:FUI_JSON_COUNTRY_NAME_PREDICATE, nameQuery]];
+  return [[FUICountryCodes alloc] initWithCountriesArray:results];
 }
 
 #pragma mark Helper methods
+
+- (nullable instancetype)initWithCountriesArray:(NSArray<NSDictionary *> *)countries {
+  NSParameterAssert(countries);
+
+  if (!countries) {
+    return nil;
+  }
+
+  if (self = [super init]) {
+    _countryCodesArray = countries;
+
+    [self localizeCountryCodesArray];
+    [self sortCountryCodesArray];
+
+  }
+  return self;
+}
 
 - (FUICountryCodeInfo *)countryCodeInfoForDictionary:(NSDictionary *)dictionary {
   FUICountryCodeInfo* countryCodeInfo = [[FUICountryCodeInfo alloc] init];
