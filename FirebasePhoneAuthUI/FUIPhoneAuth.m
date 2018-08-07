@@ -49,20 +49,26 @@ NS_ASSUME_NONNULL_BEGIN
   NSParameterAssert(countries);
   NSParameterAssert(countries.count > 0);
   if (self = [self initWithAuthUI:authUI]) {
-    [_countryCodes whiteListCountries:countries];
+    [_countryCodes whitelistCountries:countries];
     NSAssert(_countryCodes.count, @"No available country code found.");
-    if (!_countryCodes.count) return nil;
+    if (!_countryCodes.count) {
+      return nil;
+    }
   }
   return self;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
           blacklistedCountries:(NSSet<NSString *> *)countries {
-  if (!countries.count) return nil;
+  if (!countries.count) {
+    return nil;
+  }
   if (self = [self initWithAuthUI:authUI]) {
-    [_countryCodes blackListCountries:countries];
+    [_countryCodes blacklistCountries:countries];
     NSAssert(_countryCodes.count, @"No available country code found.");
-    if (!_countryCodes.count) return nil;
+    if (!_countryCodes.count) {
+      return nil;
+    }
   }
   return self;
 }

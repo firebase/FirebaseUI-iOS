@@ -46,7 +46,8 @@ __attribute__((deprecated("This is deprecated API and will be removed in a futur
     @brief Convenience initializer.
     @param authUI The @c FUIAuth instance that manages this view controller.
     @param phoneNumber The phone number which is being verifying.
-    @param countryCodes Available country codes For the view controller to use.
+    @param countryCodes Available country codes For the view controller to use. If the argument is
+                        nil, the default @c FUICountryCodes will be used.
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                    phoneNumber:(nullable NSString *)phoneNumber
@@ -58,7 +59,8 @@ __attribute__((deprecated("This is deprecated API and will be removed in a futur
     @param nibBundleOrNil The bundle in which to search for the nib file.
     @param authUI The @c FUIAuth instance that manages this view controller.
     @param phoneNumber The phone number which is being verifying.
-    @param countryCodes Available country codes For the view controller to use.
+    @param countryCodes Available country codes For the view controller to use.  If the argument is
+                        nil, the default @c FUICountryCodes will be used.
  */
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil

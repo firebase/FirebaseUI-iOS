@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
     @param countryCode              (required) The country code information
 */
 - (instancetype)initWithRawPhoneNumber:(NSString *)rawPhoneNumber
-                                    countryCode:(FUICountryCodeInfo *)countryCode;
+                           countryCode:(FUICountryCodeInfo *)countryCode;
 
 /** @fn initWithNormalizedPhoneNumber:rawPhoneNumber:countryCode:
     @param normalizedPhoneNumber    (optional) The phone number returned from the endpoint;
@@ -64,8 +64,8 @@ NS_ASSUME_NONNULL_BEGIN
     @param countryCode              (required) The country code information
 */
 - (instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber
-                                        rawPhoneNumber:(NSString *)rawPhoneNumber
-                                           countryCode:(FUICountryCodeInfo *)countryCode;
+                               rawPhoneNumber:(NSString *)rawPhoneNumber
+                                  countryCode:(FUICountryCodeInfo *)countryCode;
 
 - (instancetype)init NS_UNAVAILABLE;
 

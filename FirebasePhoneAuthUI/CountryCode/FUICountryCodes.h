@@ -65,19 +65,19 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (FUICountryCodeInfo *)defaultCountryCodeInfo;
 
-/** @fn blackListCountries:
+/** @fn blacklistCountries:
     @brief Remove the set of countries from available country codes.
     @param countries A set of blacklisted country codes. Country codes are in NSString format, and
            are either ISO (alpha-2) or E164 formatted.
 */
-- (void)blackListCountries:(NSSet<NSString *> *)countries;
+- (void)blacklistCountries:(NSSet<NSString *> *)countries;
 
-/** @fn blackListCountries:
+/** @fn blacklistCountries:
     @brief Filter the available country codes, leaving only the set of whitelisted countries.
     @param countries A set of whitelisted country codes. Country codes are in NSString format, and
            are either ISO (alpha-2) or E164 formatted.
 */
-- (void)whiteListCountries:(NSSet<NSString *> *)countries;
+- (void)whitelistCountries:(NSSet<NSString *> *)countries;
 
 /** @fn searchCountriesByName:
     @brief Get a filtered instance based on provided country name query.
