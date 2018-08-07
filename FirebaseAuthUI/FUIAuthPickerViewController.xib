@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -34,10 +33,11 @@
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstItem="Xez-8g-dy2" firstAttribute="leading" secondItem="kfP-Vq-eU2" secondAttribute="leadingMargin" id="146-w9-1AF"/>
-                <constraint firstItem="Xez-8g-dy2" firstAttribute="trailing" secondItem="kfP-Vq-eU2" secondAttribute="trailingMargin" id="Hoh-mG-IDs"/>
-                <constraint firstAttribute="bottom" secondItem="Xez-8g-dy2" secondAttribute="bottom" id="uZS-Dj-pya"/>
+                <constraint firstItem="Xez-8g-dy2" firstAttribute="leading" secondItem="Xps-cJ-b09" secondAttribute="leading" constant="16" id="146-w9-1AF"/>
+                <constraint firstItem="Xez-8g-dy2" firstAttribute="trailing" secondItem="Xps-cJ-b09" secondAttribute="trailing" constant="-16" id="Hoh-mG-IDs"/>
+                <constraint firstItem="Xps-cJ-b09" firstAttribute="bottom" secondItem="Xez-8g-dy2" secondAttribute="bottom" id="uZS-Dj-pya"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="Xps-cJ-b09"/>
             <point key="canvasLocation" x="25.5" y="51.5"/>
         </view>
     </objects>
