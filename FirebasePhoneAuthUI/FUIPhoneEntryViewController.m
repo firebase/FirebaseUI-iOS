@@ -80,39 +80,46 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   return [self initWithNibName:nibNameOrNil
                         bundle:nibBundleOrNil
                         authUI:authUI
-                   phoneNumber:nil];
+                   phoneNumber:nil
+                  countryCodes:nil];
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
   return [self initWithNibName:NSStringFromClass([self class])
                         bundle:[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName]
                         authUI:authUI
-                   phoneNumber:nil];
+                   phoneNumber:nil
+                  countryCodes:nil];
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
-                   phoneNumber:(nullable NSString *)phoneNumber {
+                   phoneNumber:(nullable NSString *)phoneNumber
+                  countryCodes:(nullable FUICountryCodes *)countryCodes {
   return [self initWithNibName:NSStringFromClass([self class])
                         bundle:[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName]
                         authUI:authUI
-                   phoneNumber:phoneNumber];
+                   phoneNumber:phoneNumber
+                  countryCodes:countryCodes];
 }
 
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil
                          authUI:(FUIAuth *)authUI
-                    phoneNumber:(nullable NSString *)phoneNumber {
+                    phoneNumber:(nullable NSString *)phoneNumber
+                   countryCodes:(nullable FUICountryCodes *)countryCodes {
 
   self = [super initWithNibName:nibNameOrNil
                          bundle:nibBundleOrNil
                          authUI:authUI];
   if (self) {
     self.title = FUIPhoneAuthLocalizedString(kPAStr_EnterPhoneTitle);
-    _countryCodes = [[FUICountryCodes alloc] init];
-    _phoneNumber = phoneNumber.length ?
-        [[FUIPhoneNumber alloc] initWithNormalizedPhoneNumber:phoneNumber] : nil;
+    _countryCodes = countryCodes ?: [[FUICountryCodes alloc] init];
+    if (phoneNumber.length) {
+      _phoneNumber = [[FUIPhoneNumber alloc] initWithNormalizedPhoneNumber:phoneNumber
+                                                              countryCodes:_countryCodes];
+    }
     _selectedCountryCode = _phoneNumber.countryCode ?:
-        [_countryCodes countryCodeInfoFromDeviceLocale];
+        [_countryCodes defaultCountryCodeInfo];
   }
   return self;
 }

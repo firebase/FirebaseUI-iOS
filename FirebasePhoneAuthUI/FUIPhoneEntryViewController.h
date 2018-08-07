@@ -16,6 +16,8 @@
 
 #import "FirebaseAuthUI.h"
 
+@class FUICountryCodes;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FUIPhoneEntryViewController : FUIAuthBaseViewController
@@ -40,25 +42,31 @@ __attribute__((deprecated("This is deprecated API and will be removed in a futur
 __attribute__((deprecated("This is deprecated API and will be removed in a future release."
                           "Please use initWithNibName:bundle:authUI:phoneNumber:")));
 
-/** @fn initWithAuthUI:phoneNumber:
+/** @fn initWithAuthUI:phoneNumber:countryCodes:
     @brief Convenience initializer.
     @param authUI The @c FUIAuth instance that manages this view controller.
     @param phoneNumber The phone number which is being verifying.
+    @param countryCodes Available country codes For the view controller to use. If the argument is
+                        nil, the default @c FUICountryCodes will be used.
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
-                   phoneNumber:(nullable NSString *)phoneNumber;
+                   phoneNumber:(nullable NSString *)phoneNumber
+                  countryCodes:(nullable FUICountryCodes *)countryCodes;
 
-/** @fn initWithNibName:bundle:authUI:phoneNumber:
+/** @fn initWithNibName:bundle:authUI:phoneNumber:countryCodes:
     @brief Designated initializer.
     @param nibNameOrNil The name of the nib file to associate with the view controller.
     @param nibBundleOrNil The bundle in which to search for the nib file.
     @param authUI The @c FUIAuth instance that manages this view controller.
     @param phoneNumber The phone number which is being verifying.
+    @param countryCodes Available country codes For the view controller to use.  If the argument is
+                        nil, the default @c FUICountryCodes will be used.
  */
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil
                          authUI:(FUIAuth *)authUI
-                    phoneNumber:(nullable NSString *)phoneNumber NS_DESIGNATED_INITIALIZER;
+                    phoneNumber:(nullable NSString *)phoneNumber
+                   countryCodes:(nullable FUICountryCodes *)countryCodes NS_DESIGNATED_INITIALIZER;
 @end
 
 NS_ASSUME_NONNULL_END

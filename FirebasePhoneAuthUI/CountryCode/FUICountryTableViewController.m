@@ -111,9 +111,9 @@ NS_ASSUME_NONNULL_BEGIN
   FUICountryCodeInfo* countryCodeInfo;
   NSInteger row = [self cumulativeRowForTableView:tableView indexPath:indexPath];
   if ([self isSearchActive]) {
-    countryCodeInfo = [self.searchResults countryCodeInfoForRow:row];
+    countryCodeInfo = [self.searchResults countryCodeInfoAtIndex:row];
   } else {
-    countryCodeInfo = [self.countryCodes countryCodeInfoForRow:row];
+    countryCodeInfo = [self.countryCodes countryCodeInfoAtIndex:row];
   }
 
   if (countryCodeInfo) {
@@ -143,9 +143,9 @@ NS_ASSUME_NONNULL_BEGIN
 
   FUICountryCodeInfo *selectedCountry;
   if ([self isSearchActive]) {
-    selectedCountry = [self.searchResults countryCodeInfoForRow:row];
+    selectedCountry = [self.searchResults countryCodeInfoAtIndex:row];
   } else {
-    selectedCountry = [self.countryCodes countryCodeInfoForRow:row];
+    selectedCountry = [self.countryCodes countryCodeInfoAtIndex:row];
   }
   [self.delegate didSelectCountry:selectedCountry];
 

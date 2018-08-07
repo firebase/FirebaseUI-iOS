@@ -33,6 +33,22 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI NS_DESIGNATED_INITIALIZER;
 
+/** @fn initWithAuthUI:whitelistedCountries:
+    @param authUI The @c FUIAuth instance that manages controllers of this provider.
+    @param countries A set of whitelisted country codes. Country codes are in NSString format, and
+           are either ISO (alpha-2) or E164 formatted.
+ */
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI
+          whitelistedCountries:(NSSet<NSString *> *)countries;
+
+/** @fn initWithAuthUI:blacklistedCountries:
+    @param authUI The @c FUIAuth instance that manages controllers of this provider.
+    @param countries A set of blacklisted country codes. Country codes are in NSString format, and
+           are either ISO (alpha-2) or E164 formatted.
+ */
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI
+          blacklistedCountries:(NSSet<NSString *> *)countries;
+
 /** @fn signInWithPresentingViewController:
     @brief Signs in with phone auth provider.
         @see FUIAuthDelegate.authUI:didSignInWithAuthDataResult:error: for method callback.

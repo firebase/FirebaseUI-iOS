@@ -15,9 +15,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FUICountryCodes.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@class FUICountryCodeInfo;
+@class FUICountryCodes;
 
 FOUNDATION_EXPORT NSString * const FUIPhoneNumberValidationErrorDomain;
 
@@ -27,30 +27,32 @@ typedef NS_ENUM(NSInteger, FUIPhoneNumberValidationError) {
     FUIPhoneNumberValidationErrorMissingNumber = 2,
 };
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** Encapsulates a phone number with the raw and the normalized representations */
 @interface FUIPhoneNumber : NSObject
 
-@property (nonatomic, readonly) FUICountryCodeInfo *countryCode;
-@property (nonatomic, copy, readonly) NSString *rawPhoneNumber;
-@property (nonatomic, copy, readonly) NSString *normalizedPhoneNumber;
+@property(nonatomic, readonly) FUICountryCodeInfo *countryCode;
+@property(nonatomic, copy, readonly) NSString *rawPhoneNumber;
+@property(nonatomic, copy, readonly) NSString *normalizedPhoneNumber;
 
 /** @fn initWithNormalizedPhoneNumber:
     @brief Attempts to parse the given phone number into a raw phone number and country code.
         Parse behavior:
           If given phone number starts with a '+' character, then look for the country code matching
           the prefix of the number.
-        Otherwise use the normalized number as the raw number, and find the country code using the
-            device locale.
+        Otherwise use the normalized number as the raw number, and use the default country code.
     @param normalizedPhoneNumber   (required) A phone number string that will be parsed into
         a raw phone number and country code.
-    @return object or nil if any of the required parameters is nil.
+    @param countryCodes   (required) The @c FUICountryCodes object that contains all the available
+        country codes.
 */
-- (instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber;
+- (instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber
+                                 countryCodes:(FUICountryCodes *)countryCodes;
 
 /** @fn initWithRawPhoneNumber:countryCode:
     @param rawPhoneNumber           (required) The raw phone number without country code
     @param countryCode              (required) The country code information
-    @return object or nil if any of the required parameters is nil.
 */
 - (instancetype)initWithRawPhoneNumber:(NSString *)rawPhoneNumber
                            countryCode:(FUICountryCodeInfo *)countryCode;
@@ -60,7 +62,6 @@ typedef NS_ENUM(NSInteger, FUIPhoneNumberValidationError) {
         if null or empty it will be computed ('+' + rawCountryCode + rawPhoneNumber)
     @param rawPhoneNumber           (required) The raw phone number without country code
     @param countryCode              (required) The country code information
-    @return object or nil if any of the required parameters is nil.
 */
 - (instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber
                                rawPhoneNumber:(NSString *)rawPhoneNumber
@@ -74,6 +75,7 @@ typedef NS_ENUM(NSInteger, FUIPhoneNumberValidationError) {
     @return True if phone number format is valid.
 */
 - (BOOL)validate:(NSError *__autoreleasing _Nullable *_Nullable)errorRef;
+
 @end
 
 NS_ASSUME_NONNULL_END
