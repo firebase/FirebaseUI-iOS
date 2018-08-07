@@ -16,17 +16,20 @@
 
 #import "FUIPhoneNumber.h"
 
-NS_ASSUME_NONNULL_BEGIN
+#import "FUICountryCodes.h"
 
 NSString * const FUIPhoneNumberValidationErrorDomain = @"FUIPhoneNumberValidationErrorDomain";
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation FUIPhoneNumber
 
-- (instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber {
+- (instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber
+                                 countryCodes:(FUICountryCodes *)countryCodes {
   NSAssert(normalizedPhoneNumber, @"normalizedPhoneNumber can't be nil");
   NSString *rawPhoneNumber;
-  FUICountryCodes *codes = [[FUICountryCodes alloc] init];
-  FUICountryCodeInfo *countryCode = [codes countryCodeInfoForPhoneNumber:normalizedPhoneNumber];
+  FUICountryCodeInfo *countryCode =
+      [countryCodes countryCodeInfoForPhoneNumber:normalizedPhoneNumber];
 
   if (countryCode) {
     // Add 1 for the '+' character
@@ -37,14 +40,14 @@ NSString * const FUIPhoneNumberValidationErrorDomain = @"FUIPhoneNumberValidatio
   }
   if (!rawPhoneNumber) {
     rawPhoneNumber = normalizedPhoneNumber;
-    countryCode = [codes countryCodeInfoFromDeviceLocale];
+    countryCode = [countryCodes defaultCountryCodeInfo];
   }
   return [self initWithRawPhoneNumber:rawPhoneNumber countryCode:countryCode];
 }
 
 - (instancetype)initWithNormalizedPhoneNumber:(NSString *)normalizedPhoneNumber
-                                        rawPhoneNumber:(NSString *)rawPhoneNumber
-                                           countryCode:(FUICountryCodeInfo *)countryCode {
+                               rawPhoneNumber:(NSString *)rawPhoneNumber
+                                  countryCode:(FUICountryCodeInfo *)countryCode {
   NSAssert(normalizedPhoneNumber, @"normalizedPhoneNumber can't be nil");
   NSAssert(rawPhoneNumber, @"rawPhoneNumber can't be nil");
   NSAssert(countryCode, @"countryCode can't be nil");

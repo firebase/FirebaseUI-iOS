@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
   NSInteger countriesInSection = 0;
   for (NSInteger row = 0; row < self.countryCodes.count; row++) {
     NSString* localizedCountryName =
-        [self.countryCodes countryCodeInfoForRow:row].localizedCountryName;
+        [self.countryCodes countryCodeInfoAtIndex:row].localizedCountryName;
     BOOL countryNameIsInBetweenTitles =
         ([sectionTitle localizedCaseInsensitiveCompare:localizedCountryName] == NSOrderedAscending
              && [nextSectionTitle localizedCaseInsensitiveCompare:localizedCountryName] ==
