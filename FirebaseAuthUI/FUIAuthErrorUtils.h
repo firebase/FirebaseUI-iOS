@@ -31,17 +31,19 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSError *)errorWithCode:(FUIAuthErrorCode)code userInfo:(nullable NSDictionary *)userInfo;
 
-/** @fn userCancelledSignIn
+/** @fn userCancelledSignInError
     @brief Constructs an @c NSError with the @c FUIAuthErrorCodeUserCancelledSignIn code.
  */
 + (NSError *)userCancelledSignInError;
 
-/** @fn userCancelledSignIn
+/** @fn mergeConflictErrorWithUserInfo:underlyingError:
     @brief Constructs an @c NSError with the @c FUIAuthErrorCodeMergeConflict code.
     @param userInfo The userInfo dictionary to add to the NSError object.
+    @param underlyingError The error that was raised by FirebaseAuth while merging accounts.
     @return The merge conflict error.
  */
-+ (NSError *)mergeConflictErrorWithUserInfo:(NSDictionary *)userInfo;
++ (NSError *)mergeConflictErrorWithUserInfo:(NSDictionary *)userInfo
+                            underlyingError:(nullable NSError *)underlyingError;
 
 /** @fn providerErrorWithUnderlyingError:providerID:
     @brief Constructs an @c NSError with the @c FUIAuthErrorCodeProviderError code and a populated

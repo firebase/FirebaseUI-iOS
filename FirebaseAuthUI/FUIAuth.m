@@ -24,6 +24,7 @@
 #import <FirebaseAuth/FirebaseAuth.h>
 #import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthErrors.h"
+#import "FUIAuthErrorUtils.h"
 #import "FUIAuthPickerViewController.h"
 #import "FUIAuthStrings.h"
 #import "FUIEmailEntryViewController.h"
@@ -215,8 +216,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
     };
 
     // Check for the presence of an anonymous user and whether automatic upgrade is enabled.
-    if (self.auth.currentUser.isAnonymous &&
-        [FUIAuth defaultAuthUI].shouldAutoUpgradeAnonymousUsers) {
+    if (self.auth.currentUser.isAnonymous && self.shouldAutoUpgradeAnonymousUsers) {
       [self.auth.currentUser
           linkAndRetrieveDataWithCredential:credential
                                  completion:^(FIRAuthDataResult *_Nullable authResult,
@@ -233,9 +233,8 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
             NSDictionary *userInfo = @{
               FUIAuthCredentialKey : newCredential,
             };
-            NSError *mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
-                                                      code:FUIAuthErrorCodeMergeConflict
-                                                  userInfo:userInfo];
+            NSError *mergeError = [FUIAuthErrorUtils mergeConflictErrorWithUserInfo:userInfo
+                                                                    underlyingError:error];
             completeSignInBlock(authResult, mergeError);
           } else if (error.code == FIRAuthErrorCodeEmailAlreadyInUse) {
             if ([providerUI respondsToSelector:@selector(email)]) {
@@ -256,9 +255,8 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                   NSDictionary *userInfo = @{
                     FUIAuthCredentialKey : credential,
                   };
-                  NSError *mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
-                                                            code:FUIAuthErrorCodeMergeConflict
-                                                        userInfo:userInfo];
+                  NSError *mergeError = [FUIAuthErrorUtils mergeConflictErrorWithUserInfo:userInfo
+                                                                          underlyingError:nil];
                   completeSignInBlock(nil, mergeError);
                   return;
                 }
@@ -275,9 +273,8 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                   NSDictionary *userInfo = @{
                     FUIAuthCredentialKey : newCredential,
                   };
-                  NSError *mergeError = [NSError errorWithDomain:FUIAuthErrorDomain
-                                                             code:FUIAuthErrorCodeMergeConflict
-                                                         userInfo:userInfo];
+                  NSError *mergeError = [FUIAuthErrorUtils mergeConflictErrorWithUserInfo:userInfo
+                                                                          underlyingError:nil];
                   completeSignInBlock(authResult, mergeError);
                 }];
               }];
