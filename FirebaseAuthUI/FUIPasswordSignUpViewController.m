@@ -150,8 +150,7 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
   [self incrementActivity];
 
   // Check for the presence of an anonymous user and whether automatic upgrade is enabled.
-  if (self.auth.currentUser.isAnonymous &&
-        [FUIAuth defaultAuthUI].shouldAutoUpgradeAnonymousUsers) {
+  if (self.auth.currentUser.isAnonymous && self.authUI.shouldAutoUpgradeAnonymousUsers) {
     FIRAuthCredential *credential =
         [FIREmailAuthProvider credentialWithEmail:email password:password];
     [self.auth.currentUser
