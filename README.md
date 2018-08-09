@@ -95,9 +95,8 @@ Go to `Project Settings -> Info tab -> Url Types` and update values for:
 	+ `fb{your-app-id}` (put Facebook App Id)
 	+ `twitterkit-{consumer-key}` (put Twitter App Consumer key)
 
-1. Update `Info.plist` with Twitter and Tacebook configuration values
+1. Update `Info.plist` with Facebook configuration values
 	+ `FacebookAppID -> {your-app-id}` (put Facebook App Id)
-	+ `Fabric -> Kits -> KitInfo -> consumerKey / consumerSecret` (put Twitter App consumer key/secret). Please note that's it's not secure to store the `consumerSecret` in the app itself.
 
 1. Enable Keychain Sharing.<br>
 Facebook SDK requires keychain sharing.<br>
