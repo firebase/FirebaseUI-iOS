@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,12 +27,13 @@
                         <rect key="frame" x="0.0" y="896.5" width="375" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="By tapping Verify Phone Number, an SMS may be sent. Message &amp; data rates may apply." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGX-Qm-s2k" userLabel="Tos View" customClass="FUIPrivacyAndTermsOfServiceView">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="By tapping Verify Phone Number, an SMS may be sent. Message &amp; data rates may apply." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kGX-Qm-s2k" userLabel="Tos View" customClass="FUIPrivacyAndTermsOfServiceView">
                                 <rect key="frame" x="10" y="0.0" width="355" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
