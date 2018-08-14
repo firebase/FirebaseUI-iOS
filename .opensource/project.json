@@ -1,0 +1,37 @@
+{
+    "name": "FirebaseUI for iOS",
+    "parent": "firebaseui",
+    "type": "library",
+
+    "platforms": [
+      "iOS"
+    ],
+
+    "content": "README.md",
+
+    // These are relative paths in the same repo,
+    // each of these paths must have a .opensource/project.json
+    "subprojects": [],
+
+    // Other markdown pages that should be rendered nicely
+    "pages" : [
+        "FirebaseAuthUI/README.md",
+        "FirebaseDatabaseUI/README.md",
+        "FirebaseStorageUI/README.md",
+        "FirebaseFirestoreUI/README.md"
+    ],
+
+    // Related projects on Github, in the format $owner/$repo[/$subproject]
+    // where subproject is optional.
+    "related": [
+      "firebase/firebaseui-android",
+      "firebase/firebaseui-web"
+    ],
+
+    "tags": [
+      "firebase-auth",
+      "firebase-database",
+      "firebase-firestore",
+      "firebase-storage"
+    ]
+  }
