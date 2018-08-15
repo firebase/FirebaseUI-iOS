@@ -241,6 +241,7 @@ You can customize all email/password screens, including but not limited to:
 - Hiding the top `UINavigationBar`
 - Adding a `Cancel` button
 - Use a UI view other than `UITableView`
+
 Things that are not customizable:
 - `UIAlertController` popups (showing error labels instead)
 - Modifying the screen flow (combining screens or skipping particular screens)
