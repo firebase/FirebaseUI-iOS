@@ -48,7 +48,7 @@ typedef void (^FIRAuthProviderSignInCompletionBlock) (
 /** @property providerID
     @brief A unique identifier for the provider.
  */
-@property(nonatomic, copy, readonly) NSString *providerID;
+@property(nonatomic, copy, readonly, nullable) NSString *providerID;
 
 /** @property shortName
     @brief A short display name for the provider.
@@ -119,14 +119,14 @@ __attribute__((deprecated("This is deprecated API and will be removed in a futur
 /** @property accessToken
     @brief User Access Token obtained during sign in.
  */
-@property(nonatomic, copy, readonly) NSString *accessToken;
+@property(nonatomic, copy, readonly, nullable) NSString *accessToken;
 
 @optional;
 
 /** @property idToken
     @brief User Id Token obtained during sign in. Not all providers can return, thus it's optional.
  */
-@property(nonatomic, copy, readonly) NSString *idToken;
+@property(nonatomic, copy, readonly, nullable) NSString *idToken;
 
 /** @fn email
     @brief The email address associated with this provider, if any.

@@ -24,12 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FUIAnonymousAuth : NSObject <FUIAuthProvider>
 
 /** @fn init
- @brief Please use @c initWithAuthUI: .
+    @brief Initialize the instance with the default AuthUI. 
  */
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)init;
 
 /** @fn initWithAuthUI:
- @param authUI The @c FUIAuth instance that manages controllers of this provider.
+    @param authUI The @c FUIAuth instance that manages controllers of this provider.
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI NS_DESIGNATED_INITIALIZER;
 

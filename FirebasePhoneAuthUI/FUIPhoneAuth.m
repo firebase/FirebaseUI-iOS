@@ -75,21 +75,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - FUIAuthProvider
 
-- (NSString *)providerID {
+- (nullable NSString *)providerID {
   return FIRPhoneAuthProviderID;
 }
 
 /** @fn accessToken:
     @brief Phone Auth token is matched by FirebaseUI User Access Token
  */
-- (NSString *)accessToken {
+- (nullable NSString *)accessToken {
   return nil;
 }
 
 /** @fn idToken:
     @brief Phone Auth Token Secret is matched by FirebaseUI User Id Token
  */
-- (NSString *)idToken {
+- (nullable NSString *)idToken {
   return nil;
 }
 

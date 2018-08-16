@@ -49,6 +49,10 @@ NS_ASSUME_NONNULL_BEGIN
   UIViewController *_presentingViewController;
 }
 
+- (instancetype)init {
+  return [self initWithAuthUI:[FUIAuth defaultAuthUI]];
+}
+
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
   if (self = [super init]) {
     _authUI = authUI;
@@ -58,21 +62,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - FUIAuthProvider
 
-- (NSString *)providerID {
+- (nullable NSString *)providerID {
   return nil;
 }
 
 /** @fn accessToken:
     @brief Anonymous Auth token is matched by FirebaseUI User Access Token
  */
-- (NSString *)accessToken {
+- (nullable NSString *)accessToken {
   return nil;
 }
 
 /** @fn idToken:
     @brief Anonymous Auth Token Secret is matched by FirebaseUI User Id Token
  */
-- (NSString *)idToken {
+- (nullable NSString *)idToken {
   return nil;
 }
 
@@ -111,7 +115,7 @@ NS_ASSUME_NONNULL_BEGIN
       presentingViewController:(nullable UIViewController *)presentingViewController
                     completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
   [_authUI.auth signInAnonymouslyWithCompletion:^(FIRAuthDataResult * _Nullable authResult,
-                                                    NSError * _Nullable error) {
+                                                  NSError * _Nullable error) {
     if (error) {
       [FUIAuthBaseViewController showAlertWithMessage:error.localizedDescription
                              presentingViewController:presentingViewController];
