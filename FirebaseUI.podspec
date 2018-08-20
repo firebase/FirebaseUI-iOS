@@ -62,6 +62,17 @@ Pod::Spec.new do |s|
     auth.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseAuthUI' }
   end
 
+  s.subspec 'Anonymous' do |anonymous|
+    anonymous.platform = :ios, '8.0'
+    anonymous.public_header_files = 'FirebaseAnonymousAuthUI/*.h'
+    anonymous.source_files = 'FirebaseAnonymousAuthUI/*.{h,m}'
+    anonymous.dependency 'FirebaseUI/Auth'
+    anonymous.resource_bundle = {
+      'FirebaseAnonymousAuthUI' => ['FirebaseAnonymousAuthUI/**/*.{png,lproj}']
+    }
+    anonymous.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseAnonymousAuthUI' }
+  end
+
   s.subspec 'Facebook' do |facebook|
     facebook.platform = :ios, '8.0'
     facebook.public_header_files = 'FirebaseFacebookAuthUI/*.h'

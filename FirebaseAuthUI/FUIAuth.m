@@ -215,6 +215,18 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       }
     };
 
+    // Test if it's an anonymous login.
+    if (self.auth.currentUser.isAnonymous && !credential) {
+      if (result) {
+        result(self.auth.currentUser, nil);
+      };
+      // Hide Auth Picker Controller which was presented modally.
+      if (isAuthPickerShown && presentingViewController.presentingViewController) {
+        [presentingViewController dismissViewControllerAnimated:YES completion:nil];
+      }
+      return;
+    }
+
     // Check for the presence of an anonymous user and whether automatic upgrade is enabled.
     if (self.auth.currentUser.isAnonymous && self.shouldAutoUpgradeAnonymousUsers) {
       [self.auth.currentUser
