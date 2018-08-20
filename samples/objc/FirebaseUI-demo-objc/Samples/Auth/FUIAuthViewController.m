@@ -42,7 +42,8 @@ NS_ENUM(NSUInteger, FIRProviders) {
   kIDPGoogle,
   kIDPFacebook,
   kIDPTwitter,
-  kIDPPhone
+  kIDPPhone,
+  kIDPAnonymous
 };
 
 static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/terms/";
@@ -111,6 +112,10 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
   [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPPhone
+                                                          inSection:kSectionsProviders]
+                              animated:NO
+                        scrollPosition:UITableViewScrollPositionNone];
+  [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPAnonymous
                                                           inSection:kSectionsProviders]
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
@@ -338,7 +343,8 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
     [NSIndexPath indexPathForRow:kIDPGoogle inSection:kSectionsProviders],
     [NSIndexPath indexPathForRow:kIDPFacebook inSection:kSectionsProviders],
     [NSIndexPath indexPathForRow:kIDPTwitter inSection:kSectionsProviders],
-    [NSIndexPath indexPathForRow:kIDPPhone inSection:kSectionsProviders]
+    [NSIndexPath indexPathForRow:kIDPPhone inSection:kSectionsProviders],
+    [NSIndexPath indexPathForRow:kIDPAnonymous inSection:kSectionsProviders]
   ];
   return [self getListOfIDPs:selectedRows useCustomScopes:NO];
 }
@@ -372,6 +378,9 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
           break;
         case kIDPPhone:
           provider = [[FUIPhoneAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
+          break;
+        case kIDPAnonymous:
+          provider = [[FUIAnonymousAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
           break;
 
         default:

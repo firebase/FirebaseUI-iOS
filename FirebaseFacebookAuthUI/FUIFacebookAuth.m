@@ -84,18 +84,18 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 
 #pragma mark - FUIAuthProvider
 
-- (NSString *)providerID {
+- (nullable NSString *)providerID {
   return FIRFacebookAuthProviderID;
 }
 
-- (NSString *)accessToken {
+- (nullable NSString *)accessToken {
   return [FBSDKAccessToken currentAccessToken].tokenString;
 }
 
 /** @fn idToken:
     @brief Facebook doesn't provide User Id Token during sign in flow
  */
-- (NSString *)idToken {
+- (nullable NSString *)idToken {
   return nil;
 }
 

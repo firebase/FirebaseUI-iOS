@@ -76,15 +76,15 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 
 #pragma mark - FUIAuthProvider
 
-- (NSString *)providerID {
+- (nullable NSString *)providerID {
   return FIRGoogleAuthProviderID;
 }
 
-- (NSString *)accessToken {
+- (nullable NSString *)accessToken {
   return [GIDSignIn sharedInstance].currentUser.authentication.accessToken;
 }
 
-- (NSString *)idToken {
+- (nullable NSString *)idToken {
   return [GIDSignIn sharedInstance].currentUser.authentication.idToken;
 }
 
