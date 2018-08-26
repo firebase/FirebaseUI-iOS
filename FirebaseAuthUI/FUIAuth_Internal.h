@@ -32,10 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
     @brief Invokes the auth UI operation callback.
     @param operation The executed operation.
     @param error The error which occurred, if any.
- // TODO: Assistant Settings will be released later.
+ */
 - (void)invokeOperationCallback:(FUIAccountSettingsOperationType)operation
                           error:(NSError *_Nullable)error;
- */
+
 
 /** @fn providerWithID:
     @brief Returns first provider (if it exists) with specified provider ID.
