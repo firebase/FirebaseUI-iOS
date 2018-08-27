@@ -42,7 +42,9 @@ Pod::Spec.new do |s|
 
   s.subspec 'Auth' do |auth|
     auth.platform = :ios, '8.0'
-    auth.public_header_files = ['FirebaseAuthUI/FirebaseAuthUI.h',
+    auth.public_header_files = ['FirebaseAuthUI/AccountManagement/FUIAccountSettingsOperationType.h',
+                                'FirebaseAuthUI/AccountManagement/FUIAccountSettingsViewController.h',
+                                'FirebaseAuthUI/FirebaseAuthUI.h',
                                 'FirebaseAuthUI/FUIAuth.h',
                                 'FirebaseAuthUI/FUIAuthBaseViewController.h',
                                 'FirebaseAuthUI/FUIAuthErrors.h',
