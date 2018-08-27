@@ -337,12 +337,9 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 }
 
 - (void)showAccountManager {
-  /*
-   // TODO: Assistant Settings will be released later.
   UIViewController *controller =
       [[FUIAccountSettingsViewController alloc] initWithAuthUI:self.authUIMock];
   [self.navigationController pushViewController:controller animated:YES];
-   */
 }
 
 - (void)prepareForAccountManagerWithPasswordWithoutLinkedAccount {

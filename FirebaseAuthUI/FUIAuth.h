@@ -16,6 +16,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "FUIAccountSettingsOperationType.h"
 #import "FUIAuthProvider.h"
 
 @class FIRAuth;
@@ -77,11 +78,10 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
     @param authUI The @c FUIAuth instance sending the message.
     @param operation The operation type that was just completed.
     @param error The error that occurred during operation, if any.
- // TODO: Assitant Settings will be released later.
- - (void)authUI:(FUIAuth *)authUI
+*/
+- (void)authUI:(FUIAuth *)authUI
     didFinishOperation:(FUIAccountSettingsOperationType)operation
                  error:(nullable NSError *)error;
- */
 
 /** @fn authPickerViewControllerForAuthUI:
     @brief Sent to the receiver to ask for an instance of @c FUIAuthPickerViewController subclass

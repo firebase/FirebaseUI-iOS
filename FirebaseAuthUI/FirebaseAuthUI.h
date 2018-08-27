@@ -22,11 +22,10 @@ FOUNDATION_EXPORT double FirebaseAuthUIVersionNumber;
 //! Project version string for FirebaseAuthUI.
 FOUNDATION_EXPORT const unsigned char FirebaseAuthUIVersionString[];
 
-/*
- // Account settings will be released later.
+
 #import "FUIAccountSettingsOperationType.h"
 #import "FUIAccountSettingsViewController.h"
- */
+
 #import "FUIAuth.h"
 #import "FUIAuthBaseViewController.h"
 #import "FUIAuthErrorUtils.h"

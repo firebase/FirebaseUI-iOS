@@ -202,7 +202,7 @@
 		C329B1791DAC121200059A13 /* FirebaseAuthUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8DCC4FC11D678CDC00B0D3C4 /* FirebaseAuthUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C329B17C1DAC149B00059A13 /* FirebaseUI.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D2A84A61D678B2B0058DF04 /* FirebaseUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C329B1AE1DAC5D0B00059A13 /* FirebaseUISampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B15F1DA8694B00059A13 /* FirebaseUISampleUITests.m */; };
-		C33B0F3D1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h in Headers */ = {isa = PBXBuildFile; fileRef = C33B0F3C1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h */; };
+		C33B0F3D1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h in Headers */ = {isa = PBXBuildFile; fileRef = C33B0F3C1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C343D29B1E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = C343D2991E96ADD400DD9C61 /* FUIPhoneAuth_Internal.h */; };
 		C343D2A01E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C343D29E1E96CFD400DD9C61 /* FUIPhoneAuthStrings.h */; };
 		C343D2A11E96CFD400DD9C61 /* FUIPhoneAuthStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C343D29E1E96CFD400DD9C61 /* FUIPhoneAuthStrings.h */; };
@@ -250,7 +250,7 @@
 		C3BE738C1E625D9F00BCD147 /* FUIStaticContentTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BE73891E625D9F00BCD147 /* FUIStaticContentTableViewController.h */; };
 		C3BE738D1E625D9F00BCD147 /* FUIStaticContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE738A1E625D9F00BCD147 /* FUIStaticContentTableViewController.m */; };
 		C3BE738E1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE738B1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib */; };
-		C3BE73BE1E64D1D000BCD147 /* FUIAccountSettingsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BE73AF1E64D1D000BCD147 /* FUIAccountSettingsViewController.h */; };
+		C3BE73BE1E64D1D000BCD147 /* FUIAccountSettingsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BE73AF1E64D1D000BCD147 /* FUIAccountSettingsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3BE73BF1E64D1D000BCD147 /* FUIAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BE73B01E64D1D000BCD147 /* FUIAccountSettingsViewController.m */; };
 		C3BE73C11E64D1D000BCD147 /* FUIAccountSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE73B11E64D1D000BCD147 /* FUIAccountSettingsViewController.xib */; };
 		C3BE73D11E64D1D000BCD147 /* FUIInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE73BC1E64D1D000BCD147 /* FUIInputTableViewCell.xib */; };
@@ -2185,7 +2185,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DA941721D678F5400CD3685 /* FUIAuthPickerViewController.h in Headers */,
-				C33B0F3D1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h in Headers */,
 				C3CA19A11E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.h in Headers */,
 				8DA941791D678F5400CD3685 /* FUIAuthBaseViewController.h in Headers */,
 				8DA941771D678F5400CD3685 /* FUIAuth.h in Headers */,
@@ -2196,13 +2195,14 @@
 				C3CA19A41E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.h in Headers */,
 				8DA9417B1D678F5400CD3685 /* FUIAuthErrors.h in Headers */,
 				C3CA19AA1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.h in Headers */,
+				C33B0F3D1E6E240A0091FF54 /* FUIAccountSettingsOperationType.h in Headers */,
 				89B5FA4620FFEB45008E50F6 /* FUIPrivacyAndTermsOfServiceView.h in Headers */,
+				C3BE73BE1E64D1D000BCD147 /* FUIAccountSettingsViewController.h in Headers */,
 				C3CA19A71E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.h in Headers */,
 				8DA9417D1D678F5400CD3685 /* FUIAuthErrorUtils.h in Headers */,
 				8DA941931D678F5400CD3685 /* FUIPasswordSignUpViewController.h in Headers */,
 				C3BE738C1E625D9F00BCD147 /* FUIStaticContentTableViewController.h in Headers */,
 				8DA941881D678F5400CD3685 /* FUIAuthUtils.h in Headers */,
-				C3BE73BE1E64D1D000BCD147 /* FUIAccountSettingsViewController.h in Headers */,
 				8DA941761D678F5400CD3685 /* FUIAuth_Internal.h in Headers */,
 				8DA941901D678F5400CD3685 /* FUIPasswordSignInViewController.h in Headers */,
 				8DA941831D678F5400CD3685 /* FUIAuthTableHeaderView.h in Headers */,
@@ -3158,7 +3158,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseFirestoreUITests/Pods-FirebaseFirestoreUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -3170,7 +3170,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -3212,14 +3212,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseStorageUITests/Pods-FirebaseStorageUITests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/OCMock-iOS8.0/OCMock.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-Core/GTMSessionFetcher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMock.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3289,16 +3289,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseGoogleAuthUITests/Pods-FirebaseGoogleAuthUITests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/OCMock-iOS8.0/OCMock.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-7139d1f3/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher.default-Core/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMock.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3496,12 +3496,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseAuthUITests/Pods-FirebaseAuthUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-Core/GTMSessionFetcher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3696,12 +3696,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseDatabaseUITests/Pods-FirebaseDatabaseUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
