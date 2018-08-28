@@ -94,11 +94,11 @@
                                     result:resultCallback];
   });
 
-  [mockedProvider signInWithEmail:nil
-         presentingViewController:mockedController
-                       completion:^(FIRAuthCredential *_Nullable credential,
-                                    NSError *_Nullable error,
-                                    FIRAuthResultCallback _Nullable result) {
+  [mockedProvider signInWithDefaultValue:nil
+                presentingViewController:mockedController
+                              completion:^(FIRAuthCredential *_Nullable credential,
+                                           NSError *_Nullable error,
+                                           FIRAuthResultCallback _Nullable result) {
     XCTAssertEqual(credential, mockedCredential);
     XCTAssertEqual(error, mockedError);
     [expectation fulfill];
