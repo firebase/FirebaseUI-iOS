@@ -199,21 +199,6 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       }
       return;
     }
-    // Block to complete sign-in
-    void (^completeSignInBlock)(FIRAuthDataResult *, NSError *) = ^(FIRAuthDataResult *authResult,
-                                                                    NSError *error) {
-      if (result) {
-        result(authResult.user, nil);
-      }
-      // Hide Auth Picker Controller which was presented modally.
-      if (isAuthPickerShown && presentingViewController.presentingViewController) {
-        [presentingViewController dismissViewControllerAnimated:YES completion:^{
-          [self invokeResultCallbackWithAuthDataResult:authResult error:error];
-        }];
-      } else {
-        [self invokeResultCallbackWithAuthDataResult:authResult error:error];
-      }
-    };
 
     // Test if it's an anonymous login.
     if (self.auth.currentUser.isAnonymous && !credential) {
@@ -229,78 +214,10 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
 
     // Check for the presence of an anonymous user and whether automatic upgrade is enabled.
     if (self.auth.currentUser.isAnonymous && self.shouldAutoUpgradeAnonymousUsers) {
-      [self.auth.currentUser
-          linkAndRetrieveDataWithCredential:credential
-                                 completion:^(FIRAuthDataResult *_Nullable authResult,
-                                              NSError * _Nullable error) {
-        if (error) {
-          // Check for "credential in use" conflict error and handle appropriately.
-          if (error.code == FIRAuthErrorCodeCredentialAlreadyInUse) {
-            FIRAuthCredential *newCredential = credential;
-            // Check for and handle special case for Phone Auth Provider.
-            if (providerUI.providerID == FIRPhoneAuthProviderID) {
-              // Obtain temporary Phone Auth credential.
-              newCredential = error.userInfo[FIRAuthUpdatedCredentialKey];
-            }
-            NSDictionary *userInfo = @{
-              FUIAuthCredentialKey : newCredential,
-            };
-            NSError *mergeError = [FUIAuthErrorUtils mergeConflictErrorWithUserInfo:userInfo
-                                                                    underlyingError:error];
-            completeSignInBlock(authResult, mergeError);
-          } else if (error.code == FIRAuthErrorCodeEmailAlreadyInUse) {
-            if ([providerUI respondsToSelector:@selector(email)]) {
-              // Link federated providers
-              [self signInWithEmailHint:[providerUI email]
-               presentingViewController:presentingViewController
-                          originalError:error
-                             completion:^(FIRAuthDataResult *_Nullable authResult,
-                                          NSError *_Nullable error,
-                                          FIRAuthCredential *_Nullable existingCredential) {
-                if (error) {
-                  completeSignInBlock(nil, error);
-                  return;
-                }
-
-                if (![authResult.user.email isEqualToString:[providerUI email]]
-                    && credential) {
-                  NSDictionary *userInfo = @{
-                    FUIAuthCredentialKey : credential,
-                  };
-                  NSError *mergeError = [FUIAuthErrorUtils mergeConflictErrorWithUserInfo:userInfo
-                                                                          underlyingError:nil];
-                  completeSignInBlock(nil, mergeError);
-                  return;
-                }
-
-                [authResult.user linkAndRetrieveDataWithCredential:credential
-                                                        completion:^(FIRAuthDataResult
-                                                                         *_Nullable authResult,
-                                                                     NSError *_Nullable error) {
-                  if (error) {
-                    completeSignInBlock(nil, error);
-                    return;
-                  }
-                  FIRAuthCredential *newCredential = credential;
-                  NSDictionary *userInfo = @{
-                    FUIAuthCredentialKey : newCredential,
-                  };
-                  NSError *mergeError = [FUIAuthErrorUtils mergeConflictErrorWithUserInfo:userInfo
-                                                                          underlyingError:nil];
-                  completeSignInBlock(authResult, mergeError);
-                }];
-              }];
-            }
-          } else {
-            if (!isAuthPickerShown || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
-              [self invokeResultCallbackWithAuthDataResult:nil error:error];
-            }
-            if (result) {
-              result(nil, error);
-            }
-          }
-        }
-      }];
+      [self autoUpgradeAccountWithProviderUI:providerUI
+                    presentingViewController:presentingViewController
+                                  credential:credential
+                              resultCallback:result];
     } else {
       [self.auth signInAndRetrieveDataWithCredential:credential
                                           completion:^(FIRAuthDataResult *_Nullable authResult,
@@ -320,10 +237,126 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
           [self invokeResultCallbackWithAuthDataResult:nil error:error];
           return;
         }
-        completeSignInBlock(authResult, nil);
+        [self completeSignInWithResult:authResult
+                                 error:nil
+              presentingViewController:presentingViewController
+                              callback:result];
       }];
     }
   }];
+}
+
+- (void)autoUpgradeAccountWithProviderUI:(id<FUIAuthProvider>)providerUI
+                presentingViewController:(FUIAuthBaseViewController *)presentingViewController
+                              credential:(nullable FIRAuthCredential *)credential
+                          resultCallback:(nullable FIRAuthResultCallback)callback {
+  [self.auth.currentUser
+      linkAndRetrieveDataWithCredential:credential
+                             completion:^(FIRAuthDataResult *_Nullable authResult,
+                                          NSError * _Nullable error) {
+    if (error) {
+      // Check for "credential in use" conflict error and handle appropriately.
+      if (error.code == FIRAuthErrorCodeCredentialAlreadyInUse) {
+        FIRAuthCredential *newCredential = credential;
+        // Check for and handle special case for Phone Auth Provider.
+        if (providerUI.providerID == FIRPhoneAuthProviderID) {
+          // Obtain temporary Phone Auth credential.
+          newCredential = error.userInfo[FIRAuthUpdatedCredentialKey];
+        }
+        NSDictionary *userInfo = @{
+          FUIAuthCredentialKey : newCredential,
+        };
+        NSError *mergeError = [FUIAuthErrorUtils mergeConflictErrorWithUserInfo:userInfo
+                                                                underlyingError:error];
+        [self completeSignInWithResult:authResult
+                                 error:mergeError
+              presentingViewController:presentingViewController
+                              callback:callback];
+      } else if (error.code == FIRAuthErrorCodeEmailAlreadyInUse) {
+        if ([providerUI respondsToSelector:@selector(email)]) {
+          // Link federated providers
+          [self signInWithEmailHint:[providerUI email]
+           presentingViewController:presentingViewController
+                      originalError:error
+                         completion:^(FIRAuthDataResult *_Nullable authResult,
+                                      NSError *_Nullable emailError,
+                                      FIRAuthCredential *_Nullable existingCredential) {
+            if (emailError) {
+              [self completeSignInWithResult:nil
+                                       error:emailError
+                    presentingViewController:presentingViewController
+                                    callback:callback];
+              return;
+            }
+
+            if (![authResult.user.email isEqualToString:[providerUI email]]
+                && credential) {
+              NSDictionary *userInfo = @{
+                FUIAuthCredentialKey : credential,
+              };
+              NSError *mergeError = [FUIAuthErrorUtils mergeConflictErrorWithUserInfo:userInfo
+                                                                      underlyingError:error];
+              [self completeSignInWithResult:nil
+                                       error:mergeError
+                    presentingViewController:presentingViewController
+                                    callback:callback];
+              return;
+            }
+
+            [authResult.user linkAndRetrieveDataWithCredential:credential
+                                                    completion:^(FIRAuthDataResult *authResult,
+                                                                 NSError *linkError) {
+              if (linkError) {
+                [self completeSignInWithResult:nil
+                                         error:linkError
+                      presentingViewController:presentingViewController
+                                      callback:callback];
+                return;
+              }
+              FIRAuthCredential *newCredential = credential;
+              NSDictionary *userInfo = @{
+                FUIAuthCredentialKey : newCredential,
+              };
+              NSError *mergeError = [FUIAuthErrorUtils mergeConflictErrorWithUserInfo:userInfo
+                                                                      underlyingError:error];
+              [self completeSignInWithResult:authResult
+                                       error:mergeError
+                    presentingViewController:presentingViewController
+                                    callback:callback];
+            }];
+          }];
+        }
+      } else {
+        BOOL isAuthPickerShown =
+            [presentingViewController isKindOfClass:[FUIAuthPickerViewController class]];
+        if (!isAuthPickerShown || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
+          [self invokeResultCallbackWithAuthDataResult:nil error:error];
+        }
+        if (callback) {
+          callback(nil, error);
+        }
+      }
+    }
+  }];
+}
+
+- (void)completeSignInWithResult:(nullable FIRAuthDataResult *)authResult
+                           error:(nullable NSError *)error
+        presentingViewController:(FUIAuthBaseViewController *)presentingViewController
+                        callback:(nullable FIRAuthResultCallback)callback {
+  BOOL isAuthPickerShown =
+      [presentingViewController isKindOfClass:[FUIAuthPickerViewController class]];
+  if (callback) {
+    callback(authResult.user, nil);
+  }
+  // Hide Auth Picker Controller which was presented modally.
+  if (isAuthPickerShown && presentingViewController.presentingViewController) {
+    [presentingViewController dismissViewControllerAnimated:YES completion:^{
+      [self invokeResultCallbackWithAuthDataResult:authResult error:error];
+    }];
+  } else {
+    [self invokeResultCallbackWithAuthDataResult:authResult error:error];
+  }
 }
 
 - (void)signInWithEmailHint:(NSString *)emailHint
