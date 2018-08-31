@@ -11,9 +11,9 @@ PODS:
   - BoringSSL/Implementation (10.0.6):
     - BoringSSL/Interface (= 10.0.6)
   - BoringSSL/Interface (10.0.6)
-  - FBSDKCoreKit (4.36.0):
+  - FBSDKCoreKit (4.35.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.36.0):
+  - FBSDKLoginKit (4.35.0):
     - FBSDKCoreKit
   - Firebase/CoreOnly (5.7.0):
     - FirebaseCore (= 5.1.2)
@@ -115,8 +115,8 @@ PODS:
     - TwitterCore (>= 3.1.0)
 
 DEPENDENCIES:
-  - FBSDKCoreKit (~> 4.0)
-  - FBSDKLoginKit (~> 4.0)
+  - FBSDKCoreKit (= 4.35.0)
+  - FBSDKLoginKit (= 4.35.0)
   - Firebase/Database
   - Firebase/Firestore
   - Firebase/Storage
@@ -159,8 +159,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
-  FBSDKCoreKit: 3b8e6570eedb443f9fc4af196a7bf39f18e3a3d8
-  FBSDKLoginKit: 8bccb6064708ab2f4251a7fc4e3b6d8d00ad91ba
+  FBSDKCoreKit: 1a5b2e3ceb5ca827a53c54aa5f4a3480efff80d2
+  FBSDKLoginKit: 00a3d65d1226852f9d76dcddff01981e5e6d9c38
   Firebase: 734a4f92957aa6c40e7ae3fda3d9359e1890aa87
   FirebaseAuth: 657a25e4be044d2d333663ebf515a861c5a59cd7
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
@@ -185,6 +185,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: bc7bd086b9b724a1d888745a054e1d0b1ecc4f3f
 
-PODFILE CHECKSUM: dd4f1d385019d5b5dee552ece14d1abf8b64bade
+PODFILE CHECKSUM: 2afea7e102f27e488095390a3a3ee4c52547f2af
 
 COCOAPODS: 1.5.3
