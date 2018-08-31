@@ -12,7 +12,6 @@
 		893D24852122014800CEF7D7 /* FUIAnonymousAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 893D247F2122014800CEF7D7 /* FUIAnonymousAuth.m */; };
 		893D24862122014800CEF7D7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 893D24802122014800CEF7D7 /* Info.plist */; };
 		893D248F212202A400CEF7D7 /* FirebaseAnonymousAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 893D248D212202A400CEF7D7 /* FirebaseAnonymousAuthUITests.m */; };
-		893D2490212202A400CEF7D7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 893D248E212202A400CEF7D7 /* Info.plist */; };
 		894ED93E212211DE00CEF7D7 /* ic_anonymous.png in Resources */ = {isa = PBXBuildFile; fileRef = 894ED93B212211DE00CEF7D7 /* ic_anonymous.png */; };
 		894ED93F212211DE00CEF7D7 /* ic_anonymous@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 894ED93C212211DE00CEF7D7 /* ic_anonymous@3x.png */; };
 		894ED940212211DE00CEF7D7 /* ic_anonymous@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 894ED93D212211DE00CEF7D7 /* ic_anonymous@2x.png */; };
@@ -2502,7 +2501,7 @@
 		8D2A849D1D678B2B0058DF04 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = FirebaseUI;
 				TargetAttributes = {
 					8D2A84A51D678B2B0058DF04 = {
@@ -2711,7 +2710,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				893D2490212202A400CEF7D7 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
