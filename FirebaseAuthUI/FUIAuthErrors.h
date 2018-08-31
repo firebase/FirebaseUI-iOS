@@ -23,14 +23,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 extern NSString *const FUIAuthErrorDomain;
 
-/** @bar FUIAuthErrorUserInfoProviderIDKey
+/** @var FUIAuthErrorUserInfoProviderIDKey
     @brief The ID of the identity provider.
  */
 extern NSString *const FUIAuthErrorUserInfoProviderIDKey;
 
-/** @bar FUIAuthCredentialKey
+/** @var FUIAuthCredentialKey
     @brief The key used to obtain the credential stored within the userInfo dictionary of the
-        error, if availalble.
+        error, if available.
  */
 extern NSString *const FUIAuthCredentialKey;
 
