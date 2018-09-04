@@ -347,7 +347,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
   BOOL isAuthPickerShown =
       [presentingViewController isKindOfClass:[FUIAuthPickerViewController class]];
   if (callback) {
-    callback(authResult.user, nil);
+    callback(authResult.user, error);
   }
   // Hide Auth Picker Controller which was presented modally.
   if (isAuthPickerShown && presentingViewController.presentingViewController) {
@@ -624,11 +624,11 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
 - (void)invokeResultCallbackWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult
                                          error:(nullable NSError *)error {
   dispatch_async(dispatch_get_main_queue(), ^{
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if ([self.delegate respondsToSelector:@selector(authUI:didSignInWithAuthDataResult:error:)]) {
       [self.delegate authUI:self didSignInWithAuthDataResult:authDataResult error:error];
     }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if ([self.delegate respondsToSelector:@selector(authUI:didSignInWithUser:error:)]) {
       [self.delegate authUI:self didSignInWithUser:authDataResult.user error:error];
     }
