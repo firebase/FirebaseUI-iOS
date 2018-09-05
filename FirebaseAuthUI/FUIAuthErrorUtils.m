@@ -32,6 +32,8 @@
   if (underlyingError != nil) {
     errorInfo[NSUnderlyingErrorKey] = underlyingError;
   }
+  errorInfo[NSLocalizedDescriptionKey] = @"Unable to merge accounts. Check the userInfo dictionary"
+      @" for the auth credential of the logged-in account.";
   return [self errorWithCode:FUIAuthErrorCodeMergeConflict userInfo:[errorInfo copy]];
 }
 

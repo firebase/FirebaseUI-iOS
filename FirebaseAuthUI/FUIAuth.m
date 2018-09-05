@@ -296,7 +296,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
               };
               NSError *mergeError = [FUIAuthErrorUtils mergeConflictErrorWithUserInfo:userInfo
                                                                       underlyingError:error];
-              [self completeSignInWithResult:nil
+              [self completeSignInWithResult:authResult
                                        error:mergeError
                     presentingViewController:presentingViewController
                                     callback:callback];
@@ -336,6 +336,11 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
           callback(nil, error);
         }
       }
+    } else {
+      [self completeSignInWithResult:authResult
+                               error:nil
+            presentingViewController:presentingViewController
+                            callback:callback];
     }
   }];
 }
