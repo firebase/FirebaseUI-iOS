@@ -319,3 +319,52 @@ parent classes. For example:
 
 Refer to the Objective-C and Swift samples for examples of how you can customize
 these views.
+
+## Handling auto-upgrade of anonymous users
+
+Enabling auto-upgrade of anonymous users increases the complexity of your auth
+flow by adding several more edge cases that need to be handled. As opposed to
+normal auth, which only involves one step, auto-upgrade presents three steps
+with four possibilities total:
+- At app launch, anonymously authenticate the user. User state can be
+  accumulated on the anonymous user and linked to the non-anonymous account
+  later.
+- At some point in your app, present the auth flow and authenticate the user
+  using a non-anonymous auth method.
+- Following a successful auth attempt, if the user signs in to a new account,
+  the anonymous account and the new account can be linked together without
+  issue.
+- Otherwise, if logging into an existing user, FirebaseUI will return a merge
+  conflict error containing the resulting `FIRAuthDataResult` corresponding to
+  the existing account. This value should be used to login to the existing
+  account without linking to the anonymous user, as the two accounts may have
+  conflicting state (the anonymous account state will be discarded).
+
+```swift
+func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+  if let error = error as NSError?,
+      error.code == FUIAuthErrorCode.mergeConflict.rawValue {
+    // Merge conflict error, discard the anonymous user and login as the existing
+    // non-anonymous user.
+    guard let credential = error.userInfo[FUIAuthCredentialKey] as? AuthCredential else {
+      print("Received merge conflict error without auth credential!")
+      return
+    }
+
+    Auth.auth().signInAndRetrieveData(with: credential) { (dataResult, error) in
+      if let error = error as NSError? {
+        print("Failed to re-login: \(error)")
+        return
+      }
+
+      // Handle successful login
+    }
+  } else if let error = error {
+    // Some non-merge conflict error happened.
+    print("Failed to log in: \(error)")
+    return
+  }
+
+  // Handle successful login
+}
+```
