@@ -174,7 +174,7 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
   return textFieldSize;
 }
 
-- (UITextContentType)textContentType {
+- (UITextContentType _Null_unspecified)textContentType {
 #if __IPHONE_OS_MIN_VERSION_REQUIRED > __IPHONE_12_0
   if (@available(iOS 12.0, *)) {
     return UITextContentTypeOneTimeCode;
