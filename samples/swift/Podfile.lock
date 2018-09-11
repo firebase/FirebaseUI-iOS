@@ -58,36 +58,36 @@ PODS:
   - FirebaseStorage (3.0.1):
     - FirebaseCore (~> 5.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseUI (5.2.0):
-    - FirebaseUI/Anonymous (= 5.2.0)
-    - FirebaseUI/Auth (= 5.2.0)
-    - FirebaseUI/Database (= 5.2.0)
-    - FirebaseUI/Facebook (= 5.2.0)
-    - FirebaseUI/Firestore (= 5.2.0)
-    - FirebaseUI/Google (= 5.2.0)
-    - FirebaseUI/Phone (= 5.2.0)
-    - FirebaseUI/Storage (= 5.2.0)
-    - FirebaseUI/Twitter (= 5.2.0)
-  - FirebaseUI/Anonymous (5.2.0):
+  - FirebaseUI (5.2.1):
+    - FirebaseUI/Anonymous (= 5.2.1)
+    - FirebaseUI/Auth (= 5.2.1)
+    - FirebaseUI/Database (= 5.2.1)
+    - FirebaseUI/Facebook (= 5.2.1)
+    - FirebaseUI/Firestore (= 5.2.1)
+    - FirebaseUI/Google (= 5.2.1)
+    - FirebaseUI/Phone (= 5.2.1)
+    - FirebaseUI/Storage (= 5.2.1)
+    - FirebaseUI/Twitter (= 5.2.1)
+  - FirebaseUI/Anonymous (5.2.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Auth (5.2.0):
+  - FirebaseUI/Auth (5.2.1):
     - Firebase/Auth (~> 5.0)
-  - FirebaseUI/Database (5.2.0):
+  - FirebaseUI/Database (5.2.1):
     - Firebase/Database (~> 5.0)
-  - FirebaseUI/Facebook (5.2.0):
+  - FirebaseUI/Facebook (5.2.1):
     - FBSDKLoginKit (~> 4.0)
     - FirebaseUI/Auth
-  - FirebaseUI/Firestore (5.2.0):
+  - FirebaseUI/Firestore (5.2.1):
     - Firebase/Firestore
-  - FirebaseUI/Google (5.2.0):
+  - FirebaseUI/Google (5.2.1):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 4.0)
-  - FirebaseUI/Phone (5.2.0):
+  - FirebaseUI/Phone (5.2.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Storage (5.2.0):
+  - FirebaseUI/Storage (5.2.1):
     - Firebase/Storage (~> 5.0)
     - SDWebImage (~> 4.0)
-  - FirebaseUI/Twitter (5.2.0):
+  - FirebaseUI/Twitter (5.2.1):
     - FirebaseUI/Auth
     - TwitterKit (~> 3.0)
   - GoogleSignIn (4.2.0):
@@ -196,7 +196,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 27be5ac5bc75e0b17537b2bbfada8258addcc8cd
   FirebaseFirestore: 7eec93809ad61e7ebe303089c5cc5efa63424b72
   FirebaseStorage: 43f823b96b72a08539eba21a7de043348a69d4c6
-  FirebaseUI: 5c924b40fe338095c248b13bbe92a27dea8eca39
+  FirebaseUI: e8302cf8b8d4084fbdfc4c95ef5d6b9de77f0599
   GoogleSignIn: 591e46382014e591269f862ba6e7bc0fbd793532
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GoogleUtilities: 6f681e27050c5e130325e89fa0316dfca826f954
