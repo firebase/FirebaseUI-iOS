@@ -71,8 +71,8 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.4)
     - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.4)"
   - "GoogleToolboxForMac/NSString+URLArguments (2.1.4)"
-  - GoogleUtilities/Environment (5.2.3)
-  - GoogleUtilities/Logger (5.2.3):
+  - GoogleUtilities/Environment (5.3.0)
+  - GoogleUtilities/Logger (5.3.0):
     - GoogleUtilities/Environment
   - gRPC (1.14.0):
     - gRPC-RxLibrary (= 1.14.0)
@@ -182,7 +182,7 @@ SPEC CHECKSUMS:
   FirebaseStorage: fd82e5e5c474897e19972b34b22ac0f589dce04e
   GoogleSignIn: 591e46382014e591269f862ba6e7bc0fbd793532
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
-  GoogleUtilities: 6f681e27050c5e130325e89fa0316dfca826f954
+  GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
   gRPC: 9d4c549f37c7cef22478634bac7a0405b6e3dbfb
   "gRPC-C++": ee0b01db3122f0b6c2be28b5b11039f62fa15fe6
   gRPC-Core: f4836515817c0eb479aeeb9cc27c91c4ba62a9f6
