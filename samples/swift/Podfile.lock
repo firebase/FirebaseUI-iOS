@@ -15,18 +15,18 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.36.0):
     - FBSDKCoreKit
-  - Firebase/Auth (5.8.0):
+  - Firebase/Auth (5.8.1):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.0.4)
-  - Firebase/CoreOnly (5.8.0):
+  - Firebase/CoreOnly (5.8.1):
     - FirebaseCore (= 5.1.3)
-  - Firebase/Database (5.8.0):
+  - Firebase/Database (5.8.1):
     - Firebase/CoreOnly
     - FirebaseDatabase (= 5.0.3)
-  - Firebase/Firestore (5.8.0):
+  - Firebase/Firestore (5.8.1):
     - Firebase/CoreOnly
     - FirebaseFirestore (= 0.13.3)
-  - Firebase/Storage (5.8.0):
+  - Firebase/Storage (5.8.1):
     - Firebase/CoreOnly
     - FirebaseStorage (= 3.0.2)
   - FirebaseAuth (5.0.4):
@@ -201,7 +201,7 @@ SPEC CHECKSUMS:
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
   FBSDKCoreKit: 3b8e6570eedb443f9fc4af196a7bf39f18e3a3d8
   FBSDKLoginKit: 8bccb6064708ab2f4251a7fc4e3b6d8d00ad91ba
-  Firebase: 25812f43e7a53b11ae2f0a5f4c6d12faeb1f7cd7
+  Firebase: a870ed114d769b424021a0c8ddb0c86c3250a0c5
   FirebaseAuth: 504b198ceb3472dca5c65bb95544ea44cfc9439e
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: 27bd80e5bfaaf9552a1f5cacb4c7e8bb925bab22
