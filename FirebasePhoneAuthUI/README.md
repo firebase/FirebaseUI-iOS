@@ -101,3 +101,11 @@ If you don't need to handle APNS yourself, than don't do steps 3, 4, 5.
 
 Please notice that you can use either APNS key OR APNS certificate.
 <br>One APNS Key can be used for all your iOS app from the same Apple Developer account.
+
+12\. (Optional) To receive the callback response after the user attempt to sign in.
+
+```swift
+func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+    // Do something with the response 
+}
+```
