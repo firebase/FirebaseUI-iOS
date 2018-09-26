@@ -15,15 +15,15 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.35.0):
     - FBSDKCoreKit
-  - Firebase/CoreOnly (5.8.1):
-    - FirebaseCore (= 5.1.3)
-  - Firebase/Database (5.8.1):
+  - Firebase/CoreOnly (5.9.0):
+    - FirebaseCore (= 5.1.4)
+  - Firebase/Database (5.9.0):
     - Firebase/CoreOnly
     - FirebaseDatabase (= 5.0.3)
-  - Firebase/Firestore (5.8.1):
+  - Firebase/Firestore (5.9.0):
     - Firebase/CoreOnly
-    - FirebaseFirestore (= 0.13.3)
-  - Firebase/Storage (5.8.1):
+    - FirebaseFirestore (= 0.13.4)
+  - Firebase/Storage (5.9.0):
     - Firebase/CoreOnly
     - FirebaseStorage (= 3.0.2)
   - FirebaseAuth (5.0.4):
@@ -32,21 +32,21 @@ PODS:
     - GoogleUtilities/Environment (~> 5.2)
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (5.1.3):
+  - FirebaseCore (5.1.4):
     - GoogleUtilities/Logger (~> 5.2)
   - FirebaseDatabase (5.0.3):
     - FirebaseCore (~> 5.0)
     - leveldb-library (~> 1.18)
-  - FirebaseFirestore (0.13.3):
+  - FirebaseFirestore (0.13.4):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.0)
-    - FirebaseFirestore/abseil-cpp (= 0.13.3)
+    - FirebaseFirestore/abseil-cpp (= 0.13.4)
     - "gRPC-C++ (~> 0.0.3)"
     - gRPC-ProtoRPC (~> 1.0)
     - leveldb-library (~> 1.20)
     - nanopb (~> 0.3.8)
     - Protobuf (~> 3.1)
-  - FirebaseFirestore/abseil-cpp (0.13.3):
+  - FirebaseFirestore/abseil-cpp (0.13.4):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.0)
     - "gRPC-C++ (~> 0.0.3)"
@@ -173,12 +173,12 @@ SPEC CHECKSUMS:
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
   FBSDKCoreKit: 1a5b2e3ceb5ca827a53c54aa5f4a3480efff80d2
   FBSDKLoginKit: 00a3d65d1226852f9d76dcddff01981e5e6d9c38
-  Firebase: a870ed114d769b424021a0c8ddb0c86c3250a0c5
+  Firebase: 383fa29aca93e371cab776b48a5c66544d3c2003
   FirebaseAuth: 504b198ceb3472dca5c65bb95544ea44cfc9439e
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: 27bd80e5bfaaf9552a1f5cacb4c7e8bb925bab22
+  FirebaseCore: 2a84b6b325792a4319ef71ee18819dcba08d2fd7
   FirebaseDatabase: e2bcbc106adc4b11a2da3ec2eb63c0c4a44f2f54
-  FirebaseFirestore: c9ec5660228f97ed10782d72b0498449af07256d
+  FirebaseFirestore: eaf0b6244e9463e2429fe216666b641e4dec606b
   FirebaseStorage: fd82e5e5c474897e19972b34b22ac0f589dce04e
   GoogleSignIn: 591e46382014e591269f862ba6e7bc0fbd793532
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
