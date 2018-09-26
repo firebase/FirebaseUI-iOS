@@ -187,8 +187,16 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [self incrementActivity];
   self.navigationItem.rightBarButtonItem.enabled = NO;
   FIRPhoneAuthProvider *provider = [FIRPhoneAuthProvider providerWithAuth:self.auth];
-  NSString *phoneNumberWithCountryCode =
-      [NSString stringWithFormat:@"+%@%@", _selectedCountryCode.dialCode, phoneNumber];
+  NSString *selectedCountryCodeString =
+    [NSString stringWithFormat:@"+%@", _selectedCountryCode.dialCode];
+  BOOL isPhoneNumberAlreadyPrefixed = [phoneNumber hasPrefix:selectedCountryCodeString];
+  NSString *phoneNumberWithCountryCode;
+  if (isPhoneNumberAlreadyPrefixed) {
+    phoneNumberWithCountryCode = phoneNumber;
+  } else {
+    phoneNumberWithCountryCode =
+        [NSString stringWithFormat:@"%@%@", selectedCountryCodeString, phoneNumber];
+  }
   [provider verifyPhoneNumber:phoneNumberWithCountryCode
                    UIDelegate:self
                    completion:^(NSString *_Nullable verificationID, NSError *_Nullable error) {
