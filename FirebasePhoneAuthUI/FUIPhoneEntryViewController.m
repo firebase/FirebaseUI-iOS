@@ -195,7 +195,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     phoneNumberWithCountryCode = phoneNumber;
   } else {
     phoneNumberWithCountryCode =
-      [NSString stringWithFormat:@"%@%@", selectedCountryCodeString, phoneNumber];
+        [NSString stringWithFormat:@"%@%@", selectedCountryCodeString, phoneNumber];
   }
   [provider verifyPhoneNumber:phoneNumberWithCountryCode
                    UIDelegate:self
