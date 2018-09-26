@@ -190,9 +190,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   NSString *selectedCountryCodeString =
     [NSString stringWithFormat:@"+%@", _selectedCountryCode.dialCode];
   BOOL isPhoneNumberAlreadyPrefixed = [phoneNumber hasPrefix:selectedCountryCodeString];
-  NSString *phoneNumberWithCountryCode
+  NSString *phoneNumberWithCountryCode;
   if (isPhoneNumberAlreadyPrefixed) {
-    phoneNumberWithCountryCode = phoneNumber
+    phoneNumberWithCountryCode = phoneNumber;
   } else {
     phoneNumberWithCountryCode =
       [NSString stringWithFormat:@"%@%@", selectedCountryCodeString, phoneNumber];
