@@ -14,20 +14,13 @@
 //  limitations under the License.
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
-//! Project version number for FirebaseAuthUI.
-FOUNDATION_EXPORT double FirebaseAuthUIVersionNumber;
+//! Project version number for FirebaseEmailAuthUI.
+FOUNDATION_EXPORT double FirebaseEmailAuthUIVersionNumber;
 
-//! Project version string for FirebaseAuthUI.
-FOUNDATION_EXPORT const unsigned char FirebaseAuthUIVersionString[];
+//! Project version string for FirebaseEmailAuthUI.
+FOUNDATION_EXPORT const unsigned char FirebaseEmailAuthUIVersionString[];
 
+#import "FUIEmailAuth.h"
 
-#import "FUIAccountSettingsOperationType.h"
-#import "FUIAccountSettingsViewController.h"
-
-#import "FUIAuth.h"
-#import "FUIAuthBaseViewController.h"
-#import "FUIAuthErrorUtils.h"
-#import "FUIAuthPickerViewController.h"
-#import "FUIAuthProvider.h"

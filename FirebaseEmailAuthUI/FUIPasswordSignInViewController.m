@@ -24,6 +24,8 @@
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
 #import "FUIAuthErrors.h"
+#import "FUIEmailAuth.h"
+#import "FUIEmailAuthStrings.h"
 #import "FUIPasswordRecoveryViewController.h"
 #import "FUIPrivacyAndTermsOfServiceView.h"
 
@@ -71,7 +73,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                          email:(NSString *_Nullable)email {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
+                        bundle:[FUIAuthUtils bundleNamed:FUIEmailAuthBundleName]
                         authUI:authUI
                          email:email];
 }
@@ -89,7 +91,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
     self.title = FUILocalizedString(kStr_SignInTitle);
     __weak FUIPasswordSignInViewController *weakself = self;
     _onDismissCallback = ^(FIRAuthDataResult *authResult, NSError *error){
-      [weakself.authUI invokeResultCallbackWithAuthDataResult:authResult error:error];
+      [weakself.authUI invokeResultCallbackWithAuthDataResult:authResult URL:nil error:error];
     };
   }
   return self;
@@ -203,8 +205,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
 - (void)forgotPasswordForEmail:(NSString *)email {
   UIViewController *viewController;
-  if ([self.authUI.delegate respondsToSelector:@selector(passwordRecoveryViewControllerForAuthUI:email:)]) {
-    viewController = [self.authUI.delegate passwordRecoveryViewControllerForAuthUI:self.authUI
+  id<FUIAuthDelegate> delegate = self.authUI.delegate;
+  if ([delegate respondsToSelector:@selector(passwordRecoveryViewControllerForAuthUI:email:)]) {
+    viewController = [delegate passwordRecoveryViewControllerForAuthUI:self.authUI
                                                                              email:email];
   } else {
     viewController = [[FUIPasswordRecoveryViewController alloc] initWithAuthUI:self.authUI

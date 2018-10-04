@@ -76,6 +76,25 @@ Pod::Spec.new do |s|
     anonymous.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseAnonymousAuthUI' }
   end
 
+  s.subspec 'Email' do |email|
+    email.platform = :ios, '8.0'
+    email.public_header_files = ['FirebaseEmailAuthUI/FirebaseEmailAuthUI.h',
+                                 'FirebaseEmailAuthUI/FUIEmailAuth.h',
+                                 'FirebaseEmailAuthUI/FUIEmailEntryViewController.h',
+                                 'FirebaseEmailAuthUI/FUIPasswordRecoveryViewController.h',
+                                 'FirebaseEmailAuthUI/FUIPasswordSignInViewController.h',
+                                 'FirebaseEmailAuthUI/FUIPasswordSignUpViewController.h',
+                                 'FirebaseEmailAuthUI/FUIPasswordVerificationViewController.h']
+    email.source_files = 'FirebaseEmailAuthUI/**/*.{h,m}'
+    email.dependency 'FirebaseUI/Auth'
+    email.resource_bundle = {
+      'FirebaseEmailAuthUI' => ['FirebaseEmailAuthUI/*.xib',
+                                'FirebaseEmailAuthUI/**/*.{xib,json,lproj,png}']
+    }
+    email.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseEmailAuthUI' }
+  end
+
+ 
   s.subspec 'Facebook' do |facebook|
     facebook.platform = :ios, '8.0'
     facebook.public_header_files = 'FirebaseFacebookAuthUI/*.h'

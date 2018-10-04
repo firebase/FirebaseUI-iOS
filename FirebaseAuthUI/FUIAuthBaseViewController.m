@@ -396,7 +396,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
 - (void)cancelAuthorization {
   [self dismissNavigationControllerAnimated:YES completion:^{
     NSError *error = [FUIAuthErrorUtils userCancelledSignInError];
-    [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
+    [self.authUI invokeResultCallbackWithAuthDataResult:nil URL:nil error:error];
   }];
 }
 

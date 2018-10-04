@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2016 Google Inc.
+//  Copyright (c) 2018 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -14,20 +14,26 @@
 //  limitations under the License.
 //
 
-@import UIKit;
+#import "FUIAuthUtils.h"
 
-//! Project version number for FirebaseAuthUI.
-FOUNDATION_EXPORT double FirebaseAuthUIVersionNumber;
+NS_ASSUME_NONNULL_BEGIN
 
-//! Project version string for FirebaseAuthUI.
-FOUNDATION_EXPORT const unsigned char FirebaseAuthUIVersionString[];
+/* Name of the FirebaseEmailAuthUI resource bundle. */
+extern NSString *const FUIEmailAuthBundleName;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-#import "FUIAccountSettingsOperationType.h"
-#import "FUIAccountSettingsViewController.h"
+/** @fn FUIEmailAuthLocalizedString
+    @brief Gets a localized string from a name.
+    @param key The key value of the string.
+    @return The string by the key localized in the current locale.
+ */
+NSString *FUIEmailAuthLocalizedString(NSString *key);
 
-#import "FUIAuth.h"
-#import "FUIAuthBaseViewController.h"
-#import "FUIAuthErrorUtils.h"
-#import "FUIAuthPickerViewController.h"
-#import "FUIAuthProvider.h"
+#ifdef __cplusplus
+}
+#endif
+
+NS_ASSUME_NONNULL_END

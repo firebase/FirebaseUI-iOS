@@ -25,17 +25,6 @@
 #import "FUIEmailEntryViewController.h"
 #import "FUIPrivacyAndTermsOfServiceView.h"
 
-
-/** @var kErrorUserInfoEmailKey
-    @brief The key for the email address in the userinfo dictionary of a sign in error.
- */
-static NSString *const kErrorUserInfoEmailKey = @"FIRAuthErrorUserInfoEmailKey";
-
-/** @var kEmailButtonAccessibilityID
-    @brief The Accessibility Identifier for the @c email sign in button.
- */
-static NSString *const kEmailButtonAccessibilityID = @"EmailButtonAccessibilityID";
-
 /** @var kSignInButtonWidth
     @brief The width of the sign in buttons.
  */
@@ -98,10 +87,7 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
                                       action:nil];
 
   NSInteger numberOfButtons = self.authUI.providers.count;
-  BOOL showEmailButton = !self.authUI.signInWithEmailHidden;
-  if (showEmailButton) {
-    ++numberOfButtons;
-  }
+
   CGFloat buttonContainerViewHeight =
       kSignInButtonHeight * numberOfButtons + kSignInButtonVerticalMargin * (numberOfButtons);
   CGRect buttonContainerViewFrame = CGRectMake(0, 0, kSignInButtonWidth, buttonContainerViewHeight);
@@ -121,22 +107,6 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
     buttonFrame.origin.y += (kSignInButtonHeight + kSignInButtonVerticalMargin);
   }
 
-  if (showEmailButton) {
-    UIColor *emailButtonBackgroundColor =
-        [UIColor colorWithRed:208.f/255.f green:2.f/255.f blue:27.f/255.f alpha:1.0];
-    UIButton *emailButton =
-        [[FUIAuthSignInButton alloc] initWithFrame:buttonFrame
-                                               image:[FUIAuthUtils imageNamed:@"ic_email"
-                                                                   fromBundle:FUIAuthBundleName]
-                                                text:FUILocalizedString(kStr_SignInWithEmail)
-                                     backgroundColor:emailButtonBackgroundColor
-                                           textColor:[UIColor whiteColor]];
-    [emailButton addTarget:self
-                    action:@selector(signInWithEmail)
-          forControlEvents:UIControlEventTouchUpInside];
-    emailButton.accessibilityIdentifier = kEmailButtonAccessibilityID;
-    [_buttonContainerView addSubview:emailButton];
-  }
   _privacyPolicyAndTOSView.authUI = self.authUI;
   [_privacyPolicyAndTOSView useFullMessage];
 }
@@ -153,16 +123,6 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 }
 
 #pragma mark - Actions
-
-- (void)signInWithEmail {
-  UIViewController *controller;
-  if ([self.authUI.delegate respondsToSelector:@selector(emailEntryViewControllerForAuthUI:)]) {
-    controller = [self.authUI.delegate emailEntryViewControllerForAuthUI:self.authUI];
-  } else {
-    controller = [[FUIEmailEntryViewController alloc] initWithAuthUI:self.authUI];
-  }
-  [self pushViewController:controller];
-}
 
 - (void)didTapSignInButton:(FUIAuthSignInButton *)button {
   [self.authUI signInWithProviderUI:button.providerUI
