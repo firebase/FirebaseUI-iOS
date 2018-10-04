@@ -16,16 +16,49 @@
 
 #import "FUIAuth.h"
 
+@class FUIAuthBaseViewController;
+
+
+/** @typedef FUIEmailHintSignInCallback
+    @brief The type of block invoked when an emailHint sign-in event completes.
+
+    @param authResult Optionally; Result of sign-in request containing both the user and
+       the additional user info associated with the user.
+    @param error Optionally; the error which occurred - or nil if the request was successful.
+    @param credential Optionally; The credential used to sign-in.
+ */
+typedef void (^FUIEmailHintSignInCallback)(FIRAuthDataResult *_Nullable authResult,
+                                           NSError *_Nullable error,
+                                           FIRAuthCredential *_Nullable credential);
+
 NS_ASSUME_NONNULL_BEGIN
+
+
+
+@protocol FUIEmailAuthProvider <NSObject>
+
+- (void)handleAccountLinkingForEmail:(NSString *)email
+                       newCredential:(FIRAuthCredential *)newCredential
+            presentingViewController:(UIViewController *)presentingViewController
+                        signInResult:(_Nullable FIRAuthResultCallback)result;
+
+- (void)signInWithEmailHint:(NSString *)emailHint
+   presentingViewController:(FUIAuthBaseViewController *)presentingViewController
+              originalError:(NSError *)originalError
+                 completion:(FUIEmailHintSignInCallback)completion;
+
+@end
 
 @interface FUIAuth ()
 
 /** @fn invokeResultCallbackWithAuthDataResult:error:
     @brief Invokes the auth UI result callback.
     @param authDataResult The sign in data result, if any.
+    @param url The url, if any.
     @param error The error which occurred, if any.
  */
 - (void)invokeResultCallbackWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult
+                                           URL:(nullable NSURL *)url
                                          error:(nullable NSError *)error;
 
 /** @fn invokeOperationCallback:error:
@@ -45,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** @fn signInWithProviderUI:presentingViewController:defaultValue:
     @brief Signs in with specified provider.
-        @see FUIAuthDelegate.authUI:didSignInWithAuthDataResult:error: for method callback.
+        @see FUIAuthDelegate.authUI:didSignInWithAuthDataResult:URL:error: for method callback.
     @param providerUI The authentication provider used for signing in.
     @param presentingViewController The view controller used to present the UI.
     @param defaultValue The provider default initialization value (e.g. email or phone number)
@@ -54,6 +87,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)signInWithProviderUI:(id<FUIAuthProvider>)providerUI
     presentingViewController:(UIViewController *)presentingViewController
                 defaultValue:(nullable NSString *)defaultValue;
+
+@property(nonatomic, weak) id<FUIEmailAuthProvider> emailAuthProvider;
 
 @end
 

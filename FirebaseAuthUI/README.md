@@ -87,6 +87,7 @@ This instance can then be configured with the providers you wish to support:
 import FirebaseUI
 
 let providers: [FUIAuthProvider] = [
+  FUIEmailAuth(),
   FUIGoogleAuth(),
   FUIFacebookAuth(),
   FUITwitterAuth(),
@@ -102,6 +103,7 @@ self.authUI?.providers = providers
 // ...
 
 NSArray<id<FUIAuthProvider>> *providers = @[
+  [[FUIEmailAuth alloc] init],
   [[FUIGoogleAuth alloc] init],
   [[FUIFacebookAuth alloc] init],
   [[FUITwitterAuth alloc] init],

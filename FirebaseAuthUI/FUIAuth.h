@@ -50,6 +50,20 @@ typedef void (^FUIAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullabl
         error encountered.
     @param authUI The @c FUIAuth instance sending the message.
     @param authDataResult The data result if the sign in attempt was successful.
+    @param url pass the deep link associated with an email link sign-in completion. It is useful
+               for the developer to access the state before the sign-in attempt was triggered.
+    @param error The error that occurred during sign in, if any.
+ */
+- (void)authUI:(FUIAuth *)authUI
+    didSignInWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult
+                            URL:(nullable NSURL *)url
+                          error:(nullable NSError *)error;
+
+/** @fn authUI:didSignInWithAuthDataResult:error:
+    @brief Message sent after the sign in process has completed to report the signed in user or
+        error encountered.
+    @param authUI The @c FUIAuth instance sending the message.
+    @param authDataResult The data result if the sign in attempt was successful.
     @param error The error that occurred during sign in, if any.
  */
 - (void)authUI:(FUIAuth *)authUI
@@ -170,16 +184,6 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
     @brief The @c FUIAuthProvider implementations to use for sign-in.
  */
 @property(nonatomic, copy) NSArray<id<FUIAuthProvider>> *providers;
-
-/** @property signInWithEmailHidden
-    @brief Whether to hide the "Sign in with email" option, defaults to NO.
- */
-@property(nonatomic, assign, getter=isSignInWithEmailHidden) BOOL signInWithEmailHidden;
-
-/** @property allowNewEmailAccounts
- @brief Whether to allow new user sign, defaults to YES.
- */
-@property(nonatomic, assign) BOOL allowNewEmailAccounts;
 
 /** @property shouldHideCancelButton
  @brief Whether to hide the canel button, defaults to NO.

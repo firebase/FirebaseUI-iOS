@@ -10,11 +10,36 @@
 		893D24832122014800CEF7D7 /* FirebaseAnonymousAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 893D247D2122014700CEF7D7 /* FirebaseAnonymousAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		893D24842122014800CEF7D7 /* FUIAnonymousAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = 893D247E2122014800CEF7D7 /* FUIAnonymousAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		893D24852122014800CEF7D7 /* FUIAnonymousAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 893D247F2122014800CEF7D7 /* FUIAnonymousAuth.m */; };
-		893D24862122014800CEF7D7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 893D24802122014800CEF7D7 /* Info.plist */; };
 		893D248F212202A400CEF7D7 /* FirebaseAnonymousAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 893D248D212202A400CEF7D7 /* FirebaseAnonymousAuthUITests.m */; };
 		894ED93E212211DE00CEF7D7 /* ic_anonymous.png in Resources */ = {isa = PBXBuildFile; fileRef = 894ED93B212211DE00CEF7D7 /* ic_anonymous.png */; };
 		894ED93F212211DE00CEF7D7 /* ic_anonymous@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 894ED93C212211DE00CEF7D7 /* ic_anonymous@3x.png */; };
 		894ED940212211DE00CEF7D7 /* ic_anonymous@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 894ED93D212211DE00CEF7D7 /* ic_anonymous@2x.png */; };
+		896B71EC216582AE00CEF7D7 /* FUIEmailAuthStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 896B71EA216582AD00CEF7D7 /* FUIEmailAuthStrings.h */; };
+		896B71ED216582AE00CEF7D7 /* FUIEmailAuthStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 896B71EB216582AE00CEF7D7 /* FUIEmailAuthStrings.m */; };
+		897CB5392162FF2D00CEF7D7 /* FirebaseAnonymousAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 894ED942212211F200CEF7D7 /* FirebaseAnonymousAuthUI.strings */; };
+		897CB5682162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897CB5502162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.m */; };
+		897CB5692162FFAA00CEF7D7 /* FUIEmailEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 897CB5512162FFAA00CEF7D7 /* FUIEmailEntryViewController.h */; };
+		897CB56A2162FFAA00CEF7D7 /* FirebaseEmailAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 897CB5522162FFAA00CEF7D7 /* FirebaseEmailAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		897CB56B2162FFAA00CEF7D7 /* FUIPasswordSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897CB5532162FFAA00CEF7D7 /* FUIPasswordSignInViewController.m */; };
+		897CB56C2162FFAA00CEF7D7 /* ic_email@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 897CB5562162FFAA00CEF7D7 /* ic_email@3x.png */; };
+		897CB56D2162FFAA00CEF7D7 /* ic_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 897CB5572162FFAA00CEF7D7 /* ic_email@2x.png */; };
+		897CB56E2162FFAA00CEF7D7 /* ic_email.png in Resources */ = {isa = PBXBuildFile; fileRef = 897CB5582162FFAA00CEF7D7 /* ic_email.png */; };
+		897CB56F2162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897CB5592162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.xib */; };
+		897CB5702162FFAA00CEF7D7 /* FUIEmailEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897CB55A2162FFAA00CEF7D7 /* FUIEmailEntryViewController.xib */; };
+		897CB5712162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897CB55B2162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.xib */; };
+		897CB5722162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897CB55C2162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.xib */; };
+		897CB5732162FFAA00CEF7D7 /* FUIPasswordSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897CB55D2162FFAA00CEF7D7 /* FUIPasswordSignInViewController.xib */; };
+		897CB5742162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 897CB55E2162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.h */; };
+		897CB5752162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 897CB55F2162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.h */; };
+		897CB5762162FFAA00CEF7D7 /* FUIEmailAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = 897CB5602162FFAA00CEF7D7 /* FUIEmailAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		897CB5772162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 897CB5612162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.h */; };
+		897CB5782162FFAA00CEF7D7 /* FUIEmailEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897CB5622162FFAA00CEF7D7 /* FUIEmailEntryViewController.m */; };
+		897CB5792162FFAA00CEF7D7 /* FUIPasswordSignInViewController_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 897CB5632162FFAA00CEF7D7 /* FUIPasswordSignInViewController_Internal.h */; };
+		897CB57A2162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897CB5642162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.m */; };
+		897CB57B2162FFAA00CEF7D7 /* FUIPasswordSignInViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 897CB5652162FFAA00CEF7D7 /* FUIPasswordSignInViewController.h */; };
+		897CB57C2162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897CB5662162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.m */; };
+		897CB57D2162FFAA00CEF7D7 /* FUIEmailAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 897CB5672162FFAA00CEF7D7 /* FUIEmailAuth.m */; };
+		897CB5812162FFC500CEF7D7 /* FirebaseEmailAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 897CB57F2162FFC400CEF7D7 /* FirebaseEmailAuthUITests.m */; };
 		89B5FA4620FFEB45008E50F6 /* FUIPrivacyAndTermsOfServiceView.h in Headers */ = {isa = PBXBuildFile; fileRef = 89B5FA4420FFEB45008E50F6 /* FUIPrivacyAndTermsOfServiceView.h */; };
 		89B5FA4720FFEB45008E50F6 /* FUIPrivacyAndTermsOfServiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B5FA4520FFEB45008E50F6 /* FUIPrivacyAndTermsOfServiceView.m */; };
 		89B5FA4A20FFEB6A008E50F6 /* FUIPrivacyAndTermsOfServiceView+PhoneAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B5FA4820FFEB69008E50F6 /* FUIPrivacyAndTermsOfServiceView+PhoneAuth.m */; };
@@ -26,11 +51,6 @@
 		8D0439942023962400D0372F /* FUIPasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE73BD1E64D1D000BCD147 /* FUIPasswordTableViewCell.xib */; };
 		8D0439952023962400D0372F /* FUIAuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9414D1D678F5400CD3685 /* FUIAuthPickerViewController.xib */; };
 		8D0439962023962400D0372F /* FUIAuthTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941601D678F5400CD3685 /* FUIAuthTableViewCell.xib */; };
-		8D0439972023962400D0372F /* FUIEmailEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941651D678F5400CD3685 /* FUIEmailEntryViewController.xib */; };
-		8D0439982023962400D0372F /* FUIPasswordRecoveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941681D678F5400CD3685 /* FUIPasswordRecoveryViewController.xib */; };
-		8D0439992023962400D0372F /* FUIPasswordSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9416B1D678F5400CD3685 /* FUIPasswordSignInViewController.xib */; };
-		8D04399A2023962400D0372F /* FUIPasswordSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9416E1D678F5400CD3685 /* FUIPasswordSignUpViewController.xib */; };
-		8D04399B2023962400D0372F /* FUIPasswordVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941711D678F5400CD3685 /* FUIPasswordVerificationViewController.xib */; };
 		8D04399C2023962400D0372F /* FUIStaticContentTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BE738B1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib */; };
 		8D04399D2023962400D0372F /* FUICountryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3204F0B1E98340400841149 /* FUICountryTableViewController.xib */; };
 		8D04399E2023962400D0372F /* FUICodeField.xib in Resources */ = {isa = PBXBuildFile; fileRef = C37296831E95C83900F3FCCC /* FUICodeField.xib */; };
@@ -130,24 +150,6 @@
 		8DA941871D678F5400CD3685 /* FUIAuthTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941601D678F5400CD3685 /* FUIAuthTableViewCell.xib */; };
 		8DA941881D678F5400CD3685 /* FUIAuthUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA941611D678F5400CD3685 /* FUIAuthUtils.h */; };
 		8DA941891D678F5400CD3685 /* FUIAuthUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941621D678F5400CD3685 /* FUIAuthUtils.m */; };
-		8DA9418A1D678F5400CD3685 /* FUIEmailEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA941631D678F5400CD3685 /* FUIEmailEntryViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DA9418B1D678F5400CD3685 /* FUIEmailEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941641D678F5400CD3685 /* FUIEmailEntryViewController.m */; };
-		8DA9418C1D678F5400CD3685 /* FUIEmailEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941651D678F5400CD3685 /* FUIEmailEntryViewController.xib */; };
-		8DA9418D1D678F5400CD3685 /* FUIPasswordRecoveryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA941661D678F5400CD3685 /* FUIPasswordRecoveryViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DA9418E1D678F5400CD3685 /* FUIPasswordRecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941671D678F5400CD3685 /* FUIPasswordRecoveryViewController.m */; };
-		8DA9418F1D678F5400CD3685 /* FUIPasswordRecoveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941681D678F5400CD3685 /* FUIPasswordRecoveryViewController.xib */; };
-		8DA941901D678F5400CD3685 /* FUIPasswordSignInViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA941691D678F5400CD3685 /* FUIPasswordSignInViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DA941911D678F5400CD3685 /* FUIPasswordSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA9416A1D678F5400CD3685 /* FUIPasswordSignInViewController.m */; };
-		8DA941921D678F5400CD3685 /* FUIPasswordSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9416B1D678F5400CD3685 /* FUIPasswordSignInViewController.xib */; };
-		8DA941931D678F5400CD3685 /* FUIPasswordSignUpViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9416C1D678F5400CD3685 /* FUIPasswordSignUpViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DA941941D678F5400CD3685 /* FUIPasswordSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA9416D1D678F5400CD3685 /* FUIPasswordSignUpViewController.m */; };
-		8DA941951D678F5400CD3685 /* FUIPasswordSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9416E1D678F5400CD3685 /* FUIPasswordSignUpViewController.xib */; };
-		8DA941961D678F5400CD3685 /* FUIPasswordVerificationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DA9416F1D678F5400CD3685 /* FUIPasswordVerificationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8DA941971D678F5400CD3685 /* FUIPasswordVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA941701D678F5400CD3685 /* FUIPasswordVerificationViewController.m */; };
-		8DA941981D678F5400CD3685 /* FUIPasswordVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941711D678F5400CD3685 /* FUIPasswordVerificationViewController.xib */; };
-		8DA941A41D67904200CD3685 /* ic_email.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9419B1D67904200CD3685 /* ic_email.png */; };
-		8DA941A51D67904200CD3685 /* ic_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9419C1D67904200CD3685 /* ic_email@2x.png */; };
-		8DA941A61D67904200CD3685 /* ic_email@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9419D1D67904200CD3685 /* ic_email@3x.png */; };
 		8DA941A71D67904200CD3685 /* ic_visibility_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9419E1D67904200CD3685 /* ic_visibility_off.png */; };
 		8DA941A81D67904200CD3685 /* ic_visibility_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA9419F1D67904200CD3685 /* ic_visibility_off@2x.png */; };
 		8DA941A91D67904200CD3685 /* ic_visibility_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA941A01D67904200CD3685 /* ic_visibility_off@3x.png */; };
@@ -268,6 +270,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8922BF0521630B3B00CEF7D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 897CB52F2162FF2D00CEF7D7;
+			remoteInfo = FirebaseEmailAuthUI;
+		};
 		893D249121220A9300CEF7D7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
@@ -276,6 +285,20 @@
 			remoteInfo = FirebaseAnonymousAuthUI;
 		};
 		893D249321220F1900CEF7D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89846C1C2122003300CEF7D7;
+			remoteInfo = FirebaseAnonymousAuthUI;
+		};
+		897CB5312162FF2D00CEF7D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DCC4FC01D678CDC00B0D3C4;
+			remoteInfo = FirebaseAuthUI;
+		};
+		897CB5452162FF4000CEF7D7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
 			proxyType = 1;
@@ -460,6 +483,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8922BF022163012000CEF7D7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		893D247D2122014700CEF7D7 /* FirebaseAnonymousAuthUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseAnonymousAuthUI.h; sourceTree = "<group>"; };
 		893D247E2122014800CEF7D7 /* FUIAnonymousAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAnonymousAuth.h; sourceTree = "<group>"; };
 		893D247F2122014800CEF7D7 /* FUIAnonymousAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAnonymousAuth.m; sourceTree = "<group>"; };
@@ -470,10 +494,36 @@
 		894ED93C212211DE00CEF7D7 /* ic_anonymous@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_anonymous@3x.png"; path = "Resources/ic_anonymous@3x.png"; sourceTree = "<group>"; };
 		894ED93D212211DE00CEF7D7 /* ic_anonymous@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_anonymous@2x.png"; path = "Resources/ic_anonymous@2x.png"; sourceTree = "<group>"; };
 		894ED943212211F200CEF7D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FirebaseAnonymousAuthUI.strings; sourceTree = "<group>"; };
+		896B71EA216582AD00CEF7D7 /* FUIEmailAuthStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIEmailAuthStrings.h; sourceTree = "<group>"; };
+		896B71EB216582AE00CEF7D7 /* FUIEmailAuthStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIEmailAuthStrings.m; sourceTree = "<group>"; };
+		897CB5412162FF2D00CEF7D7 /* FirebaseEmailAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseEmailAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		897CB54D2162FF4000CEF7D7 /* FirebaseEmailAuthUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirebaseEmailAuthUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		897CB5502162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPasswordSignUpViewController.m; sourceTree = "<group>"; };
+		897CB5512162FFAA00CEF7D7 /* FUIEmailEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIEmailEntryViewController.h; sourceTree = "<group>"; };
+		897CB5522162FFAA00CEF7D7 /* FirebaseEmailAuthUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseEmailAuthUI.h; sourceTree = "<group>"; };
+		897CB5532162FFAA00CEF7D7 /* FUIPasswordSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPasswordSignInViewController.m; sourceTree = "<group>"; };
+		897CB5562162FFAA00CEF7D7 /* ic_email@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_email@3x.png"; sourceTree = "<group>"; };
+		897CB5572162FFAA00CEF7D7 /* ic_email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_email@2x.png"; sourceTree = "<group>"; };
+		897CB5582162FFAA00CEF7D7 /* ic_email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_email.png; sourceTree = "<group>"; };
+		897CB5592162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPasswordRecoveryViewController.xib; sourceTree = "<group>"; };
+		897CB55A2162FFAA00CEF7D7 /* FUIEmailEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIEmailEntryViewController.xib; sourceTree = "<group>"; };
+		897CB55B2162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPasswordVerificationViewController.xib; sourceTree = "<group>"; };
+		897CB55C2162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPasswordSignUpViewController.xib; sourceTree = "<group>"; };
+		897CB55D2162FFAA00CEF7D7 /* FUIPasswordSignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPasswordSignInViewController.xib; sourceTree = "<group>"; };
+		897CB55E2162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPasswordVerificationViewController.h; sourceTree = "<group>"; };
+		897CB55F2162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPasswordRecoveryViewController.h; sourceTree = "<group>"; };
+		897CB5602162FFAA00CEF7D7 /* FUIEmailAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIEmailAuth.h; sourceTree = "<group>"; };
+		897CB5612162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPasswordSignUpViewController.h; sourceTree = "<group>"; };
+		897CB5622162FFAA00CEF7D7 /* FUIEmailEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIEmailEntryViewController.m; sourceTree = "<group>"; };
+		897CB5632162FFAA00CEF7D7 /* FUIPasswordSignInViewController_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPasswordSignInViewController_Internal.h; sourceTree = "<group>"; };
+		897CB5642162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPasswordVerificationViewController.m; sourceTree = "<group>"; };
+		897CB5652162FFAA00CEF7D7 /* FUIPasswordSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPasswordSignInViewController.h; sourceTree = "<group>"; };
+		897CB5662162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPasswordRecoveryViewController.m; sourceTree = "<group>"; };
+		897CB5672162FFAA00CEF7D7 /* FUIEmailAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIEmailAuth.m; sourceTree = "<group>"; };
+		897CB57F2162FFC400CEF7D7 /* FirebaseEmailAuthUITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseEmailAuthUITests.m; sourceTree = "<group>"; };
+		897CB5802162FFC400CEF7D7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89846C302122003300CEF7D7 /* FirebaseAnonymousAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseAnonymousAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		89846C312122003300CEF7D7 /* FirebaseTwitterAuthUI copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "FirebaseTwitterAuthUI copy-Info.plist"; path = "/Users/wangyue/FirebaseUI-iOS/FirebaseTwitterAuthUI copy-Info.plist"; sourceTree = "<absolute>"; };
 		89846C402122006B00CEF7D7 /* FirebaseAnonymousAuthUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirebaseAnonymousAuthUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		89846C412122006B00CEF7D7 /* FirebaseTwitterAuthUITests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "FirebaseTwitterAuthUITests copy-Info.plist"; path = "/Users/wangyue/FirebaseUI-iOS/FirebaseTwitterAuthUITests copy-Info.plist"; sourceTree = "<absolute>"; };
 		89B5FA4420FFEB45008E50F6 /* FUIPrivacyAndTermsOfServiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPrivacyAndTermsOfServiceView.h; sourceTree = "<group>"; };
 		89B5FA4520FFEB45008E50F6 /* FUIPrivacyAndTermsOfServiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPrivacyAndTermsOfServiceView.m; sourceTree = "<group>"; };
 		89B5FA4820FFEB69008E50F6 /* FUIPrivacyAndTermsOfServiceView+PhoneAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FUIPrivacyAndTermsOfServiceView+PhoneAuth.m"; sourceTree = "<group>"; };
@@ -552,21 +602,6 @@
 		8DA941601D678F5400CD3685 /* FUIAuthTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIAuthTableViewCell.xib; sourceTree = "<group>"; };
 		8DA941611D678F5400CD3685 /* FUIAuthUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAuthUtils.h; sourceTree = "<group>"; };
 		8DA941621D678F5400CD3685 /* FUIAuthUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAuthUtils.m; sourceTree = "<group>"; };
-		8DA941631D678F5400CD3685 /* FUIEmailEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIEmailEntryViewController.h; sourceTree = "<group>"; };
-		8DA941641D678F5400CD3685 /* FUIEmailEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIEmailEntryViewController.m; sourceTree = "<group>"; };
-		8DA941651D678F5400CD3685 /* FUIEmailEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIEmailEntryViewController.xib; sourceTree = "<group>"; };
-		8DA941661D678F5400CD3685 /* FUIPasswordRecoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPasswordRecoveryViewController.h; sourceTree = "<group>"; };
-		8DA941671D678F5400CD3685 /* FUIPasswordRecoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPasswordRecoveryViewController.m; sourceTree = "<group>"; };
-		8DA941681D678F5400CD3685 /* FUIPasswordRecoveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPasswordRecoveryViewController.xib; sourceTree = "<group>"; };
-		8DA941691D678F5400CD3685 /* FUIPasswordSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPasswordSignInViewController.h; sourceTree = "<group>"; };
-		8DA9416A1D678F5400CD3685 /* FUIPasswordSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPasswordSignInViewController.m; sourceTree = "<group>"; };
-		8DA9416B1D678F5400CD3685 /* FUIPasswordSignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPasswordSignInViewController.xib; sourceTree = "<group>"; };
-		8DA9416C1D678F5400CD3685 /* FUIPasswordSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPasswordSignUpViewController.h; sourceTree = "<group>"; };
-		8DA9416D1D678F5400CD3685 /* FUIPasswordSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPasswordSignUpViewController.m; sourceTree = "<group>"; };
-		8DA9416E1D678F5400CD3685 /* FUIPasswordSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPasswordSignUpViewController.xib; sourceTree = "<group>"; };
-		8DA9416F1D678F5400CD3685 /* FUIPasswordVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPasswordVerificationViewController.h; sourceTree = "<group>"; };
-		8DA941701D678F5400CD3685 /* FUIPasswordVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPasswordVerificationViewController.m; sourceTree = "<group>"; };
-		8DA941711D678F5400CD3685 /* FUIPasswordVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPasswordVerificationViewController.xib; sourceTree = "<group>"; };
 		8DA9419B1D67904200CD3685 /* ic_email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_email.png; path = Resources/ic_email.png; sourceTree = "<group>"; };
 		8DA9419C1D67904200CD3685 /* ic_email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_email@2x.png"; path = "Resources/ic_email@2x.png"; sourceTree = "<group>"; };
 		8DA9419D1D67904200CD3685 /* ic_email@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_email@3x.png"; path = "Resources/ic_email@3x.png"; sourceTree = "<group>"; };
@@ -1218,6 +1253,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		897CB5342162FF2D00CEF7D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		897CB5482162FF4000CEF7D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89846C222122003300CEF7D7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1410,6 +1459,63 @@
 			path = Strings;
 			sourceTree = "<group>";
 		};
+		897CB54F2162FFAA00CEF7D7 /* FirebaseEmailAuthUI */ = {
+			isa = PBXGroup;
+			children = (
+				896B71EA216582AD00CEF7D7 /* FUIEmailAuthStrings.h */,
+				896B71EB216582AE00CEF7D7 /* FUIEmailAuthStrings.m */,
+				8922BF022163012000CEF7D7 /* Info.plist */,
+				897CB5502162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.m */,
+				897CB5512162FFAA00CEF7D7 /* FUIEmailEntryViewController.h */,
+				897CB5522162FFAA00CEF7D7 /* FirebaseEmailAuthUI.h */,
+				897CB5532162FFAA00CEF7D7 /* FUIPasswordSignInViewController.m */,
+				897CB5542162FFAA00CEF7D7 /* Resources */,
+				897CB55E2162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.h */,
+				897CB55F2162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.h */,
+				897CB5602162FFAA00CEF7D7 /* FUIEmailAuth.h */,
+				897CB5612162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.h */,
+				897CB5622162FFAA00CEF7D7 /* FUIEmailEntryViewController.m */,
+				897CB5632162FFAA00CEF7D7 /* FUIPasswordSignInViewController_Internal.h */,
+				897CB5642162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.m */,
+				897CB5652162FFAA00CEF7D7 /* FUIPasswordSignInViewController.h */,
+				897CB5662162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.m */,
+				897CB5672162FFAA00CEF7D7 /* FUIEmailAuth.m */,
+			);
+			path = FirebaseEmailAuthUI;
+			sourceTree = "<group>";
+		};
+		897CB5542162FFAA00CEF7D7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				897CB5552162FFAA00CEF7D7 /* Resources */,
+				897CB5592162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.xib */,
+				897CB55A2162FFAA00CEF7D7 /* FUIEmailEntryViewController.xib */,
+				897CB55B2162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.xib */,
+				897CB55C2162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.xib */,
+				897CB55D2162FFAA00CEF7D7 /* FUIPasswordSignInViewController.xib */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		897CB5552162FFAA00CEF7D7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				897CB5562162FFAA00CEF7D7 /* ic_email@3x.png */,
+				897CB5572162FFAA00CEF7D7 /* ic_email@2x.png */,
+				897CB5582162FFAA00CEF7D7 /* ic_email.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		897CB57E2162FFC400CEF7D7 /* FirebaseEmailAuthUITest */ = {
+			isa = PBXGroup;
+			children = (
+				897CB57F2162FFC400CEF7D7 /* FirebaseEmailAuthUITests.m */,
+				897CB5802162FFC400CEF7D7 /* Info.plist */,
+			);
+			path = FirebaseEmailAuthUITest;
+			sourceTree = "<group>";
+		};
 		8D2A849C1D678B2B0058DF04 = {
 			isa = PBXGroup;
 			children = (
@@ -1423,6 +1529,8 @@
 				8DCC4FFA1D678CF500B0D3C4 /* FirebaseGoogleAuthUI */,
 				8DCC50061D678CF500B0D3C4 /* FirebaseGoogleAuthUITests */,
 				C3773B551E8EFDEA00ACF58C /* FirebasePhoneAuthUI */,
+				897CB57E2162FFC400CEF7D7 /* FirebaseEmailAuthUITest */,
+				897CB54F2162FFAA00CEF7D7 /* FirebaseEmailAuthUI */,
 				C3773B621E8EFDEB00ACF58C /* FirebasePhoneAuthUITests */,
 				C32516931D88A54C00B0B3F9 /* FirebaseTwitterAuthUI */,
 				C325169F1D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests */,
@@ -1436,8 +1544,6 @@
 				8D559D4D1F68A7F100CE9D8A /* FirebaseFirestoreUITests */,
 				8D2A84A71D678B2B0058DF04 /* Products */,
 				903F73EA092681D67581F496 /* Frameworks */,
-				89846C312122003300CEF7D7 /* FirebaseTwitterAuthUI copy-Info.plist */,
-				89846C412122006B00CEF7D7 /* FirebaseTwitterAuthUITests copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1465,6 +1571,8 @@
 				8D559D491F68A7F100CE9D8A /* FirebaseFirestoreUITests.xctest */,
 				89846C302122003300CEF7D7 /* FirebaseAnonymousAuthUI.framework */,
 				89846C402122006B00CEF7D7 /* FirebaseAnonymousAuthUITests.xctest */,
+				897CB5412162FF2D00CEF7D7 /* FirebaseEmailAuthUI.framework */,
+				897CB54D2162FF4000CEF7D7 /* FirebaseEmailAuthUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1643,21 +1751,6 @@
 				8DA941601D678F5400CD3685 /* FUIAuthTableViewCell.xib */,
 				8DA941611D678F5400CD3685 /* FUIAuthUtils.h */,
 				8DA941621D678F5400CD3685 /* FUIAuthUtils.m */,
-				8DA941631D678F5400CD3685 /* FUIEmailEntryViewController.h */,
-				8DA941641D678F5400CD3685 /* FUIEmailEntryViewController.m */,
-				8DA941651D678F5400CD3685 /* FUIEmailEntryViewController.xib */,
-				8DA941661D678F5400CD3685 /* FUIPasswordRecoveryViewController.h */,
-				8DA941671D678F5400CD3685 /* FUIPasswordRecoveryViewController.m */,
-				8DA941681D678F5400CD3685 /* FUIPasswordRecoveryViewController.xib */,
-				8DA941691D678F5400CD3685 /* FUIPasswordSignInViewController.h */,
-				8DA9416A1D678F5400CD3685 /* FUIPasswordSignInViewController.m */,
-				8DA9416B1D678F5400CD3685 /* FUIPasswordSignInViewController.xib */,
-				8DA9416C1D678F5400CD3685 /* FUIPasswordSignUpViewController.h */,
-				8DA9416D1D678F5400CD3685 /* FUIPasswordSignUpViewController.m */,
-				8DA9416E1D678F5400CD3685 /* FUIPasswordSignUpViewController.xib */,
-				8DA9416F1D678F5400CD3685 /* FUIPasswordVerificationViewController.h */,
-				8DA941701D678F5400CD3685 /* FUIPasswordVerificationViewController.m */,
-				8DA941711D678F5400CD3685 /* FUIPasswordVerificationViewController.xib */,
 				89B5FA4420FFEB45008E50F6 /* FUIPrivacyAndTermsOfServiceView.h */,
 				89B5FA4520FFEB45008E50F6 /* FUIPrivacyAndTermsOfServiceView.m */,
 				C3BE73891E625D9F00BCD147 /* FUIStaticContentTableViewController.h */,
@@ -1956,6 +2049,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		897CB5352162FF2D00CEF7D7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				897CB5762162FFAA00CEF7D7 /* FUIEmailAuth.h in Headers */,
+				897CB56A2162FFAA00CEF7D7 /* FirebaseEmailAuthUI.h in Headers */,
+				897CB5792162FFAA00CEF7D7 /* FUIPasswordSignInViewController_Internal.h in Headers */,
+				897CB5772162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.h in Headers */,
+				897CB5752162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.h in Headers */,
+				897CB5742162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.h in Headers */,
+				897CB57B2162FFAA00CEF7D7 /* FUIPasswordSignInViewController.h in Headers */,
+				897CB5692162FFAA00CEF7D7 /* FUIEmailEntryViewController.h in Headers */,
+				896B71EC216582AE00CEF7D7 /* FUIEmailAuthStrings.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89846C242122003300CEF7D7 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -2031,13 +2140,10 @@
 				C3BE73BE1E64D1D000BCD147 /* FUIAccountSettingsViewController.h in Headers */,
 				C3CA19A71E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.h in Headers */,
 				8DA9417D1D678F5400CD3685 /* FUIAuthErrorUtils.h in Headers */,
-				8DA941931D678F5400CD3685 /* FUIPasswordSignUpViewController.h in Headers */,
 				C3BE738C1E625D9F00BCD147 /* FUIStaticContentTableViewController.h in Headers */,
 				8DA941881D678F5400CD3685 /* FUIAuthUtils.h in Headers */,
 				8DA941761D678F5400CD3685 /* FUIAuth_Internal.h in Headers */,
-				8DA941901D678F5400CD3685 /* FUIPasswordSignInViewController.h in Headers */,
 				8DA941831D678F5400CD3685 /* FUIAuthTableHeaderView.h in Headers */,
-				8DA941961D678F5400CD3685 /* FUIPasswordVerificationViewController.h in Headers */,
 				C3CA19AD1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateName.h in Headers */,
 				C3BE73751E610F6700BCD147 /* FUIStaticContentTableViewManager.h in Headers */,
 				C3CA199A1E67E605002AB4CC /* FUIAccountSettingsOperation_Internal.h in Headers */,
@@ -2047,8 +2153,6 @@
 				8DA941851D678F5400CD3685 /* FUIAuthTableViewCell.h in Headers */,
 				C3CA199B1E67E605002AB4CC /* FUIAccountSettingsOperation.h in Headers */,
 				8DA941811D678F5400CD3685 /* FUIAuthStrings.h in Headers */,
-				8DA9418A1D678F5400CD3685 /* FUIEmailEntryViewController.h in Headers */,
-				8DA9418D1D678F5400CD3685 /* FUIPasswordRecoveryViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2102,6 +2206,43 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		897CB52F2162FF2D00CEF7D7 /* FirebaseEmailAuthUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 897CB53E2162FF2D00CEF7D7 /* Build configuration list for PBXNativeTarget "FirebaseEmailAuthUI" */;
+			buildPhases = (
+				897CB5322162FF2D00CEF7D7 /* Sources */,
+				897CB5342162FF2D00CEF7D7 /* Frameworks */,
+				897CB5352162FF2D00CEF7D7 /* Headers */,
+				897CB5382162FF2D00CEF7D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				897CB5302162FF2D00CEF7D7 /* PBXTargetDependency */,
+			);
+			name = FirebaseEmailAuthUI;
+			productName = FirebaseTwitterAuthUI;
+			productReference = 897CB5412162FF2D00CEF7D7 /* FirebaseEmailAuthUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		897CB5432162FF4000CEF7D7 /* FirebaseEmailAuthUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 897CB54A2162FF4000CEF7D7 /* Build configuration list for PBXNativeTarget "FirebaseEmailAuthUITests" */;
+			buildPhases = (
+				897CB5462162FF4000CEF7D7 /* Sources */,
+				897CB5482162FF4000CEF7D7 /* Frameworks */,
+				897CB5492162FF4000CEF7D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				897CB5442162FF4000CEF7D7 /* PBXTargetDependency */,
+			);
+			name = FirebaseEmailAuthUITests;
+			productName = FirebaseTwitterAuthUITests;
+			productReference = 897CB54D2162FF4000CEF7D7 /* FirebaseEmailAuthUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		89846C1C2122003300CEF7D7 /* FirebaseAnonymousAuthUI */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89846C2D2122003300CEF7D7 /* Build configuration list for PBXNativeTarget "FirebaseAnonymousAuthUI" */;
@@ -2151,6 +2292,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8922BF0621630B3B00CEF7D7 /* PBXTargetDependency */,
 				893D249221220A9300CEF7D7 /* PBXTargetDependency */,
 				8DFB54741F68AAA2005972D4 /* PBXTargetDependency */,
 				C3773B951E92C9CE00ACF58C /* PBXTargetDependency */,
@@ -2683,6 +2825,8 @@
 				C325169A1D88A54C00B0B3F9 /* FirebaseTwitterAuthUITests */,
 				89846C1C2122003300CEF7D7 /* FirebaseAnonymousAuthUI */,
 				89846C322122006B00CEF7D7 /* FirebaseAnonymousAuthUITests */,
+				897CB52F2162FF2D00CEF7D7 /* FirebaseEmailAuthUI */,
+				897CB5432162FF4000CEF7D7 /* FirebaseEmailAuthUITests */,
 				8D90842D1D9316AB00333CC8 /* FirebaseStorageUI */,
 				8D9084351D9316AB00333CC8 /* FirebaseStorageUITests */,
 				8D559D401F68A7F100CE9D8A /* FirebaseFirestoreUI */,
@@ -2694,13 +2838,35 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		897CB5382162FF2D00CEF7D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				897CB56D2162FFAA00CEF7D7 /* ic_email@2x.png in Resources */,
+				897CB56C2162FFAA00CEF7D7 /* ic_email@3x.png in Resources */,
+				897CB56E2162FFAA00CEF7D7 /* ic_email.png in Resources */,
+				897CB56F2162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.xib in Resources */,
+				897CB5722162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.xib in Resources */,
+				897CB5732162FFAA00CEF7D7 /* FUIPasswordSignInViewController.xib in Resources */,
+				897CB5392162FF2D00CEF7D7 /* FirebaseAnonymousAuthUI.strings in Resources */,
+				897CB5712162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.xib in Resources */,
+				897CB5702162FFAA00CEF7D7 /* FUIEmailEntryViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		897CB5492162FF4000CEF7D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89846C272122003300CEF7D7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				89DAD95521223A5100CEF7D7 /* FirebaseAnonymousAuthUI.strings in Resources */,
 				894ED940212211DE00CEF7D7 /* ic_anonymous@2x.png in Resources */,
-				893D24862122014800CEF7D7 /* Info.plist in Resources */,
 				894ED93F212211DE00CEF7D7 /* ic_anonymous@3x.png in Resources */,
 				894ED93E212211DE00CEF7D7 /* ic_anonymous.png in Resources */,
 			);
@@ -2766,26 +2932,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DA941A61D67904200CD3685 /* ic_email@3x.png in Resources */,
 				C3BE738E1E625D9F00BCD147 /* FUIStaticContentTableViewController.xib in Resources */,
-				8DA9418F1D678F5400CD3685 /* FUIPasswordRecoveryViewController.xib in Resources */,
 				8DA941A81D67904200CD3685 /* ic_visibility_off@2x.png in Resources */,
-				8DA941921D678F5400CD3685 /* FUIPasswordSignInViewController.xib in Resources */,
-				8DA941A41D67904200CD3685 /* ic_email.png in Resources */,
 				8DA941AC1D67904200CD3685 /* ic_visibility@3x.png in Resources */,
-				8DA941A51D67904200CD3685 /* ic_email@2x.png in Resources */,
 				8DA941AB1D67904200CD3685 /* ic_visibility@2x.png in Resources */,
 				8DA941A91D67904200CD3685 /* ic_visibility_off@3x.png in Resources */,
 				C3BE73C11E64D1D000BCD147 /* FUIAccountSettingsViewController.xib in Resources */,
 				8DA941741D678F5400CD3685 /* FUIAuthPickerViewController.xib in Resources */,
 				C3BE73D11E64D1D000BCD147 /* FUIInputTableViewCell.xib in Resources */,
-				8DA941981D678F5400CD3685 /* FUIPasswordVerificationViewController.xib in Resources */,
 				8DA941871D678F5400CD3685 /* FUIAuthTableViewCell.xib in Resources */,
 				C3BE73D21E64D1D000BCD147 /* FUIPasswordTableViewCell.xib in Resources */,
-				8DA9418C1D678F5400CD3685 /* FUIEmailEntryViewController.xib in Resources */,
 				C38F4FCD1EE24A94008B2250 /* FirebaseAuthUI.strings in Resources */,
 				8DA941A71D67904200CD3685 /* ic_visibility_off.png in Resources */,
-				8DA941951D678F5400CD3685 /* FUIPasswordSignUpViewController.xib in Resources */,
 				8DA941AA1D67904200CD3685 /* ic_visibility.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2897,11 +3055,6 @@
 				8D0439942023962400D0372F /* FUIPasswordTableViewCell.xib in Resources */,
 				8D0439952023962400D0372F /* FUIAuthPickerViewController.xib in Resources */,
 				8D0439962023962400D0372F /* FUIAuthTableViewCell.xib in Resources */,
-				8D0439972023962400D0372F /* FUIEmailEntryViewController.xib in Resources */,
-				8D0439982023962400D0372F /* FUIPasswordRecoveryViewController.xib in Resources */,
-				8D0439992023962400D0372F /* FUIPasswordSignInViewController.xib in Resources */,
-				8D04399A2023962400D0372F /* FUIPasswordSignUpViewController.xib in Resources */,
-				8D04399B2023962400D0372F /* FUIPasswordVerificationViewController.xib in Resources */,
 				8D04399C2023962400D0372F /* FUIStaticContentTableViewController.xib in Resources */,
 				8D04399D2023962400D0372F /* FUICountryTableViewController.xib in Resources */,
 				8D04399E2023962400D0372F /* FUICodeField.xib in Resources */,
@@ -2947,6 +3100,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		897CB5322162FF2D00CEF7D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				897CB5682162FFAA00CEF7D7 /* FUIPasswordSignUpViewController.m in Sources */,
+				897CB5782162FFAA00CEF7D7 /* FUIEmailEntryViewController.m in Sources */,
+				896B71ED216582AE00CEF7D7 /* FUIEmailAuthStrings.m in Sources */,
+				897CB57A2162FFAA00CEF7D7 /* FUIPasswordVerificationViewController.m in Sources */,
+				897CB57C2162FFAA00CEF7D7 /* FUIPasswordRecoveryViewController.m in Sources */,
+				897CB57D2162FFAA00CEF7D7 /* FUIEmailAuth.m in Sources */,
+				897CB56B2162FFAA00CEF7D7 /* FUIPasswordSignInViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		897CB5462162FF4000CEF7D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				897CB5812162FFC500CEF7D7 /* FirebaseEmailAuthUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89846C202122003300CEF7D7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3042,12 +3217,10 @@
 			files = (
 				8DA941861D678F5400CD3685 /* FUIAuthTableViewCell.m in Sources */,
 				C3CA199C1E67E605002AB4CC /* FUIAccountSettingsOperation.m in Sources */,
-				8DA941911D678F5400CD3685 /* FUIPasswordSignInViewController.m in Sources */,
 				89B5FA4720FFEB45008E50F6 /* FUIPrivacyAndTermsOfServiceView.m in Sources */,
 				8DA9417A1D678F5400CD3685 /* FUIAuthBaseViewController.m in Sources */,
 				C3BE738D1E625D9F00BCD147 /* FUIStaticContentTableViewController.m in Sources */,
 				8DA941801D678F5400CD3685 /* FUIAuthSignInButton.m in Sources */,
-				8DA9418B1D678F5400CD3685 /* FUIEmailEntryViewController.m in Sources */,
 				8DA941841D678F5400CD3685 /* FUIAuthTableHeaderView.m in Sources */,
 				C3CA199F1E67E605002AB4CC /* FUIAccountSettingsOperationDeleteAccount.m in Sources */,
 				C3CA19AB1E67E605002AB4CC /* FUIAccountSettingsOperationUpdateEmail.m in Sources */,
@@ -3055,13 +3228,10 @@
 				8DA941731D678F5400CD3685 /* FUIAuthPickerViewController.m in Sources */,
 				C343D2A21E96CFD400DD9C61 /* FUIPhoneAuthStrings.m in Sources */,
 				C3CA19A81E67E605002AB4CC /* FUIAccountSettingsOperationUnlinkAccount.m in Sources */,
-				8DA941941D678F5400CD3685 /* FUIPasswordSignUpViewController.m in Sources */,
 				8DA9417C1D678F5400CD3685 /* FUIAuthErrors.m in Sources */,
-				8DA941971D678F5400CD3685 /* FUIPasswordVerificationViewController.m in Sources */,
 				C3CA19A51E67E605002AB4CC /* FUIAccountSettingsOperationSignOut.m in Sources */,
 				8DA9417E1D678F5400CD3685 /* FUIAuthErrorUtils.m in Sources */,
 				C3CA19A21E67E605002AB4CC /* FUIAccountSettingsOperationForgotPassword.m in Sources */,
-				8DA9418E1D678F5400CD3685 /* FUIPasswordRecoveryViewController.m in Sources */,
 				C3BE73761E610F6700BCD147 /* FUIStaticContentTableViewManager.m in Sources */,
 				C3CA19B11E67E605002AB4CC /* FUIAccountSettingsOperationUpdatePassword.m in Sources */,
 				8DA941891D678F5400CD3685 /* FUIAuthUtils.m in Sources */,
@@ -3175,6 +3345,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8922BF0621630B3B00CEF7D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 897CB52F2162FF2D00CEF7D7 /* FirebaseEmailAuthUI */;
+			targetProxy = 8922BF0521630B3B00CEF7D7 /* PBXContainerItemProxy */;
+		};
 		893D249221220A9300CEF7D7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 89846C1C2122003300CEF7D7 /* FirebaseAnonymousAuthUI */;
@@ -3184,6 +3359,16 @@
 			isa = PBXTargetDependency;
 			target = 89846C1C2122003300CEF7D7 /* FirebaseAnonymousAuthUI */;
 			targetProxy = 893D249321220F1900CEF7D7 /* PBXContainerItemProxy */;
+		};
+		897CB5302162FF2D00CEF7D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DCC4FC01D678CDC00B0D3C4 /* FirebaseAuthUI */;
+			targetProxy = 897CB5312162FF2D00CEF7D7 /* PBXContainerItemProxy */;
+		};
+		897CB5442162FF4000CEF7D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 89846C1C2122003300CEF7D7 /* FirebaseAnonymousAuthUI */;
+			targetProxy = 897CB5452162FF4000CEF7D7 /* PBXContainerItemProxy */;
 		};
 		89846C1D2122003300CEF7D7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3860,6 +4045,120 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		897CB53F2162FF2D00CEF7D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "$(SRCROOT)/FirebaseEmailAuthUI/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-fstack-protector-all",
+					"-fobjc-arc",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseEmailAuthUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		897CB5402162FF2D00CEF7D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "$(SRCROOT)/FirebaseEmailAuthUI/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-fstack-protector-all",
+					"-fobjc-arc",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseEmailAuthUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		897CB54B2162FF4000CEF7D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+				);
+				INFOPLIST_FILE = "FirebaseAnonymousAuthUITests copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"${BUILT_PRODUCTS_DIR}/GTMOAuth2",
+					"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-Core",
+					"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib",
+					"${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseAnonymousAuthUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REEXPORTED_FRAMEWORK_NAMES = "";
+			};
+			name = Debug;
+		};
+		897CB54C2162FF4000CEF7D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+				);
+				INFOPLIST_FILE = "FirebaseAnonymousAuthUITests copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+					"${BUILT_PRODUCTS_DIR}/GTMOAuth2",
+					"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-Core",
+					"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib",
+					"${BUILT_PRODUCTS_DIR}/nanopb-iOS8.0",
+				);
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseAnonymousAuthUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REEXPORTED_FRAMEWORK_NAMES = "";
+			};
+			name = Release;
+		};
 		89846C2E2122003300CEF7D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5265,6 +5564,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		897CB53E2162FF2D00CEF7D7 /* Build configuration list for PBXNativeTarget "FirebaseEmailAuthUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				897CB53F2162FF2D00CEF7D7 /* Debug */,
+				897CB5402162FF2D00CEF7D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		897CB54A2162FF4000CEF7D7 /* Build configuration list for PBXNativeTarget "FirebaseEmailAuthUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				897CB54B2162FF4000CEF7D7 /* Debug */,
+				897CB54C2162FF4000CEF7D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		89846C2D2122003300CEF7D7 /* Build configuration list for PBXNativeTarget "FirebaseAnonymousAuthUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

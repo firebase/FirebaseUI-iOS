@@ -44,6 +44,15 @@ target 'FirebaseAuthUI' do
     end
   end
 
+  target 'FirebaseEmailAuthUI' do
+    inherit! :search_paths
+
+    target 'FirebaseEmailAuthUITests' do
+      inherit! :search_paths
+      pod 'OCMock'
+    end
+  end
+
   target 'FirebaseFacebookAuthUI' do
     inherit! :search_paths
     # Pods for Facebook Auth
@@ -110,6 +119,7 @@ target 'FirebaseUISample' do
   pod 'OCMock'
   # pod 'FirebaseUI/Anonymous', :path => '.'
   # pod 'FirebaseUI/Auth', :path => '.'
+  # pod 'FirebaseUI/Email', :path => '.'
   # pod 'FirebaseUI/Facebook', :path => '.'
   # pod 'FirebaseUI/Google', :path => '.'
   # pod 'FirebaseUI/Twitter', :path => '.'
