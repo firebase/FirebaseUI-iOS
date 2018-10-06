@@ -54,7 +54,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>fb{your-app-id}</string>
+	<string>{your-app-id}</string>
 	<key>FacebookDisplayName</key>
 	<string>{your-app-name}</string>
 	<key>LSApplicationQueriesSchemes</key>
