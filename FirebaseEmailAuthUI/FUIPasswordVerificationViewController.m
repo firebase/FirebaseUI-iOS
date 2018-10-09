@@ -23,6 +23,8 @@
 #import "FUIAuthTableViewCell.h"
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
+#import "FUIEmailAuth.h"
+#import "FUIEmailAuthStrings.h"
 #import "FUIPasswordRecoveryViewController.h"
 #import "FUIPrivacyAndTermsOfServiceView.h"
 
@@ -71,7 +73,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
                          email:(NSString *_Nullable)email
                  newCredential:(FIRAuthCredential *)newCredential {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
+                        bundle:[FUIAuthUtils bundleNamed:FUIEmailAuthBundleName]
                         authUI:authUI
                          email:email
                  newCredential:newCredential];
@@ -168,7 +170,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
       // Ignore any error (shouldn't happen) and treat the user as successfully signed in.
       [self dismissNavigationControllerAnimated:YES completion:^{
-        [self.authUI invokeResultCallbackWithAuthDataResult:authResult error:nil];
+        [self.authUI invokeResultCallbackWithAuthDataResult:authResult URL:nil error:nil];
       }];
     }];
   }];
@@ -176,9 +178,11 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
 - (IBAction)forgotPassword {
   UIViewController *viewController;
-  if ([self.authUI.delegate respondsToSelector:@selector(passwordRecoveryViewControllerForAuthUI:email:)]) {
-    viewController = [self.authUI.delegate passwordRecoveryViewControllerForAuthUI:self.authUI
-                                                                             email:_email];
+  id<FUIAuthDelegate> delegate = self.authUI.delegate;
+
+  if ([delegate respondsToSelector:@selector(passwordRecoveryViewControllerForAuthUI:email:)]) {
+    viewController = [delegate passwordRecoveryViewControllerForAuthUI:self.authUI
+                                                                 email:_email];
   } else {
     viewController = [[FUIPasswordRecoveryViewController alloc] initWithAuthUI:self.authUI
                                                                          email:_email];

@@ -238,14 +238,19 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
   if (!_auth.currentUser || _auth.currentUser.isAnonymous) {
     FUIAuth.defaultAuthUI.autoUpgradeAnonymousUsers = YES;
     _authUI.providers = [self getListOfIDPs];
-    _authUI.signInWithEmailHidden = ![self isEmailEnabled];
 
-    BOOL shouldSkipPhoneAuthPicker = self.authUI.providers.count == 1 &&
-        [self.authUI.providers.firstObject.providerID isEqualToString:FIRPhoneAuthProviderID] &&
-            self.authUI.isSignInWithEmailHidden;
-    if (shouldSkipPhoneAuthPicker) {
-      FUIPhoneAuth *provider = self.authUI.providers.firstObject;
-      [provider signInWithPresentingViewController:self phoneNumber:nil];
+    NSString *providerID = self.authUI.providers.firstObject.providerID;
+    BOOL isPhoneAuth = [providerID isEqualToString:FIRPhoneAuthProviderID];
+    BOOL isEmailAuth = [providerID isEqualToString:FIREmailAuthProviderID];
+    BOOL shouldSkipAuthPicker = self.authUI.providers.count == 1 && (isPhoneAuth || isEmailAuth);
+    if (shouldSkipAuthPicker) {
+      if (isPhoneAuth) {
+        FUIPhoneAuth *provider = self.authUI.providers.firstObject;
+        [provider signInWithPresentingViewController:self phoneNumber:nil];
+      } else if (isEmailAuth) {
+        FUIEmailAuth *provider = self.authUI.providers.firstObject;
+        [provider signInWithPresentingViewController:self email:nil];
+      }
     } else {
       UINavigationController *controller = [self.authUI authViewController];
       if (_isCustomAuthDelegateSelected) {
@@ -263,6 +268,7 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
 // this method is called only when FUIAuthViewController is delgate of AuthUI
 - (void)authUI:(FUIAuth *)authUI
     didSignInWithAuthDataResult:(nullable FIRAuthDataResult *)authDataResult
+                            URL:(nullable NSURL *)url
                           error:(nullable NSError *)error {
   if (error) {
     if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
@@ -340,6 +346,7 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
 
 + (NSArray *)getAllIDPs {
   NSArray<NSIndexPath *> *selectedRows = @[
+    [NSIndexPath indexPathForRow:kIDPEmail inSection:kSectionsProviders],
     [NSIndexPath indexPathForRow:kIDPGoogle inSection:kSectionsProviders],
     [NSIndexPath indexPathForRow:kIDPFacebook inSection:kSectionsProviders],
     [NSIndexPath indexPathForRow:kIDPTwitter inSection:kSectionsProviders],
@@ -360,6 +367,9 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
     if (indexPath.section == kSectionsProviders) {
       id<FUIAuthProvider> provider;
       switch (indexPath.row) {
+        case kIDPEmail:
+          provider = [[FUIEmailAuth alloc] init];
+          break;
         case kIDPGoogle:
           provider = useCustomScopes ? [[FUIGoogleAuth alloc] initWithScopes:@[kGoogleUserInfoEmailScope,
                                                                                kGoogleUserInfoProfileScope,
@@ -394,13 +404,6 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
   }
 
   return providers;
-}
-
-- (BOOL)isEmailEnabled {
-  NSArray<NSIndexPath *> *selectedRows = [self.tableView indexPathsForSelectedRows];
-  return [selectedRows containsObject:[NSIndexPath
-                                       indexPathForRow:kIDPEmail
-                                       inSection:kSectionsProviders]];
 }
 
 @end

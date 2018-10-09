@@ -19,6 +19,7 @@ import Firebase
 import FirebaseUI
 
 let kFirebaseTermsOfService = URL(string: "https://firebase.google.com/terms/")!
+let kFirebasePrivacyPolicy = URL(string: "https://firebase.google.com/support/privacy/")!
 
 enum UISections: Int, RawRepresentable {
   case Settings = 0
@@ -73,6 +74,7 @@ class FUIAuthViewController: UITableViewController {
     super.viewDidLoad()
 
     self.authUI?.tosurl = kFirebaseTermsOfService
+    self.authUI?.privacyPolicyURL = kFirebasePrivacyPolicy
 
     self.tableView.selectRow(at: IndexPath(row: Providers.Email.rawValue, section: UISections.Providers.rawValue),
                              animated: false,
@@ -184,18 +186,23 @@ class FUIAuthViewController: UITableViewController {
       }
     } else {
       self.authUI?.delegate = self.customAuthorizationSwitch.isOn ? self.customAuthUIDelegate : nil;
-      self.authUI?.isSignInWithEmailHidden = !self.isEmailEnabled()
 
       // If you haven't set up your authentications correctly these buttons
       // will still appear in the UI, but they'll crash the app when tapped.
       self.authUI?.providers = self.getListOfIDPs()
 
-      let shouldSkipPhoneAuthPicker = (self.authUI?.providers.count == 1) &&
-        (self.authUI?.providers.first?.providerID == PhoneAuthProviderID) &&
-        (self.authUI?.isSignInWithEmailHidden)!;
-      if (shouldSkipPhoneAuthPicker) {
-        let provider = self.authUI?.providers.first as! FUIPhoneAuth;
-        provider.signIn(withPresenting: self, phoneNumber: nil);
+      let providerID = self.authUI?.providers.first?.providerID;
+      let isPhoneAuth = providerID == PhoneAuthProviderID;
+      let isEmailAuth = providerID == EmailAuthProviderID;
+      let shouldSkipAuthPicker = self.authUI?.providers.count == 1 && (isPhoneAuth || isEmailAuth);
+      if (shouldSkipAuthPicker) {
+        if (isPhoneAuth) {
+          let provider = self.authUI?.providers.first as! FUIPhoneAuth;
+          provider.signIn(withPresenting: self, phoneNumber: nil);
+        } else if (isEmailAuth) {
+          let provider = self.authUI?.providers.first as! FUIEmailAuth;
+          provider.signIn(withPresenting: self, email: nil);
+        }
       } else {
         let controller = self.authUI!.authViewController()
         controller.navigationBar.isHidden = self.customAuthorizationSwitch.isOn
@@ -243,7 +250,7 @@ class FUIAuthViewController: UITableViewController {
   func getAllAccessTokens() -> String {
     var result = ""
     for provider in self.authUI!.providers {
-      result += (provider.shortName + ": " + provider.accessToken + "\n")
+      result += (provider.shortName + ": " + (provider.accessToken ?? "null") + "\n")
     }
 
     return result
@@ -252,7 +259,7 @@ class FUIAuthViewController: UITableViewController {
   func getAllIdTokens() -> String {
     var result = ""
     for provider in self.authUI!.providers {
-      result += (provider.shortName + ": " + (provider.idToken ?? "null")  + "\n")
+      result += (provider.shortName + ": " + (provider.idToken! ?? "null")  + "\n")
     }
 
     return result
@@ -266,6 +273,8 @@ class FUIAuthViewController: UITableViewController {
           let provider:FUIAuthProvider?
 
           switch indexPath.row {
+          case Providers.Email.rawValue:
+            provider = FUIEmailAuth()
           case Providers.Google.rawValue:
             provider = self.customScopesSwitch.isOn ? FUIGoogleAuth(scopes: [kGoogleGamesScope,
                                                                              kGooglePlusMeScope,
@@ -294,12 +303,6 @@ class FUIAuthViewController: UITableViewController {
     }
     
     return providers
-  }
-
-  func isEmailEnabled() -> Bool {
-    let selectedRows = self.tableView.indexPathsForSelectedRows
-    return selectedRows?.contains(IndexPath(row: Providers.Email.rawValue,
-                                            section: UISections.Providers.rawValue)) ?? false
   }
 
 }

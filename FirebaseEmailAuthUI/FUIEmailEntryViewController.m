@@ -23,6 +23,8 @@
 #import "FUIAuthTableViewCell.h"
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
+#import "FUIEmailAuth.h"
+#import "FUIEmailAuthStrings.h"
 #import "FUIPasswordSignInViewController.h"
 #import "FUIPasswordSignUpViewController.h"
 #import "FUIPrivacyAndTermsOfServiceView.h"
@@ -75,7 +77,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
+                        bundle:[FUIAuthUtils bundleNamed:FUIEmailAuthBundleName]
                         authUI:authUI];
 }
 
@@ -133,6 +135,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 }
 
 - (void)onNext:(NSString *)emailText {
+  FUIEmailAuth *emailAuth = [self.authUI providerWithID:FIREmailAuthProviderID];
+  id<FUIAuthDelegate> delegate = self.authUI.delegate;
+
   if (![[self class] isValidEmail:emailText]) {
     [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
     return;
@@ -150,14 +155,14 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
         [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
       } else {
         [self dismissNavigationControllerAnimated:YES completion:^{
-          [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
+          [self.authUI invokeResultCallbackWithAuthDataResult:nil URL:nil error:error];
         }];
       }
       return;
     }
 
     id<FUIAuthProvider> provider = [self bestProviderFromProviderIDs:providers];
-    if (provider) {
+    if (provider && ![provider.providerID isEqualToString:FIREmailAuthProviderID]) {
       NSString *email = emailText;
       [[self class] showSignInAlertWithEmail:email
                                     provider:provider
@@ -170,9 +175,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       }];
     } else if ([providers containsObject:FIREmailAuthProviderID]) {
       UIViewController *controller;
-      if ([self.authUI.delegate respondsToSelector:@selector(passwordSignInViewControllerForAuthUI:email:)]) {
-        controller = [self.authUI.delegate passwordSignInViewControllerForAuthUI:self.authUI
-                                                                           email:emailText];
+      if ([delegate respondsToSelector:@selector(passwordSignInViewControllerForAuthUI:email:)]) {
+        controller = [delegate passwordSignInViewControllerForAuthUI:self.authUI
+                                                               email:emailText];
       } else {
         controller = [[FUIPasswordSignInViewController alloc] initWithAuthUI:self.authUI
                                                                        email:emailText];
@@ -185,10 +190,10 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       } else {
         // New user.
         UIViewController *controller;
-        if (self.authUI.allowNewEmailAccounts) {
-          if ([self.authUI.delegate respondsToSelector:@selector(passwordSignUpViewControllerForAuthUI:email:)]) {
-            controller = [self.authUI.delegate passwordSignUpViewControllerForAuthUI:self.authUI
-                                                                             email:emailText];
+        if (emailAuth.allowNewEmailAccounts) {
+          if ([delegate respondsToSelector:@selector(passwordSignUpViewControllerForAuthUI:email:)]) {
+            controller = [delegate passwordSignUpViewControllerForAuthUI:self.authUI
+                                                                   email:emailText];
           } else {
             controller = [[FUIPasswordSignUpViewController alloc] initWithAuthUI:self.authUI
                                                                          email:emailText];
@@ -290,7 +295,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       }
 
       [self dismissNavigationControllerAnimated:YES completion:^{
-        [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
+        [self.authUI invokeResultCallbackWithAuthDataResult:nil URL:nil error:error];
       }];
       return;
     }
@@ -304,10 +309,10 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       }
 
       if (error) {
-        [self.authUI invokeResultCallbackWithAuthDataResult:nil error:error];
+        [self.authUI invokeResultCallbackWithAuthDataResult:nil URL:nil error:error];
       } else {
         [self dismissNavigationControllerAnimated:YES completion:^{
-          [self.authUI invokeResultCallbackWithAuthDataResult:authResult error:error];
+          [self.authUI invokeResultCallbackWithAuthDataResult:authResult URL:nil error:error];
         }];
       }
     }];

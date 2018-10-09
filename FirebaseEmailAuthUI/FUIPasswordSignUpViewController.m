@@ -22,6 +22,7 @@
 #import "FUIAuthTableViewCell.h"
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
+#import "FUIEmailAuthStrings.h"
 #import "FUIPrivacyAndTermsOfServiceView.h"
 
 /** @var kCellReuseIdentifier
@@ -87,7 +88,7 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                          email:(NSString *_Nullable)email {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
+                        bundle:[FUIAuthUtils bundleNamed:FUIEmailAuthBundleName]
                         authUI:authUI
                          email:email];
 }
@@ -221,7 +222,7 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
   }
 
   [self dismissNavigationControllerAnimated:YES completion:^() {
-    [self.authUI invokeResultCallbackWithAuthDataResult:authDataResult error:error];
+    [self.authUI invokeResultCallbackWithAuthDataResult:authDataResult URL:nil error:error];
   }];
 }
 
