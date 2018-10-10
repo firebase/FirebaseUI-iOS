@@ -159,6 +159,8 @@
     [_query removeObserverWithHandle:handle.unsignedIntegerValue];
   }
 
+  [self.handles removeAllObjects];
+
   // Remove all values on invalidation.
   [self didUpdate];
   for (NSInteger i = 0; i < self.snapshots.count; /* no i++ since we modify the array instead */ ) {
