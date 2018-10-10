@@ -39,7 +39,7 @@
 @implementation FUISortedArray
 // Cheating at subclassing, but this @dynamic avoids
 // duplicating storage without exposing mutability publicly
-@dynamic snapshots;
+@dynamic snapshots, handles;
 
 - (instancetype)initWithQuery:(FIRDatabaseQuery *)query
                      delegate:(id<FUICollectionDelegate>)delegate
@@ -48,7 +48,6 @@
   self = [super initWithQuery:query delegate:delegate];
   if (self != nil) {
     _sortDescriptor = sortDescriptor;
-    _handles = [NSMutableSet setWithCapacity:4];
   }
   return self;
 }
