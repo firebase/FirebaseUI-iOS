@@ -61,39 +61,39 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseUI (5.2.1):
-    - FirebaseUI/Anonymous (= 5.2.1)
-    - FirebaseUI/Auth (= 5.2.1)
-    - FirebaseUI/Database (= 5.2.1)
-    - FirebaseUI/Email (= 5.2.1)
-    - FirebaseUI/Facebook (= 5.2.1)
-    - FirebaseUI/Firestore (= 5.2.1)
-    - FirebaseUI/Google (= 5.2.1)
-    - FirebaseUI/Phone (= 5.2.1)
-    - FirebaseUI/Storage (= 5.2.1)
-    - FirebaseUI/Twitter (= 5.2.1)
-  - FirebaseUI/Anonymous (5.2.1):
+  - FirebaseUI (5.2.2):
+    - FirebaseUI/Anonymous (= 5.2.2)
+    - FirebaseUI/Auth (= 5.2.2)
+    - FirebaseUI/Database (= 5.2.2)
+    - FirebaseUI/Email (= 5.2.2)
+    - FirebaseUI/Facebook (= 5.2.2)
+    - FirebaseUI/Firestore (= 5.2.2)
+    - FirebaseUI/Google (= 5.2.2)
+    - FirebaseUI/Phone (= 5.2.2)
+    - FirebaseUI/Storage (= 5.2.2)
+    - FirebaseUI/Twitter (= 5.2.2)
+  - FirebaseUI/Anonymous (5.2.2):
     - FirebaseUI/Auth
-  - FirebaseUI/Auth (5.2.1):
+  - FirebaseUI/Auth (5.2.2):
     - Firebase/Auth (~> 5.0)
-  - FirebaseUI/Database (5.2.1):
+  - FirebaseUI/Database (5.2.2):
     - Firebase/Database (~> 5.0)
-  - FirebaseUI/Email (5.2.1):
+  - FirebaseUI/Email (5.2.2):
     - FirebaseUI/Auth
-  - FirebaseUI/Facebook (5.2.1):
+  - FirebaseUI/Facebook (5.2.2):
     - FBSDKLoginKit (~> 4.0)
     - FirebaseUI/Auth
-  - FirebaseUI/Firestore (5.2.1):
+  - FirebaseUI/Firestore (5.2.2):
     - Firebase/Firestore
-  - FirebaseUI/Google (5.2.1):
+  - FirebaseUI/Google (5.2.2):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 4.0)
-  - FirebaseUI/Phone (5.2.1):
+  - FirebaseUI/Phone (5.2.2):
     - FirebaseUI/Auth
-  - FirebaseUI/Storage (5.2.1):
+  - FirebaseUI/Storage (5.2.2):
     - Firebase/Storage (~> 5.0)
     - SDWebImage (~> 4.0)
-  - FirebaseUI/Twitter (5.2.1):
+  - FirebaseUI/Twitter (5.2.2):
     - FirebaseUI/Auth
     - TwitterKit (~> 3.0)
   - GoogleSignIn (4.3.0):
@@ -109,8 +109,8 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.4)
     - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.4)"
   - "GoogleToolboxForMac/NSString+URLArguments (2.1.4)"
-  - GoogleUtilities/Environment (5.3.0)
-  - GoogleUtilities/Logger (5.3.0):
+  - GoogleUtilities/Environment (5.3.1)
+  - GoogleUtilities/Logger (5.3.1):
     - GoogleUtilities/Environment
   - gRPC (1.14.0):
     - gRPC-RxLibrary (= 1.14.0)
@@ -211,10 +211,10 @@ SPEC CHECKSUMS:
   FirebaseDatabase: e2bcbc106adc4b11a2da3ec2eb63c0c4a44f2f54
   FirebaseFirestore: 45a9a3045a2dc27f23c13bf832556fe287fbe1b5
   FirebaseStorage: fd82e5e5c474897e19972b34b22ac0f589dce04e
-  FirebaseUI: b15bd7d8a0b6de296d046f82e37429276ed3e7b5
+  FirebaseUI: 4047ce0093bd304647676cea71c26350158d4b60
   GoogleSignIn: 11183592dc63e105475c7305a325045ff95e02b7
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
-  GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
+  GoogleUtilities: e18bfddeb9e93419a04865d4f01722c4d5b014d9
   gRPC: 9d4c549f37c7cef22478634bac7a0405b6e3dbfb
   "gRPC-C++": ee0b01db3122f0b6c2be28b5b11039f62fa15fe6
   gRPC-Core: f4836515817c0eb479aeeb9cc27c91c4ba62a9f6
