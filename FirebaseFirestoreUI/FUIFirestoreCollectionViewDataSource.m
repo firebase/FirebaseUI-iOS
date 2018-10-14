@@ -24,6 +24,15 @@
 
 @property (nonatomic, readonly, nonnull) FUIBatchedArray *collection;
 
+// We need to maintain our own count property because the self.collection.count is sometimes
+// inconsistent with how the -[UICollectionView performBatchUpdates:] method expects it to work.
+// -[UICollectionView performBatchUpdates:] calls -[UICollectionViewDataSource count] at the
+// beginning and at the end of the method, and if the value of -[UICollectionViewDataSource count]
+// after -[UICollectionView performBatchUpdates:] is not equal to the value of
+// -[UICollectionViewDataSource count] before + (rows added - rows deleted) it throws an
+// NSInternalInconsistencyException.
+@property (nonatomic) NSUInteger count;
+
 /**
  * The callback to populate a subclass of UICollectionViewCell with an object
  * provided by the datasource.
@@ -46,6 +55,7 @@
     _collection = collection;
     _collection.delegate = self;
     _populateCellAtIndexPath = populateCell;
+    _count = 0;
   }
   return self;
 }
@@ -56,10 +66,6 @@
                                                          FIRDocumentSnapshot *))populateCell {
   FUIBatchedArray *array = [[FUIBatchedArray alloc] initWithQuery:query delegate:self];
   return [self initWithCollection:array populateCell:populateCell];
-}
-
-- (NSUInteger)count {
-  return self.collection.count;
 }
 
 - (NSArray<FIRDocumentSnapshot *> *)items {
@@ -131,7 +137,9 @@
       [insertedIndexPaths addObject:inserted];
     }
     [self.collectionView insertItemsAtIndexPaths:insertedIndexPaths];
-
+    
+    self.count += insertedIndexPaths.count;
+    self.count -= deletedIndexPaths.count;
   } completion:^(BOOL finished) {
     // Reload paths that have been moved.
     NSMutableArray *movedIndexPaths =
@@ -170,7 +178,7 @@
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-  return self.collection.count;
+  return self.count;
 }
 
 @end
