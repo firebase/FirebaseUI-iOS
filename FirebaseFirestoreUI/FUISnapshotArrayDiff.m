@@ -18,227 +18,6 @@
 
 #import "FUISnapshotArrayDiff.h"
 
-@interface FUIArraySlice ()
-
-@end
-
-@implementation FUIArraySlice
-
-- (instancetype)init {
-  return [self initWithArray:@[] startIndex:0 length:0];
-}
-
-- (instancetype)initWithArray:(NSArray *)array startIndex:(NSInteger)start length:(NSInteger)length {
-  NSParameterAssert(start >= 0);
-  NSParameterAssert(length >= 0);
-  NSParameterAssert(start + length <= array.count);
-  self = [super init];
-  if (self != nil) {
-    _startIndex = start;
-    _count = length;
-    _backingArray = [array copy];
-  }
-  return self;
-}
-
-- (instancetype)initWithArray:(NSArray *)array startIndex:(NSInteger)start endIndex:(NSInteger)end {
-  NSInteger length = end - start;
-  NSAssert(length >= 0, @"Cannot create array slice with length less than zero");
-  return [self initWithArray:array startIndex:start length:length];
-}
-
-- (instancetype)initWithArray:(NSArray *)array {
-  return [self initWithArray:array startIndex:0 length:array.count];
-}
-
-- (id)objectAtIndex:(NSInteger)index {
-  NSAssert(index >= self.startIndex && index < self.endIndex, @"Index out of bounds");
-  return self.backingArray[index];
-}
-
-- (id)objectAtIndexedSubscript:(NSInteger)index {
-  return [self objectAtIndex:index];
-}
-
-- (FUIArraySlice *)suffixFromIndex:(NSInteger)index {
-  return [[FUIArraySlice alloc] initWithArray:self.backingArray
-                                   startIndex:index
-                                     endIndex:self.endIndex];
-}
-
-- (NSInteger)endIndex {
-  return self.startIndex + self.count;
-}
-
-- (NSUInteger)hash {
-  NSUInteger hash = 5381;
-  for (NSInteger i = self.startIndex; i < self.endIndex; i++) {
-    NSUInteger intermediate = [self.backingArray[i] hash];
-    hash = (hash << 5) + hash + intermediate;
-  }
-  return hash;
-}
-
-- (BOOL)isEqual:(FUIArraySlice *)object {
-  if (![object isKindOfClass:[self class]]) { return NO; }
-  if (object.count != self.count) { return NO; }
-  if (object.startIndex != self.startIndex) { return NO; }
-
-  for (NSInteger i = self.startIndex; i < self.endIndex; i++) {
-    if (![[object objectAtIndex:i] isEqual:[self objectAtIndex:i]]) {
-      return NO;
-    }
-  }
-
-  return YES;
-}
-
-@end
-
-
-@interface FUIUnorderedPair ()
-
-@property (nonatomic, readwrite) id left;
-@property (nonatomic, readwrite) id right;
-
-- (instancetype)initWithLeft:(id)left right:(id)right NS_DESIGNATED_INITIALIZER;
-- (instancetype)init NS_UNAVAILABLE;
-
-@end
-
-@implementation FUIUnorderedPair
-
-- (instancetype)init {
-  abort();
-}
-
-- (instancetype)initWithLeft:(id)left right:(id)right {
-  self = [super init];
-  if (self != nil) {
-    _left = left;
-    _right = right;
-  }
-  return self;
-}
-
-- (NSUInteger)hash {
-  return [self.left hash] ^ [self.right hash];
-}
-
-- (BOOL)isEqual:(FUIUnorderedPair *)object {
-  if (![object isKindOfClass:[self class]]) { return NO; }
-  return ([self.left isEqual:object.left] && [self.right isEqual:object.right]) ||
-      ([self.right isEqual:object.left] && [self.left isEqual:object.right]);
-}
-
-// This class is immutable, so copies just return self.
-- (id)copyWithZone:(NSZone *)zone {
-  return self;
-}
-
-- (id)copy {
-  return self;
-}
-
-@end
-
-FUIUnorderedPair *FUIUnorderedPairMake(id left, id right) {
-  FUIUnorderedPair *pair = [[FUIUnorderedPair alloc] initWithLeft:left right:right];
-  return pair;
-}
-
-@interface FUILCS ()
-@property (nonatomic, readonly) NSMutableDictionary<FUIUnorderedPair<FUIArraySlice<id> *> *, NSMutableArray<id> *> *memo;
-@end
-
-@implementation FUILCS
-
-- (instancetype)init {
-  self = [super init];
-  if (self != nil) {
-    _memo = [NSMutableDictionary dictionary];
-  }
-  return self;
-}
-
-- (NSMutableArray *)lcsWithInitial:(FUIArraySlice *)lhs result:(FUIArraySlice *)rhs {
-  if (lhs.count == 0 && rhs.count == 0) {
-    return [NSMutableArray array];
-  }
-
-  FUIUnorderedPair *args = FUIUnorderedPairMake(lhs, rhs);
-  NSMutableArray *memoized = _memo[args];
-  if (memoized != nil) {
-    return memoized;
-  }
-
-  @autoreleasepool {
-    FUIArraySlice *shorter;
-    FUIArraySlice *longer;
-    if (lhs.count <= rhs.count) {
-      shorter = lhs; longer = rhs;
-    } else {
-      shorter = rhs; longer = lhs;
-    }
-
-    NSMutableArray *aggregate = [NSMutableArray arrayWithCapacity:shorter.count];
-
-    // Aggregate common elements.
-    NSInteger shortOffset = shorter.startIndex;
-    NSInteger longOffset  = longer.startIndex;
-    for (NSInteger i = 0; i < shorter.count; i++) {
-      if ([shorter[i + shortOffset] isEqual:longer[i + longOffset]]) {
-        [aggregate addObject:shorter[i + shortOffset]];
-      } else {
-        break;
-      }
-    }
-
-    // LCS is the entire shorter collection.
-    if (aggregate.count == shorter.count) {
-      _memo[args] = aggregate;
-      return aggregate;
-    }
-
-    // Reached uncommon element, so try LCS of both sides minus the uncommon element or any
-    // previously aggregated common elements.
-    NSMutableArray *right =
-        [self lcsWithInitial:[shorter suffixFromIndex:shortOffset + aggregate.count]
-                      result:[longer suffixFromIndex:longOffset + aggregate.count + 1]];
-
-    // Exit early, avoiding one recurse
-    if (right.count == shorter.count) {
-      [aggregate addObjectsFromArray:right];
-      _memo[args] = aggregate;
-      return aggregate;
-    }
-
-    NSMutableArray *left =
-        [self lcsWithInitial:[shorter suffixFromIndex:shortOffset + aggregate.count + 1]
-                      result:[longer suffixFromIndex:longOffset + aggregate.count]];
-
-    // Return the aggregate plus the greater of the two subsequences.
-    if (left.count > right.count) {
-      [aggregate addObjectsFromArray:left];
-    } else {
-      [aggregate addObjectsFromArray:right];
-    }
-
-    _memo[args] = aggregate;
-    return aggregate;
-  }
-}
-
-+ (NSArray *)lcsWithInitialArray:(NSArray *)initial resultArray:(NSArray *)result {
-  FUILCS *lcs = [[FUILCS alloc] init];
-  FUIArraySlice *left = [[FUIArraySlice alloc] initWithArray:initial];
-  FUIArraySlice *right = [[FUIArraySlice alloc] initWithArray:result];
-  return [[lcs lcsWithInitial:left result:right] copy];
-}
-
-@end
-
-
 @implementation FUISnapshotArrayDiff
 
 - (instancetype)initWithInitialArray:(NSArray *)initialArray resultArray:(NSArray *)resultArray {
@@ -246,122 +25,9 @@ FUIUnorderedPair *FUIUnorderedPairMake(id left, id right) {
   if (self != nil) {
     _initial = [initialArray copy];
     _result = [resultArray copy];
-    [self buildDiffs];
+    [self buildFastDiffs];
   }
   return self;
-}
-
-- (void)buildDiffs {
-  NSArray *lcs = [FUILCS lcsWithInitialArray:_initial resultArray:_result];
-
-  // A map of deleted elements and their indexes, which will be used later to convert
-  // deletes into moves. These must be arrays since objects may not be unique.
-  NSMutableDictionary<id, NSMutableSet<NSNumber *> *> *deleted =
-      [NSMutableDictionary dictionaryWithCapacity:_initial.count];
-
-  NSMutableArray<NSNumber *> *deletedIndexes = [NSMutableArray arrayWithCapacity:_initial.count];
-  NSMutableArray *deletedObjects = [NSMutableArray arrayWithCapacity:_initial.count];
-
-  NSMutableArray<NSNumber *> *insertedIndexes = [NSMutableArray arrayWithCapacity:_result.count];
-  NSMutableArray *insertedObjects = [NSMutableArray arrayWithCapacity:_result.count];
-
-  NSMutableArray<NSNumber *> *changedIndexes = [NSMutableArray arrayWithCapacity:_initial.count];
-  NSMutableArray *changedObjects = [NSMutableArray arrayWithCapacity:_initial.count];
-
-  NSMutableArray<NSNumber *> *movedInitialIndexes = [NSMutableArray array];
-  NSMutableArray<NSNumber *> *movedResultIndexes = [NSMutableArray array];
-  NSMutableArray *movedObjects = [NSMutableArray array];
-
-  // Build the array of deleted items by examining the initial array and LCS.
-  // All deleted items and their indexes go into the dictionary of deleted stuff,
-  // so we can tell later on which ones should be moves and which ones should be deletes.
-  NSInteger lcsIndex = 0;
-  for (NSInteger i = 0; i < _initial.count; i++) {
-    id object = _initial[i];
-    id lcsObject;
-    if (lcsIndex < lcs.count) { lcsObject = lcs[lcsIndex]; }
-    id resultObject;
-    if (i < _result.count) { resultObject = _result[i]; }
-    if ([lcsObject isEqual:object]) {
-      lcsIndex++;
-    } else {
-      // All missing elements are treated as deletions for now and then revised later.
-      [deletedIndexes addObject:@(i)];
-      [deletedObjects addObject:object];
-
-      if (deleted[object] == nil) {
-        deleted[object] = [NSMutableSet setWithObject:@(i)];
-      } else {
-        [deleted[object] addObject:@(i)];
-      }
-    }
-  }
-
-  // Build everything that's not a delete. Changes come first, then moves, then insertions.
-  // Moves are considered insertions of a previously deleted element, unless
-  // that element was a part of a change.
-  lcsIndex = 0;
-  for (NSInteger i = 0; i < _result.count; i++) {
-    id initialObject;
-    if (i < _initial.count) { initialObject = _initial[i]; }
-    id lcsObject;
-    if (lcsIndex < lcs.count) { lcsObject = lcs[lcsIndex]; }
-    id object = _result[i];
-    if ([lcsObject isEqual:object]) {
-      lcsIndex++;
-    } else {
-      // Insertion of a previously deleted element should be counted as a move.
-      if (deleted[object].count > 0) {
-        NSNumber *initialIndex = deleted[object].anyObject;
-        [deleted[object] removeObject:initialIndex];
-        [movedObjects addObject:object];
-        [movedInitialIndexes addObject:initialIndex];
-        [movedResultIndexes addObject:@(i)];
-        continue;
-      }
-
-      // If we're inserting at the same index that a deletion previously took place,
-      // count it as an in-place change instead.
-      if ([deleted[object] containsObject:@(i)]) {
-        [changedObjects addObject:object];
-        [changedIndexes addObject:@(i)];
-
-        // Changes can no longer be considered moves, so remove them from the moves dict.
-        [deleted[object] removeObject:@(i)];
-        continue;
-      }
-
-      // Otherwise, this is just an insertion.
-      [insertedIndexes addObject:@(i)];
-      [insertedObjects addObject:object];
-    }
-  }
-
-  // Finally, remove deletions that were later counted as moves/changes.
-  NSMutableArray *oldDeletions = deletedObjects;
-  NSMutableArray *oldIndexes = deletedIndexes;
-  NSSet<NSNumber *> *changes = [NSSet setWithArray:movedInitialIndexes];
-  changes = [changes setByAddingObjectsFromArray:changedIndexes];
-  deletedObjects = [NSMutableArray arrayWithCapacity:oldDeletions.count];
-  deletedIndexes = [NSMutableArray arrayWithCapacity:oldIndexes.count];
-  for (NSInteger i = 0; i < oldDeletions.count; i++) {
-    if ([changes containsObject:oldIndexes[i]]) { continue; }
-    [deletedObjects addObject:oldDeletions[i]];
-    [deletedIndexes addObject:oldIndexes[i]];
-  }
-
-  _deletedIndexes = [deletedIndexes copy];
-  _deletedObjects = [deletedObjects copy];
-
-  _insertedIndexes = [insertedIndexes copy];
-  _insertedObjects = [insertedObjects copy];
-
-  _changedIndexes = [changedIndexes copy];
-  _changedObjects = [changedObjects copy];
-
-  _movedInitialIndexes = [movedInitialIndexes copy];
-  _movedResultIndexes = [movedResultIndexes copy];
-  _movedObjects = [movedObjects copy];
 }
 
 - (instancetype)initWithInitialArray:(NSArray<FIRDocumentSnapshot *> *)initial
@@ -377,6 +43,136 @@ FUIUnorderedPair *FUIUnorderedPairMake(id left, id right) {
   return self;
 }
 
+// Builds a fast (linear), non-minimal diff between the two collections of
+// document snapshots. This diff may include some spurious moves, but should not
+// violate any UIKit expectations for cell updates in table or collection views.
+// It should not include any unnecessary adds, deletes, or reloads/changes.
+- (void)buildFastDiffs {
+  NSMutableDictionary<NSString *, NSNumber *> *oldIndexes =
+      [NSMutableDictionary dictionaryWithCapacity:_initial.count];
+  NSMutableDictionary<NSString *, NSNumber *> *newIndexes =
+      [NSMutableDictionary dictionaryWithCapacity:_result.count];
+
+  NSArray<FIRDocumentSnapshot *> *initial = _initial;
+  NSArray<FIRDocumentSnapshot *> *result = _result;
+
+  for (NSInteger i = 0; i < initial.count; i++) {
+    oldIndexes[initial[i].documentID] = @(i);
+  }
+  for (NSInteger i = 0; i < result.count; i++) {
+    newIndexes[result[i].documentID] = @(i);
+  }
+
+  // This set is used to look up the index of deletions later on.
+  NSMutableOrderedSet<NSNumber *> *deletedIndexes = [NSMutableOrderedSet orderedSet];
+  NSMutableOrderedSet<FIRDocumentSnapshot *> *deletedObjects = [NSMutableOrderedSet orderedSet];
+
+  NSMutableArray<NSNumber *> *insertedIndexes = [NSMutableArray array];
+  NSMutableArray<FIRDocumentSnapshot *> *insertedObjects = [NSMutableArray array];
+
+  NSMutableArray<NSNumber *> *changedIndexes = [NSMutableArray array];
+  NSMutableArray<FIRDocumentSnapshot *> *changedObjects = [NSMutableArray array];
+
+  NSMutableArray<NSNumber *> *movedInitialIndexes = [NSMutableArray array];
+  NSMutableArray<NSNumber *> *movedResultIndexes = [NSMutableArray array];
+  NSMutableArray<FIRDocumentSnapshot *> *movedObjects = [NSMutableArray array];
+
+  // Loop through the collections, building diff information as we go.
+  // This is simpler than some other diff agorithms because documentIDs are guaranteed
+  // to be unique, so we can't have multiple versions of the same document in a
+  // collection. Here's the observations we're making:
+  //
+  // 1. If the document is unchanged and its start and end indexes are the same, ignore the
+  //    document.
+  // 2. If the document is different in the initial and result arrays but the documentID
+  //    is the same, then the document was changed (and should be reloaded).
+  // 3. If the document did not exist in the initial array, this corresponds to an added object.
+  // 4. If the document did not exist in the result array, this corresponds to a deleted object.
+  // 5. If an add and delete occurred at the same index, this corresponds to a changed object.
+  // 6. If the document exists in both arrays with differing indexes, this corresponds to a moved
+  //    object.
+  // 7. If the document exists in both arrays with differing indexes and was also changed,
+  //    this should be modeled as a delete and then an add.
+  for (NSInteger i = 0; i < initial.count; i++) {
+    NSString *key = initial[i].documentID;
+    FIRDocumentSnapshot *_Nonnull oldDocument = initial[i];
+    FIRDocumentSnapshot *_Nullable newDocument =
+        newIndexes[key] != nil ? result[newIndexes[key].integerValue] : nil;
+    BOOL changed = NO;
+    BOOL moved = NO;
+
+    if (newDocument == nil) {
+      [deletedIndexes addObject:oldIndexes[key]];
+      [deletedObjects addObject:oldDocument];
+    } else {
+      changed = ![newDocument isEqual:oldDocument];
+      moved = ![oldIndexes[key] isEqualToNumber:newIndexes[key]];
+
+      if (!changed && !moved) {
+        continue;
+      }
+
+      if (changed && !moved) {
+        [changedIndexes addObject:oldIndexes[key]];
+        [changedObjects addObject:newDocument];
+      }
+
+      if (!changed && moved) {
+        NSNumber *oldIndex = oldIndexes[key];
+        NSNumber *newIndex = newIndexes[key];
+        [movedInitialIndexes addObject:oldIndex];
+        [movedResultIndexes addObject:newIndex];
+        [movedObjects addObject:oldDocument];
+      }
+
+      if (changed && moved) {
+        NSNumber *oldIndex = oldIndexes[key];
+        NSNumber *newIndex = newIndexes[key];
+
+        [deletedIndexes addObject:oldIndex];
+        [deletedObjects addObject:oldDocument];
+
+        [insertedIndexes addObject:newIndex];
+        [insertedObjects addObject:newDocument];
+      }
+    }
+  }
+
+  // Only process insertions and changes as a result of insertions and deletions to the same
+  // index in this loop.
+  for (NSInteger i = 0; i < result.count; i++) {
+    FIRDocumentSnapshot *newDocument = result[i];
+    NSString *key = newDocument.documentID;
+    if (oldIndexes[key] != nil) { continue; }
+
+    NSNumber *newIndex = newIndexes[key];
+    if ([deletedIndexes containsObject:newIndex]) {
+      FIRDocumentSnapshot *oldDocument = initial[newIndexes[key].integerValue];
+      [deletedIndexes removeObject:newIndex];
+      [deletedObjects removeObject:oldDocument];
+
+      [changedIndexes addObject:newIndex];
+      [changedObjects addObject:newDocument];
+    } else {
+      [insertedIndexes addObject:newIndex];
+      [insertedObjects addObject:newDocument];
+    }
+  }
+
+  _deletedIndexes = [deletedIndexes array];
+  _deletedObjects = [deletedObjects array];
+
+  _insertedIndexes = [insertedIndexes copy];
+  _insertedObjects = [insertedObjects copy];
+
+  _changedIndexes = [changedIndexes copy];
+  _changedObjects = [changedObjects copy];
+
+  _movedInitialIndexes = [movedInitialIndexes copy];
+  _movedResultIndexes = [movedResultIndexes copy];
+  _movedObjects = [movedObjects copy];
+}
+
 - (void)buildDiffsFromDocumentChanges:(NSArray<FIRDocumentChange *> *)documentChanges {
   NSMutableDictionary<NSString *, NSNumber *> *oldIndexes =
       [NSMutableDictionary dictionaryWithCapacity:_initial.count];
@@ -387,10 +183,10 @@ FUIUnorderedPair *FUIUnorderedPairMake(id left, id right) {
   NSArray<FIRDocumentSnapshot *> *result = _result;
 
   // Ignore the FIRDocumentChange indexing, since we do our own
-  for (NSInteger i = 0; i < _initial.count; i++) {
+  for (NSInteger i = 0; i < initial.count; i++) {
     oldIndexes[initial[i].documentID] = @(i);
   }
-  for (NSInteger i = 0; i < _result.count; i++) {
+  for (NSInteger i = 0; i < result.count; i++) {
     newIndexes[result[i].documentID] = @(i);
   }
 

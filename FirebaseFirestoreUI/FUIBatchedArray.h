@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Called when any new data is received or the batched array's query is changed.
  */
 - (void)batchedArray:(FUIBatchedArray *)array
-   didUpdateWithDiff:(FUISnapshotArrayDiff<FIRDocumentSnapshot *> *)diff;
+   didUpdateWithDiff:(FUISnapshotArrayDiff *)diff;
 
 /**
  * Called when the array's query raises an error.

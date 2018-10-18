@@ -33,95 +33,8 @@
   [super tearDown];
 }
 
-#pragma mark - FUILCS
-
-// TODO(morganchen): add indexes to these tests too
-- (void)testLCSEdgeCases {
-  NSArray *initial = @[];
-  NSArray *result = @[];
-
-  NSArray *lcs = [FUILCS lcsWithInitialArray:initial resultArray:result];
-
-  XCTAssertEqualObjects(lcs, @[], @"Expected LCS of 2 empty arrays to be empty array");
-
-  initial = @[@"a", @"b", @"c", @"d", @"e"];
-  result = @[@"a", @"b", @"c"];
-
-  lcs = [FUILCS lcsWithInitialArray:initial resultArray:result];
-
-  NSArray *expected = @[@"a", @"b", @"c"];
-  XCTAssertEqualObjects(lcs, expected, @"Expected lcs of %@ and %@ to be %@, got %@",
-                        initial, result, expected, lcs);
-
-  initial = @[@"a", @"b", @"c", @"d", @"e"];
-  result = @[@"c", @"d", @"e"];
-
-  lcs = [FUILCS lcsWithInitialArray:initial resultArray:result];
-
-  expected = @[@"c", @"d", @"e"];
-  XCTAssertEqualObjects(lcs, expected, @"Expected lcs of %@ and %@ to be %@, got %@",
-                        initial, result, expected, lcs);
-
-  initial = @[@"a", @"b", @"c", @"d", @"e"];
-  result = @[@"c", @"c", @"c"];
-
-  lcs = [FUILCS lcsWithInitialArray:initial resultArray:result];
-
-  expected = @[@"c"];
-  XCTAssertEqualObjects(lcs, expected, @"Expected lcs of %@ and %@ to be %@, got %@",
-                        initial, result, expected, lcs);
-
-  initial = @[@"a", @"e"];
-  result = @[@"a", @"b", @"c", @"d", @"e"];
-
-  lcs = [FUILCS lcsWithInitialArray:initial resultArray:result];
-
-  expected = @[@"a", @"e"];
-  XCTAssertEqualObjects(lcs, expected, @"Expected lcs of %@ and %@ to be %@, got %@",
-                        initial, result, expected, lcs);
-
-  initial = @[@"a", @"b", @"c", @"d", @"e"];
-  result = @[@"x", @"y", @"z", @"z", @"f"];
-
-  lcs = [FUILCS lcsWithInitialArray:initial resultArray:result];
-
-  expected = @[];
-  XCTAssertEqualObjects(lcs, expected, @"Expected lcs of %@ and %@ to be %@, got %@",
-                        initial, result, expected, lcs);
-
-  initial = @[@"a", @"b", @"c", @"d", @"e"];
-  result = @[@"a", @"b", @"c", @"d", @"e"];
-
-  lcs = [FUILCS lcsWithInitialArray:initial resultArray:result];
-
-  expected = @[@"a", @"b", @"c", @"d", @"e"];
-  XCTAssertEqualObjects(lcs, expected, @"Expected lcs of %@ and %@ to be %@, got %@",
-                        initial, result, expected, lcs);
-
-  initial = @[@"a", @"b", @"d", @"e"];
-  result = @[@"a", @"b", @"c", @"d", @"e"];
-
-  lcs = [FUILCS lcsWithInitialArray:initial resultArray:result];
-
-  expected = @[@"a", @"b", @"d", @"e"];
-  XCTAssertEqualObjects(lcs, expected, @"Expected lcs of %@ and %@ to be %@, got %@",
-                        initial, result, expected, lcs);
-}
-
-- (void)testLCSGeneralCases {
-  NSArray *initial, *result, *lcs, *expected;
-
-  initial = [@"a b a b a b a a a c b c" componentsSeparatedByString:@" "];
-  result = [@"b a b a c a c a c b c" componentsSeparatedByString:@" "];
-
-  lcs = [FUILCS lcsWithInitialArray:initial resultArray:result];
-
-  expected = @[@"b", @"a", @"b", @"a", @"a", @"a", @"c", @"b", @"c"];
-  XCTAssertEqualObjects(lcs, expected, @"Expected lcs of %@ and %@ to be %@, got %@",
-                        initial, result, expected, lcs);
-}
-
-#pragma mark - General diff (without Firestore)
+// TODO(morganchen): Add indexes to these tests too
+#pragma mark - General diff (without Firestore documentChanges)
 
 - (void)testDiffEdgeCases {
   NSArray *initial = @[];
@@ -135,13 +48,16 @@
   XCTAssert(diff.changedObjects.count == 0, @"expected diff between empty arrays to be empty");
   XCTAssert(diff.movedObjects.count == 0, @"expected diff between empty arrays to be empty");
 
-  initial = @[@"a", @"b"];
+  initial = @[[FUIDocumentSnapshot documentWithID:@"a"], [FUIDocumentSnapshot documentWithID:@"b"]];
   result = @[];
   diff = [[FUISnapshotArrayDiff alloc] initWithInitialArray:initial
                                                 resultArray:result];
 
   NSArray *expectedDeletions, *expectedInsertions, *expectedChanges, *expectedMoves;
-  expectedDeletions = @[@"a", @"b"];
+  expectedDeletions = @[
+    [FUIDocumentSnapshot documentWithID:@"a"],
+    [FUIDocumentSnapshot documentWithID:@"b"]
+  ];
   XCTAssertEqualObjects(diff.deletedObjects, expectedDeletions,
                         @"expected deletions to equal %@, got %@",
                         expectedDeletions, diff.deletedObjects);
@@ -151,11 +67,12 @@
   XCTAssert(diff.movedObjects.count == 0, @"expected zero moves, got %@", diff.movedObjects);
 
   initial = @[];
-  result = @[@"a", @"b"];
+  result = @[[FUIDocumentSnapshot documentWithID:@"a"], [FUIDocumentSnapshot documentWithID:@"b"]];
   diff = [[FUISnapshotArrayDiff alloc] initWithInitialArray:initial
                                                 resultArray:result];
   expectedDeletions = @[];
-  expectedInsertions = @[@"a", @"b"];
+  expectedInsertions =
+      @[[FUIDocumentSnapshot documentWithID:@"a"], [FUIDocumentSnapshot documentWithID:@"b"]];
   expectedMoves = @[];
   expectedChanges = @[];
   XCTAssertEqualObjects(diff.deletedObjects, expectedDeletions,
@@ -171,34 +88,36 @@
                         @"expected deletions to equal %@, got %@",
                         expectedChanges, diff.changedObjects);
 
-  initial = @[@"x", @"y"];
-  result = @[@"a", @"b"];
-  diff = [[FUISnapshotArrayDiff alloc] initWithInitialArray:initial
-                                                resultArray:result];
-  expectedDeletions = @[@"x", @"y"];
-  expectedInsertions = @[@"a", @"b"];
-  expectedMoves = @[];
-  expectedChanges = @[];
-  XCTAssertEqualObjects(diff.deletedObjects, expectedDeletions,
-                        @"expected deletions to equal %@, got %@",
-                        expectedDeletions, diff.deletedObjects);
-  XCTAssertEqualObjects(diff.insertedObjects, expectedInsertions,
-                        @"expected insertions to equal %@, got %@",
-                        expectedInsertions, diff.insertedObjects);
-  XCTAssertEqualObjects(diff.movedObjects, expectedMoves,
-                        @"expected moves to equal %@, got %@",
-                        expectedMoves, diff.movedObjects);
-  XCTAssertEqualObjects(diff.changedObjects, expectedChanges,
-                        @"expected deletions to equal %@, got %@",
-                        expectedChanges, diff.changedObjects);
-
-  initial = @[@"b", @"a"];
-  result = @[@"a", @"b"];
+  initial = @[[FUIDocumentSnapshot documentWithID:@"x"], [FUIDocumentSnapshot documentWithID:@"y"]];
+  result = @[[FUIDocumentSnapshot documentWithID:@"a"], [FUIDocumentSnapshot documentWithID:@"b"]];
   diff = [[FUISnapshotArrayDiff alloc] initWithInitialArray:initial
                                                 resultArray:result];
   expectedDeletions = @[];
   expectedInsertions = @[];
-  expectedMoves = @[@"a"];
+  expectedMoves = @[];
+  expectedChanges =
+      @[[FUIDocumentSnapshot documentWithID:@"a"], [FUIDocumentSnapshot documentWithID:@"b"]];
+  XCTAssertEqualObjects(diff.deletedObjects, expectedDeletions,
+                        @"expected deletions to equal %@, got %@",
+                        expectedDeletions, diff.deletedObjects);
+  XCTAssertEqualObjects(diff.insertedObjects, expectedInsertions,
+                        @"expected insertions to equal %@, got %@",
+                        expectedInsertions, diff.insertedObjects);
+  XCTAssertEqualObjects(diff.movedObjects, expectedMoves,
+                        @"expected moves to equal %@, got %@",
+                        expectedMoves, diff.movedObjects);
+  XCTAssertEqualObjects(diff.changedObjects, expectedChanges,
+                        @"expected deletions to equal %@, got %@",
+                        expectedChanges, diff.changedObjects);
+
+  initial = @[[FUIDocumentSnapshot documentWithID:@"b"], [FUIDocumentSnapshot documentWithID:@"a"]];
+  result = @[[FUIDocumentSnapshot documentWithID:@"a"], [FUIDocumentSnapshot documentWithID:@"b"]];
+  diff = [[FUISnapshotArrayDiff alloc] initWithInitialArray:initial
+                                                resultArray:result];
+  expectedDeletions = @[];
+  expectedInsertions = @[];
+  expectedMoves =
+      @[[FUIDocumentSnapshot documentWithID:@"b"], [FUIDocumentSnapshot documentWithID:@"a"]];
   expectedChanges = @[];
   XCTAssertEqualObjects(diff.deletedObjects, expectedDeletions,
                         @"expected deletions to equal %@, got %@",
@@ -213,8 +132,18 @@
                         @"expected deletions to equal %@, got %@",
                         expectedChanges, diff.changedObjects);
 
-  initial = @[@"a", @"a", @"a", @"a"];
-  result = @[@"a", @"a", @"a", @"a"];
+  initial = @[
+    [FUIDocumentSnapshot documentWithID:@"a"],
+    [FUIDocumentSnapshot documentWithID:@"a"],
+    [FUIDocumentSnapshot documentWithID:@"a"],
+    [FUIDocumentSnapshot documentWithID:@"a"]
+  ];
+  result = @[
+    [FUIDocumentSnapshot documentWithID:@"a"],
+    [FUIDocumentSnapshot documentWithID:@"a"],
+    [FUIDocumentSnapshot documentWithID:@"a"],
+    [FUIDocumentSnapshot documentWithID:@"a"]
+  ];
   diff = [[FUISnapshotArrayDiff alloc] initWithInitialArray:initial
                                                 resultArray:result];
   expectedDeletions = @[];
@@ -236,14 +165,37 @@
 }
 
 - (void)testDiffGeneralCases {
-  NSArray *initial = @[@"b", @"a", @"c", @"x", @"y", @"z", @"o"];
-  NSArray *result = @[@"a", @"b", @"c", @"z", @"x", @"y", @"b", @"h"];
+  NSArray *initial = @[
+    [FUIDocumentSnapshot documentWithID:@"b"],
+    [FUIDocumentSnapshot documentWithID:@"a"],
+    [FUIDocumentSnapshot documentWithID:@"c"],
+    [FUIDocumentSnapshot documentWithID:@"x"],
+    [FUIDocumentSnapshot documentWithID:@"y"],
+    [FUIDocumentSnapshot documentWithID:@"z"],
+    [FUIDocumentSnapshot documentWithID:@"o"]
+  ];
+  NSArray *result = @[
+    [FUIDocumentSnapshot documentWithID:@"a"],
+    [FUIDocumentSnapshot documentWithID:@"b"],
+    [FUIDocumentSnapshot documentWithID:@"c"],
+    [FUIDocumentSnapshot documentWithID:@"z"],
+    [FUIDocumentSnapshot documentWithID:@"x"],
+    [FUIDocumentSnapshot documentWithID:@"y"],
+    [FUIDocumentSnapshot documentWithID:@"v"],
+    [FUIDocumentSnapshot documentWithID:@"h"]
+  ];
   FUISnapshotArrayDiff *diff = [[FUISnapshotArrayDiff alloc] initWithInitialArray:initial
-                                                resultArray:result];
-  NSArray *expectedDeletions = @[@"o"];
-  NSArray *expectedInsertions = @[@"b", @"h"];
-  NSArray *expectedMoves = @[@"a", @"z"];
-  NSArray *expectedChanges = @[];
+                                                                      resultArray:result];
+  NSArray *expectedDeletions = @[];
+  NSArray *expectedInsertions = @[[FUIDocumentSnapshot documentWithID:@"h"]];
+  NSArray *expectedMoves = @[
+    [FUIDocumentSnapshot documentWithID:@"b"],
+    [FUIDocumentSnapshot documentWithID:@"a"],
+    [FUIDocumentSnapshot documentWithID:@"x"],
+    [FUIDocumentSnapshot documentWithID:@"y"],
+    [FUIDocumentSnapshot documentWithID:@"z"]
+  ];
+  NSArray *expectedChanges = @[[FUIDocumentSnapshot documentWithID:@"v"]];
   XCTAssertEqualObjects(diff.deletedObjects, expectedDeletions,
                         @"expected deletions to equal %@, got %@",
                         expectedDeletions, diff.deletedObjects);
