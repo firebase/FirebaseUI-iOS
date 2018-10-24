@@ -11,9 +11,9 @@ PODS:
   - BoringSSL/Implementation (10.0.6):
     - BoringSSL/Interface (= 10.0.6)
   - BoringSSL/Interface (10.0.6)
-  - FBSDKCoreKit (4.37.0):
-    - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.37.0):
+  - FBSDKCoreKit (4.38.0):
+    - Bolts (~> 1.9)
+  - FBSDKLoginKit (4.38.0):
     - FBSDKCoreKit
   - Firebase/Auth (5.10.0):
     - Firebase/CoreOnly
@@ -109,8 +109,8 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.4)
     - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.4)"
   - "GoogleToolboxForMac/NSString+URLArguments (2.1.4)"
-  - GoogleUtilities/Environment (5.3.3)
-  - GoogleUtilities/Logger (5.3.3):
+  - GoogleUtilities/Environment (5.3.4)
+  - GoogleUtilities/Logger (5.3.4):
     - GoogleUtilities/Environment
   - gRPC (1.14.0):
     - gRPC-RxLibrary (= 1.14.0)
@@ -202,8 +202,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
-  FBSDKCoreKit: fe5f3474499a81963e11e3f3a5c753d0a95ca2b4
-  FBSDKLoginKit: 2f7249686d1e30ce8a5ef5400eedf50b3e3df332
+  FBSDKCoreKit: 2ab7fdbf600dc6b628ba7a49aa29d357a7b4c74e
+  FBSDKLoginKit: 634fa27e72e33620eb6389253337342c03d4a407
   Firebase: 6691d47562a780c26281ce8464518faafc90c610
   FirebaseAuth: 504b198ceb3472dca5c65bb95544ea44cfc9439e
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
@@ -214,7 +214,7 @@ SPEC CHECKSUMS:
   FirebaseUI: 4047ce0093bd304647676cea71c26350158d4b60
   GoogleSignIn: 11183592dc63e105475c7305a325045ff95e02b7
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
-  GoogleUtilities: 8208aee3e97a1ae93d44c57e96c476a5a3b03f0a
+  GoogleUtilities: abb092d2c12e817fa3e0e7b274987dd72fb86ec3
   gRPC: 9d4c549f37c7cef22478634bac7a0405b6e3dbfb
   "gRPC-C++": ee0b01db3122f0b6c2be28b5b11039f62fa15fe6
   gRPC-Core: f4836515817c0eb479aeeb9cc27c91c4ba62a9f6
