@@ -11,9 +11,9 @@ PODS:
   - BoringSSL/Implementation (10.0.6):
     - BoringSSL/Interface (= 10.0.6)
   - BoringSSL/Interface (10.0.6)
-  - FBSDKCoreKit (4.38.0):
+  - FBSDKCoreKit (4.38.1):
     - Bolts (~> 1.9)
-  - FBSDKLoginKit (4.38.0):
+  - FBSDKLoginKit (4.38.1):
     - FBSDKCoreKit
   - Firebase/Auth (5.11.0):
     - Firebase/CoreOnly
@@ -202,8 +202,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
-  FBSDKCoreKit: 2ab7fdbf600dc6b628ba7a49aa29d357a7b4c74e
-  FBSDKLoginKit: 634fa27e72e33620eb6389253337342c03d4a407
+  FBSDKCoreKit: 8d47857400e2f5bdea697a80daff882e91c84ef6
+  FBSDKLoginKit: 4621c690d9dd8628031a4791497062183ea34b0d
   Firebase: b48f9e653da971ecce5b8c749684bc8bb2d26bd3
   FirebaseAuth: 504b198ceb3472dca5c65bb95544ea44cfc9439e
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
