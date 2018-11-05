@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Passwort auswählen";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Durch Tippen auf %@ stimmen Sie den %@ zu.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Nutzungsbedingungen";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Datenschutzerklärung";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Durch fortfahren stimmen Sie den %@ und der %@ zu.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "Die E-Mail-Adresse wird bereits von einem anderen Konto verwendet.";
