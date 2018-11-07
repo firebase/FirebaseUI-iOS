@@ -270,20 +270,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8922BF0521630B3B00CEF7D7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 897CB52F2162FF2D00CEF7D7;
-			remoteInfo = FirebaseEmailAuthUI;
-		};
-		893D249121220A9300CEF7D7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 89846C1C2122003300CEF7D7;
-			remoteInfo = FirebaseAnonymousAuthUI;
-		};
 		893D249321220F1900CEF7D7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
@@ -325,6 +311,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8DCC4FA41D678CC400B0D3C4;
 			remoteInfo = FirebaseDatabaseUI;
+		};
+		8D13756721926ADB00F28322 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89846C1C2122003300CEF7D7;
+			remoteInfo = FirebaseAnonymousAuthUI;
+		};
+		8D13756921926ADB00F28322 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D2A849D1D678B2B0058DF04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 897CB52F2162FF2D00CEF7D7;
+			remoteInfo = FirebaseEmailAuthUI;
 		};
 		8D559D4B1F68A7F100CE9D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2292,8 +2292,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				8922BF0621630B3B00CEF7D7 /* PBXTargetDependency */,
-				893D249221220A9300CEF7D7 /* PBXTargetDependency */,
+				8D13756821926ADB00F28322 /* PBXTargetDependency */,
+				8D13756A21926ADB00F28322 /* PBXTargetDependency */,
 				8DFB54741F68AAA2005972D4 /* PBXTargetDependency */,
 				C3773B951E92C9CE00ACF58C /* PBXTargetDependency */,
 				8D73A3191D95E06B009F229E /* PBXTargetDependency */,
@@ -3345,16 +3345,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8922BF0621630B3B00CEF7D7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 897CB52F2162FF2D00CEF7D7 /* FirebaseEmailAuthUI */;
-			targetProxy = 8922BF0521630B3B00CEF7D7 /* PBXContainerItemProxy */;
-		};
-		893D249221220A9300CEF7D7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 89846C1C2122003300CEF7D7 /* FirebaseAnonymousAuthUI */;
-			targetProxy = 893D249121220A9300CEF7D7 /* PBXContainerItemProxy */;
-		};
 		893D249421220F1900CEF7D7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 89846C1C2122003300CEF7D7 /* FirebaseAnonymousAuthUI */;
@@ -3384,6 +3374,16 @@
 			isa = PBXTargetDependency;
 			target = 8DCC4FA41D678CC400B0D3C4 /* FirebaseDatabaseUI */;
 			targetProxy = 8D0F5E951D81EB06001C47AA /* PBXContainerItemProxy */;
+		};
+		8D13756821926ADB00F28322 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 89846C1C2122003300CEF7D7 /* FirebaseAnonymousAuthUI */;
+			targetProxy = 8D13756721926ADB00F28322 /* PBXContainerItemProxy */;
+		};
+		8D13756A21926ADB00F28322 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 897CB52F2162FF2D00CEF7D7 /* FirebaseEmailAuthUI */;
+			targetProxy = 8D13756921926ADB00F28322 /* PBXContainerItemProxy */;
 		};
 		8D559D4C1F68A7F100CE9D8A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

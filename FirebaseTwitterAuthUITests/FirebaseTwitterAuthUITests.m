@@ -97,7 +97,8 @@
          presentingViewController:nil
                        completion:^(FIRAuthCredential *_Nullable credential,
                                     NSError *_Nullable error,
-                                    FIRAuthResultCallback _Nullable result) {
+                                    FIRAuthResultCallback _Nullable result,
+                                    NSDictionary *_Nullable userInfo) {
     XCTAssertNil(error);
     XCTAssertNotNil(credential);
     XCTAssertNotNil(result);
@@ -135,7 +136,8 @@
          presentingViewController:nil
                        completion:^(FIRAuthCredential *_Nullable credential,
                                     NSError *_Nullable error,
-                                    FIRAuthResultCallback _Nullable result) {
+                                    FIRAuthResultCallback _Nullable result,
+                                    NSDictionary *_Nullable userInfo) {
     XCTAssertNil(credential);
     XCTAssertNotNil(error);
     XCTAssertNil(result);
