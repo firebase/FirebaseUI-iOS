@@ -26,6 +26,12 @@
 @property (nonatomic, readonly, nonnull) id<FUICollection> collection;
 
 /**
+ * Count is tracked separately from the FUIArray to make sure
+ * count isn't invalid during an animated update.
+ */
+@property (nonatomic, readwrite, assign) NSUInteger count;
+
+/**
  * The callback to populate a subclass of UICollectionViewCell with an object
  * provided by the datasource.
  */
@@ -47,6 +53,8 @@
     _collection = collection;
     _collection.delegate = self;
     _populateCellAtIndexPath = populateCell;
+    _count = 0; // This is zero because RTDB arrays start out at zero
+                // and send initial items as a series of adds.
   }
   return self;
 }
@@ -60,7 +68,7 @@
 }
 
 - (NSUInteger)count {
-  return self.collection.count;
+  return _count;
 }
 
 - (NSArray<FIRDataSnapshot *> *)items {
@@ -85,19 +93,27 @@
 
 #pragma mark - FUICollectionDelegate methods
 
+// performBatchUpdates: is used for single updates because of this radar:
+// https://openradar.appspot.com/26484150
 - (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
-  [self.collectionView
-      insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+  [self.collectionView performBatchUpdates:^{
+    self.count = array.count;
+    [self.collectionView
+     insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+  } completion:^(BOOL finished) {}];
 }
 
 - (void)array:(FUIArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
   [self.collectionView
-      reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+   reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
 }
 
 - (void)array:(FUIArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
-  [self.collectionView
-      deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+  [self.collectionView performBatchUpdates:^{
+    self.count = array.count;
+    [self.collectionView
+     deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+  } completion:^(BOOL finished) {}];
 }
 
 - (void)array:(FUIArray *)array didMoveObject:(id)object
@@ -129,7 +145,7 @@
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-  return self.collection.count;
+  return self.count;
 }
 
 @end
