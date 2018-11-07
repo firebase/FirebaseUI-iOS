@@ -58,8 +58,8 @@ target 'FirebaseAuthUI' do
     # Pods for Facebook Auth
     # These are pinned to 4.35.0 to work around this bug:
     # https://developers.facebook.com/support/bugs/242258916492125/?disable_redirect=0
-    pod 'FBSDKLoginKit', '= 4.35.0'
-    pod 'FBSDKCoreKit', '= 4.35.0'
+    pod 'FBSDKLoginKit', '= 4.35.0', :inhibit_warnings => true
+    pod 'FBSDKCoreKit', '= 4.35.0', :inhibit_warnings => true
 
     target 'FirebaseFacebookAuthUITests' do
       inherit! :search_paths

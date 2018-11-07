@@ -55,7 +55,7 @@
     _collection = collection;
     _collection.delegate = self;
     _populateCellAtIndexPath = populateCell;
-    _count = 0;
+    _count = collection.count;
   }
   return self;
 }
@@ -138,8 +138,7 @@
     }
     [self.collectionView insertItemsAtIndexPaths:insertedIndexPaths];
     
-    self.count += insertedIndexPaths.count;
-    self.count -= deletedIndexPaths.count;
+    self.count = self.collection.count;
   } completion:^(BOOL finished) {
     // Reload paths that have been moved.
     NSMutableArray *movedIndexPaths =
