@@ -23,7 +23,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** @typedef FIRAuthProviderSignInCompletionBlock
+/** @typedef FUIAuthProviderSignInCompletionBlock
     @brief The type of block used to notify the auth system of the result of a sign-in flow.
         @see FUIAuthProvider.signInWithDefaultValue:presentingViewController:completion:
     @param credential The @c FIRAuthCredential object created after user interaction with third 
@@ -31,11 +31,29 @@ NS_ASSUME_NONNULL_BEGIN
     @param error The error which may happen during creation of The @c FIRAuthCredential object.
     @param result The result of sign-in operation using provided @c FIRAuthCredential object.
         @see @c FIRAuth.signInWithCredential:completion:
+    @param userInfo A dictionary containing additional information about the sign in operation.
+        @see FUIAuthProviderSignInUserInfoKey
  */
-typedef void (^FIRAuthProviderSignInCompletionBlock) (
+typedef void (^FUIAuthProviderSignInCompletionBlock) (
     FIRAuthCredential *_Nullable credential,
     NSError *_Nullable error,
-    _Nullable FIRAuthResultCallback result);
+    _Nullable FIRAuthResultCallback result,
+    NSDictionary<NSString *, id> *_Nullable userInfo);
+
+/**
+    @typedef FUIAuthProviderSignInUserInfoKey
+    @brief A key in a userInfo dictionary corresponding to some supplemental value from
+        the sign-in operation.
+    @see FUIAuthProviderSignInCompletionBlock
+ */
+typedef NSString *FUIAuthProviderSignInUserInfoKey NS_TYPED_ENUM;
+
+/**
+    For Firebase-based authentication operations, use this key to obtain the original auth result
+    that was returned from the sign-in operation.
+ */
+static FUIAuthProviderSignInUserInfoKey FUIAuthProviderSignInUserInfoKeyAuthDataResult =
+    @"FUIAuthProviderSignInUserInfoKeyAuthDataResult";
 
 /** @protocol FUIAuthProvider
     @brief Represents an authentication provider (such as Google Sign In or Facebook Login) which
@@ -90,7 +108,7 @@ typedef void (^FIRAuthProviderSignInCompletionBlock) (
  */
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
-                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion
+                  completion:(nullable FUIAuthProviderSignInCompletionBlock)completion
 __attribute__((deprecated("This is deprecated API and will be removed in a future release."
                           "Use signInWithDefaultValue:presentingViewController:completion:")));
 
@@ -109,7 +127,7 @@ __attribute__((deprecated("This is deprecated API and will be removed in a futur
  */
 - (void)signInWithDefaultValue:(nullable NSString *)defaultValue
       presentingViewController:(nullable UIViewController *)presentingViewController
-                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion;
+                    completion:(nullable FUIAuthProviderSignInCompletionBlock)completion;
 
 /** @fn signOut
     @brief Called when the user wants to sign out.

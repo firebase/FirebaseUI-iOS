@@ -104,7 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
-                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+                  completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
   [self signInWithDefaultValue:email
       presentingViewController:presentingViewController
                     completion:completion];
@@ -113,19 +113,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)signInWithDefaultValue:(nullable NSString *)defaultValue
       presentingViewController:(nullable UIViewController *)presentingViewController
-                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+                    completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
   [_authUI.auth signInAnonymouslyWithCompletion:^(FIRAuthDataResult * _Nullable authResult,
                                                   NSError * _Nullable error) {
+    NSDictionary *userInfo;
+    if (authResult != nil) {
+      userInfo = @{
+        FUIAuthProviderSignInUserInfoKeyAuthDataResult: authResult,
+      };
+    }
     if (error) {
       [FUIAuthBaseViewController showAlertWithMessage:error.localizedDescription
                              presentingViewController:presentingViewController];
       if (completion) {
-        completion(nil, error, nil);
+        completion(nil, error, nil, userInfo);
       }
       return;
     }
     if (completion) {
-      completion(nil, error, nil);
+      completion(nil, error, nil, userInfo);
     }
   }];
 }

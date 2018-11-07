@@ -47,7 +47,7 @@
 #pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)signInWithEmail:(NSString *)email
   presentingViewController:(UIViewController *)presentingViewController
-            completion:(FIRAuthProviderSignInCompletionBlock)completion {}
+            completion:(FUIAuthProviderSignInCompletionBlock)completion {}
 #pragma clang diagnostic pop
 
 - (void)signOut {}
@@ -58,7 +58,7 @@
 
 - (void)signInWithDefaultValue:(nullable NSString *)defaultValue
       presentingViewController:(nullable UIViewController *)presentingViewController
-                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {}
+                    completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {}
 
 
 @end

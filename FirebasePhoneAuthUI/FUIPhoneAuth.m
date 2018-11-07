@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
   FUIAuth *_authUI;
 
   /** The callback which should be invoked when the sign in flow completes (or is cancelled.) */
-  FIRAuthProviderSignInCompletionBlock _pendingSignInCallback;
+  FUIAuthProviderSignInCompletionBlock _pendingSignInCallback;
   
   /** Available country codes For the authUI to use. */
   FUICountryCodes *_countryCodes;
@@ -128,7 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
-                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+                  completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
   [self signInWithDefaultValue:email
       presentingViewController:presentingViewController
                     completion:completion];
@@ -137,7 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)signInWithDefaultValue:(nullable NSString *)defaultValue
       presentingViewController:(nullable UIViewController *)presentingViewController
-                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+                    completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
   _pendingSignInCallback = completion;
   
   FUIPhoneAuth *delegate = [_authUI providerWithID:FIRPhoneAuthProviderID];
@@ -174,7 +174,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)callbackWithCredential:(nullable FIRAuthCredential *)credential
                          error:(nullable NSError *)error
                         result:(nullable FIRAuthResultCallback)result {
-  FIRAuthProviderSignInCompletionBlock callback = _pendingSignInCallback;
+  FUIAuthProviderSignInCompletionBlock callback = _pendingSignInCallback;
 
   FIRAuthResultCallback resultAuthCallback = ^(FIRUser *_Nullable user, NSError *_Nullable error) {
     if (!error) {
@@ -185,7 +185,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
   };
   if (callback) {
-    callback(credential, error, resultAuthCallback);
+    callback(credential, error, resultAuthCallback, nil);
   }
 }
 

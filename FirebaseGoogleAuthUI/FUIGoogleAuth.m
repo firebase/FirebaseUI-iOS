@@ -54,7 +54,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   /** @var _pendingSignInCallback
       @brief The callback which should be invoked when the sign in flow completes (or is cancelled.)
    */
-  FIRAuthProviderSignInCompletionBlock _pendingSignInCallback;
+  FUIAuthProviderSignInCompletionBlock _pendingSignInCallback;
 
   /** @var _email
       @brief The email address associated with this account.
@@ -112,7 +112,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 #pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
-                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+                  completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
   [self signInWithDefaultValue:email
       presentingViewController:presentingViewController
                     completion:completion];
@@ -121,16 +121,17 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 
 - (void)signInWithDefaultValue:(nullable NSString *)defaultValue
       presentingViewController:(nullable UIViewController *)presentingViewController
-                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+                    completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
   _presentingViewController = presentingViewController;
 
   GIDSignIn *signIn = [self configuredGoogleSignIn];
   _pendingSignInCallback = ^(FIRAuthCredential *_Nullable credential,
                              NSError *_Nullable error,
-                             _Nullable FIRAuthResultCallback result) {
+                             _Nullable FIRAuthResultCallback result,
+                             NSDictionary *_Nullable userInfo) {
     signIn.loginHint = nil;
     if (completion) {
-      completion(credential, error, result);
+      completion(credential, error, result, nil);
     }
   };
 
@@ -220,11 +221,11 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 - (void)callbackWithCredential:(nullable FIRAuthCredential *)credential
                          error:(nullable NSError *)error
                         result:(nullable FIRAuthResultCallback)result {
-  FIRAuthProviderSignInCompletionBlock callback = _pendingSignInCallback;
+  FUIAuthProviderSignInCompletionBlock callback = _pendingSignInCallback;
   _presentingViewController = nil;
   _pendingSignInCallback = nil;
   if (callback) {
-    callback(credential, error, result);
+    callback(credential, error, result, nil);
   }
 }
 

@@ -101,7 +101,8 @@
         presentingViewController:nil
                       completion:^(FIRAuthCredential *_Nullable credential,
                                    NSError *_Nullable error,
-                                   FIRAuthResultCallback _Nullable result) {
+                                   FIRAuthResultCallback _Nullable result,
+                                   NSDictionary *_Nullable userInfo) {
     XCTAssertNil(error);
     XCTAssertNotNil(result);
     XCTAssertNotNil(credential);
@@ -159,7 +160,8 @@
         presentingViewController:nil
                       completion:^(FIRAuthCredential *_Nullable credential,
                                    NSError *_Nullable error,
-                                   FIRAuthResultCallback _Nullable result) {
+                                   FIRAuthResultCallback _Nullable result,
+                                   NSDictionary *_Nullable userInfo) {
     XCTAssertNotNil(error);
     XCTAssertEqualObjects(error.userInfo[NSUnderlyingErrorKey], signInError);
     XCTAssertNil(credential);
@@ -210,7 +212,8 @@
         presentingViewController:nil
                       completion:^(FIRAuthCredential *_Nullable credential,
                                    NSError *_Nullable error,
-                                   FIRAuthResultCallback _Nullable result) {
+                                   FIRAuthResultCallback _Nullable result,
+                                   NSDictionary *_Nullable userInfo) {
     XCTAssertNotNil(error);
     XCTAssertEqualObjects(error, [FUIAuthErrorUtils userCancelledSignInError]);
     XCTAssertNil(credential);

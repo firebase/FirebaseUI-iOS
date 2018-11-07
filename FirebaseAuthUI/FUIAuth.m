@@ -155,7 +155,8 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
      presentingViewController:presentingViewController
                    completion:^(FIRAuthCredential *_Nullable credential,
                                 NSError *_Nullable error,
-                                _Nullable FIRAuthResultCallback result) {
+                                _Nullable FIRAuthResultCallback result,
+                                NSDictionary *_Nullable userInfo) {
     BOOL isAuthPickerShown =
         [presentingViewController isKindOfClass:[FUIAuthPickerViewController class]];
     if (error) {
@@ -176,6 +177,10 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       // Hide Auth Picker Controller which was presented modally.
       if (isAuthPickerShown && presentingViewController.presentingViewController) {
         [presentingViewController dismissViewControllerAnimated:YES completion:nil];
+      }
+      FIRAuthDataResult *authResult = userInfo[FUIAuthProviderSignInUserInfoKeyAuthDataResult];
+      if (authResult != nil) {
+        [self invokeResultCallbackWithAuthDataResult:authResult URL:nil error:error];
       }
       return;
     }
@@ -297,14 +302,10 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
           }];
         }
       } else {
-        BOOL isAuthPickerShown =
-            [presentingViewController isKindOfClass:[FUIAuthPickerViewController class]];
-        if (!isAuthPickerShown || error.code != FUIAuthErrorCodeUserCancelledSignIn) {
-          [self invokeResultCallbackWithAuthDataResult:nil URL:nil error:error];
-        }
-        if (callback) {
-          callback(nil, error);
-        }
+        [self completeSignInWithResult:nil
+                                 error:error
+              presentingViewController:presentingViewController
+                              callback:callback];
       }
     } else {
       [self completeSignInWithResult:authResult
@@ -343,7 +344,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
     if ([self.delegate respondsToSelector:@selector(authUI:didSignInWithAuthDataResult:URL:error:)]) {
       [self.delegate authUI:self
           didSignInWithAuthDataResult:authDataResult
-                                  URL:nil
+                                  URL:url
                                 error:error];
     }
     if ([self.delegate respondsToSelector:@selector(authUI:didSignInWithAuthDataResult:error:)]) {
