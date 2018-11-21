@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FUIPhoneEntryViewController">
+            <connections>
+                <outlet property="_tableView" destination="ZXV-PY-1fK" id="jxd-xz-C6f"/>
+                <outlet property="_tosView" destination="kGX-Qm-s2k" id="E18-dA-xIS"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ZXV-PY-1fK">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <view key="tableFooterView" contentMode="scaleToFill" id="1jX-mt-zck">
+                        <rect key="frame" x="0.0" y="896.5" width="375" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="By tapping Verify Phone Number, an SMS may be sent. Message &amp; data rates may apply." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kGX-Qm-s2k" userLabel="Tos View" customClass="FUIPrivacyAndTermsOfServiceView">
+                                <rect key="frame" x="10" y="0.0" width="355" height="100"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="kGX-Qm-s2k" secondAttribute="bottom" id="apr-W2-fhI"/>
+                            <constraint firstAttribute="trailing" secondItem="kGX-Qm-s2k" secondAttribute="trailing" constant="10" id="eqh-Yd-HEL"/>
+                            <constraint firstItem="kGX-Qm-s2k" firstAttribute="top" secondItem="1jX-mt-zck" secondAttribute="top" id="kAy-j4-skz"/>
+                            <constraint firstItem="kGX-Qm-s2k" firstAttribute="leading" secondItem="1jX-mt-zck" secondAttribute="leading" constant="10" id="zff-58-ueo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="cIO-fO-UsX"/>
+                        <outlet property="delegate" destination="-1" id="IWT-TE-EyX"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ZXV-PY-1fK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RqV-RV-Axm"/>
+                <constraint firstItem="ZXV-PY-1fK" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="W2j-8H-7xa"/>
+                <constraint firstItem="ZXV-PY-1fK" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="ibc-Lu-Lpt"/>
+                <constraint firstItem="ZXV-PY-1fK" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="uNZ-29-fq6"/>
+            </constraints>
+            <point key="canvasLocation" x="64.5" y="93.5"/>
+        </view>
+    </objects>
+</document>

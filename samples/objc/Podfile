@@ -1,17 +1,8 @@
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 target 'FirebaseUI-demo-objc' do
+  use_frameworks!
 
-#  used for development from sources
-  pod 'FirebaseAuthUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_auth.podspec"
-  pod 'FirebaseDatabaseUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_db.podspec"
-  pod 'FirebaseStorageUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_storage.podspec"
-  pod 'FirebaseFacebookAuthUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_fb.podspec"
-  pod 'FirebaseGoogleAuthUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_ggl.podspec"
-  pod 'FirebaseTwitterAuthUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI_dev_tw.podspec"
-
-#  used for development from released frameworks
-#  use_frameworks!
-#  pod 'FirebaseUI', :podspec => "https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/FirebaseUI.podspec"
+  pod 'FirebaseUI', :path => '../../'
 
 end

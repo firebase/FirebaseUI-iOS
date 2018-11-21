@@ -21,7 +21,13 @@ FOUNDATION_EXPORT double FirebaseUIVersionNumber;
 //! Project version string for FirebaseUI.
 FOUNDATION_EXPORT const unsigned char FirebaseUIVersionString[];
 
-@import FirebaseDatabaseUI;
-@import FirebaseAuthUI;
-@import FirebaseFacebookAuthUI;
-@import FirebaseGoogleAuthUI;
+#import <FirebaseUI/FirebaseDatabaseUI.h>
+#import <FirebaseUI/FirebaseFirestoreUI.h>
+#import <FirebaseUI/FirebaseAnonymousAuthUI.h>
+#import <FirebaseUI/FirebaseAuthUI.h>
+#import <FirebaseUI/FirebaseEmailAuthUI.h>
+#import <FirebaseUI/FirebaseFacebookAuthUI.h>
+#import <FirebaseUI/FirebaseGoogleAuthUI.h>
+#import <FirebaseUI/FirebaseTwitterAuthUI.h>
+#import <FirebaseUI/FirebasePhoneAuthUI.h>
+#import <FirebaseUI/FirebaseStorageUI.h>

@@ -1,0 +1,245 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Et donem la benvinguda";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Inicia la sessió amb l'adreça electrònica";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Introdueix la teva adreça electrònica";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Aquesta adreça electrònica no és correcta.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Aquest tipus de compte no és compatible amb l'aplicació";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "Ja tens un compte";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Ja has utilitzat l'adreça electrònica %@. Inicia la sessió amb %@ per continuar.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Inicia la sessió";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Introdueix la teva contrasenya";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Cal introduir una contrasenya.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "L'adreça electrònica i la contrasenya que has introduït no coincideixen.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Aquesta adreça electrònica no coincideix amb cap compte.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Aquesta adreça electrònica pertany a un compte que s'ha desactivat.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Has introduït una contrasenya incorrecta massa vegades. Torna-ho a provar d'aquí a uns quants minuts.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "No es pot trobar un proveïdor per a %@.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "Les adreces electròniques no coincideixen";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Recupera la contrasenya";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Rep un correu electrònic amb instruccions per restablir la contrasenya.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Comprova el correu electrònic";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Per recuperar la contrasenya, segueix les instruccions que s'han enviat a %@.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Crea un compte";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Nom i cognoms";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Tria una contrasenya";
+
+/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
+"TermsOfServiceNotice" = "En tocar %@, indiques que acceptes les %@.";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Condicions del servei";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Ja hi ha un altre compte que utilitza aquesta adreça electrònica.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Perquè una contrasenya sigui segura, ha de tenir com a mínim 6 caràcters i combinar lletres i números.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "Aquesta adreça IP està enviant massa sol·licituds per crear comptes. Torna-ho a provar d'aquí a uns quants minuts.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Ja has utilitzat l'adreça electrònica %@ per iniciar la sessió. Introdueix la contrasenya d'aquest compte.";
+
+/* OK button title. */
+"OK" = "D'acord";
+
+/* Cancel button title. */
+"Cancel" = "Cancel·la";
+
+/* Back button title. */
+"Back" = "Enrere";
+
+/* Next button title. */
+"Next" = "Següent";
+
+/* Save button title. */
+"Save" = "Desa";
+
+/* Save button title. */
+"Send" = "Envia";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "Adreça electrònica";
+
+/* Label next to a password text field. */
+"Password" = "Contrasenya";
+
+/* Label next to a name text field. */
+"Name" = "Nom";
+
+/* Alert title Error. */
+"Error" = "Error";
+
+/* Alert button title Close. */
+"Close" = "Tanca";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Perfil";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Seguretat";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Comptes enllaçats";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Nom";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "Adreça electrònica";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Afegeix una contrasenya";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Canvia la contrasenya";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Tanca la sessió";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Suprimeix el compte";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Has oblidat la contrasenya?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Verifica la teva identitat";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Vols suprimir el compte?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Aquesta acció esborrarà totes les dades associades a aquest compte i no es pot desfer. Per completar-la, has de tornar a iniciar la sessió.";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Aquesta acció esborrarà totes les dades associades a aquest compte i no es pot desfer. Confirmes que vols suprimir el compte?";
+
+/* Text of Delete action button. */
+"Delete" = "Suprimeix";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Suprimeix el compte";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Aquesta acció no es pot desfer";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Desenllaça";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Compte enllaçat";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Vols desenllaçar el compte?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Ja no podràs iniciar la sessió amb el teu compte";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Desenllaça el compte";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Per canviar l'adreça electrònica associada al teu compte, has de tornar a iniciar la sessió.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Per canviar la contrasenya, primer has d'introduir la teva contrasenya actual.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "Edita l'adreça electrònica";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Edita el nom";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Per afegir una contrasenya al teu compte, has de tornar a iniciar la sessió.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Per canviar la contrasenya del teu compte, has de tornar a iniciar la sessió.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Per canviar la contrasenya, primer has d'introduir la teva contrasenya actual.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Afegeix una contrasenya";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Canvia la contrasenya";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "Adreça electrònica";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Inicia la sessió amb %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Introdueix el teu nom";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Introdueix la teva adreça electrònica";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Introdueix la teva contrasenya";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Contrasenya nova";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Tria una contrasenya";
+
+/* The title of forgot password button. */
+"ForgotPasswordTitle" = "No pots iniciar la sessió?";

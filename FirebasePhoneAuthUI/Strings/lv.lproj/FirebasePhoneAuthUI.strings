@@ -1,0 +1,78 @@
+/* The text of the button used to sign-in with Phone. */
+"SignInWithPhone" = "Pierakstīties ar tālruni";
+
+/* The title of view controller where user enters phone number. */
+"EnterPhoneTitle" = "Ievadīt tālruņa numuru";
+
+/* The title of button on navigation controller which navigates to previous screen. */
+"Back" = "Atpakaļ";
+
+/* The title of button on navigation controller which navigates to the next screen. */
+"Next" = "Tālāk";
+
+/* The title of button which user taps on phone verification screen. */
+"Verify" = "Verificēt";
+
+/* Alert message displayed when user submits empty verification code. */
+"EmptyVerificationCode" = "Verifikācijas koda lauks nedrīkst būt tukšs";
+
+/* Alert message displayed when user submits empty phone number. */
+"EmptyPhoneNumber" = "Tālruņa numura lauks nedrīkst būt tukšs";
+
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
+"PhoneNumber" = "Numurs";
+
+/* Placeholder shown for phone number input field. */
+"EnterYourPhoneNumber" = "Tālruņa numurs";
+
+/* Label next to the left of country selector control. */
+"Country" = "Valsts";
+
+/* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
+"EnterCodeDescription" = "Ievadiet %@ ciparu kodu, ko nosūtījām uz šādu tālruņa numuru:";
+
+/* The title of button with resend verification code functionality. */
+"ResendCode" = "Vēlreiz nosūtīt kodu";
+
+/* Text of the resend timer label shown on verification phone number screen. */
+"ResendCodeTimer" = "Vēlreiz nosūtīt kodu pēc %@";
+
+/* The title of view controller where user verifies phone number. . */
+"VerifyPhoneTitle" = "Verificēt tālruņa numuru";
+
+/* The title of button displayed when user closes alert message. */
+"Done" = "Gatavs";
+
+/* The title of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneTitle" = "Nederīgs tālruņa numurs";
+
+/* The body message of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneMessage" = "Ievadiet derīgu tālruņa numuru";
+
+/* The body message of alert shown when user tapped resend verification code button. */
+"ResendCodeResult" = "Kods tika nosūtīts uz: %@";
+
+/* The title of alert shown when user entered invalid verification code. */
+"IncorrectCodeTitle" = "Nepareizs verifikācijas kods";
+
+/* The body message of alert shown when user entered invalid verification code. */
+"IncorrectCodeMessage" = "Nepareizs kods. Mēģiniet vēlreiz.";
+
+/* The body message of alert shown when internal server error appeared. */
+"InternalErrorMessage" = "Radās problēma. Lūdzu, mēģiniet vēlreiz.";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "Šis tālruņa numurs ir izmantots pārāk daudz reižu";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "Verificējot jūsu tālruņa numuru, radās problēma";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "Šis kods vairs nav derīgs";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
+"TermsSMS" = "Pieskaroties pogai %@, var tikt nosūtīta īsziņa. Var tikt piemērota maksa par ziņojumiem un datu pārsūtīšanu.";
+
+/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
+"TermsAccountCreation" = "Pieskaroties pogai %@, jūs norādāt, ka piekrītat [pakalpojumu sniegšanas noteikumiem].";
+

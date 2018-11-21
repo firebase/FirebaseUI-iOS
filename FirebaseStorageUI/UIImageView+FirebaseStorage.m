@@ -112,15 +112,15 @@ static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
 
   // If nothing was found in cache, download the image from Firebase Storage
   FIRStorageDownloadTask * download = [storageRef dataWithMaxSize:size
-                                                       completion:^(NSData * _Nullable data,
-                                                                    NSError * _Nullable error) {
+                                                       completion:^(NSData *_Nullable data,
+                                                                    NSError *_Nullable error) {
     dispatch_async(dispatch_get_main_queue(), ^{
       if (data != nil) {
         UIImage *image = [UIImage sd_imageWithData:data];
         self.image = image;
 
         // Cache downloaded image
-        [cache storeImage:image forKey:storageRef.fullPath];
+        [cache storeImage:image forKey:storageRef.fullPath completion:nil];
 
         if (completion != nil) {
           completion(image, nil, SDImageCacheTypeNone, storageRef);

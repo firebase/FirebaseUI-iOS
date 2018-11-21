@@ -1,0 +1,78 @@
+/* The text of the button used to sign-in with Phone. */
+"SignInWithPhone" = "ஃபோன் எண் மூலம் உள்நுழைக";
+
+/* The title of view controller where user enters phone number. */
+"EnterPhoneTitle" = "ஃபோன் எண்ணை உள்ளிடவும்";
+
+/* The title of button on navigation controller which navigates to previous screen. */
+"Back" = "முந்தையது";
+
+/* The title of button on navigation controller which navigates to the next screen. */
+"Next" = "அடுத்து";
+
+/* The title of button which user taps on phone verification screen. */
+"Verify" = "சரிபார்";
+
+/* Alert message displayed when user submits empty verification code. */
+"EmptyVerificationCode" = "சரிபார்ப்புக் குறியீடு வெறுமையாக இருக்கக்கூடாது";
+
+/* Alert message displayed when user submits empty phone number. */
+"EmptyPhoneNumber" = "ஃபோன் எண் வெறுமையாக இருக்கக்கூடாது";
+
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
+"PhoneNumber" = "ஃபோன் எண்";
+
+/* Placeholder shown for phone number input field. */
+"EnterYourPhoneNumber" = "ஃபோன் எண்";
+
+/* Label next to the left of country selector control. */
+"Country" = "நாடு";
+
+/* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
+"EnterCodeDescription" = "இந்த எண்ணுக்கு நாங்கள் அனுப்பிய %@ இலக்கக் குறியீட்டை உள்ளிடவும்:";
+
+/* The title of button with resend verification code functionality. */
+"ResendCode" = "குறியீட்டை மீண்டும் அனுப்பு";
+
+/* Text of the resend timer label shown on verification phone number screen. */
+"ResendCodeTimer" = "%@ இல் குறியீட்டை மீண்டும் அனுப்பவும்";
+
+/* The title of view controller where user verifies phone number. . */
+"VerifyPhoneTitle" = "ஃபோன் எண்ணைச் சரிபார்க்கவும்";
+
+/* The title of button displayed when user closes alert message. */
+"Done" = "முடிந்தது";
+
+/* The title of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneTitle" = "தவறான ஃபோன் எண்";
+
+/* The body message of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneMessage" = "சரியான ஃபோன் எண்ணை உள்ளிடவும்";
+
+/* The body message of alert shown when user tapped resend verification code button. */
+"ResendCodeResult" = "குறியீடு %@க்கு அனுப்பப்பட்டது";
+
+/* The title of alert shown when user entered invalid verification code. */
+"IncorrectCodeTitle" = "தவறான சரிபார்ப்புக் குறியீடு";
+
+/* The body message of alert shown when user entered invalid verification code. */
+"IncorrectCodeMessage" = "தவறான குறியீடு. மீண்டும் முயலவும்.";
+
+/* The body message of alert shown when internal server error appeared. */
+"InternalErrorMessage" = "ஏதோ தவறாகிவிட்டது. மீண்டும் முயலவும்.";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "இந்த ஃபோன் எண் பலமுறைப் பயன்படுத்தப்பட்டுள்ளது";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "ஃபோன் எண்ணைச் சரிபார்ப்பதில் ஏதோ சிக்கல் ஏற்பட்டது";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "இந்தக் குறியீடு இனி செல்லுபடியாகாது";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
+"TermsSMS" = "%@ என்பதைத் தட்டினால், SMS அனுப்பப்படும். செய்தி மற்றும் தரவுக் கட்டணங்கள் விதிக்கப்படலாம்.";
+
+/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
+"TermsAccountCreation" = "%@ என்பதைத் தட்டுவதன் மூலம், [சேவை விதிமுறைகளை] ஏற்பதாகக் குறிப்பிடுகிறீர்கள்.";
+

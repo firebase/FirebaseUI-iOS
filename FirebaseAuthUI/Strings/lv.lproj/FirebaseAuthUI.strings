@@ -1,0 +1,245 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Laipni lūdzam!";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Pierakstīties ar e-pasta adresi";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Ievadiet e-pastu";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "E-pasta adrese nav pareiza.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Šī lietotne neatbalsta šāda veida kontu";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "Jums jau ir konts";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Jūs jau esat izmantojis e-pasta adresi %@. Pierakstieties ar %@, lai turpinātu.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Pierakstīties";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Ievadiet savu paroli";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Paroles lauks nedrīkst būt tukšs.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Ievadītā e-pasta adrese un parole neatbilst.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "E-pasta adrese neatbilst esošam kontam.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Šī ir atspējota konta e-pasta adrese.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Esat pārāk daudz reižu ievadījis nepareizu paroli. Lūdzu, mēģiniet vēlreiz pēc dažām minūtēm.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Nevar atrast %@ nodrošinātāju.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "E-pasta adreses nesakrīt";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Paroles atgūšana";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Saņemiet uz šo e-pasta adresi nosūtītus norādījumus ar skaidrojumu par to, kā atiestatīt paroli.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Pārbaudiet savu e-pastu";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Izpildiet uz e-pasta adresi %@ nosūtītos norādījumus, lai atgūtu paroli.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Izveidot kontu";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Vārds un uzvārds";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Izvēlieties paroli";
+
+/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
+"TermsOfServiceNotice" = "Pieskaroties pogai %@, jūs norādāt, ka piekrītat šādiem noteikumiem: %@.";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Pakalpojumu sniegšanas noteikumi";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Šī e-pasta adrese jau tiek izmantota citam kontam.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Drošām parolēm ir vismaz 6 rakstzīmes, un tajās ir burtu un ciparu kombinācija.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "Pārāk daudz kontu pieprasījumu ir nosūtīti no jūsu IP adreses. Pēc dažām minūtēm mēģiniet vēlreiz.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Esat jau izmantojis e-pasta adresi %@, lai pierakstītos. Ievadiet šī konta paroli.";
+
+/* OK button title. */
+"OK" = "Labi";
+
+/* Cancel button title. */
+"Cancel" = "Atcelt";
+
+/* Back button title. */
+"Back" = "Atpakaļ";
+
+/* Next button title. */
+"Next" = "Tālāk";
+
+/* Save button title. */
+"Save" = "Saglabāt";
+
+/* Save button title. */
+"Send" = "Sūtīt";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "E-pasts";
+
+/* Label next to a password text field. */
+"Password" = "Parole";
+
+/* Label next to a name text field. */
+"Name" = "Vārds";
+
+/* Alert title Error. */
+"Error" = "Kļūda";
+
+/* Alert button title Close. */
+"Close" = "Aizvērt";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Profils";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Drošība";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Saistītie konti";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Vārds";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "E-pasts";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Paroles pievienošana";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Paroles maiņa";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Izrakstīšanās";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Konta dzēšana";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Vai aizmirsāt paroli?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Verificējiet savu identitāti";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Vai izdzēst kontu?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Veicot šo darbību, tiks dzēsti visi ar kontu saistītie dati, un to nevarēs atsaukt. Lai veiktu šo darbību, ir vēlreiz jāpierakstās";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Veicot šo darbību, tiks dzēsti visi ar kontu saistītie dati, un to nevarēs atsaukt. Vai tiešām vēlaties dzēst šo kontu?";
+
+/* Text of Delete action button. */
+"Delete" = "Dzēst";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Konta dzēšana";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Šo darbību nevar atsaukt";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Atsaistīt";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Saistīts konts";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Vai atsaistīt kontu?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Jūs vairs nevarēsit pierakstīties, izmantojot savu kontu";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Konta atsaistīšana";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Lai mainītu ar kontu saistīto e-pasta adresi, būs vēlreiz jāpierakstās.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Lai mainītu paroli, vispirms ir jāievada pašreizējā parole.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "E-pasta rediģēšana";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Nosaukuma rediģēšana";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Lai pievienotu kontam paroli, būs vēlreiz jāpierakstās.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Lai mainītu konta paroli, būs vēlreiz jāpierakstās.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Lai mainītu paroli, vispirms ir jāievada pašreizējā parole.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Paroles pievienošana";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Paroles maiņa";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "E-pasts";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Pierakstīties ar %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Ievadiet savu vārdu";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Ievadiet e-pastu";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Ievadiet savu paroli.";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Jauna parole";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Izvēlieties paroli";
+
+/* The title of forgot password button. */
+"ForgotPasswordTitle" = "Vai jums ir problēmas ar pierakstīšanos?";

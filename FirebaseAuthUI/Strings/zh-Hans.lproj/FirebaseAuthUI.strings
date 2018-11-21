@@ -1,0 +1,245 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "欢迎";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "使用电子邮件地址登录";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "输入您的电子邮件地址";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "该电子邮件地址不正确。";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "此应用不支持这种类型的帐号";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "您已经有帐号了";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "您已经使用了 %@。请使用 %@ 帐号登录以继续操作。";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "登录";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "输入您的密码";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "密码不能为空。";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "您输入的电子邮件地址和密码不匹配。";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "该电子邮件地址没有相匹配的现有帐号。";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "该电子邮件地址对应的帐号已停用。";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "您输入错误密码的次数过多，请过几分钟再试。";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "找不到 %@ 的提供方。";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "电子邮件地址不匹配";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "找回密码";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "向此电子邮件地址发送关于如何重置密码的说明。";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "请查收电子邮件";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "请按照发送到 %@ 的说明找回密码。";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "创建帐号";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "姓名";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "选择密码";
+
+/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
+"TermsOfServiceNotice" = "点按“%@”即表示您同意%@。";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "服务条款";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "此电子邮件地址已被其他帐号使用。";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "安全系数高的密码至少包含 6 个字符，由字母和数字组成。";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "来自您的 IP 地址的帐号请求过多，请过几分钟再试。";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "您已经使用 %@ 登录了，请输入该帐号的密码。";
+
+/* OK button title. */
+"OK" = "确定";
+
+/* Cancel button title. */
+"Cancel" = "取消";
+
+/* Back button title. */
+"Back" = "返回";
+
+/* Next button title. */
+"Next" = "继续";
+
+/* Save button title. */
+"Save" = "保存";
+
+/* Save button title. */
+"Send" = "发送";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "电子邮件";
+
+/* Label next to a password text field. */
+"Password" = "密码";
+
+/* Label next to a name text field. */
+"Name" = "名称";
+
+/* Alert title Error. */
+"Error" = "错误";
+
+/* Alert button title Close. */
+"Close" = "关闭";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "个人资料";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "安全";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "已关联的帐号";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "名称";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "电子邮件";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "添加密码";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "更改密码";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "退出帐号";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "删除帐号";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "忘记了密码？";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "请验证是您本人";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "要删除帐号吗？";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "此操作将清空与您的帐号相关联的所有数据，并且无法撤消。您需要重新登录才能完成此操作";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "此操作将清空与您的帐号相关联的所有数据，并且无法撤消。确定要删除帐号吗？";
+
+/* Text of Delete action button. */
+"Delete" = "删除";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "删除帐号";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "此操作无法撤消";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "取消关联";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "已关联的帐号";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "要取消帐号关联吗？";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "您将不能再使用您的帐号登录";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "取消帐号关联";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "要更改与您的帐号相关联的电子邮件地址，您需要重新登录。";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "要更改密码，您需要先输入当前的密码。";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "修改电子邮件地址";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "修改名称";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "要为帐号添加密码，您需要重新登录。";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "要更改帐号的密码，您需要重新登录。";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "要更改密码，您需要先输入当前的密码。";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "添加密码";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "更改密码";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "电子邮件";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "使用 %@ 帐号登录";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "输入您的名称";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "输入您的电子邮件地址";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "输入您的密码";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "新密码";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "选择密码";
+
+/* The title of forgot password button. */
+"ForgotPasswordTitle" = "登录时遇到问题？";

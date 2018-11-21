@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FUIStaticContentTableViewController"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="inputCellReuseIdentitfier" id="iNb-DP-bP2" customClass="FUIInputTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iNb-DP-bP2" id="TlY-8X-4BX">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aj1-vo-KPN">
+                        <rect key="frame" x="8" y="11" width="42" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="NQp-aD-hrg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="IFu-zc-lrX">
+                        <rect key="frame" x="58" y="-1" width="309" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="JL9-Jt-Ytc"/>
+                        </constraints>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                        <connections>
+                            <action selector="onInputChanged:" destination="iNb-DP-bP2" eventType="editingChanged" id="W8F-zs-sCz"/>
+                        </connections>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="IFu-zc-lrX" firstAttribute="centerY" secondItem="TlY-8X-4BX" secondAttribute="centerY" id="LGW-tR-7Y6"/>
+                    <constraint firstItem="Aj1-vo-KPN" firstAttribute="centerY" secondItem="IFu-zc-lrX" secondAttribute="centerY" id="a9H-nf-3mf"/>
+                    <constraint firstItem="Aj1-vo-KPN" firstAttribute="leading" secondItem="TlY-8X-4BX" secondAttribute="leadingMargin" id="bBx-9I-F8f"/>
+                    <constraint firstItem="IFu-zc-lrX" firstAttribute="leading" secondItem="Aj1-vo-KPN" secondAttribute="trailing" constant="8" symbolic="YES" id="fD2-jf-gub"/>
+                    <constraint firstItem="IFu-zc-lrX" firstAttribute="trailing" secondItem="TlY-8X-4BX" secondAttribute="trailingMargin" id="sZQ-0x-6us"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="input" destination="IFu-zc-lrX" id="Nh5-lL-b0J"/>
+                <outlet property="title" destination="Aj1-vo-KPN" id="Kaz-9i-bZH"/>
+            </connections>
+            <point key="canvasLocation" x="-1081.5" y="-52"/>
+        </tableViewCell>
+    </objects>
+</document>

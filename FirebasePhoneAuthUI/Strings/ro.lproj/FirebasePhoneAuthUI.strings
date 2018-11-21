@@ -1,0 +1,78 @@
+/* The text of the button used to sign-in with Phone. */
+"SignInWithPhone" = "Conectați-vă cu numărul de telefon";
+
+/* The title of view controller where user enters phone number. */
+"EnterPhoneTitle" = "Introduceți numărul de telefon";
+
+/* The title of button on navigation controller which navigates to previous screen. */
+"Back" = "Înapoi";
+
+/* The title of button on navigation controller which navigates to the next screen. */
+"Next" = "Înainte";
+
+/* The title of button which user taps on phone verification screen. */
+"Verify" = "Confirmați";
+
+/* Alert message displayed when user submits empty verification code. */
+"EmptyVerificationCode" = "Codul de confirmare trebuie completat";
+
+/* Alert message displayed when user submits empty phone number. */
+"EmptyPhoneNumber" = "Numărul de telefon trebuie completat";
+
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
+"PhoneNumber" = "Număr de telefon";
+
+/* Placeholder shown for phone number input field. */
+"EnterYourPhoneNumber" = "Număr de telefon";
+
+/* Label next to the left of country selector control. */
+"Country" = "Țară";
+
+/* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
+"EnterCodeDescription" = "Introduceți codul din %@ cifre pe care l-am trimis la";
+
+/* The title of button with resend verification code functionality. */
+"ResendCode" = "Retrimiteți codul";
+
+/* Text of the resend timer label shown on verification phone number screen. */
+"ResendCodeTimer" = "Retrimiteți codul în %@";
+
+/* The title of view controller where user verifies phone number. . */
+"VerifyPhoneTitle" = "Confirmați numărul de telefon";
+
+/* The title of button displayed when user closes alert message. */
+"Done" = "Gata";
+
+/* The title of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneTitle" = "Număr de telefon nevalid";
+
+/* The body message of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneMessage" = "Introduceți un număr de telefon valid.";
+
+/* The body message of alert shown when user tapped resend verification code button. */
+"ResendCodeResult" = "Codul a fost trimis la %@";
+
+/* The title of alert shown when user entered invalid verification code. */
+"IncorrectCodeTitle" = "Codul de confirmare este greșit";
+
+/* The body message of alert shown when user entered invalid verification code. */
+"IncorrectCodeMessage" = "Cod greșit. Încercați din nou.";
+
+/* The body message of alert shown when internal server error appeared. */
+"InternalErrorMessage" = "A apărut o eroare. Încercați din nou.";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "Acest număr de telefon a fost folosit de prea multe ori";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "A apărut o problemă la confirmarea numărului de telefon";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "Codul nu mai este valid";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
+"TermsSMS" = "Dacă atingeți %@, poate fi trimis un SMS. Se pot aplica tarife pentru mesaje și date.";
+
+/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
+"TermsAccountCreation" = "Dacă atingeți %@, indicați că sunteți de acord cu [Termenii și condițiile].";
+

@@ -1,62 +1,145 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseUI'
-  s.version      = '0.6.2'
+  s.version      = '5.2.2'
   s.summary      = 'UI binding libraries for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
-  s.license      = { :type => 'Apache 2.0', :file => 'FirebaseUIFrameworks/LICENSE' }
-  s.source       = { :http => 'https://github.com/firebase/FirebaseUI-iOS/releases/download/v0.6.2/FirebaseUIFrameworks.zip' }
+  s.license      = { :type => 'Apache 2.0', :file => 'LICENSE' }
+  s.source       = { :git => 'https://github.com/firebase/FirebaseUI-iOS.git', :tag => 'v' + s.version.to_s }
   s.author       = 'Firebase'
   s.platform = :ios
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
+  s.static_framework = true
   s.ios.framework = 'UIKit'
   s.requires_arc = true
-  s.default_subspecs = 'All'
-  s.ios.vendored_frameworks = 'FirebaseUIFrameworks/*/Frameworks/*.framework'
-
-  s.subspec 'All' do |all|
-    all.dependency 'FirebaseUI/Database'
-    all.dependency 'FirebaseUI/Storage'
-    all.dependency 'FirebaseUI/Auth'
-    all.dependency 'FirebaseUI/Facebook'
-    all.dependency 'FirebaseUI/Google'
-    all.dependency 'FirebaseUI/Twitter'
-  end
+  s.public_header_files = 'FirebaseUI/FirebaseUI.h'
+  s.source_files = 'FirebaseUI/FirebaseUI.h'
+  s.cocoapods_version = '>= 1.5.0'
 
   s.subspec 'Database' do |database|
-    database.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks/FirebaseDatabaseUI.framework"]
-    database.dependency 'Firebase/Database'
+    database.platform = :ios, '8.0'
+    database.public_header_files = 'FirebaseDatabaseUI/*.h'
+    database.source_files = 'FirebaseDatabaseUI/*.{h,m}'
+    database.dependency 'Firebase/Database', '~> 5.0'
+    database.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseDatabaseUI' }
+  end
+
+  s.subspec 'Firestore' do |firestore|
+    firestore.platform = :ios, '8.0'
+    firestore.public_header_files = 'FirebaseFirestoreUI/*.h'
+    firestore.source_files = 'FirebaseFirestoreUI/*.{h,m}'
+    firestore.dependency 'Firebase/Firestore'
+    firestore.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseFirestoreUI' }
   end
 
   s.subspec 'Storage' do |storage|
-    storage.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseStorageUI/Frameworks/FirebaseStorageUI.framework"]
-    storage.dependency 'Firebase/Storage'
-    storage.dependency 'SDWebImage'
+    storage.platform = :ios, '8.0'
+    storage.public_header_files = 'FirebaseStorageUI/*.h'
+    storage.source_files = 'FirebaseStorageUI/*.{h,m}'
+    storage.dependency 'Firebase/Storage', '~> 5.0'
+    storage.dependency 'SDWebImage', '~> 4.0'
+    storage.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseStorageUI' }
   end
 
   s.subspec 'Auth' do |auth|
-    auth.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseAuthUI/Frameworks/FirebaseAuthUI.framework"]
-    auth.dependency 'Firebase/Auth'
-    auth.resources = 'FirebaseUIFrameworks/FirebaseAuthUI/Frameworks/FirebaseAuthUI.framework/*.{nib,lproj,png}'
+    auth.platform = :ios, '8.0'
+    auth.public_header_files = ['FirebaseAuthUI/AccountManagement/FUIAccountSettingsOperationType.h',
+                                'FirebaseAuthUI/AccountManagement/FUIAccountSettingsViewController.h',
+                                'FirebaseAuthUI/FirebaseAuthUI.h',
+                                'FirebaseAuthUI/FUIAuth.h',
+                                'FirebaseAuthUI/FUIAuthBaseViewController.h',
+                                'FirebaseAuthUI/FUIAuthErrors.h',
+                                'FirebaseAuthUI/FUIAuthErrorUtils.h',
+                                'FirebaseAuthUI/FUIAuthPickerViewController.h',
+                                'FirebaseAuthUI/FUIAuthProvider.h',
+                                'FirebaseAuthUI/FUIEmailEntryViewController.h',
+                                'FirebaseAuthUI/FUIPasswordRecoveryViewController.h',
+                                'FirebaseAuthUI/FUIPasswordSignInViewController.h',
+                                'FirebaseAuthUI/FUIPasswordSignUpViewController.h',
+                                'FirebaseAuthUI/FUIPasswordVerificationViewController.h']
+    auth.source_files = ['FirebaseAuthUI/**/*.{h,m}', 'FirebaseAuthUI/*.{h,m}']
+    auth.dependency 'Firebase/Auth', '~> 5.0'
+    auth.resource_bundle = {
+      'FirebaseAuthUI' => ['FirebaseAuthUI/**/*.{xib,png,lproj}']
+    }
+    auth.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseAuthUI' }
   end
 
+  s.subspec 'Anonymous' do |anonymous|
+    anonymous.platform = :ios, '8.0'
+    anonymous.public_header_files = 'FirebaseAnonymousAuthUI/*.h'
+    anonymous.source_files = 'FirebaseAnonymousAuthUI/*.{h,m}'
+    anonymous.dependency 'FirebaseUI/Auth'
+    anonymous.resource_bundle = {
+      'FirebaseAnonymousAuthUI' => ['FirebaseAnonymousAuthUI/**/*.{png,lproj}']
+    }
+    anonymous.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseAnonymousAuthUI' }
+  end
+
+  s.subspec 'Email' do |email|
+    email.platform = :ios, '8.0'
+    email.public_header_files = ['FirebaseEmailAuthUI/FirebaseEmailAuthUI.h',
+                                 'FirebaseEmailAuthUI/FUIEmailAuth.h',
+                                 'FirebaseEmailAuthUI/FUIEmailEntryViewController.h',
+                                 'FirebaseEmailAuthUI/FUIPasswordRecoveryViewController.h',
+                                 'FirebaseEmailAuthUI/FUIPasswordSignInViewController.h',
+                                 'FirebaseEmailAuthUI/FUIPasswordSignUpViewController.h',
+                                 'FirebaseEmailAuthUI/FUIPasswordVerificationViewController.h']
+    email.source_files = 'FirebaseEmailAuthUI/**/*.{h,m}'
+    email.dependency 'FirebaseUI/Auth'
+    email.resource_bundle = {
+      'FirebaseEmailAuthUI' => ['FirebaseEmailAuthUI/*.xib',
+                                'FirebaseEmailAuthUI/**/*.{xib,json,lproj,png}']
+    }
+    email.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseEmailAuthUI' }
+  end
+
+ 
   s.subspec 'Facebook' do |facebook|
-    facebook.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks/FirebaseFacebookAuthUI.framework"]
+    facebook.platform = :ios, '8.0'
+    facebook.public_header_files = 'FirebaseFacebookAuthUI/*.h'
+    facebook.source_files = 'FirebaseFacebookAuthUI/*.{h,m}'
     facebook.dependency 'FirebaseUI/Auth'
     facebook.dependency 'FBSDKLoginKit', '~> 4.0'
-    facebook.resources = 'FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks/FirebaseFacebookAuthUI.framework/*.{nib,lproj,png}'
+    facebook.resource_bundle = {
+      'FirebaseFacebookAuthUI' => ['FirebaseFacebookAuthUI/**/*.{png,lproj}']
+    }
+    facebook.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseFacebookAuthUI' }
   end
 
   s.subspec 'Google' do |google|
-    google.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks/FirebaseGoogleAuthUI.framework"]
+    google.platform = :ios, '8.0'
+    google.public_header_files = 'FirebaseGoogleAuthUI/*.h'
+    google.source_files = 'FirebaseGoogleAuthUI/*.{h,m}'
     google.dependency 'FirebaseUI/Auth'
     google.dependency 'GoogleSignIn', '~> 4.0'
-    google.resources = 'FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks/FirebaseGoogleAuthUI.framework/*.{nib,lproj,png}'
+    google.resource_bundle = {
+      'FirebaseGoogleAuthUI' => ['FirebaseGoogleAuthUI/**/*.{png,lproj}']
+    }
+    google.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseGoogleAuthUI' }
+  end
+
+  s.subspec 'Phone' do |phone|
+    phone.platform = :ios, '8.0'
+    phone.public_header_files = ['FirebasePhoneAuthUI/FirebasePhoneAuthUI.h',
+                                 'FirebasePhoneAuthUI/FUIPhoneAuth.h']
+    phone.source_files = 'FirebasePhoneAuthUI/**/*.{h,m}'
+    phone.dependency 'FirebaseUI/Auth'
+    phone.resource_bundle = {
+      'FirebasePhoneAuthUI' => ['FirebasePhoneAuthUI/*.xib',
+                                'FirebasePhoneAuthUI/**/*.{xib,json,lproj,png}']
+    }
+    phone.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebasePhoneAuthUI' }
   end
 
   s.subspec 'Twitter' do |twitter|
-    twitter.vendored_frameworks = ["FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks/FirebaseTwitterAuthUI.framework"]
+    twitter.public_header_files = 'FirebaseTwitterAuthUI/*.h'
+    twitter.source_files = 'FirebaseTwitterAuthUI/*.{h,m}'
     twitter.dependency 'FirebaseUI/Auth'
-    twitter.dependency 'TwitterKit', '~> 2.4'
-    twitter.resources = 'FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks/FirebaseTwitterAuthUI.framework/*.{nib,lproj,png}'
+    twitter.dependency 'TwitterKit', '~> 3.0'
+    twitter.platform = :ios, '9.0'
+    twitter.resource_bundle = {
+      'FirebaseTwitterAuthUI' => ['FirebaseTwitterAuthUI/**/*.{png,lproj}']
+    }
+    twitter.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseTwitterAuthUI' }
   end
 end

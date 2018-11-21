@@ -1,0 +1,245 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Velkommen";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Log ind med mail";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Angiv din mail";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Mailadressen er ikke korrekt.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Denne type konto understøttes ikke af denne app";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "Du har allerede en konto";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Du har allerede brugt %@. Log ind med %@ for at fortsætte.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Log ind";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Angiv din adgangskode";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Adgangskode skal angives.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Den mail og adgangskode, du angav, stemmer ikke overens.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Mailadressen stemmer ikke overens med en eksisterende konto.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Mailadressen er for en konto, der er blevet deaktiveret.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Du har indtastet en forkert adgangskode for mange gange. Prøv igen om et par minutter.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Kan ikke finde udbyder til %@.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "Mailadresserne stemmer ikke overens";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Gendan adgangskode";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Få en vejledning sendt til denne mail om, hvordan du nulstiller din adgangskode.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Tjek din mail";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Følg vejledningen, der blev sendt til %@, for at gendanne din adgangskode.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Opret konto";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "For- og efternavn";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Vælg adgangskode";
+
+/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
+"TermsOfServiceNotice" = "Ved at trykke på %@ angiver du, at du accepterer %@.";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Servicevilkår";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Mailadressen bruges allerede af en anden konto.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Stærke adgangskoder har mindst 6 tegn og en blanding af bogstaver og tal.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "Der kommer for mange kontoanmodninger fra din IP-adresse. Prøv igen om et par minutter.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Du har allerede brugt %@ til at logge ind. Angiv din adgangskode for den pågældende konto.";
+
+/* OK button title. */
+"OK" = "OK";
+
+/* Cancel button title. */
+"Cancel" = "Annuller";
+
+/* Back button title. */
+"Back" = "Tilbage";
+
+/* Next button title. */
+"Next" = "Næste";
+
+/* Save button title. */
+"Save" = "Gem";
+
+/* Save button title. */
+"Send" = "Send";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "Mail";
+
+/* Label next to a password text field. */
+"Password" = "Adgangskode";
+
+/* Label next to a name text field. */
+"Name" = "Navn";
+
+/* Alert title Error. */
+"Error" = "Fejl";
+
+/* Alert button title Close. */
+"Close" = "Luk";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Profil";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Sikkerhed";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Tilknyttede konti";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Navn";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "Mail";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Tilføj adgangskode";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Skift adgangskode";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Log ud";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Slet konto";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Har du glemt adgangskoden?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Bekræft, at det er dig";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Skal kontoen slettes?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Dette vil slette alle data, der er knyttet til din konto, og kan ikke fortrydes. Du skal logge ind igen for at fuldføre denne handling";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Dette vil slette alle data, der er knyttet til din konto, og kan ikke fortrydes. Er du sikker på, at du vil slette din konto?";
+
+/* Text of Delete action button. */
+"Delete" = "Slet";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Slet konto";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Denne handling kan ikke fortrydes";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Fjern tilknytning";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Tilknyttet konto";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Fjern tilknytning til konto?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Du kan ikke længere logge ind ved hjælp af din konto";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Fjern tilknytning til konto";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "For at ændre den mailadresse, der er knyttet til din konto, skal du logge ind igen.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "For at ændre din adgangskode skal du først angive din nuværende adgangskode.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "Rediger mail";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Rediger navn";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "For at føje en adgangskode til din konto skal du logge ind igen.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "For at ændre adgangskoden for din konto skal du logge ind igen.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "For at ændre din adgangskode skal du først angive din nuværende adgangskode.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Tilføj adgangskode";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Skift adgangskode";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "Mail";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Log ind med %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Angiv dit navn";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Angiv din mail";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Angiv din adgangskode";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Ny adgangskode";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Vælg adgangskode";
+
+/* The title of forgot password button. */
+"ForgotPasswordTitle" = "Har du problemer med at logge ind?";
