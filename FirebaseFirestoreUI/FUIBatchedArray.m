@@ -71,6 +71,10 @@
                                                     resultArray:snapshot.documents];
     }
 
+    if ([sself.delegate respondsToSelector:@selector(batchedArray:willUpdateWithDiff:)]) {
+      [sself.delegate batchedArray:sself willUpdateWithDiff:diff];
+    }
+
     sself.items = snapshot.documents;
     sself.isInSync = YES;
 
