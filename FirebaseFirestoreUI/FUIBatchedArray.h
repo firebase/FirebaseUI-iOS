@@ -25,10 +25,16 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol FUIBatchedArrayDelegate <NSObject>
 
 /**
- * Called when any new data is received or the batched array's query is changed.
+ * Called after any new data is received or the batched array's query did change.
  */
 - (void)batchedArray:(FUIBatchedArray *)array
    didUpdateWithDiff:(FUISnapshotArrayDiff<FIRDocumentSnapshot *> *)diff;
+
+/**
+ * Called before any new data is received or the batched array's query will change.
+ */
+- (void)batchedArray:(FUIBatchedArray *)array
+   willUpdateWithDiff:(FUISnapshotArrayDiff<FIRDocumentSnapshot *> *)diff;
 
 /**
  * Called when the array's query raises an error.
