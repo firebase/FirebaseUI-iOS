@@ -4,5 +4,10 @@
 <dict>
 	<key>aps-environment</key>
 	<string>development</string>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:fex9s.app.goo.gl</string>
+		<string>applinks:fbsaupgraded.page.link</string>
+	</array>
 </dict>
 </plist>

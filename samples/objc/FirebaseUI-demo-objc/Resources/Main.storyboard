@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7RW-VL-qNI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7RW-VL-qNI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -163,13 +162,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Authorization UI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="YxK-c8-9q7">
-                                                    <rect key="frame" x="31" y="12" width="539" height="20"/>
+                                                    <rect key="frame" x="27" y="12" width="322" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JZd-6c-Soe">
-                                                    <rect key="frame" x="521" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="300" y="6.5" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="onAuthUIDelegateChanged:" destination="CNE-cz-Qwp" eventType="valueChanged" id="KtF-5y-VCY"/>
                                                     </connections>
@@ -192,13 +191,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Scopes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="T07-wL-pGr">
-                                                    <rect key="frame" x="31" y="12" width="539" height="20"/>
+                                                    <rect key="frame" x="27" y="12" width="322" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9Ma-Mx-g56">
-                                                    <rect key="frame" x="521" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="300" y="6.5" width="51" height="31"/>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -228,6 +227,20 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Link" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ig5-8M-jHk">
+                                                    <rect key="frame" x="244" y="10.5" width="48" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LiB-gr-jDR">
+                                                    <rect key="frame" x="300" y="5.5" width="49" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="onEmailSwitchValueChanged:" destination="CNE-cz-Qwp" eventType="valueChanged" id="9Er-fB-rWV"/>
+                                                    </connections>
+                                                </switch>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -456,6 +469,8 @@
                         <outlet property="cellSignIn" destination="ORf-bf-Sq2" id="5Lp-Ik-8fw"/>
                         <outlet property="cellUID" destination="EWm-GE-IZV" id="eTu-Vt-UCP"/>
                         <outlet property="customScopeSwitch" destination="9Ma-Mx-g56" id="Scy-Do-CrR"/>
+                        <outlet property="emailLabel" destination="ig5-8M-jHk" id="a2T-8z-dxJ"/>
+                        <outlet property="emailSwitch" destination="LiB-gr-jDR" id="I2g-oL-ZRC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1w1-3x-wCC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -475,20 +490,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gPR-lg-zcg">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="554"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="621"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIg-6e-k6g">
-                                <rect key="frame" x="0.0" y="554" width="600" height="46"/>
+                                <rect key="frame" x="0.0" y="621" width="375" height="46"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3i-kj-emg">
-                                        <rect key="frame" x="558" y="8" width="34" height="30"/>
+                                        <rect key="frame" x="333" y="8" width="34" height="30"/>
                                         <state key="normal" title="Load"/>
                                         <connections>
                                             <action selector="loadButtonPressed:" destination="Ne3-90-zlK" eventType="touchUpInside" id="FBE-qc-8PX"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="path/to/image.jpg" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S2u-gw-VSI">
-                                        <rect key="frame" x="8" y="8" width="542" height="30"/>
+                                        <rect key="frame" x="8" y="8" width="317" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
