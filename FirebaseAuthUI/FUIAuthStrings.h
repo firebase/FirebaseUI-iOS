@@ -34,6 +34,7 @@ extern NSString *const kStr_Cancel;
 extern NSString *const kStr_CannotAuthenticateError;
 extern NSString *const kStr_ChoosePassword;
 extern NSString *const kStr_Close;
+extern NSString *const kStr_ConfirmEmail;
 extern NSString *const kStr_Email;
 extern NSString *const kStr_EmailAlreadyInUseError;
 extern NSString *const kStr_EnterYourEmail;

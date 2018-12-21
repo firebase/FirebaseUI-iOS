@@ -40,6 +40,7 @@ NSString *const kStr_Cancel = @"Cancel";
 NSString *const kStr_CannotAuthenticateError = @"CannotAuthenticateError";
 NSString *const kStr_ChoosePassword = @"ChoosePassword";
 NSString *const kStr_Close = @"Close";
+NSString *const kStr_ConfirmEmail = @"ConfirmEmail";
 NSString *const kStr_Email = @"Email";
 NSString *const kStr_EmailAlreadyInUseError = @"EmailAlreadyInUseError";
 NSString *const kStr_EnterYourEmail = @"EnterYourEmail";

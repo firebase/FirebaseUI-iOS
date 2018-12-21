@@ -20,6 +20,4 @@
 
 @interface FUIAuthViewController : UITableViewController
 
-+ (NSArray *)getAllIDPs;
-
 @end

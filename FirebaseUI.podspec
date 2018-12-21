@@ -78,6 +78,7 @@ Pod::Spec.new do |s|
   s.subspec 'Email' do |email|
     email.platform = :ios, '8.0'
     email.public_header_files = ['FirebaseEmailAuthUI/FirebaseEmailAuthUI.h',
+                                 'FirebaseEmailAuthUI/FUIConfirmEmailViewController.h',
                                  'FirebaseEmailAuthUI/FUIEmailAuth.h',
                                  'FirebaseEmailAuthUI/FUIEmailEntryViewController.h',
                                  'FirebaseEmailAuthUI/FUIPasswordRecoveryViewController.h',
