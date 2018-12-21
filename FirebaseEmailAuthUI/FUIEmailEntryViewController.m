@@ -241,7 +241,9 @@ static NSString *const kTroubleGettingEmailMessage =
                                             message:error.description
                            presentingViewController:self];
     } else {
-      NSString *successMessage = [NSString stringWithFormat: @"A sign-in email with additional instrucitons was sent to %@. Check your email to complete sign-in.", email];
+      NSString *successMessage =
+          [NSString stringWithFormat: @"A sign-in email with additional instrucitons was sent to "
+                                      "%@. Check your email to complete sign-in.", email];
       [FUIAuthBaseViewController showAlertWithTitle:@"Sign-in email Sent"
                                             message:successMessage
                                         actionTitle:@"Trouble getting email?"

@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2016 Google Inc.
+//  Copyright (c) 2018 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -31,50 +31,50 @@
 #import "FUIPrivacyAndTermsOfServiceView.h"
 
 /** @var kCellReuseIdentifier
- @brief The reuse identifier for table view cell.
+    @brief The reuse identifier for table view cell.
  */
 static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
 /** @var kAppIDCodingKey
- @brief The key used to encode the app ID for NSCoding.
+    @brief The key used to encode the app ID for NSCoding.
  */
 static NSString *const kAppIDCodingKey = @"appID";
 
 /** @var kAuthUICodingKey
- @brief The key used to encode @c FUIAuth instance for NSCoding.
+    @brief The key used to encode @c FUIAuth instance for NSCoding.
  */
 static NSString *const kAuthUICodingKey = @"authUI";
 
 /** @var kEmailCellAccessibilityID
- @brief The Accessibility Identifier for the @c email sign in cell.
+    @brief The Accessibility Identifier for the @c email sign in cell.
  */
 static NSString *const kEmailCellAccessibilityID = @"EmailCellAccessibilityID";
 
 /** @var kNextButtonAccessibilityID
- @brief The Accessibility Identifier for the @c next button.
+    @brief The Accessibility Identifier for the @c next button.
  */
 static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID";
 
 @interface FUIConfirmEmailViewController () <UITableViewDataSource, UITextFieldDelegate>
+
+/** @property emailField
+    @brief The @c UITextField that user enters email address into.
+ */
+@property (nonatomic) UITextField *emailField;
+
+/** @property tableView
+    @brief The @c UITableView used to store all UI elements.
+ */
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+
+/** @property termsOfServiceView
+    @brief The @c Text view which displays Terms of Service.
+ */
+@property (nonatomic, weak) IBOutlet FUIPrivacyAndTermsOfServiceView *termsOfServiceView;
+
 @end
 
-@implementation FUIConfirmEmailViewController {
-  /** @var _emailField
-   @brief The @c UITextField that user enters email address into.
-   */
-  UITextField *_emailField;
-  
-  /** @var _tableView
-   @brief The @c UITableView used to store all UI elements.
-   */
-  __weak IBOutlet UITableView *_tableView;
-
-  /** @var _termsOfServiceView
-   @brief The @c Text view which displays Terms of Service.
-   */
-  __weak IBOutlet FUIPrivacyAndTermsOfServiceView *_termsOfServiceView;
-
-}
+@implementation FUIConfirmEmailViewController
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
   return [self initWithNibName:NSStringFromClass([self class])
@@ -104,10 +104,10 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                            action:@selector(next)];
   nextButtonItem.accessibilityIdentifier = kNextButtonAccessibilityID;
   self.navigationItem.rightBarButtonItem = nextButtonItem;
-  _termsOfServiceView.authUI = self.authUI;
-  [_termsOfServiceView useFullMessage];
+  self.termsOfServiceView.authUI = self.authUI;
+  [self.termsOfServiceView useFullMessage];
 
-  [self enableDynamicCellHeightForTableView:_tableView];
+  [self enableDynamicCellHeightForTableView:self.tableView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -132,7 +132,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 #pragma mark - Actions
 
 - (void)next {
-  [self onNext:_emailField.text];
+  [self onNext:self.emailField.text];
 }
 
 - (void)onNext:(NSString *)emailText {
@@ -185,7 +185,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 }
 
 - (void)textFieldDidChange {
-  [self didChangeEmail:_emailField.text];
+  [self didChangeEmail:self.emailField.text];
 }
 
 - (void)didChangeEmail:(NSString *)emailText {
@@ -211,7 +211,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   cell.textField.placeholder = FUILocalizedString(kStr_ConfirmEmail);
   cell.textField.delegate = self;
   cell.accessibilityIdentifier = kEmailCellAccessibilityID;
-  _emailField = cell.textField;
+  self.emailField = cell.textField;
   cell.textField.secureTextEntry = NO;
   cell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
   cell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -223,7 +223,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
            forControlEvents:UIControlEventEditingChanged];
-  [self didChangeEmail:_emailField.text];
+  [self didChangeEmail:self.emailField.text];
   return cell;
 }
 
@@ -242,8 +242,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-  if (textField == _emailField) {
-    [self onNext:_emailField.text];
+  if (textField == self.emailField) {
+    [self onNext:self.emailField.text];
   }
   return NO;
 }
@@ -251,9 +251,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 #pragma mark - Utilities
 
 /** @fn signInWithProvider:email:
- @brief Actually kicks off sign in with the provider.
- @param provider The identity provider to sign in with.
- @param email The email address of the user.
+    @brief Actually kicks off sign in with the provider.
+    @param provider The identity provider to sign in with.
+    @param email The email address of the user.
  */
 - (void)signInWithProvider:(id<FUIAuthProvider>)provider email:(NSString *)email {
   [self incrementActivity];
