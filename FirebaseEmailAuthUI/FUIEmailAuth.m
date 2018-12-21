@@ -228,10 +228,9 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
   localParameterDict[@"ui_sid"] = [GULUserDefaults.standardUserDefaults stringForKey:@"ui_sid"];
 
   // Handling flows
-  BOOL sameDevice =
-      urlParameterDict[@"ui_sid"] &&
-      localParameterDict[@"ui_sid"] &&
-      [urlParameterDict[@"ui_sid"] isEqualToString:localParameterDict[@"ui_sid"]];
+  NSString *urlSessionID = urlParameterDict[@"ui_sid"];
+  NSString *localSessionID = localParameterDict[@"ui_sid"];
+  BOOL sameDevice = urlSessionID && localSessionID && [urlSessionID isEqualToString:localSessionID];
 
   if (sameDevice) { // Same device
     if (urlParameterDict[@"ui_pid"] != nil) { // Unverified provider linking
@@ -254,7 +253,7 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
 }
 
 - (void)handleUnverifiedProviderLinking:(NSString *)providerID {
-  // TODO: Implement this after FIRAuthCerdential conforms to NSSecureCoding
+  // TODO(chuanr): Implement this after FIRAuthCerdential conforms to NSSecureCoding.
 }
 
 - (void)handleAnonymousUpgrade:(NSString *)anonymousUserID email:(NSString *)email {
@@ -332,7 +331,7 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
       }
     }
 
-    void (^dismissHandler)(void) = ^(){
+    void (^dismissHandler)(void) = ^() {
       UINavigationController *authViewController = [self.authUI authViewController];
       if (!(authViewController.isViewLoaded && authViewController.view.window)) {
         [authViewController.navigationController dismissViewControllerAnimated:YES completion:nil];
@@ -599,11 +598,11 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
         providerName = @"Github";
       }
       NSString *message = [NSString stringWithFormat:
-                               @"You already have an account\n \n You've already used %@. You "
-                               "can connect your %@ account with %@ by signing in with Email "
-                               "link below. \n \n For this flow to successfully connect your "
-                               "account with this email, you have to open the link on the same "
-                               "device or browser.", email, providerName, email];
+          @"You already have an account\n \n You've already used %@. You "
+          "can connect your %@ account with %@ by signing in with Email "
+          "link below. \n \n For this flow to successfully connect your "
+          "account with this email, you have to open the link on the same "
+          "device or browser.", email, providerName, email];
       [FUIAuthBaseViewController
           showAlertWithTitle:@"Sign in"
                      message:message
@@ -615,11 +614,12 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
                    if (error) {
                      [FUIAuthBaseViewController showAlertWithMessage:error.description];
                    } else {
+                     NSString *signInMessage = [NSString stringWithFormat:
+                         @"A sign-in email with additional instrucitons was sent to %@. Check your "
+                         "email to complete sign-in.", email];
                      [FUIAuthBaseViewController
                       showAlertWithTitle:@"Sign-in email sent"
-                      message:[NSString stringWithFormat:@"A sign-in email with additional "
-                               "instrucitons was sent to %@. Check your "
-                               "email to complete sign-in.", email]
+                      message:signInMessage
                       presentingViewController:nil];
                    }
                  };
