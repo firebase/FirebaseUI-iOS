@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2016 Google Inc.
+//  Copyright (c) 2018 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -27,14 +27,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** @fn onNext:
     @brief Should be called when user entered email. Triggers email verification before
-    pushing new controller
+        pushing new controller
     @param emailText Email value entered by user.
  */
 - (void)onNext:(NSString *)emailText;
 
 /** @fn didChangeEmail:
     @brief Should be called after any change of email value. Updates UI controls state
-    (e g state of next button)
+        (e g state of next button)
     @param emailText Email value entered by user.
  */
 - (void)didChangeEmail:(NSString *)emailText;

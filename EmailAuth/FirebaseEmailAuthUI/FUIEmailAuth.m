@@ -229,8 +229,8 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
 
   // Handling flows
   BOOL sameDevice =
-      (urlParameterDict[@"ui_sid"] != nil) &&
-      (localParameterDict[@"ui_sid"] != nil) &&
+      urlParameterDict[@"ui_sid"] &&
+      localParameterDict[@"ui_sid"] &&
       [urlParameterDict[@"ui_sid"] isEqualToString:localParameterDict[@"ui_sid"]];
 
   if (sameDevice) { // Same device
@@ -253,9 +253,8 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
   return YES;
 }
 
-// TODO: Implement this after FIRAuthCerdential conforms to NSSecureCoding
 - (void)handleUnverifiedProviderLinking:(NSString *)providerID {
-
+  // TODO: Implement this after FIRAuthCerdential conforms to NSSecureCoding
 }
 
 - (void)handleAnonymousUpgrade:(NSString *)anonymousUserID email:(NSString *)email {
@@ -333,18 +332,20 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
       }
     }
 
+    void (^dismissHandler)(void) = ^(){
+      UINavigationController *authViewController = [self.authUI authViewController];
+      if (!(authViewController.isViewLoaded && authViewController.view.window)) {
+        [authViewController.navigationController dismissViewControllerAnimated:YES completion:nil];
+      }
+      [self.authUI invokeResultCallbackWithAuthDataResult:authResult URL:nil error:error];
+    };
+
     [FUIAuthBaseViewController showAlertWithTitle:@"Signed in!"
                                           message:nil
                                       actionTitle:nil
                                     actionHandler:nil
                                      dismissTitle:@"OK"
-                                   dismissHandler:^{
-                                     UINavigationController *authViewController = [self.authUI authViewController];
-                                     if (!(authViewController.isViewLoaded && authViewController.view.window)) {
-                                       [authViewController.navigationController dismissViewControllerAnimated:YES completion:nil];
-                                     }
-                                     [self.authUI invokeResultCallbackWithAuthDataResult:authResult URL:nil error:error];
-                                   }
+                                   dismissHandler:dismissHandler
                          presentingViewController:nil];
   };
 
@@ -355,7 +356,8 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
   UINavigationController *authViewController = [self.authUI authViewController];
   void (^completion)(void) = ^(){
     [FUIAuthBaseViewController showAlertWithTitle:@"New Device detected"
-                                          message:@"Try opening the link using the same device where you started the sign-in process"
+                                          message:@"Try opening the link using the same "
+                                                  "device where you started the sign-in process"
                          presentingViewController:authViewController];
   };
 
@@ -539,8 +541,8 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
                         signInResult:(_Nullable FIRAuthResultCallback)result {
   id<FUIAuthDelegate> delegate = self.authUI.delegate;
   [self.authUI.auth fetchSignInMethodsForEmail:email
-                         completion:^(NSArray<NSString *> *_Nullable providers,
-                                      NSError *_Nullable error) {
+                                    completion:^(NSArray<NSString *> *_Nullable providers,
+                                                 NSError *_Nullable error) {
     if (result) {
       result(nil, error);
     }
@@ -597,7 +599,12 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
       } else if ([newCredential.provider isEqualToString:FIRGitHubAuthProviderID]) {
         providerName = @"Github";
       }
-      NSString *message = [NSString stringWithFormat:@"You already have an account\n \n You've already used %@. You can connect your %@ account with %@ by signing in with Email link below. \n \n For this flow to successfully connect your account with this email, you have to open the link on the same device or browser.", email, providerName, email];
+      NSString *message = [NSString stringWithFormat:
+                               @"You already have an account\n \n You've already used %@. You "
+                               "can connect your %@ account with %@ by signing in with Email "
+                               "link below. \n \n For this flow to successfully connect your "
+                               "account with this email, you have to open the link on the same "
+                               "device or browser.", email, providerName, email];
       [FUIAuthBaseViewController
           showAlertWithTitle:@"Sign in"
                      message:message
@@ -605,14 +612,21 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
                actionHandler:^{
                  [self generateURLParametersAndLocalCache:email
                                           linkingProvider:newCredential.provider];
+                 void (^completion)(NSError * _Nullable error) = ^(NSError * _Nullable error){
+                   if (error) {
+                     [FUIAuthBaseViewController showAlertWithMessage:error.description];
+                   } else {
+                     [FUIAuthBaseViewController
+                      showAlertWithTitle:@"Sign-in email sent"
+                      message:[NSString stringWithFormat:@"A sign-in email with additional "
+                               "instrucitons was sent to %@. Check your "
+                               "email to complete sign-in.", email]
+                      presentingViewController:nil];
+                   }
+                 };
                  [self.authUI.auth sendSignInLinkToEmail:email
                                       actionCodeSettings:self.actionCodeSettings
-                                              completion:^(NSError * _Nullable error) {
-                                                [FUIAuthBaseViewController
-                                                    showAlertWithTitle:@"Sign-in email sent"
-                                                               message:[NSString stringWithFormat:@"A sign-in email with additional instrucitons was sent to %@. Check your email to complete sign-in.", email]
-                                              presentingViewController:nil];
-                                              }];
+                                              completion:completion];
                }
                 dismissTitle:nil
               dismissHandler:nil

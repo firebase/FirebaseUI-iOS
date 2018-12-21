@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8D7D5DC11D9D9536006C1857 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */; };
 		8D7F86B51D9DAA0100C2A122 /* FUIStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F86B41D9DAA0100C2A122 /* FUIStorageViewController.m */; };
-		C30AEB081ED610740084E328 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C30AEB051ED610740084E328 /* LaunchScreen.xib */; };
 		C30AEB0A1ED610740084E328 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30AEB071ED610740084E328 /* Main.storyboard */; };
 		C30AEB0B1ED610780084E328 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C30AEB0D1ED610780084E328 /* Localizable.strings */; };
 		C329B1B21DAD6E5100059A13 /* FUICustomEmailEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B1B01DAD6E5100059A13 /* FUICustomEmailEntryViewController.m */; };
@@ -42,7 +41,6 @@
 		8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D7F86B31D9DAA0100C2A122 /* FUIStorageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FUIStorageViewController.h; path = Storage/FUIStorageViewController.h; sourceTree = "<group>"; };
 		8D7F86B41D9DAA0100C2A122 /* FUIStorageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FUIStorageViewController.m; path = Storage/FUIStorageViewController.m; sourceTree = "<group>"; };
-		C30AEB051ED610740084E328 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		C30AEB071ED610740084E328 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C30AEB0C1ED610780084E328 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C30AEB291ED611460084E328 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -195,7 +193,6 @@
 		C30AEB041ED610740084E328 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C30AEB051ED610740084E328 /* LaunchScreen.xib */,
 				C30AEB0D1ED610780084E328 /* Localizable.strings */,
 				C30AEB071ED610740084E328 /* Main.storyboard */,
 			);
@@ -449,7 +446,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C30AEB081ED610740084E328 /* LaunchScreen.xib in Resources */,
 				C3A8B7C21DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib in Resources */,
 				C30AEB0B1ED610780084E328 /* Localizable.strings in Resources */,
 				C30AEB0A1ED610740084E328 /* Main.storyboard in Resources */,
