@@ -1,0 +1,13 @@
+platform :ios, '8.0'
+
+target 'FirebaseEmailAuthUI' do
+  use_frameworks!
+
+  pod 'FirebaseUI/Auth', :path => '../'
+
+  target 'FirebaseEmailAuthUITests' do
+    inherit! :search_paths
+    pod 'OCMock'
+  end
+
+end

@@ -1,0 +1,12 @@
+platform :ios, '8.0'
+
+target 'FirebaseDatabaseUI' do
+  use_frameworks!
+
+  pod 'Firebase/Database'
+
+  target 'FirebaseDatabaseUITests' do
+    inherit! :search_paths
+  end
+
+end

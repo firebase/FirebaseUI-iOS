@@ -1,0 +1,893 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D69E54B21DE915A00CFA49B /* FirebasePhoneAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D69E54121DE915A00CFA49B /* FirebasePhoneAuthUI.framework */; };
+		8D69E55021DE915A00CFA49B /* FirebasePhoneAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E54F21DE915A00CFA49B /* FirebasePhoneAuthUITests.m */; };
+		8D69E55221DE915A00CFA49B /* FirebasePhoneAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E54421DE915A00CFA49B /* FirebasePhoneAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E5D221DE91D400CFA49B /* FUIPhoneAuthStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E55B21DE91D200CFA49B /* FUIPhoneAuthStrings.m */; };
+		8D69E5D321DE91D400CFA49B /* FUIPrivacyAndTermsOfServiceView+PhoneAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E55C21DE91D200CFA49B /* FUIPrivacyAndTermsOfServiceView+PhoneAuth.h */; };
+		8D69E5D421DE91D400CFA49B /* FirebasePhoneAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E55E21DE91D200CFA49B /* FirebasePhoneAuthUI.strings */; };
+		8D69E5D521DE91D400CFA49B /* FUICodeField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E5B321DE91D300CFA49B /* FUICodeField.xib */; };
+		8D69E5D621DE91D400CFA49B /* ic_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E5B521DE91D300CFA49B /* ic_phone.png */; };
+		8D69E5D721DE91D400CFA49B /* ic_phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E5B621DE91D300CFA49B /* ic_phone@3x.png */; };
+		8D69E5D821DE91D400CFA49B /* ic_phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E5B721DE91D300CFA49B /* ic_phone@2x.png */; };
+		8D69E5D921DE91D400CFA49B /* country-codes.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E5B821DE91D300CFA49B /* country-codes.json */; };
+		8D69E5DA21DE91D400CFA49B /* FUIPhoneAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E5B921DE91D300CFA49B /* FUIPhoneAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E5DB21DE91D400CFA49B /* FUIPhoneAuthStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E5BA21DE91D300CFA49B /* FUIPhoneAuthStrings.h */; };
+		8D69E5DC21DE91D400CFA49B /* FUICodeField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E5BB21DE91D300CFA49B /* FUICodeField.m */; };
+		8D69E5DD21DE91D400CFA49B /* FUICollationForCountries.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E5BD21DE91D300CFA49B /* FUICollationForCountries.m */; };
+		8D69E5DE21DE91D400CFA49B /* FUICountryTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E5BE21DE91D300CFA49B /* FUICountryTableViewController.h */; };
+		8D69E5DF21DE91D400CFA49B /* FUICountryCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E5BF21DE91D300CFA49B /* FUICountryCodes.m */; };
+		8D69E5E021DE91D400CFA49B /* FUIFeatureSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E5C021DE91D300CFA49B /* FUIFeatureSwitch.h */; };
+		8D69E5E121DE91D400CFA49B /* FUIPhoneNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E5C121DE91D300CFA49B /* FUIPhoneNumber.h */; };
+		8D69E5E221DE91D400CFA49B /* FUICountryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E5C221DE91D300CFA49B /* FUICountryTableViewController.xib */; };
+		8D69E5E321DE91D400CFA49B /* FUICountryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E5C321DE91D300CFA49B /* FUICountryTableViewController.m */; };
+		8D69E5E421DE91D400CFA49B /* FUICollationForCountries.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E5C421DE91D300CFA49B /* FUICollationForCountries.h */; };
+		8D69E5E521DE91D400CFA49B /* FUICountryCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E5C521DE91D300CFA49B /* FUICountryCodes.h */; };
+		8D69E5E621DE91D400CFA49B /* FUIPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E5C621DE91D300CFA49B /* FUIPhoneNumber.m */; };
+		8D69E5E721DE91D400CFA49B /* FUIFeatureSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E5C721DE91D300CFA49B /* FUIFeatureSwitch.m */; };
+		8D69E5E821DE91D400CFA49B /* FUIPhoneEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E5C821DE91D300CFA49B /* FUIPhoneEntryViewController.m */; };
+		8D69E5E921DE91D400CFA49B /* FUIPhoneVerificationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E5C921DE91D300CFA49B /* FUIPhoneVerificationViewController.h */; };
+		8D69E5EA21DE91D400CFA49B /* FUIPhoneVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E5CA21DE91D300CFA49B /* FUIPhoneVerificationViewController.xib */; };
+		8D69E5EB21DE91D400CFA49B /* FUIPhoneEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E5CB21DE91D300CFA49B /* FUIPhoneEntryViewController.xib */; };
+		8D69E5EC21DE91D400CFA49B /* FUIPhoneAuth_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E5CC21DE91D300CFA49B /* FUIPhoneAuth_Internal.h */; };
+		8D69E5ED21DE91D400CFA49B /* FUIPrivacyAndTermsOfServiceView+PhoneAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E5CD21DE91D300CFA49B /* FUIPrivacyAndTermsOfServiceView+PhoneAuth.m */; };
+		8D69E5EE21DE91D400CFA49B /* FUIPhoneVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E5CE21DE91D300CFA49B /* FUIPhoneVerificationViewController.m */; };
+		8D69E5EF21DE91D400CFA49B /* FUIPhoneAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E5CF21DE91D300CFA49B /* FUIPhoneAuth.m */; };
+		8D69E5F021DE91D400CFA49B /* FUICodeField.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E5D021DE91D300CFA49B /* FUICodeField.h */; };
+		8D69E5F121DE91D400CFA49B /* FUIPhoneEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E5D121DE91D300CFA49B /* FUIPhoneEntryViewController.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8D69E54C21DE915A00CFA49B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D69E53821DE915A00CFA49B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D69E54021DE915A00CFA49B;
+			remoteInfo = FirebasePhoneAuthUI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8D69E54121DE915A00CFA49B /* FirebasePhoneAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebasePhoneAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D69E54421DE915A00CFA49B /* FirebasePhoneAuthUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebasePhoneAuthUI.h; sourceTree = "<group>"; };
+		8D69E54521DE915A00CFA49B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D69E54A21DE915A00CFA49B /* FirebasePhoneAuthUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirebasePhoneAuthUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D69E54F21DE915A00CFA49B /* FirebasePhoneAuthUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebasePhoneAuthUITests.m; sourceTree = "<group>"; };
+		8D69E55121DE915A00CFA49B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D69E55B21DE91D200CFA49B /* FUIPhoneAuthStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPhoneAuthStrings.m; sourceTree = "<group>"; };
+		8D69E55C21DE91D200CFA49B /* FUIPrivacyAndTermsOfServiceView+PhoneAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FUIPrivacyAndTermsOfServiceView+PhoneAuth.h"; sourceTree = "<group>"; };
+		8D69E55F21DE91D200CFA49B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E56021DE91D200CFA49B /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = ur.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E56121DE91D200CFA49B /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E56221DE91D200CFA49B /* es-SV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-SV"; path = "es-SV.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E56321DE91D200CFA49B /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E56421DE91D200CFA49B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E56521DE91D200CFA49B /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E56621DE91D200CFA49B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E56721DE91D200CFA49B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E56821DE91D200CFA49B /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E56921DE91D200CFA49B /* mr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = mr; path = mr.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E56A21DE91D200CFA49B /* es-GT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-GT"; path = "es-GT.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E56B21DE91D200CFA49B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E56C21DE91D200CFA49B /* en-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-CA"; path = "en-CA.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E56D21DE91D200CFA49B /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E56E21DE91D200CFA49B /* es-PY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PY"; path = "es-PY.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E56F21DE91D200CFA49B /* gu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gu; path = gu.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E57021DE91D200CFA49B /* kn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kn; path = kn.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E57121DE91D200CFA49B /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E57221DE91D200CFA49B /* es-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-US"; path = "es-US.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E57321DE91D200CFA49B /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E57421DE91D200CFA49B /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E57521DE91D200CFA49B /* es-VE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-VE"; path = "es-VE.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E57621DE91D200CFA49B /* es-CL */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CL"; path = "es-CL.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E57721DE91D200CFA49B /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E57821DE91D200CFA49B /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E57921DE91D200CFA49B /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E57A21DE91D200CFA49B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E57B21DE91D200CFA49B /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E57C21DE91D200CFA49B /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E57D21DE91D200CFA49B /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E57E21DE91D200CFA49B /* nn-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nn-NO"; path = "nn-NO.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E57F21DE91D200CFA49B /* es-PA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PA"; path = "es-PA.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E58021DE91D200CFA49B /* en-SG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-SG"; path = "en-SG.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E58121DE91D200CFA49B /* sr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sr; path = sr.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E58221DE91D200CFA49B /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = ms.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E58321DE91D200CFA49B /* es-CR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CR"; path = "es-CR.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E58421DE91D200CFA49B /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E58521DE91D200CFA49B /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E58621DE91D200CFA49B /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E58721DE91D200CFA49B /* es-AR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-AR"; path = "es-AR.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E58821DE91D200CFA49B /* es-PE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PE"; path = "es-PE.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E58921DE91D200CFA49B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E58A21DE91D200CFA49B /* en-IE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IE"; path = "en-IE.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E58B21DE91D200CFA49B /* fil */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fil; path = fil.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E58C21DE91D200CFA49B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E58D21DE91D200CFA49B /* es-CO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CO"; path = "es-CO.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E58E21DE91D200CFA49B /* gsw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gsw; path = gsw.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E58F21DE91D200CFA49B /* en-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-ZA"; path = "en-ZA.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E59021DE91D200CFA49B /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E59121DE91D200CFA49B /* es-PR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PR"; path = "es-PR.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E59221DE91D200CFA49B /* de-AT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-AT"; path = "de-AT.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E59321DE91D200CFA49B /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E59421DE91D200CFA49B /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E59521DE91D200CFA49B /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E59621DE91D200CFA49B /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E59721DE91D200CFA49B /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E59821DE91D200CFA49B /* lv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lv; path = lv.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E59921DE91D200CFA49B /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E59A21DE91D200CFA49B /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E59B21DE91D200CFA49B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E59C21DE91D200CFA49B /* es-DO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-DO"; path = "es-DO.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E59D21DE91D200CFA49B /* fr-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CH"; path = "fr-CH.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E59E21DE91D200CFA49B /* es-NI */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-NI"; path = "es-NI.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E59F21DE91D200CFA49B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E5A021DE91D200CFA49B /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E5A121DE91D200CFA49B /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E5A221DE91D200CFA49B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E5A321DE91D200CFA49B /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E5A421DE91D200CFA49B /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E5A521DE91D200CFA49B /* de-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-CH"; path = "de-CH.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E5A621DE91D200CFA49B /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = bn.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E5A721DE91D200CFA49B /* es-EC */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-EC"; path = "es-EC.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E5A821DE91D200CFA49B /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E5A921DE91D200CFA49B /* es-BO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-BO"; path = "es-BO.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E5AA21DE91D200CFA49B /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E5AB21DE91D200CFA49B /* ln */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ln; path = ln.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E5AC21DE91D200CFA49B /* es-UY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-UY"; path = "es-UY.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E5AD21DE91D200CFA49B /* es-HN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-HN"; path = "es-HN.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E5AE21DE91D200CFA49B /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E5AF21DE91D200CFA49B /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E5B021DE91D200CFA49B /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E5B121DE91D200CFA49B /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/FirebasePhoneAuthUI.strings; sourceTree = "<group>"; };
+		8D69E5B221DE91D200CFA49B /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "en-IN.lproj/FirebasePhoneAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E5B321DE91D300CFA49B /* FUICodeField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICodeField.xib; sourceTree = "<group>"; };
+		8D69E5B521DE91D300CFA49B /* ic_phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_phone.png; sourceTree = "<group>"; };
+		8D69E5B621DE91D300CFA49B /* ic_phone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_phone@3x.png"; sourceTree = "<group>"; };
+		8D69E5B721DE91D300CFA49B /* ic_phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_phone@2x.png"; sourceTree = "<group>"; };
+		8D69E5B821DE91D300CFA49B /* country-codes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "country-codes.json"; sourceTree = "<group>"; };
+		8D69E5B921DE91D300CFA49B /* FUIPhoneAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneAuth.h; sourceTree = "<group>"; };
+		8D69E5BA21DE91D300CFA49B /* FUIPhoneAuthStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneAuthStrings.h; sourceTree = "<group>"; };
+		8D69E5BB21DE91D300CFA49B /* FUICodeField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICodeField.m; sourceTree = "<group>"; };
+		8D69E5BD21DE91D300CFA49B /* FUICollationForCountries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICollationForCountries.m; sourceTree = "<group>"; };
+		8D69E5BE21DE91D300CFA49B /* FUICountryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICountryTableViewController.h; sourceTree = "<group>"; };
+		8D69E5BF21DE91D300CFA49B /* FUICountryCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICountryCodes.m; sourceTree = "<group>"; };
+		8D69E5C021DE91D300CFA49B /* FUIFeatureSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIFeatureSwitch.h; sourceTree = "<group>"; };
+		8D69E5C121DE91D300CFA49B /* FUIPhoneNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneNumber.h; sourceTree = "<group>"; };
+		8D69E5C221DE91D300CFA49B /* FUICountryTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICountryTableViewController.xib; sourceTree = "<group>"; };
+		8D69E5C321DE91D300CFA49B /* FUICountryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICountryTableViewController.m; sourceTree = "<group>"; };
+		8D69E5C421DE91D300CFA49B /* FUICollationForCountries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICollationForCountries.h; sourceTree = "<group>"; };
+		8D69E5C521DE91D300CFA49B /* FUICountryCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICountryCodes.h; sourceTree = "<group>"; };
+		8D69E5C621DE91D300CFA49B /* FUIPhoneNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPhoneNumber.m; sourceTree = "<group>"; };
+		8D69E5C721DE91D300CFA49B /* FUIFeatureSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIFeatureSwitch.m; sourceTree = "<group>"; };
+		8D69E5C821DE91D300CFA49B /* FUIPhoneEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPhoneEntryViewController.m; sourceTree = "<group>"; };
+		8D69E5C921DE91D300CFA49B /* FUIPhoneVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneVerificationViewController.h; sourceTree = "<group>"; };
+		8D69E5CA21DE91D300CFA49B /* FUIPhoneVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPhoneVerificationViewController.xib; sourceTree = "<group>"; };
+		8D69E5CB21DE91D300CFA49B /* FUIPhoneEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIPhoneEntryViewController.xib; sourceTree = "<group>"; };
+		8D69E5CC21DE91D300CFA49B /* FUIPhoneAuth_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneAuth_Internal.h; sourceTree = "<group>"; };
+		8D69E5CD21DE91D300CFA49B /* FUIPrivacyAndTermsOfServiceView+PhoneAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FUIPrivacyAndTermsOfServiceView+PhoneAuth.m"; sourceTree = "<group>"; };
+		8D69E5CE21DE91D300CFA49B /* FUIPhoneVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPhoneVerificationViewController.m; sourceTree = "<group>"; };
+		8D69E5CF21DE91D300CFA49B /* FUIPhoneAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPhoneAuth.m; sourceTree = "<group>"; };
+		8D69E5D021DE91D300CFA49B /* FUICodeField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICodeField.h; sourceTree = "<group>"; };
+		8D69E5D121DE91D300CFA49B /* FUIPhoneEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPhoneEntryViewController.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D69E53E21DE915A00CFA49B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D69E54721DE915A00CFA49B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E54B21DE915A00CFA49B /* FirebasePhoneAuthUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8D69E53721DE915A00CFA49B = {
+			isa = PBXGroup;
+			children = (
+				8D69E54321DE915A00CFA49B /* FirebasePhoneAuthUI */,
+				8D69E54E21DE915A00CFA49B /* FirebasePhoneAuthUITests */,
+				8D69E54221DE915A00CFA49B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8D69E54221DE915A00CFA49B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E54121DE915A00CFA49B /* FirebasePhoneAuthUI.framework */,
+				8D69E54A21DE915A00CFA49B /* FirebasePhoneAuthUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8D69E54321DE915A00CFA49B /* FirebasePhoneAuthUI */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E54421DE915A00CFA49B /* FirebasePhoneAuthUI.h */,
+				8D69E5D021DE91D300CFA49B /* FUICodeField.h */,
+				8D69E5BB21DE91D300CFA49B /* FUICodeField.m */,
+				8D69E5B321DE91D300CFA49B /* FUICodeField.xib */,
+				8D69E5CC21DE91D300CFA49B /* FUIPhoneAuth_Internal.h */,
+				8D69E5B921DE91D300CFA49B /* FUIPhoneAuth.h */,
+				8D69E5CF21DE91D300CFA49B /* FUIPhoneAuth.m */,
+				8D69E5BA21DE91D300CFA49B /* FUIPhoneAuthStrings.h */,
+				8D69E55B21DE91D200CFA49B /* FUIPhoneAuthStrings.m */,
+				8D69E5D121DE91D300CFA49B /* FUIPhoneEntryViewController.h */,
+				8D69E5C821DE91D300CFA49B /* FUIPhoneEntryViewController.m */,
+				8D69E5CB21DE91D300CFA49B /* FUIPhoneEntryViewController.xib */,
+				8D69E5C921DE91D300CFA49B /* FUIPhoneVerificationViewController.h */,
+				8D69E5CE21DE91D300CFA49B /* FUIPhoneVerificationViewController.m */,
+				8D69E5CA21DE91D300CFA49B /* FUIPhoneVerificationViewController.xib */,
+				8D69E55C21DE91D200CFA49B /* FUIPrivacyAndTermsOfServiceView+PhoneAuth.h */,
+				8D69E5CD21DE91D300CFA49B /* FUIPrivacyAndTermsOfServiceView+PhoneAuth.m */,
+				8D69E5BC21DE91D300CFA49B /* CountryCode */,
+				8D69E5B421DE91D300CFA49B /* Resources */,
+				8D69E55D21DE91D200CFA49B /* Strings */,
+				8D69E54521DE915A00CFA49B /* Info.plist */,
+			);
+			path = FirebasePhoneAuthUI;
+			sourceTree = "<group>";
+		};
+		8D69E54E21DE915A00CFA49B /* FirebasePhoneAuthUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E54F21DE915A00CFA49B /* FirebasePhoneAuthUITests.m */,
+				8D69E55121DE915A00CFA49B /* Info.plist */,
+			);
+			path = FirebasePhoneAuthUITests;
+			sourceTree = "<group>";
+		};
+		8D69E55D21DE91D200CFA49B /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E55E21DE91D200CFA49B /* FirebasePhoneAuthUI.strings */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
+		8D69E5B421DE91D300CFA49B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E5B521DE91D300CFA49B /* ic_phone.png */,
+				8D69E5B621DE91D300CFA49B /* ic_phone@3x.png */,
+				8D69E5B721DE91D300CFA49B /* ic_phone@2x.png */,
+				8D69E5B821DE91D300CFA49B /* country-codes.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8D69E5BC21DE91D300CFA49B /* CountryCode */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E5BD21DE91D300CFA49B /* FUICollationForCountries.m */,
+				8D69E5BE21DE91D300CFA49B /* FUICountryTableViewController.h */,
+				8D69E5BF21DE91D300CFA49B /* FUICountryCodes.m */,
+				8D69E5C021DE91D300CFA49B /* FUIFeatureSwitch.h */,
+				8D69E5C121DE91D300CFA49B /* FUIPhoneNumber.h */,
+				8D69E5C221DE91D300CFA49B /* FUICountryTableViewController.xib */,
+				8D69E5C321DE91D300CFA49B /* FUICountryTableViewController.m */,
+				8D69E5C421DE91D300CFA49B /* FUICollationForCountries.h */,
+				8D69E5C521DE91D300CFA49B /* FUICountryCodes.h */,
+				8D69E5C621DE91D300CFA49B /* FUIPhoneNumber.m */,
+				8D69E5C721DE91D300CFA49B /* FUIFeatureSwitch.m */,
+			);
+			path = CountryCode;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8D69E53C21DE915A00CFA49B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E5E921DE91D400CFA49B /* FUIPhoneVerificationViewController.h in Headers */,
+				8D69E55221DE915A00CFA49B /* FirebasePhoneAuthUI.h in Headers */,
+				8D69E5DE21DE91D400CFA49B /* FUICountryTableViewController.h in Headers */,
+				8D69E5DB21DE91D400CFA49B /* FUIPhoneAuthStrings.h in Headers */,
+				8D69E5F121DE91D400CFA49B /* FUIPhoneEntryViewController.h in Headers */,
+				8D69E5DA21DE91D400CFA49B /* FUIPhoneAuth.h in Headers */,
+				8D69E5E521DE91D400CFA49B /* FUICountryCodes.h in Headers */,
+				8D69E5E421DE91D400CFA49B /* FUICollationForCountries.h in Headers */,
+				8D69E5E021DE91D400CFA49B /* FUIFeatureSwitch.h in Headers */,
+				8D69E5EC21DE91D400CFA49B /* FUIPhoneAuth_Internal.h in Headers */,
+				8D69E5D321DE91D400CFA49B /* FUIPrivacyAndTermsOfServiceView+PhoneAuth.h in Headers */,
+				8D69E5E121DE91D400CFA49B /* FUIPhoneNumber.h in Headers */,
+				8D69E5F021DE91D400CFA49B /* FUICodeField.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D69E54021DE915A00CFA49B /* FirebasePhoneAuthUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D69E55521DE915A00CFA49B /* Build configuration list for PBXNativeTarget "FirebasePhoneAuthUI" */;
+			buildPhases = (
+				8D69E53C21DE915A00CFA49B /* Headers */,
+				8D69E53D21DE915A00CFA49B /* Sources */,
+				8D69E53E21DE915A00CFA49B /* Frameworks */,
+				8D69E53F21DE915A00CFA49B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FirebasePhoneAuthUI;
+			productName = FirebasePhoneAuthUI;
+			productReference = 8D69E54121DE915A00CFA49B /* FirebasePhoneAuthUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8D69E54921DE915A00CFA49B /* FirebasePhoneAuthUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D69E55821DE915A00CFA49B /* Build configuration list for PBXNativeTarget "FirebasePhoneAuthUITests" */;
+			buildPhases = (
+				8D69E54621DE915A00CFA49B /* Sources */,
+				8D69E54721DE915A00CFA49B /* Frameworks */,
+				8D69E54821DE915A00CFA49B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8D69E54D21DE915A00CFA49B /* PBXTargetDependency */,
+			);
+			name = FirebasePhoneAuthUITests;
+			productName = FirebasePhoneAuthUITests;
+			productReference = 8D69E54A21DE915A00CFA49B /* FirebasePhoneAuthUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8D69E53821DE915A00CFA49B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = Firebase;
+				TargetAttributes = {
+					8D69E54021DE915A00CFA49B = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					8D69E54921DE915A00CFA49B = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 8D69E53B21DE915A00CFA49B /* Build configuration list for PBXProject "FirebasePhoneAuthUI" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				de,
+				ur,
+				he,
+				"es-SV",
+				"zh-Hant-TW",
+				ar,
+				el,
+				"zh-Hans",
+				ja,
+				fa,
+				mr,
+				"es-GT",
+				"en-CA",
+				uk,
+				"es-PY",
+				gu,
+				kn,
+				nb,
+				"es-US",
+				"en-GB",
+				es,
+				"es-VE",
+				"es-CL",
+				sl,
+				da,
+				"es-419",
+				it,
+				bg,
+				sk,
+				"sr-Latn",
+				"nn-NO",
+				"es-PA",
+				"en-SG",
+				sr,
+				ms,
+				"es-CR",
+				ta,
+				sv,
+				cs,
+				"es-AR",
+				"es-PE",
+				ko,
+				"en-IE",
+				fil,
+				"zh-Hant",
+				"es-CO",
+				gsw,
+				"en-ZA",
+				hu,
+				"es-PR",
+				"de-AT",
+				"en-AU",
+				tr,
+				pl,
+				"pt-BR",
+				vi,
+				lv,
+				"es-MX",
+				lt,
+				ru,
+				"es-DO",
+				"fr-CH",
+				"es-NI",
+				fr,
+				fi,
+				id,
+				nl,
+				th,
+				pt,
+				"de-CH",
+				bn,
+				"es-EC",
+				"pt-PT",
+				"es-BO",
+				ro,
+				ln,
+				"es-UY",
+				"es-HN",
+				hr,
+				hi,
+				ca,
+				zh,
+				"en-IN",
+			);
+			mainGroup = 8D69E53721DE915A00CFA49B;
+			productRefGroup = 8D69E54221DE915A00CFA49B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D69E54021DE915A00CFA49B /* FirebasePhoneAuthUI */,
+				8D69E54921DE915A00CFA49B /* FirebasePhoneAuthUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D69E53F21DE915A00CFA49B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E5D821DE91D400CFA49B /* ic_phone@2x.png in Resources */,
+				8D69E5E221DE91D400CFA49B /* FUICountryTableViewController.xib in Resources */,
+				8D69E5D621DE91D400CFA49B /* ic_phone.png in Resources */,
+				8D69E5D521DE91D400CFA49B /* FUICodeField.xib in Resources */,
+				8D69E5EB21DE91D400CFA49B /* FUIPhoneEntryViewController.xib in Resources */,
+				8D69E5D921DE91D400CFA49B /* country-codes.json in Resources */,
+				8D69E5D721DE91D400CFA49B /* ic_phone@3x.png in Resources */,
+				8D69E5D421DE91D400CFA49B /* FirebasePhoneAuthUI.strings in Resources */,
+				8D69E5EA21DE91D400CFA49B /* FUIPhoneVerificationViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D69E54821DE915A00CFA49B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D69E53D21DE915A00CFA49B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E5E621DE91D400CFA49B /* FUIPhoneNumber.m in Sources */,
+				8D69E5DD21DE91D400CFA49B /* FUICollationForCountries.m in Sources */,
+				8D69E5ED21DE91D400CFA49B /* FUIPrivacyAndTermsOfServiceView+PhoneAuth.m in Sources */,
+				8D69E5E321DE91D400CFA49B /* FUICountryTableViewController.m in Sources */,
+				8D69E5DC21DE91D400CFA49B /* FUICodeField.m in Sources */,
+				8D69E5EE21DE91D400CFA49B /* FUIPhoneVerificationViewController.m in Sources */,
+				8D69E5DF21DE91D400CFA49B /* FUICountryCodes.m in Sources */,
+				8D69E5E721DE91D400CFA49B /* FUIFeatureSwitch.m in Sources */,
+				8D69E5EF21DE91D400CFA49B /* FUIPhoneAuth.m in Sources */,
+				8D69E5D221DE91D400CFA49B /* FUIPhoneAuthStrings.m in Sources */,
+				8D69E5E821DE91D400CFA49B /* FUIPhoneEntryViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D69E54621DE915A00CFA49B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E55021DE915A00CFA49B /* FirebasePhoneAuthUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8D69E54D21DE915A00CFA49B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D69E54021DE915A00CFA49B /* FirebasePhoneAuthUI */;
+			targetProxy = 8D69E54C21DE915A00CFA49B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8D69E55E21DE91D200CFA49B /* FirebasePhoneAuthUI.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8D69E55F21DE91D200CFA49B /* de */,
+				8D69E56021DE91D200CFA49B /* ur */,
+				8D69E56121DE91D200CFA49B /* he */,
+				8D69E56221DE91D200CFA49B /* es-SV */,
+				8D69E56321DE91D200CFA49B /* zh-Hant-TW */,
+				8D69E56421DE91D200CFA49B /* ar */,
+				8D69E56521DE91D200CFA49B /* el */,
+				8D69E56621DE91D200CFA49B /* zh-Hans */,
+				8D69E56721DE91D200CFA49B /* ja */,
+				8D69E56821DE91D200CFA49B /* fa */,
+				8D69E56921DE91D200CFA49B /* mr */,
+				8D69E56A21DE91D200CFA49B /* es-GT */,
+				8D69E56B21DE91D200CFA49B /* en */,
+				8D69E56C21DE91D200CFA49B /* en-CA */,
+				8D69E56D21DE91D200CFA49B /* uk */,
+				8D69E56E21DE91D200CFA49B /* es-PY */,
+				8D69E56F21DE91D200CFA49B /* gu */,
+				8D69E57021DE91D200CFA49B /* kn */,
+				8D69E57121DE91D200CFA49B /* nb */,
+				8D69E57221DE91D200CFA49B /* es-US */,
+				8D69E57321DE91D200CFA49B /* en-GB */,
+				8D69E57421DE91D200CFA49B /* es */,
+				8D69E57521DE91D200CFA49B /* es-VE */,
+				8D69E57621DE91D200CFA49B /* es-CL */,
+				8D69E57721DE91D200CFA49B /* sl */,
+				8D69E57821DE91D200CFA49B /* da */,
+				8D69E57921DE91D200CFA49B /* es-419 */,
+				8D69E57A21DE91D200CFA49B /* it */,
+				8D69E57B21DE91D200CFA49B /* bg */,
+				8D69E57C21DE91D200CFA49B /* sk */,
+				8D69E57D21DE91D200CFA49B /* sr-Latn */,
+				8D69E57E21DE91D200CFA49B /* nn-NO */,
+				8D69E57F21DE91D200CFA49B /* es-PA */,
+				8D69E58021DE91D200CFA49B /* en-SG */,
+				8D69E58121DE91D200CFA49B /* sr */,
+				8D69E58221DE91D200CFA49B /* ms */,
+				8D69E58321DE91D200CFA49B /* es-CR */,
+				8D69E58421DE91D200CFA49B /* ta */,
+				8D69E58521DE91D200CFA49B /* sv */,
+				8D69E58621DE91D200CFA49B /* cs */,
+				8D69E58721DE91D200CFA49B /* es-AR */,
+				8D69E58821DE91D200CFA49B /* es-PE */,
+				8D69E58921DE91D200CFA49B /* ko */,
+				8D69E58A21DE91D200CFA49B /* en-IE */,
+				8D69E58B21DE91D200CFA49B /* fil */,
+				8D69E58C21DE91D200CFA49B /* zh-Hant */,
+				8D69E58D21DE91D200CFA49B /* es-CO */,
+				8D69E58E21DE91D200CFA49B /* gsw */,
+				8D69E58F21DE91D200CFA49B /* en-ZA */,
+				8D69E59021DE91D200CFA49B /* hu */,
+				8D69E59121DE91D200CFA49B /* es-PR */,
+				8D69E59221DE91D200CFA49B /* de-AT */,
+				8D69E59321DE91D200CFA49B /* en-AU */,
+				8D69E59421DE91D200CFA49B /* tr */,
+				8D69E59521DE91D200CFA49B /* pl */,
+				8D69E59621DE91D200CFA49B /* pt-BR */,
+				8D69E59721DE91D200CFA49B /* vi */,
+				8D69E59821DE91D200CFA49B /* lv */,
+				8D69E59921DE91D200CFA49B /* es-MX */,
+				8D69E59A21DE91D200CFA49B /* lt */,
+				8D69E59B21DE91D200CFA49B /* ru */,
+				8D69E59C21DE91D200CFA49B /* es-DO */,
+				8D69E59D21DE91D200CFA49B /* fr-CH */,
+				8D69E59E21DE91D200CFA49B /* es-NI */,
+				8D69E59F21DE91D200CFA49B /* fr */,
+				8D69E5A021DE91D200CFA49B /* fi */,
+				8D69E5A121DE91D200CFA49B /* id */,
+				8D69E5A221DE91D200CFA49B /* nl */,
+				8D69E5A321DE91D200CFA49B /* th */,
+				8D69E5A421DE91D200CFA49B /* pt */,
+				8D69E5A521DE91D200CFA49B /* de-CH */,
+				8D69E5A621DE91D200CFA49B /* bn */,
+				8D69E5A721DE91D200CFA49B /* es-EC */,
+				8D69E5A821DE91D200CFA49B /* pt-PT */,
+				8D69E5A921DE91D200CFA49B /* es-BO */,
+				8D69E5AA21DE91D200CFA49B /* ro */,
+				8D69E5AB21DE91D200CFA49B /* ln */,
+				8D69E5AC21DE91D200CFA49B /* es-UY */,
+				8D69E5AD21DE91D200CFA49B /* es-HN */,
+				8D69E5AE21DE91D200CFA49B /* hr */,
+				8D69E5AF21DE91D200CFA49B /* hi */,
+				8D69E5B021DE91D200CFA49B /* ca */,
+				8D69E5B121DE91D200CFA49B /* zh */,
+				8D69E5B221DE91D200CFA49B /* en-IN */,
+			);
+			name = FirebasePhoneAuthUI.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8D69E55321DE915A00CFA49B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8D69E55421DE915A00CFA49B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8D69E55621DE915A00CFA49B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FirebasePhoneAuthUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebasePhoneAuthUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8D69E55721DE915A00CFA49B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FirebasePhoneAuthUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebasePhoneAuthUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8D69E55921DE915A00CFA49B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FirebasePhoneAuthUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"OCMock\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"UIKit\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebasePhoneAuthUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8D69E55A21DE915A00CFA49B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FirebasePhoneAuthUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"OCMock\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"UIKit\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebasePhoneAuthUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8D69E53B21DE915A00CFA49B /* Build configuration list for PBXProject "FirebasePhoneAuthUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D69E55321DE915A00CFA49B /* Debug */,
+				8D69E55421DE915A00CFA49B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D69E55521DE915A00CFA49B /* Build configuration list for PBXNativeTarget "FirebasePhoneAuthUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D69E55621DE915A00CFA49B /* Debug */,
+				8D69E55721DE915A00CFA49B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D69E55821DE915A00CFA49B /* Build configuration list for PBXNativeTarget "FirebasePhoneAuthUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D69E55921DE915A00CFA49B /* Debug */,
+				8D69E55A21DE915A00CFA49B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8D69E53821DE915A00CFA49B /* Project object */;
+}

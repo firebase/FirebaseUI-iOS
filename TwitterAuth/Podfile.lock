@@ -1,0 +1,61 @@
+PODS:
+  - Firebase/Auth (5.15.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (= 5.2.0)
+  - Firebase/CoreOnly (5.15.0):
+    - FirebaseCore (= 5.1.10)
+  - FirebaseAuth (5.2.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.1)
+    - GoogleUtilities/Environment (~> 5.2)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseAuthInterop (1.0.0)
+  - FirebaseCore (5.1.10):
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseUI/Auth (5.2.2):
+    - Firebase/Auth (~> 5.0)
+  - GoogleUtilities/Environment (5.3.6)
+  - GoogleUtilities/Logger (5.3.6):
+    - GoogleUtilities/Environment
+  - GTMSessionFetcher/Core (1.2.1)
+  - OCMock (3.4.3)
+  - TwitterCore (3.2.0)
+  - TwitterKit (3.4.2):
+    - TwitterCore (>= 3.2.0)
+
+DEPENDENCIES:
+  - FirebaseUI/Auth (from `../`)
+  - OCMock
+  - TwitterKit (~> 3.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Firebase
+    - FirebaseAuth
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - GoogleUtilities
+    - GTMSessionFetcher
+    - OCMock
+    - TwitterCore
+    - TwitterKit
+
+EXTERNAL SOURCES:
+  FirebaseUI:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
+  FirebaseAuth: 02e969ff430e156d99d4cb842d77b806b71ad7bb
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: 35747502d9e8c6ee217385ad04446c7c2aaf9c5c
+  FirebaseUI: b27a8d8a86bd4222e0360aec994ec6e1891c7917
+  GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
+  GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+  OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
+  TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
+  TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
+
+PODFILE CHECKSUM: de32e7713fecfcd0c9523ca58ef3cf2e8adb655d
+
+COCOAPODS: 1.5.3

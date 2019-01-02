@@ -1,0 +1,13 @@
+platform :ios, '8.0'
+
+target 'FirebaseFirestoreUI' do
+  use_frameworks!
+
+  pod 'Firebase/Firestore'
+
+  target 'FirebaseFirestoreUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
