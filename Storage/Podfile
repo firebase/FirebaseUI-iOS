@@ -1,0 +1,14 @@
+platform :ios, '8.0'
+
+target 'FirebaseStorageUI' do
+  use_frameworks!
+
+  pod 'Firebase/Storage'
+  pod 'SDWebImage', '~> 4.0'
+
+  target 'FirebaseStorageUITests' do
+    inherit! :search_paths
+    pod 'OCMock'
+  end
+
+end

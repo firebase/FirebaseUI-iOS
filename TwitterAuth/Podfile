@@ -1,0 +1,14 @@
+platform :ios, '9.0'
+
+target 'FirebaseTwitterAuthUI' do
+  use_frameworks!
+
+  pod 'TwitterKit', '~> 3.0'
+  pod 'FirebaseUI/Auth', :path => '../'
+
+  target 'FirebaseTwitterAuthUITests' do
+    inherit! :search_paths
+    pod 'OCMock'
+  end
+
+end
