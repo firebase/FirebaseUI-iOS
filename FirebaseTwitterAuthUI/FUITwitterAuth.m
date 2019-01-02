@@ -89,7 +89,7 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 #pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
-                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+                  completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
   [self signInWithDefaultValue:email
       presentingViewController:presentingViewController
                     completion:completion];
@@ -98,7 +98,7 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 
 - (void)signInWithDefaultValue:(nullable NSString *)defaultValue
       presentingViewController:(nullable UIViewController *)presentingViewController
-                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+                    completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
 
   [[self getTwitterManager] logInWithViewController:presentingViewController
                                          completion:^(TWTRSession *_Nullable session,
@@ -116,7 +116,7 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
           [activityView stopAnimating];
           [activityView removeFromSuperview];
         };
-        completion(credential, nil, result);
+        completion(credential, nil, result, nil);
       }
     } else {
       if (completion) {
@@ -127,7 +127,7 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
           newError = [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
                                                               providerID:FIRTwitterAuthProviderID];
         }
-        completion(nil, newError, nil);
+        completion(nil, newError, nil, nil);
       }
     }
   }];

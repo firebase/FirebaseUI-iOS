@@ -52,7 +52,7 @@ static NSString *const kEmailButtonAccessibilityID = @"EmailButtonAccessibilityI
 /** @property pendingSignInCallback.
     @brief The callback which should be invoked when the sign in flow completes (or is cancelled.)
  */
-@property(nonatomic, copy, readwrite) FIRAuthProviderSignInCompletionBlock pendingSignInCallback;
+@property(nonatomic, copy, readwrite) FUIAuthProviderSignInCompletionBlock pendingSignInCallback;
 
 /** @property presentingViewController
     @brief The presenting view controller for interactive sign-in.
@@ -147,7 +147,7 @@ static NSString *const kEmailButtonAccessibilityID = @"EmailButtonAccessibilityI
 #pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)signInWithEmail:(nullable NSString *)email
     presentingViewController:(nullable UIViewController *)presentingViewController
-                  completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+                  completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
   [self signInWithDefaultValue:email
       presentingViewController:presentingViewController
                     completion:completion];
@@ -156,7 +156,7 @@ static NSString *const kEmailButtonAccessibilityID = @"EmailButtonAccessibilityI
 
 - (void)signInWithDefaultValue:(nullable NSString *)defaultValue
       presentingViewController:(nullable UIViewController *)presentingViewController
-                    completion:(nullable FIRAuthProviderSignInCompletionBlock)completion {
+                    completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
   self.presentingViewController = presentingViewController;
 
   self.pendingSignInCallback = completion;
@@ -206,10 +206,10 @@ static NSString *const kEmailButtonAccessibilityID = @"EmailButtonAccessibilityI
 - (void)callbackWithCredential:(nullable FIRAuthCredential *)credential
                          error:(nullable NSError *)error
                         result:(nullable FIRAuthResultCallback)result {
-  FIRAuthProviderSignInCompletionBlock callback = self.pendingSignInCallback;
+  FUIAuthProviderSignInCompletionBlock callback = self.pendingSignInCallback;
   self.pendingSignInCallback = nil;
   if (callback) {
-    callback(credential, error, result);
+    callback(credential, error, result, nil);
   }
 }
 
@@ -289,7 +289,8 @@ static NSString *const kEmailButtonAccessibilityID = @"EmailButtonAccessibilityI
                         presentingViewController:presentingViewController
                                       completion:^(FIRAuthCredential *_Nullable credential,
                                                    NSError *_Nullable error,
-                                                   FIRAuthResultCallback  _Nullable result) {
+                                                   FIRAuthResultCallback  _Nullable result,
+                                                   NSDictionary *_Nullable userInfo) {
             if (error) {
               if (completion) {
                 completion(nil, error, nil);
@@ -418,7 +419,8 @@ static NSString *const kEmailButtonAccessibilityID = @"EmailButtonAccessibilityI
            presentingViewController:presentingViewController
                          completion:^(FIRAuthCredential *_Nullable credential,
                                       NSError *_Nullable error,
-                                      _Nullable FIRAuthResultCallback result) {
+                                      _Nullable FIRAuthResultCallback result,
+                                      NSDictionary *_Nullable userInfo) {
         if (error) {
           if (error.code == FUIAuthErrorCodeUserCancelledSignIn) {
             // User cancelled sign in, Do nothing.

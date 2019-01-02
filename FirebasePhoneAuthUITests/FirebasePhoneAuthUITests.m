@@ -98,7 +98,8 @@
                 presentingViewController:mockedController
                               completion:^(FIRAuthCredential *_Nullable credential,
                                            NSError *_Nullable error,
-                                           FIRAuthResultCallback _Nullable result) {
+                                           FIRAuthResultCallback _Nullable result,
+                                           NSDictionary *_Nullable userInfo) {
     XCTAssertEqual(credential, mockedCredential);
     XCTAssertEqual(error, mockedError);
     [expectation fulfill];

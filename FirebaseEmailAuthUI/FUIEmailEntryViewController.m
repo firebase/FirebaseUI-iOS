@@ -287,7 +287,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
           presentingViewController:self
                         completion:^(FIRAuthCredential *_Nullable credential,
                                      NSError *_Nullable error,
-                                     _Nullable FIRAuthResultCallback result) {
+                                     _Nullable FIRAuthResultCallback result,
+                                     NSDictionary *_Nullable userInfo) {
     if (error) {
       [self decrementActivity];
       if (result) {

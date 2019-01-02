@@ -169,7 +169,8 @@ NS_ASSUME_NONNULL_BEGIN
      presentingViewController:[self.delegate presentingController]
                    completion:^(FIRAuthCredential *_Nullable credential,
                                 NSError *_Nullable error,
-                                _Nullable FIRAuthResultCallback result) {
+                                _Nullable FIRAuthResultCallback result,
+                                NSDictionary *_Nullable userInfo) {
     if (error) {
       [self.delegate decrementActivity];
       [self finishOperationWithError:error];

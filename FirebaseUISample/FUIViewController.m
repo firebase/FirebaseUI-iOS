@@ -510,11 +510,11 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
                         presentingViewController:OCMOCK_ANY
                                       completion:OCMOCK_ANY]).
       andDo(^(NSInvocation *invocation) {
-    FIRAuthProviderSignInCompletionBlock mockedResponse;
+    FUIAuthProviderSignInCompletionBlock mockedResponse;
     [invocation getArgument:&mockedResponse atIndex:4];
 
     id mockCredential = OCMClassMock([FIRAuthCredential class]);
-    mockedResponse(mockCredential, nil, nil);
+    mockedResponse(mockCredential, nil, nil, nil);
   });
 }
 
