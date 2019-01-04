@@ -12,6 +12,8 @@ schemes=( "FirebaseAnonymousAuthUI" "FirebaseAuthUI" "FirebaseDatabaseUI" \
     "FirebaseGoogleAuthUI" "FirebasePhoneAuthUI" "FirebaseStorageUI" \
     "FirebaseTwitterAuthUI")
 
+pod repo update;
+
 for ((i=0; i<${#folders[*]}; i++));
 do
   cd ${folders[i]};
