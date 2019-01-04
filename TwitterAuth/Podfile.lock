@@ -49,7 +49,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: 02e969ff430e156d99d4cb842d77b806b71ad7bb
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: 35747502d9e8c6ee217385ad04446c7c2aaf9c5c
-  FirebaseUI: b27a8d8a86bd4222e0360aec994ec6e1891c7917
+  FirebaseUI: 810a4d85e15dfed08bfc6fc01358f2c64a8b341c
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab

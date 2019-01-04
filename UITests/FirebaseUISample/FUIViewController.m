@@ -16,11 +16,7 @@
 
 #import "FUIViewController.h"
 
-@import FirebaseAuthUI;
-@import FirebasePhoneAuthUI;
-@import FirebaseTwitterAuthUI;
-@import FirebaseFacebookAuthUI;
-@import FirebaseGoogleAuthUI;
+#import <FirebaseUI/FirebaseUI.h>
 
 #import <OCMock/OCMock.h>
 
@@ -86,8 +82,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   [self prepareStubs];
 
   BOOL shouldSkipPhoneAuthPicker = _authProviders.count == 1 &&
-      [_authProviders.firstObject.providerID isEqualToString:FIRPhoneAuthProviderID] &&
-          [self.authUIMock isSignInWithEmailHidden];
+      [_authProviders.firstObject.providerID isEqualToString:FIRPhoneAuthProviderID];
   if (shouldSkipPhoneAuthPicker) {
     FUIPhoneAuth *provider = _authProviders.firstObject;
     [provider signInWithPresentingViewController:self phoneNumber:nil];
@@ -198,7 +193,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 
 - (void)prepareStubs {
   [self populateListOfIDPs];
-  OCMStub([self.authUIMock isSignInWithEmailHidden]).andReturn(![self isEmailEnabled]);
+//  OCMStub([self.authUIMock isSignInWithEmailHidden]).andReturn(![self isEmailEnabled]);
 
   switch (_selectedSimulationChoise) {
     case kSimulationNoMocks:

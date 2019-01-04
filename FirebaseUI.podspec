@@ -12,8 +12,8 @@ Pod::Spec.new do |s|
   s.static_framework = true
   s.ios.framework = 'UIKit'
   s.requires_arc = true
-  s.public_header_files = 'FirebaseUI/FirebaseUI.h'
-  s.source_files = 'FirebaseUI/FirebaseUI.h'
+  s.public_header_files = 'FirebaseUI.h'
+  s.source_files = 'FirebaseUI.h'
   s.cocoapods_version = '>= 1.5.0'
 
   s.subspec 'Database' do |database|

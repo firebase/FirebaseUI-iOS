@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0940"
+   LastUpgradeVersion = "1010"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8DCC4FDC1D678CE800B0D3C4"
-               BuildableName = "FirebaseFacebookAuthUI.framework"
-               BlueprintName = "FirebaseFacebookAuthUI"
-               ReferencedContainer = "container:FirebaseUI.xcodeproj">
+               BlueprintIdentifier = "8D69E6AA21DEC97E00CFA49B"
+               BuildableName = "FirebaseUISample.app"
+               BlueprintName = "FirebaseUISample"
+               ReferencedContainer = "container:FirebaseUISample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,23 +29,33 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
+            skipped = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8D69E6C221DEC98000CFA49B"
+               BuildableName = "FirebaseUISampleTests.xctest"
+               BlueprintName = "FirebaseUISampleTests"
+               ReferencedContainer = "container:FirebaseUISample.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8DCC4FE51D678CE800B0D3C4"
-               BuildableName = "FirebaseFacebookAuthUITests.xctest"
-               BlueprintName = "FirebaseFacebookAuthUITests"
-               ReferencedContainer = "container:FirebaseUI.xcodeproj">
+               BlueprintIdentifier = "8D69E6CD21DEC98000CFA49B"
+               BuildableName = "FirebaseUISampleUITests.xctest"
+               BlueprintName = "FirebaseUISampleUITests"
+               ReferencedContainer = "container:FirebaseUISample.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8DCC4FDC1D678CE800B0D3C4"
-            BuildableName = "FirebaseFacebookAuthUI.framework"
-            BlueprintName = "FirebaseFacebookAuthUI"
-            ReferencedContainer = "container:FirebaseUI.xcodeproj">
+            BlueprintIdentifier = "8D69E6AA21DEC97E00CFA49B"
+            BuildableName = "FirebaseUISample.app"
+            BlueprintName = "FirebaseUISample"
+            ReferencedContainer = "container:FirebaseUISample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -61,15 +71,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8DCC4FDC1D678CE800B0D3C4"
-            BuildableName = "FirebaseFacebookAuthUI.framework"
-            BlueprintName = "FirebaseFacebookAuthUI"
-            ReferencedContainer = "container:FirebaseUI.xcodeproj">
+            BlueprintIdentifier = "8D69E6AA21DEC97E00CFA49B"
+            BuildableName = "FirebaseUISample.app"
+            BlueprintName = "FirebaseUISample"
+            ReferencedContainer = "container:FirebaseUISample.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -79,15 +90,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8DCC4FDC1D678CE800B0D3C4"
-            BuildableName = "FirebaseFacebookAuthUI.framework"
-            BlueprintName = "FirebaseFacebookAuthUI"
-            ReferencedContainer = "container:FirebaseUI.xcodeproj">
+            BlueprintIdentifier = "8D69E6AA21DEC97E00CFA49B"
+            BuildableName = "FirebaseUISample.app"
+            BlueprintName = "FirebaseUISample"
+            ReferencedContainer = "container:FirebaseUISample.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
