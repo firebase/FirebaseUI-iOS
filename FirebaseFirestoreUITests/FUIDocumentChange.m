@@ -36,4 +36,13 @@
   return doc;
 }
 
+- (NSString *)description {
+  return [NSString stringWithFormat:@"<%@: %p, documentID: %@>",
+          NSStringFromClass([self class]), self, _documentID];
+}
+
+- (BOOL)isEqual:(FUIDocumentSnapshot *)object {
+  return [self.documentID isEqual:object.documentID];
+}
+
 @end

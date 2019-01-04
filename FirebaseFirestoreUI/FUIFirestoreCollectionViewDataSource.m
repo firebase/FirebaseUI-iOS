@@ -99,7 +99,7 @@
 #pragma mark - FUIBatchedArrayDelegate methods
 
 - (void)batchedArray:(FUIBatchedArray *)array
-   didUpdateWithDiff:(FUISnapshotArrayDiff<FIRDocumentSnapshot *> *)diff {
+   didUpdateWithDiff:(FUISnapshotArrayDiff *)diff {
   [self.collectionView performBatchUpdates:^{
 
     NSMutableArray *deletedIndexPaths =
