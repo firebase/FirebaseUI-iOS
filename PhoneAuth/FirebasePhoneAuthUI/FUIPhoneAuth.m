@@ -102,7 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (UIImage *)icon {
-  return [FUIAuthUtils imageNamed:@"ic_phone" fromBundle:[NSBundle bundleForClass:[self class]]];
+  return [FUIAuthUtils imageNamed:@"ic_phone" fromBundleNameOrNil:FUIPhoneAuthBundleName];
 }
 
 - (UIColor *)buttonBackgroundColor {

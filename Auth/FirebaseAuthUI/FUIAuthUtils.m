@@ -22,29 +22,37 @@ NSString *const FUIAuthBundleName = @"FirebaseAuthUI";
 
 + (NSBundle *)bundleNamed:(NSString *)bundleName {
   NSBundle *frameworkBundle = nil;
-  if (bundleName) {
-    NSString *path = [[NSBundle mainBundle] pathForResource:bundleName ofType:@"bundle"];
-    if (path == nil) {
-      // Check framework resources if bundle isn't present in main bundle.
-      path = [[NSBundle mainBundle] pathForResource:bundleName ofType:@"framework"];
-    }
-    frameworkBundle = [NSBundle bundleWithPath:path];
-  } else {
+  if (!bundleName) {
+    bundleName = FUIAuthBundleName;
+  }
+  NSString *path = [[NSBundle mainBundle] pathForResource:bundleName ofType:@"bundle"];
+  if (!path) {
+    // Check framework resources if bundle isn't present in main bundle.
+    path = [[NSBundle mainBundle] pathForResource:bundleName ofType:@"framework"];
+  }
+  frameworkBundle = [NSBundle bundleWithPath:path];
+  if (!frameworkBundle) {
     frameworkBundle = [NSBundle bundleForClass:[self class]];
   }
   return frameworkBundle;
 }
 
 + (UIImage *)imageNamed:(NSString *)name fromBundle:(NSBundle *)bundle {
-  if (bundle == nil) {
+  if (!bundle) {
     bundle = [self bundleNamed:nil];
   }
   NSString *path = [bundle pathForResource:name ofType:@"png"];
+  if (!path) {
+    NSLog(@"Warning: Unable to find asset %@ in bundle %@.", name, bundle);
+  }
   return [UIImage imageWithContentsOfFile:path];
 }
 
 + (UIImage *)imageNamed:(NSString *)name fromBundleNameOrNil:(nullable NSString *)bundleNameOrNil {
   NSString *path = [[FUIAuthUtils bundleNamed:bundleNameOrNil] pathForResource:name ofType:@"png"];
+  if (!path) {
+    NSLog(@"Warning: Unable to find asset %@ in bundle named %@.", name, bundleNameOrNil);
+  }
   return [UIImage imageWithContentsOfFile:path];
 }
 
