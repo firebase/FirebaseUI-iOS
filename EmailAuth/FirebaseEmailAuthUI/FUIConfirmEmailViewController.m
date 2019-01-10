@@ -262,9 +262,10 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   [provider signOut];
   [provider signInWithDefaultValue:email
           presentingViewController:self
-                        completion:^(FIRAuthCredential *_Nullable credential,
-                                     NSError *_Nullable error,
-                                     _Nullable FIRAuthResultCallback result) {
+                        completion:^(FIRAuthCredential * _Nullable credential,
+                                     NSError * _Nullable error,
+                                     FIRAuthResultCallback  _Nullable result,
+                                     NSDictionary<NSString *,id> * _Nullable userInfo) {
     if (error) {
       [self decrementActivity];
       if (result) {
