@@ -49,7 +49,12 @@ static NSString *const kEmailButtonAccessibilityID = @"EmailButtonAccessibilityI
 /** @var kEmailLinkSignInEmailKey
     @brief The key of the email which request email link sign in.
  */
-static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
+static NSString *const kEmailLinkSignInEmailKey = @"FIRAuthEmailLinkSignInEmail";
+
+/** @var kEmailLinkSignInLinkingCredentialKey
+ @brief The key of the auth credential to be linked.
+ */
+static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLinkSignInLinkingCredential";
 
 @interface FUIEmailAuth () <FUIEmailAuthProvider>
 /** @property authUI.
@@ -234,12 +239,13 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
 
   if (sameDevice) { // Same device
     if (urlParameterDict[@"ui_pid"] != nil) { // Unverified provider linking
-      [self handleUnverifiedProviderLinking:urlParameterDict[@"ui_pid"]];
+      [self handleUnverifiedProviderLinking:urlParameterDict[@"ui_pid"]
+                                      email:localParameterDict[kEmailLinkSignInEmailKey]];
     } else if (urlParameterDict[@"ui_auid"] != nil) { // Anonymous upgrade
       [self handleAnonymousUpgrade:urlParameterDict[@"ui_auid"]
                              email:localParameterDict[kEmailLinkSignInEmailKey]];
     } else { // Normal email link sign in
-      [self handleEmaiLinkURL:localParameterDict[kEmailLinkSignInEmailKey]];
+      [self handleEmaiLinkSignIn:localParameterDict[kEmailLinkSignInEmailKey]];
     }
   } else { // Different device
     if ([urlParameterDict[@"ui_sd"] isEqualToString:@"1"]) { // Force same device enabled
@@ -252,8 +258,61 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
   return YES;
 }
 
-- (void)handleUnverifiedProviderLinking:(NSString *)providerID {
-  // TODO(chuanr): Implement this after FIRAuthCerdential conforms to NSSecureCoding.
+- (void)handleUnverifiedProviderLinking:(NSString *)providerID
+                                  email:(NSString *)email {
+  if ([providerID isEqualToString:FIRFacebookAuthProviderID]) {
+    NSData *unverifiedProviderCredentialData = [GULUserDefaults.standardUserDefaults objectForKey:kEmailLinkSignInLinkingCredentialKey];
+    FIRAuthCredential *unverifiedProviderCredential = [NSKeyedUnarchiver unarchiveObjectWithData:unverifiedProviderCredentialData];
+
+    FIRAuthCredential *emailLinkCredential =
+    [FIREmailAuthProvider credentialWithEmail:email link:self.emailLink];
+
+    void (^completeSignInBlock)(FIRAuthDataResult *, NSError *) = ^(FIRAuthDataResult *authResult,
+                                                                    NSError *error) {
+      if (error) {
+        switch (error.code) {
+          case FIRAuthErrorCodeWrongPassword:
+            [FUIAuthBaseViewController showAlertWithMessage:FUILocalizedString(kStr_WrongPasswordError)];
+            return;
+          case FIRAuthErrorCodeUserNotFound:
+            [FUIAuthBaseViewController showAlertWithMessage:FUILocalizedString(kStr_UserNotFoundError)];
+            return;
+          case FIRAuthErrorCodeUserDisabled:
+            [FUIAuthBaseViewController showAlertWithMessage:FUILocalizedString(kStr_AccountDisabledError)];
+            return;
+          case FIRAuthErrorCodeTooManyRequests:
+            [FUIAuthBaseViewController showAlertWithMessage:FUILocalizedString(kStr_SignInTooManyTimesError)];
+            return;
+        }
+      }
+
+      void (^dismissHandler)(void) = ^() {
+        UINavigationController *authViewController = [self.authUI authViewController];
+        if (!(authViewController.isViewLoaded && authViewController.view.window)) {
+          [authViewController.navigationController dismissViewControllerAnimated:YES completion:nil];
+        }
+        [self.authUI invokeResultCallbackWithAuthDataResult:authResult URL:nil error:error];
+      };
+
+      [FUIAuthBaseViewController showAlertWithTitle:@"Signed in!"
+                                            message:nil
+                                        actionTitle:nil
+                                      actionHandler:nil
+                                       dismissTitle:@"OK"
+                                     dismissHandler:dismissHandler
+                           presentingViewController:nil];
+    };
+
+    [self.authUI.auth signInAndRetrieveDataWithCredential:emailLinkCredential
+                                               completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
+      if (error) {
+        [FUIAuthBaseViewController showAlertWithMessage:error.description];
+        return;
+      }
+
+      [authResult.user linkAndRetrieveDataWithCredential:unverifiedProviderCredential completion:completeSignInBlock];
+    }];
+  }
 }
 
 - (void)handleAnonymousUpgrade:(NSString *)anonymousUserID email:(NSString *)email {
@@ -263,7 +322,7 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
       [anonymousUserID isEqualToString:self.authUI.auth.currentUser.uid]) {
 
     FIRAuthCredential *credential =
-    [FIREmailAuthProvider credentialWithEmail:email link:self.emailLink];
+        [FIREmailAuthProvider credentialWithEmail:email link:self.emailLink];
 
     void (^completeSignInBlock)(FIRAuthDataResult *, NSError *) = ^(FIRAuthDataResult *authResult,
                                                                     NSError *error) {
@@ -308,7 +367,7 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
   }
 }
 
-- (void)handleEmaiLinkURL:(NSString *)email {
+- (void)handleEmaiLinkSignIn:(NSString *)email {
   FIRAuthCredential *credential =
   [FIREmailAuthProvider credentialWithEmail:email link:self.emailLink];
 
@@ -611,6 +670,10 @@ static NSString *const kEmailLinkSignInEmailKey = @"EmailLinkSignInEmail";
                actionHandler:^{
                  [self generateURLParametersAndLocalCache:email
                                           linkingProvider:newCredential.provider];
+
+                 NSData *data = [NSKeyedArchiver archivedDataWithRootObject:newCredential];
+                 [GULUserDefaults.standardUserDefaults setObject:data forKey:kEmailLinkSignInLinkingCredentialKey];
+
                  void (^completion)(NSError * _Nullable error) = ^(NSError * _Nullable error){
                    if (error) {
                      [FUIAuthBaseViewController showAlertWithMessage:error.description];
