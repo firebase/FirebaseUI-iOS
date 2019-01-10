@@ -119,7 +119,7 @@ static NSString *const kEmailButtonAccessibilityID = @"EmailButtonAccessibilityI
 }
 
 - (UIImage *)icon {
-  return [FUIAuthUtils imageNamed:@"ic_email" fromBundle:[NSBundle bundleForClass:[self class]]];
+  return [FUIAuthUtils imageNamed:@"ic_email" fromBundleNameOrNil:FUIEmailAuthBundleName];
 }
 
 - (UIColor *)buttonBackgroundColor {

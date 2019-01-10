@@ -108,7 +108,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 - (UIImage *)icon {
-  return [FUIAuthUtils imageNamed:@"ic_facebook" fromBundle:[NSBundle bundleForClass:[self class]]];
+  return [FUIAuthUtils imageNamed:@"ic_facebook" fromBundleNameOrNil:kBundleName];
 }
 
 - (UIColor *)buttonBackgroundColor {
@@ -222,7 +222,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
     @brief Validates that Facebook SDK data was filled in Info.plist and creates Facebook login manager 
  */
 - (void)configureProvider {
-  NSBundle *bundle = [FUIAuthUtils bundleNamed:nil];
+  NSBundle *bundle = [NSBundle mainBundle];
   NSString *facebookAppId = [bundle objectForInfoDictionaryKey:kFacebookAppId];
   NSString *facebookDisplayName = [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
 

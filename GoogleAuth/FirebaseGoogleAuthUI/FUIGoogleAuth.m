@@ -97,7 +97,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 }
 
 - (UIImage *)icon {
-  return [FUIAuthUtils imageNamed:@"ic_google" fromBundle:[NSBundle bundleForClass:[self class]]];
+  return [FUIAuthUtils imageNamed:@"ic_google" fromBundleNameOrNil:kBundleName];
 }
 
 - (UIColor *)buttonBackgroundColor {
