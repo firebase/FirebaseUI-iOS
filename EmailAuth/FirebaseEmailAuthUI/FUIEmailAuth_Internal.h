@@ -42,6 +42,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIAlertController *)alertControllerForError:(NSError *)error
                                  actionHandler:(nullable FUIAuthAlertActionHandler)actionHandler;
 
+/** @fn generateURLParametersAndLocalCache:linkingProvider:
+    @brief Generate the parameters before sending out the email link. Append the parameters to
+        continue url and store them locally.
+    @param email The email that requested the email sign in link.
+    @param linkingProvider The id of the auth provider to be linked, if any.
+ */
+- (void)generateURLParametersAndLocalCache:(NSString *)email linkingProvider:(nullable NSString *)linkingProvider;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -24,6 +24,7 @@
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
 #import "FUIEmailAuth.h"
+#import "FUIEmailAuth_Internal.h"
 #import "FUIEmailAuthStrings.h"
 #import "FUIPasswordSignInViewController.h"
 #import "FUIPasswordSignUpViewController.h"
@@ -53,6 +54,18 @@ static NSString *const kEmailCellAccessibilityID = @"EmailCellAccessibilityID";
     @brief The Accessibility Identifier for the @c next button.
  */
 static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID";
+
+/** @var kTroubleGettingEmailMessage
+ @brief The message used in trouble getting email alert view.
+ */
+static NSString *const kTroubleGettingEmailMessage =
+    @"Try these common fixes: \n \
+    - Check if the email was marked as spam or filtered.\n \
+    - Check your internet connection.\n \
+    - Check that you did not misspell your email.\n \
+    - Check that your inbox space is not running out or other inbox settings related issues.\n \
+    If the steps above didn't work, you can resend the email.\
+    Note that this will deactivate the link in the older email.";
 
 @interface FUIEmailEntryViewController () <UITableViewDataSource, UITextFieldDelegate>
 @end
@@ -145,9 +158,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
   [self incrementActivity];
 
-  [self.auth fetchProvidersForEmail:emailText
-                         completion:^(NSArray<NSString *> *_Nullable providers,
-                                      NSError *_Nullable error) {
+  [self.auth fetchSignInMethodsForEmail:emailText
+                             completion:^(NSArray<NSString *> *_Nullable providers,
+                                          NSError *_Nullable error) {
     [self decrementActivity];
 
     if (error) {
@@ -183,6 +196,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                                                        email:emailText];
       }
       [self pushViewController:controller];
+    } else if ([emailAuth.signInMethod isEqualToString:FIREmailLinkAuthSignInMethod]) {
+      [self sendSignInLinkToEmail:emailText];
     } else {
       if (providers.count) {
         // There's some unsupported providers, surface the error to the user.
@@ -196,13 +211,61 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                                                    email:emailText];
           } else {
             controller = [[FUIPasswordSignUpViewController alloc] initWithAuthUI:self.authUI
-                                                                         email:emailText];
+                                                                           email:emailText];
           }
         } else {
-            [self showAlertWithMessage:FUILocalizedString(kStr_UserNotFoundError)];
+          [self showAlertWithMessage:FUILocalizedString(kStr_UserNotFoundError)];
         }
         [self pushViewController:controller];
       }
+    }
+  }];
+}
+
+- (void)sendSignInLinkToEmail:(NSString*)email {
+  if (![[self class] isValidEmail:email]) {
+    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
+    return;
+  }
+
+  [self incrementActivity];
+  FUIEmailAuth *emailAuth = [self.authUI providerWithID:FIREmailAuthProviderID];
+  [emailAuth generateURLParametersAndLocalCache:email linkingProvider:nil];
+  [self.auth sendSignInLinkToEmail:email
+                actionCodeSettings:emailAuth.actionCodeSettings
+                        completion:^(NSError * _Nullable error) {
+    [self decrementActivity];
+
+    if (error) {
+      [FUIAuthBaseViewController showAlertWithTitle:@"Error"
+                                            message:error.description
+                           presentingViewController:self];
+    } else {
+      NSString *successMessage =
+          [NSString stringWithFormat: @"A sign-in email with additional instrucitons was sent to "
+                                      "%@. Check your email to complete sign-in.", email];
+      [FUIAuthBaseViewController showAlertWithTitle:@"Sign-in email Sent"
+                                            message:successMessage
+                                        actionTitle:@"Trouble getting email?"
+                                      actionHandler:^{
+                                        [FUIAuthBaseViewController
+                                           showAlertWithTitle:@"Trouble getting emails?"
+                                                      message:kTroubleGettingEmailMessage
+                                                  actionTitle:@"Resend"
+                                                actionHandler:^{
+                                                  [self sendSignInLinkToEmail:email];
+                                                } dismissTitle:@"Back"
+                                               dismissHandler:^{
+                                                 [self.navigationController popToRootViewControllerAnimated:YES];
+                                               }
+                                     presentingViewController:self];
+                                      }
+                                       dismissTitle:@"Back"
+                                     dismissHandler:^{
+                                       [self.navigationController popToRootViewControllerAnimated:YES];
+                                     }
+                           presentingViewController:self
+       ];
     }
   }];
 }
