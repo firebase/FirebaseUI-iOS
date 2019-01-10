@@ -88,8 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (UIImage *)icon {
-  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-  return [FUIAuthUtils imageNamed:@"ic_anonymous" fromBundle:bundle];
+  return [FUIAuthUtils imageNamed:@"ic_anonymous" fromBundleNameOrNil:FUIAuthBundleName];
 }
 
 - (UIColor *)buttonBackgroundColor {

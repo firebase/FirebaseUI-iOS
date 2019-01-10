@@ -74,7 +74,7 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 }
 
 - (UIImage *)icon {
-  return [FUIAuthUtils imageNamed:@"ic_twitter" fromBundle:[NSBundle bundleForClass:[self class]]];
+  return [FUIAuthUtils imageNamed:@"ic_twitter" fromBundleNameOrNil:kBundleName];
 }
 
 - (UIColor *)buttonBackgroundColor {
