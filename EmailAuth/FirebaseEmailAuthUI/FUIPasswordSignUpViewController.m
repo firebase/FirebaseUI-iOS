@@ -332,8 +332,8 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
 
 - (void)updateIconForRightViewButton:(UIButton *)button {
   NSString *imageName = _passwordField.secureTextEntry ? @"ic_visibility" : @"ic_visibility_off";
-  [button setImage:[FUIAuthUtils imageNamed:imageName fromBundle:FUIAuthBundleName]
-          forState:UIControlStateNormal];
+  UIImage *image = [FUIAuthUtils imageNamed:imageName fromBundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]];
+  [button setImage:image forState:UIControlStateNormal];
 }
 
 - (void)togglePasswordFieldVisibility:(UIButton *)button {
