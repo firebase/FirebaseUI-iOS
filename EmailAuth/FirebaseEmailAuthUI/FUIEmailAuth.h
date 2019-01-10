@@ -31,12 +31,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface FUIEmailAuth : NSObject <FUIAuthProvider>
 
+/** @property emailLink.
+ @brief The link for email link sign in.
+ */
+@property(nonatomic, strong, readwrite, nullable) NSString *emailLink;
+
 - (instancetype)initAuthAuthUI:(FUIAuth *)authUI
                   signInMethod:(NSString *)signInMethod
                forceSameDevice:(BOOL)forceSameDevice
          allowNewEmailAccounts:(BOOL)allowNewEmailAccounts
              actionCodeSetting:(FIRActionCodeSettings *)actionCodeSettings;
-
 
 /** @property signInMethod.
     @brief Defines the sign in method for FIREmailAuthProvider.
