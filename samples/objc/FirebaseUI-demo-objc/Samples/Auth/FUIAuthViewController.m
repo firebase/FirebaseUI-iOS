@@ -373,9 +373,8 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
           if (useEmaiLink) {
             // ActionCodeSettings for email link sign-in.
             FIRActionCodeSettings *actionCodeSettings = [[FIRActionCodeSettings alloc] init];
-            [actionCodeSettings setURL:[NSURL URLWithString:@"https://fb-sa-1211.appspot.com"]];
+            actionCodeSettings.URL = [NSURL URLWithString:@"https://fb-sa-1211.appspot.com"];
             actionCodeSettings.handleCodeInApp = YES;
-            [actionCodeSettings setIOSBundleID:[[NSBundle mainBundle] bundleIdentifier]];
             [actionCodeSettings setAndroidPackageName:@"com.example.android"
                                 installIfNotAvailable:NO
                                        minimumVersion:@"12"];

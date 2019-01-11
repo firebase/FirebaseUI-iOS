@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** @fn showAlertWithMessage:
     @brief Displays an alert view with given title and message on top of the current view
-    controller.
+        controller.
     @param message The message of the alert.
  */
 + (void)showAlertWithMessage:(NSString *)message;

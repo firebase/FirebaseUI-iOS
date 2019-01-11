@@ -85,7 +85,6 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
                          authUI:(FUIAuth *)authUI {
-
   self = [super initWithNibName:nibNameOrNil
                          bundle:nibBundleOrNil
                          authUI:authUI];

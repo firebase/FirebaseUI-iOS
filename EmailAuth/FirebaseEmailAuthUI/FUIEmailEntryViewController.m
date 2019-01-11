@@ -264,8 +264,7 @@ static NSString *const kTroubleGettingEmailMessage =
                                      dismissHandler:^{
                                        [self.navigationController popToRootViewControllerAnimated:YES];
                                      }
-                           presentingViewController:self
-       ];
+                           presentingViewController:self];
     }
   }];
 }
