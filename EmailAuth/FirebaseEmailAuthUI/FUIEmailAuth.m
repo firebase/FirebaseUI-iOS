@@ -229,7 +229,8 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
   }
   // Retrieve parameters from local storage
   NSMutableDictionary *localParameterDict = [NSMutableDictionary dictionary];
-  localParameterDict[kEmailLinkSignInEmailKey] = [GULUserDefaults.standardUserDefaults stringForKey:kEmailLinkSignInEmailKey];
+  localParameterDict[kEmailLinkSignInEmailKey] = [GULUserDefaults.standardUserDefaults
+                                                  stringForKey:kEmailLinkSignInEmailKey];
   localParameterDict[@"ui_sid"] = [GULUserDefaults.standardUserDefaults stringForKey:@"ui_sid"];
 
   // Handling flows
@@ -237,20 +238,27 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
   NSString *localSessionID = localParameterDict[@"ui_sid"];
   BOOL sameDevice = urlSessionID && localSessionID && [urlSessionID isEqualToString:localSessionID];
 
-  if (sameDevice) { // Same device
-    if (urlParameterDict[@"ui_pid"] != nil) { // Unverified provider linking
+  if (sameDevice) {
+    // Same device
+    if (urlParameterDict[@"ui_pid"]) {
+      // Unverified provider linking
       [self handleUnverifiedProviderLinking:urlParameterDict[@"ui_pid"]
                                       email:localParameterDict[kEmailLinkSignInEmailKey]];
-    } else if (urlParameterDict[@"ui_auid"] != nil) { // Anonymous upgrade
+    } else if (urlParameterDict[@"ui_auid"]) {
+      // Anonymous upgrade
       [self handleAnonymousUpgrade:urlParameterDict[@"ui_auid"]
                              email:localParameterDict[kEmailLinkSignInEmailKey]];
-    } else { // Normal email link sign in
+    } else {
+      // Normal email link sign in
       [self handleEmaiLinkSignIn:localParameterDict[kEmailLinkSignInEmailKey]];
     }
-  } else { // Different device
-    if ([urlParameterDict[@"ui_sd"] isEqualToString:@"1"]) { // Force same device enabled
+  } else {
+    // Different device
+    if ([urlParameterDict[@"ui_sd"] isEqualToString:@"1"]) {
+      // Force same device enabled
       [self handleDifferentDevice];
-    } else { // Force same device not enabled
+    } else {
+      // Force same device not enabled
       [self handleConfirmEmail];
     }
   }
@@ -261,8 +269,10 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
 - (void)handleUnverifiedProviderLinking:(NSString *)providerID
                                   email:(NSString *)email {
   if ([providerID isEqualToString:FIRFacebookAuthProviderID]) {
-    NSData *unverifiedProviderCredentialData = [GULUserDefaults.standardUserDefaults objectForKey:kEmailLinkSignInLinkingCredentialKey];
-    FIRAuthCredential *unverifiedProviderCredential = [NSKeyedUnarchiver unarchiveObjectWithData:unverifiedProviderCredentialData];
+    NSData *unverifiedProviderCredentialData = [GULUserDefaults.standardUserDefaults
+                                                objectForKey:kEmailLinkSignInLinkingCredentialKey];
+    FIRAuthCredential *unverifiedProviderCredential =
+        [NSKeyedUnarchiver unarchiveObjectWithData:unverifiedProviderCredentialData];
 
     FIRAuthCredential *emailLinkCredential =
     [FIREmailAuthProvider credentialWithEmail:email link:self.emailLink];
@@ -663,34 +673,36 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
           "link below. \n \n For this flow to successfully connect your "
           "account with this email, you have to open the link on the same "
           "device or browser.", email, providerName, email];
+      void (^actionHandler)(void) = ^() {
+        [self generateURLParametersAndLocalCache:email
+                                 linkingProvider:newCredential.provider];
+
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:newCredential];
+        [GULUserDefaults.standardUserDefaults setObject:data forKey:kEmailLinkSignInLinkingCredentialKey];
+
+        void (^completion)(NSError * _Nullable error) = ^(NSError * _Nullable error){
+          if (error) {
+            [FUIAuthBaseViewController showAlertWithMessage:error.description];
+          } else {
+            NSString *signInMessage = [NSString stringWithFormat:
+                                       @"A sign-in email with additional instrucitons was sent to %@. Check your "
+                                       "email to complete sign-in.", email];
+            [FUIAuthBaseViewController
+             showAlertWithTitle:@"Sign-in email sent"
+             message:signInMessage
+             presentingViewController:nil];
+          }
+        };
+        [self.authUI.auth sendSignInLinkToEmail:email
+                             actionCodeSettings:self.actionCodeSettings
+                                     completion:completion];
+      };
+
       [FUIAuthBaseViewController
           showAlertWithTitle:@"Sign in"
                      message:message
                  actionTitle:@"Sign in"
-               actionHandler:^{
-                 [self generateURLParametersAndLocalCache:email
-                                          linkingProvider:newCredential.provider];
-
-                 NSData *data = [NSKeyedArchiver archivedDataWithRootObject:newCredential];
-                 [GULUserDefaults.standardUserDefaults setObject:data forKey:kEmailLinkSignInLinkingCredentialKey];
-
-                 void (^completion)(NSError * _Nullable error) = ^(NSError * _Nullable error){
-                   if (error) {
-                     [FUIAuthBaseViewController showAlertWithMessage:error.description];
-                   } else {
-                     NSString *signInMessage = [NSString stringWithFormat:
-                         @"A sign-in email with additional instrucitons was sent to %@. Check your "
-                         "email to complete sign-in.", email];
-                     [FUIAuthBaseViewController
-                      showAlertWithTitle:@"Sign-in email sent"
-                      message:signInMessage
-                      presentingViewController:nil];
-                   }
-                 };
-                 [self.authUI.auth sendSignInLinkToEmail:email
-                                      actionCodeSettings:self.actionCodeSettings
-                                              completion:completion];
-               }
+               actionHandler:actionHandler
                 dismissTitle:nil
               dismissHandler:nil
     presentingViewController:nil];
@@ -769,10 +781,8 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
   NSURLComponents *urlComponents = [NSURLComponents componentsWithString:url.absoluteString];
   NSMutableArray<NSURLQueryItem *> *urlQuertItems = [NSMutableArray array];
 
-  // kEmailLinkSignInEmailKey
   [GULUserDefaults.standardUserDefaults setObject:email forKey:kEmailLinkSignInEmailKey];
 
-  // ui_auid
   if (self.authUI.auth.currentUser.isAnonymous && self.authUI.shouldAutoUpgradeAnonymousUsers) {
     NSString *auid = self.authUI.auth.currentUser.uid;
 
@@ -781,7 +791,6 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
     [urlQuertItems addObject:anonymousUserIDQueryItem];
   }
 
-  // ui_sid
   NSInteger ui_sid = arc4random_uniform(999999999);
   NSString *sidString = [NSString stringWithFormat:@"%ld", (long)ui_sid];
   [GULUserDefaults.standardUserDefaults setObject:sidString forKey:@"ui_sid"];
@@ -790,7 +799,6 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
       [NSURLQueryItem queryItemWithName:@"ui_sid" value:sidString];
   [urlQuertItems addObject:sessionIDQueryItem];
 
-  // ui_sd
   NSString *sameDeviceValueString;
   if (self.forceSameDevice) {
     sameDeviceValueString = @"1";
@@ -800,7 +808,6 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
   NSURLQueryItem *sameDeviceQueryItem = [NSURLQueryItem queryItemWithName:@"ui_sd" value:sameDeviceValueString];
   [urlQuertItems addObject:sameDeviceQueryItem];
 
-  // ui_pid
   if (linkingProvider) {
     NSURLQueryItem *providerIDQueryItem = [NSURLQueryItem queryItemWithName:@"ui_pid" value:linkingProvider];
     [urlQuertItems addObject:providerIDQueryItem];
