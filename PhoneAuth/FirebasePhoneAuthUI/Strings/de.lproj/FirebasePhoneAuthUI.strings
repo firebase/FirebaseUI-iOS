@@ -70,9 +70,5 @@
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
 "MessageExpired" = "Dieser Code ist nicht mehr gültig";
 
-/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "Wenn Sie auf %@ tippen, erhalten Sie möglicherweise eine Bestätigungs-SMS. Es können Gebühren für SMS und Datenübertragung anfallen.";
-
-/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "Durch Tippen auf %@ bestätigen Sie, dass Sie den [Nutzungsbedingungen] zustimmen.";
-
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "Wenn Sie auf \"%@\" tippen, stimmen Sie unseren %@ und unserer %@ zu. Sie erhalten möglicherweise eine SMS und es können Gebühren für die Nachricht und die Datenübertragung anfallen.";

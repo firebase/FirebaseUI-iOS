@@ -38,7 +38,7 @@
 "AccountDisabledError" = "Та имејл адреса припада деактивираном налогу.";
 
 /* Error message displayed after user trying to sign in too many times. */
-"SignInTooManyTimesError" = "Превише пута сте унели нетачну лозинку. Пробајте поново за неколико минута.";
+"SignInTooManyTimesError" = "Превише пута сте унели нетачну лозинку. Пробајте поново за пар минута.";
 
 /* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
 "CantFindProvider" = "Нисмо успели да нађемо добављача за %@.";
@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Изаберите лозинку";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Ако додирнете %@, потврђујете да прихватате документ %@.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Услови коришћења услуге";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Политика приватности";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Ако наставите, потврђујете да прихватате документе %@ и %@.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "Ова имејл адреса се већ користи за други налог.";
@@ -80,7 +83,7 @@
 "WeakPasswordError" = "Јаке лозинке имају бар 6 знакова, уз комбинацију слова и бројева.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "Са ваше IP адресе потиче превише захтева за налог. Пробајте поново за неколико минута.";
+"SignUpTooManyTimesError" = "Са ваше IP адресе потиче превише захтева за налог. Пробајте поново за пар минута.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
 "PasswordVerificationMessage" = "Већ сте користили адресу %@ за пријављивање. Унесите лозинку за тај налог.";

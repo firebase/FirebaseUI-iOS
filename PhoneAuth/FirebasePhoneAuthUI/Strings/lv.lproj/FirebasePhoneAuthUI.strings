@@ -70,9 +70,5 @@
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
 "MessageExpired" = "Šis kods vairs nav derīgs";
 
-/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "Pieskaroties pogai %@, var tikt nosūtīta īsziņa. Var tikt piemērota maksa par ziņojumiem un datu pārsūtīšanu.";
-
-/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "Pieskaroties pogai %@, jūs norādāt, ka piekrītat [pakalpojumu sniegšanas noteikumiem].";
-
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "Pieskaroties vienumam %@, jūs norādāt, ka piekrītat šādiem dokumentiem: %@ un %@. Var tikt nosūtīta īsziņa. Var tikt piemērota maksa par ziņojumiem un datu pārsūtīšanu.";

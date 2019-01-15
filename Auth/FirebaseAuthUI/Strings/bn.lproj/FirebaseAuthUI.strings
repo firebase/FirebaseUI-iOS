@@ -50,7 +50,7 @@
 "PasswordRecoveryTitle" = "পাসওয়ার্ড পুনরুদ্ধার করুন";
 
 /* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryMessage" = "কিভাবে পাসওয়ার্ড রিসেট করবেন তা জানতে এই ইমেলে নির্দেশাবলী পাঠান।";
+"PasswordRecoveryMessage" = "কীভাবে পাসওয়ার্ড রিসেট করবেন তা জানতে এই ইমেলে নির্দেশাবলী পাঠান।";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "PasswordRecoveryEmailSentTitle" = "আপনার ইমেল দেখুন";
@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "পাসওয়ার্ড বেছে নিন";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "%@ এ ট্যাপ করার মাধ্যমে আপনি %@ তে সম্মতি জানাচ্ছেন।";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "পরিষেবার শর্তাবলি";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "গোপনীয়তা নীতি";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "চালিয়ে যাওয়ার অর্থ, আপনি আমাদের %@ এবং %@-এর সাথে সম্মত।";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "এই ইমেল অ্যাড্রেসটি আগে থেকেই অন্য অ্যাকাউন্টে ব্যবহার করা হচ্ছে।";
@@ -227,7 +230,7 @@
 "SignInWithProvider" = "%@ দিয়ে সাইন-ইন করুন";
 
 /* Placeholder of input cell when user changes name. */
-"PlaceholderEnterName" = "আপনার নামটি লিখুন";
+"PlaceholderEnterName" = "আপনার নাম লিখুন";
 
 /* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "PlaceholderEnterEmail" = "আপনার ইমেল লিখুন";

@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Choisissez un mot de passe";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "En appuyant sur %@, vous acceptez les %@.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Conditions d'utilisation";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Règles de confidentialité";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "En continuant, vous acceptez les %@ et les %@.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "Cette adresse e-mail est déjà utilisée par un autre compte.";
@@ -185,7 +188,7 @@
 "UnlinkConfirmationActionTitle" = "Dissocier le compte";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "Vous devrez vous reconnecter pour modifier l'adresse e-mail associée à votre compte.";
+"UpdateEmailAlertMessage" = "Pour modifier l'adresse e-mail associée à votre compte, vous devrez vous reconnecter.";
 
 /* Alert action message shown before confirmation of updating email action. */
 "UpdateEmailVerificationAlertMessage" = "Pour modifier votre mot de passe, vous devez d'abord saisir votre mot de passe actuel.";

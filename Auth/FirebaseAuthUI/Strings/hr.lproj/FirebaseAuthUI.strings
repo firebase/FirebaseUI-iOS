@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Odaberite zaporku";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Ako dodirnete %@, prihvaćate dokument %@.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Uvjeti pružanja usluge";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Pravila o privatnosti";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Nastavkom upotrebe potvrđujete da prihvaćate odredbe koje sadrže naši %@ i %@.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "Ta e-adresa već pripada drugom računu.";

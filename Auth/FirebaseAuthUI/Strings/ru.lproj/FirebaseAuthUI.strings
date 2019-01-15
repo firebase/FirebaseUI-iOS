@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Выберите пароль";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Нажимая кнопку \"%@\", вы принимаете %@.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Условия использования";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Политика конфиденциальности";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Продолжая, вы принимаете два документа. Вот они: %@ и %@.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "Этот адрес электронной почты уже используется в другом аккаунте.";
@@ -185,7 +188,7 @@
 "UnlinkConfirmationActionTitle" = "Отменить связь с аккаунтом";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "Чтобы изменить адрес электронной почты, связанный с аккаунтом, нужно будет войти в систему ещё раз.";
+"UpdateEmailAlertMessage" = "Чтобы связать с аккаунтом другой адрес, потребуется повторно войти в систему.";
 
 /* Alert action message shown before confirmation of updating email action. */
 "UpdateEmailVerificationAlertMessage" = "Сначала нужно ввести текущий пароль.";

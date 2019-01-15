@@ -70,9 +70,5 @@
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
 "MessageExpired" = "हा कोड यापुढे वैध नाही";
 
-/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "%@ टॅप केल्यावर, एक SMS कदाचित पाठवला जाईल. संदेश आणि डेटाचे दर लागू होऊ शकतील.";
-
-/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "%@ टॅप केल्याने तुम्ही [सेवा अटी] शी सहमती असल्याचे दाखवता.";
-
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "%@ वर टॅप करून, तुम्ही सूचित करता की, तुम्ही आमचे %@ आणि %@ स्वीकारता. एसएमएस पाठवला जाऊ शकतो. मेसेज आणि डेटा दर लागू केले जाऊ शकतात.";

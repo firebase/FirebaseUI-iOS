@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Επιλέξτε κωδικό πρόσβασης";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Αν πατήσετε %@, δηλώνετε ότι συμφωνείτε με τους %@.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Όρους Παροχής Υπηρεσιών";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Πολιτική απορρήτου";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Αν συνεχίσετε, δηλώνετε ότι αποδέχεστε τους %@ και την %@ μας.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "Αυτή η διεύθυνση ηλεκτρονικού ταχυδρομείου χρησιμοποιείται ήδη από άλλον λογαριασμό.";
@@ -185,7 +188,7 @@
 "UnlinkConfirmationActionTitle" = "Αποσύνδεση λογαριασμού";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "Για να αλλάξετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου που συσχετίζεται με τον λογαριασμό σας, θα πρέπει να συνδεθείτε ξανά.";
+"UpdateEmailAlertMessage" = "Για να αλλάξετε τη διεύθυνση που συσχετίζεται με τον λογαριασμό σας, θα πρέπει να συνδεθείτε ξανά.";
 
 /* Alert action message shown before confirmation of updating email action. */
 "UpdateEmailVerificationAlertMessage" = "Για να αλλάξετε τον κωδικό πρόσβασής σας, θα πρέπει πρώτα να εισαγάγετε τον τρέχοντα κωδικό πρόσβασης.";
