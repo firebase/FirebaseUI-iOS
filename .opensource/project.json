@@ -9,17 +9,13 @@
 
     "content": "README.md",
 
-    // These are relative paths in the same repo,
-    // each of these paths must have a .opensource/project.json
-    "subprojects": [],
-
     // Other markdown pages that should be rendered nicely
-    "pages" : [
-        "FirebaseAuthUI/README.md",
-        "FirebaseDatabaseUI/README.md",
-        "FirebaseStorageUI/README.md",
-        "FirebaseFirestoreUI/README.md"
-    ],
+    "pages" : {
+        "Auth/README.md": "Authentication",
+        "Database/README.md": "Realtime Database",
+        "Storage/README.md": "Cloud Storage",
+        "Firestore/README.md": "Cloud Firestore"
+    },
 
     // Related projects on Github, in the format $owner/$repo[/$subproject]
     // where subproject is optional.
