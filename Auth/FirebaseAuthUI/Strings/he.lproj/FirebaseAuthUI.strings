@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "הסיסמה שלך כאן";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "הקשה על %@ תתפרש כהסכמה ל%@.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "תנאים והגבלות";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "מדיניות פרטיות";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "המשך התהליך יפורש כהסכמתך ל%@ ול%@.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "כתובת האימייל הזאת משויכת לחשבון אחר.";
@@ -101,7 +104,7 @@
 "Save" = "שמור";
 
 /* Save button title. */
-"Send" = "שלח";
+"Send" = "שליחה";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "אימייל";

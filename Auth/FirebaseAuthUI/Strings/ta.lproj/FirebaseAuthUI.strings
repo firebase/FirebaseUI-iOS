@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "கடவுச்சொல்லைத் தேர்வு செய்யவும்";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "%@ஐத் தட்டுவதன் மூலம், %@ஐ ஏற்பதாகக் குறிப்பிடுகிறீர்கள்.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "சேவை விதிமுறைகள்";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "தனியுரிமைக் கொள்கை";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "தொடர்வதன் மூலம், எங்கள் %@ மற்றும் %@ ஆகியவற்றை ஏற்பதாகக் குறிப்பிடுகிறீர்கள்.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "மின்னஞ்சல் முகவரி ஏற்கனவே வேறொரு கணக்கில் பயன்படுத்தப்படுகிறது.";

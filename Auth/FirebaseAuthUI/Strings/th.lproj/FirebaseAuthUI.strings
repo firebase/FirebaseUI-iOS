@@ -23,7 +23,7 @@
 "SignInTitle" = "ลงชื่อเข้าใช้";
 
 /* Password text field placeholder. */
-"EnterYourPassword" = "ป้อนรหัสผ่านของคุณ";
+"EnterYourPassword" = "ป้อนรหัสผ่าน";
 
 /* Error message displayed when user enters an empty password. */
 "InvalidPasswordError" = "ต้องระบุรหัสผ่าน";
@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "ตั้งรหัสผ่าน";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "การแตะ%@แสดงว่าคุณยอมรับ%@";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "ข้อกำหนดในการให้บริการ";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "นโยบายความเป็นส่วนตัว";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "การดำเนินการต่อแสดงว่าคุณยอมรับ%@และ%@";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "มีบัญชีอื่นใช้งานที่อยู่อีเมลนี้อยู่แล้ว";
@@ -233,7 +236,7 @@
 "PlaceholderEnterEmail" = "ป้อนอีเมลของคุณ";
 
 /* Placeholder of secret input cell when user changes password. */
-"PlaceholderEnterPassword" = "ป้อนรหัสผ่านของคุณ";
+"PlaceholderEnterPassword" = "ป้อนรหัสผ่าน";
 
 /* Placeholder of secret input cell when user confirms password. */
 "PlaceholderNewPassword" = "รหัสผ่านใหม่";

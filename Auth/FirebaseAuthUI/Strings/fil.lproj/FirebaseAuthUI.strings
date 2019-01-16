@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Pumili ng password";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Sa pamamagitan ng pag-tap sa %@, isinasaad mo na sumasang-ayon ka sa %@.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Mga Tuntunin ng Serbisyo";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Patakaran sa Privacy";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Sa pagpapatuloy, ipinababatid mo na tinatanggap mo ang aming %@ at %@.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "Ginagamit na ang email address ng ibang account.";
@@ -185,7 +188,7 @@
 "UnlinkConfirmationActionTitle" = "I-unlink ang account";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "Upang baguhin ang email address na nauugnay sa iyong account, kailangan mong mag-sign in muli.";
+"UpdateEmailAlertMessage" = "Upang mabago ang email address na kaugnay ng iyong account, kakailanganin mong mag-sign in muli.";
 
 /* Alert action message shown before confirmation of updating email action. */
 "UpdateEmailVerificationAlertMessage" = "Upang baguhin ang iyong password, kailangan mo munang ipasok ang iyong kasalukuyang password.";

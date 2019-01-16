@@ -70,9 +70,5 @@
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
 "MessageExpired" = "این کد دیگر معتبر نیست";
 
-/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "با ضربه زدن روی %@ پیامکی ارسال می‌شود. ممکن است هزینه انتقال داده و پیام اعمال شود.";
-
-/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "با ضربه زدن روی %@ موافقتتان را با [شرایط و ضوابط] اعلام می‌کنید.";
-
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "با ضربه‌زدن روی %@، موافقتتان را با %@ و %@ ما اعلام می‌کنید. ممکن است پیامکی ارسال شود. ممکن است هزینه داده و پیام اعمال شود.";

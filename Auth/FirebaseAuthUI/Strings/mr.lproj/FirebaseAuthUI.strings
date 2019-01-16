@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "पासवर्ड निवडा";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "%@वर टॅप करून, तुम्ही %@शी सहमत असल्याचे दाखवता.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "सेवा अटी";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "गोपनीयता धोरण";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "पुढे सुरू ठेवून, तुम्ही सूचित करता की तुम्ही आमचे %@ आणि %@ स्वीकारता.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "ईमेल अॅड्रेस दुसर्‍या खात्यावर आधीपासून वापरात आहे.";

@@ -53,7 +53,7 @@
 "PasswordRecoveryMessage" = "Utilize este endereço de email para obter instruções que explicam como repor a palavra-passe.";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryEmailSentTitle" = "Verifique o seu e-mail";
+"PasswordRecoveryEmailSentTitle" = "Verifique o seu email";
 
 /* Message displayed when the email for password recovery has been sent. */
 "PasswordRecoveryEmailSentMessage" = "Siga as instruções enviadas para %@ para recuperar a palavra-passe.";
@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Escolha uma palavra-passe";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Ao tocar em %@, indica que concorda com os %@.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Termos de Utilização";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Política de Privacidade";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Ao continuar, indica que aceita os %@ e a %@.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "O endereço de email já está a ser utilizado por outra conta.";

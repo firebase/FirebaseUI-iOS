@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Alegeți o parolă";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Dacă atingeți %@, indicați că sunteți de acord cu %@.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Termeni și condițiile";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Politica de confidențialitate";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Dacă alegeți să continuați, sunteți de acord cu %@ și cu %@.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "Adresa de e-mail este folosită deja de alt cont.";

@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Vælg adgangskode";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Ved at trykke på %@ angiver du, at du accepterer %@.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Servicevilkår";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Privatlivspolitik";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Ved at fortsætte indikerer du, at du accepterer vores %@ og %@.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "Mailadressen bruges allerede af en anden konto.";

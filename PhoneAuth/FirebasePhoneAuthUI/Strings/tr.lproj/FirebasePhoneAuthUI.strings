@@ -2,7 +2,7 @@
 "SignInWithPhone" = "Telefonla oturum aç";
 
 /* The title of view controller where user enters phone number. */
-"EnterPhoneTitle" = "Telefon numarasını girin";
+"EnterPhoneTitle" = "Telefonu girin";
 
 /* The title of button on navigation controller which navigates to previous screen. */
 "Back" = "Geri";
@@ -70,9 +70,5 @@
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
 "MessageExpired" = "Bu kod artık geçerli değil";
 
-/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "%@ öğesine dokunarak SMS gönderilebilir. Mesaj ve veri ücretleri uygulanabilir.";
-
-/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "%@ öğesine dokunarak [Hizmet Şartları] hükümlerini kabul ettiğinizi belirtirsiniz.";
-
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "%@ öğesine dokunarak %@ ve %@ hükümlerimizi kabul ettiğinizi bildirirsiniz. SMS gönderilebilir. Mesaj ve veri ücretleri geçerli uygulanabilir.";
