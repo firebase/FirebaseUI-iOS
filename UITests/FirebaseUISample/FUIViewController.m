@@ -81,14 +81,19 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 
   [self prepareStubs];
 
+  NSString *firstProviderID = _authProviders.firstObject.providerID;
   BOOL shouldSkipPhoneAuthPicker = _authProviders.count == 1 &&
-      [_authProviders.firstObject.providerID isEqualToString:FIRPhoneAuthProviderID];
-  if (shouldSkipPhoneAuthPicker) {
-    FUIPhoneAuth *provider = _authProviders.firstObject;
-    [provider signInWithPresentingViewController:self phoneNumber:nil];
-  } else {
+      ([firstProviderID isEqualToString:FIRPhoneAuthProviderID] ||
+       [firstProviderID isEqualToString:FIREmailAuthProviderID]);
+  if (!shouldSkipPhoneAuthPicker) {
     UIViewController *controller = [self.authUIMock authViewController];
     [self presentViewController:controller animated:YES completion:nil];
+  } else if ([firstProviderID isEqualToString:FIRPhoneAuthProviderID]) {
+    FUIPhoneAuth *provider = _authProviders.firstObject;
+    [provider signInWithPresentingViewController:self phoneNumber:nil];
+  } else if ([firstProviderID isEqualToString:FIREmailAuthProviderID]) {
+    FUIEmailAuth *provider = _authProviders.firstObject;
+    [provider signInWithPresentingViewController:self email:nil];
   }
 
 }
@@ -248,9 +253,9 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   });
 
 
-  OCMStub([self.authMock createUserAndRetrieveDataWithEmail:OCMOCK_ANY
-                                                   password:OCMOCK_ANY
-                                                 completion:OCMOCK_ANY]).
+  OCMStub([self.authMock createUserWithEmail:OCMOCK_ANY
+                                    password:OCMOCK_ANY
+                                  completion:OCMOCK_ANY]).
       andDo(^(NSInvocation *invocation) {
     FIRAuthDataResultCallback mockedCallback;
     [invocation getArgument:&mockedCallback atIndex:4];
@@ -293,6 +298,9 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   for (NSIndexPath *indexPath in selectedRows) {
     if (indexPath.section == kSectionsProviders) {
       switch (indexPath.row) {
+        case kIDPEmail:
+          [_authProviders addObject:[[FUIEmailAuth alloc] init]];
+          break;
         case kIDPGoogle:
           [_authProviders addObject:[[FUIGoogleAuth alloc] init]];
           break;
@@ -493,7 +501,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   OCMStub([mockProviderUI signOut]);
   OCMStub([mockProviderUI providerID]).andReturn(providerId);
 
-  OCMStub([mockUser reauthenticateWithCredential:OCMOCK_ANY completion:OCMOCK_ANY]).
+  OCMStub([mockUser reauthenticateAndRetrieveDataWithCredential:OCMOCK_ANY completion:OCMOCK_ANY]).
       andDo(^(NSInvocation *invocation) {
     FIRUserProfileChangeCallback mockedCallBack;
     [invocation getArgument:&mockedCallBack atIndex:3];
