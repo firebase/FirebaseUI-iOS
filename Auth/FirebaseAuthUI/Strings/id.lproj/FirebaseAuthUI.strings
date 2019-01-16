@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Pilih sandi";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Dengan menge-tap %@, Anda menunjukkan bahwa Anda menyetujui %@.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Persyaratan Layanan";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Kebijakan Privasi";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Dengan melanjutkan, Anda menyatakan persetujuan atas %@ dan %@ kami.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "Alamat email ini sudah digunakan oleh akun lain.";
@@ -170,22 +173,22 @@
 "ActionCantBeUndone" = "Tindakan ini tidak dapat diurungkan";
 
 /* Button title for unlinking account action. */
-"UnlinkAction" = "Batalkan link";
+"UnlinkAction" = "Batalkan tautan";
 
 /* Controller title shown for unlinking account action. */
 "UnlinkTitle" = "Akun tertaut";
 
 /* Alert title shown before unlinking action. */
-"UnlinkConfirmationTitle" = "Batalkan link akun?";
+"UnlinkConfirmationTitle" = "Batalkan tautan akun?";
 
 /* Alert message shown before unlinking action. */
 "UnlinkConfirmationMessage" = "Anda tidak dapat lagi login menggunakan akun Anda";
 
 /* Alert action title shown before unlinking action. */
-"UnlinkConfirmationActionTitle" = "Batalkan link akun";
+"UnlinkConfirmationActionTitle" = "Batalkan tautan akun";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "Untuk mengubah alamat email yang terkait dengan akun, Anda harus login kembali.";
+"UpdateEmailAlertMessage" = "Untuk mengubah alamat email yang dikaitkan dengan akun, Anda perlu melakukan login kembali.";
 
 /* Alert action message shown before confirmation of updating email action. */
 "UpdateEmailVerificationAlertMessage" = "Untuk mengubah sandi, Anda harus memasukkan sandi saat ini terlebih dahulu.";

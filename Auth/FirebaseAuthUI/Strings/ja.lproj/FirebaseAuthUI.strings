@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "パスワードを設定";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "[%@] をタップすると、%@に同意したことになります。";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "利用規約";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "プライバシー ポリシー";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "続行すると、%@と%@に同意したことになります。";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "このメールアドレスは他のアカウントによってすでに使用されています。";
@@ -104,7 +107,7 @@
 "Send" = "送信";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"Email" = "メールアドレス";
+"Email" = "メール";
 
 /* Label next to a password text field. */
 "Password" = "パスワード";
@@ -185,7 +188,7 @@
 "UnlinkConfirmationActionTitle" = "アカウントのリンク解除";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "アカウントに関連付けられたメールアドレスを変更するには、再度ログインする必要があります。";
+"UpdateEmailAlertMessage" = "アカウントに関連付けられているメールアドレスを変更するには、再度ログインする必要があります。";
 
 /* Alert action message shown before confirmation of updating email action. */
 "UpdateEmailVerificationAlertMessage" = "パスワードを変更するには、まず現在のパスワードを入力する必要があります。";

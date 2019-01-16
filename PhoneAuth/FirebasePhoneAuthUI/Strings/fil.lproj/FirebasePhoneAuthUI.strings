@@ -70,9 +70,5 @@
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
 "MessageExpired" = "Wala nang bisa ang code na ito";
 
-/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "Sa pamamagitan ng pag-tap sa %@, maaaring magpadala ng SMS. Maaaring ipatupad ang mga rate ng pagmemensahe at data.";
-
-/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "Sa pamamagitan ng pag-tap sa %@ isinasaad mo na sumasang-ayon ka sa [Mga Tuntunin ng Serbisyo].";
-
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "Sa pag-tap sa %@, ipinababatid mo na tinatanggap mo ang aming %@ at %@. Maaaring magpadala ng SMS. Maaaring ipatupad ang mga rate ng pagmemensahe at data.";
