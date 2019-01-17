@@ -59,7 +59,7 @@
   [self.app.toolbars.buttons[@"Sign In"] tap];
   [tablesQuery.cells[@"EmailCellAccessibilityID"].textFields[@"Enter your email"] tap];
   [[tablesQuery.cells[@"EmailCellAccessibilityID"] childrenMatchingType:XCUIElementTypeTextField].element typeText:@"test@test.com"];
-  [self.app.navigationBars[@"Sign in with email"].buttons[@"NextButtonAccessibilityID"] tap];
+  [self.app.navigationBars[@"Enter your email"].buttons[@"NextButtonAccessibilityID"] tap];
   [tablesQuery.secureTextFields[@"Enter your password"] tap];
   [[[tablesQuery.cells containingType:XCUIElementTypeStaticText identifier:@"Password"] childrenMatchingType:XCUIElementTypeSecureTextField].element typeText:@"test"];
   [self.app.navigationBars[@"Sign in"].buttons[@"Sign in"] tap];
@@ -73,7 +73,7 @@
   
   [tablesQuery.cells[@"EmailCellAccessibilityID"].textFields[@"Enter your email"] tap];
   [[tablesQuery.cells[@"EmailCellAccessibilityID"] childrenMatchingType:XCUIElementTypeTextField].element typeText:@"test2@test2.com"];
-  [self.app.navigationBars[@"Sign in with email"].buttons[@"NextButtonAccessibilityID"] tap];
+  [self.app.navigationBars[@"Enter your email"].buttons[@"NextButtonAccessibilityID"] tap];
   [tablesQuery.cells[@"NameSignUpCellAccessibilityID"].textFields[@"First & last name"] tap];
   [[tablesQuery.cells[@"NameSignUpCellAccessibilityID"] childrenMatchingType:XCUIElementTypeTextField].element typeText:@"test2"];
   
@@ -90,12 +90,12 @@
   [tablesQuery.cells.staticTexts[@"Google"] tap];
   [tablesQuery.cells.staticTexts[@"Simulate Existing User"] tap];
   [self.app.toolbars.buttons[@"Sign In"] tap];
-  [self.app.buttons[@"EmailButtonAccessibilityID"] tap];
+  [self.app.buttons[@"Sign in with email"] tap];
   [tablesQuery.cells[@"EmailCellAccessibilityID"].textFields[@"Enter your email"] tap];
   [[tablesQuery.cells[@"EmailCellAccessibilityID"] childrenMatchingType:XCUIElementTypeTextField].element typeText:@"test@test.com"];
   
-  XCUIElement *signInWithEmailNavigationBar = self.app.navigationBars[@"Sign in with email"];
-  [signInWithEmailNavigationBar.buttons[@"NextButtonAccessibilityID"] tap];
+  XCUIElement *signInWithEmailNavigationBar = self.app.navigationBars[@"Enter your email"];
+  [signInWithEmailNavigationBar.buttons[@"Next"] tap];
   [[[[self.app.navigationBars[@"Sign in"] childrenMatchingType:XCUIElementTypeButton] matchingIdentifier:@"Back"] elementBoundByIndex:0] tap];
   [[[[signInWithEmailNavigationBar childrenMatchingType:XCUIElementTypeButton] matchingIdentifier:@"Back"] elementBoundByIndex:0] tap];
   [self.app.navigationBars[@"Welcome"].buttons[@"Cancel"] tap];
@@ -114,7 +114,7 @@
   [enterYourEmailTextField tap];
   [[tablesQuery.cells[@"EmailCellAccessibilityID"] childrenMatchingType:XCUIElementTypeTextField].element typeText:@"test@test.com"];
 
-  XCUIElement *signInWithEmailNavigationBar = self.app.navigationBars[@"Sign in with email"];
+  XCUIElement *signInWithEmailNavigationBar = self.app.navigationBars[@"Enter your email"];
   [signInWithEmailNavigationBar.buttons[@"NextButtonAccessibilityID"] tap];
   [tablesQuery.secureTextFields[@"Enter your password"] tap];
   [tablesQuery.buttons[@"Trouble signing in?"] tap];
@@ -148,7 +148,7 @@
 
   [self.app.tables.cells.staticTexts[@"\U0001F1FA\U0001F1F8 United States"] forceTap];
 
-  [self.app.navigationBars[@"Enter phone number"].buttons[@"Cancel"] tap];
+  [self.app.navigationBars[@"Enter phone number"].buttons[@"Back"] tap];
   [self.app.navigationBars[@"Welcome"].buttons[@"Cancel"] tap];
   [self.app.alerts[@"Error"].buttons[@"Close"] tap];
 
@@ -165,7 +165,7 @@
   [tablesQuery.cells[@"PhoneNumberCellAccessibilityID"].textFields[@"Phone number"] tap];
   [[tablesQuery.cells[@"PhoneNumberCellAccessibilityID"]
        childrenMatchingType:XCUIElementTypeTextField].element typeText:@"123456789"];
-  [self.app.navigationBars[@"Enter phone number"].buttons[@"NextButtonAccessibilityID"] tap];
+  [self.app.navigationBars[@"Enter phone number"].buttons[@"Verify"] tap];
 
   [self.app.keyboards.keys[@"1"] tap];
   [self.app.keyboards.keys[@"2"] tap];
