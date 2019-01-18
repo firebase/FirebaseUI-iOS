@@ -17,7 +17,7 @@
 #import "FUIAppDelegate.h"
 
 @import Firebase;
-@import FirebaseUI;
+#import <FirebaseUI/FirebaseUI.h>
 #import <GTMSessionFetcher/GTMSessionFetcherLogging.h>
 #import <TwitterKit/TWTRTwitter.h>
 
