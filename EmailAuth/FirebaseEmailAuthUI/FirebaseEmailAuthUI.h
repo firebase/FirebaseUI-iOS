@@ -23,4 +23,8 @@ FOUNDATION_EXPORT double FirebaseEmailAuthUIVersionNumber;
 FOUNDATION_EXPORT const unsigned char FirebaseEmailAuthUIVersionString[];
 
 #import "FUIEmailAuth.h"
-
+#import "FUIEmailEntryViewController.h"
+#import "FUIPasswordRecoveryViewController.h"
+#import "FUIPasswordVerificationViewController.h"
+#import "FUIPasswordSignInViewController.h"
+#import "FUIPasswordSignUpViewController.h"

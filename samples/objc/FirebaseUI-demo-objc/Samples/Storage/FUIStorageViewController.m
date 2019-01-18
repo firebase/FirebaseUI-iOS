@@ -16,7 +16,7 @@
 //  limitations under the License.
 //
 
-@import FirebaseUI;
+#import <FirebaseUI/FirebaseUI.h>
 
 #import "FUIStorageViewController.h"
 
