@@ -63,7 +63,6 @@ The READMEs for components of FirebaseUI can be found in their respective
 project folders.
 
 - [Auth](FirebaseAuthUI/README.md)
-- [Firestore](FirebaseFirestoreUI/README.md)
 - [PhoneAuth](FirebasePhoneAuthUI/README.md)
 - [Database](FirebaseDatabaseUI/README.md)
 - [Firestore](FirebaseFirestoreUI/README.md)
