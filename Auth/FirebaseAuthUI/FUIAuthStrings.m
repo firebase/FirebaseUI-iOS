@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-@import FirebaseCore;
+#import <FirebaseCore/FirebaseCore.h>
 
 #import "FUIAuthStrings.h"
 

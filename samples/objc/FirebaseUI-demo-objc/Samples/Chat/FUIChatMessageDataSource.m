@@ -15,7 +15,7 @@
 //
 
 #import "FUIChatMessageDataSource.h"
-@import FirebaseDatabase;
+#import <FirebaseDatabase/FirebaseDatabase.h>
 
 @implementation FUIChatMessageDataSource
 
