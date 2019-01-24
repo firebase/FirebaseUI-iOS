@@ -5,60 +5,60 @@ PODS:
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
-  - BoringSSL (10.0.6):
-    - BoringSSL/Implementation (= 10.0.6)
-    - BoringSSL/Interface (= 10.0.6)
-  - BoringSSL/Implementation (10.0.6):
-    - BoringSSL/Interface (= 10.0.6)
-  - BoringSSL/Interface (10.0.6)
-  - FBSDKCoreKit (4.39.1):
+  - BoringSSL-GRPC (0.0.2):
+    - BoringSSL-GRPC/Implementation (= 0.0.2)
+    - BoringSSL-GRPC/Interface (= 0.0.2)
+  - BoringSSL-GRPC/Implementation (0.0.2):
+    - BoringSSL-GRPC/Interface (= 0.0.2)
+  - BoringSSL-GRPC/Interface (0.0.2)
+  - FBSDKCoreKit (4.40.0):
     - Bolts (~> 1.9)
-  - FBSDKLoginKit (4.39.1):
+  - FBSDKLoginKit (4.40.0):
     - FBSDKCoreKit
-  - Firebase/Auth (5.15.0):
+  - Firebase/Auth (5.16.0):
     - Firebase/CoreOnly
-    - FirebaseAuth (= 5.2.0)
-  - Firebase/CoreOnly (5.15.0):
-    - FirebaseCore (= 5.1.10)
-  - Firebase/Database (5.15.0):
+    - FirebaseAuth (= 5.3.0)
+  - Firebase/CoreOnly (5.16.0):
+    - FirebaseCore (= 5.2.0)
+  - Firebase/Database (5.16.0):
     - Firebase/CoreOnly
-    - FirebaseDatabase (= 5.0.4)
-  - Firebase/Firestore (5.15.0):
+    - FirebaseDatabase (= 5.1.0)
+  - Firebase/Firestore (5.16.0):
     - Firebase/CoreOnly
-    - FirebaseFirestore (= 0.16.1)
-  - Firebase/Storage (5.15.0):
+    - FirebaseFirestore (= 1.0.0)
+  - Firebase/Storage (5.16.0):
     - Firebase/CoreOnly
-    - FirebaseStorage (= 3.0.3)
-  - FirebaseAuth (5.2.0):
+    - FirebaseStorage (= 3.1.0)
+  - FirebaseAuth (5.3.0):
     - FirebaseAuthInterop (~> 1.0)
-    - FirebaseCore (~> 5.1)
+    - FirebaseCore (~> 5.2)
     - GoogleUtilities/Environment (~> 5.2)
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (5.1.10):
+  - FirebaseCore (5.2.0):
     - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseDatabase (5.0.4):
+  - FirebaseDatabase (5.1.0):
     - FirebaseAuthInterop (~> 1.0)
-    - FirebaseCore (~> 5.1)
+    - FirebaseCore (~> 5.2)
     - leveldb-library (~> 1.18)
-  - FirebaseFirestore (0.16.1):
+  - FirebaseFirestore (1.0.0):
     - FirebaseAuthInterop (~> 1.0)
-    - FirebaseCore (~> 5.1)
-    - FirebaseFirestore/abseil-cpp (= 0.16.1)
-    - "gRPC-C++ (= 0.0.5)"
+    - FirebaseCore (~> 5.2)
+    - FirebaseFirestore/abseil-cpp (= 1.0.0)
+    - "gRPC-C++ (= 0.0.6)"
     - leveldb-library (~> 1.20)
-    - nanopb (~> 0.3.8)
+    - nanopb (~> 0.3.901)
     - Protobuf (~> 3.1)
-  - FirebaseFirestore/abseil-cpp (0.16.1):
+  - FirebaseFirestore/abseil-cpp (1.0.0):
     - FirebaseAuthInterop (~> 1.0)
-    - FirebaseCore (~> 5.1)
-    - "gRPC-C++ (= 0.0.5)"
+    - FirebaseCore (~> 5.2)
+    - "gRPC-C++ (= 0.0.6)"
     - leveldb-library (~> 1.20)
-    - nanopb (~> 0.3.8)
+    - nanopb (~> 0.3.901)
     - Protobuf (~> 3.1)
-  - FirebaseStorage (3.0.3):
+  - FirebaseStorage (3.1.0):
     - FirebaseAuthInterop (~> 1.0)
-    - FirebaseCore (~> 5.1)
+    - FirebaseCore (~> 5.2)
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseUI (5.2.2):
     - FirebaseUI/Anonymous (= 5.2.2)
@@ -110,22 +110,22 @@ PODS:
   - GoogleUtilities/Environment (5.3.7)
   - GoogleUtilities/Logger (5.3.7):
     - GoogleUtilities/Environment
-  - "gRPC-C++ (0.0.5)":
-    - "gRPC-C++/Implementation (= 0.0.5)"
-    - "gRPC-C++/Interface (= 0.0.5)"
-  - "gRPC-C++/Implementation (0.0.5)":
-    - "gRPC-C++/Interface (= 0.0.5)"
-    - gRPC-Core (= 1.14.0)
+  - "gRPC-C++ (0.0.6)":
+    - "gRPC-C++/Implementation (= 0.0.6)"
+    - "gRPC-C++/Interface (= 0.0.6)"
+  - "gRPC-C++/Implementation (0.0.6)":
+    - "gRPC-C++/Interface (= 0.0.6)"
+    - gRPC-Core (= 1.17.0)
     - nanopb (~> 0.3)
-  - "gRPC-C++/Interface (0.0.5)"
-  - gRPC-Core (1.14.0):
-    - gRPC-Core/Implementation (= 1.14.0)
-    - gRPC-Core/Interface (= 1.14.0)
-  - gRPC-Core/Implementation (1.14.0):
-    - BoringSSL (~> 10.0)
-    - gRPC-Core/Interface (= 1.14.0)
+  - "gRPC-C++/Interface (0.0.6)"
+  - gRPC-Core (1.17.0):
+    - gRPC-Core/Implementation (= 1.17.0)
+    - gRPC-Core/Interface (= 1.17.0)
+  - gRPC-Core/Implementation (1.17.0):
+    - BoringSSL-GRPC (= 0.0.2)
+    - gRPC-Core/Interface (= 1.17.0)
     - nanopb (~> 0.3)
-  - gRPC-Core/Interface (1.14.0)
+  - gRPC-Core/Interface (1.17.0)
   - GTMSessionFetcher/Core (1.2.1)
   - leveldb-library (1.20)
   - nanopb (0.3.901):
@@ -149,7 +149,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Bolts
-    - BoringSSL
+    - BoringSSL-GRPC
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
@@ -179,22 +179,22 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
-  BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
-  FBSDKCoreKit: f442aa96179cc9b382bb4abeb7e340a47cca8f91
-  FBSDKLoginKit: c3079d9a4db27c492287b1eed7a4272b28cf8a59
-  Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
-  FirebaseAuth: 02e969ff430e156d99d4cb842d77b806b71ad7bb
+  BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
+  FBSDKCoreKit: ae214474b25033399c131dc81d258e412582a2ba
+  FBSDKLoginKit: 7a1e411d46acc8834588eca437daf34de42e1d52
+  Firebase: 749a8ff4962f9d8c79dda1966de20f6f77583d67
+  FirebaseAuth: c9b3ff063c223d2841d97240af547ce511bce19a
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: 35747502d9e8c6ee217385ad04446c7c2aaf9c5c
-  FirebaseDatabase: 0621689f77528d62b47e1c06ca737c4c19275d1a
-  FirebaseFirestore: 58043a1c2d2c91efdaa8d8f385cdbaa2ce750cfe
-  FirebaseStorage: 3d22c041370593e639fba013d1eb698a8dae2881
+  FirebaseCore: ea2d1816723ef21492b8e9113303e1350db5e08c
+  FirebaseDatabase: 23acb0c53cd4d4070a427b60100b2e4aaa97c45d
+  FirebaseFirestore: 6f2b93b4f7bb8416628142763c91ccc00fa04c86
+  FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
   FirebaseUI: 810a4d85e15dfed08bfc6fc01358f2c64a8b341c
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
-  "gRPC-C++": 19eec1ffd34de29453f5fab5b4697ad0f240ad51
-  gRPC-Core: f4836515817c0eb479aeeb9cc27c91c4ba62a9f6
+  "gRPC-C++": e76441995900ac90e9bd98644ab4733f12521edf
+  gRPC-Core: 4028031ed2c5267cca0d846c876d8046b1ecb9b6
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48

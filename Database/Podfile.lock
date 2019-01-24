@@ -1,15 +1,15 @@
 PODS:
-  - Firebase/CoreOnly (5.15.0):
-    - FirebaseCore (= 5.1.10)
-  - Firebase/Database (5.15.0):
+  - Firebase/CoreOnly (5.16.0):
+    - FirebaseCore (= 5.2.0)
+  - Firebase/Database (5.16.0):
     - Firebase/CoreOnly
-    - FirebaseDatabase (= 5.0.4)
+    - FirebaseDatabase (= 5.1.0)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (5.1.10):
+  - FirebaseCore (5.2.0):
     - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseDatabase (5.0.4):
+  - FirebaseDatabase (5.1.0):
     - FirebaseAuthInterop (~> 1.0)
-    - FirebaseCore (~> 5.1)
+    - FirebaseCore (~> 5.2)
     - leveldb-library (~> 1.18)
   - GoogleUtilities/Environment (5.3.7)
   - GoogleUtilities/Logger (5.3.7):
@@ -29,10 +29,10 @@ SPEC REPOS:
     - leveldb-library
 
 SPEC CHECKSUMS:
-  Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
+  Firebase: 749a8ff4962f9d8c79dda1966de20f6f77583d67
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: 35747502d9e8c6ee217385ad04446c7c2aaf9c5c
-  FirebaseDatabase: 0621689f77528d62b47e1c06ca737c4c19275d1a
+  FirebaseCore: ea2d1816723ef21492b8e9113303e1350db5e08c
+  FirebaseDatabase: 23acb0c53cd4d4070a427b60100b2e4aaa97c45d
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
 
