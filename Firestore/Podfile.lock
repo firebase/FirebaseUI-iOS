@@ -1,52 +1,52 @@
 PODS:
-  - BoringSSL (10.0.6):
-    - BoringSSL/Implementation (= 10.0.6)
-    - BoringSSL/Interface (= 10.0.6)
-  - BoringSSL/Implementation (10.0.6):
-    - BoringSSL/Interface (= 10.0.6)
-  - BoringSSL/Interface (10.0.6)
-  - Firebase/CoreOnly (5.15.0):
-    - FirebaseCore (= 5.1.10)
-  - Firebase/Firestore (5.15.0):
+  - BoringSSL-GRPC (0.0.2):
+    - BoringSSL-GRPC/Implementation (= 0.0.2)
+    - BoringSSL-GRPC/Interface (= 0.0.2)
+  - BoringSSL-GRPC/Implementation (0.0.2):
+    - BoringSSL-GRPC/Interface (= 0.0.2)
+  - BoringSSL-GRPC/Interface (0.0.2)
+  - Firebase/CoreOnly (5.16.0):
+    - FirebaseCore (= 5.2.0)
+  - Firebase/Firestore (5.16.0):
     - Firebase/CoreOnly
-    - FirebaseFirestore (= 0.16.1)
+    - FirebaseFirestore (= 1.0.0)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (5.1.10):
+  - FirebaseCore (5.2.0):
     - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseFirestore (0.16.1):
+  - FirebaseFirestore (1.0.0):
     - FirebaseAuthInterop (~> 1.0)
-    - FirebaseCore (~> 5.1)
-    - FirebaseFirestore/abseil-cpp (= 0.16.1)
-    - "gRPC-C++ (= 0.0.5)"
+    - FirebaseCore (~> 5.2)
+    - FirebaseFirestore/abseil-cpp (= 1.0.0)
+    - "gRPC-C++ (= 0.0.6)"
     - leveldb-library (~> 1.20)
-    - nanopb (~> 0.3.8)
+    - nanopb (~> 0.3.901)
     - Protobuf (~> 3.1)
-  - FirebaseFirestore/abseil-cpp (0.16.1):
+  - FirebaseFirestore/abseil-cpp (1.0.0):
     - FirebaseAuthInterop (~> 1.0)
-    - FirebaseCore (~> 5.1)
-    - "gRPC-C++ (= 0.0.5)"
+    - FirebaseCore (~> 5.2)
+    - "gRPC-C++ (= 0.0.6)"
     - leveldb-library (~> 1.20)
-    - nanopb (~> 0.3.8)
+    - nanopb (~> 0.3.901)
     - Protobuf (~> 3.1)
   - GoogleUtilities/Environment (5.3.7)
   - GoogleUtilities/Logger (5.3.7):
     - GoogleUtilities/Environment
-  - "gRPC-C++ (0.0.5)":
-    - "gRPC-C++/Implementation (= 0.0.5)"
-    - "gRPC-C++/Interface (= 0.0.5)"
-  - "gRPC-C++/Implementation (0.0.5)":
-    - "gRPC-C++/Interface (= 0.0.5)"
-    - gRPC-Core (= 1.14.0)
+  - "gRPC-C++ (0.0.6)":
+    - "gRPC-C++/Implementation (= 0.0.6)"
+    - "gRPC-C++/Interface (= 0.0.6)"
+  - "gRPC-C++/Implementation (0.0.6)":
+    - "gRPC-C++/Interface (= 0.0.6)"
+    - gRPC-Core (= 1.17.0)
     - nanopb (~> 0.3)
-  - "gRPC-C++/Interface (0.0.5)"
-  - gRPC-Core (1.14.0):
-    - gRPC-Core/Implementation (= 1.14.0)
-    - gRPC-Core/Interface (= 1.14.0)
-  - gRPC-Core/Implementation (1.14.0):
-    - BoringSSL (~> 10.0)
-    - gRPC-Core/Interface (= 1.14.0)
+  - "gRPC-C++/Interface (0.0.6)"
+  - gRPC-Core (1.17.0):
+    - gRPC-Core/Implementation (= 1.17.0)
+    - gRPC-Core/Interface (= 1.17.0)
+  - gRPC-Core/Implementation (1.17.0):
+    - BoringSSL-GRPC (= 0.0.2)
+    - gRPC-Core/Interface (= 1.17.0)
     - nanopb (~> 0.3)
-  - gRPC-Core/Interface (1.14.0)
+  - gRPC-Core/Interface (1.17.0)
   - leveldb-library (1.20)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
@@ -60,7 +60,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - BoringSSL
+    - BoringSSL-GRPC
     - Firebase
     - FirebaseAuthInterop
     - FirebaseCore
@@ -73,14 +73,14 @@ SPEC REPOS:
     - Protobuf
 
 SPEC CHECKSUMS:
-  BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
-  Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
+  BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
+  Firebase: 749a8ff4962f9d8c79dda1966de20f6f77583d67
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: 35747502d9e8c6ee217385ad04446c7c2aaf9c5c
-  FirebaseFirestore: 58043a1c2d2c91efdaa8d8f385cdbaa2ce750cfe
+  FirebaseCore: ea2d1816723ef21492b8e9113303e1350db5e08c
+  FirebaseFirestore: 6f2b93b4f7bb8416628142763c91ccc00fa04c86
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
-  "gRPC-C++": 19eec1ffd34de29453f5fab5b4697ad0f240ad51
-  gRPC-Core: f4836515817c0eb479aeeb9cc27c91c4ba62a9f6
+  "gRPC-C++": e76441995900ac90e9bd98644ab4733f12521edf
+  gRPC-Core: 4028031ed2c5267cca0d846c876d8046b1ecb9b6
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
