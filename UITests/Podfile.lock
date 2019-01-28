@@ -135,9 +135,9 @@ PODS:
   - nanopb/encode (0.3.901)
   - OCMock (3.4.3)
   - Protobuf (3.6.1)
-  - SDWebImage (4.4.3):
-    - SDWebImage/Core (= 4.4.3)
-  - SDWebImage/Core (4.4.3)
+  - SDWebImage (4.4.4):
+    - SDWebImage/Core (= 4.4.4)
+  - SDWebImage/Core (4.4.4)
   - TwitterCore (3.2.0)
   - TwitterKit (3.4.2):
     - TwitterCore (>= 3.2.0)
@@ -200,7 +200,7 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-  SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
+  SDWebImage: c00ec18ab25d10e5ffac109b0f78d1b4341c9691
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
