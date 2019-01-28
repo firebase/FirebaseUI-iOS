@@ -16,9 +16,9 @@ PODS:
     - GoogleUtilities/Environment
   - GTMSessionFetcher/Core (1.2.1)
   - OCMock (3.4.3)
-  - SDWebImage (4.4.3):
-    - SDWebImage/Core (= 4.4.3)
-  - SDWebImage/Core (4.4.3)
+  - SDWebImage (4.4.4):
+    - SDWebImage/Core (= 4.4.4)
+  - SDWebImage/Core (4.4.4)
 
 DEPENDENCIES:
   - Firebase/Storage
@@ -44,7 +44,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
-  SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
+  SDWebImage: c00ec18ab25d10e5ffac109b0f78d1b4341c9691
 
 PODFILE CHECKSUM: 520bda42321ed30976c6840784823b80f3cb081a
 
