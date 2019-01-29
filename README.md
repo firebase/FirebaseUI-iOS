@@ -6,7 +6,7 @@ Additionally, FirebaseUI simplifies Firebase authentication by providing easy to
 
 FirebaseUI clients are also available for [Android](https://github.com/firebase/FirebaseUI-Android) and [web](https://github.com/firebase/firebaseui-web).
 
-![](https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/samples/demo.gif)
+![](https://raw.githubusercontent.com/firebase/FirebaseUI-iOS/master/demos/demo.gif)
 
 ## Installing FirebaseUI for iOS
 
@@ -86,7 +86,7 @@ Alternatively you can use `pod try FirebaseUI` to install the Objective-C or Swi
 You'll have to configure your Xcode project in order to run the samples.
 
 1. Your Xcode project should contain a `GoogleService-Info.plist`, downloaded from [Firebase console](https://console.firebase.google.com) when you add your app to a Firebase project.<br>
-Copy the `GoogleService-Info.plist` into the sample project folder (`samples/obj-c/GoogleService-Info.plist` or `samples/swift/GoogleService-Info.plist`).
+Copy the `GoogleService-Info.plist` into the sample project folder (`demos/obj-c/GoogleService-Info.plist` or `demos/swift/GoogleService-Info.plist`).
 
 1. Update URL Types.<br>
 Go to `Project Settings -> Info tab -> Url Types` and update values for:
