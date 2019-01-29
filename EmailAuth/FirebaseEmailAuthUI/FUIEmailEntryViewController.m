@@ -55,18 +55,6 @@ static NSString *const kEmailCellAccessibilityID = @"EmailCellAccessibilityID";
  */
 static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID";
 
-/** @var kTroubleGettingEmailMessage
- @brief The message used in trouble getting email alert view.
- */
-static NSString *const kTroubleGettingEmailMessage =
-    @"Try these common fixes: \n \
-    - Check if the email was marked as spam or filtered.\n \
-    - Check your internet connection.\n \
-    - Check that you did not misspell your email.\n \
-    - Check that your inbox space is not running out or other inbox settings related issues.\n \
-    If the steps above didn't work, you can resend the email.\
-    Note that this will deactivate the link in the older email.";
-
 @interface FUIEmailEntryViewController () <UITableViewDataSource, UITextFieldDelegate>
 @end
 
@@ -237,30 +225,29 @@ static NSString *const kTroubleGettingEmailMessage =
     [self decrementActivity];
 
     if (error) {
-      [FUIAuthBaseViewController showAlertWithTitle:@"Error"
+      [FUIAuthBaseViewController showAlertWithTitle:FUILocalizedString(kStr_Error)
                                             message:error.description
                            presentingViewController:self];
     } else {
       NSString *successMessage =
-          [NSString stringWithFormat: @"A sign-in email with additional instrucitons was sent to "
-                                      "%@. Check your email to complete sign-in.", email];
-      [FUIAuthBaseViewController showAlertWithTitle:@"Sign-in email Sent"
+          [NSString stringWithFormat: FUILocalizedString(kStr_EmailSentConfirmationMessage), email];
+      [FUIAuthBaseViewController showAlertWithTitle:FUILocalizedString(kStr_SignInEmailSent)
                                             message:successMessage
-                                        actionTitle:@"Trouble getting email?"
+                                        actionTitle:FUILocalizedString(kStr_TroubleGettingEmailTitle)
                                       actionHandler:^{
                                         [FUIAuthBaseViewController
-                                           showAlertWithTitle:@"Trouble getting emails?"
-                                                      message:kTroubleGettingEmailMessage
-                                                  actionTitle:@"Resend"
+                                           showAlertWithTitle:FUILocalizedString(kStr_TroubleGettingEmailTitle)
+                                                      message:FUILocalizedString(kStr_TroubleGettingEmailMessage)
+                                                  actionTitle:FUILocalizedString(kStr_Resend)
                                                 actionHandler:^{
                                                   [self sendSignInLinkToEmail:email];
-                                                } dismissTitle:@"Back"
+                                                } dismissTitle:FUILocalizedString(kStr_Back)
                                                dismissHandler:^{
                                                  [self.navigationController popToRootViewControllerAnimated:YES];
                                                }
                                      presentingViewController:self];
                                       }
-                                       dismissTitle:@"Back"
+                                       dismissTitle:FUILocalizedString(kStr_Back)
                                      dismissHandler:^{
                                        [self.navigationController popToRootViewControllerAnimated:YES];
                                      }

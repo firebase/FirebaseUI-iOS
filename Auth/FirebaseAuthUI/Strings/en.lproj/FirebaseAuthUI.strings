@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Save";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Send";
+
+/* Resend button title. */
+"Resend" = "Resend";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Email";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Choose password";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Trouble signing in?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Confirm Email";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Signed in!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Trouble getting emails?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Try these common fixes: \n - Check if the email was marked as spam or filtered.\n - Check your internet connection.\n - Check that you did not misspell your email.\n - Check that your inbox space is not running out or other inbox settings related issues.\n If the steps above didn't work, you can resend the email. Note that this will deactivate the link in the older email.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "A sign-in email with additional instrucitons was sent to %@. Check your email to complete sign-in.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Sign-in email Sent";
