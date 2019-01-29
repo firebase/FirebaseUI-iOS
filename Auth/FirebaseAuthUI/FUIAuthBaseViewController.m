@@ -236,7 +236,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
                            message:message
                        actionTitle:nil
                      actionHandler:nil
-                      dismissTitle:@"OK"
+                      dismissTitle:FUILocalizedString(kStr_OK)
                     dismissHandler:nil
           presentingViewController:presentingViewController];
 }

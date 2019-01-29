@@ -167,7 +167,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       }
     }
 
-    [[self class] showAlertWithTitle:@"Signed in!"
+    [[self class] showAlertWithTitle:FUILocalizedString(kStr_SignedIn)
                              message:nil
                          actionTitle:nil
                        actionHandler:nil
