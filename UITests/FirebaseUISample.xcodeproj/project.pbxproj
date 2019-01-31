@@ -863,8 +863,6 @@
 					"\"leveldb\"",
 					"-framework",
 					"\"nanopb\"",
-					"-framework",
-					"\"openssl\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseUISampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -960,8 +958,6 @@
 					"\"leveldb\"",
 					"-framework",
 					"\"nanopb\"",
-					"-framework",
-					"\"openssl\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseUISampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
