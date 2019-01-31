@@ -168,10 +168,11 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
             return;
         }
       }
-      [self dismissNavigationControllerAnimated:true completion:^{
-          if (self->_onDismissCallback) {
-              self->_onDismissCallback(authResult, error);
-          }
+
+      [self dismissNavigationControllerAnimated:YES completion:^{
+        if (self->_onDismissCallback) {
+          self->_onDismissCallback(authResult, error);
+        }
       }];
     };
 
