@@ -249,7 +249,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                       }
                                        dismissTitle:FUILocalizedString(kStr_Back)
                                      dismissHandler:^{
-                                       [self.navigationController popToRootViewControllerAnimated:YES];
+                                       [self.navigationController dismissViewControllerAnimated:YES
+                                                                                     completion:nil];
                                      }
                            presentingViewController:self];
     }

@@ -375,7 +375,7 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
             FIRActionCodeSettings *actionCodeSettings = [[FIRActionCodeSettings alloc] init];
             actionCodeSettings.URL = [NSURL URLWithString:@"https://fb-sa-1211.appspot.com"];
             actionCodeSettings.handleCodeInApp = YES;
-            [actionCodeSettings setAndroidPackageName:@"com.example.android"
+            [actionCodeSettings setAndroidPackageName:@"com.firebase.uidemo"
                                 installIfNotAvailable:NO
                                        minimumVersion:@"12"];
 
