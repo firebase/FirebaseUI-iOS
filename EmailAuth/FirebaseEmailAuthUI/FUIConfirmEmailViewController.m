@@ -164,6 +164,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
         case FIRAuthErrorCodeTooManyRequests:
           [self showAlertWithMessage:FUILocalizedString(kStr_SignInTooManyTimesError)];
           return;
+        default:
+          [self showAlertWithMessage:error.description];
+          return;
       }
     }
 
