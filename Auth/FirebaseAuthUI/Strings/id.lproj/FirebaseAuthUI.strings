@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Simpan";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Kirim";
+
+/* Resend button title. */
+"Resend" = "Kirim ulang";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Email";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Pilih sandi";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Terjadi masalah saat login?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Konfirmasi Email";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Telah login";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Ada masalah dalam mendapatkan email?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Cobalah perbaikan umum berikut: \n - Periksa apakah email ditandai sebagai spam atau difilter.\n - Periksa koneksi internet Anda.\n - Pastikan Anda tidak salah mengeja email Anda.\n - Pastikan masih ada ruang di kotak masuk Anda, atau periksa masalah terkait setelan kotak masuk lainnya.\n Jika langkah-langkah di atas tidak memecahkan masalah, Anda dapat mengirim ulang email tersebut. Perlu diperhatikan bahwa tindakan ini akan menonaktifkan link di email lama.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Email login dengan petunjuk tambahan telah dikirim ke %@. Buka email Anda untuk menyelesaikan proses login.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Email Login Terkirim";

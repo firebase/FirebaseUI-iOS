@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "सहेजें";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "भेजें";
+
+/* Resend button title. */
+"Resend" = "फिर से भेजें";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "ईमेल";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "पासवर्ड चुनें";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "प्रवेश करने में समस्या?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "ईमेल की पुष्टि करें";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "साइन-इन हैं!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "क्या ईमेल मिलने में दिक्कत हो रही है?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "समस्या सुलझाने के ये सामान्य तरीके आज़माकर देखें: \n - देख लें कि ईमेल स्पैम फ़ोल्डर में तो नहीं चला गया या फ़िल्टर तो नहीं हो गया.\n - देख लें कि आपका इंटरनेट कनेक्शन चालू है या नहींं.\n - देख लें कि आपने ईमेल पते की वर्तनी (स्पेलिंग) गलत तो नहीं लिखी है.\n - देख लें कि आपका इनबॉक्स भर तो नहीं गया या इनबॉक्स सेटिंग से जुड़ी दूसरी समस्याएं तो नहीं हैं.\n अगर ऊपर दिए गए सुझावों से काम नहीं बनता है, तो आप फिर से ईमेल भेज सकते हैं. ध्यान दें कि ऐसा करने से पुराने ईमेल में भेजा गया लिंक काम करना बंद कर देगा.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "ज़्यादा निर्देशों वाला एक साइन-इन ईमेल %@ पर भेजा गया है. साइन-इन पूरा करने के लिए अपना ईमेल देखें.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "साइन-इन करने के लिंक वाला ईमेल भेज दिया गया";

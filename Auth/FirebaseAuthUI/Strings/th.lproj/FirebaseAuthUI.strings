@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "บันทึก";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "ส่ง";
+
+/* Resend button title. */
+"Resend" = "ส่งซ้ำ";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "อีเมล";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "ตั้งรหัสผ่าน";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "หากพบปัญหาในการลงชื่อเช้าใช้";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "ยืนยันอีเมล";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "ลงชื่อเข้าใช้แล้ว";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "มีปัญหาในการรับอีเมลใช่ไหม";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "ลองใช้วิธีแก้ไขทั่วไปเหล่านี้ \n - ตรวจสอบว่าอีเมลดังกล่าวมีการทำเครื่องหมายว่าเป็นสแปมหรือผ่านการกรอง\n - ตรวจสอบการเชื่อมต่ออินเทอร์เน็ต\n - ตรวจสอบว่าสะกดชื่ออีเมลถูกต้องแล้ว\n - ตรวจสอบว่ายังมีพื้นที่เหลือในกล่องจดหมายหรือไม่มีปัญหาอื่นๆ ที่เกี่ยวข้องกับการตั้งค่ากล่องจดหมาย\n คุณอาจส่งอีเมลอีกครั้งได้ หากขั้นตอนข้างต้นไม่ช่วยแก้ไขปัญหา โปรดทราบว่าการกระทำดังกล่าวจะเป็นการปิดใช้งานลิงก์ในอีเมลเก่า";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "ระบบได้ส่งอีเมลลงชื่อเข้าใช้พร้อมวิธีการเพิ่มเติมไปยัง %@ แล้ว โปรดตรวจสอบอีเมลเพื่อลงชื่อเข้าใช้";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "ส่งอีเมลลงชื่อเข้าใช้แล้ว";

@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "حفظ";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "إرسال";
+
+/* Resend button title. */
+"Resend" = "إعادة إرسال الرسالة";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "البريد الإلكتروني";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "اختيار كلمة المرور";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "هل تواجه مشكلة في تسجيل الدخول؟";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "تأكيد عنوان البريد الإلكتروني";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "تمّ تسجيل الدخول.";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "هل تواجه مشكلة في استلام الرسائل الإلكترونية؟";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "يمكنك تجربة الحلول الشائعة التالية: \n - التأكّد ممّا إذا تمّ وضع علامة على الرسالة الإلكترونية بأنها \"غير مرغوب فيها\" أو نقلها تلقائيًا إلى مجلّد آخر\n - التحقّق من اتصال الإنترنت\n - التأكّد من كتابة عنوان البريد الإلكتروني بالشكل الصحيح\n - التأكّد من توفّر مساحة فارغة في البريد الوارد أو من عدم حدوث أي مشاكل أخرى في إعدادات البريد الوارد\n إذا لم تنجح الخطوات أعلاه، يمكنك إعادة إرسال الرسالة الإلكترونية. ستؤدي هذه الخطوة إلى إلغاء الرابط المضمّن في الرسالة السابقة.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "تمّ إرسال رسالة إلكترونية لتسجيل الدخول تتضمّن تعليمات إضافية إلى %@. يُرجى التحقق من بريدك الإلكتروني لإكمال عملية تسجيل الدخول.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "تمّ إرسال رسالة إلكترونية لتسجيل الدخول";

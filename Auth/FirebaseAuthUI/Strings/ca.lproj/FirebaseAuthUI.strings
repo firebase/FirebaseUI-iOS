@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Desa";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Envia";
+
+/* Resend button title. */
+"Resend" = "Torna a enviar";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Adreça electrònica";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Tria una contrasenya";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "No pots iniciar la sessió?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Confirma l'adreça electrònica";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "S'ha iniciat la sessió";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Tens problemes per rebre correus electrònics?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Prova aquestes solucions habituals: \n - Comprova si el correu electrònic s'ha marcat com a correu brossa o s'ha filtrat.\n - Comprova la connexió a Internet.\n - Comprova que hagis escrit correctament la teva adreça electrònica.\n - Comprova que tinguis espai a la safata d'entrada i altres problemes relacionats amb la configuració de la safata d'entrada.\n - Si els passos anteriors no t'han servit d'ajuda, pots tornar a enviar el correu electrònic. Tingues en compte que l'enllaç del correu anterior es desactivarà.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "S'ha enviat un correu electrònic d'inici de sessió amb més instruccions a %@. Comprova si l'has rebut per completar l'inici de sessió.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "S'ha enviat el correu electrònic d'inici de sessió";

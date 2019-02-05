@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Speichern";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Senden";
+
+/* Resend button title. */
+"Resend" = "Erneut senden";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "E-Mail-Adresse";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Passwort auswählen";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Probleme bei der Anmeldung?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "E-Mail-Adresse bestätigen";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Angemeldet.";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Probleme beim Empfangen von E-Mails?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Versuchen Sie Folgendes: \n – Überprüfen Sie, ob die E-Mail als Spam markiert oder herausgefiltert wurde.\n – Überprüfen Sie Ihre Internetverbindung.\n – Überprüfen Sie die Schreibweise Ihrer E-Mail-Adresse.\n – Überprüfen Sie den Speicherplatz und weitere Einstellungen Ihres Posteingangs, die Probleme bereiten könnten.\n Sollte das Problem nach Ausführung der obigen Schritte weiterhin bestehen, können Sie sich die Anmelde-E-Mail noch einmal zusenden lassen. Hinweis: Der Link in der vorhergehenden E-Mail ist dann nicht mehr gültig.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Wir haben eine Anmelde-E-Mail mit zusätzlichen Informationen an %@ gesendet. Bitte öffnen Sie die E-Mail, um die Anmeldung abzuschließen.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Anmelde-E-Mail gesendet";

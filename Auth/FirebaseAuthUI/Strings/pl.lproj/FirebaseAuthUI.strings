@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Zapisz";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Wyślij";
+
+/* Resend button title. */
+"Resend" = "Wyślij ponownie";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Adres e-mail";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Wybierz hasło";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Masz problem z zalogowaniem się?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Potwierdź adres e-mail";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Zalogowano";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "E-maile nie dotarły?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Wypróbuj standardowe rozwiązania: \n – Sprawdź, czy e-mail nie został oznaczony jako spam lub objęty którymś z filtrów.\n – Sprawdź połączenie z internetem.\n – Sprawdź, czy adres e-mail jest wpisany poprawnie.\n – Sprawdź, czy nie kończy się miejsce w skrzynce odbiorczej oraz czy nie ma innych problemów z ustawieniami skrzynki.\n Jeżeli wykonanie powyższych czynności nie dało żadnych rezultatów, możesz wysłać e-maila jeszcze raz. Link wysłany w poprzedniej wiadomości przestanie być aktywny.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Na adres %@ wysłaliśmy e-maila umożliwiającego zalogowanie się z dodatkowymi instrukcjami. Sprawdź pocztę, by się zalogować.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "E-mail umożliwiający zalogowanie się został wysłany";

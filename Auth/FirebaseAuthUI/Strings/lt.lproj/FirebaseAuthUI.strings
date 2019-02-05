@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Išsaugoti";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Siųsti";
+
+/* Resend button title. */
+"Resend" = "Siųsti iš naujo";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "El. paštas";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Pasirinkite slaptažodį";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Kyla problemų prisijungiant?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Patvirtinkite el. paštą";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Prisijungta.";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Negaunate el. laiškų?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Išbandykite šiuos dažnai kylančių problemų sprendimo būdus: \n – patikrinkite, ar el. laiškas nebuvo pažymėtas kaip šlamštas arba filtruotas;\n – patikrinkite interneto ryšį;\n – patikrinkite, ar nurodėte tikslų el. pašto adresą;\n – patikrinkite, ar gautiesiems skirta saugyklos vieta nepasibaigė arba kitas su gautųjų nustatymais susijusias problemas.\n Jei ankstesni veiksmai nebuvo naudingi, galite iš naujo išsiųsti el. laišką. Atkreipkite dėmesį, kad šiuo veiksmu bus išaktyvinta ankstesniame el. laiške pateikta nuoroda.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Prisijungimo el. laiškas su papildomomis instrukcijomis išsiųstas adresu %@. Patikrinkite el. paštą, kad užbaigtumėte prisijungimą.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Prisijungimo el. laiškas išsiųstas";

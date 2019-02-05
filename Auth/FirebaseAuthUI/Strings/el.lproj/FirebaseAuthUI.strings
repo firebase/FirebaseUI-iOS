@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Αποθήκευση";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Αποστολή";
+
+/* Resend button title. */
+"Resend" = "Επανάληψη αποστολής";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Ηλεκτρονικό ταχυδρομείο";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Επιλέξτε κωδικό πρόσβασης";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Πρόβλημα σύνδεσης;";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Επιβεβαίωση διεύθυνσης ηλεκτρονικού ταχυδρομείου";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Συνδέθηκε!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Αντιμετωπίζετε πρόβλημα με τη λήψη των μηνυμάτων ηλεκτρονικού ταχυδρομείου;";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Δοκιμάστε αυτές τις συνήθεις λύσεις: \n - Ελέγξτε αν το μήνυμα ηλεκτρονικού ταχυδρομείου επισημάνθηκε ως ανεπιθύμητο ή έχει φιλτραριστεί.\n - Ελέγξτε τη σύνδεσή σας στο διαδίκτυο.\n - Βεβαιωθείτε ότι δεν έχετε γράψει λάθος τη διεύθυνση ηλεκτρονικού ταχυδρομείου.\n - Βεβαιωθείτε ότι δεν έχει γεμίσει ο χώρος εισερχομένων ή ότι δεν υπάρχουν άλλα προβλήματα που σχετίζονται με τις ρυθμίσεις εισερχομένων.\n Αν τα παραπάνω βήματα δεν λειτούργησαν, μπορείτε να στείλετε ξανά το μήνυμα ηλεκτρονικού ταχυδρομείου. Έχετε υπόψη ότι με αυτήν την ενέργεια, ο σύνδεσμος στο παλιότερο μήνυμα ηλεκτρονικού ταχυδρομείου θα απενεργοποιηθεί.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Ένα μήνυμα ηλεκτρονικού ταχυδρομείου σύνδεσης με πρόσθετες οδηγίες στάλθηκε στη διεύθυνση %@. Ελέγξτε τη διεύθυνση ηλεκτρονικού ταχυδρομείου για να ολοκληρώσετε τη σύνδεση.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Το μήνυμα ηλεκτρονικού ταχυδρομείου σύνδεσης στάλθηκε";

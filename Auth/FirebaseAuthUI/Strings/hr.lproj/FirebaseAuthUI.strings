@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Spremi";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Pošalji";
+
+/* Resend button title. */
+"Resend" = "Pošalji ponovo";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "E-adresa";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Odaberite zaporku";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Problem s prijavom?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Potvrdite e-adresu";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Prijavljeni ste!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Ne dobivate e-poruke?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Isprobajte ova uobičajena rješenja: \n - Provjerite je li e-poruka filtrirana ili označena kao neželjena pošta.\n - Provjerite internetsku vezu.\n - Provjerite jeste li točno napisali e-adresu.\n - Provjerite ima li dovoljno prostora u vašem pretincu pristigle pošte ili je došlo do drugih problema povezanih s postavkama pretinca pristigle pošte.\n Ako se problem ne riješi pomoću koraka iznad, možete ponovo poslati e-poruku. Time će se deaktivirati veza u prethodnoj e-poruci.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "E-poruka za prijavu s dodatnim uputama poslana je na adresu %@. Provjerite e-poštu da biste dovršili prijavu.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "E-poruka za prijavu poslana";
