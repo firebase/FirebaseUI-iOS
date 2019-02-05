@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (UIImage *)icon {
-  return [FUIAuthUtils imageNamed:@"ic_anonymous" fromBundleNameOrNil:FUIAuthBundleName];
+  return [FUIAuthUtils imageNamed:@"ic_anonymous" fromBundleNameOrNil:kBundleName];
 }
 
 - (UIColor *)buttonBackgroundColor {

@@ -53,7 +53,7 @@
 "PasswordRecoveryMessage" = "इस ईमेल पर भेजे गए निर्देश पाएं जो आपको अपना पासवर्ड रीसेट करना बताएंगे.";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryEmailSentTitle" = "अपना ईमेल जांचें";
+"PasswordRecoveryEmailSentTitle" = "अपना ईमेल जाँचें";
 
 /* Message displayed when the email for password recovery has been sent. */
 "PasswordRecoveryEmailSentMessage" = "अपना पासवर्ड फिर से पाने के लिए %@ पर भेजे गए निर्देशों का पालन करें.";
@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "पासवर्ड चुनें";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "%@ टैप करके आप यह बताते हैं कि आप %@ से सहमत हैं.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "सेवा की शर्तें";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "निजता नीति";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "जारी रखकर, आप यह बताते हैं कि आप हमारे %@ और %@ को स्वीकार करते हैं.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "कोई दूसरा खाता पहले से ही इस ईमेल पते का उपयोग कर रहा है.";

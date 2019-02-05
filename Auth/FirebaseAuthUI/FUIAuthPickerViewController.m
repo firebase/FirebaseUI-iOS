@@ -40,14 +40,23 @@ static const CGFloat kSignInButtonHeight = 40.0f;
 static const CGFloat kSignInButtonVerticalMargin = 24.0f;
 
 /** @var kButtonContainerBottomMargin
-    @brief The magin between sign in buttons and the bottom of the screen.
+    @brief The magin between sign in buttons and the bottom of the content view.
  */
 static const CGFloat kButtonContainerBottomMargin = 56.0f;
+
+/** @var kButtonContainerTopMargin
+    @brief The margin between sign in buttons and the top of the content view.
+ */
+static const CGFloat kButtonContainerTopMargin = 16.0f;
 
 @implementation FUIAuthPickerViewController {
   UIView *_buttonContainerView;
 
   IBOutlet FUIPrivacyAndTermsOfServiceView *_privacyPolicyAndTOSView;
+
+  IBOutlet UIView *_contentView;
+  
+  IBOutlet UIScrollView *_scrollView;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
@@ -91,7 +100,13 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
       kSignInButtonHeight * numberOfButtons + kSignInButtonVerticalMargin * (numberOfButtons);
   CGRect buttonContainerViewFrame = CGRectMake(0, 0, kSignInButtonWidth, buttonContainerViewHeight);
   _buttonContainerView = [[UIView alloc] initWithFrame:buttonContainerViewFrame];
-  [self.view addSubview:_buttonContainerView];
+  if (_scrollView) {
+    [_contentView addSubview:_buttonContainerView];
+  } else {
+    // For backward compatibility. The old auth picker view does not have a scroll view and its
+    // customized class put the button container view directly into self.view.
+    [self.view addSubview:_buttonContainerView];
+  }
 
   CGRect buttonFrame = CGRectMake(0, 0, kSignInButtonWidth, kSignInButtonHeight);
   for (id<FUIAuthProvider> providerUI in self.authUI.providers) {
@@ -108,17 +123,52 @@ static const CGFloat kButtonContainerBottomMargin = 56.0f;
 
   _privacyPolicyAndTOSView.authUI = self.authUI;
   [_privacyPolicyAndTOSView useFullMessage];
+  [_contentView bringSubviewToFront:_privacyPolicyAndTOSView];
 }
 
 - (void)viewDidLayoutSubviews {
   [super viewDidLayoutSubviews];
 
-  CGFloat distanceFromCenterToBottom =
-      CGRectGetHeight(_buttonContainerView.frame) / 2.0f + kButtonContainerBottomMargin;
-  CGFloat centerY = CGRectGetHeight(self.view.bounds) - distanceFromCenterToBottom;
-  // Compensate for bounds adjustment if any.
-  centerY += self.view.bounds.origin.y;
-  _buttonContainerView.center = CGPointMake(self.view.center.x, centerY);
+  // For backward compatibility. The old auth picker view does not have a scroll view and its
+  // customized class put the button container view directly into self.view. The following is the
+  // old layout behavior.
+  if (!_scrollView) {
+    CGFloat distanceFromCenterToBottom =
+        CGRectGetHeight(_buttonContainerView.frame) / 2.0f + kButtonContainerBottomMargin;
+    CGFloat centerY = CGRectGetHeight(self.view.bounds) - distanceFromCenterToBottom;
+    // Compensate for bounds adjustment if any.
+    centerY += self.view.bounds.origin.y;
+    _buttonContainerView.center = CGPointMake(self.view.center.x, centerY);
+    return;
+  }
+  
+  CGFloat buttonContainerHeight = CGRectGetHeight(_buttonContainerView.frame);
+  CGFloat buttonContainerWidth = CGRectGetWidth(_buttonContainerView.frame);
+  CGFloat contentViewHeight = kButtonContainerTopMargin +
+      buttonContainerHeight + kButtonContainerBottomMargin;
+  CGFloat contentViewWidth = CGRectGetWidth(self.view.bounds);
+  _scrollView.frame = self.view.frame;
+  CGFloat scrollViewHeight;
+  if (@available(iOS 11.0, *)) {
+    scrollViewHeight = CGRectGetHeight(_scrollView.frame) - _scrollView.safeAreaInsets.top;
+  } else {
+    scrollViewHeight = CGRectGetHeight(_scrollView.frame)
+        - CGRectGetHeight(self.navigationController.navigationBar.frame)
+        - CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+  }
+  CGFloat contentViewY = scrollViewHeight - contentViewHeight;
+  if (contentViewY < 0) {
+    contentViewY = 0;
+  }
+  _contentView.frame = CGRectMake(0, contentViewY, contentViewWidth, contentViewHeight);
+  _scrollView.contentSize = CGSizeMake(contentViewWidth, contentViewY + contentViewHeight);
+  CGFloat buttonContainerLeftMargin = (contentViewWidth - buttonContainerWidth) / 2.0f;
+  _buttonContainerView.frame =CGRectMake(buttonContainerLeftMargin,
+                                         kButtonContainerTopMargin,
+                                         buttonContainerWidth,
+                                         buttonContainerHeight);
+  CGFloat privacyViewHeight = CGRectGetHeight(_privacyPolicyAndTOSView.frame);
+  _privacyPolicyAndTOSView.frame = CGRectMake(0, contentViewHeight - privacyViewHeight, contentViewWidth, privacyViewHeight);
 }
 
 #pragma mark - Actions

@@ -2,13 +2,13 @@
 "AuthPickerTitle" = "خوش‌ آمدید";
 
 /* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"SignInWithEmail" = "ورود به سیستم با رایانامه";
+"SignInWithEmail" = "ورود به سیستم با ایمیل ";
 
 /* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EnterYourEmail" = "رایانامه‌تان را وارد کنید";
 
 /* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"InvalidEmailError" = "این آدرس رایانامه درست نیست.";
+"InvalidEmailError" = "این نشانی ایمیل  درست نیست.";
 
 /* Error message displayed when the app cannot authenticate user's account. */
 "CannotAuthenticateError" = "این برنامه از این نوع حساب‌ پشتیبانی نمی‌کند";
@@ -29,13 +29,13 @@
 "InvalidPasswordError" = "فیلد گذرواژه نمی‌تواند خالی باشد.";
 
 /* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"WrongPasswordError" = "رایانامه و گذرواژه وارد‌شده با هم مطابقت ندارند.";
+"WrongPasswordError" = "ایمیل  و گذرواژه وارد‌شده با هم مطابقت ندارند.";
 
 /* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UserNotFoundError" = "این آدرس رایانامه با هیچ حسابی مطابقت ندارد.";
+"UserNotFoundError" = "این نشانی ایمیل  با هیچ حسابی مطابقت ندارد.";
 
 /* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AccountDisabledError" = "این آدرس رایانامه متعلق به حسابی است که غیرفعال شده است.";
+"AccountDisabledError" = "این نشانی ایمیل  متعلق به حسابی است که غیرفعال شده است.";
 
 /* Error message displayed after user trying to sign in too many times. */
 "SignInTooManyTimesError" = "دفعات زیادی گذرواژه اشتباه وارد کرده‌اید. پس از چند دقیقه دوباره امتحان کنید.";
@@ -44,13 +44,13 @@
 "CantFindProvider" = "قادر به پیدا کردن ارائه‌دهنده %@ نیست.";
 
 /* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailsDontMatch" = "رایانامه‌ها با هم مطابقت ندارند";
+"EmailsDontMatch" = "ایمیل‌ها با هم مطابقت ندارند";
 
 /* Title for password recovery screen. */
 "PasswordRecoveryTitle" = "بازیابی گذرواژه";
 
 /* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"PasswordRecoveryMessage" = "دستورالعمل نحوه بازنشانی گذرواژه‌تان به این رایانامه ارسال شده است، آن را ببینید.";
+"PasswordRecoveryMessage" = "دستورالعمل نحوه بازنشانی گذرواژه‌تان به این ایمیل  ارسال شده است، آن را ببینید.";
 
 /* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "PasswordRecoveryEmailSentTitle" = "رایانامه‌تان را بررسی کنید";
@@ -67,20 +67,23 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "یک گذرواژه انتخاب کنید";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "با ضربه زدن روی %@، موافقتتان را با %@ اعلام می‌کنید.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "شرایط خدمات";
 
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "خط‌مشی رازداری";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "درصورت ادامه‌ دادن، موافقتتان را با %@ و %@ ما اعلام می‌کنید.";
+
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EmailAlreadyInUseError" = "قبلاً از این آدرس رایانامه برای حساب دیگری استفاده شده است.";
+"EmailAlreadyInUseError" = "قبلاً از این نشانی ایمیل  برای حساب دیگری استفاده شده است.";
 
 /* Error message displayed when the password is too weak. */
 "WeakPasswordError" = "گذرواژه قوی باید حداقل شامل ۶ نویسه‌ و ترکیبی از حروف و اعداد باشد.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
-"SignUpTooManyTimesError" = "تعداد زیادی درخواست حساب از آدرس IP شما در حال ارسال است. پس از چند دقیقه دوباره امتحان کنید.";
+"SignUpTooManyTimesError" = "تعداد زیادی درخواست حساب از نشانی IP شما درحال ارسال است. پس از چند دقیقه دوباره امتحان کنید.";
 
 /* Message to explain to the user that password is needed for an account with this email address. */
 "PasswordVerificationMessage" = "قبلاً از %@ برای ورود به سیستم استفاده کرده‌اید. گذرواژه این حساب را وارد کنید.";
@@ -104,7 +107,7 @@
 "Send" = "ارسال";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"Email" = "رایانامه";
+"Email" = "ایمیل ";
 
 /* Label next to a password text field. */
 "Password" = "گذرواژه";
@@ -131,7 +134,7 @@
 "AS_Name" = "نام";
 
 /* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"AS_Email" = "رایانامه";
+"AS_Email" = "ایمیل ";
 
 /* Account Settings cell title Add Password. */
 "AS_AddPassword" = "افزودن گذرواژه";
@@ -167,13 +170,13 @@
 "DeleteAccountControllerTitle" = "حذف حساب";
 
 /* Alert message shown before account deletion. */
-"ActionCantBeUndone" = "این اقدام واگردپذیر نیست.";
+"ActionCantBeUndone" = "این کار واگردشدنی نیست.";
 
 /* Button title for unlinking account action. */
 "UnlinkAction" = "لغو پیوند";
 
 /* Controller title shown for unlinking account action. */
-"UnlinkTitle" = "حساب پیوندشده";
+"UnlinkTitle" = "حساب پیوندی";
 
 /* Alert title shown before unlinking action. */
 "UnlinkConfirmationTitle" = "پیوند حساب لغو شود؟";
@@ -185,13 +188,13 @@
 "UnlinkConfirmationActionTitle" = "لغو پیوند حساب";
 
 /* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"UpdateEmailAlertMessage" = "برای تغییر آدرس رایانامه مرتبط با حسابتان باید دوباره وارد سیستم شوید.";
+"UpdateEmailAlertMessage" = "برای تغییر نشانی ایمیل  مرتبط با حسابتان باید دوباره وارد سیستم شوید.";
 
 /* Alert action message shown before confirmation of updating email action. */
 "UpdateEmailVerificationAlertMessage" = "برای تغییر گذرواژه‌‌، ابتدا باید گذرواژه کنونی‌تان را وارد کنید.";
 
 /* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"EditEmailTitle" = "ویرایش رایانامه";
+"EditEmailTitle" = "ویرایش ایمیل ";
 
 /* Controller title shown when editing account name. */
 "EditNameTitle" = "ویرایش نام";
@@ -212,7 +215,7 @@
 "EditPasswordTitle" = "تغییر گذرواژه";
 
 /* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
-"ProviderTitlePassword" = "ایمیل";
+"ProviderTitlePassword" = "ایمیل ";
 
 /* Title of Google provider */
 "ProviderTitleGoogle" = "Google‏";

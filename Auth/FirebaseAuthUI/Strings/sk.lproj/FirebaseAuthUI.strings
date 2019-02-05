@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Zvoľte si heslo";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Klepnutím na tlačidlo %@ vyjadrujete súhlas s dokumentom %@.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Zmluvné podmienky";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Pravidlá ochrany súkromia";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Pokračovaním vyjadrujete súhlas s dokumentmi %@ a %@.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "E-mailovú adresu už využíva iný účet.";

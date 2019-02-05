@@ -67,11 +67,14 @@
 /* Placeholder for the password text field in a sign up form. */
 "ChoosePassword" = "Escolha a senha";
 
-/* A notice displayed when the user is creating a new account. The first placeholder is a button label (ex. Next). The second placeholder is "Terms of Service". */
-"TermsOfServiceNotice" = "Ao tocar em %@, você indica que concordou com os %@.";
-
 /* Text linked to a web page with the Terms of Service content. */
 "TermsOfService" = "Termos de Serviço";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Política de privacidade";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Ao continuar, você concorda com nossos %@ e a %@.";
 
 /* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "EmailAlreadyInUseError" = "O endereço de e-mail já está sendo usado em outra conta.";
@@ -158,7 +161,7 @@
 "DeleteAccountBody" = "Esta ação apagará todos os dados associados à sua conta e não poderá ser desfeita. Faça login novamente para concluir a ação";
 
 /* Explanation message shown before deleting account. */
-"DeleteAccountConfirmationMessage" = "Esta ação apagará todos os dados associados à sua conta e não poderá ser desfeita. Tem certeza de que deseja excluir sua conta?";
+"DeleteAccountConfirmationMessage" = "Esta ação apagará todos os dados associados à sua conta e não poderá ser desfeita. Tem certeza que quer excluir sua conta?";
 
 /* Text of Delete action button. */
 "Delete" = "Excluir";
@@ -242,4 +245,4 @@
 "PlaceholderChosePassword" = "Escolha a senha";
 
 /* The title of forgot password button. */
-"ForgotPasswordTitle" = "Teve problemas para fazer login?";
+"ForgotPasswordTitle" = "Problemas para fazer login?";

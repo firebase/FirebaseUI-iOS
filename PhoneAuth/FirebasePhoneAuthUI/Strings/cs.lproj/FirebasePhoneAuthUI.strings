@@ -70,9 +70,5 @@
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
 "MessageExpired" = "Platnost kódu vypršela";
 
-/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "Po klepnutí na položku %@ může být odeslána SMS. Mohou být účtovány poplatky za zprávy a data.";
-
-/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "Klepnutím na položku %@ potvrzujete, že souhlasíte se [smluvními podmínkami].";
-
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "Klepnutím na tlačítko %@ vyjadřujete svůj souhlas s těmito dokumenty: %@ a %@. Může být odeslána SMS a mohou být účtovány poplatky za zprávy a data.";

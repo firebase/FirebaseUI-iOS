@@ -59,7 +59,7 @@
 "IncorrectCodeMessage" = "Koden er forkert. Prøv igen.";
 
 /* The body message of alert shown when internal server error appeared. */
-"InternalErrorMessage" = "Der opstod en fejl. Prøv igen.";
+"InternalErrorMessage" = "Noget gik galt. Prøv igen.";
 
 /* The body message of alert shown when the user has tried to send too many SMS messages. */
 "TooManyCodesSent" = "Dette telefonnummer er blevet brugt for mange gange";
@@ -70,9 +70,5 @@
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
 "MessageExpired" = "Denne kode er ikke længere gyldig";
 
-/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "Der sendes en sms, når du trykker på %@. Der opkræves muligvis gebyrer for beskeder og data.";
-
-/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "Ved at trykke på %@ accepterer du [servicevilkårene].";
-
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "Når du trykker på %@, indikerer du, at du accepterer vores %@ og %@. Der sendes måske en sms. Der opkræves muligvis gebyrer for beskeder og data.";

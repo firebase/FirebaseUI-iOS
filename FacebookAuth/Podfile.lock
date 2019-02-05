@@ -9,23 +9,23 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.35.0):
     - FBSDKCoreKit
-  - Firebase/Auth (5.15.0):
+  - Firebase/Auth (5.16.0):
     - Firebase/CoreOnly
-    - FirebaseAuth (= 5.2.0)
-  - Firebase/CoreOnly (5.15.0):
-    - FirebaseCore (= 5.1.10)
-  - FirebaseAuth (5.2.0):
+    - FirebaseAuth (= 5.3.0)
+  - Firebase/CoreOnly (5.16.0):
+    - FirebaseCore (= 5.2.0)
+  - FirebaseAuth (5.3.0):
     - FirebaseAuthInterop (~> 1.0)
-    - FirebaseCore (~> 5.1)
+    - FirebaseCore (~> 5.2)
     - GoogleUtilities/Environment (~> 5.2)
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (5.1.10):
+  - FirebaseCore (5.2.0):
     - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseUI/Auth (5.2.2):
+  - FirebaseUI/Auth (6.0.0):
     - Firebase/Auth (~> 5.0)
-  - GoogleUtilities/Environment (5.3.6)
-  - GoogleUtilities/Logger (5.3.6):
+  - GoogleUtilities/Environment (5.3.7)
+  - GoogleUtilities/Logger (5.3.7):
     - GoogleUtilities/Environment
   - GTMSessionFetcher/Core (1.2.1)
   - OCMock (3.4.3)
@@ -57,12 +57,12 @@ SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   FBSDKCoreKit: 1a5b2e3ceb5ca827a53c54aa5f4a3480efff80d2
   FBSDKLoginKit: 00a3d65d1226852f9d76dcddff01981e5e6d9c38
-  Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
-  FirebaseAuth: 02e969ff430e156d99d4cb842d77b806b71ad7bb
+  Firebase: 749a8ff4962f9d8c79dda1966de20f6f77583d67
+  FirebaseAuth: c9b3ff063c223d2841d97240af547ce511bce19a
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: 35747502d9e8c6ee217385ad04446c7c2aaf9c5c
-  FirebaseUI: 810a4d85e15dfed08bfc6fc01358f2c64a8b341c
-  GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
+  FirebaseCore: ea2d1816723ef21492b8e9113303e1350db5e08c
+  FirebaseUI: f25f5af494e7e08bd86b04209b9c0b87a63368a6
+  GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
 

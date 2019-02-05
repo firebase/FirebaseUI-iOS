@@ -1,5 +1,5 @@
 /* The text of the button used to sign-in with Phone. */
-"SignInWithPhone" = "Fazer login com o smartphone";
+"SignInWithPhone" = "Fazer login com o telefone";
 
 /* The title of view controller where user enters phone number. */
 "EnterPhoneTitle" = "Inserir número de telefone";
@@ -70,9 +70,5 @@
 /* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
 "MessageExpired" = "Este código não é mais válido.";
 
-/* Message shown at the footer of the screen before sending SMS confirmation code. Parameter %@ is the value of the key "Verify". */
-"TermsSMS" = "Talvez você receba um SMS quando tocar em %@. Taxas de mensagens e dados podem ser aplicáveis.";
-
-/* Message shown at the footer of the screen before account creation. Characters '[' and ']' mark beginning and end of the terms of service URL and they should be preserved in translation. Parameter %@ is the value of the key "Next". */
-"TermsAccountCreation" = "Se tocar em %@, você afirma que concorda com os [Termos de Serviço].";
-
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "Ao tocar em %@, você concorda com nossos %@ e a %@. Um SMS poderá ser enviado e tarifas de mensagens e de dados poderão ser cobradas.";
