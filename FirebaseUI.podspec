@@ -94,7 +94,7 @@ Pod::Spec.new do |s|
                                  'EmailAuth/FirebaseEmailAuthUI/FUIPasswordVerificationViewController.h']
     email.source_files = 'EmailAuth/FirebaseEmailAuthUI/**/*.{h,m}'
     email.dependency 'FirebaseUI/Auth'
-    email.dependency 'GoogleUtilities/GULUserDefaults'
+    email.dependency 'GoogleUtilities/UserDefaults'
     email.resource_bundle = {
       'FirebaseEmailAuthUI' => ['EmailAuth/FirebaseEmailAuthUI/*.xib',
                                 'EmailAuth/FirebaseEmailAuthUI/**/*.{xib,json,lproj,png}']
