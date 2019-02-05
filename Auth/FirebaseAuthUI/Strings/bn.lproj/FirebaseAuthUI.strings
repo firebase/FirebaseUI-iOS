@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "সেভ করুন";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "পাঠান";
+
+/* Resend button title. */
+"Resend" = "আবার পাঠান";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "ইমেল";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "পাসওয়ার্ড বেছে নিন";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "সাইন-ইন করতে সমস্যা হচ্ছে?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "ইমেল আইডি কনফার্ম করুন";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "সাইন-ইন করা হয়েছে!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "ইমেল পেতে সমস্যা হচ্ছে?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "এই সাধারণ সমাধানগুলি ব্যবহার করে দেখুন: \n - ইমেলটি স্প্যাম অথবা ফিল্টার হিসেবে চিহ্নিত করা হয়েছে কিনা তা দেখুন।\n - ইন্টারনেট কানেকশন পরীক্ষা করে দেখুন।\n - ইমেলের সঠিক বানান লিখেছেন কিনা তা দেখুন।\n - আপনার ইনবক্সের স্পেস শেষ হয়ে গেছে কিনা বা ইনবক্সের সেটিংস সংক্রান্ত অন্যান্য সমস্যাগুলি একবার দেখে নিন।\n উপরের পদক্ষেপগুলি যদি কাজ না করে তাহলে আপনি ইমেলটি আবার পাঠাতে পারেন। মনে রাখবেন এটি করলে পুরনো ইমেলের লিঙ্কটি আর কাজ করবে না।";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "অতিরিক্ত নির্দেশাবলী সহ সাইন-ইন করার একটি ইমেল %@-এ পাঠানো হয়েছে। সাইন-ইন করার জন্য আপনার ইমেল দেখুন।";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "সাইন-ইন করার ইমেল পাঠানো হয়েছে";

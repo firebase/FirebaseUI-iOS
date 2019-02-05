@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Lagre";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Send";
+
+/* Resend button title. */
+"Resend" = "Send på nytt";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "E-post";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Velg passord";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Har du problemer med å logge på?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Bekreft e-postadressen";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Pålogget.";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Problemer med å motta e-post?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Prøv disse vanlige løsningene: \n — Sjekk om e-posten ble merket som søppelpost eller filtrert bort.\n — Sjekk internettilkoblingen din.\n — Kontrollér at du ikke har skrevet e-postadressen din feil.\n — Kontrollér at innboksen din ikke er full, og se etter andre problemer knyttet til innboksinnstillingene.\n — Hvis trinnene ovenfor ikke bidro til å løse problemet, kan du sende e-posten på nytt. Vær oppmerksom på at dette deaktiverer linken i den forrige e-posten.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "En påloggings-e-post med ytterligere instruksjoner er sendt til %@. Sjekk e-posten din for å fullføre påloggingen.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Påloggings-e-post er sendt";

@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "સાચવો";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "મોકલો";
+
+/* Resend button title. */
+"Resend" = "ફરી મોકલો";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "ઇમેઇલ";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "પાસવર્ડ પસંદ કરો";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "સાઇન ઇન કરવામાં સમસ્યા આવી રહી છે?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "ઇમેઇલ કન્ફર્મ કરો";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "સાઇન ઇન કર્યું!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "ઇમેઇલ મેળવવામાં મુશ્કેલી આવે છે?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "આ સામાન્ય ઉકેલોને અજમાવી જુઓ: \n - તે ઇમેઇલ સ્પામ કે ફિલ્ટર કરેલ તરીકે ચિહ્નિત કર્યો હતો.કે કેમ તે ચેક કરો.\n - તમારું ઇન્ટરનેટ કનેક્શન ચેક કરો.\n - તમે તમારા ઇમેઇલની જોડણીમાં ભૂલ ન કરી હોવાનું ચેક કરો.\n - તમારી ઇનબૉક્સ સ્પેસ ભરાઈ ન ગઈ હોવાનું અથવા ઇનબૉક્સ સેટિંગ સંબંધિત અન્ય સમસ્યા ન હોવાનું.ચેક કરો.\n જો ઉપરોક્ત પગલાં કામ ન કરે, તો તમે ઇમેઇલ ફરીથી મોકલી શકો છો. નોંધ લેશો કે આને કારણે જૂના ઇમેઇલમાં રહેલી લિંક નિષ્ક્રિય થશે.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "વધારાની સૂચનાઓ ધરાવતો સાઇન-ઇન ઇમેઇલ %@ પર મોકલ્યો હતો. સાઇન-ઇન પૂર્ણ કરવા માટે તમારો ઇમેઇલ ચેક કરો.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "સાઇન ઇન ઇમેઇલ મોકલ્યો";

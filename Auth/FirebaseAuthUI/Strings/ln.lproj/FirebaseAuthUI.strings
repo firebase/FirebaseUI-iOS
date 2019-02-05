@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Enregistrer";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Envoyer";
+
+/* Resend button title. */
+"Resend" = "Renvoyer";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Adresse e-mail";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Choisissez un mot de passe";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Vous ne parvenez pas à vous connecter ?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Confirmez votre adresse e-mail";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Connecté";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Vous n'avez pas reçu l'e-mail ?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Essayez les solutions courantes suivantes : \n - Vérifiez que l'e-mail n'a pas été filtré ni marqué comme spam.\n - Vérifiez votre connexion Internet.\n - Vérifiez que votre adresse e-mail est correcte.\n - Vérifiez que votre boîte de réception n'est pas pleine et que les paramètres sont correctement définis.\n Si les étapes décrites ci-dessus n'ont pas résolu le problème, vous pouvez renvoyer l'e-mail. Sachez que le lien du premier e-mail sera alors désactivé.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Un e-mail de connexion avec des instructions supplémentaires a été envoyé à %@. Consultez cet e-mail pour vous connecter.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "E-mail de connexion envoyé";

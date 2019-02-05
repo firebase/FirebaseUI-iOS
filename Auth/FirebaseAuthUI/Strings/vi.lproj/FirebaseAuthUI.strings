@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Lưu";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Gửi";
+
+/* Resend button title. */
+"Resend" = "Gửi lại";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Email";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Chọn mật khẩu";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Bạn gặp sự cố khi đăng nhập?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Xác nhận email";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Đã đăng nhập!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Bạn gặp vấn đề khi nhận email?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Hãy thử các cách khắc phục vấn đề phổ biến sau: \n - Kiểm tra xem email có bị đánh dấu là spam hay đã được lọc.\n - Kiểm tra kết nối Internet của bạn.\n - Kiểm tra để đảm bảo bạn không viết sai chính tả tên email.\n - Kiểm tra để đảm bảo dung lượng bộ nhớ hộp thư đến của bạn chưa hết hoặc không có vấn đề khác liên quan đến tùy chọn cài đặt hộp thư đến.\n Nếu các bước trên không hiệu quả, bạn có thể gửi lại email. Vui lòng lưu ý rằng thao tác này sẽ hủy kích hoạt đường dẫn liên kết trong email cũ.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Email đăng nhập có hướng dẫn bổ sung đã gửi tới %@. Hãy tìm email này trong hộp thư của bạn để hoàn tất đăng nhập.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Đã gửi email đăng nhập";

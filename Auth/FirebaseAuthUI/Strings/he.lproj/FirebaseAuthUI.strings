@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "שמור";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "שליחה";
+
+/* Resend button title. */
+"Resend" = "שליחה מחדש";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "אימייל";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "בחר סיסמה";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "לא מצליח להיכנס?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "אישור כתובת האימייל";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "בוצעה כניסה!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "נתקלת בבעיה בקבלת אימיילים?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "מומלץ לנסות את הפתרונות הבאים: \n - יש לבדוק אם האימייל סומן כספאם או סונן.\n - יש לבדוק את החיבור לאינטרנט.\n - יש לוודא שכתובת האימייל אויתה כהלכה.\n - יש לוודא שהשטח הפנוי בתיבת הדואר הנכנס אינו עומד להסתיים, או לבדוק בעיות אחרות שקשורות להגדרות של תיבת הדואר הנכנס.\n אם הבעיה נמשכת לאחר ביצוע השלבים המפורטים למעלה, אפשר לשלוח מחדש את האימייל. לתשומת ליבך: שליחת האימייל מחדש תשבית את הקישור באימייל הקודם.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "אימייל לכניסה לחשבון עם הוראות נוספות נשלח אל %@. יש לבדוק את תיבת הדואר הנכנס כדי להשלים את תהליך הכניסה.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "נשלח אימייל לכניסה לחשבון";

@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Запазване";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Изпращане";
+
+/* Resend button title. */
+"Resend" = "Повторно изпращане";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Имейл";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Изберете парола";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Имате проблем при влизането?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Потвърждаване на имейл адреса";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Влязохте в профила!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Имате проблеми с получаването на имейла?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Изпробвайте следните често използвани решения: \n – Проверете дали имейлът не е обозначен и филтриран като спам.\n – Проверете връзката си с интернет.\n – Проверете дали имейлът е изписан правилно.\n – Проверете дали в пощенската ви кутия има достатъчно пространство, или не е налице друг проблем с настройките й.\n Ако стъпките по-горе не разрешат проблема, можете отново да изпратите имейла. Имайте предвид, че това ще деактивира връзката в предходното съобщение.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Изпратихме имейл до %@ за вход в профила с допълнителни инструкции. Проверете входящата си поща, за да завършите процеса.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Изпратен е имейл за вход в профила";

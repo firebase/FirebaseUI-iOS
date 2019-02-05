@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Зберегти";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Надіслати";
+
+/* Resend button title. */
+"Resend" = "Надіслати ще раз";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Електронна адреса";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Виберіть пароль";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Не вдається ввійти?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Підтвердьте електронну адресу";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Ви ввійшли";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Ви не отримуєте електронні листи?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Щоб вирішити проблему, скористайтеся порадами нижче. \n – Перевірте: можливо, електронний лист позначено як спам або відфільтровано.\n – Перевірте інтернет-з’єднання.\n – Переконайтеся, що ви правильно вказали електронну адресу.\n – Перевірте доступний обсяг пам’яті для папки \"Вхідні\" й інші можливі проблеми з налаштуваннями.\n – Якщо поради вище не допоможуть, надішліть електронний лист повторно. Зверніть увагу, що після цього посилання в давнішому електронному листі стане недійсним.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Посилання для входу та додаткові вказівки надіслано на адресу %@. Дотримуйтеся їх, щоб увійти в обліковий запис.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Електронну адресу для входу надіслано";

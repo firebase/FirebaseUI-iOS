@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Сачувај";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Пошаљи";
+
+/* Resend button title. */
+"Resend" = "Поново пошаљи";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Имејл";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Изаберите лозинку";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Имате проблема при пријављивању?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Потврдите имејл адресу";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Пријављени сте!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Имате проблема са пријемом имејла?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Пробајте ова уобичајена решења: \n– Проверите да ли је имејл филтриран или обележен као непожељан.\n – Проверите интернет везу.\n – Проверите да ли сте тачно уписали имејл адресу.\n – Проверите да нисте остали без простора у пријемном сандучету, односно да нема других проблема са пријемним сандучетом.\n Ако наведене мере не уроде плодом, можете поново да пошаљете имејл. Имајте у виду да ћете тиме деактивирати линк у старијем имејлу.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Имејл за пријављивање са додатним упутствима је послат на %@. Проверите имејл да бисте довршили пријављивање.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Послали смо вам имејл за пријављивање";

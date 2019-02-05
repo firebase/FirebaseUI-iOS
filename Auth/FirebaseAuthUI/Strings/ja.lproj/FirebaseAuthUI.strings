@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "保存";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "送信";
+
+/* Resend button title. */
+"Resend" = "再送信";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "メール";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "パスワードを設定";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "ログインできない場合";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "メールの確認";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "ログインしました";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "メールが受信できない場合";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "以下の一般的な解決方法をお試しください。\n - メールがスパムに分類されたりフィルタされたりしていないか確認する。\n - インターネットの接続を確認する。\n - メールアドレスのスペルに誤りがないか確認する。\n - 受信トレイの容量不足や、設定関連のその他の問題がないか確認する。\n 上記の手順で解決しなかった場合はメールを再送信できます。メールを再送信すると、前回のメールに記載されたリンクは無効になります。";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "詳細な手順を記載したログインメールを %@ に送信しました。メールを確認してログインを完了してください。";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "ログインメールを送信しました";

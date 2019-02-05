@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "சேமி";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "அனுப்பு";
+
+/* Resend button title. */
+"Resend" = "மீண்டும் அனுப்பு";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "மின்னஞ்சல்";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "கடவுச்சொல்லைத் தேர்வு செய்யவும்";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "உள்நுழைவதில் சிக்கலா?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "மின்னஞ்சலை உறுதிப்படுத்தவும்";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "உள்நுழைந்துவிட்டீர்கள்!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "மின்னஞ்சல்களைப் பெறுவதில் சிக்கல் உள்ளதா?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "இந்தப் பொதுவான திருத்தங்களை முயலவும்: \n - மின்னஞ்சல் ஸ்பேமாகக் குறிக்கப்பட்டுள்ளதா அல்லது வடிகட்டப்பட்டுள்ளதா எனப் பார்க்கவும்.\n - இணைய இணைப்பைச் சரிபார்க்கவும்.\n - உங்கள் மின்னஞ்சல் முகவரியில் எழுத்துப்பிழை இல்லை என்பதை உறுதிப்படுத்திக் கொள்ளவும்.\n - இன்பாக்ஸில் போதுமான இடமுள்ளதா என்பதையும், மற்ற இன்பாக்ஸ் அமைப்புகளுடன் தொடர்புடைய சிக்கல்களையும் சரிபார்க்கவும்.\n மேலேயுள்ளவற்றை முயன்றும் பலனளிக்கவில்லை எனில், நீங்கள் மீண்டும் மின்னஞ்சல் அனுப்பலாம். இது முந்தைய மின்னஞ்சலில் உள்ள இணைப்பை முடக்கிவிடும் என்பதை நினைவில் கொள்ளவும்.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "கூடுதல் வழிமுறைகளுடன் கூடிய உள்நுழைவு மின்னஞ்சல் %@ என்பதற்கு அனுப்பப்பட்டது. உள்நுழைவை நிறைவு செய்ய, உங்கள் மின்னஞ்சலைப் பார்க்கவும்.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "உள்நுழைவு மின்னஞ்சல் அனுப்பப்பட்டது";

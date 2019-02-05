@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "I-save";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Ipadala";
+
+/* Resend button title. */
+"Resend" = "Muling Ipadala";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Email";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Pumili ng password";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Nagkaproblema sa pag-sign in?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Kumpirmahin ang Email";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Naka-sign in!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Nagkakaproblema sa pagtanggap ng mga email?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Subukan ang mga karaniwang pag-aayos na ito: \n - Tingnan kung minarkahan ang email bilang spam o na-filter.\n - Tingnan ang iyong koneksyon sa internet.\n - Tiyakin na hindi ka nagkamali sa pagbaybay ng iyong email.\n - Tingnan kung hindi pa nauubusan ng espasyo ang iyong inbox o may iba pang isyu na may kinalaman sa mga setting ng inbox.\n Kung hindi umubra ang mga hakbang sa itaas, maaari mong ipadala muli ang email. Tandaan na hindi nito ide-deactivate ang link sa lumang email.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Nagpadala ng email sa pag-sign in na may mga karagdagang tagubilin sa %@. Tingnan ang iyong email para makumpleto ang pag-sign in.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Naipadala na ang email sa pag-sign in";
