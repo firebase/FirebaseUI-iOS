@@ -28,6 +28,11 @@
 @property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *snapshots;
 
 /**
+ * The backing collection that holds all of the array's key.
+ */
+@property (strong, nonatomic) NSMutableArray<NSString *> *keys;
+
+/**
  * A set containing the query observer handles that should be released when
  * this array is freed.
  */
@@ -52,6 +57,7 @@
   self = [super init];
   if (self) {
     self.snapshots = [NSMutableArray array];
+    self.keys = [NSMutableArray array];
     self.query = query;
     self.handles = [NSMutableSet setWithCapacity:4];
     self.delegate = delegate;
@@ -168,6 +174,7 @@
 
     [self.snapshots removeObjectAtIndex:i];
 
+    [self.keys removeObjectAtIndex:i];
     if ([self.delegate respondsToSelector:@selector(array:didRemoveObject:atIndex:)]) {
       [self.delegate array:self didRemoveObject:current atIndex:i];
     }
@@ -177,13 +184,8 @@
 
 - (NSUInteger)indexForKey:(NSString *)key {
   NSParameterAssert(key != nil);
-
-  for (NSUInteger index = 0; index < [self.snapshots count]; index++) {
-    if ([key isEqualToString:[(FIRDataSnapshot *)[self.snapshots objectAtIndex:index] key]]) {
-      return index;
-    }
-  }
-  return NSNotFound;
+  
+  return [self.keys indexOfObject:key];
 }
 
 - (void)insertSnapshot:(FIRDataSnapshot *)snap withPreviousChildKey:(NSString *)previous {
@@ -204,6 +206,7 @@
   }
 
   [self.snapshots insertObject:snap atIndex:index];
+  [self.keys insertObject:snap.key atIndex:index];
 
   if ([self.delegate respondsToSelector:@selector(array:didAddObject:atIndex:)]) {
     [self.delegate array:self didAddObject:snap atIndex:index];
@@ -223,6 +226,7 @@
   }
 
   [self.snapshots removeObjectAtIndex:index];
+  [self.keys removeObjectAtIndex:index];
 
   if ([self.delegate respondsToSelector:@selector(array:didRemoveObject:atIndex:)]) {
     [self.delegate array:self didRemoveObject:snap atIndex:index];
@@ -242,6 +246,7 @@
   }
 
   [self.snapshots replaceObjectAtIndex:index withObject:snap];
+  [self.keys replaceObjectAtIndex:index withObject:snap.key];
 
   if ([self.delegate respondsToSelector:@selector(array:didChangeObject:atIndex:)]) {
     [self.delegate array:self didChangeObject:snap atIndex:index];
@@ -261,6 +266,7 @@
   }
 
   [self.snapshots removeObjectAtIndex:fromIndex];
+  [self.keys removeObjectAtIndex:fromIndex];
 
   NSUInteger toIndex = 0;
   if (previous != nil) {
@@ -270,6 +276,7 @@
     }
   }
   [self.snapshots insertObject:snap atIndex:toIndex];
+  [self.keys insertObject:snap.key atIndex:toIndex];
 
   if ([self.delegate respondsToSelector:@selector(array:didMoveObject:fromIndex:toIndex:)]) {
     [self.delegate array:self didMoveObject:snap fromIndex:fromIndex toIndex:toIndex];
@@ -278,14 +285,17 @@
 
 - (void)removeSnapshotAtIndex:(NSUInteger)index {
   [self.snapshots removeObjectAtIndex:index];
+  [self.keys removeObjectAtIndex:index];
 }
 
 - (void)insertSnapshot:(FIRDataSnapshot *)snap atIndex:(NSUInteger)index {
   [self.snapshots insertObject:snap atIndex:index];
+  [self.keys insertObject:snap.key atIndex:index];
 }
 
 - (void)addSnapshot:(FIRDataSnapshot *)snap {
   [self.snapshots addObject:snap];
+  [self.keys addObject:snap.key];
 }
 
 #pragma mark - Public API methods
