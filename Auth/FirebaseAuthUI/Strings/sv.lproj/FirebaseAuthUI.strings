@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Spara";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Skicka";
+
+/* Resend button title. */
+"Resend" = "Skicka igen";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "E-post";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Välj lösenord";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Har du problem med att logga in?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Bekräfta e-post";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Inloggad!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Får du inte e-postmeddelanden?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Prova dessa vanliga lösningar: \n – Kontrollera om meddelandet hamnade bland skräpposten eller filtrerades.\n – Kontrollera internetanslutningen.\n – Kontrollera att du inte stavade e-postadressen fel.\n – Kontrollera att du inte har ont om utrymme i inkorgen eller andra inkorgsrelaterade problem.\n Om ovanstående lösningar inte fungerar kan du testa att skicka meddelandet igen. Länken i det gamla meddelandet inaktiveras om du gör det.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Ett inloggningsmeddelande med instruktioner skickades till %@. Kontrollera din e-post för att slutföra inloggningen.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Inloggningsmeddelande skickat";

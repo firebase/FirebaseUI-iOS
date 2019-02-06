@@ -65,6 +65,7 @@ Pod::Spec.new do |s|
                                 'Auth/FirebaseAuthUI/FUIAuthTableHeaderView.h']
     auth.source_files = ['Auth/FirebaseAuthUI/**/*.{h,m}', 'Auth/FirebaseAuthUI/*.{h,m}']
     auth.dependency 'Firebase/Auth', '~> 5.0'
+    auth.dependency 'GoogleUtilities/UserDefaults'
     auth.resource_bundle = {
       'FirebaseAuthUI' => ['Auth/FirebaseAuthUI/**/*.{xib,png,lproj}']
     }
@@ -85,6 +86,7 @@ Pod::Spec.new do |s|
   s.subspec 'Email' do |email|
     email.platform = :ios, '8.0'
     email.public_header_files = ['EmailAuth/FirebaseEmailAuthUI/FirebaseEmailAuthUI.h',
+                                 'EmailAuth/FirebaseEmailAuthUI/FUIConfirmEmailViewController.h',
                                  'EmailAuth/FirebaseEmailAuthUI/FUIEmailAuth.h',
                                  'EmailAuth/FirebaseEmailAuthUI/FUIEmailEntryViewController.h',
                                  'EmailAuth/FirebaseEmailAuthUI/FUIPasswordRecoveryViewController.h',

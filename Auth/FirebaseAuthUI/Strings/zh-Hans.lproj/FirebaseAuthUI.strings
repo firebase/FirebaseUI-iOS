@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "保存";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "发送";
+
+/* Resend button title. */
+"Resend" = "重新发送";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "电子邮件";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "选择密码";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "登录时遇到问题？";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "确认电子邮件地址";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "已登录！";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "无法收到电子邮件？";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "尝试以下常见解决方法：\n - 检查电子邮件是否被标记为垃圾邮件或被过滤。\n - 检查互联网连接。\n - 确保没有写错电子邮件地址。\n - 确保收件箱空间充足，且不存在其他与收件箱设置有关的问题。\n 如果上述步骤未能帮助您解决问题，您可以重新发送电子邮件。请注意，重新发送后上一封电子邮件中的链接将失效。";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "系统已将含附加说明的登录电子邮件发送至 %@。请查收电子邮件以完成登录。";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "已发送登录电子邮件";

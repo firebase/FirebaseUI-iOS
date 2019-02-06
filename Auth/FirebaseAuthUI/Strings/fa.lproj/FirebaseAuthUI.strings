@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "ذخیره";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "ارسال";
+
+/* Resend button title. */
+"Resend" = "ارسال مجدد";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "ایمیل ";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "گذرواژه انتخاب کنید";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "مشکلی در ورود به سیستم دارید؟";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "تأیید ایمیل";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "به سیستم وارد شدید!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "در دریافت ایمیل مشکل دارید؟";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "این رفع اشکال‌های رایج را امتحان کنید: \n - ببینید ایمیل به‌عنوان هرزنامه یا فیلترشده مشخص نشده باشد.\n - اتصال اینترنتتان را بررسی کنید.\n - مطمئن شوید املای ایمیلتان را درست وارد کرده باشید.\n - مطمئن شوید فضای صندوق ورودی‌تان روبه‌اتمام نباشد یا مشکل دیگری در تنظیمات صندوق ورودی وجود نداشته باشد.\n اگر اقدامات بالا به رفع مشکل کمک نکرد، می‌توانید ایمیل را مجدداً ارسال کنید. توجه کنید که با این کار، پیوند موجود در ایمیل قبلی غیرفعال می‌شود.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "ایمیل ورود به سیستم، حاوی دستورالعمل‌های بیشتر، به %@ ارسال شد. برای تکمیل ورود به سیستم، ایمیلتان را بررسی کنید.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "ایمیل ورود به سیستم ارسال شد";

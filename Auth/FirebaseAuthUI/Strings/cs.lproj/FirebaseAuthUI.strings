@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Uložit";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Odeslat";
+
+/* Resend button title. */
+"Resend" = "Odeslat znovu";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "E-mail";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Zvolte heslo.";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Máte potíže s přihlášením?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Potvrzení·e-mailu";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Jste přihlášeni!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Nepřišly vám e-maily?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Vyzkoušejte tato běžná řešení: \n – Zkontrolujte, jestli e-mail nebyl označen jako spam nebo nebyl odstraněn jiným filtrem.\n – Zkontrolujte připojení k internetu.\n – Zkontrolujte, zda jste adresu e-mailu napsali správně.\n – Zkontrolujte, jestli nemáte plnou schránku příchozích správ nebo nedošlo k nějakému jiného problému se schránkou.\n Pokud žádné z uvedených řešení nepomohlo, můžete si e-mail nechat zaslat znovu. Odkaz v prvním e-mailu pak bude deaktivován.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Na adresu %@ byl odeslán přihlašovací e-mail s dalšími pokyny. Dokončete přihlášení podle instrukcí v e-mailu.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Přihlašovací e-mail odeslán";

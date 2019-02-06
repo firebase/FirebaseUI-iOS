@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Gem";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Send";
+
+/* Resend button title. */
+"Resend" = "Send igen";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Mail";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Vælg adgangskode";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Har du problemer med at logge ind?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Bekræft mailadresse";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Du er logget ind";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Har du problemer med at modtage mails?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Prøv disse almindelige løsninger: \n - Tjek, om mailen er blevet markeret som spam eller filtreret fra.\n - Tjek din internetforbindelse.\n - Sørg for, at du ikke har stavet din mailadresse forkert.\n - Sørg for, at din indbakke ikke er løbet tør for plads, og at du ikke har andre problemer med indbakken.\n Hvis ovenstående vejledning ikke løste problemet, kan du sende mailen igen. Bemærk, at dette vil deaktivere linket i den gamle mail.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Der er blevet sendt en loginmail med yderligere vejledning til %@. Tjek din mail for at fuldføre loginprocessen.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Loginmailen blev sendt";

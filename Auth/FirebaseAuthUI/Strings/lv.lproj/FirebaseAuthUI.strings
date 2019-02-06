@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Saglabāt";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Sūtīt";
+
+/* Resend button title. */
+"Resend" = "Sūtīt vēlreiz";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "E-pasts";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Izvēlieties paroli";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Vai jums ir problēmas ar pierakstīšanos?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Apstipriniet e-pasta adresi";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Esat pierakstījies.";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Vai jums ir problēmas ar e-pasta ziņojumu saņemšanu?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Izmēģiniet tālāk norādītās tipiskās problēmu novēršanas iespējas. \n - Pārbaudiet, vai e-pasta ziņojums nav atzīmēts kā mēstule vai nav filtrēts.\n - Pārbaudiet interneta savienojumu.\n - Pārbaudiet, vai e-pasta adrese ir pareizi uzrakstīta.\n - Pārbaudiet, vai jūsu iesūtnes krātuve nav beigusies vai nav citu ar iesūtnes iestatījumiem saistītu problēmu.\n Ja iepriekš minētās darbības nepalīdzēja, varat atkārtoti nosūtīt e-pasta ziņojumu. Ņemiet vērā: tiks deaktivizēta saite no iepriekšējā e-pasta ziņojuma.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Pierakstīšanās e-pasta ziņojums ar papildu norādījumiem tika nosūtīts uz e-pasta adresi %@. Pārbaudiet savu e-pastu, lai pabeigtu pierakstīšanos.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Pierakstīšanās e-pasta ziņojums ir nosūtīts";

@@ -218,59 +218,76 @@ static NSString *const kAuthUICodingKey = @"authUI";
   [[self class] showAlertWithMessage:message presentingViewController:self];
 }
 
++ (void)showAlertWithMessage:(NSString *)message {
+  [[self class] showAlertWithMessage:message presentingViewController:nil];
+}
+
 + (void)showAlertWithMessage:(NSString *)message
-    presentingViewController:(UIViewController *)presentingViewController {
-  [[self class] showAlertWithTitle:nil
-                           message:message
-                       actionTitle:FUILocalizedString(kStr_OK)
+    presentingViewController:(nullable UIViewController *)presentingViewController {
+  [[self class] showAlertWithTitle:message
+                           message:nil
           presentingViewController:presentingViewController];
 }
 
 + (void)showAlertWithTitle:(nullable NSString *)title
-                     message:(NSString *)message
-                 actionTitle:(NSString *)actionTitle
-    presentingViewController:(UIViewController *)presentingViewController {
-  UIAlertController *alertController =
-      [UIAlertController alertControllerWithTitle:title
-                                          message:message
-                                   preferredStyle:UIAlertControllerStyleAlert];
-  UIAlertAction *okAction =
-      [UIAlertAction actionWithTitle:actionTitle
-                               style:UIAlertActionStyleDefault
-                             handler:nil];
-  [alertController addAction:okAction];
-  [presentingViewController presentViewController:alertController animated:YES completion:nil];
+                   message:(nullable NSString *)message
+  presentingViewController:(nullable UIViewController *)presentingViewController {
+  [[self class] showAlertWithTitle:title
+                           message:message
+                       actionTitle:nil
+                     actionHandler:nil
+                      dismissTitle:FUILocalizedString(kStr_OK)
+                    dismissHandler:nil
+          presentingViewController:presentingViewController];
 }
 
 + (void)showAlertWithTitle:(nullable NSString *)title
-                   message:(NSString *)message
-               actionTitle:(NSString *)actionTitle
-  presentingViewController:(UIViewController *)presentingViewController
-             actionHandler:(FUIAuthAlertActionHandler)actionHandler
-             cancelHandler:(FUIAuthAlertActionHandler)cancelHandler {
+                   message:(nullable NSString *)message
+               actionTitle:(nullable NSString *)actionTitle
+             actionHandler:(nullable FUIAuthAlertActionHandler)actionHandler
+              dismissTitle:(nullable NSString *)dismissTitle
+            dismissHandler:(nullable FUIAuthAlertActionHandler)dismissHandler
+  presentingViewController:(nullable UIViewController *)presentingViewController {
   UIAlertController *alertController =
       [UIAlertController alertControllerWithTitle:title
                                           message:message
                                    preferredStyle:UIAlertControllerStyleAlert];
-  UIAlertAction *okAction =
-      [UIAlertAction actionWithTitle:actionTitle
-                               style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction *_Nonnull action) {
-        if (actionHandler) {
-          actionHandler();
-        }
-      }];
-  [alertController addAction:okAction];
-  UIAlertAction *cancelAction =
-      [UIAlertAction actionWithTitle:FUILocalizedString(kStr_Cancel)
-                               style:UIAlertActionStyleCancel
+
+  if (actionTitle) {
+    UIAlertAction *action =
+        [UIAlertAction actionWithTitle:actionTitle
+                                 style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *_Nonnull action) {
+                                 if (actionHandler) {
+                                   actionHandler();
+                                 }
+                               }];
+    [alertController addAction:action];
+  }
+
+  if (dismissTitle) {
+    UIAlertAction *dismissAction =
+        [UIAlertAction actionWithTitle:dismissTitle
+                                 style:UIAlertActionStyleCancel
                                handler:^(UIAlertAction * _Nonnull action) {
-        if (cancelHandler) {
-          cancelHandler();
-        }
-      }];
-  [alertController addAction:cancelAction];
-  [presentingViewController presentViewController:alertController animated:YES completion:nil];
+                                 if (dismissHandler) {
+                                   dismissHandler();
+                                 }
+                               }];
+    [alertController addAction:dismissAction];
+  }
+
+  if (presentingViewController) {
+    [presentingViewController presentViewController:alertController animated:YES completion:nil];
+  } else {
+    UIViewController *viewController = [[UIViewController alloc] init];
+    viewController.view.backgroundColor = UIColor.clearColor;
+    UIWindow *window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    window.rootViewController = viewController;
+    window.windowLevel = UIWindowLevelAlert + 1;
+    [window makeKeyAndVisible];
+    [viewController presentViewController:alertController animated:YES completion:nil];
+  }
 }
 
 + (void)showSignInAlertWithEmail:(NSString *)email

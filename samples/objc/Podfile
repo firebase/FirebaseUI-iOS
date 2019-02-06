@@ -4,5 +4,5 @@ target 'FirebaseUI-demo-objc' do
   use_frameworks!
 
   pod 'FirebaseUI', :path => '../../'
-
+  pod 'Firebase/DynamicLinks'
 end

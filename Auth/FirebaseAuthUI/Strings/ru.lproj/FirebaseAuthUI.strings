@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Сохранить";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Отправить";
+
+/* Resend button title. */
+"Resend" = "Отправить ещё раз";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Адрес электронной почты";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Выберите пароль";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Не удается войти в аккаунт?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Подтвердите адрес электронной почты";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Вход выполнен";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Не получили письмо?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Вот что можно сделать: \n – Поищите письмо в папке со спамом или отфильтрованными сообщениями.\n – Проверьте подключение к Интернету.\n – Убедитесь, что правильно указали свой адрес электронной почты.\n – Проверьте настройки папки со входящими сообщениям и посмотрите, достаточно ли в ней места.\n Если найти письмо не удалось, мы можем отправить его ещё раз. В таком случае ссылка из предыдущего сообщения станет недействительна.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "На адрес электронной почты %@ отправлено письмо с информацией о том, как войти в аккаунт. Изучите его и выполните инструкции.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Письмо отправлено.";

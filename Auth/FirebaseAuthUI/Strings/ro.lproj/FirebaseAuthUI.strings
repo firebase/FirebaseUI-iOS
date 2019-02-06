@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Salvați";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Trimiteți";
+
+/* Resend button title. */
+"Resend" = "Retrimiteți";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Adresă de e-mail";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Alegeți o parolă";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Nu reușiți să vă conectați?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Confirmați adresa de e-mail";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Conectat(ă)!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Nu primiți e-mailuri?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Încercați aceste soluții frecvent folosite: \n - verificați dacă e-mailul a fost marcat ca spam sau filtrat;\n - verificați conexiunea la internet;\n - verificați dacă ați scris corect adresa de e-mail;\n - verificați dacă aveți spațiu în căsuța de e-mail sau dacă există alte probleme legate de setările căsuței de e-mail.\n Dacă pașii de mai sus nu funcționează, puteți să trimiteți din nou e-mailul. Rețineți că va fi dezactivat linkul din e-mailul anterior.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Un e-mail de conectare cu instrucțiuni suplimentare a fost trimis la %@. Verificați-vă căsuța de e-mail pentru a finaliza conectarea.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "A fost trimis e-mailul de conectare";

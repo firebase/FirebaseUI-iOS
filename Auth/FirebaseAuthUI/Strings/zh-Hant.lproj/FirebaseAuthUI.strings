@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "儲存";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "傳送";
+
+/* Resend button title. */
+"Resend" = "重新傳送";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "電子郵件";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "選擇密碼";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "無法登入嗎？";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "確認電子郵件地址";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "登入成功！";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "沒收到電子郵件嗎？";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "請試試這些常見的解決方式：\n - 檢查電子郵件是否被標示為垃圾郵件或遭系統篩除。\n - 檢查您的網際網路連線。\n - 檢查電子郵件地址是否拼錯。\n - 確認收件匣的儲存空間是否足夠，或檢查與收件匣設定相關的其他問題。\n 如果上述步驟全部無效，建議您重新傳送電子郵件。請注意，這個動作會使先前郵件中的連結失效。";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "系統已將登入電子郵件傳送至 %@，其中包含額外的操作說明。請查看您的電子郵件以完成登入程序。";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "已寄出登入電子郵件";

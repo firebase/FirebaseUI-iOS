@@ -124,14 +124,20 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
 }
 
 - (UINavigationController *)authViewController {
-  UIViewController *controller;
+  static UINavigationController *authViewController;
 
-  if ([self.delegate respondsToSelector:@selector(authPickerViewControllerForAuthUI:)]) {
-    controller = [self.delegate authPickerViewControllerForAuthUI:self];
-  } else {
-    controller = [[FUIAuthPickerViewController alloc] initWithAuthUI:self];
-  }
-  return [[UINavigationController alloc] initWithRootViewController:controller];
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    UIViewController *controller;
+    if ([self.delegate respondsToSelector:@selector(authPickerViewControllerForAuthUI:)]) {
+      controller = [self.delegate authPickerViewControllerForAuthUI:self];
+    } else {
+      controller = [[FUIAuthPickerViewController alloc] initWithAuthUI:self];
+    }
+    authViewController = [[UINavigationController alloc] initWithRootViewController:controller];
+  });
+
+  return authViewController;
 }
 
 - (BOOL)signOutWithError:(NSError *_Nullable *_Nullable)error {

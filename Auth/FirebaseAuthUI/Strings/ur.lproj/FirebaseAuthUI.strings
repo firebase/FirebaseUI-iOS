@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "محفوظ کریں";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "بھیجیں";
+
+/* Resend button title. */
+"Resend" = "دوبارہ بھیجیں";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "ای میل";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "پاس ورڈ منتخب کریں";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "سائن ان کرنے میں دشواری؟";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "ای میل کی تصدیق کریں";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "سائن ان ہو گیا!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "ای میلز حاصل کرنے میں دشواری پیش آ رہی ہے؟";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "یہ عام اصلاحات آزمائیں: \n - چیک کریں کہ آیا ای میل سپام یا فلٹر شدہ کے طور پر نشان زد کی گئی ہے۔\n - اپنا انٹرنیٹ کنکشن چیک کریں۔\n - چیک کریں کہ آپ نے اپنی ای میل کے ہجے میں غلطی تو نہیں کی ہے۔\n - چیک کریں کہ آپ کی ان باکس اسپیس ختم تو نہیں ہوگئی ہے یا دیگر ان باکس کی ترتیبات سے متعلق مسائل چیک کریں۔\n اگر مندرجہ بالا مراحل کام نہ کریں تو آپ ای میل دوبارہ بھیج سکتے ہیں۔ نوٹ کریں کہ اس سے پرانی ای میل میں موجود لنک غیر فعال ہو جائے گا۔";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "ایک سائن ان ای میل اضافی ہدایات کے ساتھ %@ کو بھیج دی گئی ہے۔ سائن ان مکمل کرنے کے لیے اپنی ای میل چیک کریں۔";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "سائن ان ای میل بھیج دی گئی";

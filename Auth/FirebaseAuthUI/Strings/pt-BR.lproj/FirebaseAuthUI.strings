@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Salvar";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Enviar";
+
+/* Resend button title. */
+"Resend" = "Reenviar";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "E-mail";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Escolha a senha";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Problemas para fazer login?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Confirme o e-mail";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Conectado!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Está com problemas para receber e-mails?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Tente estas soluções comuns: \n - Verifique se o e-mail foi filtrado ou marcado como spam.\n - Verifique sua conexão com a Internet.\n - Verifique se você digitou seu e-mail corretamente.\n - Verifique se você ainda tem espaço na sua caixa de entrada, além de outros problemas relacionados à configuração.\n Se as etapas acima não funcionarem, tente enviar o e-mail novamente. Observe que isso desativará o link no e-mail antigo.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Um e-mail de login com mais instruções foi enviado para %@. Verifique sua caixa de entrada para concluir o login.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "E-mail de login enviado";

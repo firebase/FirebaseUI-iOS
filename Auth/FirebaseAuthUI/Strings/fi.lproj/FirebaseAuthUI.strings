@@ -104,8 +104,11 @@
 /* Save button title. */
 "Save" = "Tallenna";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Lähetä";
+
+/* Resend button title. */
+"Resend" = "Lähetä uudelleen";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Sähköposti";
@@ -245,5 +248,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Valitse salasana";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Eikö kirjautuminen onnistu?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Vahvista sähköposti";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Kirjauduttu";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Ongelmia sähköpostiviestien saamisessa?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Kokeile näitä yleisiä ratkaisuja: \n – Tarkista, merkittiinkö viesti roskapostiksi tai suodatettiinko se.\n – Tarkista internetyhteytesi.\n – Tarkista, että kirjoitit sähköpostiosoitteesi oikein.\n – Tarkista, ettei postilaatikkosi tila ole loppumassa tai ettei postilaatikon asetuksissa ole muita ongelmia.\n – Jos edellä olevista ratkaisuista ei ollut apua, voit lähettää viestin uudelleen. Huomaa, että tällöin aiemmassa viestissä oleva linkki poistetaan käytöstä.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Lisäohjeita sisältävä kirjautumisviesti lähetettiin osoitteeseen %@. Tarkista sähköpostisi kirjautumisen suorittamiseksi loppuun.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Kirjautumisviesti lähetetty";

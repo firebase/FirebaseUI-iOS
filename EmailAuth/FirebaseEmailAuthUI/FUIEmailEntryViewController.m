@@ -24,6 +24,7 @@
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
 #import "FUIEmailAuth.h"
+#import "FUIEmailAuth_Internal.h"
 #import "FUIEmailAuthStrings.h"
 #import "FUIPasswordSignInViewController.h"
 #import "FUIPasswordSignUpViewController.h"
@@ -145,9 +146,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
   [self incrementActivity];
 
-  [self.auth fetchProvidersForEmail:emailText
-                         completion:^(NSArray<NSString *> *_Nullable providers,
-                                      NSError *_Nullable error) {
+  [self.auth fetchSignInMethodsForEmail:emailText
+                             completion:^(NSArray<NSString *> *_Nullable providers,
+                                          NSError *_Nullable error) {
     [self decrementActivity];
 
     if (error) {
@@ -183,6 +184,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                                                        email:emailText];
       }
       [self pushViewController:controller];
+    } else if ([emailAuth.signInMethod isEqualToString:FIREmailLinkAuthSignInMethod]) {
+      [self sendSignInLinkToEmail:emailText];
     } else {
       if (providers.count) {
         // There's some unsupported providers, surface the error to the user.
@@ -196,13 +199,60 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                                                    email:emailText];
           } else {
             controller = [[FUIPasswordSignUpViewController alloc] initWithAuthUI:self.authUI
-                                                                         email:emailText];
+                                                                           email:emailText];
           }
         } else {
-            [self showAlertWithMessage:FUILocalizedString(kStr_UserNotFoundError)];
+          [self showAlertWithMessage:FUILocalizedString(kStr_UserNotFoundError)];
         }
         [self pushViewController:controller];
       }
+    }
+  }];
+}
+
+- (void)sendSignInLinkToEmail:(NSString*)email {
+  if (![[self class] isValidEmail:email]) {
+    [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];
+    return;
+  }
+
+  [self incrementActivity];
+  FUIEmailAuth *emailAuth = [self.authUI providerWithID:FIREmailAuthProviderID];
+  [emailAuth generateURLParametersAndLocalCache:email linkingProvider:nil];
+  [self.auth sendSignInLinkToEmail:email
+                actionCodeSettings:emailAuth.actionCodeSettings
+                        completion:^(NSError * _Nullable error) {
+    [self decrementActivity];
+
+    if (error) {
+      [FUIAuthBaseViewController showAlertWithTitle:FUILocalizedString(kStr_Error)
+                                            message:error.description
+                           presentingViewController:self];
+    } else {
+      NSString *successMessage =
+          [NSString stringWithFormat: FUILocalizedString(kStr_EmailSentConfirmationMessage), email];
+      [FUIAuthBaseViewController showAlertWithTitle:FUILocalizedString(kStr_SignInEmailSent)
+                                            message:successMessage
+                                        actionTitle:FUILocalizedString(kStr_TroubleGettingEmailTitle)
+                                      actionHandler:^{
+                                        [FUIAuthBaseViewController
+                                           showAlertWithTitle:FUILocalizedString(kStr_TroubleGettingEmailTitle)
+                                                      message:FUILocalizedString(kStr_TroubleGettingEmailMessage)
+                                                  actionTitle:FUILocalizedString(kStr_Resend)
+                                                actionHandler:^{
+                                                  [self sendSignInLinkToEmail:email];
+                                                } dismissTitle:FUILocalizedString(kStr_Back)
+                                               dismissHandler:^{
+                                                 [self.navigationController popToRootViewControllerAnimated:YES];
+                                               }
+                                     presentingViewController:self];
+                                      }
+                                       dismissTitle:FUILocalizedString(kStr_Back)
+                                     dismissHandler:^{
+                                       [self.navigationController dismissViewControllerAnimated:YES
+                                                                                     completion:nil];
+                                     }
+                           presentingViewController:self];
     }
   }];
 }

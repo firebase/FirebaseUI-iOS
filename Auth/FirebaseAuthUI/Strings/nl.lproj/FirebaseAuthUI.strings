@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Opslaan";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Verzenden";
+
+/* Resend button title. */
+"Resend" = "Opnieuw verzenden";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "E-mail";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Wachtwoord kiezen";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Problemen met inloggen?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "E-mailadres bevestigen";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Ingelogd";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Ontvangt u e-mails niet?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Probeer deze algemene oplossingen: \n - Controleer of de e-mail als spam is gemarkeerd of is weggefilterd.\n - Controleer uw internetverbinding.\n - Controleer of u uw e-mailadres juist heeft gespeld.\n - Controleer of er voldoende ruimte in uw inbox is en of er geen andere problemen met inboxinstellingen zijn.\n Als de bovenstaande stappen geen uitkomst bieden, kunt u de e-mail opnieuw verzenden. Hiermee wordt de link in de eerdere e-mail gedeactiveerd.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Er is een inlogmail met aanvullende instructies verzonden naar %@. Controleer uw inbox om het inlogproces te voltooien.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Inlogmail verzonden";

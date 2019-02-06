@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Salva";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Invia";
+
+/* Resend button title. */
+"Resend" = "Invia di nuovo";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Email";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Scegli password";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "Problemi di accesso?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Conferma email";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Accesso eseguito";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Non ricevi l'email?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Prova le seguenti soluzioni comuni: \n - Verifica se l'email è stata contrassegnata come spam o è stata filtrata.\n - Controlla la connessione Internet.\n - Verifica di aver digitato correttamente l'indirizzo email.\n - Verifica che vi sia ancora spazio disponibile nella Posta in arrivo o che non vi siano altri problemi legati alle impostazioni della Posta in arrivo.\n Se le procedure descritte sopra non hanno risolto il problema, puoi inviare nuovamente l'email. Tieni presente che questo disattiverà il link contenuto nell'email precedente.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Un'email di accesso con ulteriori istruzioni è stata inviata all'indirizzo %@. Controlla la tua casella di posta per completare l'accesso.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Email di accesso inviata";

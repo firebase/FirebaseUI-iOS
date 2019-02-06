@@ -103,8 +103,11 @@
 /* Save button title. */
 "Save" = "Guardar";
 
-/* Save button title. */
+/* Send button title. */
 "Send" = "Enviar";
+
+/* Resend button title. */
+"Resend" = "Reenviar";
 
 /* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
 "Email" = "Correo electrónico";
@@ -244,5 +247,23 @@
 /* Placeholder of secret input cell when user changes password. */
 "PlaceholderChosePassword" = "Elige una contraseña";
 
-/* The title of forgot password button. */
+/* Title of forgot password button. */
 "ForgotPasswordTitle" = "¿No puedes iniciar sesión?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Confirmar la dirección de correo electrónico";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Has iniciado sesión.";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "¿No puedes recibir los correos electrónicos?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Prueba las soluciones más habituales: \n. Asegúrate de que el correo electrónico no se ha filtrado ni marcado como spam.\n. Comprueba tu conexión a Internet.\n. Asegúrate de que has escrito bien tu dirección de correo electrónico.\n. Comprueba que no te estés quedando sin espacio en la bandeja de entrada y que no haya ningún problema con su configuración.\n. Si no se ha resuelto el problema con los pasos mencionados, puedes volver a enviar el correo electrónico. Si lo haces, se desactivará el enlace del mensaje de correo anterior.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Se ha enviado un correo electrónico de inicio de sesión con más instrucciones a %@. Consulta tu bandeja de entrada para completar el inicio de sesión.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Correo electrónico de inicio de sesión enviado";
