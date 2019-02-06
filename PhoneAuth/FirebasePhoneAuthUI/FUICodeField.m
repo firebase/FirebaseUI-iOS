@@ -25,7 +25,7 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
 
 @interface FUICodeField ()
 
-@property (nonatomic, retain, readonly) FUICodeField *inputField;
+@property (nonatomic, retain, readonly) UIView *inputField;
 
 @property (weak, nonatomic) IBOutlet UILabel *digits;
 
@@ -58,10 +58,6 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
   self.inputField.autoresizingMask =
       UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
   self.inputField.userInteractionEnabled = YES;
-
-  if (@available(iOS 12.0, *)) {
-    self.inputField.textContentType = UITextContentTypeOneTimeCode;
-  }
 
   // Initialization code
   _codeEntry = [NSMutableString string];
