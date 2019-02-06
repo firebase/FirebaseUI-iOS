@@ -5,6 +5,4 @@ target 'FirebaseUI-demo-objc' do
 
   pod 'FirebaseUI', :path => '../../'
   pod 'Firebase/DynamicLinks'
-
-  pod 'GoogleUtilities/UserDefaults'
 end
