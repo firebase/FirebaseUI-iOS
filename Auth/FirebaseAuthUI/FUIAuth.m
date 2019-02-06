@@ -22,7 +22,6 @@
 #import <FirebaseCore/FIROptions.h>
 #import <FirebaseAuth/FIRAuth.h>
 #import <FirebaseAuth/FirebaseAuth.h>
-#import <GoogleUtilities/GULUserDefaults.h>
 #import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthErrors.h"
 #import "FUIAuthErrorUtils.h"
