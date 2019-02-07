@@ -73,7 +73,9 @@ authUI?.delegate = self
 ```objective-c
 // Objective-C
 @import FirebaseUI;
-...
+
+/* ... */
+
 [FIRApp configure];
 FUIAuth *authUI = [FUIAuth defaultAuthUI];
 // You need to adopt a FUIAuthDelegate protocol to receive callback
@@ -85,6 +87,8 @@ This instance can then be configured with the providers you wish to support:
 ```swift
 // Swift
 import FirebaseUI
+
+/* ... */
 
 let providers: [FUIAuthProvider] = [
   FUIEmailAuth(),
@@ -100,7 +104,7 @@ self.authUI?.providers = providers
 // Objective-C
 @import FirebaseUI;
 
-// ...
+/* ... */
 
 NSArray<id<FUIAuthProvider>> *providers = @[
   [[FUIEmailAuth alloc] init],
@@ -173,6 +177,42 @@ UINavigationController *authViewController = [authUI authViewController];
   // Implement this method to handle signed in user (`authDataResult.user`) or error if any.
 }
 ```
+
+### Configuring Email Link Sign In
+To use email link sign in, you will first need to enable it in the Firebase Console. Additionally, you will also have to enable Firebase Dynamic Links.
+
+You can enable email link sign in by initializing an `FUIEmailAuth` instance with `FIREmailLinkAuthSignInMethod`. You will also need to provide a valid `FIRActionCodeSettings` object with `handleCodeInApp` set to true. Additionally, you need to whitelist the URL you pass to the iniatializer; you can do so in the Firebase Console (Authentication -> Sign in Methods -> Authorized domains).
+
+```objective-c
+// Objective-C
+FIRActionCodeSettings *actionCodeSettings = [[FIRActionCodeSettings alloc] init];
+actionCodeSettings.URL = [NSURL URLWithString:@"https://example.appspot.com"];
+actionCodeSettings.handleCodeInApp = YES;
+[actionCodeSettings setAndroidPackageName:@"com.firebase.example"
+                    installIfNotAvailable:NO
+                           minimumVersion:@"12"];
+```
+
+```swift
+// Swift
+var actionCodeSettings = ActionCodeSettings()
+actionCodeSettings.url = URL(string: "https://example.appspot.com")
+actionCodeSettings.handleCodeInApp = true
+actionCodeSettings.setAndroidPackageName("com.firebase.example", installIfNotAvailable: false, minimumVersion: "12")
+```
+
+Once you catch the deep link, you will need to pass it to the auth UI so it can be handled.
+
+```objective-c
+// Objective-C
+[FUIAuth.defaultAuthUI handleOpenURL:url sourceApplication:sourceApplication];
+```
+
+```swift
+// Swift
+Auth.defaultAuthUI.handleOpenURL(url, sourceApplication: sourceApplication)
+```
+We support cross device email link sign in for the normal flows. It is not supported with anonymous user upgrade. By default, cross device support is enabled. You can disable it setting `forceSameDevice` to false in the `FUIEmailAuth` initializer.
 
 ## Customizing FirebaseUI for authentication
 ### Custom terms of Service (ToS) URL
