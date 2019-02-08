@@ -33,6 +33,7 @@ Add the following to your `Podfile`:
 ```ruby
 pod 'FirebaseUI/Auth'
 
+pod 'FirebaseUI/Email'
 pod 'FirebaseUI/Google'
 pod 'FirebaseUI/Facebook'
 pod 'FirebaseUI/Twitter'
