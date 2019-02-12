@@ -1,0 +1,74 @@
+/* The text of the button used to sign-in with Phone. */
+"SignInWithPhone" = "Se connecter avec un téléphone";
+
+/* The title of view controller where user enters phone number. */
+"EnterPhoneTitle" = "Saisissez un numéro de téléphone";
+
+/* The title of button on navigation controller which navigates to previous screen. */
+"Back" = "Retour";
+
+/* The title of button on navigation controller which navigates to the next screen. */
+"Next" = "Suivant";
+
+/* The title of button which user taps on phone verification screen. */
+"Verify" = "Valider";
+
+/* Alert message displayed when user submits empty verification code. */
+"EmptyVerificationCode" = "Code de validation obligatoire";
+
+/* Alert message displayed when user submits empty phone number. */
+"EmptyPhoneNumber" = "Numéro de téléphone obligatoire";
+
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
+"PhoneNumber" = "Numéro";
+
+/* Placeholder shown for phone number input field. */
+"EnterYourPhoneNumber" = "Numéro de téléphone";
+
+/* Label next to the left of country selector control. */
+"Country" = "Pays";
+
+/* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
+"EnterCodeDescription" = "Saisissez le code à %@ chiffres envoyé au";
+
+/* The title of button with resend verification code functionality. */
+"ResendCode" = "Renvoyer le code";
+
+/* Text of the resend timer label shown on verification phone number screen. */
+"ResendCodeTimer" = "Renvoyer le code dans %@";
+
+/* The title of view controller where user verifies phone number. . */
+"VerifyPhoneTitle" = "Validez le numéro de téléphone";
+
+/* The title of button displayed when user closes alert message. */
+"Done" = "OK";
+
+/* The title of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneTitle" = "Numéro de téléphone incorrect";
+
+/* The body message of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneMessage" = "Saisissez un numéro de téléphone valide";
+
+/* The body message of alert shown when user tapped resend verification code button. */
+"ResendCodeResult" = "Le code a été envoyé au %@";
+
+/* The title of alert shown when user entered invalid verification code. */
+"IncorrectCodeTitle" = "Code de validation incorrect";
+
+/* The body message of alert shown when user entered invalid verification code. */
+"IncorrectCodeMessage" = "Code erroné. Veuillez réessayer.";
+
+/* The body message of alert shown when internal server error appeared. */
+"InternalErrorMessage" = "Une erreur s'est produite. Veuillez réessayer.";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "Ce numéro de téléphone a été utilisé un trop grand nombre de fois";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "Un problème est survenu lors de la validation de votre numéro de téléphone";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "Ce code n'est plus valide";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "En appuyant sur %@, vous acceptez les %@ et les %@. Vous déclencherez peut-être l'envoi d'un SMS. Des frais de messages et de données peuvent être facturés.";

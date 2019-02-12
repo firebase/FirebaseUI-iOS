@@ -1,0 +1,269 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Welcome";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Mag-sign in gamit ang email";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Ilagay ang iyong email";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Mali ang email address na iyon.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Hindi sinusuportahan sa app na ito ang ganitong uri ng account";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "Mayroon ka nang account";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Nagamit mo na ang %@. Mag-sign in gamit ang %@ upang magpatuloy.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Mag-sign in";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Ilagay ang iyong password";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Hindi maaaring walang laman ang password.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Hindi nagtutugma ang inilagay mong email at password.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Hindi tumutugma ang email address na iyon sa isang kasalukuyang account.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Ang email address na iyon ay para sa isang na-disable nang account.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Nagpasok ka ng di-wastong password nang masyadong maraming beses. Pakisubukang muli pagkalipas ng ilang minuto.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Hindi makahanap ng provider para sa %@.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "Hindi tumutugma ang mga email";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "I-recover ang password";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Kumuha ng mga tagubilin na ipadala sa email na ito na magpapaliwanag kung paano i-reset ang iyong password.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Suriin ang iyong email";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Sundin ang mga tagubilin na ipinadala sa %@ upang ma-recover ang iyong password.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Gumawa ng account";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Pangalan at apelyido";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Pumili ng password";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Mga Tuntunin ng Serbisyo";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Patakaran sa Privacy";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Sa pagpapatuloy, ipinababatid mo na tinatanggap mo ang aming %@ at %@.";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Ginagamit na ang email address ng ibang account.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Kailangang may 6 na character man lang at kumbinasyon ng mga titik at mga numero ang mga malalakas na password.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "Masyadong maraming kahilingan ng account mula sa iyong IP address. Subukang muli pagkalipas ng ilang minuto.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Nagamit mo na ang %@ upang mag-sign in. Ilagay ang iyong password para sa account na iyon.";
+
+/* OK button title. */
+"OK" = "OK";
+
+/* Cancel button title. */
+"Cancel" = "Kanselahin";
+
+/* Back button title. */
+"Back" = "Bumalik";
+
+/* Next button title. */
+"Next" = "Susunod";
+
+/* Save button title. */
+"Save" = "I-save";
+
+/* Send button title. */
+"Send" = "Ipadala";
+
+/* Resend button title. */
+"Resend" = "Muling Ipadala";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "Email";
+
+/* Label next to a password text field. */
+"Password" = "Password";
+
+/* Label next to a name text field. */
+"Name" = "Pangalan";
+
+/* Alert title Error. */
+"Error" = "Error";
+
+/* Alert button title Close. */
+"Close" = "Isara";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Profile";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Seguridad";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Mga Naka-link na Account";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Pangalan";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "Mag-email";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Magdagdag ng password";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Palitan ang password";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Mag-sign Out";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Tanggalin ang Account";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Nakalimutan ang password?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "I-verify na ikaw ito";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "I-delete ang Account?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Buburahin nito ang lahat ng data na nauugnay sa iyong account, at hindi na maa-undo Kailangan mong mag-sign in muli upang kumpletuhin ang pagkilos na ito";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Buburahin nito ang lahat ng data na nauugnay sa iyong account, at hindi na maa-undo. Sigurado ka bang gusto mong i-delete ang iyong account?";
+
+/* Text of Delete action button. */
+"Delete" = "I-delete";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "I-delete ang account";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Hindi na maa-undo ang pagkilos na ito";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "I-unlink";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Naka-link na account";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "I-unlink ang account?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Hindi ka na makakapag-sign in gamit ang iyong account";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "I-unlink ang account";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Upang mabago ang email address na kaugnay ng iyong account, kakailanganin mong mag-sign in muli.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Upang baguhin ang iyong password, kailangan mo munang ipasok ang iyong kasalukuyang password.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "I-edit ang email";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "I-edit ang pangalan";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Upang magdagdag ng password sa iyong account, kailangan mong mag-sign in muli.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Upang baguhin ang password sa iyong account, kailangan mong mag-sign in muli.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Upang baguhin ang iyong password, kailangan mo munang ipasok ang iyong kasalukuyang password.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Magdagdag ng password";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Palitan ang password";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "Mag-email";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Fecebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Mag-sign in gamit ang %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Ilagay ang iyong pangalan";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Ilagay ang iyong email";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Ilagay ang iyong password";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Bagong password";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Pumili ng password";
+
+/* Title of forgot password button. */
+"ForgotPasswordTitle" = "Nagkaproblema sa pag-sign in?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Kumpirmahin ang Email";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Naka-sign in!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Nagkakaproblema sa pagtanggap ng mga email?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Subukan ang mga karaniwang pag-aayos na ito: \n - Tingnan kung minarkahan ang email bilang spam o na-filter.\n - Tingnan ang iyong koneksyon sa internet.\n - Tiyakin na hindi ka nagkamali sa pagbaybay ng iyong email.\n - Tingnan kung hindi pa nauubusan ng espasyo ang iyong inbox o may iba pang isyu na may kinalaman sa mga setting ng inbox.\n Kung hindi umubra ang mga hakbang sa itaas, maaari mong ipadala muli ang email. Tandaan na hindi nito ide-deactivate ang link sa lumang email.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Nagpadala ng email sa pag-sign in na may mga karagdagang tagubilin sa %@. Tingnan ang iyong email para makumpleto ang pag-sign in.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Naipadala na ang email sa pag-sign in";

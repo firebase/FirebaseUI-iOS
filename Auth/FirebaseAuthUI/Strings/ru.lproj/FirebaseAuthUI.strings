@@ -1,0 +1,269 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Добро пожаловать!";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Войти по адресу электронной почты";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Введите свой адрес электронной почты";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Неверный адрес электронной почты.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "В этом приложении не поддерживается такой тип аккаунта.";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "У вас уже есть аккаунт";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Вы уже использовали адрес %@. Войдите через аккаунт %@.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Войти";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Введите пароль";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Укажите пароль.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Неверный адрес эл. почты или пароль.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Нет аккаунта с таким адресом электронной почты.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Аккаунт с этим адресом электронной почты отключен.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Вы неправильно ввели пароль слишком много раз. Прежде чем повторить попытку, подождите несколько минут.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "%@: поставщик услуг не найден.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "Адреса электронной почты не совпадают.";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Сбор пароля";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "На этот адрес будет отправлено письмо с инструкциями по сбросу пароля.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Проверьте электронную почту";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "На адрес %@ отправлено письмо с инструкциями по сбросу пароля.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Создать аккаунт";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Имя и фамилия";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Выберите пароль";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Условия использования";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Политика конфиденциальности";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Продолжая, вы принимаете два документа. Вот они: %@ и %@.";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Этот адрес электронной почты уже используется в другом аккаунте.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Пароль должен состоять из букв и цифр и содержать не меньше шести символов.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "С вашего IP-адреса поступает слишком много запросов на создание аккаунта. Повторите попытку через несколько минут.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Вы уже использовали адрес %@. Введите пароль для этого аккаунта.";
+
+/* OK button title. */
+"OK" = "ОК";
+
+/* Cancel button title. */
+"Cancel" = "Отмена";
+
+/* Back button title. */
+"Back" = "Назад";
+
+/* Next button title. */
+"Next" = "Далее";
+
+/* Save button title. */
+"Save" = "Сохранить";
+
+/* Send button title. */
+"Send" = "Отправить";
+
+/* Resend button title. */
+"Resend" = "Отправить ещё раз";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "Адрес электронной почты";
+
+/* Label next to a password text field. */
+"Password" = "Пароль";
+
+/* Label next to a name text field. */
+"Name" = "Имя";
+
+/* Alert title Error. */
+"Error" = "Ошибка";
+
+/* Alert button title Close. */
+"Close" = "Закрыть";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Профиль";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Безопасность";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Связанные аккаунты";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Имя";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "Адрес электронной почты";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Добавить пароль";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Изменить пароль";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Выйти";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Удалить аккаунт";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Забыли пароль?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Подтвердите, что это вы";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Удалить аккаунт?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Все данные в нем будут безвозвратно удалены. Чтобы завершить это действие, нужно будет войти в аккаунт ещё раз.";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Все данные в аккаунте будут безвозвратно удалены. Вы уверены, что хотите продолжить?";
+
+/* Text of Delete action button. */
+"Delete" = "Удалить";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Удаление аккаунта";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Отменить это действие невозможно.";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Отменить связь";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Связанный аккаунт";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Отменить связь с аккаунтом?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Вы больше не сможете входить в систему с его помощью.";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Отменить связь с аккаунтом";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Чтобы связать с аккаунтом другой адрес, потребуется повторно войти в систему.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Сначала нужно ввести текущий пароль.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "Изменить адрес электронной почты";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Изменить имя";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Чтобы добавить новый пароль, нужно будет войти в аккаунт ещё раз.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Чтобы изменить пароль, нужно будет войти в аккаунт ещё раз.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Сначала нужно ввести текущий пароль.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Добавить пароль";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Изменить пароль";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "Адрес электронной почты";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Войти через аккаунт %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Введите свое имя";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Введите свой адрес электронной почты";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Введите пароль";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Новый пароль";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Выберите пароль";
+
+/* Title of forgot password button. */
+"ForgotPasswordTitle" = "Не удается войти в аккаунт?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Подтвердите адрес электронной почты";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Вход выполнен";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Не получили письмо?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Вот что можно сделать: \n – Поищите письмо в папке со спамом или отфильтрованными сообщениями.\n – Проверьте подключение к Интернету.\n – Убедитесь, что правильно указали свой адрес электронной почты.\n – Проверьте настройки папки со входящими сообщениям и посмотрите, достаточно ли в ней места.\n Если найти письмо не удалось, мы можем отправить его ещё раз. В таком случае ссылка из предыдущего сообщения станет недействительна.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "На адрес электронной почты %@ отправлено письмо с информацией о том, как войти в аккаунт. Изучите его и выполните инструкции.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Письмо отправлено.";

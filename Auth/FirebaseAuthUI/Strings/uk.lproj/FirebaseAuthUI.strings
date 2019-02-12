@@ -1,0 +1,269 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Вітаємо";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Увійти, використовуючи електронну адресу";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Введіть електронну адресу";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Електронна адреса неправильна.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Додаток не підтримує облікові записи цього типу";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "У вас уже є обліковий запис";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Ви вже використовували електронну адресу %@. Щоб продовжити, увійдіть через %@.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Увійти";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Введіть пароль";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Укажіть пароль.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Електронна адреса та пароль не збігаються.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Ця електронна адреса не відповідає адресі наявного облікового запису.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Це електронна адреса вимкненого облікового запису.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Ви ввели неправильний пароль забагато разів. Спробуйте за кілька хвилин.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Не вдалося знайти постачальника для %@.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "Електронні адреси не збігаються";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Відновити пароль";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "На цю електронну адресу надійдуть інструкції, як скинути пароль.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Перевірте свою електронну пошту";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Виконайте інструкції з відновлення пароля, надіслані на адресу %@.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Створити обліковий запис";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Ім’я та прізвище";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Виберіть пароль";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Умови використання";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Політика конфіденційності";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Продовжуючи, ви приймаєте такі документи: %@ і %@.";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Ця електронна адреса вже використовується для іншого облікового запису.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Надійний пароль має містити принаймні 6 символів та комбінацію літер і цифр.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "З вашої IP-адреси надходить дуже багато запитів на створення облікового запису. Спробуйте за кілька хвилин.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Ви вже використовували адресу %@ для входу. Введіть пароль для цього облікового запису.";
+
+/* OK button title. */
+"OK" = "ОК";
+
+/* Cancel button title. */
+"Cancel" = "Скасувати";
+
+/* Back button title. */
+"Back" = "Назад";
+
+/* Next button title. */
+"Next" = "Далі";
+
+/* Save button title. */
+"Save" = "Зберегти";
+
+/* Send button title. */
+"Send" = "Надіслати";
+
+/* Resend button title. */
+"Resend" = "Надіслати ще раз";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "Електронна адреса";
+
+/* Label next to a password text field. */
+"Password" = "Пароль";
+
+/* Label next to a name text field. */
+"Name" = "Ім’я";
+
+/* Alert title Error. */
+"Error" = "Помилка";
+
+/* Alert button title Close. */
+"Close" = "Закрити";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Профіль";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Безпека";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Зв’язані облікові записи";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Назва";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "Електронна адреса";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Додати пароль";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Змінити пароль";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Вийти";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Видалити обліковий запис";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Забули пароль?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Підтвердьте свою особу";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Видалити обліковий запис?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Усі дані вашого облікового запису буде стерто, і цю дію не можна буде відмінити. Щоб виконати цю дію, потрібно ввійти ще раз.";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Усі дані вашого облікового запису буде стерто, і цю дію не можна буде відмінити. Видалити обліковий запис?";
+
+/* Text of Delete action button. */
+"Delete" = "Видалити";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Видалити обліковий запис";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Цю дію не можна відмінити";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Від’єднати";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Зв’язаний обліковий запис";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Від’єднати обліковий запис?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Ви більше не зможете входити, використовуючи свій обліковий запис";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Від’єднати обліковий запис";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Щоб змінити електронну адресу, зв’язану з вашим обліковим записом, потрібно ввійти ще раз.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Щоб змінити пароль, спершу введіть поточний.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "Змінити електронну адресу";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Змінити ім’я";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Щоб додати пароль до облікового запису, потрібно ввійти ще раз.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Щоб змінити пароль облікового запису, потрібно ввійти ще раз.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Щоб змінити пароль, спершу введіть поточний.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Додати пароль";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Змінити пароль";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "Електронна адреса";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Твіттер";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Увійти, використовуючи %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Введіть своє ім’я";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Введіть електронну адресу";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Введіть пароль";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Новий пароль";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Виберіть пароль";
+
+/* Title of forgot password button. */
+"ForgotPasswordTitle" = "Не вдається ввійти?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Підтвердьте електронну адресу";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Ви ввійшли";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Ви не отримуєте електронні листи?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Щоб вирішити проблему, скористайтеся порадами нижче. \n – Перевірте: можливо, електронний лист позначено як спам або відфільтровано.\n – Перевірте інтернет-з’єднання.\n – Переконайтеся, що ви правильно вказали електронну адресу.\n – Перевірте доступний обсяг пам’яті для папки \"Вхідні\" й інші можливі проблеми з налаштуваннями.\n – Якщо поради вище не допоможуть, надішліть електронний лист повторно. Зверніть увагу, що після цього посилання в давнішому електронному листі стане недійсним.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Посилання для входу та додаткові вказівки надіслано на адресу %@. Дотримуйтеся їх, щоб увійти в обліковий запис.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Електронну адресу для входу надіслано";

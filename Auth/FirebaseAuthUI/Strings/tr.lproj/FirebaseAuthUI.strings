@@ -1,0 +1,269 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Hoş geldiniz";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "E-posta ile oturum aç";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "E-postanızı girin";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Bu e-posta adresi doğru değil.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Bu hesap türü, bu uygulama tarafından desteklenmiyor";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "Zaten bir hesabınız var";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "%@ e-posta adresini daha önce kullandınız. Devam etmek için %@ ile oturum açın.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Oturum aç";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Şifrenizi girin";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Şifre boş bırakılamaz.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Girdiğiniz e-posta ile şifre eşleşmiyor.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Bu e-posta adresi mevcut bir hesapla eşleşmiyor.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Bu e-posta adresi, devre dışı bırakılmış bir hesaba ait.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Çok fazla kez yanlış şifre girdiniz. Birkaç dakika içinde tekrar deneyin.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "%@ için sağlayıcı bulunamıyor.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "E-postalar eşleşmiyor";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Şifreyi kurtarın";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Şifrenizi nasıl sıfırlayacağınızı açıklayan talimatlar bu e-postaya gönderilsin.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "E-postanızı kontrol edin";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Şifrenizi kurtarmak için %@ adresine gönderilen talimatları uygulayın.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Hesap oluşturun";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Ad ve Soyadı";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Şifre seçin";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Hizmet Şartları";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Gizlilik Politikası";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Devam ederek %@ ve %@ hükümlerimizi kabul ettiğinizi bildirirsiniz.";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "E-posta adresi başka bir hesap tarafından kullanılıyor.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Güçlü şifreler en az 6 karakterden oluşur ve hem harf hem de rakam içerir.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "IP adresinizden çok fazla sayıda hesap isteği geliyor. Birkaç dakika içinde tekrar deneyin.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Oturum açmak için %@ adresini zaten kullandınız. Bu hesaba ait şifrenizi girin.";
+
+/* OK button title. */
+"OK" = "Tamam";
+
+/* Cancel button title. */
+"Cancel" = "İptal";
+
+/* Back button title. */
+"Back" = "Geri";
+
+/* Next button title. */
+"Next" = "İleri";
+
+/* Save button title. */
+"Save" = "Kaydet";
+
+/* Send button title. */
+"Send" = "Gönder";
+
+/* Resend button title. */
+"Resend" = "Tekrar gönder";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "E-posta";
+
+/* Label next to a password text field. */
+"Password" = "Şifre";
+
+/* Label next to a name text field. */
+"Name" = "Ad";
+
+/* Alert title Error. */
+"Error" = "Hata";
+
+/* Alert button title Close. */
+"Close" = "Kapat";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Profil";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Güvenlik";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Bağlı Hesaplar";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Ad";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "E-posta";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Şifre ekle";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Şifreyi değiştir";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Oturumu Kapat";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Hesabı Sil";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Şifrenizi mi unuttunuz?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Kimliğinizi doğrulayın";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Hesap silinsin mi?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Bu işlem, hesabınızla ilişkili tüm verileri siler ve geri alınamaz. Bu işlemi tamamlamak için tekrar oturum açmanız gerekir";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Bu işlem, hesabınızla ilişkili tüm verileri siler ve geri alınamaz. Hesabınızı silmek istediğinizden emin misiniz?";
+
+/* Text of Delete action button. */
+"Delete" = "Sil";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Hesabı silin";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Bu işlem geri alınamaz";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Bağlantıyı kaldır";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Bağlı hesap";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Hesabın bağlantısı kaldırılsın mı?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Artık hesabınızı kullanarak oturum açamazsınız";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Hesabın bağlantısını kaldırın";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Hesabınızla ilişkilendirilmiş e-posta adresini değiştirmek için tekrar oturum açmanız gerekir.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Şifrenizi değiştirmek için önce mevcut şifrenizi girmeniz gerekir.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "E-postayı düzenleyin";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Adı düzenleyin";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Hesabınıza şifre eklemek için tekrar oturum açmanız gerekir.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Hesabınızın şifresini değiştirmek için tekrar oturum açmanız gerekir.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Şifrenizi değiştirmek için önce mevcut şifrenizi girmeniz gerekir.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Şifre ekleyin";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Şifreyi değiştirin";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "E-posta";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "%@ ile oturum aç";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Adınızı girin";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "E-postanızı girin";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Şifrenizi girin";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Yeni şifre";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Şifre seçin";
+
+/* Title of forgot password button. */
+"ForgotPasswordTitle" = "Oturum açılamıyor mu?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "E-posta Adresini Onaylayın";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Oturum açıldı!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "E-postaları almayla ilgili sorun mu yaşıyorsunuz?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Şu sık başvurulan düzeltme yöntemlerini deneyin: \n - E-postanın spam olarak işaretlenme veya filtrelenme durumunu kontrol edin.\n - İnternet bağlantınızı kontrol edin.\n - E-postanızda yazım hatası bulunmadığından emin olun.\n - Gelen kutunuzdaki boş alanın azalıp azalmadığını ve gelen kutusu ayarlarıyla ilgili başka bir sorun olup olmadığını kontrol edin.\n Yukarıdaki adımlar işe yaramazsa e-postayı yeniden gönderebilirsiniz. Bu işlemin eski e-postadaki bağlantıyı devre dışı bırakacağını göz önünde bulundurun.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "%@ adresine ek talimatlar içeren bir oturum açma e-postası gönderildi. Oturum açma işlemini tamamlamak için e-postanızı kontrol edin.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Oturum açma e-postası gönderildi";

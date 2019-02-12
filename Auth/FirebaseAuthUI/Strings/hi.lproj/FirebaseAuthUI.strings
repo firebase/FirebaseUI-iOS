@@ -1,0 +1,269 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "आपका स्वागत है";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "ईमेल से प्रवेश करें";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "अपना ईमेल डालें";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "वह ईमेल पता सही नहीं है.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "यह ऐप्लिकेशन इस प्रकार के खाते का समर्थन नहीं करता है";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "आपके पास पहले से ही एक खाता है";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "आपने पहले ही %@ का उपयोग कर लिया है. जारी रखने के लिए %@ से प्रवेश करें.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "प्रवेश करें";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "अपना पासवर्ड डालें";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "पासवर्ड खाली नहीं हो सकता.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "आपने जो ईमेल और पासवर्ड डाला है, उनका मिलान नहीं हो रहा है.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "वह ईमेल पता किसी मौजूदा खाते से मेल नहीं खाता है.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "यह ईमेल पता उस खाते का है जिसे अक्षम कर दिया गया है.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "आपने कई बार गलत पासवर्ड डाला. कुछ मिनटों में फिर से कोशिश करें.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "%@ के लिए प्रदाता नहीं मिल सका.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "ईमेल का मिलान नहीं हो रहा है";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "पासवर्ड फिर से प्राप्त करें";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "इस ईमेल पर भेजे गए निर्देश पाएं जो आपको अपना पासवर्ड रीसेट करना बताएंगे.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "अपना ईमेल जाँचें";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "अपना पासवर्ड फिर से पाने के लिए %@ पर भेजे गए निर्देशों का पालन करें.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "खाता बनाएं";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "नाम और उपनाम";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "पासवर्ड चुनें";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "सेवा की शर्तें";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "निजता नीति";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "जारी रखकर, आप यह बताते हैं कि आप हमारे %@ और %@ को स्वीकार करते हैं.";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "कोई दूसरा खाता पहले से ही इस ईमेल पते का उपयोग कर रहा है.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "सशक्त पासवर्ड में कम से कम 6 वर्ण होने चाहिए और वे अक्षरों और नंबरों दोनों को मिलाकर बना होना चाहिए.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "आपके IP पते से बहुत अधिक खाता अनुरोध मिल रहे हैं. कुछ मिनटों में फिर से कोशिश करें.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "आपने पहले ही प्रवेश करने के लिए %@ का उपयोग कर लिया है. उस खाते के लिए अपना पासवर्ड डालें.";
+
+/* OK button title. */
+"OK" = "ठीक";
+
+/* Cancel button title. */
+"Cancel" = "रद्द करें";
+
+/* Back button title. */
+"Back" = "वापस जाएं";
+
+/* Next button title. */
+"Next" = "अगला";
+
+/* Save button title. */
+"Save" = "सहेजें";
+
+/* Send button title. */
+"Send" = "भेजें";
+
+/* Resend button title. */
+"Resend" = "फिर से भेजें";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "ईमेल";
+
+/* Label next to a password text field. */
+"Password" = "पासवर्ड";
+
+/* Label next to a name text field. */
+"Name" = "नाम";
+
+/* Alert title Error. */
+"Error" = "गड़बड़ी";
+
+/* Alert button title Close. */
+"Close" = "बंद करें";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "प्रोफ़ाइल";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "सुरक्षा";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "लिंक किए गए खाते";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "नाम";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "ईमेल";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "पासवर्ड जोड़ें";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "पासवर्ड बदलें";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "साइन आउट करें";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "खाता हटाएं";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "पासवर्ड भूल गए?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "पुष्टि करें कि यह आप ही हैं";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "खाता हटाएं?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "यह आपके खाते से संबंधित सभी डेटा मिटा देगा और इसे वापस नहीं पाया जा सकता है. इस कार्रवाई को पूरा करने के लिए आपको फिर से प्रवेश करना होगा";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "यह आपके खाते से संबंधित सभी डेटा मिटा देगा और इसे वापस नहीं पाया जा सकता है. क्या आप वाकई अपना खाता हटाना चाहते हैं?";
+
+/* Text of Delete action button. */
+"Delete" = "हटाएं";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "खाता हटाएं";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "यह कार्रवाई पहले जैसी नहीं की जा सकती";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "अनलिंक करें";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "लिंक किया गया खाता";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "खाता अनलिंक करें?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "अब आप अपने खाते का उपयोग करके प्रवेश करने में सक्षम नहीं होंगे";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "खाता अनलिंक करें";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "अपने खाते से जुड़े ईमेल पते को बदलने के लिए, आपको फिर से प्रवेश करना होगा.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "अपना पासवर्ड बदलने के लिए, आपको पहले अपना मौजूदा पासवर्ड डालना होगा.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "ईमेल संपादित करें";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "नाम संपादित करें";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "अपने खाते में पासवर्ड जोड़ने के लिए, आपको फिर से प्रवेश करना होगा.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "अपने खाते का पासवर्ड बदलने के लिए, आपको फिर से प्रवेश करना होगा.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "अपना पासवर्ड बदलने के लिए, आपको पहले अपना मौजूदा पासवर्ड डालना होगा.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "पासवर्ड जोड़ें";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "पासवर्ड बदलें";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "ईमेल";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "%@ से प्रवेश करें";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "अपना नाम डालें";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "अपना ईमेल डालें";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "अपना पासवर्ड डालें";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "नया पासवर्ड";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "पासवर्ड चुनें";
+
+/* Title of forgot password button. */
+"ForgotPasswordTitle" = "प्रवेश करने में समस्या?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "ईमेल की पुष्टि करें";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "साइन-इन हैं!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "क्या ईमेल मिलने में दिक्कत हो रही है?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "समस्या सुलझाने के ये सामान्य तरीके आज़माकर देखें: \n - देख लें कि ईमेल स्पैम फ़ोल्डर में तो नहीं चला गया या फ़िल्टर तो नहीं हो गया.\n - देख लें कि आपका इंटरनेट कनेक्शन चालू है या नहींं.\n - देख लें कि आपने ईमेल पते की वर्तनी (स्पेलिंग) गलत तो नहीं लिखी है.\n - देख लें कि आपका इनबॉक्स भर तो नहीं गया या इनबॉक्स सेटिंग से जुड़ी दूसरी समस्याएं तो नहीं हैं.\n अगर ऊपर दिए गए सुझावों से काम नहीं बनता है, तो आप फिर से ईमेल भेज सकते हैं. ध्यान दें कि ऐसा करने से पुराने ईमेल में भेजा गया लिंक काम करना बंद कर देगा.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "ज़्यादा निर्देशों वाला एक साइन-इन ईमेल %@ पर भेजा गया है. साइन-इन पूरा करने के लिए अपना ईमेल देखें.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "साइन-इन करने के लिंक वाला ईमेल भेज दिया गया";

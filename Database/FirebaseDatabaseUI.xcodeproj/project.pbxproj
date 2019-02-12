@@ -1,0 +1,545 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D69E1D021DD446600CFA49B /* FirebaseDatabaseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D69E1C621DD446600CFA49B /* FirebaseDatabaseUI.framework */; };
+		8D69E1D721DD446600CFA49B /* FirebaseDatabaseUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E1C921DD446600CFA49B /* FirebaseDatabaseUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E1F121DD44EB00CFA49B /* FUICollectionViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E1E021DD44EA00CFA49B /* FUICollectionViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E1F221DD44EB00CFA49B /* FUIIndexCollectionViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E1E121DD44EA00CFA49B /* FUIIndexCollectionViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E1F321DD44EB00CFA49B /* FUISortedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E1E221DD44EA00CFA49B /* FUISortedArray.m */; };
+		8D69E1F421DD44EB00CFA49B /* FUICollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E1E321DD44EA00CFA49B /* FUICollectionViewDataSource.m */; };
+		8D69E1F521DD44EB00CFA49B /* FUIIndexArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E1E421DD44EA00CFA49B /* FUIIndexArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E1F621DD44EB00CFA49B /* FUIArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E1E521DD44EA00CFA49B /* FUIArray.m */; };
+		8D69E1F721DD44EB00CFA49B /* FUIArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E1E621DD44EA00CFA49B /* FUIArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E1F821DD44EB00CFA49B /* FUIIndexArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E1E721DD44EA00CFA49B /* FUIIndexArray.m */; };
+		8D69E1F921DD44EB00CFA49B /* FUIIndexCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E1E821DD44EA00CFA49B /* FUIIndexCollectionViewDataSource.m */; };
+		8D69E1FA21DD44EB00CFA49B /* FUIIndexTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E1E921DD44EA00CFA49B /* FUIIndexTableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E1FB21DD44EB00CFA49B /* FUITableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E1EA21DD44EB00CFA49B /* FUITableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E1FC21DD44EB00CFA49B /* FUITableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E1EB21DD44EB00CFA49B /* FUITableViewDataSource.m */; };
+		8D69E1FD21DD44EB00CFA49B /* FUICollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E1EC21DD44EB00CFA49B /* FUICollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E1FE21DD44EB00CFA49B /* FUIIndexTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E1ED21DD44EB00CFA49B /* FUIIndexTableViewDataSource.m */; };
+		8D69E1FF21DD44EB00CFA49B /* FUIQueryObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E1EE21DD44EB00CFA49B /* FUIQueryObserver.m */; };
+		8D69E20021DD44EB00CFA49B /* FUISortedArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E1EF21DD44EB00CFA49B /* FUISortedArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E20121DD44EB00CFA49B /* FUIQueryObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E1F021DD44EB00CFA49B /* FUIQueryObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E20B21DD451D00CFA49B /* FUIIndexArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E20221DD451C00CFA49B /* FUIIndexArrayTest.m */; };
+		8D69E20C21DD451D00CFA49B /* FUIIndexCollectionViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E20321DD451C00CFA49B /* FUIIndexCollectionViewDataSourceTest.m */; };
+		8D69E20D21DD451D00CFA49B /* FUIDatabaseTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E20421DD451C00CFA49B /* FUIDatabaseTestUtils.m */; };
+		8D69E20E21DD451D00CFA49B /* FUISortedArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E20521DD451D00CFA49B /* FUISortedArrayTest.m */; };
+		8D69E20F21DD451D00CFA49B /* FUIArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E20721DD451D00CFA49B /* FUIArrayTest.m */; };
+		8D69E21021DD451D00CFA49B /* FUIIndexTableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E20821DD451D00CFA49B /* FUIIndexTableViewDataSourceTest.m */; };
+		8D69E21121DD451D00CFA49B /* FUITableViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E20921DD451D00CFA49B /* FUITableViewDataSourceTest.m */; };
+		8D69E21221DD451D00CFA49B /* FUICollectionViewDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E20A21DD451D00CFA49B /* FUICollectionViewDataSourceTest.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8D69E1D121DD446600CFA49B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D69E1BD21DD446600CFA49B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D69E1C521DD446600CFA49B;
+			remoteInfo = FirebaseDatabaseUI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8D69E1C621DD446600CFA49B /* FirebaseDatabaseUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseDatabaseUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D69E1C921DD446600CFA49B /* FirebaseDatabaseUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseDatabaseUI.h; sourceTree = "<group>"; };
+		8D69E1CA21DD446600CFA49B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D69E1CF21DD446600CFA49B /* FirebaseDatabaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirebaseDatabaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D69E1D621DD446600CFA49B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D69E1E021DD44EA00CFA49B /* FUICollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICollectionViewDataSource.h; sourceTree = "<group>"; };
+		8D69E1E121DD44EA00CFA49B /* FUIIndexCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIIndexCollectionViewDataSource.h; sourceTree = "<group>"; };
+		8D69E1E221DD44EA00CFA49B /* FUISortedArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISortedArray.m; sourceTree = "<group>"; };
+		8D69E1E321DD44EA00CFA49B /* FUICollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICollectionViewDataSource.m; sourceTree = "<group>"; };
+		8D69E1E421DD44EA00CFA49B /* FUIIndexArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIIndexArray.h; sourceTree = "<group>"; };
+		8D69E1E521DD44EA00CFA49B /* FUIArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIArray.m; sourceTree = "<group>"; };
+		8D69E1E621DD44EA00CFA49B /* FUIArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIArray.h; sourceTree = "<group>"; };
+		8D69E1E721DD44EA00CFA49B /* FUIIndexArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIIndexArray.m; sourceTree = "<group>"; };
+		8D69E1E821DD44EA00CFA49B /* FUIIndexCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIIndexCollectionViewDataSource.m; sourceTree = "<group>"; };
+		8D69E1E921DD44EA00CFA49B /* FUIIndexTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIIndexTableViewDataSource.h; sourceTree = "<group>"; };
+		8D69E1EA21DD44EB00CFA49B /* FUITableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUITableViewDataSource.h; sourceTree = "<group>"; };
+		8D69E1EB21DD44EB00CFA49B /* FUITableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUITableViewDataSource.m; sourceTree = "<group>"; };
+		8D69E1EC21DD44EB00CFA49B /* FUICollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICollection.h; sourceTree = "<group>"; };
+		8D69E1ED21DD44EB00CFA49B /* FUIIndexTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIIndexTableViewDataSource.m; sourceTree = "<group>"; };
+		8D69E1EE21DD44EB00CFA49B /* FUIQueryObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIQueryObserver.m; sourceTree = "<group>"; };
+		8D69E1EF21DD44EB00CFA49B /* FUISortedArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISortedArray.h; sourceTree = "<group>"; };
+		8D69E1F021DD44EB00CFA49B /* FUIQueryObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIQueryObserver.h; sourceTree = "<group>"; };
+		8D69E20221DD451C00CFA49B /* FUIIndexArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIIndexArrayTest.m; sourceTree = "<group>"; };
+		8D69E20321DD451C00CFA49B /* FUIIndexCollectionViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIIndexCollectionViewDataSourceTest.m; sourceTree = "<group>"; };
+		8D69E20421DD451C00CFA49B /* FUIDatabaseTestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIDatabaseTestUtils.m; sourceTree = "<group>"; };
+		8D69E20521DD451D00CFA49B /* FUISortedArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISortedArrayTest.m; sourceTree = "<group>"; };
+		8D69E20621DD451D00CFA49B /* FUIDatabaseTestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIDatabaseTestUtils.h; sourceTree = "<group>"; };
+		8D69E20721DD451D00CFA49B /* FUIArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIArrayTest.m; sourceTree = "<group>"; };
+		8D69E20821DD451D00CFA49B /* FUIIndexTableViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIIndexTableViewDataSourceTest.m; sourceTree = "<group>"; };
+		8D69E20921DD451D00CFA49B /* FUITableViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUITableViewDataSourceTest.m; sourceTree = "<group>"; };
+		8D69E20A21DD451D00CFA49B /* FUICollectionViewDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICollectionViewDataSourceTest.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D69E1C321DD446600CFA49B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D69E1CC21DD446600CFA49B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E1D021DD446600CFA49B /* FirebaseDatabaseUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8D69E1BC21DD446600CFA49B = {
+			isa = PBXGroup;
+			children = (
+				8D69E1C821DD446600CFA49B /* FirebaseDatabaseUI */,
+				8D69E1D321DD446600CFA49B /* FirebaseDatabaseUITests */,
+				8D69E1C721DD446600CFA49B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8D69E1C721DD446600CFA49B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E1C621DD446600CFA49B /* FirebaseDatabaseUI.framework */,
+				8D69E1CF21DD446600CFA49B /* FirebaseDatabaseUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8D69E1C821DD446600CFA49B /* FirebaseDatabaseUI */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E1C921DD446600CFA49B /* FirebaseDatabaseUI.h */,
+				8D69E1E621DD44EA00CFA49B /* FUIArray.h */,
+				8D69E1E521DD44EA00CFA49B /* FUIArray.m */,
+				8D69E1EC21DD44EB00CFA49B /* FUICollection.h */,
+				8D69E1E021DD44EA00CFA49B /* FUICollectionViewDataSource.h */,
+				8D69E1E321DD44EA00CFA49B /* FUICollectionViewDataSource.m */,
+				8D69E1E421DD44EA00CFA49B /* FUIIndexArray.h */,
+				8D69E1E721DD44EA00CFA49B /* FUIIndexArray.m */,
+				8D69E1E121DD44EA00CFA49B /* FUIIndexCollectionViewDataSource.h */,
+				8D69E1E821DD44EA00CFA49B /* FUIIndexCollectionViewDataSource.m */,
+				8D69E1E921DD44EA00CFA49B /* FUIIndexTableViewDataSource.h */,
+				8D69E1ED21DD44EB00CFA49B /* FUIIndexTableViewDataSource.m */,
+				8D69E1F021DD44EB00CFA49B /* FUIQueryObserver.h */,
+				8D69E1EE21DD44EB00CFA49B /* FUIQueryObserver.m */,
+				8D69E1EF21DD44EB00CFA49B /* FUISortedArray.h */,
+				8D69E1E221DD44EA00CFA49B /* FUISortedArray.m */,
+				8D69E1EA21DD44EB00CFA49B /* FUITableViewDataSource.h */,
+				8D69E1EB21DD44EB00CFA49B /* FUITableViewDataSource.m */,
+				8D69E1CA21DD446600CFA49B /* Info.plist */,
+			);
+			path = FirebaseDatabaseUI;
+			sourceTree = "<group>";
+		};
+		8D69E1D321DD446600CFA49B /* FirebaseDatabaseUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E20721DD451D00CFA49B /* FUIArrayTest.m */,
+				8D69E20A21DD451D00CFA49B /* FUICollectionViewDataSourceTest.m */,
+				8D69E20621DD451D00CFA49B /* FUIDatabaseTestUtils.h */,
+				8D69E20421DD451C00CFA49B /* FUIDatabaseTestUtils.m */,
+				8D69E20221DD451C00CFA49B /* FUIIndexArrayTest.m */,
+				8D69E20321DD451C00CFA49B /* FUIIndexCollectionViewDataSourceTest.m */,
+				8D69E20821DD451D00CFA49B /* FUIIndexTableViewDataSourceTest.m */,
+				8D69E20521DD451D00CFA49B /* FUISortedArrayTest.m */,
+				8D69E20921DD451D00CFA49B /* FUITableViewDataSourceTest.m */,
+				8D69E1D621DD446600CFA49B /* Info.plist */,
+			);
+			path = FirebaseDatabaseUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8D69E1C121DD446600CFA49B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E20121DD44EB00CFA49B /* FUIQueryObserver.h in Headers */,
+				8D69E1F721DD44EB00CFA49B /* FUIArray.h in Headers */,
+				8D69E1F521DD44EB00CFA49B /* FUIIndexArray.h in Headers */,
+				8D69E20021DD44EB00CFA49B /* FUISortedArray.h in Headers */,
+				8D69E1F221DD44EB00CFA49B /* FUIIndexCollectionViewDataSource.h in Headers */,
+				8D69E1FA21DD44EB00CFA49B /* FUIIndexTableViewDataSource.h in Headers */,
+				8D69E1D721DD446600CFA49B /* FirebaseDatabaseUI.h in Headers */,
+				8D69E1FD21DD44EB00CFA49B /* FUICollection.h in Headers */,
+				8D69E1FB21DD44EB00CFA49B /* FUITableViewDataSource.h in Headers */,
+				8D69E1F121DD44EB00CFA49B /* FUICollectionViewDataSource.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D69E1C521DD446600CFA49B /* FirebaseDatabaseUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D69E1DA21DD446600CFA49B /* Build configuration list for PBXNativeTarget "FirebaseDatabaseUI" */;
+			buildPhases = (
+				8D69E1C121DD446600CFA49B /* Headers */,
+				8D69E1C221DD446600CFA49B /* Sources */,
+				8D69E1C321DD446600CFA49B /* Frameworks */,
+				8D69E1C421DD446600CFA49B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FirebaseDatabaseUI;
+			productName = FirebaseDatabaseUI;
+			productReference = 8D69E1C621DD446600CFA49B /* FirebaseDatabaseUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8D69E1CE21DD446600CFA49B /* FirebaseDatabaseUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D69E1DD21DD446600CFA49B /* Build configuration list for PBXNativeTarget "FirebaseDatabaseUITests" */;
+			buildPhases = (
+				8D69E1CB21DD446600CFA49B /* Sources */,
+				8D69E1CC21DD446600CFA49B /* Frameworks */,
+				8D69E1CD21DD446600CFA49B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8D69E1D221DD446600CFA49B /* PBXTargetDependency */,
+			);
+			name = FirebaseDatabaseUITests;
+			productName = FirebaseDatabaseUITests;
+			productReference = 8D69E1CF21DD446600CFA49B /* FirebaseDatabaseUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8D69E1BD21DD446600CFA49B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = Firebase;
+				TargetAttributes = {
+					8D69E1C521DD446600CFA49B = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					8D69E1CE21DD446600CFA49B = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 8D69E1C021DD446600CFA49B /* Build configuration list for PBXProject "FirebaseDatabaseUI" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8D69E1BC21DD446600CFA49B;
+			productRefGroup = 8D69E1C721DD446600CFA49B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D69E1C521DD446600CFA49B /* FirebaseDatabaseUI */,
+				8D69E1CE21DD446600CFA49B /* FirebaseDatabaseUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D69E1C421DD446600CFA49B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D69E1CD21DD446600CFA49B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D69E1C221DD446600CFA49B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E1F421DD44EB00CFA49B /* FUICollectionViewDataSource.m in Sources */,
+				8D69E1F921DD44EB00CFA49B /* FUIIndexCollectionViewDataSource.m in Sources */,
+				8D69E1F821DD44EB00CFA49B /* FUIIndexArray.m in Sources */,
+				8D69E1FC21DD44EB00CFA49B /* FUITableViewDataSource.m in Sources */,
+				8D69E1FE21DD44EB00CFA49B /* FUIIndexTableViewDataSource.m in Sources */,
+				8D69E1F621DD44EB00CFA49B /* FUIArray.m in Sources */,
+				8D69E1F321DD44EB00CFA49B /* FUISortedArray.m in Sources */,
+				8D69E1FF21DD44EB00CFA49B /* FUIQueryObserver.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D69E1CB21DD446600CFA49B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E20F21DD451D00CFA49B /* FUIArrayTest.m in Sources */,
+				8D69E21221DD451D00CFA49B /* FUICollectionViewDataSourceTest.m in Sources */,
+				8D69E21121DD451D00CFA49B /* FUITableViewDataSourceTest.m in Sources */,
+				8D69E21021DD451D00CFA49B /* FUIIndexTableViewDataSourceTest.m in Sources */,
+				8D69E20C21DD451D00CFA49B /* FUIIndexCollectionViewDataSourceTest.m in Sources */,
+				8D69E20B21DD451D00CFA49B /* FUIIndexArrayTest.m in Sources */,
+				8D69E20E21DD451D00CFA49B /* FUISortedArrayTest.m in Sources */,
+				8D69E20D21DD451D00CFA49B /* FUIDatabaseTestUtils.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8D69E1D221DD446600CFA49B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D69E1C521DD446600CFA49B /* FirebaseDatabaseUI */;
+			targetProxy = 8D69E1D121DD446600CFA49B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		8D69E1D821DD446600CFA49B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8D69E1D921DD446600CFA49B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8D69E1DB21DD446600CFA49B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FirebaseDatabaseUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8D69E1DC21DD446600CFA49B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FirebaseDatabaseUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8D69E1DE21DD446600CFA49B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8D69E1DF21DD446600CFA49B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FirebaseDatabaseUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8D69E1C021DD446600CFA49B /* Build configuration list for PBXProject "FirebaseDatabaseUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D69E1D821DD446600CFA49B /* Debug */,
+				8D69E1D921DD446600CFA49B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D69E1DA21DD446600CFA49B /* Build configuration list for PBXNativeTarget "FirebaseDatabaseUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D69E1DB21DD446600CFA49B /* Debug */,
+				8D69E1DC21DD446600CFA49B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D69E1DD21DD446600CFA49B /* Build configuration list for PBXNativeTarget "FirebaseDatabaseUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D69E1DE21DD446600CFA49B /* Debug */,
+				8D69E1DF21DD446600CFA49B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8D69E1BD21DD446600CFA49B /* Project object */;
+}

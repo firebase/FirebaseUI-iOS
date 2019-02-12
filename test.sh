@@ -4,29 +4,29 @@ set -eo pipefail
 
 EXIT_STATUS=0
 
-(xcodebuild \
-  -workspace FirebaseUI.xcworkspace \
-  -scheme FirebaseUI \
-  -sdk iphonesimulator \
-  -destination 'platform=iOS Simulator,OS=11.4,name=iPhone X' \
-  build \
-  test \
-  ONLY_ACTIVE_ARCH=YES \
-  | xcpretty) || EXIT_STATUS=$?
+folders=( "AnonymousAuth" "Auth" "Database" "EmailAuth" "FacebookAuth" \
+    "Firestore" "GoogleAuth" "PhoneAuth" "Storage" "TwitterAuth" "UITests" )
 
-# It'd be nice to test building the objc sample as a simple
-# integration test, but we don't have a GoogleService-Info.plist file
-# on Travis.
-# cd samples/objc
-# pod install
+schemes=( "FirebaseAnonymousAuthUI" "FirebaseAuthUI" "FirebaseDatabaseUI" \
+    "FirebaseEmailAuthUI" "FirebaseFacebookAuthUI" "FirebaseFirestoreUI" \
+    "FirebaseGoogleAuthUI" "FirebasePhoneAuthUI" "FirebaseStorageUI" \
+    "FirebaseTwitterAuthUI" "FirebaseUISample")
 
-# (xcodebuild \
-#   -workspace FirebaseUI-demo-objc.xcworkspace \
-#   -scheme FirebaseUI-demo-objc \
-#   -sdk iphonesimulator \
-#   -destination 'platform=iOS Simulator,name=iPhone 7' \
-#   build \
-#   ONLY_ACTIVE_ARCH=YES \
-#   | xcpretty) || EXIT_STATUS=$?
+pod repo update;
 
-exit $EXIT_STATUS
+for ((i=0; i<${#folders[*]}; i++));
+do
+  cd ${folders[i]};
+  pod install >/dev/null;
+  (xcodebuild \
+    -workspace ${schemes[i]}.xcworkspace \
+    -scheme ${schemes[i]} \
+    -sdk iphonesimulator \
+    -destination 'platform=iOS Simulator,OS=12.1,name=iPhone XS' \
+    build \
+    test \
+    ONLY_ACTIVE_ARCH=YES \
+    | xcpretty) || EXIT_STATUS=$?;
+  pod deintegrate >/dev/null;
+  cd ..;
+done

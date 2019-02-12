@@ -1,0 +1,12 @@
+platform :ios, '8.0'
+
+target 'FirebaseAuthUI' do
+  use_frameworks!
+
+  pod 'Firebase/Auth'
+
+  target 'FirebaseAuthUITests' do
+    inherit! :search_paths
+  end
+
+end

@@ -1,0 +1,269 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Witamy";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Zaloguj się za pomocą e-maila";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Wpisz swój adres e-mail";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Nieprawidłowy adres e-mail.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Konto tego typu nie jest obsługiwane przez tę aplikację";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "Masz już konto";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Adres %@ został już przez Ciebie użyty. Aby kontynuować, zaloguj się przez: %@.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Zaloguj się";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Wpisz hasło";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Pole z hasłem nie może być puste.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Podany przez Ciebie adres e-mail i hasło nie zgadzają się.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Nie istnieje konto, do którego pasuje ten adres e-mail.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "To jest adres e-mail konta, które zostało wyłączone.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Zbyt wiele razy podano niepoprawne hasło. Spróbuj jeszcze raz za kilka minut.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "%@ – nie można znaleźć usługi";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "Adresy e-mail są niezgodne";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Odzyskiwanie hasła";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Na ten adres e-mail zostaną wysłane instrukcje wyjaśniające, jak zresetować hasło.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Sprawdź pocztę";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Aby odzyskać hasło, wykonaj instrukcje wysłane na adres %@.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Tworzenie konta";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Imię i nazwisko";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Wybierz hasło";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Warunki korzystania z usługi";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Polityka prywatności";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Kontynuując, potwierdzasz, że akceptujesz te dokumenty: %@ i %@.";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Adres e-mail jest już używany przez inne konto.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Silne hasło ma co najmniej 6 znaków i jest kombinacją liter oraz cyfr.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "Z tego adresu IP wysłano zbyt wiele próśb o utworzenie konta. Spróbuj jeszcze raz za kilka minut.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Adres e-mail %@ był już używany przez Ciebie do logowania. Wpisz hasło tego konta.";
+
+/* OK button title. */
+"OK" = "OK";
+
+/* Cancel button title. */
+"Cancel" = "Anuluj";
+
+/* Back button title. */
+"Back" = "Wstecz";
+
+/* Next button title. */
+"Next" = "Dalej";
+
+/* Save button title. */
+"Save" = "Zapisz";
+
+/* Send button title. */
+"Send" = "Wyślij";
+
+/* Resend button title. */
+"Resend" = "Wyślij ponownie";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "Adres e-mail";
+
+/* Label next to a password text field. */
+"Password" = "Hasło";
+
+/* Label next to a name text field. */
+"Name" = "Nazwa";
+
+/* Alert title Error. */
+"Error" = "Błąd";
+
+/* Alert button title Close. */
+"Close" = "Zamknij";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Profil";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Zabezpieczenia";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Połączone konta";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Nazwa";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "Adres e-mail";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Dodaj hasło";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Zmień hasło";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Wyloguj się";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Usuń konto";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Nie pamiętasz hasła?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Potwierdź, że to Ty";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Usunąć konto?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Spowoduje to nieodwracalne usunięcie wszystkich danych powiązanych z Twoim kontem. Aby zakończyć tę czynność, musisz jeszcze raz się zalogować";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Spowoduje to nieodwracalne usunięcie wszystkich danych powiązanych z Twoim kontem. Czy na pewno chcesz usunąć konto?";
+
+/* Text of Delete action button. */
+"Delete" = "Usuń";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Usuwanie konta";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Tej czynności nie będzie można cofnąć";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Odłącz";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Połączone konto";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Czy odłączyć konto?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Logowanie za pomocą tego konta będzie niemożliwe";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Odłączanie konta";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Aby zmienić adres e-mail powiązany ze swoim kontem, musisz zalogować się jeszcze raz.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Aby zmienić hasło, musisz najpierw wpisać to, którego używasz obecnie.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "Edycja adresu e-mail";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Edycja nazwy";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Aby dodać hasło do swojego konta, musisz zalogować się jeszcze raz.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Aby zmienić hasło do swojego konta, musisz zalogować się jeszcze raz.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Aby zmienić hasło, musisz najpierw wpisać to, którego używasz obecnie.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Dodawanie hasła";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Zmiana hasła";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "Adres e-mail";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Zaloguj się przez: %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Wpisz nazwę";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Wpisz adres e-mail";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Wpisz hasło";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Nowe hasło";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Wybierz hasło";
+
+/* Title of forgot password button. */
+"ForgotPasswordTitle" = "Masz problem z zalogowaniem się?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Potwierdź adres e-mail";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Zalogowano";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "E-maile nie dotarły?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Wypróbuj standardowe rozwiązania: \n – Sprawdź, czy e-mail nie został oznaczony jako spam lub objęty którymś z filtrów.\n – Sprawdź połączenie z internetem.\n – Sprawdź, czy adres e-mail jest wpisany poprawnie.\n – Sprawdź, czy nie kończy się miejsce w skrzynce odbiorczej oraz czy nie ma innych problemów z ustawieniami skrzynki.\n Jeżeli wykonanie powyższych czynności nie dało żadnych rezultatów, możesz wysłać e-maila jeszcze raz. Link wysłany w poprzedniej wiadomości przestanie być aktywny.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Na adres %@ wysłaliśmy e-maila umożliwiającego zalogowanie się z dodatkowymi instrukcjami. Sprawdź pocztę, by się zalogować.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "E-mail umożliwiający zalogowanie się został wysłany";

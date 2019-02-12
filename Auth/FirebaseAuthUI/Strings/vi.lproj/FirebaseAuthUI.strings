@@ -1,0 +1,269 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Chào mừng bạn";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Đăng nhập bằng email";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Nhập email của bạn";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Địa chỉ email đó không đúng.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Loại tài khoản này không được ứng dụng này hỗ trợ";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "Bạn đã có tài khoản";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Bạn đã sử dụng %@. Đăng nhập bằng %@ để tiếp tục.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Đăng nhập";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Nhập mật khẩu của bạn";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Không được để trống mật khẩu.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Email và mật khẩu bạn đã nhập không khớp.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Địa chỉ email đó không khớp với tài khoản hiện có.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Địa chỉ email đó là dành cho tài khoản đã bị vô hiệu hóa.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Bạn đã nhập sai mật khẩu quá nhiều lần. Hãy thử lại sau một vài phút.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Không thể tìm thấy nhà cung cấp cho %@.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "Email không khớp";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Khôi phục mật khẩu";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Xem hướng dẫn gửi tới email này có giải thích cách đặt lại mật khẩu của bạn.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Kiểm tra email của bạn";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Làm theo hướng dẫn gửi tới %@ để khôi phục mật khẩu của bạn.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Tạo tài khoản";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Họ và tên";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Chọn mật khẩu";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Điều khoản dịch vụ";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Chính sách về quyền riêng tư";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Bằng cách tiếp tục, bạn cho biết rằng bạn chấp nhận %@ và %@ của chúng tôi.";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Địa chỉ email đã được tài khoản khác sử dụng.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Mật khẩu mạnh có ít nhất 6 ký tự, kết hợp chữ cái và số.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "Có quá nhiều yêu cầu tài khoản từ địa chỉ IP của bạn. Hãy thử lại sau một vài phút.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Bạn đã sử dụng %@ để đăng nhập. Hãy nhập mật khẩu của bạn cho tài khoản đó.";
+
+/* OK button title. */
+"OK" = "OK";
+
+/* Cancel button title. */
+"Cancel" = "Hủy";
+
+/* Back button title. */
+"Back" = "Quay lại";
+
+/* Next button title. */
+"Next" = "Tiếp";
+
+/* Save button title. */
+"Save" = "Lưu";
+
+/* Send button title. */
+"Send" = "Gửi";
+
+/* Resend button title. */
+"Resend" = "Gửi lại";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "Email";
+
+/* Label next to a password text field. */
+"Password" = "Mật khẩu";
+
+/* Label next to a name text field. */
+"Name" = "Tên";
+
+/* Alert title Error. */
+"Error" = "Lỗi";
+
+/* Alert button title Close. */
+"Close" = "Đóng";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Hồ sơ";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Bảo mật";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Tài khoản được liên kết";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Tên";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "Email";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Thêm mật khẩu";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Đổi mật khẩu";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Đăng xuất";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Xóa tài khoản";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Quên mật khẩu?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Xác minh đó là bạn";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Xóa tài khoản?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Thao tác này sẽ xóa tất cả dữ liệu được liên kết với tài khoản của bạn và không thể hoàn tác. Bạn sẽ phải đăng nhập lại để hoàn tất thao tác này";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Thao tác này sẽ xóa tất cả dữ liệu được liên kết với tài khoản của bạn và không thể hoàn tác. Bạn có chắc chắn muốn xóa tài khoản của bạn không?";
+
+/* Text of Delete action button. */
+"Delete" = "Xóa";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Xóa tài khoản";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Không thể hoàn tác thao tác này";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Hủy liên kết";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Tài khoản được liên kết";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Hủy liên kết tài khoản?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Bạn sẽ không thể đăng nhập bằng tài khoản của bạn";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Hủy liên kết tài khoản";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Để thay đổi địa chỉ email liên kết với tài khoản của bạn, bạn sẽ phải đăng nhập lại.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Để thay đổi mật khẩu, trước tiên bạn phải nhập mật khẩu hiện tại của bạn.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "Chỉnh sửa email";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Chỉnh sửa tên";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Để thêm mật khẩu cho tài khoản của bạn, bạn sẽ phải đăng nhập lại.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Để thay đổi mật khẩu cho tài khoản của bạn, bạn sẽ phải đăng nhập lại.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Để thay đổi mật khẩu, trước tiên bạn phải nhập mật khẩu hiện tại của bạn.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Thêm mật khẩu";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Đổi mật khẩu";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "Email";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Đăng nhập bằng %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Nhập tên của bạn";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Nhập email của bạn";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Nhập mật khẩu của bạn";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Mật khẩu mới";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Chọn mật khẩu";
+
+/* Title of forgot password button. */
+"ForgotPasswordTitle" = "Bạn gặp sự cố khi đăng nhập?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Xác nhận email";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Đã đăng nhập!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Bạn gặp vấn đề khi nhận email?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Hãy thử các cách khắc phục vấn đề phổ biến sau: \n - Kiểm tra xem email có bị đánh dấu là spam hay đã được lọc.\n - Kiểm tra kết nối Internet của bạn.\n - Kiểm tra để đảm bảo bạn không viết sai chính tả tên email.\n - Kiểm tra để đảm bảo dung lượng bộ nhớ hộp thư đến của bạn chưa hết hoặc không có vấn đề khác liên quan đến tùy chọn cài đặt hộp thư đến.\n Nếu các bước trên không hiệu quả, bạn có thể gửi lại email. Vui lòng lưu ý rằng thao tác này sẽ hủy kích hoạt đường dẫn liên kết trong email cũ.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Email đăng nhập có hướng dẫn bổ sung đã gửi tới %@. Hãy tìm email này trong hộp thư của bạn để hoàn tất đăng nhập.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Đã gửi email đăng nhập";

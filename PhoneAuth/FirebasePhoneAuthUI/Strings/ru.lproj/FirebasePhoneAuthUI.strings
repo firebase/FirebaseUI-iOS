@@ -1,0 +1,74 @@
+/* The text of the button used to sign-in with Phone. */
+"SignInWithPhone" = "Войти по номеру телефона";
+
+/* The title of view controller where user enters phone number. */
+"EnterPhoneTitle" = "Введите номер телефона";
+
+/* The title of button on navigation controller which navigates to previous screen. */
+"Back" = "Назад";
+
+/* The title of button on navigation controller which navigates to the next screen. */
+"Next" = "Далее";
+
+/* The title of button which user taps on phone verification screen. */
+"Verify" = "Подтвердить";
+
+/* Alert message displayed when user submits empty verification code. */
+"EmptyVerificationCode" = "Укажите код подтверждения.";
+
+/* Alert message displayed when user submits empty phone number. */
+"EmptyPhoneNumber" = "Укажите номер телефона.";
+
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
+"PhoneNumber" = "Номер телефона";
+
+/* Placeholder shown for phone number input field. */
+"EnterYourPhoneNumber" = "Номер телефона";
+
+/* Label next to the left of country selector control. */
+"Country" = "Страна";
+
+/* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
+"EnterCodeDescription" = "Укажите код из %@ цифр, который мы отправили на номер";
+
+/* The title of button with resend verification code functionality. */
+"ResendCode" = "Отправить код ещё раз";
+
+/* Text of the resend timer label shown on verification phone number screen. */
+"ResendCodeTimer" = "Код можно будет запросить ещё раз через %@";
+
+/* The title of view controller where user verifies phone number. . */
+"VerifyPhoneTitle" = "Подтвердите номер телефона";
+
+/* The title of button displayed when user closes alert message. */
+"Done" = "Готово";
+
+/* The title of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneTitle" = "Неверный номер телефона";
+
+/* The body message of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneMessage" = "Введите действительный номер телефона.";
+
+/* The body message of alert shown when user tapped resend verification code button. */
+"ResendCodeResult" = "Код был отправлен на номер %@";
+
+/* The title of alert shown when user entered invalid verification code. */
+"IncorrectCodeTitle" = "Неверный код подтверждения";
+
+/* The body message of alert shown when user entered invalid verification code. */
+"IncorrectCodeMessage" = "Неверный код. Повторите попытку.";
+
+/* The body message of alert shown when internal server error appeared. */
+"InternalErrorMessage" = "Произошла ошибка. Повторите попытку.";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "Этот номер телефона использовался слишком много раз.";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "Не удалось подтвердить номер телефона.";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "Этот код уже неактивен.";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "Нажимая кнопку \"%@\", вы принимаете два документа. Вот они: %@ и %@. Также вы соглашаетесь получить SMS. За сообщение и обмен данными может взиматься плата.";

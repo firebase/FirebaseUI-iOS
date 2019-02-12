@@ -1,0 +1,13 @@
+platform :ios, '8.0'
+
+target 'FirebaseUISample' do
+  use_frameworks!
+  platform :ios, '9.0'
+
+  pod 'OCMock'
+  pod 'FirebaseUI', :path => '../'
+
+  target 'FirebaseUISampleUITests' do
+    inherit! :search_paths
+  end
+end

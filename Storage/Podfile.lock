@@ -1,0 +1,51 @@
+PODS:
+  - Firebase/CoreOnly (5.16.0):
+    - FirebaseCore (= 5.2.0)
+  - Firebase/Storage (5.16.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (= 3.1.0)
+  - FirebaseAuthInterop (1.0.0)
+  - FirebaseCore (5.2.0):
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseStorage (3.1.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleUtilities/Environment (5.3.7)
+  - GoogleUtilities/Logger (5.3.7):
+    - GoogleUtilities/Environment
+  - GTMSessionFetcher/Core (1.2.1)
+  - OCMock (3.4.3)
+  - SDWebImage (4.4.5):
+    - SDWebImage/Core (= 4.4.5)
+  - SDWebImage/Core (4.4.5)
+
+DEPENDENCIES:
+  - Firebase/Storage
+  - OCMock
+  - SDWebImage (~> 4.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Firebase
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseStorage
+    - GoogleUtilities
+    - GTMSessionFetcher
+    - OCMock
+    - SDWebImage
+
+SPEC CHECKSUMS:
+  Firebase: 749a8ff4962f9d8c79dda1966de20f6f77583d67
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: ea2d1816723ef21492b8e9113303e1350db5e08c
+  FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
+  GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
+  GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+  OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
+  SDWebImage: ecc03494e973b93b80213649d32175f8d2d17d4d
+
+PODFILE CHECKSUM: 520bda42321ed30976c6840784823b80f3cb081a
+
+COCOAPODS: 1.5.3

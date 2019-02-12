@@ -1,0 +1,74 @@
+/* The text of the button used to sign-in with Phone. */
+"SignInWithPhone" = "Přihlásit se pomocí telefonu";
+
+/* The title of view controller where user enters phone number. */
+"EnterPhoneTitle" = "Zadejte telefonní číslo";
+
+/* The title of button on navigation controller which navigates to previous screen. */
+"Back" = "Zpět";
+
+/* The title of button on navigation controller which navigates to the next screen. */
+"Next" = "Další";
+
+/* The title of button which user taps on phone verification screen. */
+"Verify" = "Ověřit";
+
+/* Alert message displayed when user submits empty verification code. */
+"EmptyVerificationCode" = "Pole ověřovacího kódu nesmí být prázdné";
+
+/* Alert message displayed when user submits empty phone number. */
+"EmptyPhoneNumber" = "Pole telefonního čísla nesmí být prázdné";
+
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
+"PhoneNumber" = "Číslo";
+
+/* Placeholder shown for phone number input field. */
+"EnterYourPhoneNumber" = "Telefonní číslo";
+
+/* Label next to the left of country selector control. */
+"Country" = "Země";
+
+/* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
+"EnterCodeDescription" = "Zadejte %@místný kód, který jsme vám zaslali";
+
+/* The title of button with resend verification code functionality. */
+"ResendCode" = "Znovu odeslat kód";
+
+/* Text of the resend timer label shown on verification phone number screen. */
+"ResendCodeTimer" = "Znovu odeslat kód za %@";
+
+/* The title of view controller where user verifies phone number. . */
+"VerifyPhoneTitle" = "Ověření telefonního čísla";
+
+/* The title of button displayed when user closes alert message. */
+"Done" = "Hotovo";
+
+/* The title of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneTitle" = "Neplatné telefonní číslo";
+
+/* The body message of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneMessage" = "Zadejte platné telefonní číslo";
+
+/* The body message of alert shown when user tapped resend verification code button. */
+"ResendCodeResult" = "Kód odeslán na číslo %@";
+
+/* The title of alert shown when user entered invalid verification code. */
+"IncorrectCodeTitle" = "Nesprávný ověřovací kód";
+
+/* The body message of alert shown when user entered invalid verification code. */
+"IncorrectCodeMessage" = "Špatný kód. Zkuste to znovu.";
+
+/* The body message of alert shown when internal server error appeared. */
+"InternalErrorMessage" = "Něco se nepovedlo. Zkuste to prosím znovu.";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "Toto telefonní číslo již bylo použito příliš mnohokrát";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "Při ověřování telefonního čísla došlo k potížím";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "Platnost kódu vypršela";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "Klepnutím na tlačítko %@ vyjadřujete svůj souhlas s těmito dokumenty: %@ a %@. Může být odeslána SMS a mohou být účtovány poplatky za zprávy a data.";

@@ -1,0 +1,269 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Üdvözöljük!";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Bejelentkezés e-mail-fiókkal";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Adja meg az e-mail-címét";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Az e-mail-cím helytelen.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Ezt a típusú fiókot az alkalmazás nem támogatja.";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "Már rendelkezik fiókkal";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Már használta a következő e-mail-címet: %@. A folytatáshoz jelentkezzen be %@-fiókjával.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Bejelentkezés";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Adja meg a jelszót";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "A jelszó mező nem lehet üres.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "A megadott e-mail-cím és jelszó nem egyezik.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Ehhez az e-mail-címhez egyetlen meglévő fiók sem tartozik.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Ez az e-mail-cím egy letiltott fiókhoz tartozik.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Túl sokszor adott meg hibás jelszót. Néhány perc múlva próbálja újra.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Nem találjuk a következőhöz tartozó szolgáltatót: %@.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "Az e-mail-címek nem egyeznek.";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Jelszó visszaállítása";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Olvassa el az e-mailben elküldött utasításokat, amelyekből megtudhatja, hogyan állíthatja vissza a jelszavát.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Ellenőrizze az e-mailjeit.";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "A jelszó visszaállításához kövesse az ide (%@) elküldött utasításokat.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Fiók létrehozása";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Utónév és vezetéknév";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Válasszon jelszót";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Általános Szerződési Feltételek";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Adatvédelmi irányelvek";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "A folytatással kinyilvánítja, hogy elfogadja %@ és %@ dokumentumainkat.";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Az e-mail-cím egy másik fióknál már használatban van.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Az erős jelszavak legalább 6 karakterből állnak, valamint betűket és számokat egyaránt tartalmaznak.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "Az Ön IP-címéről túl sok fiókkérelem érkezik. Néhány perc múlva próbálja újra.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Ezt az e-mail-fiókot (%@) már használta bejelentkezésre. Adja meg a fiókhoz tartozó jelszót.";
+
+/* OK button title. */
+"OK" = "Rendben";
+
+/* Cancel button title. */
+"Cancel" = "Mégse";
+
+/* Back button title. */
+"Back" = "Vissza";
+
+/* Next button title. */
+"Next" = "Következő";
+
+/* Save button title. */
+"Save" = "Mentés";
+
+/* Send button title. */
+"Send" = "Küldés";
+
+/* Resend button title. */
+"Resend" = "Újraküldés";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "E-mail";
+
+/* Label next to a password text field. */
+"Password" = "Jelszó";
+
+/* Label next to a name text field. */
+"Name" = "Név";
+
+/* Alert title Error. */
+"Error" = "Hiba";
+
+/* Alert button title Close. */
+"Close" = "Bezárás";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Profil";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Biztonság";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Összekapcsolt fiókok";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Név";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "E-mail";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Jelszó hozzáadása";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Jelszó módosítása";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Kijelentkezés";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Fiók törlése";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Elfelejtette a jelszavát?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Igazolja, hogy Ön az";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Fiók törlése?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Ezzel az összes fiókadatát törli, és ezt a műveletet nem vonhatja vissza. A művelet végrehajtásához újra be kell jelentkeznie.";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Ezzel az összes fiókadatát törli, és ezt a műveletet nem vonhatja vissza. Biztosan törölni szeretné a fiókját?";
+
+/* Text of Delete action button. */
+"Delete" = "Törlés";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Fiók törlése";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "A művelet nem vonható vissza.";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Leválasztás";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Összekapcsolt fiók";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Leválasztja a fiókot?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Többé nem fog tudni bejelentkezni a fiókkal.";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Fiók leválasztása";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "A fiókjához tartozó e-mail-cím módosításához újra be kell jelentkeznie.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "A jelszó módosításához előbb meg kell adnia a jelenlegi jelszavát.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "E-mail szerkesztése";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Név szerkesztése";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Ha fiókjához jelszót szeretne hozzáadni, újra be kell jelentkeznie.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Fiókja jelszavának módosításához újra be kell jelentkeznie.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "A jelszó módosításához előbb meg kell adnia a jelenlegi jelszavát.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Jelszó hozzáadása";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Jelszó módosítása";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "E-mail";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Bejelentkezés a következővel: %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Írja be a nevét";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Adja meg az e-mail-címét";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Adja meg a jelszót";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Új jelszó";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Válasszon jelszót";
+
+/* Title of forgot password button. */
+"ForgotPasswordTitle" = "Problémái vannak a bejelentkezéssel?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "E-mail megerősítése";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Sikeres bejelentkezés!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Gondja van az e-mailek fogadásával?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Próbálja ki ezeket az általános problémamegoldó lépéseket: \n – Nézze meg, hogy nem került-e az e-mail a spameket tartalmazó mappába, vagy nem szűrte-e ki a levelezőrendszer.\n – Ellenőrizze az internetkapcsolatot.\n – Ellenőrizze, hogy helyesen adta-e meg az e-mail-címét.\n – Ellenőrizze, hogy a beérkező leveleket tartalmazó mappa nem telt-e meg, vagy nincs-e más, a mappával kapcsolatos probléma.\n Ha a fenti lépések nem végrehajtása nem járt eredménnyel, küldje el újra az e-mailt. Ne feledje, hogy ezzel deaktiválja az előző e-mailben szereplő linket.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "A további utasításokat tartalmazó bejelentkezési e-mailt elküldtük ide: %@. A bejelentkezés befejezéséhez keresse meg az e-mailjei között.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Elküldtük a bejelentkezési e-mailt";

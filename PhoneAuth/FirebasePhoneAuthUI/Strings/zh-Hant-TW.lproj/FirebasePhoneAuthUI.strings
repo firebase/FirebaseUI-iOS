@@ -1,0 +1,74 @@
+/* The text of the button used to sign-in with Phone. */
+"SignInWithPhone" = "使用電話登入";
+
+/* The title of view controller where user enters phone number. */
+"EnterPhoneTitle" = "輸入電話號碼";
+
+/* The title of button on navigation controller which navigates to previous screen. */
+"Back" = "上一步";
+
+/* The title of button on navigation controller which navigates to the next screen. */
+"Next" = "下一步";
+
+/* The title of button which user taps on phone verification screen. */
+"Verify" = "驗證";
+
+/* Alert message displayed when user submits empty verification code. */
+"EmptyVerificationCode" = "驗證碼不能空白";
+
+/* Alert message displayed when user submits empty phone number. */
+"EmptyPhoneNumber" = "電話號碼不能空白";
+
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
+"PhoneNumber" = "號碼";
+
+/* Placeholder shown for phone number input field. */
+"EnterYourPhoneNumber" = "電話號碼";
+
+/* Label next to the left of country selector control. */
+"Country" = "國家/地區";
+
+/* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
+"EnterCodeDescription" = "請輸入系統傳送到下列電話號碼的 %@ 位數驗證碼：";
+
+/* The title of button with resend verification code functionality. */
+"ResendCode" = "重新傳送驗證碼";
+
+/* Text of the resend timer label shown on verification phone number screen. */
+"ResendCodeTimer" = "於 %@ 後重新傳送驗證碼";
+
+/* The title of view controller where user verifies phone number. . */
+"VerifyPhoneTitle" = "驗證電話號碼";
+
+/* The title of button displayed when user closes alert message. */
+"Done" = "完成";
+
+/* The title of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneTitle" = "電話號碼錯誤";
+
+/* The body message of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneMessage" = "請輸入有效的電話號碼";
+
+/* The body message of alert shown when user tapped resend verification code button. */
+"ResendCodeResult" = "驗證碼已傳送至 %@";
+
+/* The title of alert shown when user entered invalid verification code. */
+"IncorrectCodeTitle" = "驗證碼不正確";
+
+/* The body message of alert shown when user entered invalid verification code. */
+"IncorrectCodeMessage" = "驗證碼錯誤，請再試一次。";
+
+/* The body message of alert shown when internal server error appeared. */
+"InternalErrorMessage" = "發生錯誤，請再試一次。";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "使用這個電話號碼的次數過多";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "驗證電話號碼時發生問題";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "這個代碼已經失效";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "選擇輕觸 [%@] 即表示您接受我們的《%@》和《%@》。系統將會傳送簡訊給您，不過您可能需要支付簡訊和數據傳輸費用。";

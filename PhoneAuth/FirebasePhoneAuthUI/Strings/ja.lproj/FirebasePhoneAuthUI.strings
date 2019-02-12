@@ -1,0 +1,74 @@
+/* The text of the button used to sign-in with Phone. */
+"SignInWithPhone" = "携帯電話を使用してログイン";
+
+/* The title of view controller where user enters phone number. */
+"EnterPhoneTitle" = "電話番号の入力";
+
+/* The title of button on navigation controller which navigates to previous screen. */
+"Back" = "戻る";
+
+/* The title of button on navigation controller which navigates to the next screen. */
+"Next" = "次へ";
+
+/* The title of button which user taps on phone verification screen. */
+"Verify" = "確認";
+
+/* Alert message displayed when user submits empty verification code. */
+"EmptyVerificationCode" = "確認コードは空白にできません";
+
+/* Alert message displayed when user submits empty phone number. */
+"EmptyPhoneNumber" = "電話番号は空白にできません";
+
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
+"PhoneNumber" = "数字";
+
+/* Placeholder shown for phone number input field. */
+"EnterYourPhoneNumber" = "電話番号";
+
+/* Label next to the left of country selector control. */
+"Country" = "国";
+
+/* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
+"EnterCodeDescription" = "送信された %@ 桁のコードを入力してください";
+
+/* The title of button with resend verification code functionality. */
+"ResendCode" = "コードを再送信";
+
+/* Text of the resend timer label shown on verification phone number screen. */
+"ResendCodeTimer" = "%@後にコードを再送信";
+
+/* The title of view controller where user verifies phone number. . */
+"VerifyPhoneTitle" = "電話番号の確認";
+
+/* The title of button displayed when user closes alert message. */
+"Done" = "完了";
+
+/* The title of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneTitle" = "電話番号が無効です";
+
+/* The body message of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneMessage" = "有効な電話番号を入力してください";
+
+/* The body message of alert shown when user tapped resend verification code button. */
+"ResendCodeResult" = "コードを %@ に送信しました";
+
+/* The title of alert shown when user entered invalid verification code. */
+"IncorrectCodeTitle" = "確認コードが正しくありません";
+
+/* The body message of alert shown when user entered invalid verification code. */
+"IncorrectCodeMessage" = "コードが間違っています。もう一度お試しください。";
+
+/* The body message of alert shown when internal server error appeared. */
+"InternalErrorMessage" = "エラーが発生しました。もう一度お試しください。";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "この電話番号は何度も使用されています";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "電話番号の確認中に問題が発生しました";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "このコードは無効になりました";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "[%@] をタップすると、%@と%@に同意したことになり、SMS が送信されます。データ通信料がかかることがあります。";

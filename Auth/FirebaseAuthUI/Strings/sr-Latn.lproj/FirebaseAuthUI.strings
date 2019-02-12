@@ -1,0 +1,269 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Dobro došli";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Prijavi me pomoću imejla";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Unesite imejl";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Ta imejl adresa nije tačna.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Ova aplikacija ne podržava taj tip naloga";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "Već imate nalog";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Već ste upotrebili %@. Prijavite se pomoću %@-a da biste nastavili.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Prijavi me";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Unesite lozinku";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Lozinka mora da se unese.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Imejl i lozinka koje ste uneli se ne podudaraju.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Ta imejl adresa ne odgovara nijednom postojećem nalogu.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Ta imejl adresa pripada deaktiviranom nalogu.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Previše puta ste uneli netačnu lozinku. Probajte ponovo za par minuta.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Nismo uspeli da nađemo dobavljača za %@.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "Imejlovi se ne podudaraju";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Povratite lozinku";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Na ovaj imejl ćete dobiti uputstva kako da resetujete lozinku.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Proverite imejl";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Pratite uputstva koja smo vam poslali na %@ da biste povratili lozinku.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Otvorite nalog";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Ime i prezime";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Izaberite lozinku";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Uslovi korišćenja usluge";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Politika privatnosti";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Ako nastavite, potvrđujete da prihvatate dokumente %@ i %@.";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Ova imejl adresa se već koristi za drugi nalog.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Jake lozinke imaju bar 6 znakova, uz kombinaciju slova i brojeva.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "Sa vaše IP adrese potiče previše zahteva za nalog. Probajte ponovo za par minuta.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Već ste koristili adresu %@ za prijavljivanje. Unesite lozinku za taj nalog.";
+
+/* OK button title. */
+"OK" = "Potvrdi";
+
+/* Cancel button title. */
+"Cancel" = "Otkaži";
+
+/* Back button title. */
+"Back" = "Nazad";
+
+/* Next button title. */
+"Next" = "Sledeće";
+
+/* Save button title. */
+"Save" = "Sačuvaj";
+
+/* Send button title. */
+"Send" = "Pošalji";
+
+/* Resend button title. */
+"Resend" = "Ponovo pošalji";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "Imejl";
+
+/* Label next to a password text field. */
+"Password" = "Lozinka";
+
+/* Label next to a name text field. */
+"Name" = "Ime";
+
+/* Alert title Error. */
+"Error" = "Greška";
+
+/* Alert button title Close. */
+"Close" = "Zatvori";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Profil";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Bezbednost";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Povezani nalozi";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Ime";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "Imejl";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Dodajte lozinku";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Promenite lozinku";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Odjavi me";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Brisanje naloga";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Zaboravili ste lozinku?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Potvrdite da ste to vi";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Želite li da izbrišete nalog?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Ovim ćete trajno izbrisati sve podatke povezane sa nalogom. Treba da se ponovo prijavite da biste mogli da obavite ovu radnju";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Ovim ćete trajno izbrisati sve podatke povezane sa nalogom. Želite li stvarno da izbrišete nalog?";
+
+/* Text of Delete action button. */
+"Delete" = "Izbriši";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Izbriši nalog";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Ova radnja ne može da se opozove";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Opozovi vezu";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Povezani nalog";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Želite li da opozovete vezu sa nalogom?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Više nećete moći da se prijavljujete pomoću naloga";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Opoziv veze sa nalogom";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Da biste promenili imejl adresu povezanu sa nalogom, treba da se ponovo prijavite.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Da biste promenili lozinku, treba da unesete trenutnu lozinku.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "Izmena imejla";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Izmena naziva";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Da biste nalogu dodali lozinku, treba ponovo da se prijavite.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Da biste promenili lozinku naloga, treba ponovo da se prijavite.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Da biste promenili lozinku, treba je da unesete trenutnu lozinku.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Dodajte lozinku";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Promenite lozinku";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "Imejl";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Prijavite se pomoću %@-a";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Unesite ime";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Unesite imejl";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Unesite lozinku";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Nova lozinka";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Izaberite lozinku";
+
+/* Title of forgot password button. */
+"ForgotPasswordTitle" = "Imate problema pri prijavljivanju?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Potvrdite imejl adresu";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Prijavljeni ste!";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Imate problema sa prijemom imejla?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Probajte ova uobičajena rešenja: \n– Proverite da li je imejl filtriran ili obeležen kao nepoželjan.\n – Proverite internet vezu.\n – Proverite da li ste tačno upisali imejl adresu.\n – Proverite da niste ostali bez prostora u prijemnom sandučetu, odnosno da nema drugih problema sa prijemnim sandučetom.\n Ako navedene mere ne urode plodom, možete ponovo da pošaljete imejl. Imajte u vidu da ćete time deaktivirati link u starijem imejlu.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Imejl za prijavljivanje sa dodatnim uputstvima je poslat na %@. Proverite imejl da biste dovršili prijavljivanje.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Poslali smo vam imejl za prijavljivanje";

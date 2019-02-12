@@ -1,0 +1,269 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Bienvenue";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Se connecter avec une adresse e-mail";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Saisissez votre adresse e-mail";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Cette adresse e-mail est incorrecte.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Ce type de compte n'est pas compatible avec cette application";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "Vous avez déjà un compte";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Vous avez déjà utilisé l'adresse e-mail %@. Connectez-vous avec %@ pour continuer.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Se connecter";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Saisissez votre mot de passe";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Vous devez indiquer un mot de passe.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "L'adresse e-mail et le mot de passe saisis ne correspondent pas.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Cette adresse e-mail ne correspond à aucun compte existant.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Cette adresse e-mail correspond à un compte qui a été désactivé.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Vous avez saisi un mot de passe incorrect un trop grand nombre de fois. Veuillez réessayer dans quelques minutes.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Impossible de trouver un fournisseur pour %@.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "Les adresses e-mail ne correspondent pas";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Récupérez votre mot de passe";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Les instructions relatives à la réinitialisation de votre mot de passe seront envoyées à cette adresse e-mail.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Consultez votre boîte de réception";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Suivez les instructions envoyées à l'adresse e-mail %@ pour récupérer votre mot de passe.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Créer un compte";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Nom et prénom";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Choisissez un mot de passe";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Conditions d'utilisation";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Règles de confidentialité";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "En continuant, vous acceptez les %@ et les %@.";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Cette adresse e-mail est déjà utilisée par un autre compte.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Les mots de passe sécurisés comportent au moins six caractères et une combinaison de chiffres et de lettres.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "De trop nombreuses demandes de compte proviennent de votre adresse IP. Veuillez réessayer dans quelques minutes.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Vous avez déjà utilisé l'adresse e-mail %@ pour vous connecter. Saisissez votre mot de passe pour ce compte.";
+
+/* OK button title. */
+"OK" = "OK";
+
+/* Cancel button title. */
+"Cancel" = "Annuler";
+
+/* Back button title. */
+"Back" = "Retour";
+
+/* Next button title. */
+"Next" = "Suivant";
+
+/* Save button title. */
+"Save" = "Enregistrer";
+
+/* Send button title. */
+"Send" = "Envoyer";
+
+/* Resend button title. */
+"Resend" = "Renvoyer";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "Adresse e-mail";
+
+/* Label next to a password text field. */
+"Password" = "Mot de passe";
+
+/* Label next to a name text field. */
+"Name" = "Nom";
+
+/* Alert title Error. */
+"Error" = "Erreur";
+
+/* Alert button title Close. */
+"Close" = "Fermer";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Profil";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Sécurité";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Comptes associés";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Nom";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "Adresse e-mail";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Ajouter un mot de passe";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Modifier le mot de passe";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Se déconnecter";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Supprimer le compte";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Mot de passe oublié";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Confirmez qu'il s'agit bien de vous";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Supprimer le compte ?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Cette action effacera toutes les données associées à votre compte de façon irréversible. Vous devrez vous reconnecter pour finaliser cette opération.";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Cette action effacera toutes les données associées à votre compte de façon irréversible. Voulez-vous vraiment supprimer votre compte ?";
+
+/* Text of Delete action button. */
+"Delete" = "Supprimer";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Supprimer le compte";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Cette action est irréversible";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Dissocier";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Compte associé";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Dissocier le compte ?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Vous ne pourrez plus utiliser votre compte pour vous connecter";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Dissocier le compte";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Pour modifier l'adresse e-mail associée à votre compte, vous devrez vous reconnecter.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Pour modifier votre mot de passe, vous devez d'abord saisir votre mot de passe actuel.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "Modifier l'adresse e-mail";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Modifier le nom";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Vous devrez vous reconnecter pour ajouter un mot de passe à votre compte.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Vous devrez vous reconnecter pour modifier le mot de passe de votre compte.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Pour modifier votre mot de passe, vous devez d'abord saisir votre mot de passe actuel.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Ajouter un mot de passe";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Modifier le mot de passe";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "Adresse e-mail";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Se connecter avec %@";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Saisissez votre nom";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Saisissez votre adresse e-mail";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Saisissez votre mot de passe";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Nouveau mot de passe";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Choisissez un mot de passe";
+
+/* Title of forgot password button. */
+"ForgotPasswordTitle" = "Vous ne parvenez pas à vous connecter ?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Confirmez votre adresse e-mail";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Connecté";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Vous n'avez pas reçu l'e-mail ?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Essayez les solutions courantes suivantes : \n - Vérifiez que l'e-mail n'a pas été filtré ni marqué comme spam.\n - Vérifiez votre connexion Internet.\n - Vérifiez que votre adresse e-mail est correcte.\n - Vérifiez que votre boîte de réception n'est pas pleine et que les paramètres sont correctement définis.\n Si les étapes décrites ci-dessus n'ont pas résolu le problème, vous pouvez renvoyer l'e-mail. Sachez que le lien du premier e-mail sera alors désactivé.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Un e-mail de connexion avec des instructions supplémentaires a été envoyé à %@. Consultez cet e-mail pour vous connecter.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "E-mail de connexion envoyé";

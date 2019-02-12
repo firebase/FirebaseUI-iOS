@@ -1,0 +1,74 @@
+/* The text of the button used to sign-in with Phone. */
+"SignInWithPhone" = "فون کے ساتھ سائں ان کریں";
+
+/* The title of view controller where user enters phone number. */
+"EnterPhoneTitle" = "فون نمبر درج کریں";
+
+/* The title of button on navigation controller which navigates to previous screen. */
+"Back" = "پیچھے جائیں";
+
+/* The title of button on navigation controller which navigates to the next screen. */
+"Next" = "آگے جائیں";
+
+/* The title of button which user taps on phone verification screen. */
+"Verify" = "توثیق کریں";
+
+/* Alert message displayed when user submits empty verification code. */
+"EmptyVerificationCode" = "توثیقی کوڈ خالی نہیں رہ سکتا";
+
+/* Alert message displayed when user submits empty phone number. */
+"EmptyPhoneNumber" = "فون نمبر خالی نہیں رہ سکتا";
+
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
+"PhoneNumber" = "نمبر";
+
+/* Placeholder shown for phone number input field. */
+"EnterYourPhoneNumber" = "فون نمبر";
+
+/* Label next to the left of country selector control. */
+"Country" = "ملک";
+
+/* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
+"EnterCodeDescription" = "ہماری جانب سے بھیجا گیا %@ عدد کا کوڈ درج کریں";
+
+/* The title of button with resend verification code functionality. */
+"ResendCode" = "کوڈ دوبارہ بھیجیں";
+
+/* Text of the resend timer label shown on verification phone number screen. */
+"ResendCodeTimer" = "%@ میں کوڈ دوبارہ بھیجیں";
+
+/* The title of view controller where user verifies phone number. . */
+"VerifyPhoneTitle" = "فون نمبر کی توثیق کریں";
+
+/* The title of button displayed when user closes alert message. */
+"Done" = "ہو گیا";
+
+/* The title of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneTitle" = "غلط فون نمبر";
+
+/* The body message of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneMessage" = "براہ کرم ایک درست فون نمبر درج کریں";
+
+/* The body message of alert shown when user tapped resend verification code button. */
+"ResendCodeResult" = "کوڈ %@ کو بھیجا گیا تھا";
+
+/* The title of alert shown when user entered invalid verification code. */
+"IncorrectCodeTitle" = "غلط توثیقی کوڈ";
+
+/* The body message of alert shown when user entered invalid verification code. */
+"IncorrectCodeMessage" = "غلط کوڈ۔ دوبارہ کوشش کریں۔";
+
+/* The body message of alert shown when internal server error appeared. */
+"InternalErrorMessage" = "کچھ غلط ہو گیا۔ براہ کرم دوبارہ کوشش کریں۔";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "یہ فون نمبر کافی مرتبہ استعمال ہو چکا ہے";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "آپ کے فون نمبر کی توثیق کرنے میں ایک مسئلہ تھا";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "یہ کوڈ اب درست نہیں رہا";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "%@ کو تھپتھپا کر، آپ نشاندہی کر رہے ہیں کہ آپ ہماری %@ اور %@ کو قبول کرتے ہیں۔ ایک SMS بھیجا جا سکتا ہے۔ پیغام اور ڈیٹا کی شرحیں لاگو ہو سکتی ہیں۔";

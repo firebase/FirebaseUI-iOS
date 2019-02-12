@@ -1,0 +1,851 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D69E3DB21DD83EB00CFA49B /* FirebaseFacebookAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E3DA21DD83EB00CFA49B /* FirebaseFacebookAuthUITests.m */; };
+		8D69E3DD21DD83EB00CFA49B /* FirebaseFacebookAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E3CF21DD83EB00CFA49B /* FirebaseFacebookAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E3E821DD843800CFA49B /* FUIFacebookAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E3E621DD843800CFA49B /* FUIFacebookAuth.m */; };
+		8D69E3E921DD843800CFA49B /* FUIFacebookAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E3E721DD843800CFA49B /* FUIFacebookAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D69E44421DD843F00CFA49B /* FirebaseFacebookAuthUI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E3EB21DD843E00CFA49B /* FirebaseFacebookAuthUI.strings */; };
+		8D69E44521DD843F00CFA49B /* ic_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E44121DD843F00CFA49B /* ic_facebook.png */; };
+		8D69E44621DD843F00CFA49B /* ic_facebook@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E44221DD843F00CFA49B /* ic_facebook@3x.png */; };
+		8D69E44721DD843F00CFA49B /* ic_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E44321DD843F00CFA49B /* ic_facebook@2x.png */; };
+		8D69E44B21DD845100CFA49B /* FUIFacebookAuthTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E44821DD845100CFA49B /* FUIFacebookAuthTest.m */; };
+		8D69E44C21DD845100CFA49B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E44921DD845100CFA49B /* GoogleService-Info.plist */; };
+		8D69E44D21DD88BB00CFA49B /* FirebaseFacebookAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D69E3CC21DD83EB00CFA49B /* FirebaseFacebookAuthUI.framework */; };
+		8D69E45121DD8A6D00CFA49B /* ic_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E44121DD843F00CFA49B /* ic_facebook.png */; };
+		8D69E45221DD8A6D00CFA49B /* ic_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E44321DD843F00CFA49B /* ic_facebook@2x.png */; };
+		8D69E45321DD8A6D00CFA49B /* ic_facebook@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D69E44221DD843F00CFA49B /* ic_facebook@3x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8D69E3D721DD83EB00CFA49B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D69E3C321DD83EB00CFA49B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D69E3CB21DD83EB00CFA49B;
+			remoteInfo = FirebaseFacebookAuthUI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8D69E3CC21DD83EB00CFA49B /* FirebaseFacebookAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseFacebookAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D69E3CF21DD83EB00CFA49B /* FirebaseFacebookAuthUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseFacebookAuthUI.h; sourceTree = "<group>"; };
+		8D69E3D021DD83EB00CFA49B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D69E3D521DD83EB00CFA49B /* FirebaseFacebookAuthUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirebaseFacebookAuthUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D69E3DA21DD83EB00CFA49B /* FirebaseFacebookAuthUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebaseFacebookAuthUITests.m; sourceTree = "<group>"; };
+		8D69E3DC21DD83EB00CFA49B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D69E3E621DD843800CFA49B /* FUIFacebookAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIFacebookAuth.m; sourceTree = "<group>"; };
+		8D69E3E721DD843800CFA49B /* FUIFacebookAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIFacebookAuth.h; sourceTree = "<group>"; };
+		8D69E3EC21DD843E00CFA49B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E3ED21DD843E00CFA49B /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = ur.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E3EE21DD843E00CFA49B /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E3EF21DD843E00CFA49B /* es-SV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-SV"; path = "es-SV.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E3F021DD843E00CFA49B /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E3F121DD843E00CFA49B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E3F221DD843E00CFA49B /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E3F321DD843E00CFA49B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E3F421DD843E00CFA49B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E3F521DD843E00CFA49B /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E3F621DD843E00CFA49B /* mr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = mr; path = mr.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E3F721DD843E00CFA49B /* es-GT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-GT"; path = "es-GT.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E3F821DD843E00CFA49B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E3F921DD843E00CFA49B /* en-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-CA"; path = "en-CA.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E3FA21DD843E00CFA49B /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E3FB21DD843E00CFA49B /* es-PY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PY"; path = "es-PY.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E3FC21DD843E00CFA49B /* gu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gu; path = gu.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E3FD21DD843E00CFA49B /* kn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kn; path = kn.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E3FE21DD843E00CFA49B /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E3FF21DD843E00CFA49B /* es-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-US"; path = "es-US.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E40021DD843E00CFA49B /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E40121DD843E00CFA49B /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E40221DD843E00CFA49B /* es-VE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-VE"; path = "es-VE.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E40321DD843E00CFA49B /* es-CL */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CL"; path = "es-CL.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E40421DD843E00CFA49B /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E40521DD843E00CFA49B /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E40621DD843E00CFA49B /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E40721DD843E00CFA49B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E40821DD843E00CFA49B /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E40921DD843E00CFA49B /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E40A21DD843E00CFA49B /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E40B21DD843E00CFA49B /* nn-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nn-NO"; path = "nn-NO.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E40C21DD843E00CFA49B /* es-PA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PA"; path = "es-PA.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E40D21DD843E00CFA49B /* en-SG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-SG"; path = "en-SG.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E40E21DD843E00CFA49B /* sr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sr; path = sr.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E40F21DD843E00CFA49B /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = ms.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E41021DD843E00CFA49B /* es-CR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CR"; path = "es-CR.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E41121DD843E00CFA49B /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E41221DD843E00CFA49B /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E41321DD843E00CFA49B /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E41421DD843E00CFA49B /* es-AR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-AR"; path = "es-AR.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E41521DD843E00CFA49B /* es-PE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PE"; path = "es-PE.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E41621DD843E00CFA49B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E41721DD843E00CFA49B /* en-IE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IE"; path = "en-IE.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E41821DD843E00CFA49B /* fil */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fil; path = fil.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E41921DD843E00CFA49B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E41A21DD843E00CFA49B /* es-CO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CO"; path = "es-CO.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E41B21DD843E00CFA49B /* gsw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gsw; path = gsw.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E41C21DD843E00CFA49B /* en-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-ZA"; path = "en-ZA.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E41D21DD843E00CFA49B /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E41E21DD843E00CFA49B /* es-PR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PR"; path = "es-PR.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E41F21DD843E00CFA49B /* de-AT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-AT"; path = "de-AT.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E42021DD843E00CFA49B /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E42121DD843E00CFA49B /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E42221DD843E00CFA49B /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E42321DD843E00CFA49B /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E42421DD843E00CFA49B /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E42521DD843E00CFA49B /* lv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lv; path = lv.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E42621DD843E00CFA49B /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E42721DD843E00CFA49B /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E42821DD843E00CFA49B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E42921DD843E00CFA49B /* es-DO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-DO"; path = "es-DO.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E42A21DD843E00CFA49B /* fr-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CH"; path = "fr-CH.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E42B21DD843E00CFA49B /* es-NI */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-NI"; path = "es-NI.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E42C21DD843E00CFA49B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E42D21DD843E00CFA49B /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E42E21DD843E00CFA49B /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E42F21DD843E00CFA49B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E43021DD843E00CFA49B /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E43121DD843E00CFA49B /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E43221DD843E00CFA49B /* de-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-CH"; path = "de-CH.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E43321DD843E00CFA49B /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = bn.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E43421DD843E00CFA49B /* es-EC */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-EC"; path = "es-EC.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E43521DD843E00CFA49B /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E43621DD843E00CFA49B /* es-BO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-BO"; path = "es-BO.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E43721DD843E00CFA49B /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E43821DD843E00CFA49B /* ln */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ln; path = ln.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E43921DD843E00CFA49B /* es-UY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-UY"; path = "es-UY.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E43A21DD843E00CFA49B /* es-HN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-HN"; path = "es-HN.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E43B21DD843E00CFA49B /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E43C21DD843E00CFA49B /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E43D21DD843E00CFA49B /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E43E21DD843E00CFA49B /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/FirebaseFacebookAuthUI.strings; sourceTree = "<group>"; };
+		8D69E43F21DD843E00CFA49B /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "en-IN.lproj/FirebaseFacebookAuthUI.strings"; sourceTree = "<group>"; };
+		8D69E44121DD843F00CFA49B /* ic_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_facebook.png; sourceTree = "<group>"; };
+		8D69E44221DD843F00CFA49B /* ic_facebook@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_facebook@3x.png"; sourceTree = "<group>"; };
+		8D69E44321DD843F00CFA49B /* ic_facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_facebook@2x.png"; sourceTree = "<group>"; };
+		8D69E44821DD845100CFA49B /* FUIFacebookAuthTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIFacebookAuthTest.m; sourceTree = "<group>"; };
+		8D69E44921DD845100CFA49B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8D69E44A21DD845100CFA49B /* FUIFacebookAuthTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIFacebookAuthTest.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D69E3C921DD83EB00CFA49B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D69E3D221DD83EB00CFA49B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E44D21DD88BB00CFA49B /* FirebaseFacebookAuthUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8D69E3C221DD83EB00CFA49B = {
+			isa = PBXGroup;
+			children = (
+				8D69E3CE21DD83EB00CFA49B /* FirebaseFacebookAuthUI */,
+				8D69E3D921DD83EB00CFA49B /* FirebaseFacebookAuthUITests */,
+				8D69E3CD21DD83EB00CFA49B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8D69E3CD21DD83EB00CFA49B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E3CC21DD83EB00CFA49B /* FirebaseFacebookAuthUI.framework */,
+				8D69E3D521DD83EB00CFA49B /* FirebaseFacebookAuthUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8D69E3CE21DD83EB00CFA49B /* FirebaseFacebookAuthUI */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E3CF21DD83EB00CFA49B /* FirebaseFacebookAuthUI.h */,
+				8D69E3E721DD843800CFA49B /* FUIFacebookAuth.h */,
+				8D69E3E621DD843800CFA49B /* FUIFacebookAuth.m */,
+				8D69E3D021DD83EB00CFA49B /* Info.plist */,
+				8D69E44021DD843F00CFA49B /* Resources */,
+				8D69E3EA21DD843E00CFA49B /* Strings */,
+			);
+			path = FirebaseFacebookAuthUI;
+			sourceTree = "<group>";
+		};
+		8D69E3D921DD83EB00CFA49B /* FirebaseFacebookAuthUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E3DA21DD83EB00CFA49B /* FirebaseFacebookAuthUITests.m */,
+				8D69E44A21DD845100CFA49B /* FUIFacebookAuthTest.h */,
+				8D69E44821DD845100CFA49B /* FUIFacebookAuthTest.m */,
+				8D69E44921DD845100CFA49B /* GoogleService-Info.plist */,
+				8D69E3DC21DD83EB00CFA49B /* Info.plist */,
+			);
+			path = FirebaseFacebookAuthUITests;
+			sourceTree = "<group>";
+		};
+		8D69E3EA21DD843E00CFA49B /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E3EB21DD843E00CFA49B /* FirebaseFacebookAuthUI.strings */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
+		8D69E44021DD843F00CFA49B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E44121DD843F00CFA49B /* ic_facebook.png */,
+				8D69E44321DD843F00CFA49B /* ic_facebook@2x.png */,
+				8D69E44221DD843F00CFA49B /* ic_facebook@3x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8D69E3C721DD83EB00CFA49B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E3DD21DD83EB00CFA49B /* FirebaseFacebookAuthUI.h in Headers */,
+				8D69E3E921DD843800CFA49B /* FUIFacebookAuth.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D69E3CB21DD83EB00CFA49B /* FirebaseFacebookAuthUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D69E3E021DD83EB00CFA49B /* Build configuration list for PBXNativeTarget "FirebaseFacebookAuthUI" */;
+			buildPhases = (
+				8D69E3C721DD83EB00CFA49B /* Headers */,
+				8D69E3C821DD83EB00CFA49B /* Sources */,
+				8D69E3C921DD83EB00CFA49B /* Frameworks */,
+				8D69E3CA21DD83EB00CFA49B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FirebaseFacebookAuthUI;
+			productName = FirebaseFacebookAuthUI;
+			productReference = 8D69E3CC21DD83EB00CFA49B /* FirebaseFacebookAuthUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8D69E3D421DD83EB00CFA49B /* FirebaseFacebookAuthUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D69E3E321DD83EB00CFA49B /* Build configuration list for PBXNativeTarget "FirebaseFacebookAuthUITests" */;
+			buildPhases = (
+				8D69E3D121DD83EB00CFA49B /* Sources */,
+				8D69E3D221DD83EB00CFA49B /* Frameworks */,
+				8D69E3D321DD83EB00CFA49B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8D69E3D821DD83EB00CFA49B /* PBXTargetDependency */,
+			);
+			name = FirebaseFacebookAuthUITests;
+			productName = FirebaseFacebookAuthUITests;
+			productReference = 8D69E3D521DD83EB00CFA49B /* FirebaseFacebookAuthUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8D69E3C321DD83EB00CFA49B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = Firebase;
+				TargetAttributes = {
+					8D69E3CB21DD83EB00CFA49B = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					8D69E3D421DD83EB00CFA49B = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 8D69E3C621DD83EB00CFA49B /* Build configuration list for PBXProject "FirebaseFacebookAuthUI" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				de,
+				ur,
+				he,
+				"es-SV",
+				"zh-Hant-TW",
+				ar,
+				el,
+				"zh-Hans",
+				ja,
+				fa,
+				mr,
+				"es-GT",
+				"en-CA",
+				uk,
+				"es-PY",
+				gu,
+				kn,
+				nb,
+				"es-US",
+				"en-GB",
+				es,
+				"es-VE",
+				"es-CL",
+				sl,
+				da,
+				"es-419",
+				it,
+				bg,
+				sk,
+				"sr-Latn",
+				"nn-NO",
+				"es-PA",
+				"en-SG",
+				sr,
+				ms,
+				"es-CR",
+				ta,
+				sv,
+				cs,
+				"es-AR",
+				"es-PE",
+				ko,
+				"en-IE",
+				fil,
+				"zh-Hant",
+				"es-CO",
+				gsw,
+				"en-ZA",
+				hu,
+				"es-PR",
+				"de-AT",
+				"en-AU",
+				tr,
+				pl,
+				"pt-BR",
+				vi,
+				lv,
+				"es-MX",
+				lt,
+				ru,
+				"es-DO",
+				"fr-CH",
+				"es-NI",
+				fr,
+				fi,
+				id,
+				nl,
+				th,
+				pt,
+				"de-CH",
+				bn,
+				"es-EC",
+				"pt-PT",
+				"es-BO",
+				ro,
+				ln,
+				"es-UY",
+				"es-HN",
+				hr,
+				hi,
+				ca,
+				zh,
+				"en-IN",
+			);
+			mainGroup = 8D69E3C221DD83EB00CFA49B;
+			productRefGroup = 8D69E3CD21DD83EB00CFA49B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D69E3CB21DD83EB00CFA49B /* FirebaseFacebookAuthUI */,
+				8D69E3D421DD83EB00CFA49B /* FirebaseFacebookAuthUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D69E3CA21DD83EB00CFA49B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E44721DD843F00CFA49B /* ic_facebook@2x.png in Resources */,
+				8D69E44621DD843F00CFA49B /* ic_facebook@3x.png in Resources */,
+				8D69E44521DD843F00CFA49B /* ic_facebook.png in Resources */,
+				8D69E44421DD843F00CFA49B /* FirebaseFacebookAuthUI.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D69E3D321DD83EB00CFA49B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E44C21DD845100CFA49B /* GoogleService-Info.plist in Resources */,
+				8D69E45321DD8A6D00CFA49B /* ic_facebook@3x.png in Resources */,
+				8D69E45121DD8A6D00CFA49B /* ic_facebook.png in Resources */,
+				8D69E45221DD8A6D00CFA49B /* ic_facebook@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D69E3C821DD83EB00CFA49B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E3E821DD843800CFA49B /* FUIFacebookAuth.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D69E3D121DD83EB00CFA49B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D69E44B21DD845100CFA49B /* FUIFacebookAuthTest.m in Sources */,
+				8D69E3DB21DD83EB00CFA49B /* FirebaseFacebookAuthUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8D69E3D821DD83EB00CFA49B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D69E3CB21DD83EB00CFA49B /* FirebaseFacebookAuthUI */;
+			targetProxy = 8D69E3D721DD83EB00CFA49B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8D69E3EB21DD843E00CFA49B /* FirebaseFacebookAuthUI.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8D69E3EC21DD843E00CFA49B /* de */,
+				8D69E3ED21DD843E00CFA49B /* ur */,
+				8D69E3EE21DD843E00CFA49B /* he */,
+				8D69E3EF21DD843E00CFA49B /* es-SV */,
+				8D69E3F021DD843E00CFA49B /* zh-Hant-TW */,
+				8D69E3F121DD843E00CFA49B /* ar */,
+				8D69E3F221DD843E00CFA49B /* el */,
+				8D69E3F321DD843E00CFA49B /* zh-Hans */,
+				8D69E3F421DD843E00CFA49B /* ja */,
+				8D69E3F521DD843E00CFA49B /* fa */,
+				8D69E3F621DD843E00CFA49B /* mr */,
+				8D69E3F721DD843E00CFA49B /* es-GT */,
+				8D69E3F821DD843E00CFA49B /* en */,
+				8D69E3F921DD843E00CFA49B /* en-CA */,
+				8D69E3FA21DD843E00CFA49B /* uk */,
+				8D69E3FB21DD843E00CFA49B /* es-PY */,
+				8D69E3FC21DD843E00CFA49B /* gu */,
+				8D69E3FD21DD843E00CFA49B /* kn */,
+				8D69E3FE21DD843E00CFA49B /* nb */,
+				8D69E3FF21DD843E00CFA49B /* es-US */,
+				8D69E40021DD843E00CFA49B /* en-GB */,
+				8D69E40121DD843E00CFA49B /* es */,
+				8D69E40221DD843E00CFA49B /* es-VE */,
+				8D69E40321DD843E00CFA49B /* es-CL */,
+				8D69E40421DD843E00CFA49B /* sl */,
+				8D69E40521DD843E00CFA49B /* da */,
+				8D69E40621DD843E00CFA49B /* es-419 */,
+				8D69E40721DD843E00CFA49B /* it */,
+				8D69E40821DD843E00CFA49B /* bg */,
+				8D69E40921DD843E00CFA49B /* sk */,
+				8D69E40A21DD843E00CFA49B /* sr-Latn */,
+				8D69E40B21DD843E00CFA49B /* nn-NO */,
+				8D69E40C21DD843E00CFA49B /* es-PA */,
+				8D69E40D21DD843E00CFA49B /* en-SG */,
+				8D69E40E21DD843E00CFA49B /* sr */,
+				8D69E40F21DD843E00CFA49B /* ms */,
+				8D69E41021DD843E00CFA49B /* es-CR */,
+				8D69E41121DD843E00CFA49B /* ta */,
+				8D69E41221DD843E00CFA49B /* sv */,
+				8D69E41321DD843E00CFA49B /* cs */,
+				8D69E41421DD843E00CFA49B /* es-AR */,
+				8D69E41521DD843E00CFA49B /* es-PE */,
+				8D69E41621DD843E00CFA49B /* ko */,
+				8D69E41721DD843E00CFA49B /* en-IE */,
+				8D69E41821DD843E00CFA49B /* fil */,
+				8D69E41921DD843E00CFA49B /* zh-Hant */,
+				8D69E41A21DD843E00CFA49B /* es-CO */,
+				8D69E41B21DD843E00CFA49B /* gsw */,
+				8D69E41C21DD843E00CFA49B /* en-ZA */,
+				8D69E41D21DD843E00CFA49B /* hu */,
+				8D69E41E21DD843E00CFA49B /* es-PR */,
+				8D69E41F21DD843E00CFA49B /* de-AT */,
+				8D69E42021DD843E00CFA49B /* en-AU */,
+				8D69E42121DD843E00CFA49B /* tr */,
+				8D69E42221DD843E00CFA49B /* pl */,
+				8D69E42321DD843E00CFA49B /* pt-BR */,
+				8D69E42421DD843E00CFA49B /* vi */,
+				8D69E42521DD843E00CFA49B /* lv */,
+				8D69E42621DD843E00CFA49B /* es-MX */,
+				8D69E42721DD843E00CFA49B /* lt */,
+				8D69E42821DD843E00CFA49B /* ru */,
+				8D69E42921DD843E00CFA49B /* es-DO */,
+				8D69E42A21DD843E00CFA49B /* fr-CH */,
+				8D69E42B21DD843E00CFA49B /* es-NI */,
+				8D69E42C21DD843E00CFA49B /* fr */,
+				8D69E42D21DD843E00CFA49B /* fi */,
+				8D69E42E21DD843E00CFA49B /* id */,
+				8D69E42F21DD843E00CFA49B /* nl */,
+				8D69E43021DD843E00CFA49B /* th */,
+				8D69E43121DD843E00CFA49B /* pt */,
+				8D69E43221DD843E00CFA49B /* de-CH */,
+				8D69E43321DD843E00CFA49B /* bn */,
+				8D69E43421DD843E00CFA49B /* es-EC */,
+				8D69E43521DD843E00CFA49B /* pt-PT */,
+				8D69E43621DD843E00CFA49B /* es-BO */,
+				8D69E43721DD843E00CFA49B /* ro */,
+				8D69E43821DD843E00CFA49B /* ln */,
+				8D69E43921DD843E00CFA49B /* es-UY */,
+				8D69E43A21DD843E00CFA49B /* es-HN */,
+				8D69E43B21DD843E00CFA49B /* hr */,
+				8D69E43C21DD843E00CFA49B /* hi */,
+				8D69E43D21DD843E00CFA49B /* ca */,
+				8D69E43E21DD843E00CFA49B /* zh */,
+				8D69E43F21DD843E00CFA49B /* en-IN */,
+			);
+			name = FirebaseFacebookAuthUI.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8D69E3DE21DD83EB00CFA49B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8D69E3DF21DD83EB00CFA49B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8D69E3E121DD83EB00CFA49B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FirebaseFacebookAuthUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"UIKit\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8D69E3E221DD83EB00CFA49B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = FirebaseFacebookAuthUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"UIKit\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8D69E3E421DD83EB00CFA49B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"OCMock\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"UIKit\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8D69E3E521DD83EB00CFA49B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FirebaseFacebookAuthUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"OCMock\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"UIKit\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFacebookAuthUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8D69E3C621DD83EB00CFA49B /* Build configuration list for PBXProject "FirebaseFacebookAuthUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D69E3DE21DD83EB00CFA49B /* Debug */,
+				8D69E3DF21DD83EB00CFA49B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D69E3E021DD83EB00CFA49B /* Build configuration list for PBXNativeTarget "FirebaseFacebookAuthUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D69E3E121DD83EB00CFA49B /* Debug */,
+				8D69E3E221DD83EB00CFA49B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D69E3E321DD83EB00CFA49B /* Build configuration list for PBXNativeTarget "FirebaseFacebookAuthUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D69E3E421DD83EB00CFA49B /* Debug */,
+				8D69E3E521DD83EB00CFA49B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8D69E3C321DD83EB00CFA49B /* Project object */;
+}

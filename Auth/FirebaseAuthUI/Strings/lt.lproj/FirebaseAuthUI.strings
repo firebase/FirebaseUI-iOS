@@ -1,0 +1,269 @@
+/* Title for auth picker screen. */
+"AuthPickerTitle" = "Sveiki!";
+
+/* Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"SignInWithEmail" = "Prisijungti nurodant el. paštą";
+
+/* Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EnterYourEmail" = "Įveskite el. paštą";
+
+/* Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"InvalidEmailError" = "Šis el. paštas netinkamas.";
+
+/* Error message displayed when the app cannot authenticate user's account. */
+"CannotAuthenticateError" = "Ši programa nepalaiko šio paskyros tipo";
+
+/* Title of an alert shown to an existing user coming back to the app. */
+"ExistingAccountTitle" = "Jūs jau turite paskyrą";
+
+/* Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder). */
+"ProviderUsedPreviouslyMessage" = "Jau panaudojote %@. Jei norite tęsti, prisijunkite per „%@“.";
+
+/* Title for sign in screen and sign in button. */
+"SignInTitle" = "Prisijungti";
+
+/* Password text field placeholder. */
+"EnterYourPassword" = "Įveskite slaptažodį";
+
+/* Error message displayed when user enters an empty password. */
+"InvalidPasswordError" = "Slaptažodžio laukas negali būti tuščias.";
+
+/* Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"WrongPasswordError" = "Įvestas slaptažodis neatitinka el. pašto adreso.";
+
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "Šis el. pašto adresas neatitinka esamos paskyros.";
+
+/* Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AccountDisabledError" = "Šis el. pašto adresas yra išjungtos paskyros.";
+
+/* Error message displayed after user trying to sign in too many times. */
+"SignInTooManyTimesError" = "Įvedėte netinkamą slaptažodį per daug kartų. Po kelių minučių bandykite dar kartą.";
+
+/* Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc) */
+"CantFindProvider" = "Nepavyko rasti „%@“ teikėjo.";
+
+/* Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailsDontMatch" = "El. paštai nesutampa";
+
+/* Title for password recovery screen. */
+"PasswordRecoveryTitle" = "Atkurti slaptažodį";
+
+/* Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryMessage" = "Gaukite instrukcijas su nurodymais, kaip pakeisti slaptažodį, šiuo el. paštu.";
+
+/* Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PasswordRecoveryEmailSentTitle" = "Patikrinkite el. paštą";
+
+/* Message displayed when the email for password recovery has been sent. */
+"PasswordRecoveryEmailSentMessage" = "Vadovaudamiesi el. pašto adresu %@ išsiųstais nurodymais atkurkite slaptažodį.";
+
+/* Title for sign up screen. */
+"SignUpTitle" = "Sukurti paskyrą";
+
+/* Name text field placeholder. */
+"FirstAndLastName" = "Vardas ir pavardė";
+
+/* Placeholder for the password text field in a sign up form. */
+"ChoosePassword" = "Pasirinkite slaptažodį";
+
+/* Text linked to a web page with the Terms of Service content. */
+"TermsOfService" = "Paslaugų teikimo sąlygomis";
+
+/* Text linked to a web page with the Privacy Policy content. */
+"PrivacyPolicy" = "Privatumo politika";
+
+/* A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link. */
+"TermsOfServiceMessage" = "Tęsdami nurodote, kad sutinkate su %@ ir %@.";
+
+/* Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EmailAlreadyInUseError" = "Šis el. paštas jau naudojamas kitoje paskyroje.";
+
+/* Error message displayed when the password is too weak. */
+"WeakPasswordError" = "Sudėtingą slaptažodį sudaro bent 6 simboliai ir raidžių bei skaičių derinys.";
+
+/* Error message displayed when many accounts have been created from same IP address. */
+"SignUpTooManyTimesError" = "Iš jūsų IP adreso siunčiama per daug paskyros užklausų. Bandykite dar kartą po kelių minučių.";
+
+/* Message to explain to the user that password is needed for an account with this email address. */
+"PasswordVerificationMessage" = "Jūs jau prisijungėte naudodami %@. Įveskite tos paskyros slaptažodį.";
+
+/* OK button title. */
+"OK" = "Gerai";
+
+/* Cancel button title. */
+"Cancel" = "Atšaukti";
+
+/* Back button title. */
+"Back" = "Atgal";
+
+/* Next button title. */
+"Next" = "Kitas";
+
+/* Save button title. */
+"Save" = "Išsaugoti";
+
+/* Send button title. */
+"Send" = "Siųsti";
+
+/* Resend button title. */
+"Resend" = "Siųsti iš naujo";
+
+/* Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"Email" = "El. paštas";
+
+/* Label next to a password text field. */
+"Password" = "Slaptažodis";
+
+/* Label next to a name text field. */
+"Name" = "Vardas";
+
+/* Alert title Error. */
+"Error" = "Klaida";
+
+/* Alert button title Close. */
+"Close" = "Uždaryti";
+
+/* Account Settings section title Profile. */
+"AS_SectionProfile" = "Profilis";
+
+/* Account Settings section title Security. */
+"AS_SectionSecurity" = "Sauga";
+
+/* Account Settings section title Linked Accounts. */
+"AS_SectionLinkedAccounts" = "Susietos paskyros";
+
+/* Account Settings cell title Name. */
+"AS_Name" = "Vardas";
+
+/* Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"AS_Email" = "El. paštas";
+
+/* Account Settings cell title Add Password. */
+"AS_AddPassword" = "Pridėti slaptažodį";
+
+/* Account Settings cell title Change Password. */
+"AS_ChangePassword" = "Keisti slaptažodį";
+
+/* Account Settings cell title Sign Out. */
+"AS_SignOut" = "Atsijungti";
+
+/* Account Settings cell title Delete Account. */
+"AS_DeleteAccount" = "Ištrinti paskyrą";
+
+/* Button text for 'Forgot Password' action. */
+"ForgotPassword" = "Pamiršote slaptažodį?";
+
+/* Alert message title show for re-authorization. */
+"VerifyItsYou" = "Patvirtinkite savo tapatybę";
+
+/* Alert message title shown to confirm account deletion action. */
+"DeleteAccountConfirmationTitle" = "Ištrinti paskyrą?";
+
+/* Alert message body shown to confirm account deletion action. */
+"DeleteAccountBody" = "Tai atlikus bus ištrinti visi su jūsų paskyra susiję duomenys; šio veiksmo anuliuoti negalima. Norėdami užbaigti šį veiksmą turėsite prisijungti dar kartą.";
+
+/* Explanation message shown before deleting account. */
+"DeleteAccountConfirmationMessage" = "Tai atlikus bus ištrinti visi su jūsų paskyra susiję duomenys; šio veiksmo anuliuoti negalima. Ar tikrai norite ištrinti paskyrą?";
+
+/* Text of Delete action button. */
+"Delete" = "Ištrinti";
+
+/* Title of Controller shown before deleting account */
+"DeleteAccountControllerTitle" = "Ištrinti paskyrą";
+
+/* Alert message shown before account deletion. */
+"ActionCantBeUndone" = "Šio veiksmo anuliuoti negalima";
+
+/* Button title for unlinking account action. */
+"UnlinkAction" = "Atsieti";
+
+/* Controller title shown for unlinking account action. */
+"UnlinkTitle" = "Susieta paskyra";
+
+/* Alert title shown before unlinking action. */
+"UnlinkConfirmationTitle" = "Atsieti paskyrą?";
+
+/* Alert message shown before unlinking action. */
+"UnlinkConfirmationMessage" = "Nebegalėsite prisijungti naudodami savo paskyrą";
+
+/* Alert action title shown before unlinking action. */
+"UnlinkConfirmationActionTitle" = "Atsieti paskyrą";
+
+/* Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UpdateEmailAlertMessage" = "Norėdami pakeisti el. pašto adresą, susietą su paskyra, turėsite prisijungti dar kartą.";
+
+/* Alert action message shown before confirmation of updating email action. */
+"UpdateEmailVerificationAlertMessage" = "Norėdami pakeisti slaptažodį, pirmiausia turite įvesti dabartinį.";
+
+/* Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"EditEmailTitle" = "Redaguoti el. pašto adresą";
+
+/* Controller title shown when editing account name. */
+"EditNameTitle" = "Redaguoti pavadinimą";
+
+/* Alert message shown when adding account password. */
+"AddPasswordAlertMessage" = "Norėdami prie paskyros pridėti slaptažodį, turite prisijungti dar kartą.";
+
+/* Alert message shown when editing account password. */
+"EditPasswordAlertMessage" = "Norėdami pakeisti paskyros slaptažodį, turite prisijungti dar kartą.";
+
+/* Alert message shown when re-authenticating before editing account password. */
+"ReauthenticateEditPasswordAlertMessage" = "Norėdami pakeisti slaptažodį, pirmiausia turite įvesti dabartinį.";
+
+/* Controller title shown when adding password to account. */
+"AddPasswordTitle" = "Pridėti slaptažodį";
+
+/* Controller title shown when editing password to account. */
+"EditPasswordTitle" = "Keisti slaptažodį";
+
+/* Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"ProviderTitlePassword" = "El. paštas";
+
+/* Title of Google provider */
+"ProviderTitleGoogle" = "Google";
+
+/* Title of Facebook provider */
+"ProviderTitleFacebook" = "Facebook";
+
+/* Title of Twitter provider */
+"ProviderTitleTwitter" = "Twitter";
+
+/* Sign in with provider button label. */
+"SignInWithProvider" = "Prisijungti per „%@“";
+
+/* Placeholder of input cell when user changes name. */
+"PlaceholderEnterName" = "Įveskite vardą";
+
+/* Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"PlaceholderEnterEmail" = "Įveskite el. paštą";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderEnterPassword" = "Įveskite slaptažodį";
+
+/* Placeholder of secret input cell when user confirms password. */
+"PlaceholderNewPassword" = "Naujas slaptažodis";
+
+/* Placeholder of secret input cell when user changes password. */
+"PlaceholderChosePassword" = "Pasirinkite slaptažodį";
+
+/* Title of forgot password button. */
+"ForgotPasswordTitle" = "Kyla problemų prisijungiant?";
+
+/* Title of confirm email label. */
+"ConfirmEmail" = "Patvirtinkite el. paštą";
+
+/* Title of successfully signed in label. */
+"SignedIn" = "Prisijungta.";
+
+/* Title used in trouble getting email alert view. */
+"TroubleGettingEmailTitle" = "Negaunate el. laiškų?";
+
+/* Alert message displayed when user having trouble getting email. */
+"TroubleGettingEmailMessage" = "Išbandykite šiuos dažnai kylančių problemų sprendimo būdus: \n – patikrinkite, ar el. laiškas nebuvo pažymėtas kaip šlamštas arba filtruotas;\n – patikrinkite interneto ryšį;\n – patikrinkite, ar nurodėte tikslų el. pašto adresą;\n – patikrinkite, ar gautiesiems skirta saugyklos vieta nepasibaigė arba kitas su gautųjų nustatymais susijusias problemas.\n Jei ankstesni veiksmai nebuvo naudingi, galite iš naujo išsiųsti el. laišką. Atkreipkite dėmesį, kad šiuo veiksmu bus išaktyvinta ankstesniame el. laiške pateikta nuoroda.";
+
+/* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
+"EmailSentConfirmationMessage" = "Prisijungimo el. laiškas su papildomomis instrukcijomis išsiųstas adresu %@. Patikrinkite el. paštą, kad užbaigtumėte prisijungimą.";
+
+/* Message displayed after the email of sign-in link is sent. */
+"SignInEmailSent" = "Prisijungimo el. laiškas išsiųstas";

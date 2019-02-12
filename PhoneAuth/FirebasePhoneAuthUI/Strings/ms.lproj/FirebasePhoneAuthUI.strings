@@ -1,0 +1,74 @@
+/* The text of the button used to sign-in with Phone. */
+"SignInWithPhone" = "Log masuk dengan telefon";
+
+/* The title of view controller where user enters phone number. */
+"EnterPhoneTitle" = "Masukkan nombor telefon";
+
+/* The title of button on navigation controller which navigates to previous screen. */
+"Back" = "Kembali";
+
+/* The title of button on navigation controller which navigates to the next screen. */
+"Next" = "Seterusnya";
+
+/* The title of button which user taps on phone verification screen. */
+"Verify" = "Sahkan";
+
+/* Alert message displayed when user submits empty verification code. */
+"EmptyVerificationCode" = "Kod pengesahan tidak boleh kosong";
+
+/* Alert message displayed when user submits empty phone number. */
+"EmptyPhoneNumber" = "Nombor telefon tidak boleh kosong";
+
+/* Label next to the left of phone number entry field. User shorter version of 'phone number' translation.*/
+"PhoneNumber" = "Nombor";
+
+/* Placeholder shown for phone number input field. */
+"EnterYourPhoneNumber" = "Nombor telefon";
+
+/* Label next to the left of country selector control. */
+"Country" = "Negara";
+
+/* Text of the label shown on the verification screen describing that verification code was sent to phone number. */
+"EnterCodeDescription" = "Masukkan kod %@ digit yang kami hantar ke";
+
+/* The title of button with resend verification code functionality. */
+"ResendCode" = "Hantar semula kod";
+
+/* Text of the resend timer label shown on verification phone number screen. */
+"ResendCodeTimer" = "Hantar semula kod dalam masa %@";
+
+/* The title of view controller where user verifies phone number. . */
+"VerifyPhoneTitle" = "Sahkan nombor telefon";
+
+/* The title of button displayed when user closes alert message. */
+"Done" = "Selesai";
+
+/* The title of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneTitle" = "Nombor telefon tidak sah";
+
+/* The body message of alert shown when user entered invalid phone number format. */
+"IncorrectPhoneMessage" = "Masukkan nombor telefon yang sah";
+
+/* The body message of alert shown when user tapped resend verification code button. */
+"ResendCodeResult" = "Kod dihantar ke %@";
+
+/* The title of alert shown when user entered invalid verification code. */
+"IncorrectCodeTitle" = "Kod pengesahan tidak sah";
+
+/* The body message of alert shown when user entered invalid verification code. */
+"IncorrectCodeMessage" = "Kod salah. Cuba lagi.";
+
+/* The body message of alert shown when internal server error appeared. */
+"InternalErrorMessage" = "Kesilapan telah berlaku. Sila cuba lagi.";
+
+/* The body message of alert shown when the user has tried to send too many SMS messages. */
+"TooManyCodesSent" = "Nombor telefon ini terlalu kerap digunakan";
+
+/* The body message of alert shown when Firebase project has tried to send too many SMS messages for its price tier. */
+"MessageQuotaExceeded" = "Terdapat masalah sewaktu mengesahkan nombor telefon anda";
+
+/* The body message of alert shown when the SMS confirmation code has expired, so the user should send a new one. */
+"MessageExpired" = "Kod ini tidak sah lagi";
+
+/* Message shown at the footer of the screen before sending SMS confirmation code. The first placeholder is the value of the key "Verify". The second placeholder is the terms of service agreement link, the third placeholder is the privacy policy agreement link. */
+"TermsSMS" = "Dengan mengetik %@, anda menyatakan bahawa anda menerima %@ dan %@ kami. SMS akan dihantar. Tertakluk pada kadar mesej & data.";
