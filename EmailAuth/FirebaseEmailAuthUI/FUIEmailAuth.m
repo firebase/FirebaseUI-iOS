@@ -219,6 +219,7 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
   }
   if (!continueURLString) {
     [FUIAuthBaseViewController showAlertWithMessage:@"Invalid link! Missing continue URL."];
+    return NO;
   }
 
   // Retrieve url parameters from continueUrl
