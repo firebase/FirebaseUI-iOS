@@ -99,6 +99,13 @@
 #pragma mark - FUIBatchedArrayDelegate methods
 
 - (void)batchedArray:(FUIBatchedArray *)array
+  willUpdateWithDiff:(FUISnapshotArrayDiff<FIRDocumentSnapshot *> *)diff {
+  // This fixes an issue where UICollectionView crashes due to an invalid number of items
+  // https://fangpenlin.com/posts/2016/04/29/uicollectionview-invalid-number-of-items-crash-issue/
+  [self.collectionView numberOfItemsInSection:0];
+}
+
+- (void)batchedArray:(FUIBatchedArray *)array
    didUpdateWithDiff:(FUISnapshotArrayDiff<FIRDocumentSnapshot *> *)diff {
   [self.collectionView performBatchUpdates:^{
 
