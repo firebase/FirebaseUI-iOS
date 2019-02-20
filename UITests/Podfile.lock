@@ -75,6 +75,7 @@ PODS:
     - FirebaseUI/Auth
   - FirebaseUI/Auth (6.0.1):
     - Firebase/Auth (~> 5.0)
+    - GoogleUtilities/UserDefaults
   - FirebaseUI/Database (6.0.1):
     - Firebase/Database (~> 5.0)
   - FirebaseUI/Email (6.0.1):
@@ -110,6 +111,8 @@ PODS:
   - GoogleUtilities/Environment (5.3.7)
   - GoogleUtilities/Logger (5.3.7):
     - GoogleUtilities/Environment
+  - GoogleUtilities/UserDefaults (5.3.7):
+    - GoogleUtilities/Logger
   - "gRPC-C++ (0.0.6)":
     - "gRPC-C++/Implementation (= 0.0.6)"
     - "gRPC-C++/Interface (= 0.0.6)"
@@ -189,7 +192,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 23acb0c53cd4d4070a427b60100b2e4aaa97c45d
   FirebaseFirestore: 6f2b93b4f7bb8416628142763c91ccc00fa04c86
   FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
-  FirebaseUI: d0f44c2c63fa88004878102162307618c607da07
+  FirebaseUI: de0034d0c67fcea985546016b3534ec7840cf604
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
@@ -206,4 +209,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7865b2c90bcd66ccbc77a55fe5ad402dbe2b63a0
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0
