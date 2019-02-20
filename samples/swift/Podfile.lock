@@ -60,39 +60,40 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.2)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseUI (6.0.0):
-    - FirebaseUI/Anonymous (= 6.0.0)
-    - FirebaseUI/Auth (= 6.0.0)
-    - FirebaseUI/Database (= 6.0.0)
-    - FirebaseUI/Email (= 6.0.0)
-    - FirebaseUI/Facebook (= 6.0.0)
-    - FirebaseUI/Firestore (= 6.0.0)
-    - FirebaseUI/Google (= 6.0.0)
-    - FirebaseUI/Phone (= 6.0.0)
-    - FirebaseUI/Storage (= 6.0.0)
-    - FirebaseUI/Twitter (= 6.0.0)
-  - FirebaseUI/Anonymous (6.0.0):
+  - FirebaseUI (6.0.1):
+    - FirebaseUI/Anonymous (= 6.0.1)
+    - FirebaseUI/Auth (= 6.0.1)
+    - FirebaseUI/Database (= 6.0.1)
+    - FirebaseUI/Email (= 6.0.1)
+    - FirebaseUI/Facebook (= 6.0.1)
+    - FirebaseUI/Firestore (= 6.0.1)
+    - FirebaseUI/Google (= 6.0.1)
+    - FirebaseUI/Phone (= 6.0.1)
+    - FirebaseUI/Storage (= 6.0.1)
+    - FirebaseUI/Twitter (= 6.0.1)
+  - FirebaseUI/Anonymous (6.0.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Auth (6.0.0):
+  - FirebaseUI/Auth (6.0.1):
     - Firebase/Auth (~> 5.0)
-  - FirebaseUI/Database (6.0.0):
+    - GoogleUtilities/UserDefaults
+  - FirebaseUI/Database (6.0.1):
     - Firebase/Database (~> 5.0)
-  - FirebaseUI/Email (6.0.0):
+  - FirebaseUI/Email (6.0.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Facebook (6.0.0):
-    - FBSDKLoginKit (~> 4.39)
+  - FirebaseUI/Facebook (6.0.1):
+    - FBSDKLoginKit (~> 4.35)
     - FirebaseUI/Auth
-  - FirebaseUI/Firestore (6.0.0):
+  - FirebaseUI/Firestore (6.0.1):
     - Firebase/Firestore
-  - FirebaseUI/Google (6.0.0):
+  - FirebaseUI/Google (6.0.1):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 4.0)
-  - FirebaseUI/Phone (6.0.0):
+  - FirebaseUI/Phone (6.0.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Storage (6.0.0):
+  - FirebaseUI/Storage (6.0.1):
     - Firebase/Storage (~> 5.0)
     - SDWebImage (~> 4.0)
-  - FirebaseUI/Twitter (6.0.0):
+  - FirebaseUI/Twitter (6.0.1):
     - FirebaseUI/Auth
     - TwitterKit (~> 3.0)
   - GoogleSignIn (4.4.0):
@@ -110,6 +111,8 @@ PODS:
   - GoogleUtilities/Environment (5.3.7)
   - GoogleUtilities/Logger (5.3.7):
     - GoogleUtilities/Environment
+  - GoogleUtilities/UserDefaults (5.3.7):
+    - GoogleUtilities/Logger
   - "gRPC-C++ (0.0.6)":
     - "gRPC-C++/Implementation (= 0.0.6)"
     - "gRPC-C++/Interface (= 0.0.6)"
@@ -186,7 +189,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 23acb0c53cd4d4070a427b60100b2e4aaa97c45d
   FirebaseFirestore: 6f2b93b4f7bb8416628142763c91ccc00fa04c86
   FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
-  FirebaseUI: f25f5af494e7e08bd86b04209b9c0b87a63368a6
+  FirebaseUI: de0034d0c67fcea985546016b3534ec7840cf604
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
@@ -202,4 +205,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7620a9e0cd7d23f06f4301fc5908d3c6f6c7b72d
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0
