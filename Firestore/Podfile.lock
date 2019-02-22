@@ -5,23 +5,23 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.2):
     - BoringSSL-GRPC/Interface (= 0.0.2)
   - BoringSSL-GRPC/Interface (0.0.2)
-  - Firebase/CoreOnly (5.16.0):
-    - FirebaseCore (= 5.2.0)
-  - Firebase/Firestore (5.16.0):
+  - Firebase/CoreOnly (5.17.0):
+    - FirebaseCore (= 5.3.0)
+  - Firebase/Firestore (5.17.0):
     - Firebase/CoreOnly
-    - FirebaseFirestore (= 1.0.0)
+    - FirebaseFirestore (= 1.0.1)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (5.2.0):
+  - FirebaseCore (5.3.0):
     - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseFirestore (1.0.0):
+  - FirebaseFirestore (1.0.1):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.2)
-    - FirebaseFirestore/abseil-cpp (= 1.0.0)
+    - FirebaseFirestore/abseil-cpp (= 1.0.1)
     - "gRPC-C++ (= 0.0.6)"
     - leveldb-library (~> 1.20)
     - nanopb (~> 0.3.901)
     - Protobuf (~> 3.1)
-  - FirebaseFirestore/abseil-cpp (1.0.0):
+  - FirebaseFirestore/abseil-cpp (1.0.1):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.2)
     - "gRPC-C++ (= 0.0.6)"
@@ -74,10 +74,10 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
-  Firebase: 749a8ff4962f9d8c79dda1966de20f6f77583d67
+  Firebase: 59d557e064217fab6a03ff00baa73c06e73832e6
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: ea2d1816723ef21492b8e9113303e1350db5e08c
-  FirebaseFirestore: 6f2b93b4f7bb8416628142763c91ccc00fa04c86
+  FirebaseCore: c0c4befb82374d6aef64d800e569f47625352edc
+  FirebaseFirestore: e95af4fe30552092d6e72a8f97ea475d93891b75
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
   "gRPC-C++": e76441995900ac90e9bd98644ab4733f12521edf
   gRPC-Core: 4028031ed2c5267cca0d846c876d8046b1ecb9b6
@@ -87,4 +87,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: f8a650a7bb1d18a6090109e2d8bc3fa500fb202a
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.6.1
