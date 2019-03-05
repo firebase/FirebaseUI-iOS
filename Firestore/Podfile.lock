@@ -53,7 +53,7 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - Protobuf (3.6.1)
+  - Protobuf (3.7.0)
 
 DEPENDENCIES:
   - Firebase/Firestore
@@ -83,7 +83,7 @@ SPEC CHECKSUMS:
   gRPC-Core: 4028031ed2c5267cca0d846c876d8046b1ecb9b6
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
 
 PODFILE CHECKSUM: f8a650a7bb1d18a6090109e2d8bc3fa500fb202a
 
