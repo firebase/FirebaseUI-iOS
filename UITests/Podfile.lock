@@ -15,41 +15,41 @@ PODS:
     - Bolts (~> 1.9)
   - FBSDKLoginKit (4.40.0):
     - FBSDKCoreKit
-  - Firebase/Auth (5.17.0):
+  - Firebase/Auth (5.18.0):
     - Firebase/CoreOnly
-    - FirebaseAuth (= 5.3.1)
-  - Firebase/CoreOnly (5.17.0):
-    - FirebaseCore (= 5.3.0)
-  - Firebase/Database (5.17.0):
+    - FirebaseAuth (= 5.4.0)
+  - Firebase/CoreOnly (5.18.0):
+    - FirebaseCore (= 5.3.1)
+  - Firebase/Database (5.18.0):
     - Firebase/CoreOnly
     - FirebaseDatabase (= 5.1.0)
-  - Firebase/Firestore (5.17.0):
+  - Firebase/Firestore (5.18.0):
     - Firebase/CoreOnly
-    - FirebaseFirestore (= 1.0.1)
-  - Firebase/Storage (5.17.0):
+    - FirebaseFirestore (= 1.0.2)
+  - Firebase/Storage (5.18.0):
     - Firebase/CoreOnly
     - FirebaseStorage (= 3.1.0)
-  - FirebaseAuth (5.3.1):
+  - FirebaseAuth (5.4.0):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.2)
     - GoogleUtilities/Environment (~> 5.2)
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (5.3.0):
+  - FirebaseCore (5.3.1):
     - GoogleUtilities/Logger (~> 5.2)
   - FirebaseDatabase (5.1.0):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.2)
     - leveldb-library (~> 1.18)
-  - FirebaseFirestore (1.0.1):
+  - FirebaseFirestore (1.0.2):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.2)
-    - FirebaseFirestore/abseil-cpp (= 1.0.1)
+    - FirebaseFirestore/abseil-cpp (= 1.0.2)
     - "gRPC-C++ (= 0.0.6)"
     - leveldb-library (~> 1.20)
     - nanopb (~> 0.3.901)
     - Protobuf (~> 3.1)
-  - FirebaseFirestore/abseil-cpp (1.0.1):
+  - FirebaseFirestore/abseil-cpp (1.0.2):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.2)
     - "gRPC-C++ (= 0.0.6)"
@@ -185,12 +185,12 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
   FBSDKCoreKit: ae214474b25033399c131dc81d258e412582a2ba
   FBSDKLoginKit: 7a1e411d46acc8834588eca437daf34de42e1d52
-  Firebase: 59d557e064217fab6a03ff00baa73c06e73832e6
-  FirebaseAuth: 0f61e1329237da5682c49c9abd135e8f9d07a151
+  Firebase: 02f3281965c075426141a0ce1277e9de6649cab9
+  FirebaseAuth: d85d052354447f30b4b2a805ab91b511458b56a6
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: c0c4befb82374d6aef64d800e569f47625352edc
+  FirebaseCore: 52f851b30e11360f1e67cf04b1edfebf0a47a2d3
   FirebaseDatabase: 23acb0c53cd4d4070a427b60100b2e4aaa97c45d
-  FirebaseFirestore: e95af4fe30552092d6e72a8f97ea475d93891b75
+  FirebaseFirestore: ccdaffb8a73c591ff61872b8f7905ad0c237ef50
   FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
   FirebaseUI: 1345f778d53f9484f21474c7b10bba313b28a76b
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
