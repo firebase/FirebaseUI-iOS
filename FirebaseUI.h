@@ -29,6 +29,7 @@ FOUNDATION_EXPORT const unsigned char FirebaseUIVersionString[];
 #import <FirebaseUI/FirebaseEmailAuthUI.h>
 #import <FirebaseUI/FirebaseFacebookAuthUI.h>
 #import <FirebaseUI/FirebaseGoogleAuthUI.h>
-#import <FirebaseUI/FirebaseTwitterAuthUI.h>
+#import <FirebaseUI/FirebaseOAuthUI.h>
 #import <FirebaseUI/FirebasePhoneAuthUI.h>
+#import <FirebaseUI/FirebaseTwitterAuthUI.h>
 #import <FirebaseUI/FirebaseStorageUI.h>

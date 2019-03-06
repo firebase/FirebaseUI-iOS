@@ -43,7 +43,8 @@ NS_ENUM(NSUInteger, FIRProviders) {
   kIDPFacebook,
   kIDPTwitter,
   kIDPPhone,
-  kIDPAnonymous
+  kIDPAnonymous,
+  kIDPMicrosoft
 };
 
 static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/terms/";
@@ -118,6 +119,10 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
   [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPAnonymous
+                                                          inSection:kSectionsProviders]
+                              animated:NO
+                        scrollPosition:UITableViewScrollPositionNone];
+  [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPMicrosoft
                                                           inSection:kSectionsProviders]
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
@@ -410,7 +415,22 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
         case kIDPAnonymous:
           provider = [[FUIAnonymousAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
           break;
-
+        case kIDPMicrosoft:
+          {
+            UIColor *buttonColor = [UIColor colorWithRed:.18 green:.18 blue:.18 alpha:1.0];
+            NSString *iconPath = [[NSBundle mainBundle] pathForResource:@"mssymbol" ofType:@"png"];
+            if (!iconPath) {
+              NSLog(@"Warning: Unable to find microsoft icon.");
+            }
+            provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+                                             providerID:@"hotmail.com"
+                                        buttonLabelText:@"Sign in with Microsoft"
+                                            buttonColor:buttonColor
+                                              iconImage:[UIImage imageWithContentsOfFile:iconPath]
+                                                 scopes:@[@"user.readwrite"]
+                                       customParameters:@{@"prompt" : @"consent"}];
+          }
+          break;
         default:
           break;
       }

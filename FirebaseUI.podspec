@@ -127,6 +127,17 @@ Pod::Spec.new do |s|
     google.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseGoogleAuthUI' }
   end
 
+  s.subspec 'OAuth' do |oauth|
+    oauth.platform = :ios, '8.0'
+    oauth.public_header_files = 'OAuth/FirebaseOAuthUI/*.h'
+    oauth.source_files = 'OAuth/FirebaseOAuthUI/*.{h,m}'
+    oauth.dependency 'FirebaseUI/Auth'
+    oauth.resource_bundle = {
+      'FirebaseOAuthUI' => ['OAuth/FirebaseOAuthUI/**/*.{png,lproj}']
+    }
+    oauth.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseOAuthUI' }
+  end
+
   s.subspec 'Phone' do |phone|
     phone.platform = :ios, '8.0'
     phone.public_header_files = ['PhoneAuth/FirebasePhoneAuthUI/FirebasePhoneAuthUI.h',
