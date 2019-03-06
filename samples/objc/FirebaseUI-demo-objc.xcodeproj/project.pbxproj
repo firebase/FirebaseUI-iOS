@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		896400F7222F583100CEF7D7 /* mssymbol.png in Resources */ = {isa = PBXBuildFile; fileRef = 896400F6222F583100CEF7D7 /* mssymbol.png */; };
 		8D7D5DC11D9D9536006C1857 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */; };
 		8D7F86B51D9DAA0100C2A122 /* FUIStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F86B41D9DAA0100C2A122 /* FUIStorageViewController.m */; };
 		C30AEB0A1ED610740084E328 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30AEB071ED610740084E328 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		896400F6222F583100CEF7D7 /* mssymbol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mssymbol.png; sourceTree = "<group>"; };
 		8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D7F86B31D9DAA0100C2A122 /* FUIStorageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FUIStorageViewController.h; path = Storage/FUIStorageViewController.h; sourceTree = "<group>"; };
 		8D7F86B41D9DAA0100C2A122 /* FUIStorageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FUIStorageViewController.m; path = Storage/FUIStorageViewController.m; sourceTree = "<group>"; };
@@ -181,6 +183,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		54B9F7E49B62231ABC826A36 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		896400F5222F580400CEF7D7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				896400F6222F583100CEF7D7 /* mssymbol.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		8D7D5DC51D9DA075006C1857 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +210,7 @@
 		C30AEB041ED610740084E328 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				896400F5222F580400CEF7D7 /* Resources */,
 				C30AEB0D1ED610780084E328 /* Localizable.strings */,
 				C30AEB071ED610740084E328 /* Main.storyboard */,
 			);
@@ -260,6 +278,7 @@
 				8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */,
 				D81A05F21B86A78700498183 /* FirebaseUI-demo-objc */,
 				D81A05F11B86A78700498183 /* Products */,
+				54B9F7E49B62231ABC826A36 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -447,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3A8B7C21DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib in Resources */,
+				896400F7222F583100CEF7D7 /* mssymbol.png in Resources */,
 				C30AEB0B1ED610780084E328 /* Localizable.strings in Resources */,
 				C30AEB0A1ED610740084E328 /* Main.storyboard in Resources */,
 				C34FC1FF1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.xib in Resources */,
