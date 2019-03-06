@@ -243,7 +243,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
         // Check for and handle special case for Phone Auth Provider.
         if (providerUI.providerID == FIRPhoneAuthProviderID) {
           // Obtain temporary Phone Auth credential.
-          newCredential = error.userInfo[FIRAuthUpdatedCredentialKey];
+          newCredential = error.userInfo[FIRAuthErrorUserInfoUpdatedCredentialKey];
         }
         NSDictionary *userInfo = @{
           FUIAuthCredentialKey : newCredential,
