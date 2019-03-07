@@ -68,6 +68,7 @@ PODS:
     - FirebaseUI/Facebook (= 6.1.1)
     - FirebaseUI/Firestore (= 6.1.1)
     - FirebaseUI/Google (= 6.1.1)
+    - FirebaseUI/OAuth (= 6.1.1)
     - FirebaseUI/Phone (= 6.1.1)
     - FirebaseUI/Storage (= 6.1.1)
     - FirebaseUI/Twitter (= 6.1.1)
@@ -88,6 +89,8 @@ PODS:
   - FirebaseUI/Google (6.1.1):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 4.0)
+  - FirebaseUI/OAuth (6.1.1):
+    - FirebaseUI/Auth
   - FirebaseUI/Phone (6.1.1):
     - FirebaseUI/Auth
   - FirebaseUI/Storage (6.1.1):
@@ -192,7 +195,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 23acb0c53cd4d4070a427b60100b2e4aaa97c45d
   FirebaseFirestore: ccdaffb8a73c591ff61872b8f7905ad0c237ef50
   FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
-  FirebaseUI: 1345f778d53f9484f21474c7b10bba313b28a76b
+  FirebaseUI: fc3584df29e96959d895677274681939fa30dbe5
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
