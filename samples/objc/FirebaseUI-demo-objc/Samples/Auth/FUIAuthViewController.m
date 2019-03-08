@@ -423,7 +423,7 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
               NSLog(@"Warning: Unable to find microsoft icon.");
             }
             provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
-                                             providerID:@"hotmail.com"
+                                             providerID:@"microsoft.com"
                                         buttonLabelText:@"Sign in with Microsoft"
                                             buttonColor:buttonColor
                                               iconImage:[UIImage imageWithContentsOfFile:iconPath]
