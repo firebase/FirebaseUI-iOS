@@ -425,6 +425,7 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
             provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
                                              providerID:@"microsoft.com"
                                         buttonLabelText:@"Sign in with Microsoft"
+                                              shortName:@"Microsoft"
                                             buttonColor:buttonColor
                                               iconImage:[UIImage imageWithContentsOfFile:iconPath]
                                                  scopes:@[@"user.readwrite"]

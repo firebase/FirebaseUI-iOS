@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
     @param authUI The @c FUIAuth instance that manages controllers of this provider.
     @param providerID The unique identifier for the provider.
     @param buttonLabelText The text label for the sign in button.
+    @param shortName A short display name for the provider.
     @param buttonColor The background color that should be used for the sign in button of the
         provider.
     @param iconImage The icon image of the provider.
@@ -49,6 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                     providerID:(NSString *)providerID
                buttonLabelText:(NSString *)buttonLabelText
+                     shortName:(NSString *)shortName
                    buttonColor:(UIColor *)buttonColor
                      iconImage:(UIImage *)iconImage
                         scopes:(nullable NSArray<NSString *> *)scopes
@@ -60,6 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     @param providerID The unique identifier for the provider.
     @param buttonLabelText The text label for the sign in button.
+    @param shortName A short display name for the provider.
     @param buttonColor The background color that should be used for the sign in button of the
         provider.
     @param iconImage The icon image of the provider.
@@ -68,6 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithProviderID:(NSString *)providerID
                    buttonLabelText:(NSString *)buttonLabelText
+                         shortName:(NSString *)shortName
                        buttonColor:(UIColor *)buttonColor
                          iconImage:(UIImage *)iconImage
                             scopes:(nullable NSArray<NSString *> *)scopes
