@@ -60,6 +60,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy) NSString *signInLabel;
 
+/** @property shortName
+    @brief A short display name for the provider.
+ */
+@property(nonatomic, copy) NSString *shortName;
+
 /** @property icon
     @brief The icon image of the provider.
  */
@@ -92,6 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                     providerID:(NSString *)providerID
                buttonLabelText:(NSString *)buttonLabelText
+                     shortName:(NSString *)shortName
                    buttonColor:(UIColor *)buttonColor
                      iconImage:(UIImage *)iconImage
                         scopes:(nullable NSArray<NSString *> *)scopes
@@ -100,6 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
     _authUI = authUI;
     _providerID = providerID;
     _signInLabel = buttonLabelText;
+    _shortName = shortName;
     _buttonBackgroundColor = buttonColor;
     _icon = iconImage;
     _scopes = scopes;
@@ -113,6 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithProviderID:(NSString *)providerID
                    buttonLabelText:(NSString *)buttonLabelText
+                         shortName:(NSString *)shortName
                        buttonColor:(UIColor *)buttonColor
                          iconImage:(UIImage *)iconImage
                             scopes:(nullable NSArray<NSString *> *)scopes
@@ -120,6 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
   return [self initWithAuthUI:[FUIAuth defaultAuthUI]
                    providerID:providerID
               buttonLabelText:buttonLabelText
+                    shortName:shortName
                   buttonColor:buttonColor
                     iconImage:iconImage
                        scopes:scopes
@@ -140,10 +149,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable NSString *)idToken {
   return nil;
-}
-
-- (NSString *)shortName {
-  return @"OAuth";
 }
 
 - (UIColor *)buttonTextColor {

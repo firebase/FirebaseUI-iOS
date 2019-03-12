@@ -50,6 +50,7 @@
   self.provider = [[FUIOAuth alloc] initWithAuthUI:authUI
                                         providerID:@"dummy"
                                    buttonLabelText:@"Sign in with dummy"
+                                         shortName:@"Dummy"
                                        buttonColor:[UIColor clearColor]
                                          iconImage:[UIImage imageNamed:@""]
                                             scopes:@[]
