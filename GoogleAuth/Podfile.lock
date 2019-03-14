@@ -27,10 +27,10 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.2.0)
     - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.0)"
   - "GoogleToolboxForMac/NSString+URLArguments (2.2.0)"
-  - GoogleUtilities/Environment (5.3.7)
-  - GoogleUtilities/Logger (5.3.7):
+  - GoogleUtilities/Environment (5.4.0)
+  - GoogleUtilities/Logger (5.4.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/UserDefaults (5.3.7):
+  - GoogleUtilities/UserDefaults (5.4.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.1)
   - OCMock (3.4.3)
@@ -64,7 +64,7 @@ SPEC CHECKSUMS:
   FirebaseUI: fc3584df29e96959d895677274681939fa30dbe5
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
-  GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
+  GoogleUtilities: fa768ad04b264be250ee9edf9f378ad006f7a560
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
 
