@@ -25,37 +25,37 @@
 #import "FUIPrivacyAndTermsOfServiceView.h"
 
 /** @var kSignInButtonWidth
- @brief The width of the sign in buttons.
+    @brief The width of the sign in buttons.
  */
 static const CGFloat kSignInButtonWidth = 220.0f;
 
 /** @var kSignInButtonHeight
- @brief The height of the sign in buttons.
+    @brief The height of the sign in buttons.
  */
 static const CGFloat kSignInButtonHeight = 40.0f;
 
 /** @var kSignInButtonVerticalMargin
- @brief The vertical margin between sign in buttons.
+    @brief The vertical margin between sign in buttons.
  */
 static const CGFloat kSignInButtonVerticalMargin = 24.0f;
 
 /** @var kButtonContainerBottomMargin
- @brief The magin between sign in buttons and the bottom of the content view.
+    @brief The magin between sign in buttons and the bottom of the content view.
  */
 static const CGFloat kButtonContainerBottomMargin = 48.0f;
 
 /** @var kButtonContainerTopMargin
- @brief The margin between sign in buttons and the top of the content view.
+    @brief The margin between sign in buttons and the top of the content view.
  */
 static const CGFloat kButtonContainerTopMargin = 16.0f;
 
 /** @var kTOSViewBottomMargin
- @brief The margin between privacy policy and TOS view and the bottom of the content view.
+    @brief The margin between privacy policy and TOS view and the bottom of the content view.
  */
 static const CGFloat kTOSViewBottomMargin = 24.0f;
 
 /** @var kTOSViewHorizontalMargin
- @brief The margin between privacy policy and TOS view and the left or right of the content view.
+    @brief The margin between privacy policy and TOS view and the left or right of the content view.
  */
 static const CGFloat kTOSViewHorizontalMargin = 16.0f;
 
@@ -93,21 +93,21 @@ static const CGFloat kTOSViewHorizontalMargin = 16.0f;
 
   if (!self.authUI.shouldHideCancelButton) {
     UIBarButtonItem *cancelBarButton =
-    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                  target:self
-                                                  action:@selector(cancelAuthorization)];
+        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                      target:self
+                                                      action:@selector(cancelAuthorization)];
     self.navigationItem.leftBarButtonItem = cancelBarButton;
   }
   self.navigationItem.backBarButtonItem =
-  [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Back)
-                                   style:UIBarButtonItemStylePlain
-                                  target:nil
-                                  action:nil];
+      [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Back)
+                                       style:UIBarButtonItemStylePlain
+                                      target:nil
+                                      action:nil];
 
   NSInteger numberOfButtons = self.authUI.providers.count;
 
   CGFloat buttonContainerViewHeight =
-  kSignInButtonHeight * numberOfButtons + kSignInButtonVerticalMargin * (numberOfButtons);
+      kSignInButtonHeight * numberOfButtons + kSignInButtonVerticalMargin * (numberOfButtons);
   CGRect buttonContainerViewFrame = CGRectMake(0, 0, kSignInButtonWidth, buttonContainerViewHeight);
   _buttonContainerView = [[UIView alloc] initWithFrame:buttonContainerViewFrame];
   if (_scrollView) {
@@ -121,7 +121,7 @@ static const CGFloat kTOSViewHorizontalMargin = 16.0f;
   CGRect buttonFrame = CGRectMake(0, 0, kSignInButtonWidth, kSignInButtonHeight);
   for (id<FUIAuthProvider> providerUI in self.authUI.providers) {
     UIButton *providerButton =
-    [[FUIAuthSignInButton alloc] initWithFrame:buttonFrame providerUI:providerUI];
+        [[FUIAuthSignInButton alloc] initWithFrame:buttonFrame providerUI:providerUI];
     [providerButton addTarget:self
                        action:@selector(didTapSignInButton:)
              forControlEvents:UIControlEventTouchUpInside];
@@ -144,7 +144,7 @@ static const CGFloat kTOSViewHorizontalMargin = 16.0f;
   // old layout behavior.
   if (!_scrollView) {
     CGFloat distanceFromCenterToBottom =
-    CGRectGetHeight(_buttonContainerView.frame) / 2.0f + kButtonContainerBottomMargin + kTOSViewBottomMargin;
+        CGRectGetHeight(_buttonContainerView.frame) / 2.0f + kButtonContainerBottomMargin + kTOSViewBottomMargin;
     CGFloat centerY = CGRectGetHeight(self.view.bounds) - distanceFromCenterToBottom;
     // Compensate for bounds adjustment if any.
     centerY += self.view.bounds.origin.y;
@@ -155,7 +155,7 @@ static const CGFloat kTOSViewHorizontalMargin = 16.0f;
   CGFloat buttonContainerHeight = CGRectGetHeight(_buttonContainerView.frame);
   CGFloat buttonContainerWidth = CGRectGetWidth(_buttonContainerView.frame);
   CGFloat contentViewHeight = kButtonContainerTopMargin + buttonContainerHeight
-  + kButtonContainerBottomMargin + kTOSViewBottomMargin;
+      + kButtonContainerBottomMargin + kTOSViewBottomMargin;
   CGFloat contentViewWidth = CGRectGetWidth(self.view.bounds);
   _scrollView.frame = self.view.frame;
   CGFloat scrollViewHeight;
@@ -163,8 +163,8 @@ static const CGFloat kTOSViewHorizontalMargin = 16.0f;
     scrollViewHeight = CGRectGetHeight(_scrollView.frame) - _scrollView.safeAreaInsets.top;
   } else {
     scrollViewHeight = CGRectGetHeight(_scrollView.frame)
-    - CGRectGetHeight(self.navigationController.navigationBar.frame)
-    - CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+        - CGRectGetHeight(self.navigationController.navigationBar.frame)
+        - CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
   }
   CGFloat contentViewY = scrollViewHeight - contentViewHeight;
   if (contentViewY < 0) {
