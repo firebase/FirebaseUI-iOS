@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)useFooterMessage {
   NSAttributedString *footerMessage = [self footerPrivacyPolicyAndTOSMessage];
   self.attributedText = footerMessage;
-  self.textAlignment = NSTextAlignmentRight;
+  self.textAlignment = NSTextAlignmentCenter;
 }
 
 #pragma mark - Protected
