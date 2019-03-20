@@ -64,7 +64,7 @@ Pod::Spec.new do |s|
                                 'Auth/FirebaseAuthUI/FUIAuthTableViewCell.h',
                                 'Auth/FirebaseAuthUI/FUIAuthTableHeaderView.h']
     auth.source_files = ['Auth/FirebaseAuthUI/**/*.{h,m}', 'Auth/FirebaseAuthUI/*.{h,m}']
-    auth.dependency 'Firebase/Auth', '~> 5.0'
+    auth.dependency 'Firebase/Auth', '~> 5.4'
     auth.dependency 'GoogleUtilities/UserDefaults'
     auth.resource_bundle = {
       'FirebaseAuthUI' => ['Auth/FirebaseAuthUI/**/*.{xib,png,lproj}']
