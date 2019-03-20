@@ -64,7 +64,7 @@ Pod::Spec.new do |s|
                                 'Auth/FirebaseAuthUI/FUIAuthTableViewCell.h',
                                 'Auth/FirebaseAuthUI/FUIAuthTableHeaderView.h']
     auth.source_files = ['Auth/FirebaseAuthUI/**/*.{h,m}', 'Auth/FirebaseAuthUI/*.{h,m}']
-    auth.dependency 'Firebase/Auth', '~> 5.0'
+    auth.dependency 'Firebase/Auth', '~> 5.4'
     auth.dependency 'GoogleUtilities/UserDefaults'
     auth.resource_bundle = {
       'FirebaseAuthUI' => ['Auth/FirebaseAuthUI/**/*.{xib,png,lproj}']
@@ -132,9 +132,6 @@ Pod::Spec.new do |s|
     oauth.public_header_files = 'OAuth/FirebaseOAuthUI/*.h'
     oauth.source_files = 'OAuth/FirebaseOAuthUI/*.{h,m}'
     oauth.dependency 'FirebaseUI/Auth'
-    oauth.resource_bundle = {
-      'FirebaseOAuthUI' => ['OAuth/FirebaseOAuthUI/**/*.{png,lproj}']
-    }
     oauth.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseOAuthUI' }
   end
 
