@@ -14,33 +14,28 @@
 //  limitations under the License.
 //
 
-#import <objc/runtime.h>
-
 #import "UIImageView+FirebaseStorage.h"
-
-static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
-
-@interface UIImageView (FirebaseStorage_Private)
-@property (nonatomic, readwrite, nullable, setter=sd_setCurrentDownloadTask:) FIRStorageDownloadTask *sd_currentDownloadTask;
-@end
+#import "SDWebImageFirebaseLoader.h"
 
 @implementation UIImageView (FirebaseStorage)
 
 + (UInt64)sd_defaultMaxImageSize {
-  return FUIMaxImageDownloadSize;
+    // TODO, remove this totally ? I guess the FirebaseUI need a version bump
+    return SDWebImageFirebaseLoader.sharedLoader.defaultMaxImageSize;
 }
 
 + (void)sd_setDefaultMaxImageSize:(UInt64)size {
-  FUIMaxImageDownloadSize = size;
+    // TODO, remove this totally ? I guess the FirebaseUI need a version bump
+    SDWebImageFirebaseLoader.sharedLoader.defaultMaxImageSize = size;
 }
 
 - (FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef {
-  return [self sd_setImageWithStorageReference:storageRef placeholderImage:nil completion:nil];
+    return [self sd_setImageWithStorageReference:storageRef placeholderImage:nil completion:nil];
 }
 
 - (FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
                                            placeholderImage:(UIImage *)placeholder {
-  return [self sd_setImageWithStorageReference:storageRef placeholderImage:placeholder completion:nil];
+    return [self sd_setImageWithStorageReference:storageRef placeholderImage:placeholder completion:nil];
 }
 
 - (FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
@@ -49,10 +44,10 @@ static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
                                                                       NSError *_Nullable,
                                                                       SDImageCacheType,
                                                                       FIRStorageReference *))completion {
-  return [self sd_setImageWithStorageReference:storageRef
-                                  maxImageSize:[UIImageView sd_defaultMaxImageSize]
-                              placeholderImage:placeholder
-                                    completion:completion];
+    return [self sd_setImageWithStorageReference:storageRef
+                                    maxImageSize:SDWebImageFirebaseLoader.sharedLoader.defaultMaxImageSize
+                                placeholderImage:placeholder
+                                      completion:completion];
 }
 
 - (FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
@@ -77,76 +72,78 @@ static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
                                                                       NSError *,
                                                                       SDImageCacheType,
                                                                       FIRStorageReference *))completion {
-  NSParameterAssert(storageRef != nil);
-
-  // If there's already a download on this UIImageView, cancel it
-  if (self.sd_currentDownloadTask != nil) {
-    [self.sd_currentDownloadTask cancel];
-    self.sd_currentDownloadTask = nil;
-  }
-
-  // Set placeholder image
-  self.image = placeholder;
-
-  // Query cache for image before trying to download
-  NSString *key = storageRef.fullPath;
-  UIImage *cached = nil;
-
-  cached = [cache imageFromMemoryCacheForKey:key];
-  if (cached != nil) {
-    self.image = cached;
-    if (completion != nil) {
-      completion(cached, nil, SDImageCacheTypeMemory, storageRef);
-    }
-    return nil;
-  }
-
-  cached = [cache imageFromDiskCacheForKey:key];
-  if (cached != nil) {
-    self.image = cached;
-    if (completion != nil) {
-      completion(cached, nil, SDImageCacheTypeDisk, storageRef);
-    }
-    return nil;
-  }
-
-  // If nothing was found in cache, download the image from Firebase Storage
-  FIRStorageDownloadTask * download = [storageRef dataWithMaxSize:size
-                                                       completion:^(NSData *_Nullable data,
-                                                                    NSError *_Nullable error) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-      if (data != nil) {
-        UIImage *image = [UIImage sd_imageWithData:data];
-        self.image = image;
-
-        // Cache downloaded image
-        [cache storeImage:image forKey:storageRef.fullPath completion:nil];
-
-        if (completion != nil) {
-          completion(image, nil, SDImageCacheTypeNone, storageRef);
-        }
-      } else {
-        if (completion != nil) {
-          completion(nil, error, SDImageCacheTypeNone, storageRef);
-        }
-      }
-    });
-  }];
-  self.sd_currentDownloadTask = download;
-  return download;
+    return [self sd_setImageWithStorageReference:storageRef
+                                    maxImageSize:size
+                                placeholderImage:placeholder
+                                           cache:cache
+                                        progress:nil
+                                      completion:completion];
 }
 
-#pragma mark - Accessors
-
-- (void)sd_setCurrentDownloadTask:(FIRStorageDownloadTask *)currentDownload {
-  objc_setAssociatedObject(self,
-                           @selector(sd_currentDownloadTask),
-                           currentDownload,
-                           OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                                               maxImageSize:(UInt64)size
+                                           placeholderImage:(nullable UIImage *)placeholder
+                                                      cache:(nullable SDImageCache *)cache
+                                                   progress:(void (^)(NSInteger,
+                                                                      NSInteger,
+                                                                      FIRStorageReference *))progressBlock
+                                                 completion:(void (^)(UIImage *,
+                                                                      NSError *,
+                                                                      SDImageCacheType,
+                                                                      FIRStorageReference *))completion {
+    NSParameterAssert(storageRef != nil);
+    
+    NSURL *url = [NSURL sd_URLWithStorageReference:storageRef];
+    
+    SDWebImageManager *manager = [[SDWebImageManager alloc] initWithCache:cache loader:SDWebImageFirebaseLoader.sharedLoader];
+    
+    // TODO: A little strange, Firebase Storage API don't apply cache until user provide a cache instance ? Check later
+    SDWebImageOptions options = 0;
+    if (!cache) {
+        options |= SDWebImageFromLoaderOnly;
+    }
+    // TODO: Current version use `fullpath` as cache key, but not the URL. Do we need to keep compabitle ?
+    SDWebImageCacheKeyFilter *cacheKeyFilter = [SDWebImageCacheKeyFilter cacheKeyFilterWithBlock:^NSString * _Nullable(NSURL * _Nonnull url) {
+        FIRStorageReference *ref = url.sd_storageReference;
+        if (ref) {
+            return ref.fullPath;
+        } else {
+            return url.absoluteString;
+        }
+    }];
+    SDWebImageContext *context = @{
+                                   SDWebImageContextFirebaseMaxImageSize : @(size),
+                                   SDWebImageContextCustomManager : manager,
+                                   SDWebImageContextCacheKeyFilter : cacheKeyFilter
+                                   };
+    
+    [self sd_setImageWithURL:url placeholderImage:placeholder options:options context:context progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+        if (progressBlock) {
+            progressBlock(receivedSize, expectedSize, storageRef);
+        }
+    } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        if (completion) {
+            completion(image, error, cacheType, storageRef);
+        }
+    }];
+    
+    // TODO, the return value should be void.
+    // Because `sd_setImageWithURL` is asynchonizelly, it need to query disk cache before network request (Firebase download). So by the time the function return, this should be nil;
+    // Previous implementation, query the disk cache and even decoding on the main queue (!), it's not a good idea which blocking the UI.
+    return nil;
 }
 
+#pragma mark - Getter
 - (FIRStorageDownloadTask *)sd_currentDownloadTask {
-  return objc_getAssociatedObject(self, @selector(sd_currentDownloadTask));
+    SDWebImageCombinedOperation *operation = [self sd_imageLoadOperationForKey:NSStringFromClass(self.class)];
+    if (operation) {
+        id<SDWebImageOperation> loaderOperation = operation.loaderOperation;
+        // This is a protocol, check the class
+        if ([loaderOperation isKindOfClass:[FIRStorageDownloadTask class]]) {
+            return (FIRStorageDownloadTask *)loaderOperation;
+        }
+    }
+    return nil;
 }
 
 @end

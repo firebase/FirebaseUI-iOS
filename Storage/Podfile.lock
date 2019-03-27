@@ -16,14 +16,14 @@ PODS:
     - GoogleUtilities/Environment
   - GTMSessionFetcher/Core (1.2.1)
   - OCMock (3.4.3)
-  - SDWebImage (4.4.6):
-    - SDWebImage/Core (= 4.4.6)
-  - SDWebImage/Core (4.4.6)
+  - SDWebImage (5.0.0-beta6):
+    - SDWebImage/Core (= 5.0.0-beta6)
+  - SDWebImage/Core (5.0.0-beta6)
 
 DEPENDENCIES:
   - Firebase/Storage
   - OCMock
-  - SDWebImage (~> 4.0)
+  - SDWebImage (>= 5.0.0-beta6)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -44,8 +44,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: fa768ad04b264be250ee9edf9f378ad006f7a560
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
-  SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
+  SDWebImage: 2840a50a41156efccf460df67218b32029177897
 
-PODFILE CHECKSUM: 520bda42321ed30976c6840784823b80f3cb081a
+PODFILE CHECKSUM: ab1bf06e946282a4f1439f4514aeec58dcde8c0f
 
 COCOAPODS: 1.6.1

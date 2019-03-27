@@ -7,11 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32450161224B963B00AF2E90 /* SDWebImageFirebaseLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3245015F224B963B00AF2E90 /* SDWebImageFirebaseLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		32450162224B963B00AF2E90 /* SDWebImageFirebaseLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 32450160224B963B00AF2E90 /* SDWebImageFirebaseLoader.m */; };
+		32450165224B96B400AF2E90 /* NSURL+SDWebImageFirebaseLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 32450163224B96B400AF2E90 /* NSURL+SDWebImageFirebaseLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		32450166224B96B400AF2E90 /* NSURL+SDWebImageFirebaseLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 32450164224B96B400AF2E90 /* NSURL+SDWebImageFirebaseLoader.m */; };
+		3245016D224B987400AF2E90 /* SDWebImageFirebaseLoaderDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 3245016B224B987400AF2E90 /* SDWebImageFirebaseLoaderDefine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3245016E224B987400AF2E90 /* SDWebImageFirebaseLoaderDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3245016C224B987400AF2E90 /* SDWebImageFirebaseLoaderDefine.m */; };
 		8D69E60621DE968300CFA49B /* FirebaseStorageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D69E5FC21DE968300CFA49B /* FirebaseStorageUI.framework */; };
 		8D69E60D21DE968300CFA49B /* FirebaseStorageUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E5FF21DE968300CFA49B /* FirebaseStorageUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D69E61821DE96CF00CFA49B /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E61621DE96CF00CFA49B /* UIImageView+FirebaseStorage.m */; };
 		8D69E61921DE96CF00CFA49B /* UIImageView+FirebaseStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E61721DE96CF00CFA49B /* UIImageView+FirebaseStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D69E61B21DE96D900CFA49B /* FUIImageViewCategoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E61A21DE96D900CFA49B /* FUIImageViewCategoryTests.m */; };
+		9DA2615702DB5B00809BD179 /* Pods_FirebaseStorageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394D01F06479F5F133E31EA7 /* Pods_FirebaseStorageUI.framework */; };
+		A7CDF7C1A684C207B9EC2BEC /* Pods_FirebaseStorageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E602B38093570DAD37D329 /* Pods_FirebaseStorageUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +33,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2531884B814A605E24AF1BD1 /* Pods-FirebaseStorageUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseStorageUI.release.xcconfig"; path = "Target Support Files/Pods-FirebaseStorageUI/Pods-FirebaseStorageUI.release.xcconfig"; sourceTree = "<group>"; };
+		3245015F224B963B00AF2E90 /* SDWebImageFirebaseLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDWebImageFirebaseLoader.h; sourceTree = "<group>"; };
+		32450160224B963B00AF2E90 /* SDWebImageFirebaseLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDWebImageFirebaseLoader.m; sourceTree = "<group>"; };
+		32450163224B96B400AF2E90 /* NSURL+SDWebImageFirebaseLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURL+SDWebImageFirebaseLoader.h"; sourceTree = "<group>"; };
+		32450164224B96B400AF2E90 /* NSURL+SDWebImageFirebaseLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURL+SDWebImageFirebaseLoader.m"; sourceTree = "<group>"; };
+		3245016B224B987400AF2E90 /* SDWebImageFirebaseLoaderDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDWebImageFirebaseLoaderDefine.h; sourceTree = "<group>"; };
+		3245016C224B987400AF2E90 /* SDWebImageFirebaseLoaderDefine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDWebImageFirebaseLoaderDefine.m; sourceTree = "<group>"; };
+		394D01F06479F5F133E31EA7 /* Pods_FirebaseStorageUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseStorageUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		47BA3EFFA8182422FCFF3BA8 /* Pods-FirebaseStorageUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseStorageUITests.release.xcconfig"; path = "Target Support Files/Pods-FirebaseStorageUITests/Pods-FirebaseStorageUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4F5D5A91D72EF2D6714BF575 /* Pods-FirebaseStorageUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseStorageUI.debug.xcconfig"; path = "Target Support Files/Pods-FirebaseStorageUI/Pods-FirebaseStorageUI.debug.xcconfig"; sourceTree = "<group>"; };
 		8D69E5FC21DE968300CFA49B /* FirebaseStorageUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseStorageUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D69E5FF21DE968300CFA49B /* FirebaseStorageUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseStorageUI.h; sourceTree = "<group>"; };
 		8D69E60021DE968300CFA49B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -33,6 +51,8 @@
 		8D69E61621DE96CF00CFA49B /* UIImageView+FirebaseStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+FirebaseStorage.m"; sourceTree = "<group>"; };
 		8D69E61721DE96CF00CFA49B /* UIImageView+FirebaseStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+FirebaseStorage.h"; sourceTree = "<group>"; };
 		8D69E61A21DE96D900CFA49B /* FUIImageViewCategoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIImageViewCategoryTests.m; sourceTree = "<group>"; };
+		A6602D6474A93D643DAE0E09 /* Pods-FirebaseStorageUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseStorageUITests.debug.xcconfig"; path = "Target Support Files/Pods-FirebaseStorageUITests/Pods-FirebaseStorageUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B5E602B38093570DAD37D329 /* Pods_FirebaseStorageUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseStorageUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DA2615702DB5B00809BD179 /* Pods_FirebaseStorageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,18 +69,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D69E60621DE968300CFA49B /* FirebaseStorageUI.framework in Frameworks */,
+				A7CDF7C1A684C207B9EC2BEC /* Pods_FirebaseStorageUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0CC97045B70819DE9626D1BE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4F5D5A91D72EF2D6714BF575 /* Pods-FirebaseStorageUI.debug.xcconfig */,
+				2531884B814A605E24AF1BD1 /* Pods-FirebaseStorageUI.release.xcconfig */,
+				A6602D6474A93D643DAE0E09 /* Pods-FirebaseStorageUITests.debug.xcconfig */,
+				47BA3EFFA8182422FCFF3BA8 /* Pods-FirebaseStorageUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		8D69E5F221DE968300CFA49B = {
 			isa = PBXGroup;
 			children = (
 				8D69E5FE21DE968300CFA49B /* FirebaseStorageUI */,
 				8D69E60921DE968300CFA49B /* FirebaseStorageUITests */,
 				8D69E5FD21DE968300CFA49B /* Products */,
+				0CC97045B70819DE9626D1BE /* Pods */,
+				AB368CA46E5052A9298EBEC5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +113,12 @@
 				8D69E5FF21DE968300CFA49B /* FirebaseStorageUI.h */,
 				8D69E61721DE96CF00CFA49B /* UIImageView+FirebaseStorage.h */,
 				8D69E61621DE96CF00CFA49B /* UIImageView+FirebaseStorage.m */,
+				3245015F224B963B00AF2E90 /* SDWebImageFirebaseLoader.h */,
+				32450160224B963B00AF2E90 /* SDWebImageFirebaseLoader.m */,
+				3245016B224B987400AF2E90 /* SDWebImageFirebaseLoaderDefine.h */,
+				3245016C224B987400AF2E90 /* SDWebImageFirebaseLoaderDefine.m */,
+				32450163224B96B400AF2E90 /* NSURL+SDWebImageFirebaseLoader.h */,
+				32450164224B96B400AF2E90 /* NSURL+SDWebImageFirebaseLoader.m */,
 				8D69E60021DE968300CFA49B /* Info.plist */,
 			);
 			path = FirebaseStorageUI;
@@ -92,6 +133,15 @@
 			path = FirebaseStorageUITests;
 			sourceTree = "<group>";
 		};
+		AB368CA46E5052A9298EBEC5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				394D01F06479F5F133E31EA7 /* Pods_FirebaseStorageUI.framework */,
+				B5E602B38093570DAD37D329 /* Pods_FirebaseStorageUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -100,6 +150,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D69E61921DE96CF00CFA49B /* UIImageView+FirebaseStorage.h in Headers */,
+				32450161224B963B00AF2E90 /* SDWebImageFirebaseLoader.h in Headers */,
+				3245016D224B987400AF2E90 /* SDWebImageFirebaseLoaderDefine.h in Headers */,
+				32450165224B96B400AF2E90 /* NSURL+SDWebImageFirebaseLoader.h in Headers */,
 				8D69E60D21DE968300CFA49B /* FirebaseStorageUI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,6 +164,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8D69E61021DE968300CFA49B /* Build configuration list for PBXNativeTarget "FirebaseStorageUI" */;
 			buildPhases = (
+				CA40CBB6AA56043F94AFB971 /* [CP] Check Pods Manifest.lock */,
 				8D69E5F721DE968300CFA49B /* Headers */,
 				8D69E5F821DE968300CFA49B /* Sources */,
 				8D69E5F921DE968300CFA49B /* Frameworks */,
@@ -129,9 +183,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8D69E61321DE968300CFA49B /* Build configuration list for PBXNativeTarget "FirebaseStorageUITests" */;
 			buildPhases = (
+				8FD9C5788D2EEAE951CD23E8 /* [CP] Check Pods Manifest.lock */,
 				8D69E60121DE968300CFA49B /* Sources */,
 				8D69E60221DE968300CFA49B /* Frameworks */,
 				8D69E60321DE968300CFA49B /* Resources */,
+				5A65CD8B4FD0E1D5FB9EFE5E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -195,12 +251,90 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5A65CD8B4FD0E1D5FB9EFE5E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirebaseStorageUITests/Pods-FirebaseStorageUITests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/OCMock/OCMock.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMock.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirebaseStorageUITests/Pods-FirebaseStorageUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8FD9C5788D2EEAE951CD23E8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirebaseStorageUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA40CBB6AA56043F94AFB971 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirebaseStorageUI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8D69E5F821DE968300CFA49B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8D69E61821DE96CF00CFA49B /* UIImageView+FirebaseStorage.m in Sources */,
+				3245016E224B987400AF2E90 /* SDWebImageFirebaseLoaderDefine.m in Sources */,
+				32450166224B96B400AF2E90 /* NSURL+SDWebImageFirebaseLoader.m in Sources */,
+				32450162224B963B00AF2E90 /* SDWebImageFirebaseLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +477,7 @@
 		};
 		8D69E61121DE968300CFA49B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F5D5A91D72EF2D6714BF575 /* Pods-FirebaseStorageUI.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -366,6 +501,7 @@
 		};
 		8D69E61221DE968300CFA49B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2531884B814A605E24AF1BD1 /* Pods-FirebaseStorageUI.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -389,6 +525,7 @@
 		};
 		8D69E61421DE968300CFA49B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6602D6474A93D643DAE0E09 /* Pods-FirebaseStorageUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = FirebaseStorageUITests/Info.plist;
@@ -405,6 +542,7 @@
 		};
 		8D69E61521DE968300CFA49B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47BA3EFFA8182422FCFF3BA8 /* Pods-FirebaseStorageUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = FirebaseStorageUITests/Info.plist;

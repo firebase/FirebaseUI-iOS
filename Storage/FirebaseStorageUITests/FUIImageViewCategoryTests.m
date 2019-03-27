@@ -54,8 +54,8 @@
                                                                                        FIRStorageReference * storageRef) {
     XCTAssert(self.imageView.image == image, @"expected download to populate image");
     XCTAssertNil(error, @"expected successful download to not produce an error");
+    XCTAssertNotNil(self.imageView.sd_currentDownloadTask, @"expected image view with empty cache to attempt a download");
   }];
-  XCTAssertNotNil(download, @"expected image view with empty cache to attempt a download");
 }
 
 - (void)testItDoesNotCreateADownloadIfImageIsCached {

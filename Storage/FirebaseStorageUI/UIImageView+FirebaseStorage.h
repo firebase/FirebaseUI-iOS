@@ -17,8 +17,7 @@
 @import UIKit;
 
 #import <FirebaseStorage/FirebaseStorage.h>
-#import <SDWebImage/UIImageView+WebCache.h>
-#import <SDWebImage/UIImage+MultiFormat.h>
+#import <SDWebImage/SDWebImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,19 +26,19 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Returns the maximum image download size, in bytes. Defaults to 10e6.
  */
-+ (UInt64)sd_defaultMaxImageSize;
++ (UInt64)sd_defaultMaxImageSize __deprecated_msg("Use `SDWebImageFirebaseLoader.defaultMaxImageSize` for global level control. Use `SDWebImageContextFirebaseMaxImageSize` context option for single image request level control");
 
 /**
  * Sets the maximum image download size, in bytes.
  * @param size The new maximum image download size.
  */
-+ (void)sd_setDefaultMaxImageSize:(UInt64)size;
++ (void)sd_setDefaultMaxImageSize:(UInt64)size __deprecated_msg("Use `SDWebImageFirebaseLoader.defaultMaxImageSize` for global level control. Use `SDWebImageContextFirebaseMaxImageSize` context option for single image request level control");
 
 /**
  * The current download task, if the image view is downloading an image.
  * Must be invoked on the main queue.
  */
-@property (nonatomic, readonly, nullable) FIRStorageDownloadTask *sd_currentDownloadTask;
+@property (nonatomic, readonly, nullable) FIRStorageDownloadTask *sd_currentDownloadTask __deprecated_msg("Use `progressBlock` to monitor the progres change. Now the `sd_setImageWithStorageReference` method query cache asynchronously and does not blocking the caller queue. So it can not synchronously return a download task representing the download.");
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
@@ -118,6 +117,32 @@ NS_ASSUME_NONNULL_BEGIN
                                                         maxImageSize:(UInt64)size
                                                     placeholderImage:(nullable UIImage *)placeholder
                                                                cache:(nullable SDImageCache *)cache
+                                                          completion:(void (^_Nullable)(UIImage *_Nullable,
+                                                                                        NSError *_Nullable,
+                                                                                        SDImageCacheType,
+                                                                                        FIRStorageReference *))completion;
+
+/**
+ * Sets the image view's image to an image downloaded from the Firebase Storage reference.
+ * Must be invoked on the main queue.
+ *
+ * @param storageRef    A Firebase Storage reference containing an image.
+ * @param size          The maximum size of the downloaded image. If the downloaded image
+ *   exceeds this size, an error will be raised in the completion block.
+ * @param placeholder   An image to display while the download is in progress.
+ * @param cache         An image cache to check for images before downloading.
+ * @param progressBlock A closure to handle the progress change during the image downloading.
+ * @param completion    A closure to handle events when the image finishes downloading.
+ * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
+ *   could not be found in cache).
+ */
+- (nullable FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                                                        maxImageSize:(UInt64)size
+                                                    placeholderImage:(nullable UIImage *)placeholder
+                                                               cache:(nullable SDImageCache *)cache
+                                                            progress:(void (^_Nullable)(NSInteger,
+                                                                                        NSInteger,
+                                                                                        FIRStorageReference *))progressBlock
                                                           completion:(void (^_Nullable)(UIImage *_Nullable,
                                                                                         NSError *_Nullable,
                                                                                         SDImageCacheType,

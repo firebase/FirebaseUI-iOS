@@ -14,16 +14,8 @@
 //  limitations under the License.
 //
 
-
-#import <UIKit/UIKit.h>
-
-//! Project version number for FirebaseStorageUI.
-FOUNDATION_EXPORT double FirebaseStorageUIVersionNumber;
-
-//! Project version string for FirebaseStorageUI.
-FOUNDATION_EXPORT const unsigned char FirebaseStorageUIVersionString[];
-
-#import "UIImageView+FirebaseStorage.h"
-#import "SDWebImageFirebaseLoader.h"
 #import "SDWebImageFirebaseLoaderDefine.h"
-#import "NSURL+SDWebImageFirebaseLoader.h"
+
+NSString * _Nonnull const SDWebImageFirebaseScheme = @"gs";
+
+SDWebImageContextOption _Nonnull const SDWebImageContextFirebaseMaxImageSize = @"firebaseMaxImageSize";
