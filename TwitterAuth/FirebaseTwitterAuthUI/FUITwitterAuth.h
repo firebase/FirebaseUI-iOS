@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** @class FUITwitterAuth
     @brief AuthUI components for Twitter Sign In.
  */
+DEPRECATED_MSG_ATTRIBUTE("Please use FUIOAuth instead of FUITwitterAuth.")
 @interface FUITwitterAuth : NSObject <FUIAuthProvider>
 
 @end

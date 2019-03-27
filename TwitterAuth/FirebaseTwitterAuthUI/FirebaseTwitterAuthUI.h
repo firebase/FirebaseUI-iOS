@@ -17,10 +17,12 @@
 #import <UIKit/UIKit.h>
 
 //! Project version number for FirebaseTwitterAuthUI.
-FOUNDATION_EXPORT double FirebaseTwitterAuthUIVersionNumber;
+FOUNDATION_EXPORT double FirebaseTwitterAuthUIVersionNumber
+    DEPRECATED_MSG_ATTRIBUTE("Please use OAuth instead of TwitterAuth.");
 
 //! Project version string for FirebaseTwitterAuthUI.
-FOUNDATION_EXPORT const unsigned char FirebaseTwitterAuthUIVersionString[];
+FOUNDATION_EXPORT const unsigned char FirebaseTwitterAuthUIVersionString[]
+    DEPRECATED_MSG_ATTRIBUTE("Please use OAuth instead of TwitterAuth.");
 
 #import "FUITwitterAuth.h"
 

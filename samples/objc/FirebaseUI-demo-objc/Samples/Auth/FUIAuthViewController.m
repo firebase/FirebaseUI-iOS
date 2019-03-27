@@ -407,7 +407,10 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                                      :[[FUIFacebookAuth alloc] init];
           break;
         case kIDPTwitter:
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
           provider = [[FUITwitterAuth alloc] init];
+#pragma clang diagnostic pop
           break;
         case kIDPPhone:
           provider = [[FUIPhoneAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];

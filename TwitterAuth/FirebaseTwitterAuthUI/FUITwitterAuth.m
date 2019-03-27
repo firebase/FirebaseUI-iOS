@@ -24,6 +24,9 @@
 #import "FUIAuthStrings.h"
 #import "FUIAuthUtils.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
  */
@@ -158,3 +161,5 @@ static NSString *const kSignInWithTwitter = @"SignInWithTwitter";
 }
 
 @end
+
+#pragma clang diagnostic pop
