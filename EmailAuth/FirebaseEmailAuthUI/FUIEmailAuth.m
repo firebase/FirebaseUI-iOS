@@ -686,7 +686,7 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
             [FUIAuthBaseViewController showAlertWithMessage:error.description];
           } else {
             NSString *signInMessage = [NSString stringWithFormat:
-                                       @"A sign-in email with additional instrucitons was sent to %@. Check your "
+                                       @"A sign-in email with additional instructions was sent to %@. Check your "
                                        "email to complete sign-in.", email];
             [FUIAuthBaseViewController
              showAlertWithTitle:@"Sign-in email sent"

@@ -263,7 +263,7 @@
 "TroubleGettingEmailMessage" = "Try these common fixes: \n - Check if the email was marked as spam or filtered.\n - Check your internet connection.\n - Check that you did not misspell your email.\n - Check that your inbox space is not running out or other inbox settings related issues.\n If the steps above didn't work, you can resend the email. Note that this will deactivate the link in the older email.";
 
 /* Message displayed after email is sent. The placeholder is the email address that the email is sent to. */
-"EmailSentConfirmationMessage" = "A sign-in email with additional instrucitons was sent to %@. Check your email to complete sign-in.";
+"EmailSentConfirmationMessage" = "A sign-in email with additional instructions was sent to %@. Check your email to complete sign-in.";
 
 /* Message displayed after the email of sign-in link is sent. */
 "SignInEmailSent" = "Sign-in email Sent";
