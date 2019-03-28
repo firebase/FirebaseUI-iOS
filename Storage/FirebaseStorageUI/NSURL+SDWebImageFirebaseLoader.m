@@ -29,6 +29,9 @@
 }
 
 + (instancetype)sd_URLWithStorageReference:(FIRStorageReference *)storageRef {
+    if (!storageRef.bucket || !storageRef.fullPath) {
+        return nil;
+    }
     // gs://bucket/path/to/object.txt
     NSString *urlString = [NSString stringWithFormat:@"%@://%@/%@", SDWebImageFirebaseScheme, storageRef.bucket, storageRef.fullPath];
     NSURL *url = [NSURL URLWithString:urlString];

@@ -45,7 +45,10 @@
 - (id<SDWebImageOperation>)loadImageWithURL:(NSURL *)url options:(SDWebImageOptions)options context:(SDWebImageContext *)context progress:(SDImageLoaderProgressBlock)progressBlock completed:(SDImageLoaderCompletedBlock)completedBlock {
     FIRStorageReference *storageRef = url.sd_storageReference;
     if (!storageRef) {
-        return nil;
+        if (completedBlock) {
+            NSError *error = [NSError errorWithDomain:SDWebImageErrorDomain code:SDWebImageErrorInvalidURL userInfo:@{NSLocalizedDescriptionKey : @"Image url is Firebae Storage Reference"}];
+            completedBlock(nil, nil, error, YES);
+        }
     }
     
     UInt64 size;
@@ -56,8 +59,7 @@
     }
     // Download the image from Firebase Storage
     
-    // TODO, is there any progressive download API for Firebase Storage ? Found `FIRStorageTaskStatusProgress` and `GTMSessionFetcher`
-    // Seems we can support the progressive decoding of SDWebImage using custom loader.
+    // TODO: Support progressive image loading using the `GTMSessionFetcher`
     FIRStorageDownloadTask * download = [storageRef dataWithMaxSize:size
                                                          completion:^(NSData * _Nullable data, NSError * _Nullable error) {
                                                              if (error) {
@@ -78,6 +80,15 @@
                                                                  });
                                                              });
                                                          }];
+    // Observe the progress changes
+    [download observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
+        NSProgress *progress = snapshot.progress;
+        // completedUnitCount == totalBytesWritten;
+        // totalUnitCount == totalBytesExpectedToWrite;
+        if (progressBlock) {
+            progressBlock(progress.completedUnitCount, progress.totalUnitCount, url);
+        }
+    }];
     
     return download;
 }

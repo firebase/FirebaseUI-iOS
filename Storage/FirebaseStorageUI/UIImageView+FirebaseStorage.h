@@ -24,30 +24,17 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIImageView (FirebaseStorage)
 
 /**
- * Returns the maximum image download size, in bytes. Defaults to 10e6.
- */
-+ (UInt64)sd_defaultMaxImageSize __deprecated_msg("Use `SDWebImageFirebaseLoader.defaultMaxImageSize` for global level control. Use `SDWebImageContextFirebaseMaxImageSize` context option for single image request level control");
-
-/**
- * Sets the maximum image download size, in bytes.
- * @param size The new maximum image download size.
- */
-+ (void)sd_setDefaultMaxImageSize:(UInt64)size __deprecated_msg("Use `SDWebImageFirebaseLoader.defaultMaxImageSize` for global level control. Use `SDWebImageContextFirebaseMaxImageSize` context option for single image request level control");
-
-/**
  * The current download task, if the image view is downloading an image.
  * Must be invoked on the main queue.
  */
-@property (nonatomic, readonly, nullable) FIRStorageDownloadTask *sd_currentDownloadTask __deprecated_msg("Use `progressBlock` to monitor the progres change. Now the `sd_setImageWithStorageReference` method query cache asynchronously and does not blocking the caller queue. So it can not synchronously return a download task representing the download.");
+@property (nonatomic, readonly, nullable) FIRStorageDownloadTask *sd_currentDownloadTask;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
  *
  * @param storageRef  A Firebase Storage reference containing an image.
- * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
- *   could not be found in cache).
  */
-- (nullable FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef;
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
@@ -55,98 +42,119 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param storageRef  A Firebase Storage reference containing an image.
  * @param placeholder An image to display while the download is in progress.
- * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
- *   could not be found in cache).
  */
-- (nullable FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
-                                                    placeholderImage:(nullable UIImage *)placeholder;
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                       placeholderImage:(nullable UIImage *)placeholder;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
  * Must be invoked on the main queue.
  *
- * @param storageRef  A Firebase Storage reference containing an image.
- * @param placeholder An image to display while the download is in progress.
- * @param completion  A closure to handle events when the image finishes downloading.
+ * @param storageRef      A Firebase Storage reference containing an image.
+ * @param placeholder     An image to display while the download is in progress.
+ * @param completionBlock A closure to handle events when the image finishes downloading.
  *   The closure is not guaranteed to be invoked on the main thread.
- * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
- *   could not be found in cache).
  */
-- (nullable FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
-                                                    placeholderImage:(nullable UIImage *)placeholder
-                                                          completion:(void (^_Nullable)(UIImage *_Nullable,
-                                                                                        NSError *_Nullable,
-                                                                                        SDImageCacheType,
-                                                                                        FIRStorageReference *))completion;
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                       placeholderImage:(nullable UIImage *)placeholder
+                             completion:(void (^_Nullable)(UIImage *_Nullable,
+                                                           NSError *_Nullable,
+                                                           SDImageCacheType,
+                                                           FIRStorageReference *))completionBlock;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
  * Must be invoked on the main queue.
  *
- * @param storageRef  A Firebase Storage reference containing an image.
- * @param size        The maximum size of the downloaded image. If the downloaded image
+ * @param storageRef      A Firebase Storage reference containing an image.
+ * @param size            The maximum size of the downloaded image. If the downloaded image
  *   exceeds this size, an error will be raised in the completion block.
- * @param placeholder An image to display while the download is in progress.
- * @param completion  A closure to handle events when the image finishes downloading.
+ * @param placeholder     An image to display while the download is in progress.
+ * @param completionBlock A closure to handle events when the image finishes downloading.
  *   The closure is not guaranteed to be invoked on the main thread.
- * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
- *   could not be found in cache).
  */
-- (nullable FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
-                                                        maxImageSize:(UInt64)size
-                                                    placeholderImage:(nullable UIImage *)placeholder
-                                                          completion:(void (^_Nullable)(UIImage *_Nullable,
-                                                                                        NSError *_Nullable,
-                                                                                        SDImageCacheType,
-                                                                                        FIRStorageReference *))completion;
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                           maxImageSize:(UInt64)size
+                       placeholderImage:(nullable UIImage *)placeholder
+                             completion:(void (^_Nullable)(UIImage *_Nullable,
+                                                           NSError *_Nullable,
+                                                           SDImageCacheType,
+                                                           FIRStorageReference *))completionBlock;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
  * Must be invoked on the main queue.
  *
- * @param storageRef  A Firebase Storage reference containing an image.
- * @param size        The maximum size of the downloaded image. If the downloaded image
+ * @param storageRef      A Firebase Storage reference containing an image.
+ * @param size            The maximum size of the downloaded image. If the downloaded image
  *   exceeds this size, an error will be raised in the completion block.
- * @param placeholder An image to display while the download is in progress.
- * @param cache       An image cache to check for images before downloading.
- * @param completion  A closure to handle events when the image finishes downloading.
- * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
- *   could not be found in cache).
+ * @param placeholder     An image to display while the download is in progress.
+ * @param options         The options to use when downloading the image. @see SDWebImageOptions for the possible values.
+ * @param completionBlock A closure to handle events when the image finishes downloading.
+ *   The closure is not guaranteed to be invoked on the main thread.
  */
-- (nullable FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
-                                                        maxImageSize:(UInt64)size
-                                                    placeholderImage:(nullable UIImage *)placeholder
-                                                               cache:(nullable SDImageCache *)cache
-                                                          completion:(void (^_Nullable)(UIImage *_Nullable,
-                                                                                        NSError *_Nullable,
-                                                                                        SDImageCacheType,
-                                                                                        FIRStorageReference *))completion;
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                           maxImageSize:(UInt64)size
+                       placeholderImage:(nullable UIImage *)placeholder
+                                options:(SDWebImageOptions)options
+                             completion:(void (^_Nullable)(UIImage *_Nullable,
+                                                           NSError *_Nullable,
+                                                           SDImageCacheType,
+                                                           FIRStorageReference *))completionBlock;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
  * Must be invoked on the main queue.
  *
- * @param storageRef    A Firebase Storage reference containing an image.
- * @param size          The maximum size of the downloaded image. If the downloaded image
+ * @param storageRef      A Firebase Storage reference containing an image.
+ * @param size            The maximum size of the downloaded image. If the downloaded image
  *   exceeds this size, an error will be raised in the completion block.
- * @param placeholder   An image to display while the download is in progress.
- * @param cache         An image cache to check for images before downloading.
- * @param progressBlock A closure to handle the progress change during the image downloading.
- * @param completion    A closure to handle events when the image finishes downloading.
- * @return Returns a FIRStorageDownloadTask if a download was created (i.e. image
- *   could not be found in cache).
+ * @param placeholder     An image to display while the download is in progress.
+ * @param options         The options to use when downloading the image. @see SDWebImageOptions for the possible values.
+ * @param progressBlock   A closure to handle the progress change during the image downloading. The closure args are `receivedSize` `expectedSize` and `storageRef`
+ *   The progress block is executed on a background queue.
+ * @param completionBlock A closure to handle events when the image finishes downloading.
+ *   The closure is not guaranteed to be invoked on the main thread.
  */
-- (nullable FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
-                                                        maxImageSize:(UInt64)size
-                                                    placeholderImage:(nullable UIImage *)placeholder
-                                                               cache:(nullable SDImageCache *)cache
-                                                            progress:(void (^_Nullable)(NSInteger,
-                                                                                        NSInteger,
-                                                                                        FIRStorageReference *))progressBlock
-                                                          completion:(void (^_Nullable)(UIImage *_Nullable,
-                                                                                        NSError *_Nullable,
-                                                                                        SDImageCacheType,
-                                                                                        FIRStorageReference *))completion;
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                           maxImageSize:(UInt64)size
+                       placeholderImage:(nullable UIImage *)placeholder
+                                options:(SDWebImageOptions)options
+                               progress:(void (^_Nullable)(NSInteger,
+                                                           NSInteger,
+                                                           FIRStorageReference *))progressBlock
+                             completion:(void (^_Nullable)(UIImage *_Nullable,
+                                                           NSError *_Nullable,
+                                                           SDImageCacheType,
+                                                           FIRStorageReference *))completionBlock;
+
+/**
+ * Sets the image view's image to an image downloaded from the Firebase Storage reference.
+ * Must be invoked on the main queue.
+ *
+ * @param storageRef      A Firebase Storage reference containing an image.
+ * @param size            The maximum size of the downloaded image. If the downloaded image
+ *   exceeds this size, an error will be raised in the completion block.
+ * @param placeholder     An image to display while the download is in progress.
+ * @param options         The options to use when downloading the image. @see SDWebImageOptions for the possible values.
+ * @param context         A context contains different options to perform specify changes or processes, see `SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold. For example, you can use [.customManager] to use a custom manager with the desired cache instance for this image request.
+ * @param progressBlock   A closure to handle the progress change during the image downloading. The closure args are `receivedSize` `expectedSize` and `storageRef`
+ *   The progress block is executed on a background queue.
+ * @param completionBlock A closure to handle events when the image finishes downloading.
+ *   The closure is not guaranteed to be invoked on the main thread.
+ */
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                           maxImageSize:(UInt64)size
+                       placeholderImage:(nullable UIImage *)placeholder
+                                options:(SDWebImageOptions)options
+                                context:(nullable SDWebImageContext *)context
+                               progress:(void (^_Nullable)(NSInteger,
+                                                           NSInteger,
+                                                           FIRStorageReference *))progressBlock
+                             completion:(void (^_Nullable)(UIImage *_Nullable,
+                                                           NSError *_Nullable,
+                                                           SDImageCacheType,
+                                                           FIRStorageReference *))completionBlock;
 
 @end
 
