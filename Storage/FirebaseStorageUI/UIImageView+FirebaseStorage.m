@@ -141,7 +141,8 @@ static SDWebImageManager *SharedFirebaseWebImageManager(void) {
   }];
 }
 
-#pragma mark - Getter
+#pragma mark - Accessors
+
 - (FIRStorageDownloadTask *)sd_currentDownloadTask {
   SDWebImageCombinedOperation *operation = [self sd_imageLoadOperationForKey:NSStringFromClass(self.class)];
   if (operation) {

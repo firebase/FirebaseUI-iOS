@@ -37,7 +37,8 @@
   return self;
 }
 
-#pragma mark - SDImageLoader
+#pragma mark - SDImageLoader Protocol
+
 - (BOOL)canLoadWithURL:(NSURL *)url {
   return url.sd_storageReference;
 }
