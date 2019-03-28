@@ -21,76 +21,76 @@
 @implementation SDWebImageFirebaseLoader
 
 + (SDWebImageFirebaseLoader *)sharedLoader {
-    static dispatch_once_t onceToken;
-    static SDWebImageFirebaseLoader *loader;
-    dispatch_once(&onceToken, ^{
-        loader = [[SDWebImageFirebaseLoader alloc] init];
-    });
-    return loader;
+  static dispatch_once_t onceToken;
+  static SDWebImageFirebaseLoader *loader;
+  dispatch_once(&onceToken, ^{
+    loader = [[SDWebImageFirebaseLoader alloc] init];
+  });
+  return loader;
 }
 
 - (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.defaultMaxImageSize = 10e6;
-    }
-    return self;
+  self = [super init];
+  if (self) {
+    self.defaultMaxImageSize = 10e6;
+  }
+  return self;
 }
 
 #pragma mark - SDImageLoader
 - (BOOL)canLoadWithURL:(NSURL *)url {
-    return url.sd_storageReference;
+  return url.sd_storageReference;
 }
 
 - (id<SDWebImageOperation>)loadImageWithURL:(NSURL *)url options:(SDWebImageOptions)options context:(SDWebImageContext *)context progress:(SDImageLoaderProgressBlock)progressBlock completed:(SDImageLoaderCompletedBlock)completedBlock {
-    FIRStorageReference *storageRef = url.sd_storageReference;
-    if (!storageRef) {
-        if (completedBlock) {
-            NSError *error = [NSError errorWithDomain:SDWebImageErrorDomain code:SDWebImageErrorInvalidURL userInfo:@{NSLocalizedDescriptionKey : @"Image url is Firebae Storage Reference"}];
-            completedBlock(nil, nil, error, YES);
-        }
+  FIRStorageReference *storageRef = url.sd_storageReference;
+  if (!storageRef) {
+    if (completedBlock) {
+      NSError *error = [NSError errorWithDomain:SDWebImageErrorDomain code:SDWebImageErrorInvalidURL userInfo:@{NSLocalizedDescriptionKey : @"Image url is Firebae Storage Reference"}];
+      completedBlock(nil, nil, error, YES);
     }
-    
-    UInt64 size;
-    if (context[SDWebImageContextFirebaseMaxImageSize]) {
-        size = [context[SDWebImageContextFirebaseMaxImageSize] unsignedLongLongValue];
-    } else {
-        size = self.defaultMaxImageSize;
-    }
-    // Download the image from Firebase Storage
-    
-    // TODO: Support progressive image loading using the `GTMSessionFetcher`
-    FIRStorageDownloadTask * download = [storageRef dataWithMaxSize:size
-                                                         completion:^(NSData * _Nullable data, NSError * _Nullable error) {
-                                                             if (error) {
-                                                                 dispatch_main_async_safe(^{
-                                                                     if (completedBlock) {
-                                                                         completedBlock(nil, nil, error, YES);
-                                                                     }
-                                                                 });
-                                                                 return;
+  }
+  
+  UInt64 size;
+  if (context[SDWebImageContextFirebaseMaxImageSize]) {
+    size = [context[SDWebImageContextFirebaseMaxImageSize] unsignedLongLongValue];
+  } else {
+    size = self.defaultMaxImageSize;
+  }
+  // Download the image from Firebase Storage
+  
+  // TODO: Support progressive image loading using the `GTMSessionFetcher`
+  FIRStorageDownloadTask * download = [storageRef dataWithMaxSize:size
+                                                       completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+                                                         if (error) {
+                                                           dispatch_main_async_safe(^{
+                                                             if (completedBlock) {
+                                                               completedBlock(nil, nil, error, YES);
                                                              }
-                                                             // Decode the image with data
-                                                             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                                                                 UIImage *image = SDImageLoaderDecodeImageData(data, url, options, context);
-                                                                 dispatch_main_async_safe(^{
-                                                                     if (completedBlock) {
-                                                                         completedBlock(image, data, nil, YES);
-                                                                     }
-                                                                 });
-                                                             });
-                                                         }];
-    // Observe the progress changes
-    [download observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
-        NSProgress *progress = snapshot.progress;
-        // completedUnitCount == totalBytesWritten;
-        // totalUnitCount == totalBytesExpectedToWrite;
-        if (progressBlock) {
-            progressBlock(progress.completedUnitCount, progress.totalUnitCount, url);
-        }
-    }];
-    
-    return download;
+                                                           });
+                                                           return;
+                                                         }
+                                                         // Decode the image with data
+                                                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                                                           UIImage *image = SDImageLoaderDecodeImageData(data, url, options, context);
+                                                           dispatch_main_async_safe(^{
+                                                             if (completedBlock) {
+                                                               completedBlock(image, data, nil, YES);
+                                                             }
+                                                           });
+                                                         });
+                                                       }];
+  // Observe the progress changes
+  [download observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
+    NSProgress *progress = snapshot.progress;
+    // completedUnitCount == totalBytesWritten;
+    // totalUnitCount == totalBytesExpectedToWrite;
+    if (progressBlock) {
+      progressBlock(progress.completedUnitCount, progress.totalUnitCount, url);
+    }
+  }];
+  
+  return download;
 }
 
 @end

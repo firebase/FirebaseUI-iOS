@@ -18,23 +18,23 @@
 #import "SDWebImageFirebaseLoader.h"
 
 static SDWebImageManager *SharedFirebaseWebImageManager(void) {
-    static dispatch_once_t onceToken;
-    static SDWebImageManager *manager;
-    dispatch_once(&onceToken, ^{
-        manager = [[SDWebImageManager alloc] initWithCache:SDImageCache.sharedImageCache loader:SDWebImageFirebaseLoader.sharedLoader];
-    });
-    return manager;
+  static dispatch_once_t onceToken;
+  static SDWebImageManager *manager;
+  dispatch_once(&onceToken, ^{
+    manager = [[SDWebImageManager alloc] initWithCache:SDImageCache.sharedImageCache loader:SDWebImageFirebaseLoader.sharedLoader];
+  });
+  return manager;
 }
 
 @implementation UIImageView (FirebaseStorage)
 
 - (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef {
-    [self sd_setImageWithStorageReference:storageRef placeholderImage:nil completion:nil];
+  [self sd_setImageWithStorageReference:storageRef placeholderImage:nil completion:nil];
 }
 
 - (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
                        placeholderImage:(UIImage *)placeholder {
-    [self sd_setImageWithStorageReference:storageRef placeholderImage:placeholder completion:nil];
+  [self sd_setImageWithStorageReference:storageRef placeholderImage:placeholder completion:nil];
 }
 
 - (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
@@ -43,10 +43,10 @@ static SDWebImageManager *SharedFirebaseWebImageManager(void) {
                                                   NSError *_Nullable,
                                                   SDImageCacheType,
                                                   FIRStorageReference *))completionBlock {
-    [self sd_setImageWithStorageReference:storageRef
-                             maxImageSize:SDWebImageFirebaseLoader.sharedLoader.defaultMaxImageSize
-                         placeholderImage:placeholder
-                               completion:completionBlock];
+  [self sd_setImageWithStorageReference:storageRef
+                           maxImageSize:SDWebImageFirebaseLoader.sharedLoader.defaultMaxImageSize
+                       placeholderImage:placeholder
+                             completion:completionBlock];
 }
 
 - (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
@@ -56,11 +56,11 @@ static SDWebImageManager *SharedFirebaseWebImageManager(void) {
                                                   NSError *,
                                                   SDImageCacheType,
                                                   FIRStorageReference *))completionBlock{
-    [self sd_setImageWithStorageReference:storageRef
-                             maxImageSize:size
-                         placeholderImage:placeholder
-                                  options:0
-                               completion:completionBlock];
+  [self sd_setImageWithStorageReference:storageRef
+                           maxImageSize:size
+                       placeholderImage:placeholder
+                                options:0
+                             completion:completionBlock];
 }
 
 - (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
@@ -71,12 +71,12 @@ static SDWebImageManager *SharedFirebaseWebImageManager(void) {
                                                   NSError *,
                                                   SDImageCacheType,
                                                   FIRStorageReference *))completionBlock {
-    [self sd_setImageWithStorageReference:storageRef
-                             maxImageSize:size
-                         placeholderImage:placeholder
-                                  options:options
-                                 progress:nil
-                               completion:completionBlock];
+  [self sd_setImageWithStorageReference:storageRef
+                           maxImageSize:size
+                       placeholderImage:placeholder
+                                options:options
+                               progress:nil
+                             completion:completionBlock];
 }
 
 - (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
@@ -90,13 +90,13 @@ static SDWebImageManager *SharedFirebaseWebImageManager(void) {
                                                   NSError *,
                                                   SDImageCacheType,
                                                   FIRStorageReference *))completionBlock {
-    [self sd_setImageWithStorageReference:storageRef
-                             maxImageSize:size
-                         placeholderImage:placeholder
-                                  options:options
-                                  context:nil
-                                 progress:progressBlock
-                               completion:completionBlock];
+  [self sd_setImageWithStorageReference:storageRef
+                           maxImageSize:size
+                       placeholderImage:placeholder
+                                options:options
+                                context:nil
+                               progress:progressBlock
+                             completion:completionBlock];
 }
 
 - (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
@@ -111,47 +111,47 @@ static SDWebImageManager *SharedFirebaseWebImageManager(void) {
                                                   NSError *,
                                                   SDImageCacheType,
                                                   FIRStorageReference *))completionBlock {
-    NSParameterAssert(storageRef != nil);
-    
-    NSURL *url = [NSURL sd_URLWithStorageReference:storageRef];
-    
-    SDWebImageMutableContext *mutableContext;
-    if (context) {
-        mutableContext = [context mutableCopy];
-    } else {
-        mutableContext = [NSMutableDictionary dictionary];
+  NSParameterAssert(storageRef != nil);
+  
+  NSURL *url = [NSURL sd_URLWithStorageReference:storageRef];
+  
+  SDWebImageMutableContext *mutableContext;
+  if (context) {
+    mutableContext = [context mutableCopy];
+  } else {
+    mutableContext = [NSMutableDictionary dictionary];
+  }
+  mutableContext[SDWebImageContextCustomManager] = SharedFirebaseWebImageManager();
+  mutableContext[SDWebImageContextFirebaseMaxImageSize] = @(size);
+  
+  // TODO: Current version use `fullpath` as cache key, but not the URL. Do we need to keep compabitle ?
+  SDWebImageCacheKeyFilter *cacheKeyFilter = [SDWebImageCacheKeyFilter cacheKeyFilterWithBlock:^NSString * _Nullable(NSURL * _Nonnull url) {
+    return url.sd_storageReference.fullPath;
+  }];
+  mutableContext[SDWebImageContextCacheKeyFilter] = cacheKeyFilter;
+  
+  [self sd_setImageWithURL:url placeholderImage:placeholder options:options context:[mutableContext copy] progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+    if (progressBlock) {
+      progressBlock(receivedSize, expectedSize, storageRef);
     }
-    mutableContext[SDWebImageContextCustomManager] = SharedFirebaseWebImageManager();
-    mutableContext[SDWebImageContextFirebaseMaxImageSize] = @(size);
-    
-    // TODO: Current version use `fullpath` as cache key, but not the URL. Do we need to keep compabitle ?
-    SDWebImageCacheKeyFilter *cacheKeyFilter = [SDWebImageCacheKeyFilter cacheKeyFilterWithBlock:^NSString * _Nullable(NSURL * _Nonnull url) {
-        return url.sd_storageReference.fullPath;
-    }];
-    mutableContext[SDWebImageContextCacheKeyFilter] = cacheKeyFilter;
-    
-    [self sd_setImageWithURL:url placeholderImage:placeholder options:options context:[mutableContext copy] progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-        if (progressBlock) {
-            progressBlock(receivedSize, expectedSize, storageRef);
-        }
-    } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        if (completionBlock) {
-            completionBlock(image, error, cacheType, storageRef);
-        }
-    }];
+  } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+    if (completionBlock) {
+      completionBlock(image, error, cacheType, storageRef);
+    }
+  }];
 }
 
 #pragma mark - Getter
 - (FIRStorageDownloadTask *)sd_currentDownloadTask {
-    SDWebImageCombinedOperation *operation = [self sd_imageLoadOperationForKey:NSStringFromClass(self.class)];
-    if (operation) {
-        id<SDWebImageOperation> loaderOperation = operation.loaderOperation;
-        // This is a protocol, check the class
-        if ([loaderOperation isKindOfClass:[FIRStorageDownloadTask class]]) {
-            return (FIRStorageDownloadTask *)loaderOperation;
-        }
+  SDWebImageCombinedOperation *operation = [self sd_imageLoadOperationForKey:NSStringFromClass(self.class)];
+  if (operation) {
+    id<SDWebImageOperation> loaderOperation = operation.loaderOperation;
+    // This is a protocol, check the class
+    if ([loaderOperation isKindOfClass:[FIRStorageDownloadTask class]]) {
+      return (FIRStorageDownloadTask *)loaderOperation;
     }
-    return nil;
+  }
+  return nil;
 }
 
 @end

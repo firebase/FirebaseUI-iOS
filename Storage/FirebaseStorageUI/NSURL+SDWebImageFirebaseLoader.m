@@ -21,27 +21,27 @@
 @implementation NSURL (SDWebImageFirebaseLoader)
 
 - (FIRStorageReference *)sd_storageReference {
-    return objc_getAssociatedObject(self, @selector(sd_storageReference));
+  return objc_getAssociatedObject(self, @selector(sd_storageReference));
 }
 
 - (void)setSd_storageReference:(FIRStorageReference * _Nullable)sd_storageReference {
-    objc_setAssociatedObject(self, @selector(sd_storageReference), sd_storageReference, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+  objc_setAssociatedObject(self, @selector(sd_storageReference), sd_storageReference, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 + (instancetype)sd_URLWithStorageReference:(FIRStorageReference *)storageRef {
-    if (!storageRef.bucket || !storageRef.fullPath) {
-        return nil;
-    }
-    // gs://bucket/path/to/object.txt
-    NSString *urlString = [NSString stringWithFormat:@"%@://%@/%@", SDWebImageFirebaseScheme, storageRef.bucket, storageRef.fullPath];
-    NSURL *url = [NSURL URLWithString:urlString];
-    if (!url) {
-        return nil;
-    }
-    
-    url.sd_storageReference = storageRef;
-    
-    return url;
+  if (!storageRef.bucket || !storageRef.fullPath) {
+    return nil;
+  }
+  // gs://bucket/path/to/object.txt
+  NSString *urlString = [NSString stringWithFormat:@"%@://%@/%@", SDWebImageFirebaseScheme, storageRef.bucket, storageRef.fullPath];
+  NSURL *url = [NSURL URLWithString:urlString];
+  if (!url) {
+    return nil;
+  }
+  
+  url.sd_storageReference = storageRef;
+  
+  return url;
 }
 
 @end

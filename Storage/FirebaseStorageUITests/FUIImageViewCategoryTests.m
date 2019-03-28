@@ -30,86 +30,86 @@
 @implementation FUIImageViewCategoryTests
 
 - (void)setUp {
-    [super setUp];
-    self.ref = OCMClassMock([FIRStorageReference class]);
-    OCMStub([self.ref bucket]).andReturn(@"bucket");
-    OCMStub([self.ref fullPath]).andReturn(@"path/to/image.png");
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+  [super setUp];
+  self.ref = OCMClassMock([FIRStorageReference class]);
+  OCMStub([self.ref bucket]).andReturn(@"bucket");
+  OCMStub([self.ref fullPath]).andReturn(@"path/to/image.png");
+  self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
 }
 
 - (void)tearDown {
-    [super tearDown];
+  [super tearDown];
 }
 
 - (void)testItCreatesADownloadTaskIfCacheIsEmpty {
-    OCMStub([self.ref dataWithMaxSize:512 completion:[OCMArg any]])
-    .andReturn(OCMClassMock([FIRStorageDownloadTask class]));
-    [self.imageView sd_setImageWithStorageReference:self.ref
-                                       maxImageSize:512
-                                   placeholderImage:nil
-                                         completion:^(UIImage *image,
-                                                      NSError *error,
-                                                      SDImageCacheType cacheType,
-                                                      FIRStorageReference * storageRef) {
-                                             XCTAssert(self.imageView.image == image, @"expected download to populate image");
-                                             XCTAssertNil(error, @"expected successful download to not produce an error");
-                                             XCTAssertNotNil(self.imageView.sd_currentDownloadTask, @"expected image view with empty cache to attempt a download");
-                                         }];
+  OCMStub([self.ref dataWithMaxSize:512 completion:[OCMArg any]])
+  .andReturn(OCMClassMock([FIRStorageDownloadTask class]));
+  [self.imageView sd_setImageWithStorageReference:self.ref
+                                     maxImageSize:512
+                                 placeholderImage:nil
+                                       completion:^(UIImage *image,
+                                                    NSError *error,
+                                                    SDImageCacheType cacheType,
+                                                    FIRStorageReference * storageRef) {
+                                         XCTAssert(self.imageView.image == image, @"expected download to populate image");
+                                         XCTAssertNil(error, @"expected successful download to not produce an error");
+                                         XCTAssertNotNil(self.imageView.sd_currentDownloadTask, @"expected image view with empty cache to attempt a download");
+                                       }];
 }
 
 - (void)testItDoesNotCreateADownloadIfImageIsCached {
-    OCMStub([self.ref dataWithMaxSize:4096 completion:[OCMArg any]])
-    .andReturn(OCMClassMock([FIRStorageDownloadTask class]));
-    UIImage *image = [[UIImage alloc] init];
-    self.cache = [SDImageCache sharedImageCache];
-    [self.cache storeImage:image forKey:self.ref.fullPath completion:nil];
-    [self.imageView sd_setImageWithStorageReference:self.ref
-                                       maxImageSize:4096
-                                   placeholderImage:nil
-                                         completion:nil];
-    XCTAssertEqual(self.imageView.image, image, @"expected image view to use cached image");
-    [self.cache clearDiskOnCompletion:nil];
-    [self.cache clearMemory];
+  OCMStub([self.ref dataWithMaxSize:4096 completion:[OCMArg any]])
+  .andReturn(OCMClassMock([FIRStorageDownloadTask class]));
+  UIImage *image = [[UIImage alloc] init];
+  self.cache = [SDImageCache sharedImageCache];
+  [self.cache storeImage:image forKey:self.ref.fullPath completion:nil];
+  [self.imageView sd_setImageWithStorageReference:self.ref
+                                     maxImageSize:4096
+                                 placeholderImage:nil
+                                       completion:nil];
+  XCTAssertEqual(self.imageView.image, image, @"expected image view to use cached image");
+  [self.cache clearDiskOnCompletion:nil];
+  [self.cache clearMemory];
 }
 
 - (void)testItRaisesAnErrorIfDownloadingFails {
-    [self.imageView sd_setImageWithStorageReference:self.ref
-                                       maxImageSize:512
-                                   placeholderImage:nil
-                                         completion:^(UIImage *image,
-                                                      NSError *error,
-                                                      SDImageCacheType cacheType,
-                                                      FIRStorageReference *storageRef) {
-                                             XCTAssertNil(image, @"expected failed download to not return an image");
-                                             XCTAssertNil(self.imageView.image, @"expected failed download to not populate image");
-                                             XCTAssertNotNil(error, @"expected failed download to produce an error");
-                                         }];
+  [self.imageView sd_setImageWithStorageReference:self.ref
+                                     maxImageSize:512
+                                 placeholderImage:nil
+                                       completion:^(UIImage *image,
+                                                    NSError *error,
+                                                    SDImageCacheType cacheType,
+                                                    FIRStorageReference *storageRef) {
+                                         XCTAssertNil(image, @"expected failed download to not return an image");
+                                         XCTAssertNil(self.imageView.image, @"expected failed download to not populate image");
+                                         XCTAssertNotNil(error, @"expected failed download to produce an error");
+                                       }];
 }
 
 - (void)testItSetsAPlaceholder {
-    UIImage *placeholder = [[UIImage alloc] init];
-    [self.imageView sd_setImageWithStorageReference:self.ref
-                                       maxImageSize:4096
-                                   placeholderImage:placeholder
-                                         completion:nil];
-    XCTAssertEqual(self.imageView.image, placeholder, @"expected image view to use placeholder on failed download");
+  UIImage *placeholder = [[UIImage alloc] init];
+  [self.imageView sd_setImageWithStorageReference:self.ref
+                                     maxImageSize:4096
+                                 placeholderImage:placeholder
+                                       completion:nil];
+  XCTAssertEqual(self.imageView.image, placeholder, @"expected image view to use placeholder on failed download");
 }
 
 - (void)testItCancelsTheCurrentDownloadWhenSettingAnImage {
-    OCMStub([self.ref dataWithMaxSize:512 completion:[OCMArg any]])
-    .andReturn(OCMClassMock([FIRStorageDownloadTask class]));
-    [self.imageView sd_setImageWithStorageReference:self.ref
-                                       maxImageSize:512
-                                   placeholderImage:nil
-                                            options:SDWebImageFromLoaderOnly // Disable cache
-                                         completion:nil];
-    FIRStorageDownloadTask *download = self.imageView.sd_currentDownloadTask; // TODO: using OCMock, the `isKindOfClass:` return NO and break the real logic. What about using the actual request ?
-    self.ref = OCMClassMock([FIRStorageReference class]);
-    [self.imageView sd_setImageWithStorageReference:self.ref
-                                       maxImageSize:512
-                                   placeholderImage:nil
-                                         completion:nil];
-    OCMVerify([download cancel]);
+  OCMStub([self.ref dataWithMaxSize:512 completion:[OCMArg any]])
+  .andReturn(OCMClassMock([FIRStorageDownloadTask class]));
+  [self.imageView sd_setImageWithStorageReference:self.ref
+                                     maxImageSize:512
+                                 placeholderImage:nil
+                                          options:SDWebImageFromLoaderOnly // Disable cache
+                                       completion:nil];
+  FIRStorageDownloadTask *download = self.imageView.sd_currentDownloadTask; // TODO: using OCMock, the `isKindOfClass:` return NO and break the real logic. What about using the actual request ?
+  self.ref = OCMClassMock([FIRStorageReference class]);
+  [self.imageView sd_setImageWithStorageReference:self.ref
+                                     maxImageSize:512
+                                 placeholderImage:nil
+                                       completion:nil];
+  OCMVerify([download cancel]);
 }
 
 @end
