@@ -113,4 +113,24 @@
   OCMVerify([download cancel]);
 }
 
+- (void)testLoaderWithNilStorageReference {
+  [SDWebImageFIRStorageLoader.sharedLoader loadImageWithURL:nil
+                                                    options:0
+                                                    context:nil
+                                                   progress:nil
+                                                  completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+                                                    XCTAssertNil(image);
+                                                    XCTAssertNotNil(error);
+  }];
+  NSURL *httpURL = [NSURL URLWithString:@"www.google.com"];
+  [SDWebImageFIRStorageLoader.sharedLoader loadImageWithURL:httpURL
+                                                    options:0
+                                                    context:nil
+                                                   progress:nil
+                                                  completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+                                                    XCTAssertNil(image);
+                                                    XCTAssertNotNil(error);
+                                                  }];
+}
+
 @end
