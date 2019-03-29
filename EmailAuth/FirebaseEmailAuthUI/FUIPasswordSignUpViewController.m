@@ -302,7 +302,7 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
            forControlEvents:UIControlEventEditingChanged];
-  [self didChangeEmail:_emailField.text orPassword:_nameField.text orUserName:_passwordField.text];
+  [self didChangeEmail:_emailField.text orPassword:_passwordField.text orUserName:_nameField.text];
   return cell;
 }
 
