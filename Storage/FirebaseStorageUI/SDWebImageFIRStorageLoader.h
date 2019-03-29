@@ -25,8 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
  * To use the Firebase Storage loader, you can use the API in `UIImageView+FirebaseStorage.h` for simple usage.
  * You can also use the native SDWebImage's View Category API, with the URL constructed with `FIRStorageReference`. See `NSURL+SDWebImageFIRStorageLoader.h`
  * @code
- // Supports HTTP URL as well as Firebase URL globally. Put this in the early setup step like AppDelegate.m
- SDImageLoadersManager.sharedManager.loaders = @[SDWebImageDownloader.sharedDownloader, SDWebImageFIRStorageLoader.sharedLoader];
+ // Supports HTTP URL as well as Firebase Storage URL globally. Put this in the early setup step like AppDelegate.m
+ SDImageLoadersManager.loaders = @[SDWebImageDownloader.sharedDownloader, SDWebImageFIRStorageLoader.sharedLoader];
  // Replace default manager's loader implementation
  SDWebImageManager.defaultImageLoader = SDImageLoadersManager.sharedManager;
  
