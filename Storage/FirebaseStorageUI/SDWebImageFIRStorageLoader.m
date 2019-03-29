@@ -14,17 +14,15 @@
 //  limitations under the License.
 //
 
-#import "SDWebImageFirebaseLoader.h"
-#import "NSURL+SDWebImageFirebaseLoader.h"
-#import "SDWebImageFirebaseLoaderDefine.h"
+#import "SDWebImageFIRStorageLoader.h"
 
-@implementation SDWebImageFirebaseLoader
+@implementation SDWebImageFIRStorageLoader
 
-+ (SDWebImageFirebaseLoader *)sharedLoader {
++ (SDWebImageFIRStorageLoader *)sharedLoader {
   static dispatch_once_t onceToken;
-  static SDWebImageFirebaseLoader *loader;
+  static SDWebImageFIRStorageLoader *loader;
   dispatch_once(&onceToken, ^{
-    loader = [[SDWebImageFirebaseLoader alloc] init];
+    loader = [[SDWebImageFIRStorageLoader alloc] init];
   });
   return loader;
 }
@@ -53,8 +51,8 @@
   }
   
   UInt64 size;
-  if (context[SDWebImageContextFirebaseMaxImageSize]) {
-    size = [context[SDWebImageContextFirebaseMaxImageSize] unsignedLongLongValue];
+  if (context[SDWebImageContextFIRStorageMaxImageSize]) {
+    size = [context[SDWebImageContextFIRStorageMaxImageSize] unsignedLongLongValue];
   } else {
     size = self.defaultMaxImageSize;
   }

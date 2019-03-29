@@ -15,13 +15,13 @@
 //
 
 #import "UIImageView+FirebaseStorage.h"
-#import "SDWebImageFirebaseLoader.h"
+#import "SDWebImageFIRStorageLoader.h"
 
 static SDWebImageManager *DefaultFirebaseWebImageManager(void) {
   static dispatch_once_t onceToken;
   static SDWebImageManager *manager;
   dispatch_once(&onceToken, ^{
-    manager = [[SDWebImageManager alloc] initWithCache:SDImageCache.sharedImageCache loader:SDWebImageFirebaseLoader.sharedLoader];
+    manager = [[SDWebImageManager alloc] initWithCache:SDImageCache.sharedImageCache loader:SDWebImageFIRStorageLoader.sharedLoader];
   });
   return manager;
 }
@@ -44,7 +44,7 @@ static SDWebImageManager *DefaultFirebaseWebImageManager(void) {
                                                   SDImageCacheType,
                                                   FIRStorageReference *))completionBlock {
   [self sd_setImageWithStorageReference:storageRef
-                           maxImageSize:SDWebImageFirebaseLoader.sharedLoader.defaultMaxImageSize
+                           maxImageSize:SDWebImageFIRStorageLoader.sharedLoader.defaultMaxImageSize
                        placeholderImage:placeholder
                              completion:completionBlock];
 }
@@ -124,8 +124,8 @@ static SDWebImageManager *DefaultFirebaseWebImageManager(void) {
   if (!mutableContext[SDWebImageContextCustomManager]) {
     mutableContext[SDWebImageContextCustomManager] = DefaultFirebaseWebImageManager();
   }
-  if (!mutableContext[SDWebImageContextFirebaseMaxImageSize]) {
-    mutableContext[SDWebImageContextFirebaseMaxImageSize] = @(size);
+  if (!mutableContext[SDWebImageContextFIRStorageMaxImageSize]) {
+    mutableContext[SDWebImageContextFIRStorageMaxImageSize] = @(size);
   }
   
   [self sd_setImageWithURL:url placeholderImage:placeholder options:options context:[mutableContext copy] progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {

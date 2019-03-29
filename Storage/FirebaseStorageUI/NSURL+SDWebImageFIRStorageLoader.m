@@ -14,11 +14,11 @@
 //  limitations under the License.
 //
 
-#import "NSURL+SDWebImageFirebaseLoader.h"
-#import "SDWebImageFirebaseLoaderDefine.h"
+#import "NSURL+SDWebImageFIRStorageLoader.h"
+#import "SDWebImageFIRStorageLoaderDefine.h"
 #import <objc/runtime.h>
 
-@implementation NSURL (SDWebImageFirebaseLoader)
+@implementation NSURL (SDWebImageFIRStorageLoader)
 
 - (FIRStorageReference *)sd_storageReference {
   return objc_getAssociatedObject(self, @selector(sd_storageReference));
@@ -33,7 +33,7 @@
     return nil;
   }
   // gs://bucket/path/to/object.txt
-  NSString *urlString = [NSString stringWithFormat:@"%@://%@/%@", SDWebImageFirebaseScheme, storageRef.bucket, storageRef.fullPath];
+  NSString *urlString = [NSString stringWithFormat:@"%@://%@/%@", SDWebImageFIRStorageScheme, storageRef.bucket, storageRef.fullPath];
   NSURL *url = [NSURL URLWithString:urlString];
   if (!url) {
     return nil;

@@ -14,8 +14,8 @@
 //  limitations under the License.
 //
 
-#import "SDWebImageFirebaseLoaderDefine.h"
+#import "SDWebImageFIRStorageLoaderDefine.h"
 
-NSString * _Nonnull const SDWebImageFirebaseScheme = @"gs";
+NSString * _Nonnull const SDWebImageFIRStorageScheme = @"gs";
 
-SDWebImageContextOption _Nonnull const SDWebImageContextFirebaseMaxImageSize = @"firebaseMaxImageSize";
+SDWebImageContextOption _Nonnull const SDWebImageContextFIRStorageMaxImageSize = @"firebaseMaxImageSize";

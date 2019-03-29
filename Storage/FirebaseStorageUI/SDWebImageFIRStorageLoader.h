@@ -15,18 +15,18 @@
 //
 
 #import <SDWebImage/SDWebImage.h>
-#import "SDWebImageFirebaseLoaderDefine.h"
-#import "NSURL+SDWebImageFirebaseLoader.h"
+#import "SDWebImageFIRStorageLoaderDefine.h"
+#import "NSURL+SDWebImageFIRStorageLoader.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /*
- * This Firebase image loader is used to load a `Firebase Storage reference` of image record.
- * To use the Firebase loader, you can use the API in `UIImageView+FirebaseStorage.h` for simple usage.
- * You can also use the native SDWebImage's View Category API, with the URL constructed with `FIRStorageReference`. See `NSURL+SDWebImageFirebaseLoader.h`
+ * This Firebase Storage loader is used to load a `Firebase Storage reference` of image record.
+ * To use the Firebase Storage loader, you can use the API in `UIImageView+FirebaseStorage.h` for simple usage.
+ * You can also use the native SDWebImage's View Category API, with the URL constructed with `FIRStorageReference`. See `NSURL+SDWebImageFIRStorageLoader.h`
  * @code
- // Supports HTTP URL as well as Firebase URL globally
- SDImageLoadersManager.sharedManager.loaders = @[SDWebImageDownloader.sharedDownloader, SDWebImageFirebaseLoader.sharedLoader];
+ // Supports HTTP URL as well as Firebase URL globally. Put this in the early setup step like AppDelegate.m
+ SDImageLoadersManager.sharedManager.loaders = @[SDWebImageDownloader.sharedDownloader, SDWebImageFIRStorageLoader.sharedLoader];
  // Replace default manager's loader implementation
  SDWebImageManager.defaultImageLoader = SDImageLoadersManager.sharedManager;
  
@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
  [imageView sd_setImageWithURL:url];
  * @endcode
  */
-@interface SDWebImageFirebaseLoader : NSObject<SDImageLoader>
+@interface SDWebImageFIRStorageLoader : NSObject<SDImageLoader>
 
 /**
  * The maximum image download size, in bytes. Defaults to 10e6.
@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The global shared instance for Firebase Storage loader.
  */
-@property (nonatomic, class, readonly, nonnull) SDWebImageFirebaseLoader *sharedLoader;
+@property (nonatomic, class, readonly, nonnull) SDWebImageFIRStorageLoader *sharedLoader;
 
 @end
 
