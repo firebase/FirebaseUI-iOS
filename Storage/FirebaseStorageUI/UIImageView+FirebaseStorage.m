@@ -17,7 +17,7 @@
 #import "UIImageView+FirebaseStorage.h"
 #import "SDWebImageFirebaseLoader.h"
 
-static SDWebImageManager *SharedFirebaseWebImageManager(void) {
+static SDWebImageManager *DefaultFirebaseWebImageManager(void) {
   static dispatch_once_t onceToken;
   static SDWebImageManager *manager;
   dispatch_once(&onceToken, ^{
@@ -121,14 +121,12 @@ static SDWebImageManager *SharedFirebaseWebImageManager(void) {
   } else {
     mutableContext = [NSMutableDictionary dictionary];
   }
-  mutableContext[SDWebImageContextCustomManager] = SharedFirebaseWebImageManager();
-  mutableContext[SDWebImageContextFirebaseMaxImageSize] = @(size);
-  
-  // TODO: Current version use `fullpath` as cache key, but not the URL. Do we need to keep compabitle ?
-  SDWebImageCacheKeyFilter *cacheKeyFilter = [SDWebImageCacheKeyFilter cacheKeyFilterWithBlock:^NSString * _Nullable(NSURL * _Nonnull url) {
-    return url.sd_storageReference.fullPath;
-  }];
-  mutableContext[SDWebImageContextCacheKeyFilter] = cacheKeyFilter;
+  if (!mutableContext[SDWebImageContextCustomManager]) {
+    mutableContext[SDWebImageContextCustomManager] = DefaultFirebaseWebImageManager();
+  }
+  if (!mutableContext[SDWebImageContextFirebaseMaxImageSize]) {
+    mutableContext[SDWebImageContextFirebaseMaxImageSize] = @(size);
+  }
   
   [self sd_setImageWithURL:url placeholderImage:placeholder options:options context:[mutableContext copy] progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
     if (progressBlock) {

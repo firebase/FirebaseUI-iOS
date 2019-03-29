@@ -62,7 +62,8 @@
   .andReturn(OCMClassMock([FIRStorageDownloadTask class]));
   UIImage *image = [[UIImage alloc] init];
   self.cache = [SDImageCache sharedImageCache];
-  [self.cache storeImage:image forKey:self.ref.fullPath completion:nil];
+  NSURL *url = [NSURL sd_URLWithStorageReference:self.ref];
+  [self.cache storeImage:image forKey:url.absoluteString completion:nil];
   [self.imageView sd_setImageWithStorageReference:self.ref
                                      maxImageSize:4096
                                  placeholderImage:nil
@@ -97,13 +98,13 @@
 
 - (void)testItCancelsTheCurrentDownloadWhenSettingAnImage {
   OCMStub([self.ref dataWithMaxSize:512 completion:[OCMArg any]])
-  .andReturn(OCMClassMock([FIRStorageDownloadTask class]));
+  .andReturn(OCMClassMock(NSClassFromString(@"FIRStorageDownloadTask"))); // Must using `NSClassFromString` instead of `FIRStorageDownloadTask.class` for OCMock, or the isKindOfClass: failed.
   [self.imageView sd_setImageWithStorageReference:self.ref
                                      maxImageSize:512
                                  placeholderImage:nil
                                           options:SDWebImageFromLoaderOnly // Disable cache
                                        completion:nil];
-  FIRStorageDownloadTask *download = self.imageView.sd_currentDownloadTask; // TODO: using OCMock, the `isKindOfClass:` return NO and break the real logic. What about using the actual request ?
+  FIRStorageDownloadTask *download = self.imageView.sd_currentDownloadTask;
   self.ref = OCMClassMock([FIRStorageReference class]);
   [self.imageView sd_setImageWithStorageReference:self.ref
                                      maxImageSize:512
