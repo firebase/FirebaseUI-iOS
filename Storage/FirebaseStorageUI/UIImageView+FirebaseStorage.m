@@ -17,7 +17,7 @@
 #import "UIImageView+FirebaseStorage.h"
 #import "SDWebImageFIRStorageLoader.h"
 
-static SDWebImageManager *DefaultFirebaseWebImageManager(void) {
+static SDWebImageManager *DefaultWebImageManager(void) {
   static dispatch_once_t onceToken;
   static SDWebImageManager *manager;
   dispatch_once(&onceToken, ^{
@@ -122,7 +122,7 @@ static SDWebImageManager *DefaultFirebaseWebImageManager(void) {
     mutableContext = [NSMutableDictionary dictionary];
   }
   if (!mutableContext[SDWebImageContextCustomManager]) {
-    mutableContext[SDWebImageContextCustomManager] = DefaultFirebaseWebImageManager();
+    mutableContext[SDWebImageContextCustomManager] = DefaultWebImageManager();
   }
   if (!mutableContext[SDWebImageContextFIRStorageMaxImageSize]) {
     mutableContext[SDWebImageContextFIRStorageMaxImageSize] = @(size);

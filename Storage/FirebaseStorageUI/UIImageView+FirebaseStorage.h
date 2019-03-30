@@ -25,12 +25,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * The current download task, if the image view is downloading an image.
- * Must be invoked on the main queue.
  */
 @property (nonatomic, readonly, nullable) FIRStorageDownloadTask *sd_currentDownloadTask;
 
 /**
  * Sets the image view's image to an image downloaded from the Firebase Storage reference.
+ * Must be invoked on the main queue.
  *
  * @param storageRef  A Firebase Storage reference containing an image.
  */

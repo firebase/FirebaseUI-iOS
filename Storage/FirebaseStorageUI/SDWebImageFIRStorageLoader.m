@@ -58,7 +58,7 @@
   }
   // Download the image from Firebase Storage
   
-  // TODO: Support progressive image loading using the `GTMSessionFetcher`
+  // TODO: Support progressive image loading using the `GTMSessionFetcher.downloadedData` with `SDImageLoaderDecodeProgressiveImageData`
   FIRStorageDownloadTask * download = [storageRef dataWithMaxSize:size
                                                        completion:^(NSData * _Nullable data, NSError * _Nullable error) {
                                                          if (error) {
