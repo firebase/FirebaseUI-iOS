@@ -45,7 +45,7 @@
   FIRStorageReference *storageRef = url.sd_storageReference;
   if (!storageRef) {
     if (completedBlock) {
-      NSError *error = [NSError errorWithDomain:SDWebImageErrorDomain code:SDWebImageErrorInvalidURL userInfo:@{NSLocalizedDescriptionKey : @"Image url is Firebae Storage Reference"}];
+      NSError *error = [NSError errorWithDomain:SDWebImageErrorDomain code:SDWebImageErrorInvalidURL userInfo:@{NSLocalizedDescriptionKey : @"The provided image url must have an associated FIRStorageReference."}];
       completedBlock(nil, nil, error, YES);
     }
   }
