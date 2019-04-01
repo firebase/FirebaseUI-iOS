@@ -68,7 +68,7 @@
 "ChoosePassword" = "Välj lösenord";
 
 /* Text linked to a web page with the Terms of Service content. */
-"TermsOfService" = "användarvillkoren";
+"TermsOfService" = "Användarvillkor";
 
 /* Text linked to a web page with the Privacy Policy content. */
 "PrivacyPolicy" = "Sekretesspolicy";
