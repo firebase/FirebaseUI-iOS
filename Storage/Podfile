@@ -4,13 +4,13 @@ target 'FirebaseStorageUI' do
   use_frameworks!
 
   pod 'Firebase/Storage'
-  pod 'SDWebImage', '>= 5.0.0-beta6'
+  pod 'SDWebImage', '~> 5.0'
 end
 
 target 'FirebaseStorageUITests' do
   use_frameworks!
   
   pod 'Firebase/Storage'
-  pod 'SDWebImage', '>= 5.0.0-beta6'
+  pod 'SDWebImage', '~> 5.0'
   pod 'OCMock'
 end

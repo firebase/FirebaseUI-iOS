@@ -24,7 +24,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Storage
   - OCMock
-  - SDWebImage (>= 5.0.0-beta6)
+  - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -47,6 +47,6 @@ SPEC CHECKSUMS:
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
   SDWebImage: 5de80a0302de9e377e62f47d2fa1304efff0e55f
 
-PODFILE CHECKSUM: ab1bf06e946282a4f1439f4514aeec58dcde8c0f
+PODFILE CHECKSUM: 257b15ecb7b966143e9994f21e65b042cc02e579
 
 COCOAPODS: 1.6.1
