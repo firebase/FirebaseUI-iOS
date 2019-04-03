@@ -429,7 +429,8 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                                             buttonColor:buttonColor
                                               iconImage:[UIImage imageWithContentsOfFile:iconPath]
                                                  scopes:@[@"user.readwrite"]
-                                       customParameters:@{@"prompt" : @"consent"}];
+                                       customParameters:@{@"prompt" : @"consent"}
+                                           loginHintKey:@"login_hint"];
           }
           break;
         default:
