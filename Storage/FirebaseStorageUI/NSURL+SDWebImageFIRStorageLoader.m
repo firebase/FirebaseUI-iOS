@@ -33,8 +33,11 @@
     return nil;
   }
   // gs://bucket/path/to/object.txt
-  NSString *urlString = [NSString stringWithFormat:@"%@://%@/%@", SDWebImageFIRStorageScheme, storageRef.bucket, storageRef.fullPath];
-  NSURL *url = [NSURL URLWithString:urlString];
+  NSURLComponents *components = [[NSURLComponents alloc] initWithString:[NSString stringWithFormat:@"%@://%@/", SDWebImageFIRStorageScheme, storageRef.bucket]];
+  NSString *encodedPath = [storageRef.fullPath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
+  components.path = [components.path stringByAppendingString:encodedPath];
+  
+  NSURL *url = components.URL;
   if (!url) {
     return nil;
   }
