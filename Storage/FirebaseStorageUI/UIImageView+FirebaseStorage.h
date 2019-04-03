@@ -21,6 +21,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+/**
+ * Integrates SDWebImage async image loading and Firebase Storage with UIImageView.
+ *
+ * @code
+ // Reference to an image file in Firebase Storage
+ FIRStorageReference *reference = [storageRef child:@"images/stars.jpg"];
+ 
+ // UIImageView in your ViewController
+ UIImageView *imageView = self.imageView;
+ 
+ // Placeholder image
+ UIImage *placeholderImage;
+ 
+ // Load the image using SDWebImage
+ [imageView sd_setImageWithStorageReference:reference placeholderImage:placeholderImage];
+ * @endcode
+ */
 @interface UIImageView (FirebaseStorage)
 
 /**
