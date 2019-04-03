@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
     storage.public_header_files = 'Storage/FirebaseStorageUI/*.h'
     storage.source_files = 'Storage/FirebaseStorageUI/*.{h,m}'
     storage.dependency 'Firebase/Storage', '~> 5.0'
-    storage.dependency 'SDWebImage', '~> 4.0'
+    storage.dependency 'SDWebImage', '~> 5.0'
     storage.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseStorageUI' }
   end
 

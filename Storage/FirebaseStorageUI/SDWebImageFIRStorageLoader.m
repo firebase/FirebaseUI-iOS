@@ -15,6 +15,7 @@
 //
 
 #import "SDWebImageFIRStorageLoader.h"
+#import <FirebaseCore/FirebaseCore.h>
 
 @implementation SDWebImageFIRStorageLoader
 
@@ -37,11 +38,11 @@
 
 #pragma mark - SDImageLoader Protocol
 
-- (BOOL)canLoadWithURL:(NSURL *)url {
+- (BOOL)canRequestImageForURL:(NSURL *)url {
   return url.sd_storageReference;
 }
 
-- (id<SDWebImageOperation>)loadImageWithURL:(NSURL *)url options:(SDWebImageOptions)options context:(SDWebImageContext *)context progress:(SDImageLoaderProgressBlock)progressBlock completed:(SDImageLoaderCompletedBlock)completedBlock {
+- (id<SDWebImageOperation>)requestImageWithURL:(NSURL *)url options:(SDWebImageOptions)options context:(SDWebImageContext *)context progress:(SDImageLoaderProgressBlock)progressBlock completed:(SDImageLoaderCompletedBlock)completedBlock {
   FIRStorageReference *storageRef = url.sd_storageReference;
   if (!storageRef) {
     if (completedBlock) {
@@ -90,6 +91,17 @@
   }];
   
   return download;
+}
+
+- (BOOL)shouldBlockFailedURLWithURL:(NSURL *)url error:(NSError *)error {
+  if ([error.domain isEqualToString:FIRStorageErrorDomain]) {
+    if (error.code == FIRStorageErrorCodeBucketNotFound
+        || error.code == FIRStorageErrorCodeProjectNotFound
+        || error.code == FIRStorageErrorCodeObjectNotFound) {
+      return YES;
+    }
+  }
+  return NO;
 }
 
 @end
