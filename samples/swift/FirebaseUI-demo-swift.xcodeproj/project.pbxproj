@@ -201,7 +201,6 @@
 				8DABC9871D3D82D600453807 /* FirebaseUI-demo-swift */,
 				8DABC99C1D3D82D600453807 /* FirebaseUI-demo-swiftTests */,
 				8DABC9861D3D82D600453807 /* Products */,
-				AFBE123721E46E4F4AF60C29 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -235,13 +234,6 @@
 				8DABC99F1D3D82D600453807 /* Info.plist */,
 			);
 			path = "FirebaseUI-demo-swiftTests";
-			sourceTree = "<group>";
-		};
-		AFBE123721E46E4F4AF60C29 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		C302C1D31D91CC7B00ADBD41 /* Samples */ = {
