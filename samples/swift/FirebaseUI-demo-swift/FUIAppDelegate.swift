@@ -18,7 +18,6 @@ import UIKit
 import Firebase
 import FirebaseUI
 import GTMSessionFetcher
-import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,8 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Successfully running this sample requires an app in Firebase and an
     // accompanying valid GoogleService-Info.plist file.
     FirebaseApp.configure()
-    TWTRTwitter.sharedInstance().start(withConsumerKey: "consumer-key",
-                                       consumerSecret: "consumer-secret");
     GTMSessionFetcher.setLoggingEnabled(true)
     return true
   }

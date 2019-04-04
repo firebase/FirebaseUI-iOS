@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89B2924722568B1C00CEF7D7 /* twtrsymbol.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B2924622568B1C00CEF7D7 /* twtrsymbol.png */; };
 		8D5F93B01D9B192D00D5A2E4 /* StorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F93AF1D9B192D00D5A2E4 /* StorageViewController.swift */; };
 		8DABC9891D3D82D600453807 /* FUIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9881D3D82D600453807 /* FUIAppDelegate.swift */; };
 		8DABC9901D3D82D600453807 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DABC98F1D3D82D600453807 /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		89B2924622568B1C00CEF7D7 /* twtrsymbol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twtrsymbol.png; sourceTree = "<group>"; };
 		8D5F93AF1D9B192D00D5A2E4 /* StorageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageViewController.swift; sourceTree = "<group>"; };
 		8DABC9851D3D82D600453807 /* FirebaseUI-demo-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FirebaseUI-demo-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DABC9881D3D82D600453807 /* FUIAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FUIAppDelegate.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 		C30E94251EF8800D00F032B1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				89B2924622568B1C00CEF7D7 /* twtrsymbol.png */,
 				C30E94261EF8800D00F032B1 /* LaunchScreen.storyboard */,
 				C30E942E1EF8801500F032B1 /* Localizable.strings */,
 				C30E94281EF8800D00F032B1 /* Main.storyboard */,
@@ -465,6 +468,7 @@
 				C39BC04A1DB812030060F6AF /* FUICustomPasswordSignInViewController.xib in Resources */,
 				C39BC03E1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.xib in Resources */,
 				C3F23ECD1D80F3300020509F /* GoogleService-Info.plist in Resources */,
+				89B2924722568B1C00CEF7D7 /* twtrsymbol.png in Resources */,
 				C39BC0421DB811630060F6AF /* FUICustomEmailEntryViewController.xib in Resources */,
 				C30E942B1EF8800D00F032B1 /* Main.storyboard in Resources */,
 				C30E942C1EF8801500F032B1 /* Localizable.strings in Resources */,
