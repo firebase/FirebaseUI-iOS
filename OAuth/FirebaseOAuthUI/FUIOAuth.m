@@ -85,6 +85,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy, nullable) NSDictionary<NSString *, NSString*> *customParameters;
 
+/** @property loginHintKey
+    @brief The key of the custom parameter, with which the login hint can be passed to the IdP.
+ */
+@property(nonatomic, copy, nullable) NSString *loginHintKey;
+
 /** @property provider
     @brief The OAuth provider that does the actual sign in.
  */
@@ -101,7 +106,8 @@ NS_ASSUME_NONNULL_BEGIN
                    buttonColor:(UIColor *)buttonColor
                      iconImage:(UIImage *)iconImage
                         scopes:(nullable NSArray<NSString *> *)scopes
-              customParameters:(nullable NSDictionary<NSString *, NSString*> *)customParameters {
+              customParameters:(nullable NSDictionary<NSString *, NSString*> *)customParameters
+                  loginHintKey:(nullable NSString *)loginHintKey {
   if (self = [super init]) {
     _authUI = authUI;
     _providerID = providerID;
@@ -112,27 +118,9 @@ NS_ASSUME_NONNULL_BEGIN
     _scopes = scopes;
     _customParameters = customParameters;
     _provider = [FIROAuthProvider providerWithProviderID:self.providerID];
-    _provider.customParameters = self.customParameters;
-    _provider.scopes = self.scopes;
+    _loginHintKey = loginHintKey;
   }
   return self;
-}
-
-- (instancetype)initWithProviderID:(NSString *)providerID
-                   buttonLabelText:(NSString *)buttonLabelText
-                         shortName:(NSString *)shortName
-                       buttonColor:(UIColor *)buttonColor
-                         iconImage:(UIImage *)iconImage
-                            scopes:(nullable NSArray<NSString *> *)scopes
-    customParameters:(nullable NSDictionary<NSString *, NSString*> *)customParameters {
-  return [self initWithAuthUI:[FUIAuth defaultAuthUI]
-                   providerID:providerID
-              buttonLabelText:buttonLabelText
-                    shortName:shortName
-                  buttonColor:buttonColor
-                    iconImage:iconImage
-                       scopes:scopes
-             customParameters:customParameters];
 }
 
 #pragma mark - FUIAuthProvider
@@ -170,6 +158,17 @@ NS_ASSUME_NONNULL_BEGIN
       presentingViewController:(nullable UIViewController *)presentingViewController
                     completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
   self.presentingViewController = presentingViewController;
+
+  FIROAuthProvider *provider = self.provider;
+  provider.scopes = self.scopes;
+  NSMutableDictionary *customParameters = [NSMutableDictionary dictionary];
+  if (self.customParameters.count) {
+    [customParameters addEntriesFromDictionary:self.customParameters];
+  }
+  if (self.loginHintKey.length && defaultValue.length) {
+    customParameters[self.loginHintKey] = defaultValue;
+  }
+  provider.customParameters = [customParameters copy];
 
   [self.provider getCredentialWithUIDelegate:nil
                                   completion:^(FIRAuthCredential *_Nullable credential,

@@ -46,6 +46,9 @@ NS_ASSUME_NONNULL_BEGIN
     @param iconImage The icon image of the provider.
     @param scopes Array used to configure the OAuth scopes.
     @param customParameters Dictionary used to configure the OAuth custom parameters.
+    @param loginHintKey The key of the custom parameter, with which the login hint can be passed to
+       the IdP.
+
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                     providerID:(NSString *)providerID
@@ -55,27 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
                      iconImage:(UIImage *)iconImage
                         scopes:(nullable NSArray<NSString *> *)scopes
               customParameters:(nullable NSDictionary<NSString *, NSString*> *)customParameters
+                  loginHintKey:(nullable NSString *)loginHintKey
     NS_DESIGNATED_INITIALIZER;
-
-/** @fn providerID:buttonLabelText:buttonColor:iconImage:scopes:customParameters:
-    @brief Initialize the class instance with the default AuthUI.
-
-    @param providerID The unique identifier for the provider.
-    @param buttonLabelText The text label for the sign in button.
-    @param shortName A short display name for the provider.
-    @param buttonColor The background color that should be used for the sign in button of the
-        provider.
-    @param iconImage The icon image of the provider.
-    @param scopes Array used to configure the OAuth scopes.
-    @param customParameters Dictionary used to configure the OAuth custom parameters.
- */
-- (instancetype)initWithProviderID:(NSString *)providerID
-                   buttonLabelText:(NSString *)buttonLabelText
-                         shortName:(NSString *)shortName
-                       buttonColor:(UIColor *)buttonColor
-                         iconImage:(UIImage *)iconImage
-                            scopes:(nullable NSArray<NSString *> *)scopes
-                  customParameters:(nullable NSDictionary<NSString *, NSString*> *)customParameters;
 
 @end
 
