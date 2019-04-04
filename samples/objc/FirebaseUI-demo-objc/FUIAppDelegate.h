@@ -18,9 +18,6 @@
 
 @interface FUIAppDelegate : UIResponder <UIApplicationDelegate>
 
-extern NSString *const kTwitterConsumerKey;
-extern NSString *const kTwitterConsumerSecret;
-
 @property (strong, nonatomic) UIWindow *window;
 
 @end

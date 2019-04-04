@@ -126,13 +126,6 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                                                           inSection:kSectionsProviders]
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
-  // Disable twitter provider if token is not set.
-  if (!kTwitterConsumerKey.length || !kTwitterConsumerSecret.length) {
-    NSIndexPath *twitterRow = [NSIndexPath indexPathForRow:kIDPTwitter
-                                                 inSection:kSectionsProviders];
-    [self tableView:self.tableView cellForRowAtIndexPath:twitterRow].userInteractionEnabled = NO;
-    [self.tableView deselectRowAtIndexPath:twitterRow animated:NO];
-  }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -407,7 +400,26 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                                      :[[FUIFacebookAuth alloc] init];
           break;
         case kIDPTwitter:
-          provider = [[FUITwitterAuth alloc] init];
+          {
+            UIColor *buttonColor = [UIColor colorWithRed:71.0f/255.0f
+                                                   green:154.0f/255.0f
+                                                    blue:234.0f/255.0f
+                                                   alpha:1.0f];
+            NSString *iconPath =
+                [[NSBundle mainBundle] pathForResource:@"twtrsymbol" ofType:@"png"];
+            if (!iconPath) {
+              NSLog(@"Warning: Unable to find twitter icon.");
+            }
+            provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+                                             providerID:@"twitter.com"
+                                        buttonLabelText:@"Sign in with Twitter"
+                                              shortName:@"Twitter"
+                                            buttonColor:buttonColor
+                                              iconImage:[UIImage imageWithContentsOfFile:iconPath]
+                                                 scopes:@[@"user.readwrite"]
+                                       customParameters:@{@"prompt" : @"consent"}
+                                           loginHintKey:nil];
+          }
           break;
         case kIDPPhone:
           provider = [[FUIPhoneAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];

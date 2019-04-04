@@ -38,9 +38,6 @@ pod 'FirebaseUI/Facebook', '~> 5.0'
 # Only pull in Google login features
 pod 'FirebaseUI/Google', '~> 5.0'
 
-# Only pull in Twitter login features
-pod 'FirebaseUI/Twitter', '~> 5.0'
-
 # Only pull in Phone Auth login features
 pod 'FirebaseUI/Phone', '~> 5.0'
 ```
@@ -92,7 +89,6 @@ Copy the `GoogleService-Info.plist` into the sample project folder (`samples/obj
 Go to `Project Settings -> Info tab -> Url Types` and update values for:
 	+ `REVERSED_CLIENT_ID` (get value from `GoogleService-Info.plist`)
 	+ `fb{your-app-id}` (put Facebook App Id)
-	+ `twitterkit-{consumer-key}` (put Twitter App Consumer key)
 
 1. Update `Info.plist` with Facebook configuration values
 	+ `FacebookAppID -> {your-app-id}` (put Facebook App Id)

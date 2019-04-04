@@ -282,7 +282,21 @@ class FUIAuthViewController: UITableViewController {
                                                                              kGoogleUserInfoProfileScope])
               : FUIGoogleAuth()
           case Providers.Twitter.rawValue:
-            provider = FUITwitterAuth()
+            let buttonColor =
+                UIColor(red: 71.0/255.0, green: 154.0/255.0, blue: 234.0/255.0, alpha: 1.0)
+            guard let iconPath = Bundle.main.path(forResource: "twtrsymbol", ofType: "png") else {
+              NSLog("Warning: Unable to find Twitter icon")
+              continue
+            }
+            provider = FUIOAuth(authUI: self.authUI!,
+                                  providerID: "twitter.com",
+                                  buttonLabelText: "Sign in with Twitter",
+                                  shortName: "Twitter",
+                                  buttonColor: buttonColor,
+                                  iconImage: UIImage(contentsOfFile: iconPath)!,
+                                  scopes: ["user.readwrite"],
+                                  customParameters: ["prompt" : "consent"],
+                                  loginHintKey: nil)
           case Providers.Facebook.rawValue:
             provider = self.customScopesSwitch.isOn ? FUIFacebookAuth(permissions: ["email",
                                                                                     "user_friends",

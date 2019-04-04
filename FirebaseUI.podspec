@@ -148,15 +148,4 @@ Pod::Spec.new do |s|
     phone.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebasePhoneAuthUI' }
   end
 
-  s.subspec 'Twitter' do |twitter|
-    twitter.public_header_files = 'TwitterAuth/FirebaseTwitterAuthUI/*.h'
-    twitter.source_files = 'TwitterAuth/FirebaseTwitterAuthUI/*.{h,m}'
-    twitter.dependency 'FirebaseUI/Auth'
-    twitter.dependency 'TwitterKit', '~> 3.0'
-    twitter.platform = :ios, '9.0'
-    twitter.resource_bundle = {
-      'FirebaseTwitterAuthUI' => ['TwitterAuth/FirebaseTwitterAuthUI/**/*.{png,lproj}']
-    }
-    twitter.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseTwitterAuthUI' }
-  end
 end

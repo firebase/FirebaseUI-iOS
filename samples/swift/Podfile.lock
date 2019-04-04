@@ -60,45 +60,41 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.2)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseUI (6.1.1):
-    - FirebaseUI/Anonymous (= 6.1.1)
-    - FirebaseUI/Auth (= 6.1.1)
-    - FirebaseUI/Database (= 6.1.1)
-    - FirebaseUI/Email (= 6.1.1)
-    - FirebaseUI/Facebook (= 6.1.1)
-    - FirebaseUI/Firestore (= 6.1.1)
-    - FirebaseUI/Google (= 6.1.1)
-    - FirebaseUI/OAuth (= 6.1.1)
-    - FirebaseUI/Phone (= 6.1.1)
-    - FirebaseUI/Storage (= 6.1.1)
-    - FirebaseUI/Twitter (= 6.1.1)
-  - FirebaseUI/Anonymous (6.1.1):
+  - FirebaseUI (6.2.1):
+    - FirebaseUI/Anonymous (= 6.2.1)
+    - FirebaseUI/Auth (= 6.2.1)
+    - FirebaseUI/Database (= 6.2.1)
+    - FirebaseUI/Email (= 6.2.1)
+    - FirebaseUI/Facebook (= 6.2.1)
+    - FirebaseUI/Firestore (= 6.2.1)
+    - FirebaseUI/Google (= 6.2.1)
+    - FirebaseUI/OAuth (= 6.2.1)
+    - FirebaseUI/Phone (= 6.2.1)
+    - FirebaseUI/Storage (= 6.2.1)
+  - FirebaseUI/Anonymous (6.2.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Auth (6.1.1):
-    - Firebase/Auth (~> 5.0)
+  - FirebaseUI/Auth (6.2.1):
+    - Firebase/Auth (~> 5.4)
     - GoogleUtilities/UserDefaults
-  - FirebaseUI/Database (6.1.1):
+  - FirebaseUI/Database (6.2.1):
     - Firebase/Database (~> 5.0)
-  - FirebaseUI/Email (6.1.1):
+  - FirebaseUI/Email (6.2.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Facebook (6.1.1):
+  - FirebaseUI/Facebook (6.2.1):
     - FBSDKLoginKit (~> 4.35)
     - FirebaseUI/Auth
-  - FirebaseUI/Firestore (6.1.1):
+  - FirebaseUI/Firestore (6.2.1):
     - Firebase/Firestore
-  - FirebaseUI/Google (6.1.1):
+  - FirebaseUI/Google (6.2.1):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 4.0)
-  - FirebaseUI/OAuth (6.1.1):
+  - FirebaseUI/OAuth (6.2.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Phone (6.1.1):
+  - FirebaseUI/Phone (6.2.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Storage (6.1.1):
+  - FirebaseUI/Storage (6.2.1):
     - Firebase/Storage (~> 5.0)
     - SDWebImage (~> 4.0)
-  - FirebaseUI/Twitter (6.1.1):
-    - FirebaseUI/Auth
-    - TwitterKit (~> 3.0)
   - GoogleSignIn (4.4.0):
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
@@ -143,9 +139,6 @@ PODS:
   - SDWebImage (4.4.6):
     - SDWebImage/Core (= 4.4.6)
   - SDWebImage/Core (4.4.6)
-  - TwitterCore (3.2.0)
-  - TwitterKit (3.4.2):
-    - TwitterCore (>= 3.2.0)
 
 DEPENDENCIES:
   - FirebaseUI (from `../../`)
@@ -173,8 +166,6 @@ SPEC REPOS:
     - nanopb
     - Protobuf
     - SDWebImage
-    - TwitterCore
-    - TwitterKit
 
 EXTERNAL SOURCES:
   FirebaseUI:
@@ -192,7 +183,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 23acb0c53cd4d4070a427b60100b2e4aaa97c45d
   FirebaseFirestore: ccdaffb8a73c591ff61872b8f7905ad0c237ef50
   FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
-  FirebaseUI: fc3584df29e96959d895677274681939fa30dbe5
+  FirebaseUI: a2edbe63a90dff4a9ac715f4dd2869411528eedc
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GoogleUtilities: fa768ad04b264be250ee9edf9f378ad006f7a560
@@ -203,8 +194,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
-  TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
-  TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
 PODFILE CHECKSUM: 7620a9e0cd7d23f06f4301fc5908d3c6f6c7b72d
 
