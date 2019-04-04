@@ -308,7 +308,26 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
           [_authProviders addObject:[[FUIFacebookAuth alloc] init]];
           break;
         case kIDPTwitter:
-          [_authProviders addObject:[[FUITwitterAuth alloc] init]];
+          {
+            UIColor *buttonColor = [UIColor colorWithRed:71.0f/255.0f
+                                                   green:154.0f/255.0f
+                                                    blue:234.0f/255.0f
+                                                   alpha:1.0f];
+            NSString *iconPath =
+                [[NSBundle mainBundle] pathForResource:@"twtrsymbol" ofType:@"png"];
+            if (!iconPath) {
+              NSLog(@"Warning: Unable to find twitter icon.");
+            }
+            [_authProviders addObject:[[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+                                                            providerID:@"twitter.com"
+                                                       buttonLabelText:@"Sign in with Twitter"
+                                                             shortName:@"Twitter"
+                                                           buttonColor:buttonColor
+                                                             iconImage:nil
+                                                                scopes:@[@"user.readwrite"]
+                                                      customParameters:@{@"prompt" : @"consent"}
+                                                          loginHintKey:nil]];
+          }
           break;
         case kIDPPhone:
           [_authProviders addObject:[[FUIPhoneAuth alloc] initWithAuthUI:self.authUIMock]];
