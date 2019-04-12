@@ -13,8 +13,8 @@ PODS:
   - FirebaseCore (5.4.0):
     - GoogleUtilities/Environment (~> 5.2)
     - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseUI/Auth (6.1.1):
-    - Firebase/Auth (~> 5.0)
+  - FirebaseUI/Auth (6.2.1):
+    - Firebase/Auth (~> 5.4)
     - GoogleUtilities/UserDefaults
   - GoogleUtilities/Environment (5.5.0)
   - GoogleUtilities/Logger (5.5.0):
@@ -47,11 +47,11 @@ SPEC CHECKSUMS:
   FirebaseAuth: cbb892a66baed025efc179372598941252acf853
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: 22a79a961c3951ef2f77b67bfbc99e454247b319
-  FirebaseUI: b83b147f45aa656a7086eaa0463ef3b866342cd7
+  FirebaseUI: a2edbe63a90dff4a9ac715f4dd2869411528eedc
   GoogleUtilities: 6481e6318c5fcabaaa8513ef8120f329055d7c10
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
 
-PODFILE CHECKSUM: f595cdb63c8188389342a5860e9ce02ff7bb0e8c
+PODFILE CHECKSUM: cc705f5f2692e92921f0f3169f3cc5a786d8a5a2
 
 COCOAPODS: 1.6.1

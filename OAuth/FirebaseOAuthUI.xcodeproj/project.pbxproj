@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F876AD0DEA8CE209BED9E6D /* Pods_FirebaseOAuthUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B60787908B36BB906D6F8967 /* Pods_FirebaseOAuthUITests.framework */; };
+		7EFA5B64375216155095F4EE /* Pods_FirebaseOAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7B9FBC9CB581E1609617A32 /* Pods_FirebaseOAuthUI.framework */; };
 		8D69E22721DD476D00CFA49B /* FirebaseOAuthUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D69E21D21DD476C00CFA49B /* FirebaseOAuthUI.framework */; };
 		8D69E22C21DD476D00CFA49B /* FirebaseOAuthUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E22B21DD476D00CFA49B /* FirebaseOAuthUITests.m */; };
 		8D69E22E21DD476D00CFA49B /* FirebaseOAuthUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E22021DD476D00CFA49B /* FirebaseOAuthUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -25,6 +27,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		155F53D010178319240C0A07 /* Pods-FirebaseOAuthUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseOAuthUITests.release.xcconfig"; path = "Target Support Files/Pods-FirebaseOAuthUITests/Pods-FirebaseOAuthUITests.release.xcconfig"; sourceTree = "<group>"; };
+		1AA327BECE2E8C522D7A8534 /* Pods-FirebaseOAuthUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseOAuthUI.release.xcconfig"; path = "Target Support Files/Pods-FirebaseOAuthUI/Pods-FirebaseOAuthUI.release.xcconfig"; sourceTree = "<group>"; };
+		33C5885B143447ADBC597032 /* Pods-FirebaseOAuthUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseOAuthUI.debug.xcconfig"; path = "Target Support Files/Pods-FirebaseOAuthUI/Pods-FirebaseOAuthUI.debug.xcconfig"; sourceTree = "<group>"; };
 		8D69E21D21DD476C00CFA49B /* FirebaseOAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseOAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D69E22021DD476D00CFA49B /* FirebaseOAuthUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseOAuthUI.h; sourceTree = "<group>"; };
 		8D69E22121DD476D00CFA49B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -33,6 +38,9 @@
 		8D69E22D21DD476D00CFA49B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D69E23721DD47B400CFA49B /* FUIOAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIOAuth.m; sourceTree = "<group>"; };
 		8D69E23821DD47B400CFA49B /* FUIOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIOAuth.h; sourceTree = "<group>"; };
+		A116B9EACA0AD9E4789F3725 /* Pods-FirebaseOAuthUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseOAuthUITests.debug.xcconfig"; path = "Target Support Files/Pods-FirebaseOAuthUITests/Pods-FirebaseOAuthUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B60787908B36BB906D6F8967 /* Pods_FirebaseOAuthUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseOAuthUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7B9FBC9CB581E1609617A32 /* Pods_FirebaseOAuthUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseOAuthUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EFA5B64375216155095F4EE /* Pods_FirebaseOAuthUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,15 +57,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D69E22721DD476D00CFA49B /* FirebaseOAuthUI.framework in Frameworks */,
+				4F876AD0DEA8CE209BED9E6D /* Pods_FirebaseOAuthUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B0D33E8AFE29DE952445C11 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D7B9FBC9CB581E1609617A32 /* Pods_FirebaseOAuthUI.framework */,
+				B60787908B36BB906D6F8967 /* Pods_FirebaseOAuthUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5763488F2FEC8FD187D3A6FB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				33C5885B143447ADBC597032 /* Pods-FirebaseOAuthUI.debug.xcconfig */,
+				1AA327BECE2E8C522D7A8534 /* Pods-FirebaseOAuthUI.release.xcconfig */,
+				A116B9EACA0AD9E4789F3725 /* Pods-FirebaseOAuthUITests.debug.xcconfig */,
+				155F53D010178319240C0A07 /* Pods-FirebaseOAuthUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -68,6 +91,7 @@
 				8D69E22A21DD476D00CFA49B /* FirebaseOAuthUITests */,
 				8D69E21E21DD476C00CFA49B /* Products */,
 				5763488F2FEC8FD187D3A6FB /* Pods */,
+				1B0D33E8AFE29DE952445C11 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,10 +143,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8D69E23121DD476D00CFA49B /* Build configuration list for PBXNativeTarget "FirebaseOAuthUI" */;
 			buildPhases = (
+				762B8A6E48104309D143C852 /* [CP] Check Pods Manifest.lock */,
 				8D69E21821DD476C00CFA49B /* Headers */,
 				8D69E21921DD476C00CFA49B /* Sources */,
 				8D69E21A21DD476C00CFA49B /* Frameworks */,
 				8D69E21B21DD476C00CFA49B /* Resources */,
+				6CFBD3FEF6A5E2100C747507 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -137,9 +163,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8D69E23421DD476D00CFA49B /* Build configuration list for PBXNativeTarget "FirebaseOAuthUITests" */;
 			buildPhases = (
+				EF45A834CF9F7F74428983B7 /* [CP] Check Pods Manifest.lock */,
 				8D69E22221DD476D00CFA49B /* Sources */,
 				8D69E22321DD476D00CFA49B /* Frameworks */,
 				8D69E22421DD476D00CFA49B /* Resources */,
+				9A8EE317848A73891934DD51 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -202,6 +230,97 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6CFBD3FEF6A5E2100C747507 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirebaseOAuthUI/Pods-FirebaseOAuthUI-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirebaseOAuthUI/Pods-FirebaseOAuthUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		762B8A6E48104309D143C852 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirebaseOAuthUI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9A8EE317848A73891934DD51 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirebaseOAuthUITests/Pods-FirebaseOAuthUITests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/OCMock/OCMock.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMock.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirebaseOAuthUITests/Pods-FirebaseOAuthUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF45A834CF9F7F74428983B7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirebaseOAuthUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D69E21921DD476C00CFA49B /* Sources */ = {
@@ -351,6 +470,7 @@
 		};
 		8D69E23221DD476D00CFA49B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33C5885B143447ADBC597032 /* Pods-FirebaseOAuthUI.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -374,6 +494,7 @@
 		};
 		8D69E23321DD476D00CFA49B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AA327BECE2E8C522D7A8534 /* Pods-FirebaseOAuthUI.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -397,6 +518,7 @@
 		};
 		8D69E23521DD476D00CFA49B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A116B9EACA0AD9E4789F3725 /* Pods-FirebaseOAuthUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = FirebaseOAuthUITests/Info.plist;
@@ -422,6 +544,7 @@
 		};
 		8D69E23621DD476D00CFA49B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 155F53D010178319240C0A07 /* Pods-FirebaseOAuthUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = FirebaseOAuthUITests/Info.plist;
