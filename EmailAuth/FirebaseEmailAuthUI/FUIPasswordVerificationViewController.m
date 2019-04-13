@@ -222,9 +222,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   _passwordField.returnKeyType = UIReturnKeyNext;
   _passwordField.keyboardType = UIKeyboardTypeDefault;
   if (@available(iOS 11.0, *)) {
-    if (![FUIAuthUtils isFirebasePerformanceAvailable]) {
-      _passwordField.textContentType = UITextContentTypePassword;
-    }
+    _passwordField.textContentType = UITextContentTypePassword;
   }
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)
