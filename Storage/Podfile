@@ -9,6 +9,8 @@ target 'FirebaseStorageUI' do
   target 'FirebaseStorageUITests' do
     inherit! :search_paths
     pod 'OCMock'
+    pod 'Firebase/Storage'
+    pod 'SDWebImage', '~> 5.0'
   end
 
 end
