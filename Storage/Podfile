@@ -5,12 +5,10 @@ target 'FirebaseStorageUI' do
 
   pod 'Firebase/Storage'
   pod 'SDWebImage', '~> 5.0'
-end
 
-target 'FirebaseStorageUITests' do
-  use_frameworks!
-  
-  pod 'Firebase/Storage'
-  pod 'SDWebImage', '~> 5.0'
-  pod 'OCMock'
+  target 'FirebaseStorageUITests' do
+    inherit! :search_paths
+    pod 'OCMock'
+  end
+
 end
