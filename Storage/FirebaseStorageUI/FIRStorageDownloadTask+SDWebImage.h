@@ -13,25 +13,14 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-#import <Foundation/Foundation.h>
+
 #import <FirebaseStorage/FirebaseStorage.h>
+#import <SDWebImage/SDWebImage.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSURL (SDWebImageFIRStorageLoader)
-
-/**
- The `FIRStorageReference` value for Firebase Storage reference, or nil for other URL.
- */
-@property (nonatomic, strong, readonly, nullable) FIRStorageReference *sd_storageReference;
-
-/**
- Create a Firebase Storage reference URL with `FIRStorageReference`
- 
- @param storageRef `FIRStorageReference` object
- @return A Firebase Storage reference URL
- */
-+ (nullable instancetype)sd_URLWithStorageReference:(nonnull FIRStorageReference *)storageRef;
+// `FIRStorageDownloadTask` conforms to `SDWebImageOperation` protocol
+@interface FIRStorageDownloadTask (SDWebImage) <SDWebImageOperation>
 
 @end
 

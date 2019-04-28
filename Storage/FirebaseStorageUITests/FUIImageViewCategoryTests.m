@@ -114,23 +114,23 @@
 }
 
 - (void)testLoaderWithNilStorageReference {
-  [SDWebImageFIRStorageLoader.sharedLoader requestImageWithURL:nil
-                                                       options:0
-                                                       context:nil
-                                                      progress:nil
-                                                     completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
-                                                       XCTAssertNil(image);
-                                                       XCTAssertNotNil(error);
-                                                     }];
+  [FUIStorageImageLoader.sharedLoader requestImageWithURL:nil
+                                                  options:0
+                                                  context:nil
+                                                 progress:nil
+                                                completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+                                                  XCTAssertNil(image);
+                                                  XCTAssertNotNil(error);
+                                                }];
   NSURL *httpURL = [NSURL URLWithString:@"www.google.com"];
-  [SDWebImageFIRStorageLoader.sharedLoader requestImageWithURL:httpURL
-                                                       options:0
-                                                       context:nil
-                                                      progress:nil
-                                                     completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
-                                                       XCTAssertNil(image);
-                                                       XCTAssertNotNil(error);
-                                                     }];
+  [FUIStorageImageLoader.sharedLoader requestImageWithURL:httpURL
+                                                  options:0
+                                                  context:nil
+                                                 progress:nil
+                                                completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+                                                  XCTAssertNil(image);
+                                                  XCTAssertNotNil(error);
+                                                }];
 }
 
 @end

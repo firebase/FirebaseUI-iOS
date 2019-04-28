@@ -14,11 +14,11 @@
 //  limitations under the License.
 //
 
-#import "NSURL+SDWebImageFIRStorageLoader.h"
-#import "SDWebImageFIRStorageLoaderDefine.h"
+#import "NSURL+FirebaseStorage.h"
+#import "FUIStorageDefine.h"
 #import <objc/runtime.h>
 
-@implementation NSURL (SDWebImageFIRStorageLoader)
+@implementation NSURL (FirebaseStorage)
 
 - (FIRStorageReference *)sd_storageReference {
   return objc_getAssociatedObject(self, @selector(sd_storageReference));
@@ -33,7 +33,7 @@
     return nil;
   }
   // gs://bucket/path/to/object.txt
-  NSURLComponents *components = [[NSURLComponents alloc] initWithString:[NSString stringWithFormat:@"%@://%@/", SDWebImageFIRStorageScheme, storageRef.bucket]];
+  NSURLComponents *components = [[NSURLComponents alloc] initWithString:[NSString stringWithFormat:@"%@://%@/", FUIStorageScheme, storageRef.bucket]];
   NSString *encodedPath = [storageRef.fullPath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
   components.path = [components.path stringByAppendingString:encodedPath];
   

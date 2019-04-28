@@ -14,16 +14,17 @@
 //  limitations under the License.
 //
 
-#import "SDWebImageFIRStorageLoader.h"
+#import "FUIStorageImageLoader.h"
+#import "FIRStorageDownloadTask+SDWebImage.h"
 #import <FirebaseCore/FirebaseCore.h>
 
-@implementation SDWebImageFIRStorageLoader
+@implementation FUIStorageImageLoader
 
-+ (SDWebImageFIRStorageLoader *)sharedLoader {
++ (FUIStorageImageLoader *)sharedLoader {
   static dispatch_once_t onceToken;
-  static SDWebImageFIRStorageLoader *loader;
+  static FUIStorageImageLoader *loader;
   dispatch_once(&onceToken, ^{
-    loader = [[SDWebImageFIRStorageLoader alloc] init];
+    loader = [[FUIStorageImageLoader alloc] init];
   });
   return loader;
 }
@@ -52,8 +53,8 @@
   }
   
   UInt64 size;
-  if (context[SDWebImageContextFIRStorageMaxImageSize]) {
-    size = [context[SDWebImageContextFIRStorageMaxImageSize] unsignedLongLongValue];
+  if (context[FUIStorageMaxImageSize]) {
+    size = [context[FUIStorageMaxImageSize] unsignedLongLongValue];
   } else {
     size = self.defaultMaxImageSize;
   }

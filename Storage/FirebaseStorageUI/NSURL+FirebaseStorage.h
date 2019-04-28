@@ -13,22 +13,26 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-
+#import <Foundation/Foundation.h>
 #import <FirebaseStorage/FirebaseStorage.h>
-#import <SDWebImage/SDWebImage.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface NSURL (FirebaseStorage)
 
 /**
- * The scheme when identifing the URL is Firebase Storage URL
+ The `FIRStorageReference` value for Firebase Storage reference, or nil for other URL.
  */
-FOUNDATION_EXPORT NSString * _Nonnull const FUIStorageScheme;
+@property (nonatomic, strong, readonly, nullable) FIRStorageReference *sd_storageReference;
 
 /**
- * A UInt64 raw value specify the maximum size of the downloaded image. If the downloaded image
- *   exceeds this size, an error will be raised in the completion block. (NSNumber *)
+ Create a Firebase Storage reference URL with `FIRStorageReference`
+ 
+ @param storageRef `FIRStorageReference` object
+ @return A Firebase Storage reference URL
  */
-FOUNDATION_EXPORT SDWebImageContextOption _Nonnull const FUIStorageMaxImageSize;
-
-// `FIRStorageDownloadTask` conforms to `SDWebImageOperation` protocol
-@interface FIRStorageDownloadTask (SDWebImage) <SDWebImageOperation>
++ (nullable instancetype)sd_URLWithStorageReference:(nonnull FIRStorageReference *)storageRef;
 
 @end
+
+NS_ASSUME_NONNULL_END

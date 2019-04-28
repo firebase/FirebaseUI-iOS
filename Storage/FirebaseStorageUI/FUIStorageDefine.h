@@ -27,8 +27,3 @@ FOUNDATION_EXPORT NSString * _Nonnull const FUIStorageScheme;
  *   exceeds this size, an error will be raised in the completion block. (NSNumber *)
  */
 FOUNDATION_EXPORT SDWebImageContextOption _Nonnull const FUIStorageMaxImageSize;
-
-// `FIRStorageDownloadTask` conforms to `SDWebImageOperation` protocol
-@interface FIRStorageDownloadTask (SDWebImage) <SDWebImageOperation>
-
-@end

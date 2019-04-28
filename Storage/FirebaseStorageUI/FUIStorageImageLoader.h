@@ -15,8 +15,8 @@
 //
 
 #import <SDWebImage/SDWebImage.h>
-#import "SDWebImageFIRStorageLoaderDefine.h"
-#import "NSURL+SDWebImageFIRStorageLoader.h"
+#import "FUIStorageDefine.h"
+#import "NSURL+FirebaseStorage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -36,7 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
  [imageView sd_setImageWithURL:url];
  * @endcode
  */
-@interface SDWebImageFIRStorageLoader : NSObject<SDImageLoader>
+NS_SWIFT_NAME(StorageImageLoader)
+@interface FUIStorageImageLoader : NSObject<SDImageLoader>
 
 /**
  * The maximum image download size, in bytes. Defaults to 10e6.
@@ -46,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The global shared instance for Firebase Storage loader.
  */
-@property (nonatomic, class, readonly, nonnull) SDWebImageFIRStorageLoader *sharedLoader;
+@property (nonatomic, class, readonly, nonnull) FUIStorageImageLoader *sharedLoader;
 
 @end
 
