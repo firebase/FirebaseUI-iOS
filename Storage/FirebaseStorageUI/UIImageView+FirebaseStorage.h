@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param storageRef      A Firebase Storage reference containing an image.
  * @param placeholder     An image to display while the download is in progress.
  * @param completionBlock A closure to handle events when the image finishes downloading.
- *   The closure is not guaranteed to be invoked on the main thread.
+ *   The closure is guaranteed to be invoked on the main queue.
  */
 - (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
                        placeholderImage:(nullable UIImage *)placeholder
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
  *   exceeds this size, an error will be raised in the completion block.
  * @param placeholder     An image to display while the download is in progress.
  * @param completionBlock A closure to handle events when the image finishes downloading.
- *   The closure is not guaranteed to be invoked on the main thread.
+ *   The closure is guaranteed to be invoked on the main queue.
  */
 - (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
                            maxImageSize:(UInt64)size
@@ -109,7 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param placeholder     An image to display while the download is in progress.
  * @param options         The options to use when downloading the image. @see SDWebImageOptions for the possible values.
  * @param completionBlock A closure to handle events when the image finishes downloading.
- *   The closure is not guaranteed to be invoked on the main thread.
+ *   The closure is guaranteed to be invoked on the main queue.
  */
 - (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
                            maxImageSize:(UInt64)size
@@ -132,7 +132,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param progressBlock   A closure to handle the progress change during the image downloading. The closure args are `receivedSize` `expectedSize` and `storageRef`
  *   The progress block is executed on a background queue.
  * @param completionBlock A closure to handle events when the image finishes downloading.
- *   The closure is not guaranteed to be invoked on the main thread.
+ *   The closure is guaranteed to be invoked on the main queue.
  */
 - (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
                            maxImageSize:(UInt64)size
@@ -159,7 +159,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param progressBlock   A closure to handle the progress change during the image downloading. The closure args are `receivedSize` `expectedSize` and `storageRef`
  *   The progress block is executed on a background queue.
  * @param completionBlock A closure to handle events when the image finishes downloading.
- *   The closure is not guaranteed to be invoked on the main thread.
+ *   The closure is guaranteed to be invoked on the main queue.
  */
 - (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
                            maxImageSize:(UInt64)size
