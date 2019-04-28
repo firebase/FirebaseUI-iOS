@@ -15,7 +15,6 @@
 //
 
 #import "NSURL+FirebaseStorage.h"
-#import "FUIStorageDefine.h"
 #import <objc/runtime.h>
 
 @implementation NSURL (FirebaseStorage)
@@ -33,7 +32,7 @@
     return nil;
   }
   // gs://bucket/path/to/object.txt
-  NSURLComponents *components = [[NSURLComponents alloc] initWithString:[NSString stringWithFormat:@"%@://%@/", FUIStorageScheme, storageRef.bucket]];
+  NSURLComponents *components = [[NSURLComponents alloc] initWithString:[NSString stringWithFormat:@"%@://%@/", @"gs", storageRef.bucket]];
   NSString *encodedPath = [storageRef.fullPath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
   components.path = [components.path stringByAppendingString:encodedPath];
   

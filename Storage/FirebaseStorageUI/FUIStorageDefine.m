@@ -16,6 +16,4 @@
 
 #import "FUIStorageDefine.h"
 
-NSString * _Nonnull const FUIStorageScheme = @"gs";
-
-SDWebImageContextOption _Nonnull const FUIStorageMaxImageSize = @"firebaseMaxImageSize";
+SDWebImageContextOption _Nonnull const SDWebImageContextFUIStorageMaxImageSize = @"FUIStorageMaxImageSize";

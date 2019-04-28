@@ -18,12 +18,7 @@
 #import <SDWebImage/SDWebImage.h>
 
 /**
- * The scheme when identifing the URL is Firebase Storage URL
- */
-FOUNDATION_EXPORT NSString * _Nonnull const FUIStorageScheme;
-
-/**
  * A UInt64 raw value specify the maximum size of the downloaded image. If the downloaded image
  *   exceeds this size, an error will be raised in the completion block. (NSNumber *)
  */
-FOUNDATION_EXPORT SDWebImageContextOption _Nonnull const FUIStorageMaxImageSize;
+FOUNDATION_EXPORT SDWebImageContextOption _Nonnull const SDWebImageContextFUIStorageMaxImageSize;

@@ -124,8 +124,8 @@ static SDWebImageManager *DefaultWebImageManager(void) {
   if (!mutableContext[SDWebImageContextCustomManager]) {
     mutableContext[SDWebImageContextCustomManager] = DefaultWebImageManager();
   }
-  if (!mutableContext[FUIStorageMaxImageSize]) {
-    mutableContext[FUIStorageMaxImageSize] = @(size);
+  if (!mutableContext[SDWebImageContextFUIStorageMaxImageSize]) {
+    mutableContext[SDWebImageContextFUIStorageMaxImageSize] = @(size);
   }
   
   [self sd_setImageWithURL:url placeholderImage:placeholder options:options context:[mutableContext copy] progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {

@@ -53,8 +53,8 @@
   }
   
   UInt64 size;
-  if (context[FUIStorageMaxImageSize]) {
-    size = [context[FUIStorageMaxImageSize] unsignedLongLongValue];
+  if (context[SDWebImageContextFUIStorageMaxImageSize]) {
+    size = [context[SDWebImageContextFUIStorageMaxImageSize] unsignedLongLongValue];
   } else {
     size = self.defaultMaxImageSize;
   }
