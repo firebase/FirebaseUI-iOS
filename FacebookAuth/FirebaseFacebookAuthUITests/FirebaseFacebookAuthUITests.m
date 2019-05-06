@@ -75,10 +75,12 @@
   FBSDKAccessToken *token = [[FBSDKAccessToken alloc] initWithTokenString:testToken
                                                               permissions:@[]
                                                       declinedPermissions:@[]
+                                                       expiredPermissions:@[]
                                                                     appID:@"testAppId"
                                                                    userID:@"testUserId"
                                                            expirationDate:nil
-                                                              refreshDate:nil];
+                                                              refreshDate:nil
+                                                 dataAccessExpirationDate:nil];
   id mockToken = OCMPartialMock(token);
 
   FBSDKLoginManagerLoginResult *result = [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
@@ -117,10 +119,12 @@
   FBSDKAccessToken *token = [[FBSDKAccessToken alloc] initWithTokenString:testToken
                                                               permissions:@[]
                                                       declinedPermissions:@[]
+                                                       expiredPermissions:@[]
                                                                     appID:@"testAppId"
                                                                    userID:@"testUserId"
                                                            expirationDate:nil
-                                                              refreshDate:nil];
+                                                              refreshDate:nil
+                                                 dataAccessExpirationDate:nil];
   id mockToken = OCMPartialMock(token);
   FBSDKLoginManagerLoginResult *result = [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
                                                                                  isCancelled:YES

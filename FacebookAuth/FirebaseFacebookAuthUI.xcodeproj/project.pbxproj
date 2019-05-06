@@ -181,8 +181,7 @@
 				8D69E3CE21DD83EB00CFA49B /* FirebaseFacebookAuthUI */,
 				8D69E3D921DD83EB00CFA49B /* FirebaseFacebookAuthUITests */,
 				8D69E3CD21DD83EB00CFA49B /* Products */,
-				8BC8C2F85C81878ED349F584 /* Pods */,
-				D36C30D0E1FCF2E23DB059DD /* Frameworks */,
+				AE5221AD0EB66B14B65D2F18 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -238,13 +237,11 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		D36C30D0E1FCF2E23DB059DD /* Frameworks */ = {
+		AE5221AD0EB66B14B65D2F18 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3F3D8E31AD1C434F81FC9672 /* Pods_FirebaseFacebookAuthUI.framework */,
-				D3F9CF38CE9ED70A57185C3B /* Pods_FirebaseFacebookAuthUITests.framework */,
 			);
-			name = Frameworks;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -797,8 +794,6 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-framework",
-					"\"Bolts\"",
-					"-framework",
 					"\"FBSDKCoreKit\"",
 					"-framework",
 					"\"FBSDKLoginKit\"",
@@ -842,8 +837,6 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-framework",
-					"\"Bolts\"",
-					"-framework",
 					"\"FBSDKCoreKit\"",
 					"-framework",
 					"\"FBSDKLoginKit\"",
@@ -880,8 +873,6 @@
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-framework",
-					"\"Bolts\"",
 					"-framework",
 					"\"FBSDKCoreKit\"",
 					"-framework",
@@ -920,8 +911,6 @@
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-framework",
-					"\"Bolts\"",
 					"-framework",
 					"\"FBSDKCoreKit\"",
 					"-framework",
