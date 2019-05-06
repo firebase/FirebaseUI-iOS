@@ -60,6 +60,7 @@
 				8D69E5FE21DE968300CFA49B /* FirebaseStorageUI */,
 				8D69E60921DE968300CFA49B /* FirebaseStorageUITests */,
 				8D69E5FD21DE968300CFA49B /* Products */,
+				E3D604E8D1C7578D22E758BC /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,6 +91,13 @@
 				8D69E60C21DE968300CFA49B /* Info.plist */,
 			);
 			path = FirebaseStorageUITests;
+			sourceTree = "<group>";
+		};
+		E3D604E8D1C7578D22E758BC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,6 +404,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseStorage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/OCMock\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseStorageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -412,6 +426,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseStorage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/OCMock\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseStorageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

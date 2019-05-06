@@ -271,6 +271,7 @@
 				8D69E25B21DD4BD000CFA49B /* FirebaseAuthUI */,
 				8D69E26621DD4BD100CFA49B /* FirebaseAuthUITests */,
 				8D69E25A21DD4BD000CFA49B /* Products */,
+				ACF63AA832F9F7882BC43A9D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -389,6 +390,13 @@
 				8D69E2ED21DD4C6D00CFA49B /* FirebaseAuthUI.strings */,
 			);
 			path = Strings;
+			sourceTree = "<group>";
+		};
+		ACF63AA832F9F7882BC43A9D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -938,6 +946,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher",
+					"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -954,6 +964,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher",
+					"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

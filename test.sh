@@ -22,7 +22,7 @@ do
     -workspace ${schemes[i]}.xcworkspace \
     -scheme ${schemes[i]} \
     -sdk iphonesimulator \
-    -destination 'platform=iOS Simulator,OS=12.1,name=iPhone XS' \
+    -destination 'platform=iOS Simulator,OS=12.2,name=iPhone XS' \
     build \
     test \
     ONLY_ACTIVE_ARCH=YES \

@@ -68,6 +68,7 @@
 				8D69E21F21DD476C00CFA49B /* FirebaseAnonymousAuthUI */,
 				8D69E22A21DD476D00CFA49B /* FirebaseAnonymousAuthUITests */,
 				8D69E21E21DD476C00CFA49B /* Products */,
+				BEF4805F13BABCBDD925C264 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,6 +119,13 @@
 				8D69E35121DD5C4700CFA49B /* FirebaseAnonymousAuthUI.strings */,
 			);
 			path = Strings;
+			sourceTree = "<group>";
+		};
+		BEF4805F13BABCBDD925C264 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -439,6 +447,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/OCMock\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -464,6 +478,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/OCMock\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

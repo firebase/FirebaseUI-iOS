@@ -151,6 +151,7 @@
 				8D69E49921DE8CAF00CFA49B /* FirebaseGoogleAuthUI */,
 				8D69E4A421DE8CAF00CFA49B /* FirebaseGoogleAuthUITests */,
 				8D69E49821DE8CAF00CFA49B /* Products */,
+				8FF2D83D18DD473DED8B718A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -201,6 +202,13 @@
 				8D69E50A21DE8CF000CFA49B /* ic_google@3x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		8FF2D83D18DD473DED8B718A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -744,6 +752,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -787,6 +802,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

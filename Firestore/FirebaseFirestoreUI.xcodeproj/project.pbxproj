@@ -75,6 +75,7 @@
 				8D69E46021DD8B2E00CFA49B /* FirebaseFirestoreUI */,
 				8D69E46B21DD8B2E00CFA49B /* FirebaseFirestoreUITests */,
 				8D69E45F21DD8B2E00CFA49B /* Products */,
+				905358392FD4EDB2D9802535 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,6 +114,13 @@
 				8D69E46E21DD8B2E00CFA49B /* Info.plist */,
 			);
 			path = FirebaseFirestoreUITests;
+			sourceTree = "<group>";
+		};
+		905358392FD4EDB2D9802535 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,6 +434,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/BoringSSL-GRPC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFirestoreUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -442,6 +459,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/BoringSSL-GRPC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFirestoreUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

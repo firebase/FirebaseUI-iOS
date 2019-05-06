@@ -197,12 +197,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4132CF4029104D5AA0E7B64A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		8D69E53721DE915A00CFA49B = {
 			isa = PBXGroup;
 			children = (
 				8D69E54321DE915A00CFA49B /* FirebasePhoneAuthUI */,
 				8D69E54E21DE915A00CFA49B /* FirebasePhoneAuthUITests */,
 				8D69E54221DE915A00CFA49B /* Products */,
+				4132CF4029104D5AA0E7B64A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -800,6 +808,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -833,6 +846,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
