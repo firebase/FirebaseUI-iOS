@@ -97,7 +97,9 @@
   [super setUp];
 
   if ([FIRApp defaultApp] == nil) {
-    [FIRApp configure];
+    FIROptions *options = [[FIROptions alloc] initWithGoogleAppID:@"1:1069647793992:ios:91eecf4730fc920b"
+                                                      GCMSenderID:@"1069647793992"];
+    [FIRApp configureWithOptions:options];
   }
 
   self.auth = [FIRAuth authWithApp:[FIRApp defaultApp]];

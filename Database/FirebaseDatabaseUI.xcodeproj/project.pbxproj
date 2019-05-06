@@ -109,15 +109,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1CAEFB82EF91DE987BBCCC8D /* Pods */ = {
+		5E6E54D5C69E9648700F3B53 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				311C0F8EEBC55348D8D59158 /* Pods-FirebaseDatabaseUI.debug.xcconfig */,
-				1EB6AB5232B96EAEC31824C1 /* Pods-FirebaseDatabaseUI.release.xcconfig */,
-				6FD4BEEB30C35316198FAC38 /* Pods-FirebaseDatabaseUITests.debug.xcconfig */,
-				39AA3D8455DA000E87D20C6D /* Pods-FirebaseDatabaseUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -127,8 +122,7 @@
 				8D69E1C821DD446600CFA49B /* FirebaseDatabaseUI */,
 				8D69E1D321DD446600CFA49B /* FirebaseDatabaseUITests */,
 				8D69E1C721DD446600CFA49B /* Products */,
-				1CAEFB82EF91DE987BBCCC8D /* Pods */,
-				C22A6BA8FC3E47E6C6098F0B /* Frameworks */,
+				5E6E54D5C69E9648700F3B53 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -571,6 +565,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseDatabase\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -588,6 +586,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseDatabase\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

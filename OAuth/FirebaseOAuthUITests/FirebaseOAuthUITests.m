@@ -54,7 +54,8 @@
                                        buttonColor:[UIColor clearColor]
                                          iconImage:[UIImage imageNamed:@""]
                                             scopes:@[]
-                                  customParameters:@{}];
+                                  customParameters:@{}
+                                      loginHintKey:nil];
 }
 
 - (void)tearDown {
@@ -64,11 +65,11 @@
 
 - (void)testProviderValidity {
   XCTAssertNotNil(self.provider);
-  XCTAssertNotNil(self.provider.icon);
+  XCTAssertNil(self.provider.icon);
   XCTAssertNotNil(self.provider.signInLabel);
   XCTAssertNotNil(self.provider.buttonBackgroundColor);
   XCTAssertNotNil(self.provider.buttonTextColor);
-  XCTAssertNil(self.provider.providerID);
+  XCTAssertNotNil(self.provider.providerID);
   XCTAssertNotNil(self.provider.shortName);
   XCTAssertTrue(self.provider.signInLabel.length != 0);
   XCTAssertNil(self.provider.accessToken);

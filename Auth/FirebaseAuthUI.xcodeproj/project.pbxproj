@@ -281,8 +281,7 @@
 				8D69E25B21DD4BD000CFA49B /* FirebaseAuthUI */,
 				8D69E26621DD4BD100CFA49B /* FirebaseAuthUITests */,
 				8D69E25A21DD4BD000CFA49B /* Products */,
-				AD366F7587E22A427423A545 /* Pods */,
-				F6DA039B71F6AD552525F757 /* Frameworks */,
+				ACF63AA832F9F7882BC43A9D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -403,25 +402,11 @@
 			path = Strings;
 			sourceTree = "<group>";
 		};
-		AD366F7587E22A427423A545 /* Pods */ = {
+		ACF63AA832F9F7882BC43A9D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B4D75A18555E217B6606843B /* Pods-FirebaseAuthUI.debug.xcconfig */,
-				4955D61CF2EE16858F92D6FE /* Pods-FirebaseAuthUI.release.xcconfig */,
-				EF35DF8D73A6F8A868E996F9 /* Pods-FirebaseAuthUITests.debug.xcconfig */,
-				92B78908F9AAE76445327645 /* Pods-FirebaseAuthUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		F6DA039B71F6AD552525F757 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				4FDBEE30A8FD28AFDAF9FF21 /* Pods_FirebaseAuthUI.framework */,
-				C75BC6A95DCB5BB2416555AA /* Pods_FirebaseAuthUITests.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1023,6 +1008,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher",
+					"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1040,6 +1027,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PODS_CONFIGURATION_BUILD_DIR)/GTMSessionFetcher",
+					"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

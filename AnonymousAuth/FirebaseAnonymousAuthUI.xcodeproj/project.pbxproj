@@ -78,8 +78,7 @@
 				8D69E21F21DD476C00CFA49B /* FirebaseAnonymousAuthUI */,
 				8D69E22A21DD476D00CFA49B /* FirebaseAnonymousAuthUITests */,
 				8D69E21E21DD476C00CFA49B /* Products */,
-				B55605365FE042830EBBD157 /* Pods */,
-				B3C0D2E787876EE649C89CBF /* Frameworks */,
+				BEF4805F13BABCBDD925C264 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,24 +131,10 @@
 			path = Strings;
 			sourceTree = "<group>";
 		};
-		B3C0D2E787876EE649C89CBF /* Frameworks */ = {
+		BEF4805F13BABCBDD925C264 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				73B589F207E4236363EEE626 /* Pods_FirebaseAnonymousAuthUI.framework */,
-				9B521F1010988D23DF3A39CD /* Pods_FirebaseAnonymousAuthUITests.framework */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B55605365FE042830EBBD157 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				AD655D2BC8125FCBFB69632A /* Pods-FirebaseAnonymousAuthUI.debug.xcconfig */,
-				9929AABD790C0DD60C537CB2 /* Pods-FirebaseAnonymousAuthUI.release.xcconfig */,
-				C7E917677D16B9024969C4FE /* Pods-FirebaseAnonymousAuthUITests.debug.xcconfig */,
-				02807C8B4CFAB7FD9C32C1A3 /* Pods-FirebaseAnonymousAuthUITests.release.xcconfig */,
-			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -570,6 +555,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/OCMock\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -596,6 +587,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/OCMock\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
