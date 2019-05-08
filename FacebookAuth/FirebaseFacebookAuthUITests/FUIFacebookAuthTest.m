@@ -25,7 +25,7 @@
 
 - (void)logInWithReadPermissions:(NSArray *)permissions
               fromViewController:(UIViewController *)fromViewController
-                         handler:(FBSDKLoginManagerRequestTokenHandler)handler {
+                         handler:(FBSDKLoginManagerLoginResultBlock)handler {
   handler(self.result, self.error);
 }
 @end

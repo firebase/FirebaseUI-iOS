@@ -668,8 +668,6 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-framework",
-					"\"Bolts\"",
-					"-framework",
 					"\"FBSDKCoreKit\"",
 					"-framework",
 					"\"FBSDKLoginKit\"",
@@ -712,8 +710,6 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-framework",
-					"\"Bolts\"",
-					"-framework",
 					"\"FBSDKCoreKit\"",
 					"-framework",
 					"\"FBSDKLoginKit\"",
@@ -749,8 +745,6 @@
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-framework",
-					"\"Bolts\"",
 					"-framework",
 					"\"FBSDKCoreKit\"",
 					"-framework",
@@ -788,8 +782,6 @@
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-framework",
-					"\"Bolts\"",
 					"-framework",
 					"\"FBSDKCoreKit\"",
 					"-framework",

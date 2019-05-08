@@ -1,3 +1,6 @@
+source 'sso://cpdc-internal/firebase'
+source 'https://github.com/CocoaPods/Specs.git'
+
 platform :ios, '8.0'
 
 target 'FirebaseFacebookAuthUI' do
@@ -6,10 +9,8 @@ target 'FirebaseFacebookAuthUI' do
   # The facebook pods generate an unreasonable number of warnings.
   inhibit_all_warnings!
 
-  # These are pinned to 4.35.0 to work around this bug:
-  # https://developers.facebook.com/support/bugs/242258916492125/?disable_redirect=0
-  pod 'FBSDKLoginKit', '= 4.35.0'
-  pod 'FBSDKCoreKit', '= 4.35.0'
+  pod 'FBSDKLoginKit', '~> 5.0'
+  pod 'FBSDKCoreKit', '~> 5.0'
 
   pod 'FirebaseUI/Auth', :path => '../'
 
