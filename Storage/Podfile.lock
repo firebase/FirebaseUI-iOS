@@ -1,29 +1,30 @@
 PODS:
-  - Firebase/CoreOnly (5.18.0):
-    - FirebaseCore (= 5.3.1)
-  - Firebase/Storage (5.18.0):
+  - Firebase/CoreOnly (5.20.2):
+    - FirebaseCore (= 5.4.1)
+  - Firebase/Storage (5.20.2):
     - Firebase/CoreOnly
-    - FirebaseStorage (= 3.1.0)
+    - FirebaseStorage (= 3.1.1)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (5.3.1):
+  - FirebaseCore (5.4.1):
+    - GoogleUtilities/Environment (~> 5.2)
     - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseStorage (3.1.0):
+  - FirebaseStorage (3.1.1):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.2)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleUtilities/Environment (5.4.0)
-  - GoogleUtilities/Logger (5.4.0):
+  - GoogleUtilities/Environment (5.8.0)
+  - GoogleUtilities/Logger (5.8.0):
     - GoogleUtilities/Environment
   - GTMSessionFetcher/Core (1.2.1)
   - OCMock (3.4.3)
-  - SDWebImage (4.4.6):
-    - SDWebImage/Core (= 4.4.6)
-  - SDWebImage/Core (4.4.6)
+  - SDWebImage (5.0.2):
+    - SDWebImage/Core (= 5.0.2)
+  - SDWebImage/Core (5.0.2)
 
 DEPENDENCIES:
   - Firebase/Storage
   - OCMock
-  - SDWebImage (~> 4.0)
+  - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -37,15 +38,15 @@ SPEC REPOS:
     - SDWebImage
 
 SPEC CHECKSUMS:
-  Firebase: 02f3281965c075426141a0ce1277e9de6649cab9
+  Firebase: 0c8cf33f266410c61ab3e2265cfa412200351d9c
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: 52f851b30e11360f1e67cf04b1edfebf0a47a2d3
-  FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
-  GoogleUtilities: fa768ad04b264be250ee9edf9f378ad006f7a560
+  FirebaseCore: f1a9a8be1aee4bf71a2fc0f4096df6788bdfda61
+  FirebaseStorage: 6162ef4322502b818d9de0ec552f5226d283de43
+  GoogleUtilities: 04fce34bcd5620c1ee76fb79172105c74a4df335
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
-  SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
+  SDWebImage: 6764b5fa0f73c203728052955dbefa2bf1f33282
 
-PODFILE CHECKSUM: 520bda42321ed30976c6840784823b80f3cb081a
+PODFILE CHECKSUM: 1a45efdec565d8fc9c3215d09a119d3ca609f0a6
 
 COCOAPODS: 1.6.1

@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2016 Google Inc.
+//  Copyright (c) 2019 Google Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -14,139 +14,143 @@
 //  limitations under the License.
 //
 
-#import <objc/runtime.h>
-
 #import "UIImageView+FirebaseStorage.h"
+#import "FUIStorageImageLoader.h"
 
-static UInt64 FUIMaxImageDownloadSize = 10e6; // 10MB
-
-@interface UIImageView (FirebaseStorage_Private)
-@property (nonatomic, readwrite, nullable, setter=sd_setCurrentDownloadTask:) FIRStorageDownloadTask *sd_currentDownloadTask;
-@end
+static SDWebImageManager *DefaultWebImageManager(void) {
+  static dispatch_once_t onceToken;
+  static SDWebImageManager *manager;
+  dispatch_once(&onceToken, ^{
+    manager = [[SDWebImageManager alloc] initWithCache:SDImageCache.sharedImageCache loader:FUIStorageImageLoader.sharedLoader];
+  });
+  return manager;
+}
 
 @implementation UIImageView (FirebaseStorage)
 
-+ (UInt64)sd_defaultMaxImageSize {
-  return FUIMaxImageDownloadSize;
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef {
+  [self sd_setImageWithStorageReference:storageRef placeholderImage:nil completion:nil];
 }
 
-+ (void)sd_setDefaultMaxImageSize:(UInt64)size {
-  FUIMaxImageDownloadSize = size;
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                       placeholderImage:(UIImage *)placeholder {
+  [self sd_setImageWithStorageReference:storageRef placeholderImage:placeholder completion:nil];
 }
 
-- (FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef {
-  return [self sd_setImageWithStorageReference:storageRef placeholderImage:nil completion:nil];
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                       placeholderImage:(UIImage *)placeholder
+                             completion:(void (^)(UIImage *_Nullable,
+                                                  NSError *_Nullable,
+                                                  SDImageCacheType,
+                                                  FIRStorageReference *))completionBlock {
+  [self sd_setImageWithStorageReference:storageRef
+                           maxImageSize:FUIStorageImageLoader.sharedLoader.defaultMaxImageSize
+                       placeholderImage:placeholder
+                             completion:completionBlock];
 }
 
-- (FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
-                                           placeholderImage:(UIImage *)placeholder {
-  return [self sd_setImageWithStorageReference:storageRef placeholderImage:placeholder completion:nil];
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                           maxImageSize:(UInt64)size
+                       placeholderImage:(nullable UIImage *)placeholder
+                             completion:(void (^)(UIImage *,
+                                                  NSError *,
+                                                  SDImageCacheType,
+                                                  FIRStorageReference *))completionBlock{
+  [self sd_setImageWithStorageReference:storageRef
+                           maxImageSize:size
+                       placeholderImage:placeholder
+                                options:0
+                             completion:completionBlock];
 }
 
-- (FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
-                                           placeholderImage:(UIImage *)placeholder
-                                                 completion:(void (^)(UIImage *_Nullable,
-                                                                      NSError *_Nullable,
-                                                                      SDImageCacheType,
-                                                                      FIRStorageReference *))completion {
-  return [self sd_setImageWithStorageReference:storageRef
-                                  maxImageSize:[UIImageView sd_defaultMaxImageSize]
-                              placeholderImage:placeholder
-                                    completion:completion];
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                           maxImageSize:(UInt64)size
+                       placeholderImage:(nullable UIImage *)placeholder
+                                options:(SDWebImageOptions)options
+                             completion:(void (^)(UIImage *,
+                                                  NSError *,
+                                                  SDImageCacheType,
+                                                  FIRStorageReference *))completionBlock {
+  [self sd_setImageWithStorageReference:storageRef
+                           maxImageSize:size
+                       placeholderImage:placeholder
+                                options:options
+                               progress:nil
+                             completion:completionBlock];
 }
 
-- (FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
-                                               maxImageSize:(UInt64)size
-                                           placeholderImage:(nullable UIImage *)placeholder
-                                                 completion:(void (^)(UIImage *,
-                                                                      NSError *,
-                                                                      SDImageCacheType,
-                                                                      FIRStorageReference *))completion{
-  return [self sd_setImageWithStorageReference:storageRef
-                                  maxImageSize:size
-                              placeholderImage:placeholder
-                                         cache:[SDImageCache sharedImageCache]
-                                    completion:completion];
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                           maxImageSize:(UInt64)size
+                       placeholderImage:(nullable UIImage *)placeholder
+                                options:(SDWebImageOptions)options
+                               progress:(void (^)(NSInteger,
+                                                  NSInteger,
+                                                  FIRStorageReference *))progressBlock
+                             completion:(void (^)(UIImage *,
+                                                  NSError *,
+                                                  SDImageCacheType,
+                                                  FIRStorageReference *))completionBlock {
+  [self sd_setImageWithStorageReference:storageRef
+                           maxImageSize:size
+                       placeholderImage:placeholder
+                                options:options
+                                context:nil
+                               progress:progressBlock
+                             completion:completionBlock];
 }
 
-- (FIRStorageDownloadTask *)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
-                                               maxImageSize:(UInt64)size
-                                           placeholderImage:(nullable UIImage *)placeholder
-                                                      cache:(nullable SDImageCache *)cache
-                                                 completion:(void (^)(UIImage *,
-                                                                      NSError *,
-                                                                      SDImageCacheType,
-                                                                      FIRStorageReference *))completion {
+- (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef
+                           maxImageSize:(UInt64)size
+                       placeholderImage:(nullable UIImage *)placeholder
+                                options:(SDWebImageOptions)options
+                                context:(nullable SDWebImageContext *)context
+                               progress:(void (^)(NSInteger,
+                                                  NSInteger,
+                                                  FIRStorageReference *))progressBlock
+                             completion:(void (^)(UIImage *,
+                                                  NSError *,
+                                                  SDImageCacheType,
+                                                  FIRStorageReference *))completionBlock {
   NSParameterAssert(storageRef != nil);
-
-  // If there's already a download on this UIImageView, cancel it
-  if (self.sd_currentDownloadTask != nil) {
-    [self.sd_currentDownloadTask cancel];
-    self.sd_currentDownloadTask = nil;
+  
+  NSURL *url = [NSURL sd_URLWithStorageReference:storageRef];
+  
+  SDWebImageMutableContext *mutableContext;
+  if (context) {
+    mutableContext = [context mutableCopy];
+  } else {
+    mutableContext = [NSMutableDictionary dictionary];
   }
-
-  // Set placeholder image
-  self.image = placeholder;
-
-  // Query cache for image before trying to download
-  NSString *key = storageRef.fullPath;
-  UIImage *cached = nil;
-
-  cached = [cache imageFromMemoryCacheForKey:key];
-  if (cached != nil) {
-    self.image = cached;
-    if (completion != nil) {
-      completion(cached, nil, SDImageCacheTypeMemory, storageRef);
+  if (!mutableContext[SDWebImageContextCustomManager]) {
+    mutableContext[SDWebImageContextCustomManager] = DefaultWebImageManager();
+  }
+  if (!mutableContext[SDWebImageContextFUIStorageMaxImageSize]) {
+    mutableContext[SDWebImageContextFUIStorageMaxImageSize] = @(size);
+  }
+  
+  [self sd_setImageWithURL:url placeholderImage:placeholder options:options context:[mutableContext copy] progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+    if (progressBlock) {
+      progressBlock(receivedSize, expectedSize, storageRef);
     }
-    return nil;
-  }
-
-  cached = [cache imageFromDiskCacheForKey:key];
-  if (cached != nil) {
-    self.image = cached;
-    if (completion != nil) {
-      completion(cached, nil, SDImageCacheTypeDisk, storageRef);
+  } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+    if (completionBlock) {
+      completionBlock(image, error, cacheType, storageRef);
     }
-    return nil;
-  }
-
-  // If nothing was found in cache, download the image from Firebase Storage
-  FIRStorageDownloadTask * download = [storageRef dataWithMaxSize:size
-                                                       completion:^(NSData *_Nullable data,
-                                                                    NSError *_Nullable error) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-      if (data != nil) {
-        UIImage *image = [UIImage sd_imageWithData:data];
-        self.image = image;
-
-        // Cache downloaded image
-        [cache storeImage:image forKey:storageRef.fullPath completion:nil];
-
-        if (completion != nil) {
-          completion(image, nil, SDImageCacheTypeNone, storageRef);
-        }
-      } else {
-        if (completion != nil) {
-          completion(nil, error, SDImageCacheTypeNone, storageRef);
-        }
-      }
-    });
   }];
-  self.sd_currentDownloadTask = download;
-  return download;
 }
 
 #pragma mark - Accessors
 
-- (void)sd_setCurrentDownloadTask:(FIRStorageDownloadTask *)currentDownload {
-  objc_setAssociatedObject(self,
-                           @selector(sd_currentDownloadTask),
-                           currentDownload,
-                           OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 - (FIRStorageDownloadTask *)sd_currentDownloadTask {
-  return objc_getAssociatedObject(self, @selector(sd_currentDownloadTask));
+  SDWebImageCombinedOperation *operation = [self sd_imageLoadOperationForKey:NSStringFromClass(self.class)];
+  if (operation) {
+    id<SDWebImageOperation> loaderOperation = operation.loaderOperation;
+    // This is a protocol, check the class
+    if ([loaderOperation isKindOfClass:[FIRStorageDownloadTask class]]) {
+      return (FIRStorageDownloadTask *)loaderOperation;
+    }
+  }
+  return nil;
 }
 
 @end

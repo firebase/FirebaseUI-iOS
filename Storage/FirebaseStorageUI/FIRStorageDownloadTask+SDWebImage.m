@@ -14,17 +14,8 @@
 //  limitations under the License.
 //
 
-
-#import <UIKit/UIKit.h>
-
-//! Project version number for FirebaseStorageUI.
-FOUNDATION_EXPORT double FirebaseStorageUIVersionNumber;
-
-//! Project version string for FirebaseStorageUI.
-FOUNDATION_EXPORT const unsigned char FirebaseStorageUIVersionString[];
-
-#import "UIImageView+FirebaseStorage.h"
-#import "FUIStorageImageLoader.h"
-#import "FUIStorageDefine.h"
-#import "NSURL+FirebaseStorage.h"
 #import "FIRStorageDownloadTask+SDWebImage.h"
+
+@implementation FIRStorageDownloadTask (SDWebImage)
+
+@end

@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32450161224B963B00AF2E90 /* FUIStorageImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3245015F224B963B00AF2E90 /* FUIStorageImageLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		32450162224B963B00AF2E90 /* FUIStorageImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 32450160224B963B00AF2E90 /* FUIStorageImageLoader.m */; };
+		32450165224B96B400AF2E90 /* NSURL+FirebaseStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 32450163224B96B400AF2E90 /* NSURL+FirebaseStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		32450166224B96B400AF2E90 /* NSURL+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 32450164224B96B400AF2E90 /* NSURL+FirebaseStorage.m */; };
+		3245016D224B987400AF2E90 /* FUIStorageDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 3245016B224B987400AF2E90 /* FUIStorageDefine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3245016E224B987400AF2E90 /* FUIStorageDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3245016C224B987400AF2E90 /* FUIStorageDefine.m */; };
+		32A5DB2722755E480029B3D5 /* FIRStorageDownloadTask+SDWebImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 32A5DB2522755E480029B3D5 /* FIRStorageDownloadTask+SDWebImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		32A5DB2822755E480029B3D5 /* FIRStorageDownloadTask+SDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A5DB2622755E480029B3D5 /* FIRStorageDownloadTask+SDWebImage.m */; };
 		8D69E60621DE968300CFA49B /* FirebaseStorageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D69E5FC21DE968300CFA49B /* FirebaseStorageUI.framework */; };
 		8D69E60D21DE968300CFA49B /* FirebaseStorageUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D69E5FF21DE968300CFA49B /* FirebaseStorageUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D69E61821DE96CF00CFA49B /* UIImageView+FirebaseStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D69E61621DE96CF00CFA49B /* UIImageView+FirebaseStorage.m */; };
@@ -25,6 +33,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3245015F224B963B00AF2E90 /* FUIStorageImageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FUIStorageImageLoader.h; sourceTree = "<group>"; };
+		32450160224B963B00AF2E90 /* FUIStorageImageLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FUIStorageImageLoader.m; sourceTree = "<group>"; };
+		32450163224B96B400AF2E90 /* NSURL+FirebaseStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURL+FirebaseStorage.h"; sourceTree = "<group>"; };
+		32450164224B96B400AF2E90 /* NSURL+FirebaseStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURL+FirebaseStorage.m"; sourceTree = "<group>"; };
+		3245016B224B987400AF2E90 /* FUIStorageDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FUIStorageDefine.h; sourceTree = "<group>"; };
+		3245016C224B987400AF2E90 /* FUIStorageDefine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FUIStorageDefine.m; sourceTree = "<group>"; };
+		32A5DB2522755E480029B3D5 /* FIRStorageDownloadTask+SDWebImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FIRStorageDownloadTask+SDWebImage.h"; sourceTree = "<group>"; };
+		32A5DB2622755E480029B3D5 /* FIRStorageDownloadTask+SDWebImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "FIRStorageDownloadTask+SDWebImage.m"; sourceTree = "<group>"; };
 		8D69E5FC21DE968300CFA49B /* FirebaseStorageUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FirebaseStorageUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D69E5FF21DE968300CFA49B /* FirebaseStorageUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebaseStorageUI.h; sourceTree = "<group>"; };
 		8D69E60021DE968300CFA49B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +94,14 @@
 				8D69E5FF21DE968300CFA49B /* FirebaseStorageUI.h */,
 				8D69E61721DE96CF00CFA49B /* UIImageView+FirebaseStorage.h */,
 				8D69E61621DE96CF00CFA49B /* UIImageView+FirebaseStorage.m */,
+				3245015F224B963B00AF2E90 /* FUIStorageImageLoader.h */,
+				32450160224B963B00AF2E90 /* FUIStorageImageLoader.m */,
+				3245016B224B987400AF2E90 /* FUIStorageDefine.h */,
+				3245016C224B987400AF2E90 /* FUIStorageDefine.m */,
+				32450163224B96B400AF2E90 /* NSURL+FirebaseStorage.h */,
+				32450164224B96B400AF2E90 /* NSURL+FirebaseStorage.m */,
+				32A5DB2522755E480029B3D5 /* FIRStorageDownloadTask+SDWebImage.h */,
+				32A5DB2622755E480029B3D5 /* FIRStorageDownloadTask+SDWebImage.m */,
 				8D69E60021DE968300CFA49B /* Info.plist */,
 			);
 			path = FirebaseStorageUI;
@@ -100,6 +124,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D69E61921DE96CF00CFA49B /* UIImageView+FirebaseStorage.h in Headers */,
+				32A5DB2722755E480029B3D5 /* FIRStorageDownloadTask+SDWebImage.h in Headers */,
+				32450161224B963B00AF2E90 /* FUIStorageImageLoader.h in Headers */,
+				3245016D224B987400AF2E90 /* FUIStorageDefine.h in Headers */,
+				32450165224B96B400AF2E90 /* NSURL+FirebaseStorage.h in Headers */,
 				8D69E60D21DE968300CFA49B /* FirebaseStorageUI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,6 +229,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D69E61821DE96CF00CFA49B /* UIImageView+FirebaseStorage.m in Sources */,
+				3245016E224B987400AF2E90 /* FUIStorageDefine.m in Sources */,
+				32450166224B96B400AF2E90 /* NSURL+FirebaseStorage.m in Sources */,
+				32450162224B963B00AF2E90 /* FUIStorageImageLoader.m in Sources */,
+				32A5DB2822755E480029B3D5 /* FIRStorageDownloadTask+SDWebImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

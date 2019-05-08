@@ -14,17 +14,14 @@
 //  limitations under the License.
 //
 
+#import <FirebaseStorage/FirebaseStorage.h>
+#import <SDWebImage/SDWebImage.h>
 
-#import <UIKit/UIKit.h>
+NS_ASSUME_NONNULL_BEGIN
 
-//! Project version number for FirebaseStorageUI.
-FOUNDATION_EXPORT double FirebaseStorageUIVersionNumber;
+// `FIRStorageDownloadTask` conforms to `SDWebImageOperation` protocol
+@interface FIRStorageDownloadTask (SDWebImage) <SDWebImageOperation>
 
-//! Project version string for FirebaseStorageUI.
-FOUNDATION_EXPORT const unsigned char FirebaseStorageUIVersionString[];
+@end
 
-#import "UIImageView+FirebaseStorage.h"
-#import "FUIStorageImageLoader.h"
-#import "FUIStorageDefine.h"
-#import "NSURL+FirebaseStorage.h"
-#import "FIRStorageDownloadTask+SDWebImage.h"
+NS_ASSUME_NONNULL_END
