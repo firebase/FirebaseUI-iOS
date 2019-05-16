@@ -280,6 +280,7 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
     _nameField.secureTextEntry = NO;
     _nameField.returnKeyType = UIReturnKeyNext;
     _nameField.keyboardType = UIKeyboardTypeDefault;
+    _nameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     if (@available(iOS 10.0, *)) {
       _nameField.textContentType = UITextContentTypeName;
     }
