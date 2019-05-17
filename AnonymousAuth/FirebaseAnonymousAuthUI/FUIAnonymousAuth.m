@@ -150,6 +150,10 @@ NS_ASSUME_NONNULL_BEGIN
   }
 }
 
+- (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(nullable NSString *)sourceApplication {
+  return NO;
+}
+
 @end
 
 NS_ASSUME_NONNULL_END
