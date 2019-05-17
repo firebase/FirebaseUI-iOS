@@ -33,7 +33,7 @@
                          bundle:(nullable NSBundle *)nibBundleOrNil
                          authUI:(FUIAuth *)authUI
                           email:(NSString *_Nullable)email {
-  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil authUI:authUI email:email];
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil authUI:authUI email:email requireDisplayName:YES];
 
   if (self) {
     _emailTextField.text = email;

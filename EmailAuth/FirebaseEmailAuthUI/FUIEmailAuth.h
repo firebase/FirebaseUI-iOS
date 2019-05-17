@@ -42,6 +42,13 @@ NS_ASSUME_NONNULL_BEGIN
          allowNewEmailAccounts:(BOOL)allowNewEmailAccounts
              actionCodeSetting:(FIRActionCodeSettings *)actionCodeSettings;
 
+- (instancetype)initAuthAuthUI:(FUIAuth *)authUI
+                  signInMethod:(NSString *)signInMethod
+               forceSameDevice:(BOOL)forceSameDevice
+         allowNewEmailAccounts:(BOOL)allowNewEmailAccounts
+            requireDisplayName:(BOOL)requireDisplayName
+             actionCodeSetting:(FIRActionCodeSettings *)actionCodeSettings;
+
 /** @property signInMethod.
     @brief Defines the sign in method for FIREmailAuthProvider.
            This can be one of the following string constants:
@@ -68,6 +75,11 @@ NS_ASSUME_NONNULL_BEGIN
     @brief Whether to allow new user sign, defaults to YES.
  */
 @property(nonatomic, assign, readonly) BOOL allowNewEmailAccounts;
+
+/** @property requireDisplayName
+    @brief Whether signup requires display name, defaults to YES.
+ */
+@property(nonatomic, assign, readonly) BOOL requireDisplayName;
 
 /** @fn signInWithPresentingViewController:
     @brief Signs in with email auth provider.

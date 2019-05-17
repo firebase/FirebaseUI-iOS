@@ -381,9 +381,15 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                                                signInMethod:FIREmailLinkAuthSignInMethod
                                             forceSameDevice:NO
                                       allowNewEmailAccounts:YES
+                                         requireDisplayName:YES
                                           actionCodeSetting:actionCodeSettings];
           } else {
-            provider = [[FUIEmailAuth alloc] init];
+            provider = [[FUIEmailAuth alloc] initAuthAuthUI:[FUIAuth defaultAuthUI]
+                                               signInMethod:FIREmailPasswordAuthSignInMethod
+                                            forceSameDevice:NO
+                                      allowNewEmailAccounts:YES
+                                         requireDisplayName:NO
+                                          actionCodeSetting:[[FIRActionCodeSettings alloc] init]];
           }
           break;
         case kIDPGoogle:
