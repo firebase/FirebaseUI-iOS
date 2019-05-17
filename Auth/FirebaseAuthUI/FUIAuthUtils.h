@@ -49,9 +49,4 @@ extern NSString *const FUIAuthBundleName;
  */
 + (UIImage *)imageNamed:(NSString *)name fromBundle:(nullable NSBundle *)bundle;
 
-/** @fn isFirebasePerformanceAvailable
- * @brief Used to work around https://github.com/firebase/firebase-ios-sdk/issues/2283
- */
-+ (BOOL)isFirebasePerformanceAvailable;
-
 @end

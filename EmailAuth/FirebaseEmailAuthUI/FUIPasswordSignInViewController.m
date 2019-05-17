@@ -258,9 +258,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
     _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
     _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     if (@available(iOS 11.0, *)) {
-      if (![FUIAuthUtils isFirebasePerformanceAvailable]) {
-        _emailField.textContentType = UITextContentTypeUsername;
-      }
+      _emailField.textContentType = UITextContentTypeUsername;
     }
   } else if (indexPath.row == 1) {
     cell.label.text = FUILocalizedString(kStr_Password);
@@ -270,9 +268,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
     _passwordField.returnKeyType = UIReturnKeyNext;
     _passwordField.keyboardType = UIKeyboardTypeDefault;
     if (@available(iOS 11.0, *)) {
-      if (![FUIAuthUtils isFirebasePerformanceAvailable]) {
-        _passwordField.textContentType = UITextContentTypePassword;
-      }
+      _passwordField.textContentType = UITextContentTypePassword;
     }
   }
   [cell.textField addTarget:self

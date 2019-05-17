@@ -291,9 +291,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   cell.textField.returnKeyType = UIReturnKeyNext;
   cell.textField.keyboardType = UIKeyboardTypeEmailAddress;
   if (@available(iOS 11.0, *)) {
-    if (![FUIAuthUtils isFirebasePerformanceAvailable]) {
-      cell.textField.textContentType = UITextContentTypeUsername;
-    }
+    cell.textField.textContentType = UITextContentTypeUsername; 
   }
   [cell.textField addTarget:self
                      action:@selector(textFieldDidChange)

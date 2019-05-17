@@ -56,8 +56,4 @@ NSString *const FUIAuthBundleName = @"FirebaseAuthUI";
   return [UIImage imageWithContentsOfFile:path];
 }
 
-+ (BOOL)isFirebasePerformanceAvailable {
-  return NSClassFromString(@"FIRPerformance") != nil;
-}
-
 @end
