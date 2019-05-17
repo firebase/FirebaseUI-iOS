@@ -153,9 +153,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
 
   FIRAuthCredential *credential =
       [FIREmailAuthProvider credentialWithEmail:_email password:password];
-  [self.auth signInAndRetrieveDataWithCredential:credential
-                                      completion:^(FIRAuthDataResult *_Nullable authResult,
-                                                   NSError *_Nullable error) {
+  [self.auth signInWithCredential:credential
+                       completion:^(FIRAuthDataResult *_Nullable authResult,
+                                    NSError *_Nullable error) {
     if (error) {
       [self decrementActivity];
 
@@ -163,9 +163,9 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
       return;
     }
 
-    [authResult.user linkAndRetrieveDataWithCredential:self->_newCredential
-                                            completion:^(FIRAuthDataResult *_Nullable authResult,
-                                                         NSError *_Nullable error) {
+    [authResult.user linkWithCredential:self->_newCredential
+                             completion:^(FIRAuthDataResult *_Nullable authResult,
+                                          NSError *_Nullable error) {
       [self decrementActivity];
 
       // Ignore any error (shouldn't happen) and treat the user as successfully signed in.

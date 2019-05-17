@@ -16,6 +16,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /* Name of the FirebaseAuthUI resource bundle. */
 extern NSString *const FUIAuthBundleName;
 
@@ -55,3 +57,5 @@ extern NSString *const FUIAuthBundleName;
 + (BOOL)isFirebasePerformanceAvailable;
 
 @end
+
+NS_ASSUME_NONNULL_END

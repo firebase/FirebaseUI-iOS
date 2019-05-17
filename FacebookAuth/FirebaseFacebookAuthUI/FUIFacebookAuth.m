@@ -136,10 +136,10 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   _pendingSignInCallback = completion;
   _presentingViewController = presentingViewController;
 
-  [_loginManager logInWithReadPermissions:_scopes
-                       fromViewController:presentingViewController
-                                  handler:^(FBSDKLoginManagerLoginResult *result,
-                                            NSError *error) {
+  [_loginManager logInWithPermissions:_scopes
+                   fromViewController:presentingViewController
+                              handler:^(FBSDKLoginManagerLoginResult *result,
+                                        NSError *error) {
     if (error) {
       NSError *newError =
           [FUIAuthErrorUtils providerErrorWithUnderlyingError:error

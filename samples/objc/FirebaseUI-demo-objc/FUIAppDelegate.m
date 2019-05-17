@@ -37,13 +37,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 }
 
 - (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(nullable NSString *)sourceApplication
-         annotation:(id)annotation {
-  return [self handleOpenUrl:url sourceApplication:sourceApplication];
-}
-
-- (BOOL)application:(UIApplication *)application
 continueUserActivity:(nonnull NSUserActivity *)userActivity
  restorationHandler:
 #if defined(__IPHONE_12_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_12_0)

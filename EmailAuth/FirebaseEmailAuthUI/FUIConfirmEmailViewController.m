@@ -183,7 +183,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
             presentingViewController:self];
   };
 
-  [self.auth signInAndRetrieveDataWithCredential:credential completion:completeSignInBlock];
+  [self.auth signInWithCredential:credential completion:completeSignInBlock];
 }
 
 - (void)textFieldDidChange {
@@ -280,7 +280,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
       return;
     }
 
-    [self.auth signInAndRetrieveDataWithCredential:credential
+    [self.auth signInWithCredential:credential
                                         completion:^(FIRAuthDataResult *_Nullable authResult,
                                                      NSError *_Nullable error) {
         [self decrementActivity];

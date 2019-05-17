@@ -19,7 +19,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef UIViewController *(^FIRControllerBlock)();
+typedef UIViewController *(^FIRControllerBlock)(void);
 
 @interface FUISample : NSObject
 
