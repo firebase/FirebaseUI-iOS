@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                           email:(NSString *_Nullable)email
-            requireDisplayName:(BOOL)requireDisplayName;
+             requireDisplayName:(BOOL)requireDisplayName;
 
 /** @fn didChangeEmail:orPassword:orUserName:
     @brief Should be called after any change of email, password or user name value. 
