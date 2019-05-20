@@ -74,6 +74,11 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
    */
   UITextField *_nameField;
 
+  /** @var requireDisplayName
+    @brief Indicate weather display name field is required.
+   */
+  BOOL _requireDisplayName;
+
   /** @var _passwordField
       @brief The @c UITextField that user enters password into.
    */
@@ -86,23 +91,26 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
 }
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
-                         email:(NSString *_Nullable)email {
+                         email:(NSString *_Nullable)email
+            requireDisplayName:(BOOL)requireDisplayName {
   return [self initWithNibName:NSStringFromClass([self class])
                         bundle:[FUIAuthUtils bundleNamed:FUIEmailAuthBundleName]
                         authUI:authUI
-                         email:email];
+                         email:email
+            requireDisplayName:requireDisplayName];
 }
 
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil
                          authUI:(FUIAuth *)authUI
-                          email:(NSString *_Nullable)email {
+                          email:(NSString *_Nullable)email
+             requireDisplayName:(BOOL)requireDisplayName {
   self = [super initWithNibName:nibNameOrNil
                          bundle:nibBundleOrNil
                          authUI:authUI];
   if (self) {
     _email = [email copy];
-
+    _requireDisplayName = requireDisplayName;
     self.title = FUILocalizedString(kStr_SignUpTitle);
   }
   return self;
@@ -233,17 +241,21 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
 - (void)didChangeEmail:(NSString *)email
             orPassword:(NSString *)password
             orUserName:(NSString *)username {
-
-  BOOL enableActionButton = email.length > 0
-                            && password.length > 0
-                            && username.length > 0;
+  BOOL enableActionButton = email.length > 0 && password.length > 0;
+  if (_requireDisplayName) {
+    enableActionButton = enableActionButton && username.length > 0;
+  }
   self.navigationItem.rightBarButtonItem.enabled = enableActionButton;
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return 3;
+  if (_requireDisplayName) {
+    return 3;
+  } else {
+    return 2;
+  }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -294,6 +306,18 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
     _passwordField.keyboardType = UIKeyboardTypeDefault;
     if (@available(iOS 11.0, *)) {
       _passwordField.textContentType = UITextContentTypePassword;
+    }
+  } else if (indexPath.row == 2) {
+    cell.label.text = FUILocalizedString(kStr_Name);
+    cell.accessibilityIdentifier = kNameSignUpCellAccessibilityID;
+    _nameField = cell.textField;
+    _nameField.placeholder = FUILocalizedString(kStr_FirstAndLastName);
+    _nameField.secureTextEntry = NO;
+    _nameField.returnKeyType = UIReturnKeyNext;
+    _nameField.keyboardType = UIKeyboardTypeDefault;
+    _nameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    if (@available(iOS 10.0, *)) {
+      _nameField.textContentType = UITextContentTypeName;
     }
   }
   [cell.textField addTarget:self

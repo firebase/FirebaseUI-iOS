@@ -69,9 +69,10 @@
                                                                      email:(NSString *)email {
   return [[FUICustomPasswordSignUpViewController alloc]
               initWithNibName:@"FUICustomPasswordSignUpViewController"
-                       bundle:[NSBundle mainBundle]
-                       authUI:authUI
-                        email:email];
+              bundle:[NSBundle mainBundle]
+              authUI:authUI
+              email:email
+              requireDisplayName:YES];
 }
 
 - (FUIPasswordRecoveryViewController *)

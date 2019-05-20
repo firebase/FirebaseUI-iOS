@@ -36,10 +36,34 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, strong, readwrite, nullable) NSString *emailLink;
 
+/** @fn initAuthAuthUI:signInMethod:forceSameDevice:allowNewEmailAccounts:actionCodeSetting:
+    @brief Initializer with several configurations.
+    @param authUI The auth UI object that this auth UI provider associate with.
+    @param signInMethod The email sign in method, which can be password or email link.
+    @param forceSameDevice Indicate whether for the email sign in link to be open on the same device.
+    @param allowNewEmailAccounts Indicate whether allow sign up if the user doesn't exist.
+    @param actionCodeSettings The action code settings for email actions.
+ */
 - (instancetype)initAuthAuthUI:(FUIAuth *)authUI
                   signInMethod:(NSString *)signInMethod
                forceSameDevice:(BOOL)forceSameDevice
          allowNewEmailAccounts:(BOOL)allowNewEmailAccounts
+             actionCodeSetting:(FIRActionCodeSettings *)actionCodeSettings;
+
+/** @fn initAuthAuthUI:signInMethod:forceSameDevice:allowNewEmailAccounts:requireDisplayName:actionCodeSetting:
+    @brief Initializer with several configurations.
+    @param authUI The auth UI object that this auth UI provider associate with.
+    @param signInMethod The email sign in method, which can be password or email link.
+    @param forceSameDevice Indicate whether for the email sign in link to be open on the same device.
+    @param allowNewEmailAccounts Indicate whether allow sign up if the user doesn't exist.
+    @param requireDisplayName Indicate whether require display name when sign up.
+    @param actionCodeSettings The action code settings for email actions.
+ */
+- (instancetype)initAuthAuthUI:(FUIAuth *)authUI
+                  signInMethod:(NSString *)signInMethod
+               forceSameDevice:(BOOL)forceSameDevice
+         allowNewEmailAccounts:(BOOL)allowNewEmailAccounts
+            requireDisplayName:(BOOL)requireDisplayName
              actionCodeSetting:(FIRActionCodeSettings *)actionCodeSettings;
 
 /** @property signInMethod.
@@ -68,6 +92,11 @@ NS_ASSUME_NONNULL_BEGIN
     @brief Whether to allow new user sign, defaults to YES.
  */
 @property(nonatomic, assign, readonly) BOOL allowNewEmailAccounts;
+
+/** @property requireDisplayName
+    @brief Whether signup requires display name, defaults to YES.
+ */
+@property(nonatomic, assign, readonly) BOOL requireDisplayName;
 
 /** @fn signInWithPresentingViewController:
     @brief Signs in with email auth provider.

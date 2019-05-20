@@ -50,19 +50,23 @@ NS_ASSUME_NONNULL_BEGIN
     @param nibBundleOrNil The bundle in which to search for the nib file.
     @param authUI The @c FUIAuth instance that manages this view controller.
     @param email The email address of the user.
+    @param requireDisplayName Whether the displayname field is required .
  */
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
                          bundle:(nullable NSBundle *)nibBundleOrNil
                          authUI:(FUIAuth *)authUI
-                          email:(NSString *_Nullable)email NS_DESIGNATED_INITIALIZER;
+                          email:(NSString *_Nullable)email
+             requireDisplayName:(BOOL)requireDisplayName NS_DESIGNATED_INITIALIZER;
 
 /** @fn initWithAuthUI:email:
     @brief Convenience initializer.
     @param authUI The @c FUIAuth instance that manages this view controller.
     @param email The email address of the user.
+    @param requireDisplayName Whether the displayname field is required .
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
-                          email:(NSString *_Nullable)email;
+                          email:(NSString *_Nullable)email
+             requireDisplayName:(BOOL)requireDisplayName;
 
 /** @fn didChangeEmail:orPassword:orUserName:
     @brief Should be called after any change of email, password or user name value. 
