@@ -354,8 +354,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     }
 
     [self.auth signInWithCredential:credential
-                        completion:^(FIRAuthDataResult *_Nullable authResult,
-                                     NSError *_Nullable error) {
+                         completion:^(FIRAuthDataResult *_Nullable authResult,
+                                      NSError *_Nullable error) {
       [self decrementActivity];
       if (result) {
         result(authResult.user, error);

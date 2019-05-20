@@ -20,7 +20,7 @@ NSString *const FUIAuthBundleName = @"FirebaseAuthUI";
 
 @implementation FUIAuthUtils
 
-+ (NSBundle *)bundleNamed:(NSString *)bundleName {
++ (nullable NSBundle *)bundleNamed:(nullable NSString *)bundleName {
   NSBundle *frameworkBundle = nil;
   if (!bundleName) {
     bundleName = FUIAuthBundleName;
@@ -37,7 +37,7 @@ NSString *const FUIAuthBundleName = @"FirebaseAuthUI";
   return frameworkBundle;
 }
 
-+ (UIImage *)imageNamed:(NSString *)name fromBundle:(NSBundle *)bundle {
++ (nullable UIImage *)imageNamed:(NSString *)name fromBundle:(nullable NSBundle *)bundle {
   if (!bundle) {
     bundle = [self bundleNamed:nil];
   }
@@ -48,7 +48,7 @@ NSString *const FUIAuthBundleName = @"FirebaseAuthUI";
   return [UIImage imageWithContentsOfFile:path];
 }
 
-+ (UIImage *)imageNamed:(NSString *)name fromBundleNameOrNil:(nullable NSString *)bundleNameOrNil {
++ (nullable UIImage *)imageNamed:(NSString *)name fromBundleNameOrNil:(nullable NSString *)bundleNameOrNil {
   NSString *path = [[FUIAuthUtils bundleNamed:bundleNameOrNil] pathForResource:name ofType:@"png"];
   if (!path) {
     NSLog(@"Warning: Unable to find asset %@ in bundle named %@.", name, bundleNameOrNil);

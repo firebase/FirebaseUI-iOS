@@ -111,6 +111,7 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
   [self unregisterFromNotifications];
 }
 
