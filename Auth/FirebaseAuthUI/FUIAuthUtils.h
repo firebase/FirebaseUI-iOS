@@ -16,6 +16,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /* Name of the FirebaseAuthUI resource bundle. */
 extern NSString *const FUIAuthBundleName;
 
@@ -31,7 +33,7 @@ extern NSString *const FUIAuthBundleName;
     @param bundleName Name of the bundle to retreive. If nil, this returns the default bundle for
         FirebaseUI.
  */
-+ (NSBundle *)bundleNamed:(nullable NSString *)bundleName;
++ (nullable NSBundle *)bundleNamed:(nullable NSString *)bundleName;
 
 /** @fn imageNamed:fromBundle:
     @brief Gets a UIImage with the given name, assuming it's a png.
@@ -39,7 +41,7 @@ extern NSString *const FUIAuthBundleName;
     @param bundleNameOrNil Name of the bundle to retreive. If nil, this method will look into the
         default FirebaseUI framework bundle.
  */
-+ (UIImage *)imageNamed:(NSString *)name fromBundleNameOrNil:(nullable NSString *)bundleNameOrNil;
++ (nullable UIImage *)imageNamed:(NSString *)name fromBundleNameOrNil:(nullable NSString *)bundleNameOrNil;
 
 /** @fn imageNamed:fromBundle:
  @brief Gets a UIImage with the given name, assuming it's a png.
@@ -47,6 +49,8 @@ extern NSString *const FUIAuthBundleName;
  @param bundle The bundle to retrieve the image from. If nil, this method will look into the
      default FirebaseUI framework bundle.
  */
-+ (UIImage *)imageNamed:(NSString *)name fromBundle:(nullable NSBundle *)bundle;
++ (nullable UIImage *)imageNamed:(NSString *)name fromBundle:(nullable NSBundle *)bundle;
 
 @end
+
+NS_ASSUME_NONNULL_END

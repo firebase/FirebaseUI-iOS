@@ -330,14 +330,15 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
                            presentingViewController:nil];
     };
 
-    [self.authUI.auth signInAndRetrieveDataWithCredential:emailLinkCredential
-                                               completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
+    [self.authUI.auth signInWithCredential:emailLinkCredential
+                                completion:^(FIRAuthDataResult * _Nullable authResult,
+                                             NSError * _Nullable error) {
       if (error) {
         [FUIAuthBaseViewController showAlertWithMessage:error.description];
         return;
       }
 
-      [authResult.user linkAndRetrieveDataWithCredential:unverifiedProviderCredential completion:completeSignInBlock];
+      [authResult.user linkWithCredential:unverifiedProviderCredential completion:completeSignInBlock];
     }];
   }
 }
@@ -373,9 +374,9 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
     };
 
     [self.authUI.auth.currentUser
-     linkAndRetrieveDataWithCredential:credential
-     completion:^(FIRAuthDataResult *_Nullable authResult,
-                  NSError *_Nullable error) {
+        linkWithCredential:credential
+                completion:^(FIRAuthDataResult *_Nullable authResult,
+                            NSError *_Nullable error) {
        if (error) {
          if (error.code == FIRAuthErrorCodeEmailAlreadyInUse) {
            NSDictionary *userInfo = @{ FUIAuthCredentialKey : credential };
@@ -434,7 +435,7 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
                          presentingViewController:nil];
   };
 
-  [self.authUI.auth signInAndRetrieveDataWithCredential:credential completion:completeSignInBlock];
+  [self.authUI.auth signInWithCredential:credential completion:completeSignInBlock];
 }
 
 - (void)handleDifferentDevice {
@@ -571,9 +572,9 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
               return;
             }
 
-            [tempAuth signInAndRetrieveDataWithCredential:credential
-                                               completion:^(FIRAuthDataResult *_Nullable authResult,
-                                                            NSError *_Nullable error) {
+            [tempAuth signInWithCredential:credential
+                                completion:^(FIRAuthDataResult *_Nullable authResult,
+                                             NSError *_Nullable error) {
               if (error) {
                 if (completion) {
                   completion(nil, error, nil);
@@ -759,9 +760,9 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
           return;
         }
 
-        [self.authUI.auth signInAndRetrieveDataWithCredential:credential
-                                            completion:^(FIRAuthDataResult*_Nullable authResult,
-                                                         NSError *_Nullable error) {
+        [self.authUI.auth signInWithCredential:credential
+                                    completion:^(FIRAuthDataResult*_Nullable authResult,
+                                                 NSError *_Nullable error) {
           if (error) {
             [self.authUI invokeResultCallbackWithAuthDataResult:nil URL:nil error:error];
             if (result) {
@@ -771,9 +772,9 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
           }
 
           FIRUser *user = authResult.user;
-          [user linkAndRetrieveDataWithCredential:newCredential
-                                       completion:^(FIRAuthDataResult *_Nullable authResult,
-                                                    NSError *_Nullable error) {
+          [user linkWithCredential:newCredential
+                        completion:^(FIRAuthDataResult *_Nullable authResult,
+                                     NSError *_Nullable error) {
             if (result) {
               result(authResult.user, error);
             }

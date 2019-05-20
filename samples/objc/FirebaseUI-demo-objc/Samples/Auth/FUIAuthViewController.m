@@ -286,9 +286,9 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
     if (error.code == FUIAuthErrorCodeMergeConflict) {
       FIRAuthCredential *credential = error.userInfo[FUIAuthCredentialKey];
       [[FUIAuth defaultAuthUI].auth
-          signInAndRetrieveDataWithCredential:credential
-                                   completion:^(FIRAuthDataResult *_Nullable authResult,
-                                                NSError *_Nullable error) {
+          signInWithCredential:credential
+                    completion:^(FIRAuthDataResult *_Nullable authResult,
+                                 NSError *_Nullable error) {
         if (error) {
           [self showAlertWithTitlte:@"Sign-In error" message:error.description];
           NSLog(@"%@",error.description);

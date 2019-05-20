@@ -19,6 +19,8 @@
 @class FUICountryCodeInfo;
 @class FUICountryCodes;
 
+NS_ASSUME_NONNULL_BEGIN
+
 FOUNDATION_EXPORT NSString * const FUIPhoneNumberValidationErrorDomain;
 
 typedef NS_ENUM(NSInteger, FUIPhoneNumberValidationError) {
@@ -26,8 +28,6 @@ typedef NS_ENUM(NSInteger, FUIPhoneNumberValidationError) {
     FUIPhoneNumberValidationErrorMissingDialCode = 1,
     FUIPhoneNumberValidationErrorMissingNumber = 2,
 };
-
-NS_ASSUME_NONNULL_BEGIN
 
 /** Encapsulates a phone number with the raw and the normalized representations */
 @interface FUIPhoneNumber : NSObject
