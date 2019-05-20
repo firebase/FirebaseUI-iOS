@@ -280,11 +280,21 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
     _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
     _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     if (@available(iOS 11.0, *)) {
-      if (![FUIAuthUtils isFirebasePerformanceAvailable]) {
-        _emailField.textContentType = UITextContentTypeUsername;
-      }
+      _emailField.textContentType = UITextContentTypeUsername;
     }
   } else if (indexPath.row == 1) {
+    cell.label.text = FUILocalizedString(kStr_Name);
+    cell.accessibilityIdentifier = kNameSignUpCellAccessibilityID;
+    _nameField = cell.textField;
+    _nameField.placeholder = FUILocalizedString(kStr_FirstAndLastName);
+    _nameField.secureTextEntry = NO;
+    _nameField.returnKeyType = UIReturnKeyNext;
+    _nameField.keyboardType = UIKeyboardTypeDefault;
+    _nameField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    if (@available(iOS 10.0, *)) {
+      _nameField.textContentType = UITextContentTypeName;
+    }
+  } else if (indexPath.row == 2) {
     cell.label.text = FUILocalizedString(kStr_Password);
     cell.accessibilityIdentifier = kPasswordSignUpCellAccessibilityID;
     _passwordField = cell.textField;
@@ -295,9 +305,7 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
     _passwordField.returnKeyType = UIReturnKeyNext;
     _passwordField.keyboardType = UIKeyboardTypeDefault;
     if (@available(iOS 11.0, *)) {
-      if (![FUIAuthUtils isFirebasePerformanceAvailable]) {
-        _passwordField.textContentType = UITextContentTypePassword;
-      }
+      _passwordField.textContentType = UITextContentTypePassword;
     }
   } else if (indexPath.row == 2) {
     cell.label.text = FUILocalizedString(kStr_Name);
