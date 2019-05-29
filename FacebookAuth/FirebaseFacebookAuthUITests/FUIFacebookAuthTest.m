@@ -23,9 +23,9 @@
 
 @implementation FBSDKLoginManagerTest
 
-- (void)logInWithReadPermissions:(NSArray *)permissions
-              fromViewController:(UIViewController *)fromViewController
-                         handler:(FBSDKLoginManagerLoginResultBlock)handler {
+- (void)logInWithPermissions:(NSArray *)permissions
+          fromViewController:(UIViewController *)fromViewController
+                     handler:(FBSDKLoginManagerLoginResultBlock)handler {
   handler(self.result, self.error);
 }
 @end

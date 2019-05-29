@@ -141,6 +141,12 @@
   }
 }
 
+- (void)batchedArray:(nonnull FUIBatchedArray *)array
+  willUpdateWithDiff:(nonnull FUISnapshotArrayDiff<FIRDocumentSnapshot *> *)diff {
+  // do nothing
+}
+
+
 #pragma mark - UITableViewDataSource methods
 
 - (id)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
