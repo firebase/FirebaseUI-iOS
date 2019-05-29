@@ -29,6 +29,11 @@
 @property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *snapshots;
 
 /**
+ * The backing collection that holds all of the array's keys.
+ */
+@property (strong, nonatomic) NSMutableArray<NSString *> *keys;
+
+/**
  * A set containing the query observer handles that should be released when
  * this array is freed.
  */
@@ -64,6 +69,7 @@
   if (index == NSNotFound) { /* error */ return; }
 
   [self.snapshots removeObjectAtIndex:index];
+  [self.keys removeObjectAtIndex:index];
   if ([self.delegate respondsToSelector:@selector(array:didRemoveObject:atIndex:)]) {
     [self.delegate array:self didRemoveObject:snap atIndex:index];
   }
@@ -78,6 +84,7 @@
   // Since changes can change ordering, model changes as a deletion and an insertion.
   FIRDataSnapshot *removed = [self snapshotAtIndex:index];
   [self.snapshots removeObjectAtIndex:index];
+  [self.keys removeObjectAtIndex:index];
   if ([self.delegate respondsToSelector:@selector(array:didRemoveObject:atIndex:)]) {
     [self.delegate array:self didRemoveObject:removed atIndex:index];
   }
@@ -99,6 +106,7 @@
 - (NSInteger)insertSnapshot:(FIRDataSnapshot *)snapshot {
   if (self.count == 0) {
     [self.snapshots addObject:snapshot];
+    [self.keys addObject:snapshot.key];
     return 0;
   }
   if (self.count == 1) {
@@ -106,9 +114,11 @@
     switch (result) {
       case NSOrderedDescending:
         [self.snapshots addObject:snapshot];
+        [self.keys addObject:snapshot.key];
         return 1;
       default:
         [self.snapshots insertObject:snapshot atIndex:0];
+        [self.keys insertObject:snapshot.key atIndex:0];
         return 0;
     }
   }
@@ -120,10 +130,12 @@
 
     if (index == 0) {
       [self.snapshots insertObject:snapshot atIndex:0];
+      [self.keys insertObject:snapshot.key atIndex:0];
       return 0;
     }
     if (index == self.snapshots.count) {
       [self.snapshots addObject:snapshot];
+      [self.keys addObject:snapshot.key];
       return index;
     }
 
@@ -148,6 +160,7 @@
     } else {
       // good
       [self.snapshots insertObject:snapshot atIndex:index];
+      [self.keys insertObject:snapshot.key atIndex:index];
       return index;
     }
   }

@@ -504,9 +504,9 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
   // currently signed in user on the default auth instance.
   FIRAuth *tempAuth = [FIRAuth authWithApp:tempApp];
 
-  [self.authUI.auth fetchProvidersForEmail:emailHint
-                                completion:^(NSArray<NSString *> *_Nullable providers,
-                                             NSError *_Nullable error) {
+  [self.authUI.auth fetchSignInMethodsForEmail:emailHint
+                                    completion:^(NSArray<NSString *> *_Nullable providers,
+                                                 NSError *_Nullable error) {
     if (error) {
       if (completion) {
         completion(nil, error, nil);
