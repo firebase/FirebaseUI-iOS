@@ -21,7 +21,7 @@ class SampleCell: UITableViewCell {
   @IBOutlet fileprivate var titleLabel: UILabel!
   @IBOutlet fileprivate var subtitleLabel: UILabel!
   
-  override convenience init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+  override convenience init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     self.init(reuseIdentifier: reuseIdentifier!)
   }
   

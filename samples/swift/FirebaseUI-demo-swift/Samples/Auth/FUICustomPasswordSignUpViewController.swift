@@ -17,17 +17,19 @@
 import UIKit
 import FirebaseUI
 
-@objc(FUICustomPasswordSignUpViewController)
-
 class FUICustomPasswordSignUpViewController: FUIPasswordSignUpViewController, UITextFieldDelegate {
 
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var usernameTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var nextButton: UIBarButtonItem!
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, authUI: FUIAuth, email: String?) {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil, authUI: authUI, email: email)
+
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, authUI: FUIAuth, email: String?, requireDisplayName: Bool) {
+    super.init(nibName: nibNameOrNil,
+               bundle: nibBundleOrNil,
+               authUI: authUI,
+               email: email,
+               requireDisplayName: requireDisplayName)
 
     emailTextField.text = email
   }

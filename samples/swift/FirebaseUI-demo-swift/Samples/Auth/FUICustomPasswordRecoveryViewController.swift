@@ -17,8 +17,6 @@
 import UIKit
 import FirebaseUI
 
-@objc(FUICustomPasswordRecoveryViewController)
-
 class FUICustomPasswordRecoveryViewController: FUIPasswordRecoveryViewController, UITextFieldDelegate {
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var recoverButton: UIBarButtonItem!

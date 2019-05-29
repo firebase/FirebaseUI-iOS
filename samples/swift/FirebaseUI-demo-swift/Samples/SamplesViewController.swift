@@ -32,7 +32,7 @@ class SamplesViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // self-sizing cells
     self.tableView.estimatedRowHeight = 85
-    self.tableView.rowHeight = UITableViewAutomaticDimension
+    self.tableView.rowHeight = UITableView.automaticDimension
   }
   
   // MARK: - UITableView Delegate

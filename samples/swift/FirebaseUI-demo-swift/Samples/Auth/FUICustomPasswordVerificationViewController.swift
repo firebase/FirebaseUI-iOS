@@ -18,8 +18,6 @@ import UIKit
 import FirebaseUI
 import FirebaseAuth
 
-@objc(FUICustomPasswordVerificationViewController)
-
 class FUICustomPasswordVerificationViewController: FUIPasswordVerificationViewController, UITextFieldDelegate {
   fileprivate(set) var userEmail: String
 

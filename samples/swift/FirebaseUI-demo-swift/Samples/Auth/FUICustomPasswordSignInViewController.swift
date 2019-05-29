@@ -17,8 +17,6 @@
 import UIKit
 import FirebaseUI
 
-@objc(FUICustomPasswordSignInViewController)
-
 class FUICustomPasswordSignInViewController: FUIPasswordSignInViewController {
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!

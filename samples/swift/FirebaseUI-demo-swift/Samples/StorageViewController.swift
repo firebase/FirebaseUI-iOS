@@ -34,11 +34,11 @@ class StorageViewController: UIViewController {
     // Notification boilerplate to handle keyboard appearance/disappearance
     NotificationCenter.default.addObserver(self,
                                                      selector: #selector(keyboardWillShow),
-                                                     name: NSNotification.Name.UIKeyboardWillShow,
+                                                     name: UIResponder.keyboardWillShowNotification,
                                                      object: nil)
     NotificationCenter.default.addObserver(self,
                                                      selector: #selector(keyboardWillHide),
-                                                     name: NSNotification.Name.UIKeyboardWillHide,
+                                                     name: UIResponder.keyboardWillHideNotification,
                                                      object: nil)
   }
 
@@ -64,13 +64,13 @@ class StorageViewController: UIViewController {
 
   @objc fileprivate func keyboardWillShow(_ notification: Notification) {
     let userInfo = (notification as NSNotification).userInfo!
-    let endFrameValue = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
+    let endFrameValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
     let endHeight = endFrameValue.cgRectValue.size.height
 
     self.bottomConstraint.constant = endHeight
 
-    let curve = UIViewAnimationCurve(rawValue: userInfo[UIKeyboardAnimationCurveUserInfoKey] as! Int)!
-    let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
+    let curve = UIView.AnimationCurve(rawValue: userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! Int)!
+    let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
 
     UIView.setAnimationCurve(curve)
     UIView.animate(withDuration: duration, animations: {
@@ -82,8 +82,8 @@ class StorageViewController: UIViewController {
     self.bottomConstraint.constant = 0
 
     let userInfo = (notification as NSNotification).userInfo!
-    let curve = UIViewAnimationCurve(rawValue: userInfo[UIKeyboardAnimationCurveUserInfoKey] as! Int)!
-    let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
+    let curve = UIView.AnimationCurve(rawValue: userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! Int)!
+    let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
 
     UIView.setAnimationCurve(curve)
     UIView.animate(withDuration: duration, animations: {

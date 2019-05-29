@@ -26,7 +26,7 @@ class ChatCollectionViewCell: UICollectionViewCell {
   }
   
   static func boundingRectForText(_ text: String, maxWidth: CGFloat) -> CGRect {
-    let attributes = [NSFontAttributeName: ChatCollectionViewCell.messageFont]
+    let attributes = [NSAttributedString.Key.font: ChatCollectionViewCell.messageFont]
     let rect = text.boundingRect(with: CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude),
                                          options: [.usesLineFragmentOrigin],
                                          attributes: attributes,
