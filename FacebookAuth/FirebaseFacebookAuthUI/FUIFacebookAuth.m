@@ -222,7 +222,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
     @brief Validates that Facebook SDK data was filled in Info.plist and creates Facebook login manager 
  */
 - (void)configureProvider {
-  NSBundle *bundle = [NSBundle mainBundle];
+  NSBundle *bundle = [FUIAuthUtils bundleNamed:nil];
   NSString *facebookAppId = [bundle objectForInfoDictionaryKey:kFacebookAppId];
   NSString *facebookDisplayName = [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
 
