@@ -130,6 +130,16 @@
                         withRowAnimation:self.animation];
 
   [self.tableView endUpdates];
+
+  // Reload paths that have been moved.
+  NSMutableArray *movedIndexPaths =
+  [NSMutableArray arrayWithCapacity:diff.movedResultIndexes.count];
+  for (NSNumber *movedResultIndex in diff.movedResultIndexes) {
+    NSIndexPath *moved = [NSIndexPath indexPathForItem:movedResultIndex.integerValue inSection:0];
+    [movedIndexPaths addObject:moved];
+  }
+  [self.tableView reloadRowsAtIndexPaths:movedIndexPaths
+                        withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)batchedArray:(FUIBatchedArray *)array queryDidFailWithError:(NSError *)error {
