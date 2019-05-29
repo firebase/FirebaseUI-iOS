@@ -83,20 +83,21 @@
                                                  dataAccessExpirationDate:nil];
   id mockToken = OCMPartialMock(token);
 
+  NSSet *emptySet = [NSSet set];
   FBSDKLoginManagerLoginResult *result = [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
                                                                                  isCancelled:NO
-                                                                          grantedPermissions:nil
-                                                                         declinedPermissions:nil];
+                                                                          grantedPermissions:emptySet
+                                                                         declinedPermissions:emptySet];
   XCTAssertNil(_provider.accessToken);
   [self.provider configureLoginManager:result withError:nil];
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
-  [self.provider signInWithEmail:nil
-        presentingViewController:nil
-                      completion:^(FIRAuthCredential *_Nullable credential,
-                                   NSError *_Nullable error,
-                                   FIRAuthResultCallback _Nullable result,
-                                   NSDictionary *_Nullable userInfo) {
+  [self.provider signInWithDefaultValue:nil
+               presentingViewController:nil
+                             completion:^(FIRAuthCredential *_Nullable credential,
+                                          NSError *_Nullable error,
+                                          FIRAuthResultCallback _Nullable result,
+                                          NSDictionary *_Nullable userInfo) {
     XCTAssertNil(error);
     XCTAssertNotNil(credential);
     XCTAssertNotNil(result);
@@ -128,17 +129,17 @@
   id mockToken = OCMPartialMock(token);
   FBSDKLoginManagerLoginResult *result = [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
                                                                                  isCancelled:YES
-                                                                          grantedPermissions:nil
-                                                                         declinedPermissions:nil];
+                                                                          grantedPermissions:[NSSet set]
+                                                                         declinedPermissions:[NSSet set]];
   [self.provider configureLoginManager:result withError:nil];
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
-  [self.provider signInWithEmail:nil
-        presentingViewController:nil
-                      completion:^(FIRAuthCredential *_Nullable credential,
-                                   NSError *_Nullable error,
-                                   FIRAuthResultCallback _Nullable result,
-                                   NSDictionary *_Nullable userInfo) {
+  [self.provider signInWithDefaultValue:nil
+               presentingViewController:nil
+                             completion:^(FIRAuthCredential *_Nullable credential,
+                                          NSError *_Nullable error,
+                                          FIRAuthResultCallback _Nullable result,
+                                          NSDictionary *_Nullable userInfo) {
     XCTAssertNotNil(error);
     XCTAssertEqual(error.code, FUIAuthErrorCodeUserCancelledSignIn);
     XCTAssertNil(credential);
@@ -161,12 +162,12 @@
   [self.provider configureLoginManager:nil withError:testError];
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
-  [self.provider signInWithEmail:nil
-        presentingViewController:nil
-                      completion:^(FIRAuthCredential *_Nullable credential,
-                                   NSError *_Nullable error,
-                                   FIRAuthResultCallback _Nullable result,
-                                   NSDictionary *_Nullable userInfo) {
+  [self.provider signInWithDefaultValue:nil
+               presentingViewController:nil
+                             completion:^(FIRAuthCredential *_Nullable credential,
+                                          NSError *_Nullable error,
+                                          FIRAuthResultCallback _Nullable result,
+                                          NSDictionary *_Nullable userInfo) {
     XCTAssertNotNil(error);
     XCTAssertEqual(error.userInfo[NSUnderlyingErrorKey], testError);
     XCTAssertNil(credential);
