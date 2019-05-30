@@ -40,7 +40,7 @@
 #pragma mark - SDImageLoader Protocol
 
 - (BOOL)canRequestImageForURL:(NSURL *)url {
-  return url.sd_storageReference;
+  return url.sd_storageReference != nil;
 }
 
 - (id<SDWebImageOperation>)requestImageWithURL:(NSURL *)url options:(SDWebImageOptions)options context:(SDWebImageContext *)context progress:(SDImageLoaderProgressBlock)progressBlock completed:(SDImageLoaderCompletedBlock)completedBlock {
@@ -85,7 +85,9 @@
   [download observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
     NSProgress *progress = snapshot.progress;
     if (progressBlock) {
-      progressBlock(progress.completedUnitCount, progress.totalUnitCount, url);
+      progressBlock((NSInteger)progress.completedUnitCount,
+                    (NSInteger)progress.totalUnitCount,
+                    url);
     }
   }];
   

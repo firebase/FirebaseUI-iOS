@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary      = 'UI binding libraries for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'LICENSE' }
-  s.source       = { :git => 'https://github.com/firebase/FirebaseUI-iOS.git', :tag => 'v'}
+  s.source       = { :git => 'https://github.com/firebase/FirebaseUI-iOS.git', :tag => 'v' + s.version.to_s}
   s.author       = 'Firebase'
   s.platform = :ios
   s.ios.deployment_target = '9.0'
@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Storage' do |storage|
     storage.ios.deployment_target = '8.0'
-    storage.tvos.deployment_target = '11.0'
+    # storage.tvos.deployment_target = '11.0' Disabled; one of the dependencies doesn't support tvOS.
     storage.public_header_files = 'Storage/FirebaseStorageUI/*.h'
     storage.source_files = 'Storage/FirebaseStorageUI/*.{h,m}'
     storage.dependency 'FirebaseStorage', '~> 3.2.0'
