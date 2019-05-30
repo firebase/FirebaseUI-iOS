@@ -57,39 +57,39 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseUI (8.0.0):
-    - FirebaseUI/Anonymous (= 8.0.0)
-    - FirebaseUI/Auth (= 8.0.0)
-    - FirebaseUI/Database (= 8.0.0)
-    - FirebaseUI/Email (= 8.0.0)
-    - FirebaseUI/Facebook (= 8.0.0)
-    - FirebaseUI/Firestore (= 8.0.0)
-    - FirebaseUI/Google (= 8.0.0)
-    - FirebaseUI/OAuth (= 8.0.0)
-    - FirebaseUI/Phone (= 8.0.0)
-    - FirebaseUI/Storage (= 8.0.0)
-  - FirebaseUI/Anonymous (8.0.0):
+  - FirebaseUI (8.0.1):
+    - FirebaseUI/Anonymous (= 8.0.1)
+    - FirebaseUI/Auth (= 8.0.1)
+    - FirebaseUI/Database (= 8.0.1)
+    - FirebaseUI/Email (= 8.0.1)
+    - FirebaseUI/Facebook (= 8.0.1)
+    - FirebaseUI/Firestore (= 8.0.1)
+    - FirebaseUI/Google (= 8.0.1)
+    - FirebaseUI/OAuth (= 8.0.1)
+    - FirebaseUI/Phone (= 8.0.1)
+    - FirebaseUI/Storage (= 8.0.1)
+  - FirebaseUI/Anonymous (8.0.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Auth (8.0.0):
+  - FirebaseUI/Auth (8.0.1):
     - Firebase/Auth (~> 6.0)
     - GoogleUtilities/UserDefaults
-  - FirebaseUI/Database (8.0.0):
+  - FirebaseUI/Database (8.0.1):
     - Firebase/Database (~> 6.0)
-  - FirebaseUI/Email (8.0.0):
+  - FirebaseUI/Email (8.0.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Facebook (8.0.0):
+  - FirebaseUI/Facebook (8.0.1):
     - FBSDKLoginKit (~> 5.0)
     - FirebaseUI/Auth
-  - FirebaseUI/Firestore (8.0.0):
+  - FirebaseUI/Firestore (8.0.1):
     - Firebase/Firestore
-  - FirebaseUI/Google (8.0.0):
+  - FirebaseUI/Google (8.0.1):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 4.0)
-  - FirebaseUI/OAuth (8.0.0):
+  - FirebaseUI/OAuth (8.0.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Phone (8.0.0):
+  - FirebaseUI/Phone (8.0.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Storage (8.0.0):
+  - FirebaseUI/Storage (8.0.1):
     - FirebaseStorage (~> 3.2.0)
     - SDWebImage (~> 5.0)
   - GoogleSignIn (4.4.0):
@@ -189,7 +189,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: f48e067716864be2b855cf716b927ef375d6cfa0
   FirebaseFirestore: 8feac73d330bf7ed6945518e5ffc0aeb164a07f6
   FirebaseStorage: 926d41552072b9fee67aa645760f05f87b7ce604
-  FirebaseUI: 8dde62764a4af4167af5d57fff3d602548090a7b
+  FirebaseUI: b3d9103f3c0048070c31096ed8b802e53b619672
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
   GoogleUtilities: 996e0db07153674fd1b54b220fda3a3dc3547cba
