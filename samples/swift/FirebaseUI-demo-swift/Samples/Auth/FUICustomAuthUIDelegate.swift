@@ -63,7 +63,8 @@ class FUICustomAuthDelegate: NSObject, FUIAuthDelegate {
     return FUICustomPasswordSignUpViewController(nibName: "FUICustomPasswordSignUpViewController",
                                                  bundle: Bundle.main,
                                                  authUI: authUI,
-                                                 email: email)
+                                                 email: email,
+                                                 requireDisplayName: true)
   }
 
   func passwordVerificationViewController(forAuthUI authUI: FUIAuth, email: String, newCredential: AuthCredential) -> FUIPasswordVerificationViewController {

@@ -17,8 +17,6 @@
 import UIKit
 import FirebaseUI
 
-@objc(FUICustomAuthPickerViewController)
-
 class FUICustomAuthPickerViewController: FUIAuthPickerViewController {
 
   @IBAction func onClose(_ sender: AnyObject) {
