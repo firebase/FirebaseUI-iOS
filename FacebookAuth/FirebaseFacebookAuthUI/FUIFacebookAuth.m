@@ -226,6 +226,12 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   NSString *facebookAppId = [bundle objectForInfoDictionaryKey:kFacebookAppId];
   NSString *facebookDisplayName = [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
 
+  if (facebookAppId == nil || facebookDisplayName == nil) {
+    bundle = [FUIAuthUtils bundleNamed:nil];
+    facebookAppId = [bundle objectForInfoDictionaryKey:kFacebookAppId];
+    facebookDisplayName = [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
+  }
+
   if (!(facebookAppId && facebookDisplayName)) {
     [NSException raise:NSInternalInconsistencyException
                 format:@"Please set FacebookAppID, FacebookDisplayName, and\nURL types > Url "
