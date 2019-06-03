@@ -1,25 +1,25 @@
 PODS:
-  - Firebase/CoreOnly (5.20.2):
-    - FirebaseCore (= 5.4.1)
-  - Firebase/Storage (5.20.2):
+  - Firebase/CoreOnly (6.1.0):
+    - FirebaseCore (= 6.0.1)
+  - Firebase/Storage (6.1.0):
     - Firebase/CoreOnly
-    - FirebaseStorage (= 3.1.1)
+    - FirebaseStorage (~> 3.2.1)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (5.4.1):
-    - GoogleUtilities/Environment (~> 5.2)
-    - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseStorage (3.1.1):
+  - FirebaseCore (6.0.1):
+    - GoogleUtilities/Environment (~> 6.0)
+    - GoogleUtilities/Logger (~> 6.0)
+  - FirebaseStorage (3.2.1):
     - FirebaseAuthInterop (~> 1.0)
-    - FirebaseCore (~> 5.2)
+    - FirebaseCore (~> 6.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleUtilities/Environment (5.8.0)
-  - GoogleUtilities/Logger (5.8.0):
+  - GoogleUtilities/Environment (6.2.0)
+  - GoogleUtilities/Logger (6.2.0):
     - GoogleUtilities/Environment
-  - GTMSessionFetcher/Core (1.2.1)
+  - GTMSessionFetcher/Core (1.2.2)
   - OCMock (3.4.3)
-  - SDWebImage (5.0.2):
-    - SDWebImage/Core (= 5.0.2)
-  - SDWebImage/Core (5.0.2)
+  - SDWebImage (5.0.4):
+    - SDWebImage/Core (= 5.0.4)
+  - SDWebImage/Core (5.0.4)
 
 DEPENDENCIES:
   - Firebase/Storage
@@ -38,15 +38,15 @@ SPEC REPOS:
     - SDWebImage
 
 SPEC CHECKSUMS:
-  Firebase: 0c8cf33f266410c61ab3e2265cfa412200351d9c
+  Firebase: 8d77bb33624ae9b62d745d82ec023de5f70f7e4f
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: f1a9a8be1aee4bf71a2fc0f4096df6788bdfda61
-  FirebaseStorage: 6162ef4322502b818d9de0ec552f5226d283de43
-  GoogleUtilities: 04fce34bcd5620c1ee76fb79172105c74a4df335
-  GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+  FirebaseCore: 66bdef3b310a026880e2a5bc8aa586ab62ce4543
+  FirebaseStorage: 926d41552072b9fee67aa645760f05f87b7ce604
+  GoogleUtilities: 996e0db07153674fd1b54b220fda3a3dc3547cba
+  GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
-  SDWebImage: 6764b5fa0f73c203728052955dbefa2bf1f33282
+  SDWebImage: c739016e4bdf0a4a1f9a04b5e0385395ad63a282
 
 PODFILE CHECKSUM: 4ee09a538f9ded78a1ee0184c63b1157301e92e4
 
-COCOAPODS: 1.7.0
+COCOAPODS: 1.7.1
