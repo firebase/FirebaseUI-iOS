@@ -57,39 +57,39 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseUI (8.0.1):
-    - FirebaseUI/Anonymous (= 8.0.1)
-    - FirebaseUI/Auth (= 8.0.1)
-    - FirebaseUI/Database (= 8.0.1)
-    - FirebaseUI/Email (= 8.0.1)
-    - FirebaseUI/Facebook (= 8.0.1)
-    - FirebaseUI/Firestore (= 8.0.1)
-    - FirebaseUI/Google (= 8.0.1)
-    - FirebaseUI/OAuth (= 8.0.1)
-    - FirebaseUI/Phone (= 8.0.1)
-    - FirebaseUI/Storage (= 8.0.1)
-  - FirebaseUI/Anonymous (8.0.1):
+  - FirebaseUI (8.0.2):
+    - FirebaseUI/Anonymous (= 8.0.2)
+    - FirebaseUI/Auth (= 8.0.2)
+    - FirebaseUI/Database (= 8.0.2)
+    - FirebaseUI/Email (= 8.0.2)
+    - FirebaseUI/Facebook (= 8.0.2)
+    - FirebaseUI/Firestore (= 8.0.2)
+    - FirebaseUI/Google (= 8.0.2)
+    - FirebaseUI/OAuth (= 8.0.2)
+    - FirebaseUI/Phone (= 8.0.2)
+    - FirebaseUI/Storage (= 8.0.2)
+  - FirebaseUI/Anonymous (8.0.2):
     - FirebaseUI/Auth
-  - FirebaseUI/Auth (8.0.1):
+  - FirebaseUI/Auth (8.0.2):
     - Firebase/Auth (~> 6.0)
     - GoogleUtilities/UserDefaults
-  - FirebaseUI/Database (8.0.1):
+  - FirebaseUI/Database (8.0.2):
     - Firebase/Database (~> 6.0)
-  - FirebaseUI/Email (8.0.1):
+  - FirebaseUI/Email (8.0.2):
     - FirebaseUI/Auth
-  - FirebaseUI/Facebook (8.0.1):
+  - FirebaseUI/Facebook (8.0.2):
     - FBSDKLoginKit (~> 5.0)
     - FirebaseUI/Auth
-  - FirebaseUI/Firestore (8.0.1):
+  - FirebaseUI/Firestore (8.0.2):
     - Firebase/Firestore
-  - FirebaseUI/Google (8.0.1):
+  - FirebaseUI/Google (8.0.2):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 4.0)
-  - FirebaseUI/OAuth (8.0.1):
+  - FirebaseUI/OAuth (8.0.2):
     - FirebaseUI/Auth
-  - FirebaseUI/Phone (8.0.1):
+  - FirebaseUI/Phone (8.0.2):
     - FirebaseUI/Auth
-  - FirebaseUI/Storage (8.0.1):
+  - FirebaseUI/Storage (8.0.2):
     - FirebaseStorage (~> 3.2.0)
     - SDWebImage (~> 5.0)
   - GoogleSignIn (4.4.0):
@@ -144,9 +144,9 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.8.0)
-  - SDWebImage (5.0.4):
-    - SDWebImage/Core (= 5.0.4)
-  - SDWebImage/Core (5.0.4)
+  - SDWebImage (5.0.5):
+    - SDWebImage/Core (= 5.0.5)
+  - SDWebImage/Core (5.0.5)
 
 DEPENDENCIES:
   - FirebaseUI (from `../../`)
@@ -189,7 +189,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: f48e067716864be2b855cf716b927ef375d6cfa0
   FirebaseFirestore: 8feac73d330bf7ed6945518e5ffc0aeb164a07f6
   FirebaseStorage: 926d41552072b9fee67aa645760f05f87b7ce604
-  FirebaseUI: b3d9103f3c0048070c31096ed8b802e53b619672
+  FirebaseUI: 8734527e38959ba31b433b8115c21941d1b67ec8
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
   GoogleUtilities: 996e0db07153674fd1b54b220fda3a3dc3547cba
@@ -199,7 +199,7 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 3f617b9a6e73605565086864c9bc26b2bf2dd5a3
-  SDWebImage: c739016e4bdf0a4a1f9a04b5e0385395ad63a282
+  SDWebImage: f86b0a0713195d1c734335d010697d44af10d165
 
 PODFILE CHECKSUM: 7620a9e0cd7d23f06f4301fc5908d3c6f6c7b72d
 
