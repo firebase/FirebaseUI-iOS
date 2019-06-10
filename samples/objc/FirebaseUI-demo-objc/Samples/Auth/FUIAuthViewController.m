@@ -44,7 +44,8 @@ NS_ENUM(NSUInteger, FIRProviders) {
   kIDPTwitter,
   kIDPPhone,
   kIDPAnonymous,
-  kIDPMicrosoft
+  kIDPMicrosoft,
+  kIDPGitHub,
 };
 
 static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/terms/";
@@ -123,6 +124,10 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
   [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPMicrosoft
+                                                          inSection:kSectionsProviders]
+                              animated:NO
+                        scrollPosition:UITableViewScrollPositionNone];
+  [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPGitHub
                                                           inSection:kSectionsProviders]
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
@@ -449,6 +454,25 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                                                  scopes:@[@"user.readwrite"]
                                        customParameters:@{@"prompt" : @"consent"}
                                            loginHintKey:@"login_hint"];
+          }
+          break;
+        case kIDPGitHub:
+          {
+            UIColor *buttonColor = [UIColor colorWithRed:.2 green:.2 blue:.2 alpha:1.0];
+            NSString *iconPath = [[NSBundle mainBundle] pathForResource:@"githubsymbol"
+                                                                 ofType:@"png"];
+            if (!iconPath) {
+              NSLog(@"Warning: Unable to find GitHub icon.");
+            }
+            provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+                                             providerID:@"github.com"
+                                        buttonLabelText:@"Sign in with GitHub"
+                                              shortName:@"GitHub"
+                                            buttonColor:buttonColor
+                                              iconImage:[UIImage imageWithContentsOfFile:iconPath]
+                                                 scopes:nil
+                                       customParameters:nil
+                                           loginHintKey:nil];
           }
           break;
         default:
