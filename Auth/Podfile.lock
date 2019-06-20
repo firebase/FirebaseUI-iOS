@@ -1,17 +1,17 @@
 PODS:
-  - Firebase/Auth (6.2.0):
+  - Firebase/Auth (6.3.0):
     - Firebase/CoreOnly
-    - FirebaseAuth (~> 6.1.1)
-  - Firebase/CoreOnly (6.2.0):
-    - FirebaseCore (= 6.0.2)
-  - FirebaseAuth (6.1.1):
+    - FirebaseAuth (~> 6.1.2)
+  - Firebase/CoreOnly (6.3.0):
+    - FirebaseCore (= 6.0.3)
+  - FirebaseAuth (6.1.2):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.2)
     - GoogleUtilities/Environment (~> 6.2)
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (6.0.2):
+  - FirebaseCore (6.0.3):
     - GoogleUtilities/Environment (~> 6.0)
     - GoogleUtilities/Logger (~> 6.0)
   - GoogleUtilities/AppDelegateSwizzler (6.2.0):
@@ -43,10 +43,10 @@ SPEC REPOS:
     - GTMSessionFetcher
 
 SPEC CHECKSUMS:
-  Firebase: 5965bac23e7fcb5fa6d926ed429c9ecef8a2014e
-  FirebaseAuth: 80879f0e9f2c5f40686d5b42f6ccb3cd5dce78ea
+  Firebase: 8432d732974498afd5987e9001a05f90f1a3d625
+  FirebaseAuth: 7fa2cc010b93770831a4e7a60651b52c3b8d111a
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: b0f0262acebfa540e5f97b3832dbb13186980822
+  FirebaseCore: 68f8a7f50cdae542715d4e86afa37c4067217dcb
   GoogleUtilities: 996e0db07153674fd1b54b220fda3a3dc3547cba
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
 
