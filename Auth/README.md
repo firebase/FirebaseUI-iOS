@@ -361,6 +361,11 @@ Refer to the Objective-C and Swift samples for examples of how you can customize
 these views.
 
 ## Handling auto-upgrade of anonymous users
+By default, the auto-upgrade of anonymous users is disabled. You can enable it 
+by simply changing the associated attribute of your Firebase Auth instance:
+```swift
+authUI?.shouldAutoUpgradeAnonymousUsers = true
+```
 
 Enabling auto-upgrade of anonymous users increases the complexity of your auth
 flow by adding several more edge cases that need to be handled. As opposed to
