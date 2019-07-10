@@ -213,7 +213,7 @@ Auth.defaultAuthUI.handleOpenURL(url, sourceApplication: sourceApplication)
 We support cross device email link sign in for the normal flows. It is not supported with anonymous user upgrade. By default, cross device support is enabled. You can disable it setting `forceSameDevice` to false in the `FUIEmailAuth` initializer.
 
 ## Customizing FirebaseUI for authentication
-### Custom terms of Service (ToS) URL
+### Custom Terms of Service (ToS) and privacy policy URLs
 
 The Terms of Service URL for your application, which is displayed on the
 email/password account creation screen, can be specified as follows:
@@ -227,6 +227,13 @@ authUI?.tosurl = kFirebaseTermsOfService
 ```objective-c
 // Objective-C
 authUI.TOSURL = [NSURL URLWithString:@"https://example.com/tos"];
+```
+
+The same applies to the URL of your privacy policy:
+```swift
+// Swift
+let kFirebasePrivacyPolicy = URL(string: "https://policies.google.com/privacy")!
+authUI?.privacyPolicyURL = kFirebasePrivacyPolicy
 ```
 
 ### Custom strings
@@ -361,6 +368,11 @@ Refer to the Objective-C and Swift samples for examples of how you can customize
 these views.
 
 ## Handling auto-upgrade of anonymous users
+By default, the auto-upgrade of anonymous users is disabled. You can enable it 
+by simply changing the associated attribute of your Firebase Auth instance:
+```swift
+authUI?.shouldAutoUpgradeAnonymousUsers = true
+```
 
 Enabling auto-upgrade of anonymous users increases the complexity of your auth
 flow by adding several more edge cases that need to be handled. As opposed to
