@@ -1508,17 +1508,17 @@
     "e164_key": "686-KI-0"
   },
   {
-    "e164_cc": "377",
+    "e164_cc": "383",
     "iso2_cc": "XK",
     "e164_sc": 0,
     "geographic": true,
     "level": 2,
     "name": "Kosovo",
     "example": "",
-    "display_name": "Kosovo (XK) [+377]",
+    "display_name": "Kosovo (XK) [+383]",
     "full_example_with_plus_sign": null,
     "display_name_no_e164_cc": "Kosovo (XK)",
-    "e164_key": "377-XK-0"
+    "e164_key": "383-XK-0"
   },
   {
     "e164_cc": "381",
