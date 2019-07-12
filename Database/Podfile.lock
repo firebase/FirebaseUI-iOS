@@ -12,8 +12,8 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
     - leveldb-library (~> 1.18)
-  - GoogleUtilities/Environment (6.2.1)
-  - GoogleUtilities/Logger (6.2.1):
+  - GoogleUtilities/Environment (6.2.3)
+  - GoogleUtilities/Logger (6.2.3):
     - GoogleUtilities/Environment
   - leveldb-library (1.20)
 
@@ -34,7 +34,7 @@ SPEC CHECKSUMS:
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: 7ea99e200f0024262650be56623fbe6a7bef1707
   FirebaseDatabase: f48e067716864be2b855cf716b927ef375d6cfa0
-  GoogleUtilities: c7a0b08bda3bf808be823ed151f0e28ac6866e71
+  GoogleUtilities: d2b0e277a95962e09bb27f5cd42f5f0b6a506c7d
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
 
 PODFILE CHECKSUM: 4a5d8ca50779b0745cc8a6eed485c325bb517b35
