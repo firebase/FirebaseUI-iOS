@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
     # storage.tvos.deployment_target = '11.0' Disabled; one of the dependencies doesn't support tvOS.
     storage.public_header_files = 'Storage/FirebaseStorageUI/*.h'
     storage.source_files = 'Storage/FirebaseStorageUI/*.{h,m}'
-    storage.dependency 'FirebaseStorage', '~> 3'
+    storage.dependency 'Firebase/Storage', '~> 6.0'
     storage.dependency 'SDWebImage', '~> 5.0'
     storage.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseStorageUI' }
   end
