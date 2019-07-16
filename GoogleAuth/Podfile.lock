@@ -14,7 +14,7 @@ PODS:
   - FirebaseCore (6.0.4):
     - GoogleUtilities/Environment (~> 6.0)
     - GoogleUtilities/Logger (~> 6.0)
-  - FirebaseUI/Auth (8.0.2):
+  - FirebaseUI/Auth (8.0.3):
     - Firebase/Auth (~> 6.0)
     - GoogleUtilities/UserDefaults
   - GoogleSignIn (4.4.0):
@@ -74,7 +74,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: 68cfa47997f53d29ce978e7a615fb78d7925fcbe
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: 7ea99e200f0024262650be56623fbe6a7bef1707
-  FirebaseUI: 8734527e38959ba31b433b8115c21941d1b67ec8
+  FirebaseUI: 00797dc0010d0b269a9b9f3486154728c654b1da
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
   GoogleUtilities: d2b0e277a95962e09bb27f5cd42f5f0b6a506c7d
