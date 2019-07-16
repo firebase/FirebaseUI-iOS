@@ -14,7 +14,7 @@ PODS:
   - FirebaseCore (6.0.4):
     - GoogleUtilities/Environment (~> 6.0)
     - GoogleUtilities/Logger (~> 6.0)
-  - FirebaseUI/Auth (8.0.2):
+  - FirebaseUI/Auth (8.0.3):
     - Firebase/Auth (~> 6.0)
     - GoogleUtilities/UserDefaults
   - GoogleUtilities/AppDelegateSwizzler (6.2.3):
@@ -60,7 +60,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: 68cfa47997f53d29ce978e7a615fb78d7925fcbe
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: 7ea99e200f0024262650be56623fbe6a7bef1707
-  FirebaseUI: 8734527e38959ba31b433b8115c21941d1b67ec8
+  FirebaseUI: 00797dc0010d0b269a9b9f3486154728c654b1da
   GoogleUtilities: d2b0e277a95962e09bb27f5cd42f5f0b6a506c7d
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab

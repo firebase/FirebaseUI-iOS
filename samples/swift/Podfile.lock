@@ -24,6 +24,9 @@ PODS:
   - Firebase/Firestore (6.4.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 1.4.1)
+  - Firebase/Storage (6.4.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 3.3.0)
   - FirebaseAuth (6.2.0):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
@@ -53,44 +56,44 @@ PODS:
     - leveldb-library (~> 1.20)
     - nanopb (~> 0.3.901)
     - Protobuf (~> 3.1)
-  - FirebaseStorage (3.2.1):
+  - FirebaseStorage (3.3.0):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseUI (8.0.2):
-    - FirebaseUI/Anonymous (= 8.0.2)
-    - FirebaseUI/Auth (= 8.0.2)
-    - FirebaseUI/Database (= 8.0.2)
-    - FirebaseUI/Email (= 8.0.2)
-    - FirebaseUI/Facebook (= 8.0.2)
-    - FirebaseUI/Firestore (= 8.0.2)
-    - FirebaseUI/Google (= 8.0.2)
-    - FirebaseUI/OAuth (= 8.0.2)
-    - FirebaseUI/Phone (= 8.0.2)
-    - FirebaseUI/Storage (= 8.0.2)
-  - FirebaseUI/Anonymous (8.0.2):
+  - FirebaseUI (8.0.3):
+    - FirebaseUI/Anonymous (= 8.0.3)
+    - FirebaseUI/Auth (= 8.0.3)
+    - FirebaseUI/Database (= 8.0.3)
+    - FirebaseUI/Email (= 8.0.3)
+    - FirebaseUI/Facebook (= 8.0.3)
+    - FirebaseUI/Firestore (= 8.0.3)
+    - FirebaseUI/Google (= 8.0.3)
+    - FirebaseUI/OAuth (= 8.0.3)
+    - FirebaseUI/Phone (= 8.0.3)
+    - FirebaseUI/Storage (= 8.0.3)
+  - FirebaseUI/Anonymous (8.0.3):
     - FirebaseUI/Auth
-  - FirebaseUI/Auth (8.0.2):
+  - FirebaseUI/Auth (8.0.3):
     - Firebase/Auth (~> 6.0)
     - GoogleUtilities/UserDefaults
-  - FirebaseUI/Database (8.0.2):
+  - FirebaseUI/Database (8.0.3):
     - Firebase/Database (~> 6.0)
-  - FirebaseUI/Email (8.0.2):
+  - FirebaseUI/Email (8.0.3):
     - FirebaseUI/Auth
-  - FirebaseUI/Facebook (8.0.2):
+  - FirebaseUI/Facebook (8.0.3):
     - FBSDKLoginKit (~> 5.0)
     - FirebaseUI/Auth
-  - FirebaseUI/Firestore (8.0.2):
+  - FirebaseUI/Firestore (8.0.3):
     - Firebase/Firestore
-  - FirebaseUI/Google (8.0.2):
+  - FirebaseUI/Google (8.0.3):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 4.0)
-  - FirebaseUI/OAuth (8.0.2):
+  - FirebaseUI/OAuth (8.0.3):
     - FirebaseUI/Auth
-  - FirebaseUI/Phone (8.0.2):
+  - FirebaseUI/Phone (8.0.3):
     - FirebaseUI/Auth
-  - FirebaseUI/Storage (8.0.2):
-    - FirebaseStorage (~> 3.2.0)
+  - FirebaseUI/Storage (8.0.3):
+    - Firebase/Storage (~> 6.0)
     - SDWebImage (~> 5.0)
   - GoogleSignIn (4.4.0):
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
@@ -188,8 +191,8 @@ SPEC CHECKSUMS:
   FirebaseCore: 7ea99e200f0024262650be56623fbe6a7bef1707
   FirebaseDatabase: f48e067716864be2b855cf716b927ef375d6cfa0
   FirebaseFirestore: f9d8dbe06cb1e50b5025d0d9ece41e173d0c7e00
-  FirebaseStorage: 926d41552072b9fee67aa645760f05f87b7ce604
-  FirebaseUI: 8734527e38959ba31b433b8115c21941d1b67ec8
+  FirebaseStorage: fdf753138620fbb9257679357daec4f266627c37
+  FirebaseUI: 00797dc0010d0b269a9b9f3486154728c654b1da
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
   GoogleUtilities: d2b0e277a95962e09bb27f5cd42f5f0b6a506c7d
