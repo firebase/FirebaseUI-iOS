@@ -1,14 +1,14 @@
 PODS:
-  - Firebase/CoreOnly (6.4.0):
-    - FirebaseCore (= 6.0.4)
-  - Firebase/Storage (6.4.0):
+  - Firebase/CoreOnly (6.5.0):
+    - FirebaseCore (= 6.1.0)
+  - Firebase/Storage (6.5.0):
     - Firebase/CoreOnly
-    - FirebaseStorage (~> 3.3.0)
+    - FirebaseStorage (~> 3.4.0)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (6.0.4):
+  - FirebaseCore (6.1.0):
     - GoogleUtilities/Environment (~> 6.0)
     - GoogleUtilities/Logger (~> 6.0)
-  - FirebaseStorage (3.3.0):
+  - FirebaseStorage (3.4.0):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
     - GTMSessionFetcher/Core (~> 1.1)
@@ -38,10 +38,10 @@ SPEC REPOS:
     - SDWebImage
 
 SPEC CHECKSUMS:
-  Firebase: 9445469655a98e9010737f4bc4720e5bda465873
+  Firebase: dedc9e48ea3f3649ad5f6b982f8a0c73508a14b5
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: 7ea99e200f0024262650be56623fbe6a7bef1707
-  FirebaseStorage: fdf753138620fbb9257679357daec4f266627c37
+  FirebaseCore: aecf02fb2274ec361b9bebeac112f5daa18273bd
+  FirebaseStorage: 618dd8fd886b30adf6e5d1915b1f5c18cb5c3944
   GoogleUtilities: d2b0e277a95962e09bb27f5cd42f5f0b6a506c7d
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
