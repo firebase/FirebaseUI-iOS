@@ -121,7 +121,7 @@ Pod::Spec.new do |s|
     google.public_header_files = 'GoogleAuth/FirebaseGoogleAuthUI/*.h'
     google.source_files = 'GoogleAuth/FirebaseGoogleAuthUI/*.{h,m}'
     google.dependency 'FirebaseUI/Auth'
-    google.dependency 'GoogleSignIn', '~> 4.0'
+    google.dependency 'GoogleSignIn', '~> 5.0'
     google.resource_bundle = {
       'FirebaseGoogleAuthUI' => ['GoogleAuth/FirebaseGoogleAuthUI/**/*.{png,lproj}']
     }
