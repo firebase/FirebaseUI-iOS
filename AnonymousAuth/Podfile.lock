@@ -84,7 +84,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 8c9e08bce0c72a3affd83927d8184cf244918bc8
   FirebaseCoreDiagnostics: 4c04ae09d0ab027c30179828c6bb47764df1bd13
   FirebaseCoreDiagnosticsInterop: 6829da2b8d1fc795ff1bd99df751d3788035d2cb
-  FirebaseUI: 00797dc0010d0b269a9b9f3486154728c654b1da
+  FirebaseUI: 84a450a38d0556d6ec876926406ec1e3fe9712c5
   GoogleDataTransport: ffbadce4ab93c88fb9dd8e6366c47bfcb4a32193
   GoogleDataTransportCCTSupport: 3451e7d8ba19093e533362a6d78d6d9014c6a037
   GoogleUtilities: e7dc37039b19df7fe543479d3e4a02ac8d11bb69

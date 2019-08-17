@@ -1,17 +1,22 @@
 PODS:
+  - AppAuth (1.2.0):
+    - AppAuth/Core (= 1.2.0)
+    - AppAuth/ExternalUserAgent (= 1.2.0)
+  - AppAuth/Core (1.2.0)
+  - AppAuth/ExternalUserAgent (1.2.0)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
-  - FBSDKCoreKit (5.3.0):
-    - FBSDKCoreKit/Basics (= 5.3.0)
-    - FBSDKCoreKit/Core (= 5.3.0)
-  - FBSDKCoreKit/Basics (5.3.0)
-  - FBSDKCoreKit/Core (5.3.0):
+  - FBSDKCoreKit (5.4.0):
+    - FBSDKCoreKit/Basics (= 5.4.0)
+    - FBSDKCoreKit/Core (= 5.4.0)
+  - FBSDKCoreKit/Basics (5.4.0)
+  - FBSDKCoreKit/Core (5.4.0):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (5.3.0):
+  - FBSDKLoginKit (5.4.0):
     - FBSDKCoreKit (~> 5.0)
   - Firebase/Auth (6.6.0):
     - Firebase/CoreOnly
@@ -95,7 +100,7 @@ PODS:
     - Firebase/Firestore
   - FirebaseUI/Google (8.0.3):
     - FirebaseUI/Auth
-    - GoogleSignIn (~> 4.0)
+    - GoogleSignIn (~> 5.0)
   - FirebaseUI/OAuth (8.0.3):
     - FirebaseUI/Auth
   - FirebaseUI/Phone (8.0.3):
@@ -107,18 +112,10 @@ PODS:
   - GoogleDataTransportCCTSupport (1.0.1):
     - GoogleDataTransport (~> 1.1)
     - nanopb
-  - GoogleSignIn (4.4.0):
-    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
-    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
+  - GoogleSignIn (5.0.0):
+    - AppAuth (~> 1.1)
+    - GTMAppAuth (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleToolboxForMac/DebugUtils (2.2.1):
-    - GoogleToolboxForMac/Defines (= 2.2.1)
-  - GoogleToolboxForMac/Defines (2.2.1)
-  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.1)":
-    - GoogleToolboxForMac/DebugUtils (= 2.2.1)
-    - GoogleToolboxForMac/Defines (= 2.2.1)
-    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.1)"
-  - "GoogleToolboxForMac/NSString+URLArguments (2.2.1)"
   - GoogleUtilities/AppDelegateSwizzler (6.2.5):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -151,7 +148,14 @@ PODS:
     - gRPC-Core/Interface (= 1.21.0)
     - nanopb (~> 0.3)
   - gRPC-Core/Interface (1.21.0)
+  - GTMAppAuth (1.0.0):
+    - AppAuth/Core (~> 1.0)
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.2.2):
+    - GTMSessionFetcher/Full (= 1.2.2)
   - GTMSessionFetcher/Core (1.2.2)
+  - GTMSessionFetcher/Full (1.2.2):
+    - GTMSessionFetcher/Core (= 1.2.2)
   - leveldb-library (1.20)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
@@ -168,6 +172,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AppAuth
     - BoringSSL-GRPC
     - FBSDKCoreKit
     - FBSDKLoginKit
@@ -183,10 +188,10 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleSignIn
-    - GoogleToolboxForMac
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
+    - GTMAppAuth
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
@@ -198,9 +203,10 @@ EXTERNAL SOURCES:
     :path: "../../"
 
 SPEC CHECKSUMS:
+  AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
-  FBSDKCoreKit: 39748deefe37a005f983722e433be2ddcdd83ae7
-  FBSDKLoginKit: bc0329e10045789e8d40b12d4f15ddbd07a898e2
+  FBSDKCoreKit: 026e56cf2c2cebc656cf2aec5c6898b8c4f33930
+  FBSDKLoginKit: f5064bb8f20c065ee1ea5987cbe0475b713edf9b
   Firebase: a2b5951f30ff38fd3b3bdae9c7d340f940fd3c51
   FirebaseAuth: 2be1924ddbc741fe2a02cb6963ca747e09a2e05c
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
@@ -210,14 +216,14 @@ SPEC CHECKSUMS:
   FirebaseDatabase: f48e067716864be2b855cf716b927ef375d6cfa0
   FirebaseFirestore: d65bd28e77a8cdc045be6353c6e1e146efdf92dc
   FirebaseStorage: 618dd8fd886b30adf6e5d1915b1f5c18cb5c3944
-  FirebaseUI: 00797dc0010d0b269a9b9f3486154728c654b1da
+  FirebaseUI: 84a450a38d0556d6ec876926406ec1e3fe9712c5
   GoogleDataTransport: ffbadce4ab93c88fb9dd8e6366c47bfcb4a32193
   GoogleDataTransportCCTSupport: 3451e7d8ba19093e533362a6d78d6d9014c6a037
-  GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
-  GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
+  GoogleSignIn: a62edd0516721d2a3db1259a5681b91f9b41c06a
   GoogleUtilities: e7dc37039b19df7fe543479d3e4a02ac8d11bb69
   "gRPC-C++": 9dfe7b44821e7b3e44aacad2af29d2c21f7cde83
   gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
+  GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
