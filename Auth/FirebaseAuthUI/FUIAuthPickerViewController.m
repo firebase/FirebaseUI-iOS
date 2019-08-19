@@ -91,6 +91,11 @@ static const CGFloat kTOSViewHorizontalMargin = 16.0f;
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  // Makes sure that embedded scroll view properly handles translucent navigation bar
+  if (!self.navigationController.navigationBar.isTranslucent) {
+    self.extendedLayoutIncludesOpaqueBars = true;
+  }
+
   if (!self.authUI.shouldHideCancelButton) {
     UIBarButtonItem *cancelBarButton =
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
