@@ -22,15 +22,15 @@ PODS:
     - GoogleUtilities/Environment (~> 6.2)
     - GoogleUtilities/Logger (~> 6.2)
   - FirebaseCoreDiagnosticsInterop (1.0.0)
-  - FirebaseFirestore (1.4.4):
+  - FirebaseFirestore (1.4.5):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.2)
-    - FirebaseFirestore/abseil-cpp (= 1.4.4)
+    - FirebaseFirestore/abseil-cpp (= 1.4.5)
     - "gRPC-C++ (= 0.0.9)"
     - leveldb-library (~> 1.20)
     - nanopb (~> 0.3.901)
     - Protobuf (~> 3.1)
-  - FirebaseFirestore/abseil-cpp (1.4.4):
+  - FirebaseFirestore/abseil-cpp (1.4.5):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.2)
     - "gRPC-C++ (= 0.0.9)"
@@ -96,7 +96,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 32b48f41c84a56fbde73b35ed01a830b3b6dc048
   FirebaseCoreDiagnostics: 4c04ae09d0ab027c30179828c6bb47764df1bd13
   FirebaseCoreDiagnosticsInterop: 6829da2b8d1fc795ff1bd99df751d3788035d2cb
-  FirebaseFirestore: 65aba32fcc772434dc69726fb0c528d2a67ec486
+  FirebaseFirestore: c457c22c49ccf15a0fbe95bfcbcf69b984dec285
   GoogleDataTransport: 9c3d63ed82f882a9a74d4be67dd7ad01bf046102
   GoogleDataTransportCCTSupport: 6b545f7149111180763dc18c6f372c963de4a310
   GoogleUtilities: e7dc37039b19df7fe543479d3e4a02ac8d11bb69
