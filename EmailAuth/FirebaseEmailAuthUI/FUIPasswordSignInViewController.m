@@ -111,6 +111,10 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   [_termsOfServiceView useFooterMessage];
 
   [self enableDynamicCellHeightForTableView:_tableView];
+  
+  if (@available(iOS 13.0, *)) {
+    _tableView.backgroundColor = [UIColor systemBackgroundColor];
+  }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
