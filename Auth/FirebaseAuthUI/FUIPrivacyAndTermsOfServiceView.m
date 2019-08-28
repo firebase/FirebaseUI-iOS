@@ -60,8 +60,14 @@ NS_ASSUME_NONNULL_BEGIN
   NSString *privacyPolicyString = FUILocalizedString(kStr_PrivacyPolicy);
   NSString *privacyPolicyAndTOSString =
       [NSString stringWithFormat:format, termsOfServiceString, privacyPolicyString];
-  NSMutableAttributedString *attributedLinkText =
-      [[NSMutableAttributedString alloc] initWithString:privacyPolicyAndTOSString];
+  NSMutableAttributedString *attributedLinkText = nil;
+    
+  if (@available(iOS 13.0, *)) {
+    attributedLinkText = [[NSMutableAttributedString alloc] initWithString:privacyPolicyAndTOSString
+                                                                attributes:@{NSForegroundColorAttributeName: [UIColor labelColor]}];
+  } else {
+    attributedLinkText = [[NSMutableAttributedString alloc] initWithString:privacyPolicyAndTOSString];
+  }
 
   NSRange TOSRange = [privacyPolicyAndTOSString rangeOfString:termsOfServiceString];
   if (TOSRange.length) {
