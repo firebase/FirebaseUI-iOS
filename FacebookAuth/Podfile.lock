@@ -1,11 +1,11 @@
 PODS:
-  - FBSDKCoreKit (5.4.1):
-    - FBSDKCoreKit/Basics (= 5.4.1)
-    - FBSDKCoreKit/Core (= 5.4.1)
-  - FBSDKCoreKit/Basics (5.4.1)
-  - FBSDKCoreKit/Core (5.4.1):
+  - FBSDKCoreKit (5.5.0):
+    - FBSDKCoreKit/Basics (= 5.5.0)
+    - FBSDKCoreKit/Core (= 5.5.0)
+  - FBSDKCoreKit/Basics (5.5.0)
+  - FBSDKCoreKit/Core (5.5.0):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (5.4.1):
+  - FBSDKLoginKit (5.5.0):
     - FBSDKCoreKit (~> 5.0)
   - Firebase/Auth (6.7.0):
     - Firebase/CoreOnly
@@ -89,8 +89,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  FBSDKCoreKit: 5144671077d67f07d7d243dbc7fd57a171f73954
-  FBSDKLoginKit: ff38b353b6843353f090028eb1b895c78aa82796
+  FBSDKCoreKit: 7ade9cfea30eef2f6cf105a1aa904f89ea68fb7d
+  FBSDKLoginKit: bb28062f24e79590c44ba03297ca9bea4b6436d2
   Firebase: 291d7b0a7b393f252358083b5d224884126fa46d
   FirebaseAuth: e7f86c2dfc57281cd01f7da5e4b40e01e4510a4a
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
