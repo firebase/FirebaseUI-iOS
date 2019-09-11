@@ -1,11 +1,11 @@
 PODS:
-  - Firebase/CoreOnly (6.8.0):
-    - FirebaseCore (= 6.2.2)
-  - Firebase/Database (6.8.0):
+  - Firebase/CoreOnly (6.8.1):
+    - FirebaseCore (= 6.2.3)
+  - Firebase/Database (6.8.1):
     - Firebase/CoreOnly
     - FirebaseDatabase (~> 6.1.0)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (6.2.2):
+  - FirebaseCore (6.2.3):
     - FirebaseCoreDiagnostics (~> 1.0)
     - FirebaseCoreDiagnosticsInterop (~> 1.0)
     - GoogleUtilities/Environment (~> 6.2)
@@ -52,9 +52,9 @@ SPEC REPOS:
     - nanopb
 
 SPEC CHECKSUMS:
-  Firebase: c35912a5c160193dc423f260dac3f167a1a795ab
+  Firebase: 9cbe4e5b5eaafa05dc932be58b7c8c3820d71e88
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: 12422a2a2b79ed161b06ccad1edfe650de7a4b34
+  FirebaseCore: e9d9bd1dae61c1e82bc1e0e617a9d832392086a0
   FirebaseCoreDiagnostics: 4c04ae09d0ab027c30179828c6bb47764df1bd13
   FirebaseCoreDiagnosticsInterop: 6829da2b8d1fc795ff1bd99df751d3788035d2cb
   FirebaseDatabase: 518cd94286de2ee999e19383a2a6ae04c81ce993
