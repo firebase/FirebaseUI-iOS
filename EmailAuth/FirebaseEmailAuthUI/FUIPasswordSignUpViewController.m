@@ -127,6 +127,10 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
   self.navigationItem.rightBarButtonItem = saveButtonItem;
 
   [self enableDynamicCellHeightForTableView:_tableView];
+  
+  if (@available(iOS 13.0, *)) {
+    _tableView.backgroundColor = [UIColor systemBackgroundColor];
+  }
 }
 
 - (void)viewDidLayoutSubviews {

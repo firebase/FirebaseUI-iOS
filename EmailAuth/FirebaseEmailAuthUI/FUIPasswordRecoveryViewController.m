@@ -94,6 +94,11 @@ static const CGFloat kFooterTextViewHorizontalInset = 8.0f;
   self.navigationItem.rightBarButtonItem = sendButtonItem;
 
   [self enableDynamicCellHeightForTableView:_tableView];
+  
+  if (@available(iOS 13.0, *)) {
+    _tableView.backgroundColor = [UIColor systemBackgroundColor];
+    self.footerTextView.textColor = [UIColor secondaryLabelColor];
+  }
 }
 
 - (void)viewDidLayoutSubviews {
