@@ -21,6 +21,7 @@
 #import "FUIAuthStrings.h"
 #import "FUIAuthUtils.h"
 #import "FUIAuth_Internal.h"
+#import "objc/runtime.h"
 
 /** @var kActivityIndiactorPadding
     @brief The padding between the activity indiactor and its overlay.
@@ -287,6 +288,15 @@ static NSString *const kAuthUICodingKey = @"authUI";
     window.windowLevel = UIWindowLevelAlert + 1;
     [window makeKeyAndVisible];
     [viewController presentViewController:alertController animated:YES completion:nil];
+	  
+    if (@available(iOS 13.0, *)) {
+        /*
+            Earlier iOS versions established a strong reference to the window when makeKeyAndVisible was called.
+            Now we add one from the alert controller, to prevent objects from getting garbage collected right away.
+        */
+        static char key;
+        objc_setAssociatedObject(alertController, &key, window, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+	  }
   }
 }
 
