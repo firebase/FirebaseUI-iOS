@@ -294,8 +294,8 @@ static NSString *const kAuthUICodingKey = @"authUI";
             Earlier iOS versions established a strong reference to the window when makeKeyAndVisible was called.
             Now we add one from the alert controller, to prevent objects from getting garbage collected right away.
         */
-        static void *key;
-        objc_setAssociatedObject(alertController, key, window, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        static char key;
+        objc_setAssociatedObject(alertController, &key, window, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 	  }
   }
 }
