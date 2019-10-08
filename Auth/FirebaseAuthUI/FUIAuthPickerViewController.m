@@ -102,6 +102,10 @@ static const CGFloat kTOSViewHorizontalMargin = 16.0f;
                                                       target:self
                                                       action:@selector(cancelAuthorization)];
     self.navigationItem.leftBarButtonItem = cancelBarButton;
+  } else {
+    if (@available(iOS 13, *)) {
+      self.modalInPresentation = YES;
+    }
   }
   self.navigationItem.backBarButtonItem =
       [[UIBarButtonItem alloc] initWithTitle:FUILocalizedString(kStr_Back)
