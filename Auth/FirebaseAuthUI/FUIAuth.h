@@ -188,7 +188,8 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
 @property(nonatomic, copy) NSArray<id<FUIAuthProvider>> *providers;
 
 /** @property shouldHideCancelButton
- @brief Whether to hide the canel button, defaults to NO.
+ @brief Whether to hide the cancel button, defaults to NO. On iOS 13, this also disables
+     the swipe-to-dismiss gesture.
  */
 @property(nonatomic, assign) BOOL shouldHideCancelButton;
 
