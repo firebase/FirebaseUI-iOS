@@ -77,7 +77,7 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
 }
 
 - (UIKeyboardType) keyboardType {
-  return UIKeyboardTypeNumberPad;
+  return UIKeyboardTypeASCIICapableNumberPad;
 }
 
 - (BOOL)canBecomeFirstResponder {
