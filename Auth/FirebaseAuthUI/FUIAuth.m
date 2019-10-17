@@ -107,6 +107,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
   self = [super init];
   if (self) {
     _auth = auth;
+    _interactiveDismissEnabled = YES;
   }
   return self;
 }
@@ -178,7 +179,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
     if (self.auth.currentUser.isAnonymous && !credential) {
       if (result) {
         result(self.auth.currentUser, nil);
-      };
+      }
       // Hide Auth Picker Controller which was presented modally.
       if (isAuthPickerShown && presentingViewController.presentingViewController) {
         [presentingViewController dismissViewControllerAnimated:YES completion:nil];

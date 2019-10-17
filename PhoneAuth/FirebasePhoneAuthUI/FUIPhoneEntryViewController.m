@@ -168,6 +168,12 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                          style:UIBarButtonItemStylePlain
                                         target:nil
                                         action:nil];
+
+    if (@available(iOS 13, *)) {
+      if (!self.authUI.isInteractiveDismissEnabled) {
+        self.modalInPresentation = YES;
+      }
+    }
   }
 }
 

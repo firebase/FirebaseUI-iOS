@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FUIEmailAuth : NSObject <FUIAuthProvider>
 
 /** @property emailLink.
- @brief The link for email link sign in.
+    @brief The link for email link sign in.
  */
 @property(nonatomic, strong, readwrite, nullable) NSString *emailLink;
 
