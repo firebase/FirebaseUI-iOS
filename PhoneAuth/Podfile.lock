@@ -22,7 +22,7 @@ PODS:
     - GoogleUtilities/Environment (~> 6.2)
     - GoogleUtilities/Logger (~> 6.2)
   - FirebaseCoreDiagnosticsInterop (1.0.0)
-  - FirebaseUI/Auth (8.1.0):
+  - FirebaseUI/Auth (8.3.0):
     - Firebase/Auth (~> 6.0)
     - GoogleUtilities/UserDefaults
   - GoogleDataTransport (1.2.0)
@@ -58,7 +58,7 @@ DEPENDENCIES:
   - OCMock
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Firebase
     - FirebaseAuth
     - FirebaseAuthInterop
@@ -83,7 +83,7 @@ SPEC CHECKSUMS:
   FirebaseCore: e9d9bd1dae61c1e82bc1e0e617a9d832392086a0
   FirebaseCoreDiagnostics: 4c04ae09d0ab027c30179828c6bb47764df1bd13
   FirebaseCoreDiagnosticsInterop: 6829da2b8d1fc795ff1bd99df751d3788035d2cb
-  FirebaseUI: 41e06c5f7f6e34a8f430862d67637e36e4aa696c
+  FirebaseUI: e8994c4106a60580bd70ef65c842cfcafe50bce6
   GoogleDataTransport: 8f9897b8e073687f24ca8d3c3a8013dec7d2d1cc
   GoogleDataTransportCCTSupport: 7455d07b98851aa63e4c05a34dad356ca588479e
   GoogleUtilities: 9c2c544202301110b29f7974a82e77fdcf12bf51
@@ -93,4 +93,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 1dde70927cc7817510a860e219580b5e319d97fc
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4
