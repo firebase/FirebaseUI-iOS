@@ -188,10 +188,14 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
 @property(nonatomic, copy) NSArray<id<FUIAuthProvider>> *providers;
 
 /** @property shouldHideCancelButton
- @brief Whether to hide the cancel button, defaults to NO. On iOS 13, this also disables
-     the swipe-to-dismiss gesture.
+    @brief Whether to hide the cancel button, defaults to NO.
  */
 @property(nonatomic, assign) BOOL shouldHideCancelButton;
+
+/** @property interactiveDismissEnabled
+    @brief Whether or not interactive dismiss should be enabled on iOS 13 and above devices.
+ */
+@property(nonatomic, assign, getter=isInteractiveDismissEnabled) BOOL interactiveDismissEnabled API_AVAILABLE(ios(13));
 
 /** @property customStringsBundle
     @brief Custom strings bundle supplied by the developer. Nil when there is no custom strings
