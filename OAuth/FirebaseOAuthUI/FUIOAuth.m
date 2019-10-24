@@ -16,6 +16,8 @@
 
 #import <FirebaseUI/FirebaseAuthUI.h>
 
+#import <AuthenticationServices/AuthenticationServices.h>
+
 #import "FUIOAuth.h"
 #import <FirebaseUI/FUIAuthBaseViewController.h>
 #import <FirebaseUI/FUIAuthBaseViewController_Internal.h>
@@ -38,7 +40,9 @@ static NSString *const kSignInAsGuest = @"SignInAsGuest";
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FUIOAuth ()
+@interface FUIOAuth () <ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding> {
+  FUIAuthProviderSignInCompletionBlock _providerSignInCompletion;
+}
 
 /** @property authUI
     @brief FUIAuth instance of the application.
@@ -117,8 +121,10 @@ NS_ASSUME_NONNULL_BEGIN
     _icon = iconImage;
     _scopes = scopes;
     _customParameters = customParameters;
-    _provider = [FIROAuthProvider providerWithProviderID:self.providerID];
     _loginHintKey = loginHintKey;
+    if (![_providerID isEqualToString:@"facebook.com"] && ![_providerID isEqualToString:@"apple.com"]) {
+      _provider = [FIROAuthProvider providerWithProviderID:self.providerID];
+    }
   }
   return self;
 }
@@ -158,41 +164,55 @@ NS_ASSUME_NONNULL_BEGIN
       presentingViewController:(nullable UIViewController *)presentingViewController
                     completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
   self.presentingViewController = presentingViewController;
-
   FIROAuthProvider *provider = self.provider;
-  provider.scopes = self.scopes;
-  NSMutableDictionary *customParameters = [NSMutableDictionary dictionary];
-  if (self.customParameters.count) {
-    [customParameters addEntriesFromDictionary:self.customParameters];
-  }
-  if (self.loginHintKey.length && defaultValue.length) {
-    customParameters[self.loginHintKey] = defaultValue;
-  }
-  provider.customParameters = [customParameters copy];
+  _providerSignInCompletion = completion;
 
-  [self.provider getCredentialWithUIDelegate:nil
-                                  completion:^(FIRAuthCredential *_Nullable credential,
-                                               NSError *_Nullable error) {
-    if (error) {
-      [FUIAuthBaseViewController showAlertWithMessage:error.localizedDescription
-                             presentingViewController:presentingViewController];
-      if (completion) {
-        completion(nil, error, nil, nil);
+  if ([self.providerID isEqualToString:@"apple.com"]) {
+    if (@available(iOS 13.0, *)) {
+      ASAuthorizationAppleIDRequest *request = [[[ASAuthorizationAppleIDProvider alloc] init] createRequest];
+      request.requestedScopes = @[ASAuthorizationScopeFullName, ASAuthorizationScopeEmail];
+      ASAuthorizationController* controller = [[ASAuthorizationController alloc] initWithAuthorizationRequests:@[request]];
+      controller.delegate = self;
+      controller.presentationContextProvider = self;
+      [controller performRequests];
+    } else {
+      NSLog(@"Sign in with Apple is only available on iOS 13+.");
+    }
+  } else {
+    provider.scopes = self.scopes;
+    NSMutableDictionary *customParameters = [NSMutableDictionary dictionary];
+    if (self.customParameters.count) {
+      [customParameters addEntriesFromDictionary:self.customParameters];
+    }
+    if (self.loginHintKey.length && defaultValue.length) {
+      customParameters[self.loginHintKey] = defaultValue;
+    }
+    provider.customParameters = [customParameters copy];
+
+    [self.provider getCredentialWithUIDelegate:nil
+                                    completion:^(FIRAuthCredential *_Nullable credential,
+                                                 NSError *_Nullable error) {
+      if (error) {
+        [FUIAuthBaseViewController showAlertWithMessage:error.localizedDescription
+                               presentingViewController:presentingViewController];
+        if (completion) {
+          completion(nil, error, nil, nil);
+        }
+        return;
       }
-      return;
-    }
-    if (completion) {
-      UIActivityIndicatorView *activityView =
-          [FUIAuthBaseViewController addActivityIndicator:presentingViewController.view];
-      [activityView startAnimating];
-      FIRAuthResultCallback result = ^(FIRUser *_Nullable user,
-                                       NSError *_Nullable error) {
-        [activityView stopAnimating];
-        [activityView removeFromSuperview];
-      };
-      completion(credential, nil, result, nil);
-    }
-  }];
+      if (completion) {
+        UIActivityIndicatorView *activityView =
+            [FUIAuthBaseViewController addActivityIndicator:presentingViewController.view];
+        [activityView startAnimating];
+        FIRAuthResultCallback result = ^(FIRUser *_Nullable user,
+                                         NSError *_Nullable error) {
+          [activityView stopAnimating];
+          [activityView removeFromSuperview];
+        };
+        completion(credential, nil, result, nil);
+      }
+    }];
+  }
 }
 
 - (void)signOut {
@@ -210,6 +230,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(nullable NSString *)sourceApplication {
   return NO;
+}
+
+#pragma - ASAuthorizationControllerDelegate
+
+- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization API_AVAILABLE(ios(13.0)){
+  ASAuthorizationAppleIDCredential* appleIDCredential = authorization.credential;
+  NSString *idToken = [NSString stringWithUTF8String:[appleIDCredential.identityToken bytes]];
+  FIROAuthCredential *credential = [FIROAuthProvider credentialWithProviderID:@"apple.com"
+                                                                      IDToken:idToken
+                                                                  accessToken:nil];
+  _providerSignInCompletion(credential, nil, nil, nil);
+}
+
+- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error API_AVAILABLE(ios(13.0)){
+  NSLog(@"%@", error.description);
+}
+
+#pragma - ASAuthorizationControllerPresentationContextProviding
+
+- (ASPresentationAnchor)presentationAnchorForAuthorizationController:(ASAuthorizationController *)controller API_AVAILABLE(ios(13.0)){
+  return self.presentingViewController.view.window;
 }
 
 @end

@@ -133,6 +133,9 @@ Pod::Spec.new do |s|
     oauth.public_header_files = 'OAuth/FirebaseOAuthUI/*.h'
     oauth.source_files = 'OAuth/FirebaseOAuthUI/*.{h,m}'
     oauth.dependency 'FirebaseUI/Auth'
+    oauth.resource_bundle = {
+      'FirebaseOAuthUI' => ['OAuth/FirebaseOAuthUI/**/*.{png,lproj}']
+    }
     oauth.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseOAuthUI' }
   end
 

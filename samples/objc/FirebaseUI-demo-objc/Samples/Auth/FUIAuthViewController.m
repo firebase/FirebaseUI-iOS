@@ -46,6 +46,7 @@ NS_ENUM(NSUInteger, FIRProviders) {
   kIDPAnonymous,
   kIDPMicrosoft,
   kIDPGitHub,
+  kIDPApple,
 };
 
 static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/terms/";
@@ -128,6 +129,10 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
   [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPGitHub
+                                                          inSection:kSectionsProviders]
+                              animated:NO
+                        scrollPosition:UITableViewScrollPositionNone];
+  [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPApple
                                                           inSection:kSectionsProviders]
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
@@ -416,17 +421,13 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                                                    green:154.0f/255.0f
                                                     blue:234.0f/255.0f
                                                    alpha:1.0f];
-            NSString *iconPath =
-                [[NSBundle mainBundle] pathForResource:@"twtrsymbol" ofType:@"png"];
-            if (!iconPath) {
-              NSLog(@"Warning: Unable to find twitter icon.");
-            }
             provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
                                              providerID:@"twitter.com"
                                         buttonLabelText:@"Sign in with Twitter"
                                               shortName:@"Twitter"
                                             buttonColor:buttonColor
-                                              iconImage:[UIImage imageWithContentsOfFile:iconPath]
+                                              iconImage:[FUIAuthUtils imageNamed:@"ic_twitter"
+                                                             fromBundleNameOrNil:@"FirebaseOAuthUI"]
                                                  scopes:@[@"user.readwrite"]
                                        customParameters:@{@"prompt" : @"consent"}
                                            loginHintKey:nil];
@@ -440,17 +441,13 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
           break;
         case kIDPMicrosoft:
           {
-            UIColor *buttonColor = [UIColor colorWithRed:.18 green:.18 blue:.18 alpha:1.0];
-            NSString *iconPath = [[NSBundle mainBundle] pathForResource:@"mssymbol" ofType:@"png"];
-            if (!iconPath) {
-              NSLog(@"Warning: Unable to find microsoft icon.");
-            }
             provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
                                              providerID:@"microsoft.com"
                                         buttonLabelText:@"Sign in with Microsoft"
                                               shortName:@"Microsoft"
-                                            buttonColor:buttonColor
-                                              iconImage:[UIImage imageWithContentsOfFile:iconPath]
+                                            buttonColor:[UIColor colorWithRed:.18 green:.18 blue:.18 alpha:1.0]
+                                              iconImage:[FUIAuthUtils imageNamed:@"ic_microsoft"
+                                                             fromBundleNameOrNil:@"FirebaseOAuthUI"]
                                                  scopes:@[@"user.readwrite"]
                                        customParameters:@{@"prompt" : @"consent"}
                                            loginHintKey:@"login_hint"];
@@ -458,19 +455,28 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
           break;
         case kIDPGitHub:
           {
-            UIColor *buttonColor = [UIColor colorWithRed:.2 green:.2 blue:.2 alpha:1.0];
-            NSString *iconPath = [[NSBundle mainBundle] pathForResource:@"githubsymbol"
-                                                                 ofType:@"png"];
-            if (!iconPath) {
-              NSLog(@"Warning: Unable to find GitHub icon.");
-            }
             provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
                                              providerID:@"github.com"
                                         buttonLabelText:@"Sign in with GitHub"
                                               shortName:@"GitHub"
-                                            buttonColor:buttonColor
-                                              iconImage:[UIImage imageWithContentsOfFile:iconPath]
+                                            buttonColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0]
+                                              iconImage:[FUIAuthUtils imageNamed:@"ic_github"
+                                                             fromBundleNameOrNil:@"FirebaseOAuthUI"]
                                                  scopes:nil
+                                       customParameters:nil
+                                           loginHintKey:nil];
+          }
+          break;
+        case kIDPApple:
+          {
+            provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+                                             providerID:@"apple.com"
+                                        buttonLabelText:@"Sign in with Apple"
+                                              shortName:@"Apple"
+                                            buttonColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]
+                                              iconImage:[FUIAuthUtils imageNamed:@"ic_apple"
+                                                             fromBundleNameOrNil:@"FirebaseOAuthUI"]
+                                                 scopes:@[@"name", @"email"]
                                        customParameters:nil
                                            loginHintKey:nil];
           }
