@@ -61,6 +61,31 @@ NS_ASSUME_NONNULL_BEGIN
                   loginHintKey:(nullable NSString *)loginHintKey
     NS_DESIGNATED_INITIALIZER;
 
+/** @fn twitterAuthProvider
+    @brief Built-in OAuth provider for Twitter.
+*/
++ (FUIOAuth *)twitterAuthProvider;
+
+/** @fn githubAuthProvider
+    @brief Built-in OAuth provider for Github.
+*/
++ (FUIOAuth *)githubAuthProvider;
+
+/** @fn microsoftAuthProvider
+    @brief Built-in OAuth provider for Microsoft.
+*/
++ (FUIOAuth *)microsoftAuthProvider;
+
+/** @fn yahooAuthProvider
+    @brief Built-in OAuth provider for Yahoo.
+*/
++ (FUIOAuth *)yahooAuthProvider;
+
+/** @fn appleAuthProvider
+    @brief Built-in OAuth provider for Apple.
+*/
++ (FUIOAuth *)appleAuthProvider;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -46,6 +46,7 @@ NS_ENUM(NSUInteger, FIRProviders) {
   kIDPAnonymous,
   kIDPMicrosoft,
   kIDPGitHub,
+  kIDPYahoo,
   kIDPApple,
 };
 
@@ -129,6 +130,10 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
   [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPGitHub
+                                                          inSection:kSectionsProviders]
+                              animated:NO
+                        scrollPosition:UITableViewScrollPositionNone];
+  [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPYahoo
                                                           inSection:kSectionsProviders]
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
@@ -416,22 +421,7 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                                      :[[FUIFacebookAuth alloc] init];
           break;
         case kIDPTwitter:
-          {
-            UIColor *buttonColor = [UIColor colorWithRed:71.0f/255.0f
-                                                   green:154.0f/255.0f
-                                                    blue:234.0f/255.0f
-                                                   alpha:1.0f];
-            provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
-                                             providerID:@"twitter.com"
-                                        buttonLabelText:@"Sign in with Twitter"
-                                              shortName:@"Twitter"
-                                            buttonColor:buttonColor
-                                              iconImage:[FUIAuthUtils imageNamed:@"ic_twitter"
-                                                             fromBundleNameOrNil:@"FirebaseOAuthUI"]
-                                                 scopes:@[@"user.readwrite"]
-                                       customParameters:@{@"prompt" : @"consent"}
-                                           loginHintKey:nil];
-          }
+          provider = [FUIOAuth twitterAuthProvider];
           break;
         case kIDPPhone:
           provider = [[FUIPhoneAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
@@ -440,46 +430,16 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
           provider = [[FUIAnonymousAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
           break;
         case kIDPMicrosoft:
-          {
-            provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
-                                             providerID:@"microsoft.com"
-                                        buttonLabelText:@"Sign in with Microsoft"
-                                              shortName:@"Microsoft"
-                                            buttonColor:[UIColor colorWithRed:.18 green:.18 blue:.18 alpha:1.0]
-                                              iconImage:[FUIAuthUtils imageNamed:@"ic_microsoft"
-                                                             fromBundleNameOrNil:@"FirebaseOAuthUI"]
-                                                 scopes:@[@"user.readwrite"]
-                                       customParameters:@{@"prompt" : @"consent"}
-                                           loginHintKey:@"login_hint"];
-          }
+          provider = [FUIOAuth microsoftAuthProvider];
           break;
         case kIDPGitHub:
-          {
-            provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
-                                             providerID:@"github.com"
-                                        buttonLabelText:@"Sign in with GitHub"
-                                              shortName:@"GitHub"
-                                            buttonColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0]
-                                              iconImage:[FUIAuthUtils imageNamed:@"ic_github"
-                                                             fromBundleNameOrNil:@"FirebaseOAuthUI"]
-                                                 scopes:nil
-                                       customParameters:nil
-                                           loginHintKey:nil];
-          }
+          provider = [FUIOAuth githubAuthProvider];
+          break;
+        case kIDPYahoo:
+          provider = [FUIOAuth yahooAuthProvider];
           break;
         case kIDPApple:
-          {
-            provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
-                                             providerID:@"apple.com"
-                                        buttonLabelText:@"Sign in with Apple"
-                                              shortName:@"Apple"
-                                            buttonColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]
-                                              iconImage:[FUIAuthUtils imageNamed:@"ic_apple"
-                                                             fromBundleNameOrNil:@"FirebaseOAuthUI"]
-                                                 scopes:@[@"name", @"email"]
-                                       customParameters:nil
-                                           loginHintKey:nil];
-          }
+          provider = [FUIOAuth appleAuthProvider];
           break;
         default:
           break;

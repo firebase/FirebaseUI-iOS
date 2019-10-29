@@ -129,6 +129,74 @@ NS_ASSUME_NONNULL_BEGIN
   return self;
 }
 
++ (FUIOAuth *)twitterAuthProvider {
+  return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+                               providerID:@"twitter.com"
+                          buttonLabelText:@"Sign in with Twitter"
+                                shortName:@"Twitter"
+                              buttonColor:[UIColor colorWithRed:71.0f/255.0f
+                                                          green:154.0f/255.0f
+                                                           blue:234.0f/255.0f
+                                                          alpha:1.0f]
+                                iconImage:[FUIAuthUtils imageNamed:@"ic_twitter"
+                                               fromBundleNameOrNil:@"FirebaseOAuthUI"]
+                                   scopes:@[@"user.readwrite"]
+                         customParameters:@{@"prompt" : @"consent"}
+                             loginHintKey:nil];
+}
+
++ (FUIOAuth *)githubAuthProvider {
+  return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+                               providerID:@"github.com"
+                          buttonLabelText:@"Sign in with GitHub"
+                                shortName:@"GitHub"
+                              buttonColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0]
+                                iconImage:[FUIAuthUtils imageNamed:@"ic_github"
+                                               fromBundleNameOrNil:@"FirebaseOAuthUI"]
+                                   scopes:nil
+                         customParameters:nil
+                             loginHintKey:nil];
+}
+
++ (FUIOAuth *)microsoftAuthProvider {
+  return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+                               providerID:@"microsoft.com"
+                          buttonLabelText:@"Sign in with Microsoft"
+                                shortName:@"Microsoft"
+                              buttonColor:[UIColor colorWithRed:.18 green:.18 blue:.18 alpha:1.0]
+                                iconImage:[FUIAuthUtils imageNamed:@"ic_microsoft"
+                                               fromBundleNameOrNil:@"FirebaseOAuthUI"]
+                                   scopes:@[@"user.readwrite"]
+                         customParameters:@{@"prompt" : @"consent"}
+                             loginHintKey:@"login_hint"];
+}
+
++ (FUIOAuth *)yahooAuthProvider {
+  return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+                               providerID:@"yahoo.com"
+                          buttonLabelText:@"Sign in with Yahoo"
+                                shortName:@"Yahoo"
+                              buttonColor:[UIColor colorWithRed:.18 green:.18 blue:.18 alpha:1.0]
+                                iconImage:[FUIAuthUtils imageNamed:@"ic_yahoo"
+                                               fromBundleNameOrNil:@"FirebaseOAuthUI"]
+                                   scopes:@[@"user.readwrite"]
+                         customParameters:@{@"prompt" : @"consent"}
+                             loginHintKey:nil];
+}
+
++ (FUIOAuth *)appleAuthProvider {
+  return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+                               providerID:@"apple.com"
+                          buttonLabelText:@"Sign in with Apple"
+                                shortName:@"Apple"
+                              buttonColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]
+                                iconImage:[FUIAuthUtils imageNamed:@"ic_apple"
+                                               fromBundleNameOrNil:@"FirebaseOAuthUI"]
+                                   scopes:@[@"name", @"email"]
+                         customParameters:nil
+                             loginHintKey:nil];
+}
+
 #pragma mark - FUIAuthProvider
 
 /** @fn accessToken:
