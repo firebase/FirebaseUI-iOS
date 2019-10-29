@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** @fn appleAuthProvider
     @brief Built-in OAuth provider for Apple.
 */
-+ (FUIOAuth *)appleAuthProvider;
++ (FUIOAuth *)appleAuthProvider API_AVAILABLE(ios(13.0));
 
 @end
 

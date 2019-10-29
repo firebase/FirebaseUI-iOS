@@ -300,9 +300,9 @@ NS_ASSUME_NONNULL_BEGIN
   return NO;
 }
 
-#pragma - ASAuthorizationControllerDelegate
+#pragma mark - ASAuthorizationControllerDelegate
 
-- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization API_AVAILABLE(ios(13.0)){
+- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization API_AVAILABLE(ios(13.0)) {
   ASAuthorizationAppleIDCredential* appleIDCredential = authorization.credential;
   NSString *idToken = [NSString stringWithUTF8String:[appleIDCredential.identityToken bytes]];
   FIROAuthCredential *credential = [FIROAuthProvider credentialWithProviderID:@"apple.com"
@@ -311,13 +311,13 @@ NS_ASSUME_NONNULL_BEGIN
   _providerSignInCompletion(credential, nil, nil, nil);
 }
 
-- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error API_AVAILABLE(ios(13.0)){
+- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error API_AVAILABLE(ios(13.0)) {
   NSLog(@"%@", error.description);
 }
 
-#pragma - ASAuthorizationControllerPresentationContextProviding
+#pragma mark - ASAuthorizationControllerPresentationContextProviding
 
-- (ASPresentationAnchor)presentationAnchorForAuthorizationController:(ASAuthorizationController *)controller API_AVAILABLE(ios(13.0)){
+- (ASPresentationAnchor)presentationAnchorForAuthorizationController:(ASAuthorizationController *)controller API_AVAILABLE(ios(13.0)) {
   return self.presentingViewController.view.window;
 }
 
