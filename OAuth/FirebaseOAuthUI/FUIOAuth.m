@@ -176,7 +176,7 @@ NS_ASSUME_NONNULL_BEGIN
                                providerID:@"yahoo.com"
                           buttonLabelText:@"Sign in with Yahoo"
                                 shortName:@"Yahoo"
-                              buttonColor:[UIColor colorWithRed:.18 green:.18 blue:.18 alpha:1.0]
+                              buttonColor:[UIColor colorWithRed:.45 green:.05 blue:.62 alpha:1.0]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_yahoo"
                                                fromBundleNameOrNil:@"FirebaseOAuthUI"]
                                    scopes:@[@"user.readwrite"]
