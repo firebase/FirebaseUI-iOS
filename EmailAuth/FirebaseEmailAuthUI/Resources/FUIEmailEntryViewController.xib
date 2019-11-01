@@ -28,7 +28,7 @@
                         <rect key="frame" x="0.0" y="896.5" width="375" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Terms of Service" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ea-qX-Sdg" customClass="FUIPrivacyAndTermsOfServiceView">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Terms of Service" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9ea-qX-Sdg" customClass="FUIPrivacyAndTermsOfServiceView">
                                 <rect key="frame" x="10" y="0.0" width="355" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
