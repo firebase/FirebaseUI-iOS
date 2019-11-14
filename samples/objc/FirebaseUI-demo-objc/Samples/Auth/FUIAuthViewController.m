@@ -46,6 +46,8 @@ NS_ENUM(NSUInteger, FIRProviders) {
   kIDPAnonymous,
   kIDPMicrosoft,
   kIDPGitHub,
+  kIDPYahoo,
+  kIDPApple,
 };
 
 static NSString *const kFirebaseTermsOfService = @"https://firebase.google.com/terms/";
@@ -128,6 +130,14 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
   [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPGitHub
+                                                          inSection:kSectionsProviders]
+                              animated:NO
+                        scrollPosition:UITableViewScrollPositionNone];
+  [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPYahoo
+                                                          inSection:kSectionsProviders]
+                              animated:NO
+                        scrollPosition:UITableViewScrollPositionNone];
+  [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:kIDPApple
                                                           inSection:kSectionsProviders]
                               animated:NO
                         scrollPosition:UITableViewScrollPositionNone];
@@ -411,26 +421,7 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                                      :[[FUIFacebookAuth alloc] init];
           break;
         case kIDPTwitter:
-          {
-            UIColor *buttonColor = [UIColor colorWithRed:71.0f/255.0f
-                                                   green:154.0f/255.0f
-                                                    blue:234.0f/255.0f
-                                                   alpha:1.0f];
-            NSString *iconPath =
-                [[NSBundle mainBundle] pathForResource:@"twtrsymbol" ofType:@"png"];
-            if (!iconPath) {
-              NSLog(@"Warning: Unable to find twitter icon.");
-            }
-            provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
-                                             providerID:@"twitter.com"
-                                        buttonLabelText:@"Sign in with Twitter"
-                                              shortName:@"Twitter"
-                                            buttonColor:buttonColor
-                                              iconImage:[UIImage imageWithContentsOfFile:iconPath]
-                                                 scopes:@[@"user.readwrite"]
-                                       customParameters:@{@"prompt" : @"consent"}
-                                           loginHintKey:nil];
-          }
+          provider = [FUIOAuth twitterAuthProvider];
           break;
         case kIDPPhone:
           provider = [[FUIPhoneAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
@@ -439,41 +430,16 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
           provider = [[FUIAnonymousAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
           break;
         case kIDPMicrosoft:
-          {
-            UIColor *buttonColor = [UIColor colorWithRed:.18 green:.18 blue:.18 alpha:1.0];
-            NSString *iconPath = [[NSBundle mainBundle] pathForResource:@"mssymbol" ofType:@"png"];
-            if (!iconPath) {
-              NSLog(@"Warning: Unable to find microsoft icon.");
-            }
-            provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
-                                             providerID:@"microsoft.com"
-                                        buttonLabelText:@"Sign in with Microsoft"
-                                              shortName:@"Microsoft"
-                                            buttonColor:buttonColor
-                                              iconImage:[UIImage imageWithContentsOfFile:iconPath]
-                                                 scopes:@[@"user.readwrite"]
-                                       customParameters:@{@"prompt" : @"consent"}
-                                           loginHintKey:@"login_hint"];
-          }
+          provider = [FUIOAuth microsoftAuthProvider];
           break;
         case kIDPGitHub:
-          {
-            UIColor *buttonColor = [UIColor colorWithRed:.2 green:.2 blue:.2 alpha:1.0];
-            NSString *iconPath = [[NSBundle mainBundle] pathForResource:@"githubsymbol"
-                                                                 ofType:@"png"];
-            if (!iconPath) {
-              NSLog(@"Warning: Unable to find GitHub icon.");
-            }
-            provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
-                                             providerID:@"github.com"
-                                        buttonLabelText:@"Sign in with GitHub"
-                                              shortName:@"GitHub"
-                                            buttonColor:buttonColor
-                                              iconImage:[UIImage imageWithContentsOfFile:iconPath]
-                                                 scopes:nil
-                                       customParameters:nil
-                                           loginHintKey:nil];
-          }
+          provider = [FUIOAuth githubAuthProvider];
+          break;
+        case kIDPYahoo:
+          provider = [FUIOAuth yahooAuthProvider];
+          break;
+        case kIDPApple:
+          provider = [FUIOAuth appleAuthProvider];
           break;
         default:
           break;
