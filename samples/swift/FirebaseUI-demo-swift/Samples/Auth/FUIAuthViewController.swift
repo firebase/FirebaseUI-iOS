@@ -38,6 +38,7 @@ enum Providers: Int, RawRepresentable {
   case Google
   case Facebook
   case Twitter
+  case Apple
   case Phone
 }
 
@@ -86,6 +87,9 @@ class FUIAuthViewController: UITableViewController {
                              animated: false,
                              scrollPosition: .none)
     self.tableView.selectRow(at: IndexPath(row: Providers.Twitter.rawValue, section: UISections.Providers.rawValue),
+                             animated: false,
+                             scrollPosition: .none)
+    self.tableView.selectRow(at: IndexPath(row: Providers.Apple.rawValue, section: UISections.Providers.rawValue),
                              animated: false,
                              scrollPosition: .none)
     self.tableView.selectRow(at: IndexPath(row: Providers.Phone.rawValue, section: UISections.Providers.rawValue),
@@ -302,6 +306,12 @@ class FUIAuthViewController: UITableViewController {
                                                                                     "user_friends",
                                                                                     "ads_read"])
               : FUIFacebookAuth()
+          case Providers.Apple.rawValue:
+            if #available(iOS 13.0, *) {
+              provider = FUIOAuth.appleAuthProvider()
+            } else {
+              provider = nil
+            }
           case Providers.Phone.rawValue:
             provider = FUIPhoneAuth(authUI: self.authUI!)
           default: provider = nil
