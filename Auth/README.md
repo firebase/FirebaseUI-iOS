@@ -51,7 +51,7 @@ Auth guides at the following links:
 - [Facebook](https://firebase.google.com/docs/auth/ios/facebook-login#before_you_begin)
 - [Phone](https://firebase.google.com/docs/auth/ios/phone-auth#before_you_begin)
 - [Sign in with Apple](https://firebase.google.com/docs/auth/ios/apple#before_you_begin)
-  - For Sign in with Apple, read the *Comply with Apple anonymized data requirements* section as well. 
+  - For Sign in with Apple, read the [Comply with Apple anonymized data requirements](https://firebase.google.com/docs/auth/ios/apple#comply-with-apple-anonymized-data-requirements) section as well. 
 
 ## Using FirebaseUI for Authentication
 
@@ -130,7 +130,7 @@ self.authUI.providers = providers;
 For Google Sign-in support, add custom URL schemes to your Xcode project
 (step 1 of the [implement Google Sign-In documentation](https://developers.google.com/firebase/docs/auth/ios/google-signin#2_implement_google_sign-in)).
 
-For Sign In with Apple support, add the Sign In with Apple capability to your entitlements file.
+For Sign in with Apple support, add the Sign in with Apple capability to your entitlements file.
 
 For Facebook Login support, follow step 3 and 4 of
 [Facebook login documentation](https://developers.google.com/firebase/docs/auth/ios/facebook-login#before_you_begin),
