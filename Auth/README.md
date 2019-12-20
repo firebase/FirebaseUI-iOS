@@ -18,7 +18,8 @@ FirebaseUI can be easily customized to fit in with the rest of your app's visual
 style, and it is open source, so you aren't constrained in realizing the user
 experience you want.
 
-Compatible FirebaseUI clients are also available for [Android](https://github.com/firebase/firebaseui-android/tree/master/auth)
+Compatible FirebaseUI Auth clients are also available for
+[Android](https://github.com/firebase/firebaseui-android/tree/master/auth)
 and [Web](https://github.com/firebase/firebaseui-web/).
 
 ## Table of Contents
@@ -49,6 +50,8 @@ Auth guides at the following links:
 - [Google](https://firebase.google.com/docs/auth/ios/google-signin#before_you_begin)
 - [Facebook](https://firebase.google.com/docs/auth/ios/facebook-login#before_you_begin)
 - [Phone](https://firebase.google.com/docs/auth/ios/phone-auth#before_you_begin)
+- [Sign in with Apple](https://firebase.google.com/docs/auth/ios/apple#before_you_begin)
+  - For Sign in with Apple, read the [Comply with Apple anonymized data requirements](https://firebase.google.com/docs/auth/ios/apple#comply-with-apple-anonymized-data-requirements) section as well. 
 
 ## Using FirebaseUI for Authentication
 
@@ -95,8 +98,13 @@ let providers: [FUIAuthProvider] = [
   FUIGoogleAuth(),
   FUIFacebookAuth(),
   FUIPhoneAuth(authUI: FUIAuth.defaultAuthUI()),
+  FUIOAuth.appleAuthProvider(),
+  FUIOAuth.twitterAuthProvider(),
+  FUIOAuth.githubAuthProvider(),
+  FUIOAuth.microsoftAuthProvider(),
+  FUIOAuth.yahooAuthProvider(),
 ]
-self.authUI?.providers = providers
+authUI?.providers = providers
 ```
 
 ```objective-c
@@ -109,13 +117,20 @@ NSArray<id<FUIAuthProvider>> *providers = @[
   [[FUIEmailAuth alloc] init],
   [[FUIGoogleAuth alloc] init],
   [[FUIFacebookAuth alloc] init],
-  [[FUIPhoneAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]]
+  [[FUIPhoneAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]],
+  [FUIOAuth appleAuthProvider],
+  [FUIOAuth twitterAuthProvider],
+  [FUIOAuth githubAuthProvider],
+  [FUIOAuth microsoftAuthProvider],
+  [FUIOAuth yahooAuthProvider]
 ];
-_authUI.providers = providers;
+self.authUI.providers = providers;
 ```
 
 For Google Sign-in support, add custom URL schemes to your Xcode project
 (step 1 of the [implement Google Sign-In documentation](https://developers.google.com/firebase/docs/auth/ios/google-signin#2_implement_google_sign-in)).
+
+For Sign in with Apple support, add the Sign in with Apple capability to your entitlements file.
 
 For Facebook Login support, follow step 3 and 4 of
 [Facebook login documentation](https://developers.google.com/firebase/docs/auth/ios/facebook-login#before_you_begin),
