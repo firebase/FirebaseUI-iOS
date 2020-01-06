@@ -259,7 +259,7 @@ static NSString *const kCellReuseIdentifier = @"cellReuseIdentifier";
   cell.textField.delegate = self;
   if (indexPath.row == 0) {
     cell.label.text = FUILocalizedString(kStr_Email);
-    cell.textField.enabled = NO;
+    cell.textField.enabled = _email == nil;
     _emailField = cell.textField;
     _emailField.text = _email;
     _emailField.placeholder = FUILocalizedString(kStr_EnterYourEmail);
