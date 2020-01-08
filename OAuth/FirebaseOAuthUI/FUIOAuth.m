@@ -284,16 +284,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)signOut {
-  FIRUser *user = _authUI.auth.currentUser;
-  __weak UIViewController *weakController = self.presentingViewController;
-  [user deleteWithCompletion:^(NSError * _Nullable error) {
-    if (error) {
-      __strong UIViewController *presentingViewController = weakController;
-      [FUIAuthBaseViewController showAlertWithMessage:error.localizedDescription
-                             presentingViewController:presentingViewController];
-      return;
-    }
-  }];
+  return;
 }
 
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(nullable NSString *)sourceApplication {

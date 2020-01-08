@@ -165,6 +165,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)signOut {
+  return;
 }
 
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(nullable NSString *)sourceApplication {
