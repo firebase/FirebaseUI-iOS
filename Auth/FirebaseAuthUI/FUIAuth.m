@@ -238,9 +238,10 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       // Check for "credential in use" conflict error and handle appropriately.
       if (error.code == FIRAuthErrorCodeCredentialAlreadyInUse) {
         FIRAuthCredential *newCredential = error.userInfo[FIRAuthErrorUserInfoUpdatedCredentialKey];
-        NSDictionary *userInfo = @{
-          FUIAuthCredentialKey : newCredential,
-        };
+        NSDictionary *userInfo = @{ };
+        if (newCredential) {
+          userInfo = @{ FUIAuthCredentialKey : newCredential };
+        }
         NSError *mergeError = [FUIAuthErrorUtils mergeConflictErrorWithUserInfo:userInfo
                                                                 underlyingError:error];
         [self completeSignInWithResult:authResult
