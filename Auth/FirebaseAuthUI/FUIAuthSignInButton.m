@@ -66,7 +66,8 @@ static const CGFloat kFontSize = 12.0f;
   [self setImage:image forState:UIControlStateNormal];
 
   CGFloat paddingTitle = 8.0f;
-  CGFloat paddingImage = 8.0f;
+  CGFloat contentWidth = self.imageView.frame.size.width + paddingTitle + self.titleLabel.frame.size.width;
+  CGFloat paddingImage = (frame.size.width - contentWidth) / 2 - 4.0f;
   BOOL isLTRLayout = [[UIApplication sharedApplication] userInterfaceLayoutDirection] ==
       UIUserInterfaceLayoutDirectionLeftToRight;
   if (isLTRLayout) {
