@@ -248,6 +248,4 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   return [[FBSDKLoginManager alloc] init];
 }
 
-@synthesize buttonAlignment;
-
 @end

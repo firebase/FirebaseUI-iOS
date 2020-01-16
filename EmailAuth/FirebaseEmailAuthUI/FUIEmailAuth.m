@@ -850,6 +850,4 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
   return nil;
 }
 
-@synthesize buttonAlignment;
-
 @end

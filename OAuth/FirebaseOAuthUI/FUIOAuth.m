@@ -79,11 +79,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, strong) UIColor *buttonBackgroundColor;
 
-/** @property buttonAlignment
-    @brief The alignment of the icon and text of the button.
- */
-@property(nonatomic) FUIButtonAlignment buttonAlignment;
-
 /** @property scopes
     @brief Array used to configure the OAuth scopes.
  */

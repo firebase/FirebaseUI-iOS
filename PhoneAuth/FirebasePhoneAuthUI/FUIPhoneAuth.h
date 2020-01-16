@@ -23,6 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface FUIPhoneAuth : NSObject <FUIAuthProvider>
 
+/** @property buttonAlignment
+    @brief The alignment of the icon and text of the button.
+ */
+@property(nonatomic, readwrite) FUIButtonAlignment buttonAlignment;
+
 /** @fn init
     @brief Please use @c initWithAuthUI: .
  */

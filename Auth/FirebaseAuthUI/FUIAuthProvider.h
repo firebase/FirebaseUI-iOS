@@ -105,7 +105,7 @@ static FUIAuthProviderSignInUserInfoKey FUIAuthProviderSignInUserInfoKeyAuthData
 /** @property buttonAlignment
     @brief The alignment of the icon and text of the button.
  */
-@property(nonatomic, readonly) FUIButtonAlignment buttonAlignment;
+@property(nonatomic, readwrite) FUIButtonAlignment buttonAlignment;
 
 /** @fn signInWithEmail:presentingViewController:completion:
     @brief Called when the user wants to sign in using this auth provider.

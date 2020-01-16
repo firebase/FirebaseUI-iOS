@@ -226,8 +226,6 @@ NS_ASSUME_NONNULL_BEGIN
   return alertController;
 }
 
-@synthesize buttonAlignment;
-
 @end
 
 NS_ASSUME_NONNULL_END
