@@ -219,4 +219,6 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   }
 }
 
+@synthesize buttonAlignment;
+
 @end

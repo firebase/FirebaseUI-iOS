@@ -154,6 +154,8 @@ NS_ASSUME_NONNULL_BEGIN
   return NO;
 }
 
+@synthesize buttonAlignment;
+
 @end
 
 NS_ASSUME_NONNULL_END

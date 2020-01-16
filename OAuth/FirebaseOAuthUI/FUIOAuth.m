@@ -79,6 +79,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, strong) UIColor *buttonBackgroundColor;
 
+/** @property buttonAlignment
+    @brief The alignment of the icon and text of the button.
+ */
+@property(nonatomic) FUIButtonAlignment buttonAlignment;
+
 /** @property scopes
     @brief Array used to configure the OAuth scopes.
  */
@@ -185,16 +190,18 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (FUIOAuth *)appleAuthProvider {
-  return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
-                               providerID:@"apple.com"
-                          buttonLabelText:@"Sign in with Apple"
-                                shortName:@"Apple"
-                              buttonColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]
-                                iconImage:[FUIAuthUtils imageNamed:@"ic_apple"
-                                               fromBundleNameOrNil:@"FirebaseOAuthUI"]
-                                   scopes:@[@"name", @"email"]
-                         customParameters:nil
-                             loginHintKey:nil];
+  FUIOAuth *provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+                                             providerID:@"apple.com"
+                                        buttonLabelText:@"Sign in with Apple"
+                                              shortName:@"Apple"
+                                            buttonColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]
+                                              iconImage:[FUIAuthUtils imageNamed:@"ic_apple"
+                                                             fromBundleNameOrNil:@"FirebaseOAuthUI"]
+                                                 scopes:@[@"name", @"email"]
+                                       customParameters:nil
+                                           loginHintKey:nil];
+  provider.buttonAlignment = FUIButtonAlignmentCenter;
+  return provider;
 }
 
 #pragma mark - FUIAuthProvider
