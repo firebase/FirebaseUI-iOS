@@ -53,7 +53,7 @@ typedef NSString *FUIAuthProviderSignInUserInfoKey NS_TYPED_ENUM;
    @brief The alignment of the icon and text of the button.
 */
 typedef NS_ENUM(NSInteger, FUIButtonAlignment) {
-    FUIButtonAlignmentLeft,
+    FUIButtonAlignmentLeading,
     FUIButtonAlignmentCenter,
 };
 
