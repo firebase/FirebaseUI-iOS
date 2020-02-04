@@ -36,6 +36,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, strong, readwrite, nullable) NSString *emailLink;
 
+/** @property buttonAlignment
+    @brief The alignment of the icon and text of the button.
+ */
+@property(nonatomic, readwrite) FUIButtonAlignment buttonAlignment;
+
 /** @fn initAuthAuthUI:signInMethod:forceSameDevice:allowNewEmailAccounts:actionCodeSetting:
     @brief Initializer with several configurations.
     @param authUI The auth UI object that this auth UI provider associate with.

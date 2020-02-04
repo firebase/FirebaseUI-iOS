@@ -52,7 +52,8 @@ static const CGFloat kFontSize = 12.0f;
                         image:(UIImage *)image
                          text:(NSString *)text
               backgroundColor:(UIColor *)backgroundColor
-                    textColor:(UIColor *)textColor {
+                    textColor:(UIColor *)textColor
+              buttonAlignment:(FUIButtonAlignment)buttonAlignment {
   self = [super initWithFrame:frame];
   if (!self) {
     return nil;
@@ -66,7 +67,11 @@ static const CGFloat kFontSize = 12.0f;
   [self setImage:image forState:UIControlStateNormal];
 
   CGFloat paddingTitle = 8.0f;
+  CGFloat contentWidth = self.imageView.frame.size.width + paddingTitle + self.titleLabel.frame.size.width;
   CGFloat paddingImage = 8.0f;
+  if (buttonAlignment == FUIButtonAlignmentCenter) {
+    paddingImage = (frame.size.width - contentWidth) / 2 - 4.0f;
+  }
   BOOL isLTRLayout = [[UIApplication sharedApplication] userInterfaceLayoutDirection] ==
       UIUserInterfaceLayoutDirectionLeftToRight;
   if (isLTRLayout) {
@@ -101,7 +106,8 @@ static const CGFloat kFontSize = 12.0f;
                        image:providerUI.icon
                         text:providerUI.signInLabel
              backgroundColor:providerUI.buttonBackgroundColor
-                   textColor:providerUI.buttonTextColor];
+                   textColor:providerUI.buttonTextColor
+             buttonAlignment:providerUI.buttonAlignment];
 }
 
 @end

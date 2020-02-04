@@ -49,6 +49,15 @@ typedef void (^FUIAuthProviderSignInCompletionBlock) (
 typedef NSString *FUIAuthProviderSignInUserInfoKey NS_TYPED_ENUM;
 
 /**
+   @typedef FUIButtonAlignment
+   @brief The alignment of the icon and text of the button.
+*/
+typedef NS_ENUM(NSInteger, FUIButtonAlignment) {
+    FUIButtonAlignmentLeading,
+    FUIButtonAlignmentCenter,
+};
+
+/**
     For Firebase-based authentication operations, use this key to obtain the original auth result
     that was returned from the sign-in operation.
  */
@@ -92,6 +101,11 @@ static FUIAuthProviderSignInUserInfoKey FUIAuthProviderSignInUserInfoKeyAuthData
     @brief The text color that should be used for the sign in button of the provider.
  */
 @property(nonatomic, strong, readonly) UIColor *buttonTextColor;
+
+/** @property buttonAlignment
+    @brief The alignment of the icon and text of the button.
+ */
+@property(nonatomic, readwrite) FUIButtonAlignment buttonAlignment;
 
 /** @fn signInWithEmail:presentingViewController:completion:
     @brief Called when the user wants to sign in using this auth provider.

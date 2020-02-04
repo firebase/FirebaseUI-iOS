@@ -38,6 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, readonly, copy) NSArray<NSString *> *scopes;
 
+/** @property buttonAlignment
+    @brief The alignment of the icon and text of the button.
+ */
+@property(nonatomic, readwrite) FUIButtonAlignment buttonAlignment;
+
 /** @fn init
     @brief Conevenience initializer. Uses a default permission of `@[ "email" ]`.
  */
