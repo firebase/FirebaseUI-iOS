@@ -59,6 +59,13 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
       UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
   self.inputField.userInteractionEnabled = YES;
 
+  if (@available(iOS 12.0, *)) {
+    if ([self.inputField respondsToSelector:@selector(setTextContentType:)]) {
+      id<UITextInputTraits> inputField = (id<UITextInputTraits>)self.inputField;
+      inputField.textContentType = UITextContentTypeOneTimeCode;
+    }
+  }
+
   // Initialization code
   _codeEntry = [NSMutableString string];
 
@@ -177,6 +184,10 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
     return UITextContentTypeOneTimeCode;
   }
   return nil;
+}
+
+- (void)setTextContentType:(_Null_unspecified UITextContentType)textContentType {
+  // do nothing
 }
 
 @end
