@@ -5,6 +5,7 @@ xcode_scheme: FirebaseUI
 
 rvm: 2.6.4
 before_install:
+  - gem update cocoapods
   - gem install bundler
   - bundle install
   - gem install xcpretty
