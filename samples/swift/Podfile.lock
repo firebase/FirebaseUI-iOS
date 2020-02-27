@@ -233,39 +233,39 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseUI (8.4.0):
-    - FirebaseUI/Anonymous (= 8.4.0)
-    - FirebaseUI/Auth (= 8.4.0)
-    - FirebaseUI/Database (= 8.4.0)
-    - FirebaseUI/Email (= 8.4.0)
-    - FirebaseUI/Facebook (= 8.4.0)
-    - FirebaseUI/Firestore (= 8.4.0)
-    - FirebaseUI/Google (= 8.4.0)
-    - FirebaseUI/OAuth (= 8.4.0)
-    - FirebaseUI/Phone (= 8.4.0)
-    - FirebaseUI/Storage (= 8.4.0)
-  - FirebaseUI/Anonymous (8.4.0):
+  - FirebaseUI (8.4.1):
+    - FirebaseUI/Anonymous (= 8.4.1)
+    - FirebaseUI/Auth (= 8.4.1)
+    - FirebaseUI/Database (= 8.4.1)
+    - FirebaseUI/Email (= 8.4.1)
+    - FirebaseUI/Facebook (= 8.4.1)
+    - FirebaseUI/Firestore (= 8.4.1)
+    - FirebaseUI/Google (= 8.4.1)
+    - FirebaseUI/OAuth (= 8.4.1)
+    - FirebaseUI/Phone (= 8.4.1)
+    - FirebaseUI/Storage (= 8.4.1)
+  - FirebaseUI/Anonymous (8.4.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Auth (8.4.0):
+  - FirebaseUI/Auth (8.4.1):
     - Firebase/Auth (~> 6.0)
     - GoogleUtilities/UserDefaults
-  - FirebaseUI/Database (8.4.0):
+  - FirebaseUI/Database (8.4.1):
     - Firebase/Database (~> 6.0)
-  - FirebaseUI/Email (8.4.0):
+  - FirebaseUI/Email (8.4.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Facebook (8.4.0):
+  - FirebaseUI/Facebook (8.4.1):
     - FBSDKLoginKit (~> 5.0)
     - FirebaseUI/Auth
-  - FirebaseUI/Firestore (8.4.0):
+  - FirebaseUI/Firestore (8.4.1):
     - Firebase/Firestore
-  - FirebaseUI/Google (8.4.0):
+  - FirebaseUI/Google (8.4.1):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 5.0)
-  - FirebaseUI/OAuth (8.4.0):
+  - FirebaseUI/OAuth (8.4.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Phone (8.4.0):
+  - FirebaseUI/Phone (8.4.1):
     - FirebaseUI/Auth
-  - FirebaseUI/Storage (8.4.0):
+  - FirebaseUI/Storage (8.4.1):
     - Firebase/Storage (~> 6.0)
     - SDWebImage (~> 5.0)
   - GoogleDataTransport (3.3.0)
@@ -376,7 +376,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 0144e0706a4761f1b0e8679572eba8095ddb59be
   FirebaseFirestore: b7e6adda31974dbd259fc25b541e8850420c92ed
   FirebaseStorage: 6c5263796af3b1be82ed173598aade47535fe125
-  FirebaseUI: 433550cb9e3d03ec7ee2c25f87493f76358d9b68
+  FirebaseUI: 69f7e480265758a9a9ea39915694b0949bcab23f
   GoogleDataTransport: 574a983e829327d7c18f2627f65d9e80164ea8a4
   GoogleDataTransportCCTSupport: cad3cd6cdbdbad6b5c2c9206ec413402755faaaa
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
