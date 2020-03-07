@@ -17,10 +17,17 @@
 #import "FUIStorageImageLoader.h"
 #import "FIRStorageDownloadTask+SDWebImage.h"
 #import <FirebaseCore/FirebaseCore.h>
+#import <GTMSessionFetcher/GTMSessionFetcher.h>
 
 @interface NSURL ()
 
 @property (nonatomic, strong, readwrite, nullable) FIRStorageReference *sd_storageReference;
+
+@end
+
+@interface FIRStorageTask ()
+
+@property(strong, atomic) GTMSessionFetcher *fetcher;
 
 @end
 
@@ -79,7 +86,6 @@
   }
   // Download the image from Firebase Storage
   
-  // TODO: Support progressive image loading using the `GTMSessionFetcher.downloadedData` with `SDImageLoaderDecodeProgressiveImageData`
   FIRStorageDownloadTask * download = [storageRef dataWithMaxSize:size
                                                        completion:^(NSData * _Nullable data, NSError * _Nullable error) {
                                                          if (error) {
@@ -102,6 +108,24 @@
                                                        }];
   // Observe the progress changes
   [download observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
+    // Check progressive decoding if need
+    if (options & SDWebImageProgressiveLoad) {
+      FIRStorageDownloadTask *task = snapshot.task;
+      // Currently, FIRStorageDownloadTask does not have the API to grab partial data
+      // But since FirebaseUI and Firebase are seamless component, we access the internal fetcher here
+      GTMSessionFetcher *fetcher = task.fetcher;
+      // Get the partial image data
+      NSData *partialData = [fetcher.downloadedData copy];
+      // Get the finish status
+      BOOL finished = (fetcher.downloadedLength >= fetcher.bodyLength);
+      // This progress block is callbacked on global queue, so it's OK to decode
+      UIImage *image = SDImageLoaderDecodeProgressiveImageData(partialData, url, finished, download, options, context);
+      if (image) {
+        if (completedBlock) {
+          completedBlock(image, partialData, nil, NO);
+        }
+      }
+    }
     NSProgress *progress = snapshot.progress;
     if (progressBlock) {
       progressBlock((NSInteger)progress.completedUnitCount,
