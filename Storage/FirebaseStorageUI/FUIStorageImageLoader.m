@@ -119,11 +119,13 @@
       // Get the finish status
       BOOL finished = (fetcher.downloadedLength >= fetcher.bodyLength);
       // This progress block is callbacked on global queue, so it's OK to decode
-      UIImage *image = SDImageLoaderDecodeProgressiveImageData(partialData, url, finished, download, options, context);
+      UIImage *image = SDImageLoaderDecodeProgressiveImageData(partialData, url, finished, task, options, context);
       if (image) {
-        if (completedBlock) {
-          completedBlock(image, partialData, nil, NO);
-        }
+        dispatch_main_async_safe(^{
+          if (completedBlock) {
+            completedBlock(image, partialData, nil, NO);
+          }
+        });
       }
     }
     NSProgress *progress = snapshot.progress;
