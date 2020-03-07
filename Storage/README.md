@@ -25,19 +25,27 @@ UIImageView *imageView = ...;
 
 // Load the image using SDWebImage
 [imageView sd_setImageWithStorageReference:reference placeholderImage:placeholderImage];
+
+// You can also use gs:// URL directly with StorageImageLoader
+NSURL *storageUrl = [NSURL URLWithString:@"gs://..."];
+[imageView sd_setImageWithURL:storageUrl placeholderImage:placeholderImage options:0 context:@{SDWebImageContextImageLoader : FUIStorageImageLoader.sharedLoader}];
 ```
 
 ```swift
 // Swift
 
 // Reference to an image file in Cloud Storage
-let reference: StorageReference = ...;
+let reference: StorageReference = ...
 
 // UIImageView in your ViewController
-let imageView: UIImageView = ...;
+let imageView: UIImageView = ...
 
 // Load the image using SDWebImage
-imageView.sd_setImageWithStorageReference(reference, placeholderImage: placeholderImage)
+imageView.sd_setImage(with: reference, placeholderImage: placeholderImage)
+
+// You can also use gs:// URL directly with StorageImageLoader
+let storageUrl = URL(string: "gs://...")
+imageView.sd_setImage(with: storageUrl, placeholderImage: placeholderImage, options:[], context: [.imageLoader : StorageImageLoader.shared])
 ```
 
 Images are cached by their path in Cloud Storage, so repeated loads will be
