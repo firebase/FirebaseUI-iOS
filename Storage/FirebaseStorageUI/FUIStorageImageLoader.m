@@ -18,6 +18,12 @@
 #import "FIRStorageDownloadTask+SDWebImage.h"
 #import <FirebaseCore/FirebaseCore.h>
 
+@interface NSURL ()
+
+@property (nonatomic, strong, readwrite, nullable) FIRStorageReference *sd_storageReference;
+
+@end
+
 @implementation FUIStorageImageLoader
 
 + (FUIStorageImageLoader *)sharedLoader {
@@ -40,11 +46,24 @@
 #pragma mark - SDImageLoader Protocol
 
 - (BOOL)canRequestImageForURL:(NSURL *)url {
+  if (!url) {
+    return NO;
+  }
+  if ([url.scheme isEqualToString:@"gs"]) {
+    return YES;
+  }
   return url.sd_storageReference != nil;
 }
 
 - (id<SDWebImageOperation>)requestImageWithURL:(NSURL *)url options:(SDWebImageOptions)options context:(SDWebImageContext *)context progress:(SDImageLoaderProgressBlock)progressBlock completed:(SDImageLoaderCompletedBlock)completedBlock {
   FIRStorageReference *storageRef = url.sd_storageReference;
+  if (!storageRef) {
+    // Create Storage Reference from URL
+    FIRStorage *storage = [FIRStorage storageWithURL:url.absoluteString];
+    storageRef = storage.reference;
+    url.sd_storageReference = storageRef;
+  }
+  
   if (!storageRef) {
     if (completedBlock) {
       NSError *error = [NSError errorWithDomain:SDWebImageErrorDomain code:SDWebImageErrorInvalidURL userInfo:@{NSLocalizedDescriptionKey : @"The provided image url must have an associated FIRStorageReference."}];
