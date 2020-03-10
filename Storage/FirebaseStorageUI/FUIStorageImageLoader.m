@@ -31,12 +31,6 @@
 
 @end
 
-@interface FUIStorageImageLoader ()
-
-@property (nonatomic, strong) dispatch_queue_t coderQueue;
-
-@end
-
 @implementation FUIStorageImageLoader
 
 + (FUIStorageImageLoader *)sharedLoader {
@@ -52,7 +46,6 @@
   self = [super init];
   if (self) {
     _defaultMaxImageSize = 10e6;
-    _coderQueue = dispatch_queue_create("com.google.firebaseui.storage.coderQueue", DISPATCH_QUEUE_SERIAL);
   }
   return self;
 }
@@ -93,7 +86,8 @@
     size = self.defaultMaxImageSize;
   }
   // Download the image from Firebase Storage
-  
+  // Each download task use independent serial coder queue, to ensure callback in order during prorgessive decoding
+  dispatch_queue_t coderQueue = dispatch_queue_create("com.google.firebaseui.storage.coderQueue", DISPATCH_QUEUE_SERIAL);
   FIRStorageDownloadTask * download = [storageRef dataWithMaxSize:size
                                                        completion:^(NSData * _Nullable data, NSError * _Nullable error) {
                                                          if (error) {
@@ -105,7 +99,7 @@
                                                            return;
                                                          }
                                                          // Decode the image with data
-                                                         dispatch_async(self.coderQueue, ^{
+                                                         dispatch_async(coderQueue, ^{
                                                            @autoreleasepool {
                                                              UIImage *image = SDImageLoaderDecodeImageData(data, url, options, context);
                                                              dispatch_main_async_safe(^{
@@ -134,7 +128,7 @@
         // Get the finish status
         BOOL finished = receivedSize >= expectedSize;
         // This progress block may be called on main queue or global queue (depends configuration), always dispatched on coder queue
-        dispatch_async(self.coderQueue, ^{
+        dispatch_async(coderQueue, ^{
           @autoreleasepool {
             UIImage *image = SDImageLoaderDecodeProgressiveImageData(partialData, url, finished, task, options, context);
             if (image) {
