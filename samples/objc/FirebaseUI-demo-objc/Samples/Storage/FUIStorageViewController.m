@@ -70,7 +70,7 @@
     referenceWithPath:url.path ?: @""];
 
   [self.imageView sd_setImageWithStorageReference:storageRef
-                                     maxImageSize:10e6
+                                     maxImageSize:10e7
                                  placeholderImage:nil
                                           options:SDWebImageProgressiveLoad
                                        completion:^(UIImage *image,
