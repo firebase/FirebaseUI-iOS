@@ -31,6 +31,12 @@
 
 @end
 
+@interface FUIStorageImageLoader ()
+
+@property (nonatomic, strong) dispatch_queue_t coderQueue;
+
+@end
+
 @implementation FUIStorageImageLoader
 
 + (FUIStorageImageLoader *)sharedLoader {
@@ -45,7 +51,8 @@
 - (instancetype)init {
   self = [super init];
   if (self) {
-    self.defaultMaxImageSize = 10e6;
+    _defaultMaxImageSize = 10e6;
+    _coderQueue = dispatch_queue_create("com.google.firebaseui.storage.coderQueue", DISPATCH_QUEUE_SERIAL);
   }
   return self;
 }
@@ -66,8 +73,9 @@
   FIRStorageReference *storageRef = url.sd_storageReference;
   if (!storageRef) {
     // Create Storage Reference from URL
-    FIRStorage *storage = [FIRStorage storageWithURL:url.absoluteString];
-    storageRef = storage.reference;
+    NSString *bucketUrl = [NSString stringWithFormat:@"gs://%@", url.host];
+    FIRStorage *storage = [FIRStorage storageWithURL:bucketUrl];
+    storageRef = [storage referenceWithPath:url.path];
     url.sd_storageReference = storageRef;
   }
   
@@ -97,13 +105,15 @@
                                                            return;
                                                          }
                                                          // Decode the image with data
-                                                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                                                           UIImage *image = SDImageLoaderDecodeImageData(data, url, options, context);
-                                                           dispatch_main_async_safe(^{
-                                                             if (completedBlock) {
-                                                               completedBlock(image, data, nil, YES);
-                                                             }
-                                                           });
+                                                         dispatch_async(self.coderQueue, ^{
+                                                           @autoreleasepool {
+                                                             UIImage *image = SDImageLoaderDecodeImageData(data, url, options, context);
+                                                             dispatch_main_async_safe(^{
+                                                               if (completedBlock) {
+                                                                 completedBlock(image, data, nil, YES);
+                                                               }
+                                                             });
+                                                           }
                                                          });
                                                        }];
   // Observe the progress changes
@@ -116,14 +126,24 @@
       GTMSessionFetcher *fetcher = task.fetcher;
       // Get the partial image data
       NSData *partialData = [fetcher.downloadedData copy];
-      // Get the finish status
-      BOOL finished = (fetcher.downloadedLength >= fetcher.bodyLength);
-      // This progress block is callbacked on global queue, so it's OK to decode
-      UIImage *image = SDImageLoaderDecodeProgressiveImageData(partialData, url, finished, task, options, context);
-      if (image) {
-        dispatch_main_async_safe(^{
-          if (completedBlock) {
-            completedBlock(image, partialData, nil, NO);
+      // Get response
+      int64_t expectedSize = fetcher.response.expectedContentLength;
+      expectedSize = expectedSize > 0 ? expectedSize : 0;
+      int64_t receivedSize = fetcher.downloadedLength;
+      if (expectedSize != 0) {
+        // Get the finish status
+        BOOL finished = receivedSize >= expectedSize;
+        // This progress block may be called on main queue or global queue (depends configuration), always dispatched on coder queue
+        dispatch_async(self.coderQueue, ^{
+          @autoreleasepool {
+            UIImage *image = SDImageLoaderDecodeProgressiveImageData(partialData, url, finished, task, options, context);
+            if (image) {
+              dispatch_main_async_safe(^{
+                if (completedBlock) {
+                  completedBlock(image, partialData, nil, NO);
+                }
+              });
+            }
           }
         });
       }
