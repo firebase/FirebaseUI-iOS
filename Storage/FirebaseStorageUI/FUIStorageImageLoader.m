@@ -87,29 +87,28 @@
   }
   // Download the image from Firebase Storage
   // Each download task use independent serial coder queue, to ensure callback in order during prorgessive decoding
-  dispatch_queue_t coderQueue = dispatch_queue_create("com.google.firebaseui.storage.coderQueue", DISPATCH_QUEUE_SERIAL);
-  FIRStorageDownloadTask * download = [storageRef dataWithMaxSize:size
-                                                       completion:^(NSData * _Nullable data, NSError * _Nullable error) {
-                                                         if (error) {
-                                                           dispatch_main_async_safe(^{
-                                                             if (completedBlock) {
-                                                               completedBlock(nil, nil, error, YES);
-                                                             }
-                                                           });
-                                                           return;
-                                                         }
-                                                         // Decode the image with data
-                                                         dispatch_async(coderQueue, ^{
-                                                           @autoreleasepool {
-                                                             UIImage *image = SDImageLoaderDecodeImageData(data, url, options, context);
-                                                             dispatch_main_async_safe(^{
-                                                               if (completedBlock) {
-                                                                 completedBlock(image, data, nil, YES);
-                                                               }
-                                                             });
-                                                           }
-                                                         });
-                                                       }];
+  NSOperationQueue *coderQueue = [NSOperationQueue new];
+  coderQueue.maxConcurrentOperationCount = 1;
+  FIRStorageDownloadTask * download = [storageRef dataWithMaxSize:size completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+    if (error) {
+      dispatch_main_async_safe(^{
+        if (completedBlock) {
+          completedBlock(nil, nil, error, YES);
+        }
+      });
+      return;
+    }
+    // Decode the image with data
+    [coderQueue cancelAllOperations];
+    [coderQueue addOperationWithBlock:^{
+      UIImage *image = SDImageLoaderDecodeImageData(data, url, options, context);
+      dispatch_main_async_safe(^{
+        if (completedBlock) {
+          completedBlock(image, data, nil, YES);
+        }
+      });
+    }];
+  }];
   // Observe the progress changes
   [download observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
     // Check progressive decoding if need
@@ -128,8 +127,8 @@
         // Get the finish status
         BOOL finished = receivedSize >= expectedSize;
         // This progress block may be called on main queue or global queue (depends configuration), always dispatched on coder queue
-        dispatch_async(coderQueue, ^{
-          @autoreleasepool {
+        if (coderQueue.operationCount == 0) {
+          [coderQueue addOperationWithBlock:^{
             UIImage *image = SDImageLoaderDecodeProgressiveImageData(partialData, url, finished, task, options, context);
             if (image) {
               dispatch_main_async_safe(^{
@@ -138,8 +137,8 @@
                 }
               });
             }
-          }
-        });
+          }];
+        }
       }
     }
     NSProgress *progress = snapshot.progress;
