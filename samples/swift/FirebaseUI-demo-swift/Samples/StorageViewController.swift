@@ -63,7 +63,7 @@ class StorageViewController: UIViewController {
     }
   }
   
-  @objc fileprivate func flushCache() {
+  @objc private func flushCache() {
     SDImageCache.shared.clearMemory()
     SDImageCache.shared.clearDisk()
   }
