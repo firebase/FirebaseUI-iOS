@@ -24,6 +24,10 @@ class StorageViewController: UIViewController {
   @IBOutlet fileprivate var textField: UITextField!
 
   fileprivate var storageRef = Storage.storage().reference()
+  
+  override func viewDidLoad() {
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear Cache", style: .plain, target: self, action: #selector(flushCache))
+  }
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
@@ -50,11 +54,18 @@ class StorageViewController: UIViewController {
     self.storageRef = Storage.storage().reference(withPath: url.path)
 
     self.imageView.sd_setImage(with: self.storageRef,
-      placeholderImage: nil) { (image, error, cacheType, storageRef) in
+                               maxImageSize: 10000000,
+                               placeholderImage: nil,
+                               options: [.progressiveLoad]) { (image, error, cacheType, storageRef) in
       if let error = error {
         print("Error loading image: \(error)")
       }
     }
+  }
+  
+  @objc private func flushCache() {
+    SDImageCache.shared.clearMemory()
+    SDImageCache.shared.clearDisk()
   }
 
   // MARK: Keyboard boilerplate

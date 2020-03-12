@@ -37,6 +37,10 @@
   self.imageView.contentMode = UIViewContentModeScaleAspectFit;
   self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
   self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+  self.navigationItem.rightBarButtonItem = [UIBarButtonItem.alloc initWithTitle:@"Clear Cache"
+                                                                          style:UIBarButtonItemStylePlain
+                                                                         target:self
+                                                                         action:@selector(flushCache)];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -66,7 +70,9 @@
     referenceWithPath:url.path ?: @""];
 
   [self.imageView sd_setImageWithStorageReference:storageRef
+                                     maxImageSize:10e7
                                  placeholderImage:nil
+                                          options:SDWebImageProgressiveLoad
                                        completion:^(UIImage *image,
                                                     NSError *error,
                                                     SDImageCacheType
@@ -76,6 +82,11 @@
       NSLog(@"Error loading image: %@", error.localizedDescription);
     }
   }];
+}
+
+- (void)flushCache {
+    [SDImageCache.sharedImageCache clearMemory];
+    [SDImageCache.sharedImageCache clearDiskOnCompletion:nil];
 }
 
 #pragma mark - Keyboard boilerplate
