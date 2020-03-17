@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
+set -euxo pipefail
 
 EXIT_STATUS=0
 
@@ -21,7 +21,7 @@ do
     -workspace ${schemes[i]}.xcworkspace \
     -scheme ${schemes[i]} \
     -sdk iphonesimulator \
-    -destination 'platform=iOS Simulator,OS=12.2,name=iPhone XS' \
+    -destination 'platform=iOS Simulator,OS=13.3,name=iPhone 11 Pro' \
     build \
     test \
     ONLY_ACTIVE_ARCH=YES \
