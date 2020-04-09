@@ -61,7 +61,7 @@
                                 <userDefinedRuntimeAttribute type="string" keyPath="codePlaceholder" value="-"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <outlet property="fuiCodeFieldDelegate" destination="-1" id="PaC-Vo-cCu"/>
+                                <outlet property="codeFieldDelegate" destination="-1" id="0qx-3P-32R"/>
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PcA-t5-BTE">
