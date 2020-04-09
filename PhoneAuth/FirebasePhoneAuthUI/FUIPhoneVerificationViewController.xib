@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FUIPhoneVerificationViewController">
             <connections>
                 <outlet property="_actionDescriptionLabel" destination="ND2-cc-05r" id="hQo-f9-hBE"/>
-                <outlet property="_codeField" destination="WCV-7f-nzd" id="RJn-XF-C6g"/>
+                <outlet property="_codeField" destination="7po-Gb-ik0" id="P5u-Rr-jTl"/>
                 <outlet property="_phoneNumberButton" destination="pLV-Br-GnD" id="yvI-Uj-E95"/>
                 <outlet property="_resendCodeButton" destination="PcA-t5-BTE" id="LzC-9b-60t"/>
                 <outlet property="_resendConfirmationCodeTimerLabel" destination="WHW-Rm-HAw" id="zfA-Cb-SSz"/>
@@ -48,23 +46,24 @@
                                 <action selector="onPhoneNumberSelected:" destination="-1" eventType="touchUpInside" id="NaO-jz-NQo"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WCV-7f-nzd" customClass="FUICodeField">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7po-Gb-ik0" userLabel="Code Field" customClass="FUICodeField">
                             <rect key="frame" x="84.666666666666686" y="88.333333333333329" width="245" height="59.999999999999986"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="60" id="1I2-T1-6XH"/>
-                                <constraint firstAttribute="width" constant="245" id="OY2-MW-bRs"/>
+                                <constraint firstAttribute="width" constant="245" id="wSo-IS-TSd"/>
+                                <constraint firstAttribute="height" constant="60" id="y8O-fA-tve"/>
                             </constraints>
+                            <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="40"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="one-time-code"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="codeLength">
                                     <integer key="value" value="6"/>
                                 </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="-"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="codePlaceholder" value="-"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <outlet property="delegate" destination="-1" id="iNl-NI-3yL"/>
+                                <outlet property="fuiCodeFieldDelegate" destination="-1" id="PaC-Vo-cCu"/>
                             </connections>
-                        </view>
+                        </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PcA-t5-BTE">
                             <rect key="frame" x="20" y="158.33333333333334" width="374" height="30"/>
                             <constraints>
@@ -76,7 +75,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resend code in" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHW-Rm-HAw">
-                            <rect key="frame" x="20" y="164.33333333333334" width="374.66666666666669" height="17"/>
+                            <rect key="frame" x="20" y="164.33333333333334" width="374" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="dhl-OS-L3V"/>
                             </constraints>
@@ -91,7 +90,7 @@
                                 <fragment content="By tapping Continue you are indicating that you agree to the [Terms of Service].">
                                     <attributes>
                                         <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="12" name=".AppleSystemUIFont"/>
+                                        <font key="NSFont" metaFont="label" size="12"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                     </attributes>
                                 </fragment>
@@ -102,22 +101,22 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="WHW-Rm-HAw" firstAttribute="leading" secondItem="dye-T3-FoY" secondAttribute="leading" constant="20" id="0De-xW-B7U"/>
-                        <constraint firstItem="IbP-WL-gSm" firstAttribute="width" secondItem="WCV-7f-nzd" secondAttribute="width" id="1O8-sk-mzG"/>
                         <constraint firstAttribute="trailing" secondItem="pLV-Br-GnD" secondAttribute="trailing" constant="72" id="4E8-Nz-0ej"/>
-                        <constraint firstItem="PcA-t5-BTE" firstAttribute="top" secondItem="WCV-7f-nzd" secondAttribute="bottom" constant="10" id="5D4-Ae-1RK"/>
                         <constraint firstItem="IbP-WL-gSm" firstAttribute="top" secondItem="PcA-t5-BTE" secondAttribute="bottom" constant="20" id="7Sc-Dv-sZG"/>
+                        <constraint firstItem="IbP-WL-gSm" firstAttribute="width" secondItem="7po-Gb-ik0" secondAttribute="width" id="CFo-8q-Xi5"/>
+                        <constraint firstItem="7po-Gb-ik0" firstAttribute="centerX" secondItem="dye-T3-FoY" secondAttribute="centerX" id="HGd-4a-J3f"/>
                         <constraint firstAttribute="trailing" secondItem="ND2-cc-05r" secondAttribute="trailing" constant="20" id="IAN-91-GEI"/>
                         <constraint firstItem="pLV-Br-GnD" firstAttribute="top" secondItem="ND2-cc-05r" secondAttribute="bottom" id="OTf-Jb-T2S"/>
                         <constraint firstAttribute="trailing" secondItem="PcA-t5-BTE" secondAttribute="trailing" constant="20" id="Qoc-Ld-UfD"/>
                         <constraint firstItem="ND2-cc-05r" firstAttribute="centerX" secondItem="dye-T3-FoY" secondAttribute="centerX" id="XmG-ll-T2V"/>
-                        <constraint firstItem="WCV-7f-nzd" firstAttribute="top" secondItem="pLV-Br-GnD" secondAttribute="bottom" constant="8" id="ZRx-YX-9UF"/>
                         <constraint firstItem="WHW-Rm-HAw" firstAttribute="centerX" secondItem="ND2-cc-05r" secondAttribute="centerX" id="am3-Zw-DRc"/>
                         <constraint firstItem="ND2-cc-05r" firstAttribute="leading" secondItem="dye-T3-FoY" secondAttribute="leading" constant="20" id="d4U-su-icR"/>
                         <constraint firstAttribute="trailing" secondItem="WHW-Rm-HAw" secondAttribute="trailing" constant="20" id="dJO-pk-zhO"/>
-                        <constraint firstItem="WHW-Rm-HAw" firstAttribute="top" secondItem="WCV-7f-nzd" secondAttribute="bottom" constant="16" id="gmO-lX-GmB"/>
+                        <constraint firstItem="IbP-WL-gSm" firstAttribute="centerX" secondItem="7po-Gb-ik0" secondAttribute="centerX" id="dYh-7Q-Gr2"/>
                         <constraint firstItem="ND2-cc-05r" firstAttribute="top" secondItem="dye-T3-FoY" secondAttribute="top" constant="30" id="isu-X4-ahE"/>
-                        <constraint firstItem="WCV-7f-nzd" firstAttribute="centerX" secondItem="dye-T3-FoY" secondAttribute="centerX" id="k8O-qS-evd"/>
-                        <constraint firstItem="IbP-WL-gSm" firstAttribute="centerX" secondItem="WCV-7f-nzd" secondAttribute="centerX" id="qBQ-sU-TD5"/>
+                        <constraint firstItem="PcA-t5-BTE" firstAttribute="top" secondItem="7po-Gb-ik0" secondAttribute="bottom" constant="10.000000000000028" id="jWS-ia-q97"/>
+                        <constraint firstItem="WHW-Rm-HAw" firstAttribute="top" secondItem="7po-Gb-ik0" secondAttribute="bottom" constant="16.000000000000028" id="qlJ-sN-IqD"/>
+                        <constraint firstItem="7po-Gb-ik0" firstAttribute="top" secondItem="pLV-Br-GnD" secondAttribute="bottom" constant="7.9999999999999858" id="s6E-4j-tg9"/>
                         <constraint firstItem="pLV-Br-GnD" firstAttribute="leading" secondItem="dye-T3-FoY" secondAttribute="leading" constant="72" id="sXd-Vz-5Qy"/>
                         <constraint firstAttribute="bottom" secondItem="IbP-WL-gSm" secondAttribute="bottom" constant="5" id="svL-ih-Jnz"/>
                         <constraint firstItem="PcA-t5-BTE" firstAttribute="leading" secondItem="dye-T3-FoY" secondAttribute="leading" constant="20" id="wJz-al-TQH"/>

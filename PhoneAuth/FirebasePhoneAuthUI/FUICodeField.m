@@ -25,11 +25,7 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
 
 @interface FUICodeField ()
 
-@property (nonatomic, retain, readonly) UIView *inputField;
-
-@property (weak, nonatomic) IBOutlet UILabel *digits;
-
-@property (nonatomic, readonly) IBInspectable NSString *placeholder;
+@property (nonatomic, readonly) IBInspectable NSString *codePlaceholder;
 
 @end
 
@@ -37,69 +33,36 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]){
-    [self setUpFromNib];
+      [self commonInit];
   }
   return self;
 }
 
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
   if (self = [super initWithCoder:aDecoder]){
-    [self setUpFromNib];
+      [self commonInit];
   }
   return self;
 }
 
-- (void)setUpFromNib {
-  NSBundle *bundle = [FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName];
-  UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class]) bundle:bundle];
+- (void)commonInit {
+    // Initialization code
+    _codeEntry = [NSMutableString string];
 
-  _inputField = [nib instantiateWithOwner:self options:nil][0];
-  self.inputField.frame = [self bounds];
-  self.inputField.autoresizingMask =
-      UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-  self.inputField.userInteractionEnabled = YES;
-
-  if (@available(iOS 12.0, *)) {
-    if ([self.inputField respondsToSelector:@selector(setTextContentType:)]) {
-      id<UITextInputTraits> inputField = (id<UITextInputTraits>)self.inputField;
-      inputField.textContentType = UITextContentTypeOneTimeCode;
+    // Default values
+    if (!self.codeLength) {
+      _codeLength = 6;
+    } else {
+      _codeLength = MIN(self.codeLength, 12);
     }
-  }
 
-  // Initialization code
-  _codeEntry = [NSMutableString string];
-
-  // Default values
-  if (!self.codeLength) {
-    _codeLength = 6;
-  } else {
-    _codeLength = MIN(self.codeLength, 12);
-  }
-
-  if (!self.placeholder || !self.placeholder.length) {
-    _placeholder = @"-";
-  }
-
-  [self addSubview:self.inputField];
-}
-
-- (UIKeyboardType) keyboardType {
-  if (@available(iOS 10, *)) {
-    return UIKeyboardTypeASCIICapableNumberPad;
-  } else {
-    return UIKeyboardTypeNumberPad;
-  }
-}
-
-- (BOOL)canBecomeFirstResponder {
-  return YES;
-}
-
-- (void) touchesBegan: (NSSet *) touches withEvent: (nullable UIEvent *) event {
-  [self becomeFirstResponder];
+    if (!self.codePlaceholder || !self.codePlaceholder.length) {
+      _codePlaceholder = @"-";
+    }
 }
 
 - (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
   NSString *code = [self.codeEntry copy];
   if (self.secureTextEntry) {
     code = [[NSString string] stringByPaddingToLength:code.length
@@ -119,8 +82,7 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
   [attributedString addAttribute:NSKernAttributeName value:@20
                            range:NSMakeRange(0, attributedString.length-1)];
 
-  self.digits.text = @"";
-  [self.digits setAttributedText:attributedString];
+  [self setAttributedText:attributedString];
 }
 
 - (BOOL)hasText {
@@ -159,35 +121,18 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
 
 - (void)notifyEntryCompletion {
   if (self.codeEntry.length >= self.codeLength) {
-    [self.delegate entryIsCompletedWithCode:[self.codeEntry copy]];
+    [self.codeFieldDelegate entryIsCompletedWithCode:[self.codeEntry copy]];
   } else {
-    [self.delegate entryIsIncomplete];
+    [self.codeFieldDelegate entryIsIncomplete];
   }
-}
-
-- (CGSize)inputFieldIntrinsicContentSize {
-  CGSize textFieldSize = [self.inputField intrinsicContentSize];
-  if (textFieldSize.height < FUICodeFieldMinInputFieldHeight) {
-    textFieldSize.height = FUICodeFieldMinInputFieldHeight;
-  }
-
-  return textFieldSize;
 }
 
 - (CGSize)intrinsicContentSize {
-  CGSize textFieldSize = [self inputFieldIntrinsicContentSize];
-  return textFieldSize;
-}
-
-- (UITextContentType _Null_unspecified)textContentType {
-  if (@available(iOS 12.0, *)) {
-    return UITextContentTypeOneTimeCode;
-  }
-  return nil;
-}
-
-- (void)setTextContentType:(_Null_unspecified UITextContentType)textContentType {
-  // do nothing
+  CGSize size = [super intrinsicContentSize];
+    if (size.height < FUICodeFieldMinInputFieldHeight) {
+        size.height = FUICodeFieldMinInputFieldHeight;
+    }
+  return size;
 }
 
 @end
