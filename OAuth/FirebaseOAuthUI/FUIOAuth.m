@@ -79,6 +79,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, strong) UIColor *buttonBackgroundColor;
 
+/** @property buttonTextColor
+ @brief The text color that should be used for the sign in button of the provider.
+ */
+@property(nonatomic, readwrite) UIColor *buttonTextColor;
+
 /** @property scopes
     @brief Array used to configure the OAuth scopes.
  */
@@ -118,6 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
     _signInLabel = buttonLabelText;
     _shortName = shortName;
     _buttonBackgroundColor = buttonColor;
+    _buttonTextColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     _icon = iconImage;
     _scopes = scopes;
     _customParameters = customParameters;
@@ -185,17 +191,26 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (FUIOAuth *)appleAuthProvider {
+  UIImage *iconImage = [FUIAuthUtils imageNamed:@"ic_apple"
+                              fromBundleNameOrNil:@"FirebaseOAuthUI"];
+  UIColor *buttonColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+  UIColor *buttonTextColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+  if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+    iconImage = [iconImage imageWithTintColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]];
+    buttonColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    buttonTextColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+  }
   FUIOAuth *provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
                                              providerID:@"apple.com"
                                         buttonLabelText:@"Sign in with Apple"
                                               shortName:@"Apple"
-                                            buttonColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]
-                                              iconImage:[FUIAuthUtils imageNamed:@"ic_apple"
-                                                             fromBundleNameOrNil:@"FirebaseOAuthUI"]
+                                            buttonColor:buttonColor
+                                              iconImage:iconImage
                                                  scopes:@[@"name", @"email"]
                                        customParameters:nil
                                            loginHintKey:nil];
   provider.buttonAlignment = FUIButtonAlignmentCenter;
+  provider.buttonTextColor = buttonTextColor;
   return provider;
 }
 
@@ -213,10 +228,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable NSString *)idToken {
   return nil;
-}
-
-- (UIColor *)buttonTextColor {
-  return [UIColor whiteColor];
 }
 
 #pragma clang diagnostic push
