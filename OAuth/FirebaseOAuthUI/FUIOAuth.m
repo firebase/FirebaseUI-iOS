@@ -123,7 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
     _signInLabel = buttonLabelText;
     _shortName = shortName;
     _buttonBackgroundColor = buttonColor;
-    _buttonTextColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    _buttonTextColor = [UIColor whiteColor];
     _icon = iconImage;
     _scopes = scopes;
     _customParameters = customParameters;
@@ -192,13 +192,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (FUIOAuth *)appleAuthProvider {
   UIImage *iconImage = [FUIAuthUtils imageNamed:@"ic_apple"
-                              fromBundleNameOrNil:@"FirebaseOAuthUI"];
-  UIColor *buttonColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
-  UIColor *buttonTextColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+                            fromBundleNameOrNil:@"FirebaseOAuthUI"];
+  UIColor *buttonColor = [UIColor blackColor];
+  UIColor *buttonTextColor = [UIColor whiteColor];
   if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-    iconImage = [iconImage imageWithTintColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]];
-    buttonColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-    buttonTextColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+    iconImage = [iconImage imageWithTintColor:[UIColor blackColor]];
+    buttonColor = [UIColor whiteColor];
+    buttonTextColor = [UIColor blackColor];
   }
   FUIOAuth *provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
                                              providerID:@"apple.com"
