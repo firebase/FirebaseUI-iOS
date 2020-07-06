@@ -32,9 +32,9 @@ PODS:
   - nanopb/encode (1.30905.0)
   - OCMock (3.6)
   - PromisesObjC (1.2.9)
-  - SDWebImage (5.8.1):
-    - SDWebImage/Core (= 5.8.1)
-  - SDWebImage/Core (5.8.1)
+  - SDWebImage (5.8.3):
+    - SDWebImage/Core (= 5.8.3)
+  - SDWebImage/Core (5.8.3)
 
 DEPENDENCIES:
   - Firebase/Storage
@@ -68,7 +68,7 @@ SPEC CHECKSUMS:
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   OCMock: 5ea90566be239f179ba766fd9fbae5885040b992
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
-  SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
+  SDWebImage: 112503ec94a5a2a41869503844a15e8d8f1ead5c
 
 PODFILE CHECKSUM: 4ee09a538f9ded78a1ee0184c63b1157301e92e4
 
