@@ -1,15 +1,15 @@
 PODS:
-  - Firebase/Auth (6.27.0):
+  - Firebase/Auth (6.27.1):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.6.0)
-  - Firebase/CoreOnly (6.27.0):
-    - FirebaseCore (= 6.8.0)
+  - Firebase/CoreOnly (6.27.1):
+    - FirebaseCore (= 6.8.1)
   - FirebaseAuth (6.6.0):
     - FirebaseCore (~> 6.8)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.5)
     - GoogleUtilities/Environment (~> 6.5)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (6.8.0):
+  - FirebaseCore (6.8.1):
     - FirebaseCoreDiagnostics (~> 1.3)
     - GoogleUtilities/Environment (~> 6.5)
     - GoogleUtilities/Logger (~> 6.5)
@@ -75,9 +75,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Firebase: fc4cbf6f1592636431821ef9a3c557e4dfd9f268
+  Firebase: 919186c8e119dd9372a45fd1dd17a8a942bc1892
   FirebaseAuth: b85c064e0ac60f82486728d50a4803f235687302
-  FirebaseCore: feda061cb1ee6d8ad4824f4a4a8ffbcfe284f595
+  FirebaseCore: 8cd4f8ea22075e0ee582849b1cf79d8816506085
   FirebaseCoreDiagnostics: 4505e4d4009b1d93f605088ee7d7764d5f0d1c84
   FirebaseUI: 65c06dd1576bdd2e39972533ba12ad21036c3543
   GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
