@@ -14,7 +14,11 @@
 //  limitations under the License.
 //
 
+#if SWIFT_PACKAGE
+@import AuthUI;
+#else
 #import <FirebaseUI/FirebaseAuthUI.h>
+#endif
 
 @class FUIAuth;
 @class FIRActionCodeSettings;

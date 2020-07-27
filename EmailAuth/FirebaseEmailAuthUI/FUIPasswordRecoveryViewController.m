@@ -17,10 +17,15 @@
 #import "FUIPasswordRecoveryViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
+
+#if SWIFT_PACKAGE
+@import AuthUI;
+#else
 #import <FirebaseUI/FUIAuthBaseViewController_Internal.h>
 #import <FirebaseUI/FUIAuthStrings.h>
-#import "FUIAuthTableViewCell.h"
 #import <FirebaseUI/FUIAuthUtils.h>
+#endif
+#import "FUIAuthTableViewCell.h"
 #import "FUIAuth_Internal.h"
 #import "FUIEmailAuthStrings.h"
 #import "FUIPrivacyAndTermsOfServiceView.h"

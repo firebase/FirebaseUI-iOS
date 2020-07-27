@@ -20,7 +20,11 @@
 #import <FirebaseCore/FIROptions.h>
 #import <FirebaseAuth/FIRAuth.h>
 #import <FirebaseAuth/FirebaseAuth.h>
+#if SWIFT_PACKAGE
+@import GoogleUtilities_UserDefaults;
+#else
 #import <GoogleUtilities/GULUserDefaults.h>
+#endif
 #import "FUIAuth.h"
 #import "FUIAuth_Internal.h"
 #import "FUIAuthStrings.h"

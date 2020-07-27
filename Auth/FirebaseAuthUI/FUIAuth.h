@@ -16,7 +16,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FUIAccountSettingsOperationType.h"
+#import "AccountManagement/FUIAccountSettingsOperationType.h"
 #import "FUIAuthProvider.h"
 
 @class FIRAuth;
