@@ -6,7 +6,7 @@ platform :ios, '9.0'
 target 'FirebaseGoogleAuthUI' do
   use_frameworks!
 
-  pod 'GoogleSignIn', '~> 4.0'
+  pod 'GoogleSignIn', '~> 5.0'
   pod 'FirebaseUI/Auth', :path => '../'
 
   target 'FirebaseGoogleAuthUITests' do

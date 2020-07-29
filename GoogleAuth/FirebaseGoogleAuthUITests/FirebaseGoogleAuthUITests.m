@@ -98,12 +98,12 @@
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
 
-  [_mockProvider signInWithEmail:nil
-        presentingViewController:nil
-                      completion:^(FIRAuthCredential *_Nullable credential,
-                                   NSError *_Nullable error,
-                                   FIRAuthResultCallback _Nullable result,
-                                   NSDictionary *_Nullable userInfo) {
+  [_mockProvider signInWithDefaultValue:nil
+               presentingViewController:nil
+                             completion:^(FIRAuthCredential *_Nullable credential,
+                                          NSError *_Nullable error,
+                                          FIRAuthResultCallback _Nullable result,
+                                          NSDictionary *_Nullable userInfo) {
     XCTAssertNil(error);
     XCTAssertNotNil(result);
     XCTAssertNotNil(credential);
@@ -140,12 +140,12 @@
   id mockGoogleUser = OCMClassMock([GIDGoogleUser class]);
 
   // mock accessToken
-  OCMReject([mockGoogleUser authentication]).andReturn(mockAuthentication);
-  OCMReject([mockAuthentication accessToken]).andReturn(testAccessToken);
+  OCMStub([mockGoogleUser authentication]).andReturn(mockAuthentication);
+  OCMStub([mockAuthentication accessToken]).andReturn(testAccessToken);
 
   // mock idToken
-  OCMReject([mockGoogleUser authentication]).andReturn(mockAuthentication);
-  OCMReject([mockAuthentication idToken]).andReturn(testIdToken);
+  OCMStub([mockGoogleUser authentication]).andReturn(mockAuthentication);
+  OCMStub([mockAuthentication idToken]).andReturn(testIdToken);
 
   OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
   NSError *signInError = [NSError errorWithDomain:@"sign in domain" code:kGIDSignInErrorCodeUnknown userInfo:@{}];
@@ -157,12 +157,12 @@
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
 
-  [_mockProvider signInWithEmail:nil
-        presentingViewController:nil
-                      completion:^(FIRAuthCredential *_Nullable credential,
-                                   NSError *_Nullable error,
-                                   FIRAuthResultCallback _Nullable result,
-                                   NSDictionary *_Nullable userInfo) {
+  [_mockProvider signInWithDefaultValue:nil
+               presentingViewController:nil
+                             completion:^(FIRAuthCredential *_Nullable credential,
+                                          NSError *_Nullable error,
+                                          FIRAuthResultCallback _Nullable result,
+                                          NSDictionary *_Nullable userInfo) {
     XCTAssertNotNil(error);
     XCTAssertEqualObjects(error.userInfo[NSUnderlyingErrorKey], signInError);
     XCTAssertNil(credential);
@@ -193,12 +193,12 @@
   id mockGoogleUser = OCMClassMock([GIDGoogleUser class]);
 
   // mock accessToken
-  OCMReject([mockGoogleUser authentication]).andReturn(mockAuthentication);
-  OCMReject([mockAuthentication accessToken]).andReturn(testAccessToken);
+  OCMStub([mockGoogleUser authentication]).andReturn(mockAuthentication);
+  OCMStub([mockAuthentication accessToken]).andReturn(testAccessToken);
 
   // mock idToken
-  OCMReject([mockGoogleUser authentication]).andReturn(mockAuthentication);
-  OCMReject([mockAuthentication idToken]).andReturn(testIdToken);
+  OCMStub([mockGoogleUser authentication]).andReturn(mockAuthentication);
+  OCMStub([mockAuthentication idToken]).andReturn(testIdToken);
 
   OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
   NSError *signInError = [NSError errorWithDomain:@"sign in domain" code:kGIDSignInErrorCodeCanceled userInfo:@{}];
@@ -209,12 +209,12 @@
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
 
-  [_mockProvider signInWithEmail:nil
-        presentingViewController:nil
-                      completion:^(FIRAuthCredential *_Nullable credential,
-                                   NSError *_Nullable error,
-                                   FIRAuthResultCallback _Nullable result,
-                                   NSDictionary *_Nullable userInfo) {
+  [_mockProvider signInWithDefaultValue:nil
+               presentingViewController:nil
+                             completion:^(FIRAuthCredential *_Nullable credential,
+                                          NSError *_Nullable error,
+                                          FIRAuthResultCallback _Nullable result,
+                                          NSDictionary *_Nullable userInfo) {
     XCTAssertNotNil(error);
     XCTAssertEqualObjects(error, [FUIAuthErrorUtils userCancelledSignInError]);
     XCTAssertNil(credential);
