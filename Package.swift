@@ -65,5 +65,17 @@ let package = Package(
 //        .headerSearchPath("../../Auth/FirebaseAuthUI")
       ]
     ),
+    .target(
+      name: "PhoneUI",
+      dependencies: ["AuthUI"],
+      path: "PhoneAuth/FirebasePhoneAuthUI",
+      exclude: ["Info.plist"],
+      resources: [.process("Resources")],
+      publicHeadersPath: ".",
+      cSettings: [
+        .headerSearchPath("./"),
+//        .headerSearchPath("../../Auth/FirebaseAuthUI")
+      ]
+    ),
   ]
 )
