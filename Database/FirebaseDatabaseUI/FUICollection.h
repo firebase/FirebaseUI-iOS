@@ -18,7 +18,7 @@
 
 // clang-format on
 
-#import <Foundation/Foundation.h>;
+#import <Foundation/Foundation.h>
 
 @class FIRDatabaseReference, FIRDatabaseQuery, FIRDataSnapshot;
 @protocol FUICollectionDelegate;

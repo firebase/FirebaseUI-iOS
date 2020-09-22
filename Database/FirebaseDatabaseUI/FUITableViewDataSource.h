@@ -18,7 +18,7 @@
 
 // clang-format on
 
-#import <UIKit/UIKit.h>;
+#import <UIKit/UIKit.h>
 
 #import "FUICollection.h"
 

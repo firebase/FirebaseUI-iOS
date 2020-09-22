@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import <UIKit/UIKit.h>;
+#import <UIKit/UIKit.h>
 
 #import <FirebaseStorage/FirebaseStorage.h>
 #import <SDWebImage/SDWebImage.h>
