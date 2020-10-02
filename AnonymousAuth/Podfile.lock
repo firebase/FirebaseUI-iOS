@@ -18,8 +18,8 @@ PODS:
     - GoogleUtilities/Environment (~> 6.5)
     - GoogleUtilities/Logger (~> 6.5)
     - nanopb (~> 1.30905.0)
-  - FirebaseUI/Auth (8.4.2):
-    - Firebase/Auth (~> 6.0)
+  - FirebaseUI/Auth (9.0.0):
+    - Firebase/Auth
     - GoogleUtilities/UserDefaults
   - GoogleDataTransport (6.2.1)
   - GoogleDataTransportCCTSupport (3.2.0):
@@ -79,7 +79,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: b85c064e0ac60f82486728d50a4803f235687302
   FirebaseCore: 8cd4f8ea22075e0ee582849b1cf79d8816506085
   FirebaseCoreDiagnostics: 4505e4d4009b1d93f605088ee7d7764d5f0d1c84
-  FirebaseUI: 65c06dd1576bdd2e39972533ba12ad21036c3543
+  FirebaseUI: ad6328371d2bb285ab5be9574ba189148f4f7deb
   GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
   GoogleDataTransportCCTSupport: 489c1265d2c85b68187a83a911913d190012158d
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
@@ -88,6 +88,6 @@ SPEC CHECKSUMS:
   OCMock: 5ea90566be239f179ba766fd9fbae5885040b992
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
 
-PODFILE CHECKSUM: dd5f618b7b3efad7d3eb9d842878ab03d443c8d4
+PODFILE CHECKSUM: e679f15af71e712ea96ab9e68365925a810caaf8
 
 COCOAPODS: 1.9.3

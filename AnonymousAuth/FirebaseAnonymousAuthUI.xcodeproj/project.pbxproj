@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -453,8 +453,11 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/OCMock\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-framework",
 					"\"GTMSessionFetcher\"",
@@ -484,8 +487,11 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/OCMock\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-framework",
 					"\"GTMSessionFetcher\"",
