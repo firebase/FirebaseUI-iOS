@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
     database.platform = :ios, '9.0'
     database.public_header_files = 'Database/FirebaseDatabaseUI/*.h'
     database.source_files = 'Database/FirebaseDatabaseUI/*.{h,m}'
-    database.dependency 'Firebase/Database', '~> 6.0'
+    database.dependency 'Firebase/Database'
     database.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseDatabaseUI' }
   end
 
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
     # storage.tvos.deployment_target = '11.0' Disabled; one of the dependencies doesn't support tvOS.
     storage.public_header_files = 'Storage/FirebaseStorageUI/*.h'
     storage.source_files = 'Storage/FirebaseStorageUI/*.{h,m}'
-    storage.dependency 'Firebase/Storage', '~> 6.0'
+    storage.dependency 'Firebase/Storage'
     storage.dependency 'SDWebImage', '~> 5.6'
     storage.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseStorageUI' }
   end
@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
                                 'Auth/FirebaseAuthUI/FUIAuthTableViewCell.h',
                                 'Auth/FirebaseAuthUI/FUIAuthTableHeaderView.h']
     auth.source_files = ['Auth/FirebaseAuthUI/**/*.{h,m}', 'Auth/FirebaseAuthUI/*.{h,m}']
-    auth.dependency 'Firebase/Auth', '~> 6.0'
+    auth.dependency 'Firebase/Auth'
     auth.dependency 'GoogleUtilities/UserDefaults'
     auth.resource_bundle = {
       'FirebaseAuthUI' => ['Auth/FirebaseAuthUI/**/*.{xib,png,lproj}']
