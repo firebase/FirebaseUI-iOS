@@ -36,7 +36,7 @@
       andReturn([NSBundle bundleForClass:[FUIOAuth class]]);
   
   id authUIClass = OCMClassMock([FUIAuth class]);
-  id providerIDClass = OCMClassMock([NSString class]);
+  OCMClassMock([NSString class]);
   OCMStub(ClassMethod([authUIClass authUIWithAuth:OCMOCK_ANY])).
       andReturn(authUIClass);
 

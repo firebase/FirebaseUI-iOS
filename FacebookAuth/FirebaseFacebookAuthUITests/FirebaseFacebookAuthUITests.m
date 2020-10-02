@@ -48,10 +48,6 @@
   OCMStub(ClassMethod([authClass auth])).
       andReturn(authClass);
 
-  id bundle = [NSBundle bundleForClass:[self class]];
-  id mockNSBundleClass = OCMClassMock([NSBundle class]);
-  OCMStub(ClassMethod(mockNSBundleClass)).andReturn(bundle);
-
   self.provider = [[FUIFacebookAuthTest alloc] init];
 }
 

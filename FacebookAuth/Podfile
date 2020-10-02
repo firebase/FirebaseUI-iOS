@@ -1,7 +1,7 @@
 # source 'sso://cpdc-internal/firebase'
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 target 'FirebaseFacebookAuthUI' do
   use_frameworks!
@@ -9,8 +9,8 @@ target 'FirebaseFacebookAuthUI' do
   # The facebook pods generate an unreasonable number of warnings.
   inhibit_all_warnings!
 
-  pod 'FBSDKLoginKit', '~> 5.0'
-  pod 'FBSDKCoreKit', '~> 5.0'
+  pod 'FBSDKLoginKit', '~> 7.0'
+  pod 'FBSDKCoreKit'
 
   pod 'FirebaseUI/Auth', :path => '../'
 
