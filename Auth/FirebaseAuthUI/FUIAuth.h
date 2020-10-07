@@ -263,6 +263,11 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
  */
 - (BOOL)signOutWithError:(NSError *_Nullable *_Nullable)error;
 
+/** @fn useEmulatorWithHost:port
+    @brief Configures Firebase Auth to connect to an emulated host instead of the remote backend.
+ */
+- (void)useEmulatorWithHost:(NSString *)host port:(NSInteger)port;
+
 @end
 
 NS_ASSUME_NONNULL_END
