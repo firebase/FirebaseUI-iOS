@@ -195,7 +195,7 @@ NS_ASSUME_NONNULL_BEGIN
                             fromBundleNameOrNil:@"FirebaseOAuthUI"];
   UIColor *buttonColor = [UIColor blackColor];
   UIColor *buttonTextColor = [UIColor whiteColor];
-  if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+  if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
     iconImage = [iconImage imageWithTintColor:[UIColor blackColor]];
     buttonColor = [UIColor whiteColor];
     buttonTextColor = [UIColor blackColor];
