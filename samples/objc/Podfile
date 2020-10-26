@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 
 target 'FirebaseUI-demo-objc' do
   use_frameworks!

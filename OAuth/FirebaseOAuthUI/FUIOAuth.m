@@ -191,11 +191,15 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (FUIOAuth *)appleAuthProvider {
+  return [self appleAuthProviderWithUserInterfaceStyle:UITraitCollection.currentTraitCollection.userInterfaceStyle];
+}
+
++ (FUIOAuth *)appleAuthProviderWithUserInterfaceStyle:(UIUserInterfaceStyle)userInterfaceStyle {
   UIImage *iconImage = [FUIAuthUtils imageNamed:@"ic_apple"
                             fromBundleNameOrNil:@"FirebaseOAuthUI"];
   UIColor *buttonColor = [UIColor blackColor];
   UIColor *buttonTextColor = [UIColor whiteColor];
-  if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+  if (userInterfaceStyle == UIUserInterfaceStyleDark) {
     iconImage = [iconImage imageWithTintColor:[UIColor blackColor]];
     buttonColor = [UIColor whiteColor];
     buttonTextColor = [UIColor blackColor];
