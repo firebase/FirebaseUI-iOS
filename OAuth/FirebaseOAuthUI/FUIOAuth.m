@@ -128,7 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
     _scopes = scopes;
     _customParameters = customParameters;
     _loginHintKey = loginHintKey;
-    if ((authUI.isEmulatorEnabled || ![_providerID isEqualToString:@"apple.com"]) && ![_providerID isEqualToString:@"facebook.com"]) {
+    if ((_authUI.isEmulatorEnabled || ![_providerID isEqualToString:@"apple.com"]) && ![_providerID isEqualToString:@"facebook.com"]) {
       _provider = [FIROAuthProvider providerWithProviderID:self.providerID];
     }
   }
@@ -252,7 +252,7 @@ NS_ASSUME_NONNULL_BEGIN
   FIROAuthProvider *provider = self.provider;
   _providerSignInCompletion = completion;
 
-  if ([self.providerID isEqualToString:@"apple.com"] && !self.provider) {
+  if ([self.providerID isEqualToString:@"apple.com"] && !self.authUI.isEmulatorEnabled) {
     if (@available(iOS 13.0, *)) {
       ASAuthorizationAppleIDRequest *request = [[[ASAuthorizationAppleIDProvider alloc] init] createRequest];
       request.requestedScopes = @[ASAuthorizationScopeFullName, ASAuthorizationScopeEmail];

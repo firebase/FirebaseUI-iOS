@@ -53,6 +53,11 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 
 @interface FUIFacebookAuth () <FUIAuthProvider>
 
+/** @property authUI
+    @brief FUIAuth instance of the application.
+ */
+@property(nonatomic, strong) FUIAuth *authUI;
+
 /** @property providerForEmulator
     @brief The OAuth provider to be used when the emulator is enabled.
  */
@@ -78,6 +83,23 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   NSString *_email;
 }
 
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI
+                   permissions:(NSArray *)permissions {
+  self = [super init];
+  if (self != nil) {
+    _authUI = authUI;
+    _scopes = permissions;
+    [self configureProvider];
+  }
+  return self;
+}
+
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI {
+  return [self initWithAuthUI:authUI permissions:@[ @"email" ]];
+}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (instancetype)initWithPermissions:(NSArray *)permissions {
   self = [super init];
   if (self != nil) {
@@ -90,6 +112,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 - (instancetype)init {
   return [self initWithPermissions:@[ @"email" ]];
 }
+#pragma clang diagnostic pop
 
 
 #pragma mark - FUIAuthProvider
@@ -99,7 +122,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 - (nullable NSString *)accessToken {
-  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+  if (self.authUI.isEmulatorEnabled) {
     return nil;
   }
   return [FBSDKAccessToken currentAccessToken].tokenString;
@@ -149,7 +172,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   _pendingSignInCallback = completion;
   _presentingViewController = presentingViewController;
 
-  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+  if (self.authUI.isEmulatorEnabled) {
     self.providerForEmulator.scopes = self.scopes;
 
     [self.providerForEmulator getCredentialWithUIDelegate:nil
@@ -208,14 +231,14 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 - (void)signOut {
-  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+  if (self.authUI.isEmulatorEnabled) {
     return;
   }
   [_loginManager logOut];
 }
 
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication {
-  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+  if (self.authUI.isEmulatorEnabled) {
     return NO;
   }
   return [[FBSDKApplicationDelegate sharedInstance] application:[UIApplication sharedApplication]
@@ -287,7 +310,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
      @"https://developers.facebook.com/docs/ios/getting-started"];
   }
 
-  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+  if (self.authUI.isEmulatorEnabled) {
     _providerForEmulator = [FIROAuthProvider providerWithProviderID:self.providerID];
   } else {
     _loginManager = [self createLoginManager];

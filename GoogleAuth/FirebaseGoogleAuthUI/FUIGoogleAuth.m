@@ -46,6 +46,11 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 
 @interface FUIGoogleAuth () <GIDSignInDelegate>
 
+/** @property authUI
+    @brief FUIAuth instance of the application.
+ */
+@property(nonatomic, strong) FUIAuth *authUI;
+
 /** @property providerForEmulator
     @brief The OAuth provider to be used when the emulator is enabled.
  */
@@ -69,6 +74,24 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   NSString *_email;
 }
 
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI {
+  return [self initWithAuthUI:authUI scopes:@[kGoogleUserInfoEmailScope, kGoogleUserInfoProfileScope]];
+}
+
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI scopes:(NSArray<NSString *> *)scopes {
+  self = [super init];
+  if (self) {
+    _authUI = authUI;
+    _scopes = [scopes copy];
+    if (_authUI.isEmulatorEnabled) {
+      _providerForEmulator = [FIROAuthProvider providerWithProviderID:self.providerID];
+    }
+  }
+  return self;
+}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (instancetype)init {
   return [self initWithScopes:@[kGoogleUserInfoEmailScope, kGoogleUserInfoProfileScope]];
 }
@@ -77,12 +100,11 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   self = [super init];
   if (self) {
     _scopes = [scopes copy];
-    if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
-      _providerForEmulator = [FIROAuthProvider providerWithProviderID:self.providerID];
-    }
   }
   return self;
 }
+#pragma clang diagnostic pop
+
 
 #pragma mark - FUIAuthProvider
 
@@ -91,14 +113,14 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 }
 
 - (nullable NSString *)accessToken {
-  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+  if (self.authUI.isEmulatorEnabled) {
     return nil;
   }
   return [GIDSignIn sharedInstance].currentUser.authentication.accessToken;
 }
 
 - (nullable NSString *)idToken {
-  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+  if (self.authUI.isEmulatorEnabled) {
     return nil;
   }
   return [GIDSignIn sharedInstance].currentUser.authentication.idToken;
@@ -140,7 +162,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
                     completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
   _presentingViewController = presentingViewController;
 
-  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+  if (self.authUI.isEmulatorEnabled) {
     self.providerForEmulator.scopes = self.scopes;
 
     [self.providerForEmulator getCredentialWithUIDelegate:nil
@@ -186,7 +208,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 }
 
 - (void)signOut {
-  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+  if (self.authUI.isEmulatorEnabled) {
     return;
   }
   GIDSignIn *signIn = [self configuredGoogleSignIn];
@@ -194,7 +216,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 }
 
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication {
-  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+  if (self.authUI.isEmulatorEnabled) {
     return NO;
   }
   GIDSignIn *signIn = [self configuredGoogleSignIn];
