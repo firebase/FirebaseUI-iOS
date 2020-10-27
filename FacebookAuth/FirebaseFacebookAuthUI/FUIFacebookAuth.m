@@ -20,6 +20,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "FUIAuthBaseViewController.h"
+#import "FUIAuth_Internal.h"
 #import "FUIAuthErrorUtils.h"
 #import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthStrings.h"
@@ -49,6 +50,15 @@ static NSString *const kFacebookAppId = @"FacebookAppID";
     @brief The string key used to read Facebook App Name from Info.plist.
  */
 static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
+
+@interface FUIFacebookAuth () <FUIAuthProvider>
+
+/** @property providerForEmulator
+    @brief The OAuth provider to be used when the emulator is enabled.
+ */
+@property(nonatomic, strong) FIROAuthProvider *providerForEmulator;
+
+@end
 
 @implementation FUIFacebookAuth {
 
@@ -89,6 +99,9 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 - (nullable NSString *)accessToken {
+  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+    return nil;
+  }
   return [FBSDKAccessToken currentAccessToken].tokenString;
 }
 
@@ -136,6 +149,35 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   _pendingSignInCallback = completion;
   _presentingViewController = presentingViewController;
 
+  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+    self.providerForEmulator.scopes = self.scopes;
+
+    [self.providerForEmulator getCredentialWithUIDelegate:nil
+                                    completion:^(FIRAuthCredential *_Nullable credential,
+                                                 NSError *_Nullable error) {
+      if (error) {
+        [FUIAuthBaseViewController showAlertWithMessage:error.localizedDescription
+                               presentingViewController:presentingViewController];
+        if (completion) {
+          completion(nil, error, nil, nil);
+        }
+        return;
+      }
+      if (completion) {
+        UIActivityIndicatorView *activityView =
+            [FUIAuthBaseViewController addActivityIndicator:presentingViewController.view];
+        [activityView startAnimating];
+        FIRAuthResultCallback result = ^(FIRUser *_Nullable user,
+                                         NSError *_Nullable error) {
+          [activityView stopAnimating];
+          [activityView removeFromSuperview];
+        };
+        completion(credential, nil, result, nil);
+      }
+    }];
+    return;
+  }
+
   [_loginManager logInWithPermissions:_scopes
                    fromViewController:presentingViewController
                               handler:^(FBSDKLoginManagerLoginResult *result,
@@ -166,10 +208,16 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 - (void)signOut {
+  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+    return;
+  }
   [_loginManager logOut];
 }
 
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication {
+  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+    return NO;
+  }
   return [[FBSDKApplicationDelegate sharedInstance] application:[UIApplication sharedApplication]
                                                         openURL:URL
                                               sourceApplication:sourceApplication
@@ -239,7 +287,11 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
      @"https://developers.facebook.com/docs/ios/getting-started"];
   }
 
-  _loginManager = [self createLoginManager];
+  if ([FUIAuth defaultAuthUI].isEmulatorEnabled) {
+    _providerForEmulator = [FIROAuthProvider providerWithProviderID:self.providerID];
+  } else {
+    _loginManager = [self createLoginManager];
+  }
 }
 
 #pragma mark - Private methods
