@@ -83,7 +83,7 @@ __attribute__((deprecated("Instead use initWithAuthUI:")));
         found at https://developers.google.com/identity/protocols/googlescopes
  */
 - (instancetype)initWithScopes:(NSArray <NSString *> *)scopes
-__attribute__((deprecated("Instead use initWithAuthUI:permissions:")));
+__attribute__((deprecated("Instead use initWithAuthUI:permissions:"))) NS_DESIGNATED_INITIALIZER;
 
 @end
 

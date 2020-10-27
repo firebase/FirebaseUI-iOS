@@ -69,7 +69,7 @@ __attribute__((deprecated("Instead use initWithAuthUI:")));
       as defined in https://developers.facebook.com/docs/facebook-login/permissions/
  */
 - (instancetype)initWithPermissions:(NSArray *)permissions
-__attribute__((deprecated("Instead use initWithAuthUI:permissions:")));
+__attribute__((deprecated("Instead use initWithAuthUI:permissions:"))) NS_DESIGNATED_INITIALIZER;
 
 @end
 

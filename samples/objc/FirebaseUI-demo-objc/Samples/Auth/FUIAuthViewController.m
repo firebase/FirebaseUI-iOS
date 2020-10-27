@@ -408,17 +408,19 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
           }
           break;
         case kIDPGoogle:
-          provider = useCustomScopes ? [[FUIGoogleAuth alloc] initWithScopes:@[kGoogleUserInfoEmailScope,
+          provider = useCustomScopes ? [[FUIGoogleAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+                                                                      scopes:@[kGoogleUserInfoEmailScope,
                                                                                kGoogleUserInfoProfileScope,
                                                                                kGoogleGamesScope,
                                                                                kGooglePlusMeScope]]
-                                     : [[FUIGoogleAuth alloc] init];
+                                     : [[FUIGoogleAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
           break;
         case kIDPFacebook:
-          provider = useCustomScopes ? [[FUIFacebookAuth alloc] initWithPermissions:@[@"email",
-                                                                                      @"user_friends",
-                                                                                      @"ads_read"]]
-                                     :[[FUIFacebookAuth alloc] init];
+          provider = useCustomScopes ? [[FUIFacebookAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+                                                                   permissions:@[@"email",
+                                                                                @"user_friends",
+                                                                                @"ads_read"]]
+                                     :[[FUIFacebookAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
           break;
         case kIDPTwitter:
           provider = [FUIOAuth twitterAuthProvider];
