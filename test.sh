@@ -29,5 +29,3 @@ do
   pod deintegrate;
   cd ..;
 done
-
-exit 0
