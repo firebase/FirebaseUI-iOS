@@ -29,3 +29,5 @@ do
   pod deintegrate;
   cd ..;
 done
+
+exit $EXIT_STATUS
