@@ -25,6 +25,7 @@
 
 @interface FirebaseOAuthUITests : XCTestCase
 @property (nonatomic, strong) FUIOAuth *provider;
+@property (nonatomic, strong) FUIAuth *authUI;
 @end
 
 @implementation FirebaseOAuthUITests
@@ -52,17 +53,7 @@
   OCMStub([(FIROptions *)optionsClass googleAppID]).andReturn(@"fakeAppId");
 
   FIRAuth *auth = [FIRAuth auth];
-  FUIAuth *authUI = [FUIAuth authUIWithAuth:auth];
-
-  self.provider = [[FUIOAuth alloc] initWithAuthUI:authUI
-                                        providerID:@"dummy"
-                                   buttonLabelText:@"Sign in with dummy"
-                                         shortName:@"Dummy"
-                                       buttonColor:[UIColor clearColor]
-                                         iconImage:[UIImage imageNamed:@""]
-                                            scopes:@[]
-                                  customParameters:@{}
-                                      loginHintKey:nil];
+  _authUI = [FUIAuth authUIWithAuth:auth];
 }
 
 - (void)tearDown {
@@ -71,7 +62,40 @@
 }
 
 - (void)testProviderValidity {
+  self.provider = [[FUIOAuth alloc] initWithAuthUI:_authUI
+                                        providerID:@"dummy"
+                                   buttonLabelText:@"Sign in with dummy"
+                                         shortName:@"Dummy"
+                                       buttonColor:[UIColor clearColor]
+                                         iconImage:[UIImage imageNamed:@""]
+                                            scopes:@[]
+                                  customParameters:@{}
+                                      loginHintKey:nil];
+
   XCTAssertNotNil(self.provider);
+  XCTAssertNil(self.provider.icon);
+  XCTAssertNotNil(self.provider.signInLabel);
+  XCTAssertNotNil(self.provider.buttonBackgroundColor);
+  XCTAssertNotNil(self.provider.buttonTextColor);
+  XCTAssertNotNil(self.provider.providerID);
+  XCTAssertNotNil(self.provider.shortName);
+  XCTAssertTrue(self.provider.signInLabel.length != 0);
+  XCTAssertNil(self.provider.accessToken);
+  XCTAssertNil(self.provider.idToken);
+}
+
+- (void)testAppleProviderValidity {
+  self.provider = [[FUIOAuth alloc] initWithAuthUI:_authUI
+                                        providerID:@"apple.com"
+                                   buttonLabelText:@"Sign in with Apple"
+                                         shortName:@"Apple"
+                                       buttonColor:[UIColor clearColor]
+                                         iconImage:[UIImage imageNamed:@""]
+                                            scopes:@[]
+                                  customParameters:@{}
+                                      loginHintKey:nil];
+
+  XCTAssertNil(self.provider);
   XCTAssertNil(self.provider.icon);
   XCTAssertNotNil(self.provider.signInLabel);
   XCTAssertNotNil(self.provider.buttonBackgroundColor);
