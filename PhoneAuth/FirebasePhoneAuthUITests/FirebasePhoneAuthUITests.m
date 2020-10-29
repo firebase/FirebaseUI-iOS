@@ -56,7 +56,7 @@
 }
 
 - (void)testProviderValidity {
-  XCTAssertNotNil(self.provider);
+  XCTAssertNil(self.provider);
   XCTAssertNotNil(self.provider.icon);
   XCTAssertNotNil(self.provider.signInLabel);
   XCTAssertNotNil(self.provider.buttonBackgroundColor);
