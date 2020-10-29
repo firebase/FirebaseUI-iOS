@@ -18,6 +18,7 @@
 #import <XCTest/XCTest.h>
 
 #import <FirebaseAuth/FirebaseAuth.h>
+#import <FirebaseCore/FirebaseCore.h>
 #import <FirebaseUI/FirebaseAuthUI.h>
 
 #import "FUIOAuth.h"
@@ -36,13 +37,19 @@
       andReturn([NSBundle bundleForClass:[FUIOAuth class]]);
   
   id authUIClass = OCMClassMock([FUIAuth class]);
-  OCMClassMock([NSString class]);
   OCMStub(ClassMethod([authUIClass authUIWithAuth:OCMOCK_ANY])).
       andReturn(authUIClass);
 
   id authClass = OCMClassMock([FIRAuth class]);
   OCMStub(ClassMethod([authClass auth])).
       andReturn(authClass);
+
+  id appClass = OCMClassMock([FIRApp class]);
+  OCMStub([authClass app]).andReturn(appClass);
+
+  id optionsClass = OCMClassMock([FIROptions class]);
+  OCMStub([(FIRApp *)appClass options]).andReturn(optionsClass);
+  OCMStub([(FIROptions *)optionsClass googleAppID]).andReturn(@"fakeAppId");
 
   FIRAuth *auth = [FIRAuth auth];
   FUIAuth *authUI = [FUIAuth authUIWithAuth:auth];
