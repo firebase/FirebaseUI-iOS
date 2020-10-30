@@ -79,7 +79,7 @@
   OCMVerify(never(), [self.mockOAuthProvider providerWithProviderID:@"google.com"]);
 }
 
-- (void)testAppleUsesEmulatorCreatesOAuthProvider {
+- (void)testUseEmulatorCreatesOAuthProvider {
   [self.authUI useEmulatorWithHost:@"host" port:12345];
 
   [[FUIGoogleAuth alloc] initWithAuthUI:self.authUI];
