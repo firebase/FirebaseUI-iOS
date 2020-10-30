@@ -30,35 +30,40 @@
 
 @interface FirebaseGoogleAuthUITests : XCTestCase
 @property (nonatomic, strong) id mockProvider;
-
+@property (nonatomic, strong) id mockOAuthProvider;
+@property (nonatomic, strong) FUIAuth *authUI;
 @end
 
 @implementation FirebaseGoogleAuthUITests
 
 - (void)setUp {
   [super setUp];
-  self.mockProvider =  OCMPartialMock([[FUIGoogleAuth alloc] init]);
-
   id mockUtilsClass = OCMClassMock([FUIAuthUtils class]);
   OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY])).
       andReturn([NSBundle bundleForClass:[FUIGoogleAuth class]]);
-  
-  id authUIClass = OCMClassMock([FUIAuth class]);
-  OCMStub(ClassMethod([authUIClass authUIWithAuth:OCMOCK_ANY])).
-      andReturn(authUIClass);
 
   id authClass = OCMClassMock([FIRAuth class]);
   OCMStub(ClassMethod([authClass auth])).
       andReturn(authClass);
+
+  self.mockOAuthProvider = OCMClassMock([FIROAuthProvider class]);
+  OCMStub(ClassMethod([_mockOAuthProvider providerWithProviderID:OCMOCK_ANY])).
+      andReturn(_mockOAuthProvider);
+
+  FIRAuth *auth = [FIRAuth auth];
+  self.authUI = [FUIAuth authUIWithAuth:auth];
+  self.mockProvider =  OCMPartialMock([[FUIGoogleAuth alloc] initWithAuthUI:self.authUI]);
 }
 
 - (void)tearDown {
   self.mockProvider = nil;
+  self.mockOAuthProvider = nil;
+  self.authUI = nil;
   [super tearDown];
 }
 
 - (void)testProviderValidity {
-  FUIGoogleAuth *provider = [[FUIGoogleAuth alloc] init];
+  FUIGoogleAuth *provider = [[FUIGoogleAuth alloc] initWithAuthUI:self.authUI];
 
   XCTAssertNotNil(provider);
   XCTAssertNotNil(provider.icon);
@@ -70,6 +75,15 @@
   XCTAssertTrue(provider.signInLabel.length != 0);
   XCTAssertNil(provider.accessToken);
   XCTAssertNil(provider.idToken);
+
+  OCMVerify(never(), [self.mockOAuthProvider providerWithProviderID:@"google.com"]);
+}
+
+- (void)testAppleUsesEmulatorCreatesOAuthProvider {
+  [self.authUI useEmulatorWithHost:@"host" port:12345];
+
+  [[FUIGoogleAuth alloc] initWithAuthUI:self.authUI];
+  OCMVerify([self.mockOAuthProvider providerWithProviderID:@"google.com"]);
 }
 
 - (void)testSuccessfullLogin {
@@ -128,6 +142,8 @@
   OCMVerifyAll(mockSignIn);
   //verify that we are using token from server
   OCMVerifyAll(mockAuthentication);
+  OCMVerify(never(), [self.mockOAuthProvider getCredentialWithUIDelegate:nil completion:OCMOCK_ANY]);
+
 }
 
 - (void)testErrorLogin {
@@ -245,6 +261,20 @@
 
   OCMVerifyAll(_mockProvider);
   OCMVerifyAll(mockSignIn);
+}
+
+- (void)testUseEmulatorUsesOAuthProvider {
+  [self.authUI useEmulatorWithHost:@"host" port:12345];
+
+  [self.mockProvider signInWithDefaultValue:nil
+               presentingViewController:nil
+                             completion:^(FIRAuthCredential *_Nullable credential,
+                                          NSError *_Nullable error,
+                                          FIRAuthResultCallback _Nullable result,
+                                          NSDictionary *_Nullable userInfo) {
+    OCMVerify([self.mockOAuthProvider getCredentialWithUIDelegate:nil completion:OCMOCK_ANY]);
+    OCMVerify(never(), [self.mockProvider configuredGoogleSignIn]);
+  }];
 }
 
 
