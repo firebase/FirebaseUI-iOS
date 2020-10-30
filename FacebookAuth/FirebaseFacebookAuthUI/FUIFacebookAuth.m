@@ -173,31 +173,9 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   _presentingViewController = presentingViewController;
 
   if (self.authUI.isEmulatorEnabled) {
-    self.providerForEmulator.scopes = self.scopes;
-
-    [self.providerForEmulator getCredentialWithUIDelegate:nil
-                                    completion:^(FIRAuthCredential *_Nullable credential,
-                                                 NSError *_Nullable error) {
-      if (error) {
-        [FUIAuthBaseViewController showAlertWithMessage:error.localizedDescription
-                               presentingViewController:presentingViewController];
-        if (completion) {
-          completion(nil, error, nil, nil);
-        }
-        return;
-      }
-      if (completion) {
-        UIActivityIndicatorView *activityView =
-            [FUIAuthBaseViewController addActivityIndicator:presentingViewController.view];
-        [activityView startAnimating];
-        FIRAuthResultCallback result = ^(FIRUser *_Nullable user,
-                                         NSError *_Nullable error) {
-          [activityView stopAnimating];
-          [activityView removeFromSuperview];
-        };
-        completion(credential, nil, result, nil);
-      }
-    }];
+    [self signInWithOAuthProvider:self.providerForEmulator
+         presentingViewController:presentingViewController
+                       completion:completion];
     return;
   }
 
@@ -222,6 +200,36 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
       }];
       [self completeSignInFlowWithAccessToken:result.token.tokenString
                                         error:nil];
+    }
+  }];
+}
+
+- (void)signInWithOAuthProvider:(FIROAuthProvider *)oauthProvider
+       presentingViewController:(nullable UIViewController *)presentingViewController
+                     completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
+  oauthProvider.scopes = self.scopes;
+
+  [oauthProvider getCredentialWithUIDelegate:nil
+                                  completion:^(FIRAuthCredential *_Nullable credential,
+                                               NSError *_Nullable error) {
+    if (error) {
+      [FUIAuthBaseViewController showAlertWithMessage:error.localizedDescription
+                             presentingViewController:presentingViewController];
+      if (completion) {
+        completion(nil, error, nil, nil);
+      }
+      return;
+    }
+    if (completion) {
+      UIActivityIndicatorView *activityView =
+          [FUIAuthBaseViewController addActivityIndicator:presentingViewController.view];
+      [activityView startAnimating];
+      FIRAuthResultCallback result = ^(FIRUser *_Nullable user,
+                                       NSError *_Nullable error) {
+        [activityView stopAnimating];
+        [activityView removeFromSuperview];
+      };
+      completion(credential, nil, result, nil);
     }
   }];
 }

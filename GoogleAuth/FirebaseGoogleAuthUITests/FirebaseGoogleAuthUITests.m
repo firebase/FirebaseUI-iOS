@@ -81,8 +81,9 @@
 
 - (void)testUseEmulatorCreatesOAuthProvider {
   [self.authUI useEmulatorWithHost:@"host" port:12345];
+  FUIGoogleAuth *provider = [[FUIGoogleAuth alloc] initWithAuthUI:self.authUI];
 
-  [[FUIGoogleAuth alloc] initWithAuthUI:self.authUI];
+  XCTAssertNotNil(provider);
   OCMVerify([self.mockOAuthProvider providerWithProviderID:@"google.com"]);
 }
 
@@ -143,8 +144,71 @@
   //verify that we are using token from server
   OCMVerifyAll(mockAuthentication);
   OCMVerify(never(), [self.mockOAuthProvider getCredentialWithUIDelegate:nil completion:OCMOCK_ANY]);
-
 }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+- (void)testLegacyInitSuccessfulLogin {
+  NSString *testIdToken = @"idToken";
+  NSString *testAccessToken = @"accessToken";
+
+  _mockProvider =  OCMPartialMock([[FUIGoogleAuth alloc] init]);
+
+  id mockSignInDelegate = _mockProvider;
+  id mockSignIn = OCMClassMock([GIDSignIn class]);
+  id mockAuthentication = OCMClassMock([GIDAuthentication class]);
+  id mockGoogleUser = OCMClassMock([GIDGoogleUser class]);
+
+  // mock accessToken
+  OCMExpect([mockGoogleUser authentication]).andReturn(mockAuthentication);
+  OCMExpect([mockAuthentication accessToken]).andReturn(testAccessToken);
+
+  // mock idToken
+  OCMExpect([mockGoogleUser authentication]).andReturn(mockAuthentication);
+  OCMExpect([mockAuthentication idToken]).andReturn(testIdToken);
+
+  OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
+
+  //forward call to signIn delegate
+  OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
+    [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil];
+  });
+
+  XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
+
+  [_mockProvider signInWithDefaultValue:nil
+               presentingViewController:nil
+                             completion:^(FIRAuthCredential *_Nullable credential,
+                                          NSError *_Nullable error,
+                                          FIRAuthResultCallback _Nullable result,
+                                          NSDictionary *_Nullable userInfo) {
+    XCTAssertNil(error);
+    XCTAssertNotNil(result);
+    XCTAssertNotNil(credential);
+    FIRAuthCredential *expectedCredential =
+        [FIRGoogleAuthProvider credentialWithIDToken:testIdToken accessToken:testAccessToken];
+    XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
+
+    [expectation fulfill];
+    // We can't compare result and resultCallback. Thus verifying with expectation that result
+    // is called.
+    result(mockGoogleUser, error);
+  }];
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
+    XCTAssertNil(error);
+  }];
+
+  OCMVerifyAll(_mockProvider);
+  OCMVerifyAll(mockSignInDelegate);
+  OCMVerifyAll(mockGoogleUser);
+
+  //verify that we are doing actual sign in
+  OCMVerifyAll(mockSignIn);
+  //verify that we are using token from server
+  OCMVerifyAll(mockAuthentication);
+  OCMVerify(never(), [self.mockOAuthProvider getCredentialWithUIDelegate:nil completion:OCMOCK_ANY]);
+}
+#pragma clang diagnostic pop
 
 - (void)testErrorLogin {
   NSString *testIdToken = @"idToken";
@@ -265,16 +329,17 @@
 
 - (void)testUseEmulatorUsesOAuthProvider {
   [self.authUI useEmulatorWithHost:@"host" port:12345];
+  self.mockProvider =  OCMPartialMock([[FUIGoogleAuth alloc] initWithAuthUI:self.authUI]);
 
   [self.mockProvider signInWithDefaultValue:nil
                presentingViewController:nil
                              completion:^(FIRAuthCredential *_Nullable credential,
                                           NSError *_Nullable error,
                                           FIRAuthResultCallback _Nullable result,
-                                          NSDictionary *_Nullable userInfo) {
-    OCMVerify([self.mockOAuthProvider getCredentialWithUIDelegate:nil completion:OCMOCK_ANY]);
-    OCMVerify(never(), [self.mockProvider configuredGoogleSignIn]);
-  }];
+                                          NSDictionary *_Nullable userInfo) {}];
+
+  OCMVerify([self.mockOAuthProvider getCredentialWithUIDelegate:nil completion:OCMOCK_ANY]);
+  OCMVerify(never(), [self.mockProvider configuredGoogleSignIn]);
 }
 
 
