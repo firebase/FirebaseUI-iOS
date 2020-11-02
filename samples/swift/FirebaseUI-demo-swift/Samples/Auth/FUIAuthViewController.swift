@@ -280,11 +280,12 @@ class FUIAuthViewController: UITableViewController {
           case Providers.Email.rawValue:
             provider = FUIEmailAuth()
           case Providers.Google.rawValue:
-            provider = self.customScopesSwitch.isOn ? FUIGoogleAuth(scopes: [kGoogleGamesScope,
+            provider = self.customScopesSwitch.isOn ? FUIGoogleAuth(authUI: self.authUI!,
+                                                                    scopes: [kGoogleGamesScope,
                                                                              kGooglePlusMeScope,
                                                                              kGoogleUserInfoEmailScope,
                                                                              kGoogleUserInfoProfileScope])
-              : FUIGoogleAuth()
+              : FUIGoogleAuth(authUI: self.authUI!)
           case Providers.Twitter.rawValue:
             let buttonColor =
                 UIColor(red: 71.0/255.0, green: 154.0/255.0, blue: 234.0/255.0, alpha: 1.0)
@@ -302,10 +303,11 @@ class FUIAuthViewController: UITableViewController {
                                   customParameters: ["prompt" : "consent"],
                                   loginHintKey: nil)
           case Providers.Facebook.rawValue:
-            provider = self.customScopesSwitch.isOn ? FUIFacebookAuth(permissions: ["email",
+            provider = self.customScopesSwitch.isOn ? FUIFacebookAuth(authUI: self.authUI!,
+                                                                      permissions: ["email",
                                                                                     "user_friends",
                                                                                     "ads_read"])
-              : FUIFacebookAuth()
+              : FUIFacebookAuth(authUI: self.authUI!)
           case Providers.Apple.rawValue:
             if #available(iOS 13.0, *) {
               provider = FUIOAuth.appleAuthProvider()

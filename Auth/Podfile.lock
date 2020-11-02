@@ -41,10 +41,12 @@ PODS:
     - nanopb/encode (= 2.30906.0)
   - nanopb/decode (2.30906.0)
   - nanopb/encode (2.30906.0)
+  - OCMock (3.7.1)
   - PromisesObjC (1.2.11)
 
 DEPENDENCIES:
   - Firebase/Auth
+  - OCMock
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -56,6 +58,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMSessionFetcher
     - nanopb
+    - OCMock
     - PromisesObjC
 
 SPEC CHECKSUMS:
@@ -67,8 +70,9 @@ SPEC CHECKSUMS:
   GoogleUtilities: ffb2f4159f2c897c6e8992bd7fbcdef8a300589c
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
+  OCMock: 75fbeaa46a9b11f8c182bbb1d1f7e9a35ccc9955
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
 
-PODFILE CHECKSUM: 9c4e1843b801ac009eb7fa490800200ff099a1df
+PODFILE CHECKSUM: ebf29e3406d483d781b4dad6fb66d2ff0b7a0f9b
 
 COCOAPODS: 1.10.0

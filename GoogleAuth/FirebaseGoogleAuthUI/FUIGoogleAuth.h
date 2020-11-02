@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FUIAuthProvider.h"
+#import <FirebaseUI/FirebaseAuthUI.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -55,18 +55,35 @@ static NSString *const kGoogleUserInfoProfileScope = @"https://www.googleapis.co
  */
 @property(nonatomic, readwrite) FUIButtonAlignment buttonAlignment;
 
+/** @fn initWithAuthUI
+    @brief Convenience initializer. Calls designated init with default
+        scopes of "email" and "profile".
+    @param authUI The @c FUIAuth instance that manages this provider.
+ */
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI;
+
+/** @fn initWithAuthUI:scopes:
+    @brief Designated initializer.
+    @param authUI The @c FUIAuth instance that manages this provider.
+    @param scopes   The user account scopes required by the app. A list of possible scopes can be
+        found at https://developers.google.com/identity/protocols/googlescopes
+ */
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI
+                        scopes:(NSArray <NSString *> *)scopes NS_DESIGNATED_INITIALIZER;
+
 /** @fn init
     @brief Convenience initializer. Calls designated init with default
         scopes of "email" and "profile".
  */
-- (instancetype)init;
+- (instancetype)init
+__attribute__((deprecated("Instead use initWithAuthUI:")));
 
 /** @fn initWithScopes:
-    @brief Designated initializer.
     @param scopes   The user account scopes required by the app. A list of possible scopes can be
         found at https://developers.google.com/identity/protocols/googlescopes
  */
-- (instancetype)initWithScopes:(NSArray <NSString *> *)scopes NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithScopes:(NSArray <NSString *> *)scopes
+__attribute__((deprecated("Instead use initWithAuthUI:permissions:"))) NS_DESIGNATED_INITIALIZER;
 
 @end
 
