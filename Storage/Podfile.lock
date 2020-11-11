@@ -1,26 +1,26 @@
 PODS:
-  - Firebase/CoreOnly (7.0.0):
-    - FirebaseCore (= 7.0.0)
-  - Firebase/Storage (7.0.0):
+  - Firebase/CoreOnly (7.1.0):
+    - FirebaseCore (= 7.1.0)
+  - Firebase/Storage (7.1.0):
     - Firebase/CoreOnly
-    - FirebaseStorage (~> 7.0.0)
-  - FirebaseCore (7.0.0):
+    - FirebaseStorage (~> 7.1.0)
+  - FirebaseCore (7.1.0):
     - FirebaseCoreDiagnostics (~> 7.0)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/Logger (~> 7.0)
-  - FirebaseCoreDiagnostics (7.0.0):
+  - FirebaseCoreDiagnostics (7.1.0):
     - GoogleDataTransport (~> 8.0)
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/Logger (~> 7.0)
     - nanopb (~> 2.30906.0)
-  - FirebaseStorage (7.0.0):
+  - FirebaseStorage (7.1.0):
     - FirebaseCore (~> 7.0)
     - GTMSessionFetcher/Core (~> 1.4)
-  - GoogleDataTransport (8.0.0):
+  - GoogleDataTransport (8.0.1):
     - nanopb (~> 2.30906.0)
-  - GoogleUtilities/Environment (7.0.0):
+  - GoogleUtilities/Environment (7.1.0):
     - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (7.0.0):
+  - GoogleUtilities/Logger (7.1.0):
     - GoogleUtilities/Environment
   - GTMSessionFetcher/Core (1.5.0)
   - nanopb (2.30906.0):
@@ -54,12 +54,12 @@ SPEC REPOS:
     - SDWebImage
 
 SPEC CHECKSUMS:
-  Firebase: 50be68416f50eb4eb2ecb0e78acab9a051ef95df
-  FirebaseCore: cf3122185fce1cf71cedbbc498ea84d2b3e7cb69
-  FirebaseCoreDiagnostics: 5f4aa04fdb04923693cc704c7ef9158bdf41a48b
-  FirebaseStorage: ea52bc7a1cb540406ed1e1acfc2bf3946621ed34
-  GoogleDataTransport: 6ce8004a961db1b905740d7be106c61ba7e89c21
-  GoogleUtilities: ffb2f4159f2c897c6e8992bd7fbcdef8a300589c
+  Firebase: 78e8dd2e39d653de6270432ad84fe8b59f7bf4e8
+  FirebaseCore: 20046127eef0fcb8fa25df7fc12f7b97d4e48611
+  FirebaseCoreDiagnostics: 872cdb9b749b23346dddd5c1014d1babd2257de3
+  FirebaseStorage: 80e2cd5200791540ca544f4dcac5e6b56994fc97
+  GoogleDataTransport: e4085e6762f36a6141738f46b0153473ce57fb18
+  GoogleUtilities: f734da554aade8cc7928a31c2f3311897933a1bd
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   OCMock: 75fbeaa46a9b11f8c182bbb1d1f7e9a35ccc9955
