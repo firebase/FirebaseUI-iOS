@@ -62,7 +62,7 @@ PODS:
     - nanopb/encode (= 2.30906.0)
   - nanopb/decode (2.30906.0)
   - nanopb/encode (2.30906.0)
-  - OCMock (3.7.1)
+  - OCMock (3.8.1)
   - PromisesObjC (1.2.12)
 
 DEPENDENCIES:
@@ -103,7 +103,7 @@ SPEC CHECKSUMS:
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
-  OCMock: 75fbeaa46a9b11f8c182bbb1d1f7e9a35ccc9955
+  OCMock: 29f6e52085b4e7d9b075cbf03ed7c3112f82f934
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
 
 PODFILE CHECKSUM: 6b25b028abfe3f0d7f083a3acbba1a91422e56c0
