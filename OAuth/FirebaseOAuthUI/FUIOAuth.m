@@ -191,7 +191,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (FUIOAuth *)appleAuthProvider {
-  return [self appleAuthProviderWithUserInterfaceStyle:UITraitCollection.currentTraitCollection.userInterfaceStyle];
+  UIUserInterfaceStyle style = UITraitCollection.currentTraitCollection.userInterfaceStyle;
+  return [self appleAuthProviderWithUserInterfaceStyle:style];
 }
 
 + (FUIOAuth *)appleAuthProviderWithUserInterfaceStyle:(UIUserInterfaceStyle)userInterfaceStyle {
@@ -203,6 +204,12 @@ NS_ASSUME_NONNULL_BEGIN
     iconImage = [iconImage imageWithTintColor:[UIColor blackColor]];
     buttonColor = [UIColor whiteColor];
     buttonTextColor = [UIColor blackColor];
+  } else if (userInterfaceStyle == UIUserInterfaceStyleLight) {
+    iconImage = [iconImage imageWithTintColor:[UIColor whiteColor]];
+    buttonColor = [UIColor blackColor];
+    buttonTextColor = [UIColor whiteColor];
+  } else {
+    iconImage = [iconImage imageWithTintColor:[UIColor whiteColor]];
   }
   FUIOAuth *provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
                                              providerID:@"apple.com"
@@ -213,7 +220,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                  scopes:@[@"name", @"email"]
                                        customParameters:nil
                                            loginHintKey:nil];
-  provider.buttonAlignment = FUIButtonAlignmentCenter;
+  provider.buttonAlignment = FUIButtonAlignmentLeading;
   provider.buttonTextColor = buttonTextColor;
   return provider;
 }
@@ -312,6 +319,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization API_AVAILABLE(ios(13.0)) {
   ASAuthorizationAppleIDCredential* appleIDCredential = authorization.credential;
+  NSData *rawIdentityToken = appleIDCredential.identityToken;
+  if (rawIdentityToken == nil) {
+    // It's pretty awful to not have an error when login is unsuccessful, but Apple's docs
+    // don't provide any useful information here.
+    // https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidcredential
+    NSLog(@"Sign in with Apple completed with authorization, but no jwt: %@", authorization);
+    _providerSignInCompletion(nil, nil, nil, nil);
+  }
   NSString *idToken = [[NSString alloc] initWithData:appleIDCredential.identityToken encoding:NSUTF8StringEncoding];
   FIROAuthCredential *credential = [FIROAuthProvider credentialWithProviderID:@"apple.com"
                                                                       IDToken:idToken
