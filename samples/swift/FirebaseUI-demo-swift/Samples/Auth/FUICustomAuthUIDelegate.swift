@@ -45,14 +45,14 @@ class FUICustomAuthDelegate: NSObject, FUIAuthDelegate {
                                              authUI: authUI)
   }
 
-  func passwordRecoveryViewController(forAuthUI authUI: FUIAuth, email: String) -> FUIPasswordRecoveryViewController {
+  func passwordRecoveryViewController(forAuthUI authUI: FUIAuth, email: String?) -> FUIPasswordRecoveryViewController {
     return FUICustomPasswordRecoveryViewController(nibName: "FUICustomPasswordRecoveryViewController",
                                                    bundle: Bundle.main,
                                                    authUI: authUI,
                                                    email: email)
   }
 
-  func passwordSignInViewController(forAuthUI authUI: FUIAuth, email: String) -> FUIPasswordSignInViewController {
+  func passwordSignInViewController(forAuthUI authUI: FUIAuth, email: String?) -> FUIPasswordSignInViewController {
     return FUICustomPasswordSignInViewController(nibName: "FUICustomPasswordSignInViewController",
                                                  bundle: Bundle.main,
                                                  authUI: authUI,
@@ -67,7 +67,7 @@ class FUICustomAuthDelegate: NSObject, FUIAuthDelegate {
                                                  requireDisplayName: true)
   }
 
-  func passwordVerificationViewController(forAuthUI authUI: FUIAuth, email: String, newCredential: AuthCredential) -> FUIPasswordVerificationViewController {
+  func passwordVerificationViewController(forAuthUI authUI: FUIAuth, email: String?, newCredential: AuthCredential) -> FUIPasswordVerificationViewController {
     return FUICustomPasswordVerificationViewController(nibName: "FUICustomPasswordVerificationViewController",
                                                        bundle: Bundle.main,
                                                        authUI: authUI,
