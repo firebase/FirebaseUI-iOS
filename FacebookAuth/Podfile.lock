@@ -1,14 +1,14 @@
 PODS:
-  - FBSDKCoreKit (7.1.1):
-    - FBSDKCoreKit/Basics (= 7.1.1)
-    - FBSDKCoreKit/Core (= 7.1.1)
-  - FBSDKCoreKit/Basics (7.1.1)
-  - FBSDKCoreKit/Core (7.1.1):
+  - FBSDKCoreKit (9.0.0):
+    - FBSDKCoreKit/Basics (= 9.0.0)
+    - FBSDKCoreKit/Core (= 9.0.0)
+  - FBSDKCoreKit/Basics (9.0.0)
+  - FBSDKCoreKit/Core (9.0.0):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (7.1.1):
-    - FBSDKLoginKit/Login (= 7.1.1)
-  - FBSDKLoginKit/Login (7.1.1):
-    - FBSDKCoreKit (~> 7.1.1)
+  - FBSDKLoginKit (9.0.0):
+    - FBSDKLoginKit/Login (= 9.0.0)
+  - FBSDKLoginKit/Login (9.0.0):
+    - FBSDKCoreKit (~> 9.0.0)
   - Firebase/Auth (7.4.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 7.4.0)
@@ -61,7 +61,7 @@ PODS:
 
 DEPENDENCIES:
   - FBSDKCoreKit
-  - FBSDKLoginKit (~> 7.0)
+  - FBSDKLoginKit (~> 9.0)
   - FirebaseUI/Auth (from `../`)
   - OCMock
 
@@ -85,13 +85,13 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  FBSDKCoreKit: b46507dc8b8cefed31d644e74d7cc30e2a715ef8
-  FBSDKLoginKit: 1a61d79e2b25e2fc0d03dccab1e34b38bbdf2546
+  FBSDKCoreKit: ac6cc500b8e104bb9a4dd20b1527b5d199123c2e
+  FBSDKLoginKit: e9b6542fdee322333502ab497f628b011dce7d78
   Firebase: 09fb40287b6dfc8ee65f726fa0b788719d3f2a07
   FirebaseAuth: d8dba8db90a1705ee2493857047282ca4f6e7598
   FirebaseCore: 99c06e5a1e8d6952e75cb1f0a6d0b23c0f5ccdcf
   FirebaseCoreDiagnostics: 3770093ac4f2be4590fa03cfa1d3a6e5602d4557
-  FirebaseUI: f0677a1cc235f6da602cbd5c9b5fbbd24544a6b3
+  FirebaseUI: ea730675a9a97e5282b5ea5c1db9b15dea51e1e2
   GoogleDataTransport: 1024b1a4dfbd7a0e92cb20d7e0a6f1fb66b449a4
   GoogleUtilities: d866834472f1324d080496bc67ab3ce5d0d46027
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
@@ -99,6 +99,6 @@ SPEC CHECKSUMS:
   OCMock: 29f6e52085b4e7d9b075cbf03ed7c3112f82f934
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
 
-PODFILE CHECKSUM: bd55467c7e4a99e9a0956db8228918532b9a340f
+PODFILE CHECKSUM: 46618b1c5d74d8b0eadcee97838015eab3535a08
 
 COCOAPODS: 1.10.1

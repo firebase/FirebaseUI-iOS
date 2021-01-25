@@ -9,7 +9,7 @@ target 'FirebaseFacebookAuthUI' do
   # The facebook pods generate an unreasonable number of warnings.
   inhibit_all_warnings!
 
-  pod 'FBSDKLoginKit', '~> 7.0'
+  pod 'FBSDKLoginKit', '~> 9.0'
   pod 'FBSDKCoreKit'
 
   pod 'FirebaseUI/Auth', :path => '../'

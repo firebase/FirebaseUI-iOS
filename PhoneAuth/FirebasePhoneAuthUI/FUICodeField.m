@@ -55,7 +55,9 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
   UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, self.bounds.size.height)];
   self.leftView = paddingView;
   self.leftViewMode = UITextFieldViewModeAlways;
-  self.textContentType = UITextContentTypeOneTimeCode;
+  if (@available(iOS 12.0, *)) {
+    self.textContentType = UITextContentTypeOneTimeCode;
+  }
 
   // Default values
   if (!self.codeLength) {
@@ -72,7 +74,7 @@ const CGFloat FUICodeFieldMinInputFieldHeight = 60.0f;
   [self updateText];
 }
 
-- (UIKeyboardType) keyboardType {
+- (UIKeyboardType)keyboardType {
   if (@available(iOS 10, *)) {
     return UIKeyboardTypeASCIICapableNumberPad;
   } else {
