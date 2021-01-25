@@ -345,8 +345,6 @@ NS_ASSUME_NONNULL_BEGIN
   if (nameComponents != nil) {
     NSPersonNameComponentsFormatter *formatter = [[self class] nameFormatter];
     NSString *displayName = [formatter stringFromPersonNameComponents:nameComponents];
-    NSDictionary *userInfo = @{FIRAuthCredentialDisplayName: displayName};
-    credential.userInfo = userInfo;
 
     result = ^(FIRUser *_Nullable user,
                NSError *_Nullable error) {
