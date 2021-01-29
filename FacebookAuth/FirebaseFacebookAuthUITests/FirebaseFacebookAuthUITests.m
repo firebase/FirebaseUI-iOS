@@ -102,10 +102,12 @@
   id mockToken = OCMPartialMock(token);
 
   NSSet *emptySet = [NSSet set];
-  FBSDKLoginManagerLoginResult *result = [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
-                                                                                 isCancelled:NO
-                                                                          grantedPermissions:emptySet
-                                                                         declinedPermissions:emptySet];
+  FBSDKLoginManagerLoginResult *result =
+      [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
+                                      authenticationToken:nil
+                                              isCancelled:NO
+                                       grantedPermissions:emptySet
+                                      declinedPermissions:emptySet];
   XCTAssertNil(_provider.accessToken);
   [self.provider configureLoginManager:result withError:nil];
 
@@ -156,10 +158,12 @@
   id mockToken = OCMPartialMock(token);
 
   NSSet *emptySet = [NSSet set];
-  FBSDKLoginManagerLoginResult *result = [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
-                                                                                 isCancelled:NO
-                                                                          grantedPermissions:emptySet
-                                                                         declinedPermissions:emptySet];
+  FBSDKLoginManagerLoginResult *result =
+      [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
+                                      authenticationToken:nil
+                                              isCancelled:NO
+                                       grantedPermissions:emptySet
+                                      declinedPermissions:emptySet];
   XCTAssertNil(_provider.accessToken);
   [self.provider configureLoginManager:result withError:nil];
 
@@ -202,10 +206,12 @@
                                                               refreshDate:nil
                                                  dataAccessExpirationDate:nil];
   id mockToken = OCMPartialMock(token);
-  FBSDKLoginManagerLoginResult *result = [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
-                                                                                 isCancelled:YES
-                                                                          grantedPermissions:[NSSet set]
-                                                                         declinedPermissions:[NSSet set]];
+  FBSDKLoginManagerLoginResult *result =
+      [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
+                                      authenticationToken:nil
+                                              isCancelled:YES
+                                       grantedPermissions:[NSSet set]
+                                      declinedPermissions:[NSSet set]];
   [self.provider configureLoginManager:result withError:nil];
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
