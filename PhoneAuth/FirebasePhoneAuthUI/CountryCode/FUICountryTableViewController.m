@@ -46,7 +46,14 @@ NS_ASSUME_NONNULL_BEGIN
     _cachedNumberOfCountriesInSection = [NSMutableDictionary new];
     _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
-    self.searchController.dimsBackgroundDuringPresentation = NO;
+    if (@available(iOS 12, *)) {
+      self.searchController.obscuresBackgroundDuringPresentation = NO;
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+      self.searchController.dimsBackgroundDuringPresentation = NO;
+#pragma clang diagnostic pop
+    }
     self.definesPresentationContext = YES;
   }
   return self;

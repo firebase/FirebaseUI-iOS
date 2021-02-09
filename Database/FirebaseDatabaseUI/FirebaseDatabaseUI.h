@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 //! Project version number for FirebaseDatabaseUI.
 FOUNDATION_EXPORT double FirebaseDatabaseUIVersionNumber;

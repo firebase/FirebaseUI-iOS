@@ -24,6 +24,7 @@
 #import "FirebaseAuthUI.h"
 #import <FirebaseCore/FirebaseCore.h>
 #import <GoogleSignIn/GoogleSignIn.h>
+#import "FUIAuth_Internal.h"
 #import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthStrings.h"
 #import "FUIAuthUtils.h"
@@ -44,6 +45,17 @@ static NSString *const kBundleName = @"FirebaseGoogleAuthUI";
 static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 
 @interface FUIGoogleAuth () <GIDSignInDelegate>
+
+/** @property authUI
+    @brief FUIAuth instance of the application.
+ */
+@property(nonatomic, strong) FUIAuth *authUI;
+
+/** @property providerForEmulator
+    @brief The OAuth provider to be used when the emulator is enabled.
+ */
+@property(nonatomic, strong) FIROAuthProvider *providerForEmulator;
+
 @end
 @implementation FUIGoogleAuth {
   /** @var _presentingViewController
@@ -62,6 +74,24 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   NSString *_email;
 }
 
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI {
+  return [self initWithAuthUI:authUI scopes:@[kGoogleUserInfoEmailScope, kGoogleUserInfoProfileScope]];
+}
+
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI scopes:(NSArray<NSString *> *)scopes {
+  self = [super init];
+  if (self) {
+    _authUI = authUI;
+    _scopes = [scopes copy];
+    if (_authUI.isEmulatorEnabled) {
+      _providerForEmulator = [FIROAuthProvider providerWithProviderID:self.providerID];
+    }
+  }
+  return self;
+}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (instancetype)init {
   return [self initWithScopes:@[kGoogleUserInfoEmailScope, kGoogleUserInfoProfileScope]];
 }
@@ -73,6 +103,8 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   }
   return self;
 }
+#pragma clang diagnostic pop
+
 
 #pragma mark - FUIAuthProvider
 
@@ -81,10 +113,16 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 }
 
 - (nullable NSString *)accessToken {
+  if (self.authUI.isEmulatorEnabled) {
+    return nil;
+  }
   return [GIDSignIn sharedInstance].currentUser.authentication.accessToken;
 }
 
 - (nullable NSString *)idToken {
+  if (self.authUI.isEmulatorEnabled) {
+    return nil;
+  }
   return [GIDSignIn sharedInstance].currentUser.authentication.idToken;
 }
 
@@ -124,6 +162,13 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
                     completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
   _presentingViewController = presentingViewController;
 
+  if (self.authUI.isEmulatorEnabled) {
+    [self signInWithOAuthProvider:self.providerForEmulator
+         presentingViewController:presentingViewController
+                       completion:completion];
+    return;
+  }
+
   GIDSignIn *signIn = [self configuredGoogleSignIn];
   signIn.presentingViewController = presentingViewController;
   _pendingSignInCallback = ^(FIRAuthCredential *_Nullable credential,
@@ -140,12 +185,48 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   [signIn signIn];
 }
 
+- (void)signInWithOAuthProvider:(FIROAuthProvider *)oauthProvider
+       presentingViewController:(nullable UIViewController *)presentingViewController
+                     completion:(nullable FUIAuthProviderSignInCompletionBlock)completion {
+  oauthProvider.scopes = self.scopes;
+
+  [oauthProvider getCredentialWithUIDelegate:nil
+                                  completion:^(FIRAuthCredential *_Nullable credential,
+                                               NSError *_Nullable error) {
+    if (error) {
+      [FUIAuthBaseViewController showAlertWithMessage:error.localizedDescription
+                             presentingViewController:presentingViewController];
+      if (completion) {
+        completion(nil, error, nil, nil);
+      }
+      return;
+    }
+    if (completion) {
+      UIActivityIndicatorView *activityView =
+          [FUIAuthBaseViewController addActivityIndicator:presentingViewController.view];
+      [activityView startAnimating];
+      FIRAuthResultCallback result = ^(FIRUser *_Nullable user,
+                                       NSError *_Nullable error) {
+        [activityView stopAnimating];
+        [activityView removeFromSuperview];
+      };
+      completion(credential, nil, result, nil);
+    }
+  }];
+}
+
 - (void)signOut {
+  if (self.authUI.isEmulatorEnabled) {
+    return;
+  }
   GIDSignIn *signIn = [self configuredGoogleSignIn];
   [signIn signOut];
 }
 
 - (BOOL)handleOpenURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication {
+  if (self.authUI.isEmulatorEnabled) {
+    return NO;
+  }
   GIDSignIn *signIn = [self configuredGoogleSignIn];
   return [signIn handleURL:URL];
 }

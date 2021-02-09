@@ -1,7 +1,7 @@
 # source 'sso://cpdc-internal/firebase'
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '8.0'
+platform :ios, '10.0'
 
 target 'FirebaseAuthUI' do
   use_frameworks!
@@ -10,6 +10,7 @@ target 'FirebaseAuthUI' do
 
   target 'FirebaseAuthUITests' do
     inherit! :search_paths
+    pod 'OCMock'
   end
 
 end

@@ -121,7 +121,7 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
     @return an instance of @c FUIPasswordSignInViewController subclass.
  */
 - (FUIPasswordSignInViewController *)passwordSignInViewControllerForAuthUI:(FUIAuth *)authUI
-                                                                     email:(NSString *)email;
+                                                                     email:(nullable NSString *)email;
 
 /** @fn passwordSignInViewControllerForAuthUI:email:
     @brief Sent to the receiver to ask for an instance of @c FUIPasswordSignUpViewController subclass
@@ -132,7 +132,7 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
     @return an instance of @c FUIPasswordSignUpViewController subclass.
  */
 - (FUIPasswordSignUpViewController *)passwordSignUpViewControllerForAuthUI:(FUIAuth *)authUI
-                                                                     email:(NSString *)email
+                                                                     email:(nullable NSString *)email
                                                         requireDisplayName:(BOOL)requireDisplayName;
 
 /** @fn passwordRecoveryViewControllerForAuthUI:email:
@@ -143,7 +143,7 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
     @return an instance of @c FUIPasswordRecoveryViewController subclass.
  */
 - (FUIPasswordRecoveryViewController *)passwordRecoveryViewControllerForAuthUI:(FUIAuth *)authUI
-                                                                         email:(NSString *)email;
+                                                                         email:(nullable NSString *)email;
 
 /** @fn passwordVerificationViewControllerForAuthUI:email:newCredential:
     @brief Sent to the receiver to ask for an instance of @c FUIPasswordVerificationViewController subclass
@@ -154,7 +154,7 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
     @return an instance of @c FUIPasswordVerificationViewController subclass.
  */
 - (FUIPasswordVerificationViewController *)passwordVerificationViewControllerForAuthUI:(FUIAuth *)authUI
-                                                                                 email:(NSString *)email
+                                                                                 email:(nullable NSString *)email
                                                                          newCredential:(FIRAuthCredential *)newCredential;
 @end
 
@@ -262,6 +262,11 @@ __attribute__((deprecated("Instead use authUI:didSignInWithAuthDataResult:error:
         will contain more information about the error encountered.
  */
 - (BOOL)signOutWithError:(NSError *_Nullable *_Nullable)error;
+
+/** @fn useEmulatorWithHost:port
+    @brief Configures Firebase Auth to connect to an emulated host instead of the remote backend.
+ */
+- (void)useEmulatorWithHost:(NSString *)host port:(NSInteger)port;
 
 @end
 

@@ -115,7 +115,36 @@ NSString* const kFUIDefaultCountryCode = @"US";
 
 - (FUICountryCodeInfo *)defaultCountryCodeInfo {
   // Get the country code based on the information of user's telecommunication carrier provider.
-  CTCarrier *carrier = [[[CTTelephonyNetworkInfo alloc] init] subscriberCellularProvider];
+  CTCarrier *carrier;
+  if (@available(iOS 12, *)) {
+    NSDictionary *carriers =
+        [[[CTTelephonyNetworkInfo alloc] init] serviceSubscriberCellularProviders];
+    // For multi-sim phones, use the current locale to make an educated guess for
+    // which carrier to use.
+    NSString *currentCountryCode = [NSLocale currentLocale].countryCode;
+    for (CTCarrier *provider in carriers.allValues) {
+      if ([provider isKindOfClass:[CTCarrier class]] &&
+          [provider.isoCountryCode isEqualToString:currentCountryCode]) {
+        carrier = provider;
+        break;
+      }
+    }
+
+    // If the carrier is still nil, grab a random carrier from the dictionary.
+    if (carrier == nil) {
+      for (CTCarrier *provider in carriers.allValues) {
+        if ([provider isKindOfClass:[CTCarrier class]]) {
+          carrier = provider;
+          break;
+        }
+      }
+    }
+  } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    carrier = [[[CTTelephonyNetworkInfo alloc] init] subscriberCellularProvider];
+#pragma clang diagnostic pop
+  }
   NSString *countryCode = carrier.isoCountryCode ?: [[self class] countryCodeFromDeviceLocale];
   FUICountryCodeInfo *countryCodeInfo = [self countryCodeInfoForCode:countryCode];
   // If carrier is not available, get the hard coded default country code.

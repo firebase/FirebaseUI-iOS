@@ -18,7 +18,7 @@
 
 // clang-format on
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 #import "FUIBatchedArray.h"
 

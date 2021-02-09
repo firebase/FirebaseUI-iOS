@@ -676,6 +676,7 @@
 					"@loader_path/Frameworks",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-framework",
 					"\"FBSDKCoreKit\"",
@@ -718,6 +719,7 @@
 					"@loader_path/Frameworks",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-framework",
 					"\"FBSDKCoreKit\"",
@@ -756,11 +758,16 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-framework",
 					"\"FBSDKCoreKit\"",
@@ -800,11 +807,16 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-framework",
 					"\"FBSDKCoreKit\"",

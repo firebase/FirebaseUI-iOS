@@ -43,17 +43,33 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, readwrite) FUIButtonAlignment buttonAlignment;
 
-/** @fn init
-    @brief Conevenience initializer. Uses a default permission of `@[ "email" ]`.
+/** @fn initWithAuthUI
+    @brief Convenience initializer. Uses a default permission of `@[ "email" ]`.
+    @param authUI The @c FUIAuth instance that manages this provider.
  */
-- (instancetype)init;
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI;
 
-/** @fn initWithPermissions:
+/** @fn initWithAuthUI:permissions:
     @brief Designated initializer.
+    @param authUI The @c FUIAuth instance that manages this provider.
     @param permissions The permissions of the app. This array must be an array of specific string values
       as defined in https://developers.facebook.com/docs/facebook-login/permissions/
  */
-- (instancetype)initWithPermissions:(NSArray *)permissions NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithAuthUI:(FUIAuth *)authUI
+                   permissions:(NSArray *)permissions NS_DESIGNATED_INITIALIZER;
+
+/** @fn init
+    @brief Conevenience initializer. Uses a default permission of `@[ "email" ]`.
+ */
+- (instancetype)init
+__attribute__((deprecated("Instead use initWithAuthUI:")));
+
+/** @fn initWithPermissions:
+    @param permissions The permissions of the app. This array must be an array of specific string values
+      as defined in https://developers.facebook.com/docs/facebook-login/permissions/
+ */
+- (instancetype)initWithPermissions:(NSArray *)permissions
+__attribute__((deprecated("Instead use initWithAuthUI:permissions:"))) NS_DESIGNATED_INITIALIZER;
 
 @end
 

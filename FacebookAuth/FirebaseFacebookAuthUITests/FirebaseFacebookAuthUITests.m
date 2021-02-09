@@ -29,6 +29,8 @@
 
 @interface FirebaseFacebookAuthUITests : XCTestCase
 @property (nonatomic, strong) FUIFacebookAuthTest *provider;
+@property (nonatomic, strong) FUIAuth *authUI;
+@property (nonatomic, strong) id mockOAuthProvider;
 @end
 
 @implementation FirebaseFacebookAuthUITests
@@ -39,28 +41,30 @@
   id mockUtilsClass = OCMClassMock([FUIAuthUtils class]);
   OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY])).
       andReturn([NSBundle bundleForClass:[FUIFacebookAuthTest class]]);
-  
-  id authUIClass = OCMClassMock([FUIAuth class]);
-  OCMStub(ClassMethod([authUIClass authUIWithAuth:OCMOCK_ANY])).
-      andReturn(authUIClass);
 
   id authClass = OCMClassMock([FIRAuth class]);
   OCMStub(ClassMethod([authClass auth])).
       andReturn(authClass);
 
-  id bundle = [NSBundle bundleForClass:[self class]];
-  id mockNSBundleClass = OCMClassMock([NSBundle class]);
-  OCMStub(ClassMethod(mockNSBundleClass)).andReturn(bundle);
+  self.mockOAuthProvider = OCMClassMock([FIROAuthProvider class]);
+  OCMStub(ClassMethod([self.mockOAuthProvider providerWithProviderID:OCMOCK_ANY])).
+      andReturn(self.mockOAuthProvider);
 
-  self.provider = [[FUIFacebookAuthTest alloc] init];
+  FIRAuth *auth = [FIRAuth auth];
+  self.authUI = [FUIAuth authUIWithAuth:auth];
+  self.provider = [[FUIFacebookAuthTest alloc] initWithAuthUI:self.authUI];
 }
 
 - (void)tearDown {
   self.provider = nil;
+  self.authUI = nil;
+  self.mockOAuthProvider = nil;
   [super tearDown];
 }
 
 - (void)testProviderValidity {
+  self.provider = [[FUIFacebookAuthTest alloc] initWithAuthUI:self.authUI];
+
   XCTAssertNotNil(self.provider);
   XCTAssertNotNil(self.provider.icon);
   XCTAssertNotNil(self.provider.signInLabel);
@@ -69,6 +73,16 @@
   XCTAssertNotNil(self.provider.providerID);
   XCTAssertNotNil(self.provider.shortName);
   XCTAssertTrue(self.provider.signInLabel.length != 0);
+
+  OCMVerify(never(), [self.mockOAuthProvider providerWithProviderID:@"facebook.com"]);
+}
+
+- (void)testUseEmulatorCreatesOAuthProvider {
+  [self.authUI useEmulatorWithHost:@"host" port:12345];
+  self.provider = [[FUIFacebookAuthTest alloc] initWithAuthUI:self.authUI];
+
+  XCTAssertNotNil(self.provider);
+  OCMVerify([self.mockOAuthProvider providerWithProviderID:@"facebook.com"]);
 }
 
 - (void)testSuccessfullLogin {
@@ -88,10 +102,12 @@
   id mockToken = OCMPartialMock(token);
 
   NSSet *emptySet = [NSSet set];
-  FBSDKLoginManagerLoginResult *result = [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
-                                                                                 isCancelled:NO
-                                                                          grantedPermissions:emptySet
-                                                                         declinedPermissions:emptySet];
+  FBSDKLoginManagerLoginResult *result =
+      [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
+                                      authenticationToken:nil
+                                              isCancelled:NO
+                                       grantedPermissions:emptySet
+                                      declinedPermissions:emptySet];
   XCTAssertNil(_provider.accessToken);
   [self.provider configureLoginManager:result withError:nil];
 
@@ -117,7 +133,66 @@
   [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
     XCTAssertNil(error);
   }];
+
+  OCMVerify(never(), [self.mockOAuthProvider getCredentialWithUIDelegate:nil completion:OCMOCK_ANY]);
 }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+- (void)testLegacyInitSuccessfulLogin {
+  self.provider = [[FUIFacebookAuthTest alloc] init];
+
+  NSString *testToken = @"fakeToken";
+  XCTAssertNotNil(self.provider);
+  XCTAssertNil(self.provider.accessToken);
+
+  FBSDKAccessToken *token = [[FBSDKAccessToken alloc] initWithTokenString:testToken
+                                                              permissions:@[]
+                                                      declinedPermissions:@[]
+                                                       expiredPermissions:@[]
+                                                                    appID:@"testAppId"
+                                                                   userID:@"testUserId"
+                                                           expirationDate:nil
+                                                              refreshDate:nil
+                                                 dataAccessExpirationDate:nil];
+  id mockToken = OCMPartialMock(token);
+
+  NSSet *emptySet = [NSSet set];
+  FBSDKLoginManagerLoginResult *result =
+      [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
+                                      authenticationToken:nil
+                                              isCancelled:NO
+                                       grantedPermissions:emptySet
+                                      declinedPermissions:emptySet];
+  XCTAssertNil(_provider.accessToken);
+  [self.provider configureLoginManager:result withError:nil];
+
+  XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
+  [self.provider signInWithDefaultValue:nil
+               presentingViewController:nil
+                             completion:^(FIRAuthCredential *_Nullable credential,
+                                          NSError *_Nullable error,
+                                          FIRAuthResultCallback _Nullable result,
+                                          NSDictionary *_Nullable userInfo) {
+    XCTAssertNil(error);
+    XCTAssertNotNil(credential);
+    XCTAssertNotNil(result);
+    FIRAuthCredential *expectedCredential = [FIRFacebookAuthProvider credentialWithAccessToken:testToken];
+    XCTAssertEqualObjects(credential.provider, expectedCredential.provider);
+    XCTAssertNil(self.provider.idToken);
+
+    //verify that we are using token from server
+    OCMVerify([mockToken tokenString]);
+
+    [expectation fulfill];
+  }];
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *_Nullable error) {
+    XCTAssertNil(error);
+  }];
+
+  OCMVerify(never(), [self.mockOAuthProvider getCredentialWithUIDelegate:nil completion:OCMOCK_ANY]);
+}
+#pragma clang diagnostic pop
 
 - (void)testCancelLogin {
   NSString *testToken = @"fakeToken";
@@ -131,10 +206,12 @@
                                                               refreshDate:nil
                                                  dataAccessExpirationDate:nil];
   id mockToken = OCMPartialMock(token);
-  FBSDKLoginManagerLoginResult *result = [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
-                                                                                 isCancelled:YES
-                                                                          grantedPermissions:[NSSet set]
-                                                                         declinedPermissions:[NSSet set]];
+  FBSDKLoginManagerLoginResult *result =
+      [[FBSDKLoginManagerLoginResult alloc] initWithToken:mockToken
+                                      authenticationToken:nil
+                                              isCancelled:YES
+                                       grantedPermissions:[NSSet set]
+                                      declinedPermissions:[NSSet set]];
   [self.provider configureLoginManager:result withError:nil];
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
@@ -185,7 +262,7 @@
 }
 
 - (void)testSignOut {
-  id mockProvider = OCMPartialMock([[FUIFacebookAuth alloc] init]);
+  id mockProvider = OCMPartialMock([[FUIFacebookAuth alloc] initWithAuthUI:self.authUI]);
   id mockFacebookManager = OCMClassMock([FBSDKLoginManager class]);
 
   OCMExpect([mockProvider createLoginManager]).andReturn(mockFacebookManager);
@@ -197,6 +274,19 @@
   OCMVerifyAll(mockFacebookManager);
   OCMVerifyAll(mockProvider);
 
+}
+
+- (void)testUseEmulatorUsesOAuthProvider {
+  [self.authUI useEmulatorWithHost:@"host" port:12345];
+  self.provider = [[FUIFacebookAuthTest alloc] initWithAuthUI:self.authUI];
+
+  [self.provider signInWithDefaultValue:nil
+               presentingViewController:nil
+                             completion:^(FIRAuthCredential *_Nullable credential,
+                                          NSError *_Nullable error,
+                                          FIRAuthResultCallback _Nullable result,
+                                          NSDictionary *_Nullable userInfo) {}];
+  OCMVerify([self.mockOAuthProvider getCredentialWithUIDelegate:nil completion:OCMOCK_ANY]);
 }
 
 @end

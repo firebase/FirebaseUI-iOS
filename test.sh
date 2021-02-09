@@ -5,11 +5,11 @@ set -euxo pipefail
 EXIT_STATUS=0
 
 folders=( "AnonymousAuth" "Auth" "Database" "EmailAuth" "FacebookAuth" \
-    "Firestore" "GoogleAuth" "PhoneAuth" "Storage" )
+    "Firestore" "GoogleAuth" "OAuth" "PhoneAuth" "Storage" )
 
 schemes=( "FirebaseAnonymousAuthUI" "FirebaseAuthUI" "FirebaseDatabaseUI" \
     "FirebaseEmailAuthUI" "FirebaseFacebookAuthUI" "FirebaseFirestoreUI" \
-    "FirebaseGoogleAuthUI" "FirebasePhoneAuthUI" "FirebaseStorageUI" )
+    "FirebaseGoogleAuthUI" "FirebaseOAuthUI" "FirebasePhoneAuthUI" "FirebaseStorageUI" )
 
 pod repo update;
 
@@ -30,4 +30,4 @@ do
   cd ..;
 done
 
-exit 0
+exit $EXIT_STATUS

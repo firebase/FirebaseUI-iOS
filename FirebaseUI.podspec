@@ -1,30 +1,30 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseUI'
-  s.version      = '8.4.2'
+  s.version      = '10.0.2'
   s.summary      = 'UI binding libraries for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'LICENSE' }
   s.source       = { :git => 'https://github.com/firebase/FirebaseUI-iOS.git', :tag => 'v' + s.version.to_s}
   s.author       = 'Firebase'
   s.platform = :ios
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
   s.static_framework = true
   s.ios.framework = 'UIKit'
   s.requires_arc = true
   s.public_header_files = 'FirebaseUI.h'
   s.source_files = 'FirebaseUI.h'
-  s.cocoapods_version = '>= 1.5.0'
+  s.cocoapods_version = '>= 1.8.0'
 
   s.subspec 'Database' do |database|
-    database.platform = :ios, '8.0'
+    database.platform = :ios, '10.0'
     database.public_header_files = 'Database/FirebaseDatabaseUI/*.h'
     database.source_files = 'Database/FirebaseDatabaseUI/*.{h,m}'
-    database.dependency 'Firebase/Database', '~> 6.0'
+    database.dependency 'Firebase/Database'
     database.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseDatabaseUI' }
   end
 
   s.subspec 'Firestore' do |firestore|
-    firestore.platform = :ios, '8.0'
+    firestore.platform = :ios, '10.0'
     firestore.public_header_files = 'Firestore/FirebaseFirestoreUI/*.h'
     firestore.source_files = 'Firestore/FirebaseFirestoreUI/*.{h,m}'
     firestore.dependency 'Firebase/Firestore'
@@ -32,17 +32,17 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Storage' do |storage|
-    storage.ios.deployment_target = '8.0'
+    storage.ios.deployment_target = '10.0'
     # storage.tvos.deployment_target = '11.0' Disabled; one of the dependencies doesn't support tvOS.
     storage.public_header_files = 'Storage/FirebaseStorageUI/*.h'
     storage.source_files = 'Storage/FirebaseStorageUI/*.{h,m}'
-    storage.dependency 'Firebase/Storage', '~> 6.0'
+    storage.dependency 'Firebase/Storage'
     storage.dependency 'SDWebImage', '~> 5.6'
     storage.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/FirebaseUI/FirebaseStorageUI' }
   end
 
   s.subspec 'Auth' do |auth|
-    auth.platform = :ios, '8.0'
+    auth.platform = :ios, '10.0'
     auth.public_header_files = ['Auth/FirebaseAuthUI/AccountManagement/FUIAccountSettingsOperationType.h',
                                 'Auth/FirebaseAuthUI/AccountManagement/FUIAccountSettingsViewController.h',
                                 'Auth/FirebaseAuthUI/FirebaseAuthUI.h',
@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
                                 'Auth/FirebaseAuthUI/FUIAuthTableViewCell.h',
                                 'Auth/FirebaseAuthUI/FUIAuthTableHeaderView.h']
     auth.source_files = ['Auth/FirebaseAuthUI/**/*.{h,m}', 'Auth/FirebaseAuthUI/*.{h,m}']
-    auth.dependency 'Firebase/Auth', '~> 6.0'
+    auth.dependency 'Firebase/Auth', '>= 7.2.0'
     auth.dependency 'GoogleUtilities/UserDefaults'
     auth.resource_bundle = {
       'FirebaseAuthUI' => ['Auth/FirebaseAuthUI/**/*.{xib,png,lproj}']
@@ -74,7 +74,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Anonymous' do |anonymous|
-    anonymous.platform = :ios, '8.0'
+    anonymous.platform = :ios, '10.0'
     anonymous.public_header_files = 'AnonymousAuth/FirebaseAnonymousAuthUI/*.h'
     anonymous.source_files = 'AnonymousAuth/FirebaseAnonymousAuthUI/*.{h,m}'
     anonymous.dependency 'FirebaseUI/Auth'
@@ -85,7 +85,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Email' do |email|
-    email.platform = :ios, '8.0'
+    email.platform = :ios, '10.0'
     email.public_header_files = ['EmailAuth/FirebaseEmailAuthUI/FirebaseEmailAuthUI.h',
                                  'EmailAuth/FirebaseEmailAuthUI/FUIConfirmEmailViewController.h',
                                  'EmailAuth/FirebaseEmailAuthUI/FUIEmailAuth.h',
@@ -105,11 +105,11 @@ Pod::Spec.new do |s|
 
 
   s.subspec 'Facebook' do |facebook|
-    facebook.platform = :ios, '8.0'
+    facebook.platform = :ios, '10.0'
     facebook.public_header_files = 'FacebookAuth/FirebaseFacebookAuthUI/*.h'
     facebook.source_files = 'FacebookAuth/FirebaseFacebookAuthUI/*.{h,m}'
     facebook.dependency 'FirebaseUI/Auth'
-    facebook.dependency 'FBSDKLoginKit', '~> 5.0'
+    facebook.dependency 'FBSDKLoginKit', '~> 9.0'
     facebook.resource_bundle = {
       'FirebaseFacebookAuthUI' => ['FacebookAuth/FirebaseFacebookAuthUI/**/*.{png,lproj}']
     }
@@ -117,7 +117,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Google' do |google|
-    google.platform = :ios, '8.0'
+    google.platform = :ios, '10.0'
     google.public_header_files = 'GoogleAuth/FirebaseGoogleAuthUI/*.h'
     google.source_files = 'GoogleAuth/FirebaseGoogleAuthUI/*.{h,m}'
     google.dependency 'FirebaseUI/Auth'
@@ -129,7 +129,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'OAuth' do |oauth|
-    oauth.platform = :ios, '8.0'
+    oauth.platform = :ios, '10.0'
     oauth.public_header_files = 'OAuth/FirebaseOAuthUI/*.h'
     oauth.source_files = 'OAuth/FirebaseOAuthUI/*.{h,m}'
     oauth.dependency 'FirebaseUI/Auth'
@@ -140,7 +140,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Phone' do |phone|
-    phone.platform = :ios, '8.0'
+    phone.platform = :ios, '10.0'
     phone.public_header_files = ['PhoneAuth/FirebasePhoneAuthUI/FirebasePhoneAuthUI.h',
                                  'PhoneAuth/FirebasePhoneAuthUI/FUIPhoneAuth.h']
     phone.source_files = 'PhoneAuth/FirebasePhoneAuthUI/**/*.{h,m}'

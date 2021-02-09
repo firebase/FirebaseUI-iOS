@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -406,12 +406,17 @@
 					"@loader_path/Frameworks",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/OCMock\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-framework",
 					"\"GTMSessionFetcher\"",
@@ -437,12 +442,17 @@
 					"@loader_path/Frameworks",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/OCMock\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-framework",
 					"\"GTMSessionFetcher\"",

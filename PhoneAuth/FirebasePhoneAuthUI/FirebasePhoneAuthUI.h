@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 //! Project version number for FirebasePhoneAuthUI.
 FOUNDATION_EXPORT double FirebasePhoneAuthUIVersionNumber;

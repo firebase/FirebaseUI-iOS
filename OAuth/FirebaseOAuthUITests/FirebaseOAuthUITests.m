@@ -18,12 +18,15 @@
 #import <XCTest/XCTest.h>
 
 #import <FirebaseAuth/FirebaseAuth.h>
+#import <FirebaseCore/FirebaseCore.h>
 #import <FirebaseUI/FirebaseAuthUI.h>
 
 #import "FUIOAuth.h"
 
 @interface FirebaseOAuthUITests : XCTestCase
 @property (nonatomic, strong) FUIOAuth *provider;
+@property (nonatomic, strong) FUIAuth *authUI;
+@property (nonatomic, strong) id mockOAuthProvider;
 @end
 
 @implementation FirebaseOAuthUITests
@@ -34,20 +37,31 @@
   id mockUtilsClass = OCMClassMock([FUIAuthUtils class]);
   OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY])).
       andReturn([NSBundle bundleForClass:[FUIOAuth class]]);
-  
-  id authUIClass = OCMClassMock([FUIAuth class]);
-  id providerIDClass = OCMClassMock([NSString class]);
-  OCMStub(ClassMethod([authUIClass authUIWithAuth:OCMOCK_ANY])).
-      andReturn(authUIClass);
 
   id authClass = OCMClassMock([FIRAuth class]);
   OCMStub(ClassMethod([authClass auth])).
       andReturn(authClass);
 
-  FIRAuth *auth = [FIRAuth auth];
-  FUIAuth *authUI = [FUIAuth authUIWithAuth:auth];
+  id appClass = OCMClassMock([FIRApp class]);
+  OCMStub([authClass app]).andReturn(appClass);
 
-  self.provider = [[FUIOAuth alloc] initWithAuthUI:authUI
+  self.mockOAuthProvider = OCMClassMock([FIROAuthProvider class]);
+  OCMStub(ClassMethod([_mockOAuthProvider providerWithProviderID:OCMOCK_ANY])).
+      andReturn(_mockOAuthProvider);
+
+  FIRAuth *auth = [FIRAuth auth];
+  self.authUI = [FUIAuth authUIWithAuth:auth];
+}
+
+- (void)tearDown {
+  self.provider = nil;
+  self.authUI = nil;
+  self.mockOAuthProvider = nil;
+  [super tearDown];
+}
+
+- (void)testProviderValidity {
+  self.provider = [[FUIOAuth alloc] initWithAuthUI:self.authUI
                                         providerID:@"dummy"
                                    buttonLabelText:@"Sign in with dummy"
                                          shortName:@"Dummy"
@@ -56,14 +70,7 @@
                                             scopes:@[]
                                   customParameters:@{}
                                       loginHintKey:nil];
-}
 
-- (void)tearDown {
-  self.provider = nil;
-  [super tearDown];
-}
-
-- (void)testProviderValidity {
   XCTAssertNotNil(self.provider);
   XCTAssertNil(self.provider.icon);
   XCTAssertNotNil(self.provider.signInLabel);
@@ -74,6 +81,36 @@
   XCTAssertTrue(self.provider.signInLabel.length != 0);
   XCTAssertNil(self.provider.accessToken);
   XCTAssertNil(self.provider.idToken);
+
+  OCMVerify([self.mockOAuthProvider providerWithProviderID:@"dummy"]);
+}
+
+- (void)testAppleUsesEmulatorCreatesOAuthProvider {
+  [self.authUI useEmulatorWithHost:@"host" port:12345];
+
+  self.provider = [[FUIOAuth alloc] initWithAuthUI:self.authUI
+                                        providerID:@"apple.com"
+                                   buttonLabelText:@"Sign in with Apple"
+                                         shortName:@"Apple"
+                                       buttonColor:[UIColor clearColor]
+                                         iconImage:[UIImage imageNamed:@""]
+                                            scopes:@[]
+                                  customParameters:@{}
+                                      loginHintKey:nil];
+  OCMVerify([self.mockOAuthProvider providerWithProviderID:@"apple.com"]);
+}
+
+- (void)testAppleNoUseEmulatorNoOAuthProvider {
+  self.provider = [[FUIOAuth alloc] initWithAuthUI:self.authUI
+                                        providerID:@"apple.com"
+                                   buttonLabelText:@"Sign in with Apple"
+                                         shortName:@"Apple"
+                                       buttonColor:[UIColor clearColor]
+                                         iconImage:[UIImage imageNamed:@""]
+                                            scopes:@[]
+                                  customParameters:@{}
+                                      loginHintKey:nil];
+  OCMVerify(never(), [self.mockOAuthProvider providerWithProviderID:@"apple.com"]);
 }
 
 @end
