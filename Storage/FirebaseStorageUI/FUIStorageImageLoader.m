@@ -16,8 +16,14 @@
 
 #import "FUIStorageImageLoader.h"
 #import "FIRStorageDownloadTask+SDWebImage.h"
+
+#if SWIFT_PACKAGE
+@import FirebaseCore;
+@import GTMSessionFetcherCore;
+#else
 #import <FirebaseCore/FirebaseCore.h>
 #import <GTMSessionFetcher/GTMSessionFetcher.h>
+#endif // SWIFT_PACKAGE
 
 @interface NSURL ()
 

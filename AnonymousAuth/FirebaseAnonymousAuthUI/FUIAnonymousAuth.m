@@ -14,11 +14,15 @@
 //  limitations under the License.
 //
 
+#if SWIFT_PACKAGE
+@import AuthUI;
+#else
 #import <FirebaseUI/FirebaseAuthUI.h>
-
-#import "FUIAnonymousAuth.h"
 #import <FirebaseUI/FUIAuthBaseViewController.h>
 #import <FirebaseUI/FUIAuthBaseViewController_Internal.h>
+#endif // SWIFT_PACKAGE
+
+#import "FUIAnonymousAuth.h"
 #import "FUIAuthErrorUtils.h"
 
 /** @var kTableName

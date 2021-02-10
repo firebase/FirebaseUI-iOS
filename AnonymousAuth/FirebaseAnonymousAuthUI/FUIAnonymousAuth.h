@@ -13,8 +13,13 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+
 @class FUIAuth;
+#if SWIFT_PACKAGE
+@import AuthUI;
+#else
 #import <FirebaseUI/FUIAuthProvider.h>
+#endif // SWIFT_PACKAGE
 
 NS_ASSUME_NONNULL_BEGIN
 

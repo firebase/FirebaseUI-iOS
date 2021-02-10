@@ -16,9 +16,16 @@
 
 #import "FUIFacebookAuth.h"
 
+#if SWIFT_PACKAGE
+@import FirebaseAuth;
+@import FacebookLogin;
+@import FacebookCore;
+#else
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#endif // SWIFT_PACKAGE
+
 #import "FUIAuthBaseViewController.h"
 #import "FUIAuth_Internal.h"
 #import "FUIAuthErrorUtils.h"

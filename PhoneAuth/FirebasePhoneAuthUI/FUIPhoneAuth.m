@@ -16,11 +16,16 @@
 
 #import "FUIPhoneAuth_Internal.h"
 
+#if SWIFT_PACKAGE
+@import AuthUI;
+#else
+#import <FirebaseAuth/FIRPhoneAuthProvider.h>
+#endif // SWIFT_PACKAGE
+
 #import "CountryCode/FUICountryCodes.h"
 #import "FUIAuth_Internal.h"
 #import "FUIPhoneAuthStrings.h"
 #import "FUIPhoneEntryViewController.h"
-#import <FirebaseAuth/FIRPhoneAuthProvider.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

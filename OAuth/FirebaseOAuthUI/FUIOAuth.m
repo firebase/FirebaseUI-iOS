@@ -16,10 +16,16 @@
 
 #import "FUIOAuth.h"
 
+#if SWIFT_PACKAGE
+@import AuthenticationServices;
+@import AuthUI;
+#else
 #import <AuthenticationServices/AuthenticationServices.h>
 #import <FirebaseUI/FirebaseAuthUI.h>
 #import <FirebaseUI/FUIAuthBaseViewController.h>
 #import <FirebaseUI/FUIAuthBaseViewController_Internal.h>
+#endif // SWIFT_PACKAGE
+
 #import "FUIAuth_Internal.h"
 #import "FUIAuthErrorUtils.h"
 

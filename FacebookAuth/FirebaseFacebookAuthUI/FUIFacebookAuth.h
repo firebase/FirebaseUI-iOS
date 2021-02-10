@@ -14,9 +14,14 @@
 //  limitations under the License.
 //
 
-#import <FirebaseUI/FirebaseAuthUI.h>
-
 @class FBSDKLoginManager;
+
+#if SWIFT_PACKAGE
+@import AuthUI;
+#else
+#import "FUIAuth.h"
+#endif // SWIFT_PACKAGE
+
 NS_ASSUME_NONNULL_BEGIN
 
 /** @class FUIFacebookAuth
