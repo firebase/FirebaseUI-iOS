@@ -33,7 +33,11 @@ static NSString *const kTableName = @"FirebaseAnonymousAuthUI";
 /** @var kBundleName
     @brief The name of the bundle to search for resources.
  */
+#if SWIFT_PACKAGE
+static NSString *const kBundleName = @"FirebaseUI_AnonymousAuthUI";
+#else
 static NSString *const kBundleName = @"FirebaseAnonymousAuthUI";
+#endif // SWIFT_PACKAGE
 
 /** @var kSignInAsGuest
     @brief The string key for localized button text.

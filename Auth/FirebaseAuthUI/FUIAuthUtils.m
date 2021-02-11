@@ -16,7 +16,11 @@
 
 #import "FUIAuthUtils.h"
 
+#if SWIFT_PACKAGE
+NSString *const FUIAuthBundleName = @"FirebaseUI_AuthUI";
+#else
 NSString *const FUIAuthBundleName = @"FirebaseAuthUI";
+#endif // SWIFT_PACKAGE
 
 @implementation FUIAuthUtils
 

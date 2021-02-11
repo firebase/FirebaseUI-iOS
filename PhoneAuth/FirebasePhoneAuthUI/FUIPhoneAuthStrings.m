@@ -47,7 +47,11 @@ NSString *const kPAStr_MessageQuotaExceeded = @"MessageQuotaExceeded";
 NSString *const kPAStr_MessageExpired = @"MessageExpired";
 NSString *const kPAStr_TermsSMS = @"TermsSMS";
 
+#if SWIFT_PACKAGE
+NSString *const FUIPhoneAuthBundleName = @"FirebaseUI_PhoneAuthUI";
+#else
 NSString *const FUIPhoneAuthBundleName = @"FirebasePhoneAuthUI";
+#endif // SWIFT_PACKAGE
 
 /** @var kPhoneAuthProviderTableName
     @brief The name of the strings table to search for localized strings.

@@ -18,9 +18,11 @@
 
 #import "FUIAuthStrings.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
+#if SWIFT_PACKAGE
+NSString *const FUIEmailAuthBundleName = @"FirebaseUI_EmailAuthUI";
+#else
 NSString *const FUIEmailAuthBundleName = @"FirebaseEmailAuthUI";
+#endif // SWIFT_PACKAGE
 
 /** @var kEmailAuthProviderTableName
     @brief The name of the strings table to search for localized strings.
@@ -32,5 +34,3 @@ NSString *FUIEmailAuthLocalizedString(NSString *key) {
                                              kEmailAuthProviderTableName,
                                              FUIEmailAuthBundleName);
 }
-
-NS_ASSUME_NONNULL_END
