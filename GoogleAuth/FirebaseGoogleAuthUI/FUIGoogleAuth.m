@@ -278,6 +278,12 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   signIn.delegate = self;
   signIn.shouldFetchBasicProfile = YES;
   signIn.clientID = [[FIRApp defaultApp] options].clientID;
+  if (!signIn.clientID) {
+    [NSException raise:NSInternalInconsistencyException
+                format:@"OAuth client ID not found. Please make sure Google Sign-In is enabled in "
+     @"the Firebase console. You may have to download a new GoogleService-Info.plist file after "
+     @"enabling Google Sign-In."];
+  }
   signIn.scopes = _scopes;
   return signIn;
 }
