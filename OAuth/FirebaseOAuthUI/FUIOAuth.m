@@ -38,7 +38,7 @@ static NSString *const kTableName = @"FirebaseOAuthUI";
     @brief The name of the bundle to search for resources.
  */
 #if SWIFT_PACKAGE
-static NSString *const kBundleName = @"FirebaseOAuthUI";
+static NSString *const kBundleName = @"FirebaseUI_OAuthUI";
 #else
 static NSString *const kBundleName = @"FirebaseOAuthUI";
 #endif // SWIFT_PACKAGE
@@ -155,7 +155,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                            blue:234.0f/255.0f
                                                           alpha:1.0f]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_twitter"
-                                               fromBundleNameOrNil:@"FirebaseOAuthUI"]
+                                               fromBundleNameOrNil:kBundleName]
                                    scopes:@[@"user.readwrite"]
                          customParameters:@{@"prompt" : @"consent"}
                              loginHintKey:nil];
@@ -168,7 +168,7 @@ NS_ASSUME_NONNULL_BEGIN
                                 shortName:@"GitHub"
                               buttonColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_github"
-                                               fromBundleNameOrNil:@"FirebaseOAuthUI"]
+                                               fromBundleNameOrNil:kBundleName]
                                    scopes:nil
                          customParameters:nil
                              loginHintKey:nil];
@@ -181,7 +181,7 @@ NS_ASSUME_NONNULL_BEGIN
                                 shortName:@"Microsoft"
                               buttonColor:[UIColor colorWithRed:.18 green:.18 blue:.18 alpha:1.0]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_microsoft"
-                                               fromBundleNameOrNil:@"FirebaseOAuthUI"]
+                                               fromBundleNameOrNil:kBundleName]
                                    scopes:@[@"user.readwrite"]
                          customParameters:@{@"prompt" : @"consent"}
                              loginHintKey:@"login_hint"];
@@ -194,7 +194,7 @@ NS_ASSUME_NONNULL_BEGIN
                                 shortName:@"Yahoo"
                               buttonColor:[UIColor colorWithRed:.45 green:.05 blue:.62 alpha:1.0]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_yahoo"
-                                               fromBundleNameOrNil:@"FirebaseOAuthUI"]
+                                               fromBundleNameOrNil:kBundleName]
                                    scopes:@[@"user.readwrite"]
                          customParameters:@{@"prompt" : @"consent"}
                              loginHintKey:nil];
@@ -207,7 +207,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (FUIOAuth *)appleAuthProviderWithUserInterfaceStyle:(UIUserInterfaceStyle)userInterfaceStyle {
   UIImage *iconImage = [FUIAuthUtils imageNamed:@"ic_apple"
-                            fromBundleNameOrNil:@"FirebaseOAuthUI"];
+                            fromBundleNameOrNil:kBundleName];
   UIColor *buttonColor = [UIColor blackColor];
   UIColor *buttonTextColor = [UIColor whiteColor];
   if (userInterfaceStyle == UIUserInterfaceStyleDark) {

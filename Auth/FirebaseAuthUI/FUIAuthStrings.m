@@ -130,7 +130,7 @@ NSString *FUILocalizedString(NSString *key) {
 }
 
 NSString *FUILocalizedStringFromTable(NSString *key, NSString *table) {
-  return FUILocalizedStringFromTableInBundle(key, table, kTableName);
+  return FUILocalizedStringFromTableInBundle(key, table, FUIAuthBundleName);
 }
 
 NSString *FUILocalizedStringFromTableInBundle(NSString *key,
