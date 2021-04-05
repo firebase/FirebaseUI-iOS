@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseAuthUI.h"
+#import <FirebaseUI/FirebaseAuthUI.h>
 
 @class FUIAuth;
 @class FIRActionCodeSettings;
