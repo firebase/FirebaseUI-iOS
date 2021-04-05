@@ -16,7 +16,11 @@
 
 #import <UIKit/UIKit.h>
 
+#if SWIFT_PACKAGE
 #import "AccountManagement/FUIAccountSettingsOperationType.h"
+#else
+#import "FUIAccountSettingsOperationType.h"
+#endif
 #import "FUIAuthProvider.h"
 
 @class FIRAuth;
