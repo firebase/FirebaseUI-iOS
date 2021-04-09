@@ -1,7 +1,7 @@
 // swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 import PackageDescription
 
 let package = Package(
@@ -24,36 +23,36 @@ let package = Package(
   platforms: [.iOS(.v10)],
   products: [
     .library(
-      name: "AnonymousAuthUI",
-      targets: ["AnonymousAuthUI"]
+      name: "FirebaseAnonymousAuthUI",
+      targets: ["FirebaseAnonymousAuthUI"]
     ),
     .library(
-      name: "DatabaseUI",
-      targets: ["DatabaseUI"]
+      name: "FirebaseDatabaseUI",
+      targets: ["FirebaseDatabaseUI"]
     ),
     .library(
-      name: "AuthUI",
-      targets: ["AuthUI"]
+      name: "FirebaseAuthUI",
+      targets: ["FirebaseAuthUI"]
     ),
     .library(
-      name: "EmailAuthUI",
-      targets: ["EmailAuthUI"]
+      name: "FirebaseEmailAuthUI",
+      targets: ["FirebaseEmailAuthUI"]
     ),
     .library(
-      name: "FirestoreUI",
-      targets: ["FirestoreUI"]
+      name: "FirebaseFirestoreUI",
+      targets: ["FirebaseFirestoreUI"]
     ),
     .library(
-      name: "OAuthUI",
-      targets: ["OAuthUI"]
+      name: "FirebaseOAuthUI",
+      targets: ["FirebaseOAuthUI"]
     ),
     .library(
-      name: "PhoneAuthUI",
-      targets: ["PhoneAuthUI"]
+      name: "FirebasePhoneAuthUI",
+      targets: ["FirebasePhoneAuthUI"]
     ),
     .library(
-      name: "StorageUI",
-      targets: ["StorageUI"]
+      name: "FirebaseStorageUI",
+      targets: ["FirebaseStorageUI"]
     ),
   ],
   dependencies: [
@@ -85,39 +84,39 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "AnonymousAuthUI",
-      dependencies: ["AuthUI"],
-      path: "AnonymousAuth/FirebaseAnonymousAuthUI",
+      name: "FirebaseAnonymousAuthUI",
+      dependencies: ["FirebaseAuthUI"],
+      path: "FirebaseAnonymousAuthUI/Sources",
       exclude: ["Info.plist"],
       resources: [
         .process("Resources"),
         .process("Strings"),
       ],
-      publicHeadersPath: ".",
+      publicHeadersPath: "Public",
       cSettings: [
-        .headerSearchPath("./"),
+        .headerSearchPath("../../"),
       ]
     ),
     .target(
-      name: "DatabaseUI",
+      name: "FirebaseDatabaseUI",
       dependencies: [
         .product(name: "FirebaseDatabase", package: "Firebase"),
       ],
-      path: "Database/FirebaseDatabaseUI",
+      path: "FirebaseDatabaseUI/Sources",
       exclude: ["Info.plist"],
       resources: nil,
-      publicHeadersPath: ".",
+      publicHeadersPath: "Public",
       cSettings: [
-        .headerSearchPath("./"),
+        .headerSearchPath("../../"),
       ]
     ),
     .target(
-      name: "AuthUI",
+      name: "FirebaseAuthUI",
       dependencies: [
         .product(name: "FirebaseAuth", package: "Firebase"),
         .product(name: "GULUserDefaults", package: "GoogleUtilities"),
       ],
-      path: "Auth/FirebaseAuthUI",
+      path: "FirebaseAuthUI/Sources",
       exclude: ["Info.plist"],
       resources: [
         .process("Resources"),
@@ -129,23 +128,22 @@ let package = Package(
         .process("FUIAuthTableViewCell.xib"),
         .process("FUIStaticContentTableViewController.xib"),
       ],
-      publicHeadersPath: ".",
+      publicHeadersPath: "Public",
       cSettings: [
-        .headerSearchPath("./"),
-        .headerSearchPath("./AccountManagement/"),
+        .headerSearchPath("../../"),
       ]
     ),
     .target(
-      name: "EmailAuthUI",
-      dependencies: ["AuthUI"],
-      path: "EmailAuth/FirebaseEmailAuthUI",
+      name: "FirebaseEmailAuthUI",
+      dependencies: ["FirebaseAuthUI"],
+      path: "FirebaseEmailAuthUI/Sources",
       exclude: ["Info.plist"],
       resources: [
         .process("Resources"),
       ],
-      publicHeadersPath: ".",
+      publicHeadersPath: "Public",
       cSettings: [
-        .headerSearchPath("./"),
+        .headerSearchPath("../../"),
       ]
     ),
     // Facebook doesn't seem to vend their ObjC libraries through SPM, though thier
@@ -169,16 +167,16 @@ let package = Package(
 //      ]
 //    ),
     .target(
-      name: "FirestoreUI",
+      name: "FirebaseFirestoreUI",
       dependencies: [
         .product(name: "FirebaseFirestore", package: "Firebase"),
       ],
-      path: "Firestore/FirebaseFirestoreUI",
+      path: "FirebaseFirestoreUI/Sources",
       exclude: ["Info.plist"],
       resources: nil,
-      publicHeadersPath: ".",
+      publicHeadersPath: "Public",
       cSettings: [
-        .headerSearchPath("./"),
+        .headerSearchPath("../../"),
       ]
     ),
     // .target(
@@ -199,26 +197,26 @@ let package = Package(
     //   ]
     // ),
     .target(
-      name: "OAuthUI",
+      name: "FirebaseOAuthUI",
       dependencies: [
-        "AuthUI",
+        "FirebaseAuthUI",
       ],
-      path: "OAuth/FirebaseOAuthUI",
+      path: "FirebaseOAuthUI/Sources",
       exclude: ["Info.plist"],
       resources: [
         .process("Resources"),
       ],
-      publicHeadersPath: ".",
+      publicHeadersPath: "Public",
       cSettings: [
-        .headerSearchPath("./"),
+        .headerSearchPath("../../"),
       ]
     ),
     .target(
-      name: "PhoneAuthUI",
+      name: "FirebasePhoneAuthUI",
       dependencies: [
-        "AuthUI",
+        "FirebaseAuthUI",
       ],
-      path: "PhoneAuth/FirebasePhoneAuthUI",
+      path: "FirebasePhoneAuthUI/Sources",
       exclude: ["Info.plist"],
       resources: [
         .process("Resources"),
@@ -227,26 +225,24 @@ let package = Package(
         .process("FUIPhoneEntryViewController.xib"),
         .process("FUIPhoneVerificationViewController.xib"),
       ],
-      publicHeadersPath: ".",
+      publicHeadersPath: "Public",
       cSettings: [
-        .headerSearchPath("./"),
-        .headerSearchPath("./CountryCode/"),
+        .headerSearchPath("../../"),
       ]
     ),
     .target(
-      name: "StorageUI",
+      name: "FirebaseStorageUI",
       dependencies: [
         .product(name: "FirebaseStorage", package: "Firebase"),
         .product(name: "SDWebImage", package: "SDWebImage"),
         .product(name: "GTMSessionFetcher", package: "GTMSessionFetcher"),
       ],
-      path: "Storage/FirebaseStorageUI",
+      path: "FirebaseStorageUI/Sources",
       exclude: ["Info.plist"],
       resources: nil,
-      publicHeadersPath: ".",
+      publicHeadersPath: "Public",
       cSettings: [
-        .headerSearchPath("./"),
-        .headerSearchPath("./CountryCode/"),
+        .headerSearchPath("../../"),
       ]
     ),
   ]

@@ -4,24 +4,21 @@ set -euxo pipefail
 
 EXIT_STATUS=0
 
-folders=( "AnonymousAuth" "Auth" "Database" "EmailAuth" "FacebookAuth" \
-    "Firestore" "GoogleAuth" "OAuth" "PhoneAuth" "Storage" )
-
 schemes=( "FirebaseAnonymousAuthUI" "FirebaseAuthUI" "FirebaseDatabaseUI" \
     "FirebaseEmailAuthUI" "FirebaseFacebookAuthUI" "FirebaseFirestoreUI" \
     "FirebaseGoogleAuthUI" "FirebaseOAuthUI" "FirebasePhoneAuthUI" "FirebaseStorageUI" )
 
 pod repo update;
 
-for ((i=0; i<${#folders[*]}; i++));
+for ((i=0; i<${#schemes[*]}; i++));
 do
-  cd ${folders[i]};
+  cd ${schemes[i]};
   pod install;
   (xcodebuild \
     -workspace ${schemes[i]}.xcworkspace \
     -scheme ${schemes[i]} \
     -sdk iphonesimulator \
-    -destination 'platform=iOS Simulator,OS=13.3,name=iPhone 11 Pro' \
+    -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11 Pro' \
     build \
     test \
     ONLY_ACTIVE_ARCH=YES \
