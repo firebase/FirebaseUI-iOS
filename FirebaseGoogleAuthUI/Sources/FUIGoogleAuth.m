@@ -19,16 +19,7 @@
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FirebaseCore/FirebaseCore.h>
 #import <GoogleSignIn/GoogleSignIn.h>
-
-#if SWIFT_PACKAGE
-@import FirebaseAuthUI;
-@import FirebaseAuthUI.FUIAuthBaseViewController_Internal;
-@import FirebaseAuthUI.FUIAuth_Internal;
-#else
-#import <FirebaseUI/FirebaseAuthUI.h>
-#import <FirebaseUI/FUIAuth_Internal.h>
-#import <FirebaseUI/FUIAuthBaseViewController_Internal.h>
-#endif // SWIFT_PACKAGE
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.

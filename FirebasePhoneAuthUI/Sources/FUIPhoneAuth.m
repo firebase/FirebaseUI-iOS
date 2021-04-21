@@ -16,12 +16,7 @@
 
 #import "FirebasePhoneAuthUI/Sources/FUIPhoneAuth_Internal.h"
 
-#if SWIFT_PACKAGE
-@import FirebaseAuthUI;
-#else
-#import <FirebaseAuth/FIRPhoneAuthProvider.h>
-#import <FirebaseUI/FUIAuth_Internal.h>
-#endif // SWIFT_PACKAGE
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 #import "FirebasePhoneAuthUI/Sources/FUICountryCodes.h"
 #import "FirebasePhoneAuthUI/Sources/FUIPhoneAuthStrings.h"

@@ -16,7 +16,7 @@
 //  limitations under the License.
 //
 
-#import <FirebaseUI/FirebaseEmailAuthUI.h>
+#import <FirebaseEmailAuthUI/FirebaseEmailAuthUI.h>
 
 @interface FUICustomPasswordVerificationViewController : FUIPasswordVerificationViewController
 

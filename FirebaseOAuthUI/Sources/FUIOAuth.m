@@ -16,15 +16,8 @@
 
 #import "FirebaseOAuthUI/Sources/Public/FUIOAuth.h"
 
-#if SWIFT_PACKAGE
-@import AuthenticationServices;
-@import FirebaseAuthUI;
-#else
 #import <AuthenticationServices/AuthenticationServices.h>
-#import <FirebaseUI/FirebaseAuthUI.h>
-#import <FirebaseUI/FUIAuth_Internal.h>
-#import <FirebaseUI/FUIAuthBaseViewController_Internal.h>
-#endif // SWIFT_PACKAGE
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.

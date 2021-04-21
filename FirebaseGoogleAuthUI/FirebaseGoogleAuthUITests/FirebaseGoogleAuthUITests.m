@@ -15,9 +15,7 @@
 //
 
 #import <FirebaseAuth/FirebaseAuth.h>
-#import <FirebaseUI/FUIAuthErrorUtils.h>
-#import <FirebaseUI/FUIAuthUtils.h>
-#import <FirebaseUI/FUIAuth.h>
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <OCMock/OCMock.h>
 @import XCTest;

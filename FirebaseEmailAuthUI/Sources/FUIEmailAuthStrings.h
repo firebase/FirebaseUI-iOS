@@ -14,11 +14,7 @@
 //  limitations under the License.
 //
 
-#if SWIFT_PACKAGE
-@import FirebaseAuthUI;
-#else
-#import <FirebaseUI/FirebaseAuthUI.h>
-#endif // SWIFT_PACKAGE
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

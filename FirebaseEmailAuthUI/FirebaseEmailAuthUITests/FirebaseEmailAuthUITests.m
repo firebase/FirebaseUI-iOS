@@ -16,9 +16,9 @@
 
 #import "FUIEmailAuth.h"
 #import <FirebaseAuth/FirebaseAuth.h>
-#import <FirebaseUI/FUIAuthErrorUtils.h>
+#import <FirebaseAuthUI/FUIAuthErrorUtils.h>
 #import "FUIAuthUtils.h"
-#import <FirebaseUI/FUIAuth_Internal.h>
+#import <FirebaseAuthUI/FUIAuth_Internal.h>
 #import <FirebaseEmailAuthUI/FirebaseEmailAuthUI.h>
 #import <OCMock/OCMock.h>
 #import <XCTest/XCTest.h>

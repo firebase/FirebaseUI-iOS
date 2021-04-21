@@ -26,7 +26,9 @@ FOUNDATION_EXPORT const unsigned char FirebaseAuthUIVersionString[];
 #import "FUIAccountSettingsViewController.h"
 
 #import "FUIAuth.h"
+#import "FUIAuth_Internal.h"
 #import "FUIAuthBaseViewController.h"
+#import "FUIAuthBaseViewController_Internal.h"
 #import "FUIAuthErrorUtils.h"
 #import "FUIAuthPickerViewController.h"
 #import "FUIAuthProvider.h"

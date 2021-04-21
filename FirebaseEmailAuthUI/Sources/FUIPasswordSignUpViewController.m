@@ -17,14 +17,7 @@
 #import "FUIPasswordSignUpViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
-
-#if SWIFT_PACKAGE
-@import FirebaseAuthUI;
-#else
-#import <FirebaseUI/FirebaseAuthUI.h>
-#import <FirebaseUI/FUIAuth_Internal.h>
-#import <FirebaseUI/FUIAuthBaseViewController_Internal.h>
-#endif // SWIFT_PACKAGE
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 #import "FirebaseEmailAuthUI/Sources/FUIEmailAuthStrings.h"
 

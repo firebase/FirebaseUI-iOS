@@ -19,16 +19,7 @@
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-
-#if SWIFT_PACKAGE
-@import FirebaseAuthUI;
-@import FirebaseAuthUI.FUIAuth_Internal;
-@import FirebaseAuthUI.FUIAuthBaseViewController_Internal;
-#else
-#import <FirebaseUI/FirebaseAuthUI.h>
-#import <FirebaseUI/FUIAuth_Internal.h>
-#import <FirebaseUI/FUIAuthBaseViewController_Internal.h>
-#endif // SWIFT_PACKAGE
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.

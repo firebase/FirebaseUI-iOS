@@ -16,11 +16,7 @@
 
 #import "FirebaseEmailAuthUI/Sources/Public/FUIEmailAuth.h"
 
-#if SWIFT_PACKAGE
-@import FirebaseAuthUI;
-#else
-#import <FirebaseUI/FUIAuthBaseViewController_Internal.h>
-#endif
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

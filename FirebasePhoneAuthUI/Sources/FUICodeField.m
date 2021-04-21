@@ -19,7 +19,7 @@
 #if SWIFT_PACKAGE
 @import FirebaseAuthUI;
 #else
-#import <FirebaseUI/FirebaseAuthUI.h>
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 #endif
 
 NS_ASSUME_NONNULL_BEGIN

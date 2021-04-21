@@ -18,7 +18,7 @@
 #import <XCTest/XCTest.h>
 
 #import <FirebaseAuth/FirebaseAuth.h>
-#import <FirebaseUI/FirebaseAuthUI.h>
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 #import "FUIAnonymousAuth.h"
 

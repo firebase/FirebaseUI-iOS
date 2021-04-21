@@ -19,7 +19,7 @@
 
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FirebaseCore/FirebaseCore.h>
-#import <FirebaseUI/FirebaseAuthUI.h>
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 #import "FUIOAuth.h"
 
