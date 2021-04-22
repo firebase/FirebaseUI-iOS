@@ -8,12 +8,12 @@ schemes=( "FirebaseAnonymousAuthUI" "FirebaseAuthUI" "FirebaseDatabaseUI" \
     "FirebaseEmailAuthUI" "FirebaseFacebookAuthUI" "FirebaseFirestoreUI" \
     "FirebaseGoogleAuthUI" "FirebaseOAuthUI" "FirebasePhoneAuthUI" "FirebaseStorageUI" )
 
-pod repo update;
+bundle exec pod repo update;
 
 for ((i=0; i<${#schemes[*]}; i++));
 do
   cd ${schemes[i]};
-  pod install;
+  bundle exec pod install;
   (xcodebuild \
     -workspace ${schemes[i]}.xcworkspace \
     -scheme ${schemes[i]} \
@@ -23,7 +23,7 @@ do
     test \
     ONLY_ACTIVE_ARCH=YES \
     | xcpretty) || EXIT_STATUS=$?;
-  pod deintegrate;
+  bundle exec pod deintegrate;
   cd ..;
 done
 
