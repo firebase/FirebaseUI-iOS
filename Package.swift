@@ -146,7 +146,7 @@ let package = Package(
         .headerSearchPath("../../"),
       ]
     ),
-    // Facebook doesn't seem to vend their ObjC libraries through SPM, though thier
+    // Facebook doesn't seem to vend their ObjC libraries through SPM, though their
     // Swift libraries wrap their ObjC ones.
 //    .target(
 //      name: "FacebookAuthUI",
