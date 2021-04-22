@@ -12,7 +12,7 @@ target 'FirebaseFacebookAuthUI' do
   pod 'FBSDKLoginKit', '~> 9.0'
   pod 'FBSDKCoreKit'
 
-  pod 'FirebaseUI/Auth', :path => '../'
+  pod 'FirebaseAuthUI', :path => '../'
 
   target 'FirebaseFacebookAuthUITests' do
     inherit! :search_paths

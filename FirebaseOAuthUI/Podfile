@@ -6,7 +6,7 @@ platform :ios, '10.0'
 target 'FirebaseOAuthUI' do
   use_frameworks!
 
-  pod 'FirebaseUI/Auth', :path => '../'
+  pod 'FirebaseAuthUI', :path => '../'
 
   target 'FirebaseOAuthUITests' do
     inherit! :search_paths

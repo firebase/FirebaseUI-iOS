@@ -7,7 +7,7 @@ target 'FirebaseGoogleAuthUI' do
   use_frameworks!
 
   pod 'GoogleSignIn', '~> 5.0'
-  pod 'FirebaseUI/Auth', :path => '../'
+  pod 'FirebaseAuthUI', :path => '../'
 
   target 'FirebaseGoogleAuthUITests' do
     inherit! :search_paths
