@@ -17,7 +17,7 @@
 #import "FirebaseOAuthUI/Sources/Public/FUIOAuth.h"
 
 #import <AuthenticationServices/AuthenticationServices.h>
-#import <FirebaseAuthUI/FirebaseAuthUI.h>
+@import FirebaseAuthUI;
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.

@@ -17,7 +17,7 @@
 #import "FUIPasswordSignUpViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
-#import <FirebaseAuthUI/FirebaseAuthUI.h>
+@import FirebaseAuthUI;
 
 #import "FirebaseEmailAuthUI/Sources/FUIEmailAuthStrings.h"
 

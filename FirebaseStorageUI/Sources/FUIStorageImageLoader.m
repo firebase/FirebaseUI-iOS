@@ -18,7 +18,12 @@
 #import "FirebaseStorageUI/Sources/Public/FIRStorageDownloadTask+SDWebImage.h"
 
 #import <FirebaseCore/FirebaseCore.h>
+
+#if SWIFT_PACKAGE
+@import GTMSessionFetcherCore;
+#else
 #import <GTMSessionFetcher/GTMSessionFetcher.h>
+#endif // SWIFT_PACKAGE
 
 @interface NSURL ()
 
