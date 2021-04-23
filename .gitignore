@@ -16,7 +16,6 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-*/*/xcshareddata/**
 
 # Third Party
 /sdk

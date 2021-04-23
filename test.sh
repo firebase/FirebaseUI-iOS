@@ -14,13 +14,13 @@ for ((i=0; i<${#schemes[*]}; i++));
 do
   cd ${schemes[i]};
   bundle exec pod install;
+  xcodebuild -workspace "${schemes[i]}.xcworkspace" -list;
   (xcodebuild \
-    -workspace ${schemes[i]}.xcworkspace \
-    -scheme ${schemes[i]} \
+    -workspace "${schemes[i]}.xcworkspace" \
+    -scheme "${schemes[i]}" \
     -sdk iphonesimulator \
     -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11 Pro' \
-    build \
-    test \
+    clean build test \
     ONLY_ACTIVE_ARCH=YES \
     | xcpretty) || EXIT_STATUS=$?;
   bundle exec pod deintegrate;
