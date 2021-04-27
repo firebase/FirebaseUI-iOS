@@ -16,7 +16,7 @@
 
 #import "FUIAppDelegate.h"
 
-#import <FirebaseUI/FirebaseAuthUI.h>
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 @import Firebase;
 
 @implementation FUIAppDelegate

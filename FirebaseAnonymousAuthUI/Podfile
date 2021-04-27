@@ -1,0 +1,13 @@
+platform :ios, '10.0'
+
+target 'FirebaseAnonymousAuthUI' do
+  use_frameworks!
+
+  pod 'FirebaseAuthUI', :path => '../'
+
+  target 'FirebaseAnonymousAuthUITests' do
+    inherit! :search_paths
+    pod 'OCMock'
+  end
+
+end
