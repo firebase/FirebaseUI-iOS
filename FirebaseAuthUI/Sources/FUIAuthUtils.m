@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseAuthUI/Sources/Public/FUIAuthUtils.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthUtils.h"
 
 #if SWIFT_PACKAGE
 NSString *const FUIAuthBundleName = @"FirebaseUI_AuthUI";

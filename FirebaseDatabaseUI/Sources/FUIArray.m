@@ -18,7 +18,7 @@
 
 // clang-format on
 
-#import "FirebaseDatabaseUI/Sources/Public/FUIArray.h"
+#import "FirebaseDatabaseUI/Sources/Public/FirebaseDatabaseUI/FUIArray.h"
 
 @interface FUIArray ()
 

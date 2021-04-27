@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -155,8 +155,7 @@
 		8D55F15D261E6E470020DFB0 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				8D69E49A21DE8CAF00CFA49B /* FirebaseGoogleAuthUI.h */,
-				8D69E50B21DE8CF000CFA49B /* FUIGoogleAuth.h */,
+				8DF993742637694800DC12D1 /* FirebaseGoogleAuthUI */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -217,6 +216,15 @@
 				8D69E50A21DE8CF000CFA49B /* ic_google@3x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		8DF993742637694800DC12D1 /* FirebaseGoogleAuthUI */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E49A21DE8CAF00CFA49B /* FirebaseGoogleAuthUI.h */,
+				8D69E50B21DE8CF000CFA49B /* FUIGoogleAuth.h */,
+			);
+			path = FirebaseGoogleAuthUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

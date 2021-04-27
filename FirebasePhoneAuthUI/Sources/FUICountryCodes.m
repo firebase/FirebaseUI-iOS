@@ -18,7 +18,7 @@
 
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
-@import FirebaseAuthUI;
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 #import "FirebasePhoneAuthUI/Sources/FUIPhoneAuthStrings.h"
 

@@ -14,7 +14,6 @@ for ((i=0; i<${#schemes[*]}; i++));
 do
   cd ${schemes[i]};
   bundle exec pod install;
-  xcodebuild -workspace "${schemes[i]}.xcworkspace" -list;
   (xcodebuild \
     -workspace "${schemes[i]}.xcworkspace" \
     -scheme "${schemes[i]}" \

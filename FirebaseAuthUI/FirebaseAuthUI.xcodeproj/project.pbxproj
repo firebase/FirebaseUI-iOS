@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -268,22 +268,7 @@
 		8D55F14E261E5F3F0020DFB0 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				8D69E25C21DD4BD000CFA49B /* FirebaseAuthUI.h */,
-				8D69E2BD21DD4C5D00CFA49B /* FUIAccountSettingsOperationType.h */,
-				8D69E2C021DD4C5D00CFA49B /* FUIAccountSettingsViewController.h */,
-				8D69E27D21DD4C5000CFA49B /* FUIAuth_Internal.h */,
-				8D69E27F21DD4C5000CFA49B /* FUIAuth.h */,
-				8D69E28A21DD4C5100CFA49B /* FUIAuthBaseViewController_Internal.h */,
-				8D69E29021DD4C5100CFA49B /* FUIAuthBaseViewController.h */,
-				8D69E27621DD4C5000CFA49B /* FUIAuthErrors.h */,
-				8D69E27721DD4C5000CFA49B /* FUIAuthErrorUtils.h */,
-				8D69E27E21DD4C5000CFA49B /* FUIAuthPickerViewController.h */,
-				8D69E29121DD4C5100CFA49B /* FUIAuthProvider.h */,
-				8D69E27521DD4C5000CFA49B /* FUIAuthStrings.h */,
-				8D69E27821DD4C5000CFA49B /* FUIAuthTableHeaderView.h */,
-				8D69E28B21DD4C5100CFA49B /* FUIAuthTableViewCell.h */,
-				8D69E27A21DD4C5000CFA49B /* FUIAuthUtils.h */,
-				8D69E28921DD4C5100CFA49B /* FUIPrivacyAndTermsOfServiceView.h */,
+				8DAB9B49263768D900FF271F /* FirebaseAuthUI */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -390,6 +375,29 @@
 				8D69E2ED21DD4C6D00CFA49B /* FirebaseAuthUI.strings */,
 			);
 			path = Strings;
+			sourceTree = "<group>";
+		};
+		8DAB9B49263768D900FF271F /* FirebaseAuthUI */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E25C21DD4BD000CFA49B /* FirebaseAuthUI.h */,
+				8D69E2BD21DD4C5D00CFA49B /* FUIAccountSettingsOperationType.h */,
+				8D69E2C021DD4C5D00CFA49B /* FUIAccountSettingsViewController.h */,
+				8D69E27D21DD4C5000CFA49B /* FUIAuth_Internal.h */,
+				8D69E27F21DD4C5000CFA49B /* FUIAuth.h */,
+				8D69E28A21DD4C5100CFA49B /* FUIAuthBaseViewController_Internal.h */,
+				8D69E29021DD4C5100CFA49B /* FUIAuthBaseViewController.h */,
+				8D69E27621DD4C5000CFA49B /* FUIAuthErrors.h */,
+				8D69E27721DD4C5000CFA49B /* FUIAuthErrorUtils.h */,
+				8D69E27E21DD4C5000CFA49B /* FUIAuthPickerViewController.h */,
+				8D69E29121DD4C5100CFA49B /* FUIAuthProvider.h */,
+				8D69E27521DD4C5000CFA49B /* FUIAuthStrings.h */,
+				8D69E27821DD4C5000CFA49B /* FUIAuthTableHeaderView.h */,
+				8D69E28B21DD4C5100CFA49B /* FUIAuthTableViewCell.h */,
+				8D69E27A21DD4C5000CFA49B /* FUIAuthUtils.h */,
+				8D69E28921DD4C5100CFA49B /* FUIPrivacyAndTermsOfServiceView.h */,
+			);
+			path = FirebaseAuthUI;
 			sourceTree = "<group>";
 		};
 		ACF63AA832F9F7882BC43A9D /* Pods */ = {

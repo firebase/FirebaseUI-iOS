@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseFacebookAuthUI/Sources/Public/FUIFacebookAuth.h"
+#import "FirebaseFacebookAuthUI/Sources/Public/FirebaseFacebookAuthUI/FUIFacebookAuth.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>

@@ -30,8 +30,7 @@ In order to use Phone Auth you should initialize Phone provider and add it to th
 
 ```swift
 // Swift
-import Firebase
-import FirebaseUI
+import FirebasePhoneAuthUI
 
 /* ... */
 
@@ -42,7 +41,7 @@ FUIAuth.defaultAuthUI()?.providers = [phoneProvider]
 
 ```objective-c
 // Objective-C
-@import FirebaseUI;
+@import FirebasePhoneAuthUI;
 
 /* ... */
 

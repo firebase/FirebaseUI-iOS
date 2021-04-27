@@ -16,7 +16,7 @@
 
 @class FUIAuth;
 
-@import FirebaseAuthUI;
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -65,8 +65,7 @@
 		8D55F14B261E5BAC0020DFB0 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				8D69E22021DD476D00CFA49B /* FirebaseAnonymousAuthUI.h */,
-				8D69E23821DD47B400CFA49B /* FUIAnonymousAuth.h */,
+				8DAB9B46263768C300FF271F /* FirebaseAnonymousAuthUI */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -127,6 +126,15 @@
 				8D69E35121DD5C4700CFA49B /* FirebaseAnonymousAuthUI.strings */,
 			);
 			path = Strings;
+			sourceTree = "<group>";
+		};
+		8DAB9B46263768C300FF271F /* FirebaseAnonymousAuthUI */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E22021DD476D00CFA49B /* FirebaseAnonymousAuthUI.h */,
+				8D69E23821DD47B400CFA49B /* FUIAnonymousAuth.h */,
+			);
+			path = FirebaseAnonymousAuthUI;
 			sourceTree = "<group>";
 		};
 		BEF4805F13BABCBDD925C264 /* Pods */ = {

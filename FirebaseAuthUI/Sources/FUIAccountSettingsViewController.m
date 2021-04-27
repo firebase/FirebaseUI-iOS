@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseAuthUI/Sources/Public/FUIAccountSettingsViewController.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAccountSettingsViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
 
@@ -26,8 +26,8 @@
 #import "FirebaseAuthUI/Sources/FUIAccountSettingsOperationUpdateEmail.h"
 #import "FirebaseAuthUI/Sources/FUIAccountSettingsOperationUpdateName.h"
 #import "FirebaseAuthUI/Sources/FUIAccountSettingsOperationUpdatePassword.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthBaseViewController_Internal.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthStrings.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthBaseViewController_Internal.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthStrings.h"
 #import "FirebaseAuthUI/Sources/FUIStaticContentTableViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN

@@ -18,7 +18,7 @@
 
 // clang-format on
 
-#import "FirebaseFirestoreUI/Sources/Public/FUIFirestoreTableViewDataSource.h"
+#import "FirebaseFirestoreUI/Sources/Public/FirebaseFirestoreUI/FUIFirestoreTableViewDataSource.h"
 
 @interface FUIFirestoreTableViewDataSource () <FUIBatchedArrayDelegate>
 

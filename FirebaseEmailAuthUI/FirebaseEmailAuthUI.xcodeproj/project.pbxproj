@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -114,14 +114,7 @@
 		8D55F154261E611A0020DFB0 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				8D69E36821DD623F00CFA49B /* FirebaseEmailAuthUI.h */,
-				8DB3779E226137CC00BF5095 /* FUIConfirmEmailViewController.h */,
-				8D69E38121DD63B200CFA49B /* FUIEmailAuth.h */,
-				8D69E38821DD63B200CFA49B /* FUIEmailEntryViewController.h */,
-				8D69E38B21DD63B300CFA49B /* FUIPasswordRecoveryViewController.h */,
-				8D69E38A21DD63B300CFA49B /* FUIPasswordSignInViewController.h */,
-				8D69E38021DD63B200CFA49B /* FUIPasswordSignUpViewController.h */,
-				8D69E38321DD63B200CFA49B /* FUIPasswordVerificationViewController.h */,
+				8DAB9B4F2637690100FF271F /* FirebaseEmailAuthUI */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -189,6 +182,21 @@
 				8D69E37521DD623F00CFA49B /* Info.plist */,
 			);
 			path = FirebaseEmailAuthUITests;
+			sourceTree = "<group>";
+		};
+		8DAB9B4F2637690100FF271F /* FirebaseEmailAuthUI */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E36821DD623F00CFA49B /* FirebaseEmailAuthUI.h */,
+				8DB3779E226137CC00BF5095 /* FUIConfirmEmailViewController.h */,
+				8D69E38121DD63B200CFA49B /* FUIEmailAuth.h */,
+				8D69E38821DD63B200CFA49B /* FUIEmailEntryViewController.h */,
+				8D69E38B21DD63B300CFA49B /* FUIPasswordRecoveryViewController.h */,
+				8D69E38A21DD63B300CFA49B /* FUIPasswordSignInViewController.h */,
+				8D69E38021DD63B200CFA49B /* FUIPasswordSignUpViewController.h */,
+				8D69E38321DD63B200CFA49B /* FUIPasswordVerificationViewController.h */,
+			);
+			path = FirebaseEmailAuthUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

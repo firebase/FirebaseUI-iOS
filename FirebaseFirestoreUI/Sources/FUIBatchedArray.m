@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseFirestoreUI/Sources/Public/FUIBatchedArray.h"
+#import "FirebaseFirestoreUI/Sources/Public/FirebaseFirestoreUI/FUIBatchedArray.h"
 
 @interface FUIBatchedArray ()
 

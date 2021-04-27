@@ -19,10 +19,10 @@
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <objc/runtime.h>
 
-#import "FirebaseAuthUI/Sources/Public/FUIAuthErrorUtils.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthStrings.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthUtils.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuth_Internal.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthErrorUtils.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthStrings.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthUtils.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuth_Internal.h"
 
 
 /** @var kActivityIndiactorPadding

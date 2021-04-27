@@ -17,7 +17,7 @@
 @class FBSDKLoginManager;
 
 #if SWIFT_PACKAGE
-@import FirebaseAuthUI;
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 #else
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 #endif // SWIFT_PACKAGE

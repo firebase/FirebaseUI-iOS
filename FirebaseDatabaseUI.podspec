@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
     'HEADER_SEARCH_PATHS' => '"${PODS_TARGET_SRCROOT}"',
   }
 
-  s.public_header_files = 'FirebaseDatabaseUI/Sources/Public/*.h'
+  s.public_header_files = 'FirebaseDatabaseUI/Sources/Public/FirebaseDatabaseUI/*.h'
   s.source_files = 'FirebaseDatabaseUI/Sources/**/*.{h,m}'
   s.dependency 'Firebase/Database'
 

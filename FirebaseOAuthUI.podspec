@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
     'HEADER_SEARCH_PATHS' => '"${PODS_TARGET_SRCROOT}"',
   }
 
-  s.public_header_files = 'FirebaseOAuthUI/Sources/Public/*.h'
+  s.public_header_files = 'FirebaseOAuthUI/Sources/Public/FirebaseOAuthUI/*.h'
   s.source_files = 'FirebaseOAuthUI/Sources/**/*.{h,m}'
   s.dependency 'FirebaseAuthUI'
   s.resource_bundle = {

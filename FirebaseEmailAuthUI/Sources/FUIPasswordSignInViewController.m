@@ -17,11 +17,11 @@
 #import "FUIPasswordSignInViewController_Internal.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
-@import FirebaseAuthUI;
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
-#import "FirebaseEmailAuthUI/Sources/Public/FUIEmailAuth.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIEmailAuth.h"
 #import "FirebaseEmailAuthUI/Sources/FUIEmailAuthStrings.h"
-#import "FirebaseEmailAuthUI/Sources/Public/FUIPasswordRecoveryViewController.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIPasswordRecoveryViewController.h"
 
 /** @var kCellReuseIdentifier
     @brief The reuse identifier for table view cell.

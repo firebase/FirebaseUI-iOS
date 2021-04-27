@@ -14,11 +14,11 @@
 //  limitations under the License.
 //
 
-#import "FirebaseAuthUI/Sources/Public/FUIPrivacyAndTermsOfServiceView.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIPrivacyAndTermsOfServiceView.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
-#import "FirebaseAuthUI/Sources/Public/FUIAuth.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthStrings.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuth.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthStrings.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

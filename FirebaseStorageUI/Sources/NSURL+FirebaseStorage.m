@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseStorageUI/Sources/Public/NSURL+FirebaseStorage.h"
+#import "FirebaseStorageUI/Sources/Public/FirebaseStorageUI/NSURL+FirebaseStorage.h"
 #import <objc/runtime.h>
 
 @implementation NSURL (FirebaseStorage)

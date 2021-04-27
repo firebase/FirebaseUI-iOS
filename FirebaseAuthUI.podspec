@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
     'HEADER_SEARCH_PATHS' => '"${PODS_TARGET_SRCROOT}"',
   }
 
-  s.public_header_files = 'FirebaseAuthUI/Sources/Public/*.h'
+  s.public_header_files = 'FirebaseAuthUI/Sources/Public/FirebaseAuthUI/*.h'
   s.source_files = 'FirebaseAuthUI/Sources/**/*.{h,m}'
   s.dependency 'Firebase/Auth', '>= 7.2.0'
   s.dependency 'GoogleUtilities/UserDefaults'

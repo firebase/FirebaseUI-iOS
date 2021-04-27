@@ -14,9 +14,9 @@
 //  limitations under the License.
 //
 
-#import "FirebasePhoneAuthUI/Sources/Public/FUIPhoneAuth.h"
+#import "FirebasePhoneAuthUI/Sources/Public/FirebasePhoneAuthUI/FUIPhoneAuth.h"
 
-@import FirebaseAuthUI;
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

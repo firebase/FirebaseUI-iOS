@@ -16,7 +16,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FirebaseAuthUI/Sources/Public/FUIAuthBaseViewController.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthBaseViewController.h"
 #import "FirebaseAuthUI/Sources/FUIStaticContentTableViewManager.h"
 
 NS_ASSUME_NONNULL_BEGIN

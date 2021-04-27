@@ -63,7 +63,7 @@ instance can be accessed as follows:
 
 ```swift
 // Swift
-import FirebaseUI
+import FirebaseAuthUI
 
 /* ... */
 
@@ -75,7 +75,7 @@ authUI?.delegate = self
 
 ```objective-c
 // Objective-C
-@import FirebaseUI;
+@import FirebaseAuthUI;
 
 /* ... */
 
@@ -89,7 +89,7 @@ This instance can then be configured with the providers you wish to support:
 
 ```swift
 // Swift
-import FirebaseUI
+import FirebaseAuthUI
 
 /* ... */
 
@@ -109,7 +109,7 @@ authUI?.providers = providers
 
 ```objective-c
 // Objective-C
-@import FirebaseUI;
+@import FirebaseAuthUI;
 
 /* ... */
 

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -73,12 +73,7 @@
 		8D55F16C261E6EF60020DFB0 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				8D69E5FF21DE968300CFA49B /* FirebaseStorageUI.h */,
-				8D69E61721DE96CF00CFA49B /* UIImageView+FirebaseStorage.h */,
-				3245015F224B963B00AF2E90 /* FUIStorageImageLoader.h */,
-				3245016B224B987400AF2E90 /* FUIStorageDefine.h */,
-				32450163224B96B400AF2E90 /* NSURL+FirebaseStorage.h */,
-				32A5DB2522755E480029B3D5 /* FIRStorageDownloadTask+SDWebImage.h */,
+				8DF9937D2637698900DC12D1 /* FirebaseStorageUI */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -123,6 +118,19 @@
 				8D69E60C21DE968300CFA49B /* Info.plist */,
 			);
 			path = FirebaseStorageUITests;
+			sourceTree = "<group>";
+		};
+		8DF9937D2637698900DC12D1 /* FirebaseStorageUI */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E5FF21DE968300CFA49B /* FirebaseStorageUI.h */,
+				8D69E61721DE96CF00CFA49B /* UIImageView+FirebaseStorage.h */,
+				3245015F224B963B00AF2E90 /* FUIStorageImageLoader.h */,
+				3245016B224B987400AF2E90 /* FUIStorageDefine.h */,
+				32450163224B96B400AF2E90 /* NSURL+FirebaseStorage.h */,
+				32A5DB2522755E480029B3D5 /* FIRStorageDownloadTask+SDWebImage.h */,
+			);
+			path = FirebaseStorageUI;
 			sourceTree = "<group>";
 		};
 		E3D604E8D1C7578D22E758BC /* Pods */ = {

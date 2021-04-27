@@ -23,9 +23,9 @@
 #import "FirebaseAuthUI/Sources/FUIAccountSettingsOperationUpdateEmail.h"
 #import "FirebaseAuthUI/Sources/FUIAccountSettingsOperationUpdateName.h"
 #import "FirebaseAuthUI/Sources/FUIAccountSettingsOperationUpdatePassword.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthBaseViewController_Internal.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthErrorUtils.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuth_Internal.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthBaseViewController_Internal.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthErrorUtils.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuth_Internal.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

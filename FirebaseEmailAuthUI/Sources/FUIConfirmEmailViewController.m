@@ -18,13 +18,13 @@
 
 #import <FirebaseAuth/FirebaseAuth.h>
 
-@import FirebaseAuthUI;
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
-#import "FirebaseEmailAuthUI/Sources/Public/FUIEmailAuth.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIEmailAuth.h"
 #import "FirebaseEmailAuthUI/Sources/FUIEmailAuth_Internal.h"
 #import "FirebaseEmailAuthUI/Sources/FUIEmailAuthStrings.h"
-#import "FirebaseEmailAuthUI/Sources/Public/FUIPasswordSignInViewController.h"
-#import "FirebaseEmailAuthUI/Sources/Public/FUIPasswordSignUpViewController.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIPasswordSignInViewController.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIPasswordSignUpViewController.h"
 
 /** @var kCellReuseIdentifier
     @brief The reuse identifier for table view cell.

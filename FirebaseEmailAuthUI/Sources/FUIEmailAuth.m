@@ -14,22 +14,22 @@
 //  limitations under the License.
 //
 
-#import "FirebaseEmailAuthUI/Sources/Public/FUIEmailAuth.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIEmailAuth.h"
 
 #import <FirebaseCore/FIRApp.h>
 #import <FirebaseCore/FIROptions.h>
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <GoogleUtilities/GULUserDefaults.h>
 
-@import FirebaseAuthUI;
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
-#import "FirebaseEmailAuthUI/Sources/Public/FUIConfirmEmailViewController.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIConfirmEmailViewController.h"
 #import "FirebaseEmailAuthUI/Sources/FUIEmailAuthStrings.h"
 #import "FirebaseEmailAuthUI/Sources/FUIEmailAuth_Internal.h"
-#import "FirebaseEmailAuthUI/Sources/Public/FUIEmailEntryViewController.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIEmailEntryViewController.h"
 #import "FirebaseEmailAuthUI/Sources/FUIPasswordSignInViewController_Internal.h"
-#import "FirebaseEmailAuthUI/Sources/Public/FUIPasswordVerificationViewController.h"
-#import "FirebaseEmailAuthUI/Sources/Public/FUIPasswordSignInViewController.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIPasswordVerificationViewController.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIPasswordSignInViewController.h"
 
 /** @var kErrorUserInfoEmailKey
     @brief The key for the email address in the userinfo dictionary of a sign in error.

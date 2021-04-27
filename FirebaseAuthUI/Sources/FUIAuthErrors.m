@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseAuthUI/Sources/Public/FUIAuthErrors.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthErrors.h"
 
 NSString *const FUIAuthErrorDomain = @"FUIAuthErrorDomain";
 

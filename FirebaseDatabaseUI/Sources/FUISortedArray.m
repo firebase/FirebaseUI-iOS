@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseDatabaseUI/Sources/Public/FUISortedArray.h"
+#import "FirebaseDatabaseUI/Sources/Public/FirebaseDatabaseUI/FUISortedArray.h"
 
 @interface FUISortedArray ()
 

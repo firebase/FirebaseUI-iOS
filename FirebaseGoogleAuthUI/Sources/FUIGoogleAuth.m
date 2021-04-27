@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseGoogleAuthUI/Sources/Public/FUIGoogleAuth.h"
+#import "FirebaseGoogleAuthUI/Sources/Public/FirebaseGoogleAuthUI/FUIGoogleAuth.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FirebaseCore/FirebaseCore.h>

@@ -91,7 +91,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: e9b6542fdee322333502ab497f628b011dce7d78
   Firebase: c121feb35e4126c0b355e3313fa9b487d47319fd
   FirebaseAuth: 5fe4585c2ed847319f0ea68bd1d82c77e49ff9a0
-  FirebaseAuthUI: 0364632d70a90e0b42fc1cce0435d375219fdddb
+  FirebaseAuthUI: b3511544eeec97b719aeda7ccd779f7f0ff086d3
   FirebaseCore: 907447d8917a4d3eb0cce2829c5a0ad21d90b432
   FirebaseCoreDiagnostics: 68ad972f99206cef818230f3f3179d52ccfb7f8c
   GoogleDataTransport: cd9db2180fcecd8da1b561aea31e3e56cf834aa7

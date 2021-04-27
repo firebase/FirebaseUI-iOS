@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseEmailAuthUI/Sources/Public/FUIPasswordSignInViewController.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIPasswordSignInViewController.h"
 #import <FirebaseAuth/FirebaseAuth.h>
 
 NS_ASSUME_NONNULL_BEGIN

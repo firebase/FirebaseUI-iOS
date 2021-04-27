@@ -14,9 +14,9 @@
 //  limitations under the License.
 //
 
-#import "FirebaseEmailAuthUI/Sources/Public/FUIEmailAuth.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIEmailAuth.h"
 
-@import FirebaseAuthUI;
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

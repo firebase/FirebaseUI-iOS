@@ -14,10 +14,10 @@
 //  limitations under the License.
 //
 
-#import "FirebaseOAuthUI/Sources/Public/FUIOAuth.h"
+#import "FirebaseOAuthUI/Sources/Public/FirebaseOAuthUI/FUIOAuth.h"
 
 #import <AuthenticationServices/AuthenticationServices.h>
-@import FirebaseAuthUI;
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.

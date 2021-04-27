@@ -109,16 +109,7 @@
 		8D55F151261E60A10020DFB0 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				8D69E1C921DD446600CFA49B /* FirebaseDatabaseUI.h */,
-				8D69E1E621DD44EA00CFA49B /* FUIArray.h */,
-				8D69E1EC21DD44EB00CFA49B /* FUICollection.h */,
-				8D69E1E021DD44EA00CFA49B /* FUICollectionViewDataSource.h */,
-				8D69E1E421DD44EA00CFA49B /* FUIIndexArray.h */,
-				8D69E1E121DD44EA00CFA49B /* FUIIndexCollectionViewDataSource.h */,
-				8D69E1E921DD44EA00CFA49B /* FUIIndexTableViewDataSource.h */,
-				8D69E1F021DD44EB00CFA49B /* FUIQueryObserver.h */,
-				8D69E1EF21DD44EB00CFA49B /* FUISortedArray.h */,
-				8D69E1EA21DD44EB00CFA49B /* FUITableViewDataSource.h */,
+				8DAB9B4C263768EC00FF271F /* FirebaseDatabaseUI */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -174,6 +165,23 @@
 				8D69E1D621DD446600CFA49B /* Info.plist */,
 			);
 			path = FirebaseDatabaseUITests;
+			sourceTree = "<group>";
+		};
+		8DAB9B4C263768EC00FF271F /* FirebaseDatabaseUI */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E1C921DD446600CFA49B /* FirebaseDatabaseUI.h */,
+				8D69E1E621DD44EA00CFA49B /* FUIArray.h */,
+				8D69E1EC21DD44EB00CFA49B /* FUICollection.h */,
+				8D69E1E021DD44EA00CFA49B /* FUICollectionViewDataSource.h */,
+				8D69E1E421DD44EA00CFA49B /* FUIIndexArray.h */,
+				8D69E1E121DD44EA00CFA49B /* FUIIndexCollectionViewDataSource.h */,
+				8D69E1E921DD44EA00CFA49B /* FUIIndexTableViewDataSource.h */,
+				8D69E1F021DD44EB00CFA49B /* FUIQueryObserver.h */,
+				8D69E1EF21DD44EB00CFA49B /* FUISortedArray.h */,
+				8D69E1EA21DD44EB00CFA49B /* FUITableViewDataSource.h */,
+			);
+			path = FirebaseDatabaseUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

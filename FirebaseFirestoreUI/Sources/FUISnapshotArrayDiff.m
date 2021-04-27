@@ -16,7 +16,7 @@
 
 #import <FirebaseFirestore/FirebaseFirestore.h>
 
-#import "FirebaseFirestoreUI/Sources/Public/FUISnapshotArrayDiff.h"
+#import "FirebaseFirestoreUI/Sources/Public/FirebaseFirestoreUI/FUISnapshotArrayDiff.h"
 
 @interface FUIArraySlice ()
 

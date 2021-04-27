@@ -14,8 +14,8 @@
 //  limitations under the License.
 //
 
-#import "FirebaseStorageUI/Sources/Public/UIImageView+FirebaseStorage.h"
-#import "FirebaseStorageUI/Sources/Public/FUIStorageImageLoader.h"
+#import "FirebaseStorageUI/Sources/Public/FirebaseStorageUI/UIImageView+FirebaseStorage.h"
+#import "FirebaseStorageUI/Sources/Public/FirebaseStorageUI/FUIStorageImageLoader.h"
 
 @implementation UIImageView (FirebaseStorage)
 

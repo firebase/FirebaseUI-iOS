@@ -18,8 +18,8 @@
 
 // clang-format on
 
-#import "FirebaseDatabaseUI/Sources/Public/FUICollectionViewDataSource.h"
-#import "FirebaseDatabaseUI/Sources/Public/FUIArray.h"
+#import "FirebaseDatabaseUI/Sources/Public/FirebaseDatabaseUI/FUICollectionViewDataSource.h"
+#import "FirebaseDatabaseUI/Sources/Public/FirebaseDatabaseUI/FUIArray.h"
 
 @interface FUICollectionViewDataSource () <FUICollectionDelegate>
 

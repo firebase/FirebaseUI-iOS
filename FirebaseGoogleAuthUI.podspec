@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
     'HEADER_SEARCH_PATHS' => '"${PODS_TARGET_SRCROOT}"',
   }
 
-  s.public_header_files = 'FirebaseGoogleAuthUI/Sources/Public/*.h'
+  s.public_header_files = 'FirebaseGoogleAuthUI/Sources/Public/FirebaseGoogleAuthUI/*.h'
   s.source_files = 'FirebaseGoogleAuthUI/Sources/**/*.{h,m}'
   s.dependency 'FirebaseAuthUI'
   s.dependency 'GoogleSignIn', '~> 5.0'

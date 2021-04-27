@@ -19,7 +19,7 @@
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FirebaseAuth/FIRAuthUIDelegate.h>
 #import <FirebaseAuth/FIRPhoneAuthProvider.h>
-@import FirebaseAuthUI;
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 #import "FirebasePhoneAuthUI/Sources/FUICountryTableViewController.h"
 #import "FirebasePhoneAuthUI/Sources/FUIFeatureSwitch.h"

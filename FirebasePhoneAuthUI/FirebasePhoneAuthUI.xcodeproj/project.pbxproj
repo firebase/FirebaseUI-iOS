@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -205,8 +205,7 @@
 		8D55F167261E6ECE0020DFB0 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				8D69E54421DE915A00CFA49B /* FirebasePhoneAuthUI.h */,
-				8D69E5B921DE91D300CFA49B /* FUIPhoneAuth.h */,
+				8DF9937A2637697800DC12D1 /* FirebasePhoneAuthUI */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -292,6 +291,15 @@
 				8D69E5B821DE91D300CFA49B /* country-codes.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		8DF9937A2637697800DC12D1 /* FirebasePhoneAuthUI */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E54421DE915A00CFA49B /* FirebasePhoneAuthUI.h */,
+				8D69E5B921DE91D300CFA49B /* FUIPhoneAuth.h */,
+			);
+			path = FirebasePhoneAuthUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

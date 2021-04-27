@@ -14,17 +14,17 @@
 //  limitations under the License.
 //
 
-#import "FirebaseAuthUI/Sources/Public/FUIAuthPickerViewController.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthPickerViewController.h"
 
 #import <AuthenticationServices/AuthenticationServices.h>
 #import <FirebaseAuth/FirebaseAuth.h>
 
-#import "FirebaseAuthUI/Sources/Public/FUIAuthBaseViewController_Internal.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthBaseViewController_Internal.h"
 #import "FirebaseAuthUI/Sources/FUIAuthSignInButton.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthStrings.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthUtils.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuth_Internal.h"
-#import "FirebaseAuthUI/Sources/Public/FUIPrivacyAndTermsOfServiceView.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthStrings.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthUtils.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuth_Internal.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIPrivacyAndTermsOfServiceView.h"
 
 /** @var kSignInButtonWidth
     @brief The width of the sign in buttons.

@@ -14,9 +14,9 @@
 //  limitations under the License.
 //
 
-#import "FirebaseDatabaseUI/Sources/Public/FUIIndexTableViewDataSource.h"
+#import "FirebaseDatabaseUI/Sources/Public/FirebaseDatabaseUI/FUIIndexTableViewDataSource.h"
 
-#import "FirebaseDatabaseUI/Sources/Public/FUIIndexArray.h"
+#import "FirebaseDatabaseUI/Sources/Public/FirebaseDatabaseUI/FUIIndexArray.h"
 
 @interface FUIIndexTableViewDataSource () <FUIIndexArrayDelegate>
 

@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseAuthUI/Sources/Public/FUIAuthTableViewCell.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthTableViewCell.h"
 
 @implementation FUIAuthTableViewCell
 

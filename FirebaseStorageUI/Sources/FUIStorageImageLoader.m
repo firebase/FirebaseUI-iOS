@@ -14,8 +14,8 @@
 //  limitations under the License.
 //
 
-#import "FirebaseStorageUI/Sources/Public/FUIStorageImageLoader.h"
-#import "FirebaseStorageUI/Sources/Public/FIRStorageDownloadTask+SDWebImage.h"
+#import "FirebaseStorageUI/Sources/Public/FirebaseStorageUI/FUIStorageImageLoader.h"
+#import "FirebaseStorageUI/Sources/Public/FirebaseStorageUI/FIRStorageDownloadTask+SDWebImage.h"
 
 #import <FirebaseCore/FirebaseCore.h>
 

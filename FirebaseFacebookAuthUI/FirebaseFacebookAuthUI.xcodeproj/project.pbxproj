@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -163,8 +163,7 @@
 		8D55F157261E6E0D0020DFB0 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				8D69E3CF21DD83EB00CFA49B /* FirebaseFacebookAuthUI.h */,
-				8D69E3E721DD843800CFA49B /* FUIFacebookAuth.h */,
+				8DAB9B522637691200FF271F /* FirebaseFacebookAuthUI */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -228,6 +227,15 @@
 				8D69E44221DD843F00CFA49B /* ic_facebook@3x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		8DAB9B522637691200FF271F /* FirebaseFacebookAuthUI */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E3CF21DD83EB00CFA49B /* FirebaseFacebookAuthUI.h */,
+				8D69E3E721DD843800CFA49B /* FUIFacebookAuth.h */,
+			);
+			path = FirebaseFacebookAuthUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

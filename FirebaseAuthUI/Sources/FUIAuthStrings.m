@@ -16,10 +16,10 @@
 
 #import <FirebaseCore/FirebaseCore.h>
 
-#import "FirebaseAuthUI/Sources/Public/FUIAuthStrings.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthStrings.h"
 
-#import "FirebaseAuthUI/Sources/Public/FUIAuth.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthUtils.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuth.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

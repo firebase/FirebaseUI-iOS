@@ -14,9 +14,9 @@
 //  limitations under the License.
 //
 
-@import FirebaseAuthUI;
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 
-#import "FirebaseAnonymousAuthUI/Sources/Public/FUIAnonymousAuth.h"
+#import "FirebaseAnonymousAuthUI/Sources/Public/FirebaseAnonymousAuthUI/FUIAnonymousAuth.h"
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.

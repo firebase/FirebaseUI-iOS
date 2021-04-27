@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseStorageUI/Sources/Public/FIRStorageDownloadTask+SDWebImage.h"
+#import "FirebaseStorageUI/Sources/Public/FirebaseStorageUI/FIRStorageDownloadTask+SDWebImage.h"
 
 @implementation FIRStorageDownloadTask (SDWebImage)
 

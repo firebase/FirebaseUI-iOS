@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   }
 
   # s.tvos.deployment_target = '11.0' Disabled; one of the dependencies doesn't support tvOS.
-  s.public_header_files = 'FirebaseStorageUI/Sources/Public/*.h'
+  s.public_header_files = 'FirebaseStorageUI/Sources/Public/FirebaseStorageUI/*.h'
   s.source_files = 'FirebaseStorageUI/Sources/**/*.{h,m}'
   s.dependency 'Firebase/Storage'
   s.dependency 'GTMSessionFetcher/Core', '~> 1.5.0'

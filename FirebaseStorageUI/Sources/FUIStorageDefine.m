@@ -14,6 +14,6 @@
 //  limitations under the License.
 //
 
-#import "FirebaseStorageUI/Sources/Public/FUIStorageDefine.h"
+#import "FirebaseStorageUI/Sources/Public/FirebaseStorageUI/FUIStorageDefine.h"
 
 SDWebImageContextOption _Nonnull const SDWebImageContextFUIStorageMaxImageSize = @"FUIStorageMaxImageSize";

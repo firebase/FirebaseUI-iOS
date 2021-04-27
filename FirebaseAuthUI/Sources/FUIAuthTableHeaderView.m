@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FirebaseAuthUI/Sources/Public/FUIAuthTableHeaderView.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthTableHeaderView.h"
 
 /** @var kLabelHorizontalMargin
     @brief The horizontal margin around any @c UILabel.

@@ -72,11 +72,7 @@
 		8D55F15A261E6E2E0020DFB0 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				8D69E46121DD8B2E00CFA49B /* FirebaseFirestoreUI.h */,
-				8D69E47921DE8B9600CFA49B /* FUIBatchedArray.h */,
-				8D69E47B21DE8B9600CFA49B /* FUIFirestoreCollectionViewDataSource.h */,
-				8D69E47821DE8B9600CFA49B /* FUIFirestoreTableViewDataSource.h */,
-				8D69E47D21DE8B9600CFA49B /* FUISnapshotArrayDiff.h */,
+				8DF993712637692E00DC12D1 /* FirebaseFirestoreUI */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -122,6 +118,18 @@
 				8D69E46E21DD8B2E00CFA49B /* Info.plist */,
 			);
 			path = FirebaseFirestoreUITests;
+			sourceTree = "<group>";
+		};
+		8DF993712637692E00DC12D1 /* FirebaseFirestoreUI */ = {
+			isa = PBXGroup;
+			children = (
+				8D69E46121DD8B2E00CFA49B /* FirebaseFirestoreUI.h */,
+				8D69E47921DE8B9600CFA49B /* FUIBatchedArray.h */,
+				8D69E47B21DE8B9600CFA49B /* FUIFirestoreCollectionViewDataSource.h */,
+				8D69E47821DE8B9600CFA49B /* FUIFirestoreTableViewDataSource.h */,
+				8D69E47D21DE8B9600CFA49B /* FUISnapshotArrayDiff.h */,
+			);
+			path = FirebaseFirestoreUI;
 			sourceTree = "<group>";
 		};
 		905358392FD4EDB2D9802535 /* Pods */ = {

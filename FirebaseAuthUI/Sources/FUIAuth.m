@@ -22,11 +22,11 @@
 #import <FirebaseCore/FIROptions.h>
 #import <FirebaseAuth/FIRAuth.h>
 #import <FirebaseAuth/FirebaseAuth.h>
-#import "FirebaseAuthUI/Sources/Public/FUIAuthBaseViewController_Internal.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthErrors.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthErrorUtils.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthPickerViewController.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthStrings.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthBaseViewController_Internal.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthErrors.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthErrorUtils.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthPickerViewController.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthStrings.h"
 
 /** @var kAppNameCodingKey
     @brief The key used to encode the app Name for NSCoding.

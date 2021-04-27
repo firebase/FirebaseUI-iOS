@@ -16,8 +16,8 @@
 
 #import "FirebaseAuthUI/Sources/FUIAuthSignInButton.h"
 
-#import "FirebaseAuthUI/Sources/Public/FUIAuthProvider.h"
-#import "FirebaseAuthUI/Sources/Public/FUIAuthUtils.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthProvider.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

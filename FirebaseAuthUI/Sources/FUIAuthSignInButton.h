@@ -16,7 +16,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FirebaseAuthUI/Sources/Public/FUIAuthProvider.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthProvider.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
