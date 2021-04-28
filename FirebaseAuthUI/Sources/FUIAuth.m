@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FUIAuth_Internal.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuth_Internal.h"
 
 #import <objc/runtime.h>
 
