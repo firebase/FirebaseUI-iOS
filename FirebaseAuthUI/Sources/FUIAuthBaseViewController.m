@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FUIAuthBaseViewController_Internal.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthBaseViewController_Internal.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <objc/runtime.h>

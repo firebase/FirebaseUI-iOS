@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FUIAuthBaseViewController.h"
+#import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthBaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
