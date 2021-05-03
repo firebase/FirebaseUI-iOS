@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FUIConfirmEmailViewController.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIConfirmEmailViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
 

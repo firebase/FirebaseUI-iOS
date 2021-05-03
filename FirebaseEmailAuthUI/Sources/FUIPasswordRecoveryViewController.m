@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "FUIPasswordRecoveryViewController.h"
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIPasswordRecoveryViewController.h"
 
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FirebaseAuthUI/FirebaseAuthUI.h>

@@ -16,7 +16,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FUIAuthBaseViewController.h"
+#import <FirebaseAuthUI/FUIAuthBaseViewController.h>
 
 @class FUIPrivacyAndTermsOfServiceView;
 
