@@ -46,7 +46,7 @@ NSString *const kPAStr_MessageExpired = @"MessageExpired";
 NSString *const kPAStr_TermsSMS = @"TermsSMS";
 
 #if SWIFT_PACKAGE
-NSString *const FUIPhoneAuthBundleName = @"FirebaseUI_PhoneAuthUI";
+NSString *const FUIPhoneAuthBundleName = @"FirebaseUI_FirebasePhoneAuthUI";
 #else
 NSString *const FUIPhoneAuthBundleName = @"FirebasePhoneAuthUI";
 #endif // SWIFT_PACKAGE

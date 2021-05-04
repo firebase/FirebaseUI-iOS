@@ -17,7 +17,7 @@
 #import "FirebaseEmailAuthUI/Sources/FUIEmailAuthStrings.h"
 
 #if SWIFT_PACKAGE
-NSString *const FUIEmailAuthBundleName = @"FirebaseUI_EmailAuthUI";
+NSString *const FUIEmailAuthBundleName = @"FirebaseUI_FirebaseEmailAuthUI";
 #else
 NSString *const FUIEmailAuthBundleName = @"FirebaseEmailAuthUI";
 #endif // SWIFT_PACKAGE

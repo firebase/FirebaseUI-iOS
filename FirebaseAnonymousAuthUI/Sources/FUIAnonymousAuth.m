@@ -27,7 +27,7 @@ static NSString *const kTableName = @"FirebaseAnonymousAuthUI";
     @brief The name of the bundle to search for resources.
  */
 #if SWIFT_PACKAGE
-static NSString *const kBundleName = @"FirebaseUI_AnonymousAuthUI";
+static NSString *const kBundleName = @"FirebaseUI_FirebaseAnonymousAuthUI";
 #else
 static NSString *const kBundleName = @"FirebaseAnonymousAuthUI";
 #endif // SWIFT_PACKAGE
