@@ -54,7 +54,7 @@ GEM
     colored2 (3.1.2)
     concurrent-ruby (1.1.8)
     escape (0.0.4)
-    ethon (0.13.0)
+    ethon (0.14.0)
       ffi (>= 1.15.0)
     ffi (1.15.0)
     fourflusher (2.3.1)
@@ -92,4 +92,4 @@ DEPENDENCIES
   xcodeproj
 
 BUNDLED WITH
-   1.17.2
+   1.17.3
