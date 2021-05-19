@@ -7,7 +7,6 @@ EXIT_STATUS=0
 module_name="$1"
 
 pushd "$module_name";
-bundle exec pod install;
 (xcodebuild \
   -workspace "$module_name.xcworkspace" \
   -scheme "$module_name" \
@@ -16,7 +15,6 @@ bundle exec pod install;
   clean build test \
   ONLY_ACTIVE_ARCH=YES \
   | xcpretty) || EXIT_STATUS=$?;
-bundle exec pod deintegrate;
 popd;
 
 exit $EXIT_STATUS
