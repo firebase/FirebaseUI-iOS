@@ -4,7 +4,7 @@ set -euxo pipefail
 
 EXIT_STATUS=0
 
-module_name="$0"
+module_name="$1"
 
 pushd "$module_name";
 bundle exec pod install;
