@@ -1,0 +1,38 @@
+name: Phone Auth
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - '.github/workflows/phoneauth.yml'
+      - 'FirebasePhoneAuthUI/**'
+      - 'test.sh'
+      - 'FirebasePhoneAuthUI.podspec'
+  pull_request:
+    branches: [ master ]
+    paths:
+      - '.github/workflows/phoneauth.yml'
+      - 'FirebasePhoneAuthUI/**'
+      - 'test.sh'
+      - 'FirebasePhoneAuthUI.podspec'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Setup
+        run: |
+          cd FirebasePhoneAuthUI
+          gem install bundler
+          bundle install
+          gem install xcpretty
+          bundle exec pod install --repo-update
+      - name: Build
+        run: |
+          ./test.sh FirebasePhoneAuthUI

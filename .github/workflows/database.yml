@@ -1,0 +1,38 @@
+name: Database
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - '.github/workflows/database.yml'
+      - 'FirebaseDatabaseUI/**'
+      - 'test.sh'
+      - 'FirebaseDatabaseUI.podspec'
+  pull_request:
+    branches: [ master ]
+    paths:
+      - '.github/workflows/database.yml'
+      - 'FirebaseDatabaseUI/**'
+      - 'test.sh'
+      - 'FirebaseDatabaseUI.podspec'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Setup
+        run: |
+          cd FirebaseDatabaseUI
+          gem install bundler
+          bundle install
+          gem install xcpretty
+          bundle exec pod install --repo-update
+      - name: Build
+        run: |
+          ./test.sh FirebaseDatabaseUI

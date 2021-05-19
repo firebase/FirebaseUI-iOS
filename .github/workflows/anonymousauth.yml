@@ -1,0 +1,38 @@
+name: Anonymous Auth
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - '.github/workflows/anonymousauth.yml'
+      - 'FirebaseAnonymousAuthUI/**'
+      - 'test.sh'
+      - 'FirebaseAnonymousAuthUI.podspec'
+  pull_request:
+    branches: [ master ]
+    paths:
+      - '.github/workflows/anonymousauth.yml'
+      - 'FirebaseAnonymousAuthUI/**'
+      - 'test.sh'
+      - 'FirebaseAnonymousAuthUI.podspec'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Setup
+        run: |
+          cd FirebaseAnonymousAuthUI
+          gem install bundler
+          bundle install
+          gem install xcpretty
+          bundle exec pod install --repo-update
+      - name: Build
+        run: |
+          ./test.sh FirebaseAnonymousAuthUI
