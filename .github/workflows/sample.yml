@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  swift:
     name: Swift build
     runs-on: macOS-latest
 
@@ -42,7 +42,7 @@ jobs:
             clean build test \
             ONLY_ACTIVE_ARCH=YES
 
-    build:
+  objc:
     name: ObjC build
     runs-on: macOS-latest
 
