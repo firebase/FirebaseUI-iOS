@@ -33,6 +33,7 @@ jobs:
           bundle exec pod install --repo-update
       - name: Build
         run: |
+          cd samples/swift
           xcodebuild \
             -workspace FirebaseUI-demo-swift.xcworkspace \
             -scheme FirebaseUI-demo-swift \
