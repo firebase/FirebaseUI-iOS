@@ -16,7 +16,7 @@
 //  limitations under the License.
 //
 
-#import <FirebaseUI/FirebaseEmailAuthUI.h>
+@import FirebaseEmailAuthUI;
 
 @interface FUICustomEmailEntryViewController : FUIEmailEntryViewController
 

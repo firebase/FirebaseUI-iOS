@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import <FirebaseUI/FirebaseUI.h>
+@import FirebaseDatabaseUI;
 
 @interface FUIChatMessageDataSource : FUITableViewDataSource
 
