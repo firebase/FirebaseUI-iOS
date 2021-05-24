@@ -256,8 +256,14 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
     // Same device
     if (urlParameterDict[@"ui_pid"]) {
       // Unverified provider linking
+      NSError *error = nil;
       [self handleUnverifiedProviderLinking:urlParameterDict[@"ui_pid"]
-                                      email:localParameterDict[kEmailLinkSignInEmailKey]];
+                                      email:localParameterDict[kEmailLinkSignInEmailKey]
+                                      error:&error];
+      if (error != nil) {
+        NSLog(@"Error verifying provider linking: %@", error);
+        return NO;
+      }
     } else if (urlParameterDict[@"ui_auid"]) {
       // Anonymous upgrade
       [self handleAnonymousUpgrade:urlParameterDict[@"ui_auid"]
@@ -281,12 +287,21 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
 }
 
 - (void)handleUnverifiedProviderLinking:(NSString *)providerID
-                                  email:(NSString *)email {
+                                  email:(NSString *)email
+                                  error:(NSError **)error {
   if ([providerID isEqualToString:FIRFacebookAuthProviderID]) {
     NSData *unverifiedProviderCredentialData = [GULUserDefaults.standardUserDefaults
                                                 objectForKey:kEmailLinkSignInLinkingCredentialKey];
-    FIRAuthCredential *unverifiedProviderCredential =
+    FIRAuthCredential *unverifiedProviderCredential;
+
+    // TODO:
+    // The replacement method for `unarchiveObjectWithData:` requires NSSecureCoding, which
+    // FIRAuthCredential does not yet conform to.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    unverifiedProviderCredential =
         [NSKeyedUnarchiver unarchiveObjectWithData:unverifiedProviderCredentialData];
+#pragma clang diagnostic pop
 
     FIRAuthCredential *emailLinkCredential =
     [FIREmailAuthProvider credentialWithEmail:email link:self.emailLink];

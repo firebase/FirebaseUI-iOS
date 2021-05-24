@@ -51,6 +51,7 @@ jobs:
         uses: actions/checkout@master
       - name: Setup
         run: |
+          cp samples/GoogleService-Info-dummy.plist samples/swift/GoogleService-Info.plist
           cd samples/objc
           gem install bundler
           bundle install
@@ -59,6 +60,7 @@ jobs:
       - name: Build
         # Note: tests aren't run here because the ObjC sample has no test targets.
         run: |
+          cp samples/GoogleService-Info-dummy.plist samples/objc/GoogleService-Info.plist
           cd samples/objc
           xcodebuild \
             -workspace FirebaseUI-demo-objc.xcworkspace \
