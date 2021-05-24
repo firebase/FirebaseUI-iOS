@@ -11,6 +11,7 @@ Pod::Spec.new do |s|
   s.ios.framework = 'UIKit'
   s.requires_arc = true
   s.cocoapods_version = '>= 1.8.0'
+  s.static_framework = true # Required since GoogleSignIn is a static binary.
   s.pod_target_xcconfig = {
     'HEADER_SEARCH_PATHS' => '"${PODS_TARGET_SRCROOT}"',
   }
@@ -19,6 +20,8 @@ Pod::Spec.new do |s|
   s.source_files = 'FirebaseGoogleAuthUI/Sources/**/*.{h,m}'
   s.dependency 'FirebaseAuthUI'
   s.dependency 'GoogleSignIn', '~> 5.0'
+  s.dependency 'FirebaseAuth'
+  s.dependency 'FirebaseCore'
   s.resource_bundle = {
     'FirebaseGoogleAuthUI' => ['FirebaseGoogleAuthUI/Sources/{Resources,Strings}/*.{png,lproj}']
   }

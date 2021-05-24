@@ -16,7 +16,12 @@
 
 import UIKit
 import Firebase
-import FirebaseUI
+import FirebaseEmailAuthUI
+import FirebaseFacebookAuthUI
+import FirebaseAnonymousAuthUI
+import FirebasePhoneAuthUI
+import FirebaseOAuthUI
+import FirebaseGoogleAuthUI
 
 let kFirebaseTermsOfService = URL(string: "https://firebase.google.com/terms/")!
 let kFirebasePrivacyPolicy = URL(string: "https://firebase.google.com/support/privacy/")!

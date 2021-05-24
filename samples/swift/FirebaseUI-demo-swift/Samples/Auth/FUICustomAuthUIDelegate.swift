@@ -15,8 +15,7 @@
 //
 
 import UIKit
-import FirebaseUI
-import FirebaseAuth
+import FirebaseEmailAuthUI
 
 class FUICustomAuthDelegate: NSObject, FUIAuthDelegate {
 
