@@ -16,10 +16,16 @@
 
 #import "FirebaseFacebookAuthUI/Sources/Public/FirebaseFacebookAuthUI/FUIFacebookAuth.h"
 
+#import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <FirebaseAuth/FirebaseAuth.h>
+
+#if SWIFT_PACKAGE
+@import FBSDKCoreKit;
+@import FBSDKLoginKit;
+#else
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <FirebaseAuthUI/FirebaseAuthUI.h>
+#endif // SWIFT_PACKAGE
 
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
@@ -29,7 +35,11 @@ static NSString *const kTableName = @"FirebaseFacebookAuthUI";
 /** @var kBundleName
     @brief The name of the bundle to search for resources.
  */
+#if SWIFT_PACKAGE
+static NSString *const kBundleName = @"FirebaseUI_FirebaseFacebookAuthUI";
+#else
 static NSString *const kBundleName = @"FirebaseFacebookAuthUI";
+#endif // SWIFT_PACKAGE
 
 /** @var kSignInWithFacebook
     @brief The string key for localized button text.

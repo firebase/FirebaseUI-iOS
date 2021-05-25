@@ -38,16 +38,16 @@ jobs:
       - name: Build
         run: |
           ./test.sh FirebaseFacebookAuthUI
-  # spm:
-  #   name: spm
-  #   runs-on: macOS-latest
+  spm:
+    name: spm
+    runs-on: macOS-latest
 
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@master
-  #     - name: List
-  #       run: |
-  #         xcodebuild -list
-  #     - name: Build
-  #       run: |
-  #         xcodebuild -scheme FirebaseFacebookAuthUI -sdk iphonesimulator
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: List
+        run: |
+          xcodebuild -list
+      - name: Build
+        run: |
+          xcodebuild -scheme FirebaseFacebookAuthUI -sdk iphonesimulator
