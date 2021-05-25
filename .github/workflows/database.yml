@@ -51,3 +51,13 @@ jobs:
       - name: Build
         run: |
           xcodebuild -scheme FirebaseDatabaseUI -sdk iphonesimulator
+  pod:
+    name: pod lib lint
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Build
+        run: |
+          bundle exec pod lib lint FirebaseDatabaseUI.podspec
