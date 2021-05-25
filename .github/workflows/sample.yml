@@ -40,7 +40,7 @@ jobs:
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11 Pro' \
             clean build test \
-            ONLY_ACTIVE_ARCH=YES
+            ONLY_ACTIVE_ARCH=YES | xcpretty
 
   objc:
     name: ObjC build
@@ -68,4 +68,4 @@ jobs:
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11 Pro' \
             clean build \
-            ONLY_ACTIVE_ARCH=YES
+            ONLY_ACTIVE_ARCH=YES | xcpretty
