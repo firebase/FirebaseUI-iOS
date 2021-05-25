@@ -4,6 +4,8 @@ on:
   push:
     branches: [ master ]
     paths:
+      - 'FirebaseAuthUI/**'
+      - 'FirebaseAuthUI.podspec'
       - '.github/workflows/googleauth.yml'
       - 'FirebaseGoogleAuthUI/**'
       - 'test.sh'
@@ -11,6 +13,8 @@ on:
   pull_request:
     branches: [ master ]
     paths:
+      - 'FirebaseAuthUI/**'
+      - 'FirebaseAuthUI.podspec'
       - '.github/workflows/googleauth.yml'
       - 'FirebaseGoogleAuthUI/**'
       - 'test.sh'

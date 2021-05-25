@@ -62,4 +62,4 @@ jobs:
         run: gem install bundler; bundle install
       - name: Build
         run: |
-          bundle exec pod lib lint FirebaseStorageAuthUI.podspec
+          bundle exec pod lib lint FirebaseStorageUI.podspec
