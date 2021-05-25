@@ -17,10 +17,14 @@ Pod::Spec.new do |s|
   }
 
   s.platform = :ios, '10.0'
-  s.public_header_files = 'FirebaseFacebookAuthUI/Sources/Public/FirebaseFacebookAuthUI*.h'
+  s.public_header_files = 'FirebaseFacebookAuthUI/Sources/Public/FirebaseFacebookAuthUI/*.h'
   s.source_files = 'FirebaseFacebookAuthUI/Sources/**/*.{h,m}'
   s.dependency 'FirebaseAuthUI'
+  s.dependency 'FirebaseAuth', '~> 8.0'
+  s.dependency 'FirebaseCore'
+  s.dependency 'GoogleUtilities/UserDefaults'
   s.dependency 'FBSDKLoginKit', '~> 9.0'
+  s.dependency 'FBSDKCoreKit'
   s.resource_bundle = {
     'FirebaseFacebookAuthUI' => ['FirebaseFacebookAuthUI/Sources/{Resources,Strings}/*.{png,lproj}']
   }

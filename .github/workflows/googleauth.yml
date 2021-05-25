@@ -4,6 +4,8 @@ on:
   push:
     branches: [ master ]
     paths:
+      - 'FirebaseAuthUI/**'
+      - 'FirebaseAuthUI.podspec'
       - '.github/workflows/googleauth.yml'
       - 'FirebaseGoogleAuthUI/**'
       - 'test.sh'
@@ -11,6 +13,8 @@ on:
   pull_request:
     branches: [ master ]
     paths:
+      - 'FirebaseAuthUI/**'
+      - 'FirebaseAuthUI.podspec'
       - '.github/workflows/googleauth.yml'
       - 'FirebaseGoogleAuthUI/**'
       - 'test.sh'
@@ -36,3 +40,18 @@ jobs:
       - name: Build
         run: |
           ./test.sh FirebaseGoogleAuthUI
+# Google Sign In fails to link correctly, possibly as a result of
+# missing xcframework support.
+  # pod:
+  #   name: pod lib lint
+  #   runs-on: macOS-latest
+
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@master
+  #     - name: Setup
+  #       run: gem install bundler; bundle install
+  #     - name: Build
+  #       run: |
+  #         bundle exec pod lib lint FirebaseGoogleAuthUI.podspec \
+  #           --include-podspecs=FirebaseAuthUI.podspec

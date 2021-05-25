@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -491,21 +491,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework",
-					"\"Foundation\"",
-					"-framework",
-					"\"GTMSessionFetcher\"",
-					"-framework",
-					"\"GoogleUtilities\"",
-					"-framework",
-					"\"SafariServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"UIKit\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseEmailAuthUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -529,21 +515,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework",
-					"\"Foundation\"",
-					"-framework",
-					"\"GTMSessionFetcher\"",
-					"-framework",
-					"\"GoogleUtilities\"",
-					"-framework",
-					"\"SafariServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"UIKit\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseEmailAuthUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -570,22 +542,9 @@
 					"${PODS_CONFIGURATION_BUILD_DIR}/OCMock",
 					"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC",
 					"${PODS_CONFIGURATION_BUILD_DIR}/nanopb",
+					"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseAuthUI",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework",
-					"\"Foundation\"",
-					"-framework",
-					"\"GTMSessionFetcher\"",
-					"-framework",
-					"\"GoogleUtilities\"",
-					"-framework",
-					"\"SafariServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"UIKit\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseEmailAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -611,22 +570,9 @@
 					"${PODS_CONFIGURATION_BUILD_DIR}/OCMock",
 					"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC",
 					"${PODS_CONFIGURATION_BUILD_DIR}/nanopb",
+					"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseAuthUI",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework",
-					"\"Foundation\"",
-					"-framework",
-					"\"GTMSessionFetcher\"",
-					"-framework",
-					"\"GoogleUtilities\"",
-					"-framework",
-					"\"SafariServices\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"UIKit\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseEmailAuthUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

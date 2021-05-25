@@ -3,6 +3,16 @@ target 'FirebaseUI-demo-swift' do
   use_frameworks!
 
   pod 'FirebaseUI', :path => '../../'
+  pod 'FirebaseAuthUI', :path => '../../'
+  pod 'FirebaseDatabaseUI', :path => '../../'
+  pod 'FirebaseFirestoreUI', :path => '../../'
+  pod 'FirebaseOAuthUI', :path => '../../'
+  pod 'FirebasePhoneAuthUI', :path => '../../'
+  pod 'FirebaseAnonymousAuthUI', :path => '../../'
+  pod 'FirebaseEmailAuthUI', :path => '../../'
+  pod 'FirebaseFacebookAuthUI', :path => '../../'
+  pod 'FirebaseGoogleAuthUI', :path => '../../'
+  pod 'FirebaseStorageUI', :path => '../../'
 
   target 'FirebaseUI-demo-swiftTests' do
     inherit! :search_paths

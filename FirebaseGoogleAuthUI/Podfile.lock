@@ -15,7 +15,9 @@ PODS:
     - GoogleUtilities/Environment (~> 7.4)
     - GTMSessionFetcher/Core (~> 1.5)
   - FirebaseAuthUI (11.0.0):
-    - Firebase/Auth (>= 7.2.0)
+    - Firebase/Auth (~> 8.0)
+    - FirebaseAuth
+    - FirebaseCore
     - GoogleUtilities/UserDefaults
   - FirebaseCore (8.0.0):
     - FirebaseCoreDiagnostics (~> 8.0)
@@ -92,7 +94,7 @@ SPEC CHECKSUMS:
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   Firebase: 73c3e3b216ec1ecbc54d2ffdd4670c65c749edb1
   FirebaseAuth: b8cd992fca5b53dc6eec09e873a3f375f000c5a1
-  FirebaseAuthUI: b3511544eeec97b719aeda7ccd779f7f0ff086d3
+  FirebaseAuthUI: a44ed5d5da7337fd1dfbd9ac4a32ac3217ea8f2c
   FirebaseCore: 3f09591d51292843e2a46f18358d60bf4e996255
   FirebaseCoreDiagnostics: a31d987ba0fe16d59886a5dbadc2f1de871f88c8
   GoogleDataTransport: 11e3a5f2c190327df1a4a5d7e7ae3d4d5b9c9e4c

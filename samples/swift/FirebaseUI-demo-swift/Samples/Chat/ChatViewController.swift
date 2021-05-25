@@ -16,7 +16,7 @@
 
 import UIKit
 import Firebase
-import FirebaseUI
+import FirebaseDatabaseUI
 
 /// View controller demonstrating using a FUICollectionViewDataSource
 /// to populate a collection view with chat messages. The relevant code
