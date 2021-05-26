@@ -14,6 +14,7 @@
 //  limitations under the License.
 //
 
+#import "FirebasePhoneAuthUI/Sources/Public/FirebasePhoneAuthUI/FUIPhoneAuth.h"
 #import "FirebasePhoneAuthUI/Sources/FUIPhoneAuthStrings.h"
 #import "FirebasePhoneAuthUI/Sources/FUIPhoneAuth_Internal.h"
 
@@ -59,7 +60,7 @@ NSString *const kPhoneAuthProviderTableName = @"FirebasePhoneAuthUI";
 NSString *FUIPhoneAuthLocalizedString(NSString *key) {
   return FUILocalizedStringFromTableInBundle(key,
                                              kPhoneAuthProviderTableName,
-                                             FUIPhoneAuthBundleName);
+                                             [FUIPhoneAuth bundle]);
 }
 
 NS_ASSUME_NONNULL_END

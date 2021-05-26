@@ -9,7 +9,6 @@ Pod::Spec.new do |s|
   s.platform = :ios
   s.ios.deployment_target = '10.0'
   s.ios.framework = 'UIKit'
-  s.static_framework = true
   s.requires_arc = true
   s.cocoapods_version = '>= 1.8.0'
   s.pod_target_xcconfig = {
@@ -21,7 +20,7 @@ Pod::Spec.new do |s|
   s.dependency 'FirebaseAuthUI'
   s.dependency 'FirebaseAuth', '~> 8.0'
   s.dependency 'FirebaseCore'
-  s.resource_bundle = {
+  s.resource_bundles = {
     'FirebaseAnonymousAuthUI' => [
       'FirebaseAnonymousAuthUI/Sources/{Resources,Strings}/*.{png,lproj}'
     ]

@@ -130,12 +130,12 @@ NSString *FUILocalizedString(NSString *key) {
 }
 
 NSString *FUILocalizedStringFromTable(NSString *key, NSString *table) {
-  return FUILocalizedStringFromTableInBundle(key, table, FUIAuthBundleName);
+  return FUILocalizedStringFromTableInBundle(key, table, [FUIAuthUtils authUIBundle]);
 }
 
 NSString *FUILocalizedStringFromTableInBundle(NSString *key,
                                               NSString *table,
-                                              NSString *_Nullable bundleName) {
+                                              NSBundle *_Nullable bundle) {
   // Don't load defaultAuthUI if the default app isn't configured. We don't recommend
   // people do this in our docs, but if for whatever reason they want to use a custom
   // app, this code shouldn't crash.
@@ -150,11 +150,10 @@ NSString *FUILocalizedStringFromTableInBundle(NSString *key,
       }
     }
   }
-  NSBundle *frameworkBundle = [FUIAuthUtils bundleNamed:bundleName];
-  if (frameworkBundle == nil) {
-    frameworkBundle = [NSBundle mainBundle];
+  if (bundle == nil) {
+    bundle = [NSBundle mainBundle];
   }
-  return [frameworkBundle localizedStringForKey:key value:nil table:table];
+  return [bundle localizedStringForKey:key value:nil table:table];
 }
 
 NS_ASSUME_NONNULL_END

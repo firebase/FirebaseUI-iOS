@@ -73,7 +73,7 @@ static const CGFloat kTOSViewHorizontalMargin = 16.0f;
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
   return [self initWithNibName:@"FUIAuthPickerViewController"
-                        bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
+                        bundle:[FUIAuthUtils authUIBundle]
                         authUI:authUI];
 }
 

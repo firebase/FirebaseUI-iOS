@@ -28,26 +28,22 @@ extern NSString *const FUIAuthBundleName;
 
 - (instancetype)init NS_UNAVAILABLE;
 
++ (NSBundle *)authUIBundle;
+
 /** @fn bundleNamed:
     @brief Gets the framework bundle for specified name
     @param bundleName Name of the bundle to retreive. If nil, this returns the default bundle for
         FirebaseUI.
+    @param framework The name of the framework module the resource bundle should be present in.
  */
-+ (nullable NSBundle *)bundleNamed:(nullable NSString *)bundleName;
-
-/** @fn imageNamed:fromBundle:
-    @brief Gets a UIImage with the given name, assuming it's a png.
-    @param name Name of the image to retreive.
-    @param bundleNameOrNil Name of the bundle to retreive. If nil, this method will look into the
-        default FirebaseUI framework bundle.
- */
-+ (nullable UIImage *)imageNamed:(NSString *)name fromBundleNameOrNil:(nullable NSString *)bundleNameOrNil;
++ (nullable NSBundle *)bundleNamed:(nullable NSString *)bundleName
+                 inFrameworkBundle:(nullable NSBundle *)framework;
 
 /** @fn imageNamed:fromBundle:
  @brief Gets a UIImage with the given name, assuming it's a png.
  @param name Name of the image to retreive.
  @param bundle The bundle to retrieve the image from. If nil, this method will look into the
-     default FirebaseUI framework bundle.
+     default FirebaseAuthUI framework bundle.
  */
 + (nullable UIImage *)imageNamed:(NSString *)name fromBundle:(nullable NSBundle *)bundle;
 

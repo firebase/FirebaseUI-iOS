@@ -49,6 +49,11 @@ NS_ASSUME_NONNULL_BEGIN
   UIViewController *_presentingViewController;
 }
 
++ (NSBundle *)bundle {
+  return [FUIAuthUtils bundleNamed:kBundleName
+                 inFrameworkBundle:[NSBundle bundleForClass:[self class]]];
+}
+
 - (instancetype)init {
   return [self initWithAuthUI:[FUIAuth defaultAuthUI]];
 }
@@ -85,11 +90,13 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (NSString *)signInLabel {
-  return FUILocalizedStringFromTableInBundle(kSignInAsGuest, kTableName, kBundleName);
+  return FUILocalizedStringFromTableInBundle(kSignInAsGuest,
+                                             kTableName,
+                                             [FUIAnonymousAuth bundle]);
 }
 
 - (UIImage *)icon {
-  return [FUIAuthUtils imageNamed:@"ic_anonymous" fromBundleNameOrNil:kBundleName];
+  return [FUIAuthUtils imageNamed:@"ic_anonymous" fromBundle:[FUIAnonymousAuth bundle]];
 }
 
 - (UIColor *)buttonBackgroundColor {

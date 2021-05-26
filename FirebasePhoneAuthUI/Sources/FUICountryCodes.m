@@ -20,6 +20,7 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
+#import "FirebasePhoneAuthUI/Sources/Public/FirebasePhoneAuthUI/FUIPhoneAuth.h"
 #import "FirebasePhoneAuthUI/Sources/FUIPhoneAuthStrings.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -67,9 +68,8 @@ NSString* const kFUIDefaultCountryCode = @"US";
 - (instancetype)init {
   if (self = [super init]) {
     // Country codes JSON containing country codes and phone number info.
-    NSString *countryCodeFilePath =
-        [[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName] pathForResource:@"country-codes"
-                                                                    ofType:@"json"];
+    NSBundle *bundle = [FUIPhoneAuth bundle];
+    NSString *countryCodeFilePath = [bundle  pathForResource:@"country-codes" ofType:@"json"];
     NSAssert([[NSFileManager defaultManager] fileExistsAtPath:countryCodeFilePath],
              @"Could not find country code file");
 

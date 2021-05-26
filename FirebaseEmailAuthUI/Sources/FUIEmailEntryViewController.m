@@ -74,7 +74,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils bundleNamed:FUIEmailAuthBundleName]
+                        bundle:[FUIEmailAuth bundle]
                         authUI:authUI];
 }
 
@@ -280,7 +280,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   FUIAuthTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   if (!cell) {
     UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([FUIAuthTableViewCell class])
-                                    bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]];
+                                    bundle:[FUIAuthUtils authUIBundle]];
     [tableView registerNib:cellNib forCellReuseIdentifier:kCellReuseIdentifier];
     cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   }

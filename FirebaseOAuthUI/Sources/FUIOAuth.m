@@ -108,6 +108,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation FUIOAuth
 
++ (NSBundle *)bundle {
+  return [FUIAuthUtils bundleNamed:kBundleName
+                 inFrameworkBundle:[NSBundle bundleForClass:[self class]]];
+}
+
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                     providerID:(NSString *)providerID
                buttonLabelText:(NSString *)buttonLabelText
@@ -145,7 +150,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                            blue:234.0f/255.0f
                                                           alpha:1.0f]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_twitter"
-                                               fromBundleNameOrNil:kBundleName]
+                                                        fromBundle:[FUIOAuth bundle]]
                                    scopes:@[@"user.readwrite"]
                          customParameters:@{@"prompt" : @"consent"}
                              loginHintKey:nil];
@@ -158,7 +163,7 @@ NS_ASSUME_NONNULL_BEGIN
                                 shortName:@"GitHub"
                               buttonColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_github"
-                                               fromBundleNameOrNil:kBundleName]
+                                                        fromBundle:[FUIOAuth bundle]]
                                    scopes:nil
                          customParameters:nil
                              loginHintKey:nil];
@@ -171,7 +176,7 @@ NS_ASSUME_NONNULL_BEGIN
                                 shortName:@"Microsoft"
                               buttonColor:[UIColor colorWithRed:.18 green:.18 blue:.18 alpha:1.0]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_microsoft"
-                                               fromBundleNameOrNil:kBundleName]
+                                                        fromBundle:[FUIOAuth bundle]]
                                    scopes:@[@"user.readwrite"]
                          customParameters:@{@"prompt" : @"consent"}
                              loginHintKey:@"login_hint"];
@@ -184,7 +189,7 @@ NS_ASSUME_NONNULL_BEGIN
                                 shortName:@"Yahoo"
                               buttonColor:[UIColor colorWithRed:.45 green:.05 blue:.62 alpha:1.0]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_yahoo"
-                                               fromBundleNameOrNil:kBundleName]
+                                                        fromBundle:[FUIOAuth bundle]]
                                    scopes:@[@"user.readwrite"]
                          customParameters:@{@"prompt" : @"consent"}
                              loginHintKey:nil];
@@ -197,7 +202,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (FUIOAuth *)appleAuthProviderWithUserInterfaceStyle:(UIUserInterfaceStyle)userInterfaceStyle {
   UIImage *iconImage = [FUIAuthUtils imageNamed:@"ic_apple"
-                            fromBundleNameOrNil:kBundleName];
+                                     fromBundle:[FUIOAuth bundle]];
   UIColor *buttonColor = [UIColor blackColor];
   UIColor *buttonTextColor = [UIColor whiteColor];
   if (userInterfaceStyle == UIUserInterfaceStyleDark) {

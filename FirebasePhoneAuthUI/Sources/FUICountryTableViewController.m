@@ -18,6 +18,7 @@
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
+#import "FirebasePhoneAuthUI/Sources/Public/FirebasePhoneAuthUI/FUIPhoneAuth.h"
 #import "FirebasePhoneAuthUI/Sources/FUICountryCodes.h"
 #import "FirebasePhoneAuthUI/Sources/FUICountryTableViewController.h"
 #import "FirebasePhoneAuthUI/Sources/FUIFeatureSwitch.h"
@@ -40,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithCountryCodes:(FUICountryCodes *)countryCodes {
   if ((self = [super initWithNibName:NSStringFromClass([self class])
-                              bundle:[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName]])) {
+                              bundle:[FUIPhoneAuth bundle]])) {
     _countryCodes = countryCodes;
     _collationForCountries =
         [[FUICollationForCountries alloc] initWithCountryCodes:self.countryCodes];

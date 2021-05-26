@@ -35,6 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
   FUICountryCodes *_countryCodes;
 }
 
++ (NSBundle *)bundle {
+  return [FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName
+                 inFrameworkBundle:[NSBundle bundleForClass:[self class]]];
+}
+
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
   if (self = [super init]) {
     _authUI = authUI;
@@ -102,7 +107,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (UIImage *)icon {
-  return [FUIAuthUtils imageNamed:@"ic_phone" fromBundleNameOrNil:FUIPhoneAuthBundleName];
+  return [FUIAuthUtils imageNamed:@"ic_phone" fromBundle:[FUIPhoneAuth bundle]];
 }
 
 - (UIColor *)buttonBackgroundColor {

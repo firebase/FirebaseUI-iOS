@@ -19,6 +19,7 @@
 #import <FirebaseAuth/FirebaseAuth.h>
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIEmailAuth.h"
 #import "FirebaseEmailAuthUI/Sources/FUIEmailAuthStrings.h"
 
 /** @var kCellReuseIdentifier
@@ -90,7 +91,7 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
                          email:(NSString *_Nullable)email
             requireDisplayName:(BOOL)requireDisplayName {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils bundleNamed:FUIEmailAuthBundleName]
+                        bundle:[FUIEmailAuth bundle]
                         authUI:authUI
                          email:email
             requireDisplayName:requireDisplayName];
@@ -263,7 +264,7 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
   FUIAuthTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   if (!cell) {
     UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([FUIAuthTableViewCell class])
-                                    bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]];
+                                    bundle:[FUIAuthUtils authUIBundle]];
     [tableView registerNib:cellNib forCellReuseIdentifier:kCellReuseIdentifier];
     cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   }
@@ -361,7 +362,7 @@ static const CGFloat kTextFieldRightViewSize = 36.0f;
 
 - (void)updateIconForRightViewButton:(UIButton *)button {
   NSString *imageName = _passwordField.secureTextEntry ? @"ic_visibility" : @"ic_visibility_off";
-  UIImage *image = [FUIAuthUtils imageNamed:imageName fromBundleNameOrNil:FUIAuthBundleName];
+  UIImage *image = [FUIAuthUtils imageNamed:imageName fromBundle:[FUIAuthUtils authUIBundle]];
   [button setImage:image forState:UIControlStateNormal];
 }
 
