@@ -38,8 +38,10 @@
 - (void)setUp {
   [super setUp];
 
+  // xcodebuild doesn't use a bundle within the framework bundle.
   id mockUtilsClass = OCMClassMock([FUIAuthUtils class]);
-  OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY])).
+  OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY
+                                inFrameworkBundle:OCMOCK_ANY])).
       andReturn([NSBundle bundleForClass:[FUIFacebookAuthTest class]]);
 
   id authClass = OCMClassMock([FIRAuth class]);
