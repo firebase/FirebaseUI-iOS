@@ -35,21 +35,24 @@ NSString *const FUIAuthBundleName = @"FirebaseAuthUI";
   if (!bundleName) {
     bundleName = FUIAuthBundleName;
   }
+  // Use the main bundle as a default if the framework wasn't provided.
+  NSBundle *frameworkBundle = framework;
+  if (frameworkBundle == nil) {
+    // If frameworkBundle is unspecified, assume main bundle/static linking.
+    frameworkBundle = [NSBundle mainBundle];
+  }
   // If using static frameworks, the bundle will be included directly in the main
   // bundle.
   NSString *path = [[NSBundle mainBundle] pathForResource:bundleName ofType:@"bundle"];
 
   // Otherwise, check the appropriate framework bundle.
   if (!path) {
-    NSBundle *frameworkBundle = framework;
-    if (frameworkBundle == nil) {
-      // If frameworkBundle is unspecified, assume main bundle/static linking.
-      frameworkBundle = [NSBundle mainBundle];
-    }
     path = [frameworkBundle pathForResource:bundleName ofType:@"bundle"];
   }
   if (!path) {
     NSLog(@"Warning: Unable to find bundle %@ in framework %@.", bundleName, framework);
+    // Fall back on the root module.
+    return frameworkBundle;
   }
   returnBundle = [NSBundle bundleWithPath:path];
   return returnBundle;
