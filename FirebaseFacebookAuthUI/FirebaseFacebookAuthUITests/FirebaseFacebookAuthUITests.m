@@ -46,6 +46,11 @@
   OCMStub(ClassMethod([self.mockOAuthProvider providerWithProviderID:OCMOCK_ANY])).
       andReturn(self.mockOAuthProvider);
 
+  id mockUtilsClass = OCMClassMock([FUIAuthUtils class]);
+  OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY
+                                inFrameworkBundle:OCMOCK_ANY])).
+      andReturn([NSBundle bundleForClass:[FUIFacebookAuthTest class]]);
+
   FIRAuth *auth = [FIRAuth auth];
   self.authUI = [FUIAuth authUIWithAuth:auth];
   self.provider = [[FUIFacebookAuthTest alloc] initWithAuthUI:self.authUI];

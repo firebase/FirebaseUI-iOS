@@ -318,8 +318,8 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   NSString *facebookDisplayName = [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
 
   if (facebookAppId == nil || facebookDisplayName == nil) {
-    // Always use the app bundle to look up Facebook values.
-    bundle = [NSBundle mainBundle];
+    // Executes in test targets only.
+    bundle = [FUIFacebookAuth bundle];
     facebookAppId = [bundle objectForInfoDictionaryKey:kFacebookAppId];
     facebookDisplayName = [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
   }
