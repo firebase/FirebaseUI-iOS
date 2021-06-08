@@ -320,8 +320,9 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   if (facebookAppId == nil || facebookDisplayName == nil) {
     // Executes in test targets only.
     bundle = [FUIFacebookAuth bundle];
-    facebookAppId = [bundle objectForInfoDictionaryKey:kFacebookAppId];
-    facebookDisplayName = [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
+    facebookAppId = facebookAppId ?: [bundle objectForInfoDictionaryKey:kFacebookAppId];
+    facebookDisplayName = facebookDisplayName ?:
+        [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
   }
 
   if (!(facebookAppId && facebookDisplayName)) {
