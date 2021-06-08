@@ -87,7 +87,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
+                        bundle:[FUIAuthUtils authUIBundle]
                         authUI:authUI];
 }
 

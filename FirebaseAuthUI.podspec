@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.dependency 'FirebaseAuth'
   s.dependency 'FirebaseCore'
   s.dependency 'GoogleUtilities/UserDefaults'
-  s.resource_bundle = {
+  s.resource_bundles = {
     'FirebaseAuthUI' => ['FirebaseAuthUI/Sources/{Resources,Strings}/*.{xib,png,lproj}']
   }
 

@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, readwrite) FUIButtonAlignment buttonAlignment;
 
++ (NSBundle *)bundle;
+
 /** @fn initAuthAuthUI:signInMethod:forceSameDevice:allowNewEmailAccounts:actionCodeSetting:
     @brief Initializer with several configurations.
     @param authUI The auth UI object that this auth UI provider associate with.

@@ -21,6 +21,7 @@
 #import <FirebaseAuth/FIRPhoneAuthProvider.h>
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
+#import "FirebasePhoneAuthUI/Sources/Public/FirebasePhoneAuthUI/FUIPhoneAuth.h"
 #import "FirebasePhoneAuthUI/Sources/FUICountryTableViewController.h"
 #import "FirebasePhoneAuthUI/Sources/FUIFeatureSwitch.h"
 #import "FirebasePhoneAuthUI/Sources/FUIPhoneAuthStrings.h"
@@ -84,7 +85,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName]
+                        bundle:[FUIPhoneAuth bundle]
                         authUI:authUI
                    phoneNumber:nil
                   countryCodes:nil];
@@ -94,7 +95,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                    phoneNumber:(nullable NSString *)phoneNumber
                   countryCodes:(nullable FUICountryCodes *)countryCodes {
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName]
+                        bundle:[FUIPhoneAuth bundle]
                         authUI:authUI
                    phoneNumber:phoneNumber
                   countryCodes:countryCodes];
@@ -260,7 +261,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   FUIAuthTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   if (!cell) {
     UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([FUIAuthTableViewCell class])
-                                    bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]];
+                                    bundle:[FUIAuthUtils authUIBundle]];
     [tableView registerNib:cellNib forCellReuseIdentifier:kCellReuseIdentifier];
     cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
   }

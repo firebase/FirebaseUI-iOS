@@ -491,7 +491,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 0d1ae58388a458b8222f72025804cdc84eb5d0c3
   FBSDKLoginKit: aea68df6121c5e165ccae2fabfdc83c4644ee40f
   Firebase: 73c3e3b216ec1ecbc54d2ffdd4670c65c749edb1
-  FirebaseAnonymousAuthUI: e8e72803e69b1669b74cc262bef2d73c42344f0e
+  FirebaseAnonymousAuthUI: 250139e53ca84bb18b9cd67e35be0d4d63e22418
   FirebaseAuth: b8cd992fca5b53dc6eec09e873a3f375f000c5a1
   FirebaseAuthUI: a44ed5d5da7337fd1dfbd9ac4a32ac3217ea8f2c
   FirebaseCore: 3f09591d51292843e2a46f18358d60bf4e996255

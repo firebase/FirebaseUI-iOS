@@ -88,6 +88,11 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   NSString *_email;
 }
 
++ (NSBundle *)bundle {
+  return [FUIAuthUtils bundleNamed:kBundleName
+                 inFrameworkBundle:[NSBundle bundleForClass:[self class]]];
+}
+
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                    permissions:(NSArray *)permissions {
   self = [super init];
@@ -145,11 +150,13 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 - (NSString *)signInLabel {
-  return FUILocalizedStringFromTableInBundle(kSignInWithFacebook, kTableName, kBundleName);
+  return FUILocalizedStringFromTableInBundle(kSignInWithFacebook,
+                                             kTableName,
+                                             [FUIFacebookAuth bundle]);
 }
 
 - (UIImage *)icon {
-  return [FUIAuthUtils imageNamed:@"ic_facebook" fromBundleNameOrNil:kBundleName];
+  return [FUIAuthUtils imageNamed:@"ic_facebook" fromBundle:[FUIFacebookAuth bundle]];
 }
 
 - (UIColor *)buttonBackgroundColor {
@@ -311,9 +318,11 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   NSString *facebookDisplayName = [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
 
   if (facebookAppId == nil || facebookDisplayName == nil) {
-    bundle = [FUIAuthUtils bundleNamed:nil];
-    facebookAppId = [bundle objectForInfoDictionaryKey:kFacebookAppId];
-    facebookDisplayName = [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
+    // Executes in test targets only.
+    bundle = [FUIFacebookAuth bundle];
+    facebookAppId = facebookAppId ?: [bundle objectForInfoDictionaryKey:kFacebookAppId];
+    facebookDisplayName = facebookDisplayName ?:
+        [bundle objectForInfoDictionaryKey:kFacebookDisplayName];
   }
 
   if (!(facebookAppId && facebookDisplayName)) {

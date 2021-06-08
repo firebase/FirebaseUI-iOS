@@ -71,6 +71,11 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
 
 @implementation FUIEmailAuth
 
++ (NSBundle *)bundle {
+  return [FUIAuthUtils bundleNamed:FUIEmailAuthBundleName
+                 inFrameworkBundle:[NSBundle bundleForClass:[self class]]];
+}
+
 - (instancetype)init {
   return [self initAuthAuthUI:[FUIAuth defaultAuthUI]
                  signInMethod:FIREmailPasswordAuthSignInMethod
@@ -143,7 +148,7 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
 }
 
 - (UIImage *)icon {
-  return [FUIAuthUtils imageNamed:@"ic_email" fromBundleNameOrNil:FUIEmailAuthBundleName];
+  return [FUIAuthUtils imageNamed:@"ic_email" fromBundle:[FUIEmailAuth bundle]];
 }
 
 - (UIColor *)buttonBackgroundColor {
