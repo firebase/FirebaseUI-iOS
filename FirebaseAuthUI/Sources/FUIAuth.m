@@ -267,7 +267,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
             }
 
             if (![authResult.user.email isEqualToString:[providerUI email]]
-                && credential) {
+                && credential != nil) {
               NSDictionary *userInfo = @{
                 FUIAuthCredentialKey : credential,
               };

@@ -281,7 +281,9 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
     [self callbackWithCredential:nil error:error result:nil];
     return;
   }
-  FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:accessToken];
+  // Assume accessToken cannot be nil if there's no error.
+  NSString *_Nonnull token = (id _Nonnull)accessToken;
+  FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:token];
   UIActivityIndicatorView *activityView =
       [FUIAuthBaseViewController addActivityIndicator:_presentingViewController.view];
   [activityView startAnimating];

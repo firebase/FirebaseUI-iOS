@@ -62,13 +62,14 @@ NSString *const FUIAuthBundleName = @"FirebaseAuthUI";
   if (!bundle) {
     bundle = [self authUIBundle];
   }
-  NSString *path = [bundle pathForResource:name ofType:@"png"];
-  if (!path) {
-    NSLog(@"Warning: Unable to find asset %@ in bundle %@.", name, bundle);
-  }
   if (@available(iOS 13.0, *)) {
     return [UIImage imageNamed:name inBundle:bundle withConfiguration:nil];
   } else {
+    NSString *path = [bundle pathForResource:name ofType:@"png"];
+    if (!path) {
+      NSLog(@"Warning: Unable to find asset %@ in bundle %@.", name, bundle);
+      return nil;
+    }
     return [UIImage imageWithContentsOfFile:path];
   }
 }

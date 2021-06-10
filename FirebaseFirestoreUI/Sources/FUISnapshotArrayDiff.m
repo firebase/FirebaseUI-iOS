@@ -280,8 +280,6 @@ FUIUnorderedPair *FUIUnorderedPairMake(id left, id right) {
     id object = _initial[i];
     id lcsObject;
     if (lcsIndex < lcs.count) { lcsObject = lcs[lcsIndex]; }
-    id resultObject;
-    if (i < _result.count) { resultObject = _result[i]; }
     if ([lcsObject isEqual:object]) {
       lcsIndex++;
     } else {
@@ -302,8 +300,6 @@ FUIUnorderedPair *FUIUnorderedPairMake(id left, id right) {
   // that element was a part of a change.
   lcsIndex = 0;
   for (NSInteger i = 0; i < _result.count; i++) {
-    id initialObject;
-    if (i < _initial.count) { initialObject = _initial[i]; }
     id lcsObject;
     if (lcsIndex < lcs.count) { lcsObject = lcs[lcsIndex]; }
     id object = _result[i];

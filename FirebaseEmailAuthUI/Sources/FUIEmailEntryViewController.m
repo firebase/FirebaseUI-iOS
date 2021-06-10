@@ -208,7 +208,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
         } else {
           [self showAlertWithMessage:FUILocalizedString(kStr_UserNotFoundError)];
         }
-        [self pushViewController:controller];
+        if (controller != nil) {
+          [self pushViewController:controller];
+        }
       }
     }
   }];
