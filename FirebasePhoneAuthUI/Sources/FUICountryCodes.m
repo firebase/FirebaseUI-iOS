@@ -276,7 +276,7 @@ NSString* const kFUIDefaultCountryCode = @"US";
 
     if (!countryCodes[dialCode]) {
       countryCodes[dialCode] = [self countryCodeInfoForDictionary:dict];
-    } else if (level) {
+    } else if (level != nil) {
       FUICountryCodeInfo *existing = countryCodes[dialCode];
 
       if (level.integerValue < existing.level.integerValue) {

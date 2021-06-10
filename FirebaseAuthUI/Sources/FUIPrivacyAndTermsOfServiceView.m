@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Protected
 
-- (NSAttributedString *)privacyPolicyAndTOSMessageFromFormat:(NSString *)format {
+- (nullable NSAttributedString *)privacyPolicyAndTOSMessageFromFormat:(NSString *)format {
   FUIAuth *authUI = self.authUI ?: [FUIAuth defaultAuthUI];
   NSURL *TOSURL = authUI.TOSURL;
   NSURL *privacyPolicyURL = authUI.privacyPolicyURL;

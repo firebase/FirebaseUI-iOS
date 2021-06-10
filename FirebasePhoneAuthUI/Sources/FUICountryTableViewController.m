@@ -69,10 +69,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-  if ([self tableView:tableView numberOfRowsInSection:indexPath.section] == 0) {
-    return nil;
-  }
-
   static NSString *identifier = @"fui-country-cell";
   NSInteger textLabelTag = 1;
   NSInteger detailTextLabelTag = 2;
