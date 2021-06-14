@@ -1,7 +1,7 @@
 PODS:
-  - Firebase/CoreOnly (8.1.0):
+  - Firebase/CoreOnly (8.1.1):
     - FirebaseCore (= 8.1.0)
-  - Firebase/Storage (8.1.0):
+  - Firebase/Storage (8.1.1):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 8.1.0)
   - FirebaseCore (8.1.0):
@@ -56,7 +56,7 @@ SPEC REPOS:
     - SDWebImage
 
 SPEC CHECKSUMS:
-  Firebase: b5956acddaaa53a6c292bec00649fadd18367344
+  Firebase: 4bb49ae87756034cef870fa3c4006235eb46f475
   FirebaseCore: 389c4ce9a7cce4a7e25eb22326b4bee0050557b2
   FirebaseCoreDiagnostics: 3e249cee3de5c5f9cfd6cc2a19997231286fec11
   FirebaseStorage: 5b5958efaf84fb991568ad36f157f60c76bdcd80
