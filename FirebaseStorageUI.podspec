@@ -19,8 +19,7 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = '11.0'
   s.public_header_files = 'FirebaseStorageUI/Sources/Public/FirebaseStorageUI/*.h'
   s.source_files = 'FirebaseStorageUI/Sources/**/*.{h,m}'
-  s.dependency 'Firebase/Storage', '~> 8.0'
-  s.dependency 'FirebaseStorage'
+  s.dependency 'FirebaseStorage', '~> 8.0'
   s.dependency 'GTMSessionFetcher/Core', '~> 1.5.0'
   s.dependency 'SDWebImage', '~> 5.6'
 
