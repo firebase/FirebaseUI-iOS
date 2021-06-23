@@ -20,7 +20,6 @@ Pod::Spec.new do |s|
   s.public_header_files = 'FirebaseStorageUI/Sources/Public/FirebaseStorageUI/*.h'
   s.source_files = 'FirebaseStorageUI/Sources/**/*.{h,m}'
   s.dependency 'FirebaseStorage', '~> 8.0'
-  # s.dependency 'GTMSessionFetcher/Core', '~> 1.5.0'
   s.dependency 'SDWebImage', '~> 5.6'
 
 end
