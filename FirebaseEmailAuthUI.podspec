@@ -18,8 +18,6 @@ Pod::Spec.new do |s|
   s.public_header_files = 'FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/*.h'
   s.source_files = 'FirebaseEmailAuthUI/Sources/**/*.{h,m}'
   s.dependency 'FirebaseAuthUI'
-  # s.dependency 'FirebaseAuth', '~> 8.0'
-  # s.dependency 'FirebaseCore'
   s.dependency 'GoogleUtilities/UserDefaults'
   s.resource_bundles = {
     'FirebaseEmailAuthUI' => ['FirebaseEmailAuthUI/Sources/Resources/*.{xib,png}']

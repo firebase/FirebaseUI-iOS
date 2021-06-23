@@ -233,21 +233,7 @@ PODS:
     - FBSDKLoginKit/Login (= 9.3.0)
   - FBSDKLoginKit/Login (9.3.0):
     - FBSDKCoreKit (~> 9.3.0)
-  - Firebase/Auth (8.0.0):
-    - Firebase/CoreOnly
-    - FirebaseAuth (~> 8.0.0)
-  - Firebase/CoreOnly (8.0.0):
-    - FirebaseCore (= 8.0.0)
-  - Firebase/Database (8.0.0):
-    - Firebase/CoreOnly
-    - FirebaseDatabase (~> 8.0.0)
-  - Firebase/Firestore (8.0.0):
-    - Firebase/CoreOnly
-    - FirebaseFirestore (~> 8.0.0)
-  - Firebase/Storage (8.0.0):
-    - Firebase/CoreOnly
-    - FirebaseStorage (~> 8.0.0)
-  - FirebaseAnonymousAuthUI (11.0.0):
+  - FirebaseAnonymousAuthUI (11.0.3):
     - FirebaseAuth (~> 8.0)
     - FirebaseAuthUI
     - FirebaseCore
@@ -256,11 +242,9 @@ PODS:
     - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
     - GoogleUtilities/Environment (~> 7.4)
     - GTMSessionFetcher/Core (~> 1.5)
-  - FirebaseAuthUI (11.0.0):
-    - Firebase/Auth (~> 8.0)
-    - FirebaseAuth
+  - FirebaseAuthUI (11.0.3):
+    - FirebaseAuth (~> 8.0)
     - FirebaseCore
-    - GoogleUtilities/UserDefaults
   - FirebaseCore (8.0.0):
     - FirebaseCoreDiagnostics (~> 8.0)
     - GoogleUtilities/Environment (~> 7.4)
@@ -273,20 +257,15 @@ PODS:
   - FirebaseDatabase (8.0.0):
     - FirebaseCore (~> 8.0)
     - leveldb-library (~> 1.22)
-  - FirebaseDatabaseUI (11.0.0):
-    - Firebase/Database (~> 8.0)
-  - FirebaseEmailAuthUI (11.0.0):
-    - FirebaseAuth (~> 8.0)
+  - FirebaseDatabaseUI (11.0.3):
+    - FirebaseDatabase (~> 8.0)
+  - FirebaseEmailAuthUI (11.0.3):
     - FirebaseAuthUI
-    - FirebaseCore
     - GoogleUtilities/UserDefaults
-  - FirebaseFacebookAuthUI (11.0.0):
+  - FirebaseFacebookAuthUI (11.0.3):
     - FBSDKCoreKit
     - FBSDKLoginKit (~> 9.0)
-    - FirebaseAuth (~> 8.0)
     - FirebaseAuthUI
-    - FirebaseCore
-    - GoogleUtilities/UserDefaults
   - FirebaseFirestore (8.0.0):
     - abseil/algorithm (= 0.20200225.0)
     - abseil/base (= 0.20200225.0)
@@ -299,63 +278,52 @@ PODS:
     - "gRPC-C++ (~> 1.28.0)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 2.30908.0)
-  - FirebaseFirestoreUI (11.0.0):
-    - Firebase/Firestore
+  - FirebaseFirestoreUI (11.0.3):
     - FirebaseFirestore (~> 8.0)
-  - FirebaseGoogleAuthUI (11.0.0):
-    - FirebaseAuth (~> 8.0)
+  - FirebaseGoogleAuthUI (11.0.3):
     - FirebaseAuthUI
-    - FirebaseCore
     - GoogleSignIn (~> 5.0)
-    - GoogleUtilities/UserDefaults
-  - FirebaseOAuthUI (11.0.0):
+  - FirebaseOAuthUI (11.0.3):
     - FirebaseAuth (~> 8.0)
     - FirebaseAuthUI
-    - FirebaseCore
-    - GoogleUtilities/UserDefaults
-  - FirebasePhoneAuthUI (11.0.0):
-    - FirebaseAuth (~> 8.0)
+  - FirebasePhoneAuthUI (11.0.3):
     - FirebaseAuthUI
-    - FirebaseCore
-    - GoogleUtilities/UserDefaults
   - FirebaseStorage (8.0.0):
     - FirebaseCore (~> 8.0)
     - GTMSessionFetcher/Core (~> 1.5)
-  - FirebaseStorageUI (11.0.0):
-    - Firebase/Storage (~> 8.0)
-    - FirebaseStorage
-    - GTMSessionFetcher/Core (~> 1.5.0)
+  - FirebaseStorageUI (11.0.3):
+    - FirebaseStorage (~> 8.0)
     - SDWebImage (~> 5.6)
-  - FirebaseUI (11.0.0):
-    - FirebaseUI/Anonymous (= 11.0.0)
-    - FirebaseUI/Auth (= 11.0.0)
-    - FirebaseUI/Database (= 11.0.0)
-    - FirebaseUI/Email (= 11.0.0)
-    - FirebaseUI/Facebook (= 11.0.0)
-    - FirebaseUI/Firestore (= 11.0.0)
-    - FirebaseUI/Google (= 11.0.0)
-    - FirebaseUI/OAuth (= 11.0.0)
-    - FirebaseUI/Phone (= 11.0.0)
-    - FirebaseUI/Storage (= 11.0.0)
-  - FirebaseUI/Anonymous (11.0.0):
+  - FirebaseUI (11.0.3):
+    - FirebaseUI/Anonymous (= 11.0.3)
+    - FirebaseUI/Auth (= 11.0.3)
+    - FirebaseUI/Database (= 11.0.3)
+    - FirebaseUI/Email (= 11.0.3)
+    - FirebaseUI/Facebook (= 11.0.3)
+    - FirebaseUI/Firestore (= 11.0.3)
+    - FirebaseUI/Google (= 11.0.3)
+    - FirebaseUI/OAuth (= 11.0.3)
+    - FirebaseUI/Phone (= 11.0.3)
+    - FirebaseUI/Storage (= 11.0.3)
+  - FirebaseUI/Anonymous (11.0.3):
     - FirebaseAnonymousAuthUI (~> 11.0)
-  - FirebaseUI/Auth (11.0.0):
+  - FirebaseUI/Auth (11.0.3):
     - FirebaseAuthUI (~> 11.0)
-  - FirebaseUI/Database (11.0.0):
+  - FirebaseUI/Database (11.0.3):
     - FirebaseDatabaseUI (~> 11.0)
-  - FirebaseUI/Email (11.0.0):
+  - FirebaseUI/Email (11.0.3):
     - FirebaseEmailAuthUI (~> 11.0)
-  - FirebaseUI/Facebook (11.0.0):
+  - FirebaseUI/Facebook (11.0.3):
     - FirebaseFacebookAuthUI (~> 11.0)
-  - FirebaseUI/Firestore (11.0.0):
+  - FirebaseUI/Firestore (11.0.3):
     - FirebaseFirestoreUI (~> 11.0)
-  - FirebaseUI/Google (11.0.0):
+  - FirebaseUI/Google (11.0.3):
     - FirebaseGoogleAuthUI (~> 11.0)
-  - FirebaseUI/OAuth (11.0.0):
+  - FirebaseUI/OAuth (11.0.3):
     - FirebaseOAuthUI (~> 11.0)
-  - FirebaseUI/Phone (11.0.0):
+  - FirebaseUI/Phone (11.0.3):
     - FirebasePhoneAuthUI (~> 11.0)
-  - FirebaseUI/Storage (11.0.0):
+  - FirebaseUI/Storage (11.0.3):
     - FirebaseStorageUI (~> 11.0)
   - GoogleDataTransport (9.0.0):
     - GoogleUtilities/Environment (~> 7.2)
@@ -441,7 +409,6 @@ SPEC REPOS:
     - BoringSSL-GRPC
     - FBSDKCoreKit
     - FBSDKLoginKit
-    - Firebase
     - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreDiagnostics
@@ -490,24 +457,23 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   FBSDKCoreKit: 0d1ae58388a458b8222f72025804cdc84eb5d0c3
   FBSDKLoginKit: aea68df6121c5e165ccae2fabfdc83c4644ee40f
-  Firebase: 73c3e3b216ec1ecbc54d2ffdd4670c65c749edb1
-  FirebaseAnonymousAuthUI: 250139e53ca84bb18b9cd67e35be0d4d63e22418
+  FirebaseAnonymousAuthUI: 64de9383870378e8f16ef428d73e8c18e74ce5cc
   FirebaseAuth: b8cd992fca5b53dc6eec09e873a3f375f000c5a1
-  FirebaseAuthUI: a44ed5d5da7337fd1dfbd9ac4a32ac3217ea8f2c
+  FirebaseAuthUI: 3f6dcb6f9e1af8e889916e2e0f0f971a70c2d303
   FirebaseCore: 3f09591d51292843e2a46f18358d60bf4e996255
   FirebaseCoreDiagnostics: a31d987ba0fe16d59886a5dbadc2f1de871f88c8
   FirebaseDatabase: 363961e25451425be8b14bb8801a592515ec58f2
-  FirebaseDatabaseUI: 0b304b9fbecd35c2809cd3a99e902d6f26307fba
-  FirebaseEmailAuthUI: 6548e3456fd339e73a8e9b5e7825b29863d8ba00
-  FirebaseFacebookAuthUI: 757715ef67ee9511fc2da6f7120feeca82949be1
+  FirebaseDatabaseUI: 4db2acaaee3c1a73e0daf31e926a8b7212941607
+  FirebaseEmailAuthUI: ff51c964f327eb38ed1f3ac27057c090d4955b01
+  FirebaseFacebookAuthUI: a8407d457cef6b1996de11c0ecde03b9a9dc1691
   FirebaseFirestore: 7f6576eaca9f821e864c3e917d68aa99f4e6b613
-  FirebaseFirestoreUI: 9f3d679531e47299a45790599e3737c6e3920211
-  FirebaseGoogleAuthUI: eea5adfab55c5a9f1789510e342306b7351d7c2f
-  FirebaseOAuthUI: 1d34e7784438663b08c68e9c1cea131abe1e34b0
-  FirebasePhoneAuthUI: 94d6ba23d0b2cf89dff3dbcaad39fccab355cb67
+  FirebaseFirestoreUI: 24a7a35da1a570e8aabd592f60de9438f6959a4c
+  FirebaseGoogleAuthUI: 95ac66fd249c6f6d47b53b6b578d3fe5a940db5c
+  FirebaseOAuthUI: 9f2f90a6cf72f1345473d205ff2071b994a071d8
+  FirebasePhoneAuthUI: f494446c505cea2530b4d2dc44a7918be2836fb7
   FirebaseStorage: 61bcd27880fa17362f68be67d3683d04bfd7b1c7
-  FirebaseStorageUI: e93c9c7ff0b1d565920078e503479b18061e224d
-  FirebaseUI: 4898197e31eeff47b8a99dcd7849ded186ac8af4
+  FirebaseStorageUI: d66a62c897de1d0f279ec80c7ece6b8afc9c5913
+  FirebaseUI: d2777b3abcb3fa40ea9eea9e40db5a154df608d3
   GoogleDataTransport: 11e3a5f2c190327df1a4a5d7e7ae3d4d5b9c9e4c
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: f8a43108b38a68eebe8b3540e1f4f2d28843ce20
