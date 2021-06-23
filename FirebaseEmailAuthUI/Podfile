@@ -6,7 +6,7 @@ platform :ios, '10.0'
 target 'FirebaseEmailAuthUI' do
   use_frameworks!
 
-  pod 'FirebaseAuthUI', :path => '../'
+  pod 'FirebaseEmailAuthUI', :path => '../'
 
   target 'FirebaseEmailAuthUITests' do
     inherit! :search_paths

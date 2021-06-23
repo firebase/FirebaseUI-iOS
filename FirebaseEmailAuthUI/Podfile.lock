@@ -23,6 +23,11 @@ PODS:
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/Logger (~> 7.4)
     - nanopb (~> 2.30908.0)
+  - FirebaseEmailAuthUI (11.0.3):
+    - FirebaseAuth
+    - FirebaseAuthUI
+    - FirebaseCore
+    - GoogleUtilities/UserDefaults
   - GoogleDataTransport (9.0.1):
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
@@ -54,13 +59,14 @@ PODS:
   - PromisesObjC (1.2.12)
 
 DEPENDENCIES:
-  - FirebaseAuthUI (from `../`)
+  - FirebaseEmailAuthUI (from `../`)
   - OCMock
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Firebase
     - FirebaseAuth
+    - FirebaseAuthUI
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - GoogleDataTransport
@@ -71,7 +77,7 @@ SPEC REPOS:
     - PromisesObjC
 
 EXTERNAL SOURCES:
-  FirebaseAuthUI:
+  FirebaseEmailAuthUI:
     :path: "../"
 
 SPEC CHECKSUMS:
@@ -80,6 +86,7 @@ SPEC CHECKSUMS:
   FirebaseAuthUI: a44ed5d5da7337fd1dfbd9ac4a32ac3217ea8f2c
   FirebaseCore: 389c4ce9a7cce4a7e25eb22326b4bee0050557b2
   FirebaseCoreDiagnostics: 3e249cee3de5c5f9cfd6cc2a19997231286fec11
+  FirebaseEmailAuthUI: 9d3ef1a6b89049079baaaea254f30c205176ceea
   GoogleDataTransport: 04c3e9a480bbcaa2ec3f5d27f1cdeb6a92f20c8d
   GoogleUtilities: f8a43108b38a68eebe8b3540e1f4f2d28843ce20
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
@@ -87,6 +94,6 @@ SPEC CHECKSUMS:
   OCMock: 29f6e52085b4e7d9b075cbf03ed7c3112f82f934
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
 
-PODFILE CHECKSUM: b25b4ea4616b08b074160df3d9fdb459e8096ef7
+PODFILE CHECKSUM: ffcd9b962954c6351da6f1465db15c02d9909a0a
 
 COCOAPODS: 1.10.1
