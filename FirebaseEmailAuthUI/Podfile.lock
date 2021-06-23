@@ -7,7 +7,6 @@ PODS:
   - FirebaseAuthUI (11.0.3):
     - FirebaseAuth (~> 8.0)
     - FirebaseCore
-    - GoogleUtilities/UserDefaults
   - FirebaseCore (8.1.0):
     - FirebaseCoreDiagnostics (~> 8.0)
     - GoogleUtilities/Environment (~> 7.4)
@@ -49,6 +48,7 @@ PODS:
 
 DEPENDENCIES:
   - FirebaseAuthUI (from `../`)
+  - GoogleUtilities/UserDefaults
   - OCMock
 
 SPEC REPOS:
@@ -69,7 +69,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FirebaseAuth: e069ff5736fe9d5dcf61f36244bb1b1ce1897d17
-  FirebaseAuthUI: 5ae57e5a3ffb821f89491f1b5da9efbdf99ce7cd
+  FirebaseAuthUI: 3f6dcb6f9e1af8e889916e2e0f0f971a70c2d303
   FirebaseCore: 389c4ce9a7cce4a7e25eb22326b4bee0050557b2
   FirebaseCoreDiagnostics: 3e249cee3de5c5f9cfd6cc2a19997231286fec11
   GoogleDataTransport: 04c3e9a480bbcaa2ec3f5d27f1cdeb6a92f20c8d
@@ -79,6 +79,6 @@ SPEC CHECKSUMS:
   OCMock: 29f6e52085b4e7d9b075cbf03ed7c3112f82f934
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
 
-PODFILE CHECKSUM: b25b4ea4616b08b074160df3d9fdb459e8096ef7
+PODFILE CHECKSUM: a4eca46b36587d954fedaeb6300c28f718faab4b
 
 COCOAPODS: 1.10.1
