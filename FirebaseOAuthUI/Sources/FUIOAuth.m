@@ -225,7 +225,8 @@ NS_ASSUME_NONNULL_BEGIN
     return [FUIOAuth appleAuthProviderWithAuthUI:[FUIAuth defaultAuthUI] userInterfaceStyle:userInterfaceStyle];
 }
 
-+ (FUIOAuth *)appleAuthProviderWithAuthUI:(FUIAuth *)authUI userInterfaceStyle:(UIUserInterfaceStyle)userInterfaceStyle {
++ (FUIOAuth *)appleAuthProviderWithAuthUI:(FUIAuth *)authUI
+                       userInterfaceStyle:(UIUserInterfaceStyle)userInterfaceStyle {
   UIImage *iconImage = [FUIAuthUtils imageNamed:@"ic_apple"
                                      fromBundle:[FUIOAuth bundle]];
   UIColor *buttonColor = [UIColor blackColor];
