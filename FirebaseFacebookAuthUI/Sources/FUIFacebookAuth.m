@@ -205,9 +205,9 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
       [self completeSignInFlowWithAccessToken:nil error:newError];
     } else {
       // Retrieve email.
-      [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"email" }]
-          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result,
-                                       NSError *error) {
+      [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"email" }] startWithCompletion:^(id<FBSDKGraphRequestConnecting> connection,
+                                id result,
+                                NSError *error) {
         self->_email = result[@"email"];
       }];
       [self completeSignInFlowWithAccessToken:result.token.tokenString
