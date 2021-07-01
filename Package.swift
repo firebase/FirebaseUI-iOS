@@ -63,7 +63,7 @@ let package = Package(
     .package(
       name: "Facebook", 
       url: "https://github.com/facebook/facebook-ios-sdk.git",
-      from: "9.0.0"
+      from: "11.0.0"
     ),
     .package(
       name: "Firebase", 
