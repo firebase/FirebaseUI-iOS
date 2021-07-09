@@ -11,7 +11,7 @@ PODS:
   - FBSDKLoginKit/Login (11.0.1):
     - FBSDKCoreKit (~> 11.0.1)
     - FBSDKCoreKit_Basics (~> 11.0.1)
-  - FirebaseAuth (8.2.0):
+  - FirebaseAuth (8.3.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
     - GoogleUtilities/Environment (~> 7.4)
@@ -19,11 +19,11 @@ PODS:
   - FirebaseAuthUI (11.0.3):
     - FirebaseAuth (~> 8.0)
     - FirebaseCore
-  - FirebaseCore (8.2.0):
+  - FirebaseCore (8.3.0):
     - FirebaseCoreDiagnostics (~> 8.0)
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/Logger (~> 7.4)
-  - FirebaseCoreDiagnostics (8.2.0):
+  - FirebaseCoreDiagnostics (8.3.0):
     - GoogleDataTransport (~> 9.0)
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/Logger (~> 7.4)
@@ -85,10 +85,10 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 38c9e29a3f1436362acacff6486d3a28628c288f
   FBSDKCoreKit_Basics: 06780a4a12e16596bde8406add02c6aa1bf38616
   FBSDKLoginKit: 8243e04c590c38b85c69fcf09d1234514d2475c3
-  FirebaseAuth: 4c4fb0ba1a169f3acb4aa5b724f7ae7c0999ee44
+  FirebaseAuth: fd12c82de44e7ad3b821610c387b8251f03aa0f9
   FirebaseAuthUI: 3f6dcb6f9e1af8e889916e2e0f0f971a70c2d303
-  FirebaseCore: 3a83f24c3de69ec9f9a426e2598125ea51f3a2ce
-  FirebaseCoreDiagnostics: 61384f54989065b15c36b5922b65112e86811d3c
+  FirebaseCore: a6dba751680d7033b9d3831e1cfc95ead0605118
+  FirebaseCoreDiagnostics: 7e873baabcfaa9512f538554ae4fa0817aaafbdb
   GoogleDataTransport: 04c3e9a480bbcaa2ec3f5d27f1cdeb6a92f20c8d
   GoogleUtilities: 45dbb24a7f351d69d0a601482b39ad6c32e30dab
   GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
