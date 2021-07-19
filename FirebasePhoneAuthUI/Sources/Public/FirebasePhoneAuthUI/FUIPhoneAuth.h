@@ -28,6 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, readwrite) FUIButtonAlignment buttonAlignment;
 
+/** @fn bundle
+    @brief Returns the resource bundle required by this class.
+ */
++ (NSBundle *)bundle;
+
 /** @fn init
     @brief Please use @c initWithAuthUI: .
  */

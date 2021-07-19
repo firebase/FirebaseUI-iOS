@@ -66,6 +66,11 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
     NSString *_email;
 }
 
++ (NSBundle *)bundle {
+  return [FUIAuthUtils bundleNamed:kBundleName
+                 inFrameworkBundle:[NSBundle bundleForClass:[self class]]];
+}
+
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI {
     return [self initWithAuthUI:authUI scopes:@[kGoogleUserInfoEmailScope, kGoogleUserInfoProfileScope]];
 }
@@ -127,7 +132,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 }
 
 - (UIImage *)icon {
-    return [FUIAuthUtils imageNamed:@"ic_google" fromBundleNameOrNil:kBundleName];
+  return [FUIAuthUtils imageNamed:@"ic_google" fromBundle:[FUIGoogleAuth bundle]];
 }
 
 - (UIColor *)buttonBackgroundColor {

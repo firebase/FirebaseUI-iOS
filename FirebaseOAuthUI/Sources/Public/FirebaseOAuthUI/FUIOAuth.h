@@ -73,20 +73,40 @@ NS_ASSUME_NONNULL_BEGIN
 */
 + (FUIOAuth *)twitterAuthProvider;
 
+/** @fn twitterAuthProvider
+    @brief Built-in OAuth provider for Twitter.
+*/
++ (FUIOAuth *)twitterAuthProviderWithAuthUI:(FUIAuth *)authUI;
+
 /** @fn githubAuthProvider
     @brief Built-in OAuth provider for Github.
 */
 + (FUIOAuth *)githubAuthProvider;
+
+/** @fn githubAuthProvider
+    @brief Built-in OAuth provider for Github.
+*/
++ (FUIOAuth *)githubAuthProviderWithAuthUI:(FUIAuth *)authUI;
 
 /** @fn microsoftAuthProvider
     @brief Built-in OAuth provider for Microsoft.
 */
 + (FUIOAuth *)microsoftAuthProvider;
 
+/** @fn microsoftAuthProvider
+    @brief Built-in OAuth provider for Microsoft.
+*/
++ (FUIOAuth *)microsoftAuthProviderWithAuthUI:(FUIAuth *)authUI;
+
 /** @fn yahooAuthProvider
     @brief Built-in OAuth provider for Yahoo.
 */
 + (FUIOAuth *)yahooAuthProvider;
+
+/** @fn yahooAuthProvider
+    @brief Built-in OAuth provider for Yahoo.
+*/
++ (FUIOAuth *)yahooAuthProviderWithAuthUI:(FUIAuth *)authUI;
 
 /** @fn appleAuthProvider
     @brief Built-in OAuth provider for Apple.
@@ -94,9 +114,19 @@ NS_ASSUME_NONNULL_BEGIN
 + (FUIOAuth *)appleAuthProvider API_AVAILABLE(ios(13.0));
 
 /** @fn appleAuthProvider
+    @brief Built-in OAuth provider for Apple.
+*/
++ (FUIOAuth *)appleAuthProviderWithAuthUI:(FUIAuth *)authUI API_AVAILABLE(ios(13.0));
+
+/** @fn appleAuthProvider
     @brief Built-in OAuth provider with custom UserInterfaceStyle for Apple.
 */
 + (FUIOAuth *)appleAuthProviderWithUserInterfaceStyle:(UIUserInterfaceStyle)userInterfaceStyle API_AVAILABLE(ios(13.0));
+
+/** @fn appleAuthProvider
+    @brief Built-in OAuth provider with custom UserInterfaceStyle for Apple.
+*/
++ (FUIOAuth *)appleAuthProviderWithAuthUI:(FUIAuth *)authUI userInterfaceStyle:(UIUserInterfaceStyle)userInterfaceStyle API_AVAILABLE(ios(13.0));
 
 @end
 

@@ -64,11 +64,11 @@ static NSString *const kVisibilityOnImage = @"ic_visibility.png";
   [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellReuseIdentitfier];
 
   UINib *passwordCellNib = [UINib nibWithNibName:NSStringFromClass([FUIPasswordTableViewCell class])
-                                          bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]];
+                                          bundle:[FUIAuthUtils authUIBundle]];
   [tableView registerNib:passwordCellNib forCellReuseIdentifier:kPasswordCellReuseIdentitfier];
 
   UINib *inputCellNib = [UINib nibWithNibName:NSStringFromClass([FUIInputTableViewCell class])
-                                       bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]];
+                                       bundle:[FUIAuthUtils authUIBundle]];
   [tableView registerNib:inputCellNib forCellReuseIdentifier:kInputCellReuseIdentitfier];
 }
 

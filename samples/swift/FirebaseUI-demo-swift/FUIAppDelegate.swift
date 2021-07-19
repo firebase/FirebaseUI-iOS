@@ -16,7 +16,7 @@
 
 import UIKit
 import Firebase
-import FirebaseUI
+import FirebaseAuthUI
 import GTMSessionFetcher
 
 @UIApplicationMain

@@ -20,6 +20,7 @@
 #import <FirebaseAuth/FIRPhoneAuthProvider.h>
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
+#import "FirebasePhoneAuthUI/Sources/Public/FirebasePhoneAuthUI/FUIPhoneAuth.h"
 #import "FirebasePhoneAuthUI/Sources/FUICodeField.h"
 #import "FirebasePhoneAuthUI/Sources/FUIPhoneAuthStrings.h"
 #import "FirebasePhoneAuthUI/Sources/FUIPhoneAuth_Internal.h"
@@ -58,7 +59,7 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
                 verificationID:(NSString *)verificationID
                    phoneNumber:(NSString *)phoneNumber{
   return [self initWithNibName:NSStringFromClass([self class])
-                        bundle:[FUIAuthUtils bundleNamed:FUIPhoneAuthBundleName]
+                        bundle:[FUIPhoneAuth bundle]
                         authUI:authUI
                 verificationID:verificationID
                    phoneNumber:phoneNumber];

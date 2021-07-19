@@ -17,7 +17,12 @@
 //
 
 @import Firebase;
-#import <FirebaseUI/FirebaseUI.h>
+@import FirebaseOAuthUI;
+@import FirebaseEmailAuthUI;
+@import FirebaseAnonymousAuthUI;
+@import FirebaseGoogleAuthUI;
+@import FirebaseFacebookAuthUI;
+@import FirebasePhoneAuthUI;
 
 #import "FUIAuthViewController.h"
 #import "FUIAppDelegate.h"

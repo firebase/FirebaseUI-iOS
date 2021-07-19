@@ -14,6 +14,7 @@
 //  limitations under the License.
 //
 
+#import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIEmailAuth.h"
 #import "FirebaseEmailAuthUI/Sources/FUIEmailAuthStrings.h"
 
 #if SWIFT_PACKAGE
@@ -30,5 +31,5 @@ NSString *const kEmailAuthProviderTableName = @"FirebaseEmailAuthUI";
 NSString *FUIEmailAuthLocalizedString(NSString *key) {
   return FUILocalizedStringFromTableInBundle(key,
                                              kEmailAuthProviderTableName,
-                                             FUIEmailAuthBundleName);
+                                             [FUIEmailAuth bundle]);
 }

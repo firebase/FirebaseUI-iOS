@@ -68,7 +68,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                       footerText:(nullable NSString *)footerText
                     footerAction:(nullable FUIStaticContentTableViewCellAction)footerAction {
   if (self = [super initWithNibName:NSStringFromClass([self class])
-                             bundle:[FUIAuthUtils bundleNamed:FUIAuthBundleName]
+                             bundle:[FUIAuthUtils authUIBundle]
                              authUI:[FUIAuth defaultAuthUI]]) {
     _tableViewManager.contents = contents;
     _nextAction = [nextAction copy];

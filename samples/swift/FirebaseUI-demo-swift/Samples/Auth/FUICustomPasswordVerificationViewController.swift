@@ -15,8 +15,7 @@
 //
 
 import UIKit
-import FirebaseUI
-import FirebaseAuth
+import FirebaseEmailAuthUI
 
 class FUICustomPasswordVerificationViewController: FUIPasswordVerificationViewController, UITextFieldDelegate {
   fileprivate(set) var userEmail: String

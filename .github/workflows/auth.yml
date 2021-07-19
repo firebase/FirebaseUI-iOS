@@ -1,0 +1,65 @@
+name: Auth
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - '.github/workflows/auth.yml'
+      - 'FirebaseAuthUI/**'
+      - 'test.sh'
+      - 'FirebaseAuthUI.podspec'
+      - 'Package.swift'
+  pull_request:
+    branches: [ master ]
+    paths:
+      - '.github/workflows/auth.yml'
+      - 'FirebaseAuthUI/**'
+      - 'test.sh'
+      - 'FirebaseAuthUI.podspec'
+      - 'Package.swift'
+
+  workflow_dispatch:
+
+jobs:
+  xcodebuild:
+    name: xcodebuild
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Setup
+        run: |
+          cd FirebaseAuthUI
+          gem install bundler
+          bundle install
+          gem install xcpretty
+          bundle exec pod install --repo-update
+      - name: Build
+        run: |
+          ./test.sh FirebaseAuthUI
+  spm:
+    name: spm
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: List
+        run: |
+          xcodebuild -list
+      - name: Build
+        run: |
+          xcodebuild -scheme FirebaseAuthUI -sdk iphonesimulator
+  pod:
+    name: pod lib lint
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Setup
+        run: gem install bundler; bundle install
+      - name: Build
+        run: |
+          bundle exec pod lib lint FirebaseAuthUI.podspec

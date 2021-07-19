@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
            respectively.
     @return the Privacy and Terms of Service attributed string.
  */
-- (NSAttributedString *)privacyPolicyAndTOSMessageFromFormat:(NSString *)format;
+- (nullable NSAttributedString *)privacyPolicyAndTOSMessageFromFormat:(NSString *)format;
 
 @end
 

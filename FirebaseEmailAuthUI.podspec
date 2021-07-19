@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseEmailAuthUI'
-  s.version      = '11.0.0'
+  s.version      = '11.0.3'
   s.summary      = 'An email authentication provider for FirebaseAuthUI.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'LICENSE' }
@@ -15,10 +15,13 @@ Pod::Spec.new do |s|
     'HEADER_SEARCH_PATHS' => '"${PODS_TARGET_SRCROOT}"',
   }
 
-  s.public_header_files = 'FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI*.h'
+  s.public_header_files = 'FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/*.h'
   s.source_files = 'FirebaseEmailAuthUI/Sources/**/*.{h,m}'
+  s.dependency 'FirebaseAuth'
+  s.dependency 'FirebaseCore'
   s.dependency 'FirebaseAuthUI'
-  s.resource_bundle = {
+  s.dependency 'GoogleUtilities/UserDefaults'
+  s.resource_bundles = {
     'FirebaseEmailAuthUI' => ['FirebaseEmailAuthUI/Sources/Resources/*.{xib,png}']
   }
 

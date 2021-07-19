@@ -23,10 +23,6 @@ let package = Package(
     platforms: [.iOS(.v11)],
     products: [
         .library(
-            name: "FirebaseGoogleAuthUI",
-            targets: ["FirebaseGoogleAuthUI"]
-        ),
-        .library(
             name: "FirebaseAnonymousAuthUI",
             targets: ["FirebaseAnonymousAuthUI"]
         ),
@@ -47,6 +43,10 @@ let package = Package(
             targets: ["FirebaseFirestoreUI"]
         ),
         .library(
+            name: "FirebaseGoogleAuthUI",
+            targets: ["FirebaseGoogleAuthUI"]
+        ),
+        .library(
             name: "FirebaseOAuthUI",
             targets: ["FirebaseOAuthUI"]
         ),
@@ -63,17 +63,17 @@ let package = Package(
         .package(
             name: "Facebook",
             url: "https://github.com/facebook/facebook-ios-sdk.git",
-            from: "9.0.0"
+            from: "11.0.0"
         ),
         .package(
             name: "Firebase",
             url: "https://github.com/firebase/firebase-ios-sdk.git",
-            from: "8.1.1"
+            from: "8.0.0"
         ),
         .package(
             name: "GoogleUtilities",
             url: "https://github.com/google/GoogleUtilities.git",
-            "7.2.1" ..< "8.0.0"
+            from: "7.4.1"
         ),
         .package(
             name: "GTMSessionFetcher",
@@ -89,7 +89,7 @@ let package = Package(
             name: "GoogleSignIn",
             url: "https://github.com/google/GoogleSignIn-iOS",
             from: "6.0.0"
-        )
+        ),
     ],
     targets: [
         .target(
@@ -155,26 +155,24 @@ let package = Package(
                 .headerSearchPath("../../"),
             ]
         ),
-        // Facebook doesn't seem to vend their ObjC libraries through SPM, though their
-        // Swift libraries wrap their ObjC ones.
-        //    .target(
-        //      name: "FacebookAuthUI",
-        //      dependencies: [
-        //        "AuthUI",
-        //        .product(name: "FacebookLogin", package: "Facebook"),
-        //        .product(name: "FacebookCore", package: "Facebook"),
-        //      ],
-        //      path: "FacebookAuth/FirebaseFacebookAuthUI",
-        //      exclude: ["Info.plist"],
-        //      resources: [
-        //        .process("Resources"),
-        //        .process("Strings"),
-        //      ],
-        //      publicHeadersPath: ".",
-        //      cSettings: [
-        //        .headerSearchPath("./"),
-        //      ]
-        //    ),
+        .target(
+            name: "FirebaseFacebookAuthUI",
+            dependencies: [
+                "FirebaseAuthUI",
+                .product(name: "FacebookLogin", package: "Facebook"),
+                .product(name: "FacebookCore", package: "Facebook"),
+            ],
+            path: "FirebaseFacebookAuthUI/Sources",
+            exclude: ["Info.plist"],
+            resources: [
+                .process("Resources"),
+                .process("Strings"),
+            ],
+            publicHeadersPath: "Public",
+            cSettings: [
+                .headerSearchPath("../../"),
+            ]
+        ),
         .target(
             name: "FirebaseFirestoreUI",
             dependencies: [

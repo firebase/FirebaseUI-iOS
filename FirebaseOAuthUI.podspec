@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseOAuthUI'
-  s.version      = '11.0.0'
+  s.version      = '11.1.3'
   s.summary      = 'A collection of OAuth providers for FirebaseAuthUI.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'LICENSE' }
@@ -18,7 +18,8 @@ Pod::Spec.new do |s|
   s.public_header_files = 'FirebaseOAuthUI/Sources/Public/FirebaseOAuthUI/*.h'
   s.source_files = 'FirebaseOAuthUI/Sources/**/*.{h,m}'
   s.dependency 'FirebaseAuthUI'
-  s.resource_bundle = {
+  s.dependency 'FirebaseAuth', '~> 8.0'
+  s.resource_bundles = {
     'FirebaseOAuthUI' => ['FirebaseOAuthUI/Sources/{Resources,Strings}/*.{png,lproj}']
   }
 

@@ -15,7 +15,7 @@
 //
 
 import UIKit
-import FirebaseUI
+import FirebaseEmailAuthUI
 
 class FUICustomPasswordSignUpViewController: FUIPasswordSignUpViewController, UITextFieldDelegate {
 

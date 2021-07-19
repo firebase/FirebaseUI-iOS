@@ -27,6 +27,7 @@
 
 - (instancetype)init {
   self = [self initWithQuery:(id _Nonnull)nil]; // silence a clang warning
+  __unused id value = self; // silence an analyzer warning
   NSException *e =
   [NSException exceptionWithName:@"FIRUnavailableMethodException"
                           reason:@"-init is unavailable. Please use the designated initializer instead."

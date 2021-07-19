@@ -30,10 +30,6 @@
 
 - (void)setUp {
   [super setUp];
-
-  id mockUtilsClass = OCMClassMock([FUIAuthUtils class]);
-  OCMStub(ClassMethod([mockUtilsClass bundleNamed:OCMOCK_ANY])).
-      andReturn([NSBundle bundleForClass:[FUIAnonymousAuth class]]);
   
   id authUIClass = OCMClassMock([FUIAuth class]);
   OCMStub(ClassMethod([authUIClass authUIWithAuth:OCMOCK_ANY])).

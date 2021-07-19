@@ -28,6 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, readwrite) FUIButtonAlignment buttonAlignment;
 
+/** @fn bundle
+    @brief Returns the FirebaseAnonymousAuthUI resource bundle.
+ */
++ (NSBundle *)bundle;
+
 /** @fn init
     @brief Initialize the instance with the default AuthUI. 
  */

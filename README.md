@@ -1,4 +1,6 @@
-# FirebaseUI for iOS — UI Bindings for Firebase [![Build Status](https://travis-ci.org/firebase/FirebaseUI-iOS.svg?branch=master)](https://travis-ci.org/firebase/FirebaseUI-iOS)
+# FirebaseUI for iOS — UI Bindings for Firebase
+
+![Anonymous Auth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/anonymousauth.yml/badge.svg) ![Auth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/auth.yml/badge.svg) ![Database](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/database.yml/badge.svg) ![Email Auth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/emailauth.yml/badge.svg) ![Facebook Auth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/facebookauth.yml/badge.svg) ![Firestore](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/firestore.yml/badge.svg) ![Google Auth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/googleauth.yml/badge.svg) ![OAuth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/oauth.yml/badge.svg) ![Phone Auth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/phoneauth.yml/badge.svg) ![Storage](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/storage.yml/badge.svg) ![Samples](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/sample.yml/badge.svg)
 
 FirebaseUI is an open-source library for iOS that allows you to quickly connect common UI elements to the [Firebase](https://firebase.google.com?utm_source=FirebaseUI-iOS) database for data storage, allowing views to be updated in realtime as they change, and providing simple interfaces for common tasks like displaying lists or collections of items.
 
@@ -10,7 +12,7 @@ FirebaseUI clients are also available for [Android](https://github.com/firebase/
 
 ## Installing FirebaseUI for iOS
 
-FirebaseUI supports iOS 8.0+ and Xcode 11+. We recommend using [CocoaPods](https://cocoapods.org/pods/FirebaseUI), add
+FirebaseUI supports iOS 10.0+ and Xcode 11+. We recommend using [CocoaPods](https://cocoapods.org/pods/FirebaseUI), add
 the following to your `Podfile`:
 
 ```ruby
@@ -45,7 +47,7 @@ pod 'FirebaseUI/Phone', '~> 8.0'
 If you're including FirebaseUI in a Swift project, make sure you also have:
 
 ```ruby
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 ```
 

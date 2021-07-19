@@ -1,63 +1,58 @@
 PODS:
-  - Firebase/Auth (7.11.0):
-    - Firebase/CoreOnly
-    - FirebaseAuth (~> 7.11.0)
-  - Firebase/CoreOnly (7.11.0):
-    - FirebaseCore (= 7.11.0)
-  - FirebaseAuth (7.11.0):
-    - FirebaseCore (~> 7.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
-    - GoogleUtilities/Environment (~> 7.0)
-    - GTMSessionFetcher/Core (~> 1.4)
-  - FirebaseAuthUI (11.0.0):
-    - Firebase/Auth (>= 7.2.0)
-    - GoogleUtilities/UserDefaults
-  - FirebaseCore (7.11.0):
-    - FirebaseCoreDiagnostics (~> 7.4)
-    - GoogleUtilities/Environment (~> 7.0)
-    - GoogleUtilities/Logger (~> 7.0)
-  - FirebaseCoreDiagnostics (7.11.0):
-    - GoogleDataTransport (~> 8.4)
-    - GoogleUtilities/Environment (~> 7.0)
-    - GoogleUtilities/Logger (~> 7.0)
+  - FirebaseAuth (8.3.0):
+    - FirebaseCore (~> 8.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
+    - GoogleUtilities/Environment (~> 7.4)
+    - GTMSessionFetcher/Core (~> 1.5)
+  - FirebaseAuthUI (11.0.3):
+    - FirebaseAuth (~> 8.0)
+    - FirebaseCore
+  - FirebaseCore (8.3.0):
+    - FirebaseCoreDiagnostics (~> 8.0)
+    - GoogleUtilities/Environment (~> 7.4)
+    - GoogleUtilities/Logger (~> 7.4)
+  - FirebaseCoreDiagnostics (8.3.0):
+    - GoogleDataTransport (~> 9.0)
+    - GoogleUtilities/Environment (~> 7.4)
+    - GoogleUtilities/Logger (~> 7.4)
     - nanopb (~> 2.30908.0)
-  - GoogleDataTransport (8.4.0):
+  - GoogleDataTransport (9.1.0):
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
-    - PromisesObjC (~> 1.2)
-  - GoogleUtilities/AppDelegateSwizzler (7.4.0):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/AppDelegateSwizzler (7.5.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.4.0):
-    - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (7.4.0):
+  - GoogleUtilities/Environment (7.5.0):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.5.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/Network (7.4.0):
+  - GoogleUtilities/Network (7.5.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.4.0)"
-  - GoogleUtilities/Reachability (7.4.0):
+  - "GoogleUtilities/NSData+zlib (7.5.0)"
+  - GoogleUtilities/Reachability (7.5.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (7.4.0):
+  - GoogleUtilities/UserDefaults (7.5.0):
     - GoogleUtilities/Logger
-  - GTMSessionFetcher/Core (1.5.0)
+  - GTMSessionFetcher/Core (1.6.1)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - OCMock (3.8.1)
-  - PromisesObjC (1.2.12)
+  - PromisesObjC (2.0.0)
 
 DEPENDENCIES:
   - FirebaseAuthUI (from `../`)
+  - GoogleUtilities/UserDefaults
   - OCMock
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - Firebase
     - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreDiagnostics
@@ -73,18 +68,17 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Firebase: c121feb35e4126c0b355e3313fa9b487d47319fd
-  FirebaseAuth: 5fe4585c2ed847319f0ea68bd1d82c77e49ff9a0
-  FirebaseAuthUI: b3511544eeec97b719aeda7ccd779f7f0ff086d3
-  FirebaseCore: 907447d8917a4d3eb0cce2829c5a0ad21d90b432
-  FirebaseCoreDiagnostics: 68ad972f99206cef818230f3f3179d52ccfb7f8c
-  GoogleDataTransport: cd9db2180fcecd8da1b561aea31e3e56cf834aa7
-  GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
-  GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
+  FirebaseAuth: fd12c82de44e7ad3b821610c387b8251f03aa0f9
+  FirebaseAuthUI: 3f6dcb6f9e1af8e889916e2e0f0f971a70c2d303
+  FirebaseCore: a6dba751680d7033b9d3831e1cfc95ead0605118
+  FirebaseCoreDiagnostics: 7e873baabcfaa9512f538554ae4fa0817aaafbdb
+  GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
+  GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
+  GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   OCMock: 29f6e52085b4e7d9b075cbf03ed7c3112f82f934
-  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
 
-PODFILE CHECKSUM: b25b4ea4616b08b074160df3d9fdb459e8096ef7
+PODFILE CHECKSUM: a4eca46b36587d954fedaeb6300c28f718faab4b
 
 COCOAPODS: 1.10.1

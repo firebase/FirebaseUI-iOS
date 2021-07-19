@@ -108,6 +108,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation FUIOAuth
 
++ (NSBundle *)bundle {
+  return [FUIAuthUtils bundleNamed:kBundleName
+                 inFrameworkBundle:[NSBundle bundleForClass:[self class]]];
+}
+
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                     providerID:(NSString *)providerID
                buttonLabelText:(NSString *)buttonLabelText
@@ -136,68 +141,94 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (FUIOAuth *)twitterAuthProvider {
-  return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
-                               providerID:@"twitter.com"
-                          buttonLabelText:@"Sign in with Twitter"
-                                shortName:@"Twitter"
-                              buttonColor:[UIColor colorWithRed:71.0f/255.0f
-                                                          green:154.0f/255.0f
-                                                           blue:234.0f/255.0f
-                                                          alpha:1.0f]
-                                iconImage:[FUIAuthUtils imageNamed:@"ic_twitter"
-                                               fromBundleNameOrNil:kBundleName]
-                                   scopes:@[@"user.readwrite"]
-                         customParameters:@{@"prompt" : @"consent"}
-                             loginHintKey:nil];
+    return [FUIOAuth twitterAuthProviderWithAuthUI:[FUIAuth defaultAuthUI]];
+}
+
++ (FUIOAuth *)twitterAuthProviderWithAuthUI:(FUIAuth *)authUI {
+    return [[FUIOAuth alloc] initWithAuthUI:authUI
+                                 providerID:@"twitter.com"
+                            buttonLabelText:@"Sign in with Twitter"
+                                  shortName:@"Twitter"
+                                buttonColor:[UIColor colorWithRed:71.0f/255.0f
+                                                            green:154.0f/255.0f
+                                                             blue:234.0f/255.0f
+                                                            alpha:1.0f]
+                                  iconImage:[FUIAuthUtils imageNamed:@"ic_twitter"
+                                                          fromBundle:[FUIOAuth bundle]]
+                                     scopes:@[@"user.readwrite"]
+                           customParameters:@{@"prompt" : @"consent"}
+                               loginHintKey:nil];
 }
 
 + (FUIOAuth *)githubAuthProvider {
-  return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
-                               providerID:@"github.com"
-                          buttonLabelText:@"Sign in with GitHub"
-                                shortName:@"GitHub"
-                              buttonColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0]
-                                iconImage:[FUIAuthUtils imageNamed:@"ic_github"
-                                               fromBundleNameOrNil:kBundleName]
-                                   scopes:nil
-                         customParameters:nil
-                             loginHintKey:nil];
+    return [FUIOAuth githubAuthProviderWithAuthUI:[FUIAuth defaultAuthUI]];
+}
+
++ (FUIOAuth *)githubAuthProviderWithAuthUI:(FUIAuth *)authUI
+{
+    return [[FUIOAuth alloc] initWithAuthUI:authUI
+                                 providerID:@"github.com"
+                            buttonLabelText:@"Sign in with GitHub"
+                                  shortName:@"GitHub"
+                                buttonColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0]
+                                  iconImage:[FUIAuthUtils imageNamed:@"ic_github"
+                                                          fromBundle:[FUIOAuth bundle]]
+                                     scopes:nil
+                           customParameters:nil
+                               loginHintKey:nil];
 }
 
 + (FUIOAuth *)microsoftAuthProvider {
-  return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+    return [FUIOAuth microsoftAuthProviderWithAuthUI:[FUIAuth defaultAuthUI]];
+}
+
++ (FUIOAuth *)microsoftAuthProviderWithAuthUI:(FUIAuth *)authUI {
+  return [[FUIOAuth alloc] initWithAuthUI:authUI
                                providerID:@"microsoft.com"
                           buttonLabelText:@"Sign in with Microsoft"
                                 shortName:@"Microsoft"
                               buttonColor:[UIColor colorWithRed:.18 green:.18 blue:.18 alpha:1.0]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_microsoft"
-                                               fromBundleNameOrNil:kBundleName]
+                                                        fromBundle:[FUIOAuth bundle]]
                                    scopes:@[@"user.readwrite"]
                          customParameters:@{@"prompt" : @"consent"}
                              loginHintKey:@"login_hint"];
 }
 
 + (FUIOAuth *)yahooAuthProvider {
-  return [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+    return [FUIOAuth yahooAuthProviderWithAuthUI:[FUIAuth defaultAuthUI]];
+}
+
++ (FUIOAuth *)yahooAuthProviderWithAuthUI:(FUIAuth *)authUI {
+  return [[FUIOAuth alloc] initWithAuthUI:authUI
                                providerID:@"yahoo.com"
                           buttonLabelText:@"Sign in with Yahoo"
                                 shortName:@"Yahoo"
                               buttonColor:[UIColor colorWithRed:.45 green:.05 blue:.62 alpha:1.0]
                                 iconImage:[FUIAuthUtils imageNamed:@"ic_yahoo"
-                                               fromBundleNameOrNil:kBundleName]
+                                                        fromBundle:[FUIOAuth bundle]]
                                    scopes:@[@"user.readwrite"]
                          customParameters:@{@"prompt" : @"consent"}
                              loginHintKey:nil];
 }
 
 + (FUIOAuth *)appleAuthProvider {
+    return [FUIOAuth appleAuthProviderWithAuthUI:[FUIAuth defaultAuthUI]];
+}
+
++ (FUIOAuth *)appleAuthProviderWithAuthUI:(FUIAuth *)authUI {
   UIUserInterfaceStyle style = UITraitCollection.currentTraitCollection.userInterfaceStyle;
-  return [self appleAuthProviderWithUserInterfaceStyle:style];
+  return [self appleAuthProviderWithAuthUI:authUI userInterfaceStyle:style];
 }
 
 + (FUIOAuth *)appleAuthProviderWithUserInterfaceStyle:(UIUserInterfaceStyle)userInterfaceStyle {
+    return [FUIOAuth appleAuthProviderWithAuthUI:[FUIAuth defaultAuthUI] userInterfaceStyle:userInterfaceStyle];
+}
+
++ (FUIOAuth *)appleAuthProviderWithAuthUI:(FUIAuth *)authUI
+                       userInterfaceStyle:(UIUserInterfaceStyle)userInterfaceStyle {
   UIImage *iconImage = [FUIAuthUtils imageNamed:@"ic_apple"
-                            fromBundleNameOrNil:kBundleName];
+                                     fromBundle:[FUIOAuth bundle]];
   UIColor *buttonColor = [UIColor blackColor];
   UIColor *buttonTextColor = [UIColor whiteColor];
   if (userInterfaceStyle == UIUserInterfaceStyleDark) {
@@ -211,7 +242,7 @@ NS_ASSUME_NONNULL_BEGIN
   } else {
     iconImage = [iconImage imageWithTintColor:[UIColor whiteColor]];
   }
-  FUIOAuth *provider = [[FUIOAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
+  FUIOAuth *provider = [[FUIOAuth alloc] initWithAuthUI:authUI
                                              providerID:@"apple.com"
                                         buttonLabelText:@"Sign in with Apple"
                                               shortName:@"Apple"
