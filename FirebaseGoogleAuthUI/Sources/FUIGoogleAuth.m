@@ -128,7 +128,9 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 }
 
 - (NSString *)signInLabel {
-    return FUILocalizedStringFromTableInBundle(kSignInWithGoogle, kTableName, kBundleName);
+    return FUILocalizedStringFromTableInBundle(kSignInWithGoogle,
+                                                 kTableName,
+                                                 [FUIGoogleAuth bundle]);
 }
 
 - (UIImage *)icon {
