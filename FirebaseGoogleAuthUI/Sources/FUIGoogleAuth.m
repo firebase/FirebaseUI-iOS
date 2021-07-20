@@ -29,7 +29,11 @@ static NSString *const kTableName = @"FirebaseGoogleAuthUI";
 /** @var kBundleName
     @brief The name of the bundle to search for resources.
  */
+#if SWIFT_PACKAGE
+static NSString *const kBundleName = @"FirebaseUI_FirebaseGoogleAuthUI";
+#else
 static NSString *const kBundleName = @"FirebaseGoogleAuthUI";
+#endif // SWIFT_PACKAGE
 
 /** @var kSignInWithGoogle
     @brief The string key for localized button text.

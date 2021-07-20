@@ -47,6 +47,10 @@ let package = Package(
       targets: ["FirebaseFirestoreUI"]
     ),
     .library(
+      name: "FirebaseGoogleAuthUI",
+      targets: ["FirebaseGoogleAuthUI"]
+    ),
+    .library(
       name: "FirebaseOAuthUI",
       targets: ["FirebaseOAuthUI"]
     ),
@@ -69,6 +73,11 @@ let package = Package(
       name: "Firebase", 
       url: "https://github.com/firebase/firebase-ios-sdk.git",
       from: "8.0.0"
+    ),
+    .package(
+      name: "GoogleSignIn",
+      url: "https://github.com/google/GoogleSignIn-iOS",
+      from: "6.0.0"
     ),
     .package(
       name: "GoogleUtilities",
@@ -181,23 +190,23 @@ let package = Package(
         .headerSearchPath("../../"),
       ]
     ),
-    // .target(
-    //   name: "GoogleAuthUI",
-    //   dependencies: [
-    //     "AuthUI",
-    //     // missing google auth dependency
-    //   ],
-    //   path: "GoogleAuth/FirebaseGoogleAuthUI",
-    //   exclude: ["Info.plist"],
-    //   resources: [
-    //     .process("Resources"),
-    //     .process("Strings"),
-    //   ],
-    //   publicHeadersPath: ".",
-    //   cSettings: [
-    //     .headerSearchPath("./"),
-    //   ]
-    // ),
+    .target(
+      name: "FirebaseGoogleAuthUI",
+      dependencies: [
+        "FirebaseAuthUI",
+        "GoogleSignIn"
+      ],
+      path: "FirebaseGoogleAuthUI/Sources",
+      exclude: ["Info.plist"],
+      resources: [
+        .process("Resources"),
+        .process("Strings"),
+      ],
+      publicHeadersPath: "Public",
+      cSettings: [
+        .headerSearchPath("../../"),
+      ]
+    ),
     .target(
       name: "FirebaseOAuthUI",
       dependencies: [
