@@ -23,7 +23,12 @@
 #import "FUIGoogleAuth.h"
 
 @interface FUIGoogleAuth (Testing)
-- (GIDSignIn *)configuredGoogleSignIn;
+- (NSString *)clientID;
+- (GIDSignIn *)googleSignIn;
+- (void)handleSignInWithUser:(GIDGoogleUser *)user
+                       error:(NSError *)error
+    presentingViewController:(UIViewController *)presentingViewController
+                    callback:(FUIAuthProviderSignInCompletionBlock)callback;
 @end
 
 @interface FirebaseGoogleAuthUITests : XCTestCase
@@ -48,6 +53,7 @@
   FIRAuth *auth = [FIRAuth auth];
   self.authUI = [FUIAuth authUIWithAuth:auth];
   self.mockProvider =  OCMPartialMock([[FUIGoogleAuth alloc] initWithAuthUI:self.authUI]);
+  OCMStub([_mockProvider clientID]).andReturn(@"clientID");
 }
 
 - (void)tearDown {
@@ -82,7 +88,7 @@
   OCMVerify([self.mockOAuthProvider providerWithProviderID:@"google.com"]);
 }
 
-- (void)testSuccessfullLogin {
+- (void)testSuccessfulLogin {
   NSString *testIdToken = @"idToken";
   NSString *testAccessToken = @"accessToken";
 
@@ -99,11 +105,16 @@
   OCMExpect([mockGoogleUser authentication]).andReturn(mockAuthentication);
   OCMExpect([mockAuthentication idToken]).andReturn(testIdToken);
 
-  OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
+  OCMExpect([_mockProvider googleSignIn]).andReturn(mockSignIn);
 
-  //forward call to signIn delegate
-  OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
-    [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil];
+  // forward call to signIn delegate
+  OCMExpect([mockSignIn signInWithConfiguration:[OCMArg any]
+                       presentingViewController:[OCMArg any]
+                                           hint:[OCMArg any]
+                                       callback:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
+    void (^callback)(GIDGoogleUser *, NSError *) = nil;
+    [invocation getArgument:&callback atIndex:5];
+    callback(mockGoogleUser, nil);
   });
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
@@ -147,12 +158,14 @@
   NSString *testIdToken = @"idToken";
   NSString *testAccessToken = @"accessToken";
 
-  _mockProvider =  OCMPartialMock([[FUIGoogleAuth alloc] init]);
+  _mockProvider = OCMPartialMock([[FUIGoogleAuth alloc] init]);
 
   id mockSignInDelegate = _mockProvider;
   id mockSignIn = OCMClassMock([GIDSignIn class]);
   id mockAuthentication = OCMClassMock([GIDAuthentication class]);
   id mockGoogleUser = OCMClassMock([GIDGoogleUser class]);
+
+  OCMStub([_mockProvider clientID]).andReturn(@"clientID");
 
   // mock accessToken
   OCMExpect([mockGoogleUser authentication]).andReturn(mockAuthentication);
@@ -162,11 +175,16 @@
   OCMExpect([mockGoogleUser authentication]).andReturn(mockAuthentication);
   OCMExpect([mockAuthentication idToken]).andReturn(testIdToken);
 
-  OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
+  OCMExpect([_mockProvider googleSignIn]).andReturn(mockSignIn);
 
-  //forward call to signIn delegate
-  OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
-    [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:nil];
+  // forward call to signIn delegate
+  OCMExpect([mockSignIn signInWithConfiguration:[OCMArg any]
+                       presentingViewController:[OCMArg any]
+                                           hint:[OCMArg any]
+                                       callback:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
+    void (^callback)(GIDGoogleUser *, NSError *) = nil;
+    [invocation getArgument:&callback atIndex:5];
+    callback(mockGoogleUser, nil);
   });
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
@@ -222,11 +240,17 @@
   OCMStub([mockGoogleUser authentication]).andReturn(mockAuthentication);
   OCMStub([mockAuthentication idToken]).andReturn(testIdToken);
 
-  OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
+  OCMExpect([_mockProvider googleSignIn]).andReturn(mockSignIn);
   NSError *signInError = [NSError errorWithDomain:@"sign in domain" code:kGIDSignInErrorCodeUnknown userInfo:@{}];
 
-  OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
-    [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:signInError];
+  // forward call to signIn delegate
+  OCMExpect([mockSignIn signInWithConfiguration:[OCMArg any]
+                       presentingViewController:[OCMArg any]
+                                           hint:[OCMArg any]
+                                       callback:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
+    void (^callback)(GIDGoogleUser *, NSError *) = nil;
+    [invocation getArgument:&callback atIndex:5];
+    callback(mockGoogleUser, signInError);
   });
 
 
@@ -275,11 +299,17 @@
   OCMStub([mockGoogleUser authentication]).andReturn(mockAuthentication);
   OCMStub([mockAuthentication idToken]).andReturn(testIdToken);
 
-  OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
+  OCMExpect([_mockProvider googleSignIn]).andReturn(mockSignIn);
   NSError *signInError = [NSError errorWithDomain:@"sign in domain" code:kGIDSignInErrorCodeCanceled userInfo:@{}];
 
-  OCMExpect([mockSignIn signIn]).andDo(^(NSInvocation *invocation) {
-    [mockSignInDelegate signIn:mockSignIn didSignInForUser:mockGoogleUser withError:signInError];
+  // forward call to signIn delegate
+  OCMExpect([mockSignIn signInWithConfiguration:[OCMArg any]
+                       presentingViewController:[OCMArg any]
+                                           hint:[OCMArg any]
+                                       callback:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
+    void (^callback)(GIDGoogleUser *, NSError *) = nil;
+    [invocation getArgument:&callback atIndex:5];
+    callback(mockGoogleUser, signInError);
   });
 
   XCTestExpectation *expectation = [self expectationWithDescription:@"logged in"];
@@ -313,7 +343,7 @@
 
 - (void)testSignOut {
   id mockSignIn = OCMClassMock([GIDSignIn class]);
-  OCMExpect([_mockProvider configuredGoogleSignIn]).andReturn(mockSignIn);
+  OCMExpect([_mockProvider googleSignIn]).andReturn(mockSignIn);
   OCMExpect([mockSignIn signOut]);
 
   [_mockProvider signOut];
@@ -324,7 +354,7 @@
 
 - (void)testUseEmulatorUsesOAuthProvider {
   [self.authUI useEmulatorWithHost:@"host" port:12345];
-  self.mockProvider =  OCMPartialMock([[FUIGoogleAuth alloc] initWithAuthUI:self.authUI]);
+  self.mockProvider = OCMPartialMock([[FUIGoogleAuth alloc] initWithAuthUI:self.authUI]);
 
   [self.mockProvider signInWithDefaultValue:nil
                presentingViewController:nil
@@ -334,7 +364,7 @@
                                           NSDictionary *_Nullable userInfo) {}];
 
   OCMVerify([self.mockOAuthProvider getCredentialWithUIDelegate:nil completion:OCMOCK_ANY]);
-  OCMVerify(never(), [self.mockProvider configuredGoogleSignIn]);
+  OCMVerify(never(), [self.mockProvider googleSignIn]);
 }
 
 

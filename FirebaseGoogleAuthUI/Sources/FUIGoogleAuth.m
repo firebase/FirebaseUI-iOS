@@ -96,6 +96,13 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 }
 #pragma clang diagnostic pop
 
+- (GIDSignIn *)googleSignIn {
+  return [GIDSignIn sharedInstance];
+}
+
+- (NSString *)clientID {
+  return self.authUI.auth.app.options.clientID;
+}
 
 #pragma mark - FUIAuthProvider
 
@@ -107,14 +114,14 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   if (self.authUI.isEmulatorEnabled) {
     return nil;
   }
-  return [GIDSignIn sharedInstance].currentUser.authentication.accessToken;
+  return [self googleSignIn].currentUser.authentication.accessToken;
 }
 
 - (nullable NSString *)idToken {
   if (self.authUI.isEmulatorEnabled) {
     return nil;
   }
-  return [GIDSignIn sharedInstance].currentUser.authentication.idToken;
+  return [self googleSignIn].currentUser.authentication.idToken;
 }
 
 - (NSString *)shortName {
@@ -161,8 +168,8 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
     return;
   }
 
-  GIDSignIn *signIn = [GIDSignIn sharedInstance];
-  NSString *clientID = self.authUI.auth.app.options.clientID;
+  GIDSignIn *signIn = [self googleSignIn];
+  NSString *clientID = [self clientID];
 
   if (!clientID) {
     [NSException raise:NSInternalInconsistencyException
@@ -178,7 +185,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
                              _Nullable FIRAuthResultCallback result,
                              NSDictionary *_Nullable userInfo) {
     if (completion) {
-      completion(credential, error, result, nil);
+      completion(credential, error, result, userInfo);
     }
   };
 
@@ -225,7 +232,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 
 - (void)requestScopesWithPresentingViewController:(UIViewController *)presentingViewController
                                        completion:(FUIAuthProviderSignInCompletionBlock)completion {
-  GIDSignIn *signIn = [GIDSignIn sharedInstance];
+  GIDSignIn *signIn = [self googleSignIn];
   [signIn addScopes:self.scopes presentingViewController:presentingViewController
            callback:^(GIDGoogleUser *user, NSError *error) {
     [self handleSignInWithUser:user
@@ -246,7 +253,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   if (self.authUI.isEmulatorEnabled) {
     return;
   }
-  GIDSignIn *signIn = [GIDSignIn sharedInstance];
+  GIDSignIn *signIn = [self googleSignIn];
   [signIn signOut];
 }
 
@@ -254,7 +261,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   if (self.authUI.isEmulatorEnabled) {
     return NO;
   }
-  GIDSignIn *signIn = [GIDSignIn sharedInstance];
+  GIDSignIn *signIn = [self googleSignIn];
   return [signIn handleURL:URL];
 }
 
