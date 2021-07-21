@@ -101,7 +101,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 #pragma clang diagnostic pop
 
 - (GIDSignIn *)googleSignIn {
-  return [GIDSignIn sharedInstance];
+  return GIDSignIn.sharedInstance;
 }
 
 - (NSString *)clientID {
@@ -247,7 +247,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
                                  FIRAuthResultCallback result,
                                  NSDictionary<NSString *,id> *userInfo) {
       if (completion != nil) {
-        completion(credential, error, result, nil);
+        completion(credential, error, result, userInfo);
       }
     }];
   }];
