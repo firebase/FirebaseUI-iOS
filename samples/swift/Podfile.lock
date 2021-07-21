@@ -239,7 +239,7 @@ PODS:
     - FirebaseAuth (~> 8.0)
     - FirebaseAuthUI
     - FirebaseCore
-  - FirebaseAuth (8.2.0):
+  - FirebaseAuth (8.3.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
     - GoogleUtilities/Environment (~> 7.4)
@@ -247,16 +247,16 @@ PODS:
   - FirebaseAuthUI (11.0.3):
     - FirebaseAuth (~> 8.0)
     - FirebaseCore
-  - FirebaseCore (8.2.0):
+  - FirebaseCore (8.3.0):
     - FirebaseCoreDiagnostics (~> 8.0)
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/Logger (~> 7.4)
-  - FirebaseCoreDiagnostics (8.2.0):
+  - FirebaseCoreDiagnostics (8.3.0):
     - GoogleDataTransport (~> 9.0)
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/Logger (~> 7.4)
     - nanopb (~> 2.30908.0)
-  - FirebaseDatabase (8.2.0):
+  - FirebaseDatabase (8.3.0):
     - FirebaseCore (~> 8.0)
     - leveldb-library (~> 1.22)
   - FirebaseDatabaseUI (11.0.3):
@@ -267,12 +267,12 @@ PODS:
     - FirebaseCore
     - GoogleUtilities/UserDefaults
   - FirebaseFacebookAuthUI (11.1.3):
-    - FBSDKCoreKit
+    - FBSDKCoreKit_Basics
     - FBSDKLoginKit (~> 11.0)
     - FirebaseAuth
     - FirebaseAuthUI
     - FirebaseCore
-  - FirebaseFirestore (8.2.0):
+  - FirebaseFirestore (8.3.0):
     - abseil/algorithm (= 0.20200225.0)
     - abseil/base (= 0.20200225.0)
     - abseil/memory (= 0.20200225.0)
@@ -290,14 +290,14 @@ PODS:
     - FirebaseAuth
     - FirebaseAuthUI
     - FirebaseCore
-    - GoogleSignIn (~> 5.0)
-  - FirebaseOAuthUI (11.0.3):
+    - GoogleSignIn (~> 6.0)
+  - FirebaseOAuthUI (11.1.3):
     - FirebaseAuth (~> 8.0)
     - FirebaseAuthUI
   - FirebasePhoneAuthUI (11.0.3):
     - FirebaseAuth
     - FirebaseAuthUI
-  - FirebaseStorage (8.2.0):
+  - FirebaseStorage (8.3.0):
     - FirebaseCore (~> 8.0)
     - GTMSessionFetcher/Core (~> 1.5)
   - FirebaseStorageUI (11.0.3):
@@ -334,30 +334,30 @@ PODS:
     - FirebasePhoneAuthUI (~> 11.0)
   - FirebaseUI/Storage (11.0.3):
     - FirebaseStorageUI (~> 11.0)
-  - GoogleDataTransport (9.0.1):
+  - GoogleDataTransport (9.1.0):
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
-    - PromisesObjC (~> 1.2)
-  - GoogleSignIn (5.0.2):
-    - AppAuth (~> 1.2)
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleSignIn (6.0.0):
+    - AppAuth (~> 1.4)
     - GTMAppAuth (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleUtilities/AppDelegateSwizzler (7.4.3):
+  - GoogleUtilities/AppDelegateSwizzler (7.5.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.4.3):
-    - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (7.4.3):
+  - GoogleUtilities/Environment (7.5.0):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.5.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/Network (7.4.3):
+  - GoogleUtilities/Network (7.5.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.4.3)"
-  - GoogleUtilities/Reachability (7.4.3):
+  - "GoogleUtilities/NSData+zlib (7.5.0)"
+  - GoogleUtilities/Reachability (7.5.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (7.4.3):
+  - GoogleUtilities/UserDefaults (7.5.0):
     - GoogleUtilities/Logger
   - "gRPC-C++ (1.28.2)":
     - "gRPC-C++/Implementation (= 1.28.2)"
@@ -393,7 +393,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - PromisesObjC (1.2.12)
+  - PromisesObjC (2.0.0)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
@@ -469,32 +469,32 @@ SPEC CHECKSUMS:
   FBSDKCoreKit_Basics: 06780a4a12e16596bde8406add02c6aa1bf38616
   FBSDKLoginKit: 8243e04c590c38b85c69fcf09d1234514d2475c3
   FirebaseAnonymousAuthUI: 64de9383870378e8f16ef428d73e8c18e74ce5cc
-  FirebaseAuth: 4c4fb0ba1a169f3acb4aa5b724f7ae7c0999ee44
+  FirebaseAuth: fd12c82de44e7ad3b821610c387b8251f03aa0f9
   FirebaseAuthUI: 3f6dcb6f9e1af8e889916e2e0f0f971a70c2d303
-  FirebaseCore: 3a83f24c3de69ec9f9a426e2598125ea51f3a2ce
-  FirebaseCoreDiagnostics: 61384f54989065b15c36b5922b65112e86811d3c
-  FirebaseDatabase: 9c231733363229ac26a55ee9ae9031e94cdb9a7d
+  FirebaseCore: a6dba751680d7033b9d3831e1cfc95ead0605118
+  FirebaseCoreDiagnostics: 7e873baabcfaa9512f538554ae4fa0817aaafbdb
+  FirebaseDatabase: 3cb36bbf667be87d72cebc8dbe72e2e8cac1d615
   FirebaseDatabaseUI: 4db2acaaee3c1a73e0daf31e926a8b7212941607
   FirebaseEmailAuthUI: 9d3ef1a6b89049079baaaea254f30c205176ceea
-  FirebaseFacebookAuthUI: fa945e464b3ec751b5768f03f97f3479b99111c5
-  FirebaseFirestore: 844182d64f052a8177d1766d14332e3af4726f3c
+  FirebaseFacebookAuthUI: 4110202288720f9a74be9c1aa2d3308a39589566
+  FirebaseFirestore: f4f42828c6d82f6945575611c23dd343e0e7d0aa
   FirebaseFirestoreUI: 24a7a35da1a570e8aabd592f60de9438f6959a4c
-  FirebaseGoogleAuthUI: d5dce74c7ae76b1fb18ece8a3be17c2fb6d47319
-  FirebaseOAuthUI: 9f2f90a6cf72f1345473d205ff2071b994a071d8
+  FirebaseGoogleAuthUI: 70d781b69bc933f7b43cd4363e3772376ed53d2a
+  FirebaseOAuthUI: 2cac38e94a39f9d930a7ffc30fbad1683b4e0b62
   FirebasePhoneAuthUI: 12bb994905add3399eb0e48f64080d2b916309bb
-  FirebaseStorage: 001a1f6b1ec45ed60ff9689390d23988e4b95a61
+  FirebaseStorage: ff380720c204593d98c3e5482e62ccfbb522f0c5
   FirebaseStorageUI: d66a62c897de1d0f279ec80c7ece6b8afc9c5913
   FirebaseUI: d2777b3abcb3fa40ea9eea9e40db5a154df608d3
-  GoogleDataTransport: 04c3e9a480bbcaa2ec3f5d27f1cdeb6a92f20c8d
-  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
-  GoogleUtilities: 45dbb24a7f351d69d0a601482b39ad6c32e30dab
+  GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
+  GoogleSignIn: b7779a809e1dfb32ebb43131b10d8bfcd53c1383
+  GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
 
 PODFILE CHECKSUM: 50c55b4b9231c6141172c8e2aba7f1624a881dd7

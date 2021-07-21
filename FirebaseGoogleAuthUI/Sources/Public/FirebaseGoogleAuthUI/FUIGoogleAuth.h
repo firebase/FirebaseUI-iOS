@@ -46,7 +46,9 @@ static NSString *const kGoogleUserInfoProfileScope = @"https://www.googleapis.co
 /** @property scopes
     @brief The scopes to use with Google Sign In.
     @remarks Defaults to using email and profile scopes. For a list of all scopes
-        see https://developers.google.com/identity/protocols/googlescopes
+        see https://developers.google.com/identity/protocols/googlescopes.
+        Starting with GoogleSignIn 6.0, scopes are no longer granted upon first authentication and
+        should be requested lazily.
  */
 @property(nonatomic, copy, readonly) NSArray<NSString *> *scopes;
 
@@ -66,7 +68,9 @@ static NSString *const kGoogleUserInfoProfileScope = @"https://www.googleapis.co
     @brief Designated initializer.
     @param authUI The @c FUIAuth instance that manages this provider.
     @param scopes   The user account scopes required by the app. A list of possible scopes can be
-        found at https://developers.google.com/identity/protocols/googlescopes
+        found at https://developers.google.com/identity/protocols/googlescopes.
+        Starting with GoogleSignIn 6.0, scopes are no longer granted upon first authentication and
+        should be requested lazily.
  */
 - (instancetype)initWithAuthUI:(FUIAuth *)authUI
                         scopes:(NSArray <NSString *> *)scopes NS_DESIGNATED_INITIALIZER;
@@ -84,6 +88,12 @@ __attribute__((deprecated("Instead use initWithAuthUI:")));
  */
 - (instancetype)initWithScopes:(NSArray <NSString *> *)scopes
 __attribute__((deprecated("Instead use initWithAuthUI:permissions:"))) NS_DESIGNATED_INITIALIZER;
+
+/** @fn requestScopesWithPresentingViewController:completion:
+    @brief Requests the scopes in the `scopes` array.
+ */
+- (void)requestScopesWithPresentingViewController:(UIViewController *)presentingViewController
+                                       completion:(FUIAuthProviderSignInCompletionBlock)completion;
 
 @end
 
