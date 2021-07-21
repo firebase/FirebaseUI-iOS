@@ -192,9 +192,14 @@ UINavigationController *authViewController = [authUI authViewController];
 ```
 
 ### Configuring Email Link Sign In
-To use email link sign in, you will first need to enable it in the Firebase Console. Additionally, you will also have to enable Firebase Dynamic Links.
+To use email link sign in, you will first need to enable it in the Firebase Console.
+Additionally, you will also have to enable Firebase Dynamic Links.
 
-You can enable email link sign in by initializing an `FUIEmailAuth` instance with `FIREmailLinkAuthSignInMethod`. You will also need to provide a valid `FIRActionCodeSettings` object with `handleCodeInApp` set to true. Additionally, you need to whitelist the URL you pass to the iniatializer; you can do so in the Firebase Console (Authentication -> Sign in Methods -> Authorized domains).
+You can enable email link sign in by initializing an `FUIEmailAuth` instance with
+`FIREmailLinkAuthSignInMethod`. You will also need to provide a valid
+`FIRActionCodeSettings` object with `handleCodeInApp` set to true. Additionally, you
+need to allowlist the URL you pass to the initializer; you can do so in the Firebase
+Console (Authentication -> Sign in Methods -> Authorized domains).
 
 ```objective-c
 // Objective-C
