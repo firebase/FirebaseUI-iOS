@@ -20,11 +20,13 @@
 #import <FirebaseAuth/FirebaseAuth.h>
 
 #if SWIFT_PACKAGE
+@import CommonCrypto;
 @import FBSDKCoreKit;
 @import FBSDKLoginKit;
 #else
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <CommonCrypto/CommonCrypto.h>
 #endif // SWIFT_PACKAGE
 
 /** @var kTableName
@@ -86,6 +88,11 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
       @brief The email address associated with this account.
    */
   NSString *_email;
+
+  /** @var _currentNonce
+      @brief The current nonce for a Facebook Limited Login sign-in attempt.
+   */
+  NSString *_currentNonce;
 }
 
 + (NSBundle *)bundle {
@@ -191,29 +198,59 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
     return;
   }
 
-  [_loginManager logInWithPermissions:_scopes
-                   fromViewController:presentingViewController
-                              handler:^(FBSDKLoginManagerLoginResult *result,
-                                        NSError *error) {
-    if (error) {
-      NSError *newError =
-          [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
-                                                     providerID:FIRFacebookAuthProviderID];
-      [self completeSignInFlowWithAccessToken:nil error:newError];
-    } else if (result.isCancelled) {
-      NSError *newError = [FUIAuthErrorUtils userCancelledSignInError];
-      [self completeSignInFlowWithAccessToken:nil error:newError];
-    } else {
-      // Retrieve email.
-      [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"email" }] startWithCompletion:^(id<FBSDKGraphRequestConnecting> connection,
-                                id result,
-                                NSError *error) {
-        self->_email = result[@"email"];
-      }];
-      [self completeSignInFlowWithAccessToken:result.token.tokenString
-                                        error:nil];
-    }
-  }];
+  if (self.useLimitedLogin) {
+    // Facebook Limited Login
+    NSString *nonce = [self randomNonce];
+    self->_currentNonce = nonce;
+    FBSDKLoginConfiguration *configuration =
+      [[FBSDKLoginConfiguration alloc] initWithPermissions:_scopes
+                                                  tracking:FBSDKLoginTrackingLimited
+                                                     nonce:[self stringBySha256HashingString:nonce]];
+    [_loginManager logInFromViewController:presentingViewController
+                            configuration:configuration
+                               completion:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+      if (error) {
+        NSError *newError =
+            [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
+                                                       providerID:FIRFacebookAuthProviderID];
+        [self completeSignInFlowWithAccessToken:nil idToken:nil error:newError];
+      } else if (result.isCancelled) {
+        NSError *newError = [FUIAuthErrorUtils userCancelledSignInError];
+        [self completeSignInFlowWithAccessToken:nil idToken:nil error:newError];
+      } else {
+        self->_email = FBSDKProfile.currentProfile.email;
+        NSString *idToken = FBSDKAuthenticationToken.currentAuthenticationToken.tokenString;
+        [self completeSignInFlowWithAccessToken:nil idToken:idToken error:nil];
+      }
+    }];
+  } else {
+    [_loginManager logInWithPermissions:_scopes
+                     fromViewController:presentingViewController
+                                handler:^(FBSDKLoginManagerLoginResult *result,
+                                          NSError *error) {
+      if (error) {
+        NSError *newError =
+        [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
+                                                 providerID:FIRFacebookAuthProviderID];
+        [self completeSignInFlowWithAccessToken:nil idToken:nil error:newError];
+      } else if (result.isCancelled) {
+        NSError *newError = [FUIAuthErrorUtils userCancelledSignInError];
+        [self completeSignInFlowWithAccessToken:nil idToken:nil error:newError];
+      } else {
+        // Retrieve email.
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me"
+                                           parameters:@{ @"fields" : @"email" }]
+                                  startWithCompletion:^(id<FBSDKGraphRequestConnecting> connection,
+                                                        id result,
+                                                        NSError *error) {
+          self->_email = result[@"email"];
+        }];
+        [self completeSignInFlowWithAccessToken:result.token.tokenString
+                                        idToken:nil
+                                          error:nil];
+      }
+    }];
+  }
 }
 
 - (void)signInWithOAuthProvider:(FIROAuthProvider *)oauthProvider
@@ -272,18 +309,28 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 /** @fn completeSignInFlowWithAccessToken:error:
     @brief Called with the result of a Facebook sign-in attempt. Invokes and clears any pending
         sign in callback block.
-    @param accessToken The Facebook access token, if successful.
+    @param accessToken The Facebook access token, if the Facebook sign-in attempt with tracking enabled is successful.
+    @param idToken The Facebook ID token, if the Facebook Limited Login attempt is successful.
     @param error An error which occurred during the sign-in attempt.
  */
 - (void)completeSignInFlowWithAccessToken:(nullable NSString *)accessToken
+                                  idToken:(nullable NSString *)idToken
                                     error:(nullable NSError *)error {
   if (error) {
     [self callbackWithCredential:nil error:error result:nil];
     return;
   }
-  // Assume accessToken cannot be nil if there's no error.
+  FIRAuthCredential *credential;
+  if (idToken) {
+    NSString *rawNonce = self->_currentNonce;
+    credential = [FIROAuthProvider credentialWithProviderID:FIRFacebookAuthProviderID
+                                                    IDToken:idToken
+                                                   rawNonce:rawNonce];
+  } else {
+  // Assume accessToken cannot be nil if there's no error and idToken is nil.
   NSString *_Nonnull token = (id _Nonnull)accessToken;
-  FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:token];
+  credential = [FIRFacebookAuthProvider credentialWithAccessToken:token];
+  }
   UIActivityIndicatorView *activityView =
       [FUIAuthBaseViewController addActivityIndicator:_presentingViewController.view];
   [activityView startAnimating];
@@ -345,6 +392,49 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 
 - (FBSDKLoginManager *)createLoginManager {
   return [[FBSDKLoginManager alloc] init];
+}
+
+- (NSString *)randomNonce {
+  NSString *characterSet = @"0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._";
+  NSMutableString *result = [NSMutableString string];
+  NSInteger remainingLength = 32;
+
+  while (remainingLength > 0) {
+    NSMutableArray *randoms = [NSMutableArray arrayWithCapacity:16];
+    for (NSInteger i = 0; i < 16; i++) {
+      uint8_t random = 0;
+      int errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random);
+      NSAssert(errorCode == errSecSuccess, @"Unable to generate nonce: OSStatus %i", errorCode);
+
+      [randoms addObject:@(random)];
+    }
+
+    for (NSNumber *random in randoms) {
+      if (remainingLength == 0) {
+        break;
+      }
+
+      if (random.unsignedIntValue < characterSet.length) {
+        unichar character = [characterSet characterAtIndex:random.unsignedIntValue];
+        [result appendFormat:@"%C", character];
+        remainingLength--;
+      }
+    }
+  }
+
+  return result;
+}
+
+- (NSString *)stringBySha256HashingString:(NSString *)input {
+  const char *string = [input UTF8String];
+  unsigned char result[CC_SHA256_DIGEST_LENGTH];
+  CC_SHA256(string, (CC_LONG)strlen(string), result);
+
+  NSMutableString *hashed = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
+  for (NSInteger i = 0; i < CC_SHA256_DIGEST_LENGTH; i++) {
+    [hashed appendFormat:@"%02x", result[i]];
+  }
+  return hashed;
 }
 
 @end
