@@ -298,7 +298,7 @@ NS_ASSUME_NONNULL_BEGIN
       self.currentNonce = nonce;
       ASAuthorizationAppleIDRequest *request = [[[ASAuthorizationAppleIDProvider alloc] init] createRequest];
       request.requestedScopes = @[ASAuthorizationScopeFullName, ASAuthorizationScopeEmail];
-      request.nonce = [FUIAuthUtils stringBySha256HashingString:nonce];
+      request.nonce = [FUIAuthUtils stringBySHA256HashingString:nonce];
       ASAuthorizationController* controller = [[ASAuthorizationController alloc] initWithAuthorizationRequests:@[request]];
       controller.delegate = self;
       controller.presentationContextProvider = self;

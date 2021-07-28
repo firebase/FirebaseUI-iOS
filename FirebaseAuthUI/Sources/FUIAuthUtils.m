@@ -77,6 +77,7 @@ NSString *const FUIAuthBundleName = @"FirebaseAuthUI";
 }
 
 + (NSString *)randomNonce {
+  // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
   NSString *characterSet = @"0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._";
   NSMutableString *result = [NSMutableString string];
   NSInteger remainingLength = 32;
@@ -86,7 +87,10 @@ NSString *const FUIAuthBundleName = @"FirebaseAuthUI";
     for (NSInteger i = 0; i < 16; i++) {
       uint8_t random = 0;
       int errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random);
-      NSAssert(errorCode == errSecSuccess, @"Unable to generate nonce: OSStatus %i", errorCode);
+      if (errorCode != errSecSuccess) {
+        [NSException raise:@"FUIAuthGenerateRandomNonce"
+                    format:@"Unable to generate nonce: OSStatus %i", errorCode];
+      }
 
       [randoms addObject:@(random)];
     }
@@ -107,7 +111,7 @@ NSString *const FUIAuthBundleName = @"FirebaseAuthUI";
   return result;
 }
 
-+ (NSString *)stringBySha256HashingString:(NSString *)input {
++ (NSString *)stringBySHA256HashingString:(NSString *)input {
   const char *string = [input UTF8String];
   unsigned char result[CC_SHA256_DIGEST_LENGTH];
   CC_SHA256(string, (CC_LONG)strlen(string), result);

@@ -52,11 +52,11 @@ extern NSString *const FUIAuthBundleName;
  */
 + (NSString *)randomNonce;
 
-/** @fn stringBySha256HashingString:
+/** @fn stringBySHA256HashingString:
     @brief Generates the SHA-256 hash of the input string.
     @param input The input string to be hashed.
  */
-+ (NSString *)stringBySha256HashingString:(NSString *)input;
++ (NSString *)stringBySHA256HashingString:(NSString *)input;
 
 @end
 
