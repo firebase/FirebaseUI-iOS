@@ -152,4 +152,13 @@
   OCMVerify([mockAuth useEmulatorWithHost:@"host" port:12345]);
 }
 
+- (void)testStringBySHA256HashingString {
+  NSString *inputString = @"abc-123.ZYX_987";
+  NSString *expectedSHA256HashedString = @"d858d78754a50c8ccdc414946f656fe854e6ba76bf09a79a7e7d9ca135e4b58d";
+
+  NSString *actualSHA256HashedString = [FUIAuthUtils stringBySHA256HashingString:inputString];
+
+  XCTAssertEqualObjects(actualSHA256HashedString, expectedSHA256HashedString);
+}
+
 @end

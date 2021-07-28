@@ -80,7 +80,7 @@
 "EmailAlreadyInUseError" = "The email address is already in use by another account.";
 
 /* Error message displayed when the password is too weak. */
-"WeakPasswordError" = "Strong passwords have at least 6 characters and a mix of letters and numbers.";
+"WeakPasswordError" = "Password must be at least 6 characters long.";
 
 /* Error message displayed when many accounts have been created from same IP address. */
 "SignUpTooManyTimesError" = "Too many account requests are coming from your IP address. Try again in a few minutes.";
