@@ -20,13 +20,11 @@
 #import <FirebaseAuth/FirebaseAuth.h>
 
 #if SWIFT_PACKAGE
-@import CommonCrypto;
 @import FBSDKCoreKit;
 @import FBSDKLoginKit;
 #else
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <CommonCrypto/CommonCrypto.h>
 #endif // SWIFT_PACKAGE
 
 /** @var kTableName
@@ -70,6 +68,11 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
  */
 @property(nonatomic, strong) FIROAuthProvider *providerForEmulator;
 
+/** @property currentNonce
+    @brief The nonce for the current Facebook Limited Login session, if any.
+ */
+@property(nonatomic, copy, nullable) NSString *currentNonce;
+
 @end
 
 @implementation FUIFacebookAuth {
@@ -88,11 +91,6 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
       @brief The email address associated with this account.
    */
   NSString *_email;
-
-  /** @var _currentNonce
-      @brief The current nonce for a Facebook Limited Login sign-in attempt.
-   */
-  NSString *_currentNonce;
 }
 
 + (NSBundle *)bundle {
@@ -200,12 +198,12 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 
   if (self.useLimitedLogin) {
     // Facebook Limited Login
-    NSString *nonce = [self randomNonce];
-    self->_currentNonce = nonce;
+    NSString *nonce = [FUIAuthUtils randomNonce];
+    self.currentNonce = nonce;
     FBSDKLoginConfiguration *configuration =
       [[FBSDKLoginConfiguration alloc] initWithPermissions:_scopes
                                                   tracking:FBSDKLoginTrackingLimited
-                                                     nonce:[self stringBySha256HashingString:nonce]];
+                                                     nonce:[FUIAuthUtils stringBySHA256HashingString:nonce]];
     [_loginManager logInFromViewController:presentingViewController
                             configuration:configuration
                                completion:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
@@ -322,7 +320,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   }
   FIRAuthCredential *credential;
   if (idToken) {
-    NSString *rawNonce = self->_currentNonce;
+    NSString *rawNonce = self.currentNonce;
     credential = [FIROAuthProvider credentialWithProviderID:FIRFacebookAuthProviderID
                                                     IDToken:idToken
                                                    rawNonce:rawNonce];
@@ -392,49 +390,6 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 
 - (FBSDKLoginManager *)createLoginManager {
   return [[FBSDKLoginManager alloc] init];
-}
-
-- (NSString *)randomNonce {
-  NSString *characterSet = @"0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._";
-  NSMutableString *result = [NSMutableString string];
-  NSInteger remainingLength = 32;
-
-  while (remainingLength > 0) {
-    NSMutableArray *randoms = [NSMutableArray arrayWithCapacity:16];
-    for (NSInteger i = 0; i < 16; i++) {
-      uint8_t random = 0;
-      int errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random);
-      NSAssert(errorCode == errSecSuccess, @"Unable to generate nonce: OSStatus %i", errorCode);
-
-      [randoms addObject:@(random)];
-    }
-
-    for (NSNumber *random in randoms) {
-      if (remainingLength == 0) {
-        break;
-      }
-
-      if (random.unsignedIntValue < characterSet.length) {
-        unichar character = [characterSet characterAtIndex:random.unsignedIntValue];
-        [result appendFormat:@"%C", character];
-        remainingLength--;
-      }
-    }
-  }
-
-  return result;
-}
-
-- (NSString *)stringBySha256HashingString:(NSString *)input {
-  const char *string = [input UTF8String];
-  unsigned char result[CC_SHA256_DIGEST_LENGTH];
-  CC_SHA256(string, (CC_LONG)strlen(string), result);
-
-  NSMutableString *hashed = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
-  for (NSInteger i = 0; i < CC_SHA256_DIGEST_LENGTH; i++) {
-    [hashed appendFormat:@"%02x", result[i]];
-  }
-  return hashed;
 }
 
 @end
