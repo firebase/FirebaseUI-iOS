@@ -207,46 +207,32 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
     [_loginManager logInFromViewController:presentingViewController
                             configuration:configuration
                                completion:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-      if (error) {
-        NSError *newError =
-            [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
-                                                       providerID:FIRFacebookAuthProviderID];
-        [self completeSignInFlowWithAccessToken:nil idToken:nil error:newError];
-      } else if (result.isCancelled) {
-        NSError *newError = [FUIAuthErrorUtils userCancelledSignInError];
-        [self completeSignInFlowWithAccessToken:nil idToken:nil error:newError];
-      } else {
-        self->_email = FBSDKProfile.currentProfile.email;
-        NSString *idToken = FBSDKAuthenticationToken.currentAuthenticationToken.tokenString;
-        [self completeSignInFlowWithAccessToken:nil idToken:idToken error:nil];
+      if ([self maybeHandleCancelledResult:result error:error]) {
+        return;
       }
+      self->_email = FBSDKProfile.currentProfile.email;
+      NSString *idToken = FBSDKAuthenticationToken.currentAuthenticationToken.tokenString;
+      [self completeSignInFlowWithAccessToken:nil idToken:idToken error:nil];
     }];
   } else {
     [_loginManager logInWithPermissions:_scopes
                      fromViewController:presentingViewController
                                 handler:^(FBSDKLoginManagerLoginResult *result,
                                           NSError *error) {
-      if (error) {
-        NSError *newError =
-        [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
-                                                 providerID:FIRFacebookAuthProviderID];
-        [self completeSignInFlowWithAccessToken:nil idToken:nil error:newError];
-      } else if (result.isCancelled) {
-        NSError *newError = [FUIAuthErrorUtils userCancelledSignInError];
-        [self completeSignInFlowWithAccessToken:nil idToken:nil error:newError];
-      } else {
-        // Retrieve email.
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me"
-                                           parameters:@{ @"fields" : @"email" }]
-                                  startWithCompletion:^(id<FBSDKGraphRequestConnecting> connection,
-                                                        id result,
-                                                        NSError *error) {
-          self->_email = result[@"email"];
-        }];
-        [self completeSignInFlowWithAccessToken:result.token.tokenString
-                                        idToken:nil
-                                          error:nil];
+      if ([self maybeHandleCancelledResult:result error:error]) {
+        return;
       }
+      // Retrieve email.
+      [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me"
+                                         parameters:@{ @"fields" : @"email" }]
+                                startWithCompletion:^(id<FBSDKGraphRequestConnecting> connection,
+                                                      id result,
+                                                      NSError *error) {
+        self->_email = result[@"email"];
+      }];
+      [self completeSignInFlowWithAccessToken:result.token.tokenString
+                                      idToken:nil
+                                        error:nil];
     }];
   }
 }
@@ -390,6 +376,24 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 
 - (FBSDKLoginManager *)createLoginManager {
   return [[FBSDKLoginManager alloc] init];
+}
+
+- (BOOL)maybeHandleCancelledResult:(FBSDKLoginManagerLoginResult *)result
+                             error:(NSError *)error {
+  if (error) {
+    NSError *newError =
+        [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
+                                                   providerID:FIRFacebookAuthProviderID];
+    [self completeSignInFlowWithAccessToken:nil idToken:nil error:newError];
+    return true;
+  }
+
+  if (result.isCancelled) {
+    NSError *newError = [FUIAuthErrorUtils userCancelledSignInError];
+    [self completeSignInFlowWithAccessToken:nil idToken:nil error:newError];
+    return true;
+  }
+  return false;
 }
 
 @end
