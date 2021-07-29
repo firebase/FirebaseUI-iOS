@@ -304,7 +304,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 
 #pragma mark -
 
-/** @fn completeSignInFlowWithAccessToken:error:
+/** @fn completeSignInFlowWithAccessToken:idToken:error:
     @brief Called with the result of a Facebook sign-in attempt. Invokes and clears any pending
         sign in callback block.
     @param accessToken The Facebook access token, if the Facebook sign-in attempt with tracking enabled is successful.
@@ -325,9 +325,9 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
                                                     IDToken:idToken
                                                    rawNonce:rawNonce];
   } else {
-  // Assume accessToken cannot be nil if there's no error and idToken is nil.
-  NSString *_Nonnull token = (id _Nonnull)accessToken;
-  credential = [FIRFacebookAuthProvider credentialWithAccessToken:token];
+    // Assume accessToken cannot be nil if there's no error and idToken is nil.
+    NSString *_Nonnull token = (id _Nonnull)accessToken;
+    credential = [FIRFacebookAuthProvider credentialWithAccessToken:token];
   }
   UIActivityIndicatorView *activityView =
       [FUIAuthBaseViewController addActivityIndicator:_presentingViewController.view];

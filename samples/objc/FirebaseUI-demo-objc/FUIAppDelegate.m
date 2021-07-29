@@ -18,6 +18,7 @@
 
 @import Firebase;
 @import FirebaseAuthUI;
+@import FBSDKCoreKit;
 #import <GTMSessionFetcher/GTMSessionFetcherLogging.h>
 
 @implementation FUIAppDelegate
@@ -26,6 +27,8 @@
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [FIRApp configure];
   [GTMSessionFetcher setLoggingEnabled:YES];
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                           didFinishLaunchingWithOptions:launchOptions];
   return YES;
 }
 
@@ -33,6 +36,9 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
             openURL:(NSURL *)url
             options:(NSDictionary<NSString*, id> *)options {
   NSString *sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+  [[FBSDKApplicationDelegate sharedInstance] application:app
+                                                 openURL:url
+                                                 options:options];
   return [self handleOpenUrl:url sourceApplication:sourceApplication];
 }
 
