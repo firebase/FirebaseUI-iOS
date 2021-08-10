@@ -136,7 +136,7 @@ NS_ASSUME_NONNULL_BEGIN
     _customParameters = customParameters;
     _loginHintKey = loginHintKey;
     if ((_authUI.isEmulatorEnabled || ![_providerID isEqualToString:@"apple.com"]) && ![_providerID isEqualToString:@"facebook.com"]) {
-      _provider = [FIROAuthProvider providerWithProviderID:self.providerID];
+      _provider = [FIROAuthProvider providerWithProviderID:self.providerID auth:_authUI.auth];
     }
   }
   return self;

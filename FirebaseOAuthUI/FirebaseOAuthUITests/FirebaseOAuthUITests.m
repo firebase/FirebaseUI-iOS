@@ -40,13 +40,13 @@
 
   id appClass = OCMClassMock([FIRApp class]);
   OCMStub([authClass app]).andReturn(appClass);
-
-  self.mockOAuthProvider = OCMClassMock([FIROAuthProvider class]);
-  OCMStub(ClassMethod([_mockOAuthProvider providerWithProviderID:OCMOCK_ANY])).
-      andReturn(_mockOAuthProvider);
-
+  
   FIRAuth *auth = [FIRAuth auth];
   self.authUI = [FUIAuth authUIWithAuth:auth];
+
+  self.mockOAuthProvider = OCMClassMock([FIROAuthProvider class]);
+  OCMStub(ClassMethod([_mockOAuthProvider providerWithProviderID:OCMOCK_ANY auth:self.authUI.auth])).
+      andReturn(_mockOAuthProvider);
 }
 
 - (void)tearDown {
@@ -78,7 +78,7 @@
   XCTAssertNil(self.provider.accessToken);
   XCTAssertNil(self.provider.idToken);
 
-  OCMVerify([self.mockOAuthProvider providerWithProviderID:@"dummy"]);
+  OCMVerify([self.mockOAuthProvider providerWithProviderID:@"dummy" auth:self.authUI.auth]);
 }
 
 - (void)testAppleUsesEmulatorCreatesOAuthProvider {
@@ -93,7 +93,7 @@
                                             scopes:@[]
                                   customParameters:@{}
                                       loginHintKey:nil];
-  OCMVerify([self.mockOAuthProvider providerWithProviderID:@"apple.com"]);
+  OCMVerify([self.mockOAuthProvider providerWithProviderID:@"apple.com" auth:self.authUI.auth]);
 }
 
 - (void)testAppleNoUseEmulatorNoOAuthProvider {
@@ -106,7 +106,7 @@
                                             scopes:@[]
                                   customParameters:@{}
                                       loginHintKey:nil];
-  OCMVerify(never(), [self.mockOAuthProvider providerWithProviderID:@"apple.com"]);
+  OCMVerify(never(), [self.mockOAuthProvider providerWithProviderID:@"apple.com" auth:self.authUI.auth]);
 }
 
 @end
