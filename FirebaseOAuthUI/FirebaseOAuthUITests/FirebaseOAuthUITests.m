@@ -42,7 +42,7 @@
   OCMStub([authClass app]).andReturn(appClass);
 
   self.mockOAuthProvider = OCMClassMock([FIROAuthProvider class]);
-  OCMStub(ClassMethod([_mockOAuthProvider providerWithProviderID:OCMOCK_ANY])).
+  OCMStub(ClassMethod([_mockOAuthProvider providerWithProviderID:OCMOCK_ANY auth:OCMOCK_ANY])).
       andReturn(_mockOAuthProvider);
 
   FIRAuth *auth = [FIRAuth auth];
