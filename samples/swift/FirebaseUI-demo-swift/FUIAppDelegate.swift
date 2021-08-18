@@ -45,11 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func handleOpenUrl(_ url: URL, sourceApplication: String?) -> Bool {
+    // [START handle_open_url]
     if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
       return true
     }
     // other URL handling goes here.
     return false
+    // [END handle_open_url]
   }
 
 }
