@@ -136,6 +136,9 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   return FIRFacebookAuthProviderID;
 }
 
+/** @fn accessToken:
+    @brief The access token provided by Facebook's login flow.
+ */
 - (nullable NSString *)accessToken {
   if (self.authUI.isEmulatorEnabled) {
     return nil;
@@ -144,10 +147,13 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 /** @fn idToken:
-    @brief Facebook doesn't provide User Id Token during sign in flow
+    @brief The ID token provided by Facebook's login flow.
  */
 - (nullable NSString *)idToken {
-  return nil;
+  if (self.authUI.isEmulatorEnabled) {
+    return nil;
+  }
+  return FBSDKAuthenticationToken.currentAuthenticationToken.tokenString;
 }
 
 - (NSString *)shortName {
