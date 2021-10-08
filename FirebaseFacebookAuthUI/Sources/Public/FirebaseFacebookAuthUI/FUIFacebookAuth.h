@@ -48,6 +48,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, readwrite) FUIButtonAlignment buttonAlignment;
 
+/** @property useLimitedLogin
+    @brief Whether or not Facebook Login should use Limited Login mode.
+ */
+@property(nonatomic, assign) BOOL useLimitedLogin;
+
 /** @fn initWithAuthUI
     @brief Convenience initializer. Uses a default permission of `@[ "email" ]`.
     @param authUI The @c FUIAuth instance that manages this provider.

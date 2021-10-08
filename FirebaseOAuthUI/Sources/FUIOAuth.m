@@ -99,6 +99,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, copy, nullable) NSString *loginHintKey;
 
+/** @property currentNonce
+    @brief The nonce for the current Sign in with Apple session, if any.
+ */
 @property(nonatomic, copy, nullable) NSString *currentNonce;
 
 /** @property provider

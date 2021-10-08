@@ -68,6 +68,11 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
  */
 @property(nonatomic, strong) FIROAuthProvider *providerForEmulator;
 
+/** @property currentNonce
+    @brief The nonce for the current Facebook Limited Login session, if any.
+ */
+@property(nonatomic, copy, nullable) NSString *currentNonce;
+
 @end
 
 @implementation FUIFacebookAuth {
@@ -131,6 +136,9 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   return FIRFacebookAuthProviderID;
 }
 
+/** @fn accessToken:
+    @brief The access token provided by Facebook's login flow.
+ */
 - (nullable NSString *)accessToken {
   if (self.authUI.isEmulatorEnabled) {
     return nil;
@@ -139,10 +147,13 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 }
 
 /** @fn idToken:
-    @brief Facebook doesn't provide User Id Token during sign in flow
+    @brief The ID token provided by Facebook's login flow.
  */
 - (nullable NSString *)idToken {
-  return nil;
+  if (self.authUI.isEmulatorEnabled) {
+    return nil;
+  }
+  return FBSDKAuthenticationToken.currentAuthenticationToken.tokenString;
 }
 
 - (NSString *)shortName {
@@ -191,29 +202,45 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
     return;
   }
 
-  [_loginManager logInWithPermissions:_scopes
-                   fromViewController:presentingViewController
-                              handler:^(FBSDKLoginManagerLoginResult *result,
-                                        NSError *error) {
-    if (error) {
-      NSError *newError =
-          [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
-                                                     providerID:FIRFacebookAuthProviderID];
-      [self completeSignInFlowWithAccessToken:nil error:newError];
-    } else if (result.isCancelled) {
-      NSError *newError = [FUIAuthErrorUtils userCancelledSignInError];
-      [self completeSignInFlowWithAccessToken:nil error:newError];
-    } else {
+  if (self.useLimitedLogin) {
+    // Facebook Limited Login
+    NSString *nonce = [FUIAuthUtils randomNonce];
+    self.currentNonce = nonce;
+    FBSDKLoginConfiguration *configuration =
+      [[FBSDKLoginConfiguration alloc] initWithPermissions:_scopes
+                                                  tracking:FBSDKLoginTrackingLimited
+                                                     nonce:[FUIAuthUtils stringBySHA256HashingString:nonce]];
+    [_loginManager logInFromViewController:presentingViewController
+                            configuration:configuration
+                               completion:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+      if ([self maybeHandleCancelledResult:result error:error]) {
+        return;
+      }
+      self->_email = FBSDKProfile.currentProfile.email;
+      NSString *idToken = FBSDKAuthenticationToken.currentAuthenticationToken.tokenString;
+      [self completeSignInFlowWithAccessToken:nil idToken:idToken error:nil];
+    }];
+  } else {
+    [_loginManager logInWithPermissions:_scopes
+                     fromViewController:presentingViewController
+                                handler:^(FBSDKLoginManagerLoginResult *result,
+                                          NSError *error) {
+      if ([self maybeHandleCancelledResult:result error:error]) {
+        return;
+      }
       // Retrieve email.
-      [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"email" }] startWithCompletion:^(id<FBSDKGraphRequestConnecting> connection,
-                                id result,
-                                NSError *error) {
+      [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me"
+                                         parameters:@{ @"fields" : @"email" }]
+                                startWithCompletion:^(id<FBSDKGraphRequestConnecting> connection,
+                                                      id result,
+                                                      NSError *error) {
         self->_email = result[@"email"];
       }];
       [self completeSignInFlowWithAccessToken:result.token.tokenString
+                                      idToken:nil
                                         error:nil];
-    }
-  }];
+    }];
+  }
 }
 
 - (void)signInWithOAuthProvider:(FIROAuthProvider *)oauthProvider
@@ -269,21 +296,31 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 
 #pragma mark -
 
-/** @fn completeSignInFlowWithAccessToken:error:
+/** @fn completeSignInFlowWithAccessToken:idToken:error:
     @brief Called with the result of a Facebook sign-in attempt. Invokes and clears any pending
         sign in callback block.
-    @param accessToken The Facebook access token, if successful.
+    @param accessToken The Facebook access token, if the Facebook sign-in attempt with tracking enabled is successful.
+    @param idToken The Facebook ID token, if the Facebook Limited Login attempt is successful.
     @param error An error which occurred during the sign-in attempt.
  */
 - (void)completeSignInFlowWithAccessToken:(nullable NSString *)accessToken
+                                  idToken:(nullable NSString *)idToken
                                     error:(nullable NSError *)error {
   if (error) {
     [self callbackWithCredential:nil error:error result:nil];
     return;
   }
-  // Assume accessToken cannot be nil if there's no error.
-  NSString *_Nonnull token = (id _Nonnull)accessToken;
-  FIRAuthCredential *credential = [FIRFacebookAuthProvider credentialWithAccessToken:token];
+  FIRAuthCredential *credential;
+  if (idToken) {
+    NSString *rawNonce = self.currentNonce;
+    credential = [FIROAuthProvider credentialWithProviderID:FIRFacebookAuthProviderID
+                                                    IDToken:idToken
+                                                   rawNonce:rawNonce];
+  } else {
+    // Assume accessToken cannot be nil if there's no error and idToken is nil.
+    NSString *_Nonnull token = (id _Nonnull)accessToken;
+    credential = [FIRFacebookAuthProvider credentialWithAccessToken:token];
+  }
   UIActivityIndicatorView *activityView =
       [FUIAuthBaseViewController addActivityIndicator:_presentingViewController.view];
   [activityView startAnimating];
@@ -345,6 +382,24 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 
 - (FBSDKLoginManager *)createLoginManager {
   return [[FBSDKLoginManager alloc] init];
+}
+
+- (BOOL)maybeHandleCancelledResult:(FBSDKLoginManagerLoginResult *)result
+                             error:(NSError *)error {
+  if (error) {
+    NSError *newError =
+        [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
+                                                   providerID:FIRFacebookAuthProviderID];
+    [self completeSignInFlowWithAccessToken:nil idToken:nil error:newError];
+    return true;
+  }
+
+  if (result.isCancelled) {
+    NSError *newError = [FUIAuthErrorUtils userCancelledSignInError];
+    [self completeSignInFlowWithAccessToken:nil idToken:nil error:newError];
+    return true;
+  }
+  return false;
 }
 
 @end
