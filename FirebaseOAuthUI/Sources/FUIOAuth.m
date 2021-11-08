@@ -399,7 +399,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error API_AVAILABLE(ios(13.0)) {
-  NSLog(@"%@", error.description);
+    NSLog(@"%@", error.description);
+    // canceled/failed/invalid/Nothandled/Unknown
+    if (_providerSignInCompletion) {
+        _providerSignInCompletion(nil, error, nil, nil);
+    }
 }
 
 #pragma mark - ASAuthorizationControllerPresentationContextProviding
