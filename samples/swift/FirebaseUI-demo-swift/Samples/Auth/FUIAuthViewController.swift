@@ -74,7 +74,6 @@ class FUIAuthViewController: UITableViewController {
   @IBOutlet weak var authorizationButton: UIBarButtonItem!
   @IBOutlet weak var customAuthorizationSwitch: UISwitch!
   @IBOutlet weak var customScopesSwitch: UISwitch!
-  @IBOutlet weak var facebookSwitch: UISwitch!
 
 
   override func viewDidLoad() {
@@ -314,8 +313,6 @@ class FUIAuthViewController: UITableViewController {
                                                                                     "user_friends",
                                                                                     "ads_read"])
               : FUIFacebookAuth(authUI: self.authUI!)
-            let facebookProvider = provider as! FUIFacebookAuth
-            facebookProvider.useLimitedLogin = self.facebookSwitch.isOn
           case Providers.Apple.rawValue:
             if #available(iOS 13.0, *) {
               provider = FUIOAuth.appleAuthProvider()

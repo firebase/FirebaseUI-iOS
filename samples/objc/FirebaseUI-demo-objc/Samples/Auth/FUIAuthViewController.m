@@ -64,7 +64,6 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellEmail;
 @property (weak, nonatomic) IBOutlet UISwitch *emailSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *facebookSwitch;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellUID;
 @property (weak, nonatomic) IBOutlet UITableViewCell *anonymousSignIn;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonAuthorization;
@@ -376,14 +375,12 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
 - (NSArray *)getListOfIDPs {
   return [[self class] getListOfIDPs:[self.tableView indexPathsForSelectedRows]
                      useCustomScopes:_customScopeSwitch.isOn
-                        useEmailLink:_emailSwitch.isOn
-          useFacebookLimitedLogin:_facebookSwitch.isOn];
+                        useEmailLink:_emailSwitch.isOn];
 }
 
 + (NSArray *)getListOfIDPs:(NSArray<NSIndexPath *> *)selectedRows
            useCustomScopes:(BOOL)useCustomScopes
-              useEmailLink:(BOOL)useEmaiLink
-   useFacebookLimitedLogin:(BOOL)useLimitedLogin {
+              useEmailLink:(BOOL)useEmaiLink {
   NSMutableArray *providers = [NSMutableArray new];
 
   for (NSIndexPath *indexPath in selectedRows) {
@@ -429,7 +426,6 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
                                                                                 @"user_friends",
                                                                                 @"ads_read"]]
                                      :[[FUIFacebookAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
-          ((FUIFacebookAuth *)provider).useLimitedLogin = useLimitedLogin;
           break;
         case kIDPTwitter:
           provider = [FUIOAuth twitterAuthProvider];

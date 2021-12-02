@@ -15,7 +15,6 @@
 //
 
 import UIKit
-import FBSDKCoreKit
 import Firebase
 import FirebaseAuthUI
 import GTMSessionFetcher
@@ -30,21 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // accompanying valid GoogleService-Info.plist file.
     FirebaseApp.configure()
     GTMSessionFetcher.setLoggingEnabled(true)
-    ApplicationDelegate.shared.application(
-        application,
-        didFinishLaunchingWithOptions: launchOptions
-    )
     return true
   }
   
   @available(iOS 9.0, *)
   func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-    ApplicationDelegate.shared.application(
-        app,
-        open: url,
-        sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-        annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-    )
     let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?
     return self.handleOpenUrl(url, sourceApplication: sourceApplication)
   }
