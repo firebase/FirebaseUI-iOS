@@ -67,7 +67,7 @@ let package = Package(
     .package(
       name: "Facebook", 
       url: "https://github.com/facebook/facebook-ios-sdk.git",
-      from: "11.0.0"
+      "11.0.0"..<"13.0.0"
     ),
     .package(
       name: "Firebase", 
@@ -134,12 +134,6 @@ let package = Package(
       resources: [
         .process("Resources"),
         .process("Strings"),
-        .process("AccountManagement/FUIAccountSettingsViewController.xib"),
-        .process("AccountManagement/FUIInputTableViewCell.xib"),
-        .process("AccountManagement/FUIPasswordTableViewCell.xib"),
-        .process("FUIAuthPickerViewController.xib"),
-        .process("FUIAuthTableViewCell.xib"),
-        .process("FUIStaticContentTableViewController.xib"),
       ],
       publicHeadersPath: "Public",
       cSettings: [
@@ -232,9 +226,6 @@ let package = Package(
       resources: [
         .process("Resources"),
         .process("Strings"),
-        .process("CountryCode/FUICountryTableViewController.xib"),
-        .process("FUIPhoneEntryViewController.xib"),
-        .process("FUIPhoneVerificationViewController.xib"),
       ],
       publicHeadersPath: "Public",
       cSettings: [

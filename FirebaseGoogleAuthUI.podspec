@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseGoogleAuthUI'
-  s.version      = '12.0.0'
+  s.version      = '12.1.1'
   s.summary      = 'Google authentication for FirebaseAuthUI.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'LICENSE' }
