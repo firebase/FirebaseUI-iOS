@@ -50,7 +50,7 @@ jobs:
           xcodebuild -list
       - name: Build
         run: |
-          xcodebuild -scheme FirebaseDatabaseUI -sdk iphonesimulator
+          xcodebuild -scheme FirebaseDatabaseUI -sdk iphonesimulator  -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
   pod:
     name: pod lib lint
     runs-on: macOS-latest
