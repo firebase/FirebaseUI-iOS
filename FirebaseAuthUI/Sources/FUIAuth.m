@@ -201,7 +201,8 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
       [self.auth signInWithCredential:credential
                            completion:^(FIRAuthDataResult *_Nullable authResult,
                                         NSError *_Nullable error) {
-        if (error && error.code == FIRAuthErrorCodeAccountExistsWithDifferentCredential) {
+        if (self.emailAuthProvider && error 
+            && error.code == FIRAuthErrorCodeAccountExistsWithDifferentCredential) {
           NSString *email = error.userInfo[kErrorUserInfoEmailKey];
           [self.emailAuthProvider handleAccountLinkingForEmail:email
                                                  newCredential:credential
