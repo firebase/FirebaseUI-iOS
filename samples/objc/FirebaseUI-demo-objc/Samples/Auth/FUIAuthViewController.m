@@ -16,7 +16,7 @@
 //  limitations under the License.
 //
 
-@import Firebase;
+@import FirebaseAuth;
 @import FirebaseOAuthUI;
 @import FirebaseEmailAuthUI;
 @import FirebaseAnonymousAuthUI;
