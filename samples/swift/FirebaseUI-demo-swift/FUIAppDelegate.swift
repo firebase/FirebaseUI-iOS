@@ -16,7 +16,8 @@
 
 import UIKit
 import FBSDKCoreKit
-import Firebase
+import FirebaseCore
+import FirebaseAuth
 import FirebaseAuthUI
 import GTMSessionFetcher
 

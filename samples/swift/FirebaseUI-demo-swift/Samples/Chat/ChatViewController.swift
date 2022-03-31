@@ -15,7 +15,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseAuth
 import FirebaseDatabaseUI
 
 /// View controller demonstrating using a FUICollectionViewDataSource
