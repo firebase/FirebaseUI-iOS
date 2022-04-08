@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = {
     'HEADER_SEARCH_PATHS' => '"${PODS_TARGET_SRCROOT}"',
   }
+  s.swift_version = '5.3'
 
   s.public_header_files = 'FirebaseFirestoreUI/Sources/Public/FirebaseFirestoreUI/*.h'
   s.source_files = 'FirebaseFirestoreUI/Sources/**/*.{h,m}'
