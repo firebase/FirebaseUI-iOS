@@ -15,6 +15,7 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = {
     'HEADER_SEARCH_PATHS' => '"${PODS_TARGET_SRCROOT}"',
   }
+  s.swift_version = '5.3'
 
   s.public_header_files = 'FirebaseGoogleAuthUI/Sources/Public/FirebaseGoogleAuthUI/*.h'
   s.source_files = 'FirebaseGoogleAuthUI/Sources/**/*.{h,m}'

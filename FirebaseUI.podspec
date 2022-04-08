@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.public_header_files = 'FirebaseUI.h'
   s.source_files = 'FirebaseUI.h'
-  s.swift_versions = '5.0'
+  s.swift_versions = '5.3'
   s.cocoapods_version = '>= 1.8.0'
   s.pod_target_xcconfig = {
     'HEADER_SEARCH_PATHS' => '"${PODS_TARGET_SRCROOT}"',

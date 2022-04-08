@@ -15,6 +15,7 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = {
     'HEADER_SEARCH_PATHS' => '"${PODS_TARGET_SRCROOT}"',
   }
+  s.swift_version = '5.3'
 
   s.platform = :ios, '10.0'
   s.public_header_files = 'FirebaseFacebookAuthUI/Sources/Public/FirebaseFacebookAuthUI/*.h'
