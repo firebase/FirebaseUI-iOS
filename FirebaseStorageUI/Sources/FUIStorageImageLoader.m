@@ -18,7 +18,13 @@
 #import "FirebaseStorageUI/Sources/Public/FirebaseStorageUI/FIRStorageDownloadTask+SDWebImage.h"
 
 #import <FirebaseCore/FirebaseCore.h>
-#import <FirebaseStorage/FirebaseStorage.h>
+#if __has_include(<FirebaseStorage/FirebaseStorage.h>)
+  // Firebase 8.x
+  #import <FirebaseStorage/FirebaseStorage.h>
+#else
+  // Firebase 9.0+
+  #import <FirebaseStorage/FirebaseStorage-Swift.h>
+#endif
 
 #if SWIFT_PACKAGE
 @import GTMSessionFetcherCore;
@@ -120,7 +126,7 @@
   [download observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
     // Check progressive decoding if need
     if (options & SDWebImageProgressiveLoad) {
-      FIRStorageDownloadTask *task = snapshot.task;
+      FIRStorageDownloadTask *task = (FIRStorageDownloadTask *)snapshot.task;
       // Currently, FIRStorageDownloadTask does not have the API to grab partial data
       // But since FirebaseUI and Firebase are seamless component, we access the internal fetcher here
       GTMSessionFetcher *fetcher = task.fetcher;
@@ -160,7 +166,7 @@
 }
 
 - (BOOL)shouldBlockFailedURLWithURL:(NSURL *)url error:(NSError *)error {
-  if ([error.domain isEqualToString:FIRStorageErrorDomain]) {
+  if ([error.domain isEqualToString:@"FIRStorageErrorDomain"]) {
     if (error.code == FIRStorageErrorCodeBucketNotFound
         || error.code == FIRStorageErrorCodeProjectNotFound
         || error.code == FIRStorageErrorCodeObjectNotFound) {
