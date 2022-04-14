@@ -16,8 +16,9 @@
 
 #import "FUIAppDelegate.h"
 
-@import Firebase;
+@import FirebaseCore;
 @import FirebaseAuthUI;
+@import FirebaseDynamicLinks;
 @import FBSDKCoreKit;
 #import <GTMSessionFetcher/GTMSessionFetcherLogging.h>
 
