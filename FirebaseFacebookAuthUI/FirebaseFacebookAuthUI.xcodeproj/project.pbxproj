@@ -785,6 +785,8 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseAuthUI\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBAEMKit\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -836,6 +838,8 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseAuthUI\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBAEMKit\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

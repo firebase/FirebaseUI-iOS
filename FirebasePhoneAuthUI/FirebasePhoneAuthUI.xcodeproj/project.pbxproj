@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -824,6 +824,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseAuthUI\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseCoreInternal\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -868,6 +869,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseAuthUI\"",
+					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseCoreInternal\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

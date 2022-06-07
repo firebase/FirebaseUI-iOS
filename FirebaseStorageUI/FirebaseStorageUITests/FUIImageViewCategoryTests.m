@@ -16,6 +16,7 @@
 
 @import XCTest;
 
+@import FirebaseCore;
 @import FirebaseStorageUI;
 @import OCMock;
 
@@ -31,6 +32,12 @@
 
 - (void)setUp {
   [super setUp];
+  if ([FIRApp defaultApp] == nil) {
+    FIROptions *options =
+        [[FIROptions alloc] initWithGoogleAppID:@"0:0000000000000:ios:0000000000000000"
+                                    GCMSenderID:@"1234567891011"];
+    [FIRApp configureWithOptions:options];
+  }
   self.ref = OCMClassMock([FIRStorageReference class]);
   OCMStub([self.ref bucket]).andReturn(@"bucket");
   OCMStub([self.ref fullPath]).andReturn(@"path/to/image.png");
