@@ -18,9 +18,11 @@
 #if __has_include(<FirebaseStorage/FirebaseStorage.h>)
   // Firebase 8.x
   #import <FirebaseStorage/FirebaseStorage.h>
-#else
+#elif __has_include(<FirebaseStorage/FirebaseStorage-Swift.h>)
   // Firebase 9.0+
   #import <FirebaseStorage/FirebaseStorage-Swift.h>
+#else
+  @import FirebaseStorage;
 #endif
 
 NS_ASSUME_NONNULL_BEGIN

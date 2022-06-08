@@ -476,6 +476,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuthUI\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -513,6 +514,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuthUI\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

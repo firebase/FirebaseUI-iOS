@@ -465,6 +465,8 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Libuv-gRPC\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFirestoreUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -494,6 +496,8 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Libuv-gRPC\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFirestoreUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
