@@ -787,6 +787,10 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBAEMKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBAEMKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKCoreKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKCoreKit_Basics\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKLoginKit\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -840,6 +844,10 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBAEMKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBAEMKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKCoreKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKCoreKit_Basics\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKLoginKit\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
