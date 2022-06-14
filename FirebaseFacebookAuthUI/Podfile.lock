@@ -1,21 +1,12 @@
 PODS:
-  - FBAEMKit (11.2.1):
-    - FBAEMKit/AEM (= 11.2.1)
-  - FBAEMKit/AEM (11.2.1):
-    - FBSDKCoreKit_Basics (~> 11.2.1)
-  - FBSDKCoreKit (11.2.1):
-    - FBSDKCoreKit/Core (= 11.2.1)
-  - FBSDKCoreKit/Core (11.2.1):
-    - FBAEMKit (~> 11.2.1)
-    - FBSDKCoreKit_Basics (~> 11.2.1)
-  - FBSDKCoreKit_Basics (11.2.1):
-    - FBSDKCoreKit_Basics/Basics (= 11.2.1)
-  - FBSDKCoreKit_Basics/Basics (11.2.1)
-  - FBSDKLoginKit (11.2.1):
-    - FBSDKLoginKit/Login (= 11.2.1)
-  - FBSDKLoginKit/Login (11.2.1):
-    - FBSDKCoreKit (~> 11.2.1)
-    - FBSDKCoreKit_Basics (~> 11.2.1)
+  - FBAEMKit (13.2.0):
+    - FBSDKCoreKit_Basics (= 13.2.0)
+  - FBSDKCoreKit (13.2.0):
+    - FBAEMKit (= 13.2.0)
+    - FBSDKCoreKit_Basics (= 13.2.0)
+  - FBSDKCoreKit_Basics (13.2.0)
+  - FBSDKLoginKit (13.2.0):
+    - FBSDKCoreKit (= 13.2.0)
   - FirebaseAuth (9.1.0):
     - FirebaseCore (~> 9.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
@@ -66,7 +57,7 @@ PODS:
 
 DEPENDENCIES:
   - FBSDKCoreKit
-  - FBSDKLoginKit (~> 11.0)
+  - FBSDKLoginKit (~> 13.0)
   - FirebaseAuthUI (from `../`)
   - OCMock
 
@@ -92,10 +83,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  FBAEMKit: 5de0a7aaa854eec69bb5be20795952a63d38a5f6
-  FBSDKCoreKit: bf655f808b040ed66a72b9922911b39d703e64f4
-  FBSDKCoreKit_Basics: 73ebe3a27eb688ac5b5aa7e99f68992993042115
-  FBSDKLoginKit: 2e76831ef08d356b8f9150ea51cce865074ea304
+  FBAEMKit: c2b2895363b7e57192013d1dc49fdf498b28624c
+  FBSDKCoreKit: 58139803d861e72c7661dc875611a759352a55ac
+  FBSDKCoreKit_Basics: 1ffc68326a5ece051d85574f02a0adcf27c2a5f2
+  FBSDKLoginKit: 19e2a878556c2ee4f20486dc406e582783cd7578
   FirebaseAuth: 77247e07732ec5cdb20cc58ef40ad84d2fcce847
   FirebaseAuthUI: 9381cd32c4efcaf3550f4a95dd176fc73da253ee
   FirebaseCore: b7bfc258e996eada23b3666bd6b9a22ca092acb8
@@ -108,6 +99,6 @@ SPEC CHECKSUMS:
   OCMock: 9491e4bec59e0b267d52a9184ff5605995e74be8
   PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
 
-PODFILE CHECKSUM: 99ac75a904a7560900a9eec61c273bfb283b6ff4
+PODFILE CHECKSUM: 458aa6777101b96290e6428644bc8c78a54f2daa
 
 COCOAPODS: 1.11.3
