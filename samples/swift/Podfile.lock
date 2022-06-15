@@ -656,7 +656,7 @@ PODS:
     - GoogleUtilities/UserDefaults
   - FirebaseFacebookAuthUI (12.2.0):
     - FBSDKCoreKit_Basics
-    - FBSDKLoginKit (< 13.0, >= 11.0)
+    - FBSDKLoginKit (< 14.0, >= 11.0)
     - FirebaseAuth
     - FirebaseAuthUI
     - FirebaseCore
@@ -916,7 +916,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 6308b36dbc7725204a32f1ac638e730a9aabf5bc
   FirebaseDatabaseUI: 0337a4ccbeaddd81b18f99979e4a510ab1473efa
   FirebaseEmailAuthUI: 9d6de47961cd1fa9be0003ad3cc4763fdd20560f
-  FirebaseFacebookAuthUI: ff51c10537c7a617961e8dcb60ea70a43ddb56c9
+  FirebaseFacebookAuthUI: 0730519b789c8f989057841650935698c9bd197d
   FirebaseFirestore: 20b1df7d65058b038745ecebb60f741a10e40a6f
   FirebaseFirestoreUI: 6d4a0f183573a38b90c1c37577f0ba2cd12d165d
   FirebaseGoogleAuthUI: 978ae1845a5c9111fdf4c2e05708edb0a224bed3
