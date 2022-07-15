@@ -1,10 +1,10 @@
 PODS:
-  - Firebase/CoreOnly (9.2.0):
-    - FirebaseCore (= 9.2.0)
-  - Firebase/Database (9.2.0):
+  - Firebase/CoreOnly (9.3.0):
+    - FirebaseCore (= 9.3.0)
+  - Firebase/Database (9.3.0):
     - Firebase/CoreOnly
-    - FirebaseDatabase (~> 9.2.0)
-  - FirebaseCore (9.2.0):
+    - FirebaseDatabase (~> 9.3.0)
+  - FirebaseCore (9.3.0):
     - FirebaseCoreDiagnostics (~> 9.0)
     - FirebaseCoreInternal (~> 9.0)
     - GoogleUtilities/Environment (~> 7.7)
@@ -16,7 +16,7 @@ PODS:
     - nanopb (< 2.30910.0, >= 2.30908.0)
   - FirebaseCoreInternal (9.3.0):
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
-  - FirebaseDatabase (9.2.0):
+  - FirebaseDatabase (9.3.0):
     - FirebaseCore (~> 9.0)
     - leveldb-library (~> 1.22)
   - GoogleDataTransport (9.1.4):
@@ -53,11 +53,11 @@ SPEC REPOS:
     - PromisesObjC
 
 SPEC CHECKSUMS:
-  Firebase: 4ba896cb8e5105d4b9e247e1c1b6222b548df55a
-  FirebaseCore: 0e27f2a15d8f7b7ef11e7d93e23b1cbab55d748c
+  Firebase: ef75abb1cdbc746d5a38f4e26c422c807b189b8c
+  FirebaseCore: c088995ece701a021a48a1348ea0174877de2a6a
   FirebaseCoreDiagnostics: 060eb57cc56dfaf40b1b1b5874a5c17c41ce79f8
   FirebaseCoreInternal: 635d1c9a612a6502b6377a0c92af83758076ffff
-  FirebaseDatabase: 0a888e4bcaa8edc43701597daab336201fb47cc9
+  FirebaseDatabase: 92350185966ddd283842aa9ca07e188691f3b8ad
   GoogleDataTransport: 5fffe35792f8b96ec8d6775f5eccd83c998d5a3b
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
