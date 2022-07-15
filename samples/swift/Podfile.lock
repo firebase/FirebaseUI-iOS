@@ -644,7 +644,7 @@ PODS:
     - FirebaseCore (~> 9.0)
   - FirebaseCoreInternal (9.3.0):
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
-  - FirebaseDatabase (9.2.0):
+  - FirebaseDatabase (9.3.0):
     - FirebaseCore (~> 9.0)
     - leveldb-library (~> 1.22)
   - FirebaseDatabaseUI (12.2.0):
@@ -686,13 +686,13 @@ PODS:
   - FirebasePhoneAuthUI (12.2.0):
     - FirebaseAuth
     - FirebaseAuthUI
-  - FirebaseStorage (9.2.0):
+  - FirebaseStorage (9.3.0):
     - FirebaseAppCheckInterop (~> 9.0)
     - FirebaseAuthInterop (~> 9.0)
     - FirebaseCore (~> 9.0)
     - FirebaseCoreExtension (~> 9.0)
     - FirebaseStorageInternal (~> 9.0)
-  - FirebaseStorageInternal (9.2.0):
+  - FirebaseStorageInternal (9.3.0):
     - FirebaseCore (~> 9.0)
     - GTMSessionFetcher/Core (< 3.0, >= 1.7)
   - FirebaseStorageUI (12.2.0):
@@ -913,7 +913,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 060eb57cc56dfaf40b1b1b5874a5c17c41ce79f8
   FirebaseCoreExtension: 900b065a4970c31ce8de4e966cee910188e3a07b
   FirebaseCoreInternal: 635d1c9a612a6502b6377a0c92af83758076ffff
-  FirebaseDatabase: 0a888e4bcaa8edc43701597daab336201fb47cc9
+  FirebaseDatabase: 92350185966ddd283842aa9ca07e188691f3b8ad
   FirebaseDatabaseUI: 0337a4ccbeaddd81b18f99979e4a510ab1473efa
   FirebaseEmailAuthUI: 9d6de47961cd1fa9be0003ad3cc4763fdd20560f
   FirebaseFacebookAuthUI: 0730519b789c8f989057841650935698c9bd197d
@@ -922,8 +922,8 @@ SPEC CHECKSUMS:
   FirebaseGoogleAuthUI: 978ae1845a5c9111fdf4c2e05708edb0a224bed3
   FirebaseOAuthUI: 4cb09dfdf3164e664e5381cc6beec9d600205790
   FirebasePhoneAuthUI: c6207588f5c0def216ad4c73b2e312dd1fe529f8
-  FirebaseStorage: b47b4a04062ab07911063571241c103a8a2a2332
-  FirebaseStorageInternal: 50c963664bc73739b68eb2d8427c91de5168dbcf
+  FirebaseStorage: 1414d27e15fa04f6350ef6602accef0e951c8bca
+  FirebaseStorageInternal: f1a6d64cace780580d2b8ffa0a0c8cf3c376f3f8
   FirebaseStorageUI: 952bb91b93ae0ee00d0033af011c918606c35d37
   FirebaseUI: 33ee19f70792fae68bee5cbbbf93733baa2cc7fa
   GoogleDataTransport: 5fffe35792f8b96ec8d6775f5eccd83c998d5a3b
