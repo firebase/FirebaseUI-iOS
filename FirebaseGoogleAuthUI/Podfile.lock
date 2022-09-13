@@ -1,9 +1,9 @@
 PODS:
-  - AppAuth (1.5.0):
-    - AppAuth/Core (= 1.5.0)
-    - AppAuth/ExternalUserAgent (= 1.5.0)
-  - AppAuth/Core (1.5.0)
-  - AppAuth/ExternalUserAgent (1.5.0):
+  - AppAuth (1.6.0):
+    - AppAuth/Core (= 1.6.0)
+    - AppAuth/ExternalUserAgent (= 1.6.0)
+  - AppAuth/Core (1.6.0)
+  - AppAuth/ExternalUserAgent (1.6.0):
     - AppAuth/Core
   - FirebaseAuth (9.5.0):
     - FirebaseCore (~> 9.0)
@@ -86,7 +86,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
+  AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   FirebaseAuth: 741918f1fa62ed23246a509279f91d42d79a713f
   FirebaseAuthUI: 9381cd32c4efcaf3550f4a95dd176fc73da253ee
   FirebaseCore: 25c0400b670fd1e2f2104349cd3b5dcce8d9418f
