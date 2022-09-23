@@ -608,14 +608,14 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
-  - FBAEMKit (12.3.2):
-    - FBSDKCoreKit_Basics (= 12.3.2)
-  - FBSDKCoreKit (12.3.2):
-    - FBAEMKit (= 12.3.2)
-    - FBSDKCoreKit_Basics (= 12.3.2)
-  - FBSDKCoreKit_Basics (12.3.2)
-  - FBSDKLoginKit (12.3.2):
-    - FBSDKCoreKit (= 12.3.2)
+  - FBAEMKit (14.1.0):
+    - FBSDKCoreKit_Basics (= 14.1.0)
+  - FBSDKCoreKit (14.1.0):
+    - FBAEMKit (= 14.1.0)
+    - FBSDKCoreKit_Basics (= 14.1.0)
+  - FBSDKCoreKit_Basics (14.1.0)
+  - FBSDKLoginKit (14.1.0):
+    - FBSDKCoreKit (= 14.1.0)
   - FirebaseAnonymousAuthUI (12.2.0):
     - FirebaseAuth (< 10.0, >= 8.0)
     - FirebaseAuthUI
@@ -656,7 +656,7 @@ PODS:
     - GoogleUtilities/UserDefaults
   - FirebaseFacebookAuthUI (12.2.0):
     - FBSDKCoreKit_Basics
-    - FBSDKLoginKit (< 14.0, >= 11.0)
+    - FBSDKLoginKit (< 15.0, >= 11.0)
     - FirebaseAuth
     - FirebaseAuthUI
     - FirebaseCore
@@ -900,10 +900,10 @@ SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
   AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  FBAEMKit: 955ca52eba8219c20f90774e8c6ff8bc7b3192a3
-  FBSDKCoreKit: 678f64eda3f0ff25c189c2ebbfe87b1d96a85a6d
-  FBSDKCoreKit_Basics: 6bee7c1f0932432901781203fa5e587ec5099148
-  FBSDKLoginKit: 56d55e23fe66a6db045826190b0b4dbc0e1ca0a0
+  FBAEMKit: a899515e45476027f73aef377b5cffadcd56ca3a
+  FBSDKCoreKit: 24f8bc8d3b5b2a8c5c656a1329492a12e8efa792
+  FBSDKCoreKit_Basics: 6e578c9bdc7aa1365dbbbde633c9ebb536bcaa98
+  FBSDKLoginKit: 787de205d524c3a4b17d527916f1d066e4361660
   FirebaseAnonymousAuthUI: d6e14b70ac187e2d99d95d1c0aa25a83cf7fabb6
   FirebaseAppCheckInterop: d5ecda0c09f8069406643d6e0fa12c09d1b736e3
   FirebaseAuth: e4a5d3c36e778e41141b91cc861103a441d80bcc
@@ -916,7 +916,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 3de19e533a73d45e25917b46aafe1dd344ec8119
   FirebaseDatabaseUI: 0337a4ccbeaddd81b18f99979e4a510ab1473efa
   FirebaseEmailAuthUI: 9d6de47961cd1fa9be0003ad3cc4763fdd20560f
-  FirebaseFacebookAuthUI: 0730519b789c8f989057841650935698c9bd197d
+  FirebaseFacebookAuthUI: fcc221df1ea4086a0db2a34a8689510a0769d171
   FirebaseFirestore: c09ce6d050745a45fb75ebd901005ed3279c3caf
   FirebaseFirestoreUI: 6d4a0f183573a38b90c1c37577f0ba2cd12d165d
   FirebaseGoogleAuthUI: 978ae1845a5c9111fdf4c2e05708edb0a224bed3
@@ -939,6 +939,6 @@ SPEC CHECKSUMS:
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   SDWebImage: af5bbffef2cde09f148d826f9733dcde1a9414cd
 
-PODFILE CHECKSUM: 50c55b4b9231c6141172c8e2aba7f1624a881dd7
+PODFILE CHECKSUM: 2c24841f482dcea2f8eb8b3a4c3bfeda6423a0b3
 
 COCOAPODS: 1.11.3
