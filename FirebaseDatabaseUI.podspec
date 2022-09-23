@@ -18,6 +18,6 @@ Pod::Spec.new do |s|
 
   s.public_header_files = 'FirebaseDatabaseUI/Sources/Public/FirebaseDatabaseUI/*.h'
   s.source_files = 'FirebaseDatabaseUI/Sources/**/*.{h,m}'
-  s.dependency 'FirebaseDatabase', '>= 8.0', '< 10.0'
+  s.dependency 'FirebaseDatabase', '>= 8.0', '< 11.0'
 
 end
