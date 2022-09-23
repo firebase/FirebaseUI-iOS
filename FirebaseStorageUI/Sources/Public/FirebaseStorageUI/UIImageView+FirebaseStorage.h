@@ -19,7 +19,7 @@
 #if __has_include(<FirebaseStorage/FirebaseStorage.h>)
   // Firebase 8.x
   #import <FirebaseStorage/FirebaseStorage.h>
-#elif __has_include(<FirebaseStorage/FirebaseStorage-Swift.h>)
+#elif (__has_include(<FirebaseStorage/FirebaseStorage-Swift.h>) && defined(COCOAPODS))
   // Firebase 9.0+
   #import <FirebaseStorage/FirebaseStorage-Swift.h>
 #else
