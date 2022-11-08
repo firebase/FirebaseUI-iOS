@@ -620,25 +620,25 @@ PODS:
     - FirebaseAuth (< 11.0, >= 8.0)
     - FirebaseAuthUI
     - FirebaseCore
-  - FirebaseAppCheckInterop (10.0.0)
-  - FirebaseAuth (10.0.0):
+  - FirebaseAppCheckInterop (10.1.0)
+  - FirebaseAuth (10.1.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/Environment (~> 7.8)
     - GTMSessionFetcher/Core (~> 2.1)
-  - FirebaseAuthInterop (10.0.0)
+  - FirebaseAuthInterop (10.1.0)
   - FirebaseAuthUI (12.3.0):
     - FirebaseAuth (< 11.0, >= 8.0)
     - FirebaseCore
-  - FirebaseCore (10.0.0):
+  - FirebaseCore (10.1.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/Logger (~> 7.8)
-  - FirebaseCoreExtension (10.0.0):
+  - FirebaseCoreExtension (10.1.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseCoreInternal (10.0.0):
+  - FirebaseCoreInternal (10.1.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseDatabase (10.0.0):
+  - FirebaseDatabase (10.1.0):
     - FirebaseCore (~> 10.0)
     - leveldb-library (~> 1.22)
   - FirebaseDatabaseUI (12.3.0):
@@ -654,7 +654,7 @@ PODS:
     - FirebaseAuth
     - FirebaseAuthUI
     - FirebaseCore
-  - FirebaseFirestore (10.0.0):
+  - FirebaseFirestore (10.1.0):
     - abseil/algorithm (~> 1.20211102.0)
     - abseil/base (~> 1.20211102.0)
     - abseil/container/flat_hash_map (~> 1.20211102.0)
@@ -680,7 +680,7 @@ PODS:
   - FirebasePhoneAuthUI (12.3.0):
     - FirebaseAuth
     - FirebaseAuthUI
-  - FirebaseStorage (10.0.0):
+  - FirebaseStorage (10.1.0):
     - FirebaseAppCheckInterop (~> 10.0)
     - FirebaseAuthInterop (~> 10.0)
     - FirebaseCore (~> 10.0)
@@ -795,7 +795,7 @@ PODS:
   - GTMAppAuth (1.3.1):
     - AppAuth/Core (~> 1.6)
     - GTMSessionFetcher/Core (< 3.0, >= 1.5)
-  - GTMSessionFetcher/Core (2.1.0)
+  - GTMSessionFetcher/Core (2.2.0)
   - leveldb-library (1.22.1)
   - Libuv-gRPC (0.0.10):
     - Libuv-gRPC/Implementation (= 0.0.10)
@@ -809,9 +809,9 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.1.1)
-  - SDWebImage (5.13.4):
-    - SDWebImage/Core (= 5.13.4)
-  - SDWebImage/Core (5.13.4)
+  - SDWebImage (5.13.5):
+    - SDWebImage/Core (= 5.13.5)
+  - SDWebImage/Core (5.13.5)
 
 DEPENDENCIES:
   - FirebaseAnonymousAuthUI (from `../../`)
@@ -889,23 +889,23 @@ SPEC CHECKSUMS:
   FBSDKCoreKit_Basics: 6e578c9bdc7aa1365dbbbde633c9ebb536bcaa98
   FBSDKLoginKit: 787de205d524c3a4b17d527916f1d066e4361660
   FirebaseAnonymousAuthUI: 93be34bc7a640cc89ccdb1289916179ac6d5eaf4
-  FirebaseAppCheckInterop: 9a7af9d0a4d9197265cda30194f3644e8aea24f9
-  FirebaseAuth: 493382cf533cc45e2862b00e9aa4cfe4c98daf71
-  FirebaseAuthInterop: c342679f45bee2a665a3b9148a55fcdb10df8c66
+  FirebaseAppCheckInterop: 53eec3c354a95f8fe6ff947dd9518ea17f624914
+  FirebaseAuth: 19a85b8a42e7c1104a2ffa6987c748daa79a5e64
+  FirebaseAuthInterop: 15b2c717321d5e46a60562e388c4d1b039ea7e28
   FirebaseAuthUI: 9fa83d7dd7bad0f0eb20a9682f7e649c98e8f644
-  FirebaseCore: 97f48a3a567a72b8d4daa0f03c3aadb78df4e995
-  FirebaseCoreExtension: 449595a035812f16314ca88cebf959e3bb77dd67
-  FirebaseCoreInternal: 5eb3960335da5ea30115d57d39db6988c4ad06f3
-  FirebaseDatabase: b210f8a811d6eb80dc565d9570e8486af06e331b
+  FirebaseCore: 55e7ae35991ccca4db03ff8d8df6ed5f17a3e4c7
+  FirebaseCoreExtension: 69b966c399abc4ca6dc75006ab87160f81512725
+  FirebaseCoreInternal: 96d75228e10fd369564da51bd898414eb0f54df5
+  FirebaseDatabase: 2dad4f291390ace067f46f7988600d3b46764b4e
   FirebaseDatabaseUI: 2549add5626d4cbfe6c038aeb6ed29d8a1402452
   FirebaseEmailAuthUI: 93c49123133a5ff934e05d15c51462ed0f12ee0a
   FirebaseFacebookAuthUI: 2ed58e670fbf1a8203c81ffc3a73a8739f7ce25c
-  FirebaseFirestore: 5007583f3db2129de8e87f18ee63f4c86f07e7a3
+  FirebaseFirestore: d482e5e0f95dba8ef5d499a7efa87ba2f56ef0c0
   FirebaseFirestoreUI: 626383a5a291b4c24851957b893f0e384177bb65
   FirebaseGoogleAuthUI: 07addbda8ded46089a08681bf101c424eca79337
   FirebaseOAuthUI: 7df89aca072aaba79a63f8cabb0183a2e818c3d3
   FirebasePhoneAuthUI: 75e26e892ab6136003311d89e9bda31f54f5363f
-  FirebaseStorage: 8b0b0630e11b9f3e4a479a26cfccb70ec790ec50
+  FirebaseStorage: 132c10c4d2f8ed8afbfa918eb35d19a87f383d59
   FirebaseStorageUI: e395358d689cd64b967b2402939ee0f503de63b5
   FirebaseUI: e9a2dd42f5b593cd8b6e64c11d30ded38f30e48c
   GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
@@ -913,12 +913,12 @@ SPEC CHECKSUMS:
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
   GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
-  GTMSessionFetcher: ffbb25ec00ebcb5201adab0a56d808f6f1902d9f
+  GTMSessionFetcher: d62ffccea5108bb9e7762ee121ae63bbdd2c6303
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
-  SDWebImage: e5cc87bf736e60f49592f307bdf9e157189298a3
+  SDWebImage: 23d714cd599354ee7906dbae26dff89b421c4370
 
 PODFILE CHECKSUM: 2c24841f482dcea2f8eb8b3a4c3bfeda6423a0b3
 
