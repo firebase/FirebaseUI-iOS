@@ -40,7 +40,7 @@ PODS:
   - "GoogleUtilities/NSData+zlib (7.8.0)"
   - GoogleUtilities/Reachability (7.8.0):
     - GoogleUtilities/Logger
-  - GTMSessionFetcher/Core (2.1.0)
+  - GTMSessionFetcher/Core (2.2.0)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -75,7 +75,7 @@ SPEC CHECKSUMS:
   FirebaseCoreInternal: bca76517fe1ed381e989f5e7d8abb0da8d85bed3
   GoogleDataTransport: 1c8145da7117bd68bbbed00cf304edb6a24de00f
   GoogleUtilities: 1d20a6ad97ef46f67bbdec158ce00563a671ebb7
-  GTMSessionFetcher: ffbb25ec00ebcb5201adab0a56d808f6f1902d9f
+  GTMSessionFetcher: d62ffccea5108bb9e7762ee121ae63bbdd2c6303
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   OCMock: 9491e4bec59e0b267d52a9184ff5605995e74be8
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
