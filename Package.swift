@@ -85,11 +85,6 @@ let package = Package(
       from: "7.4.1"
     ),
     .package(
-      name: "GTMSessionFetcher",
-      url: "https://github.com/google/gtm-session-fetcher.git",
-      "1.4.0" ..< "4.0.0"
-    ),
-    .package(
       name: "SDWebImage",
       url: "https://github.com/SDWebImage/SDWebImage.git",
       from: "5.0.0"
@@ -237,7 +232,6 @@ let package = Package(
       dependencies: [
         .product(name: "FirebaseStorage", package: "Firebase"),
         .product(name: "SDWebImage", package: "SDWebImage"),
-        .product(name: "GTMSessionFetcher", package: "GTMSessionFetcher"),
       ],
       path: "FirebaseStorageUI/Sources",
       exclude: ["Info.plist"],
