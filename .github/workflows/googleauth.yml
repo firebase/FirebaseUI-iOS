@@ -29,7 +29,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@latest
+        uses: actions/checkout@main
       - name: Setup
         run: |
           cd FirebaseGoogleAuthUI
@@ -46,7 +46,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@latest
+        uses: actions/checkout@main
       - name: List
         run: |
           xcodebuild -list
@@ -59,7 +59,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@latest
+        uses: actions/checkout@main
       - name: Setup
         run: gem install bundler; bundle install
       - name: Build
