@@ -12,7 +12,7 @@ PODS:
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/Environment (~> 7.8)
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
-  - FirebaseAuthUI (12.3.0):
+  - FirebaseAuthUI (13.0.0):
     - FirebaseAuth (< 11.0, >= 8.0)
     - FirebaseCore
   - FirebaseCore (10.7.0):
@@ -70,7 +70,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit_Basics: 92d6b26c0bed30ab09bbdd96dccaa26e6c9978d1
   FBSDKLoginKit: 4e275d30cf90e92bdf3a7c82857a8642abf23037
   FirebaseAuth: dd64c01631df724b09f33e584625775c52f7d71f
-  FirebaseAuthUI: 9fa83d7dd7bad0f0eb20a9682f7e649c98e8f644
+  FirebaseAuthUI: 870e22bebf5d9844cab1ded173c68e06041f90c8
   FirebaseCore: e317665b9d744727a97e623edbbed009320afdd7
   FirebaseCoreInternal: 8845798510aae74703467480f71ac613788d0696
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
@@ -78,6 +78,6 @@ SPEC CHECKSUMS:
   OCMock: 9491e4bec59e0b267d52a9184ff5605995e74be8
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
 
-PODFILE CHECKSUM: b4d60bac6e2f77e8a5e989ee6de7d1c4b6744e8a
+PODFILE CHECKSUM: 9df48341b04c970a1bc368a64500510457c006a9
 
 COCOAPODS: 1.12.0

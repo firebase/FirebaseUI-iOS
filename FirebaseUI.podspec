@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseUI'
-  s.version      = '12.3.0'
+  s.version      = '13.0.0'
   s.summary      = 'UI binding libraries for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'LICENSE' }
   s.source       = { :git => 'https://github.com/firebase/FirebaseUI-iOS.git', :tag => 'v' + s.version.to_s}
   s.author       = 'Firebase'
   s.platform = :ios
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
   s.ios.framework = 'UIKit'
   s.requires_arc = true
   s.public_header_files = 'FirebaseUI.h'
@@ -19,43 +19,43 @@ Pod::Spec.new do |s|
   }
 
   s.subspec 'Database' do |database|
-    database.dependency 'FirebaseDatabaseUI', '~> 12.0'
+    database.dependency 'FirebaseDatabaseUI', '~> 13.0'
   end
 
   s.subspec 'Firestore' do |firestore|
-    firestore.dependency 'FirebaseFirestoreUI', '~> 12.0'
+    firestore.dependency 'FirebaseFirestoreUI', '~> 13.0'
   end
 
   s.subspec 'Storage' do |storage|
-    storage.dependency 'FirebaseStorageUI', '~> 12.0'
+    storage.dependency 'FirebaseStorageUI', '~> 13.0'
   end
 
   s.subspec 'Auth' do |auth|
-    auth.dependency 'FirebaseAuthUI', '~> 12.0'
+    auth.dependency 'FirebaseAuthUI', '~> 13.0'
   end
 
   s.subspec 'Anonymous' do |anonymous|
-    anonymous.dependency 'FirebaseAnonymousAuthUI', '~> 12.0'
+    anonymous.dependency 'FirebaseAnonymousAuthUI', '~> 13.0'
   end
 
   s.subspec 'Email' do |email|
-    email.dependency 'FirebaseEmailAuthUI', '~> 12.0'
+    email.dependency 'FirebaseEmailAuthUI', '~> 13.0'
   end
 
   s.subspec 'Facebook' do |facebook|
-    facebook.dependency 'FirebaseFacebookAuthUI', '~> 12.0'
+    facebook.dependency 'FirebaseFacebookAuthUI', '~> 13.0'
   end
 
   s.subspec 'Google' do |google|
-    google.dependency 'FirebaseGoogleAuthUI', '~> 12.0'
+    google.dependency 'FirebaseGoogleAuthUI', '~> 13.0'
   end
 
   s.subspec 'OAuth' do |oauth|
-    oauth.dependency 'FirebaseOAuthUI', '~> 12.0'
+    oauth.dependency 'FirebaseOAuthUI', '~> 13.0'
   end
 
   s.subspec 'Phone' do |phone|
-    phone.dependency 'FirebasePhoneAuthUI', '~> 12.0'
+    phone.dependency 'FirebasePhoneAuthUI', '~> 13.0'
   end
 
 end
