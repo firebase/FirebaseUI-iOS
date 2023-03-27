@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   }
   s.swift_version = '5.3'
 
-  s.platform = :ios, '10.0'
+  s.platform = :ios, '12.0'
   s.public_header_files = 'FirebaseFacebookAuthUI/Sources/Public/FirebaseFacebookAuthUI/*.h'
   s.source_files = 'FirebaseFacebookAuthUI/Sources/**/*.{h,m}'
   s.dependency 'FirebaseAuth'
