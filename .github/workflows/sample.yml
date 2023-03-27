@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@latest
       - name: Setup
         run: |
           cd samples/swift
@@ -48,7 +48,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@latest
       - name: Setup
         run: |
           cp samples/GoogleService-Info-dummy.plist samples/swift/GoogleService-Info.plist
