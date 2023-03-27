@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseOAuthUI'
-  s.version      = '12.3.0'
+  s.version      = '13.0.0'
   s.summary      = 'A collection of OAuth providers for FirebaseAuthUI.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'LICENSE' }
   s.source       = { :git => 'https://github.com/firebase/FirebaseUI-iOS.git', :tag => 'v' + s.version.to_s}
   s.author       = 'Firebase'
   s.platform = :ios
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
   s.ios.framework = 'UIKit'
   s.requires_arc = true
   s.cocoapods_version = '>= 1.8.0'

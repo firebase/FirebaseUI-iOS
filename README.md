@@ -47,7 +47,7 @@ pod 'FirebaseUI/Phone', '~> 8.0'
 If you're including FirebaseUI in a Swift project, make sure you also have:
 
 ```ruby
-platform :ios, '10.0'
+platform :ios, '11.0'
 use_frameworks!
 ```
 
