@@ -35,6 +35,13 @@
 
 @implementation FirebaseFacebookAuthUITests
 
++ (void)initialize {
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    [[FBSDKSettings sharedSettings] setAppID:@"0000000"];
+  });
+}
+
 - (void)setUp {
   [super setUp];
 

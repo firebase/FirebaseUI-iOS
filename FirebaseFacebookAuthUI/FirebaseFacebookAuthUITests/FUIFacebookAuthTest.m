@@ -13,33 +13,35 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+
 #import "FUIFacebookAuthTest.h"
+#import <OCMock/OCMock.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-@interface FBSDKLoginManagerTest : FBSDKLoginManager
+@interface FUIFacebookAuthTest ()
 @property(nonatomic) FBSDKLoginManagerLoginResult *result;
 @property(nonatomic) NSError *error;
 @end
 
-@implementation FBSDKLoginManagerTest
-
-- (void)logInWithPermissions:(NSArray *)permissions
-          fromViewController:(UIViewController *)fromViewController
-                     handler:(FBSDKLoginManagerLoginResultBlock)handler {
-  handler(self.result, self.error);
-}
-@end
-
-
 @implementation FUIFacebookAuthTest
 
 - (FBSDKLoginManager *)createLoginManager {
-  return [[FBSDKLoginManagerTest alloc] init];
+  id mock = OCMClassMock([FBSDKLoginManager class]);
+  OCMStub(
+          [mock logInWithPermissions:[OCMArg any]
+                  fromViewController:[OCMArg any]
+                             handler:[OCMArg any]]
+          ).andDo(^(NSInvocation *invocation) {
+            void (^completion)(FBSDKLoginManagerLoginResult *, NSError *);
+            [invocation getArgument:&completion atIndex:4];
+            completion(self.result, self.error);
+          });
+  return mock;
 }
 
 - (void)configureLoginManager:(FBSDKLoginManagerLoginResult *)result withError:(NSError *)error {
-  ((FBSDKLoginManagerTest *)_loginManager).result = result;
-  ((FBSDKLoginManagerTest *)_loginManager).error = error;
+  self.result = result;
+  self.error = error;
 }
 
 @end

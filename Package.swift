@@ -20,7 +20,7 @@ import PackageDescription
 let package = Package(
   name: "FirebaseUI",
   defaultLocalization: "en",
-  platforms: [.iOS(.v11)],
+  platforms: [.iOS(.v12)],
   products: [
     .library(
       name: "FirebaseAnonymousAuthUI",
@@ -67,7 +67,7 @@ let package = Package(
     .package(
       name: "Facebook", 
       url: "https://github.com/facebook/facebook-ios-sdk.git",
-      "11.0.0"..<"15.0.0"
+      "11.0.0"..<"16.0.0"
     ),
     .package(
       name: "Firebase", 
