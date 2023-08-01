@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -791,6 +791,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKCoreKit\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKCoreKit_Basics\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKLoginKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -848,6 +849,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKCoreKit\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKCoreKit_Basics\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKLoginKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
