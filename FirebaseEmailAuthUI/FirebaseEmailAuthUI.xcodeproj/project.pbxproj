@@ -544,7 +544,7 @@
 					"${PODS_CONFIGURATION_BUILD_DIR}/nanopb",
 					"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseAuthUI",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAppCheckInterop\"",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseEmailAuthUITests;
@@ -574,7 +574,7 @@
 					"${PODS_CONFIGURATION_BUILD_DIR}/nanopb",
 					"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseAuthUI",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAppCheckInterop\"",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseEmailAuthUITests;
