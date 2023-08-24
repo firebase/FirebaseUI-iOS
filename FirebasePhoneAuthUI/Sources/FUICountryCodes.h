@@ -26,6 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *dialCode;
 @property (nonatomic, copy) NSNumber *level;
 
+/** @property defaultCountryCodeInfo
+    @brief Get the default country code info
+    Returns the default country code. Formerly this was set via CTCarrier information, but CTCarrier is now
+    deprecated, so this value must be manually set.
+*/
+@property (nonatomic, copy) FUICountryCodeInfo *defaultCountryCodeInfo;
+
 - (NSString *)countryFlagEmoji;
 
 @end
@@ -54,16 +61,6 @@ NS_ASSUME_NONNULL_BEGIN
     @param countryCode Country codes are in NSString format, and ISO (alpha-2) formatted.
 */
 - (nullable FUICountryCodeInfo *)countryCodeInfoForCode:(NSString *)countryCode;
-
-/** @fn defaultCountryCodeInfo
-    @brief Get the default country code info
-    @detail The default country is retrieved based on the following logic:
-            1. The country code info of user's carrier provider if available.
-            2. The country code info of user's device locale, if available.
-            3. A hard coded coutry code info (US), if available.
-            4. The first available country code info in the instance.
-*/
-- (FUICountryCodeInfo *)defaultCountryCodeInfo;
 
 /** @fn blacklistCountries:
     @brief Remove the set of countries from available country codes.
