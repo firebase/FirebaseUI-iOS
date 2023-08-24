@@ -792,6 +792,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKCoreKit_Basics\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKLoginKit\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAppCheckInterop\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RecaptchaInterop\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -850,6 +851,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKCoreKit_Basics\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCFrameworkIntermediates/FBSDKLoginKit\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAppCheckInterop\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RecaptchaInterop\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
