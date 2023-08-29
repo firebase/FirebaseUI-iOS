@@ -26,18 +26,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *dialCode;
 @property (nonatomic, copy) NSNumber *level;
 
-/** @property defaultCountryCodeInfo
-    @brief Get the default country code info
-    Returns the default country code. Formerly this was set via CTCarrier information, but CTCarrier is now
-    deprecated, so this value must be manually set.
-*/
-@property (nonatomic, copy) FUICountryCodeInfo *defaultCountryCodeInfo;
-
 - (NSString *)countryFlagEmoji;
 
 @end
 
 @interface FUICountryCodes : NSObject
+
+/** @property defaultCountryCodeInfo
+    @brief Get the default country code info
+    The default country code. Formerly this was set via CTCarrier information, but CTCarrier is now
+    deprecated, so this value must be manually set. Defaults to the country code for the United States.
+*/
+@property (nonatomic, copy) FUICountryCodeInfo *defaultCountryCodeInfo;
 
 /** @fn count:
     @brief Return the number of available country codes.

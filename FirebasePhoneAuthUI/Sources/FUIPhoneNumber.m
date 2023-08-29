@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
   }
   if (!rawPhoneNumber) {
     rawPhoneNumber = normalizedPhoneNumber;
-    countryCode = [countryCodes defaultCountryCodeInfo];
+    countryCode = countryCodes.defaultCountryCodeInfo;
   }
   return [self initWithRawPhoneNumber:rawPhoneNumber countryCode:countryCode];
 }

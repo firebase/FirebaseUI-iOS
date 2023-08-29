@@ -117,6 +117,7 @@ NSString* const kFUIDefaultCountryCode = @"US";
   if (_defaultCountryCodeInfo == nil) {
     return [self countryCodeInfoForCode:kFUIDefaultCountryCode] ?: [self countryCodeInfoAtIndex:0];
   }
+  return _defaultCountryCodeInfo;
 }
 
 - (FUICountryCodeInfo *)countryCodeInfoForPhoneNumber:(NSString *)phoneNumber {
