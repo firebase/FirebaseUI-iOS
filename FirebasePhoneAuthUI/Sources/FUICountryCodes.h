@@ -18,7 +18,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FUICountryCodeInfo : NSObject
+@interface FUICountryCodeInfo : NSObject <NSCopying>
 
 @property (nonatomic, copy) NSString *countryName;
 @property (nonatomic, copy) NSString *localizedCountryName;

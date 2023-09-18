@@ -57,6 +57,31 @@ NSString* const kFUIDefaultCountryCode = @"US";
                                   length:sizeof(bytes)
                                 encoding:NSUTF32LittleEndianStringEncoding];
 }
+
+- (id)copyWithZone:(NSZone *_Nullable)zone {
+  FUICountryCodeInfo *newInfo = [[FUICountryCodeInfo alloc] init];
+  newInfo.countryName = self.countryName;
+  newInfo.localizedCountryName = self.localizedCountryName;
+  newInfo.countryCode = self.countryCode;
+  newInfo.dialCode = self.dialCode;
+  newInfo.level = self.level;
+  return newInfo;
+}
+
+- (BOOL)isEqual:(FUICountryCodeInfo *)object {
+  if (object == self) {
+    return YES;
+  }
+  if (![object isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return object.countryName == self.countryName &&
+      object.localizedCountryName == self.localizedCountryName &&
+      object.countryCode == self.countryCode &&
+      object.dialCode == self.dialCode &&
+      object.level == self.level;
+}
+
 @end
 
 @interface FUICountryCodes ()
