@@ -323,7 +323,9 @@ class FUIAuthViewController: UITableViewController {
               provider = nil
             }
           case Providers.Phone.rawValue:
-            provider = FUIPhoneAuth(authUI: self.authUI!)
+            let phoneAuth = FUIPhoneAuth(authUI: self.authUI!)
+            phoneAuth.defaultCountryCode = "JP"
+            provider = phoneAuth
           default: provider = nil
           }
 

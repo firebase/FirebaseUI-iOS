@@ -113,6 +113,10 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   if (self) {
     self.title = FUIPhoneAuthLocalizedString(kPAStr_EnterPhoneTitle);
     _countryCodes = countryCodes ?: [[FUICountryCodes alloc] init];
+    FUIPhoneAuth *provider = [authUI providerWithID:FIRPhoneAuthProviderID];
+    NSString *defaultCountryCode = provider.defaultCountryCode;
+    _countryCodes.defaultCountryCodeInfo =
+        [_countryCodes countryCodeInfoForCode:defaultCountryCode];
     if (phoneNumber.length) {
       _phoneNumber = [[FUIPhoneNumber alloc] initWithNormalizedPhoneNumber:phoneNumber
                                                               countryCodes:_countryCodes];

@@ -28,6 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, readwrite) FUIButtonAlignment buttonAlignment;
 
+/** @property defaultCountryCode
+    Returns the default country code. If unspecified, this will default to the United States country code.
+    If overwriting the default country code, this value must be set before the phone auth flow is
+    presented.
+*/
+@property (nonatomic, copy, readwrite) NSString *defaultCountryCode;
+
 /** @fn bundle
     @brief Returns the resource bundle required by this class.
  */

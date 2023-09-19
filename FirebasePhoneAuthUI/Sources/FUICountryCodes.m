@@ -57,6 +57,31 @@ NSString* const kFUIDefaultCountryCode = @"US";
                                   length:sizeof(bytes)
                                 encoding:NSUTF32LittleEndianStringEncoding];
 }
+
+- (id)copyWithZone:(NSZone *_Nullable)zone {
+  FUICountryCodeInfo *newInfo = [[FUICountryCodeInfo alloc] init];
+  newInfo.countryName = self.countryName;
+  newInfo.localizedCountryName = self.localizedCountryName;
+  newInfo.countryCode = self.countryCode;
+  newInfo.dialCode = self.dialCode;
+  newInfo.level = self.level;
+  return newInfo;
+}
+
+- (BOOL)isEqual:(FUICountryCodeInfo *)object {
+  if (object == self) {
+    return YES;
+  }
+  if (![object isKindOfClass:[self class]]) {
+    return NO;
+  }
+  return object.countryName == self.countryName &&
+      object.localizedCountryName == self.localizedCountryName &&
+      object.countryCode == self.countryCode &&
+      object.dialCode == self.dialCode &&
+      object.level == self.level;
+}
+
 @end
 
 @interface FUICountryCodes ()
@@ -114,48 +139,10 @@ NSString* const kFUIDefaultCountryCode = @"US";
 }
 
 - (FUICountryCodeInfo *)defaultCountryCodeInfo {
-  // Get the country code based on the information of user's telecommunication carrier provider.
-  CTCarrier *carrier;
-  if (@available(iOS 12, *)) {
-    NSDictionary *carriers =
-        [[[CTTelephonyNetworkInfo alloc] init] serviceSubscriberCellularProviders];
-    // For multi-sim phones, use the current locale to make an educated guess for
-    // which carrier to use.
-    NSString *currentCountryCode = [NSLocale currentLocale].countryCode;
-    for (CTCarrier *provider in carriers.allValues) {
-      if ([provider isKindOfClass:[CTCarrier class]] &&
-          [provider.isoCountryCode isEqualToString:currentCountryCode]) {
-        carrier = provider;
-        break;
-      }
-    }
-
-    // If the carrier is still nil, grab a random carrier from the dictionary.
-    if (carrier == nil) {
-      for (CTCarrier *provider in carriers.allValues) {
-        if ([provider isKindOfClass:[CTCarrier class]]) {
-          carrier = provider;
-          break;
-        }
-      }
-    }
-  } else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    carrier = [[[CTTelephonyNetworkInfo alloc] init] subscriberCellularProvider];
-#pragma clang diagnostic pop
+  if (_defaultCountryCodeInfo == nil) {
+    return [self countryCodeInfoForCode:kFUIDefaultCountryCode] ?: [self countryCodeInfoAtIndex:0];
   }
-  NSString *countryCode = carrier.isoCountryCode ?: [[self class] countryCodeFromDeviceLocale];
-  FUICountryCodeInfo *countryCodeInfo = [self countryCodeInfoForCode:countryCode];
-  // If carrier is not available, get the hard coded default country code.
-  if (!countryCodeInfo) {
-    countryCodeInfo = [self countryCodeInfoForCode:kFUIDefaultCountryCode];
-  }
-  // If the hard coded default country code is not available, get the first available country code.
-  if (!countryCodeInfo) {
-    countryCodeInfo = [self countryCodeInfoAtIndex:0];
-  }
-  return countryCodeInfo;
+  return _defaultCountryCodeInfo;
 }
 
 - (FUICountryCodeInfo *)countryCodeInfoForPhoneNumber:(NSString *)phoneNumber {
