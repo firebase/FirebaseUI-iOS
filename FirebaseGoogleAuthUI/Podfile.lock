@@ -13,7 +13,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.8)
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
     - RecaptchaInterop (~> 100.0)
-  - FirebaseAuthUI (13.0.0):
+  - FirebaseAuthUI (13.1.0):
     - FirebaseAuth (< 11.0, >= 8.0)
     - FirebaseCore
   - FirebaseCore (10.15.0):
@@ -77,7 +77,7 @@ SPEC CHECKSUMS:
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
   FirebaseAppCheckInterop: a8c555b1c2db1d9445e6c3a08a848167ddb7eb51
   FirebaseAuth: a55ec5f7f8a5b1c2dd750235c1bb419bfb642445
-  FirebaseAuthUI: 870e22bebf5d9844cab1ded173c68e06041f90c8
+  FirebaseAuthUI: 9b4de780078d674019a2bfc560bb812f23b45ff1
   FirebaseCore: 2cec518b43635f96afe7ac3a9c513e47558abd2e
   FirebaseCoreInternal: 2f4bee5ed00301b5e56da0849268797a2dd31fb4
   GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
