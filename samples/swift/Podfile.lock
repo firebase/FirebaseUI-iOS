@@ -648,7 +648,7 @@ PODS:
   - FBSDKCoreKit_Basics (16.1.3)
   - FBSDKLoginKit (16.1.3):
     - FBSDKCoreKit (= 16.1.3)
-  - FirebaseAnonymousAuthUI (13.0.0):
+  - FirebaseAnonymousAuthUI (13.1.0):
     - FirebaseAuth (< 11.0, >= 8.0)
     - FirebaseAuthUI
     - FirebaseCore
@@ -661,7 +661,7 @@ PODS:
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
     - RecaptchaInterop (~> 100.0)
   - FirebaseAuthInterop (10.15.0)
-  - FirebaseAuthUI (13.0.0):
+  - FirebaseAuthUI (13.1.0):
     - FirebaseAuth (< 11.0, >= 8.0)
     - FirebaseCore
   - FirebaseCore (10.15.0):
@@ -675,14 +675,14 @@ PODS:
   - FirebaseDatabase (10.15.0):
     - FirebaseCore (~> 10.0)
     - leveldb-library (~> 1.22)
-  - FirebaseDatabaseUI (13.0.0):
+  - FirebaseDatabaseUI (13.1.0):
     - FirebaseDatabase (< 11.0, >= 8.0)
-  - FirebaseEmailAuthUI (13.0.0):
+  - FirebaseEmailAuthUI (13.1.0):
     - FirebaseAuth
     - FirebaseAuthUI
     - FirebaseCore
     - GoogleUtilities/UserDefaults
-  - FirebaseFacebookAuthUI (13.0.0):
+  - FirebaseFacebookAuthUI (13.1.0):
     - FBSDKCoreKit_Basics
     - FBSDKLoginKit (< 17.0, >= 11.0)
     - FirebaseAuth
@@ -701,17 +701,17 @@ PODS:
     - "gRPC-C++ (~> 1.50.1)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseFirestoreUI (13.0.0):
+  - FirebaseFirestoreUI (13.1.0):
     - FirebaseFirestore (< 11.0, >= 8.0)
-  - FirebaseGoogleAuthUI (13.0.0):
+  - FirebaseGoogleAuthUI (13.1.0):
     - FirebaseAuth
     - FirebaseAuthUI
     - FirebaseCore
     - GoogleSignIn (~> 6.0)
-  - FirebaseOAuthUI (13.0.0):
+  - FirebaseOAuthUI (13.1.0):
     - FirebaseAuth (< 11.0, >= 8.0)
     - FirebaseAuthUI (< 14.0, >= 12.0.2)
-  - FirebasePhoneAuthUI (13.0.0):
+  - FirebasePhoneAuthUI (13.1.0):
     - FirebaseAuth
     - FirebaseAuthUI
   - FirebaseStorage (10.15.0):
@@ -720,39 +720,39 @@ PODS:
     - FirebaseCore (~> 10.0)
     - FirebaseCoreExtension (~> 10.0)
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
-  - FirebaseStorageUI (13.0.0):
+  - FirebaseStorageUI (13.1.0):
     - FirebaseStorage (< 11.0, >= 8.0)
     - SDWebImage (~> 5.6)
-  - FirebaseUI (13.0.0):
-    - FirebaseUI/Anonymous (= 13.0.0)
-    - FirebaseUI/Auth (= 13.0.0)
-    - FirebaseUI/Database (= 13.0.0)
-    - FirebaseUI/Email (= 13.0.0)
-    - FirebaseUI/Facebook (= 13.0.0)
-    - FirebaseUI/Firestore (= 13.0.0)
-    - FirebaseUI/Google (= 13.0.0)
-    - FirebaseUI/OAuth (= 13.0.0)
-    - FirebaseUI/Phone (= 13.0.0)
-    - FirebaseUI/Storage (= 13.0.0)
-  - FirebaseUI/Anonymous (13.0.0):
+  - FirebaseUI (13.1.0):
+    - FirebaseUI/Anonymous (= 13.1.0)
+    - FirebaseUI/Auth (= 13.1.0)
+    - FirebaseUI/Database (= 13.1.0)
+    - FirebaseUI/Email (= 13.1.0)
+    - FirebaseUI/Facebook (= 13.1.0)
+    - FirebaseUI/Firestore (= 13.1.0)
+    - FirebaseUI/Google (= 13.1.0)
+    - FirebaseUI/OAuth (= 13.1.0)
+    - FirebaseUI/Phone (= 13.1.0)
+    - FirebaseUI/Storage (= 13.1.0)
+  - FirebaseUI/Anonymous (13.1.0):
     - FirebaseAnonymousAuthUI (~> 13.0)
-  - FirebaseUI/Auth (13.0.0):
+  - FirebaseUI/Auth (13.1.0):
     - FirebaseAuthUI (~> 13.0)
-  - FirebaseUI/Database (13.0.0):
+  - FirebaseUI/Database (13.1.0):
     - FirebaseDatabaseUI (~> 13.0)
-  - FirebaseUI/Email (13.0.0):
+  - FirebaseUI/Email (13.1.0):
     - FirebaseEmailAuthUI (~> 13.0)
-  - FirebaseUI/Facebook (13.0.0):
+  - FirebaseUI/Facebook (13.1.0):
     - FirebaseFacebookAuthUI (~> 13.0)
-  - FirebaseUI/Firestore (13.0.0):
+  - FirebaseUI/Firestore (13.1.0):
     - FirebaseFirestoreUI (~> 13.0)
-  - FirebaseUI/Google (13.0.0):
+  - FirebaseUI/Google (13.1.0):
     - FirebaseGoogleAuthUI (~> 13.0)
-  - FirebaseUI/OAuth (13.0.0):
+  - FirebaseUI/OAuth (13.1.0):
     - FirebaseOAuthUI (~> 13.0)
-  - FirebaseUI/Phone (13.0.0):
+  - FirebaseUI/Phone (13.1.0):
     - FirebasePhoneAuthUI (~> 13.0)
-  - FirebaseUI/Storage (13.0.0):
+  - FirebaseUI/Storage (13.1.0):
     - FirebaseStorageUI (~> 13.0)
   - GoogleSignIn (6.2.4):
     - AppAuth (~> 1.5)
@@ -927,26 +927,26 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 19e2e18b3be578d7a51fed8fdd8c152bef0b9511
   FBSDKCoreKit_Basics: dd9826ce3c9fd9f8cdf8dbbd0ef0a53e6c0c9e7e
   FBSDKLoginKit: c395c63a1a6cf4a8a1e6103fd94b8c46329ee81c
-  FirebaseAnonymousAuthUI: 4d7ae60df6cef88d0fb83f779485b30c3836225c
+  FirebaseAnonymousAuthUI: 03392075a7f79a674b49af1678989ded80e106f2
   FirebaseAppCheckInterop: a8c555b1c2db1d9445e6c3a08a848167ddb7eb51
   FirebaseAuth: a55ec5f7f8a5b1c2dd750235c1bb419bfb642445
   FirebaseAuthInterop: b566e21e2bc5e44a4d44babc56d05a7e5c10493b
-  FirebaseAuthUI: 870e22bebf5d9844cab1ded173c68e06041f90c8
+  FirebaseAuthUI: 9b4de780078d674019a2bfc560bb812f23b45ff1
   FirebaseCore: 2cec518b43635f96afe7ac3a9c513e47558abd2e
   FirebaseCoreExtension: d3f1ea3725fb41f56e8fbfb29eeaff54e7ffb8f6
   FirebaseCoreInternal: 2f4bee5ed00301b5e56da0849268797a2dd31fb4
   FirebaseDatabase: f93f1481c7e9e3d77af960cdff82a408d37693e6
-  FirebaseDatabaseUI: 1a821cb22fcf64c5dc1cb23c49b766cdd109f0a8
-  FirebaseEmailAuthUI: 940ed59d732cef15d5fc69cb326d40eedac2b062
-  FirebaseFacebookAuthUI: 79c7efd265f8f889bb1832c2cd184b41c3209d81
+  FirebaseDatabaseUI: 13f9d60a13ac9e35a4121e1cb20ba69d4de7ed7e
+  FirebaseEmailAuthUI: 548b1b5b557b67b15fd3197d18da29d91a154ef8
+  FirebaseFacebookAuthUI: 2f10fb7eb4ca4e507e266dc65b544dbc548e2238
   FirebaseFirestore: b4c0eaaf24efda5732ec21d9e6c788d083118ca6
-  FirebaseFirestoreUI: 41d689c1dfc497e39dc0479f2a7c4007a4bc5de1
-  FirebaseGoogleAuthUI: 5ee55f2b430cf8c4ec15b359a34bc534c71051d3
-  FirebaseOAuthUI: 367cc8ce062fefbe6b362801f966da98d056f2d7
-  FirebasePhoneAuthUI: 17442d23a3aa1dd7c4b274b01e66f584733a1957
+  FirebaseFirestoreUI: 98ddae8daaea34a3c8bc0a51e4f5c104b997f8b8
+  FirebaseGoogleAuthUI: 420e5b1c10f13a47c18579303d93275842f1a8a0
+  FirebaseOAuthUI: 5f19522e97d992841163d89a0b44afe315674020
+  FirebasePhoneAuthUI: 4e32b332ba0484a0b6cf8246c93c23a24f9dbcad
   FirebaseStorage: 1d4be239ea32fb3c0f3680a6f2b706d6cabe37f2
-  FirebaseStorageUI: 3c89304877d2f838c2276c4ad33ac7d93a37377a
-  FirebaseUI: 2453fbe76553b738ae3642eb12bf2891c12485ea
+  FirebaseStorageUI: 5db14fc4c251fdbe3b706eb1a9dddc55bc51b414
+  FirebaseUI: d3e0d3f81f5c464554945195a6133a3ab905b6a7
   GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
   "gRPC-C++": 0968bace703459fd3e5dcb0b2bed4c573dbff046
