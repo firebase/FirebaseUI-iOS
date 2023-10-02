@@ -28,9 +28,9 @@ PODS:
   - GTMSessionFetcher/Core (3.1.1)
   - OCMock (3.9.1)
   - PromisesObjC (2.3.1)
-  - SDWebImage (5.18.1):
-    - SDWebImage/Core (= 5.18.1)
-  - SDWebImage/Core (5.18.1)
+  - SDWebImage (5.18.2):
+    - SDWebImage/Core (= 5.18.2)
+  - SDWebImage/Core (5.18.2)
 
 DEPENDENCIES:
   - Firebase/Storage
@@ -64,8 +64,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
   OCMock: 9491e4bec59e0b267d52a9184ff5605995e74be8
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
-  SDWebImage: ebdbcebc7933a45226d9313bd0118bc052ad458b
+  SDWebImage: c0de394d7cf7f9838aed1fd6bb6037654a4572e4
 
 PODFILE CHECKSUM: bce22216a2463ed443858b6d49c267974dfb0daa
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.13.0
