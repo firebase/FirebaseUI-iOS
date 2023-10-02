@@ -640,14 +640,14 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
-  - FBAEMKit (16.1.3):
-    - FBSDKCoreKit_Basics (= 16.1.3)
-  - FBSDKCoreKit (16.1.3):
-    - FBAEMKit (= 16.1.3)
-    - FBSDKCoreKit_Basics (= 16.1.3)
-  - FBSDKCoreKit_Basics (16.1.3)
-  - FBSDKLoginKit (16.1.3):
-    - FBSDKCoreKit (= 16.1.3)
+  - FBAEMKit (16.2.0):
+    - FBSDKCoreKit_Basics (= 16.2.0)
+  - FBSDKCoreKit (16.2.0):
+    - FBAEMKit (= 16.2.0)
+    - FBSDKCoreKit_Basics (= 16.2.0)
+  - FBSDKCoreKit_Basics (16.2.0)
+  - FBSDKLoginKit (16.2.0):
+    - FBSDKCoreKit (= 16.2.0)
   - FirebaseAnonymousAuthUI (13.1.0):
     - FirebaseAuth (< 11.0, >= 8.0)
     - FirebaseAuthUI
@@ -848,9 +848,9 @@ PODS:
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.3.1)
   - RecaptchaInterop (100.0.0)
-  - SDWebImage (5.18.1):
-    - SDWebImage/Core (= 5.18.1)
-  - SDWebImage/Core (5.18.1)
+  - SDWebImage (5.18.2):
+    - SDWebImage/Core (= 5.18.2)
+  - SDWebImage/Core (5.18.2)
 
 DEPENDENCIES:
   - FirebaseAnonymousAuthUI (from `../../`)
@@ -923,10 +923,10 @@ SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  FBAEMKit: af2972f39bb0f3f7c45998f435b007833c32ffb2
-  FBSDKCoreKit: 19e2e18b3be578d7a51fed8fdd8c152bef0b9511
-  FBSDKCoreKit_Basics: dd9826ce3c9fd9f8cdf8dbbd0ef0a53e6c0c9e7e
-  FBSDKLoginKit: c395c63a1a6cf4a8a1e6103fd94b8c46329ee81c
+  FBAEMKit: 5facf4292bff062963f563d68fd5c0cdd6c90d63
+  FBSDKCoreKit: f94e107ae84a6f4c0d9edfd06ed989b084bfa5bb
+  FBSDKCoreKit_Basics: 8123411ba15df07f9a8da760630f4cdfeeaea6a7
+  FBSDKLoginKit: ae454ceaeb9ee753caf78242bdad1b5226968358
   FirebaseAnonymousAuthUI: 03392075a7f79a674b49af1678989ded80e106f2
   FirebaseAppCheckInterop: a8c555b1c2db1d9445e6c3a08a848167ddb7eb51
   FirebaseAuth: a55ec5f7f8a5b1c2dd750235c1bb419bfb642445
@@ -957,8 +957,8 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  SDWebImage: ebdbcebc7933a45226d9313bd0118bc052ad458b
+  SDWebImage: c0de394d7cf7f9838aed1fd6bb6037654a4572e4
 
 PODFILE CHECKSUM: 2c24841f482dcea2f8eb8b3a4c3bfeda6423a0b3
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.13.0
