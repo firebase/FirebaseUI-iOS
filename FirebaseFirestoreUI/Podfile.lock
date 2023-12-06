@@ -634,18 +634,26 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
-  - Firebase/CoreOnly (10.15.0):
-    - FirebaseCore (= 10.15.0)
-  - Firebase/Firestore (10.15.0):
+  - Firebase/CoreOnly (10.19.0):
+    - FirebaseCore (= 10.19.0)
+  - Firebase/Firestore (10.19.0):
     - Firebase/CoreOnly
-    - FirebaseFirestore (~> 10.15.0)
-  - FirebaseCore (10.15.0):
+    - FirebaseFirestore (~> 10.19.0)
+  - FirebaseAppCheckInterop (10.19.0)
+  - FirebaseCore (10.19.0):
     - FirebaseCoreInternal (~> 10.0)
-    - GoogleUtilities/Environment (~> 7.8)
-    - GoogleUtilities/Logger (~> 7.8)
-  - FirebaseCoreInternal (10.15.0):
+    - GoogleUtilities/Environment (~> 7.12)
+    - GoogleUtilities/Logger (~> 7.12)
+  - FirebaseCoreExtension (10.19.0):
+    - FirebaseCore (~> 10.0)
+  - FirebaseCoreInternal (10.19.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseFirestore (10.15.0):
+  - FirebaseFirestore (10.19.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseCoreExtension (~> 10.0)
+    - FirebaseFirestoreInternal (~> 10.17)
+    - FirebaseSharedSwift (~> 10.0)
+  - FirebaseFirestoreInternal (10.19.0):
     - abseil/algorithm (~> 1.20220623.0)
     - abseil/base (~> 1.20220623.0)
     - abseil/container/flat_hash_map (~> 1.20220623.0)
@@ -654,19 +662,21 @@ PODS:
     - abseil/strings/strings (~> 1.20220623.0)
     - abseil/time (~> 1.20220623.0)
     - abseil/types (~> 1.20220623.0)
+    - FirebaseAppCheckInterop (~> 10.17)
     - FirebaseCore (~> 10.0)
-    - "gRPC-C++ (~> 1.50.1)"
+    - "gRPC-C++ (~> 1.49.1)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleUtilities/Environment (7.11.5):
+  - FirebaseSharedSwift (10.19.0)
+  - GoogleUtilities/Environment (7.12.0):
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Logger (7.11.5):
+  - GoogleUtilities/Logger (7.12.0):
     - GoogleUtilities/Environment
-  - "GoogleUtilities/NSData+zlib (7.11.5)"
-  - "gRPC-C++ (1.50.1)":
-    - "gRPC-C++/Implementation (= 1.50.1)"
-    - "gRPC-C++/Interface (= 1.50.1)"
-  - "gRPC-C++/Implementation (1.50.1)":
+  - "GoogleUtilities/NSData+zlib (7.12.0)"
+  - "gRPC-C++ (1.49.1)":
+    - "gRPC-C++/Implementation (= 1.49.1)"
+    - "gRPC-C++/Interface (= 1.49.1)"
+  - "gRPC-C++/Implementation (1.49.1)":
     - abseil/base/base (= 1.20220623.0)
     - abseil/base/core_headers (= 1.20220623.0)
     - abseil/cleanup/cleanup (= 1.20220623.0)
@@ -691,13 +701,13 @@ PODS:
     - abseil/types/span (= 1.20220623.0)
     - abseil/types/variant (= 1.20220623.0)
     - abseil/utility/utility (= 1.20220623.0)
-    - "gRPC-C++/Interface (= 1.50.1)"
-    - gRPC-Core (= 1.50.1)
-  - "gRPC-C++/Interface (1.50.1)"
-  - gRPC-Core (1.50.1):
-    - gRPC-Core/Implementation (= 1.50.1)
-    - gRPC-Core/Interface (= 1.50.1)
-  - gRPC-Core/Implementation (1.50.1):
+    - "gRPC-C++/Interface (= 1.49.1)"
+    - gRPC-Core (= 1.49.1)
+  - "gRPC-C++/Interface (1.49.1)"
+  - gRPC-Core (1.49.1):
+    - gRPC-Core/Implementation (= 1.49.1)
+    - gRPC-Core/Interface (= 1.49.1)
+  - gRPC-Core/Implementation (1.49.1):
     - abseil/base/base (= 1.20220623.0)
     - abseil/base/core_headers (= 1.20220623.0)
     - abseil/container/flat_hash_map (= 1.20220623.0)
@@ -722,14 +732,14 @@ PODS:
     - abseil/types/variant (= 1.20220623.0)
     - abseil/utility/utility (= 1.20220623.0)
     - BoringSSL-GRPC (= 0.0.24)
-    - gRPC-Core/Interface (= 1.50.1)
-  - gRPC-Core/Interface (1.50.1)
+    - gRPC-Core/Interface (= 1.49.1)
+  - gRPC-Core/Interface (1.49.1)
   - leveldb-library (1.22.2)
-  - nanopb (2.30909.0):
-    - nanopb/decode (= 2.30909.0)
-    - nanopb/encode (= 2.30909.0)
-  - nanopb/decode (2.30909.0)
-  - nanopb/encode (2.30909.0)
+  - nanopb (2.30909.1):
+    - nanopb/decode (= 2.30909.1)
+    - nanopb/encode (= 2.30909.1)
+  - nanopb/decode (2.30909.1)
+  - nanopb/encode (2.30909.1)
   - PromisesObjC (2.3.1)
 
 DEPENDENCIES:
@@ -740,9 +750,13 @@ SPEC REPOS:
     - abseil
     - BoringSSL-GRPC
     - Firebase
+    - FirebaseAppCheckInterop
     - FirebaseCore
+    - FirebaseCoreExtension
     - FirebaseCoreInternal
     - FirebaseFirestore
+    - FirebaseFirestoreInternal
+    - FirebaseSharedSwift
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
@@ -753,17 +767,21 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  Firebase: 66043bd4579e5b73811f96829c694c7af8d67435
-  FirebaseCore: 2cec518b43635f96afe7ac3a9c513e47558abd2e
-  FirebaseCoreInternal: 2f4bee5ed00301b5e56da0849268797a2dd31fb4
-  FirebaseFirestore: b4c0eaaf24efda5732ec21d9e6c788d083118ca6
-  GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
-  "gRPC-C++": 0968bace703459fd3e5dcb0b2bed4c573dbff046
-  gRPC-Core: 17108291d84332196d3c8466b48f016fc17d816d
+  Firebase: 63ce8ece0d43743dc28eacac0c6867a2d7fd5a9d
+  FirebaseAppCheckInterop: 37884781f3e16a1ba47e7ec80a1e805f987788e3
+  FirebaseCore: dc5c7badf99d47613c52b2e3a57a64cd187f8554
+  FirebaseCoreExtension: c08d14c7b22e07994e876d837e6f58642f340087
+  FirebaseCoreInternal: b444828ea7cfd594fca83046b95db98a2be4f290
+  FirebaseFirestore: 9b9b21120c1a0cb4f2789ffb7fbb9138f94c47eb
+  FirebaseFirestoreInternal: a15405fb607dfd14edd568bba77028f4c7a69688
+  FirebaseSharedSwift: f34eeb7d3ea87a34497629b6ca41657beadef76a
+  GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
+  "gRPC-C++": 2df8cba576898bdacd29f0266d5236fa0e26ba6a
+  gRPC-Core: a21a60aefc08c68c247b439a9ef97174b0c54f96
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
-  nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
 
 PODFILE CHECKSUM: c6fcb2ac7a6a41bf4037418c44b168f38e2a5ea5
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.14.3

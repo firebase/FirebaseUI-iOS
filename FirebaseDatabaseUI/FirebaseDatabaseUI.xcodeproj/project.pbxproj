@@ -521,6 +521,8 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseSharedSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAppCheckInterop\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -546,6 +548,8 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseSharedSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAppCheckInterop\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseDatabaseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
