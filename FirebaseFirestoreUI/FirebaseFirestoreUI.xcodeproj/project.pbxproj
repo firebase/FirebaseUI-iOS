@@ -467,6 +467,9 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Libuv-gRPC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseSharedSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAppCheckInterop\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreExtension\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFirestoreUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -498,6 +501,9 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Libuv-gRPC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseSharedSwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAppCheckInterop\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreExtension\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebase.FirebaseFirestoreUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
