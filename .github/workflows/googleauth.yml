@@ -2,7 +2,7 @@ name: Google Auth
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'FirebaseAuthUI/**'
       - 'FirebaseAuthUI.podspec'
@@ -11,7 +11,7 @@ on:
       - 'test.sh'
       - 'FirebaseGoogleAuthUI.podspec'
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'FirebaseAuthUI/**'
       - 'FirebaseAuthUI.podspec'

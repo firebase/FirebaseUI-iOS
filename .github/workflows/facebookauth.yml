@@ -2,7 +2,7 @@ name: Facebook Auth
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'FirebaseAuthUI/**'
       - 'FirebaseAuthUI.podspec'
@@ -12,7 +12,7 @@ on:
       - 'FirebaseFacebookAuthUI.podspec'
       - 'Package.swift'
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'FirebaseAuthUI/**'
       - 'FirebaseAuthUI.podspec'

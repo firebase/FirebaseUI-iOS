@@ -2,7 +2,7 @@ name: Storage
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - '.github/workflows/storage.yml'
       - 'FirebaseStorageUI/**'
@@ -10,7 +10,7 @@ on:
       - 'FirebaseStorageUI.podspec'
       - 'Package.swift'
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - '.github/workflows/storage.yml'
       - 'FirebaseStorageUI/**'

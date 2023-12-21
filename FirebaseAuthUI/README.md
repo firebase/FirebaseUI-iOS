@@ -19,7 +19,7 @@ style, and it is open source, so you aren't constrained in realizing the user
 experience you want.
 
 Compatible FirebaseUI Auth clients are also available for
-[Android](https://github.com/firebase/firebaseui-android/tree/master/auth)
+[Android](https://github.com/firebase/firebaseui-android/tree/main/auth)
 and [Web](https://github.com/firebase/firebaseui-web/).
 
 ## Table of Contents
@@ -273,7 +273,7 @@ authUI?.customStringsBundle = NSBundle.mainBundle() // Or any custom bundle.
 authUI.customStringsBundle = [NSBundle mainBundle]; // Or any custom bundle.
 ```
 
-The bundle should include [.strings](https://github.com/firebase/FirebaseUI-iOS/blob/master/FirebaseAuthUI/Strings/en.lproj/FirebaseAuthUI.strings)
+The bundle should include [.strings](https://github.com/firebase/FirebaseUI-iOS/blob/main/FirebaseAuthUI/Strings/en.lproj/FirebaseAuthUI.strings)
 files that have the same names as the default files, namely `FirebaseAuthUI`,
 `FirebaseGoogleAuthUI`, and `FirebaseFacebookAuthUI`. Each string in these files
 should have the same key as its counterpart in the default `.strings` files.
