@@ -2,7 +2,7 @@ name: Auth
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - '.github/workflows/auth.yml'
       - 'FirebaseAuthUI/**'
@@ -10,7 +10,7 @@ on:
       - 'FirebaseAuthUI.podspec'
       - 'Package.swift'
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - '.github/workflows/auth.yml'
       - 'FirebaseAuthUI/**'

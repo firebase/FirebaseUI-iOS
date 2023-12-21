@@ -2,13 +2,13 @@ name: Sample
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - '.github/workflows/sample.yml'
       - 'Firebase*UI/**'
       - '*.podspec'
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - '.github/workflows/storage.yml'
       - 'Firebase*UI/**'

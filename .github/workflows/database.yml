@@ -2,7 +2,7 @@ name: Database
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - '.github/workflows/database.yml'
       - 'FirebaseDatabaseUI/**'
@@ -10,7 +10,7 @@ on:
       - 'FirebaseDatabaseUI.podspec'
       - 'Package.swift'
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - '.github/workflows/database.yml'
       - 'FirebaseDatabaseUI/**'
