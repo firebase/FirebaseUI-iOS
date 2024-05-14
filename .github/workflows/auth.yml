@@ -61,5 +61,6 @@ jobs:
       - name: Setup
         run: gem install bundler; bundle install
       - name: Build
+        # Allow warnings for deprecated `updateEmail:completion:` API.
         run: |
-          bundle exec pod lib lint FirebaseAuthUI.podspec
+          bundle exec pod lib lint FirebaseAuthUI.podspec --allow-warnings
