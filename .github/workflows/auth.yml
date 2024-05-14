@@ -50,7 +50,7 @@ jobs:
           xcodebuild -list
       - name: Build
         run: |
-          xcodebuild -scheme FirebaseAuthUI -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
+          xcodebuild -scheme FirebaseAuthUI -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15 Pro'
   pod:
     name: pod lib lint
     runs-on: macOS-latest
@@ -61,5 +61,6 @@ jobs:
       - name: Setup
         run: gem install bundler; bundle install
       - name: Build
+        # Allow warnings for deprecated `updateEmail:completion:` API.
         run: |
-          bundle exec pod lib lint FirebaseAuthUI.podspec
+          bundle exec pod lib lint FirebaseAuthUI.podspec --allow-warnings
