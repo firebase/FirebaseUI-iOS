@@ -123,7 +123,7 @@ NSString *const kKeyNotFound = @"KeyNotFound";
 /** @var kTableName
     @brief The name of the strings table to search for localized strings.
  */
-NSString *const kTableName = @"FirebaseAuthUI";
+static NSString *const kTableName = @"FirebaseAuthUI";
 
 NSString *FUILocalizedString(NSString *key) {
   return FUILocalizedStringFromTable(key, kTableName);
