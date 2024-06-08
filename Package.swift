@@ -20,7 +20,7 @@ import PackageDescription
 let package = Package(
   name: "FirebaseUI",
   defaultLocalization: "en",
-  platforms: [.iOS(.v12)],
+  platforms: [.iOS(.v13)],
   products: [
     .library(
       name: "FirebaseAnonymousAuthUI",
@@ -72,7 +72,7 @@ let package = Package(
     .package(
       name: "Firebase", 
       url: "https://github.com/firebase/firebase-ios-sdk.git",
-      "8.0.0"..<"11.0.0"
+      "8.0.0"..<"12.0.0"
     ),
     .package(
       name: "GoogleSignIn",
