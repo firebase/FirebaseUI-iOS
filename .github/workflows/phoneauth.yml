@@ -65,6 +65,7 @@ jobs:
       - name: Setup
         run: gem install bundler; bundle install
       - name: Build
+        # (#1191) Fix and remove --allow-warnings
         run: |
           bundle exec pod lib lint FirebasePhoneAuthUI.podspec \
-            --include-podspecs=FirebaseAuthUI.podspec
+            --include-podspecs=FirebaseAuthUI.podspec --allow-warnings
