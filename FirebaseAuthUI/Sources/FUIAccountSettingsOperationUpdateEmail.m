@@ -19,6 +19,8 @@
 #import "FirebaseAuthUI/Sources/FUIAccountSettingsOperation_Internal.h"
 #import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthBaseViewController_Internal.h"
 
+@import FirebaseAuth;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation FUIAccountSettingsOperationUpdateEmail

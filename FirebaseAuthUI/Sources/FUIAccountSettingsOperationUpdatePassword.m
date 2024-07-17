@@ -18,6 +18,8 @@
 
 #import "FirebaseAuthUI/Sources/FUIAccountSettingsOperation_Internal.h"
 
+@import FirebaseAuth;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FUIAccountSettingsOperationUpdatePassword ()

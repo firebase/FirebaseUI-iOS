@@ -16,7 +16,7 @@
 
 #import "FirebaseAuthUI/Sources/FUIAccountSettingsOperation.h"
 
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 
 #import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAccountSettingsOperationType.h"
 #import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthStrings.h"

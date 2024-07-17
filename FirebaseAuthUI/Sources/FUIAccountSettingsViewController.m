@@ -16,7 +16,7 @@
 
 #import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAccountSettingsViewController.h"
 
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 
 #import "FirebaseAuthUI/Sources/FUIAccountSettingsOperation.h"
 #import "FirebaseAuthUI/Sources/FUIAccountSettingsOperationDeleteAccount.h"
