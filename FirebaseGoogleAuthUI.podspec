@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.dependency 'FirebaseAuth'
   s.dependency 'FirebaseCore'
   s.dependency 'FirebaseAuthUI'
-  s.dependency 'GoogleSignIn', '~> 6.0'
+  s.dependency 'GoogleSignIn', '~> 7.0'
   s.resource_bundles = {
     'FirebaseGoogleAuthUI' => ['FirebaseGoogleAuthUI/Sources/{Resources,Strings}/*.{png,lproj}']
   }
