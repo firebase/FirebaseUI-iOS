@@ -238,7 +238,10 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
     if (error) {
       // Check for "credential in use" conflict error and handle appropriately.
       if (error.code == FIRAuthErrorCodeCredentialAlreadyInUse) {
-        FIRAuthCredential *newCredential = error.userInfo[FIRAuthErrorUserInfoUpdatedCredentialKey];
+        // TODO: When Firebase 11 is minimum update string to
+        // FIRAuthErrors.userInfoUpdatedCredentialKey
+        FIRAuthCredential *newCredential =
+          error.userInfo[@"FIRAuthErrorUserInfoUpdatedCredentialKey"];
         NSDictionary *userInfo = @{ };
         if (newCredential) {
           userInfo = @{ FUIAuthCredentialKey : newCredential };

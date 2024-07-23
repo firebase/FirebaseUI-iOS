@@ -15,11 +15,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 
 @class FIRAuth;
 @class FIRAuthCredential;
 @class FIRUserInfo;
+
+typedef void (^FIRAuthResultCallback)(FIRUser *_Nullable user, NSError *_Nullable error);
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -17,7 +17,7 @@
 #import <OCMock/OCMock.h>
 #import <XCTest/XCTest.h>
 
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 #import <FirebaseCore/FirebaseCore.h>
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 

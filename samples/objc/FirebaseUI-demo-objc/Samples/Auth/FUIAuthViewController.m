@@ -262,7 +262,8 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
 
     NSString *providerID = self.authUI.providers.firstObject.providerID;
     BOOL isPhoneAuth = [providerID isEqualToString:FIRPhoneAuthProviderID];
-    BOOL isEmailAuth = [providerID isEqualToString:FIREmailAuthProviderID];
+    BOOL isEmailAuth = [providerID isEqualToString:@
+@"email"];
     BOOL shouldSkipAuthPicker = self.authUI.providers.count == 1 && (isPhoneAuth || isEmailAuth);
     if (shouldSkipAuthPicker) {
       if (isPhoneAuth) {

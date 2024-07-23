@@ -16,8 +16,8 @@
 
 #import "FirebasePhoneAuthUI/Sources/FUIPhoneVerificationViewController.h"
 
-#import <FirebaseAuth/FIRAuthUIDelegate.h>
-#import <FirebaseAuth/FIRPhoneAuthProvider.h>
+@import FirebaseAuth;
+
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
 #import "FirebasePhoneAuthUI/Sources/Public/FirebasePhoneAuthUI/FUIPhoneAuth.h"

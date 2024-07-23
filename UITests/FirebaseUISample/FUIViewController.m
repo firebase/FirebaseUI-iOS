@@ -84,14 +84,16 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   NSString *firstProviderID = _authProviders.firstObject.providerID;
   BOOL shouldSkipPhoneAuthPicker = _authProviders.count == 1 &&
       ([firstProviderID isEqualToString:FIRPhoneAuthProviderID] ||
-       [firstProviderID isEqualToString:FIREmailAuthProviderID]);
+       [firstProviderID isEqualToString:@
+@"email"]);
   if (!shouldSkipPhoneAuthPicker) {
     UIViewController *controller = [self.authUIMock authViewController];
     [self presentViewController:controller animated:YES completion:nil];
   } else if ([firstProviderID isEqualToString:FIRPhoneAuthProviderID]) {
     FUIPhoneAuth *provider = _authProviders.firstObject;
     [provider signInWithPresentingViewController:self phoneNumber:nil];
-  } else if ([firstProviderID isEqualToString:FIREmailAuthProviderID]) {
+  } else if ([firstProviderID isEqualToString:@
+@"email"]) {
     FUIEmailAuth *provider = _authProviders.firstObject;
     [provider signInWithPresentingViewController:self email:nil];
   }
@@ -383,7 +385,8 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   id emailPasswordProviderMock = [self createPasswordProvider];
 
   //Add third party provider with email
-  id linkedProviderMock = [self createThirdPartyProvider:FIRGoogleAuthProviderID hasEmail:YES];
+  id linkedProviderMock = [self createThirdPartyProvider:@
+@"google.com" hasEmail:YES];
 
   // Stub providerData
   NSArray *providers =
@@ -395,7 +398,8 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   id mockUser = [self mockUserWhichHasEmail:YES];
 
   //Add third party provider without email
-  id linkedProviderMock = [self createThirdPartyProvider:FIRGoogleAuthProviderID hasEmail:NO];
+  id linkedProviderMock = [self createThirdPartyProvider:@
+@"google.com" hasEmail:NO];
 
   //Add EmailPassword provider
   id emailPasswordProviderMock = [self createPasswordProvider];
@@ -410,7 +414,8 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   id mockUser = [self mockUserWhichHasEmail:NO];
 
   //Add third party provider without email
-  id linkedProviderMock = [self createThirdPartyProvider:FIRGoogleAuthProviderID hasEmail:NO];
+  id linkedProviderMock = [self createThirdPartyProvider:@
+@"google.com" hasEmail:NO];
 
   // Stub providerData
   NSArray *providers = [NSArray arrayWithObject:linkedProviderMock];
@@ -421,7 +426,8 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   id mockUser = [self mockUserWhichHasEmail:YES];
 
   //Add third party provider with email
-  id linkedProviderMock = [self createThirdPartyProvider:FIRGoogleAuthProviderID hasEmail:YES];
+  id linkedProviderMock = [self createThirdPartyProvider:@
+@"google.com" hasEmail:YES];
 
   // Stub providerData
   NSArray *providers = [NSArray arrayWithObject:linkedProviderMock];
@@ -432,7 +438,8 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 
 - (id)createPasswordProvider {
   id emailPasswordProviderMock = OCMProtocolMock(@protocol(FIRUserInfo));
-  OCMStub([emailPasswordProviderMock providerID]).andReturn(FIREmailAuthProviderID);
+  OCMStub([emailPasswordProviderMock providerID]).andReturn(@
+@"email");
   OCMStub([emailPasswordProviderMock email]).andReturn(@"password@email.com");
   OCMStub([emailPasswordProviderMock displayName]).andReturn(@"password displayName");
 
@@ -572,7 +579,8 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   [self mockDeleteUserRequest:mockUser];
 
   // mock re-authentication with 3P provider
-  [self mockSignInWithProvider:FIRGoogleAuthProviderID user:mockUser];
+  [self mockSignInWithProvider:@
+@"google.com" user:mockUser];
 
   // mock unlinking 3P provider
   [self mockUnlinkOperation:mockUser];

@@ -16,7 +16,7 @@
 
 #import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthBaseViewController_Internal.h"
 
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 #import <objc/runtime.h>
 
 #import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthErrorUtils.h"
@@ -430,13 +430,13 @@ static NSString *const kAuthUICodingKey = @"authUI";
 }
 
 + (NSString *)providerLocalizedName:(NSString *)providerId {
-  if ([providerId isEqualToString:FIREmailAuthProviderID]) {
+  if ([providerId isEqualToString:@"email"]) {
     return FUILocalizedString(kStr_ProviderTitlePassword);
-  } else if ([providerId isEqualToString:FIRGoogleAuthProviderID]) {
+  } else if ([providerId isEqualToString:@"google.com"]) {
     return FUILocalizedString(kStr_ProviderTitleGoogle);
-  } else if ([providerId isEqualToString:FIRFacebookAuthProviderID]) {
+  } else if ([providerId isEqualToString:@"facebook.com"]) {
     return FUILocalizedString(kStr_ProviderTitleFacebook);
-  } else if ([providerId isEqualToString:FIRTwitterAuthProviderID]) {
+  } else if ([providerId isEqualToString:@"twitter.com"]) {
     return FUILocalizedString(kStr_ProviderTitleTwitter);
   }
   return @"";

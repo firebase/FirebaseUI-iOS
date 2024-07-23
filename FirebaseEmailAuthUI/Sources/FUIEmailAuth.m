@@ -16,9 +16,8 @@
 
 #import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIEmailAuth.h"
 
-#import <FirebaseCore/FIRApp.h>
-#import <FirebaseCore/FIROptions.h>
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseCore;
+@import FirebaseAuth;
 #import <GoogleUtilities/GULUserDefaults.h>
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
@@ -78,7 +77,7 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
 
 - (instancetype)init {
   return [self initAuthAuthUI:[FUIAuth defaultAuthUI]
-                 signInMethod:FIREmailPasswordAuthSignInMethod
+                 signInMethod:@"email"
               forceSameDevice:NO
         allowNewEmailAccounts:YES
            requireDisplayName:YES
@@ -122,7 +121,7 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
 #pragma mark - FUIAuthProvider
 
 - (nullable NSString *)providerID {
-  return FIREmailAuthProviderID;
+  return @"email";
 }
 
 /** @fn accessToken:
@@ -294,7 +293,7 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
 - (void)handleUnverifiedProviderLinking:(NSString *)providerID
                                   email:(NSString *)email
                                   error:(NSError **)error {
-  if ([providerID isEqualToString:FIRFacebookAuthProviderID]) {
+  if ([providerID isEqualToString:@"facebook.com"]) {
     NSData *unverifiedProviderCredentialData = [GULUserDefaults.standardUserDefaults
                                                 objectForKey:kEmailLinkSignInLinkingCredentialKey];
     FIRAuthCredential *unverifiedProviderCredential;
@@ -533,12 +532,12 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
     NSString *existingFederatedProviderID = [self authProviderFromProviders:providers];
     // Set of providers which can be auto-linked.
     NSSet *supportedProviders =
-        [NSSet setWithObjects:FIRGoogleAuthProviderID,
-                              FIRFacebookAuthProviderID,
-                              FIREmailAuthProviderID,
+        [NSSet setWithObjects:@"google.com",
+                              @"facebook.com",
+                              @"email",
                               nil];
     if ([supportedProviders containsObject:existingFederatedProviderID]) {
-      if ([existingFederatedProviderID isEqualToString:FIREmailAuthProviderID]) {
+      if ([existingFederatedProviderID isEqualToString:@"email"]) {
 
         [FUIAuthBaseViewController showSignInAlertWithEmail:emailHint
                                           providerShortName:@"Email/Password"
@@ -670,7 +669,7 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
       return;
     }
     NSString *bestProviderID = providers[0];
-    if ([bestProviderID isEqual:FIREmailAuthProviderID]) {
+    if ([bestProviderID isEqual:@"email"]) {
       // Password verification.
       UIViewController *passwordController;
       if ([delegate respondsToSelector:
@@ -693,13 +692,14 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
       return;
     }
 
-    if ([bestProviderID isEqual:FIREmailLinkAuthSignInMethod]) {
+    if ([bestProviderID isEqual:@"emailLink"]) {
       NSString *providerName;
-      if ([newCredential.provider isEqualToString:FIRFacebookAuthProviderID]) {
+      if ([newCredential.provider isEqualToString:@"facebook.com"]) {
         providerName = @"Facebook";
-      } else if ([newCredential.provider isEqualToString:FIRTwitterAuthProviderID]) {
+      } else if ([newCredential.provider isEqualToString:@"twitter.com"]) {
         providerName = @"Twitter";
-      } else if ([newCredential.provider isEqualToString:FIRGitHubAuthProviderID]) {
+      } else if ([newCredential.provider isEqualToString:@"github.com"
+@"twitter.com"]) {
         providerName = @"Github";
       }
       NSString *message = [NSString stringWithFormat:
@@ -854,9 +854,9 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
 
 - (nullable NSString *)authProviderFromProviders:(NSArray <NSString *> *) providers {
   NSSet *providerSet =
-  [NSSet setWithArray:@[ FIRFacebookAuthProviderID,
-                         FIRGoogleAuthProviderID,
-                         FIREmailAuthProviderID ]];
+  [NSSet setWithArray:@[ @"facebook.com",
+                         @"google.com",
+                         @"email" ]];
   for (NSString *provider in providers) {
     if ( [providerSet containsObject:provider]) {
       return provider;

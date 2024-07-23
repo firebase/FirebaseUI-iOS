@@ -16,7 +16,7 @@
 
 #import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIEmailEntryViewController.h"
 
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
@@ -138,7 +138,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 }
 
 - (void)onNext:(NSString *)emailText {
-  FUIEmailAuth *emailAuth = [self.authUI providerWithID:FIREmailAuthProviderID];
+  FUIEmailAuth *emailAuth = [self.authUI providerWithID:@"email"];
   id<FUIAuthDelegate> delegate = self.authUI.delegate;
 
   if (![[self class] isValidEmail:emailText]) {
@@ -165,7 +165,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     }
 
     id<FUIAuthProvider> provider = [self bestProviderFromProviderIDs:providers];
-    if (provider && ![provider.providerID isEqualToString:FIREmailAuthProviderID]) {
+    if (provider && ![provider.providerID isEqualToString:@"email"]) {
       NSString *email = emailText;
       [[self class] showSignInAlertWithEmail:email
                                     provider:provider
@@ -176,7 +176,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                cancelHandler:^{
         [self.authUI signOutWithError:nil];
       }];
-    } else if ([providers containsObject:FIREmailAuthProviderID]) {
+    } else if ([providers containsObject:@"email"]) {
       UIViewController *controller;
       if ([delegate respondsToSelector:@selector(passwordSignInViewControllerForAuthUI:email:)]) {
         controller = [delegate passwordSignInViewControllerForAuthUI:self.authUI
@@ -186,7 +186,9 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                                                        email:emailText];
       }
       [self pushViewController:controller];
-    } else if ([emailAuth.signInMethod isEqualToString:FIREmailLinkAuthSignInMethod]) {
+
+      // TODO: Use API to get string when Firebase 11 is the minimum.
+    } else if ([emailAuth.signInMethod isEqualToString:@"emailLink"]) {
       [self sendSignInLinkToEmail:emailText];
     } else {
       if (providers.count) {
@@ -223,7 +225,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   }
 
   [self incrementActivity];
-  FUIEmailAuth *emailAuth = [self.authUI providerWithID:FIREmailAuthProviderID];
+  FUIEmailAuth *emailAuth = [self.authUI providerWithID:@"email"];
   [emailAuth generateURLParametersAndLocalCache:email linkingProvider:nil];
   [self.auth sendSignInLinkToEmail:email
                 actionCodeSettings:emailAuth.actionCodeSettings

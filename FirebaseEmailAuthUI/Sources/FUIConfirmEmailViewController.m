@@ -16,7 +16,7 @@
 
 #import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIConfirmEmailViewController.h"
 
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 
@@ -137,7 +137,8 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 }
 
 - (void)onNext:(NSString *)emailText {
-  FUIEmailAuth *emailAuth = [self.authUI providerWithID:FIREmailAuthProviderID];
+  // TODO: After Firebase 11 minimum, change to EmailAuthProvider.id.
+  FUIEmailAuth *emailAuth = [self.authUI providerWithID:@"email"];
 
   if (![[self class] isValidEmail:emailText]) {
     [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];

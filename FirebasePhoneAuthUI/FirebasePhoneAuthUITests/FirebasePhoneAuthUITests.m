@@ -18,7 +18,7 @@
 
 #import "FUIAuthUtils.h"
 #import <FirebasePhoneAuthUI/FirebasePhoneAuthUI.h>
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 #import <FirebaseCore/FirebaseCore.h>
 #import <OCMock/OCMock.h>
 #import "FUIAuthUtils.h"

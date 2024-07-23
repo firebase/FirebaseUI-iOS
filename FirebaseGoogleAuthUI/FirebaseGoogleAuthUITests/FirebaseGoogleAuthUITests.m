@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <OCMock/OCMock.h>
