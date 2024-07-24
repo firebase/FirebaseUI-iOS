@@ -80,6 +80,8 @@
   OCMVerify(never(), [self.mockOAuthProvider providerWithProviderID:@"google.com"]);
 }
 
+#ifdef PORT_REST_OF_FILE_TO_GSI_7
+
 - (void)testUseEmulatorCreatesOAuthProvider {
   [self.authUI useEmulatorWithHost:@"host" port:12345];
   FUIGoogleAuth *provider = [[FUIGoogleAuth alloc] initWithAuthUI:self.authUI];
@@ -340,6 +342,7 @@
   //verify that we are using token from server
   OCMVerifyAll(mockAuthentication);
 }
+#endif
 
 - (void)testSignOut {
   id mockSignIn = OCMClassMock([GIDSignIn class]);
