@@ -89,12 +89,6 @@ __attribute__((deprecated("Instead use initWithAuthUI:")));
 - (instancetype)initWithScopes:(NSArray <NSString *> *)scopes
 __attribute__((deprecated("Instead use initWithAuthUI:permissions:"))) NS_DESIGNATED_INITIALIZER;
 
-/** @fn requestScopesWithPresentingViewController:completion:
-    @brief Requests the scopes in the `scopes` array.
- */
-- (void)requestScopesWithPresentingViewController:(UIViewController *)presentingViewController
-                                       completion:(FUIAuthProviderSignInCompletionBlock)completion;
-
 @end
 
 NS_ASSUME_NONNULL_END

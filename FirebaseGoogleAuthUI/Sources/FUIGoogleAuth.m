@@ -184,8 +184,6 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
      @"enabling Google Sign-In."];
   }
 
-  GIDConfiguration *config = [[GIDConfiguration alloc] initWithClientID:clientID];
-
   FUIAuthProviderSignInCompletionBlock callback = ^(FIRAuthCredential *_Nullable credential,
                              NSError *_Nullable error,
                              _Nullable FIRAuthResultCallback result,
