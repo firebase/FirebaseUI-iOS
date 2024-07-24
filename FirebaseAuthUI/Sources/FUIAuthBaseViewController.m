@@ -131,7 +131,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
   }
   UIActivityIndicatorView *activityIndicator =
       [[UIActivityIndicatorView alloc]
-           initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+       initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleLarge];
   UIView *tintView = [[UIView alloc] initWithFrame:CGRectInset(activityIndicator.frame,
                                                                -kActivityIndiactorPadding,
                                                                -kActivityIndiactorPadding)];

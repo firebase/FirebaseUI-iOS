@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 
   s.public_header_files = 'FirebaseAnonymousAuthUI/Sources/Public/FirebaseAnonymousAuthUI/*.h'
   s.source_files = 'FirebaseAnonymousAuthUI/Sources/**/*.{h,m}'
-  s.dependency 'FirebaseAuthUI'
+  s.dependency 'FirebaseAuthUI', '>= 14.2'
   s.dependency 'FirebaseAuth', '>= 8.0', '< 12.0'
   s.dependency 'FirebaseCore'
   s.resource_bundles = {
