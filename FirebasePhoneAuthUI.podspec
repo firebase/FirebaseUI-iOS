@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.public_header_files = 'FirebasePhoneAuthUI/Sources/Public/FirebasePhoneAuthUI/*.h'
   s.source_files = 'FirebasePhoneAuthUI/Sources/**/*.{h,m}'
   s.dependency 'FirebaseAuth'
-  s.dependency 'FirebaseAuthUI'
+  s.dependency 'FirebaseAuthUI', '>= 14.2'
   s.resource_bundles = {
     'FirebasePhoneAuthUI' => ['FirebasePhoneAuthUI/Sources/{Resources,Strings}/*.{xib,json,lproj,png}']
   }

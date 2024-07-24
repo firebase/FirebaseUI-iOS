@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseUI'
-  s.version      = '14.1.0'
+  s.version      = '14.2.0'
   s.summary      = 'UI binding libraries for Firebase.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'LICENSE' }
@@ -19,43 +19,43 @@ Pod::Spec.new do |s|
   }
 
   s.subspec 'Database' do |database|
-    database.dependency 'FirebaseDatabaseUI', '~> 14.0'
+    database.dependency 'FirebaseDatabaseUI', '~> 14.2'
   end
 
   s.subspec 'Firestore' do |firestore|
-    firestore.dependency 'FirebaseFirestoreUI', '~> 14.0'
+    firestore.dependency 'FirebaseFirestoreUI', '~> 14.2'
   end
 
   s.subspec 'Storage' do |storage|
-    storage.dependency 'FirebaseStorageUI', '~> 14.0'
+    storage.dependency 'FirebaseStorageUI', '~> 14.2'
   end
 
   s.subspec 'Auth' do |auth|
-    auth.dependency 'FirebaseAuthUI', '~> 14.0'
+    auth.dependency 'FirebaseAuthUI', '~> 14.2'
   end
 
   s.subspec 'Anonymous' do |anonymous|
-    anonymous.dependency 'FirebaseAnonymousAuthUI', '~> 14.0'
+    anonymous.dependency 'FirebaseAnonymousAuthUI', '~> 14.2'
   end
 
   s.subspec 'Email' do |email|
-    email.dependency 'FirebaseEmailAuthUI', '~> 14.0'
+    email.dependency 'FirebaseEmailAuthUI', '~> 14.2'
   end
 
   s.subspec 'Facebook' do |facebook|
-    facebook.dependency 'FirebaseFacebookAuthUI', '~> 14.0'
+    facebook.dependency 'FirebaseFacebookAuthUI', '~> 14.2'
   end
 
   s.subspec 'Google' do |google|
-    google.dependency 'FirebaseGoogleAuthUI', '~> 14.0'
+    google.dependency 'FirebaseGoogleAuthUI', '~> 14.2'
   end
 
   s.subspec 'OAuth' do |oauth|
-    oauth.dependency 'FirebaseOAuthUI', '~> 14.0'
+    oauth.dependency 'FirebaseOAuthUI', '~> 14.2'
   end
 
   s.subspec 'Phone' do |phone|
-    phone.dependency 'FirebasePhoneAuthUI', '~> 14.0'
+    phone.dependency 'FirebasePhoneAuthUI', '~> 14.2'
   end
 
 end
