@@ -16,7 +16,8 @@
 
 #import "FirebaseGoogleAuthUI/Sources/Public/FirebaseGoogleAuthUI/FUIGoogleAuth.h"
 
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
+
 #import <FirebaseCore/FirebaseCore.h>
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
@@ -111,21 +112,22 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
 #pragma mark - FUIAuthProvider
 
 - (nullable NSString *)providerID {
-  return FIRGoogleAuthProviderID;
+  // TODO: Replace with FIRGoogleAuthProvider.id when Firebase 11 is the minimum.
+  return @"google.com";
 }
 
 - (nullable NSString *)accessToken {
   if (self.authUI.isEmulatorEnabled) {
     return nil;
   }
-  return [self googleSignIn].currentUser.authentication.accessToken;
+  return [self googleSignIn].currentUser.accessToken.tokenString;
 }
 
 - (nullable NSString *)idToken {
   if (self.authUI.isEmulatorEnabled) {
     return nil;
   }
-  return [self googleSignIn].currentUser.authentication.idToken;
+  return [self googleSignIn].currentUser.idToken.tokenString;
 }
 
 - (NSString *)shortName {
@@ -182,8 +184,6 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
      @"enabling Google Sign-In."];
   }
 
-  GIDConfiguration *config = [[GIDConfiguration alloc] initWithClientID:clientID];
-
   FUIAuthProviderSignInCompletionBlock callback = ^(FIRAuthCredential *_Nullable credential,
                              NSError *_Nullable error,
                              _Nullable FIRAuthResultCallback result,
@@ -193,11 +193,9 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
     }
   };
 
-  [signIn signInWithConfiguration:config
-         presentingViewController:presentingViewController
-                             hint:defaultValue
-                         callback:^(GIDGoogleUser *user, NSError *error) {
-    [self handleSignInWithUser:user
+  [signIn signInWithPresentingViewController:presentingViewController
+                                        hint:defaultValue completion:^(GIDSignInResult * _Nullable signInResult, NSError * _Nullable error) {
+    [self handleSignInWithUser:signInResult.user
                          error:error
       presentingViewController:presentingViewController
                       callback:callback];
@@ -234,25 +232,6 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
   }];
 }
 
-- (void)requestScopesWithPresentingViewController:(UIViewController *)presentingViewController
-                                       completion:(FUIAuthProviderSignInCompletionBlock)completion {
-  GIDSignIn *signIn = [self googleSignIn];
-  [signIn addScopes:self.scopes presentingViewController:presentingViewController
-           callback:^(GIDGoogleUser *user, NSError *error) {
-    [self handleSignInWithUser:user
-                         error:error
-      presentingViewController:presentingViewController
-                      callback:^(FIRAuthCredential *credential,
-                                 NSError *error,
-                                 FIRAuthResultCallback result,
-                                 NSDictionary<NSString *,id> *userInfo) {
-      if (completion != nil) {
-        completion(credential, error, result, userInfo);
-      }
-    }];
-  }];
-}
-
 - (void)signOut {
   if (self.authUI.isEmulatorEnabled) {
     return;
@@ -286,7 +265,7 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
     } else {
       NSError *newError =
           [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
-                                                     providerID:FIRGoogleAuthProviderID];
+                                                     providerID:@"google.com"];
       if (callback) {
         callback(nil, newError, nil, nil);
       }
@@ -298,8 +277,8 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
       [FUIAuthBaseViewController addActivityIndicator:presentingViewController.view];
   [activityView startAnimating];
   FIRAuthCredential *credential =
-      [FIRGoogleAuthProvider credentialWithIDToken:user.authentication.idToken
-                                       accessToken:user.authentication.accessToken];
+  [FIRGoogleAuthProvider credentialWithIDToken:user.idToken.tokenString
+                                   accessToken:user.accessToken.tokenString];
   FIRAuthResultCallback result = ^(FIRUser *_Nullable user,
                                    NSError *_Nullable error) {
     [activityView stopAnimating];

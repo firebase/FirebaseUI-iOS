@@ -17,7 +17,7 @@
 #import "FirebaseFacebookAuthUI/Sources/Public/FirebaseFacebookAuthUI/FUIFacebookAuth.h"
 
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 
 #if SWIFT_PACKAGE
 @import FBSDKCoreKit;
@@ -133,7 +133,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
 #pragma mark - FUIAuthProvider
 
 - (nullable NSString *)providerID {
-  return FIRFacebookAuthProviderID;
+  return @"facebook.com";
 }
 
 /** @fn accessToken:
@@ -313,7 +313,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   FIRAuthCredential *credential;
   if (idToken) {
     NSString *rawNonce = self.currentNonce;
-    credential = [FIROAuthProvider credentialWithProviderID:FIRFacebookAuthProviderID
+    credential = [FIROAuthProvider credentialWithProviderID:@"facebook.com"
                                                     IDToken:idToken
                                                    rawNonce:rawNonce];
   } else {
@@ -389,7 +389,7 @@ static NSString *const kFacebookDisplayName = @"FacebookDisplayName";
   if (error) {
     NSError *newError =
         [FUIAuthErrorUtils providerErrorWithUnderlyingError:error
-                                                   providerID:FIRFacebookAuthProviderID];
+                                                   providerID:@"facebook.com"];
     [self completeSignInFlowWithAccessToken:nil idToken:nil error:newError];
     return true;
   }

@@ -21,7 +21,7 @@
 
 #import "FUIAuthUtils.h"
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 #import <FirebaseCore/FirebaseCore.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>

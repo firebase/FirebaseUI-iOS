@@ -15,11 +15,14 @@
 //
 
 #import "FirebaseEmailAuthUI/Sources/Public/FirebaseEmailAuthUI/FUIPasswordSignInViewController.h"
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FUIPasswordSignInViewController ()
+
+typedef void (^FIRAuthDataResultCallback)(FIRAuthDataResult *_Nullable authResult,
+                                          NSError *_Nullable error);
 
 /** @property onDismissCallback:
     @brief Sets an optional custom callback for FUIPasswordSigInViewController during dismissal. This block is NOT set to nil after use, set to nil after using

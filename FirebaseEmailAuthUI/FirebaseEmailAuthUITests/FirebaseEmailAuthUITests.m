@@ -15,7 +15,7 @@
 //
 
 #import "FUIEmailAuth.h"
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 #import <FirebaseAuthUI/FUIAuthErrorUtils.h>
 #import "FUIAuthUtils.h"
 #import <FirebaseAuthUI/FUIAuth_Internal.h>

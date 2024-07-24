@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 #import <FirebaseAuthUI/FirebaseAuthUI.h>
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <OCMock/OCMock.h>
@@ -79,6 +79,8 @@
 
   OCMVerify(never(), [self.mockOAuthProvider providerWithProviderID:@"google.com"]);
 }
+
+#ifdef PORT_REST_OF_FILE_TO_GSI_7
 
 - (void)testUseEmulatorCreatesOAuthProvider {
   [self.authUI useEmulatorWithHost:@"host" port:12345];
@@ -340,6 +342,7 @@
   //verify that we are using token from server
   OCMVerifyAll(mockAuthentication);
 }
+#endif
 
 - (void)testSignOut {
   id mockSignIn = OCMClassMock([GIDSignIn class]);

@@ -230,7 +230,7 @@ NS_ASSUME_NONNULL_BEGIN
                                   alertMessage:message
                               alertCloseButton:FUILocalizedString(kStr_Cancel)
                                providerHandler:^(id<FIRUserInfo> provider) {
-    if (![provider.providerID isEqualToString:FIREmailAuthProviderID]) {
+    if (![provider.providerID isEqualToString:@"email"]) {
       [self reauthenticateWithProvider:provider.providerID actionHandler:handler];
     } else {
       [self showVerifyPasswordViewWithMessage:message providerHandler:handler];

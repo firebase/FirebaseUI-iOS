@@ -17,7 +17,7 @@
 #import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthPickerViewController.h"
 
 #import <AuthenticationServices/AuthenticationServices.h>
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 
 #import "FirebaseAuthUI/Sources/Public/FirebaseAuthUI/FUIAuthBaseViewController_Internal.h"
 #import "FirebaseAuthUI/Sources/FUIAuthSignInButton.h"

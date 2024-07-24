@@ -14,6 +14,8 @@
 //  limitations under the License.
 //
 
+@import FirebaseAuth;
+
 #import "FirebaseOAuthUI/Sources/Public/FirebaseOAuthUI/FUIOAuth.h"
 
 #import <AuthenticationServices/AuthenticationServices.h>

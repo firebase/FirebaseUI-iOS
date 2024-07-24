@@ -15,7 +15,7 @@
 //
 
 @import FirebaseDatabaseUI;
-#import <FirebaseAuth/FirebaseAuth.h>
+@import FirebaseAuth;
 
 #import "FUIChatViewController.h"
 #import "FUIChatMessage.h"
