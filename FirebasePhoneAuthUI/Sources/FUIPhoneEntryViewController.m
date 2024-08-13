@@ -112,7 +112,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   if (self) {
     self.title = FUIPhoneAuthLocalizedString(kPAStr_EnterPhoneTitle);
     _countryCodes = countryCodes ?: [[FUICountryCodes alloc] init];
-    FUIPhoneAuth *provider = [authUI providerWithID:FIRPhoneAuthProviderID];
+    FUIPhoneAuth *provider = [authUI providerWithID:@"phone"];
     NSString *defaultCountryCode = provider.defaultCountryCode;
     _countryCodes.defaultCountryCodeInfo =
         [_countryCodes countryCodeInfoForCode:defaultCountryCode];
@@ -221,7 +221,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                                                      actionHandler:nil];
         [self presentViewController:alertController animated:YES completion:nil];
         
-        FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
+        FUIPhoneAuth *delegate = [self.authUI providerWithID:@"phone"];
         [delegate callbackWithCredential:nil error:error result:nil];
         return;
       }
@@ -360,7 +360,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 - (void)cancelAuthorization {
   NSError *error = [FUIAuthErrorUtils userCancelledSignInError];
-  FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
+  FUIPhoneAuth *delegate = [self.authUI providerWithID:@"phone"];
   [delegate callbackWithCredential:nil error:error result:^(FIRUser *_Nullable user,
                                                             NSError *_Nullable error) {
     if (!error || error.code == FUIAuthErrorCodeUserCancelledSignIn) {

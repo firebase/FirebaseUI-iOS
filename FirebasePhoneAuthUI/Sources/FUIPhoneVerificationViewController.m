@@ -185,7 +185,7 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
   [self incrementActivity];
   [_codeField resignFirstResponder];
   self.navigationItem.rightBarButtonItem.enabled = NO;
-  FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
+  FUIPhoneAuth *delegate = [self.authUI providerWithID:@"phone"];
   [delegate callbackWithCredential:credential
                              error:nil
                             result:^(FIRUser *_Nullable user, NSError *_Nullable error) {
@@ -221,7 +221,7 @@ static NSString *const kLinkPlaceholderPattern = @"\\[([^\\]]+)\\]";
 
 - (void)cancelAuthorization {
   NSError *error = [FUIAuthErrorUtils userCancelledSignInError];
-  FUIPhoneAuth *delegate = [self.authUI providerWithID:FIRPhoneAuthProviderID];
+  FUIPhoneAuth *delegate = [self.authUI providerWithID:@"phone"];
   [delegate callbackWithCredential:nil
                              error:error
                             result:^(FIRUser *_Nullable user, NSError *_Nullable error) {

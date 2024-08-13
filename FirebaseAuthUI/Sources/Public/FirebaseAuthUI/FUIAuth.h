@@ -20,6 +20,7 @@
 #import "FUIAuthProvider.h"
 
 @class FIRAuth;
+@class FIRAuthDataResult;
 @class FUIAuthPickerViewController;
 @class FUIAuth;
 @class FIRUser;
