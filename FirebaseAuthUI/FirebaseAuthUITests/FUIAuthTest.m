@@ -15,6 +15,7 @@
 //
 
 @import XCTest;
+@import FirebaseAuth;
 @import FirebaseCore;
 
 #import "FUIAuth.h"
