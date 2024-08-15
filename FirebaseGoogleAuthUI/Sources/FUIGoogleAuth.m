@@ -193,6 +193,8 @@ static NSString *const kSignInWithGoogle = @"SignInWithGoogle";
     }
   };
 
+  signIn.configuration = [[GIDConfiguration alloc] initWithClientID:clientID];
+
   [signIn signInWithPresentingViewController:presentingViewController
                                         hint:defaultValue completion:^(GIDSignInResult * _Nullable signInResult, NSError * _Nullable error) {
     [self handleSignInWithUser:signInResult.user
