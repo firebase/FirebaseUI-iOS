@@ -138,7 +138,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 
 - (void)onNext:(NSString *)emailText {
   // TODO: After Firebase 11 minimum, change to EmailAuthProvider.id.
-  FUIEmailAuth *emailAuth = [self.authUI providerWithID:@"email"];
+  FUIEmailAuth *emailAuth = [self.authUI providerWithID:@"password"];
 
   if (![[self class] isValidEmail:emailText]) {
     [self showAlertWithMessage:FUILocalizedString(kStr_InvalidEmailError)];

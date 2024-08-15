@@ -263,7 +263,7 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
     NSString *providerID = self.authUI.providers.firstObject.providerID;
     BOOL isPhoneAuth = [providerID isEqualToString:FIRPhoneAuthProviderID];
     BOOL isEmailAuth = [providerID isEqualToString:@
-@"email"];
+@"password"];
     BOOL shouldSkipAuthPicker = self.authUI.providers.count == 1 && (isPhoneAuth || isEmailAuth);
     if (shouldSkipAuthPicker) {
       if (isPhoneAuth) {
@@ -426,7 +426,7 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
           break;
         case kIDPFacebook:
           provider = useCustomScopes ? [[FUIFacebookAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
-                                                                   permissions:@[@"email",
+                                                                   permissions:@[@"password",
                                                                                 @"user_friends",
                                                                                 @"ads_read"]]
                                      :[[FUIFacebookAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];

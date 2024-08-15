@@ -138,7 +138,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
 }
 
 - (void)onNext:(NSString *)emailText {
-  FUIEmailAuth *emailAuth = [self.authUI providerWithID:@"email"];
+  FUIEmailAuth *emailAuth = [self.authUI providerWithID:@"password"];
   id<FUIAuthDelegate> delegate = self.authUI.delegate;
 
   if (![[self class] isValidEmail:emailText]) {
@@ -165,7 +165,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
     }
 
     id<FUIAuthProvider> provider = [self bestProviderFromProviderIDs:providers];
-    if (provider && ![provider.providerID isEqualToString:@"email"]) {
+    if (provider && ![provider.providerID isEqualToString:@"password"]) {
       NSString *email = emailText;
       [[self class] showSignInAlertWithEmail:email
                                     provider:provider
@@ -176,7 +176,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
                                cancelHandler:^{
         [self.authUI signOutWithError:nil];
       }];
-    } else if ([providers containsObject:@"email"]) {
+    } else if ([providers containsObject:@"password"]) {
       UIViewController *controller;
       if ([delegate respondsToSelector:@selector(passwordSignInViewControllerForAuthUI:email:)]) {
         controller = [delegate passwordSignInViewControllerForAuthUI:self.authUI
@@ -225,7 +225,7 @@ static NSString *const kNextButtonAccessibilityID = @"NextButtonAccessibilityID"
   }
 
   [self incrementActivity];
-  FUIEmailAuth *emailAuth = [self.authUI providerWithID:@"email"];
+  FUIEmailAuth *emailAuth = [self.authUI providerWithID:@"password"];
   [emailAuth generateURLParametersAndLocalCache:email linkingProvider:nil];
   [self.auth sendSignInLinkToEmail:email
                 actionCodeSettings:emailAuth.actionCodeSettings

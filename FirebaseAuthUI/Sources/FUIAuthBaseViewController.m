@@ -430,7 +430,7 @@ static NSString *const kAuthUICodingKey = @"authUI";
 }
 
 + (NSString *)providerLocalizedName:(NSString *)providerId {
-  if ([providerId isEqualToString:@"email"]) {
+  if ([providerId isEqualToString:@"password"]) {
     return FUILocalizedString(kStr_ProviderTitlePassword);
   } else if ([providerId isEqualToString:@"google.com"]) {
     return FUILocalizedString(kStr_ProviderTitleGoogle);

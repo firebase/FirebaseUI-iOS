@@ -77,7 +77,7 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
 
 - (instancetype)init {
   return [self initAuthAuthUI:[FUIAuth defaultAuthUI]
-                 signInMethod:@"email"
+                 signInMethod:@"password"
               forceSameDevice:NO
         allowNewEmailAccounts:YES
            requireDisplayName:YES
@@ -121,7 +121,7 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
 #pragma mark - FUIAuthProvider
 
 - (nullable NSString *)providerID {
-  return @"email";
+  return @"password";
 }
 
 /** @fn accessToken:
@@ -534,10 +534,10 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
     NSSet *supportedProviders =
         [NSSet setWithObjects:@"google.com",
                               @"facebook.com",
-                              @"email",
+                              @"password",
                               nil];
     if ([supportedProviders containsObject:existingFederatedProviderID]) {
-      if ([existingFederatedProviderID isEqualToString:@"email"]) {
+      if ([existingFederatedProviderID isEqualToString:@"password"]) {
 
         [FUIAuthBaseViewController showSignInAlertWithEmail:emailHint
                                           providerShortName:@"Email/Password"
@@ -669,7 +669,7 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
       return;
     }
     NSString *bestProviderID = providers[0];
-    if ([bestProviderID isEqual:@"email"]) {
+    if ([bestProviderID isEqual:@"password"]) {
       // Password verification.
       UIViewController *passwordController;
       if ([delegate respondsToSelector:
@@ -856,7 +856,7 @@ static NSString *const kEmailLinkSignInLinkingCredentialKey = @"FIRAuthEmailLink
   NSSet *providerSet =
   [NSSet setWithArray:@[ @"facebook.com",
                          @"google.com",
-                         @"email" ]];
+                         @"password" ]];
   for (NSString *provider in providers) {
     if ( [providerSet containsObject:provider]) {
       return provider;
