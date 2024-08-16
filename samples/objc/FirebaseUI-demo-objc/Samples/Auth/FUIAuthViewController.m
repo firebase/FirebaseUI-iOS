@@ -426,7 +426,7 @@ static NSString *const kFirebasePrivacyPolicy = @"https://firebase.google.com/su
           break;
         case kIDPFacebook:
           provider = useCustomScopes ? [[FUIFacebookAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]
-                                                                   permissions:@[@"password",
+                                                                   permissions:@[@"email",
                                                                                 @"user_friends",
                                                                                 @"ads_read"]]
                                      :[[FUIFacebookAuth alloc] initWithAuthUI:[FUIAuth defaultAuthUI]];
