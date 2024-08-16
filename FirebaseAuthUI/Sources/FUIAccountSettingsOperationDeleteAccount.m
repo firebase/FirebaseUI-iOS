@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
                               alertCloseButton:FUILocalizedString(kStr_Cancel)
                                providerHandler:^(id<FIRUserInfo> provider) {
     // TODO: Use public API after Firebase 11 minimum.
-    if (![provider.providerID isEqualToString:@"email"]) {
+    if (![provider.providerID isEqualToString:@"password"]) {
       [self reauthenticateWithProvider:provider.providerID actionHandler:^{
         [self showDeleteAccountView];
       }];

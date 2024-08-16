@@ -85,7 +85,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
   BOOL shouldSkipPhoneAuthPicker = _authProviders.count == 1 &&
       ([firstProviderID isEqualToString:FIRPhoneAuthProviderID] ||
        [firstProviderID isEqualToString:@
-@"email"]);
+@"password"]);
   if (!shouldSkipPhoneAuthPicker) {
     UIViewController *controller = [self.authUIMock authViewController];
     [self presentViewController:controller animated:YES completion:nil];
@@ -93,7 +93,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
     FUIPhoneAuth *provider = _authProviders.firstObject;
     [provider signInWithPresentingViewController:self phoneNumber:nil];
   } else if ([firstProviderID isEqualToString:@
-@"email"]) {
+@"password"]) {
     FUIEmailAuth *provider = _authProviders.firstObject;
     [provider signInWithPresentingViewController:self email:nil];
   }
@@ -439,7 +439,7 @@ typedef NS_ENUM(NSUInteger, FIRProviders) {
 - (id)createPasswordProvider {
   id emailPasswordProviderMock = OCMProtocolMock(@protocol(FIRUserInfo));
   OCMStub([emailPasswordProviderMock providerID]).andReturn(@
-@"email");
+@"password");
   OCMStub([emailPasswordProviderMock email]).andReturn(@"password@email.com");
   OCMStub([emailPasswordProviderMock displayName]).andReturn(@"password displayName");
 
