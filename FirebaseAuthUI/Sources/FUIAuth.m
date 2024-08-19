@@ -352,6 +352,7 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
                                            URL:(nullable NSURL *)url
                                          error:(nullable NSError *)error {
   dispatch_async(dispatch_get_main_queue(), ^{
+    // Firebase 10 signatures.
     if ([self.delegate respondsToSelector:@selector(authUI:didSignInWithAuthDataResult:URL:error:)]) {
       [self.delegate authUI:self
           didSignInWithAuthDataResult:authDataResult
@@ -360,6 +361,13 @@ static NSString *const kFirebaseAuthUIFrameworkMarker = @"FirebaseUI-iOS";
     }
     if ([self.delegate respondsToSelector:@selector(authUI:didSignInWithAuthDataResult:error:)]) {
       [self.delegate authUI:self didSignInWithAuthDataResult:authDataResult error:error];
+    }
+    // Firebase 11+ signatures.
+    if ([self.delegate respondsToSelector:@selector(authUI:didSignInWith:URL:error:)]) {
+      [self.delegate authUI:self didSignInWith:authDataResult URL:url error:error];
+    }
+    if ([self.delegate respondsToSelector:@selector(authUI:didSignInWith:error:)]) {
+      [self.delegate authUI:self didSignInWith:authDataResult error:error];
     }
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
