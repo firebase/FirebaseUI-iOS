@@ -513,7 +513,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuthInterop\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseDatabase\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
@@ -521,6 +521,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreExtension\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseSharedSwift\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAppCheckInterop\"",
 				);
@@ -540,7 +541,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuthInterop\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseDatabase\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
@@ -548,6 +549,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreInternal\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreExtension\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseSharedSwift\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAppCheckInterop\"",
 				);

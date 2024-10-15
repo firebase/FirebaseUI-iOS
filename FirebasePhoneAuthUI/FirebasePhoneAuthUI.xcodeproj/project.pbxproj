@@ -816,7 +816,7 @@
 					"@loader_path/Frameworks",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuthInterop\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
@@ -825,6 +825,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseAuthUI\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseCoreInternal\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreExtension\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAppCheckInterop\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/RecaptchaInterop\"",
 				);
@@ -863,7 +864,7 @@
 					"@loader_path/Frameworks",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuthInterop\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
@@ -872,6 +873,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseAuthUI\"",
 					"\"$(PODS_CONFIGURATION_BUILD_DIR)/FirebaseCoreInternal\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreExtension\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAppCheckInterop\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/RecaptchaInterop\"",
 				);
