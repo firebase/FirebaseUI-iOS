@@ -49,6 +49,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@main
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
       - name: List
         run: |
           xcodebuild -list
@@ -64,6 +67,9 @@ jobs:
         uses: actions/checkout@main
       - name: Setup
         run: gem install bundler; bundle install
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
       - name: Build
         # (#1191) Fix and remove --allow-warnings
         run: |

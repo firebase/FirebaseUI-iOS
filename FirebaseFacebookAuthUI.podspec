@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FirebaseFacebookAuthUI'
-  s.version      = '14.2.7'
+  s.version      = '15.0.0'
   s.summary      = 'A Facebook auth provider for FirebaseAuthUI.'
   s.homepage     = 'https://github.com/firebase/FirebaseUI-iOS'
   s.license      = { :type => 'Apache 2.0', :file => 'LICENSE' }
@@ -15,15 +15,15 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = {
     'HEADER_SEARCH_PATHS' => '"${PODS_TARGET_SRCROOT}"',
   }
-  s.swift_version = '5.3'
+  s.swift_version = '6.0'
 
   s.platform = :ios, '13.0'
   s.public_header_files = 'FirebaseFacebookAuthUI/Sources/Public/FirebaseFacebookAuthUI/*.h'
   s.source_files = 'FirebaseFacebookAuthUI/Sources/**/*.{h,m}'
   s.dependency 'FirebaseAuth'
   s.dependency 'FirebaseCore'
-  s.dependency 'FirebaseAuthUI', '>= 14.2'
-  s.dependency 'FBSDKLoginKit', '>= 11.0', '< 18.0'
+  s.dependency 'FirebaseAuthUI', '>= 15.0'
+  s.dependency 'FBSDKLoginKit', '>= 17.0', '< 18.0'
   s.dependency 'FBSDKCoreKit_Basics'
   s.resource_bundles = {
     'FirebaseFacebookAuthUI' => ['FirebaseFacebookAuthUI/Sources/{Resources,Strings}/*.{png,lproj}']

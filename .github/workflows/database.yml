@@ -28,6 +28,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@main
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
       - name: Setup
         run: |
           cd FirebaseDatabaseUI
@@ -45,6 +48,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@main
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
       - name: List
         run: |
           xcodebuild -list
@@ -58,6 +64,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@main
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
       - name: Setup
         run: gem install bundler; bundle install
       - name: Build
