@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.source_files = 'FirebaseFacebookAuthUI/Sources/**/*.{h,m}'
   s.dependency 'FirebaseAuth'
   s.dependency 'FirebaseCore'
-  s.dependency 'FirebaseAuthUI', '>= 15.0'
+  s.dependency 'FirebaseAuthUI', '~> 15.0'
   s.dependency 'FBSDKLoginKit', '>= 17.0', '< 18.0'
   s.dependency 'FBSDKCoreKit_Basics'
   s.resource_bundles = {
