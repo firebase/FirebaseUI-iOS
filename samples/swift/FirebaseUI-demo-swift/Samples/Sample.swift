@@ -55,7 +55,7 @@ enum Sample: Int, RawRepresentable {
     }
   }
   
-  func controller() -> UIViewController {
+  @MainActor func controller() -> UIViewController {
     switch self {
     case .chat:
       return UIStoryboard.instantiateViewController("Main", identifier: "ChatViewController")

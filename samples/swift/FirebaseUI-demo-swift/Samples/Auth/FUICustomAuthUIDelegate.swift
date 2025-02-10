@@ -18,7 +18,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseEmailAuthUI
 
-class FUICustomAuthDelegate: NSObject, FUIAuthDelegate {
+class FUICustomAuthDelegate: NSObject, @preconcurrency FUIAuthDelegate {
 
   @objc func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
     switch error {
@@ -33,33 +33,33 @@ class FUICustomAuthDelegate: NSObject, FUIAuthDelegate {
     }
   }
 
-  func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
+  @MainActor func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
     return FUICustomAuthPickerViewController(nibName: "FUICustomAuthPickerViewController",
                                              bundle: Bundle.main,
                                              authUI: authUI)
   }
 
-  func emailEntryViewController(forAuthUI authUI: FUIAuth) -> FUIEmailEntryViewController {
+  @MainActor func emailEntryViewController(forAuthUI authUI: FUIAuth) -> FUIEmailEntryViewController {
     return FUICustomEmailEntryViewController(nibName: "FUICustomEmailEntryViewController",
                                              bundle: Bundle.main,
                                              authUI: authUI)
   }
 
-  func passwordRecoveryViewController(forAuthUI authUI: FUIAuth, email: String?) -> FUIPasswordRecoveryViewController {
+  @MainActor func passwordRecoveryViewController(forAuthUI authUI: FUIAuth, email: String?) -> FUIPasswordRecoveryViewController {
     return FUICustomPasswordRecoveryViewController(nibName: "FUICustomPasswordRecoveryViewController",
                                                    bundle: Bundle.main,
                                                    authUI: authUI,
                                                    email: email)
   }
 
-  func passwordSignInViewController(forAuthUI authUI: FUIAuth, email: String?) -> FUIPasswordSignInViewController {
+  @MainActor func passwordSignInViewController(forAuthUI authUI: FUIAuth, email: String?) -> FUIPasswordSignInViewController {
     return FUICustomPasswordSignInViewController(nibName: "FUICustomPasswordSignInViewController",
                                                  bundle: Bundle.main,
                                                  authUI: authUI,
                                                  email: email)
   }
 
-  func passwordSignUpViewController(forAuthUI authUI: FUIAuth, email: String) -> FUIPasswordSignUpViewController {
+  @MainActor func passwordSignUpViewController(forAuthUI authUI: FUIAuth, email: String) -> FUIPasswordSignUpViewController {
     return FUICustomPasswordSignUpViewController(nibName: "FUICustomPasswordSignUpViewController",
                                                  bundle: Bundle.main,
                                                  authUI: authUI,
@@ -67,7 +67,7 @@ class FUICustomAuthDelegate: NSObject, FUIAuthDelegate {
                                                  requireDisplayName: true)
   }
 
-  func passwordVerificationViewController(forAuthUI authUI: FUIAuth, email: String?, newCredential: AuthCredential) -> FUIPasswordVerificationViewController {
+  @MainActor func passwordVerificationViewController(forAuthUI authUI: FUIAuth, email: String?, newCredential: AuthCredential) -> FUIPasswordVerificationViewController {
     return FUICustomPasswordVerificationViewController(nibName: "FUICustomPasswordVerificationViewController",
                                                        bundle: Bundle.main,
                                                        authUI: authUI,
