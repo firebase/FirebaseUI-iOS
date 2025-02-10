@@ -19,8 +19,7 @@
 @import FirebaseStorageUI;
 
 #import "FUIStorageViewController.h"
-
-#import <FirebaseStorage/FirebaseStorage.h>
+#import <FirebaseStorage/FirebaseStorage-Swift.h>
 
 @interface FUIStorageViewController ()
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
