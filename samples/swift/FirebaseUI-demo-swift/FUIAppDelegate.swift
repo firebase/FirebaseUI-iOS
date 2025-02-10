@@ -21,7 +21,7 @@ import FirebaseAuth
 import FirebaseAuthUI
 import GTMSessionFetcher
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
