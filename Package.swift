@@ -62,6 +62,10 @@ let package = Package(
       name: "FirebaseStorageUI",
       targets: ["FirebaseStorageUI"]
     ),
+    .library(
+      name: "FirebaseAuthSwiftUI",
+      targets: ["FirebaseAuthSwiftUI"]
+    ),
   ],
   dependencies: [
     .package(
@@ -241,5 +245,17 @@ let package = Package(
         .headerSearchPath("../../"),
       ]
     ),
+    .target(
+      name: "FirebaseAuthSwiftUI",
+      dependencies: [
+          .product(name: "FirebaseAuth", package: "Firebase")
+      ],
+      path: "FirebaseSwiftUI/FirebaseAuthSwiftUI/Sources"
+      ),
+    .testTarget(
+      name: "FirebaseAuthSwiftUITests",
+      dependencies: ["FirebaseAuthSwiftUI"],
+      path: "FirebaseSwiftUI/FirebaseAuthSwiftUI/Tests/"
+      ),
   ]
 )
