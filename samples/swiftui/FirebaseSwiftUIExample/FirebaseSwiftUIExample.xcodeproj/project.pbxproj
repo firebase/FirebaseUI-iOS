@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		46F89C392D64B04E000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 46F89C382D64B04E000F8BC0 /* FirebaseAuthSwiftUI */; };
+		46F89C4D2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 46F89C4C2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		46F89C1B2D64A86D000F8BC0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46F89C392D64B04E000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */,
+				46F89C4D2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +119,8 @@
 			);
 			name = FirebaseSwiftUIExample;
 			packageProductDependencies = (
+				46F89C382D64B04E000F8BC0 /* FirebaseAuthSwiftUI */,
+				46F89C4C2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI */,
 			);
 			productName = FirebaseSwiftUIExample;
 			productReference = 46F89C082D64A86C000F8BC0 /* FirebaseSwiftUIExample.app */;
@@ -195,6 +204,9 @@
 			);
 			mainGroup = 46F89BFF2D64A86C000F8BC0;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				46F89C4B2D64BB9B000F8BC0 /* XCLocalSwiftPackageReference "../../../../firebaseUI-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 46F89C092D64A86C000F8BC0 /* Products */;
 			projectDirPath = "";
@@ -558,6 +570,24 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		46F89C4B2D64BB9B000F8BC0 /* XCLocalSwiftPackageReference "../../../../firebaseUI-ios" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../../firebaseUI-ios";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		46F89C382D64B04E000F8BC0 /* FirebaseAuthSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAuthSwiftUI;
+		};
+		46F89C4C2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAuthSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 46F89C002D64A86C000F8BC0 /* Project object */;
 }
