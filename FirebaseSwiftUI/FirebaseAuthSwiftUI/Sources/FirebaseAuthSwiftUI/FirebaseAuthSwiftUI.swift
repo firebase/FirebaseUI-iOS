@@ -11,8 +11,8 @@ protocol AuthListenerProtocol {
     func onSignedIn(_ user: User)
     func onCanceled()
     // TODO - add when I get to this point
-    // func onCredentialReceived(_ credential: AuthCredential)
-    // func onCredentialLinked(_ credential: AuthCredential)
+     func onCredentialReceived(_ credential: AuthCredential)
+     func onCredentialLinked(_ credential: AuthCredential)
     // func onMFARequired(_ resolver: MultiFactorResolver)
 }
 
@@ -43,16 +43,21 @@ enum AuthAction {
     case none
 }
 
-class AuthProvider<Listener: AuthListenerProtocol, Credential: AuthCredential>: AuthProviderProtocol {
+class AuthProvider<Listener: AuthListenerProtocol>: AuthProviderProtocol {
     var auth: Auth = Auth.auth()
     var authListener: Listener
     var providerId: String
     
-    init(listener: Listener) {
+  init(listener: Listener, providerId: String) {
         self.authListener = listener
+        self.providerId = providerId
     }
+  
+  var shouldUpgradeAnonymous: Bool {
+      return Auth.auth().currentUser?.isAnonymous ?? false
+  }
     
-    func signInWithCredential(_ credential: Credential) {
+  func signInWithCredential(_ credential: AuthCredential) {
         authListener.onBeforeSignIn()
         auth.signIn(with: credential) { [weak self] result, error in
             if let error = error {
@@ -63,7 +68,7 @@ class AuthProvider<Listener: AuthListenerProtocol, Credential: AuthCredential>: 
         }
     }
     
-    func linkWithCredential(_ credential: Credential) {
+    func linkWithCredential(_ credential: AuthCredential) {
         authListener.onCredentialReceived(credential)
         guard let user = auth.currentUser else { return }
         
@@ -79,17 +84,17 @@ class AuthProvider<Listener: AuthListenerProtocol, Credential: AuthCredential>: 
   func onCredentialReceived(credential: AuthCredential, action: AuthAction) {
       switch action {
       case .link:
-          linkWithCredential(credential: credential)
+          linkWithCredential(credential)
       case .signIn, .signUp:
           // Only email provider has a different action for sign in and sign up
           // and implements its own sign up logic.
           if shouldUpgradeAnonymous {
-              linkWithCredential(credential: credential)
+              linkWithCredential(credential)
           } else {
-              signInWithCredential(credential: credential)
+              signInWithCredential(credential)
           }
       case .none:
-          authListener.onCredentialReceived(credential: credential)
+          authListener.onCredentialReceived(credential)
       }
   }
     // TODO - fetchSignInMethodsForEmail/fetchProvidersForEmail is deprecated
