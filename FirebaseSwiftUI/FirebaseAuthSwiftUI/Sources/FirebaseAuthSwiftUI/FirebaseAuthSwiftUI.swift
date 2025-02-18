@@ -46,8 +46,7 @@ enum AuthAction {
 class AuthProvider<Listener: AuthListenerProtocol, Credential: AuthCredential>: AuthProviderProtocol {
     var auth: Auth = Auth.auth()
     var authListener: Listener
-  // add providerId to classes that extend this
-//    var providerId: String = "default_provider_id"
+    var providerId: String
     
     init(listener: Listener) {
         self.authListener = listener
