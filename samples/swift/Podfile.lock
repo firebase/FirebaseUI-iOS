@@ -1173,31 +1173,31 @@ PODS:
     - FirebaseAuth (< 12.0, >= 8.0)
     - FirebaseAuthUI (~> 15.0)
     - FirebaseCore
-  - FirebaseAppCheckInterop (11.7.0)
-  - FirebaseAuth (11.7.0):
+  - FirebaseAppCheckInterop (11.8.0)
+  - FirebaseAuth (11.8.1):
     - FirebaseAppCheckInterop (~> 11.0)
     - FirebaseAuthInterop (~> 11.0)
-    - FirebaseCore (~> 11.7.0)
-    - FirebaseCoreExtension (~> 11.7.0)
+    - FirebaseCore (~> 11.8.0)
+    - FirebaseCoreExtension (~> 11.8.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 8.0)
     - GoogleUtilities/Environment (~> 8.0)
     - GTMSessionFetcher/Core (< 5.0, >= 3.4)
     - RecaptchaInterop (~> 100.0)
-  - FirebaseAuthInterop (11.7.0)
+  - FirebaseAuthInterop (11.8.0)
   - FirebaseAuthUI (15.0.0):
     - FirebaseAuth (< 12.0, >= 11.0)
     - FirebaseCore
-  - FirebaseCore (11.7.0):
-    - FirebaseCoreInternal (~> 11.7.0)
+  - FirebaseCore (11.8.1):
+    - FirebaseCoreInternal (~> 11.8.0)
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/Logger (~> 8.0)
-  - FirebaseCoreExtension (11.7.0):
-    - FirebaseCore (~> 11.7.0)
-  - FirebaseCoreInternal (11.7.0):
+  - FirebaseCoreExtension (11.8.0):
+    - FirebaseCore (~> 11.8.0)
+  - FirebaseCoreInternal (11.8.0):
     - "GoogleUtilities/NSData+zlib (~> 8.0)"
-  - FirebaseDatabase (11.7.0):
+  - FirebaseDatabase (11.8.0):
     - FirebaseAppCheckInterop (~> 11.0)
-    - FirebaseCore (~> 11.7.0)
+    - FirebaseCore (~> 11.8.0)
     - FirebaseSharedSwift (~> 11.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - leveldb-library (~> 1.22)
@@ -1214,12 +1214,12 @@ PODS:
     - FirebaseAuth
     - FirebaseAuthUI (~> 15.0)
     - FirebaseCore
-  - FirebaseFirestore (11.7.0):
-    - FirebaseCore (~> 11.7.0)
-    - FirebaseCoreExtension (~> 11.7.0)
-    - FirebaseFirestoreInternal (= 11.7.0)
+  - FirebaseFirestore (11.8.0):
+    - FirebaseCore (~> 11.8.0)
+    - FirebaseCoreExtension (~> 11.8.0)
+    - FirebaseFirestoreInternal (= 11.8.0)
     - FirebaseSharedSwift (~> 11.0)
-  - FirebaseFirestoreInternal (11.7.0):
+  - FirebaseFirestoreInternal (11.8.0):
     - abseil/algorithm (~> 1.20240116.1)
     - abseil/base (~> 1.20240116.1)
     - abseil/container/flat_hash_map (~> 1.20240116.1)
@@ -1229,7 +1229,7 @@ PODS:
     - abseil/time (~> 1.20240116.1)
     - abseil/types (~> 1.20240116.1)
     - FirebaseAppCheckInterop (~> 11.0)
-    - FirebaseCore (~> 11.7.0)
+    - FirebaseCore (~> 11.8.0)
     - "gRPC-C++ (~> 1.65.0)"
     - gRPC-Core (~> 1.65.0)
     - leveldb-library (~> 1.22)
@@ -1247,12 +1247,12 @@ PODS:
   - FirebasePhoneAuthUI (15.0.0):
     - FirebaseAuth
     - FirebaseAuthUI (~> 15.0)
-  - FirebaseSharedSwift (11.7.0)
-  - FirebaseStorage (11.7.0):
+  - FirebaseSharedSwift (11.8.0)
+  - FirebaseStorage (11.8.0):
     - FirebaseAppCheckInterop (~> 11.0)
     - FirebaseAuthInterop (~> 11.0)
-    - FirebaseCore (~> 11.7.0)
-    - FirebaseCoreExtension (~> 11.7.0)
+    - FirebaseCore (~> 11.8.0)
+    - FirebaseCoreExtension (~> 11.8.0)
     - GoogleUtilities/Environment (~> 8.0)
     - GTMSessionFetcher/Core (< 5.0, >= 3.4)
   - FirebaseStorageUI (15.0.0):
@@ -1420,9 +1420,9 @@ PODS:
   - nanopb/encode (3.30910.0)
   - PromisesObjC (2.4.0)
   - RecaptchaInterop (100.0.0)
-  - SDWebImage (5.20.0):
-    - SDWebImage/Core (= 5.20.0)
-  - SDWebImage/Core (5.20.0)
+  - SDWebImage (5.21.0):
+    - SDWebImage/Core (= 5.21.0)
+  - SDWebImage/Core (5.21.0)
 
 DEPENDENCIES:
   - FirebaseAnonymousAuthUI (from `../../`)
@@ -1504,25 +1504,25 @@ SPEC CHECKSUMS:
   FBSDKCoreKit_Basics: 151b43db8b834d3f0e02f95d36a44ffd36265e45
   FBSDKLoginKit: 5c1cd53c91a2282b3a4fe6e6d3dcf2b8b0d33d55
   FirebaseAnonymousAuthUI: beac8a00da8c765f14e01bfcd13d9fde8b991e1f
-  FirebaseAppCheckInterop: 2376d3ec5cb4267facad4fe754ab4f301a5a519b
-  FirebaseAuth: 77e25aa24f3e1c626c5babd3338551fc1669ee0e
-  FirebaseAuthInterop: a6973d72aa242ea88ffb6be9c9b06c65455071da
+  FirebaseAppCheckInterop: 7bf86d55a2b7e9bd91464120eba3e52e4b63b2e2
+  FirebaseAuth: ad59a1a7b161e75f74c39f70179d2482d40e2737
+  FirebaseAuthInterop: 651756e70d9a0b9160db39ead71fd5507dbb6c84
   FirebaseAuthUI: d2c84c671a24b9d669b4d2483cfd261c2c6e5bab
-  FirebaseCore: 3227e35f4197a924206fbcdc0349325baf4f5de4
-  FirebaseCoreExtension: 206c1b399f0d103055207c16f299b28e3dbd1949
-  FirebaseCoreInternal: d6c17dafc8dc33614733a8b52df78fcb4394c881
-  FirebaseDatabase: b014c0068fa691dec5f4a868357e685df882cca5
+  FirebaseCore: 99fe0c4b44a39f37d99e6404e02009d2db5d718d
+  FirebaseCoreExtension: 3d3f2017a00d06e09ab4ebe065391b0bb642565e
+  FirebaseCoreInternal: df24ce5af28864660ecbd13596fc8dd3a8c34629
+  FirebaseDatabase: f86d3da3a67e41b551a84a8c5b081d0f86a5a896
   FirebaseDatabaseUI: 6b629132ecc79e624b76f5b370921eea30c06503
   FirebaseEmailAuthUI: f81d35790f1647484af81fb8b96ee81bc3eb9fe7
   FirebaseFacebookAuthUI: 65d7e20aef4d9107fc3edf9274f144cde706fecd
-  FirebaseFirestore: e8528981558d50872e24119b9448b18e86cab9f6
-  FirebaseFirestoreInternal: 953e31e70db09d928b927b65761171c680d2ea9b
+  FirebaseFirestore: 563a4ab1a65e2858f05e150bb4c31b0f8f79248b
+  FirebaseFirestoreInternal: 8c5921c360a70e447bfeefb245f450e8b50e750b
   FirebaseFirestoreUI: 5e367973b79caec884a4e16269c97f991ddaf5de
   FirebaseGoogleAuthUI: 11ead69cc92ac3f86f94692d0e96cabe22f61121
   FirebaseOAuthUI: 784f4f756adebbfaae892a873c0b98085b2f12d6
   FirebasePhoneAuthUI: 9f80bfb5fa883ea5a0a33ebad25f28c2ac8111e7
-  FirebaseSharedSwift: a45efd84d60ebbfdcdbaebc66948af3630459e62
-  FirebaseStorage: d35da127dd49edcbd07b8c07cf651a70161558b2
+  FirebaseSharedSwift: 672954eac7b141d6954fab9a32d45d6b1d922df8
+  FirebaseStorage: 8eede00081a6ce904eaa8d2daa66f1e053e8e6ea
   FirebaseStorageUI: 646d8e65d699ba733c16b66e7fd2fae4d33b4b78
   FirebaseUI: 0d38fa4fda5606b3da0af78a829c960f3a81ca50
   GoogleSignIn: ce8c89bb9b37fb624b92e7514cc67335d1e277e4
@@ -1535,7 +1535,7 @@ SPEC CHECKSUMS:
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
+  SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
 
 PODFILE CHECKSUM: 2c24841f482dcea2f8eb8b3a4c3bfeda6423a0b3
 
