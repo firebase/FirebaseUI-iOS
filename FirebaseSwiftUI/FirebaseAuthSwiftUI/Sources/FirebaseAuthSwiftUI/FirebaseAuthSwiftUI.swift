@@ -5,18 +5,18 @@ import FirebaseAuth
 import Combine
 
 
-protocol AuthListenerProtocol {
+public protocol AuthListenerProtocol {
     func onError(_ error: Error)
     func onBeforeSignIn()
     func onSignedIn(_ user: User)
     func onCanceled()
+    func onCredentialReceived(_ credential: AuthCredential)
+    func onCredentialLinked(_ credential: AuthCredential)
     // TODO - add when I get to this point
-     func onCredentialReceived(_ credential: AuthCredential)
-     func onCredentialLinked(_ credential: AuthCredential)
     // func onMFARequired(_ resolver: MultiFactorResolver)
 }
 
-protocol AuthProviderProtocol {
+public protocol AuthProviderProtocol {
     associatedtype Listener: AuthListenerProtocol
     associatedtype Credential: AuthCredential
     
@@ -28,7 +28,7 @@ protocol AuthProviderProtocol {
     func linkWithCredential(_ credential: Credential)
 }
 
-enum AuthAction {
+public enum AuthAction {
     /// Performs user sign in
     case signIn
 
@@ -43,12 +43,12 @@ enum AuthAction {
     case none
 }
 
-class AuthProvider<Listener: AuthListenerProtocol>: AuthProviderProtocol {
-    var auth: Auth = Auth.auth()
-    var authListener: Listener
-    var providerId: String
+open class AuthProvider<Listener: AuthListenerProtocol>: AuthProviderProtocol {
+  public var auth: Auth = Auth.auth()
+  public var authListener: Listener
+  public var providerId: String
     
-  init(listener: Listener, providerId: String) {
+  public init(listener: Listener, providerId: String) {
         self.authListener = listener
         self.providerId = providerId
     }
@@ -57,7 +57,7 @@ class AuthProvider<Listener: AuthListenerProtocol>: AuthProviderProtocol {
       return Auth.auth().currentUser?.isAnonymous ?? false
   }
     
-  func signInWithCredential(_ credential: AuthCredential) {
+  public func signInWithCredential(_ credential: AuthCredential) {
         authListener.onBeforeSignIn()
         auth.signIn(with: credential) { [weak self] result, error in
             if let error = error {
@@ -68,7 +68,7 @@ class AuthProvider<Listener: AuthListenerProtocol>: AuthProviderProtocol {
         }
     }
     
-    func linkWithCredential(_ credential: AuthCredential) {
+  public func linkWithCredential(_ credential: AuthCredential) {
         authListener.onCredentialReceived(credential)
         guard let user = auth.currentUser else { return }
         
