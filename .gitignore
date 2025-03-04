@@ -16,7 +16,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-
+.build/
 # Third Party
 /sdk
 
