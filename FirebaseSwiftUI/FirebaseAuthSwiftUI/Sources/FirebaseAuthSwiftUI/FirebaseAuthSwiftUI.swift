@@ -8,6 +8,24 @@ import SwiftUI
 
 public protocol FUIAuthProvider {
   var providerId: String { get }
+  var shortName: String { get }
+  var signInLabel: String { get }
+  var icon: UIImage { get }
+  var buttonBackgroundColor: UIColor { get }
+  var buttonTextColor: UIColor { get }
+  var buttonAlignment: FUIButtonAlignment { get set }
+  var accessToken: String? { get }
+  var idToken: String? { get }
+
+  func signInWithDefaultValue(_ defaultValue: String?,
+                              presentingViewController: UIViewController?,
+                              completion: @escaping FUIAuthProviderSignInCompletionBlock)
+
+  func signOut()
+
+  func email() -> String
+
+  // Removed handleOpenURL method as SwiftUI uses onOpenURL which is a view modifier
 }
 
 public class FirebaseAuthSwiftUI {
@@ -79,7 +97,6 @@ public struct EmailProviderButton: EmailAuthButton {
   public var body: some View {
     VStack {
       Button(action: {
-        // Add the action you want to perform when the button is tapped
         print("Email sign-in button tapped")
       }) {
         Text(text)
