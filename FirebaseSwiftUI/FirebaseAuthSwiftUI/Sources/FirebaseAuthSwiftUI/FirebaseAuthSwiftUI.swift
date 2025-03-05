@@ -13,13 +13,15 @@ public protocol FUIAuthProvider {
   var icon: UIImage { get }
   var buttonBackgroundColor: UIColor { get }
   var buttonTextColor: UIColor { get }
-  var buttonAlignment: FUIButtonAlignment { get set }
+  var buttonAlignment: Alignment { get set }
   var accessToken: String? { get }
   var idToken: String? { get }
 
-  func signInWithDefaultValue(_ defaultValue: String?,
-                              presentingViewController: UIViewController?,
-                              completion: @escaping FUIAuthProviderSignInCompletionBlock)
+  // State properties passed upwards
+  var credential: AuthCredential? { get set }
+  var error: Error? { get set }
+  var userInfo: [String: Any]? { get set }
+  var isAuthenticated: Bool { get set }
 
   func signOut()
 
