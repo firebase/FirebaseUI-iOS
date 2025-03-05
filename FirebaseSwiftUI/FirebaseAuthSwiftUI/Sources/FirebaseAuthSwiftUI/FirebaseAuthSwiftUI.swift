@@ -6,6 +6,10 @@ import FirebaseCore
 // https://docs.swift.org/swift-book
 import SwiftUI
 
+enum FUIError: Error {
+  case providerNotFound(message: String)
+}
+
 public protocol FUIAuthProvider {
   var providerId: String { get }
   var shortName: String { get }
@@ -30,6 +34,7 @@ public protocol FUIAuthProvider {
   // Removed handleOpenURL method as SwiftUI uses onOpenURL which is a view modifier
 }
 
+// similar to FUIAuth in UIKit implementation
 public class FirebaseAuthSwiftUI {
   private var auth: Auth
   private var authProviders: [FUIAuthProvider] = []
@@ -40,6 +45,17 @@ public class FirebaseAuthSwiftUI {
 
   public func authProviders(providers: [FUIAuthProvider]) {
     authProviders = providers
+  }
+
+  public func providerWithId(providerId: String) throws -> FUIAuthProvider? {
+    if let provider = authProviders.first(where: { $0.providerId == providerId }) {
+      return provider
+    } else {
+      throw FUIError
+        .providerNotFound(
+          message: "Provider with ID \(providerId) not found. Did you add it to the authProviders array?"
+        )
+    }
   }
 }
 
@@ -69,11 +85,11 @@ public protocol AuthPickerView: View {
 
 public struct FUIAuthPicker: AuthPickerView {
   public var title: String
-  private var emailAuthButton: any EmailAuthButton
+  private var emailAuthButton: any EmailAuthButtonProtocol
 
-  public init(title: String? = nil, _emailAuthButton: (any EmailAuthButton)? = nil) {
+  public init(title: String? = nil, _emailAuthButton: (any EmailAuthButtonProtocol)? = nil) {
     self.title = title ?? "Auth Picker View"
-    emailAuthButton = _emailAuthButton ?? EmailProviderButton() as! any EmailAuthButton
+    emailAuthButton = _emailAuthButton ?? EmailAuthButton() as! any EmailAuthButtonProtocol
   }
 
   public var body: some View {
@@ -90,16 +106,17 @@ public struct FUIAuthPicker: AuthPickerView {
   }
 }
 
-public protocol EmailAuthButton: View {
+public protocol EmailAuthButtonProtocol: View {
   var text: String { get }
 }
 
-public struct EmailProviderButton: EmailAuthButton {
+public struct EmailAuthButton: EmailAuthButtonProtocol {
   public var text: String = "Sign in with email"
+  @State private var emailAuthView = false
   public var body: some View {
     VStack {
       Button(action: {
-        print("Email sign-in button tapped")
+        emailAuthView = true
       }) {
         Text(text)
           .padding()
@@ -107,6 +124,43 @@ public struct EmailProviderButton: EmailAuthButton {
           .foregroundColor(.white)
           .cornerRadius(8)
       }
+      NavigationLink(destination: EmailAuthProvider(), isActive: $emailAuthView) {
+        EmptyView()
+      }
     }
+  }
+}
+
+public struct EmailAuthProvider: View {
+  @State private var email: String = ""
+
+  public var body: some View {
+    VStack {
+      Text("Email")
+        .font(.largeTitle)
+        .padding()
+      TextField("Email", text: $email, onCommit: emailSubmit)
+        .textFieldStyle(RoundedBorderTextFieldStyle())
+        .padding()
+    }
+    .padding(20)
+    .background(Color.white)
+    .cornerRadius(12)
+    .shadow(radius: 10)
+    .padding()
+    // TODO: - figure out why this is causing exception: Ambiguous use of 'toolbar(content:)'
+//    .toolbar {
+//      ToolbarItemGroup(placement: .navigationBarTrailing) {
+//        Button("Next") {
+//          handleNext()
+//        }
+//      }
+//    }
+  }
+
+  private func emailSubmit() {
+    // TODO-
+    // 1. need to get correct provider, create function on FUIAuth
+    // 2. Create another view/alert which renders if email isn't valid
   }
 }
