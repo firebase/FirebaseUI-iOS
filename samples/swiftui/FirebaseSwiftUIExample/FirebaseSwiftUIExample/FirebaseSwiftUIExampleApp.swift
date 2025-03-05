@@ -7,9 +7,15 @@
 
 import SwiftUI
 import SwiftData
+import FirebaseAuthSwiftUI
+import FirebaseCore
+import FirebaseAuth
 
 @main
 struct FirebaseSwiftUIExampleApp: App {
+    init() {
+        FirebaseApp.configure()
+    }
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -25,7 +31,11 @@ struct FirebaseSwiftUIExampleApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+          // Put this at top level so user can control it in their app
+          NavigationView {
+            let firebaseAuthUI = FirebaseAuthSwiftUI()
+            FUIAuthView(FUIAuth: firebaseAuthUI)
+          }
         }
         .modelContainer(sharedModelContainer)
     }
