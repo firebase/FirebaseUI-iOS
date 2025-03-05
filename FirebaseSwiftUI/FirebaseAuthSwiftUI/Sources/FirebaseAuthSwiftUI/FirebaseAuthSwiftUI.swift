@@ -14,7 +14,6 @@ public class FirebaseAuthSwiftUI {
   private var authProviders: [FUIAuthProvider] = []
 
   public init(auth: Auth? = nil) {
-      // Use the provided Auth instance or default
       self.auth = auth ?? Auth.auth()
   }
 
@@ -49,15 +48,47 @@ public protocol AuthPickerView: View {
 }
 
 public struct FUIAuthPicker: AuthPickerView {
-  public init(title: String? = nil) {
+  public var title: String
+  private var emailAuthButton: any EmailAuthButton
+  
+  public init(title: String? = nil, _emailAuthButton: (any EmailAuthButton)? = nil) {
     self.title = title ?? "Auth Picker View"
+    self.emailAuthButton = _emailAuthButton ?? EmailProviderButton() as! any EmailAuthButton
   }
-    public var title: String = "Main View"
+    
     public var body: some View {
         VStack {
             Text(title)
                 .font(.largeTitle)
                 .padding()
-        }
+          AnyView(emailAuthButton)
+        }.padding(20)
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(radius: 10)
+            .padding() 
+
     }
+}
+
+public protocol EmailAuthButton: View {
+    var text: String { get }
+}
+
+public struct EmailProviderButton: EmailAuthButton {
+  public var text: String = "Sign in with email"
+  public var body: some View {
+    VStack {
+      Button(action: {
+              // Add the action you want to perform when the button is tapped
+              print("Email sign-in button tapped")
+            }) {
+              Text(text)
+                .padding()
+                .background(Color.red)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+            }
+    }
+  }
 }
