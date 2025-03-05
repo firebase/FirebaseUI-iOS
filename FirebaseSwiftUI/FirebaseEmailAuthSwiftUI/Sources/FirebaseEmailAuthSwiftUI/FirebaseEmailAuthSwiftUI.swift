@@ -1,12 +1,11 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
-import FirebaseAuthSwiftUI
 import FirebaseAuth
+import FirebaseAuthSwiftUI
 
 class EmailAuthProvider: FUIAuthProvider {
   var providerId: String {
-      return "password"
+    return "password"
   }
-  
 }
