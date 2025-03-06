@@ -6,10 +6,6 @@ import FirebaseCore
 // https://docs.swift.org/swift-book
 import SwiftUI
 
-enum FUIError: Error {
-  case providerNotFound(message: String)
-}
-
 public protocol FUIAuthProvider {
   var providerId: String { get }
   var shortName: String { get }
