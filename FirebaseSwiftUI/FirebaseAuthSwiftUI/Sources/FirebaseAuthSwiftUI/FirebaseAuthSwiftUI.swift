@@ -121,7 +121,7 @@ public struct EmailAuthButton: FUIButtonProtocol {
       }) {
         buttonContent
       }
-      NavigationLink(destination: EmailAuthProvider(), isActive: $emailAuthView) {
+      NavigationLink(destination: EmailEntryView(), isActive: $emailAuthView) {
         EmptyView()
       }
     }
@@ -139,7 +139,7 @@ public struct EmailAuthButton: FUIButtonProtocol {
   }
 }
 
-public struct EmailAuthProvider: View {
+public struct EmailEntryView: View {
   @State private var email: String = ""
 
   public var body: some View {
