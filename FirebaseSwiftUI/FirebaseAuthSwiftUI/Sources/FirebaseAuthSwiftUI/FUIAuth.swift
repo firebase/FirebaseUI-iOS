@@ -174,7 +174,11 @@ public struct EmailEntryView: View {
 
   public var body: some View {
     if invalidEmailWarning {
-      WarningView(invalidEmailWarning: $invalidEmailWarning, message: "Incorrect email address")
+      WarningView(
+        invalidEmailWarning: $invalidEmailWarning,
+        message: "Incorrect email address",
+        configuration: WarningViewConfiguration()
+      )
     } else {
       VStack {
         Text("Email")
