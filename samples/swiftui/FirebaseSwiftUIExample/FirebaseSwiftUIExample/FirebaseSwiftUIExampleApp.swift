@@ -21,7 +21,7 @@ struct FirebaseSwiftUIExampleApp: App {
     WindowGroup {
       // Put this at top level so user can control it in their app
       NavigationView {
-        let firebaseAuthUI = FirebaseAuthSwiftUI()
+        let firebaseAuthUI = FUIAuth()
         FUIAuthView<AuthPickerModifier>(FUIAuth: firebaseAuthUI)
       }
     }

@@ -36,7 +36,7 @@ public protocol FUIAuthProvider {
 }
 
 // similar to FUIAuth in UIKit implementation
-public class FirebaseAuthSwiftUI {
+public class FUIAuth: ObservableObject {
   private var auth: Auth
   private var authProviders: [FUIAuthProvider] = []
 
@@ -48,14 +48,18 @@ public class FirebaseAuthSwiftUI {
     authProviders = providers
   }
 
-  public func providerWithId(providerId: String) throws -> FUIAuthProvider? {
+  public func getEmailProvider() -> EmailAuthProvider? {
+    return try! providerWithId(providerId: "email") as! EmailAuthProvider
+  }
+
+  public func providerWithId(providerId: String) -> FUIAuthProvider? {
     if let provider = authProviders.first(where: { $0.providerId == providerId }) {
       return provider
     } else {
-      throw FUIError
-        .providerNotFound(
-          message: "Provider with ID \(providerId) not found. Did you add it to the authProviders array?"
-        )
+      assertionFailure(
+        "Provider with ID \(providerId) not found. Did you add it to the authProviders array?"
+      )
+      return nil
     }
   }
 }
@@ -64,12 +68,12 @@ public class FirebaseAuthSwiftUI {
 // state upwards as opposed to having callbacks.
 // Negates the need for a delegate used in UIKit
 public struct FUIAuthView<Modifier: ViewModifier>: View {
-  private var FUIAuth: FirebaseAuthSwiftUI
+  private var authFUI: FUIAuth
   private var authPickerView: AuthPickerView<Modifier>
 
-  public init(FUIAuth: FirebaseAuthSwiftUI,
+  public init(FUIAuth: FUIAuth,
               _authPickerView: AuthPickerView<Modifier>? = nil) {
-    self.FUIAuth = FUIAuth
+    authFUI = FUIAuth
     authPickerView = _authPickerView ?? AuthPickerView()
   }
 
@@ -156,6 +160,7 @@ public struct EmailAuthButton: FUIButtonProtocol {
 
 public struct EmailEntryView: View {
   @State private var email: String = ""
+  @EnvironmentObject var authFUI: FUIAuth
 
   public var body: some View {
     VStack {
@@ -182,6 +187,8 @@ public struct EmailEntryView: View {
   }
 
   private func emailSubmit() {
+    var emailAuthProvider = authFUI.getEmailProvider()
+
     // TODO-
     // 1. need to be able to call providerWithId() function on FUIAuth. not sure whether to pass it
     // down. I think I kind have to if I want to make it composable.
