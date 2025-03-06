@@ -22,7 +22,7 @@ struct FirebaseSwiftUIExampleApp: App {
       // Put this at top level so user can control it in their app
       NavigationView {
         let firebaseAuthUI = FirebaseAuthSwiftUI()
-        FUIAuthView(FUIAuth: firebaseAuthUI)
+        FUIAuthView<AuthPickerModifier>(FUIAuth: firebaseAuthUI)
       }
     }
   }

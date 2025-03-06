@@ -63,12 +63,12 @@ public class FirebaseAuthSwiftUI {
 // main auth view - can be composed of custom views or fallback to default views. We can also pass
 // state upwards as opposed to having callbacks.
 // Negates the need for a delegate used in UIKit
-public struct FUIAuthView: View {
+public struct FUIAuthView<Modifier: ViewModifier>: View {
   private var FUIAuth: FirebaseAuthSwiftUI
-  private var authPickerView: AuthPickerView
+  private var authPickerView: AuthPickerView<Modifier>
 
   public init(FUIAuth: FirebaseAuthSwiftUI,
-              _authPickerView: AuthPickerView? = nil) {
+              _authPickerView: AuthPickerView<Modifier>? = nil) {
     self.FUIAuth = FUIAuth
     authPickerView = _authPickerView ?? AuthPickerView()
   }
@@ -84,24 +84,34 @@ public protocol AuthPickerViewProtocol: View {
   var title: AnyView { get }
 }
 
-public struct AuthPickerView: AuthPickerViewProtocol {
-  private var emailAuthButton: EmailAuthButton
+public struct AuthPickerModifier: ViewModifier {
+  public func body(content: Content) -> some View {
+    content
+      .padding(20)
+      .background(Color.white)
+      .cornerRadius(12)
+      .shadow(radius: 10)
+      .padding()
+  }
+}
 
-  public init(title: String? = nil, _emailAuthButton: EmailAuthButton? = nil) {
+public struct AuthPickerView<Modifier: ViewModifier>: AuthPickerViewProtocol {
+  private var emailAuthButton: EmailAuthButton
+  private var vStackModifier: Modifier
+
+  public init(title _: String? = nil, _emailAuthButton: EmailAuthButton? = nil,
+              _modifier: Modifier? = nil) {
     emailAuthButton = _emailAuthButton ?? EmailAuthButton()
+    vStackModifier = _modifier ?? AuthPickerModifier() as! Modifier
   }
 
   public var body: some View {
     VStack {
       title
       emailAuthButton
-    }.padding(20)
-      .background(Color.white)
-      .cornerRadius(12)
-      .shadow(radius: 10)
-      .padding()
+    }.modifier(vStackModifier)
   }
-  
+
   // Default implementation that can be overridden
   public var title: AnyView {
     AnyView(
