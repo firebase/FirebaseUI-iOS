@@ -81,29 +81,34 @@ public struct FUIAuthView: View {
 }
 
 public protocol AuthPickerViewProtocol: View {
-  var title: String { get }
+  var title: AnyView { get }
 }
 
 public struct AuthPickerView: AuthPickerViewProtocol {
-  public var title: String
   private var emailAuthButton: EmailAuthButton
 
   public init(title: String? = nil, _emailAuthButton: EmailAuthButton? = nil) {
-    self.title = title ?? "Auth Picker View"
     emailAuthButton = _emailAuthButton ?? EmailAuthButton()
   }
 
   public var body: some View {
     VStack {
-      Text(title)
-        .font(.largeTitle)
-        .padding()
-      AnyView(emailAuthButton)
+      title
+      emailAuthButton
     }.padding(20)
       .background(Color.white)
       .cornerRadius(12)
       .shadow(radius: 10)
       .padding()
+  }
+  
+  // Default implementation that can be overridden
+  public var title: AnyView {
+    AnyView(
+      Text("Auth Picker view")
+        .font(.largeTitle)
+        .padding()
+    )
   }
 }
 
