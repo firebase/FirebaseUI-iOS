@@ -227,7 +227,6 @@ public struct WarningViewConfiguration {
   public var frameHeight: CGFloat = 150
 }
 
-// TODO: - figure out a way to make this configurable. Tough because we need to use binding. Could be class with certain attributes rather than a view
 public struct WarningView: View {
   @Binding var invalidEmailWarning: Bool
   var message: String
