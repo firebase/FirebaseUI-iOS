@@ -107,7 +107,7 @@ public struct FUIAuthPicker: AuthPickerView {
 }
 
 public protocol FUIButtonProtocol: View {
-  var buttonContent: AnyView { get } 
+  var buttonContent: AnyView { get }
 }
 
 public struct EmailAuthButton: FUIButtonProtocol {
@@ -124,8 +124,9 @@ public struct EmailAuthButton: FUIButtonProtocol {
       }
     }
   }
-    // Default implementation that can be overridden
-    public var buttonContent: AnyView { 
+
+  // Default implementation that can be overridden
+  public var buttonContent: AnyView {
     AnyView(
       Text("Sign in with email")
         .padding()
@@ -165,7 +166,8 @@ public struct EmailAuthProvider: View {
 
   private func emailSubmit() {
     // TODO-
-    // 1. need to be able to call providerWithId() function on FUIAuth. not sure whether to pass it down. I think I kind have to if I want to make it composable.
+    // 1. need to be able to call providerWithId() function on FUIAuth. not sure whether to pass it
+    // down. I think I kind have to if I want to make it composable.
     // 2. Create another view/alert which renders if email isn't valid
   }
 }
