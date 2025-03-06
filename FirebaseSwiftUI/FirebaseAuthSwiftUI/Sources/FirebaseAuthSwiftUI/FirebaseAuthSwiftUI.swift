@@ -65,12 +65,12 @@ public class FirebaseAuthSwiftUI {
 // Negates the need for a delegate used in UIKit
 public struct FUIAuthView: View {
   private var FUIAuth: FirebaseAuthSwiftUI
-  private var authPickerView: any AuthPickerView
+  private var authPickerView: AuthPickerView
 
   public init(FUIAuth: FirebaseAuthSwiftUI,
-              _authPickerView: some AuthPickerView = FUIAuthPicker()) {
+              _authPickerView: AuthPickerView? = nil) {
     self.FUIAuth = FUIAuth
-    authPickerView = _authPickerView
+    authPickerView = _authPickerView ?? AuthPickerView()
   }
 
   public var body: some View {
@@ -80,17 +80,17 @@ public struct FUIAuthView: View {
   }
 }
 
-public protocol AuthPickerView: View {
+public protocol AuthPickerViewProtocol: View {
   var title: String { get }
 }
 
-public struct FUIAuthPicker: AuthPickerView {
+public struct AuthPickerView: AuthPickerViewProtocol {
   public var title: String
-  private var emailAuthButton: any FUIButtonProtocol
+  private var emailAuthButton: EmailAuthButton
 
-  public init(title: String? = nil, _emailAuthButton: (any FUIButtonProtocol)? = nil) {
+  public init(title: String? = nil, _emailAuthButton: EmailAuthButton? = nil) {
     self.title = title ?? "Auth Picker View"
-    emailAuthButton = _emailAuthButton ?? EmailAuthButton() as! any FUIButtonProtocol
+    emailAuthButton = _emailAuthButton ?? EmailAuthButton()
   }
 
   public var body: some View {
