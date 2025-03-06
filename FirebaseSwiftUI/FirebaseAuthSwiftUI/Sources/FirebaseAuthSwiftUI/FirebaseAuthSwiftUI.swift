@@ -160,7 +160,7 @@ public struct EmailAuthProvider: View {
 
   private func emailSubmit() {
     // TODO-
-    // 1. need to get correct provider, create function on FUIAuth
+    // 1. need to be able to call providerWithId() function on FUIAuth. not sure whether to pass it down. I think I kind have to if I want to make it composable.
     // 2. Create another view/alert which renders if email isn't valid
   }
 }
