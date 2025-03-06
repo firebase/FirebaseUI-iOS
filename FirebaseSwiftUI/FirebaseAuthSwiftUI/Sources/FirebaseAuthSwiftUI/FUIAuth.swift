@@ -35,6 +35,15 @@ public protocol FUIAuthProvider {
   // Removed handleOpenURL method as SwiftUI uses onOpenURL which is a view modifier
 }
 
+class AuthUtils {
+  static let emailRegex = ".+@([a-zA-Z0-9\\-]+\\.)+[a-zA-Z0-9]{2,63}"
+
+  static func isValidEmail(_ email: String) -> Bool {
+    let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+    return emailPredicate.evaluate(with: email)
+  }
+}
+
 // similar to FUIAuth in UIKit implementation
 public class FUIAuth: ObservableObject {
   private var auth: Auth
@@ -160,37 +169,77 @@ public struct EmailAuthButton: FUIButtonProtocol {
 
 public struct EmailEntryView: View {
   @State private var email: String = ""
+  @State private var invalidEmailWarning: Bool = false
   @EnvironmentObject var authFUI: FUIAuth
 
   public var body: some View {
-    VStack {
-      Text("Email")
-        .font(.largeTitle)
-        .padding()
-      TextField("Email", text: $email, onCommit: emailSubmit)
-        .textFieldStyle(RoundedBorderTextFieldStyle())
-        .padding()
+    if invalidEmailWarning {
+      WarningView(invalidEmailWarning: $invalidEmailWarning, message: "Incorrect email address")
+    } else {
+      VStack {
+        Text("Email")
+          .font(.largeTitle)
+          .padding()
+        TextField("Email", text: $email, onCommit: emailSubmit)
+          .textFieldStyle(RoundedBorderTextFieldStyle())
+          .padding()
+      }
+      .padding(20)
+      .background(Color.white)
+      .cornerRadius(12)
+      .shadow(radius: 10)
+      .padding()
+      // TODO: - figure out why this is causing exception: Ambiguous use of 'toolbar(content:)'
+      //    .toolbar {
+      //      ToolbarItemGroup(placement: .navigationBarTrailing) {
+      //        Button("Next") {
+      //          handleNext()
+      //        }
+      //      }
+      //    }
     }
-    .padding(20)
-    .background(Color.white)
-    .cornerRadius(12)
-    .shadow(radius: 10)
-    .padding()
-    // TODO: - figure out why this is causing exception: Ambiguous use of 'toolbar(content:)'
-//    .toolbar {
-//      ToolbarItemGroup(placement: .navigationBarTrailing) {
-//        Button("Next") {
-//          handleNext()
-//        }
-//      }
-//    }
   }
 
   private func emailSubmit() {
-    var emailAuthProvider = authFUI.getEmailProvider()
+//    var emailAuthProvider = authFUI.getEmailProvider()
+    if !AuthUtils.isValidEmail(email) {
+      invalidEmailWarning = true
+    }
 
     // TODO-
     // 2. Create another view/alert which renders if email isn't valid
+  }
+}
+
+public struct WarningView: View {
+  @Binding var invalidEmailWarning: Bool
+  var message: String
+
+  public var body: some View {
+    VStack {
+      Text(message)
+        .font(.headline)
+        .padding()
+      Button(action: {
+        invalidEmailWarning = false
+      }) {
+        Text("OK")
+          .font(.body)
+          .padding()
+          .background(Color.blue)
+          .foregroundColor(.white)
+          .cornerRadius(8)
+      }
+    }
+    .frame(width: 300, height: 150)
+    .background(Color.white)
+    .cornerRadius(12)
+    .shadow(radius: 10)
+    .overlay(
+      RoundedRectangle(cornerRadius: 12)
+        .stroke(Color.gray, lineWidth: 1)
+    )
+    .padding()
   }
 }
 
@@ -204,11 +253,13 @@ public struct FUIEmailProvider: FUIAuthProvider {
   }
 
   public var accessToken: String? {
-    return nil // Email provider might not use access tokens
+    // Email Auth token is matched by FirebaseUI User Access Token
+    return nil
   }
 
   public var idToken: String? {
-    return nil // Email provider might not use ID tokens
+    // Email Auth Token Secret is matched by FirebaseUI User Id Token
+    return nil
   }
 
   public var credential: AuthCredential? = nil
@@ -219,9 +270,7 @@ public struct FUIEmailProvider: FUIAuthProvider {
 
   public var isAuthenticated: Bool = false
 
-  public init() {
-    // Initialize any necessary properties here
-  }
+  public init() {}
 
   public func signOut() {}
 
