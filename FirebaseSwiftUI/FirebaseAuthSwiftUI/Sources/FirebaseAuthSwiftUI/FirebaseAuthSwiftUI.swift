@@ -85,11 +85,11 @@ public protocol AuthPickerView: View {
 
 public struct FUIAuthPicker: AuthPickerView {
   public var title: String
-  private var emailAuthButton: any EmailAuthButtonProtocol
+  private var emailAuthButton: any FUIButtonProtocol
 
-  public init(title: String? = nil, _emailAuthButton: (any EmailAuthButtonProtocol)? = nil) {
+  public init(title: String? = nil, _emailAuthButton: (any FUIButtonProtocol)? = nil) {
     self.title = title ?? "Auth Picker View"
-    emailAuthButton = _emailAuthButton ?? EmailAuthButton() as! any EmailAuthButtonProtocol
+    emailAuthButton = _emailAuthButton ?? EmailAuthButton() as! any FUIButtonProtocol
   }
 
   public var body: some View {
@@ -106,28 +106,33 @@ public struct FUIAuthPicker: AuthPickerView {
   }
 }
 
-public protocol EmailAuthButtonProtocol: View {
-  var text: String { get }
+public protocol FUIButtonProtocol: View {
+  var buttonContent: AnyView { get } 
 }
 
-public struct EmailAuthButton: EmailAuthButtonProtocol {
-  public var text: String = "Sign in with email"
+public struct EmailAuthButton: FUIButtonProtocol {
   @State private var emailAuthView = false
   public var body: some View {
     VStack {
       Button(action: {
         emailAuthView = true
       }) {
-        Text(text)
-          .padding()
-          .background(Color.red)
-          .foregroundColor(.white)
-          .cornerRadius(8)
+        buttonContent
       }
       NavigationLink(destination: EmailAuthProvider(), isActive: $emailAuthView) {
         EmptyView()
       }
     }
+  }
+    // Default implementation that can be overridden
+    public var buttonContent: AnyView { 
+    AnyView(
+      Text("Sign in with email")
+        .padding()
+        .background(Color.red)
+        .foregroundColor(.white)
+        .cornerRadius(8)
+    )
   }
 }
 
