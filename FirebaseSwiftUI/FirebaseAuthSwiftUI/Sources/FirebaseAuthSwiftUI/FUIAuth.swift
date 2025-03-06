@@ -35,7 +35,6 @@ public protocol FUIAuthProvider {
   // Removed handleOpenURL method as SwiftUI uses onOpenURL which is a view modifier
 }
 
-
 // similar to FUIAuth in UIKit implementation
 public class FUIAuth: ObservableObject {
   private var auth: Auth
@@ -192,5 +191,42 @@ public struct EmailEntryView: View {
 
     // TODO-
     // 2. Create another view/alert which renders if email isn't valid
+  }
+}
+
+public struct FUIEmailProvider: FUIAuthProvider {
+  public var providerId: String {
+    return "email"
+  }
+
+  public var shortName: String {
+    return "Email"
+  }
+
+  public var accessToken: String? {
+    return nil // Email provider might not use access tokens
+  }
+
+  public var idToken: String? {
+    return nil // Email provider might not use ID tokens
+  }
+
+  public var credential: AuthCredential? = nil
+
+  public var error: Error? = nil
+
+  public var userInfo: [String: Any]? = nil
+
+  public var isAuthenticated: Bool = false
+
+  public init() {
+    // Initialize any necessary properties here
+  }
+
+  public func signOut() {}
+
+  public func email() -> String {
+    // Return the email associated with the provider, if available
+    return userInfo?["email"] as? String ?? ""
   }
 }
