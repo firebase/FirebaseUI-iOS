@@ -13,11 +13,12 @@ enum FUIError: Error {
 public protocol FUIAuthProvider {
   var providerId: String { get }
   var shortName: String { get }
-  var signInLabel: String { get }
-  var icon: UIImage { get }
-  var buttonBackgroundColor: UIColor { get }
-  var buttonTextColor: UIColor { get }
-  var buttonAlignment: Alignment { get set }
+  // TODO: - put customisable UI on the appropriate View
+//  var signInLabel: String { get }
+//  var icon: UIImage { get }
+//  var buttonBackgroundColor: UIColor { get }
+//  var buttonTextColor: UIColor { get }
+//  var buttonAlignment: Alignment { get set }
   var accessToken: String? { get }
   var idToken: String? { get }
 
@@ -114,6 +115,7 @@ public struct EmailAuthButton: FUIButtonProtocol {
   @State private var emailAuthView = false
   public var body: some View {
     VStack {
+      // TODO: - update FUIButtonProtocol with ways to align the button/have defaults
       Button(action: {
         emailAuthView = true
       }) {
