@@ -35,6 +35,7 @@ public protocol FUIAuthProvider {
   // Removed handleOpenURL method as SwiftUI uses onOpenURL which is a view modifier
 }
 
+
 // similar to FUIAuth in UIKit implementation
 public class FUIAuth: ObservableObject {
   private var auth: Auth
@@ -49,7 +50,7 @@ public class FUIAuth: ObservableObject {
   }
 
   public func getEmailProvider() -> EmailAuthProvider? {
-    return try! providerWithId(providerId: "email") as! EmailAuthProvider
+    return try! providerWithId(providerId: "password") as! EmailAuthProvider
   }
 
   public func providerWithId(providerId: String) -> FUIAuthProvider? {
