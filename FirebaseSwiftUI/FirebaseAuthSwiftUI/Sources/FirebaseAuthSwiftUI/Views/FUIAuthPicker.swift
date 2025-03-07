@@ -1,14 +1,27 @@
 import SwiftUI
 
 public class AuthPickerViewConfiguration {
-  public var title: String = "Auth Picker view"
-  public var titleFont: Font = .largeTitle
-  public var titlePadding: CGFloat = 20
-  public var backgroundColor: Color = .white
-  public var cornerRadius: CGFloat = 12
-  public var shadowRadius: CGFloat = 10
+  public var title: String
+  public var titleFont: Font
+  public var titlePadding: CGFloat
+  public var backgroundColor: Color
+  public var cornerRadius: CGFloat
+  public var shadowRadius: CGFloat
 
-  public init() {}
+  // Custom initializer
+  public init(title: String = "Auth Picker view",
+              titleFont: Font = .largeTitle,
+              titlePadding: CGFloat = 20,
+              backgroundColor: Color = .white,
+              cornerRadius: CGFloat = 12,
+              shadowRadius: CGFloat = 10) {
+    self.title = title
+    self.titleFont = titleFont
+    self.titlePadding = titlePadding
+    self.backgroundColor = backgroundColor
+    self.cornerRadius = cornerRadius
+    self.shadowRadius = shadowRadius
+  }
 }
 
 public protocol AuthPickerViewProtocol: View {
