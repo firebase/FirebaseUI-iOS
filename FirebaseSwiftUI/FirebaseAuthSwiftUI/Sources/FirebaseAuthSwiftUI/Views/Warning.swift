@@ -1,6 +1,9 @@
 import SwiftUI
 
-public struct WarningViewConfiguration {
+// Base class with default values that can be overridden by user
+public class WarningViewConfiguration {
+  public var warningMessage: String = "Incorrect email address"
+  public var textMessage: String = "OK"
   public var messageFont: Font = .headline
   public var buttonFont: Font = .body
   public var buttonBackgroundColor: Color = .blue
@@ -13,22 +16,23 @@ public struct WarningViewConfiguration {
   public var strokeLineWidth: CGFloat = 1
   public var frameWidth: CGFloat = 300
   public var frameHeight: CGFloat = 150
+
+  public init() {}
 }
 
 public struct WarningView: View {
   @Binding var invalidEmailWarning: Bool
-  var message: String
   var configuration: WarningViewConfiguration
 
   public var body: some View {
     VStack {
-      Text(message)
+      Text(configuration.warningMessage)
         .font(configuration.messageFont)
         .padding()
       Button(action: {
         invalidEmailWarning = false
       }) {
-        Text("OK")
+        Text(configuration.textMessage)
           .font(configuration.buttonFont)
           .padding()
           .background(configuration.buttonBackgroundColor)
