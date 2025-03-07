@@ -1,6 +1,5 @@
 import SwiftUI
 
-// TODO: - needs to be moved to EmailAuth package.
 public struct EmailEntryView: View {
   @State private var email: String = ""
   @State private var invalidEmailWarning: Bool = false
@@ -38,7 +37,7 @@ public struct EmailEntryView: View {
   }
 
   private func emailSubmit() {
-//    var emailAuthProvider = authFUI.getEmailProvider()
+    var emailAuthProvider = authFUI.getEmailProvider()
     if !AuthUtils.isValidEmail(email) {
       invalidEmailWarning = true
     }
