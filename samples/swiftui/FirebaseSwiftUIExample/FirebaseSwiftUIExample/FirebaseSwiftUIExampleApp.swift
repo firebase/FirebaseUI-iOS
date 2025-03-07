@@ -8,6 +8,7 @@
 import FirebaseAuth
 import FirebaseAuthSwiftUI
 import FirebaseCore
+import FirebaseEmailAuthSwiftUI
 import SwiftData
 import SwiftUI
 
@@ -22,7 +23,11 @@ struct FirebaseSwiftUIExampleApp: App {
       // Put this at top level so user can control it in their app
       NavigationView {
         let firebaseAuthUI = FUIAuth()
-        FUIAuthView(FUIAuth: firebaseAuthUI)
+        FUIAuthView(FUIAuth: firebaseAuthUI) {
+          VStack {
+            // TODO: - populate with auth views here
+          }
+        }
       }
     }
   }

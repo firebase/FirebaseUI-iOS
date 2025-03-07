@@ -28,11 +28,14 @@ public protocol AuthPickerViewProtocol: View {
   var configuration: AuthPickerViewConfiguration { get }
 }
 
-public struct AuthPickerView: AuthPickerViewProtocol {
+public struct AuthPickerView<Content: View>: AuthPickerViewProtocol {
   public let configuration: AuthPickerViewConfiguration
+  private let content: Content
 
-  public init(configuration: AuthPickerViewConfiguration = AuthPickerViewConfiguration()) {
+  public init(configuration: AuthPickerViewConfiguration = AuthPickerViewConfiguration(),
+              @ViewBuilder content: () -> Content) {
     self.configuration = configuration
+    self.content = content()
   }
 
   public var body: some View {
@@ -40,6 +43,8 @@ public struct AuthPickerView: AuthPickerViewProtocol {
       Text(configuration.title)
         .font(configuration.titleFont)
         .padding(configuration.titlePadding)
+
+      content
     }
     .padding(configuration.titlePadding)
     .background(configuration.backgroundColor)
