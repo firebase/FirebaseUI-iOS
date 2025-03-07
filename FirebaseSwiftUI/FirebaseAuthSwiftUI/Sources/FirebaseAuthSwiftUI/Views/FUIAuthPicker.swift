@@ -16,7 +16,7 @@ public struct AuthPickerModifier: ViewModifier {
 }
 
 public struct AuthPickerView<Modifier: ViewModifier>: AuthPickerViewProtocol {
-  // TODO - this needs either refactoring or needs a generic type to be extended by EmailAuthButton. EmailAuthButton is currently in FUIAuth but needs to be moved 
+  // TODO: - this needs either refactoring or needs a generic type to be extended by EmailAuthButton. EmailAuthButton is currently in FUIAuth but needs to be moved
   private var emailAuthButton: EmailAuthButton
   private var vStackModifier: Modifier
 

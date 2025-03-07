@@ -1,6 +1,6 @@
 import SwiftUI
 
-// TODO - needs to be moved to EmailAuth package.
+// TODO: - needs to be moved to EmailAuth package.
 public struct EmailEntryView: View {
   @State private var email: String = ""
   @State private var invalidEmailWarning: Bool = false

@@ -1,5 +1,4 @@
 import FirebaseAuth
-import SwiftUI
 
 public protocol FUIAuthProvider {
   var providerId: String { get }

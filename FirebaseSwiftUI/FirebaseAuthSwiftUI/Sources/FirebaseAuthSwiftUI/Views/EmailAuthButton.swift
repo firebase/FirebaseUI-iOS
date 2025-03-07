@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 public protocol FUIButtonProtocol: View {
   var buttonContent: AnyView { get }
 }
