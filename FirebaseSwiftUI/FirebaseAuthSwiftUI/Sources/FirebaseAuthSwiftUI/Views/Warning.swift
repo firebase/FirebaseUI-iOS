@@ -1,23 +1,50 @@
 import SwiftUI
 
-// Base class with default values that can be overridden by user
 public class WarningViewConfiguration {
-  public var warningMessage: String = "Incorrect email address"
-  public var textMessage: String = "OK"
-  public var messageFont: Font = .headline
-  public var buttonFont: Font = .body
-  public var buttonBackgroundColor: Color = .blue
-  public var buttonForegroundColor: Color = .white
-  public var buttonCornerRadius: CGFloat = 8
-  public var viewBackgroundColor: Color = .white
-  public var viewCornerRadius: CGFloat = 12
-  public var shadowRadius: CGFloat = 10
-  public var strokeColor: Color = .gray
-  public var strokeLineWidth: CGFloat = 1
-  public var frameWidth: CGFloat = 300
-  public var frameHeight: CGFloat = 150
+  public var warningMessage: String
+  public var textMessage: String
+  public var messageFont: Font
+  public var buttonFont: Font
+  public var buttonBackgroundColor: Color
+  public var buttonForegroundColor: Color
+  public var buttonCornerRadius: CGFloat
+  public var viewBackgroundColor: Color
+  public var viewCornerRadius: CGFloat
+  public var shadowRadius: CGFloat
+  public var strokeColor: Color
+  public var strokeLineWidth: CGFloat
+  public var frameWidth: CGFloat
+  public var frameHeight: CGFloat
 
-  public init() {}
+  public init(warningMessage: String = "Incorrect email address",
+              textMessage: String = "OK",
+              messageFont: Font = .headline,
+              buttonFont: Font = .body,
+              buttonBackgroundColor: Color = .blue,
+              buttonForegroundColor: Color = .white,
+              buttonCornerRadius: CGFloat = 8,
+              viewBackgroundColor: Color = .white,
+              viewCornerRadius: CGFloat = 12,
+              shadowRadius: CGFloat = 10,
+              strokeColor: Color = .gray,
+              strokeLineWidth: CGFloat = 1,
+              frameWidth: CGFloat = 300,
+              frameHeight: CGFloat = 150) {
+    self.warningMessage = warningMessage
+    self.textMessage = textMessage
+    self.messageFont = messageFont
+    self.buttonFont = buttonFont
+    self.buttonBackgroundColor = buttonBackgroundColor
+    self.buttonForegroundColor = buttonForegroundColor
+    self.buttonCornerRadius = buttonCornerRadius
+    self.viewBackgroundColor = viewBackgroundColor
+    self.viewCornerRadius = viewCornerRadius
+    self.shadowRadius = shadowRadius
+    self.strokeColor = strokeColor
+    self.strokeLineWidth = strokeLineWidth
+    self.frameWidth = frameWidth
+    self.frameHeight = frameHeight
+  }
 }
 
 public struct WarningView: View {
