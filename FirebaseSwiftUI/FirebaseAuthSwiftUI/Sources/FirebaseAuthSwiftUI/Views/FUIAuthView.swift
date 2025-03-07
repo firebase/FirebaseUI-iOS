@@ -8,9 +8,9 @@ public struct FUIAuthView: View {
   private var authPickerView: AuthPickerView
 
   public init(FUIAuth: FUIAuth,
-              _authPickerView: AuthPickerView? = nil) {
+              authPickerView: AuthPickerView? = nil) {
     authFUI = FUIAuth
-    authPickerView = _authPickerView ?? AuthPickerView()
+    self.authPickerView = authPickerView ?? AuthPickerView()
   }
 
   public var body: some View {
