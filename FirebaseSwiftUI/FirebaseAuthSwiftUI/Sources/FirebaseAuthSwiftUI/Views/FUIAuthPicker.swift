@@ -11,12 +11,12 @@ public class AuthPickerViewConfiguration {
   public init() {}
 }
 
-public protocol AuthPickerViewProtocol {
+public protocol AuthPickerViewProtocol: View {
   var configuration: AuthPickerViewConfiguration { get }
 }
 
 public struct AuthPickerView: AuthPickerViewProtocol {
-  private let configuration: AuthPickerViewConfiguration
+  public let configuration: AuthPickerViewConfiguration
 
   public init(configuration: AuthPickerViewConfiguration = AuthPickerViewConfiguration()) {
     self.configuration = configuration
