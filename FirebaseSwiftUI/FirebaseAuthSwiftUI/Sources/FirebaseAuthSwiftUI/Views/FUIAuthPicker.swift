@@ -27,7 +27,6 @@ public struct AuthPickerView: AuthPickerViewProtocol {
       Text(configuration.title)
         .font(configuration.titleFont)
         .padding(configuration.titlePadding)
-      EmailAuthButton()
     }
     .padding(configuration.titlePadding)
     .background(configuration.backgroundColor)
