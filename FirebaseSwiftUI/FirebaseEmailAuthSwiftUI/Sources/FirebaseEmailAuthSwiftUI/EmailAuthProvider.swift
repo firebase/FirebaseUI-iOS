@@ -1,3 +1,5 @@
+import FirebaseAuth
+import FirebaseAuthSwiftUI
 import SwiftUI
 
 public struct FUIEmailProvider: FUIAuthProvider {
