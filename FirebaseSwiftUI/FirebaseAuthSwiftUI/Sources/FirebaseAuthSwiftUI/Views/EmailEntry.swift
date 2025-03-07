@@ -10,7 +10,6 @@ public struct EmailEntryView: View {
     if invalidEmailWarning {
       WarningView(
         invalidEmailWarning: $invalidEmailWarning,
-        message: "Incorrect email address",
         configuration: WarningViewConfiguration()
       )
     } else {
