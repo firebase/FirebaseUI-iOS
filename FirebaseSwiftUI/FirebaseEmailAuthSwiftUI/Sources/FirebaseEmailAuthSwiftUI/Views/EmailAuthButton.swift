@@ -5,13 +5,23 @@ public protocol FUIButtonProtocol: View {
 }
 
 public class EmailAuthButtonConfiguration {
-  public var buttonText: String = "Sign in with email"
-  public var buttonPadding: CGFloat = 8
-  public var buttonBackgroundColor: Color = .red
-  public var buttonForegroundColor: Color = .white
-  public var buttonCornerRadius: CGFloat = 8
+  public var buttonText: String
+  public var buttonPadding: CGFloat
+  public var buttonBackgroundColor: Color
+  public var buttonForegroundColor: Color
+  public var buttonCornerRadius: CGFloat
 
-  public init() {}
+  public init(buttonText: String = "Sign in with email",
+              buttonPadding: CGFloat = 8,
+              buttonBackgroundColor: Color = .red,
+              buttonForegroundColor: Color = .white,
+              buttonCornerRadius: CGFloat = 8) {
+    self.buttonText = buttonText
+    self.buttonPadding = buttonPadding
+    self.buttonBackgroundColor = buttonBackgroundColor
+    self.buttonForegroundColor = buttonForegroundColor
+    self.buttonCornerRadius = buttonCornerRadius
+  }
 }
 
 // Update the EmailAuthButton to use the configuration
