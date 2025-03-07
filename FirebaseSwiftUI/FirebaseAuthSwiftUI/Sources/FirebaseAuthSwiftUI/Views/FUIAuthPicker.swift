@@ -1,44 +1,38 @@
 import SwiftUI
 
-public protocol AuthPickerViewProtocol: View {
-  var title: AnyView { get }
+public class AuthPickerViewConfiguration {
+  public var title: String = "Auth Picker view"
+  public var titleFont: Font = .largeTitle
+  public var titlePadding: CGFloat = 20
+  public var backgroundColor: Color = .white
+  public var cornerRadius: CGFloat = 12
+  public var shadowRadius: CGFloat = 10
+
+  public init() {}
 }
 
-public struct AuthPickerModifier: ViewModifier {
-  public func body(content: Content) -> some View {
-    content
-      .padding(20)
-      .background(Color.white)
-      .cornerRadius(12)
-      .shadow(radius: 10)
-      .padding()
-  }
+public protocol AuthPickerViewProtocol {
+  var configuration: AuthPickerViewConfiguration { get }
 }
 
-public struct AuthPickerView<Modifier: ViewModifier>: AuthPickerViewProtocol {
-  // TODO: - this needs either refactoring or needs a generic type to be extended by EmailAuthButton. EmailAuthButton is currently in FUIAuth but needs to be moved
-  private var emailAuthButton: EmailAuthButton
-  private var vStackModifier: Modifier
+public struct AuthPickerView: AuthPickerViewProtocol {
+  private let configuration: AuthPickerViewConfiguration
 
-  public init(title _: String? = nil, _emailAuthButton: EmailAuthButton? = nil,
-              _modifier: Modifier? = nil) {
-    emailAuthButton = _emailAuthButton ?? EmailAuthButton()
-    vStackModifier = _modifier ?? AuthPickerModifier() as! Modifier
+  public init(configuration: AuthPickerViewConfiguration = AuthPickerViewConfiguration()) {
+    self.configuration = configuration
   }
 
   public var body: some View {
     VStack {
-      title
-      emailAuthButton
-    }.modifier(vStackModifier)
-  }
-
-  // Default implementation that can be overridden
-  public var title: AnyView {
-    AnyView(
-      Text("Auth Picker view")
-        .font(.largeTitle)
-        .padding()
-    )
+      Text(configuration.title)
+        .font(configuration.titleFont)
+        .padding(configuration.titlePadding)
+      EmailAuthButton()
+    }
+    .padding(configuration.titlePadding)
+    .background(configuration.backgroundColor)
+    .cornerRadius(configuration.cornerRadius)
+    .shadow(radius: configuration.shadowRadius)
+    .padding()
   }
 }
