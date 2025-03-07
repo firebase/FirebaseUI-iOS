@@ -24,7 +24,6 @@ public class EmailAuthButtonConfiguration {
   }
 }
 
-// Update the EmailAuthButton to use the configuration
 public struct EmailAuthButton: FUIButtonProtocol {
   @State private var emailAuthView = false
   public let configuration: EmailAuthButtonConfiguration
