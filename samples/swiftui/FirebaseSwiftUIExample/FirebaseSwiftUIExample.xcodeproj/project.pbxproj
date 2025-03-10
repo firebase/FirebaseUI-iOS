@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		46A94CD32D7ECB4800F872B2 /* FirebaseEmailAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 46A94CD22D7ECB4800F872B2 /* FirebaseEmailAuthUI */; };
+		46A94CF32D7EDFE300F872B2 /* FirebaseEmailAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 46A94CF22D7EDFE300F872B2 /* FirebaseEmailAuthSwiftUI */; };
 		46CB7B252D773F2100F1FD0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46CB7B242D773F2100F1FD0A /* GoogleService-Info.plist */; };
 		46F89C392D64B04E000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 46F89C382D64B04E000F8BC0 /* FirebaseAuthSwiftUI */; };
 		46F89C4D2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 46F89C4C2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI */; };
@@ -60,8 +60,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46A94CD32D7ECB4800F872B2 /* FirebaseEmailAuthUI in Frameworks */,
 				46F89C392D64B04E000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */,
+				46A94CF32D7EDFE300F872B2 /* FirebaseEmailAuthSwiftUI in Frameworks */,
 				46F89C4D2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +135,7 @@
 				46F89C382D64B04E000F8BC0 /* FirebaseAuthSwiftUI */,
 				46F89C4C2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI */,
 				46A94CD22D7ECB4800F872B2 /* FirebaseEmailAuthUI */,
+				46A94CF22D7EDFE300F872B2 /* FirebaseEmailAuthSwiftUI */,
 			);
 			productName = FirebaseSwiftUIExample;
 			productReference = 46F89C082D64A86C000F8BC0 /* FirebaseSwiftUIExample.app */;
@@ -598,6 +599,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 46F89C4B2D64BB9B000F8BC0 /* XCLocalSwiftPackageReference "../../../../firebaseUI-ios" */;
 			productName = FirebaseEmailAuthUI;
+		};
+		46A94CF22D7EDFE300F872B2 /* FirebaseEmailAuthSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46F89C4B2D64BB9B000F8BC0 /* XCLocalSwiftPackageReference "../../../../firebaseUI-ios" */;
+			productName = FirebaseEmailAuthSwiftUI;
 		};
 		46F89C382D64B04E000F8BC0 /* FirebaseAuthSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

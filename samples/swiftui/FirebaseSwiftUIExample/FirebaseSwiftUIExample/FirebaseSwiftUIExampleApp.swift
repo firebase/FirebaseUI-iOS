@@ -8,7 +8,7 @@
 import FirebaseAuth
 import FirebaseAuthSwiftUI
 import FirebaseCore
-import FirebaseEmailAuthUI
+import FirebaseEmailAuthSwiftUI
 import SwiftData
 import SwiftUI
 
@@ -25,7 +25,7 @@ struct FirebaseSwiftUIExampleApp: App {
         let firebaseAuthUI = FUIAuth()
         FUIAuthView(FUIAuth: firebaseAuthUI) {
           VStack {
-            // TODO: - populate with auth views here
+            EmailAuth()
           }
         }
       }
