@@ -9,8 +9,7 @@ public struct EmailEntryView: View {
   public var body: some View {
     if invalidEmailWarning {
       WarningView(
-        invalidEmailWarning: $invalidEmailWarning,
-        configuration: WarningViewConfiguration()
+        invalidEmailWarning: $invalidEmailWarning
       )
     } else {
       VStack {

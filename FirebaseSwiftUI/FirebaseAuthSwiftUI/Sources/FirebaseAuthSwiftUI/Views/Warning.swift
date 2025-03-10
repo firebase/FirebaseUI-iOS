@@ -1,80 +1,65 @@
 import SwiftUI
 
-public class WarningViewConfiguration {
-  public var warningMessage: String
-  public var textMessage: String
-  public var messageFont: Font
-  public var buttonFont: Font
-  public var buttonBackgroundColor: Color
-  public var buttonForegroundColor: Color
-  public var buttonCornerRadius: CGFloat
-  public var viewBackgroundColor: Color
-  public var viewCornerRadius: CGFloat
-  public var shadowRadius: CGFloat
-  public var strokeColor: Color
-  public var strokeLineWidth: CGFloat
-  public var frameWidth: CGFloat
-  public var frameHeight: CGFloat
-
-  public init(warningMessage: String = "Incorrect email address",
-              textMessage: String = "OK",
-              messageFont: Font = .headline,
-              buttonFont: Font = .body,
-              buttonBackgroundColor: Color = .blue,
-              buttonForegroundColor: Color = .white,
-              buttonCornerRadius: CGFloat = 8,
-              viewBackgroundColor: Color = .white,
-              viewCornerRadius: CGFloat = 12,
-              shadowRadius: CGFloat = 10,
-              strokeColor: Color = .gray,
-              strokeLineWidth: CGFloat = 1,
-              frameWidth: CGFloat = 300,
-              frameHeight: CGFloat = 150) {
-    self.warningMessage = warningMessage
-    self.textMessage = textMessage
-    self.messageFont = messageFont
-    self.buttonFont = buttonFont
-    self.buttonBackgroundColor = buttonBackgroundColor
-    self.buttonForegroundColor = buttonForegroundColor
-    self.buttonCornerRadius = buttonCornerRadius
-    self.viewBackgroundColor = viewBackgroundColor
-    self.viewCornerRadius = viewCornerRadius
-    self.shadowRadius = shadowRadius
-    self.strokeColor = strokeColor
-    self.strokeLineWidth = strokeLineWidth
-    self.frameWidth = frameWidth
-    self.frameHeight = frameHeight
-  }
-}
-
 public struct WarningView: View {
   @Binding var invalidEmailWarning: Bool
-  var configuration: WarningViewConfiguration
+  private let warningMessage: String
+  private let textMessage: String
+  private let messageModifier: (Text) -> Text
+  private let buttonModifier: (Button<Text>) -> Button<Text>
+  private let vStackModifier: (VStack<TupleView<(Text, Button<Text>)>>) -> VStack<TupleView<(
+    Text,
+    Button<Text>
+  )>>
+
+  public init(invalidEmailWarning: Binding<Bool>,
+              warningMessage: String = "Incorrect email address",
+              textMessage: String = "OK",
+              messageModifier: ((Text) -> Text)? = nil,
+              buttonModifier: ((Button<Text>) -> Button<Text>)? = nil,
+              vStackModifier: ((VStack<TupleView<(Text, Button<Text>)>>) -> VStack<TupleView<(
+                Text,
+                Button<Text>
+              )>>)? = nil) {
+    _invalidEmailWarning = invalidEmailWarning
+    self.warningMessage = warningMessage
+    self.textMessage = textMessage
+    self.messageModifier = messageModifier ?? { text in
+      text
+        .font(.headline)
+        .padding() as! Text
+    }
+    self.buttonModifier = buttonModifier ?? { button in
+      button
+        .font(.body)
+        .padding()
+        .background(Color.blue)
+        .foregroundColor(.white)
+        .cornerRadius(8) as! Button<Text>
+    }
+    self.vStackModifier = vStackModifier ?? { vstack in
+      vstack
+        .frame(width: 300, height: 150)
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(radius: 10)
+        .overlay(
+          RoundedRectangle(cornerRadius: 12)
+            .stroke(Color.gray, lineWidth: 1)
+        )
+        .padding() as! VStack<TupleView<(Text, Button<Text>)>>
+    }
+  }
 
   public var body: some View {
-    VStack {
-      Text(configuration.warningMessage)
-        .font(configuration.messageFont)
-        .padding()
-      Button(action: {
+    let content = VStack {
+      messageModifier(Text(warningMessage))
+      buttonModifier(Button(action: {
         invalidEmailWarning = false
       }) {
-        Text(configuration.textMessage)
-          .font(configuration.buttonFont)
-          .padding()
-          .background(configuration.buttonBackgroundColor)
-          .foregroundColor(configuration.buttonForegroundColor)
-          .cornerRadius(configuration.buttonCornerRadius)
-      }
+        Text(textMessage)
+      })
     }
-    .frame(width: configuration.frameWidth, height: configuration.frameHeight)
-    .background(configuration.viewBackgroundColor)
-    .cornerRadius(configuration.viewCornerRadius)
-    .shadow(radius: configuration.shadowRadius)
-    .overlay(
-      RoundedRectangle(cornerRadius: configuration.viewCornerRadius)
-        .stroke(configuration.strokeColor, lineWidth: configuration.strokeLineWidth)
-    )
-    .padding()
+
+    vStackModifier(content)
   }
 }
