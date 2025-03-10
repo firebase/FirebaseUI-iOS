@@ -8,9 +8,9 @@ public struct FUIAuthView<Content: View>: View {
   private var authPickerView: AuthPickerView<Content>
 
   public init(FUIAuth: FUIAuth,
-              @ViewBuilder content: () -> Content) {
+              authPickerView: AuthPickerView<Content>) {
     authFUI = FUIAuth
-    authPickerView = AuthPickerView(content: content)
+    self.authPickerView = authPickerView
   }
 
   public var body: some View {

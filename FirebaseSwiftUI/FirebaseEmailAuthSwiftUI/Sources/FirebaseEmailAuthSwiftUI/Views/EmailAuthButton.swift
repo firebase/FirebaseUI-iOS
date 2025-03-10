@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct EmailAuthButtonModifier: ViewModifier {
-  func body(content: Content) -> some View {
+public struct EmailAuthButtonModifier: ViewModifier {
+  public func body(content: Content) -> some View {
     content
       .font(.body)
       .padding(8)
@@ -11,8 +11,8 @@ struct EmailAuthButtonModifier: ViewModifier {
   }
 }
 
-struct EmailAuthVStackModifier: ViewModifier {
-  func body(content: Content) -> some View {
+public struct EmailAuthVStackModifier: ViewModifier {
+  public func body(content: Content) -> some View {
     content
       .frame(width: 300, height: 150)
       .background(Color.white)
@@ -26,8 +26,8 @@ struct EmailAuthVStackModifier: ViewModifier {
   }
 }
 
-struct EmailAuthTextModifier: ViewModifier {
-  func body(content: Content) -> some View {
+public struct EmailAuthTextModifier: ViewModifier {
+  public func body(content: Content) -> some View {
     content
       .font(.headline)
       .padding()

@@ -10,9 +10,23 @@ class EmailUtils {
   }
 }
 
-public struct EmailAuth: View {
-  public init() {}
+public struct EmailAuth<
+  ButtonModifier: ViewModifier,
+  TextModifier: ViewModifier,
+  VStackModifier: ViewModifier
+>: View {
+  private var emailAuthButton: EmailAuthButton<ButtonModifier, TextModifier, VStackModifier>?
+
+  public init(emailAuthButton: EmailAuthButton<ButtonModifier, TextModifier, VStackModifier>? =
+    nil) {
+    self.emailAuthButton = emailAuthButton
+  }
+
   public var body: some View {
-    EmailAuthButton<EmailAuthButtonModifier, EmailAuthTextModifier, EmailAuthVStackModifier>()
+    if emailAuthButton != nil {
+      emailAuthButton
+    } else {
+      EmailAuthButton<EmailAuthButtonModifier, EmailAuthTextModifier, EmailAuthVStackModifier>()
+    }
   }
 }
