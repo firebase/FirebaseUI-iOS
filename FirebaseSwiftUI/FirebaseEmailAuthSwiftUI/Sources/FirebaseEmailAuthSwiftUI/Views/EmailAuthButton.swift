@@ -6,20 +6,17 @@ public struct EmailAuthButton: View {
   public var buttonModifier: (Button<Text>) -> Button<Text>
   public var textModifier: (Text) -> Text
   public var vStackModifier: (VStack<TupleView<(
-    Text,
     Button<Text>,
     NavigationLink<EmptyView, EmailEntryView>
-  )>>) -> VStack<TupleView<(Text, Button<Text>, NavigationLink<EmptyView, EmailEntryView>)>>
+  )>>) -> VStack<TupleView<(Button<Text>, NavigationLink<EmptyView, EmailEntryView>)>>
 
   public init(buttonText: String = "Sign in with email",
               buttonModifier: ((Button<Text>) -> Button<Text>)? = nil,
               textModifier: ((Text) -> Text)? = nil,
               vStackModifier: ((VStack<TupleView<(
-                Text,
                 Button<Text>,
                 NavigationLink<EmptyView, EmailEntryView>
               )>>) -> VStack<TupleView<(
-                Text,
                 Button<Text>,
                 NavigationLink<EmptyView, EmailEntryView>
               )>>)? = nil) {
@@ -47,27 +44,24 @@ public struct EmailAuthButton: View {
           RoundedRectangle(cornerRadius: 12)
             .stroke(Color.gray, lineWidth: 1)
         )
-        .padding() as! VStack<TupleView<(
-          Text,
-          Button<Text>,
-          NavigationLink<EmptyView, EmailEntryView>
-        )>>
+        .padding() as! VStack<TupleView<(Button<Text>, NavigationLink<EmptyView, EmailEntryView>)>>
     }
   }
 
   public var body: some View {
-    let content = VStack {
+    let buttonView = buttonModifier(Button(action: {
+      emailAuthView = true
+    }) {
       textModifier(Text(buttonText))
-      buttonModifier(Button(action: {
-        emailAuthView = true
-      }) {
-        Text(buttonText)
-      })
+    })
+
+    let content = VStack {
+      buttonView
       NavigationLink(destination: EmailEntryView(), isActive: $emailAuthView) {
         EmptyView()
       }
     }
 
-    vStackModifier(content)
+    return vStackModifier(content)
   }
 }
