@@ -33,8 +33,12 @@ struct FirebaseSwiftUIExampleApp: App {
         let firebaseAuthUI = FUIAuth()
         FUIAuthView(
           FUIAuth: firebaseAuthUI,
-          authPickerView: AuthPickerView(title: "Custom Auth Picker") {
+          // method 1 of setting view modifier
+          authPickerView: AuthPickerView(title: "Custom Auth Picker", textModifier: { Text in
+            Text.bold()
+          }) {
             VStack {
+              // method 2 of setting view modifier
               EmailAuth(emailAuthButton: EmailAuthButton<
                 CustomTextModifier,
                 EmailAuthButtonModifier,
