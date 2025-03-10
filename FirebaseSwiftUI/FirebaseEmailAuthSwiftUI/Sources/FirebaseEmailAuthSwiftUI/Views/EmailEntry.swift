@@ -1,3 +1,4 @@
+import FirebaseAuthSwiftUI
 import SwiftUI
 
 public struct EmailEntryView: View {
@@ -38,7 +39,7 @@ public struct EmailEntryView: View {
 
   private func emailSubmit() {
     var emailAuthProvider = authFUI.getEmailProvider()
-    if !AuthUtils.isValidEmail(email) {
+    if !EmailUtils.isValidEmail(email) {
       invalidEmailWarning = true
     }
   }
