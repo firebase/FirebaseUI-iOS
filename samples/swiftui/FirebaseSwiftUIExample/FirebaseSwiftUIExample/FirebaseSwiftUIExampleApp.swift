@@ -12,6 +12,14 @@ import FirebaseEmailAuthSwiftUI
 import SwiftData
 import SwiftUI
 
+struct CustomTextModifier: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(.headline)
+      .background(.red)
+  }
+}
+
 @main
 struct FirebaseSwiftUIExampleApp: App {
   init() {
@@ -23,11 +31,18 @@ struct FirebaseSwiftUIExampleApp: App {
       // Put this at top level so user can control it in their app
       NavigationView {
         let firebaseAuthUI = FUIAuth()
-        FUIAuthView(FUIAuth: firebaseAuthUI) {
-          VStack {
-            EmailAuth()
+        FUIAuthView(
+          FUIAuth: firebaseAuthUI,
+          authPickerView: AuthPickerView(title: "Custom Auth Picker") {
+            VStack {
+              EmailAuth(emailAuthButton: EmailAuthButton<
+                CustomTextModifier,
+                EmailAuthButtonModifier,
+                EmailAuthVStackModifier
+              >(buttonModifier: CustomTextModifier()))
+            }
           }
-        }
+        )
       }
     }
   }
