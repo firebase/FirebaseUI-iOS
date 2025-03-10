@@ -1,55 +1,45 @@
 import SwiftUI
 
-public class AuthPickerViewConfiguration {
-  public var title: String
-  public var titleFont: Font
-  public var titlePadding: CGFloat
-  public var backgroundColor: Color
-  public var cornerRadius: CGFloat
-  public var shadowRadius: CGFloat
-
-  // Custom initializer
-  public init(title: String = "Auth Picker view",
-              titleFont: Font = .largeTitle,
-              titlePadding: CGFloat = 20,
-              backgroundColor: Color = .white,
-              cornerRadius: CGFloat = 12,
-              shadowRadius: CGFloat = 10) {
-    self.title = title
-    self.titleFont = titleFont
-    self.titlePadding = titlePadding
-    self.backgroundColor = backgroundColor
-    self.cornerRadius = cornerRadius
-    self.shadowRadius = shadowRadius
-  }
-}
-
-public protocol AuthPickerViewProtocol: View {
-  var configuration: AuthPickerViewConfiguration { get }
-}
-
-public struct AuthPickerView<Content: View>: AuthPickerViewProtocol {
-  public let configuration: AuthPickerViewConfiguration
+public struct AuthPickerView<Content: View>: View {
   private let content: Content
+  private let title: String
+  private let textModifier: (Text) -> Text
+  private let vStackModifier: (VStack<TupleView<(Text, Content)>>) -> VStack<TupleView<(
+    Text,
+    Content
+  )>>
 
-  public init(configuration: AuthPickerViewConfiguration = AuthPickerViewConfiguration(),
+  public init(title: String = "Auth Picker view",
+              textModifier: ((Text) -> Text)? = nil,
+              vStackModifier: ((VStack<TupleView<(Text, Content)>>) -> VStack<TupleView<(
+                Text,
+                Content
+              )>>)? = nil,
               @ViewBuilder content: () -> Content) {
-    self.configuration = configuration
+    self.title = title
+    self.textModifier = textModifier ?? { text in
+      text
+        .font(.title)
+        .foregroundColor(.red)
+        .bold()
+    }
+    self.vStackModifier = vStackModifier ?? { vstack in
+      vstack
+        .padding()
+        .background(Color.yellow)
+        .cornerRadius(20)
+        .shadow(radius: 5) as! VStack<TupleView<(Text, Content)>>
+    }
     self.content = content()
   }
 
   public var body: some View {
-    VStack {
-      Text(configuration.title)
-        .font(configuration.titleFont)
-        .padding(configuration.titlePadding)
-
+    let titleView = textModifier(Text(title))
+    let vStack = VStack {
+      titleView
       content
     }
-    .padding(configuration.titlePadding)
-    .background(configuration.backgroundColor)
-    .cornerRadius(configuration.cornerRadius)
-    .shadow(radius: configuration.shadowRadius)
-    .padding()
+
+    vStackModifier(vStack)
   }
 }
