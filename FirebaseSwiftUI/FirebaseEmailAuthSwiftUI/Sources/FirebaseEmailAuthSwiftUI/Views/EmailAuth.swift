@@ -13,6 +13,6 @@ class EmailUtils {
 public struct EmailAuth: View {
   public init() {}
   public var body: some View {
-    EmailAuthButton()
+    EmailAuthButton<EmailAuthButtonModifier, EmailAuthTextModifier, EmailAuthVStackModifier>()
   }
 }

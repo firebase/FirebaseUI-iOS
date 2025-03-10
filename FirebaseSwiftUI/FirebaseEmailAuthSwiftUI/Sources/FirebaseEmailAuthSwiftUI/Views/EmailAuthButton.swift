@@ -1,73 +1,74 @@
 import SwiftUI
 
-public struct EmailAuthButton: View {
-  @State private var emailAuthView = false
-  public var buttonText: String
-  public var buttonModifier: (Button<Text>) -> Button<Text>?
-  public var textModifier: (Text) -> Text
-  public var vStackModifier: (VStack<TupleView<(
-    Button<Text>,
-    NavigationLink<EmptyView, EmailEntryView>
-  )>>) -> VStack<TupleView<(Button<Text>, NavigationLink<EmptyView, EmailEntryView>)>>
+struct EmailAuthButtonModifier: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(.body)
+      .padding(8)
+      .background(Color.red)
+      .foregroundColor(Color.white)
+      .cornerRadius(8)
+  }
+}
 
-  public init(buttonText: String = "Sign in with email",
-              buttonModifier: ((Button<Text>) -> Button<Text>)? = nil,
-              textModifier: ((Text) -> Text)? = nil,
-              vStackModifier: ((VStack<TupleView<(
-                Button<Text>,
-                NavigationLink<EmptyView, EmailEntryView>
-              )>>) -> VStack<TupleView<(
-                Button<Text>,
-                NavigationLink<EmptyView, EmailEntryView>
-              )>>)? = nil) {
+struct EmailAuthVStackModifier: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .frame(width: 300, height: 150)
+      .background(Color.white)
+      .cornerRadius(12)
+      .shadow(radius: 10)
+      .overlay(
+        RoundedRectangle(cornerRadius: 12)
+          .stroke(Color.gray, lineWidth: 1)
+      )
+      .padding()
+  }
+}
+
+struct EmailAuthTextModifier: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(.headline)
+      .padding()
+  }
+}
+
+public struct EmailAuthButton<
+  ButtonModifier: ViewModifier,
+  ButtonTextModifier: ViewModifier,
+  VStackModifier: ViewModifier
+>: View {
+  @State private var emailAuthView = false
+  private var buttonText: String
+  private var buttonModifier: ButtonModifier?
+  private var buttonTextModifier: ButtonTextModifier?
+  private var vStackModifier: VStackModifier?
+
+  public init(buttonText: String = "Sign in with email", buttonModifier: ButtonModifier? = nil,
+              buttonTextModifier: ButtonTextModifier? = nil,
+              vStackModifier: VStackModifier? = nil) {
     self.buttonText = buttonText
     self.buttonModifier = buttonModifier
-    self.textModifier = textModifier ?? { text in
-      text
-        .font(.headline)
-        .padding() as! Text
-    }
-    self.vStackModifier = vStackModifier ?? { vstack in
-      vstack
-        .frame(width: 300, height: 150)
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(radius: 10)
-        .overlay(
-          RoundedRectangle(cornerRadius: 12)
-            .stroke(Color.gray, lineWidth: 1)
-        )
-        .padding() as! VStack<TupleView<(Button<Text>, NavigationLink<EmptyView, EmailEntryView>)>>
-    }
+    self.buttonTextModifier = buttonTextModifier
+    self.vStackModifier = vStackModifier
   }
 
   public var body: some View {
-    let buttonView: Button<Text> = {
-      let button = Button(action: {
-        emailAuthView = true
-      }) {
-        textModifier(Text(buttonText))
-      }
+    let textView = Text(buttonText)
+      .modifier(buttonTextModifier ?? EmailAuthTextModifier() as! ButtonTextModifier)
 
-      if let customButtonModifier = buttonModifier {
-        return customButtonModifier(button)
-      } else {
-        return button
-          .font(.body)
-          .padding(8)
-          .background(.red)
-          .foregroundColor(.white)
-          .cornerRadius(8)
-      }
-    }()
+    let buttonView = Button(action: {
+      emailAuthView = true
+    }) {
+      textView
+    }.modifier(buttonModifier ?? EmailAuthButtonModifier() as! ButtonModifier)
 
-    let content = VStack {
+    return VStack {
       buttonView
       NavigationLink(destination: EmailEntryView(), isActive: $emailAuthView) {
         EmptyView()
       }
-    }
-
-    return vStackModifier(content)
+    }.modifier(vStackModifier ?? EmailAuthVStackModifier() as! VStackModifier)
   }
 }
