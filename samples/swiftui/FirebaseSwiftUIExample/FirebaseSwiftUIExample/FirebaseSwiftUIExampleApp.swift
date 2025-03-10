@@ -8,7 +8,7 @@
 import FirebaseAuth
 import FirebaseAuthSwiftUI
 import FirebaseCore
-import FirebaseEmailAuthSwiftUI
+import FirebaseEmailAuthUI
 import SwiftData
 import SwiftUI
 
