@@ -3,7 +3,7 @@ import SwiftUI
 public struct EmailAuthButton: View {
   @State private var emailAuthView = false
   public var buttonText: String
-  public var buttonModifier: (Button<Text>) -> Button<Text>
+  public var buttonModifier: (Button<Text>) -> Button<Text>?
   public var textModifier: (Text) -> Text
   public var vStackModifier: (VStack<TupleView<(
     Button<Text>,
@@ -21,14 +21,7 @@ public struct EmailAuthButton: View {
                 NavigationLink<EmptyView, EmailEntryView>
               )>>)? = nil) {
     self.buttonText = buttonText
-    self.buttonModifier = buttonModifier ?? { button in
-      button
-        .font(.body)
-        .padding(8)
-        .background(.red)
-        .foregroundColor(.white)
-        .cornerRadius(8)
-    }
+    self.buttonModifier = buttonModifier
     self.textModifier = textModifier ?? { text in
       text
         .font(.headline)
@@ -49,11 +42,24 @@ public struct EmailAuthButton: View {
   }
 
   public var body: some View {
-    let buttonView = buttonModifier(Button(action: {
-      emailAuthView = true
-    }) {
-      textModifier(Text(buttonText))
-    })
+    let buttonView: Button<Text> = {
+      let button = Button(action: {
+        emailAuthView = true
+      }) {
+        textModifier(Text(buttonText))
+      }
+
+      if let customButtonModifier = buttonModifier {
+        return customButtonModifier(button)
+      } else {
+        return button
+          .font(.body)
+          .padding(8)
+          .background(.red)
+          .foregroundColor(.white)
+          .cornerRadius(8)
+      }
+    }()
 
     let content = VStack {
       buttonView
