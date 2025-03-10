@@ -1,51 +1,73 @@
 import SwiftUI
 
-public protocol FUIButtonProtocol: View {
-  var configuration: EmailAuthButtonConfiguration { get }
-}
-
-public class EmailAuthButtonConfiguration {
+public struct EmailAuthButton: View {
+  @State private var emailAuthView = false
   public var buttonText: String
-  public var buttonPadding: CGFloat
-  public var buttonBackgroundColor: Color
-  public var buttonForegroundColor: Color
-  public var buttonCornerRadius: CGFloat
+  public var buttonModifier: (Button<Text>) -> Button<Text>
+  public var textModifier: (Text) -> Text
+  public var vStackModifier: (VStack<TupleView<(
+    Text,
+    Button<Text>,
+    NavigationLink<EmptyView, EmailEntryView>
+  )>>) -> VStack<TupleView<(Text, Button<Text>, NavigationLink<EmptyView, EmailEntryView>)>>
 
   public init(buttonText: String = "Sign in with email",
-              buttonPadding: CGFloat = 8,
-              buttonBackgroundColor: Color = .red,
-              buttonForegroundColor: Color = .white,
-              buttonCornerRadius: CGFloat = 8) {
+              buttonModifier: ((Button<Text>) -> Button<Text>)? = nil,
+              textModifier: ((Text) -> Text)? = nil,
+              vStackModifier: ((VStack<TupleView<(
+                Text,
+                Button<Text>,
+                NavigationLink<EmptyView, EmailEntryView>
+              )>>) -> VStack<TupleView<(
+                Text,
+                Button<Text>,
+                NavigationLink<EmptyView, EmailEntryView>
+              )>>)? = nil) {
     self.buttonText = buttonText
-    self.buttonPadding = buttonPadding
-    self.buttonBackgroundColor = buttonBackgroundColor
-    self.buttonForegroundColor = buttonForegroundColor
-    self.buttonCornerRadius = buttonCornerRadius
-  }
-}
-
-public struct EmailAuthButton: FUIButtonProtocol {
-  @State private var emailAuthView = false
-  public let configuration: EmailAuthButtonConfiguration
-
-  public init(configuration: EmailAuthButtonConfiguration = EmailAuthButtonConfiguration()) {
-    self.configuration = configuration
+    self.buttonModifier = buttonModifier ?? { button in
+      button
+        .font(.body)
+        .padding(8)
+        .background(.red)
+        .foregroundColor(.white)
+        .cornerRadius(8)
+    }
+    self.textModifier = textModifier ?? { text in
+      text
+        .font(.headline)
+        .padding() as! Text
+    }
+    self.vStackModifier = vStackModifier ?? { vstack in
+      vstack
+        .frame(width: 300, height: 150)
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(radius: 10)
+        .overlay(
+          RoundedRectangle(cornerRadius: 12)
+            .stroke(Color.gray, lineWidth: 1)
+        )
+        .padding() as! VStack<TupleView<(
+          Text,
+          Button<Text>,
+          NavigationLink<EmptyView, EmailEntryView>
+        )>>
+    }
   }
 
   public var body: some View {
-    VStack {
-      Button(action: {
+    let content = VStack {
+      textModifier(Text(buttonText))
+      buttonModifier(Button(action: {
         emailAuthView = true
       }) {
-        Text(configuration.buttonText)
-          .padding(configuration.buttonPadding)
-          .background(configuration.buttonBackgroundColor)
-          .foregroundColor(configuration.buttonForegroundColor)
-          .cornerRadius(configuration.buttonCornerRadius)
-      }
+        Text(buttonText)
+      })
       NavigationLink(destination: EmailEntryView(), isActive: $emailAuthView) {
         EmptyView()
       }
     }
+
+    vStackModifier(content)
   }
 }
