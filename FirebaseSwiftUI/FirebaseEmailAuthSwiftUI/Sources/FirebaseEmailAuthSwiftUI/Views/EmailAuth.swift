@@ -10,12 +10,9 @@ class EmailUtils {
   }
 }
 
-public struct EmailAuth<
-  StackStyle: FUIVStackStyle
->: View {
-  private var emailAuthButton: EmailAuthButton<StackStyle>?
-
-  public init(emailAuthButton: EmailAuthButton<StackStyle>? = nil) {
+public struct EmailAuth<EmailButtonStyle: ButtonStyle>: View {
+  private var emailAuthButton: EmailAuthButton<EmailButtonStyle>?
+  public init(emailAuthButton: EmailAuthButton<EmailButtonStyle>? = nil) {
     self.emailAuthButton = emailAuthButton
   }
 
@@ -23,7 +20,7 @@ public struct EmailAuth<
     if let emailAuthButton = emailAuthButton {
       emailAuthButton
     } else {
-      EmailAuthButton<DefaultVStackStyle>()
+      EmailAuthButton<DefaultEmailAuthButtonStyle>(buttonStyle: DefaultEmailAuthButtonStyle())
     }
   }
 }

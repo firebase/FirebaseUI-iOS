@@ -1,30 +1,23 @@
 import SwiftUI
 
-public protocol FUIVStackStyle {
-  associatedtype Body: View
-
-  @ViewBuilder func body(content: VStack<Button<Text>>) -> Body
-}
-
-public struct DefaultVStackStyle: FUIVStackStyle {
-  public init() {}
-
-  public func body(content: VStack<Button<Text>>) -> some View {
-    content
+public struct DefaultEmailAuthButtonStyle: ButtonStyle {
+  public func makeBody(configuration: Configuration) -> some View {
+    configuration.label
       .padding()
-      .background(Color.gray.opacity(0.2))
+      .background(Color.blue)
+      .foregroundColor(.white)
       .cornerRadius(10)
   }
 }
 
-public struct EmailAuthButton<StackStyle: FUIVStackStyle>: View {
+public struct EmailAuthButton<ButtonStyleType: ButtonStyle>: View {
   @State private var emailAuthView = false
   private var buttonText: String
-  private var vStackStyle: StackStyle?
+  private var buttonStyle: ButtonStyleType
 
-  public init(buttonText: String = "Sign in with email", vStackStyle: StackStyle? = nil) {
+  public init(buttonText: String = "Sign in with email", buttonStyle: ButtonStyleType) {
     self.buttonText = buttonText
-    self.vStackStyle = vStackStyle
+    self.buttonStyle = buttonStyle
   }
 
   public var body: some View {
@@ -36,14 +29,6 @@ public struct EmailAuthButton<StackStyle: FUIVStackStyle>: View {
       textView
     }
 
-    let vStackView = VStack {
-      buttonView
-    }
-
-    if let vStackStyle = vStackStyle {
-      vStackStyle.body(content: vStackView)
-    } else {
-      DefaultVStackStyle().body(content: vStackView)
-    }
+    buttonView.buttonStyle(buttonStyle)
   }
 }
