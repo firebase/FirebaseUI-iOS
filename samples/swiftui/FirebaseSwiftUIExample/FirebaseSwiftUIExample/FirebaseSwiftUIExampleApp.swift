@@ -22,17 +22,21 @@ struct CustomTextModifier: ViewModifier {
 
 @main
 struct FirebaseSwiftUIExampleApp: App {
+  var authUI: FUIAuth
+
   init() {
     FirebaseApp.configure()
+    let firebaseAuthUI = FUIAuth()
+    authUI = firebaseAuthUI
+//    authUI.authProviders(providers: [EmailAuthProvider()])
   }
 
   var body: some Scene {
     WindowGroup {
       // Put this at top level so user can control it in their app
       NavigationView {
-        let firebaseAuthUI = FUIAuth()
         FUIAuthView(
-          FUIAuth: firebaseAuthUI,
+          FUIAuth: authUI,
           // method 1 of setting view modifier
           authPickerView: AuthPickerView(title: "Custom Auth Picker", textModifier: { Text in
             Text.bold()
