@@ -50,5 +50,8 @@ public struct EmailAuthButton<
     }
 
     buttonTextStyle.body(content: buttonView).buttonStyle(buttonStyle)
+    NavigationLink(destination: EmailEntryView(), isActive: $emailAuthView) {
+      EmptyView()
+    }
   }
 }
