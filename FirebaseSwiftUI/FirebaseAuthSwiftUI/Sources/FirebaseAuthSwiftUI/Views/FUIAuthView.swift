@@ -5,16 +5,22 @@ import SwiftUI
 // Negates the need for a delegate used in UIKit
 public struct FUIAuthView<Content: View>: View {
   private var authFUI: FUIAuth
-  private var authPickerView: AuthPickerView<Content>
+  private var authPickerView: AuthPickerView<Content>?
   @ObservedObject var internalState: FUIAuthState = .init()
 
   public init(FUIAuth: FUIAuth,
-              authPickerView: AuthPickerView<Content>) {
+              authPickerView: AuthPickerView<Content>? = nil) {
     authFUI = FUIAuth
     self.authPickerView = authPickerView
   }
 
   public var body: some View {
-    authPickerView.environmentObject(internalState).environmentObject(authFUI)
+    if authPickerView != nil {
+      authPickerView.environmentObject(internalState).environmentObject(authFUI)
+    } else {
+      VStack {
+        // TODO: - default provider flows to render
+      }
+    }
   }
 }
