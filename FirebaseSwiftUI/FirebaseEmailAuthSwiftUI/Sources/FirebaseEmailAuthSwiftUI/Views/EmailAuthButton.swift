@@ -10,14 +10,34 @@ public struct DefaultEmailAuthButtonStyle: ButtonStyle {
   }
 }
 
-public struct EmailAuthButton<ButtonStyleType: ButtonStyle>: View {
+public protocol EmailButtonTextStyle {
+  associatedtype Body: View
+
+  @ViewBuilder func body(content: Button<Text>) -> Body
+}
+
+public struct DefaultEmailButtonTextStyle: EmailButtonTextStyle {
+  public init() {}
+
+  public func body(content: Button<Text>) -> some View {
+    content
+  }
+}
+
+public struct EmailAuthButton<
+  ButtonStyleType: ButtonStyle,
+  ButtonTextStyleType: EmailButtonTextStyle
+>: View {
   @State private var emailAuthView = false
   private var buttonText: String
   private var buttonStyle: ButtonStyleType
+  private var buttonTextStyle: ButtonTextStyleType
 
-  public init(buttonText: String = "Sign in with email", buttonStyle: ButtonStyleType) {
+  public init(buttonText: String = "Sign in with email", buttonStyle: ButtonStyleType,
+              buttonTextStyle: ButtonTextStyleType) {
     self.buttonText = buttonText
     self.buttonStyle = buttonStyle
+    self.buttonTextStyle = buttonTextStyle
   }
 
   public var body: some View {
@@ -29,6 +49,6 @@ public struct EmailAuthButton<ButtonStyleType: ButtonStyle>: View {
       textView
     }
 
-    buttonView.buttonStyle(buttonStyle)
+    buttonTextStyle.body(content: buttonView).buttonStyle(buttonStyle)
   }
 }

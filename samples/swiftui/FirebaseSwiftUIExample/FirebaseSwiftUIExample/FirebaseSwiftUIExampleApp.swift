@@ -39,7 +39,7 @@ struct FirebaseSwiftUIExampleApp: App {
           }) {
             VStack {
               // method 2 of setting view modifier
-              EmailAuth<DefaultEmailAuthButtonStyle>()
+              EmailAuth<DefaultEmailAuthButtonStyle, DefaultEmailButtonTextStyle>()
             }
           }
         )
