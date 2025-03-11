@@ -25,10 +25,6 @@ public struct AuthPickerView<Content: View>: View {
     }
     self.vStackModifier = vStackModifier ?? { vstack in
       vstack
-        .padding()
-        .background(Color.yellow)
-        .cornerRadius(20)
-        .shadow(radius: 5) as! VStack<TupleView<(Text, Content)>>
     }
     self.content = content()
   }
