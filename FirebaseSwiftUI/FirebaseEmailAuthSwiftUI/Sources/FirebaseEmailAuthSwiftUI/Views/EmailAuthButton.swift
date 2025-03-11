@@ -31,6 +31,7 @@ public struct EmailAuthButton<
 >: View {
   @State private var emailAuthView = false
   @EnvironmentObject var internalState: FUIAuthState
+  @EnvironmentObject var authFUI: FUIAuth
   private var buttonText: String
   private var buttonStyle: ButtonStyleType
   private var buttonTextStyle: ButtonTextStyleType
@@ -53,7 +54,7 @@ public struct EmailAuthButton<
 
     buttonTextStyle.body(content: buttonView).buttonStyle(buttonStyle)
     NavigationLink(
-      destination: EmailEntryView().environmentObject(internalState),
+      destination: EmailEntryView().environmentObject(internalState).environmentObject(authFUI),
       isActive: $emailAuthView
     ) {
       EmptyView()
