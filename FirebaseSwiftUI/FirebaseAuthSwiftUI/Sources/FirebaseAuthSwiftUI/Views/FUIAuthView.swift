@@ -15,6 +15,6 @@ public struct FUIAuthView<Content: View>: View {
   }
 
   public var body: some View {
-    authPickerView
+    authPickerView.environmentObject(internalState)
   }
 }

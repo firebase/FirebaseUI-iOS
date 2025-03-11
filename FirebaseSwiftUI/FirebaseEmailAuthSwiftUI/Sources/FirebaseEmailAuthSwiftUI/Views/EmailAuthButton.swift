@@ -1,3 +1,4 @@
+import FirebaseAuthSwiftUI
 import SwiftUI
 
 public struct DefaultEmailAuthButtonStyle: ButtonStyle {
@@ -29,6 +30,7 @@ public struct EmailAuthButton<
   ButtonTextStyleType: EmailButtonTextStyle
 >: View {
   @State private var emailAuthView = false
+  @EnvironmentObject var internalState: FUIAuthState
   private var buttonText: String
   private var buttonStyle: ButtonStyleType
   private var buttonTextStyle: ButtonTextStyleType
@@ -50,7 +52,10 @@ public struct EmailAuthButton<
     }
 
     buttonTextStyle.body(content: buttonView).buttonStyle(buttonStyle)
-    NavigationLink(destination: EmailEntryView(), isActive: $emailAuthView) {
+    NavigationLink(
+      destination: EmailEntryView().environmentObject(internalState),
+      isActive: $emailAuthView
+    ) {
       EmptyView()
     }
   }
