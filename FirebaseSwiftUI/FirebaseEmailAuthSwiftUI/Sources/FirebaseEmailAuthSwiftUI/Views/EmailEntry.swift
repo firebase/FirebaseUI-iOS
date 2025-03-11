@@ -3,13 +3,11 @@ import SwiftUI
 
 public struct EmailEntryView: View {
   @State private var email: String = ""
-  @State private var invalidEmailWarning: Bool = false
+  @EnvironmentObject var internalState: FUIAuthState
   @EnvironmentObject var authFUI: FUIAuth
 
   public var body: some View {
-    WarningView(
-      invalidEmailWarning: $invalidEmailWarning
-    ).disabled(invalidEmailWarning == true)
+    WarningView().disabled(internalState.isEmailWarningVisible == false)
 
     VStack {
       Text("Email")
@@ -23,7 +21,7 @@ public struct EmailEntryView: View {
     .background(Color.white)
     .cornerRadius(12)
     .shadow(radius: 10)
-    .disabled(invalidEmailWarning == false)
+    .disabled(internalState.isEmailWarningVisible == true)
     // TODO: - figure out why this is causing exception: Ambiguous use of 'toolbar(content:)'
 //      .toolbar {
 //        ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -37,7 +35,7 @@ public struct EmailEntryView: View {
   private func emailSubmit() {
     var emailAuthProvider = authFUI.getEmailProvider()
     if !EmailUtils.isValidEmail(email) {
-      invalidEmailWarning = true
+      internalState.showEmailWarning()
     }
   }
 }
