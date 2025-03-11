@@ -1,74 +1,49 @@
 import SwiftUI
 
-public struct EmailAuthButtonModifier: ViewModifier {
-  public func body(content: Content) -> some View {
-    content
-      .font(.body)
-      .padding(8)
-      .background(Color.red)
-      .foregroundColor(Color.white)
-      .cornerRadius(8)
-  }
+public protocol FUIVStackStyle {
+  associatedtype Body: View
+
+  @ViewBuilder func body(content: VStack<Button<Text>>) -> Body
 }
 
-public struct EmailAuthVStackModifier: ViewModifier {
-  public func body(content: Content) -> some View {
+public struct DefaultVStackStyle: FUIVStackStyle {
+  public init() {}
+
+  public func body(content: VStack<Button<Text>>) -> some View {
     content
-      .frame(width: 300, height: 150)
-      .background(Color.white)
-      .cornerRadius(12)
-      .shadow(radius: 10)
-      .overlay(
-        RoundedRectangle(cornerRadius: 12)
-          .stroke(Color.gray, lineWidth: 1)
-      )
       .padding()
+      .background(Color.gray.opacity(0.2))
+      .cornerRadius(10)
   }
 }
 
-public struct EmailAuthTextModifier: ViewModifier {
-  public func body(content: Content) -> some View {
-    content
-      .font(.headline)
-      .padding()
-  }
-}
-
-public struct EmailAuthButton<
-  ButtonModifier: ViewModifier,
-  ButtonTextModifier: ViewModifier,
-  VStackModifier: ViewModifier
->: View {
+public struct EmailAuthButton<StackStyle: FUIVStackStyle>: View {
   @State private var emailAuthView = false
   private var buttonText: String
-  private var buttonModifier: ButtonModifier?
-  private var buttonTextModifier: ButtonTextModifier?
-  private var vStackModifier: VStackModifier?
+  private var vStackStyle: StackStyle?
 
-  public init(buttonText: String = "Sign in with email", buttonModifier: ButtonModifier? = nil,
-              buttonTextModifier: ButtonTextModifier? = nil,
-              vStackModifier: VStackModifier? = nil) {
+  public init(buttonText: String = "Sign in with email", vStackStyle: StackStyle? = nil) {
     self.buttonText = buttonText
-    self.buttonModifier = buttonModifier
-    self.buttonTextModifier = buttonTextModifier
-    self.vStackModifier = vStackModifier
+    self.vStackStyle = vStackStyle
   }
 
   public var body: some View {
     let textView = Text(buttonText)
-      .modifier(buttonTextModifier ?? EmailAuthTextModifier() as! ButtonTextModifier)
 
     let buttonView = Button(action: {
       emailAuthView = true
     }) {
       textView
-    }.modifier(buttonModifier ?? EmailAuthButtonModifier() as! ButtonModifier)
+    }
 
-    return VStack {
+    let vStackView = VStack {
       buttonView
-      NavigationLink(destination: EmailEntryView(), isActive: $emailAuthView) {
-        EmptyView()
-      }
-    }.modifier(vStackModifier ?? EmailAuthVStackModifier() as! VStackModifier)
+    }
+
+    if let vStackStyle = vStackStyle {
+      vStackStyle.body(content: vStackView)
+    } else {
+      DefaultVStackStyle().body(content: vStackView)
+    }
   }
 }

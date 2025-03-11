@@ -11,22 +11,19 @@ class EmailUtils {
 }
 
 public struct EmailAuth<
-  ButtonModifier: ViewModifier,
-  TextModifier: ViewModifier,
-  VStackModifier: ViewModifier
+  StackStyle: FUIVStackStyle
 >: View {
-  private var emailAuthButton: EmailAuthButton<ButtonModifier, TextModifier, VStackModifier>?
+  private var emailAuthButton: EmailAuthButton<StackStyle>?
 
-  public init(emailAuthButton: EmailAuthButton<ButtonModifier, TextModifier, VStackModifier>? =
-    nil) {
+  public init(emailAuthButton: EmailAuthButton<StackStyle>? = nil) {
     self.emailAuthButton = emailAuthButton
   }
 
   public var body: some View {
-    if emailAuthButton != nil {
+    if let emailAuthButton = emailAuthButton {
       emailAuthButton
     } else {
-      EmailAuthButton<EmailAuthButtonModifier, EmailAuthTextModifier, EmailAuthVStackModifier>()
+      EmailAuthButton<DefaultVStackStyle>()
     }
   }
 }
