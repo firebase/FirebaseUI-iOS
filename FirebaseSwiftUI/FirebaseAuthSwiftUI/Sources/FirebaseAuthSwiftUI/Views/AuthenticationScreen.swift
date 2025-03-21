@@ -8,15 +8,15 @@ enum AuthenticationFlow {
 
 public struct AuthenticationScreen {
   @Environment(AuthEnvironment.self) private var authEnvironment
-
   @State private var flow: AuthenticationFlow = .login
+  @State private var errorMessage = ""
+
+  public init() {}
 
   private func switchFlow() {
     flow = flow == .login ? .signUp : .login
     errorMessage = ""
   }
-
-  @State private var errorMessage = ""
 }
 
 extension AuthenticationScreen: View {
