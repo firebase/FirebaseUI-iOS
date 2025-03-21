@@ -66,10 +66,6 @@ let package = Package(
       name: "FirebaseAuthSwiftUI",
       targets: ["FirebaseAuthSwiftUI"]
     ),
-    .library(
-      name: "FirebaseEmailAuthSwiftUI",
-      targets: ["FirebaseEmailAuthSwiftUI"]
-    ),
   ],
   dependencies: [
     .package(
@@ -260,18 +256,6 @@ let package = Package(
       name: "FirebaseAuthSwiftUITests",
       dependencies: ["FirebaseAuthSwiftUI"],
       path: "FirebaseSwiftUI/FirebaseAuthSwiftUI/Tests/"
-      ),
-    .target(
-      name: "FirebaseEmailAuthSwiftUI",
-      dependencies: [
-        "FirebaseAuthSwiftUI"
-      ],
-      path: "FirebaseSwiftUI/FirebaseEmailAuthSwiftUI/Sources"
-      ),
-    .testTarget(
-      name: "FirebaseEmailAuthSwiftUITests",
-      dependencies: ["FirebaseEmailAuthSwiftUI"],
-      path: "FirebaseSwiftUI/FirebaseEmailAuthSwiftUI/Tests/"
       ),
   ]
 )
