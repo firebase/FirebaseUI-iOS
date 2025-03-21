@@ -2,7 +2,7 @@
 import SwiftUI
 
 @MainActor
-class EmailAuthProvider {
+public class EmailAuthProvider {
   @Environment(AuthEnvironment.self) private var authEnvironment
 
   public init() {}

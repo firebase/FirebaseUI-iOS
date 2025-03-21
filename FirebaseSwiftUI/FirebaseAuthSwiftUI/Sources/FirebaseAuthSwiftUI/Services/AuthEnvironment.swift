@@ -18,12 +18,18 @@ public enum AuthenticationState {
   case authenticated
 }
 
+public enum AuthenticationFlow {
+  case login
+  case signUp
+}
+
 @MainActor
 @Observable
 public final class AuthEnvironment {
   public static let shared = AuthEnvironment()
 
   var currentUser: User?
+  var errorMessage = ""
 
   private init() {
     setupAuthenticationListener()
@@ -37,6 +43,7 @@ public final class AuthEnvironment {
   }
 
   public var authenticationState: AuthenticationState = .unauthenticated
+  public var authenticationFlow: AuthenticationFlow = .login
 
   private func setupAuthenticationListener() {
     authStateHandle = Auth.auth().addStateDidChangeListener { [weak self] _, user in

@@ -1,20 +1,16 @@
 import FirebaseAuth
 import SwiftUI
 
-enum AuthenticationFlow {
-  case login
-  case signUp
-}
-
+@MainActor
 public struct AuthenticationScreen {
   @Environment(AuthEnvironment.self) private var authEnvironment
-  @State private var flow: AuthenticationFlow = .login
   @State private var errorMessage = ""
 
   public init() {}
 
   private func switchFlow() {
-    flow = flow == .login ? .signUp : .login
+    authEnvironment.authenticationFlow = authEnvironment
+      .authenticationFlow == .login ? .signUp : .login
     errorMessage = ""
   }
 }
@@ -22,7 +18,8 @@ public struct AuthenticationScreen {
 extension AuthenticationScreen: View {
   public var body: some View {
     VStack {
-      Text("Authentication screen")
+      Text(authEnvironment.authenticationFlow == .login ? "Login" : "Sign up")
+      EmailPasswordView(provider: EmailAuthProvider()).environment(authEnvironment)
     }
   }
 }
