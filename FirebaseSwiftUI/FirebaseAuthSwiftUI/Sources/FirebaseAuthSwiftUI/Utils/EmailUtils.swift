@@ -1,3 +1,5 @@
+import Foundation
+
 class EmailUtils {
   static let emailRegex = ".+@([a-zA-Z0-9\\-]+\\.)+[a-zA-Z0-9]{2,63}"
 
