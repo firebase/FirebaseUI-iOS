@@ -20,7 +20,7 @@ import PackageDescription
 let package = Package(
   name: "FirebaseUI",
   defaultLocalization: "en",
-  platforms: [.iOS(.v13)],
+  platforms: [.iOS(.v17)],
   products: [
     .library(
       name: "FirebaseAnonymousAuthUI",
