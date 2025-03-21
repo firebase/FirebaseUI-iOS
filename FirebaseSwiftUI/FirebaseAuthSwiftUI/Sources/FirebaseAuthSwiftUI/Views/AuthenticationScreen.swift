@@ -20,6 +20,19 @@ extension AuthenticationScreen: View {
     VStack {
       Text(authEnvironment.authenticationFlow == .login ? "Login" : "Sign up")
       EmailPasswordView(provider: EmailAuthProvider()).environment(authEnvironment)
+      HStack {
+        Text(authEnvironment
+          .authenticationFlow == .login ? "Don't have an account yet?" : "Already have an account?")
+        Button(action: {
+          withAnimation {
+            switchFlow()
+          }
+        }) {
+          Text(authEnvironment.authenticationFlow == .signUp ? "Log in" : "Sign up")
+            .fontWeight(.semibold)
+            .foregroundColor(.blue)
+        }
+      }
     }
   }
 }

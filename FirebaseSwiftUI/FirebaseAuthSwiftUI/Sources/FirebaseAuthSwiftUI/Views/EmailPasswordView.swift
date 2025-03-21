@@ -58,6 +58,79 @@ public struct EmailPasswordView {
 
 extension EmailPasswordView: View {
   public var body: some View {
-    Text("EmailPasswordView")
+    VStack {
+      LabeledContent {
+        TextField("Email", text: $email)
+          .textInputAutocapitalization(.never)
+          .disableAutocorrection(true)
+          .focused($focus, equals: .email)
+          .submitLabel(.next)
+          .onSubmit {
+            self.focus = .password
+          }
+      } label: {
+        Image(systemName: "at")
+      }
+      .padding(.vertical, 6)
+      .background(Divider(), alignment: .bottom)
+      .padding(.bottom, 4)
+
+      LabeledContent {
+        SecureField("Password", text: $password)
+          .focused($focus, equals: .password)
+          .submitLabel(.go)
+          .onSubmit {
+            Task { await signInWithEmailPassword() }
+          }
+      } label: {
+        Image(systemName: "lock")
+      }
+      .padding(.vertical, 6)
+      .background(Divider(), alignment: .bottom)
+      .padding(.bottom, 8)
+
+      if authEnvironment.authenticationFlow == .login {
+        Button("Forgot password?") {}
+          .frame(maxWidth: .infinity, alignment: .trailing)
+      }
+
+      if authEnvironment.authenticationFlow == .signUp {
+        LabeledContent {
+          SecureField("Confirm password", text: $confirmPassword)
+            .focused($focus, equals: .confirmPassword)
+            .submitLabel(.go)
+            .onSubmit {
+              Task { await signUpWithEmailPassword() }
+            }
+        } label: {
+          Image(systemName: "lock")
+        }
+        .padding(.vertical, 6)
+        .background(Divider(), alignment: .bottom)
+        .padding(.bottom, 8)
+      }
+
+      Button(action: {
+        Task {
+          if authEnvironment.authenticationFlow == .login { await signInWithEmailPassword() }
+          else { await signUpWithEmailPassword() }
+        }
+      }) {
+        if authEnvironment.authenticationState != .authenticating {
+          Text(authEnvironment.authenticationFlow == .login ? "Log in with password" : "Sign up")
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        } else {
+          ProgressView()
+            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        }
+      }
+      .disabled(!isValid)
+      .padding([.top, .bottom], 8)
+      .frame(maxWidth: .infinity)
+      .buttonStyle(.borderedProminent)
+    }
   }
 }
