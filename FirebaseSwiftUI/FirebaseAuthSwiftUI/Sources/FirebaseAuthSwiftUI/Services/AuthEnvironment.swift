@@ -24,6 +24,32 @@ public enum AuthenticationFlow {
 }
 
 @MainActor
+final class AuthListenerManager {
+  private var authStateHandle: AuthStateDidChangeListenerHandle?
+  private let auth: Auth
+  private weak var authEnvironment: AuthEnvironment?
+
+  init(auth: Auth, authEnvironment: AuthEnvironment) {
+    self.auth = auth
+    self.authEnvironment = authEnvironment
+    setupAuthenticationListener()
+  }
+
+  deinit {
+    if let handle = authStateHandle {
+      auth.removeStateDidChangeListener(handle)
+    }
+  }
+
+  private func setupAuthenticationListener() {
+    authStateHandle = auth.addStateDidChangeListener { [weak self] _, user in
+      self?.authEnvironment?.currentUser = user
+      self?.authEnvironment?.updateAuthenticationState()
+    }
+  }
+}
+
+@MainActor
 @Observable
 public final class AuthEnvironment {
   public static let shared = AuthEnvironment()
@@ -36,34 +62,14 @@ public final class AuthEnvironment {
   var currentUser: User?
   var errorMessage = ""
 
-  private init() {
-    setupAuthenticationListener()
-  }
+  private var listenerManager: AuthListenerManager?
 
-  deinit {
-    if let handle = authStateHandle {
-      auth.removeStateDidChangeListener(handle)
-      authStateHandle = nil
-    }
+  private init() {
+    listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
   }
 
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .login
-
-  private func setupAuthenticationListener() {
-    authStateHandle = auth.addStateDidChangeListener { [weak self] _, user in
-      self?.currentUser = user
-      self?.updateAuthenticationState()
-    }
-  }
-
-  private nonisolated(unsafe) var authStateHandle: AuthStateDidChangeListenerHandle? {
-    willSet {
-      if let handle = authStateHandle {
-        auth.removeStateDidChangeListener(handle)
-      }
-    }
-  }
 
   func updateAuthenticationState() {
     authenticationState =
