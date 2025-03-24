@@ -42,7 +42,7 @@ public final class AuthEnvironment {
 
   deinit {
     if let handle = authStateHandle {
-      Auth.auth().removeStateDidChangeListener(handle)
+      auth.removeStateDidChangeListener(handle)
       authStateHandle = nil
     }
   }
@@ -51,7 +51,7 @@ public final class AuthEnvironment {
   public var authenticationFlow: AuthenticationFlow = .login
 
   private func setupAuthenticationListener() {
-    authStateHandle = Auth.auth().addStateDidChangeListener { [weak self] _, user in
+    authStateHandle = auth.addStateDidChangeListener { [weak self] _, user in
       self?.currentUser = user
       self?.updateAuthenticationState()
     }
@@ -60,7 +60,7 @@ public final class AuthEnvironment {
   private nonisolated(unsafe) var authStateHandle: AuthStateDidChangeListenerHandle? {
     willSet {
       if let handle = authStateHandle {
-        Auth.auth().removeStateDidChangeListener(handle)
+        auth.removeStateDidChangeListener(handle)
       }
     }
   }
@@ -72,12 +72,12 @@ public final class AuthEnvironment {
         : .authenticated
   }
 
-  public func signOut() throws {
-    try Auth.auth().signOut()
+  public func signOut() async throws {
+    try await auth.signOut()
   }
 
   func signIn(with credentials: AuthCredential) async throws {
-    try await Auth.auth().signIn(with: credentials)
+    try await auth.signIn(with: credentials)
     updateAuthenticationState()
   }
 }
