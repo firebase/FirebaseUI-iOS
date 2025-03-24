@@ -46,9 +46,9 @@ public struct EmailPasswordView {
     }
   }
 
-  private func signUpWithEmailPassword() async {
+  private func createUserWithEmailPassword() async {
     do {
-      try await provider.signUp(withEmail: email, password: password)
+      try await provider.createUser(withEmail: email, password: password)
       dismiss()
     } catch {
       authEnvironment.errorMessage = error.localizedDescription
@@ -90,8 +90,10 @@ extension EmailPasswordView: View {
       .padding(.bottom, 8)
 
       if authEnvironment.authenticationFlow == .login {
-        Button("Forgot password?") {}
-          .frame(maxWidth: .infinity, alignment: .trailing)
+        Button("Forgot password?") {
+          // TODO: - does this update to a new screen or update in-situ???
+        }
+        .frame(maxWidth: .infinity, alignment: .trailing)
       }
 
       if authEnvironment.authenticationFlow == .signUp {
@@ -100,7 +102,7 @@ extension EmailPasswordView: View {
             .focused($focus, equals: .confirmPassword)
             .submitLabel(.go)
             .onSubmit {
-              Task { await signUpWithEmailPassword() }
+              Task { await createUserWithEmailPassword() }
             }
         } label: {
           Image(systemName: "lock")
@@ -113,7 +115,7 @@ extension EmailPasswordView: View {
       Button(action: {
         Task {
           if authEnvironment.authenticationFlow == .login { await signInWithEmailPassword() }
-          else { await signUpWithEmailPassword() }
+          else { await createUserWithEmailPassword() }
         }
       }) {
         if authEnvironment.authenticationState != .authenticating {

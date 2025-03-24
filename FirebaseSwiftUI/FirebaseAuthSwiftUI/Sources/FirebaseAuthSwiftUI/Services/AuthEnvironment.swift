@@ -83,7 +83,13 @@ public final class AuthEnvironment {
   }
 
   func signIn(with credentials: AuthCredential) async throws {
-    try await auth.signIn(with: credentials)
-    updateAuthenticationState()
+    authenticationState = .authenticating
+    do {
+      try await auth.signIn(with: credentials)
+      updateAuthenticationState()
+    } catch {
+      authenticationState = .unauthenticated
+      throw error
+    }
   }
 }

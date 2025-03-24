@@ -12,17 +12,19 @@ public class EmailAuthProvider {
   func signIn(withEmail email: String, password: String) async throws {
     authEnvironment.authenticationState = .authenticating
     do {
-      try await authEnvironment.auth.createUser(withEmail: email, password: password)
+      try await authEnvironment.auth.signIn(withEmail: email, password: password)
+      authEnvironment.updateAuthenticationState()
     } catch {
       authEnvironment.authenticationState = .unauthenticated
       throw error
     }
   }
 
-  func signUp(withEmail email: String, password: String) async throws {
+  func createUser(withEmail email: String, password: String) async throws {
     authEnvironment.authenticationState = .authenticating
     do {
       try await authEnvironment.auth.createUser(withEmail: email, password: password)
+      authEnvironment.updateAuthenticationState()
     } catch {
       authEnvironment.authenticationState = .unauthenticated
       throw error
