@@ -3,14 +3,16 @@ import SwiftUI
 
 @MainActor
 public class EmailAuthProvider {
-  @Environment(AuthEnvironment.self) private var authEnvironment
+  private let authEnvironment: AuthEnvironment
 
-  public init() {}
+  public init(authEnvironment: AuthEnvironment) {
+    self.authEnvironment = authEnvironment
+  }
 
   func signIn(withEmail email: String, password: String) async throws {
     authEnvironment.authenticationState = .authenticating
     do {
-      try await Auth.auth().createUser(withEmail: email, password: password)
+      try await authEnvironment.auth.createUser(withEmail: email, password: password)
     } catch {
       authEnvironment.authenticationState = .unauthenticated
       throw error
@@ -20,7 +22,7 @@ public class EmailAuthProvider {
   func signUp(withEmail email: String, password: String) async throws {
     authEnvironment.authenticationState = .authenticating
     do {
-      try await Auth.auth().createUser(withEmail: email, password: password)
+      try await authEnvironment.auth.createUser(withEmail: email, password: password)
     } catch {
       authEnvironment.authenticationState = .unauthenticated
       throw error

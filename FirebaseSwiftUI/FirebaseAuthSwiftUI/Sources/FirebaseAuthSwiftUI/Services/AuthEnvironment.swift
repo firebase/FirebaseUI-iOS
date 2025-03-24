@@ -28,6 +28,11 @@ public enum AuthenticationFlow {
 public final class AuthEnvironment {
   public static let shared = AuthEnvironment()
 
+  // TODO: - need to know how we're configuring the below properties or if they should live on AuthEnvironment
+  let auth: Auth = .auth()
+  let language: String = "en"
+  let enableAutoAnonymousLogin: Bool = true
+
   var currentUser: User?
   var errorMessage = ""
 
