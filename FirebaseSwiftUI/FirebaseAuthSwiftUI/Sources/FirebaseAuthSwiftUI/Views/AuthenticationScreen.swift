@@ -19,7 +19,7 @@ extension AuthenticationScreen: View {
   public var body: some View {
     VStack {
       Text(authEnvironment.authenticationFlow == .login ? "Login" : "Sign up")
-      EmailPasswordView(provider: EmailAuthProvider()).environment(authEnvironment)
+      EmailPasswordView(provider: EmailAuthProvider(authEnvironment: authEnvironment))
       HStack {
         Text(authEnvironment
           .authenticationFlow == .login ? "Don't have an account yet?" : "Already have an account?")
