@@ -15,16 +15,29 @@ import SwiftUI
 struct FirebaseSwiftUIExampleApp: App {
   init() {
     FirebaseApp.configure()
-    authViewModel = AuthEnvironment()
   }
-
-  let authViewModel: AuthEnvironment
 
   var body: some Scene {
     WindowGroup {
       NavigationView {
-        AuthenticationScreen().environment(authViewModel)
+        ContentView()
       }
     }
+  }
+}
+
+struct ContentView: View {
+  let authEnvironment: AuthEnvironment
+  let emailAuthProvider: EmailPasswordAuthProvider
+
+  init() {
+    authEnvironment = AuthEnvironment()
+    emailAuthProvider = EmailPasswordAuthProvider(authEnvironment: authEnvironment)
+  }
+
+  var body: some View {
+    AuthPickerView {
+      EmailPasswordButtonView(provider: emailAuthProvider)
+    }.environment(authEnvironment)
   }
 }

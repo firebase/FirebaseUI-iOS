@@ -17,7 +17,7 @@ public struct EmailPasswordView {
   @Environment(AuthEnvironment.self) private var authEnvironment
   @Environment(\.dismiss) private var dismiss
 
-  @State private var provider: EmailAuthProvider
+  private var provider: EmailPasswordAuthProvider
 
   @State private var email = ""
   @State private var password = ""
@@ -25,7 +25,7 @@ public struct EmailPasswordView {
 
   @FocusState private var focus: FocusableField?
 
-  public init(provider: EmailAuthProvider) {
+  public init(provider: EmailPasswordAuthProvider) {
     self.provider = provider
   }
 

@@ -21,7 +21,7 @@ extension AuthenticationScreen: View {
         SignedInView()
       } else {
         Text(authEnvironment.authenticationFlow == .login ? "Login" : "Sign up")
-        EmailPasswordView(provider: EmailAuthProvider(authEnvironment: authEnvironment))
+        EmailPasswordView(provider: EmailPasswordAuthProvider(authEnvironment: authEnvironment))
         HStack {
           Text(authEnvironment
             .authenticationFlow == .login ? "Don't have an account yet?" :

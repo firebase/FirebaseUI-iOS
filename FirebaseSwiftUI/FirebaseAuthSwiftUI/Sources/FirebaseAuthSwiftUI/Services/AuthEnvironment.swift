@@ -52,13 +52,13 @@ final class AuthListenerManager {
 @MainActor
 @Observable
 public final class AuthEnvironment {
-  public let configuation: AuthConfiguration
+  public let configuration: AuthConfiguration
   public let auth: Auth
   private var listenerManager: AuthListenerManager?
 
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth()) {
     self.auth = auth
-    configuation = configuration
+    self.configuration = configuration
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
   }
 
