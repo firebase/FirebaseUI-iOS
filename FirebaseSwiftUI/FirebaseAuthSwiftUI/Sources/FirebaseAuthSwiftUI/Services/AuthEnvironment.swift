@@ -63,7 +63,6 @@ public final class AuthEnvironment {
   }
 
   public var currentUser: User?
-  public var errorMessage = ""
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .login
 

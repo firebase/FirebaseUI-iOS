@@ -22,6 +22,7 @@ public struct EmailPasswordView {
   @State private var email = ""
   @State private var password = ""
   @State private var confirmPassword = ""
+  @State private var errorMessage = ""
 
   @FocusState private var focus: FocusableField?
 
@@ -42,7 +43,7 @@ public struct EmailPasswordView {
       try await provider.signIn(withEmail: email, password: password)
       dismiss()
     } catch {
-      authEnvironment.errorMessage = error.localizedDescription
+      errorMessage = error.localizedDescription
     }
   }
 
@@ -51,7 +52,7 @@ public struct EmailPasswordView {
       try await provider.createUser(withEmail: email, password: password)
       dismiss()
     } catch {
-      authEnvironment.errorMessage = error.localizedDescription
+      errorMessage = error.localizedDescription
     }
   }
 }
@@ -90,7 +91,7 @@ extension EmailPasswordView: View {
       .padding(.bottom, 8)
 
       if authEnvironment.authenticationFlow == .login {
-        NavigationLink(destination: PasswordRecoveryView()
+        NavigationLink(destination: PasswordRecoveryView(provider: provider)
           .environment(authEnvironment)) {
             Text("Forgotten Password?")
           }
@@ -133,6 +134,7 @@ extension EmailPasswordView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
+      Text(errorMessage).foregroundColor(.red)
     }
   }
 }
