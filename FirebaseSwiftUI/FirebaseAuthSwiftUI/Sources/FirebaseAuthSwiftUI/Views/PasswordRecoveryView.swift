@@ -4,6 +4,7 @@ public struct PasswordRecoveryView {
   @Environment(AuthEnvironment.self) private var authEnvironment
   @State private var email = ""
   @State private var errorMessage = ""
+  @State private var showModal = false
 
   private var provider: EmailPasswordAuthProvider
 
@@ -14,6 +15,7 @@ public struct PasswordRecoveryView {
   private func sendPasswordRecoveryEmail() async {
     do {
       try await provider.sendPasswordRecoveryEmail(withEmail: email)
+      showModal = true
     } catch {
       errorMessage = error.localizedDescription
     }
@@ -54,6 +56,18 @@ extension PasswordRecoveryView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
+    }.sheet(isPresented: $showModal) {
+      VStack {
+        Text("Instructions")
+          .font(.headline)
+        Text("Please check your email for password recovery instructions.")
+          .padding()
+        Button("Dismiss") {
+          showModal = false
+        }
+        .padding()
+      }
+      .padding()
     }
   }
 }
