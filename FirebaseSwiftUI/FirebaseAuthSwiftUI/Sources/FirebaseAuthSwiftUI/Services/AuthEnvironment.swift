@@ -52,22 +52,18 @@ final class AuthListenerManager {
 @MainActor
 @Observable
 public final class AuthEnvironment {
-  public static let shared = AuthEnvironment()
-
-  // TODO: - need to know how we're configuring the below properties or if they should live on AuthEnvironment
-  let auth: Auth = .auth()
-  let language: String = "en"
-  let enableAutoAnonymousLogin: Bool = true
-
-  var currentUser: User?
-  var errorMessage = ""
-
+  public let configuation: AuthConfiguration
+  public let auth: Auth
   private var listenerManager: AuthListenerManager?
 
-  private init() {
+  public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth()) {
+    self.auth = auth
+    configuation = configuration
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
   }
 
+  public var currentUser: User?
+  public var errorMessage = ""
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .login
 

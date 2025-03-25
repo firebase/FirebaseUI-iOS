@@ -15,12 +15,15 @@ import SwiftUI
 struct FirebaseSwiftUIExampleApp: App {
   init() {
     FirebaseApp.configure()
+    authViewModel = AuthEnvironment()
   }
+
+  let authViewModel: AuthEnvironment
 
   var body: some Scene {
     WindowGroup {
       NavigationView {
-        AuthenticationScreen().environment(AuthEnvironment.shared)
+        AuthenticationScreen().environment(authViewModel)
       }
     }
   }
