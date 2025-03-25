@@ -90,10 +90,10 @@ extension EmailPasswordView: View {
       .padding(.bottom, 8)
 
       if authEnvironment.authenticationFlow == .login {
-        Button("Forgot password?") {
-          // TODO: - does this update to a new screen or update in-situ???
-        }
-        .frame(maxWidth: .infinity, alignment: .trailing)
+        NavigationLink(destination: PasswordRecoveryView()
+          .environment(authEnvironment)) {
+            Text("Forgotten Password?")
+          }
       }
 
       if authEnvironment.authenticationFlow == .signUp {
