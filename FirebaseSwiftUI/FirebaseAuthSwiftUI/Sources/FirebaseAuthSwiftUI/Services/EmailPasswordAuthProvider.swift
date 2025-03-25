@@ -24,4 +24,12 @@ public class EmailPasswordAuthProvider {
       throw error
     }
   }
+
+  func sendPasswordRecoveryEmail(withEmail email: String) async throws {
+    do {
+      try await authEnvironment.auth.sendPasswordReset(withEmail: email)
+    } catch {
+      throw error
+    }
+  }
 }
