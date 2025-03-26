@@ -1,6 +1,6 @@
 import SwiftUI
 
-@MainActor
+
 public struct SignedInView {
   @Environment(AuthEnvironment.self) private var authEnvironment
 }
