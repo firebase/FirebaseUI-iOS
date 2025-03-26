@@ -15,7 +15,6 @@ private enum FocusableField: Hashable {
 @MainActor
 public struct EmailPasswordView {
   @Environment(AuthEnvironment.self) private var authEnvironment
-  @Environment(\.dismiss) private var dismiss
 
   private var provider: EmailPasswordAuthProvider
 
@@ -41,7 +40,6 @@ public struct EmailPasswordView {
   private func signInWithEmailPassword() async {
     do {
       try await provider.signIn(withEmail: email, password: password)
-      dismiss()
     } catch {
       errorMessage = error.localizedDescription
     }
@@ -50,7 +48,6 @@ public struct EmailPasswordView {
   private func createUserWithEmailPassword() async {
     do {
       try await provider.createUser(withEmail: email, password: password)
-      dismiss()
     } catch {
       errorMessage = error.localizedDescription
     }
