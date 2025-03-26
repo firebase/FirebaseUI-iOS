@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 public struct SignedInView {
   @Environment(AuthEnvironment.self) private var authEnvironment
 }

@@ -25,9 +25,22 @@ public class EmailPasswordAuthProvider {
     }
   }
 
-  func sendPasswordRecoveryEmail(withEmail email: String) async throws {
+  func sendPasswordRecoveryEmail(to email: String) async throws {
     do {
       try await authEnvironment.auth.sendPasswordReset(withEmail: email)
+    } catch {
+      throw error
+    }
+  }
+
+  func sendEmailSignInLink(to email: String) async throws {
+    do {
+      // TODO: - how does user set action code settings?
+      let actionCodeSettings = ActionCodeSettings()
+      try await authEnvironment.auth.sendSignInLink(
+        toEmail: email,
+        actionCodeSettings: actionCodeSettings
+      )
     } catch {
       throw error
     }

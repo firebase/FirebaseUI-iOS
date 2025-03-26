@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct PasswordRecoveryView {
+public struct EmailLinkView {
   @Environment(AuthEnvironment.self) private var authEnvironment
   @State private var email = ""
   @State private var errorMessage = ""
@@ -12,7 +12,7 @@ public struct PasswordRecoveryView {
     self.provider = provider
   }
 
-  private func sendPasswordRecoveryEmail() async {
+  private func sendEmailLink() async {
     do {
       try await provider.sendPasswordRecoveryEmail(to: email)
       showModal = true
@@ -22,10 +22,10 @@ public struct PasswordRecoveryView {
   }
 }
 
-extension PasswordRecoveryView: View {
+extension EmailLinkView: View {
   public var body: some View {
     VStack {
-      Text("Password Recovery")
+      Text("Sign in with email link")
       LabeledContent {
         TextField("Email", text: $email)
           .textInputAutocapitalization(.never)
@@ -38,11 +38,11 @@ extension PasswordRecoveryView: View {
         .padding(.bottom, 4)
       Button(action: {
         Task {
-          await sendPasswordRecoveryEmail()
+          await sendEmailLink()
         }
       }) {
         if authEnvironment.authenticationState != .authenticating {
-          Text("Password Recovery")
+          Text("Send email sign-in link")
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         } else {
@@ -60,7 +60,7 @@ extension PasswordRecoveryView: View {
       VStack {
         Text("Instructions")
           .font(.headline)
-        Text("Please check your email for password recovery instructions.")
+        Text("Please check your email for email sign-in link.")
           .padding()
         Button("Dismiss") {
           showModal = false

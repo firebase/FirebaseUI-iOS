@@ -131,6 +131,10 @@ extension EmailPasswordView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
+      NavigationLink(destination: EmailLinkView(provider: provider).environment(authEnvironment)
+        .environment(authEnvironment)) {
+          Text("Prefer Email link sign-in?")
+        }
       Text(errorMessage).foregroundColor(.red)
     }
   }
