@@ -75,6 +75,7 @@ public final class AuthEnvironment {
 
   public func signOut() async throws {
     try await auth.signOut()
+    updateAuthenticationState()
   }
 
   func signIn(with credentials: AuthCredential) async throws {
@@ -85,6 +86,17 @@ public final class AuthEnvironment {
     } catch {
       authenticationState = .unauthenticated
       throw error
+    }
+  }
+
+  func sendEmailVerification() async throws {
+    if currentUser != nil {
+      do {
+        // TODO: - can use set user action code settings?
+        try await currentUser!.sendEmailVerification()
+      } catch {
+        throw error
+      }
     }
   }
 }

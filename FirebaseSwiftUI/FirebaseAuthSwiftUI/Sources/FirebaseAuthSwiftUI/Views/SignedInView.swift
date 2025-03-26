@@ -14,6 +14,9 @@ extension SignedInView: View {
           try? await authEnvironment.signOut()
         }
       }
+      if authEnvironment.currentUser?.isEmailVerified == false {
+        VerifyEmailView()
+      }
     }
   }
 }
