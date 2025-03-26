@@ -10,7 +10,11 @@ public struct AuthPickerView<Content: View>: View {
 
   public var body: some View {
     VStack {
-      providerButtons()
+      if authEnvironment.authenticationState == .authenticated {
+        SignedInView()
+      } else {
+        providerButtons()
+      }
     }
   }
 }
