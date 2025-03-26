@@ -10,7 +10,7 @@ public class EmailPasswordAuthProvider {
   }
 
   func signIn(withEmail email: String, password: String) async throws {
-    let credential = FirebaseAuth.EmailAuthProvider.credential(withEmail: email, password: password)
+    let credential = EmailAuthProvider.credential(withEmail: email, password: password)
     try await authEnvironment.signIn(with: credential)
   }
 
