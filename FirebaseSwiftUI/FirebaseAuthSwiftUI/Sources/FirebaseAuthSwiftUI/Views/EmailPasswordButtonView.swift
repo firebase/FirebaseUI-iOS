@@ -10,7 +10,8 @@ public struct EmailPasswordButtonView: View {
   public var body: some View {
     NavigationLink(destination: EmailPasswordView(provider: provider)
       .environment(authEnvironment)) {
-        Text("Sign in with email")
+        Text(authEnvironment
+          .authenticationFlow == .login ? "Login with email" : "Sign up with email")
       }
   }
 }

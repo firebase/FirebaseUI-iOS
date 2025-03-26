@@ -1,6 +1,7 @@
 import SwiftUI
 
-public struct AuthPickerView<Content: View>: View {
+@MainActor
+public struct AuthPickerView<Content: View> {
   @Environment(AuthEnvironment.self) private var authEnvironment
   let providerButtons: () -> Content
 
@@ -12,7 +13,9 @@ public struct AuthPickerView<Content: View>: View {
     authEnvironment.authenticationFlow = authEnvironment
       .authenticationFlow == .login ? .signUp : .login
   }
+}
 
+extension AuthPickerView: View {
   public var body: some View {
     VStack {
       if authEnvironment.authenticationState == .authenticated {
