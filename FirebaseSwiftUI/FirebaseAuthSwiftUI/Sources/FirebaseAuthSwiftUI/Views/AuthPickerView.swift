@@ -22,7 +22,9 @@ extension AuthPickerView: View {
         SignedInView()
       } else {
         Text(authEnvironment.authenticationFlow == .login ? "Login" : "Sign up")
+        VStack { Divider() }
         providerButtons()
+        VStack { Divider() }
         HStack {
           Text(authEnvironment
             .authenticationFlow == .login ? "Don't have an account yet?" :
