@@ -31,13 +31,13 @@ struct ContentView: View {
   let emailAuthProvider: EmailPasswordAuthProvider
 
   init() {
-    authEnvironment = AuthEnvironment()
-    emailAuthProvider = EmailPasswordAuthProvider(authEnvironment: authEnvironment)
+    emailAuthProvider = EmailPasswordAuthProvider()
+    authEnvironment = AuthEnvironment(emailAuthProvider: emailAuthProvider)
   }
 
   var body: some View {
     AuthPickerView {
-      EmailPasswordButtonView(provider: emailAuthProvider)
+      EmailPasswordButtonView()
     }.environment(authEnvironment)
   }
 }

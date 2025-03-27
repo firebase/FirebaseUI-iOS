@@ -55,10 +55,28 @@ public final class AuthEnvironment {
   public let configuration: AuthConfiguration
   public let auth: Auth
   private var listenerManager: AuthListenerManager?
+  private let emailAuthProvider: EmailPasswordAuthProvider?
 
-  public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth()) {
+  public var safeEmailProvider: EmailPasswordAuthProvider {
+    get throws {
+      guard let provider = emailAuthProvider else {
+        throw NSError(
+          domain: "AuthEnvironmentErrorDomain",
+          code: 1,
+          userInfo: [
+            NSLocalizedDescriptionKey: "`EmailPasswordAuthProvider` has not been configured",
+          ]
+        )
+      }
+      return provider
+    }
+  }
+
+  public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
+              emailAuthProvider: EmailPasswordAuthProvider) {
     self.auth = auth
     self.configuration = configuration
+    self.emailAuthProvider = emailAuthProvider
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
   }
 
@@ -78,10 +96,21 @@ public final class AuthEnvironment {
     updateAuthenticationState()
   }
 
-  func signIn(with credentials: AuthCredential) async throws {
+  func signIn(withEmail email: String, password: String) async throws {
     authenticationState = .authenticating
     do {
-      try await auth.signIn(with: credentials)
+      try await safeEmailProvider.signIn(auth: auth, email: email, password: password)
+      updateAuthenticationState()
+    } catch {
+      authenticationState = .unauthenticated
+      throw error
+    }
+  }
+
+  func createUser(withEmail email: String, password: String) async throws {
+    authenticationState = .authenticating
+    do {
+      try await safeEmailProvider.createUser(auth: auth, email: email, password: password)
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated

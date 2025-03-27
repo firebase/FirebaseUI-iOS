@@ -14,7 +14,7 @@ public struct EmailLinkView {
 
   private func sendEmailLink() async {
     do {
-      try await provider.sendEmailSignInLink(to: email)
+//      try await provider.sendEmailSignInLink(to: email)
       showModal = true
     } catch {
       errorMessage = error.localizedDescription

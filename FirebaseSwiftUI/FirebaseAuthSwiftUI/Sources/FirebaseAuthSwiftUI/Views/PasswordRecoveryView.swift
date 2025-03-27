@@ -14,7 +14,7 @@ public struct PasswordRecoveryView {
 
   private func sendPasswordRecoveryEmail() async {
     do {
-      try await provider.sendPasswordRecoveryEmail(to: email)
+//      try await provider.sendPasswordRecoveryEmail(to: email)
       showModal = true
     } catch {
       errorMessage = error.localizedDescription

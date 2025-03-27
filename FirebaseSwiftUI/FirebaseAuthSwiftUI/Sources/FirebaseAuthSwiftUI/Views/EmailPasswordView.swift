@@ -16,8 +16,6 @@ private enum FocusableField: Hashable {
 public struct EmailPasswordView {
   @Environment(AuthEnvironment.self) private var authEnvironment
 
-  private var provider: EmailPasswordAuthProvider
-
   @State private var email = ""
   @State private var password = ""
   @State private var confirmPassword = ""
@@ -25,9 +23,7 @@ public struct EmailPasswordView {
 
   @FocusState private var focus: FocusableField?
 
-  public init(provider: EmailPasswordAuthProvider) {
-    self.provider = provider
-  }
+  public init() {}
 
   private var isValid: Bool {
     return if authEnvironment.authenticationFlow == .login {
@@ -39,7 +35,7 @@ public struct EmailPasswordView {
 
   private func signInWithEmailPassword() async {
     do {
-      try await provider.signIn(withEmail: email, password: password)
+      try await authEnvironment.signIn(withEmail: email, password: password)
     } catch {
       errorMessage = error.localizedDescription
     }
@@ -47,7 +43,7 @@ public struct EmailPasswordView {
 
   private func createUserWithEmailPassword() async {
     do {
-      try await provider.createUser(withEmail: email, password: password)
+      try await authEnvironment.createUser(withEmail: email, password: password)
     } catch {
       errorMessage = error.localizedDescription
     }
@@ -87,13 +83,6 @@ extension EmailPasswordView: View {
       .background(Divider(), alignment: .bottom)
       .padding(.bottom, 8)
 
-      if authEnvironment.authenticationFlow == .login {
-        NavigationLink(destination: PasswordRecoveryView(provider: provider)
-          .environment(authEnvironment)) {
-            Text("Forgotten Password?")
-          }
-      }
-
       if authEnvironment.authenticationFlow == .signUp {
         LabeledContent {
           SecureField("Confirm password", text: $confirmPassword)
@@ -131,10 +120,6 @@ extension EmailPasswordView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
-      NavigationLink(destination: EmailLinkView(provider: provider).environment(authEnvironment)
-        .environment(authEnvironment)) {
-          Text("Prefer Email link sign-in?")
-        }
       Text(errorMessage).foregroundColor(.red)
     }
   }
