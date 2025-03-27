@@ -14,7 +14,7 @@ public struct EmailLinkView {
 
   private func sendEmailLink() async {
     do {
-      try await provider.sendPasswordRecoveryEmail(to: email)
+      try await provider.sendEmailSignInLink(to: email)
       showModal = true
     } catch {
       errorMessage = error.localizedDescription
@@ -41,21 +41,15 @@ extension EmailLinkView: View {
           await sendEmailLink()
         }
       }) {
-        if authEnvironment.authenticationState != .authenticating {
-          Text("Send email sign-in link")
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
-        } else {
-          ProgressView()
-            .progressViewStyle(CircularProgressViewStyle(tint: .white))
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
-        }
+        Text("Send email sign-in link")
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
       }
       .disabled(!EmailUtils.isValidEmail(email))
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
+      Text(errorMessage).foregroundColor(.red)
     }.sheet(isPresented: $showModal) {
       VStack {
         Text("Instructions")

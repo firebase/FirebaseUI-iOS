@@ -23,16 +23,9 @@ extension VerifyEmailView: View {
           await sendEmailVerification()
         }
       }) {
-        if authEnvironment.authenticationState != .authenticating {
-          Text("Verify email address?")
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
-        } else {
-          ProgressView()
-            .progressViewStyle(CircularProgressViewStyle(tint: .white))
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
-        }
+        Text("Verify email address?")
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
       }
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)

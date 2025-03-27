@@ -35,8 +35,9 @@ public class EmailPasswordAuthProvider {
 
   func sendEmailSignInLink(to email: String) async throws {
     do {
-      // TODO: - how does user set action code settings?
+      // TODO: - how does user set action code settings? Needs configuring
       let actionCodeSettings = ActionCodeSettings()
+      actionCodeSettings.handleCodeInApp = true
       try await authEnvironment.auth.sendSignInLink(
         toEmail: email,
         actionCodeSettings: actionCodeSettings

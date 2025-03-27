@@ -41,16 +41,9 @@ extension PasswordRecoveryView: View {
           await sendPasswordRecoveryEmail()
         }
       }) {
-        if authEnvironment.authenticationState != .authenticating {
-          Text("Password Recovery")
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
-        } else {
-          ProgressView()
-            .progressViewStyle(CircularProgressViewStyle(tint: .white))
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
-        }
+        Text("Password Recovery")
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
       }
       .disabled(!EmailUtils.isValidEmail(email))
       .padding([.top, .bottom], 8)
