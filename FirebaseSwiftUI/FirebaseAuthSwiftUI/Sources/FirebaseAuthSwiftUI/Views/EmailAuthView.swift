@@ -13,7 +13,7 @@ private enum FocusableField: Hashable {
 }
 
 @MainActor
-public struct EmailPasswordView {
+public struct EmailAuthView {
   @Environment(AuthService.self) private var authService
 
   @State private var email = ""
@@ -50,7 +50,7 @@ public struct EmailPasswordView {
   }
 }
 
-extension EmailPasswordView: View {
+extension EmailAuthView: View {
   public var body: some View {
     VStack {
       LabeledContent {
