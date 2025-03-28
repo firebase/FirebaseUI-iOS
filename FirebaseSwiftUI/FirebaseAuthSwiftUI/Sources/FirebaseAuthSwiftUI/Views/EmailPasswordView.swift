@@ -16,8 +16,6 @@ private enum FocusableField: Hashable {
 public struct EmailPasswordView {
   @Environment(AuthService.self) private var authService
 
-  private var provider: EmailPasswordAuthProvider
-
   @State private var email = ""
   @State private var password = ""
   @State private var confirmPassword = ""
@@ -25,9 +23,7 @@ public struct EmailPasswordView {
 
   @FocusState private var focus: FocusableField?
 
-  public init(provider: EmailPasswordAuthProvider) {
-    self.provider = provider
-  }
+  public init() {}
 
   private var isValid: Bool {
     return if authService.authenticationFlow == .login {
@@ -39,7 +35,7 @@ public struct EmailPasswordView {
 
   private func signInWithEmailPassword() async {
     do {
-      try await provider.signIn(withEmail: email, password: password)
+      try await authService.signIn(withEmail: email, password: password)
     } catch {
       errorMessage = error.localizedDescription
     }
@@ -47,7 +43,7 @@ public struct EmailPasswordView {
 
   private func createUserWithEmailPassword() async {
     do {
-      try await provider.createUser(withEmail: email, password: password)
+      try await authService.createUser(withEmail: email, password: password)
     } catch {
       errorMessage = error.localizedDescription
     }
@@ -88,7 +84,7 @@ extension EmailPasswordView: View {
       .padding(.bottom, 8)
 
       if authService.authenticationFlow == .login {
-        NavigationLink(destination: PasswordRecoveryView(provider: provider)
+        NavigationLink(destination: PasswordRecoveryView()
           .environment(authService)) {
             Text("Forgotten Password?")
           }
@@ -131,7 +127,7 @@ extension EmailPasswordView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
-      NavigationLink(destination: EmailLinkView(provider: provider).environment(authService)
+      NavigationLink(destination: EmailLinkView().environment(authService)
         .environment(authService)) {
           Text("Prefer Email link sign-in?")
         }

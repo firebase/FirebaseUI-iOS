@@ -99,4 +99,42 @@ public final class AuthService {
       }
     }
   }
+
+  func signIn(withEmail email: String, password: String) async throws {
+    let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+    try await auth.signIn(with: credential)
+  }
+
+  func createUser(withEmail email: String, password: String) async throws {
+    authenticationState = .authenticating
+    do {
+      try await auth.createUser(withEmail: email, password: password)
+      updateAuthenticationState()
+    } catch {
+      authenticationState = .unauthenticated
+      throw error
+    }
+  }
+
+  func sendPasswordRecoveryEmail(to email: String) async throws {
+    do {
+      try await auth.sendPasswordReset(withEmail: email)
+    } catch {
+      throw error
+    }
+  }
+
+  func sendEmailSignInLink(to email: String) async throws {
+    do {
+      // TODO: - how does user set action code settings? Needs configuring
+      let actionCodeSettings = ActionCodeSettings()
+      actionCodeSettings.handleCodeInApp = true
+      try await auth.sendSignInLink(
+        toEmail: email,
+        actionCodeSettings: actionCodeSettings
+      )
+    } catch {
+      throw error
+    }
+  }
 }

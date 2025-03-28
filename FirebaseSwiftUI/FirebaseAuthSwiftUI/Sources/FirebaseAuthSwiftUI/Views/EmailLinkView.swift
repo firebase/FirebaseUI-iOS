@@ -6,15 +6,11 @@ public struct EmailLinkView {
   @State private var errorMessage = ""
   @State private var showModal = false
 
-  private var provider: EmailPasswordAuthProvider
-
-  public init(provider: EmailPasswordAuthProvider) {
-    self.provider = provider
-  }
+  public init() {}
 
   private func sendEmailLink() async {
     do {
-      try await provider.sendEmailSignInLink(to: email)
+      try await authService.sendEmailSignInLink(to: email)
       showModal = true
     } catch {
       errorMessage = error.localizedDescription

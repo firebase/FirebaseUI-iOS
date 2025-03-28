@@ -28,16 +28,14 @@ struct FirebaseSwiftUIExampleApp: App {
 
 struct ContentView: View {
   let authService: AuthService
-  let emailAuthProvider: EmailPasswordAuthProvider
 
   init() {
     authService = AuthService()
-    emailAuthProvider = EmailPasswordAuthProvider(authService: authService)
   }
 
   var body: some View {
     AuthPickerView {
-      EmailPasswordButtonView(provider: emailAuthProvider)
+      EmailPasswordButtonView()
     }.environment(authService)
   }
 }
