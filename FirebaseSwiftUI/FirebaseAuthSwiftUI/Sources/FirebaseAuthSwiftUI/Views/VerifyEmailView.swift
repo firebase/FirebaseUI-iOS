@@ -1,13 +1,13 @@
 import SwiftUI
 
 public struct VerifyEmailView {
-  @Environment(AuthEnvironment.self) private var authEnvironment
+  @Environment(AuthService.self) private var authService
   @State private var errorMessage = ""
   @State private var showModal = false
 
   private func sendEmailVerification() async {
     do {
-      try await authEnvironment.sendEmailVerification()
+      try await authService.sendEmailVerification()
       showModal = true
     } catch {
       errorMessage = error.localizedDescription

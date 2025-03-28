@@ -2,7 +2,7 @@ import SwiftUI
 
 @MainActor
 public struct AuthPickerView<Content: View> {
-  @Environment(AuthEnvironment.self) private var authEnvironment
+  @Environment(AuthService.self) private var authService
   let providerButtons: () -> Content
 
   public init(@ViewBuilder providerButtons: @escaping () -> Content) {
@@ -10,7 +10,7 @@ public struct AuthPickerView<Content: View> {
   }
 
   private func switchFlow() {
-    authEnvironment.authenticationFlow = authEnvironment
+    authService.authenticationFlow = authService
       .authenticationFlow == .login ? .signUp : .login
   }
 }
@@ -18,15 +18,15 @@ public struct AuthPickerView<Content: View> {
 extension AuthPickerView: View {
   public var body: some View {
     VStack {
-      if authEnvironment.authenticationState == .authenticated {
+      if authService.authenticationState == .authenticated {
         SignedInView()
       } else {
-        Text(authEnvironment.authenticationFlow == .login ? "Login" : "Sign up")
+        Text(authService.authenticationFlow == .login ? "Login" : "Sign up")
         VStack { Divider() }
         providerButtons()
         VStack { Divider() }
         HStack {
-          Text(authEnvironment
+          Text(authService
             .authenticationFlow == .login ? "Don't have an account yet?" :
             "Already have an account?")
           Button(action: {
@@ -34,7 +34,7 @@ extension AuthPickerView: View {
               switchFlow()
             }
           }) {
-            Text(authEnvironment.authenticationFlow == .signUp ? "Log in" : "Sign up")
+            Text(authService.authenticationFlow == .signUp ? "Log in" : "Sign up")
               .fontWeight(.semibold)
               .foregroundColor(.blue)
           }

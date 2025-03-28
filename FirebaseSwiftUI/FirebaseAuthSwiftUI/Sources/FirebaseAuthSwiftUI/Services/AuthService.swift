@@ -27,9 +27,9 @@ public enum AuthenticationFlow {
 final class AuthListenerManager {
   private var authStateHandle: AuthStateDidChangeListenerHandle?
   private let auth: Auth
-  private weak var authEnvironment: AuthEnvironment?
+  private weak var authEnvironment: AuthService?
 
-  init(auth: Auth, authEnvironment: AuthEnvironment) {
+  init(auth: Auth, authEnvironment: AuthService) {
     self.auth = auth
     self.authEnvironment = authEnvironment
     setupAuthenticationListener()
@@ -51,7 +51,7 @@ final class AuthListenerManager {
 
 @MainActor
 @Observable
-public final class AuthEnvironment {
+public final class AuthService {
   public let configuration: AuthConfiguration
   public let auth: Auth
   private var listenerManager: AuthListenerManager?

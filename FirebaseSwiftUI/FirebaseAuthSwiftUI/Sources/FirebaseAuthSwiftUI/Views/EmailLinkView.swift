@@ -1,7 +1,7 @@
 import SwiftUI
 
 public struct EmailLinkView {
-  @Environment(AuthEnvironment.self) private var authEnvironment
+  @Environment(AuthService.self) private var authService
   @State private var email = ""
   @State private var errorMessage = ""
   @State private var showModal = false

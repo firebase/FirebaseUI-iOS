@@ -1,20 +1,20 @@
 import SwiftUI
 
 public struct SignedInView {
-  @Environment(AuthEnvironment.self) private var authEnvironment
+  @Environment(AuthService.self) private var authService
 }
 
 extension SignedInView: View {
   public var body: some View {
     VStack {
       Text("Signed in")
-      Text("User: \(authEnvironment.currentUser?.email ?? "Unknown")")
+      Text("User: \(authService.currentUser?.email ?? "Unknown")")
       Button("Sign out") {
         Task {
-          try? await authEnvironment.signOut()
+          try? await authService.signOut()
         }
       }
-      if authEnvironment.currentUser?.isEmailVerified == false {
+      if authService.currentUser?.isEmailVerified == false {
         VerifyEmailView()
       }
     }

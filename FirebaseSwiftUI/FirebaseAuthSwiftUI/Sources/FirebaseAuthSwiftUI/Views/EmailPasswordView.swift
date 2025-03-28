@@ -14,7 +14,7 @@ private enum FocusableField: Hashable {
 
 @MainActor
 public struct EmailPasswordView {
-  @Environment(AuthEnvironment.self) private var authEnvironment
+  @Environment(AuthService.self) private var authService
 
   private var provider: EmailPasswordAuthProvider
 
@@ -30,7 +30,7 @@ public struct EmailPasswordView {
   }
 
   private var isValid: Bool {
-    return if authEnvironment.authenticationFlow == .login {
+    return if authService.authenticationFlow == .login {
       !email.isEmpty && !password.isEmpty
     } else {
       !email.isEmpty && !password.isEmpty && password == confirmPassword
@@ -87,14 +87,14 @@ extension EmailPasswordView: View {
       .background(Divider(), alignment: .bottom)
       .padding(.bottom, 8)
 
-      if authEnvironment.authenticationFlow == .login {
+      if authService.authenticationFlow == .login {
         NavigationLink(destination: PasswordRecoveryView(provider: provider)
-          .environment(authEnvironment)) {
+          .environment(authService)) {
             Text("Forgotten Password?")
           }
       }
 
-      if authEnvironment.authenticationFlow == .signUp {
+      if authService.authenticationFlow == .signUp {
         LabeledContent {
           SecureField("Confirm password", text: $confirmPassword)
             .focused($focus, equals: .confirmPassword)
@@ -112,12 +112,12 @@ extension EmailPasswordView: View {
 
       Button(action: {
         Task {
-          if authEnvironment.authenticationFlow == .login { await signInWithEmailPassword() }
+          if authService.authenticationFlow == .login { await signInWithEmailPassword() }
           else { await createUserWithEmailPassword() }
         }
       }) {
-        if authEnvironment.authenticationState != .authenticating {
-          Text(authEnvironment.authenticationFlow == .login ? "Log in with password" : "Sign up")
+        if authService.authenticationState != .authenticating {
+          Text(authService.authenticationFlow == .login ? "Log in with password" : "Sign up")
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         } else {
@@ -131,8 +131,8 @@ extension EmailPasswordView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
-      NavigationLink(destination: EmailLinkView(provider: provider).environment(authEnvironment)
-        .environment(authEnvironment)) {
+      NavigationLink(destination: EmailLinkView(provider: provider).environment(authService)
+        .environment(authService)) {
           Text("Prefer Email link sign-in?")
         }
       Text(errorMessage).foregroundColor(.red)
