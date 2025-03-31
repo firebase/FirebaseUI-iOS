@@ -1,0 +1,2 @@
+/* Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars. */
+"UserNotFoundError" = "That email address doesn’t match an existing account.";

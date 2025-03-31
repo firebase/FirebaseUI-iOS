@@ -137,4 +137,20 @@ public final class AuthService {
       throw error
     }
   }
+
+  func localizedString(forKey key: String) -> String {
+    if let customStringsBundle = configuration.customStringsBundle {
+        let localizedString = customStringsBundle.localizedString(
+            forKey: key,
+            value: kKeyNotFound,
+            table: nil
+        )
+
+        if localizedString != key {
+            return localizedString
+        }
+    }
+    
+    return Bundle.module.localizedString(forKey: key, value: nil, table: nil)
+  }
 }
