@@ -64,7 +64,7 @@ class StringUtils {
         configuration: configuration
       )
     default:
-      return StringUtils.localizedString(forKey: kUnknownError, configuration: configuration)
+      return error.localizedDescription
     }
   }
 }
