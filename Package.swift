@@ -252,7 +252,7 @@ let package = Package(
       ],
       path: "FirebaseSwiftUI/FirebaseAuthSwiftUI/Sources",
       resources: [
-        .process("FirebaseAuthSwiftUI/Strings")
+        .process("Strings")
       ]
       ),
     .testTarget(
