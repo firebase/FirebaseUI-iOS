@@ -270,7 +270,8 @@ let package = Package(
     ),
     .testTarget(
       name: "FirebaseGoogleSwiftUITests",
-      dependencies: ["FirebaseGoogleSwiftUI"]
+      dependencies: ["FirebaseGoogleSwiftUI"],
+      path: "FirebaseSwiftUI/FirebaseGoogleSwiftUI/Tests/"
     ),
   ]
 )
