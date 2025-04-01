@@ -61,12 +61,14 @@ public final class AuthService {
   public let auth: Auth
   private var listenerManager: AuthListenerManager?
   private let googleProvider: GoogleProviderProtocol?
+  public let string: StringUtils
 
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
               googleProvider: GoogleProviderProtocol? = nil) {
     self.auth = auth
     self.configuration = configuration
     self.googleProvider = googleProvider
+    string = StringUtils(bundle: configuration.customStringsBundle ?? Bundle.module)
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
   }
 

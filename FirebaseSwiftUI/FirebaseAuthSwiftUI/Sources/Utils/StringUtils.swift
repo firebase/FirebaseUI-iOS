@@ -14,56 +14,42 @@ let kEmailsDoNotMatchError = "EmailsDoNotMatchError"
 let kUnknownError = "UnknownError"
 
 public class StringUtils {
-  public static func localizedString(forKey key: String,
-                                     configuration: AuthConfiguration) -> String {
-    if let customStringsBundle = configuration.customStringsBundle {
-      let localizedString = customStringsBundle.localizedString(
-        forKey: key,
-        value: kKeyNotFound,
-        table: nil
-      )
-
-      if localizedString != key {
-        return localizedString
-      }
-    }
-
-    return Bundle.module.localizedString(forKey: key, value: nil, table: nil)
+  let bundle: Bundle
+  init(bundle: Bundle) {
+    self.bundle = bundle
   }
 
-  public static func localizedErrorMessage(for error: Error,
-                                           configuration: AuthConfiguration) -> String {
+  public func localizedString(forKey key: String) -> String {
+    return bundle.localizedString(forKey: key, value: nil, table: nil)
+  }
+
+  public func localizedErrorMessage(for error: Error) -> String {
     let authError = error as NSError
     let errorCode = AuthErrorCode(rawValue: authError.code)
     switch errorCode {
     case .emailAlreadyInUse:
-      return StringUtils.localizedString(
-        forKey: kEmailAlreadyInUseError,
-        configuration: configuration
+      return localizedString(
+        forKey: kEmailAlreadyInUseError
       )
     case .invalidEmail:
-      return StringUtils.localizedString(forKey: kInvalidEmailError, configuration: configuration)
+      return localizedString(forKey: kInvalidEmailError)
     case .weakPassword:
-      return StringUtils.localizedString(forKey: kWeakPasswordError, configuration: configuration)
+      return localizedString(forKey: kWeakPasswordError)
     case .tooManyRequests:
-      return StringUtils.localizedString(
-        forKey: kSignUpTooManyTimesError,
-        configuration: configuration
+      return localizedString(
+        forKey: kSignUpTooManyTimesError
       )
     case .wrongPassword:
-      return StringUtils.localizedString(
-        forKey: kWrongPasswordError,
-        configuration: configuration
+      return localizedString(
+        forKey: kWrongPasswordError
       )
     case .userNotFound:
-      return StringUtils.localizedString(
-        forKey: kUsersNotFoundError,
-        configuration: configuration
+      return localizedString(
+        forKey: kUsersNotFoundError
       )
     case .userDisabled:
-      return StringUtils.localizedString(
-        forKey: kAccountDisabledError,
-        configuration: configuration
+      return localizedString(
+        forKey: kAccountDisabledError
       )
     default:
       return error.localizedDescription

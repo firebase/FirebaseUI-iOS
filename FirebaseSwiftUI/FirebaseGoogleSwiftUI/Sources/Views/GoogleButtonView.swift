@@ -12,9 +12,8 @@ public struct GoogleButtonView {
     do {
       try await authService.signInWithGoogle()
     } catch {
-      errorMessage = StringUtils.localizedErrorMessage(
-        for: error,
-        configuration: authService.configuration
+      errorMessage = authService.string.localizedErrorMessage(
+        for: error
       )
     }
   }
