@@ -66,6 +66,10 @@ let package = Package(
       name: "FirebaseAuthSwiftUI",
       targets: ["FirebaseAuthSwiftUI"]
     ),
+    .library(
+      name: "FirebaseGoogleSwiftUI",
+      targets: ["FirebaseGoogleSwiftUI"]
+    ),
   ],
   dependencies: [
     .package(
