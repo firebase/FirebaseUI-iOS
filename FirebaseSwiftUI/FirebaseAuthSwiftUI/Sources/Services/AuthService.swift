@@ -59,7 +59,8 @@ public final class AuthService {
   private var listenerManager: AuthListenerManager?
   private let googleProvider: GoogleProviderProtocol?
 
-  public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(), googleProvider: GoogleProviderProtocol) {
+  public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
+              googleProvider: GoogleProviderProtocol) {
     self.auth = auth
     self.configuration = configuration
     self.googleProvider = googleProvider
@@ -69,21 +70,21 @@ public final class AuthService {
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .login
-  
+
   private var safeGoogleProvider: GoogleProviderProtocol {
-      get throws {
-        guard let provider = googleProvider else {
-          throw NSError(
-            domain: "AuthEnvironmentErrorDomain",
-            code: 1,
-            userInfo: [
-              NSLocalizedDescriptionKey: "`GoogleProviderSwift` has not been configured",
-            ]
-          )
-        }
-        return provider
+    get throws {
+      guard let provider = googleProvider else {
+        throw NSError(
+          domain: "AuthEnvironmentErrorDomain",
+          code: 1,
+          userInfo: [
+            NSLocalizedDescriptionKey: "`GoogleProviderSwift` has not been configured",
+          ]
+        )
       }
+      return provider
     }
+  }
 
   func updateAuthenticationState() {
     authenticationState =
