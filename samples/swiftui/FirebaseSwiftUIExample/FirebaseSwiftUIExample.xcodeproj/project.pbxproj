@@ -36,9 +36,22 @@
 		46F89C242D64A86D000F8BC0 /* FirebaseSwiftUIExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirebaseSwiftUIExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4607CC8A2D9BE8D9009EC3F5 /* Exceptions for "FirebaseSwiftUIExample" folder in "FirebaseSwiftUIExample" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 46F89C072D64A86C000F8BC0 /* FirebaseSwiftUIExample */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		46F89C0A2D64A86C000F8BC0 /* FirebaseSwiftUIExample */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4607CC8A2D9BE8D9009EC3F5 /* Exceptions for "FirebaseSwiftUIExample" folder in "FirebaseSwiftUIExample" target */,
+			);
 			path = FirebaseSwiftUIExample;
 			sourceTree = "<group>";
 		};
@@ -423,6 +436,7 @@
 				DEVELOPMENT_TEAM = YYX2P3XVJ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FirebaseSwiftUIExample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -453,6 +467,7 @@
 				DEVELOPMENT_TEAM = YYX2P3XVJ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FirebaseSwiftUIExample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
