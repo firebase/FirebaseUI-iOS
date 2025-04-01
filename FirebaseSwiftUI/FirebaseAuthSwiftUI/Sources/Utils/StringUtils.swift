@@ -13,8 +13,9 @@ let kAccountDisabledError = "AccountDisabledError"
 let kEmailsDoNotMatchError = "EmailsDoNotMatchError"
 let kUnknownError = "UnknownError"
 
-class StringUtils {
-  static func localizedString(forKey key: String, configuration: AuthConfiguration) -> String {
+public class StringUtils {
+  public static func localizedString(forKey key: String,
+                                     configuration: AuthConfiguration) -> String {
     if let customStringsBundle = configuration.customStringsBundle {
       let localizedString = customStringsBundle.localizedString(
         forKey: key,
@@ -30,7 +31,8 @@ class StringUtils {
     return Bundle.module.localizedString(forKey: key, value: nil, table: nil)
   }
 
-  static func localizedErrorMessage(for error: Error, configuration: AuthConfiguration) -> String {
+  public static func localizedErrorMessage(for error: Error,
+                                           configuration: AuthConfiguration) -> String {
     let authError = error as NSError
     let errorCode = AuthErrorCode(rawValue: authError.code)
     switch errorCode {

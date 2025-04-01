@@ -48,7 +48,7 @@ struct ContentView: View {
 
   var body: some View {
     AuthPickerView {
-      Text("GOOGLE AUTH BUTTON")
+      GoogleButtonView()
     }.environment(authService)
   }
 }

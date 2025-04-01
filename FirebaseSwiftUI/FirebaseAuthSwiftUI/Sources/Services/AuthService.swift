@@ -3,6 +3,7 @@ import SwiftUI
 
 public protocol GoogleProviderProtocol {
   func handleUrl(_ url: URL) -> Bool
+  func signInWithGoogle(clientID: String)
 }
 
 public enum AuthenticationProvider {
@@ -98,6 +99,23 @@ public final class AuthService {
   public func signOut() async throws {
     try await auth.signOut()
     updateAuthenticationState()
+  }
+
+  public func signInWithGoogle() async throws {
+    authenticationState = .authenticating
+    do {
+      guard let clientID = auth.app?.options.clientID else { throw NSError(
+        domain: "AuthServiceErrorDomain",
+        code: 2,
+        userInfo: [
+          NSLocalizedDescriptionKey: "OAuth client ID not found. Please make sure Google Sign-In is enabled in the Firebase console. You may have to download a new GoogleService-Info.plist file after enabling Google Sign-In.",
+        ]
+      ) }
+      try safeGoogleProvider.signInWithGoogle(clientID: clientID)
+    } catch {
+      authenticationState = .unauthenticated
+      throw error
+    }
   }
 
   func signIn(with credentials: AuthCredential) async throws {
