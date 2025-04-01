@@ -1,3 +1,4 @@
+@preconcurrency import FirebaseAuth
 import FirebaseAuthSwiftUI
 import GoogleSignIn
 
@@ -15,5 +16,36 @@ public class GoogleProviderSwift: GoogleProviderProtocol {
 
   public func handleUrl(_ url: URL) -> Bool {
     return GIDSignIn.sharedInstance.handle(url)
+  }
+
+  @MainActor public func signInWithGoogle(clientID: String) {
+    guard let presentingViewController = (UIApplication.shared.connectedScenes
+      .first as? UIWindowScene)?.windows.first?.rootViewController else {
+//      "Error: Unable to get the presenting view controller."
+      return
+    }
+
+    let config = GIDConfiguration(clientID: clientID)
+    GIDSignIn.sharedInstance.configuration = config
+
+    GIDSignIn.sharedInstance.signIn(
+      withPresenting: presentingViewController
+    ) { result, error in
+      guard error == nil else {
+        // Handle error
+        return
+      }
+
+      guard let user = result?.user,
+            let idToken = user.idToken?.tokenString else {
+        // Handle error
+        return
+      }
+
+      let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                     accessToken: user.accessToken
+                                                       .tokenString)
+
+    }
   }
 }
