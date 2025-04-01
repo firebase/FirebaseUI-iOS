@@ -264,6 +264,7 @@ let package = Package(
       name: "FirebaseGoogleSwiftUI",
       dependencies: [
         "FirebaseAuthSwiftUI",
+        "GoogleSignIn",
       ],
       path: "FirebaseSwiftUI/FirebaseGoogleSwiftUI/Sources",
     ),
