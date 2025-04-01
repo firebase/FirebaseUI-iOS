@@ -37,7 +37,10 @@ public struct EmailAuthView {
     do {
       try await authService.signIn(withEmail: email, password: password)
     } catch {
-      errorMessage = error.localizedDescription
+      errorMessage = StringUtils.localizedErrorMessage(
+        for: error,
+        configuration: authService.configuration
+      )
     }
   }
 
@@ -45,7 +48,10 @@ public struct EmailAuthView {
     do {
       try await authService.createUser(withEmail: email, password: password)
     } catch {
-      errorMessage = error.localizedDescription
+      errorMessage = StringUtils.localizedErrorMessage(
+        for: error,
+        configuration: authService.configuration
+      )
     }
   }
 }
