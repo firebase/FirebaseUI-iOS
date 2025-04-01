@@ -1,7 +1,7 @@
 @preconcurrency import FirebaseAuth
 import SwiftUI
 
-public protocol ProviderProtocol {}
+public protocol GoogleProviderProtocol {}
 
 public enum AuthenticationProvider {
   case email
@@ -57,16 +57,33 @@ public final class AuthService {
   public let configuration: AuthConfiguration
   public let auth: Auth
   private var listenerManager: AuthListenerManager?
+  private let googleProvider: GoogleProviderProtocol?
 
-  public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth()) {
+  public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(), googleProvider: GoogleProviderProtocol) {
     self.auth = auth
     self.configuration = configuration
+    self.googleProvider = googleProvider
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
   }
 
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .login
+  
+  private var safeGoogleProvider: GoogleProviderProtocol {
+      get throws {
+        guard let provider = googleProvider else {
+          throw NSError(
+            domain: "AuthEnvironmentErrorDomain",
+            code: 1,
+            userInfo: [
+              NSLocalizedDescriptionKey: "`GoogleProviderSwift` has not been configured",
+            ]
+          )
+        }
+        return provider
+      }
+    }
 
   func updateAuthenticationState() {
     authenticationState =
