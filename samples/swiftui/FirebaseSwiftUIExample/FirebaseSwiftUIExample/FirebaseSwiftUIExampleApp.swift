@@ -43,7 +43,7 @@ struct ContentView: View {
   let authService: AuthService
 
   init() {
-    authService = AuthService()
+    authService = AuthService(googleProvider: googleProvider)
   }
 
   var body: some View {

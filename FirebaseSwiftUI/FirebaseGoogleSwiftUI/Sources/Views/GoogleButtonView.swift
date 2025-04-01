@@ -38,6 +38,6 @@ extension GoogleButtonView: View {
           .frame(maxWidth: .infinity)
       }
     }
-    Text(errorMessage)
+    Text(errorMessage).foregroundColor(.red)
   }
 }

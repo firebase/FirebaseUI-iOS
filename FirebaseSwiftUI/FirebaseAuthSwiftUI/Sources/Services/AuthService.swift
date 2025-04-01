@@ -112,6 +112,7 @@ public final class AuthService {
         ]
       ) }
       try safeGoogleProvider.signInWithGoogle(clientID: clientID)
+      updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
       throw error
