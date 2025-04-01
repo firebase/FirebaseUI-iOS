@@ -7,12 +7,23 @@
 
 import FirebaseAuth
 import FirebaseAuthSwiftUI
+import FirebaseGoogleSwiftUI
 import FirebaseCore
 import SwiftData
 import SwiftUI
 
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_: UIApplication,
+                   open url: URL,
+                   options _: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    return GIDSignIn.sharedInstance.handle(url)
+  }
+}
+
 @main
 struct FirebaseSwiftUIExampleApp: App {
+  @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
   init() {
     FirebaseApp.configure()
   }
