@@ -7,16 +7,18 @@
 
 import FirebaseAuth
 import FirebaseAuthSwiftUI
-import FirebaseGoogleSwiftUI
 import FirebaseCore
+import FirebaseGoogleSwiftUI
 import SwiftData
 import SwiftUI
+
+let googleProvider = GoogleProviderSwift()
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_: UIApplication,
                    open url: URL,
                    options _: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-    return GIDSignIn.sharedInstance.handle(url)
+    return googleProvider.handleUrl(url)
   }
 }
 

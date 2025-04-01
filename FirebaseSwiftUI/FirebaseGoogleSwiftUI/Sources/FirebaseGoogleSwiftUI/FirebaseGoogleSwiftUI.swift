@@ -9,11 +9,11 @@ public class GoogleProviderSwift: GoogleProviderProtocol {
   let scopes: [String]
   let shortName = "Google"
   let providerId = "google.com"
-  public init(scopes _: [String] = kDefaultScopes) {
-    scopes = scopes
+  public init(scopes: [String]? = nil) {
+    self.scopes = scopes ?? kDefaultScopes
   }
 
-  func handleUrl(_ url: URL) -> Bool {
+  public func handleUrl(_ url: URL) -> Bool {
     return GIDSignIn.sharedInstance.handle(url)
   }
 }
