@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4607CC9C2D9BFE29009EC3F5 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4607CC9B2D9BFE29009EC3F5 /* FirebaseAuthSwiftUI */; };
+		4607CC9E2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4607CC9D2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI */; };
 		46CB7B252D773F2100F1FD0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46CB7B242D773F2100F1FD0A /* GoogleService-Info.plist */; };
 		46F89C392D64B04E000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 46F89C382D64B04E000F8BC0 /* FirebaseAuthSwiftUI */; };
 		46F89C4D2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 46F89C4C2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI */; };
@@ -74,6 +76,8 @@
 			files = (
 				46F89C392D64B04E000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */,
 				46F89C4D2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */,
+				4607CC9E2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI in Frameworks */,
+				4607CC9C2D9BFE29009EC3F5 /* FirebaseAuthSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +149,8 @@
 			packageProductDependencies = (
 				46F89C382D64B04E000F8BC0 /* FirebaseAuthSwiftUI */,
 				46F89C4C2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI */,
+				4607CC9B2D9BFE29009EC3F5 /* FirebaseAuthSwiftUI */,
+				4607CC9D2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI */,
 			);
 			productName = FirebaseSwiftUIExample;
 			productReference = 46F89C082D64A86C000F8BC0 /* FirebaseSwiftUIExample.app */;
@@ -229,7 +235,7 @@
 			mainGroup = 46F89BFF2D64A86C000F8BC0;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				46EC40762D8D910100B53267 /* XCLocalSwiftPackageReference "../../../../firebaseUI-ios" */,
+				4607CC9A2D9BFE29009EC3F5 /* XCLocalSwiftPackageReference "../../../../firebaseUI-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 46F89C092D64A86C000F8BC0 /* Products */;
@@ -601,13 +607,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		46EC40762D8D910100B53267 /* XCLocalSwiftPackageReference "../../../../firebaseUI-ios" */ = {
+		4607CC9A2D9BFE29009EC3F5 /* XCLocalSwiftPackageReference "../../../../firebaseUI-ios" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../../../../firebaseUI-ios";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4607CC9B2D9BFE29009EC3F5 /* FirebaseAuthSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAuthSwiftUI;
+		};
+		4607CC9D2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseGoogleSwiftUI;
+		};
 		46F89C382D64B04E000F8BC0 /* FirebaseAuthSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseAuthSwiftUI;
