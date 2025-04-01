@@ -1,2 +1,5 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+import FirebaseAuthSwiftUI
+
+public class GoogleProviderSwift: ProviderProtocol {
+  public init() {}
+}

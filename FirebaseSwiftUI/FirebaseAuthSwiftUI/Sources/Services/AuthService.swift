@@ -1,6 +1,8 @@
 @preconcurrency import FirebaseAuth
 import SwiftUI
 
+public protocol ProviderProtocol {}
+
 public enum AuthenticationProvider {
   case email
   case google
