@@ -12,4 +12,8 @@ public class GoogleProviderSwift: GoogleProviderProtocol {
   public init(scopes _: [String] = kDefaultScopes) {
     scopes = scopes
   }
+
+  func handleUrl(_ url: URL) -> Bool {
+    return GIDSignIn.sharedInstance.handle(url)
+  }
 }
