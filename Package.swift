@@ -69,14 +69,14 @@ let package = Package(
   ],
   dependencies: [
     .package(
-      name: "Facebook", 
+      name: "Facebook",
       url: "https://github.com/facebook/facebook-ios-sdk.git",
-      "17.0.0"..<"18.0.0"
+      "17.0.0" ..< "18.0.0"
     ),
     .package(
-      name: "Firebase", 
+      name: "Firebase",
       url: "https://github.com/firebase/firebase-ios-sdk.git",
-      "8.0.0"..<"12.0.0"
+      "8.0.0" ..< "12.0.0"
     ),
     .package(
       name: "GoogleSignIn",
@@ -86,7 +86,7 @@ let package = Package(
     .package(
       name: "GoogleUtilities",
       url: "https://github.com/google/GoogleUtilities.git",
-      "7.4.1"..<"9.0.0"
+      "7.4.1" ..< "9.0.0"
     ),
     .package(
       name: "SDWebImage",
@@ -187,7 +187,7 @@ let package = Package(
       name: "FirebaseGoogleAuthUI",
       dependencies: [
         "FirebaseAuthUI",
-        "GoogleSignIn"
+        "GoogleSignIn",
       ],
       path: "FirebaseGoogleAuthUI/Sources",
       exclude: ["Info.plist"],
@@ -248,17 +248,28 @@ let package = Package(
     .target(
       name: "FirebaseAuthSwiftUI",
       dependencies: [
-          .product(name: "FirebaseAuth", package: "Firebase")
+        .product(name: "FirebaseAuth", package: "Firebase"),
       ],
       path: "FirebaseSwiftUI/FirebaseAuthSwiftUI/Sources",
       resources: [
-        .process("Strings")
+        .process("Strings"),
       ]
-      ),
+    ),
     .testTarget(
       name: "FirebaseAuthSwiftUITests",
       dependencies: ["FirebaseAuthSwiftUI"],
       path: "FirebaseSwiftUI/FirebaseAuthSwiftUI/Tests/"
-      ),
+    ),
+    .target(
+      name: "FirebaseGoogleSwiftUI",
+      dependencies: [
+        "FirebaseAuthSwiftUI",
+      ],
+      path: "FirebaseSwiftUI/FirebaseGoogleSwiftUI/Sources",
+    ),
+    .testTarget(
+      name: "FirebaseGoogleSwiftUITests",
+      dependencies: ["FirebaseGoogleSwiftUI"]
+    ),
   ]
 )
