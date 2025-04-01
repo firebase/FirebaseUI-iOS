@@ -266,7 +266,7 @@ let package = Package(
         "FirebaseAuthSwiftUI",
         "GoogleSignIn",
       ],
-      path: "FirebaseSwiftUI/FirebaseGoogleSwiftUI/Sources",
+      path: "FirebaseSwiftUI/FirebaseGoogleSwiftUI/Sources"
     ),
     .testTarget(
       name: "FirebaseGoogleSwiftUITests",
