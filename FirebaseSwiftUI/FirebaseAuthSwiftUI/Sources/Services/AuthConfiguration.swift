@@ -1,12 +1,12 @@
 import Foundation
 
 public final class AuthConfiguration {
-  var shouldHideCancelButton: Bool
-  var interactiveDismissEnabled: Bool
-  var shouldAutoUpgradeAnonymousUsers: Bool
-  var customStringsBundle: Bundle?
-  var tosUrl: URL
-  var privacyPolicyUrl: URL
+  let shouldHideCancelButton: Bool
+  let interactiveDismissEnabled: Bool
+  let shouldAutoUpgradeAnonymousUsers: Bool
+  let customStringsBundle: Bundle?
+  let tosUrl: URL
+  let privacyPolicyUrl: URL
 
   public init(shouldHideCancelButton: Bool = false,
               interactiveDismissEnabled: Bool = true,
