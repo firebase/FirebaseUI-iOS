@@ -60,7 +60,7 @@ public final class AuthService {
   private let googleProvider: GoogleProviderProtocol?
 
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
-              googleProvider: GoogleProviderProtocol) {
+              googleProvider: GoogleProviderProtocol? = nil) {
     self.auth = auth
     self.configuration = configuration
     self.googleProvider = googleProvider
