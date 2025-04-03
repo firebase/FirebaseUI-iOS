@@ -70,6 +70,10 @@ let package = Package(
       name: "FirebaseGoogleSwiftUI",
       targets: ["FirebaseGoogleSwiftUI"]
     ),
+    .library(
+      name: "FirebaseFacebookSwiftUI",
+      targets: ["FirebaseFacebookSwiftUI"]
+    ),
   ],
   dependencies: [
     .package(
@@ -276,6 +280,19 @@ let package = Package(
       name: "FirebaseGoogleSwiftUITests",
       dependencies: ["FirebaseGoogleSwiftUI"],
       path: "FirebaseSwiftUI/FirebaseGoogleSwiftUI/Tests/"
+    ),
+    .target(
+      name: "FirebaseFacebookSwiftUI",
+      path: "FirebaseSwiftUI/FirebaseFacebookSwiftUI/Sources",
+      dependencies: [
+        "FirebaseAuthSwiftUI",
+        .product(name: "FacebookLogin", package: "Facebook"),
+      ],
+    ),
+    .testTarget(
+      name: "FirebaseFacebookSwiftUITests",
+      dependencies: ["FirebaseFacebookSwiftUI"],
+      path: "FirebaseSwiftUI/FirebaseFacebookSwiftUI/Tests/"
     ),
   ]
 )
