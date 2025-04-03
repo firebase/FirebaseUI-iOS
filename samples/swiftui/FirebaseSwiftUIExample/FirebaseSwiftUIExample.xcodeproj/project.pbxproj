@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4607CC9C2D9BFE29009EC3F5 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4607CC9B2D9BFE29009EC3F5 /* FirebaseAuthSwiftUI */; };
 		4607CC9E2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4607CC9D2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI */; };
+		4670DEA72D9EA9E100E0D36A /* FirebaseFacebookSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4670DEA62D9EA9E100E0D36A /* FirebaseFacebookSwiftUI */; };
 		46CB7B252D773F2100F1FD0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46CB7B242D773F2100F1FD0A /* GoogleService-Info.plist */; };
 		46F89C392D64B04E000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 46F89C382D64B04E000F8BC0 /* FirebaseAuthSwiftUI */; };
 		46F89C4D2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 46F89C4C2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI */; };
@@ -74,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4670DEA72D9EA9E100E0D36A /* FirebaseFacebookSwiftUI in Frameworks */,
 				46F89C392D64B04E000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */,
 				46F89C4D2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */,
 				4607CC9E2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI in Frameworks */,
@@ -151,6 +153,7 @@
 				46F89C4C2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI */,
 				4607CC9B2D9BFE29009EC3F5 /* FirebaseAuthSwiftUI */,
 				4607CC9D2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI */,
+				4670DEA62D9EA9E100E0D36A /* FirebaseFacebookSwiftUI */,
 			);
 			productName = FirebaseSwiftUIExample;
 			productReference = 46F89C082D64A86C000F8BC0 /* FirebaseSwiftUIExample.app */;
@@ -621,6 +624,11 @@
 		4607CC9D2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseGoogleSwiftUI;
+		};
+		4670DEA62D9EA9E100E0D36A /* FirebaseFacebookSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4607CC9A2D9BFE29009EC3F5 /* XCLocalSwiftPackageReference "../../../../firebaseUI-ios" */;
+			productName = FirebaseFacebookSwiftUI;
 		};
 		46F89C382D64B04E000F8BC0 /* FirebaseAuthSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

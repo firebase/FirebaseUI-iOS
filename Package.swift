@@ -283,11 +283,11 @@ let package = Package(
     ),
     .target(
       name: "FirebaseFacebookSwiftUI",
-      path: "FirebaseSwiftUI/FirebaseFacebookSwiftUI/Sources",
       dependencies: [
         "FirebaseAuthSwiftUI",
         .product(name: "FacebookLogin", package: "Facebook"),
       ],
+      path: "FirebaseSwiftUI/FirebaseFacebookSwiftUI/Sources"
     ),
     .testTarget(
       name: "FirebaseFacebookSwiftUITests",

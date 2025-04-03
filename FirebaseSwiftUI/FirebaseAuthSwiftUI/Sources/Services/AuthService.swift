@@ -6,6 +6,8 @@ public protocol GoogleProviderProtocol {
   @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
 }
 
+public protocol FacebookProviderProtocol {}
+
 public enum AuthenticationProvider {
   case email
   case google
@@ -61,13 +63,16 @@ public final class AuthService {
   public let auth: Auth
   private var listenerManager: AuthListenerManager?
   private let googleProvider: GoogleProviderProtocol?
+  private let facebookProvider: FacebookProviderProtocol?
   public let string: StringUtils
 
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
-              googleProvider: GoogleProviderProtocol? = nil) {
+              googleProvider: GoogleProviderProtocol? = nil,
+              facebookProvider: FacebookProviderProtocol? = nil) {
     self.auth = auth
     self.configuration = configuration
     self.googleProvider = googleProvider
+    self.facebookProvider = facebookProvider
     string = StringUtils(bundle: configuration.customStringsBundle ?? Bundle.module)
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
   }
@@ -84,6 +89,21 @@ public final class AuthService {
           code: 1,
           userInfo: [
             NSLocalizedDescriptionKey: "`GoogleProviderSwift` has not been configured",
+          ]
+        )
+      }
+      return provider
+    }
+  }
+
+  private var safeFacebookProvider: FacebookProviderProtocol {
+    get throws {
+      guard let provider = facebookProvider else {
+        throw NSError(
+          domain: "AuthEnvironmentErrorDomain",
+          code: 1,
+          userInfo: [
+            NSLocalizedDescriptionKey: "`FacebookProviderSwift` has not been configured",
           ]
         )
       }
