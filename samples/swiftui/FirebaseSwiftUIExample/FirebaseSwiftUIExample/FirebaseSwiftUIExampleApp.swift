@@ -9,6 +9,7 @@ import FacebookCore
 import FirebaseAuth
 import FirebaseAuthSwiftUI
 import FirebaseCore
+import FirebaseFacebookSwiftUI
 import FirebaseGoogleSwiftUI
 import SwiftData
 import SwiftUI
@@ -68,6 +69,7 @@ struct ContentView: View {
   var body: some View {
     AuthPickerView {
       GoogleButtonView()
+      FacebookButtonView()
     }.environment(authService)
   }
 }

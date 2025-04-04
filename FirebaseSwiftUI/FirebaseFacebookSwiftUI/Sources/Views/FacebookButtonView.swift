@@ -12,21 +12,21 @@ public struct FacebookButtonView {
 
   public init() {}
 
-  private func signInWithFacebook() async {}
+  private func signInWithFacebook() async {
+    if let token = AccessToken.current,
+       !token.isExpired {
+//      AuthenticationToken.current.
+      // no need to login with Facebook, create credential and sign in here
+    }
+  }
 }
 
 extension FacebookButtonView: View {
   public var body: some View {
-    Button(action: {
-      Task {
-        try await signInWithFacebook()
-      }
-    }) {
-      FacebookLoginButtonView(
-        isLimitedLogin: $limitedLogin,
-        nonce: $nonce
-      )
-    }
+    FacebookLoginButtonView(
+      isLimitedLogin: $limitedLogin,
+      nonce: $nonce
+    )
     Text(errorMessage).foregroundColor(.red)
   }
 }
@@ -46,6 +46,7 @@ struct FacebookLoginButtonView: UIViewRepresentable {
 
     @MainActor func loginButtonWillLogin(_ loginButton: FBLoginButton) -> Bool {
       loginButton.loginTracking = parent.isLimitedLogin ? .limited : .enabled
+      loginButton.permissions = ["public_profile", "email"]
 
       if let nonce = parent.nonce, !nonce.isEmpty {
         loginButton.nonce = nonce
