@@ -36,6 +36,7 @@ struct FacebookLoginButtonView: UIViewRepresentable {
 
   @Binding var isLimitedLogin: Bool
   @Binding var nonce: String?
+  var onLoginResult: ((Error?) -> Void)?
 
   class Coordinator: NSObject, @preconcurrency LoginButtonDelegate {
     var parent: FacebookLoginButtonView
@@ -55,25 +56,24 @@ struct FacebookLoginButtonView: UIViewRepresentable {
       return true
     }
 
-    func loginButton(_: FBLoginButton,
-                     didCompleteWith result: LoginManagerLoginResult?,
-                     error: Error?) {
+    @MainActor func loginButton(_: FBLoginButton,
+                                didCompleteWith result: LoginManagerLoginResult?,
+                                error: Error?) {
       if let error = error {
-        print("Login Error: \(error.localizedDescription)")
+        parent.onLoginResult?(error)
         return
       }
 
-      guard let result = result else {
-        print("Invalid Login Result")
+      guard let result = result, !result.isCancelled else {
+        parent.onLoginResult?(NSError(
+          domain: "FacebookLogin",
+          code: 1,
+          userInfo: [NSLocalizedDescriptionKey: "Login was cancelled."]
+        ))
         return
       }
 
-      if result.isCancelled {
-        print("Login Cancelled")
-        return
-      }
-
-      print("Login Successful")
+      parent.onLoginResult?(nil)
     }
 
     func loginButtonDidLogOut(_: FBLoginButton) {
