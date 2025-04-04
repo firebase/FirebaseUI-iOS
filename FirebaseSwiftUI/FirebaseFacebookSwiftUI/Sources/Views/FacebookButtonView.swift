@@ -26,16 +26,6 @@ extension FacebookButtonView: View {
         isLimitedLogin: $limitedLogin,
         nonce: $nonce
       )
-      if authService.authenticationState != .authenticating {
-        Text(authService.authenticationFlow == .login ? "Login with Google" : "Sign-up with Google")
-          .padding(.vertical, 8)
-          .frame(maxWidth: .infinity)
-      } else {
-        ProgressView()
-          .progressViewStyle(CircularProgressViewStyle(tint: .white))
-          .padding(.vertical, 8)
-          .frame(maxWidth: .infinity)
-      }
     }
     Text(errorMessage).foregroundColor(.red)
   }
