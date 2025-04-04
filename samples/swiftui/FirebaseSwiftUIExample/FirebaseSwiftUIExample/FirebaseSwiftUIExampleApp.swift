@@ -5,6 +5,7 @@
 //  Created by Russell Wheatley on 18/02/2025.
 //
 
+import FacebookCore
 import FirebaseAuth
 import FirebaseAuthSwiftUI
 import FirebaseCore
@@ -15,9 +16,27 @@ import SwiftUI
 let googleProvider = GoogleProviderSwift()
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_: UIApplication,
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [
+                     UIApplication.LaunchOptionsKey: Any
+                   ]?) -> Bool {
+    ApplicationDelegate.shared.application(
+      application,
+      didFinishLaunchingWithOptions: launchOptions
+    )
+    return true
+  }
+
+  func application(_ app: UIApplication,
                    open url: URL,
-                   options _: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+                   options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    ApplicationDelegate.shared.application(
+      app,
+      open: url,
+      sourceApplication: options[UIApplication.OpenURLOptionsKey
+        .sourceApplication] as? String,
+      annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+    )
     return googleProvider.handleUrl(url)
   }
 }

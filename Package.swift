@@ -286,6 +286,7 @@ let package = Package(
       dependencies: [
         "FirebaseAuthSwiftUI",
         .product(name: "FacebookLogin", package: "Facebook"),
+        .product(name: "FacebookCore", package: "Facebook"),
       ],
       path: "FirebaseSwiftUI/FirebaseFacebookSwiftUI/Sources"
     ),

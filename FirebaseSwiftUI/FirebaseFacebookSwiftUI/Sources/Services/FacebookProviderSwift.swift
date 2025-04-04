@@ -1,4 +1,5 @@
-// @preconcurrency import FirebaseAuth
+import FacebookCore
+import FacebookLogin
 import FirebaseAuthSwiftUI
 
 public enum FacebookLoginType {
@@ -9,10 +10,7 @@ public enum FacebookLoginType {
 public class FacebookProviderSwift: FacebookProviderProtocol {
   let shortName = "Facebook"
   let providerId = "facebook.com"
-  var loginType: FacebookLoginType
-  public init(loginType: FacebookLoginType = FacebookLoginType.classic) {
-    self.loginType = loginType
-  }
+  public init() {}
 
-  public func signInWithFacebook() {}
+  public func authenticateWithClassic() {}
 }
