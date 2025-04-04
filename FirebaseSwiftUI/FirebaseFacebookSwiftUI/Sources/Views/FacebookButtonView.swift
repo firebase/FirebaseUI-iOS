@@ -25,7 +25,16 @@ extension FacebookButtonView: View {
   public var body: some View {
     FacebookLoginButtonView(
       isLimitedLogin: $limitedLogin,
-      nonce: $nonce
+      nonce: $nonce,
+      onLoginResult: { error in
+        Task {
+          if let error = error {
+            errorMessage = authService.string.localizedErrorMessage(for: error)
+          } else {
+            await signInWithFacebook()
+          }
+        }
+      }
     )
     Text(errorMessage).foregroundColor(.red)
   }
