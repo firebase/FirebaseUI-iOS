@@ -1,3 +1,4 @@
+import AppTrackingTransparency
 import FacebookCore
 import FacebookLogin
 import FirebaseAuth
@@ -75,7 +76,10 @@ extension FacebookButtonView: View {
           if let error = error {
             errorMessage = authService.string.localizedErrorMessage(for: error)
           } else {
-            if limitedLogin {
+            // if not authorized, Facebook will default to limited login and classic login will fail
+            let trackingStatus = ATTrackingManager.trackingAuthorizationStatus
+
+            if limitedLogin || trackingStatus != .authorized {
               await limitedLogin()
             } else {
               await classicLogin()
@@ -104,7 +108,7 @@ struct FacebookLoginButtonView: UIViewRepresentable {
 
     @MainActor func loginButtonWillLogin(_ loginButton: FBLoginButton) -> Bool {
       loginButton.loginTracking = parent.isLimitedLogin ? .limited : .enabled
-//      loginButton.permissions = ["public_profile", "email"]
+      loginButton.permissions = ["public_profile", "email"]
 
       loginButton.nonce = parent.shaNonce
 
