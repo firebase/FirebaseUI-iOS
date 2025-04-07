@@ -5,7 +5,7 @@ import FirebaseAuthSwiftUI
 let kFacebookEmailScope = "email"
 let kFacebookProfileScope = "public_profile"
 let kDefaultFacebookScopes = [kFacebookEmailScope, kFacebookProfileScope]
-// TODO - need to think how to handle this
+// TODO: - need to think how to handle this
 let kFacebookProviderId = "facebook.com"
 
 public enum FacebookLoginType {

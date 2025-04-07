@@ -69,7 +69,7 @@ extension FacebookButtonView: View {
   public var body: some View {
     FacebookLoginButtonView(
       isLimitedLogin: $limitedLogin,
-      nonce: $shaNonce,
+      shaNonce: $shaNonce,
       onLoginResult: { error in
         Task {
           if let error = error {
@@ -92,7 +92,7 @@ struct FacebookLoginButtonView: UIViewRepresentable {
   typealias UIViewType = FBLoginButton
 
   @Binding var isLimitedLogin: Bool
-  @Binding var nonce: String
+  @Binding var shaNonce: String
   var onLoginResult: (Error?) -> Void
 
   class Coordinator: NSObject, @preconcurrency LoginButtonDelegate {
@@ -106,7 +106,7 @@ struct FacebookLoginButtonView: UIViewRepresentable {
       loginButton.loginTracking = parent.isLimitedLogin ? .limited : .enabled
 //      loginButton.permissions = ["public_profile", "email"]
 
-      loginButton.nonce = parent.nonce
+      loginButton.nonce = parent.shaNonce
 
       return true
     }
