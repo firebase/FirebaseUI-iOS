@@ -191,7 +191,7 @@ extension FacebookButtonView: View {
       .toggleStyle(SwitchToggleStyle(tint: .green))
       .alert(isPresented: $showUserTrackingAlert) {
         Alert(
-          title: Text("Authorise User Tracking"),
+          title: Text("Authorize User Tracking"),
           message: Text("For classic Facebook login, please authorize user tracking."),
           dismissButton: .default(Text("OK"))
         )
