@@ -26,5 +26,7 @@
       <string>fbapi</string>
       <string>fb-messenger-share-api</string>
     </array>
+    <key>NSUserTrackingUsageDescription</key>
+    <string>Testing - need to authorize User tracking for Facebook classic login.</string>
   </dict>
 </plist>
