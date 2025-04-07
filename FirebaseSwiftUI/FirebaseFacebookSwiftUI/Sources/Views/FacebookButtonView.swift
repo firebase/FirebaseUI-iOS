@@ -6,7 +6,7 @@ import FirebaseAuthSwiftUI
 import SwiftUI
 
 @MainActor
-public struct FacebookButtonView2 {
+public struct FacebookButtonView {
   @Environment(AuthService.self) private var authService
   @State private var errorMessage = ""
   @State private var limitedLogin: Bool = true
@@ -149,7 +149,7 @@ public struct FacebookButtonView2 {
   }
 }
 
-extension FacebookButtonView2: View {
+extension FacebookButtonView: View {
   public var body: some View {
     Button(action: {
       invokeLoginMethod()
