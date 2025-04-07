@@ -125,7 +125,6 @@ public struct FacebookButtonView {
       get: { self.limitedLogin },
       set: { newValue in
         let trackingStatus = ATTrackingManager.trackingAuthorizationStatus
-
         if newValue == true, trackingStatus != .authorized {
           self.showUserTrackingAlert = true
         } else {
@@ -173,6 +172,7 @@ extension FacebookButtonView: View {
         dismissButton: .default(Text("OK"))
       )
     }
+
     HStack {
       Text("Authorize User Tracking")
         .font(.footnote)
@@ -182,8 +182,11 @@ extension FacebookButtonView: View {
           requestTrackingPermission()
         }
       Toggle(isOn: limitedLoginBinding) {
-        Text("Limited Login")
-          .foregroundColor(.green)
+        HStack {
+          Spacer() // This will push the text to the left of the toggle
+          Text("Limited Login")
+            .foregroundColor(.blue)
+        }
       }
       .toggleStyle(SwitchToggleStyle(tint: .green))
       .alert(isPresented: $showUserTrackingAlert) {
