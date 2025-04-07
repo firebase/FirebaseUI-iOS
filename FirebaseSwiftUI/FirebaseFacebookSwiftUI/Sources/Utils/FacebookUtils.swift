@@ -31,7 +31,7 @@ class FacebookUtils {
     return result
   }
 
-  func sha256Hash(of input: String) -> String {
+  static func sha256Hash(of input: String) -> String {
     guard let data = input.data(using: .utf8) else { return "" }
     var hash = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
     data.withUnsafeBytes {

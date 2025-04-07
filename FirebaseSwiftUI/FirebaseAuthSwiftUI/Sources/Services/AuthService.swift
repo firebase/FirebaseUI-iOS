@@ -143,7 +143,7 @@ public final class AuthService {
     }
   }
 
-  func signIn(with credentials: AuthCredential) async throws {
+  public func signIn(with credentials: AuthCredential) async throws {
     authenticationState = .authenticating
     do {
       try await auth.signIn(with: credentials)

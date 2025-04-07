@@ -1,5 +1,6 @@
 import FacebookCore
 import FacebookLogin
+import FirebaseAuth
 import FirebaseAuthSwiftUI
 import SwiftUI
 
@@ -7,16 +8,59 @@ import SwiftUI
 public struct FacebookButtonView {
   @Environment(AuthService.self) private var authService
   @State private var errorMessage = ""
-  @State private var limitedLogin: Bool = true
-  @State private var nonce: String? = FacebookUtils.randomNonce()
+  @State private var limitedLogin: Bool = false
+  @State private var rawNonce: String
+  @State private var shaNonce: String
 
-  public init() {}
+  public init() {
+    let nonce = FacebookUtils.randomNonce()
+    _rawNonce = State(initialValue: nonce)
+    _shaNonce = State(initialValue: FacebookUtils.sha256Hash(of: nonce))
+  }
 
-  private func signInWithFacebook() async {
-    if let token = AccessToken.current,
-       !token.isExpired {
-//      AuthenticationToken.current.
-      // no need to login with Facebook, create credential and sign in here
+  private func classicLogin() async {
+    do {
+      if let token = AccessToken.current,
+         !token.isExpired {
+        let credential = FacebookAuthProvider
+          .credential(withAccessToken: token.tokenString)
+        try await authService.signIn(with: credential)
+      } else {
+        throw NSError(
+          domain: "FacebookSwiftErrorDomain",
+          code: 1,
+          userInfo: [
+            NSLocalizedDescriptionKey: "Access token has expired or not available. Please sign-in with Facebook before attempting to create a Facebook provider credential",
+          ]
+        )
+      }
+    } catch {
+      errorMessage = authService.string.localizedErrorMessage(
+        for: error
+      )
+    }
+  }
+
+  private func limitedLogin() async {
+    do {
+      if let idToken = AuthenticationToken.current {
+        let credential = OAuthProvider.credential(withProviderID: kFacebookProviderId,
+                                                  idToken: idToken.tokenString,
+                                                  rawNonce: rawNonce)
+        try await authService.signIn(with: credential)
+      } else {
+        throw NSError(
+          domain: "FacebookSwiftErrorDomain",
+          code: 2,
+          userInfo: [
+            NSLocalizedDescriptionKey: "Authentication is not available. Please sign-in with Facebook before attempting to create a Facebook provider credential",
+          ]
+        )
+      }
+    } catch {
+      errorMessage = authService.string.localizedErrorMessage(
+        for: error
+      )
     }
   }
 }
@@ -25,13 +69,17 @@ extension FacebookButtonView: View {
   public var body: some View {
     FacebookLoginButtonView(
       isLimitedLogin: $limitedLogin,
-      nonce: $nonce,
+      nonce: $shaNonce,
       onLoginResult: { error in
         Task {
           if let error = error {
             errorMessage = authService.string.localizedErrorMessage(for: error)
           } else {
-            await signInWithFacebook()
+            if limitedLogin {
+              await limitedLogin()
+            } else {
+              await classicLogin()
+            }
           }
         }
       }
@@ -44,8 +92,8 @@ struct FacebookLoginButtonView: UIViewRepresentable {
   typealias UIViewType = FBLoginButton
 
   @Binding var isLimitedLogin: Bool
-  @Binding var nonce: String?
-  var onLoginResult: ((Error?) -> Void)?
+  @Binding var nonce: String
+  var onLoginResult: (Error?) -> Void
 
   class Coordinator: NSObject, @preconcurrency LoginButtonDelegate {
     var parent: FacebookLoginButtonView
@@ -56,11 +104,9 @@ struct FacebookLoginButtonView: UIViewRepresentable {
 
     @MainActor func loginButtonWillLogin(_ loginButton: FBLoginButton) -> Bool {
       loginButton.loginTracking = parent.isLimitedLogin ? .limited : .enabled
-      loginButton.permissions = ["public_profile", "email"]
+//      loginButton.permissions = ["public_profile", "email"]
 
-      if let nonce = parent.nonce, !nonce.isEmpty {
-        loginButton.nonce = nonce
-      }
+      loginButton.nonce = parent.nonce
 
       return true
     }
@@ -69,12 +115,12 @@ struct FacebookLoginButtonView: UIViewRepresentable {
                                 didCompleteWith result: LoginManagerLoginResult?,
                                 error: Error?) {
       if let error = error {
-        parent.onLoginResult?(error)
+        parent.onLoginResult(error)
         return
       }
 
       guard let result = result, !result.isCancelled else {
-        parent.onLoginResult?(NSError(
+        parent.onLoginResult(NSError(
           domain: "FacebookLogin",
           code: 1,
           userInfo: [NSLocalizedDescriptionKey: "Login was cancelled."]
@@ -82,7 +128,7 @@ struct FacebookLoginButtonView: UIViewRepresentable {
         return
       }
 
-      parent.onLoginResult?(nil)
+      parent.onLoginResult(nil)
     }
 
     func loginButtonDidLogOut(_: FBLoginButton) {
