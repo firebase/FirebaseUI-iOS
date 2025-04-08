@@ -27,9 +27,24 @@ extension GoogleButtonView: View {
       }
     }) {
       if authService.authenticationState != .authenticating {
-        Text(authService.authenticationFlow == .login ? "Login with Google" : "Sign-up with Google")
-          .padding(.vertical, 8)
-          .frame(maxWidth: .infinity)
+        HStack {
+          Image(systemName: "globe") // Placeholder for Google logo
+            .resizable()
+            .frame(width: 20, height: 20)
+            .padding(.leading, 8)
+
+          Text(authService
+            .authenticationFlow == .login ? "Login with Google" : "Sign-up with Google")
+            .foregroundColor(.black)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        }
+        .background(Color.white)
+        .cornerRadius(8)
+        .overlay(
+          RoundedRectangle(cornerRadius: 8)
+            .stroke(Color.gray, lineWidth: 1)
+        )
       } else {
         ProgressView()
           .progressViewStyle(CircularProgressViewStyle(tint: .white))
