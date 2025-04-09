@@ -30,6 +30,13 @@ public enum AuthenticationFlow {
   case signUp
 }
 
+public enum AuthServiceError: Error {
+  case invalidEmailLink(String)
+  case notConfiguredProvider(String)
+  case clientIdNotFound(String)
+  case notConfiguredActionCodeSettings(String)
+}
+
 @MainActor
 final class AuthListenerManager {
   private var authStateHandle: AuthStateDidChangeListenerHandle?
@@ -59,6 +66,7 @@ final class AuthListenerManager {
 @MainActor
 @Observable
 public final class AuthService {
+  @ObservationIgnored @AppStorage("email-link") public var emailLink: String?
   public let configuration: AuthConfiguration
   public let auth: Auth
   private var listenerManager: AuthListenerManager?
@@ -84,13 +92,8 @@ public final class AuthService {
   private var safeGoogleProvider: GoogleProviderProtocol {
     get throws {
       guard let provider = googleProvider else {
-        throw NSError(
-          domain: "AuthEnvironmentErrorDomain",
-          code: 1,
-          userInfo: [
-            NSLocalizedDescriptionKey: "`GoogleProviderSwift` has not been configured",
-          ]
-        )
+        throw AuthServiceError
+          .notConfiguredProvider("`GoogleProviderSwift` has not been configured")
       }
       return provider
     }
@@ -99,16 +102,23 @@ public final class AuthService {
   private var safeFacebookProvider: FacebookProviderProtocol {
     get throws {
       guard let provider = facebookProvider else {
-        throw NSError(
-          domain: "AuthEnvironmentErrorDomain",
-          code: 1,
-          userInfo: [
-            NSLocalizedDescriptionKey: "`FacebookProviderSwift` has not been configured",
-          ]
-        )
+        throw AuthServiceError
+          .notConfiguredProvider("`FacebookProviderSwift` has not been configured")
       }
       return provider
     }
+  }
+
+  private func safeActionCodeSettings(emailLinkSignIn: Bool = true) throws -> ActionCodeSettings {
+    guard let actionCodeSettings = emailLinkSignIn ? configuration
+      .emailLinkSignInActionCodeSettings : configuration.verifyEmailActionCodeSettings else {
+      let errorMessage = emailLinkSignIn ?
+        "ActionCodeSettings has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`" :
+        "ActionCodeSettings has not been configured for `AuthConfiguration.verifyEmailActionCodeSettings`"
+      throw AuthServiceError
+        .notConfiguredActionCodeSettings(errorMessage)
+    }
+    return actionCodeSettings
   }
 
   func updateAuthenticationState() {
@@ -126,13 +136,12 @@ public final class AuthService {
   public func signInWithGoogle() async throws {
     authenticationState = .authenticating
     do {
-      guard let clientID = auth.app?.options.clientID else { throw NSError(
-        domain: "AuthServiceErrorDomain",
-        code: 2,
-        userInfo: [
-          NSLocalizedDescriptionKey: "OAuth client ID not found. Please make sure Google Sign-In is enabled in the Firebase console. You may have to download a new GoogleService-Info.plist file after enabling Google Sign-In.",
-        ]
-      ) }
+      guard let clientID = auth.app?.options.clientID else {
+        throw AuthServiceError
+          .clientIdNotFound(
+            "OAuth client ID not found. Please make sure Google Sign-In is enabled in the Firebase console. You may have to download a new GoogleService-Info.plist file after enabling Google Sign-In."
+          )
+      }
       let credential = try await safeGoogleProvider.signInWithGoogle(clientID: clientID)
 
       try await signIn(with: credential)
@@ -191,13 +200,29 @@ public final class AuthService {
 
   func sendEmailSignInLink(to email: String) async throws {
     do {
-      // TODO: - how does user set action code settings? Needs configuring
-      let actionCodeSettings = ActionCodeSettings()
-      actionCodeSettings.handleCodeInApp = true
+      let actionCodeSettings = try safeActionCodeSettings()
       try await auth.sendSignInLink(
         toEmail: email,
         actionCodeSettings: actionCodeSettings
       )
+    } catch {
+      throw error
+    }
+  }
+
+  func handleSignInLink(url url: URL) async throws {
+    do {
+      guard let email = emailLink else {
+        throw AuthServiceError.invalidEmailLink(
+          "Invalid email address. Most likely, the link you used has expired. Try signing in again."
+        )
+      }
+      let link = url.absoluteString
+      if auth.isSignIn(withEmailLink: link) {
+        let result = try await auth.signIn(withEmail: email, link: link)
+        updateAuthenticationState()
+        emailLink = nil
+      }
     } catch {
       throw error
     }

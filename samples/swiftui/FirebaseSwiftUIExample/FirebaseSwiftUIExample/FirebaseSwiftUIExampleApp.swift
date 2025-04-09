@@ -63,7 +63,14 @@ struct ContentView: View {
   let authService: AuthService
 
   init() {
-    authService = AuthService(googleProvider: googleProvider)
+    let actionCodeSettings = ActionCodeSettings()
+    actionCodeSettings.handleCodeInApp = true
+    actionCodeSettings
+      .url = URL(string: "https://flutterfire-e2e-tests.firebaseapp.com")
+    actionCodeSettings.linkDomain = "flutterfire-e2e-tests.firebaseapp.com"
+    actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
+    let configuration = AuthConfiguration(emailLinkSignInActionCodeSettings: actionCodeSettings)
+    authService = AuthService(configuration: configuration, googleProvider: googleProvider)
   }
 
   var body: some View {

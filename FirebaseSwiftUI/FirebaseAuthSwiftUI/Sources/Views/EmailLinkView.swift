@@ -1,3 +1,4 @@
+import FirebaseAuth
 import SwiftUI
 
 public struct EmailLinkView {
@@ -35,6 +36,7 @@ extension EmailLinkView: View {
       Button(action: {
         Task {
           await sendEmailLink()
+          authService.emailLink = email
         }
       }) {
         Text("Send email sign-in link")
@@ -58,6 +60,14 @@ extension EmailLinkView: View {
         .padding()
       }
       .padding()
+    }.onOpenURL { url in
+      Task {
+        do {
+          try await authService.handleSignInLink(url: url)
+        } catch {
+          errorMessage = authService.string.localizedErrorMessage(for: error)
+        }
+      }
     }
   }
 }
