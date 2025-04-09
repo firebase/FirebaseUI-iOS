@@ -5,6 +5,11 @@ import FirebaseAuth
 import FirebaseAuthSwiftUI
 import SwiftUI
 
+public enum FacebookError: Error {
+  case accessToken(String)
+  case authenticationToken(String)
+}
+
 @MainActor
 public struct FacebookButtonView {
   @Environment(AuthService.self) private var authService
@@ -82,13 +87,10 @@ public struct FacebookButtonView {
           .credential(withAccessToken: token.tokenString)
         try await authService.signIn(with: credential)
       } else {
-        throw NSError(
-          domain: "FacebookSwiftErrorDomain",
-          code: 1,
-          userInfo: [
-            NSLocalizedDescriptionKey: "Access token has expired or not available. Please sign-in with Facebook before attempting to create a Facebook provider credential",
-          ]
-        )
+        throw FacebookError
+          .accessToken(
+            "Access token has expired or not available. Please sign-in with Facebook before attempting to create a Facebook provider credential"
+          )
       }
     } catch {
       errorMessage = authService.string.localizedErrorMessage(
@@ -105,13 +107,10 @@ public struct FacebookButtonView {
                                                   rawNonce: rawNonce)
         try await authService.signIn(with: credential)
       } else {
-        throw NSError(
-          domain: "FacebookSwiftErrorDomain",
-          code: 2,
-          userInfo: [
-            NSLocalizedDescriptionKey: "Authentication is not available. Please sign-in with Facebook before attempting to create a Facebook provider credential",
-          ]
-        )
+        throw FacebookError
+          .authenticationToken(
+            "Authentication is not available. Please sign-in with Facebook before attempting to create a Facebook provider credential"
+          )
       }
     } catch {
       errorMessage = authService.string.localizedErrorMessage(

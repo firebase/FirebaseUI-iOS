@@ -6,6 +6,12 @@ let kGoogleUserInfoEmailScope = "https://www.googleapis.com/auth/userinfo.email"
 let kGoogleUserInfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile"
 let kDefaultScopes = [kGoogleUserInfoEmailScope, kGoogleUserInfoProfileScope]
 
+public enum GoogleError: Error {
+  case rootViewController(String)
+  case authenticationToken(String)
+  case user(String)
+}
+
 public class GoogleProviderSwift: @preconcurrency GoogleProviderProtocol {
   let scopes: [String]
   let shortName = "Google"
@@ -21,13 +27,8 @@ public class GoogleProviderSwift: @preconcurrency GoogleProviderProtocol {
   @MainActor public func signInWithGoogle(clientID: String) async throws -> AuthCredential {
     guard let presentingViewController = await (UIApplication.shared.connectedScenes
       .first as? UIWindowScene)?.windows.first?.rootViewController else {
-      throw NSError(
-        domain: "GoogleProviderSwiftErrorDomain",
-        code: 1,
-        userInfo: [
-          NSLocalizedDescriptionKey: "Root View controller is not available to present Google sign-in View.",
-        ]
-      )
+      throw GoogleError
+        .rootViewController("Root View controller is not available to present Google sign-in View.")
     }
 
     let config = GIDConfiguration(clientID: clientID)
@@ -44,13 +45,7 @@ public class GoogleProviderSwift: @preconcurrency GoogleProviderProtocol {
 
         guard let user = result?.user,
               let idToken = user.idToken?.tokenString else {
-          continuation.resume(throwing: NSError(
-            domain: "GoogleProviderSwiftErrorDomain",
-            code: 2,
-            userInfo: [
-              NSLocalizedDescriptionKey: "Failed to retrieve user or idToken.",
-            ]
-          ))
+          continuation.resume(throwing: GoogleError.user("Failed to retrieve user or idToken."))
           return
         }
 
