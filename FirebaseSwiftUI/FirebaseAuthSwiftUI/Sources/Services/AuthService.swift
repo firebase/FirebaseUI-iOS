@@ -112,16 +112,17 @@ public final class AuthService {
   private func safeActionCodeSettings(emailLinkSignIn: Bool = true) throws -> ActionCodeSettings {
     guard let actionCodeSettings = emailLinkSignIn ? configuration
       .emailLinkSignInActionCodeSettings : configuration.verifyEmailActionCodeSettings else {
-      let errorMessage = emailLinkSignIn ?
-        "ActionCodeSettings has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`" :
-        "ActionCodeSettings has not been configured for `AuthConfiguration.verifyEmailActionCodeSettings`"
+      let settingType = emailLinkSignIn ? "emailLinkSignInActionCodeSettings" :
+        "verifyEmailActionCodeSettings"
+      let errorMessage =
+        "ActionCodeSettings has not been configured for `AuthConfiguration.\(settingType)`"
       throw AuthServiceError
         .notConfiguredActionCodeSettings(errorMessage)
     }
     return actionCodeSettings
   }
 
-  func updateAuthenticationState() {
+  public func updateAuthenticationState() {
     authenticationState =
       (currentUser == nil || currentUser?.isAnonymous == true)
         ? .unauthenticated
@@ -131,25 +132,6 @@ public final class AuthService {
   public func signOut() async throws {
     try await auth.signOut()
     updateAuthenticationState()
-  }
-
-  public func signInWithGoogle() async throws {
-    authenticationState = .authenticating
-    do {
-      guard let clientID = auth.app?.options.clientID else {
-        throw AuthServiceError
-          .clientIdNotFound(
-            "OAuth client ID not found. Please make sure Google Sign-In is enabled in the Firebase console. You may have to download a new GoogleService-Info.plist file after enabling Google Sign-In."
-          )
-      }
-      let credential = try await safeGoogleProvider.signInWithGoogle(clientID: clientID)
-
-      try await signIn(with: credential)
-      updateAuthenticationState()
-    } catch {
-      authenticationState = .unauthenticated
-      throw error
-    }
   }
 
   public func signIn(with credentials: AuthCredential) async throws {
@@ -224,6 +206,29 @@ public final class AuthService {
         emailLink = nil
       }
     } catch {
+      throw error
+    }
+  }
+}
+
+// MARK: - Google Sign In
+
+public extension AuthService {
+  func signInWithGoogle() async throws {
+    authenticationState = .authenticating
+    do {
+      guard let clientID = auth.app?.options.clientID else {
+        throw AuthServiceError
+          .clientIdNotFound(
+            "OAuth client ID not found. Please make sure Google Sign-In is enabled in the Firebase console. You may have to download a new GoogleService-Info.plist file after enabling Google Sign-In."
+          )
+      }
+      let credential = try await safeGoogleProvider.signInWithGoogle(clientID: clientID)
+
+      try await signIn(with: credential)
+      updateAuthenticationState()
+    } catch {
+      authenticationState = .unauthenticated
       throw error
     }
   }
