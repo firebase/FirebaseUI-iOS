@@ -6,7 +6,9 @@ public protocol GoogleProviderProtocol {
   @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
 }
 
-public protocol FacebookProviderProtocol {}
+public protocol FacebookProviderProtocol {
+  @MainActor func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential
+}
 
 public enum AuthenticationProvider {
   case email
@@ -66,14 +68,6 @@ final class AuthListenerManager {
 @MainActor
 @Observable
 public final class AuthService {
-  @ObservationIgnored @AppStorage("email-link") public var emailLink: String?
-  public let configuration: AuthConfiguration
-  public let auth: Auth
-  private var listenerManager: AuthListenerManager?
-  private let googleProvider: GoogleProviderProtocol?
-  private let facebookProvider: FacebookProviderProtocol?
-  public let string: StringUtils
-
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
               googleProvider: GoogleProviderProtocol? = nil,
               facebookProvider: FacebookProviderProtocol? = nil) {
@@ -85,9 +79,18 @@ public final class AuthService {
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
   }
 
+  @ObservationIgnored @AppStorage("email-link") public var emailLink: String?
+  public let configuration: AuthConfiguration
+  public let auth: Auth
+
+  public let string: StringUtils
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .login
+
+  private var listenerManager: AuthListenerManager?
+  private let googleProvider: GoogleProviderProtocol?
+  private let facebookProvider: FacebookProviderProtocol?
 
   private var safeGoogleProvider: GoogleProviderProtocol {
     get throws {
@@ -225,6 +228,23 @@ public extension AuthService {
       }
       let credential = try await safeGoogleProvider.signInWithGoogle(clientID: clientID)
 
+      try await signIn(with: credential)
+      updateAuthenticationState()
+    } catch {
+      authenticationState = .unauthenticated
+      throw error
+    }
+  }
+}
+
+// MARK: - Facebook Sign In
+
+public extension AuthService {
+  func signInWithFacebook(limitedLogin: Bool = true) async throws {
+    authenticationState = .authenticating
+    do {
+      let credential = try await safeFacebookProvider
+        .signInWithFacebook(isLimitedLogin: limitedLogin)
       try await signIn(with: credential)
       updateAuthenticationState()
     } catch {
