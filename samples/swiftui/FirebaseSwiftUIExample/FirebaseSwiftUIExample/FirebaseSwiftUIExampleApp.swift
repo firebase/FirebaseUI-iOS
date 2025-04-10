@@ -11,6 +11,7 @@ import FirebaseAuthSwiftUI
 import FirebaseCore
 import FirebaseFacebookSwiftUI
 import FirebaseGoogleSwiftUI
+import FirebasePhoneAuthSwiftUI
 import SwiftData
 import SwiftUI
 
@@ -70,13 +71,21 @@ struct ContentView: View {
     actionCodeSettings.linkDomain = "flutterfire-e2e-tests.firebaseapp.com"
     actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
     let configuration = AuthConfiguration(emailLinkSignInActionCodeSettings: actionCodeSettings)
-    authService = AuthService(configuration: configuration, googleProvider: googleProvider)
+    let facebookProvider = FacebookProviderSwift()
+    let phoneAuthProvider = PhoneAuthProviderSwift()
+    authService = AuthService(
+      configuration: configuration,
+      googleProvider: googleProvider,
+      facebookProvider: facebookProvider,
+      phoneAuthProvider: phoneAuthProvider
+    )
   }
 
   var body: some View {
     AuthPickerView {
       GoogleButtonView()
       FacebookButtonView()
+      PhoneAuthButtonView()
     }.environment(authService)
   }
 }

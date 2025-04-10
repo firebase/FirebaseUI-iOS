@@ -10,6 +10,10 @@ public protocol FacebookProviderProtocol {
   @MainActor func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential
 }
 
+public protocol PhoneAuthProviderProtocol {
+  @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
+}
+
 public enum AuthenticationProvider {
   case email
   case google
@@ -70,11 +74,13 @@ final class AuthListenerManager {
 public final class AuthService {
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
               googleProvider: GoogleProviderProtocol? = nil,
-              facebookProvider: FacebookProviderProtocol? = nil) {
+              facebookProvider: FacebookProviderProtocol? = nil,
+              phoneAuthProvider: PhoneAuthProviderProtocol? = nil) {
     self.auth = auth
     self.configuration = configuration
     self.googleProvider = googleProvider
     self.facebookProvider = facebookProvider
+    self.phoneAuthProvider = phoneAuthProvider
     string = StringUtils(bundle: configuration.customStringsBundle ?? Bundle.module)
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
   }
@@ -91,6 +97,7 @@ public final class AuthService {
   private var listenerManager: AuthListenerManager?
   private let googleProvider: GoogleProviderProtocol?
   private let facebookProvider: FacebookProviderProtocol?
+  private let phoneAuthProvider: PhoneAuthProviderProtocol?
 
   private var safeGoogleProvider: GoogleProviderProtocol {
     get throws {
@@ -107,6 +114,16 @@ public final class AuthService {
       guard let provider = facebookProvider else {
         throw AuthServiceError
           .notConfiguredProvider("`FacebookProviderSwift` has not been configured")
+      }
+      return provider
+    }
+  }
+
+  private var safePhoneAuthProvider: PhoneAuthProviderProtocol {
+    get throws {
+      guard let provider = phoneAuthProvider else {
+        throw AuthServiceError
+          .notConfiguredProvider("`PhoneAuthProviderSwift` has not been configured")
       }
       return provider
     }
@@ -245,6 +262,27 @@ public extension AuthService {
     do {
       let credential = try await safeFacebookProvider
         .signInWithFacebook(isLimitedLogin: limitedLogin)
+      try await signIn(with: credential)
+      updateAuthenticationState()
+    } catch {
+      authenticationState = .unauthenticated
+      throw error
+    }
+  }
+}
+
+// MARK: - Phone Auth Sign In
+
+public extension AuthService {
+  func verifyPhoneNumber(phoneNumber: String) async throws -> String {
+    return try await safePhoneAuthProvider.verifyPhoneNumber(phoneNumber: phoneNumber)
+  }
+
+  func signInWithPhoneNumber(verificationID: String, verificationCode: String) async throws {
+    authenticationState = .authenticating
+    do {
+      let credential = PhoneAuthProvider.provider()
+        .credential(withVerificationID: verificationID, verificationCode: verificationCode)
       try await signIn(with: credential)
       updateAuthenticationState()
     } catch {
