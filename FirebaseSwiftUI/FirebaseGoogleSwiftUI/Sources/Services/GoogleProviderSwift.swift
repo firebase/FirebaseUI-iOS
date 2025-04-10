@@ -6,7 +6,7 @@ let kGoogleUserInfoEmailScope = "https://www.googleapis.com/auth/userinfo.email"
 let kGoogleUserInfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile"
 let kDefaultScopes = [kGoogleUserInfoEmailScope, kGoogleUserInfoProfileScope]
 
-public enum GoogleError: Error {
+public enum GoogleProviderError: Error {
   case rootViewController(String)
   case authenticationToken(String)
   case user(String)
@@ -27,7 +27,7 @@ public class GoogleProviderSwift: @preconcurrency GoogleProviderProtocol {
   @MainActor public func signInWithGoogle(clientID: String) async throws -> AuthCredential {
     guard let presentingViewController = await (UIApplication.shared.connectedScenes
       .first as? UIWindowScene)?.windows.first?.rootViewController else {
-      throw GoogleError
+      throw GoogleProviderError
         .rootViewController("Root View controller is not available to present Google sign-in View.")
     }
 
@@ -45,7 +45,8 @@ public class GoogleProviderSwift: @preconcurrency GoogleProviderProtocol {
 
         guard let user = result?.user,
               let idToken = user.idToken?.tokenString else {
-          continuation.resume(throwing: GoogleError.user("Failed to retrieve user or idToken."))
+          continuation
+            .resume(throwing: GoogleProviderError.user("Failed to retrieve user or idToken."))
           return
         }
 
