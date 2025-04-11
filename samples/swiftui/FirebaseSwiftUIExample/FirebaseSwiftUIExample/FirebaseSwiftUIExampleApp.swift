@@ -22,11 +22,26 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                    didFinishLaunchingWithOptions launchOptions: [
                      UIApplication.LaunchOptionsKey: Any
                    ]?) -> Bool {
+    FirebaseApp.configure()
     ApplicationDelegate.shared.application(
       application,
       didFinishLaunchingWithOptions: launchOptions
     )
     return true
+  }
+
+  func application(_: UIApplication,
+                   didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    Auth.auth().setAPNSToken(deviceToken, type: .prod)
+  }
+
+  func application(_: UIApplication, didReceiveRemoteNotification notification: [AnyHashable: Any],
+                   fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult)
+                     -> Void) {
+    if Auth.auth().canHandleNotification(notification) {
+      completionHandler(.noData)
+      return
+    }
   }
 
   func application(_ app: UIApplication,
@@ -39,6 +54,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         .sourceApplication] as? String,
       annotation: options[UIApplication.OpenURLOptionsKey.annotation]
     )
+
     return googleProvider.handleUrl(url)
   }
 }
@@ -47,9 +63,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct FirebaseSwiftUIExampleApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-  init() {
-    FirebaseApp.configure()
-  }
+  init() {}
 
   var body: some Scene {
     WindowGroup {

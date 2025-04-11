@@ -17,13 +17,16 @@ extension PhoneAuthButtonView: View {
   public var body: some View {
     if authService.authenticationState != .authenticating {
       VStack {
-        TextField("Enter phone number", text: $phoneNumber)
-          .keyboardType(.phonePad)
-          .padding()
-          .background(Color(.systemGray6))
-          .cornerRadius(8)
-          .padding(.horizontal)
-
+        LabeledContent {
+          TextField("Enter phone number", text: $phoneNumber)
+            .textInputAutocapitalization(.never)
+            .disableAutocorrection(true)
+            .submitLabel(.next)
+        } label: {
+          Image(systemName: "at")
+        }.padding(.vertical, 6)
+          .background(Divider(), alignment: .bottom)
+          .padding(.bottom, 4)
         Button(action: {
           Task {
             do {
@@ -37,46 +40,46 @@ extension PhoneAuthButtonView: View {
             }
           }
         }) {
-          Text("Send Verification Code")
+          Text("Send SMS code")
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        }
+        .disabled(!PhoneUtils.isValidPhoneNumber(phoneNumber))
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity)
+        .buttonStyle(.borderedProminent)
+        Text(errorMessage).foregroundColor(.red)
+      }.sheet(isPresented: $showVerificationCodeInput) {
+        TextField("Enter verification code", text: $verificationCode)
+          .keyboardType(.numberPad)
+          .padding()
+          .background(Color(.systemGray6))
+          .cornerRadius(8)
+          .padding(.horizontal)
+
+        Button(action: {
+          Task {
+            do {
+              try await authService.signInWithPhoneNumber(
+                verificationID: verificationID,
+                verificationCode: verificationCode
+              )
+            } catch {
+              errorMessage = authService.string.localizedErrorMessage(for: error)
+            }
+            showVerificationCodeInput = false
+          }
+        }) {
+          Text("Verify phone number and sign-in")
             .foregroundColor(.white)
             .padding()
             .frame(maxWidth: .infinity)
-            .background(Color.blue)
+            .background(Color.green)
             .cornerRadius(8)
             .padding(.horizontal)
-        }.disabled(!PhoneUtils.isValidPhoneNumber(phoneNumber))
-      }
-      .sheet(isPresented: $showVerificationCodeInput) {
-        VStack {
-          TextField("Enter verification code", text: $verificationCode)
-            .keyboardType(.numberPad)
-            .padding()
-            .background(Color(.systemGray6))
-            .cornerRadius(8)
-            .padding(.horizontal)
-
-          Button(action: {
-            Task {
-              do {
-                try await authService.signInWithPhoneNumber(
-                  verificationID: verificationID,
-                  verificationCode: verificationCode
-                )
-              } catch {
-                errorMessage = authService.string.localizedErrorMessage(for: error)
-              }
-              showVerificationCodeInput = false
-            }
-          }) {
-            Text("Verify and Sign In")
-              .foregroundColor(.white)
-              .padding()
-              .frame(maxWidth: .infinity)
-              .background(Color.green)
-              .cornerRadius(8)
-              .padding(.horizontal)
-          }
         }
+      }.onOpenURL { url in
+        authService.auth.canHandle(url)
       }
     } else {
       ProgressView()
