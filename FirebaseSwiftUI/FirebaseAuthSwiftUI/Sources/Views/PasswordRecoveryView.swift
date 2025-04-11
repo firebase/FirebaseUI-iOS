@@ -57,6 +57,8 @@ extension PasswordRecoveryView: View {
         .padding()
       }
       .padding()
+    }.onOpenURL { _ in
+      // move the user to email/password View
     }
   }
 }
