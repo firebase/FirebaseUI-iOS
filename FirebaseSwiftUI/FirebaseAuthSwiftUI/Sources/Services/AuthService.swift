@@ -175,7 +175,11 @@ public final class AuthService {
       }
     }
   }
+}
 
+// MARK: - Email/Password Sign In
+
+public extension AuthService {
   func signIn(withEmail email: String, password: String) async throws {
     let credential = EmailAuthProvider.credential(withEmail: email, password: password)
     try await auth.signIn(with: credential)
@@ -199,7 +203,11 @@ public final class AuthService {
       throw error
     }
   }
+}
 
+// MARK: - Email Link Sign In
+
+public extension AuthService {
   func sendEmailSignInLink(to email: String) async throws {
     do {
       let actionCodeSettings = try safeActionCodeSettings()
