@@ -129,15 +129,14 @@ public final class AuthService {
     }
   }
 
-  private func safeActionCodeSettings(emailLinkSignIn: Bool = true) throws -> ActionCodeSettings {
-    guard let actionCodeSettings = emailLinkSignIn ? configuration
-      .emailLinkSignInActionCodeSettings : configuration.verifyEmailActionCodeSettings else {
-      let settingType = emailLinkSignIn ? "emailLinkSignInActionCodeSettings" :
-        "verifyEmailActionCodeSettings"
-      let errorMessage =
-        "ActionCodeSettings has not been configured for `AuthConfiguration.\(settingType)`"
+  private func safeActionCodeSettings() throws -> ActionCodeSettings {
+    // email sign-in requires action code settings
+    guard let actionCodeSettings = configuration
+      .emailLinkSignInActionCodeSettings else {
       throw AuthServiceError
-        .notConfiguredActionCodeSettings(errorMessage)
+        .notConfiguredActionCodeSettings(
+          "ActionCodeSettings has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`"
+        )
     }
     return actionCodeSettings
   }
