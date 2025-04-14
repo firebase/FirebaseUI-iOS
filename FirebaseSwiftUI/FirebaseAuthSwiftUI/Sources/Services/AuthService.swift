@@ -87,6 +87,7 @@ public final class AuthService {
   private let googleProvider: GoogleProviderProtocol?
   private let facebookProvider: FacebookProviderProtocol?
   private let phoneAuthProvider: PhoneAuthProviderProtocol?
+  private var signedInCredential: AuthCredential?
 
   private var safeGoogleProvider: GoogleProviderProtocol {
     get throws {
@@ -160,6 +161,7 @@ public final class AuthService {
     } else {
       do {
         try await auth.signIn(with: credentials)
+        signedInCredential = credentials
         updateAuthenticationState()
       } catch {
         authenticationState = .unauthenticated
@@ -180,6 +182,40 @@ public final class AuthService {
   }
 }
 
+// MARK: - User API
+
+extension Date {
+  func isWithinPast(minutes: Int) -> Bool {
+    let calendar = Calendar.current
+    guard let timeAgo = calendar.date(byAdding: .minute, value: -minutes, to: Date()) else {
+      return false
+    }
+    return self >= timeAgo && self <= Date()
+  }
+}
+
+public extension AuthService {
+  func reauthenticate() async throws {
+    if let user = auth.currentUser, let credential = signedInCredential {
+      try await user.reauthenticate(with: credential)
+    }
+  }
+
+  func deleteUser() async throws {
+    do {
+      if let user = auth.currentUser, let lastSignInDate = user.metadata.lastSignInDate {
+        let needsReauth = !lastSignInDate.isWithinPast(minutes: 5)
+        if needsReauth {
+          try await reauthenticate()
+        }
+        try await user.delete()
+      }
+    } catch {
+      throw error
+    }
+  }
+}
+
 // MARK: - Email/Password Sign In
 
 public extension AuthService {
@@ -193,6 +229,8 @@ public extension AuthService {
 
     do {
       try await auth.createUser(withEmail: email, password: password)
+      let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+      signedInCredential = credential
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
