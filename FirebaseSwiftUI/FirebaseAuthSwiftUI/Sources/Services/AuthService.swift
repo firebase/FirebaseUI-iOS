@@ -14,17 +14,6 @@ public protocol PhoneAuthProviderProtocol {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
 }
 
-public enum AuthenticationProvider {
-  case email
-  case google
-}
-
-public enum AuthenticationOperationType: String {
-  case signIn
-  case signUp
-  case deleteAccount
-}
-
 public enum AuthenticationState {
   case unauthenticated
   case authenticating
@@ -153,14 +142,29 @@ public final class AuthService {
     updateAuthenticationState()
   }
 
-  public func signIn(with credentials: AuthCredential) async throws {
+  public func linkAccounts(credentials credentials: AuthCredential) async throws {
     authenticationState = .authenticating
     do {
-      try await auth.signIn(with: credentials)
+      try await currentUser?.link(with: credentials)
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
       throw error
+    }
+  }
+
+  public func signIn(credentials credentials: AuthCredential) async throws {
+    authenticationState = .authenticating
+    if currentUser?.isAnonymous == true, configuration.shouldAutoUpgradeAnonymousUsers {
+      try await linkAccounts(credentials: credentials)
+    } else {
+      do {
+        try await auth.signIn(with: credentials)
+        updateAuthenticationState()
+      } catch {
+        authenticationState = .unauthenticated
+        throw error
+      }
     }
   }
 
@@ -181,11 +185,12 @@ public final class AuthService {
 public extension AuthService {
   func signIn(withEmail email: String, password: String) async throws {
     let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-    try await auth.signIn(with: credential)
+    try await signIn(credentials: credential)
   }
 
   func createUser(withEmail email: String, password: String) async throws {
     authenticationState = .authenticating
+
     do {
       try await auth.createUser(withEmail: email, password: password)
       updateAuthenticationState()
@@ -252,7 +257,7 @@ public extension AuthService {
       }
       let credential = try await safeGoogleProvider.signInWithGoogle(clientID: clientID)
 
-      try await signIn(with: credential)
+      try await signIn(credentials: credential)
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
@@ -269,7 +274,7 @@ public extension AuthService {
     do {
       let credential = try await safeFacebookProvider
         .signInWithFacebook(isLimitedLogin: limitedLogin)
-      try await signIn(with: credential)
+      try await signIn(credentials: credential)
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
@@ -290,7 +295,7 @@ public extension AuthService {
     do {
       let credential = PhoneAuthProvider.provider()
         .credential(withVerificationID: verificationID, verificationCode: verificationCode)
-      try await signIn(with: credential)
+      try await signIn(credentials: credential)
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated

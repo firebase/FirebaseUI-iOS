@@ -4,6 +4,7 @@
 //
 //  Created by Russell Wheatley on 20/03/2025.
 //
+import FirebaseAuth
 import SwiftUI
 
 private enum FocusableField: Hashable {
@@ -36,10 +37,19 @@ public struct EmailAuthView {
   private func signInWithEmailPassword() async {
     do {
       try await authService.signIn(withEmail: email, password: password)
-    } catch {
-      errorMessage = authService.string.localizedErrorMessage(
-        for: error
-      )
+    } catch let error as NSError {
+      switch AuthErrorCode(rawValue: error.code) {
+      case .credentialAlreadyInUse:
+        // TODO: - how are we handling this?
+        if let updatedCredential = error
+          .userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? AuthCredential {
+          // user ought to merge accounts on their backend here
+        }
+      default:
+        errorMessage = authService.string.localizedErrorMessage(
+          for: error
+        )
+      }
     }
   }
 
