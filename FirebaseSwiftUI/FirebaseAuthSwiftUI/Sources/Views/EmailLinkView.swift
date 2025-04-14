@@ -4,7 +4,6 @@ import SwiftUI
 public struct EmailLinkView {
   @Environment(AuthService.self) private var authService
   @State private var email = ""
-  @State private var errorMessage = ""
   @State private var showModal = false
 
   public init() {}
@@ -13,9 +12,7 @@ public struct EmailLinkView {
     do {
       try await authService.sendEmailSignInLink(to: email)
       showModal = true
-    } catch {
-      errorMessage = error.localizedDescription
-    }
+    } catch {}
   }
 }
 
@@ -47,7 +44,7 @@ extension EmailLinkView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
-      Text(errorMessage).foregroundColor(.red)
+      Text(authService.errorMessage).foregroundColor(.red)
     }.sheet(isPresented: $showModal) {
       VStack {
         Text("Instructions")
@@ -64,9 +61,7 @@ extension EmailLinkView: View {
       Task {
         do {
           try await authService.handleSignInLink(url: url)
-        } catch {
-          errorMessage = authService.string.localizedErrorMessage(for: error)
-        }
+        } catch {}
       }
     }
   }

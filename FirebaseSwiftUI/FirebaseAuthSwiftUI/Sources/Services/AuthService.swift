@@ -82,6 +82,7 @@ public final class AuthService {
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .login
+  public var errorMessage = ""
 
   private var listenerManager: AuthListenerManager?
   private let googleProvider: GoogleProviderProtocol?
@@ -132,15 +133,27 @@ public final class AuthService {
   }
 
   public func updateAuthenticationState() {
+    reset()
     authenticationState =
       (currentUser == nil || currentUser?.isAnonymous == true)
         ? .unauthenticated
         : .authenticated
   }
 
+  func reset() {
+    errorMessage = ""
+  }
+
   public func signOut() async throws {
-    try await auth.signOut()
-    updateAuthenticationState()
+    do {
+      try await auth.signOut()
+      updateAuthenticationState()
+    } catch {
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
+      throw error
+    }
   }
 
   public func linkAccounts(credentials credentials: AuthCredential) async throws {
@@ -150,6 +163,9 @@ public final class AuthService {
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
       throw error
     }
   }
@@ -165,6 +181,9 @@ public final class AuthService {
         updateAuthenticationState()
       } catch {
         authenticationState = .unauthenticated
+        errorMessage = string.localizedErrorMessage(
+          for: error
+        )
         throw error
       }
     }
@@ -176,6 +195,9 @@ public final class AuthService {
         // TODO: - can use set user action code settings?
         try await currentUser!.sendEmailVerification()
       } catch {
+        errorMessage = string.localizedErrorMessage(
+          for: error
+        )
         throw error
       }
     }
@@ -211,6 +233,9 @@ public extension AuthService {
         try await user.delete()
       }
     } catch {
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
       throw error
     }
   }
@@ -234,6 +259,9 @@ public extension AuthService {
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
       throw error
     }
   }
@@ -242,6 +270,9 @@ public extension AuthService {
     do {
       try await auth.sendPasswordReset(withEmail: email)
     } catch {
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
       throw error
     }
   }
@@ -258,6 +289,9 @@ public extension AuthService {
         actionCodeSettings: actionCodeSettings
       )
     } catch {
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
       throw error
     }
   }
@@ -276,6 +310,9 @@ public extension AuthService {
         emailLink = nil
       }
     } catch {
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
       throw error
     }
   }
@@ -299,6 +336,9 @@ public extension AuthService {
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
       throw error
     }
   }
@@ -316,6 +356,9 @@ public extension AuthService {
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
       throw error
     }
   }
@@ -325,7 +368,14 @@ public extension AuthService {
 
 public extension AuthService {
   func verifyPhoneNumber(phoneNumber: String) async throws -> String {
-    return try await safePhoneAuthProvider.verifyPhoneNumber(phoneNumber: phoneNumber)
+    do {
+      return try await safePhoneAuthProvider.verifyPhoneNumber(phoneNumber: phoneNumber)
+    } catch {
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
+      throw error
+    }
   }
 
   func signInWithPhoneNumber(verificationID: String, verificationCode: String) async throws {
@@ -337,6 +387,9 @@ public extension AuthService {
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
       throw error
     }
   }

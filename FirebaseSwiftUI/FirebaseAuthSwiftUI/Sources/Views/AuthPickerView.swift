@@ -40,6 +40,7 @@ extension AuthPickerView: View {
               .foregroundColor(.blue)
           }
         }
+        Text(authService.errorMessage).foregroundColor(.red)
       }
     }
   }

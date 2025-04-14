@@ -20,7 +20,6 @@ public struct EmailAuthView {
   @State private var email = ""
   @State private var password = ""
   @State private var confirmPassword = ""
-  @State private var errorMessage = ""
 
   @FocusState private var focus: FocusableField?
 
@@ -39,16 +38,13 @@ public struct EmailAuthView {
       try await authService.signIn(withEmail: email, password: password)
     } catch let error as NSError {
       switch AuthErrorCode(rawValue: error.code) {
-      case .credentialAlreadyInUse:
+//      case .credentialAlreadyInUse:
+      default:
         // TODO: - how are we handling this?
         if let updatedCredential = error
           .userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? AuthCredential {
           // user ought to merge accounts on their backend here
         }
-      default:
-        errorMessage = authService.string.localizedErrorMessage(
-          for: error
-        )
       }
     }
   }
@@ -56,11 +52,7 @@ public struct EmailAuthView {
   private func createUserWithEmailPassword() async {
     do {
       try await authService.createUser(withEmail: email, password: password)
-    } catch {
-      errorMessage = authService.string.localizedErrorMessage(
-        for: error
-      )
-    }
+    } catch {}
   }
 }
 
@@ -145,7 +137,6 @@ extension EmailAuthView: View {
         .environment(authService)) {
           Text("Prefer Email link sign-in?")
         }
-      Text(errorMessage).foregroundColor(.red)
     }
   }
 }

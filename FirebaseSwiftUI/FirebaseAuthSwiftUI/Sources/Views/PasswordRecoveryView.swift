@@ -3,7 +3,6 @@ import SwiftUI
 public struct PasswordRecoveryView {
   @Environment(AuthService.self) private var authService
   @State private var email = ""
-  @State private var errorMessage = ""
   @State private var showModal = false
 
   public init() {}
@@ -12,9 +11,7 @@ public struct PasswordRecoveryView {
     do {
       try await authService.sendPasswordRecoveryEmail(to: email)
       showModal = true
-    } catch {
-      errorMessage = error.localizedDescription
-    }
+    } catch {}
   }
 }
 
