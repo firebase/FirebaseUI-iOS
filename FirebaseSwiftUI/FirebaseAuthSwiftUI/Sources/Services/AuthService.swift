@@ -306,7 +306,7 @@ public extension AuthService {
     do {
       guard let email = emailLink else {
         throw AuthServiceError.invalidEmailLink(
-          "Invalid email address. Most likely, the link you used has expired. Try signing in again."
+          "Invalid sign in link. Most likely, the link you used has expired. Try signing in again."
         )
       }
       let link = url.absoluteString
