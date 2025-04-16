@@ -7,7 +7,7 @@ let kGoogleUserInfoProfileScope = "https://www.googleapis.com/auth/userinfo.prof
 let kDefaultScopes = [kGoogleUserInfoEmailScope, kGoogleUserInfoProfileScope]
 
 public enum GoogleProviderError: Error {
-  case rootViewController(String)
+  case rootViewControllerNotFound(String)
   case authenticationToken(String)
   case user(String)
 }
@@ -28,7 +28,7 @@ public class GoogleProviderSwift: @preconcurrency GoogleProviderProtocol {
     guard let presentingViewController = await (UIApplication.shared.connectedScenes
       .first as? UIWindowScene)?.windows.first?.rootViewController else {
       throw GoogleProviderError
-        .rootViewController("Root View controller is not available to present Google sign-in View.")
+        .rootViewControllerNotFound("Root View controller is not available to present Google sign-in View.")
     }
 
     let config = GIDConfiguration(clientID: clientID)
