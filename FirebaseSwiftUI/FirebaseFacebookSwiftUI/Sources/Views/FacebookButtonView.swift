@@ -10,20 +10,24 @@ public struct FacebookButtonView {
   @Environment(AuthService.self) private var authService
   @State private var errorMessage = ""
   @State private var showCanceledAlert = false
-  @State private var showUserTrackingAlert = false
   @State private var limitedLogin = true
+  @State private var showUserTrackingAlert = false
+  @State private var trackingAuthorizationStatus: ATTrackingManager
+    .AuthorizationStatus = .notDetermined
 
-  public init() {}
+  public init() {
+    _trackingAuthorizationStatus = State(initialValue: ATTrackingManager
+      .trackingAuthorizationStatus)
+  }
 
   private var limitedLoginBinding: Binding<Bool> {
     Binding(
       get: { self.limitedLogin },
       set: { newValue in
-        let trackingStatus = ATTrackingManager.trackingAuthorizationStatus
-        if newValue == true, trackingStatus != .authorized {
-          self.showUserTrackingAlert = true
-        } else {
+        if trackingAuthorizationStatus == .authorized {
           self.limitedLogin = newValue
+        } else {
+          self.limitedLogin = false
         }
       }
     )
@@ -31,13 +35,11 @@ public struct FacebookButtonView {
 
   func requestTrackingPermission() {
     ATTrackingManager.requestTrackingAuthorization { status in
-      switch status {
-      case .authorized:
-        print("Tracking authorized")
-      case .denied, .restricted, .notDetermined:
-        print("Tracking not authorized")
-      @unknown default:
-        print("Unknown status")
+      Task { @MainActor in
+        trackingAuthorizationStatus = status
+        if status != .authorized {
+          showUserTrackingAlert = true
+        }
       }
     }
   }
