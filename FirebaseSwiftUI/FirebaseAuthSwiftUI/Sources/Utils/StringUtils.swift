@@ -20,7 +20,9 @@ public class StringUtils {
   }
 
   public func localizedString(forKey key: String) -> String {
-    return bundle.localizedString(forKey: key, value: nil, table: nil)
+    let keyLocale = String.LocalizationValue(key)
+    let value = String(localized: keyLocale, bundle: bundle)
+    return value
   }
 
   public func localizedErrorMessage(for error: Error) -> String {
