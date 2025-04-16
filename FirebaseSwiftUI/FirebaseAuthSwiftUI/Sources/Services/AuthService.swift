@@ -39,7 +39,7 @@ public enum AuthServiceError: Error {
 }
 
 @MainActor
-final class AuthListenerManager {
+private final class AuthListenerManager {
   private var authStateHandle: AuthStateDidChangeListenerHandle?
   private let auth: Auth
   private weak var authEnvironment: AuthService?
