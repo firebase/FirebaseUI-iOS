@@ -20,6 +20,10 @@ extension AuthPickerView: View {
     VStack {
       if authService.authenticationState == .authenticated {
         SignedInView()
+      } else if authService.authView == .passwordRecovery {
+        PasswordRecoveryView()
+      } else if authService.authView == .emailLink {
+        EmailLinkView()
       } else {
         Text(authService.authenticationFlow == .login ? "Login" : "Sign up")
         VStack { Divider() }

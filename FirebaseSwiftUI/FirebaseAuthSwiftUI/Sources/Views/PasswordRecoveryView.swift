@@ -57,5 +57,13 @@ extension PasswordRecoveryView: View {
     }.onOpenURL { _ in
       // move the user to email/password View
     }
+    .navigationBarItems(leading: Button(action: {
+      authService.authView = .authPicker
+    }) {
+      Image(systemName: "chevron.left")
+        .foregroundColor(.blue)
+      Text("Back")
+        .foregroundColor(.blue)
+    })
   }
 }

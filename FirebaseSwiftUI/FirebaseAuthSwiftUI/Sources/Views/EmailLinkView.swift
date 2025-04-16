@@ -64,5 +64,13 @@ extension EmailLinkView: View {
         } catch {}
       }
     }
+    .navigationBarItems(leading: Button(action: {
+      authService.authView = .authPicker
+    }) {
+      Image(systemName: "chevron.left")
+        .foregroundColor(.blue)
+      Text("Back")
+        .foregroundColor(.blue)
+    })
   }
 }

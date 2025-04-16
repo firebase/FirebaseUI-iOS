@@ -90,10 +90,11 @@ extension EmailAuthView: View {
       .padding(.bottom, 8)
 
       if authService.authenticationFlow == .login {
-        NavigationLink(destination: PasswordRecoveryView()
-          .environment(authService)) {
-            Text("Forgotten Password?")
-          }
+        Button(action: {
+          authService.authView = .passwordRecovery
+        }) {
+          Text("Forgotten Password?")
+        }
       }
 
       if authService.authenticationFlow == .signUp {
@@ -133,10 +134,11 @@ extension EmailAuthView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
-      NavigationLink(destination: EmailLinkView().environment(authService)
-        .environment(authService)) {
-          Text("Prefer Email link sign-in?")
-        }
+      Button(action: {
+        authService.authView = .passwordRecovery
+      }) {
+        Text("Prefer Email link sign-in?")
+      }
     }
   }
 }

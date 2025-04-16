@@ -25,6 +25,12 @@ public enum AuthenticationFlow {
   case signUp
 }
 
+public enum AuthView {
+  case authPicker
+  case passwordRecovery
+  case emailLink
+}
+
 public enum AuthServiceError: Error {
   case invalidEmailLink(String)
   case notConfiguredProvider(String)
@@ -77,7 +83,7 @@ public final class AuthService {
   @ObservationIgnored @AppStorage("email-link") public var emailLink: String?
   public let configuration: AuthConfiguration
   public let auth: Auth
-
+  public var authView: AuthView = .authPicker
   public let string: StringUtils
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
