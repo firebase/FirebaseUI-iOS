@@ -28,7 +28,9 @@ public class GoogleProviderSwift: @preconcurrency GoogleProviderProtocol {
     guard let presentingViewController = await (UIApplication.shared.connectedScenes
       .first as? UIWindowScene)?.windows.first?.rootViewController else {
       throw GoogleProviderError
-        .rootViewControllerNotFound("Root View controller is not available to present Google sign-in View.")
+        .rootViewControllerNotFound(
+          "Root View controller is not available to present Google sign-in View."
+        )
     }
 
     let config = GIDConfiguration(clientID: clientID)
