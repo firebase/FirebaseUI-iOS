@@ -1,7 +1,7 @@
 import FirebaseAuth
 import Foundation
 
-public final class AuthConfiguration {
+public struct AuthConfiguration {
   let shouldHideCancelButton: Bool
   let interactiveDismissEnabled: Bool
   let shouldAutoUpgradeAnonymousUsers: Bool
