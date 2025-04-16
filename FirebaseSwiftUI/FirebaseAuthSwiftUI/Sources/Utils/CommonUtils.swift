@@ -2,8 +2,15 @@ import CommonCrypto
 import Foundation
 import Security
 
-class FacebookUtils {
-  static func randomNonce(length: Int = 32) -> String {
+public class CommonUtils {
+  static let emailRegex = ".+@([a-zA-Z0-9\\-]+\\.)+[a-zA-Z0-9]{2,63}"
+
+  public static func isValidEmail(_ email: String) -> Bool {
+    let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+    return emailPredicate.evaluate(with: email)
+  }
+
+  public static func randomNonce(length: Int = 32) -> String {
     let characterSet = "0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._"
     var result = ""
     var remainingLength = length
@@ -31,7 +38,7 @@ class FacebookUtils {
     return result
   }
 
-  static func sha256Hash(of input: String) -> String {
+  public static func sha256Hash(of input: String) -> String {
     guard let data = input.data(using: .utf8) else { return "" }
     var hash = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
     data.withUnsafeBytes {

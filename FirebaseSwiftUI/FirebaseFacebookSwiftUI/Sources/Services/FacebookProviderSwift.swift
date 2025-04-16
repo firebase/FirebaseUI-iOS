@@ -30,8 +30,8 @@ public class FacebookProviderSwift: FacebookProviderProtocol {
 
   public init(scopes: [String]? = nil) {
     self.scopes = scopes ?? kDefaultFacebookScopes
-    rawNonce = FacebookUtils.randomNonce()
-    shaNonce = FacebookUtils.sha256Hash(of: rawNonce)
+    rawNonce = CommonUtils.randomNonce()
+    shaNonce = CommonUtils.sha256Hash(of: rawNonce)
   }
 
   @MainActor public func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential {
