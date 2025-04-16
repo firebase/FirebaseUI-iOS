@@ -102,7 +102,7 @@ struct ContentView: View {
 
   var body: some View {
     AuthPickerView {
-      GoogleButtonView()
+      SignInWithAppleButton()
       FacebookButtonView()
       PhoneAuthButtonView()
     }.environment(authService)
