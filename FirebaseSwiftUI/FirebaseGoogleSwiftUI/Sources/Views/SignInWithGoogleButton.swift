@@ -2,7 +2,7 @@ import FirebaseAuthSwiftUI
 import SwiftUI
 
 @MainActor
-public struct SignInWithAppleButton {
+public struct SignInWithGoogleButton {
   @Environment(AuthService.self) private var authService
   @State private var errorMessage = ""
 
@@ -19,7 +19,7 @@ public struct SignInWithAppleButton {
   }
 }
 
-extension SignInWithAppleButton: View {
+extension SignInWithGoogleButton: View {
   public var body: some View {
     Button(action: {
       Task {
