@@ -15,8 +15,6 @@ import FirebasePhoneAuthSwiftUI
 import SwiftData
 import SwiftUI
 
-let googleProvider = GoogleProviderSwift()
-
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [

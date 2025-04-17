@@ -1,16 +1,20 @@
 @preconcurrency import FirebaseAuth
 import SwiftUI
 
-public protocol GoogleProviderProtocol {
+public protocol ExternalAuthProvider {
+  @MainActor var authButton: any View { get }
+}
+
+public protocol GoogleProviderProtocol: ExternalAuthProvider {
   func handleUrl(_ url: URL) -> Bool
   @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
 }
 
-public protocol FacebookProviderProtocol {
+public protocol FacebookProviderProtocol: ExternalAuthProvider {
   @MainActor func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential
 }
 
-public protocol PhoneAuthProviderProtocol {
+public protocol PhoneAuthProviderProtocol: ExternalAuthProvider {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
 }
 
@@ -90,10 +94,11 @@ public final class AuthService {
   public var authenticationFlow: AuthenticationFlow = .login
   public var errorMessage = ""
 
+  public var googleProvider: GoogleProviderProtocol?
+  public var facebookProvider: FacebookProviderProtocol?
+  public var phoneAuthProvider: PhoneAuthProviderProtocol?
+
   private var listenerManager: AuthListenerManager?
-  private let googleProvider: GoogleProviderProtocol?
-  private let facebookProvider: FacebookProviderProtocol?
-  private let phoneAuthProvider: PhoneAuthProviderProtocol?
   private var signedInCredential: AuthCredential?
 
   private var safeGoogleProvider: GoogleProviderProtocol {
