@@ -4,18 +4,13 @@ import SwiftUI
 @MainActor
 public struct SignInWithGoogleButton {
   @Environment(AuthService.self) private var authService
-  @State private var errorMessage = ""
 
   public init() {}
 
   private func signInWithGoogle() async {
     do {
       try await authService.signInWithGoogle()
-    } catch {
-      errorMessage = authService.string.localizedErrorMessage(
-        for: error
-      )
-    }
+    } catch {}
   }
 }
 
@@ -52,6 +47,5 @@ extension SignInWithGoogleButton: View {
           .frame(maxWidth: .infinity)
       }
     }
-    Text(errorMessage).foregroundColor(.red)
   }
 }
