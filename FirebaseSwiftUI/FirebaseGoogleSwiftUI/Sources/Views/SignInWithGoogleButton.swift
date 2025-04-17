@@ -2,24 +2,19 @@ import FirebaseAuthSwiftUI
 import SwiftUI
 
 @MainActor
-public struct SignInWithAppleButton {
+public struct SignInWithGoogleButton {
   @Environment(AuthService.self) private var authService
-  @State private var errorMessage = ""
 
   public init() {}
 
   private func signInWithGoogle() async {
     do {
       try await authService.signInWithGoogle()
-    } catch {
-      errorMessage = authService.string.localizedErrorMessage(
-        for: error
-      )
-    }
+    } catch {}
   }
 }
 
-extension SignInWithAppleButton: View {
+extension SignInWithGoogleButton: View {
   public var body: some View {
     Button(action: {
       Task {
@@ -52,6 +47,5 @@ extension SignInWithAppleButton: View {
           .frame(maxWidth: .infinity)
       }
     }
-    Text(errorMessage).foregroundColor(.red)
   }
 }
