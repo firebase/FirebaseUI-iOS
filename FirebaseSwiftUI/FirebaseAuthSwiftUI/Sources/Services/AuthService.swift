@@ -296,25 +296,15 @@ public extension AuthService {
 
 public extension AuthService {
   func signInWithGoogle() async throws {
-    authenticationState = .authenticating
-    do {
-      guard let clientID = auth.app?.options.clientID else {
-        throw AuthServiceError
-          .clientIdNotFound(
-            "OAuth client ID not found. Please make sure Google Sign-In is enabled in the Firebase console. You may have to download a new GoogleService-Info.plist file after enabling Google Sign-In."
-          )
-      }
-      let credential = try await safeGoogleProvider.signInWithGoogle(clientID: clientID)
-
-      try await signIn(credentials: credential)
-      updateAuthenticationState()
-    } catch {
-      authenticationState = .unauthenticated
-      errorMessage = string.localizedErrorMessage(
-        for: error
-      )
-      throw error
+    guard let clientID = auth.app?.options.clientID else {
+      throw AuthServiceError
+        .clientIdNotFound(
+          "OAuth client ID not found. Please make sure Google Sign-In is enabled in the Firebase console. You may have to download a new GoogleService-Info.plist file after enabling Google Sign-In."
+        )
     }
+    let credential = try await safeGoogleProvider.signInWithGoogle(clientID: clientID)
+
+    try await signIn(credentials: credential)
   }
 }
 
@@ -322,19 +312,9 @@ public extension AuthService {
 
 public extension AuthService {
   func signInWithFacebook(limitedLogin: Bool = true) async throws {
-    authenticationState = .authenticating
-    do {
-      let credential = try await safeFacebookProvider
-        .signInWithFacebook(isLimitedLogin: limitedLogin)
-      try await signIn(credentials: credential)
-      updateAuthenticationState()
-    } catch {
-      authenticationState = .unauthenticated
-      errorMessage = string.localizedErrorMessage(
-        for: error
-      )
-      throw error
-    }
+    let credential = try await safeFacebookProvider
+      .signInWithFacebook(isLimitedLogin: limitedLogin)
+    try await signIn(credentials: credential)
   }
 }
 
@@ -353,18 +333,8 @@ public extension AuthService {
   }
 
   func signInWithPhoneNumber(verificationID: String, verificationCode: String) async throws {
-    authenticationState = .authenticating
-    do {
-      let credential = PhoneAuthProvider.provider()
-        .credential(withVerificationID: verificationID, verificationCode: verificationCode)
-      try await signIn(credentials: credential)
-      updateAuthenticationState()
-    } catch {
-      authenticationState = .unauthenticated
-      errorMessage = string.localizedErrorMessage(
-        for: error
-      )
-      throw error
-    }
+    let credential = PhoneAuthProvider.provider()
+      .credential(withVerificationID: verificationID, verificationCode: verificationCode)
+    try await signIn(credentials: credential)
   }
 }
