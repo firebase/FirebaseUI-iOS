@@ -232,7 +232,6 @@ public extension AuthService {
 
     do {
       try await auth.createUser(withEmail: email, password: password)
-      let credential = EmailAuthProvider.credential(withEmail: email, password: password)
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
