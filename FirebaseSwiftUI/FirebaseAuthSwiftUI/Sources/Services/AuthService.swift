@@ -14,6 +14,10 @@ public protocol PhoneAuthProviderProtocol {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
 }
 
+public protocol TwitterProviderProtocol {
+  @MainActor func signInWithTwitter() async throws -> AuthCredential
+}
+
 public enum AuthenticationState {
   case unauthenticated
   case authenticating
