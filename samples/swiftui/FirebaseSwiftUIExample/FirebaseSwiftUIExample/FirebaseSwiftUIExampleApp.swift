@@ -12,6 +12,7 @@ import FirebaseCore
 import FirebaseFacebookSwiftUI
 import FirebaseGoogleSwiftUI
 import FirebasePhoneAuthSwiftUI
+import FirebaseTwitterSwiftUI
 import SwiftData
 import SwiftUI
 
@@ -92,11 +93,13 @@ struct ContentView: View {
     )
     let facebookProvider = FacebookProviderSwift()
     let phoneAuthProvider = PhoneAuthProviderSwift()
+    let twitterProvider = TwitterProviderSwift()
     authService = AuthService(
       configuration: configuration,
       googleProvider: googleProvider,
       facebookProvider: facebookProvider,
-      phoneAuthProvider: phoneAuthProvider
+      phoneAuthProvider: phoneAuthProvider,
+      twitterProvider: twitterProvider
     )
   }
 
@@ -104,6 +107,7 @@ struct ContentView: View {
     AuthPickerView {
       SignInWithAppleButton()
       FacebookButtonView()
+      SignInWithTwitterButton()
       PhoneAuthButtonView()
     }.environment(authService)
   }

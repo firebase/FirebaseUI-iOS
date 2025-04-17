@@ -320,7 +320,10 @@ let package = Package(
       dependencies: [
         "FirebaseAuthSwiftUI",
       ],
-      path: "FirebaseSwiftUI/FirebaseTwitterSwiftUI/Sources"
+      path: "FirebaseSwiftUI/FirebaseTwitterSwiftUI/Sources",
+      resources: [
+        .process("Assets"),
+      ]
     ),
     .testTarget(
       name: "FirebaseTwitterSwiftUITests",

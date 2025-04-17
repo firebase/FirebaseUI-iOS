@@ -67,12 +67,14 @@ public final class AuthService {
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
               googleProvider: GoogleProviderProtocol? = nil,
               facebookProvider: FacebookProviderProtocol? = nil,
-              phoneAuthProvider: PhoneAuthProviderProtocol? = nil) {
+              phoneAuthProvider: PhoneAuthProviderProtocol? = nil,
+              twitterProvider: TwitterProviderProtocol? = nil) {
     self.auth = auth
     self.configuration = configuration
     self.googleProvider = googleProvider
     self.facebookProvider = facebookProvider
     self.phoneAuthProvider = phoneAuthProvider
+    self.twitterProvider = twitterProvider
     string = StringUtils(bundle: configuration.customStringsBundle ?? Bundle.module)
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
   }
@@ -92,6 +94,7 @@ public final class AuthService {
   private let googleProvider: GoogleProviderProtocol?
   private let facebookProvider: FacebookProviderProtocol?
   private let phoneAuthProvider: PhoneAuthProviderProtocol?
+  private let twitterProvider: TwitterProviderProtocol?
 
   private var safeGoogleProvider: GoogleProviderProtocol {
     get throws {
@@ -118,6 +121,16 @@ public final class AuthService {
       guard let provider = phoneAuthProvider else {
         throw AuthServiceError
           .notConfiguredProvider("`PhoneAuthProviderSwift` has not been configured")
+      }
+      return provider
+    }
+  }
+
+  private var safeTwitterProvider: TwitterProviderProtocol {
+    get throws {
+      guard let provider = twitterProvider else {
+        throw AuthServiceError
+          .notConfiguredProvider("`TwitterProviderSwift` has not been configured")
       }
       return provider
     }
@@ -339,6 +352,16 @@ public extension AuthService {
       )
       throw error
     }
+  }
+}
+
+// MARK: - Twitter Sign In
+
+public extension AuthService {
+  func signInWithTwitter() async throws {
+    let credential = try await safeTwitterProvider
+      .signInWithTwitter()
+    try await signIn(credentials: credential)
   }
 }
 

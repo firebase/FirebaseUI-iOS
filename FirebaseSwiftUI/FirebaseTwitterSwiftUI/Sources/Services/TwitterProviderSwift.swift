@@ -10,5 +10,21 @@ public class TwitterProviderSwift: TwitterProviderProtocol {
     self.scopes = scopes ?? ["user.readwrite"]
   }
 
-  @MainActor public func signInWithTwitter() async throws -> AuthCredential {}
+  @MainActor public func signInWithTwitter() async throws -> AuthCredential {
+    let provider = OAuthProvider(providerID: providerId)
+    return try await withCheckedThrowingContinuation { continuation in
+      provider.getCredentialWith(nil) { credential, error in
+        if let error {
+          continuation
+            .resume(throwing: AuthServiceError.signInFailed(underlying: error))
+        } else if let credential {
+          continuation.resume(returning: credential)
+        } else {
+          continuation
+            .resume(throwing: AuthServiceError
+              .invalidCredentials("Twitter did not provide a valid AuthCredential"))
+        }
+      }
+    }
+  }
 }
