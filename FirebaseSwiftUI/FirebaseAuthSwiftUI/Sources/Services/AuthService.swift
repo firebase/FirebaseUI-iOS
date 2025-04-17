@@ -31,13 +31,6 @@ public enum AuthView {
   case emailLink
 }
 
-public enum AuthServiceError: Error {
-  case invalidEmailLink(String)
-  case notConfiguredProvider(String)
-  case clientIdNotFound(String)
-  case notConfiguredActionCodeSettings(String)
-}
-
 @MainActor
 private final class AuthListenerManager {
   private var authStateHandle: AuthStateDidChangeListenerHandle?
@@ -89,12 +82,12 @@ public final class AuthService {
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .login
   public var errorMessage = ""
+  public let passwordPrompt: PasswordPromptCoordinator = .init()
 
   private var listenerManager: AuthListenerManager?
   private let googleProvider: GoogleProviderProtocol?
   private let facebookProvider: FacebookProviderProtocol?
   private let phoneAuthProvider: PhoneAuthProviderProtocol?
-  private var signedInCredential: AuthCredential?
 
   private var safeGoogleProvider: GoogleProviderProtocol {
     get throws {
@@ -131,9 +124,7 @@ public final class AuthService {
     guard let actionCodeSettings = configuration
       .emailLinkSignInActionCodeSettings else {
       throw AuthServiceError
-        .notConfiguredActionCodeSettings(
-          "ActionCodeSettings has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`"
-        )
+        .notConfiguredActionCodeSettings
     }
     return actionCodeSettings
   }
@@ -183,7 +174,6 @@ public final class AuthService {
     } else {
       do {
         try await auth.signIn(with: credentials)
-        signedInCredential = credentials
         updateAuthenticationState()
       } catch {
         authenticationState = .unauthenticated
@@ -212,32 +202,14 @@ public final class AuthService {
 
 // MARK: - User API
 
-extension Date {
-  func isWithinPast(minutes: Int) -> Bool {
-    let calendar = Calendar.current
-    guard let timeAgo = calendar.date(byAdding: .minute, value: -minutes, to: Date()) else {
-      return false
-    }
-    return self >= timeAgo && self <= Date()
-  }
-}
-
 public extension AuthService {
-  func reauthenticate() async throws {
-    if let user = auth.currentUser, let credential = signedInCredential {
-      try await user.reauthenticate(with: credential)
-    }
-  }
-
   func deleteUser() async throws {
     do {
-      if let user = auth.currentUser, let lastSignInDate = user.metadata.lastSignInDate {
-        let needsReauth = !lastSignInDate.isWithinPast(minutes: 5)
-        if needsReauth {
-          try await reauthenticate()
-        }
-        try await user.delete()
+      if let user = auth.currentUser {
+        let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
+        try await operation(on: user)
       }
+
     } catch {
       errorMessage = string.localizedErrorMessage(
         for: error
@@ -261,7 +233,6 @@ public extension AuthService {
     do {
       try await auth.createUser(withEmail: email, password: password)
       let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-      signedInCredential = credential
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
@@ -305,9 +276,7 @@ public extension AuthService {
   func handleSignInLink(url url: URL) async throws {
     do {
       guard let email = emailLink else {
-        throw AuthServiceError.invalidEmailLink(
-          "Invalid sign in link. Most likely, the link you used has expired. Try signing in again."
-        )
+        throw AuthServiceError.invalidEmailLink
       }
       let link = url.absoluteString
       if auth.isSignIn(withEmailLink: link) {
