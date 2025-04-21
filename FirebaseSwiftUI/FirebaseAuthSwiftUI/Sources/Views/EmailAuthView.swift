@@ -36,17 +36,7 @@ public struct EmailAuthView {
   private func signInWithEmailPassword() async {
     do {
       try await authService.signIn(withEmail: email, password: password)
-    } catch let error as NSError {
-      switch AuthErrorCode(rawValue: error.code) {
-//      case .credentialAlreadyInUse:
-      default:
-        // TODO: - how are we handling this?
-        if let updatedCredential = error
-          .userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? AuthCredential {
-          // user ought to merge accounts on their backend here
-        }
-      }
-    }
+    } catch {}
   }
 
   private func createUserWithEmailPassword() async {

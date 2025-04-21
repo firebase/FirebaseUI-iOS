@@ -35,13 +35,6 @@ public enum AuthView {
   case emailLink
 }
 
-public enum AuthServiceError: Error {
-  case invalidEmailLink(String)
-  case notConfiguredProvider(String)
-  case clientIdNotFound(String)
-  case notConfiguredActionCodeSettings(String)
-}
-
 @MainActor
 private final class AuthListenerManager {
   private var authStateHandle: AuthStateDidChangeListenerHandle?
@@ -93,6 +86,7 @@ public final class AuthService {
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .login
   public var errorMessage = ""
+  public let passwordPrompt: PasswordPromptCoordinator = .init()
 
   public var googleProvider: GoogleProviderProtocol?
   public var facebookProvider: FacebookProviderProtocol?
@@ -136,9 +130,7 @@ public final class AuthService {
     guard let actionCodeSettings = configuration
       .emailLinkSignInActionCodeSettings else {
       throw AuthServiceError
-        .notConfiguredActionCodeSettings(
-          "ActionCodeSettings has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`"
-        )
+        .notConfiguredActionCodeSettings
     }
     return actionCodeSettings
   }
@@ -188,7 +180,6 @@ public final class AuthService {
     } else {
       do {
         try await auth.signIn(with: credentials)
-        signedInCredential = credentials
         updateAuthenticationState()
       } catch {
         authenticationState = .unauthenticated
@@ -217,32 +208,14 @@ public final class AuthService {
 
 // MARK: - User API
 
-extension Date {
-  func isWithinPast(minutes: Int) -> Bool {
-    let calendar = Calendar.current
-    guard let timeAgo = calendar.date(byAdding: .minute, value: -minutes, to: Date()) else {
-      return false
-    }
-    return self >= timeAgo && self <= Date()
-  }
-}
-
 public extension AuthService {
-  func reauthenticate() async throws {
-    if let user = auth.currentUser, let credential = signedInCredential {
-      try await user.reauthenticate(with: credential)
-    }
-  }
-
   func deleteUser() async throws {
     do {
-      if let user = auth.currentUser, let lastSignInDate = user.metadata.lastSignInDate {
-        let needsReauth = !lastSignInDate.isWithinPast(minutes: 5)
-        if needsReauth {
-          try await reauthenticate()
-        }
-        try await user.delete()
+      if let user = auth.currentUser {
+        let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
+        try await operation(on: user)
       }
+
     } catch {
       errorMessage = string.localizedErrorMessage(
         for: error
@@ -265,8 +238,6 @@ public extension AuthService {
 
     do {
       try await auth.createUser(withEmail: email, password: password)
-      let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-      signedInCredential = credential
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
@@ -310,9 +281,7 @@ public extension AuthService {
   func handleSignInLink(url url: URL) async throws {
     do {
       guard let email = emailLink else {
-        throw AuthServiceError.invalidEmailLink(
-          "Invalid sign in link. Most likely, the link you used has expired. Try signing in again."
-        )
+        throw AuthServiceError.invalidEmailLink
       }
       let link = url.absoluteString
       if auth.isSignIn(withEmailLink: link) {
@@ -333,25 +302,15 @@ public extension AuthService {
 
 public extension AuthService {
   func signInWithGoogle() async throws {
-    authenticationState = .authenticating
-    do {
-      guard let clientID = auth.app?.options.clientID else {
-        throw AuthServiceError
-          .clientIdNotFound(
-            "OAuth client ID not found. Please make sure Google Sign-In is enabled in the Firebase console. You may have to download a new GoogleService-Info.plist file after enabling Google Sign-In."
-          )
-      }
-      let credential = try await safeGoogleProvider.signInWithGoogle(clientID: clientID)
-
-      try await signIn(credentials: credential)
-      updateAuthenticationState()
-    } catch {
-      authenticationState = .unauthenticated
-      errorMessage = string.localizedErrorMessage(
-        for: error
-      )
-      throw error
+    guard let clientID = auth.app?.options.clientID else {
+      throw AuthServiceError
+        .clientIdNotFound(
+          "OAuth client ID not found. Please make sure Google Sign-In is enabled in the Firebase console. You may have to download a new GoogleService-Info.plist file after enabling Google Sign-In."
+        )
     }
+    let credential = try await safeGoogleProvider.signInWithGoogle(clientID: clientID)
+
+    try await signIn(credentials: credential)
   }
 }
 
@@ -359,19 +318,9 @@ public extension AuthService {
 
 public extension AuthService {
   func signInWithFacebook(limitedLogin: Bool = true) async throws {
-    authenticationState = .authenticating
-    do {
-      let credential = try await safeFacebookProvider
-        .signInWithFacebook(isLimitedLogin: limitedLogin)
-      try await signIn(credentials: credential)
-      updateAuthenticationState()
-    } catch {
-      authenticationState = .unauthenticated
-      errorMessage = string.localizedErrorMessage(
-        for: error
-      )
-      throw error
-    }
+    let credential = try await safeFacebookProvider
+      .signInWithFacebook(isLimitedLogin: limitedLogin)
+    try await signIn(credentials: credential)
   }
 }
 
@@ -390,18 +339,8 @@ public extension AuthService {
   }
 
   func signInWithPhoneNumber(verificationID: String, verificationCode: String) async throws {
-    authenticationState = .authenticating
-    do {
-      let credential = PhoneAuthProvider.provider()
-        .credential(withVerificationID: verificationID, verificationCode: verificationCode)
-      try await signIn(credentials: credential)
-      updateAuthenticationState()
-    } catch {
-      authenticationState = .unauthenticated
-      errorMessage = string.localizedErrorMessage(
-        for: error
-      )
-      throw error
-    }
+    let credential = PhoneAuthProvider.provider()
+      .credential(withVerificationID: verificationID, verificationCode: verificationCode)
+    try await signIn(credentials: credential)
   }
 }

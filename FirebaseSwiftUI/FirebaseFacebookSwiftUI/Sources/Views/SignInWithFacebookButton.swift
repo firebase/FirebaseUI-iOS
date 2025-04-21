@@ -6,7 +6,7 @@ import FirebaseAuthSwiftUI
 import SwiftUI
 
 @MainActor
-public struct FacebookButtonView {
+public struct SignInWithFacebookButton {
   @Environment(AuthService.self) private var authService
   @State private var errorMessage = ""
   @State private var showCanceledAlert = false
@@ -45,7 +45,7 @@ public struct FacebookButtonView {
   }
 }
 
-extension FacebookButtonView: View {
+extension SignInWithFacebookButton: View {
   public var body: some View {
     Button(action: {
       Task {
