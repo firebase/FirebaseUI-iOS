@@ -406,6 +406,9 @@
         }
       }
     },
+    "Enter Password" : {
+
+    },
     "EnterYourEmail" : {
       "comment" : "Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "manual",
@@ -933,6 +936,9 @@
           }
         }
       }
+    },
+    "Submit" : {
+
     },
     "TermsOfService" : {
       "comment" : "Text linked to a web page with the Terms of Service content.",

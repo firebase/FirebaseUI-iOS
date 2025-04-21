@@ -12,6 +12,7 @@ import FirebaseCore
 import FirebaseFacebookSwiftUI
 import FirebaseGoogleSwiftUI
 import FirebasePhoneAuthSwiftUI
+import GoogleSignIn
 import SwiftData
 import SwiftUI
 
@@ -45,15 +46,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ app: UIApplication,
                    open url: URL,
                    options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-    ApplicationDelegate.shared.application(
+    if ApplicationDelegate.shared.application(
       app,
       open: url,
       sourceApplication: options[UIApplication.OpenURLOptionsKey
         .sourceApplication] as? String,
       annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-    )
+    ) {
+      return true
+    }
 
-    return googleProvider.handleUrl(url)
+    return GIDSignIn.sharedInstance.handle(url)
   }
 }
 
@@ -92,10 +95,12 @@ struct ContentView: View {
     let phoneAuthProvider = PhoneAuthProviderSwift()
     authService = AuthService(
       configuration: configuration,
-      googleProvider: googleProvider,
+      googleProvider: nil,
       facebookProvider: facebookProvider,
       phoneAuthProvider: phoneAuthProvider
     )
+      // Transition to this api
+      .withGoogleSignIn()
   }
 
   var body: some View {

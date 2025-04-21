@@ -1,5 +1,6 @@
 @preconcurrency import FirebaseAuth
 import FirebaseAuthSwiftUI
+import FirebaseCore
 import GoogleSignIn
 import GoogleSignInSwift
 import SwiftUI
@@ -19,13 +20,9 @@ public class GoogleProviderSwift: @preconcurrency GoogleProviderProtocol {
   let shortName = "Google"
   let providerId = "google.com"
   let clientID: String
-  public init(scopes: [String]? = nil, clientID: String) {
+  public init(scopes: [String]? = nil, clientID: String = FirebaseApp.app()!.options.clientID!) {
     self.scopes = scopes ?? kDefaultScopes
     self.clientID = clientID
-  }
-
-  public func handleUrl(_ url: URL) -> Bool {
-    return GIDSignIn.sharedInstance.handle(url)
   }
 
   @MainActor public var authButton: any View {

@@ -36,7 +36,7 @@ public class FacebookProviderSwift: FacebookProviderProtocol {
   }
 
   @MainActor public var authButton: any View {
-    return FacebookButtonView()
+    return SignInWithFacebookButton()
   }
 
   @MainActor public func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential {

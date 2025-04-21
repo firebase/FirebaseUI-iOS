@@ -6,7 +6,6 @@ public protocol ExternalAuthProvider {
 }
 
 public protocol GoogleProviderProtocol: ExternalAuthProvider {
-  func handleUrl(_ url: URL) -> Bool
   @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
 }
 
