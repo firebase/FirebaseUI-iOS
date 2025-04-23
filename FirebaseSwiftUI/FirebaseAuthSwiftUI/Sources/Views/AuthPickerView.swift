@@ -38,11 +38,11 @@ extension AuthPickerView: View {
             withAnimation {
               switchFlow()
             }
-          }) {
+          }, label: {
             Text(authService.authenticationFlow == .signUp ? "Log in" : "Sign up")
               .fontWeight(.semibold)
               .foregroundColor(.blue)
-          }
+          })
         }
         Text(authService.errorMessage).foregroundColor(.red)
       }

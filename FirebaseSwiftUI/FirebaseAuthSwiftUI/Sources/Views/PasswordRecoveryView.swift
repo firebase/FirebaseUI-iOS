@@ -33,11 +33,11 @@ extension PasswordRecoveryView: View {
         Task {
           await sendPasswordRecoveryEmail()
         }
-      }) {
+      }, label: {
         Text("Password Recovery")
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
-      }
+      })
       .disabled(!CommonUtils.isValidEmail(email))
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
@@ -59,11 +59,11 @@ extension PasswordRecoveryView: View {
     }
     .navigationBarItems(leading: Button(action: {
       authService.authView = .authPicker
-    }) {
+    }, label: {
       Image(systemName: "chevron.left")
         .foregroundColor(.blue)
       Text("Back")
         .foregroundColor(.blue)
-    })
+    }))
   }
 }

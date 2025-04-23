@@ -19,11 +19,11 @@ extension VerifyEmailView: View {
         Task {
           await sendEmailVerification()
         }
-      }) {
+      }, label: {
         Text("Verify email address?")
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
-      }
+      })
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)

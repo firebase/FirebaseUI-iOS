@@ -20,7 +20,7 @@ extension SignInWithGoogleButton: View {
       Task {
         try await signInWithGoogle()
       }
-    }) {
+    }, label: {
       if authService.authenticationState != .authenticating {
         HStack {
           Image(systemName: "globe") // Placeholder for Google logo
@@ -46,6 +46,6 @@ extension SignInWithGoogleButton: View {
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
-    }
+    })
   }
 }

@@ -60,7 +60,7 @@ extension SignInWithFacebookButton: View {
           }
         }
       }
-    }) {
+    }, label: {
       HStack {
         Image(systemName: "f.circle.fill")
           .font(.title)
@@ -73,7 +73,7 @@ extension SignInWithFacebookButton: View {
       .frame(maxWidth: .infinity)
       .background(Color.blue)
       .cornerRadius(8)
-    }
+    })
     .alert(isPresented: $showCanceledAlert) {
       Alert(
         title: Text("Facebook login cancelled"),
