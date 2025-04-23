@@ -4,14 +4,11 @@
 //
 //  Created by Russell Wheatley on 18/02/2025.
 //
-
 import FacebookCore
 import FirebaseAuth
-import FirebaseAuthSwiftUI
 import FirebaseCore
-import FirebaseFacebookSwiftUI
 import FirebaseGoogleSwiftUI
-import FirebasePhoneAuthSwiftUI
+import Foundation
 import SwiftData
 import SwiftUI
 
@@ -71,40 +68,5 @@ struct FirebaseSwiftUIExampleApp: App {
         ContentView()
       }
     }
-  }
-}
-
-struct ContentView: View {
-  let authService: AuthService
-
-  init() {
-    // Auth.auth().signInAnonymously()
-
-    let actionCodeSettings = ActionCodeSettings()
-    actionCodeSettings.handleCodeInApp = true
-    actionCodeSettings
-      .url = URL(string: "https://flutterfire-e2e-tests.firebaseapp.com")
-    actionCodeSettings.linkDomain = "flutterfire-e2e-tests.firebaseapp.com"
-    actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
-    let configuration = AuthConfiguration(
-      shouldAutoUpgradeAnonymousUsers: true,
-      emailLinkSignInActionCodeSettings: actionCodeSettings
-    )
-    let facebookProvider = FacebookProviderSwift()
-    let phoneAuthProvider = PhoneAuthProviderSwift()
-    authService = AuthService(
-      configuration: configuration,
-      googleProvider: googleProvider,
-      facebookProvider: facebookProvider,
-      phoneAuthProvider: phoneAuthProvider
-    )
-  }
-
-  var body: some View {
-    AuthPickerView {
-      SignInWithGoogleButton()
-      SignInWithFacebookButton()
-      PhoneAuthButtonView()
-    }.environment(authService)
   }
 }
