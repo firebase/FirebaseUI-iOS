@@ -28,8 +28,8 @@ struct ContentView: View {
       shouldAutoUpgradeAnonymousUsers: true,
       emailLinkSignInActionCodeSettings: actionCodeSettings
     )
-    let facebookProvider = FacebookProviderSwift()
-    let phoneAuthProvider = PhoneAuthProviderSwift()
+    let facebookProvider = FacebookProviderAuthUI()
+    let phoneAuthProvider = PhoneAuthProviderAuthUI()
     authService = AuthService(
       configuration: configuration,
       googleProvider: googleProvider,

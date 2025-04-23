@@ -12,7 +12,7 @@ import Foundation
 import SwiftData
 import SwiftUI
 
-let googleProvider = GoogleProviderSwift()
+let googleProvider = GoogleProviderAuthUI()
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,

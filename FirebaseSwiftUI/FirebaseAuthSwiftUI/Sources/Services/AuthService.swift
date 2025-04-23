@@ -1,16 +1,16 @@
 @preconcurrency import FirebaseAuth
 import SwiftUI
 
-public protocol GoogleProviderProtocol {
+public protocol GoogleProviderAuthUIProtocol {
   func handleUrl(_ url: URL) -> Bool
   @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
 }
 
-public protocol FacebookProviderProtocol {
+public protocol FacebookProviderAuthUIProtocol {
   @MainActor func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential
 }
 
-public protocol PhoneAuthProviderProtocol {
+public protocol PhoneAuthProviderAuthUIProtocol {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
 }
 
@@ -61,9 +61,9 @@ private final class AuthListenerManager {
 @Observable
 public final class AuthService {
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
-              googleProvider: GoogleProviderProtocol? = nil,
-              facebookProvider: FacebookProviderProtocol? = nil,
-              phoneAuthProvider: PhoneAuthProviderProtocol? = nil) {
+              googleProvider: GoogleProviderAuthUIProtocol? = nil,
+              facebookProvider: FacebookProviderAuthUIProtocol? = nil,
+              phoneAuthProvider: PhoneAuthProviderAuthUIProtocol? = nil) {
     self.auth = auth
     self.configuration = configuration
     self.googleProvider = googleProvider
@@ -85,11 +85,11 @@ public final class AuthService {
   public let passwordPrompt: PasswordPromptCoordinator = .init()
 
   private var listenerManager: AuthListenerManager?
-  private let googleProvider: GoogleProviderProtocol?
-  private let facebookProvider: FacebookProviderProtocol?
-  private let phoneAuthProvider: PhoneAuthProviderProtocol?
+  private let googleProvider: GoogleProviderAuthUIProtocol?
+  private let facebookProvider: FacebookProviderAuthUIProtocol?
+  private let phoneAuthProvider: PhoneAuthProviderAuthUIProtocol?
 
-  private var safeGoogleProvider: GoogleProviderProtocol {
+  private var safeGoogleProvider: GoogleProviderAuthUIProtocol {
     get throws {
       guard let provider = googleProvider else {
         throw AuthServiceError
@@ -99,7 +99,7 @@ public final class AuthService {
     }
   }
 
-  private var safeFacebookProvider: FacebookProviderProtocol {
+  private var safeFacebookProvider: FacebookProviderAuthUIProtocol {
     get throws {
       guard let provider = facebookProvider else {
         throw AuthServiceError
@@ -109,7 +109,7 @@ public final class AuthService {
     }
   }
 
-  private var safePhoneAuthProvider: PhoneAuthProviderProtocol {
+  private var safePhoneAuthProvider: PhoneAuthProviderAuthUIProtocol {
     get throws {
       guard let provider = phoneAuthProvider else {
         throw AuthServiceError

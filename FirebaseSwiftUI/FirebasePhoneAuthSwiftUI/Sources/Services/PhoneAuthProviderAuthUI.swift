@@ -3,7 +3,7 @@ import FirebaseAuthSwiftUI
 
 public typealias VerificationID = String
 
-public class PhoneAuthProviderSwift: @preconcurrency PhoneAuthProviderProtocol {
+public class PhoneAuthProviderAuthUI: @preconcurrency PhoneAuthProviderAuthUIProtocol {
   public init() {}
 
   @MainActor public func verifyPhoneNumber(phoneNumber: String) async throws -> VerificationID {
