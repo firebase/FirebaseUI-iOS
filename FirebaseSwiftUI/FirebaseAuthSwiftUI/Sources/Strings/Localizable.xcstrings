@@ -1,0 +1,1124 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "AccountDisabledError" : {
+      "comment" : "Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That email address is for an account that has been disabled."
+          }
+        }
+      }
+    },
+    "ActionCantBeUndone" : {
+      "comment" : "Alert message shown before account deletion.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This action can't be undone"
+          }
+        }
+      }
+    },
+    "AddPasswordAlertMessage" : {
+      "comment" : "Alert message shown when adding account password.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To add password to your account, you will need to sign in again."
+          }
+        }
+      }
+    },
+    "AddPasswordTitle" : {
+      "comment" : "Controller title shown when adding password to account.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add password"
+          }
+        }
+      }
+    },
+    "Already have an account?" : {
+
+    },
+    "AS_AddPassword" : {
+      "comment" : "Account Settings cell title Add Password.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add password"
+          }
+        }
+      }
+    },
+    "AS_ChangePassword" : {
+      "comment" : "Account Settings cell title Change Password.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change password"
+          }
+        }
+      }
+    },
+    "AS_DeleteAccount" : {
+      "comment" : "Account Settings cell title Delete Account.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Account"
+          }
+        }
+      }
+    },
+    "AS_Email" : {
+      "comment" : "Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        }
+      }
+    },
+    "AS_Name" : {
+      "comment" : "Account Settings cell title Name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        }
+      }
+    },
+    "AS_SectionLinkedAccounts" : {
+      "comment" : "Account Settings section title Linked Accounts.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Linked Accounts"
+          }
+        }
+      }
+    },
+    "AS_SectionProfile" : {
+      "comment" : "Account Settings section title Profile.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile"
+          }
+        }
+      }
+    },
+    "AS_SectionSecurity" : {
+      "comment" : "Account Settings section title Security.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Security"
+          }
+        }
+      }
+    },
+    "AS_SignOut" : {
+      "comment" : "Account Settings cell title Sign Out.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign Out"
+          }
+        }
+      }
+    },
+    "AuthPickerTitle" : {
+      "comment" : "Title for auth picker screen.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome"
+          }
+        }
+      }
+    },
+    "Back" : {
+      "comment" : "Back button title."
+    },
+    "Cancel" : {
+      "comment" : "Cancel button title.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "CannotAuthenticateError" : {
+      "comment" : "Error message displayed when the app cannot authenticate user's account.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This type of account isn't supported by this app"
+          }
+        }
+      }
+    },
+    "CantFindProvider" : {
+      "comment" : "Error message displayed when FUIAuth is not configured with third party provider. Parameter is value of provider (e g Google, Facebook etc)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can't find provider for %@."
+          }
+        }
+      }
+    },
+    "ChoosePassword" : {
+      "comment" : "Placeholder for the password text field in a sign up form.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose password"
+          }
+        }
+      }
+    },
+    "Close" : {
+      "comment" : "Alert button title Close.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        }
+      }
+    },
+    "Confirm password" : {
+
+    },
+    "ConfirmEmail" : {
+      "comment" : "Title of confirm email label.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Email"
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "comment" : "Text of Delete action button.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        }
+      }
+    },
+    "Delete account" : {
+
+    },
+    "DeleteAccountBody" : {
+      "comment" : "Alert message body shown to confirm account deletion action.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action"
+          }
+        }
+      }
+    },
+    "DeleteAccountConfirmationMessage" : {
+      "comment" : "Explanation message shown before deleting account.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?"
+          }
+        }
+      }
+    },
+    "DeleteAccountConfirmationTitle" : {
+      "comment" : "Alert message title shown to confirm account deletion action.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Account?"
+          }
+        }
+      }
+    },
+    "DeleteAccountControllerTitle" : {
+      "comment" : "Title of Controller shown before deleting account",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete account"
+          }
+        }
+      }
+    },
+    "Dismiss" : {
+
+    },
+    "Don't have an account yet?" : {
+
+    },
+    "EditEmailTitle" : {
+      "comment" : "Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit email"
+          }
+        }
+      }
+    },
+    "EditNameTitle" : {
+      "comment" : "Controller title shown when editing account name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit name"
+          }
+        }
+      }
+    },
+    "EditPasswordAlertMessage" : {
+      "comment" : "Alert message shown when editing account password.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To change password to your account, you will need to sign in again."
+          }
+        }
+      }
+    },
+    "EditPasswordTitle" : {
+      "comment" : "Controller title shown when editing password to account.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change password"
+          }
+        }
+      }
+    },
+    "Email" : {
+      "comment" : "Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars."
+    },
+    "EmailAlreadyInUseError" : {
+      "comment" : "Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The email address is already in use by another account."
+          }
+        }
+      }
+    },
+    "EmailsDontMatch" : {
+      "comment" : "Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emails don't match"
+          }
+        }
+      }
+    },
+    "EmailSentConfirmationMessage" : {
+      "comment" : "Message displayed after email is sent. The placeholder is the email address that the email is sent to.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A sign-in email with additional instructions was sent to %@. Check your email to complete sign-in."
+          }
+        }
+      }
+    },
+    "EnterYourEmail" : {
+      "comment" : "Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your email"
+          }
+        }
+      }
+    },
+    "EnterYourPassword" : {
+      "comment" : "Password text field placeholder.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your password"
+          }
+        }
+      }
+    },
+    "Error" : {
+      "comment" : "Alert title Error.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        }
+      }
+    },
+    "ExistingAccountTitle" : {
+      "comment" : "Title of an alert shown to an existing user coming back to the app.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You already have an account"
+          }
+        }
+      }
+    },
+    "FirstAndLastName" : {
+      "comment" : "Name text field placeholder.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First & last name"
+          }
+        }
+      }
+    },
+    "ForgotPassword" : {
+      "comment" : "Button text for 'Forgot Password' action.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forgot password?"
+          }
+        }
+      }
+    },
+    "ForgotPasswordTitle" : {
+      "comment" : "Title of forgot password button.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trouble signing in?"
+          }
+        }
+      }
+    },
+    "Forgotten Password?" : {
+
+    },
+    "Instructions" : {
+
+    },
+    "InvalidEmailError" : {
+      "comment" : "Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That email address isn't correct."
+          }
+        }
+      }
+    },
+    "InvalidPasswordError" : {
+      "comment" : "Error message displayed when user enters an empty password.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password cannot be empty."
+          }
+        }
+      }
+    },
+    "Log in" : {
+
+    },
+    "Log in with password" : {
+
+    },
+    "Login" : {
+
+    },
+    "Name" : {
+      "comment" : "Label next to a name text field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        }
+      }
+    },
+    "Next" : {
+      "comment" : "Next button title.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        }
+      }
+    },
+    "OK" : {
+      "comment" : "OK button title.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "Password" : {
+      "comment" : "Label next to a password text field."
+    },
+    "Password Recovery" : {
+
+    },
+    "PasswordRecoveryEmailSentMessage" : {
+      "comment" : "Message displayed when the email for password recovery has been sent.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow the instructions sent to %@ to recover your password."
+          }
+        }
+      }
+    },
+    "PasswordRecoveryEmailSentTitle" : {
+      "comment" : "Title of a message displayed when the email for password recovery has been sent. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check your email"
+          }
+        }
+      }
+    },
+    "PasswordRecoveryMessage" : {
+      "comment" : "Explanation on how the password of an account can be recovered. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get instructions sent to this email that explain how to reset your password."
+          }
+        }
+      }
+    },
+    "PasswordRecoveryTitle" : {
+      "comment" : "Title for password recovery screen.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recover password"
+          }
+        }
+      }
+    },
+    "PasswordVerificationMessage" : {
+      "comment" : "Message to explain to the user that password is needed for an account with this email address.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You’ve already used %@ to sign in. Enter your password for that account."
+          }
+        }
+      }
+    },
+    "PlaceholderChosePassword" : {
+      "comment" : "Placeholder of secret input cell when user changes password.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose password"
+          }
+        }
+      }
+    },
+    "PlaceholderEnterEmail" : {
+      "comment" : "Placeholder of input cell when user changes name. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your email"
+          }
+        }
+      }
+    },
+    "PlaceholderEnterName" : {
+      "comment" : "Placeholder of input cell when user changes name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your name"
+          }
+        }
+      }
+    },
+    "PlaceholderEnterPassword" : {
+      "comment" : "Placeholder of secret input cell when user changes password.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your password"
+          }
+        }
+      }
+    },
+    "PlaceholderNewPassword" : {
+      "comment" : "Placeholder of secret input cell when user confirms password.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New password"
+          }
+        }
+      }
+    },
+    "Please check your email for email sign-in link." : {
+
+    },
+    "Please check your email for password recovery instructions." : {
+
+    },
+    "Please check your email for verification link." : {
+
+    },
+    "Prefer Email link sign-in?" : {
+
+    },
+    "PrivacyPolicy" : {
+      "comment" : "Text linked to a web page with the Privacy Policy content.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
+          }
+        }
+      }
+    },
+    "ProviderTitleFacebook" : {
+      "comment" : "Title of Facebook provider",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facebook"
+          }
+        }
+      }
+    },
+    "ProviderTitleGoogle" : {
+      "comment" : "Title of Google provider",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google"
+          }
+        }
+      }
+    },
+    "ProviderTitlePassword" : {
+      "comment" : "Title of Password/Email provider. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        }
+      }
+    },
+    "ProviderTitleTwitter" : {
+      "comment" : "Title of Twitter provider",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twitter"
+          }
+        }
+      }
+    },
+    "ProviderUsedPreviouslyMessage" : {
+      "comment" : "Alert message to let user know what identity provider (second placeholder, ex. Google) was used previously for the email address (first placeholder).",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You’ve already used %@. Sign in with %@ to continue."
+          }
+        }
+      }
+    },
+    "ReauthenticateEditPasswordAlertMessage" : {
+      "comment" : "Alert message shown when re-authenticating before editing account password.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In order to change your password, you first need to enter your current password."
+          }
+        }
+      }
+    },
+    "Resend" : {
+      "comment" : "Resend button title.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resend"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "comment" : "Save button title.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        }
+      }
+    },
+    "Send" : {
+      "comment" : "Send button title.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send"
+          }
+        }
+      }
+    },
+    "Send email sign-in link" : {
+
+    },
+    "Sign in with email link" : {
+
+    },
+    "Sign out" : {
+
+    },
+    "Sign up" : {
+
+    },
+    "Signed in" : {
+
+    },
+    "SignedIn" : {
+      "comment" : "Title of successfully signed in label.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signed in!"
+          }
+        }
+      }
+    },
+    "SignInEmailSent" : {
+      "comment" : "Message displayed after the email of sign-in link is sent.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign-in email Sent"
+          }
+        }
+      }
+    },
+    "SignInTitle" : {
+      "comment" : "Title for sign in screen and sign in button.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in"
+          }
+        }
+      }
+    },
+    "SignInTooManyTimesError" : {
+      "comment" : "Error message displayed after user trying to sign in too many times.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You’ve entered an incorrect password too many times. Try again in a few minutes."
+          }
+        }
+      }
+    },
+    "SignInWithEmail" : {
+      "comment" : "Sign in with email button label. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with email"
+          }
+        }
+      }
+    },
+    "SignInWithProvider" : {
+      "comment" : "Sign in with provider button label.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with %@"
+          }
+        }
+      }
+    },
+    "SignUpTitle" : {
+      "comment" : "Title for sign up screen.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create account"
+          }
+        }
+      }
+    },
+    "SignUpTooManyTimesError" : {
+      "comment" : "Error message displayed when many accounts have been created from same IP address.",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Too many account requests are coming from your IP address. Try again in a few minutes."
+          }
+        }
+      }
+    },
+    "TermsOfService" : {
+      "comment" : "Text linked to a web page with the Terms of Service content.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms of Service"
+          }
+        }
+      }
+    },
+    "TermsOfServiceMessage" : {
+      "comment" : "A message displayed when the first log in screen is displayed. The first placeholder is the terms of service agreement link, the second place holder is the privacy policy agreement link.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By continuing, you are indicating that you accept our %@ and %@."
+          }
+        }
+      }
+    },
+    "TroubleGettingEmailMessage" : {
+      "comment" : "Alert message displayed when user having trouble getting email.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try these common fixes: \n - Check if the email was marked as spam or filtered.\n - Check your internet connection.\n - Check that you did not misspell your email.\n - Check that your inbox space is not running out or other inbox settings related issues.\n If the steps above didn't work, you can resend the email. Note that this will deactivate the link in the older email."
+          }
+        }
+      }
+    },
+    "TroubleGettingEmailTitle" : {
+      "comment" : "Title used in trouble getting email alert view.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trouble getting emails?"
+          }
+        }
+      }
+    },
+    "UnlinkAction" : {
+      "comment" : "Button title for unlinking account action.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlink"
+          }
+        }
+      }
+    },
+    "UnlinkConfirmationActionTitle" : {
+      "comment" : "Alert action title shown before unlinking action.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlink account"
+          }
+        }
+      }
+    },
+    "UnlinkConfirmationMessage" : {
+      "comment" : "Alert message shown before unlinking action.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You will no longer be able to sign in using your account"
+          }
+        }
+      }
+    },
+    "UnlinkConfirmationTitle" : {
+      "comment" : "Alert title shown before unlinking action.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlink account?"
+          }
+        }
+      }
+    },
+    "UnlinkTitle" : {
+      "comment" : "Controller title shown for unlinking account action.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Linked account"
+          }
+        }
+      }
+    },
+    "UpdateEmailAlertMessage" : {
+      "comment" : "Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To change email address associated with your account, you will need to sign in again."
+          }
+        }
+      }
+    },
+    "UpdateEmailVerificationAlertMessage" : {
+      "comment" : "Alert action message shown before confirmation of updating email action.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In order to change your password, you first need to enter your current password."
+          }
+        }
+      }
+    },
+    "User: %@" : {
+
+    },
+    "UserNotFoundError" : {
+      "comment" : "Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That email address doesn’t match an existing account."
+          }
+        }
+      }
+    },
+    "Verify email address?" : {
+
+    },
+    "VerifyItsYou" : {
+      "comment" : "Alert message title show for re-authorization.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verify it's you"
+          }
+        }
+      }
+    },
+    "WeakPasswordError" : {
+      "comment" : "Error message displayed when the password is too weak.",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password must be at least 6 characters long."
+          }
+        }
+      }
+    },
+    "WrongPasswordError" : {
+      "comment" : "Error message displayed when the email and password don't match. Use short/abbreviated translation for 'email' which is less than 15 chars.",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The email and password you entered don't match."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
