@@ -74,3 +74,9 @@ extension EmailLinkView: View {
     }))
   }
 }
+
+#Preview {
+  CommonUtils.dummyConfigurationForPreview()
+  return EmailLinkView()
+    .environment(AuthService())
+}

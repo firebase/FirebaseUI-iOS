@@ -67,3 +67,9 @@ extension PasswordRecoveryView: View {
     }))
   }
 }
+
+#Preview {
+  CommonUtils.dummyConfigurationForPreview()
+  return PasswordRecoveryView()
+    .environment(AuthService())
+}

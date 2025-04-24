@@ -49,3 +49,9 @@ extension SignInWithGoogleButton: View {
     })
   }
 }
+
+#Preview {
+  CommonUtils.dummyConfigurationForPreview()
+  return SignInWithGoogleButton()
+    .environment(AuthService())
+}

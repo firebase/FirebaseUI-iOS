@@ -42,3 +42,9 @@ extension VerifyEmailView: View {
     }
   }
 }
+
+#Preview {
+  CommonUtils.dummyConfigurationForPreview()
+  return VerifyEmailView()
+    .environment(AuthService())
+}

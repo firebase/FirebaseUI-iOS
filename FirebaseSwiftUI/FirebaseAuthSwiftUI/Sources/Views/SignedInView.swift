@@ -43,3 +43,9 @@ extension SignedInView: View {
     }
   }
 }
+
+#Preview {
+  CommonUtils.dummyConfigurationForPreview()
+  return SignedInView()
+    .environment(AuthService())
+}

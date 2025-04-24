@@ -108,3 +108,9 @@ extension SignInWithFacebookButton: View {
     Text(errorMessage).foregroundColor(.red)
   }
 }
+
+#Preview {
+  CommonUtils.dummyConfigurationForPreview()
+  return SignInWithFacebookButton()
+    .environment(AuthService())
+}

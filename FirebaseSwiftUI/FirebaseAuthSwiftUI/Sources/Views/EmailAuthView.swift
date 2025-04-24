@@ -132,3 +132,9 @@ extension EmailAuthView: View {
     }
   }
 }
+
+#Preview {
+  CommonUtils.dummyConfigurationForPreview()
+  return EmailAuthView()
+    .environment(AuthService())
+}

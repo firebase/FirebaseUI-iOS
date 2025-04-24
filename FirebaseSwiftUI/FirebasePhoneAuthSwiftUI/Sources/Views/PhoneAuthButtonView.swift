@@ -90,3 +90,9 @@ extension PhoneAuthButtonView: View {
     Text(errorMessage).foregroundColor(.red)
   }
 }
+
+#Preview {
+  CommonUtils.dummyConfigurationForPreview()
+  return PhoneAuthButtonView()
+    .environment(AuthService())
+}
