@@ -28,12 +28,35 @@ extension EmailPasswordOperationReauthentication {
   }
 }
 
-class EmailPasswordDeleteUserOperation: DeleteUserOperation,
+class EmailPasswordDeleteUserOperation: AuthenticatedOperation,
   EmailPasswordOperationReauthentication {
   let passwordPrompt: PasswordPromptCoordinator
 
   init(passwordPrompt: PasswordPromptCoordinator) {
     self.passwordPrompt = passwordPrompt
+  }
+
+  func callAsFunction(on user: User) async throws {
+    try await callAsFunction(on: user) { _ in
+      try await user.delete()
+    }
+  }
+}
+
+class EmailPasswordUpdatePasswordOperation: AuthenticatedOperation,
+  EmailPasswordOperationReauthentication {
+  let passwordPrompt: PasswordPromptCoordinator
+  let newPassword: String
+
+  init(passwordPrompt: PasswordPromptCoordinator, newPassword: String) {
+    self.passwordPrompt = passwordPrompt
+    self.newPassword = newPassword
+  }
+
+  func callAsFunction(on user: User) async throws {
+    try await callAsFunction(on: user) { _ in
+      try await user.updatePassword(to: newPassword)
+    }
   }
 }
 
