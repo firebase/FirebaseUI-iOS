@@ -44,6 +44,7 @@ extension UpdatePasswordView: View {
       .padding(.vertical, 6)
       .background(Divider(), alignment: .bottom)
       .padding(.bottom, 8)
+
       Divider()
 
       LabeledContent {
@@ -56,24 +57,20 @@ extension UpdatePasswordView: View {
       .padding(.vertical, 6)
       .background(Divider(), alignment: .bottom)
       .padding(.bottom, 8)
+
       Divider()
+
       Button(action: {
         Task {
           try await authService.updatePassword(to: confirmPassword)
           authService.authView = .authPicker
         }
-      }) {
-        if authService.authenticationState != .authenticating {
-          Text("Update password")
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
-        } else {
-          ProgressView()
-            .progressViewStyle(CircularProgressViewStyle(tint: .white))
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
-        }
-      }
+      }, label: {
+        Text("Update password")
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
+
+      })
       .disabled(!isValid)
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
