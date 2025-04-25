@@ -12,6 +12,7 @@ private enum FocusableField: Hashable {
   case confirmPassword
 }
 
+@MainActor
 public struct UpdatePasswordView {
   @Environment(AuthService.self) private var authService
   @State private var password = ""
@@ -24,6 +25,13 @@ public struct UpdatePasswordView {
 }
 
 extension UpdatePasswordView: View {
+  private var isShowingPasswordPrompt: Binding<Bool> {
+    Binding(
+      get: { authService.passwordPrompt.isPromptingPassword },
+      set: { authService.passwordPrompt.isPromptingPassword = $0 }
+    )
+  }
+
   public var body: some View {
     VStack {
       LabeledContent {
@@ -70,6 +78,8 @@ extension UpdatePasswordView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
+    }.sheet(isPresented: isShowingPasswordPrompt) {
+      PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }
   }
 }

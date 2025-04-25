@@ -37,7 +37,7 @@ class EmailPasswordDeleteUserOperation: AuthenticatedOperation,
   }
 
   func callAsFunction(on user: User) async throws {
-    try await callAsFunction(on: user) { _ in
+    try await callAsFunction(on: user) {
       try await user.delete()
     }
   }
@@ -54,7 +54,7 @@ class EmailPasswordUpdatePasswordOperation: AuthenticatedOperation,
   }
 
   func callAsFunction(on user: User) async throws {
-    try await callAsFunction(on: user) { _ in
+    try await callAsFunction(on: user) {
       try await user.updatePassword(to: newPassword)
     }
   }

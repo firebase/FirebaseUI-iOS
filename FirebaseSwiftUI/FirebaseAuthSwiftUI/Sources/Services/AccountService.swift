@@ -23,15 +23,15 @@ protocol AuthenticatedOperation {
 
 extension AuthenticatedOperation {
   func callAsFunction(on _: User,
-                      _ perform: (AuthenticationToken?) async throws -> Void) async throws {
+                      _ performOperation: () async throws -> Void) async throws {
     do {
-      try await perform(nil)
+      try await performOperation()
     } catch let error as NSError where error.requiresReauthentication {
       let token = try await reauthenticate()
-      try await perform(token)
+      try await performOperation()
     } catch AuthServiceError.reauthenticationRequired {
       let token = try await reauthenticate()
-      try await perform(token)
+      try await performOperation()
     }
   }
 }
