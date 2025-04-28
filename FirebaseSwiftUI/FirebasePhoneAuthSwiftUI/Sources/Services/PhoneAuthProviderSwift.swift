@@ -6,7 +6,7 @@ public typealias VerificationID = String
 
 public class PhoneAuthProviderSwift: @preconcurrency PhoneAuthProviderProtocol {
 
-  public var authButton: any View {
+  public var authButton: Button<Text> {
     // TODO: implement me
     return Button("Phone", action: { })
   }

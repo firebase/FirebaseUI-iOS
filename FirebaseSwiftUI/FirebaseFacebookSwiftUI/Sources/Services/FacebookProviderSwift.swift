@@ -35,7 +35,7 @@ public class FacebookProviderSwift: FacebookProviderProtocol {
     shaNonce = CommonUtils.sha256Hash(of: rawNonce)
   }
 
-  @MainActor public var authButton: any View {
+  @MainActor public var authButton: SignInWithFacebookButton {
     return SignInWithFacebookButton()
   }
 
