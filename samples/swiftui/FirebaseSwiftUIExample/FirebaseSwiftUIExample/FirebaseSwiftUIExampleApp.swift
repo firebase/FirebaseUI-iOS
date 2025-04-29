@@ -78,7 +78,7 @@ struct ContentView: View {
   let authService: AuthService
 
   init() {
-    // Auth.auth().signInAnonymously()
+    Auth.auth().signInAnonymously()
 
     let actionCodeSettings = ActionCodeSettings()
     actionCodeSettings.handleCodeInApp = true

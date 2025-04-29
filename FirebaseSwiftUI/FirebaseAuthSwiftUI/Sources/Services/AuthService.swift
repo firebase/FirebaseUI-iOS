@@ -169,19 +169,19 @@ public final class AuthService {
 
   public func signIn(credentials credentials: AuthCredential) async throws {
     authenticationState = .authenticating
-    if currentUser?.isAnonymous == true, configuration.shouldAutoUpgradeAnonymousUsers {
-      try await linkAccounts(credentials: credentials)
-    } else {
-      do {
+    do {
+      if currentUser?.isAnonymous == true, configuration.shouldAutoUpgradeAnonymousUsers {
+        try await linkAccounts(credentials: credentials)
+      } else {
         try await auth.signIn(with: credentials)
         updateAuthenticationState()
-      } catch {
-        authenticationState = .unauthenticated
-        errorMessage = string.localizedErrorMessage(
-          for: error
-        )
-        throw error
       }
+    } catch {
+      authenticationState = .unauthenticated
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
+      throw error
     }
   }
 
