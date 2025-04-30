@@ -54,7 +54,7 @@ extension PasswordRecoveryView: View {
           .font(.largeTitle)
           .fontWeight(.bold)
           .padding()
-        Text(authService.string.passwordRecoveryMessage)
+        Text(authService.string.passwordRecoveryHelperMessage)
           .padding()
 
         Divider()
