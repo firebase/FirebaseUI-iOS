@@ -1,15 +1,30 @@
 import FirebaseAuth
 import SwiftUI
 
+// Auth Picker (not signed-in)
 let kAuthPickerTitle = "AuthPickerTitle"
 
+// Used across multiple Views
 let kEnterYourEmail = "EnterYourEmail"
 let kEnterYourPassword = "EnterYourPassword"
+let kOK = "OK"
+let kBack = "Back"
 
+// Signed-in
 let kSignedInTitle = "SignedIn"
+
+let kForgotPasswordButtonLabel = "ForgotPasswordTitle"
+let kForgotPasswordInputLabel = "ForgotPassword"
+
+// Password recovery
+let kPasswordRecoveryTitle = "PasswordRecoveryTitle"
+let kPasswordRecoveryEmailSentTitle = "PasswordRecoveryEmailSentTitle"
+let kPasswordRecoveryMessage = "PasswordRecoveryMessage"
+let kPasswordRecoveryEmailSentMessage = "PasswordRecoveryEmailSentMessage"
 
 let kKeyNotFound = "Key not found"
 
+// Errors
 let kUsersNotFoundError = "UserNotFoundError"
 let kEmailAlreadyInUseError = "EmailAlreadyInUseError"
 let kInvalidEmailError = "InvalidEmailError"

@@ -18,9 +18,15 @@ public struct PasswordRecoveryView {
 extension PasswordRecoveryView: View {
   public var body: some View {
     VStack {
-      Text("Password Recovery")
+      Text(authService.string.localizedString(for: kPasswordRecoveryTitle))
+        .font(.largeTitle)
+        .fontWeight(.bold)
+        .padding()
+
+      Divider()
+
       LabeledContent {
-        TextField("Email", text: $email)
+        TextField(authService.string.localizedString(for: kEnterYourEmail), text: $email)
           .textInputAutocapitalization(.never)
           .disableAutocorrection(true)
           .submitLabel(.next)
@@ -34,7 +40,7 @@ extension PasswordRecoveryView: View {
           await sendPasswordRecoveryEmail()
         }
       }) {
-        Text("Password Recovery")
+        Text(authService.string.localizedString(for: kForgotPasswordInputLabel))
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
@@ -44,11 +50,18 @@ extension PasswordRecoveryView: View {
       .buttonStyle(.borderedProminent)
     }.sheet(isPresented: $showModal) {
       VStack {
-        Text("Instructions")
-          .font(.headline)
-        Text("Please check your email for password recovery instructions.")
+        Text(authService.string.localizedString(for: kPasswordRecoveryEmailSentTitle))
+          .font(.largeTitle)
+          .fontWeight(.bold)
           .padding()
-        Button("Dismiss") {
+        Text(authService.string.localizedString(for: kPasswordRecoveryMessage))
+          .padding()
+
+        Divider()
+
+        Text(authService.string.localizedString(for: kPasswordRecoveryEmailSentMessage))
+          .padding()
+        Button(authService.string.localizedString(for: kOK)) {
           showModal = false
         }
         .padding()
@@ -62,7 +75,7 @@ extension PasswordRecoveryView: View {
     }) {
       Image(systemName: "chevron.left")
         .foregroundColor(.blue)
-      Text("Back")
+      Text(authService.string.localizedString(for: kBack))
         .foregroundColor(.blue)
     })
   }

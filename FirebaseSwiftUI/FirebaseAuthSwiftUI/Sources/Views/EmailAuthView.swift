@@ -83,7 +83,7 @@ extension EmailAuthView: View {
         Button(action: {
           authService.authView = .passwordRecovery
         }) {
-          Text("Forgotten Password?")
+          Text(authService.string.localizedString(for: kForgotPasswordButtonLabel))
         }
       }
 
