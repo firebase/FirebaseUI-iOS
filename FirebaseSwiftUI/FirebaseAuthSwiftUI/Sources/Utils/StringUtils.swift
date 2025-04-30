@@ -1,27 +1,6 @@
 import FirebaseAuth
 import SwiftUI
 
-// Auth Picker (not signed-in)
-let kAuthPickerTitle = "AuthPickerTitle"
-
-// Used across multiple Views
-let kEnterYourEmail = "EnterYourEmail"
-let kEnterYourPassword = "EnterYourPassword"
-let kOK = "OK"
-let kBack = "Back"
-
-// Signed-in
-let kSignedInTitle = "SignedIn"
-
-let kForgotPasswordButtonLabel = "ForgotPasswordTitle"
-let kForgotPasswordInputLabel = "ForgotPassword"
-
-// Password recovery
-let kPasswordRecoveryTitle = "PasswordRecoveryTitle"
-let kPasswordRecoveryEmailSentTitle = "PasswordRecoveryEmailSentTitle"
-let kPasswordRecoveryMessage = "PasswordRecoveryMessage"
-let kPasswordRecoveryEmailSentMessage = "PasswordRecoveryEmailSentMessage"
-
 let kKeyNotFound = "Key not found"
 
 // Errors
@@ -84,7 +63,7 @@ public class StringUtils {
   /// found in:
   /// - AuthPickerView
   public var authPickerTitle: String {
-    return localizedString(for: kAuthPickerTitle)
+    return localizedString(for: "AuthPickerTitle")
   }
 
   /// Email input label
@@ -92,76 +71,76 @@ public class StringUtils {
   /// - EmailAuthView
   /// - PasswordRecoveryView
   public var emailInputLabel: String {
-    return localizedString(for: kEnterYourEmail)
+    return localizedString(for: "EnterYourEmail")
   }
 
   /// Password button action label
   /// found in:
   /// - EmailAuthView
   public var passwordButtonLabel: String {
-    return localizedString(for: kForgotPasswordButtonLabel)
+    return localizedString(for: "ForgotPasswordTitle")
   }
 
   /// Password input label
   /// found in:
   /// - EmailAuthView
   public var passwordInputLabel: String {
-    return localizedString(for: kEnterYourPassword)
+    return localizedString(for: "EnterYourPassword")
   }
 
   /// Password recovery title
   /// found in:
   /// - PasswordRecoveryView
   public var passwordRecoveryTitle: String {
-    return localizedString(for: kPasswordRecoveryTitle)
+    return localizedString(for: "PasswordRecoveryTitle")
   }
 
   /// Password recovery email sent title
   /// found in:
   /// - PasswordRecoveryView
   public var passwordRecoveryEmailSentTitle: String {
-    return localizedString(for: kPasswordRecoveryEmailSentTitle)
+    return localizedString(for: "PasswordRecoveryEmailSentTitle")
   }
 
   /// Password recovery helper message
   /// found in:
   /// - PasswordRecoveryView
   public var passwordRecoveryHelperMessage: String {
-    return localizedString(for: kPasswordRecoveryMessage)
+    return localizedString(for: "PasswordRecoveryMessage")
   }
 
   /// Password recovery email sent message
   /// found in:
   /// - PasswordRecoveryView
   public var passwordRecoveryEmailSentMessage: String {
-    return localizedString(for: kPasswordRecoveryEmailSentMessage)
+    return localizedString(for: "PasswordRecoveryEmailSentMessage")
   }
 
   /// Forgot password input label
   /// found in:
   /// - PasswordRecoveryView
   public var forgotPasswordInputLabel: String {
-    return localizedString(for: kForgotPasswordInputLabel)
+    return localizedString(for: "ForgotPassword")
   }
 
   /// Signed in title
   /// found in:
   /// - SignedInView
   public var signedInTitle: String {
-    return localizedString(for: kSignedInTitle)
+    return localizedString(for: "SignedIn")
   }
 
   /// General string - Back button label
   /// found in:
   /// - PasswordRecoveryView
   public var backButtonLabel: String {
-    return localizedString(for: kBack)
+    return localizedString(for: "Back")
   }
 
   /// General string - OK button label
   /// found in:
   /// - PasswordRecoveryView
   public var okButtonLabel: String {
-    return localizedString(for: kOK)
+    return localizedString(for: "OK")
   }
 }
