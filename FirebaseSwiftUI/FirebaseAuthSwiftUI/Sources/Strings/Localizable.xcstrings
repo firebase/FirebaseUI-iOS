@@ -394,13 +394,25 @@
       }
     },
     "EmailLinkSignInLabel" : {
-      "comment" : "Button label for email link sign-in",
+      "comment" : "Button label to push user to email link sign-in",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prefer Email link sign-in?"
+          }
+        }
+      }
+    },
+    "EmailLinkSignInTitle" : {
+      "comment" : "Sign in with email link View title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with email link"
           }
         }
       }
@@ -542,9 +554,6 @@
           }
         }
       }
-    },
-    "Key" : {
-      "extractionState" : "manual"
     },
     "Log in" : {
 
@@ -842,6 +851,18 @@
     },
     "Send email sign-in link" : {
 
+    },
+    "SendEmailSignInLinkButtonLabel" : {
+      "comment" : "Button label for sending email sign-in link",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send email sign-in link"
+          }
+        }
+      }
     },
     "Sign in with email link" : {
 

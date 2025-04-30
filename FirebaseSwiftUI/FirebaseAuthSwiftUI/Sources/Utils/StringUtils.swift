@@ -70,6 +70,7 @@ public class StringUtils {
   /// found in:
   /// - EmailAuthView
   /// - PasswordRecoveryView
+  /// - EmailLinkView
   public var emailInputLabel: String {
     return localizedString(for: "EnterYourEmail")
   }
@@ -139,7 +140,7 @@ public class StringUtils {
 
   /// Sign in with email button label or can be used as title
   /// found in:
-  /// EmailAuthView
+  /// - EmailAuthView
   public var signInWithEmailButtonLabel: String {
     return localizedString(for: "SignInWithEmail")
   }
@@ -151,16 +152,38 @@ public class StringUtils {
     return localizedString(for: "SignUpTitle")
   }
 
-  /// Sign up with email link button label
+  /// Sign-in with email link button label to push user to email link view
   /// found in:
   /// - EmailAuthView
   public var signUpWithEmailLinkButtonLabel: String {
     return localizedString(for: "EmailLinkSignInLabel")
   }
 
+  /// send email link sign-in button label
+  /// found in:
+  /// - EmailLinkView
+  public var sendEmailLinkButtonLabel: String {
+    return localizedString(for: "SendEmailSignInLinkButtonLabel")
+  }
+
+  /// Sign in with email link View title
+  /// found in:
+  /// - EmailLinkView
+  public var signInWithEmailLinkViewTitle: String {
+    return localizedString(for: "EmailLinkSignInTitle")
+  }
+
+  /// Sign in with email link View message
+  /// found in:
+  /// - EmailLinkView
+  public var signInWithEmailLinkViewMessage: String {
+    return localizedString(for: "SignInEmailSent")
+  }
+
   /// General string - Back button label
   /// found in:
   /// - PasswordRecoveryView
+  /// - EmailLinkView
   public var backButtonLabel: String {
     return localizedString(for: "Back")
   }
@@ -168,6 +191,7 @@ public class StringUtils {
   /// General string - OK button label
   /// found in:
   /// - PasswordRecoveryView
+  /// - EmailLinkView
   public var okButtonLabel: String {
     return localizedString(for: "OK")
   }
