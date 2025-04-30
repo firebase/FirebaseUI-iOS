@@ -50,7 +50,7 @@ extension EmailAuthView: View {
   public var body: some View {
     VStack {
       LabeledContent {
-        TextField(authService.string.localizedString(for: kEnterYourEmail), text: $email)
+        TextField(authService.string.emailInputLabel, text: $email)
           .textInputAutocapitalization(.never)
           .disableAutocorrection(true)
           .focused($focus, equals: .email)
@@ -66,7 +66,7 @@ extension EmailAuthView: View {
       .padding(.bottom, 4)
 
       LabeledContent {
-        SecureField(authService.string.localizedString(for: kEnterYourPassword), text: $password)
+        SecureField(authService.string.passwordInputLabel, text: $password)
           .focused($focus, equals: .password)
           .submitLabel(.go)
           .onSubmit {
@@ -83,7 +83,7 @@ extension EmailAuthView: View {
         Button(action: {
           authService.authView = .passwordRecovery
         }) {
-          Text(authService.string.localizedString(for: kForgotPasswordButtonLabel))
+          Text(authService.string.passwordButtonLabel)
         }
       }
 

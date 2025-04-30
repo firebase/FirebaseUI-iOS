@@ -18,7 +18,7 @@ public struct AuthPickerView<Content: View> {
 extension AuthPickerView: View {
   public var body: some View {
     VStack {
-      Text(authService.string.localizedString(for: kAuthPickerTitle))
+      Text(authService.string.authPickerTitle)
         .font(.largeTitle)
         .fontWeight(.bold)
         .padding()

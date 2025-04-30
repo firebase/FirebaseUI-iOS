@@ -79,4 +79,89 @@ public class StringUtils {
       return error.localizedDescription
     }
   }
+
+  /// Auth Picker title
+  /// found in:
+  /// - AuthPickerView
+  public var authPickerTitle: String {
+    return localizedString(for: kAuthPickerTitle)
+  }
+
+  /// Email input label
+  /// found in:
+  /// - EmailAuthView
+  /// - PasswordRecoveryView
+  public var emailInputLabel: String {
+    return localizedString(for: kEnterYourEmail)
+  }
+
+  /// Password button action label
+  /// found in:
+  /// - EmailAuthView
+  public var passwordButtonLabel: String {
+    return localizedString(for: kForgotPasswordButtonLabel)
+  }
+
+  /// Password input label
+  /// found in:
+  /// - EmailAuthView
+  public var passwordInputLabel: String {
+    return localizedString(for: kEnterYourPassword)
+  }
+
+  /// Password recovery title
+  /// found in:
+  /// - PasswordRecoveryView
+  public var passwordRecoveryTitle: String {
+    return localizedString(for: kPasswordRecoveryTitle)
+  }
+
+  /// Password recovery email sent title
+  /// found in:
+  /// - PasswordRecoveryView
+  public var passwordRecoveryEmailSentTitle: String {
+    return localizedString(for: kPasswordRecoveryEmailSentTitle)
+  }
+
+  /// Password recovery helper message
+  /// found in:
+  /// - PasswordRecoveryView
+  public var passwordRecoveryHelperMessage: String {
+    return localizedString(for: kPasswordRecoveryMessage)
+  }
+
+  /// Password recovery email sent message
+  /// found in:
+  /// - PasswordRecoveryView
+  public var passwordRecoveryEmailSentMessage: String {
+    return localizedString(for: kPasswordRecoveryEmailSentMessage)
+  }
+
+  /// Forgot password input label
+  /// found in:
+  /// - PasswordRecoveryView
+  public var forgotPasswordInputLabel: String {
+    return localizedString(for: kForgotPasswordInputLabel)
+  }
+
+  /// Signed in title
+  /// found in:
+  /// - SignedInView
+  public var signedInTitle: String {
+    return localizedString(for: kSignedInTitle)
+  }
+
+  /// General string - Back button label
+  /// found in:
+  /// - PasswordRecoveryView
+  public var backButtonLabel: String {
+    return localizedString(for: kBack)
+  }
+
+  /// General string - OK button label
+  /// found in:
+  /// - PasswordRecoveryView
+  public var okButtonLabel: String {
+    return localizedString(for: kOK)
+  }
 }

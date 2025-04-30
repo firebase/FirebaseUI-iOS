@@ -18,7 +18,7 @@ public struct PasswordRecoveryView {
 extension PasswordRecoveryView: View {
   public var body: some View {
     VStack {
-      Text(authService.string.localizedString(for: kPasswordRecoveryTitle))
+      Text(authService.string.passwordRecoveryTitle)
         .font(.largeTitle)
         .fontWeight(.bold)
         .padding()
@@ -26,7 +26,7 @@ extension PasswordRecoveryView: View {
       Divider()
 
       LabeledContent {
-        TextField(authService.string.localizedString(for: kEnterYourEmail), text: $email)
+        TextField(authService.string.emailInputLabel, text: $email)
           .textInputAutocapitalization(.never)
           .disableAutocorrection(true)
           .submitLabel(.next)
@@ -40,7 +40,7 @@ extension PasswordRecoveryView: View {
           await sendPasswordRecoveryEmail()
         }
       }) {
-        Text(authService.string.localizedString(for: kForgotPasswordInputLabel))
+        Text(authService.string.forgotPasswordInputLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
@@ -50,18 +50,18 @@ extension PasswordRecoveryView: View {
       .buttonStyle(.borderedProminent)
     }.sheet(isPresented: $showModal) {
       VStack {
-        Text(authService.string.localizedString(for: kPasswordRecoveryEmailSentTitle))
+        Text(authService.string.passwordRecoveryEmailSentTitle)
           .font(.largeTitle)
           .fontWeight(.bold)
           .padding()
-        Text(authService.string.localizedString(for: kPasswordRecoveryMessage))
+        Text(authService.string.passwordRecoveryMessage)
           .padding()
 
         Divider()
 
-        Text(authService.string.localizedString(for: kPasswordRecoveryEmailSentMessage))
+        Text(authService.string.passwordRecoveryEmailSentMessage)
           .padding()
-        Button(authService.string.localizedString(for: kOK)) {
+        Button(authService.string.okButtonLabel) {
           showModal = false
         }
         .padding()
@@ -75,7 +75,7 @@ extension PasswordRecoveryView: View {
     }) {
       Image(systemName: "chevron.left")
         .foregroundColor(.blue)
-      Text(authService.string.localizedString(for: kBack))
+      Text(authService.string.backButtonLabel)
         .foregroundColor(.blue)
     })
   }

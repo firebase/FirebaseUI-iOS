@@ -15,7 +15,7 @@ extension SignedInView: View {
 
   public var body: some View {
     VStack {
-      Text(authService.string.localizedString(for: kSignedInTitle))
+      Text(authService.string.signedInTitle)
         .font(.largeTitle)
         .fontWeight(.bold)
         .padding()
