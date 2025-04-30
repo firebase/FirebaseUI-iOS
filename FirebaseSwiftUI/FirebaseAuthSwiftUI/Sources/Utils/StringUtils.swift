@@ -181,6 +181,27 @@ public class StringUtils {
     return localizedString(for: "SignInEmailSent")
   }
 
+  /// Account settings - Delete button label
+  /// found in:
+  /// - SignedInView
+  public var deleteAccountButtonLabel: String {
+    return localizedString(for: "AS_DeleteAccount")
+  }
+
+  /// Account settings - Email label
+  /// found in:
+  /// SignedInView
+  public var accountSettingsEmailLabel: String {
+    return localizedString(for: "AS_Email")
+  }
+
+  /// Account settings - sign out button label
+  /// found in:
+  /// - SignedInView
+  public var signOutButtonLabel: String {
+    return localizedString(for: "AS_SignOut")
+  }
+
   /// General string - Back button label
   /// found in:
   /// - PasswordRecoveryView

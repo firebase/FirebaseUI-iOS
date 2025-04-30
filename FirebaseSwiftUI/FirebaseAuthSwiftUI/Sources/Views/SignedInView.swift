@@ -19,13 +19,14 @@ extension SignedInView: View {
         .font(.largeTitle)
         .fontWeight(.bold)
         .padding()
-      Text("User: \(authService.currentUser?.email ?? "Unknown")")
+      Text(authService.string.accountSettingsEmailLabel)
+      Text("\(authService.currentUser?.email ?? "Unknown")")
 
       if authService.currentUser?.isEmailVerified == false {
         VerifyEmailView()
       }
 
-      Button("Sign out") {
+      Button(authService.string.signOutButtonLabel) {
         Task {
           do {
             try await authService.signOut()
@@ -33,7 +34,7 @@ extension SignedInView: View {
         }
       }
       Divider()
-      Button("Delete account") {
+      Button(authService.string.deleteAccountButtonLabel) {
         Task {
           do {
             try await authService.deleteUser()
