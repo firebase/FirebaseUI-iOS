@@ -18,6 +18,10 @@ public struct AuthPickerView<Content: View> {
 extension AuthPickerView: View {
   public var body: some View {
     VStack {
+      Text(authService.string.localizedString(for: kAuthPickerTitle))
+        .font(.largeTitle)
+        .fontWeight(.bold)
+        .padding()
       if authService.authenticationState == .authenticated {
         SignedInView()
       } else if authService.authView == .passwordRecovery {

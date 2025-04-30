@@ -1,6 +1,13 @@
 import FirebaseAuth
 import SwiftUI
 
+let kAuthPickerTitle = "AuthPickerTitle"
+
+let kEnterYourEmail = "EnterYourEmail"
+let kEnterYourPassword = "EnterYourPassword"
+
+let kSignedInTitle = "SignedIn"
+
 let kKeyNotFound = "Key not found"
 
 let kUsersNotFoundError = "UserNotFoundError"
@@ -19,7 +26,7 @@ public class StringUtils {
     self.bundle = bundle
   }
 
-  public func localizedString(forKey key: String) -> String {
+  public func localizedString(for key: String) -> String {
     let keyLocale = String.LocalizationValue(key)
     let value = String(localized: keyLocale, bundle: bundle)
     return value
@@ -31,27 +38,27 @@ public class StringUtils {
     switch errorCode {
     case .emailAlreadyInUse:
       return localizedString(
-        forKey: kEmailAlreadyInUseError
+        for: kEmailAlreadyInUseError
       )
     case .invalidEmail:
-      return localizedString(forKey: kInvalidEmailError)
+      return localizedString(for: kInvalidEmailError)
     case .weakPassword:
-      return localizedString(forKey: kWeakPasswordError)
+      return localizedString(for: kWeakPasswordError)
     case .tooManyRequests:
       return localizedString(
-        forKey: kSignUpTooManyTimesError
+        for: kSignUpTooManyTimesError
       )
     case .wrongPassword:
       return localizedString(
-        forKey: kWrongPasswordError
+        for: kWrongPasswordError
       )
     case .userNotFound:
       return localizedString(
-        forKey: kUsersNotFoundError
+        for: kUsersNotFoundError
       )
     case .userDisabled:
       return localizedString(
-        forKey: kAccountDisabledError
+        for: kAccountDisabledError
       )
     default:
       return error.localizedDescription

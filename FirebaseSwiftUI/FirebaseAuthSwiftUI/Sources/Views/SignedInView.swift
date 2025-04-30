@@ -15,7 +15,10 @@ extension SignedInView: View {
 
   public var body: some View {
     VStack {
-      Text("Signed in")
+      Text(authService.string.localizedString(for: kSignedInTitle))
+        .font(.largeTitle)
+        .fontWeight(.bold)
+        .padding()
       Text("User: \(authService.currentUser?.email ?? "Unknown")")
 
       if authService.currentUser?.isEmailVerified == false {
