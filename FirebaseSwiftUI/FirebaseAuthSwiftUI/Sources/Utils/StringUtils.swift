@@ -130,6 +130,34 @@ public class StringUtils {
     return localizedString(for: "SignedIn")
   }
 
+  /// Confirm password
+  /// found in:
+  /// - EmailAuthView
+  public var confirmPasswordInputLabel: String {
+    return localizedString(for: "ConfirmPasswordInputLabel")
+  }
+
+  /// Sign in with email button label or can be used as title
+  /// found in:
+  /// EmailAuthView
+  public var signInWithEmailButtonLabel: String {
+    return localizedString(for: "SignInWithEmail")
+  }
+
+  /// Sign up with email button label
+  /// found in:
+  /// - EmailAuthView
+  public var signUpWithEmailButtonLabel: String {
+    return localizedString(for: "SignUpTitle")
+  }
+
+  /// Sign up with email link button label
+  /// found in:
+  /// - EmailAuthView
+  public var signUpWithEmailLinkButtonLabel: String {
+    return localizedString(for: "EmailLinkSignInLabel")
+  }
+
   /// General string - Back button label
   /// found in:
   /// - PasswordRecoveryView

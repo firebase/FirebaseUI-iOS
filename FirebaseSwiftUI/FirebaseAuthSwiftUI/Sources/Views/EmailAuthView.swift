@@ -89,7 +89,7 @@ extension EmailAuthView: View {
 
       if authService.authenticationFlow == .signUp {
         LabeledContent {
-          SecureField("Confirm password", text: $confirmPassword)
+          SecureField(authService.string.confirmPasswordInputLabel, text: $confirmPassword)
             .focused($focus, equals: .confirmPassword)
             .submitLabel(.go)
             .onSubmit {
@@ -110,7 +110,8 @@ extension EmailAuthView: View {
         }
       }) {
         if authService.authenticationState != .authenticating {
-          Text(authService.authenticationFlow == .login ? "Log in with password" : "Sign up")
+          Text(authService.authenticationFlow == .login ? authService.string
+            .signInWithEmailButtonLabel : authService.string.signUpWithEmailButtonLabel)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         } else {
@@ -127,7 +128,7 @@ extension EmailAuthView: View {
       Button(action: {
         authService.authView = .passwordRecovery
       }) {
-        Text("Prefer Email link sign-in?")
+        Text(authService.string.signUpWithEmailLinkButtonLabel)
       }
     }
   }

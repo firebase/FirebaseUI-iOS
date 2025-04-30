@@ -249,6 +249,18 @@
         }
       }
     },
+    "ConfirmPasswordInputLabel" : {
+      "comment" : "Input label for confirming password when signing up",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Password"
+          }
+        }
+      }
+    },
     "Delete" : {
       "comment" : "Text of Delete action button.",
       "extractionState" : "manual",
@@ -381,6 +393,18 @@
         }
       }
     },
+    "EmailLinkSignInLabel" : {
+      "comment" : "Button label for email link sign-in",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prefer Email link sign-in?"
+          }
+        }
+      }
+    },
     "EmailsDontMatch" : {
       "comment" : "Error message displayed when after re-authorization current user's email and re-authorized user's email doesn't match. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "manual",
@@ -404,6 +428,9 @@
           }
         }
       }
+    },
+    "Enter Password" : {
+
     },
     "EnterYourEmail" : {
       "comment" : "Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars.",
@@ -489,9 +516,6 @@
         }
       }
     },
-    "Forgotten Password?" : {
-
-    },
     "Instructions" : {
 
     },
@@ -518,6 +542,9 @@
           }
         }
       }
+    },
+    "Key" : {
+      "extractionState" : "manual"
     },
     "Log in" : {
 
@@ -563,12 +590,6 @@
           }
         }
       }
-    },
-    "Password" : {
-      "comment" : "Label next to a password text field."
-    },
-    "Password Recovery" : {
-
     },
     "PasswordRecoveryEmailSentMessage" : {
       "comment" : "Message displayed when the email for password recovery has been sent.",
@@ -691,9 +712,6 @@
       }
     },
     "Please check your email for email sign-in link." : {
-
-    },
-    "Please check your email for password recovery instructions." : {
 
     },
     "Please check your email for verification link." : {
@@ -834,9 +852,6 @@
     "Sign up" : {
 
     },
-    "Signed in" : {
-
-    },
     "SignedIn" : {
       "comment" : "Title of successfully signed in label.",
       "extractionState" : "manual",
@@ -932,6 +947,9 @@
           }
         }
       }
+    },
+    "Submit" : {
+
     },
     "TermsOfService" : {
       "comment" : "Text linked to a web page with the Terms of Service content.",
