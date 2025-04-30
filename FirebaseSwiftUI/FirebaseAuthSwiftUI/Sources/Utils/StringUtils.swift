@@ -85,6 +85,7 @@ public class StringUtils {
   /// Password input label
   /// found in:
   /// - EmailAuthView
+  /// - PasswordPromptView
   public var passwordInputLabel: String {
     return localizedString(for: "EnterYourPassword")
   }
@@ -192,7 +193,15 @@ public class StringUtils {
   /// found in:
   /// - PasswordRecoveryView
   /// - EmailLinkView
+  /// - PasswordPromptView
   public var okButtonLabel: String {
     return localizedString(for: "OK")
+  }
+
+  /// General string - Cancel button label
+  /// found in:
+  /// - PasswordPromptView
+  public var cancelButtonLabel: String {
+    return localizedString(for: "Cancel")
   }
 }

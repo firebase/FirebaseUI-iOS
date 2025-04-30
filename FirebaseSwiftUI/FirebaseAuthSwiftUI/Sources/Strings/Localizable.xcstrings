@@ -234,9 +234,6 @@
         }
       }
     },
-    "Confirm password" : {
-
-    },
     "ConfirmEmail" : {
       "comment" : "Title of confirm email label.",
       "extractionState" : "manual",
@@ -377,9 +374,6 @@
           }
         }
       }
-    },
-    "Email" : {
-      "comment" : "Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars."
     },
     "EmailAlreadyInUseError" : {
       "comment" : "Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars.",
@@ -558,9 +552,6 @@
     "Log in" : {
 
     },
-    "Log in with password" : {
-
-    },
     "Login" : {
 
     },
@@ -720,13 +711,7 @@
         }
       }
     },
-    "Please check your email for email sign-in link." : {
-
-    },
     "Please check your email for verification link." : {
-
-    },
-    "Prefer Email link sign-in?" : {
 
     },
     "PrivacyPolicy" : {
@@ -849,9 +834,6 @@
         }
       }
     },
-    "Send email sign-in link" : {
-
-    },
     "SendEmailSignInLinkButtonLabel" : {
       "comment" : "Button label for sending email sign-in link",
       "extractionState" : "manual",
@@ -863,9 +845,6 @@
           }
         }
       }
-    },
-    "Sign in with email link" : {
-
     },
     "Sign out" : {
 
