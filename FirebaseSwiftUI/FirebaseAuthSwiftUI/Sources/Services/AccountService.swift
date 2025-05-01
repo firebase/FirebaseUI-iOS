@@ -19,27 +19,19 @@ enum AuthenticationToken {
 protocol AuthenticatedOperation {
   func callAsFunction(on user: User) async throws
   func reauthenticate() async throws -> AuthenticationToken
-  func performOperation(on user: User, with token: AuthenticationToken?) async throws
 }
 
 extension AuthenticatedOperation {
-  func callAsFunction(on user: User) async throws {
+  func callAsFunction(on _: User,
+                      _ performOperation: () async throws -> Void) async throws {
     do {
-      try await performOperation(on: user, with: nil)
+      try await performOperation()
     } catch let error as NSError where error.requiresReauthentication {
       let token = try await reauthenticate()
-      try await performOperation(on: user, with: token)
+      try await performOperation()
     } catch AuthServiceError.reauthenticationRequired {
       let token = try await reauthenticate()
-      try await performOperation(on: user, with: token)
+      try await performOperation()
     }
-  }
-}
-
-protocol DeleteUserOperation: AuthenticatedOperation {}
-
-extension DeleteUserOperation {
-  func performOperation(on user: User, with _: AuthenticationToken? = nil) async throws {
-    try await user.delete()
   }
 }

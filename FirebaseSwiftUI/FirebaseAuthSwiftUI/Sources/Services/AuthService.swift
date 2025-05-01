@@ -33,6 +33,7 @@ public enum AuthView {
   case authPicker
   case passwordRecovery
   case emailLink
+  case updatePassword
 }
 
 @MainActor
@@ -213,6 +214,24 @@ public extension AuthService {
     do {
       if let user = auth.currentUser {
         let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
+        try await operation(on: user)
+      }
+
+    } catch {
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
+      throw error
+    }
+  }
+
+  func updatePassword(to password: String) async throws {
+    do {
+      if let user = auth.currentUser {
+        let operation = EmailPasswordUpdatePasswordOperation(
+          passwordPrompt: passwordPrompt,
+          newPassword: password
+        )
         try await operation(on: user)
       }
 
