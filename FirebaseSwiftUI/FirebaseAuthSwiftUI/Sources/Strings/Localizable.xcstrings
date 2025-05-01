@@ -1048,6 +1048,9 @@
         }
       }
     },
+    "Update password" : {
+
+    },
     "UpdateEmailAlertMessage" : {
       "comment" : "Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "manual",

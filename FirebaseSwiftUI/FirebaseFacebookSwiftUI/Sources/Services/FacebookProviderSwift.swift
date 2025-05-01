@@ -22,6 +22,7 @@ public enum FacebookProviderError: Error {
 }
 
 public class FacebookProviderSwift: FacebookProviderProtocol {
+  public let id: String = "facebook"
   let scopes: [String]
   let shortName = "Facebook"
   let providerId = "facebook.com"
@@ -34,9 +35,9 @@ public class FacebookProviderSwift: FacebookProviderProtocol {
     rawNonce = CommonUtils.randomNonce()
     shaNonce = CommonUtils.sha256Hash(of: rawNonce)
   }
-
-  @MainActor public var authButton: SignInWithFacebookButton {
-    return SignInWithFacebookButton()
+  
+  @MainActor public func authButton() -> AnyView {
+    AnyView(SignInWithFacebookButton())
   }
 
   @MainActor public func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential {

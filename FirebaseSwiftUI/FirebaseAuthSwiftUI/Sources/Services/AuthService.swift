@@ -2,8 +2,8 @@
 import SwiftUI
 
 public protocol ExternalAuthProvider {
-  associatedtype ButtonType: View
-  @MainActor var authButton: ButtonType { get }
+  var id: String { get } 
+  @MainActor func authButton() -> AnyView
 }
 
 public protocol GoogleProviderProtocol: ExternalAuthProvider {
@@ -95,6 +95,21 @@ public final class AuthService {
 
   private var listenerManager: AuthListenerManager?
   private var signedInCredential: AuthCredential?
+
+  private var providers: [ExternalAuthProvider] = []
+  public func register(provider: ExternalAuthProvider) {
+    providers.append(provider)
+  }
+
+  public func renderButtons(spacing: CGFloat = 16) -> AnyView {
+    AnyView(
+      VStack(spacing: spacing) {
+        ForEach(providers, id: \.id) { provider in
+          provider.authButton()
+        }
+      }
+    )
+  }
 
   private var safeGoogleProvider: any GoogleProviderProtocol {
     get throws {

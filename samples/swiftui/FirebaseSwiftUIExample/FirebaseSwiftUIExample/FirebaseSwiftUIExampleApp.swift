@@ -95,17 +95,15 @@ struct ContentView: View {
     let phoneAuthProvider = PhoneAuthProviderSwift()
     authService = AuthService(
       configuration: configuration,
-      googleProvider: nil,
       facebookProvider: facebookProvider,
       phoneAuthProvider: phoneAuthProvider
     )
-      // Transition to this api
-      .withGoogleSignIn()
+    // Transition to this api
+    .withGoogleSignIn()
   }
 
   var body: some View {
     AuthPickerView {
-      SignInWithGoogleButton()
       SignInWithFacebookButton()
       PhoneAuthButtonView()
     }.environment(authService)

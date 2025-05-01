@@ -16,6 +16,7 @@ public enum GoogleProviderError: Error {
 }
 
 public class GoogleProviderSwift: @preconcurrency GoogleProviderProtocol {
+  public let id: String = "google"
   let scopes: [String]
   let shortName = "Google"
   let providerId = "google.com"
@@ -25,12 +26,12 @@ public class GoogleProviderSwift: @preconcurrency GoogleProviderProtocol {
     self.clientID = clientID
   }
 
-  @MainActor public var authButton: GoogleSignInButton {
-    return GoogleSignInButton {
+  @MainActor public func authButton() -> AnyView {
+    AnyView(GoogleSignInButton {
       Task {
         try await self.signInWithGoogle(clientID: self.clientID)
       }
-    }
+    })
   }
 
   @MainActor public func signInWithGoogle(clientID: String) async throws -> AuthCredential {
