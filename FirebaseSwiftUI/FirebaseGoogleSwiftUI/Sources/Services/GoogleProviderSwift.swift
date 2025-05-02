@@ -34,6 +34,14 @@ public class GoogleProviderSwift: @preconcurrency GoogleProviderProtocol {
     })
   }
 
+  @MainActor @ViewBuilder public func authButtonView() -> some View {
+    GoogleSignInButton {
+      Task {
+        try await self.signInWithGoogle(clientID: self.clientID)
+      }
+    }
+  }
+
   @MainActor public func signInWithGoogle(clientID: String) async throws -> AuthCredential {
     guard let presentingViewController = await (UIApplication.shared.connectedScenes
       .first as? UIWindowScene)?.windows.first?.rootViewController else {

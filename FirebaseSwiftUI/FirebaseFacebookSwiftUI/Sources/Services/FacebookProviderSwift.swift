@@ -35,9 +35,13 @@ public class FacebookProviderSwift: FacebookProviderProtocol {
     rawNonce = CommonUtils.randomNonce()
     shaNonce = CommonUtils.sha256Hash(of: rawNonce)
   }
-  
+
   @MainActor public func authButton() -> AnyView {
     AnyView(SignInWithFacebookButton())
+  }
+
+  @MainActor @ViewBuilder public func authButtonView() -> some View {
+    SignInWithFacebookButton()
   }
 
   @MainActor public func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential {

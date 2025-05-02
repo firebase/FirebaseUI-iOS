@@ -2,7 +2,9 @@
 import SwiftUI
 
 public protocol ExternalAuthProvider {
-  var id: String { get } 
+  var id: String { get }
+  associatedtype ButtonType: View
+  @MainActor @ViewBuilder func authButtonView() -> ButtonType
   @MainActor func authButton() -> AnyView
 }
 
@@ -65,15 +67,9 @@ private final class AuthListenerManager {
 @MainActor
 @Observable
 public final class AuthService {
-  public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
-              googleProvider: (any GoogleProviderProtocol)? = nil,
-              facebookProvider: (any FacebookProviderProtocol)? = nil,
-              phoneAuthProvider: (any PhoneAuthProviderProtocol)? = nil) {
+  public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth()) {
     self.auth = auth
     self.configuration = configuration
-    self.googleProvider = googleProvider
-    self.facebookProvider = facebookProvider
-    self.phoneAuthProvider = phoneAuthProvider
     string = StringUtils(bundle: configuration.customStringsBundle ?? Bundle.module)
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
   }
@@ -96,8 +92,8 @@ public final class AuthService {
   private var listenerManager: AuthListenerManager?
   private var signedInCredential: AuthCredential?
 
-  private var providers: [ExternalAuthProvider] = []
-  public func register(provider: ExternalAuthProvider) {
+  private var providers: [any ExternalAuthProvider] = []
+  public func register(provider: any ExternalAuthProvider) {
     providers.append(provider)
   }
 
@@ -110,6 +106,25 @@ public final class AuthService {
       }
     )
   }
+
+  @ViewBuilder
+  public var googleButton: some View {
+    if googleProvider != nil {
+      // For purpose of demonstration
+      // This produces "Type 'any View' cannot conform to 'View'"
+      googleProvider!.authButtonView()
+    } else {
+      EmptyView()
+    }
+  }
+
+//  public func renderButtonViews(spacing: CGFloat = 16) -> some View {
+//    VStack(spacing: spacing) {
+//      ForEach(providers, id: \.id) { provider in
+//        provider.authButtonView()
+//      }
+//    }
+//  }
 
   private var safeGoogleProvider: any GoogleProviderProtocol {
     get throws {

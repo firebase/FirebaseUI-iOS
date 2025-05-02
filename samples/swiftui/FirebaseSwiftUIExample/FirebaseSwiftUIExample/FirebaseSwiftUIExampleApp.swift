@@ -91,12 +91,9 @@ struct ContentView: View {
       shouldAutoUpgradeAnonymousUsers: true,
       emailLinkSignInActionCodeSettings: actionCodeSettings
     )
-    let facebookProvider = FacebookProviderSwift()
-    let phoneAuthProvider = PhoneAuthProviderSwift()
+
     authService = AuthService(
-      configuration: configuration,
-      facebookProvider: facebookProvider,
-      phoneAuthProvider: phoneAuthProvider
+      configuration: configuration
     )
     // Transition to this api
     .withGoogleSignIn()
