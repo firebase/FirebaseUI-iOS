@@ -141,6 +141,10 @@ public final class AuthService {
     errorMessage = ""
   }
 
+  public var shouldHandleAnonymousUpgrade: Bool {
+    currentUser?.isAnonymous == true && configuration.shouldAutoUpgradeAnonymousUsers
+  }
+
   public func signOut() async throws {
     do {
       try await auth.signOut()
@@ -167,15 +171,31 @@ public final class AuthService {
     }
   }
 
+  public func handleAutoUpgradeAnonymousUser(credentials credentials: AuthCredential) async throws {
+    do {
+      try await currentUser?.link(with: credentials)
+    } catch let error as NSError {
+      if error.code == AuthErrorCode.emailAlreadyInUse.rawValue {
+        let context = AccountMergeConflictContext(
+          credential: credentials,
+          underlyingError: error,
+          message: "Unable to merge accounts. Use the credential in the context to resolve the conflict."
+        )
+        throw AuthServiceError.accountMergeConflict(context: context)
+      }
+      throw error
+    }
+  }
+
   public func signIn(credentials credentials: AuthCredential) async throws {
     authenticationState = .authenticating
     do {
-      if currentUser?.isAnonymous == true, configuration.shouldAutoUpgradeAnonymousUsers {
-        try await linkAccounts(credentials: credentials)
+      if shouldHandleAnonymousUpgrade {
+        try await handleAutoUpgradeAnonymousUser(credentials: credentials)
       } else {
         try await auth.signIn(with: credentials)
-        updateAuthenticationState()
       }
+      updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
       errorMessage = string.localizedErrorMessage(
@@ -231,7 +251,13 @@ public extension AuthService {
     authenticationState = .authenticating
 
     do {
-      try await auth.createUser(withEmail: email, password: password)
+      if shouldHandleAnonymousUpgrade {
+        // TODO: - check this works. This is how it is done in previous implementation, but I wonder if this would fail
+        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+        try await handleAutoUpgradeAnonymousUser(credentials: credential)
+      } else {
+        try await auth.createUser(withEmail: email, password: password)
+      }
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
@@ -278,6 +304,8 @@ public extension AuthService {
         throw AuthServiceError.invalidEmailLink
       }
       let link = url.absoluteString
+      // TODO: - get anonymous id here and check against current user before linking accounts
+      // put anonymous uid on link and get it back: https://github.com/firebase/FirebaseUI-iOS/blob/main/FirebaseEmailAuthUI/Sources/FUIEmailAuth.m#L822
       if auth.isSignIn(withEmailLink: link) {
         let result = try await auth.signIn(withEmail: email, link: link)
         updateAuthenticationState()
