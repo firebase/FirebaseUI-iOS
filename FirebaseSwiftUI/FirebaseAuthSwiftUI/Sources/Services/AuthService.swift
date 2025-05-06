@@ -254,7 +254,6 @@ public extension AuthService {
 
     do {
       if shouldHandleAnonymousUpgrade {
-        // TODO: - check this works. This is how it is done in previous implementation, but I wonder if this would fail
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         try await handleAutoUpgradeAnonymousUser(credentials: credential)
       } else {
