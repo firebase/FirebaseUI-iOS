@@ -124,7 +124,9 @@ public final class AuthService {
     guard let actionCodeSettings = configuration
       .emailLinkSignInActionCodeSettings else {
       throw AuthServiceError
-        .notConfiguredActionCodeSettings
+        .notConfiguredActionCodeSettings(
+          "ActionCodeSettings has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`"
+        )
     }
     return actionCodeSettings
   }
@@ -285,7 +287,7 @@ public extension AuthService {
 public extension AuthService {
   func sendEmailSignInLink(to email: String) async throws {
     do {
-      let actionCodeSettings = try safeActionCodeSettings()
+      let actionCodeSettings = try updateActionCodeSettings()
       try await auth.sendSignInLink(
         toEmail: email,
         actionCodeSettings: actionCodeSettings
@@ -304,10 +306,15 @@ public extension AuthService {
         throw AuthServiceError.invalidEmailLink
       }
       let link = url.absoluteString
-      // TODO: - get anonymous id here and check against current user before linking accounts
-      // put anonymous uid on link and get it back: https://github.com/firebase/FirebaseUI-iOS/blob/main/FirebaseEmailAuthUI/Sources/FUIEmailAuth.m#L822
+
       if auth.isSignIn(withEmailLink: link) {
-        let result = try await auth.signIn(withEmail: email, link: link)
+        let anonymousUserID = CommonUtils.getQueryParamValue(from: link, paramName: "ui_auid")
+        if shouldHandleAnonymousUpgrade, anonymousUserID == currentUser?.uid {
+          let credential = EmailAuthProvider.credential(withEmail: email, link: link)
+          try await handleAutoUpgradeAnonymousUser(credentials: credential)
+        } else {
+          let result = try await auth.signIn(withEmail: email, link: link)
+        }
         updateAuthenticationState()
         emailLink = nil
       }
@@ -317,6 +324,38 @@ public extension AuthService {
       )
       throw error
     }
+  }
+
+  private func updateActionCodeSettings() throws -> ActionCodeSettings {
+    let actionCodeSettings = try safeActionCodeSettings()
+    guard var urlComponents = URLComponents(string: actionCodeSettings.url!.absoluteString) else {
+      throw AuthServiceError
+        .notConfiguredActionCodeSettings(
+          "ActionCodeSettings.url has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`"
+        )
+    }
+
+    var queryItems: [URLQueryItem] = []
+
+    if shouldHandleAnonymousUpgrade {
+      if let currentUser = currentUser {
+        let anonymousUID = currentUser.uid
+        let auidItem = URLQueryItem(name: "ui_auid", value: anonymousUID)
+        queryItems.append(auidItem)
+      }
+    }
+
+    // We don't have config for forceSameDevice so it is set as default
+    let forceSameDevice = "1"
+    let sameDeviceItem = URLQueryItem(name: "ui_sd", value: forceSameDevice)
+    queryItems.append(sameDeviceItem)
+
+    urlComponents.queryItems = queryItems
+    if let finalURL = urlComponents.url {
+      actionCodeSettings.url = finalURL
+    }
+
+    return actionCodeSettings
   }
 }
 

@@ -16,7 +16,7 @@ public enum AuthServiceError: LocalizedError {
   case invalidEmailLink
   case notConfiguredProvider(String)
   case clientIdNotFound(String)
-  case notConfiguredActionCodeSettings
+  case notConfiguredActionCodeSettings(String)
   case reauthenticationRequired(String)
   case invalidCredentials(String)
   case signInFailed(underlying: Error)
@@ -30,8 +30,8 @@ public enum AuthServiceError: LocalizedError {
       return description
     case let .clientIdNotFound(description):
       return description
-    case .notConfiguredActionCodeSettings:
-      return "ActionCodeSettings has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`"
+    case let .notConfiguredActionCodeSettings(description):
+      return description
     case let .reauthenticationRequired(description):
       return description
     case let .invalidCredentials(description):
