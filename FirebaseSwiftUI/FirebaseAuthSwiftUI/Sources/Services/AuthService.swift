@@ -307,7 +307,8 @@ public extension AuthService {
       let link = url.absoluteString
 
       if auth.isSignIn(withEmailLink: link) {
-        let anonymousUserID = CommonUtils.getQueryParamValue(from: link, paramName: "ui_auid")
+        let anonymousUserID = CommonUtils.getQueryParamValue(from: link, paramName: "continueUrl")
+          .flatMap { CommonUtils.getQueryParamValue(from: $0, paramName: "ui_auid") }
         if shouldHandleAnonymousUpgrade, anonymousUserID == currentUser?.uid {
           let credential = EmailAuthProvider.credential(withEmail: email, link: link)
           try await handleAutoUpgradeAnonymousUser(credentials: credential)
