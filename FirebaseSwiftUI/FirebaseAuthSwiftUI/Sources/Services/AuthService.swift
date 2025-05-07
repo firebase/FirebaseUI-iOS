@@ -302,12 +302,20 @@ public extension AuthService {
   func handleSignInLink(url url: URL) async throws {
     do {
       guard let email = emailLink else {
-        throw AuthServiceError.invalidEmailLink
+        throw AuthServiceError.invalidEmailLink("email address is missing from local storage")
       }
       let link = url.absoluteString
+      guard let continueUrl = CommonUtils.getQueryParamValue(from: link, paramName: "continueUrl")
+      else {
+        throw AuthServiceError
+          .invalidEmailLink("`continueUrl` parameter is missing from the email link URL")
+      }
 
       if auth.isSignIn(withEmailLink: link) {
-        let anonymousUserID = CommonUtils.getAnonymousUserIdFromUrl(from: link)
+        let anonymousUserID = CommonUtils.getQueryParamValue(
+          from: continueUrl,
+          paramName: "ui_auid"
+        )
         if shouldHandleAnonymousUpgrade, anonymousUserID == currentUser?.uid {
           let credential = EmailAuthProvider.credential(withEmail: email, link: link)
           try await handleAutoUpgradeAnonymousUser(credentials: credential)

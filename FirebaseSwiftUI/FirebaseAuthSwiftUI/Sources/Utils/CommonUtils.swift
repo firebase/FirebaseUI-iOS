@@ -54,9 +54,4 @@ public class CommonUtils {
 
     return urlComponents.queryItems?.first(where: { $0.name == paramName })?.value
   }
-
-  public static func getAnonymousUserIdFromUrl(from urlString: String) -> String? {
-    getQueryParamValue(from: urlString, paramName: "continueUrl")
-      .flatMap { getQueryParamValue(from: $0, paramName: "ui_auid") }
-  }
 }

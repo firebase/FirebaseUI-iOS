@@ -13,7 +13,7 @@ public struct AccountMergeConflictContext: LocalizedError {
 }
 
 public enum AuthServiceError: LocalizedError {
-  case invalidEmailLink
+  case invalidEmailLink(String)
   case notConfiguredProvider(String)
   case clientIdNotFound(String)
   case notConfiguredActionCodeSettings(String)
@@ -24,8 +24,8 @@ public enum AuthServiceError: LocalizedError {
 
   public var errorDescription: String? {
     switch self {
-    case .invalidEmailLink:
-      return "Invalid sign in link. Most likely, the link you used has expired. Try signing in again."
+    case let .invalidEmailLink(description):
+      return description
     case let .notConfiguredProvider(description):
       return description
     case let .clientIdNotFound(description):
