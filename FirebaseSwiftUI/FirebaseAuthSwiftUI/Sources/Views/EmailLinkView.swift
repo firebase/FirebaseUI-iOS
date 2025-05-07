@@ -1,4 +1,5 @@
 import FirebaseAuth
+import FirebaseCore
 import SwiftUI
 
 public struct EmailLinkView {
@@ -76,7 +77,7 @@ extension EmailLinkView: View {
 }
 
 #Preview {
-  CommonUtils.dummyConfigurationForPreview()
+  FirebaseOptions.dummyConfigurationForPreview()
   return EmailLinkView()
     .environment(AuthService())
 }

@@ -1,3 +1,4 @@
+import FirebaseCore
 import SwiftUI
 
 @MainActor
@@ -45,7 +46,7 @@ extension SignedInView: View {
 }
 
 #Preview {
-  CommonUtils.dummyConfigurationForPreview()
+  FirebaseOptions.dummyConfigurationForPreview()
   return SignedInView()
     .environment(AuthService())
 }

@@ -3,6 +3,7 @@ import FacebookCore
 import FacebookLogin
 import FirebaseAuth
 import FirebaseAuthSwiftUI
+import FirebaseCore
 import SwiftUI
 
 @MainActor
@@ -110,7 +111,7 @@ extension SignInWithFacebookButton: View {
 }
 
 #Preview {
-  CommonUtils.dummyConfigurationForPreview()
+  FirebaseOptions.dummyConfigurationForPreview()
   return SignInWithFacebookButton()
     .environment(AuthService())
 }

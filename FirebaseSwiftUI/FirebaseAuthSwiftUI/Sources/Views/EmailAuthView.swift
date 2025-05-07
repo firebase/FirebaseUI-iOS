@@ -5,6 +5,7 @@
 //  Created by Russell Wheatley on 20/03/2025.
 //
 import FirebaseAuth
+import FirebaseCore
 import SwiftUI
 
 private enum FocusableField: Hashable {
@@ -134,7 +135,7 @@ extension EmailAuthView: View {
 }
 
 #Preview {
-  CommonUtils.dummyConfigurationForPreview()
+  FirebaseOptions.dummyConfigurationForPreview()
   return EmailAuthView()
     .environment(AuthService())
 }

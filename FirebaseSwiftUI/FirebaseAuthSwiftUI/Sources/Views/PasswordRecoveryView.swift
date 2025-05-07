@@ -1,3 +1,4 @@
+import FirebaseCore
 import SwiftUI
 
 public struct PasswordRecoveryView {
@@ -69,7 +70,7 @@ extension PasswordRecoveryView: View {
 }
 
 #Preview {
-  CommonUtils.dummyConfigurationForPreview()
+  FirebaseOptions.dummyConfigurationForPreview()
   return PasswordRecoveryView()
     .environment(AuthService())
 }
