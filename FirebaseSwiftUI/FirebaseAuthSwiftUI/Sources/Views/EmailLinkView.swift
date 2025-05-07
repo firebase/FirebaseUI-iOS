@@ -35,11 +35,11 @@ extension EmailLinkView: View {
           await sendEmailLink()
           authService.emailLink = email
         }
-      }, label: {
+      }) {
         Text("Send email sign-in link")
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
-      })
+      }
       .disabled(!CommonUtils.isValidEmail(email))
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)

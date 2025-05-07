@@ -82,9 +82,9 @@ extension EmailAuthView: View {
       if authService.authenticationFlow == .login {
         Button(action: {
           authService.authView = .passwordRecovery
-        }, label: {
+        }) {
           Text("Forgotten Password?")
-        })
+        }
       }
 
       if authService.authenticationFlow == .signUp {
@@ -108,7 +108,7 @@ extension EmailAuthView: View {
           if authService.authenticationFlow == .login { await signInWithEmailPassword() }
           else { await createUserWithEmailPassword() }
         }
-      }, label: {
+      }) {
         if authService.authenticationState != .authenticating {
           Text(authService.authenticationFlow == .login ? "Log in with password" : "Sign up")
             .padding(.vertical, 8)
@@ -119,16 +119,16 @@ extension EmailAuthView: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }
-      })
+      }
       .disabled(!isValid)
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
       Button(action: {
         authService.authView = .passwordRecovery
-      }, label: {
+      }) {
         Text("Prefer Email link sign-in?")
-      })
+      }
     }
   }
 }

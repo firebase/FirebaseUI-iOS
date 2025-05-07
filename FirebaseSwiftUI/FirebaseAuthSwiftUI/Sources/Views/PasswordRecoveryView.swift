@@ -33,11 +33,11 @@ extension PasswordRecoveryView: View {
         Task {
           await sendPasswordRecoveryEmail()
         }
-      }, label: {
+      }) {
         Text("Password Recovery")
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
-      })
+      }
       .disabled(!CommonUtils.isValidEmail(email))
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)

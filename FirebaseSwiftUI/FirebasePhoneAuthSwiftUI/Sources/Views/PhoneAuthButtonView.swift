@@ -39,11 +39,11 @@ extension PhoneAuthButtonView: View {
               )
             }
           }
-        }, label: {
+        }) {
           Text("Send SMS code")
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
-        })
+        }
         .disabled(!PhoneUtils.isValidPhoneNumber(phoneNumber))
         .padding([.top, .bottom], 8)
         .frame(maxWidth: .infinity)
@@ -69,7 +69,7 @@ extension PhoneAuthButtonView: View {
             }
             showVerificationCodeInput = false
           }
-        }, label: {
+        }) {
           Text("Verify phone number and sign-in")
             .foregroundColor(.white)
             .padding()
@@ -77,7 +77,7 @@ extension PhoneAuthButtonView: View {
             .background(Color.green)
             .cornerRadius(8)
             .padding(.horizontal)
-        })
+        }
       }.onOpenURL { url in
         authService.auth.canHandle(url)
       }
