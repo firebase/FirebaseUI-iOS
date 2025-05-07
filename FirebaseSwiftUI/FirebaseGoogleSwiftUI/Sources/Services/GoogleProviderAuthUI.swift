@@ -1,6 +1,9 @@
 @preconcurrency import FirebaseAuth
 import FirebaseAuthSwiftUI
+import FirebaseCore
 import GoogleSignIn
+import GoogleSignInSwift
+import SwiftUI
 
 let kGoogleUserInfoEmailScope = "https://www.googleapis.com/auth/userinfo.email"
 let kGoogleUserInfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile"
@@ -16,12 +19,18 @@ public class GoogleProviderAuthUI: @preconcurrency GoogleProviderAuthUIProtocol 
   let scopes: [String]
   let shortName = "Google"
   let providerId = "google.com"
-  public init(scopes: [String]? = nil) {
+  let clientID: String
+  public init(scopes: [String]? = nil, clientID: String = FirebaseApp.app()!.options.clientID!) {
     self.scopes = scopes ?? kDefaultScopes
+    self.clientID = clientID
   }
 
-  public func handleUrl(_ url: URL) -> Bool {
-    return GIDSignIn.sharedInstance.handle(url)
+  @MainActor public var authButton: GoogleSignInButton {
+    return GoogleSignInButton {
+      Task {
+        try await self.signInWithGoogle(clientID: self.clientID)
+      }
+    }
   }
 
   @MainActor public func signInWithGoogle(clientID: String) async throws -> AuthCredential {

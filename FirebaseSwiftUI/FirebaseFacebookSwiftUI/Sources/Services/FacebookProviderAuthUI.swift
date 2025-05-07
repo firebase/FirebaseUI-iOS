@@ -3,6 +3,7 @@ import FacebookCore
 import FacebookLogin
 import FirebaseAuth
 import FirebaseAuthSwiftUI
+import SwiftUI
 
 let kFacebookEmailScope = "email"
 let kFacebookProfileScope = "public_profile"
@@ -32,6 +33,10 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
     self.scopes = scopes ?? kDefaultFacebookScopes
     rawNonce = CommonUtils.randomNonce()
     shaNonce = CommonUtils.sha256Hash(of: rawNonce)
+  }
+
+  @MainActor public var authButton: SignInWithFacebookButton {
+    return SignInWithFacebookButton()
   }
 
   @MainActor public func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential {

@@ -8,11 +8,10 @@ import FacebookCore
 import FirebaseAuth
 import FirebaseCore
 import FirebaseGoogleSwiftUI
-import Foundation
+import FirebasePhoneAuthSwiftUI
+import GoogleSignIn
 import SwiftData
 import SwiftUI
-
-let googleProvider = GoogleProviderAuthUI()
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
@@ -44,15 +43,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ app: UIApplication,
                    open url: URL,
                    options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-    ApplicationDelegate.shared.application(
+    if ApplicationDelegate.shared.application(
       app,
       open: url,
       sourceApplication: options[UIApplication.OpenURLOptionsKey
         .sourceApplication] as? String,
       annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-    )
+    ) {
+      return true
+    }
 
-    return googleProvider.handleUrl(url)
+    return GIDSignIn.sharedInstance.handle(url)
   }
 }
 

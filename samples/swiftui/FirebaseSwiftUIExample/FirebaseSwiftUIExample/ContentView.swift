@@ -32,10 +32,10 @@ struct ContentView: View {
     let phoneAuthProvider = PhoneAuthProviderAuthUI()
     authService = AuthService(
       configuration: configuration,
-      googleProvider: googleProvider,
       facebookProvider: facebookProvider,
       phoneAuthProvider: phoneAuthProvider
     )
+    .withGoogleSignIn()
   }
 
   var body: some View {

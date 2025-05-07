@@ -1,8 +1,12 @@
 @preconcurrency import FirebaseAuth
 import SwiftUI
 
+public protocol ExternalAuthProvider {
+  associatedtype ButtonType: View
+  @MainActor var authButton: ButtonType { get }
+}
+
 public protocol GoogleProviderAuthUIProtocol {
-  func handleUrl(_ url: URL) -> Bool
   @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
 }
 
@@ -29,6 +33,7 @@ public enum AuthView {
   case authPicker
   case passwordRecovery
   case emailLink
+  case updatePassword
 }
 
 @MainActor
@@ -84,12 +89,14 @@ public final class AuthService {
   public var errorMessage = ""
   public let passwordPrompt: PasswordPromptCoordinator = .init()
 
-  private var listenerManager: AuthListenerManager?
-  private let googleProvider: GoogleProviderAuthUIProtocol?
-  private let facebookProvider: FacebookProviderAuthUIProtocol?
-  private let phoneAuthProvider: PhoneAuthProviderAuthUIProtocol?
+  public var googleProvider: (any GoogleProviderAuthUIProtocol)?
+  public var facebookProvider: (any FacebookProviderAuthUIProtocol)?
+  public var phoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
 
-  private var safeGoogleProvider: GoogleProviderAuthUIProtocol {
+  private var listenerManager: AuthListenerManager?
+  private var signedInCredential: AuthCredential?
+
+  private var safeGoogleProvider: any GoogleProviderAuthUIProtocol {
     get throws {
       guard let provider = googleProvider else {
         throw AuthServiceError
@@ -207,6 +214,24 @@ public extension AuthService {
     do {
       if let user = auth.currentUser {
         let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
+        try await operation(on: user)
+      }
+
+    } catch {
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
+      throw error
+    }
+  }
+
+  func updatePassword(to password: String) async throws {
+    do {
+      if let user = auth.currentUser {
+        let operation = EmailPasswordUpdatePasswordOperation(
+          passwordPrompt: passwordPrompt,
+          newPassword: password
+        )
         try await operation(on: user)
       }
 

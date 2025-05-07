@@ -15,32 +15,40 @@ extension SignedInView: View {
   }
 
   public var body: some View {
-    VStack {
-      Text("Signed in")
-      Text("User: \(authService.currentUser?.email ?? "Unknown")")
+    if authService.authView == .updatePassword {
+      UpdatePasswordView()
+    } else {
+      VStack {
+        Text("Signed in")
+        Text("User: \(authService.currentUser?.email ?? "Unknown")")
 
-      if authService.currentUser?.isEmailVerified == false {
-        VerifyEmailView()
-      }
-
-      Button("Sign out") {
-        Task {
-          do {
-            try await authService.signOut()
-          } catch {}
+        if authService.currentUser?.isEmailVerified == false {
+          VerifyEmailView()
         }
-      }
-      Divider()
-      Button("Delete account") {
-        Task {
-          do {
-            try await authService.deleteUser()
-          } catch {}
+        Divider()
+        Button("Update password") {
+          authService.authView = .updatePassword
         }
+        Divider()
+        Button("Sign out") {
+          Task {
+            do {
+              try await authService.signOut()
+            } catch {}
+          }
+        }
+        Divider()
+        Button("Delete account") {
+          Task {
+            do {
+              try await authService.deleteUser()
+            } catch {}
+          }
+        }
+        Text(authService.errorMessage).foregroundColor(.red)
+      }.sheet(isPresented: isShowingPasswordPrompt) {
+        PasswordPromptSheet(coordinator: authService.passwordPrompt)
       }
-      Text(authService.errorMessage).foregroundColor(.red)
-    }.sheet(isPresented: isShowingPasswordPrompt) {
-      PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }
   }
 }
