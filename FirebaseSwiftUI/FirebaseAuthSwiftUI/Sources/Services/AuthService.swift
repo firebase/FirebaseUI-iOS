@@ -302,7 +302,7 @@ public extension AuthService {
   func handleSignInLink(url url: URL) async throws {
     do {
       guard let email = emailLink else {
-        throw AuthServiceError.invalidEmailLink("email address is missing from local storage")
+        throw AuthServiceError.invalidEmailLink("email address is missing from app storage. Is this the same device?")
       }
       let link = url.absoluteString
       guard let continueUrl = CommonUtils.getQueryParamValue(from: link, paramName: "continueUrl")
