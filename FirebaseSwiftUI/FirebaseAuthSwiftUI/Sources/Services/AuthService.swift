@@ -302,7 +302,8 @@ public extension AuthService {
   func handleSignInLink(url url: URL) async throws {
     do {
       guard let email = emailLink else {
-        throw AuthServiceError.invalidEmailLink("email address is missing from app storage. Is this the same device?")
+        throw AuthServiceError
+          .invalidEmailLink("email address is missing from app storage. Is this the same device?")
       }
       let link = url.absoluteString
       guard let continueUrl = CommonUtils.getQueryParamValue(from: link, paramName: "continueUrl")
@@ -351,11 +352,6 @@ public extension AuthService {
         queryItems.append(auidItem)
       }
     }
-
-    // We don't have config for forceSameDevice so it is set as default
-    let forceSameDevice = "1"
-    let sameDeviceItem = URLQueryItem(name: "ui_sd", value: forceSameDevice)
-    queryItems.append(sameDeviceItem)
 
     urlComponents.queryItems = queryItems
     if let finalURL = urlComponents.url {
