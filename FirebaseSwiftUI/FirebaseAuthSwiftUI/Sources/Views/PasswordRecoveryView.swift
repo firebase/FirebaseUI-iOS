@@ -60,12 +60,12 @@ extension PasswordRecoveryView: View {
     }
     .navigationBarItems(leading: Button(action: {
       authService.authView = .authPicker
-    }, label: {
+    }) {
       Image(systemName: "chevron.left")
         .foregroundColor(.blue)
       Text("Back")
         .foregroundColor(.blue)
-    }))
+    })
   }
 }
 

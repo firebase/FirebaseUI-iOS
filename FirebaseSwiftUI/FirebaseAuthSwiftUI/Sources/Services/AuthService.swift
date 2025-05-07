@@ -6,15 +6,15 @@ public protocol ExternalAuthProvider {
   @MainActor var authButton: ButtonType { get }
 }
 
-public protocol GoogleProviderAuthUIProtocol {
+public protocol GoogleProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
 }
 
-public protocol FacebookProviderAuthUIProtocol {
+public protocol FacebookProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential
 }
 
-public protocol PhoneAuthProviderAuthUIProtocol {
+public protocol PhoneAuthProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
 }
 
@@ -66,9 +66,9 @@ private final class AuthListenerManager {
 @Observable
 public final class AuthService {
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
-              googleProvider: GoogleProviderAuthUIProtocol? = nil,
-              facebookProvider: FacebookProviderAuthUIProtocol? = nil,
-              phoneAuthProvider: PhoneAuthProviderAuthUIProtocol? = nil) {
+              googleProvider: (any GoogleProviderAuthUIProtocol)? = nil,
+              facebookProvider: (any FacebookProviderAuthUIProtocol)? = nil,
+              phoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)? = nil) {
     self.auth = auth
     self.configuration = configuration
     self.googleProvider = googleProvider
@@ -106,7 +106,7 @@ public final class AuthService {
     }
   }
 
-  private var safeFacebookProvider: FacebookProviderAuthUIProtocol {
+  private var safeFacebookProvider: any FacebookProviderAuthUIProtocol {
     get throws {
       guard let provider = facebookProvider else {
         throw AuthServiceError
@@ -116,7 +116,7 @@ public final class AuthService {
     }
   }
 
-  private var safePhoneAuthProvider: PhoneAuthProviderAuthUIProtocol {
+  private var safePhoneAuthProvider: any PhoneAuthProviderAuthUIProtocol {
     get throws {
       guard let provider = phoneAuthProvider else {
         throw AuthServiceError
