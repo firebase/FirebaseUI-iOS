@@ -30,7 +30,7 @@ extension SignedInView: View {
           VerifyEmailView()
         }
         Divider()
-        Button("Update password") {
+        Button(authService.string.updatePasswordButtonLabel) {
           authService.authView = .updatePassword
         }
         Divider()

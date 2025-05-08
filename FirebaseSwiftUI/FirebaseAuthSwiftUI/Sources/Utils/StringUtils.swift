@@ -201,6 +201,14 @@ public class StringUtils {
   public var signOutButtonLabel: String {
     return localizedString(for: "AS_SignOut")
   }
+  
+  /// Account settings - update password button label
+  /// found in:
+  /// SignedInView
+  public var updatePasswordButtonLabel: String {
+    return localizedString(for: "Update password")
+  }
+  
 
   /// General string - Back button label
   /// found in:
