@@ -4,11 +4,10 @@ import SwiftUI
 
 public typealias VerificationID = String
 
-public class PhoneAuthProviderSwift: @preconcurrency PhoneAuthProviderProtocol {
-
+public class PhoneAuthProviderAuthUI: @preconcurrency PhoneAuthProviderAuthUIProtocol {
   public var authButton: Button<Text> {
     // TODO: implement me
-    return Button("Phone", action: { })
+    return Button("Phone", action: {})
   }
 
   public init() {}

@@ -1,3 +1,4 @@
+import FirebaseCore
 import SwiftUI
 
 public struct VerifyEmailView {
@@ -41,4 +42,10 @@ extension VerifyEmailView: View {
       .padding()
     }
   }
+}
+
+#Preview {
+  FirebaseOptions.dummyConfigurationForPreview()
+  return VerifyEmailView()
+    .environment(AuthService())
 }
