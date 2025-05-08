@@ -9,7 +9,7 @@
 5. Press `Add Packages` button to complete installation.
 
 
-## Getting started
+## Getting started
 
 1. Follow step 2, 3 & 5 on [adding Firebase to your SwiftUI app](https://firebase.google.com/docs/ios/setup).
 2. You should now update your app entry point to look like this:
@@ -96,7 +96,7 @@ public struct AuthConfiguration {
 }
 ```
 
-## Configuring providers
+## Configuring providers
 
 1. Ensure the provider is installed from step 1 (e.g. if configuring Google provider, you need to install `FirebaseGoogleSwiftUI` package).
 2. Ensure you have called the relevant API on `AuthService` to initialise provider. Example of Email and Google provider initialization:
