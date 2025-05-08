@@ -162,6 +162,7 @@
     },
     "AuthPickerTitle" : {
       "comment" : "Title for auth picker screen.",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

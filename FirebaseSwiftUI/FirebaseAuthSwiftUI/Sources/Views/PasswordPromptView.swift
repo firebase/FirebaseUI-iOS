@@ -28,3 +28,7 @@ extension PasswordPromptSheet: View {
     .padding()
   }
 }
+
+#Preview {
+  PasswordPromptSheet(coordinator: PasswordPromptCoordinator())
+}

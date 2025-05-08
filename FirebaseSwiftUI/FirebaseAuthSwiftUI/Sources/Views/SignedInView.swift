@@ -1,3 +1,4 @@
+import FirebaseCore
 import SwiftUI
 
 @MainActor
@@ -14,36 +15,50 @@ extension SignedInView: View {
   }
 
   public var body: some View {
-    VStack {
-      Text(authService.string.signedInTitle)
+    if authService.authView == .updatePassword {
+      UpdatePasswordView()
+    } else {
+      VStack {
+        Text(authService.string.signedInTitle)
         .font(.largeTitle)
         .fontWeight(.bold)
         .padding()
       Text(authService.string.accountSettingsEmailLabel)
       Text("\(authService.currentUser?.email ?? "Unknown")")
 
-      if authService.currentUser?.isEmailVerified == false {
-        VerifyEmailView()
-      }
-
-      Button(authService.string.signOutButtonLabel) {
-        Task {
-          do {
-            try await authService.signOut()
-          } catch {}
+        if authService.currentUser?.isEmailVerified == false {
+          VerifyEmailView()
         }
-      }
-      Divider()
-      Button(authService.string.deleteAccountButtonLabel) {
-        Task {
-          do {
-            try await authService.deleteUser()
-          } catch {}
+        Divider()
+        Button("Update password") {
+          authService.authView = .updatePassword
         }
+        Divider()
+        Button(authService.string.signOutButtonLabel) {
+          Task {
+            do {
+              try await authService.signOut()
+            } catch {}
+          }
+        }
+        Divider()
+        Button(authService.string.deleteAccountButtonLabel) {
+          Task {
+            do {
+              try await authService.deleteUser()
+            } catch {}
+          }
+        }
+        Text(authService.errorMessage).foregroundColor(.red)
+      }.sheet(isPresented: isShowingPasswordPrompt) {
+        PasswordPromptSheet(coordinator: authService.passwordPrompt)
       }
-      Text(authService.errorMessage).foregroundColor(.red)
-    }.sheet(isPresented: isShowingPasswordPrompt) {
-      PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }
   }
+}
+
+#Preview {
+  FirebaseOptions.dummyConfigurationForPreview()
+  return SignedInView()
+    .environment(AuthService())
 }

@@ -3,6 +3,7 @@ import FacebookCore
 import FacebookLogin
 import FirebaseAuth
 import FirebaseAuthSwiftUI
+import FirebaseCore
 import SwiftUI
 
 @MainActor
@@ -107,4 +108,10 @@ extension SignInWithFacebookButton: View {
     }
     Text(errorMessage).foregroundColor(.red)
   }
+}
+
+#Preview {
+  FirebaseOptions.dummyConfigurationForPreview()
+  return SignInWithFacebookButton()
+    .environment(AuthService())
 }

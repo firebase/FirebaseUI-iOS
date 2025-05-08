@@ -1,4 +1,5 @@
 import FirebaseAuth
+import FirebaseCore
 import SwiftUI
 
 public struct EmailLinkView {
@@ -71,4 +72,10 @@ extension EmailLinkView: View {
         .foregroundColor(.blue)
     })
   }
+}
+
+#Preview {
+  FirebaseOptions.dummyConfigurationForPreview()
+  return EmailLinkView()
+    .environment(AuthService())
 }

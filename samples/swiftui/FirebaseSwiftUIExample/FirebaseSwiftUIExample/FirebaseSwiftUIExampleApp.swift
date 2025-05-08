@@ -4,18 +4,14 @@
 //
 //  Created by Russell Wheatley on 18/02/2025.
 //
-
 import FacebookCore
 import FirebaseAuth
-import FirebaseAuthSwiftUI
 import FirebaseCore
-import FirebaseFacebookSwiftUI
 import FirebaseGoogleSwiftUI
 import FirebasePhoneAuthSwiftUI
+import GoogleSignIn
 import SwiftData
 import SwiftUI
-
-let googleProvider = GoogleProviderSwift()
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
@@ -47,15 +43,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ app: UIApplication,
                    open url: URL,
                    options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-    ApplicationDelegate.shared.application(
+    if ApplicationDelegate.shared.application(
       app,
       open: url,
       sourceApplication: options[UIApplication.OpenURLOptionsKey
         .sourceApplication] as? String,
       annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-    )
+    ) {
+      return true
+    }
 
-    return googleProvider.handleUrl(url)
+    return GIDSignIn.sharedInstance.handle(url)
   }
 }
 
@@ -71,40 +69,5 @@ struct FirebaseSwiftUIExampleApp: App {
         ContentView()
       }
     }
-  }
-}
-
-struct ContentView: View {
-  let authService: AuthService
-
-  init() {
-    // Auth.auth().signInAnonymously()
-
-    let actionCodeSettings = ActionCodeSettings()
-    actionCodeSettings.handleCodeInApp = true
-    actionCodeSettings
-      .url = URL(string: "https://flutterfire-e2e-tests.firebaseapp.com")
-    actionCodeSettings.linkDomain = "flutterfire-e2e-tests.firebaseapp.com"
-    actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
-    let configuration = AuthConfiguration(
-      shouldAutoUpgradeAnonymousUsers: true,
-      emailLinkSignInActionCodeSettings: actionCodeSettings
-    )
-    let facebookProvider = FacebookProviderSwift()
-    let phoneAuthProvider = PhoneAuthProviderSwift()
-    authService = AuthService(
-      configuration: configuration,
-      googleProvider: googleProvider,
-      facebookProvider: facebookProvider,
-      phoneAuthProvider: phoneAuthProvider
-    )
-  }
-
-  var body: some View {
-    AuthPickerView {
-      SignInWithGoogleButton()
-      SignInWithFacebookButton()
-      PhoneAuthButtonView()
-    }.environment(authService)
   }
 }
