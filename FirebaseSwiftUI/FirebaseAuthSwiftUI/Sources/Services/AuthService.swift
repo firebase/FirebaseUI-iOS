@@ -180,7 +180,10 @@ public final class AuthService {
     }
   }
 
-  public func handleAutoUpgradeAnonymousUser(credentials credentials: AuthCredential) async throws {
+  public func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws {
+    if currentUser == nil {
+      throw AuthServiceError.noCurrentUser
+    }
     do {
       try await currentUser?.link(with: credentials)
     } catch let error as NSError {
@@ -196,7 +199,7 @@ public final class AuthService {
     }
   }
 
-  public func signIn(credentials credentials: AuthCredential) async throws {
+  public func signIn(credentials: AuthCredential) async throws {
     authenticationState = .authenticating
     do {
       if shouldHandleAnonymousUpgrade {
