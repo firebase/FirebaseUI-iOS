@@ -1,4 +1,5 @@
 import FirebaseAuthSwiftUI
+import FirebaseCore
 import SwiftUI
 
 @MainActor
@@ -48,4 +49,10 @@ extension SignInWithGoogleButton: View {
       }
     }
   }
+}
+
+#Preview {
+  FirebaseOptions.dummyConfigurationForPreview()
+  return SignInWithGoogleButton()
+    .environment(AuthService())
 }

@@ -1,3 +1,4 @@
+import FirebaseCore
 import SwiftUI
 
 public struct PasswordRecoveryView {
@@ -66,4 +67,10 @@ extension PasswordRecoveryView: View {
         .foregroundColor(.blue)
     })
   }
+}
+
+#Preview {
+  FirebaseOptions.dummyConfigurationForPreview()
+  return PasswordRecoveryView()
+    .environment(AuthService())
 }

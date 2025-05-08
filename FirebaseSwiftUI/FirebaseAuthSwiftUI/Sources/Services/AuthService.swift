@@ -1,16 +1,20 @@
 @preconcurrency import FirebaseAuth
 import SwiftUI
 
-public protocol GoogleProviderProtocol {
-  func handleUrl(_ url: URL) -> Bool
+public protocol ExternalAuthProvider {
+  associatedtype ButtonType: View
+  @MainActor var authButton: ButtonType { get }
+}
+
+public protocol GoogleProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
 }
 
-public protocol FacebookProviderProtocol {
+public protocol FacebookProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential
 }
 
-public protocol PhoneAuthProviderProtocol {
+public protocol PhoneAuthProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
 }
 
@@ -29,6 +33,7 @@ public enum AuthView {
   case authPicker
   case passwordRecovery
   case emailLink
+  case updatePassword
 }
 
 @MainActor
@@ -61,9 +66,9 @@ private final class AuthListenerManager {
 @Observable
 public final class AuthService {
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
-              googleProvider: GoogleProviderProtocol? = nil,
-              facebookProvider: FacebookProviderProtocol? = nil,
-              phoneAuthProvider: PhoneAuthProviderProtocol? = nil) {
+              googleProvider: (any GoogleProviderAuthUIProtocol)? = nil,
+              facebookProvider: (any FacebookProviderAuthUIProtocol)? = nil,
+              phoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)? = nil) {
     self.auth = auth
     self.configuration = configuration
     self.googleProvider = googleProvider
@@ -84,12 +89,14 @@ public final class AuthService {
   public var errorMessage = ""
   public let passwordPrompt: PasswordPromptCoordinator = .init()
 
-  private var listenerManager: AuthListenerManager?
-  private let googleProvider: GoogleProviderProtocol?
-  private let facebookProvider: FacebookProviderProtocol?
-  private let phoneAuthProvider: PhoneAuthProviderProtocol?
+  public var googleProvider: (any GoogleProviderAuthUIProtocol)?
+  public var facebookProvider: (any FacebookProviderAuthUIProtocol)?
+  public var phoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
 
-  private var safeGoogleProvider: GoogleProviderProtocol {
+  private var listenerManager: AuthListenerManager?
+  private var signedInCredential: AuthCredential?
+
+  private var safeGoogleProvider: any GoogleProviderAuthUIProtocol {
     get throws {
       guard let provider = googleProvider else {
         throw AuthServiceError
@@ -99,7 +106,7 @@ public final class AuthService {
     }
   }
 
-  private var safeFacebookProvider: FacebookProviderProtocol {
+  private var safeFacebookProvider: any FacebookProviderAuthUIProtocol {
     get throws {
       guard let provider = facebookProvider else {
         throw AuthServiceError
@@ -109,7 +116,7 @@ public final class AuthService {
     }
   }
 
-  private var safePhoneAuthProvider: PhoneAuthProviderProtocol {
+  private var safePhoneAuthProvider: any PhoneAuthProviderAuthUIProtocol {
     get throws {
       guard let provider = phoneAuthProvider else {
         throw AuthServiceError
@@ -229,6 +236,24 @@ public extension AuthService {
     do {
       if let user = auth.currentUser {
         let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
+        try await operation(on: user)
+      }
+
+    } catch {
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
+      throw error
+    }
+  }
+
+  func updatePassword(to password: String) async throws {
+    do {
+      if let user = auth.currentUser {
+        let operation = EmailPasswordUpdatePasswordOperation(
+          passwordPrompt: passwordPrompt,
+          newPassword: password
+        )
         try await operation(on: user)
       }
 
