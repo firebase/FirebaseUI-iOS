@@ -1,11 +1,11 @@
 @preconcurrency import FirebaseAuth
 import SwiftUI
 
-public protocol ExternalAuthProvider {
+public protocol ExternalAuthProvider: Identifiable {
   var id: String { get }
   associatedtype ButtonType: View
-  @MainActor @ViewBuilder func authButtonView() -> ButtonType
   @MainActor func authButton() -> AnyView
+  @MainActor var authButtonView: Self.ButtonType { get }
 }
 
 public protocol GoogleProviderProtocol: ExternalAuthProvider {
@@ -97,34 +97,9 @@ public final class AuthService {
     providers.append(provider)
   }
 
-  public func renderButtons(spacing: CGFloat = 16) -> AnyView {
-    AnyView(
-      VStack(spacing: spacing) {
-        ForEach(providers, id: \.id) { provider in
-          provider.authButton()
-        }
-      }
-    )
+  var availableProviders: [any ExternalAuthProvider] {
+    return providers
   }
-
-  @ViewBuilder
-  public var googleButton: some View {
-    if googleProvider != nil {
-      // For purpose of demonstration
-      // This produces "Type 'any View' cannot conform to 'View'"
-      googleProvider!.authButtonView()
-    } else {
-      EmptyView()
-    }
-  }
-
-//  public func renderButtonViews(spacing: CGFloat = 16) -> some View {
-//    VStack(spacing: spacing) {
-//      ForEach(providers, id: \.id) { provider in
-//        provider.authButtonView()
-//      }
-//    }
-//  }
 
   private var safeGoogleProvider: any GoogleProviderProtocol {
     get throws {

@@ -12,7 +12,7 @@ public class PhoneAuthProviderSwift: @preconcurrency PhoneAuthProviderProtocol {
     AnyView(Text("phone button TODO"))
   }
 
-  @MainActor @ViewBuilder public func authButtonView() -> some View {
+  @MainActor public var authButtonView: some View {
     Text("phone button TODO")
   }
 

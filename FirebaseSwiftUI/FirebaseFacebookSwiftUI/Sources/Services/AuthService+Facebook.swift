@@ -11,6 +11,7 @@ public extension AuthService {
   @discardableResult
   func withFacebookSignIn(scopes scopes: [String]? = nil) -> AuthService {
     facebookProvider = FacebookProviderSwift(scopes: scopes)
+    register(provider: facebookProvider!)
     return self
   }
 }

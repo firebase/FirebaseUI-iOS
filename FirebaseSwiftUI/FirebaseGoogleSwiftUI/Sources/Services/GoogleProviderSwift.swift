@@ -34,7 +34,7 @@ public class GoogleProviderSwift: @preconcurrency GoogleProviderProtocol {
     })
   }
 
-  @MainActor @ViewBuilder public func authButtonView() -> some View {
+  @MainActor public var authButtonView: some View {
     GoogleSignInButton {
       Task {
         try await self.signInWithGoogle(clientID: self.clientID)

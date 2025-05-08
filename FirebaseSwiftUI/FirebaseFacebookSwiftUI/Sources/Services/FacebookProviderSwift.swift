@@ -40,7 +40,7 @@ public class FacebookProviderSwift: FacebookProviderProtocol {
     AnyView(SignInWithFacebookButton())
   }
 
-  @MainActor @ViewBuilder public func authButtonView() -> some View {
+  @MainActor public var authButtonView: some View {
     SignInWithFacebookButton()
   }
 

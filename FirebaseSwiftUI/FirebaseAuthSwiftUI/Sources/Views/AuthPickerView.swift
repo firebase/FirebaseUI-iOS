@@ -28,7 +28,8 @@ extension AuthPickerView: View {
         Text(authService.authenticationFlow == .login ? "Login" : "Sign up")
         VStack { Divider() }
         EmailAuthView()
-
+        // Xcode compiler exception: Type 'any ExternalAuthProvider' cannot conform to 'ExternalAuthProvider'
+        RenderButtonsView(providers: authService.availableProviders)
         VStack { Divider() }
         HStack {
           Text(authService
