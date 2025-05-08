@@ -198,6 +198,20 @@ public class StringUtils {
   public var updatePasswordButtonLabel: String {
     return localizedString(for: "Update password")
   }
+
+  /// Account settings - send email verification label
+  /// found in:
+  /// VerifyEmailView
+  public var sendEmailVerificationButtonLabel: String {
+    return localizedString(for: "Verify email address?")
+  }
+
+  /// Account settings - verify email sheet message
+  /// found in:
+  /// VerifyEmailView
+  public var verifyEmailSheetMessage: String {
+    return localizedString(for: "Verification email sent")
+  }
   
 
   /// General string - Back button label

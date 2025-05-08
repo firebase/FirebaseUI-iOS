@@ -21,7 +21,7 @@ extension VerifyEmailView: View {
           await sendEmailVerification()
         }
       }) {
-        Text("Verify email address?")
+        Text(authService.string.sendEmailVerificationButtonLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
@@ -30,11 +30,9 @@ extension VerifyEmailView: View {
       .buttonStyle(.borderedProminent)
     }.sheet(isPresented: $showModal) {
       VStack {
-        Text("Instructions")
+        Text(authService.string.verifyEmailSheetMessage)
           .font(.headline)
-        Text("Please check your email for verification link.")
-          .padding()
-        Button("Dismiss") {
+        Button(authService.string.okButtonLabel) {
           showModal = false
         }
         .padding()

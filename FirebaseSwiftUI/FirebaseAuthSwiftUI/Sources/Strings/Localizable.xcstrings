@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+
+    },
     "AccountDisabledError" : {
       "comment" : "Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "migrated",
@@ -235,6 +238,9 @@
         }
       }
     },
+    "Confirm password" : {
+
+    },
     "ConfirmEmail" : {
       "comment" : "Title of confirm email label.",
       "extractionState" : "manual",
@@ -270,9 +276,6 @@
           }
         }
       }
-    },
-    "Delete account" : {
-
     },
     "DeleteAccountBody" : {
       "comment" : "Alert message body shown to confirm account deletion action.",
@@ -436,9 +439,6 @@
         }
       }
     },
-    "Enter Password" : {
-
-    },
     "EnterYourEmail" : {
       "comment" : "Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "manual",
@@ -591,6 +591,9 @@
           }
         }
       }
+    },
+    "Password" : {
+
     },
     "PasswordRecoveryEmailSentMessage" : {
       "comment" : "Message displayed when the email for password recovery has been sent.",
@@ -847,9 +850,6 @@
         }
       }
     },
-    "Sign out" : {
-
-    },
     "Sign up" : {
 
     },
@@ -948,9 +948,6 @@
           }
         }
       }
-    },
-    "Submit" : {
-
     },
     "TermsOfService" : {
       "comment" : "Text linked to a web page with the Terms of Service content.",
@@ -1060,6 +1057,17 @@
         }
       }
     },
+    "Update password" : {
+      "comment" : "Update password button label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update password"
+          }
+        }
+      }
+    },
     "UpdateEmailAlertMessage" : {
       "comment" : "Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "manual",
@@ -1084,9 +1092,6 @@
         }
       }
     },
-    "User: %@" : {
-
-    },
     "UserNotFoundError" : {
       "comment" : "Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "migrated",
@@ -1100,7 +1105,15 @@
       }
     },
     "Verify email address?" : {
-
+      "comment" : "Label for sending email verification to user.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verify email address?"
+          }
+        }
+      }
     },
     "VerifyItsYou" : {
       "comment" : "Alert message title show for re-authorization.",
