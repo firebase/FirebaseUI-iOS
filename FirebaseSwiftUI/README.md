@@ -131,7 +131,8 @@ let authService = AuthService()
    - Delete user
    - Verify email address
 
-## Notes for Alpha release
+
+## Notes for Alpha release
 1. Customization/theming for Views is not yet available.
 2. The providers available are Email, Phone, Google and Facebook.
 3. String localizations have been ported over and used where possible from the previous implementation, but new strings will only have English translations for the time being.
