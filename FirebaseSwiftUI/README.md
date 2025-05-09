@@ -97,7 +97,7 @@ public struct AuthConfiguration {
 ## Configuring providers
 
 1. Ensure the provider is installed from step 1 (e.g. if configuring Google provider, you need to install `FirebaseGoogleSwiftUI` package).
-2. Ensure you have called the relevant API on `AuthService` to initialise provider. Example of Email and Google provider initialization:
+2. Ensure you have called the relevant API on `AuthService` to initialise the provider. Example of Email and Google provider initialization:
 
 ```swift
 let authService = AuthService()
