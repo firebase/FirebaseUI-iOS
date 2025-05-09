@@ -8,7 +8,7 @@ public class PhoneAuthProviderAuthUI: @preconcurrency PhoneAuthProviderAuthUIPro
   public let id: String = "phone"
 
   public init() {}
-  
+
   @MainActor public func authButton() -> AnyView {
     AnyView(Text("phone button TODO"))
   }

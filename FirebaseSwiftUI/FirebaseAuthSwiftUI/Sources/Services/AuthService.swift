@@ -2,7 +2,7 @@
 import SwiftUI
 
 public protocol ExternalAuthProvider {
-  var id: String { get } 
+  var id: String { get }
   @MainActor func authButton() -> AnyView
 }
 
