@@ -8,6 +8,7 @@
 import FirebaseAuth
 import FirebaseAuthSwiftUI
 import FirebaseFacebookSwiftUI
+import FirebaseGoogleSwiftUI
 import FirebasePhoneAuthSwiftUI
 import SwiftUI
 
@@ -27,7 +28,6 @@ struct ContentView: View {
       shouldAutoUpgradeAnonymousUsers: true,
       emailLinkSignInActionCodeSettings: actionCodeSettings
     )
-    let facebookProvider = FacebookProviderAuthUI()
     let phoneAuthProvider = PhoneAuthProviderAuthUI()
     authService = AuthService(
       configuration: configuration,
