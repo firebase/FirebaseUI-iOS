@@ -11,7 +11,7 @@ public extension AuthService {
   @discardableResult
   func withGoogleSignIn(scopes scopes: [String]? = nil) -> AuthService {
     let clientID = auth.app?.options.clientID ?? ""
-    googleProvider = GoogleProviderSwift(scopes: scopes, clientID: clientID)
+    googleProvider = GoogleProviderAuthUI(scopes: scopes, clientID: clientID)
     register(provider: googleProvider!)
     return self
   }

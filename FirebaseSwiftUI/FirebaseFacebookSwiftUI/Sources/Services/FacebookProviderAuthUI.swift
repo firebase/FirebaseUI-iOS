@@ -21,7 +21,8 @@ public enum FacebookProviderError: Error {
   case authenticationToken(String)
 }
 
-public class FacebookProviderSwift: FacebookProviderProtocol {
+
+public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
   public let id: String = "facebook"
   let scopes: [String]
   let shortName = "Facebook"

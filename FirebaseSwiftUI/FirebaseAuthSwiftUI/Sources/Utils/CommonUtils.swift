@@ -1,4 +1,5 @@
 import CommonCrypto
+import FirebaseCore
 import Foundation
 import Security
 
@@ -45,5 +46,22 @@ public class CommonUtils {
       _ = CC_SHA256($0.baseAddress, CC_LONG(data.count), &hash)
     }
     return hash.map { String(format: "%02x", $0) }.joined()
+  }
+}
+
+public extension FirebaseOptions {
+  static func dummyConfigurationForPreview() {
+    guard FirebaseApp.app() == nil else { return }
+
+    let options = FirebaseOptions(
+      googleAppID: "1:123:ios:123abc456def7890",
+      gcmSenderID: "dummy"
+    )
+    options.apiKey = "dummy"
+    options.projectID = "dummy-project-id"
+    options.bundleID = Bundle.main.bundleIdentifier ?? "com.example.dummy"
+    options.clientID = "dummy-abc.apps.googleusercontent.com"
+
+    FirebaseApp.configure(options: options)
   }
 }

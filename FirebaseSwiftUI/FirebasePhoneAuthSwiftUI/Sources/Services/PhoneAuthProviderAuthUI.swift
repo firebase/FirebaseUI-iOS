@@ -4,8 +4,9 @@ import SwiftUI
 
 public typealias VerificationID = String
 
-public class PhoneAuthProviderSwift: @preconcurrency PhoneAuthProviderProtocol {
+public class PhoneAuthProviderAuthUI: @preconcurrency PhoneAuthProviderAuthUIProtocol {
   public let id: String = "phone"
+
   public init() {}
   
   @MainActor public func authButton() -> AnyView {

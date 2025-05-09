@@ -1,4 +1,5 @@
 import FirebaseAuthSwiftUI
+import FirebaseCore
 import SwiftUI
 
 @MainActor
@@ -89,4 +90,10 @@ extension PhoneAuthButtonView: View {
     }
     Text(errorMessage).foregroundColor(.red)
   }
+}
+
+#Preview {
+  FirebaseOptions.dummyConfigurationForPreview()
+  return PhoneAuthButtonView()
+    .environment(AuthService())
 }

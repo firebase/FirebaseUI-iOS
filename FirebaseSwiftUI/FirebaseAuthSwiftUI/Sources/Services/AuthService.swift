@@ -6,15 +6,15 @@ public protocol ExternalAuthProvider {
   @MainActor func authButton() -> AnyView
 }
 
-public protocol GoogleProviderProtocol: ExternalAuthProvider {
+public protocol GoogleProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
 }
 
-public protocol FacebookProviderProtocol: ExternalAuthProvider {
+public protocol FacebookProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential
 }
 
-public protocol PhoneAuthProviderProtocol: ExternalAuthProvider {
+public protocol PhoneAuthProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
 }
 
@@ -66,9 +66,9 @@ private final class AuthListenerManager {
 @Observable
 public final class AuthService {
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
-              googleProvider: (any GoogleProviderProtocol)? = nil,
-              facebookProvider: (any FacebookProviderProtocol)? = nil,
-              phoneAuthProvider: (any PhoneAuthProviderProtocol)? = nil) {
+              googleProvider: (any GoogleProviderAuthUIProtocol)? = nil,
+              facebookProvider: (any FacebookProviderAuthUIProtocol)? = nil,
+              phoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)? = nil) {
     self.auth = auth
     self.configuration = configuration
     self.googleProvider = googleProvider
@@ -89,9 +89,9 @@ public final class AuthService {
   public var errorMessage = ""
   public let passwordPrompt: PasswordPromptCoordinator = .init()
 
-  public var googleProvider: (any GoogleProviderProtocol)?
-  public var facebookProvider: (any FacebookProviderProtocol)?
-  public var phoneAuthProvider: (any PhoneAuthProviderProtocol)?
+  public var googleProvider: (any GoogleProviderAuthUIProtocol)?
+  public var facebookProvider: (any FacebookProviderAuthUIProtocol)?
+  public var phoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
 
   private var listenerManager: AuthListenerManager?
   private var signedInCredential: AuthCredential?
@@ -111,7 +111,7 @@ public final class AuthService {
     )
   }
 
-  private var safeGoogleProvider: any GoogleProviderProtocol {
+  private var safeGoogleProvider: any GoogleProviderAuthUIProtocol {
     get throws {
       guard let provider = googleProvider else {
         throw AuthServiceError
@@ -121,7 +121,7 @@ public final class AuthService {
     }
   }
 
-  private var safeFacebookProvider: any FacebookProviderProtocol {
+  private var safeFacebookProvider: any FacebookProviderAuthUIProtocol {
     get throws {
       guard let provider = facebookProvider else {
         throw AuthServiceError
@@ -131,7 +131,7 @@ public final class AuthService {
     }
   }
 
-  private var safePhoneAuthProvider: any PhoneAuthProviderProtocol {
+  private var safePhoneAuthProvider: any PhoneAuthProviderAuthUIProtocol {
     get throws {
       guard let provider = phoneAuthProvider else {
         throw AuthServiceError

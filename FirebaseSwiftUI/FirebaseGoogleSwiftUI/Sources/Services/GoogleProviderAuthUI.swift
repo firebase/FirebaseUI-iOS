@@ -15,7 +15,7 @@ public enum GoogleProviderError: Error {
   case user(String)
 }
 
-public class GoogleProviderSwift: @preconcurrency GoogleProviderProtocol {
+public class GoogleProviderAuthUI: @preconcurrency GoogleProviderAuthUIProtocol {
   public let id: String = "google"
   let scopes: [String]
   let shortName = "Google"
