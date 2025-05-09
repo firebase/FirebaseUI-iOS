@@ -20,9 +20,9 @@ public struct EmailLinkView {
 extension EmailLinkView: View {
   public var body: some View {
     VStack {
-      Text("Sign in with email link")
+      Text(authService.string.signInWithEmailLinkViewTitle)
       LabeledContent {
-        TextField("Email", text: $email)
+        TextField(authService.string.emailInputLabel, text: $email)
           .textInputAutocapitalization(.never)
           .disableAutocorrection(true)
           .submitLabel(.next)
@@ -37,7 +37,7 @@ extension EmailLinkView: View {
           authService.emailLink = email
         }
       }) {
-        Text("Send email sign-in link")
+        Text(authService.string.sendEmailLinkButtonLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
@@ -48,11 +48,9 @@ extension EmailLinkView: View {
       Text(authService.errorMessage).foregroundColor(.red)
     }.sheet(isPresented: $showModal) {
       VStack {
-        Text("Instructions")
-          .font(.headline)
-        Text("Please check your email for email sign-in link.")
+        Text(authService.string.signInWithEmailLinkViewMessage)
           .padding()
-        Button("Dismiss") {
+        Button(authService.string.okButtonLabel) {
           showModal = false
         }
         .padding()
@@ -70,7 +68,7 @@ extension EmailLinkView: View {
     }) {
       Image(systemName: "chevron.left")
         .foregroundColor(.blue)
-      Text("Back")
+      Text(authService.string.backButtonLabel)
         .foregroundColor(.blue)
     })
   }

@@ -19,9 +19,15 @@ public struct PasswordRecoveryView {
 extension PasswordRecoveryView: View {
   public var body: some View {
     VStack {
-      Text("Password Recovery")
+      Text(authService.string.passwordRecoveryTitle)
+        .font(.largeTitle)
+        .fontWeight(.bold)
+        .padding()
+
+      Divider()
+
       LabeledContent {
-        TextField("Email", text: $email)
+        TextField(authService.string.emailInputLabel, text: $email)
           .textInputAutocapitalization(.never)
           .disableAutocorrection(true)
           .submitLabel(.next)
@@ -35,7 +41,7 @@ extension PasswordRecoveryView: View {
           await sendPasswordRecoveryEmail()
         }
       }) {
-        Text("Password Recovery")
+        Text(authService.string.forgotPasswordInputLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
@@ -45,11 +51,18 @@ extension PasswordRecoveryView: View {
       .buttonStyle(.borderedProminent)
     }.sheet(isPresented: $showModal) {
       VStack {
-        Text("Instructions")
-          .font(.headline)
-        Text("Please check your email for password recovery instructions.")
+        Text(authService.string.passwordRecoveryEmailSentTitle)
+          .font(.largeTitle)
+          .fontWeight(.bold)
           .padding()
-        Button("Dismiss") {
+        Text(authService.string.passwordRecoveryHelperMessage)
+          .padding()
+
+        Divider()
+
+        Text(authService.string.passwordRecoveryEmailSentMessage)
+          .padding()
+        Button(authService.string.okButtonLabel) {
           showModal = false
         }
         .padding()
@@ -63,7 +76,7 @@ extension PasswordRecoveryView: View {
     }) {
       Image(systemName: "chevron.left")
         .foregroundColor(.blue)
-      Text("Back")
+      Text(authService.string.backButtonLabel)
         .foregroundColor(.blue)
     })
   }

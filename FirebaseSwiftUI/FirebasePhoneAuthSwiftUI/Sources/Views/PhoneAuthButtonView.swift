@@ -19,7 +19,7 @@ extension PhoneAuthButtonView: View {
     if authService.authenticationState != .authenticating {
       VStack {
         LabeledContent {
-          TextField("Enter phone number", text: $phoneNumber)
+          TextField(authService.string.enterPhoneNumberLabel, text: $phoneNumber)
             .textInputAutocapitalization(.never)
             .disableAutocorrection(true)
             .submitLabel(.next)
@@ -41,7 +41,7 @@ extension PhoneAuthButtonView: View {
             }
           }
         }) {
-          Text("Send SMS code")
+          Text(authService.string.smsCodeSentLabel)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }
@@ -51,7 +51,7 @@ extension PhoneAuthButtonView: View {
         .buttonStyle(.borderedProminent)
         Text(errorMessage).foregroundColor(.red)
       }.sheet(isPresented: $showVerificationCodeInput) {
-        TextField("Enter verification code", text: $verificationCode)
+        TextField(authService.string.phoneNumberVerificationCodeLabel, text: $verificationCode)
           .keyboardType(.numberPad)
           .padding()
           .background(Color(.systemGray6))
@@ -71,7 +71,7 @@ extension PhoneAuthButtonView: View {
             showVerificationCodeInput = false
           }
         }) {
-          Text("Verify phone number and sign-in")
+          Text(authService.string.verifyPhoneNumberAndSignInLabel)
             .foregroundColor(.white)
             .padding()
             .frame(maxWidth: .infinity)
