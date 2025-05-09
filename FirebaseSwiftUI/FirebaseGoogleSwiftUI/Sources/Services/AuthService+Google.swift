@@ -9,9 +9,10 @@ import FirebaseAuthSwiftUI
 
 public extension AuthService {
   @discardableResult
-  func withGoogleSignIn() -> AuthService {
+  func withGoogleSignIn(scopes scopes: [String]? = nil) -> AuthService {
     let clientID = auth.app?.options.clientID ?? ""
-    googleProvider = GoogleProviderAuthUI(clientID: clientID)
+    googleProvider = GoogleProviderAuthUI(scopes: scopes, clientID: clientID)
+    register(provider: googleProvider!)
     return self
   }
 }

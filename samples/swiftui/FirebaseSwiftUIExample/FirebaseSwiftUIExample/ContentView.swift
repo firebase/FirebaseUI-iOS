@@ -28,20 +28,16 @@ struct ContentView: View {
       shouldAutoUpgradeAnonymousUsers: true,
       emailLinkSignInActionCodeSettings: actionCodeSettings
     )
-    let facebookProvider = FacebookProviderAuthUI()
-    let phoneAuthProvider = PhoneAuthProviderAuthUI()
     authService = AuthService(
-      configuration: configuration,
-      facebookProvider: facebookProvider,
-      phoneAuthProvider: phoneAuthProvider
+      configuration: configuration
     )
     .withGoogleSignIn()
+    .withFacebookSignIn()
+    .withPhoneSignIn()
   }
 
   var body: some View {
     AuthPickerView {
-      SignInWithGoogleButton()
-      SignInWithFacebookButton()
       PhoneAuthButtonView()
     }.environment(authService)
   }

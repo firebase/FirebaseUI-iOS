@@ -5,12 +5,11 @@ import SwiftUI
 public typealias VerificationID = String
 
 public class PhoneAuthProviderAuthUI: @preconcurrency PhoneAuthProviderAuthUIProtocol {
-  public var authButton: Button<Text> {
-    // TODO: implement me
-    return Button("Phone", action: {})
-  }
+  public let id: String = "phone"
 
-  public init() {}
+  @MainActor public func authButton() -> AnyView {
+    AnyView(PhoneAuthButtonView())
+  }
 
   @MainActor public func verifyPhoneNumber(phoneNumber: String) async throws -> VerificationID {
     return try await withCheckedThrowingContinuation { continuation in

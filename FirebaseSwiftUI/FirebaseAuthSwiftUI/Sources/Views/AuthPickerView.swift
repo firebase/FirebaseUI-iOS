@@ -28,7 +28,7 @@ extension AuthPickerView: View {
         Text(authService.authenticationFlow == .login ? "Login" : "Sign up")
         VStack { Divider() }
         EmailAuthView()
-        providerButtons()
+        authService.renderButtons()
         VStack { Divider() }
         HStack {
           Text(authService
