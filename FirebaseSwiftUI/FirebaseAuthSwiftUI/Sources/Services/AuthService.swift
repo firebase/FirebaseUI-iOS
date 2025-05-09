@@ -65,15 +65,9 @@ private final class AuthListenerManager {
 @MainActor
 @Observable
 public final class AuthService {
-  public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth(),
-              googleProvider: (any GoogleProviderAuthUIProtocol)? = nil,
-              facebookProvider: (any FacebookProviderAuthUIProtocol)? = nil,
-              phoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)? = nil) {
+  public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth()) {
     self.auth = auth
     self.configuration = configuration
-    self.googleProvider = googleProvider
-    self.facebookProvider = facebookProvider
-    self.phoneAuthProvider = phoneAuthProvider
     string = StringUtils(bundle: configuration.customStringsBundle ?? Bundle.module)
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
   }
