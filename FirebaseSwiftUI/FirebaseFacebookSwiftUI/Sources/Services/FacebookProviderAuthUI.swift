@@ -21,7 +21,6 @@ public enum FacebookProviderError: Error {
   case authenticationToken(String)
 }
 
-
 public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
   public let id: String = "facebook"
   let scopes: [String]
@@ -36,7 +35,7 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
     rawNonce = CommonUtils.randomNonce()
     shaNonce = CommonUtils.sha256Hash(of: rawNonce)
   }
-  
+
   @MainActor public func authButton() -> AnyView {
     AnyView(SignInWithFacebookButton())
   }
