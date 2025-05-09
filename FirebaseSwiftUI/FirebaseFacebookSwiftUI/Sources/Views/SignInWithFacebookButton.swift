@@ -66,7 +66,7 @@ extension SignInWithFacebookButton: View {
         Image(systemName: "f.circle.fill")
           .font(.title)
           .foregroundColor(.white)
-        Text("Continue with Facebook")
+        Text(authService.string.facebookLoginButtonLabel)
           .fontWeight(.semibold)
           .foregroundColor(.white)
       }
@@ -77,13 +77,13 @@ extension SignInWithFacebookButton: View {
     }
     .alert(isPresented: $showCanceledAlert) {
       Alert(
-        title: Text("Facebook login cancelled"),
-        dismissButton: .default(Text("OK"))
+        title: Text(authService.string.facebookLoginCancelledLabel),
+        dismissButton: .default(Text(authService.string.okButtonLabel))
       )
     }
 
     HStack {
-      Text("Authorize User Tracking")
+      Text(authService.string.authorizeUserTrackingLabel)
         .font(.footnote)
         .foregroundColor(.blue)
         .underline()
@@ -93,16 +93,16 @@ extension SignInWithFacebookButton: View {
       Toggle(isOn: limitedLoginBinding) {
         HStack {
           Spacer() // This will push the text to the left of the toggle
-          Text("Limited Login")
+          Text(authService.string.facebookLimitedLoginLabel)
             .foregroundColor(.blue)
         }
       }
       .toggleStyle(SwitchToggleStyle(tint: .green))
       .alert(isPresented: $showUserTrackingAlert) {
         Alert(
-          title: Text("Authorize User Tracking"),
-          message: Text("For classic Facebook login, please authorize user tracking."),
-          dismissButton: .default(Text("OK"))
+          title: Text(authService.string.authorizeUserTrackingLabel),
+          message: Text(authService.string.facebookAuthorizeUserTrackingMessage),
+          dismissButton: .default(Text(authService.string.okButtonLabel))
         )
       }
     }

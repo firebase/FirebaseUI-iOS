@@ -3,7 +3,6 @@ import SwiftUI
 
 let kKeyNotFound = "Key not found"
 
-
 public class StringUtils {
   let bundle: Bundle
   init(bundle: Bundle) {
@@ -17,37 +16,37 @@ public class StringUtils {
   }
 
   public func localizedErrorMessage(for error: Error) -> String {
-      let authError = error as NSError
-      let errorCode = AuthErrorCode(rawValue: authError.code)
-      switch errorCode {
-      case .emailAlreadyInUse:
-        return localizedString(
-          for: "EmailAlreadyInUseError"
-        )
-      case .invalidEmail:
-        return localizedString(for: "InvalidEmailError")
-      case .weakPassword:
-        return localizedString(for: "WeakPasswordError")
-      case .tooManyRequests:
-        return localizedString(
-          for: "SignUpTooManyTimesError"
-        )
-      case .wrongPassword:
-        return localizedString(
-          for: "WrongPasswordError"
-        )
-      case .userNotFound:
-        return localizedString(
-          for: "UserNotFoundError"
-        )
-      case .userDisabled:
-        return localizedString(
-          for: "AccountDisabledError"
-        )
-      default:
-        return error.localizedDescription
-      }
+    let authError = error as NSError
+    let errorCode = AuthErrorCode(rawValue: authError.code)
+    switch errorCode {
+    case .emailAlreadyInUse:
+      return localizedString(
+        for: "EmailAlreadyInUseError"
+      )
+    case .invalidEmail:
+      return localizedString(for: "InvalidEmailError")
+    case .weakPassword:
+      return localizedString(for: "WeakPasswordError")
+    case .tooManyRequests:
+      return localizedString(
+        for: "SignUpTooManyTimesError"
+      )
+    case .wrongPassword:
+      return localizedString(
+        for: "WrongPasswordError"
+      )
+    case .userNotFound:
+      return localizedString(
+        for: "UserNotFoundError"
+      )
+    case .userDisabled:
+      return localizedString(
+        for: "AccountDisabledError"
+      )
+    default:
+      return error.localizedDescription
     }
+  }
 
   /// Auth Picker title
   /// found in:
@@ -191,7 +190,7 @@ public class StringUtils {
   public var signOutButtonLabel: String {
     return localizedString(for: "AS_SignOut")
   }
-  
+
   /// Account settings - update password button label
   /// found in:
   /// SignedInView
@@ -212,7 +211,6 @@ public class StringUtils {
   public var verifyEmailSheetMessage: String {
     return localizedString(for: "Verification email sent")
   }
-  
 
   /// General string - Back button label
   /// found in:
@@ -236,5 +234,40 @@ public class StringUtils {
   /// - PasswordPromptView
   public var cancelButtonLabel: String {
     return localizedString(for: "Cancel")
+  }
+
+  /// Facebook provider
+  /// found in:
+  /// - SignInWithFacebookButton
+  public var facebookLoginButtonLabel: String {
+    return localizedString(for: "Continue with Facebook")
+  }
+
+  /// Facebook provider
+  /// found in:
+  /// - SignInWithFacebookButton
+  public var facebookLoginCancelledLabel: String {
+    return localizedString(for: "Facebook login cancelled")
+  }
+
+  /// Facebook provider
+  /// found in:
+  /// - SignInWithFacebookButton
+  public var authorizeUserTrackingLabel: String {
+    return localizedString(for: "Authorize User Tracking")
+  }
+
+  /// Facebook provider
+  /// found in:
+  /// - SignInWithFacebookButton
+  public var facebookLimitedLoginLabel: String {
+    return localizedString(for: "Limited Login")
+  }
+
+  /// Facebook provider
+  /// found in:
+  /// - SignInWithFacebookButton
+  public var facebookAuthorizeUserTrackingMessage: String {
+    return localizedString(for: "For classic Facebook login, please authorize user tracking.")
   }
 }

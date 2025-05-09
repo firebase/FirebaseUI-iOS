@@ -20,11 +20,11 @@ extension SignedInView: View {
     } else {
       VStack {
         Text(authService.string.signedInTitle)
-        .font(.largeTitle)
-        .fontWeight(.bold)
-        .padding()
-      Text(authService.string.accountSettingsEmailLabel)
-      Text("\(authService.currentUser?.email ?? "Unknown")")
+          .font(.largeTitle)
+          .fontWeight(.bold)
+          .padding()
+        Text(authService.string.accountSettingsEmailLabel)
+        Text("\(authService.currentUser?.email ?? "Unknown")")
 
         if authService.currentUser?.isEmailVerified == false {
           VerifyEmailView()
