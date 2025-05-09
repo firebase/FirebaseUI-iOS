@@ -301,4 +301,30 @@ public class StringUtils {
   public var facebookAuthorizeUserTrackingMessage: String {
     return localizedString(for: "For classic Facebook login, please authorize user tracking.")
   }
+
+  /// Phone provider
+  /// found in:
+  /// - PhoneAuthButtonView
+  public var enterPhoneNumberLabel: String {
+    return localizedString(for: "Enter phone number")
+  }
+  /// Phone provider
+  /// found in:
+  /// - PhoneAuthButtonView
+  public var phoneNumberVerificationCodeLabel: String {
+    return localizedString(for: "Enter verification code")
+  }
+  /// Phone provider
+  /// found in:
+  /// - PhoneAuthButtonView
+  public var smsCodeSentLabel: String {
+    return localizedString(for: "SMS code sent")
+  }
+
+  /// Phone provider
+  /// found in:
+  /// - PhoneAuthButtonView
+  public var verifyPhoneNumberAndSignInLabel: String {
+    return localizedString(for: "Verify phone number and sign-in")
+  }
 }
