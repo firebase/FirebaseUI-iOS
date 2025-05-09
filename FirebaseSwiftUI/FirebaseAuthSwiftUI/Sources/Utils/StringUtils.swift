@@ -308,12 +308,14 @@ public class StringUtils {
   public var enterPhoneNumberLabel: String {
     return localizedString(for: "Enter phone number")
   }
+
   /// Phone provider
   /// found in:
   /// - PhoneAuthButtonView
   public var phoneNumberVerificationCodeLabel: String {
     return localizedString(for: "Enter verification code")
   }
+
   /// Phone provider
   /// found in:
   /// - PhoneAuthButtonView

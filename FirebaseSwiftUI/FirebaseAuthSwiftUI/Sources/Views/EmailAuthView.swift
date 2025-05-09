@@ -127,7 +127,7 @@ extension EmailAuthView: View {
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
       Button(action: {
-        authService.authView = .passwordRecovery
+        authService.authView = .emailLink
       }) {
         Text(authService.string.signUpWithEmailLinkButtonLabel)
       }
