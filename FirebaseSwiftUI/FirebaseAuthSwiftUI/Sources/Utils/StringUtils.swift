@@ -75,6 +75,7 @@ public class StringUtils {
   /// found in:
   /// - EmailAuthView
   /// - PasswordPromptView
+  /// - UpdatePassword
   public var passwordInputLabel: String {
     return localizedString(for: "EnterYourPassword")
   }
@@ -124,6 +125,7 @@ public class StringUtils {
   /// Confirm password
   /// found in:
   /// - EmailAuthView
+  /// - UpdatePassword
   public var confirmPasswordInputLabel: String {
     return localizedString(for: "ConfirmPasswordInputLabel")
   }
@@ -193,7 +195,8 @@ public class StringUtils {
 
   /// Account settings - update password button label
   /// found in:
-  /// SignedInView
+  /// - SignedInView
+  /// - UpdatePassword
   public var updatePasswordButtonLabel: String {
     return localizedString(for: "Update password")
   }
