@@ -236,6 +236,34 @@ public class StringUtils {
     return localizedString(for: "Cancel")
   }
 
+  /// Email provider
+  /// found in:
+  /// - AuthPickerView
+  public var emailLoginFlowLabel: String {
+    return localizedString(for: "Login")
+  }
+
+  /// Email provider
+  /// found in:
+  /// - AuthPickerView
+  public var emailSignUpFlowLabel: String {
+    return localizedString(for: "Sign up")
+  }
+
+  /// Email provider
+  /// found in:
+  /// - AuthPickerView
+  public var dontHaveAnAccountYetLabel: String {
+    return localizedString(for: "Don't have an account yet?")
+  }
+
+  /// Email provider
+  /// found in:
+  /// - AuthPickerView
+  public var alreadyHaveAnAccountLabel: String {
+    return localizedString(for: "Already have an account?")
+  }
+
   /// Facebook provider
   /// found in:
   /// - SignInWithFacebookButton

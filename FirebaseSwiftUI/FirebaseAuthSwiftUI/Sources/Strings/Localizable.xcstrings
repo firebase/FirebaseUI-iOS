@@ -329,7 +329,14 @@
 
     },
     "Don't have an account yet?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't have an account yet?"
+          }
+        }
+      }
     },
     "EditEmailTitle" : {
       "comment" : "Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars.",
@@ -554,7 +561,14 @@
 
     },
     "Login" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        }
+      }
     },
     "Name" : {
       "comment" : "Label next to a name text field.",

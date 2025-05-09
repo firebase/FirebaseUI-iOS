@@ -29,21 +29,23 @@ extension AuthPickerView: View {
       } else if authService.authView == .emailLink {
         EmailLinkView()
       } else {
-        Text(authService.authenticationFlow == .login ? "Login" : "Sign up")
+        Text(authService.authenticationFlow == .login ? authService.string
+          .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
         VStack { Divider() }
         EmailAuthView()
         authService.renderButtons()
         VStack { Divider() }
         HStack {
           Text(authService
-            .authenticationFlow == .login ? "Don't have an account yet?" :
-            "Already have an account?")
+            .authenticationFlow == .login ? authService.string.dontHaveAnAccountYetLabel :
+            authService.string.alreadyHaveAnAccountLabel)
           Button(action: {
             withAnimation {
               switchFlow()
             }
           }) {
-            Text(authService.authenticationFlow == .signUp ? "Log in" : "Sign up")
+            Text(authService.authenticationFlow == .signUp ? authService.string
+              .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
               .fontWeight(.semibold)
               .foregroundColor(.blue)
           }
