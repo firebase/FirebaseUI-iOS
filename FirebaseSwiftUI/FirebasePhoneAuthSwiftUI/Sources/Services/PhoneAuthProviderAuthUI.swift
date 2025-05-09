@@ -7,10 +7,8 @@ public typealias VerificationID = String
 public class PhoneAuthProviderAuthUI: @preconcurrency PhoneAuthProviderAuthUIProtocol {
   public let id: String = "phone"
 
-  public init() {}
-
   @MainActor public func authButton() -> AnyView {
-    AnyView(Text("phone button TODO"))
+    AnyView(PhoneAuthButtonView())
   }
 
   @MainActor public func verifyPhoneNumber(phoneNumber: String) async throws -> VerificationID {

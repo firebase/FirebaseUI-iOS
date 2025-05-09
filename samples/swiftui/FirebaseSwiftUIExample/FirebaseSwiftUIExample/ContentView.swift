@@ -28,13 +28,12 @@ struct ContentView: View {
       shouldAutoUpgradeAnonymousUsers: true,
       emailLinkSignInActionCodeSettings: actionCodeSettings
     )
-    let phoneAuthProvider = PhoneAuthProviderAuthUI()
     authService = AuthService(
-      configuration: configuration,
-      phoneAuthProvider: phoneAuthProvider
+      configuration: configuration
     )
     .withGoogleSignIn()
     .withFacebookSignIn()
+    .withPhoneSignIn()
   }
 
   var body: some View {
