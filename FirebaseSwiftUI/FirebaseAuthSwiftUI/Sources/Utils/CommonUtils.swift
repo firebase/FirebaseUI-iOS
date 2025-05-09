@@ -47,6 +47,14 @@ public class CommonUtils {
     }
     return hash.map { String(format: "%02x", $0) }.joined()
   }
+
+  public static func getQueryParamValue(from urlString: String, paramName: String) -> String? {
+    guard let urlComponents = URLComponents(string: urlString) else {
+      return nil
+    }
+
+    return urlComponents.queryItems?.first(where: { $0.name == paramName })?.value
+  }
 }
 
 public extension FirebaseOptions {
