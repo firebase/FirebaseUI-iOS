@@ -50,6 +50,7 @@ extension AuthPickerView: View {
               .foregroundColor(.blue)
           }
         }
+        PrivacyTOCsView(displayMode: .footer)
         Text(authService.errorMessage).foregroundColor(.red)
       }
     }

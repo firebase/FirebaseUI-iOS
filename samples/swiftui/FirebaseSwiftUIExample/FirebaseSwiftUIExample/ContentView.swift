@@ -26,6 +26,8 @@ struct ContentView: View {
     actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
     let configuration = AuthConfiguration(
       shouldAutoUpgradeAnonymousUsers: true,
+      tosUrl: URL(string: "https://example.com/tos"),
+      privacyPolicyUrl: URL(string: "https://example.com/privacy"),
       emailLinkSignInActionCodeSettings: actionCodeSettings
     )
     authService = AuthService(
