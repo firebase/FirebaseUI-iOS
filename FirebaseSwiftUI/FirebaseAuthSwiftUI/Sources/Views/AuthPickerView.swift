@@ -32,7 +32,9 @@ extension AuthPickerView: View {
           VStack { Divider() }
           EmailAuthView()
         }
-        authService.renderButtons()
+        VStack {
+          authService.renderButtons()
+        }.padding(.horizontal)
         if authService.emailSignInEnabled {
           VStack { Divider() }
           HStack {
@@ -50,6 +52,7 @@ extension AuthPickerView: View {
                 .foregroundColor(.blue)
             }
           }
+          PrivacyTOCsView(displayMode: .footer)
           Text(authService.errorMessage).foregroundColor(.red)
         }
       }

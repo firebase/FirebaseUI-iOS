@@ -27,7 +27,12 @@ public class GoogleProviderAuthUI: @preconcurrency GoogleProviderAuthUIProtocol 
   }
 
   @MainActor public func authButton() -> AnyView {
-    AnyView(GoogleSignInButton {
+    let customViewModel = GoogleSignInButtonViewModel(
+      scheme: .light,
+      style: .wide,
+      state: .normal
+    )
+    return AnyView(GoogleSignInButton(viewModel: customViewModel) {
       Task {
         try await self.signInWithGoogle(clientID: self.clientID)
       }

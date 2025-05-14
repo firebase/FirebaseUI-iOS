@@ -6,8 +6,8 @@ public struct AuthConfiguration {
   let interactiveDismissEnabled: Bool
   let shouldAutoUpgradeAnonymousUsers: Bool
   let customStringsBundle: Bundle?
-  let tosUrl: URL
-  let privacyPolicyUrl: URL
+  let tosUrl: URL?
+  let privacyPolicyUrl: URL?
   let emailLinkSignInActionCodeSettings: ActionCodeSettings?
   let verifyEmailActionCodeSettings: ActionCodeSettings?
 
@@ -15,8 +15,8 @@ public struct AuthConfiguration {
               interactiveDismissEnabled: Bool = true,
               shouldAutoUpgradeAnonymousUsers: Bool = false,
               customStringsBundle: Bundle? = nil,
-              tosUrl: URL = URL(string: "https://example.com/tos")!,
-              privacyPolicyUrl: URL = URL(string: "https://example.com/privacy")!,
+              tosUrl: URL? = nil,
+              privacyPolicyUrl: URL? = nil,
               emailLinkSignInActionCodeSettings: ActionCodeSettings? = nil,
               verifyEmailActionCodeSettings: ActionCodeSettings? = nil) {
     self.shouldHideCancelButton = shouldHideCancelButton
