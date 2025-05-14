@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+
+    },
     "AccountDisabledError" : {
       "comment" : "Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "migrated",
@@ -250,6 +253,18 @@
         }
       }
     },
+    "ConfirmPasswordInputLabel" : {
+      "comment" : "Input label for confirming password when signing up",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Password"
+          }
+        }
+      }
+    },
     "Delete" : {
       "comment" : "Text of Delete action button.",
       "extractionState" : "manual",
@@ -261,9 +276,6 @@
           }
         }
       }
-    },
-    "Delete account" : {
-
     },
     "DeleteAccountBody" : {
       "comment" : "Alert message body shown to confirm account deletion action.",
@@ -317,7 +329,14 @@
 
     },
     "Don't have an account yet?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't have an account yet?"
+          }
+        }
+      }
     },
     "EditEmailTitle" : {
       "comment" : "Controller title shown when editing account email. Use short/abbreviated translation for 'email' which is less than 15 chars.",
@@ -367,9 +386,6 @@
         }
       }
     },
-    "Email" : {
-      "comment" : "Label next to a email text field. Use short/abbreviated translation for 'email' which is less than 15 chars."
-    },
     "EmailAlreadyInUseError" : {
       "comment" : "Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "migrated",
@@ -378,6 +394,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The email address is already in use by another account."
+          }
+        }
+      }
+    },
+    "EmailLinkSignInLabel" : {
+      "comment" : "Button label to push user to email link sign-in",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prefer Email link sign-in?"
+          }
+        }
+      }
+    },
+    "EmailLinkSignInTitle" : {
+      "comment" : "Sign in with email link View title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with email link"
           }
         }
       }
@@ -405,9 +445,6 @@
           }
         }
       }
-    },
-    "Enter Password" : {
-
     },
     "EnterYourEmail" : {
       "comment" : "Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars.",
@@ -493,9 +530,6 @@
         }
       }
     },
-    "Forgotten Password?" : {
-
-    },
     "Instructions" : {
 
     },
@@ -526,11 +560,15 @@
     "Log in" : {
 
     },
-    "Log in with password" : {
-
-    },
     "Login" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        }
+      }
     },
     "Name" : {
       "comment" : "Label next to a name text field.",
@@ -569,9 +607,6 @@
       }
     },
     "Password" : {
-      "comment" : "Label next to a password text field."
-    },
-    "Password Recovery" : {
 
     },
     "PasswordRecoveryEmailSentMessage" : {
@@ -694,16 +729,7 @@
         }
       }
     },
-    "Please check your email for email sign-in link." : {
-
-    },
-    "Please check your email for password recovery instructions." : {
-
-    },
     "Please check your email for verification link." : {
-
-    },
-    "Prefer Email link sign-in?" : {
 
     },
     "PrivacyPolicy" : {
@@ -826,19 +852,19 @@
         }
       }
     },
-    "Send email sign-in link" : {
-
-    },
-    "Sign in with email link" : {
-
-    },
-    "Sign out" : {
-
+    "SendEmailSignInLinkButtonLabel" : {
+      "comment" : "Button label for sending email sign-in link",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send email sign-in link"
+          }
+        }
+      }
     },
     "Sign up" : {
-
-    },
-    "Signed in" : {
 
     },
     "SignedIn" : {
@@ -936,9 +962,6 @@
           }
         }
       }
-    },
-    "Submit" : {
-
     },
     "TermsOfService" : {
       "comment" : "Text linked to a web page with the Terms of Service content.",
@@ -1048,6 +1071,17 @@
         }
       }
     },
+    "Update password" : {
+      "comment" : "Update password button label",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update password"
+          }
+        }
+      }
+    },
     "UpdateEmailAlertMessage" : {
       "comment" : "Alert action message shown before updating email action. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "manual",
@@ -1072,9 +1106,6 @@
         }
       }
     },
-    "User: %@" : {
-
-    },
     "UserNotFoundError" : {
       "comment" : "Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "migrated",
@@ -1088,7 +1119,15 @@
       }
     },
     "Verify email address?" : {
-
+      "comment" : "Label for sending email verification to user.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verify email address?"
+          }
+        }
+      }
     },
     "VerifyItsYou" : {
       "comment" : "Alert message title show for re-authorization.",

@@ -19,18 +19,22 @@ extension SignedInView: View {
       UpdatePasswordView()
     } else {
       VStack {
-        Text("Signed in")
-        Text("User: \(authService.currentUser?.email ?? "Unknown")")
+        Text(authService.string.signedInTitle)
+          .font(.largeTitle)
+          .fontWeight(.bold)
+          .padding()
+        Text(authService.string.accountSettingsEmailLabel)
+        Text("\(authService.currentUser?.email ?? "Unknown")")
 
         if authService.currentUser?.isEmailVerified == false {
           VerifyEmailView()
         }
         Divider()
-        Button("Update password") {
+        Button(authService.string.updatePasswordButtonLabel) {
           authService.authView = .updatePassword
         }
         Divider()
-        Button("Sign out") {
+        Button(authService.string.signOutButtonLabel) {
           Task {
             do {
               try await authService.signOut()
@@ -38,7 +42,7 @@ extension SignedInView: View {
           }
         }
         Divider()
-        Button("Delete account") {
+        Button(authService.string.deleteAccountButtonLabel) {
           Task {
             do {
               try await authService.deleteUser()

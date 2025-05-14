@@ -26,22 +26,20 @@ struct ContentView: View {
     actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
     let configuration = AuthConfiguration(
       shouldAutoUpgradeAnonymousUsers: true,
+      tosUrl: URL(string: "https://example.com/tos"),
+      privacyPolicyUrl: URL(string: "https://example.com/privacy"),
       emailLinkSignInActionCodeSettings: actionCodeSettings
     )
-    let facebookProvider = FacebookProviderAuthUI()
-    let phoneAuthProvider = PhoneAuthProviderAuthUI()
     authService = AuthService(
-      configuration: configuration,
-      facebookProvider: facebookProvider,
-      phoneAuthProvider: phoneAuthProvider
+      configuration: configuration
     )
     .withGoogleSignIn()
+    .withFacebookSignIn()
+    .withPhoneSignIn()
   }
 
   var body: some View {
     AuthPickerView {
-      SignInWithGoogleButton()
-      SignInWithFacebookButton()
       PhoneAuthButtonView()
     }.environment(authService)
   }

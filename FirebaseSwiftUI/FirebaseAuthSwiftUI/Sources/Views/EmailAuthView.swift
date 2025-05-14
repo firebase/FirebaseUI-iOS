@@ -51,7 +51,7 @@ extension EmailAuthView: View {
   public var body: some View {
     VStack {
       LabeledContent {
-        TextField("Email", text: $email)
+        TextField(authService.string.emailInputLabel, text: $email)
           .textInputAutocapitalization(.never)
           .disableAutocorrection(true)
           .focused($focus, equals: .email)
@@ -67,7 +67,7 @@ extension EmailAuthView: View {
       .padding(.bottom, 4)
 
       LabeledContent {
-        SecureField("Password", text: $password)
+        SecureField(authService.string.passwordInputLabel, text: $password)
           .focused($focus, equals: .password)
           .submitLabel(.go)
           .onSubmit {
@@ -84,13 +84,13 @@ extension EmailAuthView: View {
         Button(action: {
           authService.authView = .passwordRecovery
         }) {
-          Text("Forgotten Password?")
+          Text(authService.string.passwordButtonLabel)
         }
       }
 
       if authService.authenticationFlow == .signUp {
         LabeledContent {
-          SecureField("Confirm password", text: $confirmPassword)
+          SecureField(authService.string.confirmPasswordInputLabel, text: $confirmPassword)
             .focused($focus, equals: .confirmPassword)
             .submitLabel(.go)
             .onSubmit {
@@ -111,7 +111,8 @@ extension EmailAuthView: View {
         }
       }) {
         if authService.authenticationState != .authenticating {
-          Text(authService.authenticationFlow == .login ? "Log in with password" : "Sign up")
+          Text(authService.authenticationFlow == .login ? authService.string
+            .signInWithEmailButtonLabel : authService.string.signUpWithEmailButtonLabel)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         } else {
@@ -128,7 +129,7 @@ extension EmailAuthView: View {
       Button(action: {
         authService.authView = .emailLink
       }) {
-        Text("Prefer Email link sign-in?")
+        Text(authService.string.signUpWithEmailLinkButtonLabel)
       }
     }
   }

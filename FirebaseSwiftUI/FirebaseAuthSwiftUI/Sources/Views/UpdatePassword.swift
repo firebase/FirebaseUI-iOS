@@ -35,7 +35,7 @@ extension UpdatePasswordView: View {
   public var body: some View {
     VStack {
       LabeledContent {
-        SecureField("Password", text: $password)
+        SecureField(authService.string.passwordInputLabel, text: $password)
           .focused($focus, equals: .password)
           .submitLabel(.go)
       } label: {
@@ -48,7 +48,7 @@ extension UpdatePasswordView: View {
       Divider()
 
       LabeledContent {
-        SecureField("Confirm password", text: $confirmPassword)
+        SecureField(authService.string.confirmPasswordInputLabel, text: $confirmPassword)
           .focused($focus, equals: .confirmPassword)
           .submitLabel(.go)
       } label: {
@@ -66,7 +66,7 @@ extension UpdatePasswordView: View {
           authService.authView = .authPicker
         }
       }, label: {
-        Text("Update password")
+        Text(authService.string.updatePasswordButtonLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
 

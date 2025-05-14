@@ -18,6 +18,10 @@ public struct AuthPickerView<Content: View> {
 extension AuthPickerView: View {
   public var body: some View {
     VStack {
+      Text(authService.string.authPickerTitle)
+        .font(.largeTitle)
+        .fontWeight(.bold)
+        .padding()
       if authService.authenticationState == .authenticated {
         SignedInView()
       } else if authService.authView == .passwordRecovery {
@@ -25,25 +29,32 @@ extension AuthPickerView: View {
       } else if authService.authView == .emailLink {
         EmailLinkView()
       } else {
-        Text(authService.authenticationFlow == .login ? "Login" : "Sign up")
+        Text(authService.authenticationFlow == .login ? authService.string
+          .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
         VStack { Divider() }
+
         EmailAuthView()
-        providerButtons()
+        VStack {
+          authService.renderButtons()
+        }.padding(.horizontal)
+
         VStack { Divider() }
         HStack {
           Text(authService
-            .authenticationFlow == .login ? "Don't have an account yet?" :
-            "Already have an account?")
+            .authenticationFlow == .login ? authService.string.dontHaveAnAccountYetLabel :
+            authService.string.alreadyHaveAnAccountLabel)
           Button(action: {
             withAnimation {
               switchFlow()
             }
           }) {
-            Text(authService.authenticationFlow == .signUp ? "Log in" : "Sign up")
+            Text(authService.authenticationFlow == .signUp ? authService.string
+              .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
               .fontWeight(.semibold)
               .foregroundColor(.blue)
           }
         }
+        PrivacyTOCsView(displayMode: .footer)
         Text(authService.errorMessage).foregroundColor(.red)
       }
     }

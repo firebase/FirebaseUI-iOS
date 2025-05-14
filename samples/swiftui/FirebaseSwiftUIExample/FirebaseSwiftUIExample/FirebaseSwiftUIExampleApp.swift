@@ -7,10 +7,7 @@
 import FacebookCore
 import FirebaseAuth
 import FirebaseCore
-import FirebaseGoogleSwiftUI
-import FirebasePhoneAuthSwiftUI
 import GoogleSignIn
-import SwiftData
 import SwiftUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -60,8 +57,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct FirebaseSwiftUIExampleApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
-  init() {}
 
   var body: some Scene {
     WindowGroup {
