@@ -271,7 +271,7 @@ public class StringUtils {
   /// found in:
   /// - SignInWithFacebookButton
   public var facebookLoginButtonLabel: String {
-    return localizedString(for: "Continue with Facebook")
+    return localizedString(for: "Sign in with Facebook")
   }
 
   /// Facebook provider
