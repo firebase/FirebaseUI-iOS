@@ -34,8 +34,9 @@ struct ContentView: View {
       configuration: configuration
     )
     .withGoogleSignIn()
-    .withFacebookSignIn()
     .withPhoneSignIn()
+    .withFacebookSignIn()
+    
   }
 
   var body: some View {
