@@ -64,12 +64,13 @@ extension SignInWithFacebookButton: View {
     }) {
       HStack {
         Image(systemName: "f.circle.fill")
-          .font(.title)
+          .font(.title2)
           .foregroundColor(.white)
         Text(authService.string.facebookLoginButtonLabel)
           .fontWeight(.semibold)
           .foregroundColor(.white)
       }
+      .frame(maxWidth: .infinity, alignment: .leading)
       .padding()
       .frame(maxWidth: .infinity)
       .background(Color.blue)

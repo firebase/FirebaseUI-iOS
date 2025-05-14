@@ -32,8 +32,12 @@ extension AuthPickerView: View {
         Text(authService.authenticationFlow == .login ? authService.string
           .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
         VStack { Divider() }
+
         EmailAuthView()
-        authService.renderButtons()
+        VStack {
+          authService.renderButtons()
+        }.padding(.horizontal)
+
         VStack { Divider() }
         HStack {
           Text(authService
