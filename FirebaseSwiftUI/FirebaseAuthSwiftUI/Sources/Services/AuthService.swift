@@ -191,7 +191,8 @@ public final class AuthService {
         let context = AccountMergeConflictContext(
           credential: credentials,
           underlyingError: error,
-          message: "Unable to merge accounts. Use the credential in the context to resolve the conflict."
+          message: "Unable to merge accounts. Use the credential in the context to resolve the conflict.",
+          uid: currentUser?.uid
         )
         throw AuthServiceError.accountMergeConflict(context: context)
       }
