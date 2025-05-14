@@ -33,6 +33,7 @@ public enum AuthView {
   case authPicker
   case passwordRecovery
   case emailLink
+  case phoneAuth
   case updatePassword
 }
 
