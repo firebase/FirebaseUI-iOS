@@ -30,6 +30,8 @@ extension AuthPickerView: View {
         } else if authService.authView == .emailLink {
           Divider()
           EmailLinkView()
+        } else if authService.authView == .phoneAuth {
+          // TODO: - how are we rendering the phone auth View??
         } else {
           Divider()
           Text(authService.authenticationFlow == .login ? authService.string
