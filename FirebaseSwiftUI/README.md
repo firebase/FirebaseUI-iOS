@@ -75,9 +75,9 @@ public struct AuthConfiguration {
   // custom string bundle for string localizations
   let customStringsBundle: Bundle?
   // terms of service URL
-  let tosUrl: URL
+  let tosUrl: URL?
   // privacy policy URL
-  let privacyPolicyUrl: URL
+  let privacyPolicyUrl: URL?
   // action code settings for email sign in link
   let emailLinkSignInActionCodeSettings: ActionCodeSettings?
   // action code settings verifying email address
@@ -87,12 +87,14 @@ public struct AuthConfiguration {
               interactiveDismissEnabled: Bool = true,
               shouldAutoUpgradeAnonymousUsers: Bool = false,
               customStringsBundle: Bundle? = nil,
-              tosUrl: URL = URL(string: "https://example.com/tos")!,
-              privacyPolicyUrl: URL = URL(string: "https://example.com/privacy")!,
+              tosUrl: URL? = nil,
+              privacyPolicyUrl: URL? = nil,
               emailLinkSignInActionCodeSettings: ActionCodeSettings? = nil,
               verifyEmailActionCodeSettings: ActionCodeSettings? = nil)
 }
 ```
+
+> Note: Both `tosUrl` and `privacyPolicyUrl` have to be set for them to be rendered in the UI.
 
 ## Configuring providers
 
