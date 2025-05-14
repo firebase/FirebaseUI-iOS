@@ -1,3 +1,4 @@
+import FirebaseCore
 import SwiftUI
 
 @MainActor
@@ -29,14 +30,14 @@ extension AuthPickerView: View {
         if authService.emailSignInEnabled {
           Text(authService.authenticationFlow == .login ? authService.string
             .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
-          VStack { Divider() }
+          Divider()
           EmailAuthView()
         }
         VStack {
           authService.renderButtons()
         }.padding(.horizontal)
         if authService.emailSignInEnabled {
-          VStack { Divider() }
+          Divider() 
           HStack {
             Text(authService
               .authenticationFlow == .login ? authService.string.dontHaveAnAccountYetLabel :
@@ -58,4 +59,11 @@ extension AuthPickerView: View {
       }
     }
   }
+}
+
+#Preview {
+  FirebaseOptions.dummyConfigurationForPreview()
+  let authService = AuthService()
+  .withEmailSignIn()
+  return AuthPickerView().environment(authService)
 }
