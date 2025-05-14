@@ -37,7 +37,7 @@ extension AuthPickerView: View {
           authService.renderButtons()
         }.padding(.horizontal)
         if authService.emailSignInEnabled {
-          Divider() 
+          Divider()
           HStack {
             Text(authService
               .authenticationFlow == .login ? authService.string.dontHaveAnAccountYetLabel :
@@ -64,6 +64,6 @@ extension AuthPickerView: View {
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
   let authService = AuthService()
-  .withEmailSignIn()
+    .withEmailSignIn()
   return AuthPickerView().environment(authService)
 }
