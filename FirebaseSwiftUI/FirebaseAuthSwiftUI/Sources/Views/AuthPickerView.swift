@@ -17,45 +17,49 @@ public struct AuthPickerView<Content: View> {
 
 extension AuthPickerView: View {
   public var body: some View {
-    VStack {
-      Text(authService.string.authPickerTitle)
-        .font(.largeTitle)
-        .fontWeight(.bold)
-        .padding()
-      if authService.authenticationState == .authenticated {
-        SignedInView()
-      } else if authService.authView == .passwordRecovery {
-        PasswordRecoveryView()
-      } else if authService.authView == .emailLink {
-        EmailLinkView()
-      } else {
-        Text(authService.authenticationFlow == .login ? authService.string
-          .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
-        VStack { Divider() }
+    ScrollView {
+      VStack {
+        Text(authService.string.authPickerTitle)
+          .font(.largeTitle)
+          .fontWeight(.bold)
+          .padding()
+        if authService.authenticationState == .authenticated {
+          SignedInView()
+        } else if authService.authView == .passwordRecovery {
+          PasswordRecoveryView()
+        } else if authService.authView == .emailLink {
+          Divider()
+          EmailLinkView()
+        } else {
+          Divider()
+          Text(authService.authenticationFlow == .login ? authService.string
+            .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
+          VStack { Divider() }
 
-        EmailAuthView()
-        VStack {
-          authService.renderButtons()
-        }.padding(.horizontal)
+          EmailAuthView()
+          VStack {
+            authService.renderButtons()
+          }.padding(.horizontal)
 
-        VStack { Divider() }
-        HStack {
-          Text(authService
-            .authenticationFlow == .login ? authService.string.dontHaveAnAccountYetLabel :
-            authService.string.alreadyHaveAnAccountLabel)
-          Button(action: {
-            withAnimation {
-              switchFlow()
+          VStack { Divider() }
+          HStack {
+            Text(authService
+              .authenticationFlow == .login ? authService.string.dontHaveAnAccountYetLabel :
+              authService.string.alreadyHaveAnAccountLabel)
+            Button(action: {
+              withAnimation {
+                switchFlow()
+              }
+            }) {
+              Text(authService.authenticationFlow == .signUp ? authService.string
+                .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
+                .fontWeight(.semibold)
+                .foregroundColor(.blue)
             }
-          }) {
-            Text(authService.authenticationFlow == .signUp ? authService.string
-              .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
-              .fontWeight(.semibold)
-              .foregroundColor(.blue)
           }
+          PrivacyTOCsView(displayMode: .footer)
+          Text(authService.errorMessage).foregroundColor(.red)
         }
-        PrivacyTOCsView(displayMode: .footer)
-        Text(authService.errorMessage).foregroundColor(.red)
       }
     }
   }
