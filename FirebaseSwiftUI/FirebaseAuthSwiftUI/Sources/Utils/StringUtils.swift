@@ -308,12 +308,14 @@ public class StringUtils {
   public var enterPhoneNumberLabel: String {
     return localizedString(for: "Enter phone number")
   }
+
   /// Phone provider
   /// found in:
   /// - PhoneAuthButtonView
   public var phoneNumberVerificationCodeLabel: String {
     return localizedString(for: "Enter verification code")
   }
+
   /// Phone provider
   /// found in:
   /// - PhoneAuthButtonView
@@ -326,5 +328,26 @@ public class StringUtils {
   /// - PhoneAuthButtonView
   public var verifyPhoneNumberAndSignInLabel: String {
     return localizedString(for: "Verify phone number and sign-in")
+  }
+
+  /// Terms of Service label
+  /// found in:
+  /// - PrivacyTOCsView
+  public var termsOfServiceLabel: String {
+    return localizedString(for: "TermsOfService")
+  }
+
+  /// Terms of Service message
+  /// found in:
+  /// - PrivacyTOCsView
+  public var termsOfServiceMessage: String {
+    return localizedString(for: "TermsOfServiceMessage")
+  }
+
+  /// Privacy Policy
+  /// found in:
+  /// - PrivacyTOCsView
+  public var privacyPolicyLabel: String {
+    return localizedString(for: "PrivacyPolicy")
   }
 }
