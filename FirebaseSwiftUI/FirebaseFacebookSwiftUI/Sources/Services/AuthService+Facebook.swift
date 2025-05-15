@@ -10,8 +10,8 @@ import FirebaseAuthSwiftUI
 public extension AuthService {
   @discardableResult
   func withFacebookSignIn(scopes scopes: [String]? = nil) -> AuthService {
-    facebookProvider = FacebookProviderAuthUI(scopes: scopes)
-    register(provider: facebookProvider!)
+    FacebookProviderAuthUI.configureProvider(scopes: scopes)
+    register(provider: FacebookProviderAuthUI.shared)
     return self
   }
 }

@@ -12,6 +12,7 @@ public protocol GoogleProviderAuthUIProtocol: ExternalAuthProvider {
 
 public protocol FacebookProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential
+  @MainActor func deleteUser(user: User) async throws
 }
 
 public protocol PhoneAuthProviderAuthUIProtocol: ExternalAuthProvider {
@@ -82,17 +83,28 @@ public final class AuthService {
   public var authenticationFlow: AuthenticationFlow = .login
   public var errorMessage = ""
   public let passwordPrompt: PasswordPromptCoordinator = .init()
-
-  public var googleProvider: (any GoogleProviderAuthUIProtocol)?
-  public var facebookProvider: (any FacebookProviderAuthUIProtocol)?
-  public var phoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
+  private var googleProvider: (any GoogleProviderAuthUIProtocol)?
+  private var facebookProvider: (any FacebookProviderAuthUIProtocol)?
+  private var phoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
 
   private var listenerManager: AuthListenerManager?
   private var signedInCredential: AuthCredential?
 
   private var providers: [ExternalAuthProvider] = []
   public func register(provider: ExternalAuthProvider) {
-    providers.append(provider)
+    switch provider {
+    case let google as GoogleProviderAuthUIProtocol:
+      googleProvider = google
+      providers.append(provider)
+    case let facebook as FacebookProviderAuthUIProtocol:
+      facebookProvider = facebook
+      providers.append(provider)
+    case let phone as PhoneAuthProviderAuthUIProtocol:
+      phoneAuthProvider = phone
+      providers.append(provider)
+    default:
+      break
+    }
   }
 
   public func renderButtons(spacing: CGFloat = 16) -> AnyView {
@@ -119,7 +131,7 @@ public final class AuthService {
     get throws {
       guard let provider = facebookProvider else {
         throw AuthServiceError
-          .notConfiguredProvider("`FacebookProviderSwift` has not been configured")
+          .notConfiguredProvider("`FacebookProviderAuthUI` has not been configured")
       }
       return provider
     }
@@ -215,7 +227,8 @@ public final class AuthService {
       if shouldHandleAnonymousUpgrade {
         try await handleAutoUpgradeAnonymousUser(credentials: credentials)
       } else {
-        try await auth.signIn(with: credentials)
+        let result = try await auth.signIn(with: credentials)
+        signedInCredential = result.credential
       }
       updateAuthenticationState()
     } catch {
@@ -247,9 +260,13 @@ public final class AuthService {
 public extension AuthService {
   func deleteUser() async throws {
     do {
-      if let user = auth.currentUser {
-        let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
-        try await operation(on: user)
+      if let user = auth.currentUser, let providerId = signedInCredential?.provider {
+        if providerId == "password" {
+          let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
+          try await operation(on: user)
+        } else if providerId == "facebook.com" {
+          try await safeFacebookProvider.deleteUser(user: user)
+        }
       }
 
     } catch {
@@ -295,7 +312,8 @@ public extension AuthService {
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         try await handleAutoUpgradeAnonymousUser(credentials: credential)
       } else {
-        try await auth.createUser(withEmail: email, password: password)
+        let result = try await auth.createUser(withEmail: email, password: password)
+        signedInCredential = result.credential
       }
       updateAuthenticationState()
     } catch {

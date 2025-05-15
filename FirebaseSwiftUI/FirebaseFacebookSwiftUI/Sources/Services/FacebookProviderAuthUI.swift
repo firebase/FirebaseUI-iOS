@@ -9,11 +9,6 @@ let kFacebookEmailScope = "email"
 let kFacebookProfileScope = "public_profile"
 let kDefaultFacebookScopes = [kFacebookEmailScope, kFacebookProfileScope]
 
-public enum FacebookLoginType {
-  case classic
-  case limitedLogin
-}
-
 public enum FacebookProviderError: Error {
   case signInCancelled(String)
   case configurationInvalid(String)
@@ -27,35 +22,52 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
   let shortName = "Facebook"
   let providerId = "facebook.com"
   private let loginManager = LoginManager()
-  private var rawNonce: String
-  private var shaNonce: String
+  private var rawNonce: String?
+  private var shaNonce: String?
+  // Needed for reauthentication
+  var isLimitedLogin: Bool = true
 
-  public init(scopes: [String]? = nil) {
+  @MainActor private static var _shared: FacebookProviderAuthUI =
+    .init(scopes: kDefaultFacebookScopes)
+
+  @MainActor public static var shared: FacebookProviderAuthUI {
+    return _shared
+  }
+
+  @MainActor public static func configureProvider(scopes: [String]? = nil) {
+    _shared = FacebookProviderAuthUI(scopes: scopes)
+  }
+
+  private init(scopes: [String]? = nil) {
     self.scopes = scopes ?? kDefaultFacebookScopes
-    rawNonce = CommonUtils.randomNonce()
-    shaNonce = CommonUtils.sha256Hash(of: rawNonce)
   }
 
   @MainActor public func authButton() -> AnyView {
     AnyView(SignInWithFacebookButton())
   }
 
+  public func deleteUser(user: User) async throws {
+    let operation = FacebookDeleteUserOperation(facebookProvider: self)
+    try await operation(on: user)
+  }
+
   @MainActor public func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential {
-    let trackingStatus = ATTrackingManager.trackingAuthorizationStatus
-    let tracking: LoginTracking = trackingStatus != .authorized ? .limited :
-      (isLimitedLogin ? .limited : .enabled)
+    let loginType: LoginTracking = isLimitedLogin ? .limited : .enabled
+    self.isLimitedLogin = isLimitedLogin
 
     guard let configuration: LoginConfiguration = {
-      if tracking == .limited {
+      if loginType == .limited {
+        rawNonce = CommonUtils.randomNonce()
+        shaNonce = CommonUtils.sha256Hash(of: rawNonce!)
         return LoginConfiguration(
           permissions: scopes,
-          tracking: tracking,
-          nonce: shaNonce
+          tracking: loginType,
+          nonce: shaNonce!
         )
       } else {
         return LoginConfiguration(
           permissions: scopes,
-          tracking: tracking
+          tracking: loginType
         )
       }
     }() else {
@@ -74,10 +86,8 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
         case .cancelled:
           continuation
             .resume(throwing: FacebookProviderError.signInCancelled("User cancelled sign-in"))
-        //          showCanceledAlert = true
         case let .failed(error):
           continuation.resume(throwing: error)
-        //          errorMessage = authService.string.localizedErrorMessage(for: error)
         case .success:
           continuation.resume()
         }
@@ -109,7 +119,7 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
     if let idToken = AuthenticationToken.current {
       let credential = OAuthProvider.credential(withProviderID: providerId,
                                                 idToken: idToken.tokenString,
-                                                rawNonce: rawNonce)
+                                                rawNonce: rawNonce!)
       return credential
     } else {
       throw FacebookProviderError
