@@ -27,16 +27,14 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
   // Needed for reauthentication
   var isLimitedLogin: Bool = true
 
-  @MainActor private static var _shared: FacebookProviderAuthUI?
+  @MainActor private static var _shared: FacebookProviderAuthUI =
+    .init(scopes: kDefaultFacebookScopes)
 
   @MainActor public static var shared: FacebookProviderAuthUI {
-    guard let instance = _shared else {
-      fatalError("`FacebookProviderAuthUI` has not been configured")
-    }
-    return instance
+    return _shared
   }
 
-  @MainActor public static func configureSharedInstance(scopes: [String]? = nil) {
+  @MainActor public static func configureProvider(scopes: [String]? = nil) {
     _shared = FacebookProviderAuthUI(scopes: scopes)
   }
 
