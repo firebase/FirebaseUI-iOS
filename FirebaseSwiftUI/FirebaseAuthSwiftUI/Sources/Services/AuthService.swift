@@ -152,7 +152,9 @@ public final class AuthService {
     guard let actionCodeSettings = configuration
       .emailLinkSignInActionCodeSettings else {
       throw AuthServiceError
-        .notConfiguredActionCodeSettings
+        .notConfiguredActionCodeSettings(
+          "ActionCodeSettings has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`"
+        )
     }
     return actionCodeSettings
   }
@@ -167,6 +169,10 @@ public final class AuthService {
 
   func reset() {
     errorMessage = ""
+  }
+
+  public var shouldHandleAnonymousUpgrade: Bool {
+    currentUser?.isAnonymous == true && configuration.shouldAutoUpgradeAnonymousUsers
   }
 
   public func signOut() async throws {
@@ -195,22 +201,42 @@ public final class AuthService {
     }
   }
 
-  public func signIn(credentials credentials: AuthCredential) async throws {
+  public func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws {
+    if currentUser == nil {
+      throw AuthServiceError.noCurrentUser
+    }
+    do {
+      try await currentUser?.link(with: credentials)
+    } catch let error as NSError {
+      if error.code == AuthErrorCode.emailAlreadyInUse.rawValue {
+        let context = AccountMergeConflictContext(
+          credential: credentials,
+          underlyingError: error,
+          message: "Unable to merge accounts. Use the credential in the context to resolve the conflict.",
+          uid: currentUser?.uid
+        )
+        throw AuthServiceError.accountMergeConflict(context: context)
+      }
+      throw error
+    }
+  }
+
+  public func signIn(credentials: AuthCredential) async throws {
     authenticationState = .authenticating
-    if currentUser?.isAnonymous == true, configuration.shouldAutoUpgradeAnonymousUsers {
-      try await linkAccounts(credentials: credentials)
-    } else {
-      do {
+    do {
+      if shouldHandleAnonymousUpgrade {
+        try await handleAutoUpgradeAnonymousUser(credentials: credentials)
+      } else {
         let result = try await auth.signIn(with: credentials)
         signedInCredential = result.credential
-        updateAuthenticationState()
-      } catch {
-        authenticationState = .unauthenticated
-        errorMessage = string.localizedErrorMessage(
-          for: error
-        )
-        throw error
       }
+      updateAuthenticationState()
+    } catch {
+      authenticationState = .unauthenticated
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
+      throw error
     }
   }
 
@@ -282,8 +308,13 @@ public extension AuthService {
     authenticationState = .authenticating
 
     do {
-      let result = try await auth.createUser(withEmail: email, password: password)
-      signedInCredential = result.credential
+      if shouldHandleAnonymousUpgrade {
+        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+        try await handleAutoUpgradeAnonymousUser(credentials: credential)
+      } else {
+        let result = try await auth.createUser(withEmail: email, password: password)
+        signedInCredential = result.credential
+      }
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
@@ -311,7 +342,7 @@ public extension AuthService {
 public extension AuthService {
   func sendEmailSignInLink(to email: String) async throws {
     do {
-      let actionCodeSettings = try safeActionCodeSettings()
+      let actionCodeSettings = try updateActionCodeSettings()
       try await auth.sendSignInLink(
         toEmail: email,
         actionCodeSettings: actionCodeSettings
@@ -327,11 +358,27 @@ public extension AuthService {
   func handleSignInLink(url url: URL) async throws {
     do {
       guard let email = emailLink else {
-        throw AuthServiceError.invalidEmailLink
+        throw AuthServiceError
+          .invalidEmailLink("email address is missing from app storage. Is this the same device?")
       }
       let link = url.absoluteString
+      guard let continueUrl = CommonUtils.getQueryParamValue(from: link, paramName: "continueUrl")
+      else {
+        throw AuthServiceError
+          .invalidEmailLink("`continueUrl` parameter is missing from the email link URL")
+      }
+
       if auth.isSignIn(withEmailLink: link) {
-        let result = try await auth.signIn(withEmail: email, link: link)
+        let anonymousUserID = CommonUtils.getQueryParamValue(
+          from: continueUrl,
+          paramName: "ui_auid"
+        )
+        if shouldHandleAnonymousUpgrade, anonymousUserID == currentUser?.uid {
+          let credential = EmailAuthProvider.credential(withEmail: email, link: link)
+          try await handleAutoUpgradeAnonymousUser(credentials: credential)
+        } else {
+          let result = try await auth.signIn(withEmail: email, link: link)
+        }
         updateAuthenticationState()
         emailLink = nil
       }
@@ -341,6 +388,33 @@ public extension AuthService {
       )
       throw error
     }
+  }
+
+  private func updateActionCodeSettings() throws -> ActionCodeSettings {
+    let actionCodeSettings = try safeActionCodeSettings()
+    guard var urlComponents = URLComponents(string: actionCodeSettings.url!.absoluteString) else {
+      throw AuthServiceError
+        .notConfiguredActionCodeSettings(
+          "ActionCodeSettings.url has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`"
+        )
+    }
+
+    var queryItems: [URLQueryItem] = []
+
+    if shouldHandleAnonymousUpgrade {
+      if let currentUser = currentUser {
+        let anonymousUID = currentUser.uid
+        let auidItem = URLQueryItem(name: "ui_auid", value: anonymousUID)
+        queryItems.append(auidItem)
+      }
+    }
+
+    urlComponents.queryItems = queryItems
+    if let finalURL = urlComponents.url {
+      actionCodeSettings.url = finalURL
+    }
+
+    return actionCodeSettings
   }
 }
 
