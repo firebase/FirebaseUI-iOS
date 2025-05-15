@@ -16,6 +16,7 @@ public enum AuthenticationToken {
   case firebase(String)
 }
 
+@MainActor
 public protocol AuthenticatedOperation {
   func callAsFunction(on user: User) async throws
   func reauthenticate() async throws -> AuthenticationToken

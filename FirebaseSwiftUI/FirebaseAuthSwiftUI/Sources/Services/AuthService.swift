@@ -12,6 +12,7 @@ public protocol GoogleProviderAuthUIProtocol: ExternalAuthProvider {
 
 public protocol FacebookProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential
+  @MainActor func deleteUser(user: User) async throws
 }
 
 public protocol PhoneAuthProviderAuthUIProtocol: ExternalAuthProvider {
@@ -200,7 +201,8 @@ public final class AuthService {
       try await linkAccounts(credentials: credentials)
     } else {
       do {
-        try await auth.signIn(with: credentials)
+        let result = try await auth.signIn(with: credentials)
+        signedInCredential = result.credential
         updateAuthenticationState()
       } catch {
         authenticationState = .unauthenticated
@@ -232,9 +234,13 @@ public final class AuthService {
 public extension AuthService {
   func deleteUser() async throws {
     do {
-      if let user = auth.currentUser {
-        let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
-        try await operation(on: user)
+      if let user = auth.currentUser, let providerId = signedInCredential?.provider {
+        if providerId == "password" {
+          let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
+          try await operation(on: user)
+        } else if providerId == "facebook.com" {
+          try await safeFacebookProvider.deleteUser(user: user)
+        }
       }
 
     } catch {
@@ -276,7 +282,8 @@ public extension AuthService {
     authenticationState = .authenticating
 
     do {
-      try await auth.createUser(withEmail: email, password: password)
+      let result = try await auth.createUser(withEmail: email, password: password)
+      signedInCredential = result.credential
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated

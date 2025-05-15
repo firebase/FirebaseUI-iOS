@@ -16,16 +16,16 @@ public enum FacebookProviderError: Error {
   case authenticationToken(String)
 }
 
-public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol, @unchecked Sendable {
+public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
   public let id: String = "facebook"
   let scopes: [String]
   let shortName = "Facebook"
   let providerId = "facebook.com"
   private let loginManager = LoginManager()
-  private var rawNonce: String
-  private var shaNonce: String
+  private var rawNonce: String?
+  private var shaNonce: String?
   // Needed for reauthentication
-  @MainActor public var isLimitedLogin: Bool = true
+  var isLimitedLogin: Bool = true
 
   @MainActor private static var _shared: FacebookProviderAuthUI?
 
@@ -42,12 +42,15 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol, @unchecked 
 
   private init(scopes: [String]? = nil) {
     self.scopes = scopes ?? kDefaultFacebookScopes
-    rawNonce = CommonUtils.randomNonce()
-    shaNonce = CommonUtils.sha256Hash(of: rawNonce)
   }
 
   @MainActor public func authButton() -> AnyView {
     AnyView(SignInWithFacebookButton())
+  }
+
+  public func deleteUser(user: User) async throws {
+    let operation = FacebookDeleteUserOperation(facebookProvider: self)
+    try await operation(on: user)
   }
 
   @MainActor public func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential {
@@ -56,10 +59,12 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol, @unchecked 
 
     guard let configuration: LoginConfiguration = {
       if loginType == .limited {
+        rawNonce = CommonUtils.randomNonce()
+        shaNonce = CommonUtils.sha256Hash(of: rawNonce!)
         return LoginConfiguration(
           permissions: scopes,
           tracking: loginType,
-          nonce: shaNonce
+          nonce: shaNonce!
         )
       } else {
         return LoginConfiguration(
@@ -116,7 +121,7 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol, @unchecked 
     if let idToken = AuthenticationToken.current {
       let credential = OAuthProvider.credential(withProviderID: providerId,
                                                 idToken: idToken.tokenString,
-                                                rawNonce: rawNonce)
+                                                rawNonce: rawNonce!)
       return credential
     } else {
       throw FacebookProviderError
