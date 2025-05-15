@@ -11,17 +11,17 @@ extension NSError {
   }
 }
 
-enum AuthenticationToken {
+public enum AuthenticationToken {
   case apple(ASAuthorizationAppleIDCredential, String)
   case firebase(String)
 }
 
-protocol AuthenticatedOperation {
+public protocol AuthenticatedOperation {
   func callAsFunction(on user: User) async throws
   func reauthenticate() async throws -> AuthenticationToken
 }
 
-extension AuthenticatedOperation {
+public extension AuthenticatedOperation {
   func callAsFunction(on _: User,
                       _ performOperation: () async throws -> Void) async throws {
     do {

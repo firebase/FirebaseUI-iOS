@@ -82,17 +82,28 @@ public final class AuthService {
   public var authenticationFlow: AuthenticationFlow = .login
   public var errorMessage = ""
   public let passwordPrompt: PasswordPromptCoordinator = .init()
-
-  public var googleProvider: (any GoogleProviderAuthUIProtocol)?
-  public var facebookProvider: (any FacebookProviderAuthUIProtocol)?
-  public var phoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
+  private var googleProvider: (any GoogleProviderAuthUIProtocol)?
+  private var facebookProvider: (any FacebookProviderAuthUIProtocol)?
+  private var phoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
 
   private var listenerManager: AuthListenerManager?
   private var signedInCredential: AuthCredential?
 
   private var providers: [ExternalAuthProvider] = []
   public func register(provider: ExternalAuthProvider) {
-    providers.append(provider)
+    switch provider {
+    case let google as GoogleProviderAuthUIProtocol:
+      googleProvider = google
+      providers.append(provider)
+    case let facebook as FacebookProviderAuthUIProtocol:
+      facebookProvider = facebook
+      providers.append(provider)
+    case let phone as PhoneAuthProviderAuthUIProtocol:
+      phoneAuthProvider = phone
+      providers.append(provider)
+    default:
+      break
+    }
   }
 
   public func renderButtons(spacing: CGFloat = 16) -> AnyView {
@@ -119,7 +130,7 @@ public final class AuthService {
     get throws {
       guard let provider = facebookProvider else {
         throw AuthServiceError
-          .notConfiguredProvider("`FacebookProviderSwift` has not been configured")
+          .notConfiguredProvider("`FacebookProviderAuthUI` has not been configured")
       }
       return provider
     }
