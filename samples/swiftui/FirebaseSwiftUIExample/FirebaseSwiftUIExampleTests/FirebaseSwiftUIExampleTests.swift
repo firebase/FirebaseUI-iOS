@@ -10,7 +10,6 @@ import FirebaseCore
 @testable import FirebaseSwiftUIExample
 import Testing
 
-let kEmailAddress = "test@example.com"
 let kPassword = "123456"
 
 struct FirebaseSwiftUIExampleTests {
@@ -25,6 +24,12 @@ struct FirebaseSwiftUIExampleTests {
     return AuthService(configuration: resolvedConfiguration)
   }
 
+  func createEmail() -> String {
+    let before = UUID().uuidString.prefix(8)
+    let after = UUID().uuidString.prefix(6)
+    return "\(before)@\(after).com"
+  }
+
   @Test
   @MainActor
   func testCreateEmailPasswordUser() async throws {
@@ -35,7 +40,7 @@ struct FirebaseSwiftUIExampleTests {
     #expect(service.errorMessage.isEmpty)
     #expect(service.signedInCredential == nil)
     #expect(service.currentUser == nil)
-    try await service.createUser(withEmail: kEmailAddress, password: kPassword)
+    try await service.createUser(withEmail: createEmail(), password: kPassword)
 
     #expect(service.authenticationState == .authenticated)
     #expect(service.authView == .authPicker)
@@ -49,22 +54,23 @@ struct FirebaseSwiftUIExampleTests {
   @MainActor
   func testSignInUser() async throws {
     let service = try await prepareFreshAuthService()
-    // TODO: - it clears emulator data but seems like it is still there?
-//    try await service.createUser(withEmail: kEmailAddress, password: kPassword)
-//    try await service.signOut()
+    let email = createEmail()
+    try await service.createUser(withEmail: email, password: kPassword)
+    try await service.signOut()
+    try await Task.sleep(nanoseconds: 1_000_000_000)
     #expect(service.authenticationState == .unauthenticated)
     #expect(service.authView == .authPicker)
     #expect(service.errorMessage.isEmpty)
     #expect(service.signedInCredential == nil)
     #expect(service.currentUser == nil)
 
-    try await service.signIn(withEmail: kEmailAddress, password: kPassword)
+    try await service.signIn(withEmail: email, password: kPassword)
 
     #expect(service.authenticationState == .authenticated)
     #expect(service.authView == .authPicker)
     #expect(service.errorMessage.isEmpty)
     #expect(service.currentUser != nil)
     // TODO: - reinstate once this PR is merged: https://github.com/firebase/FirebaseUI-iOS/pull/1256
-//    #expect(service.signedInCredential is AuthCredential)
+    //    #expect(service.signedInCredential is AuthCredential)
   }
 }
