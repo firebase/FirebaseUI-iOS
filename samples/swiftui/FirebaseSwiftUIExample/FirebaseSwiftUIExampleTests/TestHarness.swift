@@ -51,7 +51,7 @@ func clearAuthEmulatorState(projectID: String = "flutterfire-e2e-tests") async t
   let url = URL(string: "http://localhost:9099/emulator/v1/projects/\(projectID)/accounts")!
   var request = URLRequest(url: url)
   request.httpMethod = "DELETE"
-  let (data, response) = try await URLSession.shared.data(for: request)
+  let (_, response) = try await URLSession.shared.data(for: request)
 
   if let httpResponse = response as? HTTPURLResponse {
     print("🔥 clearAuthEmulatorState: status = \(httpResponse.statusCode)")
