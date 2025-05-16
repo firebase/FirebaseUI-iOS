@@ -15,12 +15,14 @@ let kPassword = "123456"
 
 struct FirebaseSwiftUIExampleTests {
   @MainActor
-  func prepareFreshAuthService() async throws -> AuthService {
+  func prepareFreshAuthService(configuration: AuthConfiguration? = nil) async throws
+    -> AuthService {
     configureFirebaseIfNeeded()
     try await clearAuthEmulatorState()
 
-    let auth = Auth.auth()
-    return AuthService(auth: auth)
+    let resolvedConfiguration = configuration ?? AuthConfiguration()
+
+    return AuthService(configuration: resolvedConfiguration)
   }
 
   @Test

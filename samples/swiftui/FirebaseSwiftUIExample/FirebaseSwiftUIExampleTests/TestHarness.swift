@@ -15,7 +15,6 @@ func configureFirebaseIfNeeded() {
   if FirebaseApp.app() == nil {
     FirebaseApp.configure()
   }
-  Auth.auth().useEmulator(withHost: "localhost", port: 9099)
 }
 
 private var hasCheckedEmulatorAvailability = false
@@ -42,6 +41,7 @@ func isEmulatorRunning() async throws {
       ]
     )
   }
+  Auth.auth().useEmulator(withHost: "localhost", port: 9099)
   hasCheckedEmulatorAvailability = true
 }
 
