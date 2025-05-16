@@ -65,6 +65,7 @@ extension EmailAuthView: View {
       .padding(.vertical, 6)
       .background(Divider(), alignment: .bottom)
       .padding(.bottom, 4)
+      .accessibilityIdentifier("email-field")
 
       LabeledContent {
         SecureField(authService.string.passwordInputLabel, text: $password)
@@ -79,6 +80,7 @@ extension EmailAuthView: View {
       .padding(.vertical, 6)
       .background(Divider(), alignment: .bottom)
       .padding(.bottom, 8)
+      .accessibilityIdentifier("password-field")
 
       if authService.authenticationFlow == .login {
         Button(action: {
@@ -126,6 +128,7 @@ extension EmailAuthView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
+      .accessibilityIdentifier("sign-in-button")
       Button(action: {
         authService.authView = .emailLink
       }) {

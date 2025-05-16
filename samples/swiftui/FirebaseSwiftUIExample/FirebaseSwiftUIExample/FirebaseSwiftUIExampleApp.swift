@@ -10,12 +10,17 @@ import FirebaseCore
 import GoogleSignIn
 import SwiftUI
 
+public let isUITestRunner = CommandLine.arguments.contains("--ui-test-runner")
+
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [
                      UIApplication.LaunchOptionsKey: Any
                    ]?) -> Bool {
     FirebaseApp.configure()
+    if isUITestRunner {
+      Auth.auth().useEmulator(withHost: "localhost", port: 9099)
+    }
     ApplicationDelegate.shared.application(
       application,
       didFinishLaunchingWithOptions: launchOptions
