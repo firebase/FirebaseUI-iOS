@@ -32,11 +32,13 @@ struct FirebaseSwiftUIExampleTests {
     #expect(service.authView == .authPicker)
     #expect(service.errorMessage.isEmpty)
     #expect(service.signedInCredential == nil)
+    #expect(service.currentUser == nil)
     try await service.createUser(withEmail: kEmailAddress, password: kPassword)
 
     #expect(service.authenticationState == .authenticated)
     #expect(service.authView == .authPicker)
     #expect(service.errorMessage.isEmpty)
+    #expect(service.currentUser != nil)
     // TODO: - reinstate once this PR is merged: https://github.com/firebase/FirebaseUI-iOS/pull/1256
 //    #expect(service.signedInCredential is AuthCredential)
   }
@@ -48,16 +50,18 @@ struct FirebaseSwiftUIExampleTests {
     // TODO: - it clears emulator data but seems like it is still there?
 //    try await service.createUser(withEmail: kEmailAddress, password: kPassword)
 //    try await service.signOut()
-//    #expect(service.authenticationState == .unauthenticated)
-//    #expect(service.authView == .authPicker)
-//    #expect(service.errorMessage.isEmpty)
-//    #expect(service.signedInCredential == nil)
+    #expect(service.authenticationState == .unauthenticated)
+    #expect(service.authView == .authPicker)
+    #expect(service.errorMessage.isEmpty)
+    #expect(service.signedInCredential == nil)
+    #expect(service.currentUser == nil)
 
     try await service.signIn(withEmail: kEmailAddress, password: kPassword)
 
     #expect(service.authenticationState == .authenticated)
     #expect(service.authView == .authPicker)
     #expect(service.errorMessage.isEmpty)
+    #expect(service.currentUser != nil)
     // TODO: - reinstate once this PR is merged: https://github.com/firebase/FirebaseUI-iOS/pull/1256
 //    #expect(service.signedInCredential is AuthCredential)
   }
