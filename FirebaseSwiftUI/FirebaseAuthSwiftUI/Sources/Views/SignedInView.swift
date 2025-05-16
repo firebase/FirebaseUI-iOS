@@ -23,6 +23,7 @@ extension SignedInView: View {
           .font(.largeTitle)
           .fontWeight(.bold)
           .padding()
+          .accessibilityIdentifier("signed-in-text")
         Text(authService.string.accountSettingsEmailLabel)
         Text("\(authService.currentUser?.email ?? "Unknown")")
 

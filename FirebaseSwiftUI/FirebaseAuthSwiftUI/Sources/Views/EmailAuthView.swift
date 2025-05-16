@@ -65,10 +65,13 @@ extension EmailAuthView: View {
       .padding(.vertical, 6)
       .background(Divider(), alignment: .bottom)
       .padding(.bottom, 4)
+      .accessibilityIdentifier("email-field")
 
       LabeledContent {
         SecureField(authService.string.passwordInputLabel, text: $password)
           .focused($focus, equals: .password)
+          .textInputAutocapitalization(.never)
+          .disableAutocorrection(true)
           .submitLabel(.go)
           .onSubmit {
             Task { await signInWithEmailPassword() }
@@ -79,6 +82,7 @@ extension EmailAuthView: View {
       .padding(.vertical, 6)
       .background(Divider(), alignment: .bottom)
       .padding(.bottom, 8)
+      .accessibilityIdentifier("password-field")
 
       if authService.authenticationFlow == .login {
         Button(action: {
@@ -92,6 +96,8 @@ extension EmailAuthView: View {
         LabeledContent {
           SecureField(authService.string.confirmPasswordInputLabel, text: $confirmPassword)
             .focused($focus, equals: .confirmPassword)
+            .textInputAutocapitalization(.never)
+            .disableAutocorrection(true)
             .submitLabel(.go)
             .onSubmit {
               Task { await createUserWithEmailPassword() }
@@ -102,6 +108,7 @@ extension EmailAuthView: View {
         .padding(.vertical, 6)
         .background(Divider(), alignment: .bottom)
         .padding(.bottom, 8)
+        .accessibilityIdentifier("confirm-password-field")
       }
 
       Button(action: {
@@ -126,6 +133,7 @@ extension EmailAuthView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
+      .accessibilityIdentifier("sign-in-button")
       Button(action: {
         authService.authView = .emailLink
       }) {

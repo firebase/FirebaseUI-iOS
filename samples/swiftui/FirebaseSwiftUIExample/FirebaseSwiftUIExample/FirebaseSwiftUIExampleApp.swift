@@ -16,6 +16,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      UIApplication.LaunchOptionsKey: Any
                    ]?) -> Bool {
     FirebaseApp.configure()
+    if uiAuthEmulator {
+      Auth.auth().useEmulator(withHost: "localhost", port: 9099)
+    }
+
     ApplicationDelegate.shared.application(
       application,
       didFinishLaunchingWithOptions: launchOptions
@@ -57,6 +61,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct FirebaseSwiftUIExampleApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
+  init() {
+    Task {
+      try await testCreateUser()
+    }
+  }
 
   var body: some Scene {
     WindowGroup {

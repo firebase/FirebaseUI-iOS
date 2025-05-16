@@ -88,7 +88,7 @@ public final class AuthService {
   public var phoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
 
   private var listenerManager: AuthListenerManager?
-  private var signedInCredential: AuthCredential?
+  public var signedInCredential: AuthCredential?
 
   private var providers: [ExternalAuthProvider] = []
   public func register(provider: ExternalAuthProvider) {
