@@ -8,8 +8,6 @@
 import FirebaseAuth
 import FirebaseCore
 
-/// Call this at the beginning of any integration test to ensure Firebase is configured and pointed
-/// to the Auth Emulator.
 @MainActor
 func configureFirebaseIfNeeded() {
   if FirebaseApp.app() == nil {
