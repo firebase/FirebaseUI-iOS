@@ -70,6 +70,8 @@ extension EmailAuthView: View {
       LabeledContent {
         SecureField(authService.string.passwordInputLabel, text: $password)
           .focused($focus, equals: .password)
+          .textInputAutocapitalization(.never)
+          .disableAutocorrection(true)
           .submitLabel(.go)
           .onSubmit {
             Task { await signInWithEmailPassword() }
@@ -94,6 +96,8 @@ extension EmailAuthView: View {
         LabeledContent {
           SecureField(authService.string.confirmPasswordInputLabel, text: $confirmPassword)
             .focused($focus, equals: .confirmPassword)
+            .textInputAutocapitalization(.never)
+            .disableAutocorrection(true)
             .submitLabel(.go)
             .onSubmit {
               Task { await createUserWithEmailPassword() }
@@ -104,6 +108,7 @@ extension EmailAuthView: View {
         .padding(.vertical, 6)
         .background(Divider(), alignment: .bottom)
         .padding(.bottom, 8)
+        .accessibilityIdentifier("confirm-password-field")
       }
 
       Button(action: {

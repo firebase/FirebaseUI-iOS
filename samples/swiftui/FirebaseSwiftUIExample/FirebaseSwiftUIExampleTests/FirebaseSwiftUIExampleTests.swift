@@ -24,12 +24,6 @@ struct FirebaseSwiftUIExampleTests {
     return AuthService(configuration: resolvedConfiguration)
   }
 
-  func createEmail() -> String {
-    let before = UUID().uuidString.prefix(8)
-    let after = UUID().uuidString.prefix(6)
-    return "\(before)@\(after).com"
-  }
-
   @Test
   @MainActor
   func testDefaultAuthConfigurationInjection() async throws {

@@ -57,3 +57,9 @@ func clearAuthEmulatorState(projectID: String = "flutterfire-e2e-tests") async t
     print("🔥 clearAuthEmulatorState: status = \(httpResponse.statusCode)")
   }
 }
+
+func createEmail() -> String {
+  let before = UUID().uuidString.prefix(8)
+  let after = UUID().uuidString.prefix(6)
+  return "\(before)@\(after).com"
+}
