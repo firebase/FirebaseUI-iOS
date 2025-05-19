@@ -1,0 +1,55 @@
+name: SwiftUI Auth
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/swiftui-auth.yml'
+      - 'samples/swiftui/**'
+      - 'FirebaseSwiftUI/**'
+      - 'Package.swift'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/swiftui-auth.yml'
+      - 'samples/swiftui/**'
+      - 'FirebaseSwiftUI/**'
+      - 'Package.swift'
+
+  workflow_dispatch:
+
+jobs:
+  swiftui-auth:
+    runs-on: macOS-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
+      - uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a
+        name: Install Node.js 20
+        with:
+          node-version: '20'
+      - uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Install Firebase
+        run: |
+          sudo npm i -g firebase-tools
+      - name: Start Firebase Emulator
+        run: |
+          sudo chown -R 501:20 && cd ./samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample && ./start-firebase-emulator.sh
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
+      - name: Disable iOS Simulator hardware keyboard
+        # needed for SecureFields otherwise the UI flow tests will fail 
+        run: |
+          defaults delete com.apple.iphonesimulator ConnectHardwareKeyboard || true
+      - name: Run Integration Tests
+        run: |
+          cd ./samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample
+          xcodebuild test -scheme FirebaseSwiftUIExampleTests -destination 'platform=iOS Simulator,name=iPhone 16 Plus' -enableCodeCoverage YES
+      - name: Run View UI Tests
+        run: |
+          cd ./samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample
+          xcodebuild test -scheme FirebaseSwiftUIExampleUITests -destination 'platform=iOS Simulator,name=iPhone 16 Plus' -enableCodeCoverage YES
