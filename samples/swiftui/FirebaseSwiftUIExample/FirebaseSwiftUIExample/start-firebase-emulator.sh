@@ -33,10 +33,10 @@ while [ $RETRIES -le $MAX_RETRIES ]; do
     CHECKATTEMPTS=1
     while [ $CHECKATTEMPTS -le $MAX_CHECKATTEMPTS ]; do
       sleep $CHECKATTEMPTS_WAIT
-      if curl --output /dev/null --silent --fail http://localhost:8080; then
+      if curl --output /dev/null --silent --fail http://localhost:9099; then
         # Check again since it can exit before the emulator is ready.
         sleep 15
-        if curl --output /dev/null --silent --fail http://localhost:8080; then
+        if curl --output /dev/null --silent --fail http://localhost:9099; then
           echo "Firebase Emulator is online!"
           exit 0
         else
