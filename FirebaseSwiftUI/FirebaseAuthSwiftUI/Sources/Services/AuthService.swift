@@ -83,9 +83,9 @@ public final class AuthService {
   public var authenticationFlow: AuthenticationFlow = .login
   public var errorMessage = ""
   public let passwordPrompt: PasswordPromptCoordinator = .init()
-  private var googleProvider: (any GoogleProviderAuthUIProtocol)?
-  private var facebookProvider: (any FacebookProviderAuthUIProtocol)?
-  private var phoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
+  private var unsafeGoogleProvider: (any GoogleProviderAuthUIProtocol)?
+  private var unsafeFacebookProvider: (any FacebookProviderAuthUIProtocol)?
+  private var unsafePhoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
 
   private var listenerManager: AuthListenerManager?
   private var signedInCredential: AuthCredential?
@@ -94,13 +94,13 @@ public final class AuthService {
   public func register(provider: ExternalAuthProvider) {
     switch provider {
     case let google as GoogleProviderAuthUIProtocol:
-      googleProvider = google
+      unsafeGoogleProvider = google
       providers.append(provider)
     case let facebook as FacebookProviderAuthUIProtocol:
-      facebookProvider = facebook
+      unsafeFacebookProvider = facebook
       providers.append(provider)
     case let phone as PhoneAuthProviderAuthUIProtocol:
-      phoneAuthProvider = phone
+      unsafePhoneAuthProvider = phone
       providers.append(provider)
     default:
       break
@@ -117,9 +117,9 @@ public final class AuthService {
     )
   }
 
-  private var safeGoogleProvider: any GoogleProviderAuthUIProtocol {
+  private var googleProvider: any GoogleProviderAuthUIProtocol {
     get throws {
-      guard let provider = googleProvider else {
+      guard let provider = unsafeGoogleProvider else {
         throw AuthServiceError
           .notConfiguredProvider("`GoogleProviderSwift` has not been configured")
       }
@@ -127,9 +127,9 @@ public final class AuthService {
     }
   }
 
-  private var safeFacebookProvider: any FacebookProviderAuthUIProtocol {
+  private var facebookProvider: any FacebookProviderAuthUIProtocol {
     get throws {
-      guard let provider = facebookProvider else {
+      guard let provider = unsafeFacebookProvider else {
         throw AuthServiceError
           .notConfiguredProvider("`FacebookProviderAuthUI` has not been configured")
       }
@@ -137,9 +137,9 @@ public final class AuthService {
     }
   }
 
-  private var safePhoneAuthProvider: any PhoneAuthProviderAuthUIProtocol {
+  private var phoneAuthProvider: any PhoneAuthProviderAuthUIProtocol {
     get throws {
-      guard let provider = phoneAuthProvider else {
+      guard let provider = unsafePhoneAuthProvider else {
         throw AuthServiceError
           .notConfiguredProvider("`PhoneAuthProviderSwift` has not been configured")
       }
@@ -265,7 +265,7 @@ public extension AuthService {
           let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
           try await operation(on: user)
         } else if providerId == "facebook.com" {
-          try await safeFacebookProvider.deleteUser(user: user)
+          try await facebookProvider.deleteUser(user: user)
         }
       }
 
@@ -428,7 +428,7 @@ public extension AuthService {
           "OAuth client ID not found. Please make sure Google Sign-In is enabled in the Firebase console. You may have to download a new GoogleService-Info.plist file after enabling Google Sign-In."
         )
     }
-    let credential = try await safeGoogleProvider.signInWithGoogle(clientID: clientID)
+    let credential = try await googleProvider.signInWithGoogle(clientID: clientID)
 
     try await signIn(credentials: credential)
   }
@@ -438,7 +438,7 @@ public extension AuthService {
 
 public extension AuthService {
   func signInWithFacebook(limitedLogin: Bool = true) async throws {
-    let credential = try await safeFacebookProvider
+    let credential = try await facebookProvider
       .signInWithFacebook(isLimitedLogin: limitedLogin)
     try await signIn(credentials: credential)
   }
@@ -449,7 +449,7 @@ public extension AuthService {
 public extension AuthService {
   func verifyPhoneNumber(phoneNumber: String) async throws -> String {
     do {
-      return try await safePhoneAuthProvider.verifyPhoneNumber(phoneNumber: phoneNumber)
+      return try await phoneAuthProvider.verifyPhoneNumber(phoneNumber: phoneNumber)
     } catch {
       errorMessage = string.localizedErrorMessage(
         for: error
