@@ -47,9 +47,9 @@ jobs:
           defaults delete com.apple.iphonesimulator ConnectHardwareKeyboard || true
       - name: Run Integration Tests
         run: |
-          cd ./samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample
+          cd ./samples/swiftui/FirebaseSwiftUIExample
           xcodebuild test -scheme FirebaseSwiftUIExampleTests -destination 'platform=iOS Simulator,name=iPhone 16 Plus' -enableCodeCoverage YES
       - name: Run View UI Tests
         run: |
-          cd ./samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample
+          cd ./samples/swiftui/FirebaseSwiftUIExample
           xcodebuild test -scheme FirebaseSwiftUIExampleUITests -destination 'platform=iOS Simulator,name=iPhone 16 Plus' -enableCodeCoverage YES
