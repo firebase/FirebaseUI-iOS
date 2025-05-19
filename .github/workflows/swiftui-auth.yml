@@ -38,6 +38,8 @@ jobs:
       - name: Start Firebase Emulator
         run: |
           sudo chown -R 501:20 "/Users/runner/.npm" && cd ./samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample && ./start-firebase-emulator.sh
+      - name: Install xcpretty
+        run: gem install xcpretty
       - name: Select Xcode version
         run: |
           sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
@@ -48,8 +50,16 @@ jobs:
       - name: Run Integration Tests
         run: |
           cd ./samples/swiftui/FirebaseSwiftUIExample
-          xcodebuild test -scheme FirebaseSwiftUIExampleTests -destination 'platform=iOS Simulator,name=iPhone 16 Plus' -enableCodeCoverage YES
+          xcodebuild test -scheme FirebaseSwiftUIExampleTests -destination 'platform=iOS Simulator,name=iPhone 16 Plus' -enableCodeCoverage YES | tee FirebaseSwiftUIExampleTests.log | xcpretty --test --color --simple
       - name: Run View UI Tests
         run: |
           cd ./samples/swiftui/FirebaseSwiftUIExample
-          xcodebuild test -scheme FirebaseSwiftUIExampleUITests -destination 'platform=iOS Simulator,name=iPhone 16 Plus' -enableCodeCoverage YES
+          xcodebuild test -scheme FirebaseSwiftUIExampleUITests -destination 'platform=iOS Simulator,name=iPhone 16 Plus' -enableCodeCoverage YES | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple
+      - name: Upload test logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: swiftui-auth-test-logs
+          path: |
+            samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.log
+            samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.log
