@@ -12,6 +12,7 @@ let kDefaultFacebookScopes = [kFacebookEmailScope, kFacebookProfileScope]
 public enum FacebookProviderError: Error {
   case signInCancelled(String)
   case configurationInvalid(String)
+  case limitedLoginNonce(String)
   case accessToken(String)
   case authenticationToken(String)
 }
@@ -117,9 +118,13 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
 
   private func limitedLogin() throws -> AuthCredential {
     if let idToken = AuthenticationToken.current {
+      guard let nonce = rawNonce else {
+        throw FacebookProviderError
+          .limitedLoginNonce("`rawNonce` has not been generated for Facebook limited login")
+      }
       let credential = OAuthProvider.credential(withProviderID: providerId,
                                                 idToken: idToken.tokenString,
-                                                rawNonce: rawNonce!)
+                                                rawNonce: nonce)
       return credential
     } else {
       throw FacebookProviderError
