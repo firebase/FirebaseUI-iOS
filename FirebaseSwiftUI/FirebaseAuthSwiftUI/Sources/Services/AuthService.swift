@@ -120,8 +120,7 @@ public final class AuthService {
   private var googleProvider: any GoogleProviderAuthUIProtocol {
     get throws {
       guard let provider = unsafeGoogleProvider else {
-        throw AuthServiceError
-          .notConfiguredProvider("`GoogleProviderSwift` has not been configured")
+        fatalError("`GoogleProviderAuthUI` has not been configured")
       }
       return provider
     }
@@ -130,8 +129,7 @@ public final class AuthService {
   private var facebookProvider: any FacebookProviderAuthUIProtocol {
     get throws {
       guard let provider = unsafeFacebookProvider else {
-        throw AuthServiceError
-          .notConfiguredProvider("`FacebookProviderAuthUI` has not been configured")
+        fatalError("`FacebookProviderAuthUI` has not been configured")
       }
       return provider
     }
@@ -140,8 +138,7 @@ public final class AuthService {
   private var phoneAuthProvider: any PhoneAuthProviderAuthUIProtocol {
     get throws {
       guard let provider = unsafePhoneAuthProvider else {
-        throw AuthServiceError
-          .notConfiguredProvider("`PhoneAuthProviderSwift` has not been configured")
+        fatalError("`PhoneAuthProviderAuthUI` has not been configured")
       }
       return provider
     }

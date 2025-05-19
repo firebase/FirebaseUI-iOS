@@ -17,7 +17,6 @@ public struct AccountMergeConflictContext: LocalizedError {
 public enum AuthServiceError: LocalizedError {
   case noCurrentUser
   case invalidEmailLink(String)
-  case notConfiguredProvider(String)
   case clientIdNotFound(String)
   case notConfiguredActionCodeSettings(String)
   case reauthenticationRequired(String)
@@ -30,8 +29,6 @@ public enum AuthServiceError: LocalizedError {
     case .noCurrentUser:
       return "No user is currently signed in."
     case let .invalidEmailLink(description):
-      return description
-    case let .notConfiguredProvider(description):
       return description
     case let .clientIdNotFound(description):
       return description
