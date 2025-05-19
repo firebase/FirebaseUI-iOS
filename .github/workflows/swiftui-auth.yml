@@ -37,7 +37,7 @@ jobs:
           sudo npm i -g firebase-tools
       - name: Start Firebase Emulator
         run: |
-          sudo chown -R 501:20 && cd ./samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample && ./start-firebase-emulator.sh
+          sudo chown -R 501:20 "/Users/runner/.npm" && cd ./samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample && ./start-firebase-emulator.sh
       - name: Select Xcode version
         run: |
           sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
