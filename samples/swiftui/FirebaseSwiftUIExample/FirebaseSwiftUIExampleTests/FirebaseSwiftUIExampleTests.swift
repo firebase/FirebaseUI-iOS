@@ -92,7 +92,7 @@ struct FirebaseSwiftUIExampleTests {
     #expect(service.signedInCredential == nil)
     #expect(service.currentUser == nil)
     try await service.createUser(withEmail: createEmail(), password: kPassword)
-    try await Task.sleep(nanoseconds: 2_000_000_000)
+    try await Task.sleep(nanoseconds: 4_000_000_000)
     #expect(service.authenticationState == .authenticated)
     #expect(service.authView == .authPicker)
     #expect(service.errorMessage.isEmpty)

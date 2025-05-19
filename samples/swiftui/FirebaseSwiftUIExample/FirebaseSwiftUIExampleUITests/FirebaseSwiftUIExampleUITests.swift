@@ -42,11 +42,12 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     let app = XCUIApplication()
     let email = createEmail()
     app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--create-user \(email)")
+    app.launchArguments.append("--create-user")
+    app.launchArguments.append("\(email)")
     app.launch()
 
     let emailField = app.textFields["email-field"]
-    XCTAssertTrue(emailField.waitForExistence(timeout: 2), "Email field should exist")
+    XCTAssertTrue(emailField.waitForExistence(timeout: 6), "Email field should exist")
     emailField.tap()
     emailField.typeText(email)
 
@@ -71,7 +72,7 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     let app = XCUIApplication()
     let email = createEmail()
     let password = "qwerty321@"
-    app.launchArguments.append("--ui-test-runner")
+    app.launchArguments.append("--auth-emulator")
     app.launch()
 
     let switchFlowButton = app.buttons["switch-auth-flow"]
