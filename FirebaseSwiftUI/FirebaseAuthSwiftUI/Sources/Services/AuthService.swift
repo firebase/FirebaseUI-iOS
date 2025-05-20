@@ -90,6 +90,8 @@ public final class AuthService {
   private var listenerManager: AuthListenerManager?
   private var signedInCredential: AuthCredential?
 
+  var emailSignInEnabled = false
+
   private var providers: [ExternalAuthProvider] = []
   public func register(provider: ExternalAuthProvider) {
     switch provider {
@@ -296,6 +298,11 @@ public extension AuthService {
 // MARK: - Email/Password Sign In
 
 public extension AuthService {
+  func withEmailSignIn() -> AuthService {
+    emailSignInEnabled = true
+    return self
+  }
+
   func signIn(withEmail email: String, password: String) async throws {
     let credential = EmailAuthProvider.credential(withEmail: email, password: password)
     try await signIn(credentials: credential)
