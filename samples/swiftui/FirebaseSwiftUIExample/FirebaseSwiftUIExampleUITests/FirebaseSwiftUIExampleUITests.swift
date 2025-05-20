@@ -81,19 +81,22 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     let emailField = app.textFields["email-field"]
 
     XCTAssertTrue(emailField.waitForExistence(timeout: 2), "Email field should exist")
-    emailField.tap()
-    emailField.typeText(email)
+    // Workaround for updating SecureFields with ConnectHardwareKeyboard enabled
+    UIPasteboard.general.string = email
+    emailField.press(forDuration: 1.2)
+    app.menuItems["Paste"].tap()
 
     let passwordField = app.secureTextFields["password-field"]
     XCTAssertTrue(passwordField.exists, "Password field should exist")
-    passwordField.tap()
-    passwordField.typeText(password)
+    UIPasteboard.general.string = password
+    passwordField.press(forDuration: 1.2)
+    app.menuItems["Paste"].tap()
 
     let confirmPasswordField = app.secureTextFields["confirm-password-field"]
     XCTAssertTrue(confirmPasswordField.exists, "Confirm password field should exist")
-    confirmPasswordField.tap()
-    confirmPasswordField.typeText(password)
-    Thread.sleep(forTimeInterval: 3)
+    UIPasteboard.general.string = password
+    confirmPasswordField.press(forDuration: 1.2)
+    app.menuItems["Paste"].tap()
 
     let signInButton = app.buttons["sign-in-button"]
     XCTAssertTrue(signInButton.exists, "Sign-In button should exist")
