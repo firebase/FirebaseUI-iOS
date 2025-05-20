@@ -25,8 +25,6 @@ jobs:
   swiftui-auth:
     runs-on: macOS-latest
     timeout-minutes: 30
-    env: 
-      SIMULATOR_NAME: CI-iPhone-16-Test
     steps:
       - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
       - uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a
@@ -48,24 +46,6 @@ jobs:
       - name: Select Xcode version
         run: |
           sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
-      - name: Create Simulator
-        run: xcrun simctl create "$SIMULATOR_NAME" "iPhone 16 Plus"
-      - name: Boot Simulator Once and Generate Preferences
-        run: |
-          xcrun simctl boot "$SIMULATOR_NAME"
-          sleep 5
-          open -a Simulator
-          sleep 10
-          osascript -e 'tell application "Simulator" to quit'
-
-      - name: Disable iOS Simulator Hardware Keyboard
-        run: |
-          defaults write com.apple.iphonesimulator ConnectHardwareKeyboard -bool false
-
-      - name: Boot Simulator for Testing
-        run: |
-          xcrun simctl boot "$SIMULATOR_NAME"
-          sleep 5     
       - name: Run Integration Tests
         run: |
           cd ./samples/swiftui/FirebaseSwiftUIExample
@@ -75,7 +55,7 @@ jobs:
         run: |
           cd ./samples/swiftui/FirebaseSwiftUIExample
           set -o pipefail
-          xcodebuild test -scheme FirebaseSwiftUIExampleUITests -destination "name=$SIMULATOR_NAME" -enableCodeCoverage YES | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple
+          xcodebuild test -scheme FirebaseSwiftUIExampleUITests -destination 'platform=iOS Simulator,name=iPhone 16 Plus' -enableCodeCoverage YES | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple
       - name: Upload test logs
         if: always()
         uses: actions/upload-artifact@v4
