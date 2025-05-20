@@ -57,7 +57,7 @@ jobs:
           set -o pipefail
           xcodebuild test -scheme FirebaseSwiftUIExampleUITests -destination 'platform=iOS Simulator,name=iPhone 16 Plus' -enableCodeCoverage YES -resultBundlePath FirebaseSwiftUIExampleUITests.xcresult | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple
       - name: Upload test logs
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: swiftui-auth-test-logs
@@ -65,7 +65,7 @@ jobs:
             samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.log
             samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.log
       - name: Upload xcresult bundle
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: swiftui-auth-xcresult
