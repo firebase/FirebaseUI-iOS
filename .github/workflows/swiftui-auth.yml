@@ -49,7 +49,7 @@ jobs:
         run: |
           sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
       - name: Create Simulator
-        run: xcrun simctl create "$SIMULATOR_NAME" "iPhone 16 Plus" latest
+        run: xcrun simctl create "$SIMULATOR_NAME" "iPhone 16 Plus"
       - name: Boot Simulator Once and Generate Preferences
         run: |
           xcrun simctl boot "$SIMULATOR_NAME"
