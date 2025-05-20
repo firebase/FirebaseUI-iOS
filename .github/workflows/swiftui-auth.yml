@@ -49,7 +49,10 @@ jobs:
       - name: Disable iOS Simulator hardware keyboard
         # needed for SecureFields otherwise the UI flow tests will fail 
         run: |
-          defaults delete com.apple.iphonesimulator ConnectHardwareKeyboard || true
+          /usr/libexec/PlistBuddy -c "Set :ConnectHardwareKeyboard 0" ~/Library/Preferences/com.apple.iphonesimulator.plist || true
+          killall Simulator || true
+          xcrun simctl boot "iPhone 16 Plus" || true
+          sleep 10
       - name: Run Integration Tests
         run: |
           cd ./samples/swiftui/FirebaseSwiftUIExample
