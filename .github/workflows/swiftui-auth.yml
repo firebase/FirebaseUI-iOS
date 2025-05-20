@@ -46,13 +46,19 @@ jobs:
       - name: Select Xcode version
         run: |
           sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
-      - name: Disable iOS Simulator hardware keyboard
-        # needed for SecureFields otherwise the UI flow tests will fail 
+      - name: Boot Simulator (once) to create plist
         run: |
-          /usr/libexec/PlistBuddy -c "Set :ConnectHardwareKeyboard 0" ~/Library/Preferences/com.apple.iphonesimulator.plist || true
-          killall Simulator || true
           xcrun simctl boot "iPhone 16 Plus" || true
-          sleep 10
+          sleep 5
+      # needed for SecureFields otherwise the UI flow tests will fail 
+      - name: Disable iOS Simulator hardware keyboard & kill to force reload
+        run: |
+          /usr/libexec/PlistBuddy -c "Add :ConnectHardwareKeyboard bool false" ~/Library/Preferences/com.apple.iphonesimulator.plist || \
+          /usr/libexec/PlistBuddy -c "Set :ConnectHardwareKeyboard false" ~/Library/Preferences/com.apple.iphonesimulator.plist
+          killall Simulator || true
+      - name: Confirm Simulator keyboard setting
+        run: |
+          /usr/libexec/PlistBuddy -c "Print :ConnectHardwareKeyboard" ~/Library/Preferences/com.apple.iphonesimulator.plist || echo "Key not found"
       - name: Run Integration Tests
         run: |
           cd ./samples/swiftui/FirebaseSwiftUIExample
