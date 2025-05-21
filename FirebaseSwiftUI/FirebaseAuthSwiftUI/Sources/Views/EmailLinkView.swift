@@ -21,6 +21,7 @@ extension EmailLinkView: View {
   public var body: some View {
     VStack {
       Text(authService.string.signInWithEmailLinkViewTitle)
+        .accessibilityIdentifier("email-link-title-text")
       LabeledContent {
         TextField(authService.string.emailInputLabel, text: $email)
           .textInputAutocapitalization(.never)
@@ -70,7 +71,7 @@ extension EmailLinkView: View {
         .foregroundColor(.blue)
       Text(authService.string.backButtonLabel)
         .foregroundColor(.blue)
-    })
+    }.accessibilityIdentifier("email-link-back-button"))
   }
 }
 

@@ -41,7 +41,7 @@ extension SignedInView: View {
               try await authService.signOut()
             } catch {}
           }
-        }
+        }.accessibilityIdentifier("sign-out-button")
         Divider()
         Button(authService.string.deleteAccountButtonLabel) {
           Task {

@@ -89,7 +89,7 @@ extension EmailAuthView: View {
           authService.authView = .passwordRecovery
         }) {
           Text(authService.string.passwordButtonLabel)
-        }
+        }.accessibilityIdentifier("password-recovery-button")
       }
 
       if authService.authenticationFlow == .signUp {
@@ -138,7 +138,7 @@ extension EmailAuthView: View {
         authService.authView = .emailLink
       }) {
         Text(authService.string.signUpWithEmailLinkButtonLabel)
-      }
+      }.accessibilityIdentifier("sign-in-with-email-link-button")
     }
   }
 }

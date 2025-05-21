@@ -15,6 +15,12 @@ func createEmail() -> String {
   return "\(before)@\(after).com"
 }
 
+func dismissAlert(app: XCUIApplication) {
+  if app.scrollViews.otherElements.buttons["Not Now"].waitForExistence(timeout: 2) {
+    app.scrollViews.otherElements.buttons["Not Now"].tap()
+  }
+}
+
 final class FirebaseSwiftUIExampleUITests: XCTestCase {
   override func setUpWithError() throws {
     continueAfterFailure = false
@@ -64,6 +70,60 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     XCTAssertTrue(
       signedInText.waitForExistence(timeout: 10),
       "SignedInView should be visible after login"
+    )
+
+    dismissAlert(app: app)
+    // Check the Views are updated
+    let signOutButton = app.buttons["sign-out-button"]
+    XCTAssertTrue(
+      signOutButton.waitForExistence(timeout: 10),
+      "Sign-Out button should exist and be visible"
+    )
+
+    signOutButton.tap()
+    XCTAssertTrue(
+      signInButton.waitForExistence(timeout: 10),
+      "Sign-In button should exist after logout"
+    )
+
+    let passwordRecoveryButton = app.buttons["password-recovery-button"]
+    XCTAssertTrue(passwordRecoveryButton.exists, "Password recovery button should exist")
+    passwordRecoveryButton.tap()
+    let passwordRecoveryText = app.staticTexts["password-recovery-text"]
+    XCTAssertTrue(
+      passwordRecoveryText.waitForExistence(timeout: 10),
+      "Password recovery text should exist after routing to PasswordRecoveryView"
+    )
+
+    let passwordRecoveryBackButton = app.buttons["password-recovery-back-button"]
+    XCTAssertTrue(passwordRecoveryBackButton.exists, "Password back button should exist")
+    passwordRecoveryBackButton.tap()
+
+    let signInButton2 = app.buttons["sign-in-button"]
+    XCTAssertTrue(
+      signInButton2.waitForExistence(timeout: 10),
+      "Sign-In button should exist after pressing password recovery back button"
+    )
+
+    let emailLinkSignInButton = app.buttons["sign-in-with-email-link-button"]
+    XCTAssertTrue(emailLinkSignInButton.exists, "Email link sign-in button should exist")
+    emailLinkSignInButton.tap()
+
+    let emailLinkText = app.staticTexts["email-link-title-text"]
+
+    XCTAssertTrue(
+      emailLinkText.waitForExistence(timeout: 10),
+      "Email link text should exist after pressing email link button in AuthPickerView"
+    )
+
+    let emailLinkBackButton = app.buttons["email-link-back-button"]
+    XCTAssertTrue(emailLinkBackButton.exists, "Email link back button should exist")
+    emailLinkBackButton.tap()
+
+    let signInButton3 = app.buttons["sign-in-button"]
+    XCTAssertTrue(
+      signInButton3.waitForExistence(timeout: 10),
+      "Sign-In button should exist after pressing password recovery back button"
     )
   }
 
