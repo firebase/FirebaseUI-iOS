@@ -68,5 +68,5 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: swiftui-auth-xcresult
+          name: swiftui-auth.xcresult
           path: samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.xcresult
