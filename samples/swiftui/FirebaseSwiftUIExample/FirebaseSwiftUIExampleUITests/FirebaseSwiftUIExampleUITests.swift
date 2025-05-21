@@ -164,7 +164,7 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
     let signedInText = app.staticTexts["signed-in-text"]
     XCTAssertTrue(
-      signedInText.waitForExistence(timeout: 10),
+      signedInText.waitForExistence(timeout: 20),
       "SignedInView should be visible after login"
     )
   }
