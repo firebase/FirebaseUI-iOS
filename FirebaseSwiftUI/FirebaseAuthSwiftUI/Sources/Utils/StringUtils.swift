@@ -315,14 +315,13 @@ public class StringUtils {
   public var phoneNumberVerificationCodeLabel: String {
     return localizedString(for: "Enter verification code")
   }
-
+  
   /// Phone provider
   /// found in:
   /// - PhoneAuthButtonView
-  public var smsCodeSentLabel: String {
-    return localizedString(for: "SMS code sent")
+  public var smsCodeSendButtonLabel: String {
+    return localizedString(for: "Send SMS code")
   }
-
   /// Phone provider
   /// found in:
   /// - PhoneAuthButtonView

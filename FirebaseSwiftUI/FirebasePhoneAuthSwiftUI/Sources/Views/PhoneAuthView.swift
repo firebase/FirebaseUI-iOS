@@ -48,7 +48,7 @@ extension PhoneAuthView: View {
             }
           }
         }) {
-          Text(authService.string.smsCodeSentLabel)
+          Text(authService.string.smsCodeSendButtonLabel)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }
