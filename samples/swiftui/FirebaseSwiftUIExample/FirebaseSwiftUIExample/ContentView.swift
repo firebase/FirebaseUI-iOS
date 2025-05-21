@@ -36,12 +36,10 @@ struct ContentView: View {
     .withGoogleSignIn()
     .withPhoneSignIn()
     .withFacebookSignIn()
-    
+    .withEmailSignIn()
   }
 
   var body: some View {
-    AuthPickerView {
-      PhoneAuthButtonView()
-    }.environment(authService)
+    AuthPickerView().environment(authService)
   }
 }

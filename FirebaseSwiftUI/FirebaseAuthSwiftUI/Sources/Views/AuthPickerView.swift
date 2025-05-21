@@ -1,13 +1,11 @@
+import FirebaseCore
 import SwiftUI
 
 @MainActor
-public struct AuthPickerView<Content: View> {
+public struct AuthPickerView {
   @Environment(AuthService.self) private var authService
-  let providerButtons: () -> Content
 
-  public init(@ViewBuilder providerButtons: @escaping () -> Content) {
-    self.providerButtons = providerButtons
-  }
+  public init() {}
 
   private func switchFlow() {
     authService.authenticationFlow = authService
@@ -34,29 +32,33 @@ extension AuthPickerView: View {
           // TODO: - how are we rendering the phone auth View??
         } else {
           Divider()
-          Text(authService.authenticationFlow == .login ? authService.string
-            .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
-          VStack { Divider() }
+          if authService.emailSignInEnabled {
+            Text(authService.authenticationFlow == .login ? authService.string
+              .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
+            Divider()
 
-          EmailAuthView()
+            EmailAuthView()
+          }
           VStack {
             authService.renderButtons()
           }.padding(.horizontal)
 
           VStack { Divider() }
-          HStack {
-            Text(authService
-              .authenticationFlow == .login ? authService.string.dontHaveAnAccountYetLabel :
-              authService.string.alreadyHaveAnAccountLabel)
-            Button(action: {
-              withAnimation {
-                switchFlow()
+          if authService.emailSignInEnabled {
+            HStack {
+              Text(authService
+                .authenticationFlow == .login ? authService.string.dontHaveAnAccountYetLabel :
+                authService.string.alreadyHaveAnAccountLabel)
+              Button(action: {
+                withAnimation {
+                  switchFlow()
+                }
+              }) {
+                Text(authService.authenticationFlow == .signUp ? authService.string
+                  .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
+                  .fontWeight(.semibold)
+                  .foregroundColor(.blue)
               }
-            }) {
-              Text(authService.authenticationFlow == .signUp ? authService.string
-                .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
-                .fontWeight(.semibold)
-                .foregroundColor(.blue)
             }
           }
           PrivacyTOCsView(displayMode: .footer)
@@ -65,4 +67,11 @@ extension AuthPickerView: View {
       }
     }
   }
+}
+
+#Preview {
+  FirebaseOptions.dummyConfigurationForPreview()
+  let authService = AuthService()
+    .withEmailSignIn()
+  return AuthPickerView().environment(authService)
 }
