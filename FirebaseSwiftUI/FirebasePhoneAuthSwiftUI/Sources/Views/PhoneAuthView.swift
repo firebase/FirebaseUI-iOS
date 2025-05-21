@@ -95,7 +95,6 @@ extension PhoneAuthView: View {
         .padding(.vertical, 8)
         .frame(maxWidth: .infinity)
     }
-    Text(errorMessage).foregroundColor(.red)
   }
 }
 

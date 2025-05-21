@@ -11,6 +11,13 @@ public struct AuthPickerView {
     authService.authenticationFlow = authService
       .authenticationFlow == .login ? .signUp : .login
   }
+
+  private var isAuthModalPresented: Binding<Bool> {
+    Binding(
+      get: { authService.isShowingAuthModal },
+      set: { authService.isShowingAuthModal = $0 }
+    )
+  }
 }
 
 extension AuthPickerView: View {
@@ -28,8 +35,6 @@ extension AuthPickerView: View {
         } else if authService.authView == .emailLink {
           Divider()
           EmailLinkView()
-        } else if authService.authView == .phoneAuth {
-          // TODO: - how are we rendering the phone auth View??
         } else {
           Divider()
           if authService.emailSignInEnabled {
@@ -63,6 +68,33 @@ extension AuthPickerView: View {
           }
           PrivacyTOCsView(displayMode: .footer)
           Text(authService.errorMessage).foregroundColor(.red)
+        }
+      }.sheet(isPresented: isAuthModalPresented) {
+        VStack(spacing: 0) {
+          HStack {
+            Button(action: {
+              authService.dismissModal()
+            }) {
+              HStack(spacing: 4) {
+                Image(systemName: "chevron.left")
+                  .font(.system(size: 17, weight: .medium))
+                Text(authService.string.backButtonLabel)
+                  .font(.system(size: 17))
+              }
+              .foregroundColor(.blue)
+            }
+            Spacer()
+          }
+          .padding()
+          .background(Color(.systemBackground))
+
+          Divider()
+
+          if let view = authService.viewForCurrentModal() {
+            view
+              .frame(maxWidth: .infinity, maxHeight: .infinity)
+              .padding()
+          }
         }
       }
     }

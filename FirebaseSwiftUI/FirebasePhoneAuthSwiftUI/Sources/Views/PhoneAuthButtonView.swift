@@ -12,7 +12,10 @@ public struct PhoneAuthButtonView {
 extension PhoneAuthButtonView: View {
   public var body: some View {
     Button(action: {
-      authService.authView = .phoneAuth
+      authService.registerModalView(for: .phoneAuth) {
+        AnyView(PhoneAuthView().environment(authService))
+      }
+      authService.presentModal(for: .phoneAuth)
     }) {
       Label("Sign in with Phone", systemImage: "phone.fill")
         .foregroundColor(.white)

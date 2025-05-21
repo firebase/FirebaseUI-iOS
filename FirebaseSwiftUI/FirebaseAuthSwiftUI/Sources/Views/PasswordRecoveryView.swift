@@ -69,7 +69,7 @@ extension PasswordRecoveryView: View {
       }
       .padding()
     }.onOpenURL { _ in
-      // move the user to email/password View
+      // TODO: - move the user to email/password View
     }
     .navigationBarItems(leading: Button(action: {
       authService.authView = .authPicker
