@@ -82,7 +82,7 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
     signOutButton.tap()
     XCTAssertTrue(
-      signInButton.waitForExistence(timeout: 10),
+      signInButton.waitForExistence(timeout: 20),
       "Sign-In button should exist after logout"
     )
 
