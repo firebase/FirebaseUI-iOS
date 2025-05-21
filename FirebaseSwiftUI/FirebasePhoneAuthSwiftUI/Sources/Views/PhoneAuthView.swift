@@ -76,6 +76,7 @@ extension PhoneAuthView: View {
               errorMessage = authService.string.localizedErrorMessage(for: error)
             }
             showVerificationCodeInput = false
+            authService.dismissModal()
           }
         }) {
           Text(authService.string.verifyPhoneNumberAndSignInLabel)
