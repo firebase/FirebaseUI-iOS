@@ -1,3 +1,4 @@
+import FirebaseCore
 import SwiftUI
 
 struct PasswordPromptSheet {
@@ -9,26 +10,47 @@ struct PasswordPromptSheet {
 extension PasswordPromptSheet: View {
   var body: some View {
     VStack(spacing: 20) {
-      SecureField(authService.string.passwordInputLabel, text: $password)
-        .textFieldStyle(.roundedBorder)
+      Text(authService.string.confirmPasswordInputLabel)
+        .font(.largeTitle)
+        .fontWeight(.bold)
         .padding()
 
-      HStack {
-        Button(authService.string.cancelButtonLabel) {
-          coordinator.cancel()
-        }
-        Spacer()
-        Button(authService.string.okButtonLabel) {
+      Divider()
+
+      LabeledContent {
+        TextField(authService.string.passwordInputLabel, text: $password)
+          .textInputAutocapitalization(.never)
+          .disableAutocorrection(true)
+          .submitLabel(.next)
+      } label: {
+        Image(systemName: "lock")
+      }.padding(.vertical, 10)
+        .background(Divider(), alignment: .bottom)
+        .padding(.bottom, 4)
+
+      Button(action: {
+        Task {
           coordinator.submit(password: password)
         }
-        .disabled(password.isEmpty)
+      }) {
+        Text(authService.string.okButtonLabel)
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
       }
-      .padding(.horizontal)
+      .disabled(password.isEmpty)
+      .padding([.top, .bottom, .horizontal], 8)
+      .frame(maxWidth: .infinity)
+      .buttonStyle(.borderedProminent)
+
+      Button(authService.string.cancelButtonLabel) {
+        coordinator.cancel()
+      }
     }
     .padding()
   }
 }
 
 #Preview {
-  PasswordPromptSheet(coordinator: PasswordPromptCoordinator())
+  FirebaseOptions.dummyConfigurationForPreview()
+  return PasswordPromptSheet(coordinator: PasswordPromptCoordinator()).environment(AuthService())
 }
