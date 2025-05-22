@@ -23,6 +23,7 @@ extension PasswordRecoveryView: View {
         .font(.largeTitle)
         .fontWeight(.bold)
         .padding()
+        .accessibilityIdentifier("password-recovery-text")
 
       Divider()
 
@@ -78,7 +79,7 @@ extension PasswordRecoveryView: View {
         .foregroundColor(.blue)
       Text(authService.string.backButtonLabel)
         .foregroundColor(.blue)
-    })
+    }.accessibilityIdentifier("password-recovery-back-button"))
   }
 }
 
