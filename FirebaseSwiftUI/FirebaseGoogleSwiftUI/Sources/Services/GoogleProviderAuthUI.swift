@@ -20,23 +20,19 @@ public class GoogleProviderAuthUI: @preconcurrency GoogleProviderAuthUIProtocol 
   let scopes: [String]
   let shortName = "Google"
   let providerId = "google.com"
-  let clientID: String
+  public let clientID: String
   public init(scopes: [String]? = nil, clientID: String = FirebaseApp.app()!.options.clientID!) {
     self.scopes = scopes ?? kDefaultScopes
     self.clientID = clientID
   }
 
   @MainActor public func authButton() -> AnyView {
-    let customViewModel = GoogleSignInButtonViewModel(
-      scheme: .light,
-      style: .wide,
-      state: .normal
-    )
-    return AnyView(GoogleSignInButton(viewModel: customViewModel) {
-      Task {
-        try await self.signInWithGoogle(clientID: self.clientID)
-      }
-    })
+    AnyView(SignInWithGoogleButton())
+  }
+
+  public func deleteUser(user: User) async throws {
+    let operation = GoogleDeleteUserOperation(googleProvider: self)
+    try await operation(on: user)
   }
 
   @MainActor public func signInWithGoogle(clientID: String) async throws -> AuthCredential {

@@ -8,6 +8,7 @@ public protocol ExternalAuthProvider {
 
 public protocol GoogleProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
+  @MainActor func deleteUser(user: User) async throws
 }
 
 public protocol FacebookProviderAuthUIProtocol: ExternalAuthProvider {
@@ -265,6 +266,8 @@ public extension AuthService {
           try await operation(on: user)
         } else if providerId == "facebook.com" {
           try await facebookProvider.deleteUser(user: user)
+        } else if providerId == "google.com" {
+          try await googleProvider.deleteUser(user: user)
         }
       }
 
