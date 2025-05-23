@@ -1,18 +1,32 @@
 import FirebaseCore
 import SwiftUI
 
+enum PasswordRecoveryResult: Identifiable {
+  case success
+  case failure
+
+  var id: String {
+    switch self {
+    case .success: return "success"
+    case .failure: return "failure"
+    }
+  }
+}
+
 public struct PasswordRecoveryView {
   @Environment(AuthService.self) private var authService
   @State private var email = ""
-  @State private var showModal = false
+  @State private var result: PasswordRecoveryResult?
 
   public init() {}
 
   private func sendPasswordRecoveryEmail() async {
     do {
       try await authService.sendPasswordRecoveryEmail(to: email)
-      showModal = true
-    } catch {}
+      result = .success
+    } catch {
+      result = .failure
+    }
   }
 }
 
@@ -46,30 +60,48 @@ extension PasswordRecoveryView: View {
           .frame(maxWidth: .infinity)
       }
       .disabled(!CommonUtils.isValidEmail(email))
-      .padding([.top, .bottom], 8)
+      .padding([.top, .bottom, .horizontal], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
-    }.sheet(isPresented: $showModal) {
+    }.sheet(item: $result) { result in
       VStack {
-        Text(authService.string.passwordRecoveryEmailSentTitle)
-          .font(.largeTitle)
-          .fontWeight(.bold)
-          .padding()
-        Text(authService.string.passwordRecoveryHelperMessage)
-          .padding()
+        switch result {
+        case .success:
+          Text(authService.string.passwordRecoveryEmailSentTitle)
+            .font(.largeTitle)
+            .fontWeight(.bold)
+            .padding()
+          Text(authService.string.passwordRecoveryHelperMessage)
+            .padding()
 
-        Divider()
+          Divider()
 
-        Text(authService.string.passwordRecoveryEmailSentMessage)
+          Text(authService.string.passwordRecoveryEmailSentMessage)
+            .padding()
+          Button(authService.string.okButtonLabel) {
+            self.result = nil
+          }
           .padding()
-        Button(authService.string.okButtonLabel) {
-          showModal = false
+        case .failure:
+          Text(authService.string.alertErrorTitle)
+            .font(.title)
+            .fontWeight(.semibold)
+            .padding()
+
+          Divider()
+
+          Text(authService.errorMessage)
+            .padding()
+
+          Divider()
+
+          Button(authService.string.okButtonLabel) {
+            self.result = nil
+          }
+          .padding()
         }
-        .padding()
       }
       .padding()
-    }.onOpenURL { _ in
-      // move the user to email/password View
     }
     .navigationBarItems(leading: Button(action: {
       authService.authView = .authPicker
