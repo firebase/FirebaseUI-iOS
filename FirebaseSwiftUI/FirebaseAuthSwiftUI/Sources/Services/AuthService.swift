@@ -1,6 +1,5 @@
 @preconcurrency import FirebaseAuth
 import SwiftUI
-import SwiftUICore
 
 public protocol ExternalAuthProvider {
   var id: String { get }
