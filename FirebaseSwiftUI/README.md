@@ -5,8 +5,9 @@
 1. Launch Xcode and open the project or workspace where you want to add the packages.
 2. In the menu bar, go to: `File > Add Package Dependencies...`
 3. Enter the Package URL: `https://github.com/firebase/FirebaseUI-iOS`
-4. Select target(s) you wish to add to your app (currently `FirebaseAuthSwiftUI`, `FirebaseGoogleSwiftUI`, `FirebaseFacebookSwiftUI` and `FirebasePhoneAuthSwiftUI` are available). `FirebaseAuthSwiftUI` is required and contains the Email provider API.
-5. Press the `Add Packages` button to complete installation.
+4. In the `Dependency Rule` dropdown, select `Branch` and set the branch to `main` in the resulting text input.
+5. Select target(s) you wish to add to your app (currently `FirebaseAuthSwiftUI`, `FirebaseGoogleSwiftUI`, `FirebaseFacebookSwiftUI` and `FirebasePhoneAuthSwiftUI` are available). `FirebaseAuthSwiftUI` is required and contains the Email provider API.
+6. Press the `Add Packages` button to complete installation.
 
 
 ## Getting started
@@ -133,7 +134,12 @@ let authService = AuthService()
 
 
 ## Notes for Alpha release
-1. Customization/theming for Views is not yet available.
+1. Customization/theming for Views is not available directly in the default view.
+   To create a custom view, build your own auth picker view from the provider components.
 2. The providers available are Email, Phone, Google and Facebook.
 3. String localizations have been ported over and used where possible from the previous implementation, but new strings will only have English translations for the time being.
 4. The UI has not been polished and is subject to change once design has been finalized.
+
+## Feedback
+
+Please file feedback in the repository's issue tracker.
