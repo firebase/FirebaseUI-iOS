@@ -1,31 +1,26 @@
 import FirebaseCore
 import SwiftUI
 
-enum PasswordRecoveryResult: Identifiable {
-  case success
-  case failure
-
-  var id: String {
-    switch self {
-    case .success: return "success"
-    case .failure: return "failure"
-    }
-  }
+private struct ResultWrapper: Identifiable {
+  let id = UUID()
+  let value: Result<Void, Error>
 }
 
 public struct PasswordRecoveryView {
   @Environment(AuthService.self) private var authService
   @State private var email = ""
-  @State private var result: PasswordRecoveryResult?
+  @State private var resultWrapper: ResultWrapper?
 
   public init() {}
 
   private func sendPasswordRecoveryEmail() async {
+    let recoveryResult: Result<Void, Error>
+
     do {
       try await authService.sendPasswordRecoveryEmail(to: email)
-      result = .success
+      resultWrapper = ResultWrapper(value: .success(()))
     } catch {
-      result = .failure
+      resultWrapper = ResultWrapper(value: .failure(error))
     }
   }
 }
@@ -47,9 +42,11 @@ extension PasswordRecoveryView: View {
           .submitLabel(.next)
       } label: {
         Image(systemName: "at")
-      }.padding(.vertical, 6)
-        .background(Divider(), alignment: .bottom)
-        .padding(.bottom, 4)
+      }
+      .padding(.vertical, 6)
+      .background(Divider(), alignment: .bottom)
+      .padding(.bottom, 4)
+
       Button(action: {
         Task {
           await sendPasswordRecoveryEmail()
@@ -63,45 +60,9 @@ extension PasswordRecoveryView: View {
       .padding([.top, .bottom, .horizontal], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
-    }.sheet(item: $result) { result in
-      VStack {
-        switch result {
-        case .success:
-          Text(authService.string.passwordRecoveryEmailSentTitle)
-            .font(.largeTitle)
-            .fontWeight(.bold)
-            .padding()
-          Text(authService.string.passwordRecoveryHelperMessage)
-            .padding()
-
-          Divider()
-
-          Text(authService.string.passwordRecoveryEmailSentMessage)
-            .padding()
-          Button(authService.string.okButtonLabel) {
-            self.result = nil
-          }
-          .padding()
-        case .failure:
-          Text(authService.string.alertErrorTitle)
-            .font(.title)
-            .fontWeight(.semibold)
-            .padding()
-
-          Divider()
-
-          Text(authService.errorMessage)
-            .padding()
-
-          Divider()
-
-          Button(authService.string.okButtonLabel) {
-            self.result = nil
-          }
-          .padding()
-        }
-      }
-      .padding()
+    }
+    .sheet(item: $resultWrapper) { wrapper in
+      resultSheet(wrapper.value)
     }
     .navigationBarItems(leading: Button(action: {
       authService.authView = .authPicker
@@ -111,6 +72,46 @@ extension PasswordRecoveryView: View {
       Text(authService.string.backButtonLabel)
         .foregroundColor(.blue)
     })
+  }
+
+  @ViewBuilder
+  @MainActor
+  private func resultSheet(_ result: Result<Void, Error>) -> some View {
+    VStack {
+      switch result {
+      case .success:
+        Text(authService.string.passwordRecoveryEmailSentTitle)
+          .font(.largeTitle)
+          .fontWeight(.bold)
+          .padding()
+        Text(authService.string.passwordRecoveryHelperMessage)
+          .padding()
+
+        Divider()
+
+        Text(String(format: authService.string.passwordRecoveryEmailSentMessage, email))
+          .padding()
+
+      case .failure:
+        Text(authService.string.alertErrorTitle)
+          .font(.title)
+          .fontWeight(.semibold)
+          .padding()
+
+        Divider()
+
+        Text(authService.errorMessage)
+          .padding()
+      }
+
+      Divider()
+
+      Button(authService.string.okButtonLabel) {
+        self.resultWrapper = nil
+      }
+      .padding()
+    }
+    .padding()
   }
 }
 
