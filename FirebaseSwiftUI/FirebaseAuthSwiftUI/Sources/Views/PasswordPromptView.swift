@@ -29,9 +29,7 @@ extension PasswordPromptSheet: View {
         .padding(.bottom, 4)
 
       Button(action: {
-        Task {
-          coordinator.submit(password: password)
-        }
+        coordinator.submit(password: password)
       }) {
         Text(authService.string.okButtonLabel)
           .padding(.vertical, 8)
