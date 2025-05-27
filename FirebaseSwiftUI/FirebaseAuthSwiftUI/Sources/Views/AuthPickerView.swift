@@ -11,18 +11,23 @@ public struct AuthPickerView {
     authService.authenticationFlow = authService
       .authenticationFlow == .login ? .signUp : .login
   }
+
+  @ViewBuilder
+  private var authPickerTitleView: some View {
+    if authService.authView == .authPicker {
+      Text(authService.string.authPickerTitle)
+        .font(.largeTitle)
+        .fontWeight(.bold)
+        .padding()
+    }
+  }
 }
 
 extension AuthPickerView: View {
   public var body: some View {
     ScrollView {
       VStack {
-        if authService.authView == .authPicker {
-          Text(authService.string.authPickerTitle)
-            .font(.largeTitle)
-            .fontWeight(.bold)
-            .padding()
-        }
+        authPickerTitleView
         if authService.authenticationState == .authenticated {
           SignedInView()
         } else if authService.authView == .passwordRecovery {
