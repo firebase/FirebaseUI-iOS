@@ -30,39 +30,44 @@ extension AuthPickerView: View {
         authPickerTitleView
         if authService.authenticationState == .authenticated {
           SignedInView()
-        } else if authService.authView == .passwordRecovery {
-          PasswordRecoveryView()
-        } else if authService.authView == .emailLink {
-          EmailLinkView()
         } else {
-          if authService.emailSignInEnabled {
-            Text(authService.authenticationFlow == .login ? authService.string
-              .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
-            Divider()
-            EmailAuthView()
-          }
-          VStack {
-            authService.renderButtons()
-          }.padding(.horizontal)
-          if authService.emailSignInEnabled {
-            Divider()
-            HStack {
-              Text(authService
-                .authenticationFlow == .login ? authService.string.dontHaveAnAccountYetLabel :
-                authService.string.alreadyHaveAnAccountLabel)
-              Button(action: {
-                withAnimation {
-                  switchFlow()
+          switch authService.authView {
+          case .passwordRecovery:
+            PasswordRecoveryView()
+          case .emailLink:
+            EmailLinkView()
+          case .authPicker:
+            if authService.emailSignInEnabled {
+              Text(authService.authenticationFlow == .login ? authService.string
+                .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
+              Divider()
+              EmailAuthView()
+            }
+            VStack {
+              authService.renderButtons()
+            }.padding(.horizontal)
+            if authService.emailSignInEnabled {
+              Divider()
+              HStack {
+                Text(authService
+                  .authenticationFlow == .login ? authService.string.dontHaveAnAccountYetLabel :
+                  authService.string.alreadyHaveAnAccountLabel)
+                Button(action: {
+                  withAnimation {
+                    switchFlow()
+                  }
+                }) {
+                  Text(authService.authenticationFlow == .signUp ? authService.string
+                    .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.blue)
                 }
-              }) {
-                Text(authService.authenticationFlow == .signUp ? authService.string
-                  .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
-                  .fontWeight(.semibold)
-                  .foregroundColor(.blue)
               }
             }
             PrivacyTOCsView(displayMode: .footer)
             Text(authService.errorMessage).foregroundColor(.red)
+          default:
+            EmptyView()
           }
         }
       }
