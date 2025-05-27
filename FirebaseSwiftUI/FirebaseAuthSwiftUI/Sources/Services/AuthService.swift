@@ -1,5 +1,6 @@
 @preconcurrency import FirebaseAuth
 import SwiftUI
+import SwiftUICore
 
 public protocol ExternalAuthProvider {
   var id: String { get }
@@ -96,7 +97,8 @@ public final class AuthService {
 
   public var authModalViewBuilderRegistry: [AuthModalContentType: () -> AnyView] = [:]
 
-  public func registerModalView(for type: AuthModalContentType, builder: @escaping () -> AnyView) {
+  public func registerModalView(for type: AuthModalContentType,
+                                @ViewBuilder builder: @escaping () -> AnyView) {
     authModalViewBuilderRegistry[type] = builder
   }
 
