@@ -39,7 +39,6 @@ struct ContentView: View {
     actionCodeSettings.linkDomain = "flutterfire-e2e-tests.firebaseapp.com"
     actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
     let configuration = AuthConfiguration(
-      shouldAutoUpgradeAnonymousUsers: true,
       tosUrl: URL(string: "https://example.com/tos"),
       privacyPolicyUrl: URL(string: "https://example.com/privacy"),
       emailLinkSignInActionCodeSettings: actionCodeSettings
@@ -48,8 +47,8 @@ struct ContentView: View {
       configuration: configuration
     )
     .withGoogleSignIn()
-    .withFacebookSignIn()
     .withPhoneSignIn()
+    .withFacebookSignIn()
     .withEmailSignIn()
   }
 

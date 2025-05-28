@@ -22,6 +22,7 @@ public protocol ExternalAuthProvider {
 
 public protocol GoogleProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
+  @MainActor func deleteUser(user: User) async throws
 }
 
 public protocol FacebookProviderAuthUIProtocol: ExternalAuthProvider {
@@ -97,6 +98,45 @@ public final class AuthService {
   public var authenticationFlow: AuthenticationFlow = .login
   public var errorMessage = ""
   public let passwordPrompt: PasswordPromptCoordinator = .init()
+
+  // MARK: - AuthPickerView Modal APIs
+
+  public var isShowingAuthModal = false
+
+  public enum AuthModalContentType {
+    case phoneAuth
+  }
+
+  public var currentModal: AuthModalContentType?
+
+  public var authModalViewBuilderRegistry: [AuthModalContentType: () -> AnyView] = [:]
+
+  public func registerModalView(for type: AuthModalContentType,
+                                @ViewBuilder builder: @escaping () -> AnyView) {
+    authModalViewBuilderRegistry[type] = builder
+  }
+
+  public func viewForCurrentModal() -> AnyView? {
+    guard let type = currentModal,
+          let builder = authModalViewBuilderRegistry[type] else {
+      return nil
+    }
+    return builder()
+  }
+
+  public func presentModal(for type: AuthModalContentType) {
+    currentModal = type
+    isShowingAuthModal = true
+  }
+
+  public func dismissModal() {
+    isShowingAuthModal = false
+  }
+
+  // MARK: - End AuthPickerView Modal APIs
+
+  // MARK: - Provider APIs
+
   private var unsafeGoogleProvider: (any GoogleProviderAuthUIProtocol)?
   private var unsafeFacebookProvider: (any FacebookProviderAuthUIProtocol)?
   private var unsafePhoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
@@ -159,6 +199,8 @@ public final class AuthService {
       return provider
     }
   }
+
+  // MARK: - End Provider APIs
 
   private func safeActionCodeSettings() throws -> ActionCodeSettings {
     // email sign-in requires action code settings
@@ -241,7 +283,7 @@ public final class AuthService {
         try await handleAutoUpgradeAnonymousUser(credentials: credentials)
       } else {
         let result = try await auth.signIn(with: credentials)
-        signedInCredential = result.credential
+        signedInCredential = result.credential ?? credentials
       }
       updateAuthenticationState()
     } catch {
@@ -274,11 +316,13 @@ public extension AuthService {
   func deleteUser() async throws {
     do {
       if let user = auth.currentUser, let providerId = signedInCredential?.provider {
-        if providerId == "password" {
+        if providerId == EmailAuthProviderID {
           let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
           try await operation(on: user)
-        } else if providerId == "facebook.com" {
+        } else if providerId == FacebookAuthProviderID {
           try await facebookProvider.deleteUser(user: user)
+        } else if providerId == GoogleAuthProviderID {
+          try await googleProvider.deleteUser(user: user)
         }
       }
 

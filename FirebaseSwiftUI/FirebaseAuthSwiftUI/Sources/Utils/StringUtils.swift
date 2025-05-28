@@ -285,7 +285,7 @@ public class StringUtils {
   /// found in:
   /// - SignInWithFacebookButton
   public var facebookLoginButtonLabel: String {
-    return localizedString(for: "Continue with Facebook")
+    return localizedString(for: "Sign in with Facebook")
   }
 
   /// Facebook provider
@@ -333,8 +333,8 @@ public class StringUtils {
   /// Phone provider
   /// found in:
   /// - PhoneAuthButtonView
-  public var smsCodeSentLabel: String {
-    return localizedString(for: "SMS code sent")
+  public var smsCodeSendButtonLabel: String {
+    return localizedString(for: "Send SMS code")
   }
 
   /// Phone provider
@@ -363,5 +363,12 @@ public class StringUtils {
   /// - PrivacyTOCsView
   public var privacyPolicyLabel: String {
     return localizedString(for: "PrivacyPolicy")
+  }
+
+  /// Alert Error title
+  /// found in:
+  /// PasswordRecoveryView
+  public var alertErrorTitle: String {
+    return localizedString(for: "Error")
   }
 }

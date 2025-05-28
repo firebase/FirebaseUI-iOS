@@ -137,7 +137,7 @@ extension EmailAuthView: View {
         }
       }
       .disabled(!isValid)
-      .padding([.top, .bottom], 8)
+      .padding([.top, .bottom, .horizontal], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
       Button(action: {
