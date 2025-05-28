@@ -12,37 +12,40 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//
+//  SignInWithGoogleButton.swift
+//  FirebaseUI
+//
+//  Created by Russell Wheatley on 22/05/2025.
+//
 import FirebaseAuthSwiftUI
 import FirebaseCore
+import GoogleSignInSwift
 import SwiftUI
 
 @MainActor
-public struct PhoneAuthButtonView {
+public struct SignInWithGoogleButton {
   @Environment(AuthService.self) private var authService
 
-  public init() {}
+  let customViewModel = GoogleSignInButtonViewModel(
+    scheme: .light,
+    style: .wide,
+    state: .normal
+  )
 }
 
-extension PhoneAuthButtonView: View {
+extension SignInWithGoogleButton: View {
   public var body: some View {
-    Button(action: {
-      authService.registerModalView(for: .phoneAuth) {
-        AnyView(PhoneAuthView().environment(authService))
+    GoogleSignInButton(viewModel: customViewModel) {
+      Task {
+        try await authService.signInWithGoogle()
       }
-      authService.presentModal(for: .phoneAuth)
-    }) {
-      Label("Sign in with Phone", systemImage: "phone.fill")
-        .foregroundColor(.white)
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.green.opacity(0.8)) // Light green
-        .cornerRadius(8)
     }
   }
 }
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
-  return PhoneAuthButtonView()
+  return SignInWithGoogleButton()
     .environment(AuthService())
 }

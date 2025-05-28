@@ -1,3 +1,17 @@
+// Copyright 2025 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 import FirebaseAuth
 import SwiftUI
 
@@ -271,7 +285,7 @@ public class StringUtils {
   /// found in:
   /// - SignInWithFacebookButton
   public var facebookLoginButtonLabel: String {
-    return localizedString(for: "Continue with Facebook")
+    return localizedString(for: "Sign in with Facebook")
   }
 
   /// Facebook provider
@@ -319,8 +333,8 @@ public class StringUtils {
   /// Phone provider
   /// found in:
   /// - PhoneAuthButtonView
-  public var smsCodeSentLabel: String {
-    return localizedString(for: "SMS code sent")
+  public var smsCodeSendButtonLabel: String {
+    return localizedString(for: "Send SMS code")
   }
 
   /// Phone provider
@@ -349,5 +363,12 @@ public class StringUtils {
   /// - PrivacyTOCsView
   public var privacyPolicyLabel: String {
     return localizedString(for: "PrivacyPolicy")
+  }
+
+  /// Alert Error title
+  /// found in:
+  /// PasswordRecoveryView
+  public var alertErrorTitle: String {
+    return localizedString(for: "Error")
   }
 }

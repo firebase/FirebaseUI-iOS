@@ -13,6 +13,13 @@
 // limitations under the License.
 
 //
+//  AccountService+Google.swift
+//  FirebaseUI
+//
+//  Created by Russell Wheatley on 22/05/2025.
+//
+
+//
 //  AccountService+Facebook.swift
 //  FirebaseUI
 //
@@ -23,19 +30,19 @@
 import FirebaseAuthSwiftUI
 import Observation
 
-protocol FacebookOperationReauthentication {
-  var facebookProvider: FacebookProviderAuthUI { get }
+protocol GoogleOperationReauthentication {
+  var googleProvider: GoogleProviderAuthUI { get }
 }
 
-extension FacebookOperationReauthentication {
+extension GoogleOperationReauthentication {
   @MainActor func reauthenticate() async throws -> AuthenticationToken {
     guard let user = Auth.auth().currentUser else {
       throw AuthServiceError.reauthenticationRequired("No user currently signed-in")
     }
 
     do {
-      let credential = try await facebookProvider
-        .signInWithFacebook(isLimitedLogin: facebookProvider.isLimitedLogin)
+      let credential = try await googleProvider
+        .signInWithGoogle(clientID: googleProvider.clientID)
       try await user.reauthenticate(with: credential)
 
       return .firebase("")
@@ -46,11 +53,11 @@ extension FacebookOperationReauthentication {
 }
 
 @MainActor
-class FacebookDeleteUserOperation: AuthenticatedOperation,
-  @preconcurrency FacebookOperationReauthentication {
-  let facebookProvider: FacebookProviderAuthUI
-  init(facebookProvider: FacebookProviderAuthUI) {
-    self.facebookProvider = facebookProvider
+class GoogleDeleteUserOperation: AuthenticatedOperation,
+  @preconcurrency GoogleOperationReauthentication {
+  let googleProvider: GoogleProviderAuthUI
+  init(googleProvider: GoogleProviderAuthUI) {
+    self.googleProvider = googleProvider
   }
 
   func callAsFunction(on user: User) async throws {

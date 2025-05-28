@@ -1,3 +1,17 @@
+// Copyright 2025 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 @preconcurrency import FirebaseAuth
 import SwiftUI
 
@@ -8,6 +22,7 @@ public protocol ExternalAuthProvider {
 
 public protocol GoogleProviderAuthUIProtocol: ExternalAuthProvider {
   @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
+  @MainActor func deleteUser(user: User) async throws
 }
 
 public protocol FacebookProviderAuthUIProtocol: ExternalAuthProvider {
@@ -83,6 +98,45 @@ public final class AuthService {
   public var authenticationFlow: AuthenticationFlow = .login
   public var errorMessage = ""
   public let passwordPrompt: PasswordPromptCoordinator = .init()
+
+  // MARK: - AuthPickerView Modal APIs
+
+  public var isShowingAuthModal = false
+
+  public enum AuthModalContentType {
+    case phoneAuth
+  }
+
+  public var currentModal: AuthModalContentType?
+
+  public var authModalViewBuilderRegistry: [AuthModalContentType: () -> AnyView] = [:]
+
+  public func registerModalView(for type: AuthModalContentType,
+                                @ViewBuilder builder: @escaping () -> AnyView) {
+    authModalViewBuilderRegistry[type] = builder
+  }
+
+  public func viewForCurrentModal() -> AnyView? {
+    guard let type = currentModal,
+          let builder = authModalViewBuilderRegistry[type] else {
+      return nil
+    }
+    return builder()
+  }
+
+  public func presentModal(for type: AuthModalContentType) {
+    currentModal = type
+    isShowingAuthModal = true
+  }
+
+  public func dismissModal() {
+    isShowingAuthModal = false
+  }
+
+  // MARK: - End AuthPickerView Modal APIs
+
+  // MARK: - Provider APIs
+
   private var unsafeGoogleProvider: (any GoogleProviderAuthUIProtocol)?
   private var unsafeFacebookProvider: (any FacebookProviderAuthUIProtocol)?
   private var unsafePhoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
@@ -145,6 +199,8 @@ public final class AuthService {
       return provider
     }
   }
+
+  // MARK: - End Provider APIs
 
   private func safeActionCodeSettings() throws -> ActionCodeSettings {
     // email sign-in requires action code settings
@@ -227,7 +283,7 @@ public final class AuthService {
         try await handleAutoUpgradeAnonymousUser(credentials: credentials)
       } else {
         let result = try await auth.signIn(with: credentials)
-        signedInCredential = result.credential
+        signedInCredential = result.credential ?? credentials
       }
       updateAuthenticationState()
     } catch {
@@ -260,11 +316,13 @@ public extension AuthService {
   func deleteUser() async throws {
     do {
       if let user = auth.currentUser, let providerId = signedInCredential?.provider {
-        if providerId == "password" {
+        if providerId == EmailAuthProviderID {
           let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
           try await operation(on: user)
-        } else if providerId == "facebook.com" {
+        } else if providerId == FacebookAuthProviderID {
           try await facebookProvider.deleteUser(user: user)
+        } else if providerId == GoogleAuthProviderID {
+          try await googleProvider.deleteUser(user: user)
         }
       }
 
