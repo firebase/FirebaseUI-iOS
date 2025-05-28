@@ -67,6 +67,7 @@ extension AuthPickerView: View {
             PrivacyTOCsView(displayMode: .footer)
             Text(authService.errorMessage).foregroundColor(.red)
           default:
+            // TODO: - possibly refactor this, see: https://github.com/firebase/FirebaseUI-iOS/pull/1259#discussion_r2105473437
             EmptyView()
           }
         }
