@@ -82,7 +82,7 @@ extension AuthPickerView: View {
                     .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
                     .fontWeight(.semibold)
                     .foregroundColor(.blue)
-                }
+                }.accessibilityIdentifier("switch-auth-flow")
               }
             }
             PrivacyTOCsView(displayMode: .footer)

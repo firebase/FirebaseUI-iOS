@@ -16,14 +16,14 @@ import FirebaseAuth
 import Foundation
 
 public struct AuthConfiguration {
-  let shouldHideCancelButton: Bool
-  let interactiveDismissEnabled: Bool
-  let shouldAutoUpgradeAnonymousUsers: Bool
-  let customStringsBundle: Bundle?
-  let tosUrl: URL?
-  let privacyPolicyUrl: URL?
-  let emailLinkSignInActionCodeSettings: ActionCodeSettings?
-  let verifyEmailActionCodeSettings: ActionCodeSettings?
+  public let shouldHideCancelButton: Bool
+  public let interactiveDismissEnabled: Bool
+  public let shouldAutoUpgradeAnonymousUsers: Bool
+  public let customStringsBundle: Bundle?
+  public let tosUrl: URL?
+  public let privacyPolicyUrl: URL?
+  public let emailLinkSignInActionCodeSettings: ActionCodeSettings?
+  public let verifyEmailActionCodeSettings: ActionCodeSettings?
 
   public init(shouldHideCancelButton: Bool = false,
               interactiveDismissEnabled: Bool = true,

@@ -37,6 +37,7 @@ extension SignedInView: View {
           .font(.largeTitle)
           .fontWeight(.bold)
           .padding()
+          .accessibilityIdentifier("signed-in-text")
         Text(authService.string.accountSettingsEmailLabel)
         Text("\(authService.currentUser?.email ?? "Unknown")")
 
@@ -54,7 +55,7 @@ extension SignedInView: View {
               try await authService.signOut()
             } catch {}
           }
-        }
+        }.accessibilityIdentifier("sign-out-button")
         Divider()
         Button(authService.string.deleteAccountButtonLabel) {
           Task {

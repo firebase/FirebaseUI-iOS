@@ -142,7 +142,7 @@ public final class AuthService {
   private var unsafePhoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
 
   private var listenerManager: AuthListenerManager?
-  private var signedInCredential: AuthCredential?
+  public var signedInCredential: AuthCredential?
 
   var emailSignInEnabled = false
 
