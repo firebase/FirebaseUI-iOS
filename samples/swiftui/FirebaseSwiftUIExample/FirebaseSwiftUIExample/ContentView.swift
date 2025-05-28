@@ -33,8 +33,8 @@ struct ContentView: View {
       configuration: configuration
     )
     .withGoogleSignIn()
-    .withFacebookSignIn()
     .withPhoneSignIn()
+    .withFacebookSignIn()
     .withEmailSignIn()
   }
 
