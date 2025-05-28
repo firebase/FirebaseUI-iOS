@@ -27,6 +27,7 @@ public class GoogleProviderAuthUI: @preconcurrency GoogleProviderAuthUIProtocol 
   }
 
   @MainActor public func authButton() -> AnyView {
+    // Moved to SignInWithGoogleButton so we could sign in via AuthService
     AnyView(SignInWithGoogleButton())
   }
 
