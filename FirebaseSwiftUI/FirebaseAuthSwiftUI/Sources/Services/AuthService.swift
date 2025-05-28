@@ -228,7 +228,7 @@ public final class AuthService {
         try await handleAutoUpgradeAnonymousUser(credentials: credentials)
       } else {
         let result = try await auth.signIn(with: credentials)
-        signedInCredential = result.credential
+        signedInCredential = result.credential ?? credentials
       }
       updateAuthenticationState()
     } catch {
@@ -261,12 +261,12 @@ public extension AuthService {
   func deleteUser() async throws {
     do {
       if let user = auth.currentUser, let providerId = signedInCredential?.provider {
-        if providerId == "password" {
+        if providerId == EmailAuthProviderID {
           let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
           try await operation(on: user)
-        } else if providerId == "facebook.com" {
+        } else if providerId == FacebookAuthProviderID {
           try await facebookProvider.deleteUser(user: user)
-        } else if providerId == "google.com" {
+        } else if providerId == GoogleAuthProviderID {
           try await googleProvider.deleteUser(user: user)
         }
       }
