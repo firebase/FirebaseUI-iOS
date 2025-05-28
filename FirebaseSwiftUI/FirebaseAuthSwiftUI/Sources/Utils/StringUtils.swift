@@ -350,4 +350,11 @@ public class StringUtils {
   public var privacyPolicyLabel: String {
     return localizedString(for: "PrivacyPolicy")
   }
+
+  /// Alert Error title
+  /// found in:
+  /// PasswordRecoveryView
+  public var alertErrorTitle: String {
+    return localizedString(for: "Error")
+  }
 }
