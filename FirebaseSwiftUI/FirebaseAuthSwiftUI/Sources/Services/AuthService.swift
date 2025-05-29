@@ -296,16 +296,24 @@ public final class AuthService {
   }
 
   func sendEmailVerification() async throws {
-    if currentUser != nil {
-      do {
-        // TODO: - can use set user action code settings?
-        try await currentUser!.sendEmailVerification()
-      } catch {
-        errorMessage = string.localizedErrorMessage(
-          for: error
-        )
-        throw error
+    do {
+      if let user = currentUser {
+        // Requires running on MainActor as passing to sendEmailVerification() which is non-isolated
+        let settings: ActionCodeSettings? = await MainActor.run {
+          configuration.verifyEmailActionCodeSettings
+        }
+
+        if let settings = settings {
+          try await user.sendEmailVerification(with: settings)
+        } else {
+          try await user.sendEmailVerification()
+        }
       }
+    } catch {
+      errorMessage = string.localizedErrorMessage(
+        for: error
+      )
+      throw error
     }
   }
 }
