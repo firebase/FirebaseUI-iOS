@@ -19,6 +19,7 @@
 //  Created by Russell Wheatley on 24/04/2025.
 //
 
+import FirebaseCore
 import SwiftUI
 
 private enum FocusableField: Hashable {
@@ -93,4 +94,11 @@ extension UpdatePasswordView: View {
       PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }
   }
+}
+
+
+#Preview {
+  FirebaseOptions.dummyConfigurationForPreview()
+  return UpdatePasswordView()
+    .environment(AuthService())
 }
