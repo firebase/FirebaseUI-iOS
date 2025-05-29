@@ -121,7 +121,6 @@ extension SignInWithFacebookButton: View {
         )
       }
     }
-    Text(errorMessage).foregroundColor(.red)
   }
 }
 
