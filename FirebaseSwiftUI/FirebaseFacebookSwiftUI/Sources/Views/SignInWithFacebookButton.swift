@@ -42,7 +42,7 @@ public struct SignInWithFacebookButton {
         if trackingAuthorizationStatus == .authorized {
           self.limitedLogin = newValue
         } else {
-          self.limitedLogin = false
+          self.limitedLogin = true
         }
       }
     )
