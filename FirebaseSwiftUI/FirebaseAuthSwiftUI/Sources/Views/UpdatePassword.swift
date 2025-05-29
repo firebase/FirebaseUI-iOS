@@ -96,7 +96,6 @@ extension UpdatePasswordView: View {
   }
 }
 
-
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
   return UpdatePasswordView()
