@@ -42,7 +42,7 @@ public struct SignInWithFacebookButton {
         if trackingAuthorizationStatus == .authorized {
           self.limitedLogin = newValue
         } else {
-          self.limitedLogin = false
+          self.limitedLogin = true
         }
       }
     )
@@ -121,7 +121,6 @@ extension SignInWithFacebookButton: View {
         )
       }
     }
-    Text(errorMessage).foregroundColor(.red)
   }
 }
 
