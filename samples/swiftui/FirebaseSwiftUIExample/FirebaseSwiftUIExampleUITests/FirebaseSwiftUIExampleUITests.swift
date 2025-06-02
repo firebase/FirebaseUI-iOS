@@ -81,16 +81,11 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     signInButton.tap()
 
     let signedInText = app.staticTexts["signed-in-text"]
-    let maxWaitTime: TimeInterval = 30
-    let interval: TimeInterval = 1
-    var waited: TimeInterval = 0
 
-    while !signedInText.exists && waited < maxWaitTime {
-      sleep(UInt32(interval))
-      waited += interval
-    }
-
-    XCTAssertTrue(signedInText.exists, "SignedInView should be visible after login")
+    XCTAssertTrue(
+      signedInText.waitForExistence(timeout: 30),
+      "SignedInView should be visible after login"
+    )
 
     dismissAlert(app: app)
     // Check the Views are updated
@@ -183,15 +178,10 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     signInButton.tap()
 
     let signedInText = app.staticTexts["signed-in-text"]
-    let maxWaitTime: TimeInterval = 30
-    let interval: TimeInterval = 1
-    var waited: TimeInterval = 0
 
-    while !signedInText.exists && waited < maxWaitTime {
-      sleep(UInt32(interval))
-      waited += interval
-    }
-
-    XCTAssertTrue(signedInText.exists, "SignedInView should be visible after login")
+    XCTAssertTrue(
+      signedInText.waitForExistence(timeout: 30),
+      "SignedInView should be visible after login"
+    )
   }
 }
