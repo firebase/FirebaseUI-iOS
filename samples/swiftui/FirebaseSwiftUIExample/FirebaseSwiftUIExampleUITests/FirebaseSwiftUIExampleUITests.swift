@@ -82,15 +82,20 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
     let signedInText = app.staticTexts["signed-in-text"]
 
-    let expectation = XCTNSPredicateExpectation(
-      predicate: NSPredicate(format: "exists == true"),
-      object: signedInText
-    )
+    let expectation = XCTestExpectation(description: "Wait for SignedInView to appear")
 
+    let checkInterval: TimeInterval = 1
     let maxWaitTime: TimeInterval = 30
-    let result = XCTWaiter().wait(for: [expectation], timeout: maxWaitTime)
 
-    XCTAssertEqual(result, .completed, "SignedInView should be visible after login")
+    Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true) { timer in
+      if signedInText.exists {
+        expectation.fulfill()
+        timer.invalidate()
+      }
+    }
+
+    wait(for: [expectation], timeout: maxWaitTime)
+    XCTAssertTrue(signedInText.exists, "SignedInView should be visible after login")
 
     dismissAlert(app: app)
     // Check the Views are updated
@@ -184,14 +189,19 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
     let signedInText = app.staticTexts["signed-in-text"]
 
-    let expectation = XCTNSPredicateExpectation(
-      predicate: NSPredicate(format: "exists == true"),
-      object: signedInText
-    )
+    let expectation = XCTestExpectation(description: "Wait for SignedInView to appear")
 
+    let checkInterval: TimeInterval = 1
     let maxWaitTime: TimeInterval = 30
-    let result = XCTWaiter().wait(for: [expectation], timeout: maxWaitTime)
 
-    XCTAssertEqual(result, .completed, "SignedInView should be visible after login")
+    Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true) { timer in
+      if signedInText.exists {
+        expectation.fulfill()
+        timer.invalidate()
+      }
+    }
+
+    wait(for: [expectation], timeout: maxWaitTime)
+    XCTAssertTrue(signedInText.exists, "SignedInView should be visible after login")
   }
 }
