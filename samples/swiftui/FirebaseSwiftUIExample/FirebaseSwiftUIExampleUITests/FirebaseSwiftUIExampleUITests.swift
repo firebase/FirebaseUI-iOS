@@ -88,9 +88,11 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     let maxWaitTime: TimeInterval = 30
 
     Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true) { timer in
-      if signedInText.exists {
-        expectation.fulfill()
-        timer.invalidate()
+      DispatchQueue.main.async {
+        if signedInText.exists {
+          expectation.fulfill()
+          timer.invalidate()
+        }
       }
     }
 
@@ -195,9 +197,11 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     let maxWaitTime: TimeInterval = 30
 
     Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true) { timer in
-      if signedInText.exists {
-        expectation.fulfill()
-        timer.invalidate()
+      DispatchQueue.main.async {
+        if signedInText.exists {
+          expectation.fulfill()
+          timer.invalidate()
+        }
       }
     }
 
