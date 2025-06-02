@@ -58,7 +58,7 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
   }
 
   @MainActor
-  func testSignInDisplaysSignedInView() async throws {
+  func testSignInDisplaysSignedInView() throws {
     let app = XCUIApplication()
     let email = createEmail()
     app.launchArguments.append("--auth-emulator")
@@ -82,10 +82,15 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
     let signedInText = app.staticTexts["signed-in-text"]
 
-    XCTAssertTrue(
-      signedInText.waitForExistence(timeout: 30),
-      "SignedInView should be visible after login"
+    let expectation = XCTNSPredicateExpectation(
+      predicate: NSPredicate(format: "exists == true"),
+      object: signedInText
     )
+
+    let maxWaitTime: TimeInterval = 30
+    let result = XCTWaiter().wait(for: [expectation], timeout: maxWaitTime)
+
+    XCTAssertEqual(result, .completed, "SignedInView should be visible after login")
 
     dismissAlert(app: app)
     // Check the Views are updated
@@ -179,9 +184,14 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
     let signedInText = app.staticTexts["signed-in-text"]
 
-    XCTAssertTrue(
-      signedInText.waitForExistence(timeout: 30),
-      "SignedInView should be visible after login"
+    let expectation = XCTNSPredicateExpectation(
+      predicate: NSPredicate(format: "exists == true"),
+      object: signedInText
     )
+
+    let maxWaitTime: TimeInterval = 30
+    let result = XCTWaiter().wait(for: [expectation], timeout: maxWaitTime)
+
+    XCTAssertEqual(result, .completed, "SignedInView should be visible after login")
   }
 }
