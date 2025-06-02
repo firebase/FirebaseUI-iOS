@@ -5,7 +5,7 @@
 1. Launch Xcode and open the project or workspace where you want to add the packages.
 2. In the menu bar, go to: `File > Add Package Dependencies...`
 3. Enter the Package URL: `https://github.com/firebase/FirebaseUI-iOS`
-4. In the `Dependency Rule` dropdown, select `Branch` and set the branch to `main` in the resulting text input.
+4. In the `Dependency Rule` dropdown, select `Exact Version` and set the version to `v15.1.0-alpha` in the resulting text input.
 5. Select target(s) you wish to add to your app (currently `FirebaseAuthSwiftUI`, `FirebaseGoogleSwiftUI`, `FirebaseFacebookSwiftUI` and `FirebasePhoneAuthSwiftUI` are available). `FirebaseAuthSwiftUI` is required and contains the Email provider API.
 6. Press the `Add Packages` button to complete installation.
 
