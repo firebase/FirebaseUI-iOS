@@ -11,7 +11,7 @@ pushd "$module_name";
   -workspace "$module_name.xcworkspace" \
   -scheme "$module_name" \
   -sdk iphonesimulator \
-  -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15 Pro' \
+  -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' \
   clean build test \
   ONLY_ACTIVE_ARCH=YES \
   | xcpretty) || EXIT_STATUS=$?;

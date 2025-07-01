@@ -19,7 +19,7 @@ on:
 jobs:
   swift:
     name: Swift build
-    runs-on: macOS-latest
+    runs-on: macos-15
 
     steps:
       - name: Checkout
@@ -44,7 +44,7 @@ jobs:
 
   objc:
     name: ObjC build
-    runs-on: macOS-latest
+    runs-on: macos-15
 
     steps:
       - name: Checkout

@@ -238,9 +238,6 @@
         }
       }
     },
-    "Confirm password" : {
-
-    },
     "ConfirmEmail" : {
       "comment" : "Title of confirm email label.",
       "extractionState" : "manual",
@@ -324,9 +321,6 @@
           }
         }
       }
-    },
-    "Dismiss" : {
-
     },
     "Don't have an account yet?" : {
       "localizations" : {
@@ -530,9 +524,6 @@
         }
       }
     },
-    "Instructions" : {
-
-    },
     "InvalidEmailError" : {
       "comment" : "Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "migrated",
@@ -556,9 +547,6 @@
           }
         }
       }
-    },
-    "Log in" : {
-
     },
     "Login" : {
       "localizations" : {
@@ -605,9 +593,6 @@
           }
         }
       }
-    },
-    "Password" : {
-
     },
     "PasswordRecoveryEmailSentMessage" : {
       "comment" : "Message displayed when the email for password recovery has been sent.",
@@ -728,9 +713,6 @@
           }
         }
       }
-    },
-    "Please check your email for verification link." : {
-
     },
     "PrivacyPolicy" : {
       "comment" : "Text linked to a web page with the Privacy Policy content.",
