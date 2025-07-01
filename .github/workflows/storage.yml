@@ -23,7 +23,7 @@ on:
 jobs:
   xcodebuild:
     name: xcodebuild
-    runs-on: macOS-latest
+    runs-on: macos-15
 
     steps:
       - name: Checkout
@@ -40,30 +40,30 @@ jobs:
           ./test.sh FirebaseStorageUI
   spm:
     name: spm
-    runs-on: macOS-latest
+    runs-on: macos-15
 
     steps:
       - name: Checkout
         uses: actions/checkout@main
       - name: Select Xcode version
         run: |
-          sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
+          sudo xcode-select -switch /Applications/Xcode_16.3.app/Contents/Developer
       - name: List
         run: |
           xcodebuild -list
       - name: Build
         run: |
-          xcodebuild -scheme FirebaseStorageUI -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15 Pro'
+          xcodebuild -scheme FirebaseStorageUI -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro'
   pod:
     name: pod lib lint
-    runs-on: macOS-latest
+    runs-on: macos-15
 
     steps:
       - name: Checkout
         uses: actions/checkout@main
       - name: Select Xcode version
         run: |
-          sudo xcode-select -switch /Applications/Xcode_16.1.app/Contents/Developer
+          sudo xcode-select -switch /Applications/Xcode_16.3.app/Contents/Developer
       - name: Setup
         run: gem install bundler; bundle install
       - name: Build
