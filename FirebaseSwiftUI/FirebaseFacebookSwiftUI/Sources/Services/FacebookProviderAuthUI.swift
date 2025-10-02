@@ -31,7 +31,7 @@ public enum FacebookProviderError: Error {
   case authenticationToken(String)
 }
 
-public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
+public class FacebookProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUserSwift {
   public let id: String = "facebook"
   let scopes: [String]
   let shortName = "Facebook"
@@ -41,6 +41,8 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
   private var shaNonce: String?
   // Needed for reauthentication
   var isLimitedLogin: Bool = true
+  
+  public var provider: AuthProviderSwift { self }
 
   @MainActor private static var _shared: FacebookProviderAuthUI =
     .init(scopes: kDefaultFacebookScopes)
@@ -64,6 +66,10 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
   public func deleteUser(user: User) async throws {
     let operation = FacebookDeleteUserOperation(facebookProvider: self)
     try await operation(on: user)
+  }
+
+  @MainActor public func createAuthCredential() async throws -> AuthCredential {
+    return try await signInWithFacebook(isLimitedLogin: true)
   }
 
   @MainActor public func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential {

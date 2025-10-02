@@ -38,7 +38,11 @@ extension SignInWithGoogleButton: View {
   public var body: some View {
     GoogleSignInButton(viewModel: customViewModel) {
       Task {
-        try await authService.signInWithGoogle()
+        guard let clientID = authService.auth.app?.options.clientID else {
+          return
+        }
+        let provider = GoogleProviderAuthUI(clientID: clientID)
+        try await authService.signInWithProvider(provider)
       }
     }
   }

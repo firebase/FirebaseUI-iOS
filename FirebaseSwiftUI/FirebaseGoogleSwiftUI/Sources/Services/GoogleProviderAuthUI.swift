@@ -29,12 +29,15 @@ public enum GoogleProviderError: Error {
   case user(String)
 }
 
-public class GoogleProviderAuthUI: @preconcurrency GoogleProviderAuthUIProtocol {
+public class GoogleProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUserSwift {
   public let id: String = "google"
   let scopes: [String]
   let shortName = "Google"
   let providerId = "google.com"
   public let clientID: String
+  
+  public var provider: AuthProviderSwift { self }
+  
   public init(scopes: [String]? = nil, clientID: String = FirebaseApp.app()!.options.clientID!) {
     self.scopes = scopes ?? kDefaultScopes
     self.clientID = clientID
@@ -48,6 +51,10 @@ public class GoogleProviderAuthUI: @preconcurrency GoogleProviderAuthUIProtocol 
   public func deleteUser(user: User) async throws {
     let operation = GoogleDeleteUserOperation(googleProvider: self)
     try await operation(on: user)
+  }
+
+  @MainActor public func createAuthCredential() async throws -> AuthCredential {
+    return try await signInWithGoogle(clientID: clientID)
   }
 
   @MainActor public func signInWithGoogle(clientID: String) async throws -> AuthCredential {

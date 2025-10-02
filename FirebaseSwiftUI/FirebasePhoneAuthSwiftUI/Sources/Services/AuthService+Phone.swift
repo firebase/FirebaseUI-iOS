@@ -24,7 +24,7 @@ import FirebaseAuthSwiftUI
 public extension AuthService {
   @discardableResult
   func withPhoneSignIn() -> AuthService {
-    register(provider: PhoneAuthProviderAuthUI())
+    registerProvider(provider: PhoneAuthProviderAuthUI())
     return self
   }
 }

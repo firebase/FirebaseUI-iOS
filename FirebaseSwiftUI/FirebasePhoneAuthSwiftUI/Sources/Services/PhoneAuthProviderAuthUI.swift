@@ -18,11 +18,28 @@ import SwiftUI
 
 public typealias VerificationID = String
 
-public class PhoneAuthProviderAuthUI: @preconcurrency PhoneAuthProviderAuthUIProtocol {
+public class PhoneAuthProviderAuthUI: @preconcurrency PhoneAuthProviderAuthUIProtocol, AuthProviderUI {
   public let id: String = "phone"
+  
+  public var provider: AuthProviderSwift { self }
+  
+  // Store verification details for the signIn method
+  private var storedVerificationID: String?
+  private var storedVerificationCode: String?
 
   @MainActor public func authButton() -> AnyView {
     AnyView(PhoneAuthButtonView())
+  }
+  
+  @MainActor public func createAuthCredential() async throws -> AuthCredential {
+    guard let verificationID = storedVerificationID,
+          let verificationCode = storedVerificationCode else {
+      fatalError("Phone authentication requires verifyPhoneNumber to be called first")
+    }
+    return PhoneAuthProvider.provider().credential(
+      withVerificationID: verificationID,
+      verificationCode: verificationCode
+    )
   }
 
   @MainActor public func verifyPhoneNumber(phoneNumber: String) async throws -> VerificationID {

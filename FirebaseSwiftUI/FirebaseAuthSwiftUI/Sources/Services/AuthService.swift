@@ -15,22 +15,21 @@
 @preconcurrency import FirebaseAuth
 import SwiftUI
 
-public protocol ExternalAuthProvider {
+public protocol AuthProviderSwift {
+  @MainActor func createAuthCredential() async throws -> AuthCredential
+}
+
+public protocol AuthProviderUI {
   var id: String { get }
   @MainActor func authButton() -> AnyView
+  var provider: AuthProviderSwift { get }
 }
 
-public protocol GoogleProviderAuthUIProtocol: ExternalAuthProvider {
-  @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
+public protocol DeleteUserSwift {
   @MainActor func deleteUser(user: User) async throws
 }
 
-public protocol FacebookProviderAuthUIProtocol: ExternalAuthProvider {
-  @MainActor func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential
-  @MainActor func deleteUser(user: User) async throws
-}
-
-public protocol PhoneAuthProviderAuthUIProtocol: ExternalAuthProvider {
+public protocol PhoneAuthProviderAuthUIProtocol: AuthProviderSwift {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
 }
 
@@ -137,30 +136,14 @@ public final class AuthService {
 
   // MARK: - Provider APIs
 
-  private var unsafeGoogleProvider: (any GoogleProviderAuthUIProtocol)?
-  private var unsafeFacebookProvider: (any FacebookProviderAuthUIProtocol)?
-  private var unsafePhoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
-
   private var listenerManager: AuthListenerManager?
   public var signedInCredential: AuthCredential?
 
   var emailSignInEnabled = false
 
-  private var providers: [ExternalAuthProvider] = []
-  public func register(provider: ExternalAuthProvider) {
-    switch provider {
-    case let google as GoogleProviderAuthUIProtocol:
-      unsafeGoogleProvider = google
-      providers.append(provider)
-    case let facebook as FacebookProviderAuthUIProtocol:
-      unsafeFacebookProvider = facebook
-      providers.append(provider)
-    case let phone as PhoneAuthProviderAuthUIProtocol:
-      unsafePhoneAuthProvider = phone
-      providers.append(provider)
-    default:
-      break
-    }
+  private var providers: [AuthProviderUI] = []
+  public func registerProvider(provider: AuthProviderUI) {
+    providers.append(provider)
   }
 
   public func renderButtons(spacing: CGFloat = 16) -> AnyView {
@@ -173,31 +156,9 @@ public final class AuthService {
     )
   }
 
-  private var googleProvider: any GoogleProviderAuthUIProtocol {
-    get throws {
-      guard let provider = unsafeGoogleProvider else {
-        fatalError("`GoogleProviderAuthUI` has not been configured")
-      }
-      return provider
-    }
-  }
-
-  private var facebookProvider: any FacebookProviderAuthUIProtocol {
-    get throws {
-      guard let provider = unsafeFacebookProvider else {
-        fatalError("`FacebookProviderAuthUI` has not been configured")
-      }
-      return provider
-    }
-  }
-
-  private var phoneAuthProvider: any PhoneAuthProviderAuthUIProtocol {
-    get throws {
-      guard let provider = unsafePhoneAuthProvider else {
-        fatalError("`PhoneAuthProviderAuthUI` has not been configured")
-      }
-      return provider
-    }
+  public func signInWithProvider(_ provider: AuthProviderSwift) async throws {
+    let credential = try await provider.createAuthCredential()
+    try await signIn(credentials: credential)
   }
 
   // MARK: - End Provider APIs
@@ -327,13 +288,16 @@ public extension AuthService {
         if providerId == EmailAuthProviderID {
           let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
           try await operation(on: user)
-        } else if providerId == FacebookAuthProviderID {
-          try await facebookProvider.deleteUser(user: user)
-        } else if providerId == GoogleAuthProviderID {
-          try await googleProvider.deleteUser(user: user)
+        } else {
+          // Find provider by matching ID and ensure it can delete users
+          guard let matchingProvider = providers.first(where: { $0.id == providerId }),
+                let provider = matchingProvider.provider as? DeleteUserSwift else {
+            throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
+          }
+          
+          try await provider.deleteUser(user: user)
         }
       }
-
     } catch {
       errorMessage = string.localizedErrorMessage(
         for: error
@@ -488,43 +452,20 @@ public extension AuthService {
   }
 }
 
-// MARK: - Google Sign In
-
-public extension AuthService {
-  func signInWithGoogle() async throws {
-    guard let clientID = auth.app?.options.clientID else {
-      throw AuthServiceError
-        .clientIdNotFound(
-          "OAuth client ID not found. Please make sure Google Sign-In is enabled in the Firebase console. You may have to download a new GoogleService-Info.plist file after enabling Google Sign-In."
-        )
-    }
-    let credential = try await googleProvider.signInWithGoogle(clientID: clientID)
-
-    try await signIn(credentials: credential)
-  }
-}
-
-// MARK: - Facebook Sign In
-
-public extension AuthService {
-  func signInWithFacebook(limitedLogin: Bool = true) async throws {
-    let credential = try await facebookProvider
-      .signInWithFacebook(isLimitedLogin: limitedLogin)
-    try await signIn(credentials: credential)
-  }
-}
 
 // MARK: - Phone Auth Sign In
 
 public extension AuthService {
   func verifyPhoneNumber(phoneNumber: String) async throws -> String {
-    do {
-      return try await phoneAuthProvider.verifyPhoneNumber(phoneNumber: phoneNumber)
-    } catch {
-      errorMessage = string.localizedErrorMessage(
-        for: error
-      )
-      throw error
+    return try await withCheckedThrowingContinuation { continuation in
+      PhoneAuthProvider.provider()
+        .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
+          if let error = error {
+            continuation.resume(throwing: error)
+            return
+          }
+          continuation.resume(returning: verificationID!)
+        }
     }
   }
 
