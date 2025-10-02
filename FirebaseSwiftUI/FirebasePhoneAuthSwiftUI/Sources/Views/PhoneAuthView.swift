@@ -87,7 +87,7 @@ extension PhoneAuthView: View {
                 verificationID: verificationID,
                 verificationCode: verificationCode
               )
-              try await authService.signInWithProvider(phoneProvider)
+              try await authService.signIn(phoneProvider)
             } catch {
               errorMessage = authService.string.localizedErrorMessage(for: error)
             }

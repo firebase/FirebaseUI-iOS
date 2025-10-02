@@ -39,7 +39,7 @@ extension SignInWithGoogleButton: View {
   public var body: some View {
     GoogleSignInButton(viewModel: customViewModel) {
       Task {
-        try await authService.signInWithProvider(googleProvider)
+        try await authService.signIn(googleProvider)
       }
     }
   }

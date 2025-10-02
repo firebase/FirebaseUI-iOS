@@ -156,7 +156,7 @@ public final class AuthService {
     )
   }
 
-  public func signInWithProvider(_ provider: AuthProviderSwift) async throws {
+  public func signIn(_ provider: AuthProviderSwift) async throws {
     let credential = try await provider.createAuthCredential()
     try await signIn(credentials: credential)
   }
