@@ -264,7 +264,7 @@ public final class AuthService {
     }
   }
 
-  func sendEmailVerification() async throws {
+  public func sendEmailVerification() async throws {
     do {
       if let user = currentUser {
         // Requires running on MainActor as passing to sendEmailVerification() which is non-isolated
