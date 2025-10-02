@@ -71,7 +71,6 @@ public class FacebookProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUs
 
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
     let loginType: LoginTracking = isLimitedLogin ? .limited : .enabled
-    self.isLimitedLogin = isLimitedLogin
 
     guard let configuration: LoginConfiguration = {
       if loginType == .limited {
