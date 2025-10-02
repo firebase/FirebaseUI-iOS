@@ -51,6 +51,10 @@ public enum AuthView {
   case updatePassword
 }
 
+public enum SignInOutcome: @unchecked Sendable {
+  case signedIn(AuthDataResult?)
+}
+
 @MainActor
 private final class AuthListenerManager {
   private var authStateHandle: AuthStateDidChangeListenerHandle?
@@ -156,9 +160,10 @@ public final class AuthService {
     )
   }
 
-  public func signIn(_ provider: AuthProviderSwift) async throws {
+  public func signIn(_ provider: AuthProviderSwift) async throws -> SignInOutcome {
     let credential = try await provider.createAuthCredential()
-    try await signIn(credentials: credential)
+    let result = try await signIn(credentials: credential)
+    return result
   }
 
   // MARK: - End Provider APIs
@@ -217,12 +222,14 @@ public final class AuthService {
     }
   }
 
-  public func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws {
+  public func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws -> SignInOutcome {
     if currentUser == nil {
       throw AuthServiceError.noCurrentUser
     }
     do {
-      try await currentUser?.link(with: credentials)
+      let result = try await currentUser?.link(with: credentials)
+      updateAuthenticationState()
+      return .signedIn(result)
     } catch let error as NSError {
       if error.code == AuthErrorCode.emailAlreadyInUse.rawValue {
         let context = AccountMergeConflictContext(
@@ -237,16 +244,17 @@ public final class AuthService {
     }
   }
 
-  public func signIn(credentials: AuthCredential) async throws {
+  public func signIn(credentials: AuthCredential) async throws -> SignInOutcome {
     authenticationState = .authenticating
     do {
       if shouldHandleAnonymousUpgrade {
-        try await handleAutoUpgradeAnonymousUser(credentials: credentials)
+        return try await handleAutoUpgradeAnonymousUser(credentials: credentials)
       } else {
         let result = try await auth.signIn(with: credentials)
         signedInCredential = result.credential ?? credentials
+        updateAuthenticationState()
+        return .signedIn(result)
       }
-      updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
       errorMessage = string.localizedErrorMessage(
@@ -333,23 +341,24 @@ public extension AuthService {
     return self
   }
 
-  func signIn(withEmail email: String, password: String) async throws {
+  func signIn(withEmail email: String, password: String) async throws -> SignInOutcome {
     let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-    try await signIn(credentials: credential)
+    return try await signIn(credentials: credential)
   }
 
-  func createUser(withEmail email: String, password: String) async throws {
+  func createUser(withEmail email: String, password: String) async throws -> SignInOutcome {
     authenticationState = .authenticating
 
     do {
       if shouldHandleAnonymousUpgrade {
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-        try await handleAutoUpgradeAnonymousUser(credentials: credential)
+        return try await handleAutoUpgradeAnonymousUser(credentials: credential)
       } else {
         let result = try await auth.createUser(withEmail: email, password: password)
         signedInCredential = result.credential
+        updateAuthenticationState()
+        return .signedIn(result)
       }
-      updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
       errorMessage = string.localizedErrorMessage(
