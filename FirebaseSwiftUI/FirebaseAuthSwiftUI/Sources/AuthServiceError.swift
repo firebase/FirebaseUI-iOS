@@ -36,6 +36,7 @@ public enum AuthServiceError: LocalizedError {
   case invalidCredentials(String)
   case signInFailed(underlying: Error)
   case accountMergeConflict(context: AccountMergeConflictContext)
+  case invalidPhoneAuthenticationArguments(String)
   case providerNotFound(String)
 
   public var errorDescription: String? {
@@ -58,6 +59,8 @@ public enum AuthServiceError: LocalizedError {
       return context.errorDescription
     case let .providerNotFound(description):
       return description
+    case let .invalidPhoneAuthenticationArguments(description):
+        return description
     }
   }
 }

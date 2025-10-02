@@ -30,17 +30,6 @@ public class PhoneAuthProviderAuthUI: @preconcurrency PhoneAuthProviderAuthUIPro
   @MainActor public func authButton() -> AnyView {
     AnyView(PhoneAuthButtonView())
   }
-  
-  @MainActor public func createAuthCredential() async throws -> AuthCredential {
-    guard let verificationID = storedVerificationID,
-          let verificationCode = storedVerificationCode else {
-      fatalError("Phone authentication requires verifyPhoneNumber to be called first")
-    }
-    return PhoneAuthProvider.provider().credential(
-      withVerificationID: verificationID,
-      verificationCode: verificationCode
-    )
-  }
 
   @MainActor public func verifyPhoneNumber(phoneNumber: String) async throws -> VerificationID {
     return try await withCheckedThrowingContinuation { continuation in
@@ -53,5 +42,21 @@ public class PhoneAuthProviderAuthUI: @preconcurrency PhoneAuthProviderAuthUIPro
           continuation.resume(returning: verificationID!)
         }
     }
+  }
+  
+  // Set verification details before calling signIn
+  public func setVerificationDetails(verificationID: String, verificationCode: String) {
+    self.storedVerificationID = verificationID
+    self.storedVerificationCode = verificationCode
+  }
+  
+  @MainActor public func createAuthCredential() async throws -> AuthCredential {
+    guard let verificationID = storedVerificationID,
+          let verificationCode = storedVerificationCode else {
+      throw AuthServiceError.invalidPhoneAuthenticationArguments("please call setVerificationDetails() before creating Phone Auth credential")
+    }
+    
+    return PhoneAuthProvider.provider()
+      .credential(withVerificationID: verificationID, verificationCode: verificationCode)
   }
 }

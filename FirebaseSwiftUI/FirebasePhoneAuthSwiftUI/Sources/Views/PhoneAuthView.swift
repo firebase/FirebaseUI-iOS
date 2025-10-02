@@ -31,6 +31,7 @@ public struct PhoneAuthView {
   @State private var showVerificationCodeInput = false
   @State private var verificationCode = ""
   @State private var verificationID = ""
+  private let phoneProvider = PhoneAuthProviderAuthUI()
 
   public init() {}
 }
@@ -52,7 +53,7 @@ extension PhoneAuthView: View {
         Button(action: {
           Task {
             do {
-              let id = try await authService.verifyPhoneNumber(phoneNumber: phoneNumber)
+              let id = try await phoneProvider.verifyPhoneNumber(phoneNumber: phoneNumber)
               verificationID = id
               showVerificationCodeInput = true
             } catch {
@@ -82,10 +83,11 @@ extension PhoneAuthView: View {
         Button(action: {
           Task {
             do {
-              try await authService.signInWithPhoneNumber(
+              phoneProvider.setVerificationDetails(
                 verificationID: verificationID,
                 verificationCode: verificationCode
               )
+              try await authService.signInWithProvider(phoneProvider)
             } catch {
               errorMessage = authService.string.localizedErrorMessage(for: error)
             }
