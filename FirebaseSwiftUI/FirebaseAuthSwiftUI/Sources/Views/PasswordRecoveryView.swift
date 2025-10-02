@@ -31,7 +31,7 @@ public struct PasswordRecoveryView {
     let recoveryResult: Result<Void, Error>
 
     do {
-      try await authService.sendPasswordRecoveryEmail(to: email)
+      try await authService.sendPasswordRecoveryEmail(email: email)
       resultWrapper = ResultWrapper(value: .success(()))
     } catch {
       resultWrapper = ResultWrapper(value: .failure(error))

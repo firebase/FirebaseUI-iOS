@@ -341,12 +341,12 @@ public extension AuthService {
     return self
   }
 
-  func signIn(withEmail email: String, password: String) async throws -> SignInOutcome {
+  func signIn(email: String, password: String) async throws -> SignInOutcome {
     let credential = EmailAuthProvider.credential(withEmail: email, password: password)
     return try await signIn(credentials: credential)
   }
 
-  func createUser(withEmail email: String, password: String) async throws -> SignInOutcome {
+  func createUser(email email: String, password: String) async throws -> SignInOutcome {
     authenticationState = .authenticating
 
     do {
@@ -368,7 +368,7 @@ public extension AuthService {
     }
   }
 
-  func sendPasswordRecoveryEmail(to email: String) async throws {
+  func sendPasswordRecoveryEmail(email: String) async throws {
     do {
       try await auth.sendPasswordReset(withEmail: email)
     } catch {
@@ -383,7 +383,7 @@ public extension AuthService {
 // MARK: - Email Link Sign In
 
 public extension AuthService {
-  func sendEmailSignInLink(to email: String) async throws {
+  func sendEmailSignInLink(email: String) async throws {
     do {
       let actionCodeSettings = try updateActionCodeSettings()
       try await auth.sendSignInLink(

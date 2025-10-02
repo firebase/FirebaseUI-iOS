@@ -25,7 +25,7 @@ public struct EmailLinkView {
 
   private func sendEmailLink() async {
     do {
-      try await authService.sendEmailSignInLink(to: email)
+      try await authService.sendEmailSignInLink(email: email)
       showModal = true
     } catch {}
   }
