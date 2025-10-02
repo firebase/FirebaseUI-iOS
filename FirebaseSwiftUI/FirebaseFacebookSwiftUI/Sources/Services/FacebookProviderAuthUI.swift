@@ -44,19 +44,19 @@ public class FacebookProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUs
   
   public var provider: AuthProviderSwift { self }
 
-  @MainActor private static var _shared: FacebookProviderAuthUI =
-    .init(scopes: kDefaultFacebookScopes)
+  @MainActor private static var _shared: FacebookProviderAuthUI = FacebookProviderAuthUI(scopes: kDefaultFacebookScopes)
 
   @MainActor public static var shared: FacebookProviderAuthUI {
     return _shared
   }
 
-  @MainActor public static func configureProvider(scopes: [String]? = nil) {
-    _shared = FacebookProviderAuthUI(scopes: scopes)
+  @MainActor public static func configureProvider(scopes: [String]? = nil, isLimitedLogin: Bool = true) {
+    _shared = FacebookProviderAuthUI(scopes: scopes, isLimitedLogin: isLimitedLogin)
   }
 
-  private init(scopes: [String]? = nil) {
+  public init(scopes: [String]? = nil, isLimitedLogin: Bool = true) {
     self.scopes = scopes ?? kDefaultFacebookScopes
+    self.isLimitedLogin = isLimitedLogin
   }
 
   @MainActor public func authButton() -> AnyView {
@@ -68,11 +68,8 @@ public class FacebookProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUs
     try await operation(on: user)
   }
 
-  @MainActor public func createAuthCredential() async throws -> AuthCredential {
-    return try await signInWithFacebook(isLimitedLogin: true)
-  }
 
-  @MainActor public func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential {
+  @MainActor public func createAuthCredential() async throws -> AuthCredential {
     let loginType: LoginTracking = isLimitedLogin ? .limited : .enabled
     self.isLimitedLogin = isLimitedLogin
 

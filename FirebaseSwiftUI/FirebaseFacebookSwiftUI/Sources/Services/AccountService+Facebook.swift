@@ -34,8 +34,7 @@ extension FacebookOperationReauthentication {
     }
 
     do {
-      let credential = try await facebookProvider
-        .signInWithFacebook(isLimitedLogin: facebookProvider.isLimitedLogin)
+      let credential = try await facebookProvider.createAuthCredential()
       try await user.reauthenticate(with: credential)
 
       return .firebase("")
