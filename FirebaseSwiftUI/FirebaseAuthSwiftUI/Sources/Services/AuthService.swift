@@ -40,7 +40,7 @@ public enum AuthenticationState {
 }
 
 public enum AuthenticationFlow {
-  case login
+  case signIn
   case signUp
 }
 
@@ -94,7 +94,7 @@ public final class AuthService {
   public let string: StringUtils
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
-  public var authenticationFlow: AuthenticationFlow = .login
+  public var authenticationFlow: AuthenticationFlow = .signIn
   public var errorMessage = ""
   public let passwordPrompt: PasswordPromptCoordinator = .init()
 
