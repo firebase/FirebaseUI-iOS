@@ -484,3 +484,37 @@ public extension AuthService {
     try await signIn(credentials: credential)
   }
 }
+
+// MARK: - User Profile Management
+
+public extension AuthService {
+  func updateUserPhotoURL(url: URL) async throws {
+    guard let user = currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
+    
+    do {
+      let changeRequest = user.createProfileChangeRequest()
+      changeRequest.photoURL = url
+      try await changeRequest.commitChanges()
+    } catch {
+      errorMessage = string.localizedErrorMessage(for: error)
+      throw error
+    }
+  }
+  
+  func updateUserDisplayName(name: String) async throws {
+    guard let user = currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
+    
+    do {
+      let changeRequest = user.createProfileChangeRequest()
+      changeRequest.displayName = name
+      try await changeRequest.commitChanges()
+    } catch {
+      errorMessage = string.localizedErrorMessage(for: error)
+      throw error
+    }
+  }
+}
