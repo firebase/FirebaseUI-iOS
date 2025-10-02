@@ -41,8 +41,7 @@ extension GoogleOperationReauthentication {
     }
 
     do {
-      let credential = try await googleProvider
-        .signInWithGoogle(clientID: googleProvider.clientID)
+      let credential = try await googleProvider.createAuthCredential()
       try await user.reauthenticate(with: credential)
 
       return .firebase("")

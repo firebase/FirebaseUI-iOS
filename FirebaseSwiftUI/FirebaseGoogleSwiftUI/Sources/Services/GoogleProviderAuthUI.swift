@@ -44,7 +44,6 @@ public class GoogleProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUser
   }
 
   @MainActor public func authButton() -> AnyView {
-    // Moved to SignInWithGoogleButton so we could sign in via AuthService
     AnyView(SignInWithGoogleButton())
   }
 
@@ -54,10 +53,6 @@ public class GoogleProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUser
   }
 
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
-    return try await signInWithGoogle(clientID: clientID)
-  }
-
-  @MainActor public func signInWithGoogle(clientID: String) async throws -> AuthCredential {
     guard let presentingViewController = await (UIApplication.shared.connectedScenes
       .first as? UIWindowScene)?.windows.first?.rootViewController else {
       throw GoogleProviderError
@@ -66,7 +61,7 @@ public class GoogleProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUser
         )
     }
 
-    let config = GIDConfiguration(clientID: clientID)
+    let config = GIDConfiguration(clientID: self.clientID)
     GIDSignIn.sharedInstance.configuration = config
 
     return try await withCheckedThrowingContinuation { continuation in
