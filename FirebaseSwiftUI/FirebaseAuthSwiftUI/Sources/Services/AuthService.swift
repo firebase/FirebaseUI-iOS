@@ -59,8 +59,6 @@ public enum SignInOutcome: @unchecked Sendable {
   case signedIn(AuthDataResult?)
 }
 
-
-
 @MainActor
 private final class AuthListenerManager {
   private var authStateHandle: AuthStateDidChangeListenerHandle?
@@ -236,6 +234,7 @@ public final class AuthService {
     }
     do {
       let result = try await currentUser?.link(with: credentials)
+      signedInCredential = credentials
       updateAuthenticationState()
       return .signedIn(result)
     } catch let error as NSError {
@@ -263,11 +262,18 @@ public final class AuthService {
         updateAuthenticationState()
         return .signedIn(result)
       }
-    } catch {
+    }  catch let error as NSError {
       authenticationState = .unauthenticated
-      errorMessage = string.localizedErrorMessage(
-        for: error
-      )
+      errorMessage = string.localizedErrorMessage(for: error)
+
+      // Check if this is an MFA required error
+      if error.code == AuthErrorCode.secondFactorRequired.rawValue {
+        if let resolver = error
+          .userInfo[AuthErrorUserInfoMultiFactorResolverKey] as? MultiFactorResolver {
+          return handleMFARequiredError(resolver: resolver)
+        }
+      }
+
       throw error
     }
   }
@@ -527,7 +533,7 @@ public extension AuthService {
   }
 }
 
-// MARK: - MFA Methods (Placeholder implementations)
+// MARK: - MFA Methods
 
 public extension AuthService {
   func startMfaEnrollment(type: SecondFactorType, accountName: String? = nil,
