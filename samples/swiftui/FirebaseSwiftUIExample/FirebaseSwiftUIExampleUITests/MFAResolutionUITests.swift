@@ -59,6 +59,7 @@ final class MFAResolutionUITests: XCTestCase {
     )
     
     XCTAssertTrue(mfaEnabled, "MFA should be enabled successfully via API")
+
     
     // Wait for sign out to complete
     let emailField = app.textFields["email-field"]
