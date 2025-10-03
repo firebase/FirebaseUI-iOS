@@ -111,11 +111,9 @@ func setEmailVerifiedInEmulator(for user: User,
                   ])
   }
 
-  log("Applied oobCode successfully; reloading user...")
 
   // 4) Reload the user to reflect the new verification state.
   try await user.reload()
-  log("User reloaded. emailVerified after reload: \(user.isEmailVerified)")
 }
 
 /// Small async helper to call FirebaseAuth's callback-based `sendEmailVerification` on iOS.
