@@ -30,9 +30,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      UIApplication.LaunchOptionsKey: Any
                    ]?) -> Bool {
     FirebaseApp.configure()
-    if uiAuthEmulator {
-      Auth.auth().useEmulator(withHost: "localhost", port: 9099)
-    }
 
     ApplicationDelegate.shared.application(
       application,
@@ -58,6 +55,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ app: UIApplication,
                    open url: URL,
                    options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    if Auth.auth().canHandle(url) { return true }
+
     if ApplicationDelegate.shared.application(
       app,
       open: url,
@@ -76,15 +75,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct FirebaseSwiftUIExampleApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-  init() {
-    Task {
-      try await testCreateUser()
-    }
-  }
+  init() {}
 
   var body: some Scene {
     WindowGroup {
-      NavigationView {
+      if testRunner {
+        TestView()
+      } else {
         ContentView()
       }
     }
