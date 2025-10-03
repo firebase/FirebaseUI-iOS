@@ -50,13 +50,20 @@ extension AuthPickerView: View {
       VStack {
         authPickerTitleView
         if authService.authenticationState == .authenticated {
-          SignedInView()
+          switch authService.authView {
+          case .mfaEnrollment:
+            MFAEnrolmentView()
+          default:
+            SignedInView()
+          }
         } else {
           switch authService.authView {
           case .passwordRecovery:
             PasswordRecoveryView()
           case .emailLink:
             EmailLinkView()
+          case .mfaEnrollment:
+            MFAEnrolmentView()
           case .authPicker:
             if authService.emailSignInEnabled {
               Text(authService.authenticationFlow == .signIn ? authService.string
