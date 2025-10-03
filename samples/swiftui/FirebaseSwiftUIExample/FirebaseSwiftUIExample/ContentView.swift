@@ -41,7 +41,8 @@ struct ContentView: View {
     let configuration = AuthConfiguration(
       tosUrl: URL(string: "https://example.com/tos"),
       privacyPolicyUrl: URL(string: "https://example.com/privacy"),
-      emailLinkSignInActionCodeSettings: actionCodeSettings
+      emailLinkSignInActionCodeSettings: actionCodeSettings,
+      mfaEnabled: true
     )
 
     authService = AuthService(
