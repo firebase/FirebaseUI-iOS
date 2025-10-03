@@ -23,12 +23,6 @@ import FirebaseAuth
 import FirebaseCore
 import XCTest
 
-func createEmail() -> String {
-  let before = UUID().uuidString.prefix(8)
-  let after = UUID().uuidString.prefix(6)
-  return "\(before)@\(after).com"
-}
-
 func dismissAlert(app: XCUIApplication) {
   if app.scrollViews.otherElements.buttons["Not Now"].waitForExistence(timeout: 2) {
     app.scrollViews.otherElements.buttons["Not Now"].tap()
@@ -58,7 +52,7 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
   }
 
   @MainActor
-  func testSignInDisplaysSignedInView() async throws {
+  func testSignInDisplaysSignedInView() throws {
     let app = XCUIApplication()
     let email = createEmail()
     app.launchArguments.append("--auth-emulator")
@@ -81,10 +75,22 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     signInButton.tap()
 
     let signedInText = app.staticTexts["signed-in-text"]
-    XCTAssertTrue(
-      signedInText.waitForExistence(timeout: 10),
-      "SignedInView should be visible after login"
-    )
+    let expectation = XCTestExpectation(description: "Wait for SignedInView to appear")
+
+    let checkInterval: TimeInterval = 1
+    let maxWaitTime: TimeInterval = 30
+
+    Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true) { timer in
+      DispatchQueue.main.async {
+        if signedInText.exists {
+          expectation.fulfill()
+          timer.invalidate()
+        }
+      }
+    }
+
+    wait(for: [expectation], timeout: maxWaitTime)
+    XCTAssertTrue(signedInText.exists, "SignedInView should be visible after login")
 
     dismissAlert(app: app)
     // Check the Views are updated
@@ -149,6 +155,12 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     app.launchArguments.append("--auth-emulator")
     app.launch()
 
+    // Check the Views are updated
+    let signOutButton = app.buttons["sign-out-button"]
+    if signOutButton.exists {
+      signOutButton.tap()
+    }
+
     let switchFlowButton = app.buttons["switch-auth-flow"]
     switchFlowButton.tap()
 
@@ -172,14 +184,29 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     confirmPasswordField.press(forDuration: 1.2)
     app.menuItems["Paste"].tap()
 
-    let signInButton = app.buttons["sign-in-button"]
-    XCTAssertTrue(signInButton.exists, "Sign-In button should exist")
-    signInButton.tap()
+    // Create the user (sign up)
+    let signUpButton = app
+      .buttons["sign-in-button"] // This button changes context after switch-auth-flow
+    XCTAssertTrue(signUpButton.exists, "Sign-Up button should exist")
+    signUpButton.tap()
 
     let signedInText = app.staticTexts["signed-in-text"]
-    XCTAssertTrue(
-      signedInText.waitForExistence(timeout: 20),
-      "SignedInView should be visible after login"
-    )
+
+    let expectation = XCTestExpectation(description: "Wait for SignedInView to appear")
+
+    let checkInterval: TimeInterval = 1
+    let maxWaitTime: TimeInterval = 30
+
+    Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true) { timer in
+      DispatchQueue.main.async {
+        if signedInText.exists {
+          expectation.fulfill()
+          timer.invalidate()
+        }
+      }
+    }
+
+    wait(for: [expectation], timeout: maxWaitTime)
+    XCTAssertTrue(signedInText.exists, "SignedInView should be visible after login")
   }
 }
