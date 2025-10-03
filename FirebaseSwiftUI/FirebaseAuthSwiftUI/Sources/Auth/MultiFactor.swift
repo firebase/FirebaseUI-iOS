@@ -99,3 +99,16 @@ public struct EnrollmentSession {
       (status == .initiated || status == .verificationSent || status == .verificationPending)
   }
 }
+
+public enum MFAHint {
+  case phone(displayName: String?, uid: String, phoneNumber: String?)
+  case totp(displayName: String?, uid: String)
+}
+
+public struct MFARequired {
+  public let hints: [MFAHint]
+
+  public init(hints: [MFAHint]) {
+    self.hints = hints
+  }
+}

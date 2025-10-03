@@ -53,6 +53,8 @@ extension AuthPickerView: View {
           switch authService.authView {
           case .mfaEnrollment:
             MFAEnrolmentView()
+          case .mfaManagement:
+            MFAManagementView()
           default:
             SignedInView()
           }
@@ -64,6 +66,8 @@ extension AuthPickerView: View {
             EmailLinkView()
           case .mfaEnrollment:
             MFAEnrolmentView()
+          case .mfaResolution:
+            MFAResolutionView()  
           case .authPicker:
             if authService.emailSignInEnabled {
               Text(authService.authenticationFlow == .signIn ? authService.string
