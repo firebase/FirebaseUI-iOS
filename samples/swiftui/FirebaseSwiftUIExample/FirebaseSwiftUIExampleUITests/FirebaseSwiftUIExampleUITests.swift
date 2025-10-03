@@ -74,23 +74,12 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     XCTAssertTrue(signInButton.exists, "Sign-In button should exist")
     signInButton.tap()
 
+    // Wait for authentication to complete and signed-in view to appear
     let signedInText = app.staticTexts["signed-in-text"]
-    let expectation = XCTestExpectation(description: "Wait for SignedInView to appear")
-
-    let checkInterval: TimeInterval = 1
-    let maxWaitTime: TimeInterval = 30
-
-    Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true) { timer in
-      DispatchQueue.main.async {
-        if signedInText.exists {
-          expectation.fulfill()
-          timer.invalidate()
-        }
-      }
-    }
-
-    wait(for: [expectation], timeout: maxWaitTime)
-    XCTAssertTrue(signedInText.exists, "SignedInView should be visible after login")
+    XCTAssertTrue(
+      signedInText.waitForExistence(timeout: 30),
+      "SignedInView should be visible after login"
+    )
 
     dismissAlert(app: app)
     // Check the Views are updated
@@ -190,23 +179,11 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     XCTAssertTrue(signUpButton.exists, "Sign-Up button should exist")
     signUpButton.tap()
 
+    // Wait for user creation and signed-in view to appear
     let signedInText = app.staticTexts["signed-in-text"]
-
-    let expectation = XCTestExpectation(description: "Wait for SignedInView to appear")
-
-    let checkInterval: TimeInterval = 1
-    let maxWaitTime: TimeInterval = 30
-
-    Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true) { timer in
-      DispatchQueue.main.async {
-        if signedInText.exists {
-          expectation.fulfill()
-          timer.invalidate()
-        }
-      }
-    }
-
-    wait(for: [expectation], timeout: maxWaitTime)
-    XCTAssertTrue(signedInText.exists, "SignedInView should be visible after login")
+    XCTAssertTrue(
+      signedInText.waitForExistence(timeout: 30),
+      "SignedInView should be visible after user creation"
+    )
   }
 }
