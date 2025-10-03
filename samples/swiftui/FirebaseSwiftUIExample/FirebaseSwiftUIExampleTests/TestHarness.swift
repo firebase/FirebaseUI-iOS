@@ -61,3 +61,22 @@ func createEmail() -> String {
   let after = UUID().uuidString.prefix(6)
   return "\(before)@\(after).com"
 }
+
+func waitForStateChange(timeout: TimeInterval = 10.0,
+                        condition: @escaping () -> Bool) async throws {
+  let startTime = Date()
+
+  while !condition() {
+    if Date().timeIntervalSince(startTime) > timeout {
+      throw TestError.timeout("Timeout waiting for condition to be met")
+    }
+
+    // Small delay to prevent busy waiting
+    try await Task.sleep(nanoseconds: 50_000_000) // 50ms
+  }
+}
+
+// Add this simple error type
+enum TestError: Error {
+  case timeout(String)
+}

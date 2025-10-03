@@ -105,14 +105,19 @@ struct FirebaseSwiftUIExampleTests {
     #expect(service.errorMessage.isEmpty)
     #expect(service.signedInCredential == nil)
     #expect(service.currentUser == nil)
-    try await service.createUser(withEmail: createEmail(), password: kPassword)
-    try await Task.sleep(nanoseconds: 4_000_000_000)
+    try await service.createUser(email: createEmail(), password: kPassword)
+
+    try await waitForStateChange {
+      service.authenticationState == .authenticated
+    }
     #expect(service.authenticationState == .authenticated)
+
+    try await waitForStateChange {
+      service.currentUser != nil
+    }
+    #expect(service.currentUser != nil)
     #expect(service.authView == .authPicker)
     #expect(service.errorMessage.isEmpty)
-    #expect(service.currentUser != nil)
-    // TODO: - reinstate once this PR is merged: https://github.com/firebase/FirebaseUI-iOS/pull/1256
-//    #expect(service.signedInCredential is AuthCredential)
   }
 
   @Test
@@ -120,22 +125,38 @@ struct FirebaseSwiftUIExampleTests {
   func testSignInUser() async throws {
     let service = try await prepareFreshAuthService()
     let email = createEmail()
-    try await service.createUser(withEmail: email, password: kPassword)
+    try await service.createUser(email: email, password: kPassword)
     try await service.signOut()
-    try await Task.sleep(nanoseconds: 2_000_000_000)
+
+    try await waitForStateChange {
+      service.authenticationState == .unauthenticated
+    }
     #expect(service.authenticationState == .unauthenticated)
+
+    try await waitForStateChange {
+      service.currentUser == nil
+    }
+    #expect(service.currentUser == nil)
     #expect(service.authView == .authPicker)
     #expect(service.errorMessage.isEmpty)
     #expect(service.signedInCredential == nil)
-    #expect(service.currentUser == nil)
 
-    try await service.signIn(withEmail: email, password: kPassword)
+    try await service.signIn(email: email, password: kPassword)
 
+    try await waitForStateChange {
+      service.authenticationState == .authenticated
+    }
     #expect(service.authenticationState == .authenticated)
+
+    try await waitForStateChange {
+      service.currentUser != nil
+    }
+    #expect(service.currentUser != nil)
+    try await waitForStateChange {
+      service.signedInCredential != nil
+    }
+    #expect(service.signedInCredential != nil)
     #expect(service.authView == .authPicker)
     #expect(service.errorMessage.isEmpty)
-    #expect(service.currentUser != nil)
-    // TODO: - reinstate once this PR is merged: https://github.com/firebase/FirebaseUI-iOS/pull/1256
-    //    #expect(service.signedInCredential is AuthCredential)
   }
 }
