@@ -41,13 +41,10 @@ final class MFAResolutionUITests: XCTestCase {
     let password = "12345678"
     let phoneNumber = "+15551234567"
     
-    
     // Sign up the user
     try await signUpUser(email: email, password: password)
     
-    
     // Get ID token and enable MFA via API
-    
     guard let idToken = await getIDTokenFromEmulator(email: email, password: password) else {
       XCTFail("Failed to get ID token from emulator")
       return
@@ -164,8 +161,6 @@ final class MFAResolutionUITests: XCTestCase {
     do {
       let (data, _) = try await URLSession.shared.data(for: request)
       
-      // Print raw response for debugging
-      let responseStr = String(data: data, encoding: .utf8)
       
       // Step 1: Parse JSON
       guard let jsonObject = try? JSONSerialization.jsonObject(with: data) else {
@@ -237,8 +232,6 @@ final class MFAResolutionUITests: XCTestCase {
         print("📡 Finalize HTTP Status: \(httpResponse.statusCode)")
       }
       
-      // Print raw finalize response
-      let responseStr = String(data: finalizeData, encoding: .utf8)
       
       guard let json = try? JSONSerialization.jsonObject(with: finalizeData) as? [String: Any] else {
         print("❌ Failed to parse finalize response as JSON")
@@ -283,8 +276,6 @@ final class MFAResolutionUITests: XCTestCase {
     do {
       let (data, _) = try await URLSession.shared.data(from: url)
       
-      // Print raw response for debugging
-      let responseStr = String(data: data, encoding: .utf8)
       
       guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
             let codes = json["verificationCodes"] as? [[String: Any]] else {
@@ -332,7 +323,6 @@ final class MFAResolutionUITests: XCTestCase {
       // Get the last matching code (most recent)
       if let lastCode = matchingCodes.last,
          let code = lastCode["code"] as? String {
-        print("✅ Retrieved code: \(code)")
         return code
       }
       
@@ -382,9 +372,6 @@ final class MFAResolutionUITests: XCTestCase {
       guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
             let idToken = json["idToken"] as? String else {
         print("Failed to parse sign-in response")
-        if let responseStr = String(data: data, encoding: .utf8) {
-          print("Response: \(responseStr)")
-        }
         return nil
       }
       
