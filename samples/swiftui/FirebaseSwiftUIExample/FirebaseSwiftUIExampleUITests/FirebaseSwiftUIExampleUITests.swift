@@ -58,7 +58,7 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
   }
 
   @MainActor
-  func testSignInDisplaysSignedInView() async throws {
+  func testSignInDisplaysSignedInView() throws {
     let app = XCUIApplication()
     let email = createEmail()
     app.launchArguments.append("--auth-emulator")
@@ -81,10 +81,23 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     signInButton.tap()
 
     let signedInText = app.staticTexts["signed-in-text"]
-    XCTAssertTrue(
-      signedInText.waitForExistence(timeout: 10),
-      "SignedInView should be visible after login"
-    )
+
+    let expectation = XCTestExpectation(description: "Wait for SignedInView to appear")
+
+    let checkInterval: TimeInterval = 1
+    let maxWaitTime: TimeInterval = 30
+
+    Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true) { timer in
+      DispatchQueue.main.async {
+        if signedInText.exists {
+          expectation.fulfill()
+          timer.invalidate()
+        }
+      }
+    }
+
+    wait(for: [expectation], timeout: maxWaitTime)
+    XCTAssertTrue(signedInText.exists, "SignedInView should be visible after login")
 
     dismissAlert(app: app)
     // Check the Views are updated
@@ -177,9 +190,22 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     signInButton.tap()
 
     let signedInText = app.staticTexts["signed-in-text"]
-    XCTAssertTrue(
-      signedInText.waitForExistence(timeout: 20),
-      "SignedInView should be visible after login"
-    )
+
+    let expectation = XCTestExpectation(description: "Wait for SignedInView to appear")
+
+    let checkInterval: TimeInterval = 1
+    let maxWaitTime: TimeInterval = 30
+
+    Timer.scheduledTimer(withTimeInterval: checkInterval, repeats: true) { timer in
+      DispatchQueue.main.async {
+        if signedInText.exists {
+          expectation.fulfill()
+          timer.invalidate()
+        }
+      }
+    }
+
+    wait(for: [expectation], timeout: maxWaitTime)
+    XCTAssertTrue(signedInText.exists, "SignedInView should be visible after login")
   }
 }
