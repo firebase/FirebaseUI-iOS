@@ -249,9 +249,6 @@ extension MFAResolutionView: View {
             .keyboardType(.numberPad)
             .focused($focus, equals: .verificationCode)
             .accessibilityIdentifier("sms-verification-code-field")
-            .onAppear {
-              focus = .verificationCode
-            }
         }
         .padding(.horizontal)
       }
@@ -293,9 +290,6 @@ extension MFAResolutionView: View {
           .keyboardType(.numberPad)
           .focused($focus, equals: .totpCode)
           .accessibilityIdentifier("totp-verification-code-field")
-          .onAppear {
-            focus = .totpCode
-          }
       }
       .padding(.horizontal)
     }
