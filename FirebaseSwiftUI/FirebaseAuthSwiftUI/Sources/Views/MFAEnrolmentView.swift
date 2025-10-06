@@ -33,6 +33,7 @@ public struct MFAEnrolmentView {
   @State private var isLoading = false
   @State private var errorMessage = ""
   @State private var displayName = ""
+  @State private var showCopiedFeedback = false
 
   @FocusState private var focus: FocusableField?
 
@@ -168,6 +169,20 @@ public struct MFAEnrolmentView {
   private func cancelEnrollment() {
     resetForm()
     authService.authView = .authPicker
+  }
+
+  private func copyToClipboard(_ text: String) {
+    UIPasteboard.general.string = text
+    
+
+    // Show feedback
+    showCopiedFeedback = true
+
+    // Quickly show it has been copied to the clipboard
+    Task {
+      try? await Task.sleep(nanoseconds: 500_000_000)
+      showCopiedFeedback = false
+    }
   }
 }
 
@@ -502,13 +517,36 @@ extension MFAEnrolmentView: View {
           Text("Manual Entry Key:")
             .font(.headline)
 
-          Text(totpInfo.sharedSecretKey)
-            .font(.system(.body, design: .monospaced))
-            .padding()
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(8)
-            .textSelection(.enabled)
+          VStack(spacing: 8) {
+            Button(action: {
+              copyToClipboard(totpInfo.sharedSecretKey)
+            }) {
+              HStack {
+                Text(totpInfo.sharedSecretKey)
+                  .font(.system(.body, design: .monospaced))
+                  .lineLimit(1)
+                  .minimumScaleFactor(0.5)
+
+                Spacer()
+
+                Image(systemName: showCopiedFeedback ? "checkmark" : "doc.on.doc")
+                  .foregroundColor(showCopiedFeedback ? .green : .blue)
+              }
+              .padding()
+              .background(Color.gray.opacity(0.1))
+              .cornerRadius(8)
+            }
+            .buttonStyle(.plain)
             .accessibilityIdentifier("totp-secret-key")
+
+            if showCopiedFeedback {
+              Text("Copied to clipboard!")
+                .font(.caption)
+                .foregroundColor(.green)
+                .transition(.opacity)
+            }
+          }
+          .animation(.easeInOut(duration: 0.2), value: showCopiedFeedback)
 
           TextField("Display Name (Optional)", text: $displayName)
             .textFieldStyle(.roundedBorder)
