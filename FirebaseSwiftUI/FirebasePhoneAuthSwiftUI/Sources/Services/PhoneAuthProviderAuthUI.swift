@@ -18,7 +18,7 @@ import SwiftUI
 
 public typealias VerificationID = String
 
-public class PhoneAuthProviderAuthUI: @preconcurrency PhoneAuthProviderAuthUIProtocol, AuthProviderUI {
+public class PhoneAuthProviderAuthUI: PhoneAuthProviderAuthUIProtocol, AuthProviderUI {
   public let id: String = "phone"
   
   public var provider: AuthProviderSwift { self }
