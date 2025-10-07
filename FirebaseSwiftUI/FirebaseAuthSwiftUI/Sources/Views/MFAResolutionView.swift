@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseCore
 import FirebaseAuth
 import SwiftUI
 
@@ -109,8 +110,7 @@ public struct MFAResolutionView {
 
 extension MFAResolutionView: View {
   public var body: some View {
-    ScrollView {
-      VStack(spacing: 24) {
+    VStack(spacing: 24) {
         // Header
         VStack(spacing: 12) {
           Image(systemName: "lock.shield")
@@ -180,9 +180,8 @@ extension MFAResolutionView: View {
           .accessibilityIdentifier("cancel-button")
         }
         .padding(.horizontal)
-      }
-      .padding(.vertical, 20)
     }
+    .padding(.vertical, 20)
   }
 
   @ViewBuilder
@@ -377,7 +376,37 @@ private extension MFAHint {
   }
 }
 
-#Preview {
+#Preview("Phone SMS Only") {
+  FirebaseOptions.dummyConfigurationForPreview()
   let authService = AuthService()
+  authService.currentMFARequired = MFARequired(hints: [
+    .phone(displayName: "Work Phone", uid: "phone-uid-1", phoneNumber: "+15551234567")
+  ])
+  return MFAResolutionView().environment(authService)
+}
+
+#Preview("TOTP Only") {
+  FirebaseOptions.dummyConfigurationForPreview()
+  let authService = AuthService()
+  authService.currentMFARequired = MFARequired(hints: [
+    .totp(displayName: "Authenticator App", uid: "totp-uid-1")
+  ])
+  return MFAResolutionView().environment(authService)
+}
+
+#Preview("Multiple Methods") {
+  FirebaseOptions.dummyConfigurationForPreview()
+  let authService = AuthService()
+  authService.currentMFARequired = MFARequired(hints: [
+    .phone(displayName: "Mobile", uid: "phone-uid-1", phoneNumber: "+15551234567"),
+    .totp(displayName: "Google Authenticator", uid: "totp-uid-1")
+  ])
+  return MFAResolutionView().environment(authService)
+}
+
+#Preview("No MFA Required") {
+  FirebaseOptions.dummyConfigurationForPreview()
+  let authService = AuthService()
+  // currentMFARequired is nil by default
   return MFAResolutionView().environment(authService)
 }
