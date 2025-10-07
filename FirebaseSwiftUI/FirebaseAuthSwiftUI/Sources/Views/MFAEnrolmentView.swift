@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import FirebaseAuth
+import FirebaseCore
 import SwiftUI
 
 private enum FocusableField: Hashable {
@@ -583,7 +584,57 @@ extension MFAEnrolmentView: View {
   }
 }
 
-#Preview {
-  MFAEnrolmentView()
-    .environment(AuthService())
+#Preview("MFA Enabled - Both Methods") {
+  FirebaseOptions.dummyConfigurationForPreview()
+  let config = AuthConfiguration(
+    mfaEnabled: true,
+    allowedSecondFactors: [.sms, .totp]
+  )
+  let authService = AuthService(configuration: config)
+  return MFAEnrolmentView()
+    .environment(authService)
+}
+
+#Preview("MFA Disabled") {
+  FirebaseOptions.dummyConfigurationForPreview()
+  let config = AuthConfiguration(
+    mfaEnabled: false,
+    allowedSecondFactors: []
+  )
+  let authService = AuthService(configuration: config)
+  return MFAEnrolmentView()
+    .environment(authService)
+}
+
+#Preview("No Allowed Factors") {
+  FirebaseOptions.dummyConfigurationForPreview()
+  let config = AuthConfiguration(
+    mfaEnabled: true,
+    allowedSecondFactors: []
+  )
+  let authService = AuthService(configuration: config)
+  return MFAEnrolmentView()
+    .environment(authService)
+}
+
+#Preview("SMS Only") {
+  FirebaseOptions.dummyConfigurationForPreview()
+  let config = AuthConfiguration(
+    mfaEnabled: true,
+    allowedSecondFactors: [.sms]
+  )
+  let authService = AuthService(configuration: config)
+  return MFAEnrolmentView()
+    .environment(authService)
+}
+
+#Preview("TOTP Only") {
+  FirebaseOptions.dummyConfigurationForPreview()
+  let config = AuthConfiguration(
+    mfaEnabled: true,
+    allowedSecondFactors: [.totp]
+  )
+  let authService = AuthService(configuration: config)
+  return MFAEnrolmentView()
+    .environment(authService)
 }
