@@ -211,13 +211,20 @@ public struct MFAEnrolmentView {
 extension MFAEnrolmentView: View {
   public var body: some View {
     VStack(spacing: 16) {
-      // Cancel button
+      // Back button
       HStack {
-        Button("Cancel") {
+        Button(action: {
           cancelEnrollment()
+        }) {
+          HStack(spacing: 4) {
+            Image(systemName: "chevron.left")
+              .font(.system(size: 17, weight: .medium))
+            Text("Back")
+              .font(.system(size: 17))
+          }
+          .foregroundColor(.blue)
         }
-        .foregroundColor(.blue)
-        .accessibilityIdentifier("cancel-button")
+        .accessibilityIdentifier("mfa-back-button")
         Spacer()
       }
       .padding(.horizontal)
@@ -507,7 +514,7 @@ extension MFAEnrolmentView: View {
             .font(.title2)
             .fontWeight(.semibold)
 
-          Text("Use your authenticator app to scan this QR code")
+          Text("Scan with your authenticator app or tap to open directly")
             .font(.body)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
@@ -515,12 +522,29 @@ extension MFAEnrolmentView: View {
           // QR Code generated from the otpauth:// URI
           if let qrURL = totpInfo.qrCodeURL,
              let qrImage = generateQRCode(from: qrURL.absoluteString) {
-            Image(uiImage: qrImage)
-              .interpolation(.none)
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 200, height: 200)
-              .accessibilityIdentifier("qr-code-image")
+            Button(action: {
+              UIApplication.shared.open(qrURL)
+            }) {
+              VStack(spacing: 12) {
+                Image(uiImage: qrImage)
+                  .interpolation(.none)
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+                  .frame(width: 200, height: 200)
+                  .accessibilityIdentifier("qr-code-image")
+                
+                HStack(spacing: 6) {
+                  Image(systemName: "arrow.up.forward.app.fill")
+                    .font(.caption)
+                  Text("Tap to open in authenticator app")
+                    .font(.caption)
+                    .fontWeight(.medium)
+                }
+                .foregroundColor(.blue)
+              }
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("open-authenticator-button")
           } else {
             RoundedRectangle(cornerRadius: 8)
               .fill(Color.gray.opacity(0.3))
