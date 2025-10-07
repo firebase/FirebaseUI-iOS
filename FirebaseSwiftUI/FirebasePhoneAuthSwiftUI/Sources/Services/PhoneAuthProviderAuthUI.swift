@@ -18,8 +18,14 @@ import SwiftUI
 
 public typealias VerificationID = String
 
-public class PhoneAuthProviderAuthUI: @preconcurrency PhoneAuthProviderAuthUIProtocol {
+public class PhoneAuthProviderAuthUI: PhoneAuthProviderAuthUIProtocol, AuthProviderUI {
   public let id: String = "phone"
+  
+  public var provider: AuthProviderSwift { self }
+  
+  // Store verification details for the signIn method
+  private var storedVerificationID: String?
+  private var storedVerificationCode: String?
 
   @MainActor public func authButton() -> AnyView {
     AnyView(PhoneAuthButtonView())
@@ -36,5 +42,21 @@ public class PhoneAuthProviderAuthUI: @preconcurrency PhoneAuthProviderAuthUIPro
           continuation.resume(returning: verificationID!)
         }
     }
+  }
+  
+  // Set verification details before calling signIn
+  public func setVerificationDetails(verificationID: String, verificationCode: String) {
+    self.storedVerificationID = verificationID
+    self.storedVerificationCode = verificationCode
+  }
+  
+  @MainActor public func createAuthCredential() async throws -> AuthCredential {
+    guard let verificationID = storedVerificationID,
+          let verificationCode = storedVerificationCode else {
+      throw AuthServiceError.invalidPhoneAuthenticationArguments("please call setVerificationDetails() before creating Phone Auth credential")
+    }
+    
+    return PhoneAuthProvider.provider()
+      .credential(withVerificationID: verificationID, verificationCode: verificationCode)
   }
 }

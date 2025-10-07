@@ -15,22 +15,21 @@
 @preconcurrency import FirebaseAuth
 import SwiftUI
 
-public protocol ExternalAuthProvider {
+public protocol AuthProviderSwift {
+  @MainActor func createAuthCredential() async throws -> AuthCredential
+}
+
+public protocol AuthProviderUI {
   var id: String { get }
   @MainActor func authButton() -> AnyView
+  var provider: AuthProviderSwift { get }
 }
 
-public protocol GoogleProviderAuthUIProtocol: ExternalAuthProvider {
-  @MainActor func signInWithGoogle(clientID: String) async throws -> AuthCredential
+public protocol DeleteUserSwift {
   @MainActor func deleteUser(user: User) async throws
 }
 
-public protocol FacebookProviderAuthUIProtocol: ExternalAuthProvider {
-  @MainActor func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential
-  @MainActor func deleteUser(user: User) async throws
-}
-
-public protocol PhoneAuthProviderAuthUIProtocol: ExternalAuthProvider {
+public protocol PhoneAuthProviderAuthUIProtocol: AuthProviderSwift {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
 }
 
@@ -41,7 +40,7 @@ public enum AuthenticationState {
 }
 
 public enum AuthenticationFlow {
-  case login
+  case signIn
   case signUp
 }
 
@@ -50,6 +49,10 @@ public enum AuthView {
   case passwordRecovery
   case emailLink
   case updatePassword
+}
+
+public enum SignInOutcome: @unchecked Sendable {
+  case signedIn(AuthDataResult?)
 }
 
 @MainActor
@@ -95,7 +98,7 @@ public final class AuthService {
   public let string: StringUtils
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
-  public var authenticationFlow: AuthenticationFlow = .login
+  public var authenticationFlow: AuthenticationFlow = .signIn
   public var errorMessage = ""
   public let passwordPrompt: PasswordPromptCoordinator = .init()
 
@@ -137,30 +140,14 @@ public final class AuthService {
 
   // MARK: - Provider APIs
 
-  private var unsafeGoogleProvider: (any GoogleProviderAuthUIProtocol)?
-  private var unsafeFacebookProvider: (any FacebookProviderAuthUIProtocol)?
-  private var unsafePhoneAuthProvider: (any PhoneAuthProviderAuthUIProtocol)?
-
   private var listenerManager: AuthListenerManager?
   public var signedInCredential: AuthCredential?
 
   var emailSignInEnabled = false
 
-  private var providers: [ExternalAuthProvider] = []
-  public func register(provider: ExternalAuthProvider) {
-    switch provider {
-    case let google as GoogleProviderAuthUIProtocol:
-      unsafeGoogleProvider = google
-      providers.append(provider)
-    case let facebook as FacebookProviderAuthUIProtocol:
-      unsafeFacebookProvider = facebook
-      providers.append(provider)
-    case let phone as PhoneAuthProviderAuthUIProtocol:
-      unsafePhoneAuthProvider = phone
-      providers.append(provider)
-    default:
-      break
-    }
+  private var providers: [AuthProviderUI] = []
+  public func registerProvider(provider: AuthProviderUI) {
+    providers.append(provider)
   }
 
   public func renderButtons(spacing: CGFloat = 16) -> AnyView {
@@ -173,31 +160,10 @@ public final class AuthService {
     )
   }
 
-  private var googleProvider: any GoogleProviderAuthUIProtocol {
-    get throws {
-      guard let provider = unsafeGoogleProvider else {
-        fatalError("`GoogleProviderAuthUI` has not been configured")
-      }
-      return provider
-    }
-  }
-
-  private var facebookProvider: any FacebookProviderAuthUIProtocol {
-    get throws {
-      guard let provider = unsafeFacebookProvider else {
-        fatalError("`FacebookProviderAuthUI` has not been configured")
-      }
-      return provider
-    }
-  }
-
-  private var phoneAuthProvider: any PhoneAuthProviderAuthUIProtocol {
-    get throws {
-      guard let provider = unsafePhoneAuthProvider else {
-        fatalError("`PhoneAuthProviderAuthUI` has not been configured")
-      }
-      return provider
-    }
+  public func signIn(_ provider: AuthProviderSwift) async throws -> SignInOutcome {
+    let credential = try await provider.createAuthCredential()
+    let result = try await signIn(credentials: credential)
+    return result
   }
 
   // MARK: - End Provider APIs
@@ -256,12 +222,14 @@ public final class AuthService {
     }
   }
 
-  public func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws {
+  public func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws -> SignInOutcome {
     if currentUser == nil {
       throw AuthServiceError.noCurrentUser
     }
     do {
-      try await currentUser?.link(with: credentials)
+      let result = try await currentUser?.link(with: credentials)
+      updateAuthenticationState()
+      return .signedIn(result)
     } catch let error as NSError {
       if error.code == AuthErrorCode.emailAlreadyInUse.rawValue {
         let context = AccountMergeConflictContext(
@@ -276,16 +244,17 @@ public final class AuthService {
     }
   }
 
-  public func signIn(credentials: AuthCredential) async throws {
+  public func signIn(credentials: AuthCredential) async throws -> SignInOutcome {
     authenticationState = .authenticating
     do {
       if shouldHandleAnonymousUpgrade {
-        try await handleAutoUpgradeAnonymousUser(credentials: credentials)
+        return try await handleAutoUpgradeAnonymousUser(credentials: credentials)
       } else {
         let result = try await auth.signIn(with: credentials)
         signedInCredential = result.credential ?? credentials
+        updateAuthenticationState()
+        return .signedIn(result)
       }
-      updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
       errorMessage = string.localizedErrorMessage(
@@ -295,7 +264,7 @@ public final class AuthService {
     }
   }
 
-  func sendEmailVerification() async throws {
+  public func sendEmailVerification() async throws {
     do {
       if let user = currentUser {
         // Requires running on MainActor as passing to sendEmailVerification() which is non-isolated
@@ -327,13 +296,16 @@ public extension AuthService {
         if providerId == EmailAuthProviderID {
           let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
           try await operation(on: user)
-        } else if providerId == FacebookAuthProviderID {
-          try await facebookProvider.deleteUser(user: user)
-        } else if providerId == GoogleAuthProviderID {
-          try await googleProvider.deleteUser(user: user)
+        } else {
+          // Find provider by matching ID and ensure it can delete users
+          guard let matchingProvider = providers.first(where: { $0.id == providerId }),
+                let provider = matchingProvider.provider as? DeleteUserSwift else {
+            throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
+          }
+          
+          try await provider.deleteUser(user: user)
         }
       }
-
     } catch {
       errorMessage = string.localizedErrorMessage(
         for: error
@@ -369,23 +341,24 @@ public extension AuthService {
     return self
   }
 
-  func signIn(withEmail email: String, password: String) async throws {
+  func signIn(email: String, password: String) async throws -> SignInOutcome {
     let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-    try await signIn(credentials: credential)
+    return try await signIn(credentials: credential)
   }
 
-  func createUser(withEmail email: String, password: String) async throws {
+  func createUser(email email: String, password: String) async throws -> SignInOutcome {
     authenticationState = .authenticating
 
     do {
       if shouldHandleAnonymousUpgrade {
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-        try await handleAutoUpgradeAnonymousUser(credentials: credential)
+        return try await handleAutoUpgradeAnonymousUser(credentials: credential)
       } else {
         let result = try await auth.createUser(withEmail: email, password: password)
         signedInCredential = result.credential
+        updateAuthenticationState()
+        return .signedIn(result)
       }
-      updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
       errorMessage = string.localizedErrorMessage(
@@ -395,7 +368,7 @@ public extension AuthService {
     }
   }
 
-  func sendPasswordRecoveryEmail(to email: String) async throws {
+  func sendPasswordRecoveryEmail(email: String) async throws {
     do {
       try await auth.sendPasswordReset(withEmail: email)
     } catch {
@@ -410,7 +383,7 @@ public extension AuthService {
 // MARK: - Email Link Sign In
 
 public extension AuthService {
-  func sendEmailSignInLink(to email: String) async throws {
+  func sendEmailSignInLink(email: String) async throws {
     do {
       let actionCodeSettings = try updateActionCodeSettings()
       try await auth.sendSignInLink(
@@ -488,43 +461,20 @@ public extension AuthService {
   }
 }
 
-// MARK: - Google Sign In
-
-public extension AuthService {
-  func signInWithGoogle() async throws {
-    guard let clientID = auth.app?.options.clientID else {
-      throw AuthServiceError
-        .clientIdNotFound(
-          "OAuth client ID not found. Please make sure Google Sign-In is enabled in the Firebase console. You may have to download a new GoogleService-Info.plist file after enabling Google Sign-In."
-        )
-    }
-    let credential = try await googleProvider.signInWithGoogle(clientID: clientID)
-
-    try await signIn(credentials: credential)
-  }
-}
-
-// MARK: - Facebook Sign In
-
-public extension AuthService {
-  func signInWithFacebook(limitedLogin: Bool = true) async throws {
-    let credential = try await facebookProvider
-      .signInWithFacebook(isLimitedLogin: limitedLogin)
-    try await signIn(credentials: credential)
-  }
-}
 
 // MARK: - Phone Auth Sign In
 
 public extension AuthService {
   func verifyPhoneNumber(phoneNumber: String) async throws -> String {
-    do {
-      return try await phoneAuthProvider.verifyPhoneNumber(phoneNumber: phoneNumber)
-    } catch {
-      errorMessage = string.localizedErrorMessage(
-        for: error
-      )
-      throw error
+    return try await withCheckedThrowingContinuation { continuation in
+      PhoneAuthProvider.provider()
+        .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
+          if let error = error {
+            continuation.resume(throwing: error)
+            return
+          }
+          continuation.resume(returning: verificationID!)
+        }
     }
   }
 
@@ -532,5 +482,39 @@ public extension AuthService {
     let credential = PhoneAuthProvider.provider()
       .credential(withVerificationID: verificationID, verificationCode: verificationCode)
     try await signIn(credentials: credential)
+  }
+}
+
+// MARK: - User Profile Management
+
+public extension AuthService {
+  func updateUserPhotoURL(url: URL) async throws {
+    guard let user = currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
+    
+    do {
+      let changeRequest = user.createProfileChangeRequest()
+      changeRequest.photoURL = url
+      try await changeRequest.commitChanges()
+    } catch {
+      errorMessage = string.localizedErrorMessage(for: error)
+      throw error
+    }
+  }
+  
+  func updateUserDisplayName(name: String) async throws {
+    guard let user = currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
+    
+    do {
+      let changeRequest = user.createProfileChangeRequest()
+      changeRequest.displayName = name
+      try await changeRequest.commitChanges()
+    } catch {
+      errorMessage = string.localizedErrorMessage(for: error)
+      throw error
+    }
   }
 }

@@ -65,7 +65,8 @@ extension SignInWithFacebookButton: View {
     Button(action: {
       Task {
         do {
-          try await authService.signInWithFacebook(limitedLogin: limitedLogin)
+          let facebookProvider = FacebookProviderAuthUI(isLimitedLogin: limitedLogin)
+          try await authService.signIn(facebookProvider)
         } catch {
           switch error {
           case FacebookProviderError.signInCancelled:

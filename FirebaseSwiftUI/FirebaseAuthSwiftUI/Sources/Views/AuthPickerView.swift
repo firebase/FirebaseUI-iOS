@@ -23,7 +23,7 @@ public struct AuthPickerView {
 
   private func switchFlow() {
     authService.authenticationFlow = authService
-      .authenticationFlow == .login ? .signUp : .login
+      .authenticationFlow == .signIn ? .signUp : .signIn
   }
 
   private var isAuthModalPresented: Binding<Bool> {
@@ -59,7 +59,7 @@ extension AuthPickerView: View {
             EmailLinkView()
           case .authPicker:
             if authService.emailSignInEnabled {
-              Text(authService.authenticationFlow == .login ? authService.string
+              Text(authService.authenticationFlow == .signIn ? authService.string
                 .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
               Divider()
               EmailAuthView()
@@ -71,7 +71,7 @@ extension AuthPickerView: View {
               Divider()
               HStack {
                 Text(authService
-                  .authenticationFlow == .login ? authService.string.dontHaveAnAccountYetLabel :
+                  .authenticationFlow == .signIn ? authService.string.dontHaveAnAccountYetLabel :
                   authService.string.alreadyHaveAnAccountLabel)
                 Button(action: {
                   withAnimation {

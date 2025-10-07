@@ -31,7 +31,7 @@ public enum FacebookProviderError: Error {
   case authenticationToken(String)
 }
 
-public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
+public class FacebookProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUserSwift {
   public let id: String = "facebook"
   let scopes: [String]
   let shortName = "Facebook"
@@ -41,20 +41,22 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
   private var shaNonce: String?
   // Needed for reauthentication
   var isLimitedLogin: Bool = true
+  
+  public var provider: AuthProviderSwift { self }
 
-  @MainActor private static var _shared: FacebookProviderAuthUI =
-    .init(scopes: kDefaultFacebookScopes)
+  @MainActor private static var _shared: FacebookProviderAuthUI = FacebookProviderAuthUI(scopes: kDefaultFacebookScopes)
 
   @MainActor public static var shared: FacebookProviderAuthUI {
     return _shared
   }
 
-  @MainActor public static func configureProvider(scopes: [String]? = nil) {
-    _shared = FacebookProviderAuthUI(scopes: scopes)
+  @MainActor public static func configureProvider(scopes: [String]? = nil, isLimitedLogin: Bool = true) {
+    _shared = FacebookProviderAuthUI(scopes: scopes, isLimitedLogin: isLimitedLogin)
   }
 
-  private init(scopes: [String]? = nil) {
+  public init(scopes: [String]? = nil, isLimitedLogin: Bool = true) {
     self.scopes = scopes ?? kDefaultFacebookScopes
+    self.isLimitedLogin = isLimitedLogin
   }
 
   @MainActor public func authButton() -> AnyView {
@@ -66,9 +68,9 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
     try await operation(on: user)
   }
 
-  @MainActor public func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential {
+
+  @MainActor public func createAuthCredential() async throws -> AuthCredential {
     let loginType: LoginTracking = isLimitedLogin ? .limited : .enabled
-    self.isLimitedLogin = isLimitedLogin
 
     guard let configuration: LoginConfiguration = {
       if loginType == .limited {

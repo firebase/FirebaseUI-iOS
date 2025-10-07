@@ -41,7 +41,7 @@ public struct EmailAuthView {
   public init() {}
 
   private var isValid: Bool {
-    return if authService.authenticationFlow == .login {
+    return if authService.authenticationFlow == .signIn {
       !email.isEmpty && !password.isEmpty
     } else {
       !email.isEmpty && !password.isEmpty && password == confirmPassword
@@ -50,13 +50,13 @@ public struct EmailAuthView {
 
   private func signInWithEmailPassword() async {
     do {
-      try await authService.signIn(withEmail: email, password: password)
+      try await authService.signIn(email: email, password: password)
     } catch {}
   }
 
   private func createUserWithEmailPassword() async {
     do {
-      try await authService.createUser(withEmail: email, password: password)
+      try await authService.createUser(email: email, password: password)
     } catch {}
   }
 }
@@ -98,7 +98,7 @@ extension EmailAuthView: View {
       .padding(.bottom, 8)
       .accessibilityIdentifier("password-field")
 
-      if authService.authenticationFlow == .login {
+      if authService.authenticationFlow == .signIn {
         Button(action: {
           authService.authView = .passwordRecovery
         }) {
@@ -127,12 +127,12 @@ extension EmailAuthView: View {
 
       Button(action: {
         Task {
-          if authService.authenticationFlow == .login { await signInWithEmailPassword() }
+          if authService.authenticationFlow == .signIn { await signInWithEmailPassword() }
           else { await createUserWithEmailPassword() }
         }
       }) {
         if authService.authenticationState != .authenticating {
-          Text(authService.authenticationFlow == .login ? authService.string
+          Text(authService.authenticationFlow == .signIn ? authService.string
             .signInWithEmailButtonLabel : authService.string.signUpWithEmailButtonLabel)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)

@@ -29,19 +29,21 @@ public enum GoogleProviderError: Error {
   case user(String)
 }
 
-public class GoogleProviderAuthUI: @preconcurrency GoogleProviderAuthUIProtocol {
+public class GoogleProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUserSwift {
   public let id: String = "google"
   let scopes: [String]
   let shortName = "Google"
   let providerId = "google.com"
   public let clientID: String
+  
+  public var provider: AuthProviderSwift { self }
+  
   public init(scopes: [String]? = nil, clientID: String = FirebaseApp.app()!.options.clientID!) {
     self.scopes = scopes ?? kDefaultScopes
     self.clientID = clientID
   }
 
   @MainActor public func authButton() -> AnyView {
-    // Moved to SignInWithGoogleButton so we could sign in via AuthService
     AnyView(SignInWithGoogleButton())
   }
 
@@ -50,7 +52,7 @@ public class GoogleProviderAuthUI: @preconcurrency GoogleProviderAuthUIProtocol 
     try await operation(on: user)
   }
 
-  @MainActor public func signInWithGoogle(clientID: String) async throws -> AuthCredential {
+  @MainActor public func createAuthCredential() async throws -> AuthCredential {
     guard let presentingViewController = await (UIApplication.shared.connectedScenes
       .first as? UIWindowScene)?.windows.first?.rootViewController else {
       throw GoogleProviderError
@@ -59,7 +61,7 @@ public class GoogleProviderAuthUI: @preconcurrency GoogleProviderAuthUIProtocol 
         )
     }
 
-    let config = GIDConfiguration(clientID: clientID)
+    let config = GIDConfiguration(clientID: self.clientID)
     GIDSignIn.sharedInstance.configuration = config
 
     return try await withCheckedThrowingContinuation { continuation in

@@ -26,6 +26,7 @@ import SwiftUI
 @MainActor
 public struct SignInWithGoogleButton {
   @Environment(AuthService.self) private var authService
+  private let googleProvider = GoogleProviderAuthUI()
 
   let customViewModel = GoogleSignInButtonViewModel(
     scheme: .light,
@@ -38,7 +39,7 @@ extension SignInWithGoogleButton: View {
   public var body: some View {
     GoogleSignInButton(viewModel: customViewModel) {
       Task {
-        try await authService.signInWithGoogle()
+        try await authService.signIn(googleProvider)
       }
     }
   }
