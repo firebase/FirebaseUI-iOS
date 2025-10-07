@@ -119,7 +119,7 @@ let package = Package(
     .target(
       name: "FirebaseDatabaseUI",
       dependencies: [
-        .product(name: "FirebaseDatabase", package: "Firebase"),
+        .product(name: "FirebaseDatabase", package: "firebase-ios-sdk"),
       ],
       path: "FirebaseDatabaseUI/Sources",
       exclude: ["Info.plist"],
@@ -132,7 +132,7 @@ let package = Package(
     .target(
       name: "FirebaseAuthUI",
       dependencies: [
-        .product(name: "FirebaseAuth", package: "Firebase"),
+        .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
         .product(name: "GULUserDefaults", package: "GoogleUtilities"),
       ],
       path: "FirebaseAuthUI/Sources",
@@ -163,8 +163,8 @@ let package = Package(
       name: "FirebaseFacebookAuthUI",
       dependencies: [
         "FirebaseAuthUI",
-        .product(name: "FacebookLogin", package: "Facebook"),
-        .product(name: "FacebookCore", package: "Facebook"),
+        .product(name: "FacebookLogin", package: "facebook-ios-sdk"),
+        .product(name: "FacebookCore", package: "facebook-ios-sdk"),
       ],
       path: "FirebaseFacebookAuthUI/Sources",
       exclude: ["Info.plist"],
@@ -180,7 +180,7 @@ let package = Package(
     .target(
       name: "FirebaseFirestoreUI",
       dependencies: [
-        .product(name: "FirebaseFirestore", package: "Firebase"),
+        .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
       ],
       path: "FirebaseFirestoreUI/Sources",
       exclude: ["Info.plist"],
@@ -194,7 +194,7 @@ let package = Package(
       name: "FirebaseGoogleAuthUI",
       dependencies: [
         "FirebaseAuthUI",
-        "GoogleSignIn",
+        .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS"),
       ],
       path: "FirebaseGoogleAuthUI/Sources",
       exclude: ["Info.plist"],
@@ -241,7 +241,7 @@ let package = Package(
     .target(
       name: "FirebaseStorageUI",
       dependencies: [
-        .product(name: "FirebaseStorage", package: "Firebase"),
+        .product(name: "FirebaseStorage", package: "firebase-ios-sdk"),
         .product(name: "SDWebImage", package: "SDWebImage"),
       ],
       path: "FirebaseStorageUI/Sources",
@@ -255,7 +255,7 @@ let package = Package(
     .target(
       name: "FirebaseAuthSwiftUI",
       dependencies: [
-        .product(name: "FirebaseAuth", package: "Firebase"),
+        .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
       ],
       path: "FirebaseSwiftUI/FirebaseAuthSwiftUI/Sources",
       resources: [
@@ -271,8 +271,8 @@ let package = Package(
       name: "FirebaseGoogleSwiftUI",
       dependencies: [
         "FirebaseAuthSwiftUI",
-        "GoogleSignIn",
-        .product(name: "GoogleSignInSwift", package: "GoogleSignIn"),
+        .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS"),
+        .product(name: "GoogleSignInSwift", package: "GoogleSignIn-iOS"),
       ],
       path: "FirebaseSwiftUI/FirebaseGoogleSwiftUI/Sources"
     ),
@@ -285,8 +285,8 @@ let package = Package(
       name: "FirebaseFacebookSwiftUI",
       dependencies: [
         "FirebaseAuthSwiftUI",
-        .product(name: "FacebookLogin", package: "Facebook"),
-        .product(name: "FacebookCore", package: "Facebook"),
+        .product(name: "FacebookLogin", package: "facebook-ios-sdk"),
+        .product(name: "FacebookCore", package: "facebook-ios-sdk"),
       ],
       path: "FirebaseSwiftUI/FirebaseFacebookSwiftUI/Sources"
     ),
