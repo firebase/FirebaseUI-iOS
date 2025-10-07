@@ -81,27 +81,22 @@ let package = Package(
   ],
   dependencies: [
     .package(
-      name: "Facebook",
       url: "https://github.com/facebook/facebook-ios-sdk.git",
       "17.0.0" ..< "18.0.0"
     ),
     .package(
-      name: "Firebase",
       url: "https://github.com/firebase/firebase-ios-sdk.git",
       "8.0.0" ..< "13.0.0"
     ),
     .package(
-      name: "GoogleSignIn",
       url: "https://github.com/google/GoogleSignIn-iOS",
       from: "7.0.0"
     ),
     .package(
-      name: "GoogleUtilities",
       url: "https://github.com/google/GoogleUtilities.git",
       "7.4.1" ..< "9.0.0"
     ),
     .package(
-      name: "SDWebImage",
       url: "https://github.com/SDWebImage/SDWebImage.git",
       from: "5.0.0"
     ),
