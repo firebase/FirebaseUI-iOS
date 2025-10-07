@@ -354,7 +354,7 @@ final class MFAEnrollmentUITests: XCTestCase {
   // MARK: - Navigation Tests
 
   @MainActor
-  func testCancelButtonNavigation() throws {
+  func testBackButtonNavigation() throws {
     let app = XCUIApplication()
     app.launchArguments.append("--auth-emulator")
     app.launchArguments.append("--mfa-enabled")
@@ -367,10 +367,10 @@ final class MFAEnrollmentUITests: XCTestCase {
     try signInToApp(app: app, email: email)
     try navigateToMFAEnrollment(app: app)
 
-    // Test cancel button exists
-    let cancelButton = app.buttons["cancel-button"]
-    XCTAssertTrue(cancelButton.exists, "Cancel button should exist")
-    XCTAssertTrue(cancelButton.isEnabled, "Cancel button should be enabled")
+    // Test back button exists
+    let cancelButton = app.buttons["mfa-back-button"]
+    XCTAssertTrue(cancelButton.exists, "Back button should exist")
+    XCTAssertTrue(cancelButton.isEnabled, "Back button should be enabled")
 
     // Tap cancel button
     cancelButton.tap()
