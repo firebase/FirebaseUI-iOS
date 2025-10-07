@@ -185,121 +185,140 @@ public struct MFAEnrolmentView {
       showCopiedFeedback = false
     }
   }
+  
+  private func generateQRCode(from string: String) -> UIImage? {
+    let data = Data(string.utf8)
+    
+    guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
+    filter.setValue(data, forKey: "inputMessage")
+    filter.setValue("H", forKey: "inputCorrectionLevel")
+    
+    guard let ciImage = filter.outputImage else { return nil }
+    
+    // Scale up the QR code for better quality
+    let transform = CGAffineTransform(scaleX: 10, y: 10)
+    let scaledImage = ciImage.transformed(by: transform)
+    
+    let context = CIContext()
+    guard let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) else {
+      return nil
+    }
+    
+    return UIImage(cgImage: cgImage)
+  }
 }
 
 extension MFAEnrolmentView: View {
   public var body: some View {
-    ScrollView {
-      VStack(spacing: 16) {
-        // Cancel button
-        HStack {
-          Button("Cancel") {
-            cancelEnrollment()
-          }
-          .foregroundColor(.blue)
-          .accessibilityIdentifier("cancel-button")
-          Spacer()
+    VStack(spacing: 16) {
+      // Cancel button
+      HStack {
+        Button("Cancel") {
+          cancelEnrollment()
         }
-        .padding(.horizontal)
+        .foregroundColor(.blue)
+        .accessibilityIdentifier("cancel-button")
+        Spacer()
+      }
+      .padding(.horizontal)
 
-        // Header
-        VStack {
-          Text("Set Up Two-Factor Authentication")
-            .font(.largeTitle)
-            .fontWeight(.bold)
-            .multilineTextAlignment(.center)
+      // Header
+      VStack {
+        Text("Set Up Two-Factor Authentication")
+          .font(.largeTitle)
+          .fontWeight(.bold)
+          .multilineTextAlignment(.center)
 
-          Text("Add an extra layer of security to your account")
-            .font(.subheadline)
+        Text("Add an extra layer of security to your account")
+          .font(.subheadline)
+          .foregroundColor(.secondary)
+          .multilineTextAlignment(.center)
+      }
+      .padding()
+
+      // Factor Type Selection (only if no session started)
+      if currentSession == nil {
+        if !authService.configuration.mfaEnabled {
+          VStack(spacing: 12) {
+            Image(systemName: "lock.slash")
+              .font(.system(size: 40))
+              .foregroundColor(.orange)
+
+            Text("Multi-Factor Authentication Disabled")
+              .font(.title2)
+              .fontWeight(.semibold)
+
+            Text(
+              "MFA is not enabled in the current configuration. Please contact your administrator."
+            )
+            .font(.body)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
-        }
-        .padding()
+          }
+          .padding(.horizontal)
+          .accessibilityIdentifier("mfa-disabled-message")
+        } else if allowedFactorTypes.isEmpty {
+          VStack(spacing: 12) {
+            Image(systemName: "exclamationmark.triangle")
+              .font(.system(size: 40))
+              .foregroundColor(.orange)
 
-        // Factor Type Selection (only if no session started)
-        if currentSession == nil {
-          if !authService.configuration.mfaEnabled {
-            VStack(spacing: 12) {
-              Image(systemName: "lock.slash")
-                .font(.system(size: 40))
-                .foregroundColor(.orange)
+            Text("No Authentication Methods Available")
+              .font(.title2)
+              .fontWeight(.semibold)
 
-              Text("Multi-Factor Authentication Disabled")
-                .font(.title2)
-                .fontWeight(.semibold)
-
-              Text(
-                "MFA is not enabled in the current configuration. Please contact your administrator."
-              )
+            Text("No MFA methods are configured as allowed. Please contact your administrator.")
               .font(.body)
               .foregroundColor(.secondary)
               .multilineTextAlignment(.center)
-            }
-            .padding(.horizontal)
-            .accessibilityIdentifier("mfa-disabled-message")
-          } else if allowedFactorTypes.isEmpty {
-            VStack(spacing: 12) {
-              Image(systemName: "exclamationmark.triangle")
-                .font(.system(size: 40))
-                .foregroundColor(.orange)
+          }
+          .padding(.horizontal)
+          .accessibilityIdentifier("no-factors-message")
+        } else {
+          VStack(alignment: .leading, spacing: 12) {
+            Text("Choose Authentication Method")
+              .font(.headline)
 
-              Text("No Authentication Methods Available")
-                .font(.title2)
-                .fontWeight(.semibold)
-
-              Text("No MFA methods are configured as allowed. Please contact your administrator.")
-                .font(.body)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-            }
-            .padding(.horizontal)
-            .accessibilityIdentifier("no-factors-message")
-          } else {
-            VStack(alignment: .leading, spacing: 12) {
-              Text("Choose Authentication Method")
-                .font(.headline)
-
-              Picker("Authentication Method", selection: $selectedFactorType) {
-                ForEach(allowedFactorTypes, id: \.self) { factorType in
-                  switch factorType {
-                  case .sms:
-                    Image(systemName: "message").tag(SecondFactorType.sms)
-                  case .totp:
-                    Image(systemName: "qrcode").tag(SecondFactorType.totp)
-                  }
+            Picker("Authentication Method", selection: $selectedFactorType) {
+              ForEach(allowedFactorTypes, id: \.self) { factorType in
+                switch factorType {
+                case .sms:
+                  Image(systemName: "message").tag(SecondFactorType.sms)
+                case .totp:
+                  Image(systemName: "qrcode").tag(SecondFactorType.totp)
                 }
               }
-              .pickerStyle(.segmented)
-              .accessibilityIdentifier("factor-type-picker")
             }
-            .padding(.horizontal)
+            .pickerStyle(.segmented)
+            .accessibilityIdentifier("factor-type-picker")
           }
-        }
-
-        // Content based on current state
-        if let session = currentSession {
-          enrollmentContent(for: session)
-        } else {
-          initialContent
-        }
-
-        // Error message
-        if !errorMessage.isEmpty {
-          Text(errorMessage)
-            .foregroundColor(.red)
-            .font(.caption)
-            .padding(.horizontal)
-            .accessibilityIdentifier("error-message")
+          .padding(.horizontal)
         }
       }
-      .padding(.horizontal, 16)
-      .padding(.vertical, 20)
-      .onAppear {
-        // Initialize selected factor type to first allowed type
-        if !allowedFactorTypes.contains(selectedFactorType),
-           let firstAllowed = allowedFactorTypes.first {
-          selectedFactorType = firstAllowed
-        }
+
+      // Content based on current state
+      if let session = currentSession {
+        enrollmentContent(for: session)
+      } else {
+        initialContent
+      }
+
+      // Error message
+      if !errorMessage.isEmpty {
+        Text(errorMessage)
+          .foregroundColor(.red)
+          .font(.caption)
+          .padding(.horizontal)
+          .accessibilityIdentifier("error-message")
+      }
+    }
+    .padding(.horizontal, 16)
+    .padding(.vertical, 20)
+    .onAppear {
+      // Initialize selected factor type to first allowed type
+      if !allowedFactorTypes.contains(selectedFactorType),
+         let firstAllowed = allowedFactorTypes.first {
+        selectedFactorType = firstAllowed
       }
     }
   }
@@ -493,26 +512,28 @@ extension MFAEnrolmentView: View {
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
 
-          // QR Code placeholder - in a real implementation, you'd generate and display the actual
-          // QR code
-          if let qrURL = totpInfo.qrCodeURL {
-            AsyncImage(url: qrURL) { image in
-              image
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-            } placeholder: {
-              RoundedRectangle(cornerRadius: 8)
-                .fill(Color.gray.opacity(0.3))
-                .overlay(
-                  VStack {
-                    ProgressView()
-                    Text("Loading QR Code...")
-                      .font(.caption)
-                  }
-                )
-            }
-            .frame(width: 200, height: 200)
-            .accessibilityIdentifier("qr-code-image")
+          // QR Code generated from the otpauth:// URI
+          if let qrURL = totpInfo.qrCodeURL,
+             let qrImage = generateQRCode(from: qrURL.absoluteString) {
+            Image(uiImage: qrImage)
+              .interpolation(.none)
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+              .frame(width: 200, height: 200)
+              .accessibilityIdentifier("qr-code-image")
+          } else {
+            RoundedRectangle(cornerRadius: 8)
+              .fill(Color.gray.opacity(0.3))
+              .frame(width: 200, height: 200)
+              .overlay(
+                VStack {
+                  Image(systemName: "exclamationmark.triangle")
+                    .font(.title)
+                    .foregroundColor(.orange)
+                  Text("Unable to generate QR Code")
+                    .font(.caption)
+                }
+              )
           }
 
           Text("Manual Entry Key:")
