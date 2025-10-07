@@ -594,7 +594,7 @@ extension MFAEnrolmentView: View {
           }
           .animation(.easeInOut(duration: 0.2), value: showCopiedFeedback)
 
-          TextField("Display Name (Optional)", text: $displayName)
+          TextField("Display Name", text: $displayName)
             .textFieldStyle(.roundedBorder)
             .accessibilityIdentifier("display-name-field")
             .padding(.horizontal)
