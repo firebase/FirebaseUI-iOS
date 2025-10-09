@@ -732,23 +732,23 @@ public extension AuthService {
   }
 
   func reauthenticateCurrentUser(on user: User) async throws {
-    if let providerId = signedInCredential?.provider {
-      if providerId == EmailAuthProviderID {
-        guard let email = user.email else {
-          throw AuthServiceError.invalidCredentials("User does not have an email address")
-        }
-        let password = try await passwordPrompt.confirmPassword()
-        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-        try await user.reauthenticate(with: credential)
-      } else if let matchingProvider = providers.first(where: { $0.id == providerId }) {
-        let credential = try await matchingProvider.provider.createAuthCredential()
-        try await user.reauthenticate(with: credential)
-      } else {
-        throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
-      }
-    } else {
+    guard let providerId = signedInCredential?.provider else {
       throw AuthServiceError
         .reauthenticationRequired("Recent login required to perform this operation.")
+    }
+    
+    if providerId == EmailAuthProviderID {
+      guard let email = user.email else {
+        throw AuthServiceError.invalidCredentials("User does not have an email address")
+      }
+      let password = try await passwordPrompt.confirmPassword()
+      let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+      try await user.reauthenticate(with: credential)
+    } else if let matchingProvider = providers.first(where: { $0.id == providerId }) {
+      let credential = try await matchingProvider.provider.createAuthCredential()
+      try await user.reauthenticate(with: credential)
+    } else {
+      throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
     }
   }
 
