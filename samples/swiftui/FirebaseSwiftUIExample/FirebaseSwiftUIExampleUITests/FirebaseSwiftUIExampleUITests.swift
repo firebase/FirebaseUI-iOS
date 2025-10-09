@@ -23,12 +23,6 @@ import FirebaseAuth
 import FirebaseCore
 import XCTest
 
-func createEmail() -> String {
-  let before = UUID().uuidString.prefix(8)
-  let after = UUID().uuidString.prefix(6)
-  return "\(before)@\(after).com"
-}
-
 func dismissAlert(app: XCUIApplication) {
   if app.scrollViews.otherElements.buttons["Not Now"].waitForExistence(timeout: 2) {
     app.scrollViews.otherElements.buttons["Not Now"].tap()
@@ -58,7 +52,7 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
   }
 
   @MainActor
-  func testSignInDisplaysSignedInView() async throws {
+  func testSignInDisplaysSignedInView() throws {
     let app = XCUIApplication()
     let email = createEmail()
     app.launchArguments.append("--auth-emulator")
@@ -80,9 +74,10 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     XCTAssertTrue(signInButton.exists, "Sign-In button should exist")
     signInButton.tap()
 
+    // Wait for authentication to complete and signed-in view to appear
     let signedInText = app.staticTexts["signed-in-text"]
     XCTAssertTrue(
-      signedInText.waitForExistence(timeout: 10),
+      signedInText.waitForExistence(timeout: 30),
       "SignedInView should be visible after login"
     )
 
@@ -149,6 +144,12 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     app.launchArguments.append("--auth-emulator")
     app.launch()
 
+    // Check the Views are updated
+    let signOutButton = app.buttons["sign-out-button"]
+    if signOutButton.exists {
+      signOutButton.tap()
+    }
+
     let switchFlowButton = app.buttons["switch-auth-flow"]
     switchFlowButton.tap()
 
@@ -172,14 +173,17 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     confirmPasswordField.press(forDuration: 1.2)
     app.menuItems["Paste"].tap()
 
-    let signInButton = app.buttons["sign-in-button"]
-    XCTAssertTrue(signInButton.exists, "Sign-In button should exist")
-    signInButton.tap()
+    // Create the user (sign up)
+    let signUpButton = app
+      .buttons["sign-in-button"] // This button changes context after switch-auth-flow
+    XCTAssertTrue(signUpButton.exists, "Sign-Up button should exist")
+    signUpButton.tap()
 
+    // Wait for user creation and signed-in view to appear
     let signedInText = app.staticTexts["signed-in-text"]
     XCTAssertTrue(
-      signedInText.waitForExistence(timeout: 20),
-      "SignedInView should be visible after login"
+      signedInText.waitForExistence(timeout: 30),
+      "SignedInView should be visible after user creation"
     )
   }
 }

@@ -25,6 +25,12 @@ public struct AuthConfiguration {
   public let emailLinkSignInActionCodeSettings: ActionCodeSettings?
   public let verifyEmailActionCodeSettings: ActionCodeSettings?
 
+    // MARK: - MFA Configuration
+
+  public let mfaEnabled: Bool
+  public let allowedSecondFactors: Set<SecondFactorType>
+  public let mfaIssuer: String
+
   public init(shouldHideCancelButton: Bool = false,
               interactiveDismissEnabled: Bool = true,
               shouldAutoUpgradeAnonymousUsers: Bool = false,
@@ -32,7 +38,10 @@ public struct AuthConfiguration {
               tosUrl: URL? = nil,
               privacyPolicyUrl: URL? = nil,
               emailLinkSignInActionCodeSettings: ActionCodeSettings? = nil,
-              verifyEmailActionCodeSettings: ActionCodeSettings? = nil) {
+              verifyEmailActionCodeSettings: ActionCodeSettings? = nil,
+              mfaEnabled: Bool = false,
+              allowedSecondFactors: Set<SecondFactorType> = [.sms, .totp],
+              mfaIssuer: String = "Firebase Auth") {
     self.shouldHideCancelButton = shouldHideCancelButton
     self.interactiveDismissEnabled = interactiveDismissEnabled
     self.shouldAutoUpgradeAnonymousUsers = shouldAutoUpgradeAnonymousUsers
@@ -41,5 +50,8 @@ public struct AuthConfiguration {
     self.privacyPolicyUrl = privacyPolicyUrl
     self.emailLinkSignInActionCodeSettings = emailLinkSignInActionCodeSettings
     self.verifyEmailActionCodeSettings = verifyEmailActionCodeSettings
+    self.mfaEnabled = mfaEnabled
+    self.allowedSecondFactors = allowedSecondFactors
+    self.mfaIssuer = mfaIssuer
   }
 }

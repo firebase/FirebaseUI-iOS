@@ -26,11 +26,17 @@ import FirebaseGoogleSwiftUI
 import FirebasePhoneAuthSwiftUI
 import SwiftUI
 
-struct ContentView: View {
+struct TestView: View {
   let authService: AuthService
 
   init() {
-    Auth.auth().signInAnonymously()
+    Auth.auth().useEmulator(withHost: "localhost", port: 9099)
+    Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+    Task {
+      try await testCreateUser()
+    }
+
+    let isMfaEnabled = ProcessInfo.processInfo.arguments.contains("--mfa-enabled")
 
     let actionCodeSettings = ActionCodeSettings()
     actionCodeSettings.handleCodeInApp = true
@@ -42,7 +48,7 @@ struct ContentView: View {
       tosUrl: URL(string: "https://example.com/tos"),
       privacyPolicyUrl: URL(string: "https://example.com/privacy"),
       emailLinkSignInActionCodeSettings: actionCodeSettings,
-      mfaEnabled: true
+      mfaEnabled: isMfaEnabled
     )
 
     authService = AuthService(

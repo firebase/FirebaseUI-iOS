@@ -49,6 +49,11 @@ extension SignedInView: View {
           authService.authView = .updatePassword
         }
         Divider()
+        Button("Manage Two-Factor Authentication") {
+          authService.authView = .mfaManagement
+        }
+        .accessibilityIdentifier("mfa-management-button")
+        Divider()
         Button(authService.string.signOutButtonLabel) {
           Task {
             do {

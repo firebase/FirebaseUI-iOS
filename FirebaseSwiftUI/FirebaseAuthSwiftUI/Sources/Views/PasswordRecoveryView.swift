@@ -42,6 +42,24 @@ public struct PasswordRecoveryView {
 extension PasswordRecoveryView: View {
   public var body: some View {
     VStack {
+      HStack {
+        Button(action: {
+          authService.authView = .authPicker
+        }) {
+          HStack(spacing: 4) {
+            Image(systemName: "chevron.left")
+              .font(.system(size: 17, weight: .medium))
+            Text(authService.string.backButtonLabel)
+              .font(.system(size: 17))
+          }
+          .foregroundColor(.blue)
+        }
+        .accessibilityIdentifier("password-recovery-back-button")
+
+        Spacer()
+      }
+      .padding(.horizontal)
+      .padding(.top, 8)
       Text(authService.string.passwordRecoveryTitle)
         .font(.largeTitle)
         .fontWeight(.bold)
@@ -79,14 +97,6 @@ extension PasswordRecoveryView: View {
     .sheet(item: $resultWrapper) { wrapper in
       resultSheet(wrapper.value)
     }
-    .navigationBarItems(leading: Button(action: {
-      authService.authView = .authPicker
-    }) {
-      Image(systemName: "chevron.left")
-        .foregroundColor(.blue)
-      Text(authService.string.backButtonLabel)
-        .foregroundColor(.blue)
-    }.accessibilityIdentifier("password-recovery-back-button"))
   }
 
   @ViewBuilder

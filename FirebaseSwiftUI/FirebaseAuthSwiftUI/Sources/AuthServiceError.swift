@@ -38,6 +38,8 @@ public enum AuthServiceError: LocalizedError {
   case accountMergeConflict(context: AccountMergeConflictContext)
   case invalidPhoneAuthenticationArguments(String)
   case providerNotFound(String)
+  case multiFactorAuth(String)
+  
 
   public var errorDescription: String? {
     switch self {
@@ -61,6 +63,8 @@ public enum AuthServiceError: LocalizedError {
       return description
     case let .invalidPhoneAuthenticationArguments(description):
         return description
+    case let .multiFactorAuth(description):
+      return description
     }
   }
 }

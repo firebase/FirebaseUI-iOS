@@ -34,6 +34,24 @@ public struct EmailLinkView {
 extension EmailLinkView: View {
   public var body: some View {
     VStack {
+      HStack {
+        Button(action: {
+          authService.authView = .authPicker
+        }) {
+          HStack(spacing: 4) {
+            Image(systemName: "chevron.left")
+              .font(.system(size: 17, weight: .medium))
+            Text(authService.string.backButtonLabel)
+              .font(.system(size: 17))
+          }
+          .foregroundColor(.blue)
+        }
+        .accessibilityIdentifier("email-link-back-button")
+
+        Spacer()
+      }
+      .padding(.horizontal)
+      .padding(.top, 8)
       Text(authService.string.signInWithEmailLinkViewTitle)
         .accessibilityIdentifier("email-link-title-text")
       LabeledContent {
@@ -61,6 +79,7 @@ extension EmailLinkView: View {
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
       Text(authService.errorMessage).foregroundColor(.red)
+      Spacer()
     }.sheet(isPresented: $showModal) {
       VStack {
         Text(authService.string.signInWithEmailLinkViewMessage)
@@ -78,14 +97,6 @@ extension EmailLinkView: View {
         } catch {}
       }
     }
-    .navigationBarItems(leading: Button(action: {
-      authService.authView = .authPicker
-    }) {
-      Image(systemName: "chevron.left")
-        .foregroundColor(.blue)
-      Text(authService.string.backButtonLabel)
-        .foregroundColor(.blue)
-    }.accessibilityIdentifier("email-link-back-button"))
   }
 }
 
