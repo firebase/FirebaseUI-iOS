@@ -17,7 +17,14 @@ import FirebaseAuthSwiftUI
 import FirebaseCore
 import SwiftUI
 
-public class TwitterProviderAuthUI: AuthProviderSwift, AuthProviderUI {
+public class TwitterProviderSwift: AuthProviderSwift {
+  public let scopes: [String]
+  let providerId = "twitter.com"
+
+  public init(scopes: [String] = ["user.readwrite"]) {
+    self.scopes = scopes
+  }
+
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
     let provider = OAuthProvider(providerID: providerId)
     return try await withCheckedThrowingContinuation { continuation in
@@ -35,19 +42,22 @@ public class TwitterProviderAuthUI: AuthProviderSwift, AuthProviderUI {
       }
     }
   }
+}
 
-  public var provider: AuthProviderSwift { self }
+public class TwitterProviderAuthUI: TwitterProviderSwift, AuthProviderUI {
+  public init() {
+    super.init()
+  }
+
   public let id: String = "twitter"
-  let providerId = "twitter.com"
+  public var provider: AuthProviderSwift { self }
 
   @MainActor public func authButton() -> AnyView {
     AnyView(SignInWithTwitterButton())
   }
 
-// TODO: need to implement delete user protocol
+  // TODO: need to implement delete user protocol
 //  @MainActor public func deleteUser(user _: User) async throws {
 //    <#code#>
 //  }
-
-  public init() {}
 }
