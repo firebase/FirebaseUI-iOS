@@ -24,14 +24,13 @@ import FirebaseAuthSwiftUI
 import FirebaseFacebookSwiftUI
 import FirebaseGoogleSwiftUI
 import FirebasePhoneAuthSwiftUI
+import FirebaseTwitterSwiftUI 
 import SwiftUI
 
 struct ContentView: View {
   let authService: AuthService
 
   init() {
-    Auth.auth().signInAnonymously()
-
     let actionCodeSettings = ActionCodeSettings()
     actionCodeSettings.handleCodeInApp = true
     actionCodeSettings
@@ -52,6 +51,7 @@ struct ContentView: View {
     .withPhoneSignIn()
     .withFacebookSignIn()
     .withEmailSignIn()
+    .withTwitterSignIn()
   }
 
   var body: some View {
