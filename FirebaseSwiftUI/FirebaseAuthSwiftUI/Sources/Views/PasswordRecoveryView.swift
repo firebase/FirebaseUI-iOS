@@ -55,7 +55,11 @@ extension PasswordRecoveryView: View {
           .foregroundColor(.blue)
         }
         .accessibilityIdentifier("password-recovery-back-button")
+
+        Spacer()
       }
+      .padding(.horizontal)
+      .padding(.top, 8)
       Text(authService.string.passwordRecoveryTitle)
         .font(.largeTitle)
         .fontWeight(.bold)
