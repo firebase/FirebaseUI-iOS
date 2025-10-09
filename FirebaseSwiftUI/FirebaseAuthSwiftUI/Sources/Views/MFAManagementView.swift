@@ -15,6 +15,10 @@
 import FirebaseAuth
 import SwiftUI
 
+extension MultiFactorInfo: Identifiable {
+  public var id: String { uid }
+}
+
 @MainActor
 public struct MFAManagementView {
   @Environment(AuthService.self) private var authService
@@ -131,7 +135,7 @@ extension MFAManagementView: View {
             .font(.headline)
             .padding(.horizontal)
 
-          ForEach(enrolledFactors, id: \.uid) { factor in
+          ForEach(enrolledFactors) { factor in
             factorRow(factor: factor)
           }
 
