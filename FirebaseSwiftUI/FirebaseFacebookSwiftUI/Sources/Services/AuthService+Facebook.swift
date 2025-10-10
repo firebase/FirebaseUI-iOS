@@ -25,7 +25,7 @@ public extension AuthService {
   @discardableResult
   func withFacebookSignIn(scopes scopes: [String]? = nil) -> AuthService {
     FacebookProviderAuthUI.configureProvider(scopes: scopes)
-    registerProvider(provider: FacebookProviderAuthUI.shared)
+    registerProvider(providerWithButton: FacebookProviderAuthUI.shared)
     return self
   }
 }
