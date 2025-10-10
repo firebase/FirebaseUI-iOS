@@ -32,7 +32,21 @@ extension SignInWithTwitterButton: View {
         try await authService.signIn(provider)
       }
     }) {
-      Text("Sign in with Twitter")
+      HStack {
+        Image("twitter_logo", bundle: .module)
+          .resizable()
+          .renderingMode(.template)
+          .scaledToFit()
+          .frame(width: 24, height: 24)
+          .foregroundColor(.white)
+        Text("Sign in with Twitter")
+          .fontWeight(.semibold)
+          .foregroundColor(.white)
+      }
+      .frame(maxWidth: .infinity, alignment: .leading)
+      .padding()
+      .background(Color.black)
+      .cornerRadius(8)
     }
   }
 }
