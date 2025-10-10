@@ -49,9 +49,10 @@ struct ContentView: View {
     )
     .withGoogleSignIn()
     .withPhoneSignIn()
+    .withTwitterSignIn()
     .withFacebookSignIn()
     .withEmailSignIn()
-    .withTwitterSignIn()
+
   }
 
   var body: some View {
