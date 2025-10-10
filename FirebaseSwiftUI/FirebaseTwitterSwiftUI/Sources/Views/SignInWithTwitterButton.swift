@@ -48,5 +48,6 @@ extension SignInWithTwitterButton: View {
       .background(Color.black)
       .cornerRadius(8)
     }
+    .accessibilityIdentifier("sign-in-with-twitter-button")
   }
 }

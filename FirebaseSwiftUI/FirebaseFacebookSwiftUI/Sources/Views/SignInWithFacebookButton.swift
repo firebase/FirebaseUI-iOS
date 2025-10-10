@@ -91,6 +91,7 @@ extension SignInWithFacebookButton: View {
       .background(Color.blue)
       .cornerRadius(8)
     }
+    .accessibilityIdentifier("sign-in-with-facebook-button")
     .alert(isPresented: $showCanceledAlert) {
       Alert(
         title: Text(authService.string.facebookLoginCancelledLabel),

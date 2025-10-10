@@ -52,6 +52,40 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
   }
 
   @MainActor
+  func testSignInButtonsExist() throws {
+    let app = XCUIApplication()
+    app.launch()
+    
+    // Check for Twitter/X sign-in button
+    let twitterButton = app.buttons["sign-in-with-twitter-button"]
+    XCTAssertTrue(
+      twitterButton.waitForExistence(timeout: 5),
+      "Twitter/X sign-in button should exist"
+    )
+    
+    // Check for Google sign-in button
+    let googleButton = app.buttons["sign-in-with-google-button"]
+    XCTAssertTrue(
+      googleButton.waitForExistence(timeout: 5),
+      "Google sign-in button should exist"
+    )
+    
+    // Check for Facebook sign-in button
+    let facebookButton = app.buttons["sign-in-with-facebook-button"]
+    XCTAssertTrue(
+      facebookButton.waitForExistence(timeout: 5),
+      "Facebook sign-in button should exist"
+    )
+    
+    // Check for Phone sign-in button
+    let phoneButton = app.buttons["sign-in-with-phone-button"]
+    XCTAssertTrue(
+      phoneButton.waitForExistence(timeout: 5),
+      "Phone sign-in button should exist"
+    )
+  }
+
+  @MainActor
   func testSignInDisplaysSignedInView() throws {
     let app = XCUIApplication()
     let email = createEmail()
