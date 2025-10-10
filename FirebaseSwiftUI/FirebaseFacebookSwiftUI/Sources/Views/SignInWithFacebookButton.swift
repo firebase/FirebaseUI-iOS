@@ -23,6 +23,7 @@ import SwiftUI
 @MainActor
 public struct SignInWithFacebookButton {
   @Environment(AuthService.self) private var authService
+  let facebookProvider: AuthProviderSwift
   @State private var errorMessage = ""
   @State private var showCanceledAlert = false
   @State private var limitedLogin = true
@@ -30,7 +31,8 @@ public struct SignInWithFacebookButton {
   @State private var trackingAuthorizationStatus: ATTrackingManager
     .AuthorizationStatus = .notDetermined
 
-  public init() {
+  public init(facebookProvider: AuthProviderSwift) {
+    self.facebookProvider = facebookProvider
     _trackingAuthorizationStatus = State(initialValue: ATTrackingManager
       .trackingAuthorizationStatus)
   }
@@ -65,7 +67,6 @@ extension SignInWithFacebookButton: View {
     Button(action: {
       Task {
         do {
-          let facebookProvider = FacebookProviderAuthUI(isLimitedLogin: limitedLogin)
           try await authService.signIn(facebookProvider)
         } catch {
           switch error {
@@ -128,6 +129,7 @@ extension SignInWithFacebookButton: View {
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
-  return SignInWithFacebookButton()
+  let facebookProvider = FacebookProviderSwift()
+  return SignInWithFacebookButton(facebookProvider: facebookProvider)
     .environment(AuthService())
 }
