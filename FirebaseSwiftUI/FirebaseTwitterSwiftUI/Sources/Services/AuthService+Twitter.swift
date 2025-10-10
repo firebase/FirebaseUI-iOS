@@ -23,8 +23,8 @@ import FirebaseAuthSwiftUI
 
 public extension AuthService {
   @discardableResult
-  func withTwitterSignIn(_ provider: TwitterProviderSwift) -> AuthService {
-    registerProvider(providerWithButton: TwitterProviderAuthUI(provider: provider))
+  func withTwitterSignIn(_ provider: TwitterProviderSwift? = nil) -> AuthService {
+    registerProvider(providerWithButton: TwitterProviderAuthUI(provider: provider ?? TwitterProviderSwift()))
     return self
   }
 }
