@@ -17,7 +17,7 @@ import FirebaseAuthSwiftUI
 import FirebaseCore
 import SwiftUI
 
-public class TwitterProviderSwift: AuthProviderSwift {
+public class TwitterProviderSwift: AuthProviderSwift, DeleteUserSwift {
   public let scopes: [String]
   let providerId = "twitter.com"
 
@@ -42,9 +42,14 @@ public class TwitterProviderSwift: AuthProviderSwift {
       }
     }
   }
+
+  public func deleteUser(user: User) async throws {
+    let operation = TwitterDeleteUserOperation(twitterProvider: self)
+    try await operation(on: user)
+  }
 }
 
-public class TwitterProviderAuthUI: AuthProviderUI, DeleteUserSwift {
+public class TwitterProviderAuthUI: AuthProviderUI {
   public var provider: AuthProviderSwift
 
   public init(provider: AuthProviderSwift) {
@@ -55,10 +60,5 @@ public class TwitterProviderAuthUI: AuthProviderUI, DeleteUserSwift {
 
   @MainActor public func authButton() -> AnyView {
     AnyView(SignInWithTwitterButton(provider: provider))
-  }
-
-  public func deleteUser(user: User) async throws {
-    let operation = TwitterDeleteUserOperation(twitterProvider: provider as! TwitterProviderSwift)
-    try await operation(on: user)
   }
 }
