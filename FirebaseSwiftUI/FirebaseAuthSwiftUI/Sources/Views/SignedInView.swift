@@ -38,7 +38,7 @@ extension SignedInView: View {
           .fontWeight(.bold)
           .padding()
           .accessibilityIdentifier("signed-in-text")
-        Text(authService.string.accountSettingsEmailLabel)
+        Text("as:")
         Text("\(authService.currentUser?.email ?? authService.currentUser?.displayName ?? "Unknown")")
         if authService.currentUser?.isEmailVerified == false {
           VerifyEmailView()
