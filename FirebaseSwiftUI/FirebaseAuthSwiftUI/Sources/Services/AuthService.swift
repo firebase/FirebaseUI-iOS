@@ -29,7 +29,7 @@ public protocol DeleteUserSwift {
   @MainActor func deleteUser(user: User) async throws
 }
 
-public protocol PhoneAuthProviderAuthUIProtocol: AuthProviderSwift {
+public protocol PhoneAuthProviderSwift: AuthProviderSwift {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
 }
 

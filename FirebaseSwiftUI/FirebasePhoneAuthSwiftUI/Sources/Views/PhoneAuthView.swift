@@ -31,9 +31,11 @@ public struct PhoneAuthView {
   @State private var showVerificationCodeInput = false
   @State private var verificationCode = ""
   @State private var verificationID = ""
-  private let phoneProvider = PhoneAuthProviderAuthUI()
+  let phoneProvider: PhoneAuthProviderSwift
 
-  public init() {}
+  public init(phoneProvider: PhoneAuthProviderSwift) {
+    self.phoneProvider = phoneProvider
+  }
 }
 
 extension PhoneAuthView: View {
@@ -83,7 +85,11 @@ extension PhoneAuthView: View {
         Button(action: {
           Task {
             do {
-              phoneProvider.setVerificationDetails(
+              guard let phoneAuthProvider = phoneProvider as? PhoneProviderSwift else {
+                errorMessage = "Invalid phone provider"
+                return
+              }
+              phoneAuthProvider.setVerificationDetails(
                 verificationID: verificationID,
                 verificationCode: verificationCode
               )
@@ -117,6 +123,7 @@ extension PhoneAuthView: View {
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
-  return PhoneAuthView()
+  let phoneProvider = PhoneProviderSwift()
+  return PhoneAuthView(phoneProvider: phoneProvider)
     .environment(AuthService())
 }
