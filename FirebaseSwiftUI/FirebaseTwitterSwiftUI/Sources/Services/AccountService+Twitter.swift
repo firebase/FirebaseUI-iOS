@@ -9,11 +9,11 @@
 import FirebaseAuthSwiftUI
 import Observation
 
-protocol GoogleOperationReauthentication {
+protocol TwitterOperationReauthentication {
   var twitterProvider: TwitterProviderSwift { get }
 }
 
-extension GoogleOperationReauthentication {
+extension TwitterOperationReauthentication {
   @MainActor func reauthenticate() async throws -> AuthenticationToken {
     guard let user = Auth.auth().currentUser else {
       throw AuthServiceError.reauthenticationRequired("No user currently signed-in")
@@ -32,7 +32,7 @@ extension GoogleOperationReauthentication {
 
 @MainActor
 class TwitterDeleteUserOperation: AuthenticatedOperation,
-  @preconcurrency GoogleOperationReauthentication {
+  @preconcurrency TwitterOperationReauthentication {
   let twitterProvider: TwitterProviderSwift
   init(twitterProvider: TwitterProviderSwift) {
     self.twitterProvider = twitterProvider
