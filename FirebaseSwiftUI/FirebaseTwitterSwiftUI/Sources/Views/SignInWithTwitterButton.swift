@@ -39,7 +39,7 @@ extension SignInWithTwitterButton: View {
           .scaledToFit()
           .frame(width: 24, height: 24)
           .foregroundColor(.white)
-        Text("Sign in with Twitter")
+        Text("Sign in with X")
           .fontWeight(.semibold)
           .foregroundColor(.white)
       }
