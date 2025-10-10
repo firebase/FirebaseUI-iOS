@@ -152,8 +152,8 @@ public final class AuthService {
   var emailSignInEnabled = false
 
   private var providers: [AuthProviderUI] = []
-  public func registerProvider(provider: AuthProviderUI) {
-    providers.append(provider)
+  public func registerProvider(providerWithButton: AuthProviderUI) {
+    providers.append(providerWithButton)
   }
 
   public func renderButtons(spacing: CGFloat = 16) -> AnyView {

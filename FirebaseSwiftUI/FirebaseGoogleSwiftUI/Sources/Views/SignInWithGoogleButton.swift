@@ -42,6 +42,7 @@ extension SignInWithGoogleButton: View {
         try await authService.signIn(googleProvider)
       }
     }
+    .accessibilityIdentifier("sign-in-with-google-button")
   }
 }
 

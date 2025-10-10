@@ -56,6 +56,7 @@ struct TestView: View {
     )
     .withGoogleSignIn()
     .withPhoneSignIn()
+    .withTwitterSignIn()
     .withFacebookSignIn()
     .withEmailSignIn()
   }

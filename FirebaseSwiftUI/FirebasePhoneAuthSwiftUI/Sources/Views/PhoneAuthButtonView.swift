@@ -38,6 +38,7 @@ extension PhoneAuthButtonView: View {
         .background(Color.green.opacity(0.8)) // Light green
         .cornerRadius(8)
     }
+    .accessibilityIdentifier("sign-in-with-phone-button")
   }
 }
 
