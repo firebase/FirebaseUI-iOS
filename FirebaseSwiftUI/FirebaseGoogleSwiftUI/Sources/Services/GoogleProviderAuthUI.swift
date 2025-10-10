@@ -19,37 +19,24 @@ import GoogleSignIn
 import GoogleSignInSwift
 import SwiftUI
 
-let kGoogleUserInfoEmailScope = "https://www.googleapis.com/auth/userinfo.email"
-let kGoogleUserInfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile"
-let kDefaultScopes = [kGoogleUserInfoEmailScope, kGoogleUserInfoProfileScope]
-
 public enum GoogleProviderError: Error {
   case rootViewControllerNotFound(String)
   case authenticationToken(String)
   case user(String)
 }
 
-public class GoogleProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUserSwift {
-  public let id: String = "google"
+public class GoogleProviderSwift: AuthProviderSwift, DeleteUserSwift {
   let scopes: [String]
-  let shortName = "Google"
+  let clientID: String
   let providerId = "google.com"
-  public let clientID: String
-  
-  public var provider: AuthProviderSwift { self }
-  
-  public init(scopes: [String]? = nil, clientID: String = FirebaseApp.app()!.options.clientID!) {
-    self.scopes = scopes ?? kDefaultScopes
+
+  public init(scopes: [String] = [
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile",
+  ],
+  clientID: String) {
     self.clientID = clientID
-  }
-
-  @MainActor public func authButton() -> AnyView {
-    AnyView(SignInWithGoogleButton())
-  }
-
-  public func deleteUser(user: User) async throws {
-    let operation = GoogleDeleteUserOperation(googleProvider: self)
-    try await operation(on: user)
+    self.scopes = scopes
   }
 
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
@@ -61,7 +48,7 @@ public class GoogleProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUser
         )
     }
 
-    let config = GIDConfiguration(clientID: self.clientID)
+    let config = GIDConfiguration(clientID: clientID)
     GIDSignIn.sharedInstance.configuration = config
 
     return try await withCheckedThrowingContinuation { continuation in
@@ -85,5 +72,23 @@ public class GoogleProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUser
         continuation.resume(returning: credential)
       }
     }
+  }
+
+  public func deleteUser(user: User) async throws {
+    let operation = GoogleDeleteUserOperation(googleProvider: self)
+    try await operation(on: user)
+  }
+}
+
+public class GoogleProviderAuthUI: AuthProviderUI {
+  public var provider: AuthProviderSwift
+  public let id: String = "google.com"
+
+  public init(provider: AuthProviderSwift) {
+    self.provider = provider
+  }
+
+  @MainActor public func authButton() -> AnyView {
+    AnyView(SignInWithGoogleButton(googleProvider: provider))
   }
 }
