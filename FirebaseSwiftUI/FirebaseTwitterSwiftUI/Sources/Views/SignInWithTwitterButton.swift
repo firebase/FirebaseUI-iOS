@@ -19,13 +19,18 @@ import SwiftUI
 @MainActor
 public struct SignInWithTwitterButton {
   @Environment(AuthService.self) private var authService
-  public init() {}
+  let provider: AuthProviderSwift
+  public init(provider: AuthProviderSwift) {
+    self.provider = provider
+  }
 }
 
 extension SignInWithTwitterButton: View {
   public var body: some View {
     Button(action: {
-      // TODO: Implement Twitter sign-in action
+      Task {
+        try await authService.signIn(provider)
+      }
     }) {
       Text("Sign in with Twitter")
     }

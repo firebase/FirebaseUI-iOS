@@ -44,16 +44,17 @@ public class TwitterProviderSwift: AuthProviderSwift {
   }
 }
 
-public class TwitterProviderAuthUI: TwitterProviderSwift, AuthProviderUI {
+public class TwitterProviderAuthUI: AuthProviderUI {
+  public var provider: AuthProviderSwift
+
   public init() {
-    super.init()
+    provider = TwitterProviderSwift()
   }
 
   public let id: String = "twitter"
-  public var provider: AuthProviderSwift { self }
 
   @MainActor public func authButton() -> AnyView {
-    AnyView(SignInWithTwitterButton())
+    AnyView(SignInWithTwitterButton(provider: provider))
   }
 
   // TODO: need to implement delete user protocol
