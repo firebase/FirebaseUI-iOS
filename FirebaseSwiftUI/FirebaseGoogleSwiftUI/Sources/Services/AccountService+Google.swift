@@ -31,7 +31,7 @@ import FirebaseAuthSwiftUI
 import Observation
 
 protocol GoogleOperationReauthentication {
-  var googleProvider: GoogleProviderAuthUI { get }
+  var googleProvider: GoogleProviderSwift { get }
 }
 
 extension GoogleOperationReauthentication {
@@ -54,8 +54,8 @@ extension GoogleOperationReauthentication {
 @MainActor
 class GoogleDeleteUserOperation: AuthenticatedOperation,
   @preconcurrency GoogleOperationReauthentication {
-  let googleProvider: GoogleProviderAuthUI
-  init(googleProvider: GoogleProviderAuthUI) {
+  let googleProvider: GoogleProviderSwift
+  init(googleProvider: GoogleProviderSwift) {
     self.googleProvider = googleProvider
   }
 

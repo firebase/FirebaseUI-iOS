@@ -19,10 +19,6 @@ import FirebaseAuth
 import FirebaseAuthSwiftUI
 import SwiftUI
 
-let kFacebookEmailScope = "email"
-let kFacebookProfileScope = "public_profile"
-let kDefaultFacebookScopes = [kFacebookEmailScope, kFacebookProfileScope]
-
 public enum FacebookProviderError: Error {
   case signInCancelled(String)
   case configurationInvalid(String)
@@ -31,43 +27,19 @@ public enum FacebookProviderError: Error {
   case authenticationToken(String)
 }
 
-public class FacebookProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUserSwift {
-  public let id: String = "facebook"
+public class FacebookProviderSwift: AuthProviderSwift, DeleteUserSwift {
   let scopes: [String]
-  let shortName = "Facebook"
   let providerId = "facebook.com"
   private let loginManager = LoginManager()
   private var rawNonce: String?
   private var shaNonce: String?
   // Needed for reauthentication
   var isLimitedLogin: Bool = true
-  
-  public var provider: AuthProviderSwift { self }
 
-  @MainActor private static var _shared: FacebookProviderAuthUI = FacebookProviderAuthUI(scopes: kDefaultFacebookScopes)
-
-  @MainActor public static var shared: FacebookProviderAuthUI {
-    return _shared
-  }
-
-  @MainActor public static func configureProvider(scopes: [String]? = nil, isLimitedLogin: Bool = true) {
-    _shared = FacebookProviderAuthUI(scopes: scopes, isLimitedLogin: isLimitedLogin)
-  }
-
-  public init(scopes: [String]? = nil, isLimitedLogin: Bool = true) {
-    self.scopes = scopes ?? kDefaultFacebookScopes
+  public init(scopes: [String] = ["email", "public_profile"], isLimitedLogin: Bool = true) {
+    self.scopes = scopes
     self.isLimitedLogin = isLimitedLogin
   }
-
-  @MainActor public func authButton() -> AnyView {
-    AnyView(SignInWithFacebookButton())
-  }
-
-  public func deleteUser(user: User) async throws {
-    let operation = FacebookDeleteUserOperation(facebookProvider: self)
-    try await operation(on: user)
-  }
-
 
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
     let loginType: LoginTracking = isLimitedLogin ? .limited : .enabled
@@ -148,5 +120,23 @@ public class FacebookProviderAuthUI: AuthProviderSwift, AuthProviderUI, DeleteUs
           "Authentication is not available. Please sign-in with Facebook before attempting to create a Facebook provider credential"
         )
     }
+  }
+
+  public func deleteUser(user: User) async throws {
+    let operation = FacebookDeleteUserOperation(facebookProvider: self)
+    try await operation(on: user)
+  }
+}
+
+public class FacebookProviderAuthUI: AuthProviderUI {
+  public var provider: AuthProviderSwift
+  public let id: String = "facebook.com"
+
+  public init(provider: AuthProviderSwift) {
+    self.provider = provider
+  }
+
+  @MainActor public func authButton() -> AnyView {
+    AnyView(SignInWithFacebookButton(facebookProvider: provider))
   }
 }
