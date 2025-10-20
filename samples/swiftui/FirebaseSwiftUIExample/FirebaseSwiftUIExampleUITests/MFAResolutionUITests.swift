@@ -21,27 +21,9 @@
 
 import XCTest
 
-func dismissAlert(app: XCUIApplication) {
-  if app.scrollViews.otherElements.buttons["Not Now"].waitForExistence(timeout: 2) {
-    app.scrollViews.otherElements.buttons["Not Now"].tap()
-  }
-}
-
 final class MFAResolutionUITests: XCTestCase {
   override func setUpWithError() throws {
     continueAfterFailure = false
-  }
-
-  // MARK: - Helper Methods
-  
-  /// Creates and configures an XCUIApplication with default test launch arguments
-  private func createTestApp(mfaEnabled: Bool = true) -> XCUIApplication {
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
-    if mfaEnabled {
-      app.launchArguments.append("--mfa-enabled")
-    }
-    return app
   }
 
   // MARK: - MFA Resolution UI Tests
@@ -50,7 +32,7 @@ final class MFAResolutionUITests: XCTestCase {
 
   @MainActor
   func testCompleteMFAResolutionFlowWithAPIEnrollment() async throws {
-    let app = createTestApp()
+    let app = createTestApp(mfaEnabled: true)
     app.launch()
 
     let email = createEmail()
@@ -132,78 +114,6 @@ final class MFAResolutionUITests: XCTestCase {
   }
   
   // MARK: - Helper Methods
-
-  private func createEmail() -> String {
-    let before = UUID().uuidString.prefix(8)
-    let after = UUID().uuidString.prefix(6)
-    return "\(before)@\(after).com"
-  }
-  
-  /// Verifies an email address in the emulator using the OOB code mechanism
-  private func verifyEmailInEmulator(email: String, idToken: String) async throws {
-    let base = "http://127.0.0.1:9099"
-    
-    // Step 1: Trigger email verification (creates OOB code in emulator)
-    var sendReq = URLRequest(
-      url: URL(string: "\(base)/identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=fake-api-key")!
-    )
-    sendReq.httpMethod = "POST"
-    sendReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    sendReq.httpBody = try JSONSerialization.data(withJSONObject: [
-      "requestType": "VERIFY_EMAIL",
-      "idToken": idToken
-    ])
-    
-    let (_, sendResp) = try await URLSession.shared.data(for: sendReq)
-    guard (sendResp as? HTTPURLResponse)?.statusCode == 200 else {
-      throw NSError(domain: "TestError", code: 3,
-                   userInfo: [NSLocalizedDescriptionKey: "Failed to send verification email"])
-    }
-    
-    // Step 2: Fetch OOB codes from emulator
-    let oobURL = URL(string: "\(base)/emulator/v1/projects/flutterfire-e2e-tests/oobCodes")!
-    let (oobData, oobResp) = try await URLSession.shared.data(from: oobURL)
-    guard (oobResp as? HTTPURLResponse)?.statusCode == 200 else {
-      throw NSError(domain: "TestError", code: 4,
-                   userInfo: [NSLocalizedDescriptionKey: "Failed to fetch OOB codes"])
-    }
-    
-    struct OobEnvelope: Decodable { let oobCodes: [OobItem] }
-    struct OobItem: Decodable {
-      let oobCode: String
-      let email: String
-      let requestType: String
-      let creationTime: String?
-    }
-    
-    let envelope = try JSONDecoder().decode(OobEnvelope.self, from: oobData)
-    
-    // Step 3: Find most recent VERIFY_EMAIL code for this email
-    let iso = ISO8601DateFormatter()
-    let codeItem = envelope.oobCodes
-      .filter {
-        $0.email.caseInsensitiveCompare(email) == .orderedSame && $0.requestType == "VERIFY_EMAIL"
-      }
-      .sorted {
-        let d0 = $0.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
-        let d1 = $1.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
-        return d0 > d1
-      }
-      .first
-    
-    guard let oobCode = codeItem?.oobCode else {
-      throw NSError(domain: "TestError", code: 5,
-                   userInfo: [NSLocalizedDescriptionKey: "No VERIFY_EMAIL OOB code found for \(email)"])
-    }
-    
-    // Step 4: Apply the OOB code (simulate clicking verification link)
-    let verifyURL = URL(string: "\(base)/emulator/action?mode=verifyEmail&oobCode=\(oobCode)&apiKey=fake-api-key")!
-    let (_, verifyResp) = try await URLSession.shared.data(from: verifyURL)
-    guard (verifyResp as? HTTPURLResponse)?.statusCode == 200 else {
-      throw NSError(domain: "TestError", code: 6,
-                   userInfo: [NSLocalizedDescriptionKey: "Failed to apply OOB code"])
-    }
-  }
 
   /// Programmatically enables SMS MFA for a user via the Auth emulator REST API
   /// - Parameters:

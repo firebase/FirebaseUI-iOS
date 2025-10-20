@@ -27,54 +27,6 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
   }
 
   override func tearDownWithError() throws {}
-  
-  /// Creates and configures an XCUIApplication with default test launch arguments
-  private func createTestApp(mfaEnabled: Bool = false) -> XCUIApplication {
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
-    if mfaEnabled {
-      app.launchArguments.append("--mfa-enabled")
-    }
-    return app
-  }
-  
-  private func dismissAlert(app: XCUIApplication) {
-    if app.scrollViews.otherElements.buttons["Not Now"].waitForExistence(timeout: 2) {
-      app.scrollViews.otherElements.buttons["Not Now"].tap()
-    }
-  }
-  
-  /// Helper to create a test user in the emulator via REST API (avoids keychain issues)
-  private func createTestUser(email: String, password: String) async throws {
-    // Use Firebase Auth emulator REST API directly to avoid keychain access issues in UI tests
-    let signUpUrl = "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake-api-key"
-    
-    guard let url = URL(string: signUpUrl) else {
-      throw NSError(domain: "TestError", code: 1, 
-                   userInfo: [NSLocalizedDescriptionKey: "Invalid emulator URL"])
-    }
-    
-    var request = URLRequest(url: url)
-    request.httpMethod = "POST"
-    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    
-    let body: [String: Any] = [
-      "email": email,
-      "password": password,
-      "returnSecureToken": true
-    ]
-    
-    request.httpBody = try JSONSerialization.data(withJSONObject: body)
-    
-    let (data, response) = try await URLSession.shared.data(for: request)
-    
-    guard let httpResponse = response as? HTTPURLResponse,
-          httpResponse.statusCode == 200 else {
-      let errorBody = String(data: data, encoding: .utf8) ?? "Unknown error"
-      throw NSError(domain: "TestError", code: 2,
-                   userInfo: [NSLocalizedDescriptionKey: "Failed to create user: \(errorBody)"])
-    }
-  }
 
   @MainActor
   func testExample() throws {
