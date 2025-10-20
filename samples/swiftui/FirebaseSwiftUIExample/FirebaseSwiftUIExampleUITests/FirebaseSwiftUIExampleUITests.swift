@@ -19,8 +19,6 @@
 //  Created by Russell Wheatley on 18/02/2025.
 //
 
-import FirebaseAuth
-import FirebaseCore
 import XCTest
 
 func dismissAlert(app: XCUIApplication) {
@@ -35,6 +33,38 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
   }
 
   override func tearDownWithError() throws {}
+  
+  /// Helper to create a test user in the emulator via REST API (avoids keychain issues)
+  private func createTestUser(email: String, password: String) async throws {
+    // Use Firebase Auth emulator REST API directly to avoid keychain access issues in UI tests
+    let signUpUrl = "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake-api-key"
+    
+    guard let url = URL(string: signUpUrl) else {
+      throw NSError(domain: "TestError", code: 1, 
+                   userInfo: [NSLocalizedDescriptionKey: "Invalid emulator URL"])
+    }
+    
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+    let body: [String: Any] = [
+      "email": email,
+      "password": password,
+      "returnSecureToken": true
+    ]
+    
+    request.httpBody = try JSONSerialization.data(withJSONObject: body)
+    
+    let (data, response) = try await URLSession.shared.data(for: request)
+    
+    guard let httpResponse = response as? HTTPURLResponse,
+          httpResponse.statusCode == 200 else {
+      let errorBody = String(data: data, encoding: .utf8) ?? "Unknown error"
+      throw NSError(domain: "TestError", code: 2,
+                   userInfo: [NSLocalizedDescriptionKey: "Failed to create user: \(errorBody)"])
+    }
+  }
 
   @MainActor
   func testExample() throws {
@@ -87,12 +117,17 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
   }
 
   @MainActor
-  func testSignInDisplaysSignedInView() throws {
-    let app = XCUIApplication()
+  func testSignInDisplaysSignedInView() async throws {
     let email = createEmail()
+    let password = "123456"
+    
+    // Create user in test runner BEFORE launching app
+    // User will exist in emulator, but app starts unauthenticated
+    try await createTestUser(email: email, password: password)
+    
+    // Now launch the app - it connects to emulator but isn't signed in
+    let app = XCUIApplication()
     app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--create-user")
-    app.launchArguments.append("\(email)")
     app.launch()
 
     let emailField = app.textFields["email-field"]
@@ -103,7 +138,7 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     let passwordField = app.secureTextFields["password-field"]
     XCTAssertTrue(passwordField.exists, "Password field should exist")
     passwordField.tap()
-    passwordField.typeText("123456")
+    passwordField.typeText(password)
 
     let signInButton = app.buttons["sign-in-button"]
     XCTAssertTrue(signInButton.exists, "Sign-In button should exist")

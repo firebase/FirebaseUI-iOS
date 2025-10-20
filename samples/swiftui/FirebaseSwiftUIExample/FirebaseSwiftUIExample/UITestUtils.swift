@@ -26,8 +26,8 @@ func testCreateUser() async throws {
     if verifyEmail {
       try await setEmailVerifiedInEmulator(for: result.user)
     }
-    try auth.signOut()
   }
+  try Auth.auth().signOut()
 }
 
 /// Marks the given Firebase `user` as email-verified **in the Auth emulator**.
