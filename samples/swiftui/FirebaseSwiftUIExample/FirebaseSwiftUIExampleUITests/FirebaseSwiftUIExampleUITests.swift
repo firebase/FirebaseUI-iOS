@@ -54,6 +54,7 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
   @MainActor
   func testSignInButtonsExist() throws {
     let app = XCUIApplication()
+    app.launchArguments.append("--auth-emulator")
     app.launch()
     
     // Check for Twitter/X sign-in button
