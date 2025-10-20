@@ -32,15 +32,25 @@ final class MFAResolutionUITests: XCTestCase {
     continueAfterFailure = false
   }
 
+  // MARK: - Helper Methods
+  
+  /// Creates and configures an XCUIApplication with default test launch arguments
+  private func createTestApp(mfaEnabled: Bool = true) -> XCUIApplication {
+    let app = XCUIApplication()
+    app.launchArguments.append("--test-view-enabled")
+    if mfaEnabled {
+      app.launchArguments.append("--mfa-enabled")
+    }
+    return app
+  }
+
   // MARK: - MFA Resolution UI Tests
 
   // MARK: - Complete MFA Resolution Flow
 
   @MainActor
   func testCompleteMFAResolutionFlowWithAPIEnrollment() async throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
-    app.launchArguments.append("--mfa-enabled")
+    let app = createTestApp()
     app.launch()
 
     let email = createEmail()

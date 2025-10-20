@@ -26,6 +26,18 @@ final class MFAEnrollmentUITests: XCTestCase {
     continueAfterFailure = false
   }
 
+  // MARK: - Helper Methods
+  
+  /// Creates and configures an XCUIApplication with default test launch arguments
+  private func createTestApp(mfaEnabled: Bool = true) -> XCUIApplication {
+    let app = XCUIApplication()
+    app.launchArguments.append("--test-view-enabled")
+    if mfaEnabled {
+      app.launchArguments.append("--mfa-enabled")
+    }
+    return app
+  }
+
   // MARK: - Helper Methods for Test Setup
   
   /// Helper to create a test user in the emulator via REST API (avoids keychain issues)
@@ -144,9 +156,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app
     try await createTestUser(email: email)
     
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
-    app.launchArguments.append("--mfa-enabled")
+    let app = createTestApp()
     app.launch()
 
     // Sign in first to access MFA management
@@ -178,9 +188,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app
     try await createTestUser(email: email)
     
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
-    app.launchArguments.append("--mfa-enabled")
+    let app = createTestApp()
     app.launch()
 
     // Sign in and navigate to MFA management
@@ -215,9 +223,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app
     try await createTestUser(email: email)
     
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
-    app.launchArguments.append("--mfa-enabled")
+    let app = createTestApp()
     app.launch()
 
     // Navigate to MFA enrollment
@@ -246,9 +252,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app
     try await createTestUser(email: email)
     
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
-    app.launchArguments.append("--mfa-enabled")
+    let app = createTestApp()
     app.launch()
 
     // Navigate to MFA enrollment
@@ -285,9 +289,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     let email = createEmail()
     try await createTestUser(email: email, verifyEmail: true)
     
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
-    app.launchArguments.append("--mfa-enabled")
+    let app = createTestApp()
     app.launch()
 
     // 2) Sign in to reach SignedInView
@@ -386,9 +388,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app (with email verification)
     try await createTestUser(email: email, verifyEmail: true)
     
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
-    app.launchArguments.append("--mfa-enabled")
+    let app = createTestApp()
     app.launch()
 
     // Navigate to MFA enrollment and select TOTP
@@ -447,9 +447,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app
     try await createTestUser(email: email)
     
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
-    app.launchArguments.append("--mfa-enabled")
+    let app = createTestApp()
     app.launch()
 
     // Navigate to MFA enrollment
@@ -478,9 +476,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app
     try await createTestUser(email: email)
     
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
-    app.launchArguments.append("--mfa-enabled")
+    let app = createTestApp()
     app.launch()
 
     // Navigate to MFA enrollment
@@ -510,9 +506,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app
     try await createTestUser(email: email)
     
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
-    app.launchArguments.append("--mfa-enabled")
+    let app = createTestApp()
     app.launch()
 
     // Sign in and navigate to MFA management

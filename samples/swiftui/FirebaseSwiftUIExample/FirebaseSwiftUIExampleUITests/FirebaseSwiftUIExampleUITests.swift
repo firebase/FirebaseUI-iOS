@@ -28,6 +28,16 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
   override func tearDownWithError() throws {}
   
+  /// Creates and configures an XCUIApplication with default test launch arguments
+  private func createTestApp(mfaEnabled: Bool = false) -> XCUIApplication {
+    let app = XCUIApplication()
+    app.launchArguments.append("--test-view-enabled")
+    if mfaEnabled {
+      app.launchArguments.append("--mfa-enabled")
+    }
+    return app
+  }
+  
   private func dismissAlert(app: XCUIApplication) {
     if app.scrollViews.otherElements.buttons["Not Now"].waitForExistence(timeout: 2) {
       app.scrollViews.otherElements.buttons["Not Now"].tap()
@@ -83,8 +93,7 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
   @MainActor
   func testSignInButtonsExist() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
+    let app = createTestApp()
     app.launch()
     
     // Check for Twitter/X sign-in button
@@ -126,8 +135,7 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     try await createTestUser(email: email, password: password)
     
     // Now launch the app - it connects to emulator but isn't signed in
-    let app = XCUIApplication()
-    app.launchArguments.append("--test-view-enabled")
+    let app = createTestApp()
     app.launch()
 
     let emailField = app.textFields["email-field"]
@@ -208,10 +216,9 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
   @MainActor
   func testCreateUserDisplaysSignedInView() throws {
-    let app = XCUIApplication()
     let email = createEmail()
     let password = "qwerty321@"
-    app.launchArguments.append("--test-view-enabled")
+    let app = createTestApp()
     app.launch()
 
     // Check the Views are updated
