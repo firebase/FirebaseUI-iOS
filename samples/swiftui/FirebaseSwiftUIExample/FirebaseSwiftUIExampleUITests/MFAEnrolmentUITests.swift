@@ -26,16 +26,127 @@ final class MFAEnrollmentUITests: XCTestCase {
     continueAfterFailure = false
   }
 
+  // MARK: - Helper Methods for Test Setup
+  
+  /// Helper to create a test user in the emulator via REST API (avoids keychain issues)
+  private func createTestUser(email: String, password: String = "123456", verifyEmail: Bool = false) async throws {
+    // Use Firebase Auth emulator REST API directly to avoid keychain access issues in UI tests
+    let signUpUrl = "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake-api-key"
+    
+    guard let url = URL(string: signUpUrl) else {
+      throw NSError(domain: "TestError", code: 1,
+                   userInfo: [NSLocalizedDescriptionKey: "Invalid emulator URL"])
+    }
+    
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+    let body: [String: Any] = [
+      "email": email,
+      "password": password,
+      "returnSecureToken": true
+    ]
+    
+    request.httpBody = try JSONSerialization.data(withJSONObject: body)
+    
+    let (data, response) = try await URLSession.shared.data(for: request)
+    
+    guard let httpResponse = response as? HTTPURLResponse,
+          httpResponse.statusCode == 200 else {
+      let errorBody = String(data: data, encoding: .utf8) ?? "Unknown error"
+      throw NSError(domain: "TestError", code: 2,
+                   userInfo: [NSLocalizedDescriptionKey: "Failed to create user: \(errorBody)"])
+    }
+    
+    // If email verification is requested, verify the email
+    if verifyEmail {
+      // Parse the response to get the idToken
+      if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+         let idToken = json["idToken"] as? String {
+        try await verifyEmailInEmulator(email: email, idToken: idToken)
+      }
+    }
+  }
+  
+  /// Verifies an email address in the emulator using the OOB code mechanism
+  private func verifyEmailInEmulator(email: String, idToken: String) async throws {
+    let base = "http://127.0.0.1:9099"
+    
+    // Step 1: Trigger email verification (creates OOB code in emulator)
+    var sendReq = URLRequest(
+      url: URL(string: "\(base)/identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=fake-api-key")!
+    )
+    sendReq.httpMethod = "POST"
+    sendReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    sendReq.httpBody = try JSONSerialization.data(withJSONObject: [
+      "requestType": "VERIFY_EMAIL",
+      "idToken": idToken
+    ])
+    
+    let (_, sendResp) = try await URLSession.shared.data(for: sendReq)
+    guard (sendResp as? HTTPURLResponse)?.statusCode == 200 else {
+      throw NSError(domain: "TestError", code: 3,
+                   userInfo: [NSLocalizedDescriptionKey: "Failed to send verification email"])
+    }
+    
+    // Step 2: Fetch OOB codes from emulator
+    let oobURL = URL(string: "\(base)/emulator/v1/projects/flutterfire-e2e-tests/oobCodes")!
+    let (oobData, oobResp) = try await URLSession.shared.data(from: oobURL)
+    guard (oobResp as? HTTPURLResponse)?.statusCode == 200 else {
+      throw NSError(domain: "TestError", code: 4,
+                   userInfo: [NSLocalizedDescriptionKey: "Failed to fetch OOB codes"])
+    }
+    
+    struct OobEnvelope: Decodable { let oobCodes: [OobItem] }
+    struct OobItem: Decodable {
+      let oobCode: String
+      let email: String
+      let requestType: String
+      let creationTime: String?
+    }
+    
+    let envelope = try JSONDecoder().decode(OobEnvelope.self, from: oobData)
+    
+    // Step 3: Find most recent VERIFY_EMAIL code for this email
+    let iso = ISO8601DateFormatter()
+    let codeItem = envelope.oobCodes
+      .filter {
+        $0.email.caseInsensitiveCompare(email) == .orderedSame && $0.requestType == "VERIFY_EMAIL"
+      }
+      .sorted {
+        let d0 = $0.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
+        let d1 = $1.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
+        return d0 > d1
+      }
+      .first
+    
+    guard let oobCode = codeItem?.oobCode else {
+      throw NSError(domain: "TestError", code: 5,
+                   userInfo: [NSLocalizedDescriptionKey: "No VERIFY_EMAIL OOB code found for \(email)"])
+    }
+    
+    // Step 4: Apply the OOB code (simulate clicking verification link)
+    let verifyURL = URL(string: "\(base)/emulator/action?mode=verifyEmail&oobCode=\(oobCode)&apiKey=fake-api-key")!
+    let (_, verifyResp) = try await URLSession.shared.data(from: verifyURL)
+    guard (verifyResp as? HTTPURLResponse)?.statusCode == 200 else {
+      throw NSError(domain: "TestError", code: 6,
+                   userInfo: [NSLocalizedDescriptionKey: "Failed to apply OOB code"])
+    }
+  }
+
   // MARK: - MFA Management Navigation Tests
 
   @MainActor
-  func testMFAManagementButtonExistsAndIsTappable() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testMFAManagementButtonExistsAndIsTappable() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = XCUIApplication()
+    app.launchArguments.append("--test-view-enabled")
+    app.launchArguments.append("--mfa-enabled")
     app.launch()
 
     // Sign in first to access MFA management
@@ -61,13 +172,15 @@ final class MFAEnrollmentUITests: XCTestCase {
   }
 
   @MainActor
-  func testMFAEnrollmentNavigationFromManagement() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testMFAEnrollmentNavigationFromManagement() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = XCUIApplication()
+    app.launchArguments.append("--test-view-enabled")
+    app.launchArguments.append("--mfa-enabled")
     app.launch()
 
     // Sign in and navigate to MFA management
@@ -96,13 +209,15 @@ final class MFAEnrollmentUITests: XCTestCase {
   // MARK: - MFA Enrollment Factor Selection Tests
 
   @MainActor
-  func testFactorTypePickerExistsAndWorks() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testFactorTypePickerExistsAndWorks() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = XCUIApplication()
+    app.launchArguments.append("--test-view-enabled")
+    app.launchArguments.append("--mfa-enabled")
     app.launch()
 
     // Navigate to MFA enrollment
@@ -125,13 +240,15 @@ final class MFAEnrollmentUITests: XCTestCase {
   }
 
   @MainActor
-  func testStartEnrollmentButtonExistsAndWorks() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testStartEnrollmentButtonExistsAndWorks() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = XCUIApplication()
+    app.launchArguments.append("--test-view-enabled")
+    app.launchArguments.append("--mfa-enabled")
     app.launch()
 
     // Navigate to MFA enrollment
@@ -164,14 +281,13 @@ final class MFAEnrollmentUITests: XCTestCase {
 
   @MainActor
   func testEndToEndSMSEnrollmentAndRemovalFlow() async throws {
-    // 1) Launch app with emulator and create a fresh user
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--verify-email")
-    app.launchArguments.append("--create-user")
+    // 1) Create user in test runner before launching app (with email verification)
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    try await createTestUser(email: email, verifyEmail: true)
+    
+    let app = XCUIApplication()
+    app.launchArguments.append("--test-view-enabled")
+    app.launchArguments.append("--mfa-enabled")
     app.launch()
 
     // 2) Sign in to reach SignedInView
@@ -264,15 +380,15 @@ final class MFAEnrollmentUITests: XCTestCase {
   // MARK: - TOTP Enrollment Flow Tests
 
   @MainActor
-  func testTOTPEnrollmentFlowUI() throws {
-    let app = XCUIApplication()
-
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--verify-email")
-    app.launchArguments.append("--create-user")
+  func testTOTPEnrollmentFlowUI() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app (with email verification)
+    try await createTestUser(email: email, verifyEmail: true)
+    
+    let app = XCUIApplication()
+    app.launchArguments.append("--test-view-enabled")
+    app.launchArguments.append("--mfa-enabled")
     app.launch()
 
     // Navigate to MFA enrollment and select TOTP
@@ -325,13 +441,15 @@ final class MFAEnrollmentUITests: XCTestCase {
   // MARK: - Error Handling Tests
 
   @MainActor
-  func testErrorMessageDisplay() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testErrorMessageDisplay() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = XCUIApplication()
+    app.launchArguments.append("--test-view-enabled")
+    app.launchArguments.append("--mfa-enabled")
     app.launch()
 
     // Navigate to MFA enrollment
@@ -354,13 +472,15 @@ final class MFAEnrollmentUITests: XCTestCase {
   // MARK: - Navigation Tests
 
   @MainActor
-  func testBackButtonNavigation() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testBackButtonNavigation() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = XCUIApplication()
+    app.launchArguments.append("--test-view-enabled")
+    app.launchArguments.append("--mfa-enabled")
     app.launch()
 
     // Navigate to MFA enrollment
@@ -384,13 +504,15 @@ final class MFAEnrollmentUITests: XCTestCase {
   }
 
   @MainActor
-  func testBackButtonFromMFAManagement() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testBackButtonFromMFAManagement() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = XCUIApplication()
+    app.launchArguments.append("--test-view-enabled")
+    app.launchArguments.append("--mfa-enabled")
     app.launch()
 
     // Sign in and navigate to MFA management
