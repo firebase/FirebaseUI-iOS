@@ -107,6 +107,7 @@ public final class AuthService {
   public let passwordPrompt: PasswordPromptCoordinator = .init()
   public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
+  private var pendingMFACredential: AuthCredential?
 
   // MARK: - Provider APIs
 
@@ -234,6 +235,8 @@ public final class AuthService {
       if error.code == AuthErrorCode.secondFactorRequired.rawValue {
         if let resolver = error
           .userInfo[AuthErrorUserInfoMultiFactorResolverKey] as? MultiFactorResolver {
+          // Preserve the original credential for use after MFA resolution
+          pendingMFACredential = credentials
           return handleMFARequiredError(resolver: resolver)
         }
       }
@@ -847,12 +850,16 @@ public extension AuthService {
 
     do {
       let result = try await resolver.resolveSignIn(with: assertion)
-      signedInCredential = result.credential
+      
+      // After MFA resolution, result.credential is nil, so restore the original credential
+      // that was used before MFA was triggered
+      signedInCredential = result.credential ?? pendingMFACredential
       updateAuthenticationState()
 
       // Clear MFA resolution state
       currentMFARequired = nil
       currentMFAResolver = nil
+      pendingMFACredential = nil
 
     } catch {
       throw AuthServiceError
