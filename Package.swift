@@ -82,6 +82,10 @@ let package = Package(
       name: "FirebaseTwitterSwiftUI",
       targets: ["FirebaseTwitterSwiftUI"]
     ),
+    .library(
+      name: "FirebaseAppleSwiftUI",
+      targets: ["FirebaseAppleSwiftUI"]
+    ),
   ],
   dependencies: [
     .package(
@@ -325,6 +329,18 @@ let package = Package(
       name: "FirebaseTwitterSwiftUITests",
       dependencies: ["FirebaseTwitterSwiftUI"],
       path: "FirebaseSwiftUI/FirebaseTwitterSwiftUI/Tests/"
+    ),
+    .target(
+      name: "FirebaseAppleSwiftUI",
+      dependencies: [
+        "FirebaseAuthSwiftUI",
+      ],
+      path: "FirebaseSwiftUI/FirebaseAppleSwiftUI/Sources"
+    ),
+    .testTarget(
+      name: "FirebaseAppleSwiftUITests",
+      dependencies: ["FirebaseAppleSwiftUI"],
+      path: "FirebaseSwiftUI/FirebaseAppleSwiftUI/Tests/"
     ),
   ]
 )
