@@ -39,13 +39,21 @@ extension ASAuthorizationAppleIDCredential {
 
 // MARK: - Authenticate With Apple Dialog
 
-private func authenticateWithApple() async throws -> (ASAuthorizationAppleIDCredential, String) {
-  return try await AuthenticateWithAppleDialog().authenticate()
+private func authenticateWithApple(
+  scopes: [ASAuthorization.Scope]
+) async throws -> (ASAuthorizationAppleIDCredential, String) {
+  return try await AuthenticateWithAppleDialog(scopes: scopes).authenticate()
 }
 
 private class AuthenticateWithAppleDialog: NSObject {
   private var continuation: CheckedContinuation<(ASAuthorizationAppleIDCredential, String), Error>?
   private var currentNonce: String?
+  private let scopes: [ASAuthorization.Scope]
+  
+  init(scopes: [ASAuthorization.Scope]) {
+    self.scopes = scopes
+    super.init()
+  }
 
   func authenticate() async throws -> (ASAuthorizationAppleIDCredential, String) {
     return try await withCheckedThrowingContinuation { continuation in
@@ -53,7 +61,7 @@ private class AuthenticateWithAppleDialog: NSObject {
 
       let appleIDProvider = ASAuthorizationAppleIDProvider()
       let request = appleIDProvider.createRequest()
-      request.requestedScopes = [.fullName, .email]
+      request.requestedScopes = scopes
 
       do {
         let nonce = try CryptoUtils.randomNonceString()
@@ -110,15 +118,15 @@ extension AuthenticateWithAppleDialog: ASAuthorizationControllerDelegate {
 // MARK: - Apple Provider Swift
 
 public class AppleProviderSwift: AuthProviderSwift, DeleteUserSwift {
-  public let scopes: [String]
+  public let scopes: [ASAuthorization.Scope]
   let providerId = "apple.com"
 
-  public init(scopes: [String] = []) {
+  public init(scopes: [ASAuthorization.Scope] = [.fullName, .email]) {
     self.scopes = scopes
   }
 
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
-    let (appleIDCredential, nonce) = try await authenticateWithApple()
+    let (appleIDCredential, nonce) = try await authenticateWithApple(scopes: scopes)
 
     guard let idTokenString = appleIDCredential.idTokenString else {
       throw AuthServiceError.invalidCredentials("Unable to fetch identity token from Apple")
