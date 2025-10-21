@@ -12,10 +12,102 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import AuthenticationServices
+import CryptoKit
 import FirebaseAuth
 import FirebaseAuthSwiftUI
 import FirebaseCore
 import SwiftUI
+
+// MARK: - Data Extensions
+
+extension Data {
+  var utf8String: String? {
+    return String(data: self, encoding: .utf8)
+  }
+}
+
+extension ASAuthorizationAppleIDCredential {
+  var authorizationCodeString: String? {
+    return authorizationCode?.utf8String
+  }
+
+  var idTokenString: String? {
+    return identityToken?.utf8String
+  }
+}
+
+// MARK: - Authenticate With Apple Dialog
+
+private func authenticateWithApple() async throws -> (ASAuthorizationAppleIDCredential, String) {
+  return try await AuthenticateWithAppleDialog().authenticate()
+}
+
+private class AuthenticateWithAppleDialog: NSObject {
+  private var continuation: CheckedContinuation<(ASAuthorizationAppleIDCredential, String), Error>?
+  private var currentNonce: String?
+
+  func authenticate() async throws -> (ASAuthorizationAppleIDCredential, String) {
+    return try await withCheckedThrowingContinuation { continuation in
+      self.continuation = continuation
+
+      let appleIDProvider = ASAuthorizationAppleIDProvider()
+      let request = appleIDProvider.createRequest()
+      request.requestedScopes = [.fullName, .email]
+
+      do {
+        let nonce = try CryptoUtils.randomNonceString()
+        currentNonce = nonce
+        request.nonce = CryptoUtils.sha256(nonce)
+      } catch {
+        continuation.resume(throwing: AuthServiceError.signInFailed(underlying: error))
+        return
+      }
+
+      let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+      authorizationController.delegate = self
+      authorizationController.performRequests()
+    }
+  }
+}
+
+extension AuthenticateWithAppleDialog: ASAuthorizationControllerDelegate {
+  func authorizationController(
+    controller: ASAuthorizationController,
+    didCompleteWithAuthorization authorization: ASAuthorization
+  ) {
+    if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+      if let nonce = currentNonce {
+        continuation?.resume(returning: (appleIDCredential, nonce))
+      } else {
+        continuation?.resume(
+          throwing: AuthServiceError.signInFailed(
+            underlying: NSError(
+              domain: "AppleSignIn",
+              code: -1,
+              userInfo: [NSLocalizedDescriptionKey: "Missing nonce"]
+            )
+          )
+        )
+      }
+    } else {
+      continuation?.resume(
+        throwing: AuthServiceError.invalidCredentials("Missing Apple ID credential")
+      )
+    }
+    continuation = nil
+  }
+
+  func authorizationController(
+    controller: ASAuthorizationController,
+    didCompleteWithError error: Error
+  ) {
+    continuation?.resume(throwing: AuthServiceError.signInFailed(underlying: error))
+    continuation = nil
+  }
+}
+
+// MARK: - Apple Provider Swift
 
 public class AppleProviderSwift: AuthProviderSwift, DeleteUserSwift {
   public let scopes: [String]
@@ -26,27 +118,22 @@ public class AppleProviderSwift: AuthProviderSwift, DeleteUserSwift {
   }
 
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
-    // TODO: Implement Apple Sign In credential creation
-    // This will need to use ASAuthorizationAppleIDProvider
-    let provider = OAuthProvider(providerID: providerId)
-    return try await withCheckedThrowingContinuation { continuation in
-      provider.getCredentialWith(nil) { credential, error in
-        if let error {
-          continuation
-            .resume(throwing: AuthServiceError.signInFailed(underlying: error))
-        } else if let credential {
-          continuation.resume(returning: credential)
-        } else {
-          continuation
-            .resume(throwing: AuthServiceError
-              .invalidCredentials("Apple did not provide a valid AuthCredential"))
-        }
-      }
+    let (appleIDCredential, nonce) = try await authenticateWithApple()
+
+    guard let idTokenString = appleIDCredential.idTokenString else {
+      throw AuthServiceError.invalidCredentials("Unable to fetch identity token from Apple")
     }
+
+    let credential = OAuthProvider.appleCredential(
+      withIDToken: idTokenString,
+      rawNonce: nonce,
+      fullName: appleIDCredential.fullName
+    )
+
+    return credential
   }
 
   public func deleteUser(user: User) async throws {
-    // TODO: Implement delete user functionality
     let operation = AppleDeleteUserOperation(appleProvider: self)
     try await operation(on: user)
   }

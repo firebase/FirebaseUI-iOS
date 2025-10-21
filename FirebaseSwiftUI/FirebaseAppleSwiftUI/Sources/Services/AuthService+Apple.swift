@@ -24,7 +24,6 @@ import FirebaseAuthSwiftUI
 public extension AuthService {
   @discardableResult
   func withAppleSignIn(_ provider: AppleProviderSwift? = nil) -> AuthService {
-    // TODO: Register Apple provider with authentication service
     registerProvider(providerWithButton: AppleProviderAuthUI(provider: provider ??
         AppleProviderSwift()))
     return self

@@ -28,13 +28,11 @@ public struct SignInWithAppleButton {
 extension SignInWithAppleButton: View {
   public var body: some View {
     Button(action: {
-      // TODO: Implement sign in with Apple action
       Task {
         try await authService.signIn(provider)
       }
     }) {
       HStack {
-        // TODO: Add Apple logo image
         Image(systemName: "apple.logo")
           .resizable()
           .renderingMode(.template)

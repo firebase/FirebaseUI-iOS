@@ -20,7 +20,6 @@ extension AppleOperationReauthentication {
     }
 
     do {
-      // TODO: Implement Apple reauthentication
       let credential = try await appleProvider.createAuthCredential()
       try await user.reauthenticate(with: credential)
 
@@ -40,7 +39,6 @@ class AppleDeleteUserOperation: AuthenticatedOperation,
   }
 
   func callAsFunction(on user: User) async throws {
-    // TODO: Implement delete user operation
     try await callAsFunction(on: user) {
       try await user.delete()
     }
