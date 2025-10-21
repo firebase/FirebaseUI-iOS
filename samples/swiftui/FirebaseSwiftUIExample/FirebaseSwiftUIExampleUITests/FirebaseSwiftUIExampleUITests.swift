@@ -19,15 +19,7 @@
 //  Created by Russell Wheatley on 18/02/2025.
 //
 
-import FirebaseAuth
-import FirebaseCore
 import XCTest
-
-func dismissAlert(app: XCUIApplication) {
-  if app.scrollViews.otherElements.buttons["Not Now"].waitForExistence(timeout: 2) {
-    app.scrollViews.otherElements.buttons["Not Now"].tap()
-  }
-}
 
 final class FirebaseSwiftUIExampleUITests: XCTestCase {
   override func setUpWithError() throws {
@@ -52,12 +44,50 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
   }
 
   @MainActor
-  func testSignInDisplaysSignedInView() throws {
-    let app = XCUIApplication()
+  func testSignInButtonsExist() throws {
+    let app = createTestApp()
+    app.launch()
+    
+    // Check for Twitter/X sign-in button
+    let twitterButton = app.buttons["sign-in-with-twitter-button"]
+    XCTAssertTrue(
+      twitterButton.waitForExistence(timeout: 5),
+      "Twitter/X sign-in button should exist"
+    )
+    
+    // Check for Google sign-in button
+    let googleButton = app.buttons["sign-in-with-google-button"]
+    XCTAssertTrue(
+      googleButton.waitForExistence(timeout: 5),
+      "Google sign-in button should exist"
+    )
+    
+    // Check for Facebook sign-in button
+    let facebookButton = app.buttons["sign-in-with-facebook-button"]
+    XCTAssertTrue(
+      facebookButton.waitForExistence(timeout: 5),
+      "Facebook sign-in button should exist"
+    )
+    
+    // Check for Phone sign-in button
+    let phoneButton = app.buttons["sign-in-with-phone-button"]
+    XCTAssertTrue(
+      phoneButton.waitForExistence(timeout: 5),
+      "Phone sign-in button should exist"
+    )
+  }
+
+  @MainActor
+  func testSignInDisplaysSignedInView() async throws {
     let email = createEmail()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--create-user")
-    app.launchArguments.append("\(email)")
+    let password = "123456"
+    
+    // Create user in test runner BEFORE launching app
+    // User will exist in emulator, but app starts unauthenticated
+    try await createTestUser(email: email, password: password)
+    
+    // Now launch the app - it connects to emulator but isn't signed in
+    let app = createTestApp()
     app.launch()
 
     let emailField = app.textFields["email-field"]
@@ -68,7 +98,7 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     let passwordField = app.secureTextFields["password-field"]
     XCTAssertTrue(passwordField.exists, "Password field should exist")
     passwordField.tap()
-    passwordField.typeText("123456")
+    passwordField.typeText(password)
 
     let signInButton = app.buttons["sign-in-button"]
     XCTAssertTrue(signInButton.exists, "Sign-In button should exist")
@@ -138,10 +168,9 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
   @MainActor
   func testCreateUserDisplaysSignedInView() throws {
-    let app = XCUIApplication()
     let email = createEmail()
     let password = "qwerty321@"
-    app.launchArguments.append("--auth-emulator")
+    let app = createTestApp()
     app.launch()
 
     // Check the Views are updated

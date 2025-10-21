@@ -33,7 +33,7 @@ struct TestView: View {
     Auth.auth().useEmulator(withHost: "localhost", port: 9099)
     Auth.auth().settings?.isAppVerificationDisabledForTesting = true
     Task {
-      try await testCreateUser()
+      try signOut()
     }
 
     let isMfaEnabled = ProcessInfo.processInfo.arguments.contains("--mfa-enabled")
@@ -56,6 +56,7 @@ struct TestView: View {
     )
     .withGoogleSignIn()
     .withPhoneSignIn()
+    .withTwitterSignIn()
     .withFacebookSignIn()
     .withEmailSignIn()
   }

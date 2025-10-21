@@ -1,16 +1,84 @@
 import Foundation
 import XCTest
 
+// MARK: - Email Generation
+
 func createEmail() -> String {
   let before = UUID().uuidString.prefix(8)
   let after = UUID().uuidString.prefix(6)
   return "\(before)@\(after).com"
 }
 
+// MARK: - App Configuration
+
+/// Creates and configures an XCUIApplication with default test launch arguments
+func createTestApp(mfaEnabled: Bool = false) -> XCUIApplication {
+  let app = XCUIApplication()
+  app.launchArguments.append("--test-view-enabled")
+  if mfaEnabled {
+    app.launchArguments.append("--mfa-enabled")
+  }
+  return app
+}
+
+// MARK: - Alert Handling
+
+func dismissAlert(app: XCUIApplication) {
+  if app.scrollViews.otherElements.buttons["Not Now"].waitForExistence(timeout: 2) {
+    app.scrollViews.otherElements.buttons["Not Now"].tap()
+  }
+}
+
+// MARK: - User Creation
+
+/// Helper to create a test user in the emulator via REST API (avoids keychain issues)
+func createTestUser(email: String, password: String = "123456", verifyEmail: Bool = false) async throws {
+  // Use Firebase Auth emulator REST API directly to avoid keychain access issues in UI tests
+  let signUpUrl = "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake-api-key"
+  
+  guard let url = URL(string: signUpUrl) else {
+    throw NSError(domain: "TestError", code: 1,
+                 userInfo: [NSLocalizedDescriptionKey: "Invalid emulator URL"])
+  }
+  
+  var request = URLRequest(url: url)
+  request.httpMethod = "POST"
+  request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+  
+  let body: [String: Any] = [
+    "email": email,
+    "password": password,
+    "returnSecureToken": true
+  ]
+  
+  request.httpBody = try JSONSerialization.data(withJSONObject: body)
+  
+  let (data, response) = try await URLSession.shared.data(for: request)
+  
+  guard let httpResponse = response as? HTTPURLResponse,
+        httpResponse.statusCode == 200 else {
+    let errorBody = String(data: data, encoding: .utf8) ?? "Unknown error"
+    throw NSError(domain: "TestError", code: 2,
+                 userInfo: [NSLocalizedDescriptionKey: "Failed to create user: \(errorBody)"])
+  }
+  
+  // If email verification is requested, verify the email
+  if verifyEmail {
+    // Parse the response to get the idToken
+    if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+       let idToken = json["idToken"] as? String {
+      try await verifyEmailInEmulator(email: email, idToken: idToken)
+    }
+  }
+}
+
+// MARK: - Email Verification
+
+/// Verifies an email address in the emulator using the OOB code mechanism
 func verifyEmailInEmulator(email: String,
                            idToken: String,
                            projectID: String = "flutterfire-e2e-tests",
-                           emulatorHost: String = "localhost:9099") async throws {
+                           emulatorHost: String = "127.0.0.1:9099") async throws {
   let base = "http://\(emulatorHost)"
 
 

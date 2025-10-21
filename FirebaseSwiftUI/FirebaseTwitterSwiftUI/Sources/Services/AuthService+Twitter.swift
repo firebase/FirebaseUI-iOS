@@ -13,7 +13,7 @@
 // limitations under the License.
 
 //
-//  AuthService+Facebook.swift
+//  AuthService+Twitter.swift
 //  FirebaseUI
 //
 //  Created by Russell Wheatley on 01/05/2025.
@@ -23,9 +23,9 @@ import FirebaseAuthSwiftUI
 
 public extension AuthService {
   @discardableResult
-  func withFacebookSignIn(scopes scopes: [String]? = nil) -> AuthService {
-    FacebookProviderAuthUI.configureProvider(scopes: scopes)
-    registerProvider(providerWithButton: FacebookProviderAuthUI.shared)
+  func withTwitterSignIn(_ provider: TwitterProviderSwift? = nil) -> AuthService {
+    registerProvider(providerWithButton: TwitterProviderAuthUI(provider: provider ??
+        TwitterProviderSwift()))
     return self
   }
 }

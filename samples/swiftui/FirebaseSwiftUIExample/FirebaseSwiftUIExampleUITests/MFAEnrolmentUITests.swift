@@ -29,13 +29,13 @@ final class MFAEnrollmentUITests: XCTestCase {
   // MARK: - MFA Management Navigation Tests
 
   @MainActor
-  func testMFAManagementButtonExistsAndIsTappable() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testMFAManagementButtonExistsAndIsTappable() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Sign in first to access MFA management
@@ -61,13 +61,13 @@ final class MFAEnrollmentUITests: XCTestCase {
   }
 
   @MainActor
-  func testMFAEnrollmentNavigationFromManagement() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testMFAEnrollmentNavigationFromManagement() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Sign in and navigate to MFA management
@@ -96,13 +96,13 @@ final class MFAEnrollmentUITests: XCTestCase {
   // MARK: - MFA Enrollment Factor Selection Tests
 
   @MainActor
-  func testFactorTypePickerExistsAndWorks() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testFactorTypePickerExistsAndWorks() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Navigate to MFA enrollment
@@ -125,13 +125,13 @@ final class MFAEnrollmentUITests: XCTestCase {
   }
 
   @MainActor
-  func testStartEnrollmentButtonExistsAndWorks() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testStartEnrollmentButtonExistsAndWorks() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Navigate to MFA enrollment
@@ -164,14 +164,11 @@ final class MFAEnrollmentUITests: XCTestCase {
 
   @MainActor
   func testEndToEndSMSEnrollmentAndRemovalFlow() async throws {
-    // 1) Launch app with emulator and create a fresh user
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--verify-email")
-    app.launchArguments.append("--create-user")
+    // 1) Create user in test runner before launching app (with email verification)
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    try await createTestUser(email: email, verifyEmail: true)
+    
+    let app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // 2) Sign in to reach SignedInView
@@ -264,15 +261,13 @@ final class MFAEnrollmentUITests: XCTestCase {
   // MARK: - TOTP Enrollment Flow Tests
 
   @MainActor
-  func testTOTPEnrollmentFlowUI() throws {
-    let app = XCUIApplication()
-
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--verify-email")
-    app.launchArguments.append("--create-user")
+  func testTOTPEnrollmentFlowUI() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app (with email verification)
+    try await createTestUser(email: email, verifyEmail: true)
+    
+    let app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Navigate to MFA enrollment and select TOTP
@@ -325,13 +320,13 @@ final class MFAEnrollmentUITests: XCTestCase {
   // MARK: - Error Handling Tests
 
   @MainActor
-  func testErrorMessageDisplay() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testErrorMessageDisplay() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Navigate to MFA enrollment
@@ -354,13 +349,13 @@ final class MFAEnrollmentUITests: XCTestCase {
   // MARK: - Navigation Tests
 
   @MainActor
-  func testBackButtonNavigation() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testBackButtonNavigation() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Navigate to MFA enrollment
@@ -384,13 +379,13 @@ final class MFAEnrollmentUITests: XCTestCase {
   }
 
   @MainActor
-  func testBackButtonFromMFAManagement() throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
-    app.launchArguments.append("--create-user")
+  func testBackButtonFromMFAManagement() async throws {
     let email = createEmail()
-    app.launchArguments.append("\(email)")
+    
+    // Create user in test runner before launching app
+    try await createTestUser(email: email)
+    
+    let app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Sign in and navigate to MFA management

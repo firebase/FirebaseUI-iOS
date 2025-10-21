@@ -12,20 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//
-//  AuthService+Facebook.swift
-//  FirebaseUI
-//
-//  Created by Russell Wheatley on 01/05/2025.
-//
+@testable import FirebaseTwitterSwiftUI
+import Testing
 
-import FirebaseAuthSwiftUI
-
-public extension AuthService {
-  @discardableResult
-  func withFacebookSignIn(scopes scopes: [String]? = nil) -> AuthService {
-    FacebookProviderAuthUI.configureProvider(scopes: scopes)
-    registerProvider(providerWithButton: FacebookProviderAuthUI.shared)
-    return self
-  }
+@Test func example() async throws {
+  // Write your test here and use APIs like `#expect(...)` to check expected conditions.
 }

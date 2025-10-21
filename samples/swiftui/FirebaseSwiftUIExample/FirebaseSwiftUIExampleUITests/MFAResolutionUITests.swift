@@ -32,9 +32,7 @@ final class MFAResolutionUITests: XCTestCase {
 
   @MainActor
   func testCompleteMFAResolutionFlowWithAPIEnrollment() async throws {
-    let app = XCUIApplication()
-    app.launchArguments.append("--auth-emulator")
-    app.launchArguments.append("--mfa-enabled")
+    let app = createTestApp(mfaEnabled: true)
     app.launch()
 
     let email = createEmail()
@@ -116,12 +114,6 @@ final class MFAResolutionUITests: XCTestCase {
   }
   
   // MARK: - Helper Methods
-
-  private func createEmail() -> String {
-    let before = UUID().uuidString.prefix(8)
-    let after = UUID().uuidString.prefix(6)
-    return "\(before)@\(after).com"
-  }
 
   /// Programmatically enables SMS MFA for a user via the Auth emulator REST API
   /// - Parameters:
@@ -389,7 +381,7 @@ final class MFAResolutionUITests: XCTestCase {
 
   private func signUpUser(email: String, password: String = "12345678") async throws {
     // Create user via Auth Emulator REST API
-    let url = URL(string: "http://localhost:9099/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake-api-key")!
+    let url = URL(string: "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake-api-key")!
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
