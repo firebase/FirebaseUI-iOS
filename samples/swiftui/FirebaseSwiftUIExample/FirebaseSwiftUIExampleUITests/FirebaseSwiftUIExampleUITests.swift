@@ -54,6 +54,13 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
       twitterButton.waitForExistence(timeout: 5),
       "Twitter/X sign-in button should exist"
     )
+
+    // Check for Apple sign-in button
+    let appleButton = app.buttons["sign-in-with-apple-button"]
+    XCTAssertTrue(
+      appleButton.waitForExistence(timeout: 5),
+      "Apple sign-in button should exist"
+    )
     
     // Check for Google sign-in button
     let googleButton = app.buttons["sign-in-with-google-button"]
