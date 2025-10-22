@@ -22,13 +22,13 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
   public let providerId: String
   public let scopes: [String]
   public let customParameters: [String: String]
-  
+
   // Button appearance
   public let displayName: String
   public let buttonIcon: Image
   public let buttonBackgroundColor: Color
   public let buttonForegroundColor: Color
-  
+
   /// Initialize a generic OAuth provider
   /// - Parameters:
   ///   - providerId: The OAuth provider ID (e.g., "github.com", "microsoft.com")
@@ -38,15 +38,13 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
   ///   - buttonIcon: Button icon image
   ///   - buttonBackgroundColor: Button background color
   ///   - buttonForegroundColor: Button text/icon color
-  public init(
-    providerId: String,
-    scopes: [String] = [],
-    customParameters: [String: String] = [:],
-    displayName: String,
-    buttonIcon: Image,
-    buttonBackgroundColor: Color = .black,
-    buttonForegroundColor: Color = .white
-  ) {
+  public init(providerId: String,
+              scopes: [String] = [],
+              customParameters: [String: String] = [:],
+              displayName: String,
+              buttonIcon: Image,
+              buttonBackgroundColor: Color = .black,
+              buttonForegroundColor: Color = .white) {
     self.providerId = providerId
     self.scopes = scopes
     self.customParameters = customParameters
@@ -55,7 +53,7 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
     self.buttonBackgroundColor = buttonBackgroundColor
     self.buttonForegroundColor = buttonForegroundColor
   }
-  
+
   /// Convenience initializer using SF Symbol
   /// - Parameters:
   ///   - providerId: The OAuth provider ID (e.g., "github.com", "microsoft.com")
@@ -65,15 +63,13 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
   ///   - iconSystemName: SF Symbol name
   ///   - buttonBackgroundColor: Button background color
   ///   - buttonForegroundColor: Button text/icon color
-  public convenience init(
-    providerId: String,
-    scopes: [String] = [],
-    customParameters: [String: String] = [:],
-    displayName: String,
-    iconSystemName: String,
-    buttonBackgroundColor: Color = .black,
-    buttonForegroundColor: Color = .white
-  ) {
+  public convenience init(providerId: String,
+                          scopes: [String] = [],
+                          customParameters: [String: String] = [:],
+                          displayName: String,
+                          iconSystemName: String,
+                          buttonBackgroundColor: Color = .black,
+                          buttonForegroundColor: Color = .white) {
     self.init(
       providerId: providerId,
       scopes: scopes,
@@ -84,20 +80,20 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
       buttonForegroundColor: buttonForegroundColor
     )
   }
-  
+
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
     let provider = OAuthProvider(providerID: providerId)
-    
+
     // Set scopes if provided
     if !scopes.isEmpty {
       provider.scopes = scopes
     }
-    
+
     // Set custom parameters if provided
     if !customParameters.isEmpty {
       provider.customParameters = customParameters
     }
-    
+
     return try await withCheckedThrowingContinuation { continuation in
       provider.getCredentialWith(nil) { credential, error in
         if let error {
@@ -116,7 +112,7 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
       }
     }
   }
-  
+
   public func deleteUser(user: User) async throws {
     let operation = OAuthDeleteUserOperation(oauthProvider: self)
     try await operation(on: user)
@@ -125,20 +121,19 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
 
 public class OAuthProviderAuthUI: AuthProviderUI {
   public var provider: AuthProviderSwift
-  
+
   public init(provider: AuthProviderSwift) {
     self.provider = provider
   }
-  
+
   public var id: String {
     guard let oauthProvider = provider as? OAuthProviderSwift else {
       return "oauth.unknown"
     }
     return oauthProvider.providerId
   }
-  
+
   @MainActor public func authButton() -> AnyView {
     AnyView(GenericOAuthButton(provider: provider))
   }
 }
-

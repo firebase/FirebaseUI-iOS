@@ -16,7 +16,6 @@ import SwiftUI
 
 /// Preset configurations for common OAuth providers
 public extension OAuthProviderSwift {
-  
   /// GitHub OAuth provider
   /// - Parameters:
   ///   - scopes: GitHub scopes (default: ["user"])
@@ -31,7 +30,7 @@ public extension OAuthProviderSwift {
       buttonForegroundColor: .white
     )
   }
-  
+
   /// Microsoft OAuth provider
   /// - Parameters:
   ///   - scopes: Microsoft scopes (default: ["openid", "profile", "email"])
@@ -40,14 +39,14 @@ public extension OAuthProviderSwift {
     return OAuthProviderSwift(
       providerId: "microsoft.com",
       scopes: scopes,
-      customParameters:  ["prompt" : "consent"],
+      customParameters: ["prompt": "consent"],
       displayName: "Sign in with Microsoft",
       iconSystemName: "building.2",
-      buttonBackgroundColor: Color(red: 0/255, green: 120/255, blue: 212/255),
+      buttonBackgroundColor: Color(red: 0 / 255, green: 120 / 255, blue: 212 / 255),
       buttonForegroundColor: .white
     )
   }
-  
+
   /// Yahoo OAuth provider
   /// - Parameters:
   ///   - scopes: Yahoo scopes (default: ["user.readwrite"])
@@ -56,12 +55,11 @@ public extension OAuthProviderSwift {
     return OAuthProviderSwift(
       providerId: "yahoo.com",
       scopes: scopes,
-      customParameters:  ["prompt" : "consent"],
+      customParameters: ["prompt": "consent"],
       displayName: "Sign in with Yahoo",
       iconSystemName: "y.circle.fill",
-      buttonBackgroundColor: Color(red: 80/255, green: 0/255, blue: 155/255),
+      buttonBackgroundColor: Color(red: 80 / 255, green: 0 / 255, blue: 155 / 255),
       buttonForegroundColor: .white
     )
   }
 }
-
