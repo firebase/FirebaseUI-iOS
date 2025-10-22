@@ -20,7 +20,6 @@ import SwiftUI
 public struct GenericOAuthButton {
   @Environment(AuthService.self) private var authService
   let provider: AuthProviderSwift
-
   public init(provider: AuthProviderSwift) {
     self.provider = provider
   }
@@ -34,7 +33,6 @@ extension GenericOAuthButton: View {
           .foregroundColor(.red)
       )
     }
-
     return AnyView(
       Button(action: {
         Task {
@@ -48,7 +46,6 @@ extension GenericOAuthButton: View {
             .scaledToFit()
             .frame(width: 24, height: 24)
             .foregroundColor(oauthProvider.buttonForegroundColor)
-
           Text(oauthProvider.displayName)
             .fontWeight(.semibold)
             .foregroundColor(oauthProvider.buttonForegroundColor)
