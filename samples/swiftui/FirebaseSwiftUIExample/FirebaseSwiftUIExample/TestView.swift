@@ -61,6 +61,9 @@ struct TestView: View {
     .withPhoneSignIn()
     .withAppleSignIn()
     .withTwitterSignIn()
+    .withOAuthSignIn(OAuthProviderSwift.github())
+    .withOAuthSignIn(OAuthProviderSwift.microsoft())
+    .withOAuthSignIn(OAuthProviderSwift.yahoo())
     .withFacebookSignIn()
     .withEmailSignIn()
   }
