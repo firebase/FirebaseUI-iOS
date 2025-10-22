@@ -35,7 +35,8 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
   }
 
   // Create a phone auth credential with the verification details
-  public func createPhoneAuthCredential(verificationID: String, verificationCode: String) -> AuthCredential {
+  public func createPhoneAuthCredential(verificationID: String,
+                                        verificationCode: String) -> AuthCredential {
     return PhoneAuthProvider.provider()
       .credential(withVerificationID: verificationID, verificationCode: verificationCode)
   }
