@@ -40,6 +40,7 @@ public extension OAuthProviderSwift {
     return OAuthProviderSwift(
       providerId: "microsoft.com",
       scopes: scopes,
+      customParameters:  ["prompt" : "consent"],
       displayName: "Sign in with Microsoft",
       iconSystemName: "building.2",
       buttonBackgroundColor: Color(red: 0/255, green: 120/255, blue: 212/255),
@@ -49,12 +50,13 @@ public extension OAuthProviderSwift {
   
   /// Yahoo OAuth provider
   /// - Parameters:
-  ///   - scopes: Yahoo scopes (default: [])
+  ///   - scopes: Yahoo scopes (default: ["user.readwrite"])
   ///   - Returns: Configured Yahoo provider
-  static func yahoo(scopes: [String] = []) -> OAuthProviderSwift {
+  static func yahoo(scopes: [String] = ["user.readwrite"]) -> OAuthProviderSwift {
     return OAuthProviderSwift(
       providerId: "yahoo.com",
       scopes: scopes,
+      customParameters:  ["prompt" : "consent"],
       displayName: "Sign in with Yahoo",
       iconSystemName: "y.circle.fill",
       buttonBackgroundColor: Color(red: 80/255, green: 0/255, blue: 155/255),
