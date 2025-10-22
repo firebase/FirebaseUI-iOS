@@ -1,0 +1,65 @@
+// Copyright 2025 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import FirebaseAuthSwiftUI
+import SwiftUI
+
+/// A generic OAuth sign-in button that adapts to any provider's configuration
+@MainActor
+public struct GenericOAuthButton {
+  @Environment(AuthService.self) private var authService
+  let provider: AuthProviderSwift
+  
+  public init(provider: AuthProviderSwift) {
+    self.provider = provider
+  }
+}
+
+extension GenericOAuthButton: View {
+  public var body: some View {
+    guard let oauthProvider = provider as? OAuthProviderSwift else {
+      return AnyView(
+        Text("Invalid OAuth Provider")
+          .foregroundColor(.red)
+      )
+    }
+    
+    return AnyView(
+      Button(action: {
+        Task {
+          try await authService.signIn(provider)
+        }
+      }) {
+        HStack {
+          oauthProvider.buttonIcon
+            .resizable()
+            .renderingMode(.template)
+            .scaledToFit()
+            .frame(width: 24, height: 24)
+            .foregroundColor(oauthProvider.buttonForegroundColor)
+          
+          Text(oauthProvider.displayName)
+            .fontWeight(.semibold)
+            .foregroundColor(oauthProvider.buttonForegroundColor)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(oauthProvider.buttonBackgroundColor)
+        .cornerRadius(8)
+      }
+      .accessibilityIdentifier("sign-in-with-\(oauthProvider.providerId)-button")
+    )
+  }
+}
+
