@@ -25,7 +25,7 @@ public extension OAuthProviderSwift {
       providerId: "github.com",
       scopes: scopes,
       displayName: "Sign in with GitHub",
-      iconSystemName: "chevron.left.forwardslash.chevron.right",
+      buttonIcon: Image("github_logo", bundle: .module),
       buttonBackgroundColor: .black,
       buttonForegroundColor: .white
     )
@@ -33,15 +33,15 @@ public extension OAuthProviderSwift {
 
   /// Microsoft OAuth provider
   /// - Parameters:
-  ///   - scopes: Microsoft scopes (default: ["openid", "profile", "email"])
+  ///   - scopes: Microsoft scopes (default: ["user.readwrite"])
   ///   - Returns: Configured Microsoft provider
-  static func microsoft(scopes: [String] = ["openid", "profile", "email"]) -> OAuthProviderSwift {
+  static func microsoft(scopes: [String] = ["user.readwrite"]) -> OAuthProviderSwift {
     return OAuthProviderSwift(
       providerId: "microsoft.com",
       scopes: scopes,
       customParameters: ["prompt": "consent"],
       displayName: "Sign in with Microsoft",
-      iconSystemName: "building.2",
+      buttonIcon: Image("microsoft_logo", bundle: .module),
       buttonBackgroundColor: Color(red: 0 / 255, green: 120 / 255, blue: 212 / 255),
       buttonForegroundColor: .white
     )
@@ -57,7 +57,7 @@ public extension OAuthProviderSwift {
       scopes: scopes,
       customParameters: ["prompt": "consent"],
       displayName: "Sign in with Yahoo",
-      iconSystemName: "y.circle.fill",
+      buttonIcon: Image("yahoo_logo", bundle: .module),
       buttonBackgroundColor: Color(red: 80 / 255, green: 0 / 255, blue: 155 / 255),
       buttonForegroundColor: .white
     )

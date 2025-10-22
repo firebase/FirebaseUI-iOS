@@ -351,7 +351,10 @@ let package = Package(
       dependencies: [
         "FirebaseAuthSwiftUI",
       ],
-      path: "FirebaseSwiftUI/FirebaseOAuthSwiftUI/Sources"
+      path: "FirebaseSwiftUI/FirebaseOAuthSwiftUI/Sources",
+      resources: [
+        .process("Resources")
+      ]
     ),
     .testTarget(
       name: "FirebaseOAuthSwiftUITests",
