@@ -89,11 +89,11 @@ extension PhoneAuthView: View {
                 errorMessage = "Invalid phone provider"
                 return
               }
-              phoneAuthProvider.setVerificationDetails(
+              let credential = phoneAuthProvider.createPhoneAuthCredential(
                 verificationID: verificationID,
                 verificationCode: verificationCode
               )
-              try await authService.signIn(phoneProvider)
+              _ = try await authService.signIn(credentials: credential)
             } catch {
               errorMessage = authService.string.localizedErrorMessage(for: error)
             }

@@ -19,10 +19,6 @@ import SwiftUI
 public typealias VerificationID = String
 
 public class PhoneProviderSwift: PhoneAuthProviderSwift {
-  // Store verification details for the signIn method
-  private var storedVerificationID: String?
-  private var storedVerificationCode: String?
-
   public init() {}
 
   @MainActor public func verifyPhoneNumber(phoneNumber: String) async throws -> VerificationID {
@@ -38,23 +34,19 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
     }
   }
 
-  // Set verification details before calling signIn
-  public func setVerificationDetails(verificationID: String, verificationCode: String) {
-    storedVerificationID = verificationID
-    storedVerificationCode = verificationCode
-  }
-
-  @MainActor public func createAuthCredential() async throws -> AuthCredential {
-    guard let verificationID = storedVerificationID,
-          let verificationCode = storedVerificationCode else {
-      throw AuthServiceError
-        .invalidPhoneAuthenticationArguments(
-          "please call setVerificationDetails() before creating Phone Auth credential"
-        )
-    }
-
+  // Create a phone auth credential with the verification details
+  public func createPhoneAuthCredential(verificationID: String, verificationCode: String) -> AuthCredential {
     return PhoneAuthProvider.provider()
       .credential(withVerificationID: verificationID, verificationCode: verificationCode)
+  }
+
+  // This method is required by the protocol but should not be used for phone auth
+  // Phone auth requires verification details, so use createPhoneAuthCredential instead
+  @MainActor public func createAuthCredential() async throws -> AuthCredential {
+    throw AuthServiceError
+      .invalidPhoneAuthenticationArguments(
+        "Phone auth requires verification details. Use createPhoneAuthCredential(verificationID:verificationCode:) instead."
+      )
   }
 }
 
