@@ -26,6 +26,7 @@ import FirebaseGoogleSwiftUI
 import FirebasePhoneAuthSwiftUI
 import FirebaseAppleSwiftUI
 import FirebaseTwitterSwiftUI
+import FirebaseOAuthSwiftUI
 import SwiftUI
 
 struct TestView: View {
