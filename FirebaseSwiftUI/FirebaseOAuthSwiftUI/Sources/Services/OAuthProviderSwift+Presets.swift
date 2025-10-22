@@ -63,20 +63,5 @@ public extension OAuthProviderSwift {
       buttonForegroundColor: .white
     )
   }
-  
-  /// LinkedIn OAuth provider
-  /// - Parameters:
-  ///   - scopes: LinkedIn scopes (default: ["r_liteprofile", "r_emailaddress"])
-  ///   - Returns: Configured LinkedIn provider
-  static func linkedIn(scopes: [String] = ["r_liteprofile", "r_emailaddress"]) -> OAuthProviderSwift {
-    return OAuthProviderSwift(
-      providerId: "linkedin.com",
-      scopes: scopes,
-      displayName: "Sign in with LinkedIn",
-      iconSystemName: "link",
-      buttonBackgroundColor: Color(red: 0/255, green: 119/255, blue: 181/255),
-      buttonForegroundColor: .white
-    )
-  }
 }
 
