@@ -29,10 +29,9 @@ public struct PhoneAuthButtonView {
 extension PhoneAuthButtonView: View {
   public var body: some View {
     Button(action: {
-      authService.registerModalView(for: .phoneAuth) {
-        AnyView(PhoneAuthView(phoneProvider: phoneProvider).environment(authService))
+      Task {
+        try await authService.signIn(phoneProvider)
       }
-      authService.presentModal(for: .phoneAuth)
     }) {
       Label("Sign in with Phone", systemImage: "phone.fill")
         .foregroundColor(.white)

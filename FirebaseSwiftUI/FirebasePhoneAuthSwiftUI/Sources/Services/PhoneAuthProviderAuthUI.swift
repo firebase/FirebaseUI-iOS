@@ -41,13 +41,31 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
       .credential(withVerificationID: verificationID, verificationCode: verificationCode)
   }
 
-  // This method is required by the protocol but should not be used for phone auth
-  // Phone auth requires verification details, so use createPhoneAuthCredential instead
+  // Present phone auth UI and wait for user to complete the flow
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
-    throw AuthServiceError
-      .invalidPhoneAuthenticationArguments(
-        "Phone auth requires verification details. Use createPhoneAuthCredential(verificationID:verificationCode:) instead."
-      )
+    guard let presentingViewController = await (UIApplication.shared.connectedScenes
+      .first as? UIWindowScene)?.windows.first?.rootViewController else {
+      throw AuthServiceError
+        .invalidPhoneAuthenticationArguments(
+          "Root View controller is not available to present Phone auth View."
+        )
+    }
+
+    return try await withCheckedThrowingContinuation { continuation in
+      let phoneAuthView = PhoneAuthView(phoneProvider: self) { result in
+        switch result {
+        case .success(let credential):
+          continuation.resume(returning: credential)
+        case .failure(let error):
+          continuation.resume(throwing: error)
+        }
+      }
+      
+      let hostingController = UIHostingController(rootView: phoneAuthView)
+      hostingController.modalPresentationStyle = .formSheet
+      
+      presentingViewController.present(hostingController, animated: true)
+    }
   }
 }
 

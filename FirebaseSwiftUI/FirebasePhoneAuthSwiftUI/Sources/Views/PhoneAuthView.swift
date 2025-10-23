@@ -21,102 +21,179 @@
 
 import FirebaseAuthSwiftUI
 import FirebaseCore
+import FirebaseAuth
 import SwiftUI
 
 @MainActor
 public struct PhoneAuthView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.dismiss) private var dismiss
   @State private var errorMessage = ""
   @State private var phoneNumber = ""
   @State private var showVerificationCodeInput = false
   @State private var verificationCode = ""
   @State private var verificationID = ""
+  @State private var isProcessing = false
   let phoneProvider: PhoneAuthProviderSwift
+  let completion: (Result<AuthCredential, Error>) -> Void
 
-  public init(phoneProvider: PhoneAuthProviderSwift) {
+  public init(phoneProvider: PhoneAuthProviderSwift, completion: @escaping (Result<AuthCredential, Error>) -> Void) {
     self.phoneProvider = phoneProvider
+    self.completion = completion
   }
 }
 
 extension PhoneAuthView: View {
   public var body: some View {
-    if authService.authenticationState != .authenticating {
-      VStack {
-        LabeledContent {
-          TextField(authService.string.enterPhoneNumberLabel, text: $phoneNumber)
-            .textInputAutocapitalization(.never)
-            .disableAutocorrection(true)
-            .submitLabel(.next)
-        } label: {
-          Image(systemName: "at")
-        }.padding(.vertical, 6)
+    ZStack {
+      VStack(spacing: 16) {
+        // Header with cancel button
+        HStack {
+          Spacer()
+          Button(action: {
+            completion(.failure(NSError(domain: "PhoneAuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "User cancelled"])))
+            dismiss()
+          }) {
+            Image(systemName: "xmark.circle.fill")
+              .font(.title2)
+              .foregroundColor(.gray)
+          }
+        }
+        .padding(.horizontal)
+        .padding(.top, 8)
+        
+        if !isProcessing {
+          Text("Sign in with Phone")
+            .font(.title2)
+            .bold()
+          
+          LabeledContent {
+            TextField(authService.string.enterPhoneNumberLabel, text: $phoneNumber)
+              .textInputAutocapitalization(.never)
+              .disableAutocorrection(true)
+              .submitLabel(.next)
+              .keyboardType(.phonePad)
+          } label: {
+            Image(systemName: "phone.fill")
+          }
+          .padding(.vertical, 6)
           .background(Divider(), alignment: .bottom)
           .padding(.bottom, 4)
-        Button(action: {
-          Task {
-            do {
-              let id = try await phoneProvider.verifyPhoneNumber(phoneNumber: phoneNumber)
-              verificationID = id
-              showVerificationCodeInput = true
-            } catch {
-              errorMessage = authService.string.localizedErrorMessage(
+          .padding(.horizontal)
+          
+          if !errorMessage.isEmpty {
+            Text(errorMessage)
+              .foregroundColor(.red)
+              .font(.caption)
+              .padding(.horizontal)
+          }
+          
+          Button(action: {
+            Task {
+              isProcessing = true
+              do {
+                let id = try await phoneProvider.verifyPhoneNumber(phoneNumber: phoneNumber)
+                verificationID = id
+                showVerificationCodeInput = true
+                errorMessage = ""
+              } catch {
+                errorMessage = authService.string.localizedErrorMessage(
                 for: error
               )
-            }
-          }
-        }) {
-          Text(authService.string.smsCodeSendButtonLabel)
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
-        }
-        .disabled(!PhoneUtils.isValidPhoneNumber(phoneNumber))
-        .padding([.top, .bottom], 8)
-        .frame(maxWidth: .infinity)
-        .buttonStyle(.borderedProminent)
-        Text(errorMessage).foregroundColor(.red)
-      }.sheet(isPresented: $showVerificationCodeInput) {
-        TextField(authService.string.phoneNumberVerificationCodeLabel, text: $verificationCode)
-          .keyboardType(.numberPad)
-          .padding()
-          .background(Color(.systemGray6))
-          .cornerRadius(8)
-          .padding(.horizontal)
-
-        Button(action: {
-          Task {
-            do {
-              guard let phoneAuthProvider = phoneProvider as? PhoneProviderSwift else {
-                errorMessage = "Invalid phone provider"
-                return
               }
-              let credential = phoneAuthProvider.createPhoneAuthCredential(
-                verificationID: verificationID,
-                verificationCode: verificationCode
-              )
-              _ = try await authService.signIn(credentials: credential)
-            } catch {
-              errorMessage = authService.string.localizedErrorMessage(for: error)
+              isProcessing = false
             }
-            showVerificationCodeInput = false
-            authService.dismissModal()
+          }) {
+            Text(authService.string.smsCodeSendButtonLabel)
+              .padding(.vertical, 8)
+              .frame(maxWidth: .infinity)
           }
-        }) {
-          Text(authService.string.verifyPhoneNumberAndSignInLabel)
-            .foregroundColor(.white)
+          .disabled(!PhoneUtils.isValidPhoneNumber(phoneNumber) || isProcessing)
+          .padding([.top, .bottom], 8)
+          .padding(.horizontal)
+          .buttonStyle(.borderedProminent)
+          
+          Spacer()
+        } else {
+          Spacer()
+          ProgressView()
+            .progressViewStyle(CircularProgressViewStyle())
             .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color.green)
+          Text("Processing...")
+            .foregroundColor(.secondary)
+          Spacer()
+        }
+      }
+      .sheet(isPresented: $showVerificationCodeInput) {
+        VStack(spacing: 16) {
+          // Header with cancel button
+          HStack {
+            Spacer()
+            Button(action: {
+              showVerificationCodeInput = false
+            }) {
+              Image(systemName: "xmark.circle.fill")
+                .font(.title2)
+                .foregroundColor(.gray)
+            }
+          }
+          .padding(.horizontal)
+          .padding(.top, 8)
+          
+          Text("Enter Verification Code")
+            .font(.title2)
+            .bold()
+          
+          TextField(authService.string.phoneNumberVerificationCodeLabel, text: $verificationCode)
+            .keyboardType(.numberPad)
+            .padding()
+            .background(Color(.systemGray6))
             .cornerRadius(8)
             .padding(.horizontal)
+          
+          if !errorMessage.isEmpty {
+            Text(errorMessage)
+              .foregroundColor(.red)
+              .font(.caption)
+              .padding(.horizontal)
+          }
+          
+          Button(action: {
+            Task {
+              isProcessing = true
+              do {
+                guard let phoneAuthProvider = phoneProvider as? PhoneProviderSwift else {
+                  errorMessage = "Invalid phone provider"
+                  isProcessing = false
+                  return
+                }
+                let credential = phoneAuthProvider.createPhoneAuthCredential(
+                  verificationID: verificationID,
+                  verificationCode: verificationCode
+                )
+                completion(.success(credential))
+                showVerificationCodeInput = false
+                dismiss()
+              } catch {
+                errorMessage = error.localizedDescription
+                isProcessing = false
+              }
+            }
+          }) {
+            Text(authService.string.verifyPhoneNumberAndSignInLabel)
+              .foregroundColor(.white)
+              .padding()
+              .frame(maxWidth: .infinity)
+              .background(Color.green)
+              .cornerRadius(8)
+              .padding(.horizontal)
+          }
+          .disabled(verificationCode.isEmpty || isProcessing)
+          
+          Spacer()
         }
-      }.onOpenURL { url in
-        authService.auth.canHandle(url)
+        .padding(.vertical)
       }
-    } else {
-      ProgressView()
-        .progressViewStyle(CircularProgressViewStyle(tint: .white))
-        .padding(.vertical, 8)
-        .frame(maxWidth: .infinity)
     }
   }
 }
@@ -124,6 +201,12 @@ extension PhoneAuthView: View {
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
   let phoneProvider = PhoneProviderSwift()
-  return PhoneAuthView(phoneProvider: phoneProvider)
-    .environment(AuthService())
+  return PhoneAuthView(phoneProvider: phoneProvider) { result in
+    switch result {
+    case .success:
+      print("Preview: Phone auth succeeded")
+    case .failure(let error):
+      print("Preview: Phone auth failed with error: \(error)")
+    }
+  }
 }
