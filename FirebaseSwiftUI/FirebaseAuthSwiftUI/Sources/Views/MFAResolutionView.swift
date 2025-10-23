@@ -71,11 +71,10 @@ public struct MFAResolutionView {
       do {
         let verificationId = try await authService.resolveSmsChallenge(hintIndex: selectedHintIndex)
         self.verificationId = verificationId
+        isLoading = false
       } catch {
-        authService.currentError = AlertError(message: error.localizedDescription)
+        isLoading = false
       }
-
-      isLoading = false
     }
   }
 
@@ -94,11 +93,10 @@ public struct MFAResolutionView {
         // On success, the AuthService will update the authentication state
         // and we should navigate back to the main app
         authService.authView = .authPicker
+        isLoading = false
       } catch {
-        authService.currentError = AlertError(message: error.localizedDescription)
+        isLoading = false
       }
-
-      isLoading = false
     }
   }
 

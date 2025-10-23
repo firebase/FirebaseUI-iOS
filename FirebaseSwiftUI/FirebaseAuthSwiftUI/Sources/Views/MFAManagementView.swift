@@ -49,11 +49,10 @@ public struct MFAManagementView {
       do {
         let freshFactors = try await authService.unenrollMFA(factorUid)
         enrolledFactors = freshFactors
+        isLoading = false
       } catch {
-        authService.currentError = AlertError(message: error.localizedDescription)
+        isLoading = false
       }
-
-      isLoading = false
     }
   }
 

@@ -117,11 +117,10 @@ public struct MFAEnrolmentView {
           createdAt: session.createdAt,
           expiresAt: session.expiresAt
         )
+        isLoading = false
       } catch {
-        authService.currentError = AlertError(message: error.localizedDescription)
+        isLoading = false
       }
-
-      isLoading = false
     }
   }
 
@@ -146,12 +145,10 @@ public struct MFAEnrolmentView {
 
         // Navigate back to signed in view
         authService.authView = .authPicker
-
+        isLoading = false
       } catch {
-        authService.currentError = AlertError(message: error.localizedDescription)
+        isLoading = false
       }
-
-      isLoading = false
     }
   }
 
