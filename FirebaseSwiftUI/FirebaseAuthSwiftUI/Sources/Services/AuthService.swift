@@ -29,7 +29,7 @@ public protocol DeleteUserSwift {
   @MainActor func deleteUser(user: User) async throws
 }
 
-public protocol PhoneAuthProviderAuthUIProtocol: AuthProviderSwift {
+public protocol PhoneAuthProviderSwift: AuthProviderSwift {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
 }
 
@@ -107,42 +107,6 @@ public final class AuthService {
   public let passwordPrompt: PasswordPromptCoordinator = .init()
   public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
-
-  // MARK: - AuthPickerView Modal APIs
-
-  public var isShowingAuthModal = false
-
-  public enum AuthModalContentType {
-    case phoneAuth
-  }
-
-  public var currentModal: AuthModalContentType?
-
-  public var authModalViewBuilderRegistry: [AuthModalContentType: () -> AnyView] = [:]
-
-  public func registerModalView(for type: AuthModalContentType,
-                                @ViewBuilder builder: @escaping () -> AnyView) {
-    authModalViewBuilderRegistry[type] = builder
-  }
-
-  public func viewForCurrentModal() -> AnyView? {
-    guard let type = currentModal,
-          let builder = authModalViewBuilderRegistry[type] else {
-      return nil
-    }
-    return builder()
-  }
-
-  public func presentModal(for type: AuthModalContentType) {
-    currentModal = type
-    isShowingAuthModal = true
-  }
-
-  public func dismissModal() {
-    isShowingAuthModal = false
-  }
-
-  // MARK: - End AuthPickerView Modal APIs
 
   // MARK: - Provider APIs
 

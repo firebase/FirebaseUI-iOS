@@ -18,18 +18,8 @@ import SwiftUI
 
 public typealias VerificationID = String
 
-public class PhoneAuthProviderAuthUI: PhoneAuthProviderAuthUIProtocol, AuthProviderUI {
-  public let id: String = "phone"
-  
-  public var provider: AuthProviderSwift { self }
-  
-  // Store verification details for the signIn method
-  private var storedVerificationID: String?
-  private var storedVerificationCode: String?
-
-  @MainActor public func authButton() -> AnyView {
-    AnyView(PhoneAuthButtonView())
-  }
+public class PhoneProviderSwift: PhoneAuthProviderSwift {
+  public init() {}
 
   @MainActor public func verifyPhoneNumber(phoneNumber: String) async throws -> VerificationID {
     return try await withCheckedThrowingContinuation { continuation in
@@ -43,20 +33,47 @@ public class PhoneAuthProviderAuthUI: PhoneAuthProviderAuthUIProtocol, AuthProvi
         }
     }
   }
-  
-  // Set verification details before calling signIn
-  public func setVerificationDetails(verificationID: String, verificationCode: String) {
-    self.storedVerificationID = verificationID
-    self.storedVerificationCode = verificationCode
-  }
-  
+
+  // Present phone auth UI and wait for user to complete the flow
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
-    guard let verificationID = storedVerificationID,
-          let verificationCode = storedVerificationCode else {
-      throw AuthServiceError.invalidPhoneAuthenticationArguments("please call setVerificationDetails() before creating Phone Auth credential")
+    guard let presentingViewController = await (UIApplication.shared.connectedScenes
+      .first as? UIWindowScene)?.windows.first?.rootViewController else {
+      throw AuthServiceError
+        .invalidPhoneAuthenticationArguments(
+          "Root View controller is not available to present Phone auth View."
+        )
     }
-    
-    return PhoneAuthProvider.provider()
-      .credential(withVerificationID: verificationID, verificationCode: verificationCode)
+
+    return try await withCheckedThrowingContinuation { continuation in
+      let phoneAuthView = PhoneAuthView(phoneProvider: self) { result in
+        switch result {
+        case let .success(verificationID, verificationCode):
+          // Create the credential here
+          let credential = PhoneAuthProvider.provider()
+            .credential(withVerificationID: verificationID, verificationCode: verificationCode)
+          continuation.resume(returning: credential)
+        case let .failure(error):
+          continuation.resume(throwing: error)
+        }
+      }
+
+      let hostingController = UIHostingController(rootView: phoneAuthView)
+      hostingController.modalPresentationStyle = .formSheet
+
+      presentingViewController.present(hostingController, animated: true)
+    }
+  }
+}
+
+public class PhoneAuthProviderAuthUI: AuthProviderUI {
+  public var provider: AuthProviderSwift
+  public let id: String = "phone.com"
+
+  public init(provider: PhoneAuthProviderSwift? = nil) {
+    self.provider = provider ?? PhoneProviderSwift()
+  }
+
+  @MainActor public func authButton() -> AnyView {
+    AnyView(PhoneAuthButtonView(phoneProvider: provider as! PhoneAuthProviderSwift))
   }
 }

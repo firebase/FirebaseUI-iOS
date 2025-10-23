@@ -26,7 +26,11 @@ import SwiftUI
 @MainActor
 public struct SignInWithGoogleButton {
   @Environment(AuthService.self) private var authService
-  private let googleProvider = GoogleProviderAuthUI()
+  let googleProvider: AuthProviderSwift
+
+  public init(googleProvider: AuthProviderSwift) {
+    self.googleProvider = googleProvider
+  }
 
   let customViewModel = GoogleSignInButtonViewModel(
     scheme: .light,
@@ -48,6 +52,7 @@ extension SignInWithGoogleButton: View {
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
-  return SignInWithGoogleButton()
+  let googleProvider = GoogleProviderSwift(clientID: "")
+  return SignInWithGoogleButton(googleProvider: googleProvider)
     .environment(AuthService())
 }
