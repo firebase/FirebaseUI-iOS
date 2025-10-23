@@ -60,7 +60,7 @@ extension AuthPickerView: View {
           case .mfaEnrollment:
             MFAEnrolmentView()
           case .mfaResolution:
-            MFAResolutionView()  
+            MFAResolutionView()
           case .authPicker:
             if authService.emailSignInEnabled {
               Text(authService.authenticationFlow == .signIn ? authService.string

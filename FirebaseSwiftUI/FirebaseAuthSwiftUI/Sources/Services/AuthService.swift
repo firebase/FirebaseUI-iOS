@@ -162,7 +162,7 @@ public final class AuthService {
   func reset() {
     currentError = nil
   }
-  
+
   func updateError(title: String = "Error", message: String) {
     currentError = AlertError(title: title, message: message)
   }
@@ -193,7 +193,8 @@ public final class AuthService {
     }
   }
 
-  public func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws -> SignInOutcome {
+  public func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws
+    -> SignInOutcome {
     if currentUser == nil {
       throw AuthServiceError.noCurrentUser
     }
@@ -227,7 +228,7 @@ public final class AuthService {
         updateAuthenticationState()
         return .signedIn(result)
       }
-    }  catch let error as NSError {
+    } catch let error as NSError {
       authenticationState = .unauthenticated
       updateError(message: string.localizedErrorMessage(for: error))
 
@@ -281,7 +282,7 @@ public extension AuthService {
                 let provider = matchingProvider.provider as? DeleteUserSwift else {
             throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
           }
-          
+
           try await provider.deleteUser(user: user)
         }
       }
@@ -428,7 +429,6 @@ public extension AuthService {
   }
 }
 
-
 // MARK: - Phone Auth Sign In
 
 public extension AuthService {
@@ -459,7 +459,7 @@ public extension AuthService {
     guard let user = currentUser else {
       throw AuthServiceError.noCurrentUser
     }
-    
+
     do {
       let changeRequest = user.createProfileChangeRequest()
       changeRequest.photoURL = url
@@ -469,12 +469,12 @@ public extension AuthService {
       throw error
     }
   }
-  
+
   func updateUserDisplayName(name: String) async throws {
     guard let user = currentUser else {
       throw AuthServiceError.noCurrentUser
     }
-    
+
     do {
       let changeRequest = user.createProfileChangeRequest()
       changeRequest.displayName = name
@@ -498,7 +498,10 @@ public extension AuthService {
 
       // Check if MFA is enabled in configuration
       guard configuration.mfaEnabled else {
-        throw AuthServiceError.multiFactorAuth("MFA is not enabled in configuration, please enable `AuthConfiguration.mfaEnabled`")
+        throw AuthServiceError
+          .multiFactorAuth(
+            "MFA is not enabled in configuration, please enable `AuthConfiguration.mfaEnabled`"
+          )
       }
 
       // Check if the requested factor type is allowed
@@ -522,7 +525,9 @@ public extension AuthService {
           } else if let session = session {
             continuation.resume(returning: session)
           } else {
-            continuation.resume(throwing: AuthServiceError.multiFactorAuth("Failed to get MFA session for '\(type)'"))
+            continuation
+              .resume(throwing: AuthServiceError
+                .multiFactorAuth("Failed to get MFA session for '\(type)'"))
           }
         }
       }
@@ -630,9 +635,11 @@ public extension AuthService {
       // Validate session state
       guard session.canProceed else {
         if session.isExpired {
-          throw AuthServiceError.multiFactorAuth("Enrollment session has expired, cannot complete enrollment")
+          throw AuthServiceError
+            .multiFactorAuth("Enrollment session has expired, cannot complete enrollment")
         } else {
-          throw AuthServiceError.multiFactorAuth("Enrollment session is not in a valid state for completion")
+          throw AuthServiceError
+            .multiFactorAuth("Enrollment session is not in a valid state for completion")
         }
       }
 
@@ -704,7 +711,7 @@ public extension AuthService {
       throw AuthServiceError
         .reauthenticationRequired("Recent login required to perform this operation.")
     }
-    
+
     if providerId == EmailAuthProviderID {
       guard let email = user.email else {
         throw AuthServiceError.invalidCredentials("User does not have an email address")
@@ -862,7 +869,7 @@ public extension AuthService {
 
       do {
         let result = try await resolver.resolveSignIn(with: assertion)
-        
+
         // After MFA resolution, result.credential is nil, so restore the original credential
         // that was used before MFA was triggered
         signedInCredential = result.credential ?? pendingMFACredential

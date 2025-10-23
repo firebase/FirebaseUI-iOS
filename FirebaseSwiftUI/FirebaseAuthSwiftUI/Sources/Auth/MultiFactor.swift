@@ -57,7 +57,7 @@ public struct EnrollmentSession {
   public let expiresAt: Date
 
   // Internal handle to finish TOTP
-  internal let _totpSecret: AnyObject?
+  let _totpSecret: AnyObject?
 
   public enum EnrollmentStatus {
     case initiated

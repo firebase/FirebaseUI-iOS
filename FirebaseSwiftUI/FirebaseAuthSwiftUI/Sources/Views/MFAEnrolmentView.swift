@@ -169,7 +169,6 @@ public struct MFAEnrolmentView {
 
   private func copyToClipboard(_ text: String) {
     UIPasteboard.general.string = text
-    
 
     // Show feedback
     showCopiedFeedback = true
@@ -180,25 +179,25 @@ public struct MFAEnrolmentView {
       showCopiedFeedback = false
     }
   }
-  
+
   private func generateQRCode(from string: String) -> UIImage? {
     let data = Data(string.utf8)
-    
+
     guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
     filter.setValue(data, forKey: "inputMessage")
     filter.setValue("H", forKey: "inputCorrectionLevel")
-    
+
     guard let ciImage = filter.outputImage else { return nil }
-    
+
     // Scale up the QR code for better quality
     let transform = CGAffineTransform(scaleX: 10, y: 10)
     let scaledImage = ciImage.transformed(by: transform)
-    
+
     let context = CIContext()
     guard let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) else {
       return nil
     }
-    
+
     return UIImage(cgImage: cgImage)
   }
 }
@@ -518,7 +517,7 @@ extension MFAEnrolmentView: View {
                   .aspectRatio(contentMode: .fit)
                   .frame(width: 200, height: 200)
                   .accessibilityIdentifier("qr-code-image")
-                
+
                 HStack(spacing: 6) {
                   Image(systemName: "arrow.up.forward.app.fill")
                     .font(.caption)

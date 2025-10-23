@@ -25,7 +25,7 @@ public struct AuthConfiguration {
   public let emailLinkSignInActionCodeSettings: ActionCodeSettings?
   public let verifyEmailActionCodeSettings: ActionCodeSettings?
 
-    // MARK: - MFA Configuration
+  // MARK: - MFA Configuration
 
   public let mfaEnabled: Bool
   public let allowedSecondFactors: Set<SecondFactorType>

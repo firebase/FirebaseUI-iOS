@@ -18,7 +18,7 @@ import SwiftUI
 struct ErrorAlertModifier: ViewModifier {
   @Binding var error: AlertError?
   let okButtonLabel: String
-  
+
   func body(content: Content) -> some View {
     content
       .alert(isPresented: Binding<Bool>(
@@ -48,10 +48,9 @@ public struct AlertError: Identifiable {
   public let id = UUID()
   public let title: String
   public let message: String
-  
+
   public init(title: String = "Error", message: String) {
     self.title = title
     self.message = message
   }
 }
-
