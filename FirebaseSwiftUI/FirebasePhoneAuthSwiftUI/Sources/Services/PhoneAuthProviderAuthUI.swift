@@ -47,19 +47,19 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
     return try await withCheckedThrowingContinuation { continuation in
       let phoneAuthView = PhoneAuthView(phoneProvider: self) { result in
         switch result {
-        case .success(let verificationID, let verificationCode):
+        case let .success(verificationID, verificationCode):
           // Create the credential here
           let credential = PhoneAuthProvider.provider()
             .credential(withVerificationID: verificationID, verificationCode: verificationCode)
           continuation.resume(returning: credential)
-        case .failure(let error):
+        case let .failure(error):
           continuation.resume(throwing: error)
         }
       }
-      
+
       let hostingController = UIHostingController(rootView: phoneAuthView)
       hostingController.modalPresentationStyle = .formSheet
-      
+
       presentingViewController.present(hostingController, animated: true)
     }
   }

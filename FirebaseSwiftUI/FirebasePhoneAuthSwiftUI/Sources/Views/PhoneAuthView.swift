@@ -19,9 +19,9 @@
 //  Created by Russell Wheatley on 14/05/2025.
 //
 
+import FirebaseAuth
 import FirebaseAuthSwiftUI
 import FirebaseCore
-import FirebaseAuth
 import SwiftUI
 
 @MainActor
@@ -36,7 +36,8 @@ public struct PhoneAuthView {
   let phoneProvider: PhoneAuthProviderSwift
   let completion: (Result<(String, String), Error>) -> Void
 
-  public init(phoneProvider: PhoneAuthProviderSwift, completion: @escaping (Result<(String, String), Error>) -> Void) {
+  public init(phoneProvider: PhoneAuthProviderSwift,
+              completion: @escaping (Result<(String, String), Error>) -> Void) {
     self.phoneProvider = phoneProvider
     self.completion = completion
   }
@@ -50,7 +51,11 @@ extension PhoneAuthView: View {
         HStack {
           Spacer()
           Button(action: {
-            completion(.failure(NSError(domain: "PhoneAuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "User cancelled"])))
+            completion(.failure(NSError(
+              domain: "PhoneAuthError",
+              code: -1,
+              userInfo: [NSLocalizedDescriptionKey: "User cancelled"]
+            )))
             dismiss()
           }) {
             Image(systemName: "xmark.circle.fill")
@@ -60,12 +65,12 @@ extension PhoneAuthView: View {
         }
         .padding(.horizontal)
         .padding(.top, 8)
-        
+
         if !isProcessing {
           Text("Sign in with Phone")
             .font(.title2)
             .bold()
-          
+
           LabeledContent {
             TextField("Enter phone number", text: $phoneNumber)
               .textInputAutocapitalization(.never)
@@ -79,14 +84,14 @@ extension PhoneAuthView: View {
           .background(Divider(), alignment: .bottom)
           .padding(.bottom, 4)
           .padding(.horizontal)
-          
+
           if !errorMessage.isEmpty {
             Text(errorMessage)
               .foregroundColor(.red)
               .font(.caption)
               .padding(.horizontal)
           }
-          
+
           Button(action: {
             Task {
               isProcessing = true
@@ -109,7 +114,7 @@ extension PhoneAuthView: View {
           .padding([.top, .bottom], 8)
           .padding(.horizontal)
           .buttonStyle(.borderedProminent)
-          
+
           Spacer()
         } else {
           Spacer()
@@ -136,25 +141,25 @@ extension PhoneAuthView: View {
           }
           .padding(.horizontal)
           .padding(.top, 8)
-          
+
           Text("Enter Verification Code")
             .font(.title2)
             .bold()
-          
+
           TextField("Verification Code", text: $verificationCode)
             .keyboardType(.numberPad)
             .padding()
             .background(Color(.systemGray6))
             .cornerRadius(8)
             .padding(.horizontal)
-          
+
           if !errorMessage.isEmpty {
             Text(errorMessage)
               .foregroundColor(.red)
               .font(.caption)
               .padding(.horizontal)
           }
-          
+
           Button(action: {
             Task {
               isProcessing = true
@@ -173,7 +178,7 @@ extension PhoneAuthView: View {
               .padding(.horizontal)
           }
           .disabled(verificationCode.isEmpty || isProcessing)
-          
+
           Spacer()
         }
         .padding(.vertical)
@@ -187,9 +192,9 @@ extension PhoneAuthView: View {
   let phoneProvider = PhoneProviderSwift()
   return PhoneAuthView(phoneProvider: phoneProvider) { result in
     switch result {
-    case .success(let verificationID, let verificationCode):
+    case let .success(verificationID, verificationCode):
       print("Preview: Got verification - ID: \(verificationID), Code: \(verificationCode)")
-    case .failure(let error):
+    case let .failure(error):
       print("Preview: Phone auth failed with error: \(error)")
     }
   }
