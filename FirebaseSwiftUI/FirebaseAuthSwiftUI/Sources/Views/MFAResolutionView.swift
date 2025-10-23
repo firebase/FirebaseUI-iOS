@@ -66,7 +66,6 @@ public struct MFAResolutionView {
 
     Task {
       isLoading = true
-      authService.currentError = nil
 
       do {
         let verificationId = try await authService.resolveSmsChallenge(hintIndex: selectedHintIndex)
@@ -81,7 +80,6 @@ public struct MFAResolutionView {
   private func completeResolution() {
     Task {
       isLoading = true
-      authService.currentError = nil
 
       do {
         let code = selectedHint?.isPhoneHint == true ? verificationCode : totpCode

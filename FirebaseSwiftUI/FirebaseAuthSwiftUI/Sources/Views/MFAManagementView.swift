@@ -44,7 +44,6 @@ public struct MFAManagementView {
   private func unenrollFactor(_ factorUid: String) {
     Task {
       isLoading = true
-      authService.currentError = nil
 
       do {
         let freshFactors = try await authService.unenrollMFA(factorUid)

@@ -77,7 +77,6 @@ public struct MFAEnrolmentView {
   private func startEnrollment() {
     Task {
       isLoading = true
-      authService.currentError = nil
 
       do {
         let session = try await authService.startMfaEnrollment(
@@ -98,7 +97,6 @@ public struct MFAEnrolmentView {
 
     Task {
       isLoading = true
-      authService.currentError = nil
 
       do {
         let verificationId = try await authService.sendSmsVerificationForEnrollment(
@@ -129,7 +127,6 @@ public struct MFAEnrolmentView {
 
     Task {
       isLoading = true
-      authService.currentError = nil
 
       do {
         let code = session.type == .sms ? verificationCode : totpCode
@@ -158,7 +155,6 @@ public struct MFAEnrolmentView {
     verificationCode = ""
     totpCode = ""
     displayName = ""
-    authService.currentError = nil
     focus = nil
   }
 
