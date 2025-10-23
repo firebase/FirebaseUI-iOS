@@ -34,13 +34,6 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
     }
   }
 
-  // Create a phone auth credential with the verification details
-  public func createPhoneAuthCredential(verificationID: String,
-                                        verificationCode: String) -> AuthCredential {
-    return PhoneAuthProvider.provider()
-      .credential(withVerificationID: verificationID, verificationCode: verificationCode)
-  }
-
   // Present phone auth UI and wait for user to complete the flow
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
     guard let presentingViewController = await (UIApplication.shared.connectedScenes
@@ -54,7 +47,10 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
     return try await withCheckedThrowingContinuation { continuation in
       let phoneAuthView = PhoneAuthView(phoneProvider: self) { result in
         switch result {
-        case .success(let credential):
+        case .success(let verificationID, let verificationCode):
+          // Create the credential here
+          let credential = PhoneAuthProvider.provider()
+            .credential(withVerificationID: verificationID, verificationCode: verificationCode)
           continuation.resume(returning: credential)
         case .failure(let error):
           continuation.resume(throwing: error)

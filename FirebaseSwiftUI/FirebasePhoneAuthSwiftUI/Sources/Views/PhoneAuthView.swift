@@ -35,9 +35,9 @@ public struct PhoneAuthView {
   @State private var verificationID = ""
   @State private var isProcessing = false
   let phoneProvider: PhoneAuthProviderSwift
-  let completion: (Result<AuthCredential, Error>) -> Void
+  let completion: (Result<(String, String), Error>) -> Void
 
-  public init(phoneProvider: PhoneAuthProviderSwift, completion: @escaping (Result<AuthCredential, Error>) -> Void) {
+  public init(phoneProvider: PhoneAuthProviderSwift, completion: @escaping (Result<(String, String), Error>) -> Void) {
     self.phoneProvider = phoneProvider
     self.completion = completion
   }
@@ -161,23 +161,10 @@ extension PhoneAuthView: View {
           Button(action: {
             Task {
               isProcessing = true
-              do {
-                guard let phoneAuthProvider = phoneProvider as? PhoneProviderSwift else {
-                  errorMessage = "Invalid phone provider"
-                  isProcessing = false
-                  return
-                }
-                let credential = phoneAuthProvider.createPhoneAuthCredential(
-                  verificationID: verificationID,
-                  verificationCode: verificationCode
-                )
-                completion(.success(credential))
-                showVerificationCodeInput = false
-                dismiss()
-              } catch {
-                errorMessage = error.localizedDescription
-                isProcessing = false
-              }
+              // Return the verification details to createAuthCredential
+              completion(.success((verificationID, verificationCode)))
+              showVerificationCodeInput = false
+              dismiss()
             }
           }) {
             Text(authService.string.verifyPhoneNumberAndSignInLabel)
@@ -203,8 +190,8 @@ extension PhoneAuthView: View {
   let phoneProvider = PhoneProviderSwift()
   return PhoneAuthView(phoneProvider: phoneProvider) { result in
     switch result {
-    case .success:
-      print("Preview: Phone auth succeeded")
+    case .success(let verificationID, let verificationCode):
+      print("Preview: Got verification - ID: \(verificationID), Code: \(verificationCode)")
     case .failure(let error):
       print("Preview: Phone auth failed with error: \(error)")
     }
