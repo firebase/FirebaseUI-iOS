@@ -335,9 +335,6 @@ final class MFAEnrollmentUITests: XCTestCase {
 
     // Start enrollment to trigger potential errors
     app.buttons["start-enrollment-button"].tap()
-
-    // Note: Errors are now displayed via modal alerts instead of inline text
-    // Error handling can be tested by triggering error conditions and checking for alert dialogs
   }
 
   // MARK: - Navigation Tests
