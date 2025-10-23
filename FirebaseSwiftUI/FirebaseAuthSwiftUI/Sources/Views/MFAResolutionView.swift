@@ -28,7 +28,6 @@ public struct MFAResolutionView {
   @State private var verificationCode = ""
   @State private var totpCode = ""
   @State private var isLoading = false
-  @State private var errorMessage = ""
   @State private var selectedHintIndex = 0
   @State private var verificationId: String?
 
@@ -67,13 +66,13 @@ public struct MFAResolutionView {
 
     Task {
       isLoading = true
-      errorMessage = ""
+      authService.currentError = nil
 
       do {
         let verificationId = try await authService.resolveSmsChallenge(hintIndex: selectedHintIndex)
         self.verificationId = verificationId
       } catch {
-        errorMessage = error.localizedDescription
+        authService.currentError = AlertError(message: error.localizedDescription)
       }
 
       isLoading = false
@@ -83,7 +82,7 @@ public struct MFAResolutionView {
   private func completeResolution() {
     Task {
       isLoading = true
-      errorMessage = ""
+      authService.currentError = nil
 
       do {
         let code = selectedHint?.isPhoneHint == true ? verificationCode : totpCode
@@ -96,7 +95,7 @@ public struct MFAResolutionView {
         // and we should navigate back to the main app
         authService.authView = .authPicker
       } catch {
-        errorMessage = error.localizedDescription
+        authService.currentError = AlertError(message: error.localizedDescription)
       }
 
       isLoading = false
@@ -137,15 +136,6 @@ extension MFAResolutionView: View {
         // Resolution Content
         if let hint = selectedHint {
           resolutionContent(for: hint)
-        }
-
-        // Error message
-        if !errorMessage.isEmpty {
-          Text(errorMessage)
-            .foregroundColor(.red)
-            .font(.caption)
-            .padding(.horizontal)
-            .accessibilityIdentifier("error-message")
         }
 
         // Action buttons

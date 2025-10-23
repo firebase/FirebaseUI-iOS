@@ -24,7 +24,7 @@ import SwiftUI
 public struct SignInWithFacebookButton {
   @Environment(AuthService.self) private var authService
   let facebookProvider: AuthProviderSwift
-  @State private var errorMessage = ""
+  @State private var currentError: AlertError?
   @State private var showCanceledAlert = false
   @State private var limitedLogin = true
   @State private var showUserTrackingAlert = false
@@ -73,7 +73,7 @@ extension SignInWithFacebookButton: View {
           case FacebookProviderError.signInCancelled:
             showCanceledAlert = true
           default:
-            errorMessage = authService.string.localizedErrorMessage(for: error)
+            currentError = AlertError(message: authService.string.localizedErrorMessage(for: error))
           }
         }
       }
@@ -124,6 +124,7 @@ extension SignInWithFacebookButton: View {
         )
       }
     }
+    .errorAlert(error: $currentError, okButtonLabel: authService.string.okButtonLabel)
   }
 }
 

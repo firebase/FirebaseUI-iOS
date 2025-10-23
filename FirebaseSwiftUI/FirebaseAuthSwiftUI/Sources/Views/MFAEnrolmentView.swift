@@ -32,7 +32,6 @@ public struct MFAEnrolmentView {
   @State private var totpCode = ""
   @State private var currentSession: EnrollmentSession?
   @State private var isLoading = false
-  @State private var errorMessage = ""
   @State private var displayName = ""
   @State private var showCopiedFeedback = false
 
@@ -78,7 +77,7 @@ public struct MFAEnrolmentView {
   private func startEnrollment() {
     Task {
       isLoading = true
-      errorMessage = ""
+      authService.currentError = nil
 
       do {
         let session = try await authService.startMfaEnrollment(
@@ -88,7 +87,7 @@ public struct MFAEnrolmentView {
         )
         currentSession = session
       } catch {
-        errorMessage = error.localizedDescription
+        authService.currentError = AlertError(message: error.localizedDescription)
       }
 
       isLoading = false
@@ -100,7 +99,7 @@ public struct MFAEnrolmentView {
 
     Task {
       isLoading = true
-      errorMessage = ""
+      authService.currentError = nil
 
       do {
         let verificationId = try await authService.sendSmsVerificationForEnrollment(
@@ -120,7 +119,7 @@ public struct MFAEnrolmentView {
           expiresAt: session.expiresAt
         )
       } catch {
-        errorMessage = error.localizedDescription
+        authService.currentError = AlertError(message: error.localizedDescription)
       }
 
       isLoading = false
@@ -132,7 +131,7 @@ public struct MFAEnrolmentView {
 
     Task {
       isLoading = true
-      errorMessage = ""
+      authService.currentError = nil
 
       do {
         let code = session.type == .sms ? verificationCode : totpCode
@@ -150,7 +149,7 @@ public struct MFAEnrolmentView {
         authService.authView = .authPicker
 
       } catch {
-        errorMessage = error.localizedDescription
+        authService.currentError = AlertError(message: error.localizedDescription)
       }
 
       isLoading = false
@@ -163,7 +162,7 @@ public struct MFAEnrolmentView {
     verificationCode = ""
     totpCode = ""
     displayName = ""
-    errorMessage = ""
+    authService.currentError = nil
     focus = nil
   }
 
@@ -308,15 +307,6 @@ extension MFAEnrolmentView: View {
         enrollmentContent(for: session)
       } else {
         initialContent
-      }
-
-      // Error message
-      if !errorMessage.isEmpty {
-        Text(errorMessage)
-          .foregroundColor(.red)
-          .font(.caption)
-          .padding(.horizontal)
-          .accessibilityIdentifier("error-message")
       }
     }
     .padding(.horizontal, 16)

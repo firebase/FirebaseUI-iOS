@@ -23,7 +23,9 @@ public struct VerifyEmailView {
     do {
       try await authService.sendEmailVerification()
       showModal = true
-    } catch {}
+    } catch {
+      // Error already displayed via modal by AuthService
+    }
   }
 }
 

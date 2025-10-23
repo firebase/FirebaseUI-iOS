@@ -117,7 +117,7 @@ extension PasswordRecoveryView: View {
         Text(String(format: authService.string.passwordRecoveryEmailSentMessage, email))
           .padding()
 
-      case .failure:
+      case let .failure(error):
         Text(authService.string.alertErrorTitle)
           .font(.title)
           .fontWeight(.semibold)
@@ -125,7 +125,7 @@ extension PasswordRecoveryView: View {
 
         Divider()
 
-        Text(authService.errorMessage)
+        Text(authService.string.localizedErrorMessage(for: error))
           .padding()
       }
 

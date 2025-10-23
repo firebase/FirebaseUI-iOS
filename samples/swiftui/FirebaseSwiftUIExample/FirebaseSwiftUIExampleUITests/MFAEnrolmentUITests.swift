@@ -336,14 +336,8 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Start enrollment to trigger potential errors
     app.buttons["start-enrollment-button"].tap()
 
-    // Check if error message element exists (it might not be visible initially)
-    let errorMessage = app.staticTexts["error-message"]
-
-    // The error message element should exist even if not currently displaying an error
-    // In real scenarios, this would test actual error conditions
-    if errorMessage.exists {
-      XCTAssertTrue(true, "Error message element exists for error display")
-    }
+    // Note: Errors are now displayed via modal alerts instead of inline text
+    // Error handling can be tested by triggering error conditions and checking for alert dialogs
   }
 
   // MARK: - Navigation Tests
