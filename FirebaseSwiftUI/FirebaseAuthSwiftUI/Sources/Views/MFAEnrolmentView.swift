@@ -86,11 +86,10 @@ public struct MFAEnrolmentView {
           issuer: authService.configuration.mfaIssuer
         )
         currentSession = session
+        isLoading = false
       } catch {
-        authService.currentError = AlertError(message: error.localizedDescription)
+        isLoading = false
       }
-
-      isLoading = false
     }
   }
 

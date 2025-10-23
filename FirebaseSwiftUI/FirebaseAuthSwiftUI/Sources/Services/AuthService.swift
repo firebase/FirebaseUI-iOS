@@ -491,79 +491,84 @@ public extension AuthService {
 public extension AuthService {
   func startMfaEnrollment(type: SecondFactorType, accountName: String? = nil,
                           issuer: String? = nil) async throws -> EnrollmentSession {
-    guard let user = auth.currentUser else {
-      throw AuthServiceError.noCurrentUser
-    }
+    do {
+      guard let user = auth.currentUser else {
+        throw AuthServiceError.noCurrentUser
+      }
 
-    // Check if MFA is enabled in configuration
-    guard configuration.mfaEnabled else {
-      throw AuthServiceError.multiFactorAuth("MFA is not enabled in configuration, please enable `AuthConfiguration.mfaEnabled`")
-    }
+      // Check if MFA is enabled in configuration
+      guard configuration.mfaEnabled else {
+        throw AuthServiceError.multiFactorAuth("MFA is not enabled in configuration, please enable `AuthConfiguration.mfaEnabled`")
+      }
 
-    // Check if the requested factor type is allowed
-    guard configuration.allowedSecondFactors.contains(type) else {
-      throw AuthServiceError
-        .multiFactorAuth(
-          "The requested MFA factor type '\(type)' is not allowed in AuthConfiguration.allowedSecondFactors"
-        )
-    }
+      // Check if the requested factor type is allowed
+      guard configuration.allowedSecondFactors.contains(type) else {
+        throw AuthServiceError
+          .multiFactorAuth(
+            "The requested MFA factor type '\(type)' is not allowed in AuthConfiguration.allowedSecondFactors"
+          )
+      }
 
-    let multiFactorUser = user.multiFactor
+      let multiFactorUser = user.multiFactor
 
-    // Get the multi-factor session
-    let session = try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<
-      MultiFactorSession,
-      Error
-    >) in
-      multiFactorUser.getSessionWithCompletion { session, error in
-        if let error = error {
-          continuation.resume(throwing: error)
-        } else if let session = session {
-          continuation.resume(returning: session)
-        } else {
-          continuation.resume(throwing: AuthServiceError.multiFactorAuth("Failed to get MFA session for '\(type)'"))
+      // Get the multi-factor session
+      let session = try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<
+        MultiFactorSession,
+        Error
+      >) in
+        multiFactorUser.getSessionWithCompletion { session, error in
+          if let error = error {
+            continuation.resume(throwing: error)
+          } else if let session = session {
+            continuation.resume(returning: session)
+          } else {
+            continuation.resume(throwing: AuthServiceError.multiFactorAuth("Failed to get MFA session for '\(type)'"))
+          }
         }
       }
-    }
 
-    switch type {
-    case .sms:
-      // For SMS, we just return the session - phone number will be provided in
-      // sendSmsVerificationForEnrollment
-      return EnrollmentSession(
-        type: .sms,
-        session: session,
-        status: .initiated
-      )
+      switch type {
+      case .sms:
+        // For SMS, we just return the session - phone number will be provided in
+        // sendSmsVerificationForEnrollment
+        return EnrollmentSession(
+          type: .sms,
+          session: session,
+          status: .initiated
+        )
 
-    case .totp:
-      // For TOTP, generate the secret and QR code
-      let totpSecret = try await TOTPMultiFactorGenerator.generateSecret(with: session)
+      case .totp:
+        // For TOTP, generate the secret and QR code
+        let totpSecret = try await TOTPMultiFactorGenerator.generateSecret(with: session)
 
-      // Generate QR code URL
-      let resolvedAccountName = accountName ?? user.email ?? "User"
-      let resolvedIssuer = issuer ?? configuration.mfaIssuer
+        // Generate QR code URL
+        let resolvedAccountName = accountName ?? user.email ?? "User"
+        let resolvedIssuer = issuer ?? configuration.mfaIssuer
 
-      let qrCodeURL = totpSecret.generateQRCodeURL(
-        withAccountName: resolvedAccountName,
-        issuer: resolvedIssuer
-      )
+        let qrCodeURL = totpSecret.generateQRCodeURL(
+          withAccountName: resolvedAccountName,
+          issuer: resolvedIssuer
+        )
 
-      let totpInfo = TOTPEnrollmentInfo(
-        sharedSecretKey: totpSecret.sharedSecretKey(),
-        qrCodeURL: URL(string: qrCodeURL),
-        accountName: resolvedAccountName,
-        issuer: resolvedIssuer,
-        verificationStatus: .pending
-      )
+        let totpInfo = TOTPEnrollmentInfo(
+          sharedSecretKey: totpSecret.sharedSecretKey(),
+          qrCodeURL: URL(string: qrCodeURL),
+          accountName: resolvedAccountName,
+          issuer: resolvedIssuer,
+          verificationStatus: .pending
+        )
 
-      return EnrollmentSession(
-        type: .totp,
-        session: session,
-        totpInfo: totpInfo,
-        status: .initiated,
-        _totpSecret: totpSecret
-      )
+        return EnrollmentSession(
+          type: .totp,
+          session: session,
+          totpInfo: totpInfo,
+          status: .initiated,
+          _totpSecret: totpSecret
+        )
+      }
+    } catch {
+      updateError(message: string.localizedErrorMessage(for: error))
+      throw error
     }
   }
 
