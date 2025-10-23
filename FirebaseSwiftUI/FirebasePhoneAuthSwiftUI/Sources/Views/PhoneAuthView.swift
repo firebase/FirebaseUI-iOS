@@ -26,7 +26,6 @@ import SwiftUI
 
 @MainActor
 public struct PhoneAuthView {
-  @Environment(AuthService.self) private var authService
   @Environment(\.dismiss) private var dismiss
   @State private var errorMessage = ""
   @State private var phoneNumber = ""
@@ -68,7 +67,7 @@ extension PhoneAuthView: View {
             .bold()
           
           LabeledContent {
-            TextField(authService.string.enterPhoneNumberLabel, text: $phoneNumber)
+            TextField("Enter phone number", text: $phoneNumber)
               .textInputAutocapitalization(.never)
               .disableAutocorrection(true)
               .submitLabel(.next)
@@ -97,14 +96,12 @@ extension PhoneAuthView: View {
                 showVerificationCodeInput = true
                 errorMessage = ""
               } catch {
-                errorMessage = authService.string.localizedErrorMessage(
-                for: error
-              )
+                errorMessage = error.localizedDescription
               }
               isProcessing = false
             }
           }) {
-            Text(authService.string.smsCodeSendButtonLabel)
+            Text("Send Code")
               .padding(.vertical, 8)
               .frame(maxWidth: .infinity)
           }
@@ -144,7 +141,7 @@ extension PhoneAuthView: View {
             .font(.title2)
             .bold()
           
-          TextField(authService.string.phoneNumberVerificationCodeLabel, text: $verificationCode)
+          TextField("Verification Code", text: $verificationCode)
             .keyboardType(.numberPad)
             .padding()
             .background(Color(.systemGray6))
@@ -167,7 +164,7 @@ extension PhoneAuthView: View {
               dismiss()
             }
           }) {
-            Text(authService.string.verifyPhoneNumberAndSignInLabel)
+            Text("Verify and Sign In")
               .foregroundColor(.white)
               .padding()
               .frame(maxWidth: .infinity)
