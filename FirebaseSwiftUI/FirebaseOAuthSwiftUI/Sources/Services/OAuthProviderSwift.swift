@@ -96,19 +96,23 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
 
     return try await withCheckedThrowingContinuation { continuation in
       provider.getCredentialWith(nil) { credential, error in
-        if let error {
+        if let error = error {
           continuation.resume(
             throwing: AuthServiceError.signInFailed(underlying: error)
           )
-        } else if let credential {
-          continuation.resume(returning: credential)
-        } else {
+          return
+        }
+
+        guard let credential = credential else {
           continuation.resume(
             throwing: AuthServiceError.invalidCredentials(
               "\(self.providerId) did not provide a valid AuthCredential"
             )
           )
+          return
         }
+
+        continuation.resume(returning: credential)
       }
     }
   }
