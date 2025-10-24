@@ -179,12 +179,12 @@ jobs:
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleUITests.xcresult | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple
             
-      - name: Upload test logs
+      - name: Upload Firebase Emulator logs
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: ui-tests-logs
-          path: samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.log
+          name: firebase-emulator-logs
+          path: samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample/firebase-debug.log
           
       - name: Upload test results
         if: failure()
