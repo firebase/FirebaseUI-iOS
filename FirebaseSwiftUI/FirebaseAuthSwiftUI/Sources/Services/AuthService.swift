@@ -132,9 +132,14 @@ public final class AuthService {
   }
 
   public func signIn(_ provider: AuthProviderSwift) async throws -> SignInOutcome {
-    let credential = try await provider.createAuthCredential()
-    let result = try await signIn(credentials: credential)
-    return result
+    do {
+      let credential = try await provider.createAuthCredential()
+      let result = try await signIn(credentials: credential)
+      return result
+    } catch {
+      updateError(message: string.localizedErrorMessage(for: error))
+      throw error
+    }
   }
 
   // MARK: - End Provider APIs
