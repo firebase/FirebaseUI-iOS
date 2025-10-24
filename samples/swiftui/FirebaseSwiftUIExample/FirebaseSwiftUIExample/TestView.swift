@@ -26,6 +26,7 @@ import FirebaseGoogleSwiftUI
 import FirebasePhoneAuthSwiftUI
 import FirebaseAppleSwiftUI
 import FirebaseTwitterSwiftUI
+import FirebaseOAuthSwiftUI
 import SwiftUI
 
 struct TestView: View {
@@ -60,6 +61,9 @@ struct TestView: View {
     .withPhoneSignIn()
     .withAppleSignIn()
     .withTwitterSignIn()
+    .withOAuthSignIn(OAuthProviderSwift.github())
+    .withOAuthSignIn(OAuthProviderSwift.microsoft())
+    .withOAuthSignIn(OAuthProviderSwift.yahoo())
     .withFacebookSignIn()
     .withEmailSignIn()
   }

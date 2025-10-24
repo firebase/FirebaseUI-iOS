@@ -61,6 +61,27 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
       appleButton.waitForExistence(timeout: 5),
       "Apple sign-in button should exist"
     )
+
+    // Check for Github sign-in button
+    let githubButton = app.buttons["sign-in-with-github.com-button"]
+    XCTAssertTrue(
+      githubButton.waitForExistence(timeout: 5),
+      "Github sign-in button should exist"
+    )
+    
+    // Check for Microsoft sign-in button
+    let microsoftButton = app.buttons["sign-in-with-microsoft.com-button"]
+    XCTAssertTrue(
+      microsoftButton.waitForExistence(timeout: 5),
+      "Microsoft sign-in button should exist"
+    )
+    
+    // Check for Yahoo sign-in button
+    let yahooButton = app.buttons["sign-in-with-yahoo.com-button"]
+    XCTAssertTrue(
+      yahooButton.waitForExistence(timeout: 5),
+      "Yahoo sign-in button should exist"
+    )
     
     // Check for Google sign-in button
     let googleButton = app.buttons["sign-in-with-google-button"]
@@ -214,6 +235,13 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
       .buttons["sign-in-button"] // This button changes context after switch-auth-flow
     XCTAssertTrue(signUpButton.exists, "Sign-Up button should exist")
     signUpButton.tap()
+
+    // Wait for the auth screen to disappear (email field should no longer exist)
+    let emailFieldDisappeared = NSPredicate(format: "exists == false")
+    let expectation = XCTNSPredicateExpectation(predicate: emailFieldDisappeared, object: emailField)
+    let result = XCTWaiter().wait(for: [expectation], timeout: 10.0)
+    XCTAssertEqual(result, .completed, "Email field should disappear after sign-up")
+    
 
     // Wait for user creation and signed-in view to appear
     let signedInText = app.staticTexts["signed-in-text"]

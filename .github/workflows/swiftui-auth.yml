@@ -26,7 +26,7 @@ jobs:
   unit-tests:
     name: Package Unit Tests
     runs-on: macos-15
-    timeout-minutes: 20
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
       
@@ -129,7 +129,7 @@ jobs:
   ui-tests:
     name: UI Tests
     runs-on: macos-15
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
       
@@ -179,16 +179,16 @@ jobs:
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleUITests.xcresult | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple
             
-      - name: Upload test logs
+      - name: Upload Firebase Emulator logs
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: ui-tests-logs
-          path: samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.log
+          name: firebase-emulator-logs
+          path: samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample/firebase-debug.log
           
       - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: ui-tests-results
+          name: FirebaseSwiftUIExampleUITests.xcresult
           path: samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.xcresult
