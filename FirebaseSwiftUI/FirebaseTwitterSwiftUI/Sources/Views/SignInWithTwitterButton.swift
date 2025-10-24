@@ -29,7 +29,7 @@ extension SignInWithTwitterButton: View {
   public var body: some View {
     Button(action: {
       Task {
-        try await authService.signIn(provider)
+        try? await authService.signIn(provider)
       }
     }) {
       HStack {

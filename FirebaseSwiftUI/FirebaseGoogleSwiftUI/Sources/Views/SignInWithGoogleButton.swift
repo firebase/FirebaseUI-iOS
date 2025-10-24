@@ -43,7 +43,7 @@ extension SignInWithGoogleButton: View {
   public var body: some View {
     GoogleSignInButton(viewModel: customViewModel) {
       Task {
-        try await authService.signIn(googleProvider)
+        try? await authService.signIn(googleProvider)
       }
     }
     .accessibilityIdentifier("sign-in-with-google-button")
