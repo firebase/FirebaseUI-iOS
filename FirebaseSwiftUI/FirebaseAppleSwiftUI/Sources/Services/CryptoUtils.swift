@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Foundation
 import CryptoKit
+import Foundation
 
 /// Set of utility APIs for generating cryptographical artifacts.
 enum CryptoUtils {
@@ -50,4 +50,3 @@ enum CryptoUtils {
     return hashString
   }
 }
-
