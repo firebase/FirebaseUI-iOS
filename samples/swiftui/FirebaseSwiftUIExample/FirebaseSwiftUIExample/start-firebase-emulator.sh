@@ -14,7 +14,7 @@ if ! [ -x "$(command -v npm)" ]; then
   exit 1
 fi
 
-EMU_START_COMMAND="firebase emulators:start --only auth --project flutterfire-e2e-tests"
+EMU_START_COMMAND="firebase emulators:start --only auth --project flutterfire-e2e-tests --debug"
 
 MAX_RETRIES=3
 MAX_CHECKATTEMPTS=60
