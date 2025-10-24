@@ -190,5 +190,5 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: ui-tests-results
+          name: FirebaseSwiftUIExampleUITests.xcresult
           path: samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.xcresult
