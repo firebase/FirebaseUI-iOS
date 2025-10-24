@@ -77,16 +77,3 @@ public class PhoneAuthProviderAuthUI: AuthProviderUI {
     AnyView(PhoneAuthButtonView(phoneProvider: provider as! PhoneAuthProviderSwift))
   }
 }
-
-public class PhoneAuthProviderAuthUI: AuthProviderUI {
-  public var provider: AuthProviderSwift
-  public let id: String = "phone.com"
-
-  public init(provider: PhoneAuthProviderSwift? = nil) {
-    self.provider = provider ?? PhoneProviderSwift()
-  }
-
-  @MainActor public func authButton() -> AnyView {
-    AnyView(PhoneAuthButtonView(phoneProvider: provider as! PhoneAuthProviderSwift))
-  }
-}
