@@ -9,18 +9,13 @@
 import FirebaseAuthSwiftUI
 import Observation
 
-protocol OAuthOperationReauthentication: ProviderOperationReauthentication {
-  var oauthProvider: OAuthProviderSwift { get }
-}
-
-extension OAuthOperationReauthentication {
-  var authProvider: AuthProviderSwift { oauthProvider }
-}
-
 @MainActor
 class OAuthDeleteUserOperation: AuthenticatedOperation,
-  @preconcurrency OAuthOperationReauthentication {
+  @preconcurrency ProviderOperationReauthentication {
   let oauthProvider: OAuthProviderSwift
+  
+  var authProvider: AuthProviderSwift { oauthProvider }
+  
   init(oauthProvider: OAuthProviderSwift) {
     self.oauthProvider = oauthProvider
   }

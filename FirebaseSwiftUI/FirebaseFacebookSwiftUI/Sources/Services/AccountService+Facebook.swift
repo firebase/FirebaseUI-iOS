@@ -23,18 +23,13 @@
 import FirebaseAuthSwiftUI
 import Observation
 
-protocol FacebookOperationReauthentication: ProviderOperationReauthentication {
-  var facebookProvider: FacebookProviderSwift { get }
-}
-
-extension FacebookOperationReauthentication {
-  var authProvider: AuthProviderSwift { facebookProvider }
-}
-
 @MainActor
 class FacebookDeleteUserOperation: AuthenticatedOperation,
-  @preconcurrency FacebookOperationReauthentication {
+  @preconcurrency ProviderOperationReauthentication {
   let facebookProvider: FacebookProviderSwift
+  
+  var authProvider: AuthProviderSwift { facebookProvider }
+  
   init(facebookProvider: FacebookProviderSwift) {
     self.facebookProvider = facebookProvider
   }

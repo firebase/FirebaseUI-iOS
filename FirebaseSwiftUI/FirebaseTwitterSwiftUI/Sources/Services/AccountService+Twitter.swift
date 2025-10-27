@@ -9,18 +9,13 @@
 import FirebaseAuthSwiftUI
 import Observation
 
-protocol TwitterOperationReauthentication: ProviderOperationReauthentication {
-  var twitterProvider: TwitterProviderSwift { get }
-}
-
-extension TwitterOperationReauthentication {
-  var authProvider: AuthProviderSwift { twitterProvider }
-}
-
 @MainActor
 class TwitterDeleteUserOperation: AuthenticatedOperation,
-  @preconcurrency TwitterOperationReauthentication {
+  @preconcurrency ProviderOperationReauthentication {
   let twitterProvider: TwitterProviderSwift
+  
+  var authProvider: AuthProviderSwift { twitterProvider }
+  
   init(twitterProvider: TwitterProviderSwift) {
     self.twitterProvider = twitterProvider
   }

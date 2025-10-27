@@ -30,18 +30,13 @@
 import FirebaseAuthSwiftUI
 import Observation
 
-protocol GoogleOperationReauthentication: ProviderOperationReauthentication {
-  var googleProvider: GoogleProviderSwift { get }
-}
-
-extension GoogleOperationReauthentication {
-  var authProvider: AuthProviderSwift { googleProvider }
-}
-
 @MainActor
 class GoogleDeleteUserOperation: AuthenticatedOperation,
-  @preconcurrency GoogleOperationReauthentication {
+  @preconcurrency ProviderOperationReauthentication {
   let googleProvider: GoogleProviderSwift
+  
+  var authProvider: AuthProviderSwift { googleProvider }
+  
   init(googleProvider: GoogleProviderSwift) {
     self.googleProvider = googleProvider
   }

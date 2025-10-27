@@ -9,18 +9,13 @@
 import FirebaseAuthSwiftUI
 import Observation
 
-protocol AppleOperationReauthentication: ProviderOperationReauthentication {
-  var appleProvider: AppleProviderSwift { get }
-}
-
-extension AppleOperationReauthentication {
-  var authProvider: AuthProviderSwift { appleProvider }
-}
-
 @MainActor
 class AppleDeleteUserOperation: AuthenticatedOperation,
-  @preconcurrency AppleOperationReauthentication {
+  @preconcurrency ProviderOperationReauthentication {
   let appleProvider: AppleProviderSwift
+  
+  var authProvider: AuthProviderSwift { appleProvider }
+  
   init(appleProvider: AppleProviderSwift) {
     self.appleProvider = appleProvider
   }
