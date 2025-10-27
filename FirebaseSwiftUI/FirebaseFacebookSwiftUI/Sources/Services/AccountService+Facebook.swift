@@ -28,7 +28,7 @@ protocol FacebookOperationReauthentication {
 }
 
 extension FacebookOperationReauthentication {
-  @MainActor func reauthenticate() async throws -> AuthenticationToken {
+  @MainActor func reauthenticate() async throws {
     guard let user = Auth.auth().currentUser else {
       throw AuthServiceError.reauthenticationRequired("No user currently signed-in")
     }
@@ -36,8 +36,6 @@ extension FacebookOperationReauthentication {
     do {
       let credential = try await facebookProvider.createAuthCredential()
       try await user.reauthenticate(with: credential)
-
-      return .firebase("")
     } catch {
       throw AuthServiceError.signInFailed(underlying: error)
     }

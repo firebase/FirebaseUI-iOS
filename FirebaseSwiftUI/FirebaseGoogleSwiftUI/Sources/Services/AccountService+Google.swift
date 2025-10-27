@@ -35,7 +35,7 @@ protocol GoogleOperationReauthentication {
 }
 
 extension GoogleOperationReauthentication {
-  @MainActor func reauthenticate() async throws -> AuthenticationToken {
+  @MainActor func reauthenticate() async throws {
     guard let user = Auth.auth().currentUser else {
       throw AuthServiceError.reauthenticationRequired("No user currently signed-in")
     }
@@ -44,7 +44,6 @@ extension GoogleOperationReauthentication {
       let credential = try await googleProvider.createAuthCredential()
       try await user.reauthenticate(with: credential)
 
-      return .firebase("")
     } catch {
       throw AuthServiceError.signInFailed(underlying: error)
     }
