@@ -132,6 +132,6 @@ public class FacebookProviderAuthUI: AuthProviderUI {
   }
 
   @MainActor public func authButton() -> AnyView {
-    AnyView(SignInWithFacebookButton(facebookProvider: provider))
+    AnyView(SignInWithFacebookButton(facebookProvider: provider as! FacebookProviderSwift))
   }
 }
