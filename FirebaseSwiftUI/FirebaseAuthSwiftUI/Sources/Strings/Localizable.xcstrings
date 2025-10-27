@@ -4,6 +4,22 @@
     "%@" : {
 
     },
+    "%@ %@ (%@)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@ (%3$@)"
+          }
+        }
+      }
+    },
+    "••••••%@" : {
+
+    },
+    "Account: %@" : {
+
+    },
     "AccountDisabledError" : {
       "comment" : "Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "migrated",
@@ -27,6 +43,12 @@
           }
         }
       }
+    },
+    "Add an extra layer of security to your account" : {
+
+    },
+    "Add Another Method" : {
+
     },
     "AddPasswordAlertMessage" : {
       "comment" : "Alert message shown when adding account password.",
@@ -163,6 +185,18 @@
         }
       }
     },
+    "as:" : {
+
+    },
+    "Authentication" : {
+
+    },
+    "Authentication Method" : {
+
+    },
+    "Authenticator App" : {
+
+    },
     "AuthPickerTitle" : {
       "comment" : "Title for auth picker screen.",
       "extractionState" : "stale",
@@ -214,6 +248,18 @@
         }
       }
     },
+    "Change number" : {
+
+    },
+    "Check your email at %@ for a link to reset your password." : {
+
+    },
+    "Choose Authentication Method" : {
+
+    },
+    "Choose verification method:" : {
+
+    },
     "ChoosePassword" : {
       "comment" : "Placeholder for the password text field in a sign up form.",
       "extractionState" : "manual",
@@ -238,6 +284,15 @@
         }
       }
     },
+    "Complete Setup" : {
+
+    },
+    "Complete Sign-In" : {
+
+    },
+    "Complete sign-in with your second factor" : {
+
+    },
     "ConfirmEmail" : {
       "comment" : "Title of confirm email label.",
       "extractionState" : "manual",
@@ -261,6 +316,18 @@
           }
         }
       }
+    },
+    "Copied to clipboard!" : {
+
+    },
+    "Create Account" : {
+
+    },
+    "Create an account" : {
+
+    },
+    "Create an Account" : {
+
     },
     "Delete" : {
       "comment" : "Text of Delete action button.",
@@ -321,6 +388,19 @@
           }
         }
       }
+    },
+    "Digit %lld of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Digit %1$lld of %2$lld"
+          }
+        }
+      }
+    },
+    "Display Name" : {
+
     },
     "Don't have an account yet?" : {
       "localizations" : {
@@ -440,6 +520,36 @@
         }
       }
     },
+    "Enrolled Methods" : {
+
+    },
+    "Enrolled: %@" : {
+
+    },
+    "Enter 6-digit code" : {
+
+    },
+    "Enter Code from App" : {
+
+    },
+    "Enter the 6-digit code from your authenticator app" : {
+
+    },
+    "Enter Verification Code" : {
+
+    },
+    "Enter verification code digit" : {
+
+    },
+    "Enter your email address and we'll send you a link to reset your password." : {
+
+    },
+    "Enter Your Phone Number" : {
+
+    },
+    "Enter your phone number to get started" : {
+
+    },
     "EnterYourEmail" : {
       "comment" : "Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "manual",
@@ -500,6 +610,9 @@
         }
       }
     },
+    "Forgot password?" : {
+
+    },
     "ForgotPassword" : {
       "comment" : "Button text for 'Forgot Password' action.",
       "extractionState" : "manual",
@@ -523,6 +636,9 @@
           }
         }
       }
+    },
+    "Get Started" : {
+
     },
     "InvalidEmailError" : {
       "comment" : "Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars.",
@@ -558,6 +674,21 @@
         }
       }
     },
+    "Manage Two-Factor Authentication" : {
+
+    },
+    "Manage your authentication methods" : {
+
+    },
+    "Manual Entry Key:" : {
+
+    },
+    "MFA is not enabled in the current configuration. Please contact your administrator." : {
+
+    },
+    "Multi-Factor Authentication Disabled" : {
+
+    },
     "Name" : {
       "comment" : "Label next to a name text field.",
       "extractionState" : "manual",
@@ -582,6 +713,15 @@
         }
       }
     },
+    "No Authentication Methods" : {
+
+    },
+    "No Authentication Methods Available" : {
+
+    },
+    "No MFA methods are configured as allowed. Please contact your administrator." : {
+
+    },
     "OK" : {
       "comment" : "OK button title.",
       "extractionState" : "manual",
@@ -593,6 +733,9 @@
           }
         }
       }
+    },
+    "Password reset link sent!" : {
+
     },
     "PasswordRecoveryEmailSentMessage" : {
       "comment" : "Message displayed when the email for password recovery has been sent.",
@@ -653,6 +796,9 @@
           }
         }
       }
+    },
+    "Phone Number" : {
+
     },
     "PlaceholderChosePassword" : {
       "comment" : "Placeholder of secret input cell when user changes password.",
@@ -798,6 +944,9 @@
         }
       }
     },
+    "Remove" : {
+
+    },
     "Resend" : {
       "comment" : "Resend button title.",
       "extractionState" : "manual",
@@ -809,6 +958,15 @@
           }
         }
       }
+    },
+    "Resend Code" : {
+
+    },
+    "Resend code in %llds" : {
+
+    },
+    "Reset Password" : {
+
     },
     "Save" : {
       "comment" : "Save button title.",
@@ -822,6 +980,12 @@
         }
       }
     },
+    "Scan QR Code" : {
+
+    },
+    "Scan with your authenticator app or tap to open directly" : {
+
+    },
     "Send" : {
       "comment" : "Send button title.",
       "extractionState" : "manual",
@@ -834,6 +998,12 @@
         }
       }
     },
+    "Send Code" : {
+
+    },
+    "Send Reset Link" : {
+
+    },
     "SendEmailSignInLinkButtonLabel" : {
       "comment" : "Button label for sending email sign-in link",
       "extractionState" : "manual",
@@ -845,6 +1015,21 @@
           }
         }
       }
+    },
+    "Set Up Two-Factor Authentication" : {
+
+    },
+    "Set up two-factor authentication to add an extra layer of security to your account." : {
+
+    },
+    "Sign in" : {
+
+    },
+    "Sign in with email" : {
+
+    },
+    "Sign in with phone" : {
+
     },
     "Sign up" : {
 
@@ -945,6 +1130,18 @@
         }
       }
     },
+    "SMS Authentication" : {
+
+    },
+    "SMS Verification" : {
+
+    },
+    "SMS: %@" : {
+
+    },
+    "Tap to open in authenticator app" : {
+
+    },
     "TermsOfService" : {
       "comment" : "Text linked to a web page with the Terms of Service content.",
       "extractionState" : "manual",
@@ -992,6 +1189,12 @@
           }
         }
       }
+    },
+    "Two-Factor Authentication" : {
+
+    },
+    "Unable to generate QR Code" : {
+
     },
     "UnlinkAction" : {
       "comment" : "Button title for unlinking account action.",
@@ -1088,6 +1291,9 @@
         }
       }
     },
+    "Use an authenticator app like Google Authenticator or Authy to generate verification codes." : {
+
+    },
     "UserNotFoundError" : {
       "comment" : "Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "migrated",
@@ -1100,6 +1306,12 @@
         }
       }
     },
+    "Verification Code" : {
+
+    },
+    "Verify Code" : {
+
+    },
     "Verify email address?" : {
       "comment" : "Label for sending email verification to user.",
       "localizations" : {
@@ -1110,6 +1322,9 @@
           }
         }
       }
+    },
+    "Verify Phone Number" : {
+
     },
     "VerifyItsYou" : {
       "comment" : "Alert message title show for re-authorization.",
@@ -1122,6 +1337,21 @@
           }
         }
       }
+    },
+    "We sent a code to %@" : {
+
+    },
+    "We'll send a code to ••••••%@" : {
+
+    },
+    "We'll send a verification code to this number" : {
+
+    },
+    "We'll send a verification code to your phone" : {
+
+    },
+    "We'll send a verification code to your phone number each time you sign in." : {
+
     },
     "WeakPasswordError" : {
       "comment" : "Error message displayed when the password is too weak.",

@@ -23,14 +23,14 @@ import SwiftUI
 @MainActor
 public struct SignInWithFacebookButton {
   @Environment(AuthService.self) private var authService
-  let facebookProvider: FacebookProviderSwift
+  let facebookProvider: AuthProviderSwift
   @State private var showCanceledAlert = false
   @State private var limitedLogin = true
   @State private var showUserTrackingAlert = false
   @State private var trackingAuthorizationStatus: ATTrackingManager
     .AuthorizationStatus = .notDetermined
 
-  public init(facebookProvider: FacebookProviderSwift) {
+  public init(facebookProvider: AuthProviderSwift) {
     self.facebookProvider = facebookProvider
     _trackingAuthorizationStatus = State(initialValue: ATTrackingManager
       .trackingAuthorizationStatus)
@@ -66,7 +66,6 @@ extension SignInWithFacebookButton: View {
     VStack {
       Button(action: {
         Task {
-          facebookProvider.isLimitedLogin = limitedLogin
           try? await authService.signIn(facebookProvider)
         }
       }) {

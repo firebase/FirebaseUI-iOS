@@ -105,7 +105,7 @@ public class FacebookProviderSwift: AuthProviderSwift, DeleteUserSwift {
             "`rawNonce` has not been generated for Facebook limited login"
           )
       }
-      let credential = OAuthProvider.credential(withProviderID: providerId,
+      let credential = OAuthProvider.credential(providerID: .facebook,
                                                 idToken: idToken.tokenString,
                                                 rawNonce: nonce)
       return credential
@@ -132,6 +132,6 @@ public class FacebookProviderAuthUI: AuthProviderUI {
   }
 
   @MainActor public func authButton() -> AnyView {
-    AnyView(SignInWithFacebookButton(facebookProvider: provider as! FacebookProviderSwift))
+    AnyView(SignInWithFacebookButton(facebookProvider: provider))
   }
 }
