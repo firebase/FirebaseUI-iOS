@@ -14,7 +14,7 @@ protocol AppleOperationReauthentication {
 }
 
 extension AppleOperationReauthentication {
-  @MainActor func reauthenticate() async throws -> AuthenticationToken {
+  @MainActor func reauthenticate() async throws {
     guard let user = Auth.auth().currentUser else {
       throw AuthServiceError.reauthenticationRequired("No user currently signed-in")
     }
@@ -22,8 +22,6 @@ extension AppleOperationReauthentication {
     do {
       let credential = try await appleProvider.createAuthCredential()
       try await user.reauthenticate(with: credential)
-
-      return .firebase("")
     } catch {
       throw AuthServiceError.signInFailed(underlying: error)
     }

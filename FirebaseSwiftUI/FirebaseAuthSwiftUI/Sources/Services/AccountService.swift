@@ -25,15 +25,10 @@ extension NSError {
   }
 }
 
-public enum AuthenticationToken {
-  case apple(ASAuthorizationAppleIDCredential, String)
-  case firebase(String)
-}
-
 @MainActor
 public protocol AuthenticatedOperation {
   func callAsFunction(on user: User) async throws
-  func reauthenticate() async throws -> AuthenticationToken
+  func reauthenticate() async throws
 }
 
 public extension AuthenticatedOperation {
