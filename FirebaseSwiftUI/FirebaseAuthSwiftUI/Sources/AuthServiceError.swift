@@ -36,7 +36,6 @@ public enum AuthServiceError: LocalizedError {
   case invalidCredentials(String)
   case signInFailed(underlying: Error)
   case accountMergeConflict(context: AccountMergeConflictContext)
-  case invalidPhoneAuthenticationArguments(String)
   case providerNotFound(String)
   case multiFactorAuth(String)
 
@@ -54,15 +53,19 @@ public enum AuthServiceError: LocalizedError {
       return description
     case let .invalidCredentials(description):
       return description
+    // Use when failed to sign-in with Firebase
     case let .signInFailed(underlying: error):
       return "Failed to sign in: \(error.localizedDescription)"
+    // Use when failed to sign-in with provider (e.g. Google, Facebook, etc.)
+    case let .providerAuthenticationFailed(description):
+      return description
     case let .accountMergeConflict(context):
       return context.errorDescription
     case let .providerNotFound(description):
       return description
-    case let .invalidPhoneAuthenticationArguments(description):
-      return description
     case let .multiFactorAuth(description):
+      return description
+    case let .rootViewControllerNotFound(description):
       return description
     }
   }
