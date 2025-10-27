@@ -115,7 +115,7 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
   }
 
   public func deleteUser(user: User) async throws {
-    let operation = OAuthDeleteUserOperation(oauthProvider: self)
+    let operation = ProviderDeleteUserOperation(provider: self)
     try await operation(on: user)
   }
 }

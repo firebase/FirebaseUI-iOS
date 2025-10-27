@@ -70,7 +70,7 @@ public class GoogleProviderSwift: AuthProviderSwift, DeleteUserSwift {
   }
 
   public func deleteUser(user: User) async throws {
-    let operation = GoogleDeleteUserOperation(googleProvider: self)
+    let operation = ProviderDeleteUserOperation(provider: self)
     try await operation(on: user)
   }
 }

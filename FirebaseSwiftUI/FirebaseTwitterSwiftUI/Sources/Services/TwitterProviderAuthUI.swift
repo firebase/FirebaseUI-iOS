@@ -44,7 +44,7 @@ public class TwitterProviderSwift: AuthProviderSwift, DeleteUserSwift {
   }
 
   public func deleteUser(user: User) async throws {
-    let operation = TwitterDeleteUserOperation(twitterProvider: self)
+    let operation = ProviderDeleteUserOperation(provider: self)
     try await operation(on: user)
   }
 }

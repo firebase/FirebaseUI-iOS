@@ -64,3 +64,21 @@ public extension ProviderOperationReauthentication {
     }
   }
 }
+
+@MainActor
+public class ProviderDeleteUserOperation<Provider: AuthProviderSwift>: AuthenticatedOperation,
+  @preconcurrency ProviderOperationReauthentication {
+  let provider: Provider
+
+  public var authProvider: AuthProviderSwift { provider }
+
+  public init(provider: Provider) {
+    self.provider = provider
+  }
+
+  public func callAsFunction(on user: User) async throws {
+    try await callAsFunction(on: user) {
+      try await user.delete()
+    }
+  }
+}

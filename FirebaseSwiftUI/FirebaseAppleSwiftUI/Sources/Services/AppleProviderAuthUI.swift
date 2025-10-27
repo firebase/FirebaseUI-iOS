@@ -139,7 +139,7 @@ public class AppleProviderSwift: AuthProviderSwift, DeleteUserSwift {
   }
 
   public func deleteUser(user: User) async throws {
-    let operation = AppleDeleteUserOperation(appleProvider: self)
+    let operation = ProviderDeleteUserOperation(provider: self)
     try await operation(on: user)
   }
 }
