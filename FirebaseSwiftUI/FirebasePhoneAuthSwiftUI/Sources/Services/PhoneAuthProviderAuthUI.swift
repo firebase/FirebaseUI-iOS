@@ -63,6 +63,11 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
       presentingViewController.present(hostingController, animated: true)
     }
   }
+
+  public func deleteUser(user: User) async throws {
+    let operation = ProviderDeleteUserOperation(provider: self)
+    try await operation(on: user)
+  }
 }
 
 public class PhoneAuthProviderAuthUI: AuthProviderUI {

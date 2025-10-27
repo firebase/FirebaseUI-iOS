@@ -18,7 +18,7 @@ import FirebaseCore
 import SwiftUI
 
 /// Configuration for a generic OAuth provider
-public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
+public class OAuthProviderSwift: AuthProviderSwift {
   public let providerId: String
   public let scopes: [String]
   public let customParameters: [String: String]

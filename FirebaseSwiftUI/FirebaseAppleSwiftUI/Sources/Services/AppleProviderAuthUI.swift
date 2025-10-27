@@ -114,7 +114,7 @@ extension AuthenticateWithAppleDialog: ASAuthorizationControllerDelegate {
 
 // MARK: - Apple Provider Swift
 
-public class AppleProviderSwift: AuthProviderSwift, DeleteUserSwift {
+public class AppleProviderSwift: AuthProviderSwift {
   public let scopes: [ASAuthorization.Scope]
   let providerId = "apple.com"
 

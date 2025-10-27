@@ -19,7 +19,7 @@ import FirebaseAuth
 import FirebaseAuthSwiftUI
 import SwiftUI
 
-public class FacebookProviderSwift: AuthProviderSwift, DeleteUserSwift {
+public class FacebookProviderSwift: AuthProviderSwift {
   let scopes: [String]
   let providerId = "facebook.com"
   private let loginManager = LoginManager()

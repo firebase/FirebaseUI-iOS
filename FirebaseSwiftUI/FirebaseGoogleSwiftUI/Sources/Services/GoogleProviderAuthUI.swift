@@ -19,7 +19,7 @@ import GoogleSignIn
 import GoogleSignInSwift
 import SwiftUI
 
-public class GoogleProviderSwift: AuthProviderSwift, DeleteUserSwift {
+public class GoogleProviderSwift: AuthProviderSwift {
   let scopes: [String]
   let clientID: String
   let providerId = "google.com"
