@@ -20,7 +20,6 @@ protocol EmailPasswordOperationReauthentication {
 }
 
 extension EmailPasswordOperationReauthentication {
-  // TODO: - @MainActor because User is non-sendable. Might change this once User is sendable in firebase-ios-sdk
   @MainActor func reauthenticate() async throws {
     guard let user = Auth.auth().currentUser else {
       throw AuthServiceError.reauthenticationRequired("No user currently signed-in")

@@ -9,23 +9,12 @@
 import FirebaseAuthSwiftUI
 import Observation
 
-protocol OAuthOperationReauthentication {
+protocol OAuthOperationReauthentication: ProviderOperationReauthentication {
   var oauthProvider: OAuthProviderSwift { get }
 }
 
 extension OAuthOperationReauthentication {
-  @MainActor func reauthenticate() async throws {
-    guard let user = Auth.auth().currentUser else {
-      throw AuthServiceError.reauthenticationRequired("No user currently signed-in")
-    }
-
-    do {
-      let credential = try await oauthProvider.createAuthCredential()
-      try await user.reauthenticate(with: credential)
-    } catch {
-      throw AuthServiceError.signInFailed(underlying: error)
-    }
-  }
+  var authProvider: AuthProviderSwift { oauthProvider }
 }
 
 @MainActor

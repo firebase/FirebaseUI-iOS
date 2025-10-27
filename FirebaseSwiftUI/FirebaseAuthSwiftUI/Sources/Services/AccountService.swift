@@ -45,3 +45,22 @@ public extension AuthenticatedOperation {
     }
   }
 }
+
+public protocol ProviderOperationReauthentication {
+  var authProvider: AuthProviderSwift { get }
+}
+
+public extension ProviderOperationReauthentication {
+  @MainActor func reauthenticate() async throws {
+    guard let user = Auth.auth().currentUser else {
+      throw AuthServiceError.reauthenticationRequired("No user currently signed-in")
+    }
+
+    do {
+      let credential = try await authProvider.createAuthCredential()
+      try await user.reauthenticate(with: credential)
+    } catch {
+      throw AuthServiceError.signInFailed(underlying: error)
+    }
+  }
+}

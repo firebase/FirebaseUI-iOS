@@ -30,24 +30,12 @@
 import FirebaseAuthSwiftUI
 import Observation
 
-protocol GoogleOperationReauthentication {
+protocol GoogleOperationReauthentication: ProviderOperationReauthentication {
   var googleProvider: GoogleProviderSwift { get }
 }
 
 extension GoogleOperationReauthentication {
-  @MainActor func reauthenticate() async throws {
-    guard let user = Auth.auth().currentUser else {
-      throw AuthServiceError.reauthenticationRequired("No user currently signed-in")
-    }
-
-    do {
-      let credential = try await googleProvider.createAuthCredential()
-      try await user.reauthenticate(with: credential)
-
-    } catch {
-      throw AuthServiceError.signInFailed(underlying: error)
-    }
-  }
+  var authProvider: AuthProviderSwift { googleProvider }
 }
 
 @MainActor

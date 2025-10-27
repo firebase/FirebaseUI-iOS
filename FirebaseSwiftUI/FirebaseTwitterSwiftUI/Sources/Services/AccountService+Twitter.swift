@@ -9,23 +9,12 @@
 import FirebaseAuthSwiftUI
 import Observation
 
-protocol TwitterOperationReauthentication {
+protocol TwitterOperationReauthentication: ProviderOperationReauthentication {
   var twitterProvider: TwitterProviderSwift { get }
 }
 
 extension TwitterOperationReauthentication {
-  @MainActor func reauthenticate() async throws {
-    guard let user = Auth.auth().currentUser else {
-      throw AuthServiceError.reauthenticationRequired("No user currently signed-in")
-    }
-
-    do {
-      let credential = try await twitterProvider.createAuthCredential()
-      try await user.reauthenticate(with: credential)
-    } catch {
-      throw AuthServiceError.signInFailed(underlying: error)
-    }
-  }
+  var authProvider: AuthProviderSwift { twitterProvider }
 }
 
 @MainActor

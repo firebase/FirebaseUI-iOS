@@ -23,23 +23,12 @@
 import FirebaseAuthSwiftUI
 import Observation
 
-protocol FacebookOperationReauthentication {
+protocol FacebookOperationReauthentication: ProviderOperationReauthentication {
   var facebookProvider: FacebookProviderSwift { get }
 }
 
 extension FacebookOperationReauthentication {
-  @MainActor func reauthenticate() async throws {
-    guard let user = Auth.auth().currentUser else {
-      throw AuthServiceError.reauthenticationRequired("No user currently signed-in")
-    }
-
-    do {
-      let credential = try await facebookProvider.createAuthCredential()
-      try await user.reauthenticate(with: credential)
-    } catch {
-      throw AuthServiceError.signInFailed(underlying: error)
-    }
-  }
+  var authProvider: AuthProviderSwift { facebookProvider }
 }
 
 @MainActor
