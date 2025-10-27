@@ -72,7 +72,7 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
 
 public class PhoneAuthProviderAuthUI: AuthProviderUI {
   public var provider: AuthProviderSwift
-  public let id: String = "phone.com"
+  public let id: String = "phone"
 
   public init(provider: PhoneAuthProviderSwift? = nil) {
     self.provider = provider ?? PhoneProviderSwift()
