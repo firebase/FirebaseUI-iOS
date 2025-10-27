@@ -77,18 +77,14 @@ public struct MFAEnrolmentView {
   private func startEnrollment() {
     Task {
       isLoading = true
+      defer { isLoading = false }
 
-      do {
-        let session = try await authService.startMfaEnrollment(
-          type: selectedFactorType,
-          accountName: authService.currentUser?.email,
-          issuer: authService.configuration.mfaIssuer
-        )
-        currentSession = session
-        isLoading = false
-      } catch {
-        isLoading = false
-      }
+      let session = try await authService.startMfaEnrollment(
+        type: selectedFactorType,
+        accountName: authService.currentUser?.email,
+        issuer: authService.configuration.mfaIssuer
+      )
+      currentSession = session
     }
   }
 
@@ -97,28 +93,24 @@ public struct MFAEnrolmentView {
 
     Task {
       isLoading = true
+      defer { isLoading = false }
 
-      do {
-        let verificationId = try await authService.sendSmsVerificationForEnrollment(
-          session: session,
-          phoneNumber: phoneNumber
-        )
-        // Update session status
-        currentSession = EnrollmentSession(
-          id: session.id,
-          type: session.type,
-          session: session.session,
-          totpInfo: session.totpInfo,
-          phoneNumber: phoneNumber,
-          verificationId: verificationId,
-          status: .verificationSent,
-          createdAt: session.createdAt,
-          expiresAt: session.expiresAt
-        )
-        isLoading = false
-      } catch {
-        isLoading = false
-      }
+      let verificationId = try await authService.sendSmsVerificationForEnrollment(
+        session: session,
+        phoneNumber: phoneNumber
+      )
+      // Update session status
+      currentSession = EnrollmentSession(
+        id: session.id,
+        type: session.type,
+        session: session.session,
+        totpInfo: session.totpInfo,
+        phoneNumber: phoneNumber,
+        verificationId: verificationId,
+        status: .verificationSent,
+        createdAt: session.createdAt,
+        expiresAt: session.expiresAt
+      )
     }
   }
 
@@ -127,25 +119,20 @@ public struct MFAEnrolmentView {
 
     Task {
       isLoading = true
+      defer { isLoading = false }
 
-      do {
-        let code = session.type == .sms ? verificationCode : totpCode
-        try await authService.completeEnrollment(
-          session: session,
-          verificationId: session.verificationId,
-          verificationCode: code,
-          displayName: displayName
-        )
+      let code = session.type == .sms ? verificationCode : totpCode
+      try await authService.completeEnrollment(
+        session: session,
+        verificationId: session.verificationId,
+        verificationCode: code,
+        displayName: displayName
+      )
 
-        // Reset form state on success
-        resetForm()
+      // Reset form state on success
+      resetForm()
 
-        // Navigate back to signed in view
-        authService.authView = .authPicker
-        isLoading = false
-      } catch {
-        isLoading = false
-      }
+      authService.authView = .authPicker
     }
   }
 
