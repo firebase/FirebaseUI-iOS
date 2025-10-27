@@ -39,7 +39,7 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
     guard let presentingViewController = await (UIApplication.shared.connectedScenes
       .first as? UIWindowScene)?.windows.first?.rootViewController else {
       throw AuthServiceError
-        .invalidPhoneAuthenticationArguments(
+        .rootViewControllerNotFound(
           "Root View controller is not available to present Phone auth View."
         )
     }

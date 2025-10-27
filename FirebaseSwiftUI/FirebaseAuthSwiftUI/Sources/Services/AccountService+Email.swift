@@ -96,7 +96,8 @@ public final class PasswordPromptCoordinator {
 
   func cancel() {
     continuation?
-      .resume(throwing: AuthServiceError.reauthenticationRequired("Password entry cancelled"))
+      .resume(throwing: AuthServiceError
+        .signInCancelled("Password entry cancelled for Email provider"))
     cleanup()
   }
 

@@ -19,12 +19,6 @@ import GoogleSignIn
 import GoogleSignInSwift
 import SwiftUI
 
-public enum GoogleProviderError: Error {
-  case rootViewControllerNotFound(String)
-  case authenticationToken(String)
-  case user(String)
-}
-
 public class GoogleProviderSwift: AuthProviderSwift, DeleteUserSwift {
   let scopes: [String]
   let clientID: String
@@ -42,7 +36,7 @@ public class GoogleProviderSwift: AuthProviderSwift, DeleteUserSwift {
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
     guard let presentingViewController = await (UIApplication.shared.connectedScenes
       .first as? UIWindowScene)?.windows.first?.rootViewController else {
-      throw GoogleProviderError
+      throw AuthServiceError
         .rootViewControllerNotFound(
           "Root View controller is not available to present Google sign-in View."
         )
@@ -63,7 +57,8 @@ public class GoogleProviderSwift: AuthProviderSwift, DeleteUserSwift {
         guard let user = result?.user,
               let idToken = user.idToken?.tokenString else {
           continuation
-            .resume(throwing: GoogleProviderError.user("Failed to retrieve user or idToken."))
+            .resume(throwing: AuthServiceError
+              .providerAuthenticationFailed("Failed to retrieve user or idToken."))
           return
         }
 

@@ -66,18 +66,8 @@ extension SignInWithFacebookButton: View {
     VStack {
       Button(action: {
         Task {
-          do {
-            facebookProvider.isLimitedLogin = limitedLogin
-            try await authService.signIn(facebookProvider)
-          } catch {
-            switch error {
-            case FacebookProviderError.signInCancelled:
-              showCanceledAlert = true
-            default:
-              // Error already handled by AuthService
-              break
-            }
-          }
+          facebookProvider.isLimitedLogin = limitedLogin
+          try? await authService.signIn(facebookProvider)
         }
       }) {
         HStack {
@@ -113,12 +103,6 @@ extension SignInWithFacebookButton: View {
         }
         .toggleStyle(SwitchToggleStyle(tint: .green))
       }
-    }
-    .alert(isPresented: $showCanceledAlert) {
-      Alert(
-        title: Text(authService.string.facebookLoginCancelledLabel),
-        dismissButton: .default(Text(authService.string.okButtonLabel))
-      )
     }
     .alert(isPresented: $showUserTrackingAlert) {
       Alert(
