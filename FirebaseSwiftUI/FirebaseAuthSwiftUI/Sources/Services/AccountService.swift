@@ -33,7 +33,7 @@ public protocol AuthenticatedOperation {
 
 public extension AuthenticatedOperation {
   func callAsFunction(on _: User,
-                      _ performOperation: () async throws -> Void) async throws {
+                      _ performOperation: @MainActor () async throws -> Void) async throws {
     do {
       try await performOperation()
     } catch let error as NSError where error.requiresReauthentication {
