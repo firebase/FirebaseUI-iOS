@@ -51,11 +51,8 @@ extension PhoneAuthView: View {
         HStack {
           Spacer()
           Button(action: {
-            completion(.failure(NSError(
-              domain: "PhoneAuthError",
-              code: -1,
-              userInfo: [NSLocalizedDescriptionKey: "User cancelled"]
-            )))
+            completion(.failure(AuthServiceError
+                .signInCancelled("User cancelled sign-in for Phone")))
             dismiss()
           }) {
             Image(systemName: "xmark.circle.fill")

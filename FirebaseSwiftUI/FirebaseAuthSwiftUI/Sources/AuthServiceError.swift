@@ -38,6 +38,9 @@ public enum AuthServiceError: LocalizedError {
   case accountMergeConflict(context: AccountMergeConflictContext)
   case providerNotFound(String)
   case multiFactorAuth(String)
+  case rootViewControllerNotFound(String)
+  case providerAuthenticationFailed(String)
+  case signInCancelled(String)
 
   public var errorDescription: String? {
     switch self {
@@ -58,6 +61,8 @@ public enum AuthServiceError: LocalizedError {
       return "Failed to sign in: \(error.localizedDescription)"
     // Use when failed to sign-in with provider (e.g. Google, Facebook, etc.)
     case let .providerAuthenticationFailed(description):
+      return description
+    case let .signInCancelled(description):
       return description
     case let .accountMergeConflict(context):
       return context.errorDescription

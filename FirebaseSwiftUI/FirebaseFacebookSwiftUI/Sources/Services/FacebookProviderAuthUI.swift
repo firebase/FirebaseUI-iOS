@@ -19,14 +19,6 @@ import FirebaseAuth
 import FirebaseAuthSwiftUI
 import SwiftUI
 
-public enum FacebookProviderError: Error {
-  case signInCancelled(String)
-  case configurationInvalid(String)
-  case limitedLoginNonce(String)
-  case accessToken(String)
-  case authenticationToken(String)
-}
-
 public class FacebookProviderSwift: AuthProviderSwift, DeleteUserSwift {
   let scopes: [String]
   let providerId = "facebook.com"
@@ -60,8 +52,8 @@ public class FacebookProviderSwift: AuthProviderSwift, DeleteUserSwift {
         )
       }
     }() else {
-      throw FacebookProviderError
-        .configurationInvalid("Failed to create Facebook login configuration")
+      throw AuthServiceError
+        .providerAuthenticationFailed("Failed to create Facebook login configuration")
     }
 
     let result = try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<
@@ -74,7 +66,8 @@ public class FacebookProviderSwift: AuthProviderSwift, DeleteUserSwift {
         switch result {
         case .cancelled:
           continuation
-            .resume(throwing: FacebookProviderError.signInCancelled("User cancelled sign-in"))
+            .resume(throwing: AuthServiceError
+              .signInCancelled("User cancelled sign-in for Facebook"))
         case let .failed(error):
           continuation.resume(throwing: error)
         case .success:
@@ -97,8 +90,8 @@ public class FacebookProviderSwift: AuthProviderSwift, DeleteUserSwift {
 
       return credential
     } else {
-      throw FacebookProviderError
-        .accessToken(
+      throw AuthServiceError
+        .providerAuthenticationFailed(
           "Access token has expired or not available. Please sign-in with Facebook before attempting to create a Facebook provider credential"
         )
     }
@@ -107,16 +100,18 @@ public class FacebookProviderSwift: AuthProviderSwift, DeleteUserSwift {
   private func limitedLogin() throws -> AuthCredential {
     if let idToken = AuthenticationToken.current {
       guard let nonce = rawNonce else {
-        throw FacebookProviderError
-          .limitedLoginNonce("`rawNonce` has not been generated for Facebook limited login")
+        throw AuthServiceError
+          .providerAuthenticationFailed(
+            "`rawNonce` has not been generated for Facebook limited login"
+          )
       }
       let credential = OAuthProvider.credential(withProviderID: providerId,
                                                 idToken: idToken.tokenString,
                                                 rawNonce: nonce)
       return credential
     } else {
-      throw FacebookProviderError
-        .authenticationToken(
+      throw AuthServiceError
+        .providerAuthenticationFailed(
           "Authentication is not available. Please sign-in with Facebook before attempting to create a Facebook provider credential"
         )
     }
