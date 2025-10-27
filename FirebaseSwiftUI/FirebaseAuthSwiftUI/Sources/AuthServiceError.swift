@@ -39,7 +39,6 @@ public enum AuthServiceError: LocalizedError {
   case invalidPhoneAuthenticationArguments(String)
   case providerNotFound(String)
   case multiFactorAuth(String)
-  
 
   public var errorDescription: String? {
     switch self {
@@ -62,7 +61,7 @@ public enum AuthServiceError: LocalizedError {
     case let .providerNotFound(description):
       return description
     case let .invalidPhoneAuthenticationArguments(description):
-        return description
+      return description
     case let .multiFactorAuth(description):
       return description
     }

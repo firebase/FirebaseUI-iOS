@@ -102,7 +102,7 @@ struct FirebaseSwiftUIExampleTests {
 
     #expect(service.authenticationState == .unauthenticated)
     #expect(service.authView == .authPicker)
-    #expect(service.errorMessage.isEmpty)
+    #expect(service.currentError == nil)
     #expect(service.signedInCredential == nil)
     #expect(service.currentUser == nil)
     try await service.createUser(email: createEmail(), password: kPassword)
@@ -117,7 +117,7 @@ struct FirebaseSwiftUIExampleTests {
     }
     #expect(service.currentUser != nil)
     #expect(service.authView == .authPicker)
-    #expect(service.errorMessage.isEmpty)
+    #expect(service.currentError == nil)
   }
 
   @Test
@@ -138,7 +138,7 @@ struct FirebaseSwiftUIExampleTests {
     }
     #expect(service.currentUser == nil)
     #expect(service.authView == .authPicker)
-    #expect(service.errorMessage.isEmpty)
+    #expect(service.currentError == nil)
     #expect(service.signedInCredential == nil)
 
     try await service.signIn(email: email, password: kPassword)
@@ -157,6 +157,6 @@ struct FirebaseSwiftUIExampleTests {
     }
     #expect(service.signedInCredential != nil)
     #expect(service.authView == .authPicker)
-    #expect(service.errorMessage.isEmpty)
+    #expect(service.currentError == nil)
   }
 }

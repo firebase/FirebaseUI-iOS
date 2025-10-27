@@ -60,7 +60,7 @@ extension AuthPickerView: View {
           case .mfaEnrollment:
             MFAEnrolmentView()
           case .mfaResolution:
-            MFAResolutionView()  
+            MFAResolutionView()
           case .authPicker:
             if authService.emailSignInEnabled {
               Text(authService.authenticationFlow == .signIn ? authService.string
@@ -90,7 +90,6 @@ extension AuthPickerView: View {
               }
             }
             PrivacyTOCsView(displayMode: .footer)
-            Text(authService.errorMessage).foregroundColor(.red)
           default:
             // TODO: - possibly refactor this, see: https://github.com/firebase/FirebaseUI-iOS/pull/1259#discussion_r2105473437
             EmptyView()
@@ -98,6 +97,10 @@ extension AuthPickerView: View {
         }
       }
     }
+    .errorAlert(error: Binding(
+      get: { authService.currentError },
+      set: { authService.currentError = $0 }
+    ), okButtonLabel: authService.string.okButtonLabel)
   }
 }
 

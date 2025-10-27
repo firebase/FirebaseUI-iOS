@@ -24,7 +24,6 @@ import SwiftUI
 public struct SignInWithFacebookButton {
   @Environment(AuthService.self) private var authService
   let facebookProvider: AuthProviderSwift
-  @State private var errorMessage = ""
   @State private var showCanceledAlert = false
   @State private var limitedLogin = true
   @State private var showUserTrackingAlert = false
@@ -64,65 +63,68 @@ public struct SignInWithFacebookButton {
 
 extension SignInWithFacebookButton: View {
   public var body: some View {
-    Button(action: {
-      Task {
-        do {
-          try await authService.signIn(facebookProvider)
-        } catch {
-          switch error {
-          case FacebookProviderError.signInCancelled:
-            showCanceledAlert = true
-          default:
-            errorMessage = authService.string.localizedErrorMessage(for: error)
+    VStack {
+      Button(action: {
+        Task {
+          do {
+            try await authService.signIn(facebookProvider)
+          } catch {
+            switch error {
+            case FacebookProviderError.signInCancelled:
+              showCanceledAlert = true
+            default:
+              // Error already handled by AuthService
+              break
+            }
           }
         }
+      }) {
+        HStack {
+          Image(systemName: "f.circle.fill")
+            .font(.title2)
+            .foregroundColor(.white)
+          Text(authService.string.facebookLoginButtonLabel)
+            .fontWeight(.semibold)
+            .foregroundColor(.white)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(Color.blue)
+        .cornerRadius(8)
       }
-    }) {
+      .accessibilityIdentifier("sign-in-with-facebook-button")
+
       HStack {
-        Image(systemName: "f.circle.fill")
-          .font(.title2)
-          .foregroundColor(.white)
-        Text(authService.string.facebookLoginButtonLabel)
-          .fontWeight(.semibold)
-          .foregroundColor(.white)
+        Text(authService.string.authorizeUserTrackingLabel)
+          .font(.footnote)
+          .foregroundColor(.blue)
+          .underline()
+          .onTapGesture {
+            requestTrackingPermission()
+          }
+        Toggle(isOn: limitedLoginBinding) {
+          HStack {
+            Spacer() // This will push the text to the left of the toggle
+            Text(authService.string.facebookLimitedLoginLabel)
+              .foregroundColor(.blue)
+          }
+        }
+        .toggleStyle(SwitchToggleStyle(tint: .green))
       }
-      .frame(maxWidth: .infinity, alignment: .leading)
-      .padding()
-      .frame(maxWidth: .infinity)
-      .background(Color.blue)
-      .cornerRadius(8)
     }
-    .accessibilityIdentifier("sign-in-with-facebook-button")
     .alert(isPresented: $showCanceledAlert) {
       Alert(
         title: Text(authService.string.facebookLoginCancelledLabel),
         dismissButton: .default(Text(authService.string.okButtonLabel))
       )
     }
-
-    HStack {
-      Text(authService.string.authorizeUserTrackingLabel)
-        .font(.footnote)
-        .foregroundColor(.blue)
-        .underline()
-        .onTapGesture {
-          requestTrackingPermission()
-        }
-      Toggle(isOn: limitedLoginBinding) {
-        HStack {
-          Spacer() // This will push the text to the left of the toggle
-          Text(authService.string.facebookLimitedLoginLabel)
-            .foregroundColor(.blue)
-        }
-      }
-      .toggleStyle(SwitchToggleStyle(tint: .green))
-      .alert(isPresented: $showUserTrackingAlert) {
-        Alert(
-          title: Text(authService.string.authorizeUserTrackingLabel),
-          message: Text(authService.string.facebookAuthorizeUserTrackingMessage),
-          dismissButton: .default(Text(authService.string.okButtonLabel))
-        )
-      }
+    .alert(isPresented: $showUserTrackingAlert) {
+      Alert(
+        title: Text(authService.string.authorizeUserTrackingLabel),
+        message: Text(authService.string.facebookAuthorizeUserTrackingMessage),
+        dismissButton: .default(Text(authService.string.okButtonLabel))
+      )
     }
   }
 }

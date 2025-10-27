@@ -32,7 +32,6 @@ public struct MFAEnrolmentView {
   @State private var totpCode = ""
   @State private var currentSession: EnrollmentSession?
   @State private var isLoading = false
-  @State private var errorMessage = ""
   @State private var displayName = ""
   @State private var showCopiedFeedback = false
 
@@ -78,20 +77,14 @@ public struct MFAEnrolmentView {
   private func startEnrollment() {
     Task {
       isLoading = true
-      errorMessage = ""
+      defer { isLoading = false }
 
-      do {
-        let session = try await authService.startMfaEnrollment(
-          type: selectedFactorType,
-          accountName: authService.currentUser?.email,
-          issuer: authService.configuration.mfaIssuer
-        )
-        currentSession = session
-      } catch {
-        errorMessage = error.localizedDescription
-      }
-
-      isLoading = false
+      let session = try await authService.startMfaEnrollment(
+        type: selectedFactorType,
+        accountName: authService.currentUser?.email,
+        issuer: authService.configuration.mfaIssuer
+      )
+      currentSession = session
     }
   }
 
@@ -100,30 +93,24 @@ public struct MFAEnrolmentView {
 
     Task {
       isLoading = true
-      errorMessage = ""
+      defer { isLoading = false }
 
-      do {
-        let verificationId = try await authService.sendSmsVerificationForEnrollment(
-          session: session,
-          phoneNumber: phoneNumber
-        )
-        // Update session status
-        currentSession = EnrollmentSession(
-          id: session.id,
-          type: session.type,
-          session: session.session,
-          totpInfo: session.totpInfo,
-          phoneNumber: phoneNumber,
-          verificationId: verificationId,
-          status: .verificationSent,
-          createdAt: session.createdAt,
-          expiresAt: session.expiresAt
-        )
-      } catch {
-        errorMessage = error.localizedDescription
-      }
-
-      isLoading = false
+      let verificationId = try await authService.sendSmsVerificationForEnrollment(
+        session: session,
+        phoneNumber: phoneNumber
+      )
+      // Update session status
+      currentSession = EnrollmentSession(
+        id: session.id,
+        type: session.type,
+        session: session.session,
+        totpInfo: session.totpInfo,
+        phoneNumber: phoneNumber,
+        verificationId: verificationId,
+        status: .verificationSent,
+        createdAt: session.createdAt,
+        expiresAt: session.expiresAt
+      )
     }
   }
 
@@ -132,28 +119,20 @@ public struct MFAEnrolmentView {
 
     Task {
       isLoading = true
-      errorMessage = ""
+      defer { isLoading = false }
 
-      do {
-        let code = session.type == .sms ? verificationCode : totpCode
-        try await authService.completeEnrollment(
-          session: session,
-          verificationId: session.verificationId,
-          verificationCode: code,
-          displayName: displayName
-        )
+      let code = session.type == .sms ? verificationCode : totpCode
+      try await authService.completeEnrollment(
+        session: session,
+        verificationId: session.verificationId,
+        verificationCode: code,
+        displayName: displayName
+      )
 
-        // Reset form state on success
-        resetForm()
+      // Reset form state on success
+      resetForm()
 
-        // Navigate back to signed in view
-        authService.authView = .authPicker
-
-      } catch {
-        errorMessage = error.localizedDescription
-      }
-
-      isLoading = false
+      authService.authView = .authPicker
     }
   }
 
@@ -163,7 +142,6 @@ public struct MFAEnrolmentView {
     verificationCode = ""
     totpCode = ""
     displayName = ""
-    errorMessage = ""
     focus = nil
   }
 
@@ -174,7 +152,6 @@ public struct MFAEnrolmentView {
 
   private func copyToClipboard(_ text: String) {
     UIPasteboard.general.string = text
-    
 
     // Show feedback
     showCopiedFeedback = true
@@ -185,25 +162,25 @@ public struct MFAEnrolmentView {
       showCopiedFeedback = false
     }
   }
-  
+
   private func generateQRCode(from string: String) -> UIImage? {
     let data = Data(string.utf8)
-    
+
     guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
     filter.setValue(data, forKey: "inputMessage")
     filter.setValue("H", forKey: "inputCorrectionLevel")
-    
+
     guard let ciImage = filter.outputImage else { return nil }
-    
+
     // Scale up the QR code for better quality
     let transform = CGAffineTransform(scaleX: 10, y: 10)
     let scaledImage = ciImage.transformed(by: transform)
-    
+
     let context = CIContext()
     guard let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) else {
       return nil
     }
-    
+
     return UIImage(cgImage: cgImage)
   }
 }
@@ -308,15 +285,6 @@ extension MFAEnrolmentView: View {
         enrollmentContent(for: session)
       } else {
         initialContent
-      }
-
-      // Error message
-      if !errorMessage.isEmpty {
-        Text(errorMessage)
-          .foregroundColor(.red)
-          .font(.caption)
-          .padding(.horizontal)
-          .accessibilityIdentifier("error-message")
       }
     }
     .padding(.horizontal, 16)
@@ -532,7 +500,7 @@ extension MFAEnrolmentView: View {
                   .aspectRatio(contentMode: .fit)
                   .frame(width: 200, height: 200)
                   .accessibilityIdentifier("qr-code-image")
-                
+
                 HStack(spacing: 6) {
                   Image(systemName: "arrow.up.forward.app.fill")
                     .font(.caption)

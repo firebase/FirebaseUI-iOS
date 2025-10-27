@@ -29,7 +29,7 @@ extension SignInWithAppleButton: View {
   public var body: some View {
     Button(action: {
       Task {
-        try await authService.signIn(provider)
+        try? await authService.signIn(provider)
       }
     }) {
       HStack {
@@ -51,4 +51,3 @@ extension SignInWithAppleButton: View {
     .accessibilityIdentifier("sign-in-with-apple-button")
   }
 }
-

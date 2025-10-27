@@ -27,7 +27,7 @@ import SwiftUI
 @MainActor
 public struct PhoneAuthView {
   @Environment(\.dismiss) private var dismiss
-  @State private var errorMessage = ""
+  @State private var currentError: AlertError?
   @State private var phoneNumber = ""
   @State private var showVerificationCodeInput = false
   @State private var verificationCode = ""
@@ -85,13 +85,6 @@ extension PhoneAuthView: View {
           .padding(.bottom, 4)
           .padding(.horizontal)
 
-          if !errorMessage.isEmpty {
-            Text(errorMessage)
-              .foregroundColor(.red)
-              .font(.caption)
-              .padding(.horizontal)
-          }
-
           Button(action: {
             Task {
               isProcessing = true
@@ -99,9 +92,9 @@ extension PhoneAuthView: View {
                 let id = try await phoneProvider.verifyPhoneNumber(phoneNumber: phoneNumber)
                 verificationID = id
                 showVerificationCodeInput = true
-                errorMessage = ""
+                currentError = nil
               } catch {
-                errorMessage = error.localizedDescription
+                currentError = AlertError(message: error.localizedDescription)
               }
               isProcessing = false
             }
@@ -153,13 +146,6 @@ extension PhoneAuthView: View {
             .cornerRadius(8)
             .padding(.horizontal)
 
-          if !errorMessage.isEmpty {
-            Text(errorMessage)
-              .foregroundColor(.red)
-              .font(.caption)
-              .padding(.horizontal)
-          }
-
           Button(action: {
             Task {
               isProcessing = true
@@ -184,6 +170,7 @@ extension PhoneAuthView: View {
         .padding(.vertical)
       }
     }
+    .errorAlert(error: $currentError, okButtonLabel: "OK")
   }
 }
 

@@ -22,13 +22,11 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
   public let providerId: String
   public let scopes: [String]
   public let customParameters: [String: String]
-
   // Button appearance
   public let displayName: String
   public let buttonIcon: Image
   public let buttonBackgroundColor: Color
   public let buttonForegroundColor: Color
-
   /// Initialize a generic OAuth provider
   /// - Parameters:
   ///   - providerId: The OAuth provider ID (e.g., "github.com", "microsoft.com")
@@ -53,7 +51,6 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
     self.buttonBackgroundColor = buttonBackgroundColor
     self.buttonForegroundColor = buttonForegroundColor
   }
-
   /// Convenience initializer using SF Symbol
   /// - Parameters:
   ///   - providerId: The OAuth provider ID (e.g., "github.com", "microsoft.com")
@@ -88,7 +85,6 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
     if !scopes.isEmpty {
       provider.scopes = scopes
     }
-
     // Set custom parameters if provided
     if !customParameters.isEmpty {
       provider.customParameters = customParameters
@@ -136,7 +132,6 @@ public class OAuthProviderAuthUI: AuthProviderUI {
     }
     return oauthProvider.providerId
   }
-
   @MainActor public func authButton() -> AnyView {
     AnyView(GenericOAuthButton(provider: provider))
   }

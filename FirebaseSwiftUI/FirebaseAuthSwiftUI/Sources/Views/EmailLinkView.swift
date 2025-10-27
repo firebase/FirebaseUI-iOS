@@ -27,7 +27,9 @@ public struct EmailLinkView {
     do {
       try await authService.sendEmailSignInLink(email: email)
       showModal = true
-    } catch {}
+    } catch {
+      // Error already displayed via modal by AuthService
+    }
   }
 }
 
@@ -78,9 +80,9 @@ extension EmailLinkView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
-      Text(authService.errorMessage).foregroundColor(.red)
       Spacer()
-    }.sheet(isPresented: $showModal) {
+    }
+    .sheet(isPresented: $showModal) {
       VStack {
         Text(authService.string.signInWithEmailLinkViewMessage)
           .padding()
@@ -90,11 +92,10 @@ extension EmailLinkView: View {
         .padding()
       }
       .padding()
-    }.onOpenURL { url in
+    }
+    .onOpenURL { url in
       Task {
-        do {
-          try await authService.handleSignInLink(url: url)
-        } catch {}
+        try? await authService.handleSignInLink(url: url)
       }
     }
   }

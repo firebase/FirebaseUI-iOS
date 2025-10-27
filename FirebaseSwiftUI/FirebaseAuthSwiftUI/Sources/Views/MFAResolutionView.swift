@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import FirebaseCore
 import FirebaseAuth
+import FirebaseCore
 import SwiftUI
 
 private enum FocusableField: Hashable {
@@ -28,7 +28,6 @@ public struct MFAResolutionView {
   @State private var verificationCode = ""
   @State private var totpCode = ""
   @State private var isLoading = false
-  @State private var errorMessage = ""
   @State private var selectedHintIndex = 0
   @State private var verificationId: String?
 
@@ -67,23 +66,20 @@ public struct MFAResolutionView {
 
     Task {
       isLoading = true
-      errorMessage = ""
 
       do {
         let verificationId = try await authService.resolveSmsChallenge(hintIndex: selectedHintIndex)
         self.verificationId = verificationId
+        isLoading = false
       } catch {
-        errorMessage = error.localizedDescription
+        isLoading = false
       }
-
-      isLoading = false
     }
   }
 
   private func completeResolution() {
     Task {
       isLoading = true
-      errorMessage = ""
 
       do {
         let code = selectedHint?.isPhoneHint == true ? verificationCode : totpCode
@@ -95,11 +91,10 @@ public struct MFAResolutionView {
         // On success, the AuthService will update the authentication state
         // and we should navigate back to the main app
         authService.authView = .authPicker
+        isLoading = false
       } catch {
-        errorMessage = error.localizedDescription
+        isLoading = false
       }
-
-      isLoading = false
     }
   }
 
@@ -111,75 +106,66 @@ public struct MFAResolutionView {
 extension MFAResolutionView: View {
   public var body: some View {
     VStack(spacing: 24) {
-        // Header
-        VStack(spacing: 12) {
-          Image(systemName: "lock.shield")
-            .font(.system(size: 50))
-            .foregroundColor(.blue)
+      // Header
+      VStack(spacing: 12) {
+        Image(systemName: "lock.shield")
+          .font(.system(size: 50))
+          .foregroundColor(.blue)
 
-          Text("Two-Factor Authentication")
-            .font(.largeTitle)
-            .fontWeight(.bold)
-            .accessibilityIdentifier("mfa-resolution-title")
+        Text("Two-Factor Authentication")
+          .font(.largeTitle)
+          .fontWeight(.bold)
+          .accessibilityIdentifier("mfa-resolution-title")
 
-          Text("Complete sign-in with your second factor")
-            .font(.body)
-            .foregroundColor(.secondary)
-            .multilineTextAlignment(.center)
-        }
-        .padding(.horizontal)
+        Text("Complete sign-in with your second factor")
+          .font(.body)
+          .foregroundColor(.secondary)
+          .multilineTextAlignment(.center)
+      }
+      .padding(.horizontal)
 
-        // MFA Hints Selection (if multiple available)
-        if let mfaRequired = mfaRequired, mfaRequired.hints.count > 1 {
-          mfaHintsSelectionView(mfaRequired: mfaRequired)
-        }
+      // MFA Hints Selection (if multiple available)
+      if let mfaRequired = mfaRequired, mfaRequired.hints.count > 1 {
+        mfaHintsSelectionView(mfaRequired: mfaRequired)
+      }
 
-        // Resolution Content
-        if let hint = selectedHint {
-          resolutionContent(for: hint)
-        }
+      // Resolution Content
+      if let hint = selectedHint {
+        resolutionContent(for: hint)
+      }
 
-        // Error message
-        if !errorMessage.isEmpty {
-          Text(errorMessage)
-            .foregroundColor(.red)
-            .font(.caption)
-            .padding(.horizontal)
-            .accessibilityIdentifier("error-message")
-        }
-
-        // Action buttons
-        VStack(spacing: 12) {
-          // Complete Resolution Button
-          Button(action: completeResolution) {
-            HStack {
-              if isLoading {
-                ProgressView()
-                  .scaleEffect(0.8)
-              }
-              Text("Complete Sign-In")
+      // Action buttons
+      VStack(spacing: 12) {
+        // Complete Resolution Button
+        Button(action: completeResolution) {
+          HStack {
+            if isLoading {
+              ProgressView()
+                .scaleEffect(0.8)
             }
+            Text("Complete Sign-In")
+          }
+          .frame(maxWidth: .infinity)
+          .padding()
+          .background(canCompleteResolution ? Color.blue : Color.gray)
+          .foregroundColor(.white)
+          .cornerRadius(8)
+        }
+        .disabled(!canCompleteResolution)
+        .accessibilityIdentifier("complete-resolution-button")
+
+        // Cancel Button
+        Button(action: cancelResolution) {
+          Text("Cancel")
             .frame(maxWidth: .infinity)
             .padding()
-            .background(canCompleteResolution ? Color.blue : Color.gray)
-            .foregroundColor(.white)
+            .background(Color.gray.opacity(0.2))
+            .foregroundColor(.primary)
             .cornerRadius(8)
-          }
-          .disabled(!canCompleteResolution)
-          .accessibilityIdentifier("complete-resolution-button")
-
-          // Cancel Button
-          Button(action: cancelResolution) {
-            Text("Cancel")
-              .frame(maxWidth: .infinity)
-              .padding()
-              .background(Color.gray.opacity(0.2))
-              .foregroundColor(.primary)
-              .cornerRadius(8)
-          }
-          .accessibilityIdentifier("cancel-button")
         }
-        .padding(.horizontal)
+        .accessibilityIdentifier("cancel-button")
+      }
+      .padding(.horizontal)
     }
     .padding(.vertical, 20)
   }
@@ -380,7 +366,7 @@ private extension MFAHint {
   FirebaseOptions.dummyConfigurationForPreview()
   let authService = AuthService()
   authService.currentMFARequired = MFARequired(hints: [
-    .phone(displayName: "Work Phone", uid: "phone-uid-1", phoneNumber: "+15551234567")
+    .phone(displayName: "Work Phone", uid: "phone-uid-1", phoneNumber: "+15551234567"),
   ])
   return MFAResolutionView().environment(authService)
 }
@@ -389,7 +375,7 @@ private extension MFAHint {
   FirebaseOptions.dummyConfigurationForPreview()
   let authService = AuthService()
   authService.currentMFARequired = MFARequired(hints: [
-    .totp(displayName: "Authenticator App", uid: "totp-uid-1")
+    .totp(displayName: "Authenticator App", uid: "totp-uid-1"),
   ])
   return MFAResolutionView().environment(authService)
 }
@@ -399,7 +385,7 @@ private extension MFAHint {
   let authService = AuthService()
   authService.currentMFARequired = MFARequired(hints: [
     .phone(displayName: "Mobile", uid: "phone-uid-1", phoneNumber: "+15551234567"),
-    .totp(displayName: "Google Authenticator", uid: "totp-uid-1")
+    .totp(displayName: "Google Authenticator", uid: "totp-uid-1"),
   ])
   return MFAResolutionView().environment(authService)
 }

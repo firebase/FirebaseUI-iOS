@@ -39,9 +39,10 @@ extension ASAuthorizationAppleIDCredential {
 
 // MARK: - Authenticate With Apple Dialog
 
-private func authenticateWithApple(
-  scopes: [ASAuthorization.Scope]
-) async throws -> (ASAuthorizationAppleIDCredential, String) {
+private func authenticateWithApple(scopes: [ASAuthorization.Scope]) async throws -> (
+  ASAuthorizationAppleIDCredential,
+  String
+) {
   return try await AuthenticateWithAppleDialog(scopes: scopes).authenticate()
 }
 
@@ -49,7 +50,7 @@ private class AuthenticateWithAppleDialog: NSObject {
   private var continuation: CheckedContinuation<(ASAuthorizationAppleIDCredential, String), Error>?
   private var currentNonce: String?
   private let scopes: [ASAuthorization.Scope]
-  
+
   init(scopes: [ASAuthorization.Scope]) {
     self.scopes = scopes
     super.init()
@@ -80,10 +81,8 @@ private class AuthenticateWithAppleDialog: NSObject {
 }
 
 extension AuthenticateWithAppleDialog: ASAuthorizationControllerDelegate {
-  func authorizationController(
-    controller: ASAuthorizationController,
-    didCompleteWithAuthorization authorization: ASAuthorization
-  ) {
+  func authorizationController(controller _: ASAuthorizationController,
+                               didCompleteWithAuthorization authorization: ASAuthorization) {
     if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
       if let nonce = currentNonce {
         continuation?.resume(returning: (appleIDCredential, nonce))
@@ -106,10 +105,8 @@ extension AuthenticateWithAppleDialog: ASAuthorizationControllerDelegate {
     continuation = nil
   }
 
-  func authorizationController(
-    controller: ASAuthorizationController,
-    didCompleteWithError error: Error
-  ) {
+  func authorizationController(controller _: ASAuthorizationController,
+                               didCompleteWithError error: Error) {
     continuation?.resume(throwing: AuthServiceError.signInFailed(underlying: error))
     continuation = nil
   }
@@ -160,4 +157,3 @@ public class AppleProviderAuthUI: AuthProviderUI {
     AnyView(SignInWithAppleButton(provider: provider))
   }
 }
-

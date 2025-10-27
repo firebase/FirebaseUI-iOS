@@ -49,15 +49,11 @@ public struct EmailAuthView {
   }
 
   private func signInWithEmailPassword() async {
-    do {
-      try await authService.signIn(email: email, password: password)
-    } catch {}
+    try? await authService.signIn(email: email, password: password)
   }
 
   private func createUserWithEmailPassword() async {
-    do {
-      try await authService.createUser(email: email, password: password)
-    } catch {}
+    try? await authService.createUser(email: email, password: password)
   }
 }
 

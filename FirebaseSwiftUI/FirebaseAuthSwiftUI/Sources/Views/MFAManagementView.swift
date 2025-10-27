@@ -25,7 +25,6 @@ public struct MFAManagementView {
 
   @State private var enrolledFactors: [MultiFactorInfo] = []
   @State private var isLoading = false
-  @State private var errorMessage = ""
 
   // Present password prompt when required for reauthentication
   private var isShowingPasswordPrompt: Binding<Bool> {
@@ -45,16 +44,14 @@ public struct MFAManagementView {
   private func unenrollFactor(_ factorUid: String) {
     Task {
       isLoading = true
-      errorMessage = ""
 
       do {
         let freshFactors = try await authService.unenrollMFA(factorUid)
         enrolledFactors = freshFactors
+        isLoading = false
       } catch {
-        errorMessage = error.localizedDescription
+        isLoading = false
       }
-
-      isLoading = false
     }
   }
 
@@ -149,15 +146,6 @@ extension MFAManagementView: View {
           .padding(.horizontal)
           .accessibilityIdentifier("add-mfa-method-button")
         }
-      }
-
-      // Error message
-      if !errorMessage.isEmpty {
-        Text(errorMessage)
-          .foregroundColor(.red)
-          .font(.caption)
-          .padding(.horizontal)
-          .accessibilityIdentifier("error-message")
       }
 
       Spacer()

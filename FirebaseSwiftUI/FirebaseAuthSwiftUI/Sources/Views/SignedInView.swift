@@ -39,7 +39,9 @@ extension SignedInView: View {
           .padding()
           .accessibilityIdentifier("signed-in-text")
         Text("as:")
-        Text("\(authService.currentUser?.email ?? authService.currentUser?.displayName ?? "Unknown")")
+        Text(
+          "\(authService.currentUser?.email ?? authService.currentUser?.displayName ?? "Unknown")"
+        )
         if authService.currentUser?.isEmailVerified == false {
           VerifyEmailView()
         }
@@ -55,21 +57,17 @@ extension SignedInView: View {
         Divider()
         Button(authService.string.signOutButtonLabel) {
           Task {
-            do {
-              try await authService.signOut()
-            } catch {}
+            try? await authService.signOut()
           }
         }.accessibilityIdentifier("sign-out-button")
         Divider()
         Button(authService.string.deleteAccountButtonLabel) {
           Task {
-            do {
-              try await authService.deleteUser()
-            } catch {}
+            try? await authService.deleteUser()
           }
         }
-        Text(authService.errorMessage).foregroundColor(.red)
-      }.sheet(isPresented: isShowingPasswordPrompt) {
+      }
+      .sheet(isPresented: isShowingPasswordPrompt) {
         PasswordPromptSheet(coordinator: authService.passwordPrompt)
       }
     }
