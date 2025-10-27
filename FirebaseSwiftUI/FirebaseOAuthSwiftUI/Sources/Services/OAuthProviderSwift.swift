@@ -51,6 +51,7 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
     self.buttonBackgroundColor = buttonBackgroundColor
     self.buttonForegroundColor = buttonForegroundColor
   }
+
   /// Convenience initializer using SF Symbol
   /// - Parameters:
   ///   - providerId: The OAuth provider ID (e.g., "github.com", "microsoft.com")
@@ -132,6 +133,7 @@ public class OAuthProviderAuthUI: AuthProviderUI {
     }
     return oauthProvider.providerId
   }
+
   @MainActor public func authButton() -> AnyView {
     AnyView(GenericOAuthButton(provider: provider))
   }
