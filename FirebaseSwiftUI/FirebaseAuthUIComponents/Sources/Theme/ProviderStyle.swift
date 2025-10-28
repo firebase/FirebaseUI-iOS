@@ -63,8 +63,8 @@ public struct ProviderStyle: Sendable {
   
   public static var twitter: ProviderStyle {
     ProviderStyle(
-      icon: Image(.fuiIcTwitterBird),
-      backgroundColor: Color(hex: 0x5BAAF4),
+      icon: Image(.fuiIcTwitterX),
+      backgroundColor: Color.black,
       contentColor: Color(hex: 0xFFFFFF)
     )
   }

@@ -4,16 +4,6 @@
     "%@" : {
 
     },
-    "%@ %@ (%@)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$@ (%3$@)"
-          }
-        }
-      }
-    },
     "••••••%@" : {
 
     },
@@ -389,16 +379,6 @@
         }
       }
     },
-    "Digit %lld of %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Digit %1$lld of %2$lld"
-          }
-        }
-      }
-    },
     "Display Name" : {
 
     },
@@ -536,9 +516,6 @@
 
     },
     "Enter Verification Code" : {
-
-    },
-    "Enter verification code digit" : {
 
     },
     "Enter your email address and we'll send you a link to reset your password." : {

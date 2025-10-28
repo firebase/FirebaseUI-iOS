@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "fui_ic_microsoft_24dp 2.png",
+      "filename" : "fui_ic_twitter_x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "fui_ic_microsoft_24dp 1.png",
+      "filename" : "fui_ic_twitter_x_x2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "fui_ic_microsoft_24dp.png",
+      "filename" : "fui_ic_twitter_x_x3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -14,6 +14,7 @@
 
 import SwiftUI
 import FirebaseAuthSwiftUI
+import FirebaseAuthUIComponents
 
 struct EmailSignInView: View {
   let authService: AuthService

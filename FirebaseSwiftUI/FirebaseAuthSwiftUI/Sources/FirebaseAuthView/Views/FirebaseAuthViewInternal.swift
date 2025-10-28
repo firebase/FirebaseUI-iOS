@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import SwiftUI
+import FirebaseAuthUIComponents
 
 struct StringError: LocalizedError {
   let message: String
@@ -69,26 +70,6 @@ enum EmailAuthMode {
 enum PhoneAuthStep {
   case enterPhoneNumber
   case enterVerificationCode
-}
-
-struct CountryData {
-  let name: String
-  let dialCode: String
-  let code: String
-  
-  var flag: String {
-    // Convert country code to flag emoji
-    let base: UInt32 = 127397
-    var emoji = ""
-    for scalar in code.unicodeScalars {
-      if let unicodeScalar = UnicodeScalar(base + scalar.value) {
-        emoji.append(String(unicodeScalar))
-      }
-    }
-    return emoji
-  }
-  
-  static let `default` = CountryData(name: "United States", dialCode: "+1", code: "US")
 }
 
 struct EmailAuthContentState {
@@ -197,34 +178,9 @@ struct FirebaseAuthViewInternal: View {
   @ViewBuilder
   var authMethodPicker: some View {
     VStack {
-      Image(.firebaseAuthLogo)
-      AuthMethodPickerListView { selectedProvider in
-        switch selectedProvider {
-        case .email:
-          navigator.push(.emailAuth(.signIn))
-        case .phone:
-          navigator.push(.phoneAuth(.enterPhoneNumber))
-        default:
-          break
-        }
-      }
-      .padding(.vertical, 16)
-      tosAndPPFooter
-        .padding(.horizontal, 16)
     }
     .padding(.top, 24)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-  }
-  
-  @ViewBuilder
-  var tosAndPPFooter: some View {
-    AnnotatedString(
-      fullText: "By continuing, you accept our Terms of Service and Privacy Policy.",
-      links: [
-        ("Terms of Service", "https://example.com/terms"),
-        ("Privacy Policy", "https://example.com/privacy")
-      ]
-    )
   }
   
   // MARK: - State Creation

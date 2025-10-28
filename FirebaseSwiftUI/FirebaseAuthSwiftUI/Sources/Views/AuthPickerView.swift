@@ -14,23 +14,19 @@
 
 import FirebaseCore
 import SwiftUI
+import FirebaseAuthUIComponents
 
 @MainActor
 public struct AuthPickerView {
   @Environment(AuthService.self) private var authService
 
   public init() {}
-
-  private func switchFlow() {
-    authService.authenticationFlow =
-      authService
-        .authenticationFlow == .signIn ? .signUp : .signIn
-  }
 }
 
 extension AuthPickerView: View {
   public var body: some View {
     authMethodPicker
+      .background(Color(UIColor.secondarySystemBackground))
       .safeAreaPadding()
       .navigationTitle(authService.string.authPickerTitle)
       .navigationBarTitleDisplayMode(.large)
@@ -71,34 +67,8 @@ extension AuthPickerView: View {
               if authService.emailSignInEnabled {
                 EmailAuthView()
               }
-              if authService.emailSignInEnabled {
-                Divider()
-                HStack {
-                  Text(
-                    authService
-                      .authenticationFlow == .signIn
-                      ? authService.string.dontHaveAnAccountYetLabel
-                      : authService.string.alreadyHaveAnAccountLabel
-                  )
-                  Button(action: {
-                    withAnimation {
-                      switchFlow()
-                    }
-                  }) {
-                    Text(
-                      authService.authenticationFlow == .signUp
-                        ? authService.string
-                          .emailLoginFlowLabel
-                        : authService.string.emailSignUpFlowLabel
-                    )
-                    .fontWeight(.semibold)
-                    .foregroundColor(.blue)
-                  }.accessibilityIdentifier("switch-auth-flow")
-                }
-              }
               otherSignInOptions(proxy)
-              tosAndPPFooter
-            //PrivacyTOCsView(displayMode: .footer)
+              PrivacyTOCsView(displayMode: .full)
             default:
               // TODO: - possibly refactor this, see: https://github.com/firebase/FirebaseUI-iOS/pull/1259#discussion_r2105473437
               EmptyView()
@@ -115,18 +85,6 @@ extension AuthPickerView: View {
       authService.renderButtons()
     }
     .padding(.horizontal, proxy.size.width * 0.18)
-  }
-
-  @ViewBuilder
-  var tosAndPPFooter: some View {
-    AnnotatedString(
-      fullText:
-        "By continuing, you accept our Terms of Service and Privacy Policy.",
-      links: [
-        ("Terms of Service", "https://example.com/terms"),
-        ("Privacy Policy", "https://example.com/privacy"),
-      ]
-    )
   }
 }
 

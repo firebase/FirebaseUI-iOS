@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import SwiftUI
+import FirebaseAuthUIComponents
 
 struct EnterVerificationCodeView: View {
   let state: PhoneAuthContentState

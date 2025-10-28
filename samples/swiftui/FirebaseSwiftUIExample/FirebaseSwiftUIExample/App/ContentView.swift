@@ -58,14 +58,14 @@ struct ContentView: View {
     authService = AuthService(
       configuration: configuration
     )
-    .withGoogleSignIn()
-    .withPhoneSignIn()
     .withAppleSignIn()
+    .withPhoneSignIn()
+    .withGoogleSignIn()
+    .withFacebookSignIn(facebookProvider)
     .withTwitterSignIn()
     .withOAuthSignIn(OAuthProviderSwift.github())
     .withOAuthSignIn(OAuthProviderSwift.microsoft())
     .withOAuthSignIn(OAuthProviderSwift.yahoo())
-    .withFacebookSignIn(facebookProvider)
     .withEmailSignIn()
   }
 
