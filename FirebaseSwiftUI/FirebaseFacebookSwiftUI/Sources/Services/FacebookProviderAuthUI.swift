@@ -32,6 +32,13 @@ public class FacebookProviderSwift: AuthProviderSwift, DeleteUserSwift {
     self.scopes = scopes
     self.isLimitedLogin = isLimitedLogin
   }
+  
+  /// Sets whether to use Facebook Limited Login mode
+  /// - Parameter limitedLogin: `true` for Limited Login (privacy mode), `false` for full tracking
+  /// - Note: When disabling Limited Login, ensure you have requested ATT permission first
+  public func setLimitedLogin(_ limitedLogin: Bool) {
+    self.isLimitedLogin = limitedLogin
+  }
 
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
     let loginType: LoginTracking = isLimitedLogin ? .limited : .enabled

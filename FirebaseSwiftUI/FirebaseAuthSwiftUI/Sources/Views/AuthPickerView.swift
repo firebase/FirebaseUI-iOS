@@ -26,96 +26,106 @@ public struct AuthPickerView {
       authService
         .authenticationFlow == .signIn ? .signUp : .signIn
   }
-
-  @ViewBuilder
-  private var authPickerTitleView: some View {
-    if authService.authView == .authPicker {
-      Text(authService.string.authPickerTitle)
-        .font(.largeTitle)
-        .fontWeight(.bold)
-        .padding()
-    }
-  }
 }
 
 extension AuthPickerView: View {
   public var body: some View {
-    ScrollView {
-      VStack {
-        //authPickerTitleView
-        if authService.authenticationState == .authenticated {
-          switch authService.authView {
-          case .mfaEnrollment:
-            MFAEnrolmentView()
-          case .mfaManagement:
-            MFAManagementView()
-          default:
-            SignedInView()
-          }
-        } else {
-          switch authService.authView {
-          case .passwordRecovery:
-            PasswordRecoveryView()
-          case .emailLink:
-            EmailLinkView()
-          case .mfaEnrollment:
-            MFAEnrolmentView()
-          case .mfaResolution:
-            MFAResolutionView()
-          case .authPicker:
-            if authService.emailSignInEnabled {
-//              Text(
-//                authService.authenticationFlow == .signIn
-//                  ? authService.string
-//                    .emailLoginFlowLabel
-//                  : authService.string.emailSignUpFlowLabel
-//              )
-              EmailAuthView()
+    authMethodPicker
+      .safeAreaPadding()
+      .navigationTitle(authService.string.authPickerTitle)
+      .navigationBarTitleDisplayMode(.large)
+      .errorAlert(
+        error: Binding(
+          get: { authService.currentError },
+          set: { authService.currentError = $0 }
+        ),
+        okButtonLabel: authService.string.okButtonLabel
+      )
+  }
+
+  @ViewBuilder
+  var authMethodPicker: some View {
+    GeometryReader { proxy in
+      ScrollView {
+        VStack(spacing: 24) {
+          if authService.authenticationState == .authenticated {
+            switch authService.authView {
+            case .mfaEnrollment:
+              MFAEnrolmentView()
+            case .mfaManagement:
+              MFAManagementView()
+            default:
+              SignedInView()
             }
-            VStack {
-              authService.renderButtons()
-            }
-            if authService.emailSignInEnabled {
-              Divider()
-              HStack {
-                Text(
-                  authService
-                    .authenticationFlow == .signIn
-                    ? authService.string.dontHaveAnAccountYetLabel
-                    : authService.string.alreadyHaveAnAccountLabel
-                )
-                Button(action: {
-                  withAnimation {
-                    switchFlow()
-                  }
-                }) {
-                  Text(
-                    authService.authenticationFlow == .signUp
-                      ? authService.string
-                        .emailLoginFlowLabel
-                      : authService.string.emailSignUpFlowLabel
-                  )
-                  .fontWeight(.semibold)
-                  .foregroundColor(.blue)
-                }.accessibilityIdentifier("switch-auth-flow")
+          } else {
+            switch authService.authView {
+            case .passwordRecovery:
+              PasswordRecoveryView()
+            case .emailLink:
+              EmailLinkView()
+            case .mfaEnrollment:
+              MFAEnrolmentView()
+            case .mfaResolution:
+              MFAResolutionView()
+            case .authPicker:
+              if authService.emailSignInEnabled {
+                EmailAuthView()
               }
+              if authService.emailSignInEnabled {
+                Divider()
+                HStack {
+                  Text(
+                    authService
+                      .authenticationFlow == .signIn
+                      ? authService.string.dontHaveAnAccountYetLabel
+                      : authService.string.alreadyHaveAnAccountLabel
+                  )
+                  Button(action: {
+                    withAnimation {
+                      switchFlow()
+                    }
+                  }) {
+                    Text(
+                      authService.authenticationFlow == .signUp
+                        ? authService.string
+                          .emailLoginFlowLabel
+                        : authService.string.emailSignUpFlowLabel
+                    )
+                    .fontWeight(.semibold)
+                    .foregroundColor(.blue)
+                  }.accessibilityIdentifier("switch-auth-flow")
+                }
+              }
+              otherSignInOptions(proxy)
+              tosAndPPFooter
+            //PrivacyTOCsView(displayMode: .footer)
+            default:
+              // TODO: - possibly refactor this, see: https://github.com/firebase/FirebaseUI-iOS/pull/1259#discussion_r2105473437
+              EmptyView()
             }
-            PrivacyTOCsView(displayMode: .footer)
-          default:
-            // TODO: - possibly refactor this, see: https://github.com/firebase/FirebaseUI-iOS/pull/1259#discussion_r2105473437
-            EmptyView()
           }
         }
       }
-      .safeAreaPadding()
-      .navigationTitle(authService.string.authPickerTitle)
     }
-    .errorAlert(
-      error: Binding(
-        get: { authService.currentError },
-        set: { authService.currentError = $0 }
-      ),
-      okButtonLabel: authService.string.okButtonLabel
+  }
+
+  @ViewBuilder
+  func otherSignInOptions(_ proxy: GeometryProxy) -> some View {
+    VStack {
+      authService.renderButtons()
+    }
+    .padding(.horizontal, proxy.size.width * 0.18)
+  }
+
+  @ViewBuilder
+  var tosAndPPFooter: some View {
+    AnnotatedString(
+      fullText:
+        "By continuing, you accept our Terms of Service and Privacy Policy.",
+      links: [
+        ("Terms of Service", "https://example.com/terms"),
+        ("Privacy Policy", "https://example.com/privacy"),
+      ]
     )
   }
 }

@@ -19,6 +19,7 @@
 //  Created by Russell Wheatley on 23/04/2025.
 //
 
+import AppTrackingTransparency
 import FirebaseAuth
 import FirebaseAuthSwiftUI
 import FirebaseFacebookSwiftUI
@@ -31,6 +32,9 @@ import SwiftUI
 
 struct ContentView: View {
   let authService: AuthService
+  // State for Facebook Limited Login toggle
+  @State private var useLimitedLogin = true
+  let facebookProvider: FacebookProviderSwift
 
   init() {
     let actionCodeSettings = ActionCodeSettings()
@@ -46,6 +50,11 @@ struct ContentView: View {
       mfaEnabled: true
     )
 
+    // Create Facebook provider with Limited Login enabled by default
+    let fbProvider = FacebookProviderSwift()
+    fbProvider.setLimitedLogin(true)
+    facebookProvider = fbProvider
+
     authService = AuthService(
       configuration: configuration
     )
@@ -56,14 +65,56 @@ struct ContentView: View {
     .withOAuthSignIn(OAuthProviderSwift.github())
     .withOAuthSignIn(OAuthProviderSwift.microsoft())
     .withOAuthSignIn(OAuthProviderSwift.yahoo())
-    .withFacebookSignIn()
+    .withFacebookSignIn(facebookProvider)
     .withEmailSignIn()
-
   }
 
   var body: some View {
     NavigationStack {
-      AuthPickerView().environment(authService)
+      VStack {
+        AuthPickerView()
+        
+        // Facebook Limited Login Control (Example)
+        GroupBox {
+          VStack(alignment: .leading, spacing: 8) {
+            Text("Facebook Settings")
+              .font(.headline)
+            
+            Toggle("Use Limited Login", isOn: $useLimitedLogin)
+              .onChange(of: useLimitedLogin) { _, newValue in
+                handleLimitedLoginToggle(newValue)
+              }
+            
+            Text("Limited Login protects privacy by preventing Facebook tracking across apps.")
+              .font(.caption)
+              .foregroundColor(.secondary)
+          }
+        }
+        .padding()
+      }
+      .environment(authService)
+    }
+  }
+  
+  private func handleLimitedLoginToggle(_ limitedLogin: Bool) {
+    if limitedLogin {
+      // User wants Limited Login - enable immediately
+      facebookProvider.setLimitedLogin(true)
+    } else {
+      // User wants to disable Limited Login (enable tracking)
+      // Request ATT permission first
+      ATTrackingManager.requestTrackingAuthorization { status in
+        Task { @MainActor in
+          if status == .authorized {
+            // User authorized tracking
+            facebookProvider.setLimitedLogin(false)
+          } else {
+            // User denied tracking - force Limited Login back ON
+            useLimitedLogin = true
+            facebookProvider.setLimitedLogin(true)
+          }
+        }
+      }
     }
   }
 }
