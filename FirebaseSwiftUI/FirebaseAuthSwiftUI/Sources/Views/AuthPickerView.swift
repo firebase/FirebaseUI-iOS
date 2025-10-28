@@ -22,8 +22,9 @@ public struct AuthPickerView {
   public init() {}
 
   private func switchFlow() {
-    authService.authenticationFlow = authService
-      .authenticationFlow == .signIn ? .signUp : .signIn
+    authService.authenticationFlow =
+      authService
+        .authenticationFlow == .signIn ? .signUp : .signIn
   }
 
   @ViewBuilder
@@ -41,7 +42,7 @@ extension AuthPickerView: View {
   public var body: some View {
     ScrollView {
       VStack {
-        authPickerTitleView
+        //authPickerTitleView
         if authService.authenticationState == .authenticated {
           switch authService.authView {
           case .mfaEnrollment:
@@ -63,29 +64,39 @@ extension AuthPickerView: View {
             MFAResolutionView()
           case .authPicker:
             if authService.emailSignInEnabled {
-              Text(authService.authenticationFlow == .signIn ? authService.string
-                .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
-              Divider()
+//              Text(
+//                authService.authenticationFlow == .signIn
+//                  ? authService.string
+//                    .emailLoginFlowLabel
+//                  : authService.string.emailSignUpFlowLabel
+//              )
               EmailAuthView()
             }
             VStack {
               authService.renderButtons()
-            }.padding(.horizontal)
+            }
             if authService.emailSignInEnabled {
               Divider()
               HStack {
-                Text(authService
-                  .authenticationFlow == .signIn ? authService.string.dontHaveAnAccountYetLabel :
-                  authService.string.alreadyHaveAnAccountLabel)
+                Text(
+                  authService
+                    .authenticationFlow == .signIn
+                    ? authService.string.dontHaveAnAccountYetLabel
+                    : authService.string.alreadyHaveAnAccountLabel
+                )
                 Button(action: {
                   withAnimation {
                     switchFlow()
                   }
                 }) {
-                  Text(authService.authenticationFlow == .signUp ? authService.string
-                    .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.blue)
+                  Text(
+                    authService.authenticationFlow == .signUp
+                      ? authService.string
+                        .emailLoginFlowLabel
+                      : authService.string.emailSignUpFlowLabel
+                  )
+                  .fontWeight(.semibold)
+                  .foregroundColor(.blue)
                 }.accessibilityIdentifier("switch-auth-flow")
               }
             }
@@ -96,11 +107,16 @@ extension AuthPickerView: View {
           }
         }
       }
+      .safeAreaPadding()
+      .navigationTitle(authService.string.authPickerTitle)
     }
-    .errorAlert(error: Binding(
-      get: { authService.currentError },
-      set: { authService.currentError = $0 }
-    ), okButtonLabel: authService.string.okButtonLabel)
+    .errorAlert(
+      error: Binding(
+        get: { authService.currentError },
+        set: { authService.currentError = $0 }
+      ),
+      okButtonLabel: authService.string.okButtonLabel
+    )
   }
 }
 

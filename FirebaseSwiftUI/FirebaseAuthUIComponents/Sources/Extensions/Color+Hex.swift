@@ -12,30 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import FirebaseAuthSwiftUI
-import FirebaseAuthUIComponents
 import SwiftUI
 
-/// A button for signing in with Twitter/X
-@MainActor
-public struct SignInWithTwitterButton {
-  @Environment(AuthService.self) private var authService
-  let provider: AuthProviderSwift
-  public init(provider: AuthProviderSwift) {
-    self.provider = provider
-  }
-}
-
-extension SignInWithTwitterButton: View {
-  public var body: some View {
-    AuthProviderButton(
-      label: "Sign in with X",
-      style: .twitter,
-      accessibilityId: "sign-in-with-twitter-button"
-    ) {
-      Task {
-        try? await authService.signIn(provider)
-      }
+extension Color {
+    init(hex: UInt, alpha: Double = 1.0) {
+        let red = Double((hex >> 16) & 0xFF) / 255.0
+        let green = Double((hex >> 8) & 0xFF) / 255.0
+        let blue = Double(hex & 0xFF) / 255.0
+        
+        self.init(.sRGB, red: red, green: green, blue: blue, opacity: alpha)
     }
-  }
 }

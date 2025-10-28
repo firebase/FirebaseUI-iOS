@@ -19,8 +19,8 @@
 //  Created by Russell Wheatley on 22/05/2025.
 //
 import FirebaseAuthSwiftUI
+import FirebaseAuthUIComponents
 import FirebaseCore
-import GoogleSignInSwift
 import SwiftUI
 
 @MainActor
@@ -31,22 +31,19 @@ public struct SignInWithGoogleButton {
   public init(googleProvider: AuthProviderSwift) {
     self.googleProvider = googleProvider
   }
-
-  let customViewModel = GoogleSignInButtonViewModel(
-    scheme: .light,
-    style: .wide,
-    state: .normal
-  )
 }
 
 extension SignInWithGoogleButton: View {
   public var body: some View {
-    GoogleSignInButton(viewModel: customViewModel) {
+    AuthProviderButton(
+      label: "Sign in with Google",
+      style: .google,
+      accessibilityId: "sign-in-with-google-button"
+    ) {
       Task {
         try? await authService.signIn(googleProvider)
       }
     }
-    .accessibilityIdentifier("sign-in-with-google-button")
   }
 }
 

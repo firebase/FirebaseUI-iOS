@@ -17,6 +17,7 @@ import FacebookCore
 import FacebookLogin
 import FirebaseAuth
 import FirebaseAuthSwiftUI
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
@@ -64,27 +65,16 @@ public struct SignInWithFacebookButton {
 extension SignInWithFacebookButton: View {
   public var body: some View {
     VStack {
-      Button(action: {
+      AuthProviderButton(
+        label: authService.string.facebookLoginButtonLabel,
+        style: .facebook,
+        accessibilityId: "sign-in-with-facebook-button"
+      ) {
         Task {
           facebookProvider.isLimitedLogin = limitedLogin
           try? await authService.signIn(facebookProvider)
         }
-      }) {
-        HStack {
-          Image(systemName: "f.circle.fill")
-            .font(.title2)
-            .foregroundColor(.white)
-          Text(authService.string.facebookLoginButtonLabel)
-            .fontWeight(.semibold)
-            .foregroundColor(.white)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color.blue)
-        .cornerRadius(8)
       }
-      .accessibilityIdentifier("sign-in-with-facebook-button")
 
       HStack {
         Text(authService.string.authorizeUserTrackingLabel)

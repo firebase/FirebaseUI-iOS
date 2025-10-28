@@ -204,7 +204,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Welcome"
+            "value" : "Sign in with Firebase"
           }
         }
       }

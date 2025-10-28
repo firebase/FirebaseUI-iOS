@@ -265,8 +265,17 @@ let package = Package(
       ]
     ),
     .target(
+      name: "FirebaseAuthUIComponents",
+      dependencies: [],
+      path: "FirebaseSwiftUI/FirebaseAuthUIComponents/Sources",
+      resources: [
+        .process("Resources"),
+      ]
+    ),
+    .target(
       name: "FirebaseAuthSwiftUI",
       dependencies: [
+        "FirebaseAuthUIComponents",
         .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
       ],
       path: "FirebaseSwiftUI/FirebaseAuthSwiftUI/Sources",
@@ -283,6 +292,7 @@ let package = Package(
       name: "FirebaseGoogleSwiftUI",
       dependencies: [
         "FirebaseAuthSwiftUI",
+        "FirebaseAuthUIComponents",
         .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS"),
         .product(name: "GoogleSignInSwift", package: "GoogleSignIn-iOS"),
       ],
@@ -297,6 +307,7 @@ let package = Package(
       name: "FirebaseFacebookSwiftUI",
       dependencies: [
         "FirebaseAuthSwiftUI",
+        "FirebaseAuthUIComponents",
         .product(name: "FacebookLogin", package: "facebook-ios-sdk"),
         .product(name: "FacebookCore", package: "facebook-ios-sdk"),
       ],
@@ -311,6 +322,7 @@ let package = Package(
       name: "FirebasePhoneAuthSwiftUI",
       dependencies: [
         "FirebaseAuthSwiftUI",
+        "FirebaseAuthUIComponents",
       ],
       path: "FirebaseSwiftUI/FirebasePhoneAuthSwiftUI/Sources"
     ),
@@ -323,11 +335,9 @@ let package = Package(
       name: "FirebaseTwitterSwiftUI",
       dependencies: [
         "FirebaseAuthSwiftUI",
+        "FirebaseAuthUIComponents",
       ],
-      path: "FirebaseSwiftUI/FirebaseTwitterSwiftUI/Sources",
-      resources: [
-        .process("Resources")
-      ]
+      path: "FirebaseSwiftUI/FirebaseTwitterSwiftUI/Sources"
     ),
     .testTarget(
       name: "FirebaseTwitterSwiftUITests",
@@ -338,6 +348,7 @@ let package = Package(
       name: "FirebaseAppleSwiftUI",
       dependencies: [
         "FirebaseAuthSwiftUI",
+        "FirebaseAuthUIComponents",
       ],
       path: "FirebaseSwiftUI/FirebaseAppleSwiftUI/Sources"
     ),
@@ -350,11 +361,9 @@ let package = Package(
       name: "FirebaseOAuthSwiftUI",
       dependencies: [
         "FirebaseAuthSwiftUI",
+        "FirebaseAuthUIComponents",
       ],
-      path: "FirebaseSwiftUI/FirebaseOAuthSwiftUI/Sources",
-      resources: [
-        .process("Resources")
-      ]
+      path: "FirebaseSwiftUI/FirebaseOAuthSwiftUI/Sources"
     ),
     .testTarget(
       name: "FirebaseOAuthSwiftUITests",

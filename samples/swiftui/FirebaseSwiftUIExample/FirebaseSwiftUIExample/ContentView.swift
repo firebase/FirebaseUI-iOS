@@ -62,6 +62,8 @@ struct ContentView: View {
   }
 
   var body: some View {
-    AuthPickerView().environment(authService)
+    NavigationStack {
+      AuthPickerView().environment(authService)
+    }
   }
 }

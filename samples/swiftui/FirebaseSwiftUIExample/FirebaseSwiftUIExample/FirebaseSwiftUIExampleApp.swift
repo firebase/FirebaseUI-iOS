@@ -79,12 +79,12 @@ struct FirebaseSwiftUIExampleApp: App {
 
   var body: some Scene {
     WindowGroup {
-      ContentViewSheetExample()
-//      if testRunner {
-//        TestView()
-//      } else {
-//        ContentView()
-//      }
+      // ContentViewSheetExample()
+      if testRunner {
+        TestView()
+      } else {
+        ContentView()
+      }
     }
   }
 }
