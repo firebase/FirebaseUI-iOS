@@ -58,7 +58,7 @@ public extension ProviderOperationReauthentication {
 
     do {
       let credential = try await authProvider.createAuthCredential()
-      try await user.reauthenticate(with: credential)
+      _ = try await user.reauthenticate(with: credential)
     } catch {
       throw AuthServiceError.signInFailed(underlying: error)
     }
