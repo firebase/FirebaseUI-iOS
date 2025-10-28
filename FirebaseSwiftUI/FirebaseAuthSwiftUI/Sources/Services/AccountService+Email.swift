@@ -15,12 +15,13 @@
 @preconcurrency import FirebaseAuth
 import Observation
 
+@MainActor
 protocol EmailPasswordOperationReauthentication {
   var passwordPrompt: PasswordPromptCoordinator { get }
 }
 
 extension EmailPasswordOperationReauthentication {
-  @MainActor func reauthenticate() async throws {
+  func reauthenticate() async throws {
     guard let user = Auth.auth().currentUser else {
       throw AuthServiceError.reauthenticationRequired("No user currently signed-in")
     }
@@ -33,7 +34,7 @@ extension EmailPasswordOperationReauthentication {
       let password = try await passwordPrompt.confirmPassword()
 
       let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-      try await Auth.auth().currentUser?.reauthenticate(with: credential)
+      _ = try await Auth.auth().currentUser?.reauthenticate(with: credential)
     } catch {
       throw AuthServiceError.signInFailed(underlying: error)
     }

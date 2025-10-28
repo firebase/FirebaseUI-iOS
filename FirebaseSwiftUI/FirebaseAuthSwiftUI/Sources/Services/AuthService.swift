@@ -719,10 +719,10 @@ public extension AuthService {
       }
       let password = try await passwordPrompt.confirmPassword()
       let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-      try await user.reauthenticate(with: credential)
+      _ = try await user.reauthenticate(with: credential)
     } else if let matchingProvider = providers.first(where: { $0.id == providerId }) {
       let credential = try await matchingProvider.provider.createAuthCredential()
-      try await user.reauthenticate(with: credential)
+      _ = try await user.reauthenticate(with: credential)
     } else {
       throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
     }

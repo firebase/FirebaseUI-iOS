@@ -46,12 +46,13 @@ public extension AuthenticatedOperation {
   }
 }
 
+@MainActor
 public protocol ProviderOperationReauthentication {
   var authProvider: AuthProviderSwift { get }
 }
 
 public extension ProviderOperationReauthentication {
-  @MainActor func reauthenticate() async throws {
+  func reauthenticate() async throws {
     guard let user = Auth.auth().currentUser else {
       throw AuthServiceError.reauthenticationRequired("No user currently signed-in")
     }
