@@ -13,6 +13,7 @@
 // limitations under the License.
 
 @preconcurrency import FirebaseAuth
+import FirebaseCore
 import SwiftUI
 
 public protocol AuthProviderSwift {
@@ -93,6 +94,7 @@ public final class AuthService {
     self.configuration = configuration
     string = StringUtils(bundle: configuration.customStringsBundle ?? Bundle.module)
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
+    FirebaseApp.registerLibrary("firebase-ui-ios", withVersion: FirebaseAuthSwiftUIVersion.version)
   }
 
   @ObservationIgnored @AppStorage("email-link") public var emailLink: String?
