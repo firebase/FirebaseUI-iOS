@@ -41,7 +41,7 @@ jobs:
           set -o pipefail
           xcodebuild test \
             -scheme FirebaseUI-Package \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIPackageTests.xcresult | tee FirebaseSwiftUIPackageTests.log | xcpretty --test --color --simple
             
@@ -98,7 +98,7 @@ jobs:
           set -o pipefail
           xcodebuild build-for-testing \
             -scheme FirebaseSwiftUIExampleTests \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
             -enableCodeCoverage YES | xcpretty --color --simple
             
       - name: Run Integration Tests
@@ -107,7 +107,7 @@ jobs:
           set -o pipefail
           xcodebuild test-without-building \
             -scheme FirebaseSwiftUIExampleTests \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleTests.xcresult | tee FirebaseSwiftUIExampleTests.log | xcpretty --test --color --simple
             
@@ -164,7 +164,7 @@ jobs:
           set -o pipefail
           xcodebuild build-for-testing \
             -scheme FirebaseSwiftUIExampleUITests \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
             -enableCodeCoverage YES | xcpretty --color --simple
             
       - name: Run UI Tests
@@ -173,7 +173,7 @@ jobs:
           set -o pipefail
           xcodebuild test-without-building \
             -scheme FirebaseSwiftUIExampleUITests \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
             -parallel-testing-enabled YES \
             -maximum-concurrent-test-simulator-destinations 2 \
             -enableCodeCoverage YES \
