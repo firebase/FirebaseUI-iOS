@@ -235,8 +235,6 @@ public final class AuthService {
       }
     } catch let error as NSError {
       authenticationState = .unauthenticated
-      updateError(message: string.localizedErrorMessage(for: error))
-
       // Check if this is an MFA required error
       if error.code == AuthErrorCode.secondFactorRequired.rawValue {
         if let resolver = error
@@ -245,6 +243,9 @@ public final class AuthService {
           pendingMFACredential = credentials
           return handleMFARequiredError(resolver: resolver)
         }
+      } else {
+        // Don't want error modal on MFA error so we only update here
+        updateError(message: string.localizedErrorMessage(for: error))
       }
 
       throw error
