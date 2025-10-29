@@ -17,16 +17,13 @@ import SwiftUI
 
 public protocol AuthProviderSwift {
   @MainActor func createAuthCredential() async throws -> AuthCredential
+  @MainActor func deleteUser(user: User) async throws
 }
 
 public protocol AuthProviderUI {
   var id: String { get }
   @MainActor func authButton() -> AnyView
   var provider: AuthProviderSwift { get }
-}
-
-public protocol DeleteUserSwift {
-  @MainActor func deleteUser(user: User) async throws
 }
 
 public protocol PhoneAuthProviderSwift: AuthProviderSwift {
@@ -282,13 +279,12 @@ public extension AuthService {
           let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
           try await operation(on: user)
         } else {
-          // Find provider by matching ID and ensure it can delete users
-          guard let matchingProvider = providers.first(where: { $0.id == providerId }),
-                let provider = matchingProvider.provider as? DeleteUserSwift else {
+          // Find provider by matching ID
+          guard let matchingProvider = providers.first(where: { $0.id == providerId }) else {
             throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
           }
 
-          try await provider.deleteUser(user: user)
+          try await matchingProvider.provider.deleteUser(user: user)
         }
       }
     } catch {
@@ -723,10 +719,10 @@ public extension AuthService {
       }
       let password = try await passwordPrompt.confirmPassword()
       let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-      try await user.reauthenticate(with: credential)
+      _ = try await user.reauthenticate(with: credential)
     } else if let matchingProvider = providers.first(where: { $0.id == providerId }) {
       let credential = try await matchingProvider.provider.createAuthCredential()
-      try await user.reauthenticate(with: credential)
+      _ = try await user.reauthenticate(with: credential)
     } else {
       throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
     }
