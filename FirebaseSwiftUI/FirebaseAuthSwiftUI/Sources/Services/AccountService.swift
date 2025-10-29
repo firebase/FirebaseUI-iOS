@@ -33,7 +33,7 @@ public protocol AuthenticatedOperation {
 
 public extension AuthenticatedOperation {
   func callAsFunction(on _: User,
-                      _ performOperation: () async throws -> Void) async throws {
+                      _ performOperation: @MainActor () async throws -> Void) async throws {
     do {
       try await performOperation()
     } catch let error as NSError where error.requiresReauthentication {
@@ -42,6 +42,44 @@ public extension AuthenticatedOperation {
     } catch AuthServiceError.reauthenticationRequired {
       let token = try await reauthenticate()
       try await performOperation()
+    }
+  }
+}
+
+@MainActor
+public protocol ProviderOperationReauthentication {
+  var authProvider: AuthProviderSwift { get }
+}
+
+public extension ProviderOperationReauthentication {
+  func reauthenticate() async throws {
+    guard let user = Auth.auth().currentUser else {
+      throw AuthServiceError.reauthenticationRequired("No user currently signed-in")
+    }
+
+    do {
+      let credential = try await authProvider.createAuthCredential()
+      _ = try await user.reauthenticate(with: credential)
+    } catch {
+      throw AuthServiceError.signInFailed(underlying: error)
+    }
+  }
+}
+
+@MainActor
+public class ProviderDeleteUserOperation<Provider: AuthProviderSwift>: AuthenticatedOperation,
+  @preconcurrency ProviderOperationReauthentication {
+  let provider: Provider
+
+  public var authProvider: AuthProviderSwift { provider }
+
+  public init(provider: Provider) {
+    self.provider = provider
+  }
+
+  public func callAsFunction(on user: User) async throws {
+    try await callAsFunction(on: user) {
+      try await user.delete()
     }
   }
 }

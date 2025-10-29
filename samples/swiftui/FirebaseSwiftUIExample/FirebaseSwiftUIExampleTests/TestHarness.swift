@@ -15,6 +15,7 @@ func configureFirebaseIfNeeded() {
   }
 }
 
+@MainActor
 private var hasCheckedEmulatorAvailability = false
 
 @MainActor
@@ -62,6 +63,7 @@ func createEmail() -> String {
   return "\(before)@\(after).com"
 }
 
+@MainActor
 func waitForStateChange(timeout: TimeInterval = 10.0,
                         condition: @escaping () -> Bool) async throws {
   let startTime = Date()

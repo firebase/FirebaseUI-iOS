@@ -121,6 +121,7 @@ final class MFAResolutionUITests: XCTestCase {
   ///   - phoneNumber: The phone number to enroll for SMS MFA (e.g., "+15551234567")
   ///   - displayName: Optional display name for the MFA factor
   /// - Returns: True if MFA was successfully enabled, false otherwise
+  @MainActor
   private func enableSMSMFAViaEmulator(
     idToken: String,
     phoneNumber: String,
@@ -261,6 +262,7 @@ final class MFAResolutionUITests: XCTestCase {
   /// - Parameters:
   ///   - phoneNumber: The phone number to retrieve the code for
   ///   - codeType: The type of code - "enrollment" for MFA enrollment, "verification" for phone verification during resolution
+  @MainActor
   private func getSMSVerificationCode(for phoneNumber: String, codeType: String = "enrollment") async -> String? {
     let emulatorUrl = "http://127.0.0.1:9099/emulator/v1/projects/flutterfire-e2e-tests/verificationCodes"
     
@@ -336,6 +338,7 @@ final class MFAResolutionUITests: XCTestCase {
   ///   - email: The user's email address
   ///   - password: The user's password (defaults to "123456")
   /// - Returns: The user's ID token, or nil if the sign-in failed
+  @MainActor
   private func getIDTokenFromEmulator(email: String, password: String = "123456") async -> String? {
     let signInUrl = "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=fake-api-key"
     
@@ -379,6 +382,7 @@ final class MFAResolutionUITests: XCTestCase {
     }
   }
 
+  @MainActor
   private func signUpUser(email: String, password: String = "12345678") async throws {
     // Create user via Auth Emulator REST API
     let url = URL(string: "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake-api-key")!
