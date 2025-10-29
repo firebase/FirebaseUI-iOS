@@ -1,0 +1,130 @@
+// Copyright 2025 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import FirebaseAuth
+import FirebaseAuthUIComponents
+import FirebaseCore
+import SwiftUI
+
+@MainActor
+struct EnterVerificationCodeView: View {
+  @Environment(AuthService.self) private var authService
+  @Environment(\.dismiss) private var dismiss
+  @State private var verificationCode: String = ""
+  @State private var currentError: AlertError? = nil
+  @State private var isProcessing: Bool = false
+  
+  let verificationID: String
+  let fullPhoneNumber: String
+  let phoneProvider: PhoneAuthProviderSwift
+  let phoneNumber: String
+  let selectedCountry: CountryData
+  let onChangeNumber: () -> Void
+  
+  var body: some View {
+    VStack(spacing: 32) {
+      VStack(spacing: 16) {
+        VStack(spacing: 8) {
+          Text("We sent a code to \(fullPhoneNumber)")
+            .font(.subheadline)
+            .foregroundStyle(.secondary)
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: .infinity, alignment: .leading)
+          
+          Button {
+            onChangeNumber()
+          } label: {
+            Text("Change number")
+              .font(.caption)
+              .frame(maxWidth: .infinity, alignment: .leading)
+          }
+        }
+        .padding(.bottom)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        
+        VerificationCodeInputField(
+          code: $verificationCode,
+          isError: currentError != nil,
+          errorMessage: currentError?.message
+        )
+        
+        Button(action: {
+          Task {
+            isProcessing = true
+            do {
+              phoneProvider.setVerificationCode(verificationID: verificationID, code: verificationCode)
+              let credential = try await phoneProvider.createAuthCredential()
+              
+              _ = try await authService.signIn(credentials: credential)
+              dismiss()
+            } catch {
+              currentError = AlertError(message: error.localizedDescription)
+              isProcessing = false
+            }
+          }
+        }) {
+          if isProcessing {
+            ProgressView()
+              .frame(height: 32)
+              .frame(maxWidth: .infinity)
+          } else {
+            Text(authService.string.verifyAndSignInButtonLabel)
+              .frame(height: 32)
+              .frame(maxWidth: .infinity)
+          }
+        }
+        .buttonStyle(.borderedProminent)
+        .disabled(isProcessing || verificationCode.count != 6)
+      }
+      
+      Spacer()
+    }
+    .navigationTitle(authService.string.enterVerificationCodeTitle)
+    .navigationBarTitleDisplayMode(.inline)
+    .padding(.horizontal)
+    .errorAlert(error: $currentError, okButtonLabel: authService.string.okButtonLabel)
+  }
+}
+
+#Preview {
+  FirebaseOptions.dummyConfigurationForPreview()
+  
+  class MockPhoneProvider: PhoneAuthProviderSwift {
+    var id: String = "phone"
+    
+    func verifyPhoneNumber(phoneNumber: String) async throws -> String {
+      return "mock-verification-id"
+    }
+    
+    func setVerificationCode(verificationID: String, code: String) {
+      // Mock implementation
+    }
+    
+    func createAuthCredential() async throws -> AuthCredential {
+      fatalError("Not implemented in preview")
+    }
+  }
+  
+  return NavigationStack {
+    EnterVerificationCodeView(
+      verificationID: "mock-id",
+      fullPhoneNumber: "+1 5551234567",
+      phoneProvider: MockPhoneProvider(),
+      phoneNumber: "5551234567",
+      selectedCountry: .default,
+      onChangeNumber: {}
+    )
+    .environment(AuthService())
+  }
+}

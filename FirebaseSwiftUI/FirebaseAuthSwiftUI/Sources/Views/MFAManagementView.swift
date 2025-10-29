@@ -56,11 +56,11 @@ public struct MFAManagementView {
   }
 
   private func navigateToEnrollment() {
-    authService.authView = .mfaEnrollment
+    authService.navigator.push(.mfaEnrollment)
   }
 
   private func goBack() {
-    authService.authView = .authPicker
+    authService.navigator.clear()
   }
 }
 
@@ -70,7 +70,7 @@ extension MFAManagementView: View {
       // Header with manual back button
       HStack {
         Button(action: {
-          authService.authView = .authPicker
+          authService.navigator.clear()
         }) {
           HStack(spacing: 4) {
             Image(systemName: "chevron.left")

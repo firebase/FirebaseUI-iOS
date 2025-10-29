@@ -41,7 +41,8 @@ extension AuthPickerView: View {
   public var body: some View {
     content()
       .sheet(isPresented: isPresented) {
-        NavigationStack {
+        @Bindable var navigator = authService.navigator
+        NavigationStack(path: $navigator.routes) {
           authPickerViewInternal
             .navigationTitle(authService.string.authPickerTitle)
             .navigationBarTitleDisplayMode(.large)
@@ -59,6 +60,12 @@ extension AuthPickerView: View {
                 MFAManagementView()
               case AuthView.mfaResolution:
                 MFAResolutionView()
+              case AuthView.enterPhoneNumber:
+                if let phoneProvider = authService.currentPhoneProvider {
+                  EnterPhoneNumberView(phoneProvider: phoneProvider)
+                } else {
+                  EmptyView()
+                }
               default:
                 EmptyView()
               }
@@ -72,7 +79,7 @@ extension AuthPickerView: View {
   var authPickerViewInternal: some View {
     authMethodPicker
       .safeAreaPadding()
-      .onChange(of: authService.authView) { oldValue, newValue in
+      .onChange(of: authService.authViewRoutes) { oldValue, newValue in
         debugPrint("Got here: \(newValue)")
       }
       .errorAlert(

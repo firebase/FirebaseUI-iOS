@@ -21,7 +21,7 @@ import SwiftUI
 public struct PhoneAuthButtonView {
   @Environment(AuthService.self) private var authService
   let phoneProvider: PhoneAuthProviderSwift
-
+  
   public init(phoneProvider: PhoneAuthProviderSwift) {
     self.phoneProvider = phoneProvider
   }
@@ -34,9 +34,7 @@ extension PhoneAuthButtonView: View {
       style: .phone,
       accessibilityId: "sign-in-with-phone-button"
     ) {
-      Task {
-        try await authService.signIn(phoneProvider)
-      }
+      authService.navigator.push(.enterPhoneNumber)
     }
   }
 }

@@ -27,49 +27,45 @@ extension SignedInView: View {
       set: { authService.passwordPrompt.isPromptingPassword = $0 }
     )
   }
-
+  
   public var body: some View {
-    if authService.authView == .updatePassword {
-      UpdatePasswordView()
-    } else {
-      VStack {
-        Text(authService.string.signedInTitle)
-          .font(.largeTitle)
-          .fontWeight(.bold)
-          .padding()
-          .accessibilityIdentifier("signed-in-text")
-        Text("as:")
-        Text(
-          "\(authService.currentUser?.email ?? authService.currentUser?.displayName ?? "Unknown")"
-        )
-        if authService.currentUser?.isEmailVerified == false {
-          VerifyEmailView()
+    VStack {
+      Text(authService.string.signedInTitle)
+        .font(.largeTitle)
+        .fontWeight(.bold)
+        .padding()
+        .accessibilityIdentifier("signed-in-text")
+      Text("as:")
+      Text(
+        "\(authService.currentUser?.email ?? authService.currentUser?.displayName ?? "Unknown")"
+      )
+      if authService.currentUser?.isEmailVerified == false {
+        VerifyEmailView()
+      }
+      Divider()
+      Button(authService.string.updatePasswordButtonLabel) {
+        authService.navigator.push(.updatePassword)
+      }
+      Divider()
+      Button("Manage Two-Factor Authentication") {
+        authService.navigator.push(.mfaManagement)
+      }
+      .accessibilityIdentifier("mfa-management-button")
+      Divider()
+      Button(authService.string.signOutButtonLabel) {
+        Task {
+          try? await authService.signOut()
         }
-        Divider()
-        Button(authService.string.updatePasswordButtonLabel) {
-          authService.authView = .updatePassword
-        }
-        Divider()
-        Button("Manage Two-Factor Authentication") {
-          authService.authView = .mfaManagement
-        }
-        .accessibilityIdentifier("mfa-management-button")
-        Divider()
-        Button(authService.string.signOutButtonLabel) {
-          Task {
-            try? await authService.signOut()
-          }
-        }.accessibilityIdentifier("sign-out-button")
-        Divider()
-        Button(authService.string.deleteAccountButtonLabel) {
-          Task {
-            try? await authService.deleteUser()
-          }
+      }.accessibilityIdentifier("sign-out-button")
+      Divider()
+      Button(authService.string.deleteAccountButtonLabel) {
+        Task {
+          try? await authService.deleteUser()
         }
       }
-      .sheet(isPresented: isShowingPasswordPrompt) {
-        PasswordPromptSheet(coordinator: authService.passwordPrompt)
-      }
+    }
+    .sheet(isPresented: isShowingPasswordPrompt) {
+      PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }
   }
 }

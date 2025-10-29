@@ -132,7 +132,7 @@ public struct MFAEnrolmentView {
       // Reset form state on success
       resetForm()
 
-      authService.authView = .authPicker
+      authService.navigator.clear()
     }
   }
 
@@ -147,7 +147,7 @@ public struct MFAEnrolmentView {
 
   private func cancelEnrollment() {
     resetForm()
-    authService.authView = .authPicker
+    authService.navigator.clear()
   }
 
   private func copyToClipboard(_ text: String) {

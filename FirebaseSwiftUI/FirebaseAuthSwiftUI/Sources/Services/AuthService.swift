@@ -31,6 +31,7 @@ public protocol DeleteUserSwift {
 
 public protocol PhoneAuthProviderSwift: AuthProviderSwift {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
+  func setVerificationCode(verificationID: String, code: String)
 }
 
 public enum AuthenticationState {
@@ -44,14 +45,15 @@ public enum AuthenticationFlow {
   case signUp
 }
 
-public enum AuthView {
-  case authPicker
+public enum AuthView: Hashable {
   case passwordRecovery
   case emailLink
   case updatePassword
   case mfaEnrollment
   case mfaManagement
   case mfaResolution
+  case enterPhoneNumber
+  case enterVerificationCode(verificationID: String, fullPhoneNumber: String)
 }
 
 public enum SignInOutcome: @unchecked Sendable {
@@ -85,6 +87,24 @@ private final class AuthListenerManager {
   }
 }
 
+@Observable
+public class Navigator {
+  var routes: [AuthView] = []
+  
+  public func push(_ route: AuthView) {
+    routes.append(route)
+  }
+  
+  @discardableResult
+  public func pop() -> AuthView? {
+    routes.popLast()
+  }
+  
+  public func clear() {
+    routes.removeAll()
+  }
+}
+
 @MainActor
 @Observable
 public final class AuthService {
@@ -98,7 +118,10 @@ public final class AuthService {
   @ObservationIgnored @AppStorage("email-link") public var emailLink: String?
   public let configuration: AuthConfiguration
   public let auth: Auth
-  public var authView: AuthView = .authPicker
+  public private(set) var navigator = Navigator()
+  public var authViewRoutes: [AuthView] {
+    navigator.routes
+  }
   public let string: StringUtils
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
@@ -117,6 +140,10 @@ public final class AuthService {
   var emailSignInEnabled = false
 
   private var providers: [AuthProviderUI] = []
+  
+  public var currentPhoneProvider: PhoneAuthProviderSwift? {
+    providers.compactMap { $0.provider as? PhoneAuthProviderSwift }.first
+  }
   public func registerProvider(providerWithButton: AuthProviderUI) {
     providers.append(providerWithButton)
   }
@@ -794,7 +821,7 @@ public extension AuthService {
     let hints = extractMFAHints(from: resolver)
     currentMFARequired = MFARequired(hints: hints)
     currentMFAResolver = resolver
-    authView = .mfaResolution
+    navigator.push(.mfaResolution)
     return .mfaRequired(MFARequired(hints: hints))
   }
 

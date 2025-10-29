@@ -90,7 +90,7 @@ extension PasswordRecoveryView: View {
       Button(authService.string.okButtonLabel) {
         showSuccessSheet = false
         email = ""
-        authService.authView = .authPicker
+        authService.navigator.clear()
       }
       .padding()
     }

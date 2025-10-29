@@ -93,7 +93,9 @@ extension EmailAuthView: View {
       .focused($focus, equals: .password)
       .accessibilityIdentifier("password-field")
       if authService.authenticationFlow == .signIn {
-        NavigationLink(value: AuthView.passwordRecovery) {
+        Button {
+          authService.navigator.push(.passwordRecovery)
+        } label: {
           Text(authService.string.passwordButtonLabel)
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
@@ -149,7 +151,9 @@ extension EmailAuthView: View {
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
       .accessibilityIdentifier("sign-in-button")
-      NavigationLink(value: AuthView.emailLink) {
+      Button {
+        authService.navigator.push(.emailLink)
+      } label: {
         Text(authService.string.signUpWithEmailLinkButtonLabel)
       }
       .accessibilityIdentifier("sign-in-with-email-link-button")

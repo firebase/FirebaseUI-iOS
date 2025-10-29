@@ -178,9 +178,6 @@
     "as:" : {
 
     },
-    "Authentication" : {
-
-    },
     "Authentication Method" : {
 
     },
@@ -239,9 +236,6 @@
       }
     },
     "Change number" : {
-
-    },
-    "Check your email at %@ for a link to reset your password." : {
 
     },
     "Choose Authentication Method" : {
@@ -308,15 +302,6 @@
       }
     },
     "Copied to clipboard!" : {
-
-    },
-    "Create Account" : {
-
-    },
-    "Create an account" : {
-
-    },
-    "Create an Account" : {
 
     },
     "Delete" : {
@@ -518,13 +503,7 @@
     "Enter Verification Code" : {
 
     },
-    "Enter your email address and we'll send you a link to reset your password." : {
-
-    },
     "Enter Your Phone Number" : {
-
-    },
-    "Enter your phone number to get started" : {
 
     },
     "EnterYourEmail" : {
@@ -586,9 +565,6 @@
           }
         }
       }
-    },
-    "Forgot password?" : {
-
     },
     "ForgotPassword" : {
       "comment" : "Button text for 'Forgot Password' action.",
@@ -710,9 +686,6 @@
           }
         }
       }
-    },
-    "Password reset link sent!" : {
-
     },
     "PasswordRecoveryEmailSentMessage" : {
       "comment" : "Message displayed when the email for password recovery has been sent.",
@@ -939,12 +912,6 @@
     "Resend Code" : {
 
     },
-    "Resend code in %llds" : {
-
-    },
-    "Reset Password" : {
-
-    },
     "Save" : {
       "comment" : "Save button title.",
       "extractionState" : "manual",
@@ -978,9 +945,6 @@
     "Send Code" : {
 
     },
-    "Send Reset Link" : {
-
-    },
     "SendEmailSignInLinkButtonLabel" : {
       "comment" : "Button label for sending email sign-in link",
       "extractionState" : "manual",
@@ -997,15 +961,6 @@
 
     },
     "Set up two-factor authentication to add an extra layer of security to your account." : {
-
-    },
-    "Sign in" : {
-
-    },
-    "Sign in with email" : {
-
-    },
-    "Sign in with phone" : {
 
     },
     "Sign up" : {
@@ -1286,9 +1241,6 @@
     "Verification Code" : {
 
     },
-    "Verify Code" : {
-
-    },
     "Verify email address?" : {
       "comment" : "Label for sending email verification to user.",
       "localizations" : {
@@ -1299,9 +1251,6 @@
           }
         }
       }
-    },
-    "Verify Phone Number" : {
-
     },
     "VerifyItsYou" : {
       "comment" : "Alert message title show for re-authorization.",
