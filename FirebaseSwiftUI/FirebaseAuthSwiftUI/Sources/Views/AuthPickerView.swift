@@ -17,19 +17,64 @@ import SwiftUI
 import FirebaseAuthUIComponents
 
 @MainActor
-public struct AuthPickerView {
+public struct AuthPickerView<Content: View, Footer: View> {
+  public init(
+    isPresented: Binding<Bool> = .constant(false),
+    interactiveDismissDisabled: Bool = true,
+    @ViewBuilder content: @escaping () -> Content = { EmptyView() },
+    @ViewBuilder footer: @escaping () -> Footer = { EmptyView() }
+  ) {
+    self.isPresented = isPresented
+    self.interactiveDismissDisabled = interactiveDismissDisabled
+    self.content = content
+    self.footer = footer
+  }
+  
   @Environment(AuthService.self) private var authService
-
-  public init() {}
+  private var isPresented: Binding<Bool>
+  private var interactiveDismissDisabled: Bool
+  private let content: () -> Content?
+  private let footer: () -> Footer?
 }
 
 extension AuthPickerView: View {
   public var body: some View {
+    content()
+      .sheet(isPresented: isPresented) {
+        NavigationStack {
+          authPickerViewInternal
+            .navigationTitle(authService.string.authPickerTitle)
+            .navigationBarTitleDisplayMode(.large)
+            .navigationDestination(for: AuthView.self) { view in
+              switch view {
+              case AuthView.passwordRecovery:
+                PasswordRecoveryView()
+              case AuthView.emailLink:
+                EmailLinkView()
+              case AuthView.updatePassword:
+                UpdatePasswordView()
+              case AuthView.mfaEnrollment:
+                MFAEnrolmentView()
+              case AuthView.mfaManagement:
+                MFAManagementView()
+              case AuthView.mfaResolution:
+                MFAResolutionView()
+              default:
+                EmptyView()
+              }
+            }
+        }
+        .interactiveDismissDisabled(interactiveDismissDisabled)
+      }
+  }
+  
+  @ViewBuilder
+  var authPickerViewInternal: some View {
     authMethodPicker
-      .background(Color(UIColor.secondarySystemBackground))
       .safeAreaPadding()
-      .navigationTitle(authService.string.authPickerTitle)
-      .navigationBarTitleDisplayMode(.large)
+      .onChange(of: authService.authView) { oldValue, newValue in
+        debugPrint("Got here: \(newValue)")
+      }
       .errorAlert(
         error: Binding(
           get: { authService.currentError },
@@ -38,47 +83,63 @@ extension AuthPickerView: View {
         okButtonLabel: authService.string.okButtonLabel
       )
   }
-
+  
   @ViewBuilder
   var authMethodPicker: some View {
     GeometryReader { proxy in
       ScrollView {
         VStack(spacing: 24) {
-          if authService.authenticationState == .authenticated {
-            switch authService.authView {
-            case .mfaEnrollment:
-              MFAEnrolmentView()
-            case .mfaManagement:
-              MFAManagementView()
-            default:
-              SignedInView()
-            }
-          } else {
-            switch authService.authView {
-            case .passwordRecovery:
-              PasswordRecoveryView()
-            case .emailLink:
-              EmailLinkView()
-            case .mfaEnrollment:
-              MFAEnrolmentView()
-            case .mfaResolution:
-              MFAResolutionView()
-            case .authPicker:
-              if authService.emailSignInEnabled {
-                EmailAuthView()
-              }
-              otherSignInOptions(proxy)
-              PrivacyTOCsView(displayMode: .full)
-            default:
-              // TODO: - possibly refactor this, see: https://github.com/firebase/FirebaseUI-iOS/pull/1259#discussion_r2105473437
-              EmptyView()
-            }
+          if authService.emailSignInEnabled {
+            EmailAuthView()
           }
+          otherSignInOptions(proxy)
+          PrivacyTOCsView(displayMode: .full)
+          footer()
         }
       }
     }
   }
-
+  
+  //  @ViewBuilder
+  //  var authMethodPicker: some View {
+  //    GeometryReader { proxy in
+  //      ScrollView {
+  //        VStack(spacing: 24) {
+  //          if authService.authenticationState == .authenticated {
+  //            switch authService.authView {
+  //            case .mfaEnrollment:
+  //              MFAEnrolmentView()
+  //            case .mfaManagement:
+  //              MFAManagementView()
+  //            default:
+  //              SignedInView()
+  //            }
+  //          } else {
+  //            switch authService.authView {
+  //            case .passwordRecovery:
+  //              PasswordRecoveryView()
+  //            case .emailLink:
+  //              EmailLinkView()
+  //            case .mfaEnrollment:
+  //              MFAEnrolmentView()
+  //            case .mfaResolution:
+  //              MFAResolutionView()
+  //            case .authPicker:
+  //              if authService.emailSignInEnabled {
+  //                EmailAuthView()
+  //              }
+  //              otherSignInOptions(proxy)
+  //              PrivacyTOCsView(displayMode: .full)
+  //            default:
+  //              // TODO: - possibly refactor this, see: https://github.com/firebase/FirebaseUI-iOS/pull/1259#discussion_r2105473437
+  //              EmptyView()
+  //            }
+  //          }
+  //        }
+  //      }
+  //    }
+  //  }
+  
   @ViewBuilder
   func otherSignInOptions(_ proxy: GeometryProxy) -> some View {
     VStack {

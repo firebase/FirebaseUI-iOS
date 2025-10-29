@@ -31,11 +31,6 @@ import FirebaseOAuthSwiftUI
 import SwiftUI
 
 struct ContentView: View {
-  let authService: AuthService
-  // State for Facebook Limited Login toggle
-  @State private var useLimitedLogin = true
-  let facebookProvider: FacebookProviderSwift
-
   init() {
     let actionCodeSettings = ActionCodeSettings()
     actionCodeSettings.handleCodeInApp = true
@@ -49,12 +44,12 @@ struct ContentView: View {
       emailLinkSignInActionCodeSettings: actionCodeSettings,
       mfaEnabled: true
     )
-
+    
     // Create Facebook provider with Limited Login enabled by default
     let fbProvider = FacebookProviderSwift()
     fbProvider.setLimitedLogin(true)
     facebookProvider = fbProvider
-
+    
     authService = AuthService(
       configuration: configuration
     )
@@ -68,12 +63,47 @@ struct ContentView: View {
     .withOAuthSignIn(OAuthProviderSwift.yahoo())
     .withEmailSignIn()
   }
-
+  
+  let authService: AuthService
+  let facebookProvider: FacebookProviderSwift
+  // State for Facebook Limited Login toggle
+  @State private var useLimitedLogin = true
+  @State private var isPresented = false
+  
   var body: some View {
-    NavigationStack {
-      VStack {
-        AuthPickerView()
-        
+    VStack {
+      AuthPickerView(
+        isPresented: $isPresented,
+        interactiveDismissDisabled: true
+      ) {
+        NavigationStack {
+          VStack {
+            if authService.authenticationState == .unauthenticated {
+              Text("Not Authenticated")
+            } else {
+              Text("Authenticated - \(authService.currentUser?.email ?? "")")
+              Button {
+                Task {
+                  try? await authService.signOut()
+                }
+              } label: {
+                Text("Sign Out")
+              }
+              .buttonStyle(.borderedProminent)
+            }
+          }
+          .navigationTitle("Firebase UI Demo")
+        }
+        .onAppear {
+          isPresented = authService.authenticationState == .unauthenticated
+        }
+        .onChange(of: authService.authenticationState) { oldValue, newValue in
+          debugPrint("authService.authenticationState - \(newValue)")
+          if newValue != .authenticating {
+            isPresented = newValue == .unauthenticated
+          }
+        }
+      } footer: {
         // Facebook Limited Login Control (Example)
         GroupBox {
           VStack(alignment: .leading, spacing: 8) {
@@ -85,15 +115,16 @@ struct ContentView: View {
                 handleLimitedLoginToggle(newValue)
               }
             
-            Text("Limited Login protects privacy by preventing Facebook tracking across apps.")
+            Text("Limited Login protects privacy by preventing Facebook tracking across apps.\nNOTE: THIS IS NOT PART OF THE SDK")
               .font(.caption)
               .foregroundColor(.secondary)
           }
+          .padding()
         }
-        .padding()
       }
       .environment(authService)
     }
+    
   }
   
   private func handleLimitedLoginToggle(_ limitedLogin: Bool) {
@@ -116,5 +147,29 @@ struct ContentView: View {
         }
       }
     }
+  }
+}
+
+extension UIApplication {
+  static func topViewController(
+    base: UIViewController? = UIApplication.shared.connectedScenes
+      .compactMap { ($0 as? UIWindowScene)?.keyWindow }
+      .first?.rootViewController
+  ) -> UIViewController? {
+    if let nav = base as? UINavigationController {
+      return topViewController(base: nav.visibleViewController)
+    } else if let tab = base as? UITabBarController {
+      return topViewController(base: tab.selectedViewController)
+    } else if let presented = base?.presentedViewController {
+      return topViewController(base: presented)
+    }
+    return base
+  }
+}
+
+extension View {
+  func hostingController() -> UIViewController {
+    let controller = UIHostingController(rootView: self)
+    return controller
   }
 }
