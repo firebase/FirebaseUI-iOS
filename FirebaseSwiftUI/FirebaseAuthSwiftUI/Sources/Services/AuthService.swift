@@ -188,7 +188,13 @@ public final class AuthService {
   public func linkAccounts(credentials credentials: AuthCredential) async throws {
     authenticationState = .authenticating
     do {
-      try await currentUser?.link(with: credentials)
+      guard let user = currentUser else {
+        throw AuthServiceError.noCurrentUser
+      }
+
+      try await withReauthenticationIfNeeded(on: user) {
+        try await user.link(with: credentials)
+      }
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
@@ -702,7 +708,9 @@ public extension AuthService {
       }
 
       // Complete the enrollment
-      try await user.multiFactor.enroll(with: assertion, displayName: displayName)
+      try await withReauthenticationIfNeeded(on: user) {
+        try await user.multiFactor.enroll(with: assertion, displayName: displayName)
+      }
       currentUser = auth.currentUser
     } catch {
       updateError(message: string.localizedErrorMessage(for: error))
@@ -731,6 +739,22 @@ public extension AuthService {
     }
   }
 
+  private func withReauthenticationIfNeeded(on user: User,
+                                            operation: () async throws -> Void) async throws {
+    do {
+      try await operation()
+    } catch let error as NSError {
+      if error.domain == AuthErrorDomain,
+         error.code == AuthErrorCode.requiresRecentLogin.rawValue || error.code == AuthErrorCode
+         .userTokenExpired.rawValue {
+        try await reauthenticateCurrentUser(on: user)
+        try await operation()
+      } else {
+        throw error
+      }
+    }
+  }
+
   func unenrollMFA(_ factorUid: String) async throws -> [MultiFactorInfo] {
     do {
       guard let user = auth.currentUser else {
@@ -739,20 +763,8 @@ public extension AuthService {
 
       let multiFactorUser = user.multiFactor
 
-      do {
+      try await withReauthenticationIfNeeded(on: user) {
         try await multiFactorUser.unenroll(withFactorUID: factorUid)
-      } catch let error as NSError {
-        if error.domain == AuthErrorDomain,
-           error.code == AuthErrorCode.requiresRecentLogin.rawValue || error.code == AuthErrorCode
-           .userTokenExpired.rawValue {
-          try await reauthenticateCurrentUser(on: user)
-          try await multiFactorUser.unenroll(withFactorUID: factorUid)
-        } else {
-          throw AuthServiceError
-            .multiFactorAuth(
-              "Invalid second factor: \(error.localizedDescription)"
-            )
-        }
       }
 
       // This is the only we to get the actual latest enrolledFactors
