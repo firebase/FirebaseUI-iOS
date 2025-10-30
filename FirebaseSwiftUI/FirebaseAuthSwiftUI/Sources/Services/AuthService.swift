@@ -283,18 +283,12 @@ public final class AuthService {
 public extension AuthService {
   func deleteUser() async throws {
     do {
-      if let user = auth.currentUser, let providerId = signedInCredential?.provider {
-        if providerId == EmailAuthProviderID {
-          let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
-          try await operation(on: user)
-        } else {
-          // Find provider by matching ID
-          guard let matchingProvider = providers.first(where: { $0.id == providerId }) else {
-            throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
-          }
-
-          try await matchingProvider.provider.deleteUser(user: user)
-        }
+      guard let user = auth.currentUser else {
+        throw AuthServiceError.noCurrentUser
+      }
+      
+      try await withReauthenticationIfNeeded(on: user) {
+        try await user.delete()
       }
     } catch {
       updateError(message: string.localizedErrorMessage(for: error))
@@ -304,14 +298,13 @@ public extension AuthService {
 
   func updatePassword(to password: String) async throws {
     do {
-      if let user = auth.currentUser {
-        let operation = EmailPasswordUpdatePasswordOperation(
-          passwordPrompt: passwordPrompt,
-          newPassword: password
-        )
-        try await operation(on: user)
+      guard let user = auth.currentUser else {
+        throw AuthServiceError.noCurrentUser
       }
-
+      
+      try await withReauthenticationIfNeeded(on: user) {
+        try await user.updatePassword(to: password)
+      }
     } catch {
       updateError(message: string.localizedErrorMessage(for: error))
       throw error
