@@ -26,7 +26,7 @@ public class FacebookProviderSwift: AuthProviderSwift {
   private var rawNonce: String?
   private var shaNonce: String?
   // Needed for reauthentication
-  var isLimitedLogin: Bool = true
+  private var isLimitedLogin: Bool = true
 
   public init(scopes: [String] = ["email", "public_profile"]) {
     self.scopes = scopes

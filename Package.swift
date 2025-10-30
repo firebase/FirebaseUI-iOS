@@ -283,7 +283,7 @@ let package = Package(
         .process("Strings"),
       ],
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
     .testTarget(
@@ -291,7 +291,7 @@ let package = Package(
       dependencies: ["FirebaseAuthSwiftUI"],
       path: "FirebaseSwiftUI/FirebaseAuthSwiftUI/Tests/",
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
     .target(
@@ -304,7 +304,7 @@ let package = Package(
       ],
       path: "FirebaseSwiftUI/FirebaseGoogleSwiftUI/Sources",
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
     .testTarget(
@@ -312,7 +312,7 @@ let package = Package(
       dependencies: ["FirebaseGoogleSwiftUI"],
       path: "FirebaseSwiftUI/FirebaseGoogleSwiftUI/Tests/",
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
     .target(
@@ -325,7 +325,7 @@ let package = Package(
       ],
       path: "FirebaseSwiftUI/FirebaseFacebookSwiftUI/Sources",
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
     .testTarget(
@@ -333,7 +333,7 @@ let package = Package(
       dependencies: ["FirebaseFacebookSwiftUI"],
       path: "FirebaseSwiftUI/FirebaseFacebookSwiftUI/Tests/",
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
     .target(
@@ -344,7 +344,7 @@ let package = Package(
       ],
       path: "FirebaseSwiftUI/FirebasePhoneAuthSwiftUI/Sources",
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
     .testTarget(
@@ -352,7 +352,7 @@ let package = Package(
       dependencies: ["FirebasePhoneAuthSwiftUI"],
       path: "FirebaseSwiftUI/FirebasePhoneAuthSwiftUI/Tests/",
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
     .target(
@@ -362,11 +362,8 @@ let package = Package(
         "FirebaseAuthUIComponents",
       ],
       path: "FirebaseSwiftUI/FirebaseTwitterSwiftUI/Sources",
-      resources: [
-        .process("Resources")
-      ],
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
     .testTarget(
@@ -374,7 +371,7 @@ let package = Package(
       dependencies: ["FirebaseTwitterSwiftUI"],
       path: "FirebaseSwiftUI/FirebaseTwitterSwiftUI/Tests/",
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
     .target(
@@ -385,7 +382,7 @@ let package = Package(
       ],
       path: "FirebaseSwiftUI/FirebaseAppleSwiftUI/Sources",
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
     .testTarget(
@@ -393,7 +390,7 @@ let package = Package(
       dependencies: ["FirebaseAppleSwiftUI"],
       path: "FirebaseSwiftUI/FirebaseAppleSwiftUI/Tests/",
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
     .target(
@@ -403,11 +400,8 @@ let package = Package(
         "FirebaseAuthUIComponents",
       ],
       path: "FirebaseSwiftUI/FirebaseOAuthSwiftUI/Sources",
-      resources: [
-        .process("Resources")
-      ],
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
     .testTarget(
@@ -415,7 +409,7 @@ let package = Package(
       dependencies: ["FirebaseOAuthSwiftUI"],
       path: "FirebaseSwiftUI/FirebaseOAuthSwiftUI/Tests/",
       swiftSettings: [
-        .swiftLanguageVersion(.v6),
+        .swiftLanguageMode(.v6),
       ]
     ),
   ]
