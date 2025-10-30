@@ -25,7 +25,7 @@ jobs:
   # Package Unit Tests (standalone, no emulator needed)
   unit-tests:
     name: Package Unit Tests
-    runs-on: macos-15
+    runs-on: macos-26
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
@@ -34,14 +34,14 @@ jobs:
         run: gem install xcpretty
         
       - name: Select Xcode version
-        run: sudo xcode-select -switch /Applications/Xcode_16.4.app/Contents/Developer
+        run: sudo xcode-select -switch /Applications/Xcode_26.0.1.app/Contents/Developer
         
       - name: Run FirebaseSwiftUI Package Unit Tests
         run: |
           set -o pipefail
           xcodebuild test \
             -scheme FirebaseUI-Package \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIPackageTests.xcresult | tee FirebaseSwiftUIPackageTests.log | xcpretty --test --color --simple
             
@@ -62,7 +62,7 @@ jobs:
   # Integration Tests (requires emulator)
   integration-tests:
     name: Integration Tests
-    runs-on: macos-15
+    runs-on: macos-26
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
@@ -90,7 +90,7 @@ jobs:
         run: gem install xcpretty
         
       - name: Select Xcode version
-        run: sudo xcode-select -switch /Applications/Xcode_16.4.app/Contents/Developer
+        run: sudo xcode-select -switch /Applications/Xcode_26.0.1.app/Contents/Developer
         
       - name: Build for Integration Tests
         run: |
@@ -98,7 +98,7 @@ jobs:
           set -o pipefail
           xcodebuild build-for-testing \
             -scheme FirebaseSwiftUIExampleTests \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
             -enableCodeCoverage YES | xcpretty --color --simple
             
       - name: Run Integration Tests
@@ -107,7 +107,7 @@ jobs:
           set -o pipefail
           xcodebuild test-without-building \
             -scheme FirebaseSwiftUIExampleTests \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleTests.xcresult | tee FirebaseSwiftUIExampleTests.log | xcpretty --test --color --simple
             
@@ -128,7 +128,7 @@ jobs:
   # UI Tests (requires emulator)
   ui-tests:
     name: UI Tests
-    runs-on: macos-15
+    runs-on: macos-26
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
@@ -156,7 +156,7 @@ jobs:
         run: gem install xcpretty
         
       - name: Select Xcode version
-        run: sudo xcode-select -switch /Applications/Xcode_16.4.app/Contents/Developer
+        run: sudo xcode-select -switch /Applications/Xcode_26.0.1.app/Contents/Developer
         
       - name: Build for UI Tests
         run: |
@@ -164,7 +164,7 @@ jobs:
           set -o pipefail
           xcodebuild build-for-testing \
             -scheme FirebaseSwiftUIExampleUITests \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
             -enableCodeCoverage YES | xcpretty --color --simple
             
       - name: Run UI Tests
@@ -173,7 +173,7 @@ jobs:
           set -o pipefail
           xcodebuild test-without-building \
             -scheme FirebaseSwiftUIExampleUITests \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
             -parallel-testing-enabled YES \
             -maximum-concurrent-test-simulator-destinations 2 \
             -enableCodeCoverage YES \

@@ -19,7 +19,7 @@ import FirebaseAuth
 import FirebaseAuthSwiftUI
 import SwiftUI
 
-public class FacebookProviderSwift: AuthProviderSwift, DeleteUserSwift {
+public class FacebookProviderSwift: AuthProviderSwift {
   let scopes: [String]
   let providerId = "facebook.com"
   private let loginManager = LoginManager()
@@ -115,11 +115,6 @@ public class FacebookProviderSwift: AuthProviderSwift, DeleteUserSwift {
           "Authentication is not available. Please sign-in with Facebook before attempting to create a Facebook provider credential"
         )
     }
-  }
-
-  public func deleteUser(user: User) async throws {
-    let operation = FacebookDeleteUserOperation(facebookProvider: self)
-    try await operation(on: user)
   }
 }
 

@@ -18,7 +18,7 @@ import FirebaseCore
 import SwiftUI
 
 /// Configuration for a generic OAuth provider
-public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
+public class OAuthProviderSwift: AuthProviderSwift {
   public let providerId: String
   public let scopes: [String]
   public let customParameters: [String: String]
@@ -112,11 +112,6 @@ public class OAuthProviderSwift: AuthProviderSwift, DeleteUserSwift {
         continuation.resume(returning: credential)
       }
     }
-  }
-
-  public func deleteUser(user: User) async throws {
-    let operation = OAuthDeleteUserOperation(oauthProvider: self)
-    try await operation(on: user)
   }
 }
 

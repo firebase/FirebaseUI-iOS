@@ -19,7 +19,7 @@ import GoogleSignIn
 import GoogleSignInSwift
 import SwiftUI
 
-public class GoogleProviderSwift: AuthProviderSwift, DeleteUserSwift {
+public class GoogleProviderSwift: AuthProviderSwift {
   let scopes: [String]
   let clientID: String
   let providerId = "google.com"
@@ -67,11 +67,6 @@ public class GoogleProviderSwift: AuthProviderSwift, DeleteUserSwift {
         continuation.resume(returning: credential)
       }
     }
-  }
-
-  public func deleteUser(user: User) async throws {
-    let operation = GoogleDeleteUserOperation(googleProvider: self)
-    try await operation(on: user)
   }
 }
 
