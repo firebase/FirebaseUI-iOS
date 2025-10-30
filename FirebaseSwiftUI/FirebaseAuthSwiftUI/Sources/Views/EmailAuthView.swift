@@ -151,14 +151,7 @@ extension EmailAuthView: View {
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
       .accessibilityIdentifier("sign-in-button")
-      Button {
-        authService.navigator.push(.emailLink)
-      } label: {
-        Text(authService.string.signUpWithEmailLinkButtonLabel)
-      }
-      .accessibilityIdentifier("sign-in-with-email-link-button")
     }
-    Divider()
     HStack {
       Text(
         authService

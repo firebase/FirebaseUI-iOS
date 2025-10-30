@@ -28,9 +28,6 @@ struct EnterVerificationCodeView: View {
   let verificationID: String
   let fullPhoneNumber: String
   let phoneProvider: PhoneAuthProviderSwift
-  let phoneNumber: String
-  let selectedCountry: CountryData
-  let onChangeNumber: () -> Void
   
   var body: some View {
     VStack(spacing: 32) {
@@ -43,7 +40,7 @@ struct EnterVerificationCodeView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
           
           Button {
-            onChangeNumber()
+            authService.navigator.pop()
           } label: {
             Text("Change number")
               .font(.caption)
@@ -121,9 +118,6 @@ struct EnterVerificationCodeView: View {
       verificationID: "mock-id",
       fullPhoneNumber: "+1 5551234567",
       phoneProvider: MockPhoneProvider(),
-      phoneNumber: "5551234567",
-      selectedCountry: .default,
-      onChangeNumber: {}
     )
     .environment(AuthService())
   }

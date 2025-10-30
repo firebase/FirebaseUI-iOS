@@ -17,35 +17,30 @@ import SwiftUI
 import FirebaseAuthUIComponents
 
 @MainActor
-public struct AuthPickerView<Content: View, Footer: View> {
+public struct AuthPickerView<Content: View> {
   public init(
-    isPresented: Binding<Bool> = .constant(false),
-    interactiveDismissDisabled: Bool = true,
-    @ViewBuilder content: @escaping () -> Content = { EmptyView() },
-    @ViewBuilder footer: @escaping () -> Footer = { EmptyView() }
+    @ViewBuilder content: @escaping () -> Content = { EmptyView() }
   ) {
-    self.isPresented = isPresented
-    self.interactiveDismissDisabled = interactiveDismissDisabled
     self.content = content
-    self.footer = footer
   }
   
   @Environment(AuthService.self) private var authService
-  private var isPresented: Binding<Bool>
-  private var interactiveDismissDisabled: Bool
-  private let content: () -> Content?
-  private let footer: () -> Footer?
+  private let content: () -> Content
 }
 
 extension AuthPickerView: View {
   public var body: some View {
+    @Bindable var authService = authService
     content()
-      .sheet(isPresented: isPresented) {
+      .sheet(isPresented: $authService.isPresented) {
         @Bindable var navigator = authService.navigator
         NavigationStack(path: $navigator.routes) {
           authPickerViewInternal
             .navigationTitle(authService.string.authPickerTitle)
             .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+              toolbar
+            }
             .navigationDestination(for: AuthView.self) { view in
               switch view {
               case AuthView.passwordRecovery:
@@ -66,29 +61,49 @@ extension AuthPickerView: View {
                 } else {
                   EmptyView()
                 }
-              default:
-                EmptyView()
+              case .enterVerificationCode(let verificationID, let fullPhoneNumber):
+                if let phoneProvider = authService.currentPhoneProvider {
+                  EnterVerificationCodeView(verificationID: verificationID, fullPhoneNumber: fullPhoneNumber, phoneProvider: phoneProvider)
+                } else {
+                  EmptyView()
+                }
               }
             }
         }
-        .interactiveDismissDisabled(interactiveDismissDisabled)
+        .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
       }
+  }
+  
+  @ToolbarContentBuilder
+  var toolbar: some ToolbarContent {
+    ToolbarItem(placement: .topBarTrailing) {
+      if !authService.configuration.shouldHideCancelButton {
+        Button {
+          authService.isPresented = false
+        } label: {
+          Image(systemName: "xmark")
+        }
+      }
+    }
   }
   
   @ViewBuilder
   var authPickerViewInternal: some View {
-    authMethodPicker
-      .safeAreaPadding()
-      .onChange(of: authService.authViewRoutes) { oldValue, newValue in
-        debugPrint("Got here: \(newValue)")
+    VStack {
+      if authService.authenticationState == .unauthenticated {
+        authMethodPicker
+          .safeAreaPadding()
+      } else {
+        SignedInView()
       }
-      .errorAlert(
-        error: Binding(
-          get: { authService.currentError },
-          set: { authService.currentError = $0 }
-        ),
-        okButtonLabel: authService.string.okButtonLabel
-      )
+    }
+    .errorAlert(
+      error: Binding(
+        get: { authService.currentError },
+        set: { authService.currentError = $0 }
+      ),
+      okButtonLabel: authService.string.okButtonLabel
+    )
   }
   
   @ViewBuilder
@@ -103,53 +118,13 @@ extension AuthPickerView: View {
           if authService.emailSignInEnabled {
             EmailAuthView()
           }
+          Divider()
           otherSignInOptions(proxy)
           PrivacyTOCsView(displayMode: .full)
-          footer()
         }
       }
     }
   }
-  
-  //  @ViewBuilder
-  //  var authMethodPicker: some View {
-  //    GeometryReader { proxy in
-  //      ScrollView {
-  //        VStack(spacing: 24) {
-  //          if authService.authenticationState == .authenticated {
-  //            switch authService.authView {
-  //            case .mfaEnrollment:
-  //              MFAEnrolmentView()
-  //            case .mfaManagement:
-  //              MFAManagementView()
-  //            default:
-  //              SignedInView()
-  //            }
-  //          } else {
-  //            switch authService.authView {
-  //            case .passwordRecovery:
-  //              PasswordRecoveryView()
-  //            case .emailLink:
-  //              EmailLinkView()
-  //            case .mfaEnrollment:
-  //              MFAEnrolmentView()
-  //            case .mfaResolution:
-  //              MFAResolutionView()
-  //            case .authPicker:
-  //              if authService.emailSignInEnabled {
-  //                EmailAuthView()
-  //              }
-  //              otherSignInOptions(proxy)
-  //              PrivacyTOCsView(displayMode: .full)
-  //            default:
-  //              // TODO: - possibly refactor this, see: https://github.com/firebase/FirebaseUI-iOS/pull/1259#discussion_r2105473437
-  //              EmptyView()
-  //            }
-  //          }
-  //        }
-  //      }
-  //    }
-  //  }
   
   @ViewBuilder
   func otherSignInOptions(_ proxy: GeometryProxy) -> some View {

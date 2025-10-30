@@ -14,6 +14,7 @@
 
 @preconcurrency import FirebaseAuth
 import SwiftUI
+import FirebaseAuthUIComponents
 
 public protocol AuthProviderSwift {
   @MainActor func createAuthCredential() async throws -> AuthCredential
@@ -118,8 +119,12 @@ public final class AuthService {
   @ObservationIgnored @AppStorage("email-link") public var emailLink: String?
   public let configuration: AuthConfiguration
   public let auth: Auth
+  public var isPresented: Bool = false
   public private(set) var navigator = Navigator()
-  public var authViewRoutes: [AuthView] {
+  public var authView: AuthView? {
+    navigator.routes.last
+  }
+  internal var authViewRoutes: [AuthView] {
     navigator.routes
   }
   public let string: StringUtils
@@ -151,6 +156,13 @@ public final class AuthService {
   public func renderButtons(spacing: CGFloat = 16) -> AnyView {
     AnyView(
       VStack(spacing: spacing) {
+        AuthProviderButton(
+          label: string.signInWithEmailLinkViewTitle,
+          style: .email,
+          accessibilityId: "sign-in-with-email-link-button"
+        ) {
+          self.navigator.push(.emailLink)
+        }
         ForEach(providers, id: \.id) { provider in
           provider.authButton()
         }

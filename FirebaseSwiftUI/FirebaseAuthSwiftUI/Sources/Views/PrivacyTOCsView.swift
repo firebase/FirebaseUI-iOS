@@ -67,8 +67,6 @@ extension PrivacyTOCsView: View {
          let privacyURL = authService.configuration.privacyPolicyUrl {
         Text(attributedMessage(tosURL: tosURL, privacyURL: privacyURL))
           .multilineTextAlignment(displayMode == .full ? .center : .trailing)
-          //.font(.footnote)
-          //.foregroundColor(.primary)
           .padding()
       } else {
         EmptyView()
