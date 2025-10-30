@@ -18,7 +18,6 @@ import SwiftUI
 
 public protocol AuthProviderSwift {
   @MainActor func createAuthCredential() async throws -> AuthCredential
-  @MainActor func deleteUser(user: User) async throws
 }
 
 public protocol AuthProviderUI {
@@ -286,7 +285,7 @@ public extension AuthService {
       guard let user = auth.currentUser else {
         throw AuthServiceError.noCurrentUser
       }
-      
+
       try await withReauthenticationIfNeeded(on: user) {
         try await user.delete()
       }
@@ -301,7 +300,7 @@ public extension AuthService {
       guard let user = auth.currentUser else {
         throw AuthServiceError.noCurrentUser
       }
-      
+
       try await withReauthenticationIfNeeded(on: user) {
         try await user.updatePassword(to: password)
       }
