@@ -177,6 +177,8 @@ public final class AuthService {
   public func signOut() async throws {
     do {
       try await auth.signOut()
+      // Cannot wait for auth listener to change, feedback needs to be immediate
+      currentUser = nil
       updateAuthenticationState()
     } catch {
       updateError(message: string.localizedErrorMessage(for: error))
@@ -202,7 +204,7 @@ public final class AuthService {
     }
   }
 
-  public func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws
+  private func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws
     -> SignInOutcome {
     if currentUser == nil {
       throw AuthServiceError.noCurrentUser
@@ -213,11 +215,27 @@ public final class AuthService {
       updateAuthenticationState()
       return .signedIn(result)
     } catch let error as NSError {
+      // Handle credentialAlreadyInUse error
+      if error.code == AuthErrorCode.credentialAlreadyInUse.rawValue {
+        // Extract the updated credential from the error
+        let updatedCredential = error.userInfo["FIRAuthUpdatedCredentialKey"] as? AuthCredential
+          ?? credentials
+
+        let context = AccountMergeConflictContext(
+          credential: updatedCredential,
+          underlyingError: error,
+          message: "Unable to merge accounts. The credential is already associated with a different account.",
+          uid: currentUser?.uid
+        )
+        throw AuthServiceError.accountMergeConflict(context: context)
+      }
+
+      // Handle emailAlreadyInUse error
       if error.code == AuthErrorCode.emailAlreadyInUse.rawValue {
         let context = AccountMergeConflictContext(
           credential: credentials,
           underlyingError: error,
-          message: "Unable to merge accounts. Use the credential in the context to resolve the conflict.",
+          message: "Unable to merge accounts. This email is already associated with a different account.",
           uid: currentUser?.uid
         )
         throw AuthServiceError.accountMergeConflict(context: context)

@@ -19,6 +19,7 @@ import SwiftUI
 @MainActor
 public struct SignInWithTwitterButton {
   @Environment(AuthService.self) private var authService
+  @Environment(\.signInWithMergeConflictHandler) private var signInHandler
   let provider: AuthProviderSwift
   public init(provider: AuthProviderSwift) {
     self.provider = provider
@@ -29,7 +30,13 @@ extension SignInWithTwitterButton: View {
   public var body: some View {
     Button(action: {
       Task {
-        try? await authService.signIn(provider)
+        if let handler = signInHandler {
+          try? await handler(authService) {
+            try await authService.signIn(provider)
+          }
+        } else {
+          try? await authService.signIn(provider)
+        }
       }
     }) {
       HStack {

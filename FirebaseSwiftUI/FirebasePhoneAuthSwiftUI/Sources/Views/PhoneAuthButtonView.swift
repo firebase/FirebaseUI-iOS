@@ -19,6 +19,7 @@ import SwiftUI
 @MainActor
 public struct PhoneAuthButtonView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.signInWithMergeConflictHandler) private var signInHandler
   let phoneProvider: PhoneAuthProviderSwift
 
   public init(phoneProvider: PhoneAuthProviderSwift) {
@@ -30,7 +31,13 @@ extension PhoneAuthButtonView: View {
   public var body: some View {
     Button(action: {
       Task {
-        try await authService.signIn(phoneProvider)
+        if let handler = signInHandler {
+          try? await handler(authService) {
+            try await authService.signIn(phoneProvider)
+          }
+        } else {
+          try? await authService.signIn(phoneProvider)
+        }
       }
     }) {
       Label("Sign in with Phone", systemImage: "phone.fill")
