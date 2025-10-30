@@ -18,7 +18,6 @@ import SwiftUI
 
 public protocol AuthProviderSwift {
   @MainActor func createAuthCredential() async throws -> AuthCredential
-  @MainActor func deleteUser(user: User) async throws
 }
 
 public protocol AuthProviderUI {
@@ -188,7 +187,13 @@ public final class AuthService {
   public func linkAccounts(credentials credentials: AuthCredential) async throws {
     authenticationState = .authenticating
     do {
-      try await currentUser?.link(with: credentials)
+      guard let user = currentUser else {
+        throw AuthServiceError.noCurrentUser
+      }
+
+      try await withReauthenticationIfNeeded(on: user) {
+        try await user.link(with: credentials)
+      }
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
@@ -277,18 +282,12 @@ public final class AuthService {
 public extension AuthService {
   func deleteUser() async throws {
     do {
-      if let user = auth.currentUser, let providerId = signedInCredential?.provider {
-        if providerId == EmailAuthProviderID {
-          let operation = EmailPasswordDeleteUserOperation(passwordPrompt: passwordPrompt)
-          try await operation(on: user)
-        } else {
-          // Find provider by matching ID
-          guard let matchingProvider = providers.first(where: { $0.id == providerId }) else {
-            throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
-          }
+      guard let user = auth.currentUser else {
+        throw AuthServiceError.noCurrentUser
+      }
 
-          try await matchingProvider.provider.deleteUser(user: user)
-        }
+      try await withReauthenticationIfNeeded(on: user) {
+        try await user.delete()
       }
     } catch {
       updateError(message: string.localizedErrorMessage(for: error))
@@ -298,14 +297,13 @@ public extension AuthService {
 
   func updatePassword(to password: String) async throws {
     do {
-      if let user = auth.currentUser {
-        let operation = EmailPasswordUpdatePasswordOperation(
-          passwordPrompt: passwordPrompt,
-          newPassword: password
-        )
-        try await operation(on: user)
+      guard let user = auth.currentUser else {
+        throw AuthServiceError.noCurrentUser
       }
 
+      try await withReauthenticationIfNeeded(on: user) {
+        try await user.updatePassword(to: password)
+      }
     } catch {
       updateError(message: string.localizedErrorMessage(for: error))
       throw error
@@ -702,7 +700,9 @@ public extension AuthService {
       }
 
       // Complete the enrollment
-      try await user.multiFactor.enroll(with: assertion, displayName: displayName)
+      try await withReauthenticationIfNeeded(on: user) {
+        try await user.multiFactor.enroll(with: assertion, displayName: displayName)
+      }
       currentUser = auth.currentUser
     } catch {
       updateError(message: string.localizedErrorMessage(for: error))
@@ -731,6 +731,22 @@ public extension AuthService {
     }
   }
 
+  private func withReauthenticationIfNeeded(on user: User,
+                                            operation: () async throws -> Void) async throws {
+    do {
+      try await operation()
+    } catch let error as NSError {
+      if error.domain == AuthErrorDomain,
+         error.code == AuthErrorCode.requiresRecentLogin.rawValue || error.code == AuthErrorCode
+         .userTokenExpired.rawValue {
+        try await reauthenticateCurrentUser(on: user)
+        try await operation()
+      } else {
+        throw error
+      }
+    }
+  }
+
   func unenrollMFA(_ factorUid: String) async throws -> [MultiFactorInfo] {
     do {
       guard let user = auth.currentUser else {
@@ -739,20 +755,8 @@ public extension AuthService {
 
       let multiFactorUser = user.multiFactor
 
-      do {
+      try await withReauthenticationIfNeeded(on: user) {
         try await multiFactorUser.unenroll(withFactorUID: factorUid)
-      } catch let error as NSError {
-        if error.domain == AuthErrorDomain,
-           error.code == AuthErrorCode.requiresRecentLogin.rawValue || error.code == AuthErrorCode
-           .userTokenExpired.rawValue {
-          try await reauthenticateCurrentUser(on: user)
-          try await multiFactorUser.unenroll(withFactorUID: factorUid)
-        } else {
-          throw AuthServiceError
-            .multiFactorAuth(
-              "Invalid second factor: \(error.localizedDescription)"
-            )
-        }
       }
 
       // This is the only we to get the actual latest enrolledFactors

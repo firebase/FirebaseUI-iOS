@@ -400,7 +400,7 @@ final class MFAEnrollmentUITests: XCTestCase {
   }
 
   // MARK: - Helper Methods
-
+  @MainActor
   private func signInToApp(app: XCUIApplication, email: String) throws {
     let password = "123456"
 
@@ -436,7 +436,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     XCTAssertTrue(signedInText.waitForExistence(timeout: 30), "SignedInView should be visible after login")
     XCTAssertTrue(signedInText.exists, "SignedInView should be visible after login")
   }
-
+  @MainActor
   private func navigateToMFAEnrollment(app: XCUIApplication) throws {
     // Navigate to MFA management
     app.buttons["mfa-management-button"].tap()

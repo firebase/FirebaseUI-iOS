@@ -113,11 +113,6 @@ public class OAuthProviderSwift: AuthProviderSwift {
       }
     }
   }
-
-  public func deleteUser(user: User) async throws {
-    let operation = ProviderDeleteUserOperation(provider: self)
-    try await operation(on: user)
-  }
 }
 
 public class OAuthProviderAuthUI: AuthProviderUI {
