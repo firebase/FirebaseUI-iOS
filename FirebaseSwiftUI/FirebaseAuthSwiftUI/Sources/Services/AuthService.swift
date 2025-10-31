@@ -135,12 +135,10 @@ public final class AuthService {
   public let passwordPrompt: PasswordPromptCoordinator = .init()
   public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
-  private var pendingMFACredential: AuthCredential?
 
   // MARK: - Provider APIs
 
   private var listenerManager: AuthListenerManager?
-  public var signedInCredential: AuthCredential?
 
   var emailSignInEnabled = false
 
@@ -251,7 +249,6 @@ public final class AuthService {
     }
     do {
       let result = try await currentUser?.link(with: credentials)
-      signedInCredential = credentials
       updateAuthenticationState()
       return .signedIn(result)
     } catch let error as NSError {
@@ -275,7 +272,6 @@ public final class AuthService {
         return try await handleAutoUpgradeAnonymousUser(credentials: credentials)
       } else {
         let result = try await auth.signIn(with: credentials)
-        signedInCredential = result.credential ?? credentials
         updateAuthenticationState()
         return .signedIn(result)
       }
@@ -285,8 +281,6 @@ public final class AuthService {
       if error.code == AuthErrorCode.secondFactorRequired.rawValue {
         if let resolver = error
           .userInfo[AuthErrorUserInfoMultiFactorResolverKey] as? MultiFactorResolver {
-          // Preserve the original credential for use after MFA resolution
-          pendingMFACredential = credentials
           return handleMFARequiredError(resolver: resolver)
         }
       } else {
@@ -375,7 +369,6 @@ public extension AuthService {
         return try await handleAutoUpgradeAnonymousUser(credentials: credential)
       } else {
         let result = try await auth.createUser(withEmail: email, password: password)
-        signedInCredential = result.credential
         updateAuthenticationState()
         return .signedIn(result)
       }
@@ -752,11 +745,40 @@ public extension AuthService {
     }
   }
 
-  func reauthenticateCurrentUser(on user: User) async throws {
-    guard let providerId = signedInCredential?.provider else {
-      throw AuthServiceError
-        .reauthenticationRequired("Recent login required to perform this operation.")
+  /// Gets the provider ID that was used for the current sign-in session
+  private func getCurrentSignInProvider() async throws -> String {
+    guard let user = currentUser else {
+      throw AuthServiceError.noCurrentUser
     }
+
+    // Get the ID token result which contains the signInProvider claim
+    let tokenResult = try await user.getIDTokenResult(forcingRefresh: false)
+
+    // The signInProvider property tells us which provider was used for this session
+    let signInProvider = tokenResult.signInProvider
+
+    // If signInProvider is not empty, use it
+    if !signInProvider.isEmpty {
+      return signInProvider
+    }
+
+    // Fallback: if signInProvider is empty, try to infer from providerData
+    // Prefer non-password providers as they're more specific
+    let providerId = user.providerData.first(where: { $0.providerID != "password" })?.providerID
+      ?? user.providerData.first?.providerID
+
+    guard let providerId = providerId else {
+      throw AuthServiceError.reauthenticationRequired(
+        "Unable to determine sign-in provider for reauthentication"
+      )
+    }
+
+    return providerId
+  }
+
+  func reauthenticateCurrentUser(on user: User) async throws {
+    // Get the provider from the token instead of stored credential
+    let providerId = try await getCurrentSignInProvider()
 
     if providerId == EmailAuthProviderID {
       guard let email = user.email else {
@@ -919,16 +941,11 @@ public extension AuthService {
 
       do {
         let result = try await resolver.resolveSignIn(with: assertion)
-
-        // After MFA resolution, result.credential is nil, so restore the original credential
-        // that was used before MFA was triggered
-        signedInCredential = result.credential ?? pendingMFACredential
         updateAuthenticationState()
 
         // Clear MFA resolution state
         currentMFARequired = nil
         currentMFAResolver = nil
-        pendingMFACredential = nil
 
       } catch {
         throw AuthServiceError
