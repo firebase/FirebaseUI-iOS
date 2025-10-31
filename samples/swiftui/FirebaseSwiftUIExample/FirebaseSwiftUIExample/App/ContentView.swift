@@ -73,6 +73,12 @@ struct ContentView: View {
       VStack {
         if authService.authenticationState == .unauthenticated {
           Text("Not Authenticated")
+          Button {
+            authService.isPresented = true
+          } label: {
+            Text("Authenticate")
+          }
+          .buttonStyle(.bordered)
         } else {
           Text("Authenticated - \(authService.currentUser?.email ?? "")")
           Button {
