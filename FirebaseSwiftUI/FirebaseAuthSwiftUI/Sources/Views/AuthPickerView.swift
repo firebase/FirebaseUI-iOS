@@ -34,7 +34,8 @@ extension AuthPickerView: View {
         @Bindable var navigator = authService.navigator
         NavigationStack(path: $navigator.routes) {
           authPickerViewInternal
-            .navigationTitle(authService.string.authPickerTitle)
+            .navigationTitle(authService.authenticationState == .unauthenticated ? authService
+              .string.authPickerTitle : "")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
               toolbar
