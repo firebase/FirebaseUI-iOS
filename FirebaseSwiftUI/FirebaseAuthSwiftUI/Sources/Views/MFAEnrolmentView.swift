@@ -29,6 +29,7 @@ public struct MFAEnrolmentView {
 
   @State private var selectedFactorType: SecondFactorType = .sms
   @State private var phoneNumber = ""
+  @State private var selectedCountry: CountryData = .default
   @State private var verificationCode = ""
   @State private var totpCode = ""
   @State private var currentSession: EnrollmentSession?
@@ -96,9 +97,10 @@ public struct MFAEnrolmentView {
       isLoading = true
       defer { isLoading = false }
 
+      let fullPhoneNumber = selectedCountry.dialCode + phoneNumber
       let verificationId = try await authService.sendSmsVerificationForEnrollment(
         session: session,
-        phoneNumber: phoneNumber
+        phoneNumber: fullPhoneNumber
       )
       // Update session status
       currentSession = EnrollmentSession(
@@ -106,7 +108,7 @@ public struct MFAEnrolmentView {
         type: session.type,
         session: session.session,
         totpInfo: session.totpInfo,
-        phoneNumber: phoneNumber,
+        phoneNumber: fullPhoneNumber,
         verificationId: verificationId,
         status: .verificationSent,
         createdAt: session.createdAt,
@@ -140,6 +142,7 @@ public struct MFAEnrolmentView {
   private func resetForm() {
     currentSession = nil
     phoneNumber = ""
+    selectedCountry = .default
     verificationCode = ""
     totpCode = ""
     displayName = ""
@@ -369,10 +372,13 @@ extension MFAEnrolmentView: View {
             prompt: "Enter phone number",
             keyboardType: .phonePad,
             contentType: .telephoneNumber,
-            leading: {
-              Image(systemName: "phone")
-            }
-          )
+            onChange: { _ in }
+          ) {
+            CountrySelector(
+              selectedCountry: $selectedCountry,
+              enabled: !isLoading
+            )
+          }
           .focused($focus, equals: .phoneNumber)
           .accessibilityIdentifier("phone-number-field")
 
