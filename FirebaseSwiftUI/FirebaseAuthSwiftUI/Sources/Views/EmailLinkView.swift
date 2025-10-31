@@ -39,7 +39,7 @@ extension EmailLinkView: View {
     VStack(spacing: 24) {
       AuthTextField(
         text: $email,
-        localizedTitle: "Email",
+        localizedTitle: "Send a sign-in link to your email",
         prompt: authService.string.emailInputLabel,
         keyboardType: .emailAddress,
         contentType: .emailAddress,
