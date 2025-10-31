@@ -76,6 +76,12 @@ struct ContentView: View {
         } else {
           Text("Authenticated - \(authService.currentUser?.email ?? "")")
           Button {
+            authService.isPresented = true  // Reopen the sheet
+          } label: {
+            Text("Manage Account")
+          }
+          .buttonStyle(.bordered)
+          Button {
             Task {
               try? await authService.signOut()
             }
