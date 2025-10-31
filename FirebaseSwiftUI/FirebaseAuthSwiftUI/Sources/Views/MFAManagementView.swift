@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import FirebaseAuth
+import FirebaseCore
 import SwiftUI
 
 extension MultiFactorInfo: Identifiable {
@@ -96,10 +97,16 @@ extension MFAManagementView: View {
           .multilineTextAlignment(.center)
           .padding(.horizontal)
 
-          Button("Set Up Two-Factor Authentication") {
+          Button {
             navigateToEnrollment()
+          } label: {
+            Text("Set Up Two-Factor Authentication")
+              .padding(.vertical, 8)
+              .frame(maxWidth: .infinity)
           }
           .buttonStyle(.borderedProminent)
+          .padding([.top, .bottom], 8)
+          .frame(maxWidth: .infinity)
           .accessibilityIdentifier("setup-mfa-button")
         }
       } else {
@@ -119,14 +126,17 @@ extension MFAManagementView: View {
           Button("Add Another Method") {
             navigateToEnrollment()
           }
-          .buttonStyle(.bordered)
-          .padding(.horizontal)
+          .padding([.top, .bottom], 8)
+          .frame(maxWidth: .infinity)
+          .buttonStyle(.borderedProminent)
           .accessibilityIdentifier("add-mfa-method-button")
         }
       }
 
       Spacer()
     }
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .safeAreaPadding()
     .onAppear {
       loadEnrolledFactors()
     }
@@ -199,6 +209,9 @@ private extension DateFormatter {
 }
 
 #Preview {
-  MFAManagementView()
-    .environment(AuthService())
+  FirebaseOptions.dummyConfigurationForPreview()
+  return NavigationStack {
+    MFAManagementView()
+      .environment(AuthService())
+  }
 }
