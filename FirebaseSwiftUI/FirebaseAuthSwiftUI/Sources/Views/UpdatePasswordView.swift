@@ -49,24 +49,6 @@ extension UpdatePasswordView: View {
 
   public var body: some View {
     VStack {
-      HStack {
-        Button(action: {
-          authService.navigator.clear()
-        }) {
-          HStack(spacing: 4) {
-            Image(systemName: "chevron.left")
-              .font(.system(size: 17, weight: .medium))
-            Text(authService.string.backButtonLabel)
-              .font(.system(size: 17))
-          }
-          .foregroundColor(.blue)
-        }
-        .accessibilityIdentifier("update-password-back-button")
-
-        Spacer()
-      }
-      .padding(.horizontal)
-      .padding(.top, 8)
       LabeledContent {
         SecureField(authService.string.passwordInputLabel, text: $password)
           .focused($focus, equals: .password)

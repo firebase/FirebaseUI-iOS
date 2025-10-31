@@ -145,11 +145,6 @@ public struct MFAEnrolmentView {
     focus = nil
   }
 
-  private func cancelEnrollment() {
-    resetForm()
-    authService.navigator.clear()
-  }
-
   private func copyToClipboard(_ text: String) {
     UIPasteboard.general.string = text
 
@@ -188,24 +183,6 @@ public struct MFAEnrolmentView {
 extension MFAEnrolmentView: View {
   public var body: some View {
     VStack(spacing: 16) {
-      // Back button
-      HStack {
-        Button(action: {
-          cancelEnrollment()
-        }) {
-          HStack(spacing: 4) {
-            Image(systemName: "chevron.left")
-              .font(.system(size: 17, weight: .medium))
-            Text("Back")
-              .font(.system(size: 17))
-          }
-          .foregroundColor(.blue)
-        }
-        .accessibilityIdentifier("mfa-back-button")
-        Spacer()
-      }
-      .padding(.horizontal)
-
       // Header
       VStack {
         Text("Set Up Two-Factor Authentication")

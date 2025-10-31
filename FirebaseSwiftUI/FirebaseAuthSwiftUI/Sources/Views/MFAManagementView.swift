@@ -58,34 +58,11 @@ public struct MFAManagementView {
   private func navigateToEnrollment() {
     authService.navigator.push(.mfaEnrollment)
   }
-
-  private func goBack() {
-    authService.navigator.clear()
-  }
 }
 
 extension MFAManagementView: View {
   public var body: some View {
     VStack(spacing: 20) {
-      // Header with manual back button
-      HStack {
-        Button(action: {
-          authService.navigator.clear()
-        }) {
-          HStack(spacing: 4) {
-            Image(systemName: "chevron.left")
-              .font(.system(size: 17, weight: .medium))
-            Text(authService.string.backButtonLabel)
-              .font(.system(size: 17))
-          }
-          .foregroundColor(.blue)
-        }
-        .accessibilityIdentifier("back-button")
-
-        Spacer()
-      }
-      .padding(.horizontal)
-
       // Title section
       VStack {
         Text("Two-Factor Authentication")
