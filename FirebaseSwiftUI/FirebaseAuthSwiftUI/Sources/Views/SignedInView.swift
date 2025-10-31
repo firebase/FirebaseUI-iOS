@@ -19,6 +19,16 @@ import SwiftUI
 public struct SignedInView {
   @Environment(AuthService.self) private var authService
   @State private var showDeleteConfirmation = false
+  @State private var showEmailVerificationSent = false
+  
+  private func sendEmailVerification() async {
+    do {
+      try await authService.sendEmailVerification()
+      showEmailVerificationSent = true
+    } catch {
+      // Error already displayed via modal by AuthService
+    }
+  }
 }
 
 extension SignedInView: View {
@@ -40,52 +50,68 @@ extension SignedInView: View {
         "\(authService.currentUser?.email ?? authService.currentUser?.displayName ?? "Unknown")"
       )
       if authService.currentUser?.isEmailVerified == false {
-        VerifyEmailView()
+        Button {
+          Task {
+            await sendEmailVerification()
+          }
+        } label: {
+          Text(authService.string.sendEmailVerificationButtonLabel)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity)
+        .accessibilityIdentifier("verify-email-button")
       }
-      Button(action: {
+      Button {
         authService.navigator.push(.updatePassword)
-      }) {
+      } label: {
         Text(authService.string.updatePasswordButtonLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
+      .buttonStyle(.borderedProminent)
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
-      .buttonStyle(.borderedProminent)
-      Button(action: {
+      .accessibilityIdentifier("update-password-button")
+      
+      Button {
         authService.navigator.push(.mfaManagement)
-      }) {
+      } label: {
         Text("Manage Two-Factor Authentication")
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
+      .buttonStyle(.borderedProminent)
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
-      .buttonStyle(.borderedProminent)
       .accessibilityIdentifier("mfa-management-button")
-      Button(action: {
+      
+      Button {
         showDeleteConfirmation = true
-      }) {
+      } label: {
         Text(authService.string.deleteAccountButtonLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
+      .buttonStyle(.borderedProminent)
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
-      .buttonStyle(.borderedProminent)
       .accessibilityIdentifier("delete-account-button")
-      Button(action: {
+      
+      Button {
         Task {
           try? await authService.signOut()
         }
-      }) {
+      } label: {
         Text(authService.string.signOutButtonLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
+      .buttonStyle(.borderedProminent)
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
-      .buttonStyle(.borderedProminent)
       .accessibilityIdentifier("sign-out-button")
     }
     .safeAreaPadding()
@@ -105,6 +131,25 @@ extension SignedInView: View {
     }
     .sheet(isPresented: isShowingPasswordPrompt) {
       PasswordPromptSheet(coordinator: authService.passwordPrompt)
+    }
+    .sheet(isPresented: $showEmailVerificationSent) {
+      VStack(spacing: 24) {
+        Text(authService.string.verifyEmailSheetMessage)
+          .font(.headline)
+        Button {
+          showEmailVerificationSent = false
+        } label: {
+          Text(authService.string.okButtonLabel)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity)
+      }
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+      .safeAreaPadding()
+      .presentationDetents([.medium])
     }
   }
 }

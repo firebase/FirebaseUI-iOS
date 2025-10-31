@@ -217,14 +217,14 @@ public class StringUtils {
 
   /// Account settings - send email verification label
   /// found in:
-  /// VerifyEmailView
+  /// SignedInView
   public var sendEmailVerificationButtonLabel: String {
     return localizedString(for: "Verify email address?")
   }
 
   /// Account settings - verify email sheet message
   /// found in:
-  /// VerifyEmailView
+  /// SignedInView
   public var verifyEmailSheetMessage: String {
     return localizedString(for: "Verification email sent")
   }
