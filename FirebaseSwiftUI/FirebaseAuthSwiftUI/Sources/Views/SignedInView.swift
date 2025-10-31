@@ -20,7 +20,7 @@ public struct SignedInView {
   @Environment(AuthService.self) private var authService
   @State private var showDeleteConfirmation = false
   @State private var showEmailVerificationSent = false
-  
+
   private func sendEmailVerification() async {
     do {
       try await authService.sendEmailVerification()
@@ -75,7 +75,7 @@ extension SignedInView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .accessibilityIdentifier("update-password-button")
-      
+
       Button {
         authService.navigator.push(.mfaManagement)
       } label: {
@@ -87,7 +87,7 @@ extension SignedInView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .accessibilityIdentifier("mfa-management-button")
-      
+
       Button {
         showDeleteConfirmation = true
       } label: {
@@ -99,7 +99,7 @@ extension SignedInView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .accessibilityIdentifier("delete-account-button")
-      
+
       Button {
         Task {
           try? await authService.signOut()
