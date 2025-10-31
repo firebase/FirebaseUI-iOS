@@ -573,7 +573,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Forgot password?"
+            "value" : "Send password recovery email"
           }
         }
       }
