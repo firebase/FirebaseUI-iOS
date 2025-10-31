@@ -136,7 +136,7 @@ extension MFAManagementView: View {
       Spacer()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .safeAreaPadding()
+    .safeAreaPadding()
     .onAppear {
       loadEnrolledFactors()
     }

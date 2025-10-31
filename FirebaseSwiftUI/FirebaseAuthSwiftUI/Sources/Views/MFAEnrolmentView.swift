@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import FirebaseAuth
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
@@ -182,9 +183,9 @@ public struct MFAEnrolmentView {
 
 extension MFAEnrolmentView: View {
   public var body: some View {
-    VStack(spacing: 16) {
+    VStack(spacing: 24) {
       // Header
-      VStack {
+      VStack(spacing: 8) {
         Text("Set Up Two-Factor Authentication")
           .font(.largeTitle)
           .fontWeight(.bold)
@@ -195,7 +196,6 @@ extension MFAEnrolmentView: View {
           .foregroundColor(.secondary)
           .multilineTextAlignment(.center)
       }
-      .padding()
 
       // Factor Type Selection (only if no session started)
       if currentSession == nil {
@@ -216,7 +216,6 @@ extension MFAEnrolmentView: View {
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
           }
-          .padding(.horizontal)
           .accessibilityIdentifier("mfa-disabled-message")
         } else if allowedFactorTypes.isEmpty {
           VStack(spacing: 12) {
@@ -233,7 +232,6 @@ extension MFAEnrolmentView: View {
               .foregroundColor(.secondary)
               .multilineTextAlignment(.center)
           }
-          .padding(.horizontal)
           .accessibilityIdentifier("no-factors-message")
         } else {
           VStack(alignment: .leading, spacing: 12) {
@@ -253,7 +251,6 @@ extension MFAEnrolmentView: View {
             .pickerStyle(.segmented)
             .accessibilityIdentifier("factor-type-picker")
           }
-          .padding(.horizontal)
         }
       }
 
@@ -264,8 +261,9 @@ extension MFAEnrolmentView: View {
         initialContent
       }
     }
-    .padding(.horizontal, 16)
-    .padding(.vertical, 20)
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    .safeAreaPadding()
+    .navigationTitle("Two-Factor Authentication")
     .onAppear {
       // Initialize selected factor type to first allowed type
       if !allowedFactorTypes.contains(selectedFactorType),
@@ -277,46 +275,45 @@ extension MFAEnrolmentView: View {
 
   @ViewBuilder
   private var initialContent: some View {
-    VStack(spacing: 12) {
+    VStack(spacing: 24) {
       // Description based on selected type
-      Group {
-        if selectedFactorType == .sms {
-          VStack(spacing: 8) {
-            Image(systemName: "message.circle")
-              .font(.system(size: 40))
-              .foregroundColor(.blue)
+      if selectedFactorType == .sms {
+        VStack(spacing: 8) {
+          Image(systemName: "message.circle")
+            .font(.system(size: 40))
+            .foregroundColor(.blue)
 
-            Text("SMS Authentication")
-              .font(.title2)
-              .fontWeight(.semibold)
+          Text("SMS Authentication")
+            .font(.title2)
+            .fontWeight(.semibold)
 
-            Text("We'll send a verification code to your phone number each time you sign in.")
-              .font(.body)
-              .foregroundColor(.secondary)
-              .multilineTextAlignment(.center)
-          }
-        } else {
-          VStack(spacing: 8) {
-            Image(systemName: "qrcode")
-              .font(.system(size: 40))
-              .foregroundColor(.green)
-
-            Text("Authenticator App")
-              .font(.title2)
-              .fontWeight(.semibold)
-
-            Text(
-              "Use an authenticator app like Google Authenticator or Authy to generate verification codes."
-            )
+          Text("We'll send a verification code to your phone number each time you sign in.")
             .font(.body)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
-          }
+        }
+      } else {
+        VStack(spacing: 8) {
+          Image(systemName: "qrcode")
+            .font(.system(size: 40))
+            .foregroundColor(.green)
+
+          Text("Authenticator App")
+            .font(.title2)
+            .fontWeight(.semibold)
+
+          Text(
+            "Use an authenticator app like Google Authenticator or Authy to generate verification codes."
+          )
+          .font(.body)
+          .foregroundColor(.secondary)
+          .multilineTextAlignment(.center)
         }
       }
-      .padding(.horizontal)
 
-      Button(action: startEnrollment) {
+      Button {
+        startEnrollment()
+      } label: {
         HStack {
           if isLoading {
             ProgressView()
@@ -324,14 +321,13 @@ extension MFAEnrolmentView: View {
           }
           Text("Get Started")
         }
+        .padding(.vertical, 8)
         .frame(maxWidth: .infinity)
-        .padding()
-        .background(canStartEnrollment ? Color.blue : Color.gray)
-        .foregroundColor(.white)
-        .cornerRadius(8)
       }
+      .buttonStyle(.borderedProminent)
       .disabled(!canStartEnrollment)
-      .padding(.horizontal)
+      .padding([.top, .bottom], 8)
+      .frame(maxWidth: .infinity)
       .accessibilityIdentifier("start-enrollment-button")
     }
   }
@@ -348,37 +344,51 @@ extension MFAEnrolmentView: View {
 
   @ViewBuilder
   private func smsEnrollmentContent(session: EnrollmentSession) -> some View {
-    VStack(spacing: 20) {
+    VStack(spacing: 24) {
       // SMS enrollment steps
       if session.status == .initiated {
-        VStack(spacing: 16) {
-          Image(systemName: "phone")
-            .font(.system(size: 48))
-            .foregroundColor(.blue)
+        VStack(spacing: 24) {
+          VStack(spacing: 8) {
+            Image(systemName: "phone")
+              .font(.system(size: 48))
+              .foregroundColor(.blue)
 
-          Text("Enter Your Phone Number")
-            .font(.title2)
-            .fontWeight(.semibold)
+            Text("Enter Your Phone Number")
+              .font(.title2)
+              .fontWeight(.semibold)
 
-          Text("We'll send a verification code to this number")
-            .font(.body)
-            .foregroundColor(.secondary)
-            .multilineTextAlignment(.center)
+            Text("We'll send a verification code to this number")
+              .font(.body)
+              .foregroundColor(.secondary)
+              .multilineTextAlignment(.center)
+          }
 
-          TextField("Phone Number", text: $phoneNumber)
-            .textFieldStyle(.roundedBorder)
-            .keyboardType(.phonePad)
-            .focused($focus, equals: .phoneNumber)
-            .accessibilityIdentifier("phone-number-field")
-            .padding(.horizontal)
+          AuthTextField(
+            text: $phoneNumber,
+            localizedTitle: "Phone Number",
+            prompt: "Enter phone number",
+            keyboardType: .phonePad,
+            contentType: .telephoneNumber,
+            leading: {
+              Image(systemName: "phone")
+            }
+          )
+          .focused($focus, equals: .phoneNumber)
+          .accessibilityIdentifier("phone-number-field")
 
-          TextField("Display Name", text: $displayName)
-            .textFieldStyle(.roundedBorder)
-            .focused($focus, equals: nil)
-            .accessibilityIdentifier("display-name-field")
-            .padding(.horizontal)
+          AuthTextField(
+            text: $displayName,
+            localizedTitle: "Display Name",
+            prompt: "Enter display name for this device",
+            leading: {
+              Image(systemName: "person")
+            }
+          )
+          .accessibilityIdentifier("display-name-field")
 
-          Button(action: sendSMSVerification) {
+          Button {
+            sendSMSVerification()
+          } label: {
             HStack {
               if isLoading {
                 ProgressView()
@@ -386,39 +396,48 @@ extension MFAEnrolmentView: View {
               }
               Text("Send Code")
             }
+            .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
-            .padding()
-            .background(canSendSMSVerification ? Color.blue : Color.gray)
-            .foregroundColor(.white)
-            .cornerRadius(8)
           }
+          .buttonStyle(.borderedProminent)
           .disabled(!canSendSMSVerification)
-          .padding(.horizontal)
+          .padding([.top, .bottom], 8)
+          .frame(maxWidth: .infinity)
           .accessibilityIdentifier("send-sms-button")
         }
       } else if session.status == .verificationSent {
-        VStack(spacing: 16) {
-          Image(systemName: "checkmark.message")
-            .font(.system(size: 48))
-            .foregroundColor(.green)
+        VStack(spacing: 24) {
+          VStack(spacing: 8) {
+            Image(systemName: "checkmark.message")
+              .font(.system(size: 48))
+              .foregroundColor(.green)
 
-          Text("Enter Verification Code")
-            .font(.title2)
-            .fontWeight(.semibold)
+            Text("Enter Verification Code")
+              .font(.title2)
+              .fontWeight(.semibold)
 
-          Text("We sent a code to \(session.phoneNumber ?? "your phone")")
-            .font(.body)
-            .foregroundColor(.secondary)
-            .multilineTextAlignment(.center)
+            Text("We sent a code to \(session.phoneNumber ?? "your phone")")
+              .font(.body)
+              .foregroundColor(.secondary)
+              .multilineTextAlignment(.center)
+          }
 
-          TextField("Verification Code", text: $verificationCode)
-            .textFieldStyle(.roundedBorder)
-            .keyboardType(.numberPad)
-            .focused($focus, equals: .verificationCode)
-            .accessibilityIdentifier("verification-code-field")
-            .padding(.horizontal)
+          AuthTextField(
+            text: $verificationCode,
+            localizedTitle: "Verification Code",
+            prompt: "Enter 6-digit code",
+            keyboardType: .numberPad,
+            contentType: .oneTimeCode,
+            leading: {
+              Image(systemName: "number")
+            }
+          )
+          .focused($focus, equals: .verificationCode)
+          .accessibilityIdentifier("verification-code-field")
 
-          Button(action: completeEnrollment) {
+          Button {
+            completeEnrollment()
+          } label: {
             HStack {
               if isLoading {
                 ProgressView()
@@ -426,20 +445,25 @@ extension MFAEnrolmentView: View {
               }
               Text("Complete Setup")
             }
+            .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
-            .padding()
-            .background(canCompleteEnrollment ? Color.blue : Color.gray)
-            .foregroundColor(.white)
-            .cornerRadius(8)
           }
+          .buttonStyle(.borderedProminent)
           .disabled(!canCompleteEnrollment)
-          .padding(.horizontal)
+          .padding([.top, .bottom], 8)
+          .frame(maxWidth: .infinity)
           .accessibilityIdentifier("complete-enrollment-button")
 
-          Button("Resend Code") {
+          Button {
             sendSMSVerification()
+          } label: {
+            Text("Resend Code")
+              .padding(.vertical, 8)
+              .frame(maxWidth: .infinity)
           }
-          .foregroundColor(.blue)
+          .buttonStyle(.bordered)
+          .padding([.top, .bottom], 8)
+          .frame(maxWidth: .infinity)
           .accessibilityIdentifier("resend-code-button")
         }
       }
@@ -448,21 +472,23 @@ extension MFAEnrolmentView: View {
 
   @ViewBuilder
   private func totpEnrollmentContent(session: EnrollmentSession) -> some View {
-    VStack(spacing: 20) {
+    VStack(spacing: 24) {
       if let totpInfo = session.totpInfo {
-        VStack(spacing: 16) {
-          Image(systemName: "qrcode")
-            .font(.system(size: 48))
-            .foregroundColor(.green)
+        VStack(spacing: 24) {
+          VStack(spacing: 8) {
+            Image(systemName: "qrcode")
+              .font(.system(size: 48))
+              .foregroundColor(.green)
 
-          Text("Scan QR Code")
-            .font(.title2)
-            .fontWeight(.semibold)
+            Text("Scan QR Code")
+              .font(.title2)
+              .fontWeight(.semibold)
 
-          Text("Scan with your authenticator app or tap to open directly")
-            .font(.body)
-            .foregroundColor(.secondary)
-            .multilineTextAlignment(.center)
+            Text("Scan with your authenticator app or tap to open directly")
+              .font(.body)
+              .foregroundColor(.secondary)
+              .multilineTextAlignment(.center)
+          }
 
           // QR Code generated from the otpauth:// URI
           if let qrURL = totpInfo.qrCodeURL,
@@ -505,10 +531,10 @@ extension MFAEnrolmentView: View {
               )
           }
 
-          Text("Manual Entry Key:")
-            .font(.headline)
-
           VStack(spacing: 8) {
+            Text("Manual Entry Key:")
+              .font(.headline)
+
             Button(action: {
               copyToClipboard(totpInfo.sharedSecretKey)
             }) {
@@ -539,19 +565,32 @@ extension MFAEnrolmentView: View {
           }
           .animation(.easeInOut(duration: 0.2), value: showCopiedFeedback)
 
-          TextField("Display Name", text: $displayName)
-            .textFieldStyle(.roundedBorder)
-            .accessibilityIdentifier("display-name-field")
-            .padding(.horizontal)
+          AuthTextField(
+            text: $displayName,
+            localizedTitle: "Display Name",
+            prompt: "Enter display name for this authenticator",
+            leading: {
+              Image(systemName: "person")
+            }
+          )
+          .accessibilityIdentifier("display-name-field")
 
-          TextField("Enter Code from App", text: $totpCode)
-            .textFieldStyle(.roundedBorder)
-            .keyboardType(.numberPad)
-            .focused($focus, equals: .totpCode)
-            .accessibilityIdentifier("totp-code-field")
-            .padding(.horizontal)
+          AuthTextField(
+            text: $totpCode,
+            localizedTitle: "Verification Code",
+            prompt: "Enter code from app",
+            keyboardType: .numberPad,
+            contentType: .oneTimeCode,
+            leading: {
+              Image(systemName: "number")
+            }
+          )
+          .focused($focus, equals: .totpCode)
+          .accessibilityIdentifier("totp-code-field")
 
-          Button(action: completeEnrollment) {
+          Button {
+            completeEnrollment()
+          } label: {
             HStack {
               if isLoading {
                 ProgressView()
@@ -559,14 +598,13 @@ extension MFAEnrolmentView: View {
               }
               Text("Complete Setup")
             }
+            .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
-            .padding()
-            .background(canCompleteEnrollment ? Color.blue : Color.gray)
-            .foregroundColor(.white)
-            .cornerRadius(8)
           }
+          .buttonStyle(.borderedProminent)
           .disabled(!canCompleteEnrollment)
-          .padding(.horizontal)
+          .padding([.top, .bottom], 8)
+          .frame(maxWidth: .infinity)
           .accessibilityIdentifier("complete-enrollment-button")
         }
       }
