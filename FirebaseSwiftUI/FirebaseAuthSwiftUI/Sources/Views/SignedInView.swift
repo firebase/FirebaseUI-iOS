@@ -42,28 +42,54 @@ extension SignedInView: View {
       if authService.currentUser?.isEmailVerified == false {
         VerifyEmailView()
       }
-      Divider()
-      Button(authService.string.updatePasswordButtonLabel) {
+      Button(action: {
         authService.navigator.push(.updatePassword)
+      }) {
+        Text(authService.string.updatePasswordButtonLabel)
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
       }
-      Divider()
-      Button("Manage Two-Factor Authentication") {
+      .padding([.top, .bottom], 8)
+      .frame(maxWidth: .infinity)
+      .buttonStyle(.borderedProminent)
+      Button(action: {
         authService.navigator.push(.mfaManagement)
+      }) {
+        Text("Manage Two-Factor Authentication")
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
       }
+      .padding([.top, .bottom], 8)
+      .frame(maxWidth: .infinity)
+      .buttonStyle(.borderedProminent)
       .accessibilityIdentifier("mfa-management-button")
-      Divider()
-      Button(authService.string.signOutButtonLabel) {
+      Button(action: {
         Task {
           try? await authService.signOut()
         }
-      }.accessibilityIdentifier("sign-out-button")
-      Divider()
-      Button(authService.string.deleteAccountButtonLabel) {
+      }) {
+        Text(authService.string.signOutButtonLabel)
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
+      }
+      .padding([.top, .bottom], 8)
+      .frame(maxWidth: .infinity)
+      .buttonStyle(.borderedProminent)
+      .accessibilityIdentifier("sign-out-button")
+      Button(action: {
         Task {
           try? await authService.deleteUser()
         }
+      }) {
+        Text(authService.string.deleteAccountButtonLabel)
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
       }
+      .padding([.top, .bottom], 8)
+      .frame(maxWidth: .infinity)
+      .buttonStyle(.borderedProminent)
     }
+    .safeAreaPadding()
     .sheet(isPresented: isShowingPasswordPrompt) {
       PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }
