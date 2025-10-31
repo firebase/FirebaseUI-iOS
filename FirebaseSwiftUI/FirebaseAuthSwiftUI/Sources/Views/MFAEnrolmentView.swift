@@ -187,17 +187,19 @@ public struct MFAEnrolmentView {
 extension MFAEnrolmentView: View {
   public var body: some View {
     VStack(spacing: 24) {
-      // Header
-      VStack(spacing: 8) {
-        Text("Set Up Two-Factor Authentication")
-          .font(.largeTitle)
-          .fontWeight(.bold)
-          .multilineTextAlignment(.center)
+      // Header (only shown when no session is active)
+      if currentSession == nil {
+        VStack(spacing: 8) {
+          Text("Set Up Two-Factor Authentication")
+            .font(.largeTitle)
+            .fontWeight(.bold)
+            .multilineTextAlignment(.center)
 
-        Text("Add an extra layer of security to your account")
-          .font(.subheadline)
-          .foregroundColor(.secondary)
-          .multilineTextAlignment(.center)
+          Text("Add an extra layer of security to your account")
+            .font(.subheadline)
+            .foregroundColor(.secondary)
+            .multilineTextAlignment(.center)
+        }
       }
 
       // Factor Type Selection (only if no session started)
@@ -478,12 +480,12 @@ extension MFAEnrolmentView: View {
 
   @ViewBuilder
   private func totpEnrollmentContent(session: EnrollmentSession) -> some View {
-    VStack(spacing: 24) {
+    VStack(spacing: 16) {
       if let totpInfo = session.totpInfo {
-        VStack(spacing: 24) {
-          VStack(spacing: 8) {
+        VStack(spacing: 16) {
+          VStack(spacing: 6) {
             Image(systemName: "qrcode")
-              .font(.system(size: 48))
+              .font(.system(size: 40))
               .foregroundColor(.green)
 
             Text("Scan QR Code")
@@ -494,6 +496,8 @@ extension MFAEnrolmentView: View {
               .font(.body)
               .foregroundColor(.secondary)
               .multilineTextAlignment(.center)
+              .lineLimit(nil)
+              .padding(.horizontal)
           }
 
           // QR Code generated from the otpauth:// URI
@@ -502,12 +506,12 @@ extension MFAEnrolmentView: View {
             Button(action: {
               UIApplication.shared.open(qrURL)
             }) {
-              VStack(spacing: 12) {
+              VStack(spacing: 8) {
                 Image(uiImage: qrImage)
                   .interpolation(.none)
                   .resizable()
                   .aspectRatio(contentMode: .fit)
-                  .frame(width: 200, height: 200)
+                  .frame(width: 180, height: 180)
                   .accessibilityIdentifier("qr-code-image")
 
                 HStack(spacing: 6) {
@@ -525,7 +529,7 @@ extension MFAEnrolmentView: View {
           } else {
             RoundedRectangle(cornerRadius: 8)
               .fill(Color.gray.opacity(0.3))
-              .frame(width: 200, height: 200)
+              .frame(width: 180, height: 180)
               .overlay(
                 VStack {
                   Image(systemName: "exclamationmark.triangle")
@@ -537,7 +541,7 @@ extension MFAEnrolmentView: View {
               )
           }
 
-          VStack(spacing: 8) {
+          VStack(spacing: 6) {
             Text("Manual Entry Key:")
               .font(.headline)
 
