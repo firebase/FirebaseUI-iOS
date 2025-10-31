@@ -329,42 +329,42 @@ public class StringUtils {
   public var phoneSignInTitle: String {
     return localizedString(for: "Sign in with Phone")
   }
-  
+
   /// Phone provider
   /// found in:
   /// - PhoneAuthView
   public var enterPhoneNumberPlaceholder: String {
     return localizedString(for: "Enter phone number")
   }
-  
+
   /// Phone provider
   /// found in:
   /// - PhoneAuthView
   public var sendCodeButtonLabel: String {
     return localizedString(for: "Send Code")
   }
-  
+
   /// Phone provider
   /// found in:
   /// - PhoneAuthView
   public var processingLabel: String {
     return localizedString(for: "Processing...")
   }
-  
+
   /// Phone provider
   /// found in:
   /// - PhoneAuthView
   public var enterVerificationCodeTitle: String {
     return localizedString(for: "Enter Verification Code")
   }
-  
+
   /// Phone provider
   /// found in:
   /// - PhoneAuthView
   public var verificationCodePlaceholder: String {
     return localizedString(for: "Verification Code")
   }
-  
+
   /// Phone provider
   /// found in:
   /// - PhoneAuthView

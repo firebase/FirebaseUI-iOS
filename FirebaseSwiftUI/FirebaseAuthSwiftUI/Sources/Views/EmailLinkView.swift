@@ -13,17 +13,17 @@
 // limitations under the License.
 
 import FirebaseAuth
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
-import FirebaseAuthUIComponents
 
 public struct EmailLinkView {
   @Environment(AuthService.self) private var authService
   @State private var email = ""
   @State private var showModal = false
-  
+
   public init() {}
-  
+
   private func sendEmailLink() async {
     do {
       try await authService.sendEmailSignInLink(email: email)

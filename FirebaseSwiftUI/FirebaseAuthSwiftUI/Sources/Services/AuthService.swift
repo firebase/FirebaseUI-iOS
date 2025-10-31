@@ -13,9 +13,9 @@
 // limitations under the License.
 
 @preconcurrency import FirebaseAuth
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
-import FirebaseAuthUIComponents
 
 public protocol AuthProviderSwift {
   @MainActor func createAuthCredential() async throws -> AuthCredential
@@ -88,16 +88,16 @@ private final class AuthListenerManager {
 @Observable
 public class Navigator {
   var routes: [AuthView] = []
-  
+
   public func push(_ route: AuthView) {
     routes.append(route)
   }
-  
+
   @discardableResult
   public func pop() -> AuthView? {
     routes.popLast()
   }
-  
+
   public func clear() {
     routes.removeAll()
   }
@@ -122,9 +122,11 @@ public final class AuthService {
   public var authView: AuthView? {
     navigator.routes.last
   }
-  internal var authViewRoutes: [AuthView] {
+
+  var authViewRoutes: [AuthView] {
     navigator.routes
   }
+
   public let string: StringUtils
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
@@ -143,10 +145,11 @@ public final class AuthService {
   var emailSignInEnabled = false
 
   private var providers: [AuthProviderUI] = []
-  
+
   public var currentPhoneProvider: PhoneAuthProviderSwift? {
     providers.compactMap { $0.provider as? PhoneAuthProviderSwift }.first
   }
+
   public func registerProvider(providerWithButton: AuthProviderUI) {
     providers.append(providerWithButton)
   }

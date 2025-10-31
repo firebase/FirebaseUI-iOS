@@ -16,35 +16,33 @@ import SwiftUI
 
 /// Styling configuration for authentication provider buttons
 public struct ProviderStyle: Sendable {
-  public init(
-    icon: Image? = nil,
-    backgroundColor: Color,
-    contentColor: Color,
-    iconTint: Color? = nil,
-    elevation: CGFloat = 2
-  ) {
+  public init(icon: Image? = nil,
+              backgroundColor: Color,
+              contentColor: Color,
+              iconTint: Color? = nil,
+              elevation: CGFloat = 2) {
     self.icon = icon
     self.backgroundColor = backgroundColor
     self.contentColor = contentColor
     self.iconTint = iconTint
     self.elevation = elevation
   }
-  
+
   public let icon: Image?
   public let backgroundColor: Color
   public let contentColor: Color
   public var iconTint: Color? = nil
-  public let shape: AnyShape = AnyShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+  public let shape: AnyShape = .init(RoundedRectangle(cornerRadius: 4, style: .continuous))
   public let elevation: CGFloat
-  
+
   public static let empty = ProviderStyle(
     icon: nil,
     backgroundColor: .white,
     contentColor: .black
   )
-  
+
   // MARK: - Predefined Styles
-  
+
   public static var google: ProviderStyle {
     ProviderStyle(
       icon: Image(.fuiIcGoogleg),
@@ -52,7 +50,7 @@ public struct ProviderStyle: Sendable {
       contentColor: Color(hex: 0x757575)
     )
   }
-  
+
   public static var facebook: ProviderStyle {
     ProviderStyle(
       icon: Image(.fuiIcFacebook),
@@ -60,7 +58,7 @@ public struct ProviderStyle: Sendable {
       contentColor: Color(hex: 0xFFFFFF)
     )
   }
-  
+
   public static var twitter: ProviderStyle {
     ProviderStyle(
       icon: Image(.fuiIcTwitterX),
@@ -68,7 +66,7 @@ public struct ProviderStyle: Sendable {
       contentColor: Color(hex: 0xFFFFFF)
     )
   }
-  
+
   public static var apple: ProviderStyle {
     ProviderStyle(
       icon: Image(.fuiIcApple),
@@ -76,7 +74,7 @@ public struct ProviderStyle: Sendable {
       contentColor: Color(hex: 0xFFFFFF)
     )
   }
-  
+
   public static var phone: ProviderStyle {
     ProviderStyle(
       icon: Image(.fuiIcPhone),
@@ -84,7 +82,7 @@ public struct ProviderStyle: Sendable {
       contentColor: Color(hex: 0xFFFFFF)
     )
   }
-  
+
   public static var github: ProviderStyle {
     ProviderStyle(
       icon: Image(.fuiIcGithub),
@@ -92,7 +90,7 @@ public struct ProviderStyle: Sendable {
       contentColor: Color(hex: 0xFFFFFF)
     )
   }
-  
+
   public static var microsoft: ProviderStyle {
     ProviderStyle(
       icon: Image(.fuiIcMicrosoft),
@@ -100,7 +98,7 @@ public struct ProviderStyle: Sendable {
       contentColor: Color(hex: 0xFFFFFF)
     )
   }
-  
+
   public static var yahoo: ProviderStyle {
     ProviderStyle(
       icon: Image(.fuiIcYahoo),
@@ -108,7 +106,7 @@ public struct ProviderStyle: Sendable {
       contentColor: Color(hex: 0xFFFFFF)
     )
   }
-  
+
   public static var anonymous: ProviderStyle {
     ProviderStyle(
       icon: Image(.fuiIcAnonymous),
@@ -116,7 +114,7 @@ public struct ProviderStyle: Sendable {
       contentColor: Color(hex: 0xFFFFFF)
     )
   }
-  
+
   public static var email: ProviderStyle {
     ProviderStyle(
       icon: Image(.fuiIcMail),

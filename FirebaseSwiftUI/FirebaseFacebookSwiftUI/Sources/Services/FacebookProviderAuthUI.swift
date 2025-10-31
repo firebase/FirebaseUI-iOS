@@ -30,9 +30,9 @@ public class FacebookProviderSwift: AuthProviderSwift {
 
   public init(scopes: [String] = ["email", "public_profile"]) {
     self.scopes = scopes
-    self.isLimitedLogin = ATTrackingManager.trackingAuthorizationStatus != .authorized
+    isLimitedLogin = ATTrackingManager.trackingAuthorizationStatus != .authorized
   }
-  
+
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
     let loginType: LoginTracking = isLimitedLogin ? .limited : .enabled
 

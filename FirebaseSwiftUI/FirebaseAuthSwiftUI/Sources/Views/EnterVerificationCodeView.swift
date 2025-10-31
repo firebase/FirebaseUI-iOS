@@ -24,11 +24,11 @@ struct EnterVerificationCodeView: View {
   @State private var verificationCode: String = ""
   @State private var currentError: AlertError? = nil
   @State private var isProcessing: Bool = false
-  
+
   let verificationID: String
   let fullPhoneNumber: String
   let phoneProvider: PhoneAuthProviderSwift
-  
+
   var body: some View {
     VStack(spacing: 32) {
       VStack(spacing: 16) {
@@ -38,7 +38,7 @@ struct EnterVerificationCodeView: View {
             .foregroundStyle(.secondary)
             .multilineTextAlignment(.center)
             .frame(maxWidth: .infinity, alignment: .leading)
-          
+
           Button {
             authService.navigator.pop()
           } label: {
@@ -49,20 +49,23 @@ struct EnterVerificationCodeView: View {
         }
         .padding(.bottom)
         .frame(maxWidth: .infinity, alignment: .leading)
-        
+
         VerificationCodeInputField(
           code: $verificationCode,
           isError: currentError != nil,
           errorMessage: currentError?.message
         )
-        
+
         Button(action: {
           Task {
             isProcessing = true
             do {
-              phoneProvider.setVerificationCode(verificationID: verificationID, code: verificationCode)
+              phoneProvider.setVerificationCode(
+                verificationID: verificationID,
+                code: verificationCode
+              )
               let credential = try await phoneProvider.createAuthCredential()
-              
+
               _ = try await authService.signIn(credentials: credential)
               dismiss()
             } catch {
@@ -84,7 +87,7 @@ struct EnterVerificationCodeView: View {
         .buttonStyle(.borderedProminent)
         .disabled(isProcessing || verificationCode.count != 6)
       }
-      
+
       Spacer()
     }
     .navigationTitle(authService.string.enterVerificationCodeTitle)
@@ -96,23 +99,23 @@ struct EnterVerificationCodeView: View {
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
-  
+
   class MockPhoneProvider: PhoneAuthProviderSwift {
     var id: String = "phone"
-    
-    func verifyPhoneNumber(phoneNumber: String) async throws -> String {
+
+    func verifyPhoneNumber(phoneNumber _: String) async throws -> String {
       return "mock-verification-id"
     }
-    
-    func setVerificationCode(verificationID: String, code: String) {
+
+    func setVerificationCode(verificationID _: String, code _: String) {
       // Mock implementation
     }
-    
+
     func createAuthCredential() async throws -> AuthCredential {
       fatalError("Not implemented in preview")
     }
   }
-  
+
   return NavigationStack {
     EnterVerificationCodeView(
       verificationID: "mock-id",

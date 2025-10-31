@@ -21,7 +21,7 @@ import SwiftUI
 public struct PhoneAuthButtonView {
   @Environment(AuthService.self) private var authService
   let phoneProvider: PhoneAuthProviderSwift
-  
+
   public init(phoneProvider: PhoneAuthProviderSwift) {
     self.phoneProvider = phoneProvider
   }

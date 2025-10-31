@@ -32,15 +32,15 @@ private enum FocusableField: Hashable {
 @MainActor
 public struct EmailAuthView {
   @Environment(AuthService.self) private var authService
-  
+
   @State private var email = ""
   @State private var password = ""
   @State private var confirmPassword = ""
-  
+
   @FocusState private var focus: FocusableField?
-  
+
   public init() {}
-  
+
   private var isValid: Bool {
     return if authService.authenticationFlow == .signIn {
       !email.isEmpty && !password.isEmpty
@@ -48,11 +48,11 @@ public struct EmailAuthView {
       !email.isEmpty && !password.isEmpty && password == confirmPassword
     }
   }
-  
+
   private func signInWithEmailPassword() async {
     try? await authService.signIn(email: email, password: password)
   }
-  
+
   private func createUserWithEmailPassword() async {
     try? await authService.createUser(email: email, password: password)
   }
@@ -101,7 +101,7 @@ extension EmailAuthView: View {
         }
         .accessibilityIdentifier("password-recovery-button")
       }
-      
+
       if authService.authenticationFlow == .signUp {
         AuthTextField(
           text: $confirmPassword,
@@ -120,7 +120,7 @@ extension EmailAuthView: View {
         .focused($focus, equals: .confirmPassword)
         .accessibilityIdentifier("confirm-password-field")
       }
-      
+
       Button(action: {
         Task {
           if authService.authenticationFlow == .signIn {
@@ -133,9 +133,9 @@ extension EmailAuthView: View {
         if authService.authenticationState != .authenticating {
           Text(
             authService.authenticationFlow == .signIn
-            ? authService.string
+              ? authService.string
               .signInWithEmailButtonLabel
-            : authService.string.signUpWithEmailButtonLabel
+              : authService.string.signUpWithEmailButtonLabel
           )
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
@@ -156,21 +156,21 @@ extension EmailAuthView: View {
       Text(
         authService
           .authenticationFlow == .signIn
-        ? authService.string.dontHaveAnAccountYetLabel
-        : authService.string.alreadyHaveAnAccountLabel
+          ? authService.string.dontHaveAnAccountYetLabel
+          : authService.string.alreadyHaveAnAccountLabel
       )
       Button(action: {
         withAnimation {
           authService.authenticationFlow =
-          authService
-            .authenticationFlow == .signIn ? .signUp : .signIn
+            authService
+              .authenticationFlow == .signIn ? .signUp : .signIn
         }
       }) {
         Text(
           authService.authenticationFlow == .signUp
-          ? authService.string
+            ? authService.string
             .emailLoginFlowLabel
-          : authService.string.emailSignUpFlowLabel
+            : authService.string.emailSignUpFlowLabel
         )
         .fontWeight(.semibold)
         .foregroundColor(.blue)

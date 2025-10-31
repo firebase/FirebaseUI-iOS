@@ -21,7 +21,7 @@ public typealias VerificationID = String
 public class PhoneProviderSwift: PhoneAuthProviderSwift {
   private var verificationID: String?
   private var verificationCode: String?
-  
+
   public init() {}
 
   @MainActor public func verifyPhoneNumber(phoneNumber: String) async throws -> VerificationID {
@@ -39,7 +39,7 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
 
   public func setVerificationCode(verificationID: String, code: String) {
     self.verificationID = verificationID
-    self.verificationCode = code
+    verificationCode = code
   }
 
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
@@ -47,7 +47,7 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
           let verificationCode = verificationCode else {
       throw AuthServiceError.providerAuthenticationFailed("Verification ID or code not set")
     }
-    
+
     return PhoneAuthProvider.provider()
       .credential(withVerificationID: verificationID, verificationCode: verificationCode)
   }

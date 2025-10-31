@@ -16,38 +16,36 @@ import SwiftUI
 import UIKit
 
 public struct VerificationCodeInputField: View {
-  public init(
-    code: Binding<String>,
-    codeLength: Int = 6,
-    isError: Bool = false,
-    errorMessage: String? = nil,
-    onCodeComplete: @escaping (String) -> Void = { _ in },
-    onCodeChange: @escaping (String) -> Void = { _ in }
-  ) {
-    self._code = code
+  public init(code: Binding<String>,
+              codeLength: Int = 6,
+              isError: Bool = false,
+              errorMessage: String? = nil,
+              onCodeComplete: @escaping (String) -> Void = { _ in },
+              onCodeChange: @escaping (String) -> Void = { _ in }) {
+    _code = code
     self.codeLength = codeLength
     self.isError = isError
     self.errorMessage = errorMessage
     self.onCodeComplete = onCodeComplete
     self.onCodeChange = onCodeChange
-    self._digitFields = State(initialValue: Array(repeating: "", count: codeLength))
+    _digitFields = State(initialValue: Array(repeating: "", count: codeLength))
   }
-  
+
   @Binding var code: String
   let codeLength: Int
   let isError: Bool
   let errorMessage: String?
   let onCodeComplete: (String) -> Void
   let onCodeChange: (String) -> Void
-  
+
   @State private var digitFields: [String] = []
   @State private var focusedIndex: Int? = nil
   @State private var pendingInternalCodeUpdates = 0
-  
+
   public var body: some View {
     VStack(spacing: 8) {
       HStack(spacing: 8) {
-        ForEach(0..<codeLength, id: \.self) { index in
+        ForEach(0 ..< codeLength, id: \.self) { index in
           SingleDigitField(
             digit: $digitFields[index],
             isError: isError,
@@ -79,7 +77,7 @@ public struct VerificationCodeInputField: View {
           )
         }
       }
-      
+
       if isError, let errorMessage = errorMessage {
         Text(errorMessage)
           .font(.caption)
@@ -99,25 +97,25 @@ public struct VerificationCodeInputField: View {
       updateDigitFieldsFromCode(shouldUpdateFocus: true)
     }
   }
-  
+
   private func updateDigitFieldsFromCode(shouldUpdateFocus: Bool, forceFocus: Bool = false) {
     let sanitized = code.filter { $0.isNumber }
     let truncated = String(sanitized.prefix(codeLength))
     var newFields = Array(repeating: "", count: codeLength)
-    
+
     for (offset, character) in truncated.enumerated() {
       newFields[offset] = String(character)
     }
-    
+
     let fieldsChanged = newFields != digitFields
     if fieldsChanged {
       digitFields = newFields
     }
-    
+
     if code != truncated {
       commitCodeChange(truncated)
     }
-    
+
     if shouldUpdateFocus && (fieldsChanged || forceFocus) {
       let newFocus = truncated.count < codeLength ? truncated.count : nil
       DispatchQueue.main.async {
@@ -126,32 +124,32 @@ public struct VerificationCodeInputField: View {
         }
       }
     }
-    
+
     if fieldsChanged && truncated.count == codeLength {
       DispatchQueue.main.async {
         onCodeComplete(truncated)
       }
     }
   }
-  
+
   private func commitCodeChange(_ newCode: String) {
     if code != newCode {
       pendingInternalCodeUpdates += 1
       code = newCode
     }
   }
-  
+
   private func handleDigitChanged(at index: Int, newDigit: String) {
     let sanitized = newDigit.filter { $0.isNumber }
-    
+
     guard !sanitized.isEmpty else {
       processSingleDigitInput(at: index, digit: "")
       return
     }
-    
+
     let firstDigit = String(sanitized.prefix(1))
     processSingleDigitInput(at: index, digit: firstDigit)
-    
+
     let remainder = String(sanitized.dropFirst())
     let availableSlots = max(codeLength - (index + 1), 0)
     if availableSlots > 0 {
@@ -161,16 +159,16 @@ public struct VerificationCodeInputField: View {
       }
     }
   }
-  
+
   private func processSingleDigitInput(at index: Int, digit: String) {
     if digitFields[index] != digit {
       digitFields[index] = digit
     }
-    
+
     let newCode = digitFields.joined()
     commitCodeChange(newCode)
     onCodeChange(newCode)
-    
+
     if !digit.isEmpty,
        let nextIndex = findNextEmptyField(startingFrom: index) {
       DispatchQueue.main.async {
@@ -181,15 +179,14 @@ public struct VerificationCodeInputField: View {
         }
       }
     }
-    
+
     if newCode.count == codeLength {
       DispatchQueue.main.async {
         onCodeComplete(newCode)
       }
     }
   }
-  
-  
+
   private func handleBackspace(at index: Int) {
     // If current field is empty, move to previous field and clear it
     if digitFields[index].isEmpty && index > 0 {
@@ -206,32 +203,32 @@ public struct VerificationCodeInputField: View {
       // Clear current field
       digitFields[index] = ""
     }
-    
+
     // Update the main code string
     let newCode = digitFields.joined()
     commitCodeChange(newCode)
     onCodeChange(newCode)
   }
-  
+
   private func applyBulkInput(startingAt index: Int, digits: String) {
     guard !digits.isEmpty, index < codeLength else { return }
-    
+
     var updatedFields = digitFields
     var currentIndex = index
-    
+
     for digit in digits where currentIndex < codeLength {
       updatedFields[currentIndex] = String(digit)
       currentIndex += 1
     }
-    
+
     if digitFields != updatedFields {
       digitFields = updatedFields
     }
-    
+
     let newCode = updatedFields.joined()
     commitCodeChange(newCode)
     onCodeChange(newCode)
-    
+
     if newCode.count == codeLength {
       DispatchQueue.main.async {
         onCodeComplete(newCode)
@@ -249,16 +246,16 @@ public struct VerificationCodeInputField: View {
       }
     }
   }
-  
+
   private func findNextEmptyField(startingFrom index: Int) -> Int? {
     // Look for the next empty field after the current index
-    for i in (index + 1)..<codeLength {
+    for i in (index + 1) ..< codeLength {
       if digitFields[i].isEmpty {
         return i
       }
     }
     // If no empty field found after current index, look from the beginning
-    for i in 0..<index {
+    for i in 0 ..< index {
       if digitFields[i].isEmpty {
         return i
       }
@@ -277,19 +274,19 @@ private struct SingleDigitField: View {
   let onDigitChanged: (String) -> Void
   let onBackspace: () -> Void
   let onFocusChanged: (Bool) -> Void
-  
+
   private var borderWidth: CGFloat {
     if isError { return 2 }
     if isFocused || !digit.isEmpty { return 3 }
     return 1
   }
-  
+
   private var borderColor: Color {
     if isError { return .red }
     if isFocused || !digit.isEmpty { return .accentColor }
     return Color(.systemFill)
   }
-  
+
   var body: some View {
     BackspaceAwareTextField(
       text: $digit,
@@ -344,7 +341,7 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
   let maxCharacters: Int
   let configuration: (UITextField) -> Void
   let onTextChange: (String) -> Void
-  
+
   func makeUIView(context: Context) -> BackspaceUITextField {
     context.coordinator.parent = self
     let textField = BackspaceUITextField()
@@ -363,20 +360,20 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
     }
     return textField
   }
-  
+
   func updateUIView(_ uiView: BackspaceUITextField, context: Context) {
     context.coordinator.parent = self
     if uiView.text != text {
       uiView.text = text
     }
-    
+
     uiView.onDeleteBackward = { [weak uiView] in
       guard let uiView else { return }
       if (uiView.text ?? "").isEmpty {
         onDeleteBackwardWhenEmpty()
       }
     }
-    
+
     if isFirstResponder {
       if !context.coordinator.isFirstResponder {
         context.coordinator.isFirstResponder = true
@@ -389,39 +386,40 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
       context.coordinator.isFirstResponder = false
     }
   }
-  
+
   func makeCoordinator() -> Coordinator {
     Coordinator(parent: self)
   }
-  
+
   final class Coordinator: NSObject, UITextFieldDelegate {
     var parent: BackspaceAwareTextField
     var isFirstResponder = false
-    
+
     init(parent: BackspaceAwareTextField) {
       self.parent = parent
     }
-    
+
     @objc func editingChanged(_ sender: UITextField) {
       let updatedText = sender.text ?? ""
       parent.text = updatedText
       parent.onTextChange(updatedText)
     }
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
       isFirstResponder = true
       animateFocusChange(for: textField, focused: true)
       parent.onFocusChanged(true)
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
       isFirstResponder = false
       animateFocusChange(for: textField, focused: false)
       parent.onFocusChanged(false)
     }
-    
+
     private func animateFocusChange(for textField: UITextField, focused: Bool) {
-      let targetTransform: CGAffineTransform = focused ? CGAffineTransform(scaleX: 1.05, y: 1.05) : .identity
+      let targetTransform: CGAffineTransform = focused ? CGAffineTransform(scaleX: 1.05, y: 1.05) :
+        .identity
       UIView.animate(
         withDuration: 0.2,
         delay: 0,
@@ -430,24 +428,22 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
         textField.transform = targetTransform
       }
     }
-    
-    func textField(
-      _ textField: UITextField,
-      shouldChangeCharactersIn range: NSRange,
-      replacementString string: String
-    ) -> Bool {
+
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
       if string.isEmpty {
         return true
       }
-      
+
       let digitsOnly = string.filter { $0.isNumber }
       guard !digitsOnly.isEmpty else {
         return false
       }
-      
+
       let currentText = textField.text ?? ""
       let nsCurrent = currentText as NSString
-      
+
       if digitsOnly.count > 1 || string.count > 1 {
         let limit = max(parent.maxCharacters, 1)
         let truncated = String(digitsOnly.prefix(limit))
@@ -455,7 +451,7 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
         parent.onTextChange(String(proposed.prefix(limit)))
         return false
       }
-      
+
       let updated = nsCurrent.replacingCharacters(in: range, with: digitsOnly)
       return updated.count <= 1
     }
@@ -464,7 +460,7 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
 
 private final class BackspaceUITextField: UITextField {
   var onDeleteBackward: (() -> Void)?
-  
+
   override func deleteBackward() {
     let wasEmpty = (text ?? "").isEmpty
     super.deleteBackward()
@@ -478,12 +474,12 @@ private final class BackspaceUITextField: UITextField {
 
 #Preview("Normal State") {
   @Previewable @State var code = ""
-  
+
   return VStack(spacing: 32) {
     Text("Enter Verification Code")
       .font(.title2)
       .fontWeight(.semibold)
-    
+
     VerificationCodeInputField(
       code: $code,
       onCodeComplete: { completedCode in
@@ -493,7 +489,7 @@ private final class BackspaceUITextField: UITextField {
         print("Code changed: \(newCode)")
       }
     )
-    
+
     Text("Current code: \(code)")
       .font(.caption)
       .foregroundColor(.secondary)
@@ -503,12 +499,12 @@ private final class BackspaceUITextField: UITextField {
 
 #Preview("Error State") {
   @Previewable @State var code = "12345"
-  
+
   return VStack(spacing: 32) {
     Text("Enter Verification Code")
       .font(.title2)
       .fontWeight(.semibold)
-    
+
     VerificationCodeInputField(
       code: $code,
       isError: true,
@@ -520,7 +516,7 @@ private final class BackspaceUITextField: UITextField {
         print("Code changed: \(newCode)")
       }
     )
-    
+
     Text("Current code: \(code)")
       .font(.caption)
       .foregroundColor(.secondary)
@@ -530,12 +526,12 @@ private final class BackspaceUITextField: UITextField {
 
 #Preview("Custom Length") {
   @Previewable @State var code = ""
-  
+
   return VStack(spacing: 32) {
     Text("Enter 4-Digit Code")
       .font(.title2)
       .fontWeight(.semibold)
-    
+
     VerificationCodeInputField(
       code: $code,
       codeLength: 4,
@@ -546,7 +542,7 @@ private final class BackspaceUITextField: UITextField {
         print("Code changed: \(newCode)")
       }
     )
-    
+
     Text("Current code: \(code)")
       .font(.caption)
       .foregroundColor(.secondary)

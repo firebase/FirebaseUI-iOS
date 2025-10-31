@@ -27,7 +27,7 @@ extension SignedInView: View {
       set: { authService.passwordPrompt.isPromptingPassword = $0 }
     )
   }
-  
+
   public var body: some View {
     VStack {
       Text(authService.string.signedInTitle)

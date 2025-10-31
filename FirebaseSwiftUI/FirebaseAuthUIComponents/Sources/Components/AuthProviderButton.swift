@@ -22,21 +22,19 @@ public struct AuthProviderButton: View {
   let action: () -> Void
   var enabled: Bool
   var accessibilityId: String?
-  
-  public init(
-    label: String,
-    style: ProviderStyle,
-    enabled: Bool = true,
-    accessibilityId: String? = nil,
-    action: @escaping () -> Void
-  ) {
+
+  public init(label: String,
+              style: ProviderStyle,
+              enabled: Bool = true,
+              accessibilityId: String? = nil,
+              action: @escaping () -> Void) {
     self.label = label
     self.style = style
     self.enabled = enabled
     self.accessibilityId = accessibilityId
     self.action = action
   }
-  
+
   public var body: some View {
     Button(action: action) {
       HStack(spacing: 12) {
@@ -62,7 +60,7 @@ public struct AuthProviderButton: View {
     .disabled(!enabled)
     .accessibilityIdentifier(accessibilityId ?? "auth-provider-button")
   }
-  
+
   @ViewBuilder
   private func providerIcon(for image: Image, tint: Color?) -> some View {
     if let tint {

@@ -12,18 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
-import FirebaseAuthUIComponents
 
 public struct PasswordRecoveryView {
   @Environment(AuthService.self) private var authService
   @State private var email = ""
   @State private var showSuccessSheet = false
   @State private var sentEmail = ""
-  
+
   public init() {}
-  
+
   private func sendPasswordRecoveryEmail() async {
     do {
       try await authService.sendPasswordRecoveryEmail(email: email)
@@ -68,7 +68,7 @@ extension PasswordRecoveryView: View {
       successSheet
     }
   }
-  
+
   @ViewBuilder
   @MainActor
   private var successSheet: some View {
@@ -79,14 +79,14 @@ extension PasswordRecoveryView: View {
         .padding()
       Text(authService.string.passwordRecoveryHelperMessage)
         .padding()
-      
+
       Divider()
-      
+
       Text(String(format: authService.string.passwordRecoveryEmailSentMessage, sentEmail))
         .padding()
-      
+
       Divider()
-      
+
       Button(authService.string.okButtonLabel) {
         showSuccessSheet = false
         email = ""

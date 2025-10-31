@@ -32,7 +32,7 @@ public struct UpdatePasswordView {
   @Environment(AuthService.self) private var authService
   @State private var password = ""
   @State private var confirmPassword = ""
-  
+
   @FocusState private var focus: FocusableField?
   private var isValid: Bool {
     !password.isEmpty && password == confirmPassword
@@ -46,7 +46,7 @@ extension UpdatePasswordView: View {
       set: { authService.passwordPrompt.isPromptingPassword = $0 }
     )
   }
-  
+
   public var body: some View {
     VStack {
       HStack {
@@ -62,7 +62,7 @@ extension UpdatePasswordView: View {
           .foregroundColor(.blue)
         }
         .accessibilityIdentifier("update-password-back-button")
-        
+
         Spacer()
       }
       .padding(.horizontal)
@@ -77,9 +77,9 @@ extension UpdatePasswordView: View {
       .padding(.vertical, 6)
       .background(Divider(), alignment: .bottom)
       .padding(.bottom, 8)
-      
+
       Divider()
-      
+
       LabeledContent {
         SecureField(authService.string.confirmPasswordInputLabel, text: $confirmPassword)
           .focused($focus, equals: .confirmPassword)
@@ -90,9 +90,9 @@ extension UpdatePasswordView: View {
       .padding(.vertical, 6)
       .background(Divider(), alignment: .bottom)
       .padding(.bottom, 8)
-      
+
       Divider()
-      
+
       Button(action: {
         Task {
           try await authService.updatePassword(to: confirmPassword)
@@ -102,7 +102,7 @@ extension UpdatePasswordView: View {
         Text(authService.string.updatePasswordButtonLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
-        
+
       })
       .disabled(!isValid)
       .padding([.top, .bottom], 8)

@@ -24,9 +24,9 @@ struct EnterPhoneNumberView: View {
   @State private var selectedCountry: CountryData = .default
   @State private var currentError: AlertError? = nil
   @State private var isProcessing: Bool = false
-  
+
   let phoneProvider: PhoneAuthProviderSwift
-  
+
   var body: some View {
     VStack(spacing: 16) {
       Text(authService.string.enterPhoneNumberPlaceholder)
@@ -35,7 +35,7 @@ struct EnterPhoneNumberView: View {
         .multilineTextAlignment(.center)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top)
-      
+
       AuthTextField(
         text: $phoneNumber,
         localizedTitle: "Phone",
@@ -49,7 +49,7 @@ struct EnterPhoneNumberView: View {
           enabled: !isProcessing
         )
       }
-      
+
       Button(action: {
         Task {
           isProcessing = true
@@ -80,7 +80,7 @@ struct EnterPhoneNumberView: View {
       .buttonStyle(.borderedProminent)
       .disabled(isProcessing || phoneNumber.isEmpty)
       .padding(.top, 8)
-      
+
       Spacer()
     }
     .navigationTitle(authService.string.phoneSignInTitle)
@@ -91,23 +91,23 @@ struct EnterPhoneNumberView: View {
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
-  
+
   class MockPhoneProvider: PhoneAuthProviderSwift {
     var id: String = "phone"
-    
-    func verifyPhoneNumber(phoneNumber: String) async throws -> String {
+
+    func verifyPhoneNumber(phoneNumber _: String) async throws -> String {
       return "mock-verification-id"
     }
-    
-    func setVerificationCode(verificationID: String, code: String) {
+
+    func setVerificationCode(verificationID _: String, code _: String) {
       // Mock implementation
     }
-    
+
     func createAuthCredential() async throws -> AuthCredential {
       fatalError("Not implemented in preview")
     }
   }
-  
+
   return EnterPhoneNumberView(phoneProvider: MockPhoneProvider())
     .environment(AuthService())
 }

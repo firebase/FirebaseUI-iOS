@@ -34,7 +34,7 @@ extension GenericOAuthButton: View {
           .foregroundColor(.red)
       )
     }
-    
+
     // Create custom style from provider configuration
     var resolvedStyle: ProviderStyle {
       ProviderStyle(
@@ -43,7 +43,7 @@ extension GenericOAuthButton: View {
         contentColor: oauthProvider.buttonForegroundColor
       )
     }
-    
+
     return AnyView(
       AuthProviderButton(
         label: oauthProvider.displayName,

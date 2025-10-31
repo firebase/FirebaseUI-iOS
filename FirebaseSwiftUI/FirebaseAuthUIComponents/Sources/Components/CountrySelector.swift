@@ -18,22 +18,22 @@ public struct CountryData: Equatable {
   public let name: String
   public let dialCode: String
   public let code: String
-  
+
   public init(name: String, dialCode: String, code: String) {
     self.name = name
     self.dialCode = dialCode
     self.code = code
   }
-  
+
   public var flag: String {
-    let base: UInt32 = 127397
+    let base: UInt32 = 127_397
     var s = ""
     for v in code.unicodeScalars {
       s.unicodeScalars.append(UnicodeScalar(base + v.value)!)
     }
     return String(s)
   }
-  
+
   @MainActor public static let `default` = CountryData(
     name: "United States",
     dialCode: "+1",
@@ -45,17 +45,15 @@ public struct CountrySelector: View {
   @Binding var selectedCountry: CountryData
   var enabled: Bool = true
   var allowedCountries: Set<String>? = nil
-  
-  public init(
-    selectedCountry: Binding<CountryData>,
-    enabled: Bool = true,
-    allowedCountries: Set<String>? = nil
-  ) {
-    self._selectedCountry = selectedCountry
+
+  public init(selectedCountry: Binding<CountryData>,
+              enabled: Bool = true,
+              allowedCountries: Set<String>? = nil) {
+    _selectedCountry = selectedCountry
     self.enabled = enabled
     self.allowedCountries = allowedCountries
   }
-  
+
   // Common countries list
   private let allCountries: [CountryData] = [
     CountryData(name: "United States", dialCode: "+1", code: "US"),
@@ -74,14 +72,14 @@ public struct CountrySelector: View {
     CountryData(name: "Spain", dialCode: "+34", code: "ES"),
     CountryData(name: "Italy", dialCode: "+39", code: "IT"),
   ]
-  
+
   private var filteredCountries: [CountryData] {
     if let allowedCountries = allowedCountries {
       return allCountries.filter { allowedCountries.contains($0.code) }
     }
     return allCountries
   }
-  
+
   public var body: some View {
     Menu {
       ForEach(filteredCountries, id: \.code) { country in

@@ -12,18 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
-import FirebaseAuthUIComponents
 
 @MainActor
 public struct AuthPickerView<Content: View> {
-  public init(
-    @ViewBuilder content: @escaping () -> Content = { EmptyView() }
-  ) {
+  public init(@ViewBuilder content: @escaping () -> Content = { EmptyView() }) {
     self.content = content
   }
-  
+
   @Environment(AuthService.self) private var authService
   private let content: () -> Content
 }
@@ -61,9 +59,13 @@ extension AuthPickerView: View {
                 } else {
                   EmptyView()
                 }
-              case .enterVerificationCode(let verificationID, let fullPhoneNumber):
+              case let .enterVerificationCode(verificationID, fullPhoneNumber):
                 if let phoneProvider = authService.currentPhoneProvider {
-                  EnterVerificationCodeView(verificationID: verificationID, fullPhoneNumber: fullPhoneNumber, phoneProvider: phoneProvider)
+                  EnterVerificationCodeView(
+                    verificationID: verificationID,
+                    fullPhoneNumber: fullPhoneNumber,
+                    phoneProvider: phoneProvider
+                  )
                 } else {
                   EmptyView()
                 }
@@ -73,7 +75,7 @@ extension AuthPickerView: View {
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
       }
   }
-  
+
   @ToolbarContentBuilder
   var toolbar: some ToolbarContent {
     ToolbarItem(placement: .topBarTrailing) {
@@ -86,7 +88,7 @@ extension AuthPickerView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   var authPickerViewInternal: some View {
     VStack {
@@ -105,7 +107,7 @@ extension AuthPickerView: View {
       okButtonLabel: authService.string.okButtonLabel
     )
   }
-  
+
   @ViewBuilder
   var authMethodPicker: some View {
     GeometryReader { proxy in
@@ -125,7 +127,7 @@ extension AuthPickerView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   func otherSignInOptions(_ proxy: GeometryProxy) -> some View {
     VStack {
