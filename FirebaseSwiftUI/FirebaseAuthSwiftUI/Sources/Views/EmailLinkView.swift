@@ -47,34 +47,42 @@ extension EmailLinkView: View {
           Image(systemName: "at")
         }
       )
-      Button(action: {
+      Button {
         Task {
           await sendEmailLink()
           authService.emailLink = email
         }
-      }) {
+      } label: {
         Text(authService.string.sendEmailLinkButtonLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
+      .buttonStyle(.borderedProminent)
       .disabled(!CommonUtils.isValidEmail(email))
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
-      .buttonStyle(.borderedProminent)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .navigationTitle(authService.string.signInWithEmailLinkViewTitle)
     .safeAreaPadding()
     .sheet(isPresented: $showModal) {
-      VStack {
+      VStack(spacing: 24) {
         Text(authService.string.signInWithEmailLinkViewMessage)
-          .padding()
-        Button(authService.string.okButtonLabel) {
+          .font(.headline)
+        Button {
           showModal = false
+        } label: {
+          Text(authService.string.okButtonLabel)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
         }
-        .padding()
+        .buttonStyle(.borderedProminent)
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity)
       }
-      .padding()
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+      .safeAreaPadding()
+      .presentationDetents([.medium])
     }
     .onOpenURL { url in
       Task {
