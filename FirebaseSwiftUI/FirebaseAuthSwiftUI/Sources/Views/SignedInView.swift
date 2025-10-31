@@ -18,6 +18,7 @@ import SwiftUI
 @MainActor
 public struct SignedInView {
   @Environment(AuthService.self) private var authService
+  @State private var showDeleteConfirmation = false
 }
 
 extension SignedInView: View {
@@ -63,6 +64,17 @@ extension SignedInView: View {
       .buttonStyle(.borderedProminent)
       .accessibilityIdentifier("mfa-management-button")
       Button(action: {
+        showDeleteConfirmation = true
+      }) {
+        Text(authService.string.deleteAccountButtonLabel)
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
+      }
+      .padding([.top, .bottom], 8)
+      .frame(maxWidth: .infinity)
+      .buttonStyle(.borderedProminent)
+      .accessibilityIdentifier("delete-account-button")
+      Button(action: {
         Task {
           try? await authService.signOut()
         }
@@ -75,23 +87,82 @@ extension SignedInView: View {
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
       .accessibilityIdentifier("sign-out-button")
-      Button(action: {
-        Task {
-          try? await authService.deleteUser()
-        }
-      }) {
-        Text(authService.string.deleteAccountButtonLabel)
-          .padding(.vertical, 8)
-          .frame(maxWidth: .infinity)
-      }
-      .padding([.top, .bottom], 8)
-      .frame(maxWidth: .infinity)
-      .buttonStyle(.borderedProminent)
     }
     .safeAreaPadding()
+    .sheet(isPresented: $showDeleteConfirmation) {
+      DeleteAccountConfirmationSheet(
+        onConfirm: {
+          showDeleteConfirmation = false
+          Task {
+            try? await authService.deleteUser()
+          }
+        },
+        onCancel: {
+          showDeleteConfirmation = false
+        }
+      )
+      .presentationDetents([.medium])
+    }
     .sheet(isPresented: isShowingPasswordPrompt) {
       PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }
+  }
+}
+
+private struct DeleteAccountConfirmationSheet: View {
+  @Environment(AuthService.self) private var authService
+  let onConfirm: () -> Void
+  let onCancel: () -> Void
+
+  var body: some View {
+    VStack(spacing: 24) {
+      VStack(spacing: 12) {
+        Image(systemName: "exclamationmark.triangle.fill")
+          .font(.system(size: 60))
+          .foregroundColor(.red)
+
+        Text("Delete Account?")
+          .font(.title)
+          .fontWeight(.bold)
+
+        Text(
+          "This action cannot be undone. All your data will be permanently deleted. You may need to reauthenticate to complete this action."
+        )
+        .font(.body)
+        .foregroundColor(.secondary)
+        .multilineTextAlignment(.center)
+        .padding(.horizontal)
+      }
+
+      VStack(spacing: 12) {
+        Button {
+          onConfirm()
+        } label: {
+          Text("Delete Account")
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(.red)
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity)
+        .accessibilityIdentifier("confirm-delete-button")
+
+        Button {
+          onCancel()
+        } label: {
+          Text("Cancel")
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.bordered)
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity)
+        .accessibilityIdentifier("cancel-delete-button")
+      }
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    .safeAreaPadding()
   }
 }
 
