@@ -18,7 +18,7 @@
 //
 //  Created by Russell Wheatley on 24/04/2025.
 //
-
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
@@ -48,32 +48,32 @@ extension UpdatePasswordView: View {
   }
 
   public var body: some View {
-    VStack {
-      LabeledContent {
-        SecureField(authService.string.passwordInputLabel, text: $password)
-          .focused($focus, equals: .password)
-          .submitLabel(.go)
-      } label: {
-        Image(systemName: "lock")
-      }
-      .padding(.vertical, 6)
-      .background(Divider(), alignment: .bottom)
-      .padding(.bottom, 8)
+    VStack(spacing: 24) {
+      AuthTextField(
+        text: $password,
+        localizedTitle: "Type new password",
+        prompt: authService.string.passwordInputLabel,
+        contentType: .password,
+        sensitive: true,
+        leading: {
+          Image(systemName: "lock")
+        }
+      )
+      .submitLabel(.go)
+      .focused($focus, equals: .password)
 
-      Divider()
-
-      LabeledContent {
-        SecureField(authService.string.confirmPasswordInputLabel, text: $confirmPassword)
-          .focused($focus, equals: .confirmPassword)
-          .submitLabel(.go)
-      } label: {
-        Image(systemName: "lock")
-      }
-      .padding(.vertical, 6)
-      .background(Divider(), alignment: .bottom)
-      .padding(.bottom, 8)
-
-      Divider()
+      AuthTextField(
+        text: $confirmPassword,
+        localizedTitle: "Retype new password",
+        prompt: authService.string.confirmPasswordInputLabel,
+        contentType: .password,
+        sensitive: true,
+        leading: {
+          Image(systemName: "lock")
+        }
+      )
+      .submitLabel(.go)
+      .focused($focus, equals: .confirmPassword)
 
       Button(action: {
         Task {
@@ -90,7 +90,11 @@ extension UpdatePasswordView: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
-    }.sheet(isPresented: isShowingPasswordPrompt) {
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    .safeAreaPadding()
+    .navigationTitle(authService.string.passwordRecoveryTitle)
+    .sheet(isPresented: isShowingPasswordPrompt) {
       PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }
   }
@@ -98,6 +102,8 @@ extension UpdatePasswordView: View {
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
-  return UpdatePasswordView()
-    .environment(AuthService())
+  return NavigationStack {
+    UpdatePasswordView()
+      .environment(AuthService())
+  }
 }
