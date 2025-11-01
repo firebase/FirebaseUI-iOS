@@ -54,7 +54,7 @@ public struct ProviderStyle: Sendable {
   public static var facebook: ProviderStyle {
     ProviderStyle(
       icon: Image(.fuiIcFacebook),
-      backgroundColor: Color(hex: 0x3B5998),
+      backgroundColor: Color(hex: 0x1877F2),
       contentColor: Color(hex: 0xFFFFFF)
     )
   }

@@ -175,9 +175,6 @@
         }
       }
     },
-    "as:" : {
-
-    },
     "Authentication Method" : {
 
     },
@@ -315,6 +312,12 @@
           }
         }
       }
+    },
+    "Delete Account" : {
+
+    },
+    "Delete Account?" : {
+
     },
     "DeleteAccountBody" : {
       "comment" : "Alert message body shown to confirm account deletion action.",
@@ -492,9 +495,6 @@
 
     },
     "Enter 6-digit code" : {
-
-    },
-    "Enter Code from App" : {
 
     },
     "Enter the 6-digit code from your authenticator app" : {
@@ -1097,6 +1097,9 @@
           }
         }
       }
+    },
+    "This action cannot be undone. All your data will be permanently deleted. You may need to reauthenticate to complete this action." : {
+
     },
     "TroubleGettingEmailMessage" : {
       "comment" : "Alert message displayed when user having trouble getting email.",
