@@ -417,7 +417,7 @@ final class MFAResolutionUITests: XCTestCase {
     }
   }
 
-  private func signInUser(app: XCUIApplication, email: String, password: String = "123456") throws {
+  @MainActor private func signInUser(app: XCUIApplication, email: String, password: String = "123456") throws {
     // Ensure we're in sign in flow
     let switchFlowButton = app.buttons["switch-auth-flow"]
     if switchFlowButton.exists && switchFlowButton.label.contains("Sign In") {
@@ -440,7 +440,7 @@ final class MFAResolutionUITests: XCTestCase {
     signInButton.tap()
   }
 
-  private func enrollSMSMFA(app: XCUIApplication) throws {
+  @MainActor private func enrollSMSMFA(app: XCUIApplication) throws {
     // Navigate to MFA management
     let mfaManagementButton = app.buttons["mfa-management-button"]
     XCTAssertTrue(mfaManagementButton.waitForExistence(timeout: 5))
