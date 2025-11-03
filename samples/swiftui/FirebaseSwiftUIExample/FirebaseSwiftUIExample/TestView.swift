@@ -66,6 +66,7 @@ struct TestView: View {
     .withOAuthSignIn(OAuthProviderSwift.yahoo())
     .withFacebookSignIn()
     .withEmailSignIn()
+    authService.isPresented = true
   }
 
   var body: some View {
