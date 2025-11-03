@@ -31,10 +31,10 @@ final class MFAEnrollmentUITests: XCTestCase {
   @MainActor
   func testMFAManagementButtonExistsAndIsTappable() async throws {
     let email = createEmail()
-    
+
     // Create user in test runner before launching app
     try await createTestUser(email: email)
-    
+
     let app = createTestApp(mfaEnabled: true)
     app.launch()
 
@@ -63,10 +63,10 @@ final class MFAEnrollmentUITests: XCTestCase {
   @MainActor
   func testMFAEnrollmentNavigationFromManagement() async throws {
     let email = createEmail()
-    
+
     // Create user in test runner before launching app
     try await createTestUser(email: email)
-    
+
     let app = createTestApp(mfaEnabled: true)
     app.launch()
 
@@ -98,10 +98,10 @@ final class MFAEnrollmentUITests: XCTestCase {
   @MainActor
   func testFactorTypePickerExistsAndWorks() async throws {
     let email = createEmail()
-    
+
     // Create user in test runner before launching app
     try await createTestUser(email: email)
-    
+
     let app = createTestApp(mfaEnabled: true)
     app.launch()
 
@@ -127,10 +127,10 @@ final class MFAEnrollmentUITests: XCTestCase {
   @MainActor
   func testStartEnrollmentButtonExistsAndWorks() async throws {
     let email = createEmail()
-    
+
     // Create user in test runner before launching app
     try await createTestUser(email: email)
-    
+
     let app = createTestApp(mfaEnabled: true)
     app.launch()
 
@@ -167,7 +167,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // 1) Create user in test runner before launching app (with email verification)
     let email = createEmail()
     try await createTestUser(email: email, verifyEmail: true)
-    
+
     let app = createTestApp(mfaEnabled: true)
     app.launch()
 
@@ -225,7 +225,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     verificationCodeField.tap()
     verificationCodeField.press(forDuration: 1.2)
     app.menuItems["Paste"].tap()
-    
+
     // Test resend code button exists
     let resendButton = app.buttons["resend-code-button"]
     XCTAssertTrue(resendButton.exists, "Resend code button should exist")
@@ -247,7 +247,10 @@ final class MFAEnrollmentUITests: XCTestCase {
     XCTAssertTrue(enrolledMethodsHeader.waitForExistence(timeout: 10))
 
     // Find a "Remove" button for any enrolled factor (identifier starts with "remove-factor-")
-    let removeButton = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "remove-factor-")).firstMatch
+    let removeButton = app.buttons.matching(NSPredicate(
+      format: "identifier BEGINSWITH %@",
+      "remove-factor-"
+    )).firstMatch
     XCTAssertTrue(removeButton.waitForExistence(timeout: 10))
 
     // 10) Remove the enrolled SMS factor and verify we're back to setup state
@@ -257,16 +260,15 @@ final class MFAEnrollmentUITests: XCTestCase {
     XCTAssertTrue(setupButton.waitForExistence(timeout: 15))
   }
 
-
   // MARK: - TOTP Enrollment Flow Tests
 
   @MainActor
   func testTOTPEnrollmentFlowUI() async throws {
     let email = createEmail()
-    
+
     // Create user in test runner before launching app (with email verification)
     try await createTestUser(email: email, verifyEmail: true)
-    
+
     let app = createTestApp(mfaEnabled: true)
     app.launch()
 
@@ -322,10 +324,10 @@ final class MFAEnrollmentUITests: XCTestCase {
   @MainActor
   func testErrorMessageDisplay() async throws {
     let email = createEmail()
-    
+
     // Create user in test runner before launching app
     try await createTestUser(email: email)
-    
+
     let app = createTestApp(mfaEnabled: true)
     app.launch()
 
@@ -342,10 +344,10 @@ final class MFAEnrollmentUITests: XCTestCase {
   @MainActor
   func testBackButtonNavigation() async throws {
     let email = createEmail()
-    
+
     // Create user in test runner before launching app
     try await createTestUser(email: email)
-    
+
     let app = createTestApp(mfaEnabled: true)
     app.launch()
 
@@ -372,10 +374,10 @@ final class MFAEnrollmentUITests: XCTestCase {
   @MainActor
   func testBackButtonFromMFAManagement() async throws {
     let email = createEmail()
-    
+
     // Create user in test runner before launching app
     try await createTestUser(email: email)
-    
+
     let app = createTestApp(mfaEnabled: true)
     app.launch()
 
@@ -400,6 +402,7 @@ final class MFAEnrollmentUITests: XCTestCase {
   }
 
   // MARK: - Helper Methods
+
   @MainActor
   private func signInToApp(app: XCUIApplication, email: String) throws {
     let password = "123456"
@@ -431,11 +434,15 @@ final class MFAEnrollmentUITests: XCTestCase {
     }
 
     // Wait for signed-in state
-        // Wait for signed-in state
+    // Wait for signed-in state
     let signedInText = app.staticTexts["signed-in-text"]
-    XCTAssertTrue(signedInText.waitForExistence(timeout: 30), "SignedInView should be visible after login")
+    XCTAssertTrue(
+      signedInText.waitForExistence(timeout: 30),
+      "SignedInView should be visible after login"
+    )
     XCTAssertTrue(signedInText.exists, "SignedInView should be visible after login")
   }
+
   @MainActor
   private func navigateToMFAEnrollment(app: XCUIApplication) throws {
     // Navigate to MFA management
@@ -458,12 +465,12 @@ final class MFAEnrollmentUITests: XCTestCase {
 }
 
 struct VerificationCodesResponse: Codable {
-    let verificationCodes: [VerificationCode]?
+  let verificationCodes: [VerificationCode]?
 }
 
 struct VerificationCode: Codable {
-    let phoneNumber: String
-    let code: String
+  let phoneNumber: String
+  let code: String
 }
 
 /// Retrieves the last SMS verification code from Firebase Auth Emulator
@@ -471,37 +478,64 @@ struct VerificationCode: Codable {
 /// - Returns: The verification code as a String
 /// - Throws: Error if unable to retrieve codes
 private func getLastSmsCode(specificPhone: String? = nil) async throws -> String {
-  let getSmsCodesUrl = "http://127.0.0.1:9099/emulator/v1/projects/flutterfire-e2e-tests/verificationCodes"
+  let getSmsCodesUrl =
+    "http://127.0.0.1:9099/emulator/v1/projects/flutterfire-e2e-tests/verificationCodes"
 
   guard let url = URL(string: getSmsCodesUrl) else {
-      throw NSError(domain: "getLastSmsCode", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to create URL for SMS codes endpoint"])
+    throw NSError(
+      domain: "getLastSmsCode",
+      code: -1,
+      userInfo: [NSLocalizedDescriptionKey: "Failed to create URL for SMS codes endpoint"]
+    )
   }
 
   do {
-      let (data, _) = try await URLSession.shared.data(from: url)
+    let (data, _) = try await URLSession.shared.data(from: url)
 
-      let decoder = JSONDecoder()
-      let codesResponse = try decoder.decode(VerificationCodesResponse.self, from: data)
+    let decoder = JSONDecoder()
+    let codesResponse = try decoder.decode(VerificationCodesResponse.self, from: data)
 
-      guard let codes = codesResponse.verificationCodes, !codes.isEmpty else {
-          throw NSError(domain: "getLastSmsCode", code: -1, userInfo: [NSLocalizedDescriptionKey: "No SMS verification codes found in emulator"])
+    guard let codes = codesResponse.verificationCodes, !codes.isEmpty else {
+      throw NSError(
+        domain: "getLastSmsCode",
+        code: -1,
+        userInfo: [NSLocalizedDescriptionKey: "No SMS verification codes found in emulator"]
+      )
+    }
+
+    if let specificPhone = specificPhone {
+      // Search backwards through codes for the specific phone number
+      for code in codes.reversed() {
+        if code.phoneNumber == specificPhone {
+          return code.code
+        }
       }
-
-      if let specificPhone = specificPhone {
-          // Search backwards through codes for the specific phone number
-          for code in codes.reversed() {
-              if code.phoneNumber == specificPhone {
-                  return code.code
-              }
-          }
-          throw NSError(domain: "getLastSmsCode", code: -1, userInfo: [NSLocalizedDescriptionKey: "No SMS verification code found for phone number: \(specificPhone)"])
-      } else {
-          // Return the last code in the array
-          return codes.last!.code
-      }
+      throw NSError(
+        domain: "getLastSmsCode",
+        code: -1,
+        userInfo: [
+          NSLocalizedDescriptionKey: "No SMS verification code found for phone number: \(specificPhone)",
+        ]
+      )
+    } else {
+      // Return the last code in the array
+      return codes.last!.code
+    }
   } catch let error as DecodingError {
-      throw NSError(domain: "getLastSmsCode", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to parse SMS codes response: \(error.localizedDescription)"])
+    throw NSError(
+      domain: "getLastSmsCode",
+      code: -1,
+      userInfo: [
+        NSLocalizedDescriptionKey: "Failed to parse SMS codes response: \(error.localizedDescription)",
+      ]
+    )
   } catch {
-      throw NSError(domain: "getLastSmsCode", code: -1, userInfo: [NSLocalizedDescriptionKey: "Network request failed: \(error.localizedDescription)"])
+    throw NSError(
+      domain: "getLastSmsCode",
+      code: -1,
+      userInfo: [
+        NSLocalizedDescriptionKey: "Network request failed: \(error.localizedDescription)",
+      ]
+    )
   }
 }

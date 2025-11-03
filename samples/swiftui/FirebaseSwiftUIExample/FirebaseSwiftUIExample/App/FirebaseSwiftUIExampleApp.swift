@@ -79,7 +79,6 @@ struct FirebaseSwiftUIExampleApp: App {
 
   var body: some Scene {
     WindowGroup {
-      // ContentViewSheetExample()
       if testRunner {
         TestView()
       } else {

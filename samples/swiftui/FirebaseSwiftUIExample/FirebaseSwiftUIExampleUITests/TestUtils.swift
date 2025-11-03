@@ -32,36 +32,38 @@ func dismissAlert(app: XCUIApplication) {
 // MARK: - User Creation
 
 /// Helper to create a test user in the emulator via REST API (avoids keychain issues)
-func createTestUser(email: String, password: String = "123456", verifyEmail: Bool = false) async throws {
+func createTestUser(email: String, password: String = "123456",
+                    verifyEmail: Bool = false) async throws {
   // Use Firebase Auth emulator REST API directly to avoid keychain access issues in UI tests
-  let signUpUrl = "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake-api-key"
-  
+  let signUpUrl =
+    "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake-api-key"
+
   guard let url = URL(string: signUpUrl) else {
     throw NSError(domain: "TestError", code: 1,
-                 userInfo: [NSLocalizedDescriptionKey: "Invalid emulator URL"])
+                  userInfo: [NSLocalizedDescriptionKey: "Invalid emulator URL"])
   }
-  
+
   var request = URLRequest(url: url)
   request.httpMethod = "POST"
   request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-  
+
   let body: [String: Any] = [
     "email": email,
     "password": password,
-    "returnSecureToken": true
+    "returnSecureToken": true,
   ]
-  
+
   request.httpBody = try JSONSerialization.data(withJSONObject: body)
-  
+
   let (data, response) = try await URLSession.shared.data(for: request)
-  
+
   guard let httpResponse = response as? HTTPURLResponse,
         httpResponse.statusCode == 200 else {
     let errorBody = String(data: data, encoding: .utf8) ?? "Unknown error"
     throw NSError(domain: "TestError", code: 2,
-                 userInfo: [NSLocalizedDescriptionKey: "Failed to create user: \(errorBody)"])
+                  userInfo: [NSLocalizedDescriptionKey: "Failed to create user: \(errorBody)"])
   }
-  
+
   // If email verification is requested, verify the email
   if verifyEmail {
     // Parse the response to get the idToken
@@ -81,25 +83,24 @@ func verifyEmailInEmulator(email: String,
                            emulatorHost: String = "127.0.0.1:9099") async throws {
   let base = "http://\(emulatorHost)"
 
-
   // Step 1: Trigger email verification (creates OOB code in emulator)
   var sendReq = URLRequest(
-    url: URL(string: "\(base)/identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=fake-api-key")!
+    url: URL(
+      string: "\(base)/identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=fake-api-key"
+    )!
   )
   sendReq.httpMethod = "POST"
   sendReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
   sendReq.httpBody = try JSONSerialization.data(withJSONObject: [
     "requestType": "VERIFY_EMAIL",
-    "idToken": idToken
+    "idToken": idToken,
   ])
-
 
   let (_, sendResp) = try await URLSession.shared.data(for: sendReq)
   guard let http = sendResp as? HTTPURLResponse, http.statusCode == 200 else {
     throw NSError(domain: "EmulatorError", code: 1,
                   userInfo: [NSLocalizedDescriptionKey: "Failed to send verification email"])
   }
-
 
   // Step 2: Fetch OOB codes from emulator
   let oobURL = URL(string: "\(base)/emulator/v1/projects/\(projectID)/oobCodes")!
@@ -109,7 +110,6 @@ func verifyEmailInEmulator(email: String,
                   userInfo: [NSLocalizedDescriptionKey: "Failed to fetch OOB codes"])
   }
 
-
   struct OobEnvelope: Decodable { let oobCodes: [OobItem] }
   struct OobItem: Decodable {
     let oobCode: String
@@ -118,9 +118,7 @@ func verifyEmailInEmulator(email: String,
     let creationTime: String?
   }
 
-
   let envelope = try JSONDecoder().decode(OobEnvelope.self, from: oobData)
-
 
   // Step 3: Find most recent VERIFY_EMAIL code for this email
   let iso = ISO8601DateFormatter()
@@ -135,15 +133,16 @@ func verifyEmailInEmulator(email: String,
     }
     .first
 
-
   guard let oobCode = codeItem?.oobCode else {
     throw NSError(domain: "EmulatorError", code: 3,
-                  userInfo: [NSLocalizedDescriptionKey: "No VERIFY_EMAIL OOB code found for \(email)"])
+                  userInfo: [
+                    NSLocalizedDescriptionKey: "No VERIFY_EMAIL OOB code found for \(email)",
+                  ])
   }
 
-
   // Step 4: Apply the OOB code (simulate clicking verification link)
-  let verifyURL = URL(string: "\(base)/emulator/action?mode=verifyEmail&oobCode=\(oobCode)&apiKey=fake-api-key")!
+  let verifyURL =
+    URL(string: "\(base)/emulator/action?mode=verifyEmail&oobCode=\(oobCode)&apiKey=fake-api-key")!
   let (_, verifyResp) = try await URLSession.shared.data(from: verifyURL)
   guard (verifyResp as? HTTPURLResponse)?.statusCode == 200 else {
     throw NSError(domain: "EmulatorError", code: 4,
