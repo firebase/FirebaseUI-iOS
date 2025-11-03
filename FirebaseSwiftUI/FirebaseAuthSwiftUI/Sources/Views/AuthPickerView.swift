@@ -92,6 +92,7 @@ extension AuthPickerView: View {
 
   @ViewBuilder
   var authPickerViewInternal: some View {
+    @Bindable var authService = authService
     VStack {
       if authService.authenticationState == .unauthenticated {
         authMethodPicker
@@ -101,10 +102,7 @@ extension AuthPickerView: View {
       }
     }
     .errorAlert(
-      error: Binding(
-        get: { authService.currentError },
-        set: { authService.currentError = $0 }
-      ),
+      error: $authService.currentError,
       okButtonLabel: authService.string.okButtonLabel
     )
   }

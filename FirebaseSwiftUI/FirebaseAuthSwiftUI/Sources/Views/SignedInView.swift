@@ -32,14 +32,8 @@ public struct SignedInView {
 }
 
 extension SignedInView: View {
-  private var isShowingPasswordPrompt: Binding<Bool> {
-    Binding(
-      get: { authService.passwordPrompt.isPromptingPassword },
-      set: { authService.passwordPrompt.isPromptingPassword = $0 }
-    )
-  }
-
   public var body: some View {
+    @Bindable var passwordPrompt = authService.passwordPrompt
     VStack {
       Text(authService.string.signedInTitle)
         .font(.largeTitle)
@@ -129,7 +123,7 @@ extension SignedInView: View {
       )
       .presentationDetents([.medium])
     }
-    .sheet(isPresented: isShowingPasswordPrompt) {
+    .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
       PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }
     .sheet(isPresented: $showEmailVerificationSent) {

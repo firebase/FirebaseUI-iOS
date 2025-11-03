@@ -40,14 +40,8 @@ public struct UpdatePasswordView {
 }
 
 extension UpdatePasswordView: View {
-  private var isShowingPasswordPrompt: Binding<Bool> {
-    Binding(
-      get: { authService.passwordPrompt.isPromptingPassword },
-      set: { authService.passwordPrompt.isPromptingPassword = $0 }
-    )
-  }
-
   public var body: some View {
+    @Bindable var passwordPrompt = authService.passwordPrompt
     VStack(spacing: 24) {
       AuthTextField(
         text: $password,
@@ -94,7 +88,7 @@ extension UpdatePasswordView: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .safeAreaPadding()
     .navigationTitle(authService.string.passwordRecoveryTitle)
-    .sheet(isPresented: isShowingPasswordPrompt) {
+    .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
       PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }
   }

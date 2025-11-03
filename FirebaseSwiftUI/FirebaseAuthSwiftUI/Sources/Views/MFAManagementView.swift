@@ -27,14 +27,6 @@ public struct MFAManagementView {
   @State private var enrolledFactors: [MultiFactorInfo] = []
   @State private var isLoading = false
 
-  // Present password prompt when required for reauthentication
-  private var isShowingPasswordPrompt: Binding<Bool> {
-    Binding(
-      get: { authService.passwordPrompt.isPromptingPassword },
-      set: { authService.passwordPrompt.isPromptingPassword = $0 }
-    )
-  }
-
   public init() {}
 
   private func loadEnrolledFactors() {
@@ -63,6 +55,7 @@ public struct MFAManagementView {
 
 extension MFAManagementView: View {
   public var body: some View {
+    @Bindable var passwordPrompt = authService.passwordPrompt
     VStack(spacing: 20) {
       // Title section
       VStack {
@@ -140,7 +133,8 @@ extension MFAManagementView: View {
     .onAppear {
       loadEnrolledFactors()
     }
-    .sheet(isPresented: isShowingPasswordPrompt) {
+    // Present password prompt when required for reauthentication
+    .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
       PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }
   }
