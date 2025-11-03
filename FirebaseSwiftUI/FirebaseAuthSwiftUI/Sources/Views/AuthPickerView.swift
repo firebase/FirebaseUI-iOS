@@ -154,7 +154,10 @@ extension AuthPickerView: View {
             .aspectRatio(contentMode: .fit)
             .frame(width: 100, height: 100)
           if authService.emailSignInEnabled {
-            EmailAuthView().environment(\.signInWithMergeConflictHandler, signInWithMergeConflictHandling)
+            EmailAuthView().environment(
+              \.signInWithMergeConflictHandler,
+              signInWithMergeConflictHandling
+            )
           }
           Divider()
           otherSignInOptions(proxy)

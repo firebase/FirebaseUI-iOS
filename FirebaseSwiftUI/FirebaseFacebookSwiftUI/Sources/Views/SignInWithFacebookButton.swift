@@ -39,12 +39,12 @@ extension SignInWithFacebookButton: View {
     ) {
       Task {
         if let handler = signInHandler {
-            try? await handler(authService) {
-              try await authService.signIn(facebookProvider)
-            }
-          } else {
-            try? await authService.signIn(facebookProvider)
+          try? await handler(authService) {
+            try await authService.signIn(facebookProvider)
           }
+        } else {
+          try? await authService.signIn(facebookProvider)
+        }
       }
     }
   }
