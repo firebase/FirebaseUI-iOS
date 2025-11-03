@@ -56,6 +56,15 @@ struct ContentView: View {
     .withOAuthSignIn(OAuthProviderSwift.github())
     .withOAuthSignIn(OAuthProviderSwift.microsoft())
     .withOAuthSignIn(OAuthProviderSwift.yahoo())
+    .withOAuthSignIn(
+      OAuthProviderSwift(
+        providerId: "oidc.line",
+        displayName: "Sign in with LINE",
+        buttonIcon: Image(.icLineLogo),
+        buttonBackgroundColor: .lineButton,
+        buttonForegroundColor: .white
+      )
+    )
     .withEmailSignIn()
   }
   
