@@ -34,14 +34,14 @@ private class PhoneAuthCoordinator: ObservableObject {
   @Published var verificationCode = ""
   @Published var currentError: AlertError?
   @Published var isProcessing = false
-  
+
   var continuation: CheckedContinuation<AuthCredential, Error>?
-  
+
   enum Step {
     case enterPhoneNumber
     case enterVerificationCode
   }
-  
+
   func sendVerificationCode() async {
     isProcessing = true
     do {
@@ -63,13 +63,13 @@ private class PhoneAuthCoordinator: ObservableObject {
     }
     isProcessing = false
   }
-  
+
   func verifyCodeAndComplete() async {
     isProcessing = true
     do {
       let credential = PhoneAuthProvider.provider()
         .credential(withVerificationID: verificationID, verificationCode: verificationCode)
-      
+
       isPresented = false
       continuation?.resume(returning: credential)
       continuation = nil
@@ -78,10 +78,19 @@ private class PhoneAuthCoordinator: ObservableObject {
       isProcessing = false
     }
   }
-  
+
   func cancel() {
     isPresented = false
-    continuation?.resume(throwing: AuthServiceError.signInCancelled("Phone authentication was cancelled"))
+
+    // Only throw error if user has started the flow (sent verification code)
+    // If they cancel before entering/sending phone number, dismiss silently
+    if !verificationID.isEmpty {
+      continuation?
+        .resume(throwing: AuthServiceError.signInCancelled("Phone authentication was cancelled"))
+    } else {
+      continuation?.resume(throwing: CancellationError())
+    }
+
     continuation = nil
   }
 }
@@ -92,7 +101,7 @@ private class PhoneAuthCoordinator: ObservableObject {
 private struct PhoneAuthFlowView: View {
   @StateObject var coordinator: PhoneAuthCoordinator
   @Environment(AuthService.self) private var authService
-  
+
   var body: some View {
     NavigationStack {
       Group {
@@ -109,7 +118,7 @@ private struct PhoneAuthFlowView: View {
     }
     .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
   }
-  
+
   @ToolbarContentBuilder
   var toolbar: some ToolbarContent {
     ToolbarItem(placement: .topBarTrailing) {
@@ -122,9 +131,9 @@ private struct PhoneAuthFlowView: View {
       }
     }
   }
-  
+
   // MARK: - Phone Number View
-  
+
   var phoneNumberView: some View {
     VStack(spacing: 16) {
       Text(authService.string.enterPhoneNumberPlaceholder)
@@ -173,9 +182,9 @@ private struct PhoneAuthFlowView: View {
     .padding(.horizontal)
     .errorAlert(error: $coordinator.currentError, okButtonLabel: authService.string.okButtonLabel)
   }
-  
+
   // MARK: - Verification Code View
-  
+
   var verificationCodeView: some View {
     VStack(spacing: 32) {
       VStack(spacing: 16) {
@@ -236,10 +245,10 @@ private struct PhoneAuthFlowView: View {
 
 public class PhoneProviderSwift: PhoneAuthProviderSwift {
   private var cancellables = Set<AnyCancellable>()
-  
+
   // Internal use only: Injected automatically by AuthService.signIn()
   public weak var authService: AuthService?
-  
+
   public init() {}
 
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
@@ -248,7 +257,7 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
         "AuthService not injected. This should be set automatically by AuthService.signIn()."
       )
     }
-    
+
     // Get the root view controller to present from
     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
           let rootViewController = windowScene.windows.first?.rootViewController else {
@@ -256,33 +265,33 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
         "Root view controller not available to present phone auth flow"
       )
     }
-    
+
     // Find the topmost view controller
     var topViewController = rootViewController
     while let presented = topViewController.presentedViewController {
       topViewController = presented
     }
-    
+
     // Create coordinator
     let coordinator = PhoneAuthCoordinator()
-    
+
     // Present the flow and wait for result
     return try await withCheckedThrowingContinuation { continuation in
       coordinator.continuation = continuation
-      
+
       // Create SwiftUI view with environment
       let flowView = PhoneAuthFlowView(coordinator: coordinator)
         .environment(authService)
-      
+
       let hostingController = UIHostingController(rootView: flowView)
-      
+
       // Dismiss handler - watch for presentation state changes
       coordinator.$isPresented.sink { [weak hostingController] isPresented in
         if !isPresented {
           hostingController?.dismiss(animated: true)
         }
       }.store(in: &cancellables)
-      
+
       // Present modally
       topViewController.present(hostingController, animated: true)
     }

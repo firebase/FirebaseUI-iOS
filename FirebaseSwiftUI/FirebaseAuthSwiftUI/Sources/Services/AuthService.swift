@@ -170,12 +170,13 @@ public final class AuthService {
       if let phoneProvider = provider as? PhoneAuthProviderSwift {
         phoneProvider.authService = self
       }
-      
+
       let credential = try await provider.createAuthCredential()
       let result = try await signIn(credentials: credential)
       return result
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      // Always pass the underlying error - view decides what to show
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -206,8 +207,8 @@ public final class AuthService {
     currentError = nil
   }
 
-  func updateError(title: String = "Error", message: String) {
-    currentError = AlertError(title: title, message: message)
+  func updateError(title: String = "Error", message: String, underlyingError: Error? = nil) {
+    currentError = AlertError(title: title, message: message, underlyingError: underlyingError)
   }
 
   public var shouldHandleAnonymousUpgrade: Bool {
@@ -221,7 +222,7 @@ public final class AuthService {
       currentUser = nil
       updateAuthenticationState()
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -239,7 +240,7 @@ public final class AuthService {
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -303,7 +304,7 @@ public final class AuthService {
         }
       } else {
         // Don't want error modal on MFA error so we only update here
-        updateError(message: string.localizedErrorMessage(for: error))
+        updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       }
 
       throw error
@@ -325,7 +326,7 @@ public final class AuthService {
         }
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -344,7 +345,7 @@ public extension AuthService {
         try await user.delete()
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -359,7 +360,7 @@ public extension AuthService {
         try await user.updatePassword(to: password)
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -392,7 +393,7 @@ public extension AuthService {
       }
     } catch {
       authenticationState = .unauthenticated
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -401,7 +402,7 @@ public extension AuthService {
     do {
       try await auth.sendPasswordReset(withEmail: email)
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -418,7 +419,7 @@ public extension AuthService {
         actionCodeSettings: actionCodeSettings
       )
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -451,7 +452,7 @@ public extension AuthService {
         emailLink = nil
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -520,7 +521,7 @@ public extension AuthService {
       changeRequest.photoURL = url
       try await changeRequest.commitChanges()
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -535,7 +536,7 @@ public extension AuthService {
       changeRequest.displayName = name
       try await changeRequest.commitChanges()
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -627,7 +628,7 @@ public extension AuthService {
         )
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -679,7 +680,7 @@ public extension AuthService {
 
       return verificationID
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -758,7 +759,7 @@ public extension AuthService {
       }
       currentUser = auth.currentUser
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -847,7 +848,7 @@ public extension AuthService {
 
       return freshFactors
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -917,7 +918,7 @@ public extension AuthService {
         }
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -970,7 +971,7 @@ public extension AuthService {
           .multiFactorAuth("Failed to resolve MFA challenge: \(error.localizedDescription)")
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
