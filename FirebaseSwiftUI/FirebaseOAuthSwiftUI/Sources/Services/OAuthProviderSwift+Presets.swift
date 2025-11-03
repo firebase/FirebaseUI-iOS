@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuthUIComponents
 import SwiftUI
 
 /// Preset configurations for common OAuth providers
@@ -25,9 +26,9 @@ public extension OAuthProviderSwift {
       providerId: "github.com",
       scopes: scopes,
       displayName: "Sign in with GitHub",
-      buttonIcon: Image("github_logo", bundle: .module),
-      buttonBackgroundColor: .black,
-      buttonForegroundColor: .white
+      buttonIcon: ProviderStyle.github.icon!,
+      buttonBackgroundColor: ProviderStyle.github.backgroundColor,
+      buttonForegroundColor: ProviderStyle.github.contentColor
     )
   }
 
@@ -41,9 +42,9 @@ public extension OAuthProviderSwift {
       scopes: scopes,
       customParameters: ["prompt": "consent"],
       displayName: "Sign in with Microsoft",
-      buttonIcon: Image("microsoft_logo", bundle: .module),
-      buttonBackgroundColor: Color(red: 0 / 255, green: 120 / 255, blue: 212 / 255),
-      buttonForegroundColor: .white
+      buttonIcon: ProviderStyle.microsoft.icon!,
+      buttonBackgroundColor: ProviderStyle.microsoft.backgroundColor,
+      buttonForegroundColor: ProviderStyle.microsoft.contentColor
     )
   }
 
@@ -57,9 +58,9 @@ public extension OAuthProviderSwift {
       scopes: scopes,
       customParameters: ["prompt": "consent"],
       displayName: "Sign in with Yahoo",
-      buttonIcon: Image("yahoo_logo", bundle: .module),
-      buttonBackgroundColor: Color(red: 80 / 255, green: 0 / 255, blue: 155 / 255),
-      buttonForegroundColor: .white
+      buttonIcon: ProviderStyle.yahoo.icon!,
+      buttonBackgroundColor: ProviderStyle.yahoo.backgroundColor,
+      buttonForegroundColor: ProviderStyle.yahoo.contentColor
     )
   }
 }

@@ -12,111 +12,40 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import AppTrackingTransparency
-import FacebookCore
-import FacebookLogin
 import FirebaseAuth
 import FirebaseAuthSwiftUI
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
+/// A button for signing in with Facebook
 @MainActor
 public struct SignInWithFacebookButton {
   @Environment(AuthService.self) private var authService
   @Environment(\.signInWithMergeConflictHandler) private var signInHandler
   let facebookProvider: FacebookProviderSwift
-  @State private var showCanceledAlert = false
-  @State private var limitedLogin = true
-  @State private var showUserTrackingAlert = false
-  @State private var trackingAuthorizationStatus: ATTrackingManager
-    .AuthorizationStatus = .notDetermined
 
   public init(facebookProvider: FacebookProviderSwift) {
     self.facebookProvider = facebookProvider
-    _trackingAuthorizationStatus = State(initialValue: ATTrackingManager
-      .trackingAuthorizationStatus)
-  }
-
-  private var limitedLoginBinding: Binding<Bool> {
-    Binding(
-      get: { self.limitedLogin },
-      set: { newValue in
-        if trackingAuthorizationStatus == .authorized {
-          self.limitedLogin = newValue
-        } else {
-          self.limitedLogin = true
-        }
-      }
-    )
-  }
-
-  func requestTrackingPermission() {
-    ATTrackingManager.requestTrackingAuthorization { status in
-      Task { @MainActor in
-        trackingAuthorizationStatus = status
-        if status != .authorized {
-          showUserTrackingAlert = true
-        }
-      }
-    }
   }
 }
 
 extension SignInWithFacebookButton: View {
   public var body: some View {
-    VStack {
-      Button(action: {
-        Task {
-          facebookProvider.isLimitedLogin = limitedLogin
-          if let handler = signInHandler {
+    AuthProviderButton(
+      label: authService.string.facebookLoginButtonLabel,
+      style: .facebook,
+      accessibilityId: "sign-in-with-facebook-button"
+    ) {
+      Task {
+        if let handler = signInHandler {
             try? await handler(authService) {
               try await authService.signIn(facebookProvider)
             }
           } else {
             try? await authService.signIn(facebookProvider)
           }
-        }
-      }) {
-        HStack {
-          Image(systemName: "f.circle.fill")
-            .font(.title2)
-            .foregroundColor(.white)
-          Text(authService.string.facebookLoginButtonLabel)
-            .fontWeight(.semibold)
-            .foregroundColor(.white)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color.blue)
-        .cornerRadius(8)
       }
-      .accessibilityIdentifier("sign-in-with-facebook-button")
-
-      HStack {
-        Text(authService.string.authorizeUserTrackingLabel)
-          .font(.footnote)
-          .foregroundColor(.blue)
-          .underline()
-          .onTapGesture {
-            requestTrackingPermission()
-          }
-        Toggle(isOn: limitedLoginBinding) {
-          HStack {
-            Spacer() // This will push the text to the left of the toggle
-            Text(authService.string.facebookLimitedLoginLabel)
-              .foregroundColor(.blue)
-          }
-        }
-        .toggleStyle(SwitchToggleStyle(tint: .green))
-      }
-    }
-    .alert(isPresented: $showUserTrackingAlert) {
-      Alert(
-        title: Text(authService.string.authorizeUserTrackingLabel),
-        message: Text(authService.string.facebookAuthorizeUserTrackingMessage),
-        dismissButton: .default(Text(authService.string.okButtonLabel))
-      )
     }
   }
 }

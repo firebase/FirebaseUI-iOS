@@ -13,6 +13,7 @@
 // limitations under the License.
 
 @preconcurrency import FirebaseAuth
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
@@ -28,6 +29,7 @@ public protocol AuthProviderUI {
 
 public protocol PhoneAuthProviderSwift: AuthProviderSwift {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
+  func setVerificationCode(verificationID: String, code: String)
 }
 
 public enum AuthenticationState {
@@ -41,14 +43,15 @@ public enum AuthenticationFlow {
   case signUp
 }
 
-public enum AuthView {
-  case authPicker
+public enum AuthView: Hashable {
   case passwordRecovery
   case emailLink
   case updatePassword
   case mfaEnrollment
   case mfaManagement
   case mfaResolution
+  case enterPhoneNumber
+  case enterVerificationCode(verificationID: String, fullPhoneNumber: String)
 }
 
 public enum SignInOutcome: @unchecked Sendable {
@@ -82,6 +85,24 @@ private final class AuthListenerManager {
   }
 }
 
+@Observable
+public class Navigator {
+  var routes: [AuthView] = []
+
+  public func push(_ route: AuthView) {
+    routes.append(route)
+  }
+
+  @discardableResult
+  public func pop() -> AuthView? {
+    routes.popLast()
+  }
+
+  public func clear() {
+    routes.removeAll()
+  }
+}
+
 @MainActor
 @Observable
 public final class AuthService {
@@ -96,7 +117,16 @@ public final class AuthService {
   @ObservationIgnored @AppStorage("email-link") public var emailLink: String?
   public let configuration: AuthConfiguration
   public let auth: Auth
-  public var authView: AuthView = .authPicker
+  public var isPresented: Bool = false
+  public private(set) var navigator = Navigator()
+  public var authView: AuthView? {
+    navigator.routes.last
+  }
+
+  var authViewRoutes: [AuthView] {
+    navigator.routes
+  }
+
   public let string: StringUtils
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
@@ -105,16 +135,19 @@ public final class AuthService {
   public let passwordPrompt: PasswordPromptCoordinator = .init()
   public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
-  private var pendingMFACredential: AuthCredential?
 
   // MARK: - Provider APIs
 
   private var listenerManager: AuthListenerManager?
-  public var signedInCredential: AuthCredential?
 
   var emailSignInEnabled = false
 
   private var providers: [AuthProviderUI] = []
+
+  public var currentPhoneProvider: PhoneAuthProviderSwift? {
+    providers.compactMap { $0.provider as? PhoneAuthProviderSwift }.first
+  }
+
   public func registerProvider(providerWithButton: AuthProviderUI) {
     providers.append(providerWithButton)
   }
@@ -122,6 +155,13 @@ public final class AuthService {
   public func renderButtons(spacing: CGFloat = 16) -> AnyView {
     AnyView(
       VStack(spacing: spacing) {
+        AuthProviderButton(
+          label: string.signInWithEmailLinkViewTitle,
+          style: .email,
+          accessibilityId: "sign-in-with-email-link-button"
+        ) {
+          self.navigator.push(.emailLink)
+        }
         ForEach(providers, id: \.id) { provider in
           provider.authButton()
         }
@@ -211,7 +251,6 @@ public final class AuthService {
     }
     do {
       let result = try await currentUser?.link(with: credentials)
-      signedInCredential = credentials
       updateAuthenticationState()
       return .signedIn(result)
     } catch let error as NSError {
@@ -251,7 +290,6 @@ public final class AuthService {
         return try await handleAutoUpgradeAnonymousUser(credentials: credentials)
       } else {
         let result = try await auth.signIn(with: credentials)
-        signedInCredential = result.credential ?? credentials
         updateAuthenticationState()
         return .signedIn(result)
       }
@@ -261,8 +299,6 @@ public final class AuthService {
       if error.code == AuthErrorCode.secondFactorRequired.rawValue {
         if let resolver = error
           .userInfo[AuthErrorUserInfoMultiFactorResolverKey] as? MultiFactorResolver {
-          // Preserve the original credential for use after MFA resolution
-          pendingMFACredential = credentials
           return handleMFARequiredError(resolver: resolver)
         }
       } else {
@@ -351,7 +387,6 @@ public extension AuthService {
         return try await handleAutoUpgradeAnonymousUser(credentials: credential)
       } else {
         let result = try await auth.createUser(withEmail: email, password: password)
-        signedInCredential = result.credential
         updateAuthenticationState()
         return .signedIn(result)
       }
@@ -728,11 +763,40 @@ public extension AuthService {
     }
   }
 
-  func reauthenticateCurrentUser(on user: User) async throws {
-    guard let providerId = signedInCredential?.provider else {
-      throw AuthServiceError
-        .reauthenticationRequired("Recent login required to perform this operation.")
+  /// Gets the provider ID that was used for the current sign-in session
+  private func getCurrentSignInProvider() async throws -> String {
+    guard let user = currentUser else {
+      throw AuthServiceError.noCurrentUser
     }
+
+    // Get the ID token result which contains the signInProvider claim
+    let tokenResult = try await user.getIDTokenResult(forcingRefresh: false)
+
+    // The signInProvider property tells us which provider was used for this session
+    let signInProvider = tokenResult.signInProvider
+
+    // If signInProvider is not empty, use it
+    if !signInProvider.isEmpty {
+      return signInProvider
+    }
+
+    // Fallback: if signInProvider is empty, try to infer from providerData
+    // Prefer non-password providers as they're more specific
+    let providerId = user.providerData.first(where: { $0.providerID != "password" })?.providerID
+      ?? user.providerData.first?.providerID
+
+    guard let providerId = providerId else {
+      throw AuthServiceError.reauthenticationRequired(
+        "Unable to determine sign-in provider for reauthentication"
+      )
+    }
+
+    return providerId
+  }
+
+  func reauthenticateCurrentUser(on user: User) async throws {
+    // Get the provider from the token instead of stored credential
+    let providerId = try await getCurrentSignInProvider()
 
     if providerId == EmailAuthProviderID {
       guard let email = user.email else {
@@ -815,7 +879,7 @@ public extension AuthService {
     let hints = extractMFAHints(from: resolver)
     currentMFARequired = MFARequired(hints: hints)
     currentMFAResolver = resolver
-    authView = .mfaResolution
+    navigator.push(.mfaResolution)
     return .mfaRequired(MFARequired(hints: hints))
   }
 
@@ -895,16 +959,11 @@ public extension AuthService {
 
       do {
         let result = try await resolver.resolveSignIn(with: assertion)
-
-        // After MFA resolution, result.credential is nil, so restore the original credential
-        // that was used before MFA was triggered
-        signedInCredential = result.credential ?? pendingMFACredential
         updateAuthenticationState()
 
         // Clear MFA resolution state
         currentMFARequired = nil
         currentMFAResolver = nil
-        pendingMFACredential = nil
 
       } catch {
         throw AuthServiceError

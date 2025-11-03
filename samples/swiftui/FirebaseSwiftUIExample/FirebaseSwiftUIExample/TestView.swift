@@ -19,14 +19,14 @@
 //  Created by Russell Wheatley on 23/04/2025.
 //
 
+import FirebaseAppleSwiftUI
 import FirebaseAuth
 import FirebaseAuthSwiftUI
 import FirebaseFacebookSwiftUI
 import FirebaseGoogleSwiftUI
-import FirebasePhoneAuthSwiftUI
-import FirebaseAppleSwiftUI
-import FirebaseTwitterSwiftUI
 import FirebaseOAuthSwiftUI
+import FirebasePhoneAuthSwiftUI
+import FirebaseTwitterSwiftUI
 import SwiftUI
 
 struct TestView: View {
@@ -66,9 +66,13 @@ struct TestView: View {
     .withOAuthSignIn(OAuthProviderSwift.yahoo())
     .withFacebookSignIn()
     .withEmailSignIn()
+    authService.isPresented = true
   }
 
   var body: some View {
-    AuthPickerView().environment(authService)
+    AuthPickerView {
+      Text("Hello, world!")
+    }
+    .environment(authService)
   }
 }

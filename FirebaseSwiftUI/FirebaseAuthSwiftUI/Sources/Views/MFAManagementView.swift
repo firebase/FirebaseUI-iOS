@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import FirebaseAuth
+import FirebaseCore
 import SwiftUI
 
 extension MultiFactorInfo: Identifiable {
@@ -25,14 +26,6 @@ public struct MFAManagementView {
 
   @State private var enrolledFactors: [MultiFactorInfo] = []
   @State private var isLoading = false
-
-  // Present password prompt when required for reauthentication
-  private var isShowingPasswordPrompt: Binding<Bool> {
-    Binding(
-      get: { authService.passwordPrompt.isPromptingPassword },
-      set: { authService.passwordPrompt.isPromptingPassword = $0 }
-    )
-  }
 
   public init() {}
 
@@ -56,36 +49,14 @@ public struct MFAManagementView {
   }
 
   private func navigateToEnrollment() {
-    authService.authView = .mfaEnrollment
-  }
-
-  private func goBack() {
-    authService.authView = .authPicker
+    authService.navigator.push(.mfaEnrollment)
   }
 }
 
 extension MFAManagementView: View {
   public var body: some View {
+    @Bindable var passwordPrompt = authService.passwordPrompt
     VStack(spacing: 20) {
-      // Header with manual back button
-      HStack {
-        Button(action: {
-          authService.authView = .authPicker
-        }) {
-          HStack(spacing: 4) {
-            Image(systemName: "chevron.left")
-              .font(.system(size: 17, weight: .medium))
-            Text(authService.string.backButtonLabel)
-              .font(.system(size: 17))
-          }
-          .foregroundColor(.blue)
-        }
-        .accessibilityIdentifier("back-button")
-
-        Spacer()
-      }
-      .padding(.horizontal)
-
       // Title section
       VStack {
         Text("Two-Factor Authentication")
@@ -119,10 +90,16 @@ extension MFAManagementView: View {
           .multilineTextAlignment(.center)
           .padding(.horizontal)
 
-          Button("Set Up Two-Factor Authentication") {
+          Button {
             navigateToEnrollment()
+          } label: {
+            Text("Set Up Two-Factor Authentication")
+              .padding(.vertical, 8)
+              .frame(maxWidth: .infinity)
           }
           .buttonStyle(.borderedProminent)
+          .padding([.top, .bottom], 8)
+          .frame(maxWidth: .infinity)
           .accessibilityIdentifier("setup-mfa-button")
         }
       } else {
@@ -142,18 +119,22 @@ extension MFAManagementView: View {
           Button("Add Another Method") {
             navigateToEnrollment()
           }
-          .buttonStyle(.bordered)
-          .padding(.horizontal)
+          .padding([.top, .bottom], 8)
+          .frame(maxWidth: .infinity)
+          .buttonStyle(.borderedProminent)
           .accessibilityIdentifier("add-mfa-method-button")
         }
       }
 
       Spacer()
     }
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    .safeAreaPadding()
     .onAppear {
       loadEnrolledFactors()
     }
-    .sheet(isPresented: isShowingPasswordPrompt) {
+    // Present password prompt when required for reauthentication
+    .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
       PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }
   }
@@ -222,6 +203,9 @@ private extension DateFormatter {
 }
 
 #Preview {
-  MFAManagementView()
-    .environment(AuthService())
+  FirebaseOptions.dummyConfigurationForPreview()
+  return NavigationStack {
+    MFAManagementView()
+      .environment(AuthService())
+  }
 }

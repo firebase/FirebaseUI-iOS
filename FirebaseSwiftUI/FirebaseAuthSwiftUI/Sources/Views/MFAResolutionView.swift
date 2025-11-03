@@ -90,7 +90,7 @@ public struct MFAResolutionView {
         )
         // On success, the AuthService will update the authentication state
         // and we should navigate back to the main app
-        authService.authView = .authPicker
+        authService.navigator.clear()
         isLoading = false
       } catch {
         isLoading = false
@@ -99,7 +99,7 @@ public struct MFAResolutionView {
   }
 
   private func cancelResolution() {
-    authService.authView = .authPicker
+    authService.navigator.clear()
   }
 }
 

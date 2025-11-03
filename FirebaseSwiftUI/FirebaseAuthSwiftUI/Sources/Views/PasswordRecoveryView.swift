@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
@@ -36,45 +37,17 @@ public struct PasswordRecoveryView {
 
 extension PasswordRecoveryView: View {
   public var body: some View {
-    VStack {
-      HStack {
-        Button(action: {
-          authService.authView = .authPicker
-        }) {
-          HStack(spacing: 4) {
-            Image(systemName: "chevron.left")
-              .font(.system(size: 17, weight: .medium))
-            Text(authService.string.backButtonLabel)
-              .font(.system(size: 17))
-          }
-          .foregroundColor(.blue)
+    VStack(spacing: 24) {
+      AuthTextField(
+        text: $email,
+        localizedTitle: "Send a password recovery link to your email",
+        prompt: authService.string.emailInputLabel,
+        keyboardType: .emailAddress,
+        contentType: .emailAddress,
+        leading: {
+          Image(systemName: "at")
         }
-        .accessibilityIdentifier("password-recovery-back-button")
-
-        Spacer()
-      }
-      .padding(.horizontal)
-      .padding(.top, 8)
-      Text(authService.string.passwordRecoveryTitle)
-        .font(.largeTitle)
-        .fontWeight(.bold)
-        .padding()
-        .accessibilityIdentifier("password-recovery-text")
-
-      Divider()
-
-      LabeledContent {
-        TextField(authService.string.emailInputLabel, text: $email)
-          .textInputAutocapitalization(.never)
-          .disableAutocorrection(true)
-          .submitLabel(.next)
-      } label: {
-        Image(systemName: "at")
-      }
-      .padding(.vertical, 6)
-      .background(Divider(), alignment: .bottom)
-      .padding(.bottom, 4)
-
+      )
       Button(action: {
         Task {
           await sendPasswordRecoveryEmail()
@@ -85,10 +58,12 @@ extension PasswordRecoveryView: View {
           .frame(maxWidth: .infinity)
       }
       .disabled(!CommonUtils.isValidEmail(email))
-      .padding([.top, .bottom, .horizontal], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
     }
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    .navigationTitle(authService.string.passwordRecoveryTitle)
+    .safeAreaPadding()
     .sheet(isPresented: $showSuccessSheet) {
       successSheet
     }
@@ -115,7 +90,7 @@ extension PasswordRecoveryView: View {
       Button(authService.string.okButtonLabel) {
         showSuccessSheet = false
         email = ""
-        authService.authView = .authPicker
+        authService.navigator.clear()
       }
       .padding()
     }
