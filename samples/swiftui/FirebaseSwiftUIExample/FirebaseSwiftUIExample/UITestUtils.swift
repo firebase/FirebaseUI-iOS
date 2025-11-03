@@ -13,4 +13,3 @@ public let testRunner = CommandLine.arguments.contains("--test-view-enabled")
 func signOut() throws {
   try Auth.auth().signOut()
 }
-

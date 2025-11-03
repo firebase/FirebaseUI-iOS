@@ -12,95 +12,127 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
 @MainActor
-public struct AuthPickerView {
+public struct AuthPickerView<Content: View> {
+  public init(@ViewBuilder content: @escaping () -> Content = { EmptyView() }) {
+    self.content = content
+  }
+
   @Environment(AuthService.self) private var authService
-
-  public init() {}
-
-  private func switchFlow() {
-    authService.authenticationFlow = authService
-      .authenticationFlow == .signIn ? .signUp : .signIn
-  }
-
-  @ViewBuilder
-  private var authPickerTitleView: some View {
-    if authService.authView == .authPicker {
-      Text(authService.string.authPickerTitle)
-        .font(.largeTitle)
-        .fontWeight(.bold)
-        .padding()
-    }
-  }
+  private let content: () -> Content
 }
 
 extension AuthPickerView: View {
   public var body: some View {
-    ScrollView {
-      VStack {
-        authPickerTitleView
-        if authService.authenticationState == .authenticated {
-          switch authService.authView {
-          case .mfaEnrollment:
-            MFAEnrolmentView()
-          case .mfaManagement:
-            MFAManagementView()
-          default:
-            SignedInView()
-          }
-        } else {
-          switch authService.authView {
-          case .passwordRecovery:
-            PasswordRecoveryView()
-          case .emailLink:
-            EmailLinkView()
-          case .mfaEnrollment:
-            MFAEnrolmentView()
-          case .mfaResolution:
-            MFAResolutionView()
-          case .authPicker:
-            if authService.emailSignInEnabled {
-              Text(authService.authenticationFlow == .signIn ? authService.string
-                .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
-              Divider()
-              EmailAuthView()
+    @Bindable var authService = authService
+    content()
+      .sheet(isPresented: $authService.isPresented) {
+        @Bindable var navigator = authService.navigator
+        NavigationStack(path: $navigator.routes) {
+          authPickerViewInternal
+            .navigationTitle(authService.authenticationState == .unauthenticated ? authService
+              .string.authPickerTitle : "")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+              toolbar
             }
-            VStack {
-              authService.renderButtons()
-            }.padding(.horizontal)
-            if authService.emailSignInEnabled {
-              Divider()
-              HStack {
-                Text(authService
-                  .authenticationFlow == .signIn ? authService.string.dontHaveAnAccountYetLabel :
-                  authService.string.alreadyHaveAnAccountLabel)
-                Button(action: {
-                  withAnimation {
-                    switchFlow()
-                  }
-                }) {
-                  Text(authService.authenticationFlow == .signUp ? authService.string
-                    .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.blue)
-                }.accessibilityIdentifier("switch-auth-flow")
+            .navigationDestination(for: AuthView.self) { view in
+              switch view {
+              case AuthView.passwordRecovery:
+                PasswordRecoveryView()
+              case AuthView.emailLink:
+                EmailLinkView()
+              case AuthView.updatePassword:
+                UpdatePasswordView()
+              case AuthView.mfaEnrollment:
+                MFAEnrolmentView()
+              case AuthView.mfaManagement:
+                MFAManagementView()
+              case AuthView.mfaResolution:
+                MFAResolutionView()
+              case AuthView.enterPhoneNumber:
+                if let phoneProvider = authService.currentPhoneProvider {
+                  EnterPhoneNumberView(phoneProvider: phoneProvider)
+                } else {
+                  EmptyView()
+                }
+              case let .enterVerificationCode(verificationID, fullPhoneNumber):
+                if let phoneProvider = authService.currentPhoneProvider {
+                  EnterVerificationCodeView(
+                    verificationID: verificationID,
+                    fullPhoneNumber: fullPhoneNumber,
+                    phoneProvider: phoneProvider
+                  )
+                } else {
+                  EmptyView()
+                }
               }
             }
-            PrivacyTOCsView(displayMode: .footer)
-          default:
-            // TODO: - possibly refactor this, see: https://github.com/firebase/FirebaseUI-iOS/pull/1259#discussion_r2105473437
-            EmptyView()
-          }
+        }
+        .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
+      }
+  }
+
+  @ToolbarContentBuilder
+  var toolbar: some ToolbarContent {
+    ToolbarItem(placement: .topBarTrailing) {
+      if !authService.configuration.shouldHideCancelButton {
+        Button {
+          authService.isPresented = false
+        } label: {
+          Image(systemName: "xmark")
         }
       }
     }
-    .errorAlert(error: Binding(
-      get: { authService.currentError },
-      set: { authService.currentError = $0 }
-    ), okButtonLabel: authService.string.okButtonLabel)
+  }
+
+  @ViewBuilder
+  var authPickerViewInternal: some View {
+    @Bindable var authService = authService
+    VStack {
+      if authService.authenticationState == .unauthenticated {
+        authMethodPicker
+          .safeAreaPadding()
+      } else {
+        SignedInView()
+      }
+    }
+    .errorAlert(
+      error: $authService.currentError,
+      okButtonLabel: authService.string.okButtonLabel
+    )
+  }
+
+  @ViewBuilder
+  var authMethodPicker: some View {
+    GeometryReader { proxy in
+      ScrollView {
+        VStack(spacing: 24) {
+          Image(Assets.firebaseAuthLogo)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 100, height: 100)
+          if authService.emailSignInEnabled {
+            EmailAuthView()
+          }
+          Divider()
+          otherSignInOptions(proxy)
+          PrivacyTOCsView(displayMode: .full)
+        }
+      }
+    }
+  }
+
+  @ViewBuilder
+  func otherSignInOptions(_ proxy: GeometryProxy) -> some View {
+    VStack {
+      authService.renderButtons()
+    }
+    .padding(.horizontal, proxy.size.width * 0.18)
   }
 }
 

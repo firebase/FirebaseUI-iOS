@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import FirebaseAuth
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
@@ -35,63 +36,53 @@ public struct EmailLinkView {
 
 extension EmailLinkView: View {
   public var body: some View {
-    VStack {
-      HStack {
-        Button(action: {
-          authService.authView = .authPicker
-        }) {
-          HStack(spacing: 4) {
-            Image(systemName: "chevron.left")
-              .font(.system(size: 17, weight: .medium))
-            Text(authService.string.backButtonLabel)
-              .font(.system(size: 17))
-          }
-          .foregroundColor(.blue)
+    VStack(spacing: 24) {
+      AuthTextField(
+        text: $email,
+        localizedTitle: "Send a sign-in link to your email",
+        prompt: authService.string.emailInputLabel,
+        keyboardType: .emailAddress,
+        contentType: .emailAddress,
+        leading: {
+          Image(systemName: "at")
         }
-        .accessibilityIdentifier("email-link-back-button")
-
-        Spacer()
-      }
-      .padding(.horizontal)
-      .padding(.top, 8)
-      Text(authService.string.signInWithEmailLinkViewTitle)
-        .accessibilityIdentifier("email-link-title-text")
-      LabeledContent {
-        TextField(authService.string.emailInputLabel, text: $email)
-          .textInputAutocapitalization(.never)
-          .disableAutocorrection(true)
-          .submitLabel(.next)
-      } label: {
-        Image(systemName: "at")
-      }.padding(.vertical, 6)
-        .background(Divider(), alignment: .bottom)
-        .padding(.bottom, 4)
-      Button(action: {
+      )
+      Button {
         Task {
           await sendEmailLink()
           authService.emailLink = email
         }
-      }) {
+      } label: {
         Text(authService.string.sendEmailLinkButtonLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
+      .buttonStyle(.borderedProminent)
       .disabled(!CommonUtils.isValidEmail(email))
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
-      .buttonStyle(.borderedProminent)
-      Spacer()
     }
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    .navigationTitle(authService.string.signInWithEmailLinkViewTitle)
+    .safeAreaPadding()
     .sheet(isPresented: $showModal) {
-      VStack {
+      VStack(spacing: 24) {
         Text(authService.string.signInWithEmailLinkViewMessage)
-          .padding()
-        Button(authService.string.okButtonLabel) {
+          .font(.headline)
+        Button {
           showModal = false
+        } label: {
+          Text(authService.string.okButtonLabel)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
         }
-        .padding()
+        .buttonStyle(.borderedProminent)
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity)
       }
-      .padding()
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+      .safeAreaPadding()
+      .presentationDetents([.medium])
     }
     .onOpenURL { url in
       Task {

@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import FirebaseAuthSwiftUI
+import FirebaseAuthUIComponents
 import SwiftUI
 
 /// A button for signing in with Twitter/X
@@ -27,27 +28,14 @@ public struct SignInWithTwitterButton {
 
 extension SignInWithTwitterButton: View {
   public var body: some View {
-    Button(action: {
+    AuthProviderButton(
+      label: "Sign in with X",
+      style: .twitter,
+      accessibilityId: "sign-in-with-twitter-button"
+    ) {
       Task {
         try? await authService.signIn(provider)
       }
-    }) {
-      HStack {
-        Image("twitter_logo", bundle: .module)
-          .resizable()
-          .renderingMode(.template)
-          .scaledToFit()
-          .frame(width: 24, height: 24)
-          .foregroundColor(.white)
-        Text("Sign in with X")
-          .fontWeight(.semibold)
-          .foregroundColor(.white)
-      }
-      .frame(maxWidth: .infinity, alignment: .leading)
-      .padding()
-      .background(Color.black)
-      .cornerRadius(8)
     }
-    .accessibilityIdentifier("sign-in-with-twitter-button")
   }
 }

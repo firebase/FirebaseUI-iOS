@@ -19,6 +19,9 @@ import SwiftUI
 public typealias VerificationID = String
 
 public class PhoneProviderSwift: PhoneAuthProviderSwift {
+  private var verificationID: String?
+  private var verificationCode: String?
+
   public init() {}
 
   @MainActor public func verifyPhoneNumber(phoneNumber: String) async throws -> VerificationID {
@@ -34,34 +37,19 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
     }
   }
 
-  // Present phone auth UI and wait for user to complete the flow
+  public func setVerificationCode(verificationID: String, code: String) {
+    self.verificationID = verificationID
+    verificationCode = code
+  }
+
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
-    guard let presentingViewController = await (UIApplication.shared.connectedScenes
-      .first as? UIWindowScene)?.windows.first?.rootViewController else {
-      throw AuthServiceError
-        .rootViewControllerNotFound(
-          "Root View controller is not available to present Phone auth View."
-        )
+    guard let verificationID = verificationID,
+          let verificationCode = verificationCode else {
+      throw AuthServiceError.providerAuthenticationFailed("Verification ID or code not set")
     }
 
-    return try await withCheckedThrowingContinuation { continuation in
-      let phoneAuthView = PhoneAuthView(phoneProvider: self) { result in
-        switch result {
-        case let .success(verificationID, verificationCode):
-          // Create the credential here
-          let credential = PhoneAuthProvider.provider()
-            .credential(withVerificationID: verificationID, verificationCode: verificationCode)
-          continuation.resume(returning: credential)
-        case let .failure(error):
-          continuation.resume(throwing: error)
-        }
-      }
-
-      let hostingController = UIHostingController(rootView: phoneAuthView)
-      hostingController.modalPresentationStyle = .formSheet
-
-      presentingViewController.present(hostingController, animated: true)
-    }
+    return PhoneAuthProvider.provider()
+      .credential(withVerificationID: verificationID, verificationCode: verificationCode)
   }
 }
 

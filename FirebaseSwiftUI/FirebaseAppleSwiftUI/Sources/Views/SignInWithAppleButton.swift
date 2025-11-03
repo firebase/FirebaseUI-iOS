@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import FirebaseAuthSwiftUI
+import FirebaseAuthUIComponents
 import SwiftUI
 
 /// A button for signing in with Apple
@@ -27,27 +28,14 @@ public struct SignInWithAppleButton {
 
 extension SignInWithAppleButton: View {
   public var body: some View {
-    Button(action: {
+    AuthProviderButton(
+      label: "Sign in with Apple",
+      style: .apple,
+      accessibilityId: "sign-in-with-apple-button"
+    ) {
       Task {
         try? await authService.signIn(provider)
       }
-    }) {
-      HStack {
-        Image(systemName: "apple.logo")
-          .resizable()
-          .renderingMode(.template)
-          .scaledToFit()
-          .frame(width: 24, height: 24)
-          .foregroundColor(.white)
-        Text("Sign in with Apple")
-          .fontWeight(.semibold)
-          .foregroundColor(.white)
-      }
-      .frame(maxWidth: .infinity, alignment: .leading)
-      .padding()
-      .background(Color.black)
-      .cornerRadius(8)
     }
-    .accessibilityIdentifier("sign-in-with-apple-button")
   }
 }

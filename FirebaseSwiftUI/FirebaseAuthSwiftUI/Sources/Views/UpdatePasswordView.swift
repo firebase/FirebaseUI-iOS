@@ -1,0 +1,103 @@
+// Copyright 2025 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//
+//  UpdatePassword.swift
+//  FirebaseUI
+//
+//  Created by Russell Wheatley on 24/04/2025.
+//
+import FirebaseAuthUIComponents
+import FirebaseCore
+import SwiftUI
+
+private enum FocusableField: Hashable {
+  case password
+  case confirmPassword
+}
+
+@MainActor
+public struct UpdatePasswordView {
+  @Environment(AuthService.self) private var authService
+  @State private var password = ""
+  @State private var confirmPassword = ""
+
+  @FocusState private var focus: FocusableField?
+  private var isValid: Bool {
+    !password.isEmpty && password == confirmPassword
+  }
+}
+
+extension UpdatePasswordView: View {
+  public var body: some View {
+    @Bindable var passwordPrompt = authService.passwordPrompt
+    VStack(spacing: 24) {
+      AuthTextField(
+        text: $password,
+        localizedTitle: "Type new password",
+        prompt: authService.string.passwordInputLabel,
+        contentType: .password,
+        sensitive: true,
+        leading: {
+          Image(systemName: "lock")
+        }
+      )
+      .submitLabel(.go)
+      .focused($focus, equals: .password)
+
+      AuthTextField(
+        text: $confirmPassword,
+        localizedTitle: "Retype new password",
+        prompt: authService.string.confirmPasswordInputLabel,
+        contentType: .password,
+        sensitive: true,
+        leading: {
+          Image(systemName: "lock")
+        }
+      )
+      .submitLabel(.go)
+      .focused($focus, equals: .confirmPassword)
+
+      Button(action: {
+        Task {
+          try await authService.updatePassword(to: confirmPassword)
+          authService.navigator.clear()
+        }
+      }, label: {
+        Text(authService.string.updatePasswordButtonLabel)
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
+
+      })
+      .disabled(!isValid)
+      .padding([.top, .bottom], 8)
+      .frame(maxWidth: .infinity)
+      .buttonStyle(.borderedProminent)
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    .safeAreaPadding()
+    .navigationTitle(authService.string.passwordRecoveryTitle)
+    .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
+      PasswordPromptSheet(coordinator: authService.passwordPrompt)
+    }
+  }
+}
+
+#Preview {
+  FirebaseOptions.dummyConfigurationForPreview()
+  return NavigationStack {
+    UpdatePasswordView()
+      .environment(AuthService())
+  }
+}

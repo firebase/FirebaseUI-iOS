@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import FirebaseAuthSwiftUI
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
@@ -28,19 +29,13 @@ public struct PhoneAuthButtonView {
 
 extension PhoneAuthButtonView: View {
   public var body: some View {
-    Button(action: {
-      Task {
-        try await authService.signIn(phoneProvider)
-      }
-    }) {
-      Label("Sign in with Phone", systemImage: "phone.fill")
-        .foregroundColor(.white)
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.green.opacity(0.8)) // Light green
-        .cornerRadius(8)
+    AuthProviderButton(
+      label: "Sign in with Phone",
+      style: .phone,
+      accessibilityId: "sign-in-with-phone-button"
+    ) {
+      authService.navigator.push(.enterPhoneNumber)
     }
-    .accessibilityIdentifier("sign-in-with-phone-button")
   }
 }
 

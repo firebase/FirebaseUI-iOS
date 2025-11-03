@@ -217,14 +217,14 @@ public class StringUtils {
 
   /// Account settings - send email verification label
   /// found in:
-  /// VerifyEmailView
+  /// SignedInView
   public var sendEmailVerificationButtonLabel: String {
     return localizedString(for: "Verify email address?")
   }
 
   /// Account settings - verify email sheet message
   /// found in:
-  /// VerifyEmailView
+  /// SignedInView
   public var verifyEmailSheetMessage: String {
     return localizedString(for: "Verification email sent")
   }
@@ -321,6 +321,55 @@ public class StringUtils {
   /// - PhoneAuthButtonView
   public var enterPhoneNumberLabel: String {
     return localizedString(for: "Enter phone number")
+  }
+
+  /// Phone provider
+  /// found in:
+  /// - PhoneAuthView
+  public var phoneSignInTitle: String {
+    return localizedString(for: "Sign in with Phone")
+  }
+
+  /// Phone provider
+  /// found in:
+  /// - PhoneAuthView
+  public var enterPhoneNumberPlaceholder: String {
+    return localizedString(for: "Enter phone number")
+  }
+
+  /// Phone provider
+  /// found in:
+  /// - PhoneAuthView
+  public var sendCodeButtonLabel: String {
+    return localizedString(for: "Send Code")
+  }
+
+  /// Phone provider
+  /// found in:
+  /// - PhoneAuthView
+  public var processingLabel: String {
+    return localizedString(for: "Processing...")
+  }
+
+  /// Phone provider
+  /// found in:
+  /// - PhoneAuthView
+  public var enterVerificationCodeTitle: String {
+    return localizedString(for: "Enter Verification Code")
+  }
+
+  /// Phone provider
+  /// found in:
+  /// - PhoneAuthView
+  public var verificationCodePlaceholder: String {
+    return localizedString(for: "Verification Code")
+  }
+
+  /// Phone provider
+  /// found in:
+  /// - PhoneAuthView
+  public var verifyAndSignInButtonLabel: String {
+    return localizedString(for: "Verify and Sign In")
   }
 
   /// Phone provider

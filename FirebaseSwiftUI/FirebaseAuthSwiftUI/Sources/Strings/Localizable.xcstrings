@@ -4,6 +4,12 @@
     "%@" : {
 
     },
+    "••••••%@" : {
+
+    },
+    "Account: %@" : {
+
+    },
     "AccountDisabledError" : {
       "comment" : "Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "migrated",
@@ -27,6 +33,12 @@
           }
         }
       }
+    },
+    "Add an extra layer of security to your account" : {
+
+    },
+    "Add Another Method" : {
+
     },
     "AddPasswordAlertMessage" : {
       "comment" : "Alert message shown when adding account password.",
@@ -163,6 +175,12 @@
         }
       }
     },
+    "Authentication Method" : {
+
+    },
+    "Authenticator App" : {
+
+    },
     "AuthPickerTitle" : {
       "comment" : "Title for auth picker screen.",
       "extractionState" : "stale",
@@ -170,7 +188,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Welcome"
+            "value" : "Sign in with Firebase"
           }
         }
       }
@@ -214,6 +232,15 @@
         }
       }
     },
+    "Change number" : {
+
+    },
+    "Choose Authentication Method" : {
+
+    },
+    "Choose verification method:" : {
+
+    },
     "ChoosePassword" : {
       "comment" : "Placeholder for the password text field in a sign up form.",
       "extractionState" : "manual",
@@ -237,6 +264,15 @@
           }
         }
       }
+    },
+    "Complete Setup" : {
+
+    },
+    "Complete Sign-In" : {
+
+    },
+    "Complete sign-in with your second factor" : {
+
     },
     "ConfirmEmail" : {
       "comment" : "Title of confirm email label.",
@@ -262,6 +298,9 @@
         }
       }
     },
+    "Copied to clipboard!" : {
+
+    },
     "Delete" : {
       "comment" : "Text of Delete action button.",
       "extractionState" : "manual",
@@ -273,6 +312,12 @@
           }
         }
       }
+    },
+    "Delete Account" : {
+
+    },
+    "Delete Account?" : {
+
     },
     "DeleteAccountBody" : {
       "comment" : "Alert message body shown to confirm account deletion action.",
@@ -321,6 +366,9 @@
           }
         }
       }
+    },
+    "Display Name" : {
+
     },
     "Don't have an account yet?" : {
       "localizations" : {
@@ -440,6 +488,24 @@
         }
       }
     },
+    "Enrolled Methods" : {
+
+    },
+    "Enrolled: %@" : {
+
+    },
+    "Enter 6-digit code" : {
+
+    },
+    "Enter the 6-digit code from your authenticator app" : {
+
+    },
+    "Enter Verification Code" : {
+
+    },
+    "Enter Your Phone Number" : {
+
+    },
     "EnterYourEmail" : {
       "comment" : "Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "manual",
@@ -507,7 +573,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Forgot password?"
+            "value" : "Send password recovery email"
           }
         }
       }
@@ -523,6 +589,9 @@
           }
         }
       }
+    },
+    "Get Started" : {
+
     },
     "InvalidEmailError" : {
       "comment" : "Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars.",
@@ -558,6 +627,21 @@
         }
       }
     },
+    "Manage Two-Factor Authentication" : {
+
+    },
+    "Manage your authentication methods" : {
+
+    },
+    "Manual Entry Key:" : {
+
+    },
+    "MFA is not enabled in the current configuration. Please contact your administrator." : {
+
+    },
+    "Multi-Factor Authentication Disabled" : {
+
+    },
     "Name" : {
       "comment" : "Label next to a name text field.",
       "extractionState" : "manual",
@@ -581,6 +665,15 @@
           }
         }
       }
+    },
+    "No Authentication Methods" : {
+
+    },
+    "No Authentication Methods Available" : {
+
+    },
+    "No MFA methods are configured as allowed. Please contact your administrator." : {
+
     },
     "OK" : {
       "comment" : "OK button title.",
@@ -653,6 +746,9 @@
           }
         }
       }
+    },
+    "Phone Number" : {
+
     },
     "PlaceholderChosePassword" : {
       "comment" : "Placeholder of secret input cell when user changes password.",
@@ -798,6 +894,9 @@
         }
       }
     },
+    "Remove" : {
+
+    },
     "Resend" : {
       "comment" : "Resend button title.",
       "extractionState" : "manual",
@@ -809,6 +908,9 @@
           }
         }
       }
+    },
+    "Resend Code" : {
+
     },
     "Save" : {
       "comment" : "Save button title.",
@@ -822,6 +924,12 @@
         }
       }
     },
+    "Scan QR Code" : {
+
+    },
+    "Scan with your authenticator app or tap to open directly" : {
+
+    },
     "Send" : {
       "comment" : "Send button title.",
       "extractionState" : "manual",
@@ -834,6 +942,9 @@
         }
       }
     },
+    "Send Code" : {
+
+    },
     "SendEmailSignInLinkButtonLabel" : {
       "comment" : "Button label for sending email sign-in link",
       "extractionState" : "manual",
@@ -845,6 +956,12 @@
           }
         }
       }
+    },
+    "Set Up Two-Factor Authentication" : {
+
+    },
+    "Set up two-factor authentication to add an extra layer of security to your account." : {
+
     },
     "Sign up" : {
 
@@ -945,6 +1062,18 @@
         }
       }
     },
+    "SMS Authentication" : {
+
+    },
+    "SMS Verification" : {
+
+    },
+    "SMS: %@" : {
+
+    },
+    "Tap to open in authenticator app" : {
+
+    },
     "TermsOfService" : {
       "comment" : "Text linked to a web page with the Terms of Service content.",
       "extractionState" : "manual",
@@ -969,6 +1098,9 @@
         }
       }
     },
+    "This action cannot be undone. All your data will be permanently deleted. You may need to reauthenticate to complete this action." : {
+
+    },
     "TroubleGettingEmailMessage" : {
       "comment" : "Alert message displayed when user having trouble getting email.",
       "extractionState" : "manual",
@@ -992,6 +1124,12 @@
           }
         }
       }
+    },
+    "Two-Factor Authentication" : {
+
+    },
+    "Unable to generate QR Code" : {
+
     },
     "UnlinkAction" : {
       "comment" : "Button title for unlinking account action.",
@@ -1088,6 +1226,9 @@
         }
       }
     },
+    "Use an authenticator app like Google Authenticator or Authy to generate verification codes." : {
+
+    },
     "UserNotFoundError" : {
       "comment" : "Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "migrated",
@@ -1099,6 +1240,9 @@
           }
         }
       }
+    },
+    "Verification Code" : {
+
     },
     "Verify email address?" : {
       "comment" : "Label for sending email verification to user.",
@@ -1122,6 +1266,21 @@
           }
         }
       }
+    },
+    "We sent a code to %@" : {
+
+    },
+    "We'll send a code to ••••••%@" : {
+
+    },
+    "We'll send a verification code to this number" : {
+
+    },
+    "We'll send a verification code to your phone" : {
+
+    },
+    "We'll send a verification code to your phone number each time you sign in." : {
+
     },
     "WeakPasswordError" : {
       "comment" : "Error message displayed when the password is too weak.",

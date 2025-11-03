@@ -29,6 +29,8 @@
 	<string>16dbbdf0cfb309034a6ad98ac2a21688</string>
 	<key>FacebookDisplayName</key>
 	<string>Firebase Swift UI App</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<true/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -39,7 +41,5 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
-  <key>FirebaseAppDelegateProxyEnabled</key>
-  <true/>
 </dict>
 </plist>

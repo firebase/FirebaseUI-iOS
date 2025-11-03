@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import FirebaseAuthSwiftUI
+import FirebaseAuthUIComponents
 import SwiftUI
 
 /// A generic OAuth sign-in button that adapts to any provider's configuration
@@ -33,29 +34,26 @@ extension GenericOAuthButton: View {
           .foregroundColor(.red)
       )
     }
+
+    // Create custom style from provider configuration
+    var resolvedStyle: ProviderStyle {
+      ProviderStyle(
+        icon: oauthProvider.buttonIcon,
+        backgroundColor: oauthProvider.buttonBackgroundColor,
+        contentColor: oauthProvider.buttonForegroundColor
+      )
+    }
+
     return AnyView(
-      Button(action: {
+      AuthProviderButton(
+        label: oauthProvider.displayName,
+        style: resolvedStyle,
+        accessibilityId: "sign-in-with-\(oauthProvider.providerId)-button"
+      ) {
         Task {
           try await authService.signIn(provider)
         }
-      }) {
-        HStack {
-          oauthProvider.buttonIcon
-            .resizable()
-            .renderingMode(.template)
-            .scaledToFit()
-            .frame(width: 24, height: 24)
-            .foregroundColor(oauthProvider.buttonForegroundColor)
-          Text(oauthProvider.displayName)
-            .fontWeight(.semibold)
-            .foregroundColor(oauthProvider.buttonForegroundColor)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .background(oauthProvider.buttonBackgroundColor)
-        .cornerRadius(8)
       }
-      .accessibilityIdentifier("sign-in-with-\(oauthProvider.providerId)-button")
     )
   }
 }
