@@ -70,6 +70,9 @@ struct TestView: View {
   }
 
   var body: some View {
-    AuthPickerView().environment(authService)
+    AuthPickerView(){
+      Text("Hello, world!")
+    }
+    .environment(authService)
   }
 }

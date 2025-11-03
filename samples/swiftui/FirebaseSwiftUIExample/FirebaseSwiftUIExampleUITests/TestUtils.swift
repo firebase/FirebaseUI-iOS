@@ -12,7 +12,7 @@ func createEmail() -> String {
 // MARK: - App Configuration
 
 /// Creates and configures an XCUIApplication with default test launch arguments
-func createTestApp(mfaEnabled: Bool = false) -> XCUIApplication {
+@MainActor func createTestApp(mfaEnabled: Bool = false) -> XCUIApplication {
   let app = XCUIApplication()
   app.launchArguments.append("--test-view-enabled")
   if mfaEnabled {
@@ -23,7 +23,7 @@ func createTestApp(mfaEnabled: Bool = false) -> XCUIApplication {
 
 // MARK: - Alert Handling
 
-func dismissAlert(app: XCUIApplication) {
+@MainActor func dismissAlert(app: XCUIApplication) {
   if app.scrollViews.otherElements.buttons["Not Now"].waitForExistence(timeout: 2) {
     app.scrollViews.otherElements.buttons["Not Now"].tap()
   }
