@@ -22,7 +22,11 @@ struct ErrorAlertModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
       .alert(isPresented: Binding<Bool>(
-        get: { error != nil },
+        get: {
+          // View layer decides: Don't show alert for CancellationError
+          guard let error = error else { return false }
+          return !(error.underlyingError is CancellationError)
+        },
         set: { if !$0 { error = nil } }
       )) {
         Alert(
@@ -48,9 +52,11 @@ public struct AlertError: Identifiable {
   public let id = UUID()
   public let title: String
   public let message: String
+  public let underlyingError: Error?
 
-  public init(title: String = "Error", message: String) {
+  public init(title: String = "Error", message: String, underlyingError: Error? = nil) {
     self.title = title
     self.message = message
+    self.underlyingError = underlyingError
   }
 }

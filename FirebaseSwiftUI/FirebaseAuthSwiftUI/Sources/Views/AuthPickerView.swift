@@ -16,6 +16,59 @@ import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
+// MARK: - Merge Conflict Handling
+
+/// Helper function to handle sign-in with automatic merge conflict resolution.
+///
+/// This function attempts to sign in with the provided action. If a merge conflict occurs
+/// (when an anonymous user is being upgraded and the credential is already associated with
+/// an existing account), it automatically signs out the anonymous user and signs in with
+/// the existing account's credential.
+///
+/// - Parameters:
+///   - authService: The AuthService instance to use for sign-in operations
+///   - signInAction: An async closure that performs the sign-in operation
+/// - Returns: The SignInOutcome from the successful sign-in
+/// - Throws: Re-throws any errors except accountMergeConflict (which is handled internally)
+@MainActor
+public func signInWithMergeConflictHandling(authService: AuthService,
+                                            signInAction: () async throws
+                                              -> SignInOutcome) async throws -> SignInOutcome {
+  do {
+    return try await signInAction()
+  } catch let error as AuthServiceError {
+    if case let .accountMergeConflict(context) = error {
+      // The anonymous account conflicts with an existing account
+      // Sign out the anonymous user
+      try await authService.signOut()
+
+      // Sign in with the existing account's credential
+      // This works because shouldHandleAnonymousUpgrade is now false after sign out
+      return try await authService.signIn(credentials: context.credential)
+    }
+    throw error
+  }
+}
+
+// MARK: - Environment Key for Sign-In Handler
+
+/// Environment key for a sign-in handler that includes merge conflict resolution
+private struct SignInHandlerKey: EnvironmentKey {
+  static let defaultValue: (@MainActor (AuthService, () async throws -> SignInOutcome) async throws
+    -> SignInOutcome)? = nil
+}
+
+public extension EnvironmentValues {
+  /// A sign-in handler that automatically handles merge conflicts for anonymous user upgrades.
+  /// When set in the environment, views should use this handler to wrap their sign-in calls.
+  var signInWithMergeConflictHandler: (@MainActor (AuthService,
+                                                   () async throws -> SignInOutcome) async throws
+      -> SignInOutcome)? {
+    get { self[SignInHandlerKey.self] }
+    set { self[SignInHandlerKey.self] = newValue }
+  }
+}
+
 @MainActor
 public struct AuthPickerView<Content: View> {
   public init(@ViewBuilder content: @escaping () -> Content = { EmptyView() }) {
@@ -54,22 +107,6 @@ extension AuthPickerView: View {
                 MFAManagementView()
               case AuthView.mfaResolution:
                 MFAResolutionView()
-              case AuthView.enterPhoneNumber:
-                if let phoneProvider = authService.currentPhoneProvider {
-                  EnterPhoneNumberView(phoneProvider: phoneProvider)
-                } else {
-                  EmptyView()
-                }
-              case let .enterVerificationCode(verificationID, fullPhoneNumber):
-                if let phoneProvider = authService.currentPhoneProvider {
-                  EnterVerificationCodeView(
-                    verificationID: verificationID,
-                    fullPhoneNumber: fullPhoneNumber,
-                    phoneProvider: phoneProvider
-                  )
-                } else {
-                  EmptyView()
-                }
               }
             }
         }
@@ -117,7 +154,10 @@ extension AuthPickerView: View {
             .aspectRatio(contentMode: .fit)
             .frame(width: 100, height: 100)
           if authService.emailSignInEnabled {
-            EmailAuthView()
+            EmailAuthView().environment(
+              \.signInWithMergeConflictHandler,
+              signInWithMergeConflictHandling
+            )
           }
           Divider()
           otherSignInOptions(proxy)
@@ -133,6 +173,7 @@ extension AuthPickerView: View {
       authService.renderButtons()
     }
     .padding(.horizontal, proxy.size.width * 0.18)
+    .environment(\.signInWithMergeConflictHandler, signInWithMergeConflictHandling)
   }
 }
 

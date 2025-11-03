@@ -20,6 +20,7 @@ import SwiftUI
 @MainActor
 public struct PhoneAuthButtonView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.signInWithMergeConflictHandler) private var signInHandler
   let phoneProvider: PhoneAuthProviderSwift
 
   public init(phoneProvider: PhoneAuthProviderSwift) {
@@ -34,7 +35,15 @@ extension PhoneAuthButtonView: View {
       style: .phone,
       accessibilityId: "sign-in-with-phone-button"
     ) {
-      authService.navigator.push(.enterPhoneNumber)
+      Task {
+        if let handler = signInHandler {
+          try? await handler(authService) {
+            try await authService.signIn(phoneProvider)
+          }
+        } else {
+          try? await authService.signIn(phoneProvider)
+        }
+      }
     }
   }
 }

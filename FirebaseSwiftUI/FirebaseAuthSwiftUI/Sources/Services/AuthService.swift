@@ -27,9 +27,10 @@ public protocol AuthProviderUI {
   var provider: AuthProviderSwift { get }
 }
 
-public protocol PhoneAuthProviderSwift: AuthProviderSwift {
-  @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
-  func setVerificationCode(verificationID: String, code: String)
+public protocol PhoneAuthProviderSwift: AuthProviderSwift, AnyObject {
+  // Phone auth provider that presents its own UI flow in createAuthCredential()
+  // Internal use only: AuthService will be injected automatically by AuthService.signIn()
+  var authService: AuthService? { get set }
 }
 
 public enum AuthenticationState {
@@ -50,8 +51,6 @@ public enum AuthView: Hashable {
   case mfaEnrollment
   case mfaManagement
   case mfaResolution
-  case enterPhoneNumber
-  case enterVerificationCode(verificationID: String, fullPhoneNumber: String)
 }
 
 public enum SignInOutcome: @unchecked Sendable {
@@ -144,10 +143,6 @@ public final class AuthService {
 
   private var providers: [AuthProviderUI] = []
 
-  public var currentPhoneProvider: PhoneAuthProviderSwift? {
-    providers.compactMap { $0.provider as? PhoneAuthProviderSwift }.first
-  }
-
   public func registerProvider(providerWithButton: AuthProviderUI) {
     providers.append(providerWithButton)
   }
@@ -171,11 +166,17 @@ public final class AuthService {
 
   public func signIn(_ provider: AuthProviderSwift) async throws -> SignInOutcome {
     do {
+      // Automatically inject AuthService for phone provider
+      if let phoneProvider = provider as? PhoneAuthProviderSwift {
+        phoneProvider.authService = self
+      }
+
       let credential = try await provider.createAuthCredential()
       let result = try await signIn(credentials: credential)
       return result
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      // Always pass the underlying error - view decides what to show
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -206,8 +207,8 @@ public final class AuthService {
     currentError = nil
   }
 
-  func updateError(title: String = "Error", message: String) {
-    currentError = AlertError(title: title, message: message)
+  func updateError(title: String = "Error", message: String, underlyingError: Error? = nil) {
+    currentError = AlertError(title: title, message: message, underlyingError: underlyingError)
   }
 
   public var shouldHandleAnonymousUpgrade: Bool {
@@ -217,9 +218,11 @@ public final class AuthService {
   public func signOut() async throws {
     do {
       try await auth.signOut()
+      // Cannot wait for auth listener to change, feedback needs to be immediate
+      currentUser = nil
       updateAuthenticationState()
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -237,12 +240,12 @@ public final class AuthService {
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
 
-  public func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws
+  private func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws
     -> SignInOutcome {
     if currentUser == nil {
       throw AuthServiceError.noCurrentUser
@@ -252,11 +255,27 @@ public final class AuthService {
       updateAuthenticationState()
       return .signedIn(result)
     } catch let error as NSError {
+      // Handle credentialAlreadyInUse error
+      if error.code == AuthErrorCode.credentialAlreadyInUse.rawValue {
+        // Extract the updated credential from the error
+        let updatedCredential = error.userInfo["FIRAuthUpdatedCredentialKey"] as? AuthCredential
+          ?? credentials
+
+        let context = AccountMergeConflictContext(
+          credential: updatedCredential,
+          underlyingError: error,
+          message: "Unable to merge accounts. The credential is already associated with a different account.",
+          uid: currentUser?.uid
+        )
+        throw AuthServiceError.accountMergeConflict(context: context)
+      }
+
+      // Handle emailAlreadyInUse error
       if error.code == AuthErrorCode.emailAlreadyInUse.rawValue {
         let context = AccountMergeConflictContext(
           credential: credentials,
           underlyingError: error,
-          message: "Unable to merge accounts. Use the credential in the context to resolve the conflict.",
+          message: "Unable to merge accounts. This email is already associated with a different account.",
           uid: currentUser?.uid
         )
         throw AuthServiceError.accountMergeConflict(context: context)
@@ -285,7 +304,7 @@ public final class AuthService {
         }
       } else {
         // Don't want error modal on MFA error so we only update here
-        updateError(message: string.localizedErrorMessage(for: error))
+        updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       }
 
       throw error
@@ -307,7 +326,7 @@ public final class AuthService {
         }
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -326,7 +345,7 @@ public extension AuthService {
         try await user.delete()
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -341,7 +360,7 @@ public extension AuthService {
         try await user.updatePassword(to: password)
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -374,7 +393,7 @@ public extension AuthService {
       }
     } catch {
       authenticationState = .unauthenticated
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -383,7 +402,7 @@ public extension AuthService {
     do {
       try await auth.sendPasswordReset(withEmail: email)
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -400,7 +419,7 @@ public extension AuthService {
         actionCodeSettings: actionCodeSettings
       )
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -433,7 +452,7 @@ public extension AuthService {
         emailLink = nil
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -502,7 +521,7 @@ public extension AuthService {
       changeRequest.photoURL = url
       try await changeRequest.commitChanges()
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -517,7 +536,7 @@ public extension AuthService {
       changeRequest.displayName = name
       try await changeRequest.commitChanges()
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -609,7 +628,7 @@ public extension AuthService {
         )
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -661,7 +680,7 @@ public extension AuthService {
 
       return verificationID
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -740,7 +759,7 @@ public extension AuthService {
       }
       currentUser = auth.currentUser
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -829,7 +848,7 @@ public extension AuthService {
 
       return freshFactors
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -899,7 +918,7 @@ public extension AuthService {
         }
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -952,7 +971,7 @@ public extension AuthService {
           .multiFactorAuth("Failed to resolve MFA challenge: \(error.localizedDescription)")
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }

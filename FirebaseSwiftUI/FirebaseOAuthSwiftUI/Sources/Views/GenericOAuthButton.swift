@@ -20,6 +20,7 @@ import SwiftUI
 @MainActor
 public struct GenericOAuthButton {
   @Environment(AuthService.self) private var authService
+  @Environment(\.signInWithMergeConflictHandler) private var signInHandler
   let provider: AuthProviderSwift
   public init(provider: AuthProviderSwift) {
     self.provider = provider
@@ -51,7 +52,13 @@ extension GenericOAuthButton: View {
         accessibilityId: "sign-in-with-\(oauthProvider.providerId)-button"
       ) {
         Task {
-          try await authService.signIn(provider)
+          if let handler = signInHandler {
+            try? await handler(authService) {
+              try await authService.signIn(provider)
+            }
+          } else {
+            try? await authService.signIn(provider)
+          }
         }
       }
     )

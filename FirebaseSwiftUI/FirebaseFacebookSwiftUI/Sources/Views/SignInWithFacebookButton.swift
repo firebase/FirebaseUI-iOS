@@ -22,6 +22,7 @@ import SwiftUI
 @MainActor
 public struct SignInWithFacebookButton {
   @Environment(AuthService.self) private var authService
+  @Environment(\.signInWithMergeConflictHandler) private var signInHandler
   let facebookProvider: FacebookProviderSwift
 
   public init(facebookProvider: FacebookProviderSwift) {
@@ -37,7 +38,13 @@ extension SignInWithFacebookButton: View {
       accessibilityId: "sign-in-with-facebook-button"
     ) {
       Task {
-        try? await authService.signIn(facebookProvider)
+        if let handler = signInHandler {
+          try? await handler(authService) {
+            try await authService.signIn(facebookProvider)
+          }
+        } else {
+          try? await authService.signIn(facebookProvider)
+        }
       }
     }
   }
