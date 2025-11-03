@@ -104,10 +104,20 @@ private struct PhoneAuthFlowView: View {
         }
       }
       .toolbar {
-        ToolbarItem(placement: .cancellationAction) {
-          Button("Cancel") {
-            coordinator.cancel()
-          }
+        toolbar
+      }
+    }
+    .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
+  }
+  
+  @ToolbarContentBuilder
+  var toolbar: some ToolbarContent {
+    ToolbarItem(placement: .topBarTrailing) {
+      if !authService.configuration.shouldHideCancelButton {
+        Button {
+          coordinator.cancel()
+        } label: {
+          Image(systemName: "xmark")
         }
       }
     }
