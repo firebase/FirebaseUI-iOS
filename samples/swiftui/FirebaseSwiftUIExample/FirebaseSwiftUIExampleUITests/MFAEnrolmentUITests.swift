@@ -194,18 +194,19 @@ final class MFAEnrollmentUITests: XCTestCase {
     startButton.tap()
 
     // 6) Select UK country code and enter phone number (without dial code)
-    // Find and tap the country selector - try multiple approaches since it's embedded in the TextField
+    // Find and tap the country selector - try multiple approaches since it's embedded in the
+    // TextField
     let countrySelector = app.buttons["🇺🇸 +1"]
     XCTAssertTrue(countrySelector.waitForExistence(timeout: 5))
-    
+
     countrySelector.tap()
-    
+
     // Select United Kingdom (+44) - try multiple element types
     let ukOption = app.buttons["country-option-GB"]
     XCTAssertTrue(ukOption.waitForExistence(timeout: 5))
-    
+
     ukOption.tap()
-    
+
     // Enter phone number (without dial code)
     let phoneField = app.textFields["phone-number-field"]
     XCTAssertTrue(phoneField.waitForExistence(timeout: 10))

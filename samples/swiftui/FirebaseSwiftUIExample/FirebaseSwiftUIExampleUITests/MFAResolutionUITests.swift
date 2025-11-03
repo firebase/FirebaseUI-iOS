@@ -417,7 +417,8 @@ final class MFAResolutionUITests: XCTestCase {
     }
   }
 
-  @MainActor private func signInUser(app: XCUIApplication, email: String, password: String = "123456") throws {
+  @MainActor private func signInUser(app: XCUIApplication, email: String,
+                                     password: String = "123456") throws {
     // Ensure we're in sign in flow
     let switchFlowButton = app.buttons["switch-auth-flow"]
     if switchFlowButton.exists && switchFlowButton.label.contains("Sign In") {
