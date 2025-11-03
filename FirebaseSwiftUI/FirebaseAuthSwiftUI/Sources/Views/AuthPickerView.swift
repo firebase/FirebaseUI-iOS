@@ -107,22 +107,6 @@ extension AuthPickerView: View {
                 MFAManagementView()
               case AuthView.mfaResolution:
                 MFAResolutionView()
-              case AuthView.enterPhoneNumber:
-                if let phoneProvider = authService.currentPhoneProvider {
-                  EnterPhoneNumberView(phoneProvider: phoneProvider)
-                } else {
-                  EmptyView()
-                }
-              case let .enterVerificationCode(verificationID, fullPhoneNumber):
-                if let phoneProvider = authService.currentPhoneProvider {
-                  EnterVerificationCodeView(
-                    verificationID: verificationID,
-                    fullPhoneNumber: fullPhoneNumber,
-                    phoneProvider: phoneProvider
-                  )
-                } else {
-                  EmptyView()
-                }
               }
             }
         }

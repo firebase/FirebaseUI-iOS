@@ -35,7 +35,15 @@ extension PhoneAuthButtonView: View {
       style: .phone,
       accessibilityId: "sign-in-with-phone-button"
     ) {
-      authService.navigator.push(.enterPhoneNumber)
+      Task {
+        if let handler = signInHandler {
+          try? await handler(authService) {
+            try await authService.signIn(phoneProvider)
+          }
+        } else {
+          try? await authService.signIn(phoneProvider)
+        }
+      }
     }
   }
 }
