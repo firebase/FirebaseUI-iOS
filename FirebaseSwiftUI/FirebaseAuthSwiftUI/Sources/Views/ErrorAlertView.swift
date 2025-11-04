@@ -48,7 +48,7 @@ public extension View {
 }
 
 /// A struct to represent an error that should be displayed in an alert
-public struct AlertError: Identifiable {
+public struct AlertError: Identifiable, Equatable {
   public let id = UUID()
   public let title: String
   public let message: String
@@ -58,5 +58,10 @@ public struct AlertError: Identifiable {
     self.title = title
     self.message = message
     self.underlyingError = underlyingError
+  }
+
+  public static func == (lhs: AlertError, rhs: AlertError) -> Bool {
+    // Compare by id since each AlertError instance is unique
+    lhs.id == rhs.id
   }
 }

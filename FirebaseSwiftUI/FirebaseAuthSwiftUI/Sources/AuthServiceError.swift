@@ -15,12 +15,14 @@
 import FirebaseAuth
 import SwiftUI
 
-public struct AccountMergeConflictContext: LocalizedError {
+public struct AccountMergeConflictContext: LocalizedError, Identifiable {
+  public let id = UUID()
   public let credential: AuthCredential
   public let underlyingError: Error
   public let message: String
-  // TODO: - should make this User type once fixed upstream in firebase-ios-sdk. See: https://github.com/firebase/FirebaseUI-iOS/pull/1247#discussion_r2085455355
   public let uid: String?
+  public let email: String?
+  public let requiresManualLinking: Bool
 
   public var errorDescription: String? {
     return message

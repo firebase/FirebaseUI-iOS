@@ -25,11 +25,15 @@ import SwiftUI
 /// an existing account), it automatically signs out the anonymous user and signs in with
 /// the existing account's credential.
 ///
+/// For conflicts that require manual linking (accountExistsWithDifferentCredential),
+/// the error is re-thrown to be handled by the view layer with AccountLinkingView.
+///
 /// - Parameters:
 ///   - authService: The AuthService instance to use for sign-in operations
 ///   - signInAction: An async closure that performs the sign-in operation
 /// - Returns: The SignInOutcome from the successful sign-in
-/// - Throws: Re-throws any errors except accountMergeConflict (which is handled internally)
+/// - Throws: Re-throws any errors except automatic accountMergeConflict (which is handled
+/// internally)
 @MainActor
 public func signInWithMergeConflictHandling(authService: AuthService,
                                             signInAction: () async throws
@@ -38,13 +42,19 @@ public func signInWithMergeConflictHandling(authService: AuthService,
     return try await signInAction()
   } catch let error as AuthServiceError {
     if case let .accountMergeConflict(context) = error {
-      // The anonymous account conflicts with an existing account
-      // Sign out the anonymous user
-      try await authService.signOut()
+      // Check if this requires manual linking (UI flow) or automatic
+      if context.requiresManualLinking {
+        // Re-throw for view layer to handle with AccountLinkingView
+        throw error
+      } else {
+        // Automatic handling for anonymous upgrade
+        // Sign out the anonymous user
+        try await authService.signOut()
 
-      // Sign in with the existing account's credential
-      // This works because shouldHandleAnonymousUpgrade is now false after sign out
-      return try await authService.signIn(credentials: context.credential)
+        // Sign in with the existing account's credential
+        // This works because shouldHandleAnonymousUpgrade is now false after sign out
+        return try await authService.signIn(credentials: context.credential)
+      }
     }
     throw error
   }
@@ -77,6 +87,9 @@ public struct AuthPickerView<Content: View> {
 
   @Environment(AuthService.self) private var authService
   private let content: () -> Content
+
+  // State for account linking
+  @State private var accountLinkingContext: AccountMergeConflictContext?
 }
 
 extension AuthPickerView: View {
@@ -111,6 +124,39 @@ extension AuthPickerView: View {
             }
         }
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
+        // Add sheet for account linking
+        .sheet(item: Binding(
+          get: { accountLinkingContext },
+          set: { accountLinkingContext = $0 }
+        )) { context in
+          NavigationStack {
+            AccountLinkingView(context: context)
+              .environment(authService)
+              .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                  if !authService.configuration.shouldHideCancelButton {
+                    Button {
+                      accountLinkingContext = nil
+                    } label: {
+                      Image(systemName: "xmark")
+                    }
+                  }
+                }
+              }
+          }
+        }
+      }
+      // Intercept account linking errors
+      .onChange(of: authService.currentError) { _, newValue in
+        // Check if the underlying error is accountMergeConflict with manual linking required
+        if let error = newValue?.underlyingError as? AuthServiceError,
+           case let .accountMergeConflict(context) = error,
+           context.requiresManualLinking {
+          // Clear the error (we're handling it with the sheet)
+          authService.currentError = nil
+          // Show the account linking sheet
+          accountLinkingContext = context
+        }
       }
   }
 
