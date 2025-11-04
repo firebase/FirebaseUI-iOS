@@ -28,10 +28,10 @@ struct ErrorAlertModifier: ViewModifier {
     if error.underlyingError is CancellationError {
       return false
     }
-    
+
     // Don't show alert for anonymous upgrade conflicts (they're auto-handled)
     if let authError = error.underlyingError as? AuthServiceError,
-       case .accountConflict(let context) = authError,
+       case let .accountConflict(context) = authError,
        context.conflictType == .anonymousUpgradeConflict {
       return false
     }

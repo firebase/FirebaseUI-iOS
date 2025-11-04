@@ -25,7 +25,7 @@ public struct AuthPickerView<Content: View> {
 
   @Environment(AuthService.self) private var authService
   private let content: () -> Content
-  
+
   // View-layer state for handling auto-linking flow
   @State private var pendingCredentialForLinking: AuthCredential?
 }
@@ -63,7 +63,8 @@ extension AuthPickerView: View {
         }
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
       }
-      // View-layer logic: Handle account conflicts (auto-handle anonymous upgrade, store others for linking)
+      // View-layer logic: Handle account conflicts (auto-handle anonymous upgrade, store others for
+      // linking)
       .onChange(of: authService.currentAccountConflict) { _, conflict in
         handleAccountConflict(conflict)
       }
@@ -74,21 +75,21 @@ extension AuthPickerView: View {
         }
       }
   }
-  
+
   /// View-layer logic: Handle account conflicts with type-specific behavior
   private func handleAccountConflict(_ conflict: AccountConflictContext?) {
     guard let conflict = conflict else { return }
-    
+
     // Only auto-handle anonymous upgrade conflicts
     if conflict.conflictType == .anonymousUpgradeConflict {
       Task {
         do {
           // Sign out the anonymous user
           try await authService.signOut()
-          
+
           // Sign in with the new credential
           _ = try await authService.signIn(credentials: conflict.credential)
-          
+
           // Successfully handled - conflict and error are cleared automatically by reset()
         } catch {
           // Error will be shown via normal error handling
@@ -101,11 +102,11 @@ extension AuthPickerView: View {
       // Error modal will show for user to see and handle
     }
   }
-  
+
   /// View-layer logic: Attempt to link pending credential after successful sign-in
   private func attemptAutoLinkPendingCredential() {
     guard let credential = pendingCredentialForLinking else { return }
-    
+
     Task {
       do {
         try await authService.linkAccounts(credentials: credential)

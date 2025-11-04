@@ -17,18 +17,19 @@ import SwiftUI
 
 /// Describes the specific type of account conflict that occurred
 public enum AccountConflictType: Equatable {
-  /// Account exists with a different provider (e.g., user signed up with Google, trying to use email)
+  /// Account exists with a different provider (e.g., user signed up with Google, trying to use
+  /// email)
   /// Solution: Sign in with existing provider, then link the new credential
   case accountExistsWithDifferentCredential
-  
+
   /// The credential is already linked to another account
   /// Solution: User must sign in with that account or unlink the credential
   case credentialAlreadyInUse
-  
+
   /// Email is already registered with another method
   /// Solution: Sign in with existing method, then link if desired
   case emailAlreadyInUse
-  
+
   /// Trying to link anonymous account to an existing account
   /// Solution: Sign out of anonymous, then sign in with the credential
   case anonymousUpgradeConflict
@@ -42,10 +43,10 @@ public struct AccountConflictContext: LocalizedError, Identifiable, Equatable {
   public let message: String
   public let email: String?
   public let existingProviderIds: [String]?
-  
+
   /// Indicates if this conflict occurred during anonymous user upgrade
   public let isAnonymousUpgrade: Bool
-  
+
   /// Human-readable description of the conflict type
   public var conflictDescription: String {
     switch conflictType {
@@ -59,11 +60,11 @@ public struct AccountConflictContext: LocalizedError, Identifiable, Equatable {
       return "Cannot link anonymous account to an existing account."
     }
   }
-  
+
   public var errorDescription: String? {
     return message
   }
-  
+
   public static func == (lhs: AccountConflictContext, rhs: AccountConflictContext) -> Bool {
     // Compare by id since each AccountConflictContext instance is unique
     lhs.id == rhs.id
