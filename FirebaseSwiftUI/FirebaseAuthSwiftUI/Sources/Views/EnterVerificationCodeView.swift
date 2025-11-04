@@ -33,7 +33,7 @@ struct EnterVerificationCodeView: View {
     VStack(spacing: 32) {
       VStack(spacing: 16) {
         VStack(spacing: 8) {
-          Text("We sent a code to \(fullPhoneNumber)")
+          Text(authService.string.sentCodeMessage(phoneNumber: fullPhoneNumber))
             .font(.subheadline)
             .foregroundStyle(.secondary)
             .multilineTextAlignment(.center)
@@ -42,7 +42,7 @@ struct EnterVerificationCodeView: View {
           Button {
             authService.navigator.pop()
           } label: {
-            Text("Change number")
+            Text(authService.string.changeNumberButtonLabel)
               .font(.caption)
               .frame(maxWidth: .infinity, alignment: .leading)
           }

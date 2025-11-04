@@ -30,7 +30,7 @@ extension GenericOAuthButton: View {
   public var body: some View {
     guard let oauthProvider = provider as? OAuthProviderSwift else {
       return AnyView(
-        Text("Invalid OAuth Provider")
+        Text(authService.string.invalidOAuthProviderError)
           .foregroundColor(.red)
       )
     }

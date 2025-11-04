@@ -2,13 +2,52 @@
   "sourceLanguage" : "en",
   "strings" : {
     "%@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
     },
     "••••••%@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "••••••%@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "••••••%@"
+          }
+        }
+      }
     },
     "Account: %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta: %@"
+          }
+        }
+      }
     },
     "AccountDisabledError" : {
       "comment" : "Error message displayed when the account is disabled. Use short/abbreviated translation for 'email' which is less than 15 chars.",
@@ -18,6 +57,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "That email address is for an account that has been disabled."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esa dirección de correo es de una cuenta que ha sido deshabilitada."
           }
         }
       }
@@ -31,14 +76,46 @@
             "state" : "translated",
             "value" : "This action can't be undone"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta acción no se puede deshacer"
+          }
         }
       }
     },
     "Add an extra layer of security to your account" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add an extra layer of security to your account"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agrega una capa adicional de seguridad a tu cuenta"
+          }
+        }
+      }
     },
     "Add Another Method" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Another Method"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agregar otro método"
+          }
+        }
+      }
     },
     "AddPasswordAlertMessage" : {
       "comment" : "Alert message shown when adding account password.",
@@ -48,6 +125,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "To add password to your account, you will need to sign in again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para agregar una contraseña a tu cuenta, deberás iniciar sesión nuevamente."
           }
         }
       }
@@ -61,11 +144,30 @@
             "state" : "translated",
             "value" : "Add password"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agregar contraseña"
+          }
         }
       }
     },
     "Already have an account?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Already have an account?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Ya tienes una cuenta?"
+          }
+        }
+      }
     },
     "AS_AddPassword" : {
       "comment" : "Account Settings cell title Add Password.",
@@ -75,6 +177,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Add password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agregar contraseña"
           }
         }
       }
@@ -88,6 +196,12 @@
             "state" : "translated",
             "value" : "Change password"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar contraseña"
+          }
         }
       }
     },
@@ -99,6 +213,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete Account"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar cuenta"
           }
         }
       }
@@ -112,6 +232,12 @@
             "state" : "translated",
             "value" : "Email"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo"
+          }
         }
       }
     },
@@ -123,6 +249,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
           }
         }
       }
@@ -136,6 +268,12 @@
             "state" : "translated",
             "value" : "Linked Accounts"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuentas vinculadas"
+          }
         }
       }
     },
@@ -147,6 +285,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profile"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil"
           }
         }
       }
@@ -160,6 +304,12 @@
             "state" : "translated",
             "value" : "Security"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguridad"
+          }
         }
       }
     },
@@ -172,14 +322,62 @@
             "state" : "translated",
             "value" : "Sign Out"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar sesión"
+          }
+        }
+      }
+    },
+    "Authenticating..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authenticating..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autenticando..."
+          }
         }
       }
     },
     "Authentication Method" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authentication Method"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Método de autenticación"
+          }
+        }
+      }
     },
     "Authenticator App" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authenticator App"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aplicación de autenticación"
+          }
+        }
+      }
     },
     "AuthPickerTitle" : {
       "comment" : "Title for auth picker screen.",
@@ -190,11 +388,31 @@
             "state" : "translated",
             "value" : "Sign in with Firebase"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión con Firebase"
+          }
         }
       }
     },
     "Back" : {
-      "comment" : "Back button title."
+      "comment" : "Back button title.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atrás"
+          }
+        }
+      }
     },
     "Cancel" : {
       "comment" : "Cancel button title.",
@@ -204,6 +422,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
           }
         }
       }
@@ -217,6 +441,12 @@
             "state" : "translated",
             "value" : "This type of account isn't supported by this app"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este tipo de cuenta no es compatible con esta aplicación"
+          }
         }
       }
     },
@@ -229,17 +459,62 @@
             "state" : "translated",
             "value" : "Can't find provider for %@."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede encontrar el proveedor para %@."
+          }
         }
       }
     },
     "Change number" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change number"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar número"
+          }
+        }
+      }
     },
     "Choose Authentication Method" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose Authentication Method"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige el método de autenticación"
+          }
+        }
+      }
     },
     "Choose verification method:" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose verification method:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige el método de verificación:"
+          }
+        }
+      }
     },
     "ChoosePassword" : {
       "comment" : "Placeholder for the password text field in a sign up form.",
@@ -249,6 +524,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Choose password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elegir contraseña"
           }
         }
       }
@@ -262,17 +543,62 @@
             "state" : "translated",
             "value" : "Close"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar"
+          }
         }
       }
     },
     "Complete Setup" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complete Setup"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completar configuración"
+          }
+        }
+      }
     },
     "Complete Sign-In" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complete Sign-In"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completar inicio de sesión"
+          }
+        }
+      }
     },
     "Complete sign-in with your second factor" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complete sign-in with your second factor"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completa el inicio de sesión con tu segundo factor"
+          }
+        }
+      }
     },
     "ConfirmEmail" : {
       "comment" : "Title of confirm email label.",
@@ -282,6 +608,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Confirm Email"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmar correo"
+          }
+        }
+      }
+    },
+    "Confirm Password" : {
+      "comment" : "Field label for confirming password",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmar contraseña"
           }
         }
       }
@@ -295,11 +645,30 @@
             "state" : "translated",
             "value" : "Confirm Password"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmar contraseña"
+          }
         }
       }
     },
     "Copied to clipboard!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copied to clipboard!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Copiado al portapapeles!"
+          }
+        }
+      }
     },
     "Delete" : {
       "comment" : "Text of Delete action button.",
@@ -310,14 +679,46 @@
             "state" : "translated",
             "value" : "Delete"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
+          }
         }
       }
     },
     "Delete Account" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Account"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar cuenta"
+          }
+        }
+      }
     },
     "Delete Account?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Account?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Eliminar cuenta?"
+          }
+        }
+      }
     },
     "DeleteAccountBody" : {
       "comment" : "Alert message body shown to confirm account deletion action.",
@@ -327,6 +728,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "This will erase all data associated with your account, and can't be undone You will need to sign in again to complete this action"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esto borrará todos los datos asociados con tu cuenta y no se puede deshacer. Deberás iniciar sesión nuevamente para completar esta acción"
           }
         }
       }
@@ -340,6 +747,12 @@
             "state" : "translated",
             "value" : "This will erase all data associated with your account, and can't be undone. Are you sure you want to delete your account?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esto borrará todos los datos asociados con tu cuenta y no se puede deshacer. ¿Estás seguro de que deseas eliminar tu cuenta?"
+          }
         }
       }
     },
@@ -351,6 +764,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete Account?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Eliminar cuenta?"
           }
         }
       }
@@ -364,11 +783,32 @@
             "state" : "translated",
             "value" : "Delete account"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar cuenta"
+          }
         }
       }
     },
     "Display Name" : {
-
+      "comment" : "Field label for display name",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Display Name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre para mostrar"
+          }
+        }
+      }
     },
     "Don't have an account yet?" : {
       "localizations" : {
@@ -376,6 +816,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Don't have an account yet?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Aún no tienes una cuenta?"
           }
         }
       }
@@ -389,6 +835,12 @@
             "state" : "translated",
             "value" : "Edit email"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar correo"
+          }
         }
       }
     },
@@ -400,6 +852,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edit name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar nombre"
           }
         }
       }
@@ -413,6 +871,12 @@
             "state" : "translated",
             "value" : "To change password to your account, you will need to sign in again."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para cambiar la contraseña de tu cuenta, deberás iniciar sesión nuevamente."
+          }
         }
       }
     },
@@ -424,6 +888,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Change password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar contraseña"
+          }
+        }
+      }
+    },
+    "Email" : {
+      "comment" : "Field label for email",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo"
           }
         }
       }
@@ -437,6 +925,84 @@
             "state" : "translated",
             "value" : "The email address is already in use by another account."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La dirección de correo ya está en uso por otra cuenta."
+          }
+        }
+      }
+    },
+    "Enter code from app" : {
+      "comment" : "Prompt for entering code from authenticator app",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter code from app"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresa el código de la aplicación"
+          }
+        }
+      }
+    },
+    "Enter display name for this authenticator" : {
+      "comment" : "Prompt for entering display name for authenticator",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter display name for this authenticator"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresa el nombre para mostrar de este autenticador"
+          }
+        }
+      }
+    },
+    "Enter display name for this device" : {
+      "comment" : "Prompt for entering display name for device",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter display name for this device"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresa el nombre para mostrar de este dispositivo"
+          }
+        }
+      }
+    },
+    "Enter phone number" : {
+      "comment" : "Prompt for entering phone number",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter phone number"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresa el número de teléfono"
+          }
         }
       }
     },
@@ -448,6 +1014,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prefer Email link sign-in?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Prefieres iniciar sesión con enlace por correo?"
           }
         }
       }
@@ -461,6 +1033,12 @@
             "state" : "translated",
             "value" : "Sign in with email link"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión con enlace por correo"
+          }
         }
       }
     },
@@ -472,6 +1050,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Emails don't match"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los correos no coinciden"
           }
         }
       }
@@ -485,26 +1069,110 @@
             "state" : "translated",
             "value" : "A sign-in email with additional instructions was sent to %@. Check your email to complete sign-in."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se envió un correo de inicio de sesión con instrucciones adicionales a %@. Revisa tu correo para completar el inicio de sesión."
+          }
         }
       }
     },
     "Enrolled Methods" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enrolled Methods"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métodos registrados"
+          }
+        }
+      }
     },
     "Enrolled: %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enrolled: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registrado: %@"
+          }
+        }
+      }
     },
     "Enter 6-digit code" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter 6-digit code"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresa el código de 6 dígitos"
+          }
+        }
+      }
     },
     "Enter the 6-digit code from your authenticator app" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the 6-digit code from your authenticator app"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresa el código de 6 dígitos de tu aplicación de autenticación"
+          }
+        }
+      }
     },
     "Enter Verification Code" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter Verification Code"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresa el código de verificación"
+          }
+        }
+      }
     },
     "Enter Your Phone Number" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter Your Phone Number"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresa tu número de teléfono"
+          }
+        }
+      }
     },
     "EnterYourEmail" : {
       "comment" : "Title for email entry screen, email text field placeholder. Use short/abbreviated translation for 'email' which is less than 15 chars.",
@@ -514,6 +1182,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter your email"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresa tu correo"
           }
         }
       }
@@ -527,6 +1201,12 @@
             "state" : "translated",
             "value" : "Enter your password"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresa tu contraseña"
+          }
         }
       }
     },
@@ -535,6 +1215,12 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error"
@@ -551,6 +1237,12 @@
             "state" : "translated",
             "value" : "You already have an account"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya tienes una cuenta"
+          }
         }
       }
     },
@@ -562,6 +1254,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "First & last name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre y apellido"
           }
         }
       }
@@ -575,6 +1273,12 @@
             "state" : "translated",
             "value" : "Send password recovery email"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar correo de recuperación de contraseña"
+          }
         }
       }
     },
@@ -587,11 +1291,30 @@
             "state" : "translated",
             "value" : "Trouble signing in?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Problemas para iniciar sesión?"
+          }
         }
       }
     },
     "Get Started" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Started"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comenzar"
+          }
+        }
+      }
     },
     "InvalidEmailError" : {
       "comment" : "Error message displayed when user enters an invalid email address. Use short/abbreviated translation for 'email' which is less than 15 chars.",
@@ -601,6 +1324,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "That email address isn't correct."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esa dirección de correo no es correcta."
+          }
+        }
+      }
+    },
+    "Invalid OAuth Provider" : {
+      "comment" : "Error message displayed when OAuth provider configuration is invalid.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid OAuth Provider"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proveedor OAuth inválido"
           }
         }
       }
@@ -614,6 +1361,12 @@
             "state" : "translated",
             "value" : "Password cannot be empty."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La contraseña no puede estar vacía."
+          }
         }
       }
     },
@@ -624,23 +1377,94 @@
             "state" : "translated",
             "value" : "Login"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión"
+          }
         }
       }
     },
     "Manage Two-Factor Authentication" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage Two-Factor Authentication"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Administrar autenticación de dos factores"
+          }
+        }
+      }
     },
     "Manage your authentication methods" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage your authentication methods"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Administra tus métodos de autenticación"
+          }
+        }
+      }
     },
     "Manual Entry Key:" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manual Entry Key:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clave de entrada manual:"
+          }
+        }
+      }
     },
     "MFA is not enabled in the current configuration. Please contact your administrator." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MFA is not enabled in the current configuration. Please contact your administrator."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MFA no está habilitado en la configuración actual. Por favor, contacta a tu administrador."
+          }
+        }
+      }
     },
     "Multi-Factor Authentication Disabled" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Multi-Factor Authentication Disabled"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autenticación multifactor deshabilitada"
+          }
+        }
+      }
     },
     "Name" : {
       "comment" : "Label next to a name text field.",
@@ -650,6 +1474,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
           }
         }
       }
@@ -663,17 +1493,62 @@
             "state" : "translated",
             "value" : "Next"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siguiente"
+          }
         }
       }
     },
     "No Authentication Methods" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Authentication Methods"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin métodos de autenticación"
+          }
+        }
+      }
     },
     "No Authentication Methods Available" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Authentication Methods Available"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay métodos de autenticación disponibles"
+          }
+        }
+      }
     },
     "No MFA methods are configured as allowed. Please contact your administrator." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No MFA methods are configured as allowed. Please contact your administrator."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay métodos MFA configurados como permitidos. Por favor, contacta a tu administrador."
+          }
+        }
+      }
     },
     "OK" : {
       "comment" : "OK button title.",
@@ -683,6 +1558,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aceptar"
+          }
+        }
+      }
+    },
+    "Password" : {
+      "comment" : "Field label for password",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contraseña"
           }
         }
       }
@@ -696,6 +1595,12 @@
             "state" : "translated",
             "value" : "Follow the instructions sent to %@ to recover your password."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sigue las instrucciones enviadas a %@ para recuperar tu contraseña."
+          }
         }
       }
     },
@@ -707,6 +1612,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Check your email"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revisa tu correo"
           }
         }
       }
@@ -720,6 +1631,12 @@
             "state" : "translated",
             "value" : "Get instructions sent to this email that explain how to reset your password."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recibe instrucciones enviadas a este correo que explican cómo restablecer tu contraseña."
+          }
         }
       }
     },
@@ -732,6 +1649,12 @@
             "state" : "translated",
             "value" : "Recover password"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recuperar contraseña"
+          }
         }
       }
     },
@@ -742,13 +1665,52 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You’ve already used %@ to sign in. Enter your password for that account."
+            "value" : "You've already used %@ to sign in. Enter your password for that account."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya has usado %@ para iniciar sesión. Ingresa tu contraseña para esa cuenta."
+          }
+        }
+      }
+    },
+    "Phone" : {
+      "comment" : "Field label for phone",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phone"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teléfono"
           }
         }
       }
     },
     "Phone Number" : {
-
+      "comment" : "Field label for phone number",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phone Number"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Número de teléfono"
+          }
+        }
+      }
     },
     "PlaceholderChosePassword" : {
       "comment" : "Placeholder of secret input cell when user changes password.",
@@ -758,6 +1720,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Choose password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elegir contraseña"
           }
         }
       }
@@ -771,6 +1739,12 @@
             "state" : "translated",
             "value" : "Enter your email"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresa tu correo"
+          }
         }
       }
     },
@@ -782,6 +1756,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter your name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresa tu nombre"
           }
         }
       }
@@ -795,6 +1775,12 @@
             "state" : "translated",
             "value" : "Enter your password"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingresa tu contraseña"
+          }
         }
       }
     },
@@ -806,6 +1792,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "New password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nueva contraseña"
           }
         }
       }
@@ -819,6 +1811,12 @@
             "state" : "translated",
             "value" : "Privacy Policy"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de privacidad"
+          }
         }
       }
     },
@@ -827,6 +1825,12 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facebook"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Facebook"
@@ -843,6 +1847,12 @@
             "state" : "translated",
             "value" : "Google"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google"
+          }
         }
       }
     },
@@ -855,6 +1865,12 @@
             "state" : "translated",
             "value" : "Email"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo"
+          }
         }
       }
     },
@@ -863,6 +1879,12 @@
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twitter"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Twitter"
@@ -877,7 +1899,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You’ve already used %@. Sign in with %@ to continue."
+            "value" : "You've already used %@. Sign in with %@ to continue."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya has usado %@. Inicia sesión con %@ para continuar."
           }
         }
       }
@@ -891,11 +1919,30 @@
             "state" : "translated",
             "value" : "In order to change your password, you first need to enter your current password."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para cambiar tu contraseña, primero debes ingresar tu contraseña actual."
+          }
         }
       }
     },
     "Remove" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
+          }
+        }
+      }
     },
     "Resend" : {
       "comment" : "Resend button title.",
@@ -906,11 +1953,30 @@
             "state" : "translated",
             "value" : "Resend"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reenviar"
+          }
         }
       }
     },
     "Resend Code" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resend Code"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reenviar código"
+          }
+        }
+      }
     },
     "Save" : {
       "comment" : "Save button title.",
@@ -921,14 +1987,46 @@
             "state" : "translated",
             "value" : "Save"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
+          }
         }
       }
     },
     "Scan QR Code" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scan QR Code"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escanear código QR"
+          }
+        }
+      }
     },
     "Scan with your authenticator app or tap to open directly" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scan with your authenticator app or tap to open directly"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escanea con tu aplicación de autenticación o toca para abrir directamente"
+          }
+        }
+      }
     },
     "Send" : {
       "comment" : "Send button title.",
@@ -939,11 +2037,30 @@
             "state" : "translated",
             "value" : "Send"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar"
+          }
         }
       }
     },
     "Send Code" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send Code"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar código"
+          }
+        }
+      }
     },
     "SendEmailSignInLinkButtonLabel" : {
       "comment" : "Button label for sending email sign-in link",
@@ -954,17 +2071,62 @@
             "state" : "translated",
             "value" : "Send email sign-in link"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar enlace de inicio de sesión por correo"
+          }
         }
       }
     },
     "Set Up Two-Factor Authentication" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set Up Two-Factor Authentication"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurar autenticación de dos factores"
+          }
+        }
+      }
     },
     "Set up two-factor authentication to add an extra layer of security to your account." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set up two-factor authentication to add an extra layer of security to your account."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configura la autenticación de dos factores para agregar una capa adicional de seguridad a tu cuenta."
+          }
+        }
+      }
     },
     "Sign up" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign up"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registrarse"
+          }
+        }
+      }
     },
     "SignedIn" : {
       "comment" : "Title of successfully signed in label.",
@@ -974,6 +2136,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Signed in!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Sesión iniciada!"
           }
         }
       }
@@ -987,6 +2155,12 @@
             "state" : "translated",
             "value" : "Sign-in email Sent"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo de inicio de sesión enviado"
+          }
         }
       }
     },
@@ -999,6 +2173,12 @@
             "state" : "translated",
             "value" : "Sign in"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión"
+          }
         }
       }
     },
@@ -1009,7 +2189,103 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You’ve entered an incorrect password too many times. Try again in a few minutes."
+            "value" : "You've entered an incorrect password too many times. Try again in a few minutes."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Has ingresado una contraseña incorrecta demasiadas veces. Intenta nuevamente en unos minutos."
+          }
+        }
+      }
+    },
+    "Sign in with Apple" : {
+      "comment" : "Sign in with Apple button label.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with Apple"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión con Apple"
+          }
+        }
+      }
+    },
+    "Sign in with Facebook" : {
+      "comment" : "Sign in with Facebook button label.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with Facebook"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión con Facebook"
+          }
+        }
+      }
+    },
+    "Sign in with Google" : {
+      "comment" : "Sign in with Google button label.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with Google"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión con Google"
+          }
+        }
+      }
+    },
+    "Sign in with Phone" : {
+      "comment" : "Sign in with Phone button label.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with Phone"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión con teléfono"
+          }
+        }
+      }
+    },
+    "Sign in with X" : {
+      "comment" : "Sign in with X (Twitter) button label.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with X"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión con X"
           }
         }
       }
@@ -1023,6 +2299,12 @@
             "state" : "translated",
             "value" : "Sign in with email"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión con correo"
+          }
         }
       }
     },
@@ -1034,6 +2316,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sign in with %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión con %@"
           }
         }
       }
@@ -1047,6 +2335,12 @@
             "state" : "translated",
             "value" : "Create account"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear cuenta"
+          }
         }
       }
     },
@@ -1059,20 +2353,78 @@
             "state" : "translated",
             "value" : "Too many account requests are coming from your IP address. Try again in a few minutes."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demasiadas solicitudes de cuenta provienen de tu dirección IP. Intenta nuevamente en unos minutos."
+          }
         }
       }
     },
     "SMS Authentication" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SMS Authentication"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autenticación por SMS"
+          }
+        }
+      }
     },
     "SMS Verification" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SMS Verification"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verificación por SMS"
+          }
+        }
+      }
     },
     "SMS: %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SMS: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SMS: %@"
+          }
+        }
+      }
     },
     "Tap to open in authenticator app" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to open in authenticator app"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca para abrir en la aplicación de autenticación"
+          }
+        }
+      }
     },
     "TermsOfService" : {
       "comment" : "Text linked to a web page with the Terms of Service content.",
@@ -1082,6 +2434,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Terms of Service"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Términos de servicio"
           }
         }
       }
@@ -1095,11 +2453,30 @@
             "state" : "translated",
             "value" : "By continuing, you are indicating that you accept our %@ and %@."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Al continuar, indicas que aceptas nuestros %@ y %@."
+          }
         }
       }
     },
     "This action cannot be undone. All your data will be permanently deleted. You may need to reauthenticate to complete this action." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This action cannot be undone. All your data will be permanently deleted. You may need to reauthenticate to complete this action."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta acción no se puede deshacer. Todos tus datos se eliminarán permanentemente. Es posible que debas volver a autenticarte para completar esta acción."
+          }
+        }
+      }
     },
     "TroubleGettingEmailMessage" : {
       "comment" : "Alert message displayed when user having trouble getting email.",
@@ -1109,6 +2486,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Try these common fixes: \n - Check if the email was marked as spam or filtered.\n - Check your internet connection.\n - Check that you did not misspell your email.\n - Check that your inbox space is not running out or other inbox settings related issues.\n If the steps above didn't work, you can resend the email. Note that this will deactivate the link in the older email."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prueba estas soluciones comunes: \n - Verifica si el correo fue marcado como spam o filtrado.\n - Verifica tu conexión a internet.\n - Verifica que no hayas escrito mal tu correo.\n - Verifica que tu bandeja de entrada no esté llena u otros problemas relacionados con la configuración de la bandeja de entrada.\n Si los pasos anteriores no funcionaron, puedes reenviar el correo. Ten en cuenta que esto desactivará el enlace del correo anterior."
           }
         }
       }
@@ -1122,14 +2505,46 @@
             "state" : "translated",
             "value" : "Trouble getting emails?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Problemas para recibir correos?"
+          }
         }
       }
     },
     "Two-Factor Authentication" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Two-Factor Authentication"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autenticación de dos factores"
+          }
+        }
+      }
     },
     "Unable to generate QR Code" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to generate QR Code"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede generar el código QR"
+          }
+        }
+      }
     },
     "UnlinkAction" : {
       "comment" : "Button title for unlinking account action.",
@@ -1139,6 +2554,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unlink"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desvincular"
           }
         }
       }
@@ -1152,6 +2573,12 @@
             "state" : "translated",
             "value" : "Unlink account"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desvincular cuenta"
+          }
         }
       }
     },
@@ -1163,6 +2590,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "You will no longer be able to sign in using your account"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya no podrás iniciar sesión usando tu cuenta"
           }
         }
       }
@@ -1176,6 +2609,12 @@
             "state" : "translated",
             "value" : "Unlink account?"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Desvincular cuenta?"
+          }
         }
       }
     },
@@ -1188,6 +2627,12 @@
             "state" : "translated",
             "value" : "Linked account"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta vinculada"
+          }
         }
       }
     },
@@ -1198,6 +2643,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Update password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar contraseña"
           }
         }
       }
@@ -1211,6 +2662,12 @@
             "state" : "translated",
             "value" : "To change email address associated with your account, you will need to sign in again."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para cambiar la dirección de correo asociada con tu cuenta, deberás iniciar sesión nuevamente."
+          }
         }
       }
     },
@@ -1223,11 +2680,30 @@
             "state" : "translated",
             "value" : "In order to change your password, you first need to enter your current password."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para cambiar tu contraseña, primero debes ingresar tu contraseña actual."
+          }
         }
       }
     },
     "Use an authenticator app like Google Authenticator or Authy to generate verification codes." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use an authenticator app like Google Authenticator or Authy to generate verification codes."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa una aplicación de autenticación como Google Authenticator o Authy para generar códigos de verificación."
+          }
+        }
+      }
     },
     "UserNotFoundError" : {
       "comment" : "Error message displayed when there's no account matching the email address. Use short/abbreviated translation for 'email' which is less than 15 chars.",
@@ -1236,13 +2712,70 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "That email address doesn’t match an existing account."
+            "value" : "That email address doesn't match an existing account."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esa dirección de correo no coincide con una cuenta existente."
+          }
+        }
+      }
+    },
+    "Send a password recovery link to your email" : {
+      "comment" : "Field label for password recovery email",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send a password recovery link to your email"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar un enlace de recuperación de contraseña a tu correo"
+          }
+        }
+      }
+    },
+    "Send a sign-in link to your email" : {
+      "comment" : "Field label for sign-in email link",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send a sign-in link to your email"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar un enlace de inicio de sesión a tu correo"
           }
         }
       }
     },
     "Verification Code" : {
-
+      "comment" : "Field label for verification code",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verification Code"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código de verificación"
+          }
+        }
+      }
     },
     "Verify email address?" : {
       "comment" : "Label for sending email verification to user.",
@@ -1251,6 +2784,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verify email address?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Verificar dirección de correo?"
           }
         }
       }
@@ -1264,23 +2803,94 @@
             "state" : "translated",
             "value" : "Verify it's you"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifica que eres tú"
+          }
         }
       }
     },
     "We sent a code to %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We sent a code to %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviamos un código a %@"
+          }
+        }
+      }
     },
     "We'll send a code to ••••••%@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We'll send a code to ••••••%@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviaremos un código a ••••••%@"
+          }
+        }
+      }
     },
     "We'll send a verification code to this number" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We'll send a verification code to this number"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviaremos un código de verificación a este número"
+          }
+        }
+      }
     },
     "We'll send a verification code to your phone" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We'll send a verification code to your phone"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviaremos un código de verificación a tu teléfono"
+          }
+        }
+      }
     },
     "We'll send a verification code to your phone number each time you sign in." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We'll send a verification code to your phone number each time you sign in."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviaremos un código de verificación a tu número de teléfono cada vez que inicies sesión."
+          }
+        }
+      }
     },
     "WeakPasswordError" : {
       "comment" : "Error message displayed when the password is too weak.",
@@ -1290,6 +2900,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Password must be at least 6 characters long."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La contraseña debe tener al menos 6 caracteres."
           }
         }
       }
@@ -1302,6 +2918,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The email and password you entered don't match."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El correo y la contraseña que ingresaste no coinciden."
           }
         }
       }

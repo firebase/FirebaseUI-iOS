@@ -30,7 +30,7 @@ public struct PhoneAuthButtonView {
 extension PhoneAuthButtonView: View {
   public var body: some View {
     AuthProviderButton(
-      label: "Sign in with Phone",
+      label: authService.string.phoneLoginButtonLabel,
       style: .phone,
       accessibilityId: "sign-in-with-phone-button"
     ) {

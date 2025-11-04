@@ -29,7 +29,7 @@ public struct SignInWithTwitterButton {
 extension SignInWithTwitterButton: View {
   public var body: some View {
     AuthProviderButton(
-      label: "Sign in with X",
+      label: authService.string.twitterLoginButtonLabel,
       style: .twitter,
       accessibilityId: "sign-in-with-twitter-button"
     ) {

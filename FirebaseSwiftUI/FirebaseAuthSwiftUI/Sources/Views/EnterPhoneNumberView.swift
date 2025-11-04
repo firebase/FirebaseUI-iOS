@@ -38,7 +38,7 @@ struct EnterPhoneNumberView: View {
 
       AuthTextField(
         text: $phoneNumber,
-        localizedTitle: "Phone",
+        label: authService.string.phoneFieldLabel,
         prompt: authService.string.enterPhoneNumberPlaceholder,
         keyboardType: .phonePad,
         contentType: .telephoneNumber,

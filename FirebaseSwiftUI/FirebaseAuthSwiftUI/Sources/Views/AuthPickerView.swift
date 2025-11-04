@@ -21,7 +21,7 @@ public struct AuthPickerView<Content: View> {
   public init(@ViewBuilder content: @escaping () -> Content = { EmptyView() }) {
     self.content = content
   }
-
+  
   @Environment(AuthService.self) private var authService
   private let content: () -> Content
 }
@@ -76,7 +76,7 @@ extension AuthPickerView: View {
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
       }
   }
-
+  
   @ToolbarContentBuilder
   var toolbar: some ToolbarContent {
     ToolbarItem(placement: .topBarTrailing) {
@@ -85,20 +85,34 @@ extension AuthPickerView: View {
           authService.isPresented = false
         } label: {
           Image(systemName: "xmark")
+            .foregroundStyle(Color(UIColor.label))
         }
       }
     }
   }
-
+  
   @ViewBuilder
   var authPickerViewInternal: some View {
     @Bindable var authService = authService
     VStack {
-      if authService.authenticationState == .unauthenticated {
+      if authService.authenticationState == .authenticated {
+        SignedInView()
+      } else {
         authMethodPicker
           .safeAreaPadding()
-      } else {
-        SignedInView()
+      }
+    }
+    .overlay {
+      if authService.authenticationState == .authenticating {
+        VStack(spacing: 24) {
+          ProgressView()
+            .scaleEffect(1.25)
+            .tint(.white)
+          Text("Authenticating...")
+            .foregroundStyle(.white)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.black.opacity(0.7))
       }
     }
     .errorAlert(
@@ -106,13 +120,13 @@ extension AuthPickerView: View {
       okButtonLabel: authService.string.okButtonLabel
     )
   }
-
+  
   @ViewBuilder
   var authMethodPicker: some View {
     GeometryReader { proxy in
       ScrollView {
         VStack(spacing: 24) {
-          Image(Assets.firebaseAuthLogo)
+          Image(authService.configuration.logo ?? Assets.firebaseAuthLogo)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 100, height: 100)
@@ -126,7 +140,7 @@ extension AuthPickerView: View {
       }
     }
   }
-
+  
   @ViewBuilder
   func otherSignInOptions(_ proxy: GeometryProxy) -> some View {
     VStack {

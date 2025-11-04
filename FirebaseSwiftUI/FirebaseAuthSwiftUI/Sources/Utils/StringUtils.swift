@@ -281,6 +281,34 @@ public class StringUtils {
     return localizedString(for: "Already have an account?")
   }
 
+  /// Google provider
+  /// found in:
+  /// - SignInWithGoogleButton
+  public var googleLoginButtonLabel: String {
+    return localizedString(for: "Sign in with Google")
+  }
+
+  /// Apple provider
+  /// found in:
+  /// - SignInWithAppleButton
+  public var appleLoginButtonLabel: String {
+    return localizedString(for: "Sign in with Apple")
+  }
+
+  /// Twitter/X provider
+  /// found in:
+  /// - SignInWithTwitterButton
+  public var twitterLoginButtonLabel: String {
+    return localizedString(for: "Sign in with X")
+  }
+
+  /// Phone provider
+  /// found in:
+  /// - PhoneAuthButtonView
+  public var phoneLoginButtonLabel: String {
+    return localizedString(for: "Sign in with Phone")
+  }
+
   /// Facebook provider
   /// found in:
   /// - SignInWithFacebookButton
@@ -419,5 +447,492 @@ public class StringUtils {
   /// PasswordRecoveryView
   public var alertErrorTitle: String {
     return localizedString(for: "Error")
+  }
+
+  /// Authenticating overlay message
+  /// found in:
+  /// - AuthPickerView
+  public var authenticatingMessage: String {
+    return localizedString(for: "Authenticating...")
+  }
+
+  /// Two-Factor Authentication
+  /// found in:
+  /// - MFAEnrolmentView
+  /// - MFAManagementView
+  public var twoFactorAuthenticationLabel: String {
+    return localizedString(for: "Two-Factor Authentication")
+  }
+
+  /// Set Up Two-Factor Authentication
+  /// found in:
+  /// - MFAEnrolmentView
+  public var setUpTwoFactorAuthenticationLabel: String {
+    return localizedString(for: "Set Up Two-Factor Authentication")
+  }
+
+  /// Manage Two-Factor Authentication
+  /// found in:
+  /// - MFAManagementView
+  public var manageTwoFactorAuthenticationLabel: String {
+    return localizedString(for: "Manage Two-Factor Authentication")
+  }
+
+  /// Complete Sign-In
+  /// found in:
+  /// - MFAResolutionView
+  public var completeSignInLabel: String {
+    return localizedString(for: "Complete Sign-In")
+  }
+
+  /// Complete Setup
+  /// found in:
+  /// - MFAEnrolmentView
+  public var completeSetupLabel: String {
+    return localizedString(for: "Complete Setup")
+  }
+
+  /// Choose Authentication Method
+  /// found in:
+  /// - MFAEnrolmentView
+  /// - MFAResolutionView
+  public var chooseAuthenticationMethodLabel: String {
+    return localizedString(for: "Choose Authentication Method")
+  }
+
+  /// SMS Authentication
+  /// found in:
+  /// - MFAEnrolmentView
+  /// - MFAResolutionView
+  public var smsAuthenticationLabel: String {
+    return localizedString(for: "SMS Authentication")
+  }
+
+  /// Authenticator App
+  /// found in:
+  /// - MFAEnrolmentView
+  /// - MFAResolutionView
+  public var authenticatorAppLabel: String {
+    return localizedString(for: "Authenticator App")
+  }
+
+  /// Enter Your Phone Number
+  /// found in:
+  /// - MFAEnrolmentView
+  /// - EnterPhoneNumberView
+  public var enterYourPhoneNumberLabel: String {
+    return localizedString(for: "Enter Your Phone Number")
+  }
+
+  /// Phone Number
+  /// found in:
+  /// - MFAEnrolmentView
+  /// - EnterPhoneNumberView
+  public var phoneNumberLabel: String {
+    return localizedString(for: "Phone Number")
+  }
+
+  /// Send Code
+  /// found in:
+  /// - MFAEnrolmentView
+  /// - EnterPhoneNumberView
+  public var sendCodeLabel: String {
+    return localizedString(for: "Send Code")
+  }
+
+  /// Enter Verification Code
+  /// found in:
+  /// - MFAEnrolmentView
+  /// - MFAResolutionView
+  /// - EnterVerificationCodeView
+  public var enterVerificationCodeLabel: String {
+    return localizedString(for: "Enter Verification Code")
+  }
+
+  /// Verification Code
+  /// found in:
+  /// - MFAEnrolmentView
+  /// - MFAResolutionView
+  /// - EnterVerificationCodeView
+  public var verificationCodeLabel: String {
+    return localizedString(for: "Verification Code")
+  }
+
+  /// Scan QR Code
+  /// found in:
+  /// - MFAEnrolmentView
+  public var scanQRCodeLabel: String {
+    return localizedString(for: "Scan QR Code")
+  }
+
+  /// Manual Entry Key:
+  /// found in:
+  /// - MFAEnrolmentView
+  public var manualEntryKeyLabel: String {
+    return localizedString(for: "Manual Entry Key:")
+  }
+
+  /// Enter 6-digit code
+  /// found in:
+  /// - MFAEnrolmentView
+  public var enterSixDigitCodeLabel: String {
+    return localizedString(for: "Enter 6-digit code")
+  }
+
+  /// Scan with your authenticator app or tap to open directly
+  /// found in:
+  /// - MFAEnrolmentView
+  public var scanWithAuthenticatorAppMessage: String {
+    return localizedString(for: "Scan with your authenticator app or tap to open directly")
+  }
+
+  /// Tap to open in authenticator app
+  /// found in:
+  /// - MFAEnrolmentView
+  public var tapToOpenInAuthenticatorAppLabel: String {
+    return localizedString(for: "Tap to open in authenticator app")
+  }
+
+  /// Use an authenticator app like Google Authenticator or Authy to generate verification codes.
+  /// found in:
+  /// - MFAEnrolmentView
+  public var authenticatorAppInstructionsMessage: String {
+    return localizedString(for: "Use an authenticator app like Google Authenticator or Authy to generate verification codes.")
+  }
+
+  /// Set up two-factor authentication to add an extra layer of security to your account.
+  /// found in:
+  /// - MFAEnrolmentView
+  public var setUpTwoFactorAuthMessage: String {
+    return localizedString(for: "Set up two-factor authentication to add an extra layer of security to your account.")
+  }
+
+  /// We'll send a verification code to this number
+  /// found in:
+  /// - MFAEnrolmentView
+  public var sendVerificationCodeToNumberMessage: String {
+    return localizedString(for: "We'll send a verification code to this number")
+  }
+
+  /// We'll send a verification code to your phone
+  /// found in:
+  /// - MFAEnrolmentView
+  public var sendVerificationCodeToPhoneMessage: String {
+    return localizedString(for: "We'll send a verification code to your phone")
+  }
+
+  /// We'll send a verification code to your phone number each time you sign in.
+  /// found in:
+  /// - MFAEnrolmentView
+  public var sendVerificationCodeEachSignInMessage: String {
+    return localizedString(for: "We'll send a verification code to your phone number each time you sign in.")
+  }
+
+  /// Unable to generate QR Code
+  /// found in:
+  /// - MFAEnrolmentView
+  public var unableToGenerateQRCodeMessage: String {
+    return localizedString(for: "Unable to generate QR Code")
+  }
+
+  /// Copied to clipboard!
+  /// found in:
+  /// - MFAEnrolmentView
+  public var copiedToClipboardMessage: String {
+    return localizedString(for: "Copied to clipboard!")
+  }
+
+  /// Multi-Factor Authentication Disabled
+  /// found in:
+  /// - MFAEnrolmentView
+  /// - MFAResolutionView
+  public var mfaDisabledLabel: String {
+    return localizedString(for: "Multi-Factor Authentication Disabled")
+  }
+
+  /// MFA is not enabled in the current configuration. Please contact your administrator.
+  /// found in:
+  /// - MFAEnrolmentView
+  /// - MFAResolutionView
+  public var mfaNotEnabledMessage: String {
+    return localizedString(for: "MFA is not enabled in the current configuration. Please contact your administrator.")
+  }
+
+  /// No Authentication Methods Available
+  /// found in:
+  /// - MFAEnrolmentView
+  /// - MFAResolutionView
+  public var noAuthenticationMethodsAvailableLabel: String {
+    return localizedString(for: "No Authentication Methods Available")
+  }
+
+  /// No MFA methods are configured as allowed. Please contact your administrator.
+  /// found in:
+  /// - MFAEnrolmentView
+  /// - MFAResolutionView
+  public var noMFAMethodsConfiguredMessage: String {
+    return localizedString(for: "No MFA methods are configured as allowed. Please contact your administrator.")
+  }
+
+  /// Complete sign-in with your second factor
+  /// found in:
+  /// - MFAResolutionView
+  public var completeSignInWithSecondFactorMessage: String {
+    return localizedString(for: "Complete sign-in with your second factor")
+  }
+
+  /// Choose verification method:
+  /// found in:
+  /// - MFAResolutionView
+  public var chooseVerificationMethodLabel: String {
+    return localizedString(for: "Choose verification method:")
+  }
+
+  /// SMS Verification
+  /// found in:
+  /// - MFAResolutionView
+  public var smsVerificationLabel: String {
+    return localizedString(for: "SMS Verification")
+  }
+
+  /// We sent a code to %@
+  /// found in:
+  /// - MFAResolutionView
+  public var sentCodeToNumberMessage: String {
+    return localizedString(for: "We sent a code to %@")
+  }
+
+  /// We'll send a code to ••••••%@
+  /// found in:
+  /// - MFAResolutionView
+  public var sendCodeToMaskedNumberMessage: String {
+    return localizedString(for: "We'll send a code to ••••••%@")
+  }
+
+  /// Enter the 6-digit code from your authenticator app
+  /// found in:
+  /// - MFAResolutionView
+  public var enterCodeFromAuthenticatorAppMessage: String {
+    return localizedString(for: "Enter the 6-digit code from your authenticator app")
+  }
+
+  /// Resend Code
+  /// found in:
+  /// - MFAResolutionView
+  /// - EnterVerificationCodeView
+  public var resendCodeLabel: String {
+    return localizedString(for: "Resend Code")
+  }
+
+  /// Change number
+  /// found in:
+  /// - EnterVerificationCodeView
+  public var changeNumberLabel: String {
+    return localizedString(for: "Change number")
+  }
+
+  /// Manage your authentication methods
+  /// found in:
+  /// - MFAManagementView
+  public var manageAuthenticationMethodsMessage: String {
+    return localizedString(for: "Manage your authentication methods")
+  }
+
+  /// Enrolled Methods
+  /// found in:
+  /// - MFAManagementView
+  public var enrolledMethodsLabel: String {
+    return localizedString(for: "Enrolled Methods")
+  }
+
+  /// No Authentication Methods
+  /// found in:
+  /// - MFAManagementView
+  public var noAuthenticationMethodsLabel: String {
+    return localizedString(for: "No Authentication Methods")
+  }
+
+  /// Add an extra layer of security to your account
+  /// found in:
+  /// - MFAManagementView
+  public var addExtraSecurityLayerMessage: String {
+    return localizedString(for: "Add an extra layer of security to your account")
+  }
+
+  /// Add Another Method
+  /// found in:
+  /// - MFAManagementView
+  public var addAnotherMethodLabel: String {
+    return localizedString(for: "Add Another Method")
+  }
+
+  /// Get Started
+  /// found in:
+  /// - MFAManagementView
+  public var getStartedLabel: String {
+    return localizedString(for: "Get Started")
+  }
+
+  /// Remove
+  /// found in:
+  /// - MFAManagementView
+  public var removeLabel: String {
+    return localizedString(for: "Remove")
+  }
+
+  /// Authentication Method
+  /// found in:
+  /// - MFAManagementView
+  public var authenticationMethodLabel: String {
+    return localizedString(for: "Authentication Method")
+  }
+
+  /// Enrolled: %@
+  /// found in:
+  /// - MFAManagementView
+  public var enrolledDateLabel: String {
+    return localizedString(for: "Enrolled: %@")
+  }
+
+  /// SMS: %@
+  /// found in:
+  /// - MFAManagementView
+  public var smsPhoneLabel: String {
+    return localizedString(for: "SMS: %@")
+  }
+
+  /// Delete Account
+  /// found in:
+  /// - SignedInView
+  public var deleteAccountLabel: String {
+    return localizedString(for: "Delete Account")
+  }
+
+  /// Delete Account?
+  /// found in:
+  /// - SignedInView
+  public var deleteAccountConfirmationLabel: String {
+    return localizedString(for: "Delete Account?")
+  }
+
+  /// This action cannot be undone. All your data will be permanently deleted. You may need to reauthenticate to complete this action.
+  /// found in:
+  /// - SignedInView
+  public var deleteAccountWarningMessage: String {
+    return localizedString(for: "This action cannot be undone. All your data will be permanently deleted. You may need to reauthenticate to complete this action.")
+  }
+
+  /// Invalid OAuth Provider error
+  /// found in:
+  /// - GenericOAuthButton
+  public var invalidOAuthProviderError: String {
+    return localizedString(for: "Invalid OAuth Provider")
+  }
+
+  // MARK: - Field Labels
+
+  /// Email field label
+  /// found in:
+  /// - EmailAuthView
+  public var emailFieldLabel: String {
+    return localizedString(for: "Email")
+  }
+
+  /// Password field label
+  /// found in:
+  /// - EmailAuthView
+  public var passwordFieldLabel: String {
+    return localizedString(for: "Password")
+  }
+
+  /// Confirm Password field label
+  /// found in:
+  /// - EmailAuthView
+  public var confirmPasswordFieldLabel: String {
+    return localizedString(for: "Confirm Password")
+  }
+
+  /// Phone Number field label
+  /// found in:
+  /// - MFAEnrolmentView
+  public var phoneNumberFieldLabel: String {
+    return localizedString(for: "Phone Number")
+  }
+
+  /// Display Name field label
+  /// found in:
+  /// - MFAEnrolmentView
+  public var displayNameFieldLabel: String {
+    return localizedString(for: "Display Name")
+  }
+
+  /// Verification Code field label
+  /// found in:
+  /// - MFAEnrolmentView
+  public var verificationCodeFieldLabel: String {
+    return localizedString(for: "Verification Code")
+  }
+
+  /// Send a password recovery link to your email field label
+  /// found in:
+  /// - PasswordRecoveryView
+  public var passwordRecoveryEmailFieldLabel: String {
+    return localizedString(for: "Send a password recovery link to your email")
+  }
+
+  /// Send a sign-in link to your email field label
+  /// found in:
+  /// - EmailLinkView
+  public var signInLinkEmailFieldLabel: String {
+    return localizedString(for: "Send a sign-in link to your email")
+  }
+
+  /// Enter phone number prompt
+  /// found in:
+  /// - MFAEnrolmentView
+  public var enterPhoneNumberPrompt: String {
+    return localizedString(for: "Enter phone number")
+  }
+
+  /// Enter display name for this device prompt
+  /// found in:
+  /// - MFAEnrolmentView
+  public var enterDisplayNameForDevicePrompt: String {
+    return localizedString(for: "Enter display name for this device")
+  }
+
+  /// Enter display name for this authenticator prompt
+  /// found in:
+  /// - MFAEnrolmentView
+  public var enterDisplayNameForAuthenticatorPrompt: String {
+    return localizedString(for: "Enter display name for this authenticator")
+  }
+
+  /// Enter code from app prompt
+  /// found in:
+  /// - MFAEnrolmentView
+  public var enterCodeFromAppPrompt: String {
+    return localizedString(for: "Enter code from app")
+  }
+
+  /// Phone field label
+  /// found in:
+  /// - EnterPhoneNumberView
+  public var phoneFieldLabel: String {
+    return localizedString(for: "Phone")
+  }
+
+  /// We sent a code to number message
+  /// found in:
+  /// - EnterVerificationCodeView
+  public func sentCodeMessage(phoneNumber: String) -> String {
+    return String(format: localizedString(for: "We sent a code to %@"), phoneNumber)
+  }
+
+  /// Change number label
+  /// found in:
+  /// - EnterVerificationCodeView
+  public var changeNumberButtonLabel: String {
+    return localizedString(for: "Change number")
   }
 }
