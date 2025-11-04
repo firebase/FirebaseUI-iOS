@@ -132,11 +132,11 @@ extension AuthPickerView: View {
   var authPickerViewInternal: some View {
     @Bindable var authService = authService
     VStack {
-      if authService.authenticationState == .unauthenticated {
+      if authService.authenticationState == .authenticated {
+        SignedInView()
+      } else {
         authMethodPicker
           .safeAreaPadding()
-      } else {
-        SignedInView()
       }
     }
     .errorAlert(
