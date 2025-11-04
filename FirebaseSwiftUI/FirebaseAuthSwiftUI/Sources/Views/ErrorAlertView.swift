@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuth
 import SwiftUI
 
 /// A reusable view modifier that displays error messages in an alert modal
@@ -19,14 +20,24 @@ struct ErrorAlertModifier: ViewModifier {
   @Binding var error: AlertError?
   let okButtonLabel: String
 
+  private func shouldShowAlert(for error: AlertError?) -> Bool {
+    // View layer decides which errors should show an alert
+    guard let error = error else { return false }
+
+    // Don't show alert for CancellationError
+    if error.underlyingError is CancellationError {
+      return false
+    }
+
+    return true
+  }
+
   func body(content: Content) -> some View {
-    content
+    let shouldShow = shouldShowAlert(for: error)
+
+    return content
       .alert(isPresented: Binding<Bool>(
-        get: {
-          // View layer decides: Don't show alert for CancellationError
-          guard let error = error else { return false }
-          return !(error.underlyingError is CancellationError)
-        },
+        get: { shouldShow },
         set: { if !$0 { error = nil } }
       )) {
         Alert(

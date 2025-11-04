@@ -12,72 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuth
 import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
-
-// MARK: - Merge Conflict Handling
-
-/// Helper function to handle sign-in with automatic merge conflict resolution.
-///
-/// This function attempts to sign in with the provided action. If a merge conflict occurs
-/// (when an anonymous user is being upgraded and the credential is already associated with
-/// an existing account), it automatically signs out the anonymous user and signs in with
-/// the existing account's credential.
-///
-/// For conflicts that require manual linking (accountExistsWithDifferentCredential),
-/// the error is re-thrown to be handled by the view layer with AccountLinkingView.
-///
-/// - Parameters:
-///   - authService: The AuthService instance to use for sign-in operations
-///   - signInAction: An async closure that performs the sign-in operation
-/// - Returns: The SignInOutcome from the successful sign-in
-/// - Throws: Re-throws any errors except automatic accountMergeConflict (which is handled
-/// internally)
-@MainActor
-public func signInWithMergeConflictHandling(authService: AuthService,
-                                            signInAction: () async throws
-                                              -> SignInOutcome) async throws -> SignInOutcome {
-  do {
-    return try await signInAction()
-  } catch let error as AuthServiceError {
-    if case let .accountMergeConflict(context) = error {
-      // Check if this requires manual linking (UI flow) or automatic
-      if context.requiresManualLinking {
-        // Re-throw for view layer to handle with AccountLinkingView
-        throw error
-      } else {
-        // Automatic handling for anonymous upgrade
-        // Sign out the anonymous user
-        try await authService.signOut()
-
-        // Sign in with the existing account's credential
-        // This works because shouldHandleAnonymousUpgrade is now false after sign out
-        return try await authService.signIn(credentials: context.credential)
-      }
-    }
-    throw error
-  }
-}
-
-// MARK: - Environment Key for Sign-In Handler
-
-/// Environment key for a sign-in handler that includes merge conflict resolution
-private struct SignInHandlerKey: EnvironmentKey {
-  static let defaultValue: (@MainActor (AuthService, () async throws -> SignInOutcome) async throws
-    -> SignInOutcome)? = nil
-}
-
-public extension EnvironmentValues {
-  /// A sign-in handler that automatically handles merge conflicts for anonymous user upgrades.
-  /// When set in the environment, views should use this handler to wrap their sign-in calls.
-  var signInWithMergeConflictHandler: (@MainActor (AuthService,
-                                                   () async throws -> SignInOutcome) async throws
-      -> SignInOutcome)? {
-    get { self[SignInHandlerKey.self] }
-    set { self[SignInHandlerKey.self] = newValue }
-  }
-}
 
 @MainActor
 public struct AuthPickerView<Content: View> {
@@ -87,9 +25,9 @@ public struct AuthPickerView<Content: View> {
 
   @Environment(AuthService.self) private var authService
   private let content: () -> Content
-
-  // State for account linking
-  @State private var accountLinkingContext: AccountMergeConflictContext?
+  
+  // View-layer state for handling auto-linking flow
+  @State private var pendingCredentialForLinking: AuthCredential?
 }
 
 extension AuthPickerView: View {
@@ -124,40 +62,57 @@ extension AuthPickerView: View {
             }
         }
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
-        // Add sheet for account linking
-        .sheet(item: Binding(
-          get: { accountLinkingContext },
-          set: { accountLinkingContext = $0 }
-        )) { context in
-          NavigationStack {
-            AccountLinkingView(context: context)
-              .environment(authService)
-              .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                  if !authService.configuration.shouldHideCancelButton {
-                    Button {
-                      accountLinkingContext = nil
-                    } label: {
-                      Image(systemName: "xmark")
-                    }
-                  }
-                }
-              }
-          }
-        }
       }
-      // Intercept account linking errors
+      // View-layer logic: Intercept credential conflict errors and store for auto-linking
       .onChange(of: authService.currentError) { _, newValue in
-        // Check if the underlying error is accountMergeConflict with manual linking required
-        if let error = newValue?.underlyingError as? AuthServiceError,
-           case let .accountMergeConflict(context) = error,
-           context.requiresManualLinking {
-          // Clear the error (we're handling it with the sheet)
-          authService.currentError = nil
-          // Show the account linking sheet
-          accountLinkingContext = context
+        handleCredentialConflictError(newValue)
+      }
+      // View-layer logic: Auto-link pending credential after successful sign-in
+      .onChange(of: authService.authenticationState) { _, newState in
+        if newState == .authenticated {
+          attemptAutoLinkPendingCredential()
+        } else if newState == .unauthenticated {
+          // Clear pending credential if user signs out
+          pendingCredentialForLinking = nil
         }
       }
+  }
+  
+  /// View-layer logic: Handle credential conflict errors by storing credential for auto-linking
+  private func handleCredentialConflictError(_ error: AlertError?) {
+    guard let error = error,
+          let nsError = error.underlyingError as? NSError else { return }
+    
+    // Check if this is a credential conflict error that should trigger auto-linking
+    let shouldStoreCredential =
+      nsError.code == AuthErrorCode.accountExistsWithDifferentCredential.rawValue || // 17007
+      nsError.code == AuthErrorCode.credentialAlreadyInUse.rawValue ||               // 17025
+      nsError.code == AuthErrorCode.emailAlreadyInUse.rawValue ||                    // 17020
+      nsError.code == 17094                                                           // duplicate credential
+    
+    if shouldStoreCredential {
+      // Extract the credential from the error and store it
+      let credential = nsError.userInfo["FIRAuthUpdatedCredentialKey"] as? AuthCredential
+      pendingCredentialForLinking = credential
+      // Error still propagates to user via normal error modal
+    }
+  }
+  
+  /// View-layer logic: Attempt to link pending credential after successful sign-in
+  private func attemptAutoLinkPendingCredential() {
+    guard let credential = pendingCredentialForLinking else { return }
+    
+    Task {
+      do {
+        try await authService.linkAccounts(credentials: credential)
+        // Successfully linked, clear the pending credential
+        pendingCredentialForLinking = nil
+      } catch {
+        // Silently swallow linking errors - user is already signed in
+        // Consumer's custom views can observe authService.currentError if they want to handle this
+        pendingCredentialForLinking = nil
+      }
+    }
   }
 
   @ToolbarContentBuilder
@@ -200,10 +155,7 @@ extension AuthPickerView: View {
             .aspectRatio(contentMode: .fit)
             .frame(width: 100, height: 100)
           if authService.emailSignInEnabled {
-            EmailAuthView().environment(
-              \.signInWithMergeConflictHandler,
-              signInWithMergeConflictHandling
-            )
+            EmailAuthView()
           }
           Divider()
           otherSignInOptions(proxy)
@@ -219,7 +171,6 @@ extension AuthPickerView: View {
       authService.renderButtons()
     }
     .padding(.horizontal, proxy.size.width * 0.18)
-    .environment(\.signInWithMergeConflictHandler, signInWithMergeConflictHandling)
   }
 }
 

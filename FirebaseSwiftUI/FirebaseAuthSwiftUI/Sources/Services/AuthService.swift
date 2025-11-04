@@ -245,24 +245,6 @@ public final class AuthService {
     }
   }
 
-  // Real account? → Requires proof of ownership → requiresManualLinking = true
-  private func handleAccountExistsError(_ error: NSError, with credentials: AuthCredential) throws {
-    let email = error.userInfo["FIRAuthErrorUserInfoEmailKey"] as? String
-    let updatedCredential = error.userInfo["FIRAuthUpdatedCredentialKey"] as? AuthCredential
-      ?? credentials
-
-    let context = AccountMergeConflictContext(
-      credential: updatedCredential,
-      underlyingError: error,
-      message: "An account already exists with \(email ?? "this email"). Please sign in with your existing method to link accounts.",
-      uid: nil,
-      email: email,
-      requiresManualLinking: true
-    )
-
-    throw AuthServiceError.accountMergeConflict(context: context)
-  }
-
   private func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws
     -> SignInOutcome {
     if currentUser == nil {
@@ -272,42 +254,8 @@ public final class AuthService {
       let result = try await currentUser?.link(with: credentials)
       updateAuthenticationState()
       return .signedIn(result)
-    } catch let error as NSError {
-      // Handle accountExistsWithDifferentCredential error
-      if error.code == AuthErrorCode.accountExistsWithDifferentCredential.rawValue {
-        try handleAccountExistsError(error, with: credentials)
-      }
-
-      // Handle credentialAlreadyInUse error
-      if error.code == AuthErrorCode.credentialAlreadyInUse.rawValue {
-        // Extract the updated credential from the error
-        let updatedCredential = error.userInfo["FIRAuthUpdatedCredentialKey"] as? AuthCredential
-          ?? credentials
-        let context = AccountMergeConflictContext(
-          credential: updatedCredential,
-          underlyingError: error,
-          message: "Unable to merge accounts. The credential is already associated with a different account.",
-          uid: currentUser?.uid,
-          email: nil,
-          // Anonymous account? → Safe to discard → requiresManualLinking = false
-          requiresManualLinking: false
-        )
-        throw AuthServiceError.accountMergeConflict(context: context)
-      }
-
-      // Handle emailAlreadyInUse error
-      if error.code == AuthErrorCode.emailAlreadyInUse.rawValue {
-        let context = AccountMergeConflictContext(
-          credential: credentials,
-          underlyingError: error,
-          message: "Unable to merge accounts. This email is already associated with a different account.",
-          uid: currentUser?.uid,
-          email: nil,
-          // Anonymous account? → Safe to discard → requiresManualLinking = false
-          requiresManualLinking: false
-        )
-        throw AuthServiceError.accountMergeConflict(context: context)
-      }
+    } catch {
+      // Always throw errors - let view layer decide what to do
       throw error
     }
   }
@@ -324,11 +272,6 @@ public final class AuthService {
       }
     } catch let error as NSError {
       authenticationState = .unauthenticated
-
-      // Handle account exists with different credential
-      if error.code == AuthErrorCode.accountExistsWithDifferentCredential.rawValue {
-        try handleAccountExistsError(error, with: credentials)
-      }
 
       // Check if this is an MFA required error
       if error.code == AuthErrorCode.secondFactorRequired.rawValue {
@@ -427,7 +370,9 @@ public extension AuthService {
       }
     } catch {
       authenticationState = .unauthenticated
+      // ALWAYS store error - let view layer decide what to do
       updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
+      // ALWAYS throw - let view layer decide how to handle
       throw error
     }
   }
