@@ -71,9 +71,6 @@ extension AuthPickerView: View {
       .onChange(of: authService.authenticationState) { _, newState in
         if newState == .authenticated {
           attemptAutoLinkPendingCredential()
-        } else if newState == .unauthenticated {
-          // Clear pending credential if user signs out
-          pendingCredentialForLinking = nil
         }
       }
   }
@@ -92,7 +89,7 @@ extension AuthPickerView: View {
     
     if shouldStoreCredential {
       // Extract the credential from the error and store it
-      let credential = nsError.userInfo["FIRAuthUpdatedCredentialKey"] as? AuthCredential
+      let credential = nsError.userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? AuthCredential
       pendingCredentialForLinking = credential
       // Error still propagates to user via normal error modal
     }
