@@ -134,6 +134,9 @@ public final class AuthService {
   public let passwordPrompt: PasswordPromptCoordinator = .init()
   public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
+  
+  /// Current account conflict context - observe this to handle conflicts and update backend
+  public private(set) var currentAccountConflict: AccountConflictContext?
 
   // MARK: - Provider APIs
 
@@ -205,6 +208,7 @@ public final class AuthService {
 
   func reset() {
     currentError = nil
+    currentAccountConflict = nil
   }
 
   func updateError(title: String = "Error", message: String, underlyingError: Error? = nil) {
@@ -279,6 +283,25 @@ public final class AuthService {
           .userInfo[AuthErrorUserInfoMultiFactorResolverKey] as? MultiFactorResolver {
           return handleMFARequiredError(resolver: resolver)
         }
+      }
+      // Check for account conflict errors
+      else if let conflictType = determineConflictType(from: error) {
+        let context = createConflictContext(
+          from: error,
+          conflictType: conflictType,
+          credential: credentials
+        )
+        
+        // Store it for consumers to observe
+        currentAccountConflict = context
+        
+        // Only set error alert if we're NOT auto-handling it
+        if conflictType != .anonymousUpgradeConflict {
+          updateError(message: context.message, underlyingError: error)
+        }
+        
+        // Throw the specific error with context
+        throw AuthServiceError.accountConflict(context)
       } else {
         // Don't want error modal on MFA error so we only update here
         updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
@@ -370,9 +393,9 @@ public extension AuthService {
       }
     } catch {
       authenticationState = .unauthenticated
-      // ALWAYS store error - let view layer decide what to do
+      // store error if consumer wants to handle it
       updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      // ALWAYS throw - let view layer decide how to handle
+      // throw error to view layer
       throw error
     }
   }
@@ -830,6 +853,40 @@ public extension AuthService {
       updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
+  }
+
+  // MARK: - Account Conflict Helper Methods
+  
+  private func determineConflictType(from error: NSError) -> AccountConflictType? {
+    switch error.code {
+    case AuthErrorCode.accountExistsWithDifferentCredential.rawValue:
+      return shouldHandleAnonymousUpgrade ? .anonymousUpgradeConflict : .accountExistsWithDifferentCredential
+    case AuthErrorCode.credentialAlreadyInUse.rawValue:
+      return shouldHandleAnonymousUpgrade ? .anonymousUpgradeConflict : .credentialAlreadyInUse
+    case AuthErrorCode.emailAlreadyInUse.rawValue:
+      return shouldHandleAnonymousUpgrade ? .anonymousUpgradeConflict :.emailAlreadyInUse
+    default:
+      return nil
+    }
+  }
+  
+  private func createConflictContext(
+    from error: NSError,
+    conflictType: AccountConflictType,
+    credential: AuthCredential
+  ) -> AccountConflictContext {
+    let updatedCredential = error.userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? AuthCredential ?? credential
+    let email = error.userInfo[AuthErrorUserInfoEmailKey] as? String
+    
+    return AccountConflictContext(
+      conflictType: conflictType,
+      credential: updatedCredential,
+      underlyingError: error,
+      message: string.localizedErrorMessage(for: error),
+      email: email,
+      existingProviderIds: nil,
+      isAnonymousUpgrade: shouldHandleAnonymousUpgrade
+    )
   }
 
   // MARK: - MFA Helper Methods
