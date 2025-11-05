@@ -34,10 +34,6 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
     }
   }
 
-  @MainActor public func createAuthCredential() async throws -> AuthCredential {
-    fatalError("Not implemented")
-  }
-
   @MainActor public func createAuthCredential(verificationId: String,
                                               verificationCode: String) async throws
     -> AuthCredential {

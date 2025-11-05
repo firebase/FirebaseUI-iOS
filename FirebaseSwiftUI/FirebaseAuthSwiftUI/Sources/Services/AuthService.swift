@@ -17,7 +17,12 @@ import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
-public protocol AuthProviderSwift {
+/// Base protocol for all authentication providers
+public protocol AuthProviderSwift {}
+
+/// Protocol for providers that can directly create an AuthCredential
+/// Used by Google, Apple, Twitter, Facebook, and OAuth providers
+public protocol CredentialAuthProviderSwift: AuthProviderSwift {
   @MainActor func createAuthCredential() async throws -> AuthCredential
 }
 
@@ -27,6 +32,9 @@ public protocol AuthProviderUI {
   var provider: AuthProviderSwift { get }
 }
 
+/// Protocol for phone authentication which requires a two-step flow:
+/// 1. Verify phone number to get verification ID
+/// 2. Create credential with verification ID and code
 public protocol PhoneAuthProviderSwift: AuthProviderSwift {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
   @MainActor func createAuthCredential(verificationId: String,
@@ -189,7 +197,7 @@ public final class AuthService {
     )
   }
 
-  public func signIn(_ provider: AuthProviderSwift) async throws -> SignInOutcome {
+  public func signIn(_ provider: CredentialAuthProviderSwift) async throws -> SignInOutcome {
     do {
       let credential = try await provider.createAuthCredential()
       let result = try await signIn(credentials: credential)
@@ -829,8 +837,9 @@ public extension AuthService {
       let password = try await passwordPrompt.confirmPassword()
       let credential = EmailAuthProvider.credential(withEmail: email, password: password)
       _ = try await user.reauthenticate(with: credential)
-    } else if let matchingProvider = providers.first(where: { $0.id == providerId }) {
-      let credential = try await matchingProvider.provider.createAuthCredential()
+    } else if let matchingProvider = providers.first(where: { $0.id == providerId }),
+              let credentialProvider = matchingProvider.provider as? CredentialAuthProviderSwift {
+      let credential = try await credentialProvider.createAuthCredential()
       _ = try await user.reauthenticate(with: credential)
     } else {
       throw AuthServiceError.providerNotFound("No provider found for \(providerId)")

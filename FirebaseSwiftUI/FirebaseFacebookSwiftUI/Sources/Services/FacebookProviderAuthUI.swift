@@ -19,7 +19,7 @@ import FirebaseAuth
 import FirebaseAuthSwiftUI
 import SwiftUI
 
-public class FacebookProviderSwift: AuthProviderSwift {
+public class FacebookProviderSwift: CredentialAuthProviderSwift {
   let scopes: [String]
   let providerId = "facebook.com"
   private let loginManager = LoginManager()

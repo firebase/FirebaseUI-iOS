@@ -17,7 +17,7 @@ import FirebaseAuthSwiftUI
 import FirebaseCore
 import SwiftUI
 
-public class TwitterProviderSwift: AuthProviderSwift {
+public class TwitterProviderSwift: CredentialAuthProviderSwift {
   public let scopes: [String]
   let providerId = "twitter.com"
 
@@ -54,6 +54,6 @@ public class TwitterProviderAuthUI: AuthProviderUI {
   public let id: String = "twitter.com"
 
   @MainActor public func authButton() -> AnyView {
-    AnyView(SignInWithTwitterButton(provider: provider))
+    AnyView(SignInWithTwitterButton(provider: provider as! CredentialAuthProviderSwift))
   }
 }

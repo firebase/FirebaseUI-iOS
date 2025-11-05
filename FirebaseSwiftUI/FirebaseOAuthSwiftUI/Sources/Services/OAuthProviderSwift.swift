@@ -18,7 +18,7 @@ import FirebaseCore
 import SwiftUI
 
 /// Configuration for a generic OAuth provider
-public class OAuthProviderSwift: AuthProviderSwift {
+public class OAuthProviderSwift: CredentialAuthProviderSwift {
   public let providerId: String
   public let scopes: [String]
   public let customParameters: [String: String]
@@ -130,6 +130,6 @@ public class OAuthProviderAuthUI: AuthProviderUI {
   }
 
   @MainActor public func authButton() -> AnyView {
-    AnyView(GenericOAuthButton(provider: provider))
+    AnyView(GenericOAuthButton(provider: provider as! CredentialAuthProviderSwift))
   }
 }
