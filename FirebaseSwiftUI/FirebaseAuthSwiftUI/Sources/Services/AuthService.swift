@@ -427,7 +427,19 @@ public extension AuthService {
         throw AuthServiceError
           .invalidEmailLink("email address is missing from app storage. Is this the same device?")
       }
-      let link = url.absoluteString
+      let urlString = url.absoluteString
+      
+      // Extract the actual auth link from Firebase Dynamic Link
+      guard let dynamicLink = CommonUtils.getQueryParamValue(from: urlString, paramName: "link") else {
+        throw AuthServiceError
+          .invalidEmailLink("Dynamic Link 'link' parameter is missing from the email link URL")
+      }
+      
+      guard let link = dynamicLink.removingPercentEncoding else {
+        throw AuthServiceError
+          .invalidEmailLink("Failed to decode Link URL")
+      }
+      
       guard let continueUrl = CommonUtils.getQueryParamValue(from: link, paramName: "continueUrl")
       else {
         throw AuthServiceError
