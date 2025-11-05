@@ -42,11 +42,7 @@ public struct AccountConflictContext: LocalizedError, Identifiable, Equatable {
   public let underlyingError: Error
   public let message: String
   public let email: String?
-  public let existingProviderIds: [String]?
-
-  /// Indicates if this conflict occurred during anonymous user upgrade
-  public let isAnonymousUpgrade: Bool
-
+  
   /// Human-readable description of the conflict type
   public var conflictDescription: String {
     switch conflictType {

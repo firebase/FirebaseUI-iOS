@@ -130,7 +130,7 @@ public final class AuthService {
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .signIn
-  public var currentError: AlertError?
+  public private(set) var currentError: AlertError?
   public let passwordPrompt: PasswordPromptCoordinator = .init()
   public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
@@ -243,9 +243,12 @@ public final class AuthService {
       }
       updateAuthenticationState()
     } catch {
+      // Possible conflicts from user.link():
+      // - credentialAlreadyInUse: credential is already linked to another account
+      // - emailAlreadyInUse: email from credential is already used by another account
+      // - accountExistsWithDifferentCredential: account exists with different sign-in method
       authenticationState = .unauthenticated
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
+      try handleErrorWithConflictCheck(error: error, credential: credentials)
     }
   }
 
@@ -259,7 +262,6 @@ public final class AuthService {
       updateAuthenticationState()
       return .signedIn(result)
     } catch {
-      // Always throw errors - let view layer decide what to do
       throw error
     }
   }
@@ -284,30 +286,11 @@ public final class AuthService {
           return handleMFARequiredError(resolver: resolver)
         }
       }
-      // Check for account conflict errors
-      else if let conflictType = determineConflictType(from: error) {
-        let context = createConflictContext(
-          from: error,
-          conflictType: conflictType,
-          credential: credentials
-        )
-
-        // Store it for consumers to observe
-        currentAccountConflict = context
-
-        // Only set error alert if we're NOT auto-handling it
-        if conflictType != .anonymousUpgradeConflict {
-          updateError(message: context.message, underlyingError: error)
-        }
-
-        // Throw the specific error with context
-        throw AuthServiceError.accountConflict(context)
-      } else {
-        // Don't want error modal on MFA error so we only update here
-        updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      }
-
-      throw error
+      
+      // Possible conflicts from auth.signIn(with:):
+      // - accountExistsWithDifferentCredential: account exists with different provider
+      // - credentialAlreadyInUse: credential is already linked to another account
+      try handleErrorWithConflictCheck(error: error, credential: credentials)
     }
   }
 
@@ -381,10 +364,10 @@ public extension AuthService {
 
   func createUser(email email: String, password: String) async throws -> SignInOutcome {
     authenticationState = .authenticating
+    let credential = EmailAuthProvider.credential(withEmail: email, password: password)
 
     do {
       if shouldHandleAnonymousUpgrade {
-        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         return try await handleAutoUpgradeAnonymousUser(credentials: credential)
       } else {
         let result = try await auth.createUser(withEmail: email, password: password)
@@ -392,11 +375,10 @@ public extension AuthService {
         return .signedIn(result)
       }
     } catch {
+      // Possible conflicts from auth.createUser():
+      // - emailAlreadyInUse: email is already registered with another account
       authenticationState = .unauthenticated
-      // store error if consumer wants to handle it
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      // throw error to view layer
-      throw error
+      try handleErrorWithConflictCheck(error: error, credential: credential)
     }
   }
 
@@ -454,8 +436,18 @@ public extension AuthService {
         emailLink = nil
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
+      // Reconstruct credential for conflict handling
+      let link = url.absoluteString
+      guard let email = emailLink else {
+        throw AuthServiceError
+          .invalidEmailLink("email address is missing from app storage. Is this the same device?")
+      }
+      let credential = EmailAuthProvider.credential(withEmail: email, link: link)
+      
+      // Possible conflicts from auth.signIn(withEmail:link:):
+      // - accountExistsWithDifferentCredential: account exists with different provider
+      // - credentialAlreadyInUse: credential is already linked to another account
+      try handleErrorWithConflictCheck(error: error, credential: credential)
     }
   }
 
@@ -883,10 +875,39 @@ public extension AuthService {
       credential: updatedCredential,
       underlyingError: error,
       message: string.localizedErrorMessage(for: error),
-      email: email,
-      existingProviderIds: nil,
-      isAnonymousUpgrade: shouldHandleAnonymousUpgrade
+      email: email
     )
+  }
+
+  /// Handles account conflict errors by creating context, storing it, and throwing structured error
+  /// - Parameters:
+  ///   - error: The error to check and handle
+  ///   - credential: The credential that caused the conflict
+  /// - Throws: AuthServiceError.accountConflict if it's a conflict error, otherwise rethrows the original error
+  private func handleErrorWithConflictCheck(error: Error, credential: AuthCredential) throws -> Never {
+    // Check for account conflict errors
+    if let error = error as NSError?,
+       let conflictType = determineConflictType(from: error) {
+      let context = createConflictContext(
+        from: error,
+        conflictType: conflictType,
+        credential: credential
+      )
+      
+      // Store it for consumers to observe
+      currentAccountConflict = context
+      
+      // Only set error alert if we're NOT auto-handling it
+      if conflictType != .anonymousUpgradeConflict {
+        updateError(message: context.message, underlyingError: error)
+      }
+      
+      // Throw the specific error with context
+      throw AuthServiceError.accountConflict(context)
+    } else {
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
+      throw error
+    }
   }
 
   // MARK: - MFA Helper Methods
