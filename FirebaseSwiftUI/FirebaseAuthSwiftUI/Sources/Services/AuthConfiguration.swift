@@ -22,6 +22,7 @@ public struct AuthConfiguration {
   public let interactiveDismissEnabled: Bool
   public let shouldAutoUpgradeAnonymousUsers: Bool
   public let customStringsBundle: Bundle?
+  public let locale: Locale?
   public let tosUrl: URL?
   public let privacyPolicyUrl: URL?
   public let emailLinkSignInActionCodeSettings: ActionCodeSettings?
@@ -39,6 +40,7 @@ public struct AuthConfiguration {
     interactiveDismissEnabled: Bool = true,
     shouldAutoUpgradeAnonymousUsers: Bool = false,
     customStringsBundle: Bundle? = nil,
+    locale: Locale? = nil,
     tosUrl: URL? = nil,
     privacyPolicyUrl: URL? = nil,
     emailLinkSignInActionCodeSettings: ActionCodeSettings? = nil,
@@ -52,6 +54,7 @@ public struct AuthConfiguration {
     self.interactiveDismissEnabled = interactiveDismissEnabled
     self.shouldAutoUpgradeAnonymousUsers = shouldAutoUpgradeAnonymousUsers
     self.customStringsBundle = customStringsBundle
+    self.locale = locale
     self.tosUrl = tosUrl
     self.privacyPolicyUrl = privacyPolicyUrl
     self.emailLinkSignInActionCodeSettings = emailLinkSignInActionCodeSettings

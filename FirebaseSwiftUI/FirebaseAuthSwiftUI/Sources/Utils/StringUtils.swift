@@ -19,14 +19,35 @@ let kKeyNotFound = "Key not found"
 
 public class StringUtils {
   let bundle: Bundle
-  init(bundle: Bundle) {
+  let locale: Locale?
+
+  init(bundle: Bundle, locale: Locale? = nil) {
     self.bundle = bundle
+    self.locale = locale
   }
 
   public func localizedString(for key: String) -> String {
-    let keyLocale = String.LocalizationValue(key)
-    let value = String(localized: keyLocale, bundle: bundle)
-    return value
+    // If a specific locale is set, use NSLocalizedString with the locale's language code
+    if let locale {
+      let languageCode = locale.language.languageCode?.identifier ?? locale.identifier
+
+      // Get the localized string from the bundle for the specific language
+      if let path = bundle.path(forResource: languageCode, ofType: "lproj"),
+         let localizedBundle = Bundle(path: path) {
+        let localizedString = localizedBundle.localizedString(forKey: key, value: nil, table: "Localizable")
+        // If we got a localized string (not the key back), return it
+        if localizedString != key {
+          return localizedString
+        }
+      }
+
+      // Fallback to default bundle if language-specific bundle not found
+      return bundle.localizedString(forKey: key, value: nil, table: "Localizable")
+    } else {
+      let keyLocale = String.LocalizationValue(key)
+      let value = String(localized: keyLocale, bundle: bundle)
+      return value
+    }
   }
 
   public func localizedErrorMessage(for error: Error) -> String {

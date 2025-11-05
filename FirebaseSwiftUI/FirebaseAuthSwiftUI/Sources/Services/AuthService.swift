@@ -109,7 +109,7 @@ public final class AuthService {
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth()) {
     self.auth = auth
     self.configuration = configuration
-    string = StringUtils(bundle: configuration.customStringsBundle ?? Bundle.module)
+    string = StringUtils(bundle: configuration.customStringsBundle ?? Bundle.module, locale: configuration.locale)
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
     FirebaseApp.registerLibrary("firebase-ui-ios", withVersion: FirebaseAuthSwiftUIVersion.version)
   }
