@@ -21,8 +21,6 @@ struct EnterPhoneNumberView: View {
   @Environment(AuthService.self) private var authService
   @State private var phoneNumber: String = ""
   @State private var selectedCountry: CountryData = .default
-  @State private var currentError: AlertError? = nil
-  @State private var isProcessing: Bool = false
 
   var body: some View {
     VStack(spacing: 16) {
@@ -43,13 +41,12 @@ struct EnterPhoneNumberView: View {
       ) {
         CountrySelector(
           selectedCountry: $selectedCountry,
-          enabled: !isProcessing
+          enabled: !(authService.authenticationState == .authenticating)
         )
       }
 
       Button(action: {
         Task {
-          isProcessing = true
           do {
             guard let provider = authService.currentPhoneProvider else {
               fatalError("No phone provider found")
@@ -60,14 +57,11 @@ struct EnterPhoneNumberView: View {
               verificationID: id,
               fullPhoneNumber: fullPhoneNumber
             ))
-            currentError = nil
           } catch {
-            currentError = AlertError(message: error.localizedDescription)
           }
-          isProcessing = false
         }
       }) {
-        if isProcessing {
+        if authService.authenticationState == .authenticating {
           ProgressView()
             .frame(height: 32)
             .frame(maxWidth: .infinity)
@@ -78,14 +72,14 @@ struct EnterPhoneNumberView: View {
         }
       }
       .buttonStyle(.borderedProminent)
-      .disabled(isProcessing || phoneNumber.isEmpty)
+      .disabled(authService.authenticationState == .authenticating || phoneNumber.isEmpty)
       .padding(.top, 8)
 
       Spacer()
     }
     .navigationTitle(authService.string.phoneSignInTitle)
     .padding(.horizontal)
-    .errorAlert(error: $currentError, okButtonLabel: authService.string.okButtonLabel)
+    .errorAlert(error: authService.currentError, okButtonLabel: authService.string.okButtonLabel)
   }
 }
 
