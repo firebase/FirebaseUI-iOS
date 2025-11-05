@@ -19,9 +19,6 @@ import SwiftUI
 public typealias VerificationID = String
 
 public class PhoneProviderSwift: PhoneAuthProviderSwift {
-  private var verificationID: String?
-  private var verificationCode: String?
-
   public init() {}
 
   @MainActor public func verifyPhoneNumber(phoneNumber: String) async throws -> VerificationID {
@@ -37,19 +34,13 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
     }
   }
 
-  public func setVerificationCode(verificationID: String, code: String) {
-    self.verificationID = verificationID
-    verificationCode = code
-  }
-
   @MainActor public func createAuthCredential() async throws -> AuthCredential {
-    guard let verificationID = verificationID,
-          let verificationCode = verificationCode else {
-      throw AuthServiceError.providerAuthenticationFailed("Verification ID or code not set")
-    }
-
+    fatalError("Not implemented")
+  }
+  
+  @MainActor public func createAuthCredential(verificationId: String, verificationCode: String) async throws -> AuthCredential {
     return PhoneAuthProvider.provider()
-      .credential(withVerificationID: verificationID, verificationCode: verificationCode)
+      .credential(withVerificationID: verificationId, verificationCode: verificationCode)
   }
 }
 

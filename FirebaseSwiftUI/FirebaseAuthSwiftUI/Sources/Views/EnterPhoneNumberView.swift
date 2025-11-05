@@ -99,11 +99,11 @@ struct EnterPhoneNumberView: View {
       return "mock-verification-id"
     }
 
-    func setVerificationCode(verificationID _: String, code _: String) {
-      // Mock implementation
-    }
-
     func createAuthCredential() async throws -> AuthCredential {
+      fatalError("Not implemented in preview")
+    }
+    
+    func createAuthCredential(verificationId: String, verificationCode: String) async throws -> AuthCredential {
       fatalError("Not implemented in preview")
     }
   }

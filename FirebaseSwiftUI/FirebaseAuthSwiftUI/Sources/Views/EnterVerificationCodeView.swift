@@ -20,16 +20,14 @@ import SwiftUI
 @MainActor
 struct EnterVerificationCodeView: View {
   @Environment(AuthService.self) private var authService
-  @Environment(\.dismiss) private var dismiss
   @State private var verificationCode: String = ""
-  @State private var currentError: AlertError? = nil
-  @State private var isProcessing: Bool = false
 
   let verificationID: String
   let fullPhoneNumber: String
   let phoneProvider: PhoneAuthProviderSwift
 
   var body: some View {
+    @Bindable var authService = authService
     VStack(spacing: 32) {
       VStack(spacing: 16) {
         VStack(spacing: 8) {
@@ -50,31 +48,21 @@ struct EnterVerificationCodeView: View {
         .padding(.bottom)
         .frame(maxWidth: .infinity, alignment: .leading)
 
-        VerificationCodeInputField(
-          code: $verificationCode,
-          isError: currentError != nil,
-          errorMessage: currentError?.message
-        )
+        VerificationCodeInputField(code: $verificationCode)
 
         Button(action: {
           Task {
-            isProcessing = true
             do {
-              phoneProvider.setVerificationCode(
-                verificationID: verificationID,
-                code: verificationCode
-              )
-              let credential = try await phoneProvider.createAuthCredential()
+              let credential = try await phoneProvider.createAuthCredential(verificationId: verificationID, verificationCode: verificationCode)
 
               _ = try await authService.signIn(credentials: credential)
-              dismiss()
+              authService.navigator.clear()
             } catch {
-              currentError = AlertError(message: error.localizedDescription)
-              isProcessing = false
+              
             }
           }
         }) {
-          if isProcessing {
+          if authService.authenticationState == .authenticating {
             ProgressView()
               .frame(height: 32)
               .frame(maxWidth: .infinity)
@@ -85,7 +73,7 @@ struct EnterVerificationCodeView: View {
           }
         }
         .buttonStyle(.borderedProminent)
-        .disabled(isProcessing || verificationCode.count != 6)
+        .disabled(authService.authenticationState == .authenticating || verificationCode.count != 6)
       }
 
       Spacer()
@@ -93,7 +81,7 @@ struct EnterVerificationCodeView: View {
     .navigationTitle(authService.string.enterVerificationCodeTitle)
     .navigationBarTitleDisplayMode(.inline)
     .padding(.horizontal)
-    .errorAlert(error: $currentError, okButtonLabel: authService.string.okButtonLabel)
+    .errorAlert(error: $authService.currentError, okButtonLabel: authService.string.okButtonLabel)
   }
 }
 
@@ -107,11 +95,11 @@ struct EnterVerificationCodeView: View {
       return "mock-verification-id"
     }
 
-    func setVerificationCode(verificationID _: String, code _: String) {
-      // Mock implementation
-    }
-
     func createAuthCredential() async throws -> AuthCredential {
+      fatalError("Not implemented in preview")
+    }
+    
+    func createAuthCredential(verificationId: String, verificationCode: String) async throws -> AuthCredential {
       fatalError("Not implemented in preview")
     }
   }

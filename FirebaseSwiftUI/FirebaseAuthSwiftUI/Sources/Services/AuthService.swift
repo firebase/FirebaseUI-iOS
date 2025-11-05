@@ -29,7 +29,7 @@ public protocol AuthProviderUI {
 
 public protocol PhoneAuthProviderSwift: AuthProviderSwift {
   @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
-  func setVerificationCode(verificationID: String, code: String)
+  @MainActor func createAuthCredential(verificationId: String, verificationCode: String) async throws -> AuthCredential
 }
 
 public enum AuthenticationState {
@@ -109,7 +109,7 @@ public final class AuthService {
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth()) {
     self.auth = auth
     self.configuration = configuration
-    string = StringUtils(bundle: configuration.customStringsBundle ?? Bundle.module, locale: configuration.locale)
+    string = StringUtils(bundle: configuration.customStringsBundle ?? Bundle.module, languageCode: configuration.languageCode)
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
     FirebaseApp.registerLibrary("firebase-ui-ios", withVersion: FirebaseAuthSwiftUIVersion.version)
   }
