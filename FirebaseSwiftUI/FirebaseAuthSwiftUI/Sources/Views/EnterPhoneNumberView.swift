@@ -17,15 +17,12 @@ import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
-@MainActor
 struct EnterPhoneNumberView: View {
   @Environment(AuthService.self) private var authService
   @State private var phoneNumber: String = ""
   @State private var selectedCountry: CountryData = .default
   @State private var currentError: AlertError? = nil
   @State private var isProcessing: Bool = false
-
-  let phoneProvider: PhoneAuthProviderSwift
 
   var body: some View {
     VStack(spacing: 16) {
@@ -54,8 +51,11 @@ struct EnterPhoneNumberView: View {
         Task {
           isProcessing = true
           do {
+            guard let provider = authService.currentPhoneProvider else {
+              fatalError("No phone provider found")
+            }
             let fullPhoneNumber = selectedCountry.dialCode + phoneNumber
-            let id = try await phoneProvider.verifyPhoneNumber(phoneNumber: fullPhoneNumber)
+            let id = try await provider.verifyPhoneNumber(phoneNumber: fullPhoneNumber)
             authService.navigator.push(.enterVerificationCode(
               verificationID: id,
               fullPhoneNumber: fullPhoneNumber
@@ -92,22 +92,6 @@ struct EnterPhoneNumberView: View {
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
 
-  class MockPhoneProvider: PhoneAuthProviderSwift {
-    var id: String = "phone"
-
-    func verifyPhoneNumber(phoneNumber _: String) async throws -> String {
-      return "mock-verification-id"
-    }
-
-    func createAuthCredential() async throws -> AuthCredential {
-      fatalError("Not implemented in preview")
-    }
-    
-    func createAuthCredential(verificationId: String, verificationCode: String) async throws -> AuthCredential {
-      fatalError("Not implemented in preview")
-    }
-  }
-
-  return EnterPhoneNumberView(phoneProvider: MockPhoneProvider())
+  return EnterPhoneNumberView()
     .environment(AuthService())
 }

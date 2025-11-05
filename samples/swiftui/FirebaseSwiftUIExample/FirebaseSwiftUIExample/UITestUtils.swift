@@ -10,7 +10,8 @@ import SwiftUI
 // UI Test Runner keys
 public let testRunner = CommandLine.arguments.contains("--test-view-enabled")
 
+public let anonymousSignInEnabled = CommandLine.arguments.contains("--anonymous-sign-in-enabled")
+
 func signOut() throws {
   try Auth.auth().signOut()
 }
-

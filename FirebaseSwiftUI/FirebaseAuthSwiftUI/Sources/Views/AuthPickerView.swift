@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuth
 import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
@@ -24,6 +25,9 @@ public struct AuthPickerView<Content: View> {
   
   @Environment(AuthService.self) private var authService
   private let content: () -> Content
+
+  // View-layer state for handling auto-linking flow
+  @State private var pendingCredentialForLinking: AuthCredential?
 }
 
 extension AuthPickerView: View {
@@ -55,26 +59,69 @@ extension AuthPickerView: View {
               case AuthView.mfaResolution:
                 MFAResolutionView()
               case AuthView.enterPhoneNumber:
-                if let phoneProvider = authService.currentPhoneProvider {
-                  EnterPhoneNumberView(phoneProvider: phoneProvider)
-                } else {
-                  EmptyView()
-                }
+                EnterPhoneNumberView()
               case let .enterVerificationCode(verificationID, fullPhoneNumber):
-                if let phoneProvider = authService.currentPhoneProvider {
-                  EnterVerificationCodeView(
-                    verificationID: verificationID,
-                    fullPhoneNumber: fullPhoneNumber,
-                    phoneProvider: phoneProvider
-                  )
-                } else {
-                  EmptyView()
-                }
+                EnterVerificationCodeView(verificationID: verificationID, fullPhoneNumber: fullPhoneNumber)
               }
             }
         }
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
       }
+      // View-layer logic: Handle account conflicts (auto-handle anonymous upgrade, store others for
+      // linking)
+      .onChange(of: authService.currentAccountConflict) { _, conflict in
+        handleAccountConflict(conflict)
+      }
+      // View-layer logic: Auto-link pending credential after successful sign-in
+      .onChange(of: authService.authenticationState) { _, newState in
+        if newState == .authenticated {
+          attemptAutoLinkPendingCredential()
+        }
+      }
+  }
+
+  /// View-layer logic: Handle account conflicts with type-specific behavior
+  private func handleAccountConflict(_ conflict: AccountConflictContext?) {
+    guard let conflict = conflict else { return }
+
+    // Only auto-handle anonymous upgrade conflicts
+    if conflict.conflictType == .anonymousUpgradeConflict {
+      Task {
+        do {
+          // Sign out the anonymous user
+          try await authService.signOut()
+
+          // Sign in with the new credential
+          _ = try await authService.signIn(credentials: conflict.credential)
+
+          // Successfully handled - conflict and error are cleared automatically by reset()
+        } catch {
+          // Error will be shown via normal error handling
+          // Credential is still stored if they want to retry
+        }
+      }
+    } else {
+      // Other conflicts: store credential for potential linking after sign-in
+      pendingCredentialForLinking = conflict.credential
+      // Error modal will show for user to see and handle
+    }
+  }
+
+  /// View-layer logic: Attempt to link pending credential after successful sign-in
+  private func attemptAutoLinkPendingCredential() {
+    guard let credential = pendingCredentialForLinking else { return }
+
+    Task {
+      do {
+        try await authService.linkAccounts(credentials: credential)
+        // Successfully linked, clear the pending credential
+        pendingCredentialForLinking = nil
+      } catch {
+        // Silently swallow linking errors - user is already signed in
+        // Consumer's custom views can observe authService.currentError if they want to handle this
+        pendingCredentialForLinking = nil
+      }
+    }
   }
   
   @ToolbarContentBuilder
@@ -116,7 +163,7 @@ extension AuthPickerView: View {
       }
     }
     .errorAlert(
-      error: $authService.currentError,
+      error: authService.currentError,
       okButtonLabel: authService.string.okButtonLabel
     )
   }

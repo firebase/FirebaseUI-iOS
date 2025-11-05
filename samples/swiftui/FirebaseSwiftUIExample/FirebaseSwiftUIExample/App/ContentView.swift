@@ -20,18 +20,19 @@
 //
 
 import AppTrackingTransparency
+import FirebaseAppleSwiftUI
 import FirebaseAuth
 import FirebaseAuthSwiftUI
 import FirebaseFacebookSwiftUI
 import FirebaseGoogleSwiftUI
+import FirebaseOAuthSwiftUI
 import FirebasePhoneAuthSwiftUI
 import FirebaseTwitterSwiftUI
-import FirebaseAppleSwiftUI
-import FirebaseOAuthSwiftUI
 import SwiftUI
 
 struct ContentView: View {
   init() {
+    Auth.auth().signInAnonymously()
     let actionCodeSettings = ActionCodeSettings()
     actionCodeSettings.handleCodeInApp = true
     actionCodeSettings
@@ -40,12 +41,13 @@ struct ContentView: View {
     actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
     let configuration = AuthConfiguration(
       languageCode: "es",
+      shouldAutoUpgradeAnonymousUsers: true,
       tosUrl: URL(string: "https://example.com/tos"),
       privacyPolicyUrl: URL(string: "https://example.com/privacy"),
       emailLinkSignInActionCodeSettings: actionCodeSettings,
       mfaEnabled: false
     )
-    
+
     authService = AuthService(
       configuration: configuration
     )
@@ -70,16 +72,16 @@ struct ContentView: View {
     
     authService.auth.useEmulator(withHost: "127.0.0.1", port: 9099)
   }
-  
+
   let authService: AuthService
-  
+
   var body: some View {
     AuthPickerView {
       usersApp
     }
     .environment(authService)
   }
-  
+
   var usersApp: some View {
     NavigationStack {
       VStack {
@@ -94,7 +96,7 @@ struct ContentView: View {
         } else {
           Text("Authenticated - \(authService.currentUser?.email ?? "")")
           Button {
-            authService.isPresented = true  // Reopen the sheet
+            authService.isPresented = true // Reopen the sheet
           } label: {
             Text("Manage Account")
           }
@@ -114,7 +116,7 @@ struct ContentView: View {
     .onAppear {
       authService.isPresented = authService.authenticationState == .unauthenticated
     }
-    .onChange(of: authService.authenticationState) { oldValue, newValue in
+    .onChange(of: authService.authenticationState) { _, newValue in
       debugPrint("authService.authenticationState - \(newValue)")
       if newValue != .authenticating {
         authService.isPresented = newValue == .unauthenticated

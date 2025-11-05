@@ -38,81 +38,82 @@ final class MFAResolutionUITests: XCTestCase {
     let email = createEmail()
     let password = "12345678"
     let phoneNumber = "+15551234567"
-    
+
     // Sign up the user
     try await signUpUser(email: email, password: password)
-    
+
     // Get ID token and enable MFA via API
     guard let idToken = await getIDTokenFromEmulator(email: email, password: password) else {
       XCTFail("Failed to get ID token from emulator")
       return
     }
-    
+
     try await verifyEmailInEmulator(email: email, idToken: idToken)
-    
+
     let mfaEnabled = await enableSMSMFAViaEmulator(
       idToken: idToken,
       phoneNumber: phoneNumber,
       displayName: "Test Phone"
     )
-    
+
     XCTAssertTrue(mfaEnabled, "MFA should be enabled successfully via API")
 
-    
     // Wait for sign out to complete
     let emailField = app.textFields["email-field"]
     XCTAssertTrue(emailField.waitForExistence(timeout: 10), "Should return to auth picker")
-    
+
     try signInUser(app: app, email: email, password: password)
-    
-    
+
     let mfaResolutionTitle = app.staticTexts["mfa-resolution-title"]
     XCTAssertTrue(
       mfaResolutionTitle.waitForExistence(timeout: 10),
       "MFA resolution view should appear"
     )
-    
+
     let smsButton = app.buttons["sms-method-button"]
     if smsButton.exists && smsButton.isEnabled {
       smsButton.tap()
     }
     dismissAlert(app: app)
 
-    
     // Wait for SMS to be sent
     try await Task.sleep(nanoseconds: 2_000_000_000)
-    
+
     let sendSMSButton = app.buttons["send-sms-button"]
-    
+
     sendSMSButton.tap()
-    
+
     try await Task.sleep(nanoseconds: 3_000_000_000)
-    
-    guard let verificationCode = await getSMSVerificationCode(for: phoneNumber, codeType: "verification") else {
+
+    guard let verificationCode = await getSMSVerificationCode(
+      for: phoneNumber,
+      codeType: "verification"
+    ) else {
       XCTFail("Failed to retrieve SMS verification code from emulator")
       return
     }
-    
+
     let codeField = app.textFields["sms-verification-code-field"]
     XCTAssertTrue(codeField.waitForExistence(timeout: 10), "Code field should exist")
     codeField.tap()
     codeField.typeText(verificationCode)
-    
+
     let completeButton = app.buttons["complete-resolution-button"]
     XCTAssertTrue(completeButton.exists, "Complete button should exist")
     completeButton.tap()
-    
+
     // Wait for sign-in to complete
-    // Resolution always fails due to ERROR_MULTI_FACTOR_INFO_NOT_FOUND exception. See below issue for more information.
+    // Resolution always fails due to ERROR_MULTI_FACTOR_INFO_NOT_FOUND exception. See below issue
+    // for more information.
     // TODO(russellwheatley): uncomment below when this firebase-ios-sdk issue has been resolved: https://github.com/firebase/firebase-ios-sdk/issues/11079
-    
+
     //    let signedInText = app.staticTexts["signed-in-text"]
     //    XCTAssertTrue(
     //      signedInText.waitForExistence(timeout: 10),
     //      "User should be signed in after MFA resolution"
     //    )
   }
-  
+
   // MARK: - Helper Methods
 
   /// Programmatically enables SMS MFA for a user via the Auth emulator REST API
@@ -122,53 +123,51 @@ final class MFAResolutionUITests: XCTestCase {
   ///   - displayName: Optional display name for the MFA factor
   /// - Returns: True if MFA was successfully enabled, false otherwise
   @MainActor
-  private func enableSMSMFAViaEmulator(
-    idToken: String,
-    phoneNumber: String,
-    displayName: String = "Test Phone"
-  ) async -> Bool {
-    let emulatorUrl = "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v2/accounts/mfaEnrollment:start?key=fake-api-key"
-    
+  private func enableSMSMFAViaEmulator(idToken: String,
+                                       phoneNumber: String,
+                                       displayName: String = "Test Phone") async -> Bool {
+    let emulatorUrl =
+      "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v2/accounts/mfaEnrollment:start?key=fake-api-key"
+
     guard let url = URL(string: emulatorUrl) else {
       XCTFail("Invalid emulator URL")
       return false
     }
-    
+
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    
+
     let requestBody: [String: Any] = [
       "idToken": idToken,
       "phoneEnrollmentInfo": [
         "phoneNumber": phoneNumber,
-        "recaptchaToken": "fake-recaptcha-token"
-      ]
+        "recaptchaToken": "fake-recaptcha-token",
+      ],
     ]
-    
+
     guard let httpBody = try? JSONSerialization.data(withJSONObject: requestBody) else {
       XCTFail("Failed to serialize request body")
       return false
     }
-    
+
     request.httpBody = httpBody
-    
+
     // Step 1: Start MFA enrollment
     do {
       let (data, _) = try await URLSession.shared.data(for: request)
-      
-      
+
       // Step 1: Parse JSON
       guard let jsonObject = try? JSONSerialization.jsonObject(with: data) else {
         print("❌ Failed to parse JSON from response data")
         return false
       }
-      
+
       guard let json = jsonObject as? [String: Any] else {
         print("❌ JSON is not a dictionary. Type: \(type(of: jsonObject))")
         return false
       }
-      
+
       // Step 2: Extract phoneSessionInfo
       guard let info = json["phoneSessionInfo"] as? [String: Any] else {
         print("❌ Failed to extract 'phoneSessionInfo' from JSON")
@@ -178,7 +177,7 @@ final class MFAResolutionUITests: XCTestCase {
         }
         return false
       }
-      
+
       // Step 3: Extract sessionInfo
       guard let sessionInfo = info["sessionInfo"] as? String else {
         print("❌ Failed to extract 'sessionInfo' from phoneSessionInfo")
@@ -188,70 +187,71 @@ final class MFAResolutionUITests: XCTestCase {
         }
         return false
       }
-      
+
       // Step 2: Get verification code from emulator
       try await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
       guard let verificationCode = await getSMSVerificationCode(for: phoneNumber) else {
         XCTFail("Failed to retrieve SMS verification code")
         return false
       }
-      
+
       // Step 3: Finalize MFA enrollment
-      let finalizeUrl = "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v2/accounts/mfaEnrollment:finalize?key=fake-api-key"
+      let finalizeUrl =
+        "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v2/accounts/mfaEnrollment:finalize?key=fake-api-key"
       guard let finalizeURL = URL(string: finalizeUrl) else {
         return false
       }
-      
+
       var finalizeRequest = URLRequest(url: finalizeURL)
       finalizeRequest.httpMethod = "POST"
       finalizeRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      
+
       let finalizeBody: [String: Any] = [
         "idToken": idToken,
         "phoneVerificationInfo": [
           "sessionInfo": sessionInfo,
-          "code": verificationCode
+          "code": verificationCode,
         ],
-        "displayName": displayName
+        "displayName": displayName,
       ]
-      
+
       guard let finalizeHttpBody = try? JSONSerialization.data(withJSONObject: finalizeBody) else {
         return false
       }
-      
+
       finalizeRequest.httpBody = finalizeHttpBody
-      
+
       let (finalizeData, finalizeResponse) = try await URLSession.shared.data(for: finalizeRequest)
-      
+
       // Check HTTP status
       if let httpResponse = finalizeResponse as? HTTPURLResponse {
         print("📡 Finalize HTTP Status: \(httpResponse.statusCode)")
       }
-      
-      
-      guard let json = try? JSONSerialization.jsonObject(with: finalizeData) as? [String: Any] else {
+
+      guard let json = try? JSONSerialization.jsonObject(with: finalizeData) as? [String: Any]
+      else {
         print("❌ Failed to parse finalize response as JSON")
         return false
       }
-      
+
       // Check if we have the new idToken and MFA info
       guard let newIdToken = json["idToken"] as? String else {
         print("❌ Missing 'idToken' in finalize response")
         return false
       }
-      
+
       // Check if refreshToken is present
       if let refreshToken = json["refreshToken"] as? String {
         print("✅ Got refreshToken: \(refreshToken.prefix(20))...")
       }
-      
+
       // Check for MFA info in response
       if let mfaInfo = json["mfaInfo"] {
         print("✅ MFA info in response: \(mfaInfo)")
       }
-      
+
       return true
-      
+
     } catch {
       print("Failed to enable MFA: \(error.localizedDescription)")
       return false
@@ -261,37 +261,39 @@ final class MFAResolutionUITests: XCTestCase {
   /// Retrieves SMS verification codes from the Firebase Auth emulator
   /// - Parameters:
   ///   - phoneNumber: The phone number to retrieve the code for
-  ///   - codeType: The type of code - "enrollment" for MFA enrollment, "verification" for phone verification during resolution
+  ///   - codeType: The type of code - "enrollment" for MFA enrollment, "verification" for phone
+  /// verification during resolution
   @MainActor
-  private func getSMSVerificationCode(for phoneNumber: String, codeType: String = "enrollment") async -> String? {
-    let emulatorUrl = "http://127.0.0.1:9099/emulator/v1/projects/flutterfire-e2e-tests/verificationCodes"
-    
+  private func getSMSVerificationCode(for phoneNumber: String,
+                                      codeType: String = "enrollment") async -> String? {
+    let emulatorUrl =
+      "http://127.0.0.1:9099/emulator/v1/projects/flutterfire-e2e-tests/verificationCodes"
+
     guard let url = URL(string: emulatorUrl) else {
       return nil
     }
-    
+
     do {
       let (data, _) = try await URLSession.shared.data(from: url)
-      
-      
+
       guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
             let codes = json["verificationCodes"] as? [[String: Any]] else {
         print("❌ Failed to parse verification codes")
         return nil
       }
-      
+
       // Filter codes by phone number and type, then get the most recent one
       let matchingCodes = codes.filter { codeInfo in
         guard let phone = codeInfo["phoneNumber"] as? String else {
           print("❌ Code missing phoneNumber field")
           return false
         }
-        
+
         // The key difference between enrollment and verification codes:
         // - Enrollment codes have full phone numbers (e.g., "+15551234567")
         // - Verification codes have masked phone numbers (e.g., "+*******4567")
         let isMasked = phone.contains("*")
-        
+
         // Match phone number
         let phoneMatches: Bool
         if isMasked {
@@ -303,7 +305,7 @@ final class MFAResolutionUITests: XCTestCase {
           // Full phone number match
           phoneMatches = phone == phoneNumber
         }
-        
+
         guard phoneMatches else {
           return false
         }
@@ -316,16 +318,16 @@ final class MFAResolutionUITests: XCTestCase {
           return isMasked
         }
       }
-      
+
       // Get the last matching code (most recent)
       if let lastCode = matchingCodes.last,
          let code = lastCode["code"] as? String {
         return code
       }
-      
+
       print("❌ No matching code found")
       return nil
-      
+
     } catch {
       print("Failed to fetch verification codes: \(error.localizedDescription)")
       return nil
@@ -340,42 +342,43 @@ final class MFAResolutionUITests: XCTestCase {
   /// - Returns: The user's ID token, or nil if the sign-in failed
   @MainActor
   private func getIDTokenFromEmulator(email: String, password: String = "123456") async -> String? {
-    let signInUrl = "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=fake-api-key"
-    
+    let signInUrl =
+      "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=fake-api-key"
+
     guard let url = URL(string: signInUrl) else {
       print("Invalid emulator URL")
       return nil
     }
-    
+
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    
+
     let requestBody: [String: Any] = [
       "email": email,
       "password": password,
-      "returnSecureToken": true
+      "returnSecureToken": true,
     ]
-    
+
     guard let httpBody = try? JSONSerialization.data(withJSONObject: requestBody) else {
       print("Failed to serialize sign-in request body")
       return nil
     }
-    
+
     request.httpBody = httpBody
-    
+
     do {
       let (data, _) = try await URLSession.shared.data(for: request)
-      
+
       guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
             let idToken = json["idToken"] as? String else {
         print("Failed to parse sign-in response")
         return nil
       }
-      
+
       print("Successfully got ID token from emulator: \(idToken.prefix(20))...")
       return idToken
-      
+
     } catch {
       print("Failed to get ID token from emulator: \(error.localizedDescription)")
       return nil
@@ -385,33 +388,37 @@ final class MFAResolutionUITests: XCTestCase {
   @MainActor
   private func signUpUser(email: String, password: String = "12345678") async throws {
     // Create user via Auth Emulator REST API
-    let url = URL(string: "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake-api-key")!
+    let url =
+      URL(
+        string: "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake-api-key"
+      )!
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    
+
     let body: [String: Any] = [
       "email": email,
       "password": password,
-      "returnSecureToken": true
+      "returnSecureToken": true,
     ]
     request.httpBody = try JSONSerialization.data(withJSONObject: body)
-    
+
     let (data, response) = try await URLSession.shared.data(for: request)
-    
+
     guard let httpResponse = response as? HTTPURLResponse else {
       XCTFail("Invalid response")
       return
     }
-    
-    guard (200...299).contains(httpResponse.statusCode) else {
+
+    guard (200 ... 299).contains(httpResponse.statusCode) else {
       let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
       XCTFail("Failed to create user. Status: \(httpResponse.statusCode), Error: \(errorMessage)")
       return
     }
   }
 
-  private func signInUser(app: XCUIApplication, email: String, password: String = "123456") throws {
+  @MainActor private func signInUser(app: XCUIApplication, email: String,
+                                     password: String = "123456") throws {
     // Ensure we're in sign in flow
     let switchFlowButton = app.buttons["switch-auth-flow"]
     if switchFlowButton.exists && switchFlowButton.label.contains("Sign In") {
@@ -434,7 +441,7 @@ final class MFAResolutionUITests: XCTestCase {
     signInButton.tap()
   }
 
-  private func enrollSMSMFA(app: XCUIApplication) throws {
+  @MainActor private func enrollSMSMFA(app: XCUIApplication) throws {
     // Navigate to MFA management
     let mfaManagementButton = app.buttons["mfa-management-button"]
     XCTAssertTrue(mfaManagementButton.waitForExistence(timeout: 5))

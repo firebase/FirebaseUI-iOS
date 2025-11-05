@@ -18,11 +18,11 @@ import SwiftUI
 
 public struct AuthConfiguration {
   public let logo: ImageResource?
+  public let languageCode: String?
   public let shouldHideCancelButton: Bool
   public let interactiveDismissEnabled: Bool
   public let shouldAutoUpgradeAnonymousUsers: Bool
   public let customStringsBundle: Bundle?
-  public let languageCode: String?
   public let tosUrl: URL?
   public let privacyPolicyUrl: URL?
   public let emailLinkSignInActionCodeSettings: ActionCodeSettings?
@@ -36,11 +36,11 @@ public struct AuthConfiguration {
 
   public init(
     logo: ImageResource? = nil,
+    languageCode: String? = nil,
     shouldHideCancelButton: Bool = false,
     interactiveDismissEnabled: Bool = true,
     shouldAutoUpgradeAnonymousUsers: Bool = false,
     customStringsBundle: Bundle? = nil,
-    languageCode: String? = nil,
     tosUrl: URL? = nil,
     privacyPolicyUrl: URL? = nil,
     emailLinkSignInActionCodeSettings: ActionCodeSettings? = nil,

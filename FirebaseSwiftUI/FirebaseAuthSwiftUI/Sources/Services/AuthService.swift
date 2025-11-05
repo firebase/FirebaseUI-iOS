@@ -131,10 +131,26 @@ public final class AuthService {
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .signIn
-  public var currentError: AlertError?
+  private var _currentError: AlertError?
+
+  /// A binding that allows SwiftUI views to observe and clear errors
+  public var currentError: Binding<AlertError?> {
+    Binding(
+      get: { self._currentError },
+      set: { newValue in
+        if newValue == nil {
+          self._currentError = nil
+        }
+      }
+    )
+  }
+
   public let passwordPrompt: PasswordPromptCoordinator = .init()
   public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
+
+  /// Current account conflict context - observe this to handle conflicts and update backend
+  public private(set) var currentAccountConflict: AccountConflictContext?
 
   // MARK: - Provider APIs
 
@@ -175,7 +191,8 @@ public final class AuthService {
       let result = try await signIn(credentials: credential)
       return result
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      // Always pass the underlying error - view decides what to show
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -203,11 +220,12 @@ public final class AuthService {
   }
 
   func reset() {
-    currentError = nil
+    _currentError = nil
+    currentAccountConflict = nil
   }
 
-  func updateError(title: String = "Error", message: String) {
-    currentError = AlertError(title: title, message: message)
+  func updateError(title: String = "Error", message: String, underlyingError: Error? = nil) {
+    _currentError = AlertError(title: title, message: message, underlyingError: underlyingError)
   }
 
   public var shouldHandleAnonymousUpgrade: Bool {
@@ -217,9 +235,11 @@ public final class AuthService {
   public func signOut() async throws {
     do {
       try await auth.signOut()
+      // Cannot wait for auth listener to change, feedback needs to be immediate
+      currentUser = nil
       updateAuthenticationState()
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -236,13 +256,16 @@ public final class AuthService {
       }
       updateAuthenticationState()
     } catch {
+      // Possible conflicts from user.link():
+      // - credentialAlreadyInUse: credential is already linked to another account
+      // - emailAlreadyInUse: email from credential is already used by another account
+      // - accountExistsWithDifferentCredential: account exists with different sign-in method
       authenticationState = .unauthenticated
-      updateError(message: string.localizedErrorMessage(for: error))
-      throw error
+      try handleErrorWithConflictCheck(error: error, credential: credentials)
     }
   }
 
-  public func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws
+  private func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws
     -> SignInOutcome {
     if currentUser == nil {
       throw AuthServiceError.noCurrentUser
@@ -251,16 +274,7 @@ public final class AuthService {
       let result = try await currentUser?.link(with: credentials)
       updateAuthenticationState()
       return .signedIn(result)
-    } catch let error as NSError {
-      if error.code == AuthErrorCode.emailAlreadyInUse.rawValue {
-        let context = AccountMergeConflictContext(
-          credential: credentials,
-          underlyingError: error,
-          message: "Unable to merge accounts. Use the credential in the context to resolve the conflict.",
-          uid: currentUser?.uid
-        )
-        throw AuthServiceError.accountMergeConflict(context: context)
-      }
+    } catch {
       throw error
     }
   }
@@ -277,18 +291,19 @@ public final class AuthService {
       }
     } catch let error as NSError {
       authenticationState = .unauthenticated
+
       // Check if this is an MFA required error
       if error.code == AuthErrorCode.secondFactorRequired.rawValue {
         if let resolver = error
           .userInfo[AuthErrorUserInfoMultiFactorResolverKey] as? MultiFactorResolver {
           return handleMFARequiredError(resolver: resolver)
         }
-      } else {
-        // Don't want error modal on MFA error so we only update here
-        updateError(message: string.localizedErrorMessage(for: error))
       }
 
-      throw error
+      // Possible conflicts from auth.signIn(with:):
+      // - accountExistsWithDifferentCredential: account exists with different provider
+      // - credentialAlreadyInUse: credential is already linked to another account
+      try handleErrorWithConflictCheck(error: error, credential: credentials)
     }
   }
 
@@ -307,7 +322,7 @@ public final class AuthService {
         }
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -326,7 +341,7 @@ public extension AuthService {
         try await user.delete()
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -341,7 +356,7 @@ public extension AuthService {
         try await user.updatePassword(to: password)
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -362,10 +377,10 @@ public extension AuthService {
 
   func createUser(email email: String, password: String) async throws -> SignInOutcome {
     authenticationState = .authenticating
+    let credential = EmailAuthProvider.credential(withEmail: email, password: password)
 
     do {
       if shouldHandleAnonymousUpgrade {
-        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         return try await handleAutoUpgradeAnonymousUser(credentials: credential)
       } else {
         let result = try await auth.createUser(withEmail: email, password: password)
@@ -373,9 +388,10 @@ public extension AuthService {
         return .signedIn(result)
       }
     } catch {
+      // Possible conflicts from auth.createUser():
+      // - emailAlreadyInUse: email is already registered with another account
       authenticationState = .unauthenticated
-      updateError(message: string.localizedErrorMessage(for: error))
-      throw error
+      try handleErrorWithConflictCheck(error: error, credential: credential)
     }
   }
 
@@ -383,7 +399,7 @@ public extension AuthService {
     do {
       try await auth.sendPasswordReset(withEmail: email)
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -400,7 +416,7 @@ public extension AuthService {
         actionCodeSettings: actionCodeSettings
       )
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -433,8 +449,18 @@ public extension AuthService {
         emailLink = nil
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
-      throw error
+      // Reconstruct credential for conflict handling
+      let link = url.absoluteString
+      guard let email = emailLink else {
+        throw AuthServiceError
+          .invalidEmailLink("email address is missing from app storage. Is this the same device?")
+      }
+      let credential = EmailAuthProvider.credential(withEmail: email, link: link)
+
+      // Possible conflicts from auth.signIn(withEmail:link:):
+      // - accountExistsWithDifferentCredential: account exists with different provider
+      // - credentialAlreadyInUse: credential is already linked to another account
+      try handleErrorWithConflictCheck(error: error, credential: credential)
     }
   }
 
@@ -502,7 +528,7 @@ public extension AuthService {
       changeRequest.photoURL = url
       try await changeRequest.commitChanges()
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -517,7 +543,7 @@ public extension AuthService {
       changeRequest.displayName = name
       try await changeRequest.commitChanges()
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -609,7 +635,7 @@ public extension AuthService {
         )
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -661,7 +687,7 @@ public extension AuthService {
 
       return verificationID
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -740,7 +766,7 @@ public extension AuthService {
       }
       currentUser = auth.currentUser
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -829,7 +855,72 @@ public extension AuthService {
 
       return freshFactors
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
+      throw error
+    }
+  }
+
+  // MARK: - Account Conflict Helper Methods
+
+  private func determineConflictType(from error: NSError) -> AccountConflictType? {
+    switch error.code {
+    case AuthErrorCode.accountExistsWithDifferentCredential.rawValue:
+      return shouldHandleAnonymousUpgrade ? .anonymousUpgradeConflict :
+        .accountExistsWithDifferentCredential
+    case AuthErrorCode.credentialAlreadyInUse.rawValue:
+      return shouldHandleAnonymousUpgrade ? .anonymousUpgradeConflict : .credentialAlreadyInUse
+    case AuthErrorCode.emailAlreadyInUse.rawValue:
+      return shouldHandleAnonymousUpgrade ? .anonymousUpgradeConflict : .emailAlreadyInUse
+    default:
+      return nil
+    }
+  }
+
+  private func createConflictContext(from error: NSError,
+                                     conflictType: AccountConflictType,
+                                     credential: AuthCredential) -> AccountConflictContext {
+    let updatedCredential = error
+      .userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? AuthCredential ?? credential
+    let email = error.userInfo[AuthErrorUserInfoEmailKey] as? String
+
+    return AccountConflictContext(
+      conflictType: conflictType,
+      credential: updatedCredential,
+      underlyingError: error,
+      message: string.localizedErrorMessage(for: error),
+      email: email
+    )
+  }
+
+  /// Handles account conflict errors by creating context, storing it, and throwing structured error
+  /// - Parameters:
+  ///   - error: The error to check and handle
+  ///   - credential: The credential that caused the conflict
+  /// - Throws: AuthServiceError.accountConflict if it's a conflict error, otherwise rethrows the
+  /// original error
+  private func handleErrorWithConflictCheck(error: Error,
+                                            credential: AuthCredential) throws -> Never {
+    // Check for account conflict errors
+    if let error = error as NSError?,
+       let conflictType = determineConflictType(from: error) {
+      let context = createConflictContext(
+        from: error,
+        conflictType: conflictType,
+        credential: credential
+      )
+
+      // Store it for consumers to observe
+      currentAccountConflict = context
+
+      // Only set error alert if we're NOT auto-handling it
+      if conflictType != .anonymousUpgradeConflict {
+        updateError(message: context.message, underlyingError: error)
+      }
+
+      // Throw the specific error with context
+      throw AuthServiceError.accountConflict(context)
+    } else {
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -899,7 +990,7 @@ public extension AuthService {
         }
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -952,7 +1043,7 @@ public extension AuthService {
           .multiFactorAuth("Failed to resolve MFA challenge: \(error.localizedDescription)")
       }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error))
+      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }

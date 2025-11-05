@@ -88,6 +88,7 @@ public struct CountrySelector: View {
         } label: {
           Text("\(country.flag) \(country.name) (\(country.dialCode))")
         }
+        .accessibilityIdentifier("country-option-\(country.code)")
       }
     } label: {
       HStack(spacing: 4) {
@@ -101,6 +102,7 @@ public struct CountrySelector: View {
           .foregroundStyle(.secondary)
       }
     }
+    .accessibilityIdentifier("country-selector")
     .disabled(!enabled)
   }
 }

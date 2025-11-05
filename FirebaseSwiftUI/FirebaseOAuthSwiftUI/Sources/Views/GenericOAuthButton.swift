@@ -51,7 +51,7 @@ extension GenericOAuthButton: View {
         accessibilityId: "sign-in-with-\(oauthProvider.providerId)-button"
       ) {
         Task {
-          try await authService.signIn(provider)
+          try? await authService.signIn(provider)
         }
       }
     )

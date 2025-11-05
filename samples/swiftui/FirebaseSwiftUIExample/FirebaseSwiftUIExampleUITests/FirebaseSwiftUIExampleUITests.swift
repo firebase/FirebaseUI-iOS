@@ -47,11 +47,11 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
   func testSignInDisplaysSignedInView() async throws {
     let email = createEmail()
     let password = "123456"
-    
+
     // Create user in test runner BEFORE launching app
     // User will exist in emulator, but app starts unauthenticated
     try await createTestUser(email: email, password: password)
-    
+
     // Now launch the app - it connects to emulator but isn't signed in
     let app = createTestApp()
     app.launch()
@@ -94,13 +94,14 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     let passwordRecoveryButton = app.buttons["password-recovery-button"]
     XCTAssertTrue(passwordRecoveryButton.exists, "Password recovery button should exist")
     passwordRecoveryButton.tap()
-    let passwordRecoveryText = app.staticTexts["password-recovery-text"]
+    let passwordRecoveryText = app.staticTexts["Send a password recovery link to your email"]
+      .firstMatch
     XCTAssertTrue(
       passwordRecoveryText.waitForExistence(timeout: 10),
       "Password recovery text should exist after routing to PasswordRecoveryView"
     )
 
-    let passwordRecoveryBackButton = app.buttons["password-recovery-back-button"]
+    let passwordRecoveryBackButton = app.navigationBars.buttons.element(boundBy: 0)
     XCTAssertTrue(passwordRecoveryBackButton.exists, "Password back button should exist")
     passwordRecoveryBackButton.tap()
 
@@ -114,14 +115,14 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     XCTAssertTrue(emailLinkSignInButton.exists, "Email link sign-in button should exist")
     emailLinkSignInButton.tap()
 
-    let emailLinkText = app.staticTexts["email-link-title-text"]
+    let emailLinkText = app.staticTexts["Send a sign-in link to your email"].firstMatch
 
     XCTAssertTrue(
       emailLinkText.waitForExistence(timeout: 10),
       "Email link text should exist after pressing email link button in AuthPickerView"
     )
 
-    let emailLinkBackButton = app.buttons["email-link-back-button"]
+    let emailLinkBackButton = app.navigationBars.buttons.element(boundBy: 0)
     XCTAssertTrue(emailLinkBackButton.exists, "Email link back button should exist")
     emailLinkBackButton.tap()
 
@@ -176,10 +177,12 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
     // Wait for the auth screen to disappear (email field should no longer exist)
     let emailFieldDisappeared = NSPredicate(format: "exists == false")
-    let expectation = XCTNSPredicateExpectation(predicate: emailFieldDisappeared, object: emailField)
+    let expectation = XCTNSPredicateExpectation(
+      predicate: emailFieldDisappeared,
+      object: emailField
+    )
     let result = XCTWaiter().wait(for: [expectation], timeout: 10.0)
     XCTAssertEqual(result, .completed, "Email field should disappear after sign-up")
-    
 
     // Wait for user creation and signed-in view to appear
     let signedInText = app.staticTexts["signed-in-text"]

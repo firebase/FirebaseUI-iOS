@@ -24,7 +24,6 @@ struct EnterVerificationCodeView: View {
 
   let verificationID: String
   let fullPhoneNumber: String
-  let phoneProvider: PhoneAuthProviderSwift
 
   var body: some View {
     @Bindable var authService = authService
@@ -53,7 +52,10 @@ struct EnterVerificationCodeView: View {
         Button(action: {
           Task {
             do {
-              let credential = try await phoneProvider.createAuthCredential(verificationId: verificationID, verificationCode: verificationCode)
+              guard let provider = authService.currentPhoneProvider else {
+                fatalError("No phone provider found")
+              }
+              let credential = try await provider.createAuthCredential(verificationId: verificationID, verificationCode: verificationCode)
 
               _ = try await authService.signIn(credentials: credential)
               authService.navigator.clear()
@@ -79,36 +81,19 @@ struct EnterVerificationCodeView: View {
       Spacer()
     }
     .navigationTitle(authService.string.enterVerificationCodeTitle)
-    .navigationBarTitleDisplayMode(.inline)
+    .navigationBarTitleDisplayMode(.large)
     .padding(.horizontal)
-    .errorAlert(error: $authService.currentError, okButtonLabel: authService.string.okButtonLabel)
+    .errorAlert(error: authService.currentError, okButtonLabel: authService.string.okButtonLabel)
   }
 }
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
 
-  class MockPhoneProvider: PhoneAuthProviderSwift {
-    var id: String = "phone"
-
-    func verifyPhoneNumber(phoneNumber _: String) async throws -> String {
-      return "mock-verification-id"
-    }
-
-    func createAuthCredential() async throws -> AuthCredential {
-      fatalError("Not implemented in preview")
-    }
-    
-    func createAuthCredential(verificationId: String, verificationCode: String) async throws -> AuthCredential {
-      fatalError("Not implemented in preview")
-    }
-  }
-
   return NavigationStack {
     EnterVerificationCodeView(
       verificationID: "mock-id",
       fullPhoneNumber: "+1 5551234567",
-      phoneProvider: MockPhoneProvider(),
     )
     .environment(AuthService())
   }
