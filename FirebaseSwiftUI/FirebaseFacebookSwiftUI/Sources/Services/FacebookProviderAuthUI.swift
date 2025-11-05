@@ -119,14 +119,15 @@ public class FacebookProviderSwift: CredentialAuthProviderSwift {
 }
 
 public class FacebookProviderAuthUI: AuthProviderUI {
-  public var provider: AuthProviderSwift
+  private let typedProvider: FacebookProviderSwift
+  public var provider: AuthProviderSwift { typedProvider }
   public let id: String = "facebook.com"
 
-  public init(provider: AuthProviderSwift) {
-    self.provider = provider
+  public init(provider: FacebookProviderSwift) {
+    typedProvider = provider
   }
 
   @MainActor public func authButton() -> AnyView {
-    AnyView(SignInWithFacebookButton(facebookProvider: provider as! FacebookProviderSwift))
+    AnyView(SignInWithFacebookButton(facebookProvider: typedProvider))
   }
 }

@@ -116,20 +116,18 @@ public class OAuthProviderSwift: CredentialAuthProviderSwift {
 }
 
 public class OAuthProviderAuthUI: AuthProviderUI {
-  public var provider: AuthProviderSwift
+  private let typedProvider: OAuthProviderSwift
+  public var provider: AuthProviderSwift { typedProvider }
 
-  public init(provider: AuthProviderSwift) {
-    self.provider = provider
+  public init(provider: OAuthProviderSwift) {
+    typedProvider = provider
   }
 
   public var id: String {
-    guard let oauthProvider = provider as? OAuthProviderSwift else {
-      return "oauth.unknown"
-    }
-    return oauthProvider.providerId
+    return typedProvider.providerId
   }
 
   @MainActor public func authButton() -> AnyView {
-    AnyView(GenericOAuthButton(provider: provider as! CredentialAuthProviderSwift))
+    AnyView(GenericOAuthButton(provider: typedProvider))
   }
 }

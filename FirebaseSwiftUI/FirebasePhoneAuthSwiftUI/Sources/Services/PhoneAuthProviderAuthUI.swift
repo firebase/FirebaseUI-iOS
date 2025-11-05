@@ -43,14 +43,15 @@ public class PhoneProviderSwift: PhoneAuthProviderSwift {
 }
 
 public class PhoneAuthProviderAuthUI: AuthProviderUI {
-  public var provider: AuthProviderSwift
+  private let typedProvider: PhoneAuthProviderSwift
+  public var provider: AuthProviderSwift { typedProvider }
   public let id: String = "phone"
 
   public init(provider: PhoneAuthProviderSwift? = nil) {
-    self.provider = provider ?? PhoneProviderSwift()
+    typedProvider = provider ?? PhoneProviderSwift()
   }
 
   @MainActor public func authButton() -> AnyView {
-    AnyView(PhoneAuthButtonView(phoneProvider: provider as! PhoneAuthProviderSwift))
+    AnyView(PhoneAuthButtonView(phoneProvider: typedProvider))
   }
 }

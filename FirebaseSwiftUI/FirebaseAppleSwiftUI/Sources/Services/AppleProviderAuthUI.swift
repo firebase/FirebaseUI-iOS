@@ -140,15 +140,15 @@ public class AppleProviderSwift: CredentialAuthProviderSwift {
 }
 
 public class AppleProviderAuthUI: AuthProviderUI {
-  public var provider: AuthProviderSwift
-
-  public init(provider: AuthProviderSwift) {
-    self.provider = provider
-  }
-
+  private let typedProvider: AppleProviderSwift
+  public var provider: AuthProviderSwift { typedProvider }
   public let id: String = "apple.com"
 
+  public init(provider: AppleProviderSwift) {
+    typedProvider = provider
+  }
+
   @MainActor public func authButton() -> AnyView {
-    AnyView(SignInWithAppleButton(provider: provider as! CredentialAuthProviderSwift))
+    AnyView(SignInWithAppleButton(provider: typedProvider))
   }
 }

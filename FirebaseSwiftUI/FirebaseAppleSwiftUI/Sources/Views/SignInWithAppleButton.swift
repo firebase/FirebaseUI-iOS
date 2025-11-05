@@ -20,8 +20,8 @@ import SwiftUI
 @MainActor
 public struct SignInWithAppleButton {
   @Environment(AuthService.self) private var authService
-  let provider: CredentialAuthProviderSwift
-  public init(provider: CredentialAuthProviderSwift) {
+  let provider: AppleProviderSwift
+  public init(provider: AppleProviderSwift) {
     self.provider = provider
   }
 }

@@ -20,8 +20,8 @@ import SwiftUI
 @MainActor
 public struct SignInWithTwitterButton {
   @Environment(AuthService.self) private var authService
-  let provider: CredentialAuthProviderSwift
-  public init(provider: CredentialAuthProviderSwift) {
+  let provider: TwitterProviderSwift
+  public init(provider: TwitterProviderSwift) {
     self.provider = provider
   }
 }

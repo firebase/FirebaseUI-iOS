@@ -22,9 +22,9 @@ import SwiftUI
 @MainActor
 public struct SignInWithFacebookButton {
   @Environment(AuthService.self) private var authService
-  let facebookProvider: CredentialAuthProviderSwift
+  let facebookProvider: FacebookProviderSwift
 
-  public init(facebookProvider: CredentialAuthProviderSwift) {
+  public init(facebookProvider: FacebookProviderSwift) {
     self.facebookProvider = facebookProvider
   }
 }

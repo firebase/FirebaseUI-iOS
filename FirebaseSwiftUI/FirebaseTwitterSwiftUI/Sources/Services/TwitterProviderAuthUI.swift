@@ -45,15 +45,15 @@ public class TwitterProviderSwift: CredentialAuthProviderSwift {
 }
 
 public class TwitterProviderAuthUI: AuthProviderUI {
-  public var provider: AuthProviderSwift
-
-  public init(provider: AuthProviderSwift) {
-    self.provider = provider
-  }
-
+  private let typedProvider: TwitterProviderSwift
+  public var provider: AuthProviderSwift { typedProvider }
   public let id: String = "twitter.com"
 
+  public init(provider: TwitterProviderSwift) {
+    typedProvider = provider
+  }
+
   @MainActor public func authButton() -> AnyView {
-    AnyView(SignInWithTwitterButton(provider: provider as! CredentialAuthProviderSwift))
+    AnyView(SignInWithTwitterButton(provider: typedProvider))
   }
 }
