@@ -36,7 +36,7 @@ public struct SignInWithGoogleButton {
 extension SignInWithGoogleButton: View {
   public var body: some View {
     AuthProviderButton(
-      label: "Sign in with Google",
+      label: authService.string.googleLoginButtonLabel,
       style: .google,
       accessibilityId: "sign-in-with-google-button"
     ) {

@@ -27,10 +27,9 @@ public protocol AuthProviderUI {
   var provider: AuthProviderSwift { get }
 }
 
-public protocol PhoneAuthProviderSwift: AuthProviderSwift, AnyObject {
-  // Phone auth provider that presents its own UI flow in createAuthCredential()
-  // Internal use only: AuthService will be injected automatically by AuthService.signIn()
-  var authService: AuthService? { get set }
+public protocol PhoneAuthProviderSwift: AuthProviderSwift {
+  @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
+  @MainActor func createAuthCredential(verificationId: String, verificationCode: String) async throws -> AuthCredential
 }
 
 public enum AuthenticationState {
@@ -51,6 +50,8 @@ public enum AuthView: Hashable {
   case mfaEnrollment
   case mfaManagement
   case mfaResolution
+  case enterPhoneNumber
+  case enterVerificationCode(verificationID: String, fullPhoneNumber: String)
 }
 
 public enum SignInOutcome: @unchecked Sendable {
@@ -108,7 +109,7 @@ public final class AuthService {
   public init(configuration: AuthConfiguration = AuthConfiguration(), auth: Auth = Auth.auth()) {
     self.auth = auth
     self.configuration = configuration
-    string = StringUtils(bundle: configuration.customStringsBundle ?? Bundle.module)
+    string = StringUtils(bundle: configuration.customStringsBundle ?? Bundle.module, languageCode: configuration.languageCode)
     listenerManager = AuthListenerManager(auth: auth, authEnvironment: self)
     FirebaseApp.registerLibrary("firebase-ui-ios", withVersion: FirebaseAuthSwiftUIVersion.version)
   }
@@ -159,6 +160,10 @@ public final class AuthService {
 
   private var providers: [AuthProviderUI] = []
 
+  public var currentPhoneProvider: PhoneAuthProviderSwift? {
+    providers.compactMap { $0.provider as? PhoneAuthProviderSwift }.first
+  }
+
   public func registerProvider(providerWithButton: AuthProviderUI) {
     providers.append(providerWithButton)
   }
@@ -182,11 +187,6 @@ public final class AuthService {
 
   public func signIn(_ provider: AuthProviderSwift) async throws -> SignInOutcome {
     do {
-      // Automatically inject AuthService for phone provider
-      if let phoneProvider = provider as? PhoneAuthProviderSwift {
-        phoneProvider.authService = self
-      }
-
       let credential = try await provider.createAuthCredential()
       let result = try await signIn(credentials: credential)
       return result

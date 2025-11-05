@@ -370,8 +370,8 @@ extension MFAEnrolmentView: View {
 
           AuthTextField(
             text: $phoneNumber,
-            localizedTitle: "Phone Number",
-            prompt: "Enter phone number",
+            label: authService.string.phoneNumberFieldLabel,
+            prompt: authService.string.enterPhoneNumberPrompt,
             keyboardType: .phonePad,
             contentType: .telephoneNumber,
             onChange: { _ in }
@@ -386,8 +386,8 @@ extension MFAEnrolmentView: View {
 
           AuthTextField(
             text: $displayName,
-            localizedTitle: "Display Name",
-            prompt: "Enter display name for this device",
+            label: authService.string.displayNameFieldLabel,
+            prompt: authService.string.enterDisplayNameForDevicePrompt,
             leading: {
               Image(systemName: "person")
             }
@@ -432,7 +432,7 @@ extension MFAEnrolmentView: View {
 
           AuthTextField(
             text: $verificationCode,
-            localizedTitle: "Verification Code",
+            label: authService.string.verificationCodeFieldLabel,
             prompt: "Enter 6-digit code",
             keyboardType: .numberPad,
             contentType: .oneTimeCode,
@@ -577,8 +577,8 @@ extension MFAEnrolmentView: View {
 
           AuthTextField(
             text: $displayName,
-            localizedTitle: "Display Name",
-            prompt: "Enter display name for this authenticator",
+            label: authService.string.displayNameFieldLabel,
+            prompt: authService.string.enterDisplayNameForAuthenticatorPrompt,
             leading: {
               Image(systemName: "person")
             }
@@ -587,8 +587,8 @@ extension MFAEnrolmentView: View {
 
           AuthTextField(
             text: $totpCode,
-            localizedTitle: "Verification Code",
-            prompt: "Enter code from app",
+            label: authService.string.verificationCodeFieldLabel,
+            prompt: authService.string.enterCodeFromAppPrompt,
             keyboardType: .numberPad,
             contentType: .oneTimeCode,
             leading: {

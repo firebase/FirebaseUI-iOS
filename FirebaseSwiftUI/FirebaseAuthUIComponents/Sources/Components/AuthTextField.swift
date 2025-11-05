@@ -31,7 +31,7 @@ public struct AuthTextField<Leading: View>: View {
   @State var obscured: Bool = true
 
   @Binding var text: String
-  let localizedTitle: String
+  let label: String
   let prompt: String
   var textAlignment: TextAlignment = .leading
   var keyboardType: UIKeyboardType = .default
@@ -44,7 +44,7 @@ public struct AuthTextField<Leading: View>: View {
   private let leading: () -> Leading?
 
   public init(text: Binding<String>,
-              localizedTitle: String,
+              label: String,
               prompt: String,
               textAlignment: TextAlignment = .leading,
               keyboardType: UIKeyboardType = .default,
@@ -56,7 +56,7 @@ public struct AuthTextField<Leading: View>: View {
               onChange: ((String) -> Void)? = nil,
               @ViewBuilder leading: @escaping () -> Leading? = { EmptyView() }) {
     _text = text
-    self.localizedTitle = localizedTitle
+    self.label = label
     self.prompt = prompt
     self.textAlignment = textAlignment
     self.keyboardType = keyboardType
@@ -75,17 +75,17 @@ public struct AuthTextField<Leading: View>: View {
 
   public var body: some View {
     VStack(alignment: .leading) {
-      Text(localizedTitle)
+      Text(LocalizedStringResource(stringLiteral: label))
       HStack(spacing: 8) {
         leading()
         Group {
           if isSecureTextField {
             ZStack(alignment: .trailing) {
-              SecureField(localizedTitle, text: $text, prompt: Text(prompt))
+              SecureField(label, text: $text, prompt: Text(prompt))
                 .opacity(obscured ? 1 : 0)
                 .focused($isFocused)
                 .frame(height: 24)
-              TextField(localizedTitle, text: $text, prompt: Text(prompt))
+              TextField(label, text: $text, prompt: Text(prompt))
                 .opacity(obscured ? 0 : 1)
                 .focused($isFocused)
                 .frame(height: 24)
@@ -106,7 +106,7 @@ public struct AuthTextField<Leading: View>: View {
             }
           } else {
             TextField(
-              localizedTitle,
+              label,
               text: $text,
               prompt: Text(prompt)
             )

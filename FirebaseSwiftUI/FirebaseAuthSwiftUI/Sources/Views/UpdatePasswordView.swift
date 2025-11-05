@@ -45,7 +45,7 @@ extension UpdatePasswordView: View {
     VStack(spacing: 24) {
       AuthTextField(
         text: $password,
-        localizedTitle: "Type new password",
+        label: "Type new password",
         prompt: authService.string.passwordInputLabel,
         contentType: .password,
         sensitive: true,
@@ -58,7 +58,7 @@ extension UpdatePasswordView: View {
 
       AuthTextField(
         text: $confirmPassword,
-        localizedTitle: "Retype new password",
+        label: "Retype new password",
         prompt: authService.string.confirmPasswordInputLabel,
         contentType: .password,
         sensitive: true,
