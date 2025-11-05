@@ -40,12 +40,11 @@ struct ContentView: View {
     actionCodeSettings.linkDomain = "flutterfire-e2e-tests.firebaseapp.com"
     actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
     let configuration = AuthConfiguration(
-      languageCode: "es",
       shouldAutoUpgradeAnonymousUsers: true,
       tosUrl: URL(string: "https://example.com/tos"),
       privacyPolicyUrl: URL(string: "https://example.com/privacy"),
       emailLinkSignInActionCodeSettings: actionCodeSettings,
-      mfaEnabled: false
+      mfaEnabled: true
     )
 
     authService = AuthService(
@@ -69,8 +68,6 @@ struct ContentView: View {
       )
     )
     .withEmailSignIn()
-    
-    authService.auth.useEmulator(withHost: "127.0.0.1", port: 9099)
   }
 
   let authService: AuthService
