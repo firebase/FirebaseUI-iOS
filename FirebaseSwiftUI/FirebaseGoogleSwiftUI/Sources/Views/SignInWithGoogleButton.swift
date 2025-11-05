@@ -26,7 +26,6 @@ import SwiftUI
 @MainActor
 public struct SignInWithGoogleButton {
   @Environment(AuthService.self) private var authService
-  @Environment(\.signInWithMergeConflictHandler) private var signInHandler
   let googleProvider: AuthProviderSwift
 
   public init(googleProvider: AuthProviderSwift) {
@@ -42,13 +41,7 @@ extension SignInWithGoogleButton: View {
       accessibilityId: "sign-in-with-google-button"
     ) {
       Task {
-        if let handler = signInHandler {
-          try? await handler(authService) {
-            try await authService.signIn(googleProvider)
-          }
-        } else {
-          try? await authService.signIn(googleProvider)
-        }
+        try? await authService.signIn(googleProvider)
       }
     }
   }

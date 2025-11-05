@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuth
 import SwiftUI
 
 /// A reusable view modifier that displays error messages in an alert modal
@@ -19,14 +20,31 @@ struct ErrorAlertModifier: ViewModifier {
   @Binding var error: AlertError?
   let okButtonLabel: String
 
+  private func shouldShowAlert(for error: AlertError?) -> Bool {
+    // View layer decides which errors should show an alert
+    guard let error = error else { return false }
+
+    // Don't show alert for CancellationError
+    if error.underlyingError is CancellationError {
+      return false
+    }
+
+    // Don't show alert for anonymous upgrade conflicts (they're auto-handled)
+    if let authError = error.underlyingError as? AuthServiceError,
+       case let .accountConflict(context) = authError,
+       context.conflictType == .anonymousUpgradeConflict {
+      return false
+    }
+
+    return true
+  }
+
   func body(content: Content) -> some View {
-    content
+    let shouldShow = shouldShowAlert(for: error)
+
+    return content
       .alert(isPresented: Binding<Bool>(
-        get: {
-          // View layer decides: Don't show alert for CancellationError
-          guard let error = error else { return false }
-          return !(error.underlyingError is CancellationError)
-        },
+        get: { shouldShow },
         set: { if !$0 { error = nil } }
       )) {
         Alert(
@@ -48,7 +66,7 @@ public extension View {
 }
 
 /// A struct to represent an error that should be displayed in an alert
-public struct AlertError: Identifiable {
+public struct AlertError: Identifiable, Equatable {
   public let id = UUID()
   public let title: String
   public let message: String
@@ -58,5 +76,10 @@ public struct AlertError: Identifiable {
     self.title = title
     self.message = message
     self.underlyingError = underlyingError
+  }
+
+  public static func == (lhs: AlertError, rhs: AlertError) -> Bool {
+    // Compare by id since each AlertError instance is unique
+    lhs.id == rhs.id
   }
 }

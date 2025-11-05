@@ -34,9 +34,13 @@ struct TestView: View {
 
   init() {
     Auth.auth().useEmulator(withHost: "localhost", port: 9099)
+
     Auth.auth().settings?.isAppVerificationDisabledForTesting = true
     Task {
       try signOut()
+    }
+    if anonymousSignInEnabled {
+      Auth.auth().signInAnonymously()
     }
 
     let isMfaEnabled = ProcessInfo.processInfo.arguments.contains("--mfa-enabled")

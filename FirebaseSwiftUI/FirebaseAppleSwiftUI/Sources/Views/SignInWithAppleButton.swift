@@ -20,7 +20,6 @@ import SwiftUI
 @MainActor
 public struct SignInWithAppleButton {
   @Environment(AuthService.self) private var authService
-  @Environment(\.signInWithMergeConflictHandler) private var signInHandler
   let provider: AuthProviderSwift
   public init(provider: AuthProviderSwift) {
     self.provider = provider
@@ -35,13 +34,7 @@ extension SignInWithAppleButton: View {
       accessibilityId: "sign-in-with-apple-button"
     ) {
       Task {
-        if let handler = signInHandler {
-          try? await handler(authService) {
-            try await authService.signIn(provider)
-          }
-        } else {
-          try? await authService.signIn(provider)
-        }
+        try? await authService.signIn(provider)
       }
     }
   }

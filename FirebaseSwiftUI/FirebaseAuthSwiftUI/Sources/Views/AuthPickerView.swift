@@ -12,62 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuth
 import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
-
-// MARK: - Merge Conflict Handling
-
-/// Helper function to handle sign-in with automatic merge conflict resolution.
-///
-/// This function attempts to sign in with the provided action. If a merge conflict occurs
-/// (when an anonymous user is being upgraded and the credential is already associated with
-/// an existing account), it automatically signs out the anonymous user and signs in with
-/// the existing account's credential.
-///
-/// - Parameters:
-///   - authService: The AuthService instance to use for sign-in operations
-///   - signInAction: An async closure that performs the sign-in operation
-/// - Returns: The SignInOutcome from the successful sign-in
-/// - Throws: Re-throws any errors except accountMergeConflict (which is handled internally)
-@MainActor
-public func signInWithMergeConflictHandling(authService: AuthService,
-                                            signInAction: () async throws
-                                              -> SignInOutcome) async throws -> SignInOutcome {
-  do {
-    return try await signInAction()
-  } catch let error as AuthServiceError {
-    if case let .accountMergeConflict(context) = error {
-      // The anonymous account conflicts with an existing account
-      // Sign out the anonymous user
-      try await authService.signOut()
-
-      // Sign in with the existing account's credential
-      // This works because shouldHandleAnonymousUpgrade is now false after sign out
-      return try await authService.signIn(credentials: context.credential)
-    }
-    throw error
-  }
-}
-
-// MARK: - Environment Key for Sign-In Handler
-
-/// Environment key for a sign-in handler that includes merge conflict resolution
-private struct SignInHandlerKey: EnvironmentKey {
-  static let defaultValue: (@MainActor (AuthService, () async throws -> SignInOutcome) async throws
-    -> SignInOutcome)? = nil
-}
-
-public extension EnvironmentValues {
-  /// A sign-in handler that automatically handles merge conflicts for anonymous user upgrades.
-  /// When set in the environment, views should use this handler to wrap their sign-in calls.
-  var signInWithMergeConflictHandler: (@MainActor (AuthService,
-                                                   () async throws -> SignInOutcome) async throws
-      -> SignInOutcome)? {
-    get { self[SignInHandlerKey.self] }
-    set { self[SignInHandlerKey.self] = newValue }
-  }
-}
 
 @MainActor
 public struct AuthPickerView<Content: View> {
@@ -77,6 +25,9 @@ public struct AuthPickerView<Content: View> {
 
   @Environment(AuthService.self) private var authService
   private let content: () -> Content
+
+  // View-layer state for handling auto-linking flow
+  @State private var pendingCredentialForLinking: AuthCredential?
 }
 
 extension AuthPickerView: View {
@@ -112,6 +63,61 @@ extension AuthPickerView: View {
         }
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
       }
+      // View-layer logic: Handle account conflicts (auto-handle anonymous upgrade, store others for
+      // linking)
+      .onChange(of: authService.currentAccountConflict) { _, conflict in
+        handleAccountConflict(conflict)
+      }
+      // View-layer logic: Auto-link pending credential after successful sign-in
+      .onChange(of: authService.authenticationState) { _, newState in
+        if newState == .authenticated {
+          attemptAutoLinkPendingCredential()
+        }
+      }
+  }
+
+  /// View-layer logic: Handle account conflicts with type-specific behavior
+  private func handleAccountConflict(_ conflict: AccountConflictContext?) {
+    guard let conflict = conflict else { return }
+
+    // Only auto-handle anonymous upgrade conflicts
+    if conflict.conflictType == .anonymousUpgradeConflict {
+      Task {
+        do {
+          // Sign out the anonymous user
+          try await authService.signOut()
+
+          // Sign in with the new credential
+          _ = try await authService.signIn(credentials: conflict.credential)
+
+          // Successfully handled - conflict and error are cleared automatically by reset()
+        } catch {
+          // Error will be shown via normal error handling
+          // Credential is still stored if they want to retry
+        }
+      }
+    } else {
+      // Other conflicts: store credential for potential linking after sign-in
+      pendingCredentialForLinking = conflict.credential
+      // Error modal will show for user to see and handle
+    }
+  }
+
+  /// View-layer logic: Attempt to link pending credential after successful sign-in
+  private func attemptAutoLinkPendingCredential() {
+    guard let credential = pendingCredentialForLinking else { return }
+
+    Task {
+      do {
+        try await authService.linkAccounts(credentials: credential)
+        // Successfully linked, clear the pending credential
+        pendingCredentialForLinking = nil
+      } catch {
+        // Silently swallow linking errors - user is already signed in
+        // Consumer's custom views can observe authService.currentError if they want to handle this
+        pendingCredentialForLinking = nil
+      }
+    }
   }
 
   @ToolbarContentBuilder
@@ -131,15 +137,15 @@ extension AuthPickerView: View {
   var authPickerViewInternal: some View {
     @Bindable var authService = authService
     VStack {
-      if authService.authenticationState == .unauthenticated {
+      if authService.authenticationState == .authenticated {
+        SignedInView()
+      } else {
         authMethodPicker
           .safeAreaPadding()
-      } else {
-        SignedInView()
       }
     }
     .errorAlert(
-      error: $authService.currentError,
+      error: authService.currentError,
       okButtonLabel: authService.string.okButtonLabel
     )
   }
@@ -154,10 +160,7 @@ extension AuthPickerView: View {
             .aspectRatio(contentMode: .fit)
             .frame(width: 100, height: 100)
           if authService.emailSignInEnabled {
-            EmailAuthView().environment(
-              \.signInWithMergeConflictHandler,
-              signInWithMergeConflictHandling
-            )
+            EmailAuthView()
           }
           Divider()
           otherSignInOptions(proxy)
@@ -173,7 +176,6 @@ extension AuthPickerView: View {
       authService.renderButtons()
     }
     .padding(.horizontal, proxy.size.width * 0.18)
-    .environment(\.signInWithMergeConflictHandler, signInWithMergeConflictHandling)
   }
 }
 
