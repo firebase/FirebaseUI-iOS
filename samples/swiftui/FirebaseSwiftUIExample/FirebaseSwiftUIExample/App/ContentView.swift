@@ -110,9 +110,6 @@ struct ContentView: View {
       }
       .navigationTitle("Firebase UI Demo")
     }
-    .onAppear {
-      authService.isPresented = authService.authenticationState == .unauthenticated
-    }
     .onChange(of: authService.authenticationState) { _, newValue in
       debugPrint("authService.authenticationState - \(newValue)")
       if newValue != .authenticating {
