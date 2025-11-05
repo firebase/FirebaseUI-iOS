@@ -130,7 +130,20 @@ public final class AuthService {
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .signIn
-  public private(set) var currentError: AlertError?
+  private var _currentError: AlertError?
+
+  /// A binding that allows SwiftUI views to observe and clear errors
+  public var currentError: Binding<AlertError?> {
+    Binding(
+      get: { self._currentError },
+      set: { newValue in
+        if newValue == nil {
+          self._currentError = nil
+        }
+      }
+    )
+  }
+
   public let passwordPrompt: PasswordPromptCoordinator = .init()
   public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
@@ -207,12 +220,12 @@ public final class AuthService {
   }
 
   func reset() {
-    currentError = nil
+    _currentError = nil
     currentAccountConflict = nil
   }
 
   func updateError(title: String = "Error", message: String, underlyingError: Error? = nil) {
-    currentError = AlertError(title: title, message: message, underlyingError: underlyingError)
+    _currentError = AlertError(title: title, message: message, underlyingError: underlyingError)
   }
 
   public var shouldHandleAnonymousUpgrade: Bool {
@@ -286,7 +299,7 @@ public final class AuthService {
           return handleMFARequiredError(resolver: resolver)
         }
       }
-      
+
       // Possible conflicts from auth.signIn(with:):
       // - accountExistsWithDifferentCredential: account exists with different provider
       // - credentialAlreadyInUse: credential is already linked to another account
@@ -443,7 +456,7 @@ public extension AuthService {
           .invalidEmailLink("email address is missing from app storage. Is this the same device?")
       }
       let credential = EmailAuthProvider.credential(withEmail: email, link: link)
-      
+
       // Possible conflicts from auth.signIn(withEmail:link:):
       // - accountExistsWithDifferentCredential: account exists with different provider
       // - credentialAlreadyInUse: credential is already linked to another account
@@ -883,8 +896,10 @@ public extension AuthService {
   /// - Parameters:
   ///   - error: The error to check and handle
   ///   - credential: The credential that caused the conflict
-  /// - Throws: AuthServiceError.accountConflict if it's a conflict error, otherwise rethrows the original error
-  private func handleErrorWithConflictCheck(error: Error, credential: AuthCredential) throws -> Never {
+  /// - Throws: AuthServiceError.accountConflict if it's a conflict error, otherwise rethrows the
+  /// original error
+  private func handleErrorWithConflictCheck(error: Error,
+                                            credential: AuthCredential) throws -> Never {
     // Check for account conflict errors
     if let error = error as NSError?,
        let conflictType = determineConflictType(from: error) {
@@ -893,15 +908,15 @@ public extension AuthService {
         conflictType: conflictType,
         credential: credential
       )
-      
+
       // Store it for consumers to observe
       currentAccountConflict = context
-      
+
       // Only set error alert if we're NOT auto-handling it
       if conflictType != .anonymousUpgradeConflict {
         updateError(message: context.message, underlyingError: error)
       }
-      
+
       // Throw the specific error with context
       throw AuthServiceError.accountConflict(context)
     } else {

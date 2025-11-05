@@ -145,7 +145,7 @@ extension AuthPickerView: View {
       }
     }
     .errorAlert(
-      error: $authService.currentError,
+      error: authService.currentError,
       okButtonLabel: authService.string.okButtonLabel
     )
   }

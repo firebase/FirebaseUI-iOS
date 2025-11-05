@@ -42,7 +42,7 @@ public struct AccountConflictContext: LocalizedError, Identifiable, Equatable {
   public let underlyingError: Error
   public let message: String
   public let email: String?
-  
+
   /// Human-readable description of the conflict type
   public var conflictDescription: String {
     switch conflictType {
