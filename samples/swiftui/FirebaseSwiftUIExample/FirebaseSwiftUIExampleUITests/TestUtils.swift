@@ -33,7 +33,7 @@ func createEmail() -> String {
 
 /// Helper to create a test user in the emulator via REST API (avoids keychain issues)
 @MainActor func createTestUser(email: String, password: String = "123456",
-                    verifyEmail: Bool = false) async throws {
+                               verifyEmail: Bool = false) async throws {
   // Use Firebase Auth emulator REST API directly to avoid keychain access issues in UI tests
   let signUpUrl =
     "http://127.0.0.1:9099/identitytoolkit.googleapis.com/v1/accounts:signUp?key=fake-api-key"
@@ -78,9 +78,9 @@ func createEmail() -> String {
 
 /// Verifies an email address in the emulator using the OOB code mechanism
 @MainActor func verifyEmailInEmulator(email: String,
-                           idToken: String,
-                           projectID: String = "flutterfire-e2e-tests",
-                           emulatorHost: String = "127.0.0.1:9099") async throws {
+                                      idToken: String,
+                                      projectID: String = "flutterfire-e2e-tests",
+                                      emulatorHost: String = "127.0.0.1:9099") async throws {
   let base = "http://\(emulatorHost)"
 
   // Step 1: Trigger email verification (creates OOB code in emulator)

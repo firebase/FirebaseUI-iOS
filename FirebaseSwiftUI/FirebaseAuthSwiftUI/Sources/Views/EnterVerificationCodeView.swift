@@ -55,13 +55,14 @@ struct EnterVerificationCodeView: View {
               guard let provider = authService.currentPhoneProvider else {
                 fatalError("No phone provider found")
               }
-              let credential = try await provider.createAuthCredential(verificationId: verificationID, verificationCode: verificationCode)
+              let credential = try await provider.createAuthCredential(
+                verificationId: verificationID,
+                verificationCode: verificationCode
+              )
 
               _ = try await authService.signIn(credentials: credential)
               authService.navigator.clear()
-            } catch {
-              
-            }
+            } catch {}
           }
         }) {
           if authService.authenticationState == .authenticating {

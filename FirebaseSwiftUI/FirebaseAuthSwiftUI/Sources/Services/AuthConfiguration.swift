@@ -34,21 +34,19 @@ public struct AuthConfiguration {
   public let allowedSecondFactors: Set<SecondFactorType>
   public let mfaIssuer: String
 
-  public init(
-    logo: ImageResource? = nil,
-    languageCode: String? = nil,
-    shouldHideCancelButton: Bool = false,
-    interactiveDismissEnabled: Bool = true,
-    shouldAutoUpgradeAnonymousUsers: Bool = false,
-    customStringsBundle: Bundle? = nil,
-    tosUrl: URL? = nil,
-    privacyPolicyUrl: URL? = nil,
-    emailLinkSignInActionCodeSettings: ActionCodeSettings? = nil,
-    verifyEmailActionCodeSettings: ActionCodeSettings? = nil,
-    mfaEnabled: Bool = false,
-    allowedSecondFactors: Set<SecondFactorType> = [.sms, .totp],
-    mfaIssuer: String = "Firebase Auth"
-  ) {
+  public init(logo: ImageResource? = nil,
+              languageCode: String? = nil,
+              shouldHideCancelButton: Bool = false,
+              interactiveDismissEnabled: Bool = true,
+              shouldAutoUpgradeAnonymousUsers: Bool = false,
+              customStringsBundle: Bundle? = nil,
+              tosUrl: URL? = nil,
+              privacyPolicyUrl: URL? = nil,
+              emailLinkSignInActionCodeSettings: ActionCodeSettings? = nil,
+              verifyEmailActionCodeSettings: ActionCodeSettings? = nil,
+              mfaEnabled: Bool = false,
+              allowedSecondFactors: Set<SecondFactorType> = [.sms, .totp],
+              mfaIssuer: String = "Firebase Auth") {
     self.logo = logo
     self.shouldHideCancelButton = shouldHideCancelButton
     self.interactiveDismissEnabled = interactiveDismissEnabled

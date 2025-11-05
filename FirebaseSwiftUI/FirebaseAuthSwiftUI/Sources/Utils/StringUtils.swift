@@ -28,7 +28,8 @@ public class StringUtils {
 
   public func localizedString(for key: String) -> String {
     // If a specific language code is set, load strings from that language bundle
-    if let languageCode, let path = bundle.path(forResource: languageCode, ofType: "lproj"), let localizedBundle = Bundle(path: path) {
+    if let languageCode, let path = bundle.path(forResource: languageCode, ofType: "lproj"),
+       let localizedBundle = Bundle(path: path) {
       return localizedBundle.localizedString(forKey: key, value: nil, table: "Localizable")
     }
 
@@ -605,14 +606,18 @@ public class StringUtils {
   /// found in:
   /// - MFAEnrolmentView
   public var authenticatorAppInstructionsMessage: String {
-    return localizedString(for: "Use an authenticator app like Google Authenticator or Authy to generate verification codes.")
+    return localizedString(
+      for: "Use an authenticator app like Google Authenticator or Authy to generate verification codes."
+    )
   }
 
   /// Set up two-factor authentication to add an extra layer of security to your account.
   /// found in:
   /// - MFAEnrolmentView
   public var setUpTwoFactorAuthMessage: String {
-    return localizedString(for: "Set up two-factor authentication to add an extra layer of security to your account.")
+    return localizedString(
+      for: "Set up two-factor authentication to add an extra layer of security to your account."
+    )
   }
 
   /// We'll send a verification code to this number
@@ -633,7 +638,9 @@ public class StringUtils {
   /// found in:
   /// - MFAEnrolmentView
   public var sendVerificationCodeEachSignInMessage: String {
-    return localizedString(for: "We'll send a verification code to your phone number each time you sign in.")
+    return localizedString(
+      for: "We'll send a verification code to your phone number each time you sign in."
+    )
   }
 
   /// Unable to generate QR Code
@@ -663,7 +670,9 @@ public class StringUtils {
   /// - MFAEnrolmentView
   /// - MFAResolutionView
   public var mfaNotEnabledMessage: String {
-    return localizedString(for: "MFA is not enabled in the current configuration. Please contact your administrator.")
+    return localizedString(
+      for: "MFA is not enabled in the current configuration. Please contact your administrator."
+    )
   }
 
   /// No Authentication Methods Available
@@ -679,7 +688,9 @@ public class StringUtils {
   /// - MFAEnrolmentView
   /// - MFAResolutionView
   public var noMFAMethodsConfiguredMessage: String {
-    return localizedString(for: "No MFA methods are configured as allowed. Please contact your administrator.")
+    return localizedString(
+      for: "No MFA methods are configured as allowed. Please contact your administrator."
+    )
   }
 
   /// Complete sign-in with your second factor
@@ -823,11 +834,14 @@ public class StringUtils {
     return localizedString(for: "Delete Account?")
   }
 
-  /// This action cannot be undone. All your data will be permanently deleted. You may need to reauthenticate to complete this action.
+  /// This action cannot be undone. All your data will be permanently deleted. You may need to
+  /// reauthenticate to complete this action.
   /// found in:
   /// - SignedInView
   public var deleteAccountWarningMessage: String {
-    return localizedString(for: "This action cannot be undone. All your data will be permanently deleted. You may need to reauthenticate to complete this action.")
+    return localizedString(
+      for: "This action cannot be undone. All your data will be permanently deleted. You may need to reauthenticate to complete this action."
+    )
   }
 
   /// Invalid OAuth Provider error

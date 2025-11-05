@@ -57,8 +57,7 @@ struct EnterPhoneNumberView: View {
               verificationID: id,
               fullPhoneNumber: fullPhoneNumber
             ))
-          } catch {
-          }
+          } catch {}
         }
       }) {
         if authService.authenticationState == .authenticating {

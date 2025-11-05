@@ -22,7 +22,7 @@ public struct AuthPickerView<Content: View> {
   public init(@ViewBuilder content: @escaping () -> Content = { EmptyView() }) {
     self.content = content
   }
-  
+
   @Environment(AuthService.self) private var authService
   private let content: () -> Content
 
@@ -61,7 +61,10 @@ extension AuthPickerView: View {
               case AuthView.enterPhoneNumber:
                 EnterPhoneNumberView()
               case let .enterVerificationCode(verificationID, fullPhoneNumber):
-                EnterVerificationCodeView(verificationID: verificationID, fullPhoneNumber: fullPhoneNumber)
+                EnterVerificationCodeView(
+                  verificationID: verificationID,
+                  fullPhoneNumber: fullPhoneNumber
+                )
               }
             }
         }
@@ -123,7 +126,7 @@ extension AuthPickerView: View {
       }
     }
   }
-  
+
   @ToolbarContentBuilder
   var toolbar: some ToolbarContent {
     ToolbarItem(placement: .topBarTrailing) {
@@ -137,7 +140,7 @@ extension AuthPickerView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   var authPickerViewInternal: some View {
     @Bindable var authService = authService
@@ -167,7 +170,7 @@ extension AuthPickerView: View {
       okButtonLabel: authService.string.okButtonLabel
     )
   }
-  
+
   @ViewBuilder
   var authMethodPicker: some View {
     GeometryReader { proxy in
@@ -187,7 +190,7 @@ extension AuthPickerView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   func otherSignInOptions(_ proxy: GeometryProxy) -> some View {
     VStack {

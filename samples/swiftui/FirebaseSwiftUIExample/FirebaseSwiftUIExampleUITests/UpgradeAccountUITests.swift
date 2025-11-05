@@ -34,29 +34,29 @@ final class UpgradeAccountUITests: XCTestCase {
     let email = createEmail()
     let password = "123456"
     try await createTestUser(email: email, password: password)
-    
+
     // Launch app with anonymous sign-in enabled
     let app = createTestApp()
     app.launchArguments.append("--anonymous-sign-in-enabled")
     app.launch()
-    
+
     // Wait for sign-in screen to appear
     let emailField = app.textFields["email-field"]
     XCTAssertTrue(emailField.waitForExistence(timeout: 6), "Email field should exist")
     emailField.tap()
     emailField.typeText(email)
-    
+
     let passwordField = app.secureTextFields["password-field"]
     XCTAssertTrue(passwordField.exists, "Password field should exist")
     passwordField.tap()
     passwordField.typeText(password)
-    
+
     let signInButton = app.buttons["sign-in-button"]
     XCTAssertTrue(signInButton.exists, "Sign-In button should exist")
     signInButton.tap()
-    
+
     let signedInText = app.staticTexts["signed-in-text"]
-    
+
     // Wait for authentication to complete and signed-in view to appear
     XCTAssertTrue(
       signedInText.waitForExistence(timeout: 30),
