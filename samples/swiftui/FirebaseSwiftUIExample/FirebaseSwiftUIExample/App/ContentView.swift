@@ -35,10 +35,9 @@ struct ContentView: View {
     Auth.auth().signInAnonymously()
     let actionCodeSettings = ActionCodeSettings()
     actionCodeSettings.handleCodeInApp = true
-    actionCodeSettings
-      .url = URL(string: "https://flutterfire-e2e-tests.firebaseapp.com")
-    actionCodeSettings.linkDomain = "flutterfire-e2e-tests.firebaseapp.com"
+    actionCodeSettings.url = URL(string: "https://flutterfire-e2e-tests.firebaseapp.com")
     actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
+    actionCodeSettings.linkDomain = "flutterfire-e2e-tests.firebaseapp.com"
     let configuration = AuthConfiguration(
       shouldAutoUpgradeAnonymousUsers: true,
       tosUrl: URL(string: "https://example.com/tos"),
