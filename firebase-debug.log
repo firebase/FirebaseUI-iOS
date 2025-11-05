@@ -39,3 +39,5 @@ Issues? Report them at https://github.com/firebase/firebase-tools/issues and att
 [info] i  To verify the phone number +2348145495544, use the code 309002. {"metadata":{"emulator":{"name":"auth"},"message":"To verify the phone number +2348145495544, use the code 309002."}}
 [info] i  To verify the phone number +2348145495544, use the code 227291. {"metadata":{"emulator":{"name":"auth"},"message":"To verify the phone number +2348145495544, use the code 227291."}}
 [info] i  To verify the phone number +2348145495544, use the code 419134. {"metadata":{"emulator":{"name":"auth"},"message":"To verify the phone number +2348145495544, use the code 419134."}}
+[warn] ⚠  Received a signed JWT. Auth Emulator does not validate JWTs and IS NOT SECURE {"metadata":{"emulator":{"name":"auth"},"message":"Received a signed JWT. Auth Emulator does not validate JWTs and IS NOT SECURE"}}
+[warn] ⚠  Received a signed JWT. Auth Emulator does not validate JWTs and IS NOT SECURE {"metadata":{"emulator":{"name":"auth"},"message":"Received a signed JWT. Auth Emulator does not validate JWTs and IS NOT SECURE"}}

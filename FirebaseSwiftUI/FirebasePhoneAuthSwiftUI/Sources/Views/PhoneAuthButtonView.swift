@@ -34,9 +34,7 @@ extension PhoneAuthButtonView: View {
       style: .phone,
       accessibilityId: "sign-in-with-phone-button"
     ) {
-      Task {
-        try? await authService.signIn(phoneProvider)
-      }
+      authService.navigator.push(.enterPhoneNumber)
     }
   }
 }
