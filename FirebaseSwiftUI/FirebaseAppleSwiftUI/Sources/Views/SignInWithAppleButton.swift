@@ -29,7 +29,7 @@ public struct SignInWithAppleButton {
 extension SignInWithAppleButton: View {
   public var body: some View {
     AuthProviderButton(
-      label: "Sign in with Apple",
+      label: authService.string.appleLoginButtonLabel,
       style: .apple,
       accessibilityId: "sign-in-with-apple-button"
     ) {

@@ -40,7 +40,7 @@ extension PasswordRecoveryView: View {
     VStack(spacing: 24) {
       AuthTextField(
         text: $email,
-        localizedTitle: "Send a password recovery link to your email",
+        label: authService.string.passwordRecoveryEmailFieldLabel,
         prompt: authService.string.emailInputLabel,
         keyboardType: .emailAddress,
         contentType: .emailAddress,
