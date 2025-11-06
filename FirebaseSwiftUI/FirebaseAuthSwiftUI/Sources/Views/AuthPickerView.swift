@@ -28,16 +28,20 @@ public struct AuthPickerView<Content: View> {
 
   // View-layer state for handling auto-linking flow
   @State private var pendingCredentialForLinking: AuthCredential?
+  // View-layer error state
+  @State private var error: AlertError?
 }
 
 extension AuthPickerView: View {
   public var body: some View {
     @Bindable var authService = authService
     content()
+      .environment(\.reportError, reportError)
       .sheet(isPresented: $authService.isPresented) {
         @Bindable var navigator = authService.navigator
         NavigationStack(path: $navigator.routes) {
           authPickerViewInternal
+            .environment(\.reportError, reportError)
             .navigationTitle(authService.authenticationState == .unauthenticated ? authService
               .string.authPickerTitle : "")
             .navigationBarTitleDisplayMode(.large)
@@ -83,6 +87,14 @@ extension AuthPickerView: View {
       }
   }
 
+  /// Closure for reporting errors from child views
+  private func reportError(_ error: Error) {
+    self.error = AlertError(
+      message: authService.string.localizedErrorMessage(for: error),
+      underlyingError: error
+    )
+  }
+
   /// View-layer logic: Handle account conflicts with type-specific behavior
   private func handleAccountConflict(_ conflict: AccountConflictContext?) {
     guard let conflict = conflict else { return }
@@ -97,16 +109,20 @@ extension AuthPickerView: View {
           // Sign in with the new credential
           _ = try await authService.signIn(credentials: conflict.credential)
 
-          // Successfully handled - conflict and error are cleared automatically by reset()
-        } catch {
-          // Error will be shown via normal error handling
-          // Credential is still stored if they want to retry
+          // Successfully handled - conflict is cleared automatically by reset()
+        } catch let caughtError {
+          // Show error in alert
+          reportError(caughtError)
         }
       }
     } else {
       // Other conflicts: store credential for potential linking after sign-in
       pendingCredentialForLinking = conflict.credential
-      // Error modal will show for user to see and handle
+      // Show error modal for user to see and handle
+      error = AlertError(
+        message: conflict.message,
+        underlyingError: conflict.underlyingError
+      )
     }
   }
 
@@ -119,9 +135,9 @@ extension AuthPickerView: View {
         try await authService.linkAccounts(credentials: credential)
         // Successfully linked, clear the pending credential
         pendingCredentialForLinking = nil
-      } catch {
-        // Silently swallow linking errors - user is already signed in
-        // Consumer's custom views can observe authService.currentError if they want to handle this
+      } catch let caughtError {
+        // Show error - user is already signed in but linking failed
+        reportError(caughtError)
         pendingCredentialForLinking = nil
       }
     }
@@ -166,7 +182,7 @@ extension AuthPickerView: View {
       }
     }
     .errorAlert(
-      error: authService.currentError,
+      error: $error,
       okButtonLabel: authService.string.okButtonLabel
     )
   }

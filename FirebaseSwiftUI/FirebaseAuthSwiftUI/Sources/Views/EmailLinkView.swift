@@ -19,6 +19,7 @@ import SwiftUI
 
 public struct EmailLinkView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
   @State private var email = ""
   @State private var showModal = false
 
@@ -28,8 +29,8 @@ public struct EmailLinkView {
     do {
       try await authService.sendEmailSignInLink(email: email)
       showModal = true
-    } catch {
-      // Error already displayed via modal by AuthService
+    } catch let caughtError {
+      reportError(caughtError)
     }
   }
 }
@@ -86,7 +87,11 @@ extension EmailLinkView: View {
     }
     .onOpenURL { url in
       Task {
-        try? await authService.handleSignInLink(url: url)
+        do {
+          try await authService.handleSignInLink(url: url)
+        } catch let caughtError {
+          reportError(caughtError)
+        }
       }
     }
   }

@@ -18,6 +18,7 @@ import SwiftUI
 @MainActor
 public struct SignedInView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
   @State private var showDeleteConfirmation = false
   @State private var showEmailVerificationSent = false
 
@@ -25,8 +26,8 @@ public struct SignedInView {
     do {
       try await authService.sendEmailVerification()
       showEmailVerificationSent = true
-    } catch {
-      // Error already displayed via modal by AuthService
+    } catch let caughtError {
+      reportError(caughtError)
     }
   }
 }
@@ -96,7 +97,11 @@ extension SignedInView: View {
 
       Button {
         Task {
-          try? await authService.signOut()
+          do {
+            try await authService.signOut()
+          } catch let caughtError {
+            reportError(caughtError)
+          }
         }
       } label: {
         Text(authService.string.signOutButtonLabel)
@@ -114,7 +119,11 @@ extension SignedInView: View {
         onConfirm: {
           showDeleteConfirmation = false
           Task {
-            try? await authService.deleteUser()
+            do {
+              try await authService.deleteUser()
+            } catch let caughtError {
+              reportError(caughtError)
+            }
           }
         },
         onCancel: {

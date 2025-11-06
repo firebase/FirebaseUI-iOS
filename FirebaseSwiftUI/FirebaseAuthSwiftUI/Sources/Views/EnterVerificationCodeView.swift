@@ -20,6 +20,7 @@ import SwiftUI
 @MainActor
 struct EnterVerificationCodeView: View {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
   @State private var verificationCode: String = ""
 
   let verificationID: String
@@ -62,7 +63,9 @@ struct EnterVerificationCodeView: View {
 
               _ = try await authService.signIn(credentials: credential)
               authService.navigator.clear()
-            } catch {}
+            } catch let caughtError {
+              reportError(caughtError)
+            }
           }
         }) {
           if authService.authenticationState == .authenticating {
@@ -84,7 +87,6 @@ struct EnterVerificationCodeView: View {
     .navigationTitle(authService.string.enterVerificationCodeTitle)
     .navigationBarTitleDisplayMode(.large)
     .padding(.horizontal)
-    .errorAlert(error: authService.currentError, okButtonLabel: authService.string.okButtonLabel)
   }
 }
 

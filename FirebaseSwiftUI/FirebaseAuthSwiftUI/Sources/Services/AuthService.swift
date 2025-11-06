@@ -123,7 +123,7 @@ public final class AuthService {
   public let auth: Auth
   public var isPresented: Bool = false
   public private(set) var navigator = Navigator()
-  
+
   public var authView: AuthView? {
     navigator.routes.last
   }
@@ -132,19 +132,6 @@ public final class AuthService {
   public var currentUser: User?
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .signIn
-  private var _currentError: AlertError?
-
-  /// A binding that allows SwiftUI views to observe and clear errors
-  public var currentError: Binding<AlertError?> {
-    Binding(
-      get: { self._currentError },
-      set: { newValue in
-        if newValue == nil {
-          self._currentError = nil
-        }
-      }
-    )
-  }
 
   public let passwordPrompt: PasswordPromptCoordinator = .init()
   public var currentMFARequired: MFARequired?
@@ -187,15 +174,9 @@ public final class AuthService {
   }
 
   public func signIn(_ provider: AuthProviderSwift) async throws -> SignInOutcome {
-    do {
-      let credential = try await provider.createAuthCredential()
-      let result = try await signIn(credentials: credential)
-      return result
-    } catch {
-      // Always pass the underlying error - view decides what to show
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
-    }
+    let credential = try await provider.createAuthCredential()
+    let result = try await signIn(credentials: credential)
+    return result
   }
 
   // MARK: - End Provider APIs
@@ -221,12 +202,7 @@ public final class AuthService {
   }
 
   func reset() {
-    _currentError = nil
     currentAccountConflict = nil
-  }
-
-  func updateError(title: String = "Error", message: String, underlyingError: Error? = nil) {
-    _currentError = AlertError(title: title, message: message, underlyingError: underlyingError)
   }
 
   public var shouldHandleAnonymousUpgrade: Bool {
@@ -234,15 +210,10 @@ public final class AuthService {
   }
 
   public func signOut() async throws {
-    do {
-      try await auth.signOut()
-      // Cannot wait for auth listener to change, feedback needs to be immediate
-      currentUser = nil
-      updateAuthenticationState()
-    } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
-    }
+    try await auth.signOut()
+    // Cannot wait for auth listener to change, feedback needs to be immediate
+    currentUser = nil
+    updateAuthenticationState()
   }
 
   public func linkAccounts(credentials credentials: AuthCredential) async throws {
@@ -309,22 +280,17 @@ public final class AuthService {
   }
 
   public func sendEmailVerification() async throws {
-    do {
-      if let user = currentUser {
-        // Requires running on MainActor as passing to sendEmailVerification() which is non-isolated
-        let settings: ActionCodeSettings? = await MainActor.run {
-          configuration.verifyEmailActionCodeSettings
-        }
-
-        if let settings = settings {
-          try await user.sendEmailVerification(with: settings)
-        } else {
-          try await user.sendEmailVerification()
-        }
+    if let user = currentUser {
+      // Requires running on MainActor as passing to sendEmailVerification() which is non-isolated
+      let settings: ActionCodeSettings? = await MainActor.run {
+        configuration.verifyEmailActionCodeSettings
       }
-    } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
+
+      if let settings = settings {
+        try await user.sendEmailVerification(with: settings)
+      } else {
+        try await user.sendEmailVerification()
+      }
     }
   }
 }
@@ -333,32 +299,22 @@ public final class AuthService {
 
 public extension AuthService {
   func deleteUser() async throws {
-    do {
-      guard let user = auth.currentUser else {
-        throw AuthServiceError.noCurrentUser
-      }
+    guard let user = auth.currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
 
-      try await withReauthenticationIfNeeded(on: user) {
-        try await user.delete()
-      }
-    } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
+    try await withReauthenticationIfNeeded(on: user) {
+      try await user.delete()
     }
   }
 
   func updatePassword(to password: String) async throws {
-    do {
-      guard let user = auth.currentUser else {
-        throw AuthServiceError.noCurrentUser
-      }
+    guard let user = auth.currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
 
-      try await withReauthenticationIfNeeded(on: user) {
-        try await user.updatePassword(to: password)
-      }
-    } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
+    try await withReauthenticationIfNeeded(on: user) {
+      try await user.updatePassword(to: password)
     }
   }
 }
@@ -397,12 +353,7 @@ public extension AuthService {
   }
 
   func sendPasswordRecoveryEmail(email: String) async throws {
-    do {
-      try await auth.sendPasswordReset(withEmail: email)
-    } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
-    }
+    try await auth.sendPasswordReset(withEmail: email)
   }
 }
 
@@ -410,16 +361,11 @@ public extension AuthService {
 
 public extension AuthService {
   func sendEmailSignInLink(email: String) async throws {
-    do {
-      let actionCodeSettings = try updateActionCodeSettings()
-      try await auth.sendSignInLink(
-        toEmail: email,
-        actionCodeSettings: actionCodeSettings
-      )
-    } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
-    }
+    let actionCodeSettings = try updateActionCodeSettings()
+    try await auth.sendSignInLink(
+      toEmail: email,
+      actionCodeSettings: actionCodeSettings
+    )
   }
 
   func handleSignInLink(url url: URL) async throws {
@@ -536,14 +482,9 @@ public extension AuthService {
       throw AuthServiceError.noCurrentUser
     }
 
-    do {
-      let changeRequest = user.createProfileChangeRequest()
-      changeRequest.photoURL = url
-      try await changeRequest.commitChanges()
-    } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
-    }
+    let changeRequest = user.createProfileChangeRequest()
+    changeRequest.photoURL = url
+    try await changeRequest.commitChanges()
   }
 
   func updateUserDisplayName(name: String) async throws {
@@ -551,14 +492,9 @@ public extension AuthService {
       throw AuthServiceError.noCurrentUser
     }
 
-    do {
-      let changeRequest = user.createProfileChangeRequest()
-      changeRequest.displayName = name
-      try await changeRequest.commitChanges()
-    } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
-    }
+    let changeRequest = user.createProfileChangeRequest()
+    changeRequest.displayName = name
+    try await changeRequest.commitChanges()
   }
 }
 
@@ -567,221 +503,206 @@ public extension AuthService {
 public extension AuthService {
   func startMfaEnrollment(type: SecondFactorType, accountName: String? = nil,
                           issuer: String? = nil) async throws -> EnrollmentSession {
-    do {
-      guard let user = auth.currentUser else {
-        throw AuthServiceError.noCurrentUser
-      }
+    guard let user = auth.currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
 
-      // Check if MFA is enabled in configuration
-      guard configuration.mfaEnabled else {
-        throw AuthServiceError
-          .multiFactorAuth(
-            "MFA is not enabled in configuration, please enable `AuthConfiguration.mfaEnabled`"
-          )
-      }
+    // Check if MFA is enabled in configuration
+    guard configuration.mfaEnabled else {
+      throw AuthServiceError
+        .multiFactorAuth(
+          "MFA is not enabled in configuration, please enable `AuthConfiguration.mfaEnabled`"
+        )
+    }
 
-      // Check if the requested factor type is allowed
-      guard configuration.allowedSecondFactors.contains(type) else {
-        throw AuthServiceError
-          .multiFactorAuth(
-            "The requested MFA factor type '\(type)' is not allowed in AuthConfiguration.allowedSecondFactors"
-          )
-      }
+    // Check if the requested factor type is allowed
+    guard configuration.allowedSecondFactors.contains(type) else {
+      throw AuthServiceError
+        .multiFactorAuth(
+          "The requested MFA factor type '\(type)' is not allowed in AuthConfiguration.allowedSecondFactors"
+        )
+    }
 
-      let multiFactorUser = user.multiFactor
+    let multiFactorUser = user.multiFactor
 
-      // Get the multi-factor session
-      let session = try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<
-        MultiFactorSession,
-        Error
-      >) in
-        multiFactorUser.getSessionWithCompletion { session, error in
-          if let error = error {
-            continuation.resume(throwing: error)
-          } else if let session = session {
-            continuation.resume(returning: session)
-          } else {
-            continuation
-              .resume(throwing: AuthServiceError
-                .multiFactorAuth("Failed to get MFA session for '\(type)'"))
-          }
+    // Get the multi-factor session
+    let session = try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<
+      MultiFactorSession,
+      Error
+    >) in
+      multiFactorUser.getSessionWithCompletion { session, error in
+        if let error = error {
+          continuation.resume(throwing: error)
+        } else if let session = session {
+          continuation.resume(returning: session)
+        } else {
+          continuation
+            .resume(throwing: AuthServiceError
+              .multiFactorAuth("Failed to get MFA session for '\(type)'"))
         }
       }
+    }
 
-      switch type {
-      case .sms:
-        // For SMS, we just return the session - phone number will be provided in
-        // sendSmsVerificationForEnrollment
-        return EnrollmentSession(
-          type: .sms,
-          session: session,
-          status: .initiated
-        )
+    switch type {
+    case .sms:
+      // For SMS, we just return the session - phone number will be provided in
+      // sendSmsVerificationForEnrollment
+      return EnrollmentSession(
+        type: .sms,
+        session: session,
+        status: .initiated
+      )
 
-      case .totp:
-        // For TOTP, generate the secret and QR code
-        let totpSecret = try await TOTPMultiFactorGenerator.generateSecret(with: session)
+    case .totp:
+      // For TOTP, generate the secret and QR code
+      let totpSecret = try await TOTPMultiFactorGenerator.generateSecret(with: session)
 
-        // Generate QR code URL
-        let resolvedAccountName = accountName ?? user.email ?? "User"
-        let resolvedIssuer = issuer ?? configuration.mfaIssuer
+      // Generate QR code URL
+      let resolvedAccountName = accountName ?? user.email ?? "User"
+      let resolvedIssuer = issuer ?? configuration.mfaIssuer
 
-        let qrCodeURL = totpSecret.generateQRCodeURL(
-          withAccountName: resolvedAccountName,
-          issuer: resolvedIssuer
-        )
+      let qrCodeURL = totpSecret.generateQRCodeURL(
+        withAccountName: resolvedAccountName,
+        issuer: resolvedIssuer
+      )
 
-        let totpInfo = TOTPEnrollmentInfo(
-          sharedSecretKey: totpSecret.sharedSecretKey(),
-          qrCodeURL: URL(string: qrCodeURL),
-          accountName: resolvedAccountName,
-          issuer: resolvedIssuer,
-          verificationStatus: .pending
-        )
+      let totpInfo = TOTPEnrollmentInfo(
+        sharedSecretKey: totpSecret.sharedSecretKey(),
+        qrCodeURL: URL(string: qrCodeURL),
+        accountName: resolvedAccountName,
+        issuer: resolvedIssuer,
+        verificationStatus: .pending
+      )
 
-        return EnrollmentSession(
-          type: .totp,
-          session: session,
-          totpInfo: totpInfo,
-          status: .initiated,
-          _totpSecret: totpSecret
-        )
-      }
-    } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
+      return EnrollmentSession(
+        type: .totp,
+        session: session,
+        totpInfo: totpInfo,
+        status: .initiated,
+        _totpSecret: totpSecret
+      )
     }
   }
 
   func sendSmsVerificationForEnrollment(session: EnrollmentSession,
                                         phoneNumber: String) async throws -> String {
-    do {
-      // Validate session
-      guard session.type == .sms else {
-        throw AuthServiceError.multiFactorAuth("Session is not configured for SMS enrollment")
-      }
+    // Validate session
+    guard session.type == .sms else {
+      throw AuthServiceError.multiFactorAuth("Session is not configured for SMS enrollment")
+    }
 
-      guard session.canProceed else {
-        if session.isExpired {
-          throw AuthServiceError.multiFactorAuth("Enrollment session has expired")
-        } else {
-          throw AuthServiceError
-            .multiFactorAuth("Session is not in a valid state for SMS verification")
-        }
+    guard session.canProceed else {
+      if session.isExpired {
+        throw AuthServiceError.multiFactorAuth("Enrollment session has expired")
+      } else {
+        throw AuthServiceError
+          .multiFactorAuth("Session is not in a valid state for SMS verification")
       }
+    }
 
-      // Validate phone number format
-      guard !phoneNumber.isEmpty else {
-        throw AuthServiceError.multiFactorAuth("Phone number cannot be empty for SMS enrollment")
-      }
+    // Validate phone number format
+    guard !phoneNumber.isEmpty else {
+      throw AuthServiceError.multiFactorAuth("Phone number cannot be empty for SMS enrollment")
+    }
 
-      // Send SMS verification using Firebase Auth PhoneAuthProvider
-      let verificationID =
-        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<
-          String,
-          Error
-        >) in
-          PhoneAuthProvider.provider().verifyPhoneNumber(
-            phoneNumber,
-            uiDelegate: nil,
-            multiFactorSession: session.session
-          ) { verificationID, error in
-            if let error = error {
-              continuation.resume(throwing: error)
-            } else if let verificationID = verificationID {
-              continuation.resume(returning: verificationID)
-            } else {
-              continuation
-                .resume(throwing: AuthServiceError
-                  .multiFactorAuth("Failed to send SMS verification code to verify phone number"))
-            }
+    // Send SMS verification using Firebase Auth PhoneAuthProvider
+    let verificationID =
+      try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<
+        String,
+        Error
+      >) in
+        PhoneAuthProvider.provider().verifyPhoneNumber(
+          phoneNumber,
+          uiDelegate: nil,
+          multiFactorSession: session.session
+        ) { verificationID, error in
+          if let error = error {
+            continuation.resume(throwing: error)
+          } else if let verificationID = verificationID {
+            continuation.resume(returning: verificationID)
+          } else {
+            continuation
+              .resume(throwing: AuthServiceError
+                .multiFactorAuth("Failed to send SMS verification code to verify phone number"))
           }
         }
+      }
 
-      return verificationID
-    } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
-    }
+    return verificationID
   }
 
   func completeEnrollment(session: EnrollmentSession, verificationId: String?,
                           verificationCode: String, displayName: String) async throws {
-    do {
-      // Validate session state
-      guard session.canProceed else {
-        if session.isExpired {
-          throw AuthServiceError
-            .multiFactorAuth("Enrollment session has expired, cannot complete enrollment")
-        } else {
-          throw AuthServiceError
-            .multiFactorAuth("Enrollment session is not in a valid state for completion")
-        }
+    // Validate session state
+    guard session.canProceed else {
+      if session.isExpired {
+        throw AuthServiceError
+          .multiFactorAuth("Enrollment session has expired, cannot complete enrollment")
+      } else {
+        throw AuthServiceError
+          .multiFactorAuth("Enrollment session is not in a valid state for completion")
       }
-
-      // Validate verification code
-      guard !verificationCode.isEmpty else {
-        throw AuthServiceError.multiFactorAuth("Verification code cannot be empty")
-      }
-
-      guard let user = auth.currentUser else {
-        throw AuthServiceError.noCurrentUser
-      }
-
-      let multiFactorUser = user.multiFactor
-
-      // Create the appropriate assertion based on factor type
-      let assertion: MultiFactorAssertion
-
-      switch session.type {
-      case .sms:
-        // For SMS, we need the verification ID
-        guard let verificationId = verificationId else {
-          throw AuthServiceError
-            .multiFactorAuth("Verification ID is required for SMS enrollment")
-        }
-
-        // Create phone credential and assertion
-        let credential = PhoneAuthProvider.provider().credential(
-          withVerificationID: verificationId,
-          verificationCode: verificationCode
-        )
-        assertion = PhoneMultiFactorGenerator.assertion(with: credential)
-
-      case .totp:
-        // For TOTP, we need the secret from the session
-        guard let totpInfo = session.totpInfo else {
-          throw AuthServiceError
-            .multiFactorAuth("TOTP info is missing from enrollment session")
-        }
-
-        // Use the stored TOTP secret from the enrollment session
-        guard let secret = session._totpSecret else {
-          throw AuthServiceError
-            .multiFactorAuth("TOTP secret is missing from enrollment session")
-        }
-
-        // The concrete type is FirebaseAuth.TOTPSecret (kept as AnyObject to avoid exposing it)
-        guard let totpSecret = secret as? TOTPSecret else {
-          throw AuthServiceError
-            .multiFactorAuth("Invalid TOTP secret type in enrollment session")
-        }
-
-        assertion = TOTPMultiFactorGenerator.assertionForEnrollment(
-          with: totpSecret,
-          oneTimePassword: verificationCode
-        )
-      }
-
-      // Complete the enrollment
-      try await withReauthenticationIfNeeded(on: user) {
-        try await user.multiFactor.enroll(with: assertion, displayName: displayName)
-      }
-      currentUser = auth.currentUser
-    } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
     }
+
+    // Validate verification code
+    guard !verificationCode.isEmpty else {
+      throw AuthServiceError.multiFactorAuth("Verification code cannot be empty")
+    }
+
+    guard let user = auth.currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
+
+    let multiFactorUser = user.multiFactor
+
+    // Create the appropriate assertion based on factor type
+    let assertion: MultiFactorAssertion
+
+    switch session.type {
+    case .sms:
+      // For SMS, we need the verification ID
+      guard let verificationId = verificationId else {
+        throw AuthServiceError
+          .multiFactorAuth("Verification ID is required for SMS enrollment")
+      }
+
+      // Create phone credential and assertion
+      let credential = PhoneAuthProvider.provider().credential(
+        withVerificationID: verificationId,
+        verificationCode: verificationCode
+      )
+      assertion = PhoneMultiFactorGenerator.assertion(with: credential)
+
+    case .totp:
+      // For TOTP, we need the secret from the session
+      guard let totpInfo = session.totpInfo else {
+        throw AuthServiceError
+          .multiFactorAuth("TOTP info is missing from enrollment session")
+      }
+
+      // Use the stored TOTP secret from the enrollment session
+      guard let secret = session._totpSecret else {
+        throw AuthServiceError
+          .multiFactorAuth("TOTP secret is missing from enrollment session")
+      }
+
+      // The concrete type is FirebaseAuth.TOTPSecret (kept as AnyObject to avoid exposing it)
+      guard let totpSecret = secret as? TOTPSecret else {
+        throw AuthServiceError
+          .multiFactorAuth("Invalid TOTP secret type in enrollment session")
+      }
+
+      assertion = TOTPMultiFactorGenerator.assertionForEnrollment(
+        with: totpSecret,
+        oneTimePassword: verificationCode
+      )
+    }
+
+    // Complete the enrollment
+    try await withReauthenticationIfNeeded(on: user) {
+      try await user.multiFactor.enroll(with: assertion, displayName: displayName)
+    }
+    currentUser = auth.currentUser
   }
 
   /// Gets the provider ID that was used for the current sign-in session
@@ -851,26 +772,21 @@ public extension AuthService {
   }
 
   func unenrollMFA(_ factorUid: String) async throws -> [MultiFactorInfo] {
-    do {
-      guard let user = auth.currentUser else {
-        throw AuthServiceError.noCurrentUser
-      }
-
-      let multiFactorUser = user.multiFactor
-
-      try await withReauthenticationIfNeeded(on: user) {
-        try await multiFactorUser.unenroll(withFactorUID: factorUid)
-      }
-
-      // This is the only we to get the actual latest enrolledFactors
-      currentUser = Auth.auth().currentUser
-      let freshFactors = currentUser?.multiFactor.enrolledFactors ?? []
-
-      return freshFactors
-    } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
+    guard let user = auth.currentUser else {
+      throw AuthServiceError.noCurrentUser
     }
+
+    let multiFactorUser = user.multiFactor
+
+    try await withReauthenticationIfNeeded(on: user) {
+      try await multiFactorUser.unenroll(withFactorUID: factorUid)
+    }
+
+    // This is the only we to get the actual latest enrolledFactors
+    currentUser = Auth.auth().currentUser
+    let freshFactors = currentUser?.multiFactor.enrolledFactors ?? []
+
+    return freshFactors
   }
 
   // MARK: - Account Conflict Helper Methods
@@ -925,15 +841,9 @@ public extension AuthService {
       // Store it for consumers to observe
       currentAccountConflict = context
 
-      // Only set error alert if we're NOT auto-handling it
-      if conflictType != .anonymousUpgradeConflict {
-        updateError(message: context.message, underlyingError: error)
-      }
-
       // Throw the specific error with context
       throw AuthServiceError.accountConflict(context)
     } else {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
   }
@@ -970,94 +880,84 @@ public extension AuthService {
   }
 
   func resolveSmsChallenge(hintIndex: Int) async throws -> String {
-    do {
-      guard let resolver = currentMFAResolver else {
-        throw AuthServiceError.multiFactorAuth("No MFA resolver available")
-      }
+    guard let resolver = currentMFAResolver else {
+      throw AuthServiceError.multiFactorAuth("No MFA resolver available")
+    }
 
-      guard hintIndex < resolver.hints.count else {
-        throw AuthServiceError.multiFactorAuth("Invalid hint index")
-      }
+    guard hintIndex < resolver.hints.count else {
+      throw AuthServiceError.multiFactorAuth("Invalid hint index")
+    }
 
-      let hint = resolver.hints[hintIndex]
-      guard hint.factorID == PhoneMultiFactorID else {
-        throw AuthServiceError.multiFactorAuth("Selected hint is not a phone hint")
-      }
-      let phoneHint = hint as! PhoneMultiFactorInfo
+    let hint = resolver.hints[hintIndex]
+    guard hint.factorID == PhoneMultiFactorID else {
+      throw AuthServiceError.multiFactorAuth("Selected hint is not a phone hint")
+    }
+    let phoneHint = hint as! PhoneMultiFactorInfo
 
-      return try await withCheckedThrowingContinuation { continuation in
-        PhoneAuthProvider.provider().verifyPhoneNumber(
-          with: phoneHint,
-          uiDelegate: nil,
-          multiFactorSession: resolver.session
-        ) { verificationId, error in
-          if let error = error {
-            continuation
-              .resume(throwing: AuthServiceError.multiFactorAuth(error.localizedDescription))
-          } else if let verificationId = verificationId {
-            continuation.resume(returning: verificationId)
-          } else {
-            continuation
-              .resume(throwing: AuthServiceError.multiFactorAuth("Unknown error occurred"))
-          }
+    return try await withCheckedThrowingContinuation { continuation in
+      PhoneAuthProvider.provider().verifyPhoneNumber(
+        with: phoneHint,
+        uiDelegate: nil,
+        multiFactorSession: resolver.session
+      ) { verificationId, error in
+        if let error = error {
+          continuation
+            .resume(throwing: AuthServiceError.multiFactorAuth(error.localizedDescription))
+        } else if let verificationId = verificationId {
+          continuation.resume(returning: verificationId)
+        } else {
+          continuation
+            .resume(throwing: AuthServiceError.multiFactorAuth("Unknown error occurred"))
         }
       }
-    } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
     }
   }
 
   func resolveSignIn(code: String, hintIndex: Int, verificationId: String? = nil) async throws {
+    guard let resolver = currentMFAResolver else {
+      throw AuthServiceError.multiFactorAuth("No MFA resolver available")
+    }
+
+    guard hintIndex < resolver.hints.count else {
+      throw AuthServiceError.multiFactorAuth("Invalid hint index")
+    }
+
+    let hint = resolver.hints[hintIndex]
+    let assertion: MultiFactorAssertion
+
+    // Create the appropriate assertion based on the hint type
+    if hint.factorID == PhoneMultiFactorID {
+      guard let verificationId = verificationId else {
+        throw AuthServiceError.multiFactorAuth("Verification ID is required for SMS MFA")
+      }
+
+      let credential = PhoneAuthProvider.provider().credential(
+        withVerificationID: verificationId,
+        verificationCode: code
+      )
+      assertion = PhoneMultiFactorGenerator.assertion(with: credential)
+
+    } else if hint.factorID == TOTPMultiFactorID {
+      assertion = TOTPMultiFactorGenerator.assertionForSignIn(
+        withEnrollmentID: hint.uid,
+        oneTimePassword: code
+      )
+
+    } else {
+      throw AuthServiceError.multiFactorAuth("Unsupported MFA hint type")
+    }
+
     do {
-      guard let resolver = currentMFAResolver else {
-        throw AuthServiceError.multiFactorAuth("No MFA resolver available")
-      }
+      let result = try await resolver.resolveSignIn(with: assertion)
+      updateAuthenticationState()
 
-      guard hintIndex < resolver.hints.count else {
-        throw AuthServiceError.multiFactorAuth("Invalid hint index")
-      }
+      // Clear MFA resolution state
+      currentMFARequired = nil
+      currentMFAResolver = nil
 
-      let hint = resolver.hints[hintIndex]
-      let assertion: MultiFactorAssertion
-
-      // Create the appropriate assertion based on the hint type
-      if hint.factorID == PhoneMultiFactorID {
-        guard let verificationId = verificationId else {
-          throw AuthServiceError.multiFactorAuth("Verification ID is required for SMS MFA")
-        }
-
-        let credential = PhoneAuthProvider.provider().credential(
-          withVerificationID: verificationId,
-          verificationCode: code
-        )
-        assertion = PhoneMultiFactorGenerator.assertion(with: credential)
-
-      } else if hint.factorID == TOTPMultiFactorID {
-        assertion = TOTPMultiFactorGenerator.assertionForSignIn(
-          withEnrollmentID: hint.uid,
-          oneTimePassword: code
-        )
-
-      } else {
-        throw AuthServiceError.multiFactorAuth("Unsupported MFA hint type")
-      }
-
-      do {
-        let result = try await resolver.resolveSignIn(with: assertion)
-        updateAuthenticationState()
-
-        // Clear MFA resolution state
-        currentMFARequired = nil
-        currentMFAResolver = nil
-
-      } catch {
-        throw AuthServiceError
-          .multiFactorAuth("Failed to resolve MFA challenge: \(error.localizedDescription)")
-      }
     } catch {
-      updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
-      throw error
+      throw AuthServiceError
+        .multiFactorAuth("Failed to resolve MFA challenge: \(error.localizedDescription)")
     }
   }
 }
