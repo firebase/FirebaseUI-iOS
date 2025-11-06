@@ -123,12 +123,9 @@ public final class AuthService {
   public let auth: Auth
   public var isPresented: Bool = false
   public private(set) var navigator = Navigator()
+  
   public var authView: AuthView? {
     navigator.routes.last
-  }
-
-  var authViewRoutes: [AuthView] {
-    navigator.routes
   }
 
   public let string: StringUtils
