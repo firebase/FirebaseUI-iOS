@@ -20,6 +20,7 @@ import SwiftUI
 @MainActor
 public struct SignInWithTwitterButton {
   @Environment(AuthService.self) private var authService
+  @Environment(\.accountConflictHandler) private var accountConflictHandler
   let provider: AuthProviderSwift
   public init(provider: AuthProviderSwift) {
     self.provider = provider
@@ -34,7 +35,13 @@ extension SignInWithTwitterButton: View {
       accessibilityId: "sign-in-with-twitter-button"
     ) {
       Task {
-        try? await authService.signIn(provider)
+        do {
+          _ = try await authService.signIn(provider)
+        } catch let AuthServiceError.accountConflict(context) {
+          accountConflictHandler(context)
+        } catch {
+          // Other errors handled by .errorAlert()
+        }
       }
     }
   }

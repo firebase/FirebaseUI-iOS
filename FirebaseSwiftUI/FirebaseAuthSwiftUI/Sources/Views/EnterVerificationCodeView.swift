@@ -20,6 +20,7 @@ import SwiftUI
 @MainActor
 struct EnterVerificationCodeView: View {
   @Environment(AuthService.self) private var authService
+  @Environment(\.accountConflictHandler) private var accountConflictHandler
   @State private var verificationCode: String = ""
 
   let verificationID: String
@@ -62,7 +63,11 @@ struct EnterVerificationCodeView: View {
 
               _ = try await authService.signIn(credentials: credential)
               authService.navigator.clear()
-            } catch {}
+            } catch let AuthServiceError.accountConflict(context) {
+              accountConflictHandler(context)
+            } catch {
+              // Other errors handled by .errorAlert()
+            }
           }
         }) {
           if authService.authenticationState == .authenticating {

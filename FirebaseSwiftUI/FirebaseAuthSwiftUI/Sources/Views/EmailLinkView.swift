@@ -19,6 +19,7 @@ import SwiftUI
 
 public struct EmailLinkView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.accountConflictHandler) private var accountConflictHandler
   @State private var email = ""
   @State private var showModal = false
 
@@ -86,7 +87,13 @@ extension EmailLinkView: View {
     }
     .onOpenURL { url in
       Task {
-        try? await authService.handleSignInLink(url: url)
+        do {
+          try await authService.handleSignInLink(url: url)
+        } catch let AuthServiceError.accountConflict(context) {
+          accountConflictHandler(context)
+        } catch {
+          // Other errors handled by .errorAlert()
+        }
       }
     }
   }

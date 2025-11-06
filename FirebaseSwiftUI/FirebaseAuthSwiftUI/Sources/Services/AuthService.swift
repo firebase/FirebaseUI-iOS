@@ -153,9 +153,6 @@ public final class AuthService {
   public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
 
-  /// Current account conflict context - observe this to handle conflicts and update backend
-  public private(set) var currentAccountConflict: AccountConflictContext?
-
   // MARK: - Provider APIs
 
   private var listenerManager: AuthListenerManager?
@@ -225,7 +222,6 @@ public final class AuthService {
 
   func reset() {
     _currentError = nil
-    currentAccountConflict = nil
   }
 
   func updateError(title: String = "Error", message: String, underlyingError: Error? = nil) {
@@ -908,7 +904,7 @@ public extension AuthService {
     )
   }
 
-  /// Handles account conflict errors by creating context, storing it, and throwing structured error
+  /// Handles account conflict errors by creating context and throwing structured error
   /// - Parameters:
   ///   - error: The error to check and handle
   ///   - credential: The credential that caused the conflict
@@ -925,15 +921,12 @@ public extension AuthService {
         credential: credential
       )
 
-      // Store it for consumers to observe
-      currentAccountConflict = context
-
       // Only set error alert if we're NOT auto-handling it
       if conflictType != .anonymousUpgradeConflict {
         updateError(message: context.message, underlyingError: error)
       }
 
-      // Throw the specific error with context
+      // Throw the specific error with context - view layer handles it
       throw AuthServiceError.accountConflict(context)
     } else {
       updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)

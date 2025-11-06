@@ -22,6 +22,7 @@ import SwiftUI
 @MainActor
 public struct SignInWithFacebookButton {
   @Environment(AuthService.self) private var authService
+  @Environment(\.accountConflictHandler) private var accountConflictHandler
   let facebookProvider: FacebookProviderSwift
 
   public init(facebookProvider: FacebookProviderSwift) {
@@ -37,7 +38,13 @@ extension SignInWithFacebookButton: View {
       accessibilityId: "sign-in-with-facebook-button"
     ) {
       Task {
-        try? await authService.signIn(facebookProvider)
+        do {
+          _ = try await authService.signIn(facebookProvider)
+        } catch let AuthServiceError.accountConflict(context) {
+          accountConflictHandler(context)
+        } catch {
+          // Other errors handled by .errorAlert()
+        }
       }
     }
   }
