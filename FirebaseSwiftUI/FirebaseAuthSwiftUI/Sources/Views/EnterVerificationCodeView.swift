@@ -63,10 +63,13 @@ struct EnterVerificationCodeView: View {
 
               _ = try await authService.signIn(credentials: credential)
               authService.navigator.clear()
-            } catch let AuthServiceError.accountConflict(context) {
-              accountConflictHandler(context)
             } catch {
-              // Other errors handled by .errorAlert()
+              if case let AuthServiceError.accountConflict(context) = error,
+                 let handler = accountConflictHandler {
+                handler(context)
+              } else {
+                throw error
+              }
             }
           }
         }) {

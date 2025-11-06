@@ -89,10 +89,13 @@ extension EmailLinkView: View {
       Task {
         do {
           try await authService.handleSignInLink(url: url)
-        } catch let AuthServiceError.accountConflict(context) {
-          accountConflictHandler(context)
         } catch {
-          // Other errors handled by .errorAlert()
+          if case let AuthServiceError.accountConflict(context) = error,
+             let handler = accountConflictHandler {
+            handler(context)
+          } else {
+            throw error
+          }
         }
       }
     }

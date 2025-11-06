@@ -17,11 +17,11 @@ import SwiftUI
 
 /// Environment key for accessing the account conflict handler
 public struct AccountConflictHandlerKey: @preconcurrency EnvironmentKey {
-  @MainActor public static let defaultValue: (AccountConflictContext) -> Void = { _ in }
+  @MainActor public static let defaultValue: ((AccountConflictContext) -> Void)? = nil
 }
 
 public extension EnvironmentValues {
-  var accountConflictHandler: (AccountConflictContext) -> Void {
+  var accountConflictHandler: ((AccountConflictContext) -> Void)? {
     get { self[AccountConflictHandlerKey.self] }
     set { self[AccountConflictHandlerKey.self] = newValue }
   }
