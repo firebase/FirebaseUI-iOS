@@ -19,6 +19,7 @@ import SwiftUI
 
 struct EnterPhoneNumberView: View {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
   @State private var phoneNumber: String = ""
   @State private var selectedCountry: CountryData = .default
 
@@ -48,16 +49,19 @@ struct EnterPhoneNumberView: View {
       Button(action: {
         Task {
           do {
-            guard let provider = authService.currentPhoneProvider else {
-              fatalError("No phone provider found")
-            }
             let fullPhoneNumber = selectedCountry.dialCode + phoneNumber
-            let id = try await provider.verifyPhoneNumber(phoneNumber: fullPhoneNumber)
+            let id = try await authService.verifyPhoneNumber(phoneNumber: fullPhoneNumber)
             authService.navigator.push(.enterVerificationCode(
               verificationID: id,
               fullPhoneNumber: fullPhoneNumber
             ))
-          } catch {}
+          } catch {
+            if let errorHandler = reportError {
+              errorHandler(error)
+            } else {
+              throw error
+            }
+          }
         }
       }) {
         if authService.authenticationState == .authenticating {
@@ -78,7 +82,6 @@ struct EnterPhoneNumberView: View {
     }
     .navigationTitle(authService.string.phoneSignInTitle)
     .padding(.horizontal)
-    .errorAlert(error: authService.currentError, okButtonLabel: authService.string.okButtonLabel)
   }
 }
 

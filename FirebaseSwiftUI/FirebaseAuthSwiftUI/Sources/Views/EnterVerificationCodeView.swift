@@ -21,6 +21,7 @@ import SwiftUI
 struct EnterVerificationCodeView: View {
   @Environment(AuthService.self) private var authService
   @Environment(\.accountConflictHandler) private var accountConflictHandler
+  @Environment(\.reportError) private var reportError
   @State private var verificationCode: String = ""
 
   let verificationID: String
@@ -53,23 +54,23 @@ struct EnterVerificationCodeView: View {
         Button(action: {
           Task {
             do {
-              guard let provider = authService.currentPhoneProvider else {
-                fatalError("No phone provider found")
-              }
-              let credential = try await provider.createAuthCredential(
-                verificationId: verificationID,
+              try await authService.signInWithPhoneNumber(
+                verificationID: verificationID,
                 verificationCode: verificationCode
               )
-
-              _ = try await authService.signIn(credentials: credential)
               authService.navigator.clear()
             } catch {
-              if case let AuthServiceError.accountConflict(context) = error,
-                 let handler = accountConflictHandler {
-                handler(context)
-              } else {
-                throw error
+              // 1) Always report first, if a reporter exists
+              reportError?(error)
+
+              // 2) If it's a conflict and we have a handler, handle it and stop
+              if case let AuthServiceError.accountConflict(ctx) = error,
+                 let onConflict = accountConflictHandler {
+                onConflict(ctx)
+                return
               }
+
+              throw error
             }
           }
         }) {
@@ -92,7 +93,6 @@ struct EnterVerificationCodeView: View {
     .navigationTitle(authService.string.enterVerificationCodeTitle)
     .navigationBarTitleDisplayMode(.large)
     .padding(.horizontal)
-    .errorAlert(error: authService.currentError, okButtonLabel: authService.string.okButtonLabel)
   }
 }
 

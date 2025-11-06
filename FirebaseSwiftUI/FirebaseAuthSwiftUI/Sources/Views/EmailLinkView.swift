@@ -20,17 +20,22 @@ import SwiftUI
 public struct EmailLinkView {
   @Environment(AuthService.self) private var authService
   @Environment(\.accountConflictHandler) private var accountConflictHandler
+  @Environment(\.reportError) private var reportError
   @State private var email = ""
   @State private var showModal = false
 
   public init() {}
 
-  private func sendEmailLink() async {
+  private func sendEmailLink() async throws {
     do {
       try await authService.sendEmailSignInLink(email: email)
       showModal = true
     } catch {
-      // Error already displayed via modal by AuthService
+      if let errorHandler = reportError {
+        errorHandler(error)
+      } else {
+        throw error
+      }
     }
   }
 }
@@ -50,7 +55,7 @@ extension EmailLinkView: View {
       )
       Button {
         Task {
-          await sendEmailLink()
+          try await sendEmailLink()
           authService.emailLink = email
         }
       } label: {
@@ -90,12 +95,17 @@ extension EmailLinkView: View {
         do {
           try await authService.handleSignInLink(url: url)
         } catch {
-          if case let AuthServiceError.accountConflict(context) = error,
-             let handler = accountConflictHandler {
-            handler(context)
-          } else {
-            throw error
+          // 1) Always report first, if a reporter exists
+          reportError?(error)
+
+          // 2) If it's a conflict and we have a handler, handle it and stop
+          if case let AuthServiceError.accountConflict(ctx) = error,
+             let onConflict = accountConflictHandler {
+            onConflict(ctx)
+            return
           }
+
+          throw error
         }
       }
     }

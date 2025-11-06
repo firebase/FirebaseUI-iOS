@@ -21,46 +21,45 @@ import SwiftUI
 public struct GenericOAuthButton {
   @Environment(AuthService.self) private var authService
   @Environment(\.accountConflictHandler) private var accountConflictHandler
-  let provider: AuthProviderSwift
-  public init(provider: AuthProviderSwift) {
+  @Environment(\.reportError) private var reportError
+  let provider: OAuthProviderSwift
+  public init(provider: OAuthProviderSwift) {
     self.provider = provider
   }
 }
 
 extension GenericOAuthButton: View {
   public var body: some View {
-    guard let oauthProvider = provider as? OAuthProviderSwift else {
-      return AnyView(
-        Text(authService.string.invalidOAuthProviderError)
-          .foregroundColor(.red)
-      )
-    }
-
     // Create custom style from provider configuration
     var resolvedStyle: ProviderStyle {
       ProviderStyle(
-        icon: oauthProvider.buttonIcon,
-        backgroundColor: oauthProvider.buttonBackgroundColor,
-        contentColor: oauthProvider.buttonForegroundColor
+        icon: provider.buttonIcon,
+        backgroundColor: provider.buttonBackgroundColor,
+        contentColor: provider.buttonForegroundColor
       )
     }
 
     return AnyView(
       AuthProviderButton(
-        label: oauthProvider.displayName,
+        label: provider.displayName,
         style: resolvedStyle,
-        accessibilityId: "sign-in-with-\(oauthProvider.providerId)-button"
+        accessibilityId: "sign-in-with-\(provider.providerId)-button"
       ) {
         Task {
           do {
             _ = try await authService.signIn(provider)
           } catch {
-            if case let AuthServiceError.accountConflict(context) = error,
-               let handler = accountConflictHandler {
-              handler(context)
-            } else {
-              throw error
+            // 1) Always report first, if a reporter exists
+            reportError?(error)
+
+            // 2) If it's a conflict and we have a handler, handle it and stop
+            if case let AuthServiceError.accountConflict(ctx) = error,
+               let onConflict = accountConflictHandler {
+              onConflict(ctx)
+              return
             }
+
+            throw error
           }
         }
       }

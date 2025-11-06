@@ -27,9 +27,10 @@ import SwiftUI
 public struct SignInWithGoogleButton {
   @Environment(AuthService.self) private var authService
   @Environment(\.accountConflictHandler) private var accountConflictHandler
-  let googleProvider: AuthProviderSwift
+  @Environment(\.reportError) private var reportError
+  let googleProvider: GoogleProviderSwift
 
-  public init(googleProvider: AuthProviderSwift) {
+  public init(googleProvider: GoogleProviderSwift) {
     self.googleProvider = googleProvider
   }
 }
@@ -45,12 +46,17 @@ extension SignInWithGoogleButton: View {
         do {
           _ = try await authService.signIn(googleProvider)
         } catch {
-          if case let AuthServiceError.accountConflict(context) = error,
-             let handler = accountConflictHandler {
-            handler(context)
-          } else {
-            throw error
+          // 1) Always report first, if a reporter exists
+          reportError?(error)
+
+          // 2) If it's a conflict and we have a handler, handle it and stop
+          if case let AuthServiceError.accountConflict(ctx) = error,
+             let onConflict = accountConflictHandler {
+            onConflict(ctx)
+            return
           }
+
+          throw error
         }
       }
     }

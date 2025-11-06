@@ -33,6 +33,7 @@ private enum FocusableField: Hashable {
 public struct EmailAuthView {
   @Environment(AuthService.self) private var authService
   @Environment(\.accountConflictHandler) private var accountConflictHandler
+  @Environment(\.reportError) private var reportError
 
   @State private var email = ""
   @State private var password = ""
@@ -54,12 +55,17 @@ public struct EmailAuthView {
     do {
       _ = try await authService.signIn(email: email, password: password)
     } catch {
-      if case let AuthServiceError.accountConflict(context) = error,
-         let handler = accountConflictHandler {
-        handler(context)
-      } else {
-        throw error
+      // 1) Always report first, if a reporter exists
+      reportError?(error)
+
+      // 2) If it's a conflict and we have a handler, handle it and stop
+      if case let AuthServiceError.accountConflict(ctx) = error,
+         let onConflict = accountConflictHandler {
+        onConflict(ctx)
+        return
       }
+
+      throw error
     }
   }
 
@@ -67,12 +73,17 @@ public struct EmailAuthView {
     do {
       _ = try await authService.createUser(email: email, password: password)
     } catch {
-      if case let AuthServiceError.accountConflict(context) = error,
-         let handler = accountConflictHandler {
-        handler(context)
-      } else {
-        throw error
+      // 1) Always report first, if a reporter exists
+      reportError?(error)
+
+      // 2) If it's a conflict and we have a handler, handle it and stop
+      if case let AuthServiceError.accountConflict(ctx) = error,
+         let onConflict = accountConflictHandler {
+        onConflict(ctx)
+        return
       }
+
+      throw error
     }
   }
 }
@@ -102,7 +113,7 @@ extension EmailAuthView: View {
         contentType: .password,
         sensitive: true,
         onSubmit: { _ in
-          Task { try? await signInWithEmailPassword() }
+          Task { try await signInWithEmailPassword() }
         },
         leading: {
           Image(systemName: "lock")
@@ -129,7 +140,7 @@ extension EmailAuthView: View {
           contentType: .password,
           sensitive: true,
           onSubmit: { _ in
-            Task { try? await createUserWithEmailPassword() }
+            Task { try await createUserWithEmailPassword() }
           },
           leading: {
             Image(systemName: "lock")
@@ -143,9 +154,9 @@ extension EmailAuthView: View {
       Button(action: {
         Task {
           if authService.authenticationFlow == .signIn {
-            try? await signInWithEmailPassword()
+            try await signInWithEmailPassword()
           } else {
-            try? await createUserWithEmailPassword()
+            try await createUserWithEmailPassword()
           }
         }
       }) {

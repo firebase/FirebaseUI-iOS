@@ -114,7 +114,7 @@ extension AuthenticateWithAppleDialog: ASAuthorizationControllerDelegate {
 
 // MARK: - Apple Provider Swift
 
-public class AppleProviderSwift: AuthProviderSwift {
+public class AppleProviderSwift: CredentialAuthProviderSwift {
   public let scopes: [ASAuthorization.Scope]
   let providerId = "apple.com"
 
@@ -140,15 +140,15 @@ public class AppleProviderSwift: AuthProviderSwift {
 }
 
 public class AppleProviderAuthUI: AuthProviderUI {
-  public var provider: AuthProviderSwift
-
-  public init(provider: AuthProviderSwift) {
-    self.provider = provider
-  }
-
+  private let typedProvider: AppleProviderSwift
+  public var provider: AuthProviderSwift { typedProvider }
   public let id: String = "apple.com"
 
+  public init(provider: AppleProviderSwift) {
+    typedProvider = provider
+  }
+
   @MainActor public func authButton() -> AnyView {
-    AnyView(SignInWithAppleButton(provider: provider))
+    AnyView(SignInWithAppleButton(provider: typedProvider))
   }
 }
