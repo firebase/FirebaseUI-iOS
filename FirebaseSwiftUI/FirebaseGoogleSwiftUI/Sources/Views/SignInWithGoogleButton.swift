@@ -26,9 +26,9 @@ import SwiftUI
 @MainActor
 public struct SignInWithGoogleButton {
   @Environment(AuthService.self) private var authService
-  let googleProvider: AuthProviderSwift
+  let googleProvider: GoogleProviderSwift
 
-  public init(googleProvider: AuthProviderSwift) {
+  public init(googleProvider: GoogleProviderSwift) {
     self.googleProvider = googleProvider
   }
 }

@@ -19,7 +19,7 @@ import GoogleSignIn
 import GoogleSignInSwift
 import SwiftUI
 
-public class GoogleProviderSwift: AuthProviderSwift {
+public class GoogleProviderSwift: CredentialAuthProviderSwift {
   let scopes: [String]
   let clientID: String
   let providerId = "google.com"
@@ -71,14 +71,15 @@ public class GoogleProviderSwift: AuthProviderSwift {
 }
 
 public class GoogleProviderAuthUI: AuthProviderUI {
-  public var provider: AuthProviderSwift
+  private let typedProvider: GoogleProviderSwift
+  public var provider: AuthProviderSwift { typedProvider }
   public let id: String = "google.com"
 
-  public init(provider: AuthProviderSwift) {
-    self.provider = provider
+  public init(provider: GoogleProviderSwift) {
+    typedProvider = provider
   }
 
   @MainActor public func authButton() -> AnyView {
-    AnyView(SignInWithGoogleButton(googleProvider: provider))
+    AnyView(SignInWithGoogleButton(googleProvider: typedProvider))
   }
 }
