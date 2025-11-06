@@ -21,35 +21,28 @@ import SwiftUI
 public struct GenericOAuthButton {
   @Environment(AuthService.self) private var authService
   @Environment(\.reportError) private var reportError
-  let provider: AuthProviderSwift
-  public init(provider: AuthProviderSwift) {
+  let provider: OAuthProviderSwift
+  public init(provider: OAuthProviderSwift) {
     self.provider = provider
   }
 }
 
 extension GenericOAuthButton: View {
   public var body: some View {
-    guard let oauthProvider = provider as? OAuthProviderSwift else {
-      return AnyView(
-        Text(authService.string.invalidOAuthProviderError)
-          .foregroundColor(.red)
-      )
-    }
-
     // Create custom style from provider configuration
     var resolvedStyle: ProviderStyle {
       ProviderStyle(
-        icon: oauthProvider.buttonIcon,
-        backgroundColor: oauthProvider.buttonBackgroundColor,
-        contentColor: oauthProvider.buttonForegroundColor
+        icon: provider.buttonIcon,
+        backgroundColor: provider.buttonBackgroundColor,
+        contentColor: provider.buttonForegroundColor
       )
     }
 
     return AnyView(
       AuthProviderButton(
-        label: oauthProvider.displayName,
+        label: provider.displayName,
         style: resolvedStyle,
-        accessibilityId: "sign-in-with-\(oauthProvider.providerId)-button"
+        accessibilityId: "sign-in-with-\(provider.providerId)-button"
       ) {
         Task {
           do {

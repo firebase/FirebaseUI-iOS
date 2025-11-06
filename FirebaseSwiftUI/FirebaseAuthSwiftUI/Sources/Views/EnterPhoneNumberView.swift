@@ -49,11 +49,8 @@ struct EnterPhoneNumberView: View {
       Button(action: {
         Task {
           do {
-            guard let provider = authService.currentPhoneProvider else {
-              fatalError("No phone provider found")
-            }
             let fullPhoneNumber = selectedCountry.dialCode + phoneNumber
-            let id = try await provider.verifyPhoneNumber(phoneNumber: fullPhoneNumber)
+            let id = try await authService.verifyPhoneNumber(phoneNumber: fullPhoneNumber)
             authService.navigator.push(.enterVerificationCode(
               verificationID: id,
               fullPhoneNumber: fullPhoneNumber

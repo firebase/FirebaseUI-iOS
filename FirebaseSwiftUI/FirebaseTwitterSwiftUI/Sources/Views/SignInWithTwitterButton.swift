@@ -21,8 +21,8 @@ import SwiftUI
 public struct SignInWithTwitterButton {
   @Environment(AuthService.self) private var authService
   @Environment(\.reportError) private var reportError
-  let provider: AuthProviderSwift
-  public init(provider: AuthProviderSwift) {
+  let provider: TwitterProviderSwift
+  public init(provider: TwitterProviderSwift) {
     self.provider = provider
   }
 }

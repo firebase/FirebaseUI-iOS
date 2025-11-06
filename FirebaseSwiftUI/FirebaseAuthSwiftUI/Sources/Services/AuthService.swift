@@ -17,7 +17,12 @@ import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
-public protocol AuthProviderSwift {
+/// Base protocol for all authentication providers
+public protocol AuthProviderSwift {}
+
+/// Protocol for providers that can directly create an AuthCredential
+/// Used by Google, Apple, Twitter, Facebook, and OAuth providers
+public protocol CredentialAuthProviderSwift: AuthProviderSwift {
   @MainActor func createAuthCredential() async throws -> AuthCredential
 }
 
@@ -25,12 +30,6 @@ public protocol AuthProviderUI {
   var id: String { get }
   @MainActor func authButton() -> AnyView
   var provider: AuthProviderSwift { get }
-}
-
-public protocol PhoneAuthProviderSwift: AuthProviderSwift {
-  @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
-  @MainActor func createAuthCredential(verificationId: String,
-                                       verificationCode: String) async throws -> AuthCredential
 }
 
 public enum AuthenticationState {
@@ -148,10 +147,6 @@ public final class AuthService {
 
   private var providers: [AuthProviderUI] = []
 
-  public var currentPhoneProvider: PhoneAuthProviderSwift? {
-    providers.compactMap { $0.provider as? PhoneAuthProviderSwift }.first
-  }
-
   public func registerProvider(providerWithButton: AuthProviderUI) {
     providers.append(providerWithButton)
   }
@@ -173,7 +168,7 @@ public final class AuthService {
     )
   }
 
-  public func signIn(_ provider: AuthProviderSwift) async throws -> SignInOutcome {
+  public func signIn(_ provider: CredentialAuthProviderSwift) async throws -> SignInOutcome {
     let credential = try await provider.createAuthCredential()
     let result = try await signIn(credentials: credential)
     return result
@@ -747,8 +742,15 @@ public extension AuthService {
       let password = try await passwordPrompt.confirmPassword()
       let credential = EmailAuthProvider.credential(withEmail: email, password: password)
       _ = try await user.reauthenticate(with: credential)
-    } else if let matchingProvider = providers.first(where: { $0.id == providerId }) {
-      let credential = try await matchingProvider.provider.createAuthCredential()
+    } else if providerId == PhoneAuthProviderID {
+      // Phone auth requires manual reauthentication via sign out and sign in otherwise it will take
+      // the user out of the existing flow
+      throw AuthServiceError.reauthenticationRequired(
+        "Phone authentication requires you to sign out and sign in again to continue"
+      )
+    } else if let matchingProvider = providers.first(where: { $0.id == providerId }),
+              let credentialProvider = matchingProvider.provider as? CredentialAuthProviderSwift {
+      let credential = try await credentialProvider.createAuthCredential()
       _ = try await user.reauthenticate(with: credential)
     } else {
       throw AuthServiceError.providerNotFound("No provider found for \(providerId)")

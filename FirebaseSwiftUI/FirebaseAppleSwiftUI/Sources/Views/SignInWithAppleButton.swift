@@ -21,8 +21,8 @@ import SwiftUI
 public struct SignInWithAppleButton {
   @Environment(AuthService.self) private var authService
   @Environment(\.reportError) private var reportError
-  let provider: AuthProviderSwift
-  public init(provider: AuthProviderSwift) {
+  let provider: AppleProviderSwift
+  public init(provider: AppleProviderSwift) {
     self.provider = provider
   }
 }
