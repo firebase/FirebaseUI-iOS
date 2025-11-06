@@ -20,6 +20,7 @@ import SwiftUI
 @MainActor
 public struct GenericOAuthButton {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
   let provider: OAuthProviderSwift
   public init(provider: OAuthProviderSwift) {
     self.provider = provider
@@ -44,7 +45,15 @@ extension GenericOAuthButton: View {
         accessibilityId: "sign-in-with-\(provider.providerId)-button"
       ) {
         Task {
-          try? await authService.signIn(provider)
+          do {
+            _ = try await authService.signIn(provider)
+          } catch {
+            if let errorHandler = reportError {
+              errorHandler(error)
+            } else {
+              throw error
+            }
+          }
         }
       }
     )

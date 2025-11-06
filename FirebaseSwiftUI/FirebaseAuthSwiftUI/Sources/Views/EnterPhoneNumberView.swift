@@ -19,6 +19,7 @@ import SwiftUI
 
 struct EnterPhoneNumberView: View {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
   @State private var phoneNumber: String = ""
   @State private var selectedCountry: CountryData = .default
 
@@ -54,7 +55,13 @@ struct EnterPhoneNumberView: View {
               verificationID: id,
               fullPhoneNumber: fullPhoneNumber
             ))
-          } catch {}
+          } catch {
+            if let errorHandler = reportError {
+              errorHandler(error)
+            } else {
+              throw error
+            }
+          }
         }
       }) {
         if authService.authenticationState == .authenticating {
@@ -75,7 +82,6 @@ struct EnterPhoneNumberView: View {
     }
     .navigationTitle(authService.string.phoneSignInTitle)
     .padding(.horizontal)
-    .errorAlert(error: authService.currentError, okButtonLabel: authService.string.okButtonLabel)
   }
 }
 

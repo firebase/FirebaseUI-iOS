@@ -83,3 +83,18 @@ public struct AlertError: Identifiable, Equatable {
     lhs.id == rhs.id
   }
 }
+
+// MARK: - Error Reporting Environment
+
+/// Environment key for error reporting closure
+private struct ReportErrorKey: @preconcurrency EnvironmentKey {
+  @MainActor static let defaultValue: ((Error) -> Void)? = nil
+}
+
+public extension EnvironmentValues {
+  /// Optional closure to report errors to the parent view for display
+  var reportError: ((Error) -> Void)? {
+    get { self[ReportErrorKey.self] }
+    set { self[ReportErrorKey.self] = newValue }
+  }
+}

@@ -19,17 +19,22 @@ import SwiftUI
 
 public struct EmailLinkView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
   @State private var email = ""
   @State private var showModal = false
 
   public init() {}
 
-  private func sendEmailLink() async {
+  private func sendEmailLink() async throws {
     do {
       try await authService.sendEmailSignInLink(email: email)
       showModal = true
     } catch {
-      // Error already displayed via modal by AuthService
+      if let errorHandler = reportError {
+        errorHandler(error)
+      } else {
+        throw error
+      }
     }
   }
 }
@@ -49,7 +54,7 @@ extension EmailLinkView: View {
       )
       Button {
         Task {
-          await sendEmailLink()
+          try await sendEmailLink()
           authService.emailLink = email
         }
       } label: {
@@ -86,7 +91,15 @@ extension EmailLinkView: View {
     }
     .onOpenURL { url in
       Task {
-        try? await authService.handleSignInLink(url: url)
+        do {
+          try await authService.handleSignInLink(url: url)
+        } catch {
+          if let errorHandler = reportError {
+            errorHandler(error)
+          } else {
+            throw error
+          }
+        }
       }
     }
   }

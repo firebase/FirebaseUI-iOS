@@ -26,6 +26,7 @@ import SwiftUI
 @MainActor
 public struct SignInWithGoogleButton {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
   let googleProvider: GoogleProviderSwift
 
   public init(googleProvider: GoogleProviderSwift) {
@@ -41,7 +42,15 @@ extension SignInWithGoogleButton: View {
       accessibilityId: "sign-in-with-google-button"
     ) {
       Task {
-        try? await authService.signIn(googleProvider)
+        do {
+          _ = try await authService.signIn(googleProvider)
+        } catch {
+          if let errorHandler = reportError {
+            errorHandler(error)
+          } else {
+            throw error
+          }
+        }
       }
     }
   }

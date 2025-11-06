@@ -32,6 +32,7 @@ private enum FocusableField: Hashable {
 @MainActor
 public struct EmailAuthView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
 
   @State private var email = ""
   @State private var password = ""
@@ -49,12 +50,28 @@ public struct EmailAuthView {
     }
   }
 
-  private func signInWithEmailPassword() async {
-    try? await authService.signIn(email: email, password: password)
+  private func signInWithEmailPassword() async throws {
+    do {
+      _ = try await authService.signIn(email: email, password: password)
+    } catch {
+      if let errorHandler = reportError {
+        errorHandler(error)
+      } else {
+        throw error
+      }
+    }
   }
 
-  private func createUserWithEmailPassword() async {
-    try? await authService.createUser(email: email, password: password)
+  private func createUserWithEmailPassword() async throws {
+    do {
+      _ = try await authService.createUser(email: email, password: password)
+    } catch {
+      if let errorHandler = reportError {
+        errorHandler(error)
+      } else {
+        throw error
+      }
+    }
   }
 }
 
@@ -83,7 +100,7 @@ extension EmailAuthView: View {
         contentType: .password,
         sensitive: true,
         onSubmit: { _ in
-          Task { await signInWithEmailPassword() }
+          Task { try await signInWithEmailPassword() }
         },
         leading: {
           Image(systemName: "lock")
@@ -110,7 +127,7 @@ extension EmailAuthView: View {
           contentType: .password,
           sensitive: true,
           onSubmit: { _ in
-            Task { await createUserWithEmailPassword() }
+            Task { try await createUserWithEmailPassword() }
           },
           leading: {
             Image(systemName: "lock")
@@ -124,9 +141,9 @@ extension EmailAuthView: View {
       Button(action: {
         Task {
           if authService.authenticationFlow == .signIn {
-            await signInWithEmailPassword()
+            try await signInWithEmailPassword()
           } else {
-            await createUserWithEmailPassword()
+            try await createUserWithEmailPassword()
           }
         }
       }) {
