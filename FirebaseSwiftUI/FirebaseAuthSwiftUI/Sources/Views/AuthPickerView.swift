@@ -41,7 +41,6 @@ extension AuthPickerView: View {
         @Bindable var navigator = authService.navigator
         NavigationStack(path: $navigator.routes) {
           authPickerViewInternal
-            .environment(\.reportError, reportError)
             .navigationTitle(authService.authenticationState == .unauthenticated ? authService
               .string.authPickerTitle : "")
             .navigationBarTitleDisplayMode(.large)
@@ -72,6 +71,11 @@ extension AuthPickerView: View {
               }
             }
         }
+        .environment(\.reportError, reportError)
+        .errorAlert(
+          error: $error,
+          okButtonLabel: authService.string.okButtonLabel
+        )
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
       }
       // View-layer logic: Handle account conflicts (auto-handle anonymous upgrade, store others for
@@ -89,10 +93,12 @@ extension AuthPickerView: View {
 
   /// Closure for reporting errors from child views
   private func reportError(_ error: Error) {
-    self.error = AlertError(
-      message: authService.string.localizedErrorMessage(for: error),
-      underlyingError: error
-    )
+    Task { @MainActor in
+      self.error = AlertError(
+        message: authService.string.localizedErrorMessage(for: error),
+        underlyingError: error
+      )
+    }
   }
 
   /// View-layer logic: Handle account conflicts with type-specific behavior
@@ -181,10 +187,6 @@ extension AuthPickerView: View {
         .background(.black.opacity(0.7))
       }
     }
-    .errorAlert(
-      error: $error,
-      okButtonLabel: authService.string.okButtonLabel
-    )
   }
 
   @ViewBuilder
