@@ -12,46 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-@preconcurrency import FirebaseAuth
 import FirebaseAuthSwiftUI
 import SwiftUI
 
-public typealias VerificationID = String
-
-public class PhoneProviderSwift: PhoneAuthProviderSwift {
+/// Simple provider marker for phone authentication
+public class PhoneProviderSwift: AuthProviderSwift {
   public init() {}
-
-  @MainActor public func verifyPhoneNumber(phoneNumber: String) async throws -> VerificationID {
-    return try await withCheckedThrowingContinuation { continuation in
-      PhoneAuthProvider.provider()
-        .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
-          if let error = error {
-            continuation.resume(throwing: error)
-            return
-          }
-          continuation.resume(returning: verificationID!)
-        }
-    }
-  }
-
-  @MainActor public func createAuthCredential(verificationId: String,
-                                              verificationCode: String) async throws
-    -> AuthCredential {
-    return PhoneAuthProvider.provider()
-      .credential(withVerificationID: verificationId, verificationCode: verificationCode)
-  }
 }
 
 public class PhoneAuthProviderAuthUI: AuthProviderUI {
-  private let typedProvider: PhoneAuthProviderSwift
+  private let typedProvider: PhoneProviderSwift
   public var provider: AuthProviderSwift { typedProvider }
   public let id: String = "phone"
 
-  public init(provider: PhoneAuthProviderSwift? = nil) {
-    typedProvider = provider ?? PhoneProviderSwift()
+  public init() {
+    typedProvider = PhoneProviderSwift()
   }
 
   @MainActor public func authButton() -> AnyView {
-    AnyView(PhoneAuthButtonView(phoneProvider: typedProvider))
+    AnyView(PhoneAuthButtonView())
   }
 }

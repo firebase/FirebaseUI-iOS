@@ -20,11 +20,8 @@ import SwiftUI
 @MainActor
 public struct PhoneAuthButtonView {
   @Environment(AuthService.self) private var authService
-  let phoneProvider: PhoneAuthProviderSwift
 
-  public init(phoneProvider: PhoneAuthProviderSwift) {
-    self.phoneProvider = phoneProvider
-  }
+  public init() {}
 }
 
 extension PhoneAuthButtonView: View {
@@ -41,7 +38,6 @@ extension PhoneAuthButtonView: View {
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
-  let phoneProvider = PhoneProviderSwift()
-  return PhoneAuthButtonView(phoneProvider: phoneProvider)
+  return PhoneAuthButtonView()
     .environment(AuthService())
 }

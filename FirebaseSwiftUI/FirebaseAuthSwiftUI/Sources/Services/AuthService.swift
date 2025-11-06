@@ -32,15 +32,6 @@ public protocol AuthProviderUI {
   var provider: AuthProviderSwift { get }
 }
 
-/// Protocol for phone authentication which requires a two-step flow:
-/// 1. Verify phone number to get verification ID
-/// 2. Create credential with verification ID and code
-public protocol PhoneAuthProviderSwift: AuthProviderSwift {
-  @MainActor func verifyPhoneNumber(phoneNumber: String) async throws -> String
-  @MainActor func createAuthCredential(verificationId: String,
-                                       verificationCode: String) async throws -> AuthCredential
-}
-
 public enum AuthenticationState {
   case unauthenticated
   case authenticating
@@ -172,10 +163,6 @@ public final class AuthService {
 
   private var providers: [AuthProviderUI] = []
 
-  public var currentPhoneProvider: PhoneAuthProviderSwift? {
-    providers.compactMap { $0.provider as? PhoneAuthProviderSwift }.first
-  }
-
   public func registerProvider(providerWithButton: AuthProviderUI) {
     providers.append(providerWithButton)
   }
@@ -207,11 +194,6 @@ public final class AuthService {
       updateError(message: string.localizedErrorMessage(for: error), underlyingError: error)
       throw error
     }
-  }
-
-  public func signIn(_: PhoneAuthProviderSwift) async {
-    // Phone auth is multi-step, navigate to phone number entry
-    navigator.push(.enterPhoneNumber)
   }
 
   // MARK: - End Provider APIs

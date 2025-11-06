@@ -52,15 +52,10 @@ struct EnterVerificationCodeView: View {
         Button(action: {
           Task {
             do {
-              guard let provider = authService.currentPhoneProvider else {
-                fatalError("No phone provider found")
-              }
-              let credential = try await provider.createAuthCredential(
-                verificationId: verificationID,
+              try await authService.signInWithPhoneNumber(
+                verificationID: verificationID,
                 verificationCode: verificationCode
               )
-
-              _ = try await authService.signIn(credentials: credential)
               authService.navigator.clear()
             } catch {}
           }
