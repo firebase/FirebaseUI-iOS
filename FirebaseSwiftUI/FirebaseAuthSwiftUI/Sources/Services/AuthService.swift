@@ -824,6 +824,11 @@ public extension AuthService {
       let password = try await passwordPrompt.confirmPassword()
       let credential = EmailAuthProvider.credential(withEmail: email, password: password)
       _ = try await user.reauthenticate(with: credential)
+    } else if providerId == PhoneAuthProviderID {
+      // Phone auth requires manual reauthentication via sign out and sign in otherwise it will take the user out of the existing flow
+      throw AuthServiceError.reauthenticationRequired(
+        "Phone authentication requires you to sign out and sign in again to continue"
+      )
     } else if let matchingProvider = providers.first(where: { $0.id == providerId }),
               let credentialProvider = matchingProvider.provider as? CredentialAuthProviderSwift {
       let credential = try await credentialProvider.createAuthCredential()
