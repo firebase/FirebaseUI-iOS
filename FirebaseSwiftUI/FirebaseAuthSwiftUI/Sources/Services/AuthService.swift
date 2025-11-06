@@ -44,6 +44,7 @@ public enum AuthenticationFlow {
 }
 
 public enum AuthView: Hashable {
+  case authPicker
   case passwordRecovery
   case emailLink
   case updatePassword
@@ -52,6 +53,31 @@ public enum AuthView: Hashable {
   case mfaResolution
   case enterPhoneNumber
   case enterVerificationCode(verificationID: String, fullPhoneNumber: String)
+  
+  @MainActor
+  @ViewBuilder
+  func destination() -> some View {
+    switch self {
+    case AuthView.authPicker:
+      AuthPickerViewInternal()
+    case AuthView.passwordRecovery:
+      PasswordRecoveryView()
+    case AuthView.emailLink:
+      EmailLinkView()
+    case AuthView.updatePassword:
+      UpdatePasswordView()
+    case AuthView.mfaEnrollment:
+      MFAEnrolmentView()
+    case AuthView.mfaManagement:
+      MFAManagementView()
+    case AuthView.mfaResolution:
+      MFAResolutionView()
+    case AuthView.enterPhoneNumber:
+      EnterPhoneNumberView()
+    case let .enterVerificationCode(verificationID, fullPhoneNumber):
+      EnterVerificationCodeView(verificationID: verificationID, fullPhoneNumber: fullPhoneNumber)
+    }
+  }
 }
 
 public enum SignInOutcome: @unchecked Sendable {

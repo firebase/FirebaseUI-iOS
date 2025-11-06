@@ -32,7 +32,7 @@ import SwiftUI
 
 struct ContentView: View {
   init() {
-    Auth.auth().signInAnonymously()
+    //Auth.auth().signInAnonymously()
     let actionCodeSettings = ActionCodeSettings()
     actionCodeSettings.handleCodeInApp = true
     actionCodeSettings

@@ -13,19 +13,23 @@
 // limitations under the License.
 
 import FirebaseAuth
-import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
 @MainActor
 public struct AuthPickerView<Content: View> {
-  public init(@ViewBuilder content: @escaping () -> Content = { EmptyView() }) {
+  public init(
+    initialPath: AuthView = .authPicker,
+    @ViewBuilder content: @escaping () -> Content = { EmptyView() }
+  ) {
+    self.initialPath = initialPath
     self.content = content
   }
   
   @Environment(AuthService.self) private var authService
+  private let initialPath: AuthView
   private let content: () -> Content
-
+  
   // View-layer state for handling auto-linking flow
   @State private var pendingCredentialForLinking: AuthCredential?
 }
@@ -37,63 +41,40 @@ extension AuthPickerView: View {
       .sheet(isPresented: $authService.isPresented) {
         @Bindable var navigator = authService.navigator
         NavigationStack(path: $navigator.routes) {
-          authPickerViewInternal
-            .navigationTitle(authService.authenticationState == .unauthenticated ? authService
-              .string.authPickerTitle : "")
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-              toolbar
-            }
-            .navigationDestination(for: AuthView.self) { view in
-              switch view {
-              case AuthView.passwordRecovery:
-                PasswordRecoveryView()
-              case AuthView.emailLink:
-                EmailLinkView()
-              case AuthView.updatePassword:
-                UpdatePasswordView()
-              case AuthView.mfaEnrollment:
-                MFAEnrolmentView()
-              case AuthView.mfaManagement:
-                MFAManagementView()
-              case AuthView.mfaResolution:
-                MFAResolutionView()
-              case AuthView.enterPhoneNumber:
-                EnterPhoneNumberView()
-              case let .enterVerificationCode(verificationID, fullPhoneNumber):
-                EnterVerificationCodeView(verificationID: verificationID, fullPhoneNumber: fullPhoneNumber)
-              }
+          initialPath.destination()
+            .navigationDestination(for: AuthView.self) { path in
+              path.destination()
             }
         }
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
       }
-      // View-layer logic: Handle account conflicts (auto-handle anonymous upgrade, store others for
-      // linking)
+    // View-layer logic: Handle account conflicts (auto-handle anonymous upgrade, store others for
+    // linking)
       .onChange(of: authService.currentAccountConflict) { _, conflict in
         handleAccountConflict(conflict)
       }
-      // View-layer logic: Auto-link pending credential after successful sign-in
+    // View-layer logic: Auto-link pending credential after successful sign-in
       .onChange(of: authService.authenticationState) { _, newState in
         if newState == .authenticated {
           attemptAutoLinkPendingCredential()
         }
       }
   }
-
+  
   /// View-layer logic: Handle account conflicts with type-specific behavior
   private func handleAccountConflict(_ conflict: AccountConflictContext?) {
     guard let conflict = conflict else { return }
-
+    
     // Only auto-handle anonymous upgrade conflicts
     if conflict.conflictType == .anonymousUpgradeConflict {
       Task {
         do {
           // Sign out the anonymous user
           try await authService.signOut()
-
+          
           // Sign in with the new credential
           _ = try await authService.signIn(credentials: conflict.credential)
-
+          
           // Successfully handled - conflict and error are cleared automatically by reset()
         } catch {
           // Error will be shown via normal error handling
@@ -106,11 +87,11 @@ extension AuthPickerView: View {
       // Error modal will show for user to see and handle
     }
   }
-
+  
   /// View-layer logic: Attempt to link pending credential after successful sign-in
   private func attemptAutoLinkPendingCredential() {
     guard let credential = pendingCredentialForLinking else { return }
-
+    
     Task {
       do {
         try await authService.linkAccounts(credentials: credential)
@@ -122,78 +103,6 @@ extension AuthPickerView: View {
         pendingCredentialForLinking = nil
       }
     }
-  }
-  
-  @ToolbarContentBuilder
-  var toolbar: some ToolbarContent {
-    ToolbarItem(placement: .topBarTrailing) {
-      if !authService.configuration.shouldHideCancelButton {
-        Button {
-          authService.isPresented = false
-        } label: {
-          Image(systemName: "xmark")
-            .foregroundStyle(Color(UIColor.label))
-        }
-      }
-    }
-  }
-  
-  @ViewBuilder
-  var authPickerViewInternal: some View {
-    @Bindable var authService = authService
-    VStack {
-      if authService.authenticationState == .authenticated {
-        SignedInView()
-      } else {
-        authMethodPicker
-          .safeAreaPadding()
-      }
-    }
-    .overlay {
-      if authService.authenticationState == .authenticating {
-        VStack(spacing: 24) {
-          ProgressView()
-            .scaleEffect(1.25)
-            .tint(.white)
-          Text("Authenticating...")
-            .foregroundStyle(.white)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.black.opacity(0.7))
-      }
-    }
-    .errorAlert(
-      error: authService.currentError,
-      okButtonLabel: authService.string.okButtonLabel
-    )
-  }
-  
-  @ViewBuilder
-  var authMethodPicker: some View {
-    GeometryReader { proxy in
-      ScrollView {
-        VStack(spacing: 24) {
-          Image(authService.configuration.logo ?? Assets.firebaseAuthLogo)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 100, height: 100)
-          if authService.emailSignInEnabled {
-            EmailAuthView()
-          }
-          Divider()
-          otherSignInOptions(proxy)
-          PrivacyTOCsView(displayMode: .full)
-        }
-      }
-    }
-  }
-  
-  @ViewBuilder
-  func otherSignInOptions(_ proxy: GeometryProxy) -> some View {
-    VStack {
-      authService.renderButtons()
-    }
-    .padding(.horizontal, proxy.size.width * 0.18)
   }
 }
 
