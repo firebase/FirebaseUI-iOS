@@ -25,7 +25,7 @@ public struct EmailLinkView {
 
   public init() {}
 
-  private func sendEmailLink() async {
+  private func sendEmailLink() async throws {
     do {
       try await authService.sendEmailSignInLink(email: email)
       showModal = true
@@ -54,7 +54,7 @@ extension EmailLinkView: View {
       )
       Button {
         Task {
-          await sendEmailLink()
+          try await sendEmailLink()
           authService.emailLink = email
         }
       } label: {

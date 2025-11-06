@@ -36,7 +36,6 @@ extension AuthPickerView: View {
   public var body: some View {
     @Bindable var authService = authService
     content()
-      .environment(\.reportError, reportError)
       .sheet(isPresented: $authService.isPresented) {
         @Bindable var navigator = authService.navigator
         NavigationStack(path: $navigator.routes) {

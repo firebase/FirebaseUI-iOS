@@ -22,7 +22,7 @@ public struct SignedInView {
   @State private var showDeleteConfirmation = false
   @State private var showEmailVerificationSent = false
 
-  private func sendEmailVerification() async {
+  private func sendEmailVerification() async throws {
     do {
       try await authService.sendEmailVerification()
       showEmailVerificationSent = true
@@ -51,7 +51,7 @@ extension SignedInView: View {
       if authService.currentUser?.isEmailVerified == false {
         Button {
           Task {
-            await sendEmailVerification()
+            try await sendEmailVerification()
           }
         } label: {
           Text(authService.string.sendEmailVerificationButtonLabel)

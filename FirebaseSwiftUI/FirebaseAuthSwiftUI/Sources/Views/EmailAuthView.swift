@@ -50,7 +50,7 @@ public struct EmailAuthView {
     }
   }
 
-  private func signInWithEmailPassword() async {
+  private func signInWithEmailPassword() async throws {
     do {
       _ = try await authService.signIn(email: email, password: password)
     } catch {
@@ -62,7 +62,7 @@ public struct EmailAuthView {
     }
   }
 
-  private func createUserWithEmailPassword() async {
+  private func createUserWithEmailPassword() async throws {
     do {
       _ = try await authService.createUser(email: email, password: password)
     } catch {
@@ -100,7 +100,7 @@ extension EmailAuthView: View {
         contentType: .password,
         sensitive: true,
         onSubmit: { _ in
-          Task { await signInWithEmailPassword() }
+          Task { try await signInWithEmailPassword() }
         },
         leading: {
           Image(systemName: "lock")
@@ -127,7 +127,7 @@ extension EmailAuthView: View {
           contentType: .password,
           sensitive: true,
           onSubmit: { _ in
-            Task { await createUserWithEmailPassword() }
+            Task { try await createUserWithEmailPassword() }
           },
           leading: {
             Image(systemName: "lock")
@@ -141,9 +141,9 @@ extension EmailAuthView: View {
       Button(action: {
         Task {
           if authService.authenticationFlow == .signIn {
-            await signInWithEmailPassword()
+            try await signInWithEmailPassword()
           } else {
-            await createUserWithEmailPassword()
+            try await createUserWithEmailPassword()
           }
         }
       }) {
