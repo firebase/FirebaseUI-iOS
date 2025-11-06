@@ -46,10 +46,8 @@ extension SignInWithGoogleButton: View {
         do {
           _ = try await authService.signIn(googleProvider)
         } catch {
-          // 1) Always report first, if a reporter exists
           reportError?(error)
 
-          // 2) If it's a conflict and we have a handler, handle it and stop
           if case let AuthServiceError.accountConflict(ctx) = error,
              let onConflict = accountConflictHandler {
             onConflict(ctx)
