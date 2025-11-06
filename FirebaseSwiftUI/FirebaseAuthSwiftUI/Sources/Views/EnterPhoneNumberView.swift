@@ -55,8 +55,12 @@ struct EnterPhoneNumberView: View {
               verificationID: id,
               fullPhoneNumber: fullPhoneNumber
             ))
-          } catch let caughtError {
-            reportError(caughtError)
+          } catch {
+            if let errorHandler = reportError {
+              errorHandler(error)
+            } else {
+              throw error
+            }
           }
         }
       }) {

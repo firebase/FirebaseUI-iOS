@@ -88,12 +88,12 @@ public struct AlertError: Identifiable, Equatable {
 
 /// Environment key for error reporting closure
 private struct ReportErrorKey: @preconcurrency EnvironmentKey {
-  @MainActor static let defaultValue: (Error) -> Void = { _ in }
+  @MainActor static let defaultValue: ((Error) -> Void)? = nil
 }
 
 public extension EnvironmentValues {
-  /// Closure to report errors to the parent view for display
-  var reportError: (Error) -> Void {
+  /// Optional closure to report errors to the parent view for display
+  var reportError: ((Error) -> Void)? {
     get { self[ReportErrorKey.self] }
     set { self[ReportErrorKey.self] = newValue }
   }

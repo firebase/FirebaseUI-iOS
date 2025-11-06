@@ -40,8 +40,12 @@ extension SignInWithFacebookButton: View {
       Task {
         do {
           _ = try await authService.signIn(facebookProvider)
-        } catch let caughtError {
-          reportError(caughtError)
+        } catch {
+          if let errorHandler = reportError {
+            errorHandler(error)
+          } else {
+            throw error
+          }
         }
       }
     }

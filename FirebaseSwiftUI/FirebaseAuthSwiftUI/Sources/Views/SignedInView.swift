@@ -26,8 +26,12 @@ public struct SignedInView {
     do {
       try await authService.sendEmailVerification()
       showEmailVerificationSent = true
-    } catch let caughtError {
-      reportError(caughtError)
+    } catch {
+      if let errorHandler = reportError {
+        errorHandler(error)
+      } else {
+        throw error
+      }
     }
   }
 }
@@ -99,8 +103,12 @@ extension SignedInView: View {
         Task {
           do {
             try await authService.signOut()
-          } catch let caughtError {
-            reportError(caughtError)
+          } catch {
+            if let errorHandler = reportError {
+              errorHandler(error)
+            } else {
+              throw error
+            }
           }
         }
       } label: {
@@ -121,8 +129,12 @@ extension SignedInView: View {
           Task {
             do {
               try await authService.deleteUser()
-            } catch let caughtError {
-              reportError(caughtError)
+            } catch {
+              if let errorHandler = reportError {
+                errorHandler(error)
+              } else {
+                throw error
+              }
             }
           }
         },

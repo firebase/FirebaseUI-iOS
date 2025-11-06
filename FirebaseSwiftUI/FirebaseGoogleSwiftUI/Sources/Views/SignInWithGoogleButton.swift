@@ -44,8 +44,12 @@ extension SignInWithGoogleButton: View {
       Task {
         do {
           _ = try await authService.signIn(googleProvider)
-        } catch let caughtError {
-          reportError(caughtError)
+        } catch {
+          if let errorHandler = reportError {
+            errorHandler(error)
+          } else {
+            throw error
+          }
         }
       }
     }

@@ -58,8 +58,12 @@ struct EnterVerificationCodeView: View {
                 verificationCode: verificationCode
               )
               authService.navigator.clear()
-            } catch let caughtError {
-              reportError(caughtError)
+            } catch {
+              if let errorHandler = reportError {
+                errorHandler(error)
+              } else {
+                throw error
+              }
             }
           }
         }) {

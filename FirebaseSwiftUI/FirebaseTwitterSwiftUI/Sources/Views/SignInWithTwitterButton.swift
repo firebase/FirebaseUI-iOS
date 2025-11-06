@@ -37,8 +37,12 @@ extension SignInWithTwitterButton: View {
       Task {
         do {
           _ = try await authService.signIn(provider)
-        } catch let caughtError {
-          reportError(caughtError)
+        } catch {
+          if let errorHandler = reportError {
+            errorHandler(error)
+          } else {
+            throw error
+          }
         }
       }
     }

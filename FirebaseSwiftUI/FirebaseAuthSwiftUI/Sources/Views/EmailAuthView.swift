@@ -53,16 +53,24 @@ public struct EmailAuthView {
   private func signInWithEmailPassword() async {
     do {
       _ = try await authService.signIn(email: email, password: password)
-    } catch let caughtError {
-      reportError(caughtError)
+    } catch {
+      if let errorHandler = reportError {
+        errorHandler(error)
+      } else {
+        throw error
+      }
     }
   }
 
   private func createUserWithEmailPassword() async {
     do {
       _ = try await authService.createUser(email: email, password: password)
-    } catch let caughtError {
-      reportError(caughtError)
+    } catch {
+      if let errorHandler = reportError {
+        errorHandler(error)
+      } else {
+        throw error
+      }
     }
   }
 }

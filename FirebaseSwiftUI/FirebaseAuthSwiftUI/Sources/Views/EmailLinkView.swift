@@ -29,8 +29,12 @@ public struct EmailLinkView {
     do {
       try await authService.sendEmailSignInLink(email: email)
       showModal = true
-    } catch let caughtError {
-      reportError(caughtError)
+    } catch {
+      if let errorHandler = reportError {
+        errorHandler(error)
+      } else {
+        throw error
+      }
     }
   }
 }
@@ -89,8 +93,12 @@ extension EmailLinkView: View {
       Task {
         do {
           try await authService.handleSignInLink(url: url)
-        } catch let caughtError {
-          reportError(caughtError)
+        } catch {
+          if let errorHandler = reportError {
+            errorHandler(error)
+          } else {
+            throw error
+          }
         }
       }
     }
