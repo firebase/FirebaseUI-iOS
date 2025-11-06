@@ -209,6 +209,11 @@ public final class AuthService {
     }
   }
 
+  public func signIn(_: PhoneAuthProviderSwift) async {
+    // Phone auth is multi-step, navigate to phone number entry
+    navigator.push(.enterPhoneNumber)
+  }
+
   // MARK: - End Provider APIs
 
   private func safeActionCodeSettings() throws -> ActionCodeSettings {
