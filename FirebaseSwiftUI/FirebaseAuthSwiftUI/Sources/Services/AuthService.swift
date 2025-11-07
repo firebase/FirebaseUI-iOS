@@ -881,7 +881,6 @@ public extension AuthService {
     let hints = extractMFAHints(from: resolver)
     currentMFARequired = MFARequired(hints: hints)
     currentMFAResolver = resolver
-    navigator.push(.mfaResolution)
     return .mfaRequired(MFARequired(hints: hints))
   }
 

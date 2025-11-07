@@ -76,6 +76,8 @@ extension AuthPickerView: View {
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
         // Apply account conflict handling at NavigationStack level
         .accountConflictHandler()
+        // Apply MFA handling at NavigationStack level
+        .mfaHandler()
       }
   }
 

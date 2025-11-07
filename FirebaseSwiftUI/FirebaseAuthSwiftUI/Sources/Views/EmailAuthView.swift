@@ -33,6 +33,7 @@ private enum FocusableField: Hashable {
 public struct EmailAuthView {
   @Environment(AuthService.self) private var authService
   @Environment(\.accountConflictHandler) private var accountConflictHandler
+  @Environment(\.mfaHandler) private var mfaHandler
   @Environment(\.reportError) private var reportError
 
   @State private var email = ""
@@ -53,7 +54,14 @@ public struct EmailAuthView {
 
   private func signInWithEmailPassword() async throws {
     do {
-      _ = try await authService.signIn(email: email, password: password)
+      let outcome = try await authService.signIn(email: email, password: password)
+
+      // Handle MFA at view level
+      if case let .mfaRequired(mfaInfo) = outcome,
+         let onMFA = mfaHandler {
+        onMFA(mfaInfo)
+        return
+      }
     } catch {
       reportError?(error)
 
@@ -69,7 +77,14 @@ public struct EmailAuthView {
 
   private func createUserWithEmailPassword() async throws {
     do {
-      _ = try await authService.createUser(email: email, password: password)
+      let outcome = try await authService.createUser(email: email, password: password)
+
+      // Handle MFA at view level
+      if case let .mfaRequired(mfaInfo) = outcome,
+         let onMFA = mfaHandler {
+        onMFA(mfaInfo)
+        return
+      }
     } catch {
       reportError?(error)
 
