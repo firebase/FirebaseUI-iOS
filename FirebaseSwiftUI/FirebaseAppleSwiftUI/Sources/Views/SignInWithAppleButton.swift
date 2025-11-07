@@ -20,6 +20,8 @@ import SwiftUI
 @MainActor
 public struct SignInWithAppleButton {
   @Environment(AuthService.self) private var authService
+  @Environment(\.accountConflictHandler) private var accountConflictHandler
+  @Environment(\.mfaHandler) private var mfaHandler
   @Environment(\.reportError) private var reportError
   let provider: AppleProviderSwift
   public init(provider: AppleProviderSwift) {
@@ -36,13 +38,24 @@ extension SignInWithAppleButton: View {
     ) {
       Task {
         do {
-          _ = try await authService.signIn(provider)
-        } catch {
-          if let errorHandler = reportError {
-            errorHandler(error)
-          } else {
-            throw error
+          let outcome = try await authService.signIn(provider)
+
+          // Handle MFA at view level
+          if case let .mfaRequired(mfaInfo) = outcome,
+             let onMFA = mfaHandler {
+            onMFA(mfaInfo)
+            return
           }
+        } catch {
+          reportError?(error)
+
+          if case let AuthServiceError.accountConflict(ctx) = error,
+             let onConflict = accountConflictHandler {
+            onConflict(ctx)
+            return
+          }
+
+          throw error
         }
       }
     }

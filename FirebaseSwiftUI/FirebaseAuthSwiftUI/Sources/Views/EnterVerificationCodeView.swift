@@ -20,6 +20,7 @@ import SwiftUI
 @MainActor
 struct EnterVerificationCodeView: View {
   @Environment(AuthService.self) private var authService
+  @Environment(\.accountConflictHandler) private var accountConflictHandler
   @Environment(\.reportError) private var reportError
   @State private var verificationCode: String = ""
 
@@ -65,11 +66,15 @@ struct EnterVerificationCodeView: View {
               )
               authService.navigator.clear()
             } catch {
-              if let errorHandler = reportError {
-                errorHandler(error)
-              } else {
-                throw error
+              reportError?(error)
+
+              if case let AuthServiceError.accountConflict(ctx) = error,
+                 let onConflict = accountConflictHandler {
+                onConflict(ctx)
+                return
               }
+
+              throw error
             }
           }
         }) {

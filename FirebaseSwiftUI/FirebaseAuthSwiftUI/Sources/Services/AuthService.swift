@@ -136,14 +136,12 @@ public final class AuthService {
   public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
 
-  /// Current account conflict context - observe this to handle conflicts and update backend
-  public private(set) var currentAccountConflict: AccountConflictContext?
-
   // MARK: - Provider APIs
 
   private var listenerManager: AuthListenerManager?
 
   var emailSignInEnabled = false
+  private var emailSignInCallback: (@MainActor () -> Void)?
 
   private var providers: [AuthProviderUI] = []
 
@@ -154,12 +152,18 @@ public final class AuthService {
   public func renderButtons(spacing: CGFloat = 16) -> AnyView {
     AnyView(
       VStack(spacing: spacing) {
-        AuthProviderButton(
-          label: string.signInWithEmailLinkViewTitle,
-          style: .email,
-          accessibilityId: "sign-in-with-email-link-button"
-        ) {
-          self.navigator.push(.emailLink)
+        if emailSignInEnabled {
+          AuthProviderButton(
+            label: string.signInWithEmailLinkViewTitle,
+            style: .email,
+            accessibilityId: "sign-in-with-email-link-button"
+          ) {
+            if let callback = self.emailSignInCallback {
+              callback()
+            } else {
+              self.navigator.push(.emailLink)
+            }
+          }
         }
         ForEach(providers, id: \.id) { provider in
           provider.authButton()
@@ -189,15 +193,10 @@ public final class AuthService {
   }
 
   public func updateAuthenticationState() {
-    reset()
     authenticationState =
       (currentUser == nil || currentUser?.isAnonymous == true)
         ? .unauthenticated
         : .authenticated
-  }
-
-  func reset() {
-    currentAccountConflict = nil
   }
 
   public var shouldHandleAnonymousUpgrade: Bool {
@@ -317,8 +316,17 @@ public extension AuthService {
 // MARK: - Email/Password Sign In
 
 public extension AuthService {
+  /// Enable email sign-in with default behavior (navigates to email link view)
   func withEmailSignIn() -> AuthService {
+    return withEmailSignIn { [weak self] in
+      self?.navigator.push(.emailLink)
+    }
+  }
+
+  /// Enable email sign-in with custom callback
+  func withEmailSignIn(onTap: @escaping @MainActor () -> Void) -> AuthService {
     emailSignInEnabled = true
+    emailSignInCallback = onTap
     return self
   }
 
@@ -823,7 +831,7 @@ public extension AuthService {
     )
   }
 
-  /// Handles account conflict errors by creating context, storing it, and throwing structured error
+  /// Handles account conflict errors by creating context and throwing structured error
   /// - Parameters:
   ///   - error: The error to check and handle
   ///   - credential: The credential that caused the conflict
@@ -840,10 +848,6 @@ public extension AuthService {
         credential: credential
       )
 
-      // Store it for consumers to observe
-      currentAccountConflict = context
-
-      // Throw the specific error with context
       throw AuthServiceError.accountConflict(context)
     } else {
       throw error
@@ -877,7 +881,6 @@ public extension AuthService {
     let hints = extractMFAHints(from: resolver)
     currentMFARequired = MFARequired(hints: hints)
     currentMFAResolver = resolver
-    navigator.push(.mfaResolution)
     return .mfaRequired(MFARequired(hints: hints))
   }
 

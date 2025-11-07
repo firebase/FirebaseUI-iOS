@@ -25,11 +25,15 @@ public class PhoneAuthProviderAuthUI: AuthProviderUI {
   public var provider: AuthProviderSwift { typedProvider }
   public let id: String = "phone"
 
-  public init() {
+  // Callback for when the phone auth button is tapped
+  private let onTap: @MainActor () -> Void
+
+  public init(onTap: @escaping @MainActor () -> Void) {
     typedProvider = PhoneProviderSwift()
+    self.onTap = onTap
   }
 
   @MainActor public func authButton() -> AnyView {
-    AnyView(PhoneAuthButtonView())
+    AnyView(PhoneAuthButtonView(onTap: onTap))
   }
 }
