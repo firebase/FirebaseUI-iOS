@@ -136,9 +136,6 @@ public final class AuthService {
   public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
 
-  /// Current account conflict context - observe this to handle conflicts and update backend
-  public private(set) var currentAccountConflict: AccountConflictContext?
-
   // MARK: - Provider APIs
 
   private var listenerManager: AuthListenerManager?
@@ -189,15 +186,10 @@ public final class AuthService {
   }
 
   public func updateAuthenticationState() {
-    reset()
     authenticationState =
       (currentUser == nil || currentUser?.isAnonymous == true)
         ? .unauthenticated
         : .authenticated
-  }
-
-  func reset() {
-    currentAccountConflict = nil
   }
 
   public var shouldHandleAnonymousUpgrade: Bool {
@@ -823,7 +815,7 @@ public extension AuthService {
     )
   }
 
-  /// Handles account conflict errors by creating context, storing it, and throwing structured error
+  /// Handles account conflict errors by creating context and throwing structured error
   /// - Parameters:
   ///   - error: The error to check and handle
   ///   - credential: The credential that caused the conflict
@@ -840,10 +832,6 @@ public extension AuthService {
         credential: credential
       )
 
-      // Store it for consumers to observe
-      currentAccountConflict = context
-
-      // Throw the specific error with context
       throw AuthServiceError.accountConflict(context)
     } else {
       throw error
