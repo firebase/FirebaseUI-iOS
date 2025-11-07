@@ -1,0 +1,35 @@
+[debug] [2025-11-07T15:17:13.233Z] ----------------------------------------------------------------------
+[debug] [2025-11-07T15:17:13.237Z] Command:       /opt/homebrew/Cellar/node/25.1.0_1/bin/node /Users/ademolafadumo/.npm-global/bin/firebase emulators:start --only auth
+[debug] [2025-11-07T15:17:13.237Z] CLI Version:   14.23.0
+[debug] [2025-11-07T15:17:13.237Z] Platform:      darwin
+[debug] [2025-11-07T15:17:13.237Z] Node Version:  v25.1.0
+[debug] [2025-11-07T15:17:13.237Z] Time:          Fri Nov 07 2025 16:17:13 GMT+0100 (West Africa Standard Time)
+[debug] [2025-11-07T15:17:13.237Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-11-07T15:17:13.257Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-11-07T15:17:13.257Z] > authorizing via signed-in user (demolafadumo@gmail.com)
+[warn] ⚠  Could not find config (firebase.json) so using defaults. 
+[info] i  emulators: Starting emulators: auth {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth"}}
+[info] i  emulators: Detected demo project ID "demo-no-project", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail. {"metadata":{"emulator":{"name":"hub"},"message":"Detected demo project ID \"demo-no-project\", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail."}}
+[debug] [2025-11-07T15:17:13.690Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-11-07T15:17:13.690Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-11-07T15:17:13.690Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2025-11-07T15:17:13.693Z] Emulator locator file path: /var/folders/pw/cv4hgr3x2fbcrxbj9s2d60dw0000gn/T/hub-demo-no-project.json
+[debug] [2025-11-07T15:17:13.693Z] [hub] writing locator at /var/folders/pw/cv4hgr3x2fbcrxbj9s2d60dw0000gn/T/hub-demo-no-project.json
+[debug] [2025-11-07T15:17:17.123Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI        │
+├────────────────┼────────────────┼────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth │
+└────────────────┴────────────────┴────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
