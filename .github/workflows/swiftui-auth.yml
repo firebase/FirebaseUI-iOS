@@ -32,14 +32,8 @@ jobs:
       - name: Install swiftformat
         run: brew install swiftformat
         
-      - name: Check FirebaseSwiftUI formatting
-        run: swiftformat --lint ./FirebaseSwiftUI
-        
-      - name: Check SwiftUI Example formatting
-        run: swiftformat --lint ./samples/swiftui/FirebaseSwiftUIExample
-        
-      - name: Check Package.swift formatting
-        run: swiftformat --lint ./Package.swift
+      - name: Check Swift formatting
+        run: bash lint-swift.sh
 
   # Package Unit Tests (standalone, no emulator needed)
   unit-tests:
