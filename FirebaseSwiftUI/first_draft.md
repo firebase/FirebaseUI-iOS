@@ -529,17 +529,15 @@ enum CustomAuthRoute {
 }
 
 struct ContentView: View {
-  @State private var authService: AuthService
+  private let authService: AuthService
   @State private var navigationPath: [CustomAuthRoute] = []
   @State private var errorMessage: String?
 
   init() {
     let configuration = AuthConfiguration()
-    let service = AuthService(configuration: configuration)
+    self.authService = AuthService(configuration: configuration)
       .withGoogleSignIn()
       .withPhoneSignIn()
-    
-    _authService = State(initialValue: service)
   }
 
   var body: some View {
