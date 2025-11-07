@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/swiftui-auth.yml'
       - 'samples/swiftui/**'
+      - 'e2eTest/**'
       - 'FirebaseSwiftUI/**'
       - 'Package.swift'
   pull_request:
@@ -13,6 +14,7 @@ on:
     paths:
       - '.github/workflows/swiftui-auth.yml'
       - 'samples/swiftui/**'
+      - 'e2eTest/**'
       - 'FirebaseSwiftUI/**'
       - 'Package.swift'
 
@@ -83,7 +85,7 @@ jobs:
       - name: Start Firebase Emulator
         run: |
           sudo chown -R 501:20 "/Users/runner/.npm"
-          cd ./samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample
+          cd ./e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExample
           ./start-firebase-emulator.sh
           
       - name: Install xcpretty
@@ -94,7 +96,7 @@ jobs:
         
       - name: Build for Integration Tests
         run: |
-          cd ./samples/swiftui/FirebaseSwiftUIExample
+          cd ./e2eTest/FirebaseSwiftUIExample
           set -o pipefail
           xcodebuild build-for-testing \
             -scheme FirebaseSwiftUIExampleTests \
@@ -103,7 +105,7 @@ jobs:
             
       - name: Run Integration Tests
         run: |
-          cd ./samples/swiftui/FirebaseSwiftUIExample
+          cd ./e2eTest/FirebaseSwiftUIExample
           set -o pipefail
           xcodebuild test-without-building \
             -scheme FirebaseSwiftUIExampleTests \
@@ -116,14 +118,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: integration-tests-logs
-          path: samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.log
+          path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.log
           
       - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: integration-tests-results
-          path: samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.xcresult
+          path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.xcresult
 
   # UI Tests (requires emulator)
   ui-tests:
@@ -149,7 +151,7 @@ jobs:
       - name: Start Firebase Emulator
         run: |
           sudo chown -R 501:20 "/Users/runner/.npm"
-          cd ./samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample
+          cd ./e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExample
           ./start-firebase-emulator.sh
           
       - name: Install xcpretty
@@ -160,7 +162,7 @@ jobs:
         
       - name: Build for UI Tests
         run: |
-          cd ./samples/swiftui/FirebaseSwiftUIExample
+          cd ./e2eTest/FirebaseSwiftUIExample
           set -o pipefail
           xcodebuild build-for-testing \
             -scheme FirebaseSwiftUIExampleUITests \
@@ -169,7 +171,7 @@ jobs:
             
       - name: Run UI Tests
         run: |
-          cd ./samples/swiftui/FirebaseSwiftUIExample
+          cd ./e2eTest/FirebaseSwiftUIExample
           set -o pipefail
           xcodebuild test-without-building \
             -scheme FirebaseSwiftUIExampleUITests \
@@ -184,11 +186,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: firebase-emulator-logs
-          path: samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample/firebase-debug.log
+          path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExample/firebase-debug.log
           
       - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: FirebaseSwiftUIExampleUITests.xcresult
-          path: samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.xcresult
+          path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.xcresult
