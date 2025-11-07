@@ -640,6 +640,8 @@ When building custom views, you need to handle several things yourself that `Aut
 
 You can create custom OAuth providers for services beyond the built-in ones:
 
+> **⚠️ Important:** OIDC (OpenID Connect) providers must be configured in your Firebase project's Authentication settings before they can be used. In the Firebase Console, go to **Authentication → Sign-in method** and add your OIDC provider with the required credentials (Client ID, Client Secret, Issuer URL). You must also register the OAuth redirect URI provided by Firebase in your provider's developer console. See the [Firebase OIDC documentation](https://firebase.google.com/docs/auth/ios/openid-connect) for detailed setup instructions.
+
 ```swift
 import FirebaseAuthSwiftUI
 import FirebaseOAuthSwiftUI
@@ -655,6 +657,7 @@ struct ContentView: View {
       .withOAuthSignIn(
         OAuthProviderSwift(
           providerId: "oidc.line",  // LINE OIDC provider
+          scopes: ["profile", "openid", "email"],  // LINE requires these scopes
           displayName: "Sign in with LINE",
           buttonIcon: Image("line-logo"),
           buttonBackgroundColor: .green,
@@ -664,6 +667,7 @@ struct ContentView: View {
       .withOAuthSignIn(
         OAuthProviderSwift(
           providerId: "oidc.custom-provider",
+          scopes: ["profile", "openid"],
           displayName: "Sign in with Custom",
           buttonIcon: Image(systemName: "person.circle"),
           buttonBackgroundColor: .purple,
