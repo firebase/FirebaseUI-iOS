@@ -272,7 +272,7 @@ The default views support:
 
 If you need more control over the UI or navigation flow, you can build your own custom authentication views while still leveraging the `AuthService` for authentication logic.
 
-### Approach 1: Custom Buttons with Default Navigation
+### Approach 1: Default Buttons with Custom Views
 
 You can use `AuthService.renderButtons()` to render the default authentication buttons while providing your own layout and navigation:
 
@@ -308,67 +308,7 @@ struct CustomAuthView: View {
   }
 }
 
-struct CustomAuthView: View {
-  @Environment(AuthService.self) private var authService
-  @State private var showEmailView = false
-
-  var body: some View {
-    VStack(spacing: 20) {
-      // Your custom logo/branding
-      Image("app-logo")
-        .resizable()
-        .frame(width: 150, height: 150)
-      
-      Text("Welcome to My App")
-        .font(.largeTitle)
-        .fontWeight(.bold)
-      
-      // Custom email button
-      Button("Sign in with Email") {
-        showEmailView = true
-      }
-      .buttonStyle(.bordered)
-      
-      // Render other default auth buttons (Google, Apple, etc.)
-      authService.renderButtons(spacing: 12)
-        .padding()
-    }
-    .padding()
-    .sheet(isPresented: $showEmailView) {
-      SimpleEmailView()
-        .environment(authService)
-    }
-  }
-}
-
-// Simple custom email view
-struct SimpleEmailView: View {
-  @Environment(AuthService.self) private var authService
-  @State private var email = ""
-  
-  var body: some View {
-    VStack(spacing: 20) {
-      Text("Enter Your Email")
-        .font(.title)
-      
-      TextField("Email", text: $email)
-        .textFieldStyle(.roundedBorder)
-        .autocapitalization(.none)
-        .keyboardType(.emailAddress)
-      
-      Button("Continue") {
-        // Handle email submission
-        print("Email entered: \(email)")
-      }
-      .buttonStyle(.borderedProminent)
-    }
-    .padding()
-  }
-}
-
 struct ContentView: View {
-  let authService: AuthService
-
   init() {
     let configuration = AuthConfiguration()
     
@@ -376,6 +316,8 @@ struct ContentView: View {
       .withGoogleSignIn()
       .withAppleSignIn()
   }
+  
+  let authService: AuthService
 
   var body: some View {
     NavigationStack {
