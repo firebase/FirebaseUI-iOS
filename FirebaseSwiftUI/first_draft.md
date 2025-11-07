@@ -454,7 +454,7 @@ This approach works for all providers: Google, Apple, Twitter, Facebook, Phone, 
 
 ### Approach 2: Default Buttons with Custom Views
 
-You can use `AuthService.renderButtons()` to render the default authentication buttons while providing your own layout and navigation:
+You can use `AuthService.renderButtons()` and bypass `AuthPickerView` to render the default authentication buttons while providing your own layout and navigation:
 
 ```swift
 import FirebaseAuthSwiftUI
@@ -517,6 +517,7 @@ struct ContentView: View {
 For complete control over the entire flow, you can bypass `AuthPickerView` and build your own navigation system:
 
 ```swift
+import FirebaseAuth
 import FirebaseAuthSwiftUI
 import FirebaseGoogleSwiftUI
 import SwiftUI
@@ -579,7 +580,7 @@ struct ContentView: View {
       Button("Sign in with Google") {
         Task {
           do {
-            let provider = GoogleProviderSwift()
+            let provider = GoogleProviderSwift( clientID: Auth.auth().app?.options.clientID ?? "")
             let outcome = try await authService.signIn(provider)
             
             // Handle MFA if required
