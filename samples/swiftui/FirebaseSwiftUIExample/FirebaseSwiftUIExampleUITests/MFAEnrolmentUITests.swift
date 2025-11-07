@@ -196,7 +196,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // 6) Select UK country code and enter phone number (without dial code)
     // Find and tap the country selector - try multiple approaches since it's embedded in the
     // TextField
-    let countrySelector = app.buttons["🇺🇸 +1"]
+    let countrySelector = app.staticTexts["+1"].firstMatch
     XCTAssertTrue(countrySelector.waitForExistence(timeout: 5))
 
     countrySelector.tap()
