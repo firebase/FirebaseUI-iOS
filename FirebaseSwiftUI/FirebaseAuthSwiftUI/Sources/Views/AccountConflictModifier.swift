@@ -32,6 +32,7 @@ public extension EnvironmentValues {
 @MainActor
 struct AccountConflictModifier: ViewModifier {
   @Environment(AuthService.self) private var authService
+  @Environment(\.mfaHandler) private var mfaHandler
   @Environment(\.reportError) private var reportError
   @State private var pendingCredentialForLinking: AuthCredential?
 
@@ -56,7 +57,13 @@ struct AccountConflictModifier: ViewModifier {
           try await authService.signOut()
 
           // Sign in with the new credential
-          _ = try await authService.signIn(credentials: conflict.credential)
+          let outcome = try await authService.signIn(credentials: conflict.credential)
+
+          // Handle MFA at view level
+          if case let .mfaRequired(mfaInfo) = outcome,
+             let onMFA = mfaHandler {
+            onMFA(mfaInfo)
+          }
         } catch {
           // Report error to parent view for display
           reportError?(error)
