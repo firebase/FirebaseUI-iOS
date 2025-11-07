@@ -32,6 +32,7 @@ public extension EnvironmentValues {
 @MainActor
 struct AccountConflictModifier: ViewModifier {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
   @State private var pendingCredentialForLinking: AuthCredential?
 
   func body(content: Content) -> some View {
@@ -56,11 +57,9 @@ struct AccountConflictModifier: ViewModifier {
 
           // Sign in with the new credential
           _ = try await authService.signIn(credentials: conflict.credential)
-
-          // Successfully handled - conflict is cleared automatically by reset()
         } catch {
-          // Error will be shown via normal error handling
-          // Credential is still stored if they want to retry
+          // Report error to parent view for display
+          reportError?(error)
         }
       }
     } else {
@@ -81,7 +80,6 @@ struct AccountConflictModifier: ViewModifier {
         pendingCredentialForLinking = nil
       } catch {
         // Silently swallow linking errors - user is already signed in
-        // Consumer's custom views can observe authService.currentError if they want to handle this
         pendingCredentialForLinking = nil
       }
     }
