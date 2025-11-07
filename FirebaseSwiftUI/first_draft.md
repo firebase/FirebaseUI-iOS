@@ -350,13 +350,13 @@ struct CustomTwitterButton: View {
   let provider: TwitterProviderSwift
   @Environment(AuthService.self) private var authService
   @Environment(\.mfaHandler) private var mfaHandler
-  
+
   var body: some View {
     Button {
       Task {
         do {
           let outcome = try await authService.signIn(provider)
-          
+
           // Handle MFA if required
           if case let .mfaRequired(mfaInfo) = outcome,
              let onMFA = mfaHandler {
@@ -367,8 +367,7 @@ struct CustomTwitterButton: View {
         }
       }
     } label: {
-      HStack {
-        Image("twitter-logo") // Your custom icon
+      HStack { // Your custom icon
         Text("Sign in with Twitter")
           .fontWeight(.semibold)
       }
@@ -393,11 +392,11 @@ class CustomTwitterProviderAuthUI: AuthProviderUI {
   private let typedProvider: TwitterProviderSwift
   var provider: AuthProviderSwift { typedProvider }
   let id: String = "twitter.com"
-  
+
   init(provider: TwitterProviderSwift = TwitterProviderSwift()) {
     typedProvider = provider
   }
-  
+
   @MainActor func authButton() -> AnyView {
     AnyView(CustomTwitterButton(provider: typedProvider))
   }
@@ -406,22 +405,35 @@ class CustomTwitterProviderAuthUI: AuthProviderUI {
 // Step 3: Use it in your app
 struct ContentView: View {
   let authService: AuthService
-  
+
   init() {
     let configuration = AuthConfiguration()
     authService = AuthService(configuration: configuration)
-    
+
     // Register your custom provider UI
     authService.registerProvider(
       providerWithButton: CustomTwitterProviderAuthUI()
     )
+    authService.isPresented = true
   }
-  
+
   var body: some View {
     AuthPickerView {
-      Text("Welcome!")
+      usersApp
     }
     .environment(authService)
+  }
+
+  var usersApp: some View {
+    NavigationStack {
+      VStack {
+        Button {
+          authService.isPresented = true
+        } label: {
+          Text("Authenticate")
+        }
+      }
+    }
   }
 }
 ```
