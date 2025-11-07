@@ -14,22 +14,11 @@
 
 import SwiftUI
 
-public struct FieldValidation: Identifiable, Equatable {
-  public let id = UUID()
-  public let message: String
-  public var valid: Bool = false
-
-  public init(message: String, valid: Bool = false) {
-    self.message = message
-    self.valid = valid
-  }
-}
-
 public struct AuthTextField<Leading: View>: View {
   @FocusState private var isFocused: Bool
-  @State var invalidInput: Bool = false
   @State var obscured: Bool = true
-
+  @State var hasInteracted: Bool = false
+  
   @Binding var text: String
   let label: String
   let prompt: String
@@ -37,20 +26,22 @@ public struct AuthTextField<Leading: View>: View {
   var keyboardType: UIKeyboardType = .default
   var contentType: UITextContentType?
   var isSecureTextField: Bool = false
-  var validations: [FieldValidation] = []
+  var validations: [FormValidator] = []
+  var maintainsValidationMessage: Bool = false
   var formState: ((Bool) -> Void)?
   var onSubmit: ((String) -> Void)?
   var onChange: ((String) -> Void)?
   private let leading: () -> Leading?
-
+  
   public init(text: Binding<String>,
               label: String,
               prompt: String,
               textAlignment: TextAlignment = .leading,
               keyboardType: UIKeyboardType = .default,
               contentType: UITextContentType? = nil,
-              sensitive: Bool = false,
-              validations: [FieldValidation] = [],
+              isSecureTextField: Bool = false,
+              validations: [FormValidator] = [],
+              maintainsValidationMessage: Bool = false,
               formState: ((Bool) -> Void)? = nil,
               onSubmit: ((String) -> Void)? = nil,
               onChange: ((String) -> Void)? = nil,
@@ -61,18 +52,19 @@ public struct AuthTextField<Leading: View>: View {
     self.textAlignment = textAlignment
     self.keyboardType = keyboardType
     self.contentType = contentType
-    isSecureTextField = sensitive
+    self.isSecureTextField = isSecureTextField
     self.validations = validations
+    self.maintainsValidationMessage = maintainsValidationMessage
     self.formState = formState
     self.onSubmit = onSubmit
     self.onChange = onChange
     self.leading = leading
   }
-
+  
   var allRequirementsMet: Bool {
-    validations.allSatisfy { $0.valid == true }
+    validations.allSatisfy { $0.isValid(input: text) }
   }
-
+  
   public var body: some View {
     VStack(alignment: .leading) {
       Text(LocalizedStringResource(stringLiteral: label))
@@ -124,7 +116,15 @@ public struct AuthTextField<Leading: View>: View {
         onSubmit?(text)
       }
       .onChange(of: text) { _, newValue in
+        if !hasInteracted {
+          hasInteracted = true
+        }
         onChange?(newValue)
+      }
+      .onChange(of: isFocused) { _, focused in
+        if !focused && !text.isEmpty {
+          hasInteracted = true
+        }
       }
       .multilineTextAlignment(textAlignment)
       .textFieldStyle(.plain)
@@ -142,28 +142,19 @@ public struct AuthTextField<Leading: View>: View {
           isFocused = true
         }
       }
-      if !validations.isEmpty {
+      if !validations.isEmpty && hasInteracted && (maintainsValidationMessage || !allRequirementsMet) {
         VStack(alignment: .leading, spacing: 4) {
-          ForEach(validations) { validation in
-            HStack {
-              Image(systemName: isSecureTextField ? "lock.open" : "x.square")
-                .foregroundStyle(validation.valid ? .gray : .red)
-              Text(validation.message)
-                .strikethrough(validation.valid, color: .gray)
-                .foregroundStyle(.gray)
-                .fixedSize(horizontal: false, vertical: true)
-            }
+          ForEach(validations) { validator in
+            let isValid = validator.isValid(input: text)
+            Text(validator.message)
+              .font(.caption)
+              .strikethrough(isValid, color: .gray)
+              .foregroundStyle(isValid ? .gray : .red)
+              .fixedSize(horizontal: false, vertical: true)
           }
         }
         .onChange(of: allRequirementsMet) { _, newValue in
           formState?(newValue)
-          if !newValue {
-            withAnimation(.easeInOut(duration: 0.08).repeatCount(4)) {
-              invalidInput = true
-            } completion: {
-              invalidInput = false
-            }
-          }
         }
       }
     }

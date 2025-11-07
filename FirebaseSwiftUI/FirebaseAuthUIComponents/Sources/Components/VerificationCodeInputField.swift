@@ -20,12 +20,16 @@ public struct VerificationCodeInputField: View {
               codeLength: Int = 6,
               isError: Bool = false,
               errorMessage: String? = nil,
+              validations: [FormValidator] = [],
+              maintainsValidationMessage: Bool = false,
               onCodeComplete: @escaping (String) -> Void = { _ in },
               onCodeChange: @escaping (String) -> Void = { _ in }) {
     _code = code
     self.codeLength = codeLength
     self.isError = isError
     self.errorMessage = errorMessage
+    self.validations = validations
+    self.maintainsValidationMessage = maintainsValidationMessage
     self.onCodeComplete = onCodeComplete
     self.onCodeChange = onCodeChange
     _digitFields = State(initialValue: Array(repeating: "", count: codeLength))
@@ -35,12 +39,19 @@ public struct VerificationCodeInputField: View {
   let codeLength: Int
   let isError: Bool
   let errorMessage: String?
+  let validations: [FormValidator]
+  let maintainsValidationMessage: Bool
   let onCodeComplete: (String) -> Void
   let onCodeChange: (String) -> Void
 
   @State private var digitFields: [String] = []
   @State private var focusedIndex: Int? = nil
   @State private var pendingInternalCodeUpdates = 0
+  @State private var hasInteracted: Bool = false
+
+  private var allRequirementsMet: Bool {
+    validations.allSatisfy { $0.isValid(input: code) }
+  }
 
   public var body: some View {
     VStack(spacing: 8) {
@@ -84,12 +95,29 @@ public struct VerificationCodeInputField: View {
           .foregroundColor(.red)
           .frame(maxWidth: .infinity, alignment: .leading)
       }
+
+      if !validations.isEmpty && hasInteracted && (maintainsValidationMessage || !allRequirementsMet) {
+        VStack(alignment: .leading, spacing: 4) {
+          ForEach(validations) { validator in
+            let isValid = validator.isValid(input: code)
+            Text(validator.message)
+              .font(.caption)
+              .strikethrough(isValid, color: .gray)
+              .foregroundStyle(isValid ? .gray : .red)
+              .fixedSize(horizontal: false, vertical: true)
+          }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+      }
     }
     .onAppear {
       // Initialize digit fields from the code binding
       updateDigitFieldsFromCode(shouldUpdateFocus: true, forceFocus: true)
     }
     .onChange(of: code) { _, _ in
+      if !hasInteracted && !code.isEmpty {
+        hasInteracted = true
+      }
       if pendingInternalCodeUpdates > 0 {
         pendingInternalCodeUpdates -= 1
         return

@@ -32,10 +32,24 @@ public struct UpdatePasswordView {
   @Environment(AuthService.self) private var authService
   @State private var password = ""
   @State private var confirmPassword = ""
+  @State private var showAlert = false
 
   @FocusState private var focus: FocusableField?
+
   private var isValid: Bool {
-    !password.isEmpty && password == confirmPassword
+    FormValidators.atLeast6Characters.isValid(input: password) &&
+      FormValidators.confirmPassword(password: password).isValid(input: confirmPassword)
+  }
+
+  private func updatePassword() {
+    Task {
+      do {
+        try await authService.updatePassword(to: confirmPassword)
+        showAlert = true
+      } catch {
+        
+      }
+    }
   }
 }
 
@@ -48,7 +62,11 @@ extension UpdatePasswordView: View {
         label: "Type new password",
         prompt: authService.string.passwordInputLabel,
         contentType: .password,
-        sensitive: true,
+        isSecureTextField: true,
+        validations: [
+          FormValidators.atLeast6Characters
+        ],
+        maintainsValidationMessage: true,
         leading: {
           Image(systemName: "lock")
         }
@@ -61,7 +79,11 @@ extension UpdatePasswordView: View {
         label: "Retype new password",
         prompt: authService.string.confirmPasswordInputLabel,
         contentType: .password,
-        sensitive: true,
+        isSecureTextField: true,
+        validations: [
+          FormValidators.confirmPassword(password: password)
+        ],
+        maintainsValidationMessage: true,
         leading: {
           Image(systemName: "lock")
         }
@@ -70,15 +92,11 @@ extension UpdatePasswordView: View {
       .focused($focus, equals: .confirmPassword)
 
       Button(action: {
-        Task {
-          try await authService.updatePassword(to: confirmPassword)
-          authService.navigator.clear()
-        }
+        updatePassword()
       }, label: {
         Text(authService.string.updatePasswordButtonLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
-
       })
       .disabled(!isValid)
       .padding([.top, .bottom], 8)
@@ -88,6 +106,17 @@ extension UpdatePasswordView: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .safeAreaPadding()
     .navigationTitle(authService.string.passwordRecoveryTitle)
+    .alert(
+      "Password Updated",
+      isPresented: $showAlert
+    ) {
+      Button(authService.string.okButtonLabel) {
+        showAlert = false
+        authService.navigator.clear()
+      }
+    } message: {
+      Text("Your password has been successfully updated.")
+    }
     .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
       PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }

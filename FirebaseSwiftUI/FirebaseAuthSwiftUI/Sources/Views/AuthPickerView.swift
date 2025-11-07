@@ -75,13 +75,15 @@ extension AuthPickerView: View {
           okButtonLabel: authService.string.okButtonLabel
         )
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
+        // Apply account conflict handling at NavigationStack level
+        .accountConflictHandler()
+        // Apply MFA handling at NavigationStack level
+        .mfaHandler()
       }
       // Centralized password prompt sheet to prevent conflicts
       .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
         PasswordPromptSheet(coordinator: authService.passwordPrompt)
       }
-      // Apply account conflict handling at NavigationStack level
-      .accountConflictHandler()
   }
 
   /// Closure for reporting errors from child views

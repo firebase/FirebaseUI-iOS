@@ -33,6 +33,7 @@ private enum FocusableField: Hashable {
 public struct EmailAuthView {
   @Environment(AuthService.self) private var authService
   @Environment(\.accountConflictHandler) private var accountConflictHandler
+  @Environment(\.mfaHandler) private var mfaHandler
   @Environment(\.reportError) private var reportError
 
   @State private var email = ""
@@ -45,15 +46,24 @@ public struct EmailAuthView {
 
   private var isValid: Bool {
     return if authService.authenticationFlow == .signIn {
-      !email.isEmpty && !password.isEmpty
+      FormValidators.email.isValid(input: email) && !password.isEmpty
     } else {
-      !email.isEmpty && !password.isEmpty && password == confirmPassword
+      FormValidators.email.isValid(input: email) &&
+        FormValidators.atLeast6Characters.isValid(input: password) &&
+        FormValidators.confirmPassword(password: password).isValid(input: confirmPassword)
     }
   }
 
   private func signInWithEmailPassword() async throws {
     do {
-      _ = try await authService.signIn(email: email, password: password)
+      let outcome = try await authService.signIn(email: email, password: password)
+
+      // Handle MFA at view level
+      if case let .mfaRequired(mfaInfo) = outcome,
+         let onMFA = mfaHandler {
+        onMFA(mfaInfo)
+        return
+      }
     } catch {
       reportError?(error)
 
@@ -69,7 +79,14 @@ public struct EmailAuthView {
 
   private func createUserWithEmailPassword() async throws {
     do {
-      _ = try await authService.createUser(email: email, password: password)
+      let outcome = try await authService.createUser(email: email, password: password)
+
+      // Handle MFA at view level
+      if case let .mfaRequired(mfaInfo) = outcome,
+         let onMFA = mfaHandler {
+        onMFA(mfaInfo)
+        return
+      }
     } catch {
       reportError?(error)
 
@@ -93,6 +110,10 @@ extension EmailAuthView: View {
         prompt: authService.string.emailInputLabel,
         keyboardType: .emailAddress,
         contentType: .emailAddress,
+        validations: [
+          FormValidators.email
+        ],
+        maintainsValidationMessage: authService.authenticationFlow == .signUp,
         onSubmit: { _ in
           self.focus = .password
         },
@@ -107,7 +128,11 @@ extension EmailAuthView: View {
         label: authService.string.passwordFieldLabel,
         prompt: authService.string.passwordInputLabel,
         contentType: .password,
-        sensitive: true,
+        isSecureTextField: true,
+        validations: authService.authenticationFlow == .signUp ? [
+          FormValidators.atLeast6Characters
+        ] : [],
+        maintainsValidationMessage: authService.authenticationFlow == .signUp,
         onSubmit: { _ in
           Task { try await signInWithEmailPassword() }
         },
@@ -134,7 +159,11 @@ extension EmailAuthView: View {
           label: authService.string.confirmPasswordFieldLabel,
           prompt: authService.string.confirmPasswordInputLabel,
           contentType: .password,
-          sensitive: true,
+          isSecureTextField: true,
+          validations: [
+            FormValidators.confirmPassword(password: password)
+          ],
+          maintainsValidationMessage: true,
           onSubmit: { _ in
             Task { try await createUserWithEmailPassword() }
           },
