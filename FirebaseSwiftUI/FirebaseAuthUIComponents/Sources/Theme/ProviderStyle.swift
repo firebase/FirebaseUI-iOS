@@ -31,7 +31,7 @@ public struct ProviderStyle: Sendable {
   public let icon: Image?
   public let backgroundColor: Color
   public let contentColor: Color
-  public var iconTint: Color? = nil
+  public var iconTint: Color?
   public let shape: AnyShape = .init(RoundedRectangle(cornerRadius: 4, style: .continuous))
   public let elevation: CGFloat
 

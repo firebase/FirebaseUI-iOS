@@ -95,7 +95,7 @@ struct EnterVerificationCodeView: View {
   return NavigationStack {
     EnterVerificationCodeView(
       verificationID: "mock-id",
-      fullPhoneNumber: "+1 5551234567",
+      fullPhoneNumber: "+1 5551234567"
     )
     .environment(AuthService())
   }

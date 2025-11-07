@@ -116,7 +116,7 @@ public struct VerificationCodeInputField: View {
       commitCodeChange(truncated)
     }
 
-    if shouldUpdateFocus && (fieldsChanged || forceFocus) {
+    if shouldUpdateFocus, fieldsChanged || forceFocus {
       let newFocus = truncated.count < codeLength ? truncated.count : nil
       DispatchQueue.main.async {
         withAnimation(.easeInOut(duration: 0.2)) {
@@ -125,7 +125,7 @@ public struct VerificationCodeInputField: View {
       }
     }
 
-    if fieldsChanged && truncated.count == codeLength {
+    if fieldsChanged, truncated.count == codeLength {
       DispatchQueue.main.async {
         onCodeComplete(truncated)
       }
@@ -169,8 +169,7 @@ public struct VerificationCodeInputField: View {
     commitCodeChange(newCode)
     onCodeChange(newCode)
 
-    if !digit.isEmpty,
-       let nextIndex = findNextEmptyField(startingFrom: index) {
+    if !digit.isEmpty, let nextIndex = findNextEmptyField(startingFrom: index) {
       DispatchQueue.main.async {
         if focusedIndex != nextIndex {
           withAnimation(.easeInOut(duration: 0.2)) {
@@ -189,7 +188,7 @@ public struct VerificationCodeInputField: View {
 
   private func handleBackspace(at index: Int) {
     // If current field is empty, move to previous field and clear it
-    if digitFields[index].isEmpty && index > 0 {
+    if digitFields[index].isEmpty, index > 0 {
       digitFields[index - 1] = ""
       DispatchQueue.main.async {
         let previousIndex = index - 1

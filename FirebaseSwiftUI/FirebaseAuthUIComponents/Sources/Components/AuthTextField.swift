@@ -35,12 +35,12 @@ public struct AuthTextField<Leading: View>: View {
   let prompt: String
   var textAlignment: TextAlignment = .leading
   var keyboardType: UIKeyboardType = .default
-  var contentType: UITextContentType? = nil
+  var contentType: UITextContentType?
   var isSecureTextField: Bool = false
   var validations: [FieldValidation] = []
-  var formState: ((Bool) -> Void)? = nil
-  var onSubmit: ((String) -> Void)? = nil
-  var onChange: ((String) -> Void)? = nil
+  var formState: ((Bool) -> Void)?
+  var onSubmit: ((String) -> Void)?
+  var onChange: ((String) -> Void)?
   private let leading: () -> Leading?
 
   public init(text: Binding<String>,
