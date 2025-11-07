@@ -29,6 +29,46 @@ func createEmail() -> String {
   }
 }
 
+// MARK: - Text Input Helpers
+
+/// Pastes text into a text field using the system paste menu
+/// - Parameters:
+///   - field: The XCUIElement representing the text field
+///   - text: The text to paste
+///   - app: The XCUIApplication instance
+@MainActor func pasteIntoField(_ field: XCUIElement, text: String, app: XCUIApplication) throws {
+  UIPasteboard.general.string = text
+  field.tap()
+  
+  // Give field time to become first responder
+  usleep(200_000) // 0.2 seconds
+  
+  // Press and hold to bring up paste menu
+  field.press(forDuration: 1.5)
+  
+  let pasteMenuItem = app.menuItems["Paste"]
+  
+  // Wait for paste menu to appear
+  if !pasteMenuItem.waitForExistence(timeout: 3) {
+    // Fallback: try double tap approach
+    field.doubleTap()
+    usleep(300_000) // 0.3 seconds
+    
+    if !pasteMenuItem.waitForExistence(timeout: 2) {
+      throw NSError(
+        domain: "TestError",
+        code: 1,
+        userInfo: [
+          NSLocalizedDescriptionKey: "Failed to show paste menu for field. Text was: \(text)"
+        ]
+      )
+    }
+  }
+  
+  pasteMenuItem.tap()
+  
+}
+
 // MARK: - User Creation
 
 /// Helper to create a test user in the emulator via REST API (avoids keychain issues)
