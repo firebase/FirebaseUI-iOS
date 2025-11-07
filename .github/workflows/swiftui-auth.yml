@@ -142,7 +142,7 @@ jobs:
   ui-tests:
     name: UI Tests
     runs-on: macos-26
-    timeout-minutes: 40
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
       
