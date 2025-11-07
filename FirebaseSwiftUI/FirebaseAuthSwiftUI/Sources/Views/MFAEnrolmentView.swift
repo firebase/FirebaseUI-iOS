@@ -374,6 +374,10 @@ extension MFAEnrolmentView: View {
             prompt: authService.string.enterPhoneNumberPrompt,
             keyboardType: .phonePad,
             contentType: .telephoneNumber,
+            validations: [
+              FormValidators.phoneNumber
+            ],
+            maintainsValidationMessage: true,
             onChange: { _ in }
           ) {
             CountrySelector(
@@ -388,6 +392,10 @@ extension MFAEnrolmentView: View {
             text: $displayName,
             label: authService.string.displayNameFieldLabel,
             prompt: authService.string.enterDisplayNameForDevicePrompt,
+            validations: [
+              FormValidators.notEmpty(label: "Display name")
+            ],
+            maintainsValidationMessage: true,
             leading: {
               Image(systemName: "person")
             }
@@ -430,17 +438,13 @@ extension MFAEnrolmentView: View {
               .multilineTextAlignment(.center)
           }
 
-          AuthTextField(
-            text: $verificationCode,
-            label: authService.string.verificationCodeFieldLabel,
-            prompt: "Enter 6-digit code",
-            keyboardType: .numberPad,
-            contentType: .oneTimeCode,
-            leading: {
-              Image(systemName: "number")
-            }
+          VerificationCodeInputField(
+            code: $verificationCode,
+            validations: [
+              FormValidators.verificationCode
+            ],
+            maintainsValidationMessage: true
           )
-          .focused($focus, equals: .verificationCode)
           .accessibilityIdentifier("verification-code-field")
 
           Button {
@@ -579,23 +583,23 @@ extension MFAEnrolmentView: View {
             text: $displayName,
             label: authService.string.displayNameFieldLabel,
             prompt: authService.string.enterDisplayNameForAuthenticatorPrompt,
+            validations: [
+              FormValidators.notEmpty(label: "Display name")
+            ],
+            maintainsValidationMessage: true,
             leading: {
               Image(systemName: "person")
             }
           )
           .accessibilityIdentifier("display-name-field")
 
-          AuthTextField(
-            text: $totpCode,
-            label: authService.string.verificationCodeFieldLabel,
-            prompt: authService.string.enterCodeFromAppPrompt,
-            keyboardType: .numberPad,
-            contentType: .oneTimeCode,
-            leading: {
-              Image(systemName: "number")
-            }
+          VerificationCodeInputField(
+            code: $totpCode,
+            validations: [
+              FormValidators.verificationCode
+            ],
+            maintainsValidationMessage: true
           )
-          .focused($focus, equals: .totpCode)
           .accessibilityIdentifier("totp-code-field")
 
           Button {

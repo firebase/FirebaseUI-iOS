@@ -22,14 +22,14 @@ public struct EmailLinkView {
   @Environment(\.accountConflictHandler) private var accountConflictHandler
   @Environment(\.reportError) private var reportError
   @State private var email = ""
-  @State private var showModal = false
+  @State private var showAlert = false
 
   public init() {}
 
   private func sendEmailLink() async throws {
     do {
       try await authService.sendEmailSignInLink(email: email)
-      showModal = true
+      showAlert = true
     } catch {
       if let errorHandler = reportError {
         errorHandler(error)
@@ -49,6 +49,9 @@ extension EmailLinkView: View {
         prompt: authService.string.emailInputLabel,
         keyboardType: .emailAddress,
         contentType: .emailAddress,
+        validations: [
+          FormValidators.email
+        ],
         leading: {
           Image(systemName: "at")
         }
@@ -71,24 +74,15 @@ extension EmailLinkView: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .navigationTitle(authService.string.signInWithEmailLinkViewTitle)
     .safeAreaPadding()
-    .sheet(isPresented: $showModal) {
-      VStack(spacing: 24) {
-        Text(authService.string.signInWithEmailLinkViewMessage)
-          .font(.headline)
-        Button {
-          showModal = false
-        } label: {
-          Text(authService.string.okButtonLabel)
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(.borderedProminent)
-        .padding([.top, .bottom], 8)
-        .frame(maxWidth: .infinity)
+    .alert(
+      authService.string.signInWithEmailLinkViewTitle,
+      isPresented: $showAlert
+    ) {
+      Button(authService.string.okButtonLabel) {
+        showAlert = false
       }
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-      .safeAreaPadding()
-      .presentationDetents([.medium])
+    } message: {
+      Text(authService.string.signInWithEmailLinkViewMessage)
     }
     .onOpenURL { url in
       Task {
