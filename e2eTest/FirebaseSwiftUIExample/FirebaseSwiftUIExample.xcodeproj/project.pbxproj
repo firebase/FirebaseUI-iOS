@@ -11,14 +11,16 @@
 		4600E5542DD777BE00EED5F3 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 4600E5532DD777BE00EED5F3 /* FirebaseCore */; };
 		4607CC9C2D9BFE29009EC3F5 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4607CC9B2D9BFE29009EC3F5 /* FirebaseAuthSwiftUI */; };
 		4607CC9E2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4607CC9D2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI */; };
-		4610DD2A2EA796360084B32B /* FirebaseAppleSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4610DD292EA796360084B32B /* FirebaseAppleSwiftUI */; };
-		464938E92EA8E6BD0013A9E3 /* FirebaseOAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 464938E82EA8E6BD0013A9E3 /* FirebaseOAuthSwiftUI */; };
-		4681E0002E97F22B00387C88 /* FirebaseTwitterSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4681DFFF2E97F22B00387C88 /* FirebaseTwitterSwiftUI */; };
 		46CB7B252D773F2100F1FD0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46CB7B242D773F2100F1FD0A /* GoogleService-Info.plist */; };
 		46F89C392D64B04E000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 46F89C382D64B04E000F8BC0 /* FirebaseAuthSwiftUI */; };
 		46F89C4D2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 46F89C4C2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI */; };
-		8D808CB72DB0811900D2293F /* FirebaseFacebookSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8D808CB62DB0811900D2293F /* FirebaseFacebookSwiftUI */; };
-		8D808CB92DB081F900D2293F /* FirebasePhoneAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8D808CB82DB081F900D2293F /* FirebasePhoneAuthSwiftUI */; };
+		7EBF264D2EBE10DB000F0BB3 /* FirebaseAppleSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7EBF264C2EBE10DB000F0BB3 /* FirebaseAppleSwiftUI */; };
+		7EBF264F2EBE10DB000F0BB3 /* FirebaseAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7EBF264E2EBE10DB000F0BB3 /* FirebaseAuthSwiftUI */; };
+		7EBF26512EBE10DB000F0BB3 /* FirebaseFacebookSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7EBF26502EBE10DB000F0BB3 /* FirebaseFacebookSwiftUI */; };
+		7EBF26532EBE10DB000F0BB3 /* FirebaseGoogleSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7EBF26522EBE10DB000F0BB3 /* FirebaseGoogleSwiftUI */; };
+		7EBF26552EBE10DB000F0BB3 /* FirebaseOAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7EBF26542EBE10DB000F0BB3 /* FirebaseOAuthSwiftUI */; };
+		7EBF26572EBE10DB000F0BB3 /* FirebasePhoneAuthSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7EBF26562EBE10DB000F0BB3 /* FirebasePhoneAuthSwiftUI */; };
+		7EBF26592EBE10DB000F0BB3 /* FirebaseTwitterSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7EBF26582EBE10DB000F0BB3 /* FirebaseTwitterSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,15 +83,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D808CB72DB0811900D2293F /* FirebaseFacebookSwiftUI in Frameworks */,
+				7EBF26572EBE10DB000F0BB3 /* FirebasePhoneAuthSwiftUI in Frameworks */,
 				46F89C392D64B04E000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */,
-				4610DD2A2EA796360084B32B /* FirebaseAppleSwiftUI in Frameworks */,
+				7EBF26512EBE10DB000F0BB3 /* FirebaseFacebookSwiftUI in Frameworks */,
+				7EBF264D2EBE10DB000F0BB3 /* FirebaseAppleSwiftUI in Frameworks */,
 				46F89C4D2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI in Frameworks */,
 				4607CC9E2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI in Frameworks */,
-				8D808CB92DB081F900D2293F /* FirebasePhoneAuthSwiftUI in Frameworks */,
-				4681E0002E97F22B00387C88 /* FirebaseTwitterSwiftUI in Frameworks */,
+				7EBF26592EBE10DB000F0BB3 /* FirebaseTwitterSwiftUI in Frameworks */,
 				4607CC9C2D9BFE29009EC3F5 /* FirebaseAuthSwiftUI in Frameworks */,
-				464938E92EA8E6BD0013A9E3 /* FirebaseOAuthSwiftUI in Frameworks */,
+				7EBF26532EBE10DB000F0BB3 /* FirebaseGoogleSwiftUI in Frameworks */,
+				7EBF264F2EBE10DB000F0BB3 /* FirebaseAuthSwiftUI in Frameworks */,
+				7EBF26552EBE10DB000F0BB3 /* FirebaseOAuthSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,11 +169,13 @@
 				46F89C4C2D64BB9B000F8BC0 /* FirebaseAuthSwiftUI */,
 				4607CC9B2D9BFE29009EC3F5 /* FirebaseAuthSwiftUI */,
 				4607CC9D2D9BFE29009EC3F5 /* FirebaseGoogleSwiftUI */,
-				8D808CB62DB0811900D2293F /* FirebaseFacebookSwiftUI */,
-				8D808CB82DB081F900D2293F /* FirebasePhoneAuthSwiftUI */,
-				4681DFFF2E97F22B00387C88 /* FirebaseTwitterSwiftUI */,
-				4610DD292EA796360084B32B /* FirebaseAppleSwiftUI */,
-				464938E82EA8E6BD0013A9E3 /* FirebaseOAuthSwiftUI */,
+				7EBF264C2EBE10DB000F0BB3 /* FirebaseAppleSwiftUI */,
+				7EBF264E2EBE10DB000F0BB3 /* FirebaseAuthSwiftUI */,
+				7EBF26502EBE10DB000F0BB3 /* FirebaseFacebookSwiftUI */,
+				7EBF26522EBE10DB000F0BB3 /* FirebaseGoogleSwiftUI */,
+				7EBF26542EBE10DB000F0BB3 /* FirebaseOAuthSwiftUI */,
+				7EBF26562EBE10DB000F0BB3 /* FirebasePhoneAuthSwiftUI */,
+				7EBF26582EBE10DB000F0BB3 /* FirebaseTwitterSwiftUI */,
 			);
 			productName = FirebaseSwiftUIExample;
 			productReference = 46F89C082D64A86C000F8BC0 /* FirebaseSwiftUIExample.app */;
@@ -256,8 +262,8 @@
 			mainGroup = 46F89BFF2D64A86C000F8BC0;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				8D808CB52DB07EBD00D2293F /* XCLocalSwiftPackageReference "../../../../FirebaseUI-iOS" */,
 				4600E5502DD777BE00EED5F3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7EBF264B2EBE10DB000F0BB3 /* XCLocalSwiftPackageReference "../../../FirebaseUI-iOS" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 46F89C092D64A86C000F8BC0 /* Products */;
@@ -633,9 +639,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		8D808CB52DB07EBD00D2293F /* XCLocalSwiftPackageReference "../../../../FirebaseUI-iOS" */ = {
+		7EBF264B2EBE10DB000F0BB3 /* XCLocalSwiftPackageReference "../../../FirebaseUI-iOS" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../../../FirebaseUI-iOS";
+			relativePath = "../../../FirebaseUI-iOS";
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -669,21 +675,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseGoogleSwiftUI;
 		};
-		4610DD292EA796360084B32B /* FirebaseAppleSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8D808CB52DB07EBD00D2293F /* XCLocalSwiftPackageReference "../../../../FirebaseUI-iOS" */;
-			productName = FirebaseAppleSwiftUI;
-		};
-		464938E82EA8E6BD0013A9E3 /* FirebaseOAuthSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8D808CB52DB07EBD00D2293F /* XCLocalSwiftPackageReference "../../../../FirebaseUI-iOS" */;
-			productName = FirebaseOAuthSwiftUI;
-		};
-		4681DFFF2E97F22B00387C88 /* FirebaseTwitterSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8D808CB52DB07EBD00D2293F /* XCLocalSwiftPackageReference "../../../../FirebaseUI-iOS" */;
-			productName = FirebaseTwitterSwiftUI;
-		};
 		46F89C382D64B04E000F8BC0 /* FirebaseAuthSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseAuthSwiftUI;
@@ -692,15 +683,33 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseAuthSwiftUI;
 		};
-		8D808CB62DB0811900D2293F /* FirebaseFacebookSwiftUI */ = {
+		7EBF264C2EBE10DB000F0BB3 /* FirebaseAppleSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8D808CB52DB07EBD00D2293F /* XCLocalSwiftPackageReference "../../../../FirebaseUI-iOS" */;
+			productName = FirebaseAppleSwiftUI;
+		};
+		7EBF264E2EBE10DB000F0BB3 /* FirebaseAuthSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAuthSwiftUI;
+		};
+		7EBF26502EBE10DB000F0BB3 /* FirebaseFacebookSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseFacebookSwiftUI;
 		};
-		8D808CB82DB081F900D2293F /* FirebasePhoneAuthSwiftUI */ = {
+		7EBF26522EBE10DB000F0BB3 /* FirebaseGoogleSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8D808CB52DB07EBD00D2293F /* XCLocalSwiftPackageReference "../../../../FirebaseUI-iOS" */;
+			productName = FirebaseGoogleSwiftUI;
+		};
+		7EBF26542EBE10DB000F0BB3 /* FirebaseOAuthSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseOAuthSwiftUI;
+		};
+		7EBF26562EBE10DB000F0BB3 /* FirebasePhoneAuthSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = FirebasePhoneAuthSwiftUI;
+		};
+		7EBF26582EBE10DB000F0BB3 /* FirebaseTwitterSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseTwitterSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
