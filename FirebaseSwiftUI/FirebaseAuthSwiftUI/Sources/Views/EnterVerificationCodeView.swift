@@ -52,7 +52,7 @@ struct EnterVerificationCodeView: View {
         VerificationCodeInputField(
           code: $verificationCode,
           validations: [
-            FormValidators.verificationCode
+            FormValidators.verificationCode,
           ],
           maintainsValidationMessage: true
         )

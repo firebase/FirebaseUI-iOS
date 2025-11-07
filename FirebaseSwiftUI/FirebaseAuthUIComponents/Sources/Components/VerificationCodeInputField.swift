@@ -96,7 +96,8 @@ public struct VerificationCodeInputField: View {
           .frame(maxWidth: .infinity, alignment: .leading)
       }
 
-      if !validations.isEmpty && hasInteracted && (maintainsValidationMessage || !allRequirementsMet) {
+      if !validations
+        .isEmpty && hasInteracted && (maintainsValidationMessage || !allRequirementsMet) {
         VStack(alignment: .leading, spacing: 4) {
           ForEach(validations) { validator in
             let isValid = validator.isValid(input: code)

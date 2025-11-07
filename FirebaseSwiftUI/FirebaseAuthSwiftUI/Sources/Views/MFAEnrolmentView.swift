@@ -375,7 +375,7 @@ extension MFAEnrolmentView: View {
             keyboardType: .phonePad,
             contentType: .telephoneNumber,
             validations: [
-              FormValidators.phoneNumber
+              FormValidators.phoneNumber,
             ],
             maintainsValidationMessage: true,
             onChange: { _ in }
@@ -393,7 +393,7 @@ extension MFAEnrolmentView: View {
             label: authService.string.displayNameFieldLabel,
             prompt: authService.string.enterDisplayNameForDevicePrompt,
             validations: [
-              FormValidators.notEmpty(label: "Display name")
+              FormValidators.notEmpty(label: "Display name"),
             ],
             maintainsValidationMessage: true,
             leading: {
@@ -441,7 +441,7 @@ extension MFAEnrolmentView: View {
           VerificationCodeInputField(
             code: $verificationCode,
             validations: [
-              FormValidators.verificationCode
+              FormValidators.verificationCode,
             ],
             maintainsValidationMessage: true
           )
@@ -584,7 +584,7 @@ extension MFAEnrolmentView: View {
             label: authService.string.displayNameFieldLabel,
             prompt: authService.string.enterDisplayNameForAuthenticatorPrompt,
             validations: [
-              FormValidators.notEmpty(label: "Display name")
+              FormValidators.notEmpty(label: "Display name"),
             ],
             maintainsValidationMessage: true,
             leading: {
@@ -596,7 +596,7 @@ extension MFAEnrolmentView: View {
           VerificationCodeInputField(
             code: $totpCode,
             validations: [
-              FormValidators.verificationCode
+              FormValidators.verificationCode,
             ],
             maintainsValidationMessage: true
           )

@@ -41,7 +41,8 @@ public struct FormValidators {
     }
   )
 
-  public static func confirmPassword(password: @autoclosure @escaping () -> String) -> FormValidator {
+  public static func confirmPassword(password: @autoclosure @escaping () -> String)
+    -> FormValidator {
     return FormValidator(
       message: "Passwords must match",
       validate: { input in
