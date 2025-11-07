@@ -22,9 +22,18 @@
 import FirebaseAuthSwiftUI
 
 public extension AuthService {
+  /// Register phone sign-in with default behavior (navigates to enter phone number view)
   @discardableResult
   func withPhoneSignIn() -> AuthService {
-    registerProvider(providerWithButton: PhoneAuthProviderAuthUI())
+    return withPhoneSignIn { [weak self] in
+      self?.navigator.push(.enterPhoneNumber)
+    }
+  }
+
+  /// Register phone sign-in with custom behavior
+  @discardableResult
+  func withPhoneSignIn(onTap: @escaping @MainActor () -> Void) -> AuthService {
+    registerProvider(providerWithButton: PhoneAuthProviderAuthUI(onTap: onTap))
     return self
   }
 }

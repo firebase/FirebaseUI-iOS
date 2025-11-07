@@ -20,8 +20,11 @@ import SwiftUI
 @MainActor
 public struct PhoneAuthButtonView {
   @Environment(AuthService.self) private var authService
+  private let onTap: @MainActor () -> Void
 
-  public init() {}
+  public init(onTap: @escaping @MainActor () -> Void) {
+    self.onTap = onTap
+  }
 }
 
 extension PhoneAuthButtonView: View {
@@ -31,13 +34,15 @@ extension PhoneAuthButtonView: View {
       style: .phone,
       accessibilityId: "sign-in-with-phone-button"
     ) {
-      authService.navigator.push(.enterPhoneNumber)
+      onTap()
     }
   }
 }
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
-  return PhoneAuthButtonView()
-    .environment(AuthService())
+  return PhoneAuthButtonView {
+    print("Phone auth tapped")
+  }
+  .environment(AuthService())
 }
