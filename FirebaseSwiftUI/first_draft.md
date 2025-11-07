@@ -633,9 +633,8 @@ When building custom views, you need to handle several things yourself that `Aut
 1. **Account Conflicts**: Implement your own conflict resolution strategy using `AuthServiceError.accountConflict`
 2. **MFA Handling**: Check `SignInOutcome` for `.mfaRequired` and handle MFA resolution manually
 3. **Anonymous User Upgrades**: Handle the linking of anonymous accounts if `shouldAutoUpgradeAnonymousUsers` is enabled
-4. **Error Display**: Catch and display errors from `AuthService` methods appropriately
-5. **Navigation State**: Manage navigation between different auth screens (phone verification, password recovery, etc.)
-6. **Loading States**: Show loading indicators during async authentication operations by observing `authService.authenticationState`
+4. **Navigation State**: Manage navigation between different auth screens (phone verification, password recovery, etc.)
+5. **Loading States**: Show loading indicators during async authentication operations by observing `authService.authenticationState`
 
 ### Custom OAuth Providers
 
