@@ -1511,9 +1511,7 @@ Errors specific to `AuthService` operations.
 
 5. **Observe authentication state**: Use `onChange(of: authService.authenticationState)` to react to authentication changes.
 
-6. **Error handling in custom views**: When not using `AuthPickerView`, implement comprehensive error handling.
-
-7. **Provider-specific setup**: Some providers (Google, Facebook) require additional configuration in AppDelegate or Info.plist. See the [sample app](https://github.com/firebase/FirebaseUI-iOS/tree/main/samples/swiftui) for examples.
+6. **Provider-specific setup**: Some providers (Google, Facebook) require additional configuration in AppDelegate or Info.plist. See the [sample app](https://github.com/firebase/FirebaseUI-iOS/tree/main/samples/swiftui) for examples.
 
 ---
 
@@ -1528,5 +1526,5 @@ Errors specific to `AuthService` operations.
 
 ## Feedback
 
-This is an alpha release. Please file feedback and issues in the [repository's issue tracker](https://github.com/firebase/FirebaseUI-iOS/issues).
+Please file feedback and issues in the [repository's issue tracker](https://github.com/firebase/FirebaseUI-iOS/issues).
 
