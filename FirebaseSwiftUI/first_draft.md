@@ -272,67 +272,7 @@ The default views support:
 
 If you need more control over the UI or navigation flow, you can build your own custom authentication views while still leveraging the `AuthService` for authentication logic.
 
-### Approach 1: Default Buttons with Custom Views
-
-You can use `AuthService.renderButtons()` to render the default authentication buttons while providing your own layout and navigation:
-
-```swift
-import FirebaseAuthSwiftUI
-import FirebaseGoogleSwiftUI
-import FirebaseAppleSwiftUI
-import SwiftUI
-
-struct CustomAuthView: View {
-  @Environment(AuthService.self) private var authService
-
-  var body: some View {
-    VStack(spacing: 30) {
-      // Your custom logo/branding
-      Image("app-logo")
-        .resizable()
-        .frame(width: 150, height: 150)
-      
-      Text("Welcome to My App")
-        .font(.largeTitle)
-        .fontWeight(.bold)
-      
-      Text("Sign in to continue")
-        .font(.subheadline)
-        .foregroundStyle(.secondary)
-      
-      // Render default auth buttons
-      authService.renderButtons(spacing: 12)
-        .padding()
-    }
-    .padding()
-  }
-}
-
-struct ContentView: View {
-  init() {
-    let configuration = AuthConfiguration()
-    
-    authService = AuthService(configuration: configuration)
-      .withGoogleSignIn()
-      .withAppleSignIn()
-  }
-  
-  let authService: AuthService
-
-  var body: some View {
-    NavigationStack {
-      if authService.authenticationState == .authenticated {
-        Text("Authenticated!")
-      } else {
-        CustomAuthView()
-      }
-    }
-    .environment(authService)
-  }
-}
-```
-
-### Approach 2: Custom Buttons with `registerProvider()`
+### Approach 1: Custom Buttons with `registerProvider()`
 
 For complete control over button appearance, you can create your own custom `AuthProviderUI` implementation that wraps any provider and returns your custom button view.
 
@@ -511,6 +451,66 @@ struct ContentView: View {
 ```
 
 This approach works for all providers: Google, Apple, Twitter, Facebook, Phone, and OAuth providers. Simply create your custom button view and wrap it in a class conforming to `AuthProviderUI`.
+
+### Approach 2: Default Buttons with Custom Views
+
+You can use `AuthService.renderButtons()` to render the default authentication buttons while providing your own layout and navigation:
+
+```swift
+import FirebaseAuthSwiftUI
+import FirebaseGoogleSwiftUI
+import FirebaseAppleSwiftUI
+import SwiftUI
+
+struct CustomAuthView: View {
+  @Environment(AuthService.self) private var authService
+
+  var body: some View {
+    VStack(spacing: 30) {
+      // Your custom logo/branding
+      Image("app-logo")
+        .resizable()
+        .frame(width: 150, height: 150)
+      
+      Text("Welcome to My App")
+        .font(.largeTitle)
+        .fontWeight(.bold)
+      
+      Text("Sign in to continue")
+        .font(.subheadline)
+        .foregroundStyle(.secondary)
+      
+      // Render default auth buttons
+      authService.renderButtons(spacing: 12)
+        .padding()
+    }
+    .padding()
+  }
+}
+
+struct ContentView: View {
+  init() {
+    let configuration = AuthConfiguration()
+    
+    authService = AuthService(configuration: configuration)
+      .withGoogleSignIn()
+      .withAppleSignIn()
+  }
+  
+  let authService: AuthService
+
+  var body: some View {
+    NavigationStack {
+      if authService.authenticationState == .authenticated {
+        Text("Authenticated!")
+      } else {
+        CustomAuthView()
+      }
+    }
+    .environment(authService)
+  }
+}
+```
 
 ### Approach 3: Custom Views with Custom Navigation
 
