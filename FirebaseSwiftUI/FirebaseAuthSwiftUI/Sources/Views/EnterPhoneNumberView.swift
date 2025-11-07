@@ -38,6 +38,9 @@ struct EnterPhoneNumberView: View {
         prompt: authService.string.enterPhoneNumberPlaceholder,
         keyboardType: .phonePad,
         contentType: .telephoneNumber,
+        validations: [
+          FormValidators.phoneNumber
+        ],
         onChange: { _ in }
       ) {
         CountrySelector(

@@ -48,7 +48,13 @@ struct EnterVerificationCodeView: View {
         .padding(.bottom)
         .frame(maxWidth: .infinity, alignment: .leading)
 
-        VerificationCodeInputField(code: $verificationCode)
+        VerificationCodeInputField(
+          code: $verificationCode,
+          validations: [
+            FormValidators.verificationCode
+          ],
+          maintainsValidationMessage: true
+        )
 
         Button(action: {
           Task {

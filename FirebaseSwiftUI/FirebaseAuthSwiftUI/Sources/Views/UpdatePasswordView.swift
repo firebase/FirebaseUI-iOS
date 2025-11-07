@@ -34,8 +34,10 @@ public struct UpdatePasswordView {
   @State private var confirmPassword = ""
 
   @FocusState private var focus: FocusableField?
+
   private var isValid: Bool {
-    !password.isEmpty && password == confirmPassword
+    FormValidators.atLeast6Characters.isValid(input: password) &&
+      FormValidators.confirmPassword(password: password).isValid(input: confirmPassword)
   }
 }
 
@@ -48,7 +50,11 @@ extension UpdatePasswordView: View {
         label: "Type new password",
         prompt: authService.string.passwordInputLabel,
         contentType: .password,
-        sensitive: true,
+        isSecureTextField: true,
+        validations: [
+          FormValidators.atLeast6Characters
+        ],
+        maintainsValidationMessage: true,
         leading: {
           Image(systemName: "lock")
         }
@@ -61,7 +67,11 @@ extension UpdatePasswordView: View {
         label: "Retype new password",
         prompt: authService.string.confirmPasswordInputLabel,
         contentType: .password,
-        sensitive: true,
+        isSecureTextField: true,
+        validations: [
+          FormValidators.confirmPassword(password: password)
+        ],
+        maintainsValidationMessage: true,
         leading: {
           Image(systemName: "lock")
         }

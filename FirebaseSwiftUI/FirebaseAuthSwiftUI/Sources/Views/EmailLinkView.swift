@@ -48,6 +48,9 @@ extension EmailLinkView: View {
         prompt: authService.string.emailInputLabel,
         keyboardType: .emailAddress,
         contentType: .emailAddress,
+        validations: [
+          FormValidators.email
+        ],
         leading: {
           Image(systemName: "at")
         }

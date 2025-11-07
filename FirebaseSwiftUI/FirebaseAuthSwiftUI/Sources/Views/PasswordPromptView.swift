@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
@@ -31,16 +32,22 @@ extension PasswordPromptSheet: View {
 
       Divider()
 
-      LabeledContent {
-        TextField(authService.string.passwordInputLabel, text: $password)
-          .textInputAutocapitalization(.never)
-          .disableAutocorrection(true)
-          .submitLabel(.next)
-      } label: {
-        Image(systemName: "lock")
-      }.padding(.vertical, 10)
-        .background(Divider(), alignment: .bottom)
-        .padding(.bottom, 4)
+      AuthTextField(
+        text: $password,
+        label: authService.string.passwordFieldLabel,
+        prompt: authService.string.passwordInputLabel,
+        contentType: .password,
+        isSecureTextField: true,
+        onSubmit: { _ in
+          if !password.isEmpty {
+            coordinator.submit(password: password)
+          }
+        },
+        leading: {
+          Image(systemName: "lock")
+        }
+      )
+      .submitLabel(.next)
 
       Button(action: {
         coordinator.submit(password: password)
