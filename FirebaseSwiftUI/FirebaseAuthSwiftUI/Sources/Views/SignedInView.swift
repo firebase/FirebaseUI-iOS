@@ -38,7 +38,6 @@ public struct SignedInView {
 
 extension SignedInView: View {
   public var body: some View {
-    @Bindable var passwordPrompt = authService.passwordPrompt
     VStack {
       Text(authService.string.signedInTitle)
         .font(.largeTitle)
@@ -144,9 +143,7 @@ extension SignedInView: View {
       )
       .presentationDetents([.medium])
     }
-    .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
-      PasswordPromptSheet(coordinator: authService.passwordPrompt)
-    }
+    // Password prompt sheet now centralized in AuthPickerView
     .sheet(isPresented: $showEmailVerificationSent) {
       VStack(spacing: 24) {
         Text(authService.string.verifyEmailSheetMessage)

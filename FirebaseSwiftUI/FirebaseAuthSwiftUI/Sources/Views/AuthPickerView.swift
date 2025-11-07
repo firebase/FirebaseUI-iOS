@@ -35,6 +35,7 @@ public struct AuthPickerView<Content: View> {
 extension AuthPickerView: View {
   public var body: some View {
     @Bindable var authService = authService
+    @Bindable var passwordPrompt = authService.passwordPrompt
     content()
       .sheet(isPresented: $authService.isPresented) {
         @Bindable var navigator = authService.navigator
@@ -76,6 +77,10 @@ extension AuthPickerView: View {
           okButtonLabel: authService.string.okButtonLabel
         )
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
+      }
+      // Centralized password prompt sheet to prevent conflicts
+      .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
+        PasswordPromptSheet(coordinator: authService.passwordPrompt)
       }
       // View-layer logic: Handle account conflicts (auto-handle anonymous upgrade, store others for
       // linking)
