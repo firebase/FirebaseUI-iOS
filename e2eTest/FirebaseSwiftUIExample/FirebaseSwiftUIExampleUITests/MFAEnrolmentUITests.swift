@@ -22,8 +22,23 @@
 import XCTest
 
 final class MFAEnrollmentUITests: XCTestCase {
+  var app: XCUIApplication!
+  
   override func setUpWithError() throws {
     continueAfterFailure = false
+  }
+  
+  override func tearDownWithError() throws {
+    // Clean up: Terminate app
+    if let app = app {
+      app.terminate()
+    }
+    app = nil
+    
+    // Small delay between tests to allow emulator to settle
+    Thread.sleep(forTimeInterval: 0.5)
+    
+    try super.tearDownWithError()
   }
 
   // MARK: - MFA Management Navigation Tests
@@ -35,7 +50,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app
     try await createTestUser(email: email)
 
-    let app = createTestApp(mfaEnabled: true)
+    app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Sign in first to access MFA management
@@ -67,7 +82,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app
     try await createTestUser(email: email)
 
-    let app = createTestApp(mfaEnabled: true)
+    app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Sign in and navigate to MFA management
@@ -102,7 +117,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app
     try await createTestUser(email: email)
 
-    let app = createTestApp(mfaEnabled: true)
+    app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Navigate to MFA enrollment
@@ -131,7 +146,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app
     try await createTestUser(email: email)
 
-    let app = createTestApp(mfaEnabled: true)
+    app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Navigate to MFA enrollment
@@ -168,7 +183,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     let email = createEmail()
     try await createTestUser(email: email, verifyEmail: true)
 
-    let app = createTestApp(mfaEnabled: true)
+    app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // 2) Sign in to reach SignedInView
@@ -210,7 +225,9 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Enter phone number (without dial code)
     let phoneField = app.textFields["phone-number-field"]
     XCTAssertTrue(phoneField.waitForExistence(timeout: 10))
-    let phoneNumberWithoutDialCode = "7444555666"
+    // Generate unique phone number using timestamp to avoid conflicts between tests
+    let uniqueId = Int(Date().timeIntervalSince1970 * 1000) % 1000000
+    let phoneNumberWithoutDialCode = "7\(String(format: "%09d", uniqueId))"
     UIPasteboard.general.string = phoneNumberWithoutDialCode
     phoneField.tap()
     phoneField.press(forDuration: 1.2)
@@ -298,7 +315,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app (with email verification)
     try await createTestUser(email: email, verifyEmail: true)
 
-    let app = createTestApp(mfaEnabled: true)
+    app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Navigate to MFA enrollment and select TOTP
@@ -357,7 +374,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app
     try await createTestUser(email: email)
 
-    let app = createTestApp(mfaEnabled: true)
+    app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Navigate to MFA enrollment
@@ -377,7 +394,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Create user in test runner before launching app
     try await createTestUser(email: email)
 
-    let app = createTestApp(mfaEnabled: true)
+    app = createTestApp(mfaEnabled: true)
     app.launch()
 
     // Navigate to MFA enrollment
