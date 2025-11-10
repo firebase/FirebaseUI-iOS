@@ -46,9 +46,7 @@ public struct UpdatePasswordView {
       do {
         try await authService.updatePassword(to: confirmPassword)
         showAlert = true
-      } catch {
-        
-      }
+      } catch {}
     }
   }
 }
@@ -64,7 +62,7 @@ extension UpdatePasswordView: View {
         contentType: .password,
         isSecureTextField: true,
         validations: [
-          FormValidators.atLeast6Characters
+          FormValidators.atLeast6Characters,
         ],
         maintainsValidationMessage: true,
         leading: {
@@ -81,7 +79,7 @@ extension UpdatePasswordView: View {
         contentType: .password,
         isSecureTextField: true,
         validations: [
-          FormValidators.confirmPassword(password: password)
+          FormValidators.confirmPassword(password: password),
         ],
         maintainsValidationMessage: true,
         leading: {

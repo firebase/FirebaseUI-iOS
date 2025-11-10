@@ -176,8 +176,7 @@ jobs:
           xcodebuild test-without-building \
             -scheme FirebaseSwiftUIExampleUITests \
             -destination 'platform=iOS Simulator,name=iPhone 17' \
-            -parallel-testing-enabled YES \
-            -maximum-concurrent-test-simulator-destinations 2 \
+            -parallel-testing-enabled NO \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleUITests.xcresult | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple
             

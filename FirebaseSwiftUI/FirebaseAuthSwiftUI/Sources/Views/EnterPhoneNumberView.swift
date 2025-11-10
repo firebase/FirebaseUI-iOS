@@ -39,7 +39,7 @@ struct EnterPhoneNumberView: View {
         keyboardType: .phonePad,
         contentType: .telephoneNumber,
         validations: [
-          FormValidators.phoneNumber
+          FormValidators.phoneNumber,
         ],
         onChange: { _ in }
       ) {

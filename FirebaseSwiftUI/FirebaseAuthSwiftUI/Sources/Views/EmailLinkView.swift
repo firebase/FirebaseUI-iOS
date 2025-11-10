@@ -50,7 +50,7 @@ extension EmailLinkView: View {
         keyboardType: .emailAddress,
         contentType: .emailAddress,
         validations: [
-          FormValidators.email
+          FormValidators.email,
         ],
         leading: {
           Image(systemName: "at")

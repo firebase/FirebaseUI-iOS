@@ -23,6 +23,7 @@ extension MultiFactorInfo: Identifiable {
 @MainActor
 public struct MFAManagementView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
 
   @State private var enrolledFactors: [MultiFactorInfo] = []
   @State private var isLoading = false
@@ -43,6 +44,7 @@ public struct MFAManagementView {
         enrolledFactors = freshFactors
         isLoading = false
       } catch {
+        reportError?(error)
         isLoading = false
       }
     }

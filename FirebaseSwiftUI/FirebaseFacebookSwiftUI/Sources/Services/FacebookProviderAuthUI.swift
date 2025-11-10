@@ -105,7 +105,7 @@ public class FacebookProviderSwift: CredentialAuthProviderSwift {
             "`rawNonce` has not been generated for Facebook limited login"
           )
       }
-      let credential = OAuthProvider.credential(withProviderID: providerId,
+      let credential = OAuthProvider.credential(providerID: .facebook,
                                                 idToken: idToken.tokenString,
                                                 rawNonce: nonce)
       return credential
