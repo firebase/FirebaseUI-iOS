@@ -34,8 +34,6 @@ struct TestView: View {
 
   init() {
     Auth.auth().useEmulator(withHost: "localhost", port: 9099)
-
-    Auth.auth().settings?.isAppVerificationDisabledForTesting = true
     Task {
       try signOut()
     }

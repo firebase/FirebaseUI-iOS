@@ -161,7 +161,7 @@ extension AuthPickerView: View {
     VStack {
       authService.renderButtons()
     }
-    .padding(.horizontal, proxy.size.width * 0.18)
+    .padding(.horizontal, proxy.size.width * 0.14)
   }
 }
 
