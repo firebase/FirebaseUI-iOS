@@ -34,7 +34,7 @@ struct ContentView: View {
   init() {
     Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
     Auth.auth().settings?.isAppVerificationDisabledForTesting = true
-    //Auth.auth().signInAnonymously()
+    // Auth.auth().signInAnonymously()
     let actionCodeSettings = ActionCodeSettings()
     actionCodeSettings.handleCodeInApp = true
     actionCodeSettings.url = URL(string: "https://flutterfire-e2e-tests.firebaseapp.com")

@@ -29,7 +29,7 @@ import Testing
 @Suite("TOTPEnrollmentInfo Tests")
 struct TOTPEnrollmentInfoTests {
   @Test("Initialization with shared secret key")
-  func testInitializationWithSharedSecretKey() {
+  func initializationWithSharedSecretKey() {
     let validSecrets = [
       "JBSWY3DPEHPK3PXP",
       "GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ",
@@ -47,7 +47,7 @@ struct TOTPEnrollmentInfoTests {
   }
 
   @Test("Initialization with all parameters")
-  func testInitializationWithAllParameters() throws {
+  func initializationWithAllParameters() throws {
     let totpInfo = TOTPEnrollmentInfo(
       sharedSecretKey: "JBSWY3DPEHPK3PXP",
       qrCodeURL: URL(
@@ -71,7 +71,7 @@ struct TOTPEnrollmentInfoTests {
   }
 
   @Test("Verification status transitions")
-  func testVerificationStatusTransitions() {
+  func verificationStatusTransitions() {
     // Default status is pending
     var totpInfo = TOTPEnrollmentInfo(sharedSecretKey: "JBSWY3DPEHPK3PXP")
     #expect(totpInfo.verificationStatus == .pending)

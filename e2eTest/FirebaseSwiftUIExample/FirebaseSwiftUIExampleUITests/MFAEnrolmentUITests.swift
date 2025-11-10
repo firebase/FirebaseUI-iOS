@@ -235,10 +235,7 @@ final class MFAEnrollmentUITests: XCTestCase {
 
     let displayNameField = app.textFields["display-name-field"]
     XCTAssertTrue(displayNameField.waitForExistence(timeout: 10))
-    UIPasteboard.general.string = "test user"
-    displayNameField.tap()
-    displayNameField.press(forDuration: 1.2)
-    app.menuItems["Paste"].tap()
+    try pasteIntoField(displayNameField, text: "test user", app: app)
 
     let sendCodeButton = app.buttons["send-sms-button"]
     XCTAssertTrue(sendCodeButton.waitForExistence(timeout: 10))
@@ -426,16 +423,12 @@ final class MFAEnrollmentUITests: XCTestCase {
     let emailField = app.textFields["email-field"]
     XCTAssertTrue(emailField.waitForExistence(timeout: 10), "Email field should exist")
     // Workaround for updating SecureFields with ConnectHardwareKeyboard enabled
-    UIPasteboard.general.string = email
-    emailField.press(forDuration: 1.2)
-    app.menuItems["Paste"].tap()
+    try pasteIntoField(emailField, text: email, app: app)
 
     // Fill password field
     let passwordField = app.secureTextFields["password-field"]
     XCTAssertTrue(passwordField.exists, "Password field should exist")
-    UIPasteboard.general.string = password
-    passwordField.press(forDuration: 1.2)
-    app.menuItems["Paste"].tap()
+    try pasteIntoField(passwordField, text: password, app: app)
 
     // Create the user (sign up)
     let signUpButton = app

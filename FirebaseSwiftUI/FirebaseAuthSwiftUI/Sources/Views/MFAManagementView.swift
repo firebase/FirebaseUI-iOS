@@ -57,7 +57,6 @@ public struct MFAManagementView {
 
 extension MFAManagementView: View {
   public var body: some View {
-    @Bindable var passwordPrompt = authService.passwordPrompt
     VStack(spacing: 20) {
       // Title section
       VStack {
@@ -135,10 +134,7 @@ extension MFAManagementView: View {
     .onAppear {
       loadEnrolledFactors()
     }
-    // Present password prompt when required for reauthentication
-    .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
-      PasswordPromptSheet(coordinator: authService.passwordPrompt)
-    }
+    // Password prompt sheet now centralized in AuthPickerView
   }
 
   @ViewBuilder
