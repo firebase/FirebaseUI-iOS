@@ -26,6 +26,7 @@ private enum FocusableField: Hashable {
 @MainActor
 public struct MFAEnrolmentView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
 
   @State private var selectedFactorType: SecondFactorType = .sms
   @State private var phoneNumber = ""
@@ -81,12 +82,16 @@ public struct MFAEnrolmentView {
       isLoading = true
       defer { isLoading = false }
 
-      let session = try await authService.startMfaEnrollment(
-        type: selectedFactorType,
-        accountName: authService.currentUser?.email,
-        issuer: authService.configuration.mfaIssuer
-      )
-      currentSession = session
+      do {
+        let session = try await authService.startMfaEnrollment(
+          type: selectedFactorType,
+          accountName: authService.currentUser?.email,
+          issuer: authService.configuration.mfaIssuer
+        )
+        currentSession = session
+      } catch {
+        reportError?(error)
+      }
     }
   }
 
@@ -97,23 +102,27 @@ public struct MFAEnrolmentView {
       isLoading = true
       defer { isLoading = false }
 
-      let fullPhoneNumber = selectedCountry.dialCode + phoneNumber
-      let verificationId = try await authService.sendSmsVerificationForEnrollment(
-        session: session,
-        phoneNumber: fullPhoneNumber
-      )
-      // Update session status
-      currentSession = EnrollmentSession(
-        id: session.id,
-        type: session.type,
-        session: session.session,
-        totpInfo: session.totpInfo,
-        phoneNumber: fullPhoneNumber,
-        verificationId: verificationId,
-        status: .verificationSent,
-        createdAt: session.createdAt,
-        expiresAt: session.expiresAt
-      )
+      do {
+        let fullPhoneNumber = selectedCountry.dialCode + phoneNumber
+        let verificationId = try await authService.sendSmsVerificationForEnrollment(
+          session: session,
+          phoneNumber: fullPhoneNumber
+        )
+        // Update session status
+        currentSession = EnrollmentSession(
+          id: session.id,
+          type: session.type,
+          session: session.session,
+          totpInfo: session.totpInfo,
+          phoneNumber: fullPhoneNumber,
+          verificationId: verificationId,
+          status: .verificationSent,
+          createdAt: session.createdAt,
+          expiresAt: session.expiresAt
+        )
+      } catch {
+        reportError?(error)
+      }
     }
   }
 
@@ -124,18 +133,22 @@ public struct MFAEnrolmentView {
       isLoading = true
       defer { isLoading = false }
 
-      let code = session.type == .sms ? verificationCode : totpCode
-      try await authService.completeEnrollment(
-        session: session,
-        verificationId: session.verificationId,
-        verificationCode: code,
-        displayName: displayName
-      )
+      do {
+        let code = session.type == .sms ? verificationCode : totpCode
+        try await authService.completeEnrollment(
+          session: session,
+          verificationId: session.verificationId,
+          verificationCode: code,
+          displayName: displayName
+        )
 
-      // Reset form state on success
-      resetForm()
+        // Reset form state on success
+        resetForm()
 
-      authService.navigator.clear()
+        authService.navigator.clear()
+      } catch {
+        reportError?(error)
+      }
     }
   }
 
@@ -375,7 +388,7 @@ extension MFAEnrolmentView: View {
             keyboardType: .phonePad,
             contentType: .telephoneNumber,
             validations: [
-              FormValidators.phoneNumber
+              FormValidators.phoneNumber,
             ],
             maintainsValidationMessage: true,
             onChange: { _ in }
@@ -393,7 +406,7 @@ extension MFAEnrolmentView: View {
             label: authService.string.displayNameFieldLabel,
             prompt: authService.string.enterDisplayNameForDevicePrompt,
             validations: [
-              FormValidators.notEmpty(label: "Display name")
+              FormValidators.notEmpty(label: "Display name"),
             ],
             maintainsValidationMessage: true,
             leading: {
@@ -441,7 +454,7 @@ extension MFAEnrolmentView: View {
           VerificationCodeInputField(
             code: $verificationCode,
             validations: [
-              FormValidators.verificationCode
+              FormValidators.verificationCode,
             ],
             maintainsValidationMessage: true
           )
@@ -584,7 +597,7 @@ extension MFAEnrolmentView: View {
             label: authService.string.displayNameFieldLabel,
             prompt: authService.string.enterDisplayNameForAuthenticatorPrompt,
             validations: [
-              FormValidators.notEmpty(label: "Display name")
+              FormValidators.notEmpty(label: "Display name"),
             ],
             maintainsValidationMessage: true,
             leading: {
@@ -596,7 +609,7 @@ extension MFAEnrolmentView: View {
           VerificationCodeInputField(
             code: $totpCode,
             validations: [
-              FormValidators.verificationCode
+              FormValidators.verificationCode,
             ],
             maintainsValidationMessage: true
           )

@@ -44,7 +44,7 @@ public struct CountryData: Equatable {
 public struct CountrySelector: View {
   @Binding var selectedCountry: CountryData
   var enabled: Bool = true
-  var allowedCountries: Set<String>? = nil
+  var allowedCountries: Set<String>?
 
   public init(selectedCountry: Binding<CountryData>,
               enabled: Bool = true,

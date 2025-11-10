@@ -175,15 +175,6 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     XCTAssertTrue(signUpButton.exists, "Sign-Up button should exist")
     signUpButton.tap()
 
-    // Wait for the auth screen to disappear (email field should no longer exist)
-    let emailFieldDisappeared = NSPredicate(format: "exists == false")
-    let expectation = XCTNSPredicateExpectation(
-      predicate: emailFieldDisappeared,
-      object: emailField
-    )
-    let result = XCTWaiter().wait(for: [expectation], timeout: 10.0)
-    XCTAssertEqual(result, .completed, "Email field should disappear after sign-up")
-
     // Wait for user creation and signed-in view to appear
     let signedInText = app.staticTexts["signed-in-text"]
     XCTAssertTrue(

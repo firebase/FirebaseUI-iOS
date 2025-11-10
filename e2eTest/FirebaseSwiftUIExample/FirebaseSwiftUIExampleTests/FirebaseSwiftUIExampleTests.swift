@@ -40,7 +40,7 @@ struct FirebaseSwiftUIExampleTests {
 
   @Test
   @MainActor
-  func testDefaultAuthConfigurationInjection() async throws {
+  func defaultAuthConfigurationInjection() async throws {
     let config = AuthConfiguration()
     let service = AuthService(configuration: config)
 
@@ -58,7 +58,7 @@ struct FirebaseSwiftUIExampleTests {
 
   @Test
   @MainActor
-  func testCustomAuthConfigurationInjection() async throws {
+  func customAuthConfigurationInjection() async throws {
     let emailSettings = ActionCodeSettings()
     emailSettings.handleCodeInApp = true
     emailSettings.url = URL(string: "https://example.com/email-link")
@@ -97,7 +97,7 @@ struct FirebaseSwiftUIExampleTests {
 
   @Test
   @MainActor
-  func testCreateEmailPasswordUser() async throws {
+  func createEmailPasswordUser() async throws {
     let service = try await prepareFreshAuthService()
 
     #expect(service.authenticationState == .unauthenticated)
@@ -119,7 +119,7 @@ struct FirebaseSwiftUIExampleTests {
 
   @Test
   @MainActor
-  func testSignInUser() async throws {
+  func signInUser() async throws {
     let service = try await prepareFreshAuthService()
     let email = createEmail()
     try await service.createUser(email: email, password: kPassword)

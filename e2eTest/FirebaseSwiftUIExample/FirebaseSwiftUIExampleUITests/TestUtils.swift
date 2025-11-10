@@ -29,6 +29,45 @@ func createEmail() -> String {
   }
 }
 
+// MARK: - Text Input Helpers
+
+/// Pastes text into a text field using the system paste menu
+/// - Parameters:
+///   - field: The XCUIElement representing the text field
+///   - text: The text to paste
+///   - app: The XCUIApplication instance
+@MainActor func pasteIntoField(_ field: XCUIElement, text: String, app: XCUIApplication) throws {
+  UIPasteboard.general.string = text
+  field.tap()
+
+  // Give field time to become first responder
+  usleep(200_000) // 0.2 seconds
+
+  // Press and hold to bring up paste menu
+  field.press(forDuration: 1.5)
+
+  let pasteMenuItem = app.menuItems["Paste"]
+
+  // Wait for paste menu to appear
+  if !pasteMenuItem.waitForExistence(timeout: 3) {
+    // Fallback: try double tap approach
+    field.doubleTap()
+    usleep(300_000) // 0.3 seconds
+
+    if !pasteMenuItem.waitForExistence(timeout: 2) {
+      throw NSError(
+        domain: "TestError",
+        code: 1,
+        userInfo: [
+          NSLocalizedDescriptionKey: "Failed to show paste menu for field. Text was: \(text)",
+        ]
+      )
+    }
+  }
+
+  pasteMenuItem.tap()
+}
+
 // MARK: - User Creation
 
 /// Helper to create a test user in the emulator via REST API (avoids keychain issues)
@@ -96,20 +135,17 @@ func createEmail() -> String {
     "idToken": idToken,
   ])
 
-  let (_, sendResp) = try await URLSession.shared.data(for: sendReq)
+  let (sendData, sendResp) = try await URLSession.shared.data(for: sendReq)
   guard let http = sendResp as? HTTPURLResponse, http.statusCode == 200 else {
+    let errorBody = String(data: sendData, encoding: .utf8) ?? "Unknown error"
     throw NSError(domain: "EmulatorError", code: 1,
-                  userInfo: [NSLocalizedDescriptionKey: "Failed to send verification email"])
+                  userInfo: [NSLocalizedDescriptionKey: "Failed to send verification email: \(errorBody)"])
   }
 
-  // Step 2: Fetch OOB codes from emulator
-  let oobURL = URL(string: "\(base)/emulator/v1/projects/\(projectID)/oobCodes")!
-  let (oobData, oobResp) = try await URLSession.shared.data(from: oobURL)
-  guard (oobResp as? HTTPURLResponse)?.statusCode == 200 else {
-    throw NSError(domain: "EmulatorError", code: 2,
-                  userInfo: [NSLocalizedDescriptionKey: "Failed to fetch OOB codes"])
-  }
+  // Add a small delay to ensure the OOB code is registered in the emulator
+  try await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
 
+  // Define structs for OOB response parsing
   struct OobEnvelope: Decodable { let oobCodes: [OobItem] }
   struct OobItem: Decodable {
     let oobCode: String
@@ -118,20 +154,50 @@ func createEmail() -> String {
     let creationTime: String?
   }
 
-  let envelope = try JSONDecoder().decode(OobEnvelope.self, from: oobData)
+  // Step 2: Fetch OOB codes from emulator with retry logic
+  let oobURL = URL(string: "\(base)/emulator/v1/projects/\(projectID)/oobCodes")!
+  
+  var codeItem: OobItem?
+  var attempts = 0
+  let maxAttempts = 5
+  
+  while codeItem == nil && attempts < maxAttempts {
+    let (oobData, oobResp) = try await URLSession.shared.data(from: oobURL)
+    guard (oobResp as? HTTPURLResponse)?.statusCode == 200 else {
+      throw NSError(domain: "EmulatorError", code: 2,
+                    userInfo: [NSLocalizedDescriptionKey: "Failed to fetch OOB codes"])
+    }
 
-  // Step 3: Find most recent VERIFY_EMAIL code for this email
-  let iso = ISO8601DateFormatter()
-  let codeItem = envelope.oobCodes
-    .filter {
-      $0.email.caseInsensitiveCompare(email) == .orderedSame && $0.requestType == "VERIFY_EMAIL"
+    let envelope = try JSONDecoder().decode(OobEnvelope.self, from: oobData)
+
+    // Step 3: Find most recent VERIFY_EMAIL code for this email
+    let iso = ISO8601DateFormatter()
+    codeItem = envelope.oobCodes
+      .filter {
+        $0.email.caseInsensitiveCompare(email) == .orderedSame && $0.requestType == "VERIFY_EMAIL"
+      }
+      .sorted {
+        let d0 = $0.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
+        let d1 = $1.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
+        return d0 > d1
+      }
+      .first
+    
+    if codeItem == nil {
+      attempts += 1
+      if attempts < maxAttempts {
+        // Wait before retrying
+        try await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
+      } else {
+        // Log available codes for debugging
+        let availableCodes = envelope.oobCodes.map { "Email: \($0.email), Type: \($0.requestType)" }.joined(separator: "; ")
+        throw NSError(domain: "EmulatorError", code: 3,
+                      userInfo: [
+                        NSLocalizedDescriptionKey: "No VERIFY_EMAIL OOB code found for \(email) after \(maxAttempts) attempts. Available codes: \(availableCodes)",
+                      ])
+      }
     }
-    .sorted {
-      let d0 = $0.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
-      let d1 = $1.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
-      return d0 > d1
-    }
-    .first
+  }
 
   guard let oobCode = codeItem?.oobCode else {
     throw NSError(domain: "EmulatorError", code: 3,

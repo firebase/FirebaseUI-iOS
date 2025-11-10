@@ -71,7 +71,7 @@ final class MFAResolutionUITests: XCTestCase {
     )
 
     let smsButton = app.buttons["sms-method-button"]
-    if smsButton.exists && smsButton.isEnabled {
+    if smsButton.exists, smsButton.isEnabled {
       smsButton.tap()
     }
     dismissAlert(app: app)
@@ -421,7 +421,7 @@ final class MFAResolutionUITests: XCTestCase {
                                      password: String = "123456") throws {
     // Ensure we're in sign in flow
     let switchFlowButton = app.buttons["switch-auth-flow"]
-    if switchFlowButton.exists && switchFlowButton.label.contains("Sign In") {
+    if switchFlowButton.exists, switchFlowButton.label.contains("Sign In") {
       switchFlowButton.tap()
     }
 

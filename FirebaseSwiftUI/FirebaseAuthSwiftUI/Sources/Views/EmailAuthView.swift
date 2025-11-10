@@ -111,7 +111,7 @@ extension EmailAuthView: View {
         keyboardType: .emailAddress,
         contentType: .emailAddress,
         validations: [
-          FormValidators.email
+          FormValidators.email,
         ],
         maintainsValidationMessage: authService.authenticationFlow == .signUp,
         onSubmit: { _ in
@@ -161,7 +161,7 @@ extension EmailAuthView: View {
           contentType: .password,
           isSecureTextField: true,
           validations: [
-            FormValidators.confirmPassword(password: password)
+            FormValidators.confirmPassword(password: password),
           ],
           maintainsValidationMessage: true,
           onSubmit: { _ in

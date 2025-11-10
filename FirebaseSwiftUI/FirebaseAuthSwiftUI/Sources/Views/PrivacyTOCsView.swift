@@ -30,7 +30,7 @@ struct PrivacyTOCsView {
 
   let displayMode: DisplayMode
 
-  public init(displayMode: DisplayMode = .full) {
+  init(displayMode: DisplayMode = .full) {
     self.displayMode = displayMode
   }
 
@@ -61,7 +61,7 @@ struct PrivacyTOCsView {
 }
 
 extension PrivacyTOCsView: View {
-  public var body: some View {
+  var body: some View {
     Group {
       if let tosURL = authService.configuration.tosUrl,
          let privacyURL = authService.configuration.privacyPolicyUrl {
