@@ -181,62 +181,45 @@ struct CustomViewExample: View {
   }
   
   private var authenticatedView: some View {
-    AuthPickerView {
-      VStack(spacing: 24) {
-        Spacer()
-        Image(systemName: "checkmark.circle.fill")
-          .font(.system(size: 80))
-          .foregroundStyle(.green)
+    VStack(spacing: 24) {
+      Spacer()
+      Image(systemName: "checkmark.circle.fill")
+        .font(.system(size: 80))
+        .foregroundStyle(.green)
+      
+      VStack(spacing: 8) {
+        Text("Signed In Successfully")
+          .font(.title)
+          .fontWeight(.bold)
         
-        VStack(spacing: 8) {
-          Text("Signed In Successfully")
-            .font(.title)
-            .fontWeight(.bold)
-          
-          if let email = authService.currentUser?.email {
-            Text(email)
-              .font(.body)
-              .foregroundColor(.secondary)
-          } else if let phoneNumber = authService.currentUser?.phoneNumber {
-            Text(phoneNumber)
-              .font(.body)
-              .foregroundColor(.secondary)
-          }
+        if let email = authService.currentUser?.email {
+          Text(email)
+            .font(.body)
+            .foregroundColor(.secondary)
+        } else if let phoneNumber = authService.currentUser?.phoneNumber {
+          Text(phoneNumber)
+            .font(.body)
+            .foregroundColor(.secondary)
         }
-        
-        VStack(spacing: 12) {
-          Button {
-            authService.isPresented = true
-          } label: {
-            Text("Manage Account")
-              .font(.body)
-              .fontWeight(.semibold)
-              .foregroundColor(.white)
-              .frame(maxWidth: .infinity)
-              .padding(.vertical, 14)
-              .background(Color.blue)
-              .cornerRadius(8)
-          }
-          
-          Button {
-            Task {
-              try? await authService.signOut()
-            }
-          } label: {
-            Text("Sign Out")
-              .font(.body)
-              .fontWeight(.semibold)
-              .foregroundColor(.red)
-              .frame(maxWidth: .infinity)
-              .padding(.vertical, 14)
-              .background(Color.red.opacity(0.1))
-              .cornerRadius(8)
-          }
-        }
-        .padding(.horizontal, 24)
-        
-        Spacer()
       }
+      
+      Button {
+        Task {
+          try? await authService.signOut()
+        }
+      } label: {
+        Text("Sign Out")
+          .font(.body)
+          .fontWeight(.semibold)
+          .foregroundColor(.red)
+          .frame(maxWidth: .infinity)
+          .padding(.vertical, 14)
+          .background(Color.red.opacity(0.1))
+          .cornerRadius(8)
+      }
+      .padding(.horizontal, 24)
+      
+      Spacer()
     }
   }
   

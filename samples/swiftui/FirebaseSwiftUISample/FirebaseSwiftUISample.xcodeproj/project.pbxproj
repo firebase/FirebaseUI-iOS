@@ -296,6 +296,7 @@
 				CODE_SIGN_ENTITLEMENTS = FirebaseSwiftUISample/FirebaseSwiftUISample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YYX2P3XVJ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FirebaseSwiftUISample/Info.plist;
@@ -331,6 +332,7 @@
 				CODE_SIGN_ENTITLEMENTS = FirebaseSwiftUISample/FirebaseSwiftUISample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YYX2P3XVJ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FirebaseSwiftUISample/Info.plist;
