@@ -4,16 +4,9 @@ target 'FirebaseUI-demo-objc' do
   use_frameworks!
 
   pod 'FirebaseUI', :path => '../../'
-  pod 'FirebaseAuthUI', :path => '../../'
   pod 'FirebaseDatabaseUI', :path => '../../'
   pod 'FirebaseFirestoreUI', :path => '../../'
-  pod 'FirebaseOAuthUI', :path => '../../'
-  pod 'FirebasePhoneAuthUI', :path => '../../'
-  pod 'FirebaseAnonymousAuthUI', :path => '../../'
-  pod 'FirebaseEmailAuthUI', :path => '../../'
-  pod 'FirebaseFacebookAuthUI', :path => '../../'
-  pod 'FirebaseGoogleAuthUI', :path => '../../'
   pod 'FirebaseStorageUI', :path => '../../'
-
-  pod 'Firebase/DynamicLinks'
+  
+  pod 'Firebase/Auth'  # For anonymous auth in Chat sample
 end

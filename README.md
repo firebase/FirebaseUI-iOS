@@ -1,10 +1,10 @@
 # FirebaseUI for iOS — UI Bindings for Firebase
 
-![Anonymous Auth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/anonymousauth.yml/badge.svg) ![Auth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/auth.yml/badge.svg) ![Database](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/database.yml/badge.svg) ![Email Auth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/emailauth.yml/badge.svg) ![Facebook Auth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/facebookauth.yml/badge.svg) ![Firestore](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/firestore.yml/badge.svg) ![Google Auth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/googleauth.yml/badge.svg) ![OAuth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/oauth.yml/badge.svg) ![Phone Auth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/phoneauth.yml/badge.svg) ![Storage](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/storage.yml/badge.svg) ![Samples](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/sample.yml/badge.svg)
+![Database](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/database.yml/badge.svg) ![Firestore](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/firestore.yml/badge.svg) ![Storage](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/storage.yml/badge.svg) ![SwiftUI Auth](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/swiftui-auth.yml/badge.svg) ![Samples](https://github.com/firebase/FirebaseUI-iOS/actions/workflows/sample.yml/badge.svg)
 
 FirebaseUI is an open-source library for iOS that allows you to quickly connect common UI elements to the [Firebase](https://firebase.google.com?utm_source=FirebaseUI-iOS) database for data storage, allowing views to be updated in realtime as they change, and providing simple interfaces for common tasks like displaying lists or collections of items.
 
-Additionally, FirebaseUI simplifies Firebase authentication by providing easy to use auth methods that integrate with common identity providers like Facebook, Twitter, and Google as well as allowing developers to use a built in headful UI for ease of development.
+Additionally, FirebaseUI provides modern SwiftUI authentication components that simplify Firebase authentication by integrating with common identity providers like Facebook, Twitter, Google, and Apple.
 
 FirebaseUI clients are also available for [Android](https://github.com/firebase/FirebaseUI-Android) and [web](https://github.com/firebase/firebaseui-web).
 
@@ -12,14 +12,26 @@ FirebaseUI clients are also available for [Android](https://github.com/firebase/
 
 ## Installing FirebaseUI for iOS
 
-FirebaseUI supports iOS 10.0+ and Xcode 11+. We recommend using [CocoaPods](https://cocoapods.org/pods/FirebaseUI), add
-the following to your `Podfile`:
+FirebaseUI supports iOS 17.0+ and Xcode 15+. 
 
-```ruby
-pod 'FirebaseUI', '~> 8.0'       # Pull in all Firebase UI features
-```
+### Swift Package Manager (Recommended)
 
-If you don't want to use all of FirebaseUI, there are multiple subspecs which can selectively install subsets of the full feature set:
+For SwiftUI authentication and modern features, use Swift Package Manager:
+
+1. In Xcode, go to File > Add Package Dependencies
+2. Enter the repository URL: `https://github.com/firebase/FirebaseUI-iOS`
+3. Select the modules you need:
+   - `FirebaseAuthSwiftUI` - Core SwiftUI authentication
+   - `FirebaseGoogleSwiftUI` - Google Sign-In
+   - `FirebaseFacebookSwiftUI` - Facebook Login
+   - `FirebasePhoneAuthSwiftUI` - Phone Authentication
+   - `FirebaseAppleSwiftUI` - Sign in with Apple
+   - `FirebaseTwitterSwiftUI` - Twitter Login
+   - `FirebaseOAuthSwiftUI` - Generic OAuth providers
+
+### CocoaPods
+
+For UIKit data binding features (Database, Firestore, Storage), use [CocoaPods](https://cocoapods.org/pods/FirebaseUI):
 
 ```ruby
 # Only pull in Firestore features
@@ -30,97 +42,71 @@ pod 'FirebaseUI/Database'
 
 # Only pull in Storage features
 pod 'FirebaseUI/Storage'
-
-# Only pull in Auth features
-pod 'FirebaseUI/Auth'
-
-# Only pull in Facebook login features
-pod 'FirebaseUI/Facebook'
-
-# Only pull in Google login features
-pod 'FirebaseUI/Google'
-
-# Only pull in Phone Auth login features
-pod 'FirebaseUI/Phone'
 ```
 
-If you're including FirebaseUI in a Swift project, make sure you also have:
+If you're including FirebaseUI in a project, make sure you also have:
 
 ```ruby
 platform :ios, '13.0'
 use_frameworks!
 ```
 
-Otherwise, you can include the FirebaseUI Xcode project from this repo in
-your project. You also need to 
-[add the Firebase framework](https://firebase.google.com/docs/ios/setup) 
-to your project.
-
 ## Documentation
 
-The READMEs for components of FirebaseUI can be found in their respective
-project folders.
+The READMEs for components of FirebaseUI can be found in their respective project folders.
 
-- [Auth](FirebaseAuthUI/README.md)
-- [PhoneAuth](FirebasePhoneAuthUI/README.md)
+### SwiftUI Components
+- [SwiftUI Authentication](FirebaseSwiftUI/README.md)
+
+### UIKit Data Binding Components
 - [Database](FirebaseDatabaseUI/README.md)
 - [Firestore](FirebaseFirestoreUI/README.md)
 - [Storage](FirebaseStorageUI/README.md)
 
 ## Local Setup
 
-If you'd like to contribute to FirebaseUI for iOS, you'll need to run the
-following commands to get your environment set up:
+If you'd like to contribute to FirebaseUI for iOS, you'll need to run the following commands to get your environment set up:
 
 ```bash
 $ git clone https://github.com/firebase/FirebaseUI-iOS.git
 $ cd FirebaseUI-iOS
-$ cd Auth # or PhoneAuth, Database, etc
+
+# For SwiftUI components (uses Swift Package Manager)
+$ cd samples/swiftui/FirebaseSwiftUISample
+$ open FirebaseSwiftUISample.xcodeproj
+
+# For UIKit data binding components (uses CocoaPods)
+$ cd FirebaseDatabaseUI # or FirebaseFirestoreUI, FirebaseStorageUI
 $ pod install
 ```
 
-Alternatively you can use `pod try FirebaseUI` to install the Objective-C or Swift sample projects.
+## Sample Projects
 
-## Sample Project Configuration
+FirebaseUI includes several sample projects demonstrating different features:
 
-You'll have to configure your Xcode project in order to run the samples.
+### SwiftUI Authentication Sample
 
-1. Your Xcode project should contain a `GoogleService-Info.plist`, downloaded from [Firebase console](https://console.firebase.google.com) when you add your app to a Firebase project.<br>
-Copy the `GoogleService-Info.plist` into the sample project folder (`samples/obj-c/GoogleService-Info.plist` or `samples/swift/GoogleService-Info.plist`).
+Located in `samples/swiftui/FirebaseSwiftUISample/`, this sample demonstrates the modern SwiftUI authentication components.
 
-1. Update URL Types.<br>
-Go to `Project Settings -> Info tab -> Url Types` and update values for:
-	+ `REVERSED_CLIENT_ID` (get value from `GoogleService-Info.plist`)
-	+ `fb{your-app-id}` (put Facebook App Id)
+**Configuration:**
+1. Download `GoogleService-Info.plist` from [Firebase Console](https://console.firebase.google.com)
+2. Copy it to the sample project folder
+3. Update URL Types (for OAuth providers) in `Project Settings -> Info tab -> Url Types`:
+   - `REVERSED_CLIENT_ID` (from `GoogleService-Info.plist`) - Required for Google Sign-In
+   - `fb{your-app-id}` - Required for Facebook Login
+4. For Facebook Login, update `Info.plist` with `FacebookAppID` and enable Keychain Sharing
 
-1. Update `Info.plist` with Facebook configuration values
-	+ `FacebookAppID -> {your-app-id}` (put Facebook App Id)
+### UIKit Database & Storage Samples
 
-1. Enable Keychain Sharing.<br>
-Facebook SDK requires keychain sharing.<br>
-This can be done here: `Project Settings -> Capabilities -> KeyChain Sharing -> ON`
+Located in `samples/objc/` and `samples/swift/`, these samples demonstrate FirebaseUI's data binding capabilities for Realtime Database and Storage.
 
-1. Don't forget to configure your Firebase App Database using [Firebase console](https://console.firebase.google.com).<br>
-Database should contain appropriate read/write permissions and folders (`objc_demo-chat` and `swift_demo-chat` respectively)
-
-1. In Order to use `Phone Auth` provider you should [Configure Push Notifications](#configure-apple-push-notifications)
-
-#### Configure Apple Push Notifications
-
-##### Enable silent push notifications in Xcode
-
-  * `Push Notification` - Under `Capabilities` tab in your app target choose `Push Notifications` and put the switch to the `On` position.
-  * `Background Mode` - Under `Capabilities` tab in your app target choose `Background Modes` put the switch to the `On` position.  In the list of available modes select `Background fetch` and `Remote notifications` (If available).
-
-##### Upload APNS Certificate to Firebase
-
-1. Create your `Provisioning APNS SSL Certificates` by following the steps on the following link.
-https://firebase.google.com/docs/cloud-messaging/ios/certs
-
-1. Upload your `APNS Certificate` to Firebase:
-    + Inside your project in the Firebase console, select the gear icon, select `Project Settings`, and then select the `Cloud Messaging` tab.
-    + Select the `Upload Certificate` button for your development certificate, your production certificate, or both. At least one is required.
-    + For each certificate, select the `.p12 file`, and provide the password, if any. Make sure the `bundle ID` for this certificate matches the `bundle ID` of your app. Select `Save`.
+**Configuration:**
+1. Download `GoogleService-Info.plist` from [Firebase Console](https://console.firebase.google.com)
+2. Copy it to `samples/objc/GoogleService-Info.plist` or `samples/swift/GoogleService-Info.plist`
+3. Run `pod install` in the sample directory
+4. Configure your Firebase Database and Storage in the Firebase Console
+5. For the Chat sample, enable anonymous authentication in Firebase Console
+6. For the Storage sample, configure appropriate [Storage Security Rules](https://firebase.google.com/docs/storage/security/start#sample-rules)
 
 ## Contributing to FirebaseUI
 

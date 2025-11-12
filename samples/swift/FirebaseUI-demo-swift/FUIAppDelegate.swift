@@ -15,11 +15,7 @@
 //
 
 import UIKit
-import FBSDKCoreKit
 import FirebaseCore
-import FirebaseAuth
-import FirebaseAuthUI
-import GTMSessionFetcher
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,40 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Successfully running this sample requires an app in Firebase and an
     // accompanying valid GoogleService-Info.plist file.
     FirebaseApp.configure()
-    GTMSessionFetcher.setLoggingEnabled(true)
-    ApplicationDelegate.shared.application(
-        application,
-        didFinishLaunchingWithOptions: launchOptions
-    )
     return true
-  }
-  
-  @available(iOS 9.0, *)
-  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-    ApplicationDelegate.shared.application(
-        app,
-        open: url,
-        sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-        annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-    )
-    let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?
-    return self.handleOpenUrl(url, sourceApplication: sourceApplication)
-  }
-
-  @available(iOS 8.0, *)
-  func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-    return self.handleOpenUrl(url, sourceApplication: sourceApplication)
-  }
-
-
-  func handleOpenUrl(_ url: URL, sourceApplication: String?) -> Bool {
-    // [START handle_open_url]
-    if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
-      return true
-    }
-    // other URL handling goes here.
-    return false
-    // [END handle_open_url]
   }
 
 }
