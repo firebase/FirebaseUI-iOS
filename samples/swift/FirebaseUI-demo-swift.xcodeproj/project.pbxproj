@@ -1,0 +1,1055 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4617B75BF5701E48387F35F6 /* Pods_FirebaseUI_demo_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25F197CFBB06559F4B537E37 /* Pods_FirebaseUI_demo_swift.framework */; };
+		6096FEF87E5B53C0792BC146 /* Pods_FirebaseUI_demo_swiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637019691D9C301621749DE1 /* Pods_FirebaseUI_demo_swiftTests.framework */; };
+		89B2924722568B1C00CEF7D7 /* twtrsymbol.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B2924622568B1C00CEF7D7 /* twtrsymbol.png */; };
+		8D5F93B01D9B192D00D5A2E4 /* StorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F93AF1D9B192D00D5A2E4 /* StorageViewController.swift */; };
+		8DABC9891D3D82D600453807 /* FUIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9881D3D82D600453807 /* FUIAppDelegate.swift */; };
+		8DABC9901D3D82D600453807 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DABC98F1D3D82D600453807 /* Assets.xcassets */; };
+		8DABC99E1D3D82D600453807 /* FirebaseUI-demo-swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC99D1D3D82D600453807 /* FirebaseUI-demo-swiftTests.swift */; };
+		8DD51E371D873B0D00E2CA51 /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD51E361D873B0D00E2CA51 /* UIStoryboardExtension.swift */; };
+		C302C1DC1D91CC7B00ADBD41 /* FUIAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D51D91CC7B00ADBD41 /* FUIAuthViewController.swift */; };
+		C302C1DD1D91CC7B00ADBD41 /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D71D91CC7B00ADBD41 /* ChatCollectionViewCell.swift */; };
+		C302C1DE1D91CC7B00ADBD41 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D81D91CC7B00ADBD41 /* ChatViewController.swift */; };
+		C302C1DF1D91CC7B00ADBD41 /* SamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D91D91CC7B00ADBD41 /* SamplesViewController.swift */; };
+		C302C1E01D91CC7B00ADBD41 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1DA1D91CC7B00ADBD41 /* Sample.swift */; };
+		C302C1E11D91CC7B00ADBD41 /* SampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1DB1D91CC7B00ADBD41 /* SampleCell.swift */; };
+		C30E94291EF8800D00F032B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30E94261EF8800D00F032B1 /* LaunchScreen.storyboard */; };
+		C30E942B1EF8800D00F032B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30E94281EF8800D00F032B1 /* Main.storyboard */; };
+		C30E942C1EF8801500F032B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C30E942E1EF8801500F032B1 /* Localizable.strings */; };
+		C39833AD1DB7ECB300D257EF /* FUICustomAuthUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39833AC1DB7ECB300D257EF /* FUICustomAuthUIDelegate.swift */; };
+		C39BC03D1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC03B1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.swift */; };
+		C39BC03E1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC03C1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.xib */; };
+		C39BC0411DB811630060F6AF /* FUICustomEmailEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC03F1DB811630060F6AF /* FUICustomEmailEntryViewController.swift */; };
+		C39BC0421DB811630060F6AF /* FUICustomEmailEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC0401DB811630060F6AF /* FUICustomEmailEntryViewController.xib */; };
+		C39BC0451DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC0431DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.swift */; };
+		C39BC0461DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC0441DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.xib */; };
+		C39BC0491DB812030060F6AF /* FUICustomPasswordSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC0471DB812030060F6AF /* FUICustomPasswordSignInViewController.swift */; };
+		C39BC04A1DB812030060F6AF /* FUICustomPasswordSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC0481DB812030060F6AF /* FUICustomPasswordSignInViewController.xib */; };
+		C39BC04D1DB812190060F6AF /* FUICustomPasswordSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC04B1DB812190060F6AF /* FUICustomPasswordSignUpViewController.swift */; };
+		C39BC04E1DB812190060F6AF /* FUICustomPasswordSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC04C1DB812190060F6AF /* FUICustomPasswordSignUpViewController.xib */; };
+		C39BC0511DB812330060F6AF /* FUICustomPasswordVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC04F1DB812330060F6AF /* FUICustomPasswordVerificationViewController.swift */; };
+		C39BC0521DB812330060F6AF /* FUICustomPasswordVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC0501DB812330060F6AF /* FUICustomPasswordVerificationViewController.xib */; };
+		C3F23ECD1D80F3300020509F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3F23ECC1D80F3300020509F /* GoogleService-Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8DABC99A1D3D82D600453807 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DABC97D1D3D82D600453807 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DABC9841D3D82D600453807;
+			remoteInfo = "FirebaseUI-demo-swift";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		25F197CFBB06559F4B537E37 /* Pods_FirebaseUI_demo_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseUI_demo_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		637019691D9C301621749DE1 /* Pods_FirebaseUI_demo_swiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseUI_demo_swiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F5993EFB11CBA0003C0DE94 /* Pods-FirebaseUI-demo-swiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUI-demo-swiftTests.release.xcconfig"; path = "Target Support Files/Pods-FirebaseUI-demo-swiftTests/Pods-FirebaseUI-demo-swiftTests.release.xcconfig"; sourceTree = "<group>"; };
+		89B2924622568B1C00CEF7D7 /* twtrsymbol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twtrsymbol.png; sourceTree = "<group>"; };
+		8D5F93AF1D9B192D00D5A2E4 /* StorageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageViewController.swift; sourceTree = "<group>"; };
+		8DABC9851D3D82D600453807 /* FirebaseUI-demo-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FirebaseUI-demo-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DABC9881D3D82D600453807 /* FUIAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FUIAppDelegate.swift; sourceTree = "<group>"; };
+		8DABC98F1D3D82D600453807 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8DABC9941D3D82D600453807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DABC9991D3D82D600453807 /* FirebaseUI-demo-swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FirebaseUI-demo-swiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DABC99D1D3D82D600453807 /* FirebaseUI-demo-swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseUI-demo-swiftTests.swift"; sourceTree = "<group>"; };
+		8DABC99F1D3D82D600453807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DD51E361D873B0D00E2CA51 /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
+		8E009A2D4461F77B9CEB0C4D /* Pods-FirebaseUI-demo-swiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUI-demo-swiftTests.debug.xcconfig"; path = "Target Support Files/Pods-FirebaseUI-demo-swiftTests/Pods-FirebaseUI-demo-swiftTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A885F4D8D84B72ADACBE725B /* Pods-FirebaseUI-demo-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUI-demo-swift.release.xcconfig"; path = "Target Support Files/Pods-FirebaseUI-demo-swift/Pods-FirebaseUI-demo-swift.release.xcconfig"; sourceTree = "<group>"; };
+		C302C1D51D91CC7B00ADBD41 /* FUIAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUIAuthViewController.swift; sourceTree = "<group>"; };
+		C302C1D71D91CC7B00ADBD41 /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
+		C302C1D81D91CC7B00ADBD41 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		C302C1D91D91CC7B00ADBD41 /* SamplesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesViewController.swift; sourceTree = "<group>"; };
+		C302C1DA1D91CC7B00ADBD41 /* Sample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
+		C302C1DB1D91CC7B00ADBD41 /* SampleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleCell.swift; sourceTree = "<group>"; };
+		C30E94261EF8800D00F032B1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C30E94281EF8800D00F032B1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C30E942D1EF8801500F032B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E942F1EF8803500F032B1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94301EF8805100F032B1 /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = bn.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94311EF8805F00F032B1 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94321EF8806D00F032B1 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94331EF8808100F032B1 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94341EF8808800F032B1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94351EF8808E00F032B1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94361EF8809C00F032B1 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94371EF880A400F032B1 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94381EF880AC00F032B1 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94391EF880B200F032B1 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E943A1EF880CC00F032B1 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E943B1EF880E600F032B1 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E943C1EF880FC00F032B1 /* en-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-CA"; path = "en-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E943D1EF8811200F032B1 /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "en-IN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E943E1EF8813B00F032B1 /* en-IE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IE"; path = "en-IE.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E943F1EF8814C00F032B1 /* en-SG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-SG"; path = "en-SG.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94401EF8815F00F032B1 /* en-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-ZA"; path = "en-ZA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94411EF8816E00F032B1 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94421EF8817E00F032B1 /* fil */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fil; path = fil.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94431EF8818B00F032B1 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94441EF8819100F032B1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94451EF8819C00F032B1 /* fr-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CH"; path = "fr-CH.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94461EF881A500F032B1 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94471EF881B100F032B1 /* de-AT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-AT"; path = "de-AT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94481EF881BB00F032B1 /* de-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-CH"; path = "de-CH.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94491EF881C100F032B1 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E944A1EF881CD00F032B1 /* gu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gu; path = gu.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E944B1EF881DC00F032B1 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E944C1EF881E700F032B1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E944D1EF881F500F032B1 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E944E1EF881FF00F032B1 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E944F1EF8820600F032B1 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94501EF8820B00F032B1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94511EF8821300F032B1 /* kn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kn; path = kn.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94521EF8821A00F032B1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94531EF8822800F032B1 /* lv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lv; path = lv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94541EF8822F00F032B1 /* ln */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ln; path = ln.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94551EF8823800F032B1 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94561EF8824000F032B1 /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = ms.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94571EF8824A00F032B1 /* mr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = mr; path = mr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94581EF8825500F032B1 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94591EF8827100F032B1 /* nn-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nn-NO"; path = "nn-NO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E945A1EF8827C00F032B1 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E945B1EF8828500F032B1 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E945C1EF8829700F032B1 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E945D1EF8829F00F032B1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E945E1EF882A300F032B1 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E945F1EF882AB00F032B1 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94601EF882B200F032B1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94611EF882C000F032B1 /* sr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sr; path = sr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94621EF882D400F032B1 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94631EF882ED00F032B1 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94641EF882F800F032B1 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94651EF8830000F032B1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94661EF8830C00F032B1 /* es-AR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-AR"; path = "es-AR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94671EF8831700F032B1 /* es-BO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-BO"; path = "es-BO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94681EF8832100F032B1 /* es-CL */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CL"; path = "es-CL.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94691EF8832C00F032B1 /* es-CO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CO"; path = "es-CO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E946A1EF8833C00F032B1 /* es-CR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CR"; path = "es-CR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E946B1EF8834800F032B1 /* es-DO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-DO"; path = "es-DO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E946C1EF8835300F032B1 /* es-EC */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-EC"; path = "es-EC.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E946D1EF8835E00F032B1 /* es-SV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-SV"; path = "es-SV.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E946E1EF8836A00F032B1 /* es-GT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-GT"; path = "es-GT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E946F1EF8837400F032B1 /* es-HN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-HN"; path = "es-HN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94701EF8837B00F032B1 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94711EF8838100F032B1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94721EF8838A00F032B1 /* es-NI */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-NI"; path = "es-NI.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94731EF8839400F032B1 /* es-PA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PA"; path = "es-PA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94741EF8839E00F032B1 /* es-PE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PE"; path = "es-PE.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94751EF883AA00F032B1 /* es-PR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PR"; path = "es-PR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94761EF883B500F032B1 /* es-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-US"; path = "es-US.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94771EF883C300F032B1 /* es-UY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-UY"; path = "es-UY.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94781EF883CD00F032B1 /* es-VE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-VE"; path = "es-VE.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30E94791EF883D500F032B1 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E947A1EF883E100F032B1 /* gsw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gsw; path = gsw.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E947B1EF883EE00F032B1 /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E947C1EF883F500F032B1 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E947D1EF883F900F032B1 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E947E1EF883FD00F032B1 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E947F1EF8840600F032B1 /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = ur.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94801EF8840900F032B1 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E94811EF884E400F032B1 /* es-PY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PY"; path = "es-PY.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C383C4531EE742D4002A4204 /* FirebaseUI-demo-swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "FirebaseUI-demo-swift.entitlements"; sourceTree = "<group>"; };
+		C39833AC1DB7ECB300D257EF /* FUICustomAuthUIDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomAuthUIDelegate.swift; sourceTree = "<group>"; };
+		C39BC03B1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomAuthPickerViewController.swift; sourceTree = "<group>"; };
+		C39BC03C1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomAuthPickerViewController.xib; sourceTree = "<group>"; };
+		C39BC03F1DB811630060F6AF /* FUICustomEmailEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomEmailEntryViewController.swift; sourceTree = "<group>"; };
+		C39BC0401DB811630060F6AF /* FUICustomEmailEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomEmailEntryViewController.xib; sourceTree = "<group>"; };
+		C39BC0431DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomPasswordRecoveryViewController.swift; sourceTree = "<group>"; };
+		C39BC0441DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordRecoveryViewController.xib; sourceTree = "<group>"; };
+		C39BC0471DB812030060F6AF /* FUICustomPasswordSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomPasswordSignInViewController.swift; sourceTree = "<group>"; };
+		C39BC0481DB812030060F6AF /* FUICustomPasswordSignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordSignInViewController.xib; sourceTree = "<group>"; };
+		C39BC04B1DB812190060F6AF /* FUICustomPasswordSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomPasswordSignUpViewController.swift; sourceTree = "<group>"; };
+		C39BC04C1DB812190060F6AF /* FUICustomPasswordSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordSignUpViewController.xib; sourceTree = "<group>"; };
+		C39BC04F1DB812330060F6AF /* FUICustomPasswordVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomPasswordVerificationViewController.swift; sourceTree = "<group>"; };
+		C39BC0501DB812330060F6AF /* FUICustomPasswordVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordVerificationViewController.xib; sourceTree = "<group>"; };
+		C3F23ECC1D80F3300020509F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DB206ACE5B8C8DC3A2E47E00 /* Pods-FirebaseUI-demo-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseUI-demo-swift.debug.xcconfig"; path = "Target Support Files/Pods-FirebaseUI-demo-swift/Pods-FirebaseUI-demo-swift.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DABC9821D3D82D600453807 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4617B75BF5701E48387F35F6 /* Pods_FirebaseUI_demo_swift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DABC9961D3D82D600453807 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6096FEF87E5B53C0792BC146 /* Pods_FirebaseUI_demo_swiftTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8D5F93B11D9B193C00D5A2E4 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				8D5F93AF1D9B192D00D5A2E4 /* StorageViewController.swift */,
+			);
+			name = Storage;
+			sourceTree = "<group>";
+		};
+		8DABC97C1D3D82D600453807 = {
+			isa = PBXGroup;
+			children = (
+				C3F23ECC1D80F3300020509F /* GoogleService-Info.plist */,
+				8DABC9871D3D82D600453807 /* FirebaseUI-demo-swift */,
+				8DABC99C1D3D82D600453807 /* FirebaseUI-demo-swiftTests */,
+				8DABC9861D3D82D600453807 /* Products */,
+				9C43BF8CA810E7C909775084 /* Pods */,
+				C129AF2D5B3F8906D7A96042 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8DABC9861D3D82D600453807 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DABC9851D3D82D600453807 /* FirebaseUI-demo-swift.app */,
+				8DABC9991D3D82D600453807 /* FirebaseUI-demo-swiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8DABC9871D3D82D600453807 /* FirebaseUI-demo-swift */ = {
+			isa = PBXGroup;
+			children = (
+				C383C4531EE742D4002A4204 /* FirebaseUI-demo-swift.entitlements */,
+				8DABC9881D3D82D600453807 /* FUIAppDelegate.swift */,
+				8DD51E361D873B0D00E2CA51 /* UIStoryboardExtension.swift */,
+				C302C1D31D91CC7B00ADBD41 /* Samples */,
+				8DABC98F1D3D82D600453807 /* Assets.xcassets */,
+				8DABC9941D3D82D600453807 /* Info.plist */,
+				C30E94251EF8800D00F032B1 /* Resources */,
+			);
+			path = "FirebaseUI-demo-swift";
+			sourceTree = "<group>";
+		};
+		8DABC99C1D3D82D600453807 /* FirebaseUI-demo-swiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				8DABC99D1D3D82D600453807 /* FirebaseUI-demo-swiftTests.swift */,
+				8DABC99F1D3D82D600453807 /* Info.plist */,
+			);
+			path = "FirebaseUI-demo-swiftTests";
+			sourceTree = "<group>";
+		};
+		9C43BF8CA810E7C909775084 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DB206ACE5B8C8DC3A2E47E00 /* Pods-FirebaseUI-demo-swift.debug.xcconfig */,
+				A885F4D8D84B72ADACBE725B /* Pods-FirebaseUI-demo-swift.release.xcconfig */,
+				8E009A2D4461F77B9CEB0C4D /* Pods-FirebaseUI-demo-swiftTests.debug.xcconfig */,
+				6F5993EFB11CBA0003C0DE94 /* Pods-FirebaseUI-demo-swiftTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C129AF2D5B3F8906D7A96042 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				25F197CFBB06559F4B537E37 /* Pods_FirebaseUI_demo_swift.framework */,
+				637019691D9C301621749DE1 /* Pods_FirebaseUI_demo_swiftTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C302C1D31D91CC7B00ADBD41 /* Samples */ = {
+			isa = PBXGroup;
+			children = (
+				C302C1D41D91CC7B00ADBD41 /* Auth */,
+				C302C1D61D91CC7B00ADBD41 /* Chat */,
+				8D5F93B11D9B193C00D5A2E4 /* Storage */,
+				C302C1D91D91CC7B00ADBD41 /* SamplesViewController.swift */,
+				C302C1DA1D91CC7B00ADBD41 /* Sample.swift */,
+				C302C1DB1D91CC7B00ADBD41 /* SampleCell.swift */,
+			);
+			path = Samples;
+			sourceTree = "<group>";
+		};
+		C302C1D41D91CC7B00ADBD41 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				C302C1D51D91CC7B00ADBD41 /* FUIAuthViewController.swift */,
+				C39833AC1DB7ECB300D257EF /* FUICustomAuthUIDelegate.swift */,
+				C39BC03B1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.swift */,
+				C39BC03C1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.xib */,
+				C39BC03F1DB811630060F6AF /* FUICustomEmailEntryViewController.swift */,
+				C39BC0401DB811630060F6AF /* FUICustomEmailEntryViewController.xib */,
+				C39BC0431DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.swift */,
+				C39BC0441DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.xib */,
+				C39BC0471DB812030060F6AF /* FUICustomPasswordSignInViewController.swift */,
+				C39BC0481DB812030060F6AF /* FUICustomPasswordSignInViewController.xib */,
+				C39BC04B1DB812190060F6AF /* FUICustomPasswordSignUpViewController.swift */,
+				C39BC04C1DB812190060F6AF /* FUICustomPasswordSignUpViewController.xib */,
+				C39BC04F1DB812330060F6AF /* FUICustomPasswordVerificationViewController.swift */,
+				C39BC0501DB812330060F6AF /* FUICustomPasswordVerificationViewController.xib */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		C302C1D61D91CC7B00ADBD41 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				C302C1D71D91CC7B00ADBD41 /* ChatCollectionViewCell.swift */,
+				C302C1D81D91CC7B00ADBD41 /* ChatViewController.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		C30E94251EF8800D00F032B1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				89B2924622568B1C00CEF7D7 /* twtrsymbol.png */,
+				C30E94261EF8800D00F032B1 /* LaunchScreen.storyboard */,
+				C30E942E1EF8801500F032B1 /* Localizable.strings */,
+				C30E94281EF8800D00F032B1 /* Main.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DABC9841D3D82D600453807 /* FirebaseUI-demo-swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DABC9A21D3D82D600453807 /* Build configuration list for PBXNativeTarget "FirebaseUI-demo-swift" */;
+			buildPhases = (
+				3D86CE81C1F8711347A14B72 /* [CP] Check Pods Manifest.lock */,
+				8DABC9811D3D82D600453807 /* Sources */,
+				8DABC9821D3D82D600453807 /* Frameworks */,
+				8DABC9831D3D82D600453807 /* Resources */,
+				04D211F7D3B42A6D19A9E000 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FirebaseUI-demo-swift";
+			productName = "FirebaseUI-demo-swift";
+			productReference = 8DABC9851D3D82D600453807 /* FirebaseUI-demo-swift.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8DABC9981D3D82D600453807 /* FirebaseUI-demo-swiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DABC9A51D3D82D600453807 /* Build configuration list for PBXNativeTarget "FirebaseUI-demo-swiftTests" */;
+			buildPhases = (
+				94F892B9CDD1C2428D7F724B /* [CP] Check Pods Manifest.lock */,
+				8DABC9951D3D82D600453807 /* Sources */,
+				8DABC9961D3D82D600453807 /* Frameworks */,
+				8DABC9971D3D82D600453807 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8DABC99B1D3D82D600453807 /* PBXTargetDependency */,
+			);
+			name = "FirebaseUI-demo-swiftTests";
+			productName = "FirebaseUI-demo-swiftTests";
+			productReference = 8DABC9991D3D82D600453807 /* FirebaseUI-demo-swiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8DABC97D1D3D82D600453807 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 1230;
+				ORGANIZATIONNAME = "Firebase, Inc.";
+				TargetAttributes = {
+					8DABC9841D3D82D600453807 = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 1020;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+					8DABC9981D3D82D600453807 = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 1020;
+						TestTargetID = 8DABC9841D3D82D600453807;
+					};
+				};
+			};
+			buildConfigurationList = 8DABC9801D3D82D600453807 /* Build configuration list for PBXProject "FirebaseUI-demo-swift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ar,
+				bn,
+				bg,
+				ca,
+				zh,
+				"zh-Hans",
+				"zh-Hant",
+				"zh-Hant-TW",
+				hr,
+				cs,
+				da,
+				nl,
+				"en-AU",
+				"en-CA",
+				"en-IN",
+				"en-IE",
+				"en-SG",
+				"en-ZA",
+				"en-GB",
+				fil,
+				fi,
+				fr,
+				"fr-CH",
+				de,
+				"de-AT",
+				"de-CH",
+				el,
+				gu,
+				he,
+				hi,
+				hu,
+				id,
+				it,
+				ja,
+				kn,
+				ko,
+				lv,
+				ln,
+				lt,
+				ms,
+				mr,
+				nb,
+				"nn-NO",
+				fa,
+				pl,
+				pt,
+				"pt-BR",
+				"pt-PT",
+				ro,
+				ru,
+				sr,
+				"sr-Latn",
+				sk,
+				sl,
+				es,
+				"es-AR",
+				"es-BO",
+				"es-CL",
+				"es-CO",
+				"es-CR",
+				"es-DO",
+				"es-EC",
+				"es-SV",
+				"es-GT",
+				"es-HN",
+				"es-419",
+				"es-MX",
+				"es-NI",
+				"es-PA",
+				"es-PE",
+				"es-PR",
+				"es-US",
+				"es-UY",
+				"es-VE",
+				sv,
+				gsw,
+				ta,
+				th,
+				tr,
+				uk,
+				ur,
+				vi,
+				"es-PY",
+			);
+			mainGroup = 8DABC97C1D3D82D600453807;
+			productRefGroup = 8DABC9861D3D82D600453807 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DABC9841D3D82D600453807 /* FirebaseUI-demo-swift */,
+				8DABC9981D3D82D600453807 /* FirebaseUI-demo-swiftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8DABC9831D3D82D600453807 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C30E94291EF8800D00F032B1 /* LaunchScreen.storyboard in Resources */,
+				C39BC04A1DB812030060F6AF /* FUICustomPasswordSignInViewController.xib in Resources */,
+				C39BC03E1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.xib in Resources */,
+				C3F23ECD1D80F3300020509F /* GoogleService-Info.plist in Resources */,
+				89B2924722568B1C00CEF7D7 /* twtrsymbol.png in Resources */,
+				C39BC0421DB811630060F6AF /* FUICustomEmailEntryViewController.xib in Resources */,
+				C30E942B1EF8800D00F032B1 /* Main.storyboard in Resources */,
+				C30E942C1EF8801500F032B1 /* Localizable.strings in Resources */,
+				8DABC9901D3D82D600453807 /* Assets.xcassets in Resources */,
+				C39BC04E1DB812190060F6AF /* FUICustomPasswordSignUpViewController.xib in Resources */,
+				C39BC0461DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.xib in Resources */,
+				C39BC0521DB812330060F6AF /* FUICustomPasswordVerificationViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DABC9971D3D82D600453807 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		04D211F7D3B42A6D19A9E000 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirebaseUI-demo-swift/Pods-FirebaseUI-demo-swift-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/AppCheckCore/AppCheckCore.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseAnonymousAuthUI/FirebaseAnonymousAuthUI.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseAppCheckInterop/FirebaseAppCheckInterop.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseAuthInterop/FirebaseAuthInterop.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseAuthUI/FirebaseAuthUI.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCoreExtension/FirebaseCoreExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseDatabase/FirebaseDatabase.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseDatabaseUI/FirebaseDatabaseUI.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseEmailAuthUI/FirebaseEmailAuthUI.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseFacebookAuthUI/FirebaseFacebookAuthUI.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseFirestore/FirebaseFirestore.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseFirestoreInternal/FirebaseFirestoreInternal.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseFirestoreUI/FirebaseFirestoreUI.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseGoogleAuthUI/FirebaseGoogleAuthUI.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseOAuthUI/FirebaseOAuthUI.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebasePhoneAuthUI/FirebasePhoneAuthUI.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseSharedSwift/FirebaseSharedSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseStorage/FirebaseStorage.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseStorageUI/FirebaseStorageUI.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleSignIn/GoogleSignIn.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/RecaptchaInterop/RecaptchaInterop.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/abseil/absl.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBAEMKit/FBAEMKit.framework/FBAEMKit",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework/FBSDKCoreKit",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit_Basics/FBSDKCoreKit_Basics.framework/FBSDKCoreKit_Basics",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework/FBSDKLoginKit",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppCheckCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAnonymousAuthUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAppCheckInterop.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuthInterop.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuthUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreInternal.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseDatabase.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseDatabaseUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseEmailAuthUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseFacebookAuthUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseFirestore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseFirestoreInternal.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseFirestoreUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseGoogleAuthUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseOAuthUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebasePhoneAuthUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseSharedSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseStorage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseStorageUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleSignIn.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RecaptchaInterop.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/absl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBAEMKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit_Basics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirebaseUI-demo-swift/Pods-FirebaseUI-demo-swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3D86CE81C1F8711347A14B72 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirebaseUI-demo-swift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94F892B9CDD1C2428D7F724B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirebaseUI-demo-swiftTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DABC9811D3D82D600453807 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DD51E371D873B0D00E2CA51 /* UIStoryboardExtension.swift in Sources */,
+				C302C1DF1D91CC7B00ADBD41 /* SamplesViewController.swift in Sources */,
+				C302C1DC1D91CC7B00ADBD41 /* FUIAuthViewController.swift in Sources */,
+				C39BC0451DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.swift in Sources */,
+				C39BC03D1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.swift in Sources */,
+				8D5F93B01D9B192D00D5A2E4 /* StorageViewController.swift in Sources */,
+				C39BC0491DB812030060F6AF /* FUICustomPasswordSignInViewController.swift in Sources */,
+				C39BC04D1DB812190060F6AF /* FUICustomPasswordSignUpViewController.swift in Sources */,
+				C302C1DD1D91CC7B00ADBD41 /* ChatCollectionViewCell.swift in Sources */,
+				C302C1DE1D91CC7B00ADBD41 /* ChatViewController.swift in Sources */,
+				C39BC0411DB811630060F6AF /* FUICustomEmailEntryViewController.swift in Sources */,
+				C302C1E11D91CC7B00ADBD41 /* SampleCell.swift in Sources */,
+				C302C1E01D91CC7B00ADBD41 /* Sample.swift in Sources */,
+				C39BC0511DB812330060F6AF /* FUICustomPasswordVerificationViewController.swift in Sources */,
+				8DABC9891D3D82D600453807 /* FUIAppDelegate.swift in Sources */,
+				C39833AD1DB7ECB300D257EF /* FUICustomAuthUIDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DABC9951D3D82D600453807 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DABC99E1D3D82D600453807 /* FirebaseUI-demo-swiftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8DABC99B1D3D82D600453807 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DABC9841D3D82D600453807 /* FirebaseUI-demo-swift */;
+			targetProxy = 8DABC99A1D3D82D600453807 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C30E942E1EF8801500F032B1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C30E942D1EF8801500F032B1 /* en */,
+				C30E942F1EF8803500F032B1 /* ar */,
+				C30E94301EF8805100F032B1 /* bn */,
+				C30E94311EF8805F00F032B1 /* bg */,
+				C30E94321EF8806D00F032B1 /* ca */,
+				C30E94331EF8808100F032B1 /* zh */,
+				C30E94341EF8808800F032B1 /* zh-Hans */,
+				C30E94351EF8808E00F032B1 /* zh-Hant */,
+				C30E94361EF8809C00F032B1 /* zh-Hant-TW */,
+				C30E94371EF880A400F032B1 /* hr */,
+				C30E94381EF880AC00F032B1 /* cs */,
+				C30E94391EF880B200F032B1 /* da */,
+				C30E943A1EF880CC00F032B1 /* nl */,
+				C30E943B1EF880E600F032B1 /* en-AU */,
+				C30E943C1EF880FC00F032B1 /* en-CA */,
+				C30E943D1EF8811200F032B1 /* en-IN */,
+				C30E943E1EF8813B00F032B1 /* en-IE */,
+				C30E943F1EF8814C00F032B1 /* en-SG */,
+				C30E94401EF8815F00F032B1 /* en-ZA */,
+				C30E94411EF8816E00F032B1 /* en-GB */,
+				C30E94421EF8817E00F032B1 /* fil */,
+				C30E94431EF8818B00F032B1 /* fi */,
+				C30E94441EF8819100F032B1 /* fr */,
+				C30E94451EF8819C00F032B1 /* fr-CH */,
+				C30E94461EF881A500F032B1 /* de */,
+				C30E94471EF881B100F032B1 /* de-AT */,
+				C30E94481EF881BB00F032B1 /* de-CH */,
+				C30E94491EF881C100F032B1 /* el */,
+				C30E944A1EF881CD00F032B1 /* gu */,
+				C30E944B1EF881DC00F032B1 /* he */,
+				C30E944C1EF881E700F032B1 /* hi */,
+				C30E944D1EF881F500F032B1 /* hu */,
+				C30E944E1EF881FF00F032B1 /* id */,
+				C30E944F1EF8820600F032B1 /* it */,
+				C30E94501EF8820B00F032B1 /* ja */,
+				C30E94511EF8821300F032B1 /* kn */,
+				C30E94521EF8821A00F032B1 /* ko */,
+				C30E94531EF8822800F032B1 /* lv */,
+				C30E94541EF8822F00F032B1 /* ln */,
+				C30E94551EF8823800F032B1 /* lt */,
+				C30E94561EF8824000F032B1 /* ms */,
+				C30E94571EF8824A00F032B1 /* mr */,
+				C30E94581EF8825500F032B1 /* nb */,
+				C30E94591EF8827100F032B1 /* nn-NO */,
+				C30E945A1EF8827C00F032B1 /* fa */,
+				C30E945B1EF8828500F032B1 /* pl */,
+				C30E945C1EF8829700F032B1 /* pt */,
+				C30E945D1EF8829F00F032B1 /* pt-BR */,
+				C30E945E1EF882A300F032B1 /* pt-PT */,
+				C30E945F1EF882AB00F032B1 /* ro */,
+				C30E94601EF882B200F032B1 /* ru */,
+				C30E94611EF882C000F032B1 /* sr */,
+				C30E94621EF882D400F032B1 /* sr-Latn */,
+				C30E94631EF882ED00F032B1 /* sk */,
+				C30E94641EF882F800F032B1 /* sl */,
+				C30E94651EF8830000F032B1 /* es */,
+				C30E94661EF8830C00F032B1 /* es-AR */,
+				C30E94671EF8831700F032B1 /* es-BO */,
+				C30E94681EF8832100F032B1 /* es-CL */,
+				C30E94691EF8832C00F032B1 /* es-CO */,
+				C30E946A1EF8833C00F032B1 /* es-CR */,
+				C30E946B1EF8834800F032B1 /* es-DO */,
+				C30E946C1EF8835300F032B1 /* es-EC */,
+				C30E946D1EF8835E00F032B1 /* es-SV */,
+				C30E946E1EF8836A00F032B1 /* es-GT */,
+				C30E946F1EF8837400F032B1 /* es-HN */,
+				C30E94701EF8837B00F032B1 /* es-419 */,
+				C30E94711EF8838100F032B1 /* es-MX */,
+				C30E94721EF8838A00F032B1 /* es-NI */,
+				C30E94731EF8839400F032B1 /* es-PA */,
+				C30E94741EF8839E00F032B1 /* es-PE */,
+				C30E94751EF883AA00F032B1 /* es-PR */,
+				C30E94761EF883B500F032B1 /* es-US */,
+				C30E94771EF883C300F032B1 /* es-UY */,
+				C30E94781EF883CD00F032B1 /* es-VE */,
+				C30E94791EF883D500F032B1 /* sv */,
+				C30E947A1EF883E100F032B1 /* gsw */,
+				C30E947B1EF883EE00F032B1 /* ta */,
+				C30E947C1EF883F500F032B1 /* th */,
+				C30E947D1EF883F900F032B1 /* tr */,
+				C30E947E1EF883FD00F032B1 /* uk */,
+				C30E947F1EF8840600F032B1 /* ur */,
+				C30E94801EF8840900F032B1 /* vi */,
+				C30E94811EF884E400F032B1 /* es-PY */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8DABC9A01D3D82D600453807 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BITCODE_GENERATION_MODE = bitcode;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8DABC9A11D3D82D600453807 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BITCODE_GENERATION_MODE = bitcode;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8DABC9A31D3D82D600453807 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB206ACE5B8C8DC3A2E47E00 /* Pods-FirebaseUI-demo-swift.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BITCODE_GENERATION_MODE = "";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "FirebaseUI-demo-swift/FirebaseUI-demo-swift.entitlements";
+				DEVELOPMENT_TEAM = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/Core/Sources",
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseFirestore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorage\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSignIn\"",
+					"\"${PODS_ROOT}/Headers/Public/TwitterCore\"",
+					"\"${PODS_ROOT}/Headers/Public/TwitterKit\"",
+					"\"$(PODS_ROOT)/FirebaseUI\"",
+					"\"$(PODS_ROOT)/FirebaseUI/FirebaseFirestoreUI\"",
+					"\"$(PODS_ROOT)/FirebaseUI/FirebaseDatabaseUI\"",
+				);
+				INFOPLIST_FILE = "FirebaseUI-demo-swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.flutter.plugins.firebase.auth.example;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		8DABC9A41D3D82D600453807 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BITCODE_GENERATION_MODE = "";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "FirebaseUI-demo-swift/FirebaseUI-demo-swift.entitlements";
+				DEVELOPMENT_TEAM = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/Core/Sources",
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseFirestore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorage\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSignIn\"",
+					"\"${PODS_ROOT}/Headers/Public/TwitterCore\"",
+					"\"${PODS_ROOT}/Headers/Public/TwitterKit\"",
+					"\"$(PODS_ROOT)/FirebaseUI\"",
+					"\"$(PODS_ROOT)/FirebaseUI/FirebaseFirestoreUI\"",
+					"\"$(PODS_ROOT)/FirebaseUI/FirebaseDatabaseUI\"",
+				);
+				INFOPLIST_FILE = "FirebaseUI-demo-swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.flutter.plugins.firebase.auth.example;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		8DABC9A61D3D82D600453807 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "FirebaseUI-demo-swiftTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.firebase.FirebaseUI-demo-swiftTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirebaseUI-demo-swift.app/FirebaseUI-demo-swift";
+			};
+			name = Debug;
+		};
+		8DABC9A71D3D82D600453807 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "FirebaseUI-demo-swiftTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.firebase.FirebaseUI-demo-swiftTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirebaseUI-demo-swift.app/FirebaseUI-demo-swift";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8DABC9801D3D82D600453807 /* Build configuration list for PBXProject "FirebaseUI-demo-swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DABC9A01D3D82D600453807 /* Debug */,
+				8DABC9A11D3D82D600453807 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8DABC9A21D3D82D600453807 /* Build configuration list for PBXNativeTarget "FirebaseUI-demo-swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DABC9A31D3D82D600453807 /* Debug */,
+				8DABC9A41D3D82D600453807 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8DABC9A51D3D82D600453807 /* Build configuration list for PBXNativeTarget "FirebaseUI-demo-swiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DABC9A61D3D82D600453807 /* Debug */,
+				8DABC9A71D3D82D600453807 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8DABC97D1D3D82D600453807 /* Project object */;
+}

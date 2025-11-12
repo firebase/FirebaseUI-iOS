@@ -1,0 +1,34 @@
+platform :ios, '15.0'
+target 'FirebaseUI-demo-swift' do
+  use_frameworks!
+
+  # For testing upstream Firebase prerelease compatibility
+  # pod 'FirebaseAuth', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'main'
+  # pod 'FirebaseDatabase', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'main'
+  # pod 'FirebaseFirestore', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'main'
+  # pod 'FirebaseStorage', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'main'
+  # pod 'FirebaseSharedSwift', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'main'
+  # pod 'FirebaseCore', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'main'
+  # pod 'FirebaseAuthInterop', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'main'
+  # pod 'FirebaseCoreInternal', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'main'
+  # pod 'FirebaseCoreExtension', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'main'
+  # pod 'FirebaseAppCheckInterop', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'main'
+  # pod 'FirebaseFirestoreInternal', :git => 'https://github.com/firebase/firebase-ios-sdk.git', :branch => 'main'
+
+  pod 'FirebaseUI', :path => '../../'
+  pod 'FirebaseAuthUI', :path => '../../'
+  pod 'FirebaseDatabaseUI', :path => '../../'
+  pod 'FirebaseFirestoreUI', :path => '../../'
+  pod 'FirebaseOAuthUI', :path => '../../'
+  pod 'FirebasePhoneAuthUI', :path => '../../'
+  pod 'FirebaseAnonymousAuthUI', :path => '../../'
+  pod 'FirebaseEmailAuthUI', :path => '../../'
+  pod 'FirebaseFacebookAuthUI', :path => '../../'
+  pod 'FirebaseGoogleAuthUI', :path => '../../'
+  pod 'FirebaseStorageUI', :path => '../../'
+
+  target 'FirebaseUI-demo-swiftTests' do
+    inherit! :search_paths
+  end
+
+end

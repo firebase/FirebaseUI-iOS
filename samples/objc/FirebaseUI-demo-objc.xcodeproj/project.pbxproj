@@ -1,0 +1,789 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D7D5DC11D9D9536006C1857 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */; };
+		8D7F86B51D9DAA0100C2A122 /* FUIStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F86B41D9DAA0100C2A122 /* FUIStorageViewController.m */; };
+		C30AEB0A1ED610740084E328 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30AEB071ED610740084E328 /* Main.storyboard */; };
+		C30AEB0B1ED610780084E328 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C30AEB0D1ED610780084E328 /* Localizable.strings */; };
+		C329B1B21DAD6E5100059A13 /* FUICustomEmailEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B1B01DAD6E5100059A13 /* FUICustomEmailEntryViewController.m */; };
+		C329B1B31DAD6E5100059A13 /* FUICustomEmailEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C329B1B11DAD6E5100059A13 /* FUICustomEmailEntryViewController.xib */; };
+		C34FC1FE1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34FC1FC1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.m */; };
+		C34FC1FF1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C34FC1FD1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.xib */; };
+		C375CB181D935D1F002EECD3 /* FUICustomAuthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C375CB161D935D1F002EECD3 /* FUICustomAuthPickerViewController.m */; };
+		C375CB191D935D1F002EECD3 /* FUICustomAuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375CB171D935D1F002EECD3 /* FUICustomAuthPickerViewController.xib */; };
+		C375CB1C1D943D5F002EECD3 /* FUICustomAuthDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C375CB1B1D943D5F002EECD3 /* FUICustomAuthDelegate.m */; };
+		C3A8B7C11DAF073400CDF0ED /* FUICustomPasswordSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8B7BF1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.m */; };
+		C3A8B7C21DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A8B7C01DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib */; };
+		C3A8B7C61DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8B7C41DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.m */; };
+		C3A8B7C71DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A8B7C51DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.xib */; };
+		C3A8B7CB1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8B7C91DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.m */; };
+		C3A8B7CC1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A8B7CA1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.xib */; };
+		C3AC675E1D81FE6B00FC956D /* FUIAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67531D81FE6B00FC956D /* FUIAuthViewController.m */; };
+		C3AC675F1D81FE6B00FC956D /* FUIChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67561D81FE6B00FC956D /* FUIChatMessage.m */; };
+		C3AC67601D81FE6B00FC956D /* FUIChatMessageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67581D81FE6B00FC956D /* FUIChatMessageDataSource.m */; };
+		C3AC67611D81FE6B00FC956D /* FUIChatMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC675A1D81FE6B00FC956D /* FUIChatMessageTableViewCell.m */; };
+		C3AC67621D81FE6B00FC956D /* FUIChatMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3AC675B1D81FE6B00FC956D /* FUIChatMessageTableViewCell.xib */; };
+		C3AC67631D81FE6B00FC956D /* FUIChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC675D1D81FE6B00FC956D /* FUIChatViewController.m */; };
+		C3AC67661D82002F00FC956D /* FUISample.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC67651D82002F00FC956D /* FUISample.m */; };
+		C3F23ED01D80F58A0020509F /* FUISamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F23ECF1D80F58A0020509F /* FUISamplesViewController.m */; };
+		D81A05F61B86A78700498183 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D81A05F51B86A78700498183 /* main.m */; };
+		D81A05F91B86A78700498183 /* FUIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D81A05F81B86A78700498183 /* FUIAppDelegate.m */; };
+		D81A06011B86A78700498183 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D81A06001B86A78700498183 /* Images.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8D7F86B31D9DAA0100C2A122 /* FUIStorageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FUIStorageViewController.h; path = Storage/FUIStorageViewController.h; sourceTree = "<group>"; };
+		8D7F86B41D9DAA0100C2A122 /* FUIStorageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FUIStorageViewController.m; path = Storage/FUIStorageViewController.m; sourceTree = "<group>"; };
+		C30AEB071ED610740084E328 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C30AEB0C1ED610780084E328 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB291ED611460084E328 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB2A1ED611500084E328 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB2B1ED611550084E328 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB2C1ED6115C0084E328 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB2D1ED6118D0084E328 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB2E1ED611940084E328 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB2F1ED611990084E328 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB301ED6119F0084E328 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB311ED611A80084E328 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB321ED611AD0084E328 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB331ED611BB0084E328 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB341ED611CC0084E328 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB351ED611D50084E328 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB361ED611DD0084E328 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AEB381ED612060084E328 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AEB391ED6120A0084E328 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECA21EDE220A0084E328 /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = bn.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECA31EDE22B20084E328 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECA41EDE22F20084E328 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECA51EDE23010084E328 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECA61EDE230E0084E328 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECA71EDE23200084E328 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECA81EDE23290084E328 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECA91EDE232E0084E328 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECAA1EDE23340084E328 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECAB1EDE23440084E328 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECAC1EDE234F0084E328 /* en-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-CA"; path = "en-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECAD1EDE23660084E328 /* en-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IN"; path = "en-IN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECAE1EDE23770084E328 /* en-IE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-IE"; path = "en-IE.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECAF1EDE23880084E328 /* en-SG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-SG"; path = "en-SG.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECB01EDE239A0084E328 /* en-ZA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-ZA"; path = "en-ZA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECB11EDE242C0084E328 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECB21EDE243A0084E328 /* fr-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CH"; path = "fr-CH.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECB31EDE24500084E328 /* de-AT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-AT"; path = "de-AT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECB41EDE245C0084E328 /* de-CH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "de-CH"; path = "de-CH.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECB51EDE24660084E328 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECB61EDE246D0084E328 /* gu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gu; path = gu.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECB71EDE24770084E328 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECB81EDE24810084E328 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECB91EDE24930084E328 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECBA1EDE24A10084E328 /* kn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kn; path = kn.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECBB1EDE24AD0084E328 /* ln */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ln; path = ln.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECBC1EDE24B50084E328 /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = ms.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECBD1EDE24BF0084E328 /* mr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = mr; path = mr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECBE1EDE24D40084E328 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECBF1EDE24DF0084E328 /* nn-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nn-NO"; path = "nn-NO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECC01EDE24EB0084E328 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECC11EDE24FE0084E328 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECC21EDE25120084E328 /* sr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sr; path = sr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECC31EDE25210084E328 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECC41EDE25320084E328 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30AECC51EDE25460084E328 /* es-AR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-AR"; path = "es-AR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECC61EDE255E0084E328 /* es-BO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-BO"; path = "es-BO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECC71EDE25690084E328 /* es-CL */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CL"; path = "es-CL.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECC81EDE25740084E328 /* es-CO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CO"; path = "es-CO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECC91EDE257C0084E328 /* es-CR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-CR"; path = "es-CR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECCA1EDE25850084E328 /* es-DO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-DO"; path = "es-DO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECCB1EDE25910084E328 /* es-EC */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-EC"; path = "es-EC.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECCC1EDE259B0084E328 /* es-SV */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-SV"; path = "es-SV.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECCD1EDE25A70084E328 /* es-GT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-GT"; path = "es-GT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECCE1EDE25B80084E328 /* es-HN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-HN"; path = "es-HN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECCF1EDE25C00084E328 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECD01EDE25D80084E328 /* es-NI */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-NI"; path = "es-NI.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C30AECD11EDE25E30084E328 /* es-PA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PA"; path = "es-PA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C329B1AF1DAD6E5100059A13 /* FUICustomEmailEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomEmailEntryViewController.h; sourceTree = "<group>"; };
+		C329B1B01DAD6E5100059A13 /* FUICustomEmailEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomEmailEntryViewController.m; sourceTree = "<group>"; };
+		C329B1B11DAD6E5100059A13 /* FUICustomEmailEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomEmailEntryViewController.xib; sourceTree = "<group>"; };
+		C3490EA91EDE261800CD416B /* es-PE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PE"; path = "es-PE.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C3490EAA1EDE262000CD416B /* es-PR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PR"; path = "es-PR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C3490EAB1EDE262B00CD416B /* es-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-US"; path = "es-US.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C3490EAC1EDE263500CD416B /* es-UY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-UY"; path = "es-UY.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C3490EAD1EDE263D00CD416B /* es-VE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-VE"; path = "es-VE.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C3490EAE1EDE264300CD416B /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C3490EAF1EDE265000CD416B /* gsw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = gsw; path = gsw.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C3490EB01EDE265800CD416B /* ta */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ta; path = ta.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C3490EB11EDE266400CD416B /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C3490EB21EDE266C00CD416B /* ur */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ur; path = ur.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C3490EB31EDE267500CD416B /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C3490EB41EDE268500CD416B /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C34FC1FB1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomPasswordVerificationViewController.h; sourceTree = "<group>"; };
+		C34FC1FC1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomPasswordVerificationViewController.m; sourceTree = "<group>"; };
+		C34FC1FD1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordVerificationViewController.xib; sourceTree = "<group>"; };
+		C375CB151D935D1F002EECD3 /* FUICustomAuthPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomAuthPickerViewController.h; sourceTree = "<group>"; };
+		C375CB161D935D1F002EECD3 /* FUICustomAuthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomAuthPickerViewController.m; sourceTree = "<group>"; };
+		C375CB171D935D1F002EECD3 /* FUICustomAuthPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomAuthPickerViewController.xib; sourceTree = "<group>"; };
+		C375CB1A1D943D5F002EECD3 /* FUICustomAuthDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomAuthDelegate.h; sourceTree = "<group>"; };
+		C375CB1B1D943D5F002EECD3 /* FUICustomAuthDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomAuthDelegate.m; sourceTree = "<group>"; };
+		C383C4521EE2754F002A4204 /* es-PY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PY"; path = "es-PY.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C389F5B51EEA099B00D63A34 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C389F5B61EEA09A000D63A34 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C389F5B71EEA09AF00D63A34 /* fil */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fil; path = fil.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C389F5B81EEA09BC00D63A34 /* lv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lv; path = lv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C389F5B91EEA09D000D63A34 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C389F5BA1EEA09DD00D63A34 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C3A8B7BE1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomPasswordSignInViewController.h; sourceTree = "<group>"; };
+		C3A8B7BF1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomPasswordSignInViewController.m; sourceTree = "<group>"; };
+		C3A8B7C01DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordSignInViewController.xib; sourceTree = "<group>"; };
+		C3A8B7C31DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomPasswordSignUpViewController.h; sourceTree = "<group>"; };
+		C3A8B7C41DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomPasswordSignUpViewController.m; sourceTree = "<group>"; };
+		C3A8B7C51DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordSignUpViewController.xib; sourceTree = "<group>"; };
+		C3A8B7C81DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICustomPasswordRecoveryViewController.h; sourceTree = "<group>"; };
+		C3A8B7C91DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICustomPasswordRecoveryViewController.m; sourceTree = "<group>"; };
+		C3A8B7CA1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordRecoveryViewController.xib; sourceTree = "<group>"; };
+		C3AC67521D81FE6B00FC956D /* FUIAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAuthViewController.h; sourceTree = "<group>"; };
+		C3AC67531D81FE6B00FC956D /* FUIAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAuthViewController.m; sourceTree = "<group>"; };
+		C3AC67551D81FE6B00FC956D /* FUIChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIChatMessage.h; sourceTree = "<group>"; };
+		C3AC67561D81FE6B00FC956D /* FUIChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIChatMessage.m; sourceTree = "<group>"; };
+		C3AC67571D81FE6B00FC956D /* FUIChatMessageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIChatMessageDataSource.h; sourceTree = "<group>"; };
+		C3AC67581D81FE6B00FC956D /* FUIChatMessageDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIChatMessageDataSource.m; sourceTree = "<group>"; };
+		C3AC67591D81FE6B00FC956D /* FUIChatMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIChatMessageTableViewCell.h; sourceTree = "<group>"; };
+		C3AC675A1D81FE6B00FC956D /* FUIChatMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIChatMessageTableViewCell.m; sourceTree = "<group>"; };
+		C3AC675B1D81FE6B00FC956D /* FUIChatMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUIChatMessageTableViewCell.xib; sourceTree = "<group>"; };
+		C3AC675C1D81FE6B00FC956D /* FUIChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIChatViewController.h; sourceTree = "<group>"; };
+		C3AC675D1D81FE6B00FC956D /* FUIChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIChatViewController.m; sourceTree = "<group>"; };
+		C3AC67641D82002F00FC956D /* FUISample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISample.h; sourceTree = "<group>"; };
+		C3AC67651D82002F00FC956D /* FUISample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISample.m; sourceTree = "<group>"; };
+		C3DC513E1EBBE02800A12373 /* FirebaseUI-demo-objc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "FirebaseUI-demo-objc.entitlements"; sourceTree = "<group>"; };
+		C3F23ECE1D80F5890020509F /* FUISamplesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISamplesViewController.h; sourceTree = "<group>"; };
+		C3F23ECF1D80F58A0020509F /* FUISamplesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISamplesViewController.m; sourceTree = "<group>"; };
+		D81A05F01B86A78700498183 /* FirebaseUI-demo-objc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FirebaseUI-demo-objc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D81A05F41B86A78700498183 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D81A05F51B86A78700498183 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D81A05F71B86A78700498183 /* FUIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FUIAppDelegate.h; sourceTree = "<group>"; };
+		D81A05F81B86A78700498183 /* FUIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FUIAppDelegate.m; sourceTree = "<group>"; };
+		D81A06001B86A78700498183 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D81A05ED1B86A78700498183 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		54B9F7E49B62231ABC826A36 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8D7D5DC51D9DA075006C1857 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				8D7F86B31D9DAA0100C2A122 /* FUIStorageViewController.h */,
+				8D7F86B41D9DAA0100C2A122 /* FUIStorageViewController.m */,
+			);
+			name = Storage;
+			sourceTree = "<group>";
+		};
+		C30AEB041ED610740084E328 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C30AEB0D1ED610780084E328 /* Localizable.strings */,
+				C30AEB071ED610740084E328 /* Main.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C3AC67501D81FE6B00FC956D /* Samples */ = {
+			isa = PBXGroup;
+			children = (
+				C3AC67511D81FE6B00FC956D /* Auth */,
+				C3AC67541D81FE6B00FC956D /* Chat */,
+				8D7D5DC51D9DA075006C1857 /* Storage */,
+			);
+			path = Samples;
+			sourceTree = "<group>";
+		};
+		C3AC67511D81FE6B00FC956D /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				C3AC67521D81FE6B00FC956D /* FUIAuthViewController.h */,
+				C3AC67531D81FE6B00FC956D /* FUIAuthViewController.m */,
+				C375CB1A1D943D5F002EECD3 /* FUICustomAuthDelegate.h */,
+				C375CB1B1D943D5F002EECD3 /* FUICustomAuthDelegate.m */,
+				C375CB151D935D1F002EECD3 /* FUICustomAuthPickerViewController.h */,
+				C375CB161D935D1F002EECD3 /* FUICustomAuthPickerViewController.m */,
+				C375CB171D935D1F002EECD3 /* FUICustomAuthPickerViewController.xib */,
+				C329B1AF1DAD6E5100059A13 /* FUICustomEmailEntryViewController.h */,
+				C329B1B01DAD6E5100059A13 /* FUICustomEmailEntryViewController.m */,
+				C329B1B11DAD6E5100059A13 /* FUICustomEmailEntryViewController.xib */,
+				C3A8B7C81DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.h */,
+				C3A8B7C91DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.m */,
+				C3A8B7CA1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.xib */,
+				C3A8B7BE1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.h */,
+				C3A8B7BF1DAF073400CDF0ED /* FUICustomPasswordSignInViewController.m */,
+				C3A8B7C01DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib */,
+				C3A8B7C31DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.h */,
+				C3A8B7C41DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.m */,
+				C3A8B7C51DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.xib */,
+				C34FC1FB1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.h */,
+				C34FC1FC1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.m */,
+				C34FC1FD1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.xib */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		C3AC67541D81FE6B00FC956D /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				C3AC67551D81FE6B00FC956D /* FUIChatMessage.h */,
+				C3AC67561D81FE6B00FC956D /* FUIChatMessage.m */,
+				C3AC67571D81FE6B00FC956D /* FUIChatMessageDataSource.h */,
+				C3AC67581D81FE6B00FC956D /* FUIChatMessageDataSource.m */,
+				C3AC67591D81FE6B00FC956D /* FUIChatMessageTableViewCell.h */,
+				C3AC675A1D81FE6B00FC956D /* FUIChatMessageTableViewCell.m */,
+				C3AC675B1D81FE6B00FC956D /* FUIChatMessageTableViewCell.xib */,
+				C3AC675C1D81FE6B00FC956D /* FUIChatViewController.h */,
+				C3AC675D1D81FE6B00FC956D /* FUIChatViewController.m */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		D81A05E71B86A78700498183 = {
+			isa = PBXGroup;
+			children = (
+				8D7D5DC01D9D9536006C1857 /* GoogleService-Info.plist */,
+				D81A05F21B86A78700498183 /* FirebaseUI-demo-objc */,
+				D81A05F11B86A78700498183 /* Products */,
+				54B9F7E49B62231ABC826A36 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		D81A05F11B86A78700498183 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D81A05F01B86A78700498183 /* FirebaseUI-demo-objc.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D81A05F21B86A78700498183 /* FirebaseUI-demo-objc */ = {
+			isa = PBXGroup;
+			children = (
+				C3DC513E1EBBE02800A12373 /* FirebaseUI-demo-objc.entitlements */,
+				D81A05F71B86A78700498183 /* FUIAppDelegate.h */,
+				D81A05F81B86A78700498183 /* FUIAppDelegate.m */,
+				C3F23ECE1D80F5890020509F /* FUISamplesViewController.h */,
+				C3F23ECF1D80F58A0020509F /* FUISamplesViewController.m */,
+				C3AC67641D82002F00FC956D /* FUISample.h */,
+				C3AC67651D82002F00FC956D /* FUISample.m */,
+				C3AC67501D81FE6B00FC956D /* Samples */,
+				D81A06001B86A78700498183 /* Images.xcassets */,
+				C30AEB041ED610740084E328 /* Resources */,
+				D81A05F31B86A78700498183 /* Supporting Files */,
+			);
+			path = "FirebaseUI-demo-objc";
+			sourceTree = "<group>";
+		};
+		D81A05F31B86A78700498183 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D81A05F41B86A78700498183 /* Info.plist */,
+				D81A05F51B86A78700498183 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D81A05EF1B86A78700498183 /* FirebaseUI-demo-objc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D81A06131B86A78700498183 /* Build configuration list for PBXNativeTarget "FirebaseUI-demo-objc" */;
+			buildPhases = (
+				D81A05EC1B86A78700498183 /* Sources */,
+				D81A05ED1B86A78700498183 /* Frameworks */,
+				D81A05EE1B86A78700498183 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FirebaseUI-demo-objc";
+			productName = "FirebaseUI-demo-objc";
+			productReference = D81A05F01B86A78700498183 /* FirebaseUI-demo-objc.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D81A05E81B86A78700498183 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Firebase, Inc.";
+				TargetAttributes = {
+					D81A05EF1B86A78700498183 = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = VRCYNN3G94;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = D81A05EB1B86A78700498183 /* Build configuration list for PBXProject "FirebaseUI-demo-objc" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+				ar,
+				"zh-Hans",
+				"zh-Hant",
+				nl,
+				"en-GB",
+				fr,
+				de,
+				it,
+				ja,
+				ko,
+				pl,
+				"pt-BR",
+				ru,
+				"es-419",
+				es,
+				th,
+				tr,
+				bn,
+				bg,
+				ca,
+				zh,
+				"zh-Hant-TW",
+				hr,
+				cs,
+				da,
+				"en-AU",
+				"en-CA",
+				"en-IN",
+				"en-IE",
+				"en-SG",
+				"en-ZA",
+				fi,
+				"fr-CH",
+				"de-AT",
+				"de-CH",
+				el,
+				gu,
+				hi,
+				hu,
+				id,
+				kn,
+				ln,
+				ms,
+				mr,
+				nb,
+				"nn-NO",
+				fa,
+				pt,
+				sr,
+				"sr-Latn",
+				sk,
+				"es-AR",
+				"es-BO",
+				"es-CL",
+				"es-CO",
+				"es-CR",
+				"es-DO",
+				"es-EC",
+				"es-SV",
+				"es-GT",
+				"es-HN",
+				"es-MX",
+				"es-NI",
+				"es-PA",
+				"es-PY",
+				"es-PE",
+				"es-PR",
+				"es-US",
+				"es-UY",
+				"es-VE",
+				sv,
+				gsw,
+				ta,
+				uk,
+				ur,
+				vi,
+				ro,
+				he,
+				"pt-PT",
+				fil,
+				lv,
+				lt,
+				sl,
+			);
+			mainGroup = D81A05E71B86A78700498183;
+			productRefGroup = D81A05F11B86A78700498183 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D81A05EF1B86A78700498183 /* FirebaseUI-demo-objc */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D81A05EE1B86A78700498183 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3A8B7C21DAF073400CDF0ED /* FUICustomPasswordSignInViewController.xib in Resources */,
+				C30AEB0B1ED610780084E328 /* Localizable.strings in Resources */,
+				C30AEB0A1ED610740084E328 /* Main.storyboard in Resources */,
+				C34FC1FF1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.xib in Resources */,
+				C3AC67621D81FE6B00FC956D /* FUIChatMessageTableViewCell.xib in Resources */,
+				C3A8B7CC1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.xib in Resources */,
+				D81A06011B86A78700498183 /* Images.xcassets in Resources */,
+				C329B1B31DAD6E5100059A13 /* FUICustomEmailEntryViewController.xib in Resources */,
+				C3A8B7C71DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.xib in Resources */,
+				C375CB191D935D1F002EECD3 /* FUICustomAuthPickerViewController.xib in Resources */,
+				8D7D5DC11D9D9536006C1857 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D81A05EC1B86A78700498183 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D81A05F91B86A78700498183 /* FUIAppDelegate.m in Sources */,
+				C3A8B7CB1DB1454D00CDF0ED /* FUICustomPasswordRecoveryViewController.m in Sources */,
+				C375CB181D935D1F002EECD3 /* FUICustomAuthPickerViewController.m in Sources */,
+				C3A8B7C11DAF073400CDF0ED /* FUICustomPasswordSignInViewController.m in Sources */,
+				C375CB1C1D943D5F002EECD3 /* FUICustomAuthDelegate.m in Sources */,
+				C34FC1FE1DB17C8B009ED69A /* FUICustomPasswordVerificationViewController.m in Sources */,
+				C3F23ED01D80F58A0020509F /* FUISamplesViewController.m in Sources */,
+				C3AC67631D81FE6B00FC956D /* FUIChatViewController.m in Sources */,
+				C3AC67611D81FE6B00FC956D /* FUIChatMessageTableViewCell.m in Sources */,
+				C3AC67601D81FE6B00FC956D /* FUIChatMessageDataSource.m in Sources */,
+				C3A8B7C61DB027D200CDF0ED /* FUICustomPasswordSignUpViewController.m in Sources */,
+				C3AC675F1D81FE6B00FC956D /* FUIChatMessage.m in Sources */,
+				D81A05F61B86A78700498183 /* main.m in Sources */,
+				C3AC67661D82002F00FC956D /* FUISample.m in Sources */,
+				8D7F86B51D9DAA0100C2A122 /* FUIStorageViewController.m in Sources */,
+				C329B1B21DAD6E5100059A13 /* FUICustomEmailEntryViewController.m in Sources */,
+				C3AC675E1D81FE6B00FC956D /* FUIAuthViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C30AEB0D1ED610780084E328 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C30AEB0C1ED610780084E328 /* en */,
+				C30AEB291ED611460084E328 /* ar */,
+				C30AEB2A1ED611500084E328 /* zh-Hans */,
+				C30AEB2B1ED611550084E328 /* zh-Hant */,
+				C30AEB2C1ED6115C0084E328 /* nl */,
+				C30AEB2D1ED6118D0084E328 /* en-GB */,
+				C30AEB2E1ED611940084E328 /* fr */,
+				C30AEB2F1ED611990084E328 /* de */,
+				C30AEB301ED6119F0084E328 /* it */,
+				C30AEB311ED611A80084E328 /* ja */,
+				C30AEB321ED611AD0084E328 /* ko */,
+				C30AEB331ED611BB0084E328 /* pl */,
+				C30AEB341ED611CC0084E328 /* pt-BR */,
+				C30AEB351ED611D50084E328 /* ru */,
+				C30AEB361ED611DD0084E328 /* es-419 */,
+				C30AEB381ED612060084E328 /* th */,
+				C30AEB391ED6120A0084E328 /* tr */,
+				C30AECA21EDE220A0084E328 /* bn */,
+				C30AECA31EDE22B20084E328 /* es */,
+				C30AECA41EDE22F20084E328 /* bg */,
+				C30AECA51EDE23010084E328 /* ca */,
+				C30AECA61EDE230E0084E328 /* zh */,
+				C30AECA71EDE23200084E328 /* zh-Hant-TW */,
+				C30AECA81EDE23290084E328 /* hr */,
+				C30AECA91EDE232E0084E328 /* cs */,
+				C30AECAA1EDE23340084E328 /* da */,
+				C30AECAB1EDE23440084E328 /* en-AU */,
+				C30AECAC1EDE234F0084E328 /* en-CA */,
+				C30AECAD1EDE23660084E328 /* en-IN */,
+				C30AECAE1EDE23770084E328 /* en-IE */,
+				C30AECAF1EDE23880084E328 /* en-SG */,
+				C30AECB01EDE239A0084E328 /* en-ZA */,
+				C30AECB11EDE242C0084E328 /* fi */,
+				C30AECB21EDE243A0084E328 /* fr-CH */,
+				C30AECB31EDE24500084E328 /* de-AT */,
+				C30AECB41EDE245C0084E328 /* de-CH */,
+				C30AECB51EDE24660084E328 /* el */,
+				C30AECB61EDE246D0084E328 /* gu */,
+				C30AECB71EDE24770084E328 /* hi */,
+				C30AECB81EDE24810084E328 /* hu */,
+				C30AECB91EDE24930084E328 /* id */,
+				C30AECBA1EDE24A10084E328 /* kn */,
+				C30AECBB1EDE24AD0084E328 /* ln */,
+				C30AECBC1EDE24B50084E328 /* ms */,
+				C30AECBD1EDE24BF0084E328 /* mr */,
+				C30AECBE1EDE24D40084E328 /* nb */,
+				C30AECBF1EDE24DF0084E328 /* nn-NO */,
+				C30AECC01EDE24EB0084E328 /* fa */,
+				C30AECC11EDE24FE0084E328 /* pt */,
+				C30AECC21EDE25120084E328 /* sr */,
+				C30AECC31EDE25210084E328 /* sr-Latn */,
+				C30AECC41EDE25320084E328 /* sk */,
+				C30AECC51EDE25460084E328 /* es-AR */,
+				C30AECC61EDE255E0084E328 /* es-BO */,
+				C30AECC71EDE25690084E328 /* es-CL */,
+				C30AECC81EDE25740084E328 /* es-CO */,
+				C30AECC91EDE257C0084E328 /* es-CR */,
+				C30AECCA1EDE25850084E328 /* es-DO */,
+				C30AECCB1EDE25910084E328 /* es-EC */,
+				C30AECCC1EDE259B0084E328 /* es-SV */,
+				C30AECCD1EDE25A70084E328 /* es-GT */,
+				C30AECCE1EDE25B80084E328 /* es-HN */,
+				C30AECCF1EDE25C00084E328 /* es-MX */,
+				C30AECD01EDE25D80084E328 /* es-NI */,
+				C30AECD11EDE25E30084E328 /* es-PA */,
+				C3490EA91EDE261800CD416B /* es-PE */,
+				C3490EAA1EDE262000CD416B /* es-PR */,
+				C3490EAB1EDE262B00CD416B /* es-US */,
+				C3490EAC1EDE263500CD416B /* es-UY */,
+				C3490EAD1EDE263D00CD416B /* es-VE */,
+				C3490EAE1EDE264300CD416B /* sv */,
+				C3490EAF1EDE265000CD416B /* gsw */,
+				C3490EB01EDE265800CD416B /* ta */,
+				C3490EB11EDE266400CD416B /* uk */,
+				C3490EB21EDE266C00CD416B /* ur */,
+				C3490EB31EDE267500CD416B /* vi */,
+				C3490EB41EDE268500CD416B /* ro */,
+				C383C4521EE2754F002A4204 /* es-PY */,
+				C389F5B51EEA099B00D63A34 /* he */,
+				C389F5B61EEA09A000D63A34 /* pt-PT */,
+				C389F5B71EEA09AF00D63A34 /* fil */,
+				C389F5B81EEA09BC00D63A34 /* lv */,
+				C389F5B91EEA09D000D63A34 /* lt */,
+				C389F5BA1EEA09DD00D63A34 /* sl */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D81A06111B86A78700498183 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D81A06121B86A78700498183 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D81A06141B86A78700498183 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "FirebaseUI-demo-objc/FirebaseUI-demo-objc.entitlements";
+				DEVELOPMENT_TEAM = VRCYNN3G94;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/Core/Sources",
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorage\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseUI\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSignIn\"",
+					"\"${PODS_ROOT}/Headers/Public/TwitterCore\"",
+					"\"${PODS_ROOT}/Headers/Public/TwitterKit\"",
+					"\"${PODS_ROOT}/Headers/Public/GTMSessionFetcher\"",
+				);
+				INFOPLIST_FILE = "FirebaseUI-demo-objc/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.google.firebase.FirebaseUI-demo-objc3";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D81A06151B86A78700498183 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "FirebaseUI-demo-objc/FirebaseUI-demo-objc.entitlements";
+				DEVELOPMENT_TEAM = VRCYNN3G94;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/Core/Sources",
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorage\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseUI\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSignIn\"",
+					"\"${PODS_ROOT}/Headers/Public/TwitterCore\"",
+					"\"${PODS_ROOT}/Headers/Public/TwitterKit\"",
+					"\"${PODS_ROOT}/Headers/Public/GTMSessionFetcher\"",
+				);
+				INFOPLIST_FILE = "FirebaseUI-demo-objc/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.google.firebase.FirebaseUI-demo-objc3";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D81A05EB1B86A78700498183 /* Build configuration list for PBXProject "FirebaseUI-demo-objc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D81A06111B86A78700498183 /* Debug */,
+				D81A06121B86A78700498183 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D81A06131B86A78700498183 /* Build configuration list for PBXNativeTarget "FirebaseUI-demo-objc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D81A06141B86A78700498183 /* Debug */,
+				D81A06151B86A78700498183 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D81A05E81B86A78700498183 /* Project object */;
+}

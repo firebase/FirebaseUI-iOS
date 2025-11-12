@@ -6,15 +6,19 @@ on:
     paths:
       - '.github/workflows/sample.yml'
       - 'FirebaseSwiftUI/**'
-      - 'samples/swiftui/**'
+      - 'Firebase*UI/**'
+      - 'samples/**'
       - 'Package.swift'
+      - '*.podspec'
   pull_request:
     branches: [ main ]
     paths:
       - '.github/workflows/sample.yml'
       - 'FirebaseSwiftUI/**'
-      - 'samples/swiftui/**'
+      - 'Firebase*UI/**'
+      - 'samples/**'
       - 'Package.swift'
+      - '*.podspec'
 
   workflow_dispatch:
 
@@ -36,3 +40,54 @@ jobs:
             -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' \
             clean build \
             ONLY_ACTIVE_ARCH=YES
+
+  swift:
+    name: Swift UIKit Sample build
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+      - name: Setup
+        run: |
+          cd samples/swift
+          gem install bundler
+          bundle install
+          gem install xcpretty
+          bundle exec pod install --repo-update
+      - name: Build
+        run: |
+          cd samples/swift
+          xcodebuild \
+            -workspace FirebaseUI-demo-swift.xcworkspace \
+            -scheme FirebaseUI-demo-swift \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' \
+            clean build test \
+            ONLY_ACTIVE_ARCH=YES | xcpretty
+
+  objc:
+    name: ObjC Sample build
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+      - name: Setup
+        run: |
+          cp samples/GoogleService-Info-dummy.plist samples/objc/GoogleService-Info.plist
+          cd samples/objc
+          gem install bundler
+          bundle install
+          gem install xcpretty
+          bundle exec pod install --repo-update
+      - name: Build
+        run: |
+          cd samples/objc
+          xcodebuild \
+            -workspace FirebaseUI-demo-objc.xcworkspace \
+            -scheme FirebaseUI-demo-objc \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' \
+            clean build \
+            ONLY_ACTIVE_ARCH=YES | xcpretty

@@ -80,23 +80,33 @@ $ cd FirebaseDatabaseUI # or FirebaseFirestoreUI, FirebaseStorageUI
 $ pod install
 ```
 
-## Sample Project Configuration
+## Sample Projects
 
-You'll have to configure your Xcode project in order to run the SwiftUI samples.
+FirebaseUI includes several sample projects demonstrating different features:
 
-1. Your Xcode project should contain a `GoogleService-Info.plist`, downloaded from [Firebase console](https://console.firebase.google.com) when you add your app to a Firebase project.<br>
-Copy the `GoogleService-Info.plist` into the sample project folder.
+### SwiftUI Authentication Sample
 
-1. Update URL Types (for OAuth providers).<br>
-Go to `Project Settings -> Info tab -> Url Types` and update values for:
-	+ `REVERSED_CLIENT_ID` (get value from `GoogleService-Info.plist`) - Required for Google Sign-In
-	+ `fb{your-app-id}` (put Facebook App Id) - Required for Facebook Login
+Located in `samples/swiftui/FirebaseSwiftUISample/`, this sample demonstrates the modern SwiftUI authentication components.
 
-1. For Facebook Login, update `Info.plist` with Facebook configuration values:
-	+ `FacebookAppID -> {your-app-id}` (put Facebook App Id)
-	+ Enable Keychain Sharing: `Project Settings -> Capabilities -> KeyChain Sharing -> ON`
+**Configuration:**
+1. Download `GoogleService-Info.plist` from [Firebase Console](https://console.firebase.google.com)
+2. Copy it to the sample project folder
+3. Update URL Types (for OAuth providers) in `Project Settings -> Info tab -> Url Types`:
+   - `REVERSED_CLIENT_ID` (from `GoogleService-Info.plist`) - Required for Google Sign-In
+   - `fb{your-app-id}` - Required for Facebook Login
+4. For Facebook Login, update `Info.plist` with `FacebookAppID` and enable Keychain Sharing
 
-1. Don't forget to configure your Firebase project using [Firebase console](https://console.firebase.google.com).
+### UIKit Database & Storage Samples
+
+Located in `samples/objc/` and `samples/swift/`, these samples demonstrate FirebaseUI's data binding capabilities for Realtime Database and Storage.
+
+**Configuration:**
+1. Download `GoogleService-Info.plist` from [Firebase Console](https://console.firebase.google.com)
+2. Copy it to `samples/objc/GoogleService-Info.plist` or `samples/swift/GoogleService-Info.plist`
+3. Run `pod install` in the sample directory
+4. Configure your Firebase Database and Storage in the Firebase Console
+5. For the Chat sample, enable anonymous authentication in Firebase Console
+6. For the Storage sample, configure appropriate [Storage Security Rules](https://firebase.google.com/docs/storage/security/start#sample-rules)
 
 ## Contributing to FirebaseUI
 
