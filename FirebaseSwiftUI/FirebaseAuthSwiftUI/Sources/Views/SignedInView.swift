@@ -148,6 +148,7 @@ extension SignedInView: View {
       VStack(spacing: 24) {
         Text(authService.string.verifyEmailSheetMessage)
           .font(.headline)
+        Text("Please tap on the link in your email to complete verification.")
         Button {
           showEmailVerificationSent = false
         } label: {
