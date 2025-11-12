@@ -50,6 +50,7 @@ jobs:
         uses: actions/checkout@main
       - name: Setup
         run: |
+          cp samples/GoogleService-Info-dummy.plist samples/swift/GoogleService-Info.plist
           cd samples/swift
           gem install bundler
           bundle install

@@ -23,9 +23,8 @@ enum Sample: Int, RawRepresentable {
   
   // When adding new samples, add a new value here and fill
   // out the switch statements below as necessary.
-  case auth = 0
-  case chat = 1
-  case storage = 2
+  case chat = 0
+  case storage = 1
 
   static var total: Int {
     var count = 0
@@ -42,11 +41,6 @@ enum Sample: Int, RawRepresentable {
         title: "Chat",
         subtitle: "Demonstrates using a FUICollectionViewDataSource to load data from Firebase Database into a UICollectionView for a basic chat app."
       )
-    case .auth:
-      return (
-        title: "Auth",
-        subtitle: "Demonstrates the FirebaseAuthUI flow with customization options."
-      )
     case .storage:
       return (
         title: "Storage",
@@ -59,8 +53,6 @@ enum Sample: Int, RawRepresentable {
     switch self {
     case .chat:
       return UIStoryboard.instantiateViewController("Main", identifier: "ChatViewController")
-    case .auth:
-      return UIStoryboard.instantiateViewController("Main", identifier: "FUIAuthViewController")
     case .storage:
       return UIStoryboard.instantiateViewController("Main", identifier: "StorageViewController")
     }
