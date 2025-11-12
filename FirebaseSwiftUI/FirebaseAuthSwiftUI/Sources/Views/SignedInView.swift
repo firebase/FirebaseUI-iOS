@@ -143,25 +143,15 @@ extension SignedInView: View {
       )
       .presentationDetents([.medium])
     }
-    .sheet(isPresented: $showEmailVerificationSent) {
-      VStack(spacing: 24) {
-        Text(authService.string.verifyEmailSheetMessage)
-          .font(.headline)
-        Text("Please tap on the link in your email to complete verification.")
-        Button {
-          showEmailVerificationSent = false
-        } label: {
-          Text(authService.string.okButtonLabel)
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(.borderedProminent)
-        .padding([.top, .bottom], 8)
-        .frame(maxWidth: .infinity)
+    .alert(
+      authService.string.verifyEmailSheetMessage,
+      isPresented: $showEmailVerificationSent
+    ) {
+      Button(authService.string.okButtonLabel) {
+        showEmailVerificationSent = false
       }
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-      .safeAreaPadding()
-      .presentationDetents([.medium])
+    } message: {
+      Text("Please tap on the link in your email to complete verification.")
     }
   }
 }
