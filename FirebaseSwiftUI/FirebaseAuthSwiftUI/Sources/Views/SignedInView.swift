@@ -20,7 +20,7 @@ public struct SignedInView {
   @Environment(AuthService.self) private var authService
   @Environment(\.reportError) private var reportError
   @State private var showDeleteConfirmation = false
-  @State private var showEmailVerificationSent = false
+  @State private var showEmailVerificationSent = true
 
   private func sendEmailVerification() async throws {
     do {
@@ -143,7 +143,6 @@ extension SignedInView: View {
       )
       .presentationDetents([.medium])
     }
-    // Password prompt sheet now centralized in AuthPickerView
     .sheet(isPresented: $showEmailVerificationSent) {
       VStack(spacing: 24) {
         Text(authService.string.verifyEmailSheetMessage)
