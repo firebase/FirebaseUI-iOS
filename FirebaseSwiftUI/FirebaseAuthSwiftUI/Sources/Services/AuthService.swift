@@ -141,7 +141,7 @@ public final class AuthService {
   private var listenerManager: AuthListenerManager?
 
   var emailSignInEnabled = false
-  private var emailSignInCallback: (@MainActor () -> Void)?
+  private var emailSignInCallback: (() -> Void)?
 
   private var providers: [AuthProviderUI] = []
 
@@ -324,7 +324,7 @@ public extension AuthService {
   }
 
   /// Enable email sign-in with custom callback
-  func withEmailSignIn(onTap: @escaping @MainActor () -> Void) -> AuthService {
+  func withEmailSignIn(onTap: @escaping () -> Void) -> AuthService {
     emailSignInEnabled = true
     emailSignInCallback = onTap
     return self
