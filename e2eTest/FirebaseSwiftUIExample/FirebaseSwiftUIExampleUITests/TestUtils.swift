@@ -139,7 +139,9 @@ func createEmail() -> String {
   guard let http = sendResp as? HTTPURLResponse, http.statusCode == 200 else {
     let errorBody = String(data: sendData, encoding: .utf8) ?? "Unknown error"
     throw NSError(domain: "EmulatorError", code: 1,
-                  userInfo: [NSLocalizedDescriptionKey: "Failed to send verification email: \(errorBody)"])
+                  userInfo: [
+                    NSLocalizedDescriptionKey: "Failed to send verification email: \(errorBody)",
+                  ])
   }
 
   // Add a small delay to ensure the OOB code is registered in the emulator
@@ -156,12 +158,12 @@ func createEmail() -> String {
 
   // Step 2: Fetch OOB codes from emulator with retry logic
   let oobURL = URL(string: "\(base)/emulator/v1/projects/\(projectID)/oobCodes")!
-  
+
   var codeItem: OobItem?
   var attempts = 0
   let maxAttempts = 5
-  
-  while codeItem == nil && attempts < maxAttempts {
+
+  while codeItem == nil, attempts < maxAttempts {
     let (oobData, oobResp) = try await URLSession.shared.data(from: oobURL)
     guard (oobResp as? HTTPURLResponse)?.statusCode == 200 else {
       throw NSError(domain: "EmulatorError", code: 2,
@@ -182,7 +184,7 @@ func createEmail() -> String {
         return d0 > d1
       }
       .first
-    
+
     if codeItem == nil {
       attempts += 1
       if attempts < maxAttempts {
@@ -190,7 +192,8 @@ func createEmail() -> String {
         try await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
       } else {
         // Log available codes for debugging
-        let availableCodes = envelope.oobCodes.map { "Email: \($0.email), Type: \($0.requestType)" }.joined(separator: "; ")
+        let availableCodes = envelope.oobCodes.map { "Email: \($0.email), Type: \($0.requestType)" }
+          .joined(separator: "; ")
         throw NSError(domain: "EmulatorError", code: 3,
                       userInfo: [
                         NSLocalizedDescriptionKey: "No VERIFY_EMAIL OOB code found for \(email) after \(maxAttempts) attempts. Available codes: \(availableCodes)",
