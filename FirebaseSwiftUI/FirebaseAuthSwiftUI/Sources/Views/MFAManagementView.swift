@@ -134,7 +134,6 @@ extension MFAManagementView: View {
     .onAppear {
       loadEnrolledFactors()
     }
-    // Password prompt sheet now centralized in AuthPickerView
   }
 
   @ViewBuilder

@@ -103,7 +103,7 @@ extension UpdatePasswordView: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .safeAreaPadding()
-    .navigationTitle(authService.string.passwordRecoveryTitle)
+    .navigationTitle(authService.string.updatePasswordTitle)
     .alert(
       "Password Updated",
       isPresented: $showAlert

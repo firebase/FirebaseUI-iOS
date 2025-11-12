@@ -103,6 +103,13 @@ public class StringUtils {
     return localizedString(for: "EnterYourPassword")
   }
 
+  /// Update password title
+  /// found in:
+  /// - UpdatePasswordView
+  public var updatePasswordTitle: String {
+    return localizedString(for: "UpdatePasswordTitle")
+  }
+
   /// Password recovery title
   /// found in:
   /// - PasswordRecoveryView

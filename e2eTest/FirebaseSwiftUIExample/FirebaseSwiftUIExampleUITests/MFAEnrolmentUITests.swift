@@ -23,21 +23,21 @@ import XCTest
 
 final class MFAEnrollmentUITests: XCTestCase {
   var app: XCUIApplication!
-  
+
   override func setUpWithError() throws {
     continueAfterFailure = false
   }
-  
+
   override func tearDownWithError() throws {
     // Clean up: Terminate app
     if let app = app {
       app.terminate()
     }
     app = nil
-    
+
     // Small delay between tests to allow emulator to settle
     Thread.sleep(forTimeInterval: 0.5)
-    
+
     try super.tearDownWithError()
   }
 
@@ -226,7 +226,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     let phoneField = app.textFields["phone-number-field"]
     XCTAssertTrue(phoneField.waitForExistence(timeout: 10))
     // Generate unique phone number using timestamp to avoid conflicts between tests
-    let uniqueId = Int(Date().timeIntervalSince1970 * 1000) % 1000000
+    let uniqueId = Int(Date().timeIntervalSince1970 * 1000) % 1_000_000
     let phoneNumberWithoutDialCode = "7\(String(format: "%09d", uniqueId))"
     UIPasteboard.general.string = phoneNumberWithoutDialCode
     phoneField.tap()
@@ -258,9 +258,9 @@ final class MFAEnrollmentUITests: XCTestCase {
 
     // Paste each digit into the corresponding text field
     let codeDigits = Array(code)
-    let fields = [verificationCodeField1, verificationCodeField2, verificationCodeField3, 
+    let fields = [verificationCodeField1, verificationCodeField2, verificationCodeField3,
                   verificationCodeField4, verificationCodeField5, verificationCodeField6]
-    
+
     for (index, digit) in codeDigits.enumerated() where index < fields.count {
       let field = fields[index]
       UIPasteboard.general.string = String(digit)
