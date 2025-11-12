@@ -20,7 +20,7 @@ public struct SignedInView {
   @Environment(AuthService.self) private var authService
   @Environment(\.reportError) private var reportError
   @State private var showDeleteConfirmation = false
-  @State private var showEmailVerificationSent = true
+  @State private var showEmailVerificationSent = false
 
   private func sendEmailVerification() async throws {
     do {
