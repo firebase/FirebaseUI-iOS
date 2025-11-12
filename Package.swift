@@ -23,40 +23,12 @@ let package = Package(
   platforms: [.iOS(.v17)],
   products: [
     .library(
-      name: "FirebaseAnonymousAuthUI",
-      targets: ["FirebaseAnonymousAuthUI"]
-    ),
-    .library(
       name: "FirebaseDatabaseUI",
       targets: ["FirebaseDatabaseUI"]
     ),
     .library(
-      name: "FirebaseAuthUI",
-      targets: ["FirebaseAuthUI"]
-    ),
-    .library(
-      name: "FirebaseEmailAuthUI",
-      targets: ["FirebaseEmailAuthUI"]
-    ),
-    .library(
-      name: "FirebaseFacebookAuthUI",
-      targets: ["FirebaseFacebookAuthUI"]
-    ),
-    .library(
       name: "FirebaseFirestoreUI",
       targets: ["FirebaseFirestoreUI"]
-    ),
-    .library(
-      name: "FirebaseGoogleAuthUI",
-      targets: ["FirebaseGoogleAuthUI"]
-    ),
-    .library(
-      name: "FirebaseOAuthUI",
-      targets: ["FirebaseOAuthUI"]
-    ),
-    .library(
-      name: "FirebasePhoneAuthUI",
-      targets: ["FirebasePhoneAuthUI"]
     ),
     .library(
       name: "FirebaseStorageUI",
@@ -115,20 +87,6 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "FirebaseAnonymousAuthUI",
-      dependencies: ["FirebaseAuthUI"],
-      path: "FirebaseAnonymousAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-        .process("Strings"),
-      ],
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
       name: "FirebaseDatabaseUI",
       dependencies: [
         .product(name: "FirebaseDatabase", package: "firebase-ios-sdk"),
@@ -142,54 +100,6 @@ let package = Package(
       ]
     ),
     .target(
-      name: "FirebaseAuthUI",
-      dependencies: [
-        .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
-        .product(name: "GULUserDefaults", package: "GoogleUtilities"),
-      ],
-      path: "FirebaseAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-        .process("Strings"),
-      ],
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
-      name: "FirebaseEmailAuthUI",
-      dependencies: ["FirebaseAuthUI"],
-      path: "FirebaseEmailAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-      ],
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
-      name: "FirebaseFacebookAuthUI",
-      dependencies: [
-        "FirebaseAuthUI",
-        .product(name: "FacebookLogin", package: "facebook-ios-sdk"),
-        .product(name: "FacebookCore", package: "facebook-ios-sdk"),
-      ],
-      path: "FirebaseFacebookAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-        .process("Strings"),
-      ],
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
       name: "FirebaseFirestoreUI",
       dependencies: [
         .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
@@ -197,54 +107,6 @@ let package = Package(
       path: "FirebaseFirestoreUI/Sources",
       exclude: ["Info.plist"],
       resources: nil,
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
-      name: "FirebaseGoogleAuthUI",
-      dependencies: [
-        "FirebaseAuthUI",
-        .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS"),
-      ],
-      path: "FirebaseGoogleAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-        .process("Strings"),
-      ],
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
-      name: "FirebaseOAuthUI",
-      dependencies: [
-        "FirebaseAuthUI",
-      ],
-      path: "FirebaseOAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-      ],
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
-      name: "FirebasePhoneAuthUI",
-      dependencies: [
-        "FirebaseAuthUI",
-      ],
-      path: "FirebasePhoneAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-        .process("Strings"),
-      ],
       publicHeadersPath: "Public",
       cSettings: [
         .headerSearchPath("../../"),
