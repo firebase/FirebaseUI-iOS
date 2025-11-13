@@ -25,10 +25,10 @@ import FirebaseOAuthSwiftUI
 
 struct ContentView: View {
   init() {
-    Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
-    Auth.auth().settings?.isAppVerificationDisabledForTesting = true
-    //Auth.auth().signInAnonymously()
+     Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
+
     let actionCodeSettings = ActionCodeSettings()
+
     actionCodeSettings.handleCodeInApp = true
     actionCodeSettings.url = URL(string: "https://flutterfire-e2e-tests.firebaseapp.com")
     actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
@@ -55,6 +55,7 @@ struct ContentView: View {
     .withOAuthSignIn(
       OAuthProviderSwift(
         providerId: "oidc.line",
+        scopes: ["openid", "profile", "email"],
         displayName: "Sign in with LINE",
         buttonIcon: Image(.icLineLogo),
         buttonBackgroundColor: .lineButton,
