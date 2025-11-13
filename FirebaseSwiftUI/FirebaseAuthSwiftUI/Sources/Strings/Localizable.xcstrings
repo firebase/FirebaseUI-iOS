@@ -231,36 +231,6 @@
         }
       }
     },
-    "AddPasswordTitle" : {
-      "comment" : "Controller title shown when adding password to account.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passwort hinzufügen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add password"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Agregar contraseña"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter un mot de passe"
-          }
-        }
-      }
-    },
     "Already have an account?" : {
       "localizations" : {
         "de" : {
@@ -289,7 +259,7 @@
         }
       }
     },
-    "AS_AddPassword" : {
+    "Add password" : {
       "comment" : "Account Settings cell title Add Password.",
       "extractionState" : "manual",
       "localizations" : {
@@ -319,7 +289,7 @@
         }
       }
     },
-    "AS_ChangePassword" : {
+    "Change password" : {
       "comment" : "Account Settings cell title Change Password.",
       "extractionState" : "manual",
       "localizations" : {
@@ -345,96 +315,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Changer le mot de passe"
-          }
-        }
-      }
-    },
-    "AS_DeleteAccount" : {
-      "comment" : "Account Settings cell title Delete Account.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Konto löschen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete Account"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eliminar cuenta"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprimer le compte"
-          }
-        }
-      }
-    },
-    "AS_Email" : {
-      "comment" : "Account Settings cell title Email. Use short/abbreviated translation for 'email' which is less than 15 chars.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "E-Mail"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Correo"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "E-mail"
-          }
-        }
-      }
-    },
-    "AS_Name" : {
-      "comment" : "Account Settings cell title Name.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Name"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Name"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nombre"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nom"
           }
         }
       }
@@ -529,7 +409,7 @@
         }
       }
     },
-    "AS_SignOut" : {
+    "Sign Out" : {
       "comment" : "Account Settings cell title Sign Out.",
       "extractionState" : "manual",
       "localizations" : {
@@ -1492,36 +1372,6 @@
         }
       }
     },
-    "EditPasswordTitle" : {
-      "comment" : "Controller title shown when editing password to account.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passwort ändern"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Change password"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cambiar contraseña"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Changer le mot de passe"
-          }
-        }
-      }
-    },
     "Email" : {
       "comment" : "Field label for email",
       "extractionState" : "manual",
@@ -1552,7 +1402,7 @@
         }
       }
     },
-    "EmailAlreadyInUseError" : {
+    "The email address is already in use by another account." : {
       "comment" : "Error message displayed when the email address is already in use. Use short/abbreviated translation for 'email' which is less than 15 chars.",
       "extractionState" : "migrated",
       "localizations" : {
@@ -1582,7 +1432,7 @@
         }
       }
     },
-    "EmailLinkSignInLabel" : {
+    "Prefer Email link sign-in?" : {
       "comment" : "Button label to push user to email link sign-in",
       "extractionState" : "manual",
       "localizations" : {
@@ -1612,7 +1462,7 @@
         }
       }
     },
-    "EmailLinkSignInTitle" : {
+    "Sign in with email link" : {
       "comment" : "Sign in with email link View title",
       "extractionState" : "manual",
       "localizations" : {
