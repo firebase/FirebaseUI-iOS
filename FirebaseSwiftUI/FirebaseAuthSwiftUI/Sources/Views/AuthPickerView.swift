@@ -57,8 +57,8 @@ extension AuthPickerView: View {
                 MFAEnrolmentView()
               case AuthView.mfaManagement:
                 MFAManagementView()
-              case AuthView.mfaResolution:
-                MFAResolutionView()
+              case let .mfaResolution(mfaRequired):
+                MFAResolutionView(mfaRequired: mfaRequired)
               case AuthView.enterPhoneNumber:
                 EnterPhoneNumberView()
               case let .enterVerificationCode(verificationID, fullPhoneNumber):

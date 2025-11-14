@@ -49,7 +49,7 @@ public enum AuthView: Hashable {
   case updatePassword
   case mfaEnrollment
   case mfaManagement
-  case mfaResolution
+  case mfaResolution(MFARequired)
   case enterPhoneNumber
   case enterVerificationCode(verificationID: String, fullPhoneNumber: String)
 }
@@ -133,7 +133,6 @@ public final class AuthService {
   public var authenticationFlow: AuthenticationFlow = .signIn
 
   public var passwordPrompt: PasswordPromptCoordinator = .init()
-  public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
 
   // MARK: - Provider APIs
@@ -879,7 +878,6 @@ public extension AuthService {
 
   private func handleMFARequiredError(resolver: MultiFactorResolver) -> SignInOutcome {
     let hints = extractMFAHints(from: resolver)
-    currentMFARequired = MFARequired(hints: hints)
     currentMFAResolver = resolver
     return .mfaRequired(MFARequired(hints: hints))
   }
@@ -957,7 +955,6 @@ public extension AuthService {
       updateAuthenticationState()
 
       // Clear MFA resolution state
-      currentMFARequired = nil
       currentMFAResolver = nil
 
     } catch {

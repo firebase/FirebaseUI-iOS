@@ -100,12 +100,12 @@ public struct EnrollmentSession {
   }
 }
 
-public enum MFAHint {
+public enum MFAHint: Hashable {
   case phone(displayName: String?, uid: String, phoneNumber: String?)
   case totp(displayName: String?, uid: String)
 }
 
-public struct MFARequired {
+public struct MFARequired: Hashable {
   public let hints: [MFAHint]
 
   public init(hints: [MFAHint]) {

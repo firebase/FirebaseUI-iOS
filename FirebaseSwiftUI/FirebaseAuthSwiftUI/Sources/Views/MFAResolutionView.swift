@@ -23,6 +23,8 @@ private enum FocusableField: Hashable {
 
 @MainActor
 public struct MFAResolutionView {
+  let mfaRequired: MFARequired
+  
   @Environment(AuthService.self) private var authService
   @Environment(\.reportError) private var reportError
 
@@ -34,16 +36,12 @@ public struct MFAResolutionView {
 
   @FocusState private var focus: FocusableField?
 
-  public init() {}
-
-  private var mfaRequired: MFARequired? {
-    // This would be set by the sign-in flow when MFA is required
-    authService.currentMFARequired
+  public init(mfaRequired: MFARequired) {
+    self.mfaRequired = mfaRequired
   }
 
   private var selectedHint: MFAHint? {
-    guard let mfaRequired = mfaRequired,
-          selectedHintIndex < mfaRequired.hints.count else {
+    guard selectedHintIndex < mfaRequired.hints.count else {
       return nil
     }
     return mfaRequired.hints[selectedHintIndex]
@@ -63,7 +61,7 @@ public struct MFAResolutionView {
   }
 
   private func startSMSChallenge() {
-    guard selectedHintIndex < (mfaRequired?.hints.count ?? 0) else { return }
+    guard selectedHintIndex < mfaRequired.hints.count else { return }
 
     Task {
       isLoading = true
@@ -128,7 +126,7 @@ extension MFAResolutionView: View {
       .padding(.horizontal)
 
       // MFA Hints Selection (if multiple available)
-      if let mfaRequired = mfaRequired, mfaRequired.hints.count > 1 {
+      if mfaRequired.hints.count > 1 {
         mfaHintsSelectionView(mfaRequired: mfaRequired)
       }
 
@@ -368,34 +366,36 @@ private extension MFAHint {
 #Preview("Phone SMS Only") {
   FirebaseOptions.dummyConfigurationForPreview()
   let authService = AuthService()
-  authService.currentMFARequired = MFARequired(hints: [
+  let mfaRequired = MFARequired(hints: [
     .phone(displayName: "Work Phone", uid: "phone-uid-1", phoneNumber: "+15551234567"),
   ])
-  return MFAResolutionView().environment(authService)
+  return MFAResolutionView(mfaRequired: mfaRequired).environment(authService)
 }
 
 #Preview("TOTP Only") {
   FirebaseOptions.dummyConfigurationForPreview()
   let authService = AuthService()
-  authService.currentMFARequired = MFARequired(hints: [
+  let mfaRequired = MFARequired(hints: [
     .totp(displayName: "Authenticator App", uid: "totp-uid-1"),
   ])
-  return MFAResolutionView().environment(authService)
+  return MFAResolutionView(mfaRequired: mfaRequired).environment(authService)
 }
 
 #Preview("Multiple Methods") {
   FirebaseOptions.dummyConfigurationForPreview()
   let authService = AuthService()
-  authService.currentMFARequired = MFARequired(hints: [
+  let mfaRequired = MFARequired(hints: [
     .phone(displayName: "Mobile", uid: "phone-uid-1", phoneNumber: "+15551234567"),
     .totp(displayName: "Google Authenticator", uid: "totp-uid-1"),
   ])
-  return MFAResolutionView().environment(authService)
+  return MFAResolutionView(mfaRequired: mfaRequired).environment(authService)
 }
 
-#Preview("No MFA Required") {
+#Preview("Single TOTP") {
   FirebaseOptions.dummyConfigurationForPreview()
   let authService = AuthService()
-  // currentMFARequired is nil by default
-  return MFAResolutionView().environment(authService)
+  let mfaRequired = MFARequired(hints: [
+    .totp(displayName: "Authenticator", uid: "totp-uid-1"),
+  ])
+  return MFAResolutionView(mfaRequired: mfaRequired).environment(authService)
 }
