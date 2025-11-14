@@ -17,7 +17,7 @@
 1. Launch Xcode and open the project or workspace where you want to add FirebaseUI for SwiftUI.
 2. In the menu bar, go to: **File > Add Package Dependencies...**
 3. Enter the Package URL: `https://github.com/firebase/FirebaseUI-iOS`
-4. In the **Dependency Rule** dropdown, select **Exact Version** and set the version to `15.1.0-alpha` in the resulting text input.
+4. In the **Dependency Rule** dropdown, select **Exact Version** and set the version to the latest in the resulting text input.
 5. Select the targets you wish to add to your app. The available SwiftUI packages are:
    - **FirebaseAuthSwiftUI** (required - includes Email auth provider)
    - **FirebaseAppleSwiftUI** (Sign in with Apple)
