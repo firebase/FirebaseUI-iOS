@@ -767,27 +767,23 @@ Creates a new `AuthService` instance.
 ##### Email Authentication
 
 ```swift
-public func withEmailSignIn() -> AuthService
+public func withEmailSignIn(_ provider: EmailProviderSwift? = nil, onTap: @escaping () -> Void) -> AuthService
 ```
 
-Enables email/password and email link authentication and will register an email button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`. Uses default behavior (navigates to email link view when tapped).
+Enables email authentication and will render email sign-in directly within the AuthPickerView (default Views), email link sign-in is rendered as a button. When calling `AuthService.renderButtons()`, email link sign-in button is rendered. `onTap` custom callback (i.e where to navigate when tapped) allows user to control what happens when tapped. Default behavior in AuthPickerView is to push the user to email link sign-in default View.
+
+**Parameters:**
+- `provider`: An optional instance of `EmailProviderSwift`. If not provided, a default instance will be created.
+- `onTap`: A callback that will be executed when the email button is tapped.
 
 **Example:**
 
 ```swift
 authService
   .withEmailSignIn()
-```
 
-```swift
-public func withEmailSignIn(onTap: @escaping () -> Void) -> AuthService
-```
+// or
 
-Enables email authentication and will register an email button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`. Uses a custom callback (i.e where to navigate when tapped) when the email button is tapped.
-
-**Example:**
-
-```swift
 authService
   .withEmailSignIn(){
     // navigate to email sign-in screen logic
@@ -799,30 +795,24 @@ authService
 ##### Phone Authentication
 
 ```swift
-// Available when importing FirebasePhoneAuthSwiftUI
-public func withPhoneSignIn() -> AuthService
+public func withPhoneSignIn(onTap: @escaping () -> Void) -> AuthService
 ```
 
-Enables phone number authentication with SMS verification and will register a phone button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`. Uses default behavior (navigates to enter phone number view when tapped).
+Enables phone number authentication with SMS verification and will register a phone button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`. `onTap` custom callback (i.e where to navigate when tapped) allows user to control what happens when tapped. Default behavior in AuthPickerView is to push the user to phone sign-in default View.
+
+**Parameters:**
+- `onTap`: A callback that will be executed when the phone button is tapped.
 
 **Example:**
 
 ```swift
 authService
   .withPhoneSignIn()
-```
 
-```swift
-public func withPhoneSignIn(onTap: @escaping () -> Void) -> AuthService
-```
+// or
 
-Enables phone authentication and will register a phone button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`. Uses a custom callback (i.e where to navigate when tapped) when the phone button is tapped.
-
-**Example:**
-
-```swift
 authService
-  .withPhoneSignIn(){
+  .withPhoneSignIn() {
     // navigate to phone sign-in screen logic
   }
 ```
@@ -875,19 +865,19 @@ authService
 
 ```swift
 // Available when importing FirebaseFacebookSwiftUI
-public func withFacebookSignIn(_ provider: FacebookProviderSwift) -> AuthService
+public func withFacebookSignIn(_ provider: FacebookProviderSwift? = nil) -> AuthService
 ```
 
 Enables Sign in with Facebook authentication and will register a Facebook button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`.
 
 **Parameters:**
-- `provider`: An instance of `FacebookProviderSwift()` for classic login or `FacebookProviderSwift(useClassicLogin: false)` for limited login.
+- `provider`: An optional instance of `FacebookProviderSwift()` for classic login or `FacebookProviderSwift(useClassicLogin: false)` for limited login. If not provided, a default instance with classic login will be created.
 
 **Example:**
 
 ```swift
 authService
-  .withFacebookSignIn(FacebookProviderSwift())
+  .withFacebookSignIn()
 ```
 
 ---
@@ -1061,7 +1051,7 @@ Signs in using email and password credentials.
 ##### Create User with Email/Password
 
 ```swift
-public func createUser(email: String, password: String) async throws -> SignInOutcome
+public func createUser(email email: String, password: String) async throws -> SignInOutcome
 ```
 
 Creates a new user account with email and password.
@@ -1101,7 +1091,7 @@ Button("Sign Out") {
 ##### Link Accounts
 
 ```swift
-public func linkAccounts(credentials: AuthCredential) async throws
+public func linkAccounts(credentials credentials: AuthCredential) async throws
 ```
 
 Links a new authentication method to the current user's account.
@@ -1135,7 +1125,7 @@ Sends a sign-in link to the specified email address.
 ##### Handle Sign-In Link
 
 ```swift
-public func handleSignInLink(url: URL) async throws
+public func handleSignInLink(url url: URL) async throws
 ```
 
 Handles the sign-in flow when the user taps the email link.
