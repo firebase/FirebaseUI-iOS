@@ -33,10 +33,10 @@ public struct AuthPickerView<Content: View> {
 extension AuthPickerView: View {
   public var body: some View {
     @Bindable var authService = authService
-    @Bindable var passwordPrompt = authService.passwordPrompt
     content()
       .sheet(isPresented: $authService.isPresented) {
         @Bindable var navigator = authService.navigator
+        @Bindable var passwordPrompt = authService.passwordPrompt
         NavigationStack(path: $navigator.routes) {
           authPickerViewInternal
             .navigationTitle(authService.authenticationState == .unauthenticated ? authService
@@ -57,8 +57,8 @@ extension AuthPickerView: View {
                 MFAEnrolmentView()
               case AuthView.mfaManagement:
                 MFAManagementView()
-              case AuthView.mfaResolution:
-                MFAResolutionView()
+              case let .mfaResolution(mfaRequired):
+                MFAResolutionView(mfaRequired: mfaRequired)
               case AuthView.enterPhoneNumber:
                 EnterPhoneNumberView()
               case let .enterVerificationCode(verificationID, fullPhoneNumber):
@@ -79,10 +79,10 @@ extension AuthPickerView: View {
         .accountConflictHandler()
         // Apply MFA handling at NavigationStack level
         .mfaHandler()
-      }
-      // Centralized password prompt sheet to prevent conflicts
-      .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
-        PasswordPromptSheet(coordinator: authService.passwordPrompt)
+        // Centralized password prompt sheet inside auth flow
+        .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
+          PasswordPromptSheet(coordinator: passwordPrompt)
+        }
       }
   }
 

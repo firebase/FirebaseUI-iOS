@@ -49,7 +49,7 @@ public enum AuthView: Hashable {
   case updatePassword
   case mfaEnrollment
   case mfaManagement
-  case mfaResolution
+  case mfaResolution(MFARequired)
   case enterPhoneNumber
   case enterVerificationCode(verificationID: String, fullPhoneNumber: String)
 }
@@ -132,13 +132,17 @@ public final class AuthService {
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .signIn
 
-  public let passwordPrompt: PasswordPromptCoordinator = .init()
-  public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
 
   // MARK: - Provider APIs
 
   private var listenerManager: AuthListenerManager?
+
+  private var emailProvider: EmailProviderSwift?
+
+  public var passwordPrompt: PasswordPromptCoordinator {
+    emailProvider?.passwordPrompt ?? PasswordPromptCoordinator()
+  }
 
   var emailSignInEnabled = false
   private var emailSignInCallback: (() -> Void)?
@@ -199,7 +203,7 @@ public final class AuthService {
         : .authenticated
   }
 
-  public var shouldHandleAnonymousUpgrade: Bool {
+  private var shouldHandleAnonymousUpgrade: Bool {
     currentUser?.isAnonymous == true && configuration.shouldAutoUpgradeAnonymousUsers
   }
 
@@ -317,14 +321,16 @@ public extension AuthService {
 
 public extension AuthService {
   /// Enable email sign-in with default behavior (navigates to email link view)
-  func withEmailSignIn() -> AuthService {
-    return withEmailSignIn { [weak self] in
+  func withEmailSignIn(_ provider: EmailProviderSwift? = nil) -> AuthService {
+    return withEmailSignIn(provider) { [weak self] in
       self?.navigator.push(.emailLink)
     }
   }
 
   /// Enable email sign-in with custom callback
-  func withEmailSignIn(onTap: @escaping () -> Void) -> AuthService {
+  func withEmailSignIn(_ provider: EmailProviderSwift? = nil,
+                       onTap: @escaping () -> Void) -> AuthService {
+    emailProvider = provider ?? EmailProviderSwift()
     emailSignInEnabled = true
     emailSignInCallback = onTap
     return self
@@ -747,8 +753,14 @@ public extension AuthService {
       guard let email = user.email else {
         throw AuthServiceError.invalidCredentials("User does not have an email address")
       }
-      let password = try await passwordPrompt.confirmPassword()
-      let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+
+      guard let emailProvider = emailProvider else {
+        throw AuthServiceError.providerNotFound(
+          "Email provider not configured. Call withEmailSignIn() first."
+        )
+      }
+
+      let credential = try await emailProvider.createReauthCredential(email: email)
       _ = try await user.reauthenticate(with: credential)
     } else if providerId == PhoneAuthProviderID {
       // Phone auth requires manual reauthentication via sign out and sign in otherwise it will take
@@ -879,7 +891,6 @@ public extension AuthService {
 
   private func handleMFARequiredError(resolver: MultiFactorResolver) -> SignInOutcome {
     let hints = extractMFAHints(from: resolver)
-    currentMFARequired = MFARequired(hints: hints)
     currentMFAResolver = resolver
     return .mfaRequired(MFARequired(hints: hints))
   }
@@ -957,7 +968,6 @@ public extension AuthService {
       updateAuthenticationState()
 
       // Clear MFA resolution state
-      currentMFARequired = nil
       currentMFAResolver = nil
 
     } catch {
