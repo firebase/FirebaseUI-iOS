@@ -33,6 +33,7 @@ public struct AuthPickerView<Content: View> {
 extension AuthPickerView: View {
   public var body: some View {
     @Bindable var authService = authService
+    @Bindable var passwordPrompt = authService.passwordPrompt
     content()
       .sheet(isPresented: $authService.isPresented) {
         @Bindable var navigator = authService.navigator
@@ -78,6 +79,10 @@ extension AuthPickerView: View {
         .accountConflictHandler()
         // Apply MFA handling at NavigationStack level
         .mfaHandler()
+      }
+      // Centralized password prompt sheet to prevent conflicts
+      .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
+        PasswordPromptSheet(coordinator: authService.passwordPrompt)
       }
   }
 
@@ -156,7 +161,7 @@ extension AuthPickerView: View {
     VStack {
       authService.renderButtons()
     }
-    .padding(.horizontal, proxy.size.width * 0.18)
+    .padding(.horizontal, proxy.size.width * 0.14)
   }
 }
 

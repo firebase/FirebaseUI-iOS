@@ -52,7 +52,7 @@ struct EnterVerificationCodeView: View {
         VerificationCodeInputField(
           code: $verificationCode,
           validations: [
-            FormValidators.verificationCode
+            FormValidators.verificationCode,
           ],
           maintainsValidationMessage: true
         )
@@ -106,7 +106,7 @@ struct EnterVerificationCodeView: View {
   return NavigationStack {
     EnterVerificationCodeView(
       verificationID: "mock-id",
-      fullPhoneNumber: "+1 5551234567",
+      fullPhoneNumber: "+1 5551234567"
     )
     .environment(AuthService())
   }

@@ -1,39 +1,33 @@
-FirebaseUI Chat Demo in Swift
+FirebaseUI Demo in Swift
 =============================
 
-This directory contains a collection of swift code samples.
+This directory contains Swift code samples demonstrating FirebaseUI Database and Storage features.
 
-In order to install and run:
+## Installation
+
 ``` bash
 git clone https://github.com/firebase/FirebaseUI-iOS.git
 cd FirebaseUI-iOS/samples/swift
 pod install
 open FirebaseUI-demo-swift.xcworkspace
 ```
-Once you've opened the workspace, go into `Supporting Files/Info.plist` and either fill in the social provider information currently commented out, or delete extra providers you're not interested in. For providers you choose to keep, enable them in your Firebase Dashboard according to the [user authentication docs](https://www.firebase.com/docs/ios/guide/user-auth.html). In `ViewController.m` make sure to only enable providers that you've configured properly.
 
-### Project configuration
+## Project Configuration
 
-Please follow steps described [here](https://github.com/firebase/FirebaseUI-iOS#mandatory-sample-project-configuration) in order to run the sample project.
+1. Download `GoogleService-Info.plist` from [Firebase Console](https://console.firebase.google.com)
+2. Copy it to `samples/swift/` directory
+3. Configure your Firebase Database and Storage in the Firebase Console
+
+## Samples
 
 ### Chat Sample
 
-This sample uses [anonymous authentication](https://firebase.google.com/docs/auth/ios/anonymous-auth),
-so make sure anonymous auth is enabled in Firebase console.
+This sample demonstrates real-time database functionality using `FUICollectionViewDataSource` to bind a Firebase query to a `UICollectionView`. The chat messages are stored in the Firebase Realtime Database and updated in real-time.
 
-### Auth Sample
-
-This sample uses [email/password](https://firebase.google.com/docs/auth/ios/password-auth),
-[Google](https://firebase.google.com/docs/auth/ios/google-signin),
-and [Facebook](https://firebase.google.com/docs/auth/ios/facebook-login)
-auth, so make sure those are enabled in Firebase console.
-
-The auth example requires a little more setup (adding url schemes, etc)
-since it depends on the various keys and tokens for the different auth
-services your app will support. Take a look at the [Auth README](../../FirebaseAuthUI/README.md)
-for more information.
+Note: This sample uses [anonymous authentication](https://firebase.google.com/docs/auth/ios/anonymous-auth), so make sure anonymous auth is enabled in Firebase Console.
 
 ### Storage Sample
 
-This sample does not use a logged-in user, so make to set up the [Storage Security Rules](https://firebase.google.com/docs/storage/security/start#sample-rules)
-for your bucket to allow that.
+This sample demonstrates Firebase Storage integration, showing how to upload and display images stored in Firebase Storage.
+
+Note: Make sure to set up the [Storage Security Rules](https://firebase.google.com/docs/storage/security/start#sample-rules) for your bucket.

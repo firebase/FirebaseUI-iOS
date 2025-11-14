@@ -18,21 +18,21 @@ public struct AuthTextField<Leading: View>: View {
   @FocusState private var isFocused: Bool
   @State var obscured: Bool = true
   @State var hasInteracted: Bool = false
-  
+
   @Binding var text: String
   let label: String
   let prompt: String
   var textAlignment: TextAlignment = .leading
   var keyboardType: UIKeyboardType = .default
-  var contentType: UITextContentType? = nil
+  var contentType: UITextContentType?
   var isSecureTextField: Bool = false
   var validations: [FormValidator] = []
   var maintainsValidationMessage: Bool = false
-  var formState: ((Bool) -> Void)? = nil
-  var onSubmit: ((String) -> Void)? = nil
-  var onChange: ((String) -> Void)? = nil
+  var formState: ((Bool) -> Void)?
+  var onSubmit: ((String) -> Void)?
+  var onChange: ((String) -> Void)?
   private let leading: () -> Leading?
-  
+
   public init(text: Binding<String>,
               label: String,
               prompt: String,
@@ -60,11 +60,11 @@ public struct AuthTextField<Leading: View>: View {
     self.onChange = onChange
     self.leading = leading
   }
-  
+
   var allRequirementsMet: Bool {
     validations.allSatisfy { $0.isValid(input: text) }
   }
-  
+
   public var body: some View {
     VStack(alignment: .leading) {
       Text(LocalizedStringResource(stringLiteral: label))
@@ -142,7 +142,8 @@ public struct AuthTextField<Leading: View>: View {
           isFocused = true
         }
       }
-      if !validations.isEmpty && hasInteracted && (maintainsValidationMessage || !allRequirementsMet) {
+      if !validations
+        .isEmpty && hasInteracted && (maintainsValidationMessage || !allRequirementsMet) {
         VStack(alignment: .leading, spacing: 4) {
           ForEach(validations) { validator in
             let isValid = validator.isValid(input: text)

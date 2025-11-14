@@ -44,27 +44,27 @@ public class StringUtils {
     switch errorCode {
     case .emailAlreadyInUse:
       return localizedString(
-        for: "EmailAlreadyInUseError"
+        for: "The email address is already in use by another account."
       )
     case .invalidEmail:
-      return localizedString(for: "InvalidEmailError")
+      return localizedString(for: "That email address isn't correct.")
     case .weakPassword:
-      return localizedString(for: "WeakPasswordError")
+      return localizedString(for: "Password must be at least 6 characters long.")
     case .tooManyRequests:
       return localizedString(
         for: "SignUpTooManyTimesError"
       )
     case .wrongPassword:
       return localizedString(
-        for: "WrongPasswordError"
+        for: "The email and password you entered don't match."
       )
     case .userNotFound:
       return localizedString(
-        for: "UserNotFoundError"
+        for: "That email address doesn't match an existing account."
       )
     case .userDisabled:
       return localizedString(
-        for: "AccountDisabledError"
+        for: "That email address is for an account that has been disabled."
       )
     default:
       return error.localizedDescription
@@ -75,7 +75,7 @@ public class StringUtils {
   /// found in:
   /// - AuthPickerView
   public var authPickerTitle: String {
-    return localizedString(for: "AuthPickerTitle")
+    return localizedString(for: "Sign in with Firebase")
   }
 
   /// Email input label
@@ -84,14 +84,14 @@ public class StringUtils {
   /// - PasswordRecoveryView
   /// - EmailLinkView
   public var emailInputLabel: String {
-    return localizedString(for: "EnterYourEmail")
+    return localizedString(for: "Enter your email")
   }
 
   /// Password button action label
   /// found in:
   /// - EmailAuthView
   public var passwordButtonLabel: String {
-    return localizedString(for: "ForgotPasswordTitle")
+    return localizedString(for: "Trouble signing in?")
   }
 
   /// Password input label
@@ -100,21 +100,28 @@ public class StringUtils {
   /// - PasswordPromptView
   /// - UpdatePassword
   public var passwordInputLabel: String {
-    return localizedString(for: "EnterYourPassword")
+    return localizedString(for: "Enter your password")
+  }
+
+  /// Update password title
+  /// found in:
+  /// - UpdatePasswordView
+  public var updatePasswordTitle: String {
+    return localizedString(for: "UpdatePasswordTitle")
   }
 
   /// Password recovery title
   /// found in:
   /// - PasswordRecoveryView
   public var passwordRecoveryTitle: String {
-    return localizedString(for: "PasswordRecoveryTitle")
+    return localizedString(for: "Recover password")
   }
 
   /// Password recovery email sent title
   /// found in:
   /// - PasswordRecoveryView
   public var passwordRecoveryEmailSentTitle: String {
-    return localizedString(for: "PasswordRecoveryEmailSentTitle")
+    return localizedString(for: "Check your email")
   }
 
   /// Password recovery helper message
@@ -135,14 +142,14 @@ public class StringUtils {
   /// found in:
   /// - PasswordRecoveryView
   public var forgotPasswordInputLabel: String {
-    return localizedString(for: "ForgotPassword")
+    return localizedString(for: "Send password recovery email")
   }
 
   /// Signed in title
   /// found in:
   /// - SignedInView
   public var signedInTitle: String {
-    return localizedString(for: "SignedIn")
+    return localizedString(for: "Signed in!")
   }
 
   /// Confirm password
@@ -150,70 +157,70 @@ public class StringUtils {
   /// - EmailAuthView
   /// - UpdatePassword
   public var confirmPasswordInputLabel: String {
-    return localizedString(for: "ConfirmPasswordInputLabel")
+    return localizedString(for: "Confirm Password")
   }
 
   /// Sign in with email button label or can be used as title
   /// found in:
   /// - EmailAuthView
   public var signInWithEmailButtonLabel: String {
-    return localizedString(for: "SignInWithEmail")
+    return localizedString(for: "Sign in with email")
   }
 
   /// Sign up with email button label
   /// found in:
   /// - EmailAuthView
   public var signUpWithEmailButtonLabel: String {
-    return localizedString(for: "SignUpTitle")
+    return localizedString(for: "Create account")
   }
 
   /// Sign-in with email link button label to push user to email link view
   /// found in:
   /// - EmailAuthView
   public var signUpWithEmailLinkButtonLabel: String {
-    return localizedString(for: "EmailLinkSignInLabel")
+    return localizedString(for: "Prefer Email link sign-in?")
   }
 
   /// send email link sign-in button label
   /// found in:
   /// - EmailLinkView
   public var sendEmailLinkButtonLabel: String {
-    return localizedString(for: "SendEmailSignInLinkButtonLabel")
+    return localizedString(for: "Send email sign-in link")
   }
 
   /// Sign in with email link View title
   /// found in:
   /// - EmailLinkView
   public var signInWithEmailLinkViewTitle: String {
-    return localizedString(for: "EmailLinkSignInTitle")
+    return localizedString(for: "Sign in with email link")
   }
 
   /// Sign in with email link View message
   /// found in:
   /// - EmailLinkView
   public var signInWithEmailLinkViewMessage: String {
-    return localizedString(for: "SignInEmailSent")
+    return localizedString(for: "Sign-in email Sent")
   }
 
   /// Account settings - Delete button label
   /// found in:
   /// - SignedInView
   public var deleteAccountButtonLabel: String {
-    return localizedString(for: "AS_DeleteAccount")
+    return localizedString(for: "Delete Account")
   }
 
   /// Account settings - Email label
   /// found in:
   /// SignedInView
   public var accountSettingsEmailLabel: String {
-    return localizedString(for: "AS_Email")
+    return localizedString(for: "Email")
   }
 
   /// Account settings - sign out button label
   /// found in:
   /// - SignedInView
   public var signOutButtonLabel: String {
-    return localizedString(for: "AS_SignOut")
+    return localizedString(for: "Sign Out")
   }
 
   /// Account settings - update password button label
@@ -434,7 +441,7 @@ public class StringUtils {
   /// found in:
   /// - PrivacyTOCsView
   public var termsOfServiceLabel: String {
-    return localizedString(for: "TermsOfService")
+    return localizedString(for: "Terms of Service")
   }
 
   /// Terms of Service message
@@ -448,7 +455,7 @@ public class StringUtils {
   /// found in:
   /// - PrivacyTOCsView
   public var privacyPolicyLabel: String {
-    return localizedString(for: "PrivacyPolicy")
+    return localizedString(for: "Privacy Policy")
   }
 
   /// Alert Error title

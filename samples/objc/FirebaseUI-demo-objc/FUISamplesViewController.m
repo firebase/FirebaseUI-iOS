@@ -20,7 +20,6 @@
 
 #import "FUISamplesViewController.h"
 
-#import "FUIAuthViewController.h"
 #import "FUIChatViewController.h"
 #import "FUISample.h"
 
@@ -45,16 +44,9 @@
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main"
                                                        bundle:NULL];
   NSArray *samples = @[
-    [FUISample sampleWithTitle:@"Auth"
-            sampleDescription:@"Demonstrates the FirebaseAuthUI flow with customization options"
-                   controller:^UIViewController *{
-        UIViewController *controller =
-            [storyboard instantiateViewControllerWithIdentifier:@"FUIAuthViewController"];
-        return controller;
-      }],
     [FUISample sampleWithTitle:@"Chat"
-            sampleDescription:@"Demonstrates using a FUICollectionViewDataSource to load data from "
-                               "Firebase Database into a UICollectionView for a basic chat app."
+            sampleDescription:@"Demonstrates using a FUITableViewDataSource to load data from "
+                               "Firebase Database into a UITableView for a basic chat app."
                    controller:^UIViewController *{
         UIViewController *controller =
           [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];

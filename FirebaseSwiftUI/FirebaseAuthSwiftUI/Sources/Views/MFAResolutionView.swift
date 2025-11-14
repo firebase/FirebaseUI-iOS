@@ -24,6 +24,7 @@ private enum FocusableField: Hashable {
 @MainActor
 public struct MFAResolutionView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
 
   @State private var verificationCode = ""
   @State private var totpCode = ""
@@ -72,6 +73,7 @@ public struct MFAResolutionView {
         self.verificationId = verificationId
         isLoading = false
       } catch {
+        reportError?(error)
         isLoading = false
       }
     }
@@ -93,6 +95,7 @@ public struct MFAResolutionView {
         authService.navigator.clear()
         isLoading = false
       } catch {
+        reportError?(error)
         isLoading = false
       }
     }

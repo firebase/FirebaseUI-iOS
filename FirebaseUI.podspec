@@ -30,32 +30,4 @@ Pod::Spec.new do |s|
     storage.dependency 'FirebaseStorageUI', '~> 15.0'
   end
 
-  s.subspec 'Auth' do |auth|
-    auth.dependency 'FirebaseAuthUI', '~> 15.0'
-  end
-
-  s.subspec 'Anonymous' do |anonymous|
-    anonymous.dependency 'FirebaseAnonymousAuthUI', '~> 15.0'
-  end
-
-  s.subspec 'Email' do |email|
-    email.dependency 'FirebaseEmailAuthUI', '~> 15.0'
-  end
-
-  s.subspec 'Facebook' do |facebook|
-    facebook.dependency 'FirebaseFacebookAuthUI', '~> 15.0'
-  end
-
-  s.subspec 'Google' do |google|
-    google.dependency 'FirebaseGoogleAuthUI', '~> 15.0'
-  end
-
-  s.subspec 'OAuth' do |oauth|
-    oauth.dependency 'FirebaseOAuthUI', '~> 15.0'
-  end
-
-  s.subspec 'Phone' do |phone|
-    phone.dependency 'FirebasePhoneAuthUI', '~> 15.0'
-  end
-
 end

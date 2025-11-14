@@ -23,6 +23,7 @@ extension MultiFactorInfo: Identifiable {
 @MainActor
 public struct MFAManagementView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
 
   @State private var enrolledFactors: [MultiFactorInfo] = []
   @State private var isLoading = false
@@ -43,6 +44,7 @@ public struct MFAManagementView {
         enrolledFactors = freshFactors
         isLoading = false
       } catch {
+        reportError?(error)
         isLoading = false
       }
     }
@@ -55,7 +57,6 @@ public struct MFAManagementView {
 
 extension MFAManagementView: View {
   public var body: some View {
-    @Bindable var passwordPrompt = authService.passwordPrompt
     VStack(spacing: 20) {
       // Title section
       VStack {
@@ -132,10 +133,6 @@ extension MFAManagementView: View {
     .safeAreaPadding()
     .onAppear {
       loadEnrolledFactors()
-    }
-    // Present password prompt when required for reauthentication
-    .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
-      PasswordPromptSheet(coordinator: authService.passwordPrompt)
     }
   }
 

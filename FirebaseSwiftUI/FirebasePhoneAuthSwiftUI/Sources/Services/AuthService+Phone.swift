@@ -32,7 +32,7 @@ public extension AuthService {
 
   /// Register phone sign-in with custom behavior
   @discardableResult
-  func withPhoneSignIn(onTap: @escaping @MainActor () -> Void) -> AuthService {
+  func withPhoneSignIn(onTap: @escaping () -> Void) -> AuthService {
     registerProvider(providerWithButton: PhoneAuthProviderAuthUI(onTap: onTap))
     return self
   }

@@ -5,20 +5,44 @@ on:
     branches: [ main ]
     paths:
       - '.github/workflows/sample.yml'
+      - 'FirebaseSwiftUI/**'
       - 'Firebase*UI/**'
+      - 'samples/**'
+      - 'Package.swift'
       - '*.podspec'
   pull_request:
     branches: [ main ]
     paths:
-      - '.github/workflows/storage.yml'
+      - '.github/workflows/sample.yml'
+      - 'FirebaseSwiftUI/**'
       - 'Firebase*UI/**'
+      - 'samples/**'
+      - 'Package.swift'
       - '*.podspec'
 
   workflow_dispatch:
 
 jobs:
+  swiftui:
+    name: SwiftUI Sample build
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+      - name: Build SwiftUI Sample
+        run: |
+          cd samples/swiftui/FirebaseSwiftUISample
+          xcodebuild \
+            -project FirebaseSwiftUISample.xcodeproj \
+            -scheme FirebaseSwiftUISample \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' \
+            clean build \
+            ONLY_ACTIVE_ARCH=YES
+
   swift:
-    name: Swift build
+    name: Swift UIKit Sample build
     runs-on: macos-15
 
     steps:
@@ -26,6 +50,7 @@ jobs:
         uses: actions/checkout@main
       - name: Setup
         run: |
+          cp samples/GoogleService-Info-dummy.plist samples/swift/GoogleService-Info.plist
           cd samples/swift
           gem install bundler
           bundle install
@@ -38,12 +63,12 @@ jobs:
             -workspace FirebaseUI-demo-swift.xcworkspace \
             -scheme FirebaseUI-demo-swift \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11 Pro' \
+            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' \
             clean build test \
             ONLY_ACTIVE_ARCH=YES | xcpretty
 
   objc:
-    name: ObjC build
+    name: ObjC Sample build
     runs-on: macos-15
 
     steps:
@@ -51,21 +76,19 @@ jobs:
         uses: actions/checkout@main
       - name: Setup
         run: |
-          cp samples/GoogleService-Info-dummy.plist samples/swift/GoogleService-Info.plist
+          cp samples/GoogleService-Info-dummy.plist samples/objc/GoogleService-Info.plist
           cd samples/objc
           gem install bundler
           bundle install
           gem install xcpretty
           bundle exec pod install --repo-update
       - name: Build
-        # Note: tests aren't run here because the ObjC sample has no test targets.
         run: |
-          cp samples/GoogleService-Info-dummy.plist samples/objc/GoogleService-Info.plist
           cd samples/objc
           xcodebuild \
             -workspace FirebaseUI-demo-objc.xcworkspace \
             -scheme FirebaseUI-demo-objc \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11 Pro' \
+            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' \
             clean build \
             ONLY_ACTIVE_ARCH=YES | xcpretty
