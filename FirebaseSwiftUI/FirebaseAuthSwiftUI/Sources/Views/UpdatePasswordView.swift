@@ -53,7 +53,7 @@ public struct UpdatePasswordView {
 
 extension UpdatePasswordView: View {
   public var body: some View {
-    @Bindable var passwordPrompt = authService.passwordPrompt
+    @Bindable var passwordPrompt = authService.emailProvider?.passwordPrompt ?? PasswordPromptCoordinator()
     VStack(spacing: 24) {
       AuthTextField(
         text: $password,
@@ -116,7 +116,7 @@ extension UpdatePasswordView: View {
       Text("Your password has been successfully updated.")
     }
     .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
-      PasswordPromptSheet(coordinator: authService.passwordPrompt)
+      PasswordPromptSheet(coordinator: passwordPrompt)
     }
   }
 }
