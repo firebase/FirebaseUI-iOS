@@ -25,7 +25,7 @@ import FirebaseOAuthSwiftUI
 
 struct ContentView: View {
   init() {
-     Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
+//     Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
 
     let actionCodeSettings = ActionCodeSettings()
 

@@ -39,8 +39,8 @@ struct MFAHandlerModifier: ViewModifier {
   }
 
   /// Handle MFA required - navigate to MFA resolution view
-  func handleMFARequired(_: MFARequired) {
-    authService.navigator.push(.mfaResolution)
+  func handleMFARequired(_ mfaRequired: MFARequired) {
+    authService.navigator.push(.mfaResolution(mfaRequired))
   }
 }
 

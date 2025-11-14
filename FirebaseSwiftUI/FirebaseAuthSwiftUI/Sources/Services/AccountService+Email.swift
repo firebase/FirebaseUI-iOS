@@ -18,22 +18,24 @@ import Observation
 @MainActor
 @Observable
 public final class PasswordPromptCoordinator {
-  var isPromptingPassword = false
+  public var isPromptingPassword = false
   private var continuation: CheckedContinuation<String, Error>?
 
-  func confirmPassword() async throws -> String {
+  public init() {}
+
+  public func confirmPassword() async throws -> String {
     return try await withCheckedThrowingContinuation { continuation in
       self.continuation = continuation
       self.isPromptingPassword = true
     }
   }
 
-  func submit(password: String) {
+  public func submit(password: String) {
     continuation?.resume(returning: password)
     cleanup()
   }
 
-  func cancel() {
+  public func cancel() {
     continuation?
       .resume(throwing: AuthServiceError
         .signInCancelled("Password entry cancelled for Email provider"))
