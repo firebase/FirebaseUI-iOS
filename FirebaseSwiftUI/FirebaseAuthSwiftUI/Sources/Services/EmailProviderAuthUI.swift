@@ -20,15 +20,14 @@ import FirebaseAuth
 public class EmailProviderSwift: AuthProviderSwift {
   public let passwordPrompt: PasswordPromptCoordinator
   public let providerId = EmailAuthProviderID
-  
+
   public init(passwordPrompt: PasswordPromptCoordinator = .init()) {
     self.passwordPrompt = passwordPrompt
   }
-  
+
   /// Create credential for reauthentication
   func createReauthCredential(email: String) async throws -> AuthCredential {
     let password = try await passwordPrompt.confirmPassword()
     return EmailAuthProvider.credential(withEmail: email, password: password)
   }
 }
-

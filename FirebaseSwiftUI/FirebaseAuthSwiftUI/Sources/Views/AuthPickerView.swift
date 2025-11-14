@@ -33,7 +33,8 @@ public struct AuthPickerView<Content: View> {
 extension AuthPickerView: View {
   public var body: some View {
     @Bindable var authService = authService
-    @Bindable var passwordPrompt = authService.emailProvider?.passwordPrompt ?? PasswordPromptCoordinator()
+    @Bindable var passwordPrompt = authService.emailProvider?
+      .passwordPrompt ?? PasswordPromptCoordinator()
     content()
       .sheet(isPresented: $authService.isPresented) {
         @Bindable var navigator = authService.navigator

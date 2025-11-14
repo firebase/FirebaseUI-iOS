@@ -24,7 +24,7 @@ private enum FocusableField: Hashable {
 @MainActor
 public struct MFAResolutionView {
   let mfaRequired: MFARequired
-  
+
   @Environment(AuthService.self) private var authService
   @Environment(\.reportError) private var reportError
 

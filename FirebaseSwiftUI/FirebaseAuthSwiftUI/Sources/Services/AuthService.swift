@@ -138,7 +138,7 @@ public final class AuthService {
 
   private var listenerManager: AuthListenerManager?
 
-  internal private(set) var emailProvider: EmailProviderSwift?
+  private(set) var emailProvider: EmailProviderSwift?
   var emailSignInEnabled = false
   private var emailSignInCallback: (() -> Void)?
 
@@ -323,10 +323,8 @@ public extension AuthService {
   }
 
   /// Enable email sign-in with custom callback
-  func withEmailSignIn(
-    _ provider: EmailProviderSwift? = nil,
-    onTap: @escaping () -> Void
-  ) -> AuthService {
+  func withEmailSignIn(_ provider: EmailProviderSwift? = nil,
+                       onTap: @escaping () -> Void) -> AuthService {
     emailProvider = provider ?? EmailProviderSwift()
     emailSignInEnabled = true
     emailSignInCallback = onTap
@@ -750,13 +748,13 @@ public extension AuthService {
       guard let email = user.email else {
         throw AuthServiceError.invalidCredentials("User does not have an email address")
       }
-      
+
       guard let emailProvider = emailProvider else {
         throw AuthServiceError.providerNotFound(
           "Email provider not configured. Call withEmailSignIn() first."
         )
       }
-      
+
       let credential = try await emailProvider.createReauthCredential(email: email)
       _ = try await user.reauthenticate(with: credential)
     } else if providerId == PhoneAuthProviderID {
