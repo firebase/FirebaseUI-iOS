@@ -833,10 +833,13 @@ authService
 
 ```swift
 // Available when importing FirebaseAppleSwiftUI
-public func withAppleSignIn() -> AuthService
+public func withAppleSignIn(_ provider: AppleProviderSwift? = nil) -> AuthService
 ```
 
 Enables Sign in with Apple authentication and will register an apple button that is rendered in `AuthPickerView` (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`.
+
+**Parameters:**
+- `provider`: An optional instance of `AppleProviderSwift`. If not provided, a default instance will be created.
 
 **Example:**
 
@@ -851,10 +854,13 @@ authService
 
 ```swift
 // Available when importing FirebaseGoogleSwiftUI
-public func withGoogleSignIn() -> AuthService
+public func withGoogleSignIn(_ provider: GoogleProviderSwift? = nil) -> AuthService
 ```
 
 Enables Sign in with Google authentication and will register a Google button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`.
+
+**Parameters:**
+- `provider`: An optional instance of `GoogleProviderSwift`. If not provided, a default instance will be created using the client ID from Firebase configuration.
 
 **Example:**
 
@@ -890,10 +896,13 @@ authService
 
 ```swift
 // Available when importing FirebaseTwitterSwiftUI
-public func withTwitterSignIn() -> AuthService
+public func withTwitterSignIn(_ provider: TwitterProviderSwift? = nil) -> AuthService
 ```
 
 Enables Sign in with Twitter authentication and will register a Twitter button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`.
+
+**Parameters:**
+- `provider`: An optional instance of `TwitterProviderSwift`. If not provided, a default instance will be created.
 
 **Example:**
 
