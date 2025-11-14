@@ -143,7 +143,7 @@ struct ContentView: View {
       .withEmailSignIn()
       .withAppleSignIn()
       .withGoogleSignIn()
-      .withFacebookSignIn(FacebookProviderSwift())
+      .withFacebookSignIn()
       .withPhoneSignIn()
       .withTwitterSignIn()
       .withOAuthSignIn(OAuthProviderSwift.github())
