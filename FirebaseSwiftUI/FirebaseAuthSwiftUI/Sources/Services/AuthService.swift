@@ -199,7 +199,7 @@ public final class AuthService {
         : .authenticated
   }
 
-  public var shouldHandleAnonymousUpgrade: Bool {
+  private var shouldHandleAnonymousUpgrade: Bool {
     currentUser?.isAnonymous == true && configuration.shouldAutoUpgradeAnonymousUsers
   }
 
