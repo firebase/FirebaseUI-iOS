@@ -803,13 +803,28 @@ authService
 public func withPhoneSignIn() -> AuthService
 ```
 
-Enables phone number authentication with SMS verification.
+Enables phone number authentication with SMS verification. Uses default behavior (navigates to enter phone number view when tapped).
 
 **Example:**
 
 ```swift
 authService
   .withPhoneSignIn()
+```
+
+```swift
+public func withPhoneSignIn(onTap: @escaping () -> Void) -> AuthService
+```
+
+Enables phone authentication with a custom callback (i.e where to navigate when tapped) when the phone button is tapped.
+
+**Example:**
+
+```swift
+authService
+  .withPhoneSignIn(){
+    // navigate to phone sign-in screen logic
+  }
 ```
 
 ---
