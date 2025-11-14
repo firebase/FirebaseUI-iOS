@@ -262,7 +262,7 @@ The default views support:
 - **Phone Authentication** (SMS verification)
 - **Sign in with Apple**
 - **Sign in with Google**
-- **Sign in with Facebook** (Classic and Limited Login)
+- **Sign in with Facebook** (Classic and Limited Login depending on whether App Tracking Transparency is authorized)
 - **Sign in with Twitter**
 - **Generic OAuth Providers** (GitHub, Microsoft, Yahoo, or custom OIDC)
 
@@ -772,17 +772,26 @@ public func withEmailSignIn() -> AuthService
 
 Enables email/password and email link authentication. Uses default behavior (navigates to email link view when tapped).
 
-```swift
-public func withEmailSignIn(onTap: @escaping @MainActor () -> Void) -> AuthService
-```
-
-Enables email authentication with a custom callback when the email button is tapped.
-
 **Example:**
 
 ```swift
 authService
   .withEmailSignIn()
+```
+
+```swift
+public func withEmailSignIn(onTap: @escaping () -> Void) -> AuthService
+```
+
+Enables email authentication with a custom callback (i.e where to navigate when tapped) when the email button is tapped.
+
+**Example:**
+
+```swift
+authService
+  .withEmailSignIn(){
+    // navigate to email sign-in screen logic
+  }
 ```
 
 ---
