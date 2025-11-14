@@ -1424,6 +1424,22 @@ Navigator for managing navigation routes in default views.
 ---
 
 ```swift
+public var passwordPrompt: PasswordPromptCoordinator
+```
+A coordinator that manages password prompt dialogs during reauthentication flows for the email provider. 
+
+Users can provide a custom `PasswordPromptCoordinator` instance when initializing `EmailProviderSwift` to customize password prompting behavior:
+
+```swift
+let customPrompt = PasswordPromptCoordinator()
+authService.withEmailSignIn(EmailProviderSwift(passwordPrompt: customPrompt))
+```
+
+**Default Behavior:** If no custom coordinator is provided, a default `PasswordPromptCoordinator()` instance is created automatically. The default coordinator displays a modal sheet that prompts the user to enter their password when reauthentication is required for sensitive operations (e.g., updating email, deleting account).
+
+---
+
+```swift
 public var authView: AuthView?
 ```
 Currently displayed auth view (e.g., `.emailLink`, `.mfaResolution`).
