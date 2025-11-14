@@ -770,7 +770,7 @@ Creates a new `AuthService` instance.
 public func withEmailSignIn() -> AuthService
 ```
 
-Enables email/password and email link authentication. Uses default behavior (navigates to email link view when tapped).
+Enables email/password and email link authentication and will register an email button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`. Uses default behavior (navigates to email link view when tapped).
 
 **Example:**
 
@@ -783,7 +783,7 @@ authService
 public func withEmailSignIn(onTap: @escaping () -> Void) -> AuthService
 ```
 
-Enables email authentication with a custom callback (i.e where to navigate when tapped) when the email button is tapped.
+Enables email authentication and will register an email button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`. Uses a custom callback (i.e where to navigate when tapped) when the email button is tapped.
 
 **Example:**
 
@@ -803,7 +803,7 @@ authService
 public func withPhoneSignIn() -> AuthService
 ```
 
-Enables phone number authentication with SMS verification. Uses default behavior (navigates to enter phone number view when tapped).
+Enables phone number authentication with SMS verification and will register a phone button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`. Uses default behavior (navigates to enter phone number view when tapped).
 
 **Example:**
 
@@ -816,7 +816,7 @@ authService
 public func withPhoneSignIn(onTap: @escaping () -> Void) -> AuthService
 ```
 
-Enables phone authentication with a custom callback (i.e where to navigate when tapped) when the phone button is tapped.
+Enables phone authentication and will register a phone button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`. Uses a custom callback (i.e where to navigate when tapped) when the phone button is tapped.
 
 **Example:**
 
@@ -836,7 +836,7 @@ authService
 public func withAppleSignIn() -> AuthService
 ```
 
-Enables Sign in with Apple authentication.
+Enables Sign in with Apple authentication and will register an apple button that is rendered in `AuthPickerView` (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`.
 
 **Example:**
 
@@ -854,7 +854,7 @@ authService
 public func withGoogleSignIn() -> AuthService
 ```
 
-Enables Sign in with Google authentication.
+Enables Sign in with Google authentication and will register a Google button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`.
 
 **Example:**
 
@@ -872,7 +872,7 @@ authService
 public func withFacebookSignIn(_ provider: FacebookProviderSwift) -> AuthService
 ```
 
-Enables Sign in with Facebook authentication.
+Enables Sign in with Facebook authentication and will register a Facebook button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`.
 
 **Parameters:**
 - `provider`: An instance of `FacebookProviderSwift()` for classic login or `FacebookProviderSwift(useClassicLogin: false)` for limited login.
@@ -893,7 +893,7 @@ authService
 public func withTwitterSignIn() -> AuthService
 ```
 
-Enables Sign in with Twitter authentication.
+Enables Sign in with Twitter authentication and will register a Twitter button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`.
 
 **Example:**
 
@@ -911,7 +911,7 @@ authService
 public func withOAuthSignIn(_ provider: OAuthProviderSwift) -> AuthService
 ```
 
-Enables authentication with generic OAuth/OIDC providers.
+Enables authentication with generic OAuth/OIDC providers and will register an OAuth button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`.
 
 **Built-in Providers:**
 - `OAuthProviderSwift.github()`
