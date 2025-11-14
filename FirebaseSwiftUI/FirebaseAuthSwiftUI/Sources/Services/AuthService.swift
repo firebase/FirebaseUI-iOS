@@ -138,7 +138,12 @@ public final class AuthService {
 
   private var listenerManager: AuthListenerManager?
 
-  private(set) var emailProvider: EmailProviderSwift?
+  private var emailProvider: EmailProviderSwift?
+
+  public var passwordPrompt: PasswordPromptCoordinator {
+    emailProvider?.passwordPrompt ?? PasswordPromptCoordinator()
+  }
+
   var emailSignInEnabled = false
   private var emailSignInCallback: (() -> Void)?
 
