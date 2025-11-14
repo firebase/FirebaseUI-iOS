@@ -132,7 +132,7 @@ public final class AuthService {
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .signIn
 
-  public let passwordPrompt: PasswordPromptCoordinator = .init()
+  public var passwordPrompt: PasswordPromptCoordinator = .init()
   public var currentMFARequired: MFARequired?
   private var currentMFAResolver: MultiFactorResolver?
 
