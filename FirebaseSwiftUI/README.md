@@ -578,7 +578,7 @@ struct ContentView: View {
       Button("Sign in with Google") {
         Task {
           do {
-            let provider = GoogleProviderSwift( clientID: Auth.auth().app?.options.clientID ?? "")
+            let provider = GoogleProviderSwift(clientID: Auth.auth().app?.options.clientID ?? "")
             let outcome = try await authService.signIn(provider)
             
             // Handle MFA if required
@@ -767,7 +767,7 @@ Creates a new `AuthService` instance.
 ##### Email Authentication
 
 ```swift
-public func withEmailSignIn(_ provider: EmailProviderSwift? = nil, onTap: @escaping () -> Void) -> AuthService
+public func withEmailSignIn(_ provider: EmailProviderSwift? = nil, onTap: @escaping () -> Void = {}) -> AuthService
 ```
 
 Enables email authentication and will render email sign-in directly within the AuthPickerView (default Views), email link sign-in is rendered as a button. When calling `AuthService.renderButtons()`, email link sign-in button is rendered. `onTap` custom callback (i.e where to navigate when tapped) allows user to control what happens when tapped. Default behavior in AuthPickerView is to push the user to email link sign-in default View.
@@ -785,7 +785,7 @@ authService
 // or
 
 authService
-  .withEmailSignIn(){
+  .withEmailSignIn() {
     // navigate to email sign-in screen logic
   }
 ```
@@ -795,7 +795,7 @@ authService
 ##### Phone Authentication
 
 ```swift
-public func withPhoneSignIn(onTap: @escaping () -> Void) -> AuthService
+public func withPhoneSignIn(onTap: @escaping () -> Void = {}) -> AuthService
 ```
 
 Enables phone number authentication with SMS verification and will register a phone button that is rendered in AuthPickerView (default Views) or can be rendered in custom Views by calling `AuthService.renderButtons()`. `onTap` custom callback (i.e where to navigate when tapped) allows user to control what happens when tapped. Default behavior in AuthPickerView is to push the user to phone sign-in default View.
