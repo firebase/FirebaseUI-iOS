@@ -66,7 +66,7 @@ let package = Package(
   dependencies: [
     .package(
       url: "https://github.com/facebook/facebook-ios-sdk.git",
-      "17.0.0" ..< "18.0.0"
+      "18.0.0" ..< "19.0.0"
     ),
     .package(
       url: "https://github.com/firebase/firebase-ios-sdk.git",
