@@ -22,7 +22,7 @@ struct ReauthenticationModifier: ViewModifier {
 
   func body(content: Content) -> some View {
     content
-      // Alert for simple providers only (Google, Apple, etc.)
+      // Alert for OAuth providers only (Google, Apple, etc.)
       .alert(
         "Authentication Required",
         isPresented: $coordinator.isReauthenticating
@@ -50,24 +50,24 @@ struct ReauthenticationModifier: ViewModifier {
           coordinator.reauthCancelled()
         }
       } message: {
-        if let phoneNumber = coordinator.reauthContext?.phoneNumber {
-          Text("For security, we need to verify your phone number: \(phoneNumber)")
+        if case let .phone(context) = coordinator.reauthContext {
+          Text("For security, we need to verify your phone number: \(context.phoneNumber)")
         }
       }
       // Sheet for phone reauthentication
       .sheet(isPresented: $coordinator.showingPhoneReauth) {
-        if let phoneNumber = coordinator.reauthContext?.phoneNumber {
+        if case let .phone(context) = coordinator.reauthContext {
           PhoneReauthView(
-            phoneNumber: phoneNumber,
+            phoneNumber: context.phoneNumber,
             coordinator: coordinator
           )
         }
       }
       // Sheet for email reauthentication
       .sheet(isPresented: $coordinator.showingEmailPasswordPrompt) {
-        if let email = coordinator.reauthContext?.email {
+        if case let .email(context) = coordinator.reauthContext {
           EmailReauthView(
-            email: email,
+            email: context.email,
             coordinator: coordinator
           )
         }
@@ -77,9 +77,9 @@ struct ReauthenticationModifier: ViewModifier {
   private func performReauth() {
     Task {
       do {
-        guard let context = coordinator.reauthContext else { return }
+        guard case let .oauth(context) = coordinator.reauthContext else { return }
 
-        // For simple providers (Google, Apple, etc.), call reauthenticate with context
+        // For OAuth providers (Google, Apple, etc.), call reauthenticate with context
         try await authService.reauthenticate(context: context)
         coordinator.reauthCompleted()
       } catch {

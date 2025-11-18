@@ -15,28 +15,61 @@
 import FirebaseAuth
 import SwiftUI
 
-/// Context information for reauthentication
-public struct ReauthContext: Equatable {
+/// Context information for OAuth provider reauthentication (Google, Apple, Facebook, Twitter, etc.)
+public struct OAuthReauthContext: Equatable {
   public let providerId: String
   public let providerName: String
-  public let phoneNumber: String?
-  public let email: String?
 
-  public init(providerId: String, providerName: String, phoneNumber: String?, email: String?) {
+  public init(providerId: String, providerName: String) {
     self.providerId = providerId
     self.providerName = providerName
-    self.phoneNumber = phoneNumber
+  }
+
+  public var displayMessage: String {
+    "Please sign in with \(providerName) to continue"
+  }
+}
+
+/// Context information for email/password reauthentication
+public struct EmailReauthContext: Equatable {
+  public let email: String
+
+  public init(email: String) {
     self.email = email
   }
 
   public var displayMessage: String {
-    switch providerId {
-    case EmailAuthProviderID:
-      return "Please enter your password to continue"
-    case PhoneAuthProviderID:
-      return "Please verify your phone number to continue"
-    default:
-      return "Please sign in with \(providerName) to continue"
+    "Please enter your password to continue"
+  }
+}
+
+/// Context information for phone number reauthentication
+public struct PhoneReauthContext: Equatable {
+  public let phoneNumber: String
+
+  public init(phoneNumber: String) {
+    self.phoneNumber = phoneNumber
+  }
+
+  public var displayMessage: String {
+    "Please verify your phone number to continue"
+  }
+}
+
+/// Type-safe wrapper for reauthentication contexts
+public enum ReauthenticationType: Equatable {
+  case oauth(OAuthReauthContext)
+  case email(EmailReauthContext)
+  case phone(PhoneReauthContext)
+
+  public var displayMessage: String {
+    switch self {
+    case let .oauth(context):
+      return context.displayMessage
+    case let .email(context):
+      return context.displayMessage
+    case let .phone(context):
+      return context.displayMessage
     }
   }
 }
@@ -99,15 +132,15 @@ public enum AuthServiceError: LocalizedError {
   case clientIdNotFound(String)
   case notConfiguredActionCodeSettings(String)
 
-  /// Simple reauthentication required (Google, Apple, Facebook, Twitter, etc.)
+  /// OAuth reauthentication required (Google, Apple, Facebook, Twitter, etc.)
   /// Can be passed directly to `reauthenticate(context:)` method
-  case simpleReauthenticationRequired(context: ReauthContext)
+  case oauthReauthenticationRequired(context: OAuthReauthContext)
 
   /// Email reauthentication required - user must handle password prompt externally
-  case emailReauthenticationRequired(context: ReauthContext)
+  case emailReauthenticationRequired(context: EmailReauthContext)
 
   /// Phone reauthentication required - user must handle SMS verification flow externally
-  case phoneReauthenticationRequired(context: ReauthContext)
+  case phoneReauthenticationRequired(context: PhoneReauthContext)
 
   case invalidCredentials(String)
   case signInFailed(underlying: Error)
@@ -128,11 +161,11 @@ public enum AuthServiceError: LocalizedError {
       return description
     case let .notConfiguredActionCodeSettings(description):
       return description
-    case let .simpleReauthenticationRequired(context):
+    case let .oauthReauthenticationRequired(context):
       return "Please sign in again with \(context.providerName) to continue"
-    case let .emailReauthenticationRequired(context):
+    case .emailReauthenticationRequired:
       return "Please enter your password to continue"
-    case let .phoneReauthenticationRequired(context):
+    case .phoneReauthenticationRequired:
       return "Please verify your phone number to continue"
     case let .invalidCredentials(description):
       return description
@@ -155,3 +188,4 @@ public enum AuthServiceError: LocalizedError {
     }
   }
 }
+

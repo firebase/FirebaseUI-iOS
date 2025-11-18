@@ -719,12 +719,12 @@ public extension AuthService {
     }
   }
 
-  /// Reauthenticates with a simple provider (Google, Apple, Facebook, Twitter, etc.)
-  /// - Parameter context: The reauth context from `simpleReauthenticationRequired` error
+  /// Reauthenticates with an OAuth provider (Google, Apple, Facebook, Twitter, etc.)
+  /// - Parameter context: The reauth context from `oauthReauthenticationRequired` error
   /// - Throws: Error if reauthentication fails or provider is not found
   /// - Note: This only works for providers that can automatically obtain credentials.
   ///         For email/phone, handle the flow externally and use `reauthenticate(with:)`
-  func reauthenticate(context: ReauthContext) async throws {
+  func reauthenticate(context: OAuthReauthContext) async throws {
     guard let user = currentUser else {
       throw AuthServiceError.noCurrentUser
     }
@@ -779,20 +779,22 @@ public extension AuthService {
       providerDisplayName = getProviderDisplayName(providerId)
     }
 
-    let context = ReauthContext(
-      providerId: providerId,
-      providerName: providerDisplayName,
-      phoneNumber: currentUser?.phoneNumber,
-      email: currentUser?.email
-    )
-
     switch providerId {
     case EmailAuthProviderID:
+      guard let email = currentUser?.email else {
+        throw AuthServiceError.noCurrentUser
+      }
+      let context = EmailReauthContext(email: email)
       throw AuthServiceError.emailReauthenticationRequired(context: context)
     case PhoneAuthProviderID:
+      guard let phoneNumber = currentUser?.phoneNumber else {
+        throw AuthServiceError.noCurrentUser
+      }
+      let context = PhoneReauthContext(phoneNumber: phoneNumber)
       throw AuthServiceError.phoneReauthenticationRequired(context: context)
     default:
-      throw AuthServiceError.simpleReauthenticationRequired(context: context)
+      let context = OAuthReauthContext(providerId: providerId, providerName: providerDisplayName)
+      throw AuthServiceError.oauthReauthenticationRequired(context: context)
     }
   }
 

@@ -29,22 +29,18 @@ public func withReauthenticationIfNeeded(authService _: AuthService,
   do {
     try await operation()
   } catch let error as AuthServiceError {
-    // Check if this is a reauthentication error
-    let context: ReauthContext?
+    // Check if this is a reauthentication error and extract the context
+    let reauthContext: ReauthenticationType
 
     switch error {
     case let .emailReauthenticationRequired(ctx):
-      context = ctx
+      reauthContext = .email(ctx)
     case let .phoneReauthenticationRequired(ctx):
-      context = ctx
-    case let .simpleReauthenticationRequired(ctx):
-      context = ctx
+      reauthContext = .phone(ctx)
+    case let .oauthReauthenticationRequired(ctx):
+      reauthContext = .oauth(ctx)
     default:
       // Not a reauth error, rethrow
-      throw error
-    }
-
-    guard let reauthContext = context else {
       throw error
     }
 

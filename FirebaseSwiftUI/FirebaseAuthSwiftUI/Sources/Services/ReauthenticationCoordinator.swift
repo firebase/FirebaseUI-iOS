@@ -20,7 +20,7 @@ import Observation
 @Observable
 public final class ReauthenticationCoordinator {
   public var isReauthenticating = false
-  public var reauthContext: ReauthContext?
+  public var reauthContext: ReauthenticationType?
   public var showingPhoneReauth = false
   public var showingPhoneReauthAlert = false
   public var showingEmailPasswordPrompt = false
@@ -30,19 +30,19 @@ public final class ReauthenticationCoordinator {
   public init() {}
 
   /// Request reauthentication from the user
-  public func requestReauth(context: ReauthContext) async throws {
+  public func requestReauth(context: ReauthenticationType) async throws {
     return try await withCheckedThrowingContinuation { continuation in
       self.continuation = continuation
       self.reauthContext = context
 
-      // Route to appropriate flow based on provider
-      switch context.providerId {
-      case PhoneAuthProviderID:
+      // Route to appropriate flow based on context type
+      switch context {
+      case .phone:
         self.showingPhoneReauthAlert = true
-      case EmailAuthProviderID:
+      case .email:
         self.showingEmailPasswordPrompt = true
-      default:
-        // For simple providers (Google, Apple, etc.)
+      case .oauth:
+        // For OAuth providers (Google, Apple, etc.)
         self.isReauthenticating = true
       }
     }
