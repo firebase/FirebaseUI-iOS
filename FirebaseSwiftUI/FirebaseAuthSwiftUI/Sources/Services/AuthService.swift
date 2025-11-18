@@ -301,9 +301,7 @@ public extension AuthService {
       throw AuthServiceError.noCurrentUser
     }
 
-    try await withReauthenticationIfNeeded(on: user) {
-      try await user.delete()
-    }
+    try await user.delete()
   }
 
   func updatePassword(to password: String) async throws {
@@ -311,9 +309,7 @@ public extension AuthService {
       throw AuthServiceError.noCurrentUser
     }
 
-    try await withReauthenticationIfNeeded(on: user) {
-      try await user.updatePassword(to: password)
-    }
+    try await user.updatePassword(to: password)
   }
 }
 
@@ -708,14 +704,52 @@ public extension AuthService {
     }
 
     // Complete the enrollment
-    try await withReauthenticationIfNeeded(on: user) {
-      try await user.multiFactor.enroll(with: assertion, displayName: displayName)
-    }
+    try await user.multiFactor.enroll(with: assertion, displayName: displayName)
     currentUser = auth.currentUser
   }
 
+  /// Reauthenticates the current user with their sign-in provider
+  /// - Throws: `AuthServiceError.phoneReauthenticationRequired` for phone auth users
+  /// - Throws: `AuthServiceError.providerNotFound` if provider is not configured
+  func reauthenticate() async throws {
+    guard let user = currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
+
+    // Get the provider from the token instead of stored credential
+    let providerId = try await getCurrentSignInProvider()
+
+    if providerId == EmailAuthProviderID {
+      guard let email = user.email else {
+        throw AuthServiceError.invalidCredentials("User does not have an email address")
+      }
+
+      guard let emailProvider = emailProvider else {
+        throw AuthServiceError.providerNotFound(
+          "Email provider not configured. Call withEmailSignIn() first."
+        )
+      }
+
+      let credential = try await emailProvider.createReauthCredential(email: email)
+      try await user.reauthenticate(with: credential)
+    } else if providerId == PhoneAuthProviderID {
+      guard let phoneNumber = user.phoneNumber else {
+        throw AuthServiceError.invalidCredentials("User does not have a phone number")
+      }
+
+      // Throw error with context for phone reauthentication
+      throw AuthServiceError.phoneReauthenticationRequired(phoneNumber: phoneNumber)
+    } else if let matchingProvider = providers.first(where: { $0.id == providerId }),
+              let credentialProvider = matchingProvider.provider as? CredentialAuthProviderSwift {
+      let credential = try await credentialProvider.createAuthCredential()
+      try await user.reauthenticate(with: credential)
+    } else {
+      throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
+    }
+  }
+
   /// Gets the provider ID that was used for the current sign-in session
-  private func getCurrentSignInProvider() async throws -> String {
+  func getCurrentSignInProvider() async throws -> String {
     guard let user = currentUser else {
       throw AuthServiceError.noCurrentUser
     }
@@ -745,54 +779,6 @@ public extension AuthService {
     return providerId
   }
 
-  func reauthenticateCurrentUser(on user: User) async throws {
-    // Get the provider from the token instead of stored credential
-    let providerId = try await getCurrentSignInProvider()
-
-    if providerId == EmailAuthProviderID {
-      guard let email = user.email else {
-        throw AuthServiceError.invalidCredentials("User does not have an email address")
-      }
-
-      guard let emailProvider = emailProvider else {
-        throw AuthServiceError.providerNotFound(
-          "Email provider not configured. Call withEmailSignIn() first."
-        )
-      }
-
-      let credential = try await emailProvider.createReauthCredential(email: email)
-      _ = try await user.reauthenticate(with: credential)
-    } else if providerId == PhoneAuthProviderID {
-      // Phone auth requires manual reauthentication via sign out and sign in otherwise it will take
-      // the user out of the existing flow
-      throw AuthServiceError.reauthenticationRequired(
-        "Phone authentication requires you to sign out and sign in again to continue"
-      )
-    } else if let matchingProvider = providers.first(where: { $0.id == providerId }),
-              let credentialProvider = matchingProvider.provider as? CredentialAuthProviderSwift {
-      let credential = try await credentialProvider.createAuthCredential()
-      _ = try await user.reauthenticate(with: credential)
-    } else {
-      throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
-    }
-  }
-
-  private func withReauthenticationIfNeeded(on user: User,
-                                            operation: () async throws -> Void) async throws {
-    do {
-      try await operation()
-    } catch let error as NSError {
-      if error.domain == AuthErrorDomain,
-         error.code == AuthErrorCode.requiresRecentLogin.rawValue || error.code == AuthErrorCode
-         .userTokenExpired.rawValue {
-        try await reauthenticateCurrentUser(on: user)
-        try await operation()
-      } else {
-        throw error
-      }
-    }
-  }
-
   func unenrollMFA(_ factorUid: String) async throws -> [MultiFactorInfo] {
     guard let user = auth.currentUser else {
       throw AuthServiceError.noCurrentUser
@@ -800,9 +786,7 @@ public extension AuthService {
 
     let multiFactorUser = user.multiFactor
 
-    try await withReauthenticationIfNeeded(on: user) {
-      try await multiFactorUser.unenroll(withFactorUID: factorUid)
-    }
+    try await multiFactorUser.unenroll(withFactorUID: factorUid)
 
     // This is the only we to get the actual latest enrolledFactors
     currentUser = Auth.auth().currentUser

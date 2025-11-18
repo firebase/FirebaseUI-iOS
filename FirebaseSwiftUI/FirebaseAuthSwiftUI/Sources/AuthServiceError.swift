@@ -73,6 +73,7 @@ public enum AuthServiceError: LocalizedError {
   case clientIdNotFound(String)
   case notConfiguredActionCodeSettings(String)
   case reauthenticationRequired(String)
+  case phoneReauthenticationRequired(phoneNumber: String)
   case invalidCredentials(String)
   case signInFailed(underlying: Error)
   case accountConflict(AccountConflictContext)
@@ -94,6 +95,8 @@ public enum AuthServiceError: LocalizedError {
       return description
     case let .reauthenticationRequired(description):
       return description
+    case let .phoneReauthenticationRequired(phoneNumber):
+      return "Phone reauthentication required for \(phoneNumber)"
     case let .invalidCredentials(description):
       return description
     // Use when failed to sign-in with Firebase

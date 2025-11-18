@@ -37,6 +37,7 @@ public struct MFAEnrolmentView {
   @State private var isLoading = false
   @State private var displayName = ""
   @State private var showCopiedFeedback = false
+  @State private var reauthCoordinator = ReauthenticationCoordinator()
 
   @FocusState private var focus: FocusableField?
 
@@ -135,12 +136,17 @@ public struct MFAEnrolmentView {
 
       do {
         let code = session.type == .sms ? verificationCode : totpCode
-        try await authService.completeEnrollment(
-          session: session,
-          verificationId: session.verificationId,
-          verificationCode: code,
-          displayName: displayName
-        )
+        try await withReauthenticationIfNeeded(
+          authService: authService,
+          coordinator: reauthCoordinator
+        ) {
+          try await authService.completeEnrollment(
+            session: session,
+            verificationId: session.verificationId,
+            verificationCode: code,
+            displayName: displayName
+          )
+        }
 
         // Reset form state on success
         resetForm()
@@ -281,6 +287,7 @@ extension MFAEnrolmentView: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .safeAreaPadding()
+    .withReauthentication(coordinator: reauthCoordinator)
     .navigationTitle("Two-Factor Authentication")
     .onAppear {
       // Initialize selected factor type to first allowed type

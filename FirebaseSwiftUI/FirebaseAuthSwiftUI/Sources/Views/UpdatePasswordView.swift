@@ -33,6 +33,7 @@ public struct UpdatePasswordView {
   @State private var password = ""
   @State private var confirmPassword = ""
   @State private var showAlert = false
+  @State private var reauthCoordinator = ReauthenticationCoordinator()
 
   @FocusState private var focus: FocusableField?
 
@@ -44,7 +45,12 @@ public struct UpdatePasswordView {
   private func updatePassword() {
     Task {
       do {
-        try await authService.updatePassword(to: confirmPassword)
+        try await withReauthenticationIfNeeded(
+          authService: authService,
+          coordinator: reauthCoordinator
+        ) {
+          try await authService.updatePassword(to: confirmPassword)
+        }
         showAlert = true
       } catch {}
     }
@@ -103,6 +109,7 @@ extension UpdatePasswordView: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .safeAreaPadding()
     .navigationTitle(authService.string.updatePasswordTitle)
+    .withReauthentication(coordinator: reauthCoordinator)
     .alert(
       "Password Updated",
       isPresented: $showAlert
