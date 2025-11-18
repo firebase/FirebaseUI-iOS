@@ -218,16 +218,13 @@ public final class AuthService {
 
       try await user.link(with: credentials)
       updateAuthenticationState()
-    } catch let error as NSError {
+    } catch {
       authenticationState = .unauthenticated
       
-      // Check if reauthentication is needed
-      if error.domain == AuthErrorDomain,
-         error.code == AuthErrorCode.requiresRecentLogin.rawValue ||
-         error.code == AuthErrorCode.userTokenExpired.rawValue {
-        try await requireReauthentication()
-      }
+      // Check for reauthentication errors first
+      try await handleErrorWithReauthCheck(error: error)
       
+      // If not a reauth error, check for conflicts
       // Possible conflicts from user.link():
       // - credentialAlreadyInUse: credential is already linked to another account
       // - emailAlreadyInUse: email from credential is already used by another account
@@ -304,15 +301,9 @@ public extension AuthService {
 
     do {
       try await user.delete()
-    } catch let error as NSError {
-      // Check if reauthentication is needed
-      if error.domain == AuthErrorDomain,
-         error.code == AuthErrorCode.requiresRecentLogin.rawValue ||
-         error.code == AuthErrorCode.userTokenExpired.rawValue {
-        try await requireReauthentication()
-      } else {
-        throw error
-      }
+    } catch {
+      try await handleErrorWithReauthCheck(error: error)
+      throw error  // If we reach here, it wasn't a reauth error, so rethrow
     }
   }
 
@@ -323,15 +314,9 @@ public extension AuthService {
 
     do {
       try await user.updatePassword(to: password)
-    } catch let error as NSError {
-      // Check if reauthentication is needed
-      if error.domain == AuthErrorDomain,
-         error.code == AuthErrorCode.requiresRecentLogin.rawValue ||
-         error.code == AuthErrorCode.userTokenExpired.rawValue {
-        try await requireReauthentication()
-      } else {
-        throw error
-      }
+    } catch {
+      try await handleErrorWithReauthCheck(error: error)
+      throw error  // If we reach here, it wasn't a reauth error, so rethrow
     }
   }
 }
@@ -728,15 +713,9 @@ public extension AuthService {
     do {
       try await user.multiFactor.enroll(with: assertion, displayName: displayName)
       currentUser = auth.currentUser
-    } catch let error as NSError {
-      // Check if reauthentication is needed
-      if error.domain == AuthErrorDomain,
-         error.code == AuthErrorCode.requiresRecentLogin.rawValue ||
-         error.code == AuthErrorCode.userTokenExpired.rawValue {
-        try await requireReauthentication()
-      } else {
-        throw error
-      }
+    } catch {
+      try await handleErrorWithReauthCheck(error: error)
+      throw error  // If we reach here, it wasn't a reauth error, so rethrow
     }
   }
 
@@ -771,6 +750,19 @@ public extension AuthService {
     }
     try await user.reauthenticate(with: credential)
     currentUser = auth.currentUser
+  }
+
+  /// Checks if an error requires reauthentication and handles it appropriately
+  /// - Parameter error: The error to check
+  /// - Throws: Only if it's a reauthentication error (via requireReauthentication())
+  private func handleErrorWithReauthCheck(error: Error) async throws {
+    if let nsError = error as NSError?,
+       nsError.domain == AuthErrorDomain,
+       nsError.code == AuthErrorCode.requiresRecentLogin.rawValue ||
+       nsError.code == AuthErrorCode.userTokenExpired.rawValue {
+      try await requireReauthentication()
+    }
+    // If not a reauth error, return normally so caller can handle it
   }
 
   /// Internal helper to create reauth context and throw appropriate error
@@ -866,15 +858,9 @@ public extension AuthService {
       let freshFactors = currentUser?.multiFactor.enrolledFactors ?? []
 
       return freshFactors
-    } catch let error as NSError {
-      // Check if reauthentication is needed
-      if error.domain == AuthErrorDomain,
-         error.code == AuthErrorCode.requiresRecentLogin.rawValue ||
-         error.code == AuthErrorCode.userTokenExpired.rawValue {
-        try await requireReauthentication()
-      } else {
-        throw error
-      }
+    } catch {
+      try await handleErrorWithReauthCheck(error: error)
+      throw error  // If we reach here, it wasn't a reauth error, so rethrow
     }
   }
 
