@@ -124,8 +124,8 @@ extension PhoneReauthView: View {
             text: $verificationCode,
             label: "Verification Code",
             prompt: "Enter 6-digit code",
-            contentType: .oneTimeCode,
             keyboardType: .numberPad,
+            contentType: .oneTimeCode,
             leading: {
               Image(systemName: "number")
             }
