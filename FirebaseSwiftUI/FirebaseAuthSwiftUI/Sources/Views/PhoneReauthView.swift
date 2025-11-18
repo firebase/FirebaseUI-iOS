@@ -107,7 +107,7 @@ extension PhoneReauthView: View {
 
         if verificationID == nil {
           // Initial state - sending SMS
-          VStack(spacing: 16) {
+          VStack(spacing: 20) {
             Text("We'll send a verification code to:")
               .font(.subheadline)
               .foregroundStyle(.secondary)
@@ -134,11 +134,15 @@ extension PhoneReauthView: View {
             .buttonStyle(.borderedProminent)
             .disabled(isLoading)
             .accessibilityIdentifier("send-verification-code-button")
+            Button(authService.string.cancelButtonLabel) {
+              coordinator.reauthCancelled()
+            }
+            
           }
           .padding(.horizontal)
         } else {
           // Enter verification code
-          VStack(spacing: 16) {
+          VStack(spacing: 20) {
             Text("Enter the 6-digit code sent to:")
               .font(.subheadline)
               .foregroundStyle(.secondary)
@@ -185,16 +189,15 @@ extension PhoneReauthView: View {
             .buttonStyle(.bordered)
             .disabled(isLoading)
             .accessibilityIdentifier("resend-code-button")
+
+            Button(authService.string.cancelButtonLabel) {
+              coordinator.reauthCancelled()
+            }
           }
           .padding(.horizontal)
         }
 
         Spacer()
-
-        Button(authService.string.cancelButtonLabel) {
-          coordinator.reauthCancelled()
-        }
-        .padding(.horizontal)
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
       .navigationBarTitleDisplayMode(.inline)
