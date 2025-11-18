@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import FirebaseAuth
+@preconcurrency import FirebaseAuth
 import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
@@ -31,7 +31,7 @@ public struct PhoneReauthView {
   @State private var error: AlertError?
 
   private func sendSMS() {
-    Task {
+    Task { @MainActor in
       isLoading = true
       do {
         let vid = try await authService.verifyPhoneNumber(phoneNumber: phoneNumber)
@@ -55,7 +55,7 @@ public struct PhoneReauthView {
   private func verifyCode() {
     guard let verificationID = verificationID else { return }
 
-    Task {
+    Task { @MainActor in
       isLoading = true
       do {
         guard let user = authService.currentUser else {
