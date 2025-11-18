@@ -108,76 +108,96 @@ extension PhoneReauthView: View {
         if verificationID == nil {
           // Initial state - sending SMS
           VStack(spacing: 16) {
-            if isLoading {
-              ProgressView()
-                .scaleEffect(1.5)
-                .padding()
+            Text("We'll send a verification code to:")
+              .font(.subheadline)
+              .foregroundStyle(.secondary)
+              .frame(maxWidth: .infinity, alignment: .leading)
 
-              Text("Sending verification code...")
-                .font(.body)
-                .foregroundColor(.secondary)
+            Text(phoneNumber)
+              .font(.headline)
+              .frame(maxWidth: .infinity, alignment: .leading)
+              .padding(.bottom, 8)
 
-              Text(phoneNumber)
-                .font(.headline)
-            } else {
-              Text("We'll send a verification code to:")
-                .font(.body)
-                .foregroundColor(.secondary)
-
-              Text(phoneNumber)
-                .font(.headline)
-                .padding(.bottom, 8)
-
-              Button("Send Verification Code") {
-                sendSMS()
+            Button(action: {
+              sendSMS()
+            }) {
+              if isLoading {
+                ProgressView()
+                  .frame(height: 32)
+                  .frame(maxWidth: .infinity)
+              } else {
+                Text("Send Verification Code")
+                  .frame(height: 32)
+                  .frame(maxWidth: .infinity)
               }
-              .buttonStyle(.borderedProminent)
-              .accessibilityIdentifier("send-verification-code-button")
             }
+            .buttonStyle(.borderedProminent)
+            .disabled(isLoading)
+            .accessibilityIdentifier("send-verification-code-button")
           }
-          .padding()
+          .padding(.horizontal)
         } else {
           // Enter verification code
-          AuthTextField(
-            text: $verificationCode,
-            label: "Verification Code",
-            prompt: "Enter 6-digit code",
-            keyboardType: .numberPad,
-            contentType: .oneTimeCode,
-            leading: {
-              Image(systemName: "number")
+          VStack(spacing: 16) {
+            Text("Enter the 6-digit code sent to:")
+              .font(.subheadline)
+              .foregroundStyle(.secondary)
+              .frame(maxWidth: .infinity, alignment: .leading)
+
+            Text(phoneNumber)
+              .font(.caption)
+              .frame(maxWidth: .infinity, alignment: .leading)
+              .padding(.bottom, 8)
+
+            VerificationCodeInputField(
+              code: $verificationCode,
+              validations: [
+                FormValidators.verificationCode,
+              ],
+              maintainsValidationMessage: true
+            )
+            .accessibilityIdentifier("verification-code-field")
+
+            Button(action: {
+              verifyCode()
+            }) {
+              if isLoading {
+                ProgressView()
+                  .frame(height: 32)
+                  .frame(maxWidth: .infinity)
+              } else {
+                Text("Verify")
+                  .frame(height: 32)
+                  .frame(maxWidth: .infinity)
+              }
             }
-          )
+            .buttonStyle(.borderedProminent)
+            .disabled(verificationCode.count != 6 || isLoading)
+            .accessibilityIdentifier("verify-button")
+
+            Button(action: {
+              sendSMS()
+            }) {
+              Text("Resend Code")
+                .frame(height: 32)
+                .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
+            .disabled(isLoading)
+            .accessibilityIdentifier("resend-code-button")
+          }
           .padding(.horizontal)
-          .accessibilityIdentifier("verification-code-field")
-
-          Button("Verify") {
-            verifyCode()
-          }
-          .buttonStyle(.borderedProminent)
-          .disabled(verificationCode.isEmpty || isLoading)
-          .padding()
-          .accessibilityIdentifier("verify-button")
-
-          Button("Resend Code") {
-            sendSMS()
-          }
-          .buttonStyle(.bordered)
-          .disabled(isLoading)
-          .accessibilityIdentifier("resend-code-button")
         }
 
         Spacer()
+
+        Button(authService.string.cancelButtonLabel) {
+          coordinator.reauthCancelled()
+        }
+        .padding(.horizontal)
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
       .navigationBarTitleDisplayMode(.inline)
-      .toolbar {
-        ToolbarItem(placement: .cancellationAction) {
-          Button("Cancel") {
-            coordinator.reauthCancelled()
-          }
-        }
-      }
     }
     .errorAlert(error: $error, okButtonLabel: authService.string.okButtonLabel)
   }
