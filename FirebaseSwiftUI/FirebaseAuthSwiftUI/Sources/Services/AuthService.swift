@@ -138,12 +138,6 @@ public final class AuthService {
 
   private var listenerManager: AuthListenerManager?
 
-  private var emailProvider: EmailProviderSwift?
-
-  public var passwordPrompt: PasswordPromptCoordinator {
-    emailProvider?.passwordPrompt ?? PasswordPromptCoordinator()
-  }
-
   var emailSignInEnabled = false
   private var emailSignInCallback: (() -> Void)?
 
@@ -315,16 +309,14 @@ public extension AuthService {
 
 public extension AuthService {
   /// Enable email sign-in with default behavior (navigates to email link view)
-  func withEmailSignIn(_ provider: EmailProviderSwift? = nil) -> AuthService {
-    return withEmailSignIn(provider) { [weak self] in
+  func withEmailSignIn() -> AuthService {
+    return withEmailSignIn { [weak self] in
       self?.navigator.push(.emailLink)
     }
   }
 
   /// Enable email sign-in with custom callback
-  func withEmailSignIn(_ provider: EmailProviderSwift? = nil,
-                       onTap: @escaping () -> Void) -> AuthService {
-    emailProvider = provider ?? EmailProviderSwift()
+  func withEmailSignIn(onTap: @escaping () -> Void) -> AuthService {
     emailSignInEnabled = true
     emailSignInCallback = onTap
     return self

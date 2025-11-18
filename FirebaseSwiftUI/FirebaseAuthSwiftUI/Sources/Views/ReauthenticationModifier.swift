@@ -22,7 +22,7 @@ struct ReauthenticationModifier: ViewModifier {
 
   func body(content: Content) -> some View {
     content
-      // Alert for non-phone providers
+      // Alert for simple providers only (Google, Apple, etc.)
       .alert(
         "Authentication Required",
         isPresented: $coordinator.isReauthenticating
@@ -54,11 +54,20 @@ struct ReauthenticationModifier: ViewModifier {
           Text("For security, we need to verify your phone number: \(phoneNumber)")
         }
       }
-      // Sheet for phone reauthentication (shown after alert confirmation)
+      // Sheet for phone reauthentication
       .sheet(isPresented: $coordinator.showingPhoneReauth) {
         if let phoneNumber = coordinator.reauthContext?.phoneNumber {
           PhoneReauthView(
             phoneNumber: phoneNumber,
+            coordinator: coordinator
+          )
+        }
+      }
+      // Sheet for email reauthentication
+      .sheet(isPresented: $coordinator.showingEmailPasswordPrompt) {
+        if let email = coordinator.reauthContext?.email {
+          EmailReauthView(
+            email: email,
             coordinator: coordinator
           )
         }

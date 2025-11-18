@@ -12,64 +12,127 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuth
 import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
-struct PasswordPromptSheet {
+@MainActor
+public struct EmailReauthView {
   @Environment(AuthService.self) private var authService
-  @Bindable var coordinator: PasswordPromptCoordinator
+  @Environment(\.reportError) private var reportError
+  
+  let email: String
+  let coordinator: ReauthenticationCoordinator
+  
   @State private var password = ""
-}
-
-extension PasswordPromptSheet: View {
-  var body: some View {
-    VStack(spacing: 20) {
-      Text(authService.string.confirmPasswordInputLabel)
-        .font(.largeTitle)
-        .fontWeight(.bold)
-        .padding()
-
-      Divider()
-
-      AuthTextField(
-        text: $password,
-        label: authService.string.passwordFieldLabel,
-        prompt: authService.string.passwordInputLabel,
-        contentType: .password,
-        isSecureTextField: true,
-        onSubmit: { _ in
-          if !password.isEmpty {
-            coordinator.submit(password: password)
-          }
-        },
-        leading: {
-          Image(systemName: "lock")
+  @State private var isLoading = false
+  @State private var error: AlertError?
+  
+  private func verifyPassword() {
+    guard !password.isEmpty else { return }
+    
+    Task { @MainActor in
+      isLoading = true
+      do {
+        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+        try await authService.reauthenticate(with: credential)
+        coordinator.reauthCompleted()
+        isLoading = false
+      } catch {
+        if let reportError = reportError {
+          reportError(error)
+        } else {
+          self.error = AlertError(
+            title: "Error",
+            message: error.localizedDescription,
+            underlyingError: error
+          )
         }
-      )
-      .submitLabel(.next)
-
-      Button(action: {
-        coordinator.submit(password: password)
-      }) {
-        Text(authService.string.okButtonLabel)
-          .padding(.vertical, 8)
-          .frame(maxWidth: .infinity)
-      }
-      .disabled(password.isEmpty)
-      .padding([.top, .bottom, .horizontal], 8)
-      .frame(maxWidth: .infinity)
-      .buttonStyle(.borderedProminent)
-
-      Button(authService.string.cancelButtonLabel) {
-        coordinator.cancel()
+        isLoading = false
       }
     }
-    .padding()
+  }
+}
+
+extension EmailReauthView: View {
+  public var body: some View {
+    NavigationStack {
+      VStack(spacing: 24) {
+        // Header
+        VStack(spacing: 12) {
+          Image(systemName: "lock.circle.fill")
+            .font(.system(size: 60))
+            .foregroundColor(.blue)
+          
+          Text("Confirm Password")
+            .font(.title)
+            .fontWeight(.bold)
+          
+          Text("For security, please enter your password")
+            .font(.body)
+            .foregroundColor(.secondary)
+            .multilineTextAlignment(.center)
+        }
+        .padding()
+        
+        VStack(spacing: 20) {
+          Text("Email: \(email)")
+            .font(.caption)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.bottom, 8)
+          
+          AuthTextField(
+            text: $password,
+            label: authService.string.passwordFieldLabel,
+            prompt: authService.string.passwordInputLabel,
+            contentType: .password,
+            isSecureTextField: true,
+            onSubmit: { _ in
+              verifyPassword()
+            },
+            leading: {
+              Image(systemName: "lock")
+            }
+          )
+          .submitLabel(.done)
+          .accessibilityIdentifier("email-reauth-password-field")
+          
+          Button(action: verifyPassword) {
+            if isLoading {
+              ProgressView()
+                .frame(height: 32)
+                .frame(maxWidth: .infinity)
+            } else {
+              Text("Confirm")
+                .frame(height: 32)
+                .frame(maxWidth: .infinity)
+            }
+          }
+          .buttonStyle(.borderedProminent)
+          .disabled(password.isEmpty || isLoading)
+          .accessibilityIdentifier("confirm-password-button")
+          
+          Button(authService.string.cancelButtonLabel) {
+            coordinator.reauthCancelled()
+          }
+        }
+        .padding(.horizontal)
+        
+        Spacer()
+      }
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+      .navigationBarTitleDisplayMode(.inline)
+    }
+    .errorAlert(error: $error, okButtonLabel: authService.string.okButtonLabel)
   }
 }
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
-  return PasswordPromptSheet(coordinator: PasswordPromptCoordinator()).environment(AuthService())
+  return EmailReauthView(
+    email: "test@example.com",
+    coordinator: ReauthenticationCoordinator()
+  )
+  .environment(AuthService())
 }

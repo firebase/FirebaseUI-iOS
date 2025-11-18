@@ -23,6 +23,7 @@ public final class ReauthenticationCoordinator {
   public var reauthContext: ReauthContext?
   public var showingPhoneReauth = false
   public var showingPhoneReauthAlert = false
+  public var showingEmailPasswordPrompt = false
 
   private var continuation: CheckedContinuation<Void, Error>?
 
@@ -34,10 +35,14 @@ public final class ReauthenticationCoordinator {
       self.continuation = continuation
       self.reauthContext = context
 
-      // Show alert first for all providers (including phone)
-      if context.providerId == PhoneAuthProviderID {
+      // Route to appropriate flow based on provider
+      switch context.providerId {
+      case PhoneAuthProviderID:
         self.showingPhoneReauthAlert = true
-      } else {
+      case EmailAuthProviderID:
+        self.showingEmailPasswordPrompt = true
+      default:
+        // For simple providers (Google, Apple, etc.)
         self.isReauthenticating = true
       }
     }
@@ -66,6 +71,7 @@ public final class ReauthenticationCoordinator {
     isReauthenticating = false
     showingPhoneReauth = false
     showingPhoneReauthAlert = false
+    showingEmailPasswordPrompt = false
     reauthContext = nil
   }
 }
