@@ -74,6 +74,7 @@ public class GoogleProviderAuthUI: AuthProviderUI {
   private let typedProvider: GoogleProviderSwift
   public var provider: AuthProviderSwift { typedProvider }
   public let id: String = "google.com"
+  public let displayName: String = "Google"
 
   public init(provider: GoogleProviderSwift) {
     typedProvider = provider

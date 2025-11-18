@@ -122,6 +122,7 @@ public class FacebookProviderAuthUI: AuthProviderUI {
   private let typedProvider: FacebookProviderSwift
   public var provider: AuthProviderSwift { typedProvider }
   public let id: String = "facebook.com"
+  public let displayName: String = "Facebook"
 
   public init(provider: FacebookProviderSwift) {
     typedProvider = provider

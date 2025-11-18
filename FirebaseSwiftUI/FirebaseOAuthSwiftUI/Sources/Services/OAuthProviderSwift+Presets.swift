@@ -25,7 +25,8 @@ public extension OAuthProviderSwift {
     return OAuthProviderSwift(
       providerId: "github.com",
       scopes: scopes,
-      displayName: "Sign in with GitHub",
+      buttonLabel: "Sign in with GitHub",
+      displayName: "GitHub",
       buttonIcon: ProviderStyle.github.icon!,
       buttonBackgroundColor: ProviderStyle.github.backgroundColor,
       buttonForegroundColor: ProviderStyle.github.contentColor
@@ -41,7 +42,8 @@ public extension OAuthProviderSwift {
       providerId: "microsoft.com",
       scopes: scopes,
       customParameters: ["prompt": "consent"],
-      displayName: "Sign in with Microsoft",
+      buttonLabel: "Sign in with Microsoft",
+      displayName: "Microsoft",
       buttonIcon: ProviderStyle.microsoft.icon!,
       buttonBackgroundColor: ProviderStyle.microsoft.backgroundColor,
       buttonForegroundColor: ProviderStyle.microsoft.contentColor
@@ -57,7 +59,8 @@ public extension OAuthProviderSwift {
       providerId: "yahoo.com",
       scopes: scopes,
       customParameters: ["prompt": "consent"],
-      displayName: "Sign in with Yahoo",
+      buttonLabel: "Sign in with Yahoo",
+      displayName: "Yahoo",
       buttonIcon: ProviderStyle.yahoo.icon!,
       buttonBackgroundColor: ProviderStyle.yahoo.backgroundColor,
       buttonForegroundColor: ProviderStyle.yahoo.contentColor

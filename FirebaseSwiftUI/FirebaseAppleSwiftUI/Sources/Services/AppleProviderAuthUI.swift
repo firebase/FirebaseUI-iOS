@@ -143,6 +143,7 @@ public class AppleProviderAuthUI: AuthProviderUI {
   private let typedProvider: AppleProviderSwift
   public var provider: AuthProviderSwift { typedProvider }
   public let id: String = "apple.com"
+  public let displayName: String = "Apple"
 
   public init(provider: AppleProviderSwift) {
     typedProvider = provider

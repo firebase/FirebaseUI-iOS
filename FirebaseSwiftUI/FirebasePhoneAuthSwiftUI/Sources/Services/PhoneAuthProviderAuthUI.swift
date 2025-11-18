@@ -24,6 +24,7 @@ public class PhoneAuthProviderAuthUI: AuthProviderUI {
   private let typedProvider: PhoneProviderSwift
   public var provider: AuthProviderSwift { typedProvider }
   public let id: String = "phone"
+  public let displayName: String = "Phone"
 
   // Callback for when the phone auth button is tapped
   private let onTap: () -> Void

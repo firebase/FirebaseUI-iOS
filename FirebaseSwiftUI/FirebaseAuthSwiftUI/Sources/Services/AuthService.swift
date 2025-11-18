@@ -28,6 +28,7 @@ public protocol CredentialAuthProviderSwift: AuthProviderSwift {
 
 public protocol AuthProviderUI {
   var id: String { get }
+  var displayName: String { get }
   @MainActor func authButton() -> AnyView
   var provider: AuthProviderSwift { get }
 }
@@ -776,9 +777,19 @@ public extension AuthService {
   /// - Throws: Appropriate `AuthServiceError` based on the provider type
   private func requireReauthentication() async throws -> Never {
     let providerId = try await getCurrentSignInProvider()
+    
+    // Try to find display name from registered provider
+    let providerDisplayName: String
+    if let registeredProvider = providers.first(where: { $0.id == providerId }) {
+      providerDisplayName = registeredProvider.displayName
+    } else {
+      // Fallback for built-in providers (email/password) that don't have AuthProviderUI
+      providerDisplayName = getProviderDisplayName(providerId)
+    }
+    
     let context = ReauthContext(
       providerId: providerId,
-      providerName: getProviderDisplayName(providerId),
+      providerName: providerDisplayName,
       phoneNumber: currentUser?.phoneNumber,
       email: currentUser?.email
     )
@@ -824,7 +835,8 @@ public extension AuthService {
     return providerId
   }
 
-  /// Get a user-friendly display name for a provider ID
+  /// Get a user-friendly display name for built-in providers without AuthProviderUI
+  /// (email/password). Other providers should be registered and provide their own display names.
   /// - Parameter providerId: The provider ID from Firebase Auth
   /// - Returns: A user-friendly name for the provider
   private func getProviderDisplayName(_ providerId: String) -> String {
@@ -833,15 +845,8 @@ public extension AuthService {
       return "Email"
     case PhoneAuthProviderID:
       return "Phone"
-    case "google.com":
-      return "Google"
-    case "apple.com":
-      return "Apple"
-    case "facebook.com":
-      return "Facebook"
-    case "twitter.com":
-      return "Twitter"
     default:
+      // Shouldn't reach here if provider is registered
       return providerId
     }
   }
