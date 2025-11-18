@@ -15,16 +15,19 @@
 import FirebaseAuth
 
 /// Execute an operation that may require reauthentication
+/// Automatically handles simple providers (Google, Apple, etc.)
+/// For email/phone, the coordinator must be provided to handle the UI flow
 /// - Parameters:
 ///   - authService: The auth service managing authentication
-///   - coordinator: The coordinator managing reauthentication UI
+///   - coordinator: The coordinator managing reauthentication UI (for email/phone)
 ///   - operation: The operation to execute
 /// - Throws: Rethrows errors from the operation or reauthentication process
 @MainActor
-public func withReauthenticationIfNeeded(authService: AuthService,
-                                         coordinator: ReauthenticationCoordinator,
-                                         operation: @escaping () async throws
-                                           -> Void) async throws {
+public func withReauthenticationIfNeeded(
+  authService: AuthService,
+  coordinator: ReauthenticationCoordinator,
+  operation: @escaping () async throws -> Void
+) async throws {
   do {
     try await operation()
   } catch let error as NSError {
@@ -32,6 +35,7 @@ public func withReauthenticationIfNeeded(authService: AuthService,
     if error.domain == AuthErrorDomain,
        error.code == AuthErrorCode.requiresRecentLogin.rawValue ||
        error.code == AuthErrorCode.userTokenExpired.rawValue {
+      
       // Determine the provider context
       let providerId = try await authService.getCurrentSignInProvider()
       let context = ReauthContext(
@@ -40,10 +44,18 @@ public func withReauthenticationIfNeeded(authService: AuthService,
         phoneNumber: authService.currentUser?.phoneNumber,
         email: authService.currentUser?.email
       )
-
-      // Request reauthentication from user with context
-      try await coordinator.requestReauth(context: context)
-
+      
+      // Handle based on provider type
+      switch providerId {
+      case PhoneAuthProviderID, EmailAuthProviderID:
+        // For email/phone, use coordinator to handle UI flow
+        try await coordinator.requestReauth(context: context)
+        
+      default:
+        // For simple providers (Google, Apple, etc.), AuthService can handle it directly
+        try await authService.reauthenticate(context: context)
+      }
+      
       // Retry the operation after successful reauth
       try await operation()
     } else {

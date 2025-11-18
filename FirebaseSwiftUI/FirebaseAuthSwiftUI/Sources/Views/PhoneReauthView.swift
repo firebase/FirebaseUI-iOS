@@ -58,14 +58,10 @@ public struct PhoneReauthView {
     Task { @MainActor in
       isLoading = true
       do {
-        guard let user = authService.currentUser else {
-          throw AuthServiceError.noCurrentUser
-        }
-
         let credential = PhoneAuthProvider.provider()
           .credential(withVerificationID: verificationID, verificationCode: verificationCode)
 
-        try await user.reauthenticate(with: credential)
+        try await authService.reauthenticate(with: credential)
         coordinator.reauthCompleted()
         isLoading = false
       } catch {

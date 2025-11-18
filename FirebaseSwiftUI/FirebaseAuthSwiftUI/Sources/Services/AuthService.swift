@@ -706,43 +706,57 @@ public extension AuthService {
     currentUser = auth.currentUser
   }
 
-  /// Reauthenticates the current user with their sign-in provider
-  /// - Throws: `AuthServiceError.phoneReauthenticationRequired` for phone auth users
-  /// - Throws: `AuthServiceError.providerNotFound` if provider is not configured
-  func reauthenticate() async throws {
+  /// Reauthenticates with a simple provider (Google, Apple, Facebook, Twitter, etc.)
+  /// - Parameter context: The reauth context from `simpleReauthenticationRequired` error
+  /// - Throws: Error if reauthentication fails or provider is not found
+  /// - Note: This only works for providers that can automatically obtain credentials.
+  ///         For email/phone, handle the flow externally and use `reauthenticate(with:)`
+  public func reauthenticate(context: ReauthContext) async throws {
     guard let user = currentUser else {
       throw AuthServiceError.noCurrentUser
     }
-
-    // Get the provider from the token instead of stored credential
+    
+    // Find the provider and get credential
+    guard let matchingProvider = providers.first(where: { $0.id == context.providerId }),
+          let credentialProvider = matchingProvider.provider as? CredentialAuthProviderSwift else {
+      throw AuthServiceError.providerNotFound("No provider found for \(context.providerId)")
+    }
+    
+    let credential = try await credentialProvider.createAuthCredential()
+    try await user.reauthenticate(with: credential)
+    currentUser = auth.currentUser
+  }
+  
+  /// Reauthenticates with a pre-obtained credential
+  /// Use this when you've handled getting the credential yourself (email/phone)
+  /// - Parameter credential: The authentication credential to use for reauthentication
+  /// - Throws: Error if reauthentication fails
+  public func reauthenticate(with credential: AuthCredential) async throws {
+    guard let user = currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
+    try await user.reauthenticate(with: credential)
+    currentUser = auth.currentUser
+  }
+  
+  /// Internal helper to create reauth context and throw appropriate error
+  /// - Throws: Appropriate `AuthServiceError` based on the provider type
+  private func requireReauthentication() async throws -> Never {
     let providerId = try await getCurrentSignInProvider()
-
-    if providerId == EmailAuthProviderID {
-      guard let email = user.email else {
-        throw AuthServiceError.invalidCredentials("User does not have an email address")
-      }
-
-      guard let emailProvider = emailProvider else {
-        throw AuthServiceError.providerNotFound(
-          "Email provider not configured. Call withEmailSignIn() first."
-        )
-      }
-
-      let credential = try await emailProvider.createReauthCredential(email: email)
-      try await user.reauthenticate(with: credential)
-    } else if providerId == PhoneAuthProviderID {
-      guard let phoneNumber = user.phoneNumber else {
-        throw AuthServiceError.invalidCredentials("User does not have a phone number")
-      }
-
-      // Throw error with context for phone reauthentication
-      throw AuthServiceError.phoneReauthenticationRequired(phoneNumber: phoneNumber)
-    } else if let matchingProvider = providers.first(where: { $0.id == providerId }),
-              let credentialProvider = matchingProvider.provider as? CredentialAuthProviderSwift {
-      let credential = try await credentialProvider.createAuthCredential()
-      try await user.reauthenticate(with: credential)
-    } else {
-      throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
+    let context = ReauthContext(
+      providerId: providerId,
+      providerName: getProviderDisplayName(providerId),
+      phoneNumber: currentUser?.phoneNumber,
+      email: currentUser?.email
+    )
+    
+    switch providerId {
+    case EmailAuthProviderID:
+      throw AuthServiceError.emailReauthenticationRequired(context: context)
+    case PhoneAuthProviderID:
+      throw AuthServiceError.phoneReauthenticationRequired(context: context)
+    default:
+      throw AuthServiceError.simpleReauthenticationRequired(context: context)
     }
   }
 
@@ -769,12 +783,34 @@ public extension AuthService {
       ?? user.providerData.first?.providerID
 
     guard let providerId = providerId else {
-      throw AuthServiceError.reauthenticationRequired(
+      throw AuthServiceError.invalidCredentials(
         "Unable to determine sign-in provider for reauthentication"
       )
     }
 
     return providerId
+  }
+  
+  /// Get a user-friendly display name for a provider ID
+  /// - Parameter providerId: The provider ID from Firebase Auth
+  /// - Returns: A user-friendly name for the provider
+  private func getProviderDisplayName(_ providerId: String) -> String {
+    switch providerId {
+    case EmailAuthProviderID:
+      return "Email"
+    case PhoneAuthProviderID:
+      return "Phone"
+    case "google.com":
+      return "Google"
+    case "apple.com":
+      return "Apple"
+    case "facebook.com":
+      return "Facebook"
+    case "twitter.com":
+      return "Twitter"
+    default:
+      return providerId
+    }
   }
 
   func unenrollMFA(_ factorUid: String) async throws -> [MultiFactorInfo] {

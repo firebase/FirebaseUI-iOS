@@ -15,32 +15,6 @@
 import FirebaseAuth
 import Observation
 
-/// Context information for reauthentication UI
-public struct ReauthContext {
-  public let providerId: String
-  public let providerName: String
-  public let phoneNumber: String?
-  public let email: String?
-
-  public init(providerId: String, providerName: String, phoneNumber: String?, email: String?) {
-    self.providerId = providerId
-    self.providerName = providerName
-    self.phoneNumber = phoneNumber
-    self.email = email
-  }
-
-  public var displayMessage: String {
-    switch providerId {
-    case EmailAuthProviderID:
-      return "Please enter your password to continue"
-    case PhoneAuthProviderID:
-      return "Please verify your phone number to continue"
-    default:
-      return "Please sign in with \(providerName) to continue"
-    }
-  }
-}
-
 /// Coordinator for handling reauthentication flows
 @MainActor
 @Observable

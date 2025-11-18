@@ -15,6 +15,32 @@
 import FirebaseAuth
 import SwiftUI
 
+/// Context information for reauthentication
+public struct ReauthContext: Equatable {
+  public let providerId: String
+  public let providerName: String
+  public let phoneNumber: String?
+  public let email: String?
+
+  public init(providerId: String, providerName: String, phoneNumber: String?, email: String?) {
+    self.providerId = providerId
+    self.providerName = providerName
+    self.phoneNumber = phoneNumber
+    self.email = email
+  }
+
+  public var displayMessage: String {
+    switch providerId {
+    case EmailAuthProviderID:
+      return "Please enter your password to continue"
+    case PhoneAuthProviderID:
+      return "Please verify your phone number to continue"
+    default:
+      return "Please sign in with \(providerName) to continue"
+    }
+  }
+}
+
 /// Describes the specific type of account conflict that occurred
 public enum AccountConflictType: Equatable {
   /// Account exists with a different provider (e.g., user signed up with Google, trying to use
@@ -72,8 +98,17 @@ public enum AuthServiceError: LocalizedError {
   case invalidEmailLink(String)
   case clientIdNotFound(String)
   case notConfiguredActionCodeSettings(String)
-  case reauthenticationRequired(String)
-  case phoneReauthenticationRequired(phoneNumber: String)
+  
+  /// Simple reauthentication required (Google, Apple, Facebook, Twitter, etc.)
+  /// Can be passed directly to `reauthenticate(context:)` method
+  case simpleReauthenticationRequired(context: ReauthContext)
+  
+  /// Email reauthentication required - user must handle password prompt externally
+  case emailReauthenticationRequired(context: ReauthContext)
+  
+  /// Phone reauthentication required - user must handle SMS verification flow externally
+  case phoneReauthenticationRequired(context: ReauthContext)
+  
   case invalidCredentials(String)
   case signInFailed(underlying: Error)
   case accountConflict(AccountConflictContext)
@@ -93,10 +128,12 @@ public enum AuthServiceError: LocalizedError {
       return description
     case let .notConfiguredActionCodeSettings(description):
       return description
-    case let .reauthenticationRequired(description):
-      return description
-    case let .phoneReauthenticationRequired(phoneNumber):
-      return "Phone reauthentication required for \(phoneNumber)"
+    case let .simpleReauthenticationRequired(context):
+      return "Please sign in again with \(context.providerName) to continue"
+    case let .emailReauthenticationRequired(context):
+      return "Please enter your password to continue"
+    case let .phoneReauthenticationRequired(context):
+      return "Please verify your phone number to continue"
     case let .invalidCredentials(description):
       return description
     // Use when failed to sign-in with Firebase
