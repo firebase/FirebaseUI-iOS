@@ -46,7 +46,7 @@ extension SignedInView: View {
         .padding()
         .accessibilityIdentifier("signed-in-text")
       Text(
-        "\(authService.currentUser?.email ?? authService.currentUser?.displayName ?? "Unknown")"
+        "\(authService.currentUser?.email ?? authService.currentUser?.displayName ?? authService.currentUser?.phoneNumber ?? "")"
       )
       if authService.currentUser?.isEmailVerified == false {
         Button {
