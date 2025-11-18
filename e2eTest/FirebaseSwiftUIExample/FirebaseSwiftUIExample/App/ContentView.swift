@@ -62,7 +62,8 @@ struct ContentView: View {
     .withOAuthSignIn(
       OAuthProviderSwift(
         providerId: "oidc.line",
-        displayName: "Sign in with LINE",
+        buttonLabel: "Sign in with LINE",
+        displayName: "Line",
         buttonIcon: Image(.icLineLogo),
         buttonBackgroundColor: .lineButton,
         buttonForegroundColor: .white
