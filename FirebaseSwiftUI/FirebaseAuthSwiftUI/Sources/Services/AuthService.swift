@@ -221,9 +221,7 @@ public final class AuthService {
         throw AuthServiceError.noCurrentUser
       }
 
-      try await withReauthenticationIfNeeded(on: user) {
-        try await user.link(with: credentials)
-      }
+      try await user.link(with: credentials)
       updateAuthenticationState()
     } catch {
       // Possible conflicts from user.link():
