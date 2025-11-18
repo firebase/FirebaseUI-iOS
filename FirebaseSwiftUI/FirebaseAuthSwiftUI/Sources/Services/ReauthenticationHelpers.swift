@@ -22,36 +22,35 @@ import FirebaseAuth
 ///   - operation: The operation to execute
 /// - Throws: Rethrows errors from the operation or reauthentication process
 @MainActor
-public func withReauthenticationIfNeeded(
-  authService: AuthService,
-  coordinator: ReauthenticationCoordinator,
-  operation: @escaping () async throws -> Void
-) async throws {
+public func withReauthenticationIfNeeded(authService _: AuthService,
+                                         coordinator: ReauthenticationCoordinator,
+                                         operation: @escaping () async throws
+                                           -> Void) async throws {
   do {
     try await operation()
   } catch let error as AuthServiceError {
     // Check if this is a reauthentication error
     let context: ReauthContext?
-    
+
     switch error {
-    case .emailReauthenticationRequired(let ctx):
+    case let .emailReauthenticationRequired(ctx):
       context = ctx
-    case .phoneReauthenticationRequired(let ctx):
+    case let .phoneReauthenticationRequired(ctx):
       context = ctx
-    case .simpleReauthenticationRequired(let ctx):
+    case let .simpleReauthenticationRequired(ctx):
       context = ctx
     default:
       // Not a reauth error, rethrow
       throw error
     }
-    
+
     guard let reauthContext = context else {
       throw error
     }
-    
+
     // Request reauthentication through coordinator (shows UI)
     try await coordinator.requestReauth(context: reauthContext)
-    
+
     // After successful reauth, retry the operation
     try await operation()
   }

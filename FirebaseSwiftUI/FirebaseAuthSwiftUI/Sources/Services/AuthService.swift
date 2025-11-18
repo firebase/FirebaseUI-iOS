@@ -220,10 +220,10 @@ public final class AuthService {
       updateAuthenticationState()
     } catch {
       authenticationState = .unauthenticated
-      
+
       // Check for reauthentication errors first
       try await handleErrorWithReauthCheck(error: error)
-      
+
       // If not a reauth error, check for conflicts
       // Possible conflicts from user.link():
       // - credentialAlreadyInUse: credential is already linked to another account
@@ -303,7 +303,7 @@ public extension AuthService {
       try await user.delete()
     } catch {
       try await handleErrorWithReauthCheck(error: error)
-      throw error  // If we reach here, it wasn't a reauth error, so rethrow
+      throw error // If we reach here, it wasn't a reauth error, so rethrow
     }
   }
 
@@ -316,7 +316,7 @@ public extension AuthService {
       try await user.updatePassword(to: password)
     } catch {
       try await handleErrorWithReauthCheck(error: error)
-      throw error  // If we reach here, it wasn't a reauth error, so rethrow
+      throw error // If we reach here, it wasn't a reauth error, so rethrow
     }
   }
 }
@@ -715,7 +715,7 @@ public extension AuthService {
       currentUser = auth.currentUser
     } catch {
       try await handleErrorWithReauthCheck(error: error)
-      throw error  // If we reach here, it wasn't a reauth error, so rethrow
+      throw error // If we reach here, it wasn't a reauth error, so rethrow
     }
   }
 
@@ -769,7 +769,7 @@ public extension AuthService {
   /// - Throws: Appropriate `AuthServiceError` based on the provider type
   private func requireReauthentication() async throws -> Never {
     let providerId = try await getCurrentSignInProvider()
-    
+
     // Try to find display name from registered provider
     let providerDisplayName: String
     if let registeredProvider = providers.first(where: { $0.id == providerId }) {
@@ -778,7 +778,7 @@ public extension AuthService {
       // Fallback for built-in providers (email/password) that don't have AuthProviderUI
       providerDisplayName = getProviderDisplayName(providerId)
     }
-    
+
     let context = ReauthContext(
       providerId: providerId,
       providerName: providerDisplayName,
@@ -860,7 +860,7 @@ public extension AuthService {
       return freshFactors
     } catch {
       try await handleErrorWithReauthCheck(error: error)
-      throw error  // If we reach here, it wasn't a reauth error, so rethrow
+      throw error // If we reach here, it wasn't a reauth error, so rethrow
     }
   }
 
