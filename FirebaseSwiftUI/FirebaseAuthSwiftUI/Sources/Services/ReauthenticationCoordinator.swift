@@ -48,6 +48,7 @@ public final class ReauthenticationCoordinator {
   public var isReauthenticating = false
   public var reauthContext: ReauthContext?
   public var showingPhoneReauth = false
+  public var showingPhoneReauthAlert = false
 
   private var continuation: CheckedContinuation<Void, Error>?
 
@@ -59,13 +60,19 @@ public final class ReauthenticationCoordinator {
       self.continuation = continuation
       self.reauthContext = context
 
-      // Show different UI based on provider
+      // Show alert first for all providers (including phone)
       if context.providerId == PhoneAuthProviderID {
-        self.showingPhoneReauth = true
+        self.showingPhoneReauthAlert = true
       } else {
         self.isReauthenticating = true
       }
     }
+  }
+
+  /// Called when user confirms phone reauth alert
+  public func confirmPhoneReauth() {
+    showingPhoneReauthAlert = false
+    showingPhoneReauth = true
   }
 
   /// Called when reauthentication completes successfully
@@ -84,6 +91,7 @@ public final class ReauthenticationCoordinator {
     continuation = nil
     isReauthenticating = false
     showingPhoneReauth = false
+    showingPhoneReauthAlert = false
     reauthContext = nil
   }
 }

@@ -102,22 +102,40 @@ extension PhoneReauthView: View {
             .font(.body)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
-
-          Text(phoneNumber)
-            .font(.headline)
-            .foregroundColor(.primary)
         }
         .padding()
 
         if verificationID == nil {
-          // Send SMS button
-          Button("Send Verification Code") {
-            sendSMS()
+          // Initial state - sending SMS
+          VStack(spacing: 16) {
+            if isLoading {
+              ProgressView()
+                .scaleEffect(1.5)
+                .padding()
+
+              Text("Sending verification code...")
+                .font(.body)
+                .foregroundColor(.secondary)
+
+              Text(phoneNumber)
+                .font(.headline)
+            } else {
+              Text("We'll send a verification code to:")
+                .font(.body)
+                .foregroundColor(.secondary)
+
+              Text(phoneNumber)
+                .font(.headline)
+                .padding(.bottom, 8)
+
+              Button("Send Verification Code") {
+                sendSMS()
+              }
+              .buttonStyle(.borderedProminent)
+              .accessibilityIdentifier("send-verification-code-button")
+            }
           }
-          .buttonStyle(.borderedProminent)
-          .disabled(isLoading)
           .padding()
-          .accessibilityIdentifier("send-verification-code-button")
         } else {
           // Enter verification code
           AuthTextField(
@@ -162,10 +180,6 @@ extension PhoneReauthView: View {
       }
     }
     .errorAlert(error: $error, okButtonLabel: authService.string.okButtonLabel)
-    .onAppear {
-      // Auto-send SMS on appear for better UX
-      sendSMS()
-    }
   }
 }
 
