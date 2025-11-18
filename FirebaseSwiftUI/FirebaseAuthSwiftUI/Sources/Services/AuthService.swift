@@ -217,12 +217,20 @@ public final class AuthService {
 
       try await user.link(with: credentials)
       updateAuthenticationState()
-    } catch {
+    } catch let error as NSError {
+      authenticationState = .unauthenticated
+      
+      // Check if reauthentication is needed
+      if error.domain == AuthErrorDomain,
+         error.code == AuthErrorCode.requiresRecentLogin.rawValue ||
+         error.code == AuthErrorCode.userTokenExpired.rawValue {
+        try await requireReauthentication()
+      }
+      
       // Possible conflicts from user.link():
       // - credentialAlreadyInUse: credential is already linked to another account
       // - emailAlreadyInUse: email from credential is already used by another account
       // - accountExistsWithDifferentCredential: account exists with different sign-in method
-      authenticationState = .unauthenticated
       try handleErrorWithConflictCheck(error: error, credential: credentials)
     }
   }
@@ -293,7 +301,18 @@ public extension AuthService {
       throw AuthServiceError.noCurrentUser
     }
 
-    try await user.delete()
+    do {
+      try await user.delete()
+    } catch let error as NSError {
+      // Check if reauthentication is needed
+      if error.domain == AuthErrorDomain,
+         error.code == AuthErrorCode.requiresRecentLogin.rawValue ||
+         error.code == AuthErrorCode.userTokenExpired.rawValue {
+        try await requireReauthentication()
+      } else {
+        throw error
+      }
+    }
   }
 
   func updatePassword(to password: String) async throws {
@@ -301,7 +320,18 @@ public extension AuthService {
       throw AuthServiceError.noCurrentUser
     }
 
-    try await user.updatePassword(to: password)
+    do {
+      try await user.updatePassword(to: password)
+    } catch let error as NSError {
+      // Check if reauthentication is needed
+      if error.domain == AuthErrorDomain,
+         error.code == AuthErrorCode.requiresRecentLogin.rawValue ||
+         error.code == AuthErrorCode.userTokenExpired.rawValue {
+        try await requireReauthentication()
+      } else {
+        throw error
+      }
+    }
   }
 }
 
@@ -694,8 +724,19 @@ public extension AuthService {
     }
 
     // Complete the enrollment
-    try await user.multiFactor.enroll(with: assertion, displayName: displayName)
-    currentUser = auth.currentUser
+    do {
+      try await user.multiFactor.enroll(with: assertion, displayName: displayName)
+      currentUser = auth.currentUser
+    } catch let error as NSError {
+      // Check if reauthentication is needed
+      if error.domain == AuthErrorDomain,
+         error.code == AuthErrorCode.requiresRecentLogin.rawValue ||
+         error.code == AuthErrorCode.userTokenExpired.rawValue {
+        try await requireReauthentication()
+      } else {
+        throw error
+      }
+    }
   }
 
   /// Reauthenticates with a simple provider (Google, Apple, Facebook, Twitter, etc.)
@@ -812,13 +853,24 @@ public extension AuthService {
 
     let multiFactorUser = user.multiFactor
 
-    try await multiFactorUser.unenroll(withFactorUID: factorUid)
+    do {
+      try await multiFactorUser.unenroll(withFactorUID: factorUid)
 
-    // This is the only we to get the actual latest enrolledFactors
-    currentUser = Auth.auth().currentUser
-    let freshFactors = currentUser?.multiFactor.enrolledFactors ?? []
+      // This is the only we to get the actual latest enrolledFactors
+      currentUser = Auth.auth().currentUser
+      let freshFactors = currentUser?.multiFactor.enrolledFactors ?? []
 
-    return freshFactors
+      return freshFactors
+    } catch let error as NSError {
+      // Check if reauthentication is needed
+      if error.domain == AuthErrorDomain,
+         error.code == AuthErrorCode.requiresRecentLogin.rawValue ||
+         error.code == AuthErrorCode.userTokenExpired.rawValue {
+        try await requireReauthentication()
+      } else {
+        throw error
+      }
+    }
   }
 
   // MARK: - Account Conflict Helper Methods
