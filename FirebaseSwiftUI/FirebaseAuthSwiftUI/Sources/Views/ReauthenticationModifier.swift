@@ -78,7 +78,7 @@ struct ReauthenticationModifier: ViewModifier {
     Task {
       do {
         guard let context = coordinator.reauthContext else { return }
-        
+
         // For simple providers (Google, Apple, etc.), call reauthenticate with context
         try await authService.reauthenticate(context: context)
         coordinator.reauthCompleted()

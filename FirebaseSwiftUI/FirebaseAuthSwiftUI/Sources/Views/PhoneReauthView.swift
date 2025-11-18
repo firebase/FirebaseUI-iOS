@@ -133,7 +133,6 @@ extension PhoneReauthView: View {
             Button(authService.string.cancelButtonLabel) {
               coordinator.reauthCancelled()
             }
-            
           }
           .padding(.horizontal)
         } else {

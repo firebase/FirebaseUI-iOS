@@ -703,34 +703,34 @@ public extension AuthService {
   /// - Throws: Error if reauthentication fails or provider is not found
   /// - Note: This only works for providers that can automatically obtain credentials.
   ///         For email/phone, handle the flow externally and use `reauthenticate(with:)`
-  public func reauthenticate(context: ReauthContext) async throws {
+  func reauthenticate(context: ReauthContext) async throws {
     guard let user = currentUser else {
       throw AuthServiceError.noCurrentUser
     }
-    
+
     // Find the provider and get credential
     guard let matchingProvider = providers.first(where: { $0.id == context.providerId }),
           let credentialProvider = matchingProvider.provider as? CredentialAuthProviderSwift else {
       throw AuthServiceError.providerNotFound("No provider found for \(context.providerId)")
     }
-    
+
     let credential = try await credentialProvider.createAuthCredential()
     try await user.reauthenticate(with: credential)
     currentUser = auth.currentUser
   }
-  
+
   /// Reauthenticates with a pre-obtained credential
   /// Use this when you've handled getting the credential yourself (email/phone)
   /// - Parameter credential: The authentication credential to use for reauthentication
   /// - Throws: Error if reauthentication fails
-  public func reauthenticate(with credential: AuthCredential) async throws {
+  func reauthenticate(with credential: AuthCredential) async throws {
     guard let user = currentUser else {
       throw AuthServiceError.noCurrentUser
     }
     try await user.reauthenticate(with: credential)
     currentUser = auth.currentUser
   }
-  
+
   /// Internal helper to create reauth context and throw appropriate error
   /// - Throws: Appropriate `AuthServiceError` based on the provider type
   private func requireReauthentication() async throws -> Never {
@@ -741,7 +741,7 @@ public extension AuthService {
       phoneNumber: currentUser?.phoneNumber,
       email: currentUser?.email
     )
-    
+
     switch providerId {
     case EmailAuthProviderID:
       throw AuthServiceError.emailReauthenticationRequired(context: context)
@@ -782,7 +782,7 @@ public extension AuthService {
 
     return providerId
   }
-  
+
   /// Get a user-friendly display name for a provider ID
   /// - Parameter providerId: The provider ID from Firebase Auth
   /// - Returns: A user-friendly name for the provider

@@ -23,11 +23,10 @@ import FirebaseAuth
 ///   - operation: The operation to execute
 /// - Throws: Rethrows errors from the operation or reauthentication process
 @MainActor
-public func withReauthenticationIfNeeded(
-  authService: AuthService,
-  coordinator: ReauthenticationCoordinator,
-  operation: @escaping () async throws -> Void
-) async throws {
+public func withReauthenticationIfNeeded(authService: AuthService,
+                                         coordinator: ReauthenticationCoordinator,
+                                         operation: @escaping () async throws
+                                           -> Void) async throws {
   do {
     try await operation()
   } catch let error as NSError {
@@ -35,7 +34,6 @@ public func withReauthenticationIfNeeded(
     if error.domain == AuthErrorDomain,
        error.code == AuthErrorCode.requiresRecentLogin.rawValue ||
        error.code == AuthErrorCode.userTokenExpired.rawValue {
-      
       // Determine the provider context
       let providerId = try await authService.getCurrentSignInProvider()
       let context = ReauthContext(
@@ -44,18 +42,18 @@ public func withReauthenticationIfNeeded(
         phoneNumber: authService.currentUser?.phoneNumber,
         email: authService.currentUser?.email
       )
-      
+
       // Handle based on provider type
       switch providerId {
       case PhoneAuthProviderID, EmailAuthProviderID:
         // For email/phone, use coordinator to handle UI flow
         try await coordinator.requestReauth(context: context)
-        
+
       default:
         // For simple providers (Google, Apple, etc.), AuthService can handle it directly
         try await authService.reauthenticate(context: context)
       }
-      
+
       // Retry the operation after successful reauth
       try await operation()
     } else {

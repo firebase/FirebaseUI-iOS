@@ -98,17 +98,17 @@ public enum AuthServiceError: LocalizedError {
   case invalidEmailLink(String)
   case clientIdNotFound(String)
   case notConfiguredActionCodeSettings(String)
-  
+
   /// Simple reauthentication required (Google, Apple, Facebook, Twitter, etc.)
   /// Can be passed directly to `reauthenticate(context:)` method
   case simpleReauthenticationRequired(context: ReauthContext)
-  
+
   /// Email reauthentication required - user must handle password prompt externally
   case emailReauthenticationRequired(context: ReauthContext)
-  
+
   /// Phone reauthentication required - user must handle SMS verification flow externally
   case phoneReauthenticationRequired(context: ReauthContext)
-  
+
   case invalidCredentials(String)
   case signInFailed(underlying: Error)
   case accountConflict(AccountConflictContext)

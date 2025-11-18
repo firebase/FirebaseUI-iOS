@@ -21,17 +21,17 @@ import SwiftUI
 public struct EmailReauthView {
   @Environment(AuthService.self) private var authService
   @Environment(\.reportError) private var reportError
-  
+
   let email: String
   let coordinator: ReauthenticationCoordinator
-  
+
   @State private var password = ""
   @State private var isLoading = false
   @State private var error: AlertError?
-  
+
   private func verifyPassword() {
     guard !password.isEmpty else { return }
-    
+
     Task { @MainActor in
       isLoading = true
       do {
@@ -64,24 +64,24 @@ extension EmailReauthView: View {
           Image(systemName: "lock.circle.fill")
             .font(.system(size: 60))
             .foregroundColor(.blue)
-          
+
           Text("Confirm Password")
             .font(.title)
             .fontWeight(.bold)
-          
+
           Text("For security, please enter your password")
             .font(.body)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
         }
         .padding()
-        
+
         VStack(spacing: 20) {
           Text("Email: \(email)")
             .font(.caption)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.bottom, 8)
-          
+
           AuthTextField(
             text: $password,
             label: authService.string.passwordFieldLabel,
@@ -97,7 +97,7 @@ extension EmailReauthView: View {
           )
           .submitLabel(.done)
           .accessibilityIdentifier("email-reauth-password-field")
-          
+
           Button(action: verifyPassword) {
             if isLoading {
               ProgressView()
@@ -112,13 +112,13 @@ extension EmailReauthView: View {
           .buttonStyle(.borderedProminent)
           .disabled(password.isEmpty || isLoading)
           .accessibilityIdentifier("confirm-password-button")
-          
+
           Button(authService.string.cancelButtonLabel) {
             coordinator.reauthCancelled()
           }
         }
         .padding(.horizontal)
-        
+
         Spacer()
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
