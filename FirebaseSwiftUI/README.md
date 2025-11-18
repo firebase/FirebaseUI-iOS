@@ -1529,9 +1529,9 @@ public enum AuthServiceError: Error {
   case providerNotFound(String)
   case invalidCredentials(String)
   case multiFactorAuth(String)
-  case simpleReauthenticationRequired(context: ReauthContext)
-  case emailReauthenticationRequired(context: ReauthContext)
-  case phoneReauthenticationRequired(context: ReauthContext)
+  case oauthReauthenticationRequired(context: OAuthReauthContext)
+  case emailReauthenticationRequired(context: EmailReauthContext)
+  case phoneReauthenticationRequired(context: PhoneReauthContext)
   case accountConflict(AccountConflictContext)
 }
 ```
@@ -1539,7 +1539,7 @@ public enum AuthServiceError: Error {
 Errors specific to `AuthService` operations.
 
 **Reauthentication Errors:**
-- `simpleReauthenticationRequired`: For providers like Google, Apple, Facebook, Twitter. Pass the context to `authService.reauthenticate(context:)`.
+- `oauthReauthenticationRequired`: For OAuth providers like Google, Apple, Facebook, Twitter. Pass the context to `authService.reauthenticate(context:)`.
 - `emailReauthenticationRequired`: For email/password authentication. Must handle password prompt externally.
 - `phoneReauthenticationRequired`: For phone authentication. Must handle SMS verification flow externally.
 
