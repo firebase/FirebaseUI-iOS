@@ -48,6 +48,7 @@ public class TwitterProviderAuthUI: AuthProviderUI {
   private let typedProvider: TwitterProviderSwift
   public var provider: AuthProviderSwift { typedProvider }
   public let id: String = "twitter.com"
+  public let displayName: String = "Twitter"
 
   public init(provider: TwitterProviderSwift) {
     typedProvider = provider

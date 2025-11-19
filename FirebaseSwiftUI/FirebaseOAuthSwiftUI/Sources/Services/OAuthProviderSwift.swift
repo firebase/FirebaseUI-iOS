@@ -23,6 +23,7 @@ public class OAuthProviderSwift: CredentialAuthProviderSwift {
   public let scopes: [String]
   public let customParameters: [String: String]
   // Button appearance
+  public let buttonLabel: String
   public let displayName: String
   public let buttonIcon: Image
   public let buttonBackgroundColor: Color
@@ -32,13 +33,15 @@ public class OAuthProviderSwift: CredentialAuthProviderSwift {
   ///   - providerId: The OAuth provider ID (e.g., "github.com", "microsoft.com")
   ///   - scopes: OAuth scopes to request
   ///   - customParameters: Additional OAuth parameters
-  ///   - displayName: Button label (e.g., "Sign in with GitHub")
+  ///   - buttonLabel: Full button label (e.g., "Sign in with GitHub")
+  ///   - displayName: Short provider name for messages (e.g., "GitHub")
   ///   - buttonIcon: Button icon image
   ///   - buttonBackgroundColor: Button background color
   ///   - buttonForegroundColor: Button text/icon color
   public init(providerId: String,
               scopes: [String] = [],
               customParameters: [String: String] = [:],
+              buttonLabel: String,
               displayName: String,
               buttonIcon: Image,
               buttonBackgroundColor: Color = .black,
@@ -46,6 +49,7 @@ public class OAuthProviderSwift: CredentialAuthProviderSwift {
     self.providerId = providerId
     self.scopes = scopes
     self.customParameters = customParameters
+    self.buttonLabel = buttonLabel
     self.displayName = displayName
     self.buttonIcon = buttonIcon
     self.buttonBackgroundColor = buttonBackgroundColor
@@ -57,13 +61,15 @@ public class OAuthProviderSwift: CredentialAuthProviderSwift {
   ///   - providerId: The OAuth provider ID (e.g., "github.com", "microsoft.com")
   ///   - scopes: OAuth scopes to request
   ///   - customParameters: Additional OAuth parameters
-  ///   - displayName: Button label (e.g., "Sign in with GitHub")
+  ///   - buttonLabel: Full button label (e.g., "Sign in with GitHub")
+  ///   - displayName: Short provider name for messages (e.g., "GitHub")
   ///   - iconSystemName: SF Symbol name
   ///   - buttonBackgroundColor: Button background color
   ///   - buttonForegroundColor: Button text/icon color
   public convenience init(providerId: String,
                           scopes: [String] = [],
                           customParameters: [String: String] = [:],
+                          buttonLabel: String,
                           displayName: String,
                           iconSystemName: String,
                           buttonBackgroundColor: Color = .black,
@@ -72,6 +78,7 @@ public class OAuthProviderSwift: CredentialAuthProviderSwift {
       providerId: providerId,
       scopes: scopes,
       customParameters: customParameters,
+      buttonLabel: buttonLabel,
       displayName: displayName,
       buttonIcon: Image(systemName: iconSystemName),
       buttonBackgroundColor: buttonBackgroundColor,
@@ -125,6 +132,10 @@ public class OAuthProviderAuthUI: AuthProviderUI {
 
   public var id: String {
     return typedProvider.providerId
+  }
+
+  public var displayName: String {
+    return typedProvider.displayName
   }
 
   @MainActor public func authButton() -> AnyView {

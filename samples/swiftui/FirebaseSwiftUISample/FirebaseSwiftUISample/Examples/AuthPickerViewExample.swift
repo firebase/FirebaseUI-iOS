@@ -12,19 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import SwiftUI
-import FirebaseAuthSwiftUI
 import FirebaseAuth
+import FirebaseAuthSwiftUI
+import SwiftUI
 
 struct AuthPickerViewExample: View {
   @Environment(AuthService.self) private var authService
-  
+
   var body: some View {
     AuthPickerView {
       authenticatedApp
     }
   }
-  
+
   var authenticatedApp: some View {
     NavigationStack {
       VStack {

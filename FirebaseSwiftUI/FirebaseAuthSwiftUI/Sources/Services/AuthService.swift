@@ -28,6 +28,7 @@ public protocol CredentialAuthProviderSwift: AuthProviderSwift {
 
 public protocol AuthProviderUI {
   var id: String { get }
+  var displayName: String { get }
   @MainActor func authButton() -> AnyView
   var provider: AuthProviderSwift { get }
 }
@@ -118,36 +119,25 @@ public final class AuthService {
   }
 
   @ObservationIgnored @AppStorage("email-link") public var emailLink: String?
+
+  private var currentMFAResolver: MultiFactorResolver?
+  private var listenerManager: AuthListenerManager?
+  private var emailSignInCallback: (() -> Void)?
+  private var providers: [AuthProviderUI] = []
+
   public let configuration: AuthConfiguration
   public let auth: Auth
   public var isPresented: Bool = false
+  public let string: StringUtils
+  public var currentUser: User?
+  public var authenticationState: AuthenticationState = .unauthenticated
+  public var authenticationFlow: AuthenticationFlow = .signIn
+  public var emailSignInEnabled = false
   public private(set) var navigator = Navigator()
 
   public var authView: AuthView? {
     navigator.routes.last
   }
-
-  public let string: StringUtils
-  public var currentUser: User?
-  public var authenticationState: AuthenticationState = .unauthenticated
-  public var authenticationFlow: AuthenticationFlow = .signIn
-
-  private var currentMFAResolver: MultiFactorResolver?
-
-  // MARK: - Provider APIs
-
-  private var listenerManager: AuthListenerManager?
-
-  private var emailProvider: EmailProviderSwift?
-
-  public var passwordPrompt: PasswordPromptCoordinator {
-    emailProvider?.passwordPrompt ?? PasswordPromptCoordinator()
-  }
-
-  var emailSignInEnabled = false
-  private var emailSignInCallback: (() -> Void)?
-
-  private var providers: [AuthProviderUI] = []
 
   public func registerProvider(providerWithButton: AuthProviderUI) {
     providers.append(providerWithButton)
@@ -182,31 +172,6 @@ public final class AuthService {
     return result
   }
 
-  // MARK: - End Provider APIs
-
-  private func safeActionCodeSettings() throws -> ActionCodeSettings {
-    // email sign-in requires action code settings
-    guard let actionCodeSettings = configuration
-      .emailLinkSignInActionCodeSettings else {
-      throw AuthServiceError
-        .notConfiguredActionCodeSettings(
-          "ActionCodeSettings has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`"
-        )
-    }
-    return actionCodeSettings
-  }
-
-  public func updateAuthenticationState() {
-    authenticationState =
-      (currentUser == nil || currentUser?.isAnonymous == true)
-        ? .unauthenticated
-        : .authenticated
-  }
-
-  private var shouldHandleAnonymousUpgrade: Bool {
-    currentUser?.isAnonymous == true && configuration.shouldAutoUpgradeAnonymousUsers
-  }
-
   public func signOut() async throws {
     try await auth.signOut()
     // Cannot wait for auth listener to change, feedback needs to be immediate
@@ -221,31 +186,20 @@ public final class AuthService {
         throw AuthServiceError.noCurrentUser
       }
 
-      try await withReauthenticationIfNeeded(on: user) {
-        try await user.link(with: credentials)
-      }
+      try await user.link(with: credentials)
       updateAuthenticationState()
     } catch {
+      authenticationState = .unauthenticated
+
+      // Check for reauthentication errors first
+      try await handleErrorWithReauthCheck(error: error)
+
+      // If not a reauth error, check for conflicts
       // Possible conflicts from user.link():
       // - credentialAlreadyInUse: credential is already linked to another account
       // - emailAlreadyInUse: email from credential is already used by another account
       // - accountExistsWithDifferentCredential: account exists with different sign-in method
-      authenticationState = .unauthenticated
       try handleErrorWithConflictCheck(error: error, credential: credentials)
-    }
-  }
-
-  private func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws
-    -> SignInOutcome {
-    if currentUser == nil {
-      throw AuthServiceError.noCurrentUser
-    }
-    do {
-      let result = try await currentUser?.link(with: credentials)
-      updateAuthenticationState()
-      return .signedIn(result)
-    } catch {
-      throw error
     }
   }
 
@@ -291,6 +245,39 @@ public final class AuthService {
       }
     }
   }
+
+  /// Reauthenticates with an OAuth provider (Google, Apple, Facebook, Twitter, etc.)
+  /// - Parameter context: The reauth context from `oauthReauthenticationRequired` error
+  /// - Throws: Error if reauthentication fails or provider is not found
+  /// - Note: This only works for providers that can automatically obtain credentials.
+  ///         For email/phone, handle the flow externally and use `reauthenticate(with:)`
+  public func reauthenticate(context: OAuthReauthContext) async throws {
+    guard let user = currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
+
+    // Find the provider and get credential
+    guard let matchingProvider = providers.first(where: { $0.id == context.providerId }),
+          let credentialProvider = matchingProvider.provider as? CredentialAuthProviderSwift else {
+      throw AuthServiceError.providerNotFound("No provider found for \(context.providerId)")
+    }
+
+    let credential = try await credentialProvider.createAuthCredential()
+    try await user.reauthenticate(with: credential)
+    currentUser = auth.currentUser
+  }
+
+  /// Reauthenticates with a pre-obtained credential
+  /// Use this when you've handled getting the credential yourself (email/phone)
+  /// - Parameter credential: The authentication credential to use for reauthentication
+  /// - Throws: Error if reauthentication fails
+  public func reauthenticate(with credential: AuthCredential) async throws {
+    guard let user = currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
+    try await user.reauthenticate(with: credential)
+    currentUser = auth.currentUser
+  }
 }
 
 // MARK: - User API
@@ -301,8 +288,11 @@ public extension AuthService {
       throw AuthServiceError.noCurrentUser
     }
 
-    try await withReauthenticationIfNeeded(on: user) {
+    do {
       try await user.delete()
+    } catch {
+      try await handleErrorWithReauthCheck(error: error)
+      throw error // If we reach here, it wasn't a reauth error, so rethrow
     }
   }
 
@@ -311,9 +301,32 @@ public extension AuthService {
       throw AuthServiceError.noCurrentUser
     }
 
-    try await withReauthenticationIfNeeded(on: user) {
+    do {
       try await user.updatePassword(to: password)
+    } catch {
+      try await handleErrorWithReauthCheck(error: error)
+      throw error // If we reach here, it wasn't a reauth error, so rethrow
     }
+  }
+
+  func updateUserPhotoURL(url: URL) async throws {
+    guard let user = currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
+
+    let changeRequest = user.createProfileChangeRequest()
+    changeRequest.photoURL = url
+    try await changeRequest.commitChanges()
+  }
+
+  func updateUserDisplayName(name: String) async throws {
+    guard let user = currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
+
+    let changeRequest = user.createProfileChangeRequest()
+    changeRequest.displayName = name
+    try await changeRequest.commitChanges()
   }
 }
 
@@ -321,16 +334,14 @@ public extension AuthService {
 
 public extension AuthService {
   /// Enable email sign-in with default behavior (navigates to email link view)
-  func withEmailSignIn(_ provider: EmailProviderSwift? = nil) -> AuthService {
-    return withEmailSignIn(provider) { [weak self] in
+  func withEmailSignIn() -> AuthService {
+    return withEmailSignIn { [weak self] in
       self?.navigator.push(.emailLink)
     }
   }
 
   /// Enable email sign-in with custom callback
-  func withEmailSignIn(_ provider: EmailProviderSwift? = nil,
-                       onTap: @escaping () -> Void) -> AuthService {
-    emailProvider = provider ?? EmailProviderSwift()
+  func withEmailSignIn(onTap: @escaping () -> Void) -> AuthService {
     emailSignInEnabled = true
     emailSignInCallback = onTap
     return self
@@ -431,33 +442,6 @@ public extension AuthService {
       try handleErrorWithConflictCheck(error: error, credential: credential)
     }
   }
-
-  private func updateActionCodeSettings() throws -> ActionCodeSettings {
-    let actionCodeSettings = try safeActionCodeSettings()
-    guard var urlComponents = URLComponents(string: actionCodeSettings.url!.absoluteString) else {
-      throw AuthServiceError
-        .notConfiguredActionCodeSettings(
-          "ActionCodeSettings.url has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`"
-        )
-    }
-
-    var queryItems: [URLQueryItem] = []
-
-    if shouldHandleAnonymousUpgrade {
-      if let currentUser = currentUser {
-        let anonymousUID = currentUser.uid
-        let auidItem = URLQueryItem(name: "ui_auid", value: anonymousUID)
-        queryItems.append(auidItem)
-      }
-    }
-
-    urlComponents.queryItems = queryItems
-    if let finalURL = urlComponents.url {
-      actionCodeSettings.url = finalURL
-    }
-
-    return actionCodeSettings
-  }
 }
 
 // MARK: - Phone Auth Sign In
@@ -480,30 +464,6 @@ public extension AuthService {
     let credential = PhoneAuthProvider.provider()
       .credential(withVerificationID: verificationID, verificationCode: verificationCode)
     try await signIn(credentials: credential)
-  }
-}
-
-// MARK: - User Profile Management
-
-public extension AuthService {
-  func updateUserPhotoURL(url: URL) async throws {
-    guard let user = currentUser else {
-      throw AuthServiceError.noCurrentUser
-    }
-
-    let changeRequest = user.createProfileChangeRequest()
-    changeRequest.photoURL = url
-    try await changeRequest.commitChanges()
-  }
-
-  func updateUserDisplayName(name: String) async throws {
-    guard let user = currentUser else {
-      throw AuthServiceError.noCurrentUser
-    }
-
-    let changeRequest = user.createProfileChangeRequest()
-    changeRequest.displayName = name
-    try await changeRequest.commitChanges()
   }
 }
 
@@ -640,6 +600,53 @@ public extension AuthService {
     return verificationID
   }
 
+  func resolveSignIn(code: String, hintIndex: Int, verificationId: String? = nil) async throws {
+    guard let resolver = currentMFAResolver else {
+      throw AuthServiceError.multiFactorAuth("No MFA resolver available")
+    }
+
+    guard hintIndex < resolver.hints.count else {
+      throw AuthServiceError.multiFactorAuth("Invalid hint index")
+    }
+
+    let hint = resolver.hints[hintIndex]
+    let assertion: MultiFactorAssertion
+
+    // Create the appropriate assertion based on the hint type
+    if hint.factorID == PhoneMultiFactorID {
+      guard let verificationId = verificationId else {
+        throw AuthServiceError.multiFactorAuth("Verification ID is required for SMS MFA")
+      }
+
+      let credential = PhoneAuthProvider.provider().credential(
+        withVerificationID: verificationId,
+        verificationCode: code
+      )
+      assertion = PhoneMultiFactorGenerator.assertion(with: credential)
+
+    } else if hint.factorID == TOTPMultiFactorID {
+      assertion = TOTPMultiFactorGenerator.assertionForSignIn(
+        withEnrollmentID: hint.uid,
+        oneTimePassword: code
+      )
+
+    } else {
+      throw AuthServiceError.multiFactorAuth("Unsupported MFA hint type")
+    }
+
+    do {
+      let result = try await resolver.resolveSignIn(with: assertion)
+      updateAuthenticationState()
+
+      // Clear MFA resolution state
+      currentMFAResolver = nil
+
+    } catch {
+      throw AuthServiceError
+        .multiFactorAuth("Failed to resolve MFA challenge: \(error.localizedDescription)")
+    }
+  }
+
   func completeEnrollment(session: EnrollmentSession, verificationId: String?,
                           verificationCode: String, displayName: String) async throws {
     // Validate session state
@@ -708,10 +715,186 @@ public extension AuthService {
     }
 
     // Complete the enrollment
-    try await withReauthenticationIfNeeded(on: user) {
+    do {
       try await user.multiFactor.enroll(with: assertion, displayName: displayName)
+      currentUser = auth.currentUser
+    } catch {
+      try await handleErrorWithReauthCheck(error: error)
+      throw error // If we reach here, it wasn't a reauth error, so rethrow
     }
-    currentUser = auth.currentUser
+  }
+
+  func unenrollMFA(_ factorUid: String) async throws -> [MultiFactorInfo] {
+    guard let user = auth.currentUser else {
+      throw AuthServiceError.noCurrentUser
+    }
+
+    let multiFactorUser = user.multiFactor
+
+    do {
+      try await multiFactorUser.unenroll(withFactorUID: factorUid)
+
+      // This is the only we to get the actual latest enrolledFactors
+      currentUser = Auth.auth().currentUser
+      let freshFactors = currentUser?.multiFactor.enrolledFactors ?? []
+
+      return freshFactors
+    } catch {
+      try await handleErrorWithReauthCheck(error: error)
+      throw error // If we reach here, it wasn't a reauth error, so rethrow
+    }
+  }
+
+  func resolveSmsChallenge(hintIndex: Int) async throws -> String {
+    guard let resolver = currentMFAResolver else {
+      throw AuthServiceError.multiFactorAuth("No MFA resolver available")
+    }
+
+    guard hintIndex < resolver.hints.count else {
+      throw AuthServiceError.multiFactorAuth("Invalid hint index")
+    }
+
+    let hint = resolver.hints[hintIndex]
+    guard hint.factorID == PhoneMultiFactorID else {
+      throw AuthServiceError.multiFactorAuth("Selected hint is not a phone hint")
+    }
+    let phoneHint = hint as! PhoneMultiFactorInfo
+
+    return try await withCheckedThrowingContinuation { continuation in
+      PhoneAuthProvider.provider().verifyPhoneNumber(
+        with: phoneHint,
+        uiDelegate: nil,
+        multiFactorSession: resolver.session
+      ) { verificationId, error in
+        if let error = error {
+          continuation
+            .resume(throwing: AuthServiceError.multiFactorAuth(error.localizedDescription))
+        } else if let verificationId = verificationId {
+          continuation.resume(returning: verificationId)
+        } else {
+          continuation
+            .resume(throwing: AuthServiceError.multiFactorAuth("Unknown error occurred"))
+        }
+      }
+    }
+  }
+}
+
+// MARK: - Private Helper Methods
+
+private extension AuthService {
+  internal func updateAuthenticationState() {
+    authenticationState =
+      (currentUser == nil || currentUser?.isAnonymous == true)
+        ? .unauthenticated
+        : .authenticated
+  }
+
+  private var shouldHandleAnonymousUpgrade: Bool {
+    currentUser?.isAnonymous == true && configuration.shouldAutoUpgradeAnonymousUsers
+  }
+
+  private func handleAutoUpgradeAnonymousUser(credentials: AuthCredential) async throws
+    -> SignInOutcome {
+    if currentUser == nil {
+      throw AuthServiceError.noCurrentUser
+    }
+    do {
+      let result = try await currentUser?.link(with: credentials)
+      updateAuthenticationState()
+      return .signedIn(result)
+    } catch {
+      throw error
+    }
+  }
+
+  // MARK: - Action Code Settings Helper Methods
+
+  private func safeActionCodeSettings() throws -> ActionCodeSettings {
+    // email sign-in requires action code settings
+    guard let actionCodeSettings = configuration
+      .emailLinkSignInActionCodeSettings else {
+      throw AuthServiceError
+        .notConfiguredActionCodeSettings(
+          "ActionCodeSettings has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`"
+        )
+    }
+    return actionCodeSettings
+  }
+
+  private func updateActionCodeSettings() throws -> ActionCodeSettings {
+    let actionCodeSettings = try safeActionCodeSettings()
+    guard var urlComponents = URLComponents(string: actionCodeSettings.url!.absoluteString) else {
+      throw AuthServiceError
+        .notConfiguredActionCodeSettings(
+          "ActionCodeSettings.url has not been configured for `AuthConfiguration.emailLinkSignInActionCodeSettings`"
+        )
+    }
+
+    var queryItems: [URLQueryItem] = []
+
+    if shouldHandleAnonymousUpgrade {
+      if let currentUser = currentUser {
+        let anonymousUID = currentUser.uid
+        let auidItem = URLQueryItem(name: "ui_auid", value: anonymousUID)
+        queryItems.append(auidItem)
+      }
+    }
+
+    urlComponents.queryItems = queryItems
+    if let finalURL = urlComponents.url {
+      actionCodeSettings.url = finalURL
+    }
+
+    return actionCodeSettings
+  }
+
+  // MARK: - Reauth Error Helper Methods
+
+  /// Checks if an error requires reauthentication and handles it appropriately
+  /// - Parameter error: The error to check
+  /// - Throws: Only if it's a reauthentication error (via requireReauthentication())
+  private func handleErrorWithReauthCheck(error: Error) async throws {
+    if let nsError = error as NSError?,
+       nsError.domain == AuthErrorDomain,
+       nsError.code == AuthErrorCode.requiresRecentLogin.rawValue ||
+       nsError.code == AuthErrorCode.userTokenExpired.rawValue {
+      try await requireReauthentication()
+    }
+    // If not a reauth error, return normally so caller can handle it
+  }
+
+  /// Internal helper to create reauth context and throw appropriate error
+  /// - Throws: Appropriate `AuthServiceError` based on the provider type
+  private func requireReauthentication() async throws -> Never {
+    let providerId = try await getCurrentSignInProvider()
+
+    // Try to find display name from registered provider
+    let providerDisplayName: String
+    if let registeredProvider = providers.first(where: { $0.id == providerId }) {
+      providerDisplayName = registeredProvider.displayName
+    } else {
+      // Fallback for built-in providers (email/password) that don't have AuthProviderUI
+      providerDisplayName = getProviderDisplayName(providerId)
+    }
+
+    switch providerId {
+    case EmailAuthProviderID:
+      guard let email = currentUser?.email else {
+        throw AuthServiceError.noCurrentUser
+      }
+      let context = EmailReauthContext(email: email)
+      throw AuthServiceError.emailReauthenticationRequired(context: context)
+    case PhoneAuthProviderID:
+      guard let phoneNumber = currentUser?.phoneNumber else {
+        throw AuthServiceError.noCurrentUser
+      }
+      let context = PhoneReauthContext(phoneNumber: phoneNumber)
+      throw AuthServiceError.phoneReauthenticationRequired(context: context)
+    default:
+      let context = OAuthReauthContext(providerId: providerId, providerName: providerDisplayName)
+      throw AuthServiceError.oauthReauthenticationRequired(context: context)
+    }
   }
 
   /// Gets the provider ID that was used for the current sign-in session
@@ -737,7 +920,7 @@ public extension AuthService {
       ?? user.providerData.first?.providerID
 
     guard let providerId = providerId else {
-      throw AuthServiceError.reauthenticationRequired(
+      throw AuthServiceError.invalidCredentials(
         "Unable to determine sign-in provider for reauthentication"
       )
     }
@@ -745,70 +928,20 @@ public extension AuthService {
     return providerId
   }
 
-  func reauthenticateCurrentUser(on user: User) async throws {
-    // Get the provider from the token instead of stored credential
-    let providerId = try await getCurrentSignInProvider()
-
-    if providerId == EmailAuthProviderID {
-      guard let email = user.email else {
-        throw AuthServiceError.invalidCredentials("User does not have an email address")
-      }
-
-      guard let emailProvider = emailProvider else {
-        throw AuthServiceError.providerNotFound(
-          "Email provider not configured. Call withEmailSignIn() first."
-        )
-      }
-
-      let credential = try await emailProvider.createReauthCredential(email: email)
-      _ = try await user.reauthenticate(with: credential)
-    } else if providerId == PhoneAuthProviderID {
-      // Phone auth requires manual reauthentication via sign out and sign in otherwise it will take
-      // the user out of the existing flow
-      throw AuthServiceError.reauthenticationRequired(
-        "Phone authentication requires you to sign out and sign in again to continue"
-      )
-    } else if let matchingProvider = providers.first(where: { $0.id == providerId }),
-              let credentialProvider = matchingProvider.provider as? CredentialAuthProviderSwift {
-      let credential = try await credentialProvider.createAuthCredential()
-      _ = try await user.reauthenticate(with: credential)
-    } else {
-      throw AuthServiceError.providerNotFound("No provider found for \(providerId)")
+  /// Get a user-friendly display name for built-in providers without AuthProviderUI
+  /// (email/password). Other providers should be registered and provide their own display names.
+  /// - Parameter providerId: The provider ID from Firebase Auth
+  /// - Returns: A user-friendly name for the provider
+  private func getProviderDisplayName(_ providerId: String) -> String {
+    switch providerId {
+    case EmailAuthProviderID:
+      return "Email"
+    case PhoneAuthProviderID:
+      return "Phone"
+    default:
+      // Shouldn't reach here if provider is registered
+      return providerId
     }
-  }
-
-  private func withReauthenticationIfNeeded(on user: User,
-                                            operation: () async throws -> Void) async throws {
-    do {
-      try await operation()
-    } catch let error as NSError {
-      if error.domain == AuthErrorDomain,
-         error.code == AuthErrorCode.requiresRecentLogin.rawValue || error.code == AuthErrorCode
-         .userTokenExpired.rawValue {
-        try await reauthenticateCurrentUser(on: user)
-        try await operation()
-      } else {
-        throw error
-      }
-    }
-  }
-
-  func unenrollMFA(_ factorUid: String) async throws -> [MultiFactorInfo] {
-    guard let user = auth.currentUser else {
-      throw AuthServiceError.noCurrentUser
-    }
-
-    let multiFactorUser = user.multiFactor
-
-    try await withReauthenticationIfNeeded(on: user) {
-      try await multiFactorUser.unenroll(withFactorUID: factorUid)
-    }
-
-    // This is the only we to get the actual latest enrolledFactors
-    currentUser = Auth.auth().currentUser
-    let freshFactors = currentUser?.multiFactor.enrolledFactors ?? []
-
-    return freshFactors
   }
 
   // MARK: - Account Conflict Helper Methods
@@ -893,86 +1026,5 @@ public extension AuthService {
     let hints = extractMFAHints(from: resolver)
     currentMFAResolver = resolver
     return .mfaRequired(MFARequired(hints: hints))
-  }
-
-  func resolveSmsChallenge(hintIndex: Int) async throws -> String {
-    guard let resolver = currentMFAResolver else {
-      throw AuthServiceError.multiFactorAuth("No MFA resolver available")
-    }
-
-    guard hintIndex < resolver.hints.count else {
-      throw AuthServiceError.multiFactorAuth("Invalid hint index")
-    }
-
-    let hint = resolver.hints[hintIndex]
-    guard hint.factorID == PhoneMultiFactorID else {
-      throw AuthServiceError.multiFactorAuth("Selected hint is not a phone hint")
-    }
-    let phoneHint = hint as! PhoneMultiFactorInfo
-
-    return try await withCheckedThrowingContinuation { continuation in
-      PhoneAuthProvider.provider().verifyPhoneNumber(
-        with: phoneHint,
-        uiDelegate: nil,
-        multiFactorSession: resolver.session
-      ) { verificationId, error in
-        if let error = error {
-          continuation
-            .resume(throwing: AuthServiceError.multiFactorAuth(error.localizedDescription))
-        } else if let verificationId = verificationId {
-          continuation.resume(returning: verificationId)
-        } else {
-          continuation
-            .resume(throwing: AuthServiceError.multiFactorAuth("Unknown error occurred"))
-        }
-      }
-    }
-  }
-
-  func resolveSignIn(code: String, hintIndex: Int, verificationId: String? = nil) async throws {
-    guard let resolver = currentMFAResolver else {
-      throw AuthServiceError.multiFactorAuth("No MFA resolver available")
-    }
-
-    guard hintIndex < resolver.hints.count else {
-      throw AuthServiceError.multiFactorAuth("Invalid hint index")
-    }
-
-    let hint = resolver.hints[hintIndex]
-    let assertion: MultiFactorAssertion
-
-    // Create the appropriate assertion based on the hint type
-    if hint.factorID == PhoneMultiFactorID {
-      guard let verificationId = verificationId else {
-        throw AuthServiceError.multiFactorAuth("Verification ID is required for SMS MFA")
-      }
-
-      let credential = PhoneAuthProvider.provider().credential(
-        withVerificationID: verificationId,
-        verificationCode: code
-      )
-      assertion = PhoneMultiFactorGenerator.assertion(with: credential)
-
-    } else if hint.factorID == TOTPMultiFactorID {
-      assertion = TOTPMultiFactorGenerator.assertionForSignIn(
-        withEnrollmentID: hint.uid,
-        oneTimePassword: code
-      )
-
-    } else {
-      throw AuthServiceError.multiFactorAuth("Unsupported MFA hint type")
-    }
-
-    do {
-      let result = try await resolver.resolveSignIn(with: assertion)
-      updateAuthenticationState()
-
-      // Clear MFA resolution state
-      currentMFAResolver = nil
-
-    } catch {
-      throw AuthServiceError
-        .multiFactorAuth("Failed to resolve MFA challenge: \(error.localizedDescription)")
-    }
   }
 }

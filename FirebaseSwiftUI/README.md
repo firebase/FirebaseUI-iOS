@@ -266,6 +266,22 @@ The default views support:
 - **Sign in with Twitter**
 - **Generic OAuth Providers** (GitHub, Microsoft, Yahoo, or custom OIDC)
 
+### Reauthentication in Default Views
+
+Sensitive operations like deleting accounts, updating passwords, or unenrolling MFA factors require recent authentication. When using default views, reauthentication is handled automatically based on the user's sign-in provider.
+
+#### Automatic Reauthentication Behavior
+
+When a sensitive operation requires reauthentication, the default views automatically:
+
+- **OAuth Providers (Google, Apple, Facebook, Twitter, etc.)**: Display an alert asking the user to confirm, then automatically obtain fresh credentials and complete the operation.
+
+- **Email/Password**: Present a sheet prompting the user to enter their password before continuing.
+
+- **Phone**: Show an alert explaining verification is needed, then present a sheet for SMS code verification.
+
+The operation automatically retries after successful reauthentication. No additional code is required when using `AuthPickerView` or the built-in account management views (`UpdatePasswordView`, `SignedInView`, etc.).
+
 ---
 
 ## Usage with Custom Views
@@ -635,6 +651,76 @@ When building custom views, you need to handle several things yourself that `Aut
 3. **Anonymous User Upgrades**: Handle the linking of anonymous accounts if `shouldAutoUpgradeAnonymousUsers` is enabled
 4. **Navigation State**: Manage navigation between different auth screens (phone verification, password recovery, etc.)
 5. **Loading States**: Show loading indicators during async authentication operations by observing `authService.authenticationState`
+6. **Reauthentication**: Handle reauthentication errors for sensitive operations (see [Reauthentication in Custom Views](#reauthentication-in-custom-views) below)
+
+### Reauthentication in Custom Views
+
+When building custom views, handle reauthentication by catching specific errors and implementing your own flow. Sensitive operations throw three types of reauthentication errors, each containing context information.
+
+#### Implementation Patterns
+
+**OAuth Providers (Google, Apple, Facebook, Twitter, etc.):**
+
+Catch the error and call `reauthenticate(context:)` which automatically handles the OAuth flow:
+
+```swift
+do {
+  try await authService.deleteUser()
+} catch let error as AuthServiceError {
+  if case .oauthReauthenticationRequired(let context) = error {
+    try await authService.reauthenticate(context: context)
+    try await authService.deleteUser() // Retry operation
+  }
+}
+```
+
+**Email/Password:**
+
+Catch the error, prompt for password, create credential, and call `reauthenticate(with:)`:
+
+```swift
+do {
+  try await authService.updatePassword(to: newPassword)
+} catch let error as AuthServiceError {
+  if case .emailReauthenticationRequired(let context) = error {
+    // Show your password prompt UI
+    let password = await promptUserForPassword()
+    let credential = EmailAuthProvider.credential(
+      withEmail: context.email,
+      password: password
+    )
+    try await authService.reauthenticate(with: credential)
+    try await authService.updatePassword(to: newPassword) // Retry
+  }
+}
+```
+
+**Phone:**
+
+Catch the error, verify phone, create credential, and call `reauthenticate(with:)`:
+
+```swift
+do {
+  try await authService.deleteUser()
+} catch let error as AuthServiceError {
+  if case .phoneReauthenticationRequired(let context) = error {
+    // Send verification code
+    let verificationId = try await authService.verifyPhoneNumber(
+      phoneNumber: context.phoneNumber
+    )
+    // Show your SMS code input UI
+    let code = await promptUserForSMSCode()
+    let credential = PhoneAuthProvider.provider().credential(
+      withVerificationID: verificationId,
+      verificationCode: code
+    )
+    try await authService.reauthenticate(with: credential)
+    try await authService.deleteUser() // Retry
+  }
+}
+```
+
+All reauthentication context objects include a `.displayMessage` property for user-facing text.
 
 ### Custom OAuth Providers
 
@@ -767,13 +853,12 @@ Creates a new `AuthService` instance.
 ##### Email Authentication
 
 ```swift
-public func withEmailSignIn(_ provider: EmailProviderSwift? = nil, onTap: @escaping () -> Void = {}) -> AuthService
+public func withEmailSignIn(onTap: @escaping () -> Void = {}) -> AuthService
 ```
 
 Enables email authentication and will render email sign-in directly within the AuthPickerView (default Views), email link sign-in is rendered as a button. When calling `AuthService.renderButtons()`, email link sign-in button is rendered. `onTap` custom callback (i.e where to navigate when tapped) allows user to control what happens when tapped. Default behavior in AuthPickerView is to push the user to email link sign-in default View.
 
 **Parameters:**
-- `provider`: An optional instance of `EmailProviderSwift`. If not provided, a default instance will be created.
 - `onTap`: A callback that will be executed when the email button is tapped.
 
 **Example:**
@@ -1213,12 +1298,15 @@ Updates the current user's photo URL.
 public func updatePassword(to password: String) async throws
 ```
 
-Updates the current user's password. May require recent authentication.
+Updates the current user's password. This is a sensitive operation that may require recent authentication.
 
 **Parameters:**
 - `password`: New password
 
-**Throws:** `AuthServiceError.noCurrentUser` or Firebase Auth errors
+**Throws:** 
+- `AuthServiceError.noCurrentUser` if no user is signed in
+- Reauthentication errors (`emailReauthenticationRequired`, `phoneReauthenticationRequired`, or `oauthReauthenticationRequired`) if recent authentication is required - see [Reauthentication](#reauthentication-in-default-views)
+- Firebase Auth errors
 
 ---
 
@@ -1240,7 +1328,42 @@ Sends a verification email to the current user's email address.
 public func deleteUser() async throws
 ```
 
-Deletes the current user's account. May require recent authentication.
+Deletes the current user's account. This is a sensitive operation that requires recent authentication.
+
+**Throws:** 
+- `AuthServiceError.noCurrentUser` if no user is signed in
+- Reauthentication errors (`emailReauthenticationRequired`, `phoneReauthenticationRequired`, or `oauthReauthenticationRequired`) if recent authentication is required - see [Reauthentication](#reauthentication-in-default-views)
+- Firebase Auth errors
+
+---
+
+##### Reauthenticate with OAuth Provider
+
+```swift
+public func reauthenticate(context: OAuthReauthContext) async throws
+```
+
+Reauthenticates the current user with an OAuth provider (Google, Apple, Facebook, Twitter, etc.). Automatically locates the registered provider, obtains fresh credentials, and completes reauthentication.
+
+**Parameters:**
+- `context`: The reauth context from `oauthReauthenticationRequired` error
+
+**Throws:** `AuthServiceError.noCurrentUser` or `AuthServiceError.providerNotFound`
+
+**Note:** Only works for OAuth providers. For email/phone, use `reauthenticate(with:)`.
+
+---
+
+##### Reauthenticate with Credential
+
+```swift
+public func reauthenticate(with credential: AuthCredential) async throws
+```
+
+Reauthenticates the current user with a pre-obtained authentication credential. Use for email/password or phone authentication.
+
+**Parameters:**
+- `credential`: The authentication credential (from `EmailAuthProvider` or `PhoneAuthProvider`)
 
 **Throws:** `AuthServiceError.noCurrentUser` or Firebase Auth errors
 
@@ -1424,22 +1547,6 @@ Navigator for managing navigation routes in default views.
 ---
 
 ```swift
-public var passwordPrompt: PasswordPromptCoordinator
-```
-A coordinator that manages password prompt dialogs during reauthentication flows for the email provider. 
-
-Users can provide a custom `PasswordPromptCoordinator` instance when initializing `EmailProviderSwift` to customize password prompting behavior:
-
-```swift
-let customPrompt = PasswordPromptCoordinator()
-authService.withEmailSignIn(EmailProviderSwift(passwordPrompt: customPrompt))
-```
-
-**Default Behavior:** If no custom coordinator is provided, a default `PasswordPromptCoordinator()` instance is created automatically. The default coordinator displays a modal sheet that prompts the user to enter their password when reauthentication is required for sensitive operations (e.g., updating email, deleting account).
-
----
-
-```swift
 public var authView: AuthView?
 ```
 Currently displayed auth view (e.g., `.emailLink`, `.mfaResolution`).
@@ -1529,12 +1636,24 @@ public enum AuthServiceError: Error {
   case providerNotFound(String)
   case invalidCredentials(String)
   case multiFactorAuth(String)
-  case reauthenticationRequired(String)
+  case oauthReauthenticationRequired(context: OAuthReauthContext)
+  case emailReauthenticationRequired(context: EmailReauthContext)
+  case phoneReauthenticationRequired(context: PhoneReauthContext)
   case accountConflict(AccountConflictContext)
 }
 ```
 
 Errors specific to `AuthService` operations.
+
+**Reauthentication Errors:**
+
+Thrown by sensitive operations when Firebase requires recent authentication. Each includes context information:
+
+- **`oauthReauthenticationRequired(context: OAuthReauthContext)`**: OAuth providers. Context contains `providerId`, `providerName`, and `displayMessage`. Pass to `reauthenticate(context:)`.
+
+- **`emailReauthenticationRequired(context: EmailReauthContext)`**: Email/password provider. Context contains `email` and `displayMessage`. Prompt for password, then call `reauthenticate(with:)`.
+
+- **`phoneReauthenticationRequired(context: PhoneReauthContext)`**: Phone provider. Context contains `phoneNumber` and `displayMessage`. Handle SMS verification, then call `reauthenticate(with:)`.
 
 ---
 
@@ -1551,6 +1670,8 @@ Errors specific to `AuthService` operations.
 5. **Observe authentication state**: Use `onChange(of: authService.authenticationState)` to react to authentication changes.
 
 6. **Provider-specific setup**: Some providers (Google, Facebook) require additional configuration in AppDelegate or Info.plist. See the [sample app](https://github.com/firebase/FirebaseUI-iOS/tree/main/samples/swiftui) for examples.
+
+7. **Handle reauthentication**: Default views handle reauthentication automatically. For custom views, catch and handle reauthentication errors when performing sensitive operations like `deleteUser()`, `updatePassword()`, and `unenrollMFA()`. See [Reauthentication in Custom Views](#reauthentication-in-custom-views).
 
 ---
 

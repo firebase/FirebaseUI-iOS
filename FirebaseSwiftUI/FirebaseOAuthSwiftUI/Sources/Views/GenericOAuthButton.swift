@@ -42,7 +42,7 @@ extension GenericOAuthButton: View {
 
     return AnyView(
       AuthProviderButton(
-        label: provider.displayName,
+        label: provider.buttonLabel,
         style: resolvedStyle,
         accessibilityId: "sign-in-with-\(provider.providerId)-button"
       ) {

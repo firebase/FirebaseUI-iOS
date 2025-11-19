@@ -36,7 +36,6 @@ extension AuthPickerView: View {
     content()
       .sheet(isPresented: $authService.isPresented) {
         @Bindable var navigator = authService.navigator
-        @Bindable var passwordPrompt = authService.passwordPrompt
         NavigationStack(path: $navigator.routes) {
           authPickerViewInternal
             .navigationTitle(authService.authenticationState == .unauthenticated ? authService
@@ -79,10 +78,6 @@ extension AuthPickerView: View {
         .accountConflictHandler()
         // Apply MFA handling at NavigationStack level
         .mfaHandler()
-        // Centralized password prompt sheet inside auth flow
-        .sheet(isPresented: $passwordPrompt.isPromptingPassword) {
-          PasswordPromptSheet(coordinator: passwordPrompt)
-        }
       }
   }
 

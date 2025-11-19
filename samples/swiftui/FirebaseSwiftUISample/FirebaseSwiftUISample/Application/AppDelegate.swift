@@ -18,45 +18,39 @@ import FirebaseCore
 import GoogleSignIn
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(
-    _ application: UIApplication,
-    didFinishLaunchingWithOptions launchOptions: [
-      UIApplication.LaunchOptionsKey: Any
-    ]?
-  ) -> Bool {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [
+                     UIApplication.LaunchOptionsKey: Any
+                   ]?) -> Bool {
     FirebaseApp.configure()
-    
+
     ApplicationDelegate.shared.application(
       application,
       didFinishLaunchingWithOptions: launchOptions
     )
     return true
   }
-  
+
   func application(_: UIApplication,
                    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     Auth.auth().setAPNSToken(deviceToken, type: .prod)
   }
-  
-  func application(
-    _: UIApplication,
-    didReceiveRemoteNotification notification: [AnyHashable: Any],
-    fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult)
-    -> Void
-  ) {
+
+  func application(_: UIApplication,
+                   didReceiveRemoteNotification notification: [AnyHashable: Any],
+                   fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult)
+                     -> Void) {
     if Auth.auth().canHandleNotification(notification) {
       completionHandler(.noData)
       return
     }
   }
-  
-  func application(
-    _ app: UIApplication,
-    open url: URL,
-    options: [UIApplication.OpenURLOptionsKey: Any] = [:]
-  ) -> Bool {
+
+  func application(_ app: UIApplication,
+                   open url: URL,
+                   options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
     if Auth.auth().canHandle(url) { return true }
-    
+
     if ApplicationDelegate.shared.application(
       app,
       open: url,
@@ -66,7 +60,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     ) {
       return true
     }
-    
+
     return GIDSignIn.sharedInstance.handle(url)
   }
 }

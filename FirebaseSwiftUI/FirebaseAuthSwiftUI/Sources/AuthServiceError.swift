@@ -15,6 +15,65 @@
 import FirebaseAuth
 import SwiftUI
 
+/// Context information for OAuth provider reauthentication (Google, Apple, Facebook, Twitter, etc.)
+public struct OAuthReauthContext: Equatable {
+  public let providerId: String
+  public let providerName: String
+
+  public init(providerId: String, providerName: String) {
+    self.providerId = providerId
+    self.providerName = providerName
+  }
+
+  public var displayMessage: String {
+    "Please sign in with \(providerName) to continue"
+  }
+}
+
+/// Context information for email/password reauthentication
+public struct EmailReauthContext: Equatable {
+  public let email: String
+
+  public init(email: String) {
+    self.email = email
+  }
+
+  public var displayMessage: String {
+    "Please enter your password to continue"
+  }
+}
+
+/// Context information for phone number reauthentication
+public struct PhoneReauthContext: Equatable {
+  public let phoneNumber: String
+
+  public init(phoneNumber: String) {
+    self.phoneNumber = phoneNumber
+  }
+
+  public var displayMessage: String {
+    "Please verify your phone number to continue"
+  }
+}
+
+/// Type-safe wrapper for reauthentication contexts
+public enum ReauthenticationType: Equatable {
+  case oauth(OAuthReauthContext)
+  case email(EmailReauthContext)
+  case phone(PhoneReauthContext)
+
+  public var displayMessage: String {
+    switch self {
+    case let .oauth(context):
+      return context.displayMessage
+    case let .email(context):
+      return context.displayMessage
+    case let .phone(context):
+      return context.displayMessage
+    }
+  }
+}
+
 /// Describes the specific type of account conflict that occurred
 public enum AccountConflictType: Equatable {
   /// Account exists with a different provider (e.g., user signed up with Google, trying to use
@@ -72,7 +131,17 @@ public enum AuthServiceError: LocalizedError {
   case invalidEmailLink(String)
   case clientIdNotFound(String)
   case notConfiguredActionCodeSettings(String)
-  case reauthenticationRequired(String)
+
+  /// OAuth reauthentication required (Google, Apple, Facebook, Twitter, etc.)
+  /// Can be passed directly to `reauthenticate(context:)` method
+  case oauthReauthenticationRequired(context: OAuthReauthContext)
+
+  /// Email reauthentication required - user must handle password prompt externally
+  case emailReauthenticationRequired(context: EmailReauthContext)
+
+  /// Phone reauthentication required - user must handle SMS verification flow externally
+  case phoneReauthenticationRequired(context: PhoneReauthContext)
+
   case invalidCredentials(String)
   case signInFailed(underlying: Error)
   case accountConflict(AccountConflictContext)
@@ -92,8 +161,12 @@ public enum AuthServiceError: LocalizedError {
       return description
     case let .notConfiguredActionCodeSettings(description):
       return description
-    case let .reauthenticationRequired(description):
-      return description
+    case let .oauthReauthenticationRequired(context):
+      return "Please sign in again with \(context.providerName) to continue"
+    case .emailReauthenticationRequired:
+      return "Please enter your password to continue"
+    case .phoneReauthenticationRequired:
+      return "Please verify your phone number to continue"
     case let .invalidCredentials(description):
       return description
     // Use when failed to sign-in with Firebase

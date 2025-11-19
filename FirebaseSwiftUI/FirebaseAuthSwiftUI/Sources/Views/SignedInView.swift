@@ -21,6 +21,7 @@ public struct SignedInView {
   @Environment(\.reportError) private var reportError
   @State private var showDeleteConfirmation = false
   @State private var showEmailVerificationSent = false
+  @State private var reauthCoordinator = ReauthenticationCoordinator()
 
   private func sendEmailVerification() async throws {
     do {
@@ -45,7 +46,7 @@ extension SignedInView: View {
         .padding()
         .accessibilityIdentifier("signed-in-text")
       Text(
-        "\(authService.currentUser?.email ?? authService.currentUser?.displayName ?? "Unknown")"
+        "\(authService.currentUser?.email ?? authService.currentUser?.displayName ?? authService.currentUser?.phoneNumber ?? "")"
       )
       if authService.currentUser?.isEmailVerified == false {
         Button {
@@ -121,13 +122,19 @@ extension SignedInView: View {
       .accessibilityIdentifier("sign-out-button")
     }
     .safeAreaPadding()
+    .withReauthentication(coordinator: reauthCoordinator)
     .sheet(isPresented: $showDeleteConfirmation) {
       DeleteAccountConfirmationSheet(
         onConfirm: {
           showDeleteConfirmation = false
           Task {
             do {
-              try await authService.deleteUser()
+              try await withReauthenticationIfNeeded(
+                authService: authService,
+                coordinator: reauthCoordinator
+              ) {
+                try await authService.deleteUser()
+              }
             } catch {
               if let errorHandler = reportError {
                 errorHandler(error)

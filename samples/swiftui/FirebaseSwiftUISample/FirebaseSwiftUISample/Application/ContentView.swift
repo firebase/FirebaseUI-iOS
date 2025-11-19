@@ -12,20 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import SwiftUI
-import FirebaseAuth
 import FirebaseAppleSwiftUI
-import FirebasePhoneAuthSwiftUI
-import FirebaseGoogleSwiftUI
-import FirebaseTwitterSwiftUI
+import FirebaseAuth
 import FirebaseAuthSwiftUI
 import FirebaseFacebookSwiftUI
+import FirebaseGoogleSwiftUI
 import FirebaseOAuthSwiftUI
-
+import FirebasePhoneAuthSwiftUI
+import FirebaseTwitterSwiftUI
+import SwiftUI
 
 struct ContentView: View {
   init() {
-//     Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
+    Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
 
     let actionCodeSettings = ActionCodeSettings()
 
@@ -40,7 +39,7 @@ struct ContentView: View {
       emailLinkSignInActionCodeSettings: actionCodeSettings,
       mfaEnabled: true
     )
-    
+
     authService = AuthService(
       configuration: configuration
     )
@@ -56,7 +55,8 @@ struct ContentView: View {
       OAuthProviderSwift(
         providerId: "oidc.line",
         scopes: ["openid", "profile", "email"],
-        displayName: "Sign in with LINE",
+        buttonLabel: "Sign in with LINE",
+        displayName: "Line",
         buttonIcon: Image(.icLineLogo),
         buttonBackgroundColor: .lineButton,
         buttonForegroundColor: .white
@@ -64,9 +64,9 @@ struct ContentView: View {
     )
     .withEmailSignIn()
   }
-  
+
   let authService: AuthService
-  
+
   var body: some View {
     NavigationStack {
       VStack(spacing: 24) {
@@ -102,9 +102,11 @@ struct ContentView: View {
               .font(.headline)
               .fontWeight(.bold)
             Text("How to use with AuthService with a custom view")
-            Text("• Build custom authentication UI\n• Direct AuthService method calls\n• Full control over user experience")
-              .font(.caption)
-              .foregroundColor(.secondary)
+            Text(
+              "• Build custom authentication UI\n• Direct AuthService method calls\n• Full control over user experience"
+            )
+            .font(.caption)
+            .foregroundColor(.secondary)
           }
           .multilineTextAlignment(.leading)
           .padding()

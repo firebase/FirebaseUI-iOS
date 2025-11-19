@@ -35,10 +35,12 @@ struct AccountConflictModifier: ViewModifier {
   @Environment(\.mfaHandler) private var mfaHandler
   @Environment(\.reportError) private var reportError
   @State private var pendingCredentialForLinking: AuthCredential?
+  @State private var reauthCoordinator = ReauthenticationCoordinator()
 
   func body(content: Content) -> some View {
     content
       .environment(\.accountConflictHandler, handleAccountConflict)
+      .withReauthentication(coordinator: reauthCoordinator)
       .onChange(of: authService.authenticationState) { _, newState in
         // Auto-link pending credential after successful sign-in
         if newState == .authenticated {
@@ -82,7 +84,12 @@ struct AccountConflictModifier: ViewModifier {
 
     Task {
       do {
-        try await authService.linkAccounts(credentials: credential)
+        try await withReauthenticationIfNeeded(
+          authService: authService,
+          coordinator: reauthCoordinator
+        ) {
+          try await authService.linkAccounts(credentials: credential)
+        }
         // Successfully linked, clear the pending credential
         pendingCredentialForLinking = nil
       } catch {

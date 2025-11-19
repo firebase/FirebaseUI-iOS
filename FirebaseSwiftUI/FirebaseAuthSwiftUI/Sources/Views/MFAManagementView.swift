@@ -27,6 +27,7 @@ public struct MFAManagementView {
 
   @State private var enrolledFactors: [MultiFactorInfo] = []
   @State private var isLoading = false
+  @State private var reauthCoordinator = ReauthenticationCoordinator()
 
   public init() {}
 
@@ -40,8 +41,13 @@ public struct MFAManagementView {
       isLoading = true
 
       do {
-        let freshFactors = try await authService.unenrollMFA(factorUid)
-        enrolledFactors = freshFactors
+        try await withReauthenticationIfNeeded(
+          authService: authService,
+          coordinator: reauthCoordinator
+        ) {
+          let freshFactors = try await authService.unenrollMFA(factorUid)
+          enrolledFactors = freshFactors
+        }
         isLoading = false
       } catch {
         reportError?(error)
@@ -131,6 +137,7 @@ extension MFAManagementView: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .safeAreaPadding()
+    .withReauthentication(coordinator: reauthCoordinator)
     .onAppear {
       loadEnrolledFactors()
     }
