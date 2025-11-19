@@ -17,7 +17,7 @@ import SwiftUI
 @main
 struct FirebaseSwiftUISampleApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-  
+
   var body: some Scene {
     WindowGroup {
       ContentView()

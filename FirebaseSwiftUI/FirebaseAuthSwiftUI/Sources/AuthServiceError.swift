@@ -188,4 +188,3 @@ public enum AuthServiceError: LocalizedError {
     }
   }
 }
-
