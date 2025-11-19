@@ -30,6 +30,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@main
+      - name: Select Xcode version
+        run: sudo xcode-select -switch /Applications/Xcode_26.0.1.app/Contents/Developer
       - name: Build SwiftUI Sample
         run: |
           cd samples/swiftui/FirebaseSwiftUISample
@@ -37,7 +39,7 @@ jobs:
             -project FirebaseSwiftUISample.xcodeproj \
             -scheme FirebaseSwiftUISample \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 17' \
             clean build \
             ONLY_ACTIVE_ARCH=YES
 
