@@ -122,6 +122,10 @@ public final class AuthService {
   // Needed because provider data sign-in doesn't distinguish between email link and password
   // sign-in needed for reauthentication
   @ObservationIgnored @AppStorage("is-email-link") private var isEmailLinkSignIn: Bool = false
+  // Storage for email link reauthentication (separate from sign-in)
+  @ObservationIgnored @AppStorage("email-link-reauth") private var emailLinkReauth: String?
+  @ObservationIgnored @AppStorage("is-reauthenticating") private var isReauthenticating: Bool =
+    false
 
   private var currentMFAResolver: MultiFactorResolver?
   private var listenerManager: AuthListenerManager?
@@ -181,6 +185,9 @@ public final class AuthService {
     currentUser = nil
     // Clear email link sign-in flag
     isEmailLinkSignIn = false
+    // Clear email link reauth state
+    emailLinkReauth = nil
+    isReauthenticating = false
     updateAuthenticationState()
   }
 
@@ -385,20 +392,44 @@ public extension AuthService {
 // MARK: - Email Link Sign In
 
 public extension AuthService {
-  func sendEmailSignInLink(email: String) async throws {
+  /// Send email link for sign-in or reauthentication
+  /// - Parameters:
+  ///   - email: Email address to send link to
+  ///   - isReauth: Whether this is for reauthentication (default: false)
+  func sendEmailSignInLink(email: String, isReauth: Bool = false) async throws {
     let actionCodeSettings = try updateActionCodeSettings()
     try await auth.sendSignInLink(
       toEmail: email,
       actionCodeSettings: actionCodeSettings
     )
+
+    // Store email based on context
+    if isReauth {
+      emailLinkReauth = email
+      isReauthenticating = true
+    }
   }
 
   func handleSignInLink(url url: URL) async throws {
     do {
-      guard let email = emailLink else {
-        throw AuthServiceError
-          .invalidEmailLink("email address is missing from app storage. Is this the same device?")
+      // Check which flow we're in based on the flag
+      let email: String
+      let isReauth = isReauthenticating
+
+      if isReauth {
+        guard let reauthEmail = emailLinkReauth else {
+          throw AuthServiceError
+            .invalidEmailLink("Email address is missing for reauthentication")
+        }
+        email = reauthEmail
+      } else {
+        guard let signInEmail = emailLink else {
+          throw AuthServiceError
+            .invalidEmailLink("email address is missing from app storage. Is this the same device?")
+        }
+        email = signInEmail
       }
+
       let urlString = url.absoluteString
 
       guard let originalLink = CommonUtils.getQueryParamValue(from: urlString, paramName: "link")
@@ -412,41 +443,62 @@ public extension AuthService {
           .invalidEmailLink("Failed to decode Link URL")
       }
 
-      guard let continueUrl = CommonUtils.getQueryParamValue(from: link, paramName: "continueUrl")
-      else {
-        throw AuthServiceError
-          .invalidEmailLink("`continueUrl` parameter is missing from the email link URL")
-      }
-
       if auth.isSignIn(withEmailLink: link) {
-        let anonymousUserID = CommonUtils.getQueryParamValue(
-          from: continueUrl,
-          paramName: "ui_auid"
-        )
-        if shouldHandleAnonymousUpgrade, anonymousUserID == currentUser?.uid {
-          let credential = EmailAuthProvider.credential(withEmail: email, link: link)
-          try await handleAutoUpgradeAnonymousUser(credentials: credential)
+        let credential = EmailAuthProvider.credential(withEmail: email, link: link)
+
+        if isReauth {
+          // Reauthentication flow
+          try await reauthenticate(with: credential)
+          // Clean up reauth state
+          emailLinkReauth = nil
+          isReauthenticating = false
         } else {
-          let result = try await auth.signIn(withEmail: email, link: link)
+          // Sign-in flow
+          guard let continueUrl = CommonUtils.getQueryParamValue(
+            from: link,
+            paramName: "continueUrl"
+          )
+          else {
+            throw AuthServiceError
+              .invalidEmailLink("`continueUrl` parameter is missing from the email link URL")
+          }
+
+          let anonymousUserID = CommonUtils.getQueryParamValue(
+            from: continueUrl,
+            paramName: "ui_auid"
+          )
+          if shouldHandleAnonymousUpgrade, anonymousUserID == currentUser?.uid {
+            try await handleAutoUpgradeAnonymousUser(credentials: credential)
+          } else {
+            let result = try await auth.signIn(withEmail: email, link: link)
+          }
+          updateAuthenticationState()
+          // Track that user signed in with email link
+          isEmailLinkSignIn = true
+          emailLink = nil
         }
-        updateAuthenticationState()
-        // Track that user signed in with email link
-        isEmailLinkSignIn = true
-        emailLink = nil
       }
     } catch {
-      // Reconstruct credential for conflict handling
+      // Determine which email to use for error handling
+      let email = isReauthenticating ? emailLinkReauth : emailLink
       let link = url.absoluteString
-      guard let email = emailLink else {
+
+      guard let email = email else {
         throw AuthServiceError
-          .invalidEmailLink("email address is missing from app storage. Is this the same device?")
+          .invalidEmailLink("email address is missing from app storage")
       }
       let credential = EmailAuthProvider.credential(withEmail: email, link: link)
 
-      // Possible conflicts from auth.signIn(withEmail:link:):
-      // - accountExistsWithDifferentCredential: account exists with different provider
-      // - credentialAlreadyInUse: credential is already linked to another account
-      try handleErrorWithConflictCheck(error: error, credential: credential)
+      // Only handle conflicts for sign-in flow, not reauth
+      if !isReauthenticating {
+        // Possible conflicts from auth.signIn(withEmail:link:):
+        // - accountExistsWithDifferentCredential: account exists with different provider
+        // - credentialAlreadyInUse: credential is already linked to another account
+        try handleErrorWithConflictCheck(error: error, credential: credential)
+      } else {
+        // For reauth, just rethrow
+        throw error
+      }
     }
   }
 }
