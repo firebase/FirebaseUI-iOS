@@ -43,6 +43,19 @@ public struct EmailReauthContext: Equatable {
   }
 }
 
+/// Context information for email link reauthentication
+public struct EmailLinkReauthContext: Equatable {
+  public let email: String
+
+  public init(email: String) {
+    self.email = email
+  }
+
+  public var displayMessage: String {
+    "Please check your email to verify your identity"
+  }
+}
+
 /// Context information for phone number reauthentication
 public struct PhoneReauthContext: Equatable {
   public let phoneNumber: String
@@ -60,6 +73,7 @@ public struct PhoneReauthContext: Equatable {
 public enum ReauthenticationType: Equatable {
   case oauth(OAuthReauthContext)
   case email(EmailReauthContext)
+  case emailLink(EmailLinkReauthContext)
   case phone(PhoneReauthContext)
 
   public var displayMessage: String {
@@ -67,6 +81,8 @@ public enum ReauthenticationType: Equatable {
     case let .oauth(context):
       return context.displayMessage
     case let .email(context):
+      return context.displayMessage
+    case let .emailLink(context):
       return context.displayMessage
     case let .phone(context):
       return context.displayMessage
@@ -139,6 +155,9 @@ public enum AuthServiceError: LocalizedError {
   /// Email reauthentication required - user must handle password prompt externally
   case emailReauthenticationRequired(context: EmailReauthContext)
 
+  /// Email link reauthentication required - user must handle email link flow externally
+  case emailLinkReauthenticationRequired(context: EmailLinkReauthContext)
+
   /// Phone reauthentication required - user must handle SMS verification flow externally
   case phoneReauthenticationRequired(context: PhoneReauthContext)
 
@@ -165,6 +184,8 @@ public enum AuthServiceError: LocalizedError {
       return "Please sign in again with \(context.providerName) to continue"
     case .emailReauthenticationRequired:
       return "Please enter your password to continue"
+    case .emailLinkReauthenticationRequired:
+      return "Please check your email to verify your identity"
     case .phoneReauthenticationRequired:
       return "Please verify your phone number to continue"
     case let .invalidCredentials(description):

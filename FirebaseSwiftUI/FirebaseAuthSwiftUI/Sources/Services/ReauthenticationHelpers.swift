@@ -35,6 +35,8 @@ public func withReauthenticationIfNeeded(authService _: AuthService,
     switch error {
     case let .emailReauthenticationRequired(ctx):
       reauthContext = .email(ctx)
+    case let .emailLinkReauthenticationRequired(ctx):
+      reauthContext = .emailLink(ctx)
     case let .phoneReauthenticationRequired(ctx):
       reauthContext = .phone(ctx)
     case let .oauthReauthenticationRequired(ctx):

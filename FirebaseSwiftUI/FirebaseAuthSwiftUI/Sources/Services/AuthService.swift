@@ -119,6 +119,9 @@ public final class AuthService {
   }
 
   @ObservationIgnored @AppStorage("email-link") public var emailLink: String?
+  // Needed because provider data sign-in doesn't distinguish between email link and password
+  // sign-in needed for reauthentication
+  @ObservationIgnored @AppStorage("is-email-link") private var isEmailLinkSignIn: Bool = false
 
   private var currentMFAResolver: MultiFactorResolver?
   private var listenerManager: AuthListenerManager?
@@ -176,6 +179,8 @@ public final class AuthService {
     try await auth.signOut()
     // Cannot wait for auth listener to change, feedback needs to be immediate
     currentUser = nil
+    // Clear email link sign-in flag
+    isEmailLinkSignIn = false
     updateAuthenticationState()
   }
 
@@ -425,6 +430,8 @@ public extension AuthService {
           let result = try await auth.signIn(withEmail: email, link: link)
         }
         updateAuthenticationState()
+        // Track that user signed in with email link
+        isEmailLinkSignIn = true
         emailLink = nil
       }
     } catch {
@@ -883,8 +890,14 @@ private extension AuthService {
       guard let email = currentUser?.email else {
         throw AuthServiceError.noCurrentUser
       }
-      let context = EmailReauthContext(email: email)
-      throw AuthServiceError.emailReauthenticationRequired(context: context)
+      // Check if user signed in with email link or password
+      if isEmailLinkSignIn {
+        let context = EmailLinkReauthContext(email: email)
+        throw AuthServiceError.emailLinkReauthenticationRequired(context: context)
+      } else {
+        let context = EmailReauthContext(email: email)
+        throw AuthServiceError.emailReauthenticationRequired(context: context)
+      }
     case PhoneAuthProviderID:
       guard let phoneNumber = currentUser?.phoneNumber else {
         throw AuthServiceError.noCurrentUser
