@@ -11183,6 +11183,10 @@
         }
       }
     },
+    "Confirm" : {
+      "comment" : "Confirm button label",
+      "extractionState" : "manual"
+    },
     "Confirm Password" : {
       "comment" : "Field label for confirming password",
       "extractionState" : "manual",
@@ -15972,6 +15976,10 @@
         }
       }
     },
+    "Email: %@" : {
+      "comment" : "Format string to display email address",
+      "extractionState" : "manual"
+    },
     "Enter 6-digit code" : {
       "localizations" : {
         "ar" : {
@@ -18199,6 +18207,10 @@
           }
         }
       }
+    },
+    "Enter the 6-digit code sent to:" : {
+      "comment" : "Message prefix for phone verification code entry",
+      "extractionState" : "manual"
     },
     "Enter Verification Code" : {
       "localizations" : {
@@ -21158,6 +21170,10 @@
           }
         }
       }
+    },
+    "For security, please enter your password" : {
+      "comment" : "Message prompting user to enter password for security verification",
+      "extractionState" : "manual"
     },
     "For security, please verify your phone number" : {
       "comment" : "A description under the phone number label, emphasizing the importance of phone number verification.",
@@ -34489,6 +34505,10 @@
           }
         }
       }
+    },
+    "Retype new password" : {
+      "comment" : "Label for retyping new password field",
+      "extractionState" : "manual"
     },
     "Save" : {
       "comment" : "Save button title.",
@@ -52724,6 +52744,10 @@
         }
       }
     },
+    "Type new password" : {
+      "comment" : "Label for typing new password field",
+      "extractionState" : "manual"
+    },
     "Unable to generate QR Code" : {
       "localizations" : {
         "ar" : {
@@ -54296,6 +54320,10 @@
           }
         }
       }
+    },
+    "Unnamed Method" : {
+      "comment" : "Fallback label for MFA method without a display name",
+      "extractionState" : "manual"
     },
     "Update password" : {
       "comment" : "Update password button label",

@@ -964,4 +964,140 @@ public class StringUtils {
   public var changeNumberButtonLabel: String {
     return localizedString(for: "Change number")
   }
+
+  // MARK: - Reauthentication Strings
+
+  /// Confirm password title
+  /// found in:
+  /// - EmailReauthView
+  public var confirmPasswordTitle: String {
+    return localizedString(for: "Confirm Password")
+  }
+
+  /// For security prompt message
+  /// found in:
+  /// - EmailReauthView
+  public var forSecurityEnterPasswordMessage: String {
+    return localizedString(for: "For security, please enter your password")
+  }
+
+  /// Email prefix format
+  /// found in:
+  /// - EmailReauthView
+  public func emailPrefix(email: String) -> String {
+    return String(format: localizedString(for: "Email: %@"), email)
+  }
+
+  /// Confirm button label
+  /// found in:
+  /// - EmailReauthView
+  public var confirmButtonLabel: String {
+    return localizedString(for: "Confirm")
+  }
+
+  /// Verify phone number title
+  /// found in:
+  /// - PhoneReauthView
+  public var verifyPhoneNumberTitle: String {
+    return localizedString(for: "Verify Phone Number")
+  }
+
+  /// For security verify phone message
+  /// found in:
+  /// - PhoneReauthView
+  public var forSecurityVerifyPhoneMessage: String {
+    return localizedString(for: "For security, please verify your phone number")
+  }
+
+  /// Send verification code to phone prefix
+  /// found in:
+  /// - PhoneReauthView
+  public var sendVerificationCodeToPhonePrefix: String {
+    return localizedString(for: "We'll send a verification code to:")
+  }
+
+  /// Send verification code button label
+  /// found in:
+  /// - PhoneReauthView
+  public var sendVerificationCodeButtonLabel: String {
+    return localizedString(for: "Send Verification Code")
+  }
+
+  /// Enter 6-digit code sent to prefix
+  /// found in:
+  /// - PhoneReauthView
+  public var enterSixDigitCodeSentToPrefix: String {
+    return localizedString(for: "Enter the 6-digit code sent to:")
+  }
+
+  /// Verify button label
+  /// found in:
+  /// - PhoneReauthView
+  public var verifyButtonLabel: String {
+    return localizedString(for: "Verify")
+  }
+
+  // MARK: - Password Update Strings
+
+  /// Type new password label
+  /// found in:
+  /// - UpdatePasswordView
+  public var typeNewPasswordLabel: String {
+    return localizedString(for: "Type new password")
+  }
+
+  /// Retype new password label
+  /// found in:
+  /// - UpdatePasswordView
+  public var retypeNewPasswordLabel: String {
+    return localizedString(for: "Retype new password")
+  }
+
+  /// Password updated title
+  /// found in:
+  /// - UpdatePasswordView
+  public var passwordUpdatedTitle: String {
+    return localizedString(for: "Password Updated")
+  }
+
+  /// Password updated successfully message
+  /// found in:
+  /// - UpdatePasswordView
+  public var passwordUpdatedSuccessMessage: String {
+    return localizedString(for: "Your password has been successfully updated.")
+  }
+
+  // MARK: - MFA Management Strings
+
+  /// Unnamed method fallback label
+  /// found in:
+  /// - MFAManagementView
+  public var unnamedMethodLabel: String {
+    return localizedString(for: "Unnamed Method")
+  }
+
+  /// Account prefix for TOTP display name
+  /// found in:
+  /// - MFAResolutionView
+  public func accountPrefix(displayName: String) -> String {
+    return String(format: localizedString(for: "Account: %@"), displayName)
+  }
+
+  // MARK: - Email Verification Strings
+
+  /// Email verification tap link message
+  /// found in:
+  /// - SignedInView
+  public var emailVerificationTapLinkMessage: String {
+    return localizedString(for: "Please tap on the link in your email to complete verification.")
+  }
+
+  // MARK: - Privacy/TOC Format Strings
+
+  /// Footer terms format (simple concatenation for footer mode)
+  /// found in:
+  /// - PrivacyTOCsView
+  public var footerTermsFormat: String {
+    return "%@    %@"
+  }
 }

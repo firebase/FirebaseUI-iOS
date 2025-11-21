@@ -90,11 +90,11 @@ extension PhoneReauthView: View {
             .font(.system(size: 60))
             .foregroundColor(.blue)
 
-          Text("Verify Phone Number")
+          Text(authService.string.verifyPhoneNumberTitle)
             .font(.title)
             .fontWeight(.bold)
 
-          Text("For security, please verify your phone number")
+          Text(authService.string.forSecurityVerifyPhoneMessage)
             .font(.body)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
@@ -104,7 +104,7 @@ extension PhoneReauthView: View {
         if verificationID == nil {
           // Initial state - sending SMS
           VStack(spacing: 20) {
-            Text("We'll send a verification code to:")
+            Text(authService.string.sendVerificationCodeToPhonePrefix)
               .font(.subheadline)
               .foregroundStyle(.secondary)
               .frame(maxWidth: .infinity, alignment: .leading)
@@ -122,7 +122,7 @@ extension PhoneReauthView: View {
                   .frame(height: 32)
                   .frame(maxWidth: .infinity)
               } else {
-                Text("Send Verification Code")
+                Text(authService.string.sendVerificationCodeButtonLabel)
                   .frame(height: 32)
                   .frame(maxWidth: .infinity)
               }
@@ -138,7 +138,7 @@ extension PhoneReauthView: View {
         } else {
           // Enter verification code
           VStack(spacing: 20) {
-            Text("Enter the 6-digit code sent to:")
+            Text(authService.string.enterSixDigitCodeSentToPrefix)
               .font(.subheadline)
               .foregroundStyle(.secondary)
               .frame(maxWidth: .infinity, alignment: .leading)
@@ -165,7 +165,7 @@ extension PhoneReauthView: View {
                   .frame(height: 32)
                   .frame(maxWidth: .infinity)
               } else {
-                Text("Verify")
+                Text(authService.string.verifyButtonLabel)
                   .frame(height: 32)
                   .frame(maxWidth: .infinity)
               }
