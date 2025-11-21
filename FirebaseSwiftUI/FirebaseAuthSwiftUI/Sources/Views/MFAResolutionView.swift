@@ -259,7 +259,7 @@ extension MFAResolutionView: View {
           .multilineTextAlignment(.center)
 
         if let displayName = displayName {
-          Text("Account: \(displayName)")
+          Text(authService.string.accountPrefix(displayName: displayName))
             .font(.caption)
             .foregroundColor(.secondary)
         }

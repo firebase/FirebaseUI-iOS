@@ -159,7 +159,7 @@ extension MFAManagementView: View {
       .font(.title2)
 
       VStack(alignment: .leading, spacing: 4) {
-        Text(factor.displayName ?? "Unnamed Method")
+        Text(factor.displayName ?? authService.string.unnamedMethodLabel)
           .font(.headline)
 
         if factor.factorID == PhoneMultiFactorID {

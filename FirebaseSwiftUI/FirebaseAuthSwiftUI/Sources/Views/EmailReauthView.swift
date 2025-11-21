@@ -65,11 +65,11 @@ extension EmailReauthView: View {
             .font(.system(size: 60))
             .foregroundColor(.blue)
 
-          Text("Confirm Password")
+          Text(authService.string.confirmPasswordTitle)
             .font(.title)
             .fontWeight(.bold)
 
-          Text("For security, please enter your password")
+          Text(authService.string.forSecurityEnterPasswordMessage)
             .font(.body)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
@@ -77,7 +77,7 @@ extension EmailReauthView: View {
         .padding()
 
         VStack(spacing: 20) {
-          Text("Email: \(email)")
+          Text(authService.string.emailPrefix(email: email))
             .font(.caption)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.bottom, 8)
@@ -104,7 +104,7 @@ extension EmailReauthView: View {
                 .frame(height: 32)
                 .frame(maxWidth: .infinity)
             } else {
-              Text("Confirm")
+              Text(authService.string.confirmButtonLabel)
                 .frame(height: 32)
                 .frame(maxWidth: .infinity)
             }

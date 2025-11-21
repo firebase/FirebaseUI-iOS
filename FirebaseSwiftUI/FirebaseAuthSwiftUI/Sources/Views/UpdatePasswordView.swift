@@ -62,7 +62,7 @@ extension UpdatePasswordView: View {
     VStack(spacing: 24) {
       AuthTextField(
         text: $password,
-        label: "Type new password",
+        label: authService.string.typeNewPasswordLabel,
         prompt: authService.string.passwordInputLabel,
         contentType: .password,
         isSecureTextField: true,
@@ -79,7 +79,7 @@ extension UpdatePasswordView: View {
 
       AuthTextField(
         text: $confirmPassword,
-        label: "Retype new password",
+        label: authService.string.retypeNewPasswordLabel,
         prompt: authService.string.confirmPasswordInputLabel,
         contentType: .password,
         isSecureTextField: true,
@@ -111,7 +111,7 @@ extension UpdatePasswordView: View {
     .navigationTitle(authService.string.updatePasswordTitle)
     .withReauthentication(coordinator: reauthCoordinator)
     .alert(
-      "Password Updated",
+      authService.string.passwordUpdatedTitle,
       isPresented: $showAlert
     ) {
       Button(authService.string.okButtonLabel) {
@@ -119,7 +119,7 @@ extension UpdatePasswordView: View {
         authService.navigator.clear()
       }
     } message: {
-      Text("Your password has been successfully updated.")
+      Text(authService.string.passwordUpdatedSuccessMessage)
     }
   }
 }

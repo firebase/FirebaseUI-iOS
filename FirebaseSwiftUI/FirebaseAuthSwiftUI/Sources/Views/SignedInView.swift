@@ -78,7 +78,7 @@ extension SignedInView: View {
       Button {
         authService.navigator.push(.mfaManagement)
       } label: {
-        Text("Manage Two-Factor Authentication")
+        Text(authService.string.manageTwoFactorAuthenticationLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
@@ -158,7 +158,7 @@ extension SignedInView: View {
         showEmailVerificationSent = false
       }
     } message: {
-      Text("Please tap on the link in your email to complete verification.")
+      Text(authService.string.emailVerificationTapLinkMessage)
     }
   }
 }
