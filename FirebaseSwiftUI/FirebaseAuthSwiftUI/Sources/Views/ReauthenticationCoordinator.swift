@@ -24,6 +24,8 @@ public final class ReauthenticationCoordinator {
   public var showingPhoneReauth = false
   public var showingPhoneReauthAlert = false
   public var showingEmailPasswordPrompt = false
+  public var showingEmailLinkReauth = false
+  public var showingEmailLinkReauthAlert = false
 
   private var continuation: CheckedContinuation<Void, Error>?
 
@@ -41,6 +43,8 @@ public final class ReauthenticationCoordinator {
         self.showingPhoneReauthAlert = true
       case .email:
         self.showingEmailPasswordPrompt = true
+      case .emailLink:
+        self.showingEmailLinkReauthAlert = true
       case .oauth:
         // For OAuth providers (Google, Apple, etc.)
         self.isReauthenticating = true
@@ -52,6 +56,12 @@ public final class ReauthenticationCoordinator {
   public func confirmPhoneReauth() {
     showingPhoneReauthAlert = false
     showingPhoneReauth = true
+  }
+
+  /// Called when user confirms email link reauth alert
+  public func confirmEmailLinkReauth() {
+    showingEmailLinkReauthAlert = false
+    showingEmailLinkReauth = true
   }
 
   /// Called when reauthentication completes successfully
@@ -72,6 +82,8 @@ public final class ReauthenticationCoordinator {
     showingPhoneReauth = false
     showingPhoneReauthAlert = false
     showingEmailPasswordPrompt = false
+    showingEmailLinkReauth = false
+    showingEmailLinkReauthAlert = false
     reauthContext = nil
   }
 }

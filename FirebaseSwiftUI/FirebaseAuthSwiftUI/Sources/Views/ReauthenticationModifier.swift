@@ -72,6 +72,31 @@ struct ReauthenticationModifier: ViewModifier {
           )
         }
       }
+      // Alert for email link reauthentication
+      .alert(
+        "Email Verification Required",
+        isPresented: $coordinator.showingEmailLinkReauthAlert
+      ) {
+        Button("Send Verification Email") {
+          coordinator.confirmEmailLinkReauth()
+        }
+        Button("Cancel", role: .cancel) {
+          coordinator.reauthCancelled()
+        }
+      } message: {
+        if case let .emailLink(context) = coordinator.reauthContext {
+          Text("We'll send a verification link to \(context.email). Tap the link to continue.")
+        }
+      }
+      // Sheet for email link reauthentication
+      .sheet(isPresented: $coordinator.showingEmailLinkReauth) {
+        if case let .emailLink(context) = coordinator.reauthContext {
+          EmailLinkReauthView(
+            email: context.email,
+            coordinator: coordinator
+          )
+        }
+      }
   }
 
   private func performReauth() {

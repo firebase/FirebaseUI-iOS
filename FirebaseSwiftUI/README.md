@@ -278,6 +278,8 @@ When a sensitive operation requires reauthentication, the default views automati
 
 - **Email/Password**: Present a sheet prompting the user to enter their password before continuing.
 
+- **Email Link**: Show an alert asking to send a verification email, then present a sheet with instructions to check email. The user taps the link in their email to complete reauthentication.
+
 - **Phone**: Show an alert explaining verification is needed, then present a sheet for SMS code verification.
 
 The operation automatically retries after successful reauthentication. No additional code is required when using `AuthPickerView` or the built-in account management views (`UpdatePasswordView`, `SignedInView`, etc.).
@@ -655,7 +657,7 @@ When building custom views, you need to handle several things yourself that `Aut
 
 ### Reauthentication in Custom Views
 
-When building custom views, handle reauthentication by catching specific errors and implementing your own flow. Sensitive operations throw three types of reauthentication errors, each containing context information.
+When building custom views, handle reauthentication by catching specific errors and implementing your own flow. Sensitive operations throw four types of reauthentication errors, each containing context information.
 
 #### Implementation Patterns
 
@@ -716,6 +718,31 @@ do {
     )
     try await authService.reauthenticate(with: credential)
     try await authService.deleteUser() // Retry
+  }
+}
+```
+
+**Email Link:**
+
+Catch the error, send verification email, and handle the incoming URL:
+
+```swift
+do {
+  try await authService.updatePassword(to: newPassword)
+} catch let error as AuthServiceError {
+  if case .emailLinkReauthenticationRequired(let context) = error {
+    // Send verification email
+    try await authService.sendEmailSignInLink(
+      email: context.email,
+      isReauth: true
+    )
+    // Show your "Check your email" UI
+    await showCheckEmailUI()
+    // When user taps the link, it opens your app with a URL
+    // Handle it in your URL handler:
+    // try await authService.handleSignInLink(url: url)
+    // The handleSignInLink method automatically completes reauthentication
+    try await authService.updatePassword(to: newPassword) // Retry
   }
 }
 ```
@@ -1193,17 +1220,20 @@ Links a new authentication method to the current user's account.
 ##### Send Email Sign-In Link
 
 ```swift
-public func sendEmailSignInLink(email: String) async throws
+public func sendEmailSignInLink(email: String, isReauth: Bool = false) async throws
 ```
 
-Sends a sign-in link to the specified email address.
+Sends a sign-in link to the specified email address. Can also be used for reauthentication.
 
 **Parameters:**
 - `email`: Email address to send the link to
+- `isReauth`: Whether this is for reauthentication (default: `false`)
 
 **Throws:** `AuthServiceError` or Firebase Auth errors
 
 **Requirements:** `emailLinkSignInActionCodeSettings` must be configured in `AuthConfiguration`
+
+**Note:** When `isReauth` is `true`, the method stores the email for reauthentication flow. The same `handleSignInLink(url:)` method handles both sign-in and reauthentication automatically.
 
 ---
 
@@ -1213,12 +1243,14 @@ Sends a sign-in link to the specified email address.
 public func handleSignInLink(url url: URL) async throws
 ```
 
-Handles the sign-in flow when the user taps the email link.
+Handles the email link flow when the user taps the link. Automatically routes to either sign-in or reauthentication based on the current context.
 
 **Parameters:**
 - `url`: The deep link URL from the email
 
 **Throws:** `AuthServiceError` or Firebase Auth errors
+
+**Note:** This method handles both initial sign-in and reauthentication flows automatically. The behavior is determined by whether `sendEmailSignInLink(email:isReauth:)` was called with `isReauth: true`.
 
 ---
 
@@ -1305,7 +1337,7 @@ Updates the current user's password. This is a sensitive operation that may requ
 
 **Throws:** 
 - `AuthServiceError.noCurrentUser` if no user is signed in
-- Reauthentication errors (`emailReauthenticationRequired`, `phoneReauthenticationRequired`, or `oauthReauthenticationRequired`) if recent authentication is required - see [Reauthentication](#reauthentication-in-default-views)
+- Reauthentication errors (`emailReauthenticationRequired`, `emailLinkReauthenticationRequired`, `phoneReauthenticationRequired`, or `oauthReauthenticationRequired`) if recent authentication is required - see [Reauthentication](#reauthentication-in-default-views)
 - Firebase Auth errors
 
 ---
@@ -1332,7 +1364,7 @@ Deletes the current user's account. This is a sensitive operation that requires 
 
 **Throws:** 
 - `AuthServiceError.noCurrentUser` if no user is signed in
-- Reauthentication errors (`emailReauthenticationRequired`, `phoneReauthenticationRequired`, or `oauthReauthenticationRequired`) if recent authentication is required - see [Reauthentication](#reauthentication-in-default-views)
+- Reauthentication errors (`emailReauthenticationRequired`, `emailLinkReauthenticationRequired`, `phoneReauthenticationRequired`, or `oauthReauthenticationRequired`) if recent authentication is required - see [Reauthentication](#reauthentication-in-default-views)
 - Firebase Auth errors
 
 ---
@@ -1638,6 +1670,7 @@ public enum AuthServiceError: Error {
   case multiFactorAuth(String)
   case oauthReauthenticationRequired(context: OAuthReauthContext)
   case emailReauthenticationRequired(context: EmailReauthContext)
+  case emailLinkReauthenticationRequired(context: EmailLinkReauthContext)
   case phoneReauthenticationRequired(context: PhoneReauthContext)
   case accountConflict(AccountConflictContext)
 }
@@ -1652,6 +1685,8 @@ Thrown by sensitive operations when Firebase requires recent authentication. Eac
 - **`oauthReauthenticationRequired(context: OAuthReauthContext)`**: OAuth providers. Context contains `providerId`, `providerName`, and `displayMessage`. Pass to `reauthenticate(context:)`.
 
 - **`emailReauthenticationRequired(context: EmailReauthContext)`**: Email/password provider. Context contains `email` and `displayMessage`. Prompt for password, then call `reauthenticate(with:)`.
+
+- **`emailLinkReauthenticationRequired(context: EmailLinkReauthContext)`**: Email link (passwordless) provider. Context contains `email` and `displayMessage`. Send verification email with `sendEmailSignInLink(email:isReauth:true)`, then handle the incoming link with `handleSignInLink(url:)`.
 
 - **`phoneReauthenticationRequired(context: PhoneReauthContext)`**: Phone provider. Context contains `phoneNumber` and `displayMessage`. Handle SMS verification, then call `reauthenticate(with:)`.
 
