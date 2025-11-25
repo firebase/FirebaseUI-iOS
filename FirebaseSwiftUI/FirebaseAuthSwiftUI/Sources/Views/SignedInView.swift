@@ -18,57 +18,205 @@ import SwiftUI
 @MainActor
 public struct SignedInView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.reportError) private var reportError
+  @State private var showDeleteConfirmation = false
+  @State private var showEmailVerificationSent = false
+  @State private var reauthCoordinator = ReauthenticationCoordinator()
+
+  private func sendEmailVerification() async throws {
+    do {
+      try await authService.sendEmailVerification()
+      showEmailVerificationSent = true
+    } catch {
+      if let errorHandler = reportError {
+        errorHandler(error)
+      } else {
+        throw error
+      }
+    }
+  }
 }
 
 extension SignedInView: View {
-  private var isShowingPasswordPrompt: Binding<Bool> {
-    Binding(
-      get: { authService.passwordPrompt.isPromptingPassword },
-      set: { authService.passwordPrompt.isPromptingPassword = $0 }
-    )
-  }
-
   public var body: some View {
-    if authService.authView == .updatePassword {
-      UpdatePasswordView()
-    } else {
-      VStack {
-        Text(authService.string.signedInTitle)
-          .font(.largeTitle)
-          .fontWeight(.bold)
-          .padding()
-          .accessibilityIdentifier("signed-in-text")
-        Text(authService.string.accountSettingsEmailLabel)
-        Text("\(authService.currentUser?.email ?? "Unknown")")
+    VStack {
+      Text(authService.string.signedInTitle)
+        .font(.largeTitle)
+        .fontWeight(.bold)
+        .padding()
+        .accessibilityIdentifier("signed-in-text")
+      Text(
+        "\(authService.currentUser?.email ?? authService.currentUser?.displayName ?? authService.currentUser?.phoneNumber ?? "")"
+      )
+      if authService.currentUser?.isEmailVerified == false {
+        Button {
+          Task {
+            try await sendEmailVerification()
+          }
+        } label: {
+          Text(authService.string.sendEmailVerificationButtonLabel)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity)
+        .accessibilityIdentifier("verify-email-button")
+      }
+      Button {
+        authService.navigator.push(.updatePassword)
+      } label: {
+        Text(authService.string.updatePasswordButtonLabel)
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
+      }
+      .buttonStyle(.borderedProminent)
+      .padding([.top, .bottom], 8)
+      .frame(maxWidth: .infinity)
+      .accessibilityIdentifier("update-password-button")
 
-        if authService.currentUser?.isEmailVerified == false {
-          VerifyEmailView()
+      Button {
+        authService.navigator.push(.mfaManagement)
+      } label: {
+        Text(authService.string.manageTwoFactorAuthenticationLabel)
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
+      }
+      .buttonStyle(.borderedProminent)
+      .padding([.top, .bottom], 8)
+      .frame(maxWidth: .infinity)
+      .accessibilityIdentifier("mfa-management-button")
+
+      Button {
+        showDeleteConfirmation = true
+      } label: {
+        Text(authService.string.deleteAccountButtonLabel)
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
+      }
+      .buttonStyle(.borderedProminent)
+      .padding([.top, .bottom], 8)
+      .frame(maxWidth: .infinity)
+      .accessibilityIdentifier("delete-account-button")
+
+      Button {
+        Task {
+          do {
+            try await authService.signOut()
+          } catch {
+            if let errorHandler = reportError {
+              errorHandler(error)
+            } else {
+              throw error
+            }
+          }
         }
-        Divider()
-        Button(authService.string.updatePasswordButtonLabel) {
-          authService.authView = .updatePassword
-        }
-        Divider()
-        Button(authService.string.signOutButtonLabel) {
+      } label: {
+        Text(authService.string.signOutButtonLabel)
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
+      }
+      .buttonStyle(.borderedProminent)
+      .padding([.top, .bottom], 8)
+      .frame(maxWidth: .infinity)
+      .accessibilityIdentifier("sign-out-button")
+    }
+    .safeAreaPadding()
+    .withReauthentication(coordinator: reauthCoordinator)
+    .sheet(isPresented: $showDeleteConfirmation) {
+      DeleteAccountConfirmationSheet(
+        onConfirm: {
+          showDeleteConfirmation = false
           Task {
             do {
-              try await authService.signOut()
-            } catch {}
+              try await withReauthenticationIfNeeded(
+                authService: authService,
+                coordinator: reauthCoordinator
+              ) {
+                try await authService.deleteUser()
+              }
+            } catch {
+              if let errorHandler = reportError {
+                errorHandler(error)
+              } else {
+                throw error
+              }
+            }
           }
-        }.accessibilityIdentifier("sign-out-button")
-        Divider()
-        Button(authService.string.deleteAccountButtonLabel) {
-          Task {
-            do {
-              try await authService.deleteUser()
-            } catch {}
-          }
+        },
+        onCancel: {
+          showDeleteConfirmation = false
         }
-        Text(authService.errorMessage).foregroundColor(.red)
-      }.sheet(isPresented: isShowingPasswordPrompt) {
-        PasswordPromptSheet(coordinator: authService.passwordPrompt)
+      )
+      .presentationDetents([.medium])
+    }
+    .alert(
+      authService.string.verifyEmailSheetMessage,
+      isPresented: $showEmailVerificationSent
+    ) {
+      Button(authService.string.okButtonLabel) {
+        showEmailVerificationSent = false
+      }
+    } message: {
+      Text(authService.string.emailVerificationTapLinkMessage)
+    }
+  }
+}
+
+private struct DeleteAccountConfirmationSheet: View {
+  @Environment(AuthService.self) private var authService
+  let onConfirm: () -> Void
+  let onCancel: () -> Void
+
+  var body: some View {
+    VStack(spacing: 24) {
+      VStack(spacing: 12) {
+        Image(systemName: "exclamationmark.triangle.fill")
+          .font(.system(size: 60))
+          .foregroundColor(.red)
+
+        Text("Delete Account?")
+          .font(.title)
+          .fontWeight(.bold)
+
+        Text(
+          "This action cannot be undone. All your data will be permanently deleted. You may need to reauthenticate to complete this action."
+        )
+        .font(.body)
+        .foregroundColor(.secondary)
+        .multilineTextAlignment(.center)
+        .padding(.horizontal)
+      }
+
+      VStack(spacing: 12) {
+        Button {
+          onConfirm()
+        } label: {
+          Text("Delete Account")
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(.red)
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity)
+        .accessibilityIdentifier("confirm-delete-button")
+
+        Button {
+          onCancel()
+        } label: {
+          Text("Cancel")
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.bordered)
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity)
+        .accessibilityIdentifier("cancel-delete-button")
       }
     }
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    .safeAreaPadding()
   }
 }
 

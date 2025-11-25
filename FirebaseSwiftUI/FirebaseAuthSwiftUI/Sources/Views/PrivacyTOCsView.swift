@@ -30,7 +30,7 @@ struct PrivacyTOCsView {
 
   let displayMode: DisplayMode
 
-  public init(displayMode: DisplayMode = .full) {
+  init(displayMode: DisplayMode = .full) {
     self.displayMode = displayMode
   }
 
@@ -61,14 +61,12 @@ struct PrivacyTOCsView {
 }
 
 extension PrivacyTOCsView: View {
-  public var body: some View {
+  var body: some View {
     Group {
       if let tosURL = authService.configuration.tosUrl,
          let privacyURL = authService.configuration.privacyPolicyUrl {
         Text(attributedMessage(tosURL: tosURL, privacyURL: privacyURL))
-          .multilineTextAlignment(displayMode == .full ? .leading : .trailing)
-          .font(.footnote)
-          .foregroundColor(.primary)
+          .multilineTextAlignment(displayMode == .full ? .center : .trailing)
           .padding()
       } else {
         EmptyView()

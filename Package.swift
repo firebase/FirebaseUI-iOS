@@ -23,40 +23,12 @@ let package = Package(
   platforms: [.iOS(.v17)],
   products: [
     .library(
-      name: "FirebaseAnonymousAuthUI",
-      targets: ["FirebaseAnonymousAuthUI"]
-    ),
-    .library(
       name: "FirebaseDatabaseUI",
       targets: ["FirebaseDatabaseUI"]
     ),
     .library(
-      name: "FirebaseAuthUI",
-      targets: ["FirebaseAuthUI"]
-    ),
-    .library(
-      name: "FirebaseEmailAuthUI",
-      targets: ["FirebaseEmailAuthUI"]
-    ),
-    .library(
-      name: "FirebaseFacebookAuthUI",
-      targets: ["FirebaseFacebookAuthUI"]
-    ),
-    .library(
       name: "FirebaseFirestoreUI",
       targets: ["FirebaseFirestoreUI"]
-    ),
-    .library(
-      name: "FirebaseGoogleAuthUI",
-      targets: ["FirebaseGoogleAuthUI"]
-    ),
-    .library(
-      name: "FirebaseOAuthUI",
-      targets: ["FirebaseOAuthUI"]
-    ),
-    .library(
-      name: "FirebasePhoneAuthUI",
-      targets: ["FirebasePhoneAuthUI"]
     ),
     .library(
       name: "FirebaseStorageUI",
@@ -78,53 +50,46 @@ let package = Package(
       name: "FirebasePhoneAuthSwiftUI",
       targets: ["FirebasePhoneAuthSwiftUI"]
     ),
+    .library(
+      name: "FirebaseTwitterSwiftUI",
+      targets: ["FirebaseTwitterSwiftUI"]
+    ),
+    .library(
+      name: "FirebaseAppleSwiftUI",
+      targets: ["FirebaseAppleSwiftUI"]
+    ),
+    .library(
+      name: "FirebaseOAuthSwiftUI",
+      targets: ["FirebaseOAuthSwiftUI"]
+    ),
   ],
   dependencies: [
     .package(
-      name: "Facebook",
       url: "https://github.com/facebook/facebook-ios-sdk.git",
-      "17.0.0" ..< "18.0.0"
+      "18.0.0" ..< "19.0.0"
     ),
     .package(
-      name: "Firebase",
       url: "https://github.com/firebase/firebase-ios-sdk.git",
       "8.0.0" ..< "13.0.0"
     ),
     .package(
-      name: "GoogleSignIn",
       url: "https://github.com/google/GoogleSignIn-iOS",
       from: "7.0.0"
     ),
     .package(
-      name: "GoogleUtilities",
       url: "https://github.com/google/GoogleUtilities.git",
       "7.4.1" ..< "9.0.0"
     ),
     .package(
-      name: "SDWebImage",
       url: "https://github.com/SDWebImage/SDWebImage.git",
       from: "5.0.0"
     ),
   ],
   targets: [
     .target(
-      name: "FirebaseAnonymousAuthUI",
-      dependencies: ["FirebaseAuthUI"],
-      path: "FirebaseAnonymousAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-        .process("Strings"),
-      ],
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
       name: "FirebaseDatabaseUI",
       dependencies: [
-        .product(name: "FirebaseDatabase", package: "Firebase"),
+        .product(name: "FirebaseDatabase", package: "firebase-ios-sdk"),
       ],
       path: "FirebaseDatabaseUI/Sources",
       exclude: ["Info.plist"],
@@ -135,57 +100,9 @@ let package = Package(
       ]
     ),
     .target(
-      name: "FirebaseAuthUI",
-      dependencies: [
-        .product(name: "FirebaseAuth", package: "Firebase"),
-        .product(name: "GULUserDefaults", package: "GoogleUtilities"),
-      ],
-      path: "FirebaseAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-        .process("Strings"),
-      ],
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
-      name: "FirebaseEmailAuthUI",
-      dependencies: ["FirebaseAuthUI"],
-      path: "FirebaseEmailAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-      ],
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
-      name: "FirebaseFacebookAuthUI",
-      dependencies: [
-        "FirebaseAuthUI",
-        .product(name: "FacebookLogin", package: "Facebook"),
-        .product(name: "FacebookCore", package: "Facebook"),
-      ],
-      path: "FirebaseFacebookAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-        .process("Strings"),
-      ],
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
       name: "FirebaseFirestoreUI",
       dependencies: [
-        .product(name: "FirebaseFirestore", package: "Firebase"),
+        .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
       ],
       path: "FirebaseFirestoreUI/Sources",
       exclude: ["Info.plist"],
@@ -196,57 +113,9 @@ let package = Package(
       ]
     ),
     .target(
-      name: "FirebaseGoogleAuthUI",
-      dependencies: [
-        "FirebaseAuthUI",
-        "GoogleSignIn",
-      ],
-      path: "FirebaseGoogleAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-        .process("Strings"),
-      ],
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
-      name: "FirebaseOAuthUI",
-      dependencies: [
-        "FirebaseAuthUI",
-      ],
-      path: "FirebaseOAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-      ],
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
-      name: "FirebasePhoneAuthUI",
-      dependencies: [
-        "FirebaseAuthUI",
-      ],
-      path: "FirebasePhoneAuthUI/Sources",
-      exclude: ["Info.plist"],
-      resources: [
-        .process("Resources"),
-        .process("Strings"),
-      ],
-      publicHeadersPath: "Public",
-      cSettings: [
-        .headerSearchPath("../../"),
-      ]
-    ),
-    .target(
       name: "FirebaseStorageUI",
       dependencies: [
-        .product(name: "FirebaseStorage", package: "Firebase"),
+        .product(name: "FirebaseStorage", package: "firebase-ios-sdk"),
         .product(name: "SDWebImage", package: "SDWebImage"),
       ],
       path: "FirebaseStorageUI/Sources",
@@ -258,59 +127,152 @@ let package = Package(
       ]
     ),
     .target(
+      name: "FirebaseAuthUIComponents",
+      dependencies: [],
+      path: "FirebaseSwiftUI/FirebaseAuthUIComponents/Sources",
+      resources: [
+        .process("Resources"),
+      ]
+    ),
+    .target(
       name: "FirebaseAuthSwiftUI",
       dependencies: [
-        .product(name: "FirebaseAuth", package: "Firebase"),
+        "FirebaseAuthUIComponents",
+        .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
       ],
       path: "FirebaseSwiftUI/FirebaseAuthSwiftUI/Sources",
       resources: [
         .process("Strings"),
+      ],
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
       ]
     ),
     .testTarget(
       name: "FirebaseAuthSwiftUITests",
       dependencies: ["FirebaseAuthSwiftUI"],
-      path: "FirebaseSwiftUI/FirebaseAuthSwiftUI/Tests/"
+      path: "FirebaseSwiftUI/FirebaseAuthSwiftUI/Tests/",
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
+      ]
     ),
     .target(
       name: "FirebaseGoogleSwiftUI",
       dependencies: [
         "FirebaseAuthSwiftUI",
-        "GoogleSignIn",
-        .product(name: "GoogleSignInSwift", package: "GoogleSignIn"),
+        "FirebaseAuthUIComponents",
+        .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS"),
+        .product(name: "GoogleSignInSwift", package: "GoogleSignIn-iOS"),
       ],
-      path: "FirebaseSwiftUI/FirebaseGoogleSwiftUI/Sources"
+      path: "FirebaseSwiftUI/FirebaseGoogleSwiftUI/Sources",
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
+      ]
     ),
     .testTarget(
       name: "FirebaseGoogleSwiftUITests",
       dependencies: ["FirebaseGoogleSwiftUI"],
-      path: "FirebaseSwiftUI/FirebaseGoogleSwiftUI/Tests/"
+      path: "FirebaseSwiftUI/FirebaseGoogleSwiftUI/Tests/",
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
+      ]
     ),
     .target(
       name: "FirebaseFacebookSwiftUI",
       dependencies: [
         "FirebaseAuthSwiftUI",
-        .product(name: "FacebookLogin", package: "Facebook"),
-        .product(name: "FacebookCore", package: "Facebook"),
+        "FirebaseAuthUIComponents",
+        .product(name: "FacebookLogin", package: "facebook-ios-sdk"),
+        .product(name: "FacebookCore", package: "facebook-ios-sdk"),
       ],
-      path: "FirebaseSwiftUI/FirebaseFacebookSwiftUI/Sources"
+      path: "FirebaseSwiftUI/FirebaseFacebookSwiftUI/Sources",
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
+      ]
     ),
     .testTarget(
       name: "FirebaseFacebookSwiftUITests",
       dependencies: ["FirebaseFacebookSwiftUI"],
-      path: "FirebaseSwiftUI/FirebaseFacebookSwiftUI/Tests/"
+      path: "FirebaseSwiftUI/FirebaseFacebookSwiftUI/Tests/",
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
+      ]
     ),
     .target(
       name: "FirebasePhoneAuthSwiftUI",
       dependencies: [
         "FirebaseAuthSwiftUI",
+        "FirebaseAuthUIComponents",
       ],
-      path: "FirebaseSwiftUI/FirebasePhoneAuthSwiftUI/Sources"
+      path: "FirebaseSwiftUI/FirebasePhoneAuthSwiftUI/Sources",
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
+      ]
     ),
     .testTarget(
       name: "FirebasePhoneAuthSwiftUITests",
       dependencies: ["FirebasePhoneAuthSwiftUI"],
-      path: "FirebaseSwiftUI/FirebasePhoneAuthSwiftUI/Tests/"
+      path: "FirebaseSwiftUI/FirebasePhoneAuthSwiftUI/Tests/",
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
+      ]
+    ),
+    .target(
+      name: "FirebaseTwitterSwiftUI",
+      dependencies: [
+        "FirebaseAuthSwiftUI",
+        "FirebaseAuthUIComponents",
+      ],
+      path: "FirebaseSwiftUI/FirebaseTwitterSwiftUI/Sources",
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
+      ]
+    ),
+    .testTarget(
+      name: "FirebaseTwitterSwiftUITests",
+      dependencies: ["FirebaseTwitterSwiftUI"],
+      path: "FirebaseSwiftUI/FirebaseTwitterSwiftUI/Tests/",
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
+      ]
+    ),
+    .target(
+      name: "FirebaseAppleSwiftUI",
+      dependencies: [
+        "FirebaseAuthSwiftUI",
+        "FirebaseAuthUIComponents",
+      ],
+      path: "FirebaseSwiftUI/FirebaseAppleSwiftUI/Sources",
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
+      ]
+    ),
+    .testTarget(
+      name: "FirebaseAppleSwiftUITests",
+      dependencies: ["FirebaseAppleSwiftUI"],
+      path: "FirebaseSwiftUI/FirebaseAppleSwiftUI/Tests/",
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
+      ]
+    ),
+    .target(
+      name: "FirebaseOAuthSwiftUI",
+      dependencies: [
+        "FirebaseAuthSwiftUI",
+        "FirebaseAuthUIComponents",
+      ],
+      path: "FirebaseSwiftUI/FirebaseOAuthSwiftUI/Sources",
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
+      ]
+    ),
+    .testTarget(
+      name: "FirebaseOAuthSwiftUITests",
+      dependencies: ["FirebaseOAuthSwiftUI"],
+      path: "FirebaseSwiftUI/FirebaseOAuthSwiftUI/Tests/",
+      swiftSettings: [
+        .swiftLanguageMode(.v6),
+      ]
     ),
   ]
 )

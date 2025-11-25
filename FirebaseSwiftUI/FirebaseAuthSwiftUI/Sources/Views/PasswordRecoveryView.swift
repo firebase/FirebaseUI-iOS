@@ -12,56 +12,45 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
-
-private struct ResultWrapper: Identifiable {
-  let id = UUID()
-  let value: Result<Void, Error>
-}
 
 public struct PasswordRecoveryView {
   @Environment(AuthService.self) private var authService
   @State private var email = ""
-  @State private var resultWrapper: ResultWrapper?
+  @State private var showSuccessSheet = false
+  @State private var sentEmail = ""
 
   public init() {}
 
   private func sendPasswordRecoveryEmail() async {
-    let recoveryResult: Result<Void, Error>
-
     do {
-      try await authService.sendPasswordRecoveryEmail(to: email)
-      resultWrapper = ResultWrapper(value: .success(()))
+      try await authService.sendPasswordRecoveryEmail(email: email)
+      sentEmail = email
+      showSuccessSheet = true
     } catch {
-      resultWrapper = ResultWrapper(value: .failure(error))
+      // Error already displayed via modal by AuthService
     }
   }
 }
 
 extension PasswordRecoveryView: View {
   public var body: some View {
-    VStack {
-      Text(authService.string.passwordRecoveryTitle)
-        .font(.largeTitle)
-        .fontWeight(.bold)
-        .padding()
-        .accessibilityIdentifier("password-recovery-text")
-
-      Divider()
-
-      LabeledContent {
-        TextField(authService.string.emailInputLabel, text: $email)
-          .textInputAutocapitalization(.never)
-          .disableAutocorrection(true)
-          .submitLabel(.next)
-      } label: {
-        Image(systemName: "at")
-      }
-      .padding(.vertical, 6)
-      .background(Divider(), alignment: .bottom)
-      .padding(.bottom, 4)
-
+    VStack(spacing: 24) {
+      AuthTextField(
+        text: $email,
+        label: authService.string.passwordRecoveryEmailFieldLabel,
+        prompt: authService.string.emailInputLabel,
+        keyboardType: .emailAddress,
+        contentType: .emailAddress,
+        validations: [
+          FormValidators.email,
+        ],
+        leading: {
+          Image(systemName: "at")
+        }
+      )
       Button(action: {
         Task {
           await sendPasswordRecoveryEmail()
@@ -72,57 +61,39 @@ extension PasswordRecoveryView: View {
           .frame(maxWidth: .infinity)
       }
       .disabled(!CommonUtils.isValidEmail(email))
-      .padding([.top, .bottom, .horizontal], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
     }
-    .sheet(item: $resultWrapper) { wrapper in
-      resultSheet(wrapper.value)
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    .navigationTitle(authService.string.passwordRecoveryTitle)
+    .safeAreaPadding()
+    .sheet(isPresented: $showSuccessSheet) {
+      successSheet
     }
-    .navigationBarItems(leading: Button(action: {
-      authService.authView = .authPicker
-    }) {
-      Image(systemName: "chevron.left")
-        .foregroundColor(.blue)
-      Text(authService.string.backButtonLabel)
-        .foregroundColor(.blue)
-    }.accessibilityIdentifier("password-recovery-back-button"))
   }
 
   @ViewBuilder
   @MainActor
-  private func resultSheet(_ result: Result<Void, Error>) -> some View {
+  private var successSheet: some View {
     VStack {
-      switch result {
-      case .success:
-        Text(authService.string.passwordRecoveryEmailSentTitle)
-          .font(.largeTitle)
-          .fontWeight(.bold)
-          .padding()
-        Text(authService.string.passwordRecoveryHelperMessage)
-          .padding()
+      Text(authService.string.passwordRecoveryEmailSentTitle)
+        .font(.largeTitle)
+        .fontWeight(.bold)
+        .padding()
+      Text(authService.string.passwordRecoveryHelperMessage)
+        .padding()
 
-        Divider()
+      Divider()
 
-        Text(String(format: authService.string.passwordRecoveryEmailSentMessage, email))
-          .padding()
-
-      case .failure:
-        Text(authService.string.alertErrorTitle)
-          .font(.title)
-          .fontWeight(.semibold)
-          .padding()
-
-        Divider()
-
-        Text(authService.errorMessage)
-          .padding()
-      }
+      Text(String(format: authService.string.passwordRecoveryEmailSentMessage, sentEmail))
+        .padding()
 
       Divider()
 
       Button(authService.string.okButtonLabel) {
-        self.resultWrapper = nil
+        showSuccessSheet = false
+        email = ""
+        authService.navigator.clear()
       }
       .padding()
     }

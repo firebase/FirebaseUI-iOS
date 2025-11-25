@@ -2,7 +2,9 @@
 
 swiftformat ./FirebaseSwiftUI
 
-swiftformat ./samples/swiftui/FirebaseSwiftUIExample
+swiftformat ./samples/swiftui/FirebaseSwiftUISample
 
+swiftformat ./e2eTest
 
 swiftformat ./Package.swift
+

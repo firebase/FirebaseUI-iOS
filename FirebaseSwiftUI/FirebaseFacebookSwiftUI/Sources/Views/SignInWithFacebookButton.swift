@@ -12,113 +12,54 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import AppTrackingTransparency
-import FacebookCore
-import FacebookLogin
 import FirebaseAuth
 import FirebaseAuthSwiftUI
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
+/// A button for signing in with Facebook
 @MainActor
 public struct SignInWithFacebookButton {
   @Environment(AuthService.self) private var authService
-  @State private var errorMessage = ""
-  @State private var showCanceledAlert = false
-  @State private var limitedLogin = true
-  @State private var showUserTrackingAlert = false
-  @State private var trackingAuthorizationStatus: ATTrackingManager
-    .AuthorizationStatus = .notDetermined
+  @Environment(\.accountConflictHandler) private var accountConflictHandler
+  @Environment(\.mfaHandler) private var mfaHandler
+  @Environment(\.reportError) private var reportError
+  let facebookProvider: FacebookProviderSwift
 
-  public init() {
-    _trackingAuthorizationStatus = State(initialValue: ATTrackingManager
-      .trackingAuthorizationStatus)
-  }
-
-  private var limitedLoginBinding: Binding<Bool> {
-    Binding(
-      get: { self.limitedLogin },
-      set: { newValue in
-        if trackingAuthorizationStatus == .authorized {
-          self.limitedLogin = newValue
-        } else {
-          self.limitedLogin = true
-        }
-      }
-    )
-  }
-
-  func requestTrackingPermission() {
-    ATTrackingManager.requestTrackingAuthorization { status in
-      Task { @MainActor in
-        trackingAuthorizationStatus = status
-        if status != .authorized {
-          showUserTrackingAlert = true
-        }
-      }
-    }
+  public init(facebookProvider: FacebookProviderSwift) {
+    self.facebookProvider = facebookProvider
   }
 }
 
 extension SignInWithFacebookButton: View {
   public var body: some View {
-    Button(action: {
+    AuthProviderButton(
+      label: authService.string.facebookLoginButtonLabel,
+      style: .facebook,
+      accessibilityId: "sign-in-with-facebook-button"
+    ) {
       Task {
         do {
-          try await authService.signInWithFacebook(limitedLogin: limitedLogin)
-        } catch {
-          switch error {
-          case FacebookProviderError.signInCancelled:
-            showCanceledAlert = true
-          default:
-            errorMessage = authService.string.localizedErrorMessage(for: error)
-          }
-        }
-      }
-    }) {
-      HStack {
-        Image(systemName: "f.circle.fill")
-          .font(.title2)
-          .foregroundColor(.white)
-        Text(authService.string.facebookLoginButtonLabel)
-          .fontWeight(.semibold)
-          .foregroundColor(.white)
-      }
-      .frame(maxWidth: .infinity, alignment: .leading)
-      .padding()
-      .frame(maxWidth: .infinity)
-      .background(Color.blue)
-      .cornerRadius(8)
-    }
-    .alert(isPresented: $showCanceledAlert) {
-      Alert(
-        title: Text(authService.string.facebookLoginCancelledLabel),
-        dismissButton: .default(Text(authService.string.okButtonLabel))
-      )
-    }
+          let outcome = try await authService.signIn(facebookProvider)
 
-    HStack {
-      Text(authService.string.authorizeUserTrackingLabel)
-        .font(.footnote)
-        .foregroundColor(.blue)
-        .underline()
-        .onTapGesture {
-          requestTrackingPermission()
+          // Handle MFA at view level
+          if case let .mfaRequired(mfaInfo) = outcome,
+             let onMFA = mfaHandler {
+            onMFA(mfaInfo)
+            return
+          }
+        } catch {
+          reportError?(error)
+
+          if case let AuthServiceError.accountConflict(ctx) = error,
+             let onConflict = accountConflictHandler {
+            onConflict(ctx)
+            return
+          }
+
+          throw error
         }
-      Toggle(isOn: limitedLoginBinding) {
-        HStack {
-          Spacer() // This will push the text to the left of the toggle
-          Text(authService.string.facebookLimitedLoginLabel)
-            .foregroundColor(.blue)
-        }
-      }
-      .toggleStyle(SwitchToggleStyle(tint: .green))
-      .alert(isPresented: $showUserTrackingAlert) {
-        Alert(
-          title: Text(authService.string.authorizeUserTrackingLabel),
-          message: Text(authService.string.facebookAuthorizeUserTrackingMessage),
-          dismissButton: .default(Text(authService.string.okButtonLabel))
-        )
       }
     }
   }
@@ -126,6 +67,7 @@ extension SignInWithFacebookButton: View {
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
-  return SignInWithFacebookButton()
+  let facebookProvider = FacebookProviderSwift()
+  return SignInWithFacebookButton(facebookProvider: facebookProvider)
     .environment(AuthService())
 }

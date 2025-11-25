@@ -19,6 +19,7 @@
 //  Created by Russell Wheatley on 20/03/2025.
 //
 import FirebaseAuth
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
@@ -31,6 +32,9 @@ private enum FocusableField: Hashable {
 @MainActor
 public struct EmailAuthView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.accountConflictHandler) private var accountConflictHandler
+  @Environment(\.mfaHandler) private var mfaHandler
+  @Environment(\.reportError) private var reportError
 
   @State private var email = ""
   @State private var password = ""
@@ -41,101 +45,154 @@ public struct EmailAuthView {
   public init() {}
 
   private var isValid: Bool {
-    return if authService.authenticationFlow == .login {
-      !email.isEmpty && !password.isEmpty
+    return if authService.authenticationFlow == .signIn {
+      FormValidators.email.isValid(input: email) && !password.isEmpty
     } else {
-      !email.isEmpty && !password.isEmpty && password == confirmPassword
+      FormValidators.email.isValid(input: email) &&
+        FormValidators.atLeast6Characters.isValid(input: password) &&
+        FormValidators.confirmPassword(password: password).isValid(input: confirmPassword)
     }
   }
 
-  private func signInWithEmailPassword() async {
+  private func signInWithEmailPassword() async throws {
     do {
-      try await authService.signIn(withEmail: email, password: password)
-    } catch {}
+      let outcome = try await authService.signIn(email: email, password: password)
+
+      // Handle MFA at view level
+      if case let .mfaRequired(mfaInfo) = outcome,
+         let onMFA = mfaHandler {
+        onMFA(mfaInfo)
+        return
+      }
+    } catch {
+      reportError?(error)
+
+      if case let AuthServiceError.accountConflict(ctx) = error,
+         let onConflict = accountConflictHandler {
+        onConflict(ctx)
+        return
+      }
+
+      throw error
+    }
   }
 
-  private func createUserWithEmailPassword() async {
+  private func createUserWithEmailPassword() async throws {
     do {
-      try await authService.createUser(withEmail: email, password: password)
-    } catch {}
+      let outcome = try await authService.createUser(email: email, password: password)
+
+      // Handle MFA at view level
+      if case let .mfaRequired(mfaInfo) = outcome,
+         let onMFA = mfaHandler {
+        onMFA(mfaInfo)
+        return
+      }
+    } catch {
+      reportError?(error)
+
+      if case let AuthServiceError.accountConflict(ctx) = error,
+         let onConflict = accountConflictHandler {
+        onConflict(ctx)
+        return
+      }
+
+      throw error
+    }
   }
 }
 
 extension EmailAuthView: View {
   public var body: some View {
-    VStack {
-      LabeledContent {
-        TextField(authService.string.emailInputLabel, text: $email)
-          .textInputAutocapitalization(.never)
-          .disableAutocorrection(true)
-          .focused($focus, equals: .email)
-          .submitLabel(.next)
-          .onSubmit {
-            self.focus = .password
-          }
-      } label: {
-        Image(systemName: "at")
-      }
-      .padding(.vertical, 6)
-      .background(Divider(), alignment: .bottom)
-      .padding(.bottom, 4)
+    VStack(spacing: 16) {
+      AuthTextField(
+        text: $email,
+        label: authService.string.emailFieldLabel,
+        prompt: authService.string.emailInputLabel,
+        keyboardType: .emailAddress,
+        contentType: .emailAddress,
+        validations: [
+          FormValidators.email,
+        ],
+        maintainsValidationMessage: authService.authenticationFlow == .signUp,
+        onSubmit: { _ in
+          self.focus = .password
+        },
+        leading: {
+          Image(systemName: "at")
+        }
+      )
+      .focused($focus, equals: .email)
       .accessibilityIdentifier("email-field")
-
-      LabeledContent {
-        SecureField(authService.string.passwordInputLabel, text: $password)
-          .focused($focus, equals: .password)
-          .textInputAutocapitalization(.never)
-          .disableAutocorrection(true)
-          .submitLabel(.go)
-          .onSubmit {
-            Task { await signInWithEmailPassword() }
-          }
-      } label: {
-        Image(systemName: "lock")
-      }
-      .padding(.vertical, 6)
-      .background(Divider(), alignment: .bottom)
-      .padding(.bottom, 8)
+      AuthTextField(
+        text: $password,
+        label: authService.string.passwordFieldLabel,
+        prompt: authService.string.passwordInputLabel,
+        contentType: .password,
+        isSecureTextField: true,
+        validations: authService.authenticationFlow == .signUp ? [
+          FormValidators.atLeast6Characters
+        ] : [],
+        maintainsValidationMessage: authService.authenticationFlow == .signUp,
+        onSubmit: { _ in
+          Task { try await signInWithEmailPassword() }
+        },
+        leading: {
+          Image(systemName: "lock")
+        }
+      )
+      .submitLabel(.go)
+      .focused($focus, equals: .password)
       .accessibilityIdentifier("password-field")
-
-      if authService.authenticationFlow == .login {
-        Button(action: {
-          authService.authView = .passwordRecovery
-        }) {
+      if authService.authenticationFlow == .signIn {
+        Button {
+          authService.navigator.push(.passwordRecovery)
+        } label: {
           Text(authService.string.passwordButtonLabel)
-        }.accessibilityIdentifier("password-recovery-button")
+            .frame(maxWidth: .infinity, alignment: .trailing)
+        }
+        .accessibilityIdentifier("password-recovery-button")
       }
 
       if authService.authenticationFlow == .signUp {
-        LabeledContent {
-          SecureField(authService.string.confirmPasswordInputLabel, text: $confirmPassword)
-            .focused($focus, equals: .confirmPassword)
-            .textInputAutocapitalization(.never)
-            .disableAutocorrection(true)
-            .submitLabel(.go)
-            .onSubmit {
-              Task { await createUserWithEmailPassword() }
-            }
-        } label: {
-          Image(systemName: "lock")
-        }
-        .padding(.vertical, 6)
-        .background(Divider(), alignment: .bottom)
-        .padding(.bottom, 8)
+        AuthTextField(
+          text: $confirmPassword,
+          label: authService.string.confirmPasswordFieldLabel,
+          prompt: authService.string.confirmPasswordInputLabel,
+          contentType: .password,
+          isSecureTextField: true,
+          validations: [
+            FormValidators.confirmPassword(password: password),
+          ],
+          maintainsValidationMessage: true,
+          onSubmit: { _ in
+            Task { try await createUserWithEmailPassword() }
+          },
+          leading: {
+            Image(systemName: "lock")
+          }
+        )
+        .submitLabel(.go)
+        .focused($focus, equals: .confirmPassword)
         .accessibilityIdentifier("confirm-password-field")
       }
 
       Button(action: {
         Task {
-          if authService.authenticationFlow == .login { await signInWithEmailPassword() }
-          else { await createUserWithEmailPassword() }
+          if authService.authenticationFlow == .signIn {
+            try await signInWithEmailPassword()
+          } else {
+            try await createUserWithEmailPassword()
+          }
         }
       }) {
         if authService.authenticationState != .authenticating {
-          Text(authService.authenticationFlow == .login ? authService.string
-            .signInWithEmailButtonLabel : authService.string.signUpWithEmailButtonLabel)
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
+          Text(
+            authService.authenticationFlow == .signIn
+              ? authService.string.signInWithEmailButtonLabel
+              : authService.string.signUpWithEmailButtonLabel
+          )
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
         } else {
           ProgressView()
             .progressViewStyle(CircularProgressViewStyle(tint: .white))
@@ -144,16 +201,36 @@ extension EmailAuthView: View {
         }
       }
       .disabled(!isValid)
-      .padding([.top, .bottom, .horizontal], 8)
+      .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .buttonStyle(.borderedProminent)
       .accessibilityIdentifier("sign-in-button")
-      Button(action: {
-        authService.authView = .emailLink
-      }) {
-        Text(authService.string.signUpWithEmailLinkButtonLabel)
-      }.accessibilityIdentifier("sign-in-with-email-link-button")
     }
+    Button(action: {
+      withAnimation {
+        authService.authenticationFlow =
+          authService
+            .authenticationFlow == .signIn ? .signUp : .signIn
+      }
+    }) {
+      HStack(spacing: 4) {
+        Text(
+          authService
+            .authenticationFlow == .signIn
+            ? authService.string.dontHaveAnAccountYetLabel
+            : authService.string.alreadyHaveAnAccountLabel
+        )
+        .foregroundStyle(Color(.label))
+        Text(
+          authService.authenticationFlow == .signUp
+            ? authService.string.emailLoginFlowLabel
+            : authService.string.emailSignUpFlowLabel
+        )
+        .fontWeight(.semibold)
+        .foregroundColor(.blue)
+      }
+    }
+    .accessibilityIdentifier("switch-auth-flow")
   }
 }
 

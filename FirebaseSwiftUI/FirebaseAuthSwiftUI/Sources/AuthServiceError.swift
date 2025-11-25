@@ -15,15 +15,130 @@
 import FirebaseAuth
 import SwiftUI
 
-public struct AccountMergeConflictContext: LocalizedError {
+/// Context information for OAuth provider reauthentication (Google, Apple, Facebook, Twitter, etc.)
+public struct OAuthReauthContext: Equatable {
+  public let providerId: String
+  public let providerName: String
+
+  public init(providerId: String, providerName: String) {
+    self.providerId = providerId
+    self.providerName = providerName
+  }
+
+  public var displayMessage: String {
+    "Please sign in with \(providerName) to continue"
+  }
+}
+
+/// Context information for email/password reauthentication
+public struct EmailReauthContext: Equatable {
+  public let email: String
+
+  public init(email: String) {
+    self.email = email
+  }
+
+  public var displayMessage: String {
+    "Please enter your password to continue"
+  }
+}
+
+/// Context information for email link reauthentication
+public struct EmailLinkReauthContext: Equatable {
+  public let email: String
+
+  public init(email: String) {
+    self.email = email
+  }
+
+  public var displayMessage: String {
+    "Please check your email to verify your identity"
+  }
+}
+
+/// Context information for phone number reauthentication
+public struct PhoneReauthContext: Equatable {
+  public let phoneNumber: String
+
+  public init(phoneNumber: String) {
+    self.phoneNumber = phoneNumber
+  }
+
+  public var displayMessage: String {
+    "Please verify your phone number to continue"
+  }
+}
+
+/// Type-safe wrapper for reauthentication contexts
+public enum ReauthenticationType: Equatable {
+  case oauth(OAuthReauthContext)
+  case email(EmailReauthContext)
+  case emailLink(EmailLinkReauthContext)
+  case phone(PhoneReauthContext)
+
+  public var displayMessage: String {
+    switch self {
+    case let .oauth(context):
+      return context.displayMessage
+    case let .email(context):
+      return context.displayMessage
+    case let .emailLink(context):
+      return context.displayMessage
+    case let .phone(context):
+      return context.displayMessage
+    }
+  }
+}
+
+/// Describes the specific type of account conflict that occurred
+public enum AccountConflictType: Equatable {
+  /// Account exists with a different provider (e.g., user signed up with Google, trying to use
+  /// email)
+  /// Solution: Sign in with existing provider, then link the new credential
+  case accountExistsWithDifferentCredential
+
+  /// The credential is already linked to another account
+  /// Solution: User must sign in with that account or unlink the credential
+  case credentialAlreadyInUse
+
+  /// Email is already registered with another method
+  /// Solution: Sign in with existing method, then link if desired
+  case emailAlreadyInUse
+
+  /// Trying to link anonymous account to an existing account
+  /// Solution: Sign out of anonymous, then sign in with the credential
+  case anonymousUpgradeConflict
+}
+
+public struct AccountConflictContext: LocalizedError, Identifiable, Equatable {
+  public let id = UUID()
+  public let conflictType: AccountConflictType
   public let credential: AuthCredential
   public let underlyingError: Error
   public let message: String
-  // TODO: - should make this User type once fixed upstream in firebase-ios-sdk. See: https://github.com/firebase/FirebaseUI-iOS/pull/1247#discussion_r2085455355
-  public let uid: String?
+  public let email: String?
+
+  /// Human-readable description of the conflict type
+  public var conflictDescription: String {
+    switch conflictType {
+    case .accountExistsWithDifferentCredential:
+      return "This account is already registered with a different sign-in method."
+    case .credentialAlreadyInUse:
+      return "This credential is already linked to another account."
+    case .emailAlreadyInUse:
+      return "This email address is already in use."
+    case .anonymousUpgradeConflict:
+      return "Cannot link anonymous account to an existing account."
+    }
+  }
 
   public var errorDescription: String? {
     return message
+  }
+
+  public static func == (lhs: AccountConflictContext, rhs: AccountConflictContext) -> Bool {
+    // Compare by id since each AccountConflictContext instance is unique
+    lhs.id == rhs.id
   }
 }
 
@@ -32,10 +147,28 @@ public enum AuthServiceError: LocalizedError {
   case invalidEmailLink(String)
   case clientIdNotFound(String)
   case notConfiguredActionCodeSettings(String)
-  case reauthenticationRequired(String)
+
+  /// OAuth reauthentication required (Google, Apple, Facebook, Twitter, etc.)
+  /// Can be passed directly to `reauthenticate(context:)` method
+  case oauthReauthenticationRequired(context: OAuthReauthContext)
+
+  /// Email reauthentication required - user must handle password prompt externally
+  case emailReauthenticationRequired(context: EmailReauthContext)
+
+  /// Email link reauthentication required - user must handle email link flow externally
+  case emailLinkReauthenticationRequired(context: EmailLinkReauthContext)
+
+  /// Phone reauthentication required - user must handle SMS verification flow externally
+  case phoneReauthenticationRequired(context: PhoneReauthContext)
+
   case invalidCredentials(String)
   case signInFailed(underlying: Error)
-  case accountMergeConflict(context: AccountMergeConflictContext)
+  case accountConflict(AccountConflictContext)
+  case providerNotFound(String)
+  case multiFactorAuth(String)
+  case rootViewControllerNotFound(String)
+  case providerAuthenticationFailed(String)
+  case signInCancelled(String)
 
   public var errorDescription: String? {
     switch self {
@@ -47,14 +180,32 @@ public enum AuthServiceError: LocalizedError {
       return description
     case let .notConfiguredActionCodeSettings(description):
       return description
-    case let .reauthenticationRequired(description):
-      return description
+    case let .oauthReauthenticationRequired(context):
+      return "Please sign in again with \(context.providerName) to continue"
+    case .emailReauthenticationRequired:
+      return "Please enter your password to continue"
+    case .emailLinkReauthenticationRequired:
+      return "Please check your email to verify your identity"
+    case .phoneReauthenticationRequired:
+      return "Please verify your phone number to continue"
     case let .invalidCredentials(description):
       return description
+    // Use when failed to sign-in with Firebase
     case let .signInFailed(underlying: error):
       return "Failed to sign in: \(error.localizedDescription)"
-    case let .accountMergeConflict(context):
+    // Use when failed to sign-in with provider (e.g. Google, Facebook, etc.)
+    case let .providerAuthenticationFailed(description):
+      return description
+    case let .signInCancelled(description):
+      return description
+    case let .accountConflict(context):
       return context.errorDescription
+    case let .providerNotFound(description):
+      return description
+    case let .multiFactorAuth(description):
+      return description
+    case let .rootViewControllerNotFound(description):
+      return description
     }
   }
 }

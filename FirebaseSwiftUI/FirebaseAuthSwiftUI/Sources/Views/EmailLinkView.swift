@@ -13,79 +13,94 @@
 // limitations under the License.
 
 import FirebaseAuth
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
 public struct EmailLinkView {
   @Environment(AuthService.self) private var authService
+  @Environment(\.accountConflictHandler) private var accountConflictHandler
+  @Environment(\.reportError) private var reportError
   @State private var email = ""
-  @State private var showModal = false
+  @State private var showAlert = false
 
   public init() {}
 
-  private func sendEmailLink() async {
+  private func sendEmailLink() async throws {
     do {
-      try await authService.sendEmailSignInLink(to: email)
-      showModal = true
-    } catch {}
+      try await authService.sendEmailSignInLink(email: email)
+      showAlert = true
+    } catch {
+      if let errorHandler = reportError {
+        errorHandler(error)
+      } else {
+        throw error
+      }
+    }
   }
 }
 
 extension EmailLinkView: View {
   public var body: some View {
-    VStack {
-      Text(authService.string.signInWithEmailLinkViewTitle)
-        .accessibilityIdentifier("email-link-title-text")
-      LabeledContent {
-        TextField(authService.string.emailInputLabel, text: $email)
-          .textInputAutocapitalization(.never)
-          .disableAutocorrection(true)
-          .submitLabel(.next)
-      } label: {
-        Image(systemName: "at")
-      }.padding(.vertical, 6)
-        .background(Divider(), alignment: .bottom)
-        .padding(.bottom, 4)
-      Button(action: {
+    VStack(spacing: 24) {
+      AuthTextField(
+        text: $email,
+        label: authService.string.signInLinkEmailFieldLabel,
+        prompt: authService.string.emailInputLabel,
+        keyboardType: .emailAddress,
+        contentType: .emailAddress,
+        validations: [
+          FormValidators.email,
+        ],
+        leading: {
+          Image(systemName: "at")
+        }
+      )
+      Button {
         Task {
-          await sendEmailLink()
+          try await sendEmailLink()
           authService.emailLink = email
         }
-      }) {
+      } label: {
         Text(authService.string.sendEmailLinkButtonLabel)
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
+      .buttonStyle(.borderedProminent)
       .disabled(!CommonUtils.isValidEmail(email))
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
-      .buttonStyle(.borderedProminent)
-      Text(authService.errorMessage).foregroundColor(.red)
-    }.sheet(isPresented: $showModal) {
-      VStack {
-        Text(authService.string.signInWithEmailLinkViewMessage)
-          .padding()
-        Button(authService.string.okButtonLabel) {
-          showModal = false
-        }
-        .padding()
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    .navigationTitle(authService.string.signInWithEmailLinkViewTitle)
+    .safeAreaPadding()
+    .alert(
+      authService.string.signInWithEmailLinkViewTitle,
+      isPresented: $showAlert
+    ) {
+      Button(authService.string.okButtonLabel) {
+        showAlert = false
       }
-      .padding()
-    }.onOpenURL { url in
+    } message: {
+      Text(authService.string.signInWithEmailLinkViewMessage)
+    }
+    .onOpenURL { url in
       Task {
         do {
           try await authService.handleSignInLink(url: url)
-        } catch {}
+        } catch {
+          reportError?(error)
+
+          if case let AuthServiceError.accountConflict(ctx) = error,
+             let onConflict = accountConflictHandler {
+            onConflict(ctx)
+            return
+          }
+
+          throw error
+        }
       }
     }
-    .navigationBarItems(leading: Button(action: {
-      authService.authView = .authPicker
-    }) {
-      Image(systemName: "chevron.left")
-        .foregroundColor(.blue)
-      Text(authService.string.backButtonLabel)
-        .foregroundColor(.blue)
-    }.accessibilityIdentifier("email-link-back-button"))
   }
 }
 

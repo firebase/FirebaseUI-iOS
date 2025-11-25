@@ -2,17 +2,19 @@ name: SwiftUI Auth
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, development ]
     paths:
       - '.github/workflows/swiftui-auth.yml'
       - 'samples/swiftui/**'
+      - 'e2eTest/**'
       - 'FirebaseSwiftUI/**'
       - 'Package.swift'
   pull_request:
-    branches: [ main ]
+    branches: [ main, development ]
     paths:
       - '.github/workflows/swiftui-auth.yml'
       - 'samples/swiftui/**'
+      - 'e2eTest/**'
       - 'FirebaseSwiftUI/**'
       - 'Package.swift'
 
@@ -22,57 +24,185 @@ permissions:
   contents: read
 
 jobs:
-  swiftui-auth:
-    runs-on: macos-15
-    timeout-minutes: 30
+  format-check:
+    name: Swift Format Check
+    runs-on: macos-26
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
-      - uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a
-        name: Install Node.js 20
-        with:
-          node-version: '20'
-      - uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-      - name: Install Firebase
-        run: |
-          sudo npm i -g firebase-tools
-      - name: Start Firebase Emulator
-        run: |
-          sudo chown -R 501:20 "/Users/runner/.npm" && cd ./samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExample && ./start-firebase-emulator.sh
+      
+      - name: Install swiftformat
+        run: brew install swiftformat
+        
+      - name: Check Swift formatting
+        run: bash lint-swift.sh
+
+  # Package Unit Tests (standalone, no emulator needed)
+  unit-tests:
+    name: Package Unit Tests
+    runs-on: macos-26
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
+      
       - name: Install xcpretty
         run: gem install xcpretty
+        
       - name: Select Xcode version
+        run: sudo xcode-select -switch /Applications/Xcode_26.0.1.app/Contents/Developer
+        
+      - name: Run FirebaseSwiftUI Package Unit Tests
         run: |
-          sudo xcode-select -switch /Applications/Xcode_16.3.app/Contents/Developer
-      - name: Run Integration Tests
-        run: |
-          cd ./samples/swiftui/FirebaseSwiftUIExample
           set -o pipefail
-          xcodebuild test -scheme FirebaseSwiftUIExampleTests -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -enableCodeCoverage YES -resultBundlePath FirebaseSwiftUIExampleTests.xcresult | tee FirebaseSwiftUIExampleTests.log | xcpretty --test --color --simple
-      - name: Run View UI Tests
-        run: |
-          cd ./samples/swiftui/FirebaseSwiftUIExample
-          set -o pipefail
-          xcodebuild test -scheme FirebaseSwiftUIExampleUITests -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -enableCodeCoverage YES -resultBundlePath FirebaseSwiftUIExampleUITests.xcresult | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple
+          xcodebuild test \
+            -scheme FirebaseUI-Package \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -enableCodeCoverage YES \
+            -resultBundlePath FirebaseSwiftUIPackageTests.xcresult | tee FirebaseSwiftUIPackageTests.log | xcpretty --test --color --simple
+            
       - name: Upload test logs
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: swiftui-auth-test-logs
-          path: |
-            samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.log
-            samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.log
-      - name: Upload FirebaseSwiftUIExampleUITests.xcresult bundle
+          name: unit-tests-logs
+          path: FirebaseSwiftUIPackageTests.log
+          
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-tests-results
+          path: FirebaseSwiftUIPackageTests.xcresult
+
+  # Integration Tests (requires emulator)
+  integration-tests:
+    name: Integration Tests
+    runs-on: macos-26
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
+      
+      - uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a
+        name: Install Node.js 20
+        with:
+          node-version: '20'
+          
+      - uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          
+      - name: Install Firebase
+        run: sudo npm i -g firebase-tools
+        
+      - name: Start Firebase Emulator
+        run: |
+          sudo chown -R 501:20 "/Users/runner/.npm"
+          cd ./e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExample
+          ./start-firebase-emulator.sh
+          
+      - name: Install xcpretty
+        run: gem install xcpretty
+        
+      - name: Select Xcode version
+        run: sudo xcode-select -switch /Applications/Xcode_26.0.1.app/Contents/Developer
+        
+      - name: Build for Integration Tests
+        run: |
+          cd ./e2eTest/FirebaseSwiftUIExample
+          set -o pipefail
+          xcodebuild build-for-testing \
+            -scheme FirebaseSwiftUIExampleTests \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -enableCodeCoverage YES | xcpretty --color --simple
+            
+      - name: Run Integration Tests
+        run: |
+          cd ./e2eTest/FirebaseSwiftUIExample
+          set -o pipefail
+          xcodebuild test-without-building \
+            -scheme FirebaseSwiftUIExampleTests \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -enableCodeCoverage YES \
+            -resultBundlePath FirebaseSwiftUIExampleTests.xcresult | tee FirebaseSwiftUIExampleTests.log | xcpretty --test --color --simple
+            
+      - name: Upload test logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-tests-logs
+          path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.log
+          
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-tests-results
+          path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.xcresult
+
+  # UI Tests (requires emulator)
+  ui-tests:
+    name: UI Tests
+    runs-on: macos-26
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
+      
+      - uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a
+        name: Install Node.js 20
+        with:
+          node-version: '20'
+          
+      - uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          
+      - name: Install Firebase
+        run: sudo npm i -g firebase-tools
+        
+      - name: Start Firebase Emulator
+        run: |
+          sudo chown -R 501:20 "/Users/runner/.npm"
+          cd ./e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExample
+          ./start-firebase-emulator.sh
+          
+      - name: Install xcpretty
+        run: gem install xcpretty
+        
+      - name: Select Xcode version
+        run: sudo xcode-select -switch /Applications/Xcode_26.0.1.app/Contents/Developer
+        
+      - name: Build for UI Tests
+        run: |
+          cd ./e2eTest/FirebaseSwiftUIExample
+          set -o pipefail
+          xcodebuild build-for-testing \
+            -scheme FirebaseSwiftUIExampleUITests \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -enableCodeCoverage YES | xcpretty --color --simple
+            
+      - name: Run UI Tests
+        run: |
+          cd ./e2eTest/FirebaseSwiftUIExample
+          set -o pipefail
+          xcodebuild test-without-building \
+            -scheme FirebaseSwiftUIExampleUITests \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -parallel-testing-enabled NO \
+            -enableCodeCoverage YES \
+            -resultBundlePath FirebaseSwiftUIExampleUITests.xcresult | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple
+            
+      - name: Upload Firebase Emulator logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: firebase-emulator-logs
+          path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExample/firebase-debug.log
+          
+      - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: FirebaseSwiftUIExampleUITests.xcresult
-          path: samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.xcresult
-      - name: Upload FirebaseSwiftUIExampleTests.xcresult bundle
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: FirebaseSwiftUIExampleTests.xcresult
-          path: samples/swiftui/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.xcresult
+          path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.xcresult

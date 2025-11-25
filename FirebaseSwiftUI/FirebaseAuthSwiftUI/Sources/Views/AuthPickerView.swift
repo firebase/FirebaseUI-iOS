@@ -12,115 +12,151 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuth
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
 @MainActor
-public struct AuthPickerView {
+public struct AuthPickerView<Content: View> {
+  public init(@ViewBuilder content: @escaping () -> Content = { EmptyView() }) {
+    self.content = content
+  }
+
   @Environment(AuthService.self) private var authService
+  private let content: () -> Content
 
-  public init() {}
-
-  private func switchFlow() {
-    authService.authenticationFlow = authService
-      .authenticationFlow == .login ? .signUp : .login
-  }
-
-  private var isAuthModalPresented: Binding<Bool> {
-    Binding(
-      get: { authService.isShowingAuthModal },
-      set: { authService.isShowingAuthModal = $0 }
-    )
-  }
-
-  @ViewBuilder
-  private var authPickerTitleView: some View {
-    if authService.authView == .authPicker {
-      Text(authService.string.authPickerTitle)
-        .font(.largeTitle)
-        .fontWeight(.bold)
-        .padding()
-    }
-  }
+  // View-layer error state
+  @State private var error: AlertError?
 }
 
 extension AuthPickerView: View {
   public var body: some View {
-    ScrollView {
-      VStack {
-        authPickerTitleView
-        if authService.authenticationState == .authenticated {
-          SignedInView()
-        } else {
-          switch authService.authView {
-          case .passwordRecovery:
-            PasswordRecoveryView()
-          case .emailLink:
-            EmailLinkView()
-          case .authPicker:
-            if authService.emailSignInEnabled {
-              Text(authService.authenticationFlow == .login ? authService.string
-                .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
-              Divider()
-              EmailAuthView()
+    @Bindable var authService = authService
+    content()
+      .sheet(isPresented: $authService.isPresented) {
+        @Bindable var navigator = authService.navigator
+        NavigationStack(path: $navigator.routes) {
+          authPickerViewInternal
+            .navigationTitle(authService.authenticationState == .unauthenticated ? authService
+              .string.authPickerTitle : "")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+              toolbar
             }
-            VStack {
-              authService.renderButtons()
-            }.padding(.horizontal)
-            if authService.emailSignInEnabled {
-              Divider()
-              HStack {
-                Text(authService
-                  .authenticationFlow == .login ? authService.string.dontHaveAnAccountYetLabel :
-                  authService.string.alreadyHaveAnAccountLabel)
-                Button(action: {
-                  withAnimation {
-                    switchFlow()
-                  }
-                }) {
-                  Text(authService.authenticationFlow == .signUp ? authService.string
-                    .emailLoginFlowLabel : authService.string.emailSignUpFlowLabel)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.blue)
-                }.accessibilityIdentifier("switch-auth-flow")
+            .navigationDestination(for: AuthView.self) { view in
+              switch view {
+              case AuthView.passwordRecovery:
+                PasswordRecoveryView()
+              case AuthView.emailLink:
+                EmailLinkView()
+              case AuthView.updatePassword:
+                UpdatePasswordView()
+              case AuthView.mfaEnrollment:
+                MFAEnrolmentView()
+              case AuthView.mfaManagement:
+                MFAManagementView()
+              case let .mfaResolution(mfaRequired):
+                MFAResolutionView(mfaRequired: mfaRequired)
+              case AuthView.enterPhoneNumber:
+                EnterPhoneNumberView()
+              case let .enterVerificationCode(verificationID, fullPhoneNumber):
+                EnterVerificationCodeView(
+                  verificationID: verificationID,
+                  fullPhoneNumber: fullPhoneNumber
+                )
               }
             }
-            PrivacyTOCsView(displayMode: .footer)
-            Text(authService.errorMessage).foregroundColor(.red)
-          default:
-            // TODO: - possibly refactor this, see: https://github.com/firebase/FirebaseUI-iOS/pull/1259#discussion_r2105473437
-            EmptyView()
-          }
         }
-      }.sheet(isPresented: isAuthModalPresented) {
-        VStack(spacing: 0) {
-          HStack {
-            Button(action: {
-              authService.dismissModal()
-            }) {
-              HStack(spacing: 4) {
-                Image(systemName: "chevron.left")
-                  .font(.system(size: 17, weight: .medium))
-                Text(authService.string.backButtonLabel)
-                  .font(.system(size: 17))
-              }
-              .foregroundColor(.blue)
-            }
-            Spacer()
-          }
-          .padding()
-          .background(Color(.systemBackground))
+        .environment(\.reportError, reportError)
+        .errorAlert(
+          error: $error,
+          okButtonLabel: authService.string.okButtonLabel
+        )
+        .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
+        // Apply account conflict handling at NavigationStack level
+        .accountConflictHandler()
+        // Apply MFA handling at NavigationStack level
+        .mfaHandler()
+      }
+  }
 
-          Divider()
+  /// Closure for reporting errors from child views
+  private func reportError(_ error: Error) {
+    Task { @MainActor in
+      self.error = AlertError(
+        message: authService.string.localizedErrorMessage(for: error),
+        underlyingError: error
+      )
+    }
+  }
 
-          if let view = authService.viewForCurrentModal() {
-            view
-              .frame(maxWidth: .infinity, maxHeight: .infinity)
-              .padding()
-          }
+  @ToolbarContentBuilder
+  var toolbar: some ToolbarContent {
+    ToolbarItem(placement: .topBarTrailing) {
+      if !authService.configuration.shouldHideCancelButton {
+        Button {
+          authService.isPresented = false
+        } label: {
+          Image(systemName: "xmark")
+            .foregroundStyle(Color(UIColor.label))
         }
       }
     }
+  }
+
+  @ViewBuilder
+  var authPickerViewInternal: some View {
+    @Bindable var authService = authService
+    VStack {
+      if authService.authenticationState == .authenticated {
+        SignedInView()
+      } else {
+        authMethodPicker
+          .safeAreaPadding()
+      }
+    }
+    .overlay {
+      if authService.authenticationState == .authenticating {
+        VStack(spacing: 24) {
+          ProgressView()
+            .scaleEffect(1.25)
+            .tint(.white)
+          Text("Authenticating...")
+            .foregroundStyle(.white)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.black.opacity(0.7))
+      }
+    }
+  }
+
+  @ViewBuilder
+  var authMethodPicker: some View {
+    GeometryReader { proxy in
+      ScrollView {
+        VStack(spacing: 24) {
+          Image(authService.configuration.logo ?? Assets.firebaseAuthLogo)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 100, height: 100)
+          if authService.emailSignInEnabled {
+            EmailAuthView()
+          }
+          Divider()
+          otherSignInOptions(proxy)
+          PrivacyTOCsView(displayMode: .full)
+        }
+      }
+    }
+  }
+
+  @ViewBuilder
+  func otherSignInOptions(_ proxy: GeometryProxy) -> some View {
+    VStack {
+      authService.renderButtons()
+    }
+    .padding(.horizontal, proxy.size.width * 0.14)
   }
 }
 

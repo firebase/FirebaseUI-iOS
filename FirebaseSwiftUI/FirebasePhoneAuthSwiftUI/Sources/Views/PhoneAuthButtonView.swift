@@ -13,36 +13,36 @@
 // limitations under the License.
 
 import FirebaseAuthSwiftUI
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
 @MainActor
 public struct PhoneAuthButtonView {
   @Environment(AuthService.self) private var authService
+  private let onTap: @MainActor () -> Void
 
-  public init() {}
+  public init(onTap: @escaping @MainActor () -> Void) {
+    self.onTap = onTap
+  }
 }
 
 extension PhoneAuthButtonView: View {
   public var body: some View {
-    Button(action: {
-      authService.registerModalView(for: .phoneAuth) {
-        AnyView(PhoneAuthView().environment(authService))
-      }
-      authService.presentModal(for: .phoneAuth)
-    }) {
-      Label("Sign in with Phone", systemImage: "phone.fill")
-        .foregroundColor(.white)
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.green.opacity(0.8)) // Light green
-        .cornerRadius(8)
+    AuthProviderButton(
+      label: authService.string.phoneLoginButtonLabel,
+      style: .phone,
+      accessibilityId: "sign-in-with-phone-button"
+    ) {
+      onTap()
     }
   }
 }
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
-  return PhoneAuthButtonView()
-    .environment(AuthService())
+  return PhoneAuthButtonView {
+    print("Phone auth tapped")
+  }
+  .environment(AuthService())
 }

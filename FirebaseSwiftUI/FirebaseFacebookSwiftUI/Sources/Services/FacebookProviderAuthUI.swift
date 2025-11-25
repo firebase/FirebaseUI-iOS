@@ -19,56 +19,22 @@ import FirebaseAuth
 import FirebaseAuthSwiftUI
 import SwiftUI
 
-let kFacebookEmailScope = "email"
-let kFacebookProfileScope = "public_profile"
-let kDefaultFacebookScopes = [kFacebookEmailScope, kFacebookProfileScope]
-
-public enum FacebookProviderError: Error {
-  case signInCancelled(String)
-  case configurationInvalid(String)
-  case limitedLoginNonce(String)
-  case accessToken(String)
-  case authenticationToken(String)
-}
-
-public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
-  public let id: String = "facebook"
+public class FacebookProviderSwift: CredentialAuthProviderSwift {
   let scopes: [String]
-  let shortName = "Facebook"
   let providerId = "facebook.com"
   private let loginManager = LoginManager()
   private var rawNonce: String?
   private var shaNonce: String?
   // Needed for reauthentication
-  var isLimitedLogin: Bool = true
+  private var isLimitedLogin: Bool = true
 
-  @MainActor private static var _shared: FacebookProviderAuthUI =
-    .init(scopes: kDefaultFacebookScopes)
-
-  @MainActor public static var shared: FacebookProviderAuthUI {
-    return _shared
+  public init(scopes: [String] = ["email", "public_profile"]) {
+    self.scopes = scopes
+    isLimitedLogin = ATTrackingManager.trackingAuthorizationStatus != .authorized
   }
 
-  @MainActor public static func configureProvider(scopes: [String]? = nil) {
-    _shared = FacebookProviderAuthUI(scopes: scopes)
-  }
-
-  private init(scopes: [String]? = nil) {
-    self.scopes = scopes ?? kDefaultFacebookScopes
-  }
-
-  @MainActor public func authButton() -> AnyView {
-    AnyView(SignInWithFacebookButton())
-  }
-
-  public func deleteUser(user: User) async throws {
-    let operation = FacebookDeleteUserOperation(facebookProvider: self)
-    try await operation(on: user)
-  }
-
-  @MainActor public func signInWithFacebook(isLimitedLogin: Bool) async throws -> AuthCredential {
+  @MainActor public func createAuthCredential() async throws -> AuthCredential {
     let loginType: LoginTracking = isLimitedLogin ? .limited : .enabled
-    self.isLimitedLogin = isLimitedLogin
 
     guard let configuration: LoginConfiguration = {
       if loginType == .limited {
@@ -86,8 +52,8 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
         )
       }
     }() else {
-      throw FacebookProviderError
-        .configurationInvalid("Failed to create Facebook login configuration")
+      throw AuthServiceError
+        .providerAuthenticationFailed("Failed to create Facebook login configuration")
     }
 
     let result = try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<
@@ -100,7 +66,8 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
         switch result {
         case .cancelled:
           continuation
-            .resume(throwing: FacebookProviderError.signInCancelled("User cancelled sign-in"))
+            .resume(throwing: AuthServiceError
+              .signInCancelled("User cancelled sign-in for Facebook"))
         case let .failed(error):
           continuation.resume(throwing: error)
         case .success:
@@ -123,8 +90,8 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
 
       return credential
     } else {
-      throw FacebookProviderError
-        .accessToken(
+      throw AuthServiceError
+        .providerAuthenticationFailed(
           "Access token has expired or not available. Please sign-in with Facebook before attempting to create a Facebook provider credential"
         )
     }
@@ -133,18 +100,35 @@ public class FacebookProviderAuthUI: FacebookProviderAuthUIProtocol {
   private func limitedLogin() throws -> AuthCredential {
     if let idToken = AuthenticationToken.current {
       guard let nonce = rawNonce else {
-        throw FacebookProviderError
-          .limitedLoginNonce("`rawNonce` has not been generated for Facebook limited login")
+        throw AuthServiceError
+          .providerAuthenticationFailed(
+            "`rawNonce` has not been generated for Facebook limited login"
+          )
       }
-      let credential = OAuthProvider.credential(withProviderID: providerId,
+      let credential = OAuthProvider.credential(providerID: .facebook,
                                                 idToken: idToken.tokenString,
                                                 rawNonce: nonce)
       return credential
     } else {
-      throw FacebookProviderError
-        .authenticationToken(
+      throw AuthServiceError
+        .providerAuthenticationFailed(
           "Authentication is not available. Please sign-in with Facebook before attempting to create a Facebook provider credential"
         )
     }
+  }
+}
+
+public class FacebookProviderAuthUI: AuthProviderUI {
+  private let typedProvider: FacebookProviderSwift
+  public var provider: AuthProviderSwift { typedProvider }
+  public let id: String = "facebook.com"
+  public let displayName: String = "Facebook"
+
+  public init(provider: FacebookProviderSwift) {
+    typedProvider = provider
+  }
+
+  @MainActor public func authButton() -> AnyView {
+    AnyView(SignInWithFacebookButton(facebookProvider: typedProvider))
   }
 }

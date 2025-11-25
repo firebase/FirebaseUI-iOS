@@ -19,41 +19,24 @@ import GoogleSignIn
 import GoogleSignInSwift
 import SwiftUI
 
-let kGoogleUserInfoEmailScope = "https://www.googleapis.com/auth/userinfo.email"
-let kGoogleUserInfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile"
-let kDefaultScopes = [kGoogleUserInfoEmailScope, kGoogleUserInfoProfileScope]
-
-public enum GoogleProviderError: Error {
-  case rootViewControllerNotFound(String)
-  case authenticationToken(String)
-  case user(String)
-}
-
-public class GoogleProviderAuthUI: @preconcurrency GoogleProviderAuthUIProtocol {
-  public let id: String = "google"
+public class GoogleProviderSwift: CredentialAuthProviderSwift {
   let scopes: [String]
-  let shortName = "Google"
+  let clientID: String
   let providerId = "google.com"
-  public let clientID: String
-  public init(scopes: [String]? = nil, clientID: String = FirebaseApp.app()!.options.clientID!) {
-    self.scopes = scopes ?? kDefaultScopes
+
+  public init(scopes: [String] = [
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile",
+  ],
+  clientID: String) {
     self.clientID = clientID
+    self.scopes = scopes
   }
 
-  @MainActor public func authButton() -> AnyView {
-    // Moved to SignInWithGoogleButton so we could sign in via AuthService
-    AnyView(SignInWithGoogleButton())
-  }
-
-  public func deleteUser(user: User) async throws {
-    let operation = GoogleDeleteUserOperation(googleProvider: self)
-    try await operation(on: user)
-  }
-
-  @MainActor public func signInWithGoogle(clientID: String) async throws -> AuthCredential {
+  @MainActor public func createAuthCredential() async throws -> AuthCredential {
     guard let presentingViewController = await (UIApplication.shared.connectedScenes
       .first as? UIWindowScene)?.windows.first?.rootViewController else {
-      throw GoogleProviderError
+      throw AuthServiceError
         .rootViewControllerNotFound(
           "Root View controller is not available to present Google sign-in View."
         )
@@ -74,7 +57,8 @@ public class GoogleProviderAuthUI: @preconcurrency GoogleProviderAuthUIProtocol 
         guard let user = result?.user,
               let idToken = user.idToken?.tokenString else {
           continuation
-            .resume(throwing: GoogleProviderError.user("Failed to retrieve user or idToken."))
+            .resume(throwing: AuthServiceError
+              .providerAuthenticationFailed("Failed to retrieve user or idToken."))
           return
         }
 
@@ -83,5 +67,20 @@ public class GoogleProviderAuthUI: @preconcurrency GoogleProviderAuthUIProtocol 
         continuation.resume(returning: credential)
       }
     }
+  }
+}
+
+public class GoogleProviderAuthUI: AuthProviderUI {
+  private let typedProvider: GoogleProviderSwift
+  public var provider: AuthProviderSwift { typedProvider }
+  public let id: String = "google.com"
+  public let displayName: String = "Google"
+
+  public init(provider: GoogleProviderSwift) {
+    typedProvider = provider
+  }
+
+  @MainActor public func authButton() -> AnyView {
+    AnyView(SignInWithGoogleButton(googleProvider: typedProvider))
   }
 }

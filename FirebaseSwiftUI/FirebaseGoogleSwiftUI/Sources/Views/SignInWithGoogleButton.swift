@@ -19,26 +19,51 @@
 //  Created by Russell Wheatley on 22/05/2025.
 //
 import FirebaseAuthSwiftUI
+import FirebaseAuthUIComponents
 import FirebaseCore
-import GoogleSignInSwift
 import SwiftUI
 
 @MainActor
 public struct SignInWithGoogleButton {
   @Environment(AuthService.self) private var authService
+  @Environment(\.accountConflictHandler) private var accountConflictHandler
+  @Environment(\.mfaHandler) private var mfaHandler
+  @Environment(\.reportError) private var reportError
+  let googleProvider: GoogleProviderSwift
 
-  let customViewModel = GoogleSignInButtonViewModel(
-    scheme: .light,
-    style: .wide,
-    state: .normal
-  )
+  public init(googleProvider: GoogleProviderSwift) {
+    self.googleProvider = googleProvider
+  }
 }
 
 extension SignInWithGoogleButton: View {
   public var body: some View {
-    GoogleSignInButton(viewModel: customViewModel) {
+    AuthProviderButton(
+      label: authService.string.googleLoginButtonLabel,
+      style: .google,
+      accessibilityId: "sign-in-with-google-button"
+    ) {
       Task {
-        try await authService.signInWithGoogle()
+        do {
+          let outcome = try await authService.signIn(googleProvider)
+
+          // Handle MFA at view level
+          if case let .mfaRequired(mfaInfo) = outcome,
+             let onMFA = mfaHandler {
+            onMFA(mfaInfo)
+            return
+          }
+        } catch {
+          reportError?(error)
+
+          if case let AuthServiceError.accountConflict(ctx) = error,
+             let onConflict = accountConflictHandler {
+            onConflict(ctx)
+            return
+          }
+
+          throw error
+        }
       }
     }
   }
@@ -46,6 +71,7 @@ extension SignInWithGoogleButton: View {
 
 #Preview {
   FirebaseOptions.dummyConfigurationForPreview()
-  return SignInWithGoogleButton()
+  let googleProvider = GoogleProviderSwift(clientID: "")
+  return SignInWithGoogleButton(googleProvider: googleProvider)
     .environment(AuthService())
 }
