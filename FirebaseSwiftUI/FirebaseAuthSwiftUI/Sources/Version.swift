@@ -15,5 +15,5 @@
 // Auto-generated, do not edit manually.
 public enum FirebaseAuthSwiftUIVersion {
   // Use the release-swift.sh script to bump this version number, commit and push a new tag.
-  public static let version = "15.1.0"
+  public static let version = "16.0.0"
 }
