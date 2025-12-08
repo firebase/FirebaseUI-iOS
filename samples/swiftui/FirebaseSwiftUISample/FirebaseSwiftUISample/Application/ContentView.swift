@@ -34,6 +34,7 @@ struct ContentView: View {
     actionCodeSettings.linkDomain = "flutterfire-e2e-tests.firebaseapp.com"
     let configuration = AuthConfiguration(
       shouldAutoUpgradeAnonymousUsers: true,
+      customStringsBundle: .main,
       tosUrl: URL(string: "https://example.com/tos"),
       privacyPolicyUrl: URL(string: "https://example.com/privacy"),
       emailLinkSignInActionCodeSettings: actionCodeSettings,
