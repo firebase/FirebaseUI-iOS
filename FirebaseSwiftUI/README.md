@@ -798,6 +798,21 @@ struct ContentView: View {
 }
 ```
 
+### Customizing UI Strings
+
+Override any UI string by creating a `Localizable.strings` (or `.xcstrings`) file in your app with custom values. Only include strings you want to change. Strings not changed will fallback to FirebaseAuthSwiftUI default strings.
+
+```swift
+// Localizable.strings
+"Sign in with Firebase" = "Welcome Back!";
+
+// In your app configuration
+let configuration = AuthConfiguration(customStringsBundle: .main)
+```
+
+See [example implementation](../../samples/swiftui/FirebaseSwiftUISample/FirebaseSwiftUISample) for a working demo.
+
+
 ---
 
 ## API Reference
