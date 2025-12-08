@@ -1,0 +1,9 @@
+/* 
+ * Test resource file for StringUtils testing
+ * This file overrides only a few strings to test the fallback mechanism
+ */
+
+/* Custom overrides for testing */
+"Sign in with Firebase" = "Custom Sign In Title";
+"Enter your email" = "Custom Email";
+
