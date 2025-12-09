@@ -1,0 +1,7 @@
+/* 
+ * Spanish language test resources
+ * This file overrides only a few strings to test language-specific fallback
+ */
+
+"Sign in with Firebase" = "Título Personalizado";
+

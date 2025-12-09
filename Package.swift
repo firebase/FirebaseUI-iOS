@@ -152,6 +152,10 @@ let package = Package(
       name: "FirebaseAuthSwiftUITests",
       dependencies: ["FirebaseAuthSwiftUI"],
       path: "FirebaseSwiftUI/FirebaseAuthSwiftUI/Tests/",
+      resources: [
+        .copy("FirebaseAuthSwiftUITests/TestResources/StringsOverride"),
+        .copy("FirebaseAuthSwiftUITests/TestResources/MultiLanguage"),
+      ],
       swiftSettings: [
         .swiftLanguageMode(.v6),
       ]
