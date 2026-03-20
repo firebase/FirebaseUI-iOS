@@ -118,6 +118,30 @@ struct ContentView: View {
           }
         }
         .tint(Color(.label))
+        NavigationLink {
+          UIKitEmbeddingExample()
+            .navigationTitle("Embedding in UIKit")
+        } label: {
+          VStack(alignment: .leading, spacing: 16) {
+            Text("UIKit embedding example")
+              .font(.headline)
+              .fontWeight(.bold)
+            Text("How to host FirebaseSwiftUI inside a UIKit view controller")
+            Text(
+              "• Inline authentication surface\n• UIHostingController inside UIKit\n• No auth sheet toggle required"
+            )
+            .font(.caption)
+            .foregroundColor(.secondary)
+          }
+          .multilineTextAlignment(.leading)
+          .padding()
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .background {
+            RoundedRectangle(cornerRadius: 16)
+              .fill(Color(UIColor.secondarySystemBackground))
+          }
+        }
+        .tint(Color(.label))
       }
       .padding()
       .navigationTitle("FirebaseUI Demo")
