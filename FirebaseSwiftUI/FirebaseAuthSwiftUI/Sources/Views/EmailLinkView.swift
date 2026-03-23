@@ -56,6 +56,7 @@ extension EmailLinkView: View {
           Image(systemName: "at")
         }
       )
+      .accessibilityIdentifier("email-link-email-field")
       Button {
         Task {
           try await sendEmailLink()
@@ -89,16 +90,25 @@ extension EmailLinkView: View {
         do {
           try await authService.handleSignInLink(url: url)
         } catch {
-          reportError?(error)
-
           if case let AuthServiceError.accountConflict(ctx) = error,
              let onConflict = accountConflictHandler {
             onConflict(ctx)
             return
           }
 
+          reportError?(error)
           throw error
         }
+      }
+    }
+    .onAppear {
+      if let suggestedEmailAddress = authService.suggestedEmailAddress {
+        email = suggestedEmailAddress
+      }
+    }
+    .onChange(of: authService.suggestedEmailAddress) { _, suggestedEmailAddress in
+      if let suggestedEmailAddress {
+        email = suggestedEmailAddress
       }
     }
   }

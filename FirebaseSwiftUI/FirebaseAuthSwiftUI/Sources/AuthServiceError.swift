@@ -164,6 +164,7 @@ public enum AuthServiceError: LocalizedError {
   case invalidCredentials(String)
   case signInFailed(underlying: Error)
   case accountConflict(AccountConflictContext)
+  case legacySignInRecoveryPresented
   case providerNotFound(String)
   case multiFactorAuth(String)
   case rootViewControllerNotFound(String)
@@ -200,6 +201,8 @@ public enum AuthServiceError: LocalizedError {
       return description
     case let .accountConflict(context):
       return context.errorDescription
+    case .legacySignInRecoveryPresented:
+      return nil
     case let .providerNotFound(description):
       return description
     case let .multiFactorAuth(description):

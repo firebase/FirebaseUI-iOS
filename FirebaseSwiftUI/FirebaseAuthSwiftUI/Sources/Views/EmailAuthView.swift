@@ -65,11 +65,14 @@ public struct EmailAuthView {
         return
       }
     } catch {
-      reportError?(error)
-
       if case let AuthServiceError.accountConflict(ctx) = error,
          let onConflict = accountConflictHandler {
         onConflict(ctx)
+        return
+      }
+
+      reportError?(error)
+      if case .legacySignInRecoveryPresented = error as? AuthServiceError {
         return
       }
 
@@ -88,14 +91,13 @@ public struct EmailAuthView {
         return
       }
     } catch {
-      reportError?(error)
-
       if case let AuthServiceError.accountConflict(ctx) = error,
          let onConflict = accountConflictHandler {
         onConflict(ctx)
         return
       }
 
+      reportError?(error)
       throw error
     }
   }
@@ -231,6 +233,16 @@ extension EmailAuthView: View {
       }
     }
     .accessibilityIdentifier("switch-auth-flow")
+    .onAppear {
+      if let suggestedEmailAddress = authService.suggestedEmailAddress {
+        email = suggestedEmailAddress
+      }
+    }
+    .onChange(of: authService.suggestedEmailAddress) { _, suggestedEmailAddress in
+      if let suggestedEmailAddress {
+        email = suggestedEmailAddress
+      }
+    }
   }
 }
 

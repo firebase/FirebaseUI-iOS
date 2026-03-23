@@ -47,14 +47,13 @@ extension SignInWithTwitterButton: View {
             return
           }
         } catch {
-          reportError?(error)
-
           if case let AuthServiceError.accountConflict(ctx) = error,
              let onConflict = accountConflictHandler {
             onConflict(ctx)
             return
           }
 
+          reportError?(error)
           throw error
         }
       }
