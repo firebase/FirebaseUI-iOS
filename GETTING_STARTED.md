@@ -79,7 +79,12 @@ To use passwordless email link sign-in, configure `ActionCodeSettings` and pass 
 let actionCodeSettings = ActionCodeSettings()
 actionCodeSettings.handleCodeInApp = true
 actionCodeSettings.url = URL(string: "https://yourapp.firebaseapp.com")
-actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
+
+guard let bundleID = Bundle.main.bundleIdentifier else {
+  fatalError("Missing bundle identifier for email link authentication setup.")
+}
+
+actionCodeSettings.setIOSBundleID(bundleID)
 
 let configuration = AuthConfiguration(
   emailLinkSignInActionCodeSettings: actionCodeSettings
@@ -151,38 +156,7 @@ To use phone authentication:
 3. Enable Push Notifications in Xcode.
 4. Add your Firebase **Encoded App ID** as a URL scheme for reCAPTCHA fallback.
 
-If you use phone auth, add the notification and URL handlers Firebase Auth needs:
-
-```swift
-import FirebaseAuth
-import FirebaseCore
-import UIKit
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(
-    _ application: UIApplication,
-    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
-  ) -> Bool {
-    FirebaseApp.configure()
-    return true
-  }
-
-  func application(
-    _ application: UIApplication,
-    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
-  ) {
-    Auth.auth().setAPNSToken(deviceToken, type: .prod)
-  }
-
-  func application(
-    _ app: UIApplication,
-    open url: URL,
-    options: [UIApplication.OpenURLOptionsKey: Any] = [:]
-  ) -> Bool {
-    Auth.auth().canHandle(url)
-  }
-}
-```
+Phone auth also needs the APNs token and reCAPTCHA URL handlers shown in `Handle provider callbacks` below. Add those methods to the same `AppDelegate` you use for `FirebaseApp.configure()`.
 
 Then register the provider:
 
@@ -220,7 +194,7 @@ For custom OIDC providers, configure the provider first in Firebase Authenticati
 
 ### Handle provider callbacks
 
-If you use Google Sign-In, Facebook Login, phone authentication, or email link flows, add the required URL handling to your app delegate.
+If you use Google Sign-In, Facebook Login, phone authentication, or email link flows, merge the following imports and methods into the same `AppDelegate` you use for `FirebaseApp.configure()`.
 
 ```swift
 import FacebookCore
@@ -229,6 +203,17 @@ import GoogleSignIn
 import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(
+    _ application: UIApplication,
+    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+  ) {
+    #if DEBUG
+    Auth.auth().setAPNSToken(deviceToken, type: .sandbox)
+    #else
+    Auth.auth().setAPNSToken(deviceToken, type: .prod)
+    #endif
+  }
+
   func application(
     _ app: UIApplication,
     open url: URL,
