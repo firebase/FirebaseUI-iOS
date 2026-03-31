@@ -55,9 +55,7 @@ private struct FirebaseAuthUIKitContainer: UIViewControllerRepresentable {
   @Environment(AuthService.self) private var authService
 
   func makeUIViewController(context: Context) -> EmbeddedAuthViewController {
-    let viewController = EmbeddedAuthViewController()
-    viewController.update(authService: authService)
-    return viewController
+    EmbeddedAuthViewController()
   }
 
   func updateUIViewController(_ uiViewController: EmbeddedAuthViewController, context: Context) {
