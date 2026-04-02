@@ -17,6 +17,7 @@ import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
+@MainActor
 public struct EmailLinkView {
   @Environment(AuthService.self) private var authService
   @Environment(\.accountConflictHandler) private var accountConflictHandler

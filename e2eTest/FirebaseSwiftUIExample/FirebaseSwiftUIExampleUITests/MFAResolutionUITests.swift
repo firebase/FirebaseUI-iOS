@@ -266,63 +266,64 @@ final class MFAResolutionUITests: XCTestCase {
   @MainActor
   private func getSMSVerificationCode(for phoneNumber: String,
                                       codeType: String = "enrollment") async -> String? {
-    let emulatorUrl =
-      "http://127.0.0.1:9099/emulator/v1/projects/flutterfire-e2e-tests/verificationCodes"
-
-    guard let url = URL(string: emulatorUrl) else {
-      return nil
-    }
-
     do {
-      let (data, _) = try await URLSession.shared.data(from: url)
+      for projectID in authEmulatorCandidateProjectIDs() {
+        let emulatorUrl =
+          "http://127.0.0.1:9099/emulator/v1/projects/\(projectID)/verificationCodes"
 
-      guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-            let codes = json["verificationCodes"] as? [[String: Any]] else {
-        print("❌ Failed to parse verification codes")
-        return nil
-      }
-
-      // Filter codes by phone number and type, then get the most recent one
-      let matchingCodes = codes.filter { codeInfo in
-        guard let phone = codeInfo["phoneNumber"] as? String else {
-          print("❌ Code missing phoneNumber field")
-          return false
+        guard let url = URL(string: emulatorUrl) else {
+          continue
         }
 
-        // The key difference between enrollment and verification codes:
-        // - Enrollment codes have full phone numbers (e.g., "+15551234567")
-        // - Verification codes have masked phone numbers (e.g., "+*******4567")
-        let isMasked = phone.contains("*")
+        let (data, _) = try await URLSession.shared.data(from: url)
 
-        // Match phone number
-        let phoneMatches: Bool
-        if isMasked {
-          // Extract last 4 digits from both numbers
-          let last4OfResponse = String(phone.suffix(4))
-          let last4OfTarget = String(phoneNumber.suffix(4))
-          phoneMatches = last4OfResponse == last4OfTarget
-        } else {
-          // Full phone number match
-          phoneMatches = phone == phoneNumber
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let codes = json["verificationCodes"] as? [[String: Any]] else {
+          continue
         }
 
-        guard phoneMatches else {
-          return false
+        // Filter codes by phone number and type, then get the most recent one
+        let matchingCodes = codes.filter { codeInfo in
+          guard let phone = codeInfo["phoneNumber"] as? String else {
+            print("❌ Code missing phoneNumber field")
+            return false
+          }
+
+          // The key difference between enrollment and verification codes:
+          // - Enrollment codes have full phone numbers (e.g., "+15551234567")
+          // - Verification codes have masked phone numbers (e.g., "+*******4567")
+          let isMasked = phone.contains("*")
+
+          // Match phone number
+          let phoneMatches: Bool
+          if isMasked {
+            // Extract last 4 digits from both numbers
+            let last4OfResponse = String(phone.suffix(4))
+            let last4OfTarget = String(phoneNumber.suffix(4))
+            phoneMatches = last4OfResponse == last4OfTarget
+          } else {
+            // Full phone number match
+            phoneMatches = phone == phoneNumber
+          }
+
+          guard phoneMatches else {
+            return false
+          }
+
+          if codeType == "enrollment" {
+            // Enrollment codes have unmasked phone numbers
+            return !isMasked
+          } else { // "verification"
+            // Verification codes have masked phone numbers
+            return isMasked
+          }
         }
 
-        if codeType == "enrollment" {
-          // Enrollment codes have unmasked phone numbers
-          return !isMasked
-        } else { // "verification"
-          // Verification codes have masked phone numbers
-          return isMasked
+        // Get the last matching code (most recent)
+        if let lastCode = matchingCodes.last,
+           let code = lastCode["code"] as? String {
+          return code
         }
-      }
-
-      // Get the last matching code (most recent)
-      if let lastCode = matchingCodes.last,
-         let code = lastCode["code"] as? String {
-        return code
       }
 
       print("❌ No matching code found")
