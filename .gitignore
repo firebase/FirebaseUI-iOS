@@ -29,3 +29,4 @@ Pods/
 Podfile.lock
 *.xcworkspace/
 samples/**/GoogleService-Info.plist
+e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.xcresult/

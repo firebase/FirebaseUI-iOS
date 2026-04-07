@@ -16,6 +16,7 @@ import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
+@MainActor
 public struct PasswordRecoveryView {
   @Environment(AuthService.self) private var authService
   @State private var email = ""

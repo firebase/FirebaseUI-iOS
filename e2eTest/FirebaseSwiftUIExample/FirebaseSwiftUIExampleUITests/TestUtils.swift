@@ -24,8 +24,9 @@ func createEmail() -> String {
 // MARK: - Alert Handling
 
 @MainActor func dismissAlert(app: XCUIApplication) {
-  if app.scrollViews.otherElements.buttons["Not Now"].waitForExistence(timeout: 2) {
-    app.scrollViews.otherElements.buttons["Not Now"].tap()
+  let notNowButton = app.buttons["Not Now"].firstMatch
+  if notNowButton.waitForExistence(timeout: 5) {
+    notNowButton.tap()
   }
 }
 
@@ -115,6 +116,48 @@ func createEmail() -> String {
 
 // MARK: - Email Verification
 
+private let authEmulatorProjectIDs = [
+  "flutterfire-e2e-tests",
+]
+
+private func projectIDFromIDToken(_ idToken: String) -> String? {
+  let segments = idToken.split(separator: ".")
+  guard segments.count >= 2 else { return nil }
+
+  var payload = String(segments[1])
+    .replacingOccurrences(of: "-", with: "+")
+    .replacingOccurrences(of: "_", with: "/")
+
+  let paddingLength = (4 - payload.count % 4) % 4
+  payload += String(repeating: "=", count: paddingLength)
+
+  guard let payloadData = Data(base64Encoded: payload),
+        let json = try? JSONSerialization.jsonObject(with: payloadData) as? [String: Any]
+  else {
+    return nil
+  }
+
+  return json["aud"] as? String
+}
+
+func authEmulatorCandidateProjectIDs(preferredProjectID: String? = nil,
+                                     idToken: String? = nil) -> [String] {
+  var projectIDs: [String] = []
+
+  if let preferredProjectID, !preferredProjectID.isEmpty {
+    projectIDs.append(preferredProjectID)
+  }
+
+  if let idToken, let tokenProjectID = projectIDFromIDToken(idToken) {
+    projectIDs.append(tokenProjectID)
+  }
+
+  projectIDs.append(contentsOf: authEmulatorProjectIDs)
+
+  var seen = Set<String>()
+  return projectIDs.filter { seen.insert($0).inserted }
+}
+
 /// Verifies an email address in the emulator using the OOB code mechanism
 @MainActor func verifyEmailInEmulator(email: String,
                                       idToken: String,
@@ -157,33 +200,53 @@ func createEmail() -> String {
   }
 
   // Step 2: Fetch OOB codes from emulator with retry logic
-  let oobURL = URL(string: "\(base)/emulator/v1/projects/\(projectID)/oobCodes")!
+  let candidateProjectIDs = authEmulatorCandidateProjectIDs(
+    preferredProjectID: projectID,
+    idToken: idToken
+  )
 
   var codeItem: OobItem?
   var attempts = 0
   let maxAttempts = 5
+  var availableCodesByProject = ""
 
   while codeItem == nil, attempts < maxAttempts {
-    let (oobData, oobResp) = try await URLSession.shared.data(from: oobURL)
-    guard (oobResp as? HTTPURLResponse)?.statusCode == 200 else {
-      throw NSError(domain: "EmulatorError", code: 2,
-                    userInfo: [NSLocalizedDescriptionKey: "Failed to fetch OOB codes"])
+    var availableCodes: [String] = []
+
+    for candidateProjectID in candidateProjectIDs {
+      let oobURL = URL(string: "\(base)/emulator/v1/projects/\(candidateProjectID)/oobCodes")!
+      guard let (oobData, oobResp) = try? await URLSession.shared.data(from: oobURL),
+            (oobResp as? HTTPURLResponse)?.statusCode == 200 else {
+        continue
+      }
+
+      guard let envelope = try? JSONDecoder().decode(OobEnvelope.self, from: oobData) else {
+        continue
+      }
+
+      let iso = ISO8601DateFormatter()
+      codeItem = envelope.oobCodes
+        .filter {
+          $0.email.caseInsensitiveCompare(email) == .orderedSame && $0.requestType == "VERIFY_EMAIL"
+        }
+        .sorted {
+          let d0 = $0.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
+          let d1 = $1.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
+          return d0 > d1
+        }
+        .first
+
+      if codeItem != nil {
+        break
+      }
+
+      let descriptions = envelope.oobCodes.map {
+        "[\(candidateProjectID)] Email: \($0.email), Type: \($0.requestType)"
+      }
+      availableCodes.append(contentsOf: descriptions)
     }
 
-    let envelope = try JSONDecoder().decode(OobEnvelope.self, from: oobData)
-
-    // Step 3: Find most recent VERIFY_EMAIL code for this email
-    let iso = ISO8601DateFormatter()
-    codeItem = envelope.oobCodes
-      .filter {
-        $0.email.caseInsensitiveCompare(email) == .orderedSame && $0.requestType == "VERIFY_EMAIL"
-      }
-      .sorted {
-        let d0 = $0.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
-        let d1 = $1.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
-        return d0 > d1
-      }
-      .first
+    availableCodesByProject = availableCodes.joined(separator: "; ")
 
     if codeItem == nil {
       attempts += 1
@@ -191,12 +254,9 @@ func createEmail() -> String {
         // Wait before retrying
         try await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
       } else {
-        // Log available codes for debugging
-        let availableCodes = envelope.oobCodes.map { "Email: \($0.email), Type: \($0.requestType)" }
-          .joined(separator: "; ")
         throw NSError(domain: "EmulatorError", code: 3,
                       userInfo: [
-                        NSLocalizedDescriptionKey: "No VERIFY_EMAIL OOB code found for \(email) after \(maxAttempts) attempts. Available codes: \(availableCodes)",
+                        NSLocalizedDescriptionKey: "No VERIFY_EMAIL OOB code found for \(email) after \(maxAttempts) attempts. Available codes: \(availableCodesByProject)",
                       ])
       }
     }
