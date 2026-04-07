@@ -58,7 +58,7 @@ struct YourApp: App {
 
 ## Set up sign-in methods
 
-Before you can sign users in, enable the providers you want to support in **Authentication > Sign-in method** in the Firebase console.
+Before you can sign users in, enable the providers you want to support in **Authentication > Sign-in method** in the [Firebase console](https://console.firebase.google.com/u/0/project/_/authentication/providers).
 
 ### Email address and password
 
@@ -190,7 +190,21 @@ FirebaseUI also supports built-in OAuth providers such as GitHub, Microsoft, and
   .withOAuthSignIn(OAuthProviderSwift.yahoo())
 ```
 
-For custom OIDC providers, configure the provider first in Firebase Authentication, then create an `OAuthProviderSwift` with your provider ID and button configuration.
+For custom OIDC providers, configure the provider first in Firebase Authentication, then create an `OAuthProviderSwift` with your provider ID and button configuration:
+
+```swift
+let lineProvider = OAuthProviderSwift(
+  providerId: "oidc.line",
+  buttonLabel: "Sign in with LINE",
+  displayName: "LINE",
+  iconSystemName: "person.crop.circle.badge.checkmark",
+  buttonBackgroundColor: .green,
+  buttonForegroundColor: .white
+)
+
+let authService = AuthService()
+  .withOAuthSignIn(lineProvider)
+```
 
 ### Handle provider callbacks
 
