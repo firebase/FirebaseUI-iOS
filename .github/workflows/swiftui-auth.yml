@@ -48,8 +48,15 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - name: Select Xcode version
-        run: sudo xcode-select -switch /Applications/Xcode_26.4.app/Contents/Developer
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      - name: Workaround Simulator Availability issues
+        run: |
+          # Just listing the installed simulators fixes availability inconsistency
+          # Without this, runs fail *intermittently* with build target not available because simulators not available
+          # See https://github.com/actions/runner-images/issues/13459#issuecomment-3681674842
+          xcrun simctl list
         
       - name: Run FirebaseSwiftUI Package Unit Tests
         run: |
@@ -104,9 +111,17 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - name: Select Xcode version
-        run: sudo xcode-select -switch /Applications/Xcode_26.4.app/Contents/Developer
-        
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Workaround Simulator Availability issues
+        run: |
+          # Just listing the installed simulators fixes availability inconsistency
+          # Without this, runs fail *intermittently* with build target not available because simulators not available
+          # See https://github.com/actions/runner-images/issues/13459#issuecomment-3681674842
+          xcrun simctl list
+
       - name: Build for Integration Tests
         run: |
           cd ./e2eTest/FirebaseSwiftUIExample
@@ -170,9 +185,17 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - name: Select Xcode version
-        run: sudo xcode-select -switch /Applications/Xcode_26.4.app/Contents/Developer
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
         
+      - name: Workaround Simulator Availability issues
+        run: |
+          # Just listing the installed simulators fixes availability inconsistency
+          # Without this, runs fail *intermittently* with build target not available because simulators not available
+          # See https://github.com/actions/runner-images/issues/13459#issuecomment-3681674842
+          xcrun simctl list
+          
       - name: Build for UI Tests
         run: |
           cd ./e2eTest/FirebaseSwiftUIExample
