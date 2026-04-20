@@ -23,6 +23,10 @@ on:
 permissions:
   contents: read
 
+env:
+  XCODE_VERSION: latest-stable
+  IOS_SIMULATOR_DEVICE: iPhone 17 Pro
+
 jobs:
   format-check:
     name: Swift Format Check
@@ -37,7 +41,7 @@ jobs:
       - name: Check Swift formatting
         run: bash lint-swift.sh
 
-  # Package Unit Tests (standalone, no emulator needed)
+  # Package Unit Tests (simulator-backed)
   unit-tests:
     name: Package Unit Tests
     runs-on: macos-26
@@ -48,22 +52,20 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - uses: maxim-lobanov/setup-xcode@v1
+      - uses: maxim-lobanov/setup-xcode@9a237eadec58c1a4e3c19e27a1f6e2a3dce0a919
         with:
-          xcode-version: latest-stable
-      - name: Workaround Simulator Availability issues
-        run: |
-          # Just listing the installed simulators fixes availability inconsistency
-          # Without this, runs fail *intermittently* with build target not available because simulators not available
-          # See https://github.com/actions/runner-images/issues/13459#issuecomment-3681674842
-          xcrun simctl list
+          xcode-version: ${{ env.XCODE_VERSION }}
+
+      - name: Prepare iOS Simulator
+        id: prepare-simulator
+        run: ./.github/workflows/scripts/prepare-ios-simulator.sh
         
       - name: Run FirebaseSwiftUI Package Unit Tests
         run: |
           set -o pipefail
           xcodebuild test \
             -scheme FirebaseUI-Package \
-            -destination 'platform=iOS Simulator,OS=26.4,name=iPhone 17 Pro' \
+            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIPackageTests.xcresult | tee FirebaseSwiftUIPackageTests.log | xcpretty --test --color --simple
             
@@ -111,16 +113,13 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - uses: maxim-lobanov/setup-xcode@v1
+      - uses: maxim-lobanov/setup-xcode@9a237eadec58c1a4e3c19e27a1f6e2a3dce0a919
         with:
-          xcode-version: latest-stable
+          xcode-version: ${{ env.XCODE_VERSION }}
 
-      - name: Workaround Simulator Availability issues
-        run: |
-          # Just listing the installed simulators fixes availability inconsistency
-          # Without this, runs fail *intermittently* with build target not available because simulators not available
-          # See https://github.com/actions/runner-images/issues/13459#issuecomment-3681674842
-          xcrun simctl list
+      - name: Prepare iOS Simulator
+        id: prepare-simulator
+        run: ./.github/workflows/scripts/prepare-ios-simulator.sh
 
       - name: Build for Integration Tests
         run: |
@@ -128,7 +127,7 @@ jobs:
           set -o pipefail
           xcodebuild build-for-testing \
             -scheme FirebaseSwiftUIExampleTests \
-            -destination 'platform=iOS Simulator,OS=26.4,name=iPhone 17 Pro' \
+            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
             -enableCodeCoverage YES | xcpretty --color --simple
             
       - name: Run Integration Tests
@@ -137,7 +136,8 @@ jobs:
           set -o pipefail
           xcodebuild test-without-building \
             -scheme FirebaseSwiftUIExampleTests \
-            -destination 'platform=iOS Simulator,OS=26.4,name=iPhone 17 Pro' \
+            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
+            -parallel-testing-enabled NO \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleTests.xcresult | tee FirebaseSwiftUIExampleTests.log | xcpretty --test --color --simple
             
@@ -185,16 +185,13 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - uses: maxim-lobanov/setup-xcode@v1
+      - uses: maxim-lobanov/setup-xcode@9a237eadec58c1a4e3c19e27a1f6e2a3dce0a919
         with:
-          xcode-version: latest-stable
+          xcode-version: ${{ env.XCODE_VERSION }}
         
-      - name: Workaround Simulator Availability issues
-        run: |
-          # Just listing the installed simulators fixes availability inconsistency
-          # Without this, runs fail *intermittently* with build target not available because simulators not available
-          # See https://github.com/actions/runner-images/issues/13459#issuecomment-3681674842
-          xcrun simctl list
+      - name: Prepare iOS Simulator
+        id: prepare-simulator
+        run: ./.github/workflows/scripts/prepare-ios-simulator.sh
           
       - name: Build for UI Tests
         run: |
@@ -202,7 +199,7 @@ jobs:
           set -o pipefail
           xcodebuild build-for-testing \
             -scheme FirebaseSwiftUIExampleUITests \
-            -destination 'platform=iOS Simulator,OS=26.4,name=iPhone 17 Pro' \
+            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
             -enableCodeCoverage YES | xcpretty --color --simple
             
       - name: Run UI Tests
@@ -211,7 +208,7 @@ jobs:
           set -o pipefail
           xcodebuild test-without-building \
             -scheme FirebaseSwiftUIExampleUITests \
-            -destination 'platform=iOS Simulator,OS=26.4,name=iPhone 17 Pro' \
+            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
             -parallel-testing-enabled NO \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleUITests.xcresult | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple
