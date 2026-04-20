@@ -52,7 +52,7 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - uses: maxim-lobanov/setup-xcode@9a237eadec58c1a4e3c19e27a1f6e2a3dce0a919
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90
         with:
           xcode-version: ${{ env.XCODE_VERSION }}
 
@@ -113,7 +113,7 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - uses: maxim-lobanov/setup-xcode@9a237eadec58c1a4e3c19e27a1f6e2a3dce0a919
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90
         with:
           xcode-version: ${{ env.XCODE_VERSION }}
 
@@ -185,7 +185,7 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - uses: maxim-lobanov/setup-xcode@9a237eadec58c1a4e3c19e27a1f6e2a3dce0a919
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90
         with:
           xcode-version: ${{ env.XCODE_VERSION }}
         
