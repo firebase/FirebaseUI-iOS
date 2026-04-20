@@ -121,20 +121,11 @@ jobs:
         id: prepare-simulator
         run: ./.github/workflows/scripts/prepare-ios-simulator.sh
 
-      - name: Build for Integration Tests
-        run: |
-          cd ./e2eTest/FirebaseSwiftUIExample
-          set -o pipefail
-          xcodebuild build-for-testing \
-            -scheme FirebaseSwiftUIExampleTests \
-            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
-            -enableCodeCoverage YES | xcpretty --color --simple
-            
       - name: Run Integration Tests
         run: |
           cd ./e2eTest/FirebaseSwiftUIExample
           set -o pipefail
-          xcodebuild test-without-building \
+          xcodebuild test \
             -scheme FirebaseSwiftUIExampleTests \
             -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
             -parallel-testing-enabled NO \
