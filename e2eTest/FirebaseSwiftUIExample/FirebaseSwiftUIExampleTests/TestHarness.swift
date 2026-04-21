@@ -108,6 +108,9 @@ func createEmailLinkOnlyUser(email: String) async throws {
   try await service.sendEmailSignInLink(email: email)
   let signInLink = try await fetchEmailSignInLinkFromEmulator(email: email)
   try await service.handleSignInLink(url: signInLink)
+  try await waitForStateChange {
+    service.currentUser?.email?.caseInsensitiveCompare(email) == .orderedSame
+  }
   try await service.signOut()
 }
 
@@ -152,10 +155,13 @@ func fetchEmailSignInLinkFromEmulator(email: String,
       .compactMap(\.oobLink)
       .first
 
-    if let oobLink,
-       let encodedLink = oobLink.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-       let wrappedLink = URL(string: "https://example.com/?link=\(encodedLink)") {
-      return wrappedLink
+    if let oobLink {
+      var components = URLComponents(string: "https://example.com/")
+      components?.queryItems = [URLQueryItem(name: "link", value: oobLink)]
+
+      if let wrappedLink = components?.url {
+        return wrappedLink
+      }
     }
 
     attempts += 1
