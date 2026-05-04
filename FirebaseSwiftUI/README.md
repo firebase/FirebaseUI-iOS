@@ -812,6 +812,28 @@ let configuration = AuthConfiguration(customStringsBundle: .main)
 
 See [example implementation](../../samples/swiftui/FirebaseSwiftUISample/FirebaseSwiftUISample) for a working demo.
 
+### Customizing Account Deletion
+
+By default, `SignedInView` shows a **Delete Account** button that opens the built-in confirmation sheet and deletes the current Firebase Auth user after reauthentication when required.
+
+Hide the button if account deletion is handled elsewhere in your app:
+
+```swift
+let configuration = AuthConfiguration(
+  deleteAccountButtonAction: .hidden
+)
+```
+
+Or provide a custom tap action to show your own confirmation UI, route to a support flow, or run app-specific cleanup before deleting the account:
+
+```swift
+let configuration = AuthConfiguration(
+  deleteAccountButtonAction: .custom {
+    // Present your own delete-account flow.
+  }
+)
+```
+
 
 ---
 
@@ -834,6 +856,7 @@ public struct AuthConfiguration {
     privacyPolicyUrl: URL? = nil,
     emailLinkSignInActionCodeSettings: ActionCodeSettings? = nil,
     verifyEmailActionCodeSettings: ActionCodeSettings? = nil,
+    deleteAccountButtonAction: DeleteAccountButtonAction = .showConfirmationSheet,
     mfaEnabled: Bool = false,
     allowedSecondFactors: Set<SecondFactorType> = [.sms, .totp],
     mfaIssuer: String = "Firebase Auth"
@@ -855,6 +878,7 @@ public struct AuthConfiguration {
 | `privacyPolicyUrl` | `URL?` | `nil` | URL to your Privacy Policy. When both `tosUrl` and `privacyPolicyUrl` are set, links are displayed in the auth UI. |
 | `emailLinkSignInActionCodeSettings` | `ActionCodeSettings?` | `nil` | Configuration for email link (passwordless) sign-in. Must be set to use email link authentication. |
 | `verifyEmailActionCodeSettings` | `ActionCodeSettings?` | `nil` | Configuration for email verification. Used when sending verification emails to users. |
+| `deleteAccountButtonAction` | `DeleteAccountButtonAction` | `.showConfirmationSheet` | Controls the Delete Account button in `SignedInView`. Use `.showConfirmationSheet` for the built-in deletion flow, `.hidden` to remove the button, or `.custom { ... }` to run your own action when tapped. |
 | `mfaEnabled` | `Bool` | `false` | Enables Multi-Factor Authentication support. When enabled, users can enroll in and use MFA. |
 | `allowedSecondFactors` | `Set<SecondFactorType>` | `[.sms, .totp]` | Set of allowed MFA factor types. Options are `.sms` (phone-based) and `.totp` (authenticator app). |
 | `mfaIssuer` | `String` | `"Firebase Auth"` | The issuer name displayed in TOTP authenticator apps when users enroll. |
@@ -1737,4 +1761,3 @@ Thrown by sensitive operations when Firebase requires recent authentication. Eac
 ## Feedback
 
 Please file feedback and issues in the [repository's issue tracker](https://github.com/firebase/FirebaseUI-iOS/issues).
-

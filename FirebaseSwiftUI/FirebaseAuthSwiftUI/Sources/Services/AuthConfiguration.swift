@@ -17,6 +17,12 @@ import Foundation
 import SwiftUI
 
 public struct AuthConfiguration {
+  public enum DeleteAccountButtonAction {
+    case showConfirmationSheet
+    case hidden
+    case custom(@MainActor () -> Void)
+  }
+
   public let logo: ImageResource?
   public let languageCode: String?
   public let shouldHideCancelButton: Bool
@@ -27,6 +33,7 @@ public struct AuthConfiguration {
   public let privacyPolicyUrl: URL?
   public let emailLinkSignInActionCodeSettings: ActionCodeSettings?
   public let verifyEmailActionCodeSettings: ActionCodeSettings?
+  public let deleteAccountButtonAction: DeleteAccountButtonAction
 
   // MARK: - MFA Configuration
 
@@ -44,6 +51,7 @@ public struct AuthConfiguration {
               privacyPolicyUrl: URL? = nil,
               emailLinkSignInActionCodeSettings: ActionCodeSettings? = nil,
               verifyEmailActionCodeSettings: ActionCodeSettings? = nil,
+              deleteAccountButtonAction: DeleteAccountButtonAction = .showConfirmationSheet,
               mfaEnabled: Bool = false,
               allowedSecondFactors: Set<SecondFactorType> = [.sms, .totp],
               mfaIssuer: String = "Firebase Auth") {
@@ -57,6 +65,7 @@ public struct AuthConfiguration {
     self.privacyPolicyUrl = privacyPolicyUrl
     self.emailLinkSignInActionCodeSettings = emailLinkSignInActionCodeSettings
     self.verifyEmailActionCodeSettings = verifyEmailActionCodeSettings
+    self.deleteAccountButtonAction = deleteAccountButtonAction
     self.mfaEnabled = mfaEnabled
     self.allowedSecondFactors = allowedSecondFactors
     self.mfaIssuer = mfaIssuer

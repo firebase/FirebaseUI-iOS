@@ -30,4 +30,25 @@ struct SignedInViewTests {
 
     #expect(SignedInView.showsMfaManagementButton(configuration: configuration) == true)
   }
+
+  @Test("Delete account button is shown by default")
+  func deleteAccountButtonShownByDefault() {
+    let configuration = AuthConfiguration()
+
+    #expect(SignedInView.showsDeleteAccountButton(configuration: configuration) == true)
+  }
+
+  @Test("Delete account button is hidden when configured")
+  func deleteAccountButtonHiddenWhenConfigured() {
+    let configuration = AuthConfiguration(deleteAccountButtonAction: .hidden)
+
+    #expect(SignedInView.showsDeleteAccountButton(configuration: configuration) == false)
+  }
+
+  @Test("Delete account button is shown for custom actions")
+  func deleteAccountButtonShownForCustomAction() {
+    let configuration = AuthConfiguration(deleteAccountButtonAction: .custom {})
+
+    #expect(SignedInView.showsDeleteAccountButton(configuration: configuration) == true)
+  }
 }

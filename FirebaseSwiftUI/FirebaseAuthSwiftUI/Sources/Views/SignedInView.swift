@@ -27,8 +27,32 @@ public struct SignedInView {
     Self.showsMfaManagementButton(configuration: authService.configuration)
   }
 
+  private var showsDeleteAccountButton: Bool {
+    Self.showsDeleteAccountButton(configuration: authService.configuration)
+  }
+
   static func showsMfaManagementButton(configuration: AuthConfiguration) -> Bool {
     configuration.mfaEnabled
+  }
+
+  static func showsDeleteAccountButton(configuration: AuthConfiguration) -> Bool {
+    switch configuration.deleteAccountButtonAction {
+    case .hidden:
+      return false
+    case .showConfirmationSheet, .custom:
+      return true
+    }
+  }
+
+  private func performDeleteAccountButtonAction() {
+    switch authService.configuration.deleteAccountButtonAction {
+    case .showConfirmationSheet:
+      showDeleteConfirmation = true
+    case .hidden:
+      break
+    case let .custom(action):
+      action()
+    }
   }
 
   private func sendEmailVerification() async throws {
@@ -97,17 +121,19 @@ extension SignedInView: View {
         .accessibilityIdentifier("mfa-management-button")
       }
 
-      Button {
-        showDeleteConfirmation = true
-      } label: {
-        Text(authService.string.deleteAccountButtonLabel)
-          .padding(.vertical, 8)
-          .frame(maxWidth: .infinity)
+      if showsDeleteAccountButton {
+        Button {
+          performDeleteAccountButtonAction()
+        } label: {
+          Text(authService.string.deleteAccountButtonLabel)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity)
+        .accessibilityIdentifier("delete-account-button")
       }
-      .buttonStyle(.borderedProminent)
-      .padding([.top, .bottom], 8)
-      .frame(maxWidth: .infinity)
-      .accessibilityIdentifier("delete-account-button")
 
       Button {
         Task {
@@ -185,24 +211,22 @@ private struct DeleteAccountConfirmationSheet: View {
           .font(.system(size: 60))
           .foregroundColor(.red)
 
-        Text("Delete Account?")
+        Text(authService.string.deleteAccountConfirmationLabel)
           .font(.title)
           .fontWeight(.bold)
 
-        Text(
-          "This action cannot be undone. All your data will be permanently deleted. You may need to reauthenticate to complete this action."
-        )
-        .font(.body)
-        .foregroundColor(.secondary)
-        .multilineTextAlignment(.center)
-        .padding(.horizontal)
+        Text(authService.string.deleteAccountWarningMessage)
+          .font(.body)
+          .foregroundColor(.secondary)
+          .multilineTextAlignment(.center)
+          .padding(.horizontal)
       }
 
       VStack(spacing: 12) {
         Button {
           onConfirm()
         } label: {
-          Text("Delete Account")
+          Text(authService.string.deleteAccountLabel)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }
@@ -215,7 +239,7 @@ private struct DeleteAccountConfirmationSheet: View {
         Button {
           onCancel()
         } label: {
-          Text("Cancel")
+          Text(authService.string.cancelButtonLabel)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }

@@ -19,6 +19,7 @@ DerivedData
 .build/
 # Third Party
 /sdk
+vendor/
 
 # Generated
 /target
