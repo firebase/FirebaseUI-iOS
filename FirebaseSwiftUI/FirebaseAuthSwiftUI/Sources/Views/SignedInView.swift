@@ -23,7 +23,7 @@ public struct SignedInView {
   @State private var showEmailVerificationSent = false
   @State private var reauthCoordinator = ReauthenticationCoordinator()
 
-  var showsMfaManagementButton: Bool {
+  private var showsMfaManagementButton: Bool {
     Self.showsMfaManagementButton(configuration: authService.configuration)
   }
 
