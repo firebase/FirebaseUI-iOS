@@ -23,6 +23,10 @@ on:
 permissions:
   contents: read
 
+env:
+  XCODE_VERSION: latest-stable
+  IOS_SIMULATOR_DEVICE: iPhone 17 Pro
+
 jobs:
   format-check:
     name: Swift Format Check
@@ -37,7 +41,7 @@ jobs:
       - name: Check Swift formatting
         run: bash lint-swift.sh
 
-  # Package Unit Tests (standalone, no emulator needed)
+  # Package Unit Tests (simulator-backed)
   unit-tests:
     name: Package Unit Tests
     runs-on: macos-26
@@ -48,15 +52,20 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - name: Select Xcode version
-        run: sudo xcode-select -switch /Applications/Xcode_26.0.1.app/Contents/Developer
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90
+        with:
+          xcode-version: ${{ env.XCODE_VERSION }}
+
+      - name: Prepare iOS Simulator
+        id: prepare-simulator
+        run: ./.github/workflows/scripts/prepare-ios-simulator.sh
         
       - name: Run FirebaseSwiftUI Package Unit Tests
         run: |
           set -o pipefail
           xcodebuild test \
             -scheme FirebaseUI-Package \
-            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIPackageTests.xcresult | tee FirebaseSwiftUIPackageTests.log | xcpretty --test --color --simple
             
@@ -104,25 +113,22 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - name: Select Xcode version
-        run: sudo xcode-select -switch /Applications/Xcode_26.0.1.app/Contents/Developer
-        
-      - name: Build for Integration Tests
-        run: |
-          cd ./e2eTest/FirebaseSwiftUIExample
-          set -o pipefail
-          xcodebuild build-for-testing \
-            -scheme FirebaseSwiftUIExampleTests \
-            -destination 'platform=iOS Simulator,name=iPhone 17' \
-            -enableCodeCoverage YES | xcpretty --color --simple
-            
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90
+        with:
+          xcode-version: ${{ env.XCODE_VERSION }}
+
+      - name: Prepare iOS Simulator
+        id: prepare-simulator
+        run: ./.github/workflows/scripts/prepare-ios-simulator.sh
+
       - name: Run Integration Tests
         run: |
           cd ./e2eTest/FirebaseSwiftUIExample
           set -o pipefail
-          xcodebuild test-without-building \
+          xcodebuild test \
             -scheme FirebaseSwiftUIExampleTests \
-            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
+            -parallel-testing-enabled NO \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleTests.xcresult | tee FirebaseSwiftUIExampleTests.log | xcpretty --test --color --simple
             
@@ -170,16 +176,21 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - name: Select Xcode version
-        run: sudo xcode-select -switch /Applications/Xcode_26.0.1.app/Contents/Developer
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90
+        with:
+          xcode-version: ${{ env.XCODE_VERSION }}
         
+      - name: Prepare iOS Simulator
+        id: prepare-simulator
+        run: ./.github/workflows/scripts/prepare-ios-simulator.sh
+          
       - name: Build for UI Tests
         run: |
           cd ./e2eTest/FirebaseSwiftUIExample
           set -o pipefail
           xcodebuild build-for-testing \
             -scheme FirebaseSwiftUIExampleUITests \
-            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
             -enableCodeCoverage YES | xcpretty --color --simple
             
       - name: Run UI Tests
@@ -188,7 +199,7 @@ jobs:
           set -o pipefail
           xcodebuild test-without-building \
             -scheme FirebaseSwiftUIExampleUITests \
-            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
             -parallel-testing-enabled NO \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleUITests.xcresult | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple

@@ -73,6 +73,10 @@ extension AuthPickerView: View {
           error: $error,
           okButtonLabel: authService.string.okButtonLabel
         )
+        .sheet(item: $authService.legacySignInRecovery) { _ in
+          LegacySignInRecoveryView()
+            .environment(authService)
+        }
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
         // Apply account conflict handling at NavigationStack level
         .accountConflictHandler()

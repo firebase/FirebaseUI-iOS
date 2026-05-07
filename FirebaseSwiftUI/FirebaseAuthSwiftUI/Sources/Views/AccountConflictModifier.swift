@@ -74,7 +74,16 @@ struct AccountConflictModifier: ViewModifier {
     } else {
       // Other conflicts: store credential for potential linking after sign-in
       pendingCredentialForLinking = conflict.credential
-      // Error modal will show for user to see and handle
+      Task {
+        let handled = await authService.tryPresentLegacySignInRecovery(
+          email: conflict.email,
+          attemptedProviderId: conflict.credential.provider
+        )
+
+        if !handled {
+          reportError?(AuthServiceError.accountConflict(conflict))
+        }
+      }
     }
   }
 

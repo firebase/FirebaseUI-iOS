@@ -56,23 +56,7 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Sign in first to access MFA management
     try signInToApp(app: app, email: email)
 
-    // Check MFA management button exists
-    let mfaManagementButton = app.buttons["mfa-management-button"]
-    XCTAssertTrue(
-      mfaManagementButton.waitForExistence(timeout: 5),
-      "MFA management button should exist"
-    )
-    XCTAssertTrue(mfaManagementButton.isEnabled, "MFA management button should be enabled")
-
-    // Tap the button
-    mfaManagementButton.tap()
-
-    // Verify we navigated to MFA management view
-    let managementTitle = app.staticTexts["Two-Factor Authentication"]
-    XCTAssertTrue(
-      managementTitle.waitForExistence(timeout: 5),
-      "Should navigate to MFA management view"
-    )
+    try navigateToMFAManagement(app: app)
   }
 
   @MainActor
@@ -87,16 +71,16 @@ final class MFAEnrollmentUITests: XCTestCase {
 
     // Sign in and navigate to MFA management
     try signInToApp(app: app, email: email)
-    app.buttons["mfa-management-button"].tap()
+    try navigateToMFAManagement(app: app)
 
     // Tap setup MFA button (for users with no enrolled factors)
     let setupButton = app.buttons["setup-mfa-button"]
-    if setupButton.waitForExistence(timeout: 3) {
+    if setupButton.waitForExistence(timeout: 10) {
       setupButton.tap()
     } else {
       // If factors are already enrolled, tap add another method
       let addMethodButton = app.buttons["add-mfa-method-button"]
-      XCTAssertTrue(addMethodButton.waitForExistence(timeout: 3), "Add method button should exist")
+      XCTAssertTrue(addMethodButton.waitForExistence(timeout: 10), "Add method button should exist")
       addMethodButton.tap()
     }
 
@@ -228,14 +212,11 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Generate unique phone number using timestamp to avoid conflicts between tests
     let uniqueId = Int(Date().timeIntervalSince1970 * 1000) % 1_000_000
     let phoneNumberWithoutDialCode = "7\(String(format: "%09d", uniqueId))"
-    UIPasteboard.general.string = phoneNumberWithoutDialCode
-    phoneField.tap()
-    phoneField.press(forDuration: 1.2)
-    app.menuItems["Paste"].tap()
+    try enterText(phoneNumberWithoutDialCode, into: phoneField, app: app)
 
     let displayNameField = app.textFields["display-name-field"]
     XCTAssertTrue(displayNameField.waitForExistence(timeout: 10))
-    try pasteIntoField(displayNameField, text: "test user", app: app)
+    try enterText("test user", into: displayNameField, app: app)
 
     let sendCodeButton = app.buttons["send-sms-button"]
     XCTAssertTrue(sendCodeButton.waitForExistence(timeout: 10))
@@ -422,18 +403,21 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Fill email field
     let emailField = app.textFields["email-field"]
     XCTAssertTrue(emailField.waitForExistence(timeout: 10), "Email field should exist")
-    // Workaround for updating SecureFields with ConnectHardwareKeyboard enabled
-    try pasteIntoField(emailField, text: email, app: app)
+    try enterText(email, into: emailField, app: app)
 
     // Fill password field
     let passwordField = app.secureTextFields["password-field"]
     XCTAssertTrue(passwordField.exists, "Password field should exist")
-    try pasteIntoField(passwordField, text: password, app: app)
+    try enterText(password, into: passwordField, app: app)
 
     // Create the user (sign up)
     let signUpButton = app
       .buttons["sign-in-button"] // This button changes context after switch-auth-flow
     XCTAssertTrue(signUpButton.exists, "Sign-up button should exist")
+    XCTAssertTrue(
+      waitForElementToBecomeEnabled(signUpButton, timeout: 5),
+      "Sign-up button should become enabled after entering credentials"
+    )
     signUpButton.tap()
 
     let notNowButton = app.scrollViews.containing(.button, identifier: "Not Now").firstMatch
@@ -442,33 +426,51 @@ final class MFAEnrollmentUITests: XCTestCase {
     }
 
     // Wait for signed-in state
-    // Wait for signed-in state
     let signedInText = app.staticTexts["signed-in-text"]
     XCTAssertTrue(
       signedInText.waitForExistence(timeout: 30),
       "SignedInView should be visible after login"
     )
+    dismissAlert(app: app)
     XCTAssertTrue(signedInText.exists, "SignedInView should be visible after login")
   }
 
   @MainActor
+  private func navigateToMFAManagement(app: XCUIApplication) throws {
+    dismissAlert(app: app)
+
+    let mfaManagementButton = app.buttons["mfa-management-button"]
+    XCTAssertTrue(
+      mfaManagementButton.waitForExistence(timeout: 10),
+      "MFA management button should exist"
+    )
+    XCTAssertTrue(mfaManagementButton.isEnabled, "MFA management button should be enabled")
+    mfaManagementButton.tap()
+
+    let managementTitle = app.staticTexts["Two-Factor Authentication"]
+    XCTAssertTrue(
+      managementTitle.waitForExistence(timeout: 10),
+      "Should navigate to MFA management view"
+    )
+  }
+
+  @MainActor
   private func navigateToMFAEnrollment(app: XCUIApplication) throws {
-    // Navigate to MFA management
-    app.buttons["mfa-management-button"].tap()
+    try navigateToMFAManagement(app: app)
 
     // Navigate to MFA enrollment
     let setupButton = app.buttons["setup-mfa-button"]
-    if setupButton.waitForExistence(timeout: 3) {
+    if setupButton.waitForExistence(timeout: 10) {
       setupButton.tap()
     } else {
       let addMethodButton = app.buttons["add-mfa-method-button"]
-      XCTAssertTrue(addMethodButton.waitForExistence(timeout: 3), "Add method button should exist")
+      XCTAssertTrue(addMethodButton.waitForExistence(timeout: 10), "Add method button should exist")
       addMethodButton.tap()
     }
 
     // Verify we're in MFA enrollment view
     let enrollmentTitle = app.staticTexts["Set Up Two-Factor Authentication"]
-    XCTAssertTrue(enrollmentTitle.waitForExistence(timeout: 5), "Should be in MFA enrollment view")
+    XCTAssertTrue(enrollmentTitle.waitForExistence(timeout: 10), "Should be in MFA enrollment view")
   }
 }
 
@@ -486,49 +488,51 @@ struct VerificationCode: Codable {
 /// - Returns: The verification code as a String
 /// - Throws: Error if unable to retrieve codes
 private func getLastSmsCode(specificPhone: String? = nil) async throws -> String {
-  let getSmsCodesUrl =
-    "http://127.0.0.1:9099/emulator/v1/projects/flutterfire-e2e-tests/verificationCodes"
+  do {
+    for projectID in authEmulatorCandidateProjectIDs() {
+      let getSmsCodesUrl =
+        "http://127.0.0.1:9099/emulator/v1/projects/\(projectID)/verificationCodes"
 
-  guard let url = URL(string: getSmsCodesUrl) else {
+      guard let url = URL(string: getSmsCodesUrl) else {
+        continue
+      }
+
+      guard let (data, _) = try? await URLSession.shared.data(from: url) else {
+        continue
+      }
+
+      let decoder = JSONDecoder()
+      guard let codesResponse = try? decoder.decode(VerificationCodesResponse.self, from: data) else {
+        continue
+      }
+
+      guard let codes = codesResponse.verificationCodes, !codes.isEmpty else {
+        continue
+      }
+
+      if let specificPhone = specificPhone {
+        // Search backwards through codes for the specific phone number
+        for code in codes.reversed() {
+          if code.phoneNumber == specificPhone {
+            return code.code
+          }
+        }
+      } else if let lastCode = codes.last {
+        return lastCode.code
+      }
+    }
+
+    let description = if let specificPhone {
+      "No SMS verification code found for phone number: \(specificPhone)"
+    } else {
+      "No SMS verification codes found in emulator"
+    }
+
     throw NSError(
       domain: "getLastSmsCode",
       code: -1,
-      userInfo: [NSLocalizedDescriptionKey: "Failed to create URL for SMS codes endpoint"]
+      userInfo: [NSLocalizedDescriptionKey: description]
     )
-  }
-
-  do {
-    let (data, _) = try await URLSession.shared.data(from: url)
-
-    let decoder = JSONDecoder()
-    let codesResponse = try decoder.decode(VerificationCodesResponse.self, from: data)
-
-    guard let codes = codesResponse.verificationCodes, !codes.isEmpty else {
-      throw NSError(
-        domain: "getLastSmsCode",
-        code: -1,
-        userInfo: [NSLocalizedDescriptionKey: "No SMS verification codes found in emulator"]
-      )
-    }
-
-    if let specificPhone = specificPhone {
-      // Search backwards through codes for the specific phone number
-      for code in codes.reversed() {
-        if code.phoneNumber == specificPhone {
-          return code.code
-        }
-      }
-      throw NSError(
-        domain: "getLastSmsCode",
-        code: -1,
-        userInfo: [
-          NSLocalizedDescriptionKey: "No SMS verification code found for phone number: \(specificPhone)",
-        ]
-      )
-    } else {
-      // Return the last code in the array
-      return codes.last!.code
-    }
   } catch let error as DecodingError {
     throw NSError(
       domain: "getLastSmsCode",

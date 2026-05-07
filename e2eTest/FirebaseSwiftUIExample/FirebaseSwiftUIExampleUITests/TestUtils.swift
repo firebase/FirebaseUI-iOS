@@ -12,11 +12,19 @@ func createEmail() -> String {
 // MARK: - App Configuration
 
 /// Creates and configures an XCUIApplication with default test launch arguments
-@MainActor func createTestApp(mfaEnabled: Bool = false) -> XCUIApplication {
+@MainActor func createTestApp(mfaEnabled: Bool = false,
+                              legacyFetchSignInEnabled: Bool = false,
+                              legacyRecoveryPreviewEnabled: Bool = false) -> XCUIApplication {
   let app = XCUIApplication()
   app.launchArguments.append("--test-view-enabled")
   if mfaEnabled {
     app.launchArguments.append("--mfa-enabled")
+  }
+  if legacyFetchSignInEnabled {
+    app.launchArguments.append("--legacy-fetch-sign-in-enabled")
+  }
+  if legacyRecoveryPreviewEnabled {
+    app.launchArguments.append("--legacy-sign-in-recovery-preview")
   }
   return app
 }
@@ -24,33 +32,44 @@ func createEmail() -> String {
 // MARK: - Alert Handling
 
 @MainActor func dismissAlert(app: XCUIApplication) {
-  if app.scrollViews.otherElements.buttons["Not Now"].waitForExistence(timeout: 2) {
-    app.scrollViews.otherElements.buttons["Not Now"].tap()
+  let notNowButton = app.buttons["Not Now"].firstMatch
+  if notNowButton.waitForExistence(timeout: 5) {
+    notNowButton.tap()
   }
 }
 
 // MARK: - Text Input Helpers
 
-/// Pastes text into a text field using the system paste menu
-/// - Parameters:
-///   - field: The XCUIElement representing the text field
-///   - text: The text to paste
-///   - app: The XCUIApplication instance
-@MainActor func pasteIntoField(_ field: XCUIElement, text: String, app: XCUIApplication) throws {
-  UIPasteboard.general.string = text
+@MainActor private func waitForFieldValue(_ field: XCUIElement,
+                                          expectedText: String,
+                                          timeout: TimeInterval = 2) -> Bool {
+  let deadline = Date().addingTimeInterval(timeout)
+
+  while Date() < deadline {
+    if (field.value as? String) == expectedText {
+      return true
+    }
+    RunLoop.current.run(until: Date().addingTimeInterval(0.1))
+  }
+
+  return (field.value as? String) == expectedText
+}
+
+@MainActor private func showPasteMenu(for field: XCUIElement,
+                                      text: String,
+                                      app: XCUIApplication) throws -> XCUIElement {
   field.tap()
 
-  // Give field time to become first responder
+  // Give field time to become first responder.
   usleep(200_000) // 0.2 seconds
 
-  // Press and hold to bring up paste menu
+  // Press and hold to bring up paste menu.
   field.press(forDuration: 1.5)
 
   let pasteMenuItem = app.menuItems["Paste"]
 
-  // Wait for paste menu to appear
+  // Fallback to double-tap if the context menu did not appear.
   if !pasteMenuItem.waitForExistence(timeout: 3) {
-    // Fallback: try double tap approach
     field.doubleTap()
     usleep(300_000) // 0.3 seconds
 
@@ -65,7 +84,72 @@ func createEmail() -> String {
     }
   }
 
+  return pasteMenuItem
+}
+
+@MainActor private func typeIntoField(_ field: XCUIElement,
+                                      text: String) throws {
+  field.tap()
+  field.typeText(text)
+
+  guard waitForFieldValue(field, expectedText: text) else {
+    throw NSError(
+      domain: "TestError",
+      code: 2,
+      userInfo: [
+        NSLocalizedDescriptionKey: "Failed to type expected text into field. Text was: \(text)",
+      ]
+    )
+  }
+}
+
+@MainActor private func pasteIntoSecureField(_ field: XCUIElement,
+                                             text: String,
+                                             app: XCUIApplication) throws {
+  let originalValue = field.value as? String
+  UIPasteboard.general.string = text
+  let pasteMenuItem = try showPasteMenu(for: field, text: text, app: app)
   pasteMenuItem.tap()
+  usleep(200_000) // 0.2 seconds
+  UIPasteboard.general.string = nil
+
+  guard (field.value as? String) != originalValue else {
+    throw NSError(
+      domain: "TestError",
+      code: 3,
+      userInfo: [
+        NSLocalizedDescriptionKey: "Failed to paste expected text into secure field. Text was: \(text)",
+      ]
+    )
+  }
+}
+
+/// Enters text into a UI test field.
+/// - Parameters:
+///   - field: The XCUIElement representing the text field
+///   - text: The text to enter
+///   - app: The XCUIApplication instance
+@MainActor func enterText(_ text: String, into field: XCUIElement, app: XCUIApplication) throws {
+  switch field.elementType {
+  case .secureTextField:
+    try pasteIntoSecureField(field, text: text, app: app)
+  default:
+    try typeIntoField(field, text: text)
+  }
+}
+
+@MainActor func waitForElementToBecomeEnabled(_ element: XCUIElement,
+                                              timeout: TimeInterval = 5) -> Bool {
+  let deadline = Date().addingTimeInterval(timeout)
+
+  while Date() < deadline {
+    if element.isEnabled {
+      return true
+    }
+    RunLoop.current.run(until: Date().addingTimeInterval(0.1))
+  }
+
+  return element.isEnabled
 }
 
 // MARK: - User Creation
@@ -115,6 +199,48 @@ func createEmail() -> String {
 
 // MARK: - Email Verification
 
+private let authEmulatorProjectIDs = [
+  "flutterfire-e2e-tests",
+]
+
+private func projectIDFromIDToken(_ idToken: String) -> String? {
+  let segments = idToken.split(separator: ".")
+  guard segments.count >= 2 else { return nil }
+
+  var payload = String(segments[1])
+    .replacingOccurrences(of: "-", with: "+")
+    .replacingOccurrences(of: "_", with: "/")
+
+  let paddingLength = (4 - payload.count % 4) % 4
+  payload += String(repeating: "=", count: paddingLength)
+
+  guard let payloadData = Data(base64Encoded: payload),
+        let json = try? JSONSerialization.jsonObject(with: payloadData) as? [String: Any]
+  else {
+    return nil
+  }
+
+  return json["aud"] as? String
+}
+
+func authEmulatorCandidateProjectIDs(preferredProjectID: String? = nil,
+                                     idToken: String? = nil) -> [String] {
+  var projectIDs: [String] = []
+
+  if let preferredProjectID, !preferredProjectID.isEmpty {
+    projectIDs.append(preferredProjectID)
+  }
+
+  if let idToken, let tokenProjectID = projectIDFromIDToken(idToken) {
+    projectIDs.append(tokenProjectID)
+  }
+
+  projectIDs.append(contentsOf: authEmulatorProjectIDs)
+
+  var seen = Set<String>()
+  return projectIDs.filter { seen.insert($0).inserted }
+}
+
 /// Verifies an email address in the emulator using the OOB code mechanism
 @MainActor func verifyEmailInEmulator(email: String,
                                       idToken: String,
@@ -157,33 +283,53 @@ func createEmail() -> String {
   }
 
   // Step 2: Fetch OOB codes from emulator with retry logic
-  let oobURL = URL(string: "\(base)/emulator/v1/projects/\(projectID)/oobCodes")!
+  let candidateProjectIDs = authEmulatorCandidateProjectIDs(
+    preferredProjectID: projectID,
+    idToken: idToken
+  )
 
   var codeItem: OobItem?
   var attempts = 0
   let maxAttempts = 5
+  var availableCodesByProject = ""
 
   while codeItem == nil, attempts < maxAttempts {
-    let (oobData, oobResp) = try await URLSession.shared.data(from: oobURL)
-    guard (oobResp as? HTTPURLResponse)?.statusCode == 200 else {
-      throw NSError(domain: "EmulatorError", code: 2,
-                    userInfo: [NSLocalizedDescriptionKey: "Failed to fetch OOB codes"])
+    var availableCodes: [String] = []
+
+    for candidateProjectID in candidateProjectIDs {
+      let oobURL = URL(string: "\(base)/emulator/v1/projects/\(candidateProjectID)/oobCodes")!
+      guard let (oobData, oobResp) = try? await URLSession.shared.data(from: oobURL),
+            (oobResp as? HTTPURLResponse)?.statusCode == 200 else {
+        continue
+      }
+
+      guard let envelope = try? JSONDecoder().decode(OobEnvelope.self, from: oobData) else {
+        continue
+      }
+
+      let iso = ISO8601DateFormatter()
+      codeItem = envelope.oobCodes
+        .filter {
+          $0.email.caseInsensitiveCompare(email) == .orderedSame && $0.requestType == "VERIFY_EMAIL"
+        }
+        .sorted {
+          let d0 = $0.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
+          let d1 = $1.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
+          return d0 > d1
+        }
+        .first
+
+      if codeItem != nil {
+        break
+      }
+
+      let descriptions = envelope.oobCodes.map {
+        "[\(candidateProjectID)] Email: \($0.email), Type: \($0.requestType)"
+      }
+      availableCodes.append(contentsOf: descriptions)
     }
 
-    let envelope = try JSONDecoder().decode(OobEnvelope.self, from: oobData)
-
-    // Step 3: Find most recent VERIFY_EMAIL code for this email
-    let iso = ISO8601DateFormatter()
-    codeItem = envelope.oobCodes
-      .filter {
-        $0.email.caseInsensitiveCompare(email) == .orderedSame && $0.requestType == "VERIFY_EMAIL"
-      }
-      .sorted {
-        let d0 = $0.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
-        let d1 = $1.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
-        return d0 > d1
-      }
-      .first
+    availableCodesByProject = availableCodes.joined(separator: "; ")
 
     if codeItem == nil {
       attempts += 1
@@ -191,12 +337,9 @@ func createEmail() -> String {
         // Wait before retrying
         try await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
       } else {
-        // Log available codes for debugging
-        let availableCodes = envelope.oobCodes.map { "Email: \($0.email), Type: \($0.requestType)" }
-          .joined(separator: "; ")
         throw NSError(domain: "EmulatorError", code: 3,
                       userInfo: [
-                        NSLocalizedDescriptionKey: "No VERIFY_EMAIL OOB code found for \(email) after \(maxAttempts) attempts. Available codes: \(availableCodes)",
+                        NSLocalizedDescriptionKey: "No VERIFY_EMAIL OOB code found for \(email) after \(maxAttempts) attempts. Available codes: \(availableCodesByProject)",
                       ])
       }
     }

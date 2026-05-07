@@ -36,6 +36,11 @@ struct ErrorAlertModifier: ViewModifier {
       return false
     }
 
+    if let authError = error.underlyingError as? AuthServiceError,
+       case .legacySignInRecoveryPresented = authError {
+      return false
+    }
+
     return true
   }
 

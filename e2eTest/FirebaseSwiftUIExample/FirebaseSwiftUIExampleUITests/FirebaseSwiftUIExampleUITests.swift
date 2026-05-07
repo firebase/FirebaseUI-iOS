@@ -139,13 +139,11 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
     let emailField = app.textFields["email-field"]
     XCTAssertTrue(emailField.waitForExistence(timeout: 6), "Email field should exist")
-    emailField.tap()
-    emailField.typeText(email)
+    try enterText(email, into: emailField, app: app)
 
     let passwordField = app.secureTextFields["password-field"]
     XCTAssertTrue(passwordField.exists, "Password field should exist")
-    passwordField.tap()
-    passwordField.typeText(password)
+    try enterText(password, into: passwordField, app: app)
 
     let signInButton = app.buttons["sign-in-button"]
     XCTAssertTrue(signInButton.exists, "Sign-In button should exist")
@@ -233,27 +231,24 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     let emailField = app.textFields["email-field"]
 
     XCTAssertTrue(emailField.waitForExistence(timeout: 2), "Email field should exist")
-    // Workaround for updating SecureFields with ConnectHardwareKeyboard enabled
-    UIPasteboard.general.string = email
-    emailField.press(forDuration: 1.2)
-    app.menuItems["Paste"].tap()
+    try enterText(email, into: emailField, app: app)
 
     let passwordField = app.secureTextFields["password-field"]
     XCTAssertTrue(passwordField.exists, "Password field should exist")
-    UIPasteboard.general.string = password
-    passwordField.press(forDuration: 1.2)
-    app.menuItems["Paste"].tap()
+    try enterText(password, into: passwordField, app: app)
 
     let confirmPasswordField = app.secureTextFields["confirm-password-field"]
     XCTAssertTrue(confirmPasswordField.exists, "Confirm password field should exist")
-    UIPasteboard.general.string = password
-    confirmPasswordField.press(forDuration: 1.2)
-    app.menuItems["Paste"].tap()
+    try enterText(password, into: confirmPasswordField, app: app)
 
     // Create the user (sign up)
     let signUpButton = app
       .buttons["sign-in-button"] // This button changes context after switch-auth-flow
     XCTAssertTrue(signUpButton.exists, "Sign-Up button should exist")
+    XCTAssertTrue(
+      waitForElementToBecomeEnabled(signUpButton, timeout: 5),
+      "Sign-up button should become enabled after entering credentials"
+    )
     signUpButton.tap()
 
     // Wait for user creation and signed-in view to appear
