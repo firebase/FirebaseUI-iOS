@@ -28,6 +28,7 @@ public struct AuthConfiguration {
   public let shouldHideCancelButton: Bool
   public let interactiveDismissEnabled: Bool
   public let shouldAutoUpgradeAnonymousUsers: Bool
+  public let legacyFetchSignInWithEmail: Bool
   public let customStringsBundle: Bundle?
   public let tosUrl: URL?
   public let privacyPolicyUrl: URL?
@@ -46,6 +47,7 @@ public struct AuthConfiguration {
               shouldHideCancelButton: Bool = false,
               interactiveDismissEnabled: Bool = true,
               shouldAutoUpgradeAnonymousUsers: Bool = false,
+              legacyFetchSignInWithEmail: Bool = false,
               customStringsBundle: Bundle? = nil,
               tosUrl: URL? = nil,
               privacyPolicyUrl: URL? = nil,
@@ -59,6 +61,7 @@ public struct AuthConfiguration {
     self.shouldHideCancelButton = shouldHideCancelButton
     self.interactiveDismissEnabled = interactiveDismissEnabled
     self.shouldAutoUpgradeAnonymousUsers = shouldAutoUpgradeAnonymousUsers
+    self.legacyFetchSignInWithEmail = legacyFetchSignInWithEmail
     self.customStringsBundle = customStringsBundle
     self.languageCode = languageCode
     self.tosUrl = tosUrl

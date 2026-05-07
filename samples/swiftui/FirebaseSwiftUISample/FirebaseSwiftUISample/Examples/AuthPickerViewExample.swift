@@ -55,10 +55,5 @@ struct AuthPickerViewExample: View {
         }
       }
     }
-    .onChange(of: authService.authenticationState) { _, newValue in
-      if newValue != .authenticating {
-        authService.isPresented = newValue == .unauthenticated
-      }
-    }
   }
 }
