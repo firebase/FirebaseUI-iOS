@@ -60,6 +60,36 @@ public enum SignInOutcome: @unchecked Sendable {
   case signedIn(AuthDataResult?)
 }
 
+public struct LegacySignInOption: Identifiable, Equatable {
+  public let id: String
+  public let displayName: String
+
+  public init(id: String, displayName: String) {
+    self.id = id
+    self.displayName = displayName
+  }
+}
+
+public struct LegacySignInRecoveryContext: Identifiable, Equatable {
+  public let id = UUID()
+  public let email: String
+  public let options: [LegacySignInOption]
+  public let unavailableProviders: [String]
+
+  public init(email: String,
+              options: [LegacySignInOption],
+              unavailableProviders: [String] = []) {
+    self.email = email
+    self.options = options
+    self.unavailableProviders = unavailableProviders
+  }
+
+  public static func == (lhs: LegacySignInRecoveryContext,
+                         rhs: LegacySignInRecoveryContext) -> Bool {
+    lhs.id == rhs.id
+  }
+}
+
 @MainActor
 private final class AuthListenerManager {
   private var authStateHandle: AuthStateDidChangeListenerHandle?
@@ -131,6 +161,7 @@ public final class AuthService {
   private var listenerManager: AuthListenerManager?
   private var emailLinkSignInCallback: (() -> Void)?
   private var providers: [AuthProviderUI] = []
+  private let emailLinkSignInMethod = "emailLink"
 
   public let configuration: AuthConfiguration
   public let auth: Auth
@@ -141,6 +172,8 @@ public final class AuthService {
   public var authenticationFlow: AuthenticationFlow = .signIn
   public var emailPasswordSignInEnabled = false
   public var emailLinkSignInEnabled = false
+  public var legacySignInRecovery: LegacySignInRecoveryContext?
+  public var suggestedEmailAddress: String?
   public private(set) var navigator = Navigator()
 
   public var authView: AuthView? {
@@ -174,6 +207,18 @@ public final class AuthService {
     )
   }
 
+  public func renderLegacyRecoveryButtons(spacing: CGFloat = 16) -> AnyView {
+    AnyView(
+      VStack(spacing: spacing) {
+        if let recovery = legacySignInRecovery {
+          ForEach(recovery.options) { option in
+            self.legacyRecoveryButton(for: option, email: recovery.email)
+          }
+        }
+      }
+    )
+  }
+
   public func signIn(_ provider: CredentialAuthProviderSwift) async throws -> SignInOutcome {
     let credential = try await provider.createAuthCredential()
     let result = try await signIn(credentials: credential)
@@ -189,6 +234,8 @@ public final class AuthService {
     // Clear email link reauth state
     emailLinkReauth = nil
     isReauthenticating = false
+    legacySignInRecovery = nil
+    suggestedEmailAddress = nil
     updateAuthenticationState()
   }
 
@@ -354,7 +401,17 @@ public extension AuthService {
 
   func signIn(email: String, password: String) async throws -> SignInOutcome {
     let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-    return try await signIn(credentials: credential)
+    do {
+      return try await signIn(credentials: credential)
+    } catch {
+      if await tryPresentLegacySignInRecovery(
+        email: email,
+        attemptedProviderId: EmailAuthProviderID
+      ) {
+        throw AuthServiceError.legacySignInRecoveryPresented
+      }
+      throw error
+    }
   }
 
   func createUser(email email: String, password: String) async throws -> SignInOutcome {
@@ -854,6 +911,10 @@ private extension AuthService {
       (currentUser == nil || currentUser?.isAnonymous == true)
         ? .unauthenticated
         : .authenticated
+
+    if authenticationState == .authenticated {
+      legacySignInRecovery = nil
+    }
   }
 
   private var shouldHandleAnonymousUpgrade: Bool {
@@ -1010,12 +1071,166 @@ private extension AuthService {
       return "Email"
     case PhoneAuthProviderID:
       return "Phone"
+    case emailLinkSignInMethod:
+      return "Email Link"
     default:
       // Shouldn't reach here if provider is registered
       return providerId
     }
   }
 
+  private func normalizeLegacyOptionId(_ providerId: String) -> String {
+    switch providerId {
+    case PhoneAuthProviderID:
+      return "phone"
+    default:
+      return providerId
+    }
+  }
+
+  private func buildLegacySignInRecovery(email: String,
+                                         signInMethods: [String],
+                                         attemptedProviderId: String?) -> LegacySignInRecoveryContext? {
+    let attemptedOptionId = attemptedProviderId.map(normalizeLegacyOptionId)
+    var options: [LegacySignInOption] = []
+    var unavailableProviders: [String] = []
+
+    for method in signInMethods {
+      if let option = resolveLegacyOption(for: method) {
+        if !options.contains(where: { $0.id == option.id }) {
+          options.append(option)
+        }
+      } else {
+        unavailableProviders.append(getProviderDisplayName(method))
+      }
+    }
+
+    guard !options.isEmpty else {
+      return nil
+    }
+
+    if let attemptedOptionId,
+       options.count == 1,
+       options.first?.id == attemptedOptionId {
+      return nil
+    }
+
+    return LegacySignInRecoveryContext(
+      email: email,
+      options: options,
+      unavailableProviders: unavailableProviders
+    )
+  }
+
+  private func resolveLegacyOption(for signInMethod: String) -> LegacySignInOption? {
+    switch signInMethod {
+    case EmailAuthProviderID:
+      guard emailPasswordSignInEnabled else { return nil }
+      return LegacySignInOption(
+        id: EmailAuthProviderID,
+        displayName: string.legacyEmailPasswordOptionLabel
+      )
+    case emailLinkSignInMethod:
+      guard emailLinkSignInEnabled else { return nil }
+      return LegacySignInOption(
+        id: emailLinkSignInMethod,
+        displayName: string.legacyEmailLinkOptionLabel
+      )
+    default:
+      guard let provider = providers.first(where: { $0.id == normalizeLegacyOptionId(signInMethod) }) else {
+        return nil
+      }
+      return LegacySignInOption(id: provider.id, displayName: provider.displayName)
+    }
+  }
+}
+
+extension AuthService {
+  @discardableResult
+  func tryPresentLegacySignInRecovery(email: String?,
+                                      attemptedProviderId: String?) async -> Bool {
+    guard configuration.legacyFetchSignInWithEmail,
+          let email,
+          !email.isEmpty else {
+      return false
+    }
+
+    do {
+      let signInMethods = try await auth.fetchSignInMethods(forEmail: email)
+      guard let recovery = buildLegacySignInRecovery(
+        email: email,
+        signInMethods: signInMethods,
+        attemptedProviderId: attemptedProviderId
+      ) else {
+        return false
+      }
+      legacySignInRecovery = recovery
+      return true
+    } catch {
+      return false
+    }
+  }
+
+  func dismissLegacySignInRecovery() {
+    legacySignInRecovery = nil
+  }
+
+  func startLegacyRecovery(option: LegacySignInOption, email: String) {
+    suggestedEmailAddress = email
+    dismissLegacySignInRecovery()
+    authenticationFlow = .signIn
+
+    switch option.id {
+    case EmailAuthProviderID:
+      navigator.clear()
+    case emailLinkSignInMethod:
+      navigator.clear()
+      navigator.push(.emailLink)
+    case "phone":
+      navigator.clear()
+      navigator.push(.enterPhoneNumber)
+    default:
+      break
+    }
+  }
+
+  @ViewBuilder
+  private func legacyRecoveryButton(for option: LegacySignInOption,
+                                    email: String) -> some View {
+    switch option.id {
+    case EmailAuthProviderID:
+      AuthProviderButton(
+        label: option.displayName,
+        style: .email,
+        accessibilityId: "legacy-sign-in-with-email-button"
+      ) {
+        self.startLegacyRecovery(option: option, email: email)
+      }
+    case emailLinkSignInMethod:
+      AuthProviderButton(
+        label: option.displayName,
+        style: .email,
+        accessibilityId: "legacy-sign-in-with-email-link-button"
+      ) {
+        self.startLegacyRecovery(option: option, email: email)
+      }
+    case "phone":
+      AuthProviderButton(
+        label: option.displayName,
+        style: .phone,
+        accessibilityId: "legacy-sign-in-with-phone-button"
+      ) {
+        self.startLegacyRecovery(option: option, email: email)
+      }
+    default:
+      if let provider = providers.first(where: { $0.id == option.id }) {
+        provider.authButton()
+      }
+    }
+  }
+}
+
+private extension AuthService {
   // MARK: - Account Conflict Helper Methods
 
   private func determineConflictType(from error: NSError) -> AccountConflictType? {

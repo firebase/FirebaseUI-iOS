@@ -38,6 +38,26 @@ struct FirebaseSwiftUIExampleTests {
     return AuthService(configuration: resolvedConfiguration)
   }
 
+  @MainActor
+  func prepareLegacyRecoveryService(legacyFetchSignInWithEmail: Bool,
+                                    includeEmailLinkProvider: Bool) async throws -> AuthService {
+    configureFirebaseIfNeeded()
+    try await isEmulatorRunning()
+
+    let service = AuthService(
+      configuration: AuthConfiguration(
+        legacyFetchSignInWithEmail: legacyFetchSignInWithEmail
+      )
+    )
+      .withEmailSignIn()
+
+    if includeEmailLinkProvider {
+      _ = service.withEmailLinkSignIn()
+    }
+
+    return service
+  }
+
   @Test
   @MainActor
   func defaultAuthConfigurationInjection() async throws {
@@ -49,6 +69,7 @@ struct FirebaseSwiftUIExampleTests {
     #expect(actual.shouldHideCancelButton == false)
     #expect(actual.interactiveDismissEnabled == true)
     #expect(actual.shouldAutoUpgradeAnonymousUsers == false)
+    #expect(actual.legacyFetchSignInWithEmail == false)
     #expect(actual.customStringsBundle == nil)
     #expect(actual.tosUrl == nil)
     #expect(actual.privacyPolicyUrl == nil)
@@ -73,6 +94,7 @@ struct FirebaseSwiftUIExampleTests {
       shouldHideCancelButton: true,
       interactiveDismissEnabled: false,
       shouldAutoUpgradeAnonymousUsers: true,
+      legacyFetchSignInWithEmail: true,
       customStringsBundle: .main,
       tosUrl: URL(string: "https://example.com/tos"),
       privacyPolicyUrl: URL(string: "https://example.com/privacy"),
@@ -86,6 +108,7 @@ struct FirebaseSwiftUIExampleTests {
     #expect(actual.shouldHideCancelButton == true)
     #expect(actual.interactiveDismissEnabled == false)
     #expect(actual.shouldAutoUpgradeAnonymousUsers == true)
+    #expect(actual.legacyFetchSignInWithEmail == true)
     #expect(actual.customStringsBundle === Bundle.main)
     #expect(actual.tosUrl == URL(string: "https://example.com/tos"))
     #expect(actual.privacyPolicyUrl == URL(string: "https://example.com/privacy"))
@@ -93,6 +116,88 @@ struct FirebaseSwiftUIExampleTests {
     // Optional action code settings checks
     #expect(actual.emailLinkSignInActionCodeSettings?.url == emailSettings.url)
     #expect(actual.verifyEmailActionCodeSettings?.url == verifySettings.url)
+  }
+
+  @Test
+  @MainActor
+  func legacySignInRecoveryResolvesEmailLinkProvider() async throws {
+    let email = createEmail()
+    try await clearAuthEmulatorState()
+    try await createEmailLinkOnlyUser(email: email)
+
+    let service = try await prepareLegacyRecoveryService(
+      legacyFetchSignInWithEmail: true,
+      includeEmailLinkProvider: true
+    )
+
+    do {
+      try await service.signIn(email: email, password: kPassword)
+      Issue.record("Expected email/password sign-in to fail for an email-link account")
+    } catch {
+      if case .legacySignInRecoveryPresented = error as? AuthServiceError {
+        // Expected path.
+      } else {
+        Issue.record("Expected legacy recovery error, got: \(error)")
+      }
+    }
+
+    let recovery = service.legacySignInRecovery
+    #expect(recovery?.email == email)
+    #expect(recovery?.options.contains(where: { $0.id == "emailLink" }) == true)
+  }
+
+  @Test
+  @MainActor
+  func legacySignInRecoveryFallsBackWhenProviderNotEnabled() async throws {
+    let email = createEmail()
+    try await clearAuthEmulatorState()
+    try await createEmailLinkOnlyUser(email: email)
+
+    let service = try await prepareLegacyRecoveryService(
+      legacyFetchSignInWithEmail: true,
+      includeEmailLinkProvider: false
+    )
+
+    do {
+      try await service.signIn(email: email, password: kPassword)
+      Issue.record("Expected email/password sign-in to fail for an email-link account")
+    } catch {
+      #expect((error as? AuthServiceError) == nil || {
+        if case .legacySignInRecoveryPresented = error as? AuthServiceError {
+          return false
+        }
+        return true
+      }())
+    }
+
+    #expect(service.legacySignInRecovery == nil)
+  }
+
+  @Test
+  @MainActor
+  func legacySignInRecoveryDisabledPreservesExistingFailure() async throws {
+    let email = createEmail()
+    try await clearAuthEmulatorState()
+    try await createEmailLinkOnlyUser(email: email)
+
+    let service = try await prepareLegacyRecoveryService(
+      legacyFetchSignInWithEmail: false,
+      includeEmailLinkProvider: true
+    )
+
+    do {
+      try await service.signIn(email: email, password: kPassword)
+      Issue.record("Expected email/password sign-in to fail for an email-link account")
+    } catch {
+      #expect((error as? AuthServiceError) == nil || {
+        if case .legacySignInRecoveryPresented = error as? AuthServiceError {
+          return false
+        }
+        return true
+      }())
+    }
+
+    #expect(service.legacySignInRecovery == nil)
   }
 
   @Test

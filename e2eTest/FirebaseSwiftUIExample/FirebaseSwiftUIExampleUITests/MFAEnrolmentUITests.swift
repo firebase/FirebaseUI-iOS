@@ -212,14 +212,11 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Generate unique phone number using timestamp to avoid conflicts between tests
     let uniqueId = Int(Date().timeIntervalSince1970 * 1000) % 1_000_000
     let phoneNumberWithoutDialCode = "7\(String(format: "%09d", uniqueId))"
-    UIPasteboard.general.string = phoneNumberWithoutDialCode
-    phoneField.tap()
-    phoneField.press(forDuration: 1.2)
-    app.menuItems["Paste"].tap()
+    try enterText(phoneNumberWithoutDialCode, into: phoneField, app: app)
 
     let displayNameField = app.textFields["display-name-field"]
     XCTAssertTrue(displayNameField.waitForExistence(timeout: 10))
-    try pasteIntoField(displayNameField, text: "test user", app: app)
+    try enterText("test user", into: displayNameField, app: app)
 
     let sendCodeButton = app.buttons["send-sms-button"]
     XCTAssertTrue(sendCodeButton.waitForExistence(timeout: 10))
@@ -406,18 +403,21 @@ final class MFAEnrollmentUITests: XCTestCase {
     // Fill email field
     let emailField = app.textFields["email-field"]
     XCTAssertTrue(emailField.waitForExistence(timeout: 10), "Email field should exist")
-    // Workaround for updating SecureFields with ConnectHardwareKeyboard enabled
-    try pasteIntoField(emailField, text: email, app: app)
+    try enterText(email, into: emailField, app: app)
 
     // Fill password field
     let passwordField = app.secureTextFields["password-field"]
     XCTAssertTrue(passwordField.exists, "Password field should exist")
-    try pasteIntoField(passwordField, text: password, app: app)
+    try enterText(password, into: passwordField, app: app)
 
     // Create the user (sign up)
     let signUpButton = app
       .buttons["sign-in-button"] // This button changes context after switch-auth-flow
     XCTAssertTrue(signUpButton.exists, "Sign-up button should exist")
+    XCTAssertTrue(
+      waitForElementToBecomeEnabled(signUpButton, timeout: 5),
+      "Sign-up button should become enabled after entering credentials"
+    )
     signUpButton.tap()
 
     let notNowButton = app.scrollViews.containing(.button, identifier: "Not Now").firstMatch
@@ -425,7 +425,6 @@ final class MFAEnrollmentUITests: XCTestCase {
       notNowButton.tap()
     }
 
-    // Wait for signed-in state
     // Wait for signed-in state
     let signedInText = app.staticTexts["signed-in-text"]
     XCTAssertTrue(

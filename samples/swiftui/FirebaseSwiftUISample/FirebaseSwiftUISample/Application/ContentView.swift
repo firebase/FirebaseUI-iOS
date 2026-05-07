@@ -34,6 +34,7 @@ struct ContentView: View {
     actionCodeSettings.linkDomain = "flutterfire-e2e-tests.firebaseapp.com"
     let configuration = AuthConfiguration(
       shouldAutoUpgradeAnonymousUsers: true,
+      legacyFetchSignInWithEmail: true,
       customStringsBundle: .main,
       tosUrl: URL(string: "https://example.com/tos"),
       privacyPolicyUrl: URL(string: "https://example.com/privacy"),
@@ -105,6 +106,30 @@ struct ContentView: View {
             Text("How to use with AuthService with a custom view")
             Text(
               "• Build custom authentication UI\n• Direct AuthService method calls\n• Full control over user experience"
+            )
+            .font(.caption)
+            .foregroundColor(.secondary)
+          }
+          .multilineTextAlignment(.leading)
+          .padding()
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .background {
+            RoundedRectangle(cornerRadius: 16)
+              .fill(Color(UIColor.secondarySystemBackground))
+          }
+        }
+        .tint(Color(.label))
+        NavigationLink {
+          UIKitEmbeddingExample()
+            .navigationTitle("Embedding in UIKit")
+        } label: {
+          VStack(alignment: .leading, spacing: 16) {
+            Text("UIKit embedding example")
+              .font(.headline)
+              .fontWeight(.bold)
+            Text("How to host FirebaseSwiftUI inside a UIKit view controller")
+            Text(
+              "• Inline authentication surface\n• UIHostingController inside UIKit\n• No auth sheet toggle required"
             )
             .font(.caption)
             .foregroundColor(.secondary)

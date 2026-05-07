@@ -297,6 +297,48 @@ public class StringUtils {
     return localizedString(for: "Cancel")
   }
 
+  /// Legacy sign-in recovery title
+  /// found in:
+  /// - LegacySignInRecoveryView
+  public var legacySignInRecoveryTitle: String {
+    return localizedString(for: "Use a previous sign-in method")
+  }
+
+  /// Legacy sign-in recovery message
+  /// found in:
+  /// - LegacySignInRecoveryView
+  public func legacySignInRecoveryMessage(email: String) -> String {
+    return String(
+      format: localizedString(
+        for: "You previously signed in with one of these methods for %@."
+      ),
+      email
+    )
+  }
+
+  /// Legacy sign-in recovery helper copy
+  /// found in:
+  /// - LegacySignInRecoveryView
+  public var legacySignInRecoveryUnavailableMessage: String {
+    return localizedString(
+      for: "Some previous sign-in methods are not enabled in this app."
+    )
+  }
+
+  /// Legacy sign-in recovery email/password option
+  /// found in:
+  /// - LegacySignInRecoveryView
+  public var legacyEmailPasswordOptionLabel: String {
+    return localizedString(for: "Continue with email and password")
+  }
+
+  /// Legacy sign-in recovery email link option
+  /// found in:
+  /// - LegacySignInRecoveryView
+  public var legacyEmailLinkOptionLabel: String {
+    return localizedString(for: "Continue with email link")
+  }
+
   /// Email provider
   /// found in:
   /// - AuthPickerView
