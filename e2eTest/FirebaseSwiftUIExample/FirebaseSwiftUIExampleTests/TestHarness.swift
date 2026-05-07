@@ -6,6 +6,7 @@
 //
 
 import FirebaseAuth
+import FirebaseAuthSwiftUI
 import FirebaseCore
 
 @MainActor
@@ -79,4 +80,97 @@ func waitForStateChange(timeout: TimeInterval = 10.0,
 
 enum TestError: Error {
   case timeout(String)
+}
+
+@MainActor
+func makeEmailLinkActionCodeSettings() -> ActionCodeSettings {
+  let actionCodeSettings = ActionCodeSettings()
+  actionCodeSettings.handleCodeInApp = true
+  actionCodeSettings.url = URL(string: "https://flutterfire-e2e-tests.firebaseapp.com")
+  actionCodeSettings.linkDomain = "flutterfire-e2e-tests.firebaseapp.com"
+  actionCodeSettings.setIOSBundleID("io.flutter.plugins.firebase.auth.example")
+  return actionCodeSettings
+}
+
+@MainActor
+func createEmailLinkOnlyUser(email: String) async throws {
+  configureFirebaseIfNeeded()
+  try await isEmulatorRunning()
+
+  let service = AuthService(
+    configuration: AuthConfiguration(
+      emailLinkSignInActionCodeSettings: makeEmailLinkActionCodeSettings()
+    )
+  )
+    .withEmailLinkSignIn()
+
+  service.emailLink = email
+  try await service.sendEmailSignInLink(email: email)
+  let signInLink = try await fetchEmailSignInLinkFromEmulator(email: email)
+  try await service.handleSignInLink(url: signInLink)
+  try await waitForStateChange {
+    service.currentUser?.email?.caseInsensitiveCompare(email) == .orderedSame
+  }
+  try await service.signOut()
+}
+
+@MainActor
+func fetchEmailSignInLinkFromEmulator(email: String,
+                                      projectID: String = "flutterfire-e2e-tests",
+                                      emulatorHost: String = "127.0.0.1:9099") async throws -> URL {
+  struct OobEnvelope: Decodable { let oobCodes: [OobItem] }
+  struct OobItem: Decodable {
+    let email: String
+    let oobLink: String?
+    let requestType: String
+    let creationTime: String?
+  }
+
+  let oobURL = URL(string: "http://\(emulatorHost)/emulator/v1/projects/\(projectID)/oobCodes")!
+  let iso = ISO8601DateFormatter()
+
+  var attempts = 0
+  let maxAttempts = 5
+
+  while attempts < maxAttempts {
+    let (oobData, oobResponse) = try await URLSession.shared.data(from: oobURL)
+    guard (oobResponse as? HTTPURLResponse)?.statusCode == 200 else {
+      throw NSError(
+        domain: "EmulatorError",
+        code: 10,
+        userInfo: [NSLocalizedDescriptionKey: "Failed to fetch OOB codes for email sign-in"]
+      )
+    }
+
+    let envelope = try JSONDecoder().decode(OobEnvelope.self, from: oobData)
+    let oobLink = envelope.oobCodes
+      .filter {
+        $0.email.caseInsensitiveCompare(email) == .orderedSame && $0.requestType == "EMAIL_SIGNIN"
+      }
+      .sorted {
+        let lhs = $0.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
+        let rhs = $1.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
+        return lhs > rhs
+      }
+      .compactMap(\.oobLink)
+      .first
+
+    if let oobLink {
+      var components = URLComponents(string: "https://example.com/")
+      components?.queryItems = [URLQueryItem(name: "link", value: oobLink)]
+
+      if let wrappedLink = components?.url {
+        return wrappedLink
+      }
+    }
+
+    attempts += 1
+    try await Task.sleep(nanoseconds: 500_000_000)
+  }
+
+  throw NSError(
+    domain: "EmulatorError",
+    code: 11,
+    userInfo: [NSLocalizedDescriptionKey: "No EMAIL_SIGNIN OOB link found for \(email)"]
+  )
 }

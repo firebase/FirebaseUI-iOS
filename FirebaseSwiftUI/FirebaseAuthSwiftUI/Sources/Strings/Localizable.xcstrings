@@ -47531,6 +47531,66 @@
         }
       }
     },
+    "Use a previous sign-in method" : {
+      "comment" : "Legacy sign-in recovery sheet title.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use a previous sign-in method"
+          }
+        }
+      }
+    },
+    "You previously signed in with one of these methods for %@." : {
+      "comment" : "Legacy sign-in recovery sheet message.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You previously signed in with one of these methods for %@."
+          }
+        }
+      }
+    },
+    "Some previous sign-in methods are not enabled in this app." : {
+      "comment" : "Legacy sign-in recovery helper copy when some providers are unavailable.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some previous sign-in methods are not enabled in this app."
+          }
+        }
+      }
+    },
+    "Continue with email and password" : {
+      "comment" : "Legacy sign-in recovery action for email/password.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue with email and password"
+          }
+        }
+      }
+    },
+    "Continue with email link" : {
+      "comment" : "Legacy sign-in recovery action for email link.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue with email link"
+          }
+        }
+      }
+    },
     "Your password has been successfully updated." : {
       "localizations" : {
         "bg" : {

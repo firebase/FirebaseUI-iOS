@@ -42,6 +42,12 @@ struct TestView: View {
     }
 
     let isMfaEnabled = ProcessInfo.processInfo.arguments.contains("--mfa-enabled")
+    let legacyFetchSignInEnabled = ProcessInfo.processInfo.arguments.contains(
+      "--legacy-fetch-sign-in-enabled"
+    )
+    let legacyRecoveryPreviewEnabled = ProcessInfo.processInfo.arguments.contains(
+      "--legacy-sign-in-recovery-preview"
+    )
 
     let actionCodeSettings = ActionCodeSettings()
     actionCodeSettings.handleCodeInApp = true
@@ -50,6 +56,7 @@ struct TestView: View {
     actionCodeSettings.linkDomain = "flutterfire-e2e-tests.firebaseapp.com"
     actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
     let configuration = AuthConfiguration(
+      legacyFetchSignInWithEmail: legacyFetchSignInEnabled,
       tosUrl: URL(string: "https://example.com/tos"),
       privacyPolicyUrl: URL(string: "https://example.com/privacy"),
       emailLinkSignInActionCodeSettings: actionCodeSettings,
@@ -75,6 +82,21 @@ struct TestView: View {
         .withFacebookSignIn()
         .withEmailSignIn()
         .withEmailLinkSignIn()
+    }
+    if legacyRecoveryPreviewEnabled {
+      authService.legacySignInRecovery = LegacySignInRecoveryContext(
+        email: "legacy@example.com",
+        options: [
+          LegacySignInOption(
+            id: EmailAuthProviderID,
+            displayName: authService.string.legacyEmailPasswordOptionLabel
+          ),
+          LegacySignInOption(
+            id: "emailLink",
+            displayName: authService.string.legacyEmailLinkOptionLabel
+          ),
+        ]
+      )
     }
     authService.isPresented = true
   }
