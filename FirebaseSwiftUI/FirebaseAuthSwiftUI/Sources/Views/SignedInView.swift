@@ -75,17 +75,19 @@ extension SignedInView: View {
       .frame(maxWidth: .infinity)
       .accessibilityIdentifier("update-password-button")
 
-      Button {
-        authService.navigator.push(.mfaManagement)
-      } label: {
-        Text(authService.string.manageTwoFactorAuthenticationLabel)
-          .padding(.vertical, 8)
-          .frame(maxWidth: .infinity)
+      if authService.configuration.mfaEnabled {
+        Button {
+          authService.navigator.push(.mfaManagement)
+        } label: {
+          Text(authService.string.manageTwoFactorAuthenticationLabel)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity)
+        .accessibilityIdentifier("mfa-management-button")
       }
-      .buttonStyle(.borderedProminent)
-      .padding([.top, .bottom], 8)
-      .frame(maxWidth: .infinity)
-      .accessibilityIdentifier("mfa-management-button")
 
       Button {
         showDeleteConfirmation = true
