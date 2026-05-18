@@ -137,6 +137,15 @@ Only add provider setup for providers the app actually uses.
 - `AuthPickerView` already handles default navigation, account conflict resolution, MFA flows, errors, and reauthentication for built-in default views. Avoid reimplementing those unless the user asks for custom views.
 - For custom views, sensitive operations such as account deletion, password updates, and MFA unenrollment can throw reauthentication errors that default views would otherwise handle.
 
+## Source References
+
+Use these when details are needed beyond this skill:
+
+- FirebaseUI SwiftUI docs: `https://github.com/firebase/FirebaseUI-iOS/blob/main/FirebaseSwiftUI/README.md`
+- FirebaseUI SwiftUI sample: `https://github.com/firebase/FirebaseUI-iOS/tree/main/samples/swiftui/FirebaseSwiftUISample`
+- Firebase iOS setup: `https://firebase.google.com/docs/ios/setup`
+- Firebase Auth provider setup: `https://firebase.google.com/docs/auth`
+
 ## Validation Checklist
 
 Before finishing, confirm:
