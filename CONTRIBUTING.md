@@ -33,6 +33,30 @@ All submissions, including submissions by project members, require review. We
 use Github pull requests for this purpose. We adhere to the
 [Google Objective-C style guide](https://google.github.io/styleguide/objcguide.xml).
 
+### Running SwiftUI Auth checks locally
+
+The SwiftUI Auth GitHub Actions workflow can be run locally with:
+
+```bash
+./swiftui-tests.sh
+```
+
+By default, this runs the package unit tests, integration tests, and UI tests.
+You can run individual checks with `--unit`, `--integration`, or `--ui`.
+Pass `--lint` to run `lint-swift.sh` before the selected tests.
+
+Examples:
+
+```bash
+./swiftui-tests.sh --unit
+./swiftui-tests.sh --integration --ui
+./swiftui-tests.sh --lint --all
+./swiftui-tests.sh --device "iPhone 17 Pro" --ui
+```
+
+Integration and UI tests require the Firebase CLI, Node.js, and npm because
+they run against the Firebase Auth emulator.
+
 ### The small print
 
 Contributions made by corporations are covered by a different agreement than the

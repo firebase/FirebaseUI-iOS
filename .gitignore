@@ -30,3 +30,7 @@ Podfile.lock
 *.xcworkspace/
 samples/**/GoogleService-Info.plist
 e2eTest/FirebaseSwiftUIExample/*.xcresult/
+e2eTest/FirebaseSwiftUIExample/*.log
+e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExample/firebase-debug.log
+FirebaseSwiftUIPackageTests.log
+FirebaseSwiftUIPackageTests.xcresult/
