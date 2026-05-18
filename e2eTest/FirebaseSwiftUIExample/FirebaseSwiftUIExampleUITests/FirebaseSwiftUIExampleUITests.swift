@@ -156,6 +156,12 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
       "SignedInView should be visible after login"
     )
 
+    let mfaManagementButton = app.buttons["mfa-management-button"]
+    XCTAssertFalse(
+      mfaManagementButton.exists,
+      "MFA management button should be hidden when MFA is disabled"
+    )
+
     dismissAlert(app: app)
     // Check the Views are updated
     let signOutButton = app.buttons["sign-out-button"]
