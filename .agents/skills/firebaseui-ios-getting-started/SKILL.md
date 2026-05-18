@@ -37,6 +37,7 @@ Use this skill when the user wants FirebaseUI for SwiftUI authentication added t
 
 5. Create one parent-owned `AuthService`:
    - Initialize it once in a parent view, not inside frequently recreated child views.
+   - Prefer the FirebaseUI sample pattern: assign a `let authService: AuthService` in the parent view's `init()`.
    - Chain provider registration methods that match the dependencies.
    - Inject it with `.environment(authService)` above `AuthPickerView` and any authenticated content that needs auth state.
 
@@ -82,6 +83,7 @@ struct YourApp: App {
 ```
 
 ```swift
+import FirebaseAuth
 import FirebaseAuthSwiftUI
 import SwiftUI
 
@@ -133,9 +135,14 @@ Only add provider setup for providers the app actually uses.
 - Do not proceed silently if `GoogleService-Info.plist` is missing. Ask the user to download it from Firebase Console or confirm where it lives.
 - Do not hardcode sample project Firebase values, reversed client IDs, Facebook app IDs, OAuth domains, or bundle IDs.
 - Do not add every FirebaseUI provider by default. Each extra provider usually requires Firebase Console and `Info.plist` or entitlement setup.
-- Do not create multiple `AuthService` instances for the same auth flow. It owns presentation and authentication state.
+- Do not create multiple `AuthService` instances for the same auth flow. It owns presentation and authentication state. Follow the upstream sample and keep it as a parent view `let` initialized in `init()` unless the app already has a stronger owner for auth state.
+- If app code reads `authService.currentUser?.email`, `uid`, or other `User` members, import `FirebaseAuth` in addition to `FirebaseAuthSwiftUI`.
 - `AuthPickerView` already handles default navigation, account conflict resolution, MFA flows, errors, and reauthentication for built-in default views. Avoid reimplementing those unless the user asks for custom views.
 - For custom views, sensitive operations such as account deletion, password updates, and MFA unenrollment can throw reauthentication errors that default views would otherwise handle.
+- FirebaseUI `14.x` does not include the `FirebaseAuthSwiftUI` product, so it is not a valid fallback for this SwiftUI workflow.
+- If tagged FirebaseUI releases fail under Swift 6/Xcode with package-internal concurrency errors, check the upstream FirebaseUI SwiftUI docs/sample and consider the current `main` branch only after documenting the reproducibility tradeoff.
+- If Xcode package resolution gets stuck on a stale DerivedData checkout, validate with a project-local package cache, for example `xcodebuild ... -clonedSourcePackagesDirPath SourcePackages`, then remove the generated `SourcePackages` directory before finishing.
+- Xcode previews may fail if a preview instantiates a view that creates `AuthService` before `FirebaseApp.configure()` runs. Do not treat that as an app-launch integration failure unless simulator/device launch also fails.
 
 ## Source References
 
