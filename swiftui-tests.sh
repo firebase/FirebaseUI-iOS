@@ -4,6 +4,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 IOS_SIMULATOR_DEVICE="${IOS_SIMULATOR_DEVICE:-iPhone 17 Pro}"
+FIREBASE_PROJECT="${FIREBASE_PROJECT:-flutterfire-e2e-tests}"
 SIMULATOR_UDID=""
 RUN_LINT=false
 RUN_UNIT=false
@@ -32,6 +33,7 @@ Examples:
   ./swiftui-tests.sh --integration --ui
   ./swiftui-tests.sh --lint --all
   ./swiftui-tests.sh --device "iPhone 17 Pro" --ui
+  FIREBASE_PROJECT="my-firebase-project" ./swiftui-tests.sh --integration
 EOF
 }
 
@@ -143,7 +145,7 @@ wait_for_emulator() {
 
   while [[ "${attempt}" -le "${max_attempts}" ]]; do
     if curl --output /dev/null --silent --fail http://localhost:9099; then
-      sleep 15
+      sleep 12
       if curl --output /dev/null --silent --fail http://localhost:9099; then
         echo "Firebase Auth emulator is online."
         return
@@ -175,7 +177,7 @@ start_emulator_if_needed() {
   while [[ "${retry}" -le "${max_retries}" ]]; do
     echo "Starting Firebase Auth emulator, try ${retry} of ${max_retries}..."
     pushd "${ROOT_DIR}/e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExample" >/dev/null
-    firebase emulators:start --only auth --project flutterfire-e2e-tests --debug > firebase-debug.log 2>&1 &
+    firebase emulators:start --only auth --project "${FIREBASE_PROJECT}" --debug > firebase-debug.log 2>&1 &
     EMULATOR_PID="$!"
     popd >/dev/null
 

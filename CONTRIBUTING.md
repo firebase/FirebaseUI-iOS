@@ -52,10 +52,12 @@ Examples:
 ./swiftui-tests.sh --integration --ui
 ./swiftui-tests.sh --lint --all
 ./swiftui-tests.sh --device "iPhone 17 Pro" --ui
+FIREBASE_PROJECT="my-firebase-project" ./swiftui-tests.sh --integration
 ```
 
 Integration and UI tests require the Firebase CLI, Node.js, and npm because
-they run against the Firebase Auth emulator.
+they run against the Firebase Auth emulator. By default, the script uses the
+`flutterfire-e2e-tests` Firebase project; set `FIREBASE_PROJECT` to override it.
 
 ### The small print
 
