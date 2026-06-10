@@ -14,22 +14,24 @@
 //  limitations under the License.
 //
 
-#if __has_include(<FirebaseStorage/FirebaseStorage.h>)
-  // Firebase 8.x
-  #import <FirebaseStorage/FirebaseStorage.h>
-#elif __has_include(<FirebaseStorage/FirebaseStorage-Swift.h>)
-  // Firebase 9.0+
-  #import <FirebaseStorage/FirebaseStorage-Swift.h>
-#else
-  @import FirebaseStorage;
-#endif
 #import <SDWebImage/SDWebImage.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
-// `FIRStorageDownloadTask` conforms to `SDWebImageOperation` protocol
-@interface FIRStorageDownloadTask (SDWebImage) <SDWebImageOperation>
-
-@end
-
-NS_ASSUME_NONNULL_END
+// The category declaration requires FIRStorageDownloadTask to be fully defined,
+// which is only possible when the CocoaPods-style headers are present.
+// For SPM builds the declaration (and @import FirebaseStorage) live in the .m file
+// so the Clang module scanner never sees @import here.
+#if __has_include(<FirebaseStorage/FirebaseStorage.h>)
+  // Firebase 8.x (CocoaPods)
+  #import <FirebaseStorage/FirebaseStorage.h>
+  NS_ASSUME_NONNULL_BEGIN
+  @interface FIRStorageDownloadTask (SDWebImage) <SDWebImageOperation>
+  @end
+  NS_ASSUME_NONNULL_END
+#elif __has_include(<FirebaseStorage/FirebaseStorage-Swift.h>)
+  // Firebase 9.0+ (CocoaPods)
+  #import <FirebaseStorage/FirebaseStorage-Swift.h>
+  NS_ASSUME_NONNULL_BEGIN
+  @interface FIRStorageDownloadTask (SDWebImage) <SDWebImageOperation>
+  @end
+  NS_ASSUME_NONNULL_END
+#endif

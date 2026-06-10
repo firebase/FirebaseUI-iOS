@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@main
       - name: Select Xcode version
         run: |
-          sudo xcode-select -switch /Applications/Xcode_16.3.app/Contents/Developer
+          sudo xcode-select -switch /Applications/Xcode_16.4.app/Contents/Developer
       - name: List
         run: |
           xcodebuild -list
@@ -63,7 +63,7 @@ jobs:
         uses: actions/checkout@main
       - name: Select Xcode version
         run: |
-          sudo xcode-select -switch /Applications/Xcode_16.3.app/Contents/Developer
+          sudo xcode-select -switch /Applications/Xcode_16.4.app/Contents/Developer
       - name: Setup
         run: gem install bundler; bundle install
       - name: Build

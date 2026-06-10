@@ -17,21 +17,18 @@
 #import <UIKit/UIKit.h>
 
 #if __has_include(<FirebaseStorage/FirebaseStorage.h>)
-  // Firebase 8.x
+  // Firebase 8.x (CocoaPods)
   #import <FirebaseStorage/FirebaseStorage.h>
 #elif (__has_include(<FirebaseStorage/FirebaseStorage-Swift.h>))
-  // Firebase 9.0+
+  // Firebase 9.0+ (CocoaPods)
   #import <FirebaseStorage/FirebaseStorage-Swift.h>
 #else
-  // If you're using FirebaseStorageUI via Swift Package Manager
-  // from a Swift or mixed Swift/ObjC build target, you will need
-  // to add
-  // -Xcc -fmodule-map-file=$(GENERATED_MODULEMAP_DIR)/FirebaseStorage.modulemap
-  // to your target's Other Swift Flags build setting.
-  // See
-  // https://github.com/firebase/FirebaseUI-iOS/issues/1028#issuecomment-1262689219
-  // for more details.
-  @import FirebaseStorage;
+  // Swift Package Manager: forward declarations only to avoid Clang module-scanner
+  // failures. Your app target must `@import FirebaseStorage` (or `import FirebaseStorage`
+  // in Swift) separately.
+  @class FIRStorage;
+  @class FIRStorageReference;
+  @class FIRStorageDownloadTask;
 #endif
 #import <SDWebImage/SDWebImage.h>
 

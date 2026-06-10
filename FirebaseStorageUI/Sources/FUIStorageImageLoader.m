@@ -164,7 +164,7 @@
     }
   }];
   
-  return download;
+  return (id<SDWebImageOperation>)download;
 }
 
 - (BOOL)shouldBlockFailedURLWithURL:(NSURL *)url error:(NSError *)error {

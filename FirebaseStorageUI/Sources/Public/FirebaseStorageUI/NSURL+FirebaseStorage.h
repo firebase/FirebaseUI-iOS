@@ -16,13 +16,14 @@
 #import <Foundation/Foundation.h>
 
 #if __has_include(<FirebaseStorage/FirebaseStorage.h>)
-  // Firebase 8.x
+  // Firebase 8.x (CocoaPods)
   #import <FirebaseStorage/FirebaseStorage.h>
 #elif __has_include(<FirebaseStorage/FirebaseStorage-Swift.h>)
-  // Firebase 9.0+
+  // Firebase 9.0+ (CocoaPods)
   #import <FirebaseStorage/FirebaseStorage-Swift.h>
 #else
-  @import FirebaseStorage;
+  // Swift Package Manager: forward declaration only.
+  @class FIRStorageReference;
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
