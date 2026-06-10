@@ -88,11 +88,16 @@ func createEmail() -> String {
 }
 
 @MainActor private func typeIntoField(_ field: XCUIElement,
-                                      text: String) throws {
-  field.tap()
-  field.typeText(text)
+                                      text: String,
+                                      app: XCUIApplication) throws {
+  UIPasteboard.general.string = text
+  let pasteMenuItem = try showPasteMenu(for: field, text: text, app: app)
+  pasteMenuItem.tap()
 
-  guard waitForFieldValue(field, expectedText: text) else {
+  let success = waitForFieldValue(field, expectedText: text, timeout: 3)
+  UIPasteboard.general.string = nil
+
+  guard success else {
     throw NSError(
       domain: "TestError",
       code: 2,
@@ -110,10 +115,22 @@ func createEmail() -> String {
   UIPasteboard.general.string = text
   let pasteMenuItem = try showPasteMenu(for: field, text: text, app: app)
   pasteMenuItem.tap()
-  usleep(200_000) // 0.2 seconds
+
+  // Poll until the value changes rather than relying on a fixed sleep.
+  // Secure fields show bullet characters so we can only detect a change, not the exact value.
+  let deadline = Date().addingTimeInterval(3.0)
+  var pasted = false
+  while Date() < deadline {
+    if (field.value as? String) != originalValue {
+      pasted = true
+      break
+    }
+    RunLoop.current.run(until: Date().addingTimeInterval(0.1))
+  }
+
   UIPasteboard.general.string = nil
 
-  guard (field.value as? String) != originalValue else {
+  guard pasted else {
     throw NSError(
       domain: "TestError",
       code: 3,
@@ -134,7 +151,7 @@ func createEmail() -> String {
   case .secureTextField:
     try pasteIntoSecureField(field, text: text, app: app)
   default:
-    try typeIntoField(field, text: text)
+    try typeIntoField(field, text: text, app: app)
   }
 }
 

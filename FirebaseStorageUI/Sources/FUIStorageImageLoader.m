@@ -126,33 +126,31 @@
   }];
   // Observe the progress changes
   [download observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot * _Nonnull snapshot) {
-    // Check progressive decoding if need
+    // Progressive decoding requires access to partial data via the internal GTMSessionFetcher,
+    // which was removed in Firebase Storage 9.0.0. Guard to prevent crash; progressive rendering
+    // is silently skipped on Firebase 9+.
     if (options & SDWebImageProgressiveLoad) {
       FIRStorageDownloadTask *task = (FIRStorageDownloadTask *)snapshot.task;
-      // Currently, FIRStorageDownloadTask does not have the API to grab partial data
-      // But since FirebaseUI and Firebase are seamless component, we access the internal fetcher here
-      GTMSessionFetcher *fetcher = task.fetcher;
-      // Get the partial image data
-      NSData *partialData = [fetcher.downloadedData copy];
-      // Get response
-      int64_t expectedSize = fetcher.response.expectedContentLength;
-      expectedSize = expectedSize > 0 ? expectedSize : 0;
-      int64_t receivedSize = fetcher.downloadedLength;
-      if (expectedSize != 0) {
-        // Get the finish status
-        BOOL finished = receivedSize >= expectedSize;
-        // This progress block may be called on main queue or global queue (depends configuration), always dispatched on coder queue
-        if (coderQueue.operationCount == 0) {
-          [coderQueue addOperationWithBlock:^{
-            UIImage *image = SDImageLoaderDecodeProgressiveImageData(partialData, url, finished, task, options, context);
-            if (image) {
-              dispatch_main_async_safe(^{
-                if (completedBlock) {
-                  completedBlock(image, partialData, nil, NO);
-                }
-              });
-            }
-          }];
+      if ([task respondsToSelector:@selector(fetcher)]) {
+        GTMSessionFetcher *fetcher = [task performSelector:@selector(fetcher)];
+        NSData *partialData = [fetcher.downloadedData copy];
+        int64_t expectedSize = fetcher.response.expectedContentLength;
+        expectedSize = expectedSize > 0 ? expectedSize : 0;
+        int64_t receivedSize = fetcher.downloadedLength;
+        if (expectedSize != 0) {
+          BOOL finished = receivedSize >= expectedSize;
+          if (coderQueue.operationCount == 0) {
+            [coderQueue addOperationWithBlock:^{
+              UIImage *image = SDImageLoaderDecodeProgressiveImageData(partialData, url, finished, task, options, context);
+              if (image) {
+                dispatch_main_async_safe(^{
+                  if (completedBlock) {
+                    completedBlock(image, partialData, nil, NO);
+                  }
+                });
+              }
+            }];
+          }
         }
       }
     }

@@ -3,17 +3,26 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		80406F842FD863380042F477 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 80406F832FD863380042F477 /* FirebaseAuth */; };
+		80406F862FD863380042F477 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 80406F852FD863380042F477 /* FirebaseDatabase */; };
+		80406F882FD863380042F477 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 80406F872FD863380042F477 /* FirebaseFirestore */; };
+		80406F8A2FD863380042F477 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 80406F892FD863380042F477 /* FirebaseStorage */; };
+		80406F8D2FD863E80042F477 /* FirebaseDatabaseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 80406F8C2FD863E80042F477 /* FirebaseDatabaseUI */; };
+		80406F8F2FD863E80042F477 /* FirebaseFirestoreUI in Frameworks */ = {isa = PBXBuildFile; productRef = 80406F8E2FD863E80042F477 /* FirebaseFirestoreUI */; };
+		80406F912FD863E80042F477 /* FirebaseStorageUI in Frameworks */ = {isa = PBXBuildFile; productRef = 80406F902FD863E80042F477 /* FirebaseStorageUI */; };
+		80406F942FD86C530042F477 /* FirebaseDatabaseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 80406F932FD86C530042F477 /* FirebaseDatabaseUI */; };
+		80406F962FD86C530042F477 /* FirebaseFirestoreUI in Frameworks */ = {isa = PBXBuildFile; productRef = 80406F952FD86C530042F477 /* FirebaseFirestoreUI */; };
+		80406F982FD86C530042F477 /* FirebaseStorageUISwift in Frameworks */ = {isa = PBXBuildFile; productRef = 80406F972FD86C530042F477 /* FirebaseStorageUISwift */; };
 		89B2924722568B1C00CEF7D7 /* twtrsymbol.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B2924622568B1C00CEF7D7 /* twtrsymbol.png */; };
 		8D5F93B01D9B192D00D5A2E4 /* StorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F93AF1D9B192D00D5A2E4 /* StorageViewController.swift */; };
 		8DABC9891D3D82D600453807 /* FUIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC9881D3D82D600453807 /* FUIAppDelegate.swift */; };
 		8DABC9901D3D82D600453807 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DABC98F1D3D82D600453807 /* Assets.xcassets */; };
 		8DABC99E1D3D82D600453807 /* FirebaseUI-demo-swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DABC99D1D3D82D600453807 /* FirebaseUI-demo-swiftTests.swift */; };
 		8DD51E371D873B0D00E2CA51 /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD51E361D873B0D00E2CA51 /* UIStoryboardExtension.swift */; };
-		C302C1DC1D91CC7B00ADBD41 /* FUIAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D51D91CC7B00ADBD41 /* FUIAuthViewController.swift */; };
 		C302C1DD1D91CC7B00ADBD41 /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D71D91CC7B00ADBD41 /* ChatCollectionViewCell.swift */; };
 		C302C1DE1D91CC7B00ADBD41 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D81D91CC7B00ADBD41 /* ChatViewController.swift */; };
 		C302C1DF1D91CC7B00ADBD41 /* SamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302C1D91D91CC7B00ADBD41 /* SamplesViewController.swift */; };
@@ -22,19 +31,6 @@
 		C30E94291EF8800D00F032B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30E94261EF8800D00F032B1 /* LaunchScreen.storyboard */; };
 		C30E942B1EF8800D00F032B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30E94281EF8800D00F032B1 /* Main.storyboard */; };
 		C30E942C1EF8801500F032B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C30E942E1EF8801500F032B1 /* Localizable.strings */; };
-		C39833AD1DB7ECB300D257EF /* FUICustomAuthUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39833AC1DB7ECB300D257EF /* FUICustomAuthUIDelegate.swift */; };
-		C39BC03D1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC03B1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.swift */; };
-		C39BC03E1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC03C1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.xib */; };
-		C39BC0411DB811630060F6AF /* FUICustomEmailEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC03F1DB811630060F6AF /* FUICustomEmailEntryViewController.swift */; };
-		C39BC0421DB811630060F6AF /* FUICustomEmailEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC0401DB811630060F6AF /* FUICustomEmailEntryViewController.xib */; };
-		C39BC0451DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC0431DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.swift */; };
-		C39BC0461DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC0441DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.xib */; };
-		C39BC0491DB812030060F6AF /* FUICustomPasswordSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC0471DB812030060F6AF /* FUICustomPasswordSignInViewController.swift */; };
-		C39BC04A1DB812030060F6AF /* FUICustomPasswordSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC0481DB812030060F6AF /* FUICustomPasswordSignInViewController.xib */; };
-		C39BC04D1DB812190060F6AF /* FUICustomPasswordSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC04B1DB812190060F6AF /* FUICustomPasswordSignUpViewController.swift */; };
-		C39BC04E1DB812190060F6AF /* FUICustomPasswordSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC04C1DB812190060F6AF /* FUICustomPasswordSignUpViewController.xib */; };
-		C39BC0511DB812330060F6AF /* FUICustomPasswordVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BC04F1DB812330060F6AF /* FUICustomPasswordVerificationViewController.swift */; };
-		C39BC0521DB812330060F6AF /* FUICustomPasswordVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39BC0501DB812330060F6AF /* FUICustomPasswordVerificationViewController.xib */; };
 		C3F23ECD1D80F3300020509F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3F23ECC1D80F3300020509F /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +55,6 @@
 		8DABC99D1D3D82D600453807 /* FirebaseUI-demo-swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseUI-demo-swiftTests.swift"; sourceTree = "<group>"; };
 		8DABC99F1D3D82D600453807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DD51E361D873B0D00E2CA51 /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
-		C302C1D51D91CC7B00ADBD41 /* FUIAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUIAuthViewController.swift; sourceTree = "<group>"; };
 		C302C1D71D91CC7B00ADBD41 /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
 		C302C1D81D91CC7B00ADBD41 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		C302C1D91D91CC7B00ADBD41 /* SamplesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesViewController.swift; sourceTree = "<group>"; };
@@ -152,19 +147,6 @@
 		C30E94801EF8840900F032B1 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C30E94811EF884E400F032B1 /* es-PY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-PY"; path = "es-PY.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C383C4531EE742D4002A4204 /* FirebaseUI-demo-swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "FirebaseUI-demo-swift.entitlements"; sourceTree = "<group>"; };
-		C39833AC1DB7ECB300D257EF /* FUICustomAuthUIDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomAuthUIDelegate.swift; sourceTree = "<group>"; };
-		C39BC03B1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomAuthPickerViewController.swift; sourceTree = "<group>"; };
-		C39BC03C1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomAuthPickerViewController.xib; sourceTree = "<group>"; };
-		C39BC03F1DB811630060F6AF /* FUICustomEmailEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomEmailEntryViewController.swift; sourceTree = "<group>"; };
-		C39BC0401DB811630060F6AF /* FUICustomEmailEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomEmailEntryViewController.xib; sourceTree = "<group>"; };
-		C39BC0431DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomPasswordRecoveryViewController.swift; sourceTree = "<group>"; };
-		C39BC0441DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordRecoveryViewController.xib; sourceTree = "<group>"; };
-		C39BC0471DB812030060F6AF /* FUICustomPasswordSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomPasswordSignInViewController.swift; sourceTree = "<group>"; };
-		C39BC0481DB812030060F6AF /* FUICustomPasswordSignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordSignInViewController.xib; sourceTree = "<group>"; };
-		C39BC04B1DB812190060F6AF /* FUICustomPasswordSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomPasswordSignUpViewController.swift; sourceTree = "<group>"; };
-		C39BC04C1DB812190060F6AF /* FUICustomPasswordSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordSignUpViewController.xib; sourceTree = "<group>"; };
-		C39BC04F1DB812330060F6AF /* FUICustomPasswordVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUICustomPasswordVerificationViewController.swift; sourceTree = "<group>"; };
-		C39BC0501DB812330060F6AF /* FUICustomPasswordVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FUICustomPasswordVerificationViewController.xib; sourceTree = "<group>"; };
 		C3F23ECC1D80F3300020509F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,6 +155,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80406F862FD863380042F477 /* FirebaseDatabase in Frameworks */,
+				80406F8F2FD863E80042F477 /* FirebaseFirestoreUI in Frameworks */,
+				80406F8A2FD863380042F477 /* FirebaseStorage in Frameworks */,
+				80406F8D2FD863E80042F477 /* FirebaseDatabaseUI in Frameworks */,
+				80406F842FD863380042F477 /* FirebaseAuth in Frameworks */,
+				80406F912FD863E80042F477 /* FirebaseStorageUI in Frameworks */,
+				80406F942FD86C530042F477 /* FirebaseDatabaseUI in Frameworks */,
+				80406F962FD86C530042F477 /* FirebaseFirestoreUI in Frameworks */,
+				80406F882FD863380042F477 /* FirebaseFirestore in Frameworks */,
+				80406F982FD86C530042F477 /* FirebaseStorageUISwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +193,6 @@
 				8DABC9871D3D82D600453807 /* FirebaseUI-demo-swift */,
 				8DABC99C1D3D82D600453807 /* FirebaseUI-demo-swiftTests */,
 				8DABC9861D3D82D600453807 /* Products */,
-				9C43BF8CA810E7C909775084 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -237,17 +228,9 @@
 			path = "FirebaseUI-demo-swiftTests";
 			sourceTree = "<group>";
 		};
-		9C43BF8CA810E7C909775084 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		C302C1D31D91CC7B00ADBD41 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
-				C302C1D41D91CC7B00ADBD41 /* Auth */,
 				C302C1D61D91CC7B00ADBD41 /* Chat */,
 				8D5F93B11D9B193C00D5A2E4 /* Storage */,
 				C302C1D91D91CC7B00ADBD41 /* SamplesViewController.swift */,
@@ -255,27 +238,6 @@
 				C302C1DB1D91CC7B00ADBD41 /* SampleCell.swift */,
 			);
 			path = Samples;
-			sourceTree = "<group>";
-		};
-		C302C1D41D91CC7B00ADBD41 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				C302C1D51D91CC7B00ADBD41 /* FUIAuthViewController.swift */,
-				C39833AC1DB7ECB300D257EF /* FUICustomAuthUIDelegate.swift */,
-				C39BC03B1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.swift */,
-				C39BC03C1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.xib */,
-				C39BC03F1DB811630060F6AF /* FUICustomEmailEntryViewController.swift */,
-				C39BC0401DB811630060F6AF /* FUICustomEmailEntryViewController.xib */,
-				C39BC0431DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.swift */,
-				C39BC0441DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.xib */,
-				C39BC0471DB812030060F6AF /* FUICustomPasswordSignInViewController.swift */,
-				C39BC0481DB812030060F6AF /* FUICustomPasswordSignInViewController.xib */,
-				C39BC04B1DB812190060F6AF /* FUICustomPasswordSignUpViewController.swift */,
-				C39BC04C1DB812190060F6AF /* FUICustomPasswordSignUpViewController.xib */,
-				C39BC04F1DB812330060F6AF /* FUICustomPasswordVerificationViewController.swift */,
-				C39BC0501DB812330060F6AF /* FUICustomPasswordVerificationViewController.xib */,
-			);
-			path = Auth;
 			sourceTree = "<group>";
 		};
 		C302C1D61D91CC7B00ADBD41 /* Chat */ = {
@@ -457,6 +419,10 @@
 				"es-PY",
 			);
 			mainGroup = 8DABC97C1D3D82D600453807;
+			packageReferences = (
+				80406F822FD863380042F477 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				80406F922FD86C530042F477 /* XCLocalSwiftPackageReference "../../../FirebaseUI-iOS" */,
+			);
 			productRefGroup = 8DABC9861D3D82D600453807 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -473,17 +439,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C30E94291EF8800D00F032B1 /* LaunchScreen.storyboard in Resources */,
-				C39BC04A1DB812030060F6AF /* FUICustomPasswordSignInViewController.xib in Resources */,
-				C39BC03E1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.xib in Resources */,
 				C3F23ECD1D80F3300020509F /* GoogleService-Info.plist in Resources */,
 				89B2924722568B1C00CEF7D7 /* twtrsymbol.png in Resources */,
-				C39BC0421DB811630060F6AF /* FUICustomEmailEntryViewController.xib in Resources */,
 				C30E942B1EF8800D00F032B1 /* Main.storyboard in Resources */,
 				C30E942C1EF8801500F032B1 /* Localizable.strings in Resources */,
 				8DABC9901D3D82D600453807 /* Assets.xcassets in Resources */,
-				C39BC04E1DB812190060F6AF /* FUICustomPasswordSignUpViewController.xib in Resources */,
-				C39BC0461DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.xib in Resources */,
-				C39BC0521DB812330060F6AF /* FUICustomPasswordVerificationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,20 +463,12 @@
 			files = (
 				8DD51E371D873B0D00E2CA51 /* UIStoryboardExtension.swift in Sources */,
 				C302C1DF1D91CC7B00ADBD41 /* SamplesViewController.swift in Sources */,
-				C302C1DC1D91CC7B00ADBD41 /* FUIAuthViewController.swift in Sources */,
-				C39BC0451DB811E70060F6AF /* FUICustomPasswordRecoveryViewController.swift in Sources */,
-				C39BC03D1DB7F74B0060F6AF /* FUICustomAuthPickerViewController.swift in Sources */,
 				8D5F93B01D9B192D00D5A2E4 /* StorageViewController.swift in Sources */,
-				C39BC0491DB812030060F6AF /* FUICustomPasswordSignInViewController.swift in Sources */,
-				C39BC04D1DB812190060F6AF /* FUICustomPasswordSignUpViewController.swift in Sources */,
 				C302C1DD1D91CC7B00ADBD41 /* ChatCollectionViewCell.swift in Sources */,
 				C302C1DE1D91CC7B00ADBD41 /* ChatViewController.swift in Sources */,
-				C39BC0411DB811630060F6AF /* FUICustomEmailEntryViewController.swift in Sources */,
 				C302C1E11D91CC7B00ADBD41 /* SampleCell.swift in Sources */,
 				C302C1E01D91CC7B00ADBD41 /* Sample.swift in Sources */,
-				C39BC0511DB812330060F6AF /* FUICustomPasswordVerificationViewController.swift in Sources */,
 				8DABC9891D3D82D600453807 /* FUIAppDelegate.swift in Sources */,
-				C39833AD1DB7ECB300D257EF /* FUICustomAuthUIDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -739,7 +691,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -774,8 +727,11 @@
 					"\"$(PODS_ROOT)/FirebaseUI/FirebaseDatabaseUI\"",
 				);
 				INFOPLIST_FILE = "FirebaseUI-demo-swift/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.flutter.plugins.firebase.auth.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -813,8 +769,11 @@
 					"\"$(PODS_ROOT)/FirebaseUI/FirebaseDatabaseUI\"",
 				);
 				INFOPLIST_FILE = "FirebaseUI-demo-swift/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.flutter.plugins.firebase.auth.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -827,7 +786,11 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "FirebaseUI-demo-swiftTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.firebase.FirebaseUI-demo-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -840,7 +803,11 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "FirebaseUI-demo-swiftTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.firebase.FirebaseUI-demo-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -879,6 +846,71 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		80406F922FD86C530042F477 /* XCLocalSwiftPackageReference "../../../FirebaseUI-iOS" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../FirebaseUI-iOS";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		80406F822FD863380042F477 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.14.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		80406F832FD863380042F477 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 80406F822FD863380042F477 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		80406F852FD863380042F477 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 80406F822FD863380042F477 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		80406F872FD863380042F477 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 80406F822FD863380042F477 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		80406F892FD863380042F477 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 80406F822FD863380042F477 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		80406F8C2FD863E80042F477 /* FirebaseDatabaseUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseDatabaseUI;
+		};
+		80406F8E2FD863E80042F477 /* FirebaseFirestoreUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseFirestoreUI;
+		};
+		80406F902FD863E80042F477 /* FirebaseStorageUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseStorageUI;
+		};
+		80406F932FD86C530042F477 /* FirebaseDatabaseUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseDatabaseUI;
+		};
+		80406F952FD86C530042F477 /* FirebaseFirestoreUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseFirestoreUI;
+		};
+		80406F972FD86C530042F477 /* FirebaseStorageUISwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseStorageUISwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8DABC97D1D3D82D600453807 /* Project object */;
 }
