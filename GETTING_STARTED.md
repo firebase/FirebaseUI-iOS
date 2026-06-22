@@ -4,12 +4,12 @@ FirebaseUI for SwiftUI is a library built on top of Firebase Authentication that
 
 FirebaseUI for SwiftUI provides the following benefits:
 
-- Opinionated default UI: add a complete sign-in flow with `AuthPickerView`.
-- Customizable: use the built-in flow, render the default buttons in your own layout, or build a fully custom experience with `AuthService`.
-- Anonymous account linking: optionally upgrade anonymous users instead of replacing them.
-- Account management: built-in flows for sign-in, sign-up, password recovery, email link sign-in, reauthentication, and account management.
-- Multiple providers: email/password, email link, phone authentication, Apple, Google, Facebook, Twitter, and generic OAuth/OIDC providers.
-- Modern auth features: built-in support for multi-factor authentication (MFA) and async/await APIs.
+- **Opinionated default UI**: add a complete sign-in flow with `AuthPickerView`.
+- **Customizable**: use the built-in flow, render the default buttons in your own layout, or build a fully custom experience.
+- **Anonymous account linking**: optionally upgrade anonymous users instead of replacing them.
+- **Account management**: built-in flows for sign-in, sign-up, password recovery, email link sign-in, reauthentication, and account management.
+- **Multiple providers**: email/password, email link, phone authentication, Apple, Google, Facebook, Twitter, and generic OAuth/OIDC providers.
+- **Modern auth features**: built-in support for multi-factor authentication (MFA) and async/await APIs.
 
 ## Before you begin
 
@@ -56,15 +56,43 @@ struct YourApp: App {
 }
 ```
 
+## Initialize AuthService
+
+Create a shared `AuthService`, configure the sign-in methods you want to support, then pass it to FirebaseUI views through the SwiftUI environment.
+
+```swift
+import FirebaseAuthSwiftUI
+import SwiftUI
+
+struct ContentView: View {
+  let authService: AuthService
+
+  init() {
+    let configuration = AuthConfiguration()
+
+    authService = AuthService(configuration: configuration)
+      .withEmailSignIn()
+  }
+
+  var body: some View {
+    AuthPickerView {
+      // Your authenticated app content goes here.
+      Text("Welcome to your app!")
+    }
+    .environment(authService)
+  }
+}
+```
+
 ## Set up sign-in methods
 
-Before you can sign users in, enable the providers you want to support in **Authentication > Sign-in method** in the [Firebase console](https://console.firebase.google.com/u/0/project/_/authentication/providers).
+You must enable the providers you want to support in **Authentication > Sign-in method** in the [Firebase console](https://console.firebase.google.com/u/0/project/_/authentication/providers).
 
 ### Email address and password
 
-Enable the **Email/Password** provider in the Firebase console.
+1. Enable the **Email/Password** provider in the [Firebase console](https://console.firebase.google.com/u/0/project/_/authentication/providers).
 
-Add email sign-in to your `AuthService`:
+2. Add email sign-in to your `AuthService`:
 
 ```swift
  let authService = AuthService()
@@ -73,7 +101,13 @@ Add email sign-in to your `AuthService`:
 
 ### Email link authentication
 
-To use passwordless email link sign-in, configure `ActionCodeSettings` and pass it into `AuthConfiguration`.
+To use passwordless email link sign-in:
+
+1. Enable **Email link (passwordless sign-in)** in the Firebase console.
+2. Add the link domain to **Authorized domains**.
+3. If you build custom views, call `authService.handleSignInLink(url:)` when the link opens your app.
+
+Then configure `ActionCodeSettings` and pass it into `AuthConfiguration` and register the provider:
 
 ```swift
 let actionCodeSettings = ActionCodeSettings()
@@ -91,14 +125,8 @@ let configuration = AuthConfiguration(
 )
 
 let authService = AuthService(configuration: configuration)
-  .withEmailSignIn()
+  .withEmailLinkSignIn()
 ```
-
-You must also:
-
-1. Enable **Email link (passwordless sign-in)** in the Firebase console.
-2. Add the link domain to **Authorized domains**.
-3. If you build custom views, call `authService.handleSignInLink(url:)` when the link opens your app.
 
 ### Apple
 
@@ -378,6 +406,6 @@ You can also register your own provider button by conforming to `AuthProviderUI`
 
 ## Next steps
 
-- See `FirebaseSwiftUI/README.md` for the full API reference and advanced usage.
-- See `samples/swiftui/FirebaseSwiftUISample` for a working example app.
+- See [FirebaseSwiftUI/README.md](https://github.com/firebase/FirebaseUI-iOS/blob/main/FirebaseSwiftUI/README.md) for the full API reference and advanced usage.
+- See [samples/swiftui/FirebaseSwiftUISample](https://github.com/firebase/FirebaseUI-iOS/tree/main/samples/swiftui/FirebaseSwiftUISample) for a working example app.
 - For provider-specific setup details, refer to the Firebase Authentication docs for the provider you are enabling.
