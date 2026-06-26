@@ -78,7 +78,7 @@ GEM
       mutex_m
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
-    json (2.19.5)
+    json (2.20.0)
     logger (1.7.0)
     minitest (5.26.1)
     molinillo (0.8.0)
