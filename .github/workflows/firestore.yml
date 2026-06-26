@@ -29,7 +29,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_26.2.app/Contents/Developer
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: Setup
         run: |
           cd FirebaseFirestoreUI
@@ -46,10 +57,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Select Xcode version
         run: |
-          sudo xcode-select -switch /Applications/Xcode_16.4.app/Contents/Developer
+          sudo xcode-select -switch /Applications/Xcode_26.2.app/Contents/Developer
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: List
         run: |
           xcodebuild -list
@@ -62,10 +81,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Select Xcode version
         run: |
-          sudo xcode-select -switch /Applications/Xcode_16.4.app/Contents/Developer
+          sudo xcode-select -switch /Applications/Xcode_26.2.app/Contents/Developer
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: Setup
         run: gem install bundler; bundle install
       - name: Build
