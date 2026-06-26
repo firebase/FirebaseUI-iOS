@@ -165,21 +165,17 @@ static inline NSDictionary *database() {
   [self.data moveObjectFromIndex:0 toIndex:2];
   [self.index moveObjectFromIndex:0 toIndex:2];
 
-  UICollectionViewCell *cell = [self.dataSource collectionView:self.collectionView
-                                        cellForItemAtIndexPath:[NSIndexPath indexPathForItem:2 inSection:0]];
-
-  XCTAssertEqualObjects(cell.accessibilityLabel, @"data");
-  XCTAssertEqualObjects(cell.accessibilityValue, @"1");
+  FIRDataSnapshot *snap = [self.dataSource snapshotAtIndex:2];
+  XCTAssertEqualObjects(snap.key, @"data");
+  XCTAssertEqualObjects(snap.value, @"1");
 
   // move item to front
   [self.data moveObjectFromIndex:2 toIndex:0];
   [self.index moveObjectFromIndex:2 toIndex:0];
   
-  cell = [self.dataSource collectionView:self.collectionView
-                  cellForItemAtIndexPath:[NSIndexPath indexPathForItem:2 inSection:0]];
-  
-  XCTAssertEqualObjects(cell.accessibilityLabel, @"data");
-  XCTAssertEqualObjects(cell.accessibilityValue, @"3");
+  snap = [self.dataSource snapshotAtIndex:2];
+  XCTAssertEqualObjects(snap.key, @"data");
+  XCTAssertEqualObjects(snap.value, @"3");
 }
 
 - (void)testItReturnsSnapshotsFromItsIndexArray {
