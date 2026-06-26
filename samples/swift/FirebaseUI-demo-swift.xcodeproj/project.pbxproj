@@ -421,7 +421,7 @@
 			mainGroup = 8DABC97C1D3D82D600453807;
 			packageReferences = (
 				80406F822FD863380042F477 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				80406F922FD86C530042F477 /* XCLocalSwiftPackageReference "../../../FirebaseUI-iOS" */,
+				80406F922FD86C530042F477 /* XCLocalSwiftPackageReference "FirebaseUI-iOS" */,
 			);
 			productRefGroup = 8DABC9861D3D82D600453807 /* Products */;
 			projectDirPath = "";
@@ -848,7 +848,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		80406F922FD86C530042F477 /* XCLocalSwiftPackageReference "../../../FirebaseUI-iOS" */ = {
+		80406F922FD86C530042F477 /* XCLocalSwiftPackageReference "FirebaseUI-iOS" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../../../FirebaseUI-iOS";
 		};
