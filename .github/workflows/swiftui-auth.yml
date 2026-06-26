@@ -4,6 +4,7 @@ on:
   push:
     branches: [ main, development ]
     paths:
+      - 'Gemfile*'
       - '.github/workflows/swiftui-auth.yml'
       - 'samples/swiftui/**'
       - 'e2eTest/**'
@@ -12,6 +13,7 @@ on:
   pull_request:
     branches: [ main, development ]
     paths:
+      - 'Gemfile*'
       - '.github/workflows/swiftui-auth.yml'
       - 'samples/swiftui/**'
       - 'e2eTest/**'
@@ -24,7 +26,7 @@ permissions:
   contents: read
 
 env:
-  XCODE_VERSION: latest-stable
+  XCODE_VERSION: 26.2
   IOS_SIMULATOR_DEVICE: iPhone 17 Pro
 
 jobs:
@@ -33,7 +35,7 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       
       - name: Install swiftformat
         run: brew install swiftformat
@@ -47,15 +49,23 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1.7.0
         with:
           xcode-version: ${{ env.XCODE_VERSION }}
 
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: Prepare iOS Simulator
         id: prepare-simulator
         run: ./.github/workflows/scripts/prepare-ios-simulator.sh
@@ -71,14 +81,14 @@ jobs:
             
       - name: Upload test logs
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: unit-tests-logs
           path: FirebaseSwiftUIPackageTests.log
           
       - name: Upload test results
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: unit-tests-results
           path: FirebaseSwiftUIPackageTests.xcresult
@@ -89,14 +99,14 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       
-      - uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a
+      - uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
         name: Install Node.js 20
         with:
           node-version: '20'
           
-      - uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b
+      - uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b # v4.5.0
         with:
           distribution: 'temurin'
           java-version: '17'
@@ -113,10 +123,18 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1.7.0
         with:
           xcode-version: ${{ env.XCODE_VERSION }}
 
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: Prepare iOS Simulator
         id: prepare-simulator
         run: ./.github/workflows/scripts/prepare-ios-simulator.sh
@@ -134,14 +152,14 @@ jobs:
             
       - name: Upload test logs
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: integration-tests-logs
           path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.log
           
       - name: Upload test results
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: integration-tests-results
           path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.xcresult
@@ -152,14 +170,14 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       
-      - uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a
+      - uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
         name: Install Node.js 20
         with:
           node-version: '20'
           
-      - uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b
+      - uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b # v4.5.0
         with:
           distribution: 'temurin'
           java-version: '17'
@@ -176,10 +194,18 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1.7.0
         with:
           xcode-version: ${{ env.XCODE_VERSION }}
         
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: Prepare iOS Simulator
         id: prepare-simulator
         run: ./.github/workflows/scripts/prepare-ios-simulator.sh
@@ -206,14 +232,14 @@ jobs:
             
       - name: Upload Firebase Emulator logs
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: firebase-emulator-logs
           path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExample/firebase-debug.log
           
       - name: Upload test results
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: FirebaseSwiftUIExampleUITests.xcresult
           path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.xcresult

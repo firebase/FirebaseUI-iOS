@@ -4,6 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
+      - 'Gemfile*'
       - '.github/workflows/sample.yml'
       - 'FirebaseSwiftUI/**'
       - 'Firebase*UI/**'
@@ -13,6 +14,7 @@ on:
   pull_request:
     branches: [ main ]
     paths:
+      - 'Gemfile*'
       - '.github/workflows/sample.yml'
       - 'FirebaseSwiftUI/**'
       - 'Firebase*UI/**'
@@ -22,6 +24,9 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   swiftui:
     name: SwiftUI Sample build
@@ -29,9 +34,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Select Xcode version
-        run: sudo xcode-select -switch /Applications/Xcode_26.0.1.app/Contents/Developer
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_26.2.app/Contents/Developer
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: Build SwiftUI Sample
         run: |
           cd samples/swiftui/FirebaseSwiftUISample
@@ -49,7 +63,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_26.2.app/Contents/Developer
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: Setup
         run: |
           cp samples/GoogleService-Info-dummy.plist samples/swift/GoogleService-Info.plist
@@ -65,7 +90,7 @@ jobs:
             -workspace FirebaseUI-demo-swift.xcworkspace \
             -scheme FirebaseUI-demo-swift \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 17 Pro' \
             clean build test \
             ONLY_ACTIVE_ARCH=YES | xcpretty
 
@@ -75,7 +100,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_26.2.app/Contents/Developer
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: Setup
         run: |
           cp samples/GoogleService-Info-dummy.plist samples/objc/GoogleService-Info.plist
@@ -91,6 +127,6 @@ jobs:
             -workspace FirebaseUI-demo-objc.xcworkspace \
             -scheme FirebaseUI-demo-objc \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 17 Pro' \
             clean build \
             ONLY_ACTIVE_ARCH=YES | xcpretty
