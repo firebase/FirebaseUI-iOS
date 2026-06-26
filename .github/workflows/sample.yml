@@ -24,6 +24,9 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   swiftui:
     name: SwiftUI Sample build
