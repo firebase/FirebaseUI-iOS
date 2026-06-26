@@ -87,7 +87,7 @@ jobs:
             -workspace FirebaseUI-demo-swift.xcworkspace \
             -scheme FirebaseUI-demo-swift \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 17 Pro' \
             clean build test \
             ONLY_ACTIVE_ARCH=YES | xcpretty
 
@@ -124,6 +124,6 @@ jobs:
             -workspace FirebaseUI-demo-objc.xcworkspace \
             -scheme FirebaseUI-demo-objc \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro' \
+            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 17 Pro' \
             clean build \
             ONLY_ACTIVE_ARCH=YES | xcpretty

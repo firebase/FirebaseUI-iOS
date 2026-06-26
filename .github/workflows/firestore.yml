@@ -74,7 +74,7 @@ jobs:
           xcodebuild -list
       - name: Build
         run: |
-          xcodebuild -scheme FirebaseFirestoreUI -sdk iphonesimulator  -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro'
+          xcodebuild -scheme FirebaseFirestoreUI -sdk iphonesimulator  -destination 'platform=iOS Simulator,OS=latest,name=iPhone 17 Pro'
   pod:
     name: pod lib lint
     runs-on: macos-15
