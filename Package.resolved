@@ -1,5 +1,5 @@
 {
-  "originHash" : "22a31c6636175427a62e0c47e99f6c722304f56bbaa9871eb61eb88e096303a2",
+  "originHash" : "e76525ac9f180a7db8cb8062d9bbb701c0b12e07ab36ced274650310bcce71bb",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -150,8 +150,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "cac9a55a3ae92478a2c95042dcc8d9695d2129ca",
-        "version" : "5.21.0"
+        "revision" : "2de3a496eaf6df9a1312862adcfd54acd73c39c0",
+        "version" : "5.21.7"
       }
     },
     {
