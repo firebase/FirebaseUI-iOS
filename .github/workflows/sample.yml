@@ -10,6 +10,7 @@ on:
       - 'Firebase*UI/**'
       - 'samples/**'
       - 'Package.swift'
+      - 'Package.resolved'
       - '*.podspec'
   pull_request:
     branches: [ main ]
@@ -20,6 +21,7 @@ on:
       - 'Firebase*UI/**'
       - 'samples/**'
       - 'Package.swift'
+      - 'Package.resolved'
       - '*.podspec'
 
   workflow_dispatch:
