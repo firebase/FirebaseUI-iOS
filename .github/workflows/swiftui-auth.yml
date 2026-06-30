@@ -10,6 +10,7 @@ on:
       - 'e2eTest/**'
       - 'FirebaseSwiftUI/**'
       - 'Package.swift'
+      - 'Package.resolved'
   pull_request:
     branches: [ main, development ]
     paths:
@@ -19,6 +20,7 @@ on:
       - 'e2eTest/**'
       - 'FirebaseSwiftUI/**'
       - 'Package.swift'
+      - 'Package.resolved'
 
   workflow_dispatch:
 
