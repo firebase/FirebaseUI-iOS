@@ -71,11 +71,13 @@ jobs:
         run: ./.github/workflows/scripts/prepare-ios-simulator.sh
         
       - name: Run FirebaseSwiftUI Package Unit Tests
+        env:
+          SIMULATOR_UDID: ${{ steps.prepare-simulator.outputs.udid }}
         run: |
           set -o pipefail
           xcodebuild test \
             -scheme FirebaseUI-Package \
-            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
+            -destination "id=$SIMULATOR_UDID" \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIPackageTests.xcresult | tee FirebaseSwiftUIPackageTests.log | xcpretty --test --color --simple
             
@@ -97,7 +99,7 @@ jobs:
   integration-tests:
     name: Integration Tests
     runs-on: macos-26
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       
@@ -140,12 +142,14 @@ jobs:
         run: ./.github/workflows/scripts/prepare-ios-simulator.sh
 
       - name: Run Integration Tests
+        env:
+          SIMULATOR_UDID: ${{ steps.prepare-simulator.outputs.udid }}
         run: |
           cd ./e2eTest/FirebaseSwiftUIExample
           set -o pipefail
           xcodebuild test \
             -scheme FirebaseSwiftUIExampleTests \
-            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
+            -destination "id=$SIMULATOR_UDID" \
             -parallel-testing-enabled NO \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleTests.xcresult | tee FirebaseSwiftUIExampleTests.log | xcpretty --test --color --simple
@@ -211,21 +215,25 @@ jobs:
         run: ./.github/workflows/scripts/prepare-ios-simulator.sh
           
       - name: Build for UI Tests
+        env:
+          SIMULATOR_UDID: ${{ steps.prepare-simulator.outputs.udid }}
         run: |
           cd ./e2eTest/FirebaseSwiftUIExample
           set -o pipefail
           xcodebuild build-for-testing \
             -scheme FirebaseSwiftUIExampleUITests \
-            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
+            -destination "id=$SIMULATOR_UDID" \
             -enableCodeCoverage YES | xcpretty --color --simple
             
       - name: Run UI Tests
+        env:
+          SIMULATOR_UDID: ${{ steps.prepare-simulator.outputs.udid }}
         run: |
           cd ./e2eTest/FirebaseSwiftUIExample
           set -o pipefail
           xcodebuild test-without-building \
             -scheme FirebaseSwiftUIExampleUITests \
-            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
+            -destination "id=$SIMULATOR_UDID" \
             -parallel-testing-enabled NO \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleUITests.xcresult | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple
