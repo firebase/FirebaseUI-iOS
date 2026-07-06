@@ -58,7 +58,7 @@ extension SignedInView: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }
-        .buttonStyle(.borderedProminent)
+        .authCTAButtonStyle()
         .padding([.top, .bottom], 8)
         .frame(maxWidth: .infinity)
         .accessibilityIdentifier("verify-email-button")
@@ -70,7 +70,7 @@ extension SignedInView: View {
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
-      .buttonStyle(.borderedProminent)
+      .authCTAButtonStyle()
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .accessibilityIdentifier("update-password-button")
@@ -83,7 +83,7 @@ extension SignedInView: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }
-        .buttonStyle(.borderedProminent)
+        .authCTAButtonStyle()
         .padding([.top, .bottom], 8)
         .frame(maxWidth: .infinity)
         .accessibilityIdentifier("mfa-management-button")
@@ -96,7 +96,7 @@ extension SignedInView: View {
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
-      .buttonStyle(.borderedProminent)
+      .authCTAButtonStyle()
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .accessibilityIdentifier("delete-account-button")
@@ -118,7 +118,7 @@ extension SignedInView: View {
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
-      .buttonStyle(.borderedProminent)
+      .authCTAButtonStyle()
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .accessibilityIdentifier("sign-out-button")
@@ -198,7 +198,7 @@ private struct DeleteAccountConfirmationSheet: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }
-        .buttonStyle(.borderedProminent)
+        .authCTAButtonStyle()
         .tint(.red)
         .padding([.top, .bottom], 8)
         .frame(maxWidth: .infinity)

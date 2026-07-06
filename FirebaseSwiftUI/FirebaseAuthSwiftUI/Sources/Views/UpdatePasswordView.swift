@@ -104,7 +104,7 @@ extension UpdatePasswordView: View {
       .disabled(!isValid)
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
-      .buttonStyle(.borderedProminent)
+      .authCTAButtonStyle()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .safeAreaPadding()

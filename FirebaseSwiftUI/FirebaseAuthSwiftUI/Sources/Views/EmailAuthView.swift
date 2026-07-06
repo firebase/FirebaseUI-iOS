@@ -206,7 +206,7 @@ extension EmailAuthView: View {
       .disabled(!isValid)
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
-      .buttonStyle(.borderedProminent)
+      .authCTAButtonStyle()
       .accessibilityIdentifier("sign-in-button")
     }
     Button(action: {

@@ -63,7 +63,7 @@ extension PasswordRecoveryView: View {
       }
       .disabled(!CommonUtils.isValidEmail(email))
       .frame(maxWidth: .infinity)
-      .buttonStyle(.borderedProminent)
+      .authCTAButtonStyle()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .navigationTitle(authService.string.passwordRecoveryTitle)
