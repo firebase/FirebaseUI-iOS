@@ -150,6 +150,7 @@ extension EmailAuthView: View {
           authService.navigator.push(.passwordRecovery)
         } label: {
           Text(authService.string.passwordButtonLabel)
+            .fontWeight(.medium)
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .accessibilityIdentifier("password-recovery-button")
@@ -228,8 +229,7 @@ extension EmailAuthView: View {
             ? authService.string.emailLoginFlowLabel
             : authService.string.emailSignUpFlowLabel
         )
-        .fontWeight(.semibold)
-        .foregroundColor(.blue)
+        .fontWeight(.medium)
       }
     }
     .accessibilityIdentifier("switch-auth-flow")
