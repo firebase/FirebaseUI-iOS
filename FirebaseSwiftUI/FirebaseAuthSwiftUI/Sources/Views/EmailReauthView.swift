@@ -109,7 +109,7 @@ extension EmailReauthView: View {
                 .frame(maxWidth: .infinity)
             }
           }
-          .buttonStyle(.borderedProminent)
+          .authCTAButtonStyle()
           .disabled(password.isEmpty || isLoading)
           .accessibilityIdentifier("confirm-password-button")
 

@@ -87,7 +87,7 @@ struct EnterVerificationCodeView: View {
               .frame(maxWidth: .infinity)
           }
         }
-        .buttonStyle(.borderedProminent)
+        .authCTAButtonStyle()
         .disabled(authService.authenticationState == .authenticating || verificationCode.count != 6)
       }
 

@@ -104,7 +104,7 @@ extension MFAManagementView: View {
               .padding(.vertical, 8)
               .frame(maxWidth: .infinity)
           }
-          .buttonStyle(.borderedProminent)
+          .authCTAButtonStyle()
           .padding([.top, .bottom], 8)
           .frame(maxWidth: .infinity)
           .accessibilityIdentifier("setup-mfa-button")
@@ -128,7 +128,7 @@ extension MFAManagementView: View {
           }
           .padding([.top, .bottom], 8)
           .frame(maxWidth: .infinity)
-          .buttonStyle(.borderedProminent)
+          .authCTAButtonStyle()
           .accessibilityIdentifier("add-mfa-method-button")
         }
       }
