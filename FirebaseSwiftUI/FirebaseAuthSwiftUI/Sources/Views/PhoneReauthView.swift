@@ -127,7 +127,7 @@ extension PhoneReauthView: View {
                   .frame(maxWidth: .infinity)
               }
             }
-            .buttonStyle(.borderedProminent)
+            .authCTAButtonStyle()
             .disabled(isLoading)
             .accessibilityIdentifier("send-verification-code-button")
             Button(authService.string.cancelButtonLabel) {
@@ -170,7 +170,7 @@ extension PhoneReauthView: View {
                   .frame(maxWidth: .infinity)
               }
             }
-            .buttonStyle(.borderedProminent)
+            .authCTAButtonStyle()
             .disabled(verificationCode.count != 6 || isLoading)
             .accessibilityIdentifier("verify-button")
 

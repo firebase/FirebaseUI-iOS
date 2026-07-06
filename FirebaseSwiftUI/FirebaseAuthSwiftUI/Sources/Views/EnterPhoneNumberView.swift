@@ -77,7 +77,7 @@ struct EnterPhoneNumberView: View {
             .frame(maxWidth: .infinity)
         }
       }
-      .buttonStyle(.borderedProminent)
+      .authCTAButtonStyle()
       .disabled(authService.authenticationState == .authenticating || phoneNumber.isEmpty)
       .padding(.top, 8)
 

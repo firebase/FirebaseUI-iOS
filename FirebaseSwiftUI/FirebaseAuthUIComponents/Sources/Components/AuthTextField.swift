@@ -15,6 +15,7 @@
 import SwiftUI
 
 public struct AuthTextField<Leading: View>: View {
+  @Environment(\.authTextFieldStyle) private var style
   @FocusState private var isFocused: Bool
   @State var obscured: Bool = true
   @State var hasInteracted: Bool = false
@@ -131,10 +132,14 @@ public struct AuthTextField<Leading: View>: View {
       .padding(.vertical, 12)
       .padding(.horizontal, 12)
       .background {
-        RoundedRectangle(cornerRadius: 8)
-          .fill(Color.accentColor.opacity(0.05))
+        RoundedRectangle(cornerRadius: style.cornerRadius ?? 8)
+          .fill((style.tint ?? Color.accentColor).opacity(0.05))
           .strokeBorder(lineWidth: isFocused ? 3 : 1)
-          .foregroundStyle(isFocused ? Color.accentColor : Color(.systemFill))
+          .foregroundStyle(
+            isFocused
+              ? (style.tint ?? Color.accentColor)
+              : (style.containerColor ?? Color(.systemFill))
+          )
       }
       .contentShape(Rectangle())
       .onTapGesture {
@@ -149,8 +154,8 @@ public struct AuthTextField<Leading: View>: View {
             let isValid = validator.isValid(input: text)
             Text(validator.message)
               .font(.caption)
-              .strikethrough(isValid, color: .gray)
-              .foregroundStyle(isValid ? .gray : .red)
+              .strikethrough(isValid, color: style.secondaryColor ?? .gray)
+              .foregroundStyle(isValid ? (style.secondaryColor ?? .gray) : (style.errorColor ?? .red))
               .fixedSize(horizontal: false, vertical: true)
           }
         }

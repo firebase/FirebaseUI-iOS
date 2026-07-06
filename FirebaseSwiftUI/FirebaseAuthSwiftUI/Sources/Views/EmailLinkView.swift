@@ -68,7 +68,7 @@ extension EmailLinkView: View {
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
-      .buttonStyle(.borderedProminent)
+      .authCTAButtonStyle()
       .disabled(!CommonUtils.isValidEmail(email))
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
