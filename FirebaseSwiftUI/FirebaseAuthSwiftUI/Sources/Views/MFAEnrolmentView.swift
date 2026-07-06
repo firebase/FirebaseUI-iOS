@@ -349,7 +349,7 @@ extension MFAEnrolmentView: View {
         .padding(.vertical, 8)
         .frame(maxWidth: .infinity)
       }
-      .buttonStyle(.borderedProminent)
+      .authCTAButtonStyle()
       .disabled(!canStartEnrollment)
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
@@ -435,7 +435,7 @@ extension MFAEnrolmentView: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
           }
-          .buttonStyle(.borderedProminent)
+          .authCTAButtonStyle()
           .disabled(!canSendSMSVerification)
           .padding([.top, .bottom], 8)
           .frame(maxWidth: .infinity)
@@ -480,7 +480,7 @@ extension MFAEnrolmentView: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
           }
-          .buttonStyle(.borderedProminent)
+          .authCTAButtonStyle()
           .disabled(!canCompleteEnrollment)
           .padding([.top, .bottom], 8)
           .frame(maxWidth: .infinity)
@@ -635,7 +635,7 @@ extension MFAEnrolmentView: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
           }
-          .buttonStyle(.borderedProminent)
+          .authCTAButtonStyle()
           .disabled(!canCompleteEnrollment)
           .padding([.top, .bottom], 8)
           .frame(maxWidth: .infinity)
