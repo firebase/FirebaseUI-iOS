@@ -33,6 +33,14 @@ public protocol AuthProviderUI {
   var provider: AuthProviderSwift { get }
 }
 
+/// Opt-in for providers whose sign-in doesn't produce a `CredentialAuthProviderSwift` credential
+/// (e.g. phone, or a custom OAuth2 flow) — lets `AuthService.triggerSignIn(for:)` invoke their
+/// action independent of rendering their button. Conforming to this is optional and doesn't
+/// change `AuthProviderUI`'s existing requirements.
+public protocol AuthProviderAction: AuthProviderUI {
+  @MainActor func triggerAction() async throws
+}
+
 public enum AuthenticationState {
   case unauthenticated
   case authenticating
@@ -182,6 +190,26 @@ public final class AuthService {
 
   public func registerProvider(providerWithButton: AuthProviderUI) {
     providers.append(providerWithButton)
+  }
+
+  /// The providers registered via `registerProvider(providerWithButton:)`, in registration order.
+  /// Use this to build a custom method-picker layout (see `AuthPickerContentView.init(authMethodPicker:)`);
+  /// pair each provider with `triggerSignIn(for:)` to sign in without needing its default button view.
+  public var registeredProviders: [AuthProviderUI] { providers }
+
+  /// Signs in with `provider`, independent of rendering its button — for credential-based
+  /// providers (Facebook/Google/Apple/Twitter/OAuth) this routes through the same `signIn(_:)`
+  /// their default button already calls; for providers conforming to `AuthProviderAction`
+  /// (e.g. phone) it invokes `triggerAction()` instead. Returns `nil` when the provider supports
+  /// neither path, or when its action doesn't produce a `SignInOutcome` (e.g. phone just
+  /// navigates to a code-entry screen).
+  public func triggerSignIn(for provider: AuthProviderUI) async throws -> SignInOutcome? {
+    if let credentialProvider = provider.provider as? CredentialAuthProviderSwift {
+      return try await signIn(credentialProvider)
+    } else if let actionable = provider as? AuthProviderAction {
+      try await actionable.triggerAction()
+    }
+    return nil
   }
 
   public func renderButtons(spacing: CGFloat = 16) -> AnyView {

@@ -20,7 +20,8 @@ import SwiftUI
 @MainActor
 public struct AuthPickerView<Content: View, PickerContent: View, DestinationContent: View> {
   public init(@ViewBuilder content: @escaping () -> Content = { EmptyView() })
-    where PickerContent == AuthPickerContentView, DestinationContent == AuthPickerDestinationView {
+    where PickerContent == AuthPickerContentView<DefaultProviderButtonsLayout>,
+    DestinationContent == AuthPickerDestinationView {
     self.content = content
     pickerContentOverride = { AuthPickerContentView() }
     pickerDestinationOverride = { AuthPickerDestinationView(screen: $0) }
