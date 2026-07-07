@@ -16,6 +16,7 @@ import SwiftUI
 
 public struct AuthTextField<Leading: View>: View {
   @Environment(\.authTextFieldStyle) private var style
+  @Environment(\.authTypography) private var typography
   @FocusState private var isFocused: Bool
   @State var obscured: Bool = true
   @State var hasInteracted: Bool = false
@@ -69,16 +70,17 @@ public struct AuthTextField<Leading: View>: View {
   public var body: some View {
     VStack(alignment: .leading) {
       Text(LocalizedStringResource(stringLiteral: label))
+        .authFont(.body)
       HStack(spacing: 8) {
         leading()
         Group {
           if isSecureTextField {
             ZStack(alignment: .trailing) {
-              SecureField(label, text: $text, prompt: Text(prompt))
+              SecureField(label, text: $text, prompt: Text(prompt).font(typography.resolvedFont(for: .body)))
                 .opacity(obscured ? 1 : 0)
                 .focused($isFocused)
                 .frame(height: 24)
-              TextField(label, text: $text, prompt: Text(prompt))
+              TextField(label, text: $text, prompt: Text(prompt).font(typography.resolvedFont(for: .body)))
                 .opacity(obscured ? 0 : 1)
                 .focused($isFocused)
                 .frame(height: 24)
@@ -101,7 +103,7 @@ public struct AuthTextField<Leading: View>: View {
             TextField(
               label,
               text: $text,
-              prompt: Text(prompt)
+              prompt: Text(prompt).font(typography.resolvedFont(for: .body))
             )
             .frame(height: 24)
           }
@@ -153,7 +155,7 @@ public struct AuthTextField<Leading: View>: View {
           ForEach(validations) { validator in
             let isValid = validator.isValid(input: text)
             Text(validator.message)
-              .font(.caption)
+              .authFont(.caption)
               .strikethrough(isValid, color: style.secondaryColor ?? .gray)
               .foregroundStyle(isValid ? (style.secondaryColor ?? .gray) : (style.errorColor ?? .red))
               .fixedSize(horizontal: false, vertical: true)

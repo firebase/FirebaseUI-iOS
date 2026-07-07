@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import FirebaseAuth
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
@@ -81,20 +82,20 @@ extension EmailLinkReauthView: View {
               .padding(.top, 32)
 
             Text("Check Your Email")
-              .font(.title)
+              .authFont(.title)
               .fontWeight(.bold)
 
             Text("We've sent a verification link to:")
-              .font(.body)
+              .authFont(.body)
               .foregroundStyle(.secondary)
 
             Text(email)
-              .font(.body)
+              .authFont(.body)
               .fontWeight(.medium)
               .padding(.horizontal)
 
             Text("Tap the link in the email to complete reauthentication.")
-              .font(.body)
+              .authFont(.body)
               .multilineTextAlignment(.center)
               .foregroundStyle(.secondary)
               .padding(.horizontal, 32)
@@ -110,6 +111,7 @@ extension EmailLinkReauthView: View {
                   .frame(height: 32)
               } else {
                 Text("Resend Email")
+                  .authFont(.body)
                   .frame(height: 32)
               }
             }
@@ -123,6 +125,7 @@ extension EmailLinkReauthView: View {
             ProgressView()
               .padding(.top, 32)
             Text("Sending verification email...")
+              .authFont(.body)
               .foregroundStyle(.secondary)
           }
         }
