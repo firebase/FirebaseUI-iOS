@@ -42,6 +42,7 @@ public struct AuthProviderButton: View {
           providerIcon(for: icon, tint: style.iconTint)
         }
         Text(label)
+          .authFont(.body)
           .lineLimit(1)
           .truncationMode(.tail)
           .foregroundStyle(style.contentColor)

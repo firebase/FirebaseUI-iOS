@@ -41,13 +41,14 @@ extension SignedInView: View {
   public var body: some View {
     VStack {
       Text(authService.string.signedInTitle)
-        .font(.largeTitle)
+        .authFont(.largeTitle)
         .fontWeight(.bold)
         .padding()
         .accessibilityIdentifier("signed-in-text")
       Text(
         "\(authService.currentUser?.email ?? authService.currentUser?.displayName ?? authService.currentUser?.phoneNumber ?? "")"
       )
+      .authFont(.body)
       if authService.currentUser?.isEmailVerified == false {
         Button {
           Task {
@@ -178,13 +179,13 @@ private struct DeleteAccountConfirmationSheet: View {
           .foregroundColor(.red)
 
         Text("Delete Account?")
-          .font(.title)
+          .authFont(.title)
           .fontWeight(.bold)
 
         Text(
           "This action cannot be undone. All your data will be permanently deleted. You may need to reauthenticate to complete this action."
         )
-        .font(.body)
+        .authFont(.body)
         .foregroundColor(.secondary)
         .multilineTextAlignment(.center)
         .padding(.horizontal)
@@ -208,6 +209,7 @@ private struct DeleteAccountConfirmationSheet: View {
           onCancel()
         } label: {
           Text("Cancel")
+            .authFont(.body)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }
