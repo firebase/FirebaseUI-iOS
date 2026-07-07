@@ -78,15 +78,17 @@ extension PasswordRecoveryView: View {
   private var successSheet: some View {
     VStack {
       Text(authService.string.passwordRecoveryEmailSentTitle)
-        .font(.largeTitle)
+        .authFont(.largeTitle)
         .fontWeight(.bold)
         .padding()
       Text(authService.string.passwordRecoveryHelperMessage)
+        .authFont(.body)
         .padding()
 
       Divider()
 
       Text(String(format: authService.string.passwordRecoveryEmailSentMessage, sentEmail))
+        .authFont(.body)
         .padding()
 
       Divider()
