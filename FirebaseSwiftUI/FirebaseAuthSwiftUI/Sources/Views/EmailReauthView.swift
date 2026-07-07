@@ -66,11 +66,11 @@ extension EmailReauthView: View {
             .foregroundColor(.blue)
 
           Text(authService.string.confirmPasswordTitle)
-            .font(.title)
+            .authFont(.title)
             .fontWeight(.bold)
 
           Text(authService.string.forSecurityEnterPasswordMessage)
-            .font(.body)
+            .authFont(.body)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
         }
@@ -78,7 +78,7 @@ extension EmailReauthView: View {
 
         VStack(spacing: 20) {
           Text(authService.string.emailPrefix(email: email))
-            .font(.caption)
+            .authFont(.caption)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.bottom, 8)
 
