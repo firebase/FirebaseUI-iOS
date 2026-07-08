@@ -192,9 +192,6 @@ public final class AuthService {
     providers.append(providerWithButton)
   }
 
-  /// The providers registered via `registerProvider(providerWithButton:)`, in registration order.
-  /// Use this to build a custom method-picker layout (see `AuthPickerContentView.init(authMethodPicker:)`);
-  /// pair each provider with `triggerSignIn(for:)` to sign in without needing its default button view.
   public var registeredProviders: [AuthProviderUI] { providers }
 
   /// Signs in with `provider`, independent of rendering its button — for credential-based
