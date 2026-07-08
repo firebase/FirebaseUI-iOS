@@ -96,6 +96,30 @@ struct ContentView: View {
         }
         .tint(Color(.label))
         NavigationLink {
+          CustomizedAuthPickerExample()
+            .navigationTitle("Customizing AuthPickerView")
+        } label: {
+          VStack(alignment: .leading, spacing: 16) {
+            Text("Customized AuthPickerView example")
+              .font(.headline)
+              .fontWeight(.bold)
+            Text("How to restyle and relayout the auth picker")
+            Text(
+              "• pickerContent/pickerDestination\n• Custom authMethodPicker layout\n• AuthTextFieldStyle/AuthCTAButtonStyle/AuthTypography"
+            )
+            .font(.caption)
+            .foregroundColor(.secondary)
+          }
+          .multilineTextAlignment(.leading)
+          .padding()
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .background {
+            RoundedRectangle(cornerRadius: 16)
+              .fill(Color(UIColor.secondarySystemBackground))
+          }
+        }
+        .tint(Color(.label))
+        NavigationLink {
           CustomViewExample()
             .navigationTitle("Using AuthService")
         } label: {
