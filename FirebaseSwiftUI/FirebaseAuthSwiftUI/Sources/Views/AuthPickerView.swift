@@ -18,9 +18,23 @@ import FirebaseCore
 import SwiftUI
 
 @MainActor
-public struct AuthPickerView<Content: View> {
-  public init(@ViewBuilder content: @escaping () -> Content = { EmptyView() }) {
+public struct AuthPickerView<Content: View, PickerContent: View, DestinationContent: View> {
+  public init(@ViewBuilder content: @escaping () -> Content = { EmptyView() })
+    where PickerContent == AuthPickerContentView<DefaultProviderButtonsLayout>,
+    DestinationContent == AuthPickerDestinationView {
     self.content = content
+    pickerContentOverride = { AuthPickerContentView() }
+    pickerDestinationOverride = { AuthPickerDestinationView(screen: $0) }
+  }
+
+  fileprivate init(
+    content: @escaping () -> Content,
+    pickerContentOverride: @escaping () -> PickerContent,
+    pickerDestinationOverride: @escaping (AuthView) -> DestinationContent
+  ) {
+    self.content = content
+    self.pickerContentOverride = pickerContentOverride
+    self.pickerDestinationOverride = pickerDestinationOverride
   }
 
   @Environment(AuthService.self) private var authService
@@ -28,6 +42,54 @@ public struct AuthPickerView<Content: View> {
 
   // View-layer error state
   @State private var error: AlertError?
+
+  private let pickerContentOverride: () -> PickerContent
+  private let pickerDestinationOverride: (AuthView) -> DestinationContent
+}
+
+public extension AuthPickerView {
+  /// Overrides the content shown inside the auth picker sheet, allowing full customization
+  /// (background, tint, etc.) via plain SwiftUI modifiers, without changing how
+  /// `AuthPickerView` itself is constructed.
+  ///
+  /// ```swift
+  /// AuthPickerView { authenticatedApp }
+  ///   .pickerContent {
+  ///     AuthPickerContentView()
+  ///       .background(theme.colors.background)
+  ///   }
+  /// ```
+  func pickerContent<NewPickerContent: View>(
+    @ViewBuilder _ content: @escaping () -> NewPickerContent
+  ) -> AuthPickerView<Content, NewPickerContent, DestinationContent> {
+    AuthPickerView<Content, NewPickerContent, DestinationContent>(
+      content: self.content,
+      pickerContentOverride: content,
+      pickerDestinationOverride: pickerDestinationOverride
+    )
+  }
+
+  /// Overrides the content shown for each destination pushed inside the auth picker sheet
+  /// (password recovery, email link, MFA, phone verification, etc.), allowing full
+  /// customization via plain SwiftUI modifiers, without changing how `AuthPickerView` itself
+  /// is constructed.
+  ///
+  /// ```swift
+  /// AuthPickerView { authenticatedApp }
+  ///   .pickerDestination { screen in
+  ///     AuthPickerDestinationView(screen: screen)
+  ///       .background(theme.colors.background)
+  ///   }
+  /// ```
+  func pickerDestination<NewDestinationContent: View>(
+    @ViewBuilder _ content: @escaping (AuthView) -> NewDestinationContent
+  ) -> AuthPickerView<Content, PickerContent, NewDestinationContent> {
+    AuthPickerView<Content, PickerContent, NewDestinationContent>(
+      content: self.content,
+      pickerContentOverride: pickerContentOverride,
+      pickerDestinationOverride: content
+    )
+  }
 }
 
 extension AuthPickerView: View {
@@ -37,7 +99,7 @@ extension AuthPickerView: View {
       .sheet(isPresented: $authService.isPresented) {
         @Bindable var navigator = authService.navigator
         NavigationStack(path: $navigator.routes) {
-          authPickerViewInternal
+          pickerContentOverride()
             .navigationTitle(authService.authenticationState == .unauthenticated ? authService
               .string.authPickerTitle : "")
             .navigationBarTitleDisplayMode(.large)
@@ -45,27 +107,7 @@ extension AuthPickerView: View {
               toolbar
             }
             .navigationDestination(for: AuthView.self) { view in
-              switch view {
-              case AuthView.passwordRecovery:
-                PasswordRecoveryView()
-              case AuthView.emailLink:
-                EmailLinkView()
-              case AuthView.updatePassword:
-                UpdatePasswordView()
-              case AuthView.mfaEnrollment:
-                MFAEnrolmentView()
-              case AuthView.mfaManagement:
-                MFAManagementView()
-              case let .mfaResolution(mfaRequired):
-                MFAResolutionView(mfaRequired: mfaRequired)
-              case AuthView.enterPhoneNumber:
-                EnterPhoneNumberView()
-              case let .enterVerificationCode(verificationID, fullPhoneNumber):
-                EnterVerificationCodeView(
-                  verificationID: verificationID,
-                  fullPhoneNumber: fullPhoneNumber
-                )
-              }
+              pickerDestinationOverride(view)
             }
         }
         .environment(\.reportError, reportError)
@@ -107,60 +149,6 @@ extension AuthPickerView: View {
         }
       }
     }
-  }
-
-  @ViewBuilder
-  var authPickerViewInternal: some View {
-    @Bindable var authService = authService
-    VStack {
-      if authService.authenticationState == .authenticated {
-        SignedInView()
-      } else {
-        authMethodPicker
-          .safeAreaPadding()
-      }
-    }
-    .overlay {
-      if authService.authenticationState == .authenticating {
-        VStack(spacing: 24) {
-          ProgressView()
-            .scaleEffect(1.25)
-            .tint(.white)
-          Text("Authenticating...")
-            .foregroundStyle(.white)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.black.opacity(0.7))
-      }
-    }
-  }
-
-  @ViewBuilder
-  var authMethodPicker: some View {
-    GeometryReader { proxy in
-      ScrollView {
-        VStack(spacing: 24) {
-          Image(authService.configuration.logo ?? Assets.firebaseAuthLogo)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 100, height: 100)
-          if authService.emailPasswordSignInEnabled {
-            EmailAuthView()
-          }
-          Divider()
-          otherSignInOptions(proxy)
-          PrivacyTOCsView(displayMode: .full)
-        }
-      }
-    }
-  }
-
-  @ViewBuilder
-  func otherSignInOptions(_ proxy: GeometryProxy) -> some View {
-    VStack {
-      authService.renderButtons()
-    }
-    .padding(.horizontal, proxy.size.width * 0.14)
   }
 }
 

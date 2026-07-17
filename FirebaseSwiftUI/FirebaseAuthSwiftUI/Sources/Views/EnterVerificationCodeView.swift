@@ -33,7 +33,7 @@ struct EnterVerificationCodeView: View {
       VStack(spacing: 16) {
         VStack(spacing: 8) {
           Text(authService.string.sentCodeMessage(phoneNumber: fullPhoneNumber))
-            .font(.subheadline)
+            .authFont(.subheadline)
             .foregroundStyle(.secondary)
             .multilineTextAlignment(.center)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -42,7 +42,7 @@ struct EnterVerificationCodeView: View {
             authService.navigator.pop()
           } label: {
             Text(authService.string.changeNumberButtonLabel)
-              .font(.caption)
+              .authFont(.caption)
               .frame(maxWidth: .infinity, alignment: .leading)
           }
         }
@@ -87,7 +87,7 @@ struct EnterVerificationCodeView: View {
               .frame(maxWidth: .infinity)
           }
         }
-        .buttonStyle(.borderedProminent)
+        .authCTAButtonStyle()
         .disabled(authService.authenticationState == .authenticating || verificationCode.count != 6)
       }
 

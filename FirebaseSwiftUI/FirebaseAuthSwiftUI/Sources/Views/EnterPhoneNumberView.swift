@@ -26,7 +26,7 @@ struct EnterPhoneNumberView: View {
   var body: some View {
     VStack(spacing: 16) {
       Text(authService.string.enterPhoneNumberPlaceholder)
-        .font(.subheadline)
+        .authFont(.subheadline)
         .foregroundStyle(.secondary)
         .multilineTextAlignment(.center)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -77,7 +77,7 @@ struct EnterPhoneNumberView: View {
             .frame(maxWidth: .infinity)
         }
       }
-      .buttonStyle(.borderedProminent)
+      .authCTAButtonStyle()
       .disabled(authService.authenticationState == .authenticating || phoneNumber.isEmpty)
       .padding(.top, 8)
 

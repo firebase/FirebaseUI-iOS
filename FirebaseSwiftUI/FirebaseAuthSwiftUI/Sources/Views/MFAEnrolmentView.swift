@@ -210,12 +210,12 @@ extension MFAEnrolmentView: View {
       if currentSession == nil {
         VStack(spacing: 8) {
           Text("Set Up Two-Factor Authentication")
-            .font(.largeTitle)
+            .authFont(.largeTitle)
             .fontWeight(.bold)
             .multilineTextAlignment(.center)
 
           Text("Add an extra layer of security to your account")
-            .font(.subheadline)
+            .authFont(.subheadline)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
         }
@@ -230,13 +230,13 @@ extension MFAEnrolmentView: View {
               .foregroundColor(.orange)
 
             Text("Multi-Factor Authentication Disabled")
-              .font(.title2)
+              .authFont(.title2)
               .fontWeight(.semibold)
 
             Text(
               "MFA is not enabled in the current configuration. Please contact your administrator."
             )
-            .font(.body)
+            .authFont(.body)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
           }
@@ -248,11 +248,11 @@ extension MFAEnrolmentView: View {
               .foregroundColor(.orange)
 
             Text("No Authentication Methods Available")
-              .font(.title2)
+              .authFont(.title2)
               .fontWeight(.semibold)
 
             Text("No MFA methods are configured as allowed. Please contact your administrator.")
-              .font(.body)
+              .authFont(.body)
               .foregroundColor(.secondary)
               .multilineTextAlignment(.center)
           }
@@ -260,7 +260,7 @@ extension MFAEnrolmentView: View {
         } else {
           VStack(alignment: .leading, spacing: 12) {
             Text("Choose Authentication Method")
-              .font(.headline)
+              .authFont(.headline)
 
             Picker("Authentication Method", selection: $selectedFactorType) {
               ForEach(allowedFactorTypes, id: \.self) { factorType in
@@ -309,11 +309,11 @@ extension MFAEnrolmentView: View {
             .foregroundColor(.blue)
 
           Text("SMS Authentication")
-            .font(.title2)
+            .authFont(.title2)
             .fontWeight(.semibold)
 
           Text("We'll send a verification code to your phone number each time you sign in.")
-            .font(.body)
+            .authFont(.body)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
         }
@@ -324,13 +324,13 @@ extension MFAEnrolmentView: View {
             .foregroundColor(.green)
 
           Text("Authenticator App")
-            .font(.title2)
+            .authFont(.title2)
             .fontWeight(.semibold)
 
           Text(
             "Use an authenticator app like Google Authenticator or Authy to generate verification codes."
           )
-          .font(.body)
+          .authFont(.body)
           .foregroundColor(.secondary)
           .multilineTextAlignment(.center)
         }
@@ -349,7 +349,7 @@ extension MFAEnrolmentView: View {
         .padding(.vertical, 8)
         .frame(maxWidth: .infinity)
       }
-      .buttonStyle(.borderedProminent)
+      .authCTAButtonStyle()
       .disabled(!canStartEnrollment)
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
@@ -379,11 +379,11 @@ extension MFAEnrolmentView: View {
               .foregroundColor(.blue)
 
             Text("Enter Your Phone Number")
-              .font(.title2)
+              .authFont(.title2)
               .fontWeight(.semibold)
 
             Text("We'll send a verification code to this number")
-              .font(.body)
+              .authFont(.body)
               .foregroundColor(.secondary)
               .multilineTextAlignment(.center)
           }
@@ -435,7 +435,7 @@ extension MFAEnrolmentView: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
           }
-          .buttonStyle(.borderedProminent)
+          .authCTAButtonStyle()
           .disabled(!canSendSMSVerification)
           .padding([.top, .bottom], 8)
           .frame(maxWidth: .infinity)
@@ -449,11 +449,11 @@ extension MFAEnrolmentView: View {
               .foregroundColor(.green)
 
             Text("Enter Verification Code")
-              .font(.title2)
+              .authFont(.title2)
               .fontWeight(.semibold)
 
             Text("We sent a code to \(session.phoneNumber ?? "your phone")")
-              .font(.body)
+              .authFont(.body)
               .foregroundColor(.secondary)
               .multilineTextAlignment(.center)
           }
@@ -480,7 +480,7 @@ extension MFAEnrolmentView: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
           }
-          .buttonStyle(.borderedProminent)
+          .authCTAButtonStyle()
           .disabled(!canCompleteEnrollment)
           .padding([.top, .bottom], 8)
           .frame(maxWidth: .infinity)
@@ -490,6 +490,7 @@ extension MFAEnrolmentView: View {
             sendSMSVerification()
           } label: {
             Text("Resend Code")
+              .authFont(.body)
               .padding(.vertical, 8)
               .frame(maxWidth: .infinity)
           }
@@ -513,11 +514,11 @@ extension MFAEnrolmentView: View {
               .foregroundColor(.green)
 
             Text("Scan QR Code")
-              .font(.title2)
+              .authFont(.title2)
               .fontWeight(.semibold)
 
             Text("Scan with your authenticator app or tap to open directly")
-              .font(.body)
+              .authFont(.body)
               .foregroundColor(.secondary)
               .multilineTextAlignment(.center)
               .lineLimit(nil)
@@ -540,9 +541,9 @@ extension MFAEnrolmentView: View {
 
                 HStack(spacing: 6) {
                   Image(systemName: "arrow.up.forward.app.fill")
-                    .font(.caption)
+                    .authFont(.caption)
                   Text("Tap to open in authenticator app")
-                    .font(.caption)
+                    .authFont(.caption)
                     .fontWeight(.medium)
                 }
                 .foregroundColor(.blue)
@@ -557,17 +558,17 @@ extension MFAEnrolmentView: View {
               .overlay(
                 VStack {
                   Image(systemName: "exclamationmark.triangle")
-                    .font(.title)
+                    .authFont(.title)
                     .foregroundColor(.orange)
                   Text("Unable to generate QR Code")
-                    .font(.caption)
+                    .authFont(.caption)
                 }
               )
           }
 
           VStack(spacing: 6) {
             Text("Manual Entry Key:")
-              .font(.headline)
+              .authFont(.headline)
 
             Button(action: {
               copyToClipboard(totpInfo.sharedSecretKey)
@@ -592,7 +593,7 @@ extension MFAEnrolmentView: View {
 
             if showCopiedFeedback {
               Text("Copied to clipboard!")
-                .font(.caption)
+                .authFont(.caption)
                 .foregroundColor(.green)
                 .transition(.opacity)
             }
@@ -635,7 +636,7 @@ extension MFAEnrolmentView: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
           }
-          .buttonStyle(.borderedProminent)
+          .authCTAButtonStyle()
           .disabled(!canCompleteEnrollment)
           .padding([.top, .bottom], 8)
           .frame(maxWidth: .infinity)

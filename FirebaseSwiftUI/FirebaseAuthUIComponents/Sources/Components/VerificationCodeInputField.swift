@@ -91,7 +91,7 @@ public struct VerificationCodeInputField: View {
 
       if isError, let errorMessage = errorMessage {
         Text(errorMessage)
-          .font(.caption)
+          .authFont(.caption)
           .foregroundColor(.red)
           .frame(maxWidth: .infinity, alignment: .leading)
       }
@@ -102,7 +102,7 @@ public struct VerificationCodeInputField: View {
           ForEach(validations) { validator in
             let isValid = validator.isValid(input: code)
             Text(validator.message)
-              .font(.caption)
+              .authFont(.caption)
               .strikethrough(isValid, color: .gray)
               .foregroundStyle(isValid ? .gray : .red)
               .fixedSize(horizontal: false, vertical: true)
@@ -505,7 +505,7 @@ private final class BackspaceUITextField: UITextField {
 
   return VStack(spacing: 32) {
     Text("Enter Verification Code")
-      .font(.title2)
+      .authFont(.title2)
       .fontWeight(.semibold)
 
     VerificationCodeInputField(
@@ -519,7 +519,7 @@ private final class BackspaceUITextField: UITextField {
     )
 
     Text("Current code: \(code)")
-      .font(.caption)
+      .authFont(.caption)
       .foregroundColor(.secondary)
   }
   .padding()
@@ -530,7 +530,7 @@ private final class BackspaceUITextField: UITextField {
 
   return VStack(spacing: 32) {
     Text("Enter Verification Code")
-      .font(.title2)
+      .authFont(.title2)
       .fontWeight(.semibold)
 
     VerificationCodeInputField(
@@ -546,7 +546,7 @@ private final class BackspaceUITextField: UITextField {
     )
 
     Text("Current code: \(code)")
-      .font(.caption)
+      .authFont(.caption)
       .foregroundColor(.secondary)
   }
   .padding()
@@ -557,7 +557,7 @@ private final class BackspaceUITextField: UITextField {
 
   return VStack(spacing: 32) {
     Text("Enter 4-Digit Code")
-      .font(.title2)
+      .authFont(.title2)
       .fontWeight(.semibold)
 
     VerificationCodeInputField(
@@ -572,7 +572,7 @@ private final class BackspaceUITextField: UITextField {
     )
 
     Text("Current code: \(code)")
-      .font(.caption)
+      .authFont(.caption)
       .foregroundColor(.secondary)
   }
   .padding()

@@ -91,11 +91,11 @@ extension PhoneReauthView: View {
             .foregroundColor(.blue)
 
           Text(authService.string.verifyPhoneNumberTitle)
-            .font(.title)
+            .authFont(.title)
             .fontWeight(.bold)
 
           Text(authService.string.forSecurityVerifyPhoneMessage)
-            .font(.body)
+            .authFont(.body)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
         }
@@ -105,12 +105,12 @@ extension PhoneReauthView: View {
           // Initial state - sending SMS
           VStack(spacing: 20) {
             Text(authService.string.sendVerificationCodeToPhonePrefix)
-              .font(.subheadline)
+              .authFont(.subheadline)
               .foregroundStyle(.secondary)
               .frame(maxWidth: .infinity, alignment: .leading)
 
             Text(phoneNumber)
-              .font(.headline)
+              .authFont(.headline)
               .frame(maxWidth: .infinity, alignment: .leading)
               .padding(.bottom, 8)
 
@@ -127,7 +127,7 @@ extension PhoneReauthView: View {
                   .frame(maxWidth: .infinity)
               }
             }
-            .buttonStyle(.borderedProminent)
+            .authCTAButtonStyle()
             .disabled(isLoading)
             .accessibilityIdentifier("send-verification-code-button")
             Button(authService.string.cancelButtonLabel) {
@@ -139,12 +139,12 @@ extension PhoneReauthView: View {
           // Enter verification code
           VStack(spacing: 20) {
             Text(authService.string.enterSixDigitCodeSentToPrefix)
-              .font(.subheadline)
+              .authFont(.subheadline)
               .foregroundStyle(.secondary)
               .frame(maxWidth: .infinity, alignment: .leading)
 
             Text(phoneNumber)
-              .font(.caption)
+              .authFont(.caption)
               .frame(maxWidth: .infinity, alignment: .leading)
               .padding(.bottom, 8)
 
@@ -170,7 +170,7 @@ extension PhoneReauthView: View {
                   .frame(maxWidth: .infinity)
               }
             }
-            .buttonStyle(.borderedProminent)
+            .authCTAButtonStyle()
             .disabled(verificationCode.count != 6 || isLoading)
             .accessibilityIdentifier("verify-button")
 

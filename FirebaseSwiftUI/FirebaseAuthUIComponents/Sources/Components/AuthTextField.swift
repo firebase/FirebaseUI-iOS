@@ -15,6 +15,8 @@
 import SwiftUI
 
 public struct AuthTextField<Leading: View>: View {
+  @Environment(\.authTextFieldStyle) private var style
+  @Environment(\.authTypography) private var typography
   @FocusState private var isFocused: Bool
   @State var obscured: Bool = true
   @State var hasInteracted: Bool = false
@@ -68,16 +70,17 @@ public struct AuthTextField<Leading: View>: View {
   public var body: some View {
     VStack(alignment: .leading) {
       Text(LocalizedStringResource(stringLiteral: label))
+        .authFont(.body)
       HStack(spacing: 8) {
         leading()
         Group {
           if isSecureTextField {
             ZStack(alignment: .trailing) {
-              SecureField(label, text: $text, prompt: Text(prompt))
+              SecureField(label, text: $text, prompt: Text(prompt).font(typography.resolvedFont(for: .body)))
                 .opacity(obscured ? 1 : 0)
                 .focused($isFocused)
                 .frame(height: 24)
-              TextField(label, text: $text, prompt: Text(prompt))
+              TextField(label, text: $text, prompt: Text(prompt).font(typography.resolvedFont(for: .body)))
                 .opacity(obscured ? 0 : 1)
                 .focused($isFocused)
                 .frame(height: 24)
@@ -100,7 +103,7 @@ public struct AuthTextField<Leading: View>: View {
             TextField(
               label,
               text: $text,
-              prompt: Text(prompt)
+              prompt: Text(prompt).font(typography.resolvedFont(for: .body))
             )
             .frame(height: 24)
           }
@@ -131,10 +134,14 @@ public struct AuthTextField<Leading: View>: View {
       .padding(.vertical, 12)
       .padding(.horizontal, 12)
       .background {
-        RoundedRectangle(cornerRadius: 8)
-          .fill(Color.accentColor.opacity(0.05))
+        RoundedRectangle(cornerRadius: style.cornerRadius ?? 8)
+          .fill((style.tint ?? Color.accentColor).opacity(0.05))
           .strokeBorder(lineWidth: isFocused ? 3 : 1)
-          .foregroundStyle(isFocused ? Color.accentColor : Color(.systemFill))
+          .foregroundStyle(
+            isFocused
+              ? (style.tint ?? Color.accentColor)
+              : (style.containerColor ?? Color(.systemFill))
+          )
       }
       .contentShape(Rectangle())
       .onTapGesture {
@@ -148,9 +155,9 @@ public struct AuthTextField<Leading: View>: View {
           ForEach(validations) { validator in
             let isValid = validator.isValid(input: text)
             Text(validator.message)
-              .font(.caption)
-              .strikethrough(isValid, color: .gray)
-              .foregroundStyle(isValid ? .gray : .red)
+              .authFont(.caption)
+              .strikethrough(isValid, color: style.secondaryColor ?? .gray)
+              .foregroundStyle(isValid ? (style.secondaryColor ?? .gray) : (style.errorColor ?? .red))
               .fixedSize(horizontal: false, vertical: true)
           }
         }
