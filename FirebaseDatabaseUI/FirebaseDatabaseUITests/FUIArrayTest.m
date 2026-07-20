@@ -485,15 +485,10 @@
             self.firebaseArray.count);
 }
 
-#pragma mark - Invariant violations (see GitHub issue #517)
-
-// The local model can desync from the database (e.g. queryLimited(toLast:) plus
-// concurrent server-side writes), causing a child event to reference a key that
-// isn't in the array. These must not crash; each event reconciles toward the
-// correct end-state instead.
+#pragma mark - Invariant violations
 
 - (void)testRemovingUnknownKeyDoesNotCrash {
-  [self.observable populateWithCount:10]; // keys "0".."9"
+  [self.observable populateWithCount:10];
   self.snap.key = @"this-key-was-never-added";
 
   XCTAssertNoThrow(
@@ -508,7 +503,7 @@
 }
 
 - (void)testInsertingWithUnknownPreviousKeyDoesNotCrash {
-  [self.observable populateWithCount:10]; // keys "0".."9"
+  [self.observable populateWithCount:10];
   self.snap.key = @"new";
 
   XCTAssertNoThrow(
@@ -517,7 +512,6 @@
                    previousKey:@"this-key-was-never-added"
                          error:nil]);
 
-  // Best-effort: the row is kept (appended) rather than dropped or crashing.
   XCTAssert(self.firebaseArray.count == 11,
             @"expected count to become 11 after insert, got %ld",
             self.firebaseArray.count);
@@ -526,7 +520,7 @@
 }
 
 - (void)testChangingUnknownKeyDoesNotCrash {
-  [self.observable populateWithCount:10]; // keys "0".."9"
+  [self.observable populateWithCount:10];
   self.snap.key = @"this-key-was-never-added";
 
   XCTAssertNoThrow(
@@ -535,14 +529,13 @@
                    previousKey:@"9"
                          error:nil]);
 
-  // Recovered as an insert rather than dropping the update.
   XCTAssert(self.firebaseArray.count == 11,
             @"expected count to become 11 after recovering change as insert, got %ld",
             self.firebaseArray.count);
 }
 
 - (void)testMovingUnknownKeyDoesNotCrash {
-  [self.observable populateWithCount:10]; // keys "0".."9"
+  [self.observable populateWithCount:10];
   self.snap.key = @"this-key-was-never-added";
 
   XCTAssertNoThrow(
@@ -551,7 +544,6 @@
                    previousKey:@"3"
                          error:nil]);
 
-  // Recovered as an insert rather than dropping the item.
   XCTAssert(self.firebaseArray.count == 11,
             @"expected count to become 11 after recovering move as insert, got %ld",
             self.firebaseArray.count);

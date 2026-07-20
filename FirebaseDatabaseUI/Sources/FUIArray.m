@@ -189,16 +189,9 @@
 }
 
 - (void)insertSnapshot:(FIRDataSnapshot *)snap withPreviousChildKey:(NSString *)previous {
-  // The local model can desync from the database (e.g. a query limited via
-  // -queryLimitedToLast: combined with concurrent server-side writes), so a
-  // child event may reference a key that isn't in the array. Reconcile toward
-  // the correct end-state instead of throwing. See GitHub issue #517.
   NSUInteger index = 0;
   if (previous != nil) {
     NSUInteger previousChildIndex = [self indexForKey:previous];
-
-    // The previous sibling was never delivered locally. Append rather than
-    // crash or drop the row.
     index = (previousChildIndex == NSNotFound) ? self.snapshots.count
                                                : previousChildIndex + 1;
   }
@@ -215,8 +208,6 @@
   NSUInteger index = [self indexForKey:snap.key];
 
   if (index == NSNotFound) {
-    // Already absent from the local model; the desired end-state (item gone)
-    // already holds, so there is nothing to remove. See GitHub issue #517.
     return;
   }
 
@@ -232,8 +223,6 @@
   NSUInteger index = [self indexForKey:snap.key];
 
   if (index == NSNotFound) {
-    // We never had this item; recover it as an insert rather than dropping the
-    // update. See GitHub issue #517.
     [self insertSnapshot:snap withPreviousChildKey:previous];
     return;
   }
@@ -250,8 +239,6 @@
   NSUInteger fromIndex = [self indexForKey:snap.key];
 
   if (fromIndex == NSNotFound) {
-    // The item we were asked to move isn't in the local model; recover it as an
-    // insert at the destination rather than dropping it. See GitHub issue #517.
     [self insertSnapshot:snap withPreviousChildKey:previous];
     return;
   }
