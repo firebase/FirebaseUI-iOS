@@ -485,4 +485,76 @@
             self.firebaseArray.count);
 }
 
+#pragma mark - Invariant violations (see GitHub issue #517)
+
+// The local model can desync from the database (e.g. queryLimited(toLast:) plus
+// concurrent server-side writes), causing a child event to reference a key that
+// isn't in the array. These must not crash; each event reconciles toward the
+// correct end-state instead.
+
+- (void)testRemovingUnknownKeyDoesNotCrash {
+  [self.observable populateWithCount:10]; // keys "0".."9"
+  self.snap.key = @"this-key-was-never-added";
+
+  XCTAssertNoThrow(
+    [self.observable sendEvent:FIRDataEventTypeChildRemoved
+                    withObject:self.snap
+                   previousKey:@"9"
+                         error:nil]);
+
+  XCTAssert(self.firebaseArray.count == 10,
+            @"expected count to stay 10 when removing an unknown key, got %ld",
+            self.firebaseArray.count);
+}
+
+- (void)testInsertingWithUnknownPreviousKeyDoesNotCrash {
+  [self.observable populateWithCount:10]; // keys "0".."9"
+  self.snap.key = @"new";
+
+  XCTAssertNoThrow(
+    [self.observable sendEvent:FIRDataEventTypeChildAdded
+                    withObject:self.snap
+                   previousKey:@"this-key-was-never-added"
+                         error:nil]);
+
+  // Best-effort: the row is kept (appended) rather than dropped or crashing.
+  XCTAssert(self.firebaseArray.count == 11,
+            @"expected count to become 11 after insert, got %ld",
+            self.firebaseArray.count);
+  XCTAssert([[self.firebaseArray snapshotAtIndex:10].key isEqualToString:@"new"],
+            @"expected the new snapshot to be appended at the end");
+}
+
+- (void)testChangingUnknownKeyDoesNotCrash {
+  [self.observable populateWithCount:10]; // keys "0".."9"
+  self.snap.key = @"this-key-was-never-added";
+
+  XCTAssertNoThrow(
+    [self.observable sendEvent:FIRDataEventTypeChildChanged
+                    withObject:self.snap
+                   previousKey:@"9"
+                         error:nil]);
+
+  // Recovered as an insert rather than dropping the update.
+  XCTAssert(self.firebaseArray.count == 11,
+            @"expected count to become 11 after recovering change as insert, got %ld",
+            self.firebaseArray.count);
+}
+
+- (void)testMovingUnknownKeyDoesNotCrash {
+  [self.observable populateWithCount:10]; // keys "0".."9"
+  self.snap.key = @"this-key-was-never-added";
+
+  XCTAssertNoThrow(
+    [self.observable sendEvent:FIRDataEventTypeChildMoved
+                    withObject:self.snap
+                   previousKey:@"3"
+                         error:nil]);
+
+  // Recovered as an insert rather than dropping the item.
+  XCTAssert(self.firebaseArray.count == 11,
+            @"expected count to become 11 after recovering move as insert, got %ld",
+            self.firebaseArray.count);
+}
+
 @end

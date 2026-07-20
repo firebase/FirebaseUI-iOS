@@ -189,20 +189,18 @@
 }
 
 - (void)insertSnapshot:(FIRDataSnapshot *)snap withPreviousChildKey:(NSString *)previous {
+  // The local model can desync from the database (e.g. a query limited via
+  // -queryLimitedToLast: combined with concurrent server-side writes), so a
+  // child event may reference a key that isn't in the array. Reconcile toward
+  // the correct end-state instead of throwing. See GitHub issue #517.
   NSUInteger index = 0;
   if (previous != nil) {
-    NSInteger previousChildIndex = (NSInteger)[self indexForKey:previous];
+    NSUInteger previousChildIndex = [self indexForKey:previous];
 
-    if (previousChildIndex == NSNotFound) {
-      NSString *reason = [NSString stringWithFormat:@"Attempted to insert snapshot with unknown"
-                          @" previousChildKey %@ into array: %@", previous, self.snapshots];
-      NSException *exception = [NSException exceptionWithName:NSInternalInconsistencyException
-                                                       reason:reason
-                                                     userInfo:nil];
-      @throw exception;
-    }
-
-    index = previousChildIndex + 1;
+    // The previous sibling was never delivered locally. Append rather than
+    // crash or drop the row.
+    index = (previousChildIndex == NSNotFound) ? self.snapshots.count
+                                               : previousChildIndex + 1;
   }
 
   [self.snapshots insertObject:snap atIndex:index];
@@ -217,12 +215,9 @@
   NSUInteger index = [self indexForKey:snap.key];
 
   if (index == NSNotFound) {
-    NSString *reason = [NSString stringWithFormat:@"Attempted to remove snapshot with unknown"
-                        @" key %@ from array: %@", snap.key, self.snapshots];
-    NSException *exception = [NSException exceptionWithName:NSInternalInconsistencyException
-                                                     reason:reason
-                                                   userInfo:nil];
-    @throw exception;
+    // Already absent from the local model; the desired end-state (item gone)
+    // already holds, so there is nothing to remove. See GitHub issue #517.
+    return;
   }
 
   [self.snapshots removeObjectAtIndex:index];
@@ -237,12 +232,10 @@
   NSUInteger index = [self indexForKey:snap.key];
 
   if (index == NSNotFound) {
-    NSString *reason = [NSString stringWithFormat:@"Attempted to replace snapshot with unknown"
-                        @" key %@ in array: %@", snap.key, self.snapshots];
-    NSException *exception = [NSException exceptionWithName:NSInternalInconsistencyException
-                                                     reason:reason
-                                                   userInfo:nil];
-    @throw exception;
+    // We never had this item; recover it as an insert rather than dropping the
+    // update. See GitHub issue #517.
+    [self insertSnapshot:snap withPreviousChildKey:previous];
+    return;
   }
 
   [self.snapshots replaceObjectAtIndex:index withObject:snap];
@@ -257,12 +250,10 @@
   NSUInteger fromIndex = [self indexForKey:snap.key];
 
   if (fromIndex == NSNotFound) {
-    NSString *reason = [NSString stringWithFormat:@"Attempted to remove snapshot with unknown"
-                        @" key %@ from array: %@", snap.key, self.snapshots];
-    NSException *exception = [NSException exceptionWithName:NSInternalInconsistencyException
-                                                     reason:reason
-                                                   userInfo:nil];
-    @throw exception;
+    // The item we were asked to move isn't in the local model; recover it as an
+    // insert at the destination rather than dropping it. See GitHub issue #517.
+    [self insertSnapshot:snap withPreviousChildKey:previous];
+    return;
   }
 
   [self.snapshots removeObjectAtIndex:fromIndex];
