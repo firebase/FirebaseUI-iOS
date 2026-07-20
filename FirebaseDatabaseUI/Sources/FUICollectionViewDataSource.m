@@ -38,6 +38,10 @@
 @property (strong, nonatomic, readonly) UICollectionViewCell *(^populateCellAtIndexPath)
   (UICollectionView *collectionView, NSIndexPath *indexPath, FIRDataSnapshot *object);
 
+@property (nonatomic, strong) NSMutableArray<dispatch_block_t> *pendingUpdates;
+
+@property (nonatomic, assign) BOOL isApplyingBatchUpdate;
+
 @end
 
 @implementation FUICollectionViewDataSource
@@ -96,36 +100,67 @@
 // performBatchUpdates: is used for single updates because of this radar:
 // https://openradar.appspot.com/26484150
 - (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
-  [self.collectionView performBatchUpdates:^{
-    self.count = array.count;
+  self.count = array.count;
+  [self enqueueUpdate:^{
     [self.collectionView
      insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
-  } completion:^(BOOL finished) {}];
+  }];
 }
 
 - (void)array:(FUIArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
-  [self.collectionView
-   reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+  [self enqueueUpdate:^{
+    [self.collectionView
+     reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+  }];
 }
 
 - (void)array:(FUIArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
-  [self.collectionView performBatchUpdates:^{
-    self.count = array.count;
+  self.count = array.count;
+  [self enqueueUpdate:^{
     [self.collectionView
      deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
-  } completion:^(BOOL finished) {}];
+  }];
 }
 
 - (void)array:(FUIArray *)array didMoveObject:(id)object
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-  [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForItem:fromIndex inSection:0]
-                               toIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]];
+  [self enqueueUpdate:^{
+    [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForItem:fromIndex inSection:0]
+                                 toIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]];
+  }];
 }
 
 - (void)array:(id<FUICollection>)array queryCancelledWithError:(NSError *)error {
   if (self.queryErrorHandler != NULL) {
     self.queryErrorHandler(error);
   }
+}
+
+- (void)enqueueUpdate:(dispatch_block_t)update {
+  if (self.pendingUpdates == nil) {
+    self.pendingUpdates = [NSMutableArray array];
+  }
+  [self.pendingUpdates addObject:update];
+  [self flushPendingUpdatesIfNeeded];
+}
+
+- (void)flushPendingUpdatesIfNeeded {
+  if (self.isApplyingBatchUpdate || self.pendingUpdates.count == 0) {
+    return;
+  }
+
+  NSArray<dispatch_block_t> *batch = self.pendingUpdates;
+  self.pendingUpdates = [NSMutableArray array];
+  self.isApplyingBatchUpdate = YES;
+
+  [self.collectionView performBatchUpdates:^{
+    for (dispatch_block_t update in batch) {
+      update();
+    }
+  } completion:^(BOOL finished) {
+    self.isApplyingBatchUpdate = NO;
+    [self flushPendingUpdatesIfNeeded];
+  }];
 }
 
 #pragma mark - UICollectionViewDataSource methods
