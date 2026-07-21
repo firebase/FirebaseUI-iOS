@@ -532,6 +532,8 @@
   XCTAssert(self.firebaseArray.count == 11,
             @"expected count to become 11 after recovering change as insert, got %ld",
             self.firebaseArray.count);
+  XCTAssert([[self.firebaseArray snapshotAtIndex:10].key isEqualToString:@"this-key-was-never-added"],
+            @"expected the recovered snapshot to be inserted at index 10");
 }
 
 - (void)testMovingUnknownKeyDoesNotCrash {
@@ -547,6 +549,8 @@
   XCTAssert(self.firebaseArray.count == 11,
             @"expected count to become 11 after recovering move as insert, got %ld",
             self.firebaseArray.count);
+  XCTAssert([[self.firebaseArray snapshotAtIndex:4].key isEqualToString:@"this-key-was-never-added"],
+            @"expected the recovered snapshot to be inserted at index 4");
 }
 
 @end
