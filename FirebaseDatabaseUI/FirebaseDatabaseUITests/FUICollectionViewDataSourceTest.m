@@ -127,4 +127,19 @@ static NSString *const kTestReuseIdentifier = @"FUICollectionViewDataSourceTest"
             found %@ at index 4 instead", cell.accessibilityValue);
 }
 
+- (void)testUnbindDoesNotLeakDataSourceWithPendingItems {
+  __weak FUICollectionViewDataSource *weakDataSource = self.dataSource;
+
+  [self.dataSource unbind];
+  self.dataSource = nil;
+
+  NSDate *timeout = [NSDate dateWithTimeIntervalSinceNow:1.0];
+  while (weakDataSource != nil && timeout.timeIntervalSinceNow > 0) {
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+  }
+
+  XCTAssertNil(weakDataSource,
+               @"expected data source to be deallocated after unbind with pending items, found a retain cycle");
+}
+
 @end

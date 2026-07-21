@@ -104,6 +104,10 @@
 // https://openradar.appspot.com/26484150
 - (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
   [self enqueueUpdate:^(dispatch_block_t done) {
+    if (self.collectionView == nil) {
+      done();
+      return;
+    }
     [self.collectionView performBatchUpdates:^{
       [self.displayedSnapshots insertObject:object atIndex:index];
       self.count = self.displayedSnapshots.count;
@@ -117,6 +121,10 @@
 
 - (void)array:(FUIArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
   [self enqueueUpdate:^(dispatch_block_t done) {
+    if (self.collectionView == nil) {
+      done();
+      return;
+    }
     [self.collectionView performBatchUpdates:^{
       self.displayedSnapshots[index] = object;
       [self.collectionView
@@ -129,6 +137,10 @@
 
 - (void)array:(FUIArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
   [self enqueueUpdate:^(dispatch_block_t done) {
+    if (self.collectionView == nil) {
+      done();
+      return;
+    }
     [self.collectionView performBatchUpdates:^{
       [self.displayedSnapshots removeObjectAtIndex:index];
       self.count = self.displayedSnapshots.count;
@@ -143,6 +155,10 @@
 - (void)array:(FUIArray *)array didMoveObject:(id)object
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   [self enqueueUpdate:^(dispatch_block_t done) {
+    if (self.collectionView == nil) {
+      done();
+      return;
+    }
     [self.collectionView performBatchUpdates:^{
       [self.displayedSnapshots removeObjectAtIndex:fromIndex];
       [self.displayedSnapshots insertObject:object atIndex:toIndex];
