@@ -42,6 +42,8 @@
 
 @property (nonatomic, assign) BOOL isApplyingBatchUpdate;
 
+@property (nonatomic, strong) NSMutableArray<FIRDataSnapshot *> *displayedSnapshots;
+
 @end
 
 @implementation FUICollectionViewDataSource
@@ -59,6 +61,7 @@
     _populateCellAtIndexPath = populateCell;
     _count = 0; // This is zero because RTDB arrays start out at zero
                 // and send initial items as a series of adds.
+    _displayedSnapshots = [NSMutableArray array];
   }
   return self;
 }
@@ -76,11 +79,11 @@
 }
 
 - (NSArray<FIRDataSnapshot *> *)items {
-  return self.collection.items;
+  return [self.displayedSnapshots copy];
 }
 
 - (FIRDataSnapshot *)snapshotAtIndex:(NSInteger)index {
-  return [self.collection snapshotAtIndex:index];
+  return self.displayedSnapshots[index];
 }
 
 - (void)bindToView:(UICollectionView *)view {
@@ -100,10 +103,10 @@
 // performBatchUpdates: is used for single updates because of this radar:
 // https://openradar.appspot.com/26484150
 - (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
-  NSUInteger newCount = array.count;
   [self enqueueUpdate:^(dispatch_block_t done) {
     [self.collectionView performBatchUpdates:^{
-      self.count = newCount;
+      [self.displayedSnapshots insertObject:object atIndex:index];
+      self.count = self.displayedSnapshots.count;
       [self.collectionView
        insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
     } completion:^(BOOL finished) {
@@ -115,6 +118,7 @@
 - (void)array:(FUIArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
   [self enqueueUpdate:^(dispatch_block_t done) {
     [self.collectionView performBatchUpdates:^{
+      self.displayedSnapshots[index] = object;
       [self.collectionView
        reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
     } completion:^(BOOL finished) {
@@ -124,10 +128,10 @@
 }
 
 - (void)array:(FUIArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
-  NSUInteger newCount = array.count;
   [self enqueueUpdate:^(dispatch_block_t done) {
     [self.collectionView performBatchUpdates:^{
-      self.count = newCount;
+      [self.displayedSnapshots removeObjectAtIndex:index];
+      self.count = self.displayedSnapshots.count;
       [self.collectionView
        deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
     } completion:^(BOOL finished) {
@@ -140,6 +144,8 @@
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
   [self enqueueUpdate:^(dispatch_block_t done) {
     [self.collectionView performBatchUpdates:^{
+      [self.displayedSnapshots removeObjectAtIndex:fromIndex];
+      [self.displayedSnapshots insertObject:object atIndex:toIndex];
       [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForItem:fromIndex inSection:0]
                                    toIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]];
     } completion:^(BOOL finished) {
@@ -183,7 +189,7 @@
 
 - (nonnull UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView
                           cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-  FIRDataSnapshot *snap = [self.collection.items objectAtIndex:indexPath.item];
+  FIRDataSnapshot *snap = self.displayedSnapshots[indexPath.item];
 
   UICollectionViewCell *cell = self.populateCellAtIndexPath(collectionView, indexPath, snap);
 

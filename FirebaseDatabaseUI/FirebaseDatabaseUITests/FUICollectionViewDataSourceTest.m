@@ -59,6 +59,7 @@ static NSString *const kTestReuseIdentifier = @"FUICollectionViewDataSourceTest"
   NSLog(@"%lu", (unsigned long)[self.collectionView numberOfItemsInSection:0]);
 
   [self.observable populateWithCount:10];
+  [self waitForDataSourceCount:10];
 }
 
 - (void)tearDown {
@@ -68,11 +69,14 @@ static NSString *const kTestReuseIdentifier = @"FUICollectionViewDataSourceTest"
   [super tearDown];
 }
 
-- (void)testItHasACount {
+- (void)waitForDataSourceCount:(NSUInteger)expected {
   NSDate *timeout = [NSDate dateWithTimeIntervalSinceNow:1.0];
-  while (self.dataSource.count != 10 && timeout.timeIntervalSinceNow > 0) {
+  while (self.dataSource.count != expected && timeout.timeIntervalSinceNow > 0) {
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
   }
+}
+
+- (void)testItHasACount {
   NSUInteger count = self.dataSource.count;
   XCTAssert(count == 10, @"expected data source to have 10 elements after 10 insertions, but got %lu", count);
 }
