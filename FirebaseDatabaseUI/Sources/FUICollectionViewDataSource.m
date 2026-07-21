@@ -38,7 +38,7 @@
 @property (strong, nonatomic, readonly) UICollectionViewCell *(^populateCellAtIndexPath)
   (UICollectionView *collectionView, NSIndexPath *indexPath, FIRDataSnapshot *object);
 
-@property (nonatomic, strong) NSMutableArray<dispatch_block_t> *pendingUpdates;
+@property (nonatomic, strong) NSMutableArray<void (^)(dispatch_block_t)> *pendingUpdates;
 
 @property (nonatomic, assign) BOOL isApplyingBatchUpdate;
 
@@ -100,33 +100,51 @@
 // performBatchUpdates: is used for single updates because of this radar:
 // https://openradar.appspot.com/26484150
 - (void)array:(FUIArray *)array didAddObject:(id)object atIndex:(NSUInteger)index {
-  self.count = array.count;
-  [self enqueueUpdate:^{
-    [self.collectionView
-     insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+  NSUInteger newCount = array.count;
+  [self enqueueUpdate:^(dispatch_block_t done) {
+    [self.collectionView performBatchUpdates:^{
+      self.count = newCount;
+      [self.collectionView
+       insertItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+    } completion:^(BOOL finished) {
+      done();
+    }];
   }];
 }
 
 - (void)array:(FUIArray *)array didChangeObject:(id)object atIndex:(NSUInteger)index {
-  [self enqueueUpdate:^{
-    [self.collectionView
-     reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+  [self enqueueUpdate:^(dispatch_block_t done) {
+    [self.collectionView performBatchUpdates:^{
+      [self.collectionView
+       reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+    } completion:^(BOOL finished) {
+      done();
+    }];
   }];
 }
 
 - (void)array:(FUIArray *)array didRemoveObject:(id)object atIndex:(NSUInteger)index {
-  self.count = array.count;
-  [self enqueueUpdate:^{
-    [self.collectionView
-     deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+  NSUInteger newCount = array.count;
+  [self enqueueUpdate:^(dispatch_block_t done) {
+    [self.collectionView performBatchUpdates:^{
+      self.count = newCount;
+      [self.collectionView
+       deleteItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:index inSection:0] ]];
+    } completion:^(BOOL finished) {
+      done();
+    }];
   }];
 }
 
 - (void)array:(FUIArray *)array didMoveObject:(id)object
     fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-  [self enqueueUpdate:^{
-    [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForItem:fromIndex inSection:0]
-                                 toIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]];
+  [self enqueueUpdate:^(dispatch_block_t done) {
+    [self.collectionView performBatchUpdates:^{
+      [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForItem:fromIndex inSection:0]
+                                   toIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]];
+    } completion:^(BOOL finished) {
+      done();
+    }];
   }];
 }
 
@@ -136,7 +154,7 @@
   }
 }
 
-- (void)enqueueUpdate:(dispatch_block_t)update {
+- (void)enqueueUpdate:(void (^)(dispatch_block_t done))update {
   if (self.pendingUpdates == nil) {
     self.pendingUpdates = [NSMutableArray array];
   }
@@ -149,18 +167,16 @@
     return;
   }
 
-  NSArray<dispatch_block_t> *batch = self.pendingUpdates;
-  self.pendingUpdates = [NSMutableArray array];
+  void (^next)(dispatch_block_t) = self.pendingUpdates.firstObject;
+  [self.pendingUpdates removeObjectAtIndex:0];
   self.isApplyingBatchUpdate = YES;
 
-  [self.collectionView performBatchUpdates:^{
-    for (dispatch_block_t update in batch) {
-      update();
-    }
-  } completion:^(BOOL finished) {
+  next(^{
     self.isApplyingBatchUpdate = NO;
-    [self flushPendingUpdatesIfNeeded];
-  }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self flushPendingUpdatesIfNeeded];
+    });
+  });
 }
 
 #pragma mark - UICollectionViewDataSource methods

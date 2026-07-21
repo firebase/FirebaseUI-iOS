@@ -69,6 +69,10 @@ static NSString *const kTestReuseIdentifier = @"FUICollectionViewDataSourceTest"
 }
 
 - (void)testItHasACount {
+  NSDate *timeout = [NSDate dateWithTimeIntervalSinceNow:1.0];
+  while (self.dataSource.count != 10 && timeout.timeIntervalSinceNow > 0) {
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+  }
   NSUInteger count = self.dataSource.count;
   XCTAssert(count == 10, @"expected data source to have 10 elements after 10 insertions, but got %lu", count);
 }
