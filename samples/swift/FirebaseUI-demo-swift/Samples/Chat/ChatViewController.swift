@@ -64,7 +64,7 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
           self.collectionView.bind(to: self.query!) { (view, indexPath, snap) -> UICollectionViewCell in
             let cell = view.dequeueReusableCell(withReuseIdentifier: ChatViewController.reuseIdentifier,
                                                 for: indexPath) as! ChatCollectionViewCell
-            let chat = Chat(snapshot: snap)!
+            guard let chat = Chat(snapshot: snap) else { return cell }
             cell.populateCellWithChat(chat, user: self.user, maxWidth: self.view.frame.size.width)
             return cell
       }
@@ -184,7 +184,9 @@ class ChatViewController: UIViewController, UICollectionViewDelegateFlowLayout {
 
     let width = self.view.frame.size.width
     let blob = self.collectionViewDataSource.snapshot(at: indexPath.item)
-    let text = Chat(snapshot: blob)!.text
+    guard let text = Chat(snapshot: blob)?.text else {
+      return CGSize(width: width, height: 0)
+    }
 
     let rect = ChatCollectionViewCell.boundingRectForText(text, maxWidth: width)
 
