@@ -45,6 +45,56 @@ self.dataSource = collectionView.bind(to: query) { collectionView, indexPath, sn
 }
 ```
 
+### Transforming and ordering data
+
+Firestore UI binds the **results of a Firestore query** to a table or collection
+view. It does not provide client-side `map` / `filter` / `sort` transforms on
+those results (Firebase Database UI's FUISortedArray has no Firestore
+counterpart). Shape data for display in one of these places instead:
+
+1. **In the query** — filter, order, and limit with Firestore query APIs before
+   binding. Prefer this for anything that affects which documents appear or in
+   what order.
+2. **In `populateCell`** — map fields onto cell UI when dequeuing. Prefer this
+   for presentation-only changes (labels, formatting, hiding empty fields).
+
+#### Query-side ordering and limits
+
+```swift
+// Newest-first list
+let query = Firestore.firestore()
+  .collection("posts")
+  .order(by: "createdAt", descending: true)
+  .limit(to: 50)
+
+self.dataSource = tableView.bind(to: query) { tableView, indexPath, snapshot in
+  let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier",
+                                           for: indexPath)
+  let data = snapshot.data()
+  cell.textLabel?.text = data?["title"] as? String
+  return cell
+}
+```
+
+For a chat-style feed (latest N messages, oldest → newest in the list), use
+`limit(toLast:)` with ascending order:
+
+```swift
+let query = Firestore.firestore()
+  .collection("rooms").document(roomId).collection("messages")
+  .order(by: "timestamp")
+  .limit(toLast: 30)
+
+self.dataSource = tableView.bind(to: query) { tableView, indexPath, snapshot in
+  let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier",
+                                           for: indexPath)
+  /* populate cell */
+  return cell
+}
+```
+
+Keep queries bounded. When a query changes, FUIBatchedArray falls back to a Longest Common Subsequence (LCS) algorithm with O(N^2) complexity on the main thread to compute the diff. Unbounded queries can easily block the main thread and cause UI hangs.
+
 #### FUIBatchedArray
 
 `FUIBatchedArray` powers all of the updating logic in the data source classes
