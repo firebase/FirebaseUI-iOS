@@ -49,7 +49,7 @@ self.dataSource = collectionView.bind(to: query) { collectionView, indexPath, sn
 
 Firestore UI binds the **results of a Firestore query** to a table or collection
 view. It does not provide client-side `map` / `filter` / `sort` transforms on
-those results (Realtime Database UI's `FUISortedArray` has no Firestore
+those results (Firebase Database UI's FUISortedArray has no Firestore
 counterpart). Shape data for display in one of these places instead:
 
 1. **In the query** — filter, order, and limit with Firestore query APIs before
@@ -93,8 +93,7 @@ self.dataSource = tableView.bind(to: query) { tableView, indexPath, snapshot in
 }
 ```
 
-Keep queries bounded. `FUIBatchedArray` diffs the full result set on updates and
-on query changes, so unbounded listeners will hurt performance.
+Keep queries bounded. When a query changes, FUIBatchedArray falls back to a Longest Common Subsequence (LCS) algorithm with O(N^2) complexity on the main thread to compute the diff. Unbounded queries can easily block the main thread and cause UI hangs.
 
 #### FUIBatchedArray
 
