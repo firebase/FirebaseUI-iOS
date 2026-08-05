@@ -14,7 +14,7 @@ Workflows (same job shape):
 * [`.github/workflows/firestore.yml`](../../.github/workflows/firestore.yml)
 * [`.github/workflows/storage.yml`](../../.github/workflows/storage.yml)
 
-Local mirror for the CocoaPods test job: [`./test.sh <Module>`](../../test.sh) after `bundle exec pod install` in the module directory — [running tests](../testing/running-tests.md#uikit-module-tests).
+Local mirror for the CocoaPods test job: [`./test.sh <Module>`](../../test.sh) after `bundle exec pod install` in the module directory — [running tests](../testing/running-tests.md#uikit-module-tests-cocoapods).
 
 ## Jobs (per module)
 
