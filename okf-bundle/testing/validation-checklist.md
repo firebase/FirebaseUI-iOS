@@ -127,6 +127,6 @@ Before closing **`implementation_gate`**, **`review_gate`**, **`commit_gate`**, 
 - [ ] SPM scheme build when `Package.swift` / shared UIKit sources changed
 - [ ] `pod lib lint` when podspecs changed
 - [ ] Sample builds when samples changed
-- [ ] [Validation evidence package](#validation-evidence-package) recorded
+- [ ] [Validation evidence package](#validation-evidence-package-blocking) recorded
 - [ ] OKF bundle reviewed/updated per § above
 - [ ] Feature parity considered for user-facing Auth/UI ([`CONTRIBUTING.md`](../../CONTRIBUTING.md))
