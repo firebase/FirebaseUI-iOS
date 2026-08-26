@@ -9,6 +9,7 @@ For testing or packaging work, also read:
 * [okf-bundle/testing/change-authoring-workflow.md](okf-bundle/testing/change-authoring-workflow.md): verified change loop
 * [okf-bundle/testing/agent-command-policy.md](okf-bundle/testing/agent-command-policy.md): allowlisted shell commands
 * [okf-bundle/testing/running-tests.md](okf-bundle/testing/running-tests.md): SwiftUI and UIKit test commands
+* [okf-bundle/testing/validation-checklist.md](okf-bundle/testing/validation-checklist.md): pre-merge validation checklist
 
 Human onboarding (CLA, SwiftUI Auth local checks): [CONTRIBUTING.md](CONTRIBUTING.md) owns that content; do not duplicate here.
 
