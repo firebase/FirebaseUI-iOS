@@ -31,7 +31,7 @@ final class LegacySignInRecoveryUITests: XCTestCase {
     try enterText(email, into: emailField, app: app)
 
     let passwordField = app.secureTextFields["password-field"]
-    XCTAssertTrue(passwordField.exists, "Password field should exist")
+    XCTAssertTrue(passwordField.waitForExistence(timeout: 5), "Password field should exist")
     try enterText("wrong-password", into: passwordField, app: app)
 
     let signInButton = app.buttons["sign-in-button"]

@@ -282,10 +282,10 @@ func fetchOobCode(email: String,
     var availableCodes: [String] = []
 
     for candidateProjectID in candidateProjectIDs {
-      let oobURL = URL(
+      guard let oobURL = URL(
         string: "http://\(emulatorHost)/emulator/v1/projects/\(candidateProjectID)/oobCodes"
-      )!
-      guard let (oobData, oobResp) = try? await URLSession.shared.data(from: oobURL),
+      ),
+      let (oobData, oobResp) = try? await URLSession.shared.data(from: oobURL),
             (oobResp as? HTTPURLResponse)?.statusCode == 200,
             let envelope = try? JSONDecoder().decode(OobEnvelope.self, from: oobData) else {
         continue
@@ -391,7 +391,12 @@ func fetchOobCode(email: String,
 
   let base = "http://\(emulatorHost)/identitytoolkit.googleapis.com/v1"
 
-  var sendReq = URLRequest(url: URL(string: "\(base)/accounts:sendOobCode?key=fake-api-key")!)
+  guard let sendURL = URL(string: "\(base)/accounts:sendOobCode?key=fake-api-key") else {
+    throw NSError(domain: "EmulatorError", code: 1,
+                  userInfo: [NSLocalizedDescriptionKey: "Invalid sendOobCode URL"])
+  }
+
+  var sendReq = URLRequest(url: sendURL)
   sendReq.httpMethod = "POST"
   sendReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
   sendReq.httpBody = try JSONSerialization.data(withJSONObject: [
@@ -415,8 +420,12 @@ func fetchOobCode(email: String,
     emulatorHost: emulatorHost
   )
 
-  var signInReq =
-    URLRequest(url: URL(string: "\(base)/accounts:signInWithEmailLink?key=fake-api-key")!)
+  guard let signInURL = URL(string: "\(base)/accounts:signInWithEmailLink?key=fake-api-key") else {
+    throw NSError(domain: "EmulatorError", code: 2,
+                  userInfo: [NSLocalizedDescriptionKey: "Invalid signInWithEmailLink URL"])
+  }
+
+  var signInReq = URLRequest(url: signInURL)
   signInReq.httpMethod = "POST"
   signInReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
   signInReq.httpBody = try JSONSerialization.data(withJSONObject: [
