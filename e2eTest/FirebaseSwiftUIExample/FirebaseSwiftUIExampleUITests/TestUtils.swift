@@ -13,8 +13,7 @@ func createEmail() -> String {
 
 /// Creates and configures an XCUIApplication with default test launch arguments
 @MainActor func createTestApp(mfaEnabled: Bool = false,
-                              legacyFetchSignInEnabled: Bool = false,
-                              legacyRecoveryPreviewEnabled: Bool = false) -> XCUIApplication {
+                              legacyFetchSignInEnabled: Bool = false) -> XCUIApplication {
   let app = XCUIApplication()
   app.launchArguments.append("--test-view-enabled")
   if mfaEnabled {
@@ -22,9 +21,6 @@ func createEmail() -> String {
   }
   if legacyFetchSignInEnabled {
     app.launchArguments.append("--legacy-fetch-sign-in-enabled")
-  }
-  if legacyRecoveryPreviewEnabled {
-    app.launchArguments.append("--legacy-sign-in-recovery-preview")
   }
   return app
 }
@@ -258,6 +254,77 @@ func authEmulatorCandidateProjectIDs(preferredProjectID: String? = nil,
   return projectIDs.filter { seen.insert($0).inserted }
 }
 
+private struct OobEnvelope: Decodable { let oobCodes: [OobItem] }
+
+private struct OobItem: Decodable {
+  let oobCode: String
+  let email: String
+  let requestType: String
+  let creationTime: String?
+}
+
+/// Fetches the most recent OOB code the emulator recorded for `email` and `requestType`.
+/// Retries because the emulator registers the code asynchronously.
+func fetchOobCode(email: String,
+                  requestType: String,
+                  projectID: String = "flutterfire-e2e-tests",
+                  idToken: String? = nil,
+                  emulatorHost: String = "127.0.0.1:9099",
+                  maxAttempts: Int = 5) async throws -> String {
+  let candidateProjectIDs = authEmulatorCandidateProjectIDs(
+    preferredProjectID: projectID,
+    idToken: idToken
+  )
+  let iso = ISO8601DateFormatter()
+  var availableCodesByProject = ""
+
+  for attempt in 1 ... maxAttempts {
+    var availableCodes: [String] = []
+
+    for candidateProjectID in candidateProjectIDs {
+      let oobURL = URL(
+        string: "http://\(emulatorHost)/emulator/v1/projects/\(candidateProjectID)/oobCodes"
+      )!
+      guard let (oobData, oobResp) = try? await URLSession.shared.data(from: oobURL),
+            (oobResp as? HTTPURLResponse)?.statusCode == 200,
+            let envelope = try? JSONDecoder().decode(OobEnvelope.self, from: oobData) else {
+        continue
+      }
+
+      let match = envelope.oobCodes
+        .filter {
+          $0.email.caseInsensitiveCompare(email) == .orderedSame && $0.requestType == requestType
+        }
+        .sorted {
+          let d0 = $0.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
+          let d1 = $1.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
+          return d0 > d1
+        }
+        .first
+
+      if let match {
+        return match.oobCode
+      }
+
+      availableCodes.append(contentsOf: envelope.oobCodes.map {
+        "[\(candidateProjectID)] Email: \($0.email), Type: \($0.requestType)"
+      })
+    }
+
+    availableCodesByProject = availableCodes.joined(separator: "; ")
+
+    if attempt < maxAttempts {
+      // Wait before retrying
+      try await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
+    }
+  }
+
+  throw NSError(domain: "EmulatorError", code: 3,
+                userInfo: [
+                  NSLocalizedDescriptionKey: "No \(requestType) OOB code found for \(email) after \(maxAttempts) attempts. Available codes: \(availableCodesByProject)",
+                ])
+}
+
 /// Verifies an email address in the emulator using the OOB code mechanism
 @MainActor func verifyEmailInEmulator(email: String,
                                       idToken: String,
@@ -290,84 +357,14 @@ func authEmulatorCandidateProjectIDs(preferredProjectID: String? = nil,
   // Add a small delay to ensure the OOB code is registered in the emulator
   try await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
 
-  // Define structs for OOB response parsing
-  struct OobEnvelope: Decodable { let oobCodes: [OobItem] }
-  struct OobItem: Decodable {
-    let oobCode: String
-    let email: String
-    let requestType: String
-    let creationTime: String?
-  }
-
-  // Step 2: Fetch OOB codes from emulator with retry logic
-  let candidateProjectIDs = authEmulatorCandidateProjectIDs(
-    preferredProjectID: projectID,
-    idToken: idToken
+  // Step 2: Fetch the OOB code the emulator recorded for this request.
+  let oobCode = try await fetchOobCode(
+    email: email,
+    requestType: "VERIFY_EMAIL",
+    projectID: projectID,
+    idToken: idToken,
+    emulatorHost: emulatorHost
   )
-
-  var codeItem: OobItem?
-  var attempts = 0
-  let maxAttempts = 5
-  var availableCodesByProject = ""
-
-  while codeItem == nil, attempts < maxAttempts {
-    var availableCodes: [String] = []
-
-    for candidateProjectID in candidateProjectIDs {
-      let oobURL = URL(string: "\(base)/emulator/v1/projects/\(candidateProjectID)/oobCodes")!
-      guard let (oobData, oobResp) = try? await URLSession.shared.data(from: oobURL),
-            (oobResp as? HTTPURLResponse)?.statusCode == 200 else {
-        continue
-      }
-
-      guard let envelope = try? JSONDecoder().decode(OobEnvelope.self, from: oobData) else {
-        continue
-      }
-
-      let iso = ISO8601DateFormatter()
-      codeItem = envelope.oobCodes
-        .filter {
-          $0.email.caseInsensitiveCompare(email) == .orderedSame && $0.requestType == "VERIFY_EMAIL"
-        }
-        .sorted {
-          let d0 = $0.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
-          let d1 = $1.creationTime.flatMap { iso.date(from: $0) } ?? .distantPast
-          return d0 > d1
-        }
-        .first
-
-      if codeItem != nil {
-        break
-      }
-
-      let descriptions = envelope.oobCodes.map {
-        "[\(candidateProjectID)] Email: \($0.email), Type: \($0.requestType)"
-      }
-      availableCodes.append(contentsOf: descriptions)
-    }
-
-    availableCodesByProject = availableCodes.joined(separator: "; ")
-
-    if codeItem == nil {
-      attempts += 1
-      if attempts < maxAttempts {
-        // Wait before retrying
-        try await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
-      } else {
-        throw NSError(domain: "EmulatorError", code: 3,
-                      userInfo: [
-                        NSLocalizedDescriptionKey: "No VERIFY_EMAIL OOB code found for \(email) after \(maxAttempts) attempts. Available codes: \(availableCodesByProject)",
-                      ])
-      }
-    }
-  }
-
-  guard let oobCode = codeItem?.oobCode else {
-    throw NSError(domain: "EmulatorError", code: 3,
-                  userInfo: [
-                    NSLocalizedDescriptionKey: "No VERIFY_EMAIL OOB code found for \(email)",
-                  ])
-  }
 
   // Step 4: Apply the OOB code (simulate clicking verification link)
   let verifyURL =
@@ -376,5 +373,63 @@ func authEmulatorCandidateProjectIDs(preferredProjectID: String? = nil,
   guard (verifyResp as? HTTPURLResponse)?.statusCode == 200 else {
     throw NSError(domain: "EmulatorError", code: 4,
                   userInfo: [NSLocalizedDescriptionKey: "Failed to apply OOB code"])
+  }
+}
+
+
+// MARK: - Legacy Sign-In Recovery
+
+/// Creates a user that has BOTH `password` and `emailLink` sign-in methods.
+///
+/// `buildLegacySignInRecovery` returns nil when the only available sign-in method is the one that
+/// was just attempted, so the recovery sheet is only ever presented for an account carrying a
+/// second method. Completing an email-link sign-in is what attaches `emailLink` to the account.
+@MainActor func createLegacyRecoveryUser(email: String,
+                                         password: String = "123456",
+                                         emulatorHost: String = "127.0.0.1:9099") async throws {
+  try await createTestUser(email: email, password: password)
+
+  let base = "http://\(emulatorHost)/identitytoolkit.googleapis.com/v1"
+
+  var sendReq = URLRequest(url: URL(string: "\(base)/accounts:sendOobCode?key=fake-api-key")!)
+  sendReq.httpMethod = "POST"
+  sendReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
+  sendReq.httpBody = try JSONSerialization.data(withJSONObject: [
+    "requestType": "EMAIL_SIGNIN",
+    "email": email,
+    "continueUrl": "http://localhost",
+  ])
+
+  let (sendData, sendResp) = try await URLSession.shared.data(for: sendReq)
+  guard (sendResp as? HTTPURLResponse)?.statusCode == 200 else {
+    let errorBody = String(data: sendData, encoding: .utf8) ?? "Unknown error"
+    throw NSError(domain: "EmulatorError", code: 1,
+                  userInfo: [
+                    NSLocalizedDescriptionKey: "Failed to send email-link sign-in code: \(errorBody)",
+                  ])
+  }
+
+  let oobCode = try await fetchOobCode(
+    email: email,
+    requestType: "EMAIL_SIGNIN",
+    emulatorHost: emulatorHost
+  )
+
+  var signInReq =
+    URLRequest(url: URL(string: "\(base)/accounts:signInWithEmailLink?key=fake-api-key")!)
+  signInReq.httpMethod = "POST"
+  signInReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
+  signInReq.httpBody = try JSONSerialization.data(withJSONObject: [
+    "email": email,
+    "oobCode": oobCode,
+  ])
+
+  let (signInData, signInResp) = try await URLSession.shared.data(for: signInReq)
+  guard (signInResp as? HTTPURLResponse)?.statusCode == 200 else {
+    let errorBody = String(data: signInData, encoding: .utf8) ?? "Unknown error"
+    throw NSError(domain: "EmulatorError", code: 2,
+                  userInfo: [
+                    NSLocalizedDescriptionKey: "Failed to complete email-link sign-in: \(errorBody)",
+                  ])
   }
 }
