@@ -78,7 +78,7 @@ let package = Package(
     ),
     .package(
       url: "https://github.com/google/GoogleSignIn-iOS",
-      from: "9.2.0"
+      from: "10.0.0"
     ),
     .package(
       url: "https://github.com/google/GoogleUtilities.git",

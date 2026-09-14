@@ -1,5 +1,5 @@
 {
-  "originHash" : "195bad4ea24e5c8a92baaff4a49543489f5dc81b4035325107e998a31f7f4949",
+  "originHash" : "a917a87ae8a9e026aa7564a038bd798b35697087b9072b5684b87e7dcf60c5fa",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/openid/AppAuth-iOS.git",
       "state" : {
-        "revision" : "a7caeda164dc5108bf4649472b28a5af65dc6f33",
-        "version" : "2.1.0"
+        "revision" : "a972daac82d449d58ab119e91c68153e29ddac33",
+        "version" : "3.0.0"
       }
     },
     {
@@ -78,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleSignIn-iOS",
       "state" : {
-        "revision" : "08d8dcecafb575f98879ffdbb8302c1b9ad65d19",
-        "version" : "9.2.0"
+        "revision" : "7823e518f5d4db765ccac3e140dd3265ef0a1cf1",
+        "version" : "10.0.0"
       }
     },
     {
@@ -114,8 +114,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GTMAppAuth.git",
       "state" : {
-        "revision" : "56e0ccf09a6dd29dc7e68bdf729598240ca8aa16",
-        "version" : "5.0.0"
+        "revision" : "57094cd46bc8700d3a887e2a429f42b6e8ea3f0b",
+        "version" : "6.0.0"
       }
     },
     {
