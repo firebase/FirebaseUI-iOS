@@ -36,7 +36,7 @@ func createEmail() -> String {
 
 // MARK: - Text Input Helpers
 
-@MainActor private func waitForFieldValue(_ field: XCUIElement,
+@MainActor func waitForFieldValue(_ field: XCUIElement,
                                           expectedText: String,
                                           timeout: TimeInterval = 2) -> Bool {
   let deadline = Date().addingTimeInterval(timeout)
@@ -376,7 +376,6 @@ func fetchOobCode(email: String,
   }
 }
 
-
 // MARK: - Legacy Sign-In Recovery
 
 /// Creates a user that has BOTH `password` and `emailLink` sign-in methods.
@@ -441,4 +440,42 @@ func fetchOobCode(email: String,
                     NSLocalizedDescriptionKey: "Failed to complete email-link sign-in: \(errorBody)",
                   ])
   }
+
+  // Assert the account really carries both methods. Without this a change in emulator behaviour
+  // surfaces much later as an unexplained "recovery sheet should be visible" timeout.
+  let methods = try await signInMethods(for: email, emulatorHost: emulatorHost)
+  guard methods.contains("password"), methods.contains("emailLink") else {
+    throw NSError(domain: "EmulatorError", code: 3,
+                  userInfo: [
+                    NSLocalizedDescriptionKey: "Expected password and emailLink sign-in methods for \(email), emulator reported \(methods)",
+                  ])
+  }
+}
+
+/// Sign-in methods the emulator reports for an email, via the endpoint `fetchSignInMethods` uses.
+@MainActor func signInMethods(for email: String,
+                              emulatorHost: String = "127.0.0.1:9099") async throws -> [String] {
+  let url = "http://\(emulatorHost)/identitytoolkit.googleapis.com/v1/accounts:createAuthUri?key=fake-api-key"
+  guard let authUriURL = URL(string: url) else {
+    throw NSError(domain: "EmulatorError", code: 5,
+                  userInfo: [NSLocalizedDescriptionKey: "Invalid createAuthUri URL"])
+  }
+
+  var request = URLRequest(url: authUriURL)
+  request.httpMethod = "POST"
+  request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+  request.httpBody = try JSONSerialization.data(withJSONObject: [
+    "identifier": email,
+    "continueUri": "http://localhost",
+  ])
+
+  let (data, response) = try await URLSession.shared.data(for: request)
+  guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+    let errorBody = String(data: data, encoding: .utf8) ?? "Unknown error"
+    throw NSError(domain: "EmulatorError", code: 5,
+                  userInfo: [NSLocalizedDescriptionKey: "Failed to read sign-in methods: \(errorBody)"])
+  }
+
+  let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+  return json?["signinMethods"] as? [String] ?? []
 }

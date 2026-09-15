@@ -51,7 +51,7 @@ final class LegacySignInRecoveryUITests: XCTestCase {
   }
 
   @MainActor
-  func testLegacyRecoveryEmailPasswordOptionPrefillsEmail() async throws {
+  func testLegacyRecoveryEmailPasswordOptionReturnsToSignInForm() async throws {
     let email = createEmail()
     try await createLegacyRecoveryUser(email: email)
 
@@ -64,15 +64,25 @@ final class LegacySignInRecoveryUITests: XCTestCase {
     )
     emailButton.tap()
 
+    let recoveryView = app.scrollViews["legacy-sign-in-recovery-view"]
+    XCTAssertTrue(
+      recoveryView.waitForNonExistence(timeout: 5),
+      "Recovery sheet should be dismissed after choosing email/password recovery"
+    )
+
     let emailField = app.textFields["email-field"]
     XCTAssertTrue(
       emailField.waitForExistence(timeout: 5),
       "Sign-in form should be visible after choosing email/password recovery"
     )
+    // EmailAuthView sits at the picker root and keeps its own @State across the sheet, so this
+    // asserts the email survives the round trip rather than the suggestedEmailAddress prefill.
+    // testLegacyRecoveryEmailLinkOptionNavigatesWithPrefilledEmail covers the prefill itself,
+    // because EmailLinkView is built fresh by the navigation destination.
     XCTAssertEqual(
       emailField.value as? String,
       email,
-      "Email/password recovery should prefill the previous email"
+      "Sign-in form should still hold the email after returning from recovery"
     )
   }
 
@@ -95,10 +105,11 @@ final class LegacySignInRecoveryUITests: XCTestCase {
       emailLinkField.waitForExistence(timeout: 5),
       "Email link view should be visible after choosing email link recovery"
     )
-    XCTAssertEqual(
-      emailLinkField.value as? String,
-      email,
-      "Email link recovery should prefill the previous email"
+    // The field can be queryable before onAppear applies the prefill, so poll rather than
+    // reading the value once.
+    XCTAssertTrue(
+      waitForFieldValue(emailLinkField, expectedText: email, timeout: 5),
+      "Email link recovery should prefill the previous email, got \(String(describing: emailLinkField.value))"
     )
   }
 }
