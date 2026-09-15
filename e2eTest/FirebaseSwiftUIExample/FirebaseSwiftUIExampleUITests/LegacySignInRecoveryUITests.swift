@@ -19,19 +19,43 @@ final class LegacySignInRecoveryUITests: XCTestCase {
     continueAfterFailure = false
   }
 
+  /// Drives the real recovery flow: a failed password sign-in against an account that also has an
+  /// email-link method is what makes `AuthService` build a recovery context and present the sheet.
   @MainActor
-  func testLegacyRecoveryEmailPasswordOptionPrefillsEmail() throws {
-    let app = createTestApp(
-      legacyFetchSignInEnabled: true,
-      legacyRecoveryPreviewEnabled: true
-    )
+  private func presentRecoverySheet(for email: String) throws -> XCUIApplication {
+    let app = createTestApp(legacyFetchSignInEnabled: true)
     app.launch()
+
+    let emailField = app.textFields["email-field"]
+    XCTAssertTrue(emailField.waitForExistence(timeout: 10), "Email field should exist")
+    try enterText(email, into: emailField, app: app)
+
+    let passwordField = app.secureTextFields["password-field"]
+    XCTAssertTrue(passwordField.waitForExistence(timeout: 5), "Password field should exist")
+    try enterText("wrong-password", into: passwordField, app: app)
+
+    let signInButton = app.buttons["sign-in-button"]
+    XCTAssertTrue(
+      waitForElementToBecomeEnabled(signInButton),
+      "Sign-In button should become enabled once both fields are filled"
+    )
+    signInButton.tap()
 
     let recoveryView = app.scrollViews["legacy-sign-in-recovery-view"]
     XCTAssertTrue(
-      recoveryView.waitForExistence(timeout: 5),
+      recoveryView.waitForExistence(timeout: 15),
       "Legacy sign-in recovery sheet should be visible"
     )
+
+    return app
+  }
+
+  @MainActor
+  func testLegacyRecoveryEmailPasswordOptionReturnsToSignInForm() async throws {
+    let email = createEmail()
+    try await createLegacyRecoveryUser(email: email)
+
+    let app = try presentRecoverySheet(for: email)
 
     let emailButton = app.buttons["legacy-sign-in-with-email-button"]
     XCTAssertTrue(
@@ -40,27 +64,34 @@ final class LegacySignInRecoveryUITests: XCTestCase {
     )
     emailButton.tap()
 
+    let recoveryView = app.scrollViews["legacy-sign-in-recovery-view"]
+    XCTAssertTrue(
+      recoveryView.waitForNonExistence(timeout: 5),
+      "Recovery sheet should be dismissed after choosing email/password recovery"
+    )
+
     let emailField = app.textFields["email-field"]
+    XCTAssertTrue(
+      emailField.waitForExistence(timeout: 5),
+      "Sign-in form should be visible after choosing email/password recovery"
+    )
+    // EmailAuthView sits at the picker root and keeps its own @State across the sheet, so this
+    // asserts the email survives the round trip rather than the suggestedEmailAddress prefill.
+    // testLegacyRecoveryEmailLinkOptionNavigatesWithPrefilledEmail covers the prefill itself,
+    // because EmailLinkView is built fresh by the navigation destination.
     XCTAssertEqual(
       emailField.value as? String,
-      "legacy@example.com",
-      "Email/password recovery should prefill the previous email"
+      email,
+      "Sign-in form should still hold the email after returning from recovery"
     )
   }
 
   @MainActor
-  func testLegacyRecoveryEmailLinkOptionNavigatesWithPrefilledEmail() throws {
-    let app = createTestApp(
-      legacyFetchSignInEnabled: true,
-      legacyRecoveryPreviewEnabled: true
-    )
-    app.launch()
+  func testLegacyRecoveryEmailLinkOptionNavigatesWithPrefilledEmail() async throws {
+    let email = createEmail()
+    try await createLegacyRecoveryUser(email: email)
 
-    let recoveryView = app.scrollViews["legacy-sign-in-recovery-view"]
-    XCTAssertTrue(
-      recoveryView.waitForExistence(timeout: 5),
-      "Legacy sign-in recovery sheet should be visible"
-    )
+    let app = try presentRecoverySheet(for: email)
 
     let emailLinkButton = app.buttons["legacy-sign-in-with-email-link-button"]
     XCTAssertTrue(
@@ -74,10 +105,11 @@ final class LegacySignInRecoveryUITests: XCTestCase {
       emailLinkField.waitForExistence(timeout: 5),
       "Email link view should be visible after choosing email link recovery"
     )
-    XCTAssertEqual(
-      emailLinkField.value as? String,
-      "legacy@example.com",
-      "Email link recovery should prefill the previous email"
+    // The field can be queryable before onAppear applies the prefill, so poll rather than
+    // reading the value once.
+    XCTAssertTrue(
+      waitForFieldValue(emailLinkField, expectedText: email, timeout: 5),
+      "Email link recovery should prefill the previous email, got \(String(describing: emailLinkField.value))"
     )
   }
 }
