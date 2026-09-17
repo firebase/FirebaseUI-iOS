@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",
       "state" : {
-        "revision" : "33a468adfdb75b53f05a37e7c886ca7c962b5c17",
-        "version" : "12.17.0"
+        "revision" : "cf44bf2fa90b1dbba999ee2bb4dce4eaf7bceae8",
+        "version" : "12.19.1"
       }
     },
     {
@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/google-ads-on-device-conversion-ios-sdk",
       "state" : {
-        "revision" : "dc39082d8881109d35b94b1c122164c0e8d08a55",
-        "version" : "3.6.1"
+        "revision" : "0208e2681ec81f8a9c81084696f60fcce26cb7ee",
+        "version" : "3.7.0"
       }
     },
     {
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",
       "state" : {
-        "revision" : "fceaffa07d22dcd5624d3639fd970351a4a5ad8c",
-        "version" : "12.17.0"
+        "revision" : "b8455dd2ff55cc269fda7a4f9eac6c1e3588c53f",
+        "version" : "12.19.2"
       }
     },
     {
