@@ -485,4 +485,72 @@
             self.firebaseArray.count);
 }
 
+#pragma mark - Invariant violations
+
+- (void)testRemovingUnknownKeyDoesNotCrash {
+  [self.observable populateWithCount:10];
+  self.snap.key = @"this-key-was-never-added";
+
+  XCTAssertNoThrow(
+    [self.observable sendEvent:FIRDataEventTypeChildRemoved
+                    withObject:self.snap
+                   previousKey:@"9"
+                         error:nil]);
+
+  XCTAssert(self.firebaseArray.count == 10,
+            @"expected count to stay 10 when removing an unknown key, got %ld",
+            self.firebaseArray.count);
+}
+
+- (void)testInsertingWithUnknownPreviousKeyDoesNotCrash {
+  [self.observable populateWithCount:10];
+  self.snap.key = @"new";
+
+  XCTAssertNoThrow(
+    [self.observable sendEvent:FIRDataEventTypeChildAdded
+                    withObject:self.snap
+                   previousKey:@"this-key-was-never-added"
+                         error:nil]);
+
+  XCTAssert(self.firebaseArray.count == 11,
+            @"expected count to become 11 after insert, got %ld",
+            self.firebaseArray.count);
+  XCTAssert([[self.firebaseArray snapshotAtIndex:10].key isEqualToString:@"new"],
+            @"expected the new snapshot to be appended at the end");
+}
+
+- (void)testChangingUnknownKeyDoesNotCrash {
+  [self.observable populateWithCount:10];
+  self.snap.key = @"this-key-was-never-added";
+
+  XCTAssertNoThrow(
+    [self.observable sendEvent:FIRDataEventTypeChildChanged
+                    withObject:self.snap
+                   previousKey:@"9"
+                         error:nil]);
+
+  XCTAssert(self.firebaseArray.count == 11,
+            @"expected count to become 11 after recovering change as insert, got %ld",
+            self.firebaseArray.count);
+  XCTAssert([[self.firebaseArray snapshotAtIndex:10].key isEqualToString:@"this-key-was-never-added"],
+            @"expected the recovered snapshot to be inserted at index 10");
+}
+
+- (void)testMovingUnknownKeyDoesNotCrash {
+  [self.observable populateWithCount:10];
+  self.snap.key = @"this-key-was-never-added";
+
+  XCTAssertNoThrow(
+    [self.observable sendEvent:FIRDataEventTypeChildMoved
+                    withObject:self.snap
+                   previousKey:@"3"
+                         error:nil]);
+
+  XCTAssert(self.firebaseArray.count == 11,
+            @"expected count to become 11 after recovering move as insert, got %ld",
+            self.firebaseArray.count);
+  XCTAssert([[self.firebaseArray snapshotAtIndex:4].key isEqualToString:@"this-key-was-never-added"],
+            @"expected the recovered snapshot to be inserted at index 4");
+}
+
 @end

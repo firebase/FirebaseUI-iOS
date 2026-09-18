@@ -4,21 +4,28 @@ on:
   push:
     branches: [ main ]
     paths:
+      - 'Gemfile*'
       - '.github/workflows/firestore.yml'
       - 'FirebaseFirestoreUI/**'
       - 'test.sh'
       - 'FirebaseFirestoreUI.podspec'
       - 'Package.swift'
+      - 'Package.resolved'
   pull_request:
     branches: [ main ]
     paths:
+      - 'Gemfile*'
       - '.github/workflows/firestore.yml'
       - 'FirebaseFirestoreUI/**'
       - 'test.sh'
       - 'FirebaseFirestoreUI.podspec'
       - 'Package.swift'
+      - 'Package.resolved'
 
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   xcodebuild:
@@ -27,7 +34,21 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Ignored since the GITHUB_TOKEN needs to be persisted for this workflow.
+          persist-credentials: true # zizmor: ignore[artipacked]
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_26.2.app/Contents/Developer
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: Setup
         run: |
           cd FirebaseFirestoreUI
@@ -44,26 +65,48 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Ignored since the GITHUB_TOKEN needs to be persisted for this workflow.
+          persist-credentials: true # zizmor: ignore[artipacked]
       - name: Select Xcode version
         run: |
-          sudo xcode-select -switch /Applications/Xcode_16.3.app/Contents/Developer
+          sudo xcode-select -switch /Applications/Xcode_26.2.app/Contents/Developer
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: List
         run: |
           xcodebuild -list
       - name: Build
         run: |
-          xcodebuild -scheme FirebaseFirestoreUI -sdk iphonesimulator  -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro'
+          xcodebuild -scheme FirebaseFirestoreUI -sdk iphonesimulator  -destination 'platform=iOS Simulator,OS=latest,name=iPhone 17 Pro'
   pod:
     name: pod lib lint
     runs-on: macos-15
 
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Ignored since the GITHUB_TOKEN needs to be persisted for this workflow.
+          persist-credentials: true # zizmor: ignore[artipacked]
       - name: Select Xcode version
         run: |
-          sudo xcode-select -switch /Applications/Xcode_16.3.app/Contents/Developer
+          sudo xcode-select -switch /Applications/Xcode_26.2.app/Contents/Developer
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: Setup
         run: gem install bundler; bundle install
       - name: Build

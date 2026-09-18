@@ -16,7 +16,7 @@
 
 import UIKit
 
-import FirebaseStorageUI
+import FirebaseStorageUISwift
 
 class StorageViewController: UIViewController {
 
@@ -53,7 +53,7 @@ class StorageViewController: UIViewController {
 
     self.storageRef = Storage.storage().reference(withPath: url.path)
 
-    self.imageView.sd_setImage(with: self.storageRef,
+    self.imageView.sd_setImageWithStorageReference(self.storageRef,
                                maxImageSize: 10000000,
                                placeholderImage: nil,
                                options: [.progressiveLoad]) { (image, error, cacheType, storageRef) in

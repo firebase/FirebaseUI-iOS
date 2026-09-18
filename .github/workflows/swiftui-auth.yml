@@ -4,19 +4,23 @@ on:
   push:
     branches: [ main, development ]
     paths:
+      - 'Gemfile*'
       - '.github/workflows/swiftui-auth.yml'
       - 'samples/swiftui/**'
       - 'e2eTest/**'
       - 'FirebaseSwiftUI/**'
       - 'Package.swift'
+      - 'Package.resolved'
   pull_request:
     branches: [ main, development ]
     paths:
+      - 'Gemfile*'
       - '.github/workflows/swiftui-auth.yml'
       - 'samples/swiftui/**'
       - 'e2eTest/**'
       - 'FirebaseSwiftUI/**'
       - 'Package.swift'
+      - 'Package.resolved'
 
   workflow_dispatch:
 
@@ -24,7 +28,7 @@ permissions:
   contents: read
 
 env:
-  XCODE_VERSION: latest-stable
+  XCODE_VERSION: 26.2
   IOS_SIMULATOR_DEVICE: iPhone 17 Pro
 
 jobs:
@@ -33,7 +37,9 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       
       - name: Install swiftformat
         run: brew install swiftformat
@@ -45,40 +51,52 @@ jobs:
   unit-tests:
     name: Package Unit Tests
     runs-on: macos-26
-    timeout-minutes: 15
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1.7.0
         with:
           xcode-version: ${{ env.XCODE_VERSION }}
 
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: Prepare iOS Simulator
         id: prepare-simulator
         run: ./.github/workflows/scripts/prepare-ios-simulator.sh
         
       - name: Run FirebaseSwiftUI Package Unit Tests
+        env:
+          SIMULATOR_UDID: ${{ steps.prepare-simulator.outputs.udid }}
         run: |
           set -o pipefail
           xcodebuild test \
             -scheme FirebaseUI-Package \
-            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
+            -destination "id=$SIMULATOR_UDID" \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIPackageTests.xcresult | tee FirebaseSwiftUIPackageTests.log | xcpretty --test --color --simple
             
       - name: Upload test logs
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: unit-tests-logs
           path: FirebaseSwiftUIPackageTests.log
           
       - name: Upload test results
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: unit-tests-results
           path: FirebaseSwiftUIPackageTests.xcresult
@@ -87,16 +105,18 @@ jobs:
   integration-tests:
     name: Integration Tests
     runs-on: macos-26
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       
-      - uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         name: Install Node.js 20
         with:
           node-version: '20'
           
-      - uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b
+      - uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           distribution: 'temurin'
           java-version: '17'
@@ -113,35 +133,45 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1.7.0
         with:
           xcode-version: ${{ env.XCODE_VERSION }}
 
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: Prepare iOS Simulator
         id: prepare-simulator
         run: ./.github/workflows/scripts/prepare-ios-simulator.sh
 
       - name: Run Integration Tests
+        env:
+          SIMULATOR_UDID: ${{ steps.prepare-simulator.outputs.udid }}
         run: |
           cd ./e2eTest/FirebaseSwiftUIExample
           set -o pipefail
           xcodebuild test \
             -scheme FirebaseSwiftUIExampleTests \
-            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
+            -destination "id=$SIMULATOR_UDID" \
             -parallel-testing-enabled NO \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleTests.xcresult | tee FirebaseSwiftUIExampleTests.log | xcpretty --test --color --simple
             
       - name: Upload test logs
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: integration-tests-logs
           path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.log
           
       - name: Upload test results
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: integration-tests-results
           path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.xcresult
@@ -152,14 +182,16 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       
-      - uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         name: Install Node.js 20
         with:
           node-version: '20'
           
-      - uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b
+      - uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           distribution: 'temurin'
           java-version: '17'
@@ -176,44 +208,56 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
         
-      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1.7.0
         with:
           xcode-version: ${{ env.XCODE_VERSION }}
         
+      - name: Install simulators in case they are missing.
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
+        with:
+          timeout_minutes: 15
+          max_attempts: 5
+          retry_wait_seconds: 120
+          continue_on_error: true
+          command: xcodebuild -downloadPlatform iOS
       - name: Prepare iOS Simulator
         id: prepare-simulator
         run: ./.github/workflows/scripts/prepare-ios-simulator.sh
           
       - name: Build for UI Tests
+        env:
+          SIMULATOR_UDID: ${{ steps.prepare-simulator.outputs.udid }}
         run: |
           cd ./e2eTest/FirebaseSwiftUIExample
           set -o pipefail
           xcodebuild build-for-testing \
             -scheme FirebaseSwiftUIExampleUITests \
-            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
+            -destination "id=$SIMULATOR_UDID" \
             -enableCodeCoverage YES | xcpretty --color --simple
             
       - name: Run UI Tests
+        env:
+          SIMULATOR_UDID: ${{ steps.prepare-simulator.outputs.udid }}
         run: |
           cd ./e2eTest/FirebaseSwiftUIExample
           set -o pipefail
           xcodebuild test-without-building \
             -scheme FirebaseSwiftUIExampleUITests \
-            -destination "id=${{ steps.prepare-simulator.outputs.udid }}" \
+            -destination "id=$SIMULATOR_UDID" \
             -parallel-testing-enabled NO \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleUITests.xcresult | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple
             
       - name: Upload Firebase Emulator logs
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: firebase-emulator-logs
           path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExample/firebase-debug.log
           
       - name: Upload test results
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: FirebaseSwiftUIExampleUITests.xcresult
           path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.xcresult

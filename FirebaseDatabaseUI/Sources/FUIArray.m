@@ -191,18 +191,9 @@
 - (void)insertSnapshot:(FIRDataSnapshot *)snap withPreviousChildKey:(NSString *)previous {
   NSUInteger index = 0;
   if (previous != nil) {
-    NSInteger previousChildIndex = (NSInteger)[self indexForKey:previous];
-
-    if (previousChildIndex == NSNotFound) {
-      NSString *reason = [NSString stringWithFormat:@"Attempted to insert snapshot with unknown"
-                          @" previousChildKey %@ into array: %@", previous, self.snapshots];
-      NSException *exception = [NSException exceptionWithName:NSInternalInconsistencyException
-                                                       reason:reason
-                                                     userInfo:nil];
-      @throw exception;
-    }
-
-    index = previousChildIndex + 1;
+    NSUInteger previousChildIndex = [self indexForKey:previous];
+    index = (previousChildIndex == NSNotFound) ? self.snapshots.count
+                                               : previousChildIndex + 1;
   }
 
   [self.snapshots insertObject:snap atIndex:index];
@@ -217,12 +208,7 @@
   NSUInteger index = [self indexForKey:snap.key];
 
   if (index == NSNotFound) {
-    NSString *reason = [NSString stringWithFormat:@"Attempted to remove snapshot with unknown"
-                        @" key %@ from array: %@", snap.key, self.snapshots];
-    NSException *exception = [NSException exceptionWithName:NSInternalInconsistencyException
-                                                     reason:reason
-                                                   userInfo:nil];
-    @throw exception;
+    return;
   }
 
   [self.snapshots removeObjectAtIndex:index];
@@ -237,12 +223,8 @@
   NSUInteger index = [self indexForKey:snap.key];
 
   if (index == NSNotFound) {
-    NSString *reason = [NSString stringWithFormat:@"Attempted to replace snapshot with unknown"
-                        @" key %@ in array: %@", snap.key, self.snapshots];
-    NSException *exception = [NSException exceptionWithName:NSInternalInconsistencyException
-                                                     reason:reason
-                                                   userInfo:nil];
-    @throw exception;
+    [self insertSnapshot:snap withPreviousChildKey:previous];
+    return;
   }
 
   [self.snapshots replaceObjectAtIndex:index withObject:snap];
@@ -257,12 +239,8 @@
   NSUInteger fromIndex = [self indexForKey:snap.key];
 
   if (fromIndex == NSNotFound) {
-    NSString *reason = [NSString stringWithFormat:@"Attempted to remove snapshot with unknown"
-                        @" key %@ from array: %@", snap.key, self.snapshots];
-    NSException *exception = [NSException exceptionWithName:NSInternalInconsistencyException
-                                                     reason:reason
-                                                   userInfo:nil];
-    @throw exception;
+    [self insertSnapshot:snap withPreviousChildKey:previous];
+    return;
   }
 
   [self.snapshots removeObjectAtIndex:fromIndex];

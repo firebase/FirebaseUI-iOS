@@ -17,6 +17,14 @@
 #import "FirebaseStorageUI/Sources/Public/FirebaseStorageUI/UIImageView+FirebaseStorage.h"
 #import "FirebaseStorageUI/Sources/Public/FirebaseStorageUI/FUIStorageImageLoader.h"
 
+#if __has_include(<FirebaseStorage/FirebaseStorage.h>)
+  #import <FirebaseStorage/FirebaseStorage.h>
+#elif __has_include(<FirebaseStorage/FirebaseStorage-Swift.h>)
+  #import <FirebaseStorage/FirebaseStorage-Swift.h>
+#else
+  @import FirebaseStorage;
+#endif
+
 @implementation UIImageView (FirebaseStorage)
 
 - (void)sd_setImageWithStorageReference:(FIRStorageReference *)storageRef {

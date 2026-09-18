@@ -16,6 +16,17 @@
 
 #import "FirebaseStorageUI/Sources/Public/FirebaseStorageUI/FIRStorageDownloadTask+SDWebImage.h"
 
+// For SPM builds the header is empty (no @import, no @interface) to keep the
+// Clang module scanner happy.  Provide the full import and category declaration
+// here where @import is safe (compilation phase, not scan phase).
+#if !__has_include(<FirebaseStorage/FirebaseStorage.h>) && !__has_include(<FirebaseStorage/FirebaseStorage-Swift.h>)
+@import FirebaseStorage;
+NS_ASSUME_NONNULL_BEGIN
+@interface FIRStorageDownloadTask (SDWebImage) <SDWebImageOperation>
+@end
+NS_ASSUME_NONNULL_END
+#endif
+
 @implementation FIRStorageDownloadTask (SDWebImage)
 
 @end

@@ -17,6 +17,14 @@
 #import "FirebaseStorageUI/Sources/Public/FirebaseStorageUI/NSURL+FirebaseStorage.h"
 #import <objc/runtime.h>
 
+#if __has_include(<FirebaseStorage/FirebaseStorage.h>)
+  #import <FirebaseStorage/FirebaseStorage.h>
+#elif __has_include(<FirebaseStorage/FirebaseStorage-Swift.h>)
+  #import <FirebaseStorage/FirebaseStorage-Swift.h>
+#else
+  @import FirebaseStorage;
+#endif
+
 @implementation NSURL (FirebaseStorage)
 
 - (FIRStorageReference *)sd_storageReference {

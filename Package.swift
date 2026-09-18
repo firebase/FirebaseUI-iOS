@@ -35,6 +35,10 @@ let package = Package(
       targets: ["FirebaseStorageUI"]
     ),
     .library(
+      name: "FirebaseStorageUISwift",
+      targets: ["FirebaseStorageUISwift"]
+    ),
+    .library(
       name: "FirebaseAuthSwiftUI",
       targets: ["FirebaseAuthSwiftUI"]
     ),
@@ -74,7 +78,7 @@ let package = Package(
     ),
     .package(
       url: "https://github.com/google/GoogleSignIn-iOS",
-      from: "7.0.0"
+      from: "10.0.0"
     ),
     .package(
       url: "https://github.com/google/GoogleUtilities.git",
@@ -125,6 +129,15 @@ let package = Package(
       cSettings: [
         .headerSearchPath("../../"),
       ]
+    ),
+    .target(
+      name: "FirebaseStorageUISwift",
+      dependencies: [
+        "FirebaseStorageUI",
+        .product(name: "FirebaseStorage", package: "firebase-ios-sdk"),
+        .product(name: "SDWebImage", package: "SDWebImage"),
+      ],
+      path: "FirebaseStorageUI/SwiftBridge"
     ),
     .target(
       name: "FirebaseAuthUIComponents",

@@ -59,6 +59,7 @@ static NSString *const kTestReuseIdentifier = @"FUICollectionViewDataSourceTest"
   NSLog(@"%lu", (unsigned long)[self.collectionView numberOfItemsInSection:0]);
 
   [self.observable populateWithCount:10];
+  [self waitForDataSourceCount:10];
 }
 
 - (void)tearDown {
@@ -66,6 +67,13 @@ static NSString *const kTestReuseIdentifier = @"FUICollectionViewDataSourceTest"
   [self.observable removeAllObservers];
   [UIView setAnimationsEnabled:YES];
   [super tearDown];
+}
+
+- (void)waitForDataSourceCount:(NSUInteger)expected {
+  NSDate *timeout = [NSDate dateWithTimeIntervalSinceNow:1.0];
+  while (self.dataSource.count != expected && timeout.timeIntervalSinceNow > 0) {
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+  }
 }
 
 - (void)testItHasACount {
@@ -117,6 +125,21 @@ static NSString *const kTestReuseIdentifier = @"FUICollectionViewDataSourceTest"
   
   XCTAssert([cell.accessibilityValue isEqualToString:@"5"], @"expected element with index 5 to move to index 4, \
             found %@ at index 4 instead", cell.accessibilityValue);
+}
+
+- (void)testUnbindDoesNotLeakDataSourceWithPendingItems {
+  __weak FUICollectionViewDataSource *weakDataSource = self.dataSource;
+
+  [self.dataSource unbind];
+  self.dataSource = nil;
+
+  NSDate *timeout = [NSDate dateWithTimeIntervalSinceNow:1.0];
+  while (weakDataSource != nil && timeout.timeIntervalSinceNow > 0) {
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+  }
+
+  XCTAssertNil(weakDataSource,
+               @"expected data source to be deallocated after unbind with pending items, found a retain cycle");
 }
 
 @end
