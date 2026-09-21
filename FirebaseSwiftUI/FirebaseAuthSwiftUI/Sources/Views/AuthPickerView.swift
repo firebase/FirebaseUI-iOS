@@ -82,6 +82,7 @@ extension AuthPickerView: View {
         .accountConflictHandler()
         // Apply MFA handling at NavigationStack level
         .mfaHandler()
+        .environment(authService)
       }
   }
 
