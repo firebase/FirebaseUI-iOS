@@ -34,9 +34,9 @@ struct TestView: View {
 
   init() {
     Auth.auth().useEmulator(withHost: "localhost", port: 9099)
-    Task {
-      try signOut()
-    }
+    // Signed out synchronously: a deferred Task would land mid-presentation and mutate
+    // observable auth state while the auth picker sheet is still animating in.
+    try? signOut()
     if anonymousSignInEnabled {
       Auth.auth().signInAnonymously()
     }
@@ -44,9 +44,6 @@ struct TestView: View {
     let isMfaEnabled = ProcessInfo.processInfo.arguments.contains("--mfa-enabled")
     let legacyFetchSignInEnabled = ProcessInfo.processInfo.arguments.contains(
       "--legacy-fetch-sign-in-enabled"
-    )
-    let legacyRecoveryPreviewEnabled = ProcessInfo.processInfo.arguments.contains(
-      "--legacy-sign-in-recovery-preview"
     )
 
     let actionCodeSettings = ActionCodeSettings()
@@ -82,21 +79,6 @@ struct TestView: View {
         .withFacebookSignIn()
         .withEmailSignIn()
         .withEmailLinkSignIn()
-    }
-    if legacyRecoveryPreviewEnabled {
-      authService.legacySignInRecovery = LegacySignInRecoveryContext(
-        email: "legacy@example.com",
-        options: [
-          LegacySignInOption(
-            id: EmailAuthProviderID,
-            displayName: authService.string.legacyEmailPasswordOptionLabel
-          ),
-          LegacySignInOption(
-            id: "emailLink",
-            displayName: authService.string.legacyEmailLinkOptionLabel
-          ),
-        ]
-      )
     }
     authService.isPresented = true
   }
