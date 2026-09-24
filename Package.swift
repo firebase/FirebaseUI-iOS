@@ -74,11 +74,14 @@ let package = Package(
     ),
     .package(
       url: "https://github.com/firebase/firebase-ios-sdk.git",
-      "8.0.0" ..< "13.0.0"
+      // "8.0.0" ..< "14.0.0"
+      branch: "main"
     ),
     .package(
-      url: "https://github.com/google/GoogleSignIn-iOS",
-      from: "10.0.0"
+      // url: "https://github.com/google/GoogleSignIn-iOS",
+      // from: "10.0.0"
+      url: "https://github.com/paulb777/GoogleSignIn-iOS",
+      branch: "pb-test-swift-app-check"
     ),
     .package(
       url: "https://github.com/google/GoogleUtilities.git",
