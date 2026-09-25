@@ -293,6 +293,7 @@ public struct VerificationCodeInputField: View {
 }
 
 private struct SingleDigitField: View {
+  @Environment(\.authTypography) private var typography
   @Binding var digit: String
   let isError: Bool
   let isFocused: Bool
@@ -331,7 +332,8 @@ private struct SingleDigitField: View {
       },
       maxCharacters: maxDigits,
       configuration: { textField in
-        textField.font = .systemFont(ofSize: 24, weight: .medium)
+        textField.font = typography.fontFamily.flatMap { UIFont(name: $0, size: 24) }
+          ?? .systemFont(ofSize: 24, weight: .medium)
         textField.textAlignment = .center
         textField.keyboardType = .numberPad
         textField.textContentType = .oneTimeCode
