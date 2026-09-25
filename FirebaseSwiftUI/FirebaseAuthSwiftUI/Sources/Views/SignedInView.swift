@@ -196,10 +196,11 @@ private struct DeleteAccountConfirmationSheet: View {
           onConfirm()
         } label: {
           Text("Delete Account")
+            .authFont(.body)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }
-        .authCTAButtonStyle()
+        .buttonStyle(.borderedProminent)
         .tint(.red)
         .padding([.top, .bottom], 8)
         .frame(maxWidth: .infinity)

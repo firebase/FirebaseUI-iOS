@@ -80,18 +80,20 @@ private struct CTAFontModifier: ViewModifier {
     if let explicitFont {
       content.font(explicitFont)
     } else {
-      content.authFont(.headline)
+      content.authFont(.body)
     }
   }
 }
 
-public extension View {
+extension View {
   /// Applies the auth flow's primary call-to-action button styling, reading colors/shape/font
   /// from the environment's ``AuthCTAButtonStyle`` (set via `.authCTAButtonStyle(_:)`).
   func authCTAButtonStyle() -> some View {
     modifier(AuthCTAButtonModifier())
   }
+}
 
+public extension View {
   /// Sets the ``AuthCTAButtonStyle`` used by every CTA button in this view's subtree.
   ///
   /// ```swift
