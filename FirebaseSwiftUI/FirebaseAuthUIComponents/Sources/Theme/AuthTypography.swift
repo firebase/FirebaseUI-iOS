@@ -14,26 +14,26 @@
 
 import SwiftUI
 
-/// Typography configuration for the auth flow. `fontFamily` defaults to `nil`, in which case
+/// Typography configuration for the auth flow. `fontName` defaults to `nil`, in which case
 /// text keeps using the system font at each semantic text style, exactly as it does today.
 public struct AuthTypography: Sendable {
   /// The PostScript name of a custom font registered with the app (e.g. via Info.plist).
-  public var fontFamily: String?
+  public var fontName: String?
 
-  public init(fontFamily: String? = nil) {
-    self.fontFamily = fontFamily
+  public init(fontName: String? = nil) {
+    self.fontName = fontName
   }
 
   public static let `default` = AuthTypography()
 
-  /// Resolves a semantic text style against this typography's `fontFamily`, preserving Dynamic
-  /// Type scaling relative to `style`. Falls back to the system font when `fontFamily` is unset.
+  /// Resolves a semantic text style against this typography's `fontName`, preserving Dynamic
+  /// Type scaling relative to `style`. Falls back to the system font when `fontName` is unset.
   public func resolvedFont(for style: Font.TextStyle, weight: Font.Weight? = nil) -> Font {
     // Use the style's size at the default content size category; `relativeTo:` applies the
     // user's Dynamic Type scaling, so an already-scaled size would be scaled twice.
-    let base: Font = if let fontFamily {
+    let base: Font = if let fontName {
       .custom(
-        fontFamily,
+        fontName,
         size: UIFont.preferredFont(
           forTextStyle: style.uiKit,
           compatibleWith: UITraitCollection(preferredContentSizeCategory: .large)
@@ -59,25 +59,25 @@ public extension EnvironmentValues {
 }
 
 public extension View {
-  /// Sets the custom font family used by every semantic text style (`.headline`, `.body`,
+  /// Sets the custom font used by every semantic text style (`.headline`, `.body`,
   /// `.caption`, etc.) throughout the auth flow, while preserving Dynamic Type scaling relative
   /// to each style.
   ///
   /// ```swift
   /// AuthPickerView { ... }
-  ///   .authTypography(AuthTypography(fontFamily: "Poppins-Regular"))
+  ///   .authTypography(AuthTypography(fontName: "Poppins-Regular"))
   /// ```
   func authTypography(_ typography: AuthTypography) -> some View {
     environment(\.authTypography, typography)
   }
 }
 
-public struct AuthFontModifier: ViewModifier {
+struct AuthFontModifier: ViewModifier {
   @Environment(\.authTypography) private var typography
   let style: Font.TextStyle
   var weight: Font.Weight?
 
-  public func body(content: Content) -> some View {
+  func body(content: Content) -> some View {
     content.font(typography.resolvedFont(for: style, weight: weight))
   }
 }
