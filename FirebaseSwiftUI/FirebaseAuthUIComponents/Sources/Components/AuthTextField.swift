@@ -108,6 +108,7 @@ public struct AuthTextField<Leading: View>: View {
             .frame(height: 24)
           }
         }
+        .authFont(.body)
       }
       .frame(maxWidth: .infinity)
       .keyboardType(keyboardType)
