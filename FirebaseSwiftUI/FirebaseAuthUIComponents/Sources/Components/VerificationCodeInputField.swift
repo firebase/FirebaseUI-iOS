@@ -35,6 +35,7 @@ public struct VerificationCodeInputField: View {
     _digitFields = State(initialValue: Array(repeating: "", count: codeLength))
   }
 
+  @Environment(\.authTextFieldStyle) private var style
   @Binding var code: String
   let codeLength: Int
   let isError: Bool
@@ -92,7 +93,7 @@ public struct VerificationCodeInputField: View {
       if isError, let errorMessage = errorMessage {
         Text(errorMessage)
           .authFont(.caption)
-          .foregroundColor(.red)
+          .foregroundStyle(style.errorColor ?? .red)
           .frame(maxWidth: .infinity, alignment: .leading)
       }
 
@@ -103,8 +104,8 @@ public struct VerificationCodeInputField: View {
             let isValid = validator.isValid(input: code)
             Text(validator.message)
               .authFont(.caption)
-              .strikethrough(isValid, color: .gray)
-              .foregroundStyle(isValid ? .gray : .red)
+              .strikethrough(isValid, color: style.secondaryColor ?? .gray)
+              .foregroundStyle(isValid ? (style.secondaryColor ?? .gray) : (style.errorColor ?? .red))
               .fixedSize(horizontal: false, vertical: true)
           }
         }
@@ -294,6 +295,7 @@ public struct VerificationCodeInputField: View {
 
 private struct SingleDigitField: View {
   @Environment(\.authTypography) private var typography
+  @Environment(\.authTextFieldStyle) private var style
   @Binding var digit: String
   let isError: Bool
   let isFocused: Bool
@@ -311,9 +313,9 @@ private struct SingleDigitField: View {
   }
 
   private var borderColor: Color {
-    if isError { return .red }
-    if isFocused || !digit.isEmpty { return .accentColor }
-    return Color(.systemFill)
+    if isError { return style.errorColor ?? .red }
+    if isFocused || !digit.isEmpty { return style.tint ?? .accentColor }
+    return style.containerColor ?? Color(.systemFill)
   }
 
   var body: some View {
@@ -346,10 +348,10 @@ private struct SingleDigitField: View {
     )
     .frame(width: 48, height: 48)
     .background(
-      RoundedRectangle(cornerRadius: 8)
-        .fill(Color.accentColor.opacity(0.05))
+      RoundedRectangle(cornerRadius: style.cornerRadius ?? 8)
+        .fill((style.tint ?? Color.accentColor).opacity(0.05))
         .overlay(
-          RoundedRectangle(cornerRadius: 8)
+          RoundedRectangle(cornerRadius: style.cornerRadius ?? 8)
             .stroke(borderColor, lineWidth: borderWidth)
         )
     )
