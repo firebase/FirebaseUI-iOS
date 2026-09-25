@@ -331,9 +331,9 @@ private struct SingleDigitField: View {
         onFocusChanged(isFocused)
       },
       maxCharacters: maxDigits,
+      font: typography.fontName.flatMap { UIFont(name: $0, size: 24) }
+        ?? .systemFont(ofSize: 24, weight: .medium),
       configuration: { textField in
-        textField.font = typography.fontFamily.flatMap { UIFont(name: $0, size: 24) }
-          ?? .systemFont(ofSize: 24, weight: .medium)
         textField.textAlignment = .center
         textField.keyboardType = .numberPad
         textField.textContentType = .oneTimeCode
@@ -369,6 +369,7 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
   let onDeleteBackwardWhenEmpty: () -> Void
   let onFocusChanged: (Bool) -> Void
   let maxCharacters: Int
+  let font: UIFont
   let configuration: (UITextField) -> Void
   let onTextChange: (String) -> Void
 
@@ -382,6 +383,7 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
       for: .editingChanged
     )
     configuration(textField)
+    textField.font = font
     textField.onDeleteBackward = { [weak textField] in
       guard let textField else { return }
       if (textField.text ?? "").isEmpty {
@@ -395,6 +397,9 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
     context.coordinator.parent = self
     if uiView.text != text {
       uiView.text = text
+    }
+    if uiView.font != font {
+      uiView.font = font
     }
 
     uiView.onDeleteBackward = { [weak uiView] in

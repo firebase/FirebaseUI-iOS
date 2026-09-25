@@ -17,11 +17,6 @@ import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
-private enum FocusableField: Hashable {
-  case verificationCode
-  case totpCode
-}
-
 @MainActor
 public struct MFAResolutionView {
   let mfaRequired: MFARequired
@@ -34,8 +29,6 @@ public struct MFAResolutionView {
   @State private var isLoading = false
   @State private var selectedHintIndex = 0
   @State private var verificationId: String?
-
-  @FocusState private var focus: FocusableField?
 
   public init(mfaRequired: MFARequired) {
     self.mfaRequired = mfaRequired
@@ -146,14 +139,11 @@ extension MFAResolutionView: View {
                 .scaleEffect(0.8)
             }
             Text("Complete Sign-In")
-              .authFont(.body)
           }
+          .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
-          .padding()
-          .background(canCompleteResolution ? Color.blue : Color.gray)
-          .foregroundColor(.white)
-          .cornerRadius(8)
         }
+        .authCTAButtonStyle()
         .disabled(!canCompleteResolution)
         .accessibilityIdentifier("complete-resolution-button")
 
@@ -161,12 +151,10 @@ extension MFAResolutionView: View {
         Button(action: cancelResolution) {
           Text("Cancel")
             .authFont(.body)
+            .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.gray.opacity(0.2))
-            .foregroundColor(.primary)
-            .cornerRadius(8)
         }
+        .buttonStyle(.bordered)
         .accessibilityIdentifier("cancel-button")
       }
       .padding(.horizontal)
@@ -217,14 +205,11 @@ extension MFAResolutionView: View {
                 .scaleEffect(0.8)
             }
             Text("Send Code")
-              .authFont(.body)
           }
+          .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
-          .padding()
-          .background(isLoading ? Color.gray : Color.blue)
-          .foregroundColor(.white)
-          .cornerRadius(8)
         }
+        .authCTAButtonStyle()
         .disabled(isLoading)
         .padding(.horizontal)
         .accessibilityIdentifier("send-sms-button")
@@ -234,11 +219,12 @@ extension MFAResolutionView: View {
           Text("Verification Code")
             .authFont(.headline)
 
-          TextField("Enter 6-digit code", text: $verificationCode)
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .keyboardType(.numberPad)
-            .focused($focus, equals: .verificationCode)
-            .accessibilityIdentifier("sms-verification-code-field")
+          VerificationCodeInputField(
+            code: $verificationCode,
+            validations: [FormValidators.verificationCode],
+            maintainsValidationMessage: true
+          )
+          .accessibilityIdentifier("sms-verification-code-field")
         }
         .padding(.horizontal)
       }
@@ -275,11 +261,12 @@ extension MFAResolutionView: View {
         Text("Verification Code")
           .authFont(.headline)
 
-        TextField("Enter 6-digit code", text: $totpCode)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .keyboardType(.numberPad)
-          .focused($focus, equals: .totpCode)
-          .accessibilityIdentifier("totp-verification-code-field")
+        VerificationCodeInputField(
+          code: $totpCode,
+          validations: [FormValidators.verificationCode],
+          maintainsValidationMessage: true
+        )
+        .accessibilityIdentifier("totp-verification-code-field")
       }
       .padding(.horizontal)
     }
