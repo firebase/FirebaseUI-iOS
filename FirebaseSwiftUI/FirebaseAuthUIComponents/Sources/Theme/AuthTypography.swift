@@ -29,8 +29,17 @@ public struct AuthTypography: Sendable {
   /// Resolves a semantic text style against this typography's `fontFamily`, preserving Dynamic
   /// Type scaling relative to `style`. Falls back to the system font when `fontFamily` is unset.
   public func resolvedFont(for style: Font.TextStyle, weight: Font.Weight? = nil) -> Font {
+    // Use the style's size at the default content size category; `relativeTo:` applies the
+    // user's Dynamic Type scaling, so an already-scaled size would be scaled twice.
     let base: Font = if let fontFamily {
-      .custom(fontFamily, size: UIFont.preferredFont(forTextStyle: style.uiKit).pointSize, relativeTo: style)
+      .custom(
+        fontFamily,
+        size: UIFont.preferredFont(
+          forTextStyle: style.uiKit,
+          compatibleWith: UITraitCollection(preferredContentSizeCategory: .large)
+        ).pointSize,
+        relativeTo: style
+      )
     } else {
       .system(style)
     }
