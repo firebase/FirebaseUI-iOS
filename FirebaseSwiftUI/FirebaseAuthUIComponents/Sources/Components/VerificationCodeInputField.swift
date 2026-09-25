@@ -35,6 +35,7 @@ public struct VerificationCodeInputField: View {
     _digitFields = State(initialValue: Array(repeating: "", count: codeLength))
   }
 
+  @Environment(\.authTextFieldStyle) private var style
   @Binding var code: String
   let codeLength: Int
   let isError: Bool
@@ -91,8 +92,8 @@ public struct VerificationCodeInputField: View {
 
       if isError, let errorMessage = errorMessage {
         Text(errorMessage)
-          .font(.caption)
-          .foregroundColor(.red)
+          .authFont(.caption)
+          .foregroundStyle(style.errorColor ?? .red)
           .frame(maxWidth: .infinity, alignment: .leading)
       }
 
@@ -102,9 +103,9 @@ public struct VerificationCodeInputField: View {
           ForEach(validations) { validator in
             let isValid = validator.isValid(input: code)
             Text(validator.message)
-              .font(.caption)
-              .strikethrough(isValid, color: .gray)
-              .foregroundStyle(isValid ? .gray : .red)
+              .authFont(.caption)
+              .strikethrough(isValid, color: style.secondaryColor ?? .gray)
+              .foregroundStyle(isValid ? (style.secondaryColor ?? .gray) : (style.errorColor ?? .red))
               .fixedSize(horizontal: false, vertical: true)
           }
         }
@@ -293,6 +294,8 @@ public struct VerificationCodeInputField: View {
 }
 
 private struct SingleDigitField: View {
+  @Environment(\.authTypography) private var typography
+  @Environment(\.authTextFieldStyle) private var style
   @Binding var digit: String
   let isError: Bool
   let isFocused: Bool
@@ -310,9 +313,9 @@ private struct SingleDigitField: View {
   }
 
   private var borderColor: Color {
-    if isError { return .red }
-    if isFocused || !digit.isEmpty { return .accentColor }
-    return Color(.systemFill)
+    if isError { return style.errorColor ?? .red }
+    if isFocused || !digit.isEmpty { return style.tint ?? .accentColor }
+    return style.containerColor ?? Color(.systemFill)
   }
 
   var body: some View {
@@ -330,8 +333,9 @@ private struct SingleDigitField: View {
         onFocusChanged(isFocused)
       },
       maxCharacters: maxDigits,
+      font: typography.fontName.flatMap { UIFont(name: $0, size: 24) }
+        ?? .systemFont(ofSize: 24, weight: .medium),
       configuration: { textField in
-        textField.font = .systemFont(ofSize: 24, weight: .medium)
         textField.textAlignment = .center
         textField.keyboardType = .numberPad
         textField.textContentType = .oneTimeCode
@@ -344,10 +348,10 @@ private struct SingleDigitField: View {
     )
     .frame(width: 48, height: 48)
     .background(
-      RoundedRectangle(cornerRadius: 8)
-        .fill(Color.accentColor.opacity(0.05))
+      RoundedRectangle(cornerRadius: style.cornerRadius ?? 8)
+        .fill((style.tint ?? Color.accentColor).opacity(0.05))
         .overlay(
-          RoundedRectangle(cornerRadius: 8)
+          RoundedRectangle(cornerRadius: style.cornerRadius ?? 8)
             .stroke(borderColor, lineWidth: borderWidth)
         )
     )
@@ -367,6 +371,7 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
   let onDeleteBackwardWhenEmpty: () -> Void
   let onFocusChanged: (Bool) -> Void
   let maxCharacters: Int
+  let font: UIFont
   let configuration: (UITextField) -> Void
   let onTextChange: (String) -> Void
 
@@ -380,6 +385,7 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
       for: .editingChanged
     )
     configuration(textField)
+    textField.font = font
     textField.onDeleteBackward = { [weak textField] in
       guard let textField else { return }
       if (textField.text ?? "").isEmpty {
@@ -393,6 +399,9 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
     context.coordinator.parent = self
     if uiView.text != text {
       uiView.text = text
+    }
+    if uiView.font != font {
+      uiView.font = font
     }
 
     uiView.onDeleteBackward = { [weak uiView] in
@@ -505,7 +514,7 @@ private final class BackspaceUITextField: UITextField {
 
   return VStack(spacing: 32) {
     Text("Enter Verification Code")
-      .font(.title2)
+      .authFont(.title2)
       .fontWeight(.semibold)
 
     VerificationCodeInputField(
@@ -519,7 +528,7 @@ private final class BackspaceUITextField: UITextField {
     )
 
     Text("Current code: \(code)")
-      .font(.caption)
+      .authFont(.caption)
       .foregroundColor(.secondary)
   }
   .padding()
@@ -530,7 +539,7 @@ private final class BackspaceUITextField: UITextField {
 
   return VStack(spacing: 32) {
     Text("Enter Verification Code")
-      .font(.title2)
+      .authFont(.title2)
       .fontWeight(.semibold)
 
     VerificationCodeInputField(
@@ -546,7 +555,7 @@ private final class BackspaceUITextField: UITextField {
     )
 
     Text("Current code: \(code)")
-      .font(.caption)
+      .authFont(.caption)
       .foregroundColor(.secondary)
   }
   .padding()
@@ -557,7 +566,7 @@ private final class BackspaceUITextField: UITextField {
 
   return VStack(spacing: 32) {
     Text("Enter 4-Digit Code")
-      .font(.title2)
+      .authFont(.title2)
       .fontWeight(.semibold)
 
     VerificationCodeInputField(
@@ -572,7 +581,7 @@ private final class BackspaceUITextField: UITextField {
     )
 
     Text("Current code: \(code)")
-      .font(.caption)
+      .authFont(.caption)
       .foregroundColor(.secondary)
   }
   .padding()

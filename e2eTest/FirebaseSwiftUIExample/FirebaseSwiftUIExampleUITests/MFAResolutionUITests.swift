@@ -93,10 +93,16 @@ final class MFAResolutionUITests: XCTestCase {
       return
     }
 
-    let codeField = app.textFields["sms-verification-code-field"]
-    XCTAssertTrue(codeField.waitForExistence(timeout: 10), "Code field should exist")
-    codeField.tap()
-    codeField.typeText(verificationCode)
+    let firstDigitField = app.otherElements["Digit 1 of 6"].textFields.firstMatch
+    XCTAssertTrue(firstDigitField.waitForExistence(timeout: 10), "Code field should exist")
+    // Paste each digit into its own box, matching MFAEnrolmentUITests.
+    for (index, digit) in verificationCode.enumerated() {
+      let field = app.otherElements["Digit \(index + 1) of 6"].textFields.firstMatch
+      UIPasteboard.general.string = String(digit)
+      field.tap()
+      field.press(forDuration: 1.2)
+      app.menuItems["Paste"].tap()
+    }
 
     let completeButton = app.buttons["complete-resolution-button"]
     XCTAssertTrue(completeButton.exists, "Complete button should exist")

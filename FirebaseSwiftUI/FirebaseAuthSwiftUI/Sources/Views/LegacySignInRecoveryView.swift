@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
@@ -26,8 +27,9 @@ struct LegacySignInRecoveryView: View {
           VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 12) {
               Text(authService.string.legacySignInRecoveryTitle)
-                .font(.title2.weight(.semibold))
+                .authFont(.title2, weight: .semibold)
               Text(authService.string.legacySignInRecoveryMessage(email: recovery.email))
+                .authFont(.body)
                 .foregroundStyle(.secondary)
             }
 
@@ -35,7 +37,7 @@ struct LegacySignInRecoveryView: View {
 
             if !recovery.unavailableProviders.isEmpty {
               Text(authService.string.legacySignInRecoveryUnavailableMessage)
-                .font(.footnote)
+                .authFont(.footnote)
                 .foregroundStyle(.secondary)
             }
 

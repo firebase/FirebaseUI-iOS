@@ -87,18 +87,19 @@ public struct CountrySelector: View {
           selectedCountry = country
         } label: {
           Text("\(country.flag) \(country.name) (\(country.dialCode))")
+            .authFont(.body)
         }
         .accessibilityIdentifier("country-option-\(country.code)")
       }
     } label: {
       HStack(spacing: 4) {
         Text(selectedCountry.flag)
-          .font(.title3)
+          .authFont(.title3)
         Text(selectedCountry.dialCode)
-          .font(.body)
+          .authFont(.body)
           .foregroundStyle(.primary)
         Image(systemName: "chevron.down")
-          .font(.caption2)
+          .authFont(.caption2)
           .foregroundStyle(.secondary)
       }
     }
