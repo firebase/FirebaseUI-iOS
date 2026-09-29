@@ -38,7 +38,8 @@ public struct AuthPickerView<Content: View>: View {
     )
   }
 
-  /// Replaces the first screen of the authentication sheet.
+  /// Replaces the signed-out first screen of the authentication sheet. The library still shows
+  /// ``SignedInView`` to signed-in users and its progress overlay while signing in.
   ///
   /// ```swift
   /// AuthPickerView { authenticatedApp }
@@ -57,14 +58,21 @@ public struct AuthPickerView<Content: View>: View {
     )
   }
 
-  /// Replaces the screens pushed inside the authentication sheet. Return
-  /// ``DefaultAuthPickerDestination`` for routes you don't customize.
+  /// Replaces the screens pushed inside the authentication sheet.
+  ///
+  /// Always end a `switch` over the screen with a `default` branch that returns
+  /// ``DefaultAuthPickerDestination``. New ``AuthView`` routes may be added in future releases,
+  /// and the `default` branch keeps them working without a code change.
   ///
   /// ```swift
   /// AuthPickerView { authenticatedApp }
   ///   .pickerDestination { screen in
-  ///     DefaultAuthPickerDestination(screen: screen)
-  ///       .background(theme.colors.background)
+  ///     switch screen {
+  ///     case .enterPhoneNumber:
+  ///       MyPhoneEntry()
+  ///     default:
+  ///       DefaultAuthPickerDestination(screen: screen)
+  ///     }
   ///   }
   /// ```
   public func pickerDestination<NewDestinationContent: View>(

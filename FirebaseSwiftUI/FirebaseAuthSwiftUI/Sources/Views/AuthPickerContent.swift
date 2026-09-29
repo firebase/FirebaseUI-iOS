@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import FirebaseAuth
+import FirebaseAuthUIComponents
 import SwiftUI
 
 /// An ``AuthPickerView`` with custom sheet content, returned by
@@ -49,7 +50,7 @@ public struct AuthPickerContent<
       .sheet(isPresented: $authService.isPresented) {
         @Bindable var navigator = authService.navigator
         NavigationStack(path: $navigator.routes) {
-          pickerContent()
+          root
             .navigationTitle(authService.authenticationState == .unauthenticated ? authService
               .string.authPickerTitle : "")
             .navigationBarTitleDisplayMode(.large)
@@ -78,7 +79,35 @@ public struct AuthPickerContent<
       }
   }
 
-  /// Replaces the first screen of the authentication sheet.
+  /// The sheet's first screen. The slot only replaces the signed-out screen, so signed-in users
+  /// always reach ``SignedInView`` and the progress overlay always shows while signing in.
+  @ViewBuilder
+  private var root: some View {
+    VStack {
+      if authService.authenticationState == .authenticated {
+        SignedInView()
+      } else {
+        pickerContent()
+      }
+    }
+    .overlay {
+      if authService.authenticationState == .authenticating {
+        VStack(spacing: 24) {
+          ProgressView()
+            .scaleEffect(1.25)
+            .tint(.white)
+          Text("Authenticating...")
+            .authFont(.body)
+            .foregroundStyle(.white)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.black.opacity(0.7))
+      }
+    }
+  }
+
+  /// Replaces the signed-out first screen of the authentication sheet. See
+  /// ``AuthPickerView/pickerContent(_:)``.
   public func pickerContent<NewPickerContent: View>(
     @ViewBuilder _ pickerContent: @escaping () -> NewPickerContent
   ) -> AuthPickerContent<Content, NewPickerContent, DestinationContent> {
@@ -89,7 +118,8 @@ public struct AuthPickerContent<
     )
   }
 
-  /// Replaces the screens pushed inside the authentication sheet.
+  /// Replaces the screens pushed inside the authentication sheet. See
+  /// ``AuthPickerView/pickerDestination(_:)``.
   public func pickerDestination<NewDestinationContent: View>(
     @ViewBuilder _ destination: @escaping (AuthView) -> NewDestinationContent
   ) -> AuthPickerContent<Content, PickerContent, NewDestinationContent> {
