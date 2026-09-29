@@ -17,152 +17,68 @@ import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
+/// Wraps your app content and presents the authentication sheet whenever
+/// `AuthService.isPresented` is `true`.
+///
+/// Use ``pickerContent(_:)`` and ``pickerDestination(_:)`` to replace the sheet's first screen or
+/// any pushed screen while the library keeps driving navigation, MFA and account conflicts.
 @MainActor
-public struct AuthPickerView<Content: View> {
+public struct AuthPickerView<Content: View>: View {
   public init(@ViewBuilder content: @escaping () -> Content = { EmptyView() }) {
     self.content = content
   }
 
-  @Environment(AuthService.self) private var authService
   private let content: () -> Content
 
-  // View-layer error state
-  @State private var error: AlertError?
-}
-
-extension AuthPickerView: View {
   public var body: some View {
-    @Bindable var authService = authService
-    content()
-      .sheet(isPresented: $authService.isPresented) {
-        @Bindable var navigator = authService.navigator
-        NavigationStack(path: $navigator.routes) {
-          authPickerViewInternal
-            .navigationTitle(authService.authenticationState == .unauthenticated ? authService
-              .string.authPickerTitle : "")
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-              toolbar
-            }
-            .navigationDestination(for: AuthView.self) { view in
-              switch view {
-              case AuthView.passwordRecovery:
-                PasswordRecoveryView()
-              case AuthView.emailLink:
-                EmailLinkView()
-              case AuthView.updatePassword:
-                UpdatePasswordView()
-              case AuthView.mfaEnrollment:
-                MFAEnrolmentView()
-              case AuthView.mfaManagement:
-                MFAManagementView()
-              case let .mfaResolution(mfaRequired):
-                MFAResolutionView(mfaRequired: mfaRequired)
-              case AuthView.enterPhoneNumber:
-                EnterPhoneNumberView()
-              case let .enterVerificationCode(verificationID, fullPhoneNumber):
-                EnterVerificationCodeView(
-                  verificationID: verificationID,
-                  fullPhoneNumber: fullPhoneNumber
-                )
-              }
-            }
-        }
-        .environment(\.reportError, reportError)
-        .errorAlert(
-          error: $error,
-          okButtonLabel: authService.string.okButtonLabel
-        )
-        .sheet(item: $authService.legacySignInRecovery) { _ in
-          LegacySignInRecoveryView()
-            .environment(authService)
-        }
-        .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
-        // Apply account conflict handling at NavigationStack level
-        .accountConflictHandler()
-        // Apply MFA handling at NavigationStack level
-        .mfaHandler()
-        .environment(authService)
-      }
+    AuthPickerContent(
+      content: content,
+      pickerContent: { DefaultAuthPickerContent() },
+      destination: { DefaultAuthPickerDestination(screen: $0) }
+    )
   }
 
-  /// Closure for reporting errors from child views
-  private func reportError(_ error: Error) {
-    Task { @MainActor in
-      self.error = AlertError(
-        message: authService.string.localizedErrorMessage(for: error),
-        underlyingError: error
-      )
-    }
+  /// Replaces the first screen of the authentication sheet.
+  ///
+  /// ```swift
+  /// AuthPickerView { authenticatedApp }
+  ///   .pickerContent {
+  ///     DefaultAuthPickerContent()
+  ///       .background(theme.colors.background)
+  ///   }
+  /// ```
+  public func pickerContent<NewPickerContent: View>(
+    @ViewBuilder _ pickerContent: @escaping () -> NewPickerContent
+  ) -> AuthPickerContent<Content, NewPickerContent, DefaultAuthPickerDestination> {
+    AuthPickerContent(
+      content: content,
+      pickerContent: pickerContent,
+      destination: { DefaultAuthPickerDestination(screen: $0) }
+    )
   }
 
-  @ToolbarContentBuilder
-  var toolbar: some ToolbarContent {
-    ToolbarItem(placement: .topBarTrailing) {
-      if !authService.configuration.shouldHideCancelButton {
-        Button {
-          authService.isPresented = false
-        } label: {
-          Image(systemName: "xmark")
-            .foregroundStyle(Color(UIColor.label))
-        }
-      }
-    }
-  }
-
-  @ViewBuilder
-  var authPickerViewInternal: some View {
-    @Bindable var authService = authService
-    VStack {
-      if authService.authenticationState == .authenticated {
-        SignedInView()
-      } else {
-        authMethodPicker
-          .safeAreaPadding()
-      }
-    }
-    .overlay {
-      if authService.authenticationState == .authenticating {
-        VStack(spacing: 24) {
-          ProgressView()
-            .scaleEffect(1.25)
-            .tint(.white)
-          Text("Authenticating...")
-            .authFont(.body)
-            .foregroundStyle(.white)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.black.opacity(0.7))
-      }
-    }
-  }
-
-  @ViewBuilder
-  var authMethodPicker: some View {
-    GeometryReader { proxy in
-      ScrollView {
-        VStack(spacing: 24) {
-          Image(authService.configuration.logo ?? Assets.firebaseAuthLogo)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 100, height: 100)
-          if authService.emailPasswordSignInEnabled {
-            EmailAuthView()
-          }
-          Divider()
-          otherSignInOptions(proxy)
-          PrivacyTOCsView(displayMode: .full)
-        }
-      }
-    }
-  }
-
-  @ViewBuilder
-  func otherSignInOptions(_ proxy: GeometryProxy) -> some View {
-    VStack {
-      authService.renderButtons()
-    }
-    .padding(.horizontal, proxy.size.width * 0.14)
+  /// Replaces the screens pushed inside the authentication sheet. Return
+  /// ``DefaultAuthPickerDestination`` for routes you don't customize.
+  ///
+  /// ```swift
+  /// AuthPickerView { authenticatedApp }
+  ///   .pickerDestination { screen in
+  ///     DefaultAuthPickerDestination(screen: screen)
+  ///       .background(theme.colors.background)
+  ///   }
+  /// ```
+  public func pickerDestination<NewDestinationContent: View>(
+    @ViewBuilder _ destination: @escaping (AuthView) -> NewDestinationContent
+  ) -> AuthPickerContent<
+    Content,
+    DefaultAuthPickerContent<DefaultAuthMethodPicker>,
+    NewDestinationContent
+  > {
+    AuthPickerContent(
+      content: content,
+      pickerContent: { DefaultAuthPickerContent() },
+      destination: destination
+    )
   }
 }
 
