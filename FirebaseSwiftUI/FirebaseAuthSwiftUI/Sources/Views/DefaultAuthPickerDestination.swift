@@ -16,7 +16,8 @@ import SwiftUI
 
 /// The default screen for each route pushed inside the authentication sheet.
 ///
-/// Return it from ``AuthPickerView/pickerDestination(_:)`` for the routes you don't customize:
+/// Return it from ``AuthPickerView/pickerDestination(_:)`` for the routes you don't customize.
+/// Keep a `default` branch: new ``AuthView`` routes may be added in future releases.
 ///
 /// ```swift
 /// AuthPickerView { authenticatedApp }

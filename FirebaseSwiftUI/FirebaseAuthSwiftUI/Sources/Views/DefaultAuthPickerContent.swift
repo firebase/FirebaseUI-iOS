@@ -15,8 +15,8 @@
 import FirebaseAuthUIComponents
 import SwiftUI
 
-/// The default first screen of the authentication sheet: the logo, email sign-in, the provider
-/// buttons and the terms, or ``SignedInView`` once the user is signed in.
+/// The default signed-out first screen of the authentication sheet: the logo, email sign-in,
+/// the provider buttons and the terms.
 ///
 /// Return it from ``AuthPickerView/pickerContent(_:)`` to keep the stock screen while adding
 /// modifiers such as a background.
@@ -30,32 +30,6 @@ public struct DefaultAuthPickerContent<AuthMethodPicker: View>: View {
   private let authMethodPicker: () -> AuthMethodPicker
 
   public var body: some View {
-    VStack {
-      if authService.authenticationState == .authenticated {
-        SignedInView()
-      } else {
-        signInContent
-          .safeAreaPadding()
-      }
-    }
-    .overlay {
-      if authService.authenticationState == .authenticating {
-        VStack(spacing: 24) {
-          ProgressView()
-            .scaleEffect(1.25)
-            .tint(.white)
-          Text("Authenticating...")
-            .authFont(.body)
-            .foregroundStyle(.white)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.black.opacity(0.7))
-      }
-    }
-  }
-
-  @ViewBuilder
-  private var signInContent: some View {
     GeometryReader { proxy in
       ScrollView {
         VStack(spacing: 24) {
@@ -73,6 +47,7 @@ public struct DefaultAuthPickerContent<AuthMethodPicker: View>: View {
         }
       }
     }
+    .safeAreaPadding()
   }
 }
 
