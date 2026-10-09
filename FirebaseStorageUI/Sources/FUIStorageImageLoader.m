@@ -141,7 +141,7 @@
           BOOL finished = receivedSize >= expectedSize;
           if (coderQueue.operationCount == 0) {
             [coderQueue addOperationWithBlock:^{
-              UIImage *image = SDImageLoaderDecodeProgressiveImageData(partialData, url, finished, task, options, context);
+              UIImage *image = SDImageLoaderDecodeProgressiveImageData(partialData, url, finished, (id<SDWebImageOperation>)task, options, context);
               if (image) {
                 dispatch_main_async_safe(^{
                   if (completedBlock) {

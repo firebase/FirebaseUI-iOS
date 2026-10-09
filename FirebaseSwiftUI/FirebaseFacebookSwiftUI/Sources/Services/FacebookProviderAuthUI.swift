@@ -56,7 +56,7 @@ public class FacebookProviderSwift: CredentialAuthProviderSwift {
         .providerAuthenticationFailed("Failed to create Facebook login configuration")
     }
 
-    let result = try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<
+    try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<
       Void,
       Error
     >) in

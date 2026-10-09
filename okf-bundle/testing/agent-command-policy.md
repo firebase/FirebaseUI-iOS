@@ -38,7 +38,7 @@ Single source for **which shell commands agents may run** in this repo. Test det
 | SPM SwiftUI package unit tests | `./swiftui-tests.sh --unit` (preferred) — wraps `xcodebuild test -scheme FirebaseUI-Package` | `swift test` (this package is iOS-simulator backed) |
 | Sample app builds | allowlisted sample `xcodebuild` in [running tests § samples](running-tests.md#sample-builds) | opening Xcode GUI as the agent gate |
 | Podspec lint (touched pod) | `bundle exec pod lib lint <Pod>.podspec` (matches CI `pod` jobs) | `pod trunk push` / release scripts during normal PR work |
-| Release / staging | **human-only** — [`release.sh`](../../release.sh), [`release-swift.sh`](../../release-swift.sh), [`staging.sh`](../../staging.sh) | agents must not run trunk/push release scripts unless the user explicitly requests |
+| Release / staging | **human-only** — [`release-swift.sh`](../../release-swift.sh) | agents must not run trunk/push release scripts unless the user explicitly requests |
 
 ### Host / toolchain assumptions
 
@@ -53,7 +53,7 @@ Single source for **which shell commands agents may run** in this repo. Test det
 | `swift test` for this package | Targets are iOS; CI uses `xcodebuild test` on simulator |
 | `npx` / `yarn` / `npm test` as product validation | Not this repo's test entrypoints (Firebase CLI/`npm` only for Auth emulator via documented scripts) |
 | Invented SwiftLint / clang-format agent gates | Swift lint entrypoint is `./lint-swift.sh`; ObjC style is Google Objective-C guide via review, not an agent script today |
-| `pod trunk push`, `./release.sh`, `./release-swift.sh` without explicit user request | Publishes artifacts |
+| `pod trunk push`, `./release-swift.sh` without explicit user request | Publishes artifacts |
 | Changing `Package.resolved` / lockfiles to silence dependency errors without product justification | Masks real resolution issues |
 | Copying RNFB `yarn tests:*` / Detox / Jet commands | Wrong stack |
 | Parallel overlapping simulator test runs on one host | Flaky boots and port contention (Auth emulator `:9099`) |

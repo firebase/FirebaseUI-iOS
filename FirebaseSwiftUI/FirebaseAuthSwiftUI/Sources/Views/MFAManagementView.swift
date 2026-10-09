@@ -16,7 +16,7 @@ import FirebaseAuth
 import FirebaseCore
 import SwiftUI
 
-extension MultiFactorInfo: Identifiable {
+extension MultiFactorInfo: @retroactive Identifiable {
   public var id: String { uid }
 }
 
