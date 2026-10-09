@@ -16,7 +16,7 @@ import FirebaseAuth
 import SwiftUI
 
 /// Context information for OAuth provider reauthentication (Google, Apple, Facebook, Twitter, etc.)
-public struct OAuthReauthContext: Equatable {
+public struct OAuthReauthContext: Equatable, Sendable {
   public let providerId: String
   public let providerName: String
 
@@ -31,7 +31,7 @@ public struct OAuthReauthContext: Equatable {
 }
 
 /// Context information for email/password reauthentication
-public struct EmailReauthContext: Equatable {
+public struct EmailReauthContext: Equatable, Sendable {
   public let email: String
 
   public init(email: String) {
@@ -44,7 +44,7 @@ public struct EmailReauthContext: Equatable {
 }
 
 /// Context information for email link reauthentication
-public struct EmailLinkReauthContext: Equatable {
+public struct EmailLinkReauthContext: Equatable, Sendable {
   public let email: String
 
   public init(email: String) {
@@ -57,7 +57,7 @@ public struct EmailLinkReauthContext: Equatable {
 }
 
 /// Context information for phone number reauthentication
-public struct PhoneReauthContext: Equatable {
+public struct PhoneReauthContext: Equatable, Sendable {
   public let phoneNumber: String
 
   public init(phoneNumber: String) {
@@ -70,7 +70,7 @@ public struct PhoneReauthContext: Equatable {
 }
 
 /// Type-safe wrapper for reauthentication contexts
-public enum ReauthenticationType: Equatable {
+public enum ReauthenticationType: Equatable, Sendable {
   case oauth(OAuthReauthContext)
   case email(EmailReauthContext)
   case emailLink(EmailLinkReauthContext)
@@ -91,7 +91,7 @@ public enum ReauthenticationType: Equatable {
 }
 
 /// Describes the specific type of account conflict that occurred
-public enum AccountConflictType: Equatable {
+public enum AccountConflictType: Equatable, Sendable {
   /// Account exists with a different provider (e.g., user signed up with Google, trying to use
   /// email)
   /// Solution: Sign in with existing provider, then link the new credential
