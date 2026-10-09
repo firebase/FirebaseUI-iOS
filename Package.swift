@@ -24,7 +24,7 @@ let package = Package(
     .iOS(.v17),
     // Satisfies SPM's dependency graph check for FirebaseAuth 13 & GoogleSignIn 11.
     // This package only supports iOS.
-    .macOS(.v12)
+    .macOS(.v12),
   ],
   products: [
     .library(

@@ -1088,7 +1088,8 @@ extension AuthService {
 
   private func buildLegacySignInRecovery(email: String,
                                          signInMethods: [String],
-                                         attemptedProviderId: String?) -> LegacySignInRecoveryContext? {
+                                         attemptedProviderId: String?)
+    -> LegacySignInRecoveryContext? {
     let attemptedOptionId = attemptedProviderId.map(normalizeLegacyOptionId)
     var options: [LegacySignInOption] = []
     var unavailableProviders: [String] = []
@@ -1135,7 +1136,9 @@ extension AuthService {
         displayName: string.legacyEmailLinkOptionLabel
       )
     default:
-      guard let provider = providers.first(where: { $0.id == normalizeLegacyOptionId(signInMethod) }) else {
+      guard let provider = providers.first(where: {
+        $0.id == normalizeLegacyOptionId(signInMethod)
+      }) else {
         return nil
       }
       return LegacySignInOption(id: provider.id, displayName: provider.displayName)
