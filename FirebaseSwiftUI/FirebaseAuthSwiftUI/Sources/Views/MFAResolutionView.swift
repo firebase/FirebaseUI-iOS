@@ -13,13 +13,9 @@
 // limitations under the License.
 
 import FirebaseAuth
+import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
-
-private enum FocusableField: Hashable {
-  case verificationCode
-  case totpCode
-}
 
 @MainActor
 public struct MFAResolutionView {
@@ -33,8 +29,6 @@ public struct MFAResolutionView {
   @State private var isLoading = false
   @State private var selectedHintIndex = 0
   @State private var verificationId: String?
-
-  @FocusState private var focus: FocusableField?
 
   public init(mfaRequired: MFARequired) {
     self.mfaRequired = mfaRequired
@@ -114,12 +108,12 @@ extension MFAResolutionView: View {
           .foregroundColor(.blue)
 
         Text("Two-Factor Authentication")
-          .font(.largeTitle)
+          .authFont(.largeTitle)
           .fontWeight(.bold)
           .accessibilityIdentifier("mfa-resolution-title")
 
         Text("Complete sign-in with your second factor")
-          .font(.body)
+          .authFont(.body)
           .foregroundColor(.secondary)
           .multilineTextAlignment(.center)
       }
@@ -146,24 +140,21 @@ extension MFAResolutionView: View {
             }
             Text("Complete Sign-In")
           }
+          .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
-          .padding()
-          .background(canCompleteResolution ? Color.blue : Color.gray)
-          .foregroundColor(.white)
-          .cornerRadius(8)
         }
+        .authCTAButtonStyle()
         .disabled(!canCompleteResolution)
         .accessibilityIdentifier("complete-resolution-button")
 
         // Cancel Button
         Button(action: cancelResolution) {
           Text("Cancel")
+            .authFont(.body)
+            .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.gray.opacity(0.2))
-            .foregroundColor(.primary)
-            .cornerRadius(8)
         }
+        .buttonStyle(.bordered)
         .accessibilityIdentifier("cancel-button")
       }
       .padding(.horizontal)
@@ -190,16 +181,16 @@ extension MFAResolutionView: View {
           .foregroundColor(.blue)
 
         Text("SMS Verification")
-          .font(.title2)
+          .authFont(.title2)
           .fontWeight(.semibold)
 
         if let phoneNumber = phoneNumber {
           Text("We'll send a code to ••••••\(String(phoneNumber.suffix(4)))")
-            .font(.body)
+            .authFont(.body)
             .foregroundColor(.secondary)
         } else {
           Text("We'll send a verification code to your phone")
-            .font(.body)
+            .authFont(.body)
             .foregroundColor(.secondary)
         }
       }
@@ -215,12 +206,10 @@ extension MFAResolutionView: View {
             }
             Text("Send Code")
           }
+          .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
-          .padding()
-          .background(isLoading ? Color.gray : Color.blue)
-          .foregroundColor(.white)
-          .cornerRadius(8)
         }
+        .authCTAButtonStyle()
         .disabled(isLoading)
         .padding(.horizontal)
         .accessibilityIdentifier("send-sms-button")
@@ -228,13 +217,14 @@ extension MFAResolutionView: View {
         // Verification code input
         VStack(alignment: .leading, spacing: 8) {
           Text("Verification Code")
-            .font(.headline)
+            .authFont(.headline)
 
-          TextField("Enter 6-digit code", text: $verificationCode)
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .keyboardType(.numberPad)
-            .focused($focus, equals: .verificationCode)
-            .accessibilityIdentifier("sms-verification-code-field")
+          VerificationCodeInputField(
+            code: $verificationCode,
+            validations: [FormValidators.verificationCode],
+            maintainsValidationMessage: true
+          )
+          .accessibilityIdentifier("sms-verification-code-field")
         }
         .padding(.horizontal)
       }
@@ -250,17 +240,17 @@ extension MFAResolutionView: View {
           .foregroundColor(.green)
 
         Text("Authenticator App")
-          .font(.title2)
+          .authFont(.title2)
           .fontWeight(.semibold)
 
         Text("Enter the 6-digit code from your authenticator app")
-          .font(.body)
+          .authFont(.body)
           .foregroundColor(.secondary)
           .multilineTextAlignment(.center)
 
         if let displayName = displayName {
           Text(authService.string.accountPrefix(displayName: displayName))
-            .font(.caption)
+            .authFont(.caption)
             .foregroundColor(.secondary)
         }
       }
@@ -269,13 +259,14 @@ extension MFAResolutionView: View {
       // TOTP code input
       VStack(alignment: .leading, spacing: 8) {
         Text("Verification Code")
-          .font(.headline)
+          .authFont(.headline)
 
-        TextField("Enter 6-digit code", text: $totpCode)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .keyboardType(.numberPad)
-          .focused($focus, equals: .totpCode)
-          .accessibilityIdentifier("totp-verification-code-field")
+        VerificationCodeInputField(
+          code: $totpCode,
+          validations: [FormValidators.verificationCode],
+          maintainsValidationMessage: true
+        )
+        .accessibilityIdentifier("totp-verification-code-field")
       }
       .padding(.horizontal)
     }
@@ -285,7 +276,7 @@ extension MFAResolutionView: View {
   private func mfaHintsSelectionView(mfaRequired: MFARequired) -> some View {
     VStack(alignment: .leading, spacing: 12) {
       Text("Choose verification method:")
-        .font(.headline)
+        .authFont(.headline)
         .padding(.horizontal)
 
       // More idiomatic approach using indices
@@ -311,7 +302,7 @@ extension MFAResolutionView: View {
 
         VStack(alignment: .leading) {
           Text(hintDisplayName(for: hint))
-            .font(.body)
+            .authFont(.body)
             .foregroundColor(.primary)
 
           hintSubtitle(for: hint)
@@ -345,7 +336,7 @@ extension MFAResolutionView: View {
   private func hintSubtitle(for hint: MFAHint) -> some View {
     if case let .phone(_, _, phoneNumber) = hint, let phone = phoneNumber {
       Text("••••••\(String(phone.suffix(4)))")
-        .font(.caption)
+        .authFont(.caption)
         .foregroundColor(.secondary)
     }
   }
