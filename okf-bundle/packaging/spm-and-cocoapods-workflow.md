@@ -31,9 +31,13 @@ Canonical consumer docs: [`README.md`](../../README.md), [`GETTING_STARTED.md`](
 1. **SwiftUI Auth is SPM-first.** Do not add CocoaPods subspecs for `FirebaseAuthSwiftUI` / provider packages unless durable docs and CI are updated in the same change.
 2. **UIKit data-binding modules are dual-built.** Edits under `Firebase*UI/Sources` must keep CocoaPods tests and SPM scheme builds green ([distribution path gate](../testing/running-tests.md#distribution-path-gate-blocking)).
 3. **One source tree per module.** Do not fork SPM-only copies of UIKit sources; `Package.swift` targets point at the same `Sources` directories as the pods.
-4. **Versioning is split operationally:**
-   - CocoaPods / umbrella: [`release.sh`](../../release.sh), [`staging.sh`](../../staging.sh), podspecs
-   - SwiftUI Auth package version stamp: [`release-swift.sh`](../../release-swift.sh) updates `FirebaseSwiftUI/FirebaseAuthSwiftUI/Sources/Version.swift` (human-driven; agents need explicit user request)
+4. **Versioning and releases:**
+   - CocoaPods / umbrella: Starting with Firebase 13 and FirebaseUI-iOS 16.2,
+     podspecs are frozen and no longer published to CocoaPods trunk.
+   - SwiftUI Auth package version stamp:
+     [`release-swift.sh`](../../release-swift.sh) updates
+     `FirebaseSwiftUI/FirebaseAuthSwiftUI/Sources/Version.swift` (human-driven;
+     agents need explicit user request).
 5. **Swift language mode:** SwiftUI Auth targets set `.swiftLanguageMode(.v6)` in `Package.swift`. Do not silently relax to silence concurrency errors — fix or record an accepted exception.
 
 ## `Package.swift` ownership
@@ -56,5 +60,6 @@ Canonical consumer docs: [`README.md`](../../README.md), [`GETTING_STARTED.md`](
 | Dist-AD-1 | SwiftUI Auth ships via SPM; UIKit Database/Firestore/Storage remain CocoaPods-supported and SPM-listed | Accepted |
 | Dist-AD-2 | Shared UIKit sources must pass both CocoaPods `./test.sh` and CI SPM scheme jobs when changed | Accepted |
 | Dist-AD-3 | Agents do not run trunk/release scripts without explicit user request | Accepted |
+| Dist-AD-4 | Starting with Firebase 13 and FirebaseUI-iOS 16.2, CocoaPods podspecs are frozen and no longer published to trunk | Accepted |
 
 New distribution decisions get a row here; active migration tasks go in the [work queue](spm-cocoapods-work-queue.md).
