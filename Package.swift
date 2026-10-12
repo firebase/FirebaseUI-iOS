@@ -22,7 +22,7 @@ let package = Package(
   defaultLocalization: "en",
   platforms: [
     .iOS(.v17),
-    // Satisfies SPM's dependency graph check for FirebaseAuth 13 & GoogleSignIn 11.
+    // Satisfies SPM's dependency graph check for FirebaseAuth 13 & GoogleSignIn 10.
     // This package only supports iOS.
     .macOS(.v12),
   ],

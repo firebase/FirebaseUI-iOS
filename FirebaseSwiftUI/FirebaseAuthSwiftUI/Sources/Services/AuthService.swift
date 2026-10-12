@@ -901,7 +901,7 @@ public extension AuthService {
   }
 }
 
-// MARK: - Private Helper Methods
+// MARK: - Internal Helper Methods
 
 extension AuthService {
   func updateAuthenticationState() {
@@ -914,8 +914,12 @@ extension AuthService {
       legacySignInRecovery = nil
     }
   }
+}
 
-  private var shouldHandleAnonymousUpgrade: Bool {
+// MARK: - Private Helper Methods
+
+private extension AuthService {
+  var shouldHandleAnonymousUpgrade: Bool {
     currentUser?.isAnonymous == true && configuration.shouldAutoUpgradeAnonymousUsers
   }
 
