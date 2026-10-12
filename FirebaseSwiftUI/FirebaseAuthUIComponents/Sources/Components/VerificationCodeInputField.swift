@@ -467,11 +467,6 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-      // Ignore Return/newline (iPad hardware keyboard) — not a digit, not a delete.
-      if string.contains("\n") || string.contains("\r") {
-        return false
-      }
-
       if string.isEmpty {
         return true
       }
