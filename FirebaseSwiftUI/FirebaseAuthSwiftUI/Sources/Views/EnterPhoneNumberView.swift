@@ -12,79 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import FirebaseAuth
-import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
 struct EnterPhoneNumberView: View {
-  @Environment(AuthService.self) private var authService
-  @Environment(\.reportError) private var reportError
-  @State private var phoneNumber: String = ""
-  @State private var selectedCountry: CountryData = .default
-
   var body: some View {
-    VStack(spacing: 16) {
-      Text(authService.string.enterPhoneNumberPlaceholder)
-        .authFont(.subheadline)
-        .foregroundStyle(.secondary)
-        .multilineTextAlignment(.center)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.top)
-
-      AuthTextField(
-        text: $phoneNumber,
-        label: authService.string.phoneFieldLabel,
-        prompt: authService.string.enterPhoneNumberPlaceholder,
-        keyboardType: .phonePad,
-        contentType: .telephoneNumber,
-        validations: [
-          FormValidators.phoneNumber,
-        ],
-        onChange: { _ in }
-      ) {
-        CountrySelector(
-          selectedCountry: $selectedCountry,
-          enabled: !(authService.authenticationState == .authenticating)
-        )
-      }
-
-      Button(action: {
-        Task {
-          do {
-            let fullPhoneNumber = selectedCountry.dialCode + phoneNumber
-            let id = try await authService.verifyPhoneNumber(phoneNumber: fullPhoneNumber)
-            authService.navigator.push(.enterVerificationCode(
-              verificationID: id,
-              fullPhoneNumber: fullPhoneNumber
-            ))
-          } catch {
-            if let errorHandler = reportError {
-              errorHandler(error)
-            } else {
-              throw error
-            }
-          }
-        }
-      }) {
-        if authService.authenticationState == .authenticating {
-          ProgressView()
-            .frame(height: 32)
-            .frame(maxWidth: .infinity)
-        } else {
-          Text(authService.string.sendCodeButtonLabel)
-            .frame(height: 32)
-            .frame(maxWidth: .infinity)
-        }
-      }
-      .authCTAButtonStyle()
-      .disabled(authService.authenticationState == .authenticating || phoneNumber.isEmpty)
-      .padding(.top, 8)
-
-      Spacer()
-    }
-    .navigationTitle(authService.string.phoneSignInTitle)
-    .padding(.horizontal)
+    EnterPhoneNumberScreen { DefaultEnterPhoneNumberContent(state: $0) }
   }
 }
 
