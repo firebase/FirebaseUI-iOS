@@ -83,8 +83,14 @@ struct AuthFontModifier: ViewModifier {
 }
 
 public extension View {
-  /// Applies a semantic text style, resolved against the environment's ``AuthTypography`` —
-  /// use in place of a bare `.font(.headline)`/`.font(.caption)`/etc. call.
+  /// Applies a semantic text style resolved against the environment's ``AuthTypography``, so
+  /// your own views inside the auth flow use the same font as the stock screens.
+  ///
+  /// Example:
+  /// ```swift
+  /// Text("Welcome back")
+  ///   .authFont(.title2, weight: .semibold)
+  /// ```
   func authFont(_ style: Font.TextStyle, weight: Font.Weight? = nil) -> some View {
     modifier(AuthFontModifier(style: style, weight: weight))
   }

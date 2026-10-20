@@ -22,6 +22,14 @@ import SwiftUI
 ///
 /// Use ``pickerContent(_:)`` and ``pickerDestination(_:)`` to replace the sheet's first screen or
 /// any pushed screen while the library keeps driving navigation, MFA and account conflicts.
+///
+/// Example:
+/// ```swift
+/// AuthPickerView {
+///   HomeView()
+/// }
+/// .environment(authService)
+/// ```
 @MainActor
 public struct AuthPickerView<Content: View>: View {
   public init(@ViewBuilder content: @escaping () -> Content = { EmptyView() }) {
