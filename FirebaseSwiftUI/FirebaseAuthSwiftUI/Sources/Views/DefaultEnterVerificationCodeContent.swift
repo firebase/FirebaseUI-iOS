@@ -40,6 +40,7 @@ public struct DefaultEnterVerificationCodeContent: View {
               .authFont(.caption)
               .frame(maxWidth: .infinity, alignment: .leading)
           }
+          .disabled(state.isLoading)
         }
         .padding(.bottom)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -67,9 +68,15 @@ public struct DefaultEnterVerificationCodeContent: View {
         .disabled(state.isLoading || !state.isValid)
 
         Button(action: state.resendCode) {
-          Text(resendLabel)
-            .authFont(.body)
-            .frame(maxWidth: .infinity)
+          HStack(spacing: 4) {
+            Text(authService.string.resendCodeLabel)
+            if state.resendCountdown > 0 {
+              Text(Duration.seconds(state.resendCountdown), format: .time(pattern: .minuteSecond))
+                .monospacedDigit()
+            }
+          }
+          .authFont(.body)
+          .frame(maxWidth: .infinity)
         }
         .disabled(state.isLoading || state.resendCountdown > 0)
         .accessibilityIdentifier("resend-code-button")
@@ -80,12 +87,5 @@ public struct DefaultEnterVerificationCodeContent: View {
     .navigationTitle(authService.string.enterVerificationCodeTitle)
     .navigationBarTitleDisplayMode(.large)
     .padding(.horizontal)
-  }
-
-  private var resendLabel: String {
-    guard state.resendCountdown > 0 else { return authService.string.resendCodeLabel }
-    let remaining = Duration.seconds(state.resendCountdown)
-      .formatted(.time(pattern: .minuteSecond))
-    return "\(authService.string.resendCodeLabel) (\(remaining))"
   }
 }

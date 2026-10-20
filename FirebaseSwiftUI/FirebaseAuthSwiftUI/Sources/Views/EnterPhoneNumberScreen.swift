@@ -20,14 +20,39 @@ import SwiftUI
 public struct PhoneNumberContentState {
   /// The national phone number, without the dial code.
   public let phoneNumber: Binding<String>
+
+  /// The country whose dial code prefixes ``phoneNumber``.
   public let selectedCountry: Binding<CountryData>
+
   /// Sends a verification code to the full phone number, then pushes
-  /// ``AuthView/enterVerificationCode(verificationID:fullPhoneNumber:)``.
-  public let sendCode: () -> Void
+  /// ``AuthView/enterVerificationCode(verificationID:fullPhoneNumber:)``. Does nothing unless
+  /// ``isValid`` is `true` and ``isLoading`` is `false`.
+  public let sendCode: @MainActor () -> Void
+
+  /// Whether ``phoneNumber`` is non-empty.
   public let isValid: Bool
+
+  /// Whether a code is being sent, or the ``AuthService`` is signing in.
   public let isLoading: Bool
-  /// The localized message of the last failed attempt, if any.
+
+  /// The localized message of the last failed attempt. It clears when the number or country
+  /// changes or the next attempt starts. The sheet's error alert still shows for the same failure.
   public let errorMessage: String?
+
+  /// Creates a state, for example to preview custom content with stub actions.
+  public init(phoneNumber: Binding<String>,
+              selectedCountry: Binding<CountryData>,
+              sendCode: @escaping @MainActor () -> Void,
+              isValid: Bool,
+              isLoading: Bool,
+              errorMessage: String?) {
+    self.phoneNumber = phoneNumber
+    self.selectedCountry = selectedCountry
+    self.sendCode = sendCode
+    self.isValid = isValid
+    self.isLoading = isLoading
+    self.errorMessage = errorMessage
+  }
 }
 
 /// The phone number screen, with its content drawn by you.
@@ -62,7 +87,7 @@ public struct EnterPhoneNumberScreen<Content: View>: View {
   @Environment(\.reportError) private var reportError
   @State private var phoneNumber: String = ""
   @State private var selectedCountry: CountryData = .default
-  @State private var isSending = false
+  @State private var isWorking = false
   @State private var errorMessage: String?
 
   private let content: (PhoneNumberContentState) -> Content
@@ -76,6 +101,8 @@ public struct EnterPhoneNumberScreen<Content: View>: View {
       isLoading: isLoading,
       errorMessage: errorMessage
     ))
+    .onChange(of: phoneNumber) { errorMessage = nil }
+    .onChange(of: selectedCountry) { errorMessage = nil }
   }
 
   private var isValid: Bool {
@@ -83,15 +110,15 @@ public struct EnterPhoneNumberScreen<Content: View>: View {
   }
 
   private var isLoading: Bool {
-    isSending || authService.authenticationState == .authenticating
+    isWorking || authService.authenticationState == .authenticating
   }
 
   private func sendCode() {
     guard isValid, !isLoading else { return }
+    isWorking = true
+    errorMessage = nil
     Task {
-      isSending = true
-      errorMessage = nil
-      defer { isSending = false }
+      defer { isWorking = false }
       do {
         let fullPhoneNumber = selectedCountry.dialCode + phoneNumber
         let id = try await authService.verifyPhoneNumber(phoneNumber: fullPhoneNumber)
