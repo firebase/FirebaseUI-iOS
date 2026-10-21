@@ -33,7 +33,7 @@ public struct EmailLinkContentState {
   /// Whether ``email`` is a valid email address.
   public let isValid: Bool
 
-  /// Whether a link is being sent, or the ``AuthService`` is signing in.
+  /// Whether a link is being sent or handled, or the ``AuthService`` is signing in.
   public let isLoading: Bool
 
   /// The localized message of the last failed send or link sign-in. It clears when the email
@@ -96,6 +96,7 @@ public struct EmailLinkScreen<Content: View>: View {
   @State private var email = ""
   @State private var didSend = false
   @State private var isWorking = false
+  @State private var isHandlingLink = false
   @State private var errorMessage: String?
 
   private let content: (EmailLinkContentState) -> Content
@@ -112,8 +113,13 @@ public struct EmailLinkScreen<Content: View>: View {
     ))
     .onChange(of: email) { errorMessage = nil }
     .onOpenURL { url in
+      // Content with several root views gets this handler once per view; the link is one-time,
+      // so only the first one handles it.
+      guard !isHandlingLink else { return }
+      isHandlingLink = true
       errorMessage = nil
       Task {
+        defer { isHandlingLink = false }
         do {
           try await authService.handleSignInLink(url: url)
         } catch {
@@ -145,7 +151,7 @@ public struct EmailLinkScreen<Content: View>: View {
   }
 
   private var isLoading: Bool {
-    isWorking || authService.authenticationState == .authenticating
+    isWorking || isHandlingLink || authService.authenticationState == .authenticating
   }
 
   private func sendSignInLink() {

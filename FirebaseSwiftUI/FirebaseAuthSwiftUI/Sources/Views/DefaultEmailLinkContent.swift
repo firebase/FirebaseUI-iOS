@@ -65,7 +65,7 @@ public struct DefaultEmailLinkContent: View {
         }
       )
     ) {
-      Button(authService.string.okButtonLabel, action: state.dismissAlert)
+      Button(authService.string.okButtonLabel) {}
     } message: {
       Text(authService.string.signInWithEmailLinkViewMessage)
     }
