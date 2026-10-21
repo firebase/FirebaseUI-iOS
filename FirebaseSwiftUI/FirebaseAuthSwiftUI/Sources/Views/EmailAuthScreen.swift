@@ -42,6 +42,9 @@ public struct EmailAuthContentState {
   /// Pushes ``AuthView/passwordRecovery``.
   public let goToPasswordRecovery: @MainActor () -> Void
 
+  /// Starts email-link sign-in, the same as the stock email-link button.
+  public let goToEmailLink: @MainActor () -> Void
+
   /// Whether the form signs in or signs up. Shared with ``AuthService/authenticationFlow``.
   public let flow: AuthenticationFlow
 
@@ -66,6 +69,7 @@ public struct EmailAuthContentState {
               signUp: @escaping @MainActor () -> Void,
               switchFlow: @escaping @MainActor () -> Void,
               goToPasswordRecovery: @escaping @MainActor () -> Void,
+              goToEmailLink: @escaping @MainActor () -> Void,
               flow: AuthenticationFlow,
               isValid: Bool,
               isLoading: Bool,
@@ -77,6 +81,7 @@ public struct EmailAuthContentState {
     self.signUp = signUp
     self.switchFlow = switchFlow
     self.goToPasswordRecovery = goToPasswordRecovery
+    self.goToEmailLink = goToEmailLink
     self.flow = flow
     self.isValid = isValid
     self.isLoading = isLoading
@@ -90,18 +95,26 @@ public struct EmailAuthContentState {
 /// conflicts and errors. Your content only draws the UI from the ``EmailAuthContentState`` it
 /// receives. Wrap ``DefaultEmailAuthContent`` to keep the stock markup.
 ///
+/// ``AuthPickerView/pickerContent(_:)`` replaces the whole first screen, so add the provider
+/// buttons back with ``DefaultAuthMethodPicker``.
+///
 /// Example:
 /// ```swift
 /// AuthPickerView { authenticatedApp }
 ///   .pickerContent {
-///     EmailAuthScreen { state in
-///       TextField("Email", text: state.email)
-///       SecureField("Password", text: state.password)
-///       if let errorMessage = state.errorMessage {
-///         Text(errorMessage)
+///     ScrollView {
+///       VStack {
+///         EmailAuthScreen { state in
+///           TextField("Email", text: state.email)
+///           SecureField("Password", text: state.password)
+///           if let errorMessage = state.errorMessage {
+///             Text(errorMessage)
+///           }
+///           Button("Sign in", action: state.signIn)
+///             .disabled(!state.isValid || state.isLoading)
+///         }
+///         DefaultAuthMethodPicker()
 ///       }
-///       Button("Sign in", action: state.signIn)
-///         .disabled(!state.isValid || state.isLoading)
 ///     }
 ///   }
 /// ```
@@ -132,6 +145,7 @@ public struct EmailAuthScreen<Content: View>: View {
       signUp: signUp,
       switchFlow: switchFlow,
       goToPasswordRecovery: { authService.navigator.push(.passwordRecovery) },
+      goToEmailLink: { authService.selectEmailLink() },
       flow: authService.authenticationFlow,
       isValid: isValid,
       isLoading: isLoading,

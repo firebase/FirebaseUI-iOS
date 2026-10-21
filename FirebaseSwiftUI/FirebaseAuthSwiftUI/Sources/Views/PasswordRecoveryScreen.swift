@@ -27,7 +27,12 @@ public struct PasswordRecoveryContentState {
   /// Clears ``didSend`` and ``email`` and returns to the first screen of the sheet.
   public let dismissSuccess: @MainActor () -> Void
 
-  /// Whether a reset link was sent and ``dismissSuccess`` hasn't been called since.
+  /// Clears ``didSend``, keeping ``email`` and staying on this screen, for example when the
+  /// user swipes a success sheet away.
+  public let hideSuccess: @MainActor () -> Void
+
+  /// Whether a reset link was sent and neither ``dismissSuccess`` nor ``hideSuccess`` has been
+  /// called since.
   public let didSend: Bool
 
   /// The address the last reset link was sent to; empty until one is sent.
@@ -36,7 +41,7 @@ public struct PasswordRecoveryContentState {
   /// Whether ``email`` is a valid email address.
   public let isValid: Bool
 
-  /// Whether a reset link is being sent.
+  /// Whether a reset link is being sent, or the ``AuthService`` is signing in.
   public let isLoading: Bool
 
   /// The localized message of the last failed attempt. It clears when the email changes or the
@@ -47,6 +52,7 @@ public struct PasswordRecoveryContentState {
   public init(email: Binding<String>,
               sendResetLink: @escaping @MainActor () -> Void,
               dismissSuccess: @escaping @MainActor () -> Void,
+              hideSuccess: @escaping @MainActor () -> Void,
               didSend: Bool,
               sentEmail: String,
               isValid: Bool,
@@ -55,6 +61,7 @@ public struct PasswordRecoveryContentState {
     self.email = email
     self.sendResetLink = sendResetLink
     self.dismissSuccess = dismissSuccess
+    self.hideSuccess = hideSuccess
     self.didSend = didSend
     self.sentEmail = sentEmail
     self.isValid = isValid
@@ -111,10 +118,11 @@ public struct PasswordRecoveryScreen<Content: View>: View {
       email: $email,
       sendResetLink: sendResetLink,
       dismissSuccess: dismissSuccess,
+      hideSuccess: { didSend = false },
       didSend: didSend,
       sentEmail: sentEmail,
       isValid: isValid,
-      isLoading: isWorking,
+      isLoading: isLoading,
       errorMessage: errorMessage
     ))
     .onChange(of: email) { errorMessage = nil }
@@ -124,8 +132,12 @@ public struct PasswordRecoveryScreen<Content: View>: View {
     CommonUtils.isValidEmail(email)
   }
 
+  private var isLoading: Bool {
+    isWorking || authService.authenticationState == .authenticating
+  }
+
   private func sendResetLink() {
-    guard isValid, !isWorking else { return }
+    guard isValid, !isLoading else { return }
     isWorking = true
     errorMessage = nil
     Task {

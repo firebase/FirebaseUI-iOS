@@ -64,7 +64,11 @@ public struct DefaultEmailAuthContent: View {
         ] : [],
         maintainsValidationMessage: state.flow == .signUp,
         onSubmit: { _ in
-          state.signIn()
+          if state.flow == .signIn {
+            state.signIn()
+          } else {
+            focus = .confirmPassword
+          }
         },
         leading: {
           Image(systemName: "lock")
