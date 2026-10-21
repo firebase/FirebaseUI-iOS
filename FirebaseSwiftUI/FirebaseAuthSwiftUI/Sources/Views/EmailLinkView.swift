@@ -12,106 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import FirebaseAuth
-import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
 @MainActor
 public struct EmailLinkView {
-  @Environment(AuthService.self) private var authService
-  @Environment(\.accountConflictHandler) private var accountConflictHandler
-  @Environment(\.reportError) private var reportError
-  @State private var email = ""
-  @State private var showAlert = false
-
   public init() {}
-
-  private func sendEmailLink() async throws {
-    do {
-      try await authService.sendEmailSignInLink(email: email)
-      showAlert = true
-    } catch {
-      if let errorHandler = reportError {
-        errorHandler(error)
-      } else {
-        throw error
-      }
-    }
-  }
 }
 
 extension EmailLinkView: View {
   public var body: some View {
-    VStack(spacing: 24) {
-      AuthTextField(
-        text: $email,
-        label: authService.string.signInLinkEmailFieldLabel,
-        prompt: authService.string.emailInputLabel,
-        keyboardType: .emailAddress,
-        contentType: .emailAddress,
-        validations: [
-          FormValidators.email,
-        ],
-        leading: {
-          Image(systemName: "at")
-        }
-      )
-      .accessibilityIdentifier("email-link-email-field")
-      Button {
-        Task {
-          try await sendEmailLink()
-          authService.emailLink = email
-        }
-      } label: {
-        Text(authService.string.sendEmailLinkButtonLabel)
-          .padding(.vertical, 8)
-          .frame(maxWidth: .infinity)
-      }
-      .authCTAButtonStyle()
-      .disabled(!CommonUtils.isValidEmail(email))
-      .padding([.top, .bottom], 8)
-      .frame(maxWidth: .infinity)
-    }
-    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-    .navigationTitle(authService.string.signInWithEmailLinkViewTitle)
-    .safeAreaPadding()
-    .alert(
-      authService.string.signInWithEmailLinkViewTitle,
-      isPresented: $showAlert
-    ) {
-      Button(authService.string.okButtonLabel) {
-        showAlert = false
-      }
-    } message: {
-      Text(authService.string.signInWithEmailLinkViewMessage)
-    }
-    .onOpenURL { url in
-      Task {
-        do {
-          try await authService.handleSignInLink(url: url)
-        } catch {
-          if case let AuthServiceError.accountConflict(ctx) = error,
-             let onConflict = accountConflictHandler {
-            onConflict(ctx)
-            return
-          }
-
-          reportError?(error)
-          throw error
-        }
-      }
-    }
-    .onAppear {
-      if let suggestedEmailAddress = authService.suggestedEmailAddress {
-        email = suggestedEmailAddress
-      }
-    }
-    .onChange(of: authService.suggestedEmailAddress) { _, suggestedEmailAddress in
-      if let suggestedEmailAddress {
-        email = suggestedEmailAddress
-      }
-    }
+    EmailLinkScreen { DefaultEmailLinkContent(state: $0) }
   }
 }
 
