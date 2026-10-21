@@ -22,8 +22,8 @@ public struct MFAEnrollmentContentState {
   ///
   /// Later releases may add steps, so give a `switch` over it a `default` case.
   public enum Step {
-    /// Choosing a factor, before ``MFAEnrollmentContentState/startEnrollment`` succeeds or after
-    /// an enrolment session completed, failed or expired.
+    /// Choosing a factor, before ``MFAEnrollmentContentState/startEnrollment`` succeeds or once
+    /// the enrolment session has expired or finished.
     case selectFactor
     /// Entering the phone number and display name for an SMS factor.
     case enterPhoneNumber
@@ -62,8 +62,9 @@ public struct MFAEnrollmentContentState {
   public let startEnrollment: @MainActor () -> Void
 
   /// Sends a code to the full phone number, moving to ``Step/enterVerificationCode``, or sends a
-  /// new one from that step. Does nothing unless an SMS enrolment has started, ``phoneNumber``
-  /// and ``displayName`` are non-empty, and ``isLoading`` is `false`.
+  /// new one from that step. Does nothing unless ``step`` is ``Step/enterPhoneNumber`` or
+  /// ``Step/enterVerificationCode``, ``phoneNumber`` and ``displayName`` are non-empty, and
+  /// ``isLoading`` is `false`.
   public let sendCode: @MainActor () -> Void
 
   /// Enrols the factor with the SMS or authenticator code, reauthenticating first when Firebase
@@ -157,7 +158,8 @@ public struct MFAEnrollmentContentState {
 /// The screen starts the enrolment, sends SMS codes, enrols the factor, presents
 /// reauthentication when Firebase requires it, and reports errors. Your content only draws the
 /// UI for the ``MFAEnrollmentContentState/step`` it receives. Wrap ``DefaultMFAEnrolmentContent``
-/// to keep the stock markup.
+/// to keep the stock markup. The navigation title is part of that markup, so set your own on
+/// custom content.
 ///
 /// Example:
 /// ```swift
@@ -248,7 +250,11 @@ public struct MFAEnrolmentScreen<Content: View>: View {
 
   private var step: MFAEnrollmentContentState.Step {
     guard let session = currentSession else { return .selectFactor }
-    return MFAEnrollmentContentState.Step(type: session.type, status: session.status)
+    return MFAEnrollmentContentState.Step(
+      type: session.type,
+      status: session.status,
+      isExpired: session.isExpired
+    )
   }
 
   private var isValid: Bool {
@@ -286,7 +292,8 @@ public struct MFAEnrolmentScreen<Content: View>: View {
   }
 
   private func sendCode() {
-    guard let session = currentSession, session.type == .sms,
+    guard let session = currentSession,
+          step == .enterPhoneNumber || step == .enterVerificationCode,
           !phoneNumber.isEmpty, !displayName.isEmpty, !isLoading else { return }
     isWorking = true
     errorMessage = nil
@@ -379,11 +386,11 @@ extension MFAEnrollmentContentState {
 }
 
 extension MFAEnrollmentContentState.Step {
-  /// The step for a started enrolment session. Sessions that completed, failed or expired go back
-  /// to ``selectFactor`` so the user can start again.
-  init(type: SecondFactorType, status: EnrollmentSession.EnrollmentStatus) {
+  /// The step for a started enrolment session. Sessions that have expired or finished go back to
+  /// ``selectFactor`` so the user can start again.
+  init(type: SecondFactorType, status: EnrollmentSession.EnrollmentStatus, isExpired: Bool) {
     switch (type, status) {
-    case (_, .completed), (_, .failed), (_, .expired):
+    case _ where isExpired, (_, .completed), (_, .failed), (_, .expired):
       self = .selectFactor
     case (.sms, .initiated):
       self = .enterPhoneNumber
