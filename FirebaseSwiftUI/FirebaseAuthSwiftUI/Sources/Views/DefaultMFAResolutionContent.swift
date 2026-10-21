@@ -1,0 +1,284 @@
+// Copyright 2025 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import FirebaseAuthUIComponents
+import SwiftUI
+
+/// The stock content of ``MFAResolutionScreen``.
+@MainActor
+public struct DefaultMFAResolutionContent: View {
+  public init(state: MFAResolutionContentState) {
+    self.state = state
+  }
+
+  @Environment(AuthService.self) private var authService
+  private let state: MFAResolutionContentState
+
+  private var selectedHint: MFAHint? {
+    guard state.hints.indices.contains(state.selectedHintIndex.wrappedValue) else {
+      return nil
+    }
+    return state.hints[state.selectedHintIndex.wrappedValue]
+  }
+
+  public var body: some View {
+    VStack(spacing: 24) {
+      // Header
+      VStack(spacing: 12) {
+        Image(systemName: "lock.shield")
+          .font(.system(size: 50))
+          .foregroundColor(.blue)
+
+        Text("Two-Factor Authentication")
+          .authFont(.largeTitle)
+          .fontWeight(.bold)
+          .accessibilityIdentifier("mfa-resolution-title")
+
+        Text("Complete sign-in with your second factor")
+          .authFont(.body)
+          .foregroundColor(.secondary)
+          .multilineTextAlignment(.center)
+      }
+      .padding(.horizontal)
+
+      // MFA Hints Selection (if multiple available)
+      if state.hints.count > 1 {
+        mfaHintsSelectionView
+      }
+
+      // Resolution Content
+      if let hint = selectedHint {
+        resolutionContent(for: hint)
+      }
+
+      // Action buttons
+      VStack(spacing: 12) {
+        // Complete Resolution Button
+        Button(action: state.resolve) {
+          HStack {
+            if state.isLoading {
+              ProgressView()
+                .scaleEffect(0.8)
+            }
+            Text("Complete Sign-In")
+          }
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
+        }
+        .authCTAButtonStyle()
+        .disabled(state.isLoading || !state.isValid)
+        .accessibilityIdentifier("complete-resolution-button")
+
+        // Cancel Button
+        Button(action: state.cancel) {
+          Text("Cancel")
+            .authCustomFont(.body)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.bordered)
+        .accessibilityIdentifier("cancel-button")
+      }
+      .padding(.horizontal)
+    }
+    .padding(.vertical, 20)
+  }
+
+  @ViewBuilder
+  private func resolutionContent(for hint: MFAHint) -> some View {
+    switch hint {
+    case let .phone(displayName, _, phoneNumber):
+      phoneResolutionContent(displayName: displayName, phoneNumber: phoneNumber)
+    case let .totp(displayName, _):
+      totpResolutionContent(displayName: displayName)
+    }
+  }
+
+  @ViewBuilder
+  private func phoneResolutionContent(displayName _: String?, phoneNumber: String?) -> some View {
+    VStack(spacing: 16) {
+      VStack(spacing: 8) {
+        Image(systemName: "message.circle.fill")
+          .font(.system(size: 40))
+          .foregroundColor(.blue)
+
+        Text("SMS Verification")
+          .authFont(.title2)
+          .fontWeight(.semibold)
+
+        if let phoneNumber = phoneNumber {
+          Text("We'll send a code to ••••••\(String(phoneNumber.suffix(4)))")
+            .authFont(.body)
+            .foregroundColor(.secondary)
+        } else {
+          Text("We'll send a verification code to your phone")
+            .authFont(.body)
+            .foregroundColor(.secondary)
+        }
+      }
+      .padding(.horizontal)
+
+      // Send SMS button (if verification ID not yet obtained)
+      if !state.isCodeSent {
+        Button(action: state.sendCode) {
+          HStack {
+            if state.isLoading {
+              ProgressView()
+                .scaleEffect(0.8)
+            }
+            Text("Send Code")
+          }
+          .padding(.vertical, 8)
+          .frame(maxWidth: .infinity)
+        }
+        .authCTAButtonStyle()
+        .disabled(state.isLoading)
+        .padding(.horizontal)
+        .accessibilityIdentifier("send-sms-button")
+      } else {
+        // Verification code input
+        VStack(alignment: .leading, spacing: 8) {
+          Text("Verification Code")
+            .authFont(.headline)
+
+          VerificationCodeInputField(
+            code: state.verificationCode,
+            validations: [FormValidators.verificationCode],
+            maintainsValidationMessage: true
+          )
+          .accessibilityIdentifier("sms-verification-code-field")
+        }
+        .padding(.horizontal)
+      }
+    }
+  }
+
+  @ViewBuilder
+  private func totpResolutionContent(displayName: String?) -> some View {
+    VStack(spacing: 16) {
+      VStack(spacing: 8) {
+        Image(systemName: "qrcode")
+          .font(.system(size: 40))
+          .foregroundColor(.green)
+
+        Text("Authenticator App")
+          .authFont(.title2)
+          .fontWeight(.semibold)
+
+        Text("Enter the 6-digit code from your authenticator app")
+          .authFont(.body)
+          .foregroundColor(.secondary)
+          .multilineTextAlignment(.center)
+
+        if let displayName = displayName {
+          Text(authService.string.accountPrefix(displayName: displayName))
+            .authFont(.caption)
+            .foregroundColor(.secondary)
+        }
+      }
+      .padding(.horizontal)
+
+      // TOTP code input
+      VStack(alignment: .leading, spacing: 8) {
+        Text("Verification Code")
+          .authFont(.headline)
+
+        VerificationCodeInputField(
+          code: state.totpCode,
+          validations: [FormValidators.verificationCode],
+          maintainsValidationMessage: true
+        )
+        .accessibilityIdentifier("totp-verification-code-field")
+      }
+      .padding(.horizontal)
+    }
+  }
+
+  @ViewBuilder
+  private var mfaHintsSelectionView: some View {
+    VStack(alignment: .leading, spacing: 12) {
+      Text("Choose verification method:")
+        .authFont(.headline)
+        .padding(.horizontal)
+
+      ForEach(state.hints.indices, id: \.self) { index in
+        let hint = state.hints[index]
+        hintSelectionButton(hint: hint, index: index)
+      }
+    }
+  }
+
+  @ViewBuilder
+  private func hintSelectionButton(hint: MFAHint, index: Int) -> some View {
+    let isSelected = state.selectedHintIndex.wrappedValue == index
+    Button(action: {
+      state.selectedHintIndex.wrappedValue = index
+    }) {
+      HStack {
+        Image(systemName: hint.isPhoneHint ? "message.circle" : "qrcode")
+          .foregroundColor(.blue)
+
+        VStack(alignment: .leading) {
+          Text(hintDisplayName(for: hint))
+            .authFont(.body)
+            .foregroundColor(.primary)
+
+          hintSubtitle(for: hint)
+        }
+
+        Spacer()
+
+        if isSelected {
+          Image(systemName: "checkmark.circle.fill")
+            .foregroundColor(.blue)
+        }
+      }
+      .padding()
+      .background(isSelected ? Color.blue.opacity(0.1) : Color.clear)
+      .cornerRadius(8)
+      .overlay(
+        RoundedRectangle(cornerRadius: 8)
+          .stroke(isSelected ? Color.blue : Color.gray.opacity(0.3), lineWidth: 1)
+      )
+    }
+    .buttonStyle(PlainButtonStyle())
+    .padding(.horizontal)
+    .accessibilityIdentifier("hint-\(index)")
+  }
+
+  private func hintDisplayName(for hint: MFAHint) -> String {
+    hint.isPhoneHint ? "SMS" : "Authenticator App"
+  }
+
+  @ViewBuilder
+  private func hintSubtitle(for hint: MFAHint) -> some View {
+    if case let .phone(_, _, phoneNumber) = hint, let phone = phoneNumber {
+      Text("••••••\(String(phone.suffix(4)))")
+        .authFont(.caption)
+        .foregroundColor(.secondary)
+    }
+  }
+}
+
+// Helper extension for MFAHint
+private extension MFAHint {
+  var isPhoneHint: Bool {
+    switch self {
+    case .phone:
+      return true
+    case .totp:
+      return false
+    }
+  }
+}
