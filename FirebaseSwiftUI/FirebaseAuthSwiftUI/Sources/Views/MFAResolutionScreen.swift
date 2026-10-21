@@ -107,7 +107,18 @@ public struct MFAResolutionContentState {
 public struct MFAResolutionScreen<Content: View>: View {
   public init(mfaRequired: MFARequired,
               @ViewBuilder content: @escaping (MFAResolutionContentState) -> Content) {
+    self.init(mfaRequired: mfaRequired, onResolved: nil, onCancel: nil, content: content)
+  }
+
+  /// Used outside the auth navigation stack (e.g. reauthentication), where completion and
+  /// cancellation are handled by the caller instead of clearing the navigator
+  init(mfaRequired: MFARequired,
+       onResolved: (() -> Void)?,
+       onCancel: (() -> Void)?,
+       @ViewBuilder content: @escaping (MFAResolutionContentState) -> Content) {
     self.mfaRequired = mfaRequired
+    self.onResolved = onResolved
+    self.onCancel = onCancel
     self.content = content
   }
 
@@ -119,8 +130,11 @@ public struct MFAResolutionScreen<Content: View>: View {
   @State private var verificationId: String?
   @State private var isWorking = false
   @State private var errorMessage: String?
+  @State private var alertError: AlertError?
 
   private let mfaRequired: MFARequired
+  private let onResolved: (() -> Void)?
+  private let onCancel: (() -> Void)?
   private let content: (MFAResolutionContentState) -> Content
 
   public var body: some View {
@@ -133,7 +147,7 @@ public struct MFAResolutionScreen<Content: View>: View {
         totpCode: $totpCode,
         sendCode: sendCode,
         resolve: resolve,
-        cancel: { authService.navigator.clear() },
+        cancel: cancel,
         hints: mfaRequired.hints,
         isCodeSent: verificationId != nil,
         isValid: isValid,
@@ -143,6 +157,29 @@ public struct MFAResolutionScreen<Content: View>: View {
     }
     .onChange(of: verificationCode) { errorMessage = nil }
     .onChange(of: totpCode) { errorMessage = nil }
+    // Without a parent reporter (e.g. inside a reauth sheet), show failures here
+    .errorAlert(error: $alertError, okButtonLabel: authService.string.okButtonLabel)
+  }
+
+  private func cancel() {
+    if let onCancel {
+      onCancel()
+    } else {
+      authService.navigator.clear()
+    }
+  }
+
+  private func report(_ error: Error) {
+    errorMessage = authService.string.localizedErrorMessage(for: error)
+    if let reportError {
+      reportError(error)
+    } else {
+      alertError = AlertError(
+        title: "Error",
+        message: errorMessage ?? error.localizedDescription,
+        underlyingError: error
+      )
+    }
   }
 
   private func selectHint(_ index: Int) {
@@ -186,8 +223,7 @@ public struct MFAResolutionScreen<Content: View>: View {
         guard selectedHintIndex == hintIndex else { return }
         verificationId = id
       } catch {
-        errorMessage = authService.string.localizedErrorMessage(for: error)
-        reportError?(error)
+        report(error)
       }
     }
   }
@@ -211,10 +247,13 @@ public struct MFAResolutionScreen<Content: View>: View {
           hintIndex: selectedHintIndex,
           verificationId: verificationId
         )
-        authService.navigator.clear()
+        if let onResolved {
+          onResolved()
+        } else {
+          authService.navigator.clear()
+        }
       } catch {
-        errorMessage = authService.string.localizedErrorMessage(for: error)
-        reportError?(error)
+        report(error)
       }
     }
   }
