@@ -1705,6 +1705,8 @@ Thrown by sensitive operations when Firebase requires recent authentication. Eac
 
 - **`phoneReauthenticationRequired(context: PhoneReauthContext)`**: Phone provider. Context contains `phoneNumber` and `displayMessage`. Handle SMS verification, then call `reauthenticate(with:)`.
 
+- **`multiFactorReauthenticationRequired(MFARequired)`**: Thrown by `reauthenticate(with:)` and `reauthenticate(context:)` when the user has enrolled second factors. Complete it as for sign-in MFA resolution: `resolveSmsChallenge(hintIndex:)` for SMS hints, then `resolveSignIn(code:hintIndex:verificationId:)`. Default views handle this inside the reauthentication sheet.
+
 ---
 
 ### Best Practices
