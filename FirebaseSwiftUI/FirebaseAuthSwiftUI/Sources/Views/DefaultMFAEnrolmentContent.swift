@@ -15,12 +15,6 @@
 import FirebaseAuthUIComponents
 import SwiftUI
 
-private enum FocusableField: Hashable {
-  case phoneNumber
-  case verificationCode
-  case totpCode
-}
-
 /// The stock content of ``MFAEnrolmentScreen``.
 @MainActor
 public struct DefaultMFAEnrolmentContent: View {
@@ -29,7 +23,7 @@ public struct DefaultMFAEnrolmentContent: View {
   }
 
   @Environment(AuthService.self) private var authService
-  @FocusState private var focus: FocusableField?
+  @FocusState private var isPhoneNumberFocused: Bool
   private let state: MFAEnrollmentContentState
 
   public var body: some View {
@@ -119,7 +113,7 @@ public struct DefaultMFAEnrolmentContent: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .safeAreaPadding()
     .navigationTitle("Two-Factor Authentication")
-    .onChange(of: state.step) { focus = nil }
+    .onChange(of: state.step) { isPhoneNumberFocused = false }
   }
 
   private var initialContent: some View {
@@ -217,7 +211,7 @@ public struct DefaultMFAEnrolmentContent: View {
               enabled: !state.isLoading
             )
           }
-          .focused($focus, equals: .phoneNumber)
+          .focused($isPhoneNumberFocused)
           .accessibilityIdentifier("phone-number-field")
 
           AuthTextField(
