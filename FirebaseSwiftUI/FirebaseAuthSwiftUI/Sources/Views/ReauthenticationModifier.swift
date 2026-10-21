@@ -55,7 +55,7 @@ struct ReauthenticationModifier: ViewModifier {
         }
       }
       // Sheet for phone reauthentication
-      .sheet(isPresented: $coordinator.showingPhoneReauth) {
+      .sheet(isPresented: $coordinator.showingPhoneReauth, onDismiss: cancelIfPending) {
         if case let .phone(context) = coordinator.reauthContext {
           PhoneReauthView(
             phoneNumber: context.phoneNumber,
@@ -64,7 +64,7 @@ struct ReauthenticationModifier: ViewModifier {
         }
       }
       // Sheet for email reauthentication
-      .sheet(isPresented: $coordinator.showingEmailPasswordPrompt) {
+      .sheet(isPresented: $coordinator.showingEmailPasswordPrompt, onDismiss: cancelIfPending) {
         if case let .email(context) = coordinator.reauthContext {
           EmailReauthView(
             email: context.email,
@@ -89,7 +89,7 @@ struct ReauthenticationModifier: ViewModifier {
         }
       }
       // Sheet for email link reauthentication
-      .sheet(isPresented: $coordinator.showingEmailLinkReauth) {
+      .sheet(isPresented: $coordinator.showingEmailLinkReauth, onDismiss: cancelIfPending) {
         if case let .emailLink(context) = coordinator.reauthContext {
           EmailLinkReauthView(
             email: context.email,
@@ -97,6 +97,13 @@ struct ReauthenticationModifier: ViewModifier {
           )
         }
       }
+  }
+
+  /// Treats a sheet swiped away mid-flow as a cancel, so the waiting operation finishes.
+  private func cancelIfPending() {
+    if coordinator.reauthContext != nil {
+      coordinator.reauthCancelled()
+    }
   }
 
   private func performReauth() {
