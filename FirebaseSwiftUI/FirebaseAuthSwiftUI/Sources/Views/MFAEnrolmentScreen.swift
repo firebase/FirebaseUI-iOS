@@ -19,8 +19,11 @@ import SwiftUI
 /// The state and actions of the MFA enrolment screen, passed to ``MFAEnrolmentScreen``'s content.
 public struct MFAEnrollmentContentState {
   /// A step of the enrolment flow.
+  ///
+  /// Later releases may add steps, so give a `switch` over it a `default` case.
   public enum Step {
-    /// Choosing a factor, before ``MFAEnrollmentContentState/startEnrollment`` succeeds.
+    /// Choosing a factor, before ``MFAEnrollmentContentState/startEnrollment`` succeeds or after
+    /// an enrolment session completed, failed or expired.
     case selectFactor
     /// Entering the phone number and display name for an SMS factor.
     case enterPhoneNumber
@@ -34,8 +37,8 @@ public struct MFAEnrollmentContentState {
   /// The current step.
   public let step: Step
 
-  /// The factor ``startEnrollment`` sets up. The screen resets it to the first of
-  /// ``allowedFactors`` when it is not one of them.
+  /// The factor ``startEnrollment`` sets up. When the screen appears, it sets it to the first of
+  /// ``allowedFactors`` if it is not one of them.
   public let selectedFactorType: Binding<SecondFactorType>
 
   /// The national phone number of an SMS factor, without the dial code.
@@ -92,10 +95,10 @@ public struct MFAEnrollmentContentState {
   /// Whether ``copySecret`` just copied the secret.
   public let didCopySecret: Bool
 
-  /// Whether the current step's input is complete: MFA is enabled with an allowed factor in
-  /// ``Step/selectFactor``, ``phoneNumber`` and ``displayName`` are non-empty in
-  /// ``Step/enterPhoneNumber``, and ``displayName`` plus the step's code are non-empty in
-  /// ``Step/enterVerificationCode`` and ``Step/setUpTOTP``.
+  /// Whether the current step's input is complete: MFA is enabled and ``selectedFactorType`` is
+  /// one of ``allowedFactors`` in ``Step/selectFactor``, ``phoneNumber`` and ``displayName`` are
+  /// non-empty in ``Step/enterPhoneNumber``, and ``displayName`` plus the step's code are
+  /// non-empty in ``Step/enterVerificationCode`` and ``Step/setUpTOTP``.
   public let isValid: Bool
 
   /// Whether an enrolment action is in flight, or the ``AuthService`` is signing in.
@@ -194,6 +197,7 @@ public struct MFAEnrolmentScreen<Content: View>: View {
   @State private var displayName = ""
   @State private var currentSession: EnrollmentSession?
   @State private var didCopySecret = false
+  @State private var copyFeedback: Task<Void, Never>?
   @State private var isWorking = false
   @State private var errorMessage: String?
   @State private var reauthCoordinator = ReauthenticationCoordinator()
@@ -239,32 +243,24 @@ public struct MFAEnrolmentScreen<Content: View>: View {
   }
 
   private var allowedFactors: [SecondFactorType] {
-    Array(authService.configuration.allowedSecondFactors).sorted { lhs, rhs in
-      lhs == .sms && rhs == .totp
-    }
+    MFAEnrollmentContentState.sortedFactors(authService.configuration.allowedSecondFactors)
   }
 
   private var step: MFAEnrollmentContentState.Step {
     guard let session = currentSession else { return .selectFactor }
-    switch session.type {
-    case .sms:
-      return session.status == .verificationSent ? .enterVerificationCode : .enterPhoneNumber
-    case .totp:
-      return .setUpTOTP
-    }
+    return MFAEnrollmentContentState.Step(type: session.type, status: session.status)
   }
 
   private var isValid: Bool {
-    switch step {
-    case .selectFactor:
-      authService.configuration.mfaEnabled && !allowedFactors.isEmpty
-    case .enterPhoneNumber:
-      !phoneNumber.isEmpty && !displayName.isEmpty
-    case .enterVerificationCode:
-      !verificationCode.isEmpty && !displayName.isEmpty
-    case .setUpTOTP:
-      !totpCode.isEmpty && !displayName.isEmpty
-    }
+    step.isValid(
+      isMFAEnabled: authService.configuration.mfaEnabled,
+      allowedFactors: allowedFactors,
+      selectedFactorType: selectedFactorType,
+      phoneNumber: phoneNumber,
+      verificationCode: verificationCode,
+      totpCode: totpCode,
+      displayName: displayName
+    )
   }
 
   private var isLoading: Bool {
@@ -352,8 +348,10 @@ public struct MFAEnrolmentScreen<Content: View>: View {
     guard let secret = currentSession?.totpInfo?.sharedSecretKey else { return }
     UIPasteboard.general.string = secret
     didCopySecret = true
-    Task {
+    copyFeedback?.cancel()
+    copyFeedback = Task {
       try? await Task.sleep(nanoseconds: 500_000_000)
+      guard !Task.isCancelled else { return }
       didCopySecret = false
     }
   }
@@ -370,5 +368,49 @@ public struct MFAEnrolmentScreen<Content: View>: View {
     verificationCode = ""
     totpCode = ""
     displayName = ""
+  }
+}
+
+extension MFAEnrollmentContentState {
+  /// The factors in display order, SMS first.
+  static func sortedFactors(_ factors: Set<SecondFactorType>) -> [SecondFactorType] {
+    factors.sorted { lhs, rhs in lhs == .sms && rhs == .totp }
+  }
+}
+
+extension MFAEnrollmentContentState.Step {
+  /// The step for a started enrolment session. Sessions that completed, failed or expired go back
+  /// to ``selectFactor`` so the user can start again.
+  init(type: SecondFactorType, status: EnrollmentSession.EnrollmentStatus) {
+    switch (type, status) {
+    case (_, .completed), (_, .failed), (_, .expired):
+      self = .selectFactor
+    case (.sms, .initiated):
+      self = .enterPhoneNumber
+    case (.sms, .verificationSent), (.sms, .verificationPending):
+      self = .enterVerificationCode
+    case (.totp, _):
+      self = .setUpTOTP
+    }
+  }
+
+  /// Whether the input this step needs is complete.
+  func isValid(isMFAEnabled: Bool,
+               allowedFactors: [SecondFactorType],
+               selectedFactorType: SecondFactorType,
+               phoneNumber: String,
+               verificationCode: String,
+               totpCode: String,
+               displayName: String) -> Bool {
+    switch self {
+    case .selectFactor:
+      isMFAEnabled && allowedFactors.contains(selectedFactorType)
+    case .enterPhoneNumber:
+      !phoneNumber.isEmpty && !displayName.isEmpty
+    case .enterVerificationCode:
+      !verificationCode.isEmpty && !displayName.isEmpty
+    case .setUpTOTP:
+      !totpCode.isEmpty && !displayName.isEmpty
+    }
   }
 }

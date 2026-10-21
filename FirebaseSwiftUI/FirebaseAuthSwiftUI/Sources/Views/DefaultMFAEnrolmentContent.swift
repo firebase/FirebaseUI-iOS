@@ -119,6 +119,7 @@ public struct DefaultMFAEnrolmentContent: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .safeAreaPadding()
     .navigationTitle("Two-Factor Authentication")
+    .onChange(of: state.step) { focus = nil }
   }
 
   private var initialContent: some View {
