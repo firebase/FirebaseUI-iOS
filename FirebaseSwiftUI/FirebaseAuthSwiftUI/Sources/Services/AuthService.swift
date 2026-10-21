@@ -379,8 +379,7 @@ public final class AuthService {
     }
 
     let credential = try await credentialProvider.createAuthCredential()
-    try await user.reauthenticate(with: credential)
-    currentUser = auth.currentUser
+    try await reauthenticate(user: user, credential: credential)
   }
 
   /// Reauthenticates with a pre-obtained credential
@@ -391,7 +390,23 @@ public final class AuthService {
     guard let user = currentUser else {
       throw AuthServiceError.noCurrentUser
     }
-    try await user.reauthenticate(with: credential)
+    try await reauthenticate(user: user, credential: credential)
+  }
+
+  /// Throws `multiFactorReauthenticationRequired` when the user has enrolled second factors
+  private func reauthenticate(user: User, credential: AuthCredential) async throws {
+    do {
+      try await user.reauthenticate(with: credential)
+    } catch let error as NSError
+      where error.code == AuthErrorCode.secondFactorRequired.rawValue {
+      guard let resolver = error
+        .userInfo[AuthErrorUserInfoMultiFactorResolverKey] as? MultiFactorResolver else {
+        throw error
+      }
+      currentMFAResolver = resolver
+      throw AuthServiceError
+        .multiFactorReauthenticationRequired(MFARequired(hints: extractMFAHints(from: resolver)))
+    }
     currentUser = auth.currentUser
   }
 }
@@ -616,7 +631,12 @@ public extension AuthService {
         // - credentialAlreadyInUse: credential is already linked to another account
         try handleErrorWithConflictCheck(error: error, credential: credential)
       } else {
-        // For reauth, just rethrow
+        // For reauth, just rethrow. The link is consumed even when a second factor is still
+        // required, so clean up reauth state in that case.
+        if case AuthServiceError.multiFactorReauthenticationRequired = error {
+          emailLinkReauth = nil
+          isReauthenticating = false
+        }
         throw error
       }
     }

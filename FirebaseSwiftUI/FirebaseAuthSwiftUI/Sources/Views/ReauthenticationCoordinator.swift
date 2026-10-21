@@ -26,6 +26,8 @@ public final class ReauthenticationCoordinator {
   public var showingEmailPasswordPrompt = false
   public var showingEmailLinkReauth = false
   public var showingEmailLinkReauthAlert = false
+  var showingMFAReauth = false
+  var mfaReauthRequired: MFARequired?
 
   private var continuation: CheckedContinuation<Void, Error>?
 
@@ -64,6 +66,12 @@ public final class ReauthenticationCoordinator {
     showingEmailLinkReauth = true
   }
 
+  /// Called when reauthentication outside a reauth sheet (OAuth) requires a second factor
+  func requireMFAResolution(_ mfaRequired: MFARequired) {
+    mfaReauthRequired = mfaRequired
+    showingMFAReauth = true
+  }
+
   /// Called when reauthentication completes successfully
   public func reauthCompleted() {
     continuation?.resume()
@@ -84,6 +92,8 @@ public final class ReauthenticationCoordinator {
     showingEmailPasswordPrompt = false
     showingEmailLinkReauth = false
     showingEmailLinkReauthAlert = false
+    showingMFAReauth = false
+    mfaReauthRequired = nil
     reauthContext = nil
   }
 }
