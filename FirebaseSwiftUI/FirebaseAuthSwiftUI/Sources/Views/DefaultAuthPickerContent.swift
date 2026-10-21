@@ -88,7 +88,8 @@ public struct DefaultAuthPickerContent<AuthMethodPicker: View>: View {
     Task {
       let result: Result<SignInOutcome?, Error>
       do {
-        result = try await .success(authService.triggerSignIn(for: provider))
+        let outcome = try await authService.triggerSignIn(for: provider)
+        result = .success(outcome)
       } catch {
         result = .failure(error)
       }
@@ -162,10 +163,8 @@ public struct DefaultAuthMethodPicker: View {
   @Environment(AuthService.self) private var authService
 
   public var body: some View {
-    VStack {
-      authService.renderButtons()
-    }
-    // 72% of the container width, matching a 14% inset on each side.
-    .containerRelativeFrame(.horizontal) { length, _ in length * 0.72 }
+    authService.renderButtons()
+      // 72% of the container width, matching a 14% inset on each side.
+      .containerRelativeFrame(.horizontal) { length, _ in length * 0.72 }
   }
 }
