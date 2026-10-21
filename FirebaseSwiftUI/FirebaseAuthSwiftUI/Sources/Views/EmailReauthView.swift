@@ -28,6 +28,7 @@ public struct EmailReauthView {
   @State private var password = ""
   @State private var isLoading = false
   @State private var error: AlertError?
+  @State private var mfaRequired: MFARequired?
 
   private func verifyPassword() {
     guard !password.isEmpty else { return }
@@ -38,6 +39,9 @@ public struct EmailReauthView {
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         try await authService.reauthenticate(with: credential)
         coordinator.reauthCompleted()
+        isLoading = false
+      } catch let AuthServiceError.multiFactorReauthenticationRequired(mfaRequired) {
+        self.mfaRequired = mfaRequired
         isLoading = false
       } catch {
         if let reportError = reportError {
@@ -123,6 +127,7 @@ extension EmailReauthView: View {
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
       .navigationBarTitleDisplayMode(.inline)
+      .mfaReauthResolution($mfaRequired, coordinator: coordinator)
     }
     .errorAlert(error: $error, okButtonLabel: authService.string.okButtonLabel)
   }

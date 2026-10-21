@@ -27,6 +27,7 @@ public struct EmailLinkReauthView {
   @State private var emailSent = false
   @State private var isLoading = false
   @State private var error: AlertError?
+  @State private var mfaRequired: MFARequired?
 
   private func sendEmailLink() async {
     isLoading = true
@@ -53,6 +54,8 @@ public struct EmailLinkReauthView {
       do {
         try await authService.handleSignInLink(url: url)
         coordinator.reauthCompleted()
+      } catch let AuthServiceError.multiFactorReauthenticationRequired(mfaRequired) {
+        self.mfaRequired = mfaRequired
       } catch {
         if let reportError = reportError {
           reportError(error)
@@ -145,6 +148,7 @@ extension EmailLinkReauthView: View {
       .task {
         await sendEmailLink()
       }
+      .mfaReauthResolution($mfaRequired, coordinator: coordinator)
     }
     .errorAlert(error: $error, okButtonLabel: authService.string.okButtonLabel)
   }
