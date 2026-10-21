@@ -17,8 +17,8 @@ import SwiftUI
 /// The state and actions of the MFA resolution screen, passed to ``MFAResolutionScreen``'s
 /// content.
 public struct MFAResolutionContentState {
-  /// The index in ``hints`` of the factor the user resolves with. Changing it clears
-  /// ``verificationCode``, ``totpCode`` and ``isCodeSent``.
+  /// The index in ``hints`` of the factor the user resolves with. Setting it, even to the
+  /// current index, clears ``verificationCode``, ``totpCode`` and ``isCodeSent``.
   public let selectedHintIndex: Binding<Int>
 
   /// The SMS code the user typed, for a phone hint.
@@ -124,27 +124,33 @@ public struct MFAResolutionScreen<Content: View>: View {
   private let content: (MFAResolutionContentState) -> Content
 
   public var body: some View {
-    content(MFAResolutionContentState(
-      selectedHintIndex: $selectedHintIndex,
-      verificationCode: $verificationCode,
-      totpCode: $totpCode,
-      sendCode: sendCode,
-      resolve: resolve,
-      cancel: { authService.navigator.clear() },
-      hints: mfaRequired.hints,
-      isCodeSent: verificationId != nil,
-      isValid: isValid,
-      isLoading: isLoading,
-      errorMessage: errorMessage
-    ))
-    .onChange(of: selectedHintIndex) {
-      verificationCode = ""
-      totpCode = ""
-      verificationId = nil
-      errorMessage = nil
+    // A single container, so the modifiers attach once even when the content returns several
+    // views.
+    VStack(spacing: 0) {
+      content(MFAResolutionContentState(
+        selectedHintIndex: Binding(get: { selectedHintIndex }, set: selectHint),
+        verificationCode: $verificationCode,
+        totpCode: $totpCode,
+        sendCode: sendCode,
+        resolve: resolve,
+        cancel: { authService.navigator.clear() },
+        hints: mfaRequired.hints,
+        isCodeSent: verificationId != nil,
+        isValid: isValid,
+        isLoading: isLoading,
+        errorMessage: errorMessage
+      ))
     }
     .onChange(of: verificationCode) { errorMessage = nil }
     .onChange(of: totpCode) { errorMessage = nil }
+  }
+
+  private func selectHint(_ index: Int) {
+    selectedHintIndex = index
+    verificationCode = ""
+    totpCode = ""
+    verificationId = nil
+    errorMessage = nil
   }
 
   private var selectedHint: MFAHint? {
@@ -171,10 +177,14 @@ public struct MFAResolutionScreen<Content: View>: View {
     guard case .phone = selectedHint, !isLoading else { return }
     isWorking = true
     errorMessage = nil
+    let hintIndex = selectedHintIndex
     Task {
       defer { isWorking = false }
       do {
-        verificationId = try await authService.resolveSmsChallenge(hintIndex: selectedHintIndex)
+        let id = try await authService.resolveSmsChallenge(hintIndex: hintIndex)
+        // Drop a code sent for a hint the user has since switched away from.
+        guard selectedHintIndex == hintIndex else { return }
+        verificationId = id
       } catch {
         errorMessage = authService.string.localizedErrorMessage(for: error)
         reportError?(error)
