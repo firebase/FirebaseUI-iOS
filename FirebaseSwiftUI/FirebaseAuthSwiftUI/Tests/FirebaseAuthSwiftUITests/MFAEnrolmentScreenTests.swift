@@ -82,6 +82,41 @@ struct MFAEnrolmentScreenTests {
     #expect(!isValid(.setUpTOTP, totpCode: "123456", displayName: ""))
   }
 
+  @Test("Get Started runs only from factor selection")
+  func startEnrollmentGuard() {
+    #expect(Step.selectFactor.canStartEnrollment(isValid: true, isLoading: false))
+    #expect(!Step.selectFactor.canStartEnrollment(isValid: false, isLoading: false))
+    #expect(!Step.selectFactor.canStartEnrollment(isValid: true, isLoading: true))
+    for step in [Step.enterPhoneNumber, .enterVerificationCode, .setUpTOTP] {
+      #expect(!step.canStartEnrollment(isValid: true, isLoading: false))
+    }
+  }
+
+  @Test("Codes are sent only from the SMS steps")
+  func sendCodeGuard() {
+    for step in [Step.enterPhoneNumber, .enterVerificationCode] {
+      #expect(step.canSendCode(phoneNumber: "5551234567", displayName: "Phone", isLoading: false))
+      #expect(!step.canSendCode(phoneNumber: "", displayName: "Phone", isLoading: false))
+      #expect(!step.canSendCode(phoneNumber: "5551234567", displayName: "", isLoading: false))
+      #expect(!step.canSendCode(phoneNumber: "5551234567", displayName: "Phone", isLoading: true))
+    }
+    for step in [Step.selectFactor, .setUpTOTP] {
+      #expect(!step.canSendCode(phoneNumber: "5551234567", displayName: "Phone", isLoading: false))
+    }
+  }
+
+  @Test("Enrolment runs only from the code steps")
+  func enrollGuard() {
+    for step in [Step.enterVerificationCode, .setUpTOTP] {
+      #expect(step.canEnroll(isValid: true, isLoading: false))
+      #expect(!step.canEnroll(isValid: false, isLoading: false))
+      #expect(!step.canEnroll(isValid: true, isLoading: true))
+    }
+    for step in [Step.selectFactor, .enterPhoneNumber] {
+      #expect(!step.canEnroll(isValid: true, isLoading: false))
+    }
+  }
+
   private func isValid(_ step: Step,
                        isMFAEnabled: Bool = true,
                        allowedFactors: [SecondFactorType] = [.sms, .totp],

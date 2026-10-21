@@ -274,7 +274,7 @@ public struct MFAEnrolmentScreen<Content: View>: View {
   }
 
   private func startEnrollment() {
-    guard step == .selectFactor, isValid, !isLoading else { return }
+    guard step.canStartEnrollment(isValid: isValid, isLoading: isLoading) else { return }
     isWorking = true
     errorMessage = nil
     Task {
@@ -293,8 +293,11 @@ public struct MFAEnrolmentScreen<Content: View>: View {
 
   private func sendCode() {
     guard let session = currentSession,
-          step == .enterPhoneNumber || step == .enterVerificationCode,
-          !phoneNumber.isEmpty, !displayName.isEmpty, !isLoading else { return }
+          step.canSendCode(
+            phoneNumber: phoneNumber,
+            displayName: displayName,
+            isLoading: isLoading
+          ) else { return }
     isWorking = true
     errorMessage = nil
     Task {
@@ -324,8 +327,7 @@ public struct MFAEnrolmentScreen<Content: View>: View {
 
   private func enroll() {
     guard let session = currentSession,
-          step == .enterVerificationCode || step == .setUpTOTP,
-          isValid, !isLoading else { return }
+          step.canEnroll(isValid: isValid, isLoading: isLoading) else { return }
     isWorking = true
     errorMessage = nil
     Task {
@@ -419,5 +421,21 @@ extension MFAEnrollmentContentState.Step {
     case .setUpTOTP:
       !totpCode.isEmpty && !displayName.isEmpty
     }
+  }
+
+  /// Whether ``MFAEnrollmentContentState/startEnrollment`` runs from this step.
+  func canStartEnrollment(isValid: Bool, isLoading: Bool) -> Bool {
+    self == .selectFactor && isValid && !isLoading
+  }
+
+  /// Whether ``MFAEnrollmentContentState/sendCode`` runs from this step.
+  func canSendCode(phoneNumber: String, displayName: String, isLoading: Bool) -> Bool {
+    (self == .enterPhoneNumber || self == .enterVerificationCode)
+      && !phoneNumber.isEmpty && !displayName.isEmpty && !isLoading
+  }
+
+  /// Whether ``MFAEnrollmentContentState/enroll`` runs from this step.
+  func canEnroll(isValid: Bool, isLoading: Bool) -> Bool {
+    (self == .enterVerificationCode || self == .setUpTOTP) && isValid && !isLoading
   }
 }
