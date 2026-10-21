@@ -26,7 +26,7 @@ public struct MFAManagementContentState {
   /// Pushes ``AuthView/mfaEnrollment``.
   public let goToEnrollment: @MainActor () -> Void
 
-  /// Reloads ``enrolledFactors`` from the current user.
+  /// Re-reads ``enrolledFactors`` from the signed-in user and clears ``errorMessage``.
   public let refresh: @MainActor () -> Void
 
   /// The current user's enrolled second factors.
@@ -36,8 +36,9 @@ public struct MFAManagementContentState {
   /// is signing in.
   public let isLoading: Bool
 
-  /// The localized message of the last failed unenroll. It clears when the next attempt starts.
-  /// The sheet's error alert still shows for the same failure.
+  /// The localized message of the last failed unenroll; cancelling reauthentication sets none. It
+  /// clears on ``refresh`` or when the next attempt starts. The sheet's error alert still shows
+  /// for the same failure.
   public let errorMessage: String?
 
   /// Creates a state, for example to preview custom content with stub actions.
@@ -99,14 +100,18 @@ public struct MFAManagementScreen<Content: View>: View {
   private let content: (MFAManagementContentState) -> Content
 
   public var body: some View {
-    content(MFAManagementContentState(
-      unenroll: unenroll,
-      goToEnrollment: { authService.navigator.push(.mfaEnrollment) },
-      refresh: refresh,
-      enrolledFactors: enrolledFactors,
-      isLoading: isLoading,
-      errorMessage: errorMessage
-    ))
+    // A single container, so the reauthentication sheets attach once even when the content
+    // returns several views, or none.
+    VStack(spacing: 0) {
+      content(MFAManagementContentState(
+        unenroll: unenroll,
+        goToEnrollment: { authService.navigator.push(.mfaEnrollment) },
+        refresh: refresh,
+        enrolledFactors: enrolledFactors,
+        isLoading: isLoading,
+        errorMessage: errorMessage
+      ))
+    }
     .withReauthentication(coordinator: reauthCoordinator)
     .onAppear(perform: refresh)
   }
@@ -116,6 +121,7 @@ public struct MFAManagementScreen<Content: View>: View {
   }
 
   private func refresh() {
+    errorMessage = nil
     guard let user = authService.currentUser else { return }
     enrolledFactors = user.multiFactor.enrolledFactors
   }
@@ -134,7 +140,11 @@ public struct MFAManagementScreen<Content: View>: View {
           enrolledFactors = try await authService.unenrollMFA(factorUid)
         }
       } catch {
-        errorMessage = authService.string.localizedErrorMessage(for: error)
+        if case AuthServiceError.signInCancelled = error {
+          // The user backed out of reauthentication; nothing failed.
+        } else {
+          errorMessage = authService.string.localizedErrorMessage(for: error)
+        }
         reportError?(error)
       }
     }
