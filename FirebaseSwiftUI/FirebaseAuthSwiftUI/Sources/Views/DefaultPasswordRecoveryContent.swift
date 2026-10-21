@@ -56,7 +56,7 @@ public struct DefaultPasswordRecoveryContent: View {
       get: { state.didSend },
       set: { isPresented in
         if !isPresented {
-          state.dismissSuccess()
+          state.hideSuccess()
         }
       }
     )) {
