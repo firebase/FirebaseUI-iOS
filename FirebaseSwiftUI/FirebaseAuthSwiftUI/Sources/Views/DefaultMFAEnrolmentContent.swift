@@ -307,6 +307,7 @@ public struct DefaultMFAEnrolmentContent: View {
               .frame(maxWidth: .infinity)
           }
           .buttonStyle(.bordered)
+          .disabled(state.isLoading)
           .padding([.top, .bottom], 8)
           .frame(maxWidth: .infinity)
           .accessibilityIdentifier("resend-code-button")

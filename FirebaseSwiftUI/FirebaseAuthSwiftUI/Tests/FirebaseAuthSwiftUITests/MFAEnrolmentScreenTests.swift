@@ -28,24 +28,33 @@ struct MFAEnrolmentScreenTests {
 
   @Test("SMS sessions map to the phone number and code steps")
   func smsSessionSteps() {
-    #expect(Step(type: .sms, status: .initiated) == .enterPhoneNumber)
-    #expect(Step(type: .sms, status: .verificationSent) == .enterVerificationCode)
-    #expect(Step(type: .sms, status: .verificationPending) == .enterVerificationCode)
+    #expect(Step(type: .sms, status: .initiated, isExpired: false) == .enterPhoneNumber)
+    #expect(Step(type: .sms, status: .verificationSent, isExpired: false)
+      == .enterVerificationCode)
+    #expect(Step(type: .sms, status: .verificationPending, isExpired: false)
+      == .enterVerificationCode)
   }
 
   @Test("TOTP sessions map to the authenticator step")
   func totpSessionSteps() {
-    #expect(Step(type: .totp, status: .initiated) == .setUpTOTP)
-    #expect(Step(type: .totp, status: .verificationPending) == .setUpTOTP)
+    #expect(Step(type: .totp, status: .initiated, isExpired: false) == .setUpTOTP)
+    #expect(Step(type: .totp, status: .verificationPending, isExpired: false) == .setUpTOTP)
   }
 
   @Test("Finished sessions go back to factor selection")
   func finishedSessionsSelectFactor() {
     let statuses: [EnrollmentSession.EnrollmentStatus] = [.completed, .failed, .expired]
     for status in statuses {
-      #expect(Step(type: .sms, status: status) == .selectFactor)
-      #expect(Step(type: .totp, status: status) == .selectFactor)
+      #expect(Step(type: .sms, status: status, isExpired: false) == .selectFactor)
+      #expect(Step(type: .totp, status: status, isExpired: false) == .selectFactor)
     }
+  }
+
+  @Test("Expired sessions go back to factor selection")
+  func expiredSessionsSelectFactor() {
+    #expect(Step(type: .sms, status: .initiated, isExpired: true) == .selectFactor)
+    #expect(Step(type: .sms, status: .verificationSent, isExpired: true) == .selectFactor)
+    #expect(Step(type: .totp, status: .initiated, isExpired: true) == .selectFactor)
   }
 
   @Test("Factor selection needs MFA enabled and an allowed factor")
