@@ -20,7 +20,7 @@ import SwiftUI
 /// Wraps your app content and presents the authentication sheet whenever
 /// `AuthService.isPresented` is `true`.
 ///
-/// Use ``pickerContent(_:)`` and ``pickerDestination(_:)`` to replace the sheet's first screen or
+/// Use the `pickerContent` modifiers and ``pickerDestination(_:)`` to replace the sheet's first screen or
 /// any pushed screen while the library keeps driving navigation, MFA and account conflicts.
 ///
 /// Example:
@@ -70,9 +70,10 @@ public struct AuthPickerView<Content: View>: View {
   /// ``AuthMethodPickerState`` to sign in with the registered providers. Call its `select` so MFA,
   /// account conflicts and errors are handled the same as the default buttons.
   ///
-  /// Your screen replaces the logo, email sign-in and terms too, so show your own email entry
-  /// (for example ``EmailAuthScreen``) and any legal text you need. To keep the stock screen and
-  /// only lay out the provider buttons, use ``DefaultAuthPickerContent/init(authMethodPicker:)``.
+  /// Your screen replaces the logo, email sign-in, terms and the large "Sign in" title (the close
+  /// button stays), so show your own heading, email entry (for example one built around
+  /// ``EmailAuthView``) and any legal text you need. To keep the stock screen and only lay out
+  /// the provider buttons, use ``DefaultAuthPickerContent/init(authMethodPicker:)``.
   ///
   /// Example:
   /// ```swift
@@ -87,7 +88,8 @@ public struct AuthPickerView<Content: View>: View {
     AuthPickerContent(
       content: content,
       pickerContent: pickerContent,
-      destination: { DefaultAuthPickerDestination(screen: $0) }
+      destination: { DefaultAuthPickerDestination(screen: $0) },
+      showsPickerTitle: false
     )
   }
 

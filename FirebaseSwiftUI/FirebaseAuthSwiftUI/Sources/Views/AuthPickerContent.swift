@@ -17,7 +17,7 @@ import FirebaseAuthUIComponents
 import SwiftUI
 
 /// An ``AuthPickerView`` with custom sheet content, returned by
-/// ``AuthPickerView/pickerContent(_:)`` and ``AuthPickerView/pickerDestination(_:)``.
+/// `AuthPickerView`'s `pickerContent` and ``AuthPickerView/pickerDestination(_:)`` modifiers.
 ///
 /// It owns the authentication sheet, its `NavigationStack`, error alerts, and MFA and
 /// account-conflict handling; only the first screen and the pushed screens come from the slots.
@@ -30,16 +30,21 @@ public struct AuthPickerContent<
 >: View {
   init(content: @escaping () -> Content,
        pickerContent: @escaping (AuthMethodPickerState) -> PickerContent,
-       destination: @escaping (AuthView) -> DestinationContent) {
+       destination: @escaping (AuthView) -> DestinationContent,
+       showsPickerTitle: Bool = true) {
     self.content = content
     self.pickerContent = pickerContent
     self.destination = destination
+    self.showsPickerTitle = showsPickerTitle
   }
 
   @Environment(AuthService.self) private var authService
   private let content: () -> Content
   private let pickerContent: (AuthMethodPickerState) -> PickerContent
   private let destination: (AuthView) -> DestinationContent
+  /// `false` when the whole first screen is custom, so the library's large title doesn't sit
+  /// above the app's own heading. The close button stays so the sheet can still be dismissed.
+  private let showsPickerTitle: Bool
 
   // View-layer error state
   @State private var error: AlertError?
@@ -51,14 +56,19 @@ public struct AuthPickerContent<
         @Bindable var navigator = authService.navigator
         NavigationStack(path: $navigator.routes) {
           root
-            .navigationTitle(authService.authenticationState == .unauthenticated ? authService
-              .string.authPickerTitle : "")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle(
+              showsPickerTitle && authService.authenticationState == .unauthenticated
+                ? authService.string.authPickerTitle : ""
+            )
+            .navigationBarTitleDisplayMode(showsPickerTitle ? .large : .inline)
             .toolbar {
               toolbar
             }
             .navigationDestination(for: AuthView.self) { view in
               destination(view)
+                // Pushed screens inherit an `.automatic` title mode from the root. Keep them
+                // large when the root is inline because a custom first screen hid its title.
+                .navigationBarTitleDisplayMode(showsPickerTitle ? .automatic : .large)
             }
         }
         .environment(\.reportError, reportError)
@@ -109,14 +119,15 @@ public struct AuthPickerContent<
   }
 
   /// Replaces the signed-out first screen of the authentication sheet. See
-  /// ``AuthPickerView/pickerContent(_:)``.
+  /// the no-argument `pickerContent` on ``AuthPickerView``.
   public func pickerContent<NewPickerContent: View>(
     @ViewBuilder _ pickerContent: @escaping () -> NewPickerContent
   ) -> AuthPickerContent<Content, NewPickerContent, DestinationContent> {
     AuthPickerContent<Content, NewPickerContent, DestinationContent>(
       content: content,
       pickerContent: { _ in pickerContent() },
-      destination: destination
+      destination: destination,
+      showsPickerTitle: true
     )
   }
 
@@ -128,7 +139,8 @@ public struct AuthPickerContent<
     AuthPickerContent<Content, NewPickerContent, DestinationContent>(
       content: content,
       pickerContent: pickerContent,
-      destination: destination
+      destination: destination,
+      showsPickerTitle: false
     )
   }
 
@@ -140,7 +152,8 @@ public struct AuthPickerContent<
     AuthPickerContent<Content, PickerContent, NewDestinationContent>(
       content: content,
       pickerContent: pickerContent,
-      destination: destination
+      destination: destination,
+      showsPickerTitle: showsPickerTitle
     )
   }
 
