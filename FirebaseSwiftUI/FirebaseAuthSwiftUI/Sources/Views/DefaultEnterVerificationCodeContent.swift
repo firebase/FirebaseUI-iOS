@@ -75,7 +75,7 @@ public struct DefaultEnterVerificationCodeContent: View {
                 .monospacedDigit()
             }
           }
-          .authFont(.body)
+          .authCustomFont(.body)
           .frame(maxWidth: .infinity)
         }
         .disabled(state.isLoading || state.resendCountdown > 0)
