@@ -291,6 +291,10 @@ struct DemoLink: View {
         .demoText(themeID.theme.link)
         .multilineTextAlignment(textAlignment)
         .opacity(isEnabled ? 1 : 0.5)
+        // A taller tap area than the text, without changing the layout.
+        .padding(.vertical, 8)
+        .contentShape(Rectangle())
+        .padding(.vertical, -8)
     }
     .buttonStyle(.plain)
     .frame(maxWidth: .infinity, alignment: alignment)

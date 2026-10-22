@@ -122,7 +122,8 @@ private struct DemoOtherSignInMethods: View {
 
   var body: some View {
     let theme = themeID.theme
-    VStack(spacing: 24) {
+    // 12 points plus the 44-point flow switch row's inset reads as Figma's 24.
+    VStack(spacing: 12) {
       VStack(spacing: 12) {
         // Like the Figma text layer, the label spans the frame's padding so it doesn't wrap.
         Text("Other sign in methods")
@@ -160,11 +161,18 @@ private struct DemoOtherSignInMethods: View {
           }
         }
         if !otherProviders.isEmpty {
-          DemoLink(
-            title: "Use other sign-in methods",
-            alignment: .center,
+          // Not in Figma: the remaining providers, behind a pill styled like Google's.
+          DemoProviderButton(
+            title: "More sign-in options",
+            fill: .white,
+            label: theme.googleLabel,
+            stroke: .black,
+            cornerRadius: 80,
             identifier: "other-providers-button"
           ) {
+            Image(systemName: "ellipsis.circle")
+              .font(.system(size: 18, weight: .medium))
+          } action: {
             isShowingOtherProviders = true
           }
         }
@@ -181,6 +189,8 @@ private struct DemoOtherSignInMethods: View {
 
       Button(action: switchFlow) {
         flowSwitchText(theme)
+          .frame(minHeight: 44)
+          .contentShape(Rectangle())
       }
       .buttonStyle(.plain)
       .accessibilityIdentifier("login")
