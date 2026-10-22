@@ -65,7 +65,10 @@ struct DemoPage<Card: View, Footer: View>: View {
               .accessibilityIdentifier("doggo")
           }
         }
-        .padding(.horizontal, 49)
+        // The Figma "sign up" frame is 332 points wide, centred; on the 430-point frame that
+        // leaves 49 points each side.
+        .frame(maxWidth: 332)
+        .padding(.horizontal, 16)
         footer()
           .padding(.top, theme.contentSpacing)
       }
