@@ -117,7 +117,6 @@ struct DemoTheme {
   let secondaryButton: ButtonColors
 
   /// The "Content" frame below the form.
-  let contentSpacing: CGFloat
   let dividerColor: Color
   let otherLabel: TextToken
   let otherPadding: EdgeInsets
@@ -164,7 +163,6 @@ extension DemoTheme {
     buttonShadow: Shadow(color: Color(demoHex: 0x5D0B47), x: 2, y: 4),
     primaryButton: ButtonColors(fill: Color(demoHex: 0x864B6F), label: .white),
     secondaryButton: ButtonColors(fill: Color(demoHex: 0xFFD8EB), label: Color(demoHex: 0x7B3B73)),
-    contentSpacing: 38,
     dividerColor: Color(demoHex: 0x864B6F),
     otherLabel: TextToken(fontName: "Onest-Medium", size: 16, color: Color(demoHex: 0xA08B95)),
     otherPadding: EdgeInsets(top: 16, leading: 40, bottom: 0, trailing: 40),
@@ -205,7 +203,6 @@ extension DemoTheme {
     buttonShadow: Shadow(color: Color(demoHex: 0x00DCE2), x: 3, y: 6),
     primaryButton: ButtonColors(fill: Color(demoHex: 0xFF52B3), label: Color(demoHex: 0x2C1067)),
     secondaryButton: ButtonColors(fill: Color(demoHex: 0xF3FBFB), label: Color(demoHex: 0x2C1067)),
-    contentSpacing: 79,
     dividerColor: Color(demoHex: 0x864B6F),
     otherLabel: TextToken(fontName: "ChivoMono-Medium", size: 16, color: Color(demoHex: 0x2C1067)),
     otherPadding: EdgeInsets(top: 16, leading: 40, bottom: 0, trailing: 40),
@@ -253,7 +250,6 @@ extension DemoTheme {
     buttonShadow: nil,
     primaryButton: ButtonColors(fill: Color(demoHex: 0xFDADEE), label: .black),
     secondaryButton: ButtonColors(fill: Color(demoHex: 0xF3FBFB), label: .black),
-    contentSpacing: 32,
     dividerColor: Color(demoHex: 0xFDFCFB),
     otherLabel: TextToken(fontName: "JetBrainsMono-Medium", size: 16, color: .black),
     otherPadding: EdgeInsets(top: 24, leading: 54, bottom: 0, trailing: 54),

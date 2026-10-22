@@ -196,8 +196,9 @@ private struct DemoOtherSignInMethods: View {
       }
       .accessibilityElement(children: .contain)
       .accessibilityIdentifier("other")
-      // The Figma form-to-divider gap, less the switch row's 12-point inset below its text.
-      .padding(.top, theme.contentSpacing - 12)
+      // With the switch row's 12-point inset, the divider sits 24 points below the switch text,
+      // the same as the gap above it.
+      .padding(.top, 12)
 
       termsText(theme)
         .padding(.top, 24)
