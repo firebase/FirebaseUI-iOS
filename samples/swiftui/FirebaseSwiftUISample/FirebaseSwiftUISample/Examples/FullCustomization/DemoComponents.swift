@@ -35,48 +35,53 @@ struct DemoPage<Card: View, Footer: View>: View {
 
   var body: some View {
     let theme = themeID.theme
-    ScrollView {
-      VStack(spacing: 0) {
-        if theme.id == .spark {
-          SparkHeadline()
-            // "headline" ends at y 135 and "inputs" starts at y 200.
-            .padding(.bottom, title == nil ? 65 : 24)
-        }
-        VStack(alignment: .leading, spacing: theme.titleSpacing) {
-          if let title {
-            Text(title)
-              .font(theme.title.font(relativeTo: .title))
-              .foregroundStyle(theme.title.color)
-              // Long titles wrap before the 83-point mascot and its 8.6-point inset.
-              .padding(.trailing, theme.id == .doggo ? 92 : 0)
-              .frame(maxWidth: .infinity, alignment: .leading)
-              .accessibilityAddTraits(.isHeader)
-              .accessibilityIdentifier("title")
+    // The background is its own layer, so it fills the sheet whatever size the scroll view takes.
+    ZStack {
+      DemoThemeBackground(theme: theme)
+      ScrollView {
+        VStack(spacing: 0) {
+          if theme.id == .spark {
+            SparkHeadline()
+              // "headline" ends at y 135 and "inputs" starts at y 200.
+              .padding(.bottom, title == nil ? 65 : 24)
           }
-          DemoCard(theme: theme, content: card)
-        }
-        .overlay(alignment: .topTrailing) {
-          if theme.id == .doggo, title != nil {
-            // "doggo" ends 8.6 points inside the form's trailing edge (x 372.4 against 381) and
-            // starts 10.7 points above the title (y 163.3 against 174).
-            Image("FullCustomization/doggo-mascot")
-              .offset(x: -8.6, y: -10.7)
-              .accessibilityHidden(true)
-              .accessibilityIdentifier("doggo")
+          VStack(alignment: .leading, spacing: theme.titleSpacing) {
+            if let title {
+              Text(title)
+                .font(theme.title.font(relativeTo: .title))
+                .foregroundStyle(theme.title.color)
+                // Long titles wrap before the 83-point mascot and its 8.6-point inset.
+                .padding(.trailing, theme.id == .doggo ? 92 : 0)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityIdentifier("title")
+            }
+            DemoCard(theme: theme, content: card)
           }
+          .overlay(alignment: .topTrailing) {
+            if theme.id == .doggo, title != nil {
+              // "doggo" ends 8.6 points inside the form's trailing edge (x 372.4 against 381) and
+              // starts 10.7 points above the title (y 163.3 against 174).
+              Image("FullCustomization/doggo-mascot")
+                .offset(x: -8.6, y: -10.7)
+                .accessibilityHidden(true)
+                .accessibilityIdentifier("doggo")
+            }
+          }
+          // The Figma "sign up" frame is 332 points wide, centred; on the 430-point frame that
+          // leaves 49 points each side.
+          .frame(maxWidth: 332)
+          .padding(.horizontal, 16)
+          footer()
+            .padding(.top, theme.contentSpacing)
         }
-        // The Figma "sign up" frame is 332 points wide, centred; on the 430-point frame that
-        // leaves 49 points each side.
-        .frame(maxWidth: 332)
-        .padding(.horizontal, 16)
-        footer()
-          .padding(.top, theme.contentSpacing)
+        // Full width, so the whole sheet scrolls while the form stays centred.
+        .frame(maxWidth: .infinity)
+        .padding(.top, 16)
+        .padding(.bottom, 24)
       }
-      .padding(.top, 16)
-      .padding(.bottom, 24)
+      .scrollBounceBehavior(.basedOnSize)
     }
-    .scrollBounceBehavior(.basedOnSize)
-    .background { DemoThemeBackground(theme: theme) }
     .navigationTitle("")
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
