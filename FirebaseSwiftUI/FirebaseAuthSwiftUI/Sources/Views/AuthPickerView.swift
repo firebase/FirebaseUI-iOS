@@ -41,7 +41,7 @@ public struct AuthPickerView<Content: View>: View {
   public var body: some View {
     AuthPickerContent(
       content: content,
-      pickerContent: { DefaultAuthPickerContent() },
+      pickerContent: { _ in DefaultAuthPickerContent() },
       destination: { DefaultAuthPickerDestination(screen: $0) }
     )
   }
@@ -58,6 +58,31 @@ public struct AuthPickerView<Content: View>: View {
   /// ```
   public func pickerContent<NewPickerContent: View>(
     @ViewBuilder _ pickerContent: @escaping () -> NewPickerContent
+  ) -> AuthPickerContent<Content, NewPickerContent, DefaultAuthPickerDestination> {
+    AuthPickerContent(
+      content: content,
+      pickerContent: { _ in pickerContent() },
+      destination: { DefaultAuthPickerDestination(screen: $0) }
+    )
+  }
+
+  /// Replaces the whole signed-out first screen with your own, receiving an
+  /// ``AuthMethodPickerState`` to sign in with the registered providers. Call its `select` so MFA,
+  /// account conflicts and errors are handled the same as the default buttons.
+  ///
+  /// Your screen replaces the logo, email sign-in and terms too, so show your own email entry
+  /// (for example ``EmailAuthScreen``) and any legal text you need. To keep the stock screen and
+  /// only lay out the provider buttons, use ``DefaultAuthPickerContent/init(authMethodPicker:)``.
+  ///
+  /// Example:
+  /// ```swift
+  /// AuthPickerView { authenticatedApp }
+  ///   .pickerContent { state in
+  ///     MyLandingScreen(state: state)
+  ///   }
+  /// ```
+  public func pickerContent<NewPickerContent: View>(
+    @ViewBuilder _ pickerContent: @escaping (AuthMethodPickerState) -> NewPickerContent
   ) -> AuthPickerContent<Content, NewPickerContent, DefaultAuthPickerDestination> {
     AuthPickerContent(
       content: content,
@@ -92,7 +117,7 @@ public struct AuthPickerView<Content: View>: View {
   > {
     AuthPickerContent(
       content: content,
-      pickerContent: { DefaultAuthPickerContent() },
+      pickerContent: { _ in DefaultAuthPickerContent() },
       destination: destination
     )
   }
