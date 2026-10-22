@@ -234,6 +234,7 @@ public final class AuthService {
     // Clear email link reauth state
     emailLinkReauth = nil
     isReauthenticating = false
+    currentMFAResolver = nil
     legacySignInRecovery = nil
     suggestedEmailAddress = nil
     updateAuthenticationState()
