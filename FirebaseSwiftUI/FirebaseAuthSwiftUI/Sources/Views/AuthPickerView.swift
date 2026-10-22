@@ -128,7 +128,7 @@ extension AuthPickerView: View {
             .scaleEffect(1.25)
             .tint(.white)
           Text("Authenticating...")
-            .authFont(.body)
+            .authCustomFont(.body)
             .foregroundStyle(.white)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

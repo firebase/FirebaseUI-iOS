@@ -82,13 +82,13 @@ extension PasswordRecoveryView: View {
         .fontWeight(.bold)
         .padding()
       Text(authService.string.passwordRecoveryHelperMessage)
-        .authFont(.body)
+        .authCustomFont(.body)
         .padding()
 
       Divider()
 
       Text(String(format: authService.string.passwordRecoveryEmailSentMessage, sentEmail))
-        .authFont(.body)
+        .authCustomFont(.body)
         .padding()
 
       Divider()

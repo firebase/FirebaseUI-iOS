@@ -48,7 +48,7 @@ extension SignedInView: View {
       Text(
         "\(authService.currentUser?.email ?? authService.currentUser?.displayName ?? authService.currentUser?.phoneNumber ?? "")"
       )
-      .authFont(.body)
+      .authCustomFont(.body)
       if authService.currentUser?.isEmailVerified == false {
         Button {
           Task {
@@ -196,7 +196,7 @@ private struct DeleteAccountConfirmationSheet: View {
           onConfirm()
         } label: {
           Text("Delete Account")
-            .authFont(.body)
+            .authCustomFont(.body)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }
@@ -210,7 +210,7 @@ private struct DeleteAccountConfirmationSheet: View {
           onCancel()
         } label: {
           Text("Cancel")
-            .authFont(.body)
+            .authCustomFont(.body)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }

@@ -63,6 +63,12 @@ public struct AuthTextField<Leading: View>: View {
     self.leading = leading
   }
 
+  /// The placeholder uses the custom font only when one is set, so it otherwise inherits the
+  /// field's font as before theming.
+  private var promptText: Text {
+    typography.fontName == nil ? Text(prompt) : Text(prompt).font(typography.resolvedFont(for: .body))
+  }
+
   var allRequirementsMet: Bool {
     validations.allSatisfy { $0.isValid(input: text) }
   }
@@ -70,17 +76,17 @@ public struct AuthTextField<Leading: View>: View {
   public var body: some View {
     VStack(alignment: .leading) {
       Text(LocalizedStringResource(stringLiteral: label))
-        .authFont(.body)
+        .authCustomFont(.body)
       HStack(spacing: 8) {
         leading()
         Group {
           if isSecureTextField {
             ZStack(alignment: .trailing) {
-              SecureField(label, text: $text, prompt: Text(prompt).font(typography.resolvedFont(for: .body)))
+              SecureField(label, text: $text, prompt: promptText)
                 .opacity(obscured ? 1 : 0)
                 .focused($isFocused)
                 .frame(height: 24)
-              TextField(label, text: $text, prompt: Text(prompt).font(typography.resolvedFont(for: .body)))
+              TextField(label, text: $text, prompt: promptText)
                 .opacity(obscured ? 0 : 1)
                 .focused($isFocused)
                 .frame(height: 24)
@@ -103,12 +109,12 @@ public struct AuthTextField<Leading: View>: View {
             TextField(
               label,
               text: $text,
-              prompt: Text(prompt).font(typography.resolvedFont(for: .body))
+              prompt: promptText
             )
             .frame(height: 24)
           }
         }
-        .authFont(.body)
+        .authCustomFont(.body)
       }
       .frame(maxWidth: .infinity)
       .keyboardType(keyboardType)

@@ -150,7 +150,7 @@ extension MFAResolutionView: View {
         // Cancel Button
         Button(action: cancelResolution) {
           Text("Cancel")
-            .authFont(.body)
+            .authCustomFont(.body)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }

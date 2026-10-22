@@ -87,7 +87,7 @@ public struct CountrySelector: View {
           selectedCountry = country
         } label: {
           Text("\(country.flag) \(country.name) (\(country.dialCode))")
-            .authFont(.body)
+            .authCustomFont(.body)
         }
         .accessibilityIdentifier("country-option-\(country.code)")
       }

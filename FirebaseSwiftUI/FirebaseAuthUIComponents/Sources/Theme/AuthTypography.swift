@@ -90,6 +90,29 @@ public extension View {
   }
 }
 
+extension View {
+  /// Like `.authFont(_:weight:)`, but only when ``AuthTypography/fontName`` is set. Otherwise
+  /// the inherited font is left alone (only `weight` is applied), for text that had no explicit
+  /// font before theming, so an app-level `.font(...)` still reaches it.
+  package func authCustomFont(_ style: Font.TextStyle, weight: Font.Weight? = nil) -> some View {
+    modifier(AuthCustomFontModifier(style: style, weight: weight))
+  }
+}
+
+struct AuthCustomFontModifier: ViewModifier {
+  @Environment(\.authTypography) private var typography
+  let style: Font.TextStyle
+  var weight: Font.Weight?
+
+  func body(content: Content) -> some View {
+    if typography.fontName != nil {
+      content.font(typography.resolvedFont(for: style, weight: weight))
+    } else {
+      content.fontWeight(weight)
+    }
+  }
+}
+
 private extension Font.TextStyle {
   var uiKit: UIFont.TextStyle {
     switch self {
