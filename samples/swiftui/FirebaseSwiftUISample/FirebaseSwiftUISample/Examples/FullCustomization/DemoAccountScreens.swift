@@ -41,7 +41,6 @@ struct DemoSignedIn: View {
       if hasEmail {
         DemoButton(
           title: "Change password",
-          isLoading: state.isLoading,
           identifier: "update-password-button",
           action: state.updatePassword
         )
@@ -83,6 +82,7 @@ struct DemoMFAManagement: View {
             DemoFactorRow(factor: factor) {
               state.unenroll(factor.uid)
             }
+            .disabled(state.isLoading)
           }
         }
         DemoErrorText(message: state.errorMessage)
@@ -102,6 +102,7 @@ private struct DemoFactorRow: View {
   let remove: () -> Void
 
   @AppStorage(DemoThemeID.storageKey) private var themeID: DemoThemeID = .doggo
+  @Environment(\.isEnabled) private var isEnabled
 
   var body: some View {
     let theme = themeID.theme
@@ -121,6 +122,7 @@ private struct DemoFactorRow: View {
         .font(theme.link.font())
         .foregroundStyle(theme.link.color)
         .buttonStyle(.plain)
+        .opacity(isEnabled ? 1 : 0.5)
         .accessibilityIdentifier("remove-factor-button")
     }
     .padding(.horizontal, 16)
@@ -193,8 +195,8 @@ struct DemoMFAEnrolment: View {
       case .setUpTOTP:
         DemoPage(title: "Scan to set up") {
           DemoBodyText("Scan this with your authenticator app, or type the key in by hand.")
-          if let url = state.totpQRCodeURL, let qrCode = DemoQRCode(url: url) {
-            qrCode
+          if let url = state.totpQRCodeURL {
+            DemoQRCode(url: url)
           }
           if let secret = state.totpSecret {
             DemoLink(
@@ -333,29 +335,40 @@ private struct DemoChoiceRow: View {
   }
 }
 
-/// A QR code for the TOTP setup URL, drawn with Core Image.
+/// A QR code for the TOTP setup URL, drawn with Core Image once per URL.
 private struct DemoQRCode: View {
-  let image: UIImage
+  let url: URL
 
-  init?(url: URL) {
+  @State private var image: UIImage?
+
+  var body: some View {
+    Group {
+      if let image {
+        Image(uiImage: image)
+          .interpolation(.none)
+          .resizable()
+      } else {
+        Color.clear
+      }
+    }
+    .frame(width: 176, height: 176)
+    .padding(12)
+    .background(.white, in: RoundedRectangle(cornerRadius: 24))
+    .frame(maxWidth: .infinity)
+    .accessibilityLabel("QR code for your authenticator app")
+    .accessibilityIdentifier("totp-qr-code")
+    .task(id: url) {
+      image = Self.makeImage(for: url)
+    }
+  }
+
+  private static func makeImage(for url: URL) -> UIImage? {
     let filter = CIFilter.qrCodeGenerator()
     filter.message = Data(url.absoluteString.utf8)
     guard let output = filter.outputImage?.transformed(by: CGAffineTransform(scaleX: 8, y: 8)),
           let cgImage = CIContext().createCGImage(output, from: output.extent) else {
       return nil
     }
-    image = UIImage(cgImage: cgImage)
-  }
-
-  var body: some View {
-    Image(uiImage: image)
-      .interpolation(.none)
-      .resizable()
-      .frame(width: 176, height: 176)
-      .padding(12)
-      .background(.white, in: RoundedRectangle(cornerRadius: 24))
-      .frame(maxWidth: .infinity)
-      .accessibilityLabel("QR code for your authenticator app")
-      .accessibilityIdentifier("totp-qr-code")
+    return UIImage(cgImage: cgImage)
   }
 }

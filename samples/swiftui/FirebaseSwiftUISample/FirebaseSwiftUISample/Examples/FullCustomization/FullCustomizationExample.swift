@@ -32,17 +32,24 @@ import SwiftUI
 struct FullCustomizationExample: View {
   /// Its own service, so it can turn on email-link sign-in (drawn in the Figma frames) without
   /// changing the other examples.
-  @State private var authService = AuthService(configuration: Self.configuration)
-    .withEmailSignIn()
-    .withEmailLinkSignIn()
-    .withGoogleSignIn()
-    .withPhoneSignIn()
-    .withAppleSignIn()
-    .withOAuthSignIn(OAuthProviderSwift.github())
+  /// Created when the example appears: `NavigationLink` builds its destination eagerly.
+  @State private var authService: AuthService?
 
   var body: some View {
-    FullCustomizationFlow()
-      .environment(authService)
+    if let authService {
+      FullCustomizationFlow()
+        .environment(authService)
+    } else {
+      Color.clear.onAppear {
+        authService = AuthService(configuration: Self.configuration)
+          .withEmailSignIn()
+          .withEmailLinkSignIn()
+          .withGoogleSignIn()
+          .withPhoneSignIn()
+          .withAppleSignIn()
+          .withOAuthSignIn(OAuthProviderSwift.github())
+      }
+    }
   }
 
   private static var configuration: AuthConfiguration {
@@ -128,6 +135,5 @@ private struct FullCustomizationFlow: View {
     .padding(24)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background { DemoThemeBackground(theme: themeID.theme) }
-    .authTypography(themeID.theme.typography)
   }
 }
