@@ -106,6 +106,7 @@ private struct DemoOtherSignInMethods: View {
   @Environment(AuthService.self) private var authService
   @AppStorage(DemoThemeID.storageKey) private var themeID: DemoThemeID = .doggo
   @State private var isShowingOtherProviders = false
+  @State private var pendingProvider: AuthProviderUI?
 
   private var google: AuthProviderUI? {
     pickerState.providers.first { $0.id == "google.com" }
@@ -187,10 +188,17 @@ private struct DemoOtherSignInMethods: View {
       termsText(theme)
     }
     .padding(.horizontal, 48)
-    .sheet(isPresented: $isShowingOtherProviders) {
-      DemoOtherProvidersSheet(providers: otherProviders) { provider in
-        isShowingOtherProviders = false
+    // Sign-in starts once the sheet is gone, so a provider that presents its own screen
+    // (such as an OAuth web view) isn't presented from a sheet that is animating away.
+    .sheet(isPresented: $isShowingOtherProviders, onDismiss: {
+      if let provider = pendingProvider {
+        pendingProvider = nil
         pickerState.select(provider)
+      }
+    }) {
+      DemoOtherProvidersSheet(providers: otherProviders) { provider in
+        pendingProvider = provider
+        isShowingOtherProviders = false
       }
       .presentationDetents([.medium, .large])
     }
@@ -289,7 +297,8 @@ private struct DemoOtherProvidersSheet: View {
             cornerRadius: theme.phoneProvider.cornerRadius,
             identifier: "\(provider.id)-button"
           ) {
-            EmptyView()
+            Image(systemName: "person.crop.circle")
+              .font(.system(size: 18, weight: .medium))
           } action: {
             select(provider)
           }
