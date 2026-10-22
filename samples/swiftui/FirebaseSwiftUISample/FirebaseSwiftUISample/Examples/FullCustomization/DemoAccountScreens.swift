@@ -134,89 +134,97 @@ private struct DemoFactorRow: View {
 
 struct DemoMFAEnrolment: View {
   var body: some View {
-    MFAEnrolmentScreen { state in
-      switch state.step {
-      case .selectFactor:
-        DemoPage(title: "Secure your account") {
-          DemoBodyText("Add a second step to sign-in, so a password on its own isn't enough.")
-          ForEach(state.allowedFactors, id: \.self) { factor in
-            DemoChoiceRow(
-              title: factor == .sms ? "Text message" : "Authenticator app",
-              isSelected: state.selectedFactorType.wrappedValue == factor,
-              identifier: factor == .sms ? "sms-factor-button" : "totp-factor-button"
-            ) {
-              state.selectedFactorType.wrappedValue = factor
-            }
+    MFAEnrolmentScreen { DemoMFAEnrolmentContent(state: $0) }
+  }
+}
+
+/// The enrolment steps, apart from `MFAEnrolmentScreen` so they can be previewed with a stub
+/// state: the Auth emulator can't enrol TOTP.
+struct DemoMFAEnrolmentContent: View {
+  let state: MFAEnrollmentContentState
+
+  var body: some View {
+    switch state.step {
+    case .selectFactor:
+      DemoPage(title: "Secure your account") {
+        DemoBodyText("Add a second step to sign-in, so a password on its own isn't enough.")
+        ForEach(state.allowedFactors, id: \.self) { factor in
+          DemoChoiceRow(
+            title: factor == .sms ? "Text message" : "Authenticator app",
+            isSelected: state.selectedFactorType.wrappedValue == factor,
+            identifier: factor == .sms ? "sms-factor-button" : "totp-factor-button"
+          ) {
+            state.selectedFactorType.wrappedValue = factor
           }
-          DemoErrorText(message: state.isMFAEnabled
-            ? state.errorMessage
-            : "Two-factor sign-in isn't enabled for this app.")
-          DemoButton(
-            title: "Continue",
-            isLoading: state.isLoading,
-            identifier: "start-enrollment-button",
-            action: state.startEnrollment
-          )
-          .disabled(!state.isValid)
         }
-      case .enterPhoneNumber:
-        DemoPage(title: "Add your number") {
-          DemoBodyText("We'll text a code to this number whenever you sign in.")
-          displayNameField(state)
-          DemoPhoneNumberField(phoneNumber: state.phoneNumber, country: state.selectedCountry)
-          DemoErrorText(message: state.errorMessage)
-          DemoButton(
-            title: "Send code",
-            isLoading: state.isLoading,
-            identifier: "send-code-button",
-            action: state.sendCode
-          )
-          .disabled(!state.isValid)
+        DemoErrorText(message: state.isMFAEnabled
+          ? state.errorMessage
+          : "Two-factor sign-in isn't enabled for this app.")
+        DemoButton(
+          title: "Continue",
+          isLoading: state.isLoading,
+          identifier: "start-enrollment-button",
+          action: state.startEnrollment
+        )
+        .disabled(!state.isValid)
+      }
+    case .enterPhoneNumber:
+      DemoPage(title: "Add your number") {
+        DemoBodyText("We'll text a code to this number whenever you sign in.")
+        displayNameField(state)
+        DemoPhoneNumberField(phoneNumber: state.phoneNumber, country: state.selectedCountry)
+        DemoErrorText(message: state.errorMessage)
+        DemoButton(
+          title: "Send code",
+          isLoading: state.isLoading,
+          identifier: "send-code-button",
+          action: state.sendCode
+        )
+        .disabled(!state.isValid)
+      }
+    case .enterVerificationCode:
+      DemoPage(title: "Confirm the code") {
+        DemoBodyText("We sent a code to \(state.sentPhoneNumber ?? "your phone").")
+        DemoCodeField(code: state.verificationCode, identifier: "verification-code-field")
+        DemoErrorText(message: state.errorMessage)
+        DemoButton(
+          title: "Verify",
+          isLoading: state.isLoading,
+          identifier: "enroll-button",
+          action: state.enroll
+        )
+        .disabled(!state.isValid)
+        DemoLink(
+          title: "Resend code",
+          alignment: .leading,
+          identifier: "resend-code-button",
+          action: state.sendCode
+        )
+      }
+    case .setUpTOTP:
+      DemoPage(title: "Scan to set up") {
+        DemoBodyText("Scan this with your authenticator app, or type the key in by hand.")
+        if let url = state.totpQRCodeURL {
+          DemoQRCode(url: url)
         }
-      case .enterVerificationCode:
-        DemoPage(title: "Confirm the code") {
-          DemoBodyText("We sent a code to \(state.sentPhoneNumber ?? "your phone").")
-          DemoCodeField(code: state.verificationCode, identifier: "verification-code-field")
-          DemoErrorText(message: state.errorMessage)
-          DemoButton(
-            title: "Verify",
-            isLoading: state.isLoading,
-            identifier: "enroll-button",
-            action: state.enroll
-          )
-          .disabled(!state.isValid)
+        if let secret = state.totpSecret {
           DemoLink(
-            title: "Resend code",
-            alignment: .leading,
-            identifier: "resend-code-button",
-            action: state.sendCode
+            title: state.didCopySecret ? "Copied" : secret,
+            alignment: .center,
+            identifier: "totp-secret",
+            action: state.copySecret
           )
         }
-      case .setUpTOTP:
-        DemoPage(title: "Scan to set up") {
-          DemoBodyText("Scan this with your authenticator app, or type the key in by hand.")
-          if let url = state.totpQRCodeURL {
-            DemoQRCode(url: url)
-          }
-          if let secret = state.totpSecret {
-            DemoLink(
-              title: state.didCopySecret ? "Copied" : secret,
-              alignment: .center,
-              identifier: "totp-secret",
-              action: state.copySecret
-            )
-          }
-          displayNameField(state)
-          DemoCodeField(code: state.totpCode, identifier: "totp-code-field")
-          DemoErrorText(message: state.errorMessage)
-          DemoButton(
-            title: "Verify",
-            isLoading: state.isLoading,
-            identifier: "enroll-button",
-            action: state.enroll
-          )
-          .disabled(!state.isValid)
-        }
+        displayNameField(state)
+        DemoCodeField(code: state.totpCode, identifier: "totp-code-field")
+        DemoErrorText(message: state.errorMessage)
+        DemoButton(
+          title: "Verify",
+          isLoading: state.isLoading,
+          identifier: "enroll-button",
+          action: state.enroll
+        )
+        .disabled(!state.isValid)
       }
     }
   }
@@ -230,6 +238,44 @@ struct DemoMFAEnrolment: View {
     )
   }
 }
+
+#if DEBUG
+  extension MFAEnrollmentContentState {
+    /// The TOTP setup step with stub values and no-op actions.
+    static var totpSetUpPreview: MFAEnrollmentContentState {
+      MFAEnrollmentContentState(
+        step: .setUpTOTP,
+        selectedFactorType: .constant(.totp),
+        phoneNumber: .constant(""),
+        selectedCountry: .constant(.default),
+        verificationCode: .constant(""),
+        totpCode: .constant(""),
+        displayName: .constant(""),
+        startEnrollment: {},
+        sendCode: {},
+        enroll: {},
+        copySecret: {},
+        isMFAEnabled: true,
+        allowedFactors: [.sms, .totp],
+        sentPhoneNumber: nil,
+        totpSecret: "JBSWY3DPEHPK3PXP",
+        totpQRCodeURL: URL(
+          string: "otpauth://totp/FirebaseUI:rover@example.com?secret=JBSWY3DPEHPK3PXP&issuer=FirebaseUI"
+        ),
+        didCopySecret: false,
+        isValid: false,
+        isLoading: false,
+        errorMessage: nil
+      )
+    }
+  }
+
+  #Preview("TOTP setup") {
+    NavigationStack {
+      DemoMFAEnrolmentContent(state: .totpSetUpPreview)
+    }
+  }
+#endif
 
 struct DemoMFAResolution: View {
   let mfaRequired: MFARequired
