@@ -203,9 +203,7 @@ private struct DemoOtherSignInMethods: View {
       termsText(theme)
         .padding(.top, 24)
     }
-    // The Figma "Content" frame's inner width: 430 points less 48 points each side.
-    .frame(maxWidth: 334)
-    .padding(.horizontal, 16)
+    .demoContentWidth()
     // Sign-in starts once the sheet is gone, so a provider that presents its own screen
     // (such as an OAuth web view) isn't presented from a sheet that is animating away.
     .sheet(isPresented: $isShowingOtherProviders, onDismiss: {
@@ -320,8 +318,7 @@ private struct DemoOtherProvidersSheet: View {
           }
         }
       }
-      .frame(maxWidth: 334)
-      .padding(.horizontal, 16)
+      .demoContentWidth()
       .padding(.vertical, 32)
       .frame(maxWidth: .infinity)
     }

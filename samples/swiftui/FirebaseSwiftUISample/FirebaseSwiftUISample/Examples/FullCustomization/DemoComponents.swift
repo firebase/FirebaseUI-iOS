@@ -68,10 +68,7 @@ struct DemoPage<Card: View, Footer: View>: View {
                 .accessibilityIdentifier("doggo")
             }
           }
-          // The Figma "sign up" frame is 332 points wide, centred; on the 430-point frame that
-          // leaves 49 points each side.
-          .frame(maxWidth: 332)
-          .padding(.horizontal, 16)
+          .demoContentWidth()
           footer()
             // With the switch row's 12-point inset, its text sits 24 points below the form.
             .padding(.top, 12)
@@ -134,6 +131,14 @@ private struct DemoCard<Content: View>: View {
 }
 
 extension View {
+  /// The width every demo screen's content takes: inset 32 points from the sheet's edges, and
+  /// no wider than 480 points so it doesn't stretch on iPad. Narrower than the Figma frames'
+  /// 49-point inset, which left too little room on phones.
+  func demoContentWidth() -> some View {
+    frame(maxWidth: 480)
+      .padding(.horizontal, 32)
+  }
+
   /// A Figma drop shadow with zero blur: an offset copy of the shape drawn behind the view.
   @ViewBuilder
   func hardShadow(_ shadow: DemoTheme.Shadow?, shape: some Shape) -> some View {
