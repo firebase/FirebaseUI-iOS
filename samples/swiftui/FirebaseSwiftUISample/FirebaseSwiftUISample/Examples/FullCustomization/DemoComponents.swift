@@ -73,7 +73,8 @@ struct DemoPage<Card: View, Footer: View>: View {
           .frame(maxWidth: 332)
           .padding(.horizontal, 16)
           footer()
-            .padding(.top, theme.contentSpacing)
+            // With the switch row's 12-point inset, its text sits 20 points below the form.
+            .padding(.top, 8)
         }
         // Full width, so the whole sheet scrolls while the form stays centred.
         .frame(maxWidth: .infinity)

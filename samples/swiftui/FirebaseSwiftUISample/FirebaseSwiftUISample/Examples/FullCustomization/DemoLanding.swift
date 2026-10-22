@@ -123,8 +123,17 @@ private struct DemoOtherSignInMethods: View {
 
   var body: some View {
     let theme = themeID.theme
-    // 12 points plus the 44-point flow switch row's inset reads as Figma's 24.
-    VStack(spacing: 12) {
+    VStack(spacing: 0) {
+      // Not where Figma has it: the sign-in / sign-up switch belongs to the email form, so it
+      // sits right below the form, above the other sign-in methods.
+      Button(action: switchFlow) {
+        flowSwitchText(theme)
+          .frame(minHeight: 44)
+          .contentShape(Rectangle())
+      }
+      .buttonStyle(.plain)
+      .accessibilityIdentifier("login")
+
       VStack(spacing: 12) {
         // Like the Figma text layer, the label spans the frame's padding so it doesn't wrap.
         Text("Other sign in methods")
@@ -187,16 +196,11 @@ private struct DemoOtherSignInMethods: View {
       }
       .accessibilityElement(children: .contain)
       .accessibilityIdentifier("other")
-
-      Button(action: switchFlow) {
-        flowSwitchText(theme)
-          .frame(minHeight: 44)
-          .contentShape(Rectangle())
-      }
-      .buttonStyle(.plain)
-      .accessibilityIdentifier("login")
+      // The Figma form-to-divider gap, less the switch row's 12-point inset below its text.
+      .padding(.top, theme.contentSpacing - 12)
 
       termsText(theme)
+        .padding(.top, 24)
     }
     // The Figma "Content" frame's inner width: 430 points less 48 points each side.
     .frame(maxWidth: 334)
