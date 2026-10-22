@@ -43,6 +43,20 @@
 		<string>fbapi</string>
 		<string>fb-messenger-share-api</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BagelFatOne-400.ttf</string>
+		<string>ChivoMono-500.ttf</string>
+		<string>ChivoMono-700.ttf</string>
+		<string>JetBrainsMono-500.ttf</string>
+		<string>JetBrainsMono-700.ttf</string>
+		<string>Onest-500.ttf</string>
+		<string>Onest-700.ttf</string>
+		<string>Roboto-500.ttf</string>
+		<string>Roboto-600.ttf</string>
+		<string>Rowdies-400.ttf</string>
+		<string>Rowdies-700.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

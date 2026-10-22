@@ -20,8 +20,9 @@ import SwiftUI
 /// Wraps your app content and presents the authentication sheet whenever
 /// `AuthService.isPresented` is `true`.
 ///
-/// Use the `pickerContent` modifiers and ``pickerDestination(_:)`` to replace the sheet's first screen or
-/// any pushed screen while the library keeps driving navigation, MFA and account conflicts.
+/// Use the `pickerContent` modifiers, ``pickerDestination(_:)`` and ``signedInContent(_:)`` to
+/// replace the sheet's first screen, any pushed screen or the signed-in screen while the library
+/// keeps driving navigation, MFA and account conflicts.
 ///
 /// Example:
 /// ```swift
@@ -42,12 +43,14 @@ public struct AuthPickerView<Content: View>: View {
     AuthPickerContent(
       content: content,
       pickerContent: { _ in DefaultAuthPickerContent() },
-      destination: { DefaultAuthPickerDestination(screen: $0) }
+      destination: { DefaultAuthPickerDestination(screen: $0) },
+      signedInContent: { DefaultSignedInContent(state: $0) }
     )
   }
 
-  /// Replaces the signed-out first screen of the authentication sheet. The library still shows
-  /// ``SignedInView`` to signed-in users and its progress overlay while signing in.
+  /// Replaces the signed-out first screen of the authentication sheet. Signed-in users still see
+  /// ``DefaultSignedInContent`` unless you replace it with ``signedInContent(_:)``, and the
+  /// progress overlay still shows while signing in.
   ///
   /// ```swift
   /// AuthPickerView { authenticatedApp }
@@ -58,11 +61,17 @@ public struct AuthPickerView<Content: View>: View {
   /// ```
   public func pickerContent<NewPickerContent: View>(
     @ViewBuilder _ pickerContent: @escaping () -> NewPickerContent
-  ) -> AuthPickerContent<Content, NewPickerContent, DefaultAuthPickerDestination> {
+  ) -> AuthPickerContent<
+    Content,
+    NewPickerContent,
+    DefaultAuthPickerDestination,
+    DefaultSignedInContent
+  > {
     AuthPickerContent(
       content: content,
       pickerContent: { _ in pickerContent() },
-      destination: { DefaultAuthPickerDestination(screen: $0) }
+      destination: { DefaultAuthPickerDestination(screen: $0) },
+      signedInContent: { DefaultSignedInContent(state: $0) }
     )
   }
 
@@ -71,9 +80,9 @@ public struct AuthPickerView<Content: View>: View {
   /// account conflicts and errors are handled the same as the default buttons.
   ///
   /// Your screen replaces the logo, email sign-in, terms and the large "Sign in" title (the close
-  /// button stays), so show your own heading, email entry (for example one built around
-  /// ``EmailAuthView``) and any legal text you need. To keep the stock screen and only lay out
-  /// the provider buttons, use ``DefaultAuthPickerContent/init(authMethodPicker:)``.
+  /// button stays), so show your own heading, email entry (for example ``EmailAuthScreen``) and
+  /// any legal text you need. To keep the stock screen and only lay out the provider buttons, use
+  /// ``DefaultAuthPickerContent/init(authMethodPicker:)``.
   ///
   /// Example:
   /// ```swift
@@ -84,11 +93,17 @@ public struct AuthPickerView<Content: View>: View {
   /// ```
   public func pickerContent<NewPickerContent: View>(
     @ViewBuilder _ pickerContent: @escaping (AuthMethodPickerState) -> NewPickerContent
-  ) -> AuthPickerContent<Content, NewPickerContent, DefaultAuthPickerDestination> {
+  ) -> AuthPickerContent<
+    Content,
+    NewPickerContent,
+    DefaultAuthPickerDestination,
+    DefaultSignedInContent
+  > {
     AuthPickerContent(
       content: content,
       pickerContent: pickerContent,
       destination: { DefaultAuthPickerDestination(screen: $0) },
+      signedInContent: { DefaultSignedInContent(state: $0) },
       showsPickerTitle: false
     )
   }
@@ -115,12 +130,45 @@ public struct AuthPickerView<Content: View>: View {
   ) -> AuthPickerContent<
     Content,
     DefaultAuthPickerContent<DefaultAuthMethodPicker>,
-    NewDestinationContent
+    NewDestinationContent,
+    DefaultSignedInContent
   > {
     AuthPickerContent(
       content: content,
       pickerContent: { _ in DefaultAuthPickerContent() },
-      destination: destination
+      destination: destination,
+      signedInContent: { DefaultSignedInContent(state: $0) }
+    )
+  }
+
+  /// Replaces the screen the authentication sheet shows to signed-in users. Your content receives
+  /// a ``SignedInContentState``: the library still signs out, deletes the account behind its
+  /// confirmation and reauthentication, sends the verification email and navigates. Wrap
+  /// ``DefaultSignedInContent`` to keep the stock markup.
+  ///
+  /// ```swift
+  /// AuthPickerView { authenticatedApp }
+  ///   .signedInContent { state in
+  ///     MyAccountView(
+  ///       email: state.user?.email,
+  ///       onDeleteAccount: state.deleteAccount,
+  ///       onSignOut: state.signOut
+  ///     )
+  ///   }
+  /// ```
+  public func signedInContent<NewSignedInContent: View>(
+    @ViewBuilder _ signedInContent: @escaping (SignedInContentState) -> NewSignedInContent
+  ) -> AuthPickerContent<
+    Content,
+    DefaultAuthPickerContent<DefaultAuthMethodPicker>,
+    DefaultAuthPickerDestination,
+    NewSignedInContent
+  > {
+    AuthPickerContent(
+      content: content,
+      pickerContent: { _ in DefaultAuthPickerContent() },
+      destination: { DefaultAuthPickerDestination(screen: $0) },
+      signedInContent: signedInContent
     )
   }
 }
