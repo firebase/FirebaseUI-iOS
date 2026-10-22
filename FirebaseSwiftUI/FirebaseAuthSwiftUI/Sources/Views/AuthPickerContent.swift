@@ -29,7 +29,7 @@ public struct AuthPickerContent<
   DestinationContent: View
 >: View {
   init(content: @escaping () -> Content,
-       pickerContent: @escaping () -> PickerContent,
+       pickerContent: @escaping (AuthMethodPickerState) -> PickerContent,
        destination: @escaping (AuthView) -> DestinationContent) {
     self.content = content
     self.pickerContent = pickerContent
@@ -38,7 +38,7 @@ public struct AuthPickerContent<
 
   @Environment(AuthService.self) private var authService
   private let content: () -> Content
-  private let pickerContent: () -> PickerContent
+  private let pickerContent: (AuthMethodPickerState) -> PickerContent
   private let destination: (AuthView) -> DestinationContent
 
   // View-layer error state
@@ -87,7 +87,9 @@ public struct AuthPickerContent<
       if authService.authenticationState == .authenticated {
         SignedInView()
       } else {
-        pickerContent()
+        AuthMethodPickerStateReader { state in
+          pickerContent(state)
+        }
       }
     }
     .overlay {
@@ -110,6 +112,18 @@ public struct AuthPickerContent<
   /// ``AuthPickerView/pickerContent(_:)``.
   public func pickerContent<NewPickerContent: View>(
     @ViewBuilder _ pickerContent: @escaping () -> NewPickerContent
+  ) -> AuthPickerContent<Content, NewPickerContent, DestinationContent> {
+    AuthPickerContent<Content, NewPickerContent, DestinationContent>(
+      content: content,
+      pickerContent: { _ in pickerContent() },
+      destination: destination
+    )
+  }
+
+  /// Replaces the whole signed-out first screen with your own, receiving an
+  /// ``AuthMethodPickerState``. See the matching `pickerContent` on ``AuthPickerView``.
+  public func pickerContent<NewPickerContent: View>(
+    @ViewBuilder _ pickerContent: @escaping (AuthMethodPickerState) -> NewPickerContent
   ) -> AuthPickerContent<Content, NewPickerContent, DestinationContent> {
     AuthPickerContent<Content, NewPickerContent, DestinationContent>(
       content: content,

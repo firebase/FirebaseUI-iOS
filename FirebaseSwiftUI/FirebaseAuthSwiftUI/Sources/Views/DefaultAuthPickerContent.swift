@@ -50,9 +50,6 @@ public struct DefaultAuthPickerContent<AuthMethodPicker: View>: View {
   }
 
   @Environment(AuthService.self) private var authService
-  @Environment(\.mfaHandler) private var mfaHandler
-  @Environment(\.accountConflictHandler) private var accountConflictHandler
-  @Environment(\.reportError) private var reportError
   private let authMethodPicker: (AuthMethodPickerState) -> AuthMethodPicker
 
   public var body: some View {
@@ -67,21 +64,39 @@ public struct DefaultAuthPickerContent<AuthMethodPicker: View>: View {
         }
         Divider()
         VStack {
-          authMethodPicker(pickerState)
+          AuthMethodPickerStateReader { state in
+            authMethodPicker(state)
+          }
         }
         PrivacyTOCsView(displayMode: .full)
       }
     }
     .safeAreaPadding()
   }
+}
 
-  private var pickerState: AuthMethodPickerState {
-    AuthMethodPickerState(
+/// Builds an ``AuthMethodPickerState`` from the environment and passes it to its content, so
+/// provider selection routes MFA, account conflicts and errors through the same handlers as the
+/// default buttons. Used by ``DefaultAuthPickerContent`` and ``AuthPickerContent``.
+@MainActor
+struct AuthMethodPickerStateReader<Content: View>: View {
+  init(@ViewBuilder content: @escaping (AuthMethodPickerState) -> Content) {
+    self.content = content
+  }
+
+  @Environment(AuthService.self) private var authService
+  @Environment(\.mfaHandler) private var mfaHandler
+  @Environment(\.accountConflictHandler) private var accountConflictHandler
+  @Environment(\.reportError) private var reportError
+  private let content: (AuthMethodPickerState) -> Content
+
+  var body: some View {
+    content(AuthMethodPickerState(
       providers: authService.registeredProviders,
       select: selectProvider,
       isEmailLinkEnabled: authService.emailLinkSignInEnabled,
       selectEmailLink: authService.selectEmailLink
-    )
+    ))
   }
 
   private func selectProvider(_ provider: AuthProviderUI) {
@@ -103,7 +118,8 @@ public struct DefaultAuthPickerContent<AuthMethodPicker: View>: View {
   }
 }
 
-/// The providers and sign-in actions passed to a custom layout in
+/// The providers and sign-in actions passed to a custom first screen in
+/// `AuthPickerView.pickerContent { state in ... }`, or to a custom provider layout in
 /// ``DefaultAuthPickerContent/init(authMethodPicker:)``.
 public struct AuthMethodPickerState {
   /// The registered providers, in registration order. Email-link sign-in isn't included; see
