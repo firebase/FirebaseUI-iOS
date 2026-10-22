@@ -47,19 +47,20 @@ struct DemoPage<Card: View, Footer: View>: View {
             Text(title)
               .font(theme.title.font(relativeTo: .title))
               .foregroundStyle(theme.title.color)
-              // Long titles wrap before the mascot instead of running under it.
-              .padding(.trailing, theme.id == .doggo ? 64 : 0)
+              // Long titles wrap before the 83-point mascot and its 8.6-point inset.
+              .padding(.trailing, theme.id == .doggo ? 92 : 0)
               .frame(maxWidth: .infinity, alignment: .leading)
               .accessibilityAddTraits(.isHeader)
               .accessibilityIdentifier("title")
           }
           DemoCard(theme: theme, content: card)
         }
-        .overlay(alignment: .topLeading) {
+        .overlay(alignment: .topTrailing) {
           if theme.id == .doggo, title != nil {
-            // "doggo" sits at (289.3, 163.3) in the frame, and the title at (49, 174).
+            // "doggo" ends 8.6 points inside the form's trailing edge (x 372.4 against 381) and
+            // starts 10.7 points above the title (y 163.3 against 174).
             Image("FullCustomization/doggo-mascot")
-              .offset(x: 240.3, y: -10.7)
+              .offset(x: -8.6, y: -10.7)
               .accessibilityHidden(true)
               .accessibilityIdentifier("doggo")
           }
