@@ -95,8 +95,9 @@ public struct EmailAuthContentState {
 /// conflicts and errors. Your content only draws the UI from the ``EmailAuthContentState`` it
 /// receives. Wrap ``DefaultEmailAuthContent`` to keep the stock markup.
 ///
-/// ``AuthPickerView/pickerContent(_:)`` replaces the whole first screen, so add the provider
-/// buttons back with ``DefaultAuthMethodPicker``.
+/// `AuthPickerView`'s `pickerContent { state in ... }` replaces the whole first screen, so add
+/// your own provider buttons calling `state.select`, or the stock ones with
+/// ``DefaultAuthMethodPicker``.
 ///
 /// Example:
 /// ```swift
