@@ -18,7 +18,7 @@ import SwiftUI
 /// The default signed-out first screen of the authentication sheet: the logo, email sign-in,
 /// the provider buttons and the terms.
 ///
-/// Return it from ``AuthPickerView/pickerContent(_:)`` to keep the stock screen while adding
+/// Return it from `AuthPickerView`'s no-argument `pickerContent` to keep the stock screen while adding
 /// modifiers such as a background, or use ``init(authMethodPicker:)`` to lay out the provider
 /// buttons yourself.
 @MainActor
