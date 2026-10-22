@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import FirebaseAuthSwiftUI
+import FirebaseOAuthSwiftUI
 import SwiftUI
 
 /// The whole signed-out first screen, from the Figma Landing frames. `EmailAuthScreen` drives the
@@ -286,39 +287,54 @@ private struct DemoProviderButton<Icon: View>: View {
   }
 }
 
-/// The registered providers the Figma frames don't draw, listed with the same pill.
+/// The registered providers the Figma frames don't draw, as the library's own brand buttons.
+/// `AuthProviderButton` takes the demo's action, so sign-in still goes through
+/// `AuthMethodPickerState.select` once the sheet has closed.
 private struct DemoOtherProvidersSheet: View {
   let providers: [AuthProviderUI]
   let select: (AuthProviderUI) -> Void
 
+  @Environment(AuthService.self) private var authService
   @AppStorage(DemoThemeID.storageKey) private var themeID: DemoThemeID = .doggo
 
   var body: some View {
     let theme = themeID.theme
     ScrollView {
-      VStack(spacing: 12) {
+      VStack(spacing: 16) {
         Text("Other sign in methods")
           .demoText(theme.otherLabel)
           .padding(.bottom, 4)
         ForEach(providers, id: \.id) { provider in
-          DemoProviderButton(
-            title: "Continue with \(provider.displayName)",
-            fill: .white,
-            label: theme.googleLabel,
-            stroke: .black,
-            cornerRadius: theme.phoneProvider.cornerRadius,
-            identifier: "\(provider.id)-button"
+          let button = stockButton(for: provider)
+          AuthProviderButton(
+            label: button.label,
+            style: button.style,
+            accessibilityId: "\(provider.id)-button"
           ) {
-            Image(systemName: "person.crop.circle")
-              .font(.system(size: 18, weight: .medium))
-          } action: {
             select(provider)
           }
         }
       }
-      .padding(.horizontal, 48)
+      .frame(maxWidth: 334)
+      .padding(.horizontal, 16)
       .padding(.vertical, 32)
+      .frame(maxWidth: .infinity)
     }
     .background { DemoThemeBackground(theme: theme) }
+  }
+
+  /// The label and style the provider's stock button uses.
+  private func stockButton(for provider: AuthProviderUI) -> (label: String, style: ProviderStyle) {
+    if let oauth = provider.provider as? OAuthProviderSwift {
+      return (oauth.buttonLabel, ProviderStyle(
+        icon: oauth.buttonIcon,
+        backgroundColor: oauth.buttonBackgroundColor,
+        contentColor: oauth.buttonForegroundColor
+      ))
+    }
+    if provider.id == "apple.com" {
+      return (authService.string.appleLoginButtonLabel, .apple)
+    }
+    return ("Sign in with \(provider.displayName)", .empty)
   }
 }
