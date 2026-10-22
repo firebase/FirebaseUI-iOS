@@ -29,7 +29,7 @@ struct LegacySignInRecoveryView: View {
               Text(authService.string.legacySignInRecoveryTitle)
                 .authFont(.title2, weight: .semibold)
               Text(authService.string.legacySignInRecoveryMessage(email: recovery.email))
-                .authFont(.body)
+                .authCustomFont(.body)
                 .foregroundStyle(.secondary)
             }
 

@@ -111,7 +111,7 @@ extension EmailLinkReauthView: View {
                   .frame(height: 32)
               } else {
                 Text("Resend Email")
-                  .authFont(.body)
+                  .authCustomFont(.body)
                   .frame(height: 32)
               }
             }
@@ -125,7 +125,7 @@ extension EmailLinkReauthView: View {
             ProgressView()
               .padding(.top, 32)
             Text("Sending verification email...")
-              .authFont(.body)
+              .authCustomFont(.body)
               .foregroundStyle(.secondary)
           }
         }

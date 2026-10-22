@@ -51,10 +51,9 @@ public extension EnvironmentValues {
 }
 
 /// Applies `.buttonStyle(.borderedProminent)` plus the colors/shape/font from the environment's
-/// ``AuthCTAButtonStyle``, in place of a bare `.buttonStyle(.borderedProminent)` call. When
-/// `style.font` is left unset, the button falls back to ``AuthTypography`` (via `.authFont(_:)`)
-/// so it stays consistent with the rest of the auth flow's typography by default — an explicit
-/// `style.font` still overrides that, for buttons that should intentionally look different.
+/// ``AuthCTAButtonStyle``, in place of a bare `.buttonStyle(.borderedProminent)` call. Unset
+/// values leave the inherited shape, tint and font alone. When `style.font` is unset, the label
+/// uses ``AuthTypography``'s custom font if one is set.
 struct AuthCTAButtonModifier: ViewModifier {
   @Environment(\.authCTAButtonStyle) private var style
 
@@ -67,9 +66,36 @@ struct AuthCTAButtonModifier: ViewModifier {
       }
     }
     .buttonStyle(.borderedProminent)
-    .buttonBorderShape(style.shape ?? .automatic)
-    .tint(style.backgroundColor)
+    .modifier(CTAShapeModifier(shape: style.shape))
+    .modifier(CTATintModifier(tint: style.backgroundColor))
     .modifier(CTAFontModifier(explicitFont: style.font))
+  }
+}
+
+// Each modifier below only applies a value when one is set, so an unset style leaves whatever
+// the app set higher up (shape, tint, font) in effect, as before theming.
+
+private struct CTAShapeModifier: ViewModifier {
+  let shape: ButtonBorderShape?
+
+  func body(content: Content) -> some View {
+    if let shape {
+      content.buttonBorderShape(shape)
+    } else {
+      content
+    }
+  }
+}
+
+private struct CTATintModifier: ViewModifier {
+  let tint: Color?
+
+  func body(content: Content) -> some View {
+    if let tint {
+      content.tint(tint)
+    } else {
+      content
+    }
   }
 }
 
@@ -80,7 +106,7 @@ private struct CTAFontModifier: ViewModifier {
     if let explicitFont {
       content.font(explicitFont)
     } else {
-      content.authFont(.body)
+      content.authCustomFont(.body)
     }
   }
 }

@@ -490,7 +490,7 @@ extension MFAEnrolmentView: View {
             sendSMSVerification()
           } label: {
             Text("Resend Code")
-              .authFont(.body)
+              .authCustomFont(.body)
               .padding(.vertical, 8)
               .frame(maxWidth: .infinity)
           }
