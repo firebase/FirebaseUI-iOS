@@ -24,6 +24,8 @@ private enum FocusableField: Hashable {
 @MainActor
 public struct MFAResolutionView {
   let mfaRequired: MFARequired
+  private let onResolved: (() -> Void)?
+  private let onCancel: (() -> Void)?
 
   @Environment(AuthService.self) private var authService
   @Environment(\.reportError) private var reportError
@@ -33,11 +35,32 @@ public struct MFAResolutionView {
   @State private var isLoading = false
   @State private var selectedHintIndex = 0
   @State private var verificationId: String?
+  @State private var error: AlertError?
 
   @FocusState private var focus: FocusableField?
 
   public init(mfaRequired: MFARequired) {
+    self.init(mfaRequired: mfaRequired, onResolved: nil, onCancel: nil)
+  }
+
+  /// Used outside the auth navigation stack (e.g. reauthentication), where completion and
+  /// cancellation are handled by the caller instead of clearing the navigator
+  init(mfaRequired: MFARequired, onResolved: (() -> Void)?, onCancel: (() -> Void)?) {
     self.mfaRequired = mfaRequired
+    self.onResolved = onResolved
+    self.onCancel = onCancel
+  }
+
+  private func handleError(_ error: Error) {
+    if let reportError = reportError {
+      reportError(error)
+    } else {
+      self.error = AlertError(
+        title: "Error",
+        message: error.localizedDescription,
+        underlyingError: error
+      )
+    }
   }
 
   private var selectedHint: MFAHint? {
@@ -71,7 +94,7 @@ public struct MFAResolutionView {
         self.verificationId = verificationId
         isLoading = false
       } catch {
-        reportError?(error)
+        handleError(error)
         isLoading = false
       }
     }
@@ -88,19 +111,27 @@ public struct MFAResolutionView {
           hintIndex: selectedHintIndex,
           verificationId: verificationId
         )
-        // On success, the AuthService will update the authentication state
-        // and we should navigate back to the main app
-        authService.navigator.clear()
         isLoading = false
+        if let onResolved {
+          onResolved()
+        } else {
+          // On success, the AuthService will update the authentication state
+          // and we should navigate back to the main app
+          authService.navigator.clear()
+        }
       } catch {
-        reportError?(error)
+        handleError(error)
         isLoading = false
       }
     }
   }
 
   private func cancelResolution() {
-    authService.navigator.clear()
+    if let onCancel {
+      onCancel()
+    } else {
+      authService.navigator.clear()
+    }
   }
 }
 
@@ -169,6 +200,16 @@ extension MFAResolutionView: View {
       .padding(.horizontal)
     }
     .padding(.vertical, 20)
+    // The number pad has no return key and would otherwise cover the action buttons
+    .toolbar {
+      ToolbarItemGroup(placement: .keyboard) {
+        Spacer()
+        Button("Done") {
+          focus = nil
+        }
+      }
+    }
+    .errorAlert(error: $error, okButtonLabel: authService.string.okButtonLabel)
   }
 
   @ViewBuilder
