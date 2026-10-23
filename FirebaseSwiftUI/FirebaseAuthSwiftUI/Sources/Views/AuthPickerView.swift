@@ -20,7 +20,7 @@ import SwiftUI
 /// Wraps your app content and presents the authentication sheet whenever
 /// `AuthService.isPresented` is `true`.
 ///
-/// Use ``pickerContent(_:)`` and ``pickerDestination(_:)`` to replace the sheet's first screen or
+/// Use the `pickerContent` modifiers and ``pickerDestination(_:)`` to replace the sheet's first screen or
 /// any pushed screen while the library keeps driving navigation, MFA and account conflicts.
 ///
 /// Example:
@@ -41,7 +41,7 @@ public struct AuthPickerView<Content: View>: View {
   public var body: some View {
     AuthPickerContent(
       content: content,
-      pickerContent: { DefaultAuthPickerContent() },
+      pickerContent: { _ in DefaultAuthPickerContent() },
       destination: { DefaultAuthPickerDestination(screen: $0) }
     )
   }
@@ -61,8 +61,35 @@ public struct AuthPickerView<Content: View>: View {
   ) -> AuthPickerContent<Content, NewPickerContent, DefaultAuthPickerDestination> {
     AuthPickerContent(
       content: content,
-      pickerContent: pickerContent,
+      pickerContent: { _ in pickerContent() },
       destination: { DefaultAuthPickerDestination(screen: $0) }
+    )
+  }
+
+  /// Replaces the whole signed-out first screen with your own, receiving an
+  /// ``AuthMethodPickerState`` to sign in with the registered providers. Call its `select` so MFA,
+  /// account conflicts and errors are handled the same as the default buttons.
+  ///
+  /// Your screen replaces the logo, email sign-in, terms and the large "Sign in" title (the close
+  /// button stays), so show your own heading, email entry (for example one built around
+  /// ``EmailAuthView``) and any legal text you need. To keep the stock screen and only lay out
+  /// the provider buttons, use ``DefaultAuthPickerContent/init(authMethodPicker:)``.
+  ///
+  /// Example:
+  /// ```swift
+  /// AuthPickerView { authenticatedApp }
+  ///   .pickerContent { state in
+  ///     MyLandingScreen(state: state)
+  ///   }
+  /// ```
+  public func pickerContent<NewPickerContent: View>(
+    @ViewBuilder _ pickerContent: @escaping (AuthMethodPickerState) -> NewPickerContent
+  ) -> AuthPickerContent<Content, NewPickerContent, DefaultAuthPickerDestination> {
+    AuthPickerContent(
+      content: content,
+      pickerContent: pickerContent,
+      destination: { DefaultAuthPickerDestination(screen: $0) },
+      showsPickerTitle: false
     )
   }
 
@@ -92,7 +119,7 @@ public struct AuthPickerView<Content: View>: View {
   > {
     AuthPickerContent(
       content: content,
-      pickerContent: { DefaultAuthPickerContent() },
+      pickerContent: { _ in DefaultAuthPickerContent() },
       destination: destination
     )
   }
