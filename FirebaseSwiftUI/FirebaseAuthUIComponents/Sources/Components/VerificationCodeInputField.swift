@@ -334,6 +334,7 @@ private struct SingleDigitField: View {
         textField.font = .systemFont(ofSize: 24, weight: .medium)
         textField.textAlignment = .center
         textField.keyboardType = .numberPad
+        textField.returnKeyType = .done
         textField.textContentType = .oneTimeCode
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
@@ -455,6 +456,12 @@ private struct BackspaceAwareTextField: UIViewRepresentable {
       ) {
         textField.transform = targetTransform
       }
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+      // iPad hardware keyboard: never delete/hide fields on Return.
+      textField.resignFirstResponder()
+      return false
     }
 
     func textField(_ textField: UITextField,
