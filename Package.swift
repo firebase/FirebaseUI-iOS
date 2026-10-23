@@ -20,7 +20,12 @@ import PackageDescription
 let package = Package(
   name: "FirebaseUI",
   defaultLocalization: "en",
-  platforms: [.iOS(.v17)],
+  platforms: [
+    .iOS(.v17),
+    // Satisfies SPM's dependency graph check for FirebaseAuth 13 & GoogleSignIn 10.
+    // This package only supports iOS.
+    .macOS(.v12),
+  ],
   products: [
     .library(
       name: "FirebaseDatabaseUI",
@@ -74,15 +79,11 @@ let package = Package(
     ),
     .package(
       url: "https://github.com/firebase/firebase-ios-sdk.git",
-      "8.0.0" ..< "13.0.0"
+      "8.0.0" ..< "14.0.0"
     ),
     .package(
       url: "https://github.com/google/GoogleSignIn-iOS",
-      from: "10.0.0"
-    ),
-    .package(
-      url: "https://github.com/google/GoogleUtilities.git",
-      "7.4.1" ..< "9.0.0"
+      "7.0.0" ..< "11.0.0"
     ),
     .package(
       url: "https://github.com/SDWebImage/SDWebImage.git",

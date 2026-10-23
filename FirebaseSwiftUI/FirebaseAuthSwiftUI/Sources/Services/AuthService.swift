@@ -226,7 +226,7 @@ public final class AuthService {
   }
 
   public func signOut() async throws {
-    try await auth.signOut()
+    try auth.signOut()
     // Cannot wait for auth listener to change, feedback needs to be immediate
     currentUser = nil
     // Clear email link sign-in flag
@@ -239,7 +239,7 @@ public final class AuthService {
     updateAuthenticationState()
   }
 
-  public func linkAccounts(credentials credentials: AuthCredential) async throws {
+  public func linkAccounts(credentials: AuthCredential) async throws {
     authenticationState = .authenticating
     do {
       guard let user = currentUser else {
@@ -414,7 +414,7 @@ public extension AuthService {
     }
   }
 
-  func createUser(email email: String, password: String) async throws -> SignInOutcome {
+  func createUser(email: String, password: String) async throws -> SignInOutcome {
     authenticationState = .authenticating
     let credential = EmailAuthProvider.credential(withEmail: email, password: password)
 
@@ -474,7 +474,7 @@ public extension AuthService {
     }
   }
 
-  func handleSignInLink(url url: URL) async throws {
+  func handleSignInLink(url: URL) async throws {
     do {
       // Check which flow we're in based on the flag
       let email: String
@@ -532,9 +532,9 @@ public extension AuthService {
             paramName: "ui_auid"
           )
           if shouldHandleAnonymousUpgrade, anonymousUserID == currentUser?.uid {
-            try await handleAutoUpgradeAnonymousUser(credentials: credential)
+            _ = try await handleAutoUpgradeAnonymousUser(credentials: credential)
           } else {
-            let result = try await auth.signIn(withEmail: email, link: link)
+            _ = try await auth.signIn(withEmail: email, link: link)
           }
           updateAuthenticationState()
           // Track that user signed in with email link
@@ -586,7 +586,7 @@ public extension AuthService {
   func signInWithPhoneNumber(verificationID: String, verificationCode: String) async throws {
     let credential = PhoneAuthProvider.provider()
       .credential(withVerificationID: verificationID, verificationCode: verificationCode)
-    try await signIn(credentials: credential)
+    _ = try await signIn(credentials: credential)
   }
 }
 
@@ -758,7 +758,7 @@ public extension AuthService {
     }
 
     do {
-      let result = try await resolver.resolveSignIn(with: assertion)
+      _ = try await resolver.resolveSignIn(with: assertion)
       updateAuthenticationState()
 
       // Clear MFA resolution state
@@ -792,8 +792,6 @@ public extension AuthService {
       throw AuthServiceError.noCurrentUser
     }
 
-    let multiFactorUser = user.multiFactor
-
     // Create the appropriate assertion based on factor type
     let assertion: MultiFactorAssertion
 
@@ -814,7 +812,7 @@ public extension AuthService {
 
     case .totp:
       // For TOTP, we need the secret from the session
-      guard let totpInfo = session.totpInfo else {
+      guard session.totpInfo != nil else {
         throw AuthServiceError
           .multiFactorAuth("TOTP info is missing from enrollment session")
       }
@@ -903,10 +901,10 @@ public extension AuthService {
   }
 }
 
-// MARK: - Private Helper Methods
+// MARK: - Internal Helper Methods
 
-private extension AuthService {
-  internal func updateAuthenticationState() {
+extension AuthService {
+  func updateAuthenticationState() {
     authenticationState =
       (currentUser == nil || currentUser?.isAnonymous == true)
         ? .unauthenticated
@@ -916,8 +914,12 @@ private extension AuthService {
       legacySignInRecovery = nil
     }
   }
+}
 
-  private var shouldHandleAnonymousUpgrade: Bool {
+// MARK: - Private Helper Methods
+
+private extension AuthService {
+  var shouldHandleAnonymousUpgrade: Bool {
     currentUser?.isAnonymous == true && configuration.shouldAutoUpgradeAnonymousUsers
   }
 
@@ -1090,7 +1092,8 @@ private extension AuthService {
 
   private func buildLegacySignInRecovery(email: String,
                                          signInMethods: [String],
-                                         attemptedProviderId: String?) -> LegacySignInRecoveryContext? {
+                                         attemptedProviderId: String?)
+    -> LegacySignInRecoveryContext? {
     let attemptedOptionId = attemptedProviderId.map(normalizeLegacyOptionId)
     var options: [LegacySignInOption] = []
     var unavailableProviders: [String] = []
@@ -1137,7 +1140,9 @@ private extension AuthService {
         displayName: string.legacyEmailLinkOptionLabel
       )
     default:
-      guard let provider = providers.first(where: { $0.id == normalizeLegacyOptionId(signInMethod) }) else {
+      guard let provider = providers.first(where: {
+        $0.id == normalizeLegacyOptionId(signInMethod)
+      }) else {
         return nil
       }
       return LegacySignInOption(id: provider.id, displayName: provider.displayName)

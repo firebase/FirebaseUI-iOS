@@ -1178,7 +1178,7 @@ Signs in using email and password credentials.
 ##### Create User with Email/Password
 
 ```swift
-public func createUser(email email: String, password: String) async throws -> SignInOutcome
+public func createUser(email: String, password: String) async throws -> SignInOutcome
 ```
 
 Creates a new user account with email and password.
@@ -1218,7 +1218,7 @@ Button("Sign Out") {
 ##### Link Accounts
 
 ```swift
-public func linkAccounts(credentials credentials: AuthCredential) async throws
+public func linkAccounts(credentials: AuthCredential) async throws
 ```
 
 Links a new authentication method to the current user's account.
@@ -1255,7 +1255,7 @@ Sends a sign-in link to the specified email address. Can also be used for reauth
 ##### Handle Sign-In Link
 
 ```swift
-public func handleSignInLink(url url: URL) async throws
+public func handleSignInLink(url: URL) async throws
 ```
 
 Handles the email link flow when the user taps the link. Automatically routes to either sign-in or reauthentication based on the current context.

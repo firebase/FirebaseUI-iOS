@@ -83,7 +83,8 @@ bundle exec pod lib lint FirebaseDatabaseUI.podspec
 # FirebaseFirestoreUI.podspec / FirebaseStorageUI.podspec / FirebaseUI.podspec as needed
 ```
 
-Do **not** run `pod trunk push` / `./release.sh` as part of ordinary validation.
+Do **not** run `pod trunk push` / `./release-swift.sh` as part of ordinary
+validation.
 
 ## Samples
 
