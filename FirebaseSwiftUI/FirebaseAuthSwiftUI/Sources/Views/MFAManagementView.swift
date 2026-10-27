@@ -67,12 +67,12 @@ extension MFAManagementView: View {
       // Title section
       VStack {
         Text("Two-Factor Authentication")
-          .font(.largeTitle)
+          .authFont(.largeTitle)
           .fontWeight(.bold)
           .multilineTextAlignment(.center)
 
         Text("Manage your authentication methods")
-          .font(.subheadline)
+          .authFont(.subheadline)
           .foregroundColor(.secondary)
           .multilineTextAlignment(.center)
       }
@@ -86,13 +86,13 @@ extension MFAManagementView: View {
             .foregroundColor(.orange)
 
           Text("No Authentication Methods")
-            .font(.title2)
+            .authFont(.title2)
             .fontWeight(.semibold)
 
           Text(
             "Set up two-factor authentication to add an extra layer of security to your account."
           )
-          .font(.body)
+          .authFont(.body)
           .foregroundColor(.secondary)
           .multilineTextAlignment(.center)
           .padding(.horizontal)
@@ -104,7 +104,7 @@ extension MFAManagementView: View {
               .padding(.vertical, 8)
               .frame(maxWidth: .infinity)
           }
-          .buttonStyle(.borderedProminent)
+          .authCTAButtonStyle()
           .padding([.top, .bottom], 8)
           .frame(maxWidth: .infinity)
           .accessibilityIdentifier("setup-mfa-button")
@@ -113,7 +113,7 @@ extension MFAManagementView: View {
         // Show enrolled factors
         VStack(alignment: .leading, spacing: 16) {
           Text("Enrolled Methods")
-            .font(.headline)
+            .authFont(.headline)
             .padding(.horizontal)
 
           ForEach(enrolledFactors) { factor in
@@ -128,7 +128,7 @@ extension MFAManagementView: View {
           }
           .padding([.top, .bottom], 8)
           .frame(maxWidth: .infinity)
-          .buttonStyle(.borderedProminent)
+          .authCTAButtonStyle()
           .accessibilityIdentifier("add-mfa-method-button")
         }
       }
@@ -156,25 +156,25 @@ extension MFAManagementView: View {
             .foregroundColor(.green)
         }
       }
-      .font(.title2)
+      .authFont(.title2)
 
       VStack(alignment: .leading, spacing: 4) {
         Text(factor.displayName ?? authService.string.unnamedMethodLabel)
-          .font(.headline)
+          .authFont(.headline)
 
         if factor.factorID == PhoneMultiFactorID {
           let phoneInfo = factor as! PhoneMultiFactorInfo
           Text("SMS: \(phoneInfo.phoneNumber)")
-            .font(.caption)
+            .authFont(.caption)
             .foregroundColor(.secondary)
         } else {
           Text("Authenticator App")
-            .font(.caption)
+            .authFont(.caption)
             .foregroundColor(.secondary)
         }
 
         Text("Enrolled: \(DateFormatter.shortDate.string(from: factor.enrollmentDate))")
-          .font(.caption2)
+          .authFont(.caption2)
           .foregroundColor(.secondary)
       }
 
