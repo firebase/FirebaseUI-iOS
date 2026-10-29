@@ -244,8 +244,6 @@ struct ProMFAEnrolment: View {
 struct ProMFAEnrolmentContent: View {
   let state: MFAEnrollmentContentState
 
-  @Environment(AuthService.self) private var authService
-
   var body: some View {
     switch state.step {
     case .selectFactor:
@@ -288,10 +286,6 @@ struct ProMFAEnrolmentContent: View {
           )
           .disabled(!state.isValid)
           .padding(.top, 12)
-          ProTextButton(title: "Not now", identifier: "not-now-button") {
-            _ = authService.navigator.pop()
-          }
-          .padding(.top, 4)
         }
       }
     case .enterPhoneNumber:
