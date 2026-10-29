@@ -33,21 +33,26 @@ public protocol AuthProviderUI {
   var provider: AuthProviderSwift { get }
 }
 
-/// Lets ``AuthService/triggerSignIn(for:)`` start sign-in for a provider whose flow doesn't
-/// produce a credential, such as phone or a custom flow that presents its own screens.
+/// Lets ``AuthService/triggerSignIn(for:)`` start sign-in for a provider that isn't a plain
+/// credential provider, such as phone or a custom flow that presents its own screens first.
 ///
-/// Return the ``SignInOutcome`` when the action signs in directly, so `.mfaRequired` reaches the
-/// standard MFA handler. Return `nil` when the action only starts a flow, such as pushing a
-/// screen.
+/// When the action signs in through ``AuthService/signIn(credentials:)``, return its outcome so
+/// `.mfaRequired` reaches the standard MFA handler. MFA can only be resolved for an outcome from
+/// that call, so return `nil` or `.signedIn` for any other sign-in, and `nil` when the action
+/// only starts a flow, such as pushing a screen.
 ///
 /// Adopt it on a custom provider so a custom method picker layout can start its sign-in through
 /// ``AuthMethodPickerState/select``. Otherwise, start sign-in from the provider's own button.
 ///
 /// Example:
 /// ```swift
-/// extension MyProviderAuthUI: AuthProviderAction {
-///   func triggerAction() async throws -> SignInOutcome? {
-///     try await authService.signIn(credentials: myFlowCredential())
+/// final class MyProviderAuthUI: AuthProviderAction {
+///   let authService: AuthService
+///   // id, displayName, provider and authButton() as for any AuthProviderUI
+///
+///   @MainActor func triggerAction() async throws -> SignInOutcome? {
+///     let credential = try await presentMySignInScreen()
+///     return try await authService.signIn(credentials: credential)
 ///   }
 /// }
 /// ```

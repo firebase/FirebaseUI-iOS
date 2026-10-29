@@ -18,9 +18,9 @@ import SwiftUI
 /// The default signed-out first screen of the authentication sheet: the logo, email sign-in,
 /// the provider buttons and the terms.
 ///
-/// Return it from `AuthPickerView`'s no-argument `pickerContent` to keep the stock screen while adding
-/// modifiers such as a background, or use ``init(authMethodPicker:)`` to lay out the provider
-/// buttons yourself.
+/// Return it from `AuthPickerView`'s no-argument `pickerContent` to keep the stock screen while
+/// adding modifiers such as a background, or use ``init(authMethodPicker:)`` to lay out the
+/// provider buttons yourself.
 @MainActor
 public struct DefaultAuthPickerContent<AuthMethodPicker: View>: View {
   public init() where AuthMethodPicker == DefaultAuthMethodPicker {
@@ -126,8 +126,9 @@ public struct AuthMethodPickerState {
   /// ``isEmailLinkEnabled``.
   public let providers: [AuthProviderUI]
 
-  /// Signs in with a provider from ``providers``. A provider that is neither credential-based
-  /// nor an ``AuthProviderAction`` reports an error instead.
+  /// Signs in with a provider from ``providers``. MFA, account conflicts and errors are handled
+  /// for you, the same as the default buttons. A provider that is neither credential-based nor
+  /// an ``AuthProviderAction`` reports an error instead.
   public let select: @MainActor (AuthProviderUI) -> Void
 
   /// Whether email-link sign-in is enabled on the ``AuthService``.

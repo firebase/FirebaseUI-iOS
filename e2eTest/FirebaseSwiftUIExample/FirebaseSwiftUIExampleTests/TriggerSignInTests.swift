@@ -48,9 +48,13 @@ private class TestProviderUI: AuthProviderUI {
 private class TestActionProviderUI: TestProviderUI, AuthProviderAction {
   var actionCount = 0
   var outcome: SignInOutcome?
+  var error: Error?
 
   @MainActor func triggerAction() async throws -> SignInOutcome? {
     actionCount += 1
+    if let error {
+      throw error
+    }
     return outcome
   }
 }
@@ -194,6 +198,43 @@ struct AuthMethodPickerStateRouteTests {
       message: "conflict",
       email: "a@b.com"
     ))
+  }
+
+  private func routeSelection(of provider: AuthProviderUI) async -> Calls {
+    configureFirebaseIfNeeded()
+    let service = AuthService()
+    let result: Result<SignInOutcome?, Error>
+    do {
+      let outcome = try await service.triggerSignIn(for: provider)
+      result = .success(outcome)
+    } catch {
+      result = .failure(error)
+    }
+    return route(result)
+  }
+
+  @Test
+  func actionMFAReachesMFAHandler() async {
+    let provider = TestActionProviderUI(id: "action", provider: PlainProvider())
+    provider.outcome = .mfaRequired(MFARequired(hints: []))
+
+    let calls = await routeSelection(of: provider)
+
+    #expect(calls.mfa.count == 1)
+    #expect(calls.conflicts.isEmpty)
+    #expect(calls.errors.isEmpty)
+  }
+
+  @Test
+  func actionConflictReachesConflictHandler() async {
+    let provider = TestActionProviderUI(id: "action", provider: PlainProvider())
+    provider.error = conflictError()
+
+    let calls = await routeSelection(of: provider)
+
+    #expect(calls.conflicts.count == 1)
+    #expect(calls.mfa.isEmpty)
+    #expect(calls.errors.isEmpty)
   }
 
   @Test
