@@ -143,7 +143,9 @@ public struct AuthMethodPickerState {
   public let isEmailSignInEnabled: Bool
 
   /// Pushes ``AuthView/signIn``, an email and password sign-in screen of its own, for a first
-  /// screen that shows only provider buttons and a "Continue with email" button.
+  /// screen that shows only provider buttons and a "Continue with email" button. Use it from
+  /// `AuthPickerView`'s whole-screen `pickerContent`; ``DefaultAuthPickerContent`` already shows
+  /// the email form.
   public let goToEmailSignIn: @MainActor () -> Void
 
   /// Creates a state, for example to preview a custom layout with stub actions.

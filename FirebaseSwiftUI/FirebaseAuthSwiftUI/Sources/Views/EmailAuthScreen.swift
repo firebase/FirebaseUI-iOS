@@ -208,9 +208,7 @@ public struct EmailAuthScreen<Content: View>: View {
   private func switchFlow() {
     switch fixedFlow {
     case .signUp:
-      if authService.authView == .signUp {
-        authService.navigator.pop()
-      }
+      authService.navigator.pop()
       return
     case .signIn:
       authService.navigator.push(.signUp)
@@ -243,12 +241,8 @@ public struct EmailAuthScreen<Content: View>: View {
     Task {
       defer { isWorking = false }
       do {
-        switch try await attempt() {
-        case let .mfaRequired(mfaInfo):
+        if case let .mfaRequired(mfaInfo) = try await attempt() {
           mfaHandler?(mfaInfo)
-        case .signedIn:
-          // Close a pushed sign-up screen so the signed-in screen shows, like the other routes.
-          authService.navigator.clear()
         }
       } catch {
         if case let AuthServiceError.accountConflict(ctx) = error,
