@@ -265,12 +265,6 @@ struct ProPasswordRecovery: View {
             .disabled(!state.isValid)
             .padding(.top, 4)
           }
-          ProTextButton(
-            title: "Back to sign in",
-            identifier: "back-to-sign-in-button",
-            action: state.dismissSuccess
-          )
-          .padding(.top, 4)
         }
       }
     }
