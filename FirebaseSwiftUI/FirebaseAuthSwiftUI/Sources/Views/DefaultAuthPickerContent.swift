@@ -171,8 +171,9 @@ public struct AuthMethodPickerState {
 /// The default provider list on ``DefaultAuthPickerContent``: every registered provider's
 /// button, stacked vertically and inset from the screen edges.
 ///
-/// Its width is 72% of the nearest container, such as the enclosing `ScrollView`, not of its
-/// direct parent.
+/// The buttons are 72% of the nearest container's width, such as the enclosing `ScrollView`,
+/// not of their direct parent. The picker itself fills the available width, so give it a
+/// width with `.frame` when placing it in an `HStack`.
 @MainActor
 public struct DefaultAuthMethodPicker: View {
   public init() {}
