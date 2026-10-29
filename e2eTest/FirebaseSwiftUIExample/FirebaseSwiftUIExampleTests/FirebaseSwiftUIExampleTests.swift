@@ -281,10 +281,13 @@ struct FirebaseSwiftUIExampleTests {
     }
     #expect(hintPhoneNumber?.hasSuffix(String(phoneNumber.suffix(4))) == true)
 
-    // The resolver is kept so the second factor can be resolved as for sign-in. Completing
-    // resolveSignIn is not asserted: the Auth emulator rejects it with
-    // ERROR_MULTI_FACTOR_INFO_NOT_FOUND (https://github.com/firebase/firebase-ios-sdk/issues/11079)
+    // The resolver is kept so the second factor is resolved as for sign-in
     let verificationId = try await service.resolveSmsChallenge(hintIndex: 0)
-    #expect(!verificationId.isEmpty)
+    try await service.resolveSignIn(
+      code: fetchLatestSMSCode(for: phoneNumber),
+      hintIndex: 0,
+      verificationId: verificationId
+    )
+    #expect(service.currentUser?.email?.caseInsensitiveCompare(email) == .orderedSame)
   }
 }
