@@ -128,9 +128,13 @@ public struct EmailAuthContentState {
 /// ```
 @MainActor
 public struct EmailAuthScreen<Content: View>: View {
-  /// Creates the screen. Pass a `flow` to fix it to sign-in or sign-up, for example for a
-  /// custom ``AuthView/signUp`` destination; leave it `nil` to follow
-  /// ``AuthService/authenticationFlow`` and toggle it in place.
+  /// Creates the screen. Leave `flow` `nil` to follow ``AuthService/authenticationFlow`` and
+  /// toggle it in place, as the stock first screen does.
+  ///
+  /// Pass a `flow` to fix it and make ``EmailAuthContentState/switchFlow`` navigate instead:
+  /// `.signIn` pushes ``AuthView/signUp``, so a first screen fixed to `.signIn` gives the stock
+  /// "Sign up" link its own sign-up screen. Use `.signUp` only for an ``AuthView/signUp``
+  /// destination, where `switchFlow` pops back to the screen that pushed it.
   public init(flow: AuthenticationFlow? = nil,
               @ViewBuilder content: @escaping (EmailAuthContentState) -> Content) {
     fixedFlow = flow
@@ -203,7 +207,9 @@ public struct EmailAuthScreen<Content: View>: View {
   private func switchFlow() {
     switch fixedFlow {
     case .signUp:
-      authService.navigator.pop()
+      if authService.authView == .signUp {
+        authService.navigator.pop()
+      }
       return
     case .signIn:
       authService.navigator.push(.signUp)
@@ -236,8 +242,12 @@ public struct EmailAuthScreen<Content: View>: View {
     Task {
       defer { isWorking = false }
       do {
-        if case let .mfaRequired(mfaInfo) = try await attempt() {
+        switch try await attempt() {
+        case let .mfaRequired(mfaInfo):
           mfaHandler?(mfaInfo)
+        case .signedIn:
+          // Close a pushed sign-up screen so the signed-in screen shows, like the other routes.
+          authService.navigator.clear()
         }
       } catch {
         if case let AuthServiceError.accountConflict(ctx) = error,
