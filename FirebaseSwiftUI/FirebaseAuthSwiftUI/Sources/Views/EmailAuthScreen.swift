@@ -133,8 +133,9 @@ public struct EmailAuthScreen<Content: View>: View {
   ///
   /// Pass a `flow` to fix it and make ``EmailAuthContentState/switchFlow`` navigate instead:
   /// `.signIn` pushes ``AuthView/signUp``, so a first screen fixed to `.signIn` gives the stock
-  /// "Sign up" link its own sign-up screen. Use `.signUp` only for an ``AuthView/signUp``
-  /// destination, where `switchFlow` pops back to the screen that pushed it.
+  /// "Sign up" link its own sign-up screen, as ``SignInView`` does for ``AuthView/signIn``. Use
+  /// `.signUp` only for an ``AuthView/signUp`` destination, where `switchFlow` pops back to the
+  /// screen that pushed it.
   public init(flow: AuthenticationFlow? = nil,
               @ViewBuilder content: @escaping (EmailAuthContentState) -> Content) {
     fixedFlow = flow
