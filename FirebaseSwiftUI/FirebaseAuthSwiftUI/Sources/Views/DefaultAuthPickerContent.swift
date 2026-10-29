@@ -183,5 +183,8 @@ public struct DefaultAuthMethodPicker: View {
     authService.renderButtons()
       // 72% of the container width, matching a 14% inset on each side.
       .containerRelativeFrame(.horizontal) { length, _ in length * 0.72 }
+      // Fill the width so an enclosing `ScrollView`, which sizes to its content, spans the
+      // screen even when nothing else in it is full width.
+      .frame(maxWidth: .infinity)
   }
 }
