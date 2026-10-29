@@ -174,3 +174,133 @@ func fetchEmailSignInLinkFromEmulator(email: String,
     userInfo: [NSLocalizedDescriptionKey: "No EMAIL_SIGNIN OOB link found for \(email)"]
   )
 }
+
+// MARK: - MFA
+
+@MainActor
+@discardableResult
+private func postToAuthEmulator(_ path: String,
+                                body: [String: Any],
+                                asOwner: Bool = false,
+                                emulatorHost: String = "127.0.0.1:9099") async throws
+  -> [String: Any] {
+  var request = URLRequest(url: URL(string: "http://\(emulatorHost)/\(path)")!)
+  request.httpMethod = "POST"
+  request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+  if asOwner {
+    request.setValue("Bearer owner", forHTTPHeaderField: "Authorization")
+  }
+  request.httpBody = try JSONSerialization.data(withJSONObject: body)
+
+  let (data, response) = try await URLSession.shared.data(for: request)
+  guard (response as? HTTPURLResponse)?.statusCode == 200,
+        let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+    throw NSError(
+      domain: "EmulatorError",
+      code: 20,
+      userInfo: [
+        NSLocalizedDescriptionKey: "\(path) failed: \(String(data: data, encoding: .utf8) ?? "")",
+      ]
+    )
+  }
+  return json
+}
+
+@MainActor
+func fetchLatestSMSCode(for phoneNumber: String,
+                        projectID: String = "flutterfire-e2e-tests",
+                        emulatorHost: String = "127.0.0.1:9099") async throws -> String {
+  let url =
+    URL(string: "http://\(emulatorHost)/emulator/v1/projects/\(projectID)/verificationCodes")!
+  let (data, response) = try await URLSession.shared.data(from: url)
+  guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+    throw NSError(
+      domain: "EmulatorError",
+      code: 25,
+      userInfo: [NSLocalizedDescriptionKey: "Failed to fetch SMS verification codes"]
+    )
+  }
+  let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+  let codes = json?["verificationCodes"] as? [[String: Any]] ?? []
+  // Codes sent for MFA resolution carry a masked number, e.g. "+*******4567"
+  let matches: ([String: Any]) -> Bool = { entry in
+    guard let number = entry["phoneNumber"] as? String else { return false }
+    return number == phoneNumber
+      || (number.contains("*") && number.suffix(4) == phoneNumber.suffix(4))
+  }
+  guard let code = codes.last(where: matches)?["code"] as? String else {
+    throw NSError(
+      domain: "EmulatorError",
+      code: 21,
+      userInfo: [NSLocalizedDescriptionKey: "No SMS code found for \(phoneNumber)"]
+    )
+  }
+  return code
+}
+
+/// Verifies the user's email and enrolls an SMS second factor via the emulator REST API
+@MainActor
+func enrollSMSSecondFactor(email: String,
+                           password: String,
+                           phoneNumber: String,
+                           projectID: String = "flutterfire-e2e-tests") async throws {
+  let signInPath =
+    "identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=fake-api-key"
+  let signInBody: [String: Any] = [
+    "email": email,
+    "password": password,
+    "returnSecureToken": true,
+  ]
+  guard let localId = try await postToAuthEmulator(signInPath, body: signInBody)["localId"]
+    as? String else {
+    throw NSError(
+      domain: "EmulatorError",
+      code: 23,
+      userInfo: [NSLocalizedDescriptionKey: "signInWithPassword returned no localId"]
+    )
+  }
+  try await postToAuthEmulator(
+    "identitytoolkit.googleapis.com/v1/projects/\(projectID)/accounts:update",
+    body: ["localId": localId, "emailVerified": true],
+    asOwner: true
+  )
+  guard let idToken = try await postToAuthEmulator(signInPath, body: signInBody)["idToken"]
+    as? String else {
+    throw NSError(
+      domain: "EmulatorError",
+      code: 24,
+      userInfo: [NSLocalizedDescriptionKey: "signInWithPassword returned no idToken"]
+    )
+  }
+
+  let start = try await postToAuthEmulator(
+    "identitytoolkit.googleapis.com/v2/accounts/mfaEnrollment:start?key=fake-api-key",
+    body: [
+      "idToken": idToken,
+      "phoneEnrollmentInfo": [
+        "phoneNumber": phoneNumber,
+        "recaptchaToken": "fake-recaptcha-token",
+      ],
+    ]
+  )
+  guard let sessionInfo = (start["phoneSessionInfo"] as? [String: Any])?["sessionInfo"]
+    as? String else {
+    throw NSError(
+      domain: "EmulatorError",
+      code: 22,
+      userInfo: [NSLocalizedDescriptionKey: "mfaEnrollment:start returned no sessionInfo"]
+    )
+  }
+
+  try await postToAuthEmulator(
+    "identitytoolkit.googleapis.com/v2/accounts/mfaEnrollment:finalize?key=fake-api-key",
+    body: [
+      "idToken": idToken,
+      "phoneVerificationInfo": [
+        "sessionInfo": sessionInfo,
+        "code": await fetchLatestSMSCode(for: phoneNumber),
+      ],
+      "displayName": "Test Phone",
+    ]
+  )
+}
