@@ -44,14 +44,18 @@ enum ProPalette {
 /// the screen's content and an optional footer. The footer sits at the bottom when the content is
 /// short, and scrolls with it otherwise, so the keyboard never pushes it over a button.
 struct ProPage<Header: View, Content: View, Footer: View>: View {
-  init(@ViewBuilder header: () -> Header,
+  /// `showsThemeMenu` is off for screens in their own sheet, such as reauthentication.
+  init(showsThemeMenu: Bool = true,
+       @ViewBuilder header: () -> Header,
        @ViewBuilder content: () -> Content,
        @ViewBuilder footer: () -> Footer = { EmptyView() }) {
+    self.showsThemeMenu = showsThemeMenu
     self.header = header()
     self.content = content()
     self.footer = footer()
   }
 
+  private let showsThemeMenu: Bool
   private let header: Header
   private let content: Content
   private let footer: Footer
@@ -79,8 +83,10 @@ struct ProPage<Header: View, Content: View, Footer: View>: View {
     .navigationTitle("")
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      ToolbarItem(placement: .topBarLeading) {
-        DemoThemeMenu()
+      if showsThemeMenu {
+        ToolbarItem(placement: .topBarLeading) {
+          DemoThemeMenu()
+        }
       }
     }
   }
