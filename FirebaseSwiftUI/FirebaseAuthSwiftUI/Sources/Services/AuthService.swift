@@ -73,6 +73,8 @@ public enum AuthenticationFlow {
 
 public enum AuthView: Hashable {
   case passwordRecovery
+  /// A pushed email and password sign-up screen, reached with ``EmailAuthContentState/goToSignUp``.
+  case signUp
   case emailLink
   case updatePassword
   case mfaEnrollment

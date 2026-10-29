@@ -36,8 +36,12 @@ public struct EmailAuthContentState {
   /// their handlers. Does nothing unless ``isValid`` is `true` and ``isLoading`` is `false`.
   public let signUp: @MainActor () -> Void
 
-  /// Toggles ``flow`` between sign-in and sign-up, with animation.
+  /// Toggles ``flow`` between sign-in and sign-up, with animation. On a screen with a fixed
+  /// flow it navigates instead: sign-up pops back and sign-in pushes ``AuthView/signUp``.
   public let switchFlow: @MainActor () -> Void
+
+  /// Pushes ``AuthView/signUp``, for a sign-up screen of its own instead of toggling ``flow``.
+  public let goToSignUp: @MainActor () -> Void
 
   /// Pushes ``AuthView/passwordRecovery``.
   public let goToPasswordRecovery: @MainActor () -> Void
@@ -45,7 +49,8 @@ public struct EmailAuthContentState {
   /// Starts email-link sign-in, the same as the stock email-link button.
   public let goToEmailLink: @MainActor () -> Void
 
-  /// Whether the form signs in or signs up. Shared with ``AuthService/authenticationFlow``.
+  /// Whether the form signs in or signs up. Shared with ``AuthService/authenticationFlow``
+  /// unless the screen was created with a fixed flow.
   public let flow: AuthenticationFlow
 
   /// Whether the fields are valid for ``flow``: a valid email and a non-empty password to sign
@@ -68,6 +73,7 @@ public struct EmailAuthContentState {
               signIn: @escaping @MainActor () -> Void,
               signUp: @escaping @MainActor () -> Void,
               switchFlow: @escaping @MainActor () -> Void,
+              goToSignUp: @escaping @MainActor () -> Void,
               goToPasswordRecovery: @escaping @MainActor () -> Void,
               goToEmailLink: @escaping @MainActor () -> Void,
               flow: AuthenticationFlow,
@@ -80,6 +86,7 @@ public struct EmailAuthContentState {
     self.signIn = signIn
     self.signUp = signUp
     self.switchFlow = switchFlow
+    self.goToSignUp = goToSignUp
     self.goToPasswordRecovery = goToPasswordRecovery
     self.goToEmailLink = goToEmailLink
     self.flow = flow
@@ -121,7 +128,12 @@ public struct EmailAuthContentState {
 /// ```
 @MainActor
 public struct EmailAuthScreen<Content: View>: View {
-  public init(@ViewBuilder content: @escaping (EmailAuthContentState) -> Content) {
+  /// Creates the screen. Pass a `flow` to fix it to sign-in or sign-up, for example for a
+  /// custom ``AuthView/signUp`` destination; leave it `nil` to follow
+  /// ``AuthService/authenticationFlow`` and toggle it in place.
+  public init(flow: AuthenticationFlow? = nil,
+              @ViewBuilder content: @escaping (EmailAuthContentState) -> Content) {
+    fixedFlow = flow
     self.content = content
   }
 
@@ -135,6 +147,7 @@ public struct EmailAuthScreen<Content: View>: View {
   @State private var isWorking = false
   @State private var errorMessage: String?
 
+  private let fixedFlow: AuthenticationFlow?
   private let content: (EmailAuthContentState) -> Content
 
   public var body: some View {
@@ -145,9 +158,10 @@ public struct EmailAuthScreen<Content: View>: View {
       signIn: signIn,
       signUp: signUp,
       switchFlow: switchFlow,
+      goToSignUp: { authService.navigator.push(.signUp) },
       goToPasswordRecovery: { authService.navigator.push(.passwordRecovery) },
       goToEmailLink: { authService.selectEmailLink() },
-      flow: authService.authenticationFlow,
+      flow: flow,
       isValid: isValid,
       isLoading: isLoading,
       errorMessage: errorMessage
@@ -168,8 +182,12 @@ public struct EmailAuthScreen<Content: View>: View {
     }
   }
 
+  private var flow: AuthenticationFlow {
+    fixedFlow ?? authService.authenticationFlow
+  }
+
   private var isValid: Bool {
-    return if authService.authenticationFlow == .signIn {
+    return if flow == .signIn {
       FormValidators.email.isValid(input: email) && !password.isEmpty
     } else {
       FormValidators.email.isValid(input: email) &&
@@ -183,6 +201,16 @@ public struct EmailAuthScreen<Content: View>: View {
   }
 
   private func switchFlow() {
+    switch fixedFlow {
+    case .signUp:
+      authService.navigator.pop()
+      return
+    case .signIn:
+      authService.navigator.push(.signUp)
+      return
+    case nil:
+      break
+    }
     withAnimation {
       authService.authenticationFlow =
         authService.authenticationFlow == .signIn ? .signUp : .signIn
