@@ -382,7 +382,7 @@ private struct DemoChoiceRow: View {
 }
 
 /// A QR code for the TOTP setup URL, drawn with Core Image once per URL.
-private struct DemoQRCode: View {
+struct DemoQRCode: View {
   let url: URL
 
   @State private var image: UIImage?

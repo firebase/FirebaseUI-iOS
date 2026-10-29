@@ -293,7 +293,7 @@ private struct DemoProviderButton<Icon: View>: View {
 /// The registered providers the Figma frames don't draw, as the library's own brand buttons.
 /// `AuthProviderButton` takes the demo's action, so sign-in still goes through
 /// `AuthMethodPickerState.select` once the sheet has closed.
-private struct DemoOtherProvidersSheet: View {
+struct DemoOtherProvidersSheet: View {
   let providers: [AuthProviderUI]
   let select: (AuthProviderUI) -> Void
 
