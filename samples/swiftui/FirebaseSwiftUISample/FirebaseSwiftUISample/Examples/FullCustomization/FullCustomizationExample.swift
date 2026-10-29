@@ -27,8 +27,9 @@ import SwiftUI
 /// - `.pickerDestination` replaces each pushed screen through its content slot; update password
 ///   has no slot and stays stock, falling through to `DefaultAuthPickerDestination`.
 /// - `.signedInContent` replaces the signed-in screen.
-/// - The theming modifiers restyle the stock screens left in the flow (update password,
-///   reauthentication, delete confirmation) and the library components the demo reuses.
+/// - `.reauthContent` replaces the password, phone and email-link reauthentication prompts.
+/// - The theming modifiers restyle the stock screens left in the flow (update password, delete
+///   confirmation) and the library components the demo reuses.
 ///
 /// The Figma themes share one layout and differ only in ``DemoTheme`` values. Professional also
 /// brings its own layout, the `Pro…` screens, through the same slots, and pushes a separate
@@ -88,6 +89,9 @@ private struct FullCustomizationFlow: View {
     }
     .signedInContent { state in
       ThemedSignedIn(state: state)
+    }
+    .reauthContent { prompt in
+      ThemedReauth(prompt: prompt)
     }
     .authTypography(theme.typography)
     .authTextFieldStyle(theme.textFieldStyle)

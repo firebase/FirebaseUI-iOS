@@ -19,10 +19,13 @@ import SwiftUI
 /// an optional footer, over the theme's background art. Accessibility identifiers use the Figma
 /// layer names.
 struct DemoPage<Card: View, Footer: View>: View {
+  /// `showsThemeMenu` is off for screens in their own sheet, such as reauthentication.
   init(title: String?,
+       showsThemeMenu: Bool = true,
        @ViewBuilder card: @escaping () -> Card,
        @ViewBuilder footer: @escaping () -> Footer = { EmptyView() }) {
     self.title = title
+    self.showsThemeMenu = showsThemeMenu
     self.card = card
     self.footer = footer
   }
@@ -30,6 +33,7 @@ struct DemoPage<Card: View, Footer: View>: View {
   @AppStorage(DemoThemeID.storageKey) private var themeID: DemoThemeID = .doggo
 
   private let title: String?
+  private let showsThemeMenu: Bool
   private let card: () -> Card
   private let footer: () -> Footer
 
@@ -83,8 +87,10 @@ struct DemoPage<Card: View, Footer: View>: View {
     .navigationTitle("")
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      ToolbarItem(placement: .topBarLeading) {
-        DemoThemeMenu()
+      if showsThemeMenu {
+        ToolbarItem(placement: .topBarLeading) {
+          DemoThemeMenu()
+        }
       }
     }
   }
