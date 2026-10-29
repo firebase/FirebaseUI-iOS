@@ -15,13 +15,15 @@
 import FirebaseAuthSwiftUI
 import SwiftUI
 
-/// The three looks of the full customization demo, one per iOS Landing frame in the
-/// "Firebase auth flows" Figma file: Doggo (17:12933), Grid (20:5467) and Coffee Spark (20:5769).
-/// Every value below is read from those frames; screens the frames don't cover reuse them.
+/// The looks of the full customization demo. Doggo, Grid and Coffee Spark come from the iOS
+/// Landing frames in the "Firebase auth flows" Figma file (17:12933, 20:5467 and 20:5769), and
+/// screens the frames don't cover reuse their values. Professional has no Figma frame: its values
+/// are a written spec in ``DemoTheme/professional``.
 enum DemoThemeID: String, CaseIterable, Identifiable {
   case doggo
   case grid
   case spark
+  case professional
 
   static let storageKey = "fullCustomization.theme"
 
@@ -32,6 +34,7 @@ enum DemoThemeID: String, CaseIterable, Identifiable {
     case .doggo: "Doggo"
     case .grid: "Grid"
     case .spark: "Coffee Spark"
+    case .professional: "Professional"
     }
   }
 
@@ -40,19 +43,26 @@ enum DemoThemeID: String, CaseIterable, Identifiable {
     case .doggo: .doggo
     case .grid: .grid
     case .spark: .spark
+    case .professional: .professional
     }
   }
 }
 
 struct DemoTheme {
   struct TextToken {
-    var fontName: String
+    /// A bundled font's PostScript name, or `nil` for the system font at ``weight``.
+    var fontName: String?
     var size: CGFloat
+    var weight: Font.Weight = .regular
     var color: Color
     var underline = false
 
     func font(relativeTo style: Font.TextStyle = .body) -> Font {
-      .custom(fontName, size: size, relativeTo: style)
+      if let fontName {
+        .custom(fontName, size: size, relativeTo: style)
+      } else {
+        .system(size: size, weight: weight)
+      }
     }
   }
 
@@ -80,8 +90,9 @@ struct DemoTheme {
 
   let id: DemoThemeID
   /// The family handed to `AuthTypography`, so library screens the demo doesn't replace (update
-  /// password, reauthentication, delete confirmation) use the theme's font too.
-  let libraryFontFamily: String
+  /// password, reauthentication, delete confirmation) use the theme's font too. `nil` keeps the
+  /// system font.
+  let libraryFontFamily: String?
   let pageBackground: Color
 
   /// The "title" text above the form. Coffee Spark hides it in Figma and shows ``headline``.
@@ -95,6 +106,7 @@ struct DemoTheme {
   let cardCornerRadius: CGFloat
   let cardPadding: CGFloat
   let cardShadow: Shadow?
+  let cardStroke: Stroke?
 
   /// The "text-field" instance.
   let fieldFill: Color
@@ -111,6 +123,7 @@ struct DemoTheme {
   /// The "button" instances: primary is "Login", secondary is "Email link sign-in".
   let buttonFont: TextToken
   let buttonCornerRadius: CGFloat
+  let buttonHeight: CGFloat
   let buttonStroke: Stroke?
   let buttonShadow: Shadow?
   let primaryButton: ButtonColors
@@ -121,6 +134,10 @@ struct DemoTheme {
   let otherLabel: TextToken
   let otherPadding: EdgeInsets
   let googleLabel: TextToken
+  /// The Google and "More sign-in options" pills.
+  let pillFill: Color
+  let pillCornerRadius: CGFloat
+  let pillStroke: Color
   let phoneProvider: Provider
   let footerText: TextToken
   let footerAccent: TextToken
@@ -143,6 +160,7 @@ extension DemoTheme {
     cardCornerRadius: 24,
     cardPadding: 16,
     cardShadow: Shadow(color: Color(demoHex: 0xFFD8EB), x: 3, y: 6),
+    cardStroke: nil,
     fieldFill: .white,
     fieldStroke: Stroke(color: Color(demoHex: 0xD3C2C9), width: 1),
     fieldCornerRadius: 24,
@@ -159,6 +177,7 @@ extension DemoTheme {
     ),
     buttonFont: TextToken(fontName: "Onest-Bold", size: 20, color: .white),
     buttonCornerRadius: 36,
+    buttonHeight: 64,
     buttonStroke: nil,
     buttonShadow: Shadow(color: Color(demoHex: 0x5D0B47), x: 2, y: 4),
     primaryButton: ButtonColors(fill: Color(demoHex: 0x864B6F), label: .white),
@@ -167,6 +186,9 @@ extension DemoTheme {
     otherLabel: TextToken(fontName: "Onest-Medium", size: 16, color: Color(demoHex: 0xA08B95)),
     otherPadding: EdgeInsets(top: 16, leading: 40, bottom: 0, trailing: 40),
     googleLabel: TextToken(fontName: "Roboto-SemiBold", size: 14, color: .black),
+    pillFill: .white,
+    pillCornerRadius: 80,
+    pillStroke: .black,
     phoneProvider: Provider(
       fill: Color(demoHex: 0x894680),
       label: TextToken(fontName: "Roboto-Medium", size: 14, color: .white),
@@ -188,6 +210,7 @@ extension DemoTheme {
     cardCornerRadius: 24,
     cardPadding: 0,
     cardShadow: nil,
+    cardStroke: nil,
     fieldFill: .white,
     fieldStroke: Stroke(color: Color(demoHex: 0x00DCE2), width: 2),
     fieldCornerRadius: 16,
@@ -199,6 +222,7 @@ extension DemoTheme {
     link: TextToken(fontName: "ChivoMono-Medium", size: 16, color: Color(demoHex: 0xFF52B3)),
     buttonFont: TextToken(fontName: "Rowdies-Bold", size: 20, color: Color(demoHex: 0x2C1067)),
     buttonCornerRadius: 24,
+    buttonHeight: 64,
     buttonStroke: Stroke(color: Color(demoHex: 0x00DCE2), width: 2),
     buttonShadow: Shadow(color: Color(demoHex: 0x00DCE2), x: 3, y: 6),
     primaryButton: ButtonColors(fill: Color(demoHex: 0xFF52B3), label: Color(demoHex: 0x2C1067)),
@@ -207,6 +231,9 @@ extension DemoTheme {
     otherLabel: TextToken(fontName: "ChivoMono-Medium", size: 16, color: Color(demoHex: 0x2C1067)),
     otherPadding: EdgeInsets(top: 16, leading: 40, bottom: 0, trailing: 40),
     googleLabel: TextToken(fontName: "Roboto-SemiBold", size: 14, color: .black),
+    pillFill: .white,
+    pillCornerRadius: 80,
+    pillStroke: .black,
     phoneProvider: Provider(
       fill: Color(demoHex: 0x00DCE2),
       label: TextToken(fontName: "ChivoMono-Medium", size: 14, color: Color(demoHex: 0x2C1067)),
@@ -235,6 +262,7 @@ extension DemoTheme {
     cardCornerRadius: 24,
     cardPadding: 0,
     cardShadow: nil,
+    cardStroke: nil,
     fieldFill: .white,
     fieldStroke: Stroke(color: .black, width: 2),
     fieldCornerRadius: 16,
@@ -246,6 +274,7 @@ extension DemoTheme {
     link: TextToken(fontName: "JetBrainsMono-Medium", size: 16, color: Color(demoHex: 0x34A853)),
     buttonFont: TextToken(fontName: "JetBrainsMono-Bold", size: 20, color: .black),
     buttonCornerRadius: 40,
+    buttonHeight: 64,
     buttonStroke: Stroke(color: .black, width: 2),
     buttonShadow: nil,
     primaryButton: ButtonColors(fill: Color(demoHex: 0xFDADEE), label: .black),
@@ -254,6 +283,9 @@ extension DemoTheme {
     otherLabel: TextToken(fontName: "JetBrainsMono-Medium", size: 16, color: .black),
     otherPadding: EdgeInsets(top: 24, leading: 54, bottom: 0, trailing: 54),
     googleLabel: TextToken(fontName: "Roboto-SemiBold", size: 14, color: .black),
+    pillFill: .white,
+    pillCornerRadius: 80,
+    pillStroke: .black,
     phoneProvider: Provider(
       fill: Color(demoHex: 0xC6FF00),
       label: TextToken(fontName: "ChivoMono-Medium", size: 14, color: Color(demoHex: 0x34A853)),
@@ -267,6 +299,64 @@ extension DemoTheme {
       underline: true
     )
   )
+}
+
+extension DemoTheme {
+  /// Not from Figma: a quiet, platform-native look written as a spec. The system font, neutral
+  /// greys with one blue accent, 10-point corners, hairline borders instead of offset shadows,
+  /// no background art, and light and dark variants.
+  static let professional: DemoTheme = {
+    let text = Color(demoLight: 0x111418, dark: 0xF2F4F7)
+    let muted = Color(demoLight: 0x5B6470, dark: 0x9AA3AE)
+    let accent = Color(demoLight: 0x1F5EFF, dark: 0x4C7DFF)
+    let hairline = Color(demoLight: 0xE3E6EA, dark: 0x2A2F36)
+    return DemoTheme(
+      id: .professional,
+      libraryFontFamily: nil,
+      pageBackground: Color(demoLight: 0xF5F6F8, dark: 0x0F1115),
+      title: TextToken(size: 28, weight: .semibold, color: text),
+      showsTitle: true,
+      titleSpacing: 16,
+      cardFill: Color(demoLight: 0xFFFFFF, dark: 0x181B20),
+      cardCornerRadius: 16,
+      cardPadding: 20,
+      cardShadow: nil,
+      cardStroke: Stroke(color: hairline, width: 1),
+      fieldFill: Color(demoLight: 0xFFFFFF, dark: 0x0F1115),
+      fieldStroke: Stroke(color: Color(demoLight: 0xC9CFD6, dark: 0x3A414A), width: 1),
+      fieldCornerRadius: 10,
+      fieldText: TextToken(size: 16, color: text),
+      fieldPlaceholder: Color(demoLight: 0x8A929C, dark: 0x6B7480),
+      fieldIcon: muted,
+      fieldIconWeight: .regular,
+      fieldTrailingIcon: muted,
+      link: TextToken(size: 15, weight: .medium, color: accent),
+      buttonFont: TextToken(size: 17, weight: .semibold, color: .white),
+      buttonCornerRadius: 10,
+      buttonHeight: 52,
+      buttonStroke: nil,
+      buttonShadow: nil,
+      primaryButton: ButtonColors(fill: accent, label: .white),
+      secondaryButton: ButtonColors(
+        fill: Color(demoLight: 0xEEF2FF, dark: 0x1C2540),
+        label: Color(demoLight: 0x1F5EFF, dark: 0x9DB5FF)
+      ),
+      dividerColor: hairline,
+      otherLabel: TextToken(size: 15, color: muted),
+      otherPadding: EdgeInsets(top: 20, leading: 24, bottom: 0, trailing: 24),
+      googleLabel: TextToken(size: 15, weight: .semibold, color: text),
+      pillFill: Color(demoLight: 0xFFFFFF, dark: 0x181B20),
+      pillCornerRadius: 10,
+      pillStroke: Color(demoLight: 0xC9CFD6, dark: 0x3A414A),
+      phoneProvider: Provider(
+        fill: accent,
+        label: TextToken(size: 15, weight: .semibold, color: .white),
+        cornerRadius: 10
+      ),
+      footerText: TextToken(size: 14, color: muted),
+      footerAccent: TextToken(size: 14, weight: .semibold, color: accent)
+    )
+  }()
 }
 
 // MARK: - Library theming
@@ -326,6 +416,8 @@ struct DemoThemeBackground: View {
         // The export includes the layer's texture and noise effects, so it is larger than the
         // 583x568 layer; it is centred on the layer's bounds.
         art("spark-blob", x: -295.8, y: -317.7, width: 751, height: 735.3)
+      case .professional:
+        EmptyView()
       }
     }
   }
@@ -370,6 +462,13 @@ private struct DoggoGradient: View {
 }
 
 extension Color {
+  /// A colour that follows the system's light or dark appearance.
+  init(demoLight light: UInt32, dark: UInt32) {
+    self.init(UIColor { traits in
+      UIColor(Color(demoHex: traits.userInterfaceStyle == .dark ? dark : light))
+    })
+  }
+
   init(demoHex hex: UInt32) {
     self.init(
       red: Double((hex >> 16) & 0xFF) / 255,

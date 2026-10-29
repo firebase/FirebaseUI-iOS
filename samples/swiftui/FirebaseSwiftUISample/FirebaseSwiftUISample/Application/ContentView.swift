@@ -154,7 +154,7 @@ struct ContentView: View {
               .fontWeight(.bold)
             Text("How to draw every auth screen yourself with AuthPickerView")
             Text(
-              "• Custom first screen, pushed screens and signed-in screen\n• Three switchable themes\n• Library still drives auth, MFA and navigation"
+              "• Custom first screen, pushed screens and signed-in screen\n• Four switchable themes\n• Library still drives auth, MFA and navigation"
             )
             .font(.caption)
             .foregroundColor(.secondary)
