@@ -17,24 +17,28 @@ import FirebaseAuthUIComponents
 import SwiftUI
 
 /// An ``AuthPickerView`` with custom sheet content, returned by
-/// `AuthPickerView`'s `pickerContent` and ``AuthPickerView/pickerDestination(_:)`` modifiers.
+/// `AuthPickerView`'s `pickerContent`, ``AuthPickerView/pickerDestination(_:)`` and
+/// ``AuthPickerView/signedInContent(_:)`` modifiers.
 ///
 /// It owns the authentication sheet, its `NavigationStack`, error alerts, and MFA and
-/// account-conflict handling; only the first screen and the pushed screens come from the slots.
-/// You don't create it directly.
+/// account-conflict handling; only the first screen, the signed-in screen and the pushed screens
+/// come from the slots. You don't create it directly.
 @MainActor
 public struct AuthPickerContent<
   Content: View,
   PickerContent: View,
-  DestinationContent: View
+  DestinationContent: View,
+  SignedInContent: View
 >: View {
   init(content: @escaping () -> Content,
        pickerContent: @escaping (AuthMethodPickerState) -> PickerContent,
        destination: @escaping (AuthView) -> DestinationContent,
+       signedInContent: @escaping (SignedInContentState) -> SignedInContent,
        showsPickerTitle: Bool = true) {
     self.content = content
     self.pickerContent = pickerContent
     self.destination = destination
+    self.signedInContent = signedInContent
     self.showsPickerTitle = showsPickerTitle
   }
 
@@ -42,6 +46,7 @@ public struct AuthPickerContent<
   private let content: () -> Content
   private let pickerContent: (AuthMethodPickerState) -> PickerContent
   private let destination: (AuthView) -> DestinationContent
+  private let signedInContent: (SignedInContentState) -> SignedInContent
   /// `false` when the whole first screen is custom, so the library's large title doesn't sit
   /// above the app's own heading. The close button stays so the sheet can still be dismissed.
   private let showsPickerTitle: Bool
@@ -97,13 +102,13 @@ public struct AuthPickerContent<
       }
   }
 
-  /// The sheet's first screen. The slot only replaces the signed-out screen, so signed-in users
-  /// always reach ``SignedInView`` and the progress overlay always shows while signing in.
+  /// The sheet's first screen: the signed-in slot for signed-in users, otherwise the picker slot.
+  /// The progress overlay always shows while signing in, whichever slot is on screen.
   @ViewBuilder
   private var root: some View {
     VStack {
       if authService.authenticationState == .authenticated {
-        SignedInView()
+        SignedInScreen(content: signedInContent)
       } else {
         AuthMethodPickerStateReader { state in
           pickerContent(state)
@@ -130,11 +135,12 @@ public struct AuthPickerContent<
   /// the no-argument `pickerContent` on ``AuthPickerView``.
   public func pickerContent<NewPickerContent: View>(
     @ViewBuilder _ pickerContent: @escaping () -> NewPickerContent
-  ) -> AuthPickerContent<Content, NewPickerContent, DestinationContent> {
-    AuthPickerContent<Content, NewPickerContent, DestinationContent>(
+  ) -> AuthPickerContent<Content, NewPickerContent, DestinationContent, SignedInContent> {
+    AuthPickerContent<Content, NewPickerContent, DestinationContent, SignedInContent>(
       content: content,
       pickerContent: { _ in pickerContent() },
       destination: destination,
+      signedInContent: signedInContent,
       showsPickerTitle: true
     )
   }
@@ -143,11 +149,12 @@ public struct AuthPickerContent<
   /// ``AuthMethodPickerState``. See the matching `pickerContent` on ``AuthPickerView``.
   public func pickerContent<NewPickerContent: View>(
     @ViewBuilder _ pickerContent: @escaping (AuthMethodPickerState) -> NewPickerContent
-  ) -> AuthPickerContent<Content, NewPickerContent, DestinationContent> {
-    AuthPickerContent<Content, NewPickerContent, DestinationContent>(
+  ) -> AuthPickerContent<Content, NewPickerContent, DestinationContent, SignedInContent> {
+    AuthPickerContent<Content, NewPickerContent, DestinationContent, SignedInContent>(
       content: content,
       pickerContent: pickerContent,
       destination: destination,
+      signedInContent: signedInContent,
       showsPickerTitle: false
     )
   }
@@ -156,11 +163,26 @@ public struct AuthPickerContent<
   /// ``AuthPickerView/pickerDestination(_:)``.
   public func pickerDestination<NewDestinationContent: View>(
     @ViewBuilder _ destination: @escaping (AuthView) -> NewDestinationContent
-  ) -> AuthPickerContent<Content, PickerContent, NewDestinationContent> {
-    AuthPickerContent<Content, PickerContent, NewDestinationContent>(
+  ) -> AuthPickerContent<Content, PickerContent, NewDestinationContent, SignedInContent> {
+    AuthPickerContent<Content, PickerContent, NewDestinationContent, SignedInContent>(
       content: content,
       pickerContent: pickerContent,
       destination: destination,
+      signedInContent: signedInContent,
+      showsPickerTitle: showsPickerTitle
+    )
+  }
+
+  /// Replaces the signed-in screen of the authentication sheet. See
+  /// ``AuthPickerView/signedInContent(_:)``.
+  public func signedInContent<NewSignedInContent: View>(
+    @ViewBuilder _ signedInContent: @escaping (SignedInContentState) -> NewSignedInContent
+  ) -> AuthPickerContent<Content, PickerContent, DestinationContent, NewSignedInContent> {
+    AuthPickerContent<Content, PickerContent, DestinationContent, NewSignedInContent>(
+      content: content,
+      pickerContent: pickerContent,
+      destination: destination,
+      signedInContent: signedInContent,
       showsPickerTitle: showsPickerTitle
     )
   }
