@@ -124,6 +124,11 @@ private struct DemoCard<Content: View>: View {
           shape.fill(fill)
         }
       }
+      .overlay {
+        if let stroke = theme.cardStroke {
+          shape.strokeBorder(stroke.color, lineWidth: stroke.width)
+        }
+      }
       .hardShadow(theme.cardShadow, shape: shape)
       .accessibilityElement(children: .contain)
       .accessibilityIdentifier("inputs")
@@ -256,7 +261,7 @@ struct DemoButton: View {
       }
       .foregroundStyle(colors.label)
       .padding(.horizontal, 24)
-      .frame(maxWidth: .infinity, minHeight: 64)
+      .frame(maxWidth: .infinity, minHeight: theme.buttonHeight)
       .background(colors.fill, in: shape)
       .overlay {
         if let stroke = theme.buttonStroke {

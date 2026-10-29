@@ -144,10 +144,10 @@ private struct DemoOtherSignInMethods: View {
         if let google {
           DemoProviderButton(
             title: "Continue with Google",
-            fill: .white,
+            fill: theme.pillFill,
             label: theme.googleLabel,
-            stroke: .black,
-            cornerRadius: 80,
+            stroke: theme.pillStroke,
+            cornerRadius: theme.pillCornerRadius,
             identifier: "google-button"
           ) {
             Image("FullCustomization/google-g")
@@ -174,10 +174,10 @@ private struct DemoOtherSignInMethods: View {
           // Not in Figma: the remaining providers, behind a pill styled like Google's.
           DemoProviderButton(
             title: "More sign-in options",
-            fill: .white,
+            fill: theme.pillFill,
             label: theme.googleLabel,
-            stroke: .black,
-            cornerRadius: 80,
+            stroke: theme.pillStroke,
+            cornerRadius: theme.pillCornerRadius,
             identifier: "other-providers-button"
           ) {
             Image(systemName: "ellipsis.circle")
