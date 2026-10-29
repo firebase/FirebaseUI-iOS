@@ -47,9 +47,11 @@ private class TestProviderUI: AuthProviderUI {
 
 private class TestActionProviderUI: TestProviderUI, AuthProviderAction {
   var actionCount = 0
+  var outcome: SignInOutcome?
 
-  @MainActor func triggerAction() async throws {
+  @MainActor func triggerAction() async throws -> SignInOutcome? {
     actionCount += 1
+    return outcome
   }
 }
 
@@ -98,6 +100,21 @@ struct TriggerSignInTests {
     let outcome = try await service.triggerSignIn(for: provider)
 
     #expect(outcome == nil)
+    #expect(provider.actionCount == 1)
+  }
+
+  @Test
+  func actionProviderReturnsItsOutcome() async throws {
+    let service = makeService()
+    let provider = TestActionProviderUI(id: "action", provider: PlainProvider())
+    provider.outcome = .mfaRequired(MFARequired(hints: []))
+
+    let outcome = try await service.triggerSignIn(for: provider)
+
+    guard case .mfaRequired = outcome else {
+      Issue.record("Expected .mfaRequired, got \(String(describing: outcome))")
+      return
+    }
     #expect(provider.actionCount == 1)
   }
 

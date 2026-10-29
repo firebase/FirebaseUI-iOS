@@ -43,7 +43,8 @@ public class PhoneAuthProviderAuthUI: AuthProviderUI {
 }
 
 extension PhoneAuthProviderAuthUI: AuthProviderAction {
-  @MainActor public func triggerAction() async throws {
+  @MainActor public func triggerAction() async throws -> SignInOutcome? {
     onTap()
+    return nil
   }
 }

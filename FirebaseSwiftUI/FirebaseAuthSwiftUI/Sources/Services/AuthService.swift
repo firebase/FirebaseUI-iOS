@@ -36,19 +36,23 @@ public protocol AuthProviderUI {
 /// Lets ``AuthService/triggerSignIn(for:)`` start sign-in for a provider whose flow doesn't
 /// produce a credential, such as phone or a custom flow that presents its own screens.
 ///
+/// Return the ``SignInOutcome`` when the action signs in directly, so `.mfaRequired` reaches the
+/// standard MFA handler. Return `nil` when the action only starts a flow, such as pushing a
+/// screen.
+///
 /// Adopt it on a custom provider so a custom method picker layout can start its sign-in through
 /// ``AuthMethodPickerState/select``. Otherwise, start sign-in from the provider's own button.
 ///
 /// Example:
 /// ```swift
 /// extension MyProviderAuthUI: AuthProviderAction {
-///   func triggerAction() async throws {
-///     try await startMySignInFlow()
+///   func triggerAction() async throws -> SignInOutcome? {
+///     try await authService.signIn(credentials: myFlowCredential())
 ///   }
 /// }
 /// ```
 public protocol AuthProviderAction: AuthProviderUI {
-  @MainActor func triggerAction() async throws
+  @MainActor func triggerAction() async throws -> SignInOutcome?
 }
 
 public enum AuthenticationState {
@@ -210,13 +214,12 @@ public final class AuthService {
 
   /// Starts sign-in with `provider` without rendering its button.
   ///
-  /// ``AuthProviderAction`` providers run ``AuthProviderAction/triggerAction()``, in which case
-  /// this returns `nil`. Other credential-based providers sign in through ``signIn(_:)``.
+  /// ``AuthProviderAction`` providers run ``AuthProviderAction/triggerAction()`` and this
+  /// returns its outcome. Other credential-based providers sign in through ``signIn(_:)``.
   /// Any other provider throws ``AuthServiceError/providerAuthenticationFailed(_:)``.
   public func triggerSignIn(for provider: AuthProviderUI) async throws -> SignInOutcome? {
     if let actionProvider = provider as? AuthProviderAction {
-      try await actionProvider.triggerAction()
-      return nil
+      return try await actionProvider.triggerAction()
     }
     if let credentialProvider = provider.provider as? CredentialAuthProviderSwift {
       return try await signIn(credentialProvider)
