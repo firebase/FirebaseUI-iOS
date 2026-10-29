@@ -36,12 +36,19 @@ public struct DefaultAuthPickerDestination: View {
     self.screen = screen
   }
 
+  @Environment(AuthService.self) private var authService
   private let screen: AuthView
 
   public var body: some View {
     switch screen {
     case AuthView.passwordRecovery:
       PasswordRecoveryView()
+    case AuthView.signUp:
+      ScrollView {
+        EmailAuthScreen(flow: .signUp) { DefaultEmailAuthContent(state: $0) }
+      }
+      .safeAreaPadding()
+      .navigationTitle(authService.string.signUpWithEmailButtonLabel)
     case AuthView.emailLink:
       EmailLinkView()
     case AuthView.updatePassword:
