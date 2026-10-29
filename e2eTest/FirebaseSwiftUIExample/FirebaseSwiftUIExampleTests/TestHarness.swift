@@ -207,9 +207,9 @@ private func postToAuthEmulator(_ path: String,
 }
 
 @MainActor
-private func fetchLatestSMSCode(for phoneNumber: String,
-                                projectID: String = "flutterfire-e2e-tests",
-                                emulatorHost: String = "127.0.0.1:9099") async throws -> String {
+func fetchLatestSMSCode(for phoneNumber: String,
+                        projectID: String = "flutterfire-e2e-tests",
+                        emulatorHost: String = "127.0.0.1:9099") async throws -> String {
   let url =
     URL(string: "http://\(emulatorHost)/emulator/v1/projects/\(projectID)/verificationCodes")!
   let (data, response) = try await URLSession.shared.data(from: url)
@@ -222,8 +222,13 @@ private func fetchLatestSMSCode(for phoneNumber: String,
   }
   let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
   let codes = json?["verificationCodes"] as? [[String: Any]] ?? []
-  guard let code = codes.last(where: { $0["phoneNumber"] as? String == phoneNumber })?["code"]
-    as? String else {
+  // Codes sent for MFA resolution carry a masked number, e.g. "+*******4567"
+  let matches: ([String: Any]) -> Bool = { entry in
+    guard let number = entry["phoneNumber"] as? String else { return false }
+    return number == phoneNumber
+      || (number.contains("*") && number.suffix(4) == phoneNumber.suffix(4))
+  }
+  guard let code = codes.last(where: matches)?["code"] as? String else {
     throw NSError(
       domain: "EmulatorError",
       code: 21,
