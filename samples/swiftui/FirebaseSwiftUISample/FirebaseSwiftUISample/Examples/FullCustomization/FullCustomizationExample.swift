@@ -29,6 +29,10 @@ import SwiftUI
 /// - `.signedInContent` replaces the signed-in screen.
 /// - The theming modifiers restyle the stock screens left in the flow (update password,
 ///   reauthentication, delete confirmation) and the library components the demo reuses.
+///
+/// The Figma themes share one layout and differ only in ``DemoTheme`` values. Professional also
+/// brings its own layout, the `Pro…` screens, through the same slots, and pushes a separate
+/// sign-up screen on the `.signUp` route.
 struct FullCustomizationExample: View {
   /// Its own service, so it can turn on email-link sign-in (drawn in the Figma frames) without
   /// changing the other examples.
@@ -77,30 +81,13 @@ private struct FullCustomizationFlow: View {
       home
     }
     .pickerContent { state in
-      DemoLanding(pickerState: state)
+      ThemedLanding(pickerState: state)
     }
     .pickerDestination { screen in
-      switch screen {
-      case .passwordRecovery:
-        DemoPasswordRecovery()
-      case .emailLink:
-        DemoEmailLink()
-      case .enterPhoneNumber:
-        DemoEnterPhoneNumber()
-      case let .enterVerificationCode(verificationID, fullPhoneNumber):
-        DemoEnterVerificationCode(verificationID: verificationID, fullPhoneNumber: fullPhoneNumber)
-      case .mfaEnrollment:
-        DemoMFAEnrolment()
-      case .mfaManagement:
-        DemoMFAManagement()
-      case let .mfaResolution(mfaRequired):
-        DemoMFAResolution(mfaRequired: mfaRequired)
-      default:
-        DefaultAuthPickerDestination(screen: screen)
-      }
+      ThemedDestination(screen: screen)
     }
     .signedInContent { state in
-      DemoSignedIn(state: state)
+      ThemedSignedIn(state: state)
     }
     .authTypography(theme.typography)
     .authTextFieldStyle(theme.textFieldStyle)
@@ -135,5 +122,99 @@ private struct FullCustomizationFlow: View {
     .padding(24)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background { DemoThemeBackground(theme: themeID.theme) }
+  }
+}
+
+/// The first screen for the selected theme.
+private struct ThemedLanding: View {
+  let pickerState: AuthMethodPickerState
+
+  @AppStorage(DemoThemeID.storageKey) private var themeID: DemoThemeID = .doggo
+
+  var body: some View {
+    if themeID == .professional {
+      ProLanding(pickerState: pickerState)
+    } else {
+      DemoLanding(pickerState: pickerState)
+    }
+  }
+}
+
+/// The pushed screens for the selected theme. Update password has no content slot, so it stays
+/// stock in every theme.
+private struct ThemedDestination: View {
+  let screen: AuthView
+
+  @AppStorage(DemoThemeID.storageKey) private var themeID: DemoThemeID = .doggo
+
+  var body: some View {
+    if themeID == .professional {
+      professional
+    } else {
+      figma
+    }
+  }
+
+  @ViewBuilder
+  private var professional: some View {
+    switch screen {
+    case .signUp:
+      ProSignUp()
+    case .passwordRecovery:
+      ProPasswordRecovery()
+    case .emailLink:
+      ProEmailLink()
+    case .enterPhoneNumber:
+      ProEnterPhoneNumber()
+    case let .enterVerificationCode(verificationID, fullPhoneNumber):
+      ProEnterVerificationCode(verificationID: verificationID, fullPhoneNumber: fullPhoneNumber)
+    case .mfaEnrollment:
+      ProMFAEnrolment()
+    case .mfaManagement:
+      ProMFAManagement()
+    case let .mfaResolution(mfaRequired):
+      ProMFAResolution(mfaRequired: mfaRequired)
+    default:
+      DefaultAuthPickerDestination(screen: screen)
+    }
+  }
+
+  /// The Figma themes switch sign-in and sign-up in place on the first screen, so they never
+  /// push `.signUp`.
+  @ViewBuilder
+  private var figma: some View {
+    switch screen {
+    case .passwordRecovery:
+      DemoPasswordRecovery()
+    case .emailLink:
+      DemoEmailLink()
+    case .enterPhoneNumber:
+      DemoEnterPhoneNumber()
+    case let .enterVerificationCode(verificationID, fullPhoneNumber):
+      DemoEnterVerificationCode(verificationID: verificationID, fullPhoneNumber: fullPhoneNumber)
+    case .mfaEnrollment:
+      DemoMFAEnrolment()
+    case .mfaManagement:
+      DemoMFAManagement()
+    case let .mfaResolution(mfaRequired):
+      DemoMFAResolution(mfaRequired: mfaRequired)
+    default:
+      DefaultAuthPickerDestination(screen: screen)
+    }
+  }
+}
+
+/// The signed-in screen for the selected theme.
+private struct ThemedSignedIn: View {
+  let state: SignedInContentState
+
+  @AppStorage(DemoThemeID.storageKey) private var themeID: DemoThemeID = .doggo
+
+  var body: some View {
+    if themeID == .professional {
+      ProAccount(state: state)
+    } else {
+      DemoSignedIn(state: state)
+    }
   }
 }

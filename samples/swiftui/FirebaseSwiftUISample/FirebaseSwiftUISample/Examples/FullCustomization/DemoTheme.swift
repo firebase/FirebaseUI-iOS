@@ -309,6 +309,8 @@ extension DemoTheme {
     let text = Color(demoLight: 0x111418, dark: 0xF2F4F7)
     let muted = Color(demoLight: 0x5B6470, dark: 0x9AA3AE)
     let accent = Color(demoLight: 0x1F5EFF, dark: 0x4C7DFF)
+    // Darker than `accent` in dark mode so white labels on it keep 4.5:1 contrast.
+    let accentFill = Color(demoLight: 0x1F5EFF, dark: 0x2F62F0)
     let hairline = Color(demoLight: 0xE3E6EA, dark: 0x2A2F36)
     return DemoTheme(
       id: .professional,
@@ -326,7 +328,7 @@ extension DemoTheme {
       fieldStroke: Stroke(color: Color(demoLight: 0xC9CFD6, dark: 0x3A414A), width: 1),
       fieldCornerRadius: 10,
       fieldText: TextToken(size: 16, color: text),
-      fieldPlaceholder: Color(demoLight: 0x8A929C, dark: 0x6B7480),
+      fieldPlaceholder: Color(demoLight: 0x6B7480, dark: 0x7D8693),
       fieldIcon: muted,
       fieldIconWeight: .regular,
       fieldTrailingIcon: muted,
@@ -336,7 +338,7 @@ extension DemoTheme {
       buttonHeight: 52,
       buttonStroke: nil,
       buttonShadow: nil,
-      primaryButton: ButtonColors(fill: accent, label: .white),
+      primaryButton: ButtonColors(fill: accentFill, label: .white),
       secondaryButton: ButtonColors(
         fill: Color(demoLight: 0xEEF2FF, dark: 0x1C2540),
         label: Color(demoLight: 0x1F5EFF, dark: 0x9DB5FF)
@@ -349,7 +351,7 @@ extension DemoTheme {
       pillCornerRadius: 10,
       pillStroke: Color(demoLight: 0xC9CFD6, dark: 0x3A414A),
       phoneProvider: Provider(
-        fill: accent,
+        fill: accentFill,
         label: TextToken(size: 15, weight: .semibold, color: .white),
         cornerRadius: 10
       ),
