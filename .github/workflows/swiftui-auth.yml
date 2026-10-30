@@ -89,14 +89,14 @@ jobs:
             
       - name: Upload test logs
         if: failure()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: unit-tests-logs
           path: FirebaseSwiftUIPackageTests.log
           
       - name: Upload test results
         if: failure()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: unit-tests-results
           path: FirebaseSwiftUIPackageTests.xcresult
@@ -164,14 +164,14 @@ jobs:
             
       - name: Upload test logs
         if: failure()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: integration-tests-logs
           path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.log
           
       - name: Upload test results
         if: failure()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: integration-tests-results
           path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleTests.xcresult
@@ -250,14 +250,14 @@ jobs:
             
       - name: Upload Firebase Emulator logs
         if: failure()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: firebase-emulator-logs
           path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExample/firebase-debug.log
           
       - name: Upload test results
         if: failure()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: FirebaseSwiftUIExampleUITests.xcresult
           path: e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExampleUITests.xcresult
