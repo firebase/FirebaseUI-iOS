@@ -42,6 +42,10 @@ public struct DefaultAuthPickerDestination: View {
     switch screen {
     case AuthView.passwordRecovery:
       PasswordRecoveryView()
+    case AuthView.signIn:
+      SignInView()
+    case AuthView.signUp:
+      SignUpView()
     case AuthView.emailLink:
       EmailLinkView()
     case AuthView.updatePassword:
