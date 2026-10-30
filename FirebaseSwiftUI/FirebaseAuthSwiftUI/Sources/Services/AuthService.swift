@@ -73,6 +73,12 @@ public enum AuthenticationFlow {
 
 public enum AuthView: Hashable {
   case passwordRecovery
+  /// A pushed email and password sign-in screen, ``SignInView`` by default. Reached with
+  /// ``AuthMethodPickerState/goToEmailSignIn``.
+  case signIn
+  /// A pushed email and password sign-up screen, ``SignUpView`` by default. Reached with
+  /// ``EmailAuthContentState/goToSignUp``.
+  case signUp
   case emailLink
   case updatePassword
   case mfaEnrollment
@@ -158,6 +164,12 @@ public class Navigator {
 
   public func clear() {
     routes.removeAll()
+  }
+
+  /// Removes pushed ``AuthView/signIn`` and ``AuthView/signUp`` screens, which have nothing left
+  /// to do once the user is signed in.
+  func removeEmailRoutes() {
+    routes.removeAll { $0 == .signIn || $0 == .signUp }
   }
 }
 
@@ -292,6 +304,7 @@ public final class AuthService {
     isReauthenticating = false
     legacySignInRecovery = nil
     suggestedEmailAddress = nil
+    navigator.clear()
     updateAuthenticationState()
   }
 
@@ -1243,7 +1256,13 @@ extension AuthService {
 
     switch option.id {
     case EmailAuthProviderID:
+      // An app whose first screen has no email form reached email sign-in through a pushed
+      // route, so return to that screen for the suggested address.
+      let usedEmailRoute = navigator.routes.contains { $0 == .signIn || $0 == .signUp }
       navigator.clear()
+      if usedEmailRoute {
+        navigator.push(.signIn)
+      }
     case emailLinkSignInMethod:
       navigator.clear()
       navigator.push(.emailLink)
