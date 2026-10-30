@@ -33,6 +33,33 @@ public protocol AuthProviderUI {
   var provider: AuthProviderSwift { get }
 }
 
+/// Lets ``AuthService/triggerSignIn(for:)`` start sign-in for a provider that isn't a plain
+/// credential provider, such as phone or a custom flow that presents its own screens first.
+///
+/// When the action signs in through ``AuthService/signIn(credentials:)``, return its outcome so
+/// `.mfaRequired` reaches the standard MFA handler. MFA can only be resolved for an outcome from
+/// that call, so return `nil` or `.signedIn` for any other sign-in, and `nil` when the action
+/// only starts a flow, such as pushing a screen.
+///
+/// Adopt it on a custom provider so a custom method picker layout can start its sign-in through
+/// ``AuthMethodPickerState/select``. Otherwise, start sign-in from the provider's own button.
+///
+/// Example:
+/// ```swift
+/// final class MyProviderAuthUI: AuthProviderAction {
+///   let authService: AuthService
+///   // id, displayName, provider and authButton() as for any AuthProviderUI
+///
+///   @MainActor func triggerAction() async throws -> SignInOutcome? {
+///     let credential = try await presentMySignInScreen()
+///     return try await authService.signIn(credentials: credential)
+///   }
+/// }
+/// ```
+public protocol AuthProviderAction: AuthProviderUI {
+  @MainActor func triggerAction() async throws -> SignInOutcome?
+}
+
 public enum AuthenticationState {
   case unauthenticated
   case authenticating
@@ -184,6 +211,39 @@ public final class AuthService {
     providers.append(providerWithButton)
   }
 
+  /// The providers registered with ``registerProvider(providerWithButton:)``, in registration
+  /// order. Email and email-link sign-in aren't included.
+  public var registeredProviders: [AuthProviderUI] {
+    providers
+  }
+
+  /// Starts sign-in with `provider` without rendering its button.
+  ///
+  /// ``AuthProviderAction`` providers run ``AuthProviderAction/triggerAction()`` and this
+  /// returns its outcome. Other credential-based providers sign in through ``signIn(_:)``.
+  /// Any other provider throws ``AuthServiceError/providerAuthenticationFailed(_:)``.
+  public func triggerSignIn(for provider: AuthProviderUI) async throws -> SignInOutcome? {
+    if let actionProvider = provider as? AuthProviderAction {
+      return try await actionProvider.triggerAction()
+    }
+    if let credentialProvider = provider.provider as? CredentialAuthProviderSwift {
+      return try await signIn(credentialProvider)
+    }
+    throw AuthServiceError.providerAuthenticationFailed(
+      "\(provider.displayName) doesn't support starting sign-in programmatically. " +
+        "Adopt AuthProviderAction on the provider, or start sign-in from its own button."
+    )
+  }
+
+  /// Runs the email-link sign-in action, the same as the stock email-link button.
+  func selectEmailLink() {
+    if let callback = emailLinkSignInCallback {
+      callback()
+    } else {
+      navigator.push(.emailLink)
+    }
+  }
+
   public func renderButtons(spacing: CGFloat = 16) -> AnyView {
     AnyView(
       VStack(spacing: spacing) {
@@ -193,11 +253,7 @@ public final class AuthService {
             style: .email,
             accessibilityId: "sign-in-with-email-link-button"
           ) {
-            if let callback = self.emailLinkSignInCallback {
-              callback()
-            } else {
-              self.navigator.push(.emailLink)
-            }
+            self.selectEmailLink()
           }
         }
         ForEach(providers, id: \.id) { provider in

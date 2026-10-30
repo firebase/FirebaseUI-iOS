@@ -41,3 +41,10 @@ public class PhoneAuthProviderAuthUI: AuthProviderUI {
     return AnyView(PhoneAuthButtonView(onTap: mainActorClosure))
   }
 }
+
+extension PhoneAuthProviderAuthUI: AuthProviderAction {
+  @MainActor public func triggerAction() async throws -> SignInOutcome? {
+    onTap()
+    return nil
+  }
+}
