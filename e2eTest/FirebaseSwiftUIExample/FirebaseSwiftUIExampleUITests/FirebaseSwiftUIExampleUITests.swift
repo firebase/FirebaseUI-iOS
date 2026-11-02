@@ -178,6 +178,11 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
     let passwordRecoveryButton = app.buttons["password-recovery-button"]
     XCTAssertTrue(passwordRecoveryButton.exists, "Password recovery button should exist")
+    // The sign-out transition can still cover the button right after the sign-in form appears.
+    XCTAssertTrue(
+      waitForElementToBecomeHittable(passwordRecoveryButton, timeout: 10),
+      "Password recovery button should be hittable"
+    )
     passwordRecoveryButton.tap()
     let passwordRecoveryText = app.staticTexts["Send a password recovery link to your email"]
       .firstMatch
