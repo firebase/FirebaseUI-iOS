@@ -18,8 +18,16 @@ Local mirror: [`./swiftui-tests.sh`](../../swiftui-tests.sh) — [running tests]
 |-----|------|-------|
 | `format-check` | `brew install swiftformat` + `./lint-swift.sh` | Paths in `lint-swift.sh` |
 | `unit-tests` | `xcodebuild test -scheme FirebaseUI-Package` on prepared simulator | Coverage on; uploads log/xcresult on failure |
-| `integration-tests` | Auth emulator + `FirebaseSwiftUIExampleTests` | Node 20, Java 17, `firebase-tools`; `parallel-testing-enabled NO` |
-| `ui-tests` | Auth emulator + `build-for-testing` / `test-without-building` for `FirebaseSwiftUIExampleUITests` | Same emulator setup; uploads emulator debug log on failure |
+| `integration-tests` | Auth emulator + `FirebaseSwiftUIExampleTests` | Node 20, Java 17, `firebase-tools`; `parallel-testing-enabled NO`; shares the Swift package cache |
+| `ui-tests` | Auth emulator + `build-for-testing` / `test-without-building` for `FirebaseSwiftUIExampleUITests` | Same emulator setup; simulator boots during the build; uploads emulator debug log on failure |
+
+## Setup time
+
+The runner image already ships iOS simulator runtimes, so each job runs `xcodebuild -downloadPlatform iOS` only when no installed runtime has `IOS_SIMULATOR_DEVICE`; the download is several GB.
+
+A fresh simulator spends minutes on first-boot data migration. `ui-tests` runs `prepare-ios-simulator.sh` with `PREPARE_SIMULATOR_NO_WAIT=1`, which starts the boot in the background, builds meanwhile, and waits with `xcrun simctl bootstatus -b` before `test-without-building`. Without the variable the script boots and waits, as the other jobs and `./swiftui-tests.sh` use it.
+
+`ui-tests` and `integration-tests` clone Swift packages into `$RUNNER_TEMP/SourcePackages` (`-clonedSourcePackagesDirPath`), cached with `actions/cache` under a key on `Package.resolved` and the e2e project file.
 
 ## Environment
 
@@ -40,4 +48,4 @@ PRs/pushes run when `FirebaseSwiftUI/**`, `samples/swiftui/**`, `e2eTest/**`, `P
 1. Prefer downloading failure artifacts (logs / `.xcresult` / `firebase-debug.log`) over re-running blind.
 2. Format failures → `./format-swift.sh` then `./lint-swift.sh`.
 3. Emulator failures → confirm Firebase CLI, port `9099`, and project id; locally use `./swiftui-tests.sh --integration`.
-4. Simulator resolution failures → inspect `prepare-ios-simulator.sh` output and `xcrun simctl list devices available`.
+4. Simulator resolution failures → inspect `prepare-ios-simulator.sh` output and `xcrun simctl list devices available`. In `ui-tests` a boot failure surfaces in the "Wait for iOS Simulator" step, not in "Prepare iOS Simulator".

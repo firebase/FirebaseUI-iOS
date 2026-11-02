@@ -71,7 +71,7 @@ jobs:
           max_attempts: 5
           retry_wait_seconds: 120
           continue_on_error: true
-          command: xcodebuild -downloadPlatform iOS
+          command: xcrun simctl list devices available | grep -qF "$IOS_SIMULATOR_DEVICE (" || xcodebuild -downloadPlatform iOS
       - name: Prepare iOS Simulator
         id: prepare-simulator
         run: ./.github/workflows/scripts/prepare-ios-simulator.sh
@@ -144,10 +144,17 @@ jobs:
           max_attempts: 5
           retry_wait_seconds: 120
           continue_on_error: true
-          command: xcodebuild -downloadPlatform iOS
+          command: xcrun simctl list devices available | grep -qF "$IOS_SIMULATOR_DEVICE (" || xcodebuild -downloadPlatform iOS
       - name: Prepare iOS Simulator
         id: prepare-simulator
         run: ./.github/workflows/scripts/prepare-ios-simulator.sh
+
+      - name: Cache Swift packages
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ runner.temp }}/SourcePackages
+          key: spm-e2e-${{ hashFiles('Package.resolved', 'e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExample.xcodeproj/project.pbxproj') }}
+          restore-keys: spm-e2e-
 
       - name: Run Integration Tests
         env:
@@ -158,6 +165,7 @@ jobs:
           xcodebuild test \
             -scheme FirebaseSwiftUIExampleTests \
             -destination "id=$SIMULATOR_UDID" \
+            -clonedSourcePackagesDirPath "$RUNNER_TEMP/SourcePackages" \
             -parallel-testing-enabled NO \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleTests.xcresult | tee FirebaseSwiftUIExampleTests.log | xcpretty --test --color --simple
@@ -219,11 +227,21 @@ jobs:
           max_attempts: 5
           retry_wait_seconds: 120
           continue_on_error: true
-          command: xcodebuild -downloadPlatform iOS
+          command: xcrun simctl list devices available | grep -qF "$IOS_SIMULATOR_DEVICE (" || xcodebuild -downloadPlatform iOS
+      # Boots in the background so the first-boot data migration overlaps the build.
       - name: Prepare iOS Simulator
         id: prepare-simulator
+        env:
+          PREPARE_SIMULATOR_NO_WAIT: "1"
         run: ./.github/workflows/scripts/prepare-ios-simulator.sh
-          
+
+      - name: Cache Swift packages
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ runner.temp }}/SourcePackages
+          key: spm-e2e-${{ hashFiles('Package.resolved', 'e2eTest/FirebaseSwiftUIExample/FirebaseSwiftUIExample.xcodeproj/project.pbxproj') }}
+          restore-keys: spm-e2e-
+
       - name: Build for UI Tests
         env:
           SIMULATOR_UDID: ${{ steps.prepare-simulator.outputs.udid }}
@@ -233,8 +251,14 @@ jobs:
           xcodebuild build-for-testing \
             -scheme FirebaseSwiftUIExampleUITests \
             -destination "id=$SIMULATOR_UDID" \
+            -clonedSourcePackagesDirPath "$RUNNER_TEMP/SourcePackages" \
             -enableCodeCoverage YES | xcpretty --color --simple
-            
+
+      - name: Wait for iOS Simulator
+        env:
+          SIMULATOR_UDID: ${{ steps.prepare-simulator.outputs.udid }}
+        run: xcrun simctl bootstatus "$SIMULATOR_UDID" -b
+
       - name: Run UI Tests
         env:
           SIMULATOR_UDID: ${{ steps.prepare-simulator.outputs.udid }}
@@ -244,6 +268,7 @@ jobs:
           xcodebuild test-without-building \
             -scheme FirebaseSwiftUIExampleUITests \
             -destination "id=$SIMULATOR_UDID" \
+            -clonedSourcePackagesDirPath "$RUNNER_TEMP/SourcePackages" \
             -parallel-testing-enabled NO \
             -enableCodeCoverage YES \
             -resultBundlePath FirebaseSwiftUIExampleUITests.xcresult | tee FirebaseSwiftUIExampleUITests.log | xcpretty --test --color --simple

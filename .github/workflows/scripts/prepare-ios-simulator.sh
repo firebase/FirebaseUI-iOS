@@ -50,6 +50,14 @@ else
   echo "Resolved simulator UDID: $SIMULATOR_UDID"
 fi
 
+# A fresh runner spends several minutes migrating data on first boot. With
+# PREPARE_SIMULATOR_NO_WAIT=1 the boot runs in the background so the caller can
+# build meanwhile, then wait with `xcrun simctl bootstatus "$SIMULATOR_UDID" -b`.
+if [[ "${PREPARE_SIMULATOR_NO_WAIT:-}" == "1" ]]; then
+  nohup xcrun simctl boot "$SIMULATOR_UDID" > /dev/null 2>&1 &
+  exit 0
+fi
+
 if ! boot_output="$(xcrun simctl boot "$SIMULATOR_UDID" 2>&1)"; then
   if [[ "$boot_output" != *"Unable to boot device in current state: Booted"* ]]; then
     echo "$boot_output"
