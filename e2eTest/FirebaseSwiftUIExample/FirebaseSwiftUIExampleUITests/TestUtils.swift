@@ -165,6 +165,20 @@ func createEmail() -> String {
   return element.isEnabled
 }
 
+@MainActor func waitForElementToBecomeHittable(_ element: XCUIElement,
+                                               timeout: TimeInterval = 5) -> Bool {
+  let deadline = Date().addingTimeInterval(timeout)
+
+  while Date() < deadline {
+    if element.isHittable {
+      return true
+    }
+    RunLoop.current.run(until: Date().addingTimeInterval(0.1))
+  }
+
+  return element.isHittable
+}
+
 // MARK: - User Creation
 
 /// Helper to create a test user in the emulator via REST API (avoids keychain issues)
