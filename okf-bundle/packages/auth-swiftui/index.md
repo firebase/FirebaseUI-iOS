@@ -61,7 +61,7 @@ Consumers reach a per-screen slot through `.pickerDestination`, matching the `Au
 * **`XContentState`** exposes `Binding`s for input, `@MainActor` closures for actions, and `let`s for display, plus `isValid`, `isLoading` and `errorMessage: String?`. `errorMessage` is the localized message from `authService.string.localizedErrorMessage(for:)`; `reportError` still fires, so the sheet's error alert shows too. No typed error.
 * **Guards live in the screen**, not the content: every action closure checks `isValid` / `isLoading` / step itself, so custom content cannot trigger it in the wrong state. Keep guard and step rules in pure internal helpers so `./swiftui-tests.sh --unit` covers them.
 * **Navigation titles live in the default content**, so custom content sets its own.
-* **The state's public memberwise initializer is for previews.** Adding a field changes it, so its doc comment says so.
+* **Every parameter of the state's public initializer has a default**, so consumer previews pass only what they need. New fields always get a default, so adding one never breaks a caller; `ContentStateDefaultsTests` builds each state with no arguments to enforce this.
 * **Public step enums** (`MFAEnrolmentContentState.Step`) document that cases may be added, so consumers keep a `default` case.
 * **Spelling:** view-layer types use "Enrolment" (`MFAEnrolmentView`, `MFAEnrolmentScreen`, `MFAEnrolmentContentState`); service-layer API keeps "Enrollment" (`EnrollmentSession`, `startMfaEnrollment`, `AuthView.mfaEnrollment`).
 

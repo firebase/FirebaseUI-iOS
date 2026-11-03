@@ -110,28 +110,29 @@ public struct MFAEnrolmentContentState {
   /// shows for the same failure.
   public let errorMessage: String?
 
-  /// Creates a state for previews, for example to preview custom content with stub actions. Later
-  /// releases may add parameters, so don't build states outside previews.
-  public init(step: Step,
-              selectedFactorType: Binding<SecondFactorType>,
-              phoneNumber: Binding<String>,
-              selectedCountry: Binding<CountryData>,
-              verificationCode: Binding<String>,
-              totpCode: Binding<String>,
-              displayName: Binding<String>,
-              startEnrollment: @escaping @MainActor () -> Void,
-              sendCode: @escaping @MainActor () -> Void,
-              enroll: @escaping @MainActor () -> Void,
-              copySecret: @escaping @MainActor () -> Void,
-              isMFAEnabled: Bool,
-              allowedFactors: [SecondFactorType],
-              sentPhoneNumber: String?,
-              totpSecret: String?,
-              totpQRCodeURL: URL?,
-              didCopySecret: Bool,
-              isValid: Bool,
-              isLoading: Bool,
-              errorMessage: String?) {
+  /// Creates a state, for example to preview custom content with stub actions. Every parameter
+  /// has a default, so pass only what the preview needs; later releases add new parameters
+  /// with defaults too.
+  public init(step: Step = .selectFactor,
+              selectedFactorType: Binding<SecondFactorType> = .constant(.sms),
+              phoneNumber: Binding<String> = .constant(""),
+              selectedCountry: Binding<CountryData> = .constant(.default),
+              verificationCode: Binding<String> = .constant(""),
+              totpCode: Binding<String> = .constant(""),
+              displayName: Binding<String> = .constant(""),
+              startEnrollment: @escaping @MainActor () -> Void = {},
+              sendCode: @escaping @MainActor () -> Void = {},
+              enroll: @escaping @MainActor () -> Void = {},
+              copySecret: @escaping @MainActor () -> Void = {},
+              isMFAEnabled: Bool = true,
+              allowedFactors: [SecondFactorType] = [.sms, .totp],
+              sentPhoneNumber: String? = nil,
+              totpSecret: String? = nil,
+              totpQRCodeURL: URL? = nil,
+              didCopySecret: Bool = false,
+              isValid: Bool = false,
+              isLoading: Bool = false,
+              errorMessage: String? = nil) {
     self.step = step
     self.selectedFactorType = selectedFactorType
     self.phoneNumber = phoneNumber
