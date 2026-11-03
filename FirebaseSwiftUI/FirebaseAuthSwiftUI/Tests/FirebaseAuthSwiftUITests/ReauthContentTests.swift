@@ -124,16 +124,46 @@ struct ReauthScreenTests {
   }
 }
 
+@Suite("Reauth content state defaults")
+@MainActor
+struct ReauthContentStateDefaultsTests {
+  @Test("Password state builds with no arguments")
+  func passwordDefaults() {
+    let state = EmailReauthContentState()
+    #expect(state.password.wrappedValue.isEmpty)
+    #expect(state.email.isEmpty)
+    #expect(!state.isValid)
+    #expect(!state.isLoading)
+    #expect(state.errorMessage == nil)
+  }
+
+  @Test("Phone state builds with no arguments")
+  func phoneDefaults() {
+    let state = PhoneReauthContentState()
+    #expect(state.verificationCode.wrappedValue.isEmpty)
+    #expect(state.phoneNumber.isEmpty)
+    #expect(!state.codeSent)
+    #expect(!state.isValid)
+    #expect(!state.isLoading)
+    #expect(state.errorMessage == nil)
+  }
+
+  @Test("Email link state builds with no arguments")
+  func emailLinkDefaults() {
+    let state = EmailLinkReauthContentState()
+    #expect(state.email.isEmpty)
+    #expect(!state.linkSent)
+    #expect(!state.isLoading)
+    #expect(state.errorMessage == nil)
+  }
+}
+
 @Suite("Reauth content slot")
 @MainActor
 struct ReauthContentSlotTests {
   private let prompt = ReauthPrompt.emailLink(EmailLinkReauthContentState(
-    resendLink: {},
-    cancel: {},
     email: "test@example.com",
-    linkSent: true,
-    isLoading: false,
-    errorMessage: nil
+    linkSent: true
   ))
 
   @Test("No reauth content is set by default")

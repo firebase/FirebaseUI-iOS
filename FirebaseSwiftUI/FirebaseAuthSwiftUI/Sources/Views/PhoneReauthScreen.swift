@@ -49,16 +49,18 @@ public struct PhoneReauthContentState {
   /// or the next attempt starts. The prompt's error alert still shows for the same failure.
   public let errorMessage: String?
 
-  /// Creates a state, for example to preview custom content with stub actions.
-  public init(verificationCode: Binding<String>,
-              sendCode: @escaping @MainActor () -> Void,
-              verify: @escaping @MainActor () -> Void,
-              cancel: @escaping @MainActor () -> Void,
-              phoneNumber: String,
-              codeSent: Bool,
-              isValid: Bool,
-              isLoading: Bool,
-              errorMessage: String?) {
+  /// Creates a state, for example to preview custom content with stub actions. Every parameter
+  /// has a default, so pass only what the preview needs; later releases add new parameters with
+  /// defaults too.
+  public init(verificationCode: Binding<String> = .constant(""),
+              sendCode: @escaping @MainActor () -> Void = {},
+              verify: @escaping @MainActor () -> Void = {},
+              cancel: @escaping @MainActor () -> Void = {},
+              phoneNumber: String = "",
+              codeSent: Bool = false,
+              isValid: Bool = false,
+              isLoading: Bool = false,
+              errorMessage: String? = nil) {
     self.verificationCode = verificationCode
     self.sendCode = sendCode
     self.verify = verify

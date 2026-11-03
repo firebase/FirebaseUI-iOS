@@ -40,13 +40,15 @@ public struct EmailLinkReauthContentState {
   /// attempt starts. The prompt's error alert still shows for the same failure.
   public let errorMessage: String?
 
-  /// Creates a state, for example to preview custom content with stub actions.
-  public init(resendLink: @escaping @MainActor () -> Void,
-              cancel: @escaping @MainActor () -> Void,
-              email: String,
-              linkSent: Bool,
-              isLoading: Bool,
-              errorMessage: String?) {
+  /// Creates a state, for example to preview custom content with stub actions. Every parameter
+  /// has a default, so pass only what the preview needs; later releases add new parameters with
+  /// defaults too.
+  public init(resendLink: @escaping @MainActor () -> Void = {},
+              cancel: @escaping @MainActor () -> Void = {},
+              email: String = "",
+              linkSent: Bool = false,
+              isLoading: Bool = false,
+              errorMessage: String? = nil) {
     self.resendLink = resendLink
     self.cancel = cancel
     self.email = email
