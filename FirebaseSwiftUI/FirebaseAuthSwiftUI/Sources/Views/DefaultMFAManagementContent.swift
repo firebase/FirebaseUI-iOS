@@ -121,8 +121,8 @@ public struct DefaultMFAManagementContent: View {
         Text(factor.displayName ?? authService.string.unnamedMethodLabel)
           .authFont(.headline)
 
-        if factor.factorID == PhoneMultiFactorID {
-          let phoneInfo = factor as! PhoneMultiFactorInfo
+        if factor.factorID == PhoneMultiFactorID,
+           let phoneInfo = factor as? PhoneMultiFactorInfo {
           Text("SMS: \(phoneInfo.phoneNumber)")
             .authFont(.caption)
             .foregroundColor(.secondary)

@@ -128,7 +128,7 @@ public struct MFAResolutionScreen<Content: View>: View {
     // views.
     VStack(spacing: 0) {
       content(MFAResolutionContentState(
-        selectedHintIndex: Binding(get: { selectedHintIndex }, set: selectHint),
+        selectedHintIndex: Binding(get: { selectedHintIndex }, set: { selectHint($0) }),
         verificationCode: $verificationCode,
         totpCode: $totpCode,
         sendCode: sendCode,
