@@ -42,14 +42,16 @@ public struct EmailLinkContentState {
   /// failure.
   public let errorMessage: String?
 
-  /// Creates a state, for example to preview custom content with stub actions.
-  public init(email: Binding<String>,
-              sendSignInLink: @escaping @MainActor () -> Void,
-              dismissAlert: @escaping @MainActor () -> Void,
-              didSend: Bool,
-              isValid: Bool,
-              isLoading: Bool,
-              errorMessage: String?) {
+  /// Creates a state, for example to preview custom content with stub actions. Every parameter
+  /// has a default, so pass only what the preview needs; later releases add new parameters
+  /// with defaults too.
+  public init(email: Binding<String> = .constant(""),
+              sendSignInLink: @escaping @MainActor () -> Void = {},
+              dismissAlert: @escaping @MainActor () -> Void = {},
+              didSend: Bool = false,
+              isValid: Bool = false,
+              isLoading: Bool = false,
+              errorMessage: String? = nil) {
     self.email = email
     self.sendSignInLink = sendSignInLink
     self.dismissAlert = dismissAlert

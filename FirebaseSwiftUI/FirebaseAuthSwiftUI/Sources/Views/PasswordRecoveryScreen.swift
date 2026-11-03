@@ -49,16 +49,18 @@ public struct PasswordRecoveryContentState {
   /// next attempt starts. The sheet's error alert still shows for the same failure.
   public let errorMessage: String?
 
-  /// Creates a state, for example to preview custom content with stub actions.
-  public init(email: Binding<String>,
-              sendResetLink: @escaping @MainActor () -> Void,
-              dismissSuccess: @escaping @MainActor () -> Void,
-              hideSuccess: @escaping @MainActor () -> Void,
-              didSend: Bool,
-              sentEmail: String,
-              isValid: Bool,
-              isLoading: Bool,
-              errorMessage: String?) {
+  /// Creates a state, for example to preview custom content with stub actions. Every parameter
+  /// has a default, so pass only what the preview needs; later releases add new parameters
+  /// with defaults too.
+  public init(email: Binding<String> = .constant(""),
+              sendResetLink: @escaping @MainActor () -> Void = {},
+              dismissSuccess: @escaping @MainActor () -> Void = {},
+              hideSuccess: @escaping @MainActor () -> Void = {},
+              didSend: Bool = false,
+              sentEmail: String = "",
+              isValid: Bool = false,
+              isLoading: Bool = false,
+              errorMessage: String? = nil) {
     self.email = email
     self.sendResetLink = sendResetLink
     self.dismissSuccess = dismissSuccess

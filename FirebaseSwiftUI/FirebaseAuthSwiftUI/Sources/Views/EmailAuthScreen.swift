@@ -66,20 +66,22 @@ public struct EmailAuthContentState {
   /// failure.
   public let errorMessage: String?
 
-  /// Creates a state, for example to preview custom content with stub actions.
-  public init(email: Binding<String>,
-              password: Binding<String>,
-              confirmPassword: Binding<String>,
-              signIn: @escaping @MainActor () -> Void,
-              signUp: @escaping @MainActor () -> Void,
-              switchFlow: @escaping @MainActor () -> Void,
-              goToSignUp: @escaping @MainActor () -> Void,
-              goToPasswordRecovery: @escaping @MainActor () -> Void,
-              goToEmailLink: @escaping @MainActor () -> Void,
-              flow: AuthenticationFlow,
-              isValid: Bool,
-              isLoading: Bool,
-              errorMessage: String?) {
+  /// Creates a state, for example to preview custom content with stub actions. Every parameter
+  /// has a default, so pass only what the preview needs; later releases add new parameters
+  /// with defaults too.
+  public init(email: Binding<String> = .constant(""),
+              password: Binding<String> = .constant(""),
+              confirmPassword: Binding<String> = .constant(""),
+              signIn: @escaping @MainActor () -> Void = {},
+              signUp: @escaping @MainActor () -> Void = {},
+              switchFlow: @escaping @MainActor () -> Void = {},
+              goToSignUp: @escaping @MainActor () -> Void = {},
+              goToPasswordRecovery: @escaping @MainActor () -> Void = {},
+              goToEmailLink: @escaping @MainActor () -> Void = {},
+              flow: AuthenticationFlow = .signIn,
+              isValid: Bool = false,
+              isLoading: Bool = false,
+              errorMessage: String? = nil) {
     self.email = email
     self.password = password
     self.confirmPassword = confirmPassword
