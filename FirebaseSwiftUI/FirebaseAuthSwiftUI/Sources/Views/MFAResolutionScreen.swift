@@ -56,18 +56,20 @@ public struct MFAResolutionContentState {
   /// the same failure.
   public let errorMessage: String?
 
-  /// Creates a state, for example to preview custom content with stub actions.
-  public init(selectedHintIndex: Binding<Int>,
-              verificationCode: Binding<String>,
-              totpCode: Binding<String>,
-              sendCode: @escaping @MainActor () -> Void,
-              resolve: @escaping @MainActor () -> Void,
-              cancel: @escaping @MainActor () -> Void,
-              hints: [MFAHint],
-              isCodeSent: Bool,
-              isValid: Bool,
-              isLoading: Bool,
-              errorMessage: String?) {
+  /// Creates a state, for example to preview custom content with stub actions. Every parameter
+  /// has a default, so pass only what the preview needs; later releases add new parameters
+  /// with defaults too.
+  public init(selectedHintIndex: Binding<Int> = .constant(0),
+              verificationCode: Binding<String> = .constant(""),
+              totpCode: Binding<String> = .constant(""),
+              sendCode: @escaping @MainActor () -> Void = {},
+              resolve: @escaping @MainActor () -> Void = {},
+              cancel: @escaping @MainActor () -> Void = {},
+              hints: [MFAHint] = [],
+              isCodeSent: Bool = false,
+              isValid: Bool = false,
+              isLoading: Bool = false,
+              errorMessage: String? = nil) {
     self.selectedHintIndex = selectedHintIndex
     self.verificationCode = verificationCode
     self.totpCode = totpCode

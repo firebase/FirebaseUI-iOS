@@ -41,13 +41,15 @@ public struct MFAManagementContentState {
   /// reauthentication is not a failure, so it sets no message and shows no alert.
   public let errorMessage: String?
 
-  /// Creates a state, for example to preview custom content with stub actions.
-  public init(unenroll: @escaping @MainActor (_ factorUid: String) -> Void,
-              goToEnrollment: @escaping @MainActor () -> Void,
-              refresh: @escaping @MainActor () -> Void,
-              enrolledFactors: [MultiFactorInfo],
-              isLoading: Bool,
-              errorMessage: String?) {
+  /// Creates a state, for example to preview custom content with stub actions. Every parameter
+  /// has a default, so pass only what the preview needs; later releases add new parameters
+  /// with defaults too.
+  public init(unenroll: @escaping @MainActor (_ factorUid: String) -> Void = { _ in },
+              goToEnrollment: @escaping @MainActor () -> Void = {},
+              refresh: @escaping @MainActor () -> Void = {},
+              enrolledFactors: [MultiFactorInfo] = [],
+              isLoading: Bool = false,
+              errorMessage: String? = nil) {
     self.unenroll = unenroll
     self.goToEnrollment = goToEnrollment
     self.refresh = refresh
