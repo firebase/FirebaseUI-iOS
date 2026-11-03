@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuthUIComponents
 import SwiftUI
 
 /// The state and actions of the password recovery screen, passed to
@@ -129,7 +130,7 @@ public struct PasswordRecoveryScreen<Content: View>: View {
   }
 
   private var isValid: Bool {
-    CommonUtils.isValidEmail(email)
+    FormValidators.email.isValid(input: email)
   }
 
   private var isLoading: Bool {
@@ -138,6 +139,7 @@ public struct PasswordRecoveryScreen<Content: View>: View {
 
   private func sendResetLink() {
     guard isValid, !isLoading else { return }
+    let email = self.email
     isWorking = true
     errorMessage = nil
     Task {

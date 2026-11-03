@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import FirebaseAuthUIComponents
 import SwiftUI
 
 /// The state and actions of the email-link screen, passed to ``EmailLinkScreen``'s content.
@@ -147,7 +148,7 @@ public struct EmailLinkScreen<Content: View>: View {
   }
 
   private var isValid: Bool {
-    CommonUtils.isValidEmail(email)
+    FormValidators.email.isValid(input: email)
   }
 
   private var isLoading: Bool {
@@ -156,6 +157,7 @@ public struct EmailLinkScreen<Content: View>: View {
 
   private func sendSignInLink() {
     guard isValid, !isLoading else { return }
+    let email = self.email
     isWorking = true
     errorMessage = nil
     Task {

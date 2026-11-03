@@ -131,7 +131,7 @@ public struct DefaultEmailAuthContent: View {
             .frame(maxWidth: .infinity)
         }
       }
-      .disabled(!state.isValid)
+      .disabled(!state.isValid || state.isLoading)
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .authCTAButtonStyle()

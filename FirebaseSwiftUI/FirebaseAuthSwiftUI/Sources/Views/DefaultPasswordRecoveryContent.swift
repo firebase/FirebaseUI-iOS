@@ -45,7 +45,7 @@ public struct DefaultPasswordRecoveryContent: View {
           .padding(.vertical, 8)
           .frame(maxWidth: .infinity)
       }
-      .disabled(!state.isValid)
+      .disabled(!state.isValid || state.isLoading)
       .frame(maxWidth: .infinity)
       .authCTAButtonStyle()
     }
