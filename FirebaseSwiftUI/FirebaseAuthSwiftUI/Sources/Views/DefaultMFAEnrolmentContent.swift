@@ -23,6 +23,7 @@ public struct DefaultMFAEnrolmentContent: View {
   }
 
   @Environment(AuthService.self) private var authService
+  @Environment(\.openURL) private var openURL
   @FocusState private var isPhoneNumberFocused: Bool
   private let state: MFAEnrollmentContentState
 
@@ -335,7 +336,7 @@ public struct DefaultMFAEnrolmentContent: View {
           if let qrURL = state.totpQRCodeURL,
              let qrImage = generateQRCode(from: qrURL.absoluteString) {
             Button(action: {
-              UIApplication.shared.open(qrURL)
+              openURL(qrURL)
             }) {
               VStack(spacing: 8) {
                 Image(uiImage: qrImage)
@@ -450,6 +451,9 @@ public struct DefaultMFAEnrolmentContent: View {
     }
   }
 
+  /// Shared because creating a `CIContext` is expensive and the QR code renders with the body.
+  private static let qrCodeContext = CIContext()
+
   private func generateQRCode(from string: String) -> UIImage? {
     let data = Data(string.utf8)
 
@@ -463,7 +467,7 @@ public struct DefaultMFAEnrolmentContent: View {
     let transform = CGAffineTransform(scaleX: 10, y: 10)
     let scaledImage = ciImage.transformed(by: transform)
 
-    let context = CIContext()
+    let context = Self.qrCodeContext
     guard let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) else {
       return nil
     }
