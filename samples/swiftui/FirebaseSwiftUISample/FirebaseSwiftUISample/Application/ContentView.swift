@@ -143,6 +143,31 @@ struct ContentView: View {
           }
         }
         .tint(Color(.label))
+        NavigationLink {
+          FullCustomizationExample()
+            .navigationTitle("Full customization")
+            .navigationBarTitleDisplayMode(.inline)
+        } label: {
+          VStack(alignment: .leading, spacing: 16) {
+            Text("Full customization example")
+              .font(.headline)
+              .fontWeight(.bold)
+            Text("How to draw every auth screen yourself with AuthPickerView")
+            Text(
+              "• Custom first screen, pushed screens and signed-in screen\n• Four switchable themes\n• Library still drives auth, MFA and navigation"
+            )
+            .font(.caption)
+            .foregroundColor(.secondary)
+          }
+          .multilineTextAlignment(.leading)
+          .padding()
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .background {
+            RoundedRectangle(cornerRadius: 16)
+              .fill(Color(UIColor.secondarySystemBackground))
+          }
+        }
+        .tint(Color(.label))
       }
       .padding()
       .navigationTitle("FirebaseUI Demo")
