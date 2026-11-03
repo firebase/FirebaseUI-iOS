@@ -20,7 +20,7 @@ import SwiftUI
 public struct MFAManagementContentState {
   /// Removes the enrolled factor with this `uid`, then updates ``enrolledFactors``. Asks the user
   /// to reauthenticate first when Firebase requires it. Does nothing while ``isLoading`` is
-  /// `true`.
+  /// `true` or when `uid` is not in ``enrolledFactors``.
   public let unenroll: @MainActor (_ factorUid: String) -> Void
 
   /// Pushes ``AuthView/mfaEnrollment``.
@@ -36,9 +36,9 @@ public struct MFAManagementContentState {
   /// is signing in.
   public let isLoading: Bool
 
-  /// The localized message of the last failed unenroll; cancelling reauthentication sets none. It
-  /// clears on ``refresh`` or when the next attempt starts. The sheet's error alert still shows
-  /// for the same failure.
+  /// The localized message of the last failed unenroll. It clears on ``refresh`` or when the next
+  /// attempt starts. The sheet's error alert still shows for the same failure. Cancelling
+  /// reauthentication is not a failure, so it sets no message and shows no alert.
   public let errorMessage: String?
 
   /// Creates a state, for example to preview custom content with stub actions.
@@ -127,7 +127,11 @@ public struct MFAManagementScreen<Content: View>: View {
   }
 
   private func unenroll(_ factorUid: String) {
-    guard !isLoading else { return }
+    guard MFAManagementContentState.canUnenroll(
+      factorUid,
+      enrolledFactorUids: enrolledFactors.map(\.uid),
+      isLoading: isLoading
+    ) else { return }
     isWorking = true
     errorMessage = nil
     Task {
@@ -140,13 +144,28 @@ public struct MFAManagementScreen<Content: View>: View {
           enrolledFactors = try await authService.unenrollMFA(factorUid)
         }
       } catch {
-        if case AuthServiceError.signInCancelled = error {
-          // The user backed out of reauthentication; nothing failed.
-        } else {
-          errorMessage = authService.string.localizedErrorMessage(for: error)
-        }
+        guard MFAManagementContentState.isFailure(error) else { return }
+        errorMessage = authService.string.localizedErrorMessage(for: error)
         reportError?(error)
       }
     }
+  }
+}
+
+extension MFAManagementContentState {
+  /// Whether ``unenroll`` runs for `factorUid`.
+  static func canUnenroll(_ factorUid: String,
+                          enrolledFactorUids: [String],
+                          isLoading: Bool) -> Bool {
+    !isLoading && enrolledFactorUids.contains(factorUid)
+  }
+
+  /// Whether an unenroll error should be shown. The user backing out of reauthentication is not
+  /// a failure.
+  static func isFailure(_ error: Error) -> Bool {
+    if case AuthServiceError.signInCancelled = error {
+      return false
+    }
+    return true
   }
 }

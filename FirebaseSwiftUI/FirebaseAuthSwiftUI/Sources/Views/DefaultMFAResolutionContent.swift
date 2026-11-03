@@ -253,6 +253,7 @@ public struct DefaultMFAResolutionContent: View {
       )
     }
     .buttonStyle(PlainButtonStyle())
+    .disabled(state.isLoading)
     .padding(.horizontal)
     .accessibilityIdentifier("hint-\(index)")
   }

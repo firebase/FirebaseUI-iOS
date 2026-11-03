@@ -44,7 +44,8 @@ public struct MFAResolutionContentState {
   /// Whether an SMS code was sent for the selected phone hint.
   public let isCodeSent: Bool
 
-  /// Whether the code for the selected hint is non-empty.
+  /// Whether ``resolve`` has what it needs: for a phone hint, a sent code and a non-empty
+  /// ``verificationCode``; for a TOTP hint, a non-empty ``totpCode``.
   public let isValid: Bool
 
   /// Whether a send or resolve is in flight, or the ``AuthService`` is signing in.
@@ -113,10 +114,7 @@ public struct MFAResolutionScreen<Content: View>: View {
 
   @Environment(AuthService.self) private var authService
   @Environment(\.reportError) private var reportError
-  @State private var selectedHintIndex = 0
-  @State private var verificationCode = ""
-  @State private var totpCode = ""
-  @State private var verificationId: String?
+  @State private var challenge = MFAResolutionContentState.Challenge()
   @State private var isWorking = false
   @State private var errorMessage: String?
 
@@ -128,45 +126,26 @@ public struct MFAResolutionScreen<Content: View>: View {
     // views.
     VStack(spacing: 0) {
       content(MFAResolutionContentState(
-        selectedHintIndex: Binding(get: { selectedHintIndex }, set: { selectHint($0) }),
-        verificationCode: $verificationCode,
-        totpCode: $totpCode,
+        selectedHintIndex: Binding(get: { challenge.selectedHintIndex }, set: { selectHint($0) }),
+        verificationCode: $challenge.verificationCode,
+        totpCode: $challenge.totpCode,
         sendCode: sendCode,
         resolve: resolve,
         cancel: { authService.navigator.clear() },
         hints: mfaRequired.hints,
-        isCodeSent: verificationId != nil,
-        isValid: isValid,
+        isCodeSent: challenge.isCodeSent,
+        isValid: challenge.isValid(hints: mfaRequired.hints),
         isLoading: isLoading,
         errorMessage: errorMessage
       ))
     }
-    .onChange(of: verificationCode) { errorMessage = nil }
-    .onChange(of: totpCode) { errorMessage = nil }
+    .onChange(of: challenge.verificationCode) { errorMessage = nil }
+    .onChange(of: challenge.totpCode) { errorMessage = nil }
   }
 
   private func selectHint(_ index: Int) {
-    selectedHintIndex = index
-    verificationCode = ""
-    totpCode = ""
-    verificationId = nil
+    challenge.selectHint(index)
     errorMessage = nil
-  }
-
-  private var selectedHint: MFAHint? {
-    guard mfaRequired.hints.indices.contains(selectedHintIndex) else { return nil }
-    return mfaRequired.hints[selectedHintIndex]
-  }
-
-  private var isValid: Bool {
-    switch selectedHint {
-    case .phone:
-      return !verificationCode.isEmpty
-    case .totp:
-      return !totpCode.isEmpty
-    case .none:
-      return false
-    }
   }
 
   private var isLoading: Bool {
@@ -174,17 +153,15 @@ public struct MFAResolutionScreen<Content: View>: View {
   }
 
   private func sendCode() {
-    guard case .phone = selectedHint, !isLoading else { return }
+    guard challenge.canSendCode(hints: mfaRequired.hints, isLoading: isLoading) else { return }
     isWorking = true
     errorMessage = nil
-    let hintIndex = selectedHintIndex
+    let hintIndex = challenge.selectedHintIndex
     Task {
       defer { isWorking = false }
       do {
         let id = try await authService.resolveSmsChallenge(hintIndex: hintIndex)
-        // Drop a code sent for a hint the user has since switched away from.
-        guard selectedHintIndex == hintIndex else { return }
-        verificationId = id
+        challenge.acceptCode(verificationId: id, sentForHint: hintIndex)
       } catch {
         errorMessage = authService.string.localizedErrorMessage(for: error)
         reportError?(error)
@@ -193,29 +170,95 @@ public struct MFAResolutionScreen<Content: View>: View {
   }
 
   private func resolve() {
-    guard let selectedHint, isValid, !isLoading else { return }
+    // Captured before the task, so a hint switch mid-tap cannot mix one hint's code with
+    // another's index.
+    guard let request = challenge.resolveRequest(hints: mfaRequired.hints, isLoading: isLoading)
+    else { return }
     isWorking = true
     errorMessage = nil
     Task {
       defer { isWorking = false }
       do {
-        let code: String
-        switch selectedHint {
-        case .phone:
-          code = verificationCode
-        case .totp:
-          code = totpCode
-        }
         try await authService.resolveSignIn(
-          code: code,
-          hintIndex: selectedHintIndex,
-          verificationId: verificationId
+          code: request.code,
+          hintIndex: request.hintIndex,
+          verificationId: request.verificationId
         )
         authService.navigator.clear()
       } catch {
         errorMessage = authService.string.localizedErrorMessage(for: error)
         reportError?(error)
       }
+    }
+  }
+}
+
+extension MFAResolutionContentState {
+  /// The user's progress through one hint: which hint is selected, the typed codes, and the
+  /// verification ID of a sent SMS code.
+  struct Challenge: Equatable {
+    var selectedHintIndex = 0
+    var verificationCode = ""
+    var totpCode = ""
+    var verificationId: String?
+
+    /// The inputs ``MFAResolutionContentState/resolve`` sends, captured at tap time.
+    struct ResolveRequest: Equatable {
+      let code: String
+      let hintIndex: Int
+      let verificationId: String?
+    }
+
+    var isCodeSent: Bool {
+      verificationId != nil
+    }
+
+    func selectedHint(in hints: [MFAHint]) -> MFAHint? {
+      hints.indices.contains(selectedHintIndex) ? hints[selectedHintIndex] : nil
+    }
+
+    /// Selects a hint and clears the codes and any sent code, even when `index` is already
+    /// selected.
+    mutating func selectHint(_ index: Int) {
+      self = Challenge(selectedHintIndex: index)
+    }
+
+    /// Stores the verification ID of a code sent for `hintIndex`, unless the user has since
+    /// selected another hint.
+    mutating func acceptCode(verificationId: String, sentForHint hintIndex: Int) {
+      guard hintIndex == selectedHintIndex else { return }
+      self.verificationId = verificationId
+    }
+
+    func isValid(hints: [MFAHint]) -> Bool {
+      switch selectedHint(in: hints) {
+      case .phone:
+        isCodeSent && !verificationCode.isEmpty
+      case .totp:
+        !totpCode.isEmpty
+      case .none:
+        false
+      }
+    }
+
+    func canSendCode(hints: [MFAHint], isLoading: Bool) -> Bool {
+      guard case .phone = selectedHint(in: hints) else { return false }
+      return !isLoading
+    }
+
+    func resolveRequest(hints: [MFAHint], isLoading: Bool) -> ResolveRequest? {
+      guard let hint = selectedHint(in: hints), isValid(hints: hints), !isLoading else {
+        return nil
+      }
+      let code = switch hint {
+      case .phone: verificationCode
+      case .totp: totpCode
+      }
+      return ResolveRequest(
+        code: code,
+        hintIndex: selectedHintIndex,
+        verificationId: verificationId
+      )
     }
   }
 }
