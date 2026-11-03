@@ -54,17 +54,19 @@ public struct SignedInContentState {
   /// reauthentication. The sheet's error alert still shows for the same failure.
   public let errorMessage: String?
 
-  /// Creates a state, for example to preview custom content with stub actions.
-  public init(signOut: @escaping @MainActor () -> Void,
-              deleteAccount: @escaping @MainActor () -> Void,
-              updatePassword: @escaping @MainActor () -> Void,
-              verifyEmail: @escaping @MainActor () -> Void,
-              goToMFAManagement: @escaping @MainActor () -> Void,
-              user: User?,
-              isEmailVerified: Bool,
-              isMFAEnabled: Bool,
-              isLoading: Bool,
-              errorMessage: String?) {
+  /// Creates a state, for example to preview custom content with stub actions. Every parameter
+  /// has a default, so pass only what the preview needs; later releases add new parameters
+  /// with defaults too.
+  public init(signOut: @escaping @MainActor () -> Void = {},
+              deleteAccount: @escaping @MainActor () -> Void = {},
+              updatePassword: @escaping @MainActor () -> Void = {},
+              verifyEmail: @escaping @MainActor () -> Void = {},
+              goToMFAManagement: @escaping @MainActor () -> Void = {},
+              user: User? = nil,
+              isEmailVerified: Bool = true,
+              isMFAEnabled: Bool = true,
+              isLoading: Bool = false,
+              errorMessage: String? = nil) {
     self.signOut = signOut
     self.deleteAccount = deleteAccount
     self.updatePassword = updatePassword
