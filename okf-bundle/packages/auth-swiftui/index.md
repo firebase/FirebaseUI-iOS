@@ -3,7 +3,7 @@ type: Reference
 title: FirebaseAuthSwiftUI package notes
 description: Agent reference for SwiftUI Auth core and provider packages.
 tags: [auth, swiftui, spm]
-timestamp: 2026-07-31T00:00:00Z
+timestamp: 2026-11-03T00:00:00Z
 ---
 
 # Auth SwiftUI
@@ -39,6 +39,33 @@ Allowlist: [agent command policy](../../testing/agent-command-policy.md). Detail
 * Version stamp for Swift releases: `FirebaseSwiftUI/FirebaseAuthSwiftUI/Sources/Version.swift` via [`release-swift.sh`](../../../release-swift.sh) (human release process).
 * Feature parity with FirebaseUI-Android Auth UI where applicable ([`CONTRIBUTING.md`](../../../CONTRIBUTING.md)).
 * Emulator-backed tests use project `flutterfire-e2e-tests` by default.
+
+## Customization
+
+Three tiers, all additive: theming, layout, and per-screen content. `AuthService` keeps owning navigation, MFA resolution, account conflicts, reauthentication, loading state and error reporting in every tier.
+
+| Tier | Public surface |
+|------|----------------|
+| Theming | `.authCTAButtonStyle(_:)`, `.authTextFieldStyle(_:)` and `.authTypography(_:)` set `AuthCTAButtonStyle`, `AuthTextFieldStyle` and `AuthTypography` in the environment; `.authFont(_:weight:)` applies the typography to consumer text. Stock markup uses the internal `.authCTAButtonStyle()` and package `.authCustomFont(_:weight:)` |
+| Layout | `AuthPickerView.pickerContent { }` / `pickerContent { state in }` and `.pickerDestination { screen in }`, returning `AuthPickerContent`, with stock `DefaultAuthPickerContent` and `DefaultAuthPickerDestination`; `DefaultAuthPickerContent(authMethodPicker:)` with `AuthMethodPickerState` lays out the provider buttons, with stock `DefaultAuthMethodPicker` |
+| Per-screen content | `EnterPhoneNumberScreen` + `PhoneNumberContentState` + `DefaultEnterPhoneNumberContent`; `EnterVerificationCodeScreen` + `VerificationCodeContentState` + `DefaultEnterVerificationCodeContent`; `MFAEnrolmentScreen` + `MFAEnrolmentContentState` + `DefaultMFAEnrolmentContent` |
+
+Consumers reach a per-screen slot through `.pickerDestination`, matching the `AuthView` case and returning the screen with their content, or `DefaultAuthPickerDestination(screen:)` for every other case.
+
+### Per-screen content slot rules
+
+* **Do not make the existing view generic.** Each screen keeps its public, non-generic `XView` with its existing initializer; its body becomes `XScreen { DefaultXContent(state: $0) }`. Making `XView` generic breaks consumer code such as `let v: MFAEnrolmentView`.
+* **`XScreen<Content>` owns the logic.** It holds the `@State`, runs the actions, applies modifiers that must survive custom content (`.withReauthentication(coordinator:)`, `.onChange` error clearing, timers), and takes `@ViewBuilder content: @escaping (XContentState) -> Content`. `ReauthenticationCoordinator` stays private to the screen.
+* **`DefaultXContent(state:)` is public** and holds the stock markup unchanged, including accessibility identifiers (UI tests depend on them) and theming modifiers. Consumers wrap it to keep the stock UI. Naming is `Default` + slot name.
+* **Fonts in stock markup:** text that had an explicit font before theming uses `.authFont(_:weight:)`; text that had none uses the package-only `.authCustomFont(_:weight:)`, which applies only when `AuthTypography.fontName` is set, so an app-level `.font(...)` still reaches it.
+* **`XContentState`** exposes `Binding`s for input, `@MainActor` closures for actions, and `let`s for display, plus `isValid`, `isLoading` and `errorMessage: String?`. `errorMessage` is the localized message from `authService.string.localizedErrorMessage(for:)`; `reportError` still fires, so the sheet's error alert shows too. No typed error.
+* **Guards live in the screen**, not the content: every action closure checks `isValid` / `isLoading` / step itself, so custom content cannot trigger it in the wrong state. Keep guard and step rules in pure internal helpers so `./swiftui-tests.sh --unit` covers them.
+* **Navigation titles live in the default content**, so custom content sets its own.
+* **The state's public memberwise initializer is for previews.** Adding a field changes it, so its doc comment says so.
+* **Public step enums** (`MFAEnrolmentContentState.Step`) document that cases may be added, so consumers keep a `default` case.
+* **Spelling:** view-layer types use "Enrolment" (`MFAEnrolmentView`, `MFAEnrolmentScreen`, `MFAEnrolmentContentState`); service-layer API keeps "Enrollment" (`EnrollmentSession`, `startMfaEnrollment`, `AuthView.mfaEnrollment`).
+
+Not slotted: `LegacySignInRecoveryView` (its own sheet, outside `pickerDestination`) and the reauthentication views.
 
 ## Related
 
