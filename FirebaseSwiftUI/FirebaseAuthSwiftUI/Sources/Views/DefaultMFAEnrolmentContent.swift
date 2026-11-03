@@ -18,14 +18,14 @@ import SwiftUI
 /// The stock content of ``MFAEnrolmentScreen``.
 @MainActor
 public struct DefaultMFAEnrolmentContent: View {
-  public init(state: MFAEnrollmentContentState) {
+  public init(state: MFAEnrolmentContentState) {
     self.state = state
   }
 
   @Environment(AuthService.self) private var authService
   @Environment(\.openURL) private var openURL
   @FocusState private var isPhoneNumberFocused: Bool
-  private let state: MFAEnrollmentContentState
+  private let state: MFAEnrolmentContentState
 
   public var body: some View {
     VStack(spacing: 24) {

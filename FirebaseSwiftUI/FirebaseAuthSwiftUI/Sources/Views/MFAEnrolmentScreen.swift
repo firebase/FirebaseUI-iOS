@@ -17,19 +17,19 @@ import FirebaseAuthUIComponents
 import SwiftUI
 
 /// The state and actions of the MFA enrolment screen, passed to ``MFAEnrolmentScreen``'s content.
-public struct MFAEnrollmentContentState {
+public struct MFAEnrolmentContentState {
   /// A step of the enrolment flow.
   ///
   /// Later releases may add steps, so give a `switch` over it a `default` case.
   public enum Step {
-    /// Choosing a factor, before ``MFAEnrollmentContentState/startEnrollment`` succeeds or once
+    /// Choosing a factor, before ``MFAEnrolmentContentState/startEnrollment`` succeeds or once
     /// the enrolment session has expired or finished.
     case selectFactor
     /// Entering the phone number and display name for an SMS factor.
     case enterPhoneNumber
-    /// Entering the code sent to ``MFAEnrollmentContentState/sentPhoneNumber``.
+    /// Entering the code sent to ``MFAEnrolmentContentState/sentPhoneNumber``.
     case enterVerificationCode
-    /// Adding ``MFAEnrollmentContentState/totpSecret`` to an authenticator app, then entering
+    /// Adding ``MFAEnrolmentContentState/totpSecret`` to an authenticator app, then entering
     /// the display name and the code it generates.
     case setUpTOTP
   }
@@ -105,11 +105,13 @@ public struct MFAEnrollmentContentState {
   /// Whether an enrolment action is in flight, or the ``AuthService`` is signing in.
   public let isLoading: Bool
 
-  /// The localized message of the last failed action. It clears when any input changes or the
-  /// next attempt starts. The sheet's error alert still shows for the same failure.
+  /// The localized message of the last failed action, or of the enrolment session expiring. It
+  /// clears when any input changes or the next attempt starts. The sheet's error alert still
+  /// shows for the same failure.
   public let errorMessage: String?
 
-  /// Creates a state, for example to preview custom content with stub actions.
+  /// Creates a state for previews, for example to preview custom content with stub actions. Later
+  /// releases may add parameters, so don't build states outside previews.
   public init(step: Step,
               selectedFactorType: Binding<SecondFactorType>,
               phoneNumber: Binding<String>,
@@ -157,7 +159,7 @@ public struct MFAEnrollmentContentState {
 ///
 /// The screen starts the enrolment, sends SMS codes, enrols the factor, presents
 /// reauthentication when Firebase requires it, and reports errors. Your content only draws the
-/// UI for the ``MFAEnrollmentContentState/step`` it receives. Wrap ``DefaultMFAEnrolmentContent``
+/// UI for the ``MFAEnrolmentContentState/step`` it receives. Wrap ``DefaultMFAEnrolmentContent``
 /// to keep the stock markup. The navigation title is part of that markup, so set your own on
 /// custom content.
 ///
@@ -185,7 +187,7 @@ public struct MFAEnrollmentContentState {
 /// ```
 @MainActor
 public struct MFAEnrolmentScreen<Content: View>: View {
-  public init(@ViewBuilder content: @escaping (MFAEnrollmentContentState) -> Content) {
+  public init(@ViewBuilder content: @escaping (MFAEnrolmentContentState) -> Content) {
     self.content = content
   }
 
@@ -204,10 +206,10 @@ public struct MFAEnrolmentScreen<Content: View>: View {
   @State private var errorMessage: String?
   @State private var reauthCoordinator = ReauthenticationCoordinator()
 
-  private let content: (MFAEnrollmentContentState) -> Content
+  private let content: (MFAEnrolmentContentState) -> Content
 
   public var body: some View {
-    content(MFAEnrollmentContentState(
+    content(MFAEnrolmentContentState(
       step: step,
       selectedFactorType: $selectedFactorType,
       phoneNumber: $phoneNumber,
@@ -230,6 +232,12 @@ public struct MFAEnrolmentScreen<Content: View>: View {
       errorMessage: errorMessage
     ))
     .withReauthentication(coordinator: reauthCoordinator)
+    .task(id: currentSession?.expiresAt) {
+      guard let expiresAt = currentSession?.expiresAt else { return }
+      try? await Task.sleep(for: MFAEnrolmentContentState.timeUntilExpiry(expiresAt, now: Date()))
+      guard !Task.isCancelled else { return }
+      expireSession()
+    }
     .onAppear {
       if !allowedFactors.contains(selectedFactorType),
          let firstAllowed = allowedFactors.first {
@@ -245,12 +253,12 @@ public struct MFAEnrolmentScreen<Content: View>: View {
   }
 
   private var allowedFactors: [SecondFactorType] {
-    MFAEnrollmentContentState.sortedFactors(authService.configuration.allowedSecondFactors)
+    MFAEnrolmentContentState.sortedFactors(authService.configuration.allowedSecondFactors)
   }
 
-  private var step: MFAEnrollmentContentState.Step {
+  private var step: MFAEnrolmentContentState.Step {
     guard let session = currentSession else { return .selectFactor }
-    return MFAEnrollmentContentState.Step(
+    return MFAEnrolmentContentState.Step(
       type: session.type,
       status: session.status,
       isExpired: session.isExpired
@@ -280,11 +288,14 @@ public struct MFAEnrolmentScreen<Content: View>: View {
     Task {
       defer { isWorking = false }
       do {
-        currentSession = try await authService.startMfaEnrollment(
+        let session = try await authService.startMfaEnrollment(
           type: selectedFactorType,
           accountName: authService.currentUser?.email,
           issuer: authService.configuration.mfaIssuer
         )
+        verificationCode = ""
+        totpCode = ""
+        currentSession = session
       } catch {
         fail(error)
       }
@@ -365,6 +376,12 @@ public struct MFAEnrolmentScreen<Content: View>: View {
     }
   }
 
+  private func expireSession() {
+    guard currentSession != nil else { return }
+    currentSession = nil
+    fail(AuthServiceError.multiFactorAuth("Enrollment session has expired"))
+  }
+
   private func fail(_ error: Error) {
     errorMessage = authService.string.localizedErrorMessage(for: error)
     reportError?(error)
@@ -380,14 +397,19 @@ public struct MFAEnrolmentScreen<Content: View>: View {
   }
 }
 
-extension MFAEnrollmentContentState {
+extension MFAEnrolmentContentState {
+  /// How long until a session expiring at `expiresAt` expires, or zero if it already has.
+  static func timeUntilExpiry(_ expiresAt: Date, now: Date) -> Duration {
+    .seconds(max(0, expiresAt.timeIntervalSince(now)))
+  }
+
   /// The factors in display order, SMS first.
   static func sortedFactors(_ factors: Set<SecondFactorType>) -> [SecondFactorType] {
     factors.sorted { lhs, rhs in lhs == .sms && rhs == .totp }
   }
 }
 
-extension MFAEnrollmentContentState.Step {
+extension MFAEnrolmentContentState.Step {
   /// The step for a started enrolment session. Sessions that have expired or finished go back to
   /// ``selectFactor`` so the user can start again.
   init(type: SecondFactorType, status: EnrollmentSession.EnrollmentStatus, isExpired: Bool) {
@@ -423,18 +445,18 @@ extension MFAEnrollmentContentState.Step {
     }
   }
 
-  /// Whether ``MFAEnrollmentContentState/startEnrollment`` runs from this step.
+  /// Whether ``MFAEnrolmentContentState/startEnrollment`` runs from this step.
   func canStartEnrollment(isValid: Bool, isLoading: Bool) -> Bool {
     self == .selectFactor && isValid && !isLoading
   }
 
-  /// Whether ``MFAEnrollmentContentState/sendCode`` runs from this step.
+  /// Whether ``MFAEnrolmentContentState/sendCode`` runs from this step.
   func canSendCode(phoneNumber: String, displayName: String, isLoading: Bool) -> Bool {
     (self == .enterPhoneNumber || self == .enterVerificationCode)
       && !phoneNumber.isEmpty && !displayName.isEmpty && !isLoading
   }
 
-  /// Whether ``MFAEnrollmentContentState/enroll`` runs from this step.
+  /// Whether ``MFAEnrolmentContentState/enroll`` runs from this step.
   func canEnroll(isValid: Bool, isLoading: Bool) -> Bool {
     (self == .enterVerificationCode || self == .setUpTOTP) && isValid && !isLoading
   }

@@ -13,17 +13,18 @@
 // limitations under the License.
 
 @testable import FirebaseAuthSwiftUI
+import Foundation
 import Testing
 
-private typealias Step = MFAEnrollmentContentState.Step
+private typealias Step = MFAEnrolmentContentState.Step
 
 @Suite("MFAEnrolmentScreen Tests")
 struct MFAEnrolmentScreenTests {
   @Test("Allowed factors list SMS first")
   func sortedFactorsListSMSFirst() {
-    #expect(MFAEnrollmentContentState.sortedFactors([.totp, .sms]) == [.sms, .totp])
-    #expect(MFAEnrollmentContentState.sortedFactors([.totp]) == [.totp])
-    #expect(MFAEnrollmentContentState.sortedFactors([]).isEmpty)
+    #expect(MFAEnrolmentContentState.sortedFactors([.totp, .sms]) == [.sms, .totp])
+    #expect(MFAEnrolmentContentState.sortedFactors([.totp]) == [.totp])
+    #expect(MFAEnrolmentContentState.sortedFactors([]).isEmpty)
   }
 
   @Test("SMS sessions map to the phone number and code steps")
@@ -55,6 +56,15 @@ struct MFAEnrolmentScreenTests {
     #expect(Step(type: .sms, status: .initiated, isExpired: true) == .selectFactor)
     #expect(Step(type: .sms, status: .verificationSent, isExpired: true) == .selectFactor)
     #expect(Step(type: .totp, status: .initiated, isExpired: true) == .selectFactor)
+  }
+
+  @Test("Expiry fires at expiresAt, or immediately once past it")
+  func timeUntilExpiry() {
+    let now = Date(timeIntervalSince1970: 1000)
+    #expect(MFAEnrolmentContentState.timeUntilExpiry(now.addingTimeInterval(90), now: now)
+      == .seconds(90))
+    #expect(MFAEnrolmentContentState.timeUntilExpiry(now.addingTimeInterval(-5), now: now)
+      == .zero)
   }
 
   @Test("Factor selection needs MFA enabled and an allowed factor")
