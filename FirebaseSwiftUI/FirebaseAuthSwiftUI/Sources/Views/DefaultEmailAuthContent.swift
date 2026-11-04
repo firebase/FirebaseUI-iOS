@@ -63,7 +63,10 @@ public struct DefaultEmailAuthContent: View {
             prompt: authService.string.nameInputLabel,
             contentType: .name,
             validations: [
-              FormValidators.notEmpty(label: authService.string.nameFieldLabel),
+              FormValidator(
+                message: FormValidators.notEmpty(label: authService.string.nameFieldLabel).message,
+                validate: { !($0 ?? "").trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+              ),
             ],
             maintainsValidationMessage: true,
             onSubmit: { _ in

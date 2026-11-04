@@ -241,6 +241,30 @@ struct FirebaseSwiftUIExampleTests {
 
   @Test
   @MainActor
+  func upgradingAnonymousUserSavesDisplayName() async throws {
+    let service = try await prepareFreshAuthService(
+      configuration: AuthConfiguration(shouldAutoUpgradeAnonymousUsers: true)
+    ).withEmailSignIn()
+    let anonymousUser = try await service.auth.signInAnonymously().user
+    try await waitForStateChange {
+      service.currentUser?.isAnonymous == true
+    }
+
+    try await service.createUser(
+      email: createEmail(),
+      password: kPassword,
+      displayName: "Grace Hopper"
+    )
+
+    try await waitForStateChange {
+      service.currentUser?.displayName == "Grace Hopper"
+    }
+    #expect(service.currentUser?.uid == anonymousUser.uid)
+    #expect(service.currentUser?.isAnonymous == false)
+  }
+
+  @Test
+  @MainActor
   func createEmailPasswordUserWithoutDisplayName() async throws {
     let service = try await prepareFreshAuthService().withEmailSignIn()
 

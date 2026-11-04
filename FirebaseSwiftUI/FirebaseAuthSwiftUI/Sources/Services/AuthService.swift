@@ -225,6 +225,8 @@ public final class AuthService {
   public private(set) var requireDisplayName = true
   /// Whether email sign-in offers sign-up and ``createUser(email:password:displayName:)`` may
   /// create accounts. Set with ``withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)``.
+  /// Email-link sign-in still creates an account for a new address, as it did in the UIKit
+  /// library.
   public private(set) var allowNewEmailAccounts = true
   public var emailLinkSignInEnabled = false
   public var legacySignInRecovery: LegacySignInRecoveryContext?
@@ -566,7 +568,6 @@ public extension AuthService {
       } else {
         result = try await auth.createUser(withEmail: email, password: password)
       }
-      updateAuthenticationState()
     } catch {
       // Possible conflicts from auth.createUser():
       // - emailAlreadyInUse: email is already registered with another account
@@ -574,8 +575,11 @@ public extension AuthService {
       try handleErrorWithConflictCheck(error: error, credential: credential)
     }
 
-    // The account exists and is signed in now, so a failure here is reported without
-    // signing out, as the UIKit library did.
+    // The account exists and is signed in now. Save the name before this method reports the
+    // sign-in; the auth listener may report it first, and `saveDisplayName` republishes
+    // `currentUser` so views reading the name update. A failure is reported without signing
+    // out, as the UIKit library did.
+    defer { updateAuthenticationState() }
     if let user = result?.user {
       try await saveDisplayName(displayName, to: user)
     }
