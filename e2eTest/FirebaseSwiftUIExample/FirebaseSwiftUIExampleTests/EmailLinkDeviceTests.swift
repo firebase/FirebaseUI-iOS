@@ -84,6 +84,39 @@ struct EmailLinkDeviceTests {
   }
 
   @Test
+  func linkFromAnotherSessionWaitsAndCanBeCancelled() async throws {
+    let service = try await makeService()
+    let email = createEmail()
+    try await service.sendEmailSignInLink(email: email)
+    let link = try await fetchEmailSignInLinkFromEmulator(email: email)
+
+    // This device sent a newer link since, so the stored email may not be this link's.
+    try await service.sendEmailSignInLink(email: createEmail())
+    service.emailLink = email
+    try await service.handleSignInLink(url: link)
+    #expect(service.pendingEmailLink == link)
+
+    service.cancelEmailLinkConfirmation()
+    #expect(service.pendingEmailLink == nil)
+  }
+
+  @Test
+  func signingOutForgetsPendingLink() async throws {
+    let service = try await makeService()
+    let email = createEmail()
+    try await service.sendEmailSignInLink(email: email)
+    let link = try await fetchEmailSignInLinkFromEmulator(email: email)
+    service.emailLink = nil
+    try await service.handleSignInLink(url: link)
+    #expect(service.pendingEmailLink == link)
+
+    try await service.signOut()
+
+    #expect(service.pendingEmailLink == nil)
+    #expect(service.incomingEmailLink == nil)
+  }
+
+  @Test
   func forcedSameDeviceRejectsLinkFromAnotherDevice() async throws {
     let service = try await makeService(forceSameDevice: true)
     let email = createEmail()
@@ -121,6 +154,24 @@ struct EmailLinkDeviceTests {
     service.presentEmailLinkScreen(for: url)
     #expect(service.incomingEmailLink == nil)
     #expect(service.navigator.routes == [.emailLink])
+  }
+
+  @Test
+  func openedLinkIsLeftToAppsOwnEmailLinkScreen() throws {
+    configureFirebaseIfNeeded()
+    let service = AuthService().withEmailLinkSignIn(onTap: {})
+    var link = try #require(URLComponents(string: "https://example.com/"))
+    link.queryItems = [URLQueryItem(
+      name: "link",
+      value: "https://flutterfire-e2e-tests.firebaseapp.com/__/auth/action?apiKey=key"
+        + "&mode=signIn&oobCode=code&continueUrl=https://example.com"
+    )]
+
+    let url = try #require(link.url)
+    service.presentEmailLinkScreen(for: url)
+
+    #expect(!service.isPresented)
+    #expect(service.incomingEmailLink == nil)
   }
 
   @Test

@@ -62,7 +62,10 @@ public struct AuthPickerContent<
       // another device or after a cold launch, opens that screen to finish signing in.
       .onOpenURL { authService.presentEmailLinkScreen(for: $0) }
       // Reopening the sheet starts from the first screen, not a half-finished pushed one.
-      .sheet(isPresented: $authService.isPresented, onDismiss: authService.navigator.clear) {
+      .sheet(isPresented: $authService.isPresented, onDismiss: {
+        authService.navigator.clear()
+        authService.clearEmailLinkHandoff()
+      }) {
         @Bindable var navigator = authService.navigator
         NavigationStack(path: $navigator.routes) {
           root
