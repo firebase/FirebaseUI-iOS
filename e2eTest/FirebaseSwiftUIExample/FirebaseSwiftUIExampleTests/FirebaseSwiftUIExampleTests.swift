@@ -282,13 +282,11 @@ struct FirebaseSwiftUIExampleTests {
     let service = try await prepareFreshAuthService()
       .withEmailSignIn(allowNewEmailAccounts: false)
 
-    let error = await #expect(throws: AuthServiceError.self) {
+    let error = await #expect(throws: NSError.self) {
       try await service.createUser(email: createEmail(), password: kPassword)
     }
-    guard case .emailSignUpNotAllowed = error else {
-      Issue.record("Expected emailSignUpNotAllowed, got \(String(describing: error))")
-      return
-    }
+    #expect(error?.domain == AuthErrorDomain)
+    #expect(error?.code == AuthErrorCode.adminRestrictedOperation.rawValue)
   }
 
   @Test

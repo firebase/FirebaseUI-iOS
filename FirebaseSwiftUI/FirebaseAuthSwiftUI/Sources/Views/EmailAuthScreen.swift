@@ -98,7 +98,7 @@ public struct EmailAuthContentState {
               goToPasswordRecovery: @escaping @MainActor () -> Void = {},
               goToEmailLink: @escaping @MainActor () -> Void = {},
               flow: AuthenticationFlow = .signIn,
-              requiresDisplayName: Bool = true,
+              requiresDisplayName: Bool = false,
               canSignUp: Bool = true,
               isValid: Bool = false,
               isLoading: Bool = false,
