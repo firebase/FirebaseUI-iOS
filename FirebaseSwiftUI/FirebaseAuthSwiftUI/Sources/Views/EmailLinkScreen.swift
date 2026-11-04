@@ -33,6 +33,10 @@ public struct EmailLinkContentState {
   /// ``isLoading`` is `false`.
   public let confirmEmail: @MainActor () -> Void
 
+  /// Drops the link waiting for confirmation, so ``needsEmailConfirmation`` turns `false` and
+  /// the user can send a new link.
+  public let cancelConfirmation: @MainActor () -> Void
+
   /// Whether a sign-in link was opened on a device that didn't request it, so the user must
   /// enter the email address it was sent to and call ``confirmEmail``. Turned off with
   /// ``AuthService/withEmailLinkSignIn(forceSameDevice:)``.
@@ -59,6 +63,7 @@ public struct EmailLinkContentState {
               sendSignInLink: @escaping @MainActor () -> Void = {},
               dismissAlert: @escaping @MainActor () -> Void = {},
               confirmEmail: @escaping @MainActor () -> Void = {},
+              cancelConfirmation: @escaping @MainActor () -> Void = {},
               needsEmailConfirmation: Bool = false,
               didSend: Bool = false,
               isValid: Bool = false,
@@ -68,6 +73,7 @@ public struct EmailLinkContentState {
     self.sendSignInLink = sendSignInLink
     self.dismissAlert = dismissAlert
     self.confirmEmail = confirmEmail
+    self.cancelConfirmation = cancelConfirmation
     self.needsEmailConfirmation = needsEmailConfirmation
     self.didSend = didSend
     self.isValid = isValid
@@ -125,6 +131,7 @@ public struct EmailLinkScreen<Content: View>: View {
       sendSignInLink: sendSignInLink,
       dismissAlert: { didSend = false },
       confirmEmail: confirmEmail,
+      cancelConfirmation: { authService.cancelEmailLinkConfirmation() },
       needsEmailConfirmation: authService.pendingEmailLink != nil,
       didSend: didSend,
       isValid: isValid,

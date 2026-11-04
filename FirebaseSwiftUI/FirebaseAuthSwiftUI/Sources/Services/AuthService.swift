@@ -201,6 +201,9 @@ public final class AuthService {
   private var currentMFAResolver: MultiFactorResolver?
   private var listenerManager: AuthListenerManager?
   private var emailLinkSignInCallback: (() -> Void)?
+  /// Whether the email-link button pushes the library's ``AuthView/emailLink`` screen rather
+  /// than running an app's own `onTap`.
+  private var emailLinkUsesLibraryScreen = false
   private var providers: [AuthProviderUI] = []
   private let emailLinkSignInMethod = "emailLink"
 
@@ -316,6 +319,7 @@ public final class AuthService {
     try auth.signOut()
     // Cannot wait for auth listener to change, feedback needs to be immediate
     currentUser = nil
+    clearEmailLinkHandoff()
     // Clear email link sign-in flag
     isEmailLinkSignIn = false
     // Clear email link reauth state
@@ -587,9 +591,11 @@ public extension AuthService {
   ///   When `false`, a link opened on another device asks the user to confirm their email
   ///   first. Defaults to `false`.
   func withEmailLinkSignIn(forceSameDevice: Bool = false) -> AuthService {
-    return withEmailLinkSignIn(forceSameDevice: forceSameDevice) { [weak self] in
+    _ = withEmailLinkSignIn(forceSameDevice: forceSameDevice) { [weak self] in
       self?.navigator.push(.emailLink)
     }
+    emailLinkUsesLibraryScreen = true
+    return self
   }
 
   /// Enables email-link sign-in with a custom action for its button.
@@ -603,6 +609,7 @@ public extension AuthService {
     emailLinkSignInEnabled = true
     emailLinkForceSameDevice = forceSameDevice
     emailLinkSignInCallback = onTap
+    emailLinkUsesLibraryScreen = false
     return self
   }
 
@@ -651,9 +658,10 @@ public extension AuthService {
     }
     let parameter = { CommonUtils.getQueryParamValue(from: continueURL, paramName: $0) }
 
-    // Links sent before `ui_sid` existed count as this device's when an email is stored.
+    // A link without `ui_sid`, sent before it existed, counts as this device's only when this
+    // device hasn't sent a link since.
     let linkSessionID = parameter("ui_sid")
-    guard let email = emailLink, linkSessionID == nil || linkSessionID == emailLinkSessionID else {
+    guard let email = emailLink, linkSessionID == emailLinkSessionID else {
       if parameter("ui_sd") == "1" {
         throw AuthServiceError.invalidEmailLink(string.emailLinkDifferentDeviceMessage)
       }
@@ -671,13 +679,36 @@ public extension AuthService {
       throw AuthServiceError.invalidEmailLink("No sign-in link is waiting for confirmation")
     }
     let link = try Self.emailSignInLink(from: url)
-    try await signInWithEmailLink(email: email, link: link, anonymousUserID: nil)
+    do {
+      try await signInWithEmailLink(email: email, link: link, anonymousUserID: nil)
+    } catch {
+      // A used or expired link can't succeed with any email, so stop asking for one.
+      let code = AuthErrorCode(rawValue: (error as NSError).code)
+      if code == .invalidActionCode || code == .expiredActionCode {
+        pendingEmailLink = nil
+      }
+      throw error
+    }
+  }
+
+  /// Drops ``pendingEmailLink`` so the email-link screen offers to send a new link instead of
+  /// asking to confirm the email.
+  func cancelEmailLinkConfirmation() {
+    pendingEmailLink = nil
+  }
+
+  /// Forgets links waiting for the email-link screen, when the sheet closes or the user signs
+  /// out.
+  internal func clearEmailLinkHandoff() {
+    pendingEmailLink = nil
+    incomingEmailLink = nil
   }
 
   /// Hands a sign-in link the app opened to ``EmailLinkScreen``, presenting the sheet and pushing
-  /// ``AuthView/emailLink`` when that screen isn't already showing to handle it itself.
+  /// ``AuthView/emailLink`` when that screen isn't already showing to handle it itself. An app
+  /// that shows its own screen through `withEmailLinkSignIn(onTap:)` handles links there.
   internal func presentEmailLinkScreen(for url: URL) {
-    guard emailLinkSignInEnabled, !isReauthenticating,
+    guard emailLinkSignInEnabled, emailLinkUsesLibraryScreen, !isReauthenticating,
           authenticationState != .authenticated,
           !(isPresented && authView == .emailLink),
           let link = try? Self.emailSignInLink(from: url),

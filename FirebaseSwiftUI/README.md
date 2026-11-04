@@ -1288,6 +1288,8 @@ public func confirmEmailLinkSignIn(email: String) async throws
 
 Signs in with `pendingEmailLink`, a link opened on another device, once the user confirms the email address it was sent to.
 
+A used or expired link clears `pendingEmailLink`. Call `cancelEmailLinkConfirmation()` to drop it yourself, for example when the user wants a new link; signing out or closing the sheet also drops it. An app that shows its own email-link screen through `withEmailLinkSignIn(onTap:)` handles opened links on that screen.
+
 ---
 
 #### Phone Authentication
