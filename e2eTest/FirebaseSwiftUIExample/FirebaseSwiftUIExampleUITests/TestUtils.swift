@@ -13,7 +13,8 @@ func createEmail() -> String {
 
 /// Creates and configures an XCUIApplication with default test launch arguments
 @MainActor func createTestApp(mfaEnabled: Bool = false,
-                              legacyFetchSignInEnabled: Bool = false) -> XCUIApplication {
+                              legacyFetchSignInEnabled: Bool = false,
+                              requireDisplayName: Bool = false) -> XCUIApplication {
   let app = XCUIApplication()
   app.launchArguments.append("--test-view-enabled")
   if mfaEnabled {
@@ -21,6 +22,9 @@ func createEmail() -> String {
   }
   if legacyFetchSignInEnabled {
     app.launchArguments.append("--legacy-fetch-sign-in-enabled")
+  }
+  if requireDisplayName {
+    app.launchArguments.append("--require-display-name")
   }
   return app
 }

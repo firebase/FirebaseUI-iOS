@@ -224,6 +224,73 @@ struct FirebaseSwiftUIExampleTests {
 
   @Test
   @MainActor
+  func createEmailPasswordUserSavesDisplayName() async throws {
+    let service = try await prepareFreshAuthService().withEmailSignIn()
+
+    try await service.createUser(
+      email: createEmail(),
+      password: kPassword,
+      displayName: "  Ada Lovelace "
+    )
+
+    try await waitForStateChange {
+      service.currentUser?.displayName == "Ada Lovelace"
+    }
+    #expect(service.auth.currentUser?.displayName == "Ada Lovelace")
+  }
+
+  @Test
+  @MainActor
+  func upgradingAnonymousUserSavesDisplayName() async throws {
+    let service = try await prepareFreshAuthService(
+      configuration: AuthConfiguration(shouldAutoUpgradeAnonymousUsers: true)
+    ).withEmailSignIn()
+    let anonymousUser = try await service.auth.signInAnonymously().user
+    try await waitForStateChange {
+      service.currentUser?.isAnonymous == true
+    }
+
+    try await service.createUser(
+      email: createEmail(),
+      password: kPassword,
+      displayName: "Grace Hopper"
+    )
+
+    try await waitForStateChange {
+      service.currentUser?.displayName == "Grace Hopper"
+    }
+    #expect(service.currentUser?.uid == anonymousUser.uid)
+    #expect(service.currentUser?.isAnonymous == false)
+  }
+
+  @Test
+  @MainActor
+  func createEmailPasswordUserWithoutDisplayName() async throws {
+    let service = try await prepareFreshAuthService().withEmailSignIn()
+
+    try await service.createUser(email: createEmail(), password: kPassword, displayName: " ")
+
+    try await waitForStateChange {
+      service.currentUser != nil
+    }
+    #expect(service.currentUser?.displayName == nil)
+  }
+
+  @Test
+  @MainActor
+  func createUserRefusedWhenNewAccountsAreOff() async throws {
+    let service = try await prepareFreshAuthService()
+      .withEmailSignIn(allowNewEmailAccounts: false)
+
+    let error = await #expect(throws: NSError.self) {
+      try await service.createUser(email: createEmail(), password: kPassword)
+    }
+    #expect(error?.domain == AuthErrorDomain)
+    #expect(error?.code == AuthErrorCode.adminRestrictedOperation.rawValue)
+  }
+
+  @Test
+  @MainActor
   func signInUser() async throws {
     let service = try await prepareFreshAuthService()
     let email = createEmail()

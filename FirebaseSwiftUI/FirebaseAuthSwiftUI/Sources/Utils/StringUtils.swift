@@ -958,6 +958,20 @@ public class StringUtils {
     return localizedString(for: "Phone Number")
   }
 
+  /// Name field label
+  /// found in:
+  /// - DefaultEmailAuthContent
+  public var nameFieldLabel: String {
+    return localizedString(for: "Name")
+  }
+
+  /// Name input prompt
+  /// found in:
+  /// - DefaultEmailAuthContent
+  public var nameInputLabel: String {
+    return localizedString(for: "FirstAndLastName")
+  }
+
   /// Display Name field label
   /// found in:
   /// - MFAEnrolmentView

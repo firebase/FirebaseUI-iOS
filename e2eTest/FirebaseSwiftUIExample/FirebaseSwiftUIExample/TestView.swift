@@ -77,7 +77,7 @@ struct TestView: View {
         .withOAuthSignIn(OAuthProviderSwift.microsoft())
         .withOAuthSignIn(OAuthProviderSwift.yahoo())
         .withFacebookSignIn()
-        .withEmailSignIn()
+        .withEmailSignIn(requireDisplayName: args.contains("--require-display-name"))
         .withEmailLinkSignIn()
     }
     authService.isPresented = true
