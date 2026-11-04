@@ -58,6 +58,9 @@ public struct AuthPickerContent<
   public var body: some View {
     @Bindable var authService = authService
     content()
+      // A sign-in link opened while the email-link screen isn't showing, for example on
+      // another device or after a cold launch, opens that screen to finish signing in.
+      .onOpenURL { authService.presentEmailLinkScreen(for: $0) }
       // Reopening the sheet starts from the first screen, not a half-finished pushed one.
       .sheet(isPresented: $authService.isPresented, onDismiss: authService.navigator.clear) {
         @Bindable var navigator = authService.navigator
