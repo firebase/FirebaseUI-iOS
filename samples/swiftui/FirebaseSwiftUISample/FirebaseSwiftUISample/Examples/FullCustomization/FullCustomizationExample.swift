@@ -31,11 +31,11 @@ import SwiftUI
 /// - The theming modifiers restyle the stock screens left in the flow (update password, delete
 ///   confirmation) and the library components the demo reuses.
 ///
-/// The Figma themes share one layout and differ only in ``DemoTheme`` values. Professional also
-/// brings its own layout, the `Pro…` screens, through the same slots, and pushes a separate
-/// sign-up screen on the `.signUp` route.
+/// Doggo, Grid and Coffee Spark share one layout and differ only in ``DemoTheme`` values.
+/// Professional brings its own layout, the `Pro…` screens, through the same slots, and pushes a
+/// separate sign-up screen on the `.signUp` route.
 struct FullCustomizationExample: View {
-  /// Its own service, so it can turn on email-link sign-in (drawn in the Figma frames) without
+  /// Its own service, so it can turn on email-link sign-in (part of the themes' designs) without
   /// changing the other examples.
   /// Created when the example appears: `NavigationLink` builds its destination eagerly.
   @State private var authService: AuthService?
@@ -155,7 +155,7 @@ private struct ThemedDestination: View {
     if themeID == .professional {
       professional
     } else {
-      figma
+      sharedLayout
     }
   }
 
@@ -183,10 +183,10 @@ private struct ThemedDestination: View {
     }
   }
 
-  /// The Figma themes switch sign-in and sign-up in place on the first screen, so they never
-  /// push `.signUp`.
+  /// The shared-layout themes switch sign-in and sign-up in place on the first screen, so they
+  /// never push `.signUp`.
   @ViewBuilder
-  private var figma: some View {
+  private var sharedLayout: some View {
     switch screen {
     case .passwordRecovery:
       DemoPasswordRecovery()

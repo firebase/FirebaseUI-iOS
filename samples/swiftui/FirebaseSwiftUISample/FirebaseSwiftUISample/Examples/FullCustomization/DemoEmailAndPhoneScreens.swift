@@ -15,7 +15,7 @@
 import FirebaseAuthSwiftUI
 import SwiftUI
 
-// The Figma file has no frames for these screens; their copy and structure follow the
+// The original designs don't cover these screens; their copy and structure follow the
 // FirebaseUI-Android full customization demo, restyled with the theme's Landing values.
 
 struct DemoPasswordRecovery: View {

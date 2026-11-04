@@ -15,9 +15,8 @@
 import FirebaseAuthSwiftUI
 import SwiftUI
 
-/// The layout every demo screen shares, from the Figma "sign up" frame: a title, a form card and
-/// an optional footer, over the theme's background art. Accessibility identifiers use the Figma
-/// layer names.
+/// The layout every shared-layout screen uses: a title, a form card and an optional footer, over
+/// the theme's background art.
 struct DemoPage<Card: View, Footer: View>: View {
   /// `showsThemeMenu` is off for screens in their own sheet, such as reauthentication.
   init(title: String?,
@@ -96,7 +95,7 @@ struct DemoPage<Card: View, Footer: View>: View {
   }
 }
 
-/// Figma "headline" (20:5927), Coffee Spark only.
+/// The Coffee Spark headline.
 private struct SparkHeadline: View {
   var body: some View {
     HStack(spacing: 10) {
@@ -115,7 +114,7 @@ private struct SparkHeadline: View {
   }
 }
 
-/// Figma "inputs": a 16-point stack, drawn as a card with a hard offset shadow in Doggo.
+/// The form card: a 16-point stack, drawn as a card with a hard offset shadow in Doggo.
 private struct DemoCard<Content: View>: View {
   let theme: DemoTheme
   let content: () -> Content
@@ -143,14 +142,14 @@ private struct DemoCard<Content: View>: View {
 
 extension View {
   /// The width every demo screen's content takes: inset 32 points from the sheet's edges, and
-  /// no wider than 480 points so it doesn't stretch on iPad. Narrower than the Figma frames'
+  /// no wider than 480 points so it doesn't stretch on iPad. Narrower than the designs'
   /// 49-point inset, which left too little room on phones.
   func demoContentWidth() -> some View {
     frame(maxWidth: 480)
       .padding(.horizontal, 32)
   }
 
-  /// A Figma drop shadow with zero blur: an offset copy of the shape drawn behind the view.
+  /// A drop shadow with zero blur: an offset copy of the shape drawn behind the view.
   @ViewBuilder
   func hardShadow(_ shadow: DemoTheme.Shadow?, shape: some Shape) -> some View {
     if let shadow {
@@ -170,8 +169,8 @@ extension View {
   }
 }
 
-/// Figma "text-field": 56 points tall with a 48-point leading icon slot. `icon` is an SF Symbol
-/// standing in for the Material Symbols glyph named in Figma.
+/// A text field 56 points tall with a 48-point leading icon slot. `icon` is an SF Symbol
+/// standing in for the design's Material Symbols glyph.
 struct DemoTextField: View {
   var icon: String?
   let placeholder: String
@@ -236,7 +235,7 @@ struct DemoTextField: View {
   }
 }
 
-/// Figma "button": 64 points tall and as wide as the form.
+/// A button 64 points tall and as wide as the form.
 struct DemoButton: View {
   enum Kind {
     case primary
@@ -284,7 +283,7 @@ struct DemoButton: View {
   }
 }
 
-/// Figma "Forgot password?": a text link in the theme's link style.
+/// A text link in the theme's link style.
 struct DemoLink: View {
   let title: String
   var alignment: Alignment = .trailing
@@ -319,7 +318,7 @@ struct DemoLink: View {
   }
 }
 
-/// Supporting copy on the screens Figma doesn't cover, in the "Other sign in methods" style.
+/// Supporting copy on the screens the designs don't cover, in the "Other sign in methods" style.
 struct DemoBodyText: View {
   let text: String
 

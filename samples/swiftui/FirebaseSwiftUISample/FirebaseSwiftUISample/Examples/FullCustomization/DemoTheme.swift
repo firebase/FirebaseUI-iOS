@@ -15,10 +15,10 @@
 import FirebaseAuthSwiftUI
 import SwiftUI
 
-/// The looks of the full customization demo. Doggo, Grid and Coffee Spark come from the iOS
-/// Landing frames in the "Firebase auth flows" Figma file (17:12933, 20:5467 and 20:5769), and
-/// screens the frames don't cover reuse their values. Professional has no Figma frame: its values
-/// are a written spec in ``DemoTheme/professional``.
+/// The looks of the full customization demo. Doggo, Grid and Coffee Spark share one layout and
+/// come from their iOS Landing designs; screens the designs don't cover reuse their values.
+/// Professional has its own layout, and its values are a written spec in
+/// ``DemoTheme/professional``.
 enum DemoThemeID: String, CaseIterable, Identifiable {
   case doggo
   case grid
@@ -95,7 +95,7 @@ struct DemoTheme {
   let libraryFontFamily: String?
   let pageBackground: Color
 
-  /// The "title" text above the form. Coffee Spark hides it in Figma and shows ``headline``.
+  /// The "title" text above the form. Coffee Spark hides it and shows ``headline``.
   let title: TextToken
   let showsTitle: Bool
   /// Space between the title and the form: the "sign up" frame's title-to-inputs offset.
@@ -148,7 +148,7 @@ struct DemoTheme {
 }
 
 extension DemoTheme {
-  /// Figma 17:12933 "Landing".
+  /// Doggo: pastel background art and offset-shadow cards.
   static let doggo = DemoTheme(
     id: .doggo,
     libraryFontFamily: "Onest",
@@ -198,7 +198,7 @@ extension DemoTheme {
     footerAccent: TextToken(fontName: "Onest-Bold", size: 14, color: Color(demoHex: 0x894680))
   )
 
-  /// Figma 20:5467 "iOS Landing" with the grid background.
+  /// Grid: the grid background.
   static let grid = DemoTheme(
     id: .grid,
     libraryFontFamily: "Chivo Mono",
@@ -248,13 +248,13 @@ extension DemoTheme {
     )
   )
 
-  /// Figma 20:5769 "iOS Landing" with the Coffee Spark headline.
+  /// Coffee Spark: the Coffee Spark headline.
   static let spark = DemoTheme(
     id: .spark,
     libraryFontFamily: "JetBrains Mono",
     pageBackground: Color(demoHex: 0xF1F1F1),
     // The frame's "title" text is hidden; this size is the Doggo and Grid title's, used on the
-    // screens Figma doesn't cover.
+    // screens the design doesn't cover.
     title: TextToken(fontName: "JetBrainsMono-Medium", size: 28, color: Color(demoHex: 0x1C1B1B)),
     showsTitle: false,
     titleSpacing: 12,
@@ -302,7 +302,7 @@ extension DemoTheme {
 }
 
 extension DemoTheme {
-  /// Not from Figma: a quiet, platform-native look written as a spec. The system font, neutral
+  /// Not from a design: a quiet, platform-native look written as a spec. The system font, neutral
   /// greys with one blue accent, 10-point corners, hairline borders instead of offset shadows,
   /// no background art, and light and dark variants.
   static let professional: DemoTheme = {
@@ -390,7 +390,7 @@ extension DemoTheme {
 
 // MARK: - Background art
 
-/// The background layers of each frame, placed at their Figma offsets from the frame's top-left
+/// The background layers of each design, placed at their offsets from the design's top-left
 /// corner: "bg" and "pattern" in Doggo, "Frame 5" in Grid and "avatar spark" in Coffee Spark.
 struct DemoThemeBackground: View {
   let theme: DemoTheme
@@ -434,7 +434,7 @@ struct DemoThemeBackground: View {
   }
 }
 
-/// Figma "bg" (17:12934): a radial gradient whose ellipse is given by three handle points in the
+/// Doggo's background: a radial gradient whose ellipse is given by three handle points in the
 /// layer's unit square, drawn by mapping a unit circle onto that ellipse.
 private struct DoggoGradient: View {
   var body: some View {

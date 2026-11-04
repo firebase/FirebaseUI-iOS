@@ -18,7 +18,7 @@ import SwiftUI
 // The reauthentication prompts, given to `.reauthContent`. The library still presents them as
 // sheets when a sensitive action (deleting the account, changing the password, managing
 // two-factor) needs a recent sign-in, and still verifies the user and reports errors. Neither the
-// Figma file nor the Android demo draws them, so they reuse each theme's own screen pieces.
+// original designs nor the Android demo draw them, so they reuse each theme's own screen pieces.
 
 /// The reauthentication prompt for the selected theme.
 struct ThemedReauth: View {
@@ -35,7 +35,7 @@ struct ThemedReauth: View {
   }
 }
 
-/// The Figma themes' reauthentication prompt, in the shared layout.
+/// The shared-layout themes' reauthentication prompt.
 private struct DemoReauth: View {
   let prompt: ReauthPrompt
 

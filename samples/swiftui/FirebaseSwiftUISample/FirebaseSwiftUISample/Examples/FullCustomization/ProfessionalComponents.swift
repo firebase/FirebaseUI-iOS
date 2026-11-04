@@ -16,8 +16,8 @@ import FirebaseAuthSwiftUI
 import SwiftUI
 
 // The Professional theme's own layout: flat, left-aligned pages with labelled fields and grouped
-// rows, instead of the shared layout the Figma themes use. It has no Figma frame; the values
-// match the "Professional sign-in layout" mockups and ``DemoTheme/professional``.
+// rows, instead of the layout the other themes share. Its values match
+// ``DemoTheme/professional``.
 
 /// Professional colours, each with a light and a dark variant.
 enum ProPalette {

@@ -16,9 +16,9 @@ import FirebaseAuthSwiftUI
 import FirebaseOAuthSwiftUI
 import SwiftUI
 
-/// The whole signed-out first screen, from the Figma Landing frames. `EmailAuthScreen` drives the
-/// email form, and the provider buttons start sign-in through `AuthMethodPickerState`, so MFA,
-/// account conflicts and errors are routed the same as with the stock screen.
+/// The whole signed-out first screen, from the themes' Landing designs. `EmailAuthScreen` drives
+/// the email form, and the provider buttons start sign-in through `AuthMethodPickerState`, so
+/// MFA, account conflicts and errors are routed the same as with the stock screen.
 struct DemoLanding: View {
   let pickerState: AuthMethodPickerState
 
@@ -97,8 +97,8 @@ struct DemoLanding: View {
   }
 }
 
-/// Figma "Content": the other sign-in methods, the flow switch and the terms. Google and phone
-/// get the buttons drawn in Figma; any other registered provider is listed in a sheet.
+/// The other sign-in methods, the flow switch and the terms. Google and phone get the buttons
+/// from the design; any other registered provider is listed in a sheet.
 private struct DemoOtherSignInMethods: View {
   let pickerState: AuthMethodPickerState
   let flow: AuthenticationFlow
@@ -124,7 +124,7 @@ private struct DemoOtherSignInMethods: View {
   var body: some View {
     let theme = themeID.theme
     VStack(spacing: 0) {
-      // Not where Figma has it: the sign-in / sign-up switch belongs to the email form, so it
+      // Not where the design has it: the sign-in / sign-up switch belongs to the email form, so it
       // sits right below the form, above the other sign-in methods.
       Button(action: switchFlow) {
         flowSwitchText(theme)
@@ -135,7 +135,7 @@ private struct DemoOtherSignInMethods: View {
       .accessibilityIdentifier("login")
 
       VStack(spacing: 12) {
-        // Like the Figma text layer, the label spans the frame's padding so it doesn't wrap.
+        // As in the design, the label spans the frame's padding so it doesn't wrap.
         Text("Other sign in methods")
           .demoText(theme.otherLabel)
           .lineLimit(1)
@@ -171,7 +171,7 @@ private struct DemoOtherSignInMethods: View {
           }
         }
         if !otherProviders.isEmpty {
-          // Not in Figma: the remaining providers, behind a pill styled like Google's.
+          // Not in the design: the remaining providers, behind a pill styled like Google's.
           DemoProviderButton(
             title: "More sign-in options",
             fill: theme.pillFill,
@@ -252,7 +252,7 @@ private struct DemoOtherSignInMethods: View {
   }
 }
 
-/// Figma "android_light_rd_SI": a 52-point pill with a 20-point icon and a label.
+/// A 52-point pill with a 20-point icon and a label.
 private struct DemoProviderButton<Icon: View>: View {
   let title: String
   let fill: Color
@@ -290,7 +290,7 @@ private struct DemoProviderButton<Icon: View>: View {
   }
 }
 
-/// The registered providers the Figma frames don't draw, as the library's own brand buttons.
+/// The registered providers the designs don't draw, as the library's own brand buttons.
 /// `AuthProviderButton` takes the demo's action, so sign-in still goes through
 /// `AuthMethodPickerState.select` once the sheet has closed.
 struct DemoOtherProvidersSheet: View {
