@@ -244,6 +244,7 @@ When email link sign-in is configured:
 - Handles deep link navigation from email
 - Manages the complete email verification flow
 - Supports anonymous user upgrades via email link
+- Asks for the email address when a link is opened on another device, unless `withEmailLinkSignIn(forceSameDevice: true)` limits links to the device that requested them
 
 #### 5. **Anonymous User Auto-Upgrade**
 
@@ -1274,6 +1275,20 @@ Handles the email link flow when the user taps the link. Automatically routes to
 **Throws:** `AuthServiceError` or Firebase Auth errors
 
 **Note:** This method handles both initial sign-in and reauthentication flows automatically. The behavior is determined by whether `sendEmailSignInLink(email:isReauth:)` was called with `isReauth: true`.
+
+A link opened on a device that didn't request it throws `AuthServiceError.invalidEmailLink` as before, and also sets `pendingEmailLink` unless `withEmailLinkSignIn(forceSameDevice: true)` is set. Finish with `confirmEmailLinkSignIn(email:)`, passing the address the link was sent to. `AuthPickerView` handles links itself, opening the email-link screen when needed, and a link already being handled or already used is ignored, so your own `onOpenURL` handler can stay.
+
+---
+
+##### Confirm Email Link Sign-In
+
+```swift
+public func confirmEmailLinkSignIn(email: String) async throws
+```
+
+Signs in with `pendingEmailLink`, a link opened on another device, once the user confirms the email address it was sent to.
+
+A used or expired link clears `pendingEmailLink`. Call `cancelEmailLinkConfirmation()` to drop it yourself, for example when the user wants a new link; signing out or closing the sheet also drops it. An app that shows its own email-link screen through `withEmailLinkSignIn(onTap:)` handles opened links on that screen.
 
 ---
 

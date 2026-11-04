@@ -43,7 +43,7 @@ struct EmailContentStateDefaultsTests {
   func emailLinkContentState() {
     let state = EmailLinkContentState()
     #expect(state.email.wrappedValue.isEmpty)
-    #expect(!state.didSend)
+    #expect(!state.didSend && !state.needsEmailConfirmation)
     #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
   }
 

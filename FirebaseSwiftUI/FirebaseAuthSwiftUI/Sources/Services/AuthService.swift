@@ -193,12 +193,21 @@ public final class AuthService {
   @ObservationIgnored @AppStorage("is-email-link") private var isEmailLinkSignIn: Bool = false
   // Storage for email link reauthentication (separate from sign-in)
   @ObservationIgnored @AppStorage("email-link-reauth") private var emailLinkReauth: String?
-  @ObservationIgnored @AppStorage("is-reauthenticating") private var isReauthenticating: Bool =
-    false
+  @ObservationIgnored @AppStorage("is-reauthenticating") private(set) var isReauthenticating:
+    Bool = false
+  /// Identifies the last sign-in link this device sent, written on the link as `ui_sid`.
+  @ObservationIgnored @AppStorage("email-link-session-id") private var emailLinkSessionID: String?
 
   private var currentMFAResolver: MultiFactorResolver?
   private var listenerManager: AuthListenerManager?
   private var emailLinkSignInCallback: (() -> Void)?
+  /// Whether the email-link button pushes the library's ``AuthView/emailLink`` screen rather
+  /// than running an app's own `onTap`.
+  private var emailLinkUsesLibraryScreen = false
+  /// The sign-in link being handled, and the last one that signed in, so a link delivered to
+  /// several `onOpenURL` handlers is only used once.
+  @ObservationIgnored private var emailLinkInFlight: URL?
+  @ObservationIgnored private var lastSignedInEmailLink: URL?
   private var providers: [AuthProviderUI] = []
   private let emailLinkSignInMethod = "emailLink"
 
@@ -219,6 +228,15 @@ public final class AuthService {
   /// library.
   public private(set) var allowNewEmailAccounts = true
   public var emailLinkSignInEnabled = false
+  /// Whether a sign-in link only works on the device that requested it. Set with
+  /// ``withEmailLinkSignIn(forceSameDevice:)``.
+  public private(set) var emailLinkForceSameDevice = false
+  /// A sign-in link opened on a device that didn't request it, waiting for
+  /// ``confirmEmailLinkSignIn(email:)``.
+  public private(set) var pendingEmailLink: URL?
+  /// A sign-in link the app opened while ``EmailLinkScreen`` wasn't showing, handed to it
+  /// when it appears.
+  var incomingEmailLink: URL?
   public var legacySignInRecovery: LegacySignInRecoveryContext?
   public var suggestedEmailAddress: String?
   public private(set) var navigator = Navigator()
@@ -305,6 +323,7 @@ public final class AuthService {
     try auth.signOut()
     // Cannot wait for auth listener to change, feedback needs to be immediate
     currentUser = nil
+    clearEmailLinkHandoff()
     // Clear email link sign-in flag
     isEmailLinkSignIn = false
     // Clear email link reauth state
@@ -570,17 +589,31 @@ public extension AuthService {
 // MARK: - Email Link Sign In
 
 public extension AuthService {
-  /// Enable email link sign-in with default behavior (navigates to email link view)
-  func withEmailLinkSignIn() -> AuthService {
-    return withEmailLinkSignIn { [weak self] in
+  /// Enables email-link sign-in. Its button pushes ``AuthView/emailLink``.
+  ///
+  /// - Parameter forceSameDevice: Whether a link only works on the device that requested it.
+  ///   When `false`, a link opened on another device asks the user to confirm their email
+  ///   first. Defaults to `false`.
+  func withEmailLinkSignIn(forceSameDevice: Bool = false) -> AuthService {
+    _ = withEmailLinkSignIn(forceSameDevice: forceSameDevice) { [weak self] in
       self?.navigator.push(.emailLink)
     }
+    emailLinkUsesLibraryScreen = true
+    return self
   }
 
-  /// Enable email link sign-in with custom callback
-  func withEmailLinkSignIn(onTap: @escaping () -> Void) -> AuthService {
+  /// Enables email-link sign-in with a custom action for its button.
+  ///
+  /// - Parameters:
+  ///   - forceSameDevice: Whether a link only works on the device that requested it. Defaults
+  ///     to `false`.
+  ///   - onTap: Runs when the email-link button is tapped.
+  func withEmailLinkSignIn(forceSameDevice: Bool = false,
+                           onTap: @escaping () -> Void) -> AuthService {
     emailLinkSignInEnabled = true
+    emailLinkForceSameDevice = forceSameDevice
     emailLinkSignInCallback = onTap
+    emailLinkUsesLibraryScreen = false
     return self
   }
 
@@ -589,7 +622,8 @@ public extension AuthService {
   ///   - email: Email address to send link to
   ///   - isReauth: Whether this is for reauthentication (default: false)
   func sendEmailSignInLink(email: String, isReauth: Bool = false) async throws {
-    let actionCodeSettings = try updateActionCodeSettings()
+    let sessionID = isReauth ? nil : String(Int.random(in: 0 ... 999_999_999))
+    let actionCodeSettings = try updateActionCodeSettings(sessionID: sessionID)
     try await auth.sendSignInLink(
       toEmail: email,
       actionCodeSettings: actionCodeSettings
@@ -599,99 +633,171 @@ public extension AuthService {
     if isReauth {
       emailLinkReauth = email
       isReauthenticating = true
+    } else {
+      emailLink = email
+      emailLinkSessionID = sessionID
+      pendingEmailLink = nil
     }
   }
 
+  /// Signs in with a sign-in link the app opened, or reauthenticates when
+  /// ``sendEmailSignInLink(email:isReauth:)`` sent it for reauthentication.
+  ///
+  /// A link opened on a device that didn't request it throws
+  /// ``AuthServiceError/invalidEmailLink(_:)`` as before, and also sets ``pendingEmailLink`` for
+  /// ``confirmEmailLinkSignIn(email:)`` unless ``withEmailLinkSignIn(forceSameDevice:)`` is
+  /// set. A link that is already being handled, or already signed in, is ignored.
   func handleSignInLink(url: URL) async throws {
+    if isReauthenticating {
+      try await handleEmailLinkReauthentication(url: url)
+      return
+    }
+
+    guard url != emailLinkInFlight, url != lastSignedInEmailLink else { return }
+    emailLinkInFlight = url
+    defer { emailLinkInFlight = nil }
+
+    let link = try Self.emailSignInLink(from: url)
+    guard auth.isSignIn(withEmailLink: link) else { return }
+
+    guard let continueURL = try Self.continueURL(from: url) else {
+      throw AuthServiceError
+        .invalidEmailLink("`continueUrl` parameter is missing from the email link URL")
+    }
+    let parameter = { CommonUtils.getQueryParamValue(from: continueURL, paramName: $0) }
+
+    // A link without `ui_sid`, sent before it existed, counts as this device's only when this
+    // device hasn't sent a link since.
+    let linkSessionID = parameter("ui_sid")
+    guard let email = emailLink, linkSessionID == emailLinkSessionID else {
+      if parameter("ui_sd") == "1" {
+        throw AuthServiceError.invalidEmailLink(string.emailLinkDifferentDeviceMessage)
+      }
+      pendingEmailLink = url
+      throw AuthServiceError
+        .invalidEmailLink("email address is missing from app storage. Is this the same device?")
+    }
+
+    try await signInWithEmailLink(email: email, link: link, anonymousUserID: parameter("ui_auid"))
+    lastSignedInEmailLink = url
+  }
+
+  /// Finishes signing in with ``pendingEmailLink`` once the user confirms the email address the
+  /// link was sent to. Never upgrades an anonymous user, since that user is on another device.
+  func confirmEmailLinkSignIn(email: String) async throws {
+    guard let url = pendingEmailLink else {
+      throw AuthServiceError.invalidEmailLink("No sign-in link is waiting for confirmation")
+    }
+    let link = try Self.emailSignInLink(from: url)
     do {
-      // Check which flow we're in based on the flag
-      let email: String
-      let isReauth = isReauthenticating
+      try await signInWithEmailLink(email: email, link: link, anonymousUserID: nil)
+      lastSignedInEmailLink = url
+    } catch {
+      // A used or expired link can't succeed with any email, so stop asking for one.
+      let code = AuthErrorCode(rawValue: (error as NSError).code)
+      if code == .invalidActionCode || code == .expiredActionCode {
+        pendingEmailLink = nil
+      }
+      throw error
+    }
+  }
 
-      if isReauth {
-        guard let reauthEmail = emailLinkReauth else {
-          throw AuthServiceError
-            .invalidEmailLink("Email address is missing for reauthentication")
-        }
-        email = reauthEmail
+  /// Drops ``pendingEmailLink`` so the email-link screen offers to send a new link instead of
+  /// asking to confirm the email.
+  func cancelEmailLinkConfirmation() {
+    pendingEmailLink = nil
+  }
+
+  /// Forgets links waiting for the email-link screen, when the sheet closes or the user signs
+  /// out.
+  internal func clearEmailLinkHandoff() {
+    pendingEmailLink = nil
+    incomingEmailLink = nil
+  }
+
+  /// Hands a sign-in link the app opened to ``EmailLinkScreen``, presenting the sheet and pushing
+  /// ``AuthView/emailLink`` when that screen isn't already showing to handle it itself. An app
+  /// that shows its own screen through `withEmailLinkSignIn(onTap:)` handles links there.
+  internal func presentEmailLinkScreen(for url: URL) {
+    guard emailLinkSignInEnabled, emailLinkUsesLibraryScreen, !isReauthenticating,
+          authenticationState != .authenticated,
+          !(isPresented && authView == .emailLink),
+          let link = try? Self.emailSignInLink(from: url),
+          auth.isSignIn(withEmailLink: link) else { return }
+
+    incomingEmailLink = url
+    isPresented = true
+    navigator.push(.emailLink)
+  }
+
+  private func signInWithEmailLink(email: String,
+                                   link: String,
+                                   anonymousUserID: String?) async throws {
+    let credential = EmailAuthProvider.credential(withEmail: email, link: link)
+    do {
+      if let anonymousUserID, shouldHandleAnonymousUpgrade,
+         anonymousUserID == currentUser?.uid {
+        _ = try await handleAutoUpgradeAnonymousUser(credentials: credential)
       } else {
-        guard let signInEmail = emailLink else {
-          throw AuthServiceError
-            .invalidEmailLink("email address is missing from app storage. Is this the same device?")
-        }
-        email = signInEmail
-      }
-
-      let urlString = url.absoluteString
-
-      guard let originalLink = CommonUtils.getQueryParamValue(from: urlString, paramName: "link")
-      else {
-        throw AuthServiceError
-          .invalidEmailLink("'link' parameter is missing from the email link URL")
-      }
-
-      guard let link = originalLink.removingPercentEncoding else {
-        throw AuthServiceError
-          .invalidEmailLink("Failed to decode Link URL")
-      }
-
-      if auth.isSignIn(withEmailLink: link) {
-        let credential = EmailAuthProvider.credential(withEmail: email, link: link)
-
-        if isReauth {
-          // Reauthentication flow
-          try await reauthenticate(with: credential)
-          // Clean up reauth state
-          emailLinkReauth = nil
-          isReauthenticating = false
-        } else {
-          // Sign-in flow
-          guard let continueUrl = CommonUtils.getQueryParamValue(
-            from: link,
-            paramName: "continueUrl"
-          )
-          else {
-            throw AuthServiceError
-              .invalidEmailLink("`continueUrl` parameter is missing from the email link URL")
-          }
-
-          let anonymousUserID = CommonUtils.getQueryParamValue(
-            from: continueUrl,
-            paramName: "ui_auid"
-          )
-          if shouldHandleAnonymousUpgrade, anonymousUserID == currentUser?.uid {
-            _ = try await handleAutoUpgradeAnonymousUser(credentials: credential)
-          } else {
-            _ = try await auth.signIn(withEmail: email, link: link)
-          }
-          updateAuthenticationState()
-          // Track that user signed in with email link
-          isEmailLinkSignIn = true
-          emailLink = nil
-        }
+        _ = try await auth.signIn(withEmail: email, link: link)
       }
     } catch {
-      // Determine which email to use for error handling
-      let email = isReauthenticating ? emailLinkReauth : emailLink
-      let link = url.absoluteString
-
-      guard let email = email else {
-        throw AuthServiceError
-          .invalidEmailLink("email address is missing from app storage")
-      }
-      let credential = EmailAuthProvider.credential(withEmail: email, link: link)
-
-      // Only handle conflicts for sign-in flow, not reauth
-      if !isReauthenticating {
-        // Possible conflicts from auth.signIn(withEmail:link:):
-        // - accountExistsWithDifferentCredential: account exists with different provider
-        // - credentialAlreadyInUse: credential is already linked to another account
-        try handleErrorWithConflictCheck(error: error, credential: credential)
-      } else {
-        // For reauth, just rethrow
-        throw error
-      }
+      // Possible conflicts from auth.signIn(withEmail:link:):
+      // - accountExistsWithDifferentCredential: account exists with different provider
+      // - credentialAlreadyInUse: credential is already linked to another account
+      try handleErrorWithConflictCheck(error: error, credential: credential)
     }
+    updateAuthenticationState()
+    // Track that user signed in with email link
+    isEmailLinkSignIn = true
+    emailLink = nil
+    emailLinkSessionID = nil
+    pendingEmailLink = nil
+  }
+
+  private func handleEmailLinkReauthentication(url: URL) async throws {
+    guard let email = emailLinkReauth else {
+      throw AuthServiceError.invalidEmailLink("Email address is missing for reauthentication")
+    }
+    let link = try Self.emailSignInLink(from: url)
+    guard auth.isSignIn(withEmailLink: link) else { return }
+
+    try await reauthenticate(with: EmailAuthProvider.credential(withEmail: email, link: link))
+    emailLinkReauth = nil
+    isReauthenticating = false
+  }
+
+  /// The continue URL of the sign-in link inside a URL the app opened. Read before
+  /// ``emailSignInLink(from:)`` decodes the link a second time, which would split the continue
+  /// URL's own query items off onto the link.
+  private static func continueURL(from url: URL) throws -> String? {
+    guard let originalLink = CommonUtils.getQueryParamValue(
+      from: url.absoluteString,
+      paramName: "link"
+    ) else {
+      throw AuthServiceError
+        .invalidEmailLink("'link' parameter is missing from the email link URL")
+    }
+    return CommonUtils.getQueryParamValue(from: originalLink, paramName: "continueUrl")
+      ?? CommonUtils.getQueryParamValue(
+        from: originalLink.removingPercentEncoding ?? originalLink,
+        paramName: "continueUrl"
+      )
+  }
+
+  /// The Firebase sign-in link inside the `link` query parameter of a URL the app opened.
+  private static func emailSignInLink(from url: URL) throws -> String {
+    guard let originalLink = CommonUtils.getQueryParamValue(
+      from: url.absoluteString,
+      paramName: "link"
+    ) else {
+      throw AuthServiceError
+        .invalidEmailLink("'link' parameter is missing from the email link URL")
+    }
+    guard let link = originalLink.removingPercentEncoding else {
+      throw AuthServiceError.invalidEmailLink("Failed to decode Link URL")
+    }
+    return link
   }
 }
 
@@ -1079,7 +1185,10 @@ private extension AuthService {
     return actionCodeSettings
   }
 
-  private func updateActionCodeSettings() throws -> ActionCodeSettings {
+  /// The continue-URL query items the library writes on email sign-in links.
+  static let emailLinkQueryItemNames: Set<String> = ["ui_auid", "ui_sid", "ui_sd"]
+
+  private func updateActionCodeSettings(sessionID: String?) throws -> ActionCodeSettings {
     let actionCodeSettings = try safeActionCodeSettings()
     guard var urlComponents = URLComponents(string: actionCodeSettings.url!.absoluteString) else {
       throw AuthServiceError
@@ -1088,7 +1197,11 @@ private extension AuthService {
         )
     }
 
-    var queryItems: [URLQueryItem] = []
+    // Keep the app's own query items. The configured settings object is reused for every
+    // link, so drop the items an earlier link added before adding this link's.
+    var queryItems = (urlComponents.queryItems ?? []).filter {
+      !Self.emailLinkQueryItemNames.contains($0.name)
+    }
 
     if shouldHandleAnonymousUpgrade {
       if let currentUser = currentUser {
@@ -1098,7 +1211,13 @@ private extension AuthService {
       }
     }
 
-    urlComponents.queryItems = queryItems
+    // Lets the device that opens the link tell whether it sent it, as the UIKit library did.
+    if let sessionID {
+      queryItems.append(URLQueryItem(name: "ui_sid", value: sessionID))
+      queryItems.append(URLQueryItem(name: "ui_sd", value: emailLinkForceSameDevice ? "1" : "0"))
+    }
+
+    urlComponents.queryItems = queryItems.isEmpty ? nil : queryItems
     if let finalURL = urlComponents.url {
       actionCodeSettings.url = finalURL
     }

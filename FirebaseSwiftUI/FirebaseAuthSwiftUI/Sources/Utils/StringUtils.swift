@@ -1072,9 +1072,31 @@ public class StringUtils {
     return String(format: localizedString(for: "Email: %@"), email)
   }
 
+  /// Confirm email title
+  /// found in:
+  /// - DefaultEmailLinkContent
+  public var confirmEmailTitle: String {
+    return localizedString(for: "ConfirmEmail")
+  }
+
+  /// Message asking to confirm the email address of a sign-in link opened on another device
+  /// found in:
+  /// - DefaultEmailLinkContent
+  public var confirmEmailLinkMessage: String {
+    return localizedString(for: "ConfirmEmailLinkMessage")
+  }
+
+  /// Error for a same-device sign-in link opened on another device
+  /// found in:
+  /// - AuthService
+  public var emailLinkDifferentDeviceMessage: String {
+    return localizedString(for: "EmailLinkDifferentDeviceMessage")
+  }
+
   /// Confirm button label
   /// found in:
   /// - EmailReauthView
+  /// - DefaultEmailLinkContent
   public var confirmButtonLabel: String {
     return localizedString(for: "Confirm")
   }
