@@ -210,6 +210,12 @@ public final class AuthService {
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .signIn
   public var emailPasswordSignInEnabled = false
+  /// Whether email sign-up asks for a name and saves it as the account's display name. Set
+  /// with ``withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)``.
+  public private(set) var requireDisplayName = true
+  /// Whether email sign-in offers sign-up and ``createUser(email:password:displayName:)`` may
+  /// create accounts. Set with ``withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)``.
+  public private(set) var allowNewEmailAccounts = true
   public var emailLinkSignInEnabled = false
   public var legacySignInRecovery: LegacySignInRecoveryContext?
   public var suggestedEmailAddress: String?
@@ -453,18 +459,41 @@ public extension AuthService {
       throw AuthServiceError.noCurrentUser
     }
 
+    try await saveDisplayName(name, to: user)
+  }
+
+  /// Saves a non-blank `name` as `user`'s display name, then republishes ``currentUser`` so
+  /// views reading the name see it.
+  internal func saveDisplayName(_ name: String?, to user: User) async throws {
+    guard let name = name?.trimmingCharacters(in: .whitespacesAndNewlines),
+          !name.isEmpty else { return }
+
     let changeRequest = user.createProfileChangeRequest()
     changeRequest.displayName = name
     try await changeRequest.commitChanges()
+    currentUser = auth.currentUser
   }
 }
 
 // MARK: - Email/Password Sign In
 
 public extension AuthService {
-  /// Enable email/password sign-in (EmailAuthView is shown directly in AuthPickerView)
-  func withEmailSignIn() -> AuthService {
+  /// Enables email and password sign-in, shown directly in `AuthPickerView`.
+  ///
+  /// - Parameters:
+  ///   - requireDisplayName: Whether sign-up asks for a name and saves it as the new account's
+  ///     display name. Defaults to `true`.
+  ///   - allowNewEmailAccounts: Whether users may create accounts. When `false`, the sign-up
+  ///     switch is hidden and ``createUser(email:password:displayName:)`` throws
+  ///     ``AuthServiceError/emailSignUpNotAllowed``. Defaults to `true`.
+  func withEmailSignIn(requireDisplayName: Bool = true,
+                       allowNewEmailAccounts: Bool = true) -> AuthService {
     emailPasswordSignInEnabled = true
+    self.requireDisplayName = requireDisplayName
+    self.allowNewEmailAccounts = allowNewEmailAccounts
+    if !allowNewEmailAccounts {
+      authenticationFlow = .signIn
+    }
     return self
   }
 
@@ -483,24 +512,44 @@ public extension AuthService {
     }
   }
 
-  func createUser(email: String, password: String) async throws -> SignInOutcome {
+  /// Creates an email and password account, or links the credential to the signed-in anonymous
+  /// user when anonymous upgrade is on, then saves `displayName` to the account's profile.
+  ///
+  /// - Parameters:
+  ///   - displayName: The name to save as the account's display name. Ignored when `nil` or
+  ///     blank.
+  /// - Throws: ``AuthServiceError/emailSignUpNotAllowed`` when
+  ///   ``withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)`` turned sign-up off.
+  func createUser(email: String,
+                  password: String,
+                  displayName: String? = nil) async throws -> SignInOutcome {
+    guard allowNewEmailAccounts else {
+      throw AuthServiceError.emailSignUpNotAllowed
+    }
     authenticationState = .authenticating
     let credential = EmailAuthProvider.credential(withEmail: email, password: password)
 
+    let result: AuthDataResult?
     do {
       if shouldHandleAnonymousUpgrade {
-        return try await handleAutoUpgradeAnonymousUser(credentials: credential)
+        result = try await currentUser?.link(with: credential)
       } else {
-        let result = try await auth.createUser(withEmail: email, password: password)
-        updateAuthenticationState()
-        return .signedIn(result)
+        result = try await auth.createUser(withEmail: email, password: password)
       }
+      updateAuthenticationState()
     } catch {
       // Possible conflicts from auth.createUser():
       // - emailAlreadyInUse: email is already registered with another account
       authenticationState = .unauthenticated
       try handleErrorWithConflictCheck(error: error, credential: credential)
     }
+
+    // The account exists and is signed in now, so a failure here is reported without
+    // signing out, as the UIKit library did.
+    if let user = result?.user {
+      try await saveDisplayName(displayName, to: user)
+    }
+    return .signedIn(result)
   }
 
   func sendPasswordRecoveryEmail(email: String) async throws {

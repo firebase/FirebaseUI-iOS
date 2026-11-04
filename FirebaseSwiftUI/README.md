@@ -895,13 +895,15 @@ Creates a new `AuthService` instance.
 ##### Email Authentication
 
 ```swift
-public func withEmailSignIn(onTap: @escaping () -> Void = {}) -> AuthService
+public func withEmailSignIn(requireDisplayName: Bool = true,
+                            allowNewEmailAccounts: Bool = true) -> AuthService
 ```
 
-Enables email authentication and will render email sign-in directly within the AuthPickerView (default Views), email link sign-in is rendered as a button. When calling `AuthService.renderButtons()`, email link sign-in button is rendered. `onTap` custom callback (i.e where to navigate when tapped) allows user to control what happens when tapped. Default behavior in AuthPickerView is to push the user to email link sign-in default View.
+Enables email and password authentication, rendered directly within the AuthPickerView (default Views).
 
 **Parameters:**
-- `onTap`: A callback that will be executed when the email button is tapped.
+- `requireDisplayName`: Whether sign-up asks for a name and saves it as the new account's display name. Defaults to `true`.
+- `allowNewEmailAccounts`: Whether users can create accounts. When `false`, the sign-up switch is hidden and `createUser(email:password:displayName:)` throws `AuthServiceError.emailSignUpNotAllowed`. Defaults to `true`.
 
 **Example:**
 
@@ -909,12 +911,10 @@ Enables email authentication and will render email sign-in directly within the A
 authService
   .withEmailSignIn()
 
-// or
+// or, for sign-in only with existing accounts
 
 authService
-  .withEmailSignIn() {
-    // navigate to email sign-in screen logic
-  }
+  .withEmailSignIn(allowNewEmailAccounts: false)
 ```
 
 ---
@@ -1178,18 +1178,21 @@ Signs in using email and password credentials.
 ##### Create User with Email/Password
 
 ```swift
-public func createUser(email: String, password: String) async throws -> SignInOutcome
+public func createUser(email: String,
+                       password: String,
+                       displayName: String? = nil) async throws -> SignInOutcome
 ```
 
-Creates a new user account with email and password.
+Creates a new user account with email and password, then saves `displayName` to its profile.
 
 **Parameters:**
 - `email`: New user's email address
 - `password`: New user's password
+- `displayName`: Name saved as the account's display name. Ignored when `nil` or blank
 
 **Returns:** `SignInOutcome`
 
-**Throws:** `AuthServiceError` or Firebase Auth errors
+**Throws:** `AuthServiceError.emailSignUpNotAllowed` when sign-up is turned off, another `AuthServiceError` or Firebase Auth errors
 
 ---
 

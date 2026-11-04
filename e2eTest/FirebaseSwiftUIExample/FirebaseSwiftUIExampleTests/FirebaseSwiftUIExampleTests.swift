@@ -224,6 +224,51 @@ struct FirebaseSwiftUIExampleTests {
 
   @Test
   @MainActor
+  func createEmailPasswordUserSavesDisplayName() async throws {
+    let service = try await prepareFreshAuthService().withEmailSignIn()
+
+    try await service.createUser(
+      email: createEmail(),
+      password: kPassword,
+      displayName: "  Ada Lovelace "
+    )
+
+    try await waitForStateChange {
+      service.currentUser?.displayName == "Ada Lovelace"
+    }
+    #expect(service.auth.currentUser?.displayName == "Ada Lovelace")
+  }
+
+  @Test
+  @MainActor
+  func createEmailPasswordUserWithoutDisplayName() async throws {
+    let service = try await prepareFreshAuthService().withEmailSignIn()
+
+    try await service.createUser(email: createEmail(), password: kPassword, displayName: " ")
+
+    try await waitForStateChange {
+      service.currentUser != nil
+    }
+    #expect(service.currentUser?.displayName == nil)
+  }
+
+  @Test
+  @MainActor
+  func createUserRefusedWhenNewAccountsAreOff() async throws {
+    let service = try await prepareFreshAuthService()
+      .withEmailSignIn(allowNewEmailAccounts: false)
+
+    let error = await #expect(throws: AuthServiceError.self) {
+      try await service.createUser(email: createEmail(), password: kPassword)
+    }
+    guard case .emailSignUpNotAllowed = error else {
+      Issue.record("Expected emailSignUpNotAllowed, got \(String(describing: error))")
+      return
+    }
+  }
+
+  @Test
+  @MainActor
   func signInUser() async throws {
     let service = try await prepareFreshAuthService()
     let email = createEmail()

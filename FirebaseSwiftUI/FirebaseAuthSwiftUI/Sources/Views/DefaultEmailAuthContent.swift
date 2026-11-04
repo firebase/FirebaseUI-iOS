@@ -17,6 +17,7 @@ import SwiftUI
 
 private enum FocusableField: Hashable {
   case email
+  case displayName
   case password
   case confirmPassword
 }
@@ -45,7 +46,7 @@ public struct DefaultEmailAuthContent: View {
         ],
         maintainsValidationMessage: state.flow == .signUp,
         onSubmit: { _ in
-          self.focus = .password
+          self.focus = showsDisplayName ? .displayName : .password
         },
         leading: {
           Image(systemName: "at")
@@ -53,6 +54,26 @@ public struct DefaultEmailAuthContent: View {
       )
       .focused($focus, equals: .email)
       .accessibilityIdentifier("email-field")
+      if showsDisplayName {
+        AuthTextField(
+          text: state.displayName,
+          label: authService.string.nameFieldLabel,
+          prompt: authService.string.nameInputLabel,
+          contentType: .name,
+          validations: [
+            FormValidators.notEmpty(label: authService.string.nameFieldLabel),
+          ],
+          maintainsValidationMessage: true,
+          onSubmit: { _ in
+            self.focus = .password
+          },
+          leading: {
+            Image(systemName: "person")
+          }
+        )
+        .focused($focus, equals: .displayName)
+        .accessibilityIdentifier("display-name-field")
+      }
       AuthTextField(
         text: state.password,
         label: authService.string.passwordFieldLabel,
@@ -137,6 +158,16 @@ public struct DefaultEmailAuthContent: View {
       .authCTAButtonStyle()
       .accessibilityIdentifier("sign-in-button")
     }
+    if state.canSignUp {
+      switchFlowButton
+    }
+  }
+
+  private var showsDisplayName: Bool {
+    state.flow == .signUp && state.requiresDisplayName
+  }
+
+  private var switchFlowButton: some View {
     Button(action: state.switchFlow) {
       HStack(spacing: 4) {
         Text(
