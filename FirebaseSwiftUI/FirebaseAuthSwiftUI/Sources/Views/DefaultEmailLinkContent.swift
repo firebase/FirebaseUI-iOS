@@ -27,9 +27,17 @@ public struct DefaultEmailLinkContent: View {
 
   public var body: some View {
     VStack(spacing: 24) {
+      if state.needsEmailConfirmation {
+        Text(authService.string.confirmEmailLinkMessage)
+          .authCustomFont(.body)
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .accessibilityIdentifier("email-link-confirm-message")
+      }
       AuthTextField(
         text: state.email,
-        label: authService.string.signInLinkEmailFieldLabel,
+        label: state.needsEmailConfirmation
+          ? authService.string.emailFieldLabel
+          : authService.string.signInLinkEmailFieldLabel,
         prompt: authService.string.emailInputLabel,
         keyboardType: .emailAddress,
         contentType: .emailAddress,
@@ -41,18 +49,33 @@ public struct DefaultEmailLinkContent: View {
         }
       )
       .accessibilityIdentifier("email-link-email-field")
-      Button(action: state.sendSignInLink) {
-        Text(authService.string.sendEmailLinkButtonLabel)
-          .padding(.vertical, 8)
-          .frame(maxWidth: .infinity)
+      Button {
+        if state.needsEmailConfirmation {
+          state.confirmEmail()
+        } else {
+          state.sendSignInLink()
+        }
+      } label: {
+        Text(
+          state.needsEmailConfirmation
+            ? authService.string.confirmButtonLabel
+            : authService.string.sendEmailLinkButtonLabel
+        )
+        .padding(.vertical, 8)
+        .frame(maxWidth: .infinity)
       }
       .authCTAButtonStyle()
+      .accessibilityIdentifier("email-link-send-button")
       .disabled(!state.isValid || state.isLoading)
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-    .navigationTitle(authService.string.signInWithEmailLinkViewTitle)
+    .navigationTitle(
+      state.needsEmailConfirmation
+        ? authService.string.confirmEmailTitle
+        : authService.string.signInWithEmailLinkViewTitle
+    )
     .safeAreaPadding()
     .alert(
       authService.string.signInWithEmailLinkViewTitle,
