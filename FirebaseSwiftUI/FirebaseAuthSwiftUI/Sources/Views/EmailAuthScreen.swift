@@ -67,7 +67,8 @@ public struct EmailAuthContentState {
   /// Whether new accounts may be created, set with
   /// ``AuthService/withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)``. When `false`,
   /// hide your sign-up controls: ``flow`` stays ``AuthenticationFlow/signIn`` and the sign-up
-  /// actions do nothing.
+  /// actions do nothing, including on a screen created with a fixed `.signUp` flow, so don't
+  /// push ``AuthView/signUp`` yourself while sign-up is off.
   public let canSignUp: Bool
 
   /// Whether the fields are valid for ``flow``: a valid email and a non-empty password to sign
