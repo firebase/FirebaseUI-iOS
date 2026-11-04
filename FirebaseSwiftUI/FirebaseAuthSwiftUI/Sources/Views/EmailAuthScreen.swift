@@ -28,22 +28,29 @@ public struct EmailAuthContentState {
   /// ``AuthenticationFlow/signUp``.
   public let confirmPassword: Binding<String>
 
+  /// The name to save as the new account's display name. Shown only when ``flow`` is
+  /// ``AuthenticationFlow/signUp`` and ``requiresDisplayName`` is `true`.
+  public let displayName: Binding<String>
+
   /// Signs in with ``email`` and ``password``, routing MFA and account conflicts to their
   /// handlers. Does nothing while ``isLoading`` is `true` or unless the email is valid and the
   /// password is non-empty, whatever ``flow`` is.
   public let signIn: @MainActor () -> Void
 
-  /// Creates an account with ``email`` and ``password``, routing MFA and account conflicts to
-  /// their handlers. Does nothing while ``isLoading`` is `true` or unless the email is valid, the
-  /// password has at least 6 characters and ``confirmPassword`` matches, whatever ``flow`` is.
+  /// Creates an account with ``email`` and ``password`` and saves ``displayName`` to its
+  /// profile, routing MFA and account conflicts to their handlers. Does nothing while
+  /// ``isLoading`` is `true`, when ``canSignUp`` is `false`, or unless the email is valid, the
+  /// password has at least 6 characters, ``confirmPassword`` matches and, when
+  /// ``requiresDisplayName`` is `true`, ``displayName`` isn't blank, whatever ``flow`` is.
   public let signUp: @MainActor () -> Void
 
   /// Toggles ``flow`` between sign-in and sign-up, with animation. On a screen with a fixed
   /// flow it navigates instead: sign-up goes to ``AuthView/signIn`` and sign-in pushes
-  /// ``AuthView/signUp``.
+  /// ``AuthView/signUp``. Does nothing on a sign-in form when ``canSignUp`` is `false`.
   public let switchFlow: @MainActor () -> Void
 
   /// Pushes ``AuthView/signUp``, for a sign-up screen of its own instead of toggling ``flow``.
+  /// Does nothing when ``canSignUp`` is `false`.
   public let goToSignUp: @MainActor () -> Void
 
   /// Pushes ``AuthView/passwordRecovery``.
@@ -58,9 +65,19 @@ public struct EmailAuthContentState {
   /// unless the screen was created with a fixed flow.
   public let flow: AuthenticationFlow
 
+  /// Whether sign-up needs a ``displayName``, set with
+  /// ``AuthService/withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)``.
+  public let requiresDisplayName: Bool
+
+  /// Whether new accounts may be created, set with
+  /// ``AuthService/withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)``. When `false`,
+  /// hide your sign-up controls: ``flow`` stays ``AuthenticationFlow/signIn`` and the sign-up
+  /// actions do nothing.
+  public let canSignUp: Bool
+
   /// Whether the fields are valid for ``flow``: a valid email and a non-empty password to sign
-  /// in; a valid email, a password of at least 6 characters and a matching ``confirmPassword``
-  /// to sign up.
+  /// in; a valid email, a password of at least 6 characters, a matching ``confirmPassword``
+  /// and, when ``requiresDisplayName`` is `true`, a non-blank ``displayName`` to sign up.
   public let isValid: Bool
 
   /// Whether a sign-in or sign-up is in flight, or the ``AuthService`` is signing in.
@@ -80,6 +97,7 @@ public struct EmailAuthContentState {
   public init(email: Binding<String> = .constant(""),
               password: Binding<String> = .constant(""),
               confirmPassword: Binding<String> = .constant(""),
+              displayName: Binding<String> = .constant(""),
               signIn: @escaping @MainActor () -> Void = {},
               signUp: @escaping @MainActor () -> Void = {},
               switchFlow: @escaping @MainActor () -> Void = {},
@@ -87,6 +105,8 @@ public struct EmailAuthContentState {
               goToPasswordRecovery: @escaping @MainActor () -> Void = {},
               selectEmailLink: @escaping @MainActor () -> Void = {},
               flow: AuthenticationFlow = .signIn,
+              requiresDisplayName: Bool = true,
+              canSignUp: Bool = true,
               isValid: Bool = false,
               isLoading: Bool = false,
               errorMessage: String? = nil,
@@ -94,6 +114,7 @@ public struct EmailAuthContentState {
     self.email = email
     self.password = password
     self.confirmPassword = confirmPassword
+    self.displayName = displayName
     self.signIn = signIn
     self.signUp = signUp
     self.switchFlow = switchFlow
@@ -101,6 +122,8 @@ public struct EmailAuthContentState {
     self.goToPasswordRecovery = goToPasswordRecovery
     self.selectEmailLink = selectEmailLink
     self.flow = flow
+    self.requiresDisplayName = requiresDisplayName
+    self.canSignUp = canSignUp
     self.isValid = isValid
     self.isLoading = isLoading
     self.errorMessage = errorMessage
@@ -165,6 +188,7 @@ public struct EmailAuthScreen<Content: View>: View {
   @State private var email = ""
   @State private var password = ""
   @State private var confirmPassword = ""
+  @State private var displayName = ""
   @State private var isWorking = false
   @State private var errorMessage: String?
   @State private var inlineFormRegistration = InlineEmailFormRegistration()
@@ -180,13 +204,16 @@ public struct EmailAuthScreen<Content: View>: View {
         email: $email,
         password: $password,
         confirmPassword: $confirmPassword,
+        displayName: $displayName,
         signIn: signIn,
         signUp: signUp,
         switchFlow: switchFlow,
-        goToSignUp: { authService.navigator.push(.signUp) },
+        goToSignUp: goToSignUp,
         goToPasswordRecovery: { authService.navigator.push(.passwordRecovery) },
         selectEmailLink: { authService.selectEmailLink() },
         flow: flow,
+        requiresDisplayName: requiresDisplayName,
+        canSignUp: canSignUp,
         isValid: isValid,
         isLoading: isLoading,
         errorMessage: errorMessage,
@@ -196,6 +223,7 @@ public struct EmailAuthScreen<Content: View>: View {
     .onChange(of: email) { errorMessage = nil }
     .onChange(of: password) { errorMessage = nil }
     .onChange(of: confirmPassword) { errorMessage = nil }
+    .onChange(of: displayName) { errorMessage = nil }
     .onChange(of: authService.authenticationFlow) { errorMessage = nil }
     .onAppear {
       if fixedFlow == nil {
@@ -213,7 +241,19 @@ public struct EmailAuthScreen<Content: View>: View {
   }
 
   private var flow: AuthenticationFlow {
-    fixedFlow ?? authService.authenticationFlow
+    canSignUp ? fixedFlow ?? authService.authenticationFlow : .signIn
+  }
+
+  private var canSignUp: Bool {
+    authService.allowNewEmailAccounts
+  }
+
+  private var requiresDisplayName: Bool {
+    authService.requireDisplayName
+  }
+
+  private var trimmedDisplayName: String {
+    displayName.trimmingCharacters(in: .whitespacesAndNewlines)
   }
 
   private var isValid: Bool {
@@ -227,14 +267,21 @@ public struct EmailAuthScreen<Content: View>: View {
   private var isSignUpValid: Bool {
     FormValidators.email.isValid(input: email) &&
       FormValidators.atLeast6Characters.isValid(input: password) &&
-      FormValidators.confirmPassword(password: password).isValid(input: confirmPassword)
+      FormValidators.confirmPassword(password: password).isValid(input: confirmPassword) &&
+      (!requiresDisplayName || !trimmedDisplayName.isEmpty)
   }
 
   private var isLoading: Bool {
     isWorking || authService.authenticationState == .authenticating
   }
 
+  private func goToSignUp() {
+    guard canSignUp else { return }
+    authService.navigator.push(.signUp)
+  }
+
   private func switchFlow() {
+    guard canSignUp else { return }
     switch fixedFlow {
     case .signUp:
       authService.navigator.switchSignUpToSignIn()
@@ -259,9 +306,10 @@ public struct EmailAuthScreen<Content: View>: View {
   }
 
   private func signUp() {
-    guard isSignUpValid else { return }
+    guard canSignUp, isSignUpValid else { return }
+    let displayName = requiresDisplayName ? trimmedDisplayName : nil
     submit { [email, password] in
-      try await authService.createUser(email: email, password: password)
+      try await authService.createUser(email: email, password: password, displayName: displayName)
     }
   }
 

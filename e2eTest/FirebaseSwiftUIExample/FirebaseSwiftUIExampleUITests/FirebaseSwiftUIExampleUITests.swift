@@ -249,6 +249,11 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
     XCTAssertTrue(emailField.waitForExistence(timeout: 2), "Email field should exist")
     try enterText(email, into: emailField, app: app)
 
+    // Sign-up asks for a name by default.
+    let displayNameField = app.textFields["display-name-field"]
+    XCTAssertTrue(displayNameField.exists, "Name field should exist")
+    try enterText("Ada Lovelace", into: displayNameField, app: app)
+
     let passwordField = app.secureTextFields["password-field"]
     XCTAssertTrue(passwordField.exists, "Password field should exist")
     try enterText(password, into: passwordField, app: app)
