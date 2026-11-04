@@ -190,6 +190,10 @@ public struct EmailLinkScreen<Content: View>: View {
           onConflict(ctx)
           return
         }
+        // The link was opened on another device; the content asks for the email instead.
+        if case AuthServiceError.invalidEmailLink = error, authService.pendingEmailLink != nil {
+          return
+        }
 
         errorMessage = authService.string.localizedErrorMessage(for: error)
         reportError?(error)

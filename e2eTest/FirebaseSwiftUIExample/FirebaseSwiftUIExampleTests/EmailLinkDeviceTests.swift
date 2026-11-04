@@ -71,7 +71,9 @@ struct EmailLinkDeviceTests {
 
     // Another device has no stored email for the link.
     service.emailLink = nil
-    try await service.handleSignInLink(url: link)
+    await #expect(throws: AuthServiceError.self) {
+      try await service.handleSignInLink(url: link)
+    }
     // Waits instead of signing in. Other tests share `Auth`, so its state isn't checked here.
     #expect(service.pendingEmailLink == link)
 
@@ -93,7 +95,10 @@ struct EmailLinkDeviceTests {
     // This device sent a newer link since, so the stored email may not be this link's.
     try await service.sendEmailSignInLink(email: createEmail())
     service.emailLink = email
-    try await service.handleSignInLink(url: link)
+    // Throws as before, and keeps the link for confirmation.
+    await #expect(throws: AuthServiceError.self) {
+      try await service.handleSignInLink(url: link)
+    }
     #expect(service.pendingEmailLink == link)
 
     service.cancelEmailLinkConfirmation()
@@ -107,13 +112,34 @@ struct EmailLinkDeviceTests {
     try await service.sendEmailSignInLink(email: email)
     let link = try await fetchEmailSignInLinkFromEmulator(email: email)
     service.emailLink = nil
-    try await service.handleSignInLink(url: link)
+    // Throws as before, and keeps the link for confirmation.
+    await #expect(throws: AuthServiceError.self) {
+      try await service.handleSignInLink(url: link)
+    }
     #expect(service.pendingEmailLink == link)
 
     try await service.signOut()
 
     #expect(service.pendingEmailLink == nil)
     #expect(service.incomingEmailLink == nil)
+  }
+
+  @Test
+  func linkIsOnlyUsedOnce() async throws {
+    let service = try await makeService()
+    let email = createEmail()
+    try await service.sendEmailSignInLink(email: email)
+    let link = try await fetchEmailSignInLinkFromEmulator(email: email)
+
+    // Both `AuthPickerView` and an app's own `onOpenURL` may pass the same link.
+    try await service.handleSignInLink(url: link)
+    try await service.handleSignInLink(url: link)
+
+    try await waitForStateChange {
+      service.currentUser?.email?.caseInsensitiveCompare(email) == .orderedSame
+    }
+    #expect(service.pendingEmailLink == nil)
+    try await service.signOut()
   }
 
   @Test

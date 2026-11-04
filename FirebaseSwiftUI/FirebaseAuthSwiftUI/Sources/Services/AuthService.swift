@@ -204,6 +204,10 @@ public final class AuthService {
   /// Whether the email-link button pushes the library's ``AuthView/emailLink`` screen rather
   /// than running an app's own `onTap`.
   private var emailLinkUsesLibraryScreen = false
+  /// The sign-in link being handled, and the last one that signed in, so a link delivered to
+  /// several `onOpenURL` handlers is only used once.
+  @ObservationIgnored private var emailLinkInFlight: URL?
+  @ObservationIgnored private var lastSignedInEmailLink: URL?
   private var providers: [AuthProviderUI] = []
   private let emailLinkSignInMethod = "emailLink"
 
@@ -639,15 +643,19 @@ public extension AuthService {
   /// Signs in with a sign-in link the app opened, or reauthenticates when
   /// ``sendEmailSignInLink(email:isReauth:)`` sent it for reauthentication.
   ///
-  /// A link opened on a device that didn't request it sets ``pendingEmailLink`` instead, for
-  /// ``confirmEmailLinkSignIn(email:)``. With
-  /// ``withEmailLinkSignIn(forceSameDevice:)`` set, it throws
-  /// ``AuthServiceError/invalidEmailLink(_:)``.
+  /// A link opened on a device that didn't request it throws
+  /// ``AuthServiceError/invalidEmailLink(_:)`` as before, and also sets ``pendingEmailLink`` for
+  /// ``confirmEmailLinkSignIn(email:)`` unless ``withEmailLinkSignIn(forceSameDevice:)`` is
+  /// set. A link that is already being handled, or already signed in, is ignored.
   func handleSignInLink(url: URL) async throws {
     if isReauthenticating {
       try await handleEmailLinkReauthentication(url: url)
       return
     }
+
+    guard url != emailLinkInFlight, url != lastSignedInEmailLink else { return }
+    emailLinkInFlight = url
+    defer { emailLinkInFlight = nil }
 
     let link = try Self.emailSignInLink(from: url)
     guard auth.isSignIn(withEmailLink: link) else { return }
@@ -666,10 +674,12 @@ public extension AuthService {
         throw AuthServiceError.invalidEmailLink(string.emailLinkDifferentDeviceMessage)
       }
       pendingEmailLink = url
-      return
+      throw AuthServiceError
+        .invalidEmailLink("email address is missing from app storage. Is this the same device?")
     }
 
     try await signInWithEmailLink(email: email, link: link, anonymousUserID: parameter("ui_auid"))
+    lastSignedInEmailLink = url
   }
 
   /// Finishes signing in with ``pendingEmailLink`` once the user confirms the email address the
@@ -681,6 +691,7 @@ public extension AuthService {
     let link = try Self.emailSignInLink(from: url)
     do {
       try await signInWithEmailLink(email: email, link: link, anonymousUserID: nil)
+      lastSignedInEmailLink = url
     } catch {
       // A used or expired link can't succeed with any email, so stop asking for one.
       let code = AuthErrorCode(rawValue: (error as NSError).code)
