@@ -65,10 +65,17 @@ public struct DefaultEmailLinkContent: View {
         .frame(maxWidth: .infinity)
       }
       .authCTAButtonStyle()
-      .accessibilityIdentifier("email-link-send-button")
+      .accessibilityIdentifier(
+        state.needsEmailConfirmation ? "email-link-confirm-button" : "email-link-send-button"
+      )
       .disabled(!state.isValid || state.isLoading)
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
+      if state.needsEmailConfirmation {
+        Button(authService.string.cancelButtonLabel, action: state.cancelConfirmation)
+          .disabled(state.isLoading)
+          .accessibilityIdentifier("email-link-cancel-confirmation-button")
+      }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .navigationTitle(
