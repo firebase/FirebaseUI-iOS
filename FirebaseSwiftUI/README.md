@@ -895,21 +895,26 @@ Creates a new `AuthService` instance.
 ##### Email Authentication
 
 ```swift
-public func withEmailSignIn(requireDisplayName: Bool = true,
+public func withEmailSignIn(requireDisplayName: Bool = false,
                             allowNewEmailAccounts: Bool = true) -> AuthService
 ```
 
 Enables email and password authentication, rendered directly within the AuthPickerView (default Views).
 
 **Parameters:**
-- `requireDisplayName`: Whether sign-up asks for a name and saves it as the new account's display name. Defaults to `true`.
-- `allowNewEmailAccounts`: Whether users can create accounts. When `false`, the sign-up switch is hidden and `createUser(email:password:displayName:)` throws `AuthServiceError.emailSignUpNotAllowed`. Defaults to `true`.
+- `requireDisplayName`: Whether sign-up asks for a name and saves it as the new account's display name. Defaults to `false`.
+- `allowNewEmailAccounts`: Whether users can create accounts. When `false`, the sign-up switch is hidden and `createUser(email:password:displayName:)` throws `AuthErrorCode.adminRestrictedOperation`, the error Firebase returns when a project turns sign-up off. Defaults to `true`.
 
 **Example:**
 
 ```swift
 authService
   .withEmailSignIn()
+
+// or, asking for a name at sign-up as FirebaseUI-iOS v15 did
+
+authService
+  .withEmailSignIn(requireDisplayName: true)
 
 // or, for sign-in only with existing accounts
 
@@ -1192,7 +1197,7 @@ Creates a new user account with email and password, then saves `displayName` to 
 
 **Returns:** `SignInOutcome`
 
-**Throws:** `AuthServiceError.emailSignUpNotAllowed` when sign-up is turned off, another `AuthServiceError` or Firebase Auth errors
+**Throws:** `AuthErrorCode.adminRestrictedOperation` when sign-up is turned off, `AuthServiceError` or Firebase Auth errors
 
 ---
 

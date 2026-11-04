@@ -174,10 +174,6 @@ public enum AuthServiceError: LocalizedError {
   case rootViewControllerNotFound(String)
   case providerAuthenticationFailed(String)
   case signInCancelled(String)
-  /// ``AuthService/createUser(email:password:displayName:)`` was called while
-  /// ``AuthService/withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)`` turned sign-up
-  /// off.
-  case emailSignUpNotAllowed
 
   public var errorDescription: String? {
     switch self {
@@ -209,8 +205,6 @@ public enum AuthServiceError: LocalizedError {
       return description
     case let .signInCancelled(description):
       return description
-    case .emailSignUpNotAllowed:
-      return "Creating new accounts with email is turned off."
     case let .accountConflict(context):
       return context.errorDescription
     case .legacySignInRecoveryPresented:

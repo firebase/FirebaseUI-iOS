@@ -222,7 +222,7 @@ public final class AuthService {
   public var emailPasswordSignInEnabled = false
   /// Whether email sign-up asks for a name and saves it as the account's display name. Set
   /// with ``withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)``.
-  public private(set) var requireDisplayName = true
+  public private(set) var requireDisplayName = false
   /// Whether email sign-in offers sign-up and ``createUser(email:password:displayName:)`` may
   /// create accounts. Set with ``withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)``.
   /// Email-link sign-in still creates an account for a new address, as it did in the UIKit
@@ -514,11 +514,13 @@ public extension AuthService {
   ///
   /// - Parameters:
   ///   - requireDisplayName: Whether sign-up asks for a name and saves it as the new account's
-  ///     display name. Defaults to `true`.
+  ///     display name. Defaults to `false`, so the stock form is unchanged unless you opt in;
+  ///     the UIKit library and FirebaseUI-Android default to `true`.
   ///   - allowNewEmailAccounts: Whether users may create accounts. When `false`, the sign-up
   ///     switch is hidden and ``createUser(email:password:displayName:)`` throws
-  ///     ``AuthServiceError/emailSignUpNotAllowed``. Defaults to `true`.
-  func withEmailSignIn(requireDisplayName: Bool = true,
+  ///     `AuthErrorCode.adminRestrictedOperation`, the error Firebase returns when a project
+  ///     turns sign-up off. Defaults to `true`.
+  func withEmailSignIn(requireDisplayName: Bool = false,
                        allowNewEmailAccounts: Bool = true) -> AuthService {
     emailPasswordSignInEnabled = true
     self.requireDisplayName = requireDisplayName
@@ -550,13 +552,17 @@ public extension AuthService {
   /// - Parameters:
   ///   - displayName: The name to save as the account's display name. Ignored when `nil` or
   ///     blank.
-  /// - Throws: ``AuthServiceError/emailSignUpNotAllowed`` when
+  /// - Throws: `AuthErrorCode.adminRestrictedOperation` when
   ///   ``withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)`` turned sign-up off.
   func createUser(email: String,
                   password: String,
                   displayName: String? = nil) async throws -> SignInOutcome {
     guard allowNewEmailAccounts else {
-      throw AuthServiceError.emailSignUpNotAllowed
+      throw NSError(
+        domain: AuthErrorDomain,
+        code: AuthErrorCode.adminRestrictedOperation.rawValue,
+        userInfo: [NSLocalizedDescriptionKey: "Creating new accounts with email is turned off."]
+      )
     }
     authenticationState = .authenticating
     let credential = EmailAuthProvider.credential(withEmail: email, password: password)
