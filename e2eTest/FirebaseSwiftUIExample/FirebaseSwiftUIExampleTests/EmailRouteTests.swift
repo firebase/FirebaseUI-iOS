@@ -38,6 +38,37 @@ struct EmailRouteTests {
   }
 
   @Test
+  func loginFromSignUpReturnsToSignInUnderIt() {
+    let navigator = Navigator()
+    navigator.push(.signIn)
+    navigator.push(.signUp)
+
+    navigator.switchSignUpToSignIn()
+
+    #expect(navigator.routes == [.signIn])
+  }
+
+  @Test
+  func loginFromDirectSignUpOpensSignInInItsPlace() {
+    let navigator = Navigator()
+    navigator.push(.signUp)
+
+    navigator.switchSignUpToSignIn()
+
+    #expect(navigator.routes == [.signIn])
+  }
+
+  @Test
+  func switchSignUpToSignInIgnoresOtherScreens() {
+    let navigator = Navigator()
+    navigator.push(.passwordRecovery)
+
+    navigator.switchSignUpToSignIn()
+
+    #expect(navigator.routes == [.passwordRecovery])
+  }
+
+  @Test
   func legacyEmailRecoveryReturnsToPushedSignIn() {
     let service = makeService()
     service.navigator.push(.signIn)

@@ -37,7 +37,8 @@ public struct EmailAuthContentState {
   public let signUp: @MainActor () -> Void
 
   /// Toggles ``flow`` between sign-in and sign-up, with animation. On a screen with a fixed
-  /// flow it navigates instead: sign-up pops back and sign-in pushes ``AuthView/signUp``.
+  /// flow it navigates instead: sign-up goes to ``AuthView/signIn`` and sign-in pushes
+  /// ``AuthView/signUp``.
   public let switchFlow: @MainActor () -> Void
 
   /// Pushes ``AuthView/signUp``, for a sign-up screen of its own instead of toggling ``flow``.
@@ -136,8 +137,8 @@ public struct EmailAuthScreen<Content: View>: View {
   /// Pass a `flow` to fix it and make ``EmailAuthContentState/switchFlow`` navigate instead:
   /// `.signIn` pushes ``AuthView/signUp``, so a first screen fixed to `.signIn` gives the stock
   /// "Sign up" link its own sign-up screen, as ``SignInView`` does for ``AuthView/signIn``. Use
-  /// `.signUp` only for an ``AuthView/signUp`` destination, where `switchFlow` pops back to the
-  /// screen that pushed it.
+  /// `.signUp` only for an ``AuthView/signUp`` destination, where `switchFlow` returns to the
+  /// sign-in screen under it, or opens one in its place when sign-up was pushed directly.
   public init(flow: AuthenticationFlow? = nil,
               @ViewBuilder content: @escaping (EmailAuthContentState) -> Content) {
     fixedFlow = flow
@@ -210,7 +211,7 @@ public struct EmailAuthScreen<Content: View>: View {
   private func switchFlow() {
     switch fixedFlow {
     case .signUp:
-      authService.navigator.pop()
+      authService.navigator.switchSignUpToSignIn()
       return
     case .signIn:
       authService.navigator.push(.signUp)

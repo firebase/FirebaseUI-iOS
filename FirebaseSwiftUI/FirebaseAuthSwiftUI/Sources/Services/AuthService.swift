@@ -171,6 +171,16 @@ public class Navigator {
   func removeEmailRoutes() {
     routes.removeAll { $0 == .signIn || $0 == .signUp }
   }
+
+  /// Leaves a pushed ``AuthView/signUp`` screen for sign-in: back to the sign-in screen under
+  /// it, or a sign-in screen in its place when sign-up was opened directly.
+  func switchSignUpToSignIn() {
+    guard routes.last == .signUp else { return }
+    routes.removeLast()
+    if routes.last != .signIn {
+      routes.append(.signIn)
+    }
+  }
 }
 
 @MainActor

@@ -97,7 +97,8 @@ struct AuthMethodPickerStateReader<Content: View>: View {
       isEmailLinkEnabled: authService.emailLinkSignInEnabled,
       selectEmailLink: authService.selectEmailLink,
       isEmailSignInEnabled: authService.emailPasswordSignInEnabled,
-      goToEmailSignIn: { authService.navigator.push(.signIn) }
+      goToEmailSignIn: { authService.navigator.push(.signIn) },
+      goToEmailSignUp: { authService.navigator.push(.signUp) }
     ))
   }
 
@@ -148,19 +149,26 @@ public struct AuthMethodPickerState {
   /// the email form.
   public let goToEmailSignIn: @MainActor () -> Void
 
+  /// Pushes ``AuthView/signUp``, an email and password sign-up screen of its own, for a first
+  /// screen with separate "Sign in" and "Create account" buttons. Its "Login" link opens sign-in
+  /// in its place.
+  public let goToEmailSignUp: @MainActor () -> Void
+
   /// Creates a state, for example to preview a custom layout with stub actions.
   public init(providers: [AuthProviderUI],
               select: @escaping @MainActor (AuthProviderUI) -> Void,
               isEmailLinkEnabled: Bool,
               selectEmailLink: @escaping @MainActor () -> Void,
               isEmailSignInEnabled: Bool = false,
-              goToEmailSignIn: @escaping @MainActor () -> Void = {}) {
+              goToEmailSignIn: @escaping @MainActor () -> Void = {},
+              goToEmailSignUp: @escaping @MainActor () -> Void = {}) {
     self.providers = providers
     self.select = select
     self.isEmailLinkEnabled = isEmailLinkEnabled
     self.selectEmailLink = selectEmailLink
     self.isEmailSignInEnabled = isEmailSignInEnabled
     self.goToEmailSignIn = goToEmailSignIn
+    self.goToEmailSignUp = goToEmailSignUp
   }
 
   /// Hands a provider sign-in result to the same handlers the default provider buttons use:
