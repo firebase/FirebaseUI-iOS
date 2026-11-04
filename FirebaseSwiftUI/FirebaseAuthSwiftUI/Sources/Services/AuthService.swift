@@ -1141,6 +1141,9 @@ private extension AuthService {
     return actionCodeSettings
   }
 
+  /// The continue-URL query items the library writes on email sign-in links.
+  static let emailLinkQueryItemNames: Set<String> = ["ui_auid", "ui_sid", "ui_sd"]
+
   private func updateActionCodeSettings() throws -> ActionCodeSettings {
     let actionCodeSettings = try safeActionCodeSettings()
     guard var urlComponents = URLComponents(string: actionCodeSettings.url!.absoluteString) else {
@@ -1150,7 +1153,11 @@ private extension AuthService {
         )
     }
 
-    var queryItems: [URLQueryItem] = []
+    // Keep the app's own query items. The configured settings object is reused for every
+    // link, so drop the items an earlier link added before adding this link's.
+    var queryItems = (urlComponents.queryItems ?? []).filter {
+      !Self.emailLinkQueryItemNames.contains($0.name)
+    }
 
     if shouldHandleAnonymousUpgrade {
       if let currentUser = currentUser {
@@ -1160,7 +1167,7 @@ private extension AuthService {
       }
     }
 
-    urlComponents.queryItems = queryItems
+    urlComponents.queryItems = queryItems.isEmpty ? nil : queryItems
     if let finalURL = urlComponents.url {
       actionCodeSettings.url = finalURL
     }
