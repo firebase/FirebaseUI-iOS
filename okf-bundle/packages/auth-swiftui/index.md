@@ -49,8 +49,11 @@ Three tiers, all additive: theming, layout, and per-screen content. `AuthService
 | Theming | `.authCTAButtonStyle(_:)`, `.authTextFieldStyle(_:)` and `.authTypography(_:)` set `AuthCTAButtonStyle`, `AuthTextFieldStyle` and `AuthTypography` in the environment; `.authFont(_:weight:)` applies the typography to consumer text. Stock markup uses the internal `.authCTAButtonStyle()` and package `.authCustomFont(_:weight:)` |
 | Layout | `AuthPickerView.pickerContent { }` / `pickerContent { state in }` and `.pickerDestination { screen in }`, returning `AuthPickerContent`, with stock `DefaultAuthPickerContent` and `DefaultAuthPickerDestination`; `DefaultAuthPickerContent(authMethodPicker:)` with `AuthMethodPickerState` lays out the provider buttons, with stock `DefaultAuthMethodPicker` |
 | Per-screen content | `EnterPhoneNumberScreen` + `PhoneNumberContentState` + `DefaultEnterPhoneNumberContent`; `EnterVerificationCodeScreen` + `VerificationCodeContentState` + `DefaultEnterVerificationCodeContent`; `MFAEnrolmentScreen` + `MFAEnrolmentContentState` + `DefaultMFAEnrolmentContent`; `MFAResolutionScreen` + `MFAResolutionContentState` + `DefaultMFAResolutionContent`; `MFAManagementScreen` + `MFAManagementContentState` + `DefaultMFAManagementContent` |
+| Reauthentication content | `.reauthContent { prompt in }` with `ReauthPrompt` (`.password`, `.phone`, `.emailLink`) and stock `DefaultReauthContent(prompt:)`; `EmailReauthScreen` + `EmailReauthContentState` + `DefaultEmailReauthContent`; `PhoneReauthScreen` + `PhoneReauthContentState` + `DefaultPhoneReauthContent`; `EmailLinkReauthScreen` + `EmailLinkReauthContentState` + `DefaultEmailLinkReauthContent` |
 
 Consumers reach a per-screen slot through `.pickerDestination`, matching the `AuthView` case and returning the screen with their content, or `DefaultAuthPickerDestination(screen:)` for every other case.
+
+Reauthentication prompts are sheets presented by the internal `ReauthenticationModifier`, not `AuthView` routes, so `.pickerDestination` cannot reach them. Consumers set `.reauthContent { prompt in }` on `AuthPickerView` or any ancestor; it travels through the environment to every `.withReauthentication(coordinator:)` host, and the closure switches on `ReauthPrompt` and returns `DefaultReauthContent(prompt:)` for prompts it keeps stock. The reauth screens follow the slot rules below. The confirmation alerts before the phone and email link sheets and the OAuth reauth alert stay stock.
 
 ### Per-screen content slot rules
 
@@ -67,7 +70,7 @@ Consumers reach a per-screen slot through `.pickerDestination`, matching the `Au
 * **Public step enums** (`MFAEnrolmentContentState.Step`) document that cases may be added, so consumers keep a `default` case.
 * **Spelling:** view-layer types use "Enrolment" (`MFAEnrolmentView`, `MFAEnrolmentScreen`, `MFAEnrolmentContentState`); service-layer API keeps "Enrollment" (`EnrollmentSession`, `startMfaEnrollment`, `AuthView.mfaEnrollment`).
 
-Not slotted: `LegacySignInRecoveryView` (its own sheet, outside `pickerDestination`) and the reauthentication views.
+Not slotted: `LegacySignInRecoveryView` (its own sheet, outside `pickerDestination`). The reauthentication sheets take content through `.reauthContent { prompt in ... }` instead of `pickerDestination`.
 
 ## Related
 
