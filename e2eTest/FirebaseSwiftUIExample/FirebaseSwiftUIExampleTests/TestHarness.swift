@@ -66,7 +66,8 @@ func createEmail() -> String {
 
 @MainActor
 func waitForStateChange(timeout: TimeInterval = 10.0,
-                        condition: @escaping () -> Bool) async throws {
+                        condition: @escaping () -> Bool,
+                        refresh: () async throws -> Void = {}) async throws {
   let startTime = Date()
 
   while !condition() {
@@ -75,6 +76,7 @@ func waitForStateChange(timeout: TimeInterval = 10.0,
     }
 
     try await Task.sleep(nanoseconds: 50_000_000) // 50ms
+    try await refresh()
   }
 }
 

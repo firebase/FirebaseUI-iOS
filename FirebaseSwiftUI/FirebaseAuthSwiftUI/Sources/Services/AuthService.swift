@@ -237,6 +237,8 @@ public final class AuthService {
   /// A sign-in link the app opened while ``EmailLinkScreen`` wasn't showing, handed to it
   /// when it appears.
   var incomingEmailLink: URL?
+  /// Whether ``EmailLinkReauthView`` is showing, so it handles reauthentication links itself.
+  @ObservationIgnored var isShowingEmailLinkReauth = false
   public var legacySignInRecovery: LegacySignInRecoveryContext?
   public var suggestedEmailAddress: String?
   public private(set) var navigator = Navigator()
@@ -648,12 +650,15 @@ public extension AuthService {
   /// ``confirmEmailLinkSignIn(email:)`` unless ``withEmailLinkSignIn(forceSameDevice:)`` is
   /// set. A link that is already being handled, or already signed in, is ignored.
   func handleSignInLink(url: URL) async throws {
+    guard url != emailLinkInFlight else { return }
     if isReauthenticating {
+      emailLinkInFlight = url
+      defer { emailLinkInFlight = nil }
       try await handleEmailLinkReauthentication(url: url)
       return
     }
 
-    guard url != emailLinkInFlight, url != lastSignedInEmailLink else { return }
+    guard url != lastSignedInEmailLink else { return }
     emailLinkInFlight = url
     defer { emailLinkInFlight = nil }
 
@@ -728,6 +733,14 @@ public extension AuthService {
     incomingEmailLink = url
     isPresented = true
     navigator.push(.emailLink)
+  }
+
+  /// Finishes email-link reauthentication with a link the app opened while
+  /// ``EmailLinkReauthView`` isn't showing, for example after a cold launch. Does nothing for
+  /// other links, or when that view is showing to handle the link itself.
+  internal func finishEmailLinkReauthentication(with url: URL) async throws {
+    guard isReauthenticating, !isShowingEmailLinkReauth, currentUser != nil else { return }
+    try await handleSignInLink(url: url)
   }
 
   private func signInWithEmailLink(email: String,

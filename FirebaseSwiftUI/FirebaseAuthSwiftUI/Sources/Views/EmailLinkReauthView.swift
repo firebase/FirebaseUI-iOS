@@ -53,6 +53,8 @@ public struct EmailLinkReauthView {
     Task { @MainActor in
       do {
         try await authService.handleSignInLink(url: url)
+        // A link already being handled returns at once; wait for that call to finish it.
+        guard !authService.isReauthenticating else { return }
         coordinator.reauthCompleted()
       } catch {
         if let reportError = reportError {
@@ -145,6 +147,9 @@ extension EmailLinkReauthView: View {
       .onOpenURL { url in
         handleReauthURL(url)
       }
+      // `AuthPickerContent` leaves reauthentication links to this view while it shows.
+      .onAppear { authService.isShowingEmailLinkReauth = true }
+      .onDisappear { authService.isShowingEmailLinkReauth = false }
       .task {
         await sendEmailLink()
       }
