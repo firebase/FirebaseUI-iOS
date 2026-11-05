@@ -53,6 +53,8 @@ public struct EmailLinkReauthView {
     Task { @MainActor in
       do {
         try await authService.handleSignInLink(url: url)
+        // A link already being handled returns at once; wait for that call to finish it.
+        guard !authService.isReauthenticating else { return }
         coordinator.reauthCompleted()
       } catch {
         if let reportError = reportError {
