@@ -250,6 +250,8 @@ public final class AuthService {
   /// A sign-in link the app opened while ``EmailLinkScreen`` wasn't showing, handed to it
   /// when it appears.
   var incomingEmailLink: URL?
+  /// Whether ``EmailLinkReauthScreen`` is showing, so it handles reauthentication links itself.
+  @ObservationIgnored var isShowingEmailLinkReauth = false
   public var legacySignInRecovery: LegacySignInRecoveryContext?
   public var suggestedEmailAddress: String?
   /// How many in-place email forms (an ``EmailAuthScreen`` without a fixed flow) exist on the
@@ -702,19 +704,20 @@ public extension AuthService {
   /// set. A link that is already being handled waits for that attempt and gets its outcome, and
   /// a link that already signed in is ignored until sign-out.
   func handleSignInLink(url: URL) async throws {
-    if isReauthenticating {
-      try await handleEmailLinkReauthentication(url: url)
-      return
-    }
-
-    // A second caller with the same link waits for the first and gets the same outcome.
+    // A second caller with the same link waits for the first and gets the same outcome,
+    // whether it signs in or reauthenticates.
     if let inFlight = emailLinkInFlight, inFlight.url == url {
       try await inFlight.task.value
       return
     }
-    guard url != lastSignedInEmailLink else { return }
 
-    let task = Task { try await self.signInWithOpenedLink(url: url) }
+    let task: Task<Void, Error>
+    if isReauthenticating {
+      task = Task { try await self.handleEmailLinkReauthentication(url: url) }
+    } else {
+      guard url != lastSignedInEmailLink else { return }
+      task = Task { try await self.signInWithOpenedLink(url: url) }
+    }
     emailLinkInFlight = (url, task)
     defer {
       if emailLinkInFlight?.url == url {
@@ -802,6 +805,14 @@ public extension AuthService {
     incomingEmailLink = url
     isPresented = true
     navigator.push(.emailLink)
+  }
+
+  /// Finishes email-link reauthentication with a link the app opened while
+  /// ``EmailLinkReauthView`` isn't showing, for example after a cold launch. Does nothing for
+  /// other links, or when that view is showing to handle the link itself.
+  internal func finishEmailLinkReauthentication(with url: URL) async throws {
+    guard isReauthenticating, !isShowingEmailLinkReauth, currentUser != nil else { return }
+    try await handleSignInLink(url: url)
   }
 
   private func signInWithEmailLink(email: String,

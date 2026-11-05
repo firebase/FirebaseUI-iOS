@@ -279,7 +279,7 @@ When a sensitive operation requires reauthentication, the default views automati
 
 - **Email/Password**: Present a sheet prompting the user to enter their password before continuing.
 
-- **Email Link**: Show an alert asking to send a verification email, then present a sheet with instructions to check email. The user taps the link in their email to complete reauthentication.
+- **Email Link**: Show an alert asking to send a verification email, then present a sheet with instructions to check email. The user taps the link in their email to complete reauthentication. `AuthPickerView` also completes it when the link opens the app after the sheet closed, for example after a cold launch.
 
 - **Phone**: Show an alert explaining verification is needed, then present a sheet for SMS code verification.
 
