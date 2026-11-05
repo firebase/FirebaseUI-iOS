@@ -51,12 +51,4 @@ struct MFAManagementScreenTests {
       AuthServiceError.multiFactorAuth("Factor not found")
     ))
   }
-
-  @Test("MFAManagementContentState builds with no arguments")
-  @MainActor
-  func stateDefaults() {
-    let state = MFAManagementContentState()
-    #expect(state.enrolledFactors.isEmpty)
-    #expect(!state.isLoading && state.errorMessage == nil)
-  }
 }

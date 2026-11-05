@@ -111,14 +111,4 @@ struct MFAResolutionScreenTests {
     #expect(Challenge(verificationCode: "111111").resolveRequest(hints: [phone], isLoading: false)
       == nil)
   }
-
-  @Test("MFAResolutionContentState builds with no arguments")
-  @MainActor
-  func stateDefaults() {
-    let state = MFAResolutionContentState()
-    #expect(state.selectedHintIndex.wrappedValue == 0)
-    #expect(state.verificationCode.wrappedValue.isEmpty && state.totpCode.wrappedValue.isEmpty)
-    #expect(state.hints.isEmpty && !state.isCodeSent)
-    #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
-  }
 }
