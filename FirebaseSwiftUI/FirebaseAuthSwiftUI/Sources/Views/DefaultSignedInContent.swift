@@ -46,6 +46,7 @@ public struct DefaultSignedInContent: View {
         .padding([.top, .bottom], 8)
         .frame(maxWidth: .infinity)
         .accessibilityIdentifier("verify-email-button")
+        .disabled(state.isLoading)
       }
       Button(action: state.updatePassword) {
         Text(authService.string.updatePasswordButtonLabel)
@@ -78,6 +79,7 @@ public struct DefaultSignedInContent: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .accessibilityIdentifier("delete-account-button")
+      .disabled(state.isLoading)
 
       Button(action: state.signOut) {
         Text(authService.string.signOutButtonLabel)
@@ -88,6 +90,7 @@ public struct DefaultSignedInContent: View {
       .padding([.top, .bottom], 8)
       .frame(maxWidth: .infinity)
       .accessibilityIdentifier("sign-out-button")
+      .disabled(state.isLoading)
     }
     .safeAreaPadding()
   }

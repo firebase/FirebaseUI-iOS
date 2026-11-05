@@ -51,7 +51,8 @@ public struct SignedInContentState {
 
   /// The localized message of the last failed sign out, account deletion or verification email.
   /// It clears when the next of those starts, and stays `nil` when the user cancels
-  /// reauthentication. The sheet's error alert still shows for the same failure.
+  /// reauthentication. Inside ``AuthPickerView``, the sheet's error alert also shows for the same
+  /// failure.
   public let errorMessage: String?
 
   /// Creates a state, for example to preview custom content with stub actions. Every parameter
@@ -64,6 +65,8 @@ public struct SignedInContentState {
               goToMFAManagement: @escaping @MainActor () -> Void = {},
               user: User? = nil,
               isEmailVerified: Bool = true,
+              // Previews show the MFA management action by default; the screen passes the
+              // app's real `AuthConfiguration.mfaEnabled`.
               isMFAEnabled: Bool = true,
               isLoading: Bool = false,
               errorMessage: String? = nil) {
@@ -109,10 +112,12 @@ struct SignedInScreen<Content: View>: View {
     // Delete only once the confirmation sheet has finished dismissing, so a reauthentication
     // sheet isn't presented while it is still on screen.
     .sheet(isPresented: $showDeleteConfirmation, onDismiss: {
-      if deleteConfirmed {
-        deleteConfirmed = false
-        deleteAccount()
-      }
+      guard deleteConfirmed else { return }
+      deleteConfirmed = false
+      // The app may have closed the authentication sheet meanwhile; don't start a delete that
+      // could need reauthentication on a screen that is going away.
+      guard authService.isPresented else { return }
+      deleteAccount()
     }) {
       DeleteAccountConfirmationSheet(
         onConfirm: {
@@ -149,12 +154,20 @@ struct SignedInScreen<Content: View>: View {
       verifyEmail: verifyEmail,
       goToMFAManagement: { authService.navigator.push(.mfaManagement) },
       user: authService.currentUser,
-      isEmailVerified: authService.currentUser?.email == nil
-        || authService.currentUser?.isEmailVerified == true,
+      isEmailVerified: Self.isEmailVerified(
+        email: authService.currentUser?.email,
+        verified: authService.currentUser?.isEmailVerified
+      ),
       isMFAEnabled: authService.configuration.mfaEnabled,
       isLoading: isWorking,
       errorMessage: errorMessage
     )
+  }
+
+  /// Whether to treat the user's email as verified, so the verify-email action is offered only to
+  /// users with an unverified email. `true` with no user or no email (phone, anonymous).
+  nonisolated static func isEmailVerified(email: String?, verified: Bool?) -> Bool {
+    email == nil || verified == true
   }
 
   private func signOut() {

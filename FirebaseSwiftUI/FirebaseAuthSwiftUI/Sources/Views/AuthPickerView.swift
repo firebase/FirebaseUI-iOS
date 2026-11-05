@@ -144,7 +144,8 @@ public struct AuthPickerView<Content: View>: View {
   /// Replaces the screen the authentication sheet shows to signed-in users. Your content receives
   /// a ``SignedInContentState``: the library still signs out, deletes the account behind its
   /// confirmation and reauthentication, sends the verification email and navigates. Wrap
-  /// ``DefaultSignedInContent`` to keep the stock markup.
+  /// ``DefaultSignedInContent`` to keep the stock markup. Several views returned from the closure
+  /// are stacked in a `VStack`; wrap them in your own container to lay them out differently.
   ///
   /// ```swift
   /// AuthPickerView { authenticatedApp }

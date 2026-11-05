@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import FirebaseAuthSwiftUI
+@testable import FirebaseAuthSwiftUI
+import SwiftUI
 import Testing
 
 /// `SignedInContentState`'s public initializer must be callable with no arguments, so adding a
@@ -34,5 +35,21 @@ struct SignedInContentStateTests {
     let state = SignedInContentState(isEmailVerified: false, isLoading: true)
     #expect(!state.isEmailVerified)
     #expect(state.isLoading)
+  }
+}
+
+@Suite("Signed-in email verification rule")
+struct SignedInEmailVerificationTests {
+  @Test("Users without an email are treated as verified")
+  func noEmail() {
+    #expect(SignedInScreen<EmptyView>.isEmailVerified(email: nil, verified: nil))
+    #expect(SignedInScreen<EmptyView>.isEmailVerified(email: nil, verified: false))
+  }
+
+  @Test("Users with an email follow Firebase's verified flag")
+  func withEmail() {
+    #expect(SignedInScreen<EmptyView>.isEmailVerified(email: "a@b.com", verified: true))
+    #expect(!SignedInScreen<EmptyView>.isEmailVerified(email: "a@b.com", verified: false))
+    #expect(!SignedInScreen<EmptyView>.isEmailVerified(email: "a@b.com", verified: nil))
   }
 }
