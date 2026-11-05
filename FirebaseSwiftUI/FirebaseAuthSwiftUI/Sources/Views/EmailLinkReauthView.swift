@@ -145,6 +145,9 @@ extension EmailLinkReauthView: View {
       .onOpenURL { url in
         handleReauthURL(url)
       }
+      // `AuthPickerContent` leaves reauthentication links to this view while it shows.
+      .onAppear { authService.isShowingEmailLinkReauth = true }
+      .onDisappear { authService.isShowingEmailLinkReauth = false }
       .task {
         await sendEmailLink()
       }

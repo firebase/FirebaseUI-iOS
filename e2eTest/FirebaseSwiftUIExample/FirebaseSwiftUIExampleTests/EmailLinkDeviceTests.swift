@@ -22,9 +22,14 @@ import Testing
 @MainActor
 struct EmailLinkDeviceTests {
   private func makeService(continueURL: String = "https://flutterfire-e2e-tests.firebaseapp.com",
-                           forceSameDevice: Bool = false) async throws -> AuthService {
+                           forceSameDevice: Bool = false,
+                           clearingEmulator: Bool = true) async throws -> AuthService {
     configureFirebaseIfNeeded()
-    try await clearAuthEmulatorState()
+    if clearingEmulator {
+      try await clearAuthEmulatorState()
+    } else {
+      try await isEmulatorRunning()
+    }
     let settings = makeEmailLinkActionCodeSettings()
     settings.url = URL(string: continueURL)
     return AuthService(
@@ -155,6 +160,49 @@ struct EmailLinkDeviceTests {
       try await service.handleSignInLink(url: link)
     }
     #expect(service.pendingEmailLink == nil)
+  }
+
+  @Test
+  func reauthLinkOpenedAfterColdLaunchFinishesReauthentication() async throws {
+    let service = try await makeService()
+    let email = createEmail()
+    try await service.sendEmailSignInLink(email: email)
+    let signInLink = try await fetchEmailSignInLinkFromEmulator(email: email)
+    try await service.handleSignInLink(url: signInLink)
+    try await waitForStateChange {
+      service.currentUser?.email?.caseInsensitiveCompare(email) == .orderedSame
+    }
+
+    try await service.sendEmailSignInLink(email: email, isReauth: true)
+    var reauthLink = signInLink
+    try await waitForStateChange(timeout: 15) {
+      reauthLink != signInLink
+    } refresh: {
+      reauthLink = try await fetchEmailSignInLinkFromEmulator(email: email)
+    }
+
+    // While `EmailLinkReauthView` shows, its own handler takes the link.
+    service.isShowingEmailLinkReauth = true
+    try await service.finishEmailLinkReauthentication(with: reauthLink)
+    #expect(service.isReauthenticating)
+    service.isShowingEmailLinkReauth = false
+
+    // A cold launch starts a new service with the reauthentication state kept in storage.
+    let relaunched = try await makeService(clearingEmulator: false)
+    try await waitForStateChange {
+      relaunched.currentUser?.email?.caseInsensitiveCompare(email) == .orderedSame
+    }
+    #expect(relaunched.isReauthenticating)
+
+    // `AuthPickerContent` may pass the same link more than once.
+    let link = reauthLink
+    let first = Task { try await relaunched.finishEmailLinkReauthentication(with: link) }
+    let second = Task { try await relaunched.finishEmailLinkReauthentication(with: link) }
+    try await first.value
+    try await second.value
+
+    #expect(!relaunched.isReauthenticating)
+    try await relaunched.signOut()
   }
 
   @Test
