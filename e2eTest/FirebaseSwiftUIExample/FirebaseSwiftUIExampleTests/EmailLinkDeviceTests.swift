@@ -21,6 +21,12 @@ import Testing
 @Suite(.serialized)
 @MainActor
 struct EmailLinkDeviceTests {
+  init() {
+    // Reauthentication state persists in `UserDefaults`; don't let a failed test leak it.
+    UserDefaults.standard.removeObject(forKey: "is-reauthenticating")
+    UserDefaults.standard.removeObject(forKey: "email-link-reauth")
+  }
+
   private func makeService(continueURL: String = "https://flutterfire-e2e-tests.firebaseapp.com",
                            forceSameDevice: Bool = false,
                            clearingEmulator: Bool = true) async throws -> AuthService {

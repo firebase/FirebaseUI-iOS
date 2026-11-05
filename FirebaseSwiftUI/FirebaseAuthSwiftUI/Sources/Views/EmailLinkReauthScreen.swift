@@ -140,6 +140,8 @@ public struct EmailLinkReauthScreen<Content: View>: View {
     Task {
       do {
         try await authService.handleSignInLink(url: url)
+        // The URL wasn't a sign-in link, so reauthentication isn't finished.
+        guard !authService.isReauthenticating else { return }
         coordinator.reauthCompleted()
       } catch let AuthServiceError.multiFactorReauthenticationRequired(mfaRequired) {
         self.mfaRequired = mfaRequired
