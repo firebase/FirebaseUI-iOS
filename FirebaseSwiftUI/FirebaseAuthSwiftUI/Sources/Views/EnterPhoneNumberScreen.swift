@@ -39,13 +39,15 @@ public struct PhoneNumberContentState {
   /// changes or the next attempt starts. The sheet's error alert still shows for the same failure.
   public let errorMessage: String?
 
-  /// Creates a state, for example to preview custom content with stub actions.
-  public init(phoneNumber: Binding<String>,
-              selectedCountry: Binding<CountryData>,
-              sendCode: @escaping @MainActor () -> Void,
-              isValid: Bool,
-              isLoading: Bool,
-              errorMessage: String?) {
+  /// Creates a state, for example to preview custom content with stub actions. Every parameter
+  /// has a default, so pass only what the preview needs; later releases add new parameters
+  /// with defaults too.
+  public init(phoneNumber: Binding<String> = .constant(""),
+              selectedCountry: Binding<CountryData> = .constant(.default),
+              sendCode: @escaping @MainActor () -> Void = {},
+              isValid: Bool = false,
+              isLoading: Bool = false,
+              errorMessage: String? = nil) {
     self.phoneNumber = phoneNumber
     self.selectedCountry = selectedCountry
     self.sendCode = sendCode

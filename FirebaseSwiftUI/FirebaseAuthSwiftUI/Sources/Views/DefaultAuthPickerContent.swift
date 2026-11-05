@@ -154,11 +154,13 @@ public struct AuthMethodPickerState {
   /// in its place.
   public let goToEmailSignUp: @MainActor () -> Void
 
-  /// Creates a state, for example to preview a custom layout with stub actions.
-  public init(providers: [AuthProviderUI],
-              select: @escaping @MainActor (AuthProviderUI) -> Void,
-              isEmailLinkEnabled: Bool,
-              selectEmailLink: @escaping @MainActor () -> Void,
+  /// Creates a state, for example to preview a custom layout with stub actions. Every parameter
+  /// has a default, so pass only what the preview needs; later releases add new parameters
+  /// with defaults too.
+  public init(providers: [AuthProviderUI] = [],
+              select: @escaping @MainActor (AuthProviderUI) -> Void = { _ in },
+              isEmailLinkEnabled: Bool = false,
+              selectEmailLink: @escaping @MainActor () -> Void = {},
               isEmailSignInEnabled: Bool = false,
               goToEmailSignIn: @escaping @MainActor () -> Void = {},
               goToEmailSignUp: @escaping @MainActor () -> Void = {}) {

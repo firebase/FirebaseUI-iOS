@@ -15,12 +15,44 @@
 import FirebaseAuthSwiftUI
 import Testing
 
-/// Each public email state initializer must be callable with no arguments, so adding a field with
-/// a default later never breaks a consumer's preview. These fail to compile if a parameter loses
+/// Each public state initializer must be callable with no arguments, so adding a field with a
+/// default later never breaks a consumer's preview. These fail to compile if a parameter loses
 /// its default.
-@Suite("Email content state defaults")
+@Suite("Content state defaults")
 @MainActor
-struct EmailContentStateDefaultsTests {
+struct ContentStateDefaultsTests {
+  @Test("AuthMethodPickerState builds with no arguments")
+  func authMethodPickerState() {
+    let state = AuthMethodPickerState()
+    #expect(state.providers.isEmpty)
+    #expect(!state.isEmailLinkEnabled)
+    #expect(!state.isEmailSignInEnabled)
+  }
+
+  @Test("PhoneNumberContentState builds with no arguments")
+  func phoneNumberContentState() {
+    let state = PhoneNumberContentState()
+    #expect(state.phoneNumber.wrappedValue.isEmpty)
+    #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
+  }
+
+  @Test("VerificationCodeContentState builds with no arguments")
+  func verificationCodeContentState() {
+    let state = VerificationCodeContentState()
+    #expect(state.verificationCode.wrappedValue.isEmpty)
+    #expect(state.resendCountdown == 0)
+    #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
+  }
+
+  @Test("MFAEnrolmentContentState builds with no arguments")
+  func mfaEnrolmentContentState() {
+    let state = MFAEnrolmentContentState()
+    #expect(state.step == .selectFactor)
+    #expect(state.isMFAEnabled)
+    #expect(state.allowedFactors == [.sms, .totp])
+    #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
+  }
+
   @Test("EmailAuthContentState builds with no arguments")
   func emailAuthContentState() {
     let state = EmailAuthContentState()
@@ -47,8 +79,8 @@ struct EmailContentStateDefaultsTests {
 
   @Test("A preview passes only the fields it needs")
   func partialArguments() {
-    let state = EmailAuthContentState(flow: .signUp, errorMessage: "Wrong password")
-    #expect(state.flow == .signUp)
-    #expect(state.errorMessage == "Wrong password")
+    let state = MFAEnrolmentContentState(step: .enterPhoneNumber, isLoading: true)
+    #expect(state.step == .enterPhoneNumber)
+    #expect(state.isLoading)
   }
 }
