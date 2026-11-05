@@ -52,6 +52,11 @@ public struct DefaultPasswordRecoveryContent: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .navigationTitle(authService.string.passwordRecoveryTitle)
     .safeAreaPadding()
+    .errorMessageAlert(
+      state.errorMessage,
+      okButtonLabel: authService.string.okButtonLabel,
+      dismiss: state.dismissError
+    )
     .sheet(isPresented: Binding(
       get: { state.didSend },
       set: { isPresented in

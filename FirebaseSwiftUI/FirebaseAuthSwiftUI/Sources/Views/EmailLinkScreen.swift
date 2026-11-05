@@ -37,10 +37,13 @@ public struct EmailLinkContentState {
   /// Whether a link is being sent or handled, or the ``AuthService`` is signing in.
   public let isLoading: Bool
 
-  /// The localized message of the last failed send or link sign-in. It clears when the email
-  /// changes or the next attempt starts. The sheet's error alert still shows for the same
-  /// failure.
+  /// The localized message of the last failed send or link sign-in, for your content to show.
+  /// The sheet's error alert doesn't show it; ``DefaultEmailLinkContent`` shows it in the same
+  /// alert. It clears when the email changes, the next attempt starts, or ``dismissError`` runs.
   public let errorMessage: String?
+
+  /// Clears ``errorMessage``, for example when the user closes your error UI.
+  public let dismissError: @MainActor () -> Void
 
   /// Creates a state, for example to preview custom content with stub actions. Every parameter
   /// has a default, so pass only what the preview needs; later releases add new parameters
@@ -51,7 +54,8 @@ public struct EmailLinkContentState {
               didSend: Bool = false,
               isValid: Bool = false,
               isLoading: Bool = false,
-              errorMessage: String? = nil) {
+              errorMessage: String? = nil,
+              dismissError: @escaping @MainActor () -> Void = {}) {
     self.email = email
     self.sendSignInLink = sendSignInLink
     self.dismissAlert = dismissAlert
@@ -59,6 +63,7 @@ public struct EmailLinkContentState {
     self.isValid = isValid
     self.isLoading = isLoading
     self.errorMessage = errorMessage
+    self.dismissError = dismissError
   }
 }
 
@@ -95,7 +100,6 @@ public struct EmailLinkScreen<Content: View>: View {
 
   @Environment(AuthService.self) private var authService
   @Environment(\.accountConflictHandler) private var accountConflictHandler
-  @Environment(\.reportError) private var reportError
   @State private var email = ""
   @State private var didSend = false
   @State private var isWorking = false
@@ -112,7 +116,8 @@ public struct EmailLinkScreen<Content: View>: View {
       didSend: didSend,
       isValid: isValid,
       isLoading: isLoading,
-      errorMessage: errorMessage
+      errorMessage: errorMessage,
+      dismissError: { errorMessage = nil }
     ))
     .onChange(of: email) { errorMessage = nil }
     .onOpenURL { url in
@@ -132,8 +137,9 @@ public struct EmailLinkScreen<Content: View>: View {
             return
           }
 
-          errorMessage = authService.string.localizedErrorMessage(for: error)
-          reportError?(error)
+          if shouldShowErrorAlert(for: error) {
+            errorMessage = authService.string.localizedErrorMessage(for: error)
+          }
         }
       }
     }
@@ -169,8 +175,9 @@ public struct EmailLinkScreen<Content: View>: View {
         didSend = true
         authService.emailLink = email
       } catch {
-        errorMessage = authService.string.localizedErrorMessage(for: error)
-        reportError?(error)
+        if shouldShowErrorAlert(for: error) {
+          errorMessage = authService.string.localizedErrorMessage(for: error)
+        }
       }
     }
   }

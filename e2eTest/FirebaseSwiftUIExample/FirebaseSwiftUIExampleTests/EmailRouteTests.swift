@@ -69,10 +69,9 @@ struct EmailRouteTests {
   }
 
   @Test
-  func legacyEmailRecoveryReturnsToPushedSignIn() {
+  func legacyEmailRecoveryOpensSignInWithoutInlineForm() {
     let service = makeService()
-    service.navigator.push(.signIn)
-    service.navigator.push(.signUp)
+    service.navigator.push(.enterPhoneNumber)
 
     service.startLegacyRecovery(option: emailOption, email: "user@example.com")
 
@@ -81,9 +80,11 @@ struct EmailRouteTests {
   }
 
   @Test
-  func legacyEmailRecoveryReturnsToFirstScreenWithoutEmailRoute() {
+  func legacyEmailRecoveryReturnsToInlineForm() {
     let service = makeService()
-    service.navigator.push(.enterPhoneNumber)
+    service.inlineEmailFormCount = 1
+    service.navigator.push(.signIn)
+    service.navigator.push(.passwordRecovery)
 
     service.startLegacyRecovery(option: emailOption, email: "user@example.com")
 
@@ -91,13 +92,27 @@ struct EmailRouteTests {
   }
 
   @Test
-  func signOutClearsNavigation() async throws {
+  func inlineFormRegistrationCountsUntilReleased() async {
+    let service = makeService()
+    var registration: InlineEmailFormRegistration? = InlineEmailFormRegistration()
+    registration?.register(with: service)
+    registration?.register(with: service)
+    #expect(service.inlineEmailFormCount == 1)
+
+    registration = nil
+    await Task.yield()
+    await Task.yield()
+
+    #expect(service.inlineEmailFormCount == 0)
+  }
+
+  @Test
+  func signOutKeepsNavigationForAnonymousUpgradeRetry() async throws {
     let service = makeService()
     service.navigator.push(.signIn)
-    service.navigator.push(.signUp)
 
     try await service.signOut()
 
-    #expect(service.navigator.routes.isEmpty)
+    #expect(service.navigator.routes == [.signIn])
   }
 }

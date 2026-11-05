@@ -137,6 +137,12 @@ public struct DefaultEmailAuthContent: View {
       .authCTAButtonStyle()
       .accessibilityIdentifier("sign-in-button")
     }
+    // On the form only: the body has two root views, and a modifier on both shows the alert twice.
+    .errorMessageAlert(
+      state.errorMessage,
+      okButtonLabel: authService.string.okButtonLabel,
+      dismiss: state.dismissError
+    )
     Button(action: state.switchFlow) {
       HStack(spacing: 4) {
         Text(

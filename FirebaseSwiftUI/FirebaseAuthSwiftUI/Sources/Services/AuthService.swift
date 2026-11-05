@@ -77,7 +77,7 @@ public enum AuthView: Hashable {
   /// ``AuthMethodPickerState/goToEmailSignIn``.
   case signIn
   /// A pushed email and password sign-up screen, ``SignUpView`` by default. Reached with
-  /// ``EmailAuthContentState/goToSignUp``.
+  /// ``EmailAuthContentState/goToSignUp`` or ``AuthMethodPickerState/goToEmailSignUp``.
   case signUp
   case emailLink
   case updatePassword
@@ -223,6 +223,9 @@ public final class AuthService {
   public var emailLinkSignInEnabled = false
   public var legacySignInRecovery: LegacySignInRecoveryContext?
   public var suggestedEmailAddress: String?
+  /// How many in-place email forms (an ``EmailAuthScreen`` without a fixed flow) exist on the
+  /// sheet, so legacy recovery knows whether the first screen can take a suggested address.
+  @ObservationIgnored var inlineEmailFormCount = 0
   public private(set) var navigator = Navigator()
 
   public var authView: AuthView? {
@@ -314,7 +317,6 @@ public final class AuthService {
     isReauthenticating = false
     legacySignInRecovery = nil
     suggestedEmailAddress = nil
-    navigator.clear()
     updateAuthenticationState()
   }
 
@@ -1266,11 +1268,10 @@ extension AuthService {
 
     switch option.id {
     case EmailAuthProviderID:
-      // An app whose first screen has no email form reached email sign-in through a pushed
-      // route, so return to that screen for the suggested address.
-      let usedEmailRoute = navigator.routes.contains { $0 == .signIn || $0 == .signUp }
+      // Return to the first screen if it has an email form for the suggested address, and
+      // open the sign-in screen when it doesn't, such as a custom screen of provider buttons.
       navigator.clear()
-      if usedEmailRoute {
+      if inlineEmailFormCount == 0 {
         navigator.push(.signIn)
       }
     case emailLinkSignInMethod:

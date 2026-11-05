@@ -29,11 +29,13 @@ public struct EmailAuthContentState {
   public let confirmPassword: Binding<String>
 
   /// Signs in with ``email`` and ``password``, routing MFA and account conflicts to their
-  /// handlers. Does nothing unless ``isValid`` is `true` and ``isLoading`` is `false`.
+  /// handlers. Does nothing while ``isLoading`` is `true` or unless the email is valid and the
+  /// password is non-empty, whatever ``flow`` is.
   public let signIn: @MainActor () -> Void
 
   /// Creates an account with ``email`` and ``password``, routing MFA and account conflicts to
-  /// their handlers. Does nothing unless ``isValid`` is `true` and ``isLoading`` is `false`.
+  /// their handlers. Does nothing while ``isLoading`` is `true` or unless the email is valid, the
+  /// password has at least 6 characters and ``confirmPassword`` matches, whatever ``flow`` is.
   public let signUp: @MainActor () -> Void
 
   /// Toggles ``flow`` between sign-in and sign-up, with animation. On a screen with a fixed
@@ -62,10 +64,13 @@ public struct EmailAuthContentState {
   /// Whether a sign-in or sign-up is in flight, or the ``AuthService`` is signing in.
   public let isLoading: Bool
 
-  /// The localized message of the last failed attempt. It clears when a field or ``flow``
-  /// changes or the next attempt starts. The sheet's error alert still shows for the same
-  /// failure.
+  /// The localized message of the last failed attempt, for your content to show. The sheet's
+  /// error alert doesn't show it; ``DefaultEmailAuthContent`` shows it in the same alert. It
+  /// clears when a field or ``flow`` changes, the next attempt starts, or ``dismissError`` runs.
   public let errorMessage: String?
+
+  /// Clears ``errorMessage``, for example when the user closes your error UI.
+  public let dismissError: @MainActor () -> Void
 
   /// Creates a state, for example to preview custom content with stub actions. Every parameter
   /// has a default, so pass only what the preview needs; later releases add new parameters
@@ -82,7 +87,8 @@ public struct EmailAuthContentState {
               flow: AuthenticationFlow = .signIn,
               isValid: Bool = false,
               isLoading: Bool = false,
-              errorMessage: String? = nil) {
+              errorMessage: String? = nil,
+              dismissError: @escaping @MainActor () -> Void = {}) {
     self.email = email
     self.password = password
     self.confirmPassword = confirmPassword
@@ -96,6 +102,7 @@ public struct EmailAuthContentState {
     self.isValid = isValid
     self.isLoading = isLoading
     self.errorMessage = errorMessage
+    self.dismissError = dismissError
   }
 }
 
@@ -112,7 +119,7 @@ public struct EmailAuthContentState {
 /// Example:
 /// ```swift
 /// AuthPickerView { authenticatedApp }
-///   .pickerContent {
+///   .pickerContent { picker in
 ///     ScrollView {
 ///       VStack {
 ///         EmailAuthScreen { state in
@@ -124,7 +131,9 @@ public struct EmailAuthContentState {
 ///           Button("Sign in", action: state.signIn)
 ///             .disabled(!state.isValid || state.isLoading)
 ///         }
-///         DefaultAuthMethodPicker()
+///         ForEach(picker.providers, id: \.id) { provider in
+///           Button(provider.displayName) { picker.select(provider) }
+///         }
 ///       }
 ///     }
 ///   }
@@ -148,12 +157,12 @@ public struct EmailAuthScreen<Content: View>: View {
   @Environment(AuthService.self) private var authService
   @Environment(\.accountConflictHandler) private var accountConflictHandler
   @Environment(\.mfaHandler) private var mfaHandler
-  @Environment(\.reportError) private var reportError
   @State private var email = ""
   @State private var password = ""
   @State private var confirmPassword = ""
   @State private var isWorking = false
   @State private var errorMessage: String?
+  @State private var inlineFormRegistration = InlineEmailFormRegistration()
 
   private let fixedFlow: AuthenticationFlow?
   private let content: (EmailAuthContentState) -> Content
@@ -172,13 +181,17 @@ public struct EmailAuthScreen<Content: View>: View {
       flow: flow,
       isValid: isValid,
       isLoading: isLoading,
-      errorMessage: errorMessage
+      errorMessage: errorMessage,
+      dismissError: { errorMessage = nil }
     ))
     .onChange(of: email) { errorMessage = nil }
     .onChange(of: password) { errorMessage = nil }
     .onChange(of: confirmPassword) { errorMessage = nil }
     .onChange(of: authService.authenticationFlow) { errorMessage = nil }
     .onAppear {
+      if fixedFlow == nil {
+        inlineFormRegistration.register(with: authService)
+      }
       if let suggestedEmailAddress = authService.suggestedEmailAddress {
         email = suggestedEmailAddress
       }
@@ -195,13 +208,17 @@ public struct EmailAuthScreen<Content: View>: View {
   }
 
   private var isValid: Bool {
-    return if flow == .signIn {
-      FormValidators.email.isValid(input: email) && !password.isEmpty
-    } else {
-      FormValidators.email.isValid(input: email) &&
-        FormValidators.atLeast6Characters.isValid(input: password) &&
-        FormValidators.confirmPassword(password: password).isValid(input: confirmPassword)
-    }
+    flow == .signIn ? isSignInValid : isSignUpValid
+  }
+
+  private var isSignInValid: Bool {
+    FormValidators.email.isValid(input: email) && !password.isEmpty
+  }
+
+  private var isSignUpValid: Bool {
+    FormValidators.email.isValid(input: email) &&
+      FormValidators.atLeast6Characters.isValid(input: password) &&
+      FormValidators.confirmPassword(password: password).isValid(input: confirmPassword)
   }
 
   private var isLoading: Bool {
@@ -226,19 +243,21 @@ public struct EmailAuthScreen<Content: View>: View {
   }
 
   private func signIn() {
+    guard isSignInValid else { return }
     submit { [email, password] in
       try await authService.signIn(email: email, password: password)
     }
   }
 
   private func signUp() {
+    guard isSignUpValid else { return }
     submit { [email, password] in
       try await authService.createUser(email: email, password: password)
     }
   }
 
   private func submit(_ attempt: @escaping @MainActor () async throws -> SignInOutcome) {
-    guard isValid, !isLoading else { return }
+    guard !isLoading else { return }
     isWorking = true
     errorMessage = nil
     Task {
@@ -254,14 +273,34 @@ public struct EmailAuthScreen<Content: View>: View {
           return
         }
 
-        reportError?(error)
-        // The legacy sign-in recovery sheet explains this failure, so there is no message.
-        if case .legacySignInRecoveryPresented = error as? AuthServiceError {
-          return
+        // Errors the sheet's alert skips, such as the legacy sign-in recovery sheet, get no
+        // message either.
+        if shouldShowErrorAlert(for: error) {
+          errorMessage = authService.string.localizedErrorMessage(for: error)
         }
-
-        errorMessage = authService.string.localizedErrorMessage(for: error)
       }
     }
+  }
+}
+
+/// Counts an in-place ``EmailAuthScreen`` in ``AuthService/inlineEmailFormCount`` for as long as
+/// the screen exists. It's held in `@State`, so it outlives the screen being covered by a pushed
+/// one and is released when the screen leaves the sheet.
+final class InlineEmailFormRegistration: @unchecked Sendable {
+  private var unregister: (@Sendable () -> Void)?
+
+  @MainActor
+  func register(with authService: AuthService) {
+    guard unregister == nil else { return }
+    authService.inlineEmailFormCount += 1
+    unregister = {
+      Task { @MainActor in
+        authService.inlineEmailFormCount -= 1
+      }
+    }
+  }
+
+  deinit {
+    unregister?()
   }
 }

@@ -25,7 +25,8 @@ public struct PasswordRecoveryContentState {
   /// ``isValid`` is `true` and ``isLoading`` is `false`.
   public let sendResetLink: @MainActor () -> Void
 
-  /// Clears ``didSend`` and ``email`` and returns to the first screen of the sheet.
+  /// Clears ``didSend`` and ``email`` and leaves this screen, back to the one that opened it,
+  /// such as the first screen or ``SignInView``.
   public let dismissSuccess: @MainActor () -> Void
 
   /// Clears ``didSend``, keeping ``email`` and staying on this screen, for example when the
@@ -45,9 +46,13 @@ public struct PasswordRecoveryContentState {
   /// Whether a reset link is being sent, or the ``AuthService`` is signing in.
   public let isLoading: Bool
 
-  /// The localized message of the last failed attempt. It clears when the email changes or the
-  /// next attempt starts. The sheet's error alert still shows for the same failure.
+  /// The localized message of the last failed attempt, for your content to show. The sheet's
+  /// error alert doesn't show it; ``DefaultPasswordRecoveryContent`` shows it in the same alert.
+  /// It clears when the email changes, the next attempt starts, or ``dismissError`` runs.
   public let errorMessage: String?
+
+  /// Clears ``errorMessage``, for example when the user closes your error UI.
+  public let dismissError: @MainActor () -> Void
 
   /// Creates a state, for example to preview custom content with stub actions. Every parameter
   /// has a default, so pass only what the preview needs; later releases add new parameters
@@ -60,7 +65,8 @@ public struct PasswordRecoveryContentState {
               sentEmail: String = "",
               isValid: Bool = false,
               isLoading: Bool = false,
-              errorMessage: String? = nil) {
+              errorMessage: String? = nil,
+              dismissError: @escaping @MainActor () -> Void = {}) {
     self.email = email
     self.sendResetLink = sendResetLink
     self.dismissSuccess = dismissSuccess
@@ -70,6 +76,7 @@ public struct PasswordRecoveryContentState {
     self.isValid = isValid
     self.isLoading = isLoading
     self.errorMessage = errorMessage
+    self.dismissError = dismissError
   }
 }
 
@@ -107,7 +114,6 @@ public struct PasswordRecoveryScreen<Content: View>: View {
   }
 
   @Environment(AuthService.self) private var authService
-  @Environment(\.reportError) private var reportError
   @State private var email = ""
   @State private var didSend = false
   @State private var sentEmail = ""
@@ -126,7 +132,8 @@ public struct PasswordRecoveryScreen<Content: View>: View {
       sentEmail: sentEmail,
       isValid: isValid,
       isLoading: isLoading,
-      errorMessage: errorMessage
+      errorMessage: errorMessage,
+      dismissError: { errorMessage = nil }
     ))
     .onChange(of: email) { errorMessage = nil }
   }
@@ -151,8 +158,9 @@ public struct PasswordRecoveryScreen<Content: View>: View {
         sentEmail = email
         didSend = true
       } catch {
-        errorMessage = authService.string.localizedErrorMessage(for: error)
-        reportError?(error)
+        if shouldShowErrorAlert(for: error) {
+          errorMessage = authService.string.localizedErrorMessage(for: error)
+        }
       }
     }
   }
@@ -160,6 +168,6 @@ public struct PasswordRecoveryScreen<Content: View>: View {
   private func dismissSuccess() {
     didSend = false
     email = ""
-    authService.navigator.clear()
+    authService.navigator.pop()
   }
 }

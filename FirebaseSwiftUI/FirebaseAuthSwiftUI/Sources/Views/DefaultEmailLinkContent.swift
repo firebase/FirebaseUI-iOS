@@ -54,6 +54,11 @@ public struct DefaultEmailLinkContent: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     .navigationTitle(authService.string.signInWithEmailLinkViewTitle)
     .safeAreaPadding()
+    .errorMessageAlert(
+      state.errorMessage,
+      okButtonLabel: authService.string.okButtonLabel,
+      dismiss: state.dismissError
+    )
     .alert(
       authService.string.signInWithEmailLinkViewTitle,
       isPresented: Binding(
