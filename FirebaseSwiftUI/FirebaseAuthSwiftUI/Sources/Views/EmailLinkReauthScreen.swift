@@ -111,6 +111,9 @@ public struct EmailLinkReauthScreen<Content: View>: View {
         guard authService.isEmailSignInLink(url) else { return }
         handleReauthURL(url)
       }
+      // `AuthPickerContent` leaves reauthentication links to this screen while it shows.
+      .onAppear { authService.isShowingEmailLinkReauth = true }
+      .onDisappear { authService.isShowingEmailLinkReauth = false }
       .task {
         await sendLink()
       }
