@@ -141,7 +141,7 @@ struct DemoMFAEnrolment: View {
 /// The enrolment steps, apart from `MFAEnrolmentScreen` so they can be previewed with a stub
 /// state: the Auth emulator can't enrol TOTP.
 struct DemoMFAEnrolmentContent: View {
-  let state: MFAEnrollmentContentState
+  let state: MFAEnrolmentContentState
 
   var body: some View {
     switch state.step {
@@ -229,7 +229,7 @@ struct DemoMFAEnrolmentContent: View {
     }
   }
 
-  private func displayNameField(_ state: MFAEnrollmentContentState) -> some View {
+  private func displayNameField(_ state: MFAEnrolmentContentState) -> some View {
     DemoTextField(
       icon: "person",
       placeholder: "Name this method",
@@ -240,10 +240,10 @@ struct DemoMFAEnrolmentContent: View {
 }
 
 #if DEBUG
-  extension MFAEnrollmentContentState {
+  extension MFAEnrolmentContentState {
     /// The TOTP setup step with stub values and no-op actions.
-    static var totpSetUpPreview: MFAEnrollmentContentState {
-      MFAEnrollmentContentState(
+    static var totpSetUpPreview: MFAEnrolmentContentState {
+      MFAEnrolmentContentState(
         step: .setUpTOTP,
         selectedFactorType: .constant(.totp),
         phoneNumber: .constant(""),

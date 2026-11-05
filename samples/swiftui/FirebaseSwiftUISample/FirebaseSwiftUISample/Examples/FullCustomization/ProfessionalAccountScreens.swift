@@ -242,7 +242,7 @@ struct ProMFAEnrolment: View {
 /// The enrolment steps, apart from `MFAEnrolmentScreen` so they can be previewed with a stub
 /// state: the Auth emulator can't enrol TOTP.
 struct ProMFAEnrolmentContent: View {
-  let state: MFAEnrollmentContentState
+  let state: MFAEnrolmentContentState
 
   var body: some View {
     switch state.step {
