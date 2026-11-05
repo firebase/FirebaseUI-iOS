@@ -95,7 +95,10 @@ struct AuthMethodPickerStateReader<Content: View>: View {
       providers: authService.registeredProviders,
       select: selectProvider,
       isEmailLinkEnabled: authService.emailLinkSignInEnabled,
-      selectEmailLink: authService.selectEmailLink
+      selectEmailLink: authService.selectEmailLink,
+      isEmailSignInEnabled: authService.emailPasswordSignInEnabled,
+      goToEmailSignIn: { authService.navigator.push(.signIn) },
+      goToEmailSignUp: { authService.navigator.push(.signUp) }
     ))
   }
 
@@ -137,17 +140,37 @@ public struct AuthMethodPickerState {
   /// Starts email-link sign-in, the same as the stock email-link button.
   public let selectEmailLink: @MainActor () -> Void
 
+  /// Whether email and password sign-in is enabled on the ``AuthService``.
+  public let isEmailSignInEnabled: Bool
+
+  /// Pushes ``AuthView/signIn``, an email and password sign-in screen of its own, for a first
+  /// screen that shows only provider buttons and a "Continue with email" button. Use it from
+  /// `AuthPickerView`'s whole-screen `pickerContent`; ``DefaultAuthPickerContent`` already shows
+  /// the email form.
+  public let goToEmailSignIn: @MainActor () -> Void
+
+  /// Pushes ``AuthView/signUp``, an email and password sign-up screen of its own, for a first
+  /// screen with separate "Sign in" and "Create account" buttons. Its "Login" link opens sign-in
+  /// in its place.
+  public let goToEmailSignUp: @MainActor () -> Void
+
   /// Creates a state, for example to preview a custom layout with stub actions. Every parameter
   /// has a default, so pass only what the preview needs; later releases add new parameters
   /// with defaults too.
   public init(providers: [AuthProviderUI] = [],
               select: @escaping @MainActor (AuthProviderUI) -> Void = { _ in },
               isEmailLinkEnabled: Bool = false,
-              selectEmailLink: @escaping @MainActor () -> Void = {}) {
+              selectEmailLink: @escaping @MainActor () -> Void = {},
+              isEmailSignInEnabled: Bool = false,
+              goToEmailSignIn: @escaping @MainActor () -> Void = {},
+              goToEmailSignUp: @escaping @MainActor () -> Void = {}) {
     self.providers = providers
     self.select = select
     self.isEmailLinkEnabled = isEmailLinkEnabled
     self.selectEmailLink = selectEmailLink
+    self.isEmailSignInEnabled = isEmailSignInEnabled
+    self.goToEmailSignIn = goToEmailSignIn
+    self.goToEmailSignUp = goToEmailSignUp
   }
 
   /// Hands a provider sign-in result to the same handlers the default provider buttons use:

@@ -23,25 +23,8 @@ struct ErrorAlertModifier: ViewModifier {
   private func shouldShowAlert(for error: AlertError?) -> Bool {
     // View layer decides which errors should show an alert
     guard let error = error else { return false }
-
-    // Don't show alert for CancellationError
-    if error.underlyingError is CancellationError {
-      return false
-    }
-
-    // Don't show alert for anonymous upgrade conflicts (they're auto-handled)
-    if let authError = error.underlyingError as? AuthServiceError,
-       case let .accountConflict(context) = authError,
-       context.conflictType == .anonymousUpgradeConflict {
-      return false
-    }
-
-    if let authError = error.underlyingError as? AuthServiceError,
-       case .legacySignInRecoveryPresented = authError {
-      return false
-    }
-
-    return true
+    guard let underlyingError = error.underlyingError else { return true }
+    return shouldShowErrorAlert(for: underlyingError)
   }
 
   func body(content: Content) -> some View {
@@ -60,6 +43,47 @@ struct ErrorAlertModifier: ViewModifier {
           }
         )
       }
+  }
+}
+
+/// Whether the error alert shows `error`. Cancellations, anonymous upgrade conflicts (handled
+/// for you) and the legacy sign-in recovery sheet (which explains the failure itself) are skipped.
+func shouldShowErrorAlert(for error: Error) -> Bool {
+  if error is CancellationError {
+    return false
+  }
+
+  if let authError = error as? AuthServiceError,
+     case let .accountConflict(context) = authError,
+     context.conflictType == .anonymousUpgradeConflict {
+    return false
+  }
+
+  if let authError = error as? AuthServiceError,
+     case .legacySignInRecoveryPresented = authError {
+    return false
+  }
+
+  return true
+}
+
+extension View {
+  /// Shows a content state's `errorMessage` in the same alert the authentication sheet uses,
+  /// calling `dismiss` when the user closes it.
+  func errorMessageAlert(_ message: String?,
+                         okButtonLabel: String,
+                         dismiss: @escaping @MainActor () -> Void) -> some View {
+    errorAlert(
+      error: Binding(
+        get: { message.map { AlertError(message: $0) } },
+        set: { error in
+          if error == nil {
+            dismiss()
+          }
+        }
+      ),
+      okButtonLabel: okButtonLabel
+    )
   }
 }
 

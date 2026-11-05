@@ -73,6 +73,12 @@ public enum AuthenticationFlow {
 
 public enum AuthView: Hashable {
   case passwordRecovery
+  /// A pushed email and password sign-in screen, ``SignInView`` by default. Reached with
+  /// ``AuthMethodPickerState/goToEmailSignIn``.
+  case signIn
+  /// A pushed email and password sign-up screen, ``SignUpView`` by default. Reached with
+  /// ``EmailAuthContentState/goToSignUp`` or ``AuthMethodPickerState/goToEmailSignUp``.
+  case signUp
   case emailLink
   case updatePassword
   case mfaEnrollment
@@ -159,6 +165,22 @@ public class Navigator {
   public func clear() {
     routes.removeAll()
   }
+
+  /// Removes pushed ``AuthView/signIn`` and ``AuthView/signUp`` screens, which have nothing left
+  /// to do once the user is signed in.
+  func removeEmailRoutes() {
+    routes.removeAll { $0 == .signIn || $0 == .signUp }
+  }
+
+  /// Leaves a pushed ``AuthView/signUp`` screen for sign-in: back to the sign-in screen under
+  /// it, or a sign-in screen in its place when sign-up was opened directly.
+  func switchSignUpToSignIn() {
+    guard routes.last == .signUp else { return }
+    routes.removeLast()
+    if routes.last != .signIn {
+      routes.append(.signIn)
+    }
+  }
 }
 
 @MainActor
@@ -201,6 +223,9 @@ public final class AuthService {
   public var emailLinkSignInEnabled = false
   public var legacySignInRecovery: LegacySignInRecoveryContext?
   public var suggestedEmailAddress: String?
+  /// How many in-place email forms (an ``EmailAuthScreen`` without a fixed flow) exist on the
+  /// sheet, so legacy recovery knows whether the first screen can take a suggested address.
+  @ObservationIgnored var inlineEmailFormCount = 0
   public private(set) var navigator = Navigator()
 
   public var authView: AuthView? {
@@ -1243,7 +1268,12 @@ extension AuthService {
 
     switch option.id {
     case EmailAuthProviderID:
+      // Return to the first screen if it has an email form for the suggested address, and
+      // open the sign-in screen when it doesn't, such as a custom screen of provider buttons.
       navigator.clear()
+      if inlineEmailFormCount == 0 {
+        navigator.push(.signIn)
+      }
     case emailLinkSignInMethod:
       navigator.clear()
       navigator.push(.emailLink)
