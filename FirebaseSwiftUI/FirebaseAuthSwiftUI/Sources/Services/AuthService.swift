@@ -651,7 +651,7 @@ public extension AuthService {
   /// set. A link that is already being handled, or already signed in, is ignored.
   func handleSignInLink(url: URL) async throws {
     guard url != emailLinkInFlight else { return }
-    if isReauthenticating {
+    if hasPendingEmailLinkReauth() {
       emailLinkInFlight = url
       defer { emailLinkInFlight = nil }
       try await handleEmailLinkReauthentication(url: url)
@@ -724,7 +724,7 @@ public extension AuthService {
   /// ``AuthView/emailLink`` when that screen isn't already showing to handle it itself. An app
   /// that shows its own screen through `withEmailLinkSignIn(onTap:)` handles links there.
   internal func presentEmailLinkScreen(for url: URL) {
-    guard emailLinkSignInEnabled, emailLinkUsesLibraryScreen, !isReauthenticating,
+    guard emailLinkSignInEnabled, emailLinkUsesLibraryScreen, !hasPendingEmailLinkReauth(),
           authenticationState != .authenticated,
           !(isPresented && authView == .emailLink),
           let link = try? Self.emailSignInLink(from: url),
@@ -739,8 +739,28 @@ public extension AuthService {
   /// ``EmailLinkReauthView`` isn't showing, for example after a cold launch. Does nothing for
   /// other links, or when that view is showing to handle the link itself.
   internal func finishEmailLinkReauthentication(with url: URL) async throws {
-    guard isReauthenticating, !isShowingEmailLinkReauth, currentUser != nil else { return }
+    guard !isShowingEmailLinkReauth, hasPendingEmailLinkReauth() else { return }
     try await handleSignInLink(url: url)
+  }
+
+  /// Forgets a pending email-link reauthentication, so links opened later are handled as
+  /// sign-in links. Called when ``EmailLinkReauthView`` is cancelled or dismissed.
+  internal func cancelEmailLinkReauthentication() {
+    emailLinkReauth = nil
+    isReauthenticating = false
+  }
+
+  /// Whether a link the app opens is for email-link reauthentication. Forgets reauthentication
+  /// left over from a user who is no longer signed in, so a sign-in link isn't taken for it.
+  /// Reads `auth.currentUser`, which ``currentUser`` may not have caught up with after a cold
+  /// launch.
+  private func hasPendingEmailLinkReauth() -> Bool {
+    guard isReauthenticating else { return false }
+    guard let user = auth.currentUser, !user.isAnonymous else {
+      cancelEmailLinkReauthentication()
+      return false
+    }
+    return true
   }
 
   private func signInWithEmailLink(email: String,

@@ -138,6 +138,7 @@ extension EmailLinkReauthView: View {
       .toolbar {
         ToolbarItem(placement: .cancellationAction) {
           Button("Cancel") {
+            authService.cancelEmailLinkReauthentication()
             coordinator.reauthCancelled()
           }
         }
@@ -147,7 +148,12 @@ extension EmailLinkReauthView: View {
       }
       // `AuthPickerContent` leaves reauthentication links to this view while it shows.
       .onAppear { authService.isShowingEmailLinkReauth = true }
-      .onDisappear { authService.isShowingEmailLinkReauth = false }
+      // Closing the view abandons reauthentication. After it finishes, there is nothing left to
+      // forget.
+      .onDisappear {
+        authService.isShowingEmailLinkReauth = false
+        authService.cancelEmailLinkReauthentication()
+      }
       .task {
         await sendEmailLink()
       }

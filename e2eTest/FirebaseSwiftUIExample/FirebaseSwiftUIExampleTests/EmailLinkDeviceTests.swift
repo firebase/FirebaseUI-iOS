@@ -206,6 +206,55 @@ struct EmailLinkDeviceTests {
   }
 
   @Test
+  func cancelledReauthLeavesLaterLinksToSignIn() async throws {
+    let service = try await makeService()
+    let email = createEmail()
+    try await service.sendEmailSignInLink(email: email)
+    try await service.handleSignInLink(url: fetchEmailSignInLinkFromEmulator(email: email))
+    try await waitForStateChange {
+      service.currentUser?.email?.caseInsensitiveCompare(email) == .orderedSame
+    }
+
+    try await service.sendEmailSignInLink(email: email, isReauth: true)
+    #expect(service.isReauthenticating)
+    // What cancelling or dismissing `EmailLinkReauthView` does.
+    service.cancelEmailLinkReauthentication()
+    #expect(!service.isReauthenticating)
+
+    // A relaunch doesn't bring the cancelled reauthentication back.
+    let relaunched = try await makeService(clearingEmulator: false)
+    #expect(!relaunched.isReauthenticating)
+    try await relaunched.signOut()
+  }
+
+  @Test
+  func signInLinkIsNotTakenForReauthWithoutSignedInUser() async throws {
+    let service = try await makeService()
+    try service.auth.signOut()
+    // Reauthentication left over in storage, for example from a session that has since ended
+    // without `signOut()`.
+    try await service.sendEmailSignInLink(email: createEmail(), isReauth: true)
+    #expect(service.isReauthenticating)
+
+    let email = createEmail()
+    try await service.sendEmailSignInLink(email: email)
+    let link = try await fetchEmailSignInLinkFromEmulator(email: email)
+
+    service.presentEmailLinkScreen(for: link)
+    #expect(service.incomingEmailLink == link)
+    #expect(!service.isReauthenticating)
+    // Nothing to finish, so the picker leaves the link to the email-link screen.
+    try await service.finishEmailLinkReauthentication(with: link)
+    #expect(service.currentUser == nil)
+
+    try await service.handleSignInLink(url: link)
+    try await waitForStateChange {
+      service.currentUser?.email?.caseInsensitiveCompare(email) == .orderedSame
+    }
+    try await service.signOut()
+  }
+
+  @Test
   func openedLinkPresentsEmailLinkScreen() throws {
     configureFirebaseIfNeeded()
     let service = AuthService().withEmailLinkSignIn()
