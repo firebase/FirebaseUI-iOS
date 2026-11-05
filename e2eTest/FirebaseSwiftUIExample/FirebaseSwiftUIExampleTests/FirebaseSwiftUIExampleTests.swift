@@ -254,4 +254,40 @@ struct FirebaseSwiftUIExampleTests {
     #expect(service.currentUser != nil)
     #expect(service.authView == nil)
   }
+
+  @Test
+  @MainActor
+  func reauthenticateMFAUserRequiresSecondFactor() async throws {
+    let service = try await prepareFreshAuthService()
+    let email = createEmail()
+    let phoneNumber = "+1555123\(Int.random(in: 1000 ... 9999))"
+    try await service.createUser(email: email, password: kPassword)
+    try await waitForStateChange { service.currentUser != nil }
+    try await enrollSMSSecondFactor(email: email, password: kPassword, phoneNumber: phoneNumber)
+
+    let credential = EmailAuthProvider.credential(withEmail: email, password: kPassword)
+    var mfaRequired: MFARequired?
+    do {
+      try await service.reauthenticate(with: credential)
+    } catch let AuthServiceError.multiFactorReauthenticationRequired(required) {
+      mfaRequired = required
+    }
+
+    let hints = try #require(mfaRequired).hints
+    #expect(hints.count == 1)
+    guard case let .phone(_, _, hintPhoneNumber) = hints.first else {
+      Issue.record("Expected a phone hint, got \(hints)")
+      return
+    }
+    #expect(hintPhoneNumber?.hasSuffix(String(phoneNumber.suffix(4))) == true)
+
+    // The resolver is kept so the second factor is resolved as for sign-in
+    let verificationId = try await service.resolveSmsChallenge(hintIndex: 0)
+    try await service.resolveSignIn(
+      code: fetchLatestSMSCode(for: phoneNumber),
+      hintIndex: 0,
+      verificationId: verificationId
+    )
+    #expect(service.currentUser?.email?.caseInsensitiveCompare(email) == .orderedSame)
+  }
 }

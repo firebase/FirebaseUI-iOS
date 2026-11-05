@@ -161,6 +161,10 @@ public enum AuthServiceError: LocalizedError {
   /// Phone reauthentication required - user must handle SMS verification flow externally
   case phoneReauthenticationRequired(context: PhoneReauthContext)
 
+  /// Reauthentication requires a second factor. Complete it with `resolveSmsChallenge(hintIndex:)`
+  /// and `resolveSignIn(code:hintIndex:verificationId:)`, as for sign-in MFA resolution
+  case multiFactorReauthenticationRequired(MFARequired)
+
   case invalidCredentials(String)
   case signInFailed(underlying: Error)
   case accountConflict(AccountConflictContext)
@@ -189,6 +193,8 @@ public enum AuthServiceError: LocalizedError {
       return "Please check your email to verify your identity"
     case .phoneReauthenticationRequired:
       return "Please verify your phone number to continue"
+    case .multiFactorReauthenticationRequired:
+      return "Please complete two-factor authentication to continue"
     case let .invalidCredentials(description):
       return description
     // Use when failed to sign-in with Firebase

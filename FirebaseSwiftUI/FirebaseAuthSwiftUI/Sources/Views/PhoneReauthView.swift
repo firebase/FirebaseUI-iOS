@@ -29,6 +29,7 @@ public struct PhoneReauthView {
   @State private var verificationCode = ""
   @State private var isLoading = false
   @State private var error: AlertError?
+  @State private var mfaRequired: MFARequired?
 
   private func sendSMS() {
     Task { @MainActor in
@@ -63,6 +64,9 @@ public struct PhoneReauthView {
 
         try await authService.reauthenticate(with: credential)
         coordinator.reauthCompleted()
+        isLoading = false
+      } catch let AuthServiceError.multiFactorReauthenticationRequired(mfaRequired) {
+        self.mfaRequired = mfaRequired
         isLoading = false
       } catch {
         if let reportError = reportError {
@@ -196,6 +200,7 @@ extension PhoneReauthView: View {
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
       .navigationBarTitleDisplayMode(.inline)
+      .mfaReauthResolution($mfaRequired, coordinator: coordinator)
     }
     .errorAlert(error: $error, okButtonLabel: authService.string.okButtonLabel)
   }
