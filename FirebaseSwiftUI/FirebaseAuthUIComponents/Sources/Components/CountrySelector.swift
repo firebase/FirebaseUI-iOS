@@ -14,7 +14,7 @@
 
 import SwiftUI
 
-public struct CountryData: Equatable {
+public struct CountryData: Equatable, Sendable {
   public let name: String
   public let dialCode: String
   public let code: String
@@ -34,7 +34,7 @@ public struct CountryData: Equatable {
     return String(s)
   }
 
-  @MainActor public static let `default` = CountryData(
+  public static let `default` = CountryData(
     name: "United States",
     dialCode: "+1",
     code: "US"
