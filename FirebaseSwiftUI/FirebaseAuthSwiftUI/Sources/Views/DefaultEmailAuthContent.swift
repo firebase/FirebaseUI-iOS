@@ -33,133 +33,135 @@ public struct DefaultEmailAuthContent: View {
   private let state: EmailAuthContentState
 
   public var body: some View {
-    VStack(spacing: 16) {
-      AuthTextField(
-        text: state.email,
-        label: authService.string.emailFieldLabel,
-        prompt: authService.string.emailInputLabel,
-        keyboardType: .emailAddress,
-        contentType: .emailAddress,
-        validations: [
-          FormValidators.email,
-        ],
-        maintainsValidationMessage: state.flow == .signUp,
-        onSubmit: { _ in
-          self.focus = .password
-        },
-        leading: {
-          Image(systemName: "at")
-        }
-      )
-      .focused($focus, equals: .email)
-      .accessibilityIdentifier("email-field")
-      AuthTextField(
-        text: state.password,
-        label: authService.string.passwordFieldLabel,
-        prompt: authService.string.passwordInputLabel,
-        contentType: .password,
-        isSecureTextField: true,
-        validations: state.flow == .signUp ? [
-          FormValidators.atLeast6Characters
-        ] : [],
-        maintainsValidationMessage: state.flow == .signUp,
-        onSubmit: { _ in
-          if state.flow == .signIn {
-            state.signIn()
-          } else {
-            focus = .confirmPassword
-          }
-        },
-        leading: {
-          Image(systemName: "lock")
-        }
-      )
-      .submitLabel(.go)
-      .focused($focus, equals: .password)
-      .accessibilityIdentifier("password-field")
-      if state.flow == .signIn {
-        Button(action: state.goToPasswordRecovery) {
-          Text(authService.string.passwordButtonLabel)
-            .authCustomFont(.body, weight: .medium)
-            .frame(maxWidth: .infinity, alignment: .trailing)
-        }
-        .accessibilityIdentifier("password-recovery-button")
-      }
-
-      if state.flow == .signUp {
+    // The form and the flow switch, 24 points apart as on the stock first screen.
+    VStack(spacing: 24) {
+      VStack(spacing: 16) {
         AuthTextField(
-          text: state.confirmPassword,
-          label: authService.string.confirmPasswordFieldLabel,
-          prompt: authService.string.confirmPasswordInputLabel,
+          text: state.email,
+          label: authService.string.emailFieldLabel,
+          prompt: authService.string.emailInputLabel,
+          keyboardType: .emailAddress,
+          contentType: .emailAddress,
+          validations: [
+            FormValidators.email,
+          ],
+          maintainsValidationMessage: state.flow == .signUp,
+          onSubmit: { _ in
+            self.focus = .password
+          },
+          leading: {
+            Image(systemName: "at")
+          }
+        )
+        .focused($focus, equals: .email)
+        .accessibilityIdentifier("email-field")
+        AuthTextField(
+          text: state.password,
+          label: authService.string.passwordFieldLabel,
+          prompt: authService.string.passwordInputLabel,
           contentType: .password,
           isSecureTextField: true,
-          validations: [
-            FormValidators.confirmPassword(password: state.password.wrappedValue),
-          ],
-          maintainsValidationMessage: true,
+          validations: state.flow == .signUp ? [
+            FormValidators.atLeast6Characters
+          ] : [],
+          maintainsValidationMessage: state.flow == .signUp,
           onSubmit: { _ in
-            state.signUp()
+            if state.flow == .signIn {
+              state.signIn()
+            } else {
+              focus = .confirmPassword
+            }
           },
           leading: {
             Image(systemName: "lock")
           }
         )
         .submitLabel(.go)
-        .focused($focus, equals: .confirmPassword)
-        .accessibilityIdentifier("confirm-password-field")
-      }
-
-      Button {
+        .focused($focus, equals: .password)
+        .accessibilityIdentifier("password-field")
         if state.flow == .signIn {
-          state.signIn()
-        } else {
-          state.signUp()
+          Button(action: state.goToPasswordRecovery) {
+            Text(authService.string.passwordButtonLabel)
+              .authCustomFont(.body, weight: .medium)
+              .frame(maxWidth: .infinity, alignment: .trailing)
+          }
+          .accessibilityIdentifier("password-recovery-button")
         }
-      } label: {
-        if !state.isLoading {
-          Text(
-            state.flow == .signIn
-              ? authService.string.signInWithEmailButtonLabel
-              : authService.string.signUpWithEmailButtonLabel
+
+        if state.flow == .signUp {
+          AuthTextField(
+            text: state.confirmPassword,
+            label: authService.string.confirmPasswordFieldLabel,
+            prompt: authService.string.confirmPasswordInputLabel,
+            contentType: .password,
+            isSecureTextField: true,
+            validations: [
+              FormValidators.confirmPassword(password: state.password.wrappedValue),
+            ],
+            maintainsValidationMessage: true,
+            onSubmit: { _ in
+              state.signUp()
+            },
+            leading: {
+              Image(systemName: "lock")
+            }
           )
-          .padding(.vertical, 8)
-          .frame(maxWidth: .infinity)
-        } else {
-          ProgressView()
-            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+          .submitLabel(.go)
+          .focused($focus, equals: .confirmPassword)
+          .accessibilityIdentifier("confirm-password-field")
+        }
+
+        Button {
+          if state.flow == .signIn {
+            state.signIn()
+          } else {
+            state.signUp()
+          }
+        } label: {
+          if !state.isLoading {
+            Text(
+              state.flow == .signIn
+                ? authService.string.signInWithEmailButtonLabel
+                : authService.string.signUpWithEmailButtonLabel
+            )
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
+          } else {
+            ProgressView()
+              .progressViewStyle(CircularProgressViewStyle(tint: .white))
+              .padding(.vertical, 8)
+              .frame(maxWidth: .infinity)
+          }
+        }
+        .disabled(!state.isValid || state.isLoading)
+        .padding([.top, .bottom], 8)
+        .frame(maxWidth: .infinity)
+        .authCTAButtonStyle()
+        .accessibilityIdentifier("sign-in-button")
+      }
+      Button(action: state.switchFlow) {
+        HStack(spacing: 4) {
+          Text(
+            state.flow == .signIn
+              ? authService.string.dontHaveAnAccountYetLabel
+              : authService.string.alreadyHaveAnAccountLabel
+          )
+          .authCustomFont(.body)
+          .foregroundStyle(Color(.label))
+          Text(
+            state.flow == .signUp
+              ? authService.string.emailLoginFlowLabel
+              : authService.string.emailSignUpFlowLabel
+          )
+          .authCustomFont(.body, weight: .medium)
         }
       }
-      .disabled(!state.isValid || state.isLoading)
-      .padding([.top, .bottom], 8)
-      .frame(maxWidth: .infinity)
-      .authCTAButtonStyle()
-      .accessibilityIdentifier("sign-in-button")
+      .accessibilityIdentifier("switch-auth-flow")
     }
-    // On the form only: the body has two root views, and a modifier on both shows the alert twice.
     .errorMessageAlert(
       state.errorMessage,
       okButtonLabel: authService.string.okButtonLabel,
       dismiss: state.dismissError
     )
-    Button(action: state.switchFlow) {
-      HStack(spacing: 4) {
-        Text(
-          state.flow == .signIn
-            ? authService.string.dontHaveAnAccountYetLabel
-            : authService.string.alreadyHaveAnAccountLabel
-        )
-        .authCustomFont(.body)
-        .foregroundStyle(Color(.label))
-        Text(
-          state.flow == .signUp
-            ? authService.string.emailLoginFlowLabel
-            : authService.string.emailSignUpFlowLabel
-        )
-        .authCustomFont(.body, weight: .medium)
-      }
-    }
-    .accessibilityIdentifier("switch-auth-flow")
   }
 }

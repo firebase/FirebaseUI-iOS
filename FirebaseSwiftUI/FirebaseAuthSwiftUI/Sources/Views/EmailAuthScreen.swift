@@ -168,22 +168,26 @@ public struct EmailAuthScreen<Content: View>: View {
   private let content: (EmailAuthContentState) -> Content
 
   public var body: some View {
-    content(EmailAuthContentState(
-      email: $email,
-      password: $password,
-      confirmPassword: $confirmPassword,
-      signIn: signIn,
-      signUp: signUp,
-      switchFlow: switchFlow,
-      goToSignUp: { authService.navigator.push(.signUp) },
-      goToPasswordRecovery: { authService.navigator.push(.passwordRecovery) },
-      goToEmailLink: { authService.selectEmailLink() },
-      flow: flow,
-      isValid: isValid,
-      isLoading: isLoading,
-      errorMessage: errorMessage,
-      dismissError: { errorMessage = nil }
-    ))
+    // A single container, so the modifiers below attach once even when the content returns
+    // several views, or none.
+    VStack(spacing: 0) {
+      content(EmailAuthContentState(
+        email: $email,
+        password: $password,
+        confirmPassword: $confirmPassword,
+        signIn: signIn,
+        signUp: signUp,
+        switchFlow: switchFlow,
+        goToSignUp: { authService.navigator.push(.signUp) },
+        goToPasswordRecovery: { authService.navigator.push(.passwordRecovery) },
+        goToEmailLink: { authService.selectEmailLink() },
+        flow: flow,
+        isValid: isValid,
+        isLoading: isLoading,
+        errorMessage: errorMessage,
+        dismissError: { errorMessage = nil }
+      ))
+    }
     .onChange(of: email) { errorMessage = nil }
     .onChange(of: password) { errorMessage = nil }
     .onChange(of: confirmPassword) { errorMessage = nil }

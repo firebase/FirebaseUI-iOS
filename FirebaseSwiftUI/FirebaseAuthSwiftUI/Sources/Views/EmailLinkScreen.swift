@@ -109,20 +109,23 @@ public struct EmailLinkScreen<Content: View>: View {
   private let content: (EmailLinkContentState) -> Content
 
   public var body: some View {
-    content(EmailLinkContentState(
-      email: $email,
-      sendSignInLink: sendSignInLink,
-      dismissAlert: { didSend = false },
-      didSend: didSend,
-      isValid: isValid,
-      isLoading: isLoading,
-      errorMessage: errorMessage,
-      dismissError: { errorMessage = nil }
-    ))
+    // A single container, so the modifiers below attach once even when the content returns
+    // several views, or none.
+    VStack(spacing: 0) {
+      content(EmailLinkContentState(
+        email: $email,
+        sendSignInLink: sendSignInLink,
+        dismissAlert: { didSend = false },
+        didSend: didSend,
+        isValid: isValid,
+        isLoading: isLoading,
+        errorMessage: errorMessage,
+        dismissError: { errorMessage = nil }
+      ))
+    }
     .onChange(of: email) { errorMessage = nil }
     .onOpenURL { url in
-      // Content with several root views gets this handler once per view; the link is one-time,
-      // so only the first one handles it.
+      // A sign-in link is one-time, so ignore another while one is being handled.
       guard !isHandlingLink else { return }
       isHandlingLink = true
       errorMessage = nil

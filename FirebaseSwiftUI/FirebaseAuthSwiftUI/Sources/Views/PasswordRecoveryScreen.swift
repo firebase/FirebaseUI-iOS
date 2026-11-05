@@ -123,18 +123,22 @@ public struct PasswordRecoveryScreen<Content: View>: View {
   private let content: (PasswordRecoveryContentState) -> Content
 
   public var body: some View {
-    content(PasswordRecoveryContentState(
-      email: $email,
-      sendResetLink: sendResetLink,
-      dismissSuccess: dismissSuccess,
-      hideSuccess: { didSend = false },
-      didSend: didSend,
-      sentEmail: sentEmail,
-      isValid: isValid,
-      isLoading: isLoading,
-      errorMessage: errorMessage,
-      dismissError: { errorMessage = nil }
-    ))
+    // A single container, so the modifiers below attach once even when the content returns
+    // several views, or none.
+    VStack(spacing: 0) {
+      content(PasswordRecoveryContentState(
+        email: $email,
+        sendResetLink: sendResetLink,
+        dismissSuccess: dismissSuccess,
+        hideSuccess: { didSend = false },
+        didSend: didSend,
+        sentEmail: sentEmail,
+        isValid: isValid,
+        isLoading: isLoading,
+        errorMessage: errorMessage,
+        dismissError: { errorMessage = nil }
+      ))
+    }
     .onChange(of: email) { errorMessage = nil }
   }
 
