@@ -90,15 +90,18 @@ public struct EmailReauthScreen<Content: View>: View {
 
   public var body: some View {
     NavigationStack {
-      content(EmailReauthContentState(
-        password: $password,
-        verify: verify,
-        cancel: { coordinator.reauthCancelled() },
-        email: email,
-        isValid: isValid,
-        isLoading: isLoading,
-        errorMessage: errorMessage
-      ))
+      // One container, so content returning several views gets each modifier once
+      VStack(spacing: 0) {
+        content(EmailReauthContentState(
+          password: $password,
+          verify: verify,
+          cancel: { coordinator.reauthCancelled() },
+          email: email,
+          isValid: isValid,
+          isLoading: isLoading,
+          errorMessage: errorMessage
+        ))
+      }
       .mfaReauthResolution($mfaRequired, coordinator: coordinator)
     }
     .onChange(of: password) { errorMessage = nil }

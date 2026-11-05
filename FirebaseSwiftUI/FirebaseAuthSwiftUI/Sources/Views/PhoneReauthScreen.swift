@@ -103,17 +103,20 @@ public struct PhoneReauthScreen<Content: View>: View {
 
   public var body: some View {
     NavigationStack {
-      content(PhoneReauthContentState(
-        verificationCode: $verificationCode,
-        sendCode: sendCode,
-        verify: verify,
-        cancel: { coordinator.reauthCancelled() },
-        phoneNumber: phoneNumber,
-        codeSent: verificationID != nil,
-        isValid: isValid,
-        isLoading: isLoading,
-        errorMessage: errorMessage
-      ))
+      // One container, so content returning several views gets each modifier once
+      VStack(spacing: 0) {
+        content(PhoneReauthContentState(
+          verificationCode: $verificationCode,
+          sendCode: sendCode,
+          verify: verify,
+          cancel: { coordinator.reauthCancelled() },
+          phoneNumber: phoneNumber,
+          codeSent: verificationID != nil,
+          isValid: isValid,
+          isLoading: isLoading,
+          errorMessage: errorMessage
+        ))
+      }
       .mfaReauthResolution($mfaRequired, coordinator: coordinator)
     }
     .onChange(of: verificationCode) { errorMessage = nil }

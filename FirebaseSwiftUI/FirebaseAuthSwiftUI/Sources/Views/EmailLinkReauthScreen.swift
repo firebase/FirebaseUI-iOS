@@ -88,14 +88,17 @@ public struct EmailLinkReauthScreen<Content: View>: View {
 
   public var body: some View {
     NavigationStack {
-      content(EmailLinkReauthContentState(
-        resendLink: { Task { await sendLink() } },
-        cancel: { coordinator.reauthCancelled() },
-        email: email,
-        linkSent: linkSent,
-        isLoading: isLoading,
-        errorMessage: errorMessage
-      ))
+      // One container, so content returning several views gets each modifier once
+      VStack(spacing: 0) {
+        content(EmailLinkReauthContentState(
+          resendLink: { Task { await sendLink() } },
+          cancel: { coordinator.reauthCancelled() },
+          email: email,
+          linkSent: linkSent,
+          isLoading: isLoading,
+          errorMessage: errorMessage
+        ))
+      }
       .onOpenURL { url in
         handleReauthURL(url)
       }
