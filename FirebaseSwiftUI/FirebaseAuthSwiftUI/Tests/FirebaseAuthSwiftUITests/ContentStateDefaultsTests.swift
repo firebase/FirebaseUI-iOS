@@ -52,6 +52,22 @@ struct ContentStateDefaultsTests {
     #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
   }
 
+  @Test("MFAResolutionContentState builds with no arguments")
+  func mfaResolutionContentState() {
+    let state = MFAResolutionContentState()
+    #expect(state.selectedHintIndex.wrappedValue == 0)
+    #expect(state.verificationCode.wrappedValue.isEmpty && state.totpCode.wrappedValue.isEmpty)
+    #expect(state.hints.isEmpty && !state.isCodeSent)
+    #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
+  }
+
+  @Test("MFAManagementContentState builds with no arguments")
+  func mfaManagementContentState() {
+    let state = MFAManagementContentState()
+    #expect(state.enrolledFactors.isEmpty)
+    #expect(!state.isLoading && state.errorMessage == nil)
+  }
+
   @Test("A preview passes only the fields it needs")
   func partialArguments() {
     let state = MFAEnrolmentContentState(step: .enterPhoneNumber, isLoading: true)
