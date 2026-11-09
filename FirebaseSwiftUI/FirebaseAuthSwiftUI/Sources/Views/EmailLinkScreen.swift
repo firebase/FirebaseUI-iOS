@@ -149,13 +149,13 @@ public struct EmailLinkScreen<Content: View>: View {
     }
     .onChange(of: email) { errorMessage = nil }
     .onOpenURL { url in
-      handleLink { try await authService.handleSignInLink(url: url) }
+      handleLink(url) { try await authService.handleSignInLink(url: url) }
     }
     // A link the app opened before this screen was showing.
     .onChange(of: authService.incomingEmailLink, initial: true) { _, url in
       guard let url else { return }
       authService.incomingEmailLink = nil
-      handleLink { try await authService.handleSignInLink(url: url) }
+      handleLink(url) { try await authService.handleSignInLink(url: url) }
     }
     .onAppear {
       if let suggestedEmailAddress = authService.suggestedEmailAddress {
@@ -180,10 +180,11 @@ public struct EmailLinkScreen<Content: View>: View {
   private func confirmEmail() {
     guard authService.pendingEmailLink != nil, isValid, !isLoading else { return }
     let email = self.email
-    handleLink { try await authService.confirmEmailLinkSignIn(email: email) }
+    handleLink(nil) { try await authService.confirmEmailLinkSignIn(email: email) }
   }
 
-  private func handleLink(_ attempt: @escaping @MainActor () async throws -> Void) {
+  private func handleLink(_ url: URL?,
+                          _ attempt: @escaping @MainActor () async throws -> Void) {
     // A sign-in link is one-time, so ignore another while one is being handled.
     guard !isHandlingLink else { return }
     isHandlingLink = true
@@ -198,8 +199,9 @@ public struct EmailLinkScreen<Content: View>: View {
           onConflict(ctx)
           return
         }
-        // The link was opened on another device; the content asks for the email instead.
-        if case AuthServiceError.invalidEmailLink = error, authService.pendingEmailLink != nil {
+        // This link was opened on another device; the content asks for the email instead.
+        if case AuthServiceError.invalidEmailLink = error, let url,
+           authService.pendingEmailLink == url {
           return
         }
 

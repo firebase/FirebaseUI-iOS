@@ -143,6 +143,54 @@ struct EmailLinkDeviceTests {
   }
 
   @Test
+  func concurrentCallsShareOneAttempt() async throws {
+    let service = try await makeService()
+    let email = createEmail()
+    try await service.sendEmailSignInLink(email: email)
+    let link = try await fetchEmailSignInLinkFromEmulator(email: email)
+
+    let first = Task { try await service.handleSignInLink(url: link) }
+    let second = Task { try await service.handleSignInLink(url: link) }
+    try await first.value
+    try await second.value
+
+    try await waitForStateChange {
+      service.currentUser?.email?.caseInsensitiveCompare(email) == .orderedSame
+    }
+    try await service.signOut()
+  }
+
+  @Test
+  func concurrentCallsShareAFailure() async throws {
+    let service = try await makeService()
+    let email = createEmail()
+    try await service.sendEmailSignInLink(email: email)
+    let link = try await fetchEmailSignInLinkFromEmulator(email: email)
+    // Another device: the first attempt fails, and the second must not report success.
+    service.emailLink = nil
+
+    let first = Task { try await service.handleSignInLink(url: link) }
+    let second = Task { try await service.handleSignInLink(url: link) }
+    await #expect(throws: AuthServiceError.self) { try await first.value }
+    await #expect(throws: AuthServiceError.self) { try await second.value }
+  }
+
+  @Test
+  func signingOutLetsAUsedLinkFailAgain() async throws {
+    let service = try await makeService()
+    let email = createEmail()
+    try await service.sendEmailSignInLink(email: email)
+    let link = try await fetchEmailSignInLinkFromEmulator(email: email)
+    try await service.handleSignInLink(url: link)
+    try await service.signOut()
+
+    // The link is used up; after sign-out it reports that instead of doing nothing.
+    await #expect(throws: (any Error).self) {
+      try await service.handleSignInLink(url: link)
+    }
+  }
+
+  @Test
   func forcedSameDeviceRejectsLinkFromAnotherDevice() async throws {
     let service = try await makeService(forceSameDevice: true)
     let email = createEmail()
