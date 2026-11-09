@@ -91,7 +91,7 @@ struct DemoLanding: View {
         title: "Email link sign-in",
         kind: .secondary,
         identifier: "email-link-button",
-        action: state.goToEmailLink
+        action: state.selectEmailLink
       )
     }
   }

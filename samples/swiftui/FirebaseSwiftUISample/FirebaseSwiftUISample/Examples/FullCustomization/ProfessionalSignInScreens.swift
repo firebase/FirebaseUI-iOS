@@ -146,7 +146,7 @@ struct ProLanding: View {
       ProTextButton(
         title: "Email me a sign-in link",
         identifier: "email-link-button",
-        action: state.goToEmailLink
+        action: state.selectEmailLink
       )
       .padding(.top, 4)
     }
