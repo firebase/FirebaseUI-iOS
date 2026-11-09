@@ -219,7 +219,7 @@ public final class AuthService {
   private var emailLinkUsesLibraryScreen = false
   /// The sign-in link being handled, and the last one that signed in, so a link delivered to
   /// several `onOpenURL` handlers is only used once.
-  @ObservationIgnored private var emailLinkInFlight: URL?
+  @ObservationIgnored private var emailLinkInFlight: (url: URL, task: Task<Void, Error>)?
   @ObservationIgnored private var lastSignedInEmailLink: URL?
   private var providers: [AuthProviderUI] = []
   private let emailLinkSignInMethod = "emailLink"
@@ -342,6 +342,8 @@ public final class AuthService {
     // Cannot wait for auth listener to change, feedback needs to be immediate
     currentUser = nil
     clearEmailLinkHandoff()
+    // A link that signed in before is expired now; let it fail again rather than do nothing.
+    lastSignedInEmailLink = nil
     // Clear email link sign-in flag
     isEmailLinkSignIn = false
     // Clear email link reauth state
@@ -697,17 +699,32 @@ public extension AuthService {
   /// A link opened on a device that didn't request it throws
   /// ``AuthServiceError/invalidEmailLink(_:)`` as before, and also sets ``pendingEmailLink`` for
   /// ``confirmEmailLinkSignIn(email:)`` unless ``withEmailLinkSignIn(forceSameDevice:)`` is
-  /// set. A link that is already being handled, or already signed in, is ignored.
+  /// set. A link that is already being handled waits for that attempt and gets its outcome, and
+  /// a link that already signed in is ignored until sign-out.
   func handleSignInLink(url: URL) async throws {
     if isReauthenticating {
       try await handleEmailLinkReauthentication(url: url)
       return
     }
 
-    guard url != emailLinkInFlight, url != lastSignedInEmailLink else { return }
-    emailLinkInFlight = url
-    defer { emailLinkInFlight = nil }
+    // A second caller with the same link waits for the first and gets the same outcome.
+    if let inFlight = emailLinkInFlight, inFlight.url == url {
+      try await inFlight.task.value
+      return
+    }
+    guard url != lastSignedInEmailLink else { return }
 
+    let task = Task { try await self.signInWithOpenedLink(url: url) }
+    emailLinkInFlight = (url, task)
+    defer {
+      if emailLinkInFlight?.url == url {
+        emailLinkInFlight = nil
+      }
+    }
+    try await task.value
+  }
+
+  private func signInWithOpenedLink(url: URL) async throws {
     let link = try Self.emailSignInLink(from: url)
     guard auth.isSignIn(withEmailLink: link) else { return }
 

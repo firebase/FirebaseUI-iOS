@@ -1276,7 +1276,7 @@ Handles the email link flow when the user taps the link. Automatically routes to
 
 **Note:** This method handles both initial sign-in and reauthentication flows automatically. The behavior is determined by whether `sendEmailSignInLink(email:isReauth:)` was called with `isReauth: true`.
 
-A link opened on a device that didn't request it throws `AuthServiceError.invalidEmailLink` as before, and also sets `pendingEmailLink` unless `withEmailLinkSignIn(forceSameDevice: true)` is set. Finish with `confirmEmailLinkSignIn(email:)`, passing the address the link was sent to. `AuthPickerView` handles links itself, opening the email-link screen when needed, and a link already being handled or already used is ignored, so your own `onOpenURL` handler can stay.
+A link opened on a device that didn't request it throws `AuthServiceError.invalidEmailLink` as before, and also sets `pendingEmailLink` unless `withEmailLinkSignIn(forceSameDevice: true)` is set. Finish with `confirmEmailLinkSignIn(email:)`, passing the address the link was sent to. `AuthPickerView` handles links itself, opening the email-link screen when needed, so your own `onOpenURL` handler can stay: a call with a link already being handled waits for that attempt and gets its result, and a link that already signed in is ignored until sign-out.
 
 ---
 
