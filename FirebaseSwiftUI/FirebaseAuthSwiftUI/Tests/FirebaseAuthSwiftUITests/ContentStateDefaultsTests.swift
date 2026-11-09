@@ -26,6 +26,7 @@ struct ContentStateDefaultsTests {
     let state = AuthMethodPickerState()
     #expect(state.providers.isEmpty)
     #expect(!state.isEmailLinkEnabled)
+    #expect(!state.isEmailSignInEnabled)
   }
 
   @Test("PhoneNumberContentState builds with no arguments")
@@ -66,6 +67,30 @@ struct ContentStateDefaultsTests {
     let state = MFAManagementContentState()
     #expect(state.enrolledFactors.isEmpty)
     #expect(!state.isLoading && state.errorMessage == nil)
+  }
+
+  @Test("EmailAuthContentState builds with no arguments")
+  func emailAuthContentState() {
+    let state = EmailAuthContentState()
+    #expect(state.email.wrappedValue.isEmpty)
+    #expect(state.flow == .signIn)
+    #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
+  }
+
+  @Test("PasswordRecoveryContentState builds with no arguments")
+  func passwordRecoveryContentState() {
+    let state = PasswordRecoveryContentState()
+    #expect(state.email.wrappedValue.isEmpty)
+    #expect(!state.didSend && state.sentEmail.isEmpty)
+    #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
+  }
+
+  @Test("EmailLinkContentState builds with no arguments")
+  func emailLinkContentState() {
+    let state = EmailLinkContentState()
+    #expect(state.email.wrappedValue.isEmpty)
+    #expect(!state.didSend)
+    #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
   }
 
   @Test("EmailReauthContentState builds with no arguments")
