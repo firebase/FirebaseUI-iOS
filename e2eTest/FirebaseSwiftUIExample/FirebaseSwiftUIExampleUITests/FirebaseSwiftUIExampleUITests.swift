@@ -203,6 +203,11 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
     let emailLinkSignInButton = app.buttons["sign-in-with-email-link-button"]
     XCTAssertTrue(emailLinkSignInButton.exists, "Email link sign-in button should exist")
+    // The pop back from password recovery can still cover the button right after it appears.
+    XCTAssertTrue(
+      waitForElementToBecomeHittable(emailLinkSignInButton, timeout: 10),
+      "Email link sign-in button should be hittable"
+    )
     emailLinkSignInButton.tap()
 
     let emailLinkText = app.staticTexts["Send a sign-in link to your email"].firstMatch

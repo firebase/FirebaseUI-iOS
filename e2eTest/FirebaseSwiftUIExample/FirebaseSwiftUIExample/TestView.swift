@@ -84,9 +84,34 @@ struct TestView: View {
   }
 
   var body: some View {
-    AuthPickerView {
-      Text("Hello, world!")
+    authPicker
+      .environment(authService)
+  }
+
+  /// `--custom-picker` swaps the stock first screen for one with separate email sign-in and
+  /// create-account buttons, so UI tests can drive the pushed `SignInView` and `SignUpView`.
+  @ViewBuilder
+  private var authPicker: some View {
+    if ProcessInfo.processInfo.arguments.contains("--custom-picker") {
+      AuthPickerView {
+        Text("Hello, world!")
+      }
+      .pickerContent { picker in
+        ScrollView {
+          VStack(spacing: 16) {
+            Button("Sign in with email", action: picker.goToEmailSignIn)
+              .accessibilityIdentifier("custom-email-sign-in-button")
+            Button("Create account", action: picker.goToEmailSignUp)
+              .accessibilityIdentifier("custom-create-account-button")
+            DefaultAuthMethodPicker()
+          }
+          .padding()
+        }
+      }
+    } else {
+      AuthPickerView {
+        Text("Hello, world!")
+      }
     }
-    .environment(authService)
   }
 }

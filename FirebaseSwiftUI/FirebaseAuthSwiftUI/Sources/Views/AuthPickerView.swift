@@ -71,9 +71,9 @@ public struct AuthPickerView<Content: View>: View {
   /// account conflicts and errors are handled the same as the default buttons.
   ///
   /// Your screen replaces the logo, email sign-in, terms and the large "Sign in" title (the close
-  /// button stays), so show your own heading, email entry (for example one built around
-  /// ``EmailAuthView``) and any legal text you need. To keep the stock screen and only lay out
-  /// the provider buttons, use ``DefaultAuthPickerContent/init(authMethodPicker:)``.
+  /// button stays), so show your own heading, email entry (for example ``EmailAuthScreen``) and
+  /// any legal text you need. To keep the stock screen and only lay out the provider buttons, use
+  /// ``DefaultAuthPickerContent/init(authMethodPicker:)``.
   ///
   /// Example:
   /// ```swift
