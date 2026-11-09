@@ -98,6 +98,27 @@ struct ReauthScreenTests {
     #expect(state.value?.isValid == true)
   }
 
+  @Test("Phone verify does nothing until a code has been sent")
+  func phoneVerifyNeedsSentCode() {
+    let state = Recorder<PhoneReauthContentState>()
+    let window = host(
+      PhoneReauthScreen(phoneNumber: "+15555550100", coordinator: ReauthenticationCoordinator()) {
+        state.capture($0)
+      }
+      .environment(AuthService())
+    )
+    defer { window.isHidden = true }
+
+    state.value?.verificationCode.wrappedValue = "123456"
+    settle()
+    #expect(state.value?.isValid == true)
+
+    state.value?.verify()
+    settle()
+    #expect(state.value?.isLoading == false)
+    #expect(state.value?.errorMessage == nil)
+  }
+
   @Test("Cancel ends the pending reauthentication request")
   func cancelEndsRequest() async {
     let coordinator = ReauthenticationCoordinator()
