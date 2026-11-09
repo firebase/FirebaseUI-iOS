@@ -49,8 +49,10 @@ public struct EmailAuthContentState {
   /// Pushes ``AuthView/passwordRecovery``.
   public let goToPasswordRecovery: @MainActor () -> Void
 
-  /// Starts email-link sign-in, the same as the stock email-link button.
-  public let goToEmailLink: @MainActor () -> Void
+  /// Starts email-link sign-in, the same as the stock email-link button and
+  /// ``AuthMethodPickerState/selectEmailLink``: it opens ``AuthView/emailLink``, or runs the
+  /// callback passed to `withEmailLinkSignIn(onTap:)` instead.
+  public let selectEmailLink: @MainActor () -> Void
 
   /// Whether the form signs in or signs up. Shared with ``AuthService/authenticationFlow``
   /// unless the screen was created with a fixed flow.
@@ -83,7 +85,7 @@ public struct EmailAuthContentState {
               switchFlow: @escaping @MainActor () -> Void = {},
               goToSignUp: @escaping @MainActor () -> Void = {},
               goToPasswordRecovery: @escaping @MainActor () -> Void = {},
-              goToEmailLink: @escaping @MainActor () -> Void = {},
+              selectEmailLink: @escaping @MainActor () -> Void = {},
               flow: AuthenticationFlow = .signIn,
               isValid: Bool = false,
               isLoading: Bool = false,
@@ -97,7 +99,7 @@ public struct EmailAuthContentState {
     self.switchFlow = switchFlow
     self.goToSignUp = goToSignUp
     self.goToPasswordRecovery = goToPasswordRecovery
-    self.goToEmailLink = goToEmailLink
+    self.selectEmailLink = selectEmailLink
     self.flow = flow
     self.isValid = isValid
     self.isLoading = isLoading
@@ -148,6 +150,9 @@ public struct EmailAuthScreen<Content: View>: View {
   /// "Sign up" link its own sign-up screen, as ``SignInView`` does for ``AuthView/signIn``. Use
   /// `.signUp` only for an ``AuthView/signUp`` destination, where `switchFlow` returns to the
   /// sign-in screen under it, or opens one in its place when sign-up was pushed directly.
+  ///
+  /// A screen with a fixed flow doesn't count as an in-place email form, so legacy email
+  /// recovery opens ``SignInView`` on top of it, even when it's your first screen.
   public init(flow: AuthenticationFlow? = nil,
               @ViewBuilder content: @escaping (EmailAuthContentState) -> Content) {
     fixedFlow = flow
@@ -180,7 +185,7 @@ public struct EmailAuthScreen<Content: View>: View {
         switchFlow: switchFlow,
         goToSignUp: { authService.navigator.push(.signUp) },
         goToPasswordRecovery: { authService.navigator.push(.passwordRecovery) },
-        goToEmailLink: { authService.selectEmailLink() },
+        selectEmailLink: { authService.selectEmailLink() },
         flow: flow,
         isValid: isValid,
         isLoading: isLoading,

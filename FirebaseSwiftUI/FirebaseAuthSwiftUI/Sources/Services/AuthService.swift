@@ -224,7 +224,9 @@ public final class AuthService {
   public var legacySignInRecovery: LegacySignInRecoveryContext?
   public var suggestedEmailAddress: String?
   /// How many in-place email forms (an ``EmailAuthScreen`` without a fixed flow) exist on the
-  /// sheet, so legacy recovery knows whether the first screen can take a suggested address.
+  /// sheet, so legacy recovery knows whether the first screen can take a suggested address. A
+  /// screen with a fixed flow isn't counted, even as a custom first screen, so recovery opens
+  /// ``SignInView`` on top of it with the suggested address.
   @ObservationIgnored var inlineEmailFormCount = 0
   public private(set) var navigator = Navigator()
 
