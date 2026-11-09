@@ -547,6 +547,13 @@ public extension AuthService {
   }
 
   /// Creates an email and password account, or links the credential to the signed-in anonymous
+  /// user when anonymous upgrade is on. Kept so references to this two-argument form, such as
+  /// `authService.createUser` stored as a function, still compile.
+  func createUser(email: String, password: String) async throws -> SignInOutcome {
+    try await createUser(email: email, password: password, displayName: nil)
+  }
+
+  /// Creates an email and password account, or links the credential to the signed-in anonymous
   /// user when anonymous upgrade is on, then saves `displayName` to the account's profile.
   ///
   /// - Parameters:
@@ -558,10 +565,14 @@ public extension AuthService {
                   password: String,
                   displayName: String? = nil) async throws -> SignInOutcome {
     guard allowNewEmailAccounts else {
+      // Shaped like the error Firebase returns, so apps handle both the same way.
       throw NSError(
         domain: AuthErrorDomain,
         code: AuthErrorCode.adminRestrictedOperation.rawValue,
-        userInfo: [NSLocalizedDescriptionKey: "Creating new accounts with email is turned off."]
+        userInfo: [
+          NSLocalizedDescriptionKey: string.emailSignUpNotAllowedMessage,
+          AuthErrors.userInfoNameKey: "ERROR_ADMIN_RESTRICTED_OPERATION",
+        ]
       )
     }
     authenticationState = .authenticating

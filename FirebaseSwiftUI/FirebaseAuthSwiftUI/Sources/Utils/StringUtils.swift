@@ -958,6 +958,13 @@ public class StringUtils {
     return localizedString(for: "Phone Number")
   }
 
+  /// Error when an app creates an email account while sign-up is turned off
+  /// found in:
+  /// - AuthService
+  public var emailSignUpNotAllowedMessage: String {
+    return localizedString(for: "EmailSignUpNotAllowedError")
+  }
+
   /// Name field label
   /// found in:
   /// - DefaultEmailAuthContent

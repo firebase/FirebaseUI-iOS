@@ -287,6 +287,20 @@ struct FirebaseSwiftUIExampleTests {
     }
     #expect(error?.domain == AuthErrorDomain)
     #expect(error?.code == AuthErrorCode.adminRestrictedOperation.rawValue)
+    #expect(error?.userInfo[AuthErrors.userInfoNameKey] as? String
+      == "ERROR_ADMIN_RESTRICTED_OPERATION")
+    #expect(error?.localizedDescription == service.string.emailSignUpNotAllowedMessage)
+  }
+
+  @Test
+  @MainActor
+  func emailSignInDoesNotRequireDisplayNameByDefault() {
+    configureFirebaseIfNeeded()
+    let service = AuthService().withEmailSignIn()
+
+    // Requiring a name would change every app's stock sign-up form, so it stays opt-in.
+    #expect(!service.requireDisplayName)
+    #expect(service.allowNewEmailAccounts)
   }
 
   @Test
