@@ -52,7 +52,8 @@ public struct AuthPickerContent<
   public var body: some View {
     @Bindable var authService = authService
     content()
-      .sheet(isPresented: $authService.isPresented) {
+      // Reopening the sheet starts from the first screen, not a half-finished pushed one.
+      .sheet(isPresented: $authService.isPresented, onDismiss: authService.navigator.clear) {
         @Bindable var navigator = authService.navigator
         NavigationStack(path: $navigator.routes) {
           root
@@ -81,6 +82,13 @@ public struct AuthPickerContent<
             .environment(authService)
         }
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
+        // Close pushed email screens however the user got signed in, including account
+        // conflicts the library resolves by signing in for them.
+        .onChange(of: authService.authenticationState) { _, state in
+          if state == .authenticated {
+            authService.navigator.removeEmailRoutes()
+          }
+        }
         // Apply account conflict handling at NavigationStack level
         .accountConflictHandler()
         // Apply MFA handling at NavigationStack level
