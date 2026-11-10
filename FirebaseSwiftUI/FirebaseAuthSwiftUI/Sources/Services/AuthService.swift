@@ -1018,6 +1018,12 @@ extension AuthService {
       legacySignInRecovery = nil
     }
   }
+
+  /// Drops the resolver of an abandoned second-factor challenge, so a later
+  /// `resolveSmsChallenge` or `resolveSignIn` cannot act on it
+  func discardMFAResolution() {
+    currentMFAResolver = nil
+  }
 }
 
 // MARK: - Private Helper Methods

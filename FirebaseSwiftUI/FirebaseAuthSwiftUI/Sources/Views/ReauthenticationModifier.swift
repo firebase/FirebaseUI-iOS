@@ -55,10 +55,7 @@ struct ReauthenticationModifier: ViewModifier {
         }
       }
       // Sheet for phone reauthentication
-      .sheet(isPresented: $coordinator.showingPhoneReauth, onDismiss: {
-        // No-op after completion; resumes the caller when swiped away
-        coordinator.reauthCancelled()
-      }) {
+      .sheet(isPresented: $coordinator.showingPhoneReauth, onDismiss: cancelIfPending) {
         if case let .phone(context) = coordinator.reauthContext {
           PhoneReauthScreen(phoneNumber: context.phoneNumber, coordinator: coordinator) {
             ReauthPromptContent(prompt: .phone($0))
@@ -68,10 +65,7 @@ struct ReauthenticationModifier: ViewModifier {
         }
       }
       // Sheet for email reauthentication
-      .sheet(isPresented: $coordinator.showingEmailPasswordPrompt, onDismiss: {
-        // No-op after completion; resumes the caller when swiped away
-        coordinator.reauthCancelled()
-      }) {
+      .sheet(isPresented: $coordinator.showingEmailPasswordPrompt, onDismiss: cancelIfPending) {
         if case let .email(context) = coordinator.reauthContext {
           EmailReauthScreen(email: context.email, coordinator: coordinator) {
             ReauthPromptContent(prompt: .password($0))
@@ -97,10 +91,7 @@ struct ReauthenticationModifier: ViewModifier {
         }
       }
       // Sheet for email link reauthentication
-      .sheet(isPresented: $coordinator.showingEmailLinkReauth, onDismiss: {
-        // No-op after completion; resumes the caller when swiped away
-        coordinator.reauthCancelled()
-      }) {
+      .sheet(isPresented: $coordinator.showingEmailLinkReauth, onDismiss: cancelIfPending) {
         if case let .emailLink(context) = coordinator.reauthContext {
           EmailLinkReauthScreen(email: context.email, coordinator: coordinator) {
             ReauthPromptContent(prompt: .emailLink($0))
@@ -110,10 +101,7 @@ struct ReauthenticationModifier: ViewModifier {
         }
       }
       // Sheet for second-factor resolution after OAuth reauthentication
-      .sheet(isPresented: $coordinator.showingMFAReauth, onDismiss: {
-        // No-op after completion; resumes the caller when swiped away
-        coordinator.reauthCancelled()
-      }) {
+      .sheet(isPresented: $coordinator.showingMFAReauth, onDismiss: cancelIfPending) {
         if let mfaRequired = coordinator.mfaReauthRequired {
           NavigationStack {
             MFAResolutionView(
@@ -125,6 +113,15 @@ struct ReauthenticationModifier: ViewModifier {
           .environment(\.reportError, nil)
         }
       }
+  }
+
+  /// Treats a sheet swiped away mid-flow as a cancel, so the waiting operation finishes, and
+  /// drops any second-factor challenge it left behind.
+  private func cancelIfPending() {
+    if coordinator.reauthContext != nil {
+      authService.discardMFAResolution()
+      coordinator.reauthCancelled()
+    }
   }
 
   private func performReauth() {
