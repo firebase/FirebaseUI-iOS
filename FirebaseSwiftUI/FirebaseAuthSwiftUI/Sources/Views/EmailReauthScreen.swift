@@ -125,17 +125,21 @@ public struct EmailReauthScreen<Content: View>: View {
       } catch let AuthServiceError.multiFactorReauthenticationRequired(mfaRequired) {
         self.mfaRequired = mfaRequired
       } catch {
-        errorMessage = authService.string.localizedErrorMessage(for: error)
-        if let reportError {
-          reportError(error)
-        } else {
-          self.error = AlertError(
-            title: "Error",
-            message: error.localizedDescription,
-            underlyingError: error
-          )
-        }
+        report(error)
       }
+    }
+  }
+
+  private func report(_ error: Error) {
+    errorMessage = authService.string.localizedErrorMessage(for: error)
+    if let reportError {
+      reportError(error)
+    } else {
+      self.error = AlertError(
+        title: "Error",
+        message: error.localizedDescription,
+        underlyingError: error
+      )
     }
   }
 }

@@ -22,6 +22,7 @@ public struct DefaultEmailLinkReauthContent: View {
     self.state = state
   }
 
+  @Environment(AuthService.self) private var authService
   private let state: EmailLinkReauthContentState
 
   public var body: some View {
@@ -86,7 +87,7 @@ public struct DefaultEmailLinkReauthContent: View {
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
       ToolbarItem(placement: .cancellationAction) {
-        Button("Cancel", action: state.cancel)
+        Button(authService.string.cancelButtonLabel, action: state.cancel)
       }
     }
   }
