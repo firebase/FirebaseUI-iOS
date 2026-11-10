@@ -822,17 +822,13 @@ public extension AuthService {
     isReauthenticating = false
   }
 
-  /// Whether a link the app opens is for email-link reauthentication. Forgets reauthentication
-  /// left over from a user who is no longer signed in, so a sign-in link isn't taken for it.
-  /// Reads `auth.currentUser`, which ``currentUser`` may not have caught up with after a cold
-  /// launch.
+  /// Whether a link the app opens is for email-link reauthentication. Reauthentication left over
+  /// from a user who is no longer signed in doesn't count, so a sign-in link isn't taken for it.
+  /// It is kept rather than cleared, in case the user can't be read yet. Reads
+  /// `auth.currentUser`, which ``currentUser`` may not have caught up with after a cold launch.
   private func hasPendingEmailLinkReauth() -> Bool {
-    guard isReauthenticating else { return false }
-    guard let user = auth.currentUser, !user.isAnonymous else {
-      cancelEmailLinkReauthentication()
-      return false
-    }
-    return true
+    guard isReauthenticating, let user = auth.currentUser else { return false }
+    return !user.isAnonymous
   }
 
   private func signInWithEmailLink(email: String,

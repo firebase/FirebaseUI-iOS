@@ -296,7 +296,6 @@ struct EmailLinkDeviceTests {
 
     service.presentEmailLinkScreen(for: link)
     #expect(service.incomingEmailLink == link)
-    #expect(!service.isReauthenticating)
     // Nothing to finish, so the picker leaves the link to the email-link screen.
     try await service.finishEmailLinkReauthentication(with: link)
     #expect(service.currentUser == nil)
