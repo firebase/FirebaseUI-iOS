@@ -137,6 +137,12 @@ public struct EmailLinkReauthScreen<Content: View>: View {
     defer { isLoading = false }
     do {
       try await authService.sendEmailSignInLink(email: email, isReauth: true)
+      // Closed while the email was sending: the send can't be stopped, so forget the
+      // reauthentication it just stored.
+      guard authService.isShowingEmailLinkReauth else {
+        authService.cancelEmailLinkReauthentication()
+        return
+      }
       linkSent = true
     } catch {
       report(error)

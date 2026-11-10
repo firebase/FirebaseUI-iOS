@@ -92,9 +92,13 @@ struct ReauthenticationModifier: ViewModifier {
       }
       // Sheet for email link reauthentication
       // Swiping the sheet away cancels, so the caller waiting on reauthentication isn't left
-      // hanging. Does nothing once reauthentication has finished or been cancelled.
+      // hanging. Leaves alone a finished or cancelled reauthentication, and a new request made
+      // while the sheet was closing.
       .sheet(isPresented: $coordinator.showingEmailLinkReauth, onDismiss: {
-        coordinator.reauthCancelled()
+        if case .emailLink = coordinator.reauthContext,
+           !coordinator.showingEmailLinkReauthAlert {
+          cancelIfPending()
+        }
       }) {
         if case let .emailLink(context) = coordinator.reauthContext {
           EmailLinkReauthScreen(email: context.email, coordinator: coordinator) {
