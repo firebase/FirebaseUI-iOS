@@ -57,7 +57,7 @@ struct ReauthenticationModifier: ViewModifier {
       // Sheet for phone reauthentication
       .sheet(isPresented: $coordinator.showingPhoneReauth, onDismiss: {
         // No-op after completion; resumes the caller when swiped away
-        coordinator.reauthCancelled()
+        cancelReauth()
       }) {
         if case let .phone(context) = coordinator.reauthContext {
           PhoneReauthView(
@@ -71,7 +71,7 @@ struct ReauthenticationModifier: ViewModifier {
       // Sheet for email reauthentication
       .sheet(isPresented: $coordinator.showingEmailPasswordPrompt, onDismiss: {
         // No-op after completion; resumes the caller when swiped away
-        coordinator.reauthCancelled()
+        cancelReauth()
       }) {
         if case let .email(context) = coordinator.reauthContext {
           EmailReauthView(
@@ -101,7 +101,7 @@ struct ReauthenticationModifier: ViewModifier {
       // Sheet for email link reauthentication
       .sheet(isPresented: $coordinator.showingEmailLinkReauth, onDismiss: {
         // No-op after completion; resumes the caller when swiped away
-        coordinator.reauthCancelled()
+        cancelReauth()
       }) {
         if case let .emailLink(context) = coordinator.reauthContext {
           EmailLinkReauthView(
@@ -115,7 +115,7 @@ struct ReauthenticationModifier: ViewModifier {
       // Sheet for second-factor resolution after OAuth reauthentication
       .sheet(isPresented: $coordinator.showingMFAReauth, onDismiss: {
         // No-op after completion; resumes the caller when swiped away
-        coordinator.reauthCancelled()
+        cancelReauth()
       }) {
         if let mfaRequired = coordinator.mfaReauthRequired {
           NavigationStack {
@@ -128,6 +128,12 @@ struct ReauthenticationModifier: ViewModifier {
           .environment(\.reportError, nil)
         }
       }
+  }
+
+  /// Cancels reauthentication and drops any second-factor challenge it left behind
+  private func cancelReauth() {
+    authService.discardMFAResolution()
+    coordinator.reauthCancelled()
   }
 
   private func performReauth() {

@@ -162,6 +162,7 @@ public struct MFAResolutionScreen<Content: View>: View {
   }
 
   private func cancel() {
+    authService.discardMFAResolution()
     if let onCancel {
       onCancel()
     } else {
