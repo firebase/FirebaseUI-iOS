@@ -37,8 +37,12 @@ public struct EmailLinkReauthContentState {
   public let isLoading: Bool
 
   /// The localized message of the last failed send or link sign-in. It clears when the next
-  /// attempt starts. The prompt's error alert still shows for the same failure.
+  /// attempt starts or ``dismissError`` runs. The prompt's error alert still shows for the same
+  /// failure.
   public let errorMessage: String?
+
+  /// Clears ``errorMessage``, for example when the user closes your error UI.
+  public let dismissError: @MainActor () -> Void
 
   /// Creates a state, for example to preview custom content with stub actions. Every parameter
   /// has a default, so pass only what the preview needs; later releases add new parameters with
@@ -48,13 +52,15 @@ public struct EmailLinkReauthContentState {
               email: String = "",
               linkSent: Bool = false,
               isLoading: Bool = false,
-              errorMessage: String? = nil) {
+              errorMessage: String? = nil,
+              dismissError: @escaping @MainActor () -> Void = {}) {
     self.resendLink = resendLink
     self.cancel = cancel
     self.email = email
     self.linkSent = linkSent
     self.isLoading = isLoading
     self.errorMessage = errorMessage
+    self.dismissError = dismissError
   }
 }
 
@@ -96,7 +102,8 @@ public struct EmailLinkReauthScreen<Content: View>: View {
           email: email,
           linkSent: linkSent,
           isLoading: isLoading,
-          errorMessage: errorMessage
+          errorMessage: errorMessage,
+          dismissError: { errorMessage = nil }
         ))
       }
       .onOpenURL { url in
@@ -144,7 +151,7 @@ public struct EmailLinkReauthScreen<Content: View>: View {
     } else {
       self.error = AlertError(
         title: "Error",
-        message: error.localizedDescription,
+        message: errorMessage ?? error.localizedDescription,
         underlyingError: error
       )
     }

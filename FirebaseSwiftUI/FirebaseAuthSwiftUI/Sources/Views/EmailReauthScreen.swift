@@ -37,9 +37,13 @@ public struct EmailReauthContentState {
   /// Whether a reauthentication attempt is in flight.
   public let isLoading: Bool
 
-  /// The localized message of the last failed attempt. It clears when the password changes or
-  /// the next attempt starts. The prompt's error alert still shows for the same failure.
+  /// The localized message of the last failed attempt. It clears when the password changes, the
+  /// next attempt starts, or ``dismissError`` runs. The prompt's error alert still shows for the
+  /// same failure.
   public let errorMessage: String?
+
+  /// Clears ``errorMessage``, for example when the user closes your error UI.
+  public let dismissError: @MainActor () -> Void
 
   /// Creates a state, for example to preview custom content with stub actions. Every parameter
   /// has a default, so pass only what the preview needs; later releases add new parameters with
@@ -50,7 +54,8 @@ public struct EmailReauthContentState {
               email: String = "",
               isValid: Bool = false,
               isLoading: Bool = false,
-              errorMessage: String? = nil) {
+              errorMessage: String? = nil,
+              dismissError: @escaping @MainActor () -> Void = {}) {
     self.password = password
     self.verify = verify
     self.cancel = cancel
@@ -58,6 +63,7 @@ public struct EmailReauthContentState {
     self.isValid = isValid
     self.isLoading = isLoading
     self.errorMessage = errorMessage
+    self.dismissError = dismissError
   }
 }
 
@@ -99,7 +105,8 @@ public struct EmailReauthScreen<Content: View>: View {
           email: email,
           isValid: isValid,
           isLoading: isLoading,
-          errorMessage: errorMessage
+          errorMessage: errorMessage,
+          dismissError: { errorMessage = nil }
         ))
       }
       .mfaReauthResolution($mfaRequired, coordinator: coordinator)
@@ -137,7 +144,7 @@ public struct EmailReauthScreen<Content: View>: View {
     } else {
       self.error = AlertError(
         title: "Error",
-        message: error.localizedDescription,
+        message: errorMessage ?? error.localizedDescription,
         underlyingError: error
       )
     }

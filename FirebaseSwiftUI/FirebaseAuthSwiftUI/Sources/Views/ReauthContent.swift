@@ -16,6 +16,9 @@ import SwiftUI
 
 /// A reauthentication prompt and its state, passed to the content given to
 /// ``SwiftUICore/View/reauthContent(_:)``.
+///
+/// Later releases may add cases for new providers, so keep a `default` case that returns
+/// ``DefaultReauthContent``.
 public enum ReauthPrompt {
   /// The user signed in with email and password.
   case password(EmailReauthContentState)
