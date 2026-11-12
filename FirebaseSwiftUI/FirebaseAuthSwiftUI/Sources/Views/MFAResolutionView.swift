@@ -18,15 +18,29 @@ import SwiftUI
 @MainActor
 public struct MFAResolutionView {
   let mfaRequired: MFARequired
+  private let onResolved: (() -> Void)?
+  private let onCancel: (() -> Void)?
 
   public init(mfaRequired: MFARequired) {
+    self.init(mfaRequired: mfaRequired, onResolved: nil, onCancel: nil)
+  }
+
+  /// Used outside the auth navigation stack (e.g. reauthentication), where completion and
+  /// cancellation are handled by the caller instead of clearing the navigator
+  init(mfaRequired: MFARequired, onResolved: (() -> Void)?, onCancel: (() -> Void)?) {
     self.mfaRequired = mfaRequired
+    self.onResolved = onResolved
+    self.onCancel = onCancel
   }
 }
 
 extension MFAResolutionView: View {
   public var body: some View {
-    MFAResolutionScreen(mfaRequired: mfaRequired) { DefaultMFAResolutionContent(state: $0) }
+    MFAResolutionScreen(
+      mfaRequired: mfaRequired,
+      onResolved: onResolved,
+      onCancel: onCancel
+    ) { DefaultMFAResolutionContent(state: $0) }
   }
 }
 

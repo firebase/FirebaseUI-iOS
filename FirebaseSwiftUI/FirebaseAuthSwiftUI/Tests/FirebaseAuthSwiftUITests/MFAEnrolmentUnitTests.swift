@@ -91,3 +91,24 @@ struct TOTPEnrollmentInfoTests {
     #expect(totpInfo.verificationStatus == .failed)
   }
 }
+
+// MARK: - MFA Reauthentication Error Tests
+
+@Suite("multiFactorReauthenticationRequired Tests")
+struct MultiFactorReauthenticationRequiredTests {
+  @Test("Carries the MFA hints and describes the required step")
+  func carriesHintsAndDescription() throws {
+    let mfaRequired = MFARequired(hints: [
+      .phone(displayName: "Work Phone", uid: "phone-uid", phoneNumber: "+15551234567"),
+      .totp(displayName: "Authenticator", uid: "totp-uid"),
+    ])
+    let error: Error = AuthServiceError.multiFactorReauthenticationRequired(mfaRequired)
+
+    guard case let AuthServiceError.multiFactorReauthenticationRequired(payload) = error else {
+      Issue.record("Expected multiFactorReauthenticationRequired, got \(error)")
+      return
+    }
+    #expect(payload == mfaRequired)
+    #expect(error.localizedDescription == "Please complete two-factor authentication to continue")
+  }
+}
