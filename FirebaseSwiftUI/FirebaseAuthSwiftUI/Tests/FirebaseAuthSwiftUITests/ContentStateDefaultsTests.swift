@@ -93,6 +93,28 @@ struct ContentStateDefaultsTests {
     #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
   }
 
+  @Test("EmailReauthContentState builds with no arguments")
+  func emailReauthContentState() {
+    let state = EmailReauthContentState()
+    #expect(state.password.wrappedValue.isEmpty && state.email.isEmpty)
+    #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
+  }
+
+  @Test("PhoneReauthContentState builds with no arguments")
+  func phoneReauthContentState() {
+    let state = PhoneReauthContentState()
+    #expect(state.verificationCode.wrappedValue.isEmpty && state.phoneNumber.isEmpty)
+    #expect(!state.codeSent)
+    #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
+  }
+
+  @Test("EmailLinkReauthContentState builds with no arguments")
+  func emailLinkReauthContentState() {
+    let state = EmailLinkReauthContentState()
+    #expect(state.email.isEmpty && !state.linkSent)
+    #expect(!state.isLoading && state.errorMessage == nil)
+  }
+
   @Test("A preview passes only the fields it needs")
   func partialArguments() {
     let state = MFAEnrolmentContentState(step: .enterPhoneNumber, isLoading: true)

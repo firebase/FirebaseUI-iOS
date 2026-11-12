@@ -12,124 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import FirebaseAuth
-import FirebaseAuthUIComponents
 import FirebaseCore
 import SwiftUI
 
 @MainActor
 public struct EmailReauthView {
-  @Environment(AuthService.self) private var authService
-  @Environment(\.reportError) private var reportError
-
   let email: String
   let coordinator: ReauthenticationCoordinator
-
-  @State private var password = ""
-  @State private var isLoading = false
-  @State private var error: AlertError?
-  @State private var mfaRequired: MFARequired?
-
-  private func verifyPassword() {
-    guard !password.isEmpty else { return }
-
-    Task { @MainActor in
-      isLoading = true
-      do {
-        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-        try await authService.reauthenticate(with: credential)
-        coordinator.reauthCompleted()
-        isLoading = false
-      } catch let AuthServiceError.multiFactorReauthenticationRequired(mfaRequired) {
-        self.mfaRequired = mfaRequired
-        isLoading = false
-      } catch {
-        if let reportError = reportError {
-          reportError(error)
-        } else {
-          self.error = AlertError(
-            title: "Error",
-            message: error.localizedDescription,
-            underlyingError: error
-          )
-        }
-        isLoading = false
-      }
-    }
-  }
 }
 
 extension EmailReauthView: View {
   public var body: some View {
-    NavigationStack {
-      VStack(spacing: 24) {
-        // Header
-        VStack(spacing: 12) {
-          Image(systemName: "lock.circle.fill")
-            .font(.system(size: 60))
-            .foregroundColor(.blue)
-
-          Text(authService.string.confirmPasswordTitle)
-            .authFont(.title)
-            .fontWeight(.bold)
-
-          Text(authService.string.forSecurityEnterPasswordMessage)
-            .authFont(.body)
-            .foregroundColor(.secondary)
-            .multilineTextAlignment(.center)
-        }
-        .padding()
-
-        VStack(spacing: 20) {
-          Text(authService.string.emailPrefix(email: email))
-            .authFont(.caption)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.bottom, 8)
-
-          AuthTextField(
-            text: $password,
-            label: authService.string.passwordFieldLabel,
-            prompt: authService.string.passwordInputLabel,
-            contentType: .password,
-            isSecureTextField: true,
-            onSubmit: { _ in
-              verifyPassword()
-            },
-            leading: {
-              Image(systemName: "lock")
-            }
-          )
-          .submitLabel(.done)
-          .accessibilityIdentifier("email-reauth-password-field")
-
-          Button(action: verifyPassword) {
-            if isLoading {
-              ProgressView()
-                .frame(height: 32)
-                .frame(maxWidth: .infinity)
-            } else {
-              Text(authService.string.confirmButtonLabel)
-                .frame(height: 32)
-                .frame(maxWidth: .infinity)
-            }
-          }
-          .authCTAButtonStyle()
-          .disabled(password.isEmpty || isLoading)
-          .accessibilityIdentifier("confirm-password-button")
-
-          Button(authService.string.cancelButtonLabel) {
-            coordinator.reauthCancelled()
-          }
-        }
-        .padding(.horizontal)
-
-        Spacer()
-      }
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-      .navigationBarTitleDisplayMode(.inline)
-      .mfaReauthResolution($mfaRequired, coordinator: coordinator)
+    EmailReauthScreen(email: email, coordinator: coordinator) {
+      DefaultEmailReauthContent(state: $0)
     }
-    .errorAlert(error: $error, okButtonLabel: authService.string.okButtonLabel)
   }
 }
 

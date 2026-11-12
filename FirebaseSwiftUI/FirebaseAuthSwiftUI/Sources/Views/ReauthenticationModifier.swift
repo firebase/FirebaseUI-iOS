@@ -57,10 +57,9 @@ struct ReauthenticationModifier: ViewModifier {
       // Sheet for phone reauthentication
       .sheet(isPresented: $coordinator.showingPhoneReauth, onDismiss: cancelIfPending) {
         if case let .phone(context) = coordinator.reauthContext {
-          PhoneReauthView(
-            phoneNumber: context.phoneNumber,
-            coordinator: coordinator
-          )
+          PhoneReauthScreen(phoneNumber: context.phoneNumber, coordinator: coordinator) {
+            ReauthPromptContent(prompt: .phone($0))
+          }
           // Show errors inside the sheet; a parent's reportError alert would sit behind it
           .environment(\.reportError, nil)
         }
@@ -68,10 +67,9 @@ struct ReauthenticationModifier: ViewModifier {
       // Sheet for email reauthentication
       .sheet(isPresented: $coordinator.showingEmailPasswordPrompt, onDismiss: cancelIfPending) {
         if case let .email(context) = coordinator.reauthContext {
-          EmailReauthView(
-            email: context.email,
-            coordinator: coordinator
-          )
+          EmailReauthScreen(email: context.email, coordinator: coordinator) {
+            ReauthPromptContent(prompt: .password($0))
+          }
           // Show errors inside the sheet; a parent's reportError alert would sit behind it
           .environment(\.reportError, nil)
         }
@@ -95,10 +93,9 @@ struct ReauthenticationModifier: ViewModifier {
       // Sheet for email link reauthentication
       .sheet(isPresented: $coordinator.showingEmailLinkReauth, onDismiss: cancelIfPending) {
         if case let .emailLink(context) = coordinator.reauthContext {
-          EmailLinkReauthView(
-            email: context.email,
-            coordinator: coordinator
-          )
+          EmailLinkReauthScreen(email: context.email, coordinator: coordinator) {
+            ReauthPromptContent(prompt: .emailLink($0))
+          }
           // Show errors inside the sheet; a parent's reportError alert would sit behind it
           .environment(\.reportError, nil)
         }
