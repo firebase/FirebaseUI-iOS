@@ -28,6 +28,20 @@ public struct EmailLinkContentState {
   /// Clears ``didSend``.
   public let dismissAlert: @MainActor () -> Void
 
+  /// Signs in with the link waiting for confirmation, using ``email`` as the address it was
+  /// sent to. Does nothing unless ``needsEmailConfirmation`` and ``isValid`` are `true` and
+  /// ``isLoading`` is `false`.
+  public let confirmEmail: @MainActor () -> Void
+
+  /// Drops the link waiting for confirmation, so ``needsEmailConfirmation`` turns `false` and
+  /// the user can send a new link.
+  public let cancelConfirmation: @MainActor () -> Void
+
+  /// Whether a sign-in link was opened on a device that didn't request it, so the user must
+  /// enter the email address it was sent to and call ``confirmEmail``. Turned off with
+  /// ``AuthService/withEmailLinkSignIn(forceSameDevice:)``.
+  public let needsEmailConfirmation: Bool
+
   /// Whether a sign-in link was sent and ``dismissAlert`` hasn't been called since.
   public let didSend: Bool
 
@@ -51,6 +65,9 @@ public struct EmailLinkContentState {
   public init(email: Binding<String> = .constant(""),
               sendSignInLink: @escaping @MainActor () -> Void = {},
               dismissAlert: @escaping @MainActor () -> Void = {},
+              confirmEmail: @escaping @MainActor () -> Void = {},
+              cancelConfirmation: @escaping @MainActor () -> Void = {},
+              needsEmailConfirmation: Bool = false,
               didSend: Bool = false,
               isValid: Bool = false,
               isLoading: Bool = false,
@@ -59,6 +76,9 @@ public struct EmailLinkContentState {
     self.email = email
     self.sendSignInLink = sendSignInLink
     self.dismissAlert = dismissAlert
+    self.confirmEmail = confirmEmail
+    self.cancelConfirmation = cancelConfirmation
+    self.needsEmailConfirmation = needsEmailConfirmation
     self.didSend = didSend
     self.isValid = isValid
     self.isLoading = isLoading
@@ -69,8 +89,9 @@ public struct EmailLinkContentState {
 
 /// The email-link screen, with its content drawn by you.
 ///
-/// The screen sends the link, signs in when the app opens it, and routes account conflicts and
-/// errors. Your content only draws the UI from the ``EmailLinkContentState`` it receives. Wrap
+/// The screen sends the link, signs in when the app opens it, asks for the email address when
+/// the link was opened on another device, and routes account conflicts and errors. Your content
+/// only draws the UI from the ``EmailLinkContentState`` it receives. Wrap
 /// ``DefaultEmailLinkContent`` to keep the stock markup.
 ///
 /// Example:
@@ -116,6 +137,9 @@ public struct EmailLinkScreen<Content: View>: View {
         email: $email,
         sendSignInLink: sendSignInLink,
         dismissAlert: { didSend = false },
+        confirmEmail: confirmEmail,
+        cancelConfirmation: { authService.cancelEmailLinkConfirmation() },
+        needsEmailConfirmation: authService.pendingEmailLink != nil,
         didSend: didSend,
         isValid: isValid,
         isLoading: isLoading,
@@ -125,32 +149,24 @@ public struct EmailLinkScreen<Content: View>: View {
     }
     .onChange(of: email) { errorMessage = nil }
     .onOpenURL { url in
-      // A sign-in link is one-time, so ignore another while one is being handled.
-      guard !isHandlingLink else { return }
-      isHandlingLink = true
-      errorMessage = nil
-      Task {
-        defer { isHandlingLink = false }
-        do {
-          try await authService.handleSignInLink(url: url)
-        } catch {
-          if case let AuthServiceError.accountConflict(ctx) = error,
-             let onConflict = accountConflictHandler {
-            onConflict(ctx)
-            return
-          }
-
-          if shouldShowErrorAlert(for: error) {
-            errorMessage = authService.string.localizedErrorMessage(for: error)
-          }
-        }
-      }
+      // The app's other deep links reach this handler too; they aren't errors here.
+      guard authService.isEmailSignInLink(url) else { return }
+      handleLink(url) { try await authService.handleSignInLink(url: url) }
+    }
+    // A link the app opened before this screen was showing.
+    .onChange(of: authService.incomingEmailLink, initial: true) { _, url in
+      guard let url else { return }
+      authService.incomingEmailLink = nil
+      handleLink(url) { try await authService.handleSignInLink(url: url) }
     }
     .onAppear {
       if let suggestedEmailAddress = authService.suggestedEmailAddress {
         email = suggestedEmailAddress
       }
     }
+    // Leaving the screen abandons the link waiting for confirmation, so coming back offers to
+    // send a new one.
+    .onDisappear { authService.cancelEmailLinkConfirmation() }
     .onChange(of: authService.suggestedEmailAddress) { _, suggestedEmailAddress in
       if let suggestedEmailAddress {
         email = suggestedEmailAddress
@@ -166,6 +182,41 @@ public struct EmailLinkScreen<Content: View>: View {
     isWorking || isHandlingLink || authService.authenticationState == .authenticating
   }
 
+  private func confirmEmail() {
+    guard authService.pendingEmailLink != nil, isValid, !isLoading else { return }
+    let email = self.email
+    handleLink(nil) { try await authService.confirmEmailLinkSignIn(email: email) }
+  }
+
+  private func handleLink(_ url: URL?,
+                          _ attempt: @escaping @MainActor () async throws -> Void) {
+    // A sign-in link is one-time, so ignore another while one is being handled.
+    guard !isHandlingLink else { return }
+    isHandlingLink = true
+    errorMessage = nil
+    Task {
+      defer { isHandlingLink = false }
+      do {
+        try await attempt()
+      } catch {
+        if case let AuthServiceError.accountConflict(ctx) = error,
+           let onConflict = accountConflictHandler {
+          onConflict(ctx)
+          return
+        }
+        // This link was opened on another device; the content asks for the email instead.
+        if case AuthServiceError.invalidEmailLink = error, let url,
+           authService.pendingEmailLink == url {
+          return
+        }
+
+        if shouldShowErrorAlert(for: error) {
+          errorMessage = authService.string.localizedErrorMessage(for: error)
+        }
+      }
+    }
+  }
+
   private func sendSignInLink() {
     guard isValid, !isLoading else { return }
     let email = self.email
@@ -176,7 +227,6 @@ public struct EmailLinkScreen<Content: View>: View {
       do {
         try await authService.sendEmailSignInLink(email: email)
         didSend = true
-        authService.emailLink = email
       } catch {
         if shouldShowErrorAlert(for: error) {
           errorMessage = authService.string.localizedErrorMessage(for: error)
