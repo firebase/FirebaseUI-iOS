@@ -232,7 +232,7 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
   func testCreateUserDisplaysSignedInView() throws {
     let email = createEmail()
     let password = "qwerty321@"
-    let app = createTestApp()
+    let app = createTestApp(requireDisplayName: true)
     app.launch()
 
     // Check the Views are updated
@@ -248,6 +248,11 @@ final class FirebaseSwiftUIExampleUITests: XCTestCase {
 
     XCTAssertTrue(emailField.waitForExistence(timeout: 2), "Email field should exist")
     try enterText(email, into: emailField, app: app)
+
+    // Sign-up asks for a name when the app requires one.
+    let displayNameField = app.textFields["display-name-field"]
+    XCTAssertTrue(displayNameField.exists, "Name field should exist")
+    try enterText("Ada Lovelace", into: displayNameField, app: app)
 
     let passwordField = app.secureTextFields["password-field"]
     XCTAssertTrue(passwordField.exists, "Password field should exist")

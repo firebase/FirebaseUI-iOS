@@ -17,6 +17,7 @@ import SwiftUI
 
 private enum FocusableField: Hashable {
   case email
+  case displayName
   case password
   case confirmPassword
 }
@@ -47,7 +48,7 @@ public struct DefaultEmailAuthContent: View {
           ],
           maintainsValidationMessage: state.flow == .signUp,
           onSubmit: { _ in
-            self.focus = .password
+            self.focus = showsDisplayName ? .displayName : .password
           },
           leading: {
             Image(systemName: "at")
@@ -55,6 +56,29 @@ public struct DefaultEmailAuthContent: View {
         )
         .focused($focus, equals: .email)
         .accessibilityIdentifier("email-field")
+        if showsDisplayName {
+          AuthTextField(
+            text: state.displayName,
+            label: authService.string.nameFieldLabel,
+            prompt: authService.string.nameInputLabel,
+            contentType: .name,
+            validations: [
+              FormValidator(
+                message: FormValidators.notEmpty(label: authService.string.nameFieldLabel).message,
+                validate: { !($0 ?? "").trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+              ),
+            ],
+            maintainsValidationMessage: true,
+            onSubmit: { _ in
+              self.focus = .password
+            },
+            leading: {
+              Image(systemName: "person")
+            }
+          )
+          .focused($focus, equals: .displayName)
+          .accessibilityIdentifier("display-name-field")
+        }
         AuthTextField(
           text: state.password,
           label: authService.string.passwordFieldLabel,
@@ -139,29 +163,39 @@ public struct DefaultEmailAuthContent: View {
         .authCTAButtonStyle()
         .accessibilityIdentifier("sign-in-button")
       }
-      Button(action: state.switchFlow) {
-        HStack(spacing: 4) {
-          Text(
-            state.flow == .signIn
-              ? authService.string.dontHaveAnAccountYetLabel
-              : authService.string.alreadyHaveAnAccountLabel
-          )
-          .authCustomFont(.body)
-          .foregroundStyle(Color(.label))
-          Text(
-            state.flow == .signUp
-              ? authService.string.emailLoginFlowLabel
-              : authService.string.emailSignUpFlowLabel
-          )
-          .authCustomFont(.body, weight: .medium)
-        }
+      if state.canSignUp {
+        switchFlowButton
       }
-      .accessibilityIdentifier("switch-auth-flow")
     }
     .errorMessageAlert(
       state.errorMessage,
       okButtonLabel: authService.string.okButtonLabel,
       dismiss: state.dismissError
     )
+  }
+
+  private var showsDisplayName: Bool {
+    state.flow == .signUp && state.requiresDisplayName
+  }
+
+  private var switchFlowButton: some View {
+    Button(action: state.switchFlow) {
+      HStack(spacing: 4) {
+        Text(
+          state.flow == .signIn
+            ? authService.string.dontHaveAnAccountYetLabel
+            : authService.string.alreadyHaveAnAccountLabel
+        )
+        .authCustomFont(.body)
+        .foregroundStyle(Color(.label))
+        Text(
+          state.flow == .signUp
+            ? authService.string.emailLoginFlowLabel
+            : authService.string.emailSignUpFlowLabel
+        )
+        .authCustomFont(.body, weight: .medium)
+      }
+    }
+    .accessibilityIdentifier("switch-auth-flow")
   }
 }
