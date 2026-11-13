@@ -783,6 +783,13 @@ public extension AuthService {
     incomingEmailLink = nil
   }
 
+  /// Whether a URL the app opened carries a Firebase email sign-in link, so screens can leave
+  /// the app's other deep links alone.
+  internal func isEmailSignInLink(_ url: URL) -> Bool {
+    guard let link = try? Self.emailSignInLink(from: url) else { return false }
+    return auth.isSignIn(withEmailLink: link)
+  }
+
   /// Hands a sign-in link the app opened to ``EmailLinkScreen``, presenting the sheet and pushing
   /// ``AuthView/emailLink`` when that screen isn't already showing to handle it itself. An app
   /// that shows its own screen through `withEmailLinkSignIn(onTap:)` handles links there.
@@ -790,8 +797,7 @@ public extension AuthService {
     guard emailLinkSignInEnabled, emailLinkUsesLibraryScreen, !isReauthenticating,
           authenticationState != .authenticated,
           !(isPresented && authView == .emailLink),
-          let link = try? Self.emailSignInLink(from: url),
-          auth.isSignIn(withEmailLink: link) else { return }
+          isEmailSignInLink(url) else { return }
 
     incomingEmailLink = url
     isPresented = true

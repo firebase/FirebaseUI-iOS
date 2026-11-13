@@ -149,6 +149,8 @@ public struct EmailLinkScreen<Content: View>: View {
     }
     .onChange(of: email) { errorMessage = nil }
     .onOpenURL { url in
+      // The app's other deep links reach this handler too; they aren't errors here.
+      guard authService.isEmailSignInLink(url) else { return }
       handleLink(url) { try await authService.handleSignInLink(url: url) }
     }
     // A link the app opened before this screen was showing.
@@ -162,6 +164,9 @@ public struct EmailLinkScreen<Content: View>: View {
         email = suggestedEmailAddress
       }
     }
+    // Leaving the screen abandons the link waiting for confirmation, so coming back offers to
+    // send a new one.
+    .onDisappear { authService.cancelEmailLinkConfirmation() }
     .onChange(of: authService.suggestedEmailAddress) { _, suggestedEmailAddress in
       if let suggestedEmailAddress {
         email = suggestedEmailAddress

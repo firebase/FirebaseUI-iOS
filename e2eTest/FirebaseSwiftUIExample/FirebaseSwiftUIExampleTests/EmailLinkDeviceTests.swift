@@ -249,6 +249,25 @@ struct EmailLinkDeviceTests {
   }
 
   @Test
+  func onlyFirebaseSignInLinksCountAsEmailSignInLinks() throws {
+    configureFirebaseIfNeeded()
+    let service = AuthService().withEmailLinkSignIn()
+    var link = try #require(URLComponents(string: "https://example.com/"))
+    link.queryItems = [URLQueryItem(
+      name: "link",
+      value: "https://flutterfire-e2e-tests.firebaseapp.com/__/auth/action?apiKey=key"
+        + "&mode=signIn&oobCode=code&continueUrl=https://example.com"
+    )]
+
+    #expect(try service.isEmailSignInLink(#require(link.url)))
+    // Another deep link, or a link to some other Firebase action, is left to the app.
+    #expect(try !service.isEmailSignInLink(#require(URL(string: "myapp://settings"))))
+    #expect(try !service.isEmailSignInLink(
+      #require(URL(string: "https://example.com/?link=https://example.com/?mode=resetPassword"))
+    ))
+  }
+
+  @Test
   func openedLinkIsIgnoredWithoutEmailLinkSignIn() throws {
     configureFirebaseIfNeeded()
     let service = AuthService()
