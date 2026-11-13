@@ -1193,7 +1193,7 @@ Creates a new user account with email and password, then saves `displayName` to 
 **Parameters:**
 - `email`: New user's email address
 - `password`: New user's password
-- `displayName`: Name saved as the account's display name. Ignored when `nil` or blank
+- `displayName`: Name saved as the account's display name. Ignored when `nil` or blank. Saving it is best effort: a failure is logged and the method still returns `.signedIn`, because the account already exists
 
 **Returns:** `SignInOutcome`
 

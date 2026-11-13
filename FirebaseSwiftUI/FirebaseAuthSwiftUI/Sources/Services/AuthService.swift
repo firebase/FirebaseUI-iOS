@@ -15,7 +15,10 @@
 @preconcurrency import FirebaseAuth
 import FirebaseAuthUIComponents
 import FirebaseCore
+import os
 import SwiftUI
+
+private let logger = Logger(subsystem: "firebase-ui-ios", category: "AuthService")
 
 /// Base protocol for all authentication providers
 public protocol AuthProviderSwift {}
@@ -558,7 +561,9 @@ public extension AuthService {
   ///
   /// - Parameters:
   ///   - displayName: The name to save as the account's display name. Ignored when `nil` or
-  ///     blank.
+  ///     blank. Saving it is best effort: if it fails, the failure is logged and the method still
+  ///     returns ``SignInOutcome/signedIn(_:)``, because the account already exists and is
+  ///     signed in.
   /// - Throws: `AuthErrorCode.adminRestrictedOperation` when
   ///   ``withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)`` turned sign-up off.
   func createUser(email: String,
@@ -594,11 +599,16 @@ public extension AuthService {
 
     // The account exists and is signed in now. Save the name before this method reports the
     // sign-in; the auth listener may report it first, and `saveDisplayName` republishes
-    // `currentUser` so views reading the name update. A failure is reported without signing
-    // out, as the UIKit library did.
+    // `currentUser` so views reading the name update. Throwing here would report a failed
+    // sign-up for an account that exists, so a failed save is only logged.
     defer { updateAuthenticationState() }
     if let user = result?.user {
-      try await saveDisplayName(displayName, to: user)
+      do {
+        try await saveDisplayName(displayName, to: user)
+      } catch {
+        let reason = String(describing: error)
+        logger.error("Couldn't save the new account's display name: \(reason, privacy: .public)")
+      }
     }
     return .signedIn(result)
   }

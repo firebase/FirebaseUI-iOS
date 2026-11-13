@@ -242,7 +242,7 @@ public struct EmailAuthScreen<Content: View>: View {
   }
 
   private var flow: AuthenticationFlow {
-    canSignUp ? fixedFlow ?? authService.authenticationFlow : .signIn
+    canSignUp ? (fixedFlow ?? authService.authenticationFlow) : .signIn
   }
 
   private var canSignUp: Bool {
