@@ -59,8 +59,12 @@ public struct AuthPickerContent<
     @Bindable var authService = authService
     content()
       // A sign-in link opened while the email-link screen isn't showing, for example on
-      // another device or after a cold launch, opens that screen to finish signing in.
-      .onOpenURL { authService.presentEmailLinkScreen(for: $0) }
+      // another device or after a cold launch, opens that screen to finish signing in. A
+      // reauthentication link opened while its screen isn't showing finishes it here.
+      .onOpenURL { url in
+        authService.presentEmailLinkScreen(for: url)
+        finishEmailLinkReauthentication(with: url)
+      }
       // Reopening the sheet starts from the first screen, not a half-finished pushed one.
       .sheet(isPresented: $authService.isPresented, onDismiss: {
         authService.navigator.clear()
@@ -192,6 +196,18 @@ public struct AuthPickerContent<
       signedInContent: signedInContent,
       showsPickerTitle: showsPickerTitle
     )
+  }
+
+  private func finishEmailLinkReauthentication(with url: URL) {
+    Task { @MainActor in
+      do {
+        try await authService.finishEmailLinkReauthentication(with: url)
+      } catch {
+        // The sheet holds the error alert, and may be closed after a cold launch.
+        authService.isPresented = true
+        reportError(error)
+      }
+    }
   }
 
   /// Closure for reporting errors from child views
