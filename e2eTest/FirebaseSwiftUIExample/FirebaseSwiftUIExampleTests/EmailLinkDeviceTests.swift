@@ -241,11 +241,9 @@ struct EmailLinkDeviceTests {
     #expect(service.isReauthenticating)
     service.isShowingEmailLinkReauth = false
 
-    // A cold launch starts a new service with the reauthentication state kept in storage.
+    // A cold launch starts a new service with the reauthentication state kept in storage. The
+    // link can arrive before its auth listener has filled in `currentUser`, so don't wait for it.
     let relaunched = try await makeService(clearingEmulator: false)
-    try await waitForStateChange {
-      relaunched.currentUser?.email?.caseInsensitiveCompare(email) == .orderedSame
-    }
     #expect(relaunched.isReauthenticating)
 
     // `AuthPickerContent` may pass the same link more than once.
@@ -256,6 +254,10 @@ struct EmailLinkDeviceTests {
     try await second.value
 
     #expect(!relaunched.isReauthenticating)
+
+    // Delivered again after reauthentication finished, the link isn't taken for a sign-in link.
+    try await relaunched.handleSignInLink(url: link)
+    #expect(relaunched.pendingEmailLink == nil)
     try await relaunched.signOut()
   }
 

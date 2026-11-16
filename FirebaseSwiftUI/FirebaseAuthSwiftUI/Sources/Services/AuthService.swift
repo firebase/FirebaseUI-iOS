@@ -811,7 +811,9 @@ public extension AuthService {
   /// ``EmailLinkReauthView`` isn't showing, for example after a cold launch. Does nothing for
   /// other links, or when that view is showing to handle the link itself.
   internal func finishEmailLinkReauthentication(with url: URL) async throws {
-    guard isReauthenticating, !isShowingEmailLinkReauth, currentUser != nil else { return }
+    // `auth.currentUser`, not `currentUser`: after a cold launch the link can arrive before the
+    // auth listener has filled in `currentUser`.
+    guard isReauthenticating, !isShowingEmailLinkReauth, auth.currentUser != nil else { return }
     try await handleSignInLink(url: url)
   }
 
@@ -860,6 +862,8 @@ public extension AuthService {
     }
     emailLinkReauth = nil
     isReauthenticating = false
+    // The same link can be delivered again; don't take it for a sign-in link then.
+    lastSignedInEmailLink = url
   }
 
   /// The continue URL of the sign-in link inside a URL the app opened. Read before
