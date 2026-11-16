@@ -15,7 +15,10 @@
 @preconcurrency import FirebaseAuth
 import FirebaseAuthUIComponents
 import FirebaseCore
+import os
 import SwiftUI
+
+private let logger = Logger(subsystem: "firebase-ui-ios", category: "AuthService")
 
 /// Base protocol for all authentication providers
 public protocol AuthProviderSwift {}
@@ -220,6 +223,14 @@ public final class AuthService {
   public var authenticationState: AuthenticationState = .unauthenticated
   public var authenticationFlow: AuthenticationFlow = .signIn
   public var emailPasswordSignInEnabled = false
+  /// Whether email sign-up asks for a name and saves it as the account's display name. Set
+  /// with ``withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)``.
+  public private(set) var requireDisplayName = false
+  /// Whether email sign-in offers sign-up and ``createUser(email:password:displayName:)`` may
+  /// create accounts. Set with ``withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)``.
+  /// Email-link sign-in still creates an account for a new address, as it did in the UIKit
+  /// library.
+  public private(set) var allowNewEmailAccounts = true
   public var emailLinkSignInEnabled = false
   public var legacySignInRecovery: LegacySignInRecoveryContext?
   public var suggestedEmailAddress: String?
@@ -483,18 +494,43 @@ public extension AuthService {
       throw AuthServiceError.noCurrentUser
     }
 
+    try await saveDisplayName(name, to: user)
+  }
+
+  /// Saves a non-blank `name` as `user`'s display name, then republishes ``currentUser`` so
+  /// views reading the name see it.
+  internal func saveDisplayName(_ name: String?, to user: User) async throws {
+    guard let name = name?.trimmingCharacters(in: .whitespacesAndNewlines),
+          !name.isEmpty else { return }
+
     let changeRequest = user.createProfileChangeRequest()
     changeRequest.displayName = name
     try await changeRequest.commitChanges()
+    currentUser = auth.currentUser
   }
 }
 
 // MARK: - Email/Password Sign In
 
 public extension AuthService {
-  /// Enable email/password sign-in (EmailAuthView is shown directly in AuthPickerView)
-  func withEmailSignIn() -> AuthService {
+  /// Enables email and password sign-in, shown directly in `AuthPickerView`.
+  ///
+  /// - Parameters:
+  ///   - requireDisplayName: Whether sign-up asks for a name and saves it as the new account's
+  ///     display name. Defaults to `false`, so the stock form is unchanged unless you opt in;
+  ///     the UIKit library and FirebaseUI-Android default to `true`.
+  ///   - allowNewEmailAccounts: Whether users may create accounts. When `false`, the sign-up
+  ///     switch is hidden and ``createUser(email:password:displayName:)`` throws
+  ///     `AuthErrorCode.adminRestrictedOperation`, the error Firebase returns when a project
+  ///     turns sign-up off. Defaults to `true`.
+  func withEmailSignIn(requireDisplayName: Bool = false,
+                       allowNewEmailAccounts: Bool = true) -> AuthService {
     emailPasswordSignInEnabled = true
+    self.requireDisplayName = requireDisplayName
+    self.allowNewEmailAccounts = allowNewEmailAccounts
+    if !allowNewEmailAccounts {
+      authenticationFlow = .signIn
+    }
     return self
   }
 
@@ -513,17 +549,46 @@ public extension AuthService {
     }
   }
 
+  /// Creates an email and password account, or links the credential to the signed-in anonymous
+  /// user when anonymous upgrade is on. Kept so references to this two-argument form, such as
+  /// `authService.createUser` stored as a function, still compile.
   func createUser(email: String, password: String) async throws -> SignInOutcome {
+    try await createUser(email: email, password: password, displayName: nil)
+  }
+
+  /// Creates an email and password account, or links the credential to the signed-in anonymous
+  /// user when anonymous upgrade is on, then saves `displayName` to the account's profile.
+  ///
+  /// - Parameters:
+  ///   - displayName: The name to save as the account's display name. Ignored when `nil` or
+  ///     blank. Saving it is best effort: if it fails, the failure is logged and the method still
+  ///     returns ``SignInOutcome/signedIn(_:)``, because the account already exists and is
+  ///     signed in.
+  /// - Throws: `AuthErrorCode.adminRestrictedOperation` when
+  ///   ``withEmailSignIn(requireDisplayName:allowNewEmailAccounts:)`` turned sign-up off.
+  func createUser(email: String,
+                  password: String,
+                  displayName: String? = nil) async throws -> SignInOutcome {
+    guard allowNewEmailAccounts else {
+      // Shaped like the error Firebase returns, so apps handle both the same way.
+      throw NSError(
+        domain: AuthErrorDomain,
+        code: AuthErrorCode.adminRestrictedOperation.rawValue,
+        userInfo: [
+          NSLocalizedDescriptionKey: string.emailSignUpNotAllowedMessage,
+          AuthErrors.userInfoNameKey: "ERROR_ADMIN_RESTRICTED_OPERATION",
+        ]
+      )
+    }
     authenticationState = .authenticating
     let credential = EmailAuthProvider.credential(withEmail: email, password: password)
 
+    let result: AuthDataResult?
     do {
       if shouldHandleAnonymousUpgrade {
-        return try await handleAutoUpgradeAnonymousUser(credentials: credential)
+        result = try await currentUser?.link(with: credential)
       } else {
-        let result = try await auth.createUser(withEmail: email, password: password)
-        updateAuthenticationState()
-        return .signedIn(result)
+        result = try await auth.createUser(withEmail: email, password: password)
       }
     } catch {
       // Possible conflicts from auth.createUser():
@@ -531,6 +596,21 @@ public extension AuthService {
       authenticationState = .unauthenticated
       try handleErrorWithConflictCheck(error: error, credential: credential)
     }
+
+    // The account exists and is signed in now. Save the name before this method reports the
+    // sign-in; the auth listener may report it first, and `saveDisplayName` republishes
+    // `currentUser` so views reading the name update. Throwing here would report a failed
+    // sign-up for an account that exists, so a failed save is only logged.
+    defer { updateAuthenticationState() }
+    if let user = result?.user {
+      do {
+        try await saveDisplayName(displayName, to: user)
+      } catch {
+        let reason = String(describing: error)
+        logger.error("Couldn't save the new account's display name: \(reason, privacy: .public)")
+      }
+    }
+    return .signedIn(result)
   }
 
   func sendPasswordRecoveryEmail(email: String) async throws {
