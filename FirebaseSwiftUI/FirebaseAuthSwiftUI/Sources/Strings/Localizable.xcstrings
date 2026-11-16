@@ -8862,6 +8862,18 @@
         }
       }
     },
+    "ConfirmEmailLinkMessage" : {
+      "comment" : "Shown when an email sign-in link is opened on a device that didn't request it.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You opened this sign-in link on a different device or browser. Enter the email address it was sent to."
+          }
+        }
+      }
+    },
     "ConfirmPasswordInputLabel" : {
       "comment" : "Input label for confirming password when signing up",
       "extractionState" : "manual",
@@ -12462,6 +12474,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "電子郵件：%@"
+          }
+        }
+      }
+    },
+    "EmailLinkDifferentDeviceMessage" : {
+      "comment" : "Error when an email sign-in link that must stay on one device is opened on another.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open this sign-in link on the device where you requested it."
           }
         }
       }

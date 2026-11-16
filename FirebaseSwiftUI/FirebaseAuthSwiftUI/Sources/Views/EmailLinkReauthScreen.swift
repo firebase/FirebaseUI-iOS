@@ -107,6 +107,8 @@ public struct EmailLinkReauthScreen<Content: View>: View {
         ))
       }
       .onOpenURL { url in
+        // The app's other deep links reach this handler too; they aren't errors here.
+        guard authService.isEmailSignInLink(url) else { return }
         handleReauthURL(url)
       }
       .task {
