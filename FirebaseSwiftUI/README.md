@@ -244,6 +244,7 @@ When email link sign-in is configured:
 - Handles deep link navigation from email
 - Manages the complete email verification flow
 - Supports anonymous user upgrades via email link
+- Asks for the email address when a link is opened on another device, unless `withEmailLinkSignIn(forceSameDevice: true)` limits links to the device that requested them
 
 #### 5. **Anonymous User Auto-Upgrade**
 
@@ -895,13 +896,15 @@ Creates a new `AuthService` instance.
 ##### Email Authentication
 
 ```swift
-public func withEmailSignIn(onTap: @escaping () -> Void = {}) -> AuthService
+public func withEmailSignIn(requireDisplayName: Bool = false,
+                            allowNewEmailAccounts: Bool = true) -> AuthService
 ```
 
-Enables email authentication and will render email sign-in directly within the AuthPickerView (default Views), email link sign-in is rendered as a button. When calling `AuthService.renderButtons()`, email link sign-in button is rendered. `onTap` custom callback (i.e where to navigate when tapped) allows user to control what happens when tapped. Default behavior in AuthPickerView is to push the user to email link sign-in default View.
+Enables email and password authentication, rendered directly within the AuthPickerView (default Views).
 
 **Parameters:**
-- `onTap`: A callback that will be executed when the email button is tapped.
+- `requireDisplayName`: Whether sign-up asks for a name and saves it as the new account's display name. Defaults to `false`.
+- `allowNewEmailAccounts`: Whether users can create accounts. When `false`, the sign-up switch is hidden and `createUser(email:password:displayName:)` throws `AuthErrorCode.adminRestrictedOperation`, the error Firebase returns when a project turns sign-up off. Defaults to `true`.
 
 **Example:**
 
@@ -909,12 +912,15 @@ Enables email authentication and will render email sign-in directly within the A
 authService
   .withEmailSignIn()
 
-// or
+// or, asking for a name at sign-up as FirebaseUI-iOS v15 did
 
 authService
-  .withEmailSignIn() {
-    // navigate to email sign-in screen logic
-  }
+  .withEmailSignIn(requireDisplayName: true)
+
+// or, for sign-in only with existing accounts
+
+authService
+  .withEmailSignIn(allowNewEmailAccounts: false)
 ```
 
 ---
@@ -1178,18 +1184,21 @@ Signs in using email and password credentials.
 ##### Create User with Email/Password
 
 ```swift
-public func createUser(email: String, password: String) async throws -> SignInOutcome
+public func createUser(email: String,
+                       password: String,
+                       displayName: String? = nil) async throws -> SignInOutcome
 ```
 
-Creates a new user account with email and password.
+Creates a new user account with email and password, then saves `displayName` to its profile.
 
 **Parameters:**
 - `email`: New user's email address
 - `password`: New user's password
+- `displayName`: Name saved as the account's display name. Ignored when `nil` or blank. Saving it is best effort: a failure is logged and the method still returns `.signedIn`, because the account already exists
 
 **Returns:** `SignInOutcome`
 
-**Throws:** `AuthServiceError` or Firebase Auth errors
+**Throws:** `AuthErrorCode.adminRestrictedOperation` when sign-up is turned off, `AuthServiceError` or Firebase Auth errors
 
 ---
 
@@ -1266,6 +1275,20 @@ Handles the email link flow when the user taps the link. Automatically routes to
 **Throws:** `AuthServiceError` or Firebase Auth errors
 
 **Note:** This method handles both initial sign-in and reauthentication flows automatically. The behavior is determined by whether `sendEmailSignInLink(email:isReauth:)` was called with `isReauth: true`.
+
+A link opened on a device that didn't request it throws `AuthServiceError.invalidEmailLink` as before, and also sets `pendingEmailLink` unless `withEmailLinkSignIn(forceSameDevice: true)` is set. Finish with `confirmEmailLinkSignIn(email:)`, passing the address the link was sent to. `AuthPickerView` handles links itself, opening the email-link screen when needed, so your own `onOpenURL` handler can stay: a call with a link already being handled waits for that attempt and gets its result, and a link that already signed in is ignored until sign-out.
+
+---
+
+##### Confirm Email Link Sign-In
+
+```swift
+public func confirmEmailLinkSignIn(email: String) async throws
+```
+
+Signs in with `pendingEmailLink`, a link opened on another device, once the user confirms the email address it was sent to.
+
+A used or expired link clears `pendingEmailLink`. Call `cancelEmailLinkConfirmation()` to drop it yourself, for example when the user wants a new link; signing out or closing the sheet also drops it. An app that shows its own email-link screen through `withEmailLinkSignIn(onTap:)` handles opened links on that screen.
 
 ---
 

@@ -73,7 +73,9 @@ struct ContentStateDefaultsTests {
   func emailAuthContentState() {
     let state = EmailAuthContentState()
     #expect(state.email.wrappedValue.isEmpty)
+    #expect(state.displayName.wrappedValue.isEmpty)
     #expect(state.flow == .signIn)
+    #expect(!state.requiresDisplayName && state.canSignUp)
     #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
   }
 
@@ -89,7 +91,7 @@ struct ContentStateDefaultsTests {
   func emailLinkContentState() {
     let state = EmailLinkContentState()
     #expect(state.email.wrappedValue.isEmpty)
-    #expect(!state.didSend)
+    #expect(!state.didSend && !state.needsEmailConfirmation)
     #expect(!state.isValid && !state.isLoading && state.errorMessage == nil)
   }
 
@@ -113,6 +115,12 @@ struct ContentStateDefaultsTests {
     let state = EmailLinkReauthContentState()
     #expect(state.email.isEmpty && !state.linkSent)
     #expect(!state.isLoading && state.errorMessage == nil)
+  }
+
+  @Test("A preview of a sign-in-only form turns sign-up off")
+  func signUpOff() {
+    let state = EmailAuthContentState(canSignUp: false)
+    #expect(!state.canSignUp)
   }
 
   @Test("A preview passes only the fields it needs")
