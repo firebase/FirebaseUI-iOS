@@ -58,11 +58,37 @@ struct DemoPasswordRecovery: View {
 struct DemoEmailLink: View {
   var body: some View {
     EmailLinkScreen { state in
-      if state.didSend {
-        DemoPage(title: "Check your inbox") {
-          DemoBodyText(
-            "Login link sent! Open it on this device to sign in as \(state.email.wrappedValue)."
+      if state.needsEmailConfirmation {
+        // The link was opened on a device that didn't request it.
+        DemoPage(title: "Confirm your email") {
+          DemoBodyText("Enter the email address the sign-in link was sent to.")
+          DemoTextField(
+            icon: "at",
+            placeholder: "Email address",
+            text: state.email,
+            keyboard: .emailAddress,
+            contentType: .emailAddress,
+            identifier: "email-field"
           )
+          DemoErrorText(message: state.errorMessage)
+          DemoButton(
+            title: "Sign in",
+            isLoading: state.isLoading,
+            identifier: "confirm-email-button",
+            action: state.confirmEmail
+          )
+          .disabled(!state.isValid)
+          DemoLink(
+            title: "Send a new link instead",
+            alignment: .leading,
+            identifier: "cancel-confirmation-button",
+            action: state.cancelConfirmation
+          )
+          .disabled(state.isLoading)
+        }
+      } else if state.didSend {
+        DemoPage(title: "Check your inbox") {
+          DemoBodyText("Login link sent! Open it to sign in as \(state.email.wrappedValue).")
           DemoErrorText(message: state.errorMessage)
           DemoButton(
             title: "Use a different email",

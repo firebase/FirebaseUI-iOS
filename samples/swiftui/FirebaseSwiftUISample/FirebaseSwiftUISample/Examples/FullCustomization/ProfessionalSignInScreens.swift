@@ -20,7 +20,6 @@ import SwiftUI
 struct ProLanding: View {
   let pickerState: AuthMethodPickerState
 
-  @Environment(AuthService.self) private var authService
   @State private var isShowingOtherProviders = false
   @State private var pendingProvider: AuthProviderUI?
 
@@ -43,7 +42,7 @@ struct ProLanding: View {
           HStack(spacing: 10) {
             ProIconTile(symbol: "shield", size: 32, fill: ProPalette.accentFill, tint: .white)
             Text("FirebaseUI Demo")
-              .font(.system(size: 15, weight: .semibold))
+              .scaledSystemFont(size: 15, weight: .semibold)
           }
           ProHeader(
             title: "Sign in to your account",
@@ -53,7 +52,7 @@ struct ProLanding: View {
       } content: {
         VStack(alignment: .leading, spacing: 0) {
           providers
-          if authService.emailPasswordSignInEnabled {
+          if pickerState.isEmailSignInEnabled {
             if !pickerState.providers.isEmpty {
               ProDivider(label: "or continue with email")
                 .padding(.vertical, 22)
@@ -127,7 +126,7 @@ struct ProLanding: View {
         identifier: "password-field"
       ) {
         Button("Forgot password?", action: state.goToPasswordRecovery)
-          .font(.system(size: 14, weight: .medium))
+          .scaledSystemFont(size: 14, weight: .medium)
           .foregroundStyle(ProPalette.accent)
           .buttonStyle(.plain)
           .accessibilityIdentifier("forgot-password")
@@ -150,18 +149,22 @@ struct ProLanding: View {
       )
       .padding(.top, 4)
     }
-    ProPromptLink(
-      prompt: "Don't have an account?",
-      action: "Create account",
-      identifier: "create-account-button",
-      perform: state.goToSignUp
-    )
-    .padding(.top, 4)
+    if state.canSignUp {
+      ProPromptLink(
+        prompt: "Don't have an account?",
+        action: "Create account",
+        identifier: "create-account-button",
+        perform: state.goToSignUp
+      )
+      .padding(.top, 4)
+    }
   }
 }
 
 /// The pushed sign-up screen, on the `.signUp` route.
 struct ProSignUp: View {
+  @Environment(\.dismiss) private var dismiss
+
   var body: some View {
     EmailAuthScreen(flow: .signUp) { state in
       ProPage {
@@ -172,6 +175,15 @@ struct ProSignUp: View {
         )
       } content: {
         VStack(alignment: .leading, spacing: 16) {
+          if state.requiresDisplayName {
+            ProField(
+              label: "Name",
+              placeholder: "Your full name",
+              text: state.displayName,
+              contentType: .name,
+              identifier: "name-field"
+            )
+          }
           ProField(
             label: "Email",
             placeholder: "name@company.com",
@@ -206,12 +218,13 @@ struct ProSignUp: View {
           .disabled(!state.isValid)
           .padding(.top, 4)
         }
-        // With a fixed sign-up flow, switchFlow goes back to the sign-in screen.
+        // The sign-in form is on the landing underneath, so go back to it. `switchFlow` would
+        // push the `.signIn` route, a second sign-in screen this layout doesn't draw.
         ProPromptLink(
           prompt: "Already have an account?",
           action: "Sign in",
           identifier: "sign-in-instead-button",
-          perform: state.switchFlow
+          perform: { dismiss() }
         )
         .padding(.top, 8)
       } footer: {
@@ -274,12 +287,47 @@ struct ProPasswordRecovery: View {
 struct ProEmailLink: View {
   var body: some View {
     EmailLinkScreen { state in
-      if state.didSend {
+      if state.needsEmailConfirmation {
+        // The link was opened on a device that didn't request it.
+        ProPage {
+          ProHeader(
+            symbol: "envelope.open",
+            title: "Confirm your email",
+            subtitle: "Enter the email address the sign-in link was sent to."
+          )
+        } content: {
+          VStack(alignment: .leading, spacing: 16) {
+            ProField(
+              label: "Email",
+              placeholder: "name@company.com",
+              text: state.email,
+              keyboard: .emailAddress,
+              contentType: .emailAddress,
+              identifier: "email-field"
+            )
+            ProErrorText(message: state.errorMessage)
+            ProPrimaryButton(
+              title: "Sign in",
+              isLoading: state.isLoading,
+              identifier: "confirm-email-button",
+              action: state.confirmEmail
+            )
+            .disabled(!state.isValid)
+            .padding(.top, 4)
+          }
+          ProTextButton(
+            title: "Send a new link instead",
+            identifier: "cancel-confirmation-button",
+            action: state.cancelConfirmation
+          )
+          .disabled(state.isLoading)
+        }
+      } else if state.didSend {
         ProPage {
           ProHeader(
             symbol: "envelope.badge",
             title: "Check your inbox",
-            subtitle: "We sent a sign-in link to \(state.email.wrappedValue). Open it on this device to finish signing in."
+            subtitle: "We sent a sign-in link to \(state.email.wrappedValue). Open it to finish signing in."
           )
         } content: {
           ProErrorText(message: state.errorMessage)

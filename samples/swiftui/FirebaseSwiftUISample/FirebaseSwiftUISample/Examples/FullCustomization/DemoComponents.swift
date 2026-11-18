@@ -101,13 +101,13 @@ private struct SparkHeadline: View {
     HStack(spacing: 10) {
       // Material Symbols "coffee".
       Image(systemName: "cup.and.saucer")
-        .font(.system(size: 20, weight: .medium))
+        .scaledSystemFont(size: 20, weight: .medium)
       Text("Coffee Spark")
         .font(.custom("JetBrainsMono-Medium", size: 20, relativeTo: .title3))
     }
     .foregroundStyle(Color(demoHex: 0x1C1B1B))
     .padding(.horizontal, 16)
-    .frame(height: 48)
+    .frame(minHeight: 48)
     .background(.white, in: RoundedRectangle(cornerRadius: 24))
     .accessibilityElement(children: .combine)
     .accessibilityIdentifier("headline")
@@ -163,9 +163,40 @@ extension View {
 
   func demoText(_ token: DemoTheme.TextToken,
                 relativeTo style: Font.TextStyle = .body) -> some View {
-    font(token.font(relativeTo: style))
-      .foregroundStyle(token.color)
-      .underline(token.underline)
+    Group {
+      if token.fontName == nil {
+        scaledSystemFont(size: token.size, weight: token.weight, relativeTo: style)
+      } else {
+        font(token.font(relativeTo: style))
+      }
+    }
+    .foregroundStyle(token.color)
+    .underline(token.underline)
+  }
+
+  /// The system font at a design size that still scales with Dynamic Type, which
+  /// `Font.system(size:weight:)` alone doesn't.
+  func scaledSystemFont(size: CGFloat,
+                        weight: Font.Weight = .regular,
+                        design: Font.Design = .default,
+                        relativeTo style: Font.TextStyle = .body) -> some View {
+    modifier(ScaledSystemFont(size: size, weight: weight, design: design, relativeTo: style))
+  }
+}
+
+private struct ScaledSystemFont: ViewModifier {
+  @ScaledMetric private var size: CGFloat
+  let weight: Font.Weight
+  let design: Font.Design
+
+  init(size: CGFloat, weight: Font.Weight, design: Font.Design, relativeTo style: Font.TextStyle) {
+    _size = ScaledMetric(wrappedValue: size, relativeTo: style)
+    self.weight = weight
+    self.design = design
+  }
+
+  func body(content: Content) -> some View {
+    content.font(.system(size: size, weight: weight, design: design))
   }
 }
 
@@ -365,7 +396,7 @@ struct DemoThemeMenu: View {
       }
     } label: {
       Image(systemName: "paintpalette")
-        .foregroundStyle(Color(UIColor.label))
+        .foregroundStyle(.primary)
     }
     .accessibilityLabel("Theme")
     .accessibilityIdentifier("theme-switcher")

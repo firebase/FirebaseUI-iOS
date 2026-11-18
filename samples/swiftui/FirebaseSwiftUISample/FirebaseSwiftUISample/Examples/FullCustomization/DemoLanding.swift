@@ -32,6 +32,7 @@ struct DemoLanding: View {
         DemoOtherSignInMethods(
           pickerState: pickerState,
           flow: state.flow,
+          showsFlowSwitch: pickerState.isEmailSignInEnabled && state.canSignUp,
           switchFlow: state.switchFlow
         )
       }
@@ -45,6 +46,34 @@ struct DemoLanding: View {
 
   @ViewBuilder
   private func emailForm(_ state: EmailAuthContentState) -> some View {
+    if pickerState.isEmailSignInEnabled {
+      DemoEmailFields(state: state)
+    }
+    if pickerState.isEmailLinkEnabled {
+      DemoButton(
+        title: "Email link sign-in",
+        kind: .secondary,
+        identifier: "email-link-button",
+        action: state.selectEmailLink
+      )
+    }
+  }
+}
+
+/// The email and password form for either flow, with a name field when sign-up needs one.
+struct DemoEmailFields: View {
+  let state: EmailAuthContentState
+
+  var body: some View {
+    if state.flow == .signUp, state.requiresDisplayName {
+      DemoTextField(
+        icon: "person",
+        placeholder: "Name",
+        text: state.displayName,
+        contentType: .name,
+        identifier: "name-field"
+      )
+    }
     DemoTextField(
       icon: "at",
       placeholder: "Email address",
@@ -86,13 +115,26 @@ struct DemoLanding: View {
       action: state.flow == .signIn ? state.signIn : state.signUp
     )
     .disabled(!state.isValid)
-    if pickerState.isEmailLinkEnabled {
-      DemoButton(
-        title: "Email link sign-in",
-        kind: .secondary,
-        identifier: "email-link-button",
-        action: state.selectEmailLink
-      )
+  }
+}
+
+/// Sign-up on the `.signUp` route. The shared layout switches flows in place, so this only shows
+/// when the theme changes on Professional's pushed sign-up screen.
+struct DemoSignUp: View {
+  @Environment(\.dismiss) private var dismiss
+
+  var body: some View {
+    EmailAuthScreen(flow: .signUp) { state in
+      DemoPage(title: "Sign up") {
+        DemoEmailFields(state: state)
+        // The sign-in form is on the screen underneath, so go back to it.
+        DemoLink(
+          title: "Already have an account? Login",
+          alignment: .leading,
+          identifier: "sign-in-instead-button",
+          action: { dismiss() }
+        )
+      }
     }
   }
 }
@@ -102,6 +144,8 @@ struct DemoLanding: View {
 private struct DemoOtherSignInMethods: View {
   let pickerState: AuthMethodPickerState
   let flow: AuthenticationFlow
+  /// Off when email sign-in is disabled or new accounts aren't allowed.
+  let showsFlowSwitch: Bool
   let switchFlow: () -> Void
 
   @Environment(AuthService.self) private var authService
@@ -126,13 +170,15 @@ private struct DemoOtherSignInMethods: View {
     VStack(spacing: 0) {
       // Not where the design has it: the sign-in / sign-up switch belongs to the email form, so it
       // sits right below the form, above the other sign-in methods.
-      Button(action: switchFlow) {
-        flowSwitchText(theme)
-          .frame(minHeight: 44)
-          .contentShape(Rectangle())
+      if showsFlowSwitch {
+        Button(action: switchFlow) {
+          flowSwitchText(theme)
+            .frame(minHeight: 44)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("login")
       }
-      .buttonStyle(.plain)
-      .accessibilityIdentifier("login")
 
       VStack(spacing: 12) {
         // As in the design, the label spans the frame's padding so it doesn't wrap.
@@ -165,7 +211,7 @@ private struct DemoOtherSignInMethods: View {
           ) {
             // Material Symbols "phone".
             Image(systemName: "phone")
-              .font(.system(size: 18, weight: .medium))
+              .scaledSystemFont(size: 18, weight: .medium)
           } action: {
             pickerState.select(phone)
           }
@@ -181,7 +227,7 @@ private struct DemoOtherSignInMethods: View {
             identifier: "other-providers-button"
           ) {
             Image(systemName: "ellipsis.circle")
-              .font(.system(size: 18, weight: .medium))
+              .scaledSystemFont(size: 18, weight: .medium)
           } action: {
             isShowingOtherProviders = true
           }

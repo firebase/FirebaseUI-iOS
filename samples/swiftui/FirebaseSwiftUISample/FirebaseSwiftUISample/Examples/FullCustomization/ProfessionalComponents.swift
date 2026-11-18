@@ -105,14 +105,14 @@ struct ProHeader: View {
           .padding(.bottom, 20)
       }
       Text(title)
-        .font(.system(size: 26, weight: .semibold))
+        .scaledSystemFont(size: 26, weight: .semibold)
         .tracking(-0.3)
         .fixedSize(horizontal: false, vertical: true)
         .accessibilityAddTraits(.isHeader)
         .accessibilityIdentifier("title")
       if let subtitle {
         Text(subtitle)
-          .font(.system(size: 15))
+          .scaledSystemFont(size: 15)
           .foregroundStyle(ProPalette.muted)
           .fixedSize(horizontal: false, vertical: true)
           .padding(.top, 6)
@@ -156,7 +156,7 @@ struct ProField<Accessory: View>: View {
     VStack(alignment: .leading, spacing: 6) {
       HStack(alignment: .firstTextBaseline) {
         Text(label)
-          .font(.system(size: 14, weight: .medium))
+          .scaledSystemFont(size: 14, weight: .medium)
         Spacer(minLength: 8)
         accessory()
       }
@@ -168,7 +168,7 @@ struct ProField<Accessory: View>: View {
             TextField(text: $text) { placeholderText }
           }
         }
-        .font(.system(size: 16))
+        .scaledSystemFont(size: 16)
         .keyboardType(keyboard)
         .textContentType(contentType)
         .textInputAutocapitalization(.never)
@@ -188,7 +188,7 @@ struct ProField<Accessory: View>: View {
       }
       .padding(.leading, 14)
       .padding(.trailing, isSecure ? 2 : 14)
-      .frame(height: 48)
+      .frame(minHeight: 48)
       .proFieldBox()
     }
   }
@@ -236,7 +236,7 @@ struct ProPhoneField: View {
   var body: some View {
     VStack(alignment: .leading, spacing: 6) {
       Text("Phone number")
-        .font(.system(size: 14, weight: .medium))
+        .scaledSystemFont(size: 14, weight: .medium)
       HStack(spacing: 10) {
         CountrySelector(selectedCountry: country)
           .tint(ProPalette.text)
@@ -247,14 +247,14 @@ struct ProPhoneField: View {
         TextField(text: phoneNumber) {
           Text("555 123 4567").foregroundStyle(ProPalette.placeholder)
         }
-        .font(.system(size: 16))
+        .scaledSystemFont(size: 16)
         .keyboardType(.phonePad)
         .textContentType(.telephoneNumber)
         .accessibilityLabel("Phone number")
         .accessibilityIdentifier("phone-number-field")
       }
       .padding(.horizontal, 14)
-      .frame(height: 48)
+      .frame(minHeight: 48)
       .proFieldBox()
     }
   }
@@ -273,7 +273,7 @@ struct ProPrimaryButton: View {
     Button(action: action) {
       ZStack {
         Text(title)
-          .font(.system(size: 17, weight: .semibold))
+          .scaledSystemFont(size: 17, weight: .semibold)
           .opacity(isLoading ? 0 : 1)
         if isLoading {
           ProgressView().tint(.white)
@@ -303,7 +303,7 @@ struct ProOutlineButton<Icon: View>: View {
         icon()
           .frame(width: 20, height: 20)
         Text(title)
-          .font(.system(size: 15, weight: .semibold))
+          .scaledSystemFont(size: 15, weight: .semibold)
       }
       .foregroundStyle(ProPalette.text)
       .frame(maxWidth: .infinity, minHeight: 48)
@@ -327,7 +327,7 @@ struct ProTextButton: View {
   var body: some View {
     Button(action: action) {
       Text(title)
-        .font(.system(size: 15, weight: .medium))
+        .scaledSystemFont(size: 15, weight: .medium)
         .foregroundStyle(ProPalette.accent)
         .opacity(isEnabled ? 1 : 0.5)
         .frame(maxWidth: .infinity, minHeight: 44, alignment: alignment)
@@ -359,7 +359,7 @@ struct ProPromptLink: View {
       .buttonStyle(.plain)
       .accessibilityIdentifier(identifier)
     }
-    .font(.system(size: 15))
+    .scaledSystemFont(size: 15)
     .frame(maxWidth: .infinity)
   }
 }
@@ -372,7 +372,7 @@ struct ProDivider: View {
     HStack(spacing: 12) {
       line
       Text(label)
-        .font(.system(size: 13))
+        .scaledSystemFont(size: 13)
         .foregroundStyle(ProPalette.muted)
         .fixedSize()
       line
@@ -396,7 +396,7 @@ struct ProErrorText: View {
       } icon: {
         Image(systemName: "exclamationmark.circle")
       }
-      .font(.system(size: 14))
+      .scaledSystemFont(size: 14)
       .foregroundStyle(ProPalette.danger)
       .accessibilityIdentifier("error-message")
     }
@@ -409,7 +409,7 @@ struct ProSectionLabel: View {
 
   var body: some View {
     Text(text)
-      .font(.system(size: 13, weight: .medium))
+      .scaledSystemFont(size: 13, weight: .medium)
       .tracking(0.3)
       .textCase(.uppercase)
       .foregroundStyle(ProPalette.muted)
@@ -460,21 +460,21 @@ struct ProRow: View {
       HStack(spacing: 12) {
         if let symbol {
           Image(systemName: symbol)
-            .font(.system(size: 17))
+            .scaledSystemFont(size: 17)
             .frame(width: 20)
             .accessibilityHidden(true)
         }
         Text(title)
-          .font(.system(size: 16, weight: symbol == nil ? .medium : .regular))
+          .scaledSystemFont(size: 16, weight: symbol == nil ? .medium : .regular)
           .frame(maxWidth: .infinity, alignment: .leading)
         if let value {
           Text(value)
-            .font(.system(size: 15))
+            .scaledSystemFont(size: 15)
             .foregroundStyle(valueTint)
         }
         if showsChevron {
           Image(systemName: "chevron.right")
-            .font(.system(size: 13, weight: .semibold))
+            .scaledSystemFont(size: 13, weight: .semibold)
             .foregroundStyle(ProPalette.chevron)
             .accessibilityHidden(true)
         }
@@ -508,15 +508,15 @@ struct ProChoiceRow: View {
         )
         VStack(alignment: .leading, spacing: 2) {
           Text(title)
-            .font(.system(size: 16, weight: .medium))
+            .scaledSystemFont(size: 16, weight: .medium)
           Text(detail)
-            .font(.system(size: 14))
+            .scaledSystemFont(size: 14)
             .foregroundStyle(ProPalette.muted)
             .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         Image(systemName: isSelected ? "largecircle.fill.circle" : "circle")
-          .font(.system(size: 22))
+          .scaledSystemFont(size: 22)
           .foregroundStyle(isSelected ? ProPalette.accent : ProPalette.border)
           .accessibilityHidden(true)
       }
@@ -544,7 +544,7 @@ struct ProLegalText: View {
        and [Privacy Policy](\(privacy.absoluteString)).
        """) {
       Text(terms)
-        .font(.system(size: 13))
+        .scaledSystemFont(size: 13)
         .foregroundStyle(ProPalette.muted)
         .tint(ProPalette.accent)
         .multilineTextAlignment(.center)

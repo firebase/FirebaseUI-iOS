@@ -77,7 +77,7 @@ struct ProAccount: View {
         Text(
           "Deleting your account removes your data permanently. You may be asked to sign in again first."
         )
-        .font(.system(size: 13))
+        .scaledSystemFont(size: 13)
         .foregroundStyle(ProPalette.muted)
         .fixedSize(horizontal: false, vertical: true)
         .padding(.horizontal, 4)
@@ -91,18 +91,18 @@ struct ProAccount: View {
     let identity = user?.email ?? user?.phoneNumber ?? "Signed in"
     return HStack(spacing: 14) {
       Text(String(identity.prefix(1)).uppercased())
-        .font(.system(size: 22, weight: .semibold))
+        .scaledSystemFont(size: 22, weight: .semibold)
         .foregroundStyle(ProPalette.accentSoftText)
         .frame(width: 56, height: 56)
         .background(ProPalette.accentSoft, in: Circle())
         .accessibilityHidden(true)
       VStack(alignment: .leading, spacing: 2) {
         Text(identity)
-          .font(.system(size: 17, weight: .semibold))
+          .scaledSystemFont(size: 17, weight: .semibold)
           .lineLimit(1)
           .truncationMode(.middle)
         Text("Signed in with \(signInMethod)")
-          .font(.system(size: 14))
+          .scaledSystemFont(size: 14)
           .foregroundStyle(ProPalette.muted)
       }
     }
@@ -213,16 +213,16 @@ private struct ProFactorRow: View {
       ProIconTile(symbol: isPhone ? "message" : "iphone")
       VStack(alignment: .leading, spacing: 2) {
         Text(factor.displayName ?? (isPhone ? "Text message" : "Authenticator app"))
-          .font(.system(size: 16, weight: .medium))
+          .scaledSystemFont(size: 16, weight: .medium)
         Text(isPhone
           ? (factor as? PhoneMultiFactorInfo)?.phoneNumber ?? "Text message"
           : "Authenticator app")
-          .font(.system(size: 14))
+          .scaledSystemFont(size: 14)
           .foregroundStyle(ProPalette.muted)
       }
       .frame(maxWidth: .infinity, alignment: .leading)
       Button("Remove", action: remove)
-        .font(.system(size: 15, weight: .medium))
+        .scaledSystemFont(size: 15, weight: .medium)
         .foregroundStyle(ProPalette.danger)
         .frame(minHeight: 44)
         .buttonStyle(.plain)
@@ -353,19 +353,19 @@ struct ProMFAEnrolmentContent: View {
           if let secret = state.totpSecret {
             HStack(spacing: 12) {
               Text(secret)
-                .font(.system(size: 15, design: .monospaced))
+                .scaledSystemFont(size: 15, design: .monospaced)
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
                 .textSelection(.enabled)
                 .frame(maxWidth: .infinity, alignment: .leading)
               Button(state.didCopySecret ? "Copied" : "Copy", action: state.copySecret)
-                .font(.system(size: 15, weight: .medium))
+                .scaledSystemFont(size: 15, weight: .medium)
                 .foregroundStyle(ProPalette.accent)
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("copy-secret-button")
             }
             .padding(.horizontal, 14)
-            .frame(height: 48)
+            .frame(minHeight: 48)
             .proFieldBox()
             .accessibilityIdentifier("totp-secret")
           }
@@ -382,6 +382,9 @@ struct ProMFAEnrolmentContent: View {
           .padding(.top, 4)
         }
       }
+    // Later releases may add steps.
+    @unknown default:
+      DefaultMFAEnrolmentContent(state: state)
     }
   }
 

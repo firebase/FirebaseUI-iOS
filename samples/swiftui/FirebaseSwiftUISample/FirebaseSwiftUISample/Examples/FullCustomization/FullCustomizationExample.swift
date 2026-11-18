@@ -47,7 +47,7 @@ struct FullCustomizationExample: View {
     } else {
       Color.clear.onAppear {
         authService = AuthService(configuration: Self.configuration)
-          .withEmailSignIn()
+          .withEmailSignIn(requireDisplayName: true)
           .withEmailLinkSignIn()
           .withGoogleSignIn()
           .withPhoneSignIn()
@@ -96,6 +96,7 @@ private struct FullCustomizationFlow: View {
     .authTypography(theme.typography)
     .authTextFieldStyle(theme.textFieldStyle)
     .authCTAButtonStyle(theme.ctaButtonStyle)
+    .modifier(DemoColorScheme(fixed: themeID.colorScheme))
   }
 
   private var home: some View {
@@ -126,6 +127,18 @@ private struct FullCustomizationFlow: View {
     .padding(24)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background { DemoThemeBackground(theme: themeID.theme) }
+  }
+}
+
+/// Pins the colour scheme for themes that have one, and otherwise passes the system's on.
+/// Unlike `preferredColorScheme`, it takes effect in an open sheet when the theme changes.
+private struct DemoColorScheme: ViewModifier {
+  let fixed: ColorScheme?
+
+  @Environment(\.colorScheme) private var system
+
+  func body(content: Content) -> some View {
+    content.environment(\.colorScheme, fixed ?? system)
   }
 }
 
@@ -183,11 +196,13 @@ private struct ThemedDestination: View {
     }
   }
 
-  /// The shared-layout themes switch sign-in and sign-up in place on the first screen, so they
-  /// never push `.signUp`.
+  /// The shared-layout themes switch sign-in and sign-up in place on the first screen.
+  /// `.signUp` only arrives when the theme changes on Professional's pushed sign-up screen.
   @ViewBuilder
   private var sharedLayout: some View {
     switch screen {
+    case .signUp:
+      DemoSignUp()
     case .passwordRecovery:
       DemoPasswordRecovery()
     case .emailLink:

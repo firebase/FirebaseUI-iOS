@@ -126,6 +126,9 @@ private struct DemoReauth: View {
           action: state.cancel
         )
       }
+    // Later releases may add prompts for new providers.
+    @unknown default:
+      DefaultReauthContent(prompt: prompt)
     }
   }
 }
@@ -239,6 +242,9 @@ private struct ProReauth: View {
           ProTextButton(title: "Cancel", identifier: "reauth-cancel-button", action: state.cancel)
         }
       }
+    // Later releases may add prompts for new providers.
+    @unknown default:
+      DefaultReauthContent(prompt: prompt)
     }
   }
 }

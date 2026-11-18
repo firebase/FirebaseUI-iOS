@@ -26,8 +26,10 @@ struct DemoSignedIn: View {
   var body: some View {
     DemoPage(title: "You're in") {
       DemoBodyText("Signed in as \(state.user?.email ?? state.user?.phoneNumber ?? "you").")
-      // Email verification and password changes only apply to an account with an email.
+      // Email verification only applies to an account with an email, and only accounts that
+      // sign in with a password can change one.
       let hasEmail = state.user?.email != nil
+      let hasPassword = state.user?.providerData.contains { $0.providerID == "password" } ?? false
       if hasEmail, !state.isEmailVerified {
         DemoBodyText("Check your inbox to verify your email address.")
         DemoButton(
@@ -38,7 +40,7 @@ struct DemoSignedIn: View {
         )
       }
       DemoErrorText(message: state.errorMessage)
-      if hasEmail {
+      if hasPassword {
         DemoButton(
           title: "Change password",
           identifier: "update-password-button",
@@ -226,6 +228,9 @@ struct DemoMFAEnrolmentContent: View {
         )
         .disabled(!state.isValid)
       }
+    // Later releases may add steps.
+    @unknown default:
+      DefaultMFAEnrolmentContent(state: state)
     }
   }
 

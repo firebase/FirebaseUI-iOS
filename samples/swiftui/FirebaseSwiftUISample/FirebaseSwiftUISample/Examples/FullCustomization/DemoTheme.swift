@@ -46,6 +46,12 @@ enum DemoThemeID: String, CaseIterable, Identifiable {
     case .professional: .professional
     }
   }
+
+  /// Doggo, Grid and Coffee Spark come from light designs with fixed colours, so they stay
+  /// light; Professional has light and dark variants and follows the system.
+  var colorScheme: ColorScheme? {
+    self == .professional ? nil : .light
+  }
 }
 
 struct DemoTheme {
@@ -368,10 +374,12 @@ extension DemoTheme {
     AuthTypography(fontName: libraryFontFamily)
   }
 
+  /// `AuthTextField` draws `tint` as the focused border and `containerColor` as the unfocused
+  /// one, so the stock fields get the same outline as the demo's own.
   var textFieldStyle: AuthTextFieldStyle {
     AuthTextFieldStyle(
-      tint: fieldStroke.color,
-      containerColor: fieldFill,
+      tint: primaryButton.fill,
+      containerColor: fieldStroke.color,
       secondaryColor: fieldPlaceholder,
       errorColor: errorColor,
       cornerRadius: fieldCornerRadius
