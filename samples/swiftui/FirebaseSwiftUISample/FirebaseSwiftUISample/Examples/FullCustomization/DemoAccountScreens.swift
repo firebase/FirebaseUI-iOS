@@ -408,11 +408,14 @@ struct DemoQRCode: View {
     }
   }
 
+  /// Shared, since a `CIContext` is expensive to create.
+  private static let context = CIContext()
+
   private static func makeImage(for url: URL) -> UIImage? {
     let filter = CIFilter.qrCodeGenerator()
     filter.message = Data(url.absoluteString.utf8)
     guard let output = filter.outputImage?.transformed(by: CGAffineTransform(scaleX: 8, y: 8)),
-          let cgImage = CIContext().createCGImage(output, from: output.extent) else {
+          let cgImage = context.createCGImage(output, from: output.extent) else {
       return nil
     }
     return UIImage(cgImage: cgImage)
