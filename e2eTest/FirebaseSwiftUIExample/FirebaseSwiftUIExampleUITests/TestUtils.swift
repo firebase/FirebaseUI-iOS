@@ -91,15 +91,24 @@ func createEmail() -> String {
   return pasteMenuItem
 }
 
+/// How long a paste has to show up in a field. On a busy CI simulator the pasted text can
+/// appear several seconds after the Paste tap.
+private let pasteTimeout: TimeInterval = 10
+
 @MainActor private func typeIntoField(_ field: XCUIElement,
                                       text: String,
                                       app: XCUIApplication) throws {
   UIPasteboard.general.string = text
-  let pasteMenuItem = try showPasteMenu(for: field, text: text, app: app)
-  pasteMenuItem.tap()
+  defer { UIPasteboard.general.string = nil }
 
-  let success = waitForFieldValue(field, expectedText: text, timeout: 3)
-  UIPasteboard.general.string = nil
+  var success = false
+  for attempt in 0 ..< 2 {
+    // Paste again only into a field without the text, so a late first paste isn't doubled.
+    if attempt > 0, let value = field.value as? String, value.contains(text) { break }
+    try showPasteMenu(for: field, text: text, app: app).tap()
+    success = waitForFieldValue(field, expectedText: text, timeout: pasteTimeout)
+    if success { break }
+  }
 
   guard success else {
     throw NSError(
@@ -122,7 +131,7 @@ func createEmail() -> String {
 
   // Poll until the value changes rather than relying on a fixed sleep.
   // Secure fields show bullet characters so we can only detect a change, not the exact value.
-  let deadline = Date().addingTimeInterval(3.0)
+  let deadline = Date().addingTimeInterval(pasteTimeout)
   var pasted = false
   while Date() < deadline {
     if (field.value as? String) != originalValue {
