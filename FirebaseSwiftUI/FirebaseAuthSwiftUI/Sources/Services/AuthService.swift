@@ -91,6 +91,19 @@ public enum AuthView: Hashable {
   case enterVerificationCode(verificationID: String, fullPhoneNumber: String)
 }
 
+extension AuthView {
+  /// Whether the screen is part of signing in, so it is done once the user is signed in.
+  var isSignedOutOnly: Bool {
+    switch self {
+    case .signIn, .signUp, .emailLink, .passwordRecovery, .enterPhoneNumber,
+         .enterVerificationCode, .mfaResolution:
+      true
+    case .updatePassword, .mfaEnrollment, .mfaManagement:
+      false
+    }
+  }
+}
+
 public enum SignInOutcome: @unchecked Sendable {
   case mfaRequired(MFARequired)
   case signedIn(AuthDataResult?)
@@ -169,10 +182,11 @@ public class Navigator {
     routes.removeAll()
   }
 
-  /// Removes pushed ``AuthView/signIn`` and ``AuthView/signUp`` screens, which have nothing left
-  /// to do once the user is signed in.
-  func removeEmailRoutes() {
-    routes.removeAll { $0 == .signIn || $0 == .signUp }
+  /// Removes pushed screens that only apply while signed out, such as sign-in, email link and
+  /// phone verification, which have nothing left to do once the user is signed in. Screens for
+  /// a signed-in user, such as MFA management, stay.
+  func removeSignedOutRoutes() {
+    routes.removeAll(where: \.isSignedOutOnly)
   }
 
   /// Leaves a pushed ``AuthView/signUp`` screen for sign-in: back to the sign-in screen under
