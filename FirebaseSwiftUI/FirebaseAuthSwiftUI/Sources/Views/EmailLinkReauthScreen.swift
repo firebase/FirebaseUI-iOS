@@ -98,7 +98,10 @@ public struct EmailLinkReauthScreen<Content: View>: View {
       VStack(spacing: 0) {
         content(EmailLinkReauthContentState(
           resendLink: { Task { await sendLink() } },
-          cancel: { coordinator.reauthCancelled() },
+          cancel: {
+            authService.cancelEmailLinkReauthentication()
+            coordinator.reauthCancelled()
+          },
           email: email,
           linkSent: linkSent,
           isLoading: isLoading,
@@ -113,7 +116,12 @@ public struct EmailLinkReauthScreen<Content: View>: View {
       }
       // `AuthPickerContent` leaves reauthentication links to this screen while it shows.
       .onAppear { authService.isShowingEmailLinkReauth = true }
-      .onDisappear { authService.isShowingEmailLinkReauth = false }
+      // Closing the screen abandons reauthentication. After it finishes, there is nothing left to
+      // forget.
+      .onDisappear {
+        authService.isShowingEmailLinkReauth = false
+        authService.cancelEmailLinkReauthentication()
+      }
       .task {
         await sendLink()
       }
@@ -129,6 +137,12 @@ public struct EmailLinkReauthScreen<Content: View>: View {
     defer { isLoading = false }
     do {
       try await authService.sendEmailSignInLink(email: email, isReauth: true)
+      // Closed while the email was sending: the send can't be stopped, so forget the
+      // reauthentication it just stored.
+      guard authService.isShowingEmailLinkReauth else {
+        authService.cancelEmailLinkReauthentication()
+        return
+      }
       linkSent = true
     } catch {
       report(error)
