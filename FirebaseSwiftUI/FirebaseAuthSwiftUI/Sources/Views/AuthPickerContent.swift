@@ -98,11 +98,11 @@ public struct AuthPickerContent<
             .environment(authService)
         }
         .interactiveDismissDisabled(authService.configuration.interactiveDismissEnabled)
-        // Close pushed email screens however the user got signed in, including account
-        // conflicts the library resolves by signing in for them.
+        // Close pushed sign-in screens however the user got signed in, including email links
+        // and account conflicts the library resolves by signing in for them.
         .onChange(of: authService.authenticationState) { _, state in
           if state == .authenticated {
-            authService.navigator.removeEmailRoutes()
+            authService.navigator.removeSignedOutRoutes()
           }
         }
         // Apply account conflict handling at NavigationStack level

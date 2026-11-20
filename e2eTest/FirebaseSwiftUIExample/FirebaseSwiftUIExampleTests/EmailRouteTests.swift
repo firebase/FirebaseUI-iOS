@@ -26,15 +26,31 @@ struct EmailRouteTests {
   private let emailOption = LegacySignInOption(id: EmailAuthProviderID, displayName: "Email")
 
   @Test
-  func removeEmailRoutesKeepsOtherRoutes() {
+  func removeSignedOutRoutesRemovesEverySignInScreen() {
     let navigator = Navigator()
-    navigator.push(.signIn)
-    navigator.push(.signUp)
-    navigator.push(.passwordRecovery)
+    navigator.routes = [
+      .signIn,
+      .signUp,
+      .emailLink,
+      .passwordRecovery,
+      .enterPhoneNumber,
+      .enterVerificationCode(verificationID: "id", fullPhoneNumber: "+15551234567"),
+      .mfaResolution(MFARequired(hints: [.totp(displayName: nil, uid: "uid")])),
+    ]
 
-    navigator.removeEmailRoutes()
+    navigator.removeSignedOutRoutes()
 
-    #expect(navigator.routes == [.passwordRecovery])
+    #expect(navigator.routes.isEmpty)
+  }
+
+  @Test
+  func removeSignedOutRoutesKeepsSignedInScreensInOrder() {
+    let navigator = Navigator()
+    navigator.routes = [.mfaManagement, .emailLink, .mfaEnrollment, .updatePassword]
+
+    navigator.removeSignedOutRoutes()
+
+    #expect(navigator.routes == [.mfaManagement, .mfaEnrollment, .updatePassword])
   }
 
   @Test
