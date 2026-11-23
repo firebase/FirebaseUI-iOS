@@ -311,30 +311,30 @@ extension DemoTheme {
   /// Not from a design: a quiet, platform-native look written as a spec. The system font, neutral
   /// greys with one blue accent, 10-point corners, hairline borders instead of offset shadows,
   /// no background art, and light and dark variants.
+  /// Colours come from ``ProPalette``, which the Professional screens use too.
   static let professional: DemoTheme = {
-    let text = Color(demoLight: 0x111418, dark: 0xF2F4F7)
-    let muted = Color(demoLight: 0x5B6470, dark: 0x9AA3AE)
-    let accent = Color(demoLight: 0x1F5EFF, dark: 0x4C7DFF)
-    // Darker than `accent` in dark mode so white labels on it keep 4.5:1 contrast.
-    let accentFill = Color(demoLight: 0x1F5EFF, dark: 0x2F62F0)
-    let hairline = Color(demoLight: 0xE3E6EA, dark: 0x2A2F36)
+    let text = ProPalette.text
+    let muted = ProPalette.muted
+    let accent = ProPalette.accent
+    let accentFill = ProPalette.accentFill
+    let hairline = ProPalette.hairline
     return DemoTheme(
       id: .professional,
       libraryFontFamily: nil,
-      pageBackground: Color(demoLight: 0xF5F6F8, dark: 0x0F1115),
+      pageBackground: ProPalette.background,
       title: TextToken(size: 28, weight: .semibold, color: text),
       showsTitle: true,
       titleSpacing: 16,
-      cardFill: Color(demoLight: 0xFFFFFF, dark: 0x181B20),
+      cardFill: ProPalette.surface,
       cardCornerRadius: 16,
       cardPadding: 20,
       cardShadow: nil,
       cardStroke: Stroke(color: hairline, width: 1),
-      fieldFill: Color(demoLight: 0xFFFFFF, dark: 0x0F1115),
-      fieldStroke: Stroke(color: Color(demoLight: 0xC9CFD6, dark: 0x3A414A), width: 1),
+      fieldFill: ProPalette.field,
+      fieldStroke: Stroke(color: ProPalette.border, width: 1),
       fieldCornerRadius: 10,
       fieldText: TextToken(size: 16, color: text),
-      fieldPlaceholder: Color(demoLight: 0x6B7480, dark: 0x7D8693),
+      fieldPlaceholder: ProPalette.placeholder,
       fieldIcon: muted,
       fieldIconWeight: .regular,
       fieldTrailingIcon: muted,
@@ -346,16 +346,16 @@ extension DemoTheme {
       buttonShadow: nil,
       primaryButton: ButtonColors(fill: accentFill, label: .white),
       secondaryButton: ButtonColors(
-        fill: Color(demoLight: 0xEEF2FF, dark: 0x1C2540),
-        label: Color(demoLight: 0x1F5EFF, dark: 0x9DB5FF)
+        fill: ProPalette.accentSoft,
+        label: ProPalette.accentSoftText
       ),
       dividerColor: hairline,
       otherLabel: TextToken(size: 15, color: muted),
       otherPadding: EdgeInsets(top: 20, leading: 24, bottom: 0, trailing: 24),
       googleLabel: TextToken(size: 15, weight: .semibold, color: text),
-      pillFill: Color(demoLight: 0xFFFFFF, dark: 0x181B20),
+      pillFill: ProPalette.surface,
       pillCornerRadius: 10,
-      pillStroke: Color(demoLight: 0xC9CFD6, dark: 0x3A414A),
+      pillStroke: ProPalette.border,
       phoneProvider: Provider(
         fill: accentFill,
         label: TextToken(size: 15, weight: .semibold, color: .white),
