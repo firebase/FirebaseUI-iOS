@@ -69,6 +69,9 @@ struct ContentView: View {
 
   let authService: AuthService
 
+  @State private var isShowingFullCustomization = false
+  @State private var fullCustomizationLink: URL?
+
   var body: some View {
     NavigationStack {
       VStack(spacing: 24) {
@@ -143,10 +146,8 @@ struct ContentView: View {
           }
         }
         .tint(Color(.label))
-        NavigationLink {
-          FullCustomizationExample()
-            .navigationTitle("Full customization")
-            .navigationBarTitleDisplayMode(.inline)
+        Button {
+          isShowingFullCustomization = true
         } label: {
           VStack(alignment: .leading, spacing: 16) {
             Text("Full customization example")
@@ -172,6 +173,18 @@ struct ContentView: View {
       .padding()
       .navigationTitle("FirebaseUI Demo")
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+      .navigationDestination(isPresented: $isShowingFullCustomization) {
+        FullCustomizationExample(incomingLink: $fullCustomizationLink)
+          .navigationTitle("Full customization")
+          .navigationBarTitleDisplayMode(.inline)
+      }
+    }
+    // A sign-in link the full customization example sent opens it, even after a cold launch.
+    // While the example is showing, its own `AuthPickerView` handles the link.
+    .onOpenURL { url in
+      guard !isShowingFullCustomization, FullCustomizationExample.isEmailLink(url) else { return }
+      fullCustomizationLink = url
+      isShowingFullCustomization = true
     }
     .environment(authService)
   }

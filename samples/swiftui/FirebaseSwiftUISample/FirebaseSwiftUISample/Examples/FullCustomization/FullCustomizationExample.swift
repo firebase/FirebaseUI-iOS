@@ -34,16 +34,31 @@ import SwiftUI
 /// Doggo, Grid and Coffee Spark share one layout and differ only in ``DemoTheme`` values.
 /// Professional brings its own layout, the `Pro…` screens, through the same slots, and pushes a
 /// separate sign-up screen on the `.signUp` route.
+///
+/// Its sign-in links are tagged (``isEmailLink(_:)``), so the app can open this example with a
+/// link that arrives while another screen is showing, including after a cold launch, like the
+/// FirebaseUI-Android demo does.
 struct FullCustomizationExample: View {
+  /// A sign-in link the app opened while this example wasn't showing. While it is showing,
+  /// `AuthPickerView` handles links itself.
+  @Binding var incomingLink: URL?
+
   /// Its own service, so it can turn on email-link sign-in (part of the themes' designs) without
-  /// changing the other examples.
-  /// Created when the example appears: `NavigationLink` builds its destination eagerly.
+  /// changing the other examples. Created when the example appears.
   @State private var authService: AuthService?
+  @State private var linkError: String?
 
   var body: some View {
     if let authService {
       FullCustomizationFlow()
         .environment(authService)
+        .task(id: incomingLink) { await handleIncomingLink(with: authService) }
+        .alert(
+          "This sign-in link didn't work",
+          isPresented: Binding(get: { linkError != nil }, set: { _ in linkError = nil })
+        ) {} message: {
+          Text(linkError ?? "")
+        }
     } else {
       Color.clear.onAppear {
         authService = AuthService(configuration: Self.configuration)
@@ -57,10 +72,44 @@ struct FullCustomizationExample: View {
     }
   }
 
+  /// Whether `url` is a sign-in link this example sent: the email link (the URL itself, or
+  /// wrapped in its `link` parameter) has a continue URL carrying ``linkTag``.
+  static func isEmailLink(_ url: URL) -> Bool {
+    func queryValue(_ name: String, in url: URL) -> String? {
+      URLComponents(url: url, resolvingAgainstBaseURL: false)?
+        .queryItems?.first { $0.name == name }?.value
+    }
+    let emailLink = queryValue("link", in: url).flatMap(URL.init(string:)) ?? url
+    guard let continueURL = queryValue("continueUrl", in: emailLink).flatMap(URL.init(string:))
+    else { return false }
+    return queryValue(linkTag.name, in: continueURL) == linkTag.value
+  }
+
+  /// Added to the continue URL, which the library keeps when it adds its own parameters.
+  private static let linkTag = URLQueryItem(name: "demo", value: "fullcustomization")
+
+  /// Signs in with a link handed over by the app, then shows the sheet: signed in, or on the
+  /// email-link screen when the link was opened on a device that didn't request it.
+  private func handleIncomingLink(with authService: AuthService) async {
+    guard let url = incomingLink else { return }
+    incomingLink = nil
+    do {
+      try await authService.handleSignInLink(url: url)
+      authService.isPresented = true
+    } catch where authService.pendingEmailLink != nil {
+      authService.isPresented = true
+      authService.navigator.push(.emailLink)
+    } catch {
+      linkError = authService.string.localizedErrorMessage(for: error)
+    }
+  }
+
   private static var configuration: AuthConfiguration {
+    var continueURL = URLComponents(string: "https://flutterfire-e2e-tests.firebaseapp.com")!
+    continueURL.queryItems = [linkTag]
     let actionCodeSettings = ActionCodeSettings()
     actionCodeSettings.handleCodeInApp = true
-    actionCodeSettings.url = URL(string: "https://flutterfire-e2e-tests.firebaseapp.com")
+    actionCodeSettings.url = continueURL.url
     actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
     actionCodeSettings.linkDomain = "flutterfire-e2e-tests.firebaseapp.com"
     return AuthConfiguration(
