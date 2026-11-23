@@ -62,8 +62,4 @@ Each screen below owns its logic and passes its content a state value with bindi
 
 - `googlesignin-ios` 10.1.0, `firebase-ios-sdk` 12.19.3 and `googleutilities` 8.1.5 ([#1427](https://github.com/firebase/FirebaseUI-iOS/pull/1427)).
 
-### 🧰 Internal
-
-- Faster SwiftUI Auth CI jobs ([#1426](https://github.com/firebase/FirebaseUI-iOS/pull/1426)).
-
 **Full Changelog**: https://github.com/firebase/FirebaseUI-iOS/compare/v16.2.0...main
