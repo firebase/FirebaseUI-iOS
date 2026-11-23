@@ -1,4 +1,4 @@
-## 17.0.0-wip
+## 17.0.0
 
 - **Breaking:** `AuthView` gains `signIn` and `signUp` cases, so an exhaustive `switch` over `AuthView` needs new branches or a `default:`.
 - **Breaking:** `AuthServiceError` gains `multiFactorReauthenticationRequired(MFARequired)`, so an exhaustive `switch` over `AuthServiceError` needs a new case. `reauthenticate(with:)` and `reauthenticate(context:)` throw it instead of Firebase's raw `secondFactorRequired` error.
