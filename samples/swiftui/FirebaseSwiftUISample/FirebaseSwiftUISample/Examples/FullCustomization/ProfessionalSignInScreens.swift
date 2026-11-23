@@ -52,12 +52,12 @@ struct ProLanding: View {
       } content: {
         VStack(alignment: .leading, spacing: 0) {
           providers
-          if pickerState.isEmailSignInEnabled {
+          if pickerState.isEmailSignInEnabled || pickerState.isEmailLinkEnabled {
             if !pickerState.providers.isEmpty {
               ProDivider(label: "or continue with email")
                 .padding(.vertical, 22)
             }
-            emailForm(state)
+            emailSection(state)
           }
         }
       } footer: {
@@ -107,6 +107,30 @@ struct ProLanding: View {
   }
 
   @ViewBuilder
+  private func emailSection(_ state: EmailAuthContentState) -> some View {
+    // The password form and the email link are separate sign-in methods; either can be off.
+    if pickerState.isEmailSignInEnabled {
+      emailForm(state)
+    }
+    if pickerState.isEmailLinkEnabled {
+      ProTextButton(
+        title: "Email me a sign-in link",
+        identifier: "email-link-button",
+        action: state.selectEmailLink
+      )
+      .padding(.top, 4)
+    }
+    if pickerState.isEmailSignInEnabled, state.canSignUp {
+      ProPromptLink(
+        prompt: "Don't have an account?",
+        action: "Create account",
+        identifier: "create-account-button",
+        perform: state.goToSignUp
+      )
+      .padding(.top, 4)
+    }
+  }
+
   private func emailForm(_ state: EmailAuthContentState) -> some View {
     VStack(alignment: .leading, spacing: 16) {
       ProField(
@@ -139,23 +163,6 @@ struct ProLanding: View {
         action: state.signIn
       )
       .disabled(!state.isValid)
-      .padding(.top, 4)
-    }
-    if pickerState.isEmailLinkEnabled {
-      ProTextButton(
-        title: "Email me a sign-in link",
-        identifier: "email-link-button",
-        action: state.selectEmailLink
-      )
-      .padding(.top, 4)
-    }
-    if state.canSignUp {
-      ProPromptLink(
-        prompt: "Don't have an account?",
-        action: "Create account",
-        identifier: "create-account-button",
-        perform: state.goToSignUp
-      )
       .padding(.top, 4)
     }
   }
