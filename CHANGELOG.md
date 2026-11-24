@@ -1,0 +1,28 @@
+## 17.0.0
+
+- **Breaking:** `AuthView` gains `signIn` and `signUp` cases, so an exhaustive `switch` over `AuthView` needs new branches or a `default:`.
+- **Breaking:** `AuthServiceError` gains `multiFactorReauthenticationRequired(MFARequired)`, so an exhaustive `switch` over `AuthServiceError` needs a new case. `reauthenticate(with:)` and `reauthenticate(context:)` throw it instead of Firebase's raw `secondFactorRequired` error.
+- Add SwiftUI auth theming with `AuthTextFieldStyle`, `AuthCTAButtonStyle` and `AuthTypography`, set with `.authTextFieldStyle(_:)`, `.authCTAButtonStyle(_:)` and `.authTypography(_:)` and carried to every screen in the auth sheet. Unset values keep the default look and leave an app's own `.font`, `.tint` and `.buttonBorderShape` in place.
+- Re-export `FirebaseAuthUIComponents` from `FirebaseAuthSwiftUI`, so the theming types are available from `import FirebaseAuthSwiftUI`.
+- Add `.pickerContent` and `.pickerDestination` to `AuthPickerView` to replace the first screen and pushed screens, while the library keeps driving navigation, MFA and account conflicts. `DefaultAuthPickerContent`, `DefaultAuthMethodPicker` and `DefaultAuthPickerDestination` hold the stock screens.
+- Add `DefaultAuthPickerContent(authMethodPicker:)` to lay out the provider buttons with an `AuthMethodPickerState`. `AuthService` gains `registeredProviders` and `triggerSignIn(for:)`, and providers without a credential can adopt `AuthProviderAction`.
+- Add `.signedInContent` to replace the screen shown to signed-in users, with `DefaultSignedInContent` as the default.
+- Add `.reauthContent` to replace the password, phone and email-link reauthentication prompts.
+- Add content slots for the phone, email, MFA and reauthentication screens: `EnterPhoneNumberScreen`, `EnterVerificationCodeScreen`, `EmailAuthScreen`, `PasswordRecoveryScreen`, `EmailLinkScreen`, `MFAEnrolmentScreen`, `MFAResolutionScreen`, `MFAManagementScreen`, `EmailReauthScreen`, `PhoneReauthScreen` and `EmailLinkReauthScreen`. Each passes its content a state value with input bindings, actions, `isValid`, `isLoading` and a localized `errorMessage`, and a matching `Default…Content` holds the stock markup.
+- Add `AuthView.signIn` and `AuthView.signUp` routes, shown as `SignInView` and `SignUpView`, so a custom first screen can open separate sign-in and sign-up screens.
+- Add Resend Code with a 60 second countdown to the phone verification screen.
+- Add `requireDisplayName` and `allowNewEmailAccounts` to `withEmailSignIn`, restoring the v15 options to ask for a name on sign-up and to turn sign-up off. Both default to the previous behavior.
+- Add cross-device email-link sign-in: a link opened on a device that didn't request it asks for the email address instead of failing, as in v15. Add `forceSameDevice` to `withEmailLinkSignIn` to keep links on the requesting device.
+- Changed the default look of `MFAResolutionView` buttons to match the other MFA screens, and of the `EmailAuthView` sign up and password recovery labels.
+- Closing the auth sheet now clears its navigation, so reopening it starts on the first screen.
+- Swiping away a reauthentication sheet now cancels reauthentication instead of leaving the waiting operation hanging.
+- Phone and anonymous users no longer see the Verify email action on the signed-in screen.
+- MFA enrollment keeps Get Started disabled until the selected factor is allowed, and expired or finished sessions return to factor selection.
+- Fixed reauthenticating an MFA-enrolled user doing nothing visible. It now asks for the second factor.
+- Fixed email-link reauthentication not completing when the link opens the app after a cold launch.
+- Fixed cancelled or abandoned email-link reauthentication making later sign-in links route to reauthentication.
+- Fixed an email sign-in link leaving the sheet on the email-link screen instead of showing the signed-in screen.
+- Fixed email sign-in links dropping the app's own continue URL parameters.
+- Fixed sending a phone verification code showing no progress and accepting repeated taps.
+- Fixed password recovery failures being dropped instead of shown.
+- Selecting a provider that is neither credential-based nor an `AuthProviderAction` now reports an error instead of doing nothing.
