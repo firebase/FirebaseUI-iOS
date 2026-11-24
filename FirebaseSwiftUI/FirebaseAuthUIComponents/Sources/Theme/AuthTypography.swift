@@ -17,7 +17,10 @@ import SwiftUI
 /// Typography configuration for the auth flow. `fontName` defaults to `nil`, in which case
 /// text keeps using the system font at each semantic text style, exactly as it does today.
 public struct AuthTypography: Sendable {
-  /// The PostScript name of a custom font registered with the app (e.g. via Info.plist).
+  /// The family name of a custom font registered with the app (e.g. via Info.plist), such as
+  /// `"Poppins"`. Weights resolve within the family, so register a file for each weight you
+  /// use. A PostScript name such as `"Poppins-Regular"` also works, but fixes one face, so text
+  /// set to another weight may not change.
   public var fontName: String?
 
   public init(fontName: String? = nil) {
@@ -65,7 +68,7 @@ public extension View {
   ///
   /// ```swift
   /// AuthPickerView { ... }
-  ///   .authTypography(AuthTypography(fontName: "Poppins-Regular"))
+  ///   .authTypography(AuthTypography(fontName: "Poppins"))
   /// ```
   func authTypography(_ typography: AuthTypography) -> some View {
     environment(\.authTypography, typography)
